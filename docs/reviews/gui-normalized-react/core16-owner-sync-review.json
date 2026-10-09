@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "scope": "Actual parent kit:sync execution and whole-root capture, consumer qualification not inferred",
+  "source": "3151a9d62061b3b5165d9653cb09910e1d14a147",
+  "tree": "132662f63bc4c97659218417280fb348f083bc13240a7a1c026bfb845e51fdef",
+  "resultSha256": "7d276286ca07fa36e7d3e864d528ee6d16c51faaa843f0bfb4fe8f79026b6365",
+  "status": "pass",
+  "actualExit": 0,
+  "checkCount": 10,
+  "wholeCaptureManifest": "efc8e8806baf87c61a27d4fc397b46d1dbb600e5b307f280bdfa7d909b035922",
+  "regularFullModesVerified": 30163,
+  "literalUnfollowedLinksVerified": 42,
+  "artifacts": [
+    {
+      "registeredName": "verified-bootstrap roedu-web-kit-0.1.6.tgz",
+      "resolvedPath": "kit/roedu-web-kit-0.1.6.tgz",
+      "sha256": "1736b656a8650cee6fa4f0d033cdc3b14851d4e440dd7b7318ee621478999191",
+      "locations": [
+        "source-root",
+        "mirror-root"
+      ],
+      "semanticArchiveRow": true
+    },
+    {
+      "registeredName": ".gate/kit-sync/logs/51de7dd4-b87d-49a1-a188-02afaa652691-bootstrap-kit-sync-0.stdout.log",
+      "resolvedPath": ".gate/kit-sync/logs/51de7dd4-b87d-49a1-a188-02afaa652691-bootstrap-kit-sync-0.stdout.log",
+      "sha256": "b40f9921d6f71509c437622136ca17afa01267e9d1b0f431a1e87afc2a704a9e",
+      "locations": [
+        "source-root",
+        "mirror-root"
+      ],
+      "semanticArchiveRow": false
+    },
+    {
+      "registeredName": ".gate/kit-sync/logs/51de7dd4-b87d-49a1-a188-02afaa652691-bootstrap-kit-sync-0.stderr.log",
+      "resolvedPath": ".gate/kit-sync/logs/51de7dd4-b87d-49a1-a188-02afaa652691-bootstrap-kit-sync-0.stderr.log",
+      "sha256": "acb1b91f6fe428a1b3743f1a47ad5469d08e30de02dd431aa2852f3307fbd7d8",
+      "locations": [
+        "source-root",
+        "mirror-root"
+      ],
+      "semanticArchiveRow": false
+    },
+    {
+      "registeredName": ".gate/kit-sync/bootstrap-execution.json",
+      "resolvedPath": ".gate/kit-sync/bootstrap-execution.json",
+      "sha256": "9bed3204baff7f7a34009d46ace8534541f0f3d2fa2eae6c77e891435237c95b",
+      "locations": [
+        "source-root",
+        "mirror-root"
+      ],
+      "semanticArchiveRow": false
+    }
+  ],
+  "uiAdoption": {
+    "mode": "staged-react",
+    "status": "pending",
+    "until": "S1-M2",
+    "source": "repo:kit-config",
+    "config_sha256": "557b4a0935c07456dd43460c45e65ee3bf5f2931d97ea308138f4a8e56457b95",
+    "legacy": {
+      "version": "0.3.0",
+      "archive_sha256": "1934a81cdfd737a051f591ebcae072f5028943b715456dbb2899b483d399c244",
+      "source_sha": "45edcf2ce170c112621c73609e6e169633eb38a8",
+      "receipt": "docs/reviews/gui-original-react/receipt.json",
+      "receipt_sha256": "5c5704bc05511f91a02582c17e515500d2c8bca471f1c50cfd2505b646a27e58"
+    },
+    "selected_ui": {
+      "version": "1.0.6",
+      "archive_sha256": "0221837295b108b20fcae9c6987d4c52b78657d7a3378a408263afc54e9eb046"
+    }
+  },
+  "formalKIT_BUMP": "NOT ISSUED",
+  "allOtherQualification": "NOT RUN at this source",
+  "independentReview": "cross_repo_plan ACTUAL SYNC CLEAR: all30163regular/fullmodes+42literal links; exact14sanctionedpathchanges; bootstrap8/installedWK135/Go41/templates4/env11/UI0.3 preserved. Separate fixturemetadata+bootstraplock followups retained.",
+  "sourceReviewHold": "Existing frontend/tests/fixtures/gui-hook-runtime-bootstrap.json pins oldmanifest SHA. Separate closedthree-literal source successor verifiedbyprogram_pack; not partofSYNCgeneratedoutputs. Runtime NOT RUN.",
+  "bootstrapTestPinSuccessor": {
+    "seal": "d4a809f2ae85cbb2881db53eebfd56d273218bb93ea117c6a11f5434f53f597e",
+    "sourceReview": "program_pack SOURCE CLEAR",
+    "testAssertionsUnchanged": true
+  },
+  "sourceEnv11": "Entire sourcebytes unchanged fromGit3151; mirror intentionally uses shippedcoretemplate; toolchainpairsame",
+  "templateModeScope": "Fullphysicalmodes captured and verified; SDK equalFile preserves existingnonexecutable0664 onTaskfile/Dockerfile, comparescontent/executablebit; no inventedfullpermissionsfailure"
+}

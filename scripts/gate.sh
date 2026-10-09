@@ -99,7 +99,88 @@ export DJANGO_CSP_ENFORCE=$enf RO_TEACHER_CSP_ENFORCE=$enf CAT_CSP_ENFORCE=$enf 
 case "$target" in full|e2e|perf|baseline|golden:capture|golden:verify|shell|toolchain) profile=full
   [[ $PG_MAJOR =~ ^[0-9]+$ ]] || die "PG_MAJOR in .gate.env is '$PG_MAJOR': Paul fills PROD_PG_MAJOR (PROGRAM.md sec 3)"
   [[ $GATE_DB_IMAGE != *__* && $GATE_DB_IMAGE != *'<'* ]] || die "GATE_DB_IMAGE '$GATE_DB_IMAGE' still holds a placeholder";; *) profile=unit;; esac
-if [ "$profile" = full ]; then export GATE_DB_DSN=postgres://gate:gate@db:5432/gate?sslmode=disable GATE_APP_URL=http://roedu-gate.test:8080; fi
+if [ "$profile" = full ]; then export GATE_DB_DSN=postgres://gate:gate@db:5432/gate?sslmode=disable GATE_APP_URL=http://localhost:8080; fi
+# TRUSTED_ORIGIN_FUNCTIONS_BEGIN
+runtime_observation() {
+  python3 -I -c 'import subprocess,sys; r=subprocess.run(sys.argv[1:],stdout=subprocess.PIPE,timeout=15,check=True); sys.stdout.buffer.write(r.stdout)' "$@"
+}
+runner_service() {
+  case "$1" in unit) printf '%s\n' runner;; full) printf '%s\n' runner-full;; *) return 2;; esac
+}
+verify_app_container() {
+  local expected_container=$1 expected_image=$2 current_container current_image
+  [[ $expected_container =~ ^[0-9a-f]{64}$ && $expected_image =~ ^sha256:[0-9a-f]{64}$ ]] || return 2
+  current_container=$(runtime_observation "${MDC[@]}" --profile full ps -q app) || return 2
+  [ "$current_container" = "$expected_container" ] || return 2
+  current_image=$(runtime_observation docker inspect -f '{{.Image}} {{.State.Running}}' "$current_container") || return 2
+  [ "$current_image" = "$expected_image true" ] || return 2
+}
+# Raw rejected task bytes are diagnostics, never a result authority. No JSON status parsing.
+retain_rejected_app_result() {
+  python3 -I - "$PWD" "$tdir" <<'PY_RUNTIME_REJECT'
+import os,stat,sys
+root,target=sys.argv[1:]
+assert os.path.realpath(root)==root
+assert target not in ('','.','..') and all(c in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._' for c in target)
+directory=os.open(root,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
+for name in ('.gate',target):
+    st=os.stat(name,dir_fd=directory,follow_symlinks=False)
+    assert stat.S_ISDIR(st.st_mode) and not stat.S_ISLNK(st.st_mode), 'unsafe rejection evidence ancestor'
+    child=os.open(name,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW,dir_fd=directory)
+    opened=os.fstat(child); assert (opened.st_dev,opened.st_ino)==(st.st_dev,st.st_ino)
+    os.close(directory); directory=child
+source='result.json'; destination='runtime-rejected-result.json'
+try: original=os.stat(source,dir_fd=directory,follow_symlinks=False)
+except FileNotFoundError: os.close(directory); print("absent"); sys.exit(0)
+fd=None
+try:
+    assert stat.S_ISREG(original.st_mode) and not stat.S_ISLNK(original.st_mode), 'nonregular rejected result'
+    fd=os.open(source,os.O_RDONLY|os.O_NOFOLLOW,dir_fd=directory)
+    opened=os.fstat(fd); assert stat.S_ISREG(opened.st_mode) and (opened.st_dev,opened.st_ino)==(original.st_dev,original.st_ino)
+    with os.fdopen(fd,'rb',closefd=False) as stream: raw=stream.read()
+    output=os.open(destination,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600,dir_fd=directory)
+    with os.fdopen(output,'wb') as stream: stream.write(raw); stream.flush(); os.fsync(stream.fileno())
+finally:
+    if fd is not None: os.close(fd)
+    # Remove the original authority even if diagnostic publication failed. Never unlink a replacement inode.
+    current=os.stat(source,dir_fd=directory,follow_symlinks=False)
+    assert not stat.S_ISDIR(current.st_mode) and (current.st_dev,current.st_ino)==(original.st_dev,original.st_ino)
+    os.unlink(source,dir_fd=directory); os.fsync(directory); os.close(directory)
+print('retained')
+PY_RUNTIME_REJECT
+}
+check_app_after_task() {
+  if [ "$profile" = full ] && [ -n "${running_container:-}" ]; then
+    if ! verify_app_container "$running_container" "$GATE_APP_IMAGE_ID"; then
+      local primary_rc=$rc retention
+      if retention=$(retain_rejected_app_result); then
+        case "$retention" in absent|retained) ;; *) retention=failed;; esac
+      else retention=failed; fi
+      rc=2; stage=runtime-app-changed
+      # The task can alter evidence paths: publish only through no-follow directory FDs.
+      if ! python3 -I - "$PWD" "$tdir" "$primary_rc" "$retention" "$sha" "$GATE_TREE_SHA256" <<'PY_APP_REJECTION'
+import json,os,stat,sys
+root,target,primary,retention,sha,tree=sys.argv[1:]
+assert os.path.realpath(root)==root and target not in ('','.','..')
+assert all(c in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._' for c in target)
+directory=os.open(root,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
+for name in ('.gate',target):
+    st=os.stat(name,dir_fd=directory,follow_symlinks=False)
+    assert stat.S_ISDIR(st.st_mode) and not stat.S_ISLNK(st.st_mode)
+    child=os.open(name,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW,dir_fd=directory)
+    opened=os.fstat(child); assert (opened.st_dev,opened.st_ino)==(st.st_dev,st.st_ino)
+    os.close(directory); directory=child
+record={'status':'fail','reason':'wrapper:runtime-app-changed','rc':2,'primary_rc':int(primary),'retention':retention,'sha':sha,'tree_sha256':tree}
+output=os.open('wrapper-fail.json',os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600,dir_fd=directory)
+with os.fdopen(output,'w') as stream: json.dump(record,stream,separators=(',',':')); stream.write('\n'); stream.flush(); os.fsync(stream.fileno())
+os.close(directory)
+PY_APP_REJECTION
+      then echo 'gate: app rejection diagnostic publication failed (existing or unsafe evidence); result remains rejected' >&2; fi
+      echo "gate: app association changed; primary rc=$primary_rc; rejected task result retention=$retention" >&2
+    fi
+  fi
+}
+# TRUSTED_ORIGIN_FUNCTIONS_END
 bounded_build() {
   local caps mem period quota
   caps=$(docker inspect -f '{{.HostConfig.Memory}} {{.HostConfig.CpuPeriod}} {{.HostConfig.CpuQuota}}' buildx_buildkit_roedu-gates-linux0 2>/dev/null) || die "owner must provision capped roedu-gates-linux builder"
@@ -492,14 +573,17 @@ if [ "$rc" = 0 ]; then primary_started=1; case "$target" in image) stage=image; 
      if [ "$rc" = 0 ] && [ "$profile" = full ]; then
        "${MDC[@]}" --profile full up -d --wait db app || rc=$?
        if [ "$rc" = 0 ]; then
-         running_container=$("${MDC[@]}" --profile full ps -q app) || rc=$?
+         running_container=$(runtime_observation "${MDC[@]}" --profile full ps -q app) || rc=$?
+         if [ "$rc" = 0 ] && [[ ! $running_container =~ ^[0-9a-f]{64}$ ]]; then rc=2; stage=runtime-container-invalid; fi
          if [ "$rc" = 0 ]; then
-           running_image=$(docker inspect -f '{{.Image}}' "$running_container") || rc=$?
-           if [ "$running_image" != "$GATE_APP_IMAGE_ID" ]; then rc=2; stage=runtime-image-mismatch; fi
+           running_image=$(runtime_observation docker inspect -f '{{.Image}} {{.State.Running}}' "$running_container") || rc=$?
+           if [ "$running_image" != "$GATE_APP_IMAGE_ID true" ]; then rc=2; stage=runtime-image-mismatch; fi
          fi
        fi
      fi
-     if [ "$rc" = 0 ]; then stage=task; "${MDC[@]}" --profile "$profile" run --no-deps --rm --user "$(id -u):$(id -g)" runner "${cmd[@]}" || rc=$?; fi;; esac; fi
+     if [ "$rc" = 0 ]; then selected_runner=$(runner_service "$profile") || { rc=2; stage=runner-profile; }; fi
+     if [ "$rc" = 0 ]; then stage=task; "${MDC[@]}" --profile "$profile" run --no-deps --rm --user "$(id -u):$(id -g)" "$selected_runner" "${cmd[@]}" || rc=$?; fi
+     check_app_after_task;; esac; fi
 if [ "$primary_started" = 1 ] && ! verify_current_context; then rc=4; stage=current-context-changed; fi
 safe_path "$src/.gate/$tdir"; safe_path "$dst/.gate/$tdir"; safe_path "$dst/.gate/$tdir/result.json"
 [ -z "$(find ".gate/$tdir" -type l -print -quit)" ] || die "symlink in gate evidence"
@@ -530,7 +614,7 @@ PY_RESULT
 fi
 if [ "$rc" = 0 ] && [ -f ".gate/$tdir/result.json" ] && ! python3 -I -c 'import json,sys; sys.exit(json.load(open(sys.argv[1]))["status"] != "pass")' ".gate/$tdir/result.json"; then rc=1; stage=task-result-fail; fi
 ro=0; if [ "$primary_started" = 1 ] && [ "$before" != "$(prot "${allow[@]}")" ]; then ro=1; rc=3; stage=read-only-path; rm -f ".gate/$tdir/result.json"; fi   # sec 4.8: no result counts
-if [ "$rc" != 0 ] && [ ! -f ".gate/$tdir/result.json" ]; then printf '{"status":"fail","reason":"wrapper:%s","rc":%s,"sha":"%s","tree_sha256":"%s"}\n' \
+if [ "$rc" != 0 ] && [ ! -f ".gate/$tdir/result.json" ] && [ ! -f ".gate/$tdir/wrapper-fail.json" ]; then printf '{"status":"fail","reason":"wrapper:%s","rc":%s,"sha":"%s","tree_sha256":"%s"}\n' \
   "$stage" "$rc" "$sha" "$GATE_TREE_SHA256" > ".gate/$tdir/wrapper-fail.json"; fi
 if [ "$ro" = 1 ]; then mkdir -p "$src/.gate/$tdir"; rsync -a --delete ".gate/$tdir/" "$src/.gate/$tdir/"; fi   # always: a run without a result clears the source copy too
 if [ "$ro" = 1 ]; then echo "gate: '$target' changed a read-only path (sec 4.8); result discarded, nothing else synced back" >&2; exit 3; fi

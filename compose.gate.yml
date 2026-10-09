@@ -9,7 +9,7 @@ x-limits: &limits
   mem_limit: 6g
 
 services:
-  runner:
+  runner: &gate-runner
     image: ${TOOLCHAIN_IMAGE:-roedu-toolchain:core-v1.0}
     profiles: ["unit", "full"]
     <<: *limits
@@ -50,6 +50,13 @@ services:
       app:
         condition: service_healthy
         required: false
+
+  # Only the full-profile primary command shares the real app's network namespace.
+  # localhost:8080 then reaches that app without host ports or browser trust bypasses.
+  runner-full:
+    <<: *gate-runner
+    profiles: ["full"]
+    network_mode: "service:app"
 
   db:
     # ro/cat: postgres:<PROD_PG_MAJOR>-trixie by digest; social: the kit's PostGIS + pgvector image of the same major.
