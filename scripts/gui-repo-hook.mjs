@@ -3,6 +3,7 @@ import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { resolveHookRuntime } from "./gui-hook-runtime.mjs";
 import { runNativeSourcePreflight, runDoccheckSourcePreflight } from "./gui-native-preflight.mjs";
+import { checkFullBrowserCapability } from "./gui-browser-capability.mjs";
 import { createHash } from "node:crypto";
 import { validGenRequest, runOriginalStyleOperation, NORMALIZED_STYLE_OPERATION, runNormalizedStyleOperation } from "./gui-style-operation.mjs";
 
@@ -335,7 +336,14 @@ switch (target) {
     command("cat-baseline-browser", "node", ["scripts/gui-baseline.mjs", "capture"], root, { CDR_NATIVE_BINARY: path.join(scratch, "cat-server"), CDR_BROWSER_PLAN_BINARY: path.join(scratch, "cat-browser-plan") });
     if (fs.existsSync(path.join(root, "baselines/cat/capture.json"))) hook.artifact("baselines/cat/capture.json");
     break;
-  case "full":
+  case "full": {
+    let capabilityPassed = false;
+    try { capabilityPassed = checkFullBrowserCapability(hook); }
+    finally {
+      const evidence = `${directory}/browser-capability/${invocation}`;
+      if (fs.existsSync(path.join(root, evidence))) retainArtifacts(evidence);
+    }
+    if (!capabilityPassed) break; // preserve failed probe/logs; no backend/browser work
     nativeUnit();
     if (!passed("cat-unit-gui-identity") || frontendFailed()) break;
     binaries("cat-full");
@@ -350,6 +358,7 @@ switch (target) {
     command("cat-browser-full", "node", ["scripts/gui-full-browser.mjs"], root, { CDR_NATIVE_BINARY: path.join(scratch, "cat-server"), CDR_BROWSER_PLAN_BINARY: path.join(scratch, "cat-browser-plan") });
     hook.browser = { inventory: "frontend/e2e/gui-inventory.json", asset_root: "go-backend/embedfs/dist", entry: "index.html", asset_prefix: "/" };
     break;
+  }
   case "e2e": case "perf":
     command(`cat-${target}-browser`, "node", ["scripts/gui-full-browser.mjs", target]); break;
   default: throw new Error(`Unsupported actual repo hook: ${target}`);

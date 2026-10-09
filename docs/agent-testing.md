@@ -1,6 +1,6 @@
 # Agent Testing Guide — cat_de_roman_esti
 
-Last verified: 2026-10-08 — documentation/source review only; amended runtime gates NOT RUN.
+Last verified: 2026-10-09 — FULL2db evidence is retained; new browser-capability source/tests NOT RUN.
 
 ## Native serving gates
 
@@ -60,8 +60,8 @@ For browser fixtures, build `cat-browser-plan` and set its absolute scratch path
 3. Content changes run native source/operator/rail freshness and independent review contracts.
 4. Frontend JS/TS/CSS changes run applicable frontend/build/browser gates. Keep original30 frozen;
    managed output sync and reviewed source retirement follow ADR-0184; backend/docs-only edits do not regenerate output.
-   After integration, [ADR-0185](adr/0185-accepted-eager-startup-bundle-accounting.md) counts entry+mandatory AccountBar recursive static JS/CSS once in the build check.
-   Default helper/frozen historical closures stay static-only; source is unapplied/unqualified and amended tests NOT RUN. All native/privacy/browser checks remain.
+   [ADR-0185](adr/0185-accepted-eager-startup-bundle-accounting.md) counts entry+mandatory AccountBar recursive static JS/CSS once; retained actual startup122743/122880 is not device proof.
+   Default/frozen closures stay static-only. FULL2db frontend319PASS/browser894of900PASS; full remainsFAIL. New early full real-browser probe/tests NOT RUN (REQ-6); all later native/privacy/browser/CSP checks remain.
 5. Record exact commands/results in `docs/STATUS.md`; overflow history belongs in WORKLOG.
 
 ## Known load-sensitive reference check
@@ -73,6 +73,6 @@ Reference `tests/accounts/` collection requires `CAT_ACCOUNTS_ENABLED=1`.
 Current content expectations: [ADR-0116](adr/0116-share-current-content-test-expectations.md),
 `tests/current_content.py` and `tests/content_scenarios.py`; historical pins remain separate.
 
-The separate `scripts/qualify_go_toolchain.sh` source alignment prepares exact Node 26.10.0 per [ADR-0184](adr/0184-native-spa-toolchain-and-managed-output.md); **UNAPPLIED, UNQUALIFIED, NOT RUN**.
+The separate `scripts/qualify_go_toolchain.sh` source alignment already selects exact Node 26.10.0 per [ADR-0184](adr/0184-native-spa-toolchain-and-managed-output.md); aligned standalone qualification remains **UNQUALIFIED, NOT RUN**.
 It remains separate from the owning GUI wrapper; actual Linux/version/lint context, disposable PG/task scratch and all native/privacy/browser qualification obligations remain.
 [ADR-0168](adr/0168-qualify-complete-native-toolchain.md) retains historical Node 24 proof; [NATIVE_TOOLCHAIN](NATIVE_TOOLCHAIN.md) records the pending aligned recipe. No missing required gate becomes a skip.

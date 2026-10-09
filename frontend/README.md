@@ -48,18 +48,19 @@ startup calculation: all entry/static JS/CSS plus the immediately mounted
 `src/components/AccountBar.tsx` root and its recursive static dependencies,
 counted once across shared files/cycles. Missing mandatory roots/imports or emitted
 assets refuse the check. Other dynamic game routes and further lazy children remain
-excluded. `checkInitialBundle` always requires AccountBar after integration;
+excluded. `checkInitialBundle` requires AccountBar in the current calculation;
 default `collectInitialBundleFiles(manifest)` callers and frozen historical
 closures retain their static-only scope.
 
-The separate two-path calculator amendment is source-accepted, **UNAPPLIED and
-UNQUALIFIED**. Its four retained and seven new tests (11 total) are **NOT RUN**
-under the amended source; current manifest/startup gzip measurements are unacquired.
+The calculation is integrated; retained actual startup is 122,743/122,880 bytes.
+FULL2db passed frontend319/319 but failed six of900 browser cases at the untrusted
+HTTP gate origin; full/CSP/device qualification remains unearned. The new early
+full browser-capability source and its focused tests are **NOT RUN** (CORE_REQUESTS REQ-6).
 The frontend default remains 120 KiB (122,880 bytes), summing each selected JS/CSS
 file's gzip level-9 size; existing limit configuration and Latin/Latin Extended
 Fredoka/Inter subset checks remain. Fonts are checked separately from JS/CSS bytes.
 The canonical 40,960-byte JS ceiling/30,720-byte target and separate CSS policy
-remain independent requirements; no new total, savings or compliance is claimed.
+remain independent requirements; no 40KiB compliance, optimality or real-phone result is claimed.
 
 ## Layout
 

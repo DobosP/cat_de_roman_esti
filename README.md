@@ -37,7 +37,7 @@ The name is a pun on *"cât de român ești"* — "how Romanian are you".
   ([native tooling](docs/NATIVE_TOOLCHAIN.md), [ADR-0166](docs/adr/0166-native-content-operators-and-builder-rails.md)).
 - **Python/Rust** sources, tests and rollback profiles remain independent references.
   Legacy Python web dependencies are pinned by `constraints.txt`.
-- Frontend: React 19.2.7 + Vite 8.3.3 + TypeScript 7.0.2; selected Node 26.10.0/npm 12.2.0 ([ADR-0184](docs/adr/0184-native-spa-toolchain-and-managed-output.md)). [Startup accounting](docs/adr/0185-accepted-eager-startup-bundle-accounting.md) is owner-accepted, source-unapplied and unqualified; see [`frontend/README.md`](frontend/README.md).
+- Frontend: React 19.2.7 + Vite 8.3.3 + TypeScript 7.0.2; selected Node 26.10.0/npm 12.2.0 ([ADR-0184](docs/adr/0184-native-spa-toolchain-and-managed-output.md)). [Startup accounting](docs/adr/0185-accepted-eager-startup-bundle-accounting.md) is integrated with retained122743/122880 startup bytes and remains unqualified; see the current [owning handover](docs/GUI_MIGRATION_HANDOFF.md) and [`frontend/README.md`](frontend/README.md).
 - Native bounded RO-EDU REST client and provenance-preserving fixture/smoke operators;
   the original vendored Python client remains an independent reference.
 - Native race/vet/source/HTTP/browser gates; retained `pytest`/`ruff` reference commands
