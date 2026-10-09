@@ -1,0 +1,195 @@
+{
+  "all_14_common_facts": {
+    "actual_import_closure_status": "None of these14 tuples appears among the18 module tuples referenced by the passed389 backend package/test metadata objects. Their absent .mod/body payload is therefore not evidence of a missing dependency in that observed imported closure.",
+    "cache_paths": "For each tuple: OWN_COMPLETE_CACHE/cache/download/<path>/@v/<version>.info and .mod are absent; .zip is absent too. No original cache file was written or removed.",
+    "committed_anchor_status": "No body Sum or GoModSum exists for these exact14 tuples in current root/shared/local-webkit go.sum. Versions are anchored by the already authenticated cached parent .mod files, not by invented committed body hashes. Any future acquisition must authenticate fresh outputs via supported Go proxy/sumdb under separately accepted scope.",
+    "metadata_only_trigger": "go list -m all additionally reports modules which provide no imported package. Its moduleInfo calls Query for each selected version to obtain Time; cachingRepo.Stat reads .info then falls back to the repository. Missing .info with GOPROXY=off can fail this descriptive inventory even when the imported package/test closure is available. Missing .mod and body are separate observations, not proven build requirements."
+  },
+  "at_utc": "2026-10-09T05:46:05.104370+00:00",
+  "decision_support": "Full-module descriptive inventory is not itself an established content release gate. Prefer finishing the actual native package/test closure: separately review a NEW remaining-only scope for shared/authcore and local-webkit -deps -test metadata, then affected tests/vet/audits. Do not fetch unused modules merely to make this operational inventory green. Preserve the full-module failure and defer it honestly if its coverage is not needed by an explicit gate. Imported metadata is still not a test PASS or proof about test subprocess requirements.",
+  "evidence": {
+    "complete_cache_inventory": {
+      "info_files": 36,
+      "known_versions": 36,
+      "mod_files": 36,
+      "path": "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-complete-inventory-r1.json",
+      "sha256": "c7aab0473f49adffd90b017e12f723425a444ef5f9e57c9aab711a11dbdc3376"
+    },
+    "module_log": {
+      "path": "/home/dobo/work/_temp/codex__content-v1-7/probe/go-source7-runtime-refresh-tools-r1-4.log",
+      "sha256": "fa366cf9648a5f6f0ae4bd96a615ebdc01f5189e0328b6ed9ee1923184ad91f3"
+    },
+    "package_log": {
+      "path": "/home/dobo/work/_temp/codex__content-v1-7/probe/go-source7-runtime-refresh-tools-r1-3.log",
+      "sha256": "9902dffe62642b39bd299ee1eba95cd2443a13902f8a9135999cbdbe0de4ab8d"
+    }
+  },
+  "execution_or_mutation_performed": false,
+  "future_acquisition": "No acquisition command or permission is issued here. If a concrete required gate later needs full-module metadata, derive and independently review the exact public tuple set, checksum/authentication policy, fresh owned cache and subsequent offline consumer scope. Existing30+6 caches and failed campaign stay immutable.",
+  "installation_or_release_approval": false,
+  "missing_current_metadata_candidates": [
+    {
+      "path": "cloud.google.com/go/compute/metadata",
+      "required_by_authenticated_cached_mod": [
+        "golang.org/x/oauth2/@v/v0.37.0.mod"
+      ],
+      "version": "v0.3.0"
+    },
+    {
+      "path": "github.com/a-h/parse",
+      "required_by_authenticated_cached_mod": [
+        "github.com/a-h/templ/@v/v0.3.1070.mod"
+      ],
+      "version": "v0.0.0-20250122154542-74294addb73e"
+    },
+    {
+      "path": "github.com/cenkalti/backoff/v4",
+      "required_by_authenticated_cached_mod": [
+        "github.com/a-h/templ/@v/v0.3.1070.mod"
+      ],
+      "version": "v4.3.0"
+    },
+    {
+      "path": "github.com/cli/browser",
+      "required_by_authenticated_cached_mod": [
+        "github.com/a-h/templ/@v/v0.3.1070.mod"
+      ],
+      "version": "v1.3.0"
+    },
+    {
+      "path": "github.com/fatih/color",
+      "required_by_authenticated_cached_mod": [
+        "github.com/a-h/templ/@v/v0.3.1070.mod"
+      ],
+      "version": "v1.19.0"
+    },
+    {
+      "path": "github.com/fsnotify/fsnotify",
+      "required_by_authenticated_cached_mod": [
+        "github.com/a-h/templ/@v/v0.3.1070.mod"
+      ],
+      "version": "v1.10.1"
+    },
+    {
+      "path": "github.com/mattn/go-colorable",
+      "required_by_authenticated_cached_mod": [
+        "github.com/a-h/templ/@v/v0.3.1070.mod"
+      ],
+      "version": "v0.1.15"
+    },
+    {
+      "path": "github.com/mattn/go-isatty",
+      "required_by_authenticated_cached_mod": [
+        "github.com/a-h/templ/@v/v0.3.1070.mod"
+      ],
+      "version": "v0.0.24"
+    },
+    {
+      "path": "github.com/natefinch/atomic",
+      "required_by_authenticated_cached_mod": [
+        "github.com/a-h/templ/@v/v0.3.1070.mod"
+      ],
+      "version": "v1.0.1"
+    },
+    {
+      "path": "github.com/rs/cors",
+      "required_by_authenticated_cached_mod": [
+        "github.com/a-h/templ/@v/v0.3.1070.mod"
+      ],
+      "version": "v1.11.1"
+    },
+    {
+      "path": "golang.org/x/mod",
+      "required_by_authenticated_cached_mod": [
+        "github.com/a-h/templ/@v/v0.3.1070.mod",
+        "golang.org/x/text/@v/v0.42.0.mod"
+      ],
+      "version": "v0.41.0"
+    },
+    {
+      "path": "golang.org/x/term",
+      "required_by_authenticated_cached_mod": [
+        "golang.org/x/crypto/@v/v0.57.0.mod",
+        "golang.org/x/net/@v/v0.59.0.mod"
+      ],
+      "version": "v0.46.0"
+    },
+    {
+      "path": "golang.org/x/tools",
+      "required_by_authenticated_cached_mod": [
+        "github.com/a-h/templ/@v/v0.3.1070.mod"
+      ],
+      "version": "v0.51.0"
+    },
+    {
+      "path": "gopkg.in/yaml.v2",
+      "required_by_authenticated_cached_mod": [
+        "github.com/vearutop/statigz/@v/v1.5.0.mod"
+      ],
+      "version": "v2.4.0"
+    }
+  ],
+  "observed": {
+    "failed_campaign_next_index": 5,
+    "module_metadata_error_lines": 14,
+    "module_metadata_exit": 1,
+    "module_metadata_named_modules": 0,
+    "module_tuples_used_by_imported_packages": 18,
+    "passed_backend_package_objects": 389,
+    "remaining_steps_5_through_8": "UNRUN; old campaign remains failed and cannot resume"
+  },
+  "outcome": "The imported backend test dependency closure passed; a separate full-module descriptive inventory failed before emitting JSON. This is an offline metadata prerequisite failure, not a content/build or candidate failure.",
+  "schema": "source7-offline-module-metadata-static-diagnosis-v1",
+  "scope_sha256": "f797ab31297f502f8d19a9a171ee04fa3c8d3ee5dab678dca4c2905c2a5b5a9f",
+  "sdk_proof": {
+    "anonymous_failure_output": "cmd/go/internal/list/list.go lines579-591 emits errors.New(m.Error.Err), then exits before JSON printing; path names are not retained in these generic messages.",
+    "cache_fallback": "modfetch/cache.go cachingRepo.Stat lines247-259 checks readDiskStat then repo.Stat; modfetch/repo.go errProxyOff lines293-294 is the observed error.",
+    "fullgraph_request": "modload/list.go listModules lines151-181 sets needFullGraph for all and calls expandGraph; lines284-305 iterates mg.BuildList and moduleInfo.",
+    "info_query": "modload/build.go moduleInfo lines331-359 calls Query before opportunistic GoMod/Dir fields; lines405-427 avoid network for local replacements."
+  },
+  "source_inputs_sha256": {
+    "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-complete-inventory-r1.json": "c7aab0473f49adffd90b017e12f723425a444ef5f9e57c9aab711a11dbdc3376",
+    "/home/dobo/work/_temp/codex__content-v1-7/tools/go/src/cmd/go/internal/list/list.go": "d5044d409044ec858dab308de9843b162385f0c276532095cff83b807f50fc7e",
+    "/home/dobo/work/_temp/codex__content-v1-7/tools/go/src/cmd/go/internal/modfetch/cache.go": "c918f36304046088f8846beb8f69ee0639bb25273c7343fbd5da6e1b4d3c78b1",
+    "/home/dobo/work/_temp/codex__content-v1-7/tools/go/src/cmd/go/internal/modfetch/repo.go": "ba62de189b45dc51e32447b3e8e0720fade85de4453c2138d82997e76b6097df",
+    "/home/dobo/work/_temp/codex__content-v1-7/tools/go/src/cmd/go/internal/modload/build.go": "4f31ecbeceae4a50b0a56ee989d00ce64af449774edc1160c4dcaa3717da5c6b",
+    "/home/dobo/work/_temp/codex__content-v1-7/tools/go/src/cmd/go/internal/modload/buildlist.go": "e2b9a2bfa23ab1a52eeb25c1e26eb07784d87826b7c9be87f7b30b56ec7205f5",
+    "/home/dobo/work/_temp/codex__content-v1-7/tools/go/src/cmd/go/internal/modload/list.go": "d12fe90bcc30ad1ccf028bff7b11d7f47b0c9f3dd8a338ce1d1a6e2429123162",
+    "/home/dobo/work/_temp/codex__content-v1-7/tools/go/src/cmd/go/internal/modload/query.go": "65b5b1013995f202b9065e1c8780ac38d9b8ff73d51c94b51ab467b020166974",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/go-source7-runtime-refresh-outcome-scope.json": "f797ab31297f502f8d19a9a171ee04fa3c8d3ee5dab678dca4c2905c2a5b5a9f",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/go-source7-runtime-refresh-tools-r1-step-3-result.json": "234464ab68a8da4e063936743420c00a5e7bdd693056c5dc988fc6d4a85a6a69",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/go-source7-runtime-refresh-tools-r1-step-4-result.json": "4efb22df84f45c02b19c9bd34915e3d368d2f6061b20a3e94ab8aece1915ff0d",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/go-backend/go.mod": "98ea69356c008d5ed8c166c959e0e9f0db6180ce9c967582a9b6cef49e76be41",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/go-backend/go.sum": "aa0fee1fbf66167f8f1f054e2c31f7b4c110d5901307bc6294b7ae1858dbb3db",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/go-backend/third_party/webkit/go.mod": "9cf252beeca8b0e3be2e8282c3a3676e5597e107a2cffe9eca4ca6d32b26614c",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/go-backend/third_party/webkit/go.sum": "f62f81f537f408583c94567f1fa9c4fae450cc35588beee2ffaad5632d693408",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/shared-go/authcore/go.mod": "124899dbc57503d4a8884e5579435f7775421bfe0544bff1dee6e76ec895fa4c",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/shared-go/authcore/go.sum": "b2516a139953d6c42702bff40fad4da1ff04fa5cde523c089f07c6c1ea148109"
+  },
+  "static_derivation": {
+    "limits": "No Go command was executed. Missing module metadata may expose further graph facts if later acquired. The 14 anonymous runtime errors cannot individually be assigned module identities from their log; the distinct14 tuples below come independently from source requirements and cache absence, not from counting messages.",
+    "method": "Read exact root/shared/local-webkit require clauses and cached .mod files for their 17 public root tuples; compare their explicit requirement versions per path. This finite source analysis yields 42 selected candidates, not a native complete-graph result or a replacement MVS implementation.",
+    "missing_info_candidates": 14,
+    "public_root_tuples": 17,
+    "root_cached_mod_sha256": {
+      "github.com/a-h/templ/@v/v0.3.1070.mod": "af60e7f479bf321e07ba74f0d05a070da9320a662db10399925baec267b83c30",
+      "github.com/andybalholm/brotli/@v/v1.2.6.mod": "9836ed7059e6b6be9d42e666c866deea8646d5815216fcf6216966074744cb1f",
+      "github.com/coreos/go-oidc/v3/@v/v3.21.0.mod": "e3284f45197ed5f111a7ca3e090f344b6471ee20fe58f1b15299b75be77bc032",
+      "github.com/flosch/pongo2/v6/@v/v6.1.0.mod": "99fd87f9c1b6cb9f4e36afb1f7304d754c521d8fe904a6ae414804baaf8533a0",
+      "github.com/go-jose/go-jose/v4/@v/v4.1.4.mod": "e069e6002d29495b8c2dc6cf0d3b56a075ec5be7abb6c2eb1a1c0845cb66b8b3",
+      "github.com/jackc/pgpassfile/@v/v1.0.0.mod": "8ea95fa2499f4c600f7fd1f0afe745ecc0ae25121a3c823408f4a2961a05ee48",
+      "github.com/jackc/pgservicefile/@v/v0.0.0-20240606120523-5a60cdf6a761.mod": "5f70111b892c17eecec6f97e0cd961cc3922b5daece59c099c855e1062ed0277",
+      "github.com/jackc/pgx/v5/@v/v5.11.0.mod": "5bb85082d4aef07908c0ea914a1603ab40454968a95bf569cd89eb0c4df03d74",
+      "github.com/jackc/puddle/v2/@v/v2.2.2.mod": "b2be8f437fdf5c550522c8bca62194c2c1afb221b29bbf984db0599d33c55224",
+      "github.com/rogpeppe/go-internal/@v/v1.16.0.mod": "1ffa3f3c1d2ad9d40513af6610c21d52ae2839628679854df421212f6a29ec27",
+      "github.com/vearutop/statigz/@v/v1.5.0.mod": "c941e199dbf8fd132641620ceec55664e180eecae1ab0992d9a8b4aee73a369c",
+      "golang.org/x/crypto/@v/v0.57.0.mod": "93438fc90cca15b1b253be9df648ca54fb80838400239cc294f794ca2f242575",
+      "golang.org/x/net/@v/v0.59.0.mod": "f7034587fa012c43de66d8c276ddab161032931abf116a629daa8d66f1c80023",
+      "golang.org/x/oauth2/@v/v0.37.0.mod": "90facdcd7c6602d3a28dbaa32354a0398d22bbaea3b48ca94aa2235fb427358b",
+      "golang.org/x/sync/@v/v0.23.0.mod": "febf4fed5dc12c0de24528f7065bf071cc74a2424070194aaf24617b91066cda",
+      "golang.org/x/sys/@v/v0.48.0.mod": "9522f4c9806d1c26586ea80fa56292929bd295865e71981927f52996c6b1c831",
+      "golang.org/x/text/@v/v0.42.0.mod": "4756c4b8eeeae2a20cb43c198c10701d20c53493bd90b91c6632153c9cbac240"
+    },
+    "selected_candidates_from_root_summaries": 42
+  }
+}
