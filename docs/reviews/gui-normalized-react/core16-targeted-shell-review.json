@@ -1,0 +1,97 @@
+{
+  "schema": 1,
+  "scope": "Actual preliminary managed ownerShell; NOT a canonicalunit/full/browser/device/adoption receipt",
+  "source": "52d100d6691d1da5156f43175b939140d7e6ce43",
+  "tree": "b0b6ca1d9373510cbfd216048a70b4743dfc267b8b1677c2f7dadf0bc0a0f4cc",
+  "observationsSha256": "dc58d5036d2c9af1eccadae2cb9796f8b472abfc2121c84ff251a44666792411",
+  "wholeCaptureManifest": "3d0a31549ead3b14d6fec921c611c77191873476ceea98e7c21d486d1786af4c",
+  "regularFullModesVerified": 30016,
+  "literalUnfollowedLinks": 41,
+  "actualWrapperExit": 1,
+  "actualAggregate": "FAIL1 because actual gofmt-d exit1/nonempty; no renaming of this failure",
+  "nodeCounts": {
+    "tests": 61,
+    "pass": 61,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "goRequiredTopCases": [
+    "TestManagedFontManifestBindings",
+    "TestManagedFontLinkRefusals",
+    "TestManagedFontEveryLinkReceivesNonceWithoutRewriting",
+    "TestManagedNonceShellBytePreservationAndSDKContext",
+    "TestManagedNonceShellRefusals"
+  ],
+  "goAllTestAndSubcaseCount": 77,
+  "goFailedSkipped": 0,
+  "sourceUnchanged": true,
+  "commandExits": [
+    {
+      "name": "capability-data-tests",
+      "actualExit": 0,
+      "error": null
+    },
+    {
+      "name": "font-nonce-go-tests",
+      "actualExit": 0,
+      "error": null
+    },
+    {
+      "name": "font-gofmt-diff",
+      "actualExit": 1,
+      "error": null
+    },
+    {
+      "name": "font-gofmt-0",
+      "actualExit": 0,
+      "error": null
+    },
+    {
+      "name": "font-gofmt-1",
+      "actualExit": 0,
+      "error": null
+    },
+    {
+      "name": "font-gofmt-2",
+      "actualExit": 0,
+      "error": null
+    },
+    {
+      "name": "font-gofmt-3",
+      "actualExit": 0,
+      "error": null
+    },
+    {
+      "name": "font-gofmt-4",
+      "actualExit": 0,
+      "error": null
+    },
+    {
+      "name": "font-gofmt-5",
+      "actualExit": 0,
+      "error": null
+    }
+  ],
+  "all24StreamFormatterReferencesMatchBoth": 24,
+  "formatterChanges": [
+    {
+      "source": {
+        "path": "go-backend/internal/httpapi/managed_fonts_test.go",
+        "bytes": 8774,
+        "sha256": "229a1aa95c94e391b534c6063db37e7481e0365866da187bf622d27834e81527",
+        "full_mode": 33188
+      },
+      "afterimage": {
+        "path": ".gate/shell/targeted/d4faeb7f-3774-4a42-a27e-6dd3cd3cf726/formatted/go-backend/internal/httpapi/managed_fonts_test.go",
+        "bytes": 8965,
+        "sha256": "60e331f56a0a5ea73a1feba647c7ff8f3c71be5d95d99483479b512904ef98f3"
+      },
+      "changed": true
+    }
+  ],
+  "formatterApply": "Separate SOURCEaccepted/actualonefileformatterafterimage applied; newsourcefull NOT RUN",
+  "independentReview": "cross_repo_plan ACTUAL TARGETED EVIDENCE CLEAR/all30016regularfullmodes41links/24rawstream+formatterrefs/21unchangedsourceinputs/exactprotectedpin;61pureNodePASS/Go5top77allPASS/zerofail-skip; actualwrapperFAIL1format-onlypreserved",
+  "formalKIT_BUMP": "NOT ISSUED"
+}

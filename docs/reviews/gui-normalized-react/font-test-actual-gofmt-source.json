@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "scope": "APPLIED SOURCE ONLY; newafterimage full/runtime NOT RUN",
+  "base": "52d100d6691d1da5156f43175b939140d7e6ce43",
+  "path": "go-backend/internal/httpapi/managed_fonts_test.go",
+  "beforeSha256": "229a1aa95c94e391b534c6063db37e7481e0365866da187bf622d27834e81527",
+  "afterSha256": "60e331f56a0a5ea73a1feba647c7ff8f3c71be5d95d99483479b512904ef98f3",
+  "sourceFullModeToPreserve": 33188,
+  "formatterArtifactFullMode": 33152,
+  "actualFormatterCommand": {
+    "name": "font-gofmt-2",
+    "argv": [
+      "/usr/local/go/bin/gofmt",
+      "go-backend/internal/httpapi/managed_fonts_test.go"
+    ],
+    "cwd": "/work",
+    "started": "2026-10-09T21:32:13.103870+00:00",
+    "finished": "2026-10-09T21:32:13.106436+00:00",
+    "exit_code": 0,
+    "error": null,
+    "stdout": {
+      "path": ".gate/shell/targeted/d4faeb7f-3774-4a42-a27e-6dd3cd3cf726/font-gofmt-2.stdout",
+      "bytes": 8965,
+      "sha256": "60e331f56a0a5ea73a1feba647c7ff8f3c71be5d95d99483479b512904ef98f3"
+    },
+    "stderr": {
+      "path": ".gate/shell/targeted/d4faeb7f-3774-4a42-a27e-6dd3cd3cf726/font-gofmt-2.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "actualFormatterOutputReference": {
+    "path": ".gate/shell/targeted/d4faeb7f-3774-4a42-a27e-6dd3cd3cf726/formatted/go-backend/internal/httpapi/managed_fonts_test.go",
+    "bytes": 8965,
+    "sha256": "60e331f56a0a5ea73a1feba647c7ff8f3c71be5d95d99483479b512904ef98f3"
+  },
+  "actualExecutionWholeCapture": "3d0a31549ead3b14d6fec921c611c77191873476ceea98e7c21d486d1786af4c",
+  "actualObservationsSha256": "dc58d5036d2c9af1eccadae2cb9796f8b472abfc2121c84ff251a44666792411",
+  "actualTargetedTestedSource": "52d100d6691d1da5156f43175b939140d7e6ce43",
+  "actualNodePureCases": "61PASS/zero fail-skip-cancel-todo",
+  "actualGoTopCases": 5,
+  "actualGoTopAndSubcases": 77,
+  "actualGoFailOrSkip": 0,
+  "actualShellAggregate": "FAIL1 from gofmt-diff actualnonempty/exit1; preserved unchanged",
+  "intendedChange": "ONLYactualstandardformatterlayout; allGo method names/case values/actions/assertions retained",
+  "all900AndProductionSource": "UNCHANGED",
+  "sourceAfterRuntimeQualification": "NOT RUN at this new proposed afterimage; finalfull stillrequired",
+  "formalKIT_BUMP": "NOT ISSUED",
+  "closedProposalScope": "Original closedproposal remains UNAPPLIED historical review packet; this records lateractualapplication",
+  "closedSourceProposalSeal": "99ed339622ec198d5c00229c576b8cac6cff95a9eaa09778fe4bc15b11295304",
+  "independentFinalSourceReview": "planning_evidence SOURCE ACCEPT; actualcapturedstdout/command/Gitpreimage/fullmode, layoutonly, allmethods/casevalues/assertions unchanged"
+}
