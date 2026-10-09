@@ -1,0 +1,123 @@
+"""Parse one passed native package-metadata or full test-list producer; no app imports."""
+import hashlib
+import json
+import os
+import pathlib
+import re
+import stat
+import sys
+
+R = pathlib.Path("/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7")
+S = pathlib.Path("/home/dobo/work/_temp/codex__content-v1-7")
+
+def read_regular(path, maximum):
+    path = pathlib.Path(path)
+    root = next((root for root in (R, S) if path.is_relative_to(root)), None)
+    assert root is not None and root.resolve(strict=True) == root
+    for ancestor in (path, *path.parents):
+        info = ancestor.lstat()
+        assert not stat.S_ISLNK(info.st_mode)
+        if ancestor == root:
+            break
+    info = path.lstat()
+    assert stat.S_ISREG(info.st_mode) and info.st_size <= maximum
+    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
+    with os.fdopen(fd, "rb") as source:
+        opened = os.fstat(source.fileno())
+        assert (opened.st_dev, opened.st_ino) == (info.st_dev, info.st_ino)
+        blob = source.read(maximum + 1)
+    assert len(blob) <= maximum and path.lstat().st_ino == info.st_ino
+    return blob
+
+def digest(path, maximum=512 << 20):
+    return hashlib.sha256(read_regular(path, maximum)).hexdigest()
+
+def unique_object(pairs):
+    result = {}
+    for key, value in pairs:
+        assert key not in result, "Duplicate JSON key refused"
+        result[key] = value
+    return result
+
+def document(path):
+    return json.loads(read_regular(path, 8 << 20), object_pairs_hook=unique_object)
+
+assert len(sys.argv) == 6
+plan_path, receipt_path, keeper_path, external_path, output_path = map(pathlib.Path, sys.argv[1:])
+plan = document(plan_path)
+receipt = document(receipt_path)
+keeper = document(keeper_path)
+external = document(external_path)
+assert external["keeper_path"] == str(keeper_path)
+assert external["keeper_sha256"] == digest(keeper_path)
+assert 1 <= len(keeper["files"]) <= 128
+for name, pin in keeper["files"].items():
+    assert digest(name) == pin["sha256"]
+assert str(receipt_path) in keeper["files"]
+assert receipt["status"] == "passed" and receipt["exit_code"] == 0
+assert receipt.get("guard") is None and receipt.get("failure") is None and receipt.get("received_signal") is None
+commands = [command for command in plan["commands"] if command["name"] == receipt["name"]]
+assert len(commands) == 1
+command = commands[0]
+assert receipt["argv"] == command["argv"]
+log = pathlib.Path(receipt["log_path"])
+assert str(log) in keeper["files"]
+blob = read_regular(log, command["max_output_bytes_root_post_producer"])
+assert hashlib.sha256(blob).hexdigest() == receipt["log_sha256"]
+text = blob.decode("utf-8", errors="strict")
+result = {"schema": "actual-native-coverage-producer-inventory-v1", "producer_name": command["name"], "receipt_sha256": digest(receipt_path), "log_sha256": receipt["log_sha256"], "keeper_sha256": digest(keeper_path), "test_bodies_executed": False, "qualification_or_release": False}
+if command["kind"] == "package_metadata":
+    decoder = json.JSONDecoder(object_pairs_hook=unique_object)
+    offset = 0
+    rows = []
+    while offset < len(text):
+        while offset < len(text) and text[offset].isspace():
+            offset += 1
+        if offset == len(text):
+            break
+        row, offset = decoder.raw_decode(text, offset)
+        assert isinstance(row, dict)
+        assert row.get("Error") is None and not row.get("DepsErrors") and not row.get("Incomplete")
+        rows.append(row)
+        assert len(rows) <= 10000
+    assert rows
+    owned = []
+    tests = []
+    module = command["module_path"]
+    source_fields = {}
+    for row in rows:
+        name = row.get("ImportPath")
+        assert isinstance(name, str) and name
+        if row.get("DepOnly") or row.get("ForTest") or name.endswith(".test") or "[" in name:
+            continue
+        if name != module and not name.startswith(module + "/"):
+            continue
+        owned.append(name)
+        if row.get("TestGoFiles") or row.get("XTestGoFiles"):
+            tests.append(name)
+        source_fields[name] = {key: row.get(key, []) for key in ("GoFiles", "CgoFiles", "TestGoFiles", "XTestGoFiles", "IgnoredGoFiles", "EmbedFiles", "TestEmbedFiles", "XTestEmbedFiles")}
+        source_fields[name]["Dir"] = row["Dir"]
+    assert len(owned) == len(set(owned)) and sorted(owned) == command["expected_owned_base_paths"]
+    result.update({"objects": len(rows), "owned_base_packages_in_actual_order": owned, "test_bearing_packages_in_actual_order": tests, "owned_source_file_fields": source_fields, "imported_closure_only": True})
+elif command["kind"] == "binary_case_list":
+    assert digest(command["binary_path"]) == command["binary_sha256"]
+    names = text.splitlines()
+    assert names and len(names) <= 10000 and all(names)
+    assert len(names) == len(set(names))
+    groups = {name: [] for name in ("Tests", "Examples", "Fuzz", "Benchmarks")}
+    for name in names:
+        assert re.fullmatch(r"(?:Test|Example|Fuzz|Benchmark)[A-Za-z0-9_]*", name), "Unexpected listing output refused"
+        category = "Tests" if name.startswith("Test") else "Examples" if name.startswith("Example") else "Fuzz" if name.startswith("Fuzz") else "Benchmarks"
+        groups[category].append(name)
+    result.update({"names_in_actual_order": names, "categories": groups, "binary_sha256": command["binary_sha256"], "list_regex": ".", "subtests_or_runtime_skips_not_in_static_list": True})
+else:
+    raise AssertionError("Unreviewed producer kind")
+assert output_path.is_relative_to(pathlib.Path(plan["fresh_namespace"]))
+assert output_path.parent.resolve(strict=True) == output_path.parent
+assert not output_path.exists() and not output_path.is_symlink()
+with output_path.open("x") as output:
+    json.dump(result, output, indent=2, sort_keys=True)
+    output.write("\n")
+    output.flush()
+    os.fsync(output.fileno())
+print(json.dumps({"producer": command["name"], "inventory_only": True}))

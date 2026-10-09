@@ -2,6 +2,20 @@
 
 Valid until: selected inputs, qualified baseline or human steering change — recheck before installation.
 
+## Current Windows handover
+
+Valid until: the owner resumes work or source/platform/remote HEAD changes — then recheck.
+
+Owner requested landing/pushing the current checkpoint to origin/main and the feature origin branch on2026-10-09. Linux heartbeat is PAUSED and all workers stopped. This is checkpoint transport; V1.7 remains uninstalled, Source6 live and zero integrated growth. Both refs are intended to carry this handover commit; fetch and verify actual HEADs before continuing.
+
+The exact candidate stage is portable: [1200-file source snapshot](reference/source7-windows-continuation-1200.tar.gz), SHA256 `5d0ae406eabe8a7fbad16937f570f25151c2fd22254e02347d9b3231a7d7e4b6`,26,414,161B; [member manifest](reference/source7-windows-continuation-1200.manifest.json), SHA256 `c4f3049551eddcca35c15cd565bcaf5bf1dcbf60b6b30b4ed484edacc5c66460`. All1200 regular members/122,687,976 rawbytes/modes were reread and matched the accepted80db inventory and unchanged Linux source before/after. Extract only into a NEW task-owned candidate directory, preserving rawLF bytes; do not overwrite the Source6 checkout. No SDK/cache/binary/failed workspace is bundled.
+
+Windows continuation: use owner-selected Go1.27.1 and native Go checks (ADR0186), qualify Windows platform/tool/path/transaction guards and affected binaries; Linux receipts/binaries/resource clocks remain historical. Reuse the sealed candidate data/expected rows/accepted71-pass scope by its exact hashes, rather than rebuilding research or rerunning whole Python suites. The two permanent Go input tests are actual candidate files and publish to root only with qualified Source7 adoption. Runtime.Caller tests need no-trimpath compilation or a separately reviewed portable adaptation.
+
+The next package/case-inventory plans are D/go-source7-native-coverage-* drafts, [human stop](go-source7-native-coverage-human-stop.json). Authoring froze, but the independent method review was interrupted for this handover; NO Go metadata/list/compile/test ran in that iteration and the draft commands are NOT executable approval. Refresh current Windows dependencies/bindings and review actual package/case-list scope before execution. Optional full-module inventory09be stays FAILED/unrun; do not fetch unused modules to green it. Preserve the actual backend38/27 and complete-binary case discovery requirement, shared/Webkit module boundaries, all known blocked/unrun cases.
+
+Still required before V1.7 release: actual full native/backend/shared/rails/race/vet, independent Source7HTTP1207 corpus/selector, TCP151/assets28, source/history/export/currentauthority and assembled acceptance. Managed current/frozenlegacy assets remain missing; the earlier asset-scope question is unanswered. GUI/frontend/supervisors/PG/providers stay paused until explicit owner steering. Prior push prohibition is superseded only for this explicit checkpoint main+feature transport; future remote changes need owner authorization. Preserve Linux worktree/scratch/SDK and the feature branch for continuation; no unfinished candidate cleanup.
+
 ## Current Linux integration checkpoint
 
 Latest [permanent candidate input regressions](go-source7-input-contracts-results.json) add exactly two Go test sources to I1198→1200, preserving every prior member and all serving data/pins/history. Fresh race compile, exact two-name listing and targeted run pass: two complete parent tests plus all69 ordered held-input subcases (71 executions), zero failure/skip/race/omission. Ordinary seed7 normal/Societate covers2sessions/32requests, direct leafă/Salariu/shared attempt/repeats, rank15/distance2/Cald99, private recovery, earned bank3 clue, four attempts/one clue/700 points/share/Progress. The held contract checks all69 frozen lexical rows and current public confirmations, unknown zero-charge/advisories, nonwinning projection and repeated shared slots. Nine exact owners/one projection/two fuzzy/57unknown remain distinct. Its eight nonempty HTTP advice literals are new normative checks, not an archived69HTTP corpus.

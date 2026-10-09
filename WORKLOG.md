@@ -2097,3 +2097,19 @@ Projectionproof readonly schema KeyError0 precededwrites; actualmapshape
 resolved underoutcomescope. No native failure or clock was reset.
 Optional fullmodule09be remainsFAILED/unrun; no downloads/modulechange,
 GUI/frontend/PG/provider/remote action or Source7release.
+
+## 2026-10-09 — Owner-requested Windows checkpoint transport
+
+Valid until: owner resumes or platform/source/remote tips change — then history.
+
+Human requested currentwork land/push origin main andfeature forWindows. Linux
+heartbeatPAUSED; independent coverage-method worker interrupted before receipt.
+Coverage scope dd32 authored5draftfiles only; no Go/list/build/test/I mutation.
+Human stop654085b8 retains drafts asINCOMPLETE/no executionauthority.
+Portable source-only snapshot5d0ae406/membermanifestc4f30495 preserves exactI1200
+(122687976rawbytes/26414161compressed); allmembers and source prepost rereadexact.
+No SDK/cache/binary/failedworkspace transport; Windows mustqualifyownplatform.
+Prior71pass candidate scope and all release blockers remain; Source6 live,
+V1.7 uninstalled/0integratedgrowth. Main+feature transport isexplicitlyauthorized,
+not a release or future push authorization. Preserve unfinishedscratch/worktree
+and featurebranch forcontinuation; no foreign or unfinishedcleanup.
