@@ -31,6 +31,10 @@ function frontendBuild(prefix) {
 function passed(name) {
   return hook.checks.find((item) => item.name === name)?.status === "pass";
 }
+function frontendFailed() {
+  return hook.checks.some((item) => item.status === "fail"
+    && ["cat-frontend-unit", "cat-frontend-lint", "cat-frontend-types"].includes(item.name));
+}
 function managedFrontendBuild(prefix, prepared = false) {
   if (!prepared) command(`${prefix}-fresh-build-output`, "node", ["scripts/gui-assets.mjs", "prepare"]);
   if (!passed(`${prefix}-fresh-build-output`)) return false;
@@ -102,6 +106,10 @@ function nativeUnit() {
   });
   managedIdentity("cat-unit-gui-identity", ["cat-unit-frontend-build", "cat-unit-emitted-inventory", "cat-unit-assets"]);
   routeBudgets(); // E3 keeps real red measurements while independent checks continue.
+  command("cat-frontend-unit", "npm", ["test"], frontend);
+  command("cat-frontend-lint", "npm", ["run", "lint"], frontend);
+  command("cat-frontend-types", "npm", ["run", "typecheck"], frontend);
+  if (frontendFailed()) return;
   for (const [name, module] of [["backend", "go-backend"], ["authcore", "shared-go/authcore"]]) {
     hook.check(`cat-${name}-race`, () => {
       if (module === "go-backend") hook.assert("Backend race requires fresh synced assets and compiled identity inputs", () => passed("cat-unit-gui-identity"));
@@ -119,9 +127,6 @@ function nativeUnit() {
   command("cat-doc-check", "go", ["run", "./cmd/cat-doc-check", "--root", "..", "--inventory", "docs/tracked-markdown.json"], path.join(root, "go-backend"));
   command("cat-content-validate", "go", ["run", "./cmd/cat-content", "validate", "--root", ".."], path.join(root, "go-backend"));
   command("cat-content-export", "go", ["run", "./cmd/cat-content", "export", "--root", "..", "--check"], path.join(root, "go-backend"));
-  command("cat-frontend-unit", "npm", ["test"], frontend);
-  command("cat-frontend-lint", "npm", ["run", "lint"], frontend);
-  command("cat-frontend-types", "npm", ["run", "typecheck"], frontend);
   command("cat-docs-gate", "python3", [path.join(kitRoot, "lint/check_docs.py"), "."]);
 }
 switch (target) {
@@ -332,7 +337,7 @@ switch (target) {
     break;
   case "full":
     nativeUnit();
-    if (!passed("cat-unit-gui-identity")) break;
+    if (!passed("cat-unit-gui-identity") || frontendFailed()) break;
     binaries("cat-full");
     for (const [name, flag] of [["accounts", "accounts.database"], ["httpapi", "arcade.database"]]) {
       hook.check(`cat-pg-${name}`, () => {
