@@ -1,0 +1,163 @@
+{
+  "kind": "actual-quick-two-step-results-v1",
+  "spec_sha256": "f64e30dec2c68cd250d0ff8f1458f96fda1a781579f1368170d8056e42c7539d",
+  "admission_sha256": "514a81da4bd03e628d2a9f2fbfefac87980da1f97741c4054d1c369af1570894",
+  "source_boundary_sha256": "16efcd860dad5aa09b2a8048ef8857f627d0a2b33dd6c8b6d2ab85442627a04d",
+  "proposal_sha256": "fefea7b90e85988838519b0a0a8a594ce61ba171d5556d6dcb554b2feb179d0b",
+  "audit_sha256": "1c6dc29547645bbb2efd291fb424a10d6a928c3aa4f43302dc6976151d665bd7",
+  "proposal_bytes": 381538,
+  "audit_bytes": 45674,
+  "authored_boards": 85,
+  "rated_boards": 85,
+  "nodes": 322,
+  "replays": 85,
+  "requests": 460,
+  "games": {
+    "intrusul": 45,
+    "perechi": 40
+  },
+  "public_seed_range": [
+    0,
+    135
+  ],
+  "runtime_sources": 131,
+  "source_bindings": 9,
+  "all_privacy_terminal_score_checks": true,
+  "protected_post_files": 1238,
+  "immutable_stage_files": 1200,
+  "immutable_stage_dirs": 224,
+  "full_readset_checks": [
+    {
+      "step": 0,
+      "boundary": "pre",
+      "started_epoch": 1791556955.0151842,
+      "finished_epoch": 1791556955.839432,
+      "protected_files": 1238
+    },
+    {
+      "step": 0,
+      "boundary": "post",
+      "started_epoch": 1791557064.6574357,
+      "finished_epoch": 1791557066.3696988,
+      "protected_files": 1238
+    },
+    {
+      "step": 1,
+      "boundary": "pre",
+      "started_epoch": 1791557070.3558688,
+      "finished_epoch": 1791557071.8916676,
+      "protected_files": 1238
+    },
+    {
+      "step": 1,
+      "boundary": "post",
+      "started_epoch": 1791557181.866718,
+      "finished_epoch": 1791557183.4953032,
+      "protected_files": 1238
+    }
+  ],
+  "native_steps": [
+    {
+      "step": "quick-proposal",
+      "samples": 430,
+      "native_peak": 109670400,
+      "complete": {
+        "kind": "complete",
+        "step": "quick-proposal",
+        "returncode": 0,
+        "native_peak": 109670400,
+        "group_absent": true
+      },
+      "output": {
+        "kind": "quick-output",
+        "step": "quick-proposal",
+        "output_sha256": "fefea7b90e85988838519b0a0a8a594ce61ba171d5556d6dcb554b2feb179d0b",
+        "output_bytes": 381538,
+        "stdout_sha256": "72daa3d972b470d4670d486ca3559a0d8ee0021e3959cd441a4291f7a8e6ed6f",
+        "stderr_bytes": 0,
+        "proposal_sha256": ""
+      }
+    },
+    {
+      "step": "quick-audit",
+      "samples": 442,
+      "native_peak": 145186816,
+      "complete": {
+        "kind": "complete",
+        "step": "quick-audit",
+        "returncode": 0,
+        "native_peak": 145186816,
+        "group_absent": true
+      },
+      "output": {
+        "kind": "quick-output",
+        "step": "quick-audit",
+        "output_sha256": "1c6dc29547645bbb2efd291fb424a10d6a928c3aa4f43302dc6976151d665bd7",
+        "output_bytes": 45674,
+        "stdout_sha256": "ff422821197a0c0c45cd8601fb3b4112f8d9ee45c988640143c552c0dfac63ab",
+        "stderr_bytes": 0,
+        "proposal_sha256": "fefea7b90e85988838519b0a0a8a594ce61ba171d5556d6dcb554b2feb179d0b"
+      }
+    }
+  ],
+  "parent_inclusive_peak": 305487872,
+  "declared_RSS_scope": "Windows controller+actualPowerShellparent+WSLcarrier+sampledLinuxsupervisor/ownednativegroup; sourceworkers excluded",
+  "RSS_limitations": "sampled declared PS/controller/WSL/Linux group only; console helper excluded, no continuous or whole OS process-tree claim; source/metadata/resource-probe RSS unmeasured",
+  "original_baseline": 3176534922,
+  "native_final_growth": 10257249,
+  "fresh_root_counts": {
+    "C:\\Users\\Paul Work\\personal_repos\\_worktrees\\cat_de_roman_esti\\codex__content-v1-7": {
+      "bytes": 1317961130,
+      "files": 8446,
+      "dirs": 708
+    },
+    "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-7": {
+      "bytes": 1155689877,
+      "files": 26195,
+      "dirs": 3757
+    },
+    "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-7-qualification\\toolbuild-r1\\gocache": {
+      "bytes": 651189440,
+      "files": 6591,
+      "dirs": 257
+    },
+    "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-7-qualification\\toolbuild-r1\\gomodcache": {
+      "bytes": 61965905,
+      "files": 2162,
+      "dirs": 367
+    }
+  },
+  "fresh_total": 3186806352,
+  "fresh_growth": 10271430,
+  "finished_epoch": 1791557186.391806,
+  "deadline_epoch": 1791557948.6454668,
+  "outer_observation_sha256": "10923d3afba9173767904846f845ca1a8f20a47c0b6e778144e8e1facf1a23c7",
+  "windows_closure_sha256": "022e808d2a91dd7ffe052c3b82f933dd040458e3cde860844d07b1c1e0017991",
+  "linux_closure_sha256": "86d1d4e046da1ba971e60fa0b2f0ab6b0041ccde4e4b017e4e03499b63f093a9",
+  "finals": {
+    "factual": {
+      "sha256": "ab245f8501ffbd865e4dee7ab11bf42ca659b75c173ff7cf5dbb2455d2b285b0",
+      "bytes": 1312,
+      "reviewer": "/root/qualification_ledger"
+    },
+    "quality": {
+      "sha256": "31231c02b55c92958ba887dd11c13db4735495e58586ea61db31484ae3b8c6b0",
+      "bytes": 1073,
+      "reviewer": "/root/continuation_audit"
+    }
+  },
+  "actual_reviews": {
+    "factual": {
+      "reviewer": "/root/qualification_ledger",
+      "frozen_utc": "2026-10-09T14:50:00.541123Z",
+      "verdict": "accept"
+    },
+    "quality": {
+      "reviewer": "/root/continuation_audit",
+      "frozen_utc": "2026-10-09T14:50:31Z",
+      "verdict": "ACCEPT_ACTUAL_QUICK_PROPOSAL_AND_AUDIT_EVIDENCE_ONLY"
+    }
+  },
+  "scope": "accepted exact prospective Quick catalog/audit and genuine same-role finals only; stage unchanged, Source6 live, no Quick transition/installation/V1.7 qualification",
+  "next_action": "fresh source-reviewed guarded isolated Quick transition, then affected derived/pin/current authority/installed audit/finals and full V1.7 gates"
+}
