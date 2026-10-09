@@ -1,0 +1,20 @@
+{
+  "action": "SIGINT to verified owned pytest process group only, allowing pytest to emit partial failure/JUnit diagnostics. Runner remains responsible for failed outcome/accounting. No other owner stopped.",
+  "all_inner_passes_unqualified_for_failed_fullrun": true,
+  "at_utc": "2026-10-09T02:32:26.954399+00:00",
+  "cwd_matches_owned_I": true,
+  "log_sha256_at_observation": "50ae0fba449583e85c0c168abbfd99a929ff96a4556887ceaf4889ea967a8b4b",
+  "native_admission_sha256": "552e14bba8018f56d47fa111c269ffb1273bceec2b46cc42bbfd8a2e5767cad7",
+  "no_failed_prefix_resume_or_clock_reset": true,
+  "observed_failure_progress_lines": [
+    "tests/test_alchimie_discovery_catalog.py::test_editorial_descriptions_keep_original_fixes_and_provenance FAILED [  0%]",
+    "tests/test_alchimie_discovery_catalog.py::test_expansion_preserves_all_prior_recipes_goals_and_collections FAILED [  2%]",
+    "tests/test_alchimie_discovery_catalog.py::test_recipe_reuse_keeps_complete221_book_and_preparation_sources FAILED [  2%]",
+    "tests/test_alchimie_discovery_catalog.py::test_reviewed_unchanged_concepts_can_inherit_without_new_source_claims FAILED [  3%]"
+  ],
+  "owned_pgid": 2416880,
+  "owned_pid": 2416880,
+  "owned_start_ticks": 4253640,
+  "pytest_command_matches_reviewed_owner": true,
+  "schema": "owned-full-reference-stop-on-observed-test-failure-v1"
+}

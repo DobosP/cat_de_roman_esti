@@ -1,0 +1,37 @@
+{
+  "execution_performed": false,
+  "literal_owned_factory_roots": [
+    {
+      "fixture": "alchimie_evidence",
+      "mktemp_prefix": "alchimie-source",
+      "read_line": 277,
+      "scope": "module",
+      "source": "tests/test_build_review_artifact.py",
+      "source_sha256": "b996a52c0cf37d6cbbc30c9d07026212c40446b86dcadd3f774fb1d681c46dd0"
+    },
+    {
+      "fixture": "exact_v1_source_context",
+      "mktemp_prefix": "exact-v1-recipe-sources",
+      "read_line": 36,
+      "scope": "module-autouse",
+      "source": "tests/test_v1_recipe_refresh.py",
+      "source_sha256": "50e48d41d1e6f3f965beafe0b2fa29148ced8e32ebee5c188be2aac487868bd2"
+    },
+    {
+      "fixture": "comparison",
+      "mktemp_prefix": "v1-recipe-refresh",
+      "read_line": 141,
+      "scope": "module",
+      "source": "tests/test_v1_recipe_refresh.py",
+      "source_sha256": "50e48d41d1e6f3f965beafe0b2fa29148ced8e32ebee5c188be2aac487868bd2"
+    }
+  ],
+  "no_command_test_assertion_skip_resource_floor_or_oldrecord_change": true,
+  "original_method_only_percase_cleanup_postcondition_preserved": true,
+  "postcheck_interpretation": "Verify passing per-case tmp_path directories are absent. Inventory and retain the three known owned factory roots and their actual bounded regularfiles/directories/symlinks without following links. Their bytes are fully included in the same native S/R increment. Do not delete expected retained evidence to force emptiness or accept unexpected leftover per-case/foreign files. Failure/extra leftover/oversize remains STOP and preserve.",
+  "prepared_at_utc": "2026-10-09T02:21:06.921029+00:00",
+  "primary_behavior": "tmp_path passed CALL cleanup is best effort under failed policy; pytest_sessionfinish removes whole basetemp on exit0/failed only when _given_basetemp is None. Approved fullrun explicitly passes --basetemp, so module/session factory directories are not promised empty. No cleanup success inferred from ignore_errors.",
+  "primary_source_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/_pytest/tmpdir.py",
+  "primary_source_sha256": "5099f71d89413191c9e7515c9d4fe9fc7083bb73306f2cf1f73a9f89c862ed90",
+  "schema": "primary-pytest-percase-versus-modulefactory-cleanup-boundary-v1"
+}
