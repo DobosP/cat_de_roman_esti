@@ -1,0 +1,69 @@
+{
+  "schema": "exact-source-evidence-archive-v1",
+  "valid_until": "producer/source/runtime changes; then history",
+  "scope": "source only; all retained four-root bytes count; new absolute ceiling explicitly higher; no actual dispatch or artifact qualification; old FAILED clock/anchor/state retained unchanged",
+  "archive": "docs/reviews/v1-7-recognizable-content/reference/source7-windows-current-rail-build-per-lane-source-r2.tar.gz",
+  "sha256": "120c10fa48fbd3ed04271fa261383321c277854ef1bc2aacd9e2a8aa7f9b1d15",
+  "bytes": 2266701,
+  "members": [
+    {
+      "path": "current-rail-build-per-lane-generation-failure-r2.json",
+      "bytes": 469,
+      "sha256": "ef5071fc172631266420978825a138fc727c5fd95e545a41750e245879e4bc56"
+    },
+    {
+      "path": "current-rail-build-per-lane-policy-review-r2.json",
+      "bytes": 2330,
+      "sha256": "15c102bdfdd67ea893487f6db108f26cca05a4c6aa7a5bf61f1370e25d16bbfd"
+    },
+    {
+      "path": "current-rail-build-per-lane-source-admission-r2.json",
+      "bytes": 2037,
+      "sha256": "5d41a660a571fbe8410c969c4d268ea81f00c0f9483c78af96865ed3fd6ae988"
+    },
+    {
+      "path": "current-rail-build-per-lane-source-boundary-r2.json",
+      "bytes": 3628,
+      "sha256": "cd08cd05e3f7d359c88e44dae6c754dd653f6ade4ff6308d628cc72088298eef"
+    },
+    {
+      "path": "probe/native-current-rail-build-controls-r1.py",
+      "bytes": 4085,
+      "sha256": "dbae5b0370a3e49162c6e40f58362e8a10c12a1841ba1f0d3f65f57f80d8c964"
+    },
+    {
+      "path": "probe/native-current-rail-build-linux-r1.py",
+      "bytes": 24347,
+      "sha256": "9a79edc6cdda6882d17e6bb00f4b84abd34cfd16e45388e548552f69508e73bc"
+    },
+    {
+      "path": "probe/native-current-rail-build-per-lane-late-admission-r2.py",
+      "bytes": 7118,
+      "sha256": "1184360035abf20abeca57bf74be233fa72f8027c10343e2af68fc6585c03ef1"
+    },
+    {
+      "path": "probe/native-current-rail-build-template-r3.json",
+      "bytes": 10205391,
+      "sha256": "4c77f3ddaecdf1d12dede3d1fa47fe7590edd59e6418e391271350d3cd9ffda7"
+    },
+    {
+      "path": "probe/native-current-rail-build-windows-r1.py",
+      "bytes": 24378,
+      "sha256": "b9bf7b958f054e526897396f4a14757099586b4e67fcd4158e0eb2b427e615f5"
+    }
+  ],
+  "readback_verified_epoch": 1791551605.829077,
+  "source_boundary_sha256": "cd08cd05e3f7d359c88e44dae6c754dd653f6ade4ff6308d628cc72088298eef",
+  "source_reviews": {
+    "factual": {
+      "reviewer": "/root/qualification_ledger",
+      "verdict": "ACCEPT_SOURCE_ONLY",
+      "frozen_utc": "2026-10-09T13:09:20Z"
+    },
+    "quality": {
+      "reviewer": "/root/continuation_audit",
+      "verdict": "ACCEPT_CURRENT_RAIL_BUILD_PER_LANE_SOURCE_ONLY",
+      "frozen_utc": "2026-10-09T13:10:17Z"
+    }
+  }
+}

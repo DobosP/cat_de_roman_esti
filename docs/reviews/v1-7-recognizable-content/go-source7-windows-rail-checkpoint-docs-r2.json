@@ -1,0 +1,94 @@
+{
+  "schema": "native-docs-checkpoint-evidence-v1",
+  "valid_until": "currentMD/guard/tool changes; then history",
+  "scope": "documentation checkpoint ONLY, no content/operator/backend/release qualification",
+  "actual_tool_exit": 0,
+  "result_sha256": "52d6f3d7df574f702fe40da4a73ca8559b1e84d0818cf5b39d2fff77b849f454",
+  "reviewer": "/root/continuation_audit",
+  "verdict": "ACCEPT_ACTUAL_NATIVE_DOCS_CHECKPOINT_EVIDENCE_ONLY",
+  "review_frozen_utc": "2026-10-09T13:45:41Z",
+  "exact_report": {
+    "files": 59,
+    "dead_links": [],
+    "stale_terms": [],
+    "retired_verbs": [],
+    "orphans": [],
+    "budgets": []
+  },
+  "parent_inclusive_sampled_peak": 39215104,
+  "samples": 3,
+  "growth": 120376,
+  "trusted_boundary": "existing Windows/Python/psutil/Git runtime DLLs, remaining repository-local Git config and OS; fsmonitor explicitly disabled; no whole-OS hermetic claim",
+  "process_absence": "all recorded native/Git/controller/parent generations independently absent; no unobserved-child or continuous RSS claim",
+  "protected_files": 531,
+  "immutable_start": 1791553293.3386583,
+  "immutable_deadline": 1791554493.3386583,
+  "baseline": 3173552871,
+  "archive": "docs/reviews/v1-7-recognizable-content/reference/source7-windows-rail-checkpoint-docs-r2.tar.gz",
+  "archive_sha256": "89eb8726d35c97803a7cb5bf34c5e4a3329ef07b76e6fdb0641f6c61cb14c74f",
+  "archive_bytes": 2856311,
+  "members": [
+    {
+      "path": "admission/admission-r2.json",
+      "bytes": 1183,
+      "sha256": "27c095c94950aa9d69a3674bf21d443699f383744200d55147afb5416731bce4"
+    },
+    {
+      "path": "admission/spec-r4.json",
+      "bytes": 119102,
+      "sha256": "93c691199b4cff0ef70a26a16f4f23846f241bbaed13a2b8529d098c5e62f681"
+    },
+    {
+      "path": "checkpoint/STATUS.md",
+      "bytes": 11749,
+      "sha256": "4c9d2dee98462cafd755639b2807cdc664676e2b5b258eaf855213dd79901718"
+    },
+    {
+      "path": "checkpoint/wave-README.md",
+      "bytes": 76394,
+      "sha256": "43d9786ec2a0ca6842c2cb72ab82eb1332000cdf6bd192583bbec505233e2aab"
+    },
+    {
+      "path": "method/native-docs-windows-r3.py",
+      "bytes": 7873,
+      "sha256": "73502f5b0ed9fbe40d34f258e793b22dc709b93d77562755422364c22663d8ee"
+    },
+    {
+      "path": "outputs/result.json",
+      "bytes": 1778,
+      "sha256": "52d6f3d7df574f702fe40da4a73ca8559b1e84d0818cf5b39d2fff77b849f454"
+    },
+    {
+      "path": "outputs/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "outputs/stdout.json",
+      "bytes": 91,
+      "sha256": "eb7cea2f02031d8e6d85ccd479143779f3ab0ab9a1c5901582a46ac6979b6ff3"
+    },
+    {
+      "path": "source/check.go",
+      "bytes": 6362,
+      "sha256": "fe5a2dc09c1a479a4fdf380dbf4069d122f1aeb59088c0b940f7282c1b1be03d"
+    },
+    {
+      "path": "source/main.go",
+      "bytes": 526,
+      "sha256": "315a32b759607c0f75f27965b9a82dd3ccd9b2b06ef41731478650b59c5dbead"
+    },
+    {
+      "path": "tool/cat-doc-check.exe",
+      "bytes": 4850688,
+      "sha256": "ef10dd674639a612e95fb17446c20bd3c4bffd7d8c592c4849f195e8afc936af"
+    }
+  ],
+  "readback_verified_epoch": 1791553607.1144347,
+  "checkpoint_factual_review": {
+    "reviewer": "/root/qualification_ledger",
+    "frozen_utc": "2026-10-09T13:44:40.646114Z",
+    "verdict": "checkpoint-only factual consistency ACCEPT",
+    "scope": "new native build receipts and currentSTATUS/wave/sourceplan; no binary/cache rehash/archive reread/nativeexecution/assembled-version acceptance; root must verifyGitchangedfiles/stagedwhitespace"
+  }
+}

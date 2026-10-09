@@ -1,0 +1,51 @@
+{
+  "schema": "root-transcribed-independent-policy-findings-v1",
+  "root_recorded_epoch": 1791551050.046308,
+  "factual": {
+    "reviewer": "/root/qualification_ledger",
+    "frozen_utc": "2026-10-09T13:00:36Z",
+    "finding": "fresh full baseline compatible with documented per-lane1GiB policy, separatemethod/admissionreviewrequired; noR1retryauthorized"
+  },
+  "quality": {
+    "reviewer": "/root/continuation_audit",
+    "finding": "actualchecked-inrunner supports freshmeasured_size(ALLroots) for NEWnonexistentcampaign only, forbids existingcampaign/index0reset; sourcepolicycompatible, exactnewmethod/admissionstillpending",
+    "quality_native_failure_verdict": "ACCEPT_FAILED_BUILD_OUTCOME_AND_OWNERSHIP_EVIDENCE_ONLY",
+    "native_failure_review_frozen_utc": "2026-10-09T13:01:18Z"
+  },
+  "references": [
+    {
+      "path": "docs/reviews/v1-7-recognizable-content/README.md",
+      "lines": "92-98",
+      "claim": "fresh beforeeachlane/1GiBincrement/allownedroots/noresetorretryunchanged"
+    },
+    {
+      "path": ".agents/skills/romanian-game-content/SKILL.md",
+      "lines": "21-23",
+      "claim": "currentinventoryandlimits"
+    },
+    {
+      "path": "docs/reviews/v1-7-recognizable-content/methods/run_owned_full_scratch_lane.py.txt",
+      "sha256": "397686a51c5f03f207cc450fceda8b88623383a83ab2ecb90a884e6167fa91ee",
+      "lines": "226-247,258-270,548-556",
+      "claim": "newlaneonlyfreshALLrootstartsize, bindprefixbaseline/deadline, rejectexistingcampaignreset"
+    },
+    {
+      "path": "docs/adr/0177",
+      "lines": "21-25",
+      "claim": "laterlanes ownexactmanifest/resourcechecks"
+    },
+    {
+      "path": "docs/adr/0185",
+      "claim": "unchangedboundaries/nofailedguardclockreset"
+    }
+  ],
+  "prospective_constraints": [
+    "finishretainR1failureandindependentownerabsence",
+    "freshFULLR+S+bothexternalcachesincludingSDK/archive/failedtemp/logsbeforeanynewprep",
+    "freezeonce,countallnewsource/preparation/publicationgrowth",
+    "same1GiBincrement/2GiBsampledparentRSS/17to16disk/16memory/Go2/20min180metadata195launch",
+    "oldR1clock/anchor/statealwaysFAILED, noPASS/recovery/unchangedretryclaim",
+    "absoluteceilingincreasesexplicitly; no claimeveryeffectiveboundunchanged",
+    "exactnewmethod/publisher/sourceinputs/actualPIDanddispatchindependentreviewsbeforeGo"
+  ]
+}

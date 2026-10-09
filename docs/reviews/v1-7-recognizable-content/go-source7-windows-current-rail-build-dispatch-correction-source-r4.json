@@ -1,0 +1,74 @@
+{
+  "schema": "exact-source-evidence-archive-v1",
+  "valid_until": "producer/source/runtime changes; then history",
+  "scope": "source only; all retained four-root bytes count; new absolute ceiling explicitly higher; no actual dispatch or artifact qualification; old R1FAILED/R2FAILED_DISPATCH_EXPIRED clocks/anchors/state retained unchanged; exact launcher hold and immediate release bothdeadline-195",
+  "archive": "docs/reviews/v1-7-recognizable-content/reference/source7-windows-current-rail-build-dispatch-correction-source-r4.tar.gz",
+  "sha256": "7822ba5c489f9d9aa762b504b9bcbbd8eae41a913e67a4a58eaccfabdbceb6dd",
+  "bytes": 2267737,
+  "members": [
+    {
+      "path": "current-rail-build-dispatch-correction-source-admission-r4.json",
+      "bytes": 1313,
+      "sha256": "ba80c441698675296f0946f66a77bd8f0790c04147576aa5a55b673778bfc13a"
+    },
+    {
+      "path": "current-rail-build-dispatch-correction-source-boundary-r4.json",
+      "bytes": 3059,
+      "sha256": "a45c2de106b983165cace9b240583d54947f3804b4f394b953a870969b7ad9b9"
+    },
+    {
+      "path": "current-rail-build-per-lane-policy-review-r2.json",
+      "bytes": 2330,
+      "sha256": "15c102bdfdd67ea893487f6db108f26cca05a4c6aa7a5bf61f1370e25d16bbfd"
+    },
+    {
+      "path": "native-current-rail-build-dispatch-expired-r2.json",
+      "bytes": 758,
+      "sha256": "7db01867670fe8360efd2fdeb85e9804c01389644c3e6b8499f1f4923223c09c"
+    },
+    {
+      "path": "probe/native-current-rail-build-controls-r1.py",
+      "bytes": 4085,
+      "sha256": "dbae5b0370a3e49162c6e40f58362e8a10c12a1841ba1f0d3f65f57f80d8c964"
+    },
+    {
+      "path": "probe/native-current-rail-build-held-launcher-r4.ps1",
+      "bytes": 2586,
+      "sha256": "2872ba2bd747d5d93256001726e7b08f1608528c1c32b46f52528dd225f4fa05"
+    },
+    {
+      "path": "probe/native-current-rail-build-linux-r1.py",
+      "bytes": 24347,
+      "sha256": "9a79edc6cdda6882d17e6bb00f4b84abd34cfd16e45388e548552f69508e73bc"
+    },
+    {
+      "path": "probe/native-current-rail-build-per-lane-late-admission-r4.py",
+      "bytes": 7140,
+      "sha256": "37370752cebd53e6e650608a14180ae02f9496219923e3f4fafdc83ad4cc5709"
+    },
+    {
+      "path": "probe/native-current-rail-build-template-r5.json",
+      "bytes": 10206964,
+      "sha256": "2a9c4c6fc3568f732e2e56dbedace80073ebb03ae3e913615614282cedf41bf7"
+    },
+    {
+      "path": "probe/native-current-rail-build-windows-r1.py",
+      "bytes": 24378,
+      "sha256": "b9bf7b958f054e526897396f4a14757099586b4e67fcd4158e0eb2b427e615f5"
+    }
+  ],
+  "readback_verified_epoch": 1791552385.2304976,
+  "source_boundary_sha256": "a45c2de106b983165cace9b240583d54947f3804b4f394b953a870969b7ad9b9",
+  "source_reviews": {
+    "factual": {
+      "reviewer": "/root/qualification_ledger",
+      "verdict": "ACCEPT_SOURCE_ONLY",
+      "frozen_utc": "2026-10-09T13:24:50.988084Z"
+    },
+    "quality": {
+      "reviewer": "/root/continuation_audit",
+      "verdict": "ACCEPT_CURRENT_RAIL_BUILD_PER_LANE_SOURCE_ONLY",
+      "frozen_utc": "2026-10-09T13:25:16Z"
+    }
+  }
+}

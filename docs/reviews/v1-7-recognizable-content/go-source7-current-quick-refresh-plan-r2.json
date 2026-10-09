@@ -1,0 +1,36 @@
+{
+  "schema": "quick-refresh-source-plan-v1",
+  "valid_until": "candidate/runtime/source/producer/protocol changes; then history",
+  "reviewer": "/root/qualification_ledger",
+  "substantive_frozen_utc": "2026-10-09T13:18:34Z",
+  "scope": "source-only research; no native execution/final/adoption acceptance",
+  "current_candidate_sha256": "c93a2656f7794b51be20fd9e9a171fd976de63e8e3bec9bb6cdabdd490be32ef",
+  "runtime_rows": 131,
+  "source_bindings": 9,
+  "runtime_raw_rows_canonical_sha256": "15358f0bf07331515f3ecbacc935d71fe79dd44baf0e81e1fc69ab654fc01319",
+  "runtime_raw_map_canonical_sha256": "423c663ae6c36ccc0424618f4446f89c974bc168e882ac2a2cf698ecd62bc783",
+  "source_normalized_text_map_canonical_sha256": "90020b545ec1b3b5261a35db27183effdba106b69a66611ee51900d4e69657e4",
+  "old_wrapper_failures": [
+    "Old windows-driver-r5 line118 incorrectly compares audit replay rated IDs against candidate authored IDs; these actual sets intentionally have no overlap",
+    "Old line120 freezes110runtime rows; current native runtimePaths produces131"
+  ],
+  "required_identity_checks": [
+    "candidate boards and proposal authored IDs equal,85 unique",
+    "candidate/authored/rated rows biject on unique(game,source_id); preserve game/source_id/category/difficulty/payload",
+    "rated IDs unique; replay IDs equal rated IDs,85 rows",
+    "replay metadata id/game/source_id/category equal rated-by-ID; public_seed integer nonbool0..4999",
+    "45Intrusul4requests +40Perechi7requests =460; hidden_answers_preserved/terminal_get_preserved/score1000 alltrue"
+  ],
+  "native_output_contract": [
+    "proposal stdout parsed exactly mode=proposal,ok=true,rail=quick; stderr empty",
+    "audit stdout parsed exactly mode=audit,ok=true,rail=quick; stderr empty",
+    "audit quick-content-live-audit-v1,passed true,native_audit_version1,actual proposal SHA/core_boards_preserved true/exact runtime131+source9 maps"
+  ],
+  "execution_guard": "adapt current accepted W1/L1 lifecycle/four-root accounting; fresh absent confined outputs, fullI1200 namespace/rawpins/actual fresh acceptedbinary/provenance/rawreviews before/after; freeze genuine proposal SHA before audit; explicit --source",
+  "final_roles": {
+    "factual": "/root/qualification_ledger",
+    "quality": "/root/continuation_audit"
+  },
+  "final_contract": "actual same-role quick-content-final-v1 binds actual catalog_sha256/audit_sha256,verdictaccept/rationale only after genuine audit",
+  "authority_limit": "externalS evidence paths not eligible installed authority; reviewed copies insideI/docs/reviews or protectedsource plus fresh installed affected bindings/audits/finals remain required"
+}
