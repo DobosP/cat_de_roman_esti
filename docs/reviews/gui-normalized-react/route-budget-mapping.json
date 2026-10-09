@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "base": "ddbc2b184506e49adc2640fdc712e5576e145024",
+  "head": "1ffbd3cc6621bf48bb309e95947b4a5f1f01efec",
+  "changes": [
+    {
+      "path": "scripts/gui-repo-hook.mjs",
+      "operation": "modify",
+      "before_exists": true,
+      "before_sha256": "bbca2370b6f19455bc2ce687c68e31324be377cf85a883e4224f5d8ba5d2f60f",
+      "after_bytes": 25542,
+      "after_sha256": "a4e44d9607722ae39c3ac4304a39e22684018629f2e8c4f98c31ffb199b1d927",
+      "git_mode": "100644"
+    },
+    {
+      "path": "scripts/gui-route-budgets.mjs",
+      "operation": "add",
+      "before_exists": false,
+      "before_sha256": null,
+      "after_bytes": 17507,
+      "after_sha256": "2bb4ba79eb79a965861a97757f8d4b18e2f2a4b5d76b059a93cac440139eb1d9",
+      "git_mode": "100644"
+    },
+    {
+      "path": "frontend/tests/gui-route-budgets.test.mjs",
+      "operation": "add",
+      "before_exists": false,
+      "before_sha256": null,
+      "after_bytes": 10103,
+      "after_sha256": "0663ec90d13281b163ec4521105e61e58eacea321a3e148fa0fa6b6ac81007c9",
+      "git_mode": "100644"
+    }
+  ],
+  "routes": {
+    "source": "frontend/src/App.tsx",
+    "literal_paths": [
+      "/",
+      "/alchimie",
+      "/intrusul",
+      "/perechi",
+      "/cald-rece",
+      "/lant",
+      "/conexiuni",
+      "/clasament"
+    ],
+    "additional_existing_views": [
+      "/alchimie?mode=challenges",
+      "/alchimie?mode=explore"
+    ],
+    "scope": "SPA routes only; wildcard redirects home; no native legal/API runtime qualification"
+  },
+  "budget_policy": "unchanged owning budgets.json through delivered public evaluate/gateBudgets; no consumer reimplementation",
+  "profile_result_policy": "active and frozen-legacy measured separately; either actual fail remains fail; no invented legacy waiver",
+  "preserved": "all source outside three paths, SDK/bootstrap/Go/API/product/budgets/900/original16_78/locks/gate templates unchanged",
+  "runtime": "NOT RUN; no imports/parser/compiler/test/hook/wrapper executed during source authorship"
+}

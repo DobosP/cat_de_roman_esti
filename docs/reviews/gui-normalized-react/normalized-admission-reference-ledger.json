@@ -1,0 +1,145 @@
+{
+  "schema": 1,
+  "status": "SOURCE_CORRECTION_AUTHORED_NOT_RUN",
+  "baseline": "d83cdbbf6dbfb3458a82398944d179db451f0736",
+  "unit_failure_basis": {
+    "result_sha256": "f5b4ab80bef39ee16f503271d26f0bcb52ccd00226328ec330c65723ba19a043",
+    "whole_unit": "FAIL",
+    "frontend": "315/316PASS; sole positive normalized proposal source identity mismatch",
+    "actual_fixture": "normalizedFixture; bindings.profile=normalized; copies genuine current source at282"
+  },
+  "classification_correction": "844c/4a5 are prior NORMALIZED pins, not original. Original efde/f726 remain literal unchanged.",
+  "causal_reference": {
+    "old_git_source": "3f8dc6e879833393c2636400c07e3530b1ba82d8",
+    "old_normalized_package_sha256": "844c64659514a174ad033fe6ae2e00e47c9a6788fafac765d8b446d4047ef90e",
+    "old_normalized_lock_sha256": "4a5eafe6bd10d68dd0cd59cac001eb040cfafc6abbd90f21e97eb3d07560a374",
+    "current_package_sha256": "adf9fad307592089214aee4026ec02461e446dc724fd07ead6edd36371d5cb99",
+    "current_lock_sha256": "e430c87d566567f5a47160ff6bd3b327d875894769891c1d3bbcdcd035dd3aec",
+    "all_lock_slots": 203,
+    "parsed_package_changes": [
+      {
+        "path": [
+          "devDependencies",
+          "@roedu/web-kit"
+        ],
+        "before": "file:vendor/roedu-web-kit-0.1.3.tgz",
+        "after": "file:vendor/roedu-web-kit-0.1.5.tgz"
+      },
+      {
+        "path": [
+          "devDependencies",
+          "@vitejs/plugin-react"
+        ],
+        "before": "^6.0.3",
+        "after": "6.0.3"
+      }
+    ],
+    "parsed_lock_changes": [
+      {
+        "path": [
+          "packages",
+          "",
+          "devDependencies",
+          "@roedu/web-kit"
+        ],
+        "before": "file:vendor/roedu-web-kit-0.1.3.tgz",
+        "after": "file:vendor/roedu-web-kit-0.1.5.tgz"
+      },
+      {
+        "path": [
+          "packages",
+          "",
+          "devDependencies",
+          "@vitejs/plugin-react"
+        ],
+        "before": "^6.0.3",
+        "after": "6.0.3"
+      },
+      {
+        "path": [
+          "packages",
+          "node_modules/@roedu/web-kit",
+          "integrity"
+        ],
+        "before": "sha512-YK+ZiJDmCoQg4Ac51l4HgdIR5NyeEKbdjVQ3+LNcMmKAg2HhJ5glBKudTc3VQulgClYDLK/i5Mt+WP2vLaRVuw==",
+        "after": "sha512-CFAqyD3vu3QQ8XZns/DgNYYTY9KWWShXQwXslhRbIi5Tptr+KqyuKKkKngp67daPA2pDVxOjZ46obsMxaTRAwg=="
+      },
+      {
+        "path": [
+          "packages",
+          "node_modules/@roedu/web-kit",
+          "resolved"
+        ],
+        "before": "file:vendor/roedu-web-kit-0.1.3.tgz",
+        "after": "file:vendor/roedu-web-kit-0.1.5.tgz"
+      },
+      {
+        "path": [
+          "packages",
+          "node_modules/@roedu/web-kit",
+          "version"
+        ],
+        "before": "0.1.3",
+        "after": "0.1.5"
+      }
+    ],
+    "other3normalized_input_hashes": "unchanged",
+    "encoding": "manifest em-dash encoding differs in raw bytes with equivalent parsed JSON text"
+  },
+  "four_path_before_after_inverse": [
+    {
+      "path": "scripts/gui-style-plan.mjs",
+      "before_sha256": "8121c917f20995afed34d2612c45543b965918a64f7a18b0af4463ca96bf872f",
+      "after_sha256": "0f4bea9c01245b1c0c48e163d960de2bfbbe5294744aa032b362c4f5d330ff49",
+      "bytes": 47507,
+      "mode": 33188,
+      "literal_substitutions": 2,
+      "inverse_whole_file_exact": true,
+      "edited": true
+    },
+    {
+      "path": "scripts/gui-style-operation.mjs",
+      "before_sha256": "456e1f34cb1a45b82a87d13177989f911483cb5748e9187c83bf344e41a420cf",
+      "after_sha256": "f89d82726d8048f09a0ff26d0083496592ee88a01ae137c8d89f689614dbbf55",
+      "bytes": 43322,
+      "mode": 33188,
+      "literal_substitutions": 3,
+      "inverse_whole_file_exact": true,
+      "edited": true
+    },
+    {
+      "path": "frontend/tests/gui-style-plan.test.mjs",
+      "before_sha256": "70abc780e1f51bbc01644509ce4cd31f24b9c9dcd8187f413b2bcf574b162a07",
+      "after_sha256": "7a635f10da337b51112399abdb120b52b5cd7da3719595b434e3c431e5558903",
+      "bytes": 39774,
+      "mode": 33188,
+      "literal_substitutions": 1,
+      "inverse_whole_file_exact": true,
+      "edited": true
+    },
+    {
+      "path": "frontend/tests/gui-style-operation.test.mjs",
+      "before_sha256": "5116f0fb83445c3c74e8b6e6906f51237dc7025bab9cf47f04b2b158b1559a31",
+      "after_sha256": "5116f0fb83445c3c74e8b6e6906f51237dc7025bab9cf47f04b2b158b1559a31",
+      "bytes": 41038,
+      "mode": 33188,
+      "literal_substitutions": 0,
+      "inverse_whole_file_exact": true,
+      "edited": false
+    }
+  ],
+  "derived_planner_sha256": "0f4bea9c01245b1c0c48e163d960de2bfbbe5294744aa032b362c4f5d330ff49",
+  "original_frozen_pins": {
+    "package": "efde2d3fbdebc5899dc63ca6b518cab0d60370ef36a7301477da720f4978e2e9",
+    "lock": "f72661b4bd7ad129a6771037bf900a616a0fdf84bbb41f70c6d118b69fb1b62c",
+    "unchanged": true
+  },
+  "preservation": "Only6 literal source-identity substitutions. Every validation/refusal branch, negative control, test action/assertion/ID and positive fixture source byte unchanged apart from the authorized retention expected checksum. Current product package/lock not edited.",
+  "limits": [
+    "No project imports/parsers/compiler/formatter/tests/gates or wrappers executed.",
+    "The positive proposal remains NON-RELEASE data-only; no actual planner/manager execution or approval is inferred.",
+    "Whole unit remains observedFAIL until parent actual targeted managed frontend execution; source correction is not a pass.",
+    "No product/API/budget/SDK/lock/gate/hook/runtime/browser900/original16_78 change, no route-budget wiring or new numerical ceiling.",
+    "Older source/evidence packets remain literal historical records; parent owns docs/proofs and qualification."
+  ]
+}

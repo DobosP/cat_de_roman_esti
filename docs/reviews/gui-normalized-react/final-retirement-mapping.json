@@ -1,0 +1,108 @@
+{
+  "schema": 1,
+  "status": "SOURCE_RETIREMENT_AUTHORED_NOT_RUN",
+  "baseline": "ddbc2b184506e49adc2640fdc712e5576e145024",
+  "current_counts": {
+    "whole_source_guard_files_retired": 21,
+    "mixed_trimmed_files": 6,
+    "temporary_typed_guard_files_retained": 0
+  },
+  "removed_only": [
+    {
+      "path": "frontend/tests/contexto-comparative-controls.test.mjs",
+      "bytes": 929,
+      "sha256": "300e2437eeb93509a9522bd31fb334f7a1809c9f267568d59ff0fb0f422eda90",
+      "mode": 33204
+    },
+    {
+      "path": "frontend/tests/cald-rece-recovery.test.mjs",
+      "bytes": 617,
+      "sha256": "f5ae0fc9aeb76749bb05be3dfb1359f123acd3c8cabdbad6f12afdca1a027257",
+      "mode": 33204
+    },
+    {
+      "path": "frontend/tests/v39-verified-ranking.test.mjs",
+      "bytes": 352,
+      "sha256": "403cd920de756cf4387facd140233bf7ea5b83a37972098017c564274f1c7faa",
+      "mode": 33204
+    }
+  ],
+  "retirement_basis": {
+    "unit_result_sha256": "f5b4ab80bef39ee16f503271d26f0bcb52ccd00226328ec330c65723ba19a043",
+    "unit_source": "ddbc2b184506e49adc2640fdc712e5576e145024",
+    "unit_tree_sha256": "eeebbaeb38021bc5b333151b48fd7fd404b0c7a0974b658317c12805cd268862",
+    "whole_unit_status": "FAIL",
+    "frontend_unit_counts": {
+      "tests": "316",
+      "pass": "315",
+      "fail": "1",
+      "cancelled": "0",
+      "skipped": "0",
+      "todo": "0"
+    },
+    "frontend_unit_stdout_sha256": "9376092e6e3c4c44b747a1bbd3dace2cd2a5b24684ff081d9cf2305cd3ba4902",
+    "actual_typed_consumer_case": "PASS: real existing Native7 CLI --project --noEmit case",
+    "actual_transport_case": "PASS: existing actual requestClue boundary case",
+    "fixture_path": "frontend/tests/fixtures/gui-api-consumer-contract.ts",
+    "fixture_sha256": "63c04e657d0b1bc96e8719621dced637a150b4e3f4433a97aafeb0fb466e0380",
+    "parent_capture": "/home/dobo/work/_temp/adhoc-gui-migration-parent-20261006/cat-corrected-retirement-ddbc2b1-unit-failure-capture-20261009",
+    "parent_capture_manifest_sha256": "9b878283dd99ec587d3b2eb4b261192ba00ac08a21af733a71fac023c6773eb7",
+    "parent_review_sha256": "16cde7e2ad05955312d4cb574c70950eb2b6ebd2163d55225f2b7fa57dcbae41"
+  },
+  "typed_obligations": {
+    "path": "frontend/tests/fixtures/gui-api-consumer-contract.ts",
+    "before_sha256": "7243cd9c73bb4353c74a389088b3d7ec51d058012080cc1834103b261945f246",
+    "after_sha256": "63c04e657d0b1bc96e8719621dced637a150b4e3f4433a97aafeb0fb466e0380",
+    "bytes": 8510,
+    "mode": 33204,
+    "all_existing_assertions_helpers_import_semantics_preserved_by_exact_reverse": true,
+    "required_types": [
+      "Guess.attempt_number:number",
+      "GuessAccepted.feedback:GuessFeedback",
+      "GuessRejected.suggestions:string[]",
+      "RankingRow.is_me:boolean"
+    ],
+    "optional_types": [
+      "GuessFeedback.rank_delta:number|undefined",
+      "GuessAccepted.message:string|undefined"
+    ],
+    "known_feedback_members_assignable": [
+      "first",
+      "new-best",
+      "warmer",
+      "colder",
+      "same",
+      "repeat",
+      "found"
+    ],
+    "closed_union_assertion_added": false,
+    "ClueResult_optional_inherited_target_contract": "unchanged and truthful",
+    "actual_new_compiled_execution": "NOT RUN; existing real Native7CLI API2 case/helper unchanged",
+    "retirement_rule": "Retain all3 typed-source guard files until actual new compiled proof passes, then parent owns further retirement and same-SHA unit qualification."
+  },
+  "existing_UI_mapping_reference": {
+    "path": "/home/dobo/work/_temp/fix__gui-cat-prerequisites-linux/legacy-regex-type-correction-20261009/retirement-mapping.json",
+    "sha256": "eebdd05b602d8c370abd06b360c5b1994cace94305b86a5be1f7446c44eae9bc",
+    "scope": "C40 UI references and old correction history preserved; the newly observed type pass is this packet's separate retirement basis."
+  },
+  "current_guards": "all100 bytes/modes unchanged relative to ddbc; relative to original C40,99 unchanged plus1 prior intentionally extended fixture now actually compiled",
+  "older_packets": "both7b and2610 namespaces preserved byte/mode-exact",
+  "remaining_unit_failure": {
+    "file": "frontend/tests/gui-style-operation.test.mjs",
+    "line": 351,
+    "case": "a closed data-only proposal byte map validates without becoming actual planner or manager evidence",
+    "profile": "normalized",
+    "actual_current_package_sha256": "adf9fad307592089214aee4026ec02461e446dc724fd07ead6edd36371d5cb99",
+    "expected_normalized_package_sha256": "844c64659514a174ad033fe6ae2e00e47c9a6788fafac765d8b446d4047ef90e",
+    "original_profile_package_sha256": "efde2d3fbdebc5899dc63ca6b518cab0d60370ef36a7301477da720f4978e2e9",
+    "repair": "separate source packet; no validator or fixture repair in this commit"
+  },
+  "limits": [
+    "Whole unit remainsFAIL; successful typed replacement is not whole-unit/canonical/full/device/KIT_BUMP green.",
+    "No project imports/compiler/formatter/parser/tests/gates or extra900 executed for this source retirement.",
+    "No product/API/helper/budget/SDK/lock/gate/hook/runtime/browser900/original16_78 changes.",
+    "Known token membership is assignability, not an exact closed union; ClueResult optional inherited target remains truthful.",
+    "No exact submitGuess signature, upstream/native payload/privacy activation inference from consumer typechecks.",
+    "Parent owns docs/proofs, next review/capture, targeted managed frontend and all final qualification."
+  ]
+}
