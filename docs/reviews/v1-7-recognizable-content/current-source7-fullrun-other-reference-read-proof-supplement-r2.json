@@ -1,0 +1,84 @@
+{
+  "case_manifest_path": "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/current-source7-full-default-collected-cases-r1.json",
+  "case_manifest_sha256": "f6c791d8f40b35443739459c1ffe9e132128ed7c67ad404061c8d77198203b13",
+  "combined_totals": {
+    "finite_transitive_paths": 46,
+    "missing_bytes": 7761563,
+    "missing_paths": 117,
+    "original_assigned_paths": 77,
+    "overlap_paths": 1,
+    "retained_paths": 5,
+    "unique_paths": 122
+  },
+  "fresh_before_write": {
+    "checked_at_utc": "2026-10-09T00:44:50.655301+00:00",
+    "disk_free_bytes": 120781115392,
+    "memory_available_bytes": 30036144128
+  },
+  "full_run_readiness": "WITHHELD. These named read proofs do not cover runtime, imports, Git, environment behavior or other owners scopes; independent review is required before any exact new-only staging.",
+  "original_packet_path": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/current-source7-fullrun-other-reference-prerequisites-r1.json",
+  "original_packet_sha256": "5cb472c73351f07d38237b7572c78518122870e6ec121a2b7d3d8dde5afc261b",
+  "original_readset_sha256": "6513901a732c3016a41b7e4becac44a5d692ef5e3c9df8555fee4a4e074260ef",
+  "remaining_unresolved_original_uses_after_this_supplement": 0,
+  "resolved_original_unresolved_uses": [
+    {
+      "callee": "_read",
+      "callee_definition_line": 61,
+      "callee_read_line": 63,
+      "caller": "test_exact_final_judgments_promote_only_the_two_reviewed_tool_candidates",
+      "collected_case_ids": [
+        "tests/test_v90_household_graph.py::test_exact_final_judgments_promote_only_the_two_reviewed_tool_candidates"
+      ],
+      "corrected_read_line": 367,
+      "guard": "Finite analyst/verifier roles and the actual two-item perItem loop. The source asserts each dossier review_binding. The original line 368 was the assertion, not the preceding read.",
+      "original_adjacent_line": 368,
+      "path": "docs/reviews/v90-household-discovery-and-critique-gates/dossiers/ct_viata_de_roman_355.json",
+      "read_statement": "dossier = _read(REVIEW / \"dossiers\" / (item[\"id\"] + \".json\"))",
+      "source": "tests/test_v90_household_graph.py",
+      "source_sha256": "1d6bb47fce0e5a30d7df73ba1ede80f455081a5b5e523b722c05f28a72f31267"
+    },
+    {
+      "callee": "_read",
+      "callee_definition_line": 61,
+      "callee_read_line": 63,
+      "caller": "test_exact_final_judgments_promote_only_the_two_reviewed_tool_candidates",
+      "collected_case_ids": [
+        "tests/test_v90_household_graph.py::test_exact_final_judgments_promote_only_the_two_reviewed_tool_candidates"
+      ],
+      "corrected_read_line": 367,
+      "guard": "Finite analyst/verifier roles and the actual two-item perItem loop. The source asserts each dossier review_binding. The original line 368 was the assertion, not the preceding read.",
+      "original_adjacent_line": 368,
+      "path": "docs/reviews/v90-household-discovery-and-critique-gates/dossiers/ct_viata_de_roman_356.json",
+      "read_statement": "dossier = _read(REVIEW / \"dossiers\" / (item[\"id\"] + \".json\"))",
+      "source": "tests/test_v90_household_graph.py",
+      "source_sha256": "1d6bb47fce0e5a30d7df73ba1ede80f455081a5b5e523b722c05f28a72f31267"
+    },
+    {
+      "callee": "read",
+      "callee_definition_line": 67,
+      "callee_read_line": 68,
+      "caller": "prepare_comparison",
+      "collected_case_ids": [
+        "tests/test_v1_recipe_refresh.py::test_all_68_retained_books_are_byte_equivalent_to_baseline",
+        "tests/test_v1_recipe_refresh.py::test_retained_identities_bind_current_sources_and_document_one_withdrawal",
+        "tests/test_v1_recipe_refresh.py::test_old_snapshots_disable_only_additions_and_refreshed_books_restore_them[al_arta_cultura_016-1]",
+        "tests/test_v1_recipe_refresh.py::test_old_snapshots_disable_only_additions_and_refreshed_books_restore_them[al_film_tv_020-3]",
+        "tests/test_v1_recipe_refresh.py::test_old_snapshots_disable_only_additions_and_refreshed_books_restore_them[al_sport_083-3]",
+        "tests/test_v1_recipe_refresh.py::test_restamped_tampered_snapshot_still_fails_closed[al_arta_cultura_016-n_ateneul_roman-None-description]",
+        "tests/test_v1_recipe_refresh.py::test_restamped_tampered_snapshot_still_fails_closed[al_film_tv_020-n_ftv_operatiunea_monstrul-None-degree]",
+        "tests/test_v1_recipe_refresh.py::test_restamped_tampered_snapshot_still_fails_closed[al_sport_083-None-de1218-label_ro]",
+        "tests/test_v1_recipe_refresh.py::test_all_68_public_api_wins_and_seven_restored_recipe_crafts"
+      ],
+      "corrected_read_line": 114,
+      "guard": "Existing comparison fixture calls prepare_comparison; this read uses fixed CONTENT, outside the temporarily rebound ROOT. The file already exists in I and must be retained, not recopied.",
+      "original_adjacent_line": 111,
+      "path": "docs/reviews/v1-testing-release/content/alchimie-reserve-proposal.json",
+      "read_statement": "reserve = read(CONTENT / \"alchimie-reserve-proposal.json\")",
+      "source": "tests/test_v1_recipe_refresh.py",
+      "source_sha256": "50e48d41d1e6f3f965beafe0b2fa29148ced8e32ebee5c188be2aac487868bd2"
+    }
+  ],
+  "schema": "v1-7-other-reference-three-adjacent-line-read-proof-supplement-v1",
+  "scope": "Source-only narrow supplement. Correct the three adjacent-line locators without rewriting R1 or retargeting old evidence. No application import, collection, test, copying or source/data change occurred.",
+  "source_whole_RSS": "unmeasured"
+}
