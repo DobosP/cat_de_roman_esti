@@ -1,0 +1,95 @@
+{
+  "kind": "linux-Source7-native-coverage-draft-source-review-v1",
+  "reviewer": "/root/continuation_audit",
+  "decision": "REQUEST_CHANGES",
+  "scope": "Source-only independent review of the previously unreviewed Linux package/case inventory draft, parser and group0 producer/list protocol. No parser/candidate function, Go/list/compile/test/operator, SDK read/rescan/setup, archive extraction or candidate write executed.",
+  "source_admission_sha256": "22525c5c99fe185df16c40639034b00dd27ca1c76e5b3b3ae0db463d652a814d",
+  "source_started_utc": "2026-10-09T07:35:31.4005284Z",
+  "source_cutoff_utc": "2026-10-09T07:52:31.4005284Z",
+  "metadata_deadline_utc": "2026-10-09T07:55:31.4005284Z",
+  "substantive_freeze_utc": "2026-10-09T07:43:22.3491495+00:00",
+  "exact_sources": {
+    "plan_sha256": "a8b0dea7d43ce8f28af45a9c0204be75797e6eae307d566a8490dbe27a0e262d",
+    "parser_sha256": "518ab0dc26d15b66330dcee66d83ac32c6522e0030d12ed591ade7d5b76885a9",
+    "group0_sha256": "37a0bb73d9e65b10ed9fbe7eeb5d2f9eb7de230002ac4647f05ca5e44ca921b1",
+    "partition_scope_sha256": "ce0dfdf9c97cf3311d7453581b37b407b3efa6b2bb84aaedecf13af7ec311a70",
+    "human_stop_sha256": "654085b8d779fa5a148dab88f7d964a7e1aa444d3158c0603468cc06fbbb6902"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "priority": "P1",
+      "file": "go-source7-native-coverage-parser.py.txt",
+      "lines": "16-117",
+      "title": "Optimization removes the fail-closed contract",
+      "evidence": "The parser uses assert for ownership, duplicate keys, passed receipt, digest/argv/source membership and output checks, but does not refuse sys.flags.optimize or PYTHONOPTIMIZE before any file operation.",
+      "required_change": "Add an unconditional early optimized-mode refusal before reads/writes, or convert the safety predicates to explicit exceptions. Bind the exact interpreter/options in the admitted caller."
+    },
+    {
+      "id": "F2",
+      "priority": "P1",
+      "file": "go-source7-native-coverage-parser.py.txt",
+      "lines": "47-55,68",
+      "title": "Parsed snapshots can differ from the evidence digests",
+      "evidence": "plan, receipt, keeper and external are parsed from initial reads; keeper and receipt are hashed again later. A receipt or keeper A can be parsed while a subsequent read of B satisfies the external/keeper digest and is reported as its identity. The script also has no externally expected plan/external digest argument; those must be authenticated by an explicit exact immutable caller contract.",
+      "required_change": "Read each bound document once, calculate its digest and parse that same byte snapshot, compare those snapshot digests to externally frozen expected bindings, and report them. Retain any required pre/post path rechecks separately; do not substitute new reads for the snapshot identity."
+    },
+    {
+      "id": "F3",
+      "priority": "P1",
+      "file": "go-source7-native-coverage-parser.py.txt",
+      "lines": "10-29",
+      "title": "Input ownership is lexical and the reader is Linux-specific",
+      "evidence": "read_regular selects R/S with is_relative_to but never rejects parent components or checks resolved input containment. A lexical S/../outside/file can reach the root break in the ancestor loop while reading outside S. Separately, os.O_NOFOLLOW is a POSIX reader assumption and native Windows Python cannot be qualified by replacing root strings alone.",
+      "required_change": "Reject noncanonical/parent-traversal input paths and prove resolved containment plus existing no-link/type/identity checks. Declare the actual parser execution platform: retain a qualified POSIX reader for WSL or review a native Windows reparse/handle adaptation. Do not claim an output ../ bypass: line116 already rejects ordinary noncanonical/symlink output parents."
+    },
+    {
+      "id": "F4",
+      "priority": "P1",
+      "file": "go-source7-native-coverage-plan.json and go-source7-native-coverage-group0-supplement.json",
+      "lines": "commands / compile_command argv environment",
+      "title": "Command environment is not closed over owned telemetry/cache helpers",
+      "evidence": "The env arrays set GOENV=off and selected compiler/cache/offline variables but inherit other ambient variables. In particular GOCACHEPROG and Go telemetry child controls are not cleared, and no task-owned TEST_TELEMETRY_DIR/off-mode binding is declared. The old draft cannot itself prove all Go helper/output effects remain under measured owned roots.",
+      "required_change": "Reuse the already qualified effective-environment and owned telemetry policy, explicitly remove external cache/telemetry child entrypoints, and freeze the owned off-mode bytes/path with the current target SDK provenance. This requires a narrow environment rebind, not a generic runner or SDK setup rewrite."
+    },
+    {
+      "id": "F5",
+      "priority": "P2",
+      "file": "go-source7-native-coverage-parser.py.txt",
+      "lines": "79-101",
+      "title": "Owned metadata fields are recorded without shape or location validation",
+      "evidence": "An owned ImportPath and any Dir value can satisfy the package-name set; file fields may be arbitrary truthy scalars instead of filename arrays. A matching name with a foreign Dir is recorded as an owned source package, so the parser does not itself establish the declared actual owned package/source inventory.",
+      "required_change": "Validate Dir as the expected current module/package directory, validate each source field as a bounded unique list of filenames and selection flags as their proper types, and retain the actual selected test-bearing set without promoting static declaration counts to actual cases. The admitted source/readset must bind these current directories/files."
+    }
+  ],
+  "sound_scope": [
+    "Exactly shared auth imported-test metadata, parent Webkit imported-test metadata and complete HTTP binary top-level list is a useful finite initial scope; nested sample/PG/providers/frontend/network and universal modulegraph inventory remain excluded.",
+    "With assertions active, the parser rejects duplicate JSON keys, malformed/trailing non-JSON text, Error including empty Error object, truthy dependency/incomplete errors, invalid UTF8, duplicate/unexpected listing lines, non-passed/nonzero/signalled receipts and wrong known package-name sets.",
+    "Full listing preserves actual order and classifies tests/examples/fuzz/benchmarks; it grants no subtest, skipped-body or full package execution acceptance.",
+    "Group0 uses four distinct expected basenames and correctly defers all unknown binary digests until a successful compiler producer/keeper/external publication before separately bound list consumers.",
+    "Resource estimates are explicitly projections, and the draft retains fixed Go2/2GiB RSS/1GiB cumulative owned growth/20-minute deadline/180-second reserve and fail-stop consumer policy. The parser is not a replacement for the guarded native runner or immutable admission."
+  ],
+  "portable_adaptation": [
+    "Preserve the old drafts and append a narrowly repaired current plan/parser with exact R/S/platform paths and source/candidate identity; no silent old proof rebind.",
+    "Current Windows has neither the archived Linux HTTP9f nor contentbuild30de binary. Their historical accepted results may be referenced by source/producer scope, but current execution reuse requires the original matching platform/artifact or a new qualified producer.",
+    "The initial HTTP list command must be deferred until an actual current-target race binary is compiled without trimpath and its current runtime.Caller source paths/producer/inputs/output keeper are fixed; do not insert a placeholder hash.",
+    "Rebind only the current exact SDK/module/effective environment/path provenance already available; do not repeat failed optional go list -m all or perform unused SDK/module setup.",
+    "After current metadata producers, freeze complete package membership and source selections; then bounded compile/list groups and full required race/vet partitions retain all blocked/unrun names."
+  ],
+  "limits": [
+    "No current restored candidate scratch was read: root restoration receipt had not been supplied.",
+    "No source-level execution acceptance is granted. Full current package/race/vet, genuinely independent Source7 HTTP corpus/selector, real managed current+legacy assets, source/history/export/current authority and assembled adoption remain pending.",
+    "ASCII-only case-name regex is fail-closed for currently expected names; a future legitimate Unicode Go entrypoint would need explicit support rather than omission.",
+    "The first unprivileged fresh CIM memory read was denied; a required escalated read succeeded for this publication."
+  ],
+  "resources": {
+    "observed_utc": "2026-10-09T07:43:22.5876125+00:00",
+    "disk_free_bytes": 19941535744,
+    "Windows_MemAvailable_bytes": 44061790208,
+    "source_RSS": "unmeasured",
+    "admitted_R_S_baseline_bytes": 1207231700,
+    "fresh_R_S_count": "Not reread while the root restoration is in flight; the source admission remains the baseline. Root must supply fresh complete ownership/accounting before any native admission.",
+    "image_bound_bytes": 32768
+  },
+  "published_utc": "2026-10-09T07:43:22.5895005+00:00"
+}

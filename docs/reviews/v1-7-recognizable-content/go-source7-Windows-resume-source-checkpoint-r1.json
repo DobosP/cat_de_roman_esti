@@ -1,0 +1,74 @@
+{
+  "V1_7_installed": false,
+  "admission_sha256": "22525c5c99fe185df16c40639034b00dd27ca1c76e5b3b3ae0db463d652a814d",
+  "archive_sha256": "5d0ae406eabe8a7fbad16937f570f25151c2fd22254e02347d9b3231a7d7e4b6",
+  "at_utc": "2026-10-09T07:52:06.945980+00:00",
+  "available_physical_bytes": 27338313728,
+  "base_commit": "3d602215a50cd4d42c61c6af58275bb253498802",
+  "branch": "codex/content-v1-7",
+  "candidate_files": 1200,
+  "disk_free_bytes": 16745734144,
+  "fixture_results": {
+    "bytecode_disabled": true,
+    "normal": {
+      "failed": 0,
+      "passed": 25,
+      "seconds": 3.6,
+      "skipped": 0,
+      "tool_chunk": "3aa69b"
+    },
+    "optimized": {
+      "failed": 0,
+      "passed": 25,
+      "seconds": 3.971,
+      "skipped": 0,
+      "tool_chunk": "7628fe"
+    },
+    "reviewer_replayed": false
+  },
+  "growth_bytes": 122735061,
+  "independent_parser_reviewer": "/root/continuation_audit",
+  "later_metadata_sample_only": true,
+  "metadata_only_close": true,
+  "native_execution": false,
+  "next_condition": "Restore17GiB start free disk and16GiB remaining free disk plus16GiB available physical memory, then fresh admission; do not rerun the same held action under unchanged resources.",
+  "original_failure": {
+    "error": "AssertionError",
+    "line": 39,
+    "original_scalar_samples_not_published": true,
+    "predicate": "disk_free_bytes >=16GiB AND available_physical_bytes >=16GiB",
+    "tool_chunk": "682aee"
+  },
+  "owned_roots": {
+    "C:\\Users\\Paul Work\\personal_repos\\_temp\\codex__content-v1-7": {
+      "bytes": 122699267,
+      "files": 1204
+    },
+    "C:\\Users\\Paul Work\\personal_repos\\_worktrees\\cat_de_roman_esti\\codex__content-v1-7": {
+      "bytes": 1207267494,
+      "files": 8361
+    }
+  },
+  "parser_decision": "ACCEPT_PARSER_AND_CONTROLLED_FIXTURE_SOURCE_ONLY",
+  "phase_status": "HELD_POSTCHECK_RESOURCE_FLOOR",
+  "remaining": [
+    "Fresh independently reviewed producer plan: current owned paths/module roots, closed helper/telemetry environment, SDK/cache/readset/resources and current platform binary before listing.",
+    "Finite shared/Webkit imported-test metadata and full binary inventories; preserve blocked/unrun counts.",
+    "Actual independent Source7 HTTP1207 reference capture/selector; managed current/frozenlegacy actual assets; fresh installed audits/finals/authority/full qualification."
+  ],
+  "remote_authorized": false,
+  "resource_floor_ok": {
+    "disk": false,
+    "memory": true
+  },
+  "restoration_receipt_sha256": "2b20bc98f61cdf2dd5d5a34243404072b9cd3c706ad550fa2362a2689f5b3671",
+  "schema": "source7-Windows-continuation-source-checkpoint-v1",
+  "source_RSS": "unmeasured",
+  "source_pins": {
+    "go-source7-native-coverage-draft-review-r1.json": "55fafca61206dd209f64f9d88eb4a6f2dc1b945a3736f2b50c1c7bc53caef449",
+    "go-source7-native-coverage-parser-r2-fixtures.py.txt": "d0c2f9357240b3671081ad51f5e9c01b0d8f2f82ec62df5266fece6457f62577",
+    "go-source7-native-coverage-parser-r2-review.md": "50ca182dd110e41cc71265b17eec9bfcceac58e7ef6d267c142717a56ad10f84",
+    "go-source7-native-coverage-parser-r2.py.txt": "c00625cc691e51187b78580e82346e4e4734273bf2da7090f0ced5708e2cd4f1"
+  },
+  "total_owned_bytes": 1329966761
+}

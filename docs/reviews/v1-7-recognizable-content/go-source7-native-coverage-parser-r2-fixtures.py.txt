@@ -1,0 +1,221 @@
+"""Adversarial fixtures for the inventory parser; no Go or application execution."""
+import argparse
+import copy
+import hashlib
+import importlib.machinery
+import importlib.util
+import json
+import pathlib
+import sys
+import tempfile
+import unittest
+
+PARSER = pathlib.Path(sys.argv.pop(1))
+SCRATCH = pathlib.Path(sys.argv.pop(1))
+loader = importlib.machinery.SourceFileLoader("coverage_parser_r2", str(PARSER))
+spec = importlib.util.spec_from_loader(loader.name, loader)
+parser = importlib.util.module_from_spec(spec)
+loader.exec_module(parser)
+
+
+class ProducerFixtures(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory(prefix="parser-r2-", dir=SCRATCH)
+        self.base = pathlib.Path(self.temp.name).resolve()
+        self.assertTrue(self.base.is_relative_to(SCRATCH.resolve()))
+        self.addCleanup(self.temp.cleanup)
+        self.r, self.s = self.base / "repo", self.base / "scratch"
+        self.r.mkdir()
+        self.s.mkdir()
+        self.module = self.s / "candidate" / "shared"
+        self.module.mkdir(parents=True)
+        (self.module / "unit.go").write_text("package unit\n", encoding="utf-8")
+        (self.module / "unit_test.go").write_text("package unit\n", encoding="utf-8")
+        self.namespace = self.s / "fresh"
+        self.namespace.mkdir()
+        self.plan_path, self.external_path = self.r / "plan.json", self.s / "external.json"
+        self.receipt_path, self.keeper_path = self.s / "receipt.json", self.s / "keeper.json"
+        self.log_path, self.binary = self.s / "log.txt", self.s / "unit.test"
+        self.binary.write_bytes(b"fixture-not-executable")
+        self.row = {"ImportPath": "example.invalid/unit", "Dir": str(self.module),
+                    "GoFiles": ["unit.go"], "TestGoFiles": ["unit_test.go"]}
+        self.command = {"name": "metadata", "kind": "package_metadata",
+                        "module_path": "example.invalid/unit", "module_root": str(self.module),
+                        "expected_owned_base_paths": ["example.invalid/unit"],
+                        "argv": ["fixture-producer-never-executed"],
+                        "max_output_bytes_root_post_producer": 65536}
+        self.plan = {"commands": [self.command], "fresh_namespace": str(self.namespace)}
+        self.receipt = {"name": "metadata", "status": "passed", "exit_code": 0,
+                        "argv": self.command["argv"], "log_path": str(self.log_path)}
+        self.log = json.dumps(self.row).encode()
+        self.args = argparse.Namespace(root=self.r, scratch=self.s, plan=self.plan_path,
+                                       external=self.external_path, keeper=self.keeper_path,
+                                       receipt=self.receipt_path, out=self.namespace / "inventory.json")
+
+    def write_json(self, path, value):
+        path.write_bytes((json.dumps(value, sort_keys=True) + "\n").encode())
+
+    def digest(self, path):
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+
+    def freeze(self):
+        self.log_path.write_bytes(self.log)
+        self.receipt["log_sha256"] = self.digest(self.log_path)
+        self.write_json(self.receipt_path, self.receipt)
+        self.write_json(self.plan_path, self.plan)
+        self.files = {str(path): {"sha256": self.digest(path)}
+                      for path in (self.receipt_path, self.log_path, self.binary)}
+        self.write_json(self.keeper_path, {"files": self.files})
+        self.write_json(self.external_path, {"keeper_path": str(self.keeper_path),
+                                             "keeper_sha256": self.digest(self.keeper_path)})
+        self.args.plan_sha256 = self.digest(self.plan_path)
+        self.args.external_sha256 = self.digest(self.external_path)
+
+    def refused(self):
+        self.freeze()
+        with self.assertRaises((parser.Refused, ValueError, KeyError, TypeError)):
+            parser.parse_producer(self.args)
+        self.assertFalse(self.args.out.exists())
+
+    def test_valid_metadata_records_exact_provenance(self):
+        self.freeze()
+        result = parser.parse_producer(self.args)
+        self.assertEqual(result["owned_base_packages_in_actual_order"], ["example.invalid/unit"])
+        self.assertEqual(result["test_bearing_packages_in_actual_order"], ["example.invalid/unit"])
+        self.assertEqual(result["plan_sha256"], self.args.plan_sha256)
+        self.assertEqual(result["receipt_sha256"], self.digest(self.receipt_path))
+        self.assertFalse(result["test_bodies_executed"])
+        self.assertFalse(result["qualification_or_release"])
+
+    def test_valid_list_preserves_all_categories_and_order(self):
+        self.command.update(kind="binary_case_list", binary_path=str(self.binary),
+                            binary_sha256=self.digest(self.binary))
+        self.log = b"TestZulu\nExampleUnit\nFuzzInput\nBenchmarkUnit\nTestAlpha\n"
+        self.freeze()
+        result = parser.parse_producer(self.args)
+        self.assertEqual(result["names_in_actual_order"], self.log.decode().splitlines())
+        self.assertEqual(result["categories"]["Tests"], ["TestZulu", "TestAlpha"])
+
+    def test_external_plan_pin_cannot_be_recomputed_by_parser(self):
+        self.freeze()
+        self.args.plan_sha256 = "0" * 64
+        with self.assertRaises(parser.Refused):
+            parser.parse_producer(self.args)
+        self.assertFalse(self.args.out.exists())
+
+    def test_external_keeper_document_pin_is_required(self):
+        self.freeze()
+        self.args.external_sha256 = "0" * 64
+        with self.assertRaises(parser.Refused):
+            parser.parse_producer(self.args)
+
+    def test_keeper_member_tamper(self):
+        self.freeze()
+        self.log_path.write_bytes(b"tampered")
+        with self.assertRaises(parser.Refused):
+            parser.parse_producer(self.args)
+
+    def test_snapshot_digest_uses_same_bytes_as_parsed_document(self):
+        self.freeze()
+        snapshots = parser.Snapshots((self.r, self.s))
+        old, old_sha = snapshots.document(self.plan_path, self.args.plan_sha256)
+        self.plan_path.write_bytes(b'{"tampered": true}')
+        again, again_sha = snapshots.document(self.plan_path, old_sha)
+        self.assertEqual(again, old)
+        self.assertEqual(again_sha, old_sha)
+
+    def test_input_traversal_outside_owned_root(self):
+        outside = self.base / "outside.txt"
+        outside.write_bytes(b"outside")
+        snapshots = parser.Snapshots((self.r, self.s))
+        with self.assertRaises(parser.Refused):
+            snapshots.read(self.s / ".." / "outside.txt")
+
+    def test_output_traversal(self):
+        self.args.out = self.namespace / ".." / "escaped.json"
+        self.refused()
+
+    def test_existing_output_is_never_overwritten(self):
+        self.args.out.write_bytes(b"preserve")
+        self.freeze()
+        with self.assertRaises(parser.Refused):
+            parser.parse_producer(self.args)
+        self.assertEqual(self.args.out.read_bytes(), b"preserve")
+
+    def test_failed_producer(self):
+        self.receipt["status"] = "failed"
+        self.refused()
+
+    def test_boolean_exit_code_is_not_zero_exit(self):
+        self.receipt["exit_code"] = False
+        self.refused()
+
+    def test_received_signal_is_not_pass(self):
+        self.receipt["received_signal"] = 15
+        self.refused()
+
+    def test_argv_mismatch(self):
+        self.receipt["argv"] = ["different"]
+        self.refused()
+
+    def test_empty_error_object_is_still_error(self):
+        self.row["Error"] = {}
+        self.log = json.dumps(self.row).encode()
+        self.refused()
+
+    def test_incomplete_metadata(self):
+        self.row["Incomplete"] = True
+        self.log = json.dumps(self.row).encode()
+        self.refused()
+
+    def test_duplicate_json_key(self):
+        self.log = b'{"ImportPath":"a","ImportPath":"b"}'
+        self.refused()
+
+    def test_nonfinite_json_number(self):
+        self.log = b'{"ImportPath":NaN}'
+        self.refused()
+
+    def test_string_selection_flag(self):
+        self.row["DepOnly"] = "false"
+        self.log = json.dumps(self.row).encode()
+        self.refused()
+
+    def test_foreign_owned_directory(self):
+        self.row["Dir"] = str(self.r)
+        self.log = json.dumps(self.row).encode()
+        self.refused()
+
+    def test_source_file_traversal(self):
+        self.row["GoFiles"] = ["../foreign.go"]
+        self.log = json.dumps(self.row).encode()
+        self.refused()
+
+    def test_source_list_wrong_shape(self):
+        self.row["GoFiles"] = "unit.go"
+        self.log = json.dumps(self.row).encode()
+        self.refused()
+
+    def test_missing_package(self):
+        self.command["expected_owned_base_paths"].append("example.invalid/unit/missing")
+        self.refused()
+
+    def test_duplicate_case_name(self):
+        self.command.update(kind="binary_case_list", binary_path=str(self.binary),
+                            binary_sha256=self.digest(self.binary))
+        self.log = b"TestUnit\nTestUnit\n"
+        self.refused()
+
+    def test_unexpected_case_list_output(self):
+        self.command.update(kind="binary_case_list", binary_path=str(self.binary),
+                            binary_sha256=self.digest(self.binary))
+        self.log = b"TestUnit\nPASS\n"
+        self.refused()
+
+    def test_output_log_bound(self):
+        self.command["max_output_bytes_root_post_producer"] = 1
+        self.refused()
+
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)

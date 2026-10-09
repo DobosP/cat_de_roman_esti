@@ -1,0 +1,246 @@
+"""Parse frozen native metadata/list receipts; never execute the producer or application."""
+import argparse
+import hashlib
+import json
+import os
+import pathlib
+import re
+import stat
+
+SHA = re.compile(r"[0-9a-f]{64}")
+MAX_DOCUMENT = 8 << 20
+MAX_FILE = 128 << 20
+MAX_TOTAL = 512 << 20
+
+
+class Refused(ValueError):
+    pass
+
+
+def require(condition, message):
+    if not condition:
+        raise Refused(message)
+
+
+def unique_object(pairs):
+    result = {}
+    for key, value in pairs:
+        require(key not in result, "Duplicate JSON key refused")
+        result[key] = value
+    return result
+
+
+def parse_json(blob):
+    def constant(value):
+        raise Refused("Non-finite JSON number refused: " + value)
+    return json.loads(blob, object_pairs_hook=unique_object, parse_constant=constant)
+
+
+def sha(blob):
+    return hashlib.sha256(blob).hexdigest()
+
+
+def identity(info):
+    return (info.st_dev, info.st_ino, info.st_size, info.st_mtime_ns, info.st_ctime_ns)
+
+
+def plain_path(path):
+    require(path.is_absolute() and ".." not in path.parts, "Absolute canonical path required")
+    for ancestor in (path, *path.parents):
+        info = ancestor.lstat()
+        require(not stat.S_ISLNK(info.st_mode), "Symlink refused")
+        require(not (getattr(info, "st_file_attributes", 0) & 0x400), "Reparse point refused")
+    require(path.resolve(strict=True) == path, "Noncanonical path refused")
+
+
+class Snapshots:
+    def __init__(self, roots):
+        self.roots = tuple(map(pathlib.Path, roots))
+        require(len(self.roots) == 2 and self.roots[0] != self.roots[1], "Two distinct roots required")
+        for root in self.roots:
+            plain_path(root)
+            require(root.is_dir(), "Owned root must be a directory")
+        self.cache = {}
+        self.total = 0
+
+    def owned(self, path):
+        path = pathlib.Path(path)
+        require(path.is_absolute() and ".." not in path.parts, "Absolute nontraversing path required")
+        require(any(path.is_relative_to(root) for root in self.roots), "Outside owned roots")
+        return path
+
+    def read(self, path, maximum=MAX_FILE):
+        path = self.owned(path)
+        require(type(maximum) is int and 0 < maximum <= MAX_FILE, "Invalid read bound")
+        if path in self.cache:
+            blob = self.cache[path]
+            require(len(blob) <= maximum, "Cached snapshot exceeds requested bound")
+            return blob
+        plain_path(path)
+        info = path.lstat()
+        require(stat.S_ISREG(info.st_mode) and info.st_size <= maximum, "Not a bounded regular file")
+        require(self.total + info.st_size <= MAX_TOTAL, "Aggregate snapshot bound exceeded")
+        flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0) | getattr(os, "O_BINARY", 0)
+        fd = os.open(path, flags)
+        with os.fdopen(fd, "rb") as source:
+            require(identity(os.fstat(source.fileno())) == identity(info), "Opened file changed")
+            blob = source.read(maximum + 1)
+            require(identity(os.fstat(source.fileno())) == identity(info), "File changed during read")
+        plain_path(path)
+        require(identity(path.lstat()) == identity(info), "File replaced during read")
+        require(len(blob) == info.st_size and len(blob) <= maximum, "Incomplete or oversized read")
+        self.total += len(blob)
+        self.cache[path] = blob
+        return blob
+
+    def document(self, path, expected_sha=None):
+        blob = self.read(path, MAX_DOCUMENT)
+        if expected_sha is not None:
+            require(isinstance(expected_sha, str) and SHA.fullmatch(expected_sha), "Invalid SHA pin")
+            require(sha(blob) == expected_sha, "External snapshot pin mismatch")
+        value = parse_json(blob)
+        require(isinstance(value, dict), "JSON object required")
+        return value, sha(blob)
+
+
+def parse_producer(args):
+    snapshots = Snapshots((args.root, args.scratch))
+    plan, plan_sha = snapshots.document(args.plan, args.plan_sha256)
+    external, external_sha = snapshots.document(args.external, args.external_sha256)
+    keeper, keeper_sha = snapshots.document(args.keeper)
+    receipt, receipt_sha = snapshots.document(args.receipt)
+    require(external["keeper_path"] == str(args.keeper), "Keeper path mismatch")
+    require(external["keeper_sha256"] == keeper_sha, "Keeper digest mismatch")
+    files = keeper["files"]
+    require(isinstance(files, dict) and 1 <= len(files) <= 128, "Invalid keeper membership")
+    for name, pin in files.items():
+        require(isinstance(pin, dict) and SHA.fullmatch(pin["sha256"]), "Invalid keeper pin")
+        require(sha(snapshots.read(name)) == pin["sha256"], "Keeper member mismatch")
+    require(str(args.receipt) in files, "Receipt missing from keeper")
+    require(receipt["status"] == "passed" and type(receipt["exit_code"]) is int
+            and receipt["exit_code"] == 0, "Producer did not pass")
+    require(all(receipt.get(key) is None for key in ("guard", "failure", "received_signal")),
+            "Producer guard/failure/signal present")
+    commands = [item for item in plan["commands"] if item["name"] == receipt["name"]]
+    require(len(commands) == 1, "Producer name is not unique")
+    command = commands[0]
+    require(receipt["argv"] == command["argv"], "Producer argv mismatch")
+    log = pathlib.Path(receipt["log_path"])
+    require(str(log) in files, "Log missing from keeper")
+    blob = snapshots.read(log, command["max_output_bytes_root_post_producer"])
+    require(sha(blob) == receipt["log_sha256"], "Log digest mismatch")
+    text = blob.decode("utf-8", errors="strict")
+    result = {"schema": "actual-native-coverage-producer-inventory-v2",
+              "producer_name": command["name"], "plan_sha256": plan_sha,
+              "external_sha256": external_sha, "receipt_sha256": receipt_sha,
+              "log_sha256": sha(blob), "keeper_sha256": keeper_sha,
+              "test_bodies_executed": False, "qualification_or_release": False}
+    if command["kind"] == "package_metadata":
+        decoder = json.JSONDecoder(object_pairs_hook=unique_object,
+                                   parse_constant=lambda value: (_ for _ in ()).throw(Refused(value)))
+        offset, rows = 0, []
+        while offset < len(text):
+            while offset < len(text) and text[offset].isspace():
+                offset += 1
+            if offset == len(text):
+                break
+            row, offset = decoder.raw_decode(text, offset)
+            require(isinstance(row, dict), "Metadata row must be an object")
+            require(row.get("Error") is None and not row.get("DepsErrors")
+                    and not row.get("Incomplete"), "Incomplete/error metadata")
+            rows.append(row)
+            require(len(rows) <= 10000, "Too many metadata objects")
+        require(rows, "Empty metadata")
+        owned, tests, source_fields = [], [], {}
+        module = command["module_path"]
+        module_root = snapshots.owned(pathlib.Path(command["module_root"]))
+        plain_path(module_root)
+        require(module_root.is_dir(), "Module root is not a directory")
+        for row in rows:
+            name = row.get("ImportPath")
+            require(isinstance(name, str) and name, "Missing import path")
+            require(all(type(row[key]) is bool for key in ("DepOnly", "Incomplete") if key in row),
+                    "Metadata boolean flag has wrong type")
+            require("ForTest" not in row or isinstance(row["ForTest"], str),
+                    "Metadata ForTest has wrong type")
+            if row.get("DepOnly") or row.get("ForTest") or name.endswith(".test") or "[" in name:
+                continue
+            if name != module and not name.startswith(module + "/"):
+                continue
+            directory = pathlib.Path(row["Dir"])
+            expected_dir = module_root if name == module else module_root / name[len(module) + 1:]
+            require(directory == expected_dir, "Owned package Dir mismatch")
+            plain_path(directory)
+            for key in ("GoFiles", "CgoFiles", "TestGoFiles", "XTestGoFiles", "IgnoredGoFiles",
+                        "EmbedFiles", "TestEmbedFiles", "XTestEmbedFiles"):
+                entries = row.get(key, [])
+                require(isinstance(entries, list) and len(entries) <= 10000
+                        and len(entries) == len(set(entries)), "Invalid source file list")
+                for entry in entries:
+                    require(isinstance(entry, str) and entry and "\\" not in entry and ":" not in entry,
+                            "Invalid source filename")
+                    relative = pathlib.Path(entry)
+                    require(not relative.is_absolute() and ".." not in relative.parts
+                            and relative != pathlib.Path("."), "Source filename traversal")
+                    source = snapshots.owned(directory / relative)
+                    plain_path(source)
+                    require(source.is_file(), "Source filename is not a regular file")
+            owned.append(name)
+            if row.get("TestGoFiles") or row.get("XTestGoFiles"):
+                tests.append(name)
+            source_fields[name] = {key: row.get(key, []) for key in (
+                "GoFiles", "CgoFiles", "TestGoFiles", "XTestGoFiles", "IgnoredGoFiles",
+                "EmbedFiles", "TestEmbedFiles", "XTestEmbedFiles")}
+            source_fields[name]["Dir"] = row["Dir"]
+        require(len(owned) == len(set(owned)) and sorted(owned) == command["expected_owned_base_paths"],
+                "Owned package membership mismatch")
+        result.update(objects=len(rows), owned_base_packages_in_actual_order=owned,
+                      test_bearing_packages_in_actual_order=tests,
+                      owned_source_file_fields=source_fields, imported_closure_only=True)
+    elif command["kind"] == "binary_case_list":
+        require(sha(snapshots.read(command["binary_path"])) == command["binary_sha256"],
+                "Binary digest mismatch")
+        names = text.splitlines()
+        require(names and len(names) <= 10000 and all(names), "Empty/oversized listing")
+        require(len(names) == len(set(names)), "Duplicate case")
+        groups = {key: [] for key in ("Tests", "Examples", "Fuzz", "Benchmarks")}
+        for name in names:
+            require(re.fullmatch(r"(?:Test|Example|Fuzz|Benchmark)[A-Za-z0-9_]*", name),
+                    "Unexpected listing output")
+            category = ("Tests" if name.startswith("Test") else "Examples" if name.startswith("Example")
+                        else "Fuzz" if name.startswith("Fuzz") else "Benchmarks")
+            groups[category].append(name)
+        result.update(names_in_actual_order=names, categories=groups,
+                      binary_sha256=command["binary_sha256"], list_regex=".",
+                      subtests_or_runtime_skips_not_in_static_list=True)
+    else:
+        raise Refused("Unreviewed producer kind")
+    output = snapshots.owned(args.out)
+    namespace = snapshots.owned(pathlib.Path(plan["fresh_namespace"]))
+    plain_path(namespace)
+    require(namespace.is_dir() and output != namespace and output.is_relative_to(namespace),
+            "Output must be below the fresh namespace")
+    plain_path(output.parent)
+    require(not output.exists() and not output.is_symlink(), "Output already exists")
+    flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_NOFOLLOW", 0) | getattr(os, "O_BINARY", 0)
+    payload = (json.dumps(result, indent=2, sort_keys=True) + "\n").encode("utf-8")
+    with os.fdopen(os.open(output, flags, 0o600), "wb") as target:
+        target.write(payload)
+        target.flush()
+        os.fsync(target.fileno())
+    return result
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    for name in ("root", "scratch", "plan", "receipt", "keeper", "external", "out"):
+        parser.add_argument("--" + name, required=True, type=pathlib.Path)
+    parser.add_argument("--plan-sha256", required=True)
+    parser.add_argument("--external-sha256", required=True)
+    args = parser.parse_args()
+    result = parse_producer(args)
+    print(json.dumps({"producer": result["producer_name"], "inventory_only": True}))
+
+
+if __name__ == "__main__":
+    main()

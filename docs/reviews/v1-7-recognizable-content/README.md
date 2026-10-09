@@ -2,6 +2,18 @@
 
 Valid until: selected inputs, qualified baseline or human steering change — recheck before installation.
 
+## Current resumed content loop
+
+Valid until: owner steering, source, platform or branch state changes — then recheck.
+
+On2026-10-09 the owner resumed content work in this chat. Fetch and fast-forward pull found clean main/origin/main and origin/codex/content-v1-7 at3d602215. The canonical task branch is codex/content-v1-7; no new chat or remote write is authorized. GUI remains separate. The older paused handover below is history.
+
+The source phase is HELD and the automation PAUSED: its remaining-resource postcheck failed before publishing scalar samples. The separately recorded later metadata sample is C:16,745,734,144B free (15.60GiB), available memory27,338,313,728B; owned R+S1,329,966,761B, growth122,735,061B. Disk is below16GiB remaining and17GiB next-start floors. Preserve this failure; do not reset its clock or retry unchanged resources. Restore at least17GiB free disk (about1.4GiB more at that sample), then perform fresh admission. No unmerged/unknown work was deleted. [Exact checkpoint and failure](go-source7-Windows-resume-source-checkpoint-r1.json).
+
+All1200 archive members were restored exactly into new owned scratch, source-only, with readback receipt2b20bc98. [Independent draft review](go-source7-native-coverage-draft-review-r1.json) requested concrete parser/producer corrections. [R2 parser source acceptance and fixtures](go-source7-native-coverage-parser-r2-review.md) addresses optimization, snapshot/digest, canonical path and metadata-shape defects;25 normal and25 optimized controlled fixtures pass. Original drafts stay unchanged. This grants no native producer or release acceptance.
+
+Next freeze a fresh reviewed producer packet with actual current roots/module roots, closed Go helper/telemetry environment, preserved qualified SDK/cache/readsets and current resource clock. Complete shared/Webkit imported metadata and current-target binary inventories; archived Linux binaries are absent. Retain every blocked/unrun gate and source/runtime binding. Independent Source7HTTP1207 capture/selector and real current/frozenlegacy managed assets remain required; V1.7 stays uninstalled, Source6 live. Do not reopen old49-item Extensions research or failed optional full-module metadata acquisition.
+
 ## Current Windows handover
 
 Valid until: the owner resumes work or source/platform/remote HEAD changes — then recheck.
