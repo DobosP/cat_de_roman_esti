@@ -1,0 +1,42 @@
+{
+  "baseline": "a2508dc0bee3cf24be0978d7e5c3c1c6101263fb",
+  "path": "scripts/gui-repo-hook.mjs",
+  "before": {
+    "bytes": 25542,
+    "sha256": "a4e44d9607722ae39c3ac4304a39e22684018629f2e8c4f98c31ffb199b1d927",
+    "mode": 33204
+  },
+  "after": {
+    "bytes": 25777,
+    "sha256": "66f94b30a9b510d969257d765747088811b78a2e6dfa734d7e28c8c99d04ccae",
+    "mode": 33204
+  },
+  "moved_frontend_block": {
+    "bytes": 197,
+    "sha256": "4866362a8e18f7a28e45dc4f1f1ab834213a4d665e897ac6a700ce62727c4bc3",
+    "literal_commands": [
+      "  command(\"cat-frontend-unit\", \"npm\", [\"test\"], frontend);",
+      "  command(\"cat-frontend-lint\", \"npm\", [\"run\", \"lint\"], frontend);",
+      "  command(\"cat-frontend-types\", \"npm\", [\"run\", \"typecheck\"], frontend);"
+    ],
+    "each_exactly_once_before_after": true
+  },
+  "whole_inverse_preservation": true,
+  "ordering": "unchanged doc preflight/fresh build/sync/identity/routeBudgets; exactfrontend3 immediatelyafterrouteBudgets; failure-onlyreturn; unchangedGo/auth/docs/contentrelativeorder thereafter",
+  "full_guard": "originalidentityrefusal preserved; additionallybreak onlyfor actual namedfrontendfailure",
+  "budget_only_red": "not a named frontend failure, so no early return/new full break; all other required checks continue and aggregate budget failure stays real",
+  "nonbudget_failfast": "frontend failure is already recorded by original hook.check; no skipped/pass surrogate or backend qualification is created",
+  "execution": "SOURCE ONLY; no imports/parser/compiler/formatter/tests/gates/wrappers",
+  "preserved_remaining_relative_order": [
+    "cat-backend-race",
+    "cat-backend-vet",
+    "cat-authcore-race",
+    "cat-authcore-vet",
+    "managed-assets retention",
+    "cat-doc-check",
+    "cat-content-validate",
+    "cat-content-export",
+    "cat-docs-gate"
+  ],
+  "runtime_result": "NOT RUN; control-flow statements are source review, not executed outcomes"
+}

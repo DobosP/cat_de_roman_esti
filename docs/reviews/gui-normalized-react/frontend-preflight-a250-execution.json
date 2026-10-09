@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "kind": "owned-targeted-command-evidence",
+  "scope": "Actual managed frontend preflight only; no unit/full/gate qualification",
+  "qualified": false,
+  "context": {
+    "schema": 1,
+    "invocation": "77ab5575-5ecc-44b2-b1c2-e19ca5350231",
+    "target": "shell",
+    "sha": "a2508dc0bee3cf24be0978d7e5c3c1c6101263fb",
+    "tree_sha256": "9bbc9788defc0950b5ac0ca5f6b871a530bffdeb80c98559e13cf4e86a5931da",
+    "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+    "config_sha256": "557b4a0935c07456dd43460c45e65ee3bf5f2931d97ea308138f4a8e56457b95",
+    "config_path": ".gate/shell/wrapper-kit-config.json",
+    "config_file_sha256": "511339429b11fb7792c30dd727920f446743e1cae6282c165333d960fcd1b03f"
+  },
+  "descriptor_sha256": "8743a453dae81529a9e0e6019ad25b004c35d9a3a86fa7003eaa7d0cd54ceed2",
+  "commands": [
+    {
+      "name": "node-version",
+      "argv": [
+        "/opt/node/bin/node",
+        "--version"
+      ],
+      "cwd": "/work/frontend",
+      "startedUtc": "2026-10-09T05:41:27.535688+00:00",
+      "exit_code": 0,
+      "finishedUtc": "2026-10-09T05:41:27.540130+00:00",
+      "stdout": {
+        "path": ".gate/shell/frontend-preflight-77ab5575-5ecc-44b2-b1c2-e19ca5350231/node-version.stdout.log",
+        "bytes": 9,
+        "sha256": "510734775b8bc8f762a1e5bdb144a2bbc76c4c981a4a50b1bcd9d594c292b18c"
+      },
+      "stderr": {
+        "path": ".gate/shell/frontend-preflight-77ab5575-5ecc-44b2-b1c2-e19ca5350231/node-version.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "npm-ci",
+      "argv": [
+        "/opt/node/bin/npm",
+        "ci",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "cwd": "/work/frontend",
+      "startedUtc": "2026-10-09T05:41:27.540776+00:00",
+      "exit_code": 0,
+      "finishedUtc": "2026-10-09T05:41:29.482603+00:00",
+      "stdout": {
+        "path": ".gate/shell/frontend-preflight-77ab5575-5ecc-44b2-b1c2-e19ca5350231/npm-ci.stdout.log",
+        "bytes": 26,
+        "sha256": "d28b2d72aea84b0adfd78e35e05676750167e6f8157ddafed575b2fbe1803369"
+      },
+      "stderr": {
+        "path": ".gate/shell/frontend-preflight-77ab5575-5ecc-44b2-b1c2-e19ca5350231/npm-ci.stderr.log",
+        "bytes": 331,
+        "sha256": "c211d12fa3e2f4c92b2151c523b2743bc220c1991e0de3797724e244bb411568"
+      }
+    },
+    {
+      "name": "focused-tests",
+      "argv": [
+        "/opt/node/bin/node",
+        "--test",
+        "--test-reporter=tap",
+        "tests/gui-style-operation.test.mjs",
+        "tests/gui-api-consumer-contract.test.mjs",
+        "tests/gui-route-budgets.test.mjs"
+      ],
+      "cwd": "/work/frontend",
+      "startedUtc": "2026-10-09T05:41:29.483222+00:00",
+      "exit_code": 1,
+      "finishedUtc": "2026-10-09T05:41:30.034501+00:00",
+      "stdout": {
+        "path": ".gate/shell/frontend-preflight-77ab5575-5ecc-44b2-b1c2-e19ca5350231/focused-tests.stdout.log",
+        "bytes": 63959,
+        "sha256": "ebbbfacf41f39aba5d2169715de69bf73ae17119d74b61d65315347f36ef71ff"
+      },
+      "stderr": {
+        "path": ".gate/shell/frontend-preflight-77ab5575-5ecc-44b2-b1c2-e19ca5350231/focused-tests.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "all_commands_exit_zero": false,
+  "actual_final_exit": 1
+}
