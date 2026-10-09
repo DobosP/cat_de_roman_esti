@@ -317,7 +317,7 @@ try {
       assetLinks: observation.css.length + observation.preloads.length, module: new URL(observation.module).pathname, module_url: observation.module,
       css: observation.css.map((url) => new URL(url).pathname), css_urls: observation.css,
       preloads: observation.preloads.map((url) => new URL(url).pathname), preload_urls: observation.preloads,
-      fonts: { links: observation.fontPreloads, requests: fontRequests, responses: fontResponses, status: observation.fontStatus, faces: observation.fontFaces } });
+      fonts: { links: observation.fontPreloads.map(({ nonce, ...link }) => ({ ...link, nonce_sha256: hash(nonce) })), requests: fontRequests, responses: fontResponses, status: observation.fontStatus, faces: observation.fontFaces } });
     await page.close();
   }
   fs.writeFileSync(`${output}/csp-measurement.json`, JSON.stringify({ schema: 1, sha: process.env.GATE_SHA, tree_sha256: process.env.GATE_TREE_SHA256, app_image_id: process.env.GATE_APP_IMAGE_ID, stage: process.env.CSP_STAGE, violations: violations.length, legacy_violations: 0, pages: routes.length, nonceObservations: observations, observedViolations: violations }, null, 2) + "\n");
