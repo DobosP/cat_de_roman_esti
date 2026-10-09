@@ -1,9 +1,34 @@
 import { test, expect } from "@playwright/test";
 import { GAME_HELP } from "../src/gameHelp.mjs";
-import { games, gameURL, deterministicStarts, tabTo, start, act, solution, openAlchemyDisclosure } from "./games.mjs";
+import { games, gameURL, deterministicStarts, tabTo, start, act, solution, openAlchemyDisclosure, openGameOptions } from "./games.mjs";
 
 for (const game of games) {
   test(`${game.key} rules preserve the round and focused choices`, async ({ page, request }, testInfo) => {
+    // Observe the fresh intro before registering the deterministic create route.
+    await page.goto(game.path);
+    const intro = page.locator(".game-intro");
+    await expect(intro).toBeVisible();
+    const guide = intro.getByRole("list", { name: "Cum joci", exact: true });
+    await expect(guide).toHaveJSProperty("tagName", "OL");
+    const guideItems = guide.locator(":scope > li");
+    await expect(guideItems).toHaveCount(3);
+    const guideLabels = {
+      alchimie: ["Atinge un cuvânt", "Atinge altul", "Descoperă automat"],
+      intrusul: ["Privește cele patru", "Atinge intrusul", "Descoperă legătura"],
+      perechi: ["Atinge un cuvânt", "Atinge perechea", "Găsește-le pe toate"],
+      conexiuni: ["Alege patru", "Verifică", "Găsește grupul"],
+      contexto: ["Scrie un cuvânt", "Vezi căldura", "Apropie-te"],
+      lant: ["Alege o legătură", "Fă un salt", "Ajungi la țintă"],
+    }[game.key];
+    for (const [index, label] of guideLabels.entries()) {
+      await expect(guideItems.nth(index).getByText(label, { exact: true })).toBeVisible();
+    }
+    if (["alchimie", "contexto", "lant", "conexiuni"].includes(game.key)) {
+      await openGameOptions(page, game, { setup: true });
+      const difficulty = intro.getByRole("group", { name: "DIFICULTATE", exact: true });
+      await expect(difficulty.getByRole("button", { pressed: true })).toHaveCount(1);
+      await expect(difficulty.getByRole("button", { name: /^Ușor(?:\s|$)/ })).toHaveAttribute("aria-pressed", "true");
+    }
     await deterministicStarts(page, game);
     const initial = await start(page, game);
     const help = page.locator("details.game-help");
