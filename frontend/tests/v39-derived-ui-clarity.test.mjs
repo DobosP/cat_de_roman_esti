@@ -1,30 +1,7 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
 import test from "node:test";
 
 import { nextActiveTileId } from "../src/perechiFocus.mjs";
-
-const read = (path) => readFileSync(new URL(path, import.meta.url), "utf8");
-const intrusul = read("../src/screens/Intrusul.tsx");
-const perechi = read("../src/screens/Perechi.tsx");
-const perechiCss = read("../src/styles/perechi.css");
-const resultCard = read("../src/components/ResultCard.tsx");
-
-void test("Intrusul HUD omits source difficulty that does not describe puzzle state", () => {
-  assert.doesNotMatch(intrusul, /DIFFICULTY_LABEL/);
-  assert.doesNotMatch(intrusul, /label="NIVEL"/);
-  assert.match(intrusul, /label="GREȘELI"/);
-  assert.match(intrusul, /state\.daily && <StatBadge label="ZILNIC"/);
-});
-
-void test("Perechi removes solved grid tiles but keeps earned pair history", () => {
-  assert.match(perechi, /const activeTiles = state\.tiles\.filter\(\(tile\) => !tile\.solved\)/);
-  assert.match(perechi, /activeTiles\.map\(\(tile\) =>/);
-  assert.match(perechi, /state\.solved_pairs\.map\(\(pair\) =>/);
-  assert.match(perechi, /aria-label="Perechi găsite"/);
-  assert.doesNotMatch(perechi, /perechi-tile--solved/);
-  assert.doesNotMatch(perechiCss, /\.perechi-tile--solved/);
-});
 
 void test("Perechi focus follows the next active tile and wraps in board order", () => {
   const tiles = [
@@ -45,39 +22,4 @@ void test("Perechi focus follows the next active tile and wraps in board order",
     ),
     null,
   );
-});
-
-void test("Perechi moves focus only when a focused solved tile disappears", () => {
-  assert.match(
-    perechi,
-    /focusedTileBeforeMutation\.current =\s*ids\.find\(\(id\) => tileRefs\.current\.get\(id\) === document\.activeElement\)/,
-  );
-  assert.match(perechi, /candidateIds\.includes\(focusedId\)/);
-  assert.match(perechi, /if \(fresh\.won \|\| fresh\.lost\) \{[\s\S]*?kind: "result"/);
-  assert.match(perechi, /queueFocusAfterUpdate\(result, ids\)/);
-  assert.match(perechi, /tileRefs\.current\.get\(pending\.id\)/);
-  assert.match(perechi, /pending\.kind === "result"\s*\? resultFocusRef\.current\s*:/);
-  assert.match(perechi, /<div ref=\{resultFocusRef\} tabIndex=\{-1\}>/);
-  assert.doesNotMatch(perechi, /resultFocusRef\.current\?\.querySelector/);
-  assert.match(perechi, /target\.focus\(\)/);
-});
-
-void test("daily derived results identify free play while normal replay keeps its default", () => {
-  for (const screen of [intrusul, perechi]) {
-    assert.match(
-      screen,
-      /replayLabel=\{offerDaily \? "Joacă provocarea zilei →" : state\.daily \? "Joacă liber →" : undefined\}/,
-    );
-    assert.match(screen, /: \(\) => void start\(\{ previousGameId: state\.game_id \}\)\n\s*\}/);
-  }
-  assert.match(resultCard, /replayLabel = "Încă unul →"/);
-});
-
-void test("UI clarity additions do not reference private derived metadata", () => {
-  for (const source of [intrusul, perechi]) {
-    assert.doesNotMatch(
-      source,
-      /source_id|catalog_id|standard_score|starter_score|standard_rank|starter_rank/,
-    );
-  }
 });

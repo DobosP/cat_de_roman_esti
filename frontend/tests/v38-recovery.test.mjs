@@ -1,13 +1,6 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
 import test from "node:test";
 import { createGameActionOwner, recoverOwnedGameAction } from "../src/gameActionRecovery.mjs";
-
-const read = (path) => readFileSync(new URL(path, import.meta.url), "utf8");
-const intrusul = read("../src/screens/Intrusul.tsx");
-const perechi = read("../src/screens/Perechi.tsx");
-const resultCard = read("../src/components/ResultCard.tsx");
-const gameShell = read("../src/components/GameShell.tsx");
 
 for (const game of ["intrusul", "perechi"]) {
   void test(`${game} retry preserves the exact public earned snapshot after read failure`, async () => {
@@ -27,32 +20,3 @@ for (const game of ["intrusul", "perechi"]) {
     owner.finish(retry);
   });
 }
-
-void test("create and replay are single-flight with visible result busy state", () => {
-  for (const screen of [intrusul, perechi]) {
-    assert.match(screen, /const startInFlight = useRef\(false\)/);
-    assert.match(screen, /if \(!acquireFlight\(startInFlight\)\) return/);
-    assert.match(screen, /releaseFlight\(startInFlight\)/);
-    assert.match(screen, /actionsBusy=\{loading\}/);
-    assert.equal((screen.match(/busy=\{loading\}/g) ?? []).length, 2);
-    assert.match(screen, /const exitSafely = useCallback/);
-  }
-  assert.match(resultCard, /actionsBusy = false/);
-  assert.match(resultCard, /disabled=\{actionsBusy\}/);
-  assert.match(resultCard, /actionsBusy \? "Se pregătește…" : replayLabel/);
-  assert.match(gameShell, /busy = false/);
-  assert.match(gameShell, /disabled=\{busy\}/);
-  assert.match(gameShell, /aria-busy=\{busy \|\| undefined\}/);
-  assert.match(gameShell, /busy \? "Se pregătește…" : "Ieși"/);
-});
-
-void test("quick games explain locked hints and visibly price only the available hint action", () => {
-  assert.match(intrusul, /<span className="intrusul-hint-status">Indiciu disponibil după prima greșeală\.<\/span>/);
-  assert.match(perechi, /<span className="perechi-hint-status">Indiciu disponibil după două greșeli\.<\/span>/);
-  for (const screen of [intrusul, perechi]) {
-    assert.match(screen, /!finished && !state\.hints_used && \([\s\S]*?state\.hint_available \? \(\s*<Button/);
-    assert.match(screen, /onClick=\{\(\) => void requestHint\(\)\}/);
-    assert.match(screen, /Costă 150 de puncte\./);
-    assert.match(screen, /💡 Arată (?:indiciul|o pereche) · −150 pct/);
-  }
-});

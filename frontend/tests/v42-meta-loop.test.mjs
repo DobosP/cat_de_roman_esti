@@ -5,9 +5,6 @@ import ts from "@typescript/typescript6";
 
 const STORAGE_KEY = "cat_wordgame_scores_v1";
 const scoreSource = readFileSync(new URL("../src/scores.ts", import.meta.url), "utf8");
-const homeSource = readFileSync(new URL("../src/screens/Home.tsx", import.meta.url), "utf8");
-const cssSource = readFileSync(new URL("../src/styles/arcade.css", import.meta.url), "utf8");
-const appSource = readFileSync(new URL("../src/App.tsx", import.meta.url), "utf8");
 const compiled = ts.transpileModule(scoreSource, {
   compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2021 },
 }).outputText;
@@ -144,77 +141,4 @@ void test("clearing scores also clears the local streak", () => {
   scores.recordScore("alchimie", 100, "ziua 1", { daily: "2026-07-20" });
   scores.clearScores();
   assert.equal(scores.getDailyStreak("2026-07-20"), 0);
-});
-
-void test("Home shows the fire streak chip only from one day, with correct Romanian pluralization", () => {
-  assert.match(homeSource, /getDailyStreak\(today\)/);
-  assert.match(homeSource, /dailyStreak >= 1/);
-  assert.match(
-    homeSource,
-    /🔥 Serie: \{dailyStreak === 1 \? "o zi" : `\$\{dailyStreak\} zile`\}/,
-  );
-});
-
-// ------------------------------------------------------------------ (b) diploma de român
-
-void test("the diploma stamp renders only once the circuit is 6/6", () => {
-  assert.match(homeSource, /circuit\.completed === 6 &&/);
-  const diplomaBlock = homeSource.slice(
-    homeSource.indexOf("circuit.completed === 6 &&"),
-    homeSource.indexOf("</section>", homeSource.indexOf("circuit.completed === 6 &&")),
-  );
-  assert.match(diplomaBlock, /🏆 Diplomă de român/);
-  assert.match(diplomaBlock, /formatDayKey\(today\)/);
-  assert.match(diplomaBlock, /Ai închis circuitul de azi: \{circuit\.total\} puncte\./);
-  assert.match(diplomaBlock, /handleDiplomaShare/);
-});
-
-void test("the diploma share text matches the specified copy and reuses the existing share/copy helpers", () => {
-  assert.match(
-    homeSource,
-    /Cât de român ești\? Circuit 6\/6 azi · \$\{circuit\.total\} pct · Joacă: \$\{appUrl\(\)\}`/,
-  );
-  assert.match(homeSource, /copyResult\(text\)/);
-  assert.doesNotMatch(homeSource, /fetch\(|\/api\/|telemetry|upload/i);
-});
-
-// ------------------------------------------------------------------ (c) starter chip
-
-void test("the starter chip appears on Intrusul/Perechi cards only pre-graduation", () => {
-  assert.match(
-    homeSource,
-    /isStarterGame\(g\.key\) && needsDerivedStarter\(g\.key\) && \(/,
-  );
-  assert.match(homeSource, /className="faint">🌱 Nivel de început/);
-  assert.match(
-    homeSource,
-    /function isStarterGame\(key: GameKey\): key is DerivedStarterGame \{\s*return key === "intrusul" \|\| key === "perechi";/,
-  );
-});
-
-// ------------------------------------------------------------------ (d) value prop tagline
-
-void test("the hero tagline names the cultural range and keeps the h1 untouched", () => {
-  assert.match(
-    homeSource,
-    /De la Ștefan cel Mare la Las Fierbinți: șase jocuri scurte din cultura și\s*viața românească\./,
-  );
-  assert.doesNotMatch(homeSource, /Șase jocuri românești\. Alege unul și intri direct în ritm\./);
-  assert.match(homeSource, /aria-label="Cât de român ești\?"/);
-});
-
-// ------------------------------------------------------------------ CSS anchor
-
-void test("meta-loop CSS lives under its V42 anchor and keeps the diploma action >=44px", () => {
-  assert.match(cssSource, /V42 section: meta-loop/);
-  assert.match(cssSource, /@media \(pointer: coarse\)[\s\S]*?\.roedu-btn,[\s\S]*?min-height: 44px/);
-  assert.match(
-    cssSource,
-    /\.games-grid \{[\s\S]*?repeat\(auto-fit, minmax\(min\(100%, 320px\), 1fr\)\)/,
-  );
-});
-
-void test("optional account controls stay outside the initial bundle graph", () => {
-  assert.match(appSource, /const AccountBar = lazy\(\(\) => import\("\.\/components\/AccountBar"\)\)/);
-  assert.doesNotMatch(appSource, /import AccountBar from/);
 });

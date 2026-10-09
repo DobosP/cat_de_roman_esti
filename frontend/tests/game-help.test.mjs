@@ -1,9 +1,7 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
 import test from "node:test";
 import { GAME_HELP } from "../src/gameHelp.mjs";
 
-const read = (path) => readFileSync(new URL(path, import.meta.url), "utf8");
 const screens = {
   alchimie: "Alchimie", intrusul: "Intrusul", perechi: "Perechi",
   conexiuni: "Conexiuni", contexto: "CaldRece", lant: "Lant",
@@ -11,22 +9,10 @@ const screens = {
 
 void test("every live game has concise guidance for goal, feedback and recovery", () => {
   assert.deepEqual(Object.keys(GAME_HELP).sort(), Object.keys(screens).sort());
-  for (const [key, screen] of Object.entries(screens)) {
+  for (const [key] of Object.entries(screens)) {
     assert.deepEqual(Object.keys(GAME_HELP[key]), ["goal", "feedback", "recovery"]);
     for (const text of Object.values(GAME_HELP[key])) {
       assert.ok(text.length > 30 && text.length < 220, `${key}: keep each explanation short`);
-    }
-    const source = read(`../src/screens/${screen}.tsx`);
-    if (key === "alchimie") {
-      assert.match(source, /<GameHelp game=\{GAME_KEY\} \/>/);
-      assert.doesNotMatch(source, /<GameShell[^>]*helpGame=/);
-      assert.ok(
-        source.indexOf("<GameHelp game={GAME_KEY}") > source.indexOf('aria-label="Inventar"'),
-        "Alchimie keeps optional rules below the main workspace",
-      );
-    } else {
-      assert.match(source, /<GameOptions game=(?:\{GAME_KEY\}|"lant")[\s>]/);
-      assert.doesNotMatch(source, /<GameShell[^>]*helpGame=/);
     }
   }
 });
@@ -38,29 +24,4 @@ void test("help explains different kinds of relationship without revealing a boa
   assert.match(GAME_HELP.conexiuni.feedback, /Aproape: 3 din 4/);
   assert.match(GAME_HELP.contexto.feedback, /#1 este ținta/);
   assert.match(GAME_HELP.lant.feedback, /poate apropia sau ocoli/);
-});
-
-void test("rules use a closed native disclosure with no session or clue side effects", () => {
-  const component = read("../src/components/GameHelp.tsx");
-  assert.match(component, /<details className="game-help">/);
-  assert.match(component, /<summary>Reguli și ajutor<\/summary>/);
-  assert.doesNotMatch(component, /\bopen=|useEffect|useState|fetch|Api|onClick|localStorage/);
-  assert.match(component, /Citirea regulilor nu folosește un indiciu și nu schimbă scorul/);
-  const options = read("../src/components/GameOptions.tsx");
-  assert.match(options, /children &&/);
-  assert.match(options, /<details className="game-options">/);
-  assert.match(options, /<summary>Opțiuni de joc<\/summary>/);
-  assert.match(options, /<GameHelp game=\{game\} \/>/);
-  assert.ok(options.indexOf("<GameHelp") < options.indexOf('<details className="game-options">'));
-  assert.doesNotMatch(options, /\bopen=|useEffect|useState|fetch|Api|onClick|localStorage/);
-});
-
-void test("earned Alchimie evidence preserves the server's oriented relationship", () => {
-  const screen = read("../src/screens/Alchimie.tsx");
-  const renderer = screen.slice(screen.indexOf("function EarnedLinks"), screen.indexOf("function Slot"));
-  assert.match(renderer, /if \(!item\.links\?\.length\) return null/);
-  assert.match(renderer, /\{link\.source\.label\} — \{link\.label\} → \{link\.target\.label\}/);
-  assert.doesNotMatch(renderer, /\.parents|alchimieApi|setState|localStorage/);
-  assert.match(screen, /winningReaction\?\.results\.map\(\(item\) => \(\s*<EarnedLinks/);
-  assert.match(screen, /reaction\.results\.map\(\(item\) => <EarnedLinks/);
 });

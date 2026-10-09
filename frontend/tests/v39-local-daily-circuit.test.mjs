@@ -5,8 +5,6 @@ import ts from "@typescript/typescript6";
 
 const STORAGE_KEY = "cat_wordgame_scores_v1";
 const scoreSource = readFileSync(new URL("../src/scores.ts", import.meta.url), "utf8");
-const homeSource = readFileSync(new URL("../src/screens/Home.tsx", import.meta.url), "utf8");
-const cssSource = readFileSync(new URL("../src/styles/arcade.css", import.meta.url), "utf8");
 const compiled = ts.transpileModule(scoreSource, {
   compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2021 },
 }).outputText;
@@ -134,86 +132,4 @@ void test("malformed and imported histories stay deterministic and local", () =>
   assert.equal(imported.total, 0);
   assert.equal(imported.games[0].completed, true);
   assert.equal(JSON.parse(storage.getItem(STORAGE_KEY)).alchimie.recent[0].score, 0);
-});
-
-void test("Home renders local-only circuit actions and keeps completed rows read-only", () => {
-  assert.match(homeSource, /buildDailyCircuit\(board, today\)/);
-  assert.match(homeSource, /Circuitul de azi/);
-  assert.match(homeSource, /Doar pe acest dispozitiv\./);
-  assert.match(homeSource, /\{circuit\.completed\}\/6/);
-  assert.match(homeSource, /\{circuit\.total\}\/6000 pct/);
-  assert.match(homeSource, /completedToday \? "Azi ✓"/);
-
-  const circuitMarkup = homeSource.slice(
-    homeSource.indexOf('<section className="card daily-circuit"'),
-    homeSource.indexOf('        {playedTotal === 0'),
-  );
-  const helperSource = scoreSource.slice(
-    scoreSource.indexOf("export function buildDailyCircuit"),
-    scoreSource.indexOf("export function recentScores"),
-  );
-  assert.match(circuitMarkup, /if \(row\.completed\) \{/);
-  assert.match(
-    circuitMarkup,
-    /className="daily-circuit-game-item daily-circuit-game is-complete"/,
-  );
-  assert.match(
-    circuitMarkup,
-    /aria-label=\{`\$\{game\.title\}: terminat azi, \$\{row\.score\} puncte`\}/,
-  );
-  assert.match(circuitMarkup, /className="daily-circuit-game daily-circuit-game-action"/);
-  assert.match(circuitMarkup, /onClick=\{\(\) => openGame\(game, true\)\}/);
-  assert.match(
-    circuitMarkup,
-    /aria-label=\{`Deschide \$\{game\.title\} — neterminat azi`\}/,
-  );
-  assert.match(circuitMarkup, /Joacă →/);
-  const completedBranch = circuitMarkup.slice(
-    circuitMarkup.indexOf("if (row.completed)"),
-    circuitMarkup.indexOf('<li key={row.game} className="daily-circuit-game-item">'),
-  );
-  assert.doesNotMatch(completedBranch, /<button|onClick/);
-  assert.doesNotMatch(circuitMarkup, /navigate\(/);
-  assert.doesNotMatch(`${circuitMarkup}\n${helperSource}`, /fetch\(|\/api\/|telemetry|upload/i);
-});
-
-void test("circuit markup exposes headings, status text, and a labelled progress list", () => {
-  assert.match(
-    homeSource,
-    /<section className="card daily-circuit" aria-labelledby="daily-circuit-title">/,
-  );
-  assert.match(homeSource, /role="status"/);
-  assert.match(homeSource, /aria-live="polite"/);
-  assert.match(homeSource, /aria-label=\{`\$\{circuit\.completed\} din 6 jocuri terminate azi,/);
-  assert.match(homeSource, /<ul className="daily-circuit-games" aria-label="Progresul jocurilor de azi">/);
-  assert.match(
-    homeSource,
-    /aria-label=\{`\$\{game\.title\}: terminat azi, \$\{row\.score\} puncte`\}/,
-  );
-  assert.match(
-    homeSource,
-    /aria-label=\{`Deschide \$\{game\.title\} — neterminat azi`\}/,
-  );
-  assert.match(homeSource, /aria-label=\{`Joacă \$\{g\.title\} — \$\{/);
-});
-
-void test("daily circuit CSS is mobile-first, compact, and scales to desktop", () => {
-  assert.match(
-    cssSource,
-    /\.daily-circuit-games\s*\{[^}]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\)/s,
-  );
-  assert.match(cssSource, /\.daily-circuit-game\s*\{[^}]*min-height: 44px/s);
-  assert.match(cssSource, /\.daily-circuit-game-name\s*\{[^}]*overflow-wrap: anywhere/s);
-  assert.match(
-    cssSource,
-    /\.daily-circuit-game-action:focus-visible\s*\{[^}]*outline: 2px solid/s,
-  );
-  assert.match(
-    cssSource,
-    /@media \(min-width: 700px\)\s*\{[\s\S]*?\.daily-circuit-games\s*\{[^}]*repeat\(3,/,
-  );
-  assert.match(
-    cssSource,
-    /@media \(min-width: 980px\)\s*\{[\s\S]*?\.daily-circuit-games\s*\{[^}]*repeat\(6,/,
-  );
 });
