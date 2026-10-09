@@ -1,0 +1,68 @@
+{
+  "schema": "root-transcribed-current-rail-pinned-dependency-source-plan-v1",
+  "valid_until": "Selected versions, sources, toolchain or method changes, then recheck",
+  "reviewer": "/root/qualification_ledger",
+  "frozen_utc": "2026-10-09T11:54:41Z",
+  "native_execution": false,
+  "network": false,
+  "writes_by_reviewer": false,
+  "modules": [
+    {
+      "path": "github.com/a-h/templ",
+      "version": "v0.3.1070",
+      "payload_h1": "h1:3iCOXHXqFXa99OQzgkUOLJbNzv/QjFGLwKZkBAg+ADA=",
+      "go_mod_h1": "h1:iIqB3g2RHBe/WlnPwa+Bvhh1TKXHWLRnBD9NWHOLm78="
+    },
+    {
+      "path": "github.com/flosch/pongo2/v6",
+      "version": "v6.1.0",
+      "payload_h1": "h1:A/NJbrQJJD2B2mbpw3DRFwBYG0xpCr3vwFlEr46y1HQ=",
+      "go_mod_h1": "h1:CuDpFm47R0uGGE7z13/tTlt1Y6zdxvr2RLT5LJhsHEU="
+    },
+    {
+      "path": "github.com/vearutop/statigz",
+      "version": "v1.5.0",
+      "payload_h1": "h1:FuWwZiT82yBw4xbWdWIawiP2XFTyEPhIo8upRxiKLqk=",
+      "go_mod_h1": "h1:oHmjFf3izfCO804Di1ZjB666P3fAlVzJEx2k6jNt/Gk="
+    },
+    {
+      "path": "github.com/andybalholm/brotli",
+      "version": "v1.2.6",
+      "payload_h1": "h1:ftYnfj6usCp+UGV5kSJ3+chpMQgU+gJf/AxsUQ52REI=",
+      "go_mod_h1": "h1:rzTDkvFWvIrjDXZHkuS16NPggd91W3kUSvPlQ1pLaKY="
+    },
+    {
+      "path": "golang.org/x/net",
+      "version": "v0.59.0",
+      "payload_h1": "h1:5zfYln+w5XCxwrnMMJPufRgNoXEaGxl0wo5GqPXyues=",
+      "go_mod_h1": "h1:2DA/G1UfVbCpQPeWTmMPGY7Cs2PkBkwu743bVX5PIVg="
+    }
+  ],
+  "semantic_dependency_scope": "Rail directly reaches templ,pongo2,statigz; brotli/xnet also declared, external transitive reachability not proved by owned-source scan.",
+  "source_hashes": {
+    "go-backend/go.sum": "aa0fee1fbf66167f8f1f054e2c31f7b4c110d5901307bc6294b7ae1858dbb3db",
+    "go-backend/third_party/webkit/go.sum": "f62f81f537f408583c94567f1fa9c4fae450cc35588beee2ffaad5632d693408",
+    "go-backend/go.mod": "98ea69356c008d5ed8c166c959e0e9f0db6180ce9c967582a9b6cef49e76be41",
+    "go-backend/third_party/webkit/go.mod": "9cf252beeca8b0e3be2e8282c3a3676e5597e107a2cffe9eca4ca6d32b26614c"
+  },
+  "SDK_anchors": {
+    "cmd/vendor/golang.org/x/mod/sumdb/dirhash/hash.go": "24de6a735c1605e39b6381e6962787faa5c59adab896fb66dbc1ac8b6afcb297",
+    "cmd/vendor/golang.org/x/mod/zip/zip.go": "3a0fd2c978e20233b6bd904a9c510dd746a7a50825c35a2e4ab1d8618f9de77b",
+    "cmd/go/internal/modfetch/fetch.go": "8e70a3d79f0d7a7082434286b2297fe5a0d649c0c50384c7ee25629e56e81806",
+    "cmd/go/internal/modcmd/download.go": "b685f8334d703135c57555b19db01cc29441108cd9d2d7d2552ca83d45d301ae",
+    "cmd/go/internal/modfetch/proxy.go": "6ac58e996c01d827bd9502c0402b8c3c58c6fdda5f9a6b022049a6c5ff617061"
+  },
+  "findings": [
+    "Exact module download needs real official .info before .mod/.zip; its Time/Origin metadata not authenticated by go.sum.",
+    "Explicit module download may write consumer go.mod/go.sum; use fresh isolated minimal consumer seeded exact10sums, never sealedI.",
+    "GOSUMDBoff retains existing go.sum comparisons; missing sums can be added unauthenticated, so reject unexpected additions.",
+    "Go has one module-cache root; use fresh owned cache preserving old cache.",
+    "Go HashZip hashes every original full central-entry name and its uncompressed contents, including directory entries, sortedUTF8; no prefix/Unicode/newline normalization.",
+    "Go actual CheckZip/HashZip/Unzip is necessary for full Unicode15 namespace/zip validation; Python14casefold or bareZipFile cannot claim equivalent full validator.",
+    "Finite local-proxy alternative is exactly15info/mod/zip officialobjects; no list/latest/direct fallback or fabricated info.",
+    "All downloads/newcache/unzip/logs/build outputs share conservative1GiB growth cap; prior allowance remaining422209187B."
+  ],
+  "next_method_status": "Not yet authored/admitted. Root may choose supported Go official-proxy five-tuple acquisition to retain SDK's actual archive validation, avoiding a bespoke Python ZIP implementation. Any method requires fresh reviewed source/native admission and unchanged oldcache/sealedsource proof.",
+  "original_source_deadline_epoch": 1791547158.0173743,
+  "metadata_transcribed_epoch": 1791547034.7066078
+}
