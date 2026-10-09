@@ -190,15 +190,45 @@ test("the actual served build keeps optional account/game chunks outside static 
   }
   expect(matches.length, "A genuine local build manifest must bind the actually served module bytes").toBeGreaterThan(0);
   for (const match of matches) {
+    const staticOwners = new Set(), dynamicImports = new Set();
+    function manifestRow(key) {
+      expect(typeof key).toBe("string");
+      expect(key.length).toBeGreaterThan(0);
+      expect(Object.hasOwn(match.manifest, key)).toBe(true);
+      const row = match.manifest[key];
+      expect(row !== null && typeof row === "object" && !Array.isArray(row)).toBe(true);
+      expect(typeof row.file).toBe("string");
+      expect(row.file.length).toBeGreaterThan(0);
+      return row;
+    }
+    function visitStaticOwner(key) {
+      const row = manifestRow(key);
+      if (staticOwners.has(key)) return;
+      staticOwners.add(key);
+      for (const field of ["imports", "dynamicImports"]) {
+        const references = row[field] === undefined ? [] : row[field];
+        expect(Array.isArray(references)).toBe(true);
+        for (const reference of references) {
+          if (field === "imports") visitStaticOwner(reference);
+          else {
+            manifestRow(reference);
+            dynamicImports.add(reference);
+          }
+        }
+      }
+    }
+    // Follow only the genuine served entry's static owners, never dynamic edges.
+    visitStaticOwner(match.entry);
     const closure = collectInitialBundleFiles(match.manifest);
     expect(closure.length).toBeGreaterThan(0);
-    const optional = ["src/components/AccountBar.tsx", "src/screens/Intrusul.tsx", "src/screens/Perechi.tsx"]
+    const optional = ["src/components/AccountBar.tsx", "src/screens/Intrusul.tsx", "src/screens/Perechi.tsx",
+      "src/screens/Alchimie.tsx", "src/screens/CaldRece.tsx", "src/screens/Lant.tsx", "src/screens/Conexiuni.tsx"]
       .map((key) => {
         const row = match.manifest[key];
         expect(row).toBeDefined();
         expect(row.isDynamicEntry).toBe(true);
         expect(closure).not.toContain(row.file);
-        expect(match.manifest[match.entry].dynamicImports).toContain(key);
+        expect(dynamicImports.has(key)).toBe(true);
         return { key, file: row.file };
       });
     const bound = [];
