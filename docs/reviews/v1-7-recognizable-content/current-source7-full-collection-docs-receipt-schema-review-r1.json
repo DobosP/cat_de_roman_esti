@@ -1,0 +1,83 @@
+{
+  "accepted_exact_remaining_commands": [
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "name": "default-working-whitespace"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "name": "default-staged-whitespace"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "59a9a568c445654f69215d735091c9b3e0405831",
+        "--check"
+      ],
+      "name": "default-wholebranch-whitespace"
+    }
+  ],
+  "actual_old_step0": {
+    "exit_code": 0,
+    "failure": null,
+    "guard": null,
+    "index": 0,
+    "log_path": "/home/dobo/work/_temp/codex__content-v1-7/probe/current-source7-full-collection-checkpoint-docs-r1-0.log",
+    "log_sha256": "eb7cea2f02031d8e6d85ccd479143779f3ab0ab9a1c5901582a46ac6979b6ff3",
+    "native_docs_files": 59,
+    "protected_pre_post_checks_each": 4907,
+    "state": "READY_next1_pendingnull_IDENTITY_ONLY_NEVER_RESUME",
+    "status": "passed"
+  },
+  "dependency_sha256": {
+    "/home/dobo/work/_temp/codex__content-v1-7/probe/current-source7-full-collection-checkpoint-docs-r1-0.log": "eb7cea2f02031d8e6d85ccd479143779f3ab0ab9a1c5901582a46ac6979b6ff3",
+    "/home/dobo/work/_temp/codex__content-v1-7/probe/current-source7-full-collection-checkpoint-docs-r1-r4-r3-state.json": "371be050c38ef3d865b85a08a5363ba8078337dcad6da4e5d791e1ccc146a56d",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/current-source7-full-collection-actual-review-source-admission-r1.json": "717154c71465e3a44e99d6eecbe2c7144471dd4e6bdce2f1e3a2adaa75c05e99",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/current-source7-full-collection-checkpoint-docs-native-admission-r1.json": "f941db1c9cad454f91e026b0e48761f3f7922307479894b58506a9b916acd3a9",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/current-source7-full-collection-checkpoint-docs-r1-step-0-result.json": "f660d7390f19e2a21c1b404474c4f1f8ae18b13090b3bb8aa1b79bd152757883",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/current-source7-full-collection-checkpoint-whitespace-native-admission-r2.json": "c72ab6e49adc11ec1901a5c23caef26ae2b85944baee00e01b399d2898696e94",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/current-source7-full-collection-docs-root-receipt-schema-failure-r1.json": "cda44cf0d36aa4296bae29a7f7395943ad4ee5690a489a1f4fd81ad191be569a",
+    "/tmp/v17_docs_steps.py": "a0fd63be5a2e4378620a9905c4a9e9493df890d9271982acd01f2bf2b30e57c9",
+    "/tmp/v17_whitespace_remaining.py": "ccfc5d1b913ac42bc671a72a67a093b69db49ae25ecd241fca108588b0db544f"
+  },
+  "findings": [
+    "Actual397686schema uses status passed, index, log_path andlog_sha256. Rootstatus==pass assertion wasfalse; laterguessedstep_index wasunreachable, notasecondobservednativefailure. Exactoldstep0receipt/log show trueNativeDocsPASS with59files/nodiagnostics andall4907protectedchecks true.",
+    "Old/tmp/v17_docs_steps.py contains oldmanifeststep1\u20133executionloop, so it ispermanentlyinert/notauthorized. Oldf941READYstate/admission/step0/log/rootfalseassertion remainimmutable andunresumed.",
+    "Newc72 manifest hasexactthreepreviouslyUNRUNdefaultgitdiffcommands, equaloldcommands1\u20133. Newprefix/state/indices0\u20132 distinct; no docschecker/collection/tests/copy replay. Original717deadline00:34:40/reserve00:31:40 unchanged, freshheadroom andcomplete4913knownpins current.",
+    "Correctednewrootreader uses actualpassed/exit0/guardnull plusboundstate-receiptSHA andactualreceiptlog_path/log_sha256, no guessedfilefield. This ACK grants onlythisexactremaining3metadata scope, notblanketfile-existence approval oractualgatePASS."
+  ],
+  "fresh_prewrite": {
+    "MemAvailable_bytes": 25699291136,
+    "disk_free_bytes": 121669668864
+  },
+  "mandatory_before_and_during_native": [
+    "Rootverifies exactc72admissionSHA andthisACKSHA manuallybeforeandaftereachstep withcompletecurrentknownsource/producers; no circularselfhash, originalmanifestmutation or blankettrustreset. Originalrunner397686admission/state/hash/resource/deadline guards unchanged.",
+    "Runonlynewwhitespace-r2prefix/indices0\u20132 underfreshheadroom/sameoriginaldeadline+reserve/native2GiBRSS1GiBfullS-Rgrowth. Preserveoldf941state371be0 unchanged; no oldpipelinecontinuation even thoughnativeREADY.",
+    "Any checker/native/readset/resource/clock failure stopsunruncommands andpreserves exactstate/logs/receipts; no guessedpass/partialpromotion/thresholdchange.",
+    "Finalmetadatarecord maycomposegenuineoldNativeDocsstep0 withactualnewthreechecks onlyaftertheypass; it mustexplicitlyretain oldroot-schemaFAIL/oldREADYunresumed anddistinctproducerlineage."
+  ],
+  "not_granted": [
+    "remainingwhitespacecommandsalreadyPASS",
+    "source/helper/runtime/test/datachanges",
+    "testbody/fullrun/currentauthority/Source7live/assembledrelease"
+  ],
+  "reviewed_at_utc": "2026-10-09T00:29:46.670865+00:00",
+  "reviewer": "/root/v17_research_quality",
+  "reviewer_executed_native_or_tests": false,
+  "schema": "v1-7-independent-docs-receipt-schema-and-three-remaining-whitespace-review-v1",
+  "source_admission_sha256": "717154c71465e3a44e99d6eecbe2c7144471dd4e6bdce2f1e3a2adaa75c05e99",
+  "source_cutoff_utc": "2026-10-09T00:31:40.143441+00:00",
+  "source_deadline_utc": "2026-10-09T00:34:40.143441+00:00",
+  "source_whole_RSS": "unmeasured",
+  "verdict": "ACK_ACTUAL_RECEIPT_SCHEMA_AND_ACCEPT_EXACT_NEW_THREE_WHITESPACE_SCOPE_ONLY"
+}
