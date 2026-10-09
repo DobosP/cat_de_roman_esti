@@ -72,6 +72,27 @@ function normalizedContract(check, file, count) {
       && ["fail", "cancelled", "skipped", "todo"].every((name) => JSON.stringify(summary(name)) === "[0]"));
   });
 }
+function routeBudgets() {
+  hook.check("cat-route-budgets", () => {
+    hook.assert("Route budgets require fresh synced managed output", () => passed("cat-unit-gui-identity"));
+    let stdout, failure;
+    try { stdout = hook.run("node", ["scripts/gui-route-budgets.mjs", target, invocation]); }
+    catch (error) { failure = error; stdout = error.stdout; }
+    const measured = JSON.parse(stdout);
+    hook.assert("Actual complete route-budget receipt matches this invocation", () => measured.schema === 1
+      && measured.check === "cat-route-budgets" && measured.target === target && measured.invocation === invocation
+      && measured.sha === hook.context.sha && measured.tree_sha256 === hook.context.tree_sha256
+      && measured.toolchain_digest === hook.context.toolchain_digest
+      && measured.budgets_sha256 === hash(fs.readFileSync(path.join(root, "budgets.json"))));
+    Object.assign(hook.budgets, measured.budgets);
+    if (failure) throw failure; // preserve the real nonzero budget-red command
+    hook.assert("Delivered route-budget evaluator passes every measured profile", () => measured.status === "pass");
+  });
+  for (const name of ["active", "frozen-legacy", "measurements"]) {
+    const file = `${directory}/route-budgets/${name}.json`;
+    if (fs.existsSync(path.join(root, file))) hook.artifact(file);
+  }
+}
 function nativeUnit() {
   runDoccheckSourcePreflight(hook);
   managedFrontendBuild("cat-unit");
@@ -80,6 +101,7 @@ function nativeUnit() {
     hook.run("node", ["scripts/gui-assets.mjs", "sync"]);
   });
   managedIdentity("cat-unit-gui-identity", ["cat-unit-frontend-build", "cat-unit-emitted-inventory", "cat-unit-assets"]);
+  routeBudgets(); // E3 keeps real red measurements while independent checks continue.
   for (const [name, module] of [["backend", "go-backend"], ["authcore", "shared-go/authcore"]]) {
     hook.check(`cat-${name}-race`, () => {
       if (module === "go-backend") hook.assert("Backend race requires fresh synced assets and compiled identity inputs", () => passed("cat-unit-gui-identity"));
