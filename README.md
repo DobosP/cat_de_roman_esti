@@ -1,8 +1,9 @@
 # cat_de_roman_esti
 
 Qualified Source6 remains the live content. The isolated V1.7 Source7 candidate
-passed its selected history/current suites: 99 Python cases and 21 Go race tests.
-The 1,192-file prerequisite stage is verified and fresh collection found 2,733 cases. The first full reference run stopped after four failures; diagnostics identify missing historical inputs and a narrow legacy-context repair proposal. Live adoption and full qualification remain pending. See [current status](docs/STATUS.md)
+passed selected history/current suites and its complete 92-case discovery-catalog
+repair regression. Its 1,194-file stage retains all serving bytes; full reference,
+backend, authority and release qualification remain pending. See [current status](docs/STATUS.md)
 and the [V1.7 review](docs/reviews/v1-7-recognizable-content/README.md).
 
 A **text-only arcade of six Romanian word games** using a shared concept graph
@@ -37,7 +38,8 @@ The name is a pun on *"cât de român ești"* — "how Romanian are you".
   ([native tooling](docs/NATIVE_TOOLCHAIN.md), [ADR-0166](docs/adr/0166-native-content-operators-and-builder-rails.md)).
 - **Python/Rust** sources, tests and rollback profiles remain independent references.
   Legacy Python web dependencies are pinned by `constraints.txt`.
-- Frontend: React 19.2 + Vite 8.1 + TypeScript, Node 24 — see [`frontend/README.md`](frontend/README.md).
+- Frontend tooling: Node26; managed/current and frozen frontend boundaries are recorded in
+  [ADR-0184](docs/adr/0184-native-spa-toolchain-and-managed-output.md).
 - Native bounded RO-EDU REST client and provenance-preserving fixture/smoke operators;
   the original vendored Python client remains an independent reference.
 - Native race/vet/source/HTTP/browser gates; retained `pytest`/`ruff` reference commands

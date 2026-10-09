@@ -1,0 +1,31 @@
+{
+  "actual92_acceptance_and_stage_unchanged": true,
+  "actual_failure_operands": {
+    "disk_free_bytes": 116308721664,
+    "memory_available_bytes": 17169448960,
+    "required_memory_available_bytes": 17179869184
+  },
+  "failed_guard_clock": "not emitted; later sample clocks are distinct",
+  "fresh_before_recovery_record": {
+    "at_utc": "2026-10-09T03:51:15.547064+00:00",
+    "disk_free_bytes": 116309835776,
+    "memory_available_bytes": 20012695552
+  },
+  "later_wait_observations": [
+    {
+      "at_utc": "2026-10-09T03:48:57.611065+00:00",
+      "disk_free_bytes": 116305711104,
+      "memory_available_bytes": 16392695808
+    },
+    {
+      "at_utc": "2026-10-09T03:50:41.509626+00:00",
+      "disk_free_bytes": 116310880256,
+      "memory_available_bytes": 20373417984
+    }
+  ],
+  "meaningful_recovery_not_unchanged_guard_retry": true,
+  "no_five_docs_edits_or_native_launch_before_refusal": true,
+  "original_source_clock_and_floors_unchanged": true,
+  "schema": "completed-actual-review-doc-checkpoint-prewrite-floor-refusal-and-recovery-v1",
+  "source_admission_sha256": "0fa49f611c710fe70f06e527d6755832ea0832a6447692b5167b4d40d2f08663"
+}

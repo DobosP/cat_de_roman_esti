@@ -1,0 +1,604 @@
+"""Review and progression guards for authored, goal-independent discovery content."""
+
+from __future__ import annotations
+
+import copy
+import gzip
+import hashlib
+import io
+import json
+import os
+import sys
+from contextlib import contextmanager
+from pathlib import Path
+
+import pytest
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+
+import build_alchimie_discovery_world as B  # noqa: E402
+
+
+def archived_candidate(relative, expected_sha256):
+    path = ROOT / "docs/reviews" / relative
+    assert B.file_sha(path) == expected_sha256
+    return json.loads(path.read_bytes())
+
+
+@pytest.fixture
+def candidate():
+    return B.candidate()
+
+
+@pytest.fixture
+def reviewed_files(tmp_path, candidate):
+    candidate_path = tmp_path / "candidate.json"
+    candidate_path.write_bytes(B.json_bytes(candidate))
+    files = [candidate_path]
+    for role in ("factual", "quality"):
+        path = tmp_path / f"{role}.json"
+        path.write_bytes(B.json_bytes({
+            "kind": B.REVIEW_KIND, "role": role, "reviewer": f"test-{role}",
+            "candidate_sha256": B.file_sha(candidate_path),
+            "world_verdict": "accept", "world_rationale": "Test fixture only.",
+            "items": [{"id": r["id"], "verdict": "accept", "rationale": "Test fixture.",
+                       "sources": ["https://example.test/recipe/" + r["id"]]}
+                      for r in candidate["recipes"]],
+            "concepts": [{"id": c["id"], "concept_sha256": B.concept_digest(c),
+                          "verdict": "accept", "rationale": "Test concept fixture.",
+                          "sources": ["https://example.test/concept/" + c["id"]]}
+                         for c in candidate["concepts"]],
+        }))
+        files.append(path)
+    return files
+
+
+def mutate(path, change):
+    value = json.loads(path.read_bytes())
+    change(value)
+    path.write_bytes(B.json_bytes(value))
+
+
+def test_authored_world_has_broad_reachable_content(candidate):
+    result = B.audit(candidate)
+    assert result["discoverable_results"] >= 30
+    assert result["opening_recipes"] >= 5
+    assert result["results_with_alternatives"] >= 12
+    assert result["supplies"] > result["starters"]
+    assert result["closure_rounds"][-1]["total_owned"] == result["concepts"]
+    assert set(result["closure_rounds"][0]["unlocked_tiers"]) == set()
+
+
+def test_catalog_uses_same_recipes_for_every_optional_goal(reviewed_files):
+    catalog = B.build_catalog(*reviewed_files)
+    assert len({tuple(r["pair"]) for r in catalog["recipes"]}) == len(catalog["recipes"])
+    assert all(set(g) == {"id", "title", "target"} for g in catalog["goals"])
+    assert all("target" not in r and "goal" not in r for r in catalog["recipes"])
+    assert {r["role"] for r in catalog["reviews"]} == {"factual", "quality"}
+    assert all(r["sources"][0].startswith("https://example.test/")
+               for r in catalog["recipes"])
+
+
+def test_catalog_validates_with_serving_loader(reviewed_files):
+    from cat_de_roman_esti.wordgames.discovery_world import validate_world
+
+    catalog = B.build_catalog(*reviewed_files)
+    world = validate_world(catalog)
+    assert len(world.concepts) == B.audit(catalog)["concepts"]
+
+
+def test_editorial_descriptions_keep_original_fixes_and_provenance(candidate):
+    old = {c["id"]: c for c in json.loads(B.BASELINE.read_bytes())["concepts"]}
+    current = {c["id"]: c for c in candidate["concepts"]}
+    assert all(current[cid] == concept for cid, concept in old.items())
+    for concept in candidate["concepts"]:
+        assert concept["source"] == concept["snapshot"]["source"]
+        assert concept["redistributable"] == concept["snapshot"]["redistributable"]
+
+
+@pytest.mark.parametrize("role_index", [1, 2])
+@pytest.mark.parametrize("change", [
+    lambda r: r.update(candidate_sha256="0" * 64),
+    lambda r: r["items"].pop(),
+    lambda r: r["items"].append(copy.deepcopy(r["items"][0])),
+    lambda r: r["items"][0].update(id="unknown"),
+    lambda r: r["items"][0].update(verdict="hold"),
+    lambda r: r["items"][0].update(verdict="reject"),
+    lambda r: r["items"][0].update(rationale=""),
+    lambda r: r["items"][0].update(sources=["file:///private"]),
+    lambda r: r.update(world_verdict="reject"),
+    lambda r: r.update(world_rationale=""),
+])
+def test_incomplete_stale_or_rejected_review_never_builds(reviewed_files, role_index, change):
+    mutate(reviewed_files[role_index], change)
+    with pytest.raises(ValueError):
+        B.build_catalog(*reviewed_files)
+
+
+def test_factual_acceptance_requires_checked_sources(reviewed_files):
+    mutate(reviewed_files[1], lambda r: r["items"][0].update(sources=[]))
+    with pytest.raises(ValueError, match="checked source"):
+        B.build_catalog(*reviewed_files)
+
+
+def test_same_reviewer_cannot_supply_both_judgments(reviewed_files):
+    mutate(reviewed_files[2], lambda r: r.update(reviewer="test-factual"))
+    with pytest.raises(ValueError, match="independent"):
+        B.build_catalog(*reviewed_files)
+
+
+def test_candidate_and_all_concept_metadata_are_source_bound(reviewed_files):
+    mutate(reviewed_files[0], lambda r: r["concepts"][0].update(redistributable=True))
+    with pytest.raises(ValueError, match="current editorial generator"):
+        B.build_catalog(*reviewed_files)
+
+
+def test_stale_kg_binding_rejected_before_review(reviewed_files):
+    mutate(reviewed_files[0], lambda r: r["bindings"].update(kg_sha256="0" * 64))
+    with pytest.raises(ValueError, match="stale source"):
+        B.build_catalog(*reviewed_files)
+
+
+def test_automatic_supplies_do_not_unlock_themselves(candidate):
+    candidate["unlocks"][0]["after_discoveries"] = B.MAX_CONCEPTS
+    with pytest.raises(ValueError, match="unreachable"):
+        B.audit(candidate)
+
+
+@pytest.mark.parametrize("mutation", [
+    lambda c: c["recipes"].append({**c["recipes"][0], "id": "duplicate-pair"}),
+    lambda c: c["recipes"][0].update(pair=[c["recipes"][0]["pair"][0]] * 2),
+    lambda c: c["recipes"][0].update(result=c["world"]["starter_ids"][0]),
+    lambda c: c["recipes"][0].update(result=c["unlocks"][0]["concept_ids"][0]),
+    lambda c: c["unlocks"][0]["concept_ids"].append(c["world"]["starter_ids"][0]),
+    lambda c: c["goals"][0].update(target=c["world"]["starter_ids"][0]),
+])
+def test_ambiguous_or_forged_progression_rejected(candidate, mutation):
+    mutation(candidate)
+    with pytest.raises(ValueError):
+        B.audit(candidate)
+
+
+@pytest.mark.parametrize("value", ["https://", "javascript:alert(1)", "http://x:bad",
+                                  "https://user:pass@example.test", "https://x y"])
+def test_source_urls_cannot_smuggle_other_schemes_or_credentials(value):
+    assert B.valid_url(value) is False
+
+
+def test_generate_candidate_cannot_replace_runtime_catalog(monkeypatch, tmp_path):
+    target = tmp_path / "catalog.json"
+    target.write_text("untouched")
+    monkeypatch.setattr(B, "CATALOG", target)
+    monkeypatch.setattr(sys, "argv", ["builder", "--candidate", str(target),
+                                    "--generate-candidate"])
+    with pytest.raises(ValueError, match="cannot replace package"):
+        B.main()
+    assert target.read_text() == "untouched"
+
+
+def test_audit_output_cannot_replace_runtime_catalog(monkeypatch, tmp_path):
+    target = tmp_path / "catalog.json"
+    target.write_text("untouched")
+    monkeypatch.setattr(B, "CATALOG", target)
+    monkeypatch.setattr(sys, "argv", ["builder", "--candidate", str(tmp_path / "candidate.json"),
+                                    "--generate-candidate", "--audit", str(target)])
+    with pytest.raises(ValueError, match="audit cannot replace package"):
+        B.main()
+    assert target.read_text() == "untouched"
+
+
+def test_rejected_review_does_not_touch_published_bytes(monkeypatch, tmp_path, reviewed_files):
+    target = tmp_path / "catalog.json"
+    target.write_text("untouched")
+    monkeypatch.setattr(B, "CATALOG", target)
+    mutate(reviewed_files[1], lambda r: r["items"][0].update(verdict="hold"))
+    monkeypatch.setattr(sys, "argv", [
+        "builder", "--candidate", str(reviewed_files[0]),
+        "--factual-review", str(reviewed_files[1]), "--quality-review", str(reviewed_files[2]),
+        "--write",
+    ])
+    with pytest.raises(ValueError):
+        B.main()
+    assert target.read_text() == "untouched"
+
+
+@pytest.fixture
+def final_files(tmp_path, reviewed_files):
+    catalog = B.build_catalog(*reviewed_files)
+    import hashlib
+
+    catalog_sha = hashlib.sha256(B.json_bytes(catalog)).hexdigest()
+    audit = tmp_path / "live-audit.json"
+    audit.write_bytes(B.json_bytes({
+        "verdict": "accept", "catalog_sha256": catalog_sha,
+        "runtime_sources": [{"path": p, "sha256": B.file_sha(B.ROOT / p)}
+                            for p in B.RUNTIME_SOURCES],
+    }))
+    reviews = []
+    for role in ("factual", "quality"):
+        path = tmp_path / f"final-{role}.json"
+        path.write_bytes(B.json_bytes({
+            "kind": B.FINAL_REVIEW_KIND, "role": role, "reviewer": f"test-{role}",
+            "catalog_sha256": catalog_sha, "audit_sha256": B.file_sha(audit),
+            "verdict": "accept", "rationale": "Test fixture final review.",
+        }))
+        reviews.append(path)
+    return catalog, audit, *reviews
+
+
+def test_complete_current_final_review_gate_accepts(final_files):
+    B.confirm_final_reviews(*final_files)
+
+
+def test_final_gate_and_actual_runtime_auditor_bind_the_same_files():
+    import audit_alchimie_discovery_world as live
+
+    assert set(B.RUNTIME_SOURCES) == set(live.RUNTIME_SOURCES)
+
+
+@pytest.mark.parametrize("role_index", [2, 3])
+@pytest.mark.parametrize("mutation", [
+    lambda r: r.update(catalog_sha256="0" * 64),
+    lambda r: r.update(audit_sha256="0" * 64),
+    lambda r: r.update(verdict="hold"),
+    lambda r: r.update(reviewer="unrelated-reviewer"),
+    lambda r: r.update(rationale=""),
+])
+def test_stale_or_unapproved_final_review_rejected(final_files, role_index, mutation):
+    mutate(final_files[role_index], mutation)
+    with pytest.raises(ValueError):
+        B.confirm_final_reviews(*final_files)
+
+
+@pytest.mark.parametrize("mutation", [
+    lambda r: r["runtime_sources"].pop(),
+    lambda r: r["runtime_sources"][0].update(sha256="0" * 64),
+    lambda r: r["runtime_sources"].append({"path": "unrelated", "sha256": "0" * 64}),
+    lambda r: r.update(verdict="reject"),
+    lambda r: r.update(catalog_sha256="0" * 64),
+])
+def test_final_gate_requires_every_current_runtime_source(final_files, mutation):
+    mutate(final_files[1], mutation)
+    with pytest.raises(ValueError):
+        B.confirm_final_reviews(*final_files)
+
+
+def test_package_write_requires_final_review_gate(monkeypatch, tmp_path, reviewed_files):
+    target = tmp_path / "catalog.json"
+    target.write_text("untouched")
+    monkeypatch.setattr(B, "CATALOG", target)
+    monkeypatch.setattr(sys, "argv", [
+        "builder", "--candidate", str(reviewed_files[0]),
+        "--factual-review", str(reviewed_files[1]), "--quality-review", str(reviewed_files[2]),
+        "--write",
+    ])
+    with pytest.raises(ValueError, match="two final reviews"):
+        B.main()
+    assert target.read_text() == "untouched"
+
+
+def test_expansion_preserves_all_prior_recipes_goals_and_collections():
+    # Keep the historical111→221 expansion and its three save generations exact;
+    # later world growth has its own checks and must not rewrite these expectations.
+    old = archived_candidate(
+        "v92-alchimie-more-concepts/candidates.json",
+        "fc863ff35cebe88d1b2364fc3693f7d765bb33606d9a3191b1d8532540c37209",
+    )
+    candidate = archived_candidate(
+        "v92-entry-creation-and-gui/alchimie/candidate.json",
+        "ac3408616889175f21cd592b8d71ad0a3f63e95054705da8491097d39c0bf1da",
+    )
+    before, after = B.audit(old), B.audit(candidate)
+    assert after["concepts"] >= before["concepts"] + 25
+    assert after["discoverable_results"] >= before["discoverable_results"] + 15
+    assert after["recipes"] >= before["recipes"] + 30
+    assert candidate["compatible_versions"][0]["recipe_hash"] == (
+        "8b52b6ca9f7d83c804b8ed5cfb3489c6215b64b116583f1fc393569d551b182c"
+    )
+    assert {v["recipe_hash"] for v in candidate["compatible_versions"]} == {
+        "8b52b6ca9f7d83c804b8ed5cfb3489c6215b64b116583f1fc393569d551b182c",
+        "a5675c4564aea53abe956b8eacb609af65de08e42360f722bec4b6c3bb112b67",
+        "9021bd4f4dde8efbb9a747d9ec6574852f6da4346cbf242f99211c21b39c8dfc",
+    }
+
+
+def test_recipe_reuse_keeps_complete221_book_and_preparation_sources():
+    old = archived_candidate(
+        "v92-alchimie-large-concepts/candidate.json",
+        "da5a2a1df2790a2cd3f9db0806f8112c7b0ccdb63ed6d7d2e3f418542d4e209a",
+    )
+    candidate = archived_candidate(
+        "v92-entry-creation-and-gui/alchimie/candidate.json",
+        "ac3408616889175f21cd592b8d71ad0a3f63e95054705da8491097d39c0bf1da",
+    )
+    assert len(old["concepts"]) == 221 and len(old["recipes"]) == 285
+    for field in ("concepts", "world", "unlocks", "goals"):
+        assert candidate[field] == old[field]
+    assert all(row in candidate["recipes"] for row in old["recipes"])
+    old_ids = {row["id"] for row in old["recipes"]}
+    additions = [row for row in candidate["recipes"] if row["id"] not in old_ids]
+    assert {row["id"] for row in additions} == {
+        "sandvis-omleta", "salata-cartofi-ou-fiert", "piure-cartofi-copti-unt",
+    }
+    assert all(row["sources"] == B.SOURCE.RECIPE_SOURCES[row["id"]] for row in additions)
+    assert B.audit(old)["terminal_results"] - B.audit(candidate)["terminal_results"] == 3
+
+
+def drop_original_concept(candidate):
+    original_id = json.loads(B.BASELINE.read_bytes())["concepts"][0]["id"]
+    candidate["concepts"] = [c for c in candidate["concepts"] if c["id"] != original_id]
+
+
+@pytest.mark.parametrize("mutation", [
+    lambda c: c["recipes"].pop(0),
+    lambda c: c["recipes"][0].update(result=c["recipes"][4]["result"]),
+    lambda c: c["world"]["starter_ids"].pop(),
+    lambda c: c["unlocks"][0].update(after_discoveries=4),
+    lambda c: c["goals"].pop(0),
+    drop_original_concept,
+])
+def test_incompatible_editorial_changes_cannot_claim_old_save_support(candidate, mutation):
+    mutation(candidate)
+    with pytest.raises(ValueError, match="original"):
+        B.compatible_versions(candidate)
+
+
+def test_archived_save_authority_is_bound_to_the_actual_reviewed_bytes(monkeypatch, tmp_path):
+    edited = tmp_path / "edited-history.json"
+    old = json.loads(B.BASELINE.read_bytes())
+    old["recipes"][0]["result"] = "invented"
+    edited.write_bytes(B.json_bytes(old))
+    monkeypatch.setattr(B, "BASELINE", edited)
+    with pytest.raises(ValueError, match="archive changed"):
+        B.candidate()
+
+
+@pytest.mark.parametrize("role_index", [1, 2])
+@pytest.mark.parametrize("change", [
+    lambda r: r.pop("concepts"),
+    lambda r: r["concepts"].pop(),
+    lambda r: r["concepts"].append(copy.deepcopy(r["concepts"][0])),
+    lambda r: r["concepts"][0].update(id="unknown-concept"),
+    lambda r: r["concepts"][0].update(concept_sha256="0" * 64),
+    lambda r: r["concepts"][0].update(verdict="hold"),
+    lambda r: r["concepts"][0].update(rationale=""),
+    lambda r: r["concepts"][0].update(sources=["file:///private"]),
+])
+def test_every_concept_requires_complete_bound_review(reviewed_files, role_index, change):
+    mutate(reviewed_files[role_index], change)
+    with pytest.raises(ValueError, match="concept"):
+        B.build_catalog(*reviewed_files)
+
+
+def _new_concept_review(reviewed_files, monkeypatch):
+    """Exercise a new concept even during waves that only add recipes."""
+    candidate = json.loads(reviewed_files[0].read_bytes())
+    old = json.loads(B.BASELINE.read_bytes())
+    concept_id = candidate["concepts"][0]["id"]
+    old["concepts"] = [row for row in old["concepts"] if row["id"] != concept_id]
+    baseline = reviewed_files[0].parent / "prior-without-concept.json"
+    baseline.write_bytes(B.json_bytes(old))
+    monkeypatch.setattr(B, "BASELINE", baseline)
+    return candidate, concept_id
+
+
+def _read_factual_concepts(reviewed_files, candidate):
+    return B.read_review(
+        reviewed_files[1], "factual", B.file_sha(reviewed_files[0]),
+        {row["id"] for row in candidate["recipes"]}, candidate["concepts"],
+    )
+
+
+def test_new_concept_cannot_forge_inherited_approval(reviewed_files, monkeypatch):
+    candidate, concept_id = _new_concept_review(reviewed_files, monkeypatch)
+    mutate(reviewed_files[1], lambda review: next(
+        row for row in review["concepts"] if row["id"] == concept_id
+    ).update(inherited=True))
+    with pytest.raises(ValueError, match="inherited"):
+        _read_factual_concepts(reviewed_files, candidate)
+
+
+def test_new_concept_needs_factual_sources(reviewed_files, monkeypatch):
+    candidate, concept_id = _new_concept_review(reviewed_files, monkeypatch)
+    mutate(reviewed_files[1], lambda review: next(
+        row for row in review["concepts"] if row["id"] == concept_id
+    ).update(sources=[]))
+    with pytest.raises(ValueError, match="checked sources"):
+        _read_factual_concepts(reviewed_files, candidate)
+
+
+def test_reviewed_unchanged_concepts_can_inherit_without_new_source_claims(reviewed_files):
+    old_ids = {c["id"] for c in json.loads(B.BASELINE.read_bytes())["concepts"]}
+    def inherit(review):
+        for row in review["concepts"]:
+            if row["id"] in old_ids:
+                row.update(inherited=True, sources=[])
+    for path in reviewed_files[1:]:
+        mutate(path, inherit)
+    assert B.build_catalog(*reviewed_files)["concepts"]
+
+
+# The two original positive inheritance contracts describe the V96 editorial
+# baseline. Their original bodies stay exact; current-source controls are below.
+_EDITORIAL_POSITIVE_CONTEXT_TESTS = frozenset({
+    "test_editorial_descriptions_keep_original_fixes_and_provenance",
+    "test_reviewed_unchanged_concepts_can_inherit_without_new_source_claims",
+})
+_EDITORIAL_HISTORICAL_KG_SHA = "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109"
+_EDITORIAL_BASELINE_SHA = "6de6b98871c43e539402fff9680474cc31afe22f5b4923c13dbafa9bd5465496"
+_EDITORIAL_SOURCE_SHA = "66ade386c05e25f8b58990d127834c5803206e4565600256d55b09658bd23e2b"
+_EDITORIAL_RUBRIC_SHA = "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101"
+
+
+def _editorial_context_read(path, expected_sha256, limit):
+    path = Path(path)
+    assert path.is_file() and not path.is_symlink()
+    with path.open("rb") as stream:
+        raw = stream.read(limit + 1)
+    assert len(raw) <= limit
+    assert hashlib.sha256(raw).hexdigest() == expected_sha256
+    return raw
+
+
+@contextmanager
+def _historical_editorial_world_context(monkeypatch, temporary_root):
+    """Use authenticated original KG bytes, then clear the scoped loader cache."""
+    from cat_de_roman_esti.wordgames import service as service_loader
+
+    assert Path(B.ROOT).resolve() == ROOT
+    assert Path(B.BASELINE).resolve() == (
+        ROOT / "docs/reviews/v96-words-and-input-clarity/integration/alchimie/candidate.json"
+    )
+    assert B.BASELINE_SHA == _EDITORIAL_BASELINE_SHA
+    baseline = _editorial_context_read(B.BASELINE, _EDITORIAL_BASELINE_SHA, 2 << 20)
+    assert json.loads(baseline)["bindings"]["kg_sha256"] == _EDITORIAL_HISTORICAL_KG_SHA
+    assert Path(B.SOURCE.__file__).resolve() == ROOT / "scripts/alchimie_discovery_recipe_source.py"
+    _editorial_context_read(B.SOURCE.__file__, _EDITORIAL_SOURCE_SHA, 1 << 20)
+    compressed = _editorial_context_read(
+        ROOT / "docs/reviews/v1-testing-release/content/kg-before-v1.json.gz",
+        "b0cfac884d0d02d5218456fca77c0b91e1135238de2d5dde35f6636f78efcbf6",
+        1 << 20,
+    )
+    assert len(compressed) == 431885
+    with gzip.GzipFile(fileobj=io.BytesIO(compressed)) as stream:
+        historical_kg = stream.read((4 << 20) + 1)
+    assert len(historical_kg) == 3668778
+    assert hashlib.sha256(historical_kg).hexdigest() == _EDITORIAL_HISTORICAL_KG_SHA
+    rubric = _editorial_context_read(ROOT / "docs/CRITIQUE_RUBRIC.md", _EDITORIAL_RUBRIC_SHA, 32 << 10)
+    assert not temporary_root.exists() and not temporary_root.is_symlink()
+    temporary_root.mkdir(mode=0o700)
+    for relative, raw in (
+        ("cat_de_roman_esti/fixtures/kg_sample.json", historical_kg),
+        ("docs/CRITIQUE_RUBRIC.md", rubric),
+    ):
+        destination = temporary_root / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        with destination.open("xb") as stream:
+            stream.write(raw)
+        assert destination.read_bytes() == raw
+    fixture = temporary_root / "cat_de_roman_esti/fixtures/kg_sample.json"
+    original_root = B.ROOT
+    original_baseline = B.BASELINE
+    original_source = B.SOURCE
+    original_catalog = B.CATALOG
+    service_loader.get_service.cache_clear()
+    try:
+        with monkeypatch.context() as scoped:
+            scoped.setattr(B, "ROOT", temporary_root)
+            scoped.setenv("CAT_KG_FIXTURE", str(fixture))
+            try:
+                yield temporary_root
+            finally:
+                service_loader.get_service.cache_clear()
+    finally:
+        service_loader.get_service.cache_clear()
+        assert B.ROOT is original_root
+        assert B.BASELINE is original_baseline
+        assert B.SOURCE is original_source
+        assert B.CATALOG is original_catalog
+
+
+@pytest.fixture(autouse=True)
+def _exact_positive_editorial_world_context(request):
+    # Autouse setup precedes candidate/reviewed_files. Other cases obtain no
+    # extra tmp_path or monkeypatch fixture through this context.
+    name = request.node.originalname
+    if name not in _EDITORIAL_POSITIVE_CONTEXT_TESTS:
+        yield
+        return
+    monkeypatch = request.getfixturevalue("monkeypatch")
+    temporary_root = request.getfixturevalue("tmp_path") / "genuine-editorial-history"
+    with _historical_editorial_world_context(monkeypatch, temporary_root):
+        yield
+
+
+def test_current_source7_world_preserves_genuine_source6_rows_and_excludes_salary():
+    from tests import content_history as history
+    from cat_de_roman_esti.wordgames import service as service_loader
+
+    assert Path(B.ROOT).resolve() == ROOT
+    kg_raw = _editorial_context_read(
+        ROOT / "cat_de_roman_esti/fixtures/kg_sample.json",
+        "3412064a27c79e47b1b4205383e45c156316857bc8a6f6cb303bc65478501749",
+        4 << 20,
+    )
+    world_raw = _editorial_context_read(
+        ROOT / "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json",
+        "1fcd017b33edf3600098306b19c012f709c8a50b905be9d259a6a1e2cbb84049",
+        2 << 20,
+    )
+    previous_raw = history.historical_source6_v17_full_bytes("alchimie_discovery_world_v92.json")
+    assert hashlib.sha256(previous_raw).hexdigest() == (
+        "8f013a8f6b54a97a768a34c42e669addc4f5ab9823302befbe15ad811cae77ad"
+    )
+    current, previous = json.loads(world_raw), json.loads(previous_raw)
+    for field in ("schema_version", "concepts", "recipes", "world", "goals", "unlocks", "compatible_versions"):
+        assert current[field] == previous[field]
+    assert len(current["concepts"]) == 252 and len(current["recipes"]) == 352
+    assert len(current["goals"]) == 32 and len(current["compatible_versions"]) == 10
+    assert current["bindings"]["kg_sha256"] == hashlib.sha256(kg_raw).hexdigest()
+    salary = "n_v4soc_salariu"
+    assert salary not in {row["id"] for row in current["concepts"]}
+    assert all(salary != row["result"] and salary not in row["pair"] for row in current["recipes"])
+    assert service_loader.get_service().resolve("leafă") == salary
+
+
+def test_current_alias_changed_concepts_cannot_claim_inherited_v96_approval(reviewed_files, tmp_path):
+    assert Path(B.ROOT).resolve() == ROOT
+    _editorial_context_read(
+        ROOT / "cat_de_roman_esti/fixtures/kg_sample.json",
+        "3412064a27c79e47b1b4205383e45c156316857bc8a6f6cb303bc65478501749",
+        4 << 20,
+    )
+    candidate = json.loads(reviewed_files[0].read_bytes())
+    previous = json.loads(_editorial_context_read(B.BASELINE, _EDITORIAL_BASELINE_SHA, 2 << 20))
+    old = {row["id"]: row for row in previous["concepts"]}
+    current = {row["id"]: row for row in candidate["concepts"]}
+    changed = {identity for identity, row in old.items() if current[identity] != row}
+    assert changed == {"n_v24_food_pantry_ulei", "n_v4gas_rosie"}
+    original_review = json.loads(reviewed_files[1].read_bytes())
+    recipe_ids = {row["id"] for row in candidate["recipes"]}
+    for identity in sorted(changed):
+        review = copy.deepcopy(original_review)
+        row = next(row for row in review["concepts"] if row["id"] == identity)
+        row.update(inherited=True, sources=[])
+        path = tmp_path / ("invalid-inherited-" + identity + ".json")
+        with path.open("xb") as stream:
+            stream.write(B.json_bytes(review))
+        with pytest.raises(ValueError, match="altered inherited concept"):
+            B.read_review(
+                path, "factual", B.file_sha(reviewed_files[0]), recipe_ids,
+                candidate["concepts"],
+            )
+
+
+def test_historical_editorial_context_restores_root_environment_and_loader_after_error(monkeypatch, tmp_path):
+    from cat_de_roman_esti.wordgames import service as service_loader
+
+    original_root = B.ROOT
+    original_baseline = B.BASELINE
+    original_source = B.SOURCE
+    original_catalog = B.CATALOG
+    had_fixture = "CAT_KG_FIXTURE" in os.environ
+    original_fixture = os.environ.get("CAT_KG_FIXTURE")
+    with _historical_editorial_world_context(monkeypatch, tmp_path / "normal-exit") as historical:
+        assert B.ROOT == historical and B.ROOT is not original_root
+        assert os.environ["CAT_KG_FIXTURE"] == str(historical / "cat_de_roman_esti/fixtures/kg_sample.json")
+        assert service_loader.get_service().resolve("untdelemn") is None
+        assert service_loader.get_service().resolve("tomată") is None
+        assert service_loader.get_service.cache_info().currsize == 1
+    assert B.ROOT is original_root and B.BASELINE is original_baseline
+    assert B.SOURCE is original_source and B.CATALOG is original_catalog
+    assert ("CAT_KG_FIXTURE" in os.environ) == had_fixture
+    assert os.environ.get("CAT_KG_FIXTURE") == original_fixture
+    assert service_loader.get_service.cache_info().currsize == 0
+    with pytest.raises(RuntimeError, match="owned context restoration control"):
+        with _historical_editorial_world_context(monkeypatch, tmp_path / "exception-exit"):
+            assert service_loader.get_service().resolve("untdelemn") is None
+            raise RuntimeError("owned context restoration control")
+    assert B.ROOT is original_root and B.BASELINE is original_baseline
+    assert B.SOURCE is original_source and B.CATALOG is original_catalog
+    assert ("CAT_KG_FIXTURE" in os.environ) == had_fixture
+    assert os.environ.get("CAT_KG_FIXTURE") == original_fixture
+    assert service_loader.get_service.cache_info().currsize == 0
