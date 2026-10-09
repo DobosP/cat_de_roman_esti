@@ -4,6 +4,7 @@ import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { chromium } from "../frontend/node_modules/playwright/index.mjs";
+import { ROMANIAN_FONT_SOURCES } from "../frontend/scripts/check-bundle-budget.mjs";
 
 const root = process.cwd(), originalProfile = process.argv[2] === "original", normalizedProfile = process.argv[2] === "normalized-react";
 const reactProfile = originalProfile || normalizedProfile;
@@ -190,6 +191,33 @@ fs.writeFileSync(`${output}/browser-pw-journeys.json`, JSON.stringify({ schema: 
 // Independently fetch the actual image identity and every emitted manifest asset.
 // The server identity endpoint is implemented by M1 delivery; absence fails full.
 const manifestBytes = fs.readFileSync("go-backend/embedfs/dist/.vite/manifest.json"), manifest = JSON.parse(manifestBytes);
+// Independently resolve exact source identities from the actual embedded manifest.
+const fontSources = new Set(ROMANIAN_FONT_SOURCES), fontFiles = new Set(), fontURLs = new Set();
+const fontBindings = [];
+for (const [key, item] of Object.entries(manifest)) {
+  if (!item?.src?.endsWith(".woff2") && !item?.file?.endsWith(".woff2")) continue;
+  assert.ok(fontSources.has(item.src), "Unowned or duplicated font Src"); fontSources.delete(item.src);
+  assert.match(item.file, /^assets\/[A-Za-z0-9][A-Za-z0-9._-]*\.woff2$/);
+  assert.ok(!item.isEntry && !["imports", "dynamicImports", "css", "assets"].some((field) => item[field]?.length), "Font record must not be a code owner");
+  assert.ok(!fontFiles.has(item.file)); fontFiles.add(item.file);
+  const url = new URL(`/${item.file}`, process.env.GATE_APP_URL);
+  assert.equal(url.origin, new URL(process.env.GATE_APP_URL).origin); assert.equal(url.pathname, `/${item.file}`);
+  assert.equal(url.search + url.hash + url.username + url.password, ""); assert.ok(!fontURLs.has(url.href)); fontURLs.add(url.href);
+  const local = path.resolve(root, "go-backend/embedfs/dist", item.file);
+  assert.equal(fs.realpathSync(local), local); assert.ok(fs.lstatSync(local).isFile());
+  assert.ok(fs.readFileSync(local).length > 0, "Owned WOFF2 bytes required");
+  fontBindings.push({ manifest_key: key, source: item.src, file: item.file, url: url.href });
+}
+assert.equal(fontSources.size, 0); assert.equal(fontBindings.length, 4);
+fontBindings.sort((a, b) => a.source.localeCompare(b.source));
+const fontStartup = new Set(), fontOwners = new Set();
+function visitFontOwner(key) {
+  if (fontOwners.has(key)) return; fontOwners.add(key);
+  const item = manifest[key]; assert.ok(item);
+  for (const file of item.assets || []) if (file.endsWith(".woff2")) { assert.ok(fontFiles.has(file)); fontStartup.add(file); }
+  for (const key of item.imports || []) visitFontOwner(key);
+}
+visitFontOwner("index.html"); assert.deepEqual([...fontStartup].sort(), [...fontFiles].sort());
 const response = await fetch(new URL("/api/gui-build", process.env.GATE_APP_URL));
 assert.equal(response.status, 200, "M1 actual embedded build identity required");
 const identity = await response.json();
@@ -203,13 +231,16 @@ function visit(entry) {
   for (const imported of [...item.imports || [], ...item.dynamicImports || []]) visit(imported);
 }
 visit("index.html");
+for (const file of fontFiles) assert.ok(files.has(file), "Required font missing from all-manifest byte witness");
 const assets = [];
 for (const file of [...files].sort()) {
   const url = new URL(`/${file}`, process.env.GATE_APP_URL).href, actual = await fetch(url);
   assert.equal(actual.status, 200); const data = Buffer.from(await actual.arrayBuffer()), local = fs.readFileSync(`go-backend/embedfs/dist/${file}`);
   assert.deepEqual(data, local); assets.push({ file, url, bytes: data.length, sha256: hash(data) });
 }
-fs.writeFileSync(`${output}/app-witness.json`, JSON.stringify({ schema: 1, sha: process.env.GATE_SHA, tree_sha256: process.env.GATE_TREE_SHA256, app_image_id: process.env.GATE_APP_IMAGE_ID, identity, entry: "index.html", assets }, null, 2) + "\n");
+const fontAssets = fontBindings.map((font) => ({ ...font, ...assets.find((asset) => asset.file === font.file) }));
+assert.ok(fontAssets.every((font) => font.bytes > 0 && font.sha256));
+fs.writeFileSync(`${output}/app-witness.json`, JSON.stringify({ schema: 1, sha: process.env.GATE_SHA, tree_sha256: process.env.GATE_TREE_SHA256, app_image_id: process.env.GATE_APP_IMAGE_ID, identity, entry: "index.html", assets, fontAssets }, null, 2) + "\n");
 const browser = await chromium.launch();
 try {
   const observations = [], violations = [];
@@ -221,6 +252,12 @@ try {
       window.__cspViolations = [];
       document.addEventListener("securitypolicyviolation", (event) => window.__cspViolations.push({ directive: event.violatedDirective, effectiveDirective: event.effectiveDirective, disposition: event.disposition, blocked: ["inline", "eval", "wasm-eval", "trusted-types-policy", "trusted-types-sink"].includes(event.blockedURI) ? event.blockedURI : "[redacted]" }));
     });
+    const fontRequests = [];
+    page.on("request", (request) => {
+      if (request.resourceType() === "font") fontRequests.push({ url: fontURLs.has(request.url()) ? request.url() : "[unowned font request]", method: request.method() });
+    });
+    const fontsFinished = Promise.all(fontBindings.map((font) => page.waitForResponse((response) => response.url() === font.url && response.request().resourceType() === "font")))
+      .then((responses) => ({ responses }), (error) => ({ error }));
     const html = await page.goto(new URL(route, process.env.GATE_APP_URL).href);
     const header = process.env.CSP_STAGE === "enforced" ? "content-security-policy" : "content-security-policy-report-only";
     assert.ok(html.headers()[header], `Actual ${header} required`);
@@ -236,15 +273,40 @@ try {
     assert.ok(html.headers()[header].includes("script-src-attr 'none'"));
     assert.ok(html.headers()[header].includes("style-src-attr 'none'"));
     await page.locator(".screen").first().waitFor();
+    await page.evaluate(() => document.fonts.ready.then(() => undefined));
     const observation = await page.evaluate(() => {
       const scripts = [...document.querySelectorAll("script")], module = scripts.find((item) => item.type === "module");
       const css = [...document.querySelectorAll('link[rel="stylesheet"]')].map((item) => item.href);
       const preloads = [...document.querySelectorAll('link[rel="modulepreload"]')].map((item) => item.href);
       const metas = [...document.querySelectorAll('meta[property="csp-nonce"]')];
       const assetNonces = [...document.querySelectorAll('link[rel="stylesheet"],link[rel="modulepreload"]')].map((item) => item.nonce);
-      return { nonces: scripts.map((item) => item.nonce), meta: metas.map((item) => ({ content: item.content, nonce: item.nonce })), assetNonces,
+      const fontPreloads = [...document.querySelectorAll('link[rel~="preload"]')].map((item) => ({ href: item.href, rel: item.getAttribute("rel"), as: item.getAttribute("as"), type: item.getAttribute("type"), crossorigin: item.getAttribute("crossorigin"), nonce: item.nonce, attributes: [...item.attributes].map((attr) => attr.name) }));
+      const fontFaces = [...document.fonts].map((item) => ({ family: item.family, status: item.status, style: item.style, weight: item.weight, unicodeRange: item.unicodeRange }));
+      return { fontPreloads, fontStatus: document.fonts.status, fontFaces, nonces: scripts.map((item) => item.nonce), meta: metas.map((item) => ({ content: item.content, nonce: item.nonce })), assetNonces,
         module: module?.src, css, preloads, json: scripts.filter((item) => item.type === "application/json").length, violations: window.__cspViolations };
     });
+    const acquiredFonts = await fontsFinished;
+    assert.ok(!acquiredFonts.error, acquiredFonts.error?.message);
+    const fontResponses = [];
+    for (const [index, actual] of acquiredFonts.responses.entries()) {
+      const font = fontBindings[index];
+      assert.equal(actual.url(), font.url); assert.equal(actual.status(), 200);
+      assert.equal(actual.request().resourceType(), "font"); assert.equal(actual.request().method(), "GET");
+      assert.match(actual.headers()["content-type"] || "", /^font\/woff2(?:;|$)/);
+      const bytes = Buffer.from(await actual.body()), local = fs.readFileSync(`go-backend/embedfs/dist/${font.file}`);
+      assert.deepEqual(bytes, local); assert.ok(bytes.length > 0);
+      fontResponses.push({ source: font.source, file: font.file, url: font.url, status: actual.status(), bytes: bytes.length, sha256: hash(bytes), resource_type: "font" });
+    }
+    assert.ok(fontRequests.every((item) => fontURLs.has(item.url) && item.method === "GET"), "Unowned actual browser font request");
+    assert.deepEqual([...new Set(fontRequests.map((item) => item.url))].sort(), [...fontURLs].sort());
+    assert.equal(observation.fontPreloads.length, 4);
+    assert.deepEqual(observation.fontPreloads.map((item) => item.href).sort(), [...fontURLs].sort());
+    for (const font of observation.fontPreloads) {
+      assert.deepEqual(font.attributes.sort(), ["as", "crossorigin", "href", "nonce", "rel", "type"]);
+      assert.equal(font.rel, "preload"); assert.equal(font.as, "font"); assert.equal(font.type, "font/woff2");
+      assert.equal(font.crossorigin, "anonymous"); assert.equal(font.nonce, headerNonce);
+    }
+    assert.equal(observation.fontStatus, "loaded"); assert.ok(observation.fontFaces.every((item) => item.status !== "error"));
     assert.ok(observation.nonces.length > 0 && observation.nonces.every((nonce) => nonce === headerNonce));
     assert.deepEqual(observation.meta, [{ content: headerNonce, nonce: headerNonce }]);
     assert.ok(observation.assetNonces.length > 0 && observation.assetNonces.every((nonce) => nonce === headerNonce));
@@ -254,7 +316,8 @@ try {
     observations.push({ page: route, nonce_sha256: hash(observation.nonces[0]), scripts: observation.nonces.length, json: observation.json,
       assetLinks: observation.css.length + observation.preloads.length, module: new URL(observation.module).pathname, module_url: observation.module,
       css: observation.css.map((url) => new URL(url).pathname), css_urls: observation.css,
-      preloads: observation.preloads.map((url) => new URL(url).pathname), preload_urls: observation.preloads });
+      preloads: observation.preloads.map((url) => new URL(url).pathname), preload_urls: observation.preloads,
+      fonts: { links: observation.fontPreloads, requests: fontRequests, responses: fontResponses, status: observation.fontStatus, faces: observation.fontFaces } });
     await page.close();
   }
   fs.writeFileSync(`${output}/csp-measurement.json`, JSON.stringify({ schema: 1, sha: process.env.GATE_SHA, tree_sha256: process.env.GATE_TREE_SHA256, app_image_id: process.env.GATE_APP_IMAGE_ID, stage: process.env.CSP_STAGE, violations: violations.length, legacy_violations: 0, pages: routes.length, nonceObservations: observations, observedViolations: violations }, null, 2) + "\n");

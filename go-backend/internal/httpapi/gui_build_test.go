@@ -21,6 +21,7 @@ func guiBuildFixture(t *testing.T) (fstest.MapFS, fstest.MapFS, *health.Identity
 		guibuild.ManifestPath:         &fstest.MapFile{Data: []byte(`{"index.html":{"file":"assets/app-1234abcd.js","isEntry":true}}`)},
 		"dist/assets/app-1234abcd.js": &fstest.MapFile{Data: []byte("console.log('fixture')")},
 	}
+	addManagedFixtureFonts(assets, "dist")
 	lock := []byte("{\n  \"schema\": 2, \"test_fixture\": true\n}\n")
 	identity, err := health.NewIdentity(strings.Repeat("a", 40), strings.Repeat("b", 64), assets[guibuild.ManifestPath].Data, lock)
 	if err != nil {

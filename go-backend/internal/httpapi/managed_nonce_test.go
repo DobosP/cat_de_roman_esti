@@ -16,7 +16,7 @@ import (
 )
 
 // Inert synthetic source data; authored NOT RUN. No image/browser/M1 proof.
-const nonceFixtureIndex = "<!doctype html>\r\n<html lang=\"ro\"><head>\r\n<title>Cât &amp; de român?</title><!--exact metadata-->\r\n<script type=\"module\" crossorigin src=\"/assets/app-1234abcd.js\"></script>\r\n<link rel=\"modulepreload\" crossorigin href=\"/assets/shared-87654321.js\" />\r\n<link rel=\"stylesheet\" crossorigin href=\"/assets/app-1234abcd.css\">\r\n</head><body><div id=\"root\"></div></body></html>\r\n"
+const nonceFixtureIndex = "<!doctype html>\r\n<html lang=\"ro\"><head>\r\n<title>Cât &amp; de român?</title><!--exact metadata-->\r\n<script type=\"module\" crossorigin src=\"/assets/app-1234abcd.js\"></script>\r\n<link rel=\"modulepreload\" crossorigin href=\"/assets/shared-87654321.js\" />\r\n<link rel=\"stylesheet\" crossorigin href=\"/assets/app-1234abcd.css\">\r\n" + nonceFixtureFontLinks + "</head><body><div id=\"root\"></div></body></html>\r\n"
 
 func nonceFixtureManifest(t *testing.T) *assets.Manifest {
 	t.Helper()
@@ -27,6 +27,7 @@ func nonceFixtureManifest(t *testing.T) *assets.Manifest {
 		"dist/assets/lazy-1234abcd.js":   {Data: []byte("export {};")},
 		"dist/assets/app-1234abcd.css":   {Data: []byte("body{color:navy}")},
 	}
+	addManagedFixtureFonts(files, "dist")
 	manifest, err := assets.Parse(files, "dist/.vite/manifest.json", "dist", "/")
 	if err != nil {
 		t.Fatal(err)
@@ -92,7 +93,7 @@ func TestManagedNonceShellBytePreservationAndSDKContext(t *testing.T) {
 	meta := `<meta property="csp-nonce" content="` + nonce + `" nonce="` + nonce + `">`
 	stripped := bytes.Replace(body, []byte(meta), nil, 1)
 	stripped = bytes.ReplaceAll(stripped, []byte(` nonce="`+nonce+`"`), nil)
-	if !bytes.Equal(stripped, []byte(nonceFixtureIndex)) || bytes.Count(body, []byte(` nonce="`+nonce+`"`)) != 4 ||
+	if !bytes.Equal(stripped, []byte(nonceFixtureIndex)) || bytes.Count(body, []byte(` nonce="`+nonce+`"`)) != 8 ||
 		bytes.Contains(body, []byte("lazy-1234abcd.js")) {
 		t.Fatal("bytes/static graph/nonce count changed")
 	}

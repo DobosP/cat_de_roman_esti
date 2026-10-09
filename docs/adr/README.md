@@ -129,3 +129,5 @@ and the word-grid reflow; its release, reserve and content decisions remain.
 - [0185](0185-accepted-eager-startup-bundle-accounting.md) — owner-accepted AccountBar startup JS/CSS accounting; unchanged limits, source applied; Linux qualification pending.
 
 - [0186](0186-original-lint-equivalence-for-aria-and-focus.md) — original-source-grounded ARIA/focus advisory equivalence; all genuine guards and runtime assertions retained.
+
+- [0187](0187-m1-font-preload-binding.md) — proposed M1 exact-four owned WOFF2 preload/nonce and actual-browser binding; source UNAPPLIED/UNTESTED, no qualification or performance claim.

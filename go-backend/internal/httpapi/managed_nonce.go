@@ -137,6 +137,10 @@ func newManagedNonceShell(index []byte, manifest *assets.Manifest) (*managedNonc
 	if !ok || !entry.IsEntry {
 		return nil, fmt.Errorf("managed nonce shell requires index entry")
 	}
+	fonts, err := managedFontPreloads(manifest)
+	if err != nil {
+		return nil, err
+	}
 	css, preloads, visited := map[string]bool{}, map[string]bool{}, map[string]bool{}
 	var visit func(string) error
 	visit = func(key string) error {
@@ -324,7 +328,7 @@ func newManagedNonceShell(index []byte, manifest *assets.Manifest) (*managedNonc
 			rel := strings.Fields(strings.ToLower(attrs["rel"]))
 			assetRel := ""
 			for _, part := range rel {
-				if part == "stylesheet" || part == "modulepreload" {
+				if part == "stylesheet" || part == "modulepreload" || part == "preload" {
 					assetRel = part
 				}
 			}
@@ -334,14 +338,22 @@ func newManagedNonceShell(index []byte, manifest *assets.Manifest) (*managedNonc
 			if !inHead || len(rel) != 1 {
 				return nil, fmt.Errorf("unsupported managed asset link")
 			}
-			for key, value := range attrs {
-				if key != "rel" && key != "href" && (key != "crossorigin" || (value != "" && value != "anonymous")) {
-					return nil, fmt.Errorf("unsupported managed asset link attribute")
-				}
-			}
 			expected := css
-			if assetRel == "modulepreload" {
-				expected = preloads
+			if assetRel == "preload" {
+				crossorigin, present := attrs["crossorigin"]
+				if attrs["rel"] != "preload" || attrs["as"] != "font" || attrs["type"] != "font/woff2" || !present || crossorigin != "anonymous" || len(attrs) != 5 {
+					return nil, fmt.Errorf("unsupported managed font preload attributes")
+				}
+				expected = fonts
+			} else {
+				for key, value := range attrs {
+					if key != "rel" && key != "href" && (key != "crossorigin" || (value != "" && value != "anonymous")) {
+						return nil, fmt.Errorf("unsupported managed asset link attribute")
+					}
+				}
+				if assetRel == "modulepreload" {
+					expected = preloads
+				}
 			}
 			seen, exists := expected[attrs["href"]]
 			if !exists || seen {
@@ -366,6 +378,11 @@ func newManagedNonceShell(index []byte, manifest *assets.Manifest) (*managedNonc
 	for _, seen := range preloads {
 		if !seen {
 			return nil, fmt.Errorf("managed preload omitted")
+		}
+	}
+	for _, seen := range fonts {
+		if !seen {
+			return nil, fmt.Errorf("managed font preload omitted")
 		}
 	}
 	return shell, nil

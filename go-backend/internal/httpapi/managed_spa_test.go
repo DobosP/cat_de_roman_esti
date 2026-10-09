@@ -23,6 +23,7 @@ func managedSPAFixture() fstest.MapFS {
 		files[root+"/assets/app-1234abcd.css"] = &fstest.MapFile{Data: []byte("body{color:navy}")}
 		files[root+"/.keep"] = &fstest.MapFile{}
 	}
+	addManagedFixtureFonts(files, "dist")
 	return files
 }
 
@@ -206,7 +207,7 @@ func TestManagedSPANonHexViteCacheUsesActualSDKStatus(t *testing.T) {
 	files := managedSPAFixture()
 	asset := "/assets/AccountBar-B_1k6UL8.js"
 	files["dist"+asset] = &fstest.MapFile{Data: []byte("console.log('non-hex-vite-hash');")}
-	files["dist/.vite/manifest.json"].Data = []byte(`{"index.html":{"file":"assets/AccountBar-B_1k6UL8.js","isEntry":true,"css":["assets/app-1234abcd.css"]}}`)
+	files["dist/.vite/manifest.json"].Data = bytes.Replace(files["dist/.vite/manifest.json"].Data, []byte("assets/app-1234abcd.js"), []byte(strings.TrimPrefix(asset, "/")), 1)
 	files["dist/index.html"].Data = bytes.Replace(files["dist/index.html"].Data, []byte("/assets/app-1234abcd.js"), []byte(asset), 1)
 	var err error
 	s.managedUI, err = newManagedSPA(files, "current")
