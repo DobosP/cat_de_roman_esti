@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "source": "2610de7fc0ed0f9378c782852d8a0376bbbb61f5",
+  "scope": "Corrected retirement SOURCE accepted; compilation and final typed-guard retirement pending",
+  "captureManifestSha256": "9254c9b944507cf8d8d75eb3c909f74c8e97854f438bfa95ed520bdc9fc3f2a5",
+  "verifiedRegularRowsFullModes": 29,
+  "exactChangedPathsRelative7b": [
+    "frontend/tests/contexto-comparative-controls.test.mjs",
+    "frontend/tests/cald-rece-recovery.test.mjs",
+    "frontend/tests/v39-verified-ranking.test.mjs",
+    "frontend/tests/fixtures/gui-api-consumer-contract.ts"
+  ],
+  "correctedMappingSha256": "eebdd05b602d8c370abd06b360c5b1994cace94305b86a5be1f7446c44eae9bc",
+  "disposition": {
+    "wholeUiSourceFilesRetired": 18,
+    "mixedTrims": 6,
+    "temporaryTypeGuardsRetained": 3,
+    "unchangedGuards": 99,
+    "intentionallyExtendedFixture": 1,
+    "allExistingFixtureAssertionsPreservedByExactInverse": true,
+    "all38Original7bPacketFilesPreserved": true
+  },
+  "independentReviews": [
+    {
+      "reviewer": "/root/cross_repo_plan",
+      "verdict": "Preservation and scope clear; exact four paths, all old fixture bytes by inverse, 99 guards/six mixed/13 blocks/18 executable modules/frozen7b preserved"
+    },
+    {
+      "reviewer": "/root/planning_evidence",
+      "verdict": "Source accepted, no material defect; field types/requiredness/optionality and seven known-kind membership checks correct; all three guards retained until actual compiled proof"
+    }
+  ],
+  "qualification": "AUTHORED NOT RUN at2610; C40 browser runtime does not qualify new TypeScript assertions",
+  "next": "Parent clean docs commit, actual owner kit:sync/capture/review, same-SHA trust/capture then unit/capture; no empty idempotent sync commit; all three type guards stay until actual compiler passes",
+  "observedUtc": "2026-10-09T04:32:36.860292+00:00"
+}

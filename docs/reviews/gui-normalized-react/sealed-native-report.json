@@ -1,0 +1,1891 @@
+{
+  "schema": 1,
+  "check": "cat-normalized-react-runtime-execution",
+  "status": "pass",
+  "app": "cat_de_roman_esti",
+  "mode": "normalized-react",
+  "proof_scope": "owning-gen-built-native-server-sealed-16-78-replay",
+  "canonical_full": false,
+  "app_image_id": null,
+  "admission": {
+    "inputs": [
+      {
+        "path": ".gate/wrapper-current.json",
+        "bytes": 524,
+        "sha256": "520d0fbb23b2c428a8fa9cc2faf590c319a08d97cf9cf51b0c467db3b2618dac"
+      },
+      {
+        "path": ".gate/gen/wrapper-current.json",
+        "bytes": 524,
+        "sha256": "520d0fbb23b2c428a8fa9cc2faf590c319a08d97cf9cf51b0c467db3b2618dac"
+      },
+      {
+        "path": ".gate/gen/wrapper-kit-config.json",
+        "bytes": 1123,
+        "sha256": "86ad1fe84dc23f78803387b68cc20bf3b38fbf3278ecaea6212cc67722a939bd"
+      },
+      {
+        "path": ".gate/gen/bootstrap-execution.json",
+        "bytes": 3565,
+        "sha256": "239cf64db313f75587edc9d3d09702776b8eea8e834cf95bc38fe6347598b909"
+      },
+      {
+        "path": "scripts/gui-gen-request.json",
+        "bytes": 116,
+        "sha256": "0b35f1efe4b00d91d0ad5a2db3c2b23c24e6a73213b9dfdc2815cc69f4f7dbbf"
+      },
+      {
+        "path": "frontend/vendor/roedu-ui-0.3.0.tgz",
+        "bytes": 10273,
+        "sha256": "1934a81cdfd737a051f591ebcae072f5028943b715456dbb2899b483d399c244"
+      },
+      {
+        "path": "frontend/node_modules/@roedu/ui/package.json",
+        "bytes": 1147,
+        "sha256": "1e693baa0e9187ffcdd6c35f841370e70ec71551751d10fc01902b6be2f57357"
+      },
+      {
+        "path": "frontend/node_modules/@roedu/ui/dist/index.js",
+        "bytes": 9414,
+        "sha256": "45bc37efd15df1d9671d17e5d5f96518128a19da9af4bdfc3d437906ab8d049d"
+      },
+      {
+        "path": "docs/reviews/gui-original-react/receipt.json",
+        "bytes": 14701,
+        "sha256": "5c5704bc05511f91a02582c17e515500d2c8bca471f1c50cfd2505b646a27e58"
+      },
+      {
+        "path": "docs/reviews/gui-original-react/original-package.json",
+        "bytes": 1282,
+        "sha256": "efde2d3fbdebc5899dc63ca6b518cab0d60370ef36a7301477da720f4978e2e9"
+      },
+      {
+        "path": "docs/reviews/gui-original-react/original-lock.json",
+        "bytes": 101905,
+        "sha256": "f72661b4bd7ad129a6771037bf900a616a0fdf84bbb41f70c6d118b69fb1b62c"
+      },
+      {
+        "path": "docs/reviews/gui-original-react/native-report.json",
+        "bytes": 16519,
+        "sha256": "7f6eec025f63bf4f1bf4e54f1755ccff9b6ff2036fb8ebeb8e9849d312c39fb9"
+      },
+      {
+        "path": "docs/reviews/gui-original-react/stdout.log",
+        "bytes": 16519,
+        "sha256": "7f6eec025f63bf4f1bf4e54f1755ccff9b6ff2036fb8ebeb8e9849d312c39fb9"
+      },
+      {
+        "path": "docs/reviews/gui-original-react/stderr.log",
+        "bytes": 38,
+        "sha256": "705fe64504709fbe4226bd197c053c8d1b925d243bc3670dae97b82fd9f24f12"
+      },
+      {
+        "path": "docs/reviews/gui-original-react/runtime.spec.mjs",
+        "bytes": 16427,
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a"
+      },
+      {
+        "path": "frontend/e2e/original/runtime.spec.mjs",
+        "bytes": 16427,
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a"
+      },
+      {
+        "path": "frontend/playwright.original.config.mjs",
+        "bytes": 1241,
+        "sha256": "6e05214dbbcb1bb5c2881a0a2a228ca1a3292039d1baea0858787856415ad14f"
+      },
+      {
+        "path": "frontend/e2e/original/reporter.mjs",
+        "bytes": 1725,
+        "sha256": "20f561c1fcd1c0829460fdd4bdf58d51435d8ad5f4c162dfa21441fa5955a3c8"
+      },
+      {
+        "path": "frontend/e2e/gui-inventory.json",
+        "bytes": 230815,
+        "sha256": "763e1e7bfab83f4b469e55b87c1491ae2dff4debdc11412979bf3bdbe28fa278"
+      },
+      {
+        "path": "frontend/package.json",
+        "bytes": 1442,
+        "sha256": "adf9fad307592089214aee4026ec02461e446dc724fd07ead6edd36371d5cb99"
+      },
+      {
+        "path": "frontend/package-lock.json",
+        "bytes": 109956,
+        "sha256": "e430c87d566567f5a47160ff6bd3b327d875894769891c1d3bbcdcd035dd3aec"
+      },
+      {
+        "path": "versions.lock.json",
+        "bytes": 47093,
+        "sha256": "7ce6c385dde548aba1fc821f557179ef0fdb8d0b8147f1847bdd267e041100be"
+      },
+      {
+        "path": "frontend/node_modules/@fontsource-variable/fredoka/package.json",
+        "bytes": 1388,
+        "sha256": "fc6acdf17ab1dc23c83657a5bc809aa4f1000e7dbcae36149720a3ffaf0ffc8b"
+      },
+      {
+        "path": "frontend/node_modules/@fontsource-variable/inter/package.json",
+        "bytes": 1375,
+        "sha256": "257c0692e6e6f5b60718ff28f17dd4a9d53364160162045c36d84bc547292237"
+      },
+      {
+        "path": "frontend/node_modules/react/package.json",
+        "bytes": 1248,
+        "sha256": "51966ae9c8c377ff592b5d69c980966992101bc6791bf83a1e5c7ad9bcefa7f4"
+      },
+      {
+        "path": "frontend/node_modules/react-dom/package.json",
+        "bytes": 3063,
+        "sha256": "447acd72cdb6a966d9db967729e286e7cbb4a09ea61fddd45e12c2a97fd4cfb6"
+      },
+      {
+        "path": "frontend/node_modules/react-router-dom/package.json",
+        "bytes": 1669,
+        "sha256": "5ad7d08fe2baef8d629449eaaa9cd90d2e86b68712a8a4dc6ae5305fb2bd90bd"
+      },
+      {
+        "path": "frontend/node_modules/motion/package.json",
+        "bytes": 3753,
+        "sha256": "76ceaa740baa8dc457c9370c4eb53795795ce42981eb2da01352ece0c1c27f23"
+      },
+      {
+        "path": "frontend/node_modules/@axe-core/playwright/package.json",
+        "bytes": 2217,
+        "sha256": "b7325a3f67fbefba9f3da2e3eaec796958b919a306c4beaa8a3de73a7ed3991f"
+      },
+      {
+        "path": "frontend/node_modules/@playwright/test/package.json",
+        "bytes": 754,
+        "sha256": "5587f932b8979b6889654b60e3c28aeb7ca0abbac00eec8c176c939a16149536"
+      },
+      {
+        "path": "frontend/node_modules/@types/react/package.json",
+        "bytes": 6109,
+        "sha256": "36496fc09a9dcf31b0ca969ce5677c9ce9ebb5c89da9bd6212e0c89b6fae3f88"
+      },
+      {
+        "path": "frontend/node_modules/@types/react-dom/package.json",
+        "bytes": 3383,
+        "sha256": "bf90986beaec5f757c164bf1d374f3038dc41b0b06673de4a55fd975d1e5deca"
+      },
+      {
+        "path": "frontend/node_modules/@vitejs/plugin-react/package.json",
+        "bytes": 2114,
+        "sha256": "744483e15597dba4505ff19c7af5d75ddb7280db9c894d8133f8a0edffe93c30"
+      },
+      {
+        "path": "frontend/node_modules/typescript/package.json",
+        "bytes": 3087,
+        "sha256": "3722b30210616a13a3213ded11575ba6b2dbab10c32a5ef67afca8513e27017e"
+      },
+      {
+        "path": "frontend/node_modules/vite/package.json",
+        "bytes": 5081,
+        "sha256": "334c8847b7f71cebb8a9c7e0fa56163941305ef13a970a15d4a43c7cdfef915b"
+      },
+      {
+        "path": "frontend/node_modules/@roedu/web-kit/package.json",
+        "bytes": 833,
+        "sha256": "ccd6edeb980099aaa7de5bf74ea833849ff0523f1be62971dd4600a1b08677db"
+      },
+      {
+        "path": "frontend/node_modules/oxlint/package.json",
+        "bytes": 3096,
+        "sha256": "42516fd7f3dedd2027d706b09dfe6ad021e8d5ed61d4278f943d13942babf7e0"
+      },
+      {
+        "path": "frontend/node_modules/oxlint-tsgolint/package.json",
+        "bytes": 855,
+        "sha256": "2f479a7b15fb12b717a09e673d2498b55b223405a1c2ced3d139f9bfedfb0cc8"
+      },
+      {
+        "path": "frontend/node_modules/@ast-grep/cli/package.json",
+        "bytes": 1028,
+        "sha256": "374f91f5210354d06d0afb0c447b51f5323d561d194340c466deb3156caf1285"
+      },
+      {
+        "path": "frontend/node_modules/@typescript/typescript6/package.json",
+        "bytes": 841,
+        "sha256": "d9b8fb53c67c947fece83bcb73fa8512227ea6a12b110e096fdab8ecdc02b655"
+      },
+      {
+        "path": "frontend/node_modules/@types/node/package.json",
+        "bytes": 4057,
+        "sha256": "c0bfc803197d095b73cfdf344d2f23a9c92e096f2e1b141e9aaddc309421192d"
+      },
+      {
+        "path": "frontend/node_modules/preact-iso/package.json",
+        "bytes": 1575,
+        "sha256": "accf2ed62d9ee8827de79c7c2dea9ba8d10ada92d17f98261b597465291a9827"
+      },
+      {
+        "path": "frontend/node_modules/framer-motion/package.json",
+        "bytes": 4880,
+        "sha256": "1d60d7b52b9578ae58e3aa9408ac70af9fe9d706de45598ad38ac2f6ead83d4b"
+      },
+      {
+        "path": "frontend/node_modules/playwright/package.json",
+        "bytes": 1359,
+        "sha256": "8bc2ddebe8d9b051b9ecb87d62c6c63877e59d08617f32c3215681ca8bb70998"
+      },
+      {
+        "path": "frontend/scripts/compiler-runtime.mjs",
+        "bytes": 3430,
+        "sha256": "16a7c8213c5835541c73906e02761e05f9378e067fd6f0f41a3a2fdfbf620d12"
+      },
+      {
+        "path": "frontend/node_modules/typescript/bin/tsc",
+        "bytes": 44,
+        "sha256": "2219f428a7e55aaf1f7ad85b9b0f0cf5078aeb76ccc9a7c6036c92d48f492ffd"
+      },
+      {
+        "path": "frontend/node_modules/@typescript/typescript6/lib/typescript.js",
+        "bytes": 45,
+        "sha256": "d3f3cd2b04b7f466f4484df921b744223f7bd1f3e353ec9110bdf52695b983d5"
+      },
+      {
+        "path": "frontend/node_modules/@typescript/old/lib/typescript.js",
+        "bytes": 9144216,
+        "sha256": "569177652966bd528c319171c7dd22860dbf72bde116cbc4f644f1d02bb12e39"
+      },
+      {
+        "path": "frontend/node_modules/@typescript/old/package.json",
+        "bytes": 3527,
+        "sha256": "9332e97c30d3e53ed54910b89207ed657fb444066484df6e5b6965bf130865e9"
+      },
+      {
+        "path": "frontend/vendor/roedu-web-kit-0.1.5.tgz",
+        "bytes": 243378,
+        "sha256": "5b07bdfac4ff4eddc7233782c4b5780daded1765338fa04b39ca33c5b6a765da"
+      },
+      {
+        "path": "frontend/node_modules/@roedu/web-kit/scripts/kit-sync.mjs",
+        "bytes": 125097,
+        "sha256": "0d76e09e3d0c9e7d959e98a0e1093b4ad4d82deca29d1e61f77e0576ffb5f300"
+      },
+      {
+        "path": ".gate/gen/cat-server",
+        "bytes": 33270268,
+        "sha256": "97fd09303ce2f2c045c3812c0f09c6d19fa1401050b1dd74a3c78b700ab5b1f3"
+      },
+      {
+        "path": ".gate/gen/cat-browser-plan",
+        "bytes": 31935034,
+        "sha256": "a0f56d9009ae98722ba794bd48aa682dd7490d894043a740d1b386e6077237d4"
+      },
+      {
+        "path": "scripts/gui-original-execution.mjs",
+        "bytes": 24566,
+        "sha256": "5c39b4d9771468da9365f59304085c67b37e2d974496aa4e94cb8058f039dd79"
+      },
+      {
+        "path": "scripts/gui-full-browser.mjs",
+        "bytes": 22879,
+        "sha256": "315079f5a9bfe2ac00bf0a0acb6fd34be5031d1510a1a62877d952c888d2048f"
+      },
+      {
+        "path": "scripts/gui-repo-hook.mjs",
+        "bytes": 24118,
+        "sha256": "bbca2370b6f19455bc2ce687c68e31324be377cf85a883e4224f5d8ba5d2f60f"
+      },
+      {
+        "path": "tools/gui-bootstrap-webkit/scripts/kit-sync.mjs",
+        "bytes": 125097,
+        "sha256": "0d76e09e3d0c9e7d959e98a0e1093b4ad4d82deca29d1e61f77e0576ffb5f300"
+      },
+      {
+        "path": "frontend/playwright.gui.config.mjs",
+        "bytes": 388,
+        "sha256": "766408b7fcd29d257ea9d3b247d6192d47492fe0a13417de2c0d4d523d2161f9"
+      },
+      {
+        "path": "frontend/playwright.config.mjs",
+        "bytes": 1632,
+        "sha256": "06e1433a0ebd9765d9f4b2b0b1f5a5ff63224ade9db522a98de241c5731b2ed6"
+      },
+      {
+        "path": "frontend/e2e/games.mjs",
+        "bytes": 7978,
+        "sha256": "0ae31028adfd10541f7b0f30bb3b721019a02c445e3b62da679fd4d84be8ebf7"
+      },
+      {
+        "path": "frontend/e2e/native-plan.mjs",
+        "bytes": 819,
+        "sha256": "7f6f861e460a6763da29280dc72024299b9140b7c7dace4b0ad34f0f3511d7c0"
+      },
+      {
+        "path": "frontend/e2e/seeded-starts.json",
+        "bytes": 6615,
+        "sha256": "5644ab3b7ee583db6904858712e3872928d62aac2c667322153720e8f4dd31b3"
+      },
+      {
+        "path": "frontend/e2e/alchimie-111-checkpoint.json",
+        "bytes": 8515,
+        "sha256": "c3c1385b649487fbf0ee9b387cf134d145842800a0c683e0f999b07dc75dd7d1"
+      },
+      {
+        "path": "frontend/e2e/alchimie-221-checkpoint.json",
+        "bytes": 16564,
+        "sha256": "72c12842b7f6d24de6a87947be29641b8dff2d9b3dce08d91c967e79f5452538"
+      },
+      {
+        "path": "frontend/e2e/alchimie-221-expanded-checkpoint.json",
+        "bytes": 16696,
+        "sha256": "04a4a1feee36d04ebb0f1d38b50ee4d23589899843f0a2875f551ba14a19d5ab"
+      },
+      {
+        "path": "frontend/node_modules/@playwright/test/cli.js",
+        "bytes": 707,
+        "sha256": "79e23e6a249176295b8490567daa7717448a75866d6ea6f6b296ff3d23305c69"
+      },
+      {
+        "path": "scripts/gui-assets.mjs",
+        "bytes": 14292,
+        "sha256": "bbdf1b3cbba00769069c106272790ee4b96b4a9c3046c7d6e69b2c69612a87d3"
+      },
+      {
+        "path": "scripts/gui-native-preflight.mjs",
+        "bytes": 17345,
+        "sha256": "fcadf59db2dc9845e70ddafea54d63b54a32b0d7c2498cbdecef24c507425748"
+      },
+      {
+        "path": "scripts/gui-startup-inventory.mjs",
+        "bytes": 4868,
+        "sha256": "901c9528ec8e13f19c7d016cafd74d7a1e26451be46fe3fe4f47e0706f700abc"
+      },
+      {
+        "path": "frontend/scripts/check-bundle-budget.mjs",
+        "bytes": 6510,
+        "sha256": "8e6fdc34a6ec877ccde5e3a9cecaaadbf989c7b294c5ccfe796432e65348c9a3"
+      },
+      {
+        "path": "frontend/scripts/gui-lint.mjs",
+        "bytes": 9001,
+        "sha256": "8db5a0cb519b7c28fc6ef64bb5e79290f5eb60ce5abacec7aa34e62ce0169b3e"
+      },
+      {
+        "path": "frontend/tests/bundle-budget.test.mjs",
+        "bytes": 14564,
+        "sha256": "05d312edce2590b2421eb7d54477ed8745c877e2746a154b11ed6de8239b5db1"
+      },
+      {
+        "path": "frontend/vite.config.ts",
+        "bytes": 2428,
+        "sha256": "bf7b3070a1a381fd05ce7c99996e78293d27f329ae8c474f869f8b0d031b547d"
+      },
+      {
+        "path": "frontend/tsconfig.json",
+        "bytes": 586,
+        "sha256": "c71b02d67f1b304ffd49edbcc5a5dc4a57719176c9d1f83aabef9c5d36d17617"
+      },
+      {
+        "path": "frontend/tests/gui-api-consumer-contract.test.mjs",
+        "bytes": 6804,
+        "sha256": "ac435279d813123e0f4bee25ddb6fb82cf5331d6ea47de0d5bbcc3ac3da7ec11"
+      },
+      {
+        "path": "frontend/tests/conexiuni-selection-key.test.mjs",
+        "bytes": 4665,
+        "sha256": "6f07286bf2fc0594143cb5c55793c04f3f8960ee475927b679c70725bba517cf"
+      },
+      {
+        "path": "frontend/tests/fixtures/gui-api-consumer-contract.ts",
+        "bytes": 7084,
+        "sha256": "7243cd9c73bb4353c74a389088b3d7ec51d058012080cc1834103b261945f246"
+      },
+      {
+        "path": "frontend/tests/fixtures/gui-api-consumer-tsconfig.json",
+        "bytes": 94,
+        "sha256": "1425567a58d5c5a81af1bba77a3f35a4467faf2a18f4238b0f9156d9fa7cfeb5"
+      },
+      {
+        "path": "go-backend/embedfs/dist/.vite/manifest.json",
+        "bytes": 7449,
+        "sha256": "8cd196f99932cc35027094855bbcd18d2ed2a2d1dd477a564adb611b79d9f971"
+      },
+      {
+        "path": "frontend/dist/.vite/manifest.json",
+        "bytes": 7449,
+        "sha256": "8cd196f99932cc35027094855bbcd18d2ed2a2d1dd477a564adb611b79d9f971"
+      },
+      {
+        "path": "go-backend/embedfs/dist/assets/AccountBar-C9YwTva-.js",
+        "bytes": 150,
+        "sha256": "47d1c9a1b8e5805604834f6ce06d20571e44bc51ff96f48e428584bef2004d7d"
+      },
+      {
+        "path": "frontend/dist/assets/AccountBar-C9YwTva-.js",
+        "bytes": 150,
+        "sha256": "47d1c9a1b8e5805604834f6ce06d20571e44bc51ff96f48e428584bef2004d7d"
+      },
+      {
+        "path": "go-backend/embedfs/dist/assets/Alchimie-DWBTmhUZ.js",
+        "bytes": 44773,
+        "sha256": "9713dd3f4effdc2b063b90a161c45bdd3773830bdd3dccf614f49ba5293b6501"
+      },
+      {
+        "path": "frontend/dist/assets/Alchimie-DWBTmhUZ.js",
+        "bytes": 44773,
+        "sha256": "9713dd3f4effdc2b063b90a161c45bdd3773830bdd3dccf614f49ba5293b6501"
+      },
+      {
+        "path": "go-backend/embedfs/dist/assets/Alchimie-DxBkLLr5.css",
+        "bytes": 17007,
+        "sha256": "f0bb18dcc65de8ccd80c855742160761404932ed15ece4e31047966ae97c1810"
+      },
+      {
+        "path": "frontend/dist/assets/Alchimie-DxBkLLr5.css",
+        "bytes": 17007,
+        "sha256": "f0bb18dcc65de8ccd80c855742160761404932ed15ece4e31047966ae97c1810"
+      },
+      {
+        "path": "go-backend/embedfs/dist/assets/CaldRece-0dIO_Auo.css",
+        "bytes": 3562,
+        "sha256": "1f4e2ed1fa186481467bb525af04fd616a0dd17b69938dd85549ce409af4a461"
+      },
+      {
+        "path": "frontend/dist/assets/CaldRece-0dIO_Auo.css",
+        "bytes": 3562,
+        "sha256": "1f4e2ed1fa186481467bb525af04fd616a0dd17b69938dd85549ce409af4a461"
+      },
+      {
+        "path": "go-backend/embedfs/dist/assets/CaldRece-D0O7hLyt.js",
+        "bytes": 19999,
+        "sha256": "c639a6be93a323f21ed00116827dfa06233b88423d150196bb75f444032ff321"
+      },
+      {
+        "path": "frontend/dist/assets/CaldRece-D0O7hLyt.js",
+        "bytes": 19999,
+        "sha256": "c639a6be93a323f21ed00116827dfa06233b88423d150196bb75f444032ff321"
+      },
+      {
+        "path": "go-backend/embedfs/dist/assets/CategoryPicker-4pf-v9jW.css",
+        "bytes": 572,
+        "sha256": "25c5a797e2e8c86f1d77e8703627607a79fe2af67b194ddd87168e5284f9566e"
+      },
+      {
+        "path": "frontend/dist/assets/CategoryPicker-4pf-v9jW.css",
+        "bytes": 572,
+        "sha256": "25c5a797e2e8c86f1d77e8703627607a79fe2af67b194ddd87168e5284f9566e"
+      },
+      {
+        "path": "go-backend/embedfs/dist/assets/CategoryPicker-BGUdDfG-.js",
+        "bytes": 3485,
+        "sha256": "ef5d3f4aed056ac186197053f69eaddbd06d71583ec091333753ee59c1b50315"
+      },
+      {
+        "path": "frontend/dist/assets/CategoryPicker-BGUdDfG-.js",
+        "bytes": 3485,
+        "sha256": "ef5d3f4aed056ac186197053f69eaddbd06d71583ec091333753ee59c1b50315"
+      },
+      {
+        "path": "go-backend/embedfs/dist/assets/Conexiuni-D2QJHejd.css",
+        "bytes": 4240,
+        "sha256": "d5d3759d3021e356f78592b9a1d7ce5a68435640696873f56d75d6fad502da95"
+      },
+      {
+        "path": "frontend/dist/assets/Conexiuni-D2QJHejd.css",
+        "bytes": 4240,
+        "sha256": "d5d3759d3021e356f78592b9a1d7ce5a68435640696873f56d75d6fad502da95"
+      },
+      {
+        "path": "go-backend/embedfs/dist/assets/Conexiuni-dv1j2-AJ.js",
+        "bytes": 16009,
+        "sha256": "35f45fb77c9bc7f1557fa43e1e548322a7893e47318746458c87f3c8f01f6d7f"
+      },
+      {
+        "path": "frontend/dist/assets/Conexiuni-dv1j2-AJ.js",
+        "bytes": 16009,
+        "sha256": "35f45fb77c9bc7f1557fa43e1e548322a7893e47318746458c87f3c8f01f6d7f"
+      },
+      {
+        "path": "go-backend/embedfs/dist/assets/CspStyle-B1RwaPM1.js",
+        "bytes": 3785,
+        "sha256": "67738e03364bbeb45877666ac8a5831c5d600ebcac5cba9afa0aa821e3d5188b"
+      },
+      {
+        "path": "frontend/dist/assets/CspStyle-B1RwaPM1.js",
+        "bytes": 3785,
+        "sha256": "67738e03364bbeb45877666ac8a5831c5d600ebcac5cba9afa0aa821e3d5188b"
+      },
+      {
+        "path": "go-backend/embedfs/dist/assets/CspStyle-x1XGuNl0.css",
+        "bytes": 1,
+        "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+      },
+      {
+        "path": "frontend/dist/assets/CspStyle-x1XGuNl0.css",
+        "bytes": 1,
+        "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+      },
+      {
+        "path": "go-backend/embedfs/dist/assets/derivedReplay-Bor7pKb-.js",
+        "bytes": 956,
+        "sha256": "7acabbb67fc42676a114e688f8916863d55a23534247c3164c1027f1e2e1e114"
+      },
+      {
+        "path": "frontend/dist/assets/derivedReplay-Bor7pKb-.js",
+        "bytes": 956,
+        "sha256": "7acabbb67fc42676a114e688f8916863d55a23534247c3164c1027f1e2e1e114"
+      },
+      {
+        "path": "go-backend/embedfs/dist/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+        "bytes": 4576,
+        "sha256": "18a1723c878c0d8acc2e45a108fd62fbb976e408337804afa2908982fac13e2a"
+      },
+      {
+        "path": "frontend/dist/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+        "bytes": 4576,
+        "sha256": "18a1723c878c0d8acc2e45a108fd62fbb976e408337804afa2908982fac13e2a"
+      },
+      {
+        "path": "go-backend/embedfs/dist/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+        "bytes": 29732,
+        "sha256": "99d6c78e043710d4f83ed90716779798b7b04eb690f73e0ad0e8f32d1f0e98c2"
+      },
+      {
+        "path": "frontend/dist/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+        "bytes": 29732,
+        "sha256": "99d6c78e043710d4f83ed90716779798b7b04eb690f73e0ad0e8f32d1f0e98c2"
+      },
+      {
+        "path": "go-backend/embedfs/dist/assets/GameOptions-CEWYWGsz.css",
+        "bytes": 1061,
+        "sha256": "cbe029df658db3187af13ffc55d388268d410c9483521d550222bc48d4240bbd"
+      },
+      {
+        "path": "frontend/dist/assets/GameOptions-CEWYWGsz.css",
+        "bytes": 1061,
+        "sha256": "cbe029df658db3187af13ffc55d388268d410c9483521d550222bc48d4240bbd"
+      },
+      {
+        "path": "go-backend/embedfs/dist/assets/GameOptions-DNs5X9aU.js",
+        "bytes": 405,
+        "sha256": "949f94cdb4d987f72ba3c4c2e5f7b99e7c69eddaa324269ed92923d4ff48525a"
+      },
+      {
+        "path": "frontend/dist/assets/GameOptions-DNs5X9aU.js",
+        "bytes": 405,
+        "sha256": "949f94cdb4d987f72ba3c4c2e5f7b99e7c69eddaa324269ed92923d4ff48525a"
+      },
+      {
+        "path": "go-backend/embedfs/dist/assets/GameSetupOptions-SfCDbO8j.js",
+        "bytes": 335,
+        "sha256": "1f61be97be7c65a70a580d876a6a346ba24a9e0eb44eecc0c2212cfe8867741a"
+      },
+      {
+        "path": "frontend/dist/assets/GameSetupOptions-SfCDbO8j.js",
+        "bytes": 335,
+        "sha256": "1f61be97be7c65a70a580d876a6a346ba24a9e0eb44eecc0c2212cfe8867741a"
+      },
+      {
+        "path": "go-backend/embedfs/dist/assets/index-BoCfe88_.js",
+        "bytes": 338,
+        "sha256": "9ac495f5f0e76e4b0371dc2d6553f59c6716741fb55a6e5438337e4ca1c9ba05"
+      },
+      {
+        "path": "frontend/dist/assets/index-BoCfe88_.js",
+        "bytes": 338,
+        "sha256": "9ac495f5f0e76e4b0371dc2d6553f59c6716741fb55a6e5438337e4ca1c9ba05"
+      },
+      {
+        "path": "go-backend/embedfs/dist/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+        "bytes": 85068,
+        "sha256": "34b9c504cab7a73e37b746343a449132e56cf7b5481af2cb81dc74dcff25c956"
+      },
+      {
+        "path": "frontend/dist/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+        "bytes": 85068,
+        "sha256": "34b9c504cab7a73e37b746343a449132e56cf7b5481af2cb81dc74dcff25c956"
+      },
+      {
+        "path": "go-backend/embedfs/dist/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+        "bytes": 48256,
+        "sha256": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62"
+      },
+      {
+        "path": "frontend/dist/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+        "bytes": 48256,
+        "sha256": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62"
+      },
+      {
+        "path": "go-backend/embedfs/dist/assets/Intrusul-BQp0TQAh.js",
+        "bytes": 11040,
+        "sha256": "349dc5efbbcb3e25aa6af511aa47d29347ce5d8363f2afef227415506c2e7889"
+      },
+      {
+        "path": "frontend/dist/assets/Intrusul-BQp0TQAh.js",
+        "bytes": 11040,
+        "sha256": "349dc5efbbcb3e25aa6af511aa47d29347ce5d8363f2afef227415506c2e7889"
+      },
+      {
+        "path": "go-backend/embedfs/dist/assets/Intrusul-D_KdYx8Y.css",
+        "bytes": 1995,
+        "sha256": "67d3f0b9f8a148fae80dd9f624fd2ac5177258946092ed60755c5e635685fd2b"
+      },
+      {
+        "path": "frontend/dist/assets/Intrusul-D_KdYx8Y.css",
+        "bytes": 1995,
+        "sha256": "67d3f0b9f8a148fae80dd9f624fd2ac5177258946092ed60755c5e635685fd2b"
+      },
+      {
+        "path": "go-backend/embedfs/dist/assets/Lant-B2xbfLDc.js",
+        "bytes": 18858,
+        "sha256": "83b06f1ce2665d39397bf940af46d150660241ae060016408d46305873ceb7f5"
+      },
+      {
+        "path": "frontend/dist/assets/Lant-B2xbfLDc.js",
+        "bytes": 18858,
+        "sha256": "83b06f1ce2665d39397bf940af46d150660241ae060016408d46305873ceb7f5"
+      },
+      {
+        "path": "go-backend/embedfs/dist/assets/Lant-DhowxvTS.css",
+        "bytes": 3893,
+        "sha256": "3ee93b9a410d8eb8a9ea13d1191ac558c32920ff9800eebd884b574da5677cdc"
+      },
+      {
+        "path": "frontend/dist/assets/Lant-DhowxvTS.css",
+        "bytes": 3893,
+        "sha256": "3ee93b9a410d8eb8a9ea13d1191ac558c32920ff9800eebd884b574da5677cdc"
+      },
+      {
+        "path": "go-backend/embedfs/dist/assets/Perechi-CVshKqJz.js",
+        "bytes": 13784,
+        "sha256": "80a5d0a8e58e347480b75130db161038639c89d81322436ae4acc0df7fe60455"
+      },
+      {
+        "path": "frontend/dist/assets/Perechi-CVshKqJz.js",
+        "bytes": 13784,
+        "sha256": "80a5d0a8e58e347480b75130db161038639c89d81322436ae4acc0df7fe60455"
+      },
+      {
+        "path": "go-backend/embedfs/dist/assets/Perechi-DUzfG4A6.css",
+        "bytes": 2809,
+        "sha256": "c71b5a78f5d94461029283f03515abf7bce1b898489f087b6d0b6d318d96e0d6"
+      },
+      {
+        "path": "frontend/dist/assets/Perechi-DUzfG4A6.css",
+        "bytes": 2809,
+        "sha256": "c71b5a78f5d94461029283f03515abf7bce1b898489f087b6d0b6d318d96e0d6"
+      },
+      {
+        "path": "go-backend/embedfs/dist/assets/Ranking-CveSnMPN.css",
+        "bytes": 851,
+        "sha256": "5652e765c8213a30e17e668c2ee352cc90eedc536ccf8402ce065ad4947b71e7"
+      },
+      {
+        "path": "frontend/dist/assets/Ranking-CveSnMPN.css",
+        "bytes": 851,
+        "sha256": "5652e765c8213a30e17e668c2ee352cc90eedc536ccf8402ce065ad4947b71e7"
+      },
+      {
+        "path": "go-backend/embedfs/dist/assets/Ranking-DyP8GGNY.js",
+        "bytes": 3535,
+        "sha256": "12de4499f7705857ab700073cc1abcb5cb088f563c3d3dd8b1e29593df3dd373"
+      },
+      {
+        "path": "frontend/dist/assets/Ranking-DyP8GGNY.js",
+        "bytes": 3535,
+        "sha256": "12de4499f7705857ab700073cc1abcb5cb088f563c3d3dd8b1e29593df3dd373"
+      },
+      {
+        "path": "go-backend/embedfs/dist/assets/rolldown-runtime-CbXtAM7H.js",
+        "bytes": 589,
+        "sha256": "bbf7c5086ae414dc3f33777e3eebf16ea8631325b8bb4690d25091c03567f31a"
+      },
+      {
+        "path": "frontend/dist/assets/rolldown-runtime-CbXtAM7H.js",
+        "bytes": 589,
+        "sha256": "bbf7c5086ae414dc3f33777e3eebf16ea8631325b8bb4690d25091c03567f31a"
+      },
+      {
+        "path": "go-backend/embedfs/dist/assets/startup-BP5Pvlg1.js",
+        "bytes": 352124,
+        "sha256": "03eeff874ba05004479639d69e78e19ff1a5c42861797df44438b48e6ac95a74"
+      },
+      {
+        "path": "frontend/dist/assets/startup-BP5Pvlg1.js",
+        "bytes": 352124,
+        "sha256": "03eeff874ba05004479639d69e78e19ff1a5c42861797df44438b48e6ac95a74"
+      },
+      {
+        "path": "go-backend/embedfs/dist/assets/startup-uZN142Lb.css",
+        "bytes": 33749,
+        "sha256": "4752a58557f189841588d863da548db2584f5e3c144b2dfa2df024bc70a8df06"
+      },
+      {
+        "path": "frontend/dist/assets/startup-uZN142Lb.css",
+        "bytes": 33749,
+        "sha256": "4752a58557f189841588d863da548db2584f5e3c144b2dfa2df024bc70a8df06"
+      },
+      {
+        "path": "go-backend/embedfs/dist/assets/useSavedGameResume-CLCJZjna.js",
+        "bytes": 15999,
+        "sha256": "845ca8d35b15967a357392c901e741986019f5e471ca14adb6a4863acf9f7411"
+      },
+      {
+        "path": "frontend/dist/assets/useSavedGameResume-CLCJZjna.js",
+        "bytes": 15999,
+        "sha256": "845ca8d35b15967a357392c901e741986019f5e471ca14adb6a4863acf9f7411"
+      },
+      {
+        "path": "go-backend/embedfs/dist/index.html",
+        "bytes": 1329,
+        "sha256": "ab080967fbf4546e4169cc5a2382993b5f34146fb70c8c4d1510598ec6f8bdd5"
+      },
+      {
+        "path": "frontend/dist/index.html",
+        "bytes": 1329,
+        "sha256": "ab080967fbf4546e4169cc5a2382993b5f34146fb70c8c4d1510598ec6f8bdd5"
+      },
+      {
+        "path": "go-backend/embedfs/dist/.keep",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "go-backend/embedfs/legacy/.keep",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "legacy/original-bundle.json",
+        "bytes": 5399,
+        "sha256": "5f9897def4020047f9d0fa199ed96b2e52d6facd1cd878da35c65cafb4e78984"
+      },
+      {
+        "path": "legacy/cat_de_roman_esti-legacy-93066854f67245d4b70c0ea97dc2401445a3218c.tgz",
+        "bytes": 349389,
+        "sha256": "742bb11130fa2bf52ba5c64cb9cfd452f7d8ac3a4fd9dc6d77e8064a6b8fef65"
+      },
+      {
+        "path": "legacy/cat_de_roman_esti-legacy-93066854f67245d4b70c0ea97dc2401445a3218c.tgz.sha256",
+        "bytes": 136,
+        "sha256": "0576814384f4013d8c628778a1e57b0a0e1c021642b41cc87253f907fe9d67d5"
+      },
+      {
+        "path": "go-backend/embedfs/legacy/.vite/manifest.json",
+        "bytes": 6000,
+        "sha256": "9ed68d3ff5f73bec7ced96e100ff5718043bcc7efc85cf3b3916df5c82867827"
+      },
+      {
+        "path": "go-backend/embedfs/legacy/assets/AccountBar-B_1k6UL8.js",
+        "bytes": 5988,
+        "sha256": "4267be72016b80a3487a211410942f1c537622d0e0c45ca7aee3184c34f09b03"
+      },
+      {
+        "path": "go-backend/embedfs/legacy/assets/Alchimie-BkN0hBpY.js",
+        "bytes": 44650,
+        "sha256": "e343df8b3e041d0e7d1486a640edc4d534ca9dae453822c63bf05c2aac295e0f"
+      },
+      {
+        "path": "go-backend/embedfs/legacy/assets/Alchimie-DdrzYmQc.css",
+        "bytes": 15358,
+        "sha256": "eb7b9a5d9a166ece8084db2ce0a58238702b93a3dc02fe17c3b6f652a6eb8ca4"
+      },
+      {
+        "path": "go-backend/embedfs/legacy/assets/auth-CnzO1y42.js",
+        "bytes": 1161,
+        "sha256": "2cbac30aaf27906dc7b0d97b95d62f2af7c920d382bc17bb50e857c2cee43db3"
+      },
+      {
+        "path": "go-backend/embedfs/legacy/assets/CaldRece-B885PE19.css",
+        "bytes": 1075,
+        "sha256": "b9713b5c0854630c4740d176340c7feae25cc55564bbffff06a1adcfe930679d"
+      },
+      {
+        "path": "go-backend/embedfs/legacy/assets/CaldRece-BeT20Ptx.js",
+        "bytes": 19846,
+        "sha256": "552b5da60fa7a3012310401d4c51986abab10c3fff154e2db152a354676fc21e"
+      },
+      {
+        "path": "go-backend/embedfs/legacy/assets/CategoryPicker-BdaaYRb5.js",
+        "bytes": 3396,
+        "sha256": "4c937dfaaf69417170c24262584604663cd04b4ae8ef3e0e0b7fc2386f7e9cc5"
+      },
+      {
+        "path": "go-backend/embedfs/legacy/assets/Conexiuni-Cpid-uuX.js",
+        "bytes": 15860,
+        "sha256": "9453a34066460d46ebc5823e934996117024ca011beeb04792098f26ba228b1d"
+      },
+      {
+        "path": "go-backend/embedfs/legacy/assets/Conexiuni-DfW6SbKo.css",
+        "bytes": 3019,
+        "sha256": "0fb208850c976f0cb1f0abd4aaa12373599772e66c7cc64f5ffdb91c3d662e8d"
+      },
+      {
+        "path": "go-backend/embedfs/legacy/assets/derivedReplay-Bor7pKb-.js",
+        "bytes": 956,
+        "sha256": "7acabbb67fc42676a114e688f8916863d55a23534247c3164c1027f1e2e1e114"
+      },
+      {
+        "path": "go-backend/embedfs/legacy/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+        "bytes": 4576,
+        "sha256": "18a1723c878c0d8acc2e45a108fd62fbb976e408337804afa2908982fac13e2a"
+      },
+      {
+        "path": "go-backend/embedfs/legacy/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+        "bytes": 29732,
+        "sha256": "99d6c78e043710d4f83ed90716779798b7b04eb690f73e0ad0e8f32d1f0e98c2"
+      },
+      {
+        "path": "go-backend/embedfs/legacy/assets/GameOptions-CEWYWGsz.css",
+        "bytes": 1061,
+        "sha256": "cbe029df658db3187af13ffc55d388268d410c9483521d550222bc48d4240bbd"
+      },
+      {
+        "path": "go-backend/embedfs/legacy/assets/GameOptions-ia4sPKKo.js",
+        "bytes": 403,
+        "sha256": "5ebfaaea99122afbca33114a4c16c2c2f0a0b6d50f0d7475a440032357300ed8"
+      },
+      {
+        "path": "go-backend/embedfs/legacy/assets/GameSetupOptions-CMNeowgo.js",
+        "bytes": 333,
+        "sha256": "0d1c1745517aa951b04d13ace0231c0dbaaa68e7758b0ebb1650f5a31e1400b6"
+      },
+      {
+        "path": "go-backend/embedfs/legacy/assets/index-D9HNWgEs.css",
+        "bytes": 39521,
+        "sha256": "69fdcc4d03965c06d8d2fe53adcbcfcb6ff75cb0c2b64a013e5ec05d6c3988c2"
+      },
+      {
+        "path": "go-backend/embedfs/legacy/assets/index-qYTSE3Vo.js",
+        "bytes": 350672,
+        "sha256": "3aeceaed54e6d8614fa85e68bcf2a5c6ab1a7619bf20f7184624d475259be93a"
+      },
+      {
+        "path": "go-backend/embedfs/legacy/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+        "bytes": 85068,
+        "sha256": "34b9c504cab7a73e37b746343a449132e56cf7b5481af2cb81dc74dcff25c956"
+      },
+      {
+        "path": "go-backend/embedfs/legacy/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+        "bytes": 48256,
+        "sha256": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62"
+      },
+      {
+        "path": "go-backend/embedfs/legacy/assets/Intrusul-D_KdYx8Y.css",
+        "bytes": 1995,
+        "sha256": "67d3f0b9f8a148fae80dd9f624fd2ac5177258946092ed60755c5e635685fd2b"
+      },
+      {
+        "path": "go-backend/embedfs/legacy/assets/Intrusul-Ga_cb812.js",
+        "bytes": 10937,
+        "sha256": "d3b13807bd96619c0acea2461b91c11808135a2aa42219eade11cd06edc61243"
+      },
+      {
+        "path": "go-backend/embedfs/legacy/assets/Lant-BHivICVC.css",
+        "bytes": 1188,
+        "sha256": "193f470c63ac529f7ee3670a36ddd4d5577ebcb3c9fef9595d6b5dd2bec235d1"
+      },
+      {
+        "path": "go-backend/embedfs/legacy/assets/Lant-CNm6lAs4.js",
+        "bytes": 18691,
+        "sha256": "cc59c968bf21c5a5a8fbdaa01ea30c2d02b3277564c17f310f6d975aed6b03d4"
+      },
+      {
+        "path": "go-backend/embedfs/legacy/assets/Perechi-BmY0hozH.js",
+        "bytes": 13377,
+        "sha256": "0dff0b8edd36dc75ea104b516e32e784d6e1cb83c2146ef8b72f2147cc174ed5"
+      },
+      {
+        "path": "go-backend/embedfs/legacy/assets/Perechi-DUzfG4A6.css",
+        "bytes": 2809,
+        "sha256": "c71b5a78f5d94461029283f03515abf7bce1b898489f087b6d0b6d318d96e0d6"
+      },
+      {
+        "path": "go-backend/embedfs/legacy/assets/Ranking-m788lj7M.js",
+        "bytes": 3475,
+        "sha256": "db4c03b7bd1b20e54243fdc6db54aadc314a365a900c67ed2653c9a6cc20e40b"
+      },
+      {
+        "path": "go-backend/embedfs/legacy/assets/scoreSync-BVBILyAK.js",
+        "bytes": 636,
+        "sha256": "13df23077d550164a605e99c42f3fd5503c9290a77114b1b6805e6983647e9f1"
+      },
+      {
+        "path": "go-backend/embedfs/legacy/assets/useSavedGameResume-DPDD-JYv.js",
+        "bytes": 16041,
+        "sha256": "363bb2c4f2681c65a19f6aa3ed4c573d62d4cb9b7a64fb691545b4866f994448"
+      },
+      {
+        "path": "go-backend/embedfs/legacy/index.html",
+        "bytes": 1162,
+        "sha256": "6ef9e2cd5334b0e89fe078f0bf2c3c9b3b94360ad013c7740db5cc205bd3feeb"
+      },
+      {
+        "path": "go-backend/embedfs/build/dist/.keep",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "go-backend/embedfs/build/dist/.gui-build.json",
+        "bytes": 307,
+        "sha256": "5286bfd35b7ccec3af22d9e1926749415b2504ce85cbc5b3d1504b047b325d63"
+      },
+      {
+        "path": "go-backend/embedfs/build/dist/versions.lock.json",
+        "bytes": 47093,
+        "sha256": "7ce6c385dde548aba1fc821f557179ef0fdb8d0b8147f1847bdd267e041100be"
+      },
+      {
+        "path": "go-backend/cmd/cat-gui-build/main.go",
+        "bytes": 740,
+        "sha256": "cd46dad0d1d158b0d205256fcc7c70f6d0398f85356bee83dcedb5123c68a611"
+      },
+      {
+        "path": "go-backend/internal/guibuild/generate.go",
+        "bytes": 3461,
+        "sha256": "4d5b2b820b76328bf8a6dad21f6be544a2356df7fec2d3ff920f719d01cfd200"
+      },
+      {
+        "path": "go-backend/internal/guibuild/identity.go",
+        "bytes": 4216,
+        "sha256": "7ae1540fa9c34515c316d11fe84ef7b40a2dbb89eea22e957e9161ab6ff4eeb4"
+      },
+      {
+        "path": "go-backend/embedfs/assets.go",
+        "bytes": 536,
+        "sha256": "088607584b6cc86c127bb8309f62e28b87e82e2a40968cf67c27b12219014ec5"
+      },
+      {
+        "path": "go-backend/internal/httpapi/gui_build.go",
+        "bytes": 1166,
+        "sha256": "26c4447954a39a4521630b94a8633a2faa5c1568a52e8780eef2ac80488bc42f"
+      },
+      {
+        "path": "go-backend/internal/httpapi/managed_nonce.go",
+        "bytes": 13207,
+        "sha256": "1ad2713fc53582a647771018d3003230d1b223e9d565d0b1918782237b048d37"
+      }
+    ],
+    "installed_versions": {
+      "@fontsource-variable/fredoka": "5.2.10",
+      "@fontsource-variable/inter": "5.2.8",
+      "@roedu/ui": "0.3.0",
+      "react": "19.2.7",
+      "react-dom": "19.2.7",
+      "react-router-dom": "7.18.2",
+      "motion": "14.0.0",
+      "@axe-core/playwright": "4.13.0",
+      "@playwright/test": "1.63.0",
+      "@types/react": "19.2.17",
+      "@types/react-dom": "19.2.3",
+      "@vitejs/plugin-react": "6.0.3",
+      "typescript": "7.0.2",
+      "vite": "8.3.3",
+      "@roedu/web-kit": "0.1.5",
+      "oxlint": "1.87.0",
+      "oxlint-tsgolint": "7.0.2003",
+      "@ast-grep/cli": "0.45.3",
+      "@typescript/typescript6": "6.0.2",
+      "@types/node": "26.6.4",
+      "preact-iso": "2.12.2",
+      "framer-motion": "14.0.0",
+      "playwright": "1.63.0"
+    },
+    "native_compiler": {
+      "executable": "/work/frontend/node_modules/typescript/bin/tsc",
+      "package": {
+        "name": "typescript",
+        "version": "7.0.2",
+        "path": "/work/frontend/node_modules/typescript/package.json",
+        "sha256": "3722b30210616a13a3213ded11575ba6b2dbab10c32a5ef67afca8513e27017e"
+      },
+      "executable_sha256": "2219f428a7e55aaf1f7ad85b9b0f0cf5078aeb76ccc9a7c6036c92d48f492ffd"
+    },
+    "parser_api": {
+      "package": {
+        "name": "@typescript/typescript6",
+        "version": "6.0.2",
+        "path": "/work/frontend/node_modules/@typescript/typescript6/package.json",
+        "sha256": "d9b8fb53c67c947fece83bcb73fa8512227ea6a12b110e096fdab8ecdc02b655"
+      },
+      "implementation": {
+        "name": "typescript",
+        "version": "6.0.3",
+        "path": "/work/frontend/node_modules/@typescript/old/lib/typescript.js",
+        "manifest_sha256": "9332e97c30d3e53ed54910b89207ed657fb444066484df6e5b6965bf130865e9",
+        "entry_sha256": "569177652966bd528c319171c7dd22860dbf72bde116cbc4f644f1d02bb12e39"
+      },
+      "role": "AST/transpilation only; native7 is authoritative for typechecking"
+    },
+    "managed_build": {
+      "source": "frontend/dist",
+      "embedded": "go-backend/embedfs/dist",
+      "files": [
+        ".vite/manifest.json",
+        "assets/AccountBar-C9YwTva-.js",
+        "assets/Alchimie-DWBTmhUZ.js",
+        "assets/Alchimie-DxBkLLr5.css",
+        "assets/CaldRece-0dIO_Auo.css",
+        "assets/CaldRece-D0O7hLyt.js",
+        "assets/CategoryPicker-4pf-v9jW.css",
+        "assets/CategoryPicker-BGUdDfG-.js",
+        "assets/Conexiuni-D2QJHejd.css",
+        "assets/Conexiuni-dv1j2-AJ.js",
+        "assets/CspStyle-B1RwaPM1.js",
+        "assets/CspStyle-x1XGuNl0.css",
+        "assets/derivedReplay-Bor7pKb-.js",
+        "assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+        "assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+        "assets/GameOptions-CEWYWGsz.css",
+        "assets/GameOptions-DNs5X9aU.js",
+        "assets/GameSetupOptions-SfCDbO8j.js",
+        "assets/index-BoCfe88_.js",
+        "assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+        "assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+        "assets/Intrusul-BQp0TQAh.js",
+        "assets/Intrusul-D_KdYx8Y.css",
+        "assets/Lant-B2xbfLDc.js",
+        "assets/Lant-DhowxvTS.css",
+        "assets/Perechi-CVshKqJz.js",
+        "assets/Perechi-DUzfG4A6.css",
+        "assets/Ranking-CveSnMPN.css",
+        "assets/Ranking-DyP8GGNY.js",
+        "assets/rolldown-runtime-CbXtAM7H.js",
+        "assets/startup-BP5Pvlg1.js",
+        "assets/startup-uZN142Lb.css",
+        "assets/useSavedGameResume-CLCJZjna.js",
+        "index.html"
+      ],
+      "identity": {
+        "path": "go-backend/embedfs/build/dist/.gui-build.json",
+        "sha": "c40fc14ed562b02baf22bcc5dc593e40457ecdb6",
+        "tree_sha256": "fb63aadd437ef40b6d68472307f056523e6303d092e078b3474fa0b3ecd41a9f",
+        "manifest_sha256": "8cd196f99932cc35027094855bbcd18d2ed2a2d1dd477a564adb611b79d9f971",
+        "versions_lock_sha256": "7ce6c385dde548aba1fc821f557179ef0fdb8d0b8147f1847bdd267e041100be"
+      },
+      "legacy": {
+        "proof": "legacy/original-bundle.json",
+        "archive": "legacy/cat_de_roman_esti-legacy-93066854f67245d4b70c0ea97dc2401445a3218c.tgz",
+        "sha256": "742bb11130fa2bf52ba5c64cb9cfd452f7d8ac3a4fd9dc6d77e8064a6b8fef65",
+        "files": [
+          ".vite/manifest.json",
+          "assets/AccountBar-B_1k6UL8.js",
+          "assets/Alchimie-BkN0hBpY.js",
+          "assets/Alchimie-DdrzYmQc.css",
+          "assets/auth-CnzO1y42.js",
+          "assets/CaldRece-B885PE19.css",
+          "assets/CaldRece-BeT20Ptx.js",
+          "assets/CategoryPicker-BdaaYRb5.js",
+          "assets/Conexiuni-Cpid-uuX.js",
+          "assets/Conexiuni-DfW6SbKo.css",
+          "assets/derivedReplay-Bor7pKb-.js",
+          "assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+          "assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+          "assets/GameOptions-CEWYWGsz.css",
+          "assets/GameOptions-ia4sPKKo.js",
+          "assets/GameSetupOptions-CMNeowgo.js",
+          "assets/index-D9HNWgEs.css",
+          "assets/index-qYTSE3Vo.js",
+          "assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+          "assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+          "assets/Intrusul-D_KdYx8Y.css",
+          "assets/Intrusul-Ga_cb812.js",
+          "assets/Lant-BHivICVC.css",
+          "assets/Lant-CNm6lAs4.js",
+          "assets/Perechi-BmY0hozH.js",
+          "assets/Perechi-DUzfG4A6.css",
+          "assets/Ranking-m788lj7M.js",
+          "assets/scoreSync-BVBILyAK.js",
+          "assets/useSavedGameResume-DPDD-JYv.js",
+          "index.html"
+        ]
+      }
+    },
+    "runtime_dependencies": {
+      "react": "19.2.7",
+      "react-dom": "19.2.7",
+      "motion": "14.0.0",
+      "framer-motion": "14.0.0"
+    },
+    "ui_adoption": {
+      "mode": "staged-react",
+      "until": "S1-M2",
+      "legacy": {
+        "version": "0.3.0",
+        "archive_sha256": "1934a81cdfd737a051f591ebcae072f5028943b715456dbb2899b483d399c244",
+        "source_sha": "45edcf2ce170c112621c73609e6e169633eb38a8",
+        "receipt": "docs/reviews/gui-original-react/receipt.json",
+        "receipt_sha256": "5c5704bc05511f91a02582c17e515500d2c8bca471f1c50cfd2505b646a27e58"
+      }
+    },
+    "original_receipt": {
+      "path": "docs/reviews/gui-original-react/receipt.json",
+      "sha256": "5c5704bc05511f91a02582c17e515500d2c8bca471f1c50cfd2505b646a27e58"
+    },
+    "sealed_fixtures": [
+      {
+        "id": "original-intrusul-intro-single-flight",
+        "suite": "behavior",
+        "assertions": [
+          "intro.inert-and-busy",
+          "intro.all-actions-disabled",
+          "intro.no-second-create-or-saved-pointer",
+          "intro.authoritative-board-and-pointer"
+        ]
+      },
+      {
+        "id": "original-intrusul-leaving-actions",
+        "suite": "presence",
+        "assertions": [
+          "exit.mounted-controls-locked",
+          "exit.no-requests-or-score-writes"
+        ]
+      },
+      {
+        "id": "original-intrusul-leaving-earned-hint",
+        "suite": "presence",
+        "assertions": [
+          "exit.earned-control-is-mounted-and-disabled",
+          "exit.earned-control-causes-no-mutation-read-record"
+        ]
+      },
+      {
+        "id": "original-intrusul-leaving-recovery-retry",
+        "suite": "presence",
+        "assertions": [
+          "exit.earned-control-is-mounted-and-disabled",
+          "exit.earned-control-causes-no-mutation-read-record"
+        ]
+      },
+      {
+        "id": "original-intrusul-held-winning-mutation",
+        "suite": "presence",
+        "assertions": [
+          "exit.reply-released-while-mounted-and-locked",
+          "stale.no-transient-terminal-adoption-during-exit",
+          "stale.no-record-no-result-no-extra-request",
+          "resume.result-visible",
+          "resume.one-local-row",
+          "resume.one-completion-receipt",
+          "resume.saved-pointer-cleared",
+          "resume.repeat-does-not-record-again"
+        ]
+      },
+      {
+        "id": "original-intrusul-held-winning-read",
+        "suite": "presence",
+        "assertions": [
+          "exit.reply-released-while-mounted-and-locked",
+          "stale.no-transient-terminal-adoption-during-exit",
+          "stale.no-record-no-result-no-extra-request",
+          "resume.result-visible",
+          "resume.one-local-row",
+          "resume.one-completion-receipt",
+          "resume.saved-pointer-cleared",
+          "resume.repeat-does-not-record-again"
+        ]
+      },
+      {
+        "id": "original-intrusul-held-winning-unmounted",
+        "suite": "presence",
+        "assertions": [
+          "stale.no-record-no-result-no-extra-request",
+          "resume.result-visible",
+          "resume.one-local-row",
+          "resume.one-completion-receipt",
+          "resume.saved-pointer-cleared",
+          "resume.repeat-does-not-record-again"
+        ]
+      },
+      {
+        "id": "original-intrusul-private-upload-once-after-resume",
+        "suite": "behavior",
+        "assertions": [
+          "upload.stale-reply-sends-nothing",
+          "resume.result-visible",
+          "resume.one-local-row",
+          "resume.one-completion-receipt",
+          "resume.saved-pointer-cleared",
+          "upload.exactly-one-earned-row",
+          "upload.repeat-resume-never-sends-second-row"
+        ]
+      },
+      {
+        "id": "original-perechi-intro-single-flight",
+        "suite": "behavior",
+        "assertions": [
+          "intro.inert-and-busy",
+          "intro.all-actions-disabled",
+          "intro.no-second-create-or-saved-pointer",
+          "intro.authoritative-board-and-pointer"
+        ]
+      },
+      {
+        "id": "original-perechi-leaving-actions",
+        "suite": "presence",
+        "assertions": [
+          "exit.mounted-controls-locked",
+          "exit.no-requests-or-score-writes"
+        ]
+      },
+      {
+        "id": "original-perechi-leaving-earned-hint",
+        "suite": "presence",
+        "assertions": [
+          "exit.earned-control-is-mounted-and-disabled",
+          "exit.earned-control-causes-no-mutation-read-record"
+        ]
+      },
+      {
+        "id": "original-perechi-leaving-recovery-retry",
+        "suite": "presence",
+        "assertions": [
+          "exit.earned-control-is-mounted-and-disabled",
+          "exit.earned-control-causes-no-mutation-read-record"
+        ]
+      },
+      {
+        "id": "original-perechi-held-winning-mutation",
+        "suite": "presence",
+        "assertions": [
+          "exit.reply-released-while-mounted-and-locked",
+          "stale.no-transient-terminal-adoption-during-exit",
+          "stale.no-record-no-result-no-extra-request",
+          "resume.result-visible",
+          "resume.one-local-row",
+          "resume.one-completion-receipt",
+          "resume.saved-pointer-cleared",
+          "resume.repeat-does-not-record-again"
+        ]
+      },
+      {
+        "id": "original-perechi-held-winning-read",
+        "suite": "presence",
+        "assertions": [
+          "exit.reply-released-while-mounted-and-locked",
+          "stale.no-transient-terminal-adoption-during-exit",
+          "stale.no-record-no-result-no-extra-request",
+          "resume.result-visible",
+          "resume.one-local-row",
+          "resume.one-completion-receipt",
+          "resume.saved-pointer-cleared",
+          "resume.repeat-does-not-record-again"
+        ]
+      },
+      {
+        "id": "original-perechi-held-winning-unmounted",
+        "suite": "presence",
+        "assertions": [
+          "stale.no-record-no-result-no-extra-request",
+          "resume.result-visible",
+          "resume.one-local-row",
+          "resume.one-completion-receipt",
+          "resume.saved-pointer-cleared",
+          "resume.repeat-does-not-record-again"
+        ]
+      },
+      {
+        "id": "original-perechi-private-upload-once-after-resume",
+        "suite": "behavior",
+        "assertions": [
+          "upload.stale-reply-sends-nothing",
+          "resume.result-visible",
+          "resume.one-local-row",
+          "resume.one-completion-receipt",
+          "resume.saved-pointer-cleared",
+          "upload.exactly-one-earned-row",
+          "upload.repeat-resume-never-sends-second-row"
+        ]
+      }
+    ]
+  },
+  "sha": "c40fc14ed562b02baf22bcc5dc593e40457ecdb6",
+  "tree_sha256": "fb63aadd437ef40b6d68472307f056523e6303d092e078b3474fa0b3ecd41a9f",
+  "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+  "runtime_sdk": {
+    "name": "@roedu/ui",
+    "version": "0.3.0",
+    "archive_sha256": "1934a81cdfd737a051f591ebcae072f5028943b715456dbb2899b483d399c244",
+    "manifest_sha256": "1e693baa0e9187ffcdd6c35f841370e70ec71551751d10fc01902b6be2f57357",
+    "entry": "dist/index.js",
+    "entry_sha256": "45bc37efd15df1d9671d17e5d5f96518128a19da9af4bdfc3d437906ab8d049d"
+  },
+  "runtime_dependencies": {
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "motion": "14.0.0",
+    "framer-motion": "14.0.0"
+  },
+  "dependency_graph": {
+    "manifest": {
+      "path": ".gate/gen/normalized-react/evidence/normalized-package.json",
+      "sha256": "adf9fad307592089214aee4026ec02461e446dc724fd07ead6edd36371d5cb99"
+    },
+    "lock": {
+      "path": ".gate/gen/normalized-react/evidence/normalized-lock.json",
+      "sha256": "e430c87d566567f5a47160ff6bd3b327d875894769891c1d3bbcdcd035dd3aec"
+    }
+  },
+  "fixtures": [
+    {
+      "id": "original-intrusul-intro-single-flight",
+      "suite": "behavior",
+      "source": {
+        "path": ".gate/gen/normalized-react/evidence/runtime.spec.mjs",
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a"
+      },
+      "assertions": [
+        {
+          "id": "intro.inert-and-busy",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "intro.all-actions-disabled",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "intro.no-second-create-or-saved-pointer",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "intro.authoritative-board-and-pointer",
+          "status": "pass",
+          "executed": true
+        }
+      ],
+      "executed": true
+    },
+    {
+      "id": "original-intrusul-leaving-actions",
+      "suite": "presence",
+      "source": {
+        "path": ".gate/gen/normalized-react/evidence/runtime.spec.mjs",
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a"
+      },
+      "assertions": [
+        {
+          "id": "exit.mounted-controls-locked",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "exit.no-requests-or-score-writes",
+          "status": "pass",
+          "executed": true
+        }
+      ],
+      "executed": true
+    },
+    {
+      "id": "original-intrusul-leaving-earned-hint",
+      "suite": "presence",
+      "source": {
+        "path": ".gate/gen/normalized-react/evidence/runtime.spec.mjs",
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a"
+      },
+      "assertions": [
+        {
+          "id": "exit.earned-control-is-mounted-and-disabled",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "exit.earned-control-causes-no-mutation-read-record",
+          "status": "pass",
+          "executed": true
+        }
+      ],
+      "executed": true
+    },
+    {
+      "id": "original-intrusul-leaving-recovery-retry",
+      "suite": "presence",
+      "source": {
+        "path": ".gate/gen/normalized-react/evidence/runtime.spec.mjs",
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a"
+      },
+      "assertions": [
+        {
+          "id": "exit.earned-control-is-mounted-and-disabled",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "exit.earned-control-causes-no-mutation-read-record",
+          "status": "pass",
+          "executed": true
+        }
+      ],
+      "executed": true
+    },
+    {
+      "id": "original-intrusul-held-winning-mutation",
+      "suite": "presence",
+      "source": {
+        "path": ".gate/gen/normalized-react/evidence/runtime.spec.mjs",
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a"
+      },
+      "assertions": [
+        {
+          "id": "exit.reply-released-while-mounted-and-locked",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "stale.no-transient-terminal-adoption-during-exit",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "stale.no-record-no-result-no-extra-request",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.result-visible",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-local-row",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-completion-receipt",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.saved-pointer-cleared",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.repeat-does-not-record-again",
+          "status": "pass",
+          "executed": true
+        }
+      ],
+      "executed": true
+    },
+    {
+      "id": "original-intrusul-held-winning-read",
+      "suite": "presence",
+      "source": {
+        "path": ".gate/gen/normalized-react/evidence/runtime.spec.mjs",
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a"
+      },
+      "assertions": [
+        {
+          "id": "exit.reply-released-while-mounted-and-locked",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "stale.no-transient-terminal-adoption-during-exit",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "stale.no-record-no-result-no-extra-request",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.result-visible",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-local-row",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-completion-receipt",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.saved-pointer-cleared",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.repeat-does-not-record-again",
+          "status": "pass",
+          "executed": true
+        }
+      ],
+      "executed": true
+    },
+    {
+      "id": "original-intrusul-held-winning-unmounted",
+      "suite": "presence",
+      "source": {
+        "path": ".gate/gen/normalized-react/evidence/runtime.spec.mjs",
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a"
+      },
+      "assertions": [
+        {
+          "id": "stale.no-record-no-result-no-extra-request",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.result-visible",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-local-row",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-completion-receipt",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.saved-pointer-cleared",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.repeat-does-not-record-again",
+          "status": "pass",
+          "executed": true
+        }
+      ],
+      "executed": true
+    },
+    {
+      "id": "original-intrusul-private-upload-once-after-resume",
+      "suite": "behavior",
+      "source": {
+        "path": ".gate/gen/normalized-react/evidence/runtime.spec.mjs",
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a"
+      },
+      "assertions": [
+        {
+          "id": "upload.stale-reply-sends-nothing",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.result-visible",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-local-row",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-completion-receipt",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.saved-pointer-cleared",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "upload.exactly-one-earned-row",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "upload.repeat-resume-never-sends-second-row",
+          "status": "pass",
+          "executed": true
+        }
+      ],
+      "executed": true
+    },
+    {
+      "id": "original-perechi-intro-single-flight",
+      "suite": "behavior",
+      "source": {
+        "path": ".gate/gen/normalized-react/evidence/runtime.spec.mjs",
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a"
+      },
+      "assertions": [
+        {
+          "id": "intro.inert-and-busy",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "intro.all-actions-disabled",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "intro.no-second-create-or-saved-pointer",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "intro.authoritative-board-and-pointer",
+          "status": "pass",
+          "executed": true
+        }
+      ],
+      "executed": true
+    },
+    {
+      "id": "original-perechi-leaving-actions",
+      "suite": "presence",
+      "source": {
+        "path": ".gate/gen/normalized-react/evidence/runtime.spec.mjs",
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a"
+      },
+      "assertions": [
+        {
+          "id": "exit.mounted-controls-locked",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "exit.no-requests-or-score-writes",
+          "status": "pass",
+          "executed": true
+        }
+      ],
+      "executed": true
+    },
+    {
+      "id": "original-perechi-leaving-earned-hint",
+      "suite": "presence",
+      "source": {
+        "path": ".gate/gen/normalized-react/evidence/runtime.spec.mjs",
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a"
+      },
+      "assertions": [
+        {
+          "id": "exit.earned-control-is-mounted-and-disabled",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "exit.earned-control-causes-no-mutation-read-record",
+          "status": "pass",
+          "executed": true
+        }
+      ],
+      "executed": true
+    },
+    {
+      "id": "original-perechi-leaving-recovery-retry",
+      "suite": "presence",
+      "source": {
+        "path": ".gate/gen/normalized-react/evidence/runtime.spec.mjs",
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a"
+      },
+      "assertions": [
+        {
+          "id": "exit.earned-control-is-mounted-and-disabled",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "exit.earned-control-causes-no-mutation-read-record",
+          "status": "pass",
+          "executed": true
+        }
+      ],
+      "executed": true
+    },
+    {
+      "id": "original-perechi-held-winning-mutation",
+      "suite": "presence",
+      "source": {
+        "path": ".gate/gen/normalized-react/evidence/runtime.spec.mjs",
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a"
+      },
+      "assertions": [
+        {
+          "id": "exit.reply-released-while-mounted-and-locked",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "stale.no-transient-terminal-adoption-during-exit",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "stale.no-record-no-result-no-extra-request",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.result-visible",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-local-row",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-completion-receipt",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.saved-pointer-cleared",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.repeat-does-not-record-again",
+          "status": "pass",
+          "executed": true
+        }
+      ],
+      "executed": true
+    },
+    {
+      "id": "original-perechi-held-winning-read",
+      "suite": "presence",
+      "source": {
+        "path": ".gate/gen/normalized-react/evidence/runtime.spec.mjs",
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a"
+      },
+      "assertions": [
+        {
+          "id": "exit.reply-released-while-mounted-and-locked",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "stale.no-transient-terminal-adoption-during-exit",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "stale.no-record-no-result-no-extra-request",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.result-visible",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-local-row",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-completion-receipt",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.saved-pointer-cleared",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.repeat-does-not-record-again",
+          "status": "pass",
+          "executed": true
+        }
+      ],
+      "executed": true
+    },
+    {
+      "id": "original-perechi-held-winning-unmounted",
+      "suite": "presence",
+      "source": {
+        "path": ".gate/gen/normalized-react/evidence/runtime.spec.mjs",
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a"
+      },
+      "assertions": [
+        {
+          "id": "stale.no-record-no-result-no-extra-request",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.result-visible",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-local-row",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-completion-receipt",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.saved-pointer-cleared",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.repeat-does-not-record-again",
+          "status": "pass",
+          "executed": true
+        }
+      ],
+      "executed": true
+    },
+    {
+      "id": "original-perechi-private-upload-once-after-resume",
+      "suite": "behavior",
+      "source": {
+        "path": ".gate/gen/normalized-react/evidence/runtime.spec.mjs",
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a"
+      },
+      "assertions": [
+        {
+          "id": "upload.stale-reply-sends-nothing",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.result-visible",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-local-row",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.one-completion-receipt",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "resume.saved-pointer-cleared",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "upload.exactly-one-earned-row",
+          "status": "pass",
+          "executed": true
+        },
+        {
+          "id": "upload.repeat-resume-never-sends-second-row",
+          "status": "pass",
+          "executed": true
+        }
+      ],
+      "executed": true
+    }
+  ]
+}

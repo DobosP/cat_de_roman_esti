@@ -1,0 +1,1133 @@
+{
+  "schema": 1,
+  "status": "CORRECTED_SOURCE_SUCCESSOR_AUTHORED_NOT_RUN",
+  "baseline": "7b9803f4698ab73878a6efc205b26350ff456eab",
+  "original_C40": {
+    "baseline": "c40fc14ed562b02baf22bcc5dc593e40457ecdb6",
+    "tree_sha256": "fb63aadd437ef40b6d68472307f056523e6303d092e078b3474fa0b3ecd41a9f",
+    "result_sha256": "6ddb935fff271139ccba3931fe7b6a65d8aaa26c0109dada0f4989bb3efe39a7",
+    "raw900_sha256": "5c658d65664ad6c770f2742f53044a4b49fa229f536d46a651d6256481e4e83c",
+    "structured900_sha256": "ed04b36d785e167d3a479b0dfefc9d9b0aeb6751b7aba099f3d7d4ea4455d288",
+    "whole_capture_sha256": "654d92d434ead3fa70cf954edce19ed548ee39892cc80e53b6a149f7304bdc60",
+    "parent_review_sha256": "67b86e931efdeee06c8f5973811c8025ec188518f3069ba84cf916377e9c59d8"
+  },
+  "preserved_unaccepted_7b_packet": {
+    "namespace": "/home/dobo/work/_temp/fix__gui-cat-prerequisites-linux/legacy-regex-retirement-20261009",
+    "mapping_sha256": "ca399f6413f8c9161c13336b55ef406ee06f7ccb6b9c4cbb4566bf8e4082c692",
+    "closure_sha256": "89d5d11530ccbcd8a4da1a47f45c22501702e832b452780fa1db9e35c6dd9e74",
+    "decision_sha256": "902aaf203a9aed34051093ee33664d13a299d1f6dd6a06de1939a39d659b1230",
+    "files_preserved": 38,
+    "reason": "Original typed-coverage claims were incomplete. Overall retirement acceptance is not inferred; valid retained-block/100guard byte reviews at7b remain historical facts."
+  },
+  "current_disposition_counts": {
+    "whole_ui_source_files_retired": 18,
+    "mixed_files_trimmed": 6,
+    "temporary_typed_guard_files_retained": 3,
+    "compiled_consumer_fixture_intentionally_extended": 1
+  },
+  "dispositions": [
+    {
+      "path": "frontend/tests/alchimie-empty-recovery.test.mjs",
+      "disposition": "whole-ui-source-file-retired",
+      "after": null,
+      "browser_files": [
+        "frontend/e2e/alchimie-empty-pairs.spec.mjs",
+        "frontend/e2e/alchimie-workbench.spec.mjs",
+        "frontend/e2e/alchimie-action-recovery.spec.mjs",
+        "frontend/e2e/gui-m0-alchimie-parity.spec.mjs"
+      ],
+      "other_boundaries": []
+    },
+    {
+      "path": "frontend/tests/alchimie-lineage.test.mjs",
+      "disposition": "whole-ui-source-file-retired",
+      "after": null,
+      "browser_files": [
+        "frontend/e2e/gui-m0-alchimie-parity.spec.mjs",
+        "frontend/e2e/alchimie-workbench.spec.mjs",
+        "frontend/e2e/alchimie-journal-search.spec.mjs",
+        "frontend/e2e/help.spec.mjs"
+      ],
+      "other_boundaries": []
+    },
+    {
+      "path": "frontend/tests/alchimie-projection.test.mjs",
+      "disposition": "whole-ui-source-file-retired",
+      "after": null,
+      "browser_files": [
+        "frontend/e2e/alchimie-workbench.spec.mjs",
+        "frontend/e2e/alchimie-journal-search.spec.mjs",
+        "frontend/e2e/gui-m0-alchimie-parity.spec.mjs",
+        "frontend/e2e/alchimie-action-recovery.spec.mjs"
+      ],
+      "other_boundaries": [
+        "api-consumer2",
+        "native-whole-http1207"
+      ]
+    },
+    {
+      "path": "frontend/tests/v42-alchimie-fresh-board.test.mjs",
+      "disposition": "whole-ui-source-file-retired",
+      "after": null,
+      "browser_files": [
+        "frontend/e2e/gui-m0-alchimie-parity.spec.mjs",
+        "frontend/e2e/game-touch-targets.spec.mjs"
+      ],
+      "other_boundaries": []
+    },
+    {
+      "path": "frontend/tests/contexto-api.test.mjs",
+      "disposition": "whole-ui-source-file-retired",
+      "after": null,
+      "browser_files": [],
+      "other_boundaries": [
+        "api-consumer2",
+        "native-whole-http1207"
+      ]
+    },
+    {
+      "path": "frontend/tests/contexto-comparative-controls.test.mjs",
+      "disposition": "temporary-typed-source-guard-retained",
+      "after": {
+        "bytes": 929,
+        "sha256": "300e2437eeb93509a9522bd31fb334f7a1809c9f267568d59ff0fb0f422eda90",
+        "mode": 33204
+      },
+      "typed_obligations": [
+        "Guess.attempt_number required number",
+        "GuessFeedback.rank_delta optional number",
+        "GuessAccepted.feedback required GuessFeedback",
+        "seven known GuessFeedbackKind members assignable; no exact closed-union guarantee"
+      ],
+      "compiled_replacement_status": "AUTHORED NOT RUN; old API2 did not cover these fields",
+      "ui_assertions": "remain retired under accepted C40 browser proof; only the exact typed clause/block is restored"
+    },
+    {
+      "path": "frontend/tests/contexto-progressive-clue.test.mjs",
+      "disposition": "whole-ui-source-file-retired",
+      "after": null,
+      "browser_files": [
+        "frontend/e2e/gui-m0-contexto-parity.spec.mjs",
+        "frontend/e2e/contexto-action-recovery.spec.mjs",
+        "frontend/e2e/contexto-simpler-ui.spec.mjs"
+      ],
+      "other_boundaries": [
+        "api-consumer2"
+      ]
+    },
+    {
+      "path": "frontend/tests/cald-rece-recovery.test.mjs",
+      "disposition": "temporary-typed-source-guard-retained",
+      "after": {
+        "bytes": 617,
+        "sha256": "f5ae0fc9aeb76749bb05be3dfb1359f123acd3c8cabdbad6f12afdca1a027257",
+        "mode": 33204
+      },
+      "typed_obligations": [
+        "GuessRejected.suggestions required string[]",
+        "GuessAccepted.message optional string"
+      ],
+      "compiled_replacement_status": "AUTHORED NOT RUN; old API2 did not cover these fields",
+      "ui_assertions": "remain retired under accepted C40 browser proof; only the exact typed clause/block is restored"
+    },
+    {
+      "path": "frontend/tests/v42-caldrece-legend-confirm.test.mjs",
+      "disposition": "whole-ui-source-file-retired",
+      "after": null,
+      "browser_files": [
+        "frontend/e2e/gui-m0-contexto-parity.spec.mjs",
+        "frontend/e2e/contexto-simpler-ui.spec.mjs"
+      ],
+      "other_boundaries": [
+        "api-consumer2"
+      ]
+    },
+    {
+      "path": "frontend/tests/conexiuni-one-away.test.mjs",
+      "disposition": "whole-ui-source-file-retired",
+      "after": null,
+      "browser_files": [
+        "frontend/e2e/conexiuni-action-recovery.spec.mjs",
+        "frontend/e2e/gui-m0-conexiuni-parity.spec.mjs",
+        "frontend/e2e/conexiuni-coach-layout.spec.mjs",
+        "frontend/e2e/conexiuni-simpler-ui.spec.mjs"
+      ],
+      "other_boundaries": [
+        "selection-key3"
+      ]
+    },
+    {
+      "path": "frontend/tests/persistent-game-navigation.test.mjs",
+      "disposition": "whole-ui-source-file-retired",
+      "after": null,
+      "browser_files": [
+        "frontend/e2e/lifecycle.spec.mjs",
+        "frontend/e2e/conexiuni-action-recovery.spec.mjs",
+        "frontend/e2e/conexiuni-coach-layout.spec.mjs",
+        "frontend/e2e/conexiuni-simpler-ui.spec.mjs",
+        "frontend/e2e/game-touch-targets.spec.mjs"
+      ],
+      "other_boundaries": []
+    },
+    {
+      "path": "frontend/tests/lant-recovery-feedback.test.mjs",
+      "disposition": "whole-ui-source-file-retired",
+      "after": null,
+      "browser_files": [
+        "frontend/e2e/lant-action-recovery.spec.mjs",
+        "frontend/e2e/lant-current-position.spec.mjs",
+        "frontend/e2e/lant-relationship-captions.spec.mjs",
+        "frontend/e2e/lant-simpler-ui.spec.mjs",
+        "frontend/e2e/gui-m0-lant-parity.spec.mjs"
+      ],
+      "other_boundaries": [
+        "api-consumer2",
+        "native-whole-http1207"
+      ]
+    },
+    {
+      "path": "frontend/tests/v37-pilot-lobby.test.mjs",
+      "disposition": "whole-ui-source-file-retired",
+      "after": null,
+      "browser_files": [
+        "frontend/e2e/gui-m0-replacement-parity.spec.mjs",
+        "frontend/e2e/gui-m0-home-parity.spec.mjs"
+      ],
+      "other_boundaries": []
+    },
+    {
+      "path": "frontend/tests/v38-six-game-ui.test.mjs",
+      "disposition": "whole-ui-source-file-retired",
+      "after": null,
+      "browser_files": [
+        "frontend/e2e/gui-m0-replacement-parity.spec.mjs",
+        "frontend/e2e/gui-m0-home-parity.spec.mjs",
+        "frontend/e2e/gui-replacement-contracts.spec.mjs",
+        "frontend/e2e/game-touch-targets.spec.mjs",
+        "frontend/e2e/quick-games-simpler-ui.spec.mjs"
+      ],
+      "other_boundaries": [
+        "sealed16-78"
+      ]
+    },
+    {
+      "path": "frontend/tests/v39-verified-ranking.test.mjs",
+      "disposition": "temporary-typed-source-guard-retained",
+      "after": {
+        "bytes": 352,
+        "sha256": "403cd920de756cf4387facd140233bf7ea5b83a37972098017c564274f1c7faa",
+        "mode": 33204
+      },
+      "typed_obligations": [
+        "RankingRow.is_me required boolean"
+      ],
+      "compiled_replacement_status": "AUTHORED NOT RUN; old API2 did not cover these fields",
+      "ui_assertions": "remain retired under accepted C40 browser proof; only the exact typed clause/block is restored"
+    },
+    {
+      "path": "frontend/tests/v41-ranking-recovery.test.mjs",
+      "disposition": "whole-ui-source-file-retired",
+      "after": null,
+      "browser_files": [
+        "frontend/e2e/gui-replacement-contracts.spec.mjs"
+      ],
+      "other_boundaries": []
+    },
+    {
+      "path": "frontend/tests/v41-category-availability.test.mjs",
+      "disposition": "whole-ui-source-file-retired",
+      "after": null,
+      "browser_files": [
+        "frontend/e2e/gui-m0-category-parity.spec.mjs",
+        "frontend/e2e/contexto-simpler-ui.spec.mjs"
+      ],
+      "other_boundaries": [
+        "api-consumer2"
+      ]
+    },
+    {
+      "path": "frontend/tests/v1-board-grid-steps.test.mjs",
+      "disposition": "whole-ui-source-file-retired",
+      "after": null,
+      "browser_files": [
+        "frontend/e2e/v1-board-grid-steps.spec.mjs",
+        "frontend/e2e/game-touch-targets.spec.mjs",
+        "frontend/e2e/alchimie-workbench.spec.mjs",
+        "frontend/e2e/accessibility.spec.mjs"
+      ],
+      "other_boundaries": []
+    },
+    {
+      "path": "frontend/tests/v42-derived-loss-and-starter.test.mjs",
+      "disposition": "whole-ui-source-file-retired",
+      "after": null,
+      "browser_files": [
+        "frontend/e2e/perechi-loss-progress.spec.mjs",
+        "frontend/e2e/quick-games-simpler-ui.spec.mjs",
+        "frontend/e2e/gui-m0-derived-presentation-parity.spec.mjs"
+      ],
+      "other_boundaries": [
+        "native-whole-http1207"
+      ]
+    },
+    {
+      "path": "frontend/tests/v14-romanian-replay.test.mjs",
+      "disposition": "whole-ui-source-file-retired",
+      "after": null,
+      "browser_files": [
+        "frontend/e2e/lifecycle.spec.mjs",
+        "frontend/e2e/gui-m0-daily-intent-parity.spec.mjs",
+        "frontend/e2e/gui-m0-alchimie-parity.spec.mjs",
+        "frontend/e2e/gui-m0-lant-parity.spec.mjs",
+        "frontend/e2e/gui-m0-account-copy-parity.spec.mjs",
+        "frontend/e2e/help.spec.mjs"
+      ],
+      "other_boundaries": [
+        "sealed16-78"
+      ]
+    },
+    {
+      "path": "frontend/tests/mobile-beginner-ui.test.mjs",
+      "disposition": "whole-ui-source-file-retired",
+      "after": null,
+      "browser_files": [
+        "frontend/e2e/help.spec.mjs",
+        "frontend/e2e/game-touch-targets.spec.mjs",
+        "frontend/e2e/v1-board-grid-steps.spec.mjs",
+        "frontend/e2e/mobile-status-notices.spec.mjs",
+        "frontend/e2e/accessibility.spec.mjs",
+        "frontend/e2e/v96-input-and-focus.spec.mjs"
+      ],
+      "other_boundaries": []
+    },
+    {
+      "path": "frontend/tests/game-help.test.mjs",
+      "disposition": "mixed-trim-preserved-from-7b",
+      "after": {
+        "bytes": 1258,
+        "sha256": "ee346656ee2665abfe6822af9d33140f4564884524c4f95ecf429d663de29d5d",
+        "mode": 33204
+      },
+      "preservation": "all prior13 kept-block invariants unchanged",
+      "browser_files": [
+        "frontend/e2e/help.spec.mjs",
+        "frontend/e2e/alchimie-workbench.spec.mjs"
+      ]
+    },
+    {
+      "path": "frontend/tests/v38-recovery.test.mjs",
+      "disposition": "mixed-trim-preserved-from-7b",
+      "after": {
+        "bytes": 1369,
+        "sha256": "ea26ffe96c192572f2cbd86ebcec9ee309151c0efc897506a1eca72435931bae",
+        "mode": 33204
+      },
+      "preservation": "all prior13 kept-block invariants unchanged",
+      "browser_files": [
+        "frontend/e2e/derived-action-recovery.spec.mjs",
+        "frontend/e2e/gui-m0-derived-presentation-parity.spec.mjs"
+      ]
+    },
+    {
+      "path": "frontend/tests/v39-derived-ui-clarity.test.mjs",
+      "disposition": "mixed-trim-preserved-from-7b",
+      "after": {
+        "bytes": 744,
+        "sha256": "d708887741d1cafc32c329cc48dee74e2d7fd822a0583a3e6ea696573ab82a47",
+        "mode": 33204
+      },
+      "preservation": "all prior13 kept-block invariants unchanged",
+      "browser_files": [
+        "frontend/e2e/gui-m0-derived-presentation-parity.spec.mjs",
+        "frontend/e2e/gui-m0-daily-intent-parity.spec.mjs",
+        "frontend/e2e/gui-m0-replacement-parity.spec.mjs",
+        "frontend/e2e/quick-games-simpler-ui.spec.mjs"
+      ]
+    },
+    {
+      "path": "frontend/tests/v1-daily-intent.test.mjs",
+      "disposition": "mixed-trim-preserved-from-7b",
+      "after": {
+        "bytes": 2762,
+        "sha256": "beb9f6e271bfd3fcdfa8b879118bb712b6c013f06d33cba2310cc997ca4c6278",
+        "mode": 33204
+      },
+      "preservation": "all prior13 kept-block invariants unchanged",
+      "browser_files": [
+        "frontend/e2e/gui-m0-daily-intent-parity.spec.mjs",
+        "frontend/e2e/v1-testing-ux.spec.mjs",
+        "frontend/e2e/resume-recovery.spec.mjs"
+      ]
+    },
+    {
+      "path": "frontend/tests/v39-local-daily-circuit.test.mjs",
+      "disposition": "mixed-trim-preserved-from-7b",
+      "after": {
+        "bytes": 3927,
+        "sha256": "dbf98d81d000a07e2f441736320b1f5dd73dc36a8590258634760fc4db1f6fbe",
+        "mode": 33204
+      },
+      "preservation": "all prior13 kept-block invariants unchanged",
+      "browser_files": [
+        "frontend/e2e/gui-m0-home-parity.spec.mjs",
+        "frontend/e2e/gui-m0-replacement-parity.spec.mjs",
+        "frontend/e2e/gui-replacement-contracts.spec.mjs"
+      ]
+    },
+    {
+      "path": "frontend/tests/v42-meta-loop.test.mjs",
+      "disposition": "mixed-trim-preserved-from-7b",
+      "after": {
+        "bytes": 4902,
+        "sha256": "c3f07c2ddfba12a7b1de7e02856c7c75675cd025ab62e3c8473c8036a641c938",
+        "mode": 33204
+      },
+      "preservation": "all prior13 kept-block invariants unchanged",
+      "browser_files": [
+        "frontend/e2e/gui-m0-home-parity.spec.mjs",
+        "frontend/e2e/gui-m0-replacement-parity.spec.mjs",
+        "frontend/e2e/gui-replacement-contracts.spec.mjs"
+      ]
+    }
+  ],
+  "temporary_guards": [
+    {
+      "path": "frontend/tests/contexto-comparative-controls.test.mjs",
+      "after": {
+        "bytes": 929,
+        "sha256": "300e2437eeb93509a9522bd31fb334f7a1809c9f267568d59ff0fb0f422eda90",
+        "mode": 33204
+      },
+      "restored_original_typed_bytes": 695,
+      "restored_original_typed_sha256": "c8215ff5a1e4b1142a7e38aa5544b409cfd106acc4c2434c38d10f235a12c527",
+      "requirements": [
+        "Guess.attempt_number required number",
+        "GuessFeedback.rank_delta optional number",
+        "GuessAccepted.feedback required GuessFeedback",
+        "seven known GuessFeedbackKind members assignable; no exact closed-union guarantee"
+      ],
+      "status": "TEMPORARILY_RETAINED_UNTIL_ACTUAL_NEW_COMPILED_PROOF_PASSES",
+      "new_execution": "NONE"
+    },
+    {
+      "path": "frontend/tests/cald-rece-recovery.test.mjs",
+      "after": {
+        "bytes": 617,
+        "sha256": "f5ae0fc9aeb76749bb05be3dfb1359f123acd3c8cabdbad6f12afdca1a027257",
+        "mode": 33204
+      },
+      "restored_original_typed_bytes": 383,
+      "restored_original_typed_sha256": "ef58504e6e23eb6083e2a5175b3d7068d25ad2c4217992fdc60467c77fe6c1a4",
+      "requirements": [
+        "GuessRejected.suggestions required string[]",
+        "GuessAccepted.message optional string"
+      ],
+      "status": "TEMPORARILY_RETAINED_UNTIL_ACTUAL_NEW_COMPILED_PROOF_PASSES",
+      "new_execution": "NONE"
+    },
+    {
+      "path": "frontend/tests/v39-verified-ranking.test.mjs",
+      "after": {
+        "bytes": 352,
+        "sha256": "403cd920de756cf4387facd140233bf7ea5b83a37972098017c564274f1c7faa",
+        "mode": 33204
+      },
+      "restored_original_typed_bytes": 43,
+      "restored_original_typed_sha256": "ae22c8555cc82a0cf5f89a4b5773f539d89d6f8aec0576ff75076ede262c82c8",
+      "requirements": [
+        "RankingRow.is_me required boolean"
+      ],
+      "status": "TEMPORARILY_RETAINED_UNTIL_ACTUAL_NEW_COMPILED_PROOF_PASSES",
+      "new_execution": "NONE"
+    }
+  ],
+  "compiler_fixture": {
+    "path": "frontend/tests/fixtures/gui-api-consumer-contract.ts",
+    "before_sha256": "7243cd9c73bb4353c74a389088b3d7ec51d058012080cc1834103b261945f246",
+    "after_sha256": "63c04e657d0b1bc96e8719621dced637a150b4e3f4433a97aafeb0fb466e0380",
+    "bytes": 8510,
+    "mode": 33204,
+    "all_existing_assertions_helpers_import_semantics_preserved_by_exact_reverse": true,
+    "required_types": [
+      "Guess.attempt_number:number",
+      "GuessAccepted.feedback:GuessFeedback",
+      "GuessRejected.suggestions:string[]",
+      "RankingRow.is_me:boolean"
+    ],
+    "optional_types": [
+      "GuessFeedback.rank_delta:number|undefined",
+      "GuessAccepted.message:string|undefined"
+    ],
+    "known_feedback_members_assignable": [
+      "first",
+      "new-best",
+      "warmer",
+      "colder",
+      "same",
+      "repeat",
+      "found"
+    ],
+    "closed_union_assertion_added": false,
+    "ClueResult_optional_inherited_target_contract": "unchanged and truthful",
+    "actual_new_compiled_execution": "NOT RUN; existing real Native7CLI API2 case/helper unchanged",
+    "retirement_rule": "Retain all3 typed-source guard files until actual new compiled proof passes, then parent owns further retirement and same-SHA unit qualification."
+  },
+  "guard_preservation": {
+    "unchanged_files": 99,
+    "intentionally_extended_files": 1,
+    "unchanged": [
+      {
+        "path": "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json",
+        "bytes": 887736,
+        "sha256": "572882a77dbdd8bac63ca69c64c6990a1601a49551693cf1b1b5fcb7a81861de",
+        "mode": 33204
+      },
+      {
+        "path": "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json",
+        "bytes": 480002,
+        "sha256": "eeb7eede9009f09a7d9df012c7addb9f26b1b484040eb31c44ba2e6f7f35cee8",
+        "mode": 33204
+      },
+      {
+        "path": "cat_de_roman_esti/fixtures/board_demotions_v43.json",
+        "bytes": 1999,
+        "sha256": "c35261a5208d9b68d39a94f8602a5586db67eaecbe130c0c219f6a43fd1ef0a7",
+        "mode": 33204
+      },
+      {
+        "path": "cat_de_roman_esti/fixtures/board_rankings_v37.json",
+        "bytes": 164784,
+        "sha256": "036c8a00de347939d132ba25512da7cba53b12e9d11a9f86cecc07cc98293c31",
+        "mode": 33204
+      },
+      {
+        "path": "cat_de_roman_esti/fixtures/conexiuni_rejection_tombstones.json",
+        "bytes": 113252,
+        "sha256": "a52eed7f57b607568637960c07f490ded21867de6b47dbf833ce1d3ab52ef869",
+        "mode": 33204
+      },
+      {
+        "path": "cat_de_roman_esti/fixtures/contexto_demotions_v44.json",
+        "bytes": 287,
+        "sha256": "29c76be1d65fc38bf2e3a754d48ba3b96a8e6b6c95fde28c7c2fbd882ee9996c",
+        "mode": 33204
+      },
+      {
+        "path": "cat_de_roman_esti/fixtures/contexto_impact_reserve_v69.json",
+        "bytes": 245,
+        "sha256": "4c41d092c895c61aaccfbda3cb9522c4d5767a88d9af9343efccc182f71e7612",
+        "mode": 33204
+      },
+      {
+        "path": "cat_de_roman_esti/fixtures/derived_catalog_v38.json",
+        "bytes": 249190,
+        "sha256": "fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a",
+        "mode": 33204
+      },
+      {
+        "path": "cat_de_roman_esti/fixtures/games_pack.json",
+        "bytes": 410839,
+        "sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+        "mode": 33204
+      },
+      {
+        "path": "cat_de_roman_esti/fixtures/kg_real.json",
+        "bytes": 313428,
+        "sha256": "baf3d6c98f809479c5f690373cd297dece73286ec083b2e643191d4bb705c104",
+        "mode": 33204
+      },
+      {
+        "path": "cat_de_roman_esti/fixtures/kg_sample.json",
+        "bytes": 3674955,
+        "sha256": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf",
+        "mode": 33204
+      },
+      {
+        "path": "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json",
+        "bytes": 48681,
+        "sha256": "01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d",
+        "mode": 33204
+      },
+      {
+        "path": "cat_de_roman_esti/fixtures/quick_games_v92.json",
+        "bytes": 381527,
+        "sha256": "234305a844033cff0914a5213f6c0b8dcd1b21918d57cc851780259c9e87ee59",
+        "mode": 33204
+      },
+      {
+        "path": "cat_de_roman_esti/fixtures/release_reserve_v1.json",
+        "bytes": 5156,
+        "sha256": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+        "mode": 33204
+      },
+      {
+        "path": "frontend/e2e/gui-inventory.json",
+        "bytes": 230815,
+        "sha256": "763e1e7bfab83f4b469e55b87c1491ae2dff4debdc11412979bf3bdbe28fa278",
+        "mode": 33204
+      },
+      {
+        "path": "frontend/e2e/original/reporter.mjs",
+        "bytes": 1725,
+        "sha256": "20f561c1fcd1c0829460fdd4bdf58d51435d8ad5f4c162dfa21441fa5955a3c8",
+        "mode": 33204
+      },
+      {
+        "path": "frontend/e2e/original/runtime.spec.mjs",
+        "bytes": 16427,
+        "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a",
+        "mode": 33204
+      },
+      {
+        "path": "frontend/playwright.original.config.mjs",
+        "bytes": 1241,
+        "sha256": "6e05214dbbcb1bb5c2881a0a2a228ca1a3292039d1baea0858787856415ad14f",
+        "mode": 33204
+      },
+      {
+        "path": "frontend/testdata/motion-layout-shadow/entry.tsx",
+        "bytes": 10642,
+        "sha256": "ab648bb9388371341a322f978bfd37665802ad41a26a3d802d4fd1b30df00150",
+        "mode": 33204
+      },
+      {
+        "path": "frontend/testdata/motion-layout-shadow/fixture.css",
+        "bytes": 649,
+        "sha256": "33ac7e864f0ce21bbb83615e6812305eac5f2a215fa438692a4076a0a40681cd",
+        "mode": 33204
+      },
+      {
+        "path": "frontend/testdata/motion-layout-shadow/index.html",
+        "bytes": 331,
+        "sha256": "4298902a46db2d2e4327577cb3fc542422875f960fd299c39a5f2f8dfe9bb125",
+        "mode": 33204
+      },
+      {
+        "path": "frontend/testdata/motion-layout-shadow/runner.test.mjs",
+        "bytes": 39625,
+        "sha256": "1fdff5e7a0e93cef2556468f9070ac9dc597b43bce6a977b7638c28be65645ac",
+        "mode": 33204
+      },
+      {
+        "path": "frontend/testdata/motion-layout-shadow/tsconfig.json",
+        "bytes": 144,
+        "sha256": "8634d250c817477d1f2a4c259562b4bc8dc5920ca1a69ea6db2fe083e3706bb4",
+        "mode": 33204
+      },
+      {
+        "path": "frontend/tests/async-control.test.mjs",
+        "bytes": 1068,
+        "sha256": "b832927f1d799527ded324098b6a839a04530fe0c6c8305ff00a5fa918852a4c",
+        "mode": 33204
+      },
+      {
+        "path": "frontend/tests/bundle-budget.test.mjs",
+        "bytes": 14564,
+        "sha256": "05d312edce2590b2421eb7d54477ed8745c877e2746a154b11ed6de8239b5db1",
+        "mode": 33204
+      },
+      {
+        "path": "frontend/tests/conexiuni-selection-key.test.mjs",
+        "bytes": 4665,
+        "sha256": "6f07286bf2fc0594143cb5c55793c04f3f8960ee475927b679c70725bba517cf",
+        "mode": 33204
+      },
+      {
+        "path": "frontend/tests/contexto-action-recovery.test.mjs",
+        "bytes": 7681,
+        "sha256": "4777aa56582a2bc356615d04201ba5cfc6d9496c8260107bd3097359af65ab99",
+        "mode": 33204
+      },
+      {
+        "path": "frontend/tests/css-units.test.mjs",
+        "bytes": 6046,
+        "sha256": "79e6b0839b54968eb38d652b99de8c1d779a84c4cedab8b0d045236476227f4f",
+        "mode": 33188
+      },
+      {
+        "path": "frontend/tests/derived-replay-memory.test.mjs",
+        "bytes": 3916,
+        "sha256": "0fe106f4bef9e5c155e4f44f15f58b45d1201cbc9245fd7ebfca2d972cb9b3f0",
+        "mode": 33204
+      },
+      {
+        "path": "frontend/tests/exploration-save.test.mjs",
+        "bytes": 16214,
+        "sha256": "45259bc49a07d7f8b6b19fecc5372f06f71e30fcb92c8c8778a7d40f717d8dc7",
+        "mode": 33204
+      },
+      {
+        "path": "frontend/tests/fixtures/gui-api-consumer-tsconfig.json",
+        "bytes": 94,
+        "sha256": "1425567a58d5c5a81af1bba77a3f35a4467faf2a18f4238b0f9156d9fa7cfeb5",
+        "mode": 33204
+      },
+      {
+        "path": "frontend/tests/fixtures/gui-hook-runtime-bootstrap.json",
+        "bytes": 974,
+        "sha256": "4eb50f0ab43806c50ce1d88506313d9b3d5465c8264e0b985e032ec2f3d88f84",
+        "mode": 33188
+      },
+      {
+        "path": "frontend/tests/fixtures/gui-style-plan.json",
+        "bytes": 6889,
+        "sha256": "24bdcb858dcc74878e99aca0de338bf335cf3b1b3c14e8b68820fca1be9ca8b9",
+        "mode": 33188
+      },
+      {
+        "path": "frontend/tests/gui-api-consumer-contract.test.mjs",
+        "bytes": 6804,
+        "sha256": "ac435279d813123e0f4bee25ddb6fb82cf5331d6ea47de0d5bbcc3ac3da7ec11",
+        "mode": 33204
+      },
+      {
+        "path": "frontend/tests/gui-hook-runtime.test.mjs",
+        "bytes": 22779,
+        "sha256": "70d63dbe8fb3da1ee34035293738c6f9976bc2cdca7245272c2f068c376ac803",
+        "mode": 33188
+      },
+      {
+        "path": "frontend/tests/gui-style-operation.test.mjs",
+        "bytes": 41038,
+        "sha256": "5116f0fb83445c3c74e8b6e6906f51237dc7025bab9cf47f04b2b158b1559a31",
+        "mode": 33188
+      },
+      {
+        "path": "frontend/tests/gui-style-plan.test.mjs",
+        "bytes": 39774,
+        "sha256": "70abc780e1f51bbc01644509ce4cd31f24b9c9dcd8187f413b2bcf574b162a07",
+        "mode": 33188
+      },
+      {
+        "path": "frontend/tests/native-game-auth-transport.test.mjs",
+        "bytes": 2147,
+        "sha256": "124b4e87d67d08c94f42b6ca5d248b624e5e7075897e2b8584ed8c4928e7c9f6",
+        "mode": 33204
+      },
+      {
+        "path": "frontend/tests/release-recovery.test.mjs",
+        "bytes": 5502,
+        "sha256": "34c8db6f8ba2219f6bef8e440a9290059012d2903360fbde6c455c9aa46e4293",
+        "mode": 33204
+      },
+      {
+        "path": "frontend/tests/saved-game-resume.test.mjs",
+        "bytes": 7219,
+        "sha256": "eff918ea733db9d96643db32484fb836229ff6c03d81dc709e8389d8ed048ad6",
+        "mode": 33204
+      },
+      {
+        "path": "frontend/tests/score-receipts.test.mjs",
+        "bytes": 8448,
+        "sha256": "f6add1b10ce70efbc48baf4f20e08aa451fdb42cbe85a90268d07cc17d9f45d3",
+        "mode": 33204
+      },
+      {
+        "path": "frontend/tests/scores-nondaily-history.test.mjs",
+        "bytes": 7186,
+        "sha256": "4255373abac03a653c0611334fb8969cc7b76a3f3356a3671c158d9ace8d10c5",
+        "mode": 33204
+      },
+      {
+        "path": "frontend/tests/sound-storage.test.mjs",
+        "bytes": 1833,
+        "sha256": "518b7a7eebe288a611609737106a571d3eb75380afa41735b298be79405ceab8",
+        "mode": 33204
+      },
+      {
+        "path": "frontend/tests/v1-record-on-loss.test.mjs",
+        "bytes": 4225,
+        "sha256": "42783de20c8418c2aa75eaf435401cacb0dad345929ebcaa306a56c6641357c1",
+        "mode": 33204
+      },
+      {
+        "path": "go-backend/internal/alchimie/testdata/generate.py",
+        "bytes": 8437,
+        "sha256": "18dfac8404e29c38cf715d81e32fb37b3326294537fd00527480680784e8ef0a",
+        "mode": 33204
+      },
+      {
+        "path": "go-backend/internal/alchimie/testdata/python_parity.json",
+        "bytes": 320103,
+        "sha256": "ead042be8645eb74ea775c7e9d085fbc7bc4ac4fbf3cc5e90cdb591c36fa398f",
+        "mode": 33204
+      },
+      {
+        "path": "go-backend/internal/alchimie_explore/testdata/README.md",
+        "bytes": 1043,
+        "sha256": "ad54fcc9f84de10a6c4f79ecb8bdebe1e61762a966a31c9fb68dcc0388b347b7",
+        "mode": 33204
+      },
+      {
+        "path": "go-backend/internal/alchimie_explore/testdata/bundled-v1-4.json.gz",
+        "bytes": 1119243,
+        "sha256": "76245d7d5fd3266981c92e3ad7a7e323395b8edd919a4208a56b01bf3bc5f5d3",
+        "mode": 33204
+      },
+      {
+        "path": "go-backend/internal/alchimie_explore/testdata/legacy-saved-prefixes-v92.json",
+        "bytes": 118701,
+        "sha256": "51eadd294f043991fb9a518a0ea62b7bd1249f2f1d3878db91cd0d3253ab1718",
+        "mode": 33204
+      },
+      {
+        "path": "go-backend/internal/catalog/testdata/blake2b8.json",
+        "bytes": 2231,
+        "sha256": "2d77db85ca5e94ec41d1249f64fef8873da71410fa2df43c9bb412ec832d0bc4",
+        "mode": 33204
+      },
+      {
+        "path": "go-backend/internal/catalog/testdata/generate_vectors.py",
+        "bytes": 7086,
+        "sha256": "7f7b86ea1b57daf34a588a0ffa2b0a3ce7b43faaf4f944502cfda0e7c7c74c82",
+        "mode": 33204
+      },
+      {
+        "path": "go-backend/internal/catalog/testdata/python_selector.json",
+        "bytes": 355547,
+        "sha256": "c6add73c1cd1cbfd2e7ad63c7ac219520501046dadf367a1c118f7a766fd46e0",
+        "mode": 33204
+      },
+      {
+        "path": "go-backend/internal/catalog/testdata/synthetic_boards.json",
+        "bytes": 2514,
+        "sha256": "7317e34d86c236f0a34432b3170974ab035da22696fe881325338e0f1cc322b7",
+        "mode": 33204
+      },
+      {
+        "path": "go-backend/internal/conexiuni/testdata/python-goldens.json",
+        "bytes": 523356,
+        "sha256": "e0aaef96a28c2a7d2487bb91e5dabbe93b63449c0dfa24920aa299edcb56f86e",
+        "mode": 33204
+      },
+      {
+        "path": "go-backend/internal/contexto/testdata/generate_games.py",
+        "bytes": 6206,
+        "sha256": "31ad4829260a6a284b83655f3abcf0f6f7926fac0d5432b0e095c09fb4f5a513",
+        "mode": 33204
+      },
+      {
+        "path": "go-backend/internal/contexto/testdata/python_games.json",
+        "bytes": 651170,
+        "sha256": "a44372be97e2704768a819b2e9cfe56734d47dbe72bcd7381ad2622f08918078",
+        "mode": 33204
+      },
+      {
+        "path": "go-backend/internal/graph/testdata/generate.py",
+        "bytes": 2371,
+        "sha256": "fe1b677dbc789b390c887be709de9d41e64cc3271c871e86fc47875349700c5b",
+        "mode": 33204
+      },
+      {
+        "path": "go-backend/internal/graph/testdata/python_graph.json",
+        "bytes": 2458780,
+        "sha256": "823fe4153abe826c03aaff8479773bc0c22b3659ad22b800c3d56d2ec629a83a",
+        "mode": 33204
+      },
+      {
+        "path": "go-backend/internal/httpapi/testdata/submissions_python.json",
+        "bytes": 23374,
+        "sha256": "3e6abd138789e23600941915eab6948197f8a53820442c13c5ac1e90aefc0000",
+        "mode": 33204
+      },
+      {
+        "path": "go-backend/internal/httpapi/testdata/website_python.json",
+        "bytes": 2514,
+        "sha256": "64b3042843ce8edd1628b6dc39c3bf26cc41a3343d2b258c24024c5340590362",
+        "mode": 33204
+      },
+      {
+        "path": "go-backend/internal/httpgolden/testdata/README.md",
+        "bytes": 2407,
+        "sha256": "347980ef69561fadc4f819a941e3ed4df26bb07f8d8f130bc4490c74c0da6c66",
+        "mode": 33204
+      },
+      {
+        "path": "go-backend/internal/httpgolden/testdata/python-http-parity-source6-gui-requalification.json.gz",
+        "bytes": 33969,
+        "sha256": "0437c53b91b07d7c4323a7c66753d7250d9304b6a32f94f03901285e64c21951",
+        "mode": 33204
+      },
+      {
+        "path": "go-backend/internal/httpgolden/testdata/python-http-parity-v1-2.json.gz",
+        "bytes": 33601,
+        "sha256": "6293a0dde67ee0b0e5929cc1103bd80795e0aff1af2ba5fdf53e983ab79351fd",
+        "mode": 33204
+      },
+      {
+        "path": "go-backend/internal/httpgolden/testdata/python-http-parity-v1-3.json.gz",
+        "bytes": 33599,
+        "sha256": "67d009c7eaa710bd98281b3300d3df4dc4ed4e224a157934abd7e19bce112670",
+        "mode": 33204
+      },
+      {
+        "path": "go-backend/internal/httpgolden/testdata/python-http-parity-v1-4.json.gz",
+        "bytes": 33611,
+        "sha256": "9d49bd38bbc20c7ebf3a834cada064bf7e4b48018e53890075106dc8f844cb1a",
+        "mode": 33204
+      },
+      {
+        "path": "go-backend/internal/httpgolden/testdata/python-http-parity-v1-5.json.gz",
+        "bytes": 33675,
+        "sha256": "22995196184b991996b56dccf50e5032f27814d7403fff411a120fa11c76a519",
+        "mode": 33204
+      },
+      {
+        "path": "go-backend/internal/httpgolden/testdata/python-http-parity-v1-6.json.gz",
+        "bytes": 33785,
+        "sha256": "15c7d1bc33c2775a387a9bfe3229625145c94a0ed300622e6737b557c77ebdfe",
+        "mode": 33204
+      },
+      {
+        "path": "go-backend/internal/httpgolden/testdata/python-http-parity.json.gz",
+        "bytes": 33524,
+        "sha256": "9041e05f13190a06a526c1aeed1f264d467483cd267ffcdb24f422ed9430b2cb",
+        "mode": 33204
+      },
+      {
+        "path": "go-backend/internal/lant/testdata/python_games.json",
+        "bytes": 781280,
+        "sha256": "616de56e1a3f79453d4ebb2e40beb12cd5c4c47a539a6a4cc005c502810b3048",
+        "mode": 33204
+      },
+      {
+        "path": "go-backend/internal/perechi/testdata/generate_python_goldens.py",
+        "bytes": 8052,
+        "sha256": "8bb9e5a108108f78895dbdf833a712daeec81132c98e1911ce37c45b012e47d0",
+        "mode": 33204
+      },
+      {
+        "path": "go-backend/internal/perechi/testdata/python-goldens.json",
+        "bytes": 186402,
+        "sha256": "081f02948ddc9a9fa8bd215f7b214771588dd35612cf7c4a8b66016c79771ab1",
+        "mode": 33204
+      },
+      {
+        "path": "go-backend/internal/pyrandom/testdata/python_random.json",
+        "bytes": 24759,
+        "sha256": "8b84d5e0f3645df119253b80211b198ff7d28cd4d27bc2ae38e39147b926cd96",
+        "mode": 33204
+      },
+      {
+        "path": "go-backend/third_party/webkit/budget/testdata/budgets.seed.json",
+        "bytes": 794,
+        "sha256": "40f4fc9961a0276663791437417033b0589577ac65811f3863a0fde7a42f9fb4",
+        "mode": 33204
+      },
+      {
+        "path": "go-backend/third_party/webkit/budget/testdata/schema-cases.json",
+        "bytes": 5009,
+        "sha256": "c3e485273916ccf4da4165ed56031ecb9fa6bb914aede905a42ae9b693e98345",
+        "mode": 33204
+      },
+      {
+        "path": "go-backend/third_party/webkit/tokens/testdata/tokens.json",
+        "bytes": 10244,
+        "sha256": "fa71db7b135796151209220481e3dcedfdb3391a7da5faca116c79afccfb9170",
+        "mode": 33204
+      },
+      {
+        "path": "testdata/http/README.md",
+        "bytes": 549,
+        "sha256": "3f3e91f89195881e90aee3e0a6253e77383f56920feb62854d56195be8c69ae6",
+        "mode": 33204
+      },
+      {
+        "path": "testdata/http/python-body-models.json",
+        "bytes": 7933,
+        "sha256": "20748c9e111b54d0e0de6efeef476b77afc7b91bb71144b0aa8194f524e7ca40",
+        "mode": 33204
+      },
+      {
+        "path": "tests/fixtures/alchimie_v91_source.py.gz",
+        "bytes": 13972,
+        "sha256": "eee08c0832acc8081755143e68605054a4cbe88ab8f094d300ab8c04922468f0",
+        "mode": 33204
+      },
+      {
+        "path": "tests/fixtures/board_demotions_v43.json",
+        "bytes": 1999,
+        "sha256": "c35261a5208d9b68d39a94f8602a5586db67eaecbe130c0c219f6a43fd1ef0a7",
+        "mode": 33204
+      },
+      {
+        "path": "tests/fixtures/board_rankings_v37.json",
+        "bytes": 164784,
+        "sha256": "036c8a00de347939d132ba25512da7cba53b12e9d11a9f86cecc07cc98293c31",
+        "mode": 33204
+      },
+      {
+        "path": "tests/fixtures/cat_mobile_app_pack_contract.json",
+        "bytes": 1115310,
+        "sha256": "282f18f6d81c623be004f28d4c5634bfbbbdf2294e466d842a9192123bc06fae",
+        "mode": 33204
+      },
+      {
+        "path": "tests/fixtures/contexto_demotions_v44.json",
+        "bytes": 287,
+        "sha256": "29c76be1d65fc38bf2e3a754d48ba3b96a8e6b6c95fde28c7c2fbd882ee9996c",
+        "mode": 33204
+      },
+      {
+        "path": "tests/fixtures/contexto_impact_reserve_v69.json",
+        "bytes": 245,
+        "sha256": "4c41d092c895c61aaccfbda3cb9522c4d5767a88d9af9343efccc182f71e7612",
+        "mode": 33204
+      },
+      {
+        "path": "tests/fixtures/derived_catalog_v38.json",
+        "bytes": 249190,
+        "sha256": "fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a",
+        "mode": 33204
+      },
+      {
+        "path": "tests/fixtures/games_pack.json",
+        "bytes": 410839,
+        "sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+        "mode": 33204
+      },
+      {
+        "path": "tests/fixtures/kg_app_pack_sample.json",
+        "bytes": 5235,
+        "sha256": "d8255abebb702bdbb9e0c0de5fdd43612842a42df1644c3e09aacd43607b3098",
+        "mode": 33204
+      },
+      {
+        "path": "tests/fixtures/kg_sample.json",
+        "bytes": 3674955,
+        "sha256": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf",
+        "mode": 33204
+      },
+      {
+        "path": "tests/fixtures/release_reserve_v1.json",
+        "bytes": 5156,
+        "sha256": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+        "mode": 33204
+      },
+      {
+        "path": "tools/gui-bootstrap-webkit/budget/testdata/budgets.seed.json",
+        "bytes": 794,
+        "sha256": "40f4fc9961a0276663791437417033b0589577ac65811f3863a0fde7a42f9fb4",
+        "mode": 33204
+      },
+      {
+        "path": "tools/gui-bootstrap-webkit/budget/testdata/schema-cases.json",
+        "bytes": 5009,
+        "sha256": "c3e485273916ccf4da4165ed56031ecb9fa6bb914aede905a42ae9b693e98345",
+        "mode": 33204
+      },
+      {
+        "path": "tools/gui-bootstrap-webkit/testdata/kit-consumer/consumer-config.json",
+        "bytes": 175,
+        "sha256": "f6f3497be02f3750d85b443f5303997bd2f11a4fc328015a9efc42f9534974fa",
+        "mode": 33204
+      },
+      {
+        "path": "tools/gui-bootstrap-webkit/testdata/kit-consumer/frontend/package.json",
+        "bytes": 322,
+        "sha256": "92452b2ac1e23f1e604bcddafa771abd375a15e9a2ff1a698e1ae2289e566a57",
+        "mode": 33204
+      },
+      {
+        "path": "tools/gui-bootstrap-webkit/testdata/kit-consumer/server/go.mod",
+        "bytes": 47,
+        "sha256": "a10623faf69df0b47c3ea63df0305d594942fb90695c25bc9bf72aedc81b6993",
+        "mode": 33204
+      },
+      {
+        "path": "tools/gui-bootstrap-webkit/testdata/npm-consumer/Taskfile.yml",
+        "bytes": 237,
+        "sha256": "00ab77014fcbfc12d3e29de5fdd4cc8daa03c18ab946db9fdd1ffe5377365088",
+        "mode": 33204
+      },
+      {
+        "path": "tools/gui-bootstrap-webkit/testdata/npm-consumer/broken-css.ts",
+        "bytes": 125,
+        "sha256": "21ba2b48a6fccc71059dd1958b59749b9a9836e6efc16b9081a5b370f8c4dec8",
+        "mode": 33204
+      },
+      {
+        "path": "tools/gui-bootstrap-webkit/testdata/npm-consumer/consumer.tsx",
+        "bytes": 4917,
+        "sha256": "e2b39554c811be84796dc4bdc2b3841731a56787b76e80cca6c26a56b0505454",
+        "mode": 33204
+      },
+      {
+        "path": "tools/gui-bootstrap-webkit/testdata/npm-consumer/tsconfig.json",
+        "bytes": 411,
+        "sha256": "62480c011aff110c2322ede316e4bc8dc46c6ee0d5f0669308f66fc37bdbcb14",
+        "mode": 33204
+      },
+      {
+        "path": "tools/gui-bootstrap-webkit/testdata/validation/cases.json",
+        "bytes": 786,
+        "sha256": "b6c4582495fc8b9cc18c65190a673869caeeae4096f6555a1e8c362b8b383da7",
+        "mode": 33204
+      },
+      {
+        "path": "tools/gui-bootstrap-webkit/testdata/versions/registry.json",
+        "bytes": 481,
+        "sha256": "57c2d0ec29789663ce885447f2afca0870e930c8e94f486f927db76a483be91a",
+        "mode": 33204
+      }
+    ],
+    "extended": [
+      {
+        "before": {
+          "path": "frontend/tests/fixtures/gui-api-consumer-contract.ts",
+          "bytes": 7084,
+          "sha256": "7243cd9c73bb4353c74a389088b3d7ec51d058012080cc1834103b261945f246",
+          "mode": 33204
+        },
+        "after": {
+          "path": "frontend/tests/fixtures/gui-api-consumer-contract.ts",
+          "bytes": 8510,
+          "sha256": "63c04e657d0b1bc96e8719621dced637a150b4e3f4433a97aafeb0fb466e0380",
+          "mode": 33204
+        },
+        "disposition": "ONE intentionally extended compiled-consumer fixture; NOT RUN"
+      }
+    ],
+    "six_mixed_files_and13_kept_invariants": "unchanged from frozen7b packet"
+  },
+  "browser_mapping_reference": {
+    "path": "/home/dobo/work/_temp/fix__gui-cat-prerequisites-linux/legacy-regex-retirement-20261009/retirement-mapping.json",
+    "sha256": "ca399f6413f8c9161c13336b55ef406ee06f7ccb6b9c4cbb4566bf8e4082c692",
+    "files": 37,
+    "listed_passing_case_ids": 776,
+    "full_C40_cases": 900,
+    "other124cases": "legitimate unchanged C40 cases outside this mapping subset",
+    "use": "UI-behavior references only; runtime browser/native response values do not prove the new TypeScript consumer guarantees."
+  },
+  "new_source_artifacts": [
+    {
+      "path": "/home/dobo/work/_temp/fix__gui-cat-prerequisites-linux/legacy-regex-type-correction-20261009/guard_restore/record.json",
+      "sha256": "8af28b968e10eb9c7f452ea68fc54fa3d51d1d4ef393fd93ae4ee8b2cba7f28d"
+    },
+    {
+      "path": "/home/dobo/work/_temp/fix__gui-cat-prerequisites-linux/legacy-regex-type-correction-20261009/guard_restore/ranking_record.json",
+      "sha256": "ac8e5a11fefcd7789b6543852ea396ded20368ab1b8a91c462fc5c6768ccf871"
+    },
+    {
+      "path": "/home/dobo/work/_temp/fix__gui-cat-prerequisites-linux/legacy-regex-type-correction-20261009/fixture_extension/ledger.json",
+      "sha256": "d23ce25d3ba745e61b00cbd4a81e38ad22bf520ca25cd60c408b0b48b9bed952"
+    },
+    {
+      "path": "/home/dobo/work/_temp/fix__gui-cat-prerequisites-linux/legacy-regex-type-correction-20261009/fixture_extension/ranking-extension-ledger.json",
+      "sha256": "37636b07ca8d42b911a1341ebb4fc24cd28f008388a4dde05aab5a7abb841ff8"
+    },
+    {
+      "path": "/home/dobo/work/_temp/fix__gui-cat-prerequisites-linux/legacy-regex-type-correction-20261009/root-comment-correction.json",
+      "sha256": "1bb74ff8cca065ff15c5585bb4638a9c169d6e51a9b90d1fb5549bd61c599406"
+    }
+  ],
+  "explicit_limits": [
+    "No project imports/parser/compiler/formatter/tests/gates or extra900 execution occurred. New assertions are authored, not run.",
+    "Old API2 fixture did NOT cover these3 typed-guard sets. The corrected source does not retroactively relabel that proof.",
+    "Known seven feedback members must be assignable; the old presence regex did not establish an exact closed union.",
+    "submitGuess declaration/ternary spelling remains implementation shape. API2 is not claimed to prove an exact submitGuess signature; real plain/token behavior is separate.",
+    "ClueResult inherits optional target; no false forbidden-target substitute. Native whole1207 privacy remains hard and unchanged.",
+    "No app/API/helper/Go/budget/browser900/original16_78/gate/lock/SDK changes; no privacy/upstream/live-provider/native qualification inference.",
+    "Parent owns proof/docs, review, actual compiled execution and final SYNC/same-SHA trust/GREEN unit/KIT_BUMP; no branch/worktree/archive cleanup."
+  ]
+}
