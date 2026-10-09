@@ -1,0 +1,90 @@
+{
+  "schema": 1,
+  "actor": "Parent owner bootstrap source step, not SDK/self-adoption",
+  "base": "804366e24f065e3927b0e569dfa9ce6f3fc20c14",
+  "qualifiedCoreTag": "core-v1.6",
+  "qualifiedCoreSource": "b0ad658086a2745d1b3aea02659e6b644c89c680",
+  "actualShippedArchiveSha256": "1736b656a8650cee6fa4f0d033cdc3b14851d4e440dd7b7318ee621478999191",
+  "actualManifestSha256": "2e5a3634fccc61eef689b5e61ba77f1e2a6cda12ea3ff6044905ee1a23cf9d8d",
+  "scope": "Copy actual shipped self-manifest, rebind only its checksum8 entry and exact installed-probe expectation. Other seven self-contained files unchanged. No unpinned copied bootstrap data is claimed upgraded/installed.",
+  "paths": [
+    {
+      "path": "tools/gui-bootstrap-webkit/package.json",
+      "beforeSha256": "ccd6edeb980099aaa7de5bf74ea833849ff0523f1be62971dd4600a1b08677db",
+      "afterSha256": "2e5a3634fccc61eef689b5e61ba77f1e2a6cda12ea3ff6044905ee1a23cf9d8d",
+      "fullMode": 33188
+    },
+    {
+      "path": "scripts/gui-hook-runtime.mjs",
+      "beforeSha256": "ef19cac7362b86cf4dfd9c69752fb5b1edea8f965972818093070f356d34659e",
+      "afterSha256": "7234aa64c6a3a1038ef3621073fe1eb569e04128ce4a7d874404d6a6273f1d19",
+      "fullMode": 33188
+    },
+    {
+      "path": "scripts/gui-toolchain-probe.mjs",
+      "beforeSha256": "54671dfa2ccabef3f3de9a1b14bf17ccfbf57b577356d3b518c68fd48ff92872",
+      "afterSha256": "25e0555c264f04e98ddba2b15ccb0531ca2ea8a443fc3b61ff3590d4f15109d8",
+      "fullMode": 33204
+    }
+  ],
+  "bootstrap8": [
+    {
+      "path": "package.json",
+      "beforeSha256": "ccd6edeb980099aaa7de5bf74ea833849ff0523f1be62971dd4600a1b08677db",
+      "afterSha256": "2e5a3634fccc61eef689b5e61ba77f1e2a6cda12ea3ff6044905ee1a23cf9d8d",
+      "changed": true
+    },
+    {
+      "path": "scripts/run-task.mjs",
+      "beforeSha256": "10c72f96c031e880988fb62f761f9c5ae5f50a6eaf2dd3fd553ed25dba43389f",
+      "afterSha256": "10c72f96c031e880988fb62f761f9c5ae5f50a6eaf2dd3fd553ed25dba43389f",
+      "changed": false
+    },
+    {
+      "path": "scripts/locate-kit.mjs",
+      "beforeSha256": "3b61fcfd3184c663d1acc5c3764af707b95c2fe6952de77393ef914d1692647c",
+      "afterSha256": "3b61fcfd3184c663d1acc5c3764af707b95c2fe6952de77393ef914d1692647c",
+      "changed": false
+    },
+    {
+      "path": "scripts/ui-adoption-config.mjs",
+      "beforeSha256": "c1292e5b377b64934cafeaaf3ab2ba45f8f5393229716f4a71b5a65ad9122f60",
+      "afterSha256": "c1292e5b377b64934cafeaaf3ab2ba45f8f5393229716f4a71b5a65ad9122f60",
+      "changed": false
+    },
+    {
+      "path": "scripts/ast-artifacts.mjs",
+      "beforeSha256": "aaa1ed835db6963d95e345e264d4bdcc5b5d748f345294db67af6be3cd439265",
+      "afterSha256": "aaa1ed835db6963d95e345e264d4bdcc5b5d748f345294db67af6be3cd439265",
+      "changed": false
+    },
+    {
+      "path": "scripts/kit-sync.mjs",
+      "beforeSha256": "0d76e09e3d0c9e7d959e98a0e1093b4ad4d82deca29d1e61f77e0576ffb5f300",
+      "afterSha256": "0d76e09e3d0c9e7d959e98a0e1093b4ad4d82deca29d1e61f77e0576ffb5f300",
+      "changed": false
+    },
+    {
+      "path": "schemas/validate.mjs",
+      "beforeSha256": "32552ef83c2baf911f5412b7053bf70e832ac19e43ed611ebc522c50186f40f4",
+      "afterSha256": "32552ef83c2baf911f5412b7053bf70e832ac19e43ed611ebc522c50186f40f4",
+      "changed": false
+    },
+    {
+      "path": "schemas/ui-adoption.schema.json",
+      "beforeSha256": "e8b3f95ffd875a78fc97898d2cedc540ce719ddc84e5f3f9f1ee99f33bbffa64",
+      "afterSha256": "e8b3f95ffd875a78fc97898d2cedc540ce719ddc84e5f3f9f1ee99f33bbffa64",
+      "changed": false
+    }
+  ],
+  "exactInverseRestoresAllThreeFiles": true,
+  "failedActualSyncResultSha256": "27c45404741592d3746fa29b2f24d659ee969e074df13536cbf4ee86c017c675",
+  "failedWholeCaptureSha256": "b64f4ba0aa9468be821b3901d4d618c16a4637dd2f9afb3dbe181a8bfce58e6e",
+  "independentFailureReview": "cross_repo_plan actualfailure/protectedbeforeimages CLEAR; no SDKdefect, source sync-back refused",
+  "locks": "UNCHANGED; only actual native deps may regenerate bootstrap lock",
+  "activeUi": "0.3.0 unchanged",
+  "formalKIT_BUMP": "NOT ISSUED",
+  "runtimeAfterCorrection": "NOT RUN",
+  "recordedUtc": "2026-10-09T20:28:05.375640+00:00",
+  "independentSourceReview": "program_pack SOURCE CLEAR: all8payload rows/fullmodes,3wholefileinverse/literal804preimages, actualarchive manifest+8pins; precisely3sourcepaths/publicprovenance, no SDKcode/locks/UI/assertion change; actualresyncNOTRUN"
+}
