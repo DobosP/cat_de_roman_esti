@@ -18,7 +18,7 @@ function observation(project = "desktop") {
         manifest_sha256: "e".repeat(64), versions_lock_sha256: expected.versions_lock_sha256 } } };
 }
 
-test("synthetic complete observations conform without changing caller data or emitting a receipt", () => {
+void test("synthetic complete observations conform without changing caller data or emitting a receipt", () => {
   for (const project of ["desktop", "mobile"]) {
     const value = observation(project), before = structuredClone(value);
     assert.equal(assertBrowserObservation(expected, value), undefined);
@@ -57,26 +57,26 @@ const refusals = [
   ["unknown identity field", (value) => { value.identity.body.app_image_id = "sha256:" + "f".repeat(64); }],
   ["future callback claim", (value) => { value.observer_passed = true; }],
 ];
-for (const [name, mutate] of refusals) test("refuses " + name, () => {
+for (const [name, mutate] of refusals) void test("refuses " + name, () => {
   const value = observation(); mutate(value);
   assert.throws(() => assertBrowserObservation(expected, value));
 });
 
-test("closed DATA refuses an accessor without invoking it", () => {
+void test("closed DATA refuses an accessor without invoking it", () => {
   const value = observation(); let invoked = false;
   Object.defineProperty(value, "secure_context", { enumerable: true, get() { invoked = true; return true; } });
   assert.throws(() => assertBrowserObservation(expected, value));
   assert.equal(invoked, false);
 });
 
-test("identity-only assertion binds source before secure-context refusal", () => {
+void test("identity-only assertion binds source before secure-context refusal", () => {
   const value = observation(); value.secure_context = false;
   assert.equal(assertBuildResponse(expected, value.identity), undefined);
   value.identity.body.sha = "f".repeat(40);
   assert.throws(() => assertBuildResponse(expected, value.identity));
 });
 
-test("manifest comparison remains the later full witness obligation", () => {
+void test("manifest comparison remains the later full witness obligation", () => {
   const value = observation(); value.identity.body.manifest_sha256 = "f".repeat(64);
   assert.equal(assertBuildResponse(expected, value.identity), undefined);
   // This only admits a present actual hash in DATA; no unacquired local manifest is asserted.
@@ -84,11 +84,11 @@ test("manifest comparison remains the later full witness obligation", () => {
 
 for (const value of ["", "http://user:pass@localhost:8080", "http://localhost:8080/",
   "http://localhost:8080/other", "http://localhost:8080?private=1", "http://localhost:8080#fragment",
-  "file:///work/index.html", "HTTP://LOCALHOST:8080"]) test("refuses noncanonical wrapper URL " + value, () => {
+  "file:///work/index.html", "HTTP://LOCALHOST:8080"]) void test("refuses noncanonical wrapper URL " + value, () => {
   assert.throws(() => requireWrapperOrigin(value));
 });
 
-test("old wrapper alias is never silently changed to localhost or declared secure", () => {
+void test("old wrapper alias is never silently changed to localhost or declared secure", () => {
   const origin = "http://roedu-gate.test:8080";
   assert.equal(requireWrapperOrigin(origin), origin);
   const value = observation(); value.requested_origin = origin; value.document_origin = origin;
@@ -106,25 +106,25 @@ function hookDouble(failure = false) {
     run(...args) { calls.push(args); if (failure) throw Error("NON-RELEASE simulated command refusal"); },
   };
 }
-test("full seam owns exactly one fixed command and literal current invocation", () => {
+void test("full seam owns exactly one fixed command and literal current invocation", () => {
   const hook = hookDouble();
   assert.equal(checkFullBrowserCapability(hook), true);
   assert.deepEqual(hook.calls, [["node", ["scripts/gui-browser-capability.mjs", "full", hook.context.invocation]]]);
   assert.deepEqual(hook.checks, [{ name: CAPABILITY_CHECK, status: "pass" }]);
 });
-test("recorded command refusal returns false so full must stop before nativeUnit", () => {
+void test("recorded command refusal returns false so full must stop before nativeUnit", () => {
   const hook = hookDouble(true), continuation = [];
   if (checkFullBrowserCapability(hook)) continuation.push("nativeUnit");
   assert.deepEqual(continuation, []);
   assert.deepEqual(hook.checks, [{ name: CAPABILITY_CHECK, status: "fail" }]);
   assert.equal(hook.calls.length, 1);
 });
-test("unit is not rerouted through full browser capability", () => {
+void test("unit is not rerouted through full browser capability", () => {
   const hook = hookDouble(); hook.context.target = "unit";
   assert.throws(() => checkFullBrowserCapability(hook), /full invocation/);
   assert.deepEqual(hook.calls, []);
 });
-test("invalid invocation cannot choose a helper argument or output path", () => {
+void test("invalid invocation cannot choose a helper argument or output path", () => {
   const hook = hookDouble(); hook.context.invocation = "../../other-worker";
   assert.throws(() => checkFullBrowserCapability(hook), /full invocation/);
   assert.deepEqual(hook.calls, []);
@@ -140,7 +140,7 @@ function acquiredIdentityBytes(body) {
 }
 function identityBody() { return structuredClone(observation().identity.body); }
 
-test("raw write is called before malformed JSON refuses, retaining bound partial ref", () => {
+void test("raw write is called before malformed JSON refuses, retaining bound partial ref", () => {
   const { raw, identity } = acquiredIdentityBytes("not JSON");
   const journal = [];
   assert.throws(() => retainAndParseBuildResponseData(expected, "desktop", identity, raw, (bytes) => {
@@ -159,7 +159,7 @@ for (const [name, mutate] of [
   ["wrong tree", (body) => { body.tree_sha256 = "f".repeat(64); }],
   ["wrong versions", (body) => { body.versions_lock_sha256 = "f".repeat(64); }],
   ["unknown field", (body) => { body.observer_passed = true; }],
-]) test("raw response is retained before strict " + name + " refusal", () => {
+]) void test("raw response is retained before strict " + name + " refusal", () => {
   const body = identityBody(); mutate(body);
   const { raw, identity } = acquiredIdentityBytes(body), journal = [];
   // Matching acquired raw digest is established by the seam, not supplied by a sink.
@@ -170,7 +170,7 @@ for (const [name, mutate] of [
   assert.equal(identity.body, null);
 });
 
-test("retention error refuses before parsing and creates no successful ref", () => {
+void test("retention error refuses before parsing and creates no successful ref", () => {
   const { raw, identity } = acquiredIdentityBytes("not JSON"), sentinel = Error("NON-RELEASE sink collision");
   let attempts = 0;
   assert.throws(() => retainAndParseBuildResponseData(expected, "desktop", identity, raw, () => {
@@ -179,7 +179,7 @@ test("retention error refuses before parsing and creates no successful ref", () 
   assert.equal(attempts, 1); assert.equal(identity.raw_response, null); assert.equal(identity.body, null);
 });
 
-test("successful synthetic retention binds exact raw hash/length without sink success authority", () => {
+void test("successful synthetic retention binds exact raw hash/length without sink success authority", () => {
   const { raw, identity } = acquiredIdentityBytes(identityBody());
   assert.equal(retainAndParseBuildResponseData(expected, "mobile", identity, raw, () => false), undefined);
   assert.equal(identity.raw_response.bytes, raw.length);
@@ -195,12 +195,12 @@ for (const [name, mutate] of [
   ["raw byte mismatch", (value) => { value.identity.raw_response.bytes += 1; }],
   ["raw digest mismatch", (value) => { value.identity.raw_response.sha256 = "f".repeat(64); }],
   ["extra raw-ref field", (value) => { value.identity.raw_response.success = true; }],
-]) test("refuses " + name + " in partial artifact DATA", () => {
+]) void test("refuses " + name + " in partial artifact DATA", () => {
   const value = observation(); mutate(value);
   assert.throws(() => assertBrowserObservation(expected, value));
 });
 
-test("an acquired empty response is retained as zero bytes before JSON refusal", () => {
+void test("an acquired empty response is retained as zero bytes before JSON refusal", () => {
   const { raw, identity } = acquiredIdentityBytes(""); let attempts = 0;
   assert.throws(() => retainAndParseBuildResponseData(expected, "desktop", identity, raw, (bytes) => {
     attempts += 1; assert.equal(bytes.length, 0);

@@ -5,7 +5,7 @@ Session: S1, M0 through M4
 Worktree: /home/dobo/work/_worktrees/cat_de_roman_esti/fix__gui-cat-prerequisites-linux
 Valid until: S1 completion or a superseding owner dispatch — then treat as history.
 
-Linux current 2026-10-09: qualified core-v1.6 is published and actual Cat SYNC passed10; UI0.3 remains active/UI1.0.6 staged. Capability-v2 and four-font preload code are applied after parent and independent SOURCE review; all61 pure capability cases and five selected Go methods (77top/subcases) passed at52d; actualshellFAIL1 onlystandardformat is retained and one capturedformatterafterimage is applied after SOURCE review. Newformattedsource full and real preflight/font/HTTP/Vite/reuse/CSP/performance qualification remain NOT RUN. Older dated Windows UNAPPLIED/NOTRUN and core1.5 paragraphs below are preserved history; current STATUS/controller supersede those dispositions. Formal KIT_BUMP/M0/M1/full/device remain unearned.
+Linux current 2026-10-10: core1.6 is qualified/published, Cat owner sync/deps and final805 sync/trust are actual. UI0.3 remains active/UI1.0.6 staged. Targeted52d Node61/Go5top77 passed; the one actual formatter layout correction is applied. Actual full805 passed real image-bound secure-localhost/native-Web-Locks preflight and frontend380/types, then stopped on17 test-registration promise lint errors before backend/PG/1207/900/CSP/baselines. Exact17-void SOURCE correction is reviewed/applied; postfix full remains NOT RUN. All failed/original packets and older Windows UNAPPLIED paragraphs below remain history; current STATUS/controller supersede those dispositions. Budgets remain red; no formal KIT_BUMP/M0/M1/full/device or fastest/savings acceptance.
 
 ## 1. Purpose / Big Picture
 
