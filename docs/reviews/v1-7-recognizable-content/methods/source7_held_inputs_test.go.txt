@@ -1,0 +1,176 @@
+package httpapi
+
+import (
+ "bytes"
+ "crypto/sha256"
+ "encoding/json"
+ "fmt"
+ "net/http/httptest"
+ "os"
+ "path/filepath"
+ "reflect"
+ "runtime"
+ "strings"
+ "testing"
+
+ "github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
+ "github.com/DobosP/cat_de_roman_esti/go-backend/internal/graph"
+)
+
+type source7HeldProjection struct {
+ Key string `json:"key"`
+ Label string `json:"label"`
+ PublicID string `json:"public_id"`
+ AnchorID string `json:"anchor_id"`
+ RankPenalty int `json:"rank_penalty"`
+}
+type source7HeldRow struct {
+ Text, Normalized, Owner, Fuzzy string
+ Blocked bool
+ Suggestions []string
+ Projection *source7HeldProjection
+ ProjectionSuggestions []source7HeldProjection
+ HTTPAdvisories []string
+}
+
+// Expected lexical rows are losslessly projected from authenticated c77a native
+// research observations, independently compared with reference receipt 3fc18.
+// HTTPAdvisories are normative literals from those frozen candidates plus the
+// existing BNR target/advisory policy; they were not observed HTTP goldens.
+const source7HeldExpectedJSON = `[{"Text":"mare","Normalized":"mare","Owner":"n_v3geo_mare","Fuzzy":"n_v3geo_mare","Blocked":false,"Suggestions":["mare","Măr","Mazăre"],"Projection":null,"ProjectionSuggestions":[{"key":"marker","label":"Marker","public_id":"ctxp_8fc835ca9d33d8bf090b","anchor_id":"n_v24_school_writing_caiet","rank_penalty":1}],"HTTPAdvisories":[]},{"Text":"rău","Normalized":"rau","Owner":"n_v2geo_rau","Fuzzy":"n_v2geo_rau","Blocked":false,"Suggestions":["râu","Grâu"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"rapid","Normalized":"rapid","Owner":"n_v11spo_rapid_bucuresti","Fuzzy":"n_v11spo_rapid_bucuresti","Blocked":false,"Suggestions":["Rapid București"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"masă","Normalized":"masa","Owner":"n_v4gas_masa","Fuzzy":"n_v4gas_masa","Blocked":false,"Suggestions":["Masă","Mască","Mătușă"],"Projection":null,"ProjectionSuggestions":[{"key":"manusa","label":"Mănușă","public_id":"ctxp_5d59b51af8893e381ad7","anchor_id":"n_v30_clothing_outer_geaca","rank_penalty":0}],"HTTPAdvisories":[]},{"Text":"bancă","Normalized":"banca","Owner":"n_v4soc_banca","Fuzzy":"n_v4soc_banca","Blocked":false,"Suggestions":["bancă","A mânca","Bârna"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"temă","Normalized":"tema","Owner":"n_v4lit_tema","Fuzzy":"n_v4lit_tema","Blocked":false,"Suggestions":["temă","Frică"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"par","Normalized":"par","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["Parc","Pară"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":["Parc","Pară"]},{"Text":"vinete","Normalized":"vinete","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["Vinted","A veni"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":["Vinted"]},{"Text":"persoană","Normalized":"persoana","Owner":"n_v4lim_persoana_gramaticala","Fuzzy":"n_v4lim_persoana_gramaticala","Blocked":false,"Suggestions":["Persoană gramaticală","Personaj"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"barcă","Normalized":"barca","Owner":"n_spt_fc_barcelona","Fuzzy":"n_spt_fc_barcelona","Blocked":false,"Suggestions":["FC Barcelona","Bârna","bancă"],"Projection":null,"ProjectionSuggestions":[{"key":"barba","label":"Barbă","public_id":"ctxp_e7f7b6edba83fd774c10","anchor_id":"n_v24_body_face_cap","rank_penalty":1}],"HTTPAdvisories":[]},{"Text":"taxi","Normalized":"taxi","Owner":"n_v11muz_taxi","Fuzzy":"n_v11muz_taxi","Blocked":false,"Suggestions":["Taxi"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"ogradă","Normalized":"ograda","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["Oradea"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":["Oradea"]},{"Text":"muică","Normalized":"muica","Owner":"","Fuzzy":"n_v4art_muzica","Blocked":false,"Suggestions":["Muzică","Țuică","muncă"],"Projection":null,"ProjectionSuggestions":[{"key":"musca","label":"Muscă","public_id":"ctxp_04cddb37cad32f9a3361","anchor_id":"n_v4sti_animal","rank_penalty":1}],"HTTPAdvisories":[]},{"Text":"baraboi","Normalized":"baraboi","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["Barabulă"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"cucuruzi","Normalized":"cucuruzi","Owner":"","Fuzzy":"n_lbax_regionalism_cucuruz","Blocked":false,"Suggestions":["Cucuruz"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"cucuruzii","Normalized":"cucuruzii","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["Cucuruz"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":["Cucuruz"]},{"Text":"blid","Normalized":"blid","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":[],"Projection":{"key":"blid","label":"Blid","public_id":"ctxp_0d16f4679699413609bc","anchor_id":"n_v30_kitchen_table_castron","rank_penalty":1},"ProjectionSuggestions":[{"key":"blid","label":"Blid","public_id":"ctxp_0d16f4679699413609bc","anchor_id":"n_v30_kitchen_table_castron","rank_penalty":1}],"HTTPAdvisories":[]},{"Text":"amicii","Normalized":"amicii","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["Mamă","Mici","Prieten"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"arborele","Normalized":"arborele","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["copac"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"arbori","Normalized":"arbori","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["copac"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"arborii","Normalized":"arborii","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":[],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"arborelui","Normalized":"arborelui","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["copac"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"arborilor","Normalized":"arborilor","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["narator"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"cuptor","Normalized":"cuptor","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["Sculptor"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":["Sculptor"]},{"Text":"fișă","Normalized":"fisa","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["Frișcă"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"elan","Normalized":"elan","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":[],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"priză multiplă","Normalized":"priza multipla","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":[],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"păturile","Normalized":"paturile","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["pădure","Mătură","Gât"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"păturilor","Normalized":"paturilor","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["pădure","Mătură","Prăjitură"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"mesei","Normalized":"mesei","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["Masă","Meserie"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":["Meserie"]},{"Text":"meselor","Normalized":"meselor","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["Măr","Muzeu"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"părintelui","Normalized":"parintelui","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["părinte"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":["părinte"]},{"Text":"părinților","Normalized":"parintilor","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["Pâine","pacient","pagină"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"golfului","Normalized":"golfului","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["golf","Olt"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"golfurilor","Normalized":"golfurilor","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["golf"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"peștelui","Normalized":"pestelui","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["Perete","Clește","peșteră"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"peștilor","Normalized":"pestilor","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["Poet","preot","Perete"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"corpului","Normalized":"corpului","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["corp","Covor","copil"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"corpurilor","Normalized":"corpurilor","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["corp","Carne","câmp"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"tabloului","Normalized":"tabloului","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["Tablou"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"tablourilor","Normalized":"tablourilor","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["Tablou","mal"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"cărții","Normalized":"cartii","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["Carte","Carpați","hartă"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"cărților","Normalized":"cartilor","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["Carpați","hartă","Curte"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"creierului","Normalized":"creierului","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["creier"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"creierelor","Normalized":"creierelor","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["creier"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"fileului","Normalized":"fileului","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["fileu"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"fileurilor","Normalized":"fileurilor","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["fileu","Ulei","Lectură"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"cheii","Normalized":"cheii","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["cheie","ochi","Chefi la cuțite"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":["cheie"]},{"Text":"cheilor","Normalized":"cheilor","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["ochi"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"portului","Normalized":"portului","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["Prut","Porc","Poet"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"porturilor","Normalized":"porturilor","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["Port","Prăjitură","divorț"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"rolului","Normalized":"rolului","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["Olt","rol","Ou"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"rolurilor","Normalized":"rolurilor","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["rol"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"frontului","Normalized":"frontului","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["Front","Robinet"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"fronturilor","Normalized":"fronturilor","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["Front","Friptură"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"notei","Normalized":"notei","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["Notă","Noapte"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"notelor","Normalized":"notelor","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":[],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"curentului","Normalized":"curentului","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["Unt","Cremșnit","Cuvânt"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"curenților","Normalized":"curentilor","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["Curte"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"fluxului","Normalized":"fluxului","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["Lut","Lup"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"fluxurilor","Normalized":"fluxurilor","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":[],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"punctului","Normalized":"punctului","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["Unt","Punct","Prut"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"punctelor","Normalized":"punctelor","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["Punct","Prună"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"legii","Normalized":"legii","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["Lege","Coleg","Rege"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"legilor","Normalized":"legilor","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["elev"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"băncii","Normalized":"bancii","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["bani","bancă","An"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"băncilor","Normalized":"bancilor","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["stâncă","bancă"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"intrigii","Normalized":"intrigii","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["intrigă"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]},{"Text":"intrigilor","Normalized":"intrigilor","Owner":"","Fuzzy":"","Blocked":false,"Suggestions":["intrigă"],"Projection":null,"ProjectionSuggestions":[],"HTTPAdvisories":[]}]`
+
+func TestSource7HeldInputsPreserveFrozenDispositions(t *testing.T) {
+ t.Setenv("CAT_ALLOWED_HOSTS", "testserver,example.com")
+ _, file, _, ok := runtime.Caller(0)
+ if !ok { t.Fatal("test source location unavailable") }
+ root := filepath.Clean(filepath.Join(filepath.Dir(file), "../../.."))
+ sources := map[string]string{
+ "alchimie_discovery_world_v92.json":"1fcd017b33edf3600098306b19c012f709c8a50b905be9d259a6a1e2cbb84049",
+ "alchimie_recipe_extensions_v92.json":"605690ec6b163ab3860fc57c53c21288b2781b85c77f93e414d63207340119bf",
+ "board_rankings_v37.json":"24d36c7ad1968fb5b2e993a38f1c404719edc66bc4faa0e9d8e8eb079e9df7fe",
+ "derived_catalog_v38.json":"df3a01bb5bdbf8c34973b6bc43c9179ab9ffbe0fc6552fb73b5cd1e9bfb24af9",
+ "games_pack.json":"e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+ "kg_sample.json":"3412064a27c79e47b1b4205383e45c156316857bc8a6f6cb303bc65478501749",
+ "quick_games_v92.json":"34c11c48b28b45c53a741290837288d302c98cea51e4346fb64669d7188c7a8c",
+ "release_reserve_v1.json":"fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+ }
+ bindings := map[string]string{
+ "go-backend/internal/content/bundled.json":"078657f392828f2784173684c08d89736e38dae46a0d47c485a3ae5fcf1adc73",
+ "go-backend/internal/content/digest.go":"388c8484b949ac173a1edfac5dd2c78f381cad224c754e78d854f31d29dd99ec",
+ }
+ for name, want := range sources { bindings["cat_de_roman_esti/fixtures/"+name] = want }
+ verify := func() {
+  t.Helper()
+  for name, want := range bindings {
+   raw, err := os.ReadFile(filepath.Join(root,name))
+   if err != nil || fmt.Sprintf("%x",sha256.Sum256(raw)) != want { t.Fatalf("sealed binding %s: %v",name,err) }
+  }
+ }
+ verify()
+ c, err := content.Load()
+ if err != nil { t.Fatal(err) }
+ if !reflect.DeepEqual(c.Sources,sources) { t.Fatal("embedded Source7 source8 differs") }
+ raw, err := os.ReadFile(filepath.Join(root,"go-backend/internal/content/bundled.json"))
+ if err != nil { t.Fatal(err) }
+ disk, err := content.Decode(raw)
+ if err != nil { t.Fatal(err) }
+ original, err := json.Marshal(c)
+ if err != nil { t.Fatal(err) }
+ onDisk, err := json.Marshal(disk)
+ if err != nil || !bytes.Equal(original,onDisk) { t.Fatal("complete embedded content differs from disk export",err) }
+ t.Cleanup(func() {
+  verify()
+  after, err := json.Marshal(c)
+  if err != nil || !bytes.Equal(original,after) { t.Error("exported content fields mutated",err) }
+ })
+ // Private Shared memoization is allowed; all exported content fields stay exact.
+ var rows []source7HeldRow
+ if err := json.Unmarshal([]byte(source7HeldExpectedJSON),&rows); err != nil { t.Fatal(err) }
+ texts := make([]string,0,len(rows))
+ for _, row := range rows { texts = append(texts,row.Text) }
+ vector, err := json.Marshal(texts)
+ if err != nil || len(rows)!=69 || fmt.Sprintf("%x",sha256.Sum256(vector))!="112f704026ebc170ae79279c91ef1057e1ab03d5a8724f13baf4e846f237be2f" { t.Fatal("ordered held69 vector differs",err) }
+ var private struct { Terms []source7HeldProjection `json:"projection_terms"` }
+ encoded, err := json.Marshal(c.ContextoData)
+ if err != nil { t.Fatal(err) }
+ if err := json.Unmarshal(encoded,&private); err != nil { t.Fatal(err) }
+ projections := map[string]source7HeldProjection{}
+ for _, p := range private.Terms {
+  if _, exists := projections[p.Key]; exists { t.Fatal("duplicate projection key") }
+  projections[p.Key] = p
+ }
+ g := graph.New(c)
+ s := New(c)
+ counts := map[string]int{}
+ for i, row := range rows {
+  t.Run(fmt.Sprintf("%02d_%s",i,row.Text),func(t *testing.T) {
+   if g.Normalize(row.Text)!=row.Normalized || g.Resolve(row.Text)!=row.Owner || g.ResolveFuzzy(row.Text)!=row.Fuzzy || g.ReviewedUnresolved(row.Text)!=row.Blocked || !reflect.DeepEqual(g.Suggest(row.Text,3),row.Suggestions) { t.Fatalf("frozen graph disposition changed: %q",row.Text) }
+   p, exists := projections[row.Normalized]
+   if exists != (row.Projection!=nil) || exists && !reflect.DeepEqual(p,*row.Projection) { t.Fatal("frozen exact projection differs") }
+   for _, expected := range row.ProjectionSuggestions {
+    if actual, exists := projections[expected.Key]; !exists || actual!=expected { t.Fatal("frozen advisory projection descriptor differs") }
+   }
+   request := func(method,path string,body any) map[string]any {
+    t.Helper()
+    var payload []byte
+    if body!=nil { var err error; payload,err=json.Marshal(body); if err!=nil { t.Fatal(err) } }
+    req := httptest.NewRequest(method,"http://testserver"+path,bytes.NewReader(payload))
+    req.Header.Set("Content-Type","application/json")
+    reply := httptest.NewRecorder()
+    s.ServeHTTP(reply,req)
+    if reply.Code!=200 { t.Fatalf("%s %s: %d %s",method,path,reply.Code,reply.Body.String()) }
+    var out map[string]any
+    if err:=json.Unmarshal(reply.Body.Bytes(),&out);err!=nil { t.Fatal(err) }
+    for _, key := range []string{"target","score","share","curated_id","curatedId"} { if _,exists:=out[key];exists { t.Fatalf("private %s leaked",key) } }
+    for _, secret := range []string{"n_bnr",c.Labels["n_bnr"],"ct_societate_090"} { if secret!="" && strings.Contains(reply.Body.String(),secret) { t.Fatal("ordinary private identity leaked") } }
+    return out
+   }
+   created := request("POST","/api/wordgames/contexto/games?seed=7&difficulty=normal&category=societate",nil)
+   id, ok := created["game_id"].(string)
+   if !ok || id=="" || created["attempts"]!=float64(0) || created["won"]!=false { t.Fatal("ordinary session creation differs") }
+   curated, finished, won, score, found := s.contexto.Progress(id)
+   if !found || curated!="ct_societate_090" || finished || won || score!=-1 { t.Fatal("ordinary seeded BNR context differs") }
+   base := "/api/wordgames/contexto/games/"+id
+   recover := func(expected map[string]any) {
+    t.Helper()
+    got := request("GET",base,nil)
+    for _, key := range []string{"attempts","guesses","clues_used","won"} { if !reflect.DeepEqual(got[key],expected[key]) { t.Fatalf("private recovery changed %s",key) } }
+   }
+   recover(created)
+   first := request("POST",base+"/guess",map[string]any{"text":row.Text})
+   owner := row.Owner
+   if owner!="" { counts["exact"]++ } else if row.Projection!=nil { counts["projection"]++;owner=row.Projection.PublicID } else if row.Fuzzy!="" { counts["fuzzy"]++ } else { counts["unknown"]++ }
+   if owner=="" && row.Fuzzy!="" {
+    if first["ok"]!=false || first["needs_confirmation"]!=true || first["attempts"]!=float64(0) || first["resolved_label"]!=g.Label(row.Fuzzy) { t.Fatal("fuzzy input must request uncharged confirmation") }
+    recover(first)
+    token,ok:=first["resolved_token"].(string)
+    if !ok || !strings.HasPrefix(token,"ctxc_") { t.Fatal("missing opaque confirmation token") }
+    rejected:=request("POST",base+"/guess",map[string]any{"text":row.Text,"confirm":"invalid"})
+    if rejected["needs_confirmation"]!=true || rejected["attempts"]!=float64(0) { t.Fatal("invalid confirmation charged or accepted") }
+    recover(rejected)
+    first=request("POST",base+"/guess",map[string]any{"text":row.Text,"confirm":token})
+    owner=row.Fuzzy
+   }
+   if owner!="" {
+    if first["ok"]!=true || first["won"]!=false || first["attempts"]!=float64(1) || first["needs_confirmation"]==true { t.Fatal("existing input did not make exactly one nonwinning attempt") }
+    guess,ok:=first["guess"].(map[string]any)
+    if !ok || guess["id"]!=owner || guess["attempt_number"]!=float64(1) { t.Fatal("accepted existing identity differs") }
+    guesses,ok:=first["guesses"].([]any)
+    if !ok || len(guesses)!=1 || !reflect.DeepEqual(guesses[0],guess) { t.Fatal("accepted input did not keep one slot") }
+    repeatBody:=map[string]any{"text":row.Text}
+    // Reuse the public token rather than forge one from private session state.
+    if row.Owner=="" && row.Projection==nil { challenge:=request("POST",base+"/guess",map[string]any{"text":row.Text});repeatBody["confirm"]=challenge["resolved_token"] }
+    repeated:=request("POST",base+"/guess",repeatBody)
+    if repeated["ok"]!=true || repeated["won"]!=false || repeated["attempts"]!=float64(1) || !reflect.DeepEqual(repeated["guess"],guess) { t.Fatal("repeat changed the existing slot") }
+    recover(repeated)
+   } else {
+    expected:=make([]any,len(row.HTTPAdvisories));for i,label:=range row.HTTPAdvisories { expected[i]=label }
+    if first["ok"]!=false || first["won"]!=false || first["needs_confirmation"]==true || first["attempts"]!=float64(0) || !reflect.DeepEqual(first["suggestions"],expected) { t.Fatalf("unknown input charged, acquired an owner, or changed normative advisories: %v",first) }
+    repeated:=request("POST",base+"/guess",map[string]any{"text":row.Text})
+    if !reflect.DeepEqual(first,repeated) { t.Fatal("unknown repeat changed public state") }
+    recover(repeated)
+   }
+  })
+ }
+ if !reflect.DeepEqual(counts,map[string]int{"exact":9,"projection":1,"fuzzy":2,"unknown":57}) { t.Fatalf("held69 class counts differ: %v",counts) }
+}

@@ -2071,3 +2071,29 @@ A read-only schema probe used steps instead of commands; static author/planner
 print probes had conditional-spacing SyntaxErrors. They changed no I/native state.
 All original clocks/failures preserved, source/root wholeRSS unmeasured.
 Source6 live/zero integrated growth, no remote/PG/provider/frontend/GUI actions.
+
+## 2026-10-09 — Permanent candidate Go input regressions
+
+Valid until: currentI1200/source1a769 contract bindings change — then history.
+
+Source bf389aaf fixed05:59:16→06:19:16/cut06:16:16; source3b509 andformatACK8f209
+froze beforecut, source-stop06:15:58. Raw3934/552b stayed immutable; qualified
+formatter38fab produced b7f67/b4fc (38695B), exactliteral/token equivalence ACK.
+Stage62f2 copied two new-only Go tests, zero replacements, I1198→1200.
+Nativeae43 fixed06:17:58→06:37:58/reserve06:34:58 passed racecompile9f02153a,
+actual two-name manifestf144 and targeted run:2parents+69subcases=71PASS,
+ordinary2sessions32requests, no fail/skip/race/omission. Graph expectations
+independently frozen; newHTTP advisory arrays are explicit normativechecks.
+Privateprojectionordering not directly invoked; d10d reuseproof authenticates
+unchanged helper/Normalize/registry464 inputs against genuineSource6/archive69.
+No old69HTTPcorpus/newauthority claim. Results b66acba9 andactualkeepers bind
+all scopes. Rootverified144 native/prior1588 pins/I1200/bothcaches/GOPATH;
+RSS419246080B/combinedgrowth51717329B+64MiB anchored originalformatterbaseline,
+ownedtmp/go-tmp empty. Source/rootwholeRSS unmeasured. No current serving data
+orRGo publication; tests publish with supported Source7 adoption.
+A static ordinary assertion mapping initially rejected equivalent transcript
+cap→requestcounter beforewrites; corrected underoriginalclock, notesretainit.
+Projectionproof readonly schema KeyError0 precededwrites; actualmapshape
+resolved underoutcomescope. No native failure or clock was reset.
+Optional fullmodule09be remainsFAILED/unrun; no downloads/modulechange,
+GUI/frontend/PG/provider/remote action or Source7release.
