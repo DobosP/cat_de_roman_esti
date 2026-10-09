@@ -1,0 +1,85 @@
+{
+  "additional_measure_dirs": [],
+  "checked_at_utc": "2026-10-09T05:23:59.807925+00:00",
+  "commands": [
+    {
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/runtime-tools-r1/cat-doc-check",
+        "--root",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7"
+      ],
+      "name": "native-current-documentation"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "name": "default-working-whitespace"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "name": "default-staged-whitespace"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "59a9a568c445654f69215d735091c9b3e0405831",
+        "--check"
+      ],
+      "name": "default-whole-version-whitespace"
+    }
+  ],
+  "deadline_utc": "2026-10-09T05:30:32.925215+00:00",
+  "expected_after": {},
+  "fresh_headroom": {
+    "disk_free_bytes": 111864479744,
+    "memory_available_bytes": 19483779072
+  },
+  "inputs": {
+    "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/runtime-tools-r1/cat-doc-check": "41674f0775a1912df5a4befc60b9377e0d40233a9582227b1a80aa63e0b78881",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/README.md": "6bf8dab1283f7fda3e5424bdbe585b8059b0cd0ca872d56961c9e2edaa14f110",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/TASK_BRIEF.md": "c3aafc7856da34c6923f0bc03e2ebaaaafc7c71a07230e9f2d8f8842fca7ceb1",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/WORKLOG.md": "2b8bc9e569c2bbfa70a1cb081c088d92d44319730e35d0ade1169fe58654af06",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/STATUS.md": "cac6afe2cb5a30c8ed204b1ef09e798ceaa6e2152ba6512b481a5201347b10c2",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/adr/0186-go-authoritative-content-validation.md": "adbcaaadf5621d0214eb4d8cb0a1dff320949ee57caeba7816aaad87bfa9df68",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/agent-testing.md": "25951b7c65ca2504a8ae147c7645dfaff463f76a450edc62ea623641c5d49a82",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/README.md": "48e435e5a4bbd64079ad59202da4b39b7cf3f97942eaef479588bb5760ab3971",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/go-validation-checkpoint-scope.json": "754f65c5c9cb9c152e87a0e026894d166af4aaf72a46703929a486cfd65f0e55",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/go-validation-migration-results.json": "cab2468a25d41a83de569a96dcf7fce02073c4f2810a28897d59f8cc460f59b1"
+  },
+  "lane": "go-validation-docs-r1",
+  "limits": {
+    "GOMAXPROCS": 2,
+    "RSS_bytes": 2147483648,
+    "build_jobs": 2,
+    "incremental_bytes": 1073741824,
+    "metadata_reserve_seconds": 180,
+    "remaining_disk_memory_floor_bytes": 17179869184,
+    "start_disk_floor_bytes": 18253611008
+  },
+  "max_agents_including_root": 1,
+  "runner_sha256": "397686a51c5f03f207cc450fceda8b88623383a83ab2ecb90a884e6167fa91ee",
+  "schema": "completed-go-migration-final-docs-v1",
+  "scope": "Finalmetadata/checkpoint aftercompletednativecodequalification; no source/data/tests repetitions or source clock extension. Currentdocs/ADR/workflow only; oldfailures preserved.",
+  "scratch_bindings": {},
+  "unchanged": {
+    "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/runtime-tools-r1/cat-doc-check": "41674f0775a1912df5a4befc60b9377e0d40233a9582227b1a80aa63e0b78881",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/README.md": "6bf8dab1283f7fda3e5424bdbe585b8059b0cd0ca872d56961c9e2edaa14f110",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/TASK_BRIEF.md": "c3aafc7856da34c6923f0bc03e2ebaaaafc7c71a07230e9f2d8f8842fca7ceb1",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/WORKLOG.md": "2b8bc9e569c2bbfa70a1cb081c088d92d44319730e35d0ade1169fe58654af06",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/STATUS.md": "cac6afe2cb5a30c8ed204b1ef09e798ceaa6e2152ba6512b481a5201347b10c2",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/adr/0186-go-authoritative-content-validation.md": "adbcaaadf5621d0214eb4d8cb0a1dff320949ee57caeba7816aaad87bfa9df68",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/agent-testing.md": "25951b7c65ca2504a8ae147c7645dfaff463f76a450edc62ea623641c5d49a82",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/README.md": "48e435e5a4bbd64079ad59202da4b39b7cf3f97942eaef479588bb5760ab3971",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/go-validation-checkpoint-scope.json": "754f65c5c9cb9c152e87a0e026894d166af4aaf72a46703929a486cfd65f0e55",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/go-validation-migration-results.json": "cab2468a25d41a83de569a96dcf7fce02073c4f2810a28897d59f8cc460f59b1"
+  }
+}

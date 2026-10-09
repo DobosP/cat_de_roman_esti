@@ -1,7 +1,7 @@
 # ADR-0168 — Qualify the complete native toolchain
 
 Date: 2026-10-05
-Status: accepted implementation/qualification; CI reference routing awaits human approval
+Status: accepted implementation/qualification; CI reference routing awaits human approval; content validation routing amended by ADR-0186
 Amends: ADR-0165/0166 pending qualification; production remains unchanged.
 
 ## Decision and qualification

@@ -1,0 +1,9 @@
+{
+  "owner_authorized_validation_migration": true,
+  "same_source_deadline": "2026-10-09T05:09:04.145863+00:00",
+  "additional_targets": {
+    "tests/test_board_rankings_v37.py": "da9a8bd3a0d58bfb82e968aefcc0e36094da82750e02a827972d5d3fd4d3271d",
+    ".github/workflows/ci.yml": "91645d24cfe6ca058c7e39e1fc0c7bb2ac8c59109e76ce665beb2f63316a344f"
+  },
+  "purpose": "Optional Python ranking parity compares structured values/mirrors; its legacy renderer still checks its own declared order. Required native CI uses the new native content check. No reference gate falsely marked passed, no fixture/score/source data edits."
+}

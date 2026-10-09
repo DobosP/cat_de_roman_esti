@@ -1,0 +1,34 @@
+{
+  "authorized_source_targets": [
+    "go-backend/internal/contentops/command.go",
+    "go-backend/internal/contentops/check.go",
+    "go-backend/internal/contentops/check_test.go",
+    "go-backend/internal/contentops/README.md",
+    "docs/adr/0186-go-authoritative-content-validation.md",
+    "docs/adr/README.md",
+    "docs/adr/0165-native-source-build-and-qualification.md",
+    "docs/adr/0168-qualify-complete-native-toolchain.md",
+    "docs/STATUS.md",
+    "docs/agent-testing.md",
+    "README.md",
+    "TASK_BRIEF.md",
+    "WORKLOG.md",
+    "docs/reviews/v1-7-recognizable-content/README.md"
+  ],
+  "cutoff_utc": "2026-10-09T05:06:04.145863+00:00",
+  "deadline_utc": "2026-10-09T05:09:04.145863+00:00",
+  "max_agents_including_root": 3,
+  "owner_steering": "Go format and Go content validations are authoritative; Python optional. Validation rewrites explicitly authorized; consider Rust for graph performance. Notify material migration blockers promptly. Batch verification and avoid repeated giant evidence maps.",
+  "prior_protection_union": {
+    "path": "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/current-source7-full-reference-r2-checkpoint-post-protections-r1.json",
+    "sha256": "892fd44da3b0a758ea6ceb53263cd554d5de3d03f2ece65b9d4968f8f1100a1b"
+  },
+  "resource_headroom": {
+    "disk_free_bytes": 114378969088,
+    "memory_available_bytes": 28821561344
+  },
+  "schema": "owner-authorized-go-native-validation-migration-v1",
+  "scope": "Implement native readonly graph/pack/ranking/derived check using existing Go operators, meaningful parity/drift/refusal tests and benchmark; assess existing Rust without acquisition/new runtime. Record ADR and update workflow/testing/heartbeat. Source6 data and isolated1194 fixtures untouched; no live adoption/push/deploy/PG/provider/frontend activation. Source/test edits in task worktree are authorized; independent code review before build/test. Native execution uses separate fresh fixed runner admission and owned cache.",
+  "source_RSS": "unmeasured",
+  "start_utc": "2026-10-09T04:49:04.145863+00:00"
+}

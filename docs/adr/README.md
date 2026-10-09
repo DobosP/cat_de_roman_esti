@@ -127,3 +127,5 @@ and the word-grid reflow; its release, reserve and content decisions remain.
 - [0184](0184-native-spa-toolchain-and-managed-output.md) — native SPA tooling/managed-output prerequisites; runtime validation pending. ADR0183/Source7 preserved.
 
 - [0185 — Current-state content iterations and evidence reuse](0185-content-loop-current-state-and-evidence-reuse.md) — Accepted2026-10-08; concisehandoffs/exactchanged-dependencyreuse/schema-firstchecks withoutgatewaivers.
+
+- [0186](0186-go-authoritative-content-validation.md) — owner-authorized Go content validation and native JSON; Python/Rust references optional.

@@ -1,13 +1,13 @@
 # Agent Testing Guide — cat_de_roman_esti
 
-Last verified: 2026-10-08 — selected toolchain guidance refreshed; current content/GUI qualification in STATUS.
+Last verified: 2026-10-09 — native content-check migration qualified; full content/GUI qualification in STATUS.
 
 ## Native serving gates
 
 Go 1.27.1 serves the arcade, accounts/proposals and native content/tooling; selected Node26 builds the SPA (ADR-0184).
 [ADR-0162](adr/0162-select-go-production-backend.md) and [ADR-0163](adr/0163-complete-native-go-accounts.md)
 record serving boundaries; [ADR-0166](adr/0166-native-content-operators-and-builder-rails.md)
-records native operator/review rails. Python commands below are optional independent references.
+records native operator/review rails. Python commands below are optional independent references ([ADR-0186](adr/0186-go-authoritative-content-validation.md)); they do not gate Go content adoption.
 
 | Scope | Command | Expected |
 |---|---|---|
@@ -15,6 +15,7 @@ records native operator/review rails. Python commands below are optional indepen
 | Shared native identity | `go -C shared-go/authcore test -race ./... && go -C shared-go/authcore vet ./...` | crypto/session/provider fixtures pass |
 | Native account release | `go -C go-backend test -race ./internal/accounts -accounts.database <disposable-dsn>` | real PostgreSQL migration/consent/erasure contracts pass |
 | Native combined HTTP release | `go -C go-backend test -race ./internal/httpapi -arcade.database <disposable-dsn>` | real signup/consent/game ownership/credit/erase races pass |
+| Native content check | `go -C go-backend run ./cmd/cat-content-ops check --root .. --check` | graph/pack, full rank/derive values, exact native format/mirrors and source stability |
 | Native source freshness | `go -C go-backend run ./cmd/cat-content validate --root .. && go -C go-backend run ./cmd/cat-content export --root .. --check` | complete source gates and exact sealed export |
 | Independent frozen HTTP | `go -C go-backend run ./cmd/cat-qualify parity --binary <native-binary>` | all 1207 independent expected responses/source bindings |
 | Frontend | `cd frontend && npm ci && npm test && npm run lint && npm run build` | original30 frozen; managed output/retirement per ADR-0184 |
@@ -62,7 +63,7 @@ For browser fixtures, build `cat-browser-plan` and set its absolute scratch path
    original30 preservation and managed output/retirement per ADR-0184; backend/docs-only edits do not regenerate it.
 5. Record exact commands/results in `docs/STATUS.md`; overflow history belongs in WORKLOG.
 
-## Known load-sensitive reference check
+## Optional load-sensitive reference check
 
 `tests/test_alchimie_sparse_recipes.py::test_many_mined_sessions_stay_bounded_solvable_and_fast`
 asserts a 45-second wall-clock bound. Check host load and repeat on a quiet host before
@@ -71,6 +72,6 @@ Reference `tests/accounts/` collection requires `CAT_ACCOUNTS_ENABLED=1`.
 Current content expectations: [ADR-0116](adr/0116-share-current-content-test-expectations.md),
 `tests/current_content.py` and `tests/content_scenarios.py`; historical pins remain separate.
 
-Complete native-only qualification: `scripts/qualify_go_toolchain.sh`, documented in
-[NATIVE_TOOLCHAIN](NATIVE_TOOLCHAIN.md), requires explicit disposable PG and task scratch,
-Go1.27.1/selectedNode26, Python/Rust absent from PATH; no missing required gate becomes a skip.
+Full release partitions are documented in [NATIVE_TOOLCHAIN](NATIVE_TOOLCHAIN.md).
+The historical `qualify_go_toolchain.sh` still selects Node24/PG/frontend scopes; use
+explicit current Node26/asset/PG authorization. The content check starts none of them.

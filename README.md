@@ -1,10 +1,11 @@
 # cat_de_roman_esti
 
-Qualified Source6 remains live. The isolated V1.7 candidate has qualified full
-collection of 2,736 cases; execution stopped on current ranking byte/order parity.
-The observed 716 ranking rows match in value, while serialized object-key order
-differs. No formatter repair or live adoption has been applied. See [current status](docs/STATUS.md)
-and the [V1.7 review](docs/reviews/v1-7-recognizable-content/README.md).
+Content validation and native JSON policy:
+[ADR-0186](docs/adr/0186-go-authoritative-content-validation.md). Run
+`go -C go-backend run ./cmd/cat-content-ops check --root .. --check` for graph,
+pack, ranking and derived-catalog checks. Python/Rust remain optional references.
+Source6 remains live; V1.7 adoption and full qualification are tracked in
+[STATUS](docs/STATUS.md) and the [wave review](docs/reviews/v1-7-recognizable-content/README.md).
 
 A **text-only arcade of six Romanian word games** using a shared concept graph
 (current counts, fixture version, generated hashes and gate state are recorded in

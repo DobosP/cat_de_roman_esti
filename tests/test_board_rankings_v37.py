@@ -223,14 +223,18 @@ def test_formula_curves_are_clamped_and_goldilocks_shaped() -> None:
 def test_artifact_is_complete_exactly_bound_and_byte_identical(generated: dict) -> None:
     package_bytes = RANK.PACKAGE_RANKINGS.read_bytes()
     tests_bytes = RANK.TESTS_RANKINGS.read_bytes()
-    assert package_bytes == tests_bytes == RANK.render_rankings(generated)
-
+    # Go owns stored bytes; JSON object insertion order is not content semantics.
+    # The optional Python oracle still independently checks all generated values.
+    assert package_bytes == tests_bytes
     artifact = json.loads(package_bytes)
     assert artifact == generated
-    assert tuple(artifact) == ("meta", "boards")
-    assert tuple(artifact["meta"]) == RANK.META_FIELDS
-    assert tuple(artifact["meta"]["counts"]) == RANK.COUNT_FIELDS
-    assert all(tuple(row) == RANK.BOARD_FIELDS for row in artifact["boards"])
+
+    reference = json.loads(RANK.render_rankings(generated))
+    assert reference == generated
+    assert tuple(reference) == ("meta", "boards")
+    assert tuple(reference["meta"]) == RANK.META_FIELDS
+    assert tuple(reference["meta"]["counts"]) == RANK.COUNT_FIELDS
+    assert all(tuple(row) == RANK.BOARD_FIELDS for row in reference["boards"])
 
     meta = artifact["meta"]
     assert meta["schema_version"] == 1
