@@ -1,0 +1,30 @@
+"""Validate actual full run JUnit against the actual fresh collection; no expected bodies."""
+from pathlib import Path
+import json,hashlib,xml.etree.ElementTree as ET,os,sys
+T=Path('/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008')
+O=T/'current-source7-full-reference-r2'
+h=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+assert len(sys.argv)==2
+row=Path(sys.argv[1]);r=json.loads(row.read_bytes())
+manifest=O/'actual-cases.json';external=json.loads((O/'actual-cases-external.json').read_bytes());assert h(manifest)==external['manifest_sha256']
+m=json.loads(manifest.read_bytes());xml=O/'pytest-results.xml';assert xml.is_file() and not xml.is_symlink() and xml.stat().st_size<=32<<20
+root=ET.fromstring(xml.read_bytes());nodes=root.findall('.//testcase');observed=[];results=[]
+for node in nodes:
+    file=node.get('file');name=node.get('name');classname=node.get('classname','')
+    assert file in m['by_module'] and name
+    dotted=file[:-3].replace('/','.');assert classname==dotted or classname.startswith(dotted+'.')
+    suffix=classname[len(dotted):].lstrip('.');nid=file+'::'+(('::'.join(suffix.split('.'))+'::') if suffix else '')+name
+    outcome='failed' if node.find('failure') is not None else 'error' if node.find('error') is not None else 'skipped' if node.find('skipped') is not None else 'passed'
+    skip=node.find('skipped');message=skip.get('message','') if skip is not None else None
+    observed.append(nid);results.append({'nodeid':nid,'outcome':outcome,'skip_message':message})
+assert len(observed)==len(set(observed))==m['count'] and set(observed)==set(m['nodeids'])
+skips=[x for x in results if x['outcome']=='skipped'];bad=[x for x in results if x['outcome'] in ['failed','error']]
+known='tests/test_web.py::test_built_spa_served_when_present';reason='no SPA build present (run: cd frontend && npm run build)'
+known_only=len(skips)==1 and skips[0]['nodeid']==known and skips[0]['skip_message']==reason
+log=Path(r['log_path']);assert log.is_file() and h(log)==r['log_sha256'] and log.stat().st_size<=32<<20
+eligible=(r['exit_code']==0 and r['guard'] is None and r['failure'] is None and not bad and known_only)
+value={'schema':'actual-full-default-reference-run-v2','actual_cases':m['count'],'all_case_ids_present_once':True,'case_results':results,'passed':sum(x['outcome']=='passed' for x in results),'failed_or_errors':bad,'skips':skips,'known_existing_SPA_case_included_but_unqualified':known_only,'eligible_reference_qualification_only':eligible,'full_zero_omission_or_serving_qualification':False,'producer_receipt_sha256':h(row),'producer_log_sha256':h(log),'JUnit_sha256':h(xml),'actual_case_manifest_sha256':h(manifest),'cleanup_resource_and_source_postchecks_required':True}
+p=O/'run-summary.json'
+with p.open('x') as f:json.dump(value,f,indent=2,sort_keys=True);f.write('\n');f.flush();os.fsync(f.fileno())
+print(json.dumps({'summary_sha256':h(p),'eligible_reference_only':eligible,'known_blocked_case':known}))
+raise SystemExit(0 if eligible else 1)

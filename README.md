@@ -1,9 +1,9 @@
 # cat_de_roman_esti
 
-Qualified Source6 remains the live content. The isolated V1.7 Source7 candidate
-passed selected history/current suites and its complete 92-case discovery-catalog
-repair regression. Its 1,194-file stage retains all serving bytes; full reference,
-backend, authority and release qualification remain pending. See [current status](docs/STATUS.md)
+Qualified Source6 remains live. The isolated V1.7 candidate has qualified full
+collection of 2,736 cases; execution stopped on current ranking byte/order parity.
+The observed 716 ranking rows match in value, while serialized object-key order
+differs. No formatter repair or live adoption has been applied. See [current status](docs/STATUS.md)
 and the [V1.7 review](docs/reviews/v1-7-recognizable-content/README.md).
 
 A **text-only arcade of six Romanian word games** using a shared concept graph
