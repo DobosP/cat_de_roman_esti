@@ -32,8 +32,8 @@ your content changed its expectation, with no generator to refresh it, is report
 
 ## Environment, names and hazards
 
-- Go 1.27.1: `export PATH=/home/dobo/work/_temp/codex__content-v1-7/tools/go/bin:$PATH GOTOOLCHAIN=local`
-  unless `go version` already reports go1.27.1. Python importer: `~/work/cat_de_roman_esti/.venv/bin/python`
+- Go 1.27.1: `export PATH=/usr/local/go/bin:$PATH GOTOOLCHAIN=local`; `go version` must report
+  go1.27.1, otherwise BLOCKED. Python importer: `~/work/cat_de_roman_esti/.venv/bin/python`
   with `PYTHONPATH=scripts:.` from the worktree; never `python -I`.
 - Wave V1.<N>, theme `<theme>` (say "wave", never "Source<K>"): branch `content/v1-<N>-<theme>`,
   created by `python3 ~/work/agent-ops/scripts/create_task_worktree.py --repo ~/work/cat_de_roman_esti
@@ -41,7 +41,8 @@ your content changed its expectation, with no generator to refresh it, is report
   module `scripts/<theme_underscored>_v1_<N>_data.py`; `BUILD_VERSION = "fixture-v1-<N>-<theme>"`;
   authored source `authored-v<K+1>.json` (K = highest existing, today 6); corpus
   `python-http-parity-v1-<N>.json.gz`; pool `docs/content-pool/v1-<N>-<theme>/pool.json`;
-  reviews `docs/reviews/v1-<N>-<theme>/`. Loop state: `~/work/_temp/content-loop/state.json` (≤2 KB).
+  reviews `docs/reviews/v1-<N>-<theme>/`. Loop state: `~/work/_temp/content-loop/state.json` (≤2 KB); if it is
+  missing, create it for the first open backlog wave at step 0 with `waiting` null.
 - Hazards: bare `cat-content` writes bundled.json/digest.go and bare `cat-mobile-pack` rewrites the
   mobile contract — use `cat-content validate`, `cat-content export --root .. --check` and
   `cat-mobile-pack --root .. --check`. Only `cat-content-ops` and `cat-content-rail` print usage
