@@ -201,10 +201,19 @@ void test("raw manifest, budget roots and limits remain exact while unchanged SD
 function actualPlugin() {
   parserBinding(path.join(repo, "frontend"), ts);
   const filename = fileURLToPath(new URL("../scripts/gui-precompressed-plugin.mts", import.meta.url));
+  let formatAdapters = 0;
   const source = fs.readFileSync(filename, "utf8"), result = ts.transpileModule(source, {
     fileName: filename, reportDiagnostics: true,
     compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2021, esModuleInterop: true },
+    transformers: { before: [() => (file) => {
+      assert.equal(file.fileName, filename);
+      assert.equal(file.text, source);
+      assert.equal(formatAdapters++, 0, "Exactly one actual source file may receive the emitted-format adapter");
+      file.impliedNodeFormat = ts.ModuleKind.CommonJS;
+      return file;
+    }] },
   });
+  assert.equal(formatAdapters, 1, "The actual plugin source must receive its explicit CommonJS VM adapter");
   assert.equal((result.diagnostics ?? []).filter((item) => item.category === ts.DiagnosticCategory.Error).length, 0);
   const exports = {}, dependencies = { "node:path": path, "node:assert/strict": assert, "./gui-precompressed-assets.mjs": compressed };
   vm.runInNewContext(result.outputText, { exports, require(name) {

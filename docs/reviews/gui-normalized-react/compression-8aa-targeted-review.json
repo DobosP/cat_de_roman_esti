@@ -1,0 +1,193 @@
+{
+  "schema": 1,
+  "scope": "Actual failed selected synthetic compression method;29codec/input/preservation cases passed, oneVM adapter failed; no broader qualification",
+  "source": "8aa812eab5a40e6784e71b4e61b3985aca7ed223",
+  "tree": "091cada1351342d4135afeee38deb3d1fbaeca616c1f4150e504294d7324d5ed",
+  "invocation": "9ddbd92c-c98d-4a29-95dc-edffde6a0509",
+  "wrapperExit": 1,
+  "observationSha256": "7ed9e44dc93fce48ea636d612f2478197b709d50dbedcf961c87963908f4fe42",
+  "capture": "756ec62525a026bfb34c8683683bd0dedb8aa19f2aaf2c49739bde54a4388102",
+  "regularFiles": 40033,
+  "regularBytes": 4662281175,
+  "directoriesFullModes": 12288,
+  "literalLinks": 59,
+  "newLinks": "Two deliberately retained negative fixture aliases only in mirror .gate/_temp; no referents followed",
+  "actualCommands": 1,
+  "actualNodeCounts": {
+    "tests": 30,
+    "suites": 0,
+    "pass": 29,
+    "fail": 1,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "caseIndex": [
+    {
+      "id": 1,
+      "name": "final raw manifest-owned JS/CSS receives exact deterministic gzip9 and Brotli pairs without changing raw bytes or metadata",
+      "status": "pass"
+    },
+    {
+      "id": 2,
+      "name": "complete pair validation refuses missing gzip",
+      "status": "pass"
+    },
+    {
+      "id": 3,
+      "name": "complete pair validation refuses missing Brotli",
+      "status": "pass"
+    },
+    {
+      "id": 4,
+      "name": "complete pair validation refuses missing raw owner",
+      "status": "pass"
+    },
+    {
+      "id": 5,
+      "name": "complete pair validation refuses orphan sidecar",
+      "status": "pass"
+    },
+    {
+      "id": 6,
+      "name": "complete pair validation refuses nested sidecar",
+      "status": "pass"
+    },
+    {
+      "id": 7,
+      "name": "complete pair validation refuses uppercase sidecar alias",
+      "status": "pass"
+    },
+    {
+      "id": 8,
+      "name": "complete pair validation refuses compressed HTML",
+      "status": "pass"
+    },
+    {
+      "id": 9,
+      "name": "complete pair validation refuses compressed manifest",
+      "status": "pass"
+    },
+    {
+      "id": 10,
+      "name": "complete pair validation refuses compressed font",
+      "status": "pass"
+    },
+    {
+      "id": 11,
+      "name": "complete pair validation refuses duplicate row",
+      "status": "pass"
+    },
+    {
+      "id": 12,
+      "name": "complete pair validation refuses directory spelling alias",
+      "status": "pass"
+    },
+    {
+      "id": 13,
+      "name": "complete pair validation refuses path traversal",
+      "status": "pass"
+    },
+    {
+      "id": 14,
+      "name": "complete pair validation refuses absolute path",
+      "status": "pass"
+    },
+    {
+      "id": 15,
+      "name": "complete pair validation refuses encoded path alias",
+      "status": "pass"
+    },
+    {
+      "id": 16,
+      "name": "complete pair validation refuses sparse rows",
+      "status": "pass"
+    },
+    {
+      "id": 17,
+      "name": "complete pair validation refuses nonbyte row",
+      "status": "pass"
+    },
+    {
+      "id": 18,
+      "name": "gzip validation refuses malformed gzip",
+      "status": "pass"
+    },
+    {
+      "id": 19,
+      "name": "gzip validation refuses stale gzip",
+      "status": "pass"
+    },
+    {
+      "id": 20,
+      "name": "gzip validation refuses timestamped gzip",
+      "status": "pass"
+    },
+    {
+      "id": 21,
+      "name": "gzip validation refuses gzip output beyond raw bound",
+      "status": "pass"
+    },
+    {
+      "id": 22,
+      "name": "gzip validation refuses different gzip level",
+      "status": "pass"
+    },
+    {
+      "id": 23,
+      "name": "gzip validation refuses concatenated empty gzip member",
+      "status": "pass"
+    },
+    {
+      "id": 24,
+      "name": "gzip validation refuses trailing gzip padding",
+      "status": "pass"
+    },
+    {
+      "id": 25,
+      "name": "Brotli validation refuses malformed bytes and stale decoded content",
+      "status": "pass"
+    },
+    {
+      "id": 26,
+      "name": "manifest code ownership includes record.css and refuses compressed owners, sparse metadata and case aliases",
+      "status": "pass"
+    },
+    {
+      "id": 27,
+      "name": "emission refuses existing sidecars and file/directory symlinks rather than overwriting or following them",
+      "status": "pass"
+    },
+    {
+      "id": 28,
+      "name": "complete current inventory/sync keeps paired representations while the genuine frozen thirty-file payload stays exact",
+      "status": "pass"
+    },
+    {
+      "id": 29,
+      "name": "raw manifest, budget roots and limits remain exact while unchanged SDK accounting measures real level9 sidecars",
+      "status": "pass"
+    },
+    {
+      "id": 30,
+      "name": "actual post-close plugin reads finalized on-disk bytes and emits nothing for failed or unwritten builds",
+      "status": "fail"
+    }
+  ],
+  "failure": "case30 vm.runInNewContext rejects ES import syntax emitted from actual .mts TS6 SourceFile; actual productionbuild alreadyPASS",
+  "driverNodeAndGoFields": "Literal null because run() raised on rc1 before summaryparser; not invented new results",
+  "go": "NOT RUN",
+  "formatter": "NOT RUN (false boolean is not an executed formatting failure)",
+  "HTTP": "NOT RUN; only called aftertargetedPASS",
+  "sourceBracketRows": 20,
+  "sourceBracketExact": true,
+  "actualPrivateInputs": 95,
+  "privateDirs": "0700",
+  "privateFiles": "0600",
+  "hostBefore": "cat-8aa812e-compression-shell-host-before-20261010.json",
+  "hostAfter": "cat-8aa812e-compression-shell-host-after-20261010.json",
+  "actualImageIID": "sha256:4f9ddc48e5cd1f3c548ed4616cb686a8486440727e193b55b4acfec3dc42deb4",
+  "actualImageClaimScope": "Scoped host CID/IID/sharednamespace only; no API identity, HTTP compression or full-image qualification",
+  "independentReview": "cross all40033rows/fullmodes/59literal links/exactclosure/8540Git/context/oneNodefailure/29passes/20before-after/95actualprivateinputs/hostbracket verified; failure retained",
+  "full_E3_M0_M1_KIT_BUMP_device_production": false
+}
