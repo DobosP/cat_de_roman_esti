@@ -4,6 +4,7 @@ import { spawnSync } from "node:child_process";
 import { resolveHookRuntime } from "./gui-hook-runtime.mjs";
 import { runNativeSourcePreflight, runDoccheckSourcePreflight } from "./gui-native-preflight.mjs";
 import { checkFullBrowserCapability } from "./gui-browser-capability.mjs";
+import { runOwnerLegacyJourney } from "./gui-legacy-owner.mjs";
 import { createHash } from "node:crypto";
 import { validGenRequest, runOriginalStyleOperation, NORMALIZED_STYLE_OPERATION, runNormalizedStyleOperation } from "./gui-style-operation.mjs";
 
@@ -483,7 +484,9 @@ switch (target) {
       });
     }
     command("cat-http-parity", "go", ["run", "./cmd/cat-qualify", "parity", "--binary", path.join(scratch, "cat-server")], path.join(root, "go-backend"));
+    runOwnerLegacyJourney(hook); // Named failure is retained; the independent browser/baseline command still runs.
     command("cat-browser-full", "node", ["scripts/gui-full-browser.mjs"], root, { CDR_NATIVE_BINARY: path.join(scratch, "cat-server"), CDR_BROWSER_PLAN_BINARY: path.join(scratch, "cat-browser-plan") });
+    if (fs.existsSync(path.join(root, `${directory}/active-csp-observation.json`))) hook.artifact(`${directory}/active-csp-observation.json`);
     hook.browser = { inventory: "frontend/e2e/gui-inventory.json", asset_root: "go-backend/embedfs/dist", entry: "index.html", asset_prefix: "/" };
     break;
   }

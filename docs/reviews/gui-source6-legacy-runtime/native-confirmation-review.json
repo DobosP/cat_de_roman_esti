@@ -1,0 +1,86 @@
+{
+  "schema": 1,
+  "utc": "2026-10-10T13:53:55.732989+00:00",
+  "verdict": "PARENT + cross_repo_plan ACTUAL CLEAR",
+  "source": "7eb05fa0fa1771b520cd00dee49a769fd2726399",
+  "wrapper_invocation": "b290086b-e349-4431-9391-6c9ebcec352f",
+  "tree_sha256": "72eadfb404028eae703df6659d869baa2cba3eeec60274766e7bf30ee6245a90",
+  "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+  "actual_wrapper_exit": 0,
+  "actual_observation_sha256": "4348db8f2a001210882a44f32a67f917df6ab2981c79894d6ec5989f1a0bd624",
+  "capture_sha256": "ac1ab536d99c4cca6688b7f83a1a264f51c9453cb1f9ca5650da1b646567e5f1",
+  "rows_all_bytes_fullmodes_roundtrips": 55,
+  "compact_blob_bytes": 39826,
+  "ELF_hash_only": 6,
+  "commands": [
+    [
+      "build-runtime-helper",
+      0
+    ],
+    [
+      "build-native-rail",
+      0
+    ],
+    [
+      "build-native-content",
+      0
+    ],
+    [
+      "runtime-before",
+      0
+    ],
+    [
+      "installed-all-check",
+      0
+    ],
+    [
+      "native-source-validate",
+      0
+    ],
+    [
+      "native-export-check",
+      0
+    ],
+    [
+      "targeted-native-race",
+      0
+    ],
+    [
+      "runtime-after",
+      0
+    ]
+  ],
+  "native_checks": {
+    "installed-all-check": true,
+    "native-export-check": true,
+    "native-source-validate": true
+  },
+  "native_targeted": {
+    "count": 1,
+    "current_registered_parity_cases_asserted_by_existing_test": 1207,
+    "default_package_timeout_seconds": 600,
+    "fail_actions": 0,
+    "independent_corpus_sha256": "0437c53b91b07d7c4323a7c66753d7250d9304b6a32f94f03901285e64c21951",
+    "package_pass_actions": 2,
+    "pass_actions": 2,
+    "race": true,
+    "run_actions": 2,
+    "skip_actions": 0,
+    "tests": [
+      {
+        "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentrails",
+        "test": "TestAllFourBaselineArtifactsRebuiltFromAuthoredInputsExactBytes"
+      },
+      {
+        "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+        "test": "TestCurrentIndependentHTTPParity"
+      }
+    ],
+    "transport_scope": "Existing test in-process native HTTP handler; no separate child-process/browser/live1207 claim"
+  },
+  "runtime139_equal": true,
+  "source238_equal": true,
+  "all25_archives_guarded": true,
+  "scope": "InstalledSource6 native allfour reconstruction/validate/export and2inprocess targetedrace tests only; no full/browser/image/device/M0/M1/KIT_BUMP acceptance",
+  "independent_review": "All55regularrows/fullmodes/14sealedgzipblobs39826B/context/238beforeafter/139runtime/25archives/9commandsreaped0/realallfour exact+semantic/validate/export/raw2namedtests oncePASS/no fail-skip-cache-race verified. Registered1207 inprocess parity only; no extra corpus/process replay."
+}

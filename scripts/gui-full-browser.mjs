@@ -5,6 +5,7 @@ import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { chromium } from "../frontend/node_modules/playwright/index.mjs";
 import { ROMANIAN_FONT_SOURCES } from "../frontend/scripts/check-bundle-budget.mjs";
+import { readActualLegacyObservation } from "./gui-legacy-owner.mjs";
 
 const root = process.cwd(), originalProfile = process.argv[2] === "original", normalizedProfile = process.argv[2] === "normalized-react";
 const reactProfile = originalProfile || normalizedProfile;
@@ -241,6 +242,7 @@ for (const file of [...files].sort()) {
 const fontAssets = fontBindings.map((font) => ({ ...font, ...assets.find((asset) => asset.file === font.file) }));
 assert.ok(fontAssets.every((font) => font.bytes > 0 && font.sha256));
 fs.writeFileSync(`${output}/app-witness.json`, JSON.stringify({ schema: 1, sha: process.env.GATE_SHA, tree_sha256: process.env.GATE_TREE_SHA256, app_image_id: process.env.GATE_APP_IMAGE_ID, identity, entry: "index.html", assets, fontAssets }, null, 2) + "\n");
+let activeCspObservation;
 const browser = await chromium.launch();
 try {
   const observations = [], violations = [];
@@ -320,11 +322,36 @@ try {
       fonts: { links: observation.fontPreloads.map(({ nonce, ...link }) => ({ ...link, nonce_sha256: hash(nonce) })), requests: fontRequests, responses: fontResponses, status: observation.fontStatus, faces: observation.fontFaces } });
     await page.close();
   }
-  fs.writeFileSync(`${output}/csp-measurement.json`, JSON.stringify({ schema: 1, sha: process.env.GATE_SHA, tree_sha256: process.env.GATE_TREE_SHA256, app_image_id: process.env.GATE_APP_IMAGE_ID, stage: process.env.CSP_STAGE, violations: violations.length, legacy_violations: 0, pages: routes.length, nonceObservations: observations, observedViolations: violations }, null, 2) + "\n");
+  activeCspObservation = { schema: 1, sha: process.env.GATE_SHA, tree_sha256: process.env.GATE_TREE_SHA256, app_image_id: process.env.GATE_APP_IMAGE_ID, stage: process.env.CSP_STAGE, violations: violations.length, pages: routes.length, nonceObservations: observations, observedViolations: violations };
+  fs.writeFileSync(`${output}/active-csp-observation.json`, JSON.stringify(activeCspObservation, null, 2) + "\n");
   assert.equal(violations.length, 0);
 } finally { await browser.close(); }
 const baseline = spawnSync("node", ["scripts/gui-baseline.mjs", "verify"], { cwd: root, env: process.env, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
 if (baseline.stderr) process.stderr.write(baseline.stderr);
 fs.writeFileSync(`${output}/baseline-stdout.log`, baseline.stdout || "");
 assert.equal(baseline.status, 0, "Actual screenshots/axe/vitals must match original baselines");
+// The owner failure must not suppress the unchanged current matrix/CSP/baselines.
+// Validate the required legacy observation only after those independent checks.
+const fullDescriptorBytes = fs.readFileSync(`${output}/wrapper-current.json`);
+assert.deepEqual(fullDescriptorBytes, fs.readFileSync(".gate/wrapper-current.json"));
+const fullDescriptor = JSON.parse(fullDescriptorBytes);
+const fullBootstrap = JSON.parse(fs.readFileSync(`${output}/bootstrap-execution.json`, "utf8"));
+assert.equal(fullDescriptor.target, "full");
+assert.equal(fullDescriptor.sha, process.env.GATE_SHA);
+assert.equal(fullDescriptor.tree_sha256, process.env.GATE_TREE_SHA256);
+assert.equal(fullDescriptor.toolchain_digest, process.env.TOOLCHAIN_DIGEST);
+assert.equal(fullBootstrap.sha, fullDescriptor.sha);
+assert.equal(fullBootstrap.tree_sha256, fullDescriptor.tree_sha256);
+assert.equal(fullBootstrap.wrapper_invocation, fullDescriptor.invocation);
+const actualInvocation = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
+assert.match(fullDescriptor.invocation, actualInvocation);
+assert.match(fullBootstrap.invocation, actualInvocation);
+const legacyObservation = readActualLegacyObservation(root, {
+  sha: process.env.GATE_SHA, tree_sha256: process.env.GATE_TREE_SHA256,
+  app_image_id: process.env.GATE_APP_IMAGE_ID, runner_invocation: fullBootstrap.invocation,
+  wrapper_invocation: fullDescriptor.invocation,
+});
+fs.writeFileSync(`${output}/csp-measurement.json`, JSON.stringify({ ...activeCspObservation,
+  wrapper_invocation: fullDescriptor.invocation, runner_invocation: fullBootstrap.invocation,
+  legacy_violations: legacyObservation.count, legacy_observation_sha256: legacyObservation.sha256 }, null, 2) + "\n");
 process.stdout.write(`Actual image ${process.env.GATE_APP_IMAGE_ID}: ${cases.length} browser cases, ${assets.length} fetched assets, CSP/axe/screenshots/vitals passed\n`);
