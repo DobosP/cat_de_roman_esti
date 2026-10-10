@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "utc": "2026-10-10T11:24:03.482609+00:00",
+  "verdict": "SOURCE CLEAR; no compilation or runtime qualification",
+  "source": "8957b55d05f26f15509bd3bd2cf1399c5d27af1e",
+  "baseline": "714c0664be4592ef452ca2934a491a672b557eef",
+  "packet_closure_sha256": "dc13d2ae5bb0615ac093997ba03cddcf7f28e363a54cce35723919c51b95d639",
+  "verified": {
+    "packet_files": 24,
+    "exact_paths": [
+      "go-backend/internal/httpapi/managed_legacy.go",
+      "go-backend/internal/httpapi/managed_legacy_test.go",
+      "go-backend/internal/httpapi/managed_nonce.go",
+      "go-backend/internal/httpapi/managed_nonce_test.go",
+      "go-backend/internal/httpapi/managed_spa.go",
+      "go-backend/internal/httpapi/managed_spa_test.go"
+    ],
+    "reference_files": 13,
+    "unchanged_spans_and_exact_inverse": 19,
+    "new_paths_before_absent": 2,
+    "frozen_archives": 2,
+    "frozen_members_each": 30,
+    "full_modes": true,
+    "current_git_clean": true
+  },
+  "review": [
+    "Selected legacy manifest drives SDK Tags and existing strict four-font ownership; frozen raw index no longer served, all archive bytes retained.",
+    "Current nonce parser/render unchanged; same delivered SDK policy and actual request nonce/no-store; invalid inputs refuse without raw fallback.",
+    "Five new native test declarations plus all14 prior declarations; explicit two historical raw-serving assertion transitions preserve archive and current controls.",
+    "Production rollback forcing report-only remains an owner/deployment obligation; source supports both actual gate stages, no production activation."
+  ],
+  "pending": [
+    "Managed formatter/compiler/focused native tests",
+    "Fresh Source6 runtime audits/finals/native authority for added managed_legacy.go and two modified runtime files",
+    "Actual same-image legacy journey/CSP measurement and complete full qualification",
+    "CSP stage B, M0/M1/KIT_BUMP, Samsung checkpoint remain unearned"
+  ],
+  "parent_verification_attempt": "Initial verifier assumed a beforeimage for two newly added files and stopped before any review write; corrected verifier explicitly proves their Git absence."
+}

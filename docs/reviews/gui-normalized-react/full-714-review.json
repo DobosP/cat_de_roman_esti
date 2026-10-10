@@ -1,0 +1,256 @@
+{
+  "schema": 1,
+  "utc": "2026-10-10T10:52:12.699787+00:00",
+  "source": "714c0664be4592ef452ca2934a491a672b557eef",
+  "tree": "52853424ab97036865934f55fe65f8f9eb6c25a370056ead84567fe2ab873521",
+  "resultSha256": "7bef6763107275666a8635913f5b0c678ba5a418bf428ed4fa113050f2786384",
+  "captureSha256": "e764298c24706f2ba3d4b29ead58d2f1f937903b2e363c3a615cfcd1a346d189",
+  "captureSeal": "0b3500c1a4186a73f192c594011d8533588a4ec128b5fc01efbfc10324d0fced",
+  "verdict": "CompletedFAIL201 raw evidence and boundedpasses ACCEPTED with descriptivecount erratum; E3 withheld for unmeasured mandatorylegacyjourney",
+  "retentionVerified": {
+    "files": 543,
+    "directories": 460,
+    "uniqueBlobs": 210,
+    "storedBytes": 88152202,
+    "rawRoundtrips": true,
+    "sourceGitMirrorRefs": 314,
+    "assetRefsTo591c": 90,
+    "ELFHashOnly": 4,
+    "registeredArtifacts": 96,
+    "virtualImageArtifacts": 1
+  },
+  "actualImage": {
+    "tagResolves": "sha256:80b3cffe8eed8bb01db2165b12c6d01ca3e76b9fe1095550599e9741bf197e55",
+    "ownedContainerId": "e0c09b4263cf923a7715f81de10457d1107d7d387723604d7f597e2615a84495",
+    "actualContainerImageSame": true
+  },
+  "frontend": {
+    "cancelled": 0,
+    "fail": 0,
+    "pass": 453,
+    "skipped": 0,
+    "suites": 0,
+    "tests": 453,
+    "todo": 0
+  },
+  "browser": {
+    "discovery_equal_committed_inventory": true,
+    "executed": 900,
+    "execution_equal_committed_inventory": true,
+    "expected": 900,
+    "fail": 0,
+    "flaky": 0,
+    "global_errors": 0,
+    "inventory_sha256": "763e1e7bfab83f4b469e55b87c1491ae2dff4debdc11412979bf3bdbe28fa278",
+    "pass": 900,
+    "projects": {
+      "desktop": 450,
+      "mobile": 450
+    },
+    "raw_playwright_sha256": "0e0fa0a5d6db9a423e922f13cf18cdc608092d3ff851d4259aed4546ad9b42af",
+    "registered_browser_report_sha256": "91dab2590c7ce2332240808c5daf06559181a63c6f496ae8b4a85fcc933891ad",
+    "retries": 0,
+    "sealed_original": {
+      "assertions_per_project": 78,
+      "exact_ids_suites_assertion_order_equal_original_receipt": true,
+      "fixtures_per_project": 16,
+      "projects": {
+        "desktop": 16,
+        "mobile": 16
+      }
+    },
+    "skip": 0,
+    "unique_identities": 900
+  },
+  "native": {
+    "cat-authcore-race": {
+      "cached_package_count": 1,
+      "cached_packages": [
+        "github.com/DobosP/cat_de_roman_esti/shared-go/authcore"
+      ],
+      "command_exit": 0,
+      "fail_actions": 0,
+      "fresh_all_backend_claim": false,
+      "named_skips": [],
+      "package_pass_actions": 1,
+      "run_actions": 28,
+      "stdout_sha256": "0ba11aa5f56d5c52e2feeea197c121886ee1a675f2f33064119930561aa8b01d",
+      "test_pass_actions": 28,
+      "unique_run_identities": 28
+    },
+    "cat-backend-race": {
+      "cached_package_count": 19,
+      "cached_packages": [
+        "github.com/DobosP/cat_de_roman_esti/go-backend/cmd/cat-server",
+        "github.com/DobosP/cat_de_roman_esti/go-backend/internal/accounts",
+        "github.com/DobosP/cat_de_roman_esti/go-backend/internal/alchimie",
+        "github.com/DobosP/cat_de_roman_esti/go-backend/internal/apppack",
+        "github.com/DobosP/cat_de_roman_esti/go-backend/internal/catalog",
+        "github.com/DobosP/cat_de_roman_esti/go-backend/internal/conexiuni",
+        "github.com/DobosP/cat_de_roman_esti/go-backend/internal/content",
+        "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild",
+        "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contexto",
+        "github.com/DobosP/cat_de_roman_esti/go-backend/internal/doccheck",
+        "github.com/DobosP/cat_de_roman_esti/go-backend/internal/hopcli",
+        "github.com/DobosP/cat_de_roman_esti/go-backend/internal/intrusul",
+        "github.com/DobosP/cat_de_roman_esti/go-backend/internal/lant",
+        "github.com/DobosP/cat_de_roman_esti/go-backend/internal/mobilepack",
+        "github.com/DobosP/cat_de_roman_esti/go-backend/internal/perechi",
+        "github.com/DobosP/cat_de_roman_esti/go-backend/internal/pyrandom",
+        "github.com/DobosP/cat_de_roman_esti/go-backend/internal/roeduclient",
+        "github.com/DobosP/cat_de_roman_esti/go-backend/internal/session",
+        "github.com/DobosP/cat_de_roman_esti/go-backend/internal/strictjson"
+      ],
+      "command_exit": 0,
+      "fail_actions": 0,
+      "fresh_all_backend_claim": false,
+      "named_skips": [
+        "TestNativeAccountConsentMinorHoldAndCSRF",
+        "TestNativePrivateScoresIsolationIdempotencyAndCap",
+        "TestNativeServerRankingTiesPrivacyAndMonotonicBest",
+        "TestNativePlayedConsentGateAndConcurrentBest",
+        "TestNativeEraseRevokesAllAccountData",
+        "TestNativeSharedOAuthSingleUseAndThrottle",
+        "TestNativeLegacyDjangoImportIsIdempotent",
+        "TestNativeProfileVisibilityAndRenewedConsent",
+        "TestNativeStoreSessionExpiryDisabledIdentityAndCap",
+        "TestNativeConsentInputAndLogoutContracts",
+        "TestNativeMigratedAccountPreservesAndErasesLegacyCopies",
+        "TestArcadeAuthenticatedOwnershipTerminalRankingExportAndErase",
+        "TestArcadeAnonymousClaimIsOneOwnerUnderConcurrentHTTPRequests",
+        "TestArcadeCuratedPlayedKeyUsesOwnedServerTerminalResult",
+        "TestArcadeTerminalClaimAndErasureRaceCannotRetainVerifiedIdentity",
+        "TestArcadeOwnershipCapacityFailsClosedWithoutDisablingAnonymousCreation",
+        "TestTCPEarlyAccountAndPrivacyRefusalsWithoutBodyUpload"
+      ],
+      "package_pass_actions": 28,
+      "run_actions": 1399,
+      "stdout_sha256": "b7c3b30f1757f3a34f565c0fd13c36ea7d36cd89d2bae4122de24788f1862509",
+      "test_pass_actions": 1382,
+      "unique_run_identities": 1399
+    },
+    "cat-pg-accounts": {
+      "cached_package_count": 0,
+      "cached_packages": [],
+      "command_exit": 0,
+      "fail_actions": 0,
+      "fresh_all_backend_claim": false,
+      "named_skips": [],
+      "package_pass_actions": 1,
+      "run_actions": 12,
+      "stdout_sha256": "1addcc2f4c341ad024d6c53a1b80b18d64bed727bfd1d6cc6ff27bfa746eb758",
+      "test_pass_actions": 12,
+      "unique_run_identities": 12
+    },
+    "cat-pg-httpapi": {
+      "cached_package_count": 0,
+      "cached_packages": [],
+      "command_exit": 0,
+      "fail_actions": 0,
+      "fresh_all_backend_claim": false,
+      "named_skips": [],
+      "package_pass_actions": 1,
+      "run_actions": 276,
+      "stdout_sha256": "38d5392d94f10185cd0f7b9468a72fc04a373550cb6ba643271d6552a2a3b698",
+      "test_pass_actions": 276,
+      "unique_run_identities": 276
+    }
+  },
+  "nativeCachePrecision": "Existing nativeUnit Go invocation permits cached results;19backend packages and authcore were cached. Explicit PG outputs have no cached package and no skips. No fresh-all-backend claim.",
+  "activeCSPPages": 9,
+  "activeCSPViolations": 0,
+  "legacyCSP": {
+    "literalZeroPreserved": true,
+    "measured": false,
+    "mandatoryJourneyMissing": true,
+    "countAdvisoryNotRequiredZero": true
+  },
+  "baselineOutcomeCount": 16,
+  "baselineOutcomes": [
+    {
+      "name": "verification-context-recheck",
+      "status": "pass"
+    },
+    {
+      "name": "home-live-semantic-witness",
+      "status": "pass"
+    },
+    {
+      "name": "axe-route-fingerprints",
+      "status": "pass"
+    },
+    {
+      "name": "png:/",
+      "status": "pass"
+    },
+    {
+      "name": "png:/intrusul",
+      "status": "pass"
+    },
+    {
+      "name": "png:/perechi",
+      "status": "pass"
+    },
+    {
+      "name": "png:/conexiuni",
+      "status": "pass"
+    },
+    {
+      "name": "png:/alchimie?mode=challenges",
+      "status": "pass"
+    },
+    {
+      "name": "png:/alchimie?mode=explore",
+      "status": "pass"
+    },
+    {
+      "name": "png:/cald-rece",
+      "status": "pass"
+    },
+    {
+      "name": "png:/lant",
+      "status": "pass"
+    },
+    {
+      "name": "png:/clasament",
+      "status": "pass"
+    },
+    {
+      "name": "vitals:/conexiuni:lcp",
+      "status": "pass",
+      "expected": 2836,
+      "actual": 1876,
+      "absolute_delta": 960,
+      "tolerance": 283.6
+    },
+    {
+      "name": "vitals:/conexiuni:inp",
+      "status": "pass",
+      "expected": 184,
+      "actual": 48,
+      "absolute_delta": 136,
+      "tolerance": 50
+    },
+    {
+      "name": "vitals:/alchimie?mode=challenges:lcp",
+      "status": "pass",
+      "expected": 4228,
+      "actual": 1860,
+      "absolute_delta": 2368,
+      "tolerance": 422.8
+    },
+    {
+      "name": "vitals:/alchimie?mode=challenges:inp",
+      "status": "pass",
+      "expected": 200,
+      "actual": 48,
+      "absolute_delta": 152,
+      "tolerance": 50
+    }
+  ],
+  "countErratumSha256": "8490e12c2a0ea70d837d82c43f07f4ddc2f4451a6f722dd24f6ad88ec0dc30bb",
+  "onlyNamedSubstantiveFailure": "20 route JS budget rows; aggregate failure retained",
+  "E3Accepted": false,
+  "CSPStageBCandidateApplied": false,
+  "fullGreenOrM0M1KITBUMPDevice": false
+}

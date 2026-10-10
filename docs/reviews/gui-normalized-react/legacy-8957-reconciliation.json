@@ -1,0 +1,68 @@
+{
+  "schema": 1,
+  "status": "SOURCE AUTHORED NOT RUN",
+  "baseline": "714c0664be4592ef452ca2934a491a672b557eef",
+  "owning_text": [
+    {
+      "path": "docs/PROGRAM.md",
+      "lines": "281 and642",
+      "contract": "One actual frozen legacy journey under same SDK CSP policy; legacy_violations observed separately/advisory; freeze immutable."
+    },
+    {
+      "path": ".agent/S1.md",
+      "lines": "254,259-263 and462-471,566-574",
+      "contract": "Image-bound journeys; genuine tarball manifest drives generated legacy shell; original archived index never served; nonce/font preload delivery; stageA before owner-controlled stageB."
+    }
+  ],
+  "accepted_source_reconciliation": [
+    {
+      "subject": "Legacy document",
+      "before": "newManagedSPA selected compiled legacy manifest but left nonceShell nil; serveIndex returned raw frozen index without SDK CSP middleware.",
+      "successor": "Legacy-only generated Romanian metadata/root document; selected manifest supplies SDK Tags static closure, same SDK request nonce and four strictly bound font preload URLs. Frozen raw index remains nonempty acquired source and unchanged archival witness; it is never rendered."
+    },
+    {
+      "subject": "Current document",
+      "successor": "Existing current newManagedNonceShell strict parser/admission and byte-insertion renderer are exact unchanged source bytes. Common document middleware/header behavior remains the delivered SDK policy."
+    },
+    {
+      "subject": "Stage source",
+      "historical_conflict": ".agent/S1.md469-471 says direct CSP_STAGE and no cat-specific flag; accepted immutable wrapper instead validates CSP_STAGE and derives CAT_CSP_ENFORCE in scripts/gate.sh95-98, delivered compose forwards that flag.",
+      "resolution": "Explicit parent instruction preserves delivered stage/derived-flag contract. No new flag, override or wrapper change; keep existing false/default report-only and true SDK enforcement semantics for both selected modes. No stageB activation or production rollback claim."
+    },
+    {
+      "subject": "Asset namespace",
+      "historical_text": ".agent/S1.md464 describes dist-first then legacy asset lookup.",
+      "current_accepted_source": "newManagedSPA selects exactly one of two compiled roots once; static handler and refusal rules are selected-tree behavior.",
+      "resolution": "Explicit source task requires current behavior and bounded CAT_UI preserved. This successor changes document serving only; no new root, per-request selector, asset fallback/normalization or static behavior change."
+    },
+    {
+      "subject": "Owner docs",
+      "resolution": "Explicit source-only dispatch excludes parent STATUS/handoff/proof docs, SDK/core/bootstrap/gate/templates/trust/kit edits. Parent owns same-source documentation and actual validation."
+    }
+  ],
+  "intentional_test_transitions": [
+    {
+      "path": "go-backend/internal/httpapi/managed_spa_test.go",
+      "test": "TestManagedSPACompiledCurrentAndFrozenLegacy",
+      "obsolete_assertion": "Legacy HTTP body equals raw archive index.",
+      "replacement": "Generated legacy HTML bound to genuine compiled legacy manifest plus same SDK policy/nonce and four owned fonts; explicitly reject raw index response.",
+      "preserved": "Exact frozen original index SHA6ef9e2cd5334b0e89fe078f0bf2c3c9b3b94360ad013c7740db5cc205bd3feeb; selected raw entry asset byte equality; current-mode assertion byte-preservation helper."
+    },
+    {
+      "path": "go-backend/internal/httpapi/managed_nonce_test.go",
+      "test": "TestManagedNonceLegacyAndInvalidFlag",
+      "obsolete_assertion": "Raw legacy index, both CSP headers absent, no-cache.",
+      "replacement": "Nonce-bearing manifest-generated legacy document, same SDK CSP policy, no-store; keep and extend fail-closed invalid flag checks.",
+      "preserved": "Invalid current flag refusal and actual503 response; all other existing cases/assertions unchanged."
+    }
+  ],
+  "actual_runtime_boundary": {
+    "closed_parent_capture": "/home/dobo/work/_temp/adhoc-gui-migration-parent-20261006/cat-714c066-full-completed-20261010",
+    "observations_sha256": "e764298c24706f2ba3d4b29ead58d2f1f937903b2e363c3a615cfcd1a346d189",
+    "seal_sha256": "0b3500c1a4186a73f192c594011d8533588a4ec128b5fc01efbfc10324d0fced",
+    "result": "Prior actual FULL FAIL201 with20 red route-JS rows; all16 baseline outcomes and actual900/900 passed within recorded parent scope. No rerun here.",
+    "pending": "Parent/program_pack own supported second immutable-image legacy instance and actual image-bound journey/CSP advisory measurement. Existing gui_build.go deliberately leaves legacy /api/gui-build503; current driver hardcodes current/dist identity and legacy_violations0, so it cannot attest legacy and remains outside this bounded successor. No consumer probe or fabricated image context added."
+  },
+  "execution": "No tests/builds/formatters/project runtime/package actions; source/metadata filesystem and Git inspection only.",
+  "retention": "Only compact source bytes/manifests/results retained. No workspaces/node_modules/caches copied, no record deletion or historical pruning."
+}
