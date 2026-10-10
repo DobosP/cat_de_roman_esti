@@ -19,6 +19,10 @@ All20 route-JS rows remain red under40960 bytes (target30720). Home active115016
 
 ## Current source and next validation
 
+[Later c62 parent stop](reviews/gui-normalized-react/full-c62-parent-stop.json) is separate from the completed b03 full. The parent added ADR0191 but omitted its required Markdown-inventory entry; both source reviews missed that dependency. It identified the definite529-physical/528-declared mismatch and stopped only the genuine current runner. Wrapper41786 exited137; no full result exists. Compact partial evidence is retained, and exactly two owned containers plus one network were removed with absence verified. No completed-full, browser-worker or test qualification is inferred from this interruption.
+
+The successor adds only the missing existing ADR0191 path to the sorted inventory; removing that one entry restores the entire prior file. Before another expensive full, run the actual native documentation check through the supported managed owner shell. Future added/removed Cat Markdown paths require exact inventory/Git/physical-set equality during source review. This corrects the omission without weakening the validator.
+
 The [reviewed327 source](reviews/gui-normalized-react/browser-workers2-327-source-review.json) adds only `workers: process.env.GATE_APP_URL ? 2 : original.workers` in the GUI Playwright config. [ADR0191](adr/0191-image-backed-browser-concurrency.md) records the bounded experiment. Original/image-less GEN remains serial;900 identities, retries0, assertions, fixtures, fullyParallelfalse, resource caps and later serial baseline/CSP stages are unchanged. Workers2 execution and speedup are NOT RUN/proven.
 
 1. Read literal clean HEAD H with every Cat writer idle. Run actual kit:sync and compact-review sanctioned outputs; changed protected gate files require initial owner trust before sync. Commit only genuine output changes; no empty SYNC commit. Run final same-H owner trust.
