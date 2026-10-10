@@ -1,0 +1,107 @@
+{
+  "schema": 1,
+  "state": "Parent and independent SOURCE CLEAR; corrected execution NOT RUN",
+  "authorCommit": "4ee7c571e759f402b6f71449676e4bea41d1f863",
+  "nativeBefore": "cf9e6a42dd62cd60a2fc82ff01e9fb297982b86c",
+  "sourceSeal": "250192f3ece4aae93bc6f46ddeec2f163ac77dd005f33d89779ecd390248aa38",
+  "parentCaptureSha256": "27c4743e8ca57aa3c9d156934d51ff82d7467c09bf8f860dc78dd1de0fa4f98f",
+  "change": {
+    "schema": 1,
+    "scope": "Single-line SOURCE successor only; AUTHORED NOT RUN",
+    "parent": "c27c6f68057d87e9bd65edcb120b12bb3a629dd7",
+    "commit": "4ee7c571e759f402b6f71449676e4bea41d1f863",
+    "path": "frontend/scripts/gui-precompressed-assets.mjs",
+    "before": {
+      "bytes": 9084,
+      "sha256": "0d914ebf2b1ce627cdadcade9248b45438b6568af85b4503943b0ae7516e04a6",
+      "full_mode": 33204,
+      "git_blob": "05d91666a4c4ef138bec8d25a3e7b525eacf399d"
+    },
+    "after": {
+      "bytes": 9113,
+      "sha256": "ee73b305410287d4f08ecd0170bfea85ee70e3c8401a49b9e69aee4777385ad6",
+      "full_mode": 33204,
+      "git_blob": "c4b49960ef7b686cbbfdd60888b0509fbfda304e"
+    },
+    "replacement": {
+      "old_line": 81,
+      "old": "  directory(path.join(root, prefix));\n",
+      "new": "  directory(prefix ? path.join(root, prefix.slice(0, -1)) : root);\n",
+      "occurrences": 1
+    },
+    "whole_inverse_exact": true,
+    "other6_source_bindings": [
+      {
+        "path": "frontend/scripts/gui-precompressed-assets.d.mts",
+        "bytes": 298,
+        "sha256": "2b59ac43d59ecf1268712dc7f12021f5c14b46147b07547b68d85ceb06566775",
+        "full_mode": 33204,
+        "git_blob": "00dce1baec0acf24ffa47eb060133d912c5db5c3",
+        "unchanged": true
+      },
+      {
+        "path": "frontend/scripts/gui-precompressed-plugin.mts",
+        "bytes": 968,
+        "sha256": "e1ea78598c569539c1dfcf6ed203122ebe306de197b86c36b53ed992972eec0f",
+        "full_mode": 33204,
+        "git_blob": "686f7d6ffbeb4d3cbd796e991b60a5b6ab00fccf",
+        "unchanged": true
+      },
+      {
+        "path": "frontend/tests/gui-precompressed-assets.test.mjs",
+        "bytes": 16870,
+        "sha256": "0874ff789e77fe083220f2ec7db1168facd0efe90a5890ffc72274c5cc17429a",
+        "full_mode": 33204,
+        "git_blob": "0b396ccd33e69e16ab296959de437045633a97c0",
+        "unchanged": true
+      },
+      {
+        "path": "frontend/vite.config.ts",
+        "bytes": 2535,
+        "sha256": "4782fff96af590b912a07cc98e637513c0f4765cb3b98f7ddfcdb05956024f37",
+        "full_mode": 33204,
+        "git_blob": "2e3000a1b74b7f4f8560cdf5cb43dd570351ebb0",
+        "unchanged": true
+      },
+      {
+        "path": "go-backend/internal/httpapi/managed_compression_test.go",
+        "bytes": 7176,
+        "sha256": "97783b03a325e64552747f0bdc54c3ffeaf4fa4ce18dca987d523c91af5068b1",
+        "full_mode": 33188,
+        "git_blob": "983560174fc035ffe1a9de277a119f2e22d8cb68",
+        "unchanged": true
+      },
+      {
+        "path": "scripts/gui-assets.mjs",
+        "bytes": 14012,
+        "sha256": "a60cfcc809b3963246cf946429ddc2c44c73cea416da245a39e74d4ada587afd",
+        "full_mode": 33204,
+        "git_blob": "5f249d9605b6ad75d4e4062ec1663bb9c8ee9a5b",
+        "unchanged": true
+      }
+    ],
+    "all30_Node_cases_and_Go_cases_unchanged": true,
+    "strict_public_root": "Empty-prefix initial call validates root verbatim; no unconditional resolve/join normalization",
+    "internal_prefix": "Only outputFiles recursion constructs nonempty prefix as already validated file plus slash; remove that one internal separator for directory check",
+    "ancestry_symlink_FD_metadata_membership_codec_budget_SDK_dependencies_unchanged": true,
+    "previous_d201_c27_packets_reviews_failure_captures": "Preserved; not edited",
+    "static_whitespace_checks": "git diff --check and staged --check exit0",
+    "parser_import_tests_compiler_formatter_runtime": "NOT RUN",
+    "native_or_other_worktree_edited": false
+  },
+  "independentReview": "cross all7files/fullmodes/Git/diff/wholeinverse/nativebefore/all6bindings exact; publicrootverbatim/internalvalidatedseparatoronly/unchangedguards; SOURCE CLEAR",
+  "actualFailure": {
+    "source": "cf9e6a42dd62cd60a2fc82ff01e9fb297982b86c",
+    "wrapperExit": 201,
+    "result": "compression-cf9-build-result.json",
+    "resultSha256": "db0e54436dc0c062e311b28211fe7e48088c7620e1bfc6de63cfcda38caa62af",
+    "capture": "7ed30b4499b0ac6812280e653dc6a3e3d04bee51695f4c067ec6b195a3fda246",
+    "review": "compression-cf9-build-review.json",
+    "raw34Preserved": "compression-cf9-raw-preservation.json",
+    "imageField": "ABSENT",
+    "acceptance": "Failed producer; strict pair inventory refuses missing outputs; downstream sync/identity blocked, no new tests/image qualification"
+  },
+  "previousPacketsReviewsAndFailures": "Preserved immutable; initial source clear missed recursion interaction",
+  "timingPolicy": "Existing absolute max10percent/50ms unchanged; proposed directionchange pending explicitownerresponse",
+  "full_E3_M0_M1_KIT_BUMP_device_production": false
+}

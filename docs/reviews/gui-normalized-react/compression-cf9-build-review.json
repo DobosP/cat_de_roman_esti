@@ -1,0 +1,420 @@
+{
+  "schema": 1,
+  "scope": "Actual failed compression build bounded outcome review; no qualification",
+  "source": "cf9e6a42dd62cd60a2fc82ff01e9fb297982b86c",
+  "tree": "6e27fae31bb90bf8ecbe13349c7a3952e3e05a019b12f9e27d0caff96e8e3edc",
+  "wrapperExit": 201,
+  "resultSha256": "db0e54436dc0c062e311b28211fe7e48088c7620e1bfc6de63cfcda38caa62af",
+  "wholeCapture": "7ed30b4499b0ac6812280e653dc6a3e3d04bee51695f4c067ec6b195a3fda246",
+  "allRegularBytesFullModesVerified": 37450,
+  "regularBytes": 4631633034,
+  "directoriesFullModes": 12134,
+  "literalUnfollowedLinks": 57,
+  "actualChecks": [
+    {
+      "name": "bootstrap-evidence",
+      "status": "pass",
+      "duration_ms": 1
+    },
+    {
+      "name": "ui-adoption",
+      "status": "pass",
+      "reason": "ui-staged-pending",
+      "duration_ms": 35
+    },
+    {
+      "name": "cat-setup-npm-ci",
+      "status": "pass",
+      "duration_ms": 2223
+    },
+    {
+      "name": "cat-build-fresh-build-output",
+      "status": "pass",
+      "duration_ms": 78
+    },
+    {
+      "name": "cat-build-frontend-build",
+      "status": "fail",
+      "reason": "npm failed (1)",
+      "duration_ms": 1940
+    },
+    {
+      "name": "cat-build-emitted-inventory",
+      "status": "fail",
+      "reason": "node failed (1)",
+      "duration_ms": 67
+    },
+    {
+      "name": "cat-build-assets",
+      "status": "fail",
+      "reason": "Fresh build and emitted inventory passed",
+      "duration_ms": 0
+    },
+    {
+      "name": "cat-build-gui-identity",
+      "status": "fail",
+      "reason": "Fresh successful frontend build and managed sync required",
+      "duration_ms": 0
+    },
+    {
+      "name": "repo-build-exit",
+      "status": "fail",
+      "reason": "Actual hook process exited 201",
+      "duration_ms": 2271
+    },
+    {
+      "name": "ui-adoption-binding",
+      "status": "pass",
+      "duration_ms": 0
+    }
+  ],
+  "actualArtifacts": [
+    {
+      "path": ".gate/build/logs/eeef9405-19ce-481f-9f20-4b03ebb7d345-bootstrap-config-0.stdout.log",
+      "sha256": "557b4a0935c07456dd43460c45e65ee3bf5f2931d97ea308138f4a8e56457b95",
+      "locations": [
+        {
+          "root": "source-root",
+          "full_mode": 33188,
+          "bytes": 514
+        },
+        {
+          "root": "mirror-root",
+          "full_mode": 33188,
+          "bytes": 514
+        }
+      ]
+    },
+    {
+      "path": ".gate/build/logs/eeef9405-19ce-481f-9f20-4b03ebb7d345-bootstrap-config-0.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "locations": [
+        {
+          "root": "source-root",
+          "full_mode": 33188,
+          "bytes": 0
+        },
+        {
+          "root": "mirror-root",
+          "full_mode": 33188,
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "path": ".gate/build/logs/eeef9405-19ce-481f-9f20-4b03ebb7d345-bootstrap-setup-1.stdout.log",
+      "sha256": "0290ed6dcd46b6e986ad8c6d7996d07e2da12b9be00205657f56c8f1f7893a20",
+      "locations": [
+        {
+          "root": "source-root",
+          "full_mode": 33188,
+          "bytes": 1292
+        },
+        {
+          "root": "mirror-root",
+          "full_mode": 33188,
+          "bytes": 1292
+        }
+      ]
+    },
+    {
+      "path": ".gate/build/logs/eeef9405-19ce-481f-9f20-4b03ebb7d345-bootstrap-setup-1.stderr.log",
+      "sha256": "50ff6e64f20d186b2960f73e9e0f60f2549d02e94da02d15d9414a3f1d230390",
+      "locations": [
+        {
+          "root": "source-root",
+          "full_mode": 33188,
+          "bytes": 377
+        },
+        {
+          "root": "mirror-root",
+          "full_mode": 33188,
+          "bytes": 377
+        }
+      ]
+    },
+    {
+      "path": ".gate/build/logs/eeef9405-19ce-481f-9f20-4b03ebb7d345-bootstrap-config-2.stdout.log",
+      "sha256": "557b4a0935c07456dd43460c45e65ee3bf5f2931d97ea308138f4a8e56457b95",
+      "locations": [
+        {
+          "root": "source-root",
+          "full_mode": 33188,
+          "bytes": 514
+        },
+        {
+          "root": "mirror-root",
+          "full_mode": 33188,
+          "bytes": 514
+        }
+      ]
+    },
+    {
+      "path": ".gate/build/logs/eeef9405-19ce-481f-9f20-4b03ebb7d345-bootstrap-config-2.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "locations": [
+        {
+          "root": "source-root",
+          "full_mode": 33188,
+          "bytes": 0
+        },
+        {
+          "root": "mirror-root",
+          "full_mode": 33188,
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "path": ".gate/build/bootstrap-execution.json",
+      "sha256": "9633f73c3bce6ac116fd3638d86f13dbd869db6cfd02c4a4ac847173a1a15342",
+      "locations": [
+        {
+          "root": "source-root",
+          "full_mode": 33188,
+          "bytes": 4572
+        },
+        {
+          "root": "mirror-root",
+          "full_mode": 33188,
+          "bytes": 4572
+        }
+      ]
+    },
+    {
+      "path": ".gate/build/ui-adoption-evidence.json",
+      "sha256": "06afd9029565edc891a75ed29afab733d62af8b3867c18bb8258051648cbca99",
+      "locations": [
+        {
+          "root": "source-root",
+          "full_mode": 33188,
+          "bytes": 4283
+        },
+        {
+          "root": "mirror-root",
+          "full_mode": 33188,
+          "bytes": 4283
+        }
+      ]
+    },
+    {
+      "path": ".gate/build/logs/setup-eeef9405-19ce-481f-9f20-4b03ebb7d345-cat-setup-npm-ci-0.stdout.log",
+      "sha256": "d28b2d72aea84b0adfd78e35e05676750167e6f8157ddafed575b2fbe1803369",
+      "locations": [
+        {
+          "root": "source-root",
+          "full_mode": 33188,
+          "bytes": 26
+        },
+        {
+          "root": "mirror-root",
+          "full_mode": 33188,
+          "bytes": 26
+        }
+      ]
+    },
+    {
+      "path": ".gate/build/logs/setup-eeef9405-19ce-481f-9f20-4b03ebb7d345-cat-setup-npm-ci-0.stderr.log",
+      "sha256": "c211d12fa3e2f4c92b2151c523b2743bc220c1991e0de3797724e244bb411568",
+      "locations": [
+        {
+          "root": "source-root",
+          "full_mode": 33188,
+          "bytes": 331
+        },
+        {
+          "root": "mirror-root",
+          "full_mode": 33188,
+          "bytes": 331
+        }
+      ]
+    },
+    {
+      "path": ".gate/build/logs/eeef9405-19ce-481f-9f20-4b03ebb7d345-repo-build-14.stdout.log",
+      "sha256": "420519340b87e892a49b107546523d37a796d216bf5f755197314b4e4600d3d0",
+      "locations": [
+        {
+          "root": "source-root",
+          "full_mode": 33188,
+          "bytes": 4175
+        },
+        {
+          "root": "mirror-root",
+          "full_mode": 33188,
+          "bytes": 4175
+        }
+      ]
+    },
+    {
+      "path": ".gate/build/logs/eeef9405-19ce-481f-9f20-4b03ebb7d345-repo-build-14.stderr.log",
+      "sha256": "c7f682a0f16886d136038fe2690f4982506c4236761609746b5c049425782c4a",
+      "locations": [
+        {
+          "root": "source-root",
+          "full_mode": 33188,
+          "bytes": 19700
+        },
+        {
+          "root": "mirror-root",
+          "full_mode": 33188,
+          "bytes": 19700
+        }
+      ]
+    },
+    {
+      "path": ".gate/build/logs/eeef9405-19ce-481f-9f20-4b03ebb7d345-cat-build-fresh-build-output-0.stdout.log",
+      "sha256": "0b2406aa79a4487eb1ad6f3a27f613a0e79e5884838a6b1b11d3335ebe4684eb",
+      "locations": [
+        {
+          "root": "source-root",
+          "full_mode": 33188,
+          "bytes": 14051
+        },
+        {
+          "root": "mirror-root",
+          "full_mode": 33188,
+          "bytes": 14051
+        }
+      ]
+    },
+    {
+      "path": ".gate/build/logs/eeef9405-19ce-481f-9f20-4b03ebb7d345-cat-build-fresh-build-output-0.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "locations": [
+        {
+          "root": "source-root",
+          "full_mode": 33188,
+          "bytes": 0
+        },
+        {
+          "root": "mirror-root",
+          "full_mode": 33188,
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "path": ".gate/build/logs/eeef9405-19ce-481f-9f20-4b03ebb7d345-cat-build-frontend-build-1.stdout.log",
+      "sha256": "b4e7b7b3e9d5ea2623a713d443026a54b3a4c81f2d4717ce853ddb8e9cbc12b4",
+      "locations": [
+        {
+          "root": "source-root",
+          "full_mode": 33188,
+          "bytes": 3078
+        },
+        {
+          "root": "mirror-root",
+          "full_mode": 33188,
+          "bytes": 3078
+        }
+      ]
+    },
+    {
+      "path": ".gate/build/logs/eeef9405-19ce-481f-9f20-4b03ebb7d345-cat-build-frontend-build-1.stderr.log",
+      "sha256": "fa6221dcca86ceb777ecc32c7b4afa0aa117151ad560c489a28d8a0a0f89e91a",
+      "locations": [
+        {
+          "root": "source-root",
+          "full_mode": 33188,
+          "bytes": 1639
+        },
+        {
+          "root": "mirror-root",
+          "full_mode": 33188,
+          "bytes": 1639
+        }
+      ]
+    },
+    {
+      "path": ".gate/build/logs/eeef9405-19ce-481f-9f20-4b03ebb7d345-cat-build-emitted-inventory-2.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "locations": [
+        {
+          "root": "source-root",
+          "full_mode": 33188,
+          "bytes": 0
+        },
+        {
+          "root": "mirror-root",
+          "full_mode": 33188,
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "path": ".gate/build/logs/eeef9405-19ce-481f-9f20-4b03ebb7d345-cat-build-emitted-inventory-2.stderr.log",
+      "sha256": "a2012c0404d4294b55ed9862fc2904c9bb945c08530727300339c9d878c81f6b",
+      "locations": [
+        {
+          "root": "source-root",
+          "full_mode": 33188,
+          "bytes": 817
+        },
+        {
+          "root": "mirror-root",
+          "full_mode": 33188,
+          "bytes": 817
+        }
+      ]
+    },
+    {
+      "path": "go-backend/embedfs/build/dist/.keep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "locations": [
+        {
+          "root": "source-root",
+          "full_mode": 33204,
+          "bytes": 0
+        },
+        {
+          "root": "mirror-root",
+          "full_mode": 33152,
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "path": ".gate/build/managed-assets/prepare.json",
+      "sha256": "0b2406aa79a4487eb1ad6f3a27f613a0e79e5884838a6b1b11d3335ebe4684eb",
+      "locations": [
+        {
+          "root": "source-root",
+          "full_mode": 33188,
+          "bytes": 14051
+        },
+        {
+          "root": "mirror-root",
+          "full_mode": 33188,
+          "bytes": 14051
+        }
+      ]
+    },
+    {
+      "path": ".gate/build/execution.json",
+      "sha256": "917c3b097b6bb703686ea68852daf04820e08edaa0052ec617d59263fc0f6c16",
+      "locations": [
+        {
+          "root": "source-root",
+          "full_mode": 33188,
+          "bytes": 6095
+        },
+        {
+          "root": "mirror-root",
+          "full_mode": 33188,
+          "bytes": 6095
+        }
+      ]
+    }
+  ],
+  "actualRawOutputRows": 34,
+  "rawOutputEqualPrior6aa": true,
+  "sourceDistAbsentMirrorDistPresent": true,
+  "sourceMirrorKeepModeDifference": "recorded in literal artifact rows; empty generated mirror scaffold policy, not a qualifying asset",
+  "producerFailure": "Internal recursive trailing separator conflicts with unchanged canonical directory guard, before compression emission",
+  "downstream": "Inventory correctly refuses missing pairs; assets sync/identity/binaries blocked; no Node/Go tests or app image/HTTP execution",
+  "qualification": false,
+  "independentReview": "cross all37450regular/4631633034B/12134directoryfullmodes/57literalunfollowedlinks/exact49641closure/8536Gitblobs/21artifactsboth/context9323144c+hookeeef9405/tree6e27/TC2e040 andraw34equal6aa verified; failure accepted as evidence, no qualification",
+  "parentFrozenReviewSha256": "e5282b5b7a66551688469623529d62a4b03059193cbd35d9ff03c5378ce16c01",
+  "result_app_image_id_field": "ABSENT; no image execution in this build",
+  "earlierSourceReviewDisposition": "Original source-clear missed recursive trailing-separator interaction; original reviews/source/failure packets preserved as incomplete history"
+}

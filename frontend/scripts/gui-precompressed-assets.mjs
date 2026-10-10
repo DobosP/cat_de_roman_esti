@@ -78,7 +78,7 @@ function directory(name) {
   }
 }
 function outputFiles(root, prefix = "") {
-  directory(path.join(root, prefix));
+  directory(prefix ? path.join(root, prefix.slice(0, -1)) : root);
   return fs.readdirSync(path.join(root, prefix), { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name)).flatMap((entry) => {
     const file = relative(prefix + entry.name), absolute = path.join(root, file);
     assert.ok(!entry.isSymbolicLink(), "Asset symlink refused");
