@@ -1,6 +1,6 @@
 # ADR-0183 — Admit the single V1.7 salary input to supported qualification
 
-Status: Accepted
+Status: Superseded by ADR-0188 (V1.7 parked; leafă returns as an ordinary full-paradigm input)
 Date: 2026-10-08
 
 ## Context

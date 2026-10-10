@@ -1,7 +1,7 @@
 # ADR-0185: Current-state content iterations and evidence reuse
 
 Date: 2026-10-08
-Status: Accepted
+Status: Partially superseded by ADR-0188 (decision 4 and evidence preservation for content waves)
 
 ## Context
 

@@ -37,7 +37,7 @@
 1. `docs/STATUS.md` — current truth.
 2. `README.md` — run modes + doc index.
 3. `docs/agent-map.md`, `docs/agent-testing.md`.
-4. Content waves only: `docs/CRITIQUE_RUBRIC.md` + the newest `docs/reviews/<wave>/README.md`.
+4. Content waves only: `docs/CONTENT_LOOP.md` (ADR-0188) and the `docs/CRITIQUE_RUBRIC.md` sections it names.
 5. Task-specific service/test files; never the whole app, no large build artifacts or pasted source dumps.
 
 ## Commands

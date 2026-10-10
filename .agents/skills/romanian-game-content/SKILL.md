@@ -5,6 +5,8 @@ description: Refine and expand the six cat_de_roman_esti Romanian word games thr
 
 # Romanian game content
 
+Recurring content waves follow [CONTENT_LOOP.md](../../../docs/CONTENT_LOOP.md) ([ADR-0188](../../../docs/adr/0188-park-v1-7-and-reset-content-loop.md)); this skill's process rules are history for them.
+
 Improve the six games through two connected tracks: **refinement** delivers reviewed
 player improvements; **discovery** explores broadly and supplies a pool that refinement
 can select from. The operating decision is [ADR-0156](../../../docs/adr/0156-two-track-content-growth.md).

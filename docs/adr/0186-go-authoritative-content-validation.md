@@ -1,7 +1,7 @@
 # ADR-0186: Go-authoritative content validation and native JSON
 
 Date: 2026-10-09
-Status: Accepted by the owner; implementation qualification recorded in STATUS.
+Status: Accepted by the owner; implementation qualification recorded in STATUS. Failed-evidence preservation for content waves partially superseded by ADR-0188.
 Amends: ADR-0165/0168 validation routing and ADR-0185 loop execution.
 
 ## Context and authorization

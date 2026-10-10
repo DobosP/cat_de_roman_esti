@@ -129,3 +129,5 @@ and the word-grid reflow; its release, reserve and content decisions remain.
 - [0185 — Current-state content iterations and evidence reuse](0185-content-loop-current-state-and-evidence-reuse.md) — Accepted2026-10-08; concisehandoffs/exactchanged-dependencyreuse/schema-firstchecks withoutgatewaivers.
 
 - [0186](0186-go-authoritative-content-validation.md) — owner-authorized Go content validation and native JSON; Python/Rust references optional.
+
+- [0188](0188-park-v1-7-and-reset-content-loop.md) — park V1.7 unmerged; content waves become batches judged by player-visible additions; rail baseline fix comes first.
