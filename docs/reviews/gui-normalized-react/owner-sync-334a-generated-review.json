@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "state": "Actual owner kit:sync PASS10/exit0; genuine generated Go module output, not idempotent at334a",
+  "source": "334a7842665a92007ec130ef1e917a6dfc4cac19",
+  "tree_sha256": "875f938f3f56acc8fded7cc983e2da22256ce081b47c39bd68ba7d8bcb71bc9b",
+  "result_sha256": "59ad9aaa34128b0ba4a9db60d9f281dcb119e36e61112377e43aa47fc9c8ffea",
+  "private_delta_observations_sha256": "73a7403c178f86ab7dd36c21606fc76b184c646a9704299a66a020b2059139e6",
+  "generated_git_diff": "diff --git a/go-backend/go.mod b/go-backend/go.mod\nindex 0ecf58d..150927a 100644\n--- a/go-backend/go.mod\n+++ b/go-backend/go.mod\n@@ -4,7 +4,6 @@ go 1.27.1\n \n require (\n \tgithub.com/a-h/templ v0.3.1070 // indirect\n-\tgithub.com/andybalholm/brotli v1.2.6 // indirect\n \tgithub.com/coreos/go-oidc/v3 v3.21.0 // indirect\n \tgithub.com/flosch/pongo2/v6 v6.1.0 // indirect\n \tgithub.com/go-jose/go-jose/v4 v4.1.4 // indirect\n@@ -25,6 +24,7 @@ replace github.com/DobosP/cat_de_roman_esti/shared-go/authcore => ../shared-go/a\n require (\n \tgithub.com/DobosP/cat_de_roman_esti/shared-go/authcore v0.0.0\n \tgithub.com/DobosP/roedu-ui/web-kit v0.0.0-core-v1.6\n+\tgithub.com/andybalholm/brotli v1.2.6\n \tgithub.com/jackc/pgx/v5 v5.11.0\n \tgolang.org/x/net v0.59.0\n )\n",
+  "generated_before_sha256": "63cdc61c014f923fb731c60f59f649bfb6dbe7a7340741f8f7e70761ce047b64",
+  "generated_after_sha256": "4517bb8f63a6eda31500a06c16cd6aef2a4784f4b506b3c4d56cc83f0b99c59f",
+  "go_sum_and_versions_unchanged": true,
+  "existing_module": "github.com/andybalholm/brotli v1.2.6",
+  "reason": "New compression tests directly import the already registered Brotli decoder; actual managed tidy reclassifies that existing requirement as direct. No hand-edited module or version update.",
+  "captured_regular_rows": 19,
+  "captured_bytes": 46262,
+  "unchanged_base_input_rows": 189,
+  "installed_mirror_webkit_files": 135,
+  "installed_webkit_canonical_bytes_verified_by_parent": true,
+  "source_owner_env11_unchanged": true,
+  "mirror_env_different_names": [
+    "APP_DOCKERFILE"
+  ],
+  "env_precision": "Mirror matches delivered kit template. Owner source config is unchanged; next wrapper reprojects and parses the owner source before use. No manual restore needed.",
+  "source_generated_review": "cross_repo_plan verified all19 captured rows, exact module before/after/source/test import, sums/versions unchanged, source/mirror env and wrapper projection/return guards; CLEAR",
+  "qualification": "Commit genuine generated output, then repeat real idempotent sync at new cleanH before same-H trust/full. No full/device/M0/M1/KIT_BUMP acceptance."
+}

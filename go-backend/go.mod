@@ -4,7 +4,6 @@ go 1.27.1
 
 require (
 	github.com/a-h/templ v0.3.1070 // indirect
-	github.com/andybalholm/brotli v1.2.6 // indirect
 	github.com/coreos/go-oidc/v3 v3.21.0 // indirect
 	github.com/flosch/pongo2/v6 v6.1.0 // indirect
 	github.com/go-jose/go-jose/v4 v4.1.4 // indirect
@@ -25,6 +24,7 @@ replace github.com/DobosP/cat_de_roman_esti/shared-go/authcore => ../shared-go/a
 require (
 	github.com/DobosP/cat_de_roman_esti/shared-go/authcore v0.0.0
 	github.com/DobosP/roedu-ui/web-kit v0.0.0-core-v1.6
+	github.com/andybalholm/brotli v1.2.6
 	github.com/jackc/pgx/v5 v5.11.0
 	golang.org/x/net v0.59.0
 )
