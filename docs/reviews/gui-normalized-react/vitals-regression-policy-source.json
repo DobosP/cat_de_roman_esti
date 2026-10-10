@@ -1,0 +1,125 @@
+{
+  "schema": 1,
+  "state": "Explicit owner-approved source amendment applied; targeted/full execution NOT RUN",
+  "literal_owner_answer": "Allow improvements; keep slowdown limits",
+  "proposal_sha256": "05ec255022fa0f97d64c9b78ecdfba63580fcde4b5c9d9869daff32cd1254572",
+  "approved_patch_sha256": "8109561840b1600014636e6094bffa998b5e53d29696e55440f0601bf5451d8c",
+  "closed_source_packet_sha256": "b90dbc72828c6d3a0acdd2da296210e407f17420d279fca13f22c108f749ce48",
+  "before_source": "f332a2a512f59b654ef32f2b37ffa4e01d6d09ab",
+  "source_rows": [
+    {
+      "path": ".agent/S1.md",
+      "before_sha256": "84eaba49c6ce8d553c966d9219fae24d50fda2ce10f453637ac2320d67769441",
+      "after_sha256": "b876c489af21d3ca3fa5ec93ed8b243a9e69a6be7021afee9f574082c4af2b30",
+      "after_full_mode": 33204,
+      "after_bytes": 62676
+    },
+    {
+      "path": "docs/GUI_MIGRATION_HANDOFF.md",
+      "before_sha256": "35bdc6f832a51ba6538cc3e446a4b7e928d15afb4bbf908d41ce4ae185b81fd0",
+      "after_sha256": "42357ba0014cc6686da4c9986c3c5df9337eddc028f932f9d66dc5738c0c58fe",
+      "after_full_mode": 33204,
+      "after_bytes": 51279
+    },
+    {
+      "path": "docs/PROGRAM.md",
+      "before_sha256": "ab1a4a2e079371474a5d070325a88c891cac5647b9f3570e984d0e352f5ec175",
+      "after_sha256": "2bc1d10b9436caf9e88a1d074ba2efa386ee980f2bd67012c430735f77d0d146",
+      "after_full_mode": 33204,
+      "after_bytes": 160347
+    },
+    {
+      "path": "docs/STATUS.md",
+      "before_sha256": "42f14aaa3a10bf023b5f36b92cd43bcec50c1a06f05179a115a7d5c2968ca044",
+      "after_sha256": "501082c9aa8de98c8e59d3c8da66de3083b4ecb08afaf970ac30c4b05ca33608",
+      "after_full_mode": 33204,
+      "after_bytes": 16012
+    },
+    {
+      "path": "docs/adr/0188-live-home-baseline-alias-and-diagnostics.md",
+      "before_sha256": "3353a5716aad2d93d114fb3a5970907b317317df88ba0c4e572458a96ae806fa",
+      "after_sha256": "048198ff7dcd939dcd3672083a5f01461d7e3650bfcaac23c018ec6a61488392",
+      "after_full_mode": 33204,
+      "after_bytes": 2929
+    },
+    {
+      "path": "docs/adr/0190-owner-approved-vitals-regression-criterion.md",
+      "before_sha256": null,
+      "after_sha256": "cb052696a17544a3acd9e598921f2353e6ee24f24943bfe61f6e248aeb300b3f",
+      "after_full_mode": 33204,
+      "after_bytes": 3018
+    },
+    {
+      "path": "docs/adr/README.md",
+      "before_sha256": "a5187f14d9471adadd06b80eed0fae0888f11fcc6817ea715b133a08ae57548a",
+      "after_sha256": "0c8e392d3559d93627b21fbe6fa737dcc231fe5c9493c876657f985110e63001",
+      "after_full_mode": 33204,
+      "after_bytes": 14282
+    },
+    {
+      "path": "docs/execplans/s1-cat.md",
+      "before_sha256": "d16b4ca82784f97a5cbece5ea3f6674e2e503a9acc00c6b83c3a3ea198e55b74",
+      "after_sha256": "dd990be3269954e50bdc12c7bb14c2f31fc44fa04ea115c4b8e40e473a199c10",
+      "after_full_mode": 33204,
+      "after_bytes": 68696
+    },
+    {
+      "path": "docs/tracked-markdown.json",
+      "before_sha256": "839059802a3b918534cd2e5dd48e9a75fc58222af578b584f3c4c3532f00c524",
+      "after_sha256": "6060d457a63f3af23531f466dc58e137f46b5480e231bb3d98674d1595edc223",
+      "after_full_mode": 33204,
+      "after_bytes": 32750
+    },
+    {
+      "path": "frontend/tests/gui-baseline-checks.test.mjs",
+      "before_sha256": "7ac1bcfe1a3b7c323b8614e3618e62d4e806b55ff675921565be2b8cc26f5769",
+      "after_sha256": "a4bef4a9bbc450c13994c3378a54f76a6cfc068a3816a4ec2a491b877e9c9df7",
+      "after_full_mode": 33204,
+      "after_bytes": 8232
+    },
+    {
+      "path": "scripts/gui-baseline-checks.mjs",
+      "before_sha256": "0a809cf2fa3bbcf56aa4bf6fa00c268881d2c26578d57b1537718c5dc1b0b02f",
+      "after_sha256": "8b37b7c2886c568a78f0177dd75d60a6f7497f29dfd5519449511ccfbaa5a51f",
+      "after_full_mode": 33204,
+      "after_bytes": 21646
+    }
+  ],
+  "test_successor": "Exactly one extra [Infinity,1,false] data row isolates expected-value finiteness; exact inverse restores the approved R2 whole test module",
+  "expected_focused_tests": 43,
+  "criterion": "Both original/current finite and nonnegative; fail only current-original > max(original*0.1,50ms). Original absolute deltas and numeric tolerances remain reported.",
+  "counterfactual_historical_conexiuni_lcp": {
+    "original_ms": 2836,
+    "instrumented_observed_ms": 3436,
+    "slowdown_ms": 600,
+    "unchanged_allowance_ms": 283.6,
+    "still_fails": true,
+    "qualification": "Historical instrumented observation only, not a new full or performance acceptance"
+  },
+  "original_baseline_sha256": "ff055e404bf138ce0442381ab33eb643d431f922e4284f66a5002efcc397be68",
+  "qualification": "No new full/browser/vitals/device or M0/M1/KIT_BUMP acceptance; only owner policy and source scope are recorded.",
+  "policy_docs_successor_sha256": "f1bc5d3af3198b38570f5e4cd1782bd31fbd8950131660257c5091d3f49dc2a9",
+  "policy_docs_successor": {
+    "schema": 1,
+    "prior_closed_source_sha256": "b90dbc72828c6d3a0acdd2da296210e407f17420d279fca13f22c108f749ce48",
+    "scope": "Only literal original CLS criterion retained in activeS1 row and ADR0188 index partial-supersession metadata; no code or new numeric threshold",
+    "rows": [
+      {
+        "path": ".agent/S1.md",
+        "before_sha256": "b876c489af21d3ca3fa5ec93ed8b243a9e69a6be7021afee9f574082c4af2b30",
+        "after_sha256": "8b862b78be5b37b6c3a846d4054a6f0ba53c21884f83b9963b6efe826008a397",
+        "after_full_mode": 33204,
+        "after_bytes": 62725
+      },
+      {
+        "path": "docs/adr/README.md",
+        "before_sha256": "0c8e392d3559d93627b21fbe6fa737dcc231fe5c9493c876657f985110e63001",
+        "after_sha256": "9695a95b0ebcfc5d19d18c979fe21916a06765ee0a9818cbab631f75cb411af2",
+        "after_full_mode": 33204,
+        "after_bytes": 14302
+      }
+    ],
+    "patch_sha256": "c5a5fb26dfbc40ed37d1bdb4e796abb6d33f308b5a1b193a7955e76ca5090437"
+  },
+  "independent_source_review": "planning_evidence verified exact R2 and one-row finite-original inverse; cross_repo_plan verified narrow owner authority/CLS/product/device/budget scope; final two documentation metadata readback pending"
+}

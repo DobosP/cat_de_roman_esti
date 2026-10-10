@@ -8,7 +8,7 @@ Paul's cleanup-first instruction is completed:159 superseded owned experiment co
 
 Retention from now on: keep one rolling verified experiment setup and compact results/manifests, replacing it after successor verification. Check disk usage before large runs; avoid copying complete workspaces/node_modules/builds/caches per iteration. Preserve source and other-owner keepers. This preference is saved globally in `/home/dobo/.codex/AGENTS.md` and in the supervisor's saved prompt.
 
-Paul approved allowing LCP/INP improvements while keeping the existing slowdown limits. The reviewed R2 proposal remains unapplied; next apply its exact checked afterimages, record the owner amendment and run supported managed checks. The original numeric startup estimate remains a working planning target; configured limits and real failed qualification stay visible. No gate is active.
+Paul approved allowing LCP/INP improvements while keeping the existing slowdown limits. The exact reviewed R2 afterimages and [ADR-0190 owner amendment](adr/0190-owner-approved-vitals-regression-criterion.md) are applied. Targeted managed checks are next; source acceptance alone does not establish a runtime or full pass. The original numeric startup estimate remains a working planning target; configured limits and real failed qualification stay visible. No gate is active.
 
 ## Historical implementation and evidence records
 

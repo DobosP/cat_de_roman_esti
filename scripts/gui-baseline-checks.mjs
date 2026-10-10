@@ -260,8 +260,8 @@ export function comparisonOutcomes(baseline, current, witness, binding, pngs) {
   for (const [index, item] of current.vitals.entries()) for (const key of ["lcp", "inp"]) {
     const expected = baseline.vitals[index].median[key], actual = item.median[key];
     check("vitals:" + item.route + ":" + key, () => {
-      assert.ok(Number.isFinite(expected) && Number.isFinite(actual), "Actual finite baseline metrics required");
-      assert.ok(!(Math.abs(actual - expected) > Math.max(expected * .1, 50)), "Vitals baseline mismatch");
+      assert.ok(Number.isFinite(expected) && expected >= 0 && Number.isFinite(actual) && actual >= 0, "Actual finite nonnegative baseline metrics required");
+      assert.ok(!(actual - expected > Math.max(expected * .1, 50)), "Vitals baseline regression");
     });
     Object.assign(outcomes.at(-1), { expected, actual, absolute_delta: Math.abs(actual - expected), tolerance: Math.max(expected * .1, 50) });
   }

@@ -1,7 +1,7 @@
 # ADR-0188: Live Home baseline selector equivalence and explicit diagnostics
 
 Date: 2026-10-10
-Status: accepted implementation source; targeted execution and full qualification pending
+Status: accepted implementation source; only LCP/INP comparison direction partially superseded by ADR-0190; full qualification pending
 
 ## Decision
 

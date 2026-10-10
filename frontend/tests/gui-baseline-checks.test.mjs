@@ -96,12 +96,12 @@ void test("Axe refusal does not hide any of nine exact PNG and four unchanged vi
     ...baseline.pages.map((value) => "png:" + value.route),
     "vitals:/conexiuni:lcp", "vitals:/conexiuni:inp", "vitals:/alchimie?mode=challenges:lcp", "vitals:/alchimie?mode=challenges:inp"]);
   assert.deepEqual(results.filter((value) => value.status === "fail").map((value) => value.name),
-    ["home-live-semantic-witness", "axe-route-fingerprints", "png:/perechi", "vitals:/conexiuni:lcp", "vitals:/alchimie?mode=challenges:lcp"]);
+    ["home-live-semantic-witness", "axe-route-fingerprints", "png:/perechi", "vitals:/conexiuni:lcp"]);
   assert.deepEqual(baseline.pages[0].axe, originalHome);
 });
 for (const [expected, actual, pass] of [[1000, 1100, true], [1000, 1100.01, false], [100, 150, true],
-  [100, 150.01, false], [100, 50, true], [100, 49.99, false], [100, null, false], [100, NaN, false], [100, Infinity, false]]) {
-  void test("vitals retain absolute max(10%,50ms) predicate for " + String(actual), () => {
+  [100, 150.01, false], [100, 50, true], [100, 49.99, true], [100, null, false], [100, NaN, false], [100, Infinity, false], [100, -1, false], [-1, 0, false], [Infinity, 1, false]]) {
+  void test("vitals refuse only regressions beyond max(10%,50ms) with valid nonnegative metrics for " + String(actual), () => {
     const before = { pages: [], vitals: [{ median: { lcp: expected, inp: 100 } }] };
     const current = { pages: [], vitals: [{ route: "/fixture", median: { lcp: actual, inp: 100 } }] };
     const rows = comparisonOutcomes(before, current, null, null, []);
