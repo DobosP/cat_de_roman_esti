@@ -1,0 +1,59 @@
+{
+  "schema": 1,
+  "state": "ACTUAL focused native confirmation PASS; final owner sync/trust/full qualification remains pending",
+  "tested_source": "5efa1fa44e16c6c7eb283bf0c9ab7e72e01bb1b8",
+  "tree_sha256": "88fb6c0177a393ac8ba178c561a6128f6ceadb074e16b029f496413d242c535a",
+  "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+  "wrapper_invocation": "33d2ffcb-710b-449a-9902-062ce1f036c0",
+  "app_image_id": "sha256:f242ea147106dd17bd5692f10174627b4341de4e33a4157f6561e610b525aa42",
+  "actual_wrapper_exit": 0,
+  "actual_commands": 9,
+  "native_checks": {
+    "installed-all-check": true,
+    "native-export-check": true,
+    "native-source-validate": true
+  },
+  "targeted_native": {
+    "count": 1,
+    "current_registered_parity_cases_asserted_by_existing_test": 1207,
+    "default_package_timeout_seconds": 600,
+    "fail_actions": 0,
+    "independent_corpus_sha256": "0437c53b91b07d7c4323a7c66753d7250d9304b6a32f94f03901285e64c21951",
+    "package_pass_actions": 2,
+    "pass_actions": 2,
+    "race": true,
+    "run_actions": 2,
+    "skip_actions": 0,
+    "tests": [
+      {
+        "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentrails",
+        "test": "TestAllFourBaselineArtifactsRebuiltFromAuthoredInputsExactBytes"
+      },
+      {
+        "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+        "test": "TestCurrentIndependentHTTPParity"
+      }
+    ],
+    "transport_scope": "Existing test in-process native HTTP handler; no separate child-process/browser/live1207 claim"
+  },
+  "runtime_files": 138,
+  "unchanged_input_guards": 235,
+  "all25_archives_unchanged": true,
+  "all9_current_catalog_rubric_bindings_equal": true,
+  "applied_metadata_sha256": "a0f965ac89b9efb084f0f84253086b0996b96ff830c0457d20e96b5cd01d641a",
+  "applied_pin_sha256": "2ed2152473835c6f4666d3f94df6560dd7a1cee3099cb4c05f33a76889561523",
+  "actual_observations_sha256": "84564762c5977627bf18a5201f53bbabc9cf8df1a3b873343cf7dfb69def2ced",
+  "actual_capture_sha256": "6b6f098a06dd93320074491ad223f8795b8b77692d51443d0aae835fe3a46a37",
+  "capture_seal_sha256": "df0b243da22adb978c9b689c57230750625903e446db965dfd68e2bf8f29732e",
+  "captured_regular_rows": 27,
+  "captured_bytes": 181061,
+  "independent_result_review": "Parent independently verified all27 new bytes/fullmodes/closure,231 unchanged current/Git blob references,26source/mirror pairs,6liveELF hashes,9realcommands0 and exactly2unique fresh Go test runs/passes+2packages/no failure/skip/cache. Capture author program_pack independently enumerated native artifact exact-byte/semantic reconstruction/current9bindings/235guards/138runtime/all25archives.",
+  "actual_targeted_elapsed_seconds": {
+    "all_four_baseline_reconstruction": 119.7,
+    "current_registered1207": 8.01
+  },
+  "host_before_after": "Literal wrapper-returned runner08b0/TC2e040 shares own appa499/IIDf242 before payload; same appIID/running after wrapper. Initial hostname-as-runner precheck refused before tests, corrected using actual runner fullname; no environment/DSN dumped.",
+  "retention": "27 genuinely new control/result files only; no workspace/node_modules/cache or ELF copies. Original baselines/canonical releases/source packets remain. Historical pruned raw trees are unavailable.",
+  "scope": "In-process current registered1207 and native all-four-rail reconstruction only; no extra child-process replay/HTTP/browser/full/device claim.",
+  "qualification": "No aggregate full/E3/M0/M1/KIT_BUMP/device/production acceptance; budget and physicalSamsung obligations remain."
+}

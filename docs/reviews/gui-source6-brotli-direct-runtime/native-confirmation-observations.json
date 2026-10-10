@@ -1,0 +1,428 @@
+{
+  "KIT_BUMP_accepted": false,
+  "Source7_growth": false,
+  "aggregate_full_qualified": false,
+  "all25_archives_guarded": true,
+  "app_image_id": "sha256:f242ea147106dd17bd5692f10174627b4341de4e33a4157f6561e610b525aa42",
+  "catalog_or_review_written": false,
+  "commands": [
+    {
+      "argv": [
+        "/usr/local/go/bin/go",
+        "build",
+        "-mod=readonly",
+        "-o",
+        "/work/.gate/shell/source6-native-confirmation/33d2ffcb-710b-449a-9902-062ce1f036c0/runtime-helper",
+        "/work/go-backend/.gate/source6-confirmation-helper/33d2ffcb-710b-449a-9902-062ce1f036c0/main.go"
+      ],
+      "cwd": "/work/go-backend",
+      "error": null,
+      "exit_code": 0,
+      "finished": "2026-10-10T08:04:07.340905+00:00",
+      "name": "build-runtime-helper",
+      "owned_process_group_id": 13,
+      "process_id": 13,
+      "started": "2026-10-10T08:04:06.372188+00:00",
+      "stderr": {
+        "bytes": 0,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-native-confirmation/33d2ffcb-710b-449a-9902-062ce1f036c0/build-runtime-helper.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 0,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-native-confirmation/33d2ffcb-710b-449a-9902-062ce1f036c0/build-runtime-helper.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "termination": {
+        "cleanup_errors": [],
+        "direct_child_reaped": true,
+        "drain_timeout_seconds": 2,
+        "isolated_process_group": true,
+        "reap_timeout_seconds": 2,
+        "signal": null,
+        "signal_result": null
+      }
+    },
+    {
+      "argv": [
+        "/usr/local/go/bin/go",
+        "build",
+        "-mod=readonly",
+        "-o",
+        "/work/.gate/shell/source6-native-confirmation/33d2ffcb-710b-449a-9902-062ce1f036c0/cat-content-rail",
+        "./cmd/cat-content-rail"
+      ],
+      "cwd": "/work/go-backend",
+      "error": null,
+      "exit_code": 0,
+      "finished": "2026-10-10T08:04:07.995570+00:00",
+      "name": "build-native-rail",
+      "owned_process_group_id": 53,
+      "process_id": 53,
+      "started": "2026-10-10T08:04:07.346452+00:00",
+      "stderr": {
+        "bytes": 0,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-native-confirmation/33d2ffcb-710b-449a-9902-062ce1f036c0/build-native-rail.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 0,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-native-confirmation/33d2ffcb-710b-449a-9902-062ce1f036c0/build-native-rail.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "termination": {
+        "cleanup_errors": [],
+        "direct_child_reaped": true,
+        "drain_timeout_seconds": 2,
+        "isolated_process_group": true,
+        "reap_timeout_seconds": 2,
+        "signal": null,
+        "signal_result": null
+      }
+    },
+    {
+      "argv": [
+        "/usr/local/go/bin/go",
+        "build",
+        "-mod=readonly",
+        "-o",
+        "/work/.gate/shell/source6-native-confirmation/33d2ffcb-710b-449a-9902-062ce1f036c0/cat-content",
+        "./cmd/cat-content"
+      ],
+      "cwd": "/work/go-backend",
+      "error": null,
+      "exit_code": 0,
+      "finished": "2026-10-10T08:04:08.212333+00:00",
+      "name": "build-native-content",
+      "owned_process_group_id": 83,
+      "process_id": 83,
+      "started": "2026-10-10T08:04:08.004331+00:00",
+      "stderr": {
+        "bytes": 0,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-native-confirmation/33d2ffcb-710b-449a-9902-062ce1f036c0/build-native-content.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 0,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-native-confirmation/33d2ffcb-710b-449a-9902-062ce1f036c0/build-native-content.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "termination": {
+        "cleanup_errors": [],
+        "direct_child_reaped": true,
+        "drain_timeout_seconds": 2,
+        "isolated_process_group": true,
+        "reap_timeout_seconds": 2,
+        "signal": null,
+        "signal_result": null
+      }
+    },
+    {
+      "argv": [
+        "/work/.gate/shell/source6-native-confirmation/33d2ffcb-710b-449a-9902-062ce1f036c0/runtime-helper",
+        "runtime",
+        "/work"
+      ],
+      "cwd": "/work",
+      "error": null,
+      "exit_code": 0,
+      "finished": "2026-10-10T08:04:08.252861+00:00",
+      "name": "runtime-before",
+      "owned_process_group_id": 105,
+      "process_id": 105,
+      "started": "2026-10-10T08:04:08.217554+00:00",
+      "stderr": {
+        "bytes": 0,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-native-confirmation/33d2ffcb-710b-449a-9902-062ce1f036c0/runtime-before.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 20158,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-native-confirmation/33d2ffcb-710b-449a-9902-062ce1f036c0/runtime-before.stdout",
+        "sha256": "65601f10eeac4fe28af7b1489f0b89958b61777bf660df390f4f7eca2b9abd1e"
+      },
+      "termination": {
+        "cleanup_errors": [],
+        "direct_child_reaped": true,
+        "drain_timeout_seconds": 2,
+        "isolated_process_group": true,
+        "reap_timeout_seconds": 2,
+        "signal": null,
+        "signal_result": null
+      }
+    },
+    {
+      "argv": [
+        "/work/.gate/shell/source6-native-confirmation/33d2ffcb-710b-449a-9902-062ce1f036c0/cat-content-rail",
+        "all",
+        "--root",
+        "/work",
+        "--check"
+      ],
+      "cwd": "/work",
+      "error": null,
+      "exit_code": 0,
+      "finished": "2026-10-10T08:04:19.888368+00:00",
+      "name": "installed-all-check",
+      "owned_process_group_id": 111,
+      "process_id": 111,
+      "started": "2026-10-10T08:04:08.405437+00:00",
+      "stderr": {
+        "bytes": 0,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-native-confirmation/33d2ffcb-710b-449a-9902-062ce1f036c0/installed-all-check.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 1337,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-native-confirmation/33d2ffcb-710b-449a-9902-062ce1f036c0/installed-all-check.stdout",
+        "sha256": "a434cb3e097c0669e66bee5688ca956fe17b4d430a232eae5f098d39a8f234fd"
+      },
+      "termination": {
+        "cleanup_errors": [],
+        "direct_child_reaped": true,
+        "drain_timeout_seconds": 2,
+        "isolated_process_group": true,
+        "reap_timeout_seconds": 2,
+        "signal": null,
+        "signal_result": null
+      }
+    },
+    {
+      "argv": [
+        "/work/.gate/shell/source6-native-confirmation/33d2ffcb-710b-449a-9902-062ce1f036c0/cat-content",
+        "validate",
+        "--root",
+        "/work"
+      ],
+      "cwd": "/work",
+      "error": null,
+      "exit_code": 0,
+      "finished": "2026-10-10T08:04:21.081426+00:00",
+      "name": "native-source-validate",
+      "owned_process_group_id": 117,
+      "process_id": 117,
+      "started": "2026-10-10T08:04:19.909913+00:00",
+      "stderr": {
+        "bytes": 0,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-native-confirmation/33d2ffcb-710b-449a-9902-062ce1f036c0/native-source-validate.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 21,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-native-confirmation/33d2ffcb-710b-449a-9902-062ce1f036c0/native-source-validate.stdout",
+        "sha256": "1d2e645a4a6946dae65ac9fc067442df3e7a430fc9fee3039e41fd1ee3819976"
+      },
+      "termination": {
+        "cleanup_errors": [],
+        "direct_child_reaped": true,
+        "drain_timeout_seconds": 2,
+        "isolated_process_group": true,
+        "reap_timeout_seconds": 2,
+        "signal": null,
+        "signal_result": null
+      }
+    },
+    {
+      "argv": [
+        "/work/.gate/shell/source6-native-confirmation/33d2ffcb-710b-449a-9902-062ce1f036c0/cat-content",
+        "export",
+        "--root",
+        "/work",
+        "--check"
+      ],
+      "cwd": "/work",
+      "error": null,
+      "exit_code": 0,
+      "finished": "2026-10-10T08:04:22.409282+00:00",
+      "name": "native-export-check",
+      "owned_process_group_id": 121,
+      "process_id": 121,
+      "started": "2026-10-10T08:04:21.086999+00:00",
+      "stderr": {
+        "bytes": 0,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-native-confirmation/33d2ffcb-710b-449a-9902-062ce1f036c0/native-export-check.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 31,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-native-confirmation/33d2ffcb-710b-449a-9902-062ce1f036c0/native-export-check.stdout",
+        "sha256": "4f715aebbcf4c517ca8a5686959372f4ab156e4e62f897e6e5e607156dc5c8fb"
+      },
+      "termination": {
+        "cleanup_errors": [],
+        "direct_child_reaped": true,
+        "drain_timeout_seconds": 2,
+        "isolated_process_group": true,
+        "reap_timeout_seconds": 2,
+        "signal": null,
+        "signal_result": null
+      }
+    },
+    {
+      "argv": [
+        "/usr/local/go/bin/go",
+        "test",
+        "-mod=readonly",
+        "-race",
+        "-count=1",
+        "-json",
+        "-run",
+        "^(TestAllFourBaselineArtifactsRebuiltFromAuthoredInputsExactBytes|TestCurrentIndependentHTTPParity)$",
+        "./internal/contentrails",
+        "./internal/httpgolden"
+      ],
+      "cwd": "/work/go-backend",
+      "error": null,
+      "exit_code": 0,
+      "finished": "2026-10-10T08:06:25.078715+00:00",
+      "name": "targeted-native-race",
+      "owned_process_group_id": 125,
+      "process_id": 125,
+      "started": "2026-10-10T08:04:22.430592+00:00",
+      "stderr": {
+        "bytes": 0,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-native-confirmation/33d2ffcb-710b-449a-9902-062ce1f036c0/targeted-native-race.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 3403,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-native-confirmation/33d2ffcb-710b-449a-9902-062ce1f036c0/targeted-native-race.stdout",
+        "sha256": "e964a04dcea0902d24bbb8f2d0ded42ffa972e553bbf7057b55d8b48314c15ae"
+      },
+      "termination": {
+        "cleanup_errors": [],
+        "direct_child_reaped": true,
+        "drain_timeout_seconds": 2,
+        "isolated_process_group": true,
+        "reap_timeout_seconds": 2,
+        "signal": null,
+        "signal_result": null
+      }
+    },
+    {
+      "argv": [
+        "/work/.gate/shell/source6-native-confirmation/33d2ffcb-710b-449a-9902-062ce1f036c0/runtime-helper",
+        "runtime",
+        "/work"
+      ],
+      "cwd": "/work",
+      "error": null,
+      "exit_code": 0,
+      "finished": "2026-10-10T08:06:25.172327+00:00",
+      "name": "runtime-after",
+      "owned_process_group_id": 199,
+      "process_id": 199,
+      "started": "2026-10-10T08:06:25.132762+00:00",
+      "stderr": {
+        "bytes": 0,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-native-confirmation/33d2ffcb-710b-449a-9902-062ce1f036c0/runtime-after.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 20158,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-native-confirmation/33d2ffcb-710b-449a-9902-062ce1f036c0/runtime-after.stdout",
+        "sha256": "65601f10eeac4fe28af7b1489f0b89958b61777bf660df390f4f7eca2b9abd1e"
+      },
+      "termination": {
+        "cleanup_errors": [],
+        "direct_child_reaped": true,
+        "drain_timeout_seconds": 2,
+        "isolated_process_group": true,
+        "reap_timeout_seconds": 2,
+        "signal": null,
+        "signal_result": null
+      }
+    }
+  ],
+  "device_qualified": false,
+  "errors": [],
+  "extra1207_process_replay_run": false,
+  "helper_source": {
+    "bytes": 689,
+    "full_mode": 33152,
+    "path": "go-backend/.gate/source6-confirmation-helper/33d2ffcb-710b-449a-9902-062ce1f036c0/main.go",
+    "sha256": "c2313bef67173fda93a9b998d021107ef80cab0f43bc9082cf3d4eaaa4de0748"
+  },
+  "metadata_or_pin_written": false,
+  "native_checks": {
+    "installed-all-check": true,
+    "native-export-check": true,
+    "native-source-validate": true
+  },
+  "native_checks_pass": true,
+  "native_outputs": [
+    {
+      "bytes": 10274552,
+      "full_mode": 33216,
+      "path": ".gate/shell/source6-native-confirmation/33d2ffcb-710b-449a-9902-062ce1f036c0/runtime-helper",
+      "sha256": "7dde29968d09a11285336734134b97b5b094cc8a119e770c6c8b2ddc009a5839",
+      "subject": "runtime-helper"
+    },
+    {
+      "bytes": 36037497,
+      "full_mode": 33216,
+      "path": ".gate/shell/source6-native-confirmation/33d2ffcb-710b-449a-9902-062ce1f036c0/cat-content-rail",
+      "sha256": "c7737aa27592bc9817d11e78acbfea66fa423698bb415b2bf9e1b472ac5d5c8b",
+      "subject": "rail"
+    },
+    {
+      "bytes": 6347679,
+      "full_mode": 33216,
+      "path": ".gate/shell/source6-native-confirmation/33d2ffcb-710b-449a-9902-062ce1f036c0/cat-content",
+      "sha256": "343ca502484e7777450d8f6b2aecf7a3b8bbd68f5b51ab9dd3cbbae1c07e870b",
+      "subject": "content"
+    }
+  ],
+  "runtime_files": 138,
+  "schema": 1,
+  "scope": "Actual rebuilt Source6 all-check/validation/export and exact two targeted native race tests only; no HTTP/browser/aggregate full/budget/BUMP/device/production qualification",
+  "source": "5efa1fa44e16c6c7eb283bf0c9ab7e72e01bb1b8",
+  "source_before_after_equal": true,
+  "source_before_after_rows": 235,
+  "status": "pass",
+  "targeted_native": {
+    "count": 1,
+    "current_registered_parity_cases_asserted_by_existing_test": 1207,
+    "default_package_timeout_seconds": 600,
+    "fail_actions": 0,
+    "independent_corpus_sha256": "0437c53b91b07d7c4323a7c66753d7250d9304b6a32f94f03901285e64c21951",
+    "package_pass_actions": 2,
+    "pass_actions": 2,
+    "race": true,
+    "run_actions": 2,
+    "skip_actions": 0,
+    "tests": [
+      {
+        "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentrails",
+        "test": "TestAllFourBaselineArtifactsRebuiltFromAuthoredInputsExactBytes"
+      },
+      {
+        "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden",
+        "test": "TestCurrentIndependentHTTPParity"
+      }
+    ],
+    "transport_scope": "Existing test in-process native HTTP handler; no separate child-process/browser/live1207 claim"
+  },
+  "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+  "tree_sha256": "88fb6c0177a393ac8ba178c561a6128f6ceadb074e16b029f496413d242c535a",
+  "whole_backend_suite_run": false,
+  "wrapper_invocation": "33d2ffcb-710b-449a-9902-062ce1f036c0"
+}
