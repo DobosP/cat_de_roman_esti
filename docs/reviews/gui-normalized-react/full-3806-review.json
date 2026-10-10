@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "source": "3806e94a1794891bcdf2594271a1c7a11a6912de",
+  "tree_sha256": "acee6ff53e2ea5bbd8ca85fdb04212345bf9f6f072f72a54aaa3dd47fa8b3c7c",
+  "result_sha256": "b641ebf11c556eaeb4fea613b62670e12ea3c0383f4a0c6dd8cb437d4235609c",
+  "wrapper_exit": 201,
+  "checks": {
+    "pass": 33,
+    "fail": 5
+  },
+  "browser": {
+    "unique_once": 900,
+    "desktop": 450,
+    "mobile": 450,
+    "pass": 890,
+    "fail": 10,
+    "retry_skip_flaky_global_errors": 0,
+    "sealed_original16_78_pass_per_project": true,
+    "failure_cause": "Unnonced addStyleTag200percent text fixture rejected by actual enforced CSP; later layout assertions not reached. Four files/five logical cases, each two projects."
+  },
+  "other_actual_observations": {
+    "frontend_pass": 453,
+    "backend_pass": 1397,
+    "baseline_named_PG_skips": 17,
+    "no_test_packages_distinct": 12,
+    "cache_markers_retained": true,
+    "explicit_fresh_PG_pass": "accounts12+httpapi291",
+    "native_Django_parity_pass": 1207,
+    "separate_enforced_legacy_observation": "Real POST/board/CSP0 and owned legacy cleanup passed; primary was unchanged then"
+  },
+  "not_executed": "Current9-page CSP/app-image witness/baselines tail did not run after browser failure; result.csp zeros are defaults, not measurements",
+  "capture": {
+    "path": "/home/dobo/work/_temp/adhoc-gui-migration-parent-20261006/cat-3806-enforced-full-browser-failure-20261010",
+    "observations_sha256": "786af0bb021abc6da0db27776b1f23142c395d18cd8d89eb7026336677a2f795",
+    "rows": 695,
+    "raw_available": true
+  },
+  "independent_review": "program_pack ACTUAL failure boundary CLEAR; no enforced qualification"
+}

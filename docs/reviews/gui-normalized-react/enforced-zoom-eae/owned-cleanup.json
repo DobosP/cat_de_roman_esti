@@ -1,0 +1,48 @@
+{
+  "utc": "2026-10-10T18:34:43.169618+00:00",
+  "project": "gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc",
+  "commands": [
+    {
+      "args": [
+        "docker",
+        "rm",
+        "-f",
+        "1275cc061bde2275eb5ea5bb215ac5081f46c0cde32a555c5f203c8b2b464bf5",
+        "c274ccf9e0aec7eaf61a1d7b5b710c07a7928670f4399be9b9c696d213182b34"
+      ],
+      "exit": 0,
+      "stdout": "1275cc061bde2275eb5ea5bb215ac5081f46c0cde32a555c5f203c8b2b464bf5\nc274ccf9e0aec7eaf61a1d7b5b710c07a7928670f4399be9b9c696d213182b34\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "docker",
+        "network",
+        "rm",
+        "cd65a864a968"
+      ],
+      "exit": 0,
+      "stdout": "cd65a864a968\n",
+      "stderr": ""
+    }
+  ],
+  "remaining": {
+    "containers": [],
+    "networks": [],
+    "volumes": []
+  },
+  "known_CIDs_absent": [
+    {
+      "id": "1275cc061bde2275eb5ea5bb215ac5081f46c0cde32a555c5f203c8b2b464bf5",
+      "inspect_exit": 1,
+      "absent": true
+    },
+    {
+      "id": "c274ccf9e0aec7eaf61a1d7b5b710c07a7928670f4399be9b9c696d213182b34",
+      "inspect_exit": 1,
+      "absent": true
+    }
+  ],
+  "passed": true,
+  "scope": "Only completed owner-shell test app/DB/network/volumes; wrapper exit0 alone left app/DB/network. Source/other owners/baselines/releases unchanged."
+}

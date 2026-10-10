@@ -1,0 +1,34 @@
+{
+  "command": "/opt/node/bin/node",
+  "args": [
+    "node_modules/@playwright/test/cli.js",
+    "test",
+    "e2e/alchimie-journal-search.spec.mjs",
+    "e2e/alchimie-library-recovery.spec.mjs",
+    "e2e/conexiuni-coach-layout.spec.mjs",
+    "e2e/contexto-simpler-ui.spec.mjs",
+    "--config",
+    "playwright.gui.config.mjs",
+    "--reporter=json",
+    "--retries=0",
+    "--grep",
+    "(empty journal search recovers in one action and keeps the crafting selection|search reset keeps keyboard recovery visible in a short viewport with doubled text|selection and remaining mistakes never overlap at (320|390)px and 200% text|the guess field and reveal confirmation stay usable at 320px with a short viewport and doubled text)$",
+    "--output",
+    "../.gate/shell/c71693cd-b466-4415-94c3-5d7c12706b63/zoom/browser-output"
+  ],
+  "cwd": "/work/frontend",
+  "started": "2026-10-10T18:31:56.017Z",
+  "finished": "2026-10-10T18:32:19.466Z",
+  "exit_code": 0,
+  "signal": null,
+  "stdout": {
+    "path": ".gate/shell/c71693cd-b466-4415-94c3-5d7c12706b63/zoom/actual-stdout.json",
+    "bytes": 14339,
+    "sha256": "56aec2cea95916d9cd97fd96f6488d70e425d29f7a49775f8a9038bd02599775"
+  },
+  "stderr": {
+    "path": ".gate/shell/c71693cd-b466-4415-94c3-5d7c12706b63/zoom/actual-stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

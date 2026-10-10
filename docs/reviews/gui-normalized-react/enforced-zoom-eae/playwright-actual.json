@@ -1,0 +1,470 @@
+{
+  "config": {
+    "argv": [
+      "/opt/node/bin/node",
+      "/work/frontend/node_modules/@playwright/test/cli.js",
+      "test",
+      "e2e/alchimie-journal-search.spec.mjs",
+      "e2e/alchimie-library-recovery.spec.mjs",
+      "e2e/conexiuni-coach-layout.spec.mjs",
+      "e2e/contexto-simpler-ui.spec.mjs",
+      "--config",
+      "playwright.gui.config.mjs",
+      "--reporter=json",
+      "--retries=0",
+      "--grep",
+      "(empty journal search recovers in one action and keeps the crafting selection|search reset keeps keyboard recovery visible in a short viewport with doubled text|selection and remaining mistakes never overlap at (320|390)px and 200% text|the guess field and reveal confirmation stay usable at 320px with a short viewport and doubled text)$",
+      "--output",
+      "../.gate/shell/c71693cd-b466-4415-94c3-5d7c12706b63/zoom/browser-output"
+    ],
+    "configFile": "/work/frontend/playwright.gui.config.mjs",
+    "rootDir": "/work/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/work/.gate/shell/c71693cd-b466-4415-94c3-5d7c12706b63/zoom/browser-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "/work/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 45000
+      },
+      {
+        "outputDir": "/work/.gate/shell/c71693cd-b466-4415-94c3-5d7c12706b63/zoom/browser-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "/work/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "alchimie-journal-search.spec.mjs",
+      "file": "alchimie-journal-search.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "empty journal search recovers in one action and keeps the crafting selection",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2808,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-10T18:31:57.444Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b61d45f2a21cf24735ee-a1140ac84c90d166f661",
+          "file": "alchimie-journal-search.spec.mjs",
+          "line": 47,
+          "column": 1
+        },
+        {
+          "title": "empty journal search recovers in one action and keeps the crafting selection",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3082,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-10T18:32:08.004Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b61d45f2a21cf24735ee-834d46e0473c22b0e41b",
+          "file": "alchimie-journal-search.spec.mjs",
+          "line": 47,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "alchimie-library-recovery.spec.mjs",
+      "file": "alchimie-library-recovery.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "search reset keeps keyboard recovery visible in a short viewport with doubled text",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1215,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-10T18:32:00.951Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "716abd25d114cdf0f60e-547ee22406c8c32b8417",
+          "file": "alchimie-library-recovery.spec.mjs",
+          "line": 92,
+          "column": 1
+        },
+        {
+          "title": "search reset keeps keyboard recovery visible in a short viewport with doubled text",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1476,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-10T18:32:11.284Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "716abd25d114cdf0f60e-39f57364c8eddff482bd",
+          "file": "alchimie-library-recovery.spec.mjs",
+          "line": 92,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "conexiuni-coach-layout.spec.mjs",
+      "file": "conexiuni-coach-layout.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "selection and remaining mistakes never overlap at 320px and 200% text",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1756,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-10T18:32:02.198Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "165ce2f35ef3da0fca67-c4347d0853d0117c94d6",
+          "file": "conexiuni-coach-layout.spec.mjs",
+          "line": 8,
+          "column": 3
+        },
+        {
+          "title": "selection and remaining mistakes never overlap at 390px and 200% text",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1665,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-10T18:32:03.969Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "165ce2f35ef3da0fca67-4511a3abc8e4a0bf5a86",
+          "file": "conexiuni-coach-layout.spec.mjs",
+          "line": 8,
+          "column": 3
+        },
+        {
+          "title": "selection and remaining mistakes never overlap at 320px and 200% text",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2305,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-10T18:32:12.788Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "165ce2f35ef3da0fca67-b722d324d901da40c811",
+          "file": "conexiuni-coach-layout.spec.mjs",
+          "line": 8,
+          "column": 3
+        },
+        {
+          "title": "selection and remaining mistakes never overlap at 390px and 200% text",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2456,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-10T18:32:15.107Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "165ce2f35ef3da0fca67-605eb94959bac2317bfd",
+          "file": "conexiuni-coach-layout.spec.mjs",
+          "line": 8,
+          "column": 3
+        }
+      ]
+    },
+    {
+      "title": "contexto-simpler-ui.spec.mjs",
+      "file": "contexto-simpler-ui.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "the guess field and reveal confirmation stay usable at 320px with a short viewport and doubled text",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1683,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-10T18:32:05.667Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7ba7ef1d1cde293bd43d-6002c0489df6067c70a6",
+          "file": "contexto-simpler-ui.spec.mjs",
+          "line": 104,
+          "column": 1
+        },
+        {
+          "title": "the guess field and reveal confirmation stay usable at 320px with a short viewport and doubled text",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1646,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-10T18:32:17.593Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7ba7ef1d1cde293bd43d-83e94a8201aced2a8345",
+          "file": "contexto-simpler-ui.spec.mjs",
+          "line": 104,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-10T18:31:56.720Z",
+    "duration": 22702.945,
+    "expected": 10,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
