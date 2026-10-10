@@ -1,0 +1,373 @@
+{
+  "schema": 1,
+  "state": "Parent and independent corrected SOURCE CLEAR; managed execution NOT RUN",
+  "base": "f29ce0048fac4ab501e8bc431bdd8c2c3a8b58a3",
+  "sourceCommit": "d2010b225508db483ff0f4db8809669f996638c9",
+  "sourceSeal": "1a82155c9a099d2a45176d13551711d3aec25142e0e95318ea2bb0b57e44ab9b",
+  "parentCaptureSha256": "e3254eb3d20d58415fdd6f7f242d774e20c922799e677c5e75a942b7aee59d0c",
+  "parentSourceReviewSha256": "eb291cc1ce1249f8c8d8a633a1dd7f9c17fb1da2553cb3a46f3bbd40564224d2",
+  "independentReview": "cross verified literal bytes/full modes, exact7paths, inverses,24references, codec/pair/copy validation and preserved boundaries; no material defect",
+  "changes": [
+    {
+      "path": "frontend/scripts/gui-precompressed-assets.d.mts",
+      "operation": "A",
+      "after": {
+        "bytes": 298,
+        "sha256": "2b59ac43d59ecf1268712dc7f12021f5c14b46147b07547b68d85ceb06566775",
+        "full_mode": 33204,
+        "git_blob": "00dce1baec0acf24ffa47eb060133d912c5db5c3"
+      },
+      "before": {
+        "git_absent": true,
+        "literal_parent_source_absent": true,
+        "source": "f29ce0048fac4ab501e8bc431bdd8c2c3a8b58a3"
+      }
+    },
+    {
+      "path": "frontend/scripts/gui-precompressed-assets.mjs",
+      "operation": "A",
+      "after": {
+        "bytes": 9084,
+        "sha256": "0d914ebf2b1ce627cdadcade9248b45438b6568af85b4503943b0ae7516e04a6",
+        "full_mode": 33204,
+        "git_blob": "05d91666a4c4ef138bec8d25a3e7b525eacf399d"
+      },
+      "before": {
+        "git_absent": true,
+        "literal_parent_source_absent": true,
+        "source": "f29ce0048fac4ab501e8bc431bdd8c2c3a8b58a3"
+      }
+    },
+    {
+      "path": "frontend/scripts/gui-precompressed-plugin.mts",
+      "operation": "A",
+      "after": {
+        "bytes": 968,
+        "sha256": "e1ea78598c569539c1dfcf6ed203122ebe306de197b86c36b53ed992972eec0f",
+        "full_mode": 33204,
+        "git_blob": "686f7d6ffbeb4d3cbd796e991b60a5b6ab00fccf"
+      },
+      "before": {
+        "git_absent": true,
+        "literal_parent_source_absent": true,
+        "source": "f29ce0048fac4ab501e8bc431bdd8c2c3a8b58a3"
+      }
+    },
+    {
+      "path": "frontend/tests/gui-precompressed-assets.test.mjs",
+      "operation": "A",
+      "after": {
+        "bytes": 16870,
+        "sha256": "0874ff789e77fe083220f2ec7db1168facd0efe90a5890ffc72274c5cc17429a",
+        "full_mode": 33204,
+        "git_blob": "0b396ccd33e69e16ab296959de437045633a97c0"
+      },
+      "before": {
+        "git_absent": true,
+        "literal_parent_source_absent": true,
+        "source": "f29ce0048fac4ab501e8bc431bdd8c2c3a8b58a3"
+      },
+      "originalAfter": {
+        "bytes": 16868,
+        "sha256": "963ae46baf7b75acbe1e8ee06af6c79b41f962268f9081219c05b5ff54144a15",
+        "full_mode": 33204,
+        "git_blob": "eb532f8bc7864fbd1f1ff61e654ce52d834c79b2"
+      }
+    },
+    {
+      "path": "frontend/vite.config.ts",
+      "operation": "M",
+      "after": {
+        "bytes": 2535,
+        "sha256": "4782fff96af590b912a07cc98e637513c0f4765cb3b98f7ddfcdb05956024f37",
+        "full_mode": 33204,
+        "git_blob": "2e3000a1b74b7f4f8560cdf5cb43dd570351ebb0"
+      },
+      "before": {
+        "bytes": 2428,
+        "sha256": "bf7b3070a1a381fd05ce7c99996e78293d27f329ae8c474f869f8b0d031b547d",
+        "full_mode": 33204,
+        "git_blob": "23ff13d096c183fef4ee4cdddb4065b6b4adcfe2"
+      }
+    },
+    {
+      "path": "go-backend/internal/httpapi/managed_compression_test.go",
+      "operation": "A",
+      "after": {
+        "bytes": 7176,
+        "sha256": "97783b03a325e64552747f0bdc54c3ffeaf4fa4ce18dca987d523c91af5068b1",
+        "full_mode": 33188,
+        "git_blob": "983560174fc035ffe1a9de277a119f2e22d8cb68"
+      },
+      "before": {
+        "git_absent": true,
+        "literal_parent_source_absent": true,
+        "source": "f29ce0048fac4ab501e8bc431bdd8c2c3a8b58a3"
+      }
+    },
+    {
+      "path": "scripts/gui-assets.mjs",
+      "operation": "M",
+      "after": {
+        "bytes": 14012,
+        "sha256": "a60cfcc809b3963246cf946429ddc2c44c73cea416da245a39e74d4ada587afd",
+        "full_mode": 33204,
+        "git_blob": "5f249d9605b6ad75d4e4062ec1663bb9c8ee9a5b"
+      },
+      "before": {
+        "bytes": 14292,
+        "sha256": "bbdf1b3cbba00769069c106272790ee4b96b4a9c3046c7d6e69b2c69612a87d3",
+        "full_mode": 33204,
+        "git_blob": "7f31d17a7ae800bc577f5ca3f861d02097f8fd8c"
+      }
+    }
+  ],
+  "references": [
+    {
+      "path": "frontend/index.html",
+      "source": "f29ce0048fac4ab501e8bc431bdd8c2c3a8b58a3",
+      "bytes": 1732,
+      "sha256": "ddaeb61dc1a3546764d64bc2553b3fecd883eb15c23728fa1291f2b7d52525e8",
+      "full_mode": 33204,
+      "git_blob": "4394151fd3731cf9d2f816dce8bc89453717b849",
+      "unchanged_at_commit": true
+    },
+    {
+      "path": "frontend/package.json",
+      "source": "f29ce0048fac4ab501e8bc431bdd8c2c3a8b58a3",
+      "bytes": 1442,
+      "sha256": "d2fe548af9b8c097f2e067852332bdaed0daf319826892a6cb1c4e5bf92aa121",
+      "full_mode": 33204,
+      "git_blob": "295978dee75e431c31165efda021c34cc2d44a30",
+      "unchanged_at_commit": true
+    },
+    {
+      "path": "frontend/package-lock.json",
+      "source": "f29ce0048fac4ab501e8bc431bdd8c2c3a8b58a3",
+      "bytes": 109956,
+      "sha256": "fa9800b9a39cf7d30f60bd5b85e1a2bd1edcc662e20b851f4b85b56e09749915",
+      "full_mode": 33204,
+      "git_blob": "da00aa11c86536a1d26e21fb92e30b6695b6ef55",
+      "unchanged_at_commit": true
+    },
+    {
+      "path": "frontend/tsconfig.tools.json",
+      "source": "f29ce0048fac4ab501e8bc431bdd8c2c3a8b58a3",
+      "bytes": 159,
+      "sha256": "3604ec127a7a5fbadbb007409f949230b57cd0ac937fd0e4b1aa7a1cd9ad7754",
+      "full_mode": 33204,
+      "git_blob": "378648951de0caae61df3fca3c2b6538352d1d26",
+      "unchanged_at_commit": true
+    },
+    {
+      "path": "frontend/scripts/check-bundle-budget.mjs",
+      "source": "f29ce0048fac4ab501e8bc431bdd8c2c3a8b58a3",
+      "bytes": 6510,
+      "sha256": "8e6fdc34a6ec877ccde5e3a9cecaaadbf989c7b294c5ccfe796432e65348c9a3",
+      "full_mode": 33204,
+      "git_blob": "7d8c6904475a45d9d1823620ecadac72d5ce3a61",
+      "unchanged_at_commit": true
+    },
+    {
+      "path": "frontend/scripts/compiler-runtime.mjs",
+      "source": "f29ce0048fac4ab501e8bc431bdd8c2c3a8b58a3",
+      "bytes": 3430,
+      "sha256": "16a7c8213c5835541c73906e02761e05f9378e067fd6f0f41a3a2fdfbf620d12",
+      "full_mode": 33204,
+      "git_blob": "e37b8b28098e81036351b7f1a8551080a814bb8d",
+      "unchanged_at_commit": true
+    },
+    {
+      "path": "scripts/gui-route-budgets.mjs",
+      "source": "f29ce0048fac4ab501e8bc431bdd8c2c3a8b58a3",
+      "bytes": 17507,
+      "sha256": "2bb4ba79eb79a965861a97757f8d4b18e2f2a4b5d76b059a93cac440139eb1d9",
+      "full_mode": 33204,
+      "git_blob": "d05c906027ae18aa4e33f5d02af1a98f51beb36d",
+      "unchanged_at_commit": true
+    },
+    {
+      "path": "budgets.json",
+      "source": "f29ce0048fac4ab501e8bc431bdd8c2c3a8b58a3",
+      "bytes": 794,
+      "sha256": "40f4fc9961a0276663791437417033b0589577ac65811f3863a0fde7a42f9fb4",
+      "full_mode": 33204,
+      "git_blob": "eb40c433fa3aecf44417662507a1eff06edd21d5",
+      "unchanged_at_commit": true
+    },
+    {
+      "path": "versions.lock.json",
+      "source": "f29ce0048fac4ab501e8bc431bdd8c2c3a8b58a3",
+      "bytes": 47093,
+      "sha256": "d15df22e48877d66f17590f6ac1f36b7d5fcfa75c3ecc055079880dc215a8834",
+      "full_mode": 33204,
+      "git_blob": "25f15eeaaf4c8fd15f9fd1467c95d0a937b0b712",
+      "unchanged_at_commit": true
+    },
+    {
+      "path": "legacy/original-bundle.json",
+      "source": "f29ce0048fac4ab501e8bc431bdd8c2c3a8b58a3",
+      "bytes": 5399,
+      "sha256": "5f9897def4020047f9d0fa199ed96b2e52d6facd1cd878da35c65cafb4e78984",
+      "full_mode": 33204,
+      "git_blob": "d3b2346f6ed916d9b3057d0dff288f5e6f57af30",
+      "unchanged_at_commit": true
+    },
+    {
+      "path": "go-backend/internal/httpapi/managed_spa.go",
+      "source": "f29ce0048fac4ab501e8bc431bdd8c2c3a8b58a3",
+      "bytes": 7350,
+      "sha256": "e2383a814f5be11e4098652e52bf88d3e2c4da439f77ef6a9c8f9f8dfe57da41",
+      "full_mode": 33204,
+      "git_blob": "50e4fe5e9077361067766be7e4ce348efca1c911",
+      "unchanged_at_commit": true
+    },
+    {
+      "path": "go-backend/internal/httpapi/managed_nonce.go",
+      "source": "f29ce0048fac4ab501e8bc431bdd8c2c3a8b58a3",
+      "bytes": 13779,
+      "sha256": "19748b70cfd9c4afb863f8ec74445cae07f86913fafe5e9413782f01f8305330",
+      "full_mode": 33204,
+      "git_blob": "a1afcaadf0ce90bc870c548fc196a136cfb96854",
+      "unchanged_at_commit": true
+    },
+    {
+      "path": "go-backend/internal/httpapi/managed_fonts.go",
+      "source": "f29ce0048fac4ab501e8bc431bdd8c2c3a8b58a3",
+      "bytes": 3271,
+      "sha256": "35a9ab212066596b5a5f451a81cd966467c90431eabc04d71af34f371b9c6977",
+      "full_mode": 33204,
+      "git_blob": "e6c2da06eb8062bf756a2e7c9e4f307bc710dc56",
+      "unchanged_at_commit": true
+    },
+    {
+      "path": "go-backend/internal/guibuild/identity.go",
+      "source": "f29ce0048fac4ab501e8bc431bdd8c2c3a8b58a3",
+      "bytes": 4216,
+      "sha256": "7ae1540fa9c34515c316d11fe84ef7b40a2dbb89eea22e957e9161ab6ff4eeb4",
+      "full_mode": 33204,
+      "git_blob": "e7b92eff73a1e3df972ebf3423226611b69eac90",
+      "unchanged_at_commit": true
+    },
+    {
+      "path": "go-backend/internal/guibuild/generate.go",
+      "source": "f29ce0048fac4ab501e8bc431bdd8c2c3a8b58a3",
+      "bytes": 3461,
+      "sha256": "4d5b2b820b76328bf8a6dad21f6be544a2356df7fec2d3ff920f719d01cfd200",
+      "full_mode": 33204,
+      "git_blob": "9adb6f6f7c61fd15c2799b3e25ab2d6239989b70",
+      "unchanged_at_commit": true
+    },
+    {
+      "path": "go-backend/embedfs/assets.go",
+      "source": "f29ce0048fac4ab501e8bc431bdd8c2c3a8b58a3",
+      "bytes": 536,
+      "sha256": "088607584b6cc86c127bb8309f62e28b87e82e2a40968cf67c27b12219014ec5",
+      "full_mode": 33204,
+      "git_blob": "0faad2837dfbe703bba6d9cef098d5355fe73474",
+      "unchanged_at_commit": true
+    },
+    {
+      "path": "go-backend/third_party/webkit/static/static.go",
+      "source": "f29ce0048fac4ab501e8bc431bdd8c2c3a8b58a3",
+      "bytes": 1550,
+      "sha256": "8d83bec2d329242e0e2f81454aa6864dc2c01aa64928e56e631f0153b6b1694d",
+      "full_mode": 33204,
+      "git_blob": "0540df392e363dbefd002a7aedcefe5861d1e10e",
+      "unchanged_at_commit": true
+    },
+    {
+      "path": "go-backend/third_party/webkit/assets/assets.go",
+      "source": "f29ce0048fac4ab501e8bc431bdd8c2c3a8b58a3",
+      "bytes": 6577,
+      "sha256": "575093f25aa52f59bd00591b3fcb04ec40987874fcd7f4e4be9057912418f3b2",
+      "full_mode": 33204,
+      "git_blob": "18ca86b8efb5d901018e95e2d63ab5c45359ca7b",
+      "unchanged_at_commit": true
+    },
+    {
+      "path": "go-backend/go.mod",
+      "source": "f29ce0048fac4ab501e8bc431bdd8c2c3a8b58a3",
+      "bytes": 1138,
+      "sha256": "63cdc61c014f923fb731c60f59f649bfb6dbe7a7340741f8f7e70761ce047b64",
+      "full_mode": 33204,
+      "git_blob": "0ecf58d3185343c81272ff32d132f5b151922228",
+      "unchanged_at_commit": true
+    },
+    {
+      "path": "go-backend/go.sum",
+      "source": "f29ce0048fac4ab501e8bc431bdd8c2c3a8b58a3",
+      "bytes": 5363,
+      "sha256": "aa0fee1fbf66167f8f1f054e2c31f7b4c110d5901307bc6294b7ae1858dbb3db",
+      "full_mode": 33204,
+      "git_blob": "966d1dd48add86e2022f9f11ddeae804abe1ec2e",
+      "unchanged_at_commit": true
+    },
+    {
+      "path": "Dockerfile.gui",
+      "source": "f29ce0048fac4ab501e8bc431bdd8c2c3a8b58a3",
+      "bytes": 2455,
+      "sha256": "42fff3560ec64e0edd16195de1d16d4a5b320eddcee508095754144fd9b746f3",
+      "full_mode": 33204,
+      "git_blob": "5cdeffc67339210b19f696d50f68ef05b9857021",
+      "unchanged_at_commit": true
+    },
+    {
+      "path": "Dockerfile",
+      "source": "f29ce0048fac4ab501e8bc431bdd8c2c3a8b58a3",
+      "bytes": 3068,
+      "sha256": "50934d2b66df7a0b465b1023df3c0b0049c93bba890010e87035e36504ce8405",
+      "full_mode": 33204,
+      "git_blob": "6081d30d317e34fc555491bfbed6993fb48b11a0",
+      "unchanged_at_commit": true
+    },
+    {
+      "path": "docs/reviews/gui-source6-core16-runtime/native/confirmation-review.json",
+      "source": "f29ce0048fac4ab501e8bc431bdd8c2c3a8b58a3",
+      "bytes": 1976,
+      "sha256": "6d71afd4d7155654850350c6acd4cdd78329a338ff1cf3e3edb850d65fbc5c7c",
+      "full_mode": 33204,
+      "git_blob": "f434e9107cb254969eacd75ab24f1861fc93531c",
+      "unchanged_at_commit": true
+    },
+    {
+      "path": "legacy/cat_de_roman_esti-legacy-93066854f67245d4b70c0ea97dc2401445a3218c.tgz",
+      "bytes": 349389,
+      "sha256": "742bb11130fa2bf52ba5c64cb9cfd452f7d8ac3a4fd9dc6d77e8064a6b8fef65",
+      "full_mode": 33204,
+      "files_in_existing_proof": 30,
+      "unchanged_at_commit": true
+    }
+  ],
+  "tests": {
+    "NodeAuthored": 30,
+    "GoFamiliesAuthored": 4,
+    "GoSubcasesAuthored": 24,
+    "runtime": "NOT RUN"
+  },
+  "accounting": "Existing delivered SDK may use valid physical gzip9 bytes instead of previous gzip6 fallback; no policy, roots or limits changed",
+  "vitalsPolicy": "Current absolute comparisons unchanged; separate owner proposal pending/unapplied",
+  "full_E3_M0_M1_KIT_BUMP_device_production": false,
+  "sourceCorrection": {
+    "commit": "c27c6f68057d87e9bd65edcb120b12bb3a629dd7",
+    "seal": "9fa23cc212eefea394c62c517eca6003b5e7b24e44a3f513cb66385916f271bc",
+    "parentCaptureSha256": "60fc9a6a4b656e76bd9ebd886ac69a2ab45f2cfaff4d40c39668e6bfcf2441b6",
+    "path": "frontend/tests/gui-precompressed-assets.test.mjs",
+    "insertion": {
+      "byte_offset": 2067,
+      "bytes_hex": "7d0a",
+      "bytes": 2,
+      "line_after_old": 33
+    },
+    "after": {
+      "bytes": 16870,
+      "sha256": "0874ff789e77fe083220f2ec7db1168facd0efe90a5890ffc72274c5cc17429a",
+      "full_mode": 33204,
+      "git_blob": "0b396ccd33e69e16ab296959de437045633a97c0"
+    },
+    "wholeInverseExact": true,
+    "otherSixSourcePathsUnchanged": true,
+    "priorReviewDisposition": "Initial d201 parent/cross clear was incomplete due to missing rows() closing brace; original source packet/reviews preserved, separately corrected here",
+    "parentAndIndependentReview": "Literal sevenfile/seal/Git/fullmode/twobyte2067 inverse verified; no runtime"
+  }
+}

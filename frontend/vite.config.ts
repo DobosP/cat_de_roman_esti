@@ -2,6 +2,7 @@ import path from "node:path";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { guiSdkAllocationPlugin } from "./scripts/gui-sdk-allocation-plugin.mts";
+import { guiPrecompressedPlugin } from "./scripts/gui-precompressed-plugin.mts";
 
 const accountBarModule = path.resolve("src/components/AccountBar.tsx");
 const mainModule = path.resolve("src/main.tsx");
@@ -9,7 +10,7 @@ const mainModule = path.resolve("src/main.tsx");
 // Asset sync copies this managed build into the native server's embedded tree.
 // The development proxy keeps the SPA and API on the same browser origin.
 export default defineConfig({
-  plugins: [react(), guiSdkAllocationPlugin()],
+  plugins: [react(), guiSdkAllocationPlugin(), guiPrecompressedPlugin()],
   build: {
     outDir: "dist",
     emptyOutDir: true,

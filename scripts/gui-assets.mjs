@@ -4,6 +4,7 @@ import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { readTarGz } from "../tools/gui-bootstrap-webkit/scripts/kit-sync.mjs";
 import { DEFAULT_INITIAL_GZIP_LIMIT_KIB, assertRomanianFontSubsets, collectInitialBundleFiles, measureGzipFiles } from "../frontend/scripts/check-bundle-budget.mjs";
+import { validatePrecompressedAssets, copyManagedAssetFiles as replace } from "../frontend/scripts/gui-precompressed-assets.mjs";
 
 const root = process.cwd(), mode = process.argv[2];
 const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
@@ -36,17 +37,6 @@ function files(directory, prefix = "") {
     if (!entry.isFile()) throw new Error("Nonregular asset refused");
     return [{ file: relative, bytes: fs.readFileSync(path.join(directory, entry.name)) }];
   });
-}
-function replace(destination, source) {
-  fs.mkdirSync(destination, { recursive: true });
-  for (const name of fs.readdirSync(destination)) {
-    if (name !== ".keep") fs.rmSync(path.join(destination, name), { recursive: true, force: true });
-  }
-  for (const item of source) {
-    safeRelative(item.file);
-    const file = path.join(destination, item.file);
-    fs.mkdirSync(path.dirname(file), { recursive: true }); fs.writeFileSync(file, item.bytes);
-  }
 }
 function currentContext(required = false) {
   if (!fs.existsSync(path.join(root, ".gate/wrapper-current.json"))) {
@@ -116,6 +106,7 @@ function currentBundle() {
     }
   }
   const fonts = assertRomanianFontSubsets(manifest);
+  validatePrecompressedAssets(manifest, current);
   const eagerRoots = ["src/components/AccountBar.tsx"];
   const initialGzipBytes = measureGzipFiles(source, collectInitialBundleFiles(manifest)).reduce((sum, item) => sum + item.bytes, 0);
   const eagerStartupGzipBytes = measureGzipFiles(source, collectInitialBundleFiles(manifest, { eagerRoots })).reduce((sum, item) => sum + item.bytes, 0);
