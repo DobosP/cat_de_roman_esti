@@ -62,7 +62,7 @@ For browser fixtures, build `cat-browser-plan` and set its absolute scratch path
 4. Frontend JS/TS/CSS changes run applicable frontend/build/browser gates. Keep original30 frozen;
    managed output sync and reviewed source retirement follow ADR-0184; backend/docs-only edits do not regenerate output.
    [ADR-0185](adr/0185-accepted-eager-startup-bundle-accounting.md) counts entry+mandatory AccountBar recursive static JS/CSS once; retained actual startup122743/122880 is not device proof.
-   Default/frozen closures stay static-only. FULL6ebc frontend380PASS/browser900PASS remainsFAIL on stale authority/baseline. ADR-0188 adds40 safety controls and explicit owner-diagnostic, NOT RUN; full/privacy/CSP gates remain.
+   Default/frozen closures stay static-only. FULL6ebc380/900PASS remainsFAIL. ADR-0188 targeted40PASS/HomeAxe9PNGpass;4instrumentedvitalsFAIL. Metadata/pin now applied; rebuilt authority/current1207/compression probe pending.
 5. Record exact commands/results in `docs/STATUS.md`; overflow history belongs in WORKLOG.
 
 ## Optional load-sensitive reference check

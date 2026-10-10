@@ -1,0 +1,102 @@
+{
+  "scope": "Owner-shell diagnostic only; no full/baseline qualification receipt",
+  "binding": {
+    "target": "shell",
+    "invocation": "5e7c5637-e76a-467f-826b-5db1ac984153",
+    "sha": "19b3d9529e4946b4ef697937a1a1450e153edacd",
+    "tree_sha256": "85edceee64afa94c1799aec4dd52cb3ff049b226636d6bc0bb6dc7bd721d1ba3",
+    "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+    "config_sha256": "557b4a0935c07456dd43460c45e65ee3bf5f2931d97ea308138f4a8e56457b95",
+    "config_file_sha256": "59994064df61896d5ad8b2e1c91a972aa2ef9c60bd3e21111a4987c3ec021be8",
+    "descriptor_sha256": "49048f13eedf286d7731be2b902f703c09ec892accfbdd5e84696f6f513608e4",
+    "manifest_sha256": "4722e3df22d6a0d66d000502d26d6d530c807160a341956cd527866d15e77fc9",
+    "versions_lock_sha256": "d15df22e48877d66f17590f6ac1f36b7d5fcfa75c3ecc055079880dc215a8834",
+    "app_image_id": "sha256:b39adb35b9b18fd917c1a8e65eb2d528354191c2215e171755230ba818dc06c7",
+    "image_authority": "Producer declaration; owning wrapper/parent host verify actual CID/IID",
+    "origin": "http://localhost:8080",
+    "dirty": false,
+    "playwright_version": "1.63.0"
+  },
+  "outcomes": [
+    {
+      "name": "verification-context-recheck",
+      "status": "pass"
+    },
+    {
+      "name": "home-live-semantic-witness",
+      "status": "pass"
+    },
+    {
+      "name": "axe-route-fingerprints",
+      "status": "pass"
+    },
+    {
+      "name": "png:/",
+      "status": "pass"
+    },
+    {
+      "name": "png:/intrusul",
+      "status": "pass"
+    },
+    {
+      "name": "png:/perechi",
+      "status": "pass"
+    },
+    {
+      "name": "png:/conexiuni",
+      "status": "pass"
+    },
+    {
+      "name": "png:/alchimie?mode=challenges",
+      "status": "pass"
+    },
+    {
+      "name": "png:/alchimie?mode=explore",
+      "status": "pass"
+    },
+    {
+      "name": "png:/cald-rece",
+      "status": "pass"
+    },
+    {
+      "name": "png:/lant",
+      "status": "pass"
+    },
+    {
+      "name": "png:/clasament",
+      "status": "pass"
+    },
+    {
+      "name": "vitals:/conexiuni:lcp",
+      "status": "fail",
+      "expected": 2836,
+      "actual": 3436,
+      "absolute_delta": 600,
+      "tolerance": 283.6
+    },
+    {
+      "name": "vitals:/conexiuni:inp",
+      "status": "fail",
+      "expected": 184,
+      "actual": 96,
+      "absolute_delta": 88,
+      "tolerance": 50
+    },
+    {
+      "name": "vitals:/alchimie?mode=challenges:lcp",
+      "status": "fail",
+      "expected": 4228,
+      "actual": 3464,
+      "absolute_delta": 764,
+      "tolerance": 422.8
+    },
+    {
+      "name": "vitals:/alchimie?mode=challenges:inp",
+      "status": "fail",
+      "expected": 200,
+      "actual": 112,
+      "absolute_delta": 88,
+      "tolerance": 50
+    }
+  ]
+}
