@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "date": "2026-10-10",
+  "authority": "Paul directly requested cleanup first and only the latest experiment setup; this supersedes earlier retention of every whole snapshot.",
+  "source_checkpoint": "5896d70eefb64bc75107d462eb4926635f57150d",
+  "deleted_owned_old_experiment_copies": 159,
+  "deleted_allocated_bytes": 128669712384,
+  "parent_scratch_allocated_before": 133718196224,
+  "parent_scratch_allocated_after": 5618442240,
+  "parent_scratch_net_reduction_bytes": 128099753984,
+  "compact_history_allocated_bytes": 567414784,
+  "live_latest_setup_allocated_bytes": 3117498368,
+  "free_bytes_at_verification": 181630996480,
+  "latest_capture_manifest_sha256": "591c1f16624ad5e386dfeb840a7a04c77c118fd9c55cefb9e0327e6e0ef6e2d4",
+  "latest_snapshot_full_verification": {
+    "regular_files": 42438,
+    "regular_bytes": 4665567442,
+    "directories": 12443,
+    "literal_unfollowed_links": 61,
+    "latest_all_bytes_modes_and_closure_verified": true
+  },
+  "preserved": [
+    "Latest reproducible snapshot and live build setup",
+    "All source branches/worktrees and unmerged source packets",
+    "Current methods and approved unapplied timing proposal",
+    "Original baselines and canonical kit/release keepers"
+  ],
+  "historical_raw_trees": "159 superseded raw experiment trees were deliberately deleted. Compact manifests, result/control bytes and path/full-mode indexes remain in content-addressed gzip history. Deleted raw artifacts cannot be reverified from manifests alone.",
+  "private_continuation_index": "/home/dobo/work/_temp/adhoc-gui-migration-parent-20261006/compact-history-20261010/index.json",
+  "keeper_verification_sha256": "204a213b1216aca59ead73e2e296a4e5e8020044339d0c6aaac59690466e317b",
+  "deletion_journal_sha256": "b4204823ecabcd8d2dcef40b342fe168b915f8d7d2ef2003da609c2e02681dea",
+  "retention_rule": "One rolling verified experiment setup plus compact results; remove superseded owned generated copies after successor verification. Avoid per-iteration workspace/node_modules/build/cache copies. Preserve source and other-owner keepers.",
+  "persistent_locations": [
+    "/home/dobo/.codex/AGENTS.md",
+    "gui-migration-supervisor saved prompt",
+    "docs/GUI_MIGRATION_HANDOFF.md"
+  ]
+}

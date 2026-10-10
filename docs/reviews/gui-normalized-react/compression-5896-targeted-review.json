@@ -1,0 +1,65 @@
+{
+  "schema": 1,
+  "source": "5896d70eefb64bc75107d462eb4926635f57150d",
+  "tree": "77afbd326640f1414962197cf48dfdaa39882b64e12163473d649b9bcabc9d87",
+  "actual_build": {
+    "wrapper_exit": 0,
+    "checks_passed": 11,
+    "result_sha256": "260576c5b9a7247ca55fac08f5eb5c2a81ce2dc665dac2915ec824852daf7c97",
+    "inventory_sha256": "45bd6c1739923f10fa0ad0cbefddd936dcce446fae12d099257f3926df0ea754",
+    "sync_sha256": "f180171f0cfb8b81937105d2c678bf4c82a0a64b8e9f1161150e3aaebc545d15",
+    "serving_files": 90,
+    "raw_assets": 34,
+    "complete_gzip_brotli_pairs": 28,
+    "frozen_legacy_files": 30
+  },
+  "actual_targeted": {
+    "wrapper_exit": 0,
+    "invocation": "da3dcb89-d735-4910-a597-2cab74f4e5b7",
+    "observations_sha256": "669f96d6b487e453ccfd630c4a4cd687974b79f0d28577f21afb9e8a6fd70539",
+    "node_tests_passed": 30,
+    "node_failed_skipped_cancelled_todo": 0,
+    "go_parent_tests": 4,
+    "go_subcases": 24,
+    "go_pass_actions": 28,
+    "go_race": true,
+    "go_count": 1,
+    "go_cached_failed_skipped": 0,
+    "read_only_gofmt_output": "empty",
+    "source_bracket_rows": 20,
+    "source_before_after_equal": true
+  },
+  "actual_http": {
+    "observations_sha256": "2a29b6729a51c0964a3d41e5c962b5c8d0485ed4db5533559690cee2365d2f04",
+    "requests": 8,
+    "all_status_200": true,
+    "private_identity_brackets": 2,
+    "js_owners": 2,
+    "encoded_responses": 4,
+    "encoding_and_encoded_sidecar_bytes_hash_length_match": true,
+    "decoded_bodies_match_raw": true,
+    "entry_bytes": {
+      "raw": 338,
+      "gzip": 243,
+      "br": 223
+    },
+    "largest_static_js_bytes": {
+      "raw": 352124,
+      "gzip": 114256,
+      "br": 99843
+    },
+    "input_bracket_rows": 100,
+    "input_before_after_equal": true,
+    "scope": "Genuine entry and largest static JS only; not app-wide delivery or browser/vitals qualification"
+  },
+  "latest_whole_capture": {
+    "manifest_sha256": "591c1f16624ad5e386dfeb840a7a04c77c118fd9c55cefb9e0327e6e0ef6e2d4",
+    "regular_files": 42438,
+    "regular_bytes": 4665567442,
+    "directories": 12443,
+    "literal_unfollowed_links": 61,
+    "parent_and_independent_boundary_review": "ACCEPTED before cleanup; all bytes/full modes/closure independently reviewed, then parent reverified after cleanup"
+  },
+  "qualification": "Targeted compression contracts and two actual image-bound JS delivery owners only. Canonical unit/full/PG/900/CSP/vitals/device/M0/M1/KIT_BUMP remain unqualified.",
+  "retention": "Latest snapshot retained; predecessor raw experiment copies pruned under human cleanup instruction. See experiment-storage-cleanup.json."
+}
