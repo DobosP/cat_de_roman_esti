@@ -1,0 +1,1746 @@
+{
+  "schema": 1,
+  "sha": "25065356943e2decc25768c3688435870ec82be8",
+  "tree_sha256": "e5092037e7a9f71c63ac9b5623bf366fd82bc0438a5b9a7edd51a30f3e7cec47",
+  "app_image_id": "sha256:3cbe5cd9274b02ce2ceec9c987e1182414b59e93b5ebdcfcf12d94d74c3724f4",
+  "stage": "report-only",
+  "violations": 0,
+  "pages": 9,
+  "nonceObservations": [
+    {
+      "page": "/",
+      "nonce_sha256": "b0316710eaa1f814abda837b9444af734615d8308c6c58ed266a4ced0c51b19d",
+      "scripts": 1,
+      "json": 0,
+      "assetLinks": 3,
+      "module": "/assets/index-BoCfe88_.js",
+      "module_url": "http://localhost:8080/assets/index-BoCfe88_.js",
+      "css": [
+        "/assets/startup-uZN142Lb.css"
+      ],
+      "css_urls": [
+        "http://localhost:8080/assets/startup-uZN142Lb.css"
+      ],
+      "preloads": [
+        "/assets/rolldown-runtime-CbXtAM7H.js",
+        "/assets/startup-BP5Pvlg1.js"
+      ],
+      "preload_urls": [
+        "http://localhost:8080/assets/rolldown-runtime-CbXtAM7H.js",
+        "http://localhost:8080/assets/startup-BP5Pvlg1.js"
+      ],
+      "fonts": {
+        "links": [
+          {
+            "href": "http://localhost:8080/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "b0316710eaa1f814abda837b9444af734615d8308c6c58ed266a4ced0c51b19d"
+          },
+          {
+            "href": "http://localhost:8080/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "b0316710eaa1f814abda837b9444af734615d8308c6c58ed266a4ced0c51b19d"
+          },
+          {
+            "href": "http://localhost:8080/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "b0316710eaa1f814abda837b9444af734615d8308c6c58ed266a4ced0c51b19d"
+          },
+          {
+            "href": "http://localhost:8080/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "b0316710eaa1f814abda837b9444af734615d8308c6c58ed266a4ced0c51b19d"
+          }
+        ],
+        "requests": [
+          {
+            "url": "http://localhost:8080/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "method": "GET"
+          },
+          {
+            "url": "http://localhost:8080/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "method": "GET"
+          },
+          {
+            "url": "http://localhost:8080/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "method": "GET"
+          },
+          {
+            "url": "http://localhost:8080/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "method": "GET"
+          }
+        ],
+        "responses": [
+          {
+            "source": "node_modules/@fontsource-variable/fredoka/files/fredoka-latin-ext-wght-normal.woff2",
+            "file": "assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "url": "http://localhost:8080/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "status": 200,
+            "bytes": 4576,
+            "sha256": "18a1723c878c0d8acc2e45a108fd62fbb976e408337804afa2908982fac13e2a",
+            "resource_type": "font"
+          },
+          {
+            "source": "node_modules/@fontsource-variable/fredoka/files/fredoka-latin-wght-normal.woff2",
+            "file": "assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "url": "http://localhost:8080/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "status": 200,
+            "bytes": 29732,
+            "sha256": "99d6c78e043710d4f83ed90716779798b7b04eb690f73e0ad0e8f32d1f0e98c2",
+            "resource_type": "font"
+          },
+          {
+            "source": "node_modules/@fontsource-variable/inter/files/inter-latin-ext-wght-normal.woff2",
+            "file": "assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "url": "http://localhost:8080/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "status": 200,
+            "bytes": 85068,
+            "sha256": "34b9c504cab7a73e37b746343a449132e56cf7b5481af2cb81dc74dcff25c956",
+            "resource_type": "font"
+          },
+          {
+            "source": "node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2",
+            "file": "assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "url": "http://localhost:8080/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "status": 200,
+            "bytes": 48256,
+            "sha256": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62",
+            "resource_type": "font"
+          }
+        ],
+        "status": "loaded",
+        "faces": [
+          {
+            "family": "Fredoka Variable",
+            "status": "loaded",
+            "style": "normal",
+            "weight": "300 700",
+            "unicodeRange": "U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF"
+          },
+          {
+            "family": "Fredoka Variable",
+            "status": "loaded",
+            "style": "normal",
+            "weight": "300 700",
+            "unicodeRange": "U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD"
+          },
+          {
+            "family": "Inter Variable",
+            "status": "loaded",
+            "style": "normal",
+            "weight": "100 900",
+            "unicodeRange": "U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF"
+          },
+          {
+            "family": "Inter Variable",
+            "status": "loaded",
+            "style": "normal",
+            "weight": "100 900",
+            "unicodeRange": "U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD"
+          }
+        ]
+      }
+    },
+    {
+      "page": "/intrusul",
+      "nonce_sha256": "45e3c875813ecc190e78cf82e6f0203a5fcc4a471459185817690cbfea9b2e66",
+      "scripts": 1,
+      "json": 0,
+      "assetLinks": 11,
+      "module": "/assets/index-BoCfe88_.js",
+      "module_url": "http://localhost:8080/assets/index-BoCfe88_.js",
+      "css": [
+        "/assets/startup-uZN142Lb.css",
+        "/assets/CspStyle-x1XGuNl0.css",
+        "/assets/GameOptions-CEWYWGsz.css",
+        "/assets/Intrusul-D_KdYx8Y.css"
+      ],
+      "css_urls": [
+        "http://localhost:8080/assets/startup-uZN142Lb.css",
+        "http://localhost:8080/assets/CspStyle-x1XGuNl0.css",
+        "http://localhost:8080/assets/GameOptions-CEWYWGsz.css",
+        "http://localhost:8080/assets/Intrusul-D_KdYx8Y.css"
+      ],
+      "preloads": [
+        "/assets/rolldown-runtime-CbXtAM7H.js",
+        "/assets/startup-BP5Pvlg1.js",
+        "/assets/Intrusul-BQp0TQAh.js",
+        "/assets/CspStyle-B1RwaPM1.js",
+        "/assets/useSavedGameResume-CLCJZjna.js",
+        "/assets/GameOptions-DNs5X9aU.js",
+        "/assets/derivedReplay-Bor7pKb-.js"
+      ],
+      "preload_urls": [
+        "http://localhost:8080/assets/rolldown-runtime-CbXtAM7H.js",
+        "http://localhost:8080/assets/startup-BP5Pvlg1.js",
+        "http://localhost:8080/assets/Intrusul-BQp0TQAh.js",
+        "http://localhost:8080/assets/CspStyle-B1RwaPM1.js",
+        "http://localhost:8080/assets/useSavedGameResume-CLCJZjna.js",
+        "http://localhost:8080/assets/GameOptions-DNs5X9aU.js",
+        "http://localhost:8080/assets/derivedReplay-Bor7pKb-.js"
+      ],
+      "fonts": {
+        "links": [
+          {
+            "href": "http://localhost:8080/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "45e3c875813ecc190e78cf82e6f0203a5fcc4a471459185817690cbfea9b2e66"
+          },
+          {
+            "href": "http://localhost:8080/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "45e3c875813ecc190e78cf82e6f0203a5fcc4a471459185817690cbfea9b2e66"
+          },
+          {
+            "href": "http://localhost:8080/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "45e3c875813ecc190e78cf82e6f0203a5fcc4a471459185817690cbfea9b2e66"
+          },
+          {
+            "href": "http://localhost:8080/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "45e3c875813ecc190e78cf82e6f0203a5fcc4a471459185817690cbfea9b2e66"
+          }
+        ],
+        "requests": [
+          {
+            "url": "http://localhost:8080/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "method": "GET"
+          },
+          {
+            "url": "http://localhost:8080/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "method": "GET"
+          },
+          {
+            "url": "http://localhost:8080/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "method": "GET"
+          },
+          {
+            "url": "http://localhost:8080/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "method": "GET"
+          }
+        ],
+        "responses": [
+          {
+            "source": "node_modules/@fontsource-variable/fredoka/files/fredoka-latin-ext-wght-normal.woff2",
+            "file": "assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "url": "http://localhost:8080/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "status": 200,
+            "bytes": 4576,
+            "sha256": "18a1723c878c0d8acc2e45a108fd62fbb976e408337804afa2908982fac13e2a",
+            "resource_type": "font"
+          },
+          {
+            "source": "node_modules/@fontsource-variable/fredoka/files/fredoka-latin-wght-normal.woff2",
+            "file": "assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "url": "http://localhost:8080/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "status": 200,
+            "bytes": 29732,
+            "sha256": "99d6c78e043710d4f83ed90716779798b7b04eb690f73e0ad0e8f32d1f0e98c2",
+            "resource_type": "font"
+          },
+          {
+            "source": "node_modules/@fontsource-variable/inter/files/inter-latin-ext-wght-normal.woff2",
+            "file": "assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "url": "http://localhost:8080/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "status": 200,
+            "bytes": 85068,
+            "sha256": "34b9c504cab7a73e37b746343a449132e56cf7b5481af2cb81dc74dcff25c956",
+            "resource_type": "font"
+          },
+          {
+            "source": "node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2",
+            "file": "assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "url": "http://localhost:8080/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "status": 200,
+            "bytes": 48256,
+            "sha256": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62",
+            "resource_type": "font"
+          }
+        ],
+        "status": "loaded",
+        "faces": [
+          {
+            "family": "Fredoka Variable",
+            "status": "unloaded",
+            "style": "normal",
+            "weight": "300 700",
+            "unicodeRange": "U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF"
+          },
+          {
+            "family": "Fredoka Variable",
+            "status": "unloaded",
+            "style": "normal",
+            "weight": "300 700",
+            "unicodeRange": "U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD"
+          },
+          {
+            "family": "Inter Variable",
+            "status": "loaded",
+            "style": "normal",
+            "weight": "100 900",
+            "unicodeRange": "U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF"
+          },
+          {
+            "family": "Inter Variable",
+            "status": "loaded",
+            "style": "normal",
+            "weight": "100 900",
+            "unicodeRange": "U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD"
+          }
+        ]
+      }
+    },
+    {
+      "page": "/perechi",
+      "nonce_sha256": "4175abdd6927915b100d0ab04e880f28c28103025cd8a8e5008f3e12d15bd778",
+      "scripts": 1,
+      "json": 0,
+      "assetLinks": 11,
+      "module": "/assets/index-BoCfe88_.js",
+      "module_url": "http://localhost:8080/assets/index-BoCfe88_.js",
+      "css": [
+        "/assets/startup-uZN142Lb.css",
+        "/assets/CspStyle-x1XGuNl0.css",
+        "/assets/GameOptions-CEWYWGsz.css",
+        "/assets/Perechi-DUzfG4A6.css"
+      ],
+      "css_urls": [
+        "http://localhost:8080/assets/startup-uZN142Lb.css",
+        "http://localhost:8080/assets/CspStyle-x1XGuNl0.css",
+        "http://localhost:8080/assets/GameOptions-CEWYWGsz.css",
+        "http://localhost:8080/assets/Perechi-DUzfG4A6.css"
+      ],
+      "preloads": [
+        "/assets/rolldown-runtime-CbXtAM7H.js",
+        "/assets/startup-BP5Pvlg1.js",
+        "/assets/Perechi-CVshKqJz.js",
+        "/assets/CspStyle-B1RwaPM1.js",
+        "/assets/useSavedGameResume-CLCJZjna.js",
+        "/assets/GameOptions-DNs5X9aU.js",
+        "/assets/derivedReplay-Bor7pKb-.js"
+      ],
+      "preload_urls": [
+        "http://localhost:8080/assets/rolldown-runtime-CbXtAM7H.js",
+        "http://localhost:8080/assets/startup-BP5Pvlg1.js",
+        "http://localhost:8080/assets/Perechi-CVshKqJz.js",
+        "http://localhost:8080/assets/CspStyle-B1RwaPM1.js",
+        "http://localhost:8080/assets/useSavedGameResume-CLCJZjna.js",
+        "http://localhost:8080/assets/GameOptions-DNs5X9aU.js",
+        "http://localhost:8080/assets/derivedReplay-Bor7pKb-.js"
+      ],
+      "fonts": {
+        "links": [
+          {
+            "href": "http://localhost:8080/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "4175abdd6927915b100d0ab04e880f28c28103025cd8a8e5008f3e12d15bd778"
+          },
+          {
+            "href": "http://localhost:8080/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "4175abdd6927915b100d0ab04e880f28c28103025cd8a8e5008f3e12d15bd778"
+          },
+          {
+            "href": "http://localhost:8080/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "4175abdd6927915b100d0ab04e880f28c28103025cd8a8e5008f3e12d15bd778"
+          },
+          {
+            "href": "http://localhost:8080/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "4175abdd6927915b100d0ab04e880f28c28103025cd8a8e5008f3e12d15bd778"
+          }
+        ],
+        "requests": [
+          {
+            "url": "http://localhost:8080/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "method": "GET"
+          },
+          {
+            "url": "http://localhost:8080/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "method": "GET"
+          },
+          {
+            "url": "http://localhost:8080/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "method": "GET"
+          },
+          {
+            "url": "http://localhost:8080/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "method": "GET"
+          }
+        ],
+        "responses": [
+          {
+            "source": "node_modules/@fontsource-variable/fredoka/files/fredoka-latin-ext-wght-normal.woff2",
+            "file": "assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "url": "http://localhost:8080/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "status": 200,
+            "bytes": 4576,
+            "sha256": "18a1723c878c0d8acc2e45a108fd62fbb976e408337804afa2908982fac13e2a",
+            "resource_type": "font"
+          },
+          {
+            "source": "node_modules/@fontsource-variable/fredoka/files/fredoka-latin-wght-normal.woff2",
+            "file": "assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "url": "http://localhost:8080/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "status": 200,
+            "bytes": 29732,
+            "sha256": "99d6c78e043710d4f83ed90716779798b7b04eb690f73e0ad0e8f32d1f0e98c2",
+            "resource_type": "font"
+          },
+          {
+            "source": "node_modules/@fontsource-variable/inter/files/inter-latin-ext-wght-normal.woff2",
+            "file": "assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "url": "http://localhost:8080/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "status": 200,
+            "bytes": 85068,
+            "sha256": "34b9c504cab7a73e37b746343a449132e56cf7b5481af2cb81dc74dcff25c956",
+            "resource_type": "font"
+          },
+          {
+            "source": "node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2",
+            "file": "assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "url": "http://localhost:8080/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "status": 200,
+            "bytes": 48256,
+            "sha256": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62",
+            "resource_type": "font"
+          }
+        ],
+        "status": "loaded",
+        "faces": [
+          {
+            "family": "Fredoka Variable",
+            "status": "unloaded",
+            "style": "normal",
+            "weight": "300 700",
+            "unicodeRange": "U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF"
+          },
+          {
+            "family": "Fredoka Variable",
+            "status": "unloaded",
+            "style": "normal",
+            "weight": "300 700",
+            "unicodeRange": "U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD"
+          },
+          {
+            "family": "Inter Variable",
+            "status": "loaded",
+            "style": "normal",
+            "weight": "100 900",
+            "unicodeRange": "U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF"
+          },
+          {
+            "family": "Inter Variable",
+            "status": "loaded",
+            "style": "normal",
+            "weight": "100 900",
+            "unicodeRange": "U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD"
+          }
+        ]
+      }
+    },
+    {
+      "page": "/conexiuni",
+      "nonce_sha256": "4f2bec10394b31b034d5a3a1b7acd8c0d930e286f8835ab73a49bc27b40588f3",
+      "scripts": 1,
+      "json": 0,
+      "assetLinks": 13,
+      "module": "/assets/index-BoCfe88_.js",
+      "module_url": "http://localhost:8080/assets/index-BoCfe88_.js",
+      "css": [
+        "/assets/startup-uZN142Lb.css",
+        "/assets/CspStyle-x1XGuNl0.css",
+        "/assets/CategoryPicker-4pf-v9jW.css",
+        "/assets/GameOptions-CEWYWGsz.css",
+        "/assets/Conexiuni-D2QJHejd.css"
+      ],
+      "css_urls": [
+        "http://localhost:8080/assets/startup-uZN142Lb.css",
+        "http://localhost:8080/assets/CspStyle-x1XGuNl0.css",
+        "http://localhost:8080/assets/CategoryPicker-4pf-v9jW.css",
+        "http://localhost:8080/assets/GameOptions-CEWYWGsz.css",
+        "http://localhost:8080/assets/Conexiuni-D2QJHejd.css"
+      ],
+      "preloads": [
+        "/assets/rolldown-runtime-CbXtAM7H.js",
+        "/assets/startup-BP5Pvlg1.js",
+        "/assets/Conexiuni-dv1j2-AJ.js",
+        "/assets/CspStyle-B1RwaPM1.js",
+        "/assets/useSavedGameResume-CLCJZjna.js",
+        "/assets/CategoryPicker-BGUdDfG-.js",
+        "/assets/GameOptions-DNs5X9aU.js",
+        "/assets/GameSetupOptions-SfCDbO8j.js"
+      ],
+      "preload_urls": [
+        "http://localhost:8080/assets/rolldown-runtime-CbXtAM7H.js",
+        "http://localhost:8080/assets/startup-BP5Pvlg1.js",
+        "http://localhost:8080/assets/Conexiuni-dv1j2-AJ.js",
+        "http://localhost:8080/assets/CspStyle-B1RwaPM1.js",
+        "http://localhost:8080/assets/useSavedGameResume-CLCJZjna.js",
+        "http://localhost:8080/assets/CategoryPicker-BGUdDfG-.js",
+        "http://localhost:8080/assets/GameOptions-DNs5X9aU.js",
+        "http://localhost:8080/assets/GameSetupOptions-SfCDbO8j.js"
+      ],
+      "fonts": {
+        "links": [
+          {
+            "href": "http://localhost:8080/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "4f2bec10394b31b034d5a3a1b7acd8c0d930e286f8835ab73a49bc27b40588f3"
+          },
+          {
+            "href": "http://localhost:8080/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "4f2bec10394b31b034d5a3a1b7acd8c0d930e286f8835ab73a49bc27b40588f3"
+          },
+          {
+            "href": "http://localhost:8080/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "4f2bec10394b31b034d5a3a1b7acd8c0d930e286f8835ab73a49bc27b40588f3"
+          },
+          {
+            "href": "http://localhost:8080/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "4f2bec10394b31b034d5a3a1b7acd8c0d930e286f8835ab73a49bc27b40588f3"
+          }
+        ],
+        "requests": [
+          {
+            "url": "http://localhost:8080/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "method": "GET"
+          },
+          {
+            "url": "http://localhost:8080/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "method": "GET"
+          },
+          {
+            "url": "http://localhost:8080/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "method": "GET"
+          },
+          {
+            "url": "http://localhost:8080/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "method": "GET"
+          }
+        ],
+        "responses": [
+          {
+            "source": "node_modules/@fontsource-variable/fredoka/files/fredoka-latin-ext-wght-normal.woff2",
+            "file": "assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "url": "http://localhost:8080/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "status": 200,
+            "bytes": 4576,
+            "sha256": "18a1723c878c0d8acc2e45a108fd62fbb976e408337804afa2908982fac13e2a",
+            "resource_type": "font"
+          },
+          {
+            "source": "node_modules/@fontsource-variable/fredoka/files/fredoka-latin-wght-normal.woff2",
+            "file": "assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "url": "http://localhost:8080/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "status": 200,
+            "bytes": 29732,
+            "sha256": "99d6c78e043710d4f83ed90716779798b7b04eb690f73e0ad0e8f32d1f0e98c2",
+            "resource_type": "font"
+          },
+          {
+            "source": "node_modules/@fontsource-variable/inter/files/inter-latin-ext-wght-normal.woff2",
+            "file": "assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "url": "http://localhost:8080/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "status": 200,
+            "bytes": 85068,
+            "sha256": "34b9c504cab7a73e37b746343a449132e56cf7b5481af2cb81dc74dcff25c956",
+            "resource_type": "font"
+          },
+          {
+            "source": "node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2",
+            "file": "assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "url": "http://localhost:8080/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "status": 200,
+            "bytes": 48256,
+            "sha256": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62",
+            "resource_type": "font"
+          }
+        ],
+        "status": "loaded",
+        "faces": [
+          {
+            "family": "Fredoka Variable",
+            "status": "unloaded",
+            "style": "normal",
+            "weight": "300 700",
+            "unicodeRange": "U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF"
+          },
+          {
+            "family": "Fredoka Variable",
+            "status": "unloaded",
+            "style": "normal",
+            "weight": "300 700",
+            "unicodeRange": "U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD"
+          },
+          {
+            "family": "Inter Variable",
+            "status": "loaded",
+            "style": "normal",
+            "weight": "100 900",
+            "unicodeRange": "U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF"
+          },
+          {
+            "family": "Inter Variable",
+            "status": "loaded",
+            "style": "normal",
+            "weight": "100 900",
+            "unicodeRange": "U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD"
+          }
+        ]
+      }
+    },
+    {
+      "page": "/alchimie?mode=challenges",
+      "nonce_sha256": "6899f17776ff874e75577699b4dda56a3ee080cfe30f9849890b2a1536908d0d",
+      "scripts": 1,
+      "json": 0,
+      "assetLinks": 10,
+      "module": "/assets/index-BoCfe88_.js",
+      "module_url": "http://localhost:8080/assets/index-BoCfe88_.js",
+      "css": [
+        "/assets/startup-uZN142Lb.css",
+        "/assets/CspStyle-x1XGuNl0.css",
+        "/assets/CategoryPicker-4pf-v9jW.css",
+        "/assets/Alchimie-DxBkLLr5.css"
+      ],
+      "css_urls": [
+        "http://localhost:8080/assets/startup-uZN142Lb.css",
+        "http://localhost:8080/assets/CspStyle-x1XGuNl0.css",
+        "http://localhost:8080/assets/CategoryPicker-4pf-v9jW.css",
+        "http://localhost:8080/assets/Alchimie-DxBkLLr5.css"
+      ],
+      "preloads": [
+        "/assets/rolldown-runtime-CbXtAM7H.js",
+        "/assets/startup-BP5Pvlg1.js",
+        "/assets/Alchimie-DWBTmhUZ.js",
+        "/assets/CspStyle-B1RwaPM1.js",
+        "/assets/useSavedGameResume-CLCJZjna.js",
+        "/assets/CategoryPicker-BGUdDfG-.js"
+      ],
+      "preload_urls": [
+        "http://localhost:8080/assets/rolldown-runtime-CbXtAM7H.js",
+        "http://localhost:8080/assets/startup-BP5Pvlg1.js",
+        "http://localhost:8080/assets/Alchimie-DWBTmhUZ.js",
+        "http://localhost:8080/assets/CspStyle-B1RwaPM1.js",
+        "http://localhost:8080/assets/useSavedGameResume-CLCJZjna.js",
+        "http://localhost:8080/assets/CategoryPicker-BGUdDfG-.js"
+      ],
+      "fonts": {
+        "links": [
+          {
+            "href": "http://localhost:8080/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "6899f17776ff874e75577699b4dda56a3ee080cfe30f9849890b2a1536908d0d"
+          },
+          {
+            "href": "http://localhost:8080/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "6899f17776ff874e75577699b4dda56a3ee080cfe30f9849890b2a1536908d0d"
+          },
+          {
+            "href": "http://localhost:8080/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "6899f17776ff874e75577699b4dda56a3ee080cfe30f9849890b2a1536908d0d"
+          },
+          {
+            "href": "http://localhost:8080/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "6899f17776ff874e75577699b4dda56a3ee080cfe30f9849890b2a1536908d0d"
+          }
+        ],
+        "requests": [
+          {
+            "url": "http://localhost:8080/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "method": "GET"
+          },
+          {
+            "url": "http://localhost:8080/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "method": "GET"
+          },
+          {
+            "url": "http://localhost:8080/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "method": "GET"
+          },
+          {
+            "url": "http://localhost:8080/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "method": "GET"
+          }
+        ],
+        "responses": [
+          {
+            "source": "node_modules/@fontsource-variable/fredoka/files/fredoka-latin-ext-wght-normal.woff2",
+            "file": "assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "url": "http://localhost:8080/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "status": 200,
+            "bytes": 4576,
+            "sha256": "18a1723c878c0d8acc2e45a108fd62fbb976e408337804afa2908982fac13e2a",
+            "resource_type": "font"
+          },
+          {
+            "source": "node_modules/@fontsource-variable/fredoka/files/fredoka-latin-wght-normal.woff2",
+            "file": "assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "url": "http://localhost:8080/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "status": 200,
+            "bytes": 29732,
+            "sha256": "99d6c78e043710d4f83ed90716779798b7b04eb690f73e0ad0e8f32d1f0e98c2",
+            "resource_type": "font"
+          },
+          {
+            "source": "node_modules/@fontsource-variable/inter/files/inter-latin-ext-wght-normal.woff2",
+            "file": "assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "url": "http://localhost:8080/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "status": 200,
+            "bytes": 85068,
+            "sha256": "34b9c504cab7a73e37b746343a449132e56cf7b5481af2cb81dc74dcff25c956",
+            "resource_type": "font"
+          },
+          {
+            "source": "node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2",
+            "file": "assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "url": "http://localhost:8080/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "status": 200,
+            "bytes": 48256,
+            "sha256": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62",
+            "resource_type": "font"
+          }
+        ],
+        "status": "loaded",
+        "faces": [
+          {
+            "family": "Fredoka Variable",
+            "status": "unloaded",
+            "style": "normal",
+            "weight": "300 700",
+            "unicodeRange": "U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF"
+          },
+          {
+            "family": "Fredoka Variable",
+            "status": "unloaded",
+            "style": "normal",
+            "weight": "300 700",
+            "unicodeRange": "U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD"
+          },
+          {
+            "family": "Inter Variable",
+            "status": "loaded",
+            "style": "normal",
+            "weight": "100 900",
+            "unicodeRange": "U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF"
+          },
+          {
+            "family": "Inter Variable",
+            "status": "loaded",
+            "style": "normal",
+            "weight": "100 900",
+            "unicodeRange": "U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD"
+          }
+        ]
+      }
+    },
+    {
+      "page": "/alchimie?mode=explore",
+      "nonce_sha256": "dd0725149dacf9977b74bc2971f745c0129a7336285b07f4fae94ec222a92fcc",
+      "scripts": 1,
+      "json": 0,
+      "assetLinks": 10,
+      "module": "/assets/index-BoCfe88_.js",
+      "module_url": "http://localhost:8080/assets/index-BoCfe88_.js",
+      "css": [
+        "/assets/startup-uZN142Lb.css",
+        "/assets/CspStyle-x1XGuNl0.css",
+        "/assets/CategoryPicker-4pf-v9jW.css",
+        "/assets/Alchimie-DxBkLLr5.css"
+      ],
+      "css_urls": [
+        "http://localhost:8080/assets/startup-uZN142Lb.css",
+        "http://localhost:8080/assets/CspStyle-x1XGuNl0.css",
+        "http://localhost:8080/assets/CategoryPicker-4pf-v9jW.css",
+        "http://localhost:8080/assets/Alchimie-DxBkLLr5.css"
+      ],
+      "preloads": [
+        "/assets/rolldown-runtime-CbXtAM7H.js",
+        "/assets/startup-BP5Pvlg1.js",
+        "/assets/Alchimie-DWBTmhUZ.js",
+        "/assets/CspStyle-B1RwaPM1.js",
+        "/assets/useSavedGameResume-CLCJZjna.js",
+        "/assets/CategoryPicker-BGUdDfG-.js"
+      ],
+      "preload_urls": [
+        "http://localhost:8080/assets/rolldown-runtime-CbXtAM7H.js",
+        "http://localhost:8080/assets/startup-BP5Pvlg1.js",
+        "http://localhost:8080/assets/Alchimie-DWBTmhUZ.js",
+        "http://localhost:8080/assets/CspStyle-B1RwaPM1.js",
+        "http://localhost:8080/assets/useSavedGameResume-CLCJZjna.js",
+        "http://localhost:8080/assets/CategoryPicker-BGUdDfG-.js"
+      ],
+      "fonts": {
+        "links": [
+          {
+            "href": "http://localhost:8080/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "dd0725149dacf9977b74bc2971f745c0129a7336285b07f4fae94ec222a92fcc"
+          },
+          {
+            "href": "http://localhost:8080/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "dd0725149dacf9977b74bc2971f745c0129a7336285b07f4fae94ec222a92fcc"
+          },
+          {
+            "href": "http://localhost:8080/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "dd0725149dacf9977b74bc2971f745c0129a7336285b07f4fae94ec222a92fcc"
+          },
+          {
+            "href": "http://localhost:8080/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "dd0725149dacf9977b74bc2971f745c0129a7336285b07f4fae94ec222a92fcc"
+          }
+        ],
+        "requests": [
+          {
+            "url": "http://localhost:8080/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "method": "GET"
+          },
+          {
+            "url": "http://localhost:8080/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "method": "GET"
+          },
+          {
+            "url": "http://localhost:8080/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "method": "GET"
+          },
+          {
+            "url": "http://localhost:8080/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "method": "GET"
+          }
+        ],
+        "responses": [
+          {
+            "source": "node_modules/@fontsource-variable/fredoka/files/fredoka-latin-ext-wght-normal.woff2",
+            "file": "assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "url": "http://localhost:8080/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "status": 200,
+            "bytes": 4576,
+            "sha256": "18a1723c878c0d8acc2e45a108fd62fbb976e408337804afa2908982fac13e2a",
+            "resource_type": "font"
+          },
+          {
+            "source": "node_modules/@fontsource-variable/fredoka/files/fredoka-latin-wght-normal.woff2",
+            "file": "assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "url": "http://localhost:8080/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "status": 200,
+            "bytes": 29732,
+            "sha256": "99d6c78e043710d4f83ed90716779798b7b04eb690f73e0ad0e8f32d1f0e98c2",
+            "resource_type": "font"
+          },
+          {
+            "source": "node_modules/@fontsource-variable/inter/files/inter-latin-ext-wght-normal.woff2",
+            "file": "assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "url": "http://localhost:8080/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "status": 200,
+            "bytes": 85068,
+            "sha256": "34b9c504cab7a73e37b746343a449132e56cf7b5481af2cb81dc74dcff25c956",
+            "resource_type": "font"
+          },
+          {
+            "source": "node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2",
+            "file": "assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "url": "http://localhost:8080/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "status": 200,
+            "bytes": 48256,
+            "sha256": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62",
+            "resource_type": "font"
+          }
+        ],
+        "status": "loaded",
+        "faces": [
+          {
+            "family": "Fredoka Variable",
+            "status": "unloaded",
+            "style": "normal",
+            "weight": "300 700",
+            "unicodeRange": "U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF"
+          },
+          {
+            "family": "Fredoka Variable",
+            "status": "unloaded",
+            "style": "normal",
+            "weight": "300 700",
+            "unicodeRange": "U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD"
+          },
+          {
+            "family": "Inter Variable",
+            "status": "loaded",
+            "style": "normal",
+            "weight": "100 900",
+            "unicodeRange": "U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF"
+          },
+          {
+            "family": "Inter Variable",
+            "status": "loaded",
+            "style": "normal",
+            "weight": "100 900",
+            "unicodeRange": "U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD"
+          }
+        ]
+      }
+    },
+    {
+      "page": "/cald-rece",
+      "nonce_sha256": "b670b61a538d253c247deb359925da80ae747e09072ac62c001369008b1f3516",
+      "scripts": 1,
+      "json": 0,
+      "assetLinks": 13,
+      "module": "/assets/index-BoCfe88_.js",
+      "module_url": "http://localhost:8080/assets/index-BoCfe88_.js",
+      "css": [
+        "/assets/startup-uZN142Lb.css",
+        "/assets/CspStyle-x1XGuNl0.css",
+        "/assets/CategoryPicker-4pf-v9jW.css",
+        "/assets/GameOptions-CEWYWGsz.css",
+        "/assets/CaldRece-0dIO_Auo.css"
+      ],
+      "css_urls": [
+        "http://localhost:8080/assets/startup-uZN142Lb.css",
+        "http://localhost:8080/assets/CspStyle-x1XGuNl0.css",
+        "http://localhost:8080/assets/CategoryPicker-4pf-v9jW.css",
+        "http://localhost:8080/assets/GameOptions-CEWYWGsz.css",
+        "http://localhost:8080/assets/CaldRece-0dIO_Auo.css"
+      ],
+      "preloads": [
+        "/assets/rolldown-runtime-CbXtAM7H.js",
+        "/assets/startup-BP5Pvlg1.js",
+        "/assets/CaldRece-D0O7hLyt.js",
+        "/assets/CspStyle-B1RwaPM1.js",
+        "/assets/useSavedGameResume-CLCJZjna.js",
+        "/assets/CategoryPicker-BGUdDfG-.js",
+        "/assets/GameOptions-DNs5X9aU.js",
+        "/assets/GameSetupOptions-SfCDbO8j.js"
+      ],
+      "preload_urls": [
+        "http://localhost:8080/assets/rolldown-runtime-CbXtAM7H.js",
+        "http://localhost:8080/assets/startup-BP5Pvlg1.js",
+        "http://localhost:8080/assets/CaldRece-D0O7hLyt.js",
+        "http://localhost:8080/assets/CspStyle-B1RwaPM1.js",
+        "http://localhost:8080/assets/useSavedGameResume-CLCJZjna.js",
+        "http://localhost:8080/assets/CategoryPicker-BGUdDfG-.js",
+        "http://localhost:8080/assets/GameOptions-DNs5X9aU.js",
+        "http://localhost:8080/assets/GameSetupOptions-SfCDbO8j.js"
+      ],
+      "fonts": {
+        "links": [
+          {
+            "href": "http://localhost:8080/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "b670b61a538d253c247deb359925da80ae747e09072ac62c001369008b1f3516"
+          },
+          {
+            "href": "http://localhost:8080/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "b670b61a538d253c247deb359925da80ae747e09072ac62c001369008b1f3516"
+          },
+          {
+            "href": "http://localhost:8080/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "b670b61a538d253c247deb359925da80ae747e09072ac62c001369008b1f3516"
+          },
+          {
+            "href": "http://localhost:8080/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "b670b61a538d253c247deb359925da80ae747e09072ac62c001369008b1f3516"
+          }
+        ],
+        "requests": [
+          {
+            "url": "http://localhost:8080/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "method": "GET"
+          },
+          {
+            "url": "http://localhost:8080/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "method": "GET"
+          },
+          {
+            "url": "http://localhost:8080/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "method": "GET"
+          },
+          {
+            "url": "http://localhost:8080/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "method": "GET"
+          }
+        ],
+        "responses": [
+          {
+            "source": "node_modules/@fontsource-variable/fredoka/files/fredoka-latin-ext-wght-normal.woff2",
+            "file": "assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "url": "http://localhost:8080/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "status": 200,
+            "bytes": 4576,
+            "sha256": "18a1723c878c0d8acc2e45a108fd62fbb976e408337804afa2908982fac13e2a",
+            "resource_type": "font"
+          },
+          {
+            "source": "node_modules/@fontsource-variable/fredoka/files/fredoka-latin-wght-normal.woff2",
+            "file": "assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "url": "http://localhost:8080/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "status": 200,
+            "bytes": 29732,
+            "sha256": "99d6c78e043710d4f83ed90716779798b7b04eb690f73e0ad0e8f32d1f0e98c2",
+            "resource_type": "font"
+          },
+          {
+            "source": "node_modules/@fontsource-variable/inter/files/inter-latin-ext-wght-normal.woff2",
+            "file": "assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "url": "http://localhost:8080/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "status": 200,
+            "bytes": 85068,
+            "sha256": "34b9c504cab7a73e37b746343a449132e56cf7b5481af2cb81dc74dcff25c956",
+            "resource_type": "font"
+          },
+          {
+            "source": "node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2",
+            "file": "assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "url": "http://localhost:8080/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "status": 200,
+            "bytes": 48256,
+            "sha256": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62",
+            "resource_type": "font"
+          }
+        ],
+        "status": "loaded",
+        "faces": [
+          {
+            "family": "Fredoka Variable",
+            "status": "unloaded",
+            "style": "normal",
+            "weight": "300 700",
+            "unicodeRange": "U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF"
+          },
+          {
+            "family": "Fredoka Variable",
+            "status": "unloaded",
+            "style": "normal",
+            "weight": "300 700",
+            "unicodeRange": "U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD"
+          },
+          {
+            "family": "Inter Variable",
+            "status": "loaded",
+            "style": "normal",
+            "weight": "100 900",
+            "unicodeRange": "U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF"
+          },
+          {
+            "family": "Inter Variable",
+            "status": "loaded",
+            "style": "normal",
+            "weight": "100 900",
+            "unicodeRange": "U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD"
+          }
+        ]
+      }
+    },
+    {
+      "page": "/lant",
+      "nonce_sha256": "271dc5eb2f9f1bcbe46ce42b2480a868eb3528c9409d0a5586280a7fd4af5f72",
+      "scripts": 1,
+      "json": 0,
+      "assetLinks": 13,
+      "module": "/assets/index-BoCfe88_.js",
+      "module_url": "http://localhost:8080/assets/index-BoCfe88_.js",
+      "css": [
+        "/assets/startup-uZN142Lb.css",
+        "/assets/CspStyle-x1XGuNl0.css",
+        "/assets/CategoryPicker-4pf-v9jW.css",
+        "/assets/GameOptions-CEWYWGsz.css",
+        "/assets/Lant-DhowxvTS.css"
+      ],
+      "css_urls": [
+        "http://localhost:8080/assets/startup-uZN142Lb.css",
+        "http://localhost:8080/assets/CspStyle-x1XGuNl0.css",
+        "http://localhost:8080/assets/CategoryPicker-4pf-v9jW.css",
+        "http://localhost:8080/assets/GameOptions-CEWYWGsz.css",
+        "http://localhost:8080/assets/Lant-DhowxvTS.css"
+      ],
+      "preloads": [
+        "/assets/rolldown-runtime-CbXtAM7H.js",
+        "/assets/startup-BP5Pvlg1.js",
+        "/assets/Lant-B2xbfLDc.js",
+        "/assets/CspStyle-B1RwaPM1.js",
+        "/assets/useSavedGameResume-CLCJZjna.js",
+        "/assets/CategoryPicker-BGUdDfG-.js",
+        "/assets/GameOptions-DNs5X9aU.js",
+        "/assets/GameSetupOptions-SfCDbO8j.js"
+      ],
+      "preload_urls": [
+        "http://localhost:8080/assets/rolldown-runtime-CbXtAM7H.js",
+        "http://localhost:8080/assets/startup-BP5Pvlg1.js",
+        "http://localhost:8080/assets/Lant-B2xbfLDc.js",
+        "http://localhost:8080/assets/CspStyle-B1RwaPM1.js",
+        "http://localhost:8080/assets/useSavedGameResume-CLCJZjna.js",
+        "http://localhost:8080/assets/CategoryPicker-BGUdDfG-.js",
+        "http://localhost:8080/assets/GameOptions-DNs5X9aU.js",
+        "http://localhost:8080/assets/GameSetupOptions-SfCDbO8j.js"
+      ],
+      "fonts": {
+        "links": [
+          {
+            "href": "http://localhost:8080/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "271dc5eb2f9f1bcbe46ce42b2480a868eb3528c9409d0a5586280a7fd4af5f72"
+          },
+          {
+            "href": "http://localhost:8080/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "271dc5eb2f9f1bcbe46ce42b2480a868eb3528c9409d0a5586280a7fd4af5f72"
+          },
+          {
+            "href": "http://localhost:8080/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "271dc5eb2f9f1bcbe46ce42b2480a868eb3528c9409d0a5586280a7fd4af5f72"
+          },
+          {
+            "href": "http://localhost:8080/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "271dc5eb2f9f1bcbe46ce42b2480a868eb3528c9409d0a5586280a7fd4af5f72"
+          }
+        ],
+        "requests": [
+          {
+            "url": "http://localhost:8080/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "method": "GET"
+          },
+          {
+            "url": "http://localhost:8080/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "method": "GET"
+          },
+          {
+            "url": "http://localhost:8080/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "method": "GET"
+          },
+          {
+            "url": "http://localhost:8080/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "method": "GET"
+          }
+        ],
+        "responses": [
+          {
+            "source": "node_modules/@fontsource-variable/fredoka/files/fredoka-latin-ext-wght-normal.woff2",
+            "file": "assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "url": "http://localhost:8080/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "status": 200,
+            "bytes": 4576,
+            "sha256": "18a1723c878c0d8acc2e45a108fd62fbb976e408337804afa2908982fac13e2a",
+            "resource_type": "font"
+          },
+          {
+            "source": "node_modules/@fontsource-variable/fredoka/files/fredoka-latin-wght-normal.woff2",
+            "file": "assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "url": "http://localhost:8080/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "status": 200,
+            "bytes": 29732,
+            "sha256": "99d6c78e043710d4f83ed90716779798b7b04eb690f73e0ad0e8f32d1f0e98c2",
+            "resource_type": "font"
+          },
+          {
+            "source": "node_modules/@fontsource-variable/inter/files/inter-latin-ext-wght-normal.woff2",
+            "file": "assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "url": "http://localhost:8080/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "status": 200,
+            "bytes": 85068,
+            "sha256": "34b9c504cab7a73e37b746343a449132e56cf7b5481af2cb81dc74dcff25c956",
+            "resource_type": "font"
+          },
+          {
+            "source": "node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2",
+            "file": "assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "url": "http://localhost:8080/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "status": 200,
+            "bytes": 48256,
+            "sha256": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62",
+            "resource_type": "font"
+          }
+        ],
+        "status": "loaded",
+        "faces": [
+          {
+            "family": "Fredoka Variable",
+            "status": "unloaded",
+            "style": "normal",
+            "weight": "300 700",
+            "unicodeRange": "U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF"
+          },
+          {
+            "family": "Fredoka Variable",
+            "status": "unloaded",
+            "style": "normal",
+            "weight": "300 700",
+            "unicodeRange": "U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD"
+          },
+          {
+            "family": "Inter Variable",
+            "status": "loaded",
+            "style": "normal",
+            "weight": "100 900",
+            "unicodeRange": "U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF"
+          },
+          {
+            "family": "Inter Variable",
+            "status": "loaded",
+            "style": "normal",
+            "weight": "100 900",
+            "unicodeRange": "U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD"
+          }
+        ]
+      }
+    },
+    {
+      "page": "/clasament",
+      "nonce_sha256": "83ea68fd2a66cfb96989966436c6456f00a407c96e5d3447e2c2cc96147a4765",
+      "scripts": 1,
+      "json": 0,
+      "assetLinks": 7,
+      "module": "/assets/index-BoCfe88_.js",
+      "module_url": "http://localhost:8080/assets/index-BoCfe88_.js",
+      "css": [
+        "/assets/startup-uZN142Lb.css",
+        "/assets/CspStyle-x1XGuNl0.css",
+        "/assets/Ranking-CveSnMPN.css"
+      ],
+      "css_urls": [
+        "http://localhost:8080/assets/startup-uZN142Lb.css",
+        "http://localhost:8080/assets/CspStyle-x1XGuNl0.css",
+        "http://localhost:8080/assets/Ranking-CveSnMPN.css"
+      ],
+      "preloads": [
+        "/assets/rolldown-runtime-CbXtAM7H.js",
+        "/assets/startup-BP5Pvlg1.js",
+        "/assets/Ranking-DyP8GGNY.js",
+        "/assets/CspStyle-B1RwaPM1.js"
+      ],
+      "preload_urls": [
+        "http://localhost:8080/assets/rolldown-runtime-CbXtAM7H.js",
+        "http://localhost:8080/assets/startup-BP5Pvlg1.js",
+        "http://localhost:8080/assets/Ranking-DyP8GGNY.js",
+        "http://localhost:8080/assets/CspStyle-B1RwaPM1.js"
+      ],
+      "fonts": {
+        "links": [
+          {
+            "href": "http://localhost:8080/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "83ea68fd2a66cfb96989966436c6456f00a407c96e5d3447e2c2cc96147a4765"
+          },
+          {
+            "href": "http://localhost:8080/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "83ea68fd2a66cfb96989966436c6456f00a407c96e5d3447e2c2cc96147a4765"
+          },
+          {
+            "href": "http://localhost:8080/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "83ea68fd2a66cfb96989966436c6456f00a407c96e5d3447e2c2cc96147a4765"
+          },
+          {
+            "href": "http://localhost:8080/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "rel": "preload",
+            "as": "font",
+            "type": "font/woff2",
+            "crossorigin": "anonymous",
+            "attributes": [
+              "as",
+              "crossorigin",
+              "href",
+              "nonce",
+              "rel",
+              "type"
+            ],
+            "nonce_sha256": "83ea68fd2a66cfb96989966436c6456f00a407c96e5d3447e2c2cc96147a4765"
+          }
+        ],
+        "requests": [
+          {
+            "url": "http://localhost:8080/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "method": "GET"
+          },
+          {
+            "url": "http://localhost:8080/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "method": "GET"
+          },
+          {
+            "url": "http://localhost:8080/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "method": "GET"
+          },
+          {
+            "url": "http://localhost:8080/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "method": "GET"
+          }
+        ],
+        "responses": [
+          {
+            "source": "node_modules/@fontsource-variable/fredoka/files/fredoka-latin-ext-wght-normal.woff2",
+            "file": "assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "url": "http://localhost:8080/assets/fredoka-latin-ext-wght-normal-CYrqKuxd.woff2",
+            "status": 200,
+            "bytes": 4576,
+            "sha256": "18a1723c878c0d8acc2e45a108fd62fbb976e408337804afa2908982fac13e2a",
+            "resource_type": "font"
+          },
+          {
+            "source": "node_modules/@fontsource-variable/fredoka/files/fredoka-latin-wght-normal.woff2",
+            "file": "assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "url": "http://localhost:8080/assets/fredoka-latin-wght-normal-DM6njrJ3.woff2",
+            "status": 200,
+            "bytes": 29732,
+            "sha256": "99d6c78e043710d4f83ed90716779798b7b04eb690f73e0ad0e8f32d1f0e98c2",
+            "resource_type": "font"
+          },
+          {
+            "source": "node_modules/@fontsource-variable/inter/files/inter-latin-ext-wght-normal.woff2",
+            "file": "assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "url": "http://localhost:8080/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+            "status": 200,
+            "bytes": 85068,
+            "sha256": "34b9c504cab7a73e37b746343a449132e56cf7b5481af2cb81dc74dcff25c956",
+            "resource_type": "font"
+          },
+          {
+            "source": "node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2",
+            "file": "assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "url": "http://localhost:8080/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+            "status": 200,
+            "bytes": 48256,
+            "sha256": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62",
+            "resource_type": "font"
+          }
+        ],
+        "status": "loaded",
+        "faces": [
+          {
+            "family": "Fredoka Variable",
+            "status": "unloaded",
+            "style": "normal",
+            "weight": "300 700",
+            "unicodeRange": "U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF"
+          },
+          {
+            "family": "Fredoka Variable",
+            "status": "unloaded",
+            "style": "normal",
+            "weight": "300 700",
+            "unicodeRange": "U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD"
+          },
+          {
+            "family": "Inter Variable",
+            "status": "loaded",
+            "style": "normal",
+            "weight": "100 900",
+            "unicodeRange": "U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF"
+          },
+          {
+            "family": "Inter Variable",
+            "status": "loaded",
+            "style": "normal",
+            "weight": "100 900",
+            "unicodeRange": "U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD"
+          }
+        ]
+      }
+    }
+  ],
+  "observedViolations": [],
+  "wrapper_invocation": "4634668e-6a86-43a1-8ab8-fc532b7181f8",
+  "runner_invocation": "bc06f8e3-4900-47d4-b0f5-e572d320911b",
+  "legacy_violations": 0,
+  "legacy_observation_sha256": "a4c7a715966ea5379824d7a6653c3aac06ea79e63f968c435fe0936d8af06ef2"
+}

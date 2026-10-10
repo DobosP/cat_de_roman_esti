@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "scope": "Actual source250 report-only full; E3 preliminary budget-only-red evidence only",
+  "source": "25065356943e2decc25768c3688435870ec82be8",
+  "tree_sha256": "e5092037e7a9f71c63ac9b5623bf366fd82bc0438a5b9a7edd51a30f3e7cec47",
+  "app_image_id": "sha256:3cbe5cd9274b02ce2ceec9c987e1182414b59e93b5ebdcfcf12d94d74c3724f4",
+  "wrapper_invocation": "4634668e-6a86-43a1-8ab8-fc532b7181f8",
+  "runner_invocation": "bc06f8e3-4900-47d4-b0f5-e572d320911b",
+  "wrapper_exit": 201,
+  "aggregate_status": "fail",
+  "result_sha256": "61beda143561edf8c4cc5e59e68eccb2c73a361c55c93f7cb4a93cd0f775a59f",
+  "capture_sha256": "918e657531c41b9f9854d257eb74d3559667bc1276aaab46358f9f185f36209b",
+  "recorded_checks": {
+    "pass": 36,
+    "fail": [
+      "cat-route-budgets",
+      "repo-full-exit"
+    ]
+  },
+  "frontend": {
+    "pass": 453,
+    "fail": 0,
+    "skip": 0,
+    "cancel": 0,
+    "todo": 0
+  },
+  "backend": {
+    "pass_actions": 1397,
+    "fail": 0,
+    "permitted_baseline_PG_skips": 17,
+    "cache_markers": 20,
+    "authcore": "28 cached PASS; no failure/skip",
+    "explicit_PG_accounts": 12,
+    "explicit_PG_httpapi": 291,
+    "explicit_PG_fail_skip_cache": 0,
+    "native_Django_parity": 1207
+  },
+  "browser": {
+    "actual_unique": 900,
+    "desktop": 450,
+    "mobile": 450,
+    "executions_each": 1,
+    "retry": 0,
+    "skip": 0,
+    "flaky": 0,
+    "errors": [],
+    "inventory_sha256": "763e1e7bfab83f4b469e55b87c1491ae2dff4debdc11412979bf3bdbe28fa278",
+    "sealed_original_each_project": {
+      "fixtures": 16,
+      "assertions": 78,
+      "exact_identities": true
+    }
+  },
+  "CSP": {
+    "stage": "report-only",
+    "current_documents": 9,
+    "current_violations": 0,
+    "legacy_violations": 0,
+    "legacy_count_authority": "Actual same-image Intrusul POST200/onecreate/visibleboard; both observed CSP channels empty, bound probe/confirm and cleanup",
+    "legacy_cleanup_verified": true
+  },
+  "baselines": {
+    "original_exact_PNGs": 9,
+    "all_outcomes": 16,
+    "pass": 16,
+    "vitals": "Actual controlled desktop improvements under owner-approved one-sided criterion; no phone or causal/optimality claim"
+  },
+  "budgets": {
+    "JS_rows_fail": 20,
+    "configured_JS_limit": 40960,
+    "active_Home_JS": 115016,
+    "frozen_Home_JS": 117271,
+    "configured_limits_unchanged": true
+  },
+  "parent_review_sha256": "efcb2352831ebf82ef1cc848a7d04df4c0f74dc1b2750eba6fb22e404cb54ac8",
+  "independent_review": {
+    "reviewer": "program_pack",
+    "verdict": "ACTUAL CLEAR for E3 budget-only-red/nonbudget-green prerequisite",
+    "verified": "All671rows/259blobs/446Gitrefs/184physical591crefs/146artifactdeclarations(145distinct;intentduplicated)/900/original16_78/backendPG1207/CSP/cleanup/9PNG/16baseline outcomes"
+  },
+  "parent_disposition": "Accept E3 preliminary prerequisite under standing owner authority; permit reviewed one-line stage-B source transition and actual next enforced full. Retain FAIL201 and all measured red budgets.",
+  "remaining": "Enforced-stage qualification is NOT RUN at this proof. No GREEN/M0/M1/KIT_BUMP/device/M2/S0b/production authority."
+}
