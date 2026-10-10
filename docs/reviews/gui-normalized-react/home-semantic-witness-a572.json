@@ -1,0 +1,489 @@
+{
+  "scope": "Actual Home semantic witness acquisition only; no baseline/Axe acceptance, performance, phase or device qualification",
+  "status": "pass",
+  "binding": {
+    "target": "shell",
+    "invocation": "20db325e-a227-4011-bb2a-61cf3a6274f6",
+    "sha": "a572ef0dcf14da81a473245ad512b17146e352f0",
+    "tree_sha256": "a3aec8a263cca44d940d35948fe917161a8cb688964fc74199bf0b14469f3c0c",
+    "manifest_sha256": "4722e3df22d6a0d66d000502d26d6d530c807160a341956cd527866d15e77fc9",
+    "versions_lock_sha256": "d15df22e48877d66f17590f6ac1f36b7d5fcfa75c3ecc055079880dc215a8834",
+    "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+    "config_sha256": "557b4a0935c07456dd43460c45e65ee3bf5f2931d97ea308138f4a8e56457b95",
+    "config_file_sha256": "f01a3234f1a933942fa865c862bc4db734288608ffabed5b884ddede6ce8903e",
+    "wrapper_descriptor_sha256": "7f2fc1a56a9cb3d97acca513095e2ec01a57910e58d46b79e2060dd837fa3bd7",
+    "dirty": false,
+    "origin": "http://localhost:8080",
+    "app_image_id": "sha256:970ab2a533cbaf3e33240782a82412cdf07bb07469a2d9add37c5e7905341ef4",
+    "app_image_authority": "Producer-bound declaration; real container/IID association is separately verified by the owning wrapper and parent host witness",
+    "playwright_version": "1.63.0",
+    "diagnostic_source_sha256": "185dfb20caa9276adf2f5263e6656e1cd5e238ad737439fe4d3f09253e78fad9",
+    "original_source": "ae9be5b5a0f891dd5d36d6bb18945e9dcd8102a5",
+    "original_games_sha256": "ce6a53bd118fae4f0cfa62eb12d6afadb31596a1e265c5122e202560ef26b0ad",
+    "original_home_sha256": "81367777460e3cbce794f26fb4bf66100c69f8f1b3a5fb204d11f2b586e7a073"
+  },
+  "inputs": [
+    {
+      "path": ".gate/shell/home-witness-source/20db325e-a227-4011-bb2a-61cf3a6274f6/home-semantic-witness.mjs",
+      "bytes": 24941,
+      "sha256": "185dfb20caa9276adf2f5263e6656e1cd5e238ad737439fe4d3f09253e78fad9",
+      "full_mode": 33188
+    },
+    {
+      "path": ".gate/wrapper-current.json",
+      "bytes": 528,
+      "sha256": "7f2fc1a56a9cb3d97acca513095e2ec01a57910e58d46b79e2060dd837fa3bd7",
+      "full_mode": 33060
+    },
+    {
+      "path": ".gate/shell/wrapper-current.json",
+      "bytes": 528,
+      "sha256": "7f2fc1a56a9cb3d97acca513095e2ec01a57910e58d46b79e2060dd837fa3bd7",
+      "full_mode": 33060
+    },
+    {
+      "path": ".gate/shell/wrapper-kit-config.json",
+      "bytes": 1125,
+      "sha256": "f01a3234f1a933942fa865c862bc4db734288608ffabed5b884ddede6ce8903e",
+      "full_mode": 33060
+    },
+    {
+      "path": "scripts/gate.sh",
+      "bytes": 65032,
+      "sha256": "f949e941ad94a227c69ad9690e4cfcf41689423e0d7cc2f3457a9420a3b39506",
+      "full_mode": 33261
+    },
+    {
+      "path": "compose.gate.yml",
+      "bytes": 4094,
+      "sha256": "3b7f63c4a716acfe8883e3dcb7dff38e6a7f5bef44e30548f1727ac25970dbbb",
+      "full_mode": 33188
+    },
+    {
+      "path": "Taskfile.yml",
+      "bytes": 63226,
+      "sha256": "3bb2b8c8ff44052d04ec255d5e94677469678a5fa3f7e0145278111eb05bdd1f",
+      "full_mode": 33204
+    },
+    {
+      "path": "Dockerfile.toolchain",
+      "bytes": 5261,
+      "sha256": "eb9ef4aec821103a6df389a0171202bc817bdbfe7556a68ed329b476394ead7d",
+      "full_mode": 33204
+    },
+    {
+      "path": "Taskfile.repo.yml",
+      "bytes": 1606,
+      "sha256": "e58cd73433bcc412f97d77bdf321d6d053802ee1871d4df6656a8032966637de",
+      "full_mode": 33204
+    },
+    {
+      "path": "scripts/gui-hook-runtime.mjs",
+      "bytes": 10301,
+      "sha256": "7234aa64c6a3a1038ef3621073fe1eb569e04128ce4a7d874404d6a6273f1d19",
+      "full_mode": 33188
+    },
+    {
+      "path": "go-backend/internal/httpapi/gui_build.go",
+      "bytes": 1166,
+      "sha256": "26c4447954a39a4521630b94a8633a2faa5c1568a52e8780eef2ac80488bc42f",
+      "full_mode": 33204
+    },
+    {
+      "path": "go-backend/internal/guibuild/identity.go",
+      "bytes": 4216,
+      "sha256": "7ae1540fa9c34515c316d11fe84ef7b40a2dbb89eea22e957e9161ab6ff4eeb4",
+      "full_mode": 33204
+    },
+    {
+      "path": ".gate/shell/home-witness-source/20db325e-a227-4011-bb2a-61cf3a6274f6/inputs/original-games.ts",
+      "bytes": 2668,
+      "sha256": "ce6a53bd118fae4f0cfa62eb12d6afadb31596a1e265c5122e202560ef26b0ad",
+      "full_mode": 33188
+    },
+    {
+      "path": ".gate/shell/home-witness-source/20db325e-a227-4011-bb2a-61cf3a6274f6/inputs/original-Home.tsx",
+      "bytes": 18465,
+      "sha256": "81367777460e3cbce794f26fb4bf66100c69f8f1b3a5fb204d11f2b586e7a073",
+      "full_mode": 33188
+    },
+    {
+      "path": "frontend/src/games.ts",
+      "bytes": 2668,
+      "sha256": "ce6a53bd118fae4f0cfa62eb12d6afadb31596a1e265c5122e202560ef26b0ad",
+      "full_mode": 33204
+    },
+    {
+      "path": "frontend/src/screens/Home.tsx",
+      "bytes": 17554,
+      "sha256": "1d081bda1472f0a5226116c98f94d1ee68a0c77ec726942670eb9ac15928c29a",
+      "full_mode": 33188
+    },
+    {
+      "path": "baselines/cat/capture.json",
+      "bytes": 197448,
+      "sha256": "ff055e404bf138ce0442381ab33eb643d431f922e4284f66a5002efcc397be68",
+      "full_mode": 33204
+    },
+    {
+      "path": "scripts/gui-baseline.mjs",
+      "bytes": 13558,
+      "sha256": "a9f87ed873dbdc53040820cbf1e11882b11dd730abb485ae20fa769a80354dff",
+      "full_mode": 33204
+    },
+    {
+      "path": "versions.lock.json",
+      "bytes": 47093,
+      "sha256": "d15df22e48877d66f17590f6ac1f36b7d5fcfa75c3ecc055079880dc215a8834",
+      "full_mode": 33204
+    },
+    {
+      "path": "go-backend/embedfs/dist/.vite/manifest.json",
+      "bytes": 7703,
+      "sha256": "4722e3df22d6a0d66d000502d26d6d530c807160a341956cd527866d15e77fc9",
+      "full_mode": 33188
+    },
+    {
+      "path": "frontend/package.json",
+      "bytes": 1442,
+      "sha256": "d2fe548af9b8c097f2e067852332bdaed0daf319826892a6cb1c4e5bf92aa121",
+      "full_mode": 33204
+    },
+    {
+      "path": "frontend/package-lock.json",
+      "bytes": 109956,
+      "sha256": "fa9800b9a39cf7d30f60bd5b85e1a2bd1edcc662e20b851f4b85b56e09749915",
+      "full_mode": 33204
+    },
+    {
+      "path": "frontend/node_modules/playwright/package.json",
+      "bytes": 1359,
+      "sha256": "8bc2ddebe8d9b051b9ecb87d62c6c63877e59d08617f32c3215681ca8bb70998",
+      "full_mode": 33188
+    },
+    {
+      "path": "frontend/node_modules/playwright/index.mjs",
+      "bytes": 704,
+      "sha256": "a0f5715ea22354f922791a9c53dc012d5d5c067ff9cc4cd35ffb7cd272071a9f",
+      "full_mode": 33188
+    }
+  ],
+  "root": {
+    "status": 200,
+    "redirected": false,
+    "url": "http://localhost:8080/",
+    "state": {
+      "origin": "http://localhost:8080",
+      "secure_context": true
+    }
+  },
+  "identity": {
+    "url": "http://localhost:8080/api/gui-build",
+    "status": 200,
+    "redirected": false,
+    "acquired_bytes": 307,
+    "acquired_sha256": "04b89339b7018a0f891dbf0ce5e6fd21dacc7b154e9d128fcb88f6477620bd69",
+    "raw_response": {
+      "path": ".gate/shell/home-semantic-witness/20db325e-a227-4011-bb2a-61cf3a6274f6/identity-response.bin",
+      "bytes": 307,
+      "sha256": "04b89339b7018a0f891dbf0ce5e6fd21dacc7b154e9d128fcb88f6477620bd69",
+      "full_mode": 33152
+    },
+    "parsed_body": {
+      "sha": "a572ef0dcf14da81a473245ad512b17146e352f0",
+      "tree_sha256": "a3aec8a263cca44d940d35948fe917161a8cb688964fc74199bf0b14469f3c0c",
+      "manifest_sha256": "4722e3df22d6a0d66d000502d26d6d530c807160a341956cd527866d15e77fc9",
+      "versions_lock_sha256": "d15df22e48877d66f17590f6ac1f36b7d5fcfa75c3ecc055079880dc215a8834"
+    }
+  },
+  "browser": {
+    "version": "153.0.8010.12",
+    "executable_path": "/ms-playwright/chromium-1243/chrome-linux64/chrome"
+  },
+  "cards": [
+    {
+      "expected": {
+        "key": "alchimie",
+        "title": "Alchimie",
+        "name": "Joacă Alchimie — Combină și descoperă",
+        "old": ".game-card.card:nth-child(1)",
+        "current": ".home-game--alchimie.game-card.card"
+      },
+      "actual": {
+        "tag": "button",
+        "type": "button",
+        "role_attribute": null,
+        "aria_label": "Joacă Alchimie — Combină și descoperă",
+        "aria_labelledby": null,
+        "aria_hidden": null,
+        "disabled": false,
+        "classes": [
+          "card",
+          "game-card",
+          "home-game--alchimie"
+        ],
+        "text": "⚗️Combină și descoperăAlchimieCombină cuvinte și crește-ți colecția.Joacă →",
+        "outer_html_without_nonce": "<button type=\"button\" aria-label=\"Joacă Alchimie — Combină și descoperă\" class=\"card game-card home-game--alchimie\" tabindex=\"0\" style=\"opacity: 0; transform: none;\"><div aria-hidden=\"true\" class=\"game-card-halo\"></div><div class=\"row spread home-game-card-heading\"><span class=\"game-card-icon\" aria-hidden=\"true\">⚗️</span><span class=\"roedu-badge roedu-badge--neutral roedu-badge--sm roedu-badge--custom\" style=\"--roedu-badge-accent: #c689ff;\">Combină și descoperă</span></div><strong class=\"game-card-title\">Alchimie</strong><p class=\"muted game-card-blurb\">Combină cuvinte și crește-ți colecția.</p><span class=\"row game-card-footer\"><span class=\"game-card-cta\">Joacă →</span></span></button>"
+      },
+      "aria_snapshot": "- button \"Joacă Alchimie — Combină și descoperă\":\n  - text: Combină și descoperă\n  - strong: Alchimie\n  - paragraph: Combină cuvinte și crește-ți colecția.\n  - text: Joacă →",
+      "aria_snapshot_sha256": "ba8823ee525080fbc46a813f34e793f1731d6714b4ec74de585730aa1df2d9f1",
+      "unique_old_current_and_order": true,
+      "exact_computed_accessible_name_resolved": true,
+      "visible": true,
+      "enabled": true
+    },
+    {
+      "expected": {
+        "key": "intrusul",
+        "title": "Intrusul",
+        "name": "Joacă Intrusul — Începe aici",
+        "old": ".game-card--featured",
+        "current": ".game-card--featured"
+      },
+      "actual": {
+        "tag": "button",
+        "type": "button",
+        "role_attribute": null,
+        "aria_label": "Joacă Intrusul — Începe aici",
+        "aria_labelledby": null,
+        "aria_hidden": null,
+        "disabled": false,
+        "classes": [
+          "card",
+          "game-card",
+          "game-card--featured",
+          "home-game--intrusul"
+        ],
+        "text": "🔎Începe aiciIntrusulTrei cuvinte au o legătură. Atinge intrusul.Joacă →🌱 Nivel de început",
+        "outer_html_without_nonce": "<button type=\"button\" aria-label=\"Joacă Intrusul — Începe aici\" class=\"card game-card game-card--featured home-game--intrusul\" tabindex=\"0\" style=\"opacity: 0; transform: none;\"><div aria-hidden=\"true\" class=\"game-card-halo\"></div><div class=\"row spread home-game-card-heading\"><span class=\"game-card-icon\" aria-hidden=\"true\">🔎</span><span class=\"roedu-badge roedu-badge--neutral roedu-badge--sm roedu-badge--custom\" style=\"--roedu-badge-accent: #ffcf5c;\">Începe aici</span></div><strong class=\"game-card-title\">Intrusul</strong><p class=\"muted game-card-blurb\">Trei cuvinte au o legătură. Atinge intrusul.</p><span class=\"row game-card-footer\"><span class=\"game-card-cta\">Joacă →</span><span class=\"faint\">🌱 Nivel de început</span></span></button>"
+      },
+      "aria_snapshot": "- button \"Joacă Intrusul — Începe aici\":\n  - text: Începe aici\n  - strong: Intrusul\n  - paragraph: Trei cuvinte au o legătură. Atinge intrusul.\n  - text: Joacă → 🌱 Nivel de început",
+      "aria_snapshot_sha256": "3a689ff2e12a1c2af6e9436694aff4dc342e79af3d1b2bdc124b5181ab50b7ca",
+      "unique_old_current_and_order": true,
+      "exact_computed_accessible_name_resolved": true,
+      "visible": true,
+      "enabled": true
+    },
+    {
+      "expected": {
+        "key": "perechi",
+        "title": "Perechi",
+        "name": "Joacă Perechi — Potrivește câte două",
+        "old": ".game-card.card:nth-child(3)",
+        "current": ".home-game--perechi.game-card.card"
+      },
+      "actual": {
+        "tag": "button",
+        "type": "button",
+        "role_attribute": null,
+        "aria_label": "Joacă Perechi — Potrivește câte două",
+        "aria_labelledby": null,
+        "aria_hidden": null,
+        "disabled": false,
+        "classes": [
+          "card",
+          "game-card",
+          "home-game--perechi"
+        ],
+        "text": "🧠Potrivește câte douăPerechiAtinge două cuvinte care merg împreună.Joacă →🌱 Nivel de început",
+        "outer_html_without_nonce": "<button type=\"button\" aria-label=\"Joacă Perechi — Potrivește câte două\" class=\"card game-card home-game--perechi\" tabindex=\"0\" style=\"opacity: 0; transform: none;\"><div aria-hidden=\"true\" class=\"game-card-halo\"></div><div class=\"row spread home-game-card-heading\"><span class=\"game-card-icon\" aria-hidden=\"true\">🧠</span><span class=\"roedu-badge roedu-badge--neutral roedu-badge--sm roedu-badge--custom\" style=\"--roedu-badge-accent: #ff78b7;\">Potrivește câte două</span></div><strong class=\"game-card-title\">Perechi</strong><p class=\"muted game-card-blurb\">Atinge două cuvinte care merg împreună.</p><span class=\"row game-card-footer\"><span class=\"game-card-cta\">Joacă →</span><span class=\"faint\">🌱 Nivel de început</span></span></button>"
+      },
+      "aria_snapshot": "- button \"Joacă Perechi — Potrivește câte două\":\n  - text: Potrivește câte două\n  - strong: Perechi\n  - paragraph: Atinge două cuvinte care merg împreună.\n  - text: Joacă → 🌱 Nivel de început",
+      "aria_snapshot_sha256": "12266b4acae9e4209b85d5a58c0e04de0834e14e4982db6c6d6f2c51588db5cd",
+      "unique_old_current_and_order": true,
+      "exact_computed_accessible_name_resolved": true,
+      "visible": true,
+      "enabled": true
+    },
+    {
+      "expected": {
+        "key": "conexiuni",
+        "title": "Conexiuni",
+        "name": "Joacă Conexiuni — Găsește grupurile",
+        "old": ".game-card.card:nth-child(4)",
+        "current": ".home-game--conexiuni.game-card.card"
+      },
+      "actual": {
+        "tag": "button",
+        "type": "button",
+        "role_attribute": null,
+        "aria_label": "Joacă Conexiuni — Găsește grupurile",
+        "aria_labelledby": null,
+        "aria_hidden": null,
+        "disabled": false,
+        "classes": [
+          "card",
+          "game-card",
+          "home-game--conexiuni"
+        ],
+        "text": "🧩Găsește grupurileConexiuniAlege câte patru cuvinte care merg împreună.Joacă →",
+        "outer_html_without_nonce": "<button type=\"button\" aria-label=\"Joacă Conexiuni — Găsește grupurile\" class=\"card game-card home-game--conexiuni\" tabindex=\"0\" style=\"opacity: 0; transform: none;\"><div aria-hidden=\"true\" class=\"game-card-halo\"></div><div class=\"row spread home-game-card-heading\"><span class=\"game-card-icon\" aria-hidden=\"true\">🧩</span><span class=\"roedu-badge roedu-badge--neutral roedu-badge--sm roedu-badge--custom\" style=\"--roedu-badge-accent: #54e39d;\">Găsește grupurile</span></div><strong class=\"game-card-title\">Conexiuni</strong><p class=\"muted game-card-blurb\">Alege câte patru cuvinte care merg împreună.</p><span class=\"row game-card-footer\"><span class=\"game-card-cta\">Joacă →</span></span></button>"
+      },
+      "aria_snapshot": "- button \"Joacă Conexiuni — Găsește grupurile\":\n  - text: Găsește grupurile\n  - strong: Conexiuni\n  - paragraph: Alege câte patru cuvinte care merg împreună.\n  - text: Joacă →",
+      "aria_snapshot_sha256": "9662fcc7364a70bf160dda3aa196b9641f8746f9b80657521328946385826ffe",
+      "unique_old_current_and_order": true,
+      "exact_computed_accessible_name_resolved": true,
+      "visible": true,
+      "enabled": true
+    },
+    {
+      "expected": {
+        "key": "contexto",
+        "title": "Cald sau Rece",
+        "name": "Joacă Cald sau Rece — Mai cald, mai rece",
+        "old": ".game-card.card:nth-child(5)",
+        "current": ".home-game--contexto.game-card.card"
+      },
+      "actual": {
+        "tag": "button",
+        "type": "button",
+        "role_attribute": null,
+        "aria_label": "Joacă Cald sau Rece — Mai cald, mai rece",
+        "aria_labelledby": null,
+        "aria_hidden": null,
+        "disabled": false,
+        "classes": [
+          "card",
+          "game-card",
+          "home-game--contexto"
+        ],
+        "text": "🔥Mai cald, mai receCald sau ReceGhicește secretul urmărind căldura.Joacă →",
+        "outer_html_without_nonce": "<button type=\"button\" aria-label=\"Joacă Cald sau Rece — Mai cald, mai rece\" class=\"card game-card home-game--contexto\" tabindex=\"0\" style=\"opacity: 0; transform: none;\"><div aria-hidden=\"true\" class=\"game-card-halo\"></div><div class=\"row spread home-game-card-heading\"><span class=\"game-card-icon\" aria-hidden=\"true\">🔥</span><span class=\"roedu-badge roedu-badge--neutral roedu-badge--sm roedu-badge--custom\" style=\"--roedu-badge-accent: #ff8a5c;\">Mai cald, mai rece</span></div><strong class=\"game-card-title\">Cald sau Rece</strong><p class=\"muted game-card-blurb\">Ghicește secretul urmărind căldura.</p><span class=\"row game-card-footer\"><span class=\"game-card-cta\">Joacă →</span></span></button>"
+      },
+      "aria_snapshot": "- button \"Joacă Cald sau Rece — Mai cald, mai rece\":\n  - text: Mai cald, mai rece\n  - strong: Cald sau Rece\n  - paragraph: Ghicește secretul urmărind căldura.\n  - text: Joacă →",
+      "aria_snapshot_sha256": "a855ad1a7b6fed470fa22515796d68ed3695af2dd85dc6649388428d7ca92ef9",
+      "unique_old_current_and_order": true,
+      "exact_computed_accessible_name_resolved": true,
+      "visible": true,
+      "enabled": true
+    },
+    {
+      "expected": {
+        "key": "lant",
+        "title": "Lanțul Cuvintelor",
+        "name": "Joacă Lanțul Cuvintelor — Leagă conceptele",
+        "old": ".game-card.card:nth-child(6)",
+        "current": ".home-game--lant.game-card.card"
+      },
+      "actual": {
+        "tag": "button",
+        "type": "button",
+        "role_attribute": null,
+        "aria_label": "Joacă Lanțul Cuvintelor — Leagă conceptele",
+        "aria_labelledby": null,
+        "aria_hidden": null,
+        "disabled": false,
+        "classes": [
+          "card",
+          "game-card",
+          "home-game--lant"
+        ],
+        "text": "🔗Leagă concepteleLanțul CuvintelorSari din cuvânt în cuvânt până la țintă.Joacă →",
+        "outer_html_without_nonce": "<button type=\"button\" aria-label=\"Joacă Lanțul Cuvintelor — Leagă conceptele\" class=\"card game-card home-game--lant\" tabindex=\"0\" style=\"opacity: 0; transform: none;\"><div aria-hidden=\"true\" class=\"game-card-halo\"></div><div class=\"row spread home-game-card-heading\"><span class=\"game-card-icon\" aria-hidden=\"true\">🔗</span><span class=\"roedu-badge roedu-badge--neutral roedu-badge--sm roedu-badge--custom\" style=\"--roedu-badge-accent: #4fd8e0;\">Leagă conceptele</span></div><strong class=\"game-card-title\">Lanțul Cuvintelor</strong><p class=\"muted game-card-blurb\">Sari din cuvânt în cuvânt până la țintă.</p><span class=\"row game-card-footer\"><span class=\"game-card-cta\">Joacă →</span></span></button>"
+      },
+      "aria_snapshot": "- button \"Joacă Lanțul Cuvintelor — Leagă conceptele\":\n  - text: Leagă conceptele\n  - strong: Lanțul Cuvintelor\n  - paragraph: Sari din cuvânt în cuvânt până la țintă.\n  - text: Joacă →",
+      "aria_snapshot_sha256": "60ce4cb8334246b79b99e713ec0def1a98270b15256180e250e79a55184bbe4c",
+      "unique_old_current_and_order": true,
+      "exact_computed_accessible_name_resolved": true,
+      "visible": true,
+      "enabled": true
+    }
+  ],
+  "footer": {
+    "old_selector": ".container > .faint",
+    "current_selector": ".home-footer",
+    "expected_text": "Toate cele șase jocuri folosesc aceeași hartă de legături culturale românești.",
+    "actual": {
+      "tag": "p",
+      "type": null,
+      "role_attribute": null,
+      "aria_label": null,
+      "aria_labelledby": null,
+      "aria_hidden": null,
+      "disabled": false,
+      "classes": [
+        "faint",
+        "home-footer"
+      ],
+      "text": "Toate cele șase jocuri folosesc aceeași hartă de legături culturale românești.",
+      "outer_html_without_nonce": "<p class=\"faint home-footer\">Toate cele șase jocuri folosesc aceeași hartă de legături culturale românești.</p>"
+    },
+    "aria_snapshot": "- paragraph: Toate cele șase jocuri folosesc aceeași hartă de legături culturale românești.",
+    "aria_snapshot_sha256": "26f5506f0d0c7c27229b64b7272480d63e8a84d6e33fffd9e348d69c0ce0ece3",
+    "unique_old_current_and_text": true
+  },
+  "failure": null,
+  "cleanup": [
+    {
+      "subject": "context",
+      "status": "closed"
+    },
+    {
+      "subject": "browser",
+      "status": "closed"
+    }
+  ],
+  "references": [
+    {
+      "path": ".gate/shell/home-semantic-witness/20db325e-a227-4011-bb2a-61cf3a6274f6/context.json",
+      "bytes": 6270,
+      "sha256": "309e9fa1a8c40b48d5e056de90ec03beb96d647764c1d1fa73622bf21aef48d8",
+      "full_mode": 33152
+    },
+    {
+      "path": ".gate/shell/home-semantic-witness/20db325e-a227-4011-bb2a-61cf3a6274f6/identity-response.bin",
+      "bytes": 307,
+      "sha256": "04b89339b7018a0f891dbf0ce5e6fd21dacc7b154e9d128fcb88f6477620bd69",
+      "full_mode": 33152
+    },
+    {
+      "path": ".gate/shell/home-semantic-witness/20db325e-a227-4011-bb2a-61cf3a6274f6/identity.json",
+      "bytes": 813,
+      "sha256": "c15f63ca3a173fd321e6342fe6dcf0f9557e95047b89c730578e04e356fd1754",
+      "full_mode": 33152
+    },
+    {
+      "path": ".gate/shell/home-semantic-witness/20db325e-a227-4011-bb2a-61cf3a6274f6/card-1.json",
+      "bytes": 1875,
+      "sha256": "070604913ff7971497f28f3c6669e6103a98f93332287b2d60ded4a7ab397954",
+      "full_mode": 33152
+    },
+    {
+      "path": ".gate/shell/home-semantic-witness/20db325e-a227-4011-bb2a-61cf3a6274f6/card-2.json",
+      "bytes": 1925,
+      "sha256": "45ea97cd5c1f2724eb89a930d76843d2e345a512ccfe4fbaf8e3e550b9ebce86",
+      "full_mode": 33152
+    },
+    {
+      "path": ".gate/shell/home-semantic-witness/20db325e-a227-4011-bb2a-61cf3a6274f6/card-3.json",
+      "bytes": 1952,
+      "sha256": "ac8ca734c8ccf8cf507f7d149f2782c131b2180f5ceb12962aeb16060467bc97",
+      "full_mode": 33152
+    },
+    {
+      "path": ".gate/shell/home-semantic-witness/20db325e-a227-4011-bb2a-61cf3a6274f6/card-4.json",
+      "bytes": 1867,
+      "sha256": "4f28b6446b01e8d764307c468028a1b0247a2123a23839957cd5b840b5cd0315",
+      "full_mode": 33152
+    },
+    {
+      "path": ".gate/shell/home-semantic-witness/20db325e-a227-4011-bb2a-61cf3a6274f6/card-5.json",
+      "bytes": 1861,
+      "sha256": "96995c204f61134ec4a7d95ae65e80e14816795bedcf49d42f68d605d8e31dd7",
+      "full_mode": 33152
+    },
+    {
+      "path": ".gate/shell/home-semantic-witness/20db325e-a227-4011-bb2a-61cf3a6274f6/card-6.json",
+      "bytes": 1905,
+      "sha256": "bd778df57b1c9bd0851cf5751335a05cd0f6581388ea218d6e7f630a5f405044",
+      "full_mode": 33152
+    },
+    {
+      "path": ".gate/shell/home-semantic-witness/20db325e-a227-4011-bb2a-61cf3a6274f6/footer.json",
+      "bytes": 937,
+      "sha256": "8457996f2a117d725c09b628a38b76343195d8672e0cfff2e035e1f860790ce8",
+      "full_mode": 33152
+    }
+  ],
+  "card_count": 6
+}
