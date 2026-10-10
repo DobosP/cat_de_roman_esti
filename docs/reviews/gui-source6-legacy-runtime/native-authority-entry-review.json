@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "utc": "2026-10-10T13:25:35.322652+00:00",
+  "scope": "Actual authority-only native APIs, independently accepted and exact two-file source application; subsequent installed reconstruction and targeted parity remain pending",
+  "source": "3871fca57f8066221b8881f384fa1a14e286603f",
+  "wrapper_invocation": "4b3a663c-226f-4470-8034-2f2a055cc3fd",
+  "capture_sha256": "106c225f3a0c9f43daf74e92a1e786a974403ed4d1aeaaef61b4391e9ba0aa05",
+  "actual_observation_sha256": "1b3658e81156922570b31c559bf5fe61c509e54b585b8dc38a67ac69cc448b94",
+  "actual_wrapper_exit": 0,
+  "commands": [
+    [
+      "build-runtime-helper",
+      0
+    ],
+    [
+      "build-native-rail",
+      0
+    ],
+    [
+      "runtime-before",
+      0
+    ],
+    [
+      "old-pin-api-control",
+      0
+    ],
+    [
+      "world-native-installed-authority-entry",
+      0
+    ],
+    [
+      "quick-native-installed-authority-entry",
+      0
+    ],
+    [
+      "extensions-native-installed-authority-entry",
+      0
+    ],
+    [
+      "new-pin-api-proposal",
+      0
+    ],
+    [
+      "runtime-after",
+      0
+    ]
+  ],
+  "capture_rows_all_bytes_fullmodes_roundtrips": 69,
+  "unique_blobs": 20,
+  "ELF_hash_only": 4,
+  "runtime_files": 139,
+  "source_before_after_rows": 230,
+  "exact18valuewholemetadata_inverse": true,
+  "digest_only_actualAPIPin": true,
+  "proposed_manifest_sha256": "4bcd419badf31db20fb9b8ab6af7ecde5c14610007e4e8e89fa30076f8548b03",
+  "proposed_pin_sha256": "2b6654f1ee7a6037778b3986dac4eb330f29ad6a750fde9ae73c47ae124a4bbc",
+  "authority_application": true,
+  "qualification": "Installed reference source only; subsequent all-check/validate/export/targetedrace1207 and currentfull/legacyimage/M0/M1/KIT_BUMP/device still pending",
+  "host_runner_live_readback": "Alreadyabsent when postexecution inspection attempted; no liveCID witness inferred",
+  "verdict": "PARENT + cross_repo_plan ACTUAL CLEAR",
+  "independent_review": "All69regularrows/fullmodes/20gzipblobs47082B/4ELFhashonly/context/9commandsreaped0/230brackets/139runtime/25archives/18uniquevaluewholeinverse/digest-onlynativepin outputs verified; source3871 untouched at review",
+  "applied_source_paths": [
+    {
+      "path": "go-backend/internal/contentrails/sources/installed-authorities.json",
+      "before_sha256": "a0f965ac89b9efb084f0f84253086b0996b96ff830c0457d20e96b5cd01d641a",
+      "after_sha256": "4bcd419badf31db20fb9b8ab6af7ecde5c14610007e4e8e89fa30076f8548b03",
+      "bytes": 6772,
+      "full_mode": 33204
+    },
+    {
+      "path": "go-backend/internal/contentrails/installed_authorities_pin.go",
+      "before_sha256": "2ed2152473835c6f4666d3f94df6560dd7a1cee3099cb4c05f33a76889561523",
+      "after_sha256": "2b6654f1ee7a6037778b3986dac4eb330f29ad6a750fde9ae73c47ae124a4bbc",
+      "bytes": 442,
+      "full_mode": 33204
+    }
+  ],
+  "capture_availability": "Compact controls/results/source brackets retained; no complete workspace/dependencies/ELF copies. Live runner was absent at attempted post-execution readback; no liveCID witness inferred.",
+  "old_metadata_pin_still_installed_at_observation": true
+}

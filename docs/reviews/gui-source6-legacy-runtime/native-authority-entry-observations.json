@@ -1,0 +1,614 @@
+{
+  "Go_pin_installed": false,
+  "KIT_BUMP_accepted": false,
+  "Source7_growth": false,
+  "aggregate_full_qualified": false,
+  "all25_archives_guarded": true,
+  "all_check_executed": false,
+  "app_image_id": "sha256:2e01e4b8cc8a93be8317f137ee961e9f98d692e18ad0d545c7d67d9d12067a14",
+  "baseline_diagnostic_included": false,
+  "catalog_writes": false,
+  "commands": [
+    {
+      "argv": [
+        "/usr/local/go/bin/go",
+        "build",
+        "-mod=readonly",
+        "-o",
+        "/work/.gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/authority-helper",
+        "/work/go-backend/.gate/source6-authority-helper/4b3a663c-226f-4470-8034-2f2a055cc3fd/main.go"
+      ],
+      "cwd": "/work/go-backend",
+      "error": null,
+      "exit_code": 0,
+      "finished": "2026-10-10T13:24:11.981891+00:00",
+      "name": "build-runtime-helper",
+      "owned_process_group_id": 11,
+      "process_id": 11,
+      "started": "2026-10-10T13:24:10.843762+00:00",
+      "stderr": {
+        "bytes": 0,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/build-runtime-helper.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 0,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/build-runtime-helper.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "termination": {
+        "cleanup_errors": [],
+        "direct_child_reaped": true,
+        "drain_timeout_seconds": 2,
+        "isolated_process_group": true,
+        "reap_timeout_seconds": 2,
+        "signal": null,
+        "signal_result": null
+      }
+    },
+    {
+      "argv": [
+        "/usr/local/go/bin/go",
+        "build",
+        "-mod=readonly",
+        "-o",
+        "/work/.gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/cat-content-rail",
+        "./cmd/cat-content-rail"
+      ],
+      "cwd": "/work/go-backend",
+      "error": null,
+      "exit_code": 0,
+      "finished": "2026-10-10T13:24:12.446247+00:00",
+      "name": "build-native-rail",
+      "owned_process_group_id": 56,
+      "process_id": 56,
+      "started": "2026-10-10T13:24:11.986329+00:00",
+      "stderr": {
+        "bytes": 0,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/build-native-rail.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 0,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/build-native-rail.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "termination": {
+        "cleanup_errors": [],
+        "direct_child_reaped": true,
+        "drain_timeout_seconds": 2,
+        "isolated_process_group": true,
+        "reap_timeout_seconds": 2,
+        "signal": null,
+        "signal_result": null
+      }
+    },
+    {
+      "argv": [
+        "/work/.gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/authority-helper",
+        "runtime",
+        "/work"
+      ],
+      "cwd": "/work",
+      "error": null,
+      "exit_code": 0,
+      "finished": "2026-10-10T13:24:12.475488+00:00",
+      "name": "runtime-before",
+      "owned_process_group_id": 82,
+      "process_id": 82,
+      "started": "2026-10-10T13:24:12.450765+00:00",
+      "stderr": {
+        "bytes": 0,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/runtime-before.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 20309,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/runtime-before.stdout",
+        "sha256": "ac19d52cca3952f3c6eac6e370cc373386969042e7fd1f9dd6362bfed4b69528"
+      },
+      "termination": {
+        "cleanup_errors": [],
+        "direct_child_reaped": true,
+        "drain_timeout_seconds": 2,
+        "isolated_process_group": true,
+        "reap_timeout_seconds": 2,
+        "signal": null,
+        "signal_result": null
+      }
+    },
+    {
+      "argv": [
+        "/work/.gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/authority-helper",
+        "pin",
+        "a0f965ac89b9efb084f0f84253086b0996b96ff830c0457d20e96b5cd01d641a"
+      ],
+      "cwd": "/work",
+      "error": null,
+      "exit_code": 0,
+      "finished": "2026-10-10T13:24:12.563077+00:00",
+      "name": "old-pin-api-control",
+      "owned_process_group_id": 88,
+      "process_id": 88,
+      "started": "2026-10-10T13:24:12.555652+00:00",
+      "stderr": {
+        "bytes": 0,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/old-pin-api-control.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 442,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/old-pin-api-control.stdout",
+        "sha256": "2ed2152473835c6f4666d3f94df6560dd7a1cee3099cb4c05f33a76889561523"
+      },
+      "termination": {
+        "cleanup_errors": [],
+        "direct_child_reaped": true,
+        "drain_timeout_seconds": 2,
+        "isolated_process_group": true,
+        "reap_timeout_seconds": 2,
+        "signal": null,
+        "signal_result": null
+      }
+    },
+    {
+      "argv": [
+        "/work/.gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/cat-content-rail",
+        "world",
+        "--root",
+        "/work",
+        "--source",
+        "/work/go-backend/internal/contentrails/sources/authored-v6.json",
+        "--candidate",
+        "/work/docs/reviews/v1-6-everyday-inputs/native/world/candidate.json",
+        "--factual-review",
+        "/work/docs/reviews/gui-source6-runtime-requalification/native/world/factual-review.json",
+        "--quality-review",
+        "/work/docs/reviews/gui-source6-runtime-requalification/native/world/quality-review.json",
+        "--proposal",
+        "/work/docs/reviews/gui-source6-runtime-requalification/native/world/proposal.json",
+        "--live-audit",
+        "/work/docs/reviews/gui-source6-legacy-runtime/native/world/installed-audit.json",
+        "--final-factual-review",
+        "/work/docs/reviews/gui-source6-legacy-runtime/native/world/installed-final-factual-review.json",
+        "--final-quality-review",
+        "/work/docs/reviews/gui-source6-legacy-runtime/native/world/installed-final-quality-review.json",
+        "--expected-sha256",
+        "572882a77dbdd8bac63ca69c64c6990a1601a49551693cf1b1b5fcb7a81861de",
+        "--installed-authority-out",
+        "/work/.gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/world-native-installed-authority-entry.json"
+      ],
+      "cwd": "/work",
+      "error": null,
+      "exit_code": 0,
+      "finished": "2026-10-10T13:24:13.554583+00:00",
+      "name": "world-native-installed-authority-entry",
+      "owned_process_group_id": 93,
+      "process_id": 93,
+      "started": "2026-10-10T13:24:12.567259+00:00",
+      "stderr": {
+        "bytes": 0,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/world-native-installed-authority-entry.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 263,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/world-native-installed-authority-entry.stdout",
+        "sha256": "ea823e0e74b3f1ed5ae2797815662055e8a5e5b51ae4e90ce8815c6665ee7581"
+      },
+      "termination": {
+        "cleanup_errors": [],
+        "direct_child_reaped": true,
+        "drain_timeout_seconds": 2,
+        "isolated_process_group": true,
+        "reap_timeout_seconds": 2,
+        "signal": null,
+        "signal_result": null
+      }
+    },
+    {
+      "argv": [
+        "/work/.gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/cat-content-rail",
+        "quick",
+        "--root",
+        "/work",
+        "--source",
+        "/work/go-backend/internal/contentrails/sources/authored-v6.json",
+        "--candidate",
+        "/work/docs/reviews/v1-6-everyday-inputs/native/quick/candidate.json",
+        "--factual-review",
+        "/work/docs/reviews/gui-source6-runtime-requalification/native/quick/factual-review.json",
+        "--quality-review",
+        "/work/docs/reviews/gui-source6-runtime-requalification/native/quick/quality-review.json",
+        "--proposal",
+        "/work/docs/reviews/gui-source6-runtime-requalification/native/quick/proposal.json",
+        "--live-audit",
+        "/work/docs/reviews/gui-source6-legacy-runtime/native/quick/installed-audit.json",
+        "--final-factual-review",
+        "/work/docs/reviews/gui-source6-legacy-runtime/native/quick/installed-final-factual-review.json",
+        "--final-quality-review",
+        "/work/docs/reviews/gui-source6-legacy-runtime/native/quick/installed-final-quality-review.json",
+        "--expected-sha256",
+        "234305a844033cff0914a5213f6c0b8dcd1b21918d57cc851780259c9e87ee59",
+        "--installed-authority-out",
+        "/work/.gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/quick-native-installed-authority-entry.json"
+      ],
+      "cwd": "/work",
+      "error": null,
+      "exit_code": 0,
+      "finished": "2026-10-10T13:24:14.543708+00:00",
+      "name": "quick-native-installed-authority-entry",
+      "owned_process_group_id": 99,
+      "process_id": 99,
+      "started": "2026-10-10T13:24:13.559219+00:00",
+      "stderr": {
+        "bytes": 0,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/quick-native-installed-authority-entry.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 263,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/quick-native-installed-authority-entry.stdout",
+        "sha256": "4d44cf9c83dfa2f2abdff3d140113d0c55dcb9337d32168c97d32970d58f1b7d"
+      },
+      "termination": {
+        "cleanup_errors": [],
+        "direct_child_reaped": true,
+        "drain_timeout_seconds": 2,
+        "isolated_process_group": true,
+        "reap_timeout_seconds": 2,
+        "signal": null,
+        "signal_result": null
+      }
+    },
+    {
+      "argv": [
+        "/work/.gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/cat-content-rail",
+        "extensions",
+        "--root",
+        "/work",
+        "--source",
+        "/work/go-backend/internal/contentrails/sources/authored-v6.json",
+        "--candidate",
+        "/work/docs/reviews/v1-6-everyday-inputs/native/extensions/candidate.json",
+        "--factual-review",
+        "/work/docs/reviews/gui-source6-runtime-requalification/native/extensions/factual-review.json",
+        "--quality-review",
+        "/work/docs/reviews/gui-source6-runtime-requalification/native/extensions/quality-review.json",
+        "--proposal",
+        "/work/docs/reviews/gui-source6-runtime-requalification/native/extensions/proposal.json",
+        "--live-audit",
+        "/work/docs/reviews/gui-source6-legacy-runtime/native/extensions/installed-audit.json",
+        "--final-factual-review",
+        "/work/docs/reviews/gui-source6-legacy-runtime/native/extensions/installed-final-factual-review.json",
+        "--final-quality-review",
+        "/work/docs/reviews/gui-source6-legacy-runtime/native/extensions/installed-final-quality-review.json",
+        "--expected-sha256",
+        "eeb7eede9009f09a7d9df012c7addb9f26b1b484040eb31c44ba2e6f7f35cee8",
+        "--installed-authority-out",
+        "/work/.gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/extensions-native-installed-authority-entry.json"
+      ],
+      "cwd": "/work",
+      "error": null,
+      "exit_code": 0,
+      "finished": "2026-10-10T13:24:20.550101+00:00",
+      "name": "extensions-native-installed-authority-entry",
+      "owned_process_group_id": 105,
+      "process_id": 105,
+      "started": "2026-10-10T13:24:14.548835+00:00",
+      "stderr": {
+        "bytes": 0,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/extensions-native-installed-authority-entry.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 268,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/extensions-native-installed-authority-entry.stdout",
+        "sha256": "149e7af5ce020c7cdd01d1cd6ccec48d8501031412d7944d3eb587912858c99d"
+      },
+      "termination": {
+        "cleanup_errors": [],
+        "direct_child_reaped": true,
+        "drain_timeout_seconds": 2,
+        "isolated_process_group": true,
+        "reap_timeout_seconds": 2,
+        "signal": null,
+        "signal_result": null
+      }
+    },
+    {
+      "argv": [
+        "/work/.gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/authority-helper",
+        "pin",
+        "4bcd419badf31db20fb9b8ab6af7ecde5c14610007e4e8e89fa30076f8548b03"
+      ],
+      "cwd": "/work",
+      "error": null,
+      "exit_code": 0,
+      "finished": "2026-10-10T13:24:20.567570+00:00",
+      "name": "new-pin-api-proposal",
+      "owned_process_group_id": 111,
+      "process_id": 111,
+      "started": "2026-10-10T13:24:20.559271+00:00",
+      "stderr": {
+        "bytes": 0,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/new-pin-api-proposal.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 442,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/new-pin-api-proposal.stdout",
+        "sha256": "2b6654f1ee7a6037778b3986dac4eb330f29ad6a750fde9ae73c47ae124a4bbc"
+      },
+      "termination": {
+        "cleanup_errors": [],
+        "direct_child_reaped": true,
+        "drain_timeout_seconds": 2,
+        "isolated_process_group": true,
+        "reap_timeout_seconds": 2,
+        "signal": null,
+        "signal_result": null
+      }
+    },
+    {
+      "argv": [
+        "/work/.gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/authority-helper",
+        "runtime",
+        "/work"
+      ],
+      "cwd": "/work",
+      "error": null,
+      "exit_code": 0,
+      "finished": "2026-10-10T13:24:20.606487+00:00",
+      "name": "runtime-after",
+      "owned_process_group_id": 116,
+      "process_id": 116,
+      "started": "2026-10-10T13:24:20.575030+00:00",
+      "stderr": {
+        "bytes": 0,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/runtime-after.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 20309,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/runtime-after.stdout",
+        "sha256": "ac19d52cca3952f3c6eac6e370cc373386969042e7fd1f9dd6362bfed4b69528"
+      },
+      "termination": {
+        "cleanup_errors": [],
+        "direct_child_reaped": true,
+        "drain_timeout_seconds": 2,
+        "isolated_process_group": true,
+        "reap_timeout_seconds": 2,
+        "signal": null,
+        "signal_result": null
+      }
+    }
+  ],
+  "errors": [],
+  "helper_source": {
+    "bytes": 689,
+    "full_mode": 33152,
+    "path": "go-backend/.gate/source6-authority-helper/4b3a663c-226f-4470-8034-2f2a055cc3fd/main.go",
+    "sha256": "c2313bef67173fda93a9b998d021107ef80cab0f43bc9082cf3d4eaaa4de0748"
+  },
+  "installed_authority_updated": false,
+  "literal_metadata_value_replacements": 18,
+  "native_entries": {
+    "extensions": {
+      "all_other_fields_equal_old": true,
+      "entry": {
+        "artifact_sha256": "eeb7eede9009f09a7d9df012c7addb9f26b1b484040eb31c44ba2e6f7f35cee8",
+        "audit": {
+          "path": "docs/reviews/gui-source6-legacy-runtime/native/extensions/installed-audit.json",
+          "sha256": "6290375c670b5ea8cc97ba1c95145bdedb6ebd5894f6ce809d4edbdb1fc99218"
+        },
+        "candidate": {
+          "path": "docs/reviews/v1-6-everyday-inputs/native/extensions/candidate.json",
+          "sha256": "09cb6222c91015c499173f58f95d6040c7495846fca998d594778342b14ce458"
+        },
+        "factual_review": {
+          "path": "docs/reviews/gui-source6-runtime-requalification/native/extensions/factual-review.json",
+          "sha256": "b627aaac295ad1300cedf694506af7c6daebcf4e906630764d567be2f853ad6e"
+        },
+        "final_factual_review": {
+          "path": "docs/reviews/gui-source6-legacy-runtime/native/extensions/installed-final-factual-review.json",
+          "sha256": "096237c51a0e4432a4115303441d34d3e412f89c9bc2053039a11b7001952554"
+        },
+        "final_quality_review": {
+          "path": "docs/reviews/gui-source6-legacy-runtime/native/extensions/installed-final-quality-review.json",
+          "sha256": "350d5f31789386b4fd29cf21d98c54628e75e2217ae7fd3cc97a9665779a028e"
+        },
+        "proposal": {
+          "path": "docs/reviews/gui-source6-runtime-requalification/native/extensions/proposal.json",
+          "sha256": "eeb7eede9009f09a7d9df012c7addb9f26b1b484040eb31c44ba2e6f7f35cee8"
+        },
+        "quality_review": {
+          "path": "docs/reviews/gui-source6-runtime-requalification/native/extensions/quality-review.json",
+          "sha256": "3a693e3d31ff91a43b7ec3166c03ffd5dcfb75bf79e2d67ce9905535d5e7a161"
+        },
+        "source_sha256": "a086dc2accd6eb97ab7040f6a0e609cc40209fa6a441ee9d9e3f3f727d76e611"
+      },
+      "native_output": {
+        "bytes": 1621,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/extensions-native-installed-authority-entry.json",
+        "sha256": "a15e2df72bea2a7969e6543a35572d0d0cf635d68a1d6b4fc33fac96050fd954"
+      }
+    },
+    "quick": {
+      "all_other_fields_equal_old": true,
+      "entry": {
+        "artifact_sha256": "234305a844033cff0914a5213f6c0b8dcd1b21918d57cc851780259c9e87ee59",
+        "audit": {
+          "path": "docs/reviews/gui-source6-legacy-runtime/native/quick/installed-audit.json",
+          "sha256": "3f2c29238b57b4f1bf984a00558dca5497db16f75152f958a7953cbda2275a03"
+        },
+        "candidate": {
+          "path": "docs/reviews/v1-6-everyday-inputs/native/quick/candidate.json",
+          "sha256": "1950ad42444168c5fb3c1350dc53edde74198e3d9fc16db831fda2ebf17a3c6a"
+        },
+        "factual_review": {
+          "path": "docs/reviews/gui-source6-runtime-requalification/native/quick/factual-review.json",
+          "sha256": "7eaa1f144b3dc423c04f7f8ba3172dca6c0bcbaf9cf48a20c348433a54bbabb5"
+        },
+        "final_factual_review": {
+          "path": "docs/reviews/gui-source6-legacy-runtime/native/quick/installed-final-factual-review.json",
+          "sha256": "968c5438c1ff5597273b4eec4e3c65be453a2f6c262198135805d75dacf519ef"
+        },
+        "final_quality_review": {
+          "path": "docs/reviews/gui-source6-legacy-runtime/native/quick/installed-final-quality-review.json",
+          "sha256": "ef86b23262550e9ebce01a1e8063a602d130a6c122ec1835a4d8f02b278dff89"
+        },
+        "proposal": {
+          "path": "docs/reviews/gui-source6-runtime-requalification/native/quick/proposal.json",
+          "sha256": "234305a844033cff0914a5213f6c0b8dcd1b21918d57cc851780259c9e87ee59"
+        },
+        "quality_review": {
+          "path": "docs/reviews/gui-source6-runtime-requalification/native/quick/quality-review.json",
+          "sha256": "74023a61dc782f50f587e943a3180611db71e70a0cb7eb6b29e426049375cba7"
+        },
+        "source_sha256": "a086dc2accd6eb97ab7040f6a0e609cc40209fa6a441ee9d9e3f3f727d76e611"
+      },
+      "native_output": {
+        "bytes": 1586,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/quick-native-installed-authority-entry.json",
+        "sha256": "025f7271c84166366b867e009665005c8e25f22c00f287ae43be1fb60f4e74e9"
+      }
+    },
+    "world": {
+      "all_other_fields_equal_old": true,
+      "entry": {
+        "artifact_sha256": "572882a77dbdd8bac63ca69c64c6990a1601a49551693cf1b1b5fcb7a81861de",
+        "audit": {
+          "path": "docs/reviews/gui-source6-legacy-runtime/native/world/installed-audit.json",
+          "sha256": "729d6b76374cf68f9e810b4bd5b6bb894ee040a005ddc63993af6fd0efde6b22"
+        },
+        "candidate": {
+          "path": "docs/reviews/v1-6-everyday-inputs/native/world/candidate.json",
+          "sha256": "3247cd3c5bd567a8b0834041242524ba608a74131018b3d2184adb280b9a6e04"
+        },
+        "factual_review": {
+          "path": "docs/reviews/gui-source6-runtime-requalification/native/world/factual-review.json",
+          "sha256": "de2e87ea479c072c0336500cfab42dba3b21667d8e7f96c4f1dc0ea672c9a39a"
+        },
+        "final_factual_review": {
+          "path": "docs/reviews/gui-source6-legacy-runtime/native/world/installed-final-factual-review.json",
+          "sha256": "8292335dbf7c97603bc1989a1c96a36e05c76e1804bed344e622ad238ec4feed"
+        },
+        "final_quality_review": {
+          "path": "docs/reviews/gui-source6-legacy-runtime/native/world/installed-final-quality-review.json",
+          "sha256": "36149a8c43fd027d0b442f165265f1dd2b4aefae38e485777d90462770f54bea"
+        },
+        "proposal": {
+          "path": "docs/reviews/gui-source6-runtime-requalification/native/world/proposal.json",
+          "sha256": "572882a77dbdd8bac63ca69c64c6990a1601a49551693cf1b1b5fcb7a81861de"
+        },
+        "quality_review": {
+          "path": "docs/reviews/gui-source6-runtime-requalification/native/world/quality-review.json",
+          "sha256": "f9f4ce2893fe1926b948a1bf75e3212ea87bdbb7a282e791ccece39cc004bc76"
+        },
+        "source_sha256": "a086dc2accd6eb97ab7040f6a0e609cc40209fa6a441ee9d9e3f3f727d76e611"
+      },
+      "native_output": {
+        "bytes": 1586,
+        "full_mode": 33152,
+        "path": ".gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/world-native-installed-authority-entry.json",
+        "sha256": "ef3ca47ee935fcfc17cd3f2675a2f7f610fbaa2b4c6701197f7d188548af5a05"
+      }
+    }
+  },
+  "new_pin_digest_only_api_control_equal": true,
+  "old_metadata_sha256": "a0f965ac89b9efb084f0f84253086b0996b96ff830c0457d20e96b5cd01d641a",
+  "old_pin_entire_api_control_equal": true,
+  "old_pin_sha256": "2ed2152473835c6f4666d3f94df6560dd7a1cee3099cb4c05f33a76889561523",
+  "proposal_references": [
+    {
+      "bytes": 5112,
+      "full_mode": 33152,
+      "path": ".gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/metadata-replacement-ledger.json",
+      "sha256": "078ab1b0bcb1770be66e2d79c7571af4538845971295983f7164da7afe7fe89d"
+    },
+    {
+      "bytes": 6772,
+      "full_mode": 33152,
+      "path": ".gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/proposed-installed-authorities.json",
+      "sha256": "4bcd419badf31db20fb9b8ab6af7ecde5c14610007e4e8e89fa30076f8548b03"
+    },
+    {
+      "bytes": 442,
+      "full_mode": 33152,
+      "path": ".gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/proposed-installed-authorities-pin.go",
+      "sha256": "2b6654f1ee7a6037778b3986dac4eb330f29ad6a750fde9ae73c47ae124a4bbc"
+    }
+  ],
+  "proposed_metadata_sha256": "4bcd419badf31db20fb9b8ab6af7ecde5c14610007e4e8e89fa30076f8548b03",
+  "proposed_pin_sha256": "2b6654f1ee7a6037778b3986dac4eb330f29ad6a750fde9ae73c47ae124a4bbc",
+  "raw_review_or_final_review_writes": false,
+  "retained_native_outputs": [
+    {
+      "bytes": 10274576,
+      "full_mode": 33261,
+      "path": ".gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/authority-helper",
+      "sha256": "f875de0588f4c2129b5c312b49b63a1f9e9e0e048668a794b0d6a599578b3342",
+      "subject": "helper"
+    },
+    {
+      "bytes": 36052020,
+      "full_mode": 33261,
+      "path": ".gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/cat-content-rail",
+      "sha256": "25f5077c3ada7361b82233795a466414df08746c580967611c97ecae01ea6bce",
+      "subject": "rail"
+    },
+    {
+      "bytes": 1586,
+      "full_mode": 33152,
+      "path": ".gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/world-native-installed-authority-entry.json",
+      "sha256": "ef3ca47ee935fcfc17cd3f2675a2f7f610fbaa2b4c6701197f7d188548af5a05",
+      "subject": "world-native-entry"
+    },
+    {
+      "bytes": 1586,
+      "full_mode": 33152,
+      "path": ".gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/quick-native-installed-authority-entry.json",
+      "sha256": "025f7271c84166366b867e009665005c8e25f22c00f287ae43be1fb60f4e74e9",
+      "subject": "quick-native-entry"
+    },
+    {
+      "bytes": 1621,
+      "full_mode": 33152,
+      "path": ".gate/shell/source6-authority-proposal/4b3a663c-226f-4470-8034-2f2a055cc3fd/extensions-native-installed-authority-entry.json",
+      "sha256": "a15e2df72bea2a7969e6543a35572d0d0cf635d68a1d6b4fc33fac96050fd954",
+      "subject": "extensions-native-entry"
+    }
+  ],
+  "runtime_files": 139,
+  "schema": 1,
+  "scope": "Actual native Source6 installed-entry API and metadata/pin proposals only; no source/authority installation or aggregate qualification",
+  "source": "3871fca57f8066221b8881f384fa1a14e286603f",
+  "source_before_after_equal": true,
+  "source_before_after_rows": 230,
+  "status": "pass",
+  "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+  "tree_sha256": "c549617fe5b9e916af850c72ae763cd1f2d1e857d9f3bf46d37a7deb38c0a3d1",
+  "wrapper_invocation": "4b3a663c-226f-4470-8034-2f2a055cc3fd"
+}
