@@ -5,6 +5,7 @@ export default defineConfig({
   ...original,
   outputDir: "../.gate/full/browser-output",
   reporter: "json",
+  workers: process.env.GATE_APP_URL ? 2 : original.workers,
   use: { ...original.use, ...(process.env.GATE_APP_URL ? { baseURL: process.env.GATE_APP_URL } : {}) },
   webServer: process.env.GATE_APP_URL ? undefined : original.webServer,
 });
