@@ -320,6 +320,134 @@ switch (target) {
     });
     managedIdentity("cat-build-gui-identity", ["cat-build-frontend-build", "cat-build-emitted-inventory", "cat-build-assets"]);
     if (passed("cat-build-gui-identity")) binaries("cat-build");
+    // These focused checks need the genuine assets already synced by build.
+    const servingPaths = [
+      "go-backend/internal/httpapi/managed_spa.go",
+      "go-backend/internal/httpapi/managed_nonce.go",
+      "go-backend/internal/httpapi/managed_legacy.go",
+      "go-backend/internal/httpapi/managed_spa_test.go",
+      "go-backend/internal/httpapi/managed_nonce_test.go",
+      "go-backend/internal/httpapi/managed_legacy_test.go",
+    ];
+    const servingPrerequisites = ["cat-build-fresh-build-output", "cat-build-frontend-build", "cat-build-emitted-inventory",
+      "cat-build-assets", "cat-build-gui-identity", "cat-build-build-cat-server", "cat-build-build-cat-browser-plan"];
+    const servingSnapshot = () => servingPaths.map((relative) => {
+      const file = path.join(root, relative), before = fs.lstatSync(file);
+      if (!before.isFile() || before.isSymbolicLink()) throw new Error("Regular managed serving source required");
+      const fd = fs.openSync(file, fs.constants.O_RDONLY | fs.constants.O_NOFOLLOW);
+      try {
+        const opened = fs.fstatSync(fd), bytes = fs.readFileSync(fd), after = fs.fstatSync(fd), leaf = fs.lstatSync(file);
+        if (!opened.isFile() || !after.isFile() || !leaf.isFile() || leaf.isSymbolicLink() || bytes.length !== after.size
+          || ["dev", "ino", "size", "mode", "mtimeMs", "ctimeMs"].some((key) => before[key] !== opened[key]
+            || opened[key] !== after[key] || after[key] !== leaf[key])) {
+          throw new Error("Managed serving source changed during acquisition");
+        }
+        return { path: relative, bytes: bytes.length, sha256: hash(bytes), full_mode: after.mode };
+      } finally { fs.closeSync(fd); }
+    });
+    const servingRun = (check, executable, args, cwd = root, env = {}) => {
+      const start = hook.actions.length;
+      let failure = null;
+      try { hook.run(executable, args, cwd, env); }
+      catch (error) { failure = error; }
+      const commands = hook.actions.slice(start).filter((action) => action.kind === "command");
+      if (commands.length !== 1 || commands[0].check !== check) throw new Error("Exactly one retained serving command required");
+      const action = commands[0];
+      const readLog = (stream) => {
+        const relative = action[`${stream}_log`];
+        if (typeof relative !== "string" || !relative.startsWith(`${directory}/logs/`)) throw new Error("Actual SDK serving log required");
+        const file = path.join(root, relative), info = fs.lstatSync(file);
+        if (!info.isFile() || info.isSymbolicLink()) throw new Error("Regular SDK serving log required");
+        const bytes = fs.readFileSync(file);
+        if (hash(bytes) !== action[`${stream}_sha256`]) throw new Error("SDK serving log hash differs");
+        return bytes.toString("utf8");
+      };
+      return { action, stdout: readLog("stdout"), stderr: readLog("stderr"), failure };
+    };
+    const servingReceipt = (name, value) => {
+      const relative = `${directory}/managed-serving/${invocation}/${name}.json`, file = path.join(root, relative);
+      fs.mkdirSync(path.dirname(file), { recursive: true, mode: 0o700 });
+      fs.writeFileSync(file, JSON.stringify({ schema: 1, target, invocation, sha: hook.context.sha,
+        tree_sha256: hook.context.tree_sha256, toolchain_digest: hook.context.toolchain_digest,
+        stage: hook.context.stage, ...value }, null, 2) + "\n", { flag: "wx", mode: 0o600 });
+      hook.artifact(relative);
+    };
+    hook.check("cat-build-managed-serving-format", () => {
+      hook.assert("Managed serving format requires fresh assets, identity and both binaries", () => servingPrerequisites.every(passed));
+      const before = servingSnapshot();
+      const result = servingRun("cat-build-managed-serving-format", "gofmt", ["-d", ...servingPaths]);
+      const after = servingSnapshot(), unchanged = JSON.stringify(before) === JSON.stringify(after);
+      const valid = !result.failure && result.action.exit_code === 0 && result.stdout === "" && result.stderr === "" && unchanged;
+      servingReceipt("format", { check: "cat-build-managed-serving-format", status: valid ? "pass" : "fail",
+        command: result.action, argv: ["gofmt", "-d", ...servingPaths], read_only: true,
+        stdout_bytes: Buffer.byteLength(result.stdout), stderr_bytes: Buffer.byteLength(result.stderr),
+        source_before: before, source_after: after, source_before_after_equal: unchanged,
+        command_error: result.failure ? String(result.failure.message ?? result.failure) : null });
+      if (result.failure) throw result.failure;
+      hook.assert("Actual serving format has no diff/errors and preserves source bytes/modes", () => valid);
+    });
+    hook.check("cat-build-managed-serving-race", () => {
+      hook.assert("Managed serving race requires fresh assets, identity and both binaries", () => servingPrerequisites.every(passed));
+      const expectedRoots = [
+        "TestManagedSPACompiledCurrentAndFrozenLegacy",
+        "TestManagedSPADeepLinksAndAPIRouting",
+        "TestManagedSPASDKAssetsAndMethodContracts",
+        "TestManagedSPARefusesPrivateAndMissingAssets",
+        "TestManagedSPARejectsMalformedOrUnconfinedInput",
+        "TestManagedSPAUnbuiltScaffoldDoesNotAdmitUI",
+        "TestManagedSPANonHexViteCacheUsesActualSDKStatus",
+        "TestManagedNonceShellBytePreservationAndSDKContext",
+        "TestManagedNonceShellRefusals",
+        "TestManagedNonceResponseFreshnessAndStages",
+        "TestManagedNonceLegacyAndInvalidFlag",
+        "TestManagedCSPReportReceiverBoundsWithoutPersistence",
+        "TestManagedNonceCanceledContextAndRequestRefuseHTML",
+        "TestManagedNonceRenderAndSDKRefusalsAreNoStore",
+        "TestManagedLegacyShellUsesManifestAndPreservesFrozenFixture",
+        "TestManagedLegacyResponseFreshnessStagesAndHead",
+        "TestManagedLegacyMalformedInputRefusesRawHTML",
+        "TestManagedLegacyRenderRequiresNonceAndRefusesCanceledRequest",
+        "TestManagedLegacySelectionCannotBeChangedByRequestOrLaterEnvironment",
+      ];
+      const selected = "^(" + expectedRoots.join("|") + ")$";
+      const args = ["test", "-mod=readonly", "-race", "-count=1", "-json", "-timeout=15m", "-run", selected, "./internal/httpapi"];
+      const before = servingSnapshot();
+      const result = servingRun("cat-build-managed-serving-race", "go", args, path.join(root, "go-backend"), { CGO_ENABLED: "1" });
+      const after = servingSnapshot(), unchanged = JSON.stringify(before) === JSON.stringify(after);
+      let events = [], parseError = null;
+      try { events = result.stdout.split("\n").filter((line) => line.trim()).map((line) => JSON.parse(line)); }
+      catch (error) { parseError = String(error.message ?? error); }
+      const expectedPackage = "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpapi";
+      const actions = new Set(["start", "run", "pause", "cont", "pass", "output", "skip", "fail"]);
+      const malformed = events.filter((event) => !event || typeof event !== "object" || Array.isArray(event)
+        || !actions.has(event.Action) || event.Package !== expectedPackage
+        || (event.Test !== undefined && (typeof event.Test !== "string" || !event.Test))
+        || (event.Action === "run" && typeof event.Test !== "string")
+        || (event.Output !== undefined && typeof event.Output !== "string"));
+      const usable = events.filter((event) => event && typeof event === "object" && !Array.isArray(event));
+      const runs = usable.filter((event) => event.Action === "run").map((event) => event.Test);
+      const passes = usable.filter((event) => event.Action === "pass" && event.Test).map((event) => event.Test);
+      const roots = runs.filter((name) => typeof name === "string" && !name.includes("/"));
+      const packagePasses = usable.filter((event) => event.Action === "pass" && event.Test === undefined);
+      const failures = usable.filter((event) => event.Action === "fail"), skips = usable.filter((event) => event.Action === "skip");
+      const cached = result.stdout.includes("(cached)") || result.stderr.includes("(cached)");
+      const exactRoots = roots.length === 19 && new Set(roots).size === 19 && expectedRoots.every((name) => roots.includes(name));
+      const complete = runs.length === passes.length && new Set(runs).size === runs.length && new Set(passes).size === passes.length
+        && runs.every((name) => typeof name === "string" && expectedRoots.includes(name.split("/")[0]) && passes.includes(name));
+      const valid = !result.failure && result.action.exit_code === 0 && !parseError && malformed.length === 0 && exactRoots && complete
+        && packagePasses.length === 1 && packagePasses[0].Package === expectedPackage && failures.length === 0 && skips.length === 0 && !cached && unchanged;
+      servingReceipt("native", { check: "cat-build-managed-serving-race", status: valid ? "pass" : "fail",
+        command: result.action, argv: ["go", ...args], race: true, count: 1, json: true, expected_top_level_tests: expectedRoots,
+        observed_run_tests: runs, observed_pass_tests: passes, root_run_actions: roots.length,
+        run_actions: runs.length, pass_actions: passes.length, package_pass_actions: packagePasses.length,
+        fail_actions: failures.length, skip_actions: skips.length, cache_marker: cached,
+        malformed_or_unexpected_records: malformed, parse_error: parseError,
+        source_before: before, source_after: after, source_before_after_equal: unchanged,
+        dependency_build_cache_not_inferred: true, command_error: result.failure ? String(result.failure.message ?? result.failure) : null,
+        scope: "Focused native serving regressions after actual build/sync/identity; no whole-suite or legacy image journey claim" });
+      if (result.failure) throw result.failure;
+      hook.assert("Exact nineteen serving roots and every observed child pass once without skip/fail/cache", () => valid);
+    });
     if (fs.existsSync(path.join(root, `${directory}/managed-assets`))) retainArtifacts(`${directory}/managed-assets`);
     break;
   }

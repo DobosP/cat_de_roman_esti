@@ -104,8 +104,8 @@ func assertManagedLegacyIndex(t *testing.T, w *httptest.ResponseRecorder, manife
 	fontSources := map[string]bool{
 		"node_modules/@fontsource-variable/fredoka/files/fredoka-latin-ext-wght-normal.woff2": false,
 		"node_modules/@fontsource-variable/fredoka/files/fredoka-latin-wght-normal.woff2":     false,
-		"node_modules/@fontsource-variable/inter/files/inter-latin-ext-wght-normal.woff2":   false,
-		"node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2":       false,
+		"node_modules/@fontsource-variable/inter/files/inter-latin-ext-wght-normal.woff2":     false,
+		"node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2":         false,
 	}
 	fontURLs := []string{}
 	for _, item := range entries {
