@@ -1,0 +1,171 @@
+"""Exact two permanent input-regression tests into isolated Source7 only; no serving data changes."""
+import hashlib,json,os,signal,stat,sys,tempfile,datetime
+from pathlib import Path
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7')
+T=Path('/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008')
+I=T/'source7-current-stage-r1'
+D=R/'docs/reviews/v1-7-recognizable-content'
+O=T/'go-source7-input-contracts-r1/stage'
+RECEIPT=O/'result.json'
+sha=lambda b:hashlib.sha256(b).hexdigest()
+EXTERNAL_READONLY_INPUTS={'/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/_pytest/_version.py': {'sha256': 'a92165fd7b0e147d0e1b873f42ebe87f108f1f3d56b1b53fe4ad352a27adec4a', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 520, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/_pytest/config/__init__.py': {'sha256': '98b05c2c37d09e1d5c05975efc2d9af98d4aff6ea47de410a8e93956420873c1', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 80947, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/_pytest/helpconfig.py': {'sha256': '64a4ccef9da2e8f1af28afc42f605aa1d9c4c1255089adc6e4a136fbc81a5074', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 10019, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/_pytest/junitxml.py': {'sha256': '557b8978c66b8010fafc50ada4bf56333f9927f31b2b5909fe4c1a9df1a3c0f0', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 25961, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/_pytest/main.py': {'sha256': '8ee2725057ff1811e2ae9ebdf1befb7518195f8f333f9f8ca024d76a4b80780e', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 42771, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/_pytest/pathlib.py': {'sha256': 'c9fe77dccbf52afa1196ff92870ed919e09f254c082710a86ed417fd3ca90329', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 37454, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/_pytest/python.py': {'sha256': 'b04488f5e46bf1ffe2e8344f81756e10b970dbfaf2f7f2f4d312becd6404df76', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 67758, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/_pytest/terminal.py': {'sha256': '28c4a9ebca0243385b154f47ecb83b18a1df415e0b912ebd97079c5ea0036459', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 65489, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/_pytest/tmpdir.py': {'sha256': '5099f71d89413191c9e7515c9d4fe9fc7083bb73306f2cf1f73a9f89c862ed90', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 13271, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/annotated_types-0.7.0.dist-info/METADATA': {'sha256': 'ee5b6ac64b09274c026051813484025939564067801f485115d9cadc207cf791', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 15046, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/annotated_types-0.7.0.dist-info/RECORD': {'sha256': '5bb4f1ca72420634ebd566dafd9d5fbce3051b0c1c1d13980f6ceeb5c4dbb843', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 775, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/asgiref-3.11.1.dist-info/METADATA': {'sha256': '68b78f7093fa37b1e99de09b69c4e63bfe067386f43d14a8d9f58fc2c58b7984', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 9287, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/asgiref-3.11.1.dist-info/RECORD': {'sha256': '25b66f4fc8f69ca6f95021f30083c5c6438e82d25a5922f7c3ee31c4a6dd8353', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 1407, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/attrs-26.1.0.dist-info/METADATA': {'sha256': '4cd40e690f23bf37cbcad34efd6758e062df1df07c86833f7e3ce95bf1fa38cc', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 8754, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/attrs-26.1.0.dist-info/RECORD': {'sha256': '6b0b326d4b4ee0fac27909ac7cbb066fc4bdf8e93d87031e27e770db059e5a04', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 2742, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/django-5.2.16.dist-info/METADATA': {'sha256': 'a7cd5efa42a22c2e8447ad8076f4c663e838cb2d219f60c8e0e5ca8f3d8e71b7', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 4138, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/django-5.2.16.dist-info/RECORD': {'sha256': '282b0864517d309448c8a54380682b722759af7fc313ec138d2c074fbcdf57a1', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 390004, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/django_cors_headers-4.9.0.dist-info/METADATA': {'sha256': '9bc4a9b87f0b832b5925ee99046ca394d1201f2549cc0f72f76ed21d329a8370', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 16494, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/django_cors_headers-4.9.0.dist-info/RECORD': {'sha256': '3d9f5c841030fdacdfcd1b8da53a5be39edc5a695a746ca761138945a6007464', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 1273, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/djangorestframework-3.17.1.dist-info/METADATA': {'sha256': 'f5dbea33e402b2ef7ccfce773e014cfe442f95e9725d7f55dadd8642bf32e0f9', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 7855, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/djangorestframework-3.17.1.dist-info/RECORD': {'sha256': 'b588f1552b1953c9412050e37a0d14ef73c554ad3db7802e717c131ab974bd31', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 22783, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/drf_spectacular-0.30.0.dist-info/METADATA': {'sha256': '4bfc973924d78db48b489033f5176c778818133f1a2da51c7b6d067aa3c4f377', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 14698, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/drf_spectacular-0.30.0.dist-info/RECORD': {'sha256': '30ce8d823cb6762fb09fbe1b3a632a58ba84e2c97173db09b8b1c54b2cc76150', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 4704, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/inflection-0.5.1.dist-info/METADATA': {'sha256': '1f384438420dd71287d030fecfd98f276ff8657bbf9989380d50f199c1e20c25', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 1730, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/inflection-0.5.1.dist-info/RECORD': {'sha256': '206baa3990809bbe9fb90855d015a04232487b695f95ad171e14cea4036fafd9', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 806, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/iniconfig-2.3.0.dist-info/METADATA': {'sha256': '40d773f84e4e112f495bbf4f1be9cbd2d456c0aeb6ef5311f75d1bf322f2165b', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 2526, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/iniconfig-2.3.0.dist-info/RECORD': {'sha256': '4b560f65489a4dc0f32d8403da676d2e6338c371fe844160934b3fe469785185', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 965, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/jsonschema-4.26.0.dist-info/METADATA': {'sha256': '05b189866ca98a96da3934bf6b83687ced3ff85325273b77e16b705f6d8b26d2', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 7592, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/jsonschema-4.26.0.dist-info/RECORD': {'sha256': 'be11035e8c8bcf552c9c89101363983dbed1274c427f1297ccd7c23ca38b372e', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 4088, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/jsonschema_specifications-2025.9.1.dist-info/METADATA': {'sha256': '35abd41757f32b4ea24756920ded47b70173d77cbc052a5a6d3ab583b2e8d89d', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 2907, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/jsonschema_specifications-2025.9.1.dist-info/RECORD': {'sha256': '0b1047ee6c7d5d7c242b642d689820f4572860ecf7886b2074f821ed85cbe7b6', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 3440, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/packaging-26.2.dist-info/METADATA': {'sha256': '4f9cbcd7933415a4793f7767c98a2b6a512c823fc81c87337815705f230ecabf', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 3543, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/packaging-26.2.dist-info/RECORD': {'sha256': '34a791dcc687723f1d7601aa68319f6d51aa00e44d85818995dd33a1b7c5a49c', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 2358, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/pluggy-1.6.0.dist-info/METADATA': {'sha256': '7438c35ee25a095eb7416f84b461c2d74425c5e734ad54c3912453c65244e01c', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 4811, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/pluggy-1.6.0.dist-info/RECORD': {'sha256': 'a42a63bcba12ddb7e7db19158c8d05d8fc41d51f48686b411ad3a0213fbd7721', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 1227, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/pydantic-2.13.4.dist-info/METADATA': {'sha256': 'd1e56c3412492512fb6b59a9dfc25ab7af2a8204585cd7bca000513023133394', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 109397, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/pydantic-2.13.4.dist-info/RECORD': {'sha256': 'd0cbe0f34b294885175920bc8f2ece0b3ed6d9874347dc9cfb2caf4931329272', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 9517, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/pydantic_core-2.46.4.dist-info/METADATA': {'sha256': '135fa8b2f89473e9191c7078c2164e3ec6c8927a61c2379c2fddcc07f11f3bae', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 6573, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/pydantic_core-2.46.4.dist-info/RECORD': {'sha256': '3e55a95c4577dcb5dfd08cb8740db06dad7117273dd4885c090413888e606fc0', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 1099, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/pygments-2.20.0.dist-info/METADATA': {'sha256': 'e0528f51b30427fae94723662ba622f8d8db2a4d8d3f1365698d67a52450a845', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 2476, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/pygments-2.20.0.dist-info/RECORD': {'sha256': '9bd53d01a50643aac995b358bf936145587b13f7e85ae1c7c23d5b6ad21094e4', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 28834, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/pytest-9.1.1.dist-info/METADATA': {'sha256': 'c5d032518012789cabc870d46589aca3aeda36cf9fa4399ee88bda3d10438451', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 7586, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/pytest-9.1.1.dist-info/RECORD': {'sha256': '5a2736a20dc5b2dfd812a44164aba76f8c6ed559489618f0bb161311a1b04424', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 7391, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/pytest_django-4.12.0.dist-info/METADATA': {'sha256': '9732ea0eb601c1414f8ce31c26b75b349acbf5aa7410cbb44f0fa78f2daee3e5', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 8036, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/pytest_django-4.12.0.dist-info/RECORD': {'sha256': 'fbc66cfe35c530a5a6c1b59f372c4ba3d032ec6c8b35b8313e5187f3c2d55541', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 1649, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/pytest_django/plugin.py': {'sha256': '5c129167e465fabeb2bead63b41c128088cac784c5f0f25fb2575bacc839baa9', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 30043, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/pyyaml-6.0.3.dist-info/METADATA': {'sha256': '03c3b415ed38d09faedc49360e930769b40c58f68585e6de00e2e4916a858d34', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 2351, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/pyyaml-6.0.3.dist-info/RECORD': {'sha256': '7d0856221a182f5b25fde9bb976af79b4883090f54680d86a42b35fc8d6735a2', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 1971, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/referencing-0.37.0.dist-info/METADATA': {'sha256': 'c93b00e6ab1524fd60848376604c189a114374776475c25a31d57be47b29de6a', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 2845, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/referencing-0.37.0.dist-info/RECORD': {'sha256': 'd7ecf9906a4a4ea4837d16e324e344f9f00b328570cf695a96a8de46b8766982', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 1766, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/rpds_py-2026.6.3.dist-info/METADATA': {'sha256': 'f8be7b17da3980b2c48596941411a43c70ac41b1e2d530aa531f2c15eab2eb1c', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 4147, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/rpds_py-2026.6.3.dist-info/RECORD': {'sha256': '8e825dd83fbb7bdc9ff8941296bc53b6c0e07d0420ae28efa150830d6cf178fe', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 921, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/sqlparse-0.5.5.dist-info/METADATA': {'sha256': '64608ce1633133346851d8ecfa683931d0a1b70c1620720d8a21958917353621', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 4734, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/sqlparse-0.5.5.dist-info/RECORD': {'sha256': '2d75c6f6044f27b462d8c7229d2db05ea03c27c8baaea6ede5b9d33714e4c252', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 2530, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/typing_extensions-4.16.0.dist-info/METADATA': {'sha256': 'b05084ca1d50879865178d9fff9fabeab61bdfb1f361bfbde95421ffc8f9be46', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 3310, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/typing_extensions-4.16.0.dist-info/RECORD': {'sha256': '9e07fea845cac76293d927afa7157a14ecba39b318bc8af236b8de530b7656c1', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 623, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/typing_inspection-0.4.2.dist-info/METADATA': {'sha256': '61096cd0bfe3c7040b6f98c22b02d190fe01936d0ff7616c5134fed02891953a', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 2552, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/typing_inspection-0.4.2.dist-info/RECORD': {'sha256': '96edfd27f64244b308dd9b63a60613ad2a04e5012066fdbd1aeebe85b348ba29', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 978, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/uritemplate-4.2.0.dist-info/METADATA': {'sha256': '352afd43b6f1ab8f94ca31af2a1ad4f0d1a94dbd712c1b6d9e44e35d4bb3a962', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 2579, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/uritemplate-4.2.0.dist-info/RECORD': {'sha256': 'b06d84680bc9ed70b2a79703745de7129784a2309ab11c4e588da9452d635b63', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 1067, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/whitenoise-6.12.0.dist-info/METADATA': {'sha256': '9f7b6533495f753a0aa82c4a6ea363882f2482d835e5d7e961c38af1667d7b6f', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 3683, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/whitenoise-6.12.0.dist-info/RECORD': {'sha256': '344bb4b4acaed48fbf8f10d5cc26ea5252ce1cedef3c5b9aaa2115d1d97bd4b8', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 1669, 'readonly': True}, '/usr/bin/git': {'sha256': '2a8c18fbf43da9f692d75474c72bea9dfd796c260b0f3dfe456376abc3bbd668', 'root': '/usr/bin', 'mode': 493, 'bytes': 4066232, 'readonly': True}, '/usr/bin/python3.12': {'sha256': 'e1efa562c2cc2e35521a5c9c9b9939921001ff8ca9708a13ef15ace68cc2ccd7', 'root': '/usr/bin', 'mode': 493, 'bytes': 8020928, 'readonly': True}, '/usr/share/man/man1/env.1.gz': {'sha256': '0d9757863f4e6862c047701d3de97c633b36404dc9a7d6c62efd7ed99b271185', 'root': '/usr/share/man/man1', 'mode': 420, 'bytes': 1923, 'readonly': True}, '/usr/share/man/man1/git-config.1.gz': {'sha256': '25a449c3de81a60db14d17821627e94eceeaaed7ae995cb16a4662fd9a5085af', 'root': '/usr/share/man/man1', 'mode': 420, 'bytes': 88203, 'readonly': True}, '/usr/share/man/man1/git-init.1.gz': {'sha256': '97f0fb7d9a0e9b847480152b0c3fed7eda5d953a4ec0b35637bd96b6c46a53c2', 'root': '/usr/share/man/man1', 'mode': 420, 'bytes': 3369, 'readonly': True}, '/usr/share/man/man1/git.1.gz': {'sha256': 'b5f76025821304695482894041f803e26665686f79466353e1c76a12695c06a4', 'root': '/usr/share/man/man1', 'mode': 420, 'bytes': 18482, 'readonly': True}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/_pytest/fixtures.py': {'sha256': 'f5d4d3f848d97411e456d50400d3aaecc19a9b0c90def9151e395ee8952042b7', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'bytes': 92893, 'readonly': True}}
+def read_regular(p,root,maximum):
+    assert p.is_relative_to(root) and root.resolve(strict=True)==root
+    for ancestor in [p,*p.parents]:
+        info=ancestor.lstat();assert not stat.S_ISLNK(info.st_mode)
+        if ancestor==root:break
+    info=p.lstat();assert stat.S_ISREG(info.st_mode) and info.st_size<=maximum
+    fd=os.open(p,os.O_RDONLY|os.O_NOFOLLOW)
+    with os.fdopen(fd,'rb') as f:
+        opened=os.fstat(f.fileno());assert (opened.st_dev,opened.st_ino)==(info.st_dev,info.st_ino)
+        b=f.read(maximum+1)
+    assert len(b)<=maximum and p.lstat().st_ino==info.st_ino
+    return b,info
+assert len(sys.argv)==2 and O.resolve(strict=True)==O and I.resolve(strict=True)==I
+assert not RECEIPT.exists() and not RECEIPT.is_symlink()
+a=json.loads(Path(sys.argv[1]).read_bytes())
+assert sha(Path(__file__).read_bytes())==a['input_contracts_stage_method_sha256']
+MP=D/'go-source7-input-contracts-mutation-manifest.json'
+assert sha(MP.read_bytes())==a['mutation_manifest_sha256']
+m=json.loads(MP.read_bytes());assert m['stage_root']==str(I) and m['source_root']==str(R)
+assert m['external_readonly_input_whitelist']==EXTERNAL_READONLY_INPUTS
+assert len(m['writes'])==2 and len(m['retain_exact'])==0
+allowed={'go-backend/internal/httpapi/source7_ordinary_inputs_test.go', 'go-backend/internal/httpapi/source7_held_inputs_test.go'}
+assert set(m['source_afterimage_targets'])==allowed
+assert set(m['writes'])==allowed
+assert m['total_afterimage_and_evidence_write_bytes']==sum(v['bytes'] for v in m['writes'].values()) and m['total_afterimage_and_evidence_write_bytes']<32<<20
+expected_after={str(I/n):v['source_sha256'] for n,v in m['writes'].items()}
+assert a['expected_after']==expected_after
+received=None;failure=None;cleanup_errors=[];observations=[];snapshots={};attempted=[];owned_new={};owned_temps={};owned_dirs=[];lock_identity=None
+lock=I/'.cat-content-ops.lock'
+def interrupt(number,frame):
+    global received
+    received=number;raise InterruptedError('Catchable signal during exact history staging')
+for sig in (signal.SIGTERM,signal.SIGINT):signal.signal(sig,interrupt)
+def check_admission(phase):
+    for group in (('inputs','scratch_bindings') if phase=='pre' else ('unchanged','scratch_bindings')):
+        for n,want in a.get(group,{}).items():
+            p=Path(n) if Path(n).is_absolute() else R/n
+            if p.is_relative_to(R):root=R
+            elif p.is_relative_to(T.parent):root=T.parent
+            else:
+                pin=EXTERNAL_READONLY_INPUTS.get(str(p));assert pin is not None and pin['sha256']==want and pin['readonly'] is True, 'Unlisted external input refused'
+                root=Path(pin['root'])
+            b,info=read_regular(p,root,128<<20);assert sha(b)==want,n
+            if str(p) in EXTERNAL_READONLY_INPUTS:assert stat.S_IMODE(info.st_mode)==EXTERNAL_READONLY_INPUTS[str(p)]['mode'] and info.st_size==EXTERNAL_READONLY_INPUTS[str(p)]['bytes']
+
+def ensure_parent(p):
+    missing=[];q=p.parent
+    while not q.exists():
+        assert q.is_relative_to(I) and not q.is_symlink();missing.append(q);q=q.parent
+    assert q.resolve(strict=True)==q
+    for q in reversed(missing):
+        q.mkdir(mode=0o700);s=q.lstat();owned_dirs.append((q,s.st_dev,s.st_ino))
+    assert p.parent.resolve(strict=True)==p.parent
+
+def publish(n,blob,mode,replace):
+    p=I/n;ensure_parent(p)
+    with tempfile.NamedTemporaryFile(prefix='.owned-v17-history-',dir=p.parent,delete=False) as f:
+        q=Path(f.name);s=os.fstat(f.fileno());owned_temps[q]=(s.st_dev,s.st_ino,sha(blob));f.write(blob);f.flush();os.fsync(f.fileno());os.fchmod(f.fileno(),mode)
+    assert sha(q.read_bytes())==sha(blob)
+    if replace:
+        attempted.append((n,s.st_dev,s.st_ino));os.replace(q,p);owned_temps.pop(q)
+    else:
+        mask=signal.pthread_sigmask(signal.SIG_BLOCK,{signal.SIGTERM,signal.SIGINT})
+        try:
+            os.link(q,p);owned_new[n]=(s.st_dev,s.st_ino,sha(blob));q.unlink();owned_temps.pop(q)
+        finally:signal.pthread_sigmask(signal.SIG_SETMASK,mask)
+    fd=os.open(p.parent,os.O_RDONLY)
+    try:os.fsync(fd)
+    finally:os.close(fd)
+
+STAGE_CHECKS={"pre1198":False,"post1200":False}
+IP=Path(m['original_stage_inventory']['path'])
+assert sha(IP.read_bytes())==m['original_stage_inventory']['sha256']
+ORIGINAL=json.loads(IP.read_bytes())['files']
+assert len(ORIGINAL)==1198
+POST_EXPECTED=dict(ORIGINAL)
+for n,v in m['writes'].items():
+    if v['before_exists']:assert n in ORIGINAL and ORIGINAL[n]['sha256']==v['before_sha256']
+    else:assert n not in ORIGINAL
+    POST_EXPECTED[n]={'sha256':v['source_sha256'],'bytes':v['bytes'],'mode':v['after_mode']}
+assert len(POST_EXPECTED)==1200
+
+def check_exact_stage(expected, owned_lock_allowed):
+    observed=set()
+    for p in I.rglob('*'):
+        info=p.lstat()
+        assert not stat.S_ISLNK(info.st_mode), 'Unexpected I symlink; preserve foreign input'
+        if stat.S_ISDIR(info.st_mode):continue
+        assert stat.S_ISREG(info.st_mode), 'Unexpected nonregular I member'
+        if p==lock and owned_lock_allowed:
+            assert lock_identity is not None and (info.st_dev,info.st_ino)==lock_identity
+            assert info.st_size==0 and stat.S_IMODE(info.st_mode)==0o600
+            continue
+        n=p.relative_to(I).as_posix();assert n in expected, 'Unexpected I file: '+n
+        pin=expected[n];blob,opened=read_regular(p,I,16<<20)
+        assert len(blob)==pin['bytes'] and sha(blob)==pin['sha256'] and stat.S_IMODE(opened.st_mode)==pin['mode'], 'I hash/size/mode drift: '+n
+        observed.add(n)
+    assert observed==set(expected), 'Missing I members'
+
+try:
+    check_admission('pre')
+    check_exact_stage(ORIGINAL,False);STAGE_CHECKS['pre1198']=True
+    for n,v in {**m['writes'],**m['retain_exact']}.items():
+        source=Path(v['source']);assert source.is_relative_to(R)
+        b,s=read_regular(source,R,16<<20);assert len(b)==v['bytes'] and sha(b)==v['source_sha256'] and stat.S_IMODE(s.st_mode)==v['source_mode']
+        p=I/n
+        if v['before_exists']:
+            old,s=read_regular(p,I,16<<20);assert sha(old)==v['before_sha256'] and stat.S_IMODE(s.st_mode)==v['before_mode']
+            if n in m['writes']:snapshots[n]=(old,v['before_mode'],s.st_dev,s.st_ino)
+        else:assert not p.exists() and not p.is_symlink()
+    assert len(snapshots)==0 and not lock.exists() and not lock.is_symlink()
+    fd=os.open(lock,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600);s=os.fstat(fd);lock_identity=(s.st_dev,s.st_ino);os.close(fd)
+    for n,v in m['writes'].items():
+        b,s=read_regular(Path(v['source']),R,16<<20);assert sha(b)==v['source_sha256'] and stat.S_IMODE(s.st_mode)==v['source_mode']
+        if v['before_exists']:assert sha(read_regular(I/n,I,16<<20)[0])==v['before_sha256']
+        publish(n,b,v['after_mode'],v['before_exists'])
+        out,s=read_regular(I/n,I,16<<20);assert sha(out)==v['source_sha256'] and stat.S_IMODE(s.st_mode)==v['after_mode']
+    check_exact_stage(POST_EXPECTED,True);STAGE_CHECKS['post1200']=True
+    check_admission('post')
+    for n,v in {**m['writes'],**m['retain_exact']}.items():
+        source_bytes,source_info=read_regular(Path(v['source']),R,16<<20)
+        assert sha(source_bytes)==v['source_sha256'] and stat.S_IMODE(source_info.st_mode)==v['source_mode']
+        assert sha(read_regular(I/n,I,16<<20)[0])==v['source_sha256']
+except BaseException as exc:
+    failure={'type':type(exc).__name__,'message':str(exc)}
+    for sig in (signal.SIGTERM,signal.SIGINT):signal.signal(sig,signal.SIG_IGN)
+    for n,dev,ino in reversed(attempted):
+        old,mode,olddev,oldino=snapshots[n];p=I/n
+        try:
+            now,s=read_regular(p,I,16<<20);assert (s.st_dev,s.st_ino) in [(dev,ino),(olddev,oldino)] and sha(now) in [sha(old),m['writes'][n]['source_sha256']]
+            # Restoration is same-directory atomic, retaining original rawbytes/mode.
+            with tempfile.NamedTemporaryFile(prefix='.owned-v17-restore-',dir=p.parent,delete=False) as f:
+                q=Path(f.name);s=os.fstat(f.fileno());owned_temps[q]=(s.st_dev,s.st_ino,sha(old));f.write(old);f.flush();os.fsync(f.fileno());os.fchmod(f.fileno(),mode)
+            os.replace(q,p);owned_temps.pop(q);assert p.read_bytes()==old and stat.S_IMODE(p.stat().st_mode)==mode
+        except BaseException as e:cleanup_errors.append({'restore_existing':n,'error':repr(e)})
+    for n,(dev,ino,want) in reversed(list(owned_new.items())):
+        try:
+            b,s=read_regular(I/n,I,16<<20);assert (s.st_dev,s.st_ino)==(dev,ino) and sha(b)==want;(I/n).unlink()
+        except BaseException as e:cleanup_errors.append({'remove_new':n,'error':repr(e)})
+finally:
+    for q,(dev,ino,want) in list(owned_temps.items()):
+        try:
+            b,s=read_regular(q,I,16<<20);assert (s.st_dev,s.st_ino)==(dev,ino) and sha(b)==want;q.unlink()
+        except BaseException as e:cleanup_errors.append({'temporary_preserved':str(q),'error':repr(e)})
+    if failure:
+        for q,dev,ino in reversed(owned_dirs):
+            try:
+                s=q.lstat();assert stat.S_ISDIR(s.st_mode) and (s.st_dev,s.st_ino)==(dev,ino);q.rmdir()
+            except BaseException as e:cleanup_errors.append({'directory_preserved':str(q),'error':repr(e)})
+    if lock_identity is not None:
+        try:
+            b,s=read_regular(lock,I,1);assert b==b'' and (s.st_dev,s.st_ino)==lock_identity;lock.unlink()
+        except BaseException as e:cleanup_errors.append({'lock_preserved':str(lock),'error':repr(e)})
+    rollback_membership_exact=None
+    if failure:
+        try:check_exact_stage(ORIGINAL,False);rollback_membership_exact=True
+        except BaseException as e:rollback_membership_exact=False;cleanup_errors.append({'rollback_stage1198_not_exact':repr(e)})
+    result={'schema':'v1-7-exact-permanent-native-input-contracts-stage-result-v1','complete':failure is None and not cleanup_errors and received is None,'failure':failure,'cleanup_errors':cleanup_errors,'caught_signal':received,'rollback_membership_exact':rollback_membership_exact,'stage_membership_checks':STAGE_CHECKS,'existing_targets_snapshotted':len(snapshots),'writes_expected':2,'owned_new_paths':list(owned_new),'afterimage_and_evidence_bytes':m['total_afterimage_and_evidence_write_bytes'],'source_R_or_serving_data_changed':False,'test_or_native_execution':False,'finished_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat()}
+    with RECEIPT.open('x') as f:json.dump(result,f,indent=2,sort_keys=True);f.write('\n');f.flush();os.fsync(f.fileno())
+if not result['complete']:raise SystemExit(1)

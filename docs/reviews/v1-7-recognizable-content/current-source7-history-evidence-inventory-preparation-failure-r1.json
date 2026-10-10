@@ -1,0 +1,13 @@
+{
+  "actual_I_Source7_sha256": "078657f392828f2784173684c08d89736e38dae46a0d47c485a3ae5fcf1adc73",
+  "actual_R_Source6_sha256": "e0cfe93de076f14a782dc6377b2655d4ef10f86ada1560ae1202bb06dbfdf877",
+  "cause": "Unfiltered repo-file literal discovery included current serving data references, which are NOT immutable evidence-copy dependencies. Existingstage conflict guard correctlyrefused.",
+  "conflicting_path": "go-backend/internal/content/bundled.json",
+  "correction": "DeclaredCOPYscope ONLY docs evidence and immutable authoredSource1-6 parents; servingfixtures/bundle/digest/testdata are excluded and remain exact.",
+  "no_manifest_or_stage_or_runtime_or_test_write_occurred_on_failure": true,
+  "recorded_at_utc": "2026-10-08T21:37:44.686819+00:00",
+  "same_original_clock_no_reset": true,
+  "schema": "v1-7-guarded-evidence-inventory-category-conflict-before-write-v1",
+  "source_admission_sha256": "c774d8a0036d4421fa73d0a00648ad7ebce59d54518ac1f1a1cb7bc69d0a68e2",
+  "status": "SOURCE_PREPARATION_ASSERTION_BEFORE_MANIFEST_OR_COPY"
+}

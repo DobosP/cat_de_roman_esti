@@ -1,0 +1,168 @@
+{
+  "schema": "v1-7-current-cli-source6-exact-negative-actual-review-v1",
+  "reviewer": "/root/v17_research_quality",
+  "reviewed_at_utc": "2026-10-08T17:50:37.463770+00:00",
+  "verdict": "accept_actual_help_and_one_precise_runtime_stale_negative_observation_only",
+  "source_admission_sha256": "b633de582454438ac3f538c831f3134301ceb832ffd528675bd1f41839704f3c",
+  "source_cutoff_utc": "2026-10-08T18:03:39.488240+00:00",
+  "source_worker_rss_measured": false,
+  "dependencies_sha256": {
+    "current-source7-stage-source-admission-r1.json": "b633de582454438ac3f538c831f3134301ceb832ffd528675bd1f41839704f3c",
+    "current-cli-source6-negative-method-review-r1.json": "2ffd477f0dc827f66bc67da88a92c6cbb66ec2e000c8e92ecabe889baf7743a3",
+    "current-cli-source6-negative-plan-r1.json": "fc018283669502fbb850017eb0043824d5c4c56cbc0f5e7c30a9871fec6b97be",
+    "current-cli-source6-negative-readset-r1.json": "ef711003b5881622f677a489c4841e8fef205808dea9496c9b62991607fb5875",
+    "current-cli-source6-negative-method-r1.py.txt": "f974eca0628558d8d45048b5d592f5b489641a3c5241879bbe495cdc0c123125",
+    "current-cli-source6-negative-expected-help-r1.txt": "e7c37e4e1429a5738455f375aa0d51e877ea567989beb93afe887777c287237c",
+    "current-cli-source6-negative-native-admission-r1.json": "2c4e7ae48898215bfe5553aaa0f0ba68980991d4b138aeb35a228805e7705fcb",
+    "current-cli-source6-negative-r1-step-0-result.json": "f5a861189695aaf85a6e4dc56b8d0c9519bd7e5a3755954fbebe8972173b4855",
+    "current-cli-source6-negative-r1-result.json": "0d51b6b86be9f1c23008068f61e0a5de2a9aa1cd66e27e42b5acf6074add2f65",
+    "current-cli-source6-negative-results-r1.json": "e9c8ed5b51b207395a94386c2e4094d8357fb83ca25e32a427be40ed26fb3582",
+    "current-cli-source6-negative-native-stop-r1.json": "8eaeb5fa9eeafa7ab1c9c7b190cdc650dc6887fd17612d8106acfc302e0903fc",
+    "current-cli-source6-negative-publication-accounting-r1.json": "a56017b496be37984d6476ed37b97fe33062b6a9d6b8d41f6ae8f4179920cbc3",
+    "current-cli-source6-negative-actual-help.json": "088edbce346ecba22c429848f5c697ba548ffb22f53b0ccf9d32224a6fc6ec15",
+    "current-cli-source6-negative-actual-negative.json": "6fdcd2a1699104e72cc328f5765f22ec296d88550b677b775c28ba9d11a39b20",
+    "current-cli-source6-negative-actual-report.json": "b16cbeb3fe30baf748e714e6ad0e96bbc75bafe94cd77e3778e1871aaba4a728"
+  },
+  "scratch_dependencies_sha256": {
+    "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/current-cli-source6-negative-keeper-r1.json": "c7d4169c7be5209440e4b5871f486289ff8c51f01d88c0f64ef700d5cc1e32ec",
+    "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/current-cli-source6-negative-keeper-external-r1.json": "933473fbc3efc0a43209973d3a4ebaae7af101bf6eaa8b76f3ad059f8c31f5f4",
+    "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/current-cli-source6-negative-native-external-r1.json": "5ed16da9c764fcf3da03fffcc0b4957816f38c9751968ebdf9241e581f09368b",
+    "/home/dobo/work/_temp/codex__content-v1-7/probe/current-cli-source6-negative-r1-r4-r3-state.json": "2b28ed601b731ca895426207c3469eef61079cd8fffb22ce92aaefc7947765f8",
+    "/home/dobo/work/_temp/codex__content-v1-7/probe/current-cli-source6-negative-r1-0.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-cache-inventory-r2.json": "83e830f6408e35feef4963ca69088402289fc0eabf77e18db3a54aba3e355311",
+    "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-complete-inventory-r1.json": "c7aab0473f49adffd90b017e12f723425a444ef5f9e57c9aab711a11dbdc3376"
+  },
+  "baseline_commit": "705c26819b60ff74d496aa9b5eedb016531a47ef",
+  "actual_observations": {
+    "public_cli_invocations": 2,
+    "help": {
+      "exit_code": 1,
+      "stdout": "",
+      "stderr_byte_exact_with_source_derived_16_flag_help": true,
+      "stderr_bytes": 1212,
+      "stderr_sha256": "e7c37e4e1429a5738455f375aa0d51e877ea567989beb93afe887777c287237c"
+    },
+    "quick_source6_negative": {
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "cat-content-rail: final live audit incomplete/stale/unaccepted\n",
+      "full_equality_not_substring_or_any_error": true
+    },
+    "report_sha256": "b16cbeb3fe30baf748e714e6ad0e96bbc75bafe94cd77e3778e1871aaba4a728",
+    "report_complete": true,
+    "report_test_failed": false,
+    "raw_case_rows_equal_report_rows_and_durable_copies": true
+  },
+  "cause_identity": {
+    "fresh_source6_reconstruction_prerequisites": "The immutable exact authority manifest/pin, registered Source2–6 chain, seven Quick descriptors, saved proposal/artifact, Source6 candidate and nine source/rubric operands remain byte-exact. Accepted kind/passed/version/catalog/candidate clauses all hold as independently derived in the pinned source-method review; every current prerequisite still matches its executed admission pin.",
+    "only_failed_ConfirmFinal_operand": "Recorded ordered runtime_sources list differs from current RuntimeHashes list. Its negated equality is the true rejection disjunct; the fixed error is therefore supported by exact operands rather than an arbitrary failure.",
+    "runtime_drift": {
+      "added_paths": [
+        "go-backend/embedfs/assets.go",
+        "go-backend/internal/httpapi/managed_spa.go",
+        "go-backend/third_party/webkit/assets/assets.go",
+        "go-backend/third_party/webkit/budget/budget.go",
+        "go-backend/third_party/webkit/cmd/budget/main.go",
+        "go-backend/third_party/webkit/csp/csp.go",
+        "go-backend/third_party/webkit/engine/engine.go",
+        "go-backend/third_party/webkit/go.mod",
+        "go-backend/third_party/webkit/go.sum",
+        "go-backend/third_party/webkit/golden/normalize.go",
+        "go-backend/third_party/webkit/health/health.go",
+        "go-backend/third_party/webkit/health/identity.go",
+        "go-backend/third_party/webkit/island/island.go",
+        "go-backend/third_party/webkit/routes/routes.go",
+        "go-backend/third_party/webkit/sample/go.mod",
+        "go-backend/third_party/webkit/sample/go.sum",
+        "go-backend/third_party/webkit/sample/main.go",
+        "go-backend/third_party/webkit/sample/sample_templ.go",
+        "go-backend/third_party/webkit/static/static.go",
+        "go-backend/third_party/webkit/tokens/tokens.go"
+      ],
+      "changed_existing": [
+        {
+          "current_sha256": "98ea69356c008d5ed8c166c959e0e9f0db6180ce9c967582a9b6cef49e76be41",
+          "old_sha256": "4a43f82b6afbbf0dd1e94f7f6daef7113ba20a1488d94888cef93971d11fdb50",
+          "path": "go-backend/go.mod"
+        },
+        {
+          "current_sha256": "aa0fee1fbf66167f8f1f054e2c31f7b4c110d5901307bc6294b7ae1858dbb3db",
+          "old_sha256": "af163d80d114418f5acec96c1e08659aa9a8acdf6b1822344309d07a4628a621",
+          "path": "go-backend/go.sum"
+        },
+        {
+          "current_sha256": "ae736b26a9f98667a9c623f985cdc7700ed01dd537cb1b5b74d893e713367913",
+          "old_sha256": "8786ad6d0d5781c19dcb34fe0c258310b033a3500217855f078deef9c15325e9",
+          "path": "go-backend/internal/httpapi/server.go"
+        },
+        {
+          "current_sha256": "5ade14a8f839f553d55846903d25b8f991b7d470b91c5f980a0c2805179e5154",
+          "old_sha256": "89b7eca3e8b332f5090463da0b2552b9d3cf6a52420e8a65d3f3a3494981fa54",
+          "path": "go-backend/internal/httpapi/website.go"
+        }
+      ],
+      "current_count": 129,
+      "current_entry": {
+        "path": "go-backend/embedfs/assets.go",
+        "sha256": "84c7518b0ff65e76b8a7379350fb4cc0187459e6e38dde983316421c6d06a827"
+      },
+      "first_ordered_difference_index": 12,
+      "old_count": 109,
+      "old_entry": {
+        "path": "go-backend/go.mod",
+        "sha256": "4a43f82b6afbbf0dd1e94f7f6daef7113ba20a1488d94888cef93971d11fdb50"
+      },
+      "removed_paths": []
+    },
+    "registered_archive_union": 24,
+    "full_source1_to6_ancestry_union_independently_verified": 25,
+    "authority_sha256": "e365d23ae9cfd2581e146dccc142818d56cdb90fa292b376378996fba78e9b21",
+    "source6_sha256": "a086dc2accd6eb97ab7040f6a0e609cc40209fa6a441ee9d9e3f3f727d76e611",
+    "data_authority_pin_GUI_changed": false
+  },
+  "producer_and_input_identity": {
+    "initial_normal_bindings": 277,
+    "initial_scratch_bindings": 40,
+    "unique_runner_pre_post_checks": 317,
+    "all_pre_and_post_receipt_values_true": true,
+    "all317_independently_current_SHA_verified": true,
+    "outer_receipt_matches_cumulative_step": true,
+    "state_completed_next_index": 1,
+    "state_pending": null,
+    "state_receipt_path_and_SHA_match": true,
+    "actual_current_binary_sha256": "3589be2c90aabcc27894bd50c16c295f9458891cc795be25215f466fa0b58c59",
+    "output_keeper_sha256": "c7d4169c7be5209440e4b5871f486289ff8c51f01d88c0f64ef700d5cc1e32ec",
+    "keeper_external_digest_admission_producer_log_and_receipt_match": true,
+    "exclusive_output_membership": "Only help.json, negative.json and report.json; original/generated outputs were preserved without replacement.",
+    "cache_checks": "Root reports complete pre/post original5187/complete5436/GOPATH1 identity checks. Independently reread every current file SHA/size, exact membership, directory inventory and safe regular non-symlinked paths against the immutable inventories: 5187/881 original files/directories, 5436/908 complete files/directories and one owned GOPATH file are exact. This is byte preservation, not an additional cryptographic/full-graph availability result."
+  },
+  "actual_resources_and_clock": {
+    "outer_capture_exit_code": 0,
+    "outer_status": "passed",
+    "guard": null,
+    "failure": null,
+    "received_signal": null,
+    "campaign_started_at_utc": "2026-10-08T17:43:14.015769+00:00",
+    "immutable_native_deadline_utc": "2026-10-08T18:02:27.475795+00:00",
+    "metadata_reserve_utc": "2026-10-08T17:59:27.475795+00:00",
+    "raw_report_finished_at_utc": "2026-10-08T17:43:19.654498+00:00",
+    "outer_finished_at_utc": "2026-10-08T17:43:22.306241+00:00",
+    "final_metadata_publication_at_utc": "2026-10-08T17:45:35.773216+00:00",
+    "all_before_original_metadata_reserve": true,
+    "no_child_remains_in_stop_receipt": true,
+    "peak_sampled_native_group_RSS_bytes": 110170112,
+    "native_full_S_R_increment_bytes": 8452,
+    "final_publication_full_S_R_increment_bytes": 193366,
+    "final_publication_upper_bound_with_64MiB_bytes": 67302230,
+    "native_RSS_and_growth_within_admitted_caps": true,
+    "source_root_whole_RSS_unmeasured": true
+  },
+  "current_metadata_and_semantic_boundary": "Current 705 documentation records describe a genuine negative authority observation with unchanged Source6 data. Old source/raw-role judgments keep their original hashes and provenance; this observation supplies current CLI/schema evidence only. Source7 draft/content provenance and any new current-runtime staging manifest require separate exact review.",
+  "not_granted": [
+    "Source6 current-authority or all-four PASS",
+    "Source7 data adoption, fresh live audits/final judgments or current-authority regeneration",
+    "GUI/managed-assets/serving/full backend qualification",
+    "Release/landing/push/deployment or any other native campaign"
+  ],
+  "old_failure_history": "All earlier source timing, cache/offline, root-checker and native resource failures remain failed historical records; this different exact lane did not resume or reset them."
+}

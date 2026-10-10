@@ -1,0 +1,66 @@
+package contentbuild
+
+import (
+ "bytes"
+ "os"
+ "path/filepath"
+ "testing"
+)
+
+// Separate current authority: no Source6 assertion or predecessor guard is retargeted.
+func TestRebuildSource7SalaryAliasReviewedBundleAndPin(t *testing.T) {
+ root := repoRoot(t)
+ built, err := Build(root); if err != nil { t.Fatal(err) }
+ installed, err := os.ReadFile(filepath.Join(root,"go-backend/internal/content/bundled.json"))
+ if err != nil || !bytes.Equal(built,installed) || len(built)!=7272465 || SHA256(built)!="078657f392828f2784173684c08d89736e38dae46a0d47c485a3ae5fcf1adc73" { t.Fatal("reviewed Source7 source rebuild or complete installed bundle differs",err) }
+ pin, err := os.ReadFile(filepath.Join(root,"go-backend/internal/content/digest.go"))
+ if err != nil || SHA256(pin)!="388c8484b949ac173a1edfac5dd2c78f381cad224c754e78d854f31d29dd99ec" || !bytes.Equal(pin,PinBytes(built)) { t.Fatal("reviewed Source7 digest declaration differs",err) }
+ wantSources:=map[string]string{
+  "alchimie_discovery_world_v92.json":"1fcd017b33edf3600098306b19c012f709c8a50b905be9d259a6a1e2cbb84049",
+  "alchimie_recipe_extensions_v92.json":"605690ec6b163ab3860fc57c53c21288b2781b85c77f93e414d63207340119bf",
+  "board_rankings_v37.json":"24d36c7ad1968fb5b2e993a38f1c404719edc66bc4faa0e9d8e8eb079e9df7fe",
+  "derived_catalog_v38.json":"df3a01bb5bdbf8c34973b6bc43c9179ab9ffbe0fc6552fb73b5cd1e9bfb24af9",
+  "games_pack.json":"e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+  "kg_sample.json":"3412064a27c79e47b1b4205383e45c156316857bc8a6f6cb303bc65478501749",
+  "quick_games_v92.json":"34c11c48b28b45c53a741290837288d302c98cea51e4346fb64669d7188c7a8c",
+  "release_reserve_v1.json":"fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+ }
+ m,err:=decodeObject(built);if err!=nil { t.Fatal(err) }
+ if len(object(m["sources"]))!=8 || len(wantSources)!=len(SourceNames) { t.Fatal("Source7 eight-source authority differs") }
+ for _,name:=range SourceNames {
+  raw,err:=os.ReadFile(sourcePath(root,name))
+  if err!=nil || TextSHA256(raw)!=wantSources[name] || object(m["sources"])[name]!=wantSources[name] { t.Fatalf("Source7 complete source identity differs: %s (%v)",name,err) }
+ }
+ historicalRoot:=source6HistoricalRoot(t)
+ previousRaw,err:=os.ReadFile(filepath.Join(historicalRoot,"go-backend/internal/content/bundled.json"));if err!=nil { t.Fatal(err) }
+ previous,err:=decodeObject(previousRaw);if err!=nil { t.Fatal(err) }
+ if len(array(m["nodes"]))!=2419 || len(array(m["edges"]))!=9473 || len(array(m["pack_items"]))!=709 || len(array(m["boards"]))!=418 { t.Fatal("Source7 inventories differ") }
+ for _,field:=range []string{"schema_version","app_version","edges","pack_items","boards","pack_ranked","labels","category_labels","category_order","letter_ranges","label_patterns","normalization_map","accent_normalization_map","casefold_map","contexto_data","lant_captions","alchimie_projections"} {
+  if !equal(previous[field],m[field]) { t.Fatalf("single-alias release changed preserved serving field: %s",field) }
+ }
+ const owner="n_v4soc_salariu"
+ oldNodes,newNodes:=array(previous["nodes"]),array(m["nodes"])
+ if len(oldNodes)!=len(newNodes) { t.Fatal("single-alias release changed node inventory") }
+ changed:=0
+ for i,value:=range newNodes {
+  node,old:=object(value),object(oldNodes[i]);if node["id"]!=old["id"] { t.Fatal("single-alias release changed node order") }
+  if str(node["id"])==owner {
+   want:=append(append([]any{},array(old["aliases"])...),"leafă")
+   if !equal(node["aliases"],want) { t.Fatal("exact reviewed singular leafă alias append differs") }
+   restored:=clone(t,node);restored["aliases"]=old["aliases"]
+   if !equal(restored,old) { t.Fatal("other Salary fields changed") };changed++
+  } else if !equal(node,old) { t.Fatalf("unrelated node changed: %s",node["id"]) }
+ }
+ wantIndex:=clone(t,object(previous["normalized_index"]))
+ if wantIndex["leafa"]!=nil { t.Fatal("genuine Source6 already contained reconsidered input") };wantIndex["leafa"]=owner
+ if changed!=1 || !equal(wantIndex,m["normalized_index"]) { t.Fatal("sole normalized leafa ownership or unchanged index differs") }
+ world,oldWorld:=object(m["discovery_world"]),object(previous["discovery_world"])
+ if len(array(world["concepts"]))!=252 || len(array(world["recipes"]))!=352 || len(array(world["goals"]))!=32 || len(array(world["compatible_versions"]))!=10 { t.Fatal("Source7 World inventories/history differ") }
+ for _,field:=range []string{"concepts","recipes","compatible_versions","world","goals","unlocks","mechanics","recipe_hash","schema_version"} {
+  if !equal(world[field],oldWorld[field]) { t.Fatalf("single-alias release changed World definitions/mechanics/history: %s",field) }
+ }
+ if !equal(object(m["recipe_extensions"])["boards"],object(previous["recipe_extensions"])["boards"]) { t.Fatal("single-alias release changed extension recipe books") }
+ metadata,oldMetadata:=object(m["metadata"]),object(previous["metadata"])
+ if len(metadata)!=len(oldMetadata) { t.Fatal("metadata entry inventory changed") }
+ for field,value:=range oldMetadata { if field!="/api/manifest" && !equal(value,metadata[field]) { t.Fatalf("single-alias release changed unrelated metadata: %s",field) } }
+}

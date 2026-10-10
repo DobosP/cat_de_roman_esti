@@ -1,0 +1,113 @@
+{
+  "schema": "reviewed-permanent-Source7-native-input-contract-lifecycle-v1",
+  "raw_sources": {
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/methods/source7_ordinary_inputs_test.go.txt": "39343c251acffb9da70295b33e11afe9cb22a9fbbd071f53e2ab3a32ce16f45f",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/methods/source7_held_inputs_test.go.txt": "552b78173cd4a30d7091a097aa42f2e9176acbc8d7b0fc3634d20ae3b0362d1a"
+  },
+  "formatter_argv": [
+    "/home/dobo/work/_temp/codex__content-v1-7/tools/go/bin/gofmt",
+    "-w",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/go-source7-input-contracts-ordinary-formatted.go.txt",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/go-source7-input-contracts-held-formatted.go.txt"
+  ],
+  "format_lifecycle": "Copy exact immutable raw source into absent dedicated formatted paths, record before identities; separately admit qualified formatter only, exclude outputs from immutable post map. Freeze actual formatted output/receipt/log into exclusive keeper+external BEFORE independent whitespace-only ACK and exact two-new-file mutation manifest; no unknown expected hash or raw overwrite.",
+  "stage_lifecycle": "Exact frozen two-target manifest after formatting ACK; all1198 original members retained, expected1200, zero replacements; original nofollow/lock/signal/rollback primitives unchanged. Separate stage-only fresh admission, actual inner/raw receipt keeper before complete1200 inventory and external keeper.",
+  "native_lifecycle": "Fully afterimage-bound NEW native admission after actual stage keeper; fresh binary receipt/log keeper+external before list/run, actual strict two-topcase manifest before targeted run. No old09be state or namespace reuse.",
+  "native_commands": [
+    {
+      "name": "compile-permanent-Source7-input-contracts-race",
+      "argv": [
+        "/usr/bin/env",
+        "GOENV=off",
+        "GOTOOLCHAIN=local",
+        "GOPROXY=off",
+        "GOSUMDB=off",
+        "GOMODCACHE=/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-complete-cache-r1",
+        "GOPATH=/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-legacy-gopath-r1",
+        "GOCACHE=/home/dobo/work/_temp/codex__content-v1-7/gocache",
+        "GOTMPDIR=/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/go-source7-input-contracts-r1/native/go-tmp",
+        "TMPDIR=/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/go-source7-input-contracts-r1/native/tmp",
+        "GOMAXPROCS=2",
+        "GOFLAGS=-mod=readonly -p=2 -buildvcs=false",
+        "CGO_ENABLED=1",
+        "CC=/usr/bin/gcc",
+        "PATH=/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/go-validation-native-r1/native-path",
+        "GOOS=linux",
+        "GOARCH=amd64",
+        "/home/dobo/work/_temp/codex__content-v1-7/tools/go/bin/go",
+        "-C",
+        "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/source7-current-stage-r1/go-backend",
+        "test",
+        "-c",
+        "-race",
+        "-o",
+        "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/go-source7-input-contracts-r1/native/httpapi.test",
+        "./internal/httpapi"
+      ],
+      "produces": "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/go-source7-input-contracts-r1/native/httpapi.test",
+      "no_trimpath_runtime_caller_source_contract": true
+    },
+    {
+      "name": "list-exact-two-Source7-input-contract-tests",
+      "argv": [
+        "/usr/bin/env",
+        "--chdir=/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/source7-current-stage-r1/go-backend/internal/httpapi",
+        "GOENV=off",
+        "GOTOOLCHAIN=local",
+        "GOPROXY=off",
+        "GOSUMDB=off",
+        "GOMODCACHE=/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-complete-cache-r1",
+        "GOPATH=/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-legacy-gopath-r1",
+        "GOCACHE=/home/dobo/work/_temp/codex__content-v1-7/gocache",
+        "GOTMPDIR=/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/go-source7-input-contracts-r1/native/go-tmp",
+        "TMPDIR=/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/go-source7-input-contracts-r1/native/tmp",
+        "GOMAXPROCS=2",
+        "GOFLAGS=-mod=readonly -p=2 -buildvcs=false",
+        "CGO_ENABLED=1",
+        "CC=/usr/bin/gcc",
+        "PATH=/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/go-validation-native-r1/native-path",
+        "GOOS=linux",
+        "GOARCH=amd64",
+        "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/go-source7-input-contracts-r1/native/httpapi.test",
+        "-test.list",
+        "^(TestSource7ContractsOrdinarySalaryInputs|TestSource7HeldInputsPreserveFrozenDispositions)$"
+      ],
+      "expected_tests": [
+        "TestSource7ContractsOrdinarySalaryInputs",
+        "TestSource7HeldInputsPreserveFrozenDispositions"
+      ]
+    },
+    {
+      "name": "run-exact-two-Source7-input-contract-tests-race",
+      "argv": [
+        "/usr/bin/env",
+        "--chdir=/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/source7-current-stage-r1/go-backend/internal/httpapi",
+        "GOENV=off",
+        "GOTOOLCHAIN=local",
+        "GOPROXY=off",
+        "GOSUMDB=off",
+        "GOMODCACHE=/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-complete-cache-r1",
+        "GOPATH=/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-legacy-gopath-r1",
+        "GOCACHE=/home/dobo/work/_temp/codex__content-v1-7/gocache",
+        "GOTMPDIR=/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/go-source7-input-contracts-r1/native/go-tmp",
+        "TMPDIR=/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/go-source7-input-contracts-r1/native/tmp",
+        "GOMAXPROCS=2",
+        "GOFLAGS=-mod=readonly -p=2 -buildvcs=false",
+        "CGO_ENABLED=1",
+        "CC=/usr/bin/gcc",
+        "PATH=/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/go-validation-native-r1/native-path",
+        "GOOS=linux",
+        "GOARCH=amd64",
+        "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/go-source7-input-contracts-r1/native/httpapi.test",
+        "-test.v",
+        "-test.run",
+        "^(TestSource7ContractsOrdinarySalaryInputs|TestSource7HeldInputsPreserveFrozenDispositions)$",
+        "-test.timeout=8m"
+      ]
+    }
+  ],
+  "coverage": "Exactly two new top-level tests, ordinary32requests/two arms and held69subcases; actual output authoritative. Whole HTTP package/golden/assets/native fullrelease not claimed or skipped/waived.",
+  "readonly_test_orchestration": "No native CLI/frontend/PG/provider/secret/network activation, no current data or metadata/source fixture mutation; ordinary sessions only.",
+  "resource_limits_reference": "unchanged397686 fullS/R runner, fresh17GiBstartdisk16GiBremaining+MemAvailable/2GiBsampledRSS/1GiBfullgrowth/20min180reserve/Go2offlineownedcache; combined growth anchored initialformat campaign baseline",
+  "current_source_scope_sha256": "bf389aafcc8951051cc2530773b502651b79d058fa2081d2ada2b4a4e0ec63e8"
+}

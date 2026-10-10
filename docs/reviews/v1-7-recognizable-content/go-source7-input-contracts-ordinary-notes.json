@@ -1,0 +1,79 @@
+{
+  "accepted_raw_report": {
+    "archive": "docs/reviews/v1-7-recognizable-content/current-source7-proper-sealed-play-failed-r1-raw.tar.gz",
+    "archive_sha256": "197684c857d929d88b1561095018aa2d11522533935d14583d5b30b9a027df8c",
+    "bytes": 43964,
+    "member": "reports/ordinary-complete.json",
+    "scope": "Ordinary native step1 passed and was independently accepted; enclosing WorldR1 failure remains historical.",
+    "sha256": "64cadcab074a7181a36c03db285aed42df0461dd0cda7bf12b029dd2b059496f"
+  },
+  "afterimage": {
+    "bytes": 12974,
+    "future_target": "go-backend/internal/httpapi/source7_ordinary_inputs_test.go",
+    "publication": "Independently reviewed candidate staging first; publish into R only through supported live adoption. No Source6 skip/version conditional.",
+    "sha256": "39343c251acffb9da70295b33e11afe9cb22a9fbbd071f53e2ab3a32ce16f45f",
+    "source": "docs/reviews/v1-7-recognizable-content/methods/source7_ordinary_inputs_test.go.txt",
+    "target_absent_in_I": true,
+    "target_absent_in_R": true,
+    "test": "TestSource7ContractsOrdinarySalaryInputs"
+  },
+  "baseline_commit": "1a7692e7ef98422f72721340348aa5d71b07bb4e",
+  "changes_from_accepted_method": [
+    "Root from standard httpapi package CWD only; scratch root/report env and paths removed.",
+    "Complete exported Content JSON compared with decoded actual disk export before and after services, excluding only unexported Shared caches without resetting/injecting them.",
+    "Scratch report serialization/diagnostic transcript/observation objects removed; bounded request and completed-arm counters retain max80/exact32/two complete sessions.",
+    "Self-contained test has no package-level helper functions; local JSON helper has source7Contracts prefix."
+  ],
+  "installation_or_release_approval": false,
+  "native_execution_performed": false,
+  "prepared_at_utc": "2026-10-09T06:03:07.958659+00:00",
+  "preserved_protocol": {
+    "assertion_line_mapping": {
+      "after_count": 30,
+      "after_sha256": "eb3d0e5fd6327ec376202fe142a45f76636e8fb566ff424b75b3635d43d2d469",
+      "identical_lines_except_equivalent_counter": 29,
+      "mapped_original_sha256": "eb3d0e5fd6327ec376202fe142a45f76636e8fb566ff424b75b3635d43d2d469",
+      "only_mapped_expression": "len(transcript) -> requestCount for max80 request cap",
+      "original_count": 30,
+      "proof": "All protocol t.Fatal/Fatalf/Error/Errorf-bearing lines preserve order and exact bytes after this one declared counter-expression substitution. Not a Go AST/compile qualification."
+    },
+    "canonical_owner": "n_v4soc_salariu",
+    "earned_flow": "unearned clue400 unchanged/Get; Bani/Impozit produce three unique nonwins; earned safer warmer banc\u0103rank3; exact4attempt/1clue/700score/share/terminalGet/Progress",
+    "feedback": "rank15/distance2/closeness99/Cald, shared canonical attempt/slot/repeats and feedback across input order",
+    "forms": [
+      "leaf\u0103",
+      "Salariu"
+    ],
+    "privacy": "Private target/score/share/curated fields and target identity substrings refused before win. Category already selected; no category-clue claim.",
+    "request_labels_exact_original_sequence": [
+      "create",
+      "unearned_clue",
+      "first_form",
+      "first_repeat",
+      "alternate_form",
+      "alternate_repeat",
+      "earned_extra",
+      "earned_clue",
+      "solve",
+      "terminal_get"
+    ],
+    "requests": 32,
+    "selector": "normal/Societate seed7 ordinary public creation; no search, forced target, exclusions or private session writes",
+    "sessions": 2
+  },
+  "remaining": "Independent source review, guarded candidate-only staging, actual Go formatting/compile/tests from candidate package CWD, current runtime/source/authority and full release gates.",
+  "schema": "permanent-Source7-ordinary-input-contract-afterimage-v1",
+  "serving_data_or_code_changed": false,
+  "source_inputs_sha256": {
+    "docs/reviews/v1-7-recognizable-content/current-source7-proper-sealed-play-actual-review-r2.json": "4ea6d518c00f5b79a5d0c3e5f47a31cdb7e42230031ae14e38e59c78e59d736d",
+    "docs/reviews/v1-7-recognizable-content/current-source7-proper-sealed-play-complete-results-r2.json": "fc75bdd82ce1dc7865c92db7215696547580802e1d818d78a9649116472cd335",
+    "docs/reviews/v1-7-recognizable-content/current-source7-proper-sealed-play-failed-r1-manifest.json": "9271feaa9c5b788ff7d902724eae085eced8b47cff5ef5cac825933d8441459e",
+    "docs/reviews/v1-7-recognizable-content/current-source7-sealed-play-method-review-r1.json": "ad89e7a9e1e189fcb285bb28abe67cec2f0a0c6c368a0f69c9447635b5953578",
+    "docs/reviews/v1-7-recognizable-content/go-source7-input-contracts-scope.json": "bf389aafcc8951051cc2530773b502651b79d058fa2081d2ada2b4a4e0ec63e8",
+    "docs/reviews/v1-7-recognizable-content/methods/sealed_ordinary_v17_r1.go.txt": "bf80920c229b4a67eaa820f5fb035f4ba04f29d650e72281e9fa06e60580f162",
+    "docs/reviews/v1-7-recognizable-content/ordinary-leafa-native-baseline-summary-r1.json": "e535d26c3b0b8602a3a96fa7e2457f1cc295643aa00928b4d1437412402532e6",
+    "go-backend/internal/content/content.go": "4990f7ba621b0f10519a3a29ef5e998ea4b2db323b4db2e8d15753a9ef6b4f83"
+  },
+  "source_preparation_incident": "An overstrict source assertion comparison initially rejected the declared transcript-length to request-counter substitution before publishing either file. Corrected by explicitly mapping only that cap expression; no native/I/R code/data action happened.",
+  "source_scope_sha256": "bf389aafcc8951051cc2530773b502651b79d058fa2081d2ada2b4a4e0ec63e8"
+}

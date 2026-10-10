@@ -1,13 +1,13 @@
 # Agent Testing Guide — cat_de_roman_esti
 
-Last verified: 2026-10-09 — FULL2db evidence is retained; new browser-capability source/tests NOT RUN.
+Last verified: 2026-10-10 — main/GUI source reconciliation only; actual full6ebc evidence and combined-source qualification limits are in STATUS.
 
 ## Native serving gates
 
 Go 1.27.1 serves the arcade, accounts/proposals and native content/tooling; selected Node 26.10.0/npm 12.2.0 SPA tooling follows [ADR-0184](adr/0184-native-spa-toolchain-and-managed-output.md).
 [ADR-0162](adr/0162-select-go-production-backend.md) and [ADR-0163](adr/0163-complete-native-go-accounts.md)
 record serving boundaries; [ADR-0166](adr/0166-native-content-operators-and-builder-rails.md)
-records native operator/review rails. Python commands below are optional independent references.
+records native operator/review rails. Python commands below are optional independent references ([ADR-0186](adr/0186-go-authoritative-content-validation.md)); they do not gate Go content adoption.
 
 | Scope | Command | Expected |
 |---|---|---|
@@ -15,6 +15,7 @@ records native operator/review rails. Python commands below are optional indepen
 | Shared native identity | `go -C shared-go/authcore test -race ./... && go -C shared-go/authcore vet ./...` | crypto/session/provider fixtures pass |
 | Native account release | `go -C go-backend test -race ./internal/accounts -accounts.database <disposable-dsn>` | real PostgreSQL migration/consent/erasure contracts pass |
 | Native combined HTTP release | `go -C go-backend test -race ./internal/httpapi -arcade.database <disposable-dsn>` | real signup/consent/game ownership/credit/erase races pass |
+| Native content check | `go -C go-backend run ./cmd/cat-content-ops check --root .. --check` | graph/pack, full rank/derive values, exact native format/mirrors and source stability |
 | Native source freshness | `go -C go-backend run ./cmd/cat-content validate --root .. && go -C go-backend run ./cmd/cat-content export --root .. --check` | complete source gates and exact sealed export |
 | Independent frozen HTTP | `go -C go-backend run ./cmd/cat-qualify parity --binary <native-binary>` | all 1207 independent expected responses/source bindings |
 | Frontend | `cd frontend && npm ci && npm test && npm run lint && npm run build` | original30 frozen; managed output/retirement per ADR-0184 |
@@ -47,7 +48,7 @@ Other supported Python versions test the retained implementation without regener
 | Reference/content lint | `<interp> -m ruff check` | `All checks passed!` |
 
 `pyproject.toml` adds `-q`; use `-o addopts=""` when recording assertion totals.
-Original Node 24 qualification is historical; selected ADR-0184 tooling needs actual owning Linux context/version evidence and complete normalized qualification.
+Original Node 24 qualification is historical; selected ADR-0184 tooling needs actual owning Linux context/version evidence and complete normalized qualification. Selected Node26.10.0/npm12.2.0 needs the actual owning wrapper evidence recorded in STATUS.
 Playwright setup uses `npx playwright install chromium`; `CDR_E2E_PORT` and
 `CDR_E2E_OUTPUT_DIR` scope the local server and scratch receipts. Private answer helpers run Go; `CDR_BROWSER_PLAN_BINARY` selects the scratch planner.
 Windows targeted reference tests use `PYTHONUTF8=1`; the full Unix `resource`-using suite needs WSL.
@@ -64,7 +65,7 @@ For browser fixtures, build `cat-browser-plan` and set its absolute scratch path
    Default/frozen closures stay static-only. FULL2db frontend319PASS/browser894of900PASS; full remainsFAIL. New early full real-browser probe/tests NOT RUN (REQ-6); all later native/privacy/browser/CSP checks remain.
 5. Record exact commands/results in `docs/STATUS.md`; overflow history belongs in WORKLOG.
 
-## Known load-sensitive reference check
+## Optional load-sensitive reference check
 
 `tests/test_alchimie_sparse_recipes.py::test_many_mined_sessions_stay_bounded_solvable_and_fast`
 asserts a 45-second wall-clock bound. Check host load and repeat on a quiet host before
@@ -75,4 +76,4 @@ Current content expectations: [ADR-0116](adr/0116-share-current-content-test-exp
 
 The separate `scripts/qualify_go_toolchain.sh` source alignment already selects exact Node 26.10.0 per [ADR-0184](adr/0184-native-spa-toolchain-and-managed-output.md); aligned standalone qualification remains **UNQUALIFIED, NOT RUN**.
 It remains separate from the owning GUI wrapper; actual Linux/version/lint context, disposable PG/task scratch and all native/privacy/browser qualification obligations remain.
-[ADR-0168](adr/0168-qualify-complete-native-toolchain.md) retains historical Node 24 proof; [NATIVE_TOOLCHAIN](NATIVE_TOOLCHAIN.md) records the pending aligned recipe. No missing required gate becomes a skip.
+[ADR-0168](adr/0168-qualify-complete-native-toolchain.md) retains historical Node 24 proof; [NATIVE_TOOLCHAIN](NATIVE_TOOLCHAIN.md) records the pending aligned recipe. No missing required gate becomes a skip. The native content check starts no PG or frontend scope.

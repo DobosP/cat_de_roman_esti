@@ -1,0 +1,27 @@
+{
+  "command_source_binding_sha256": "6be677ee7fe678144078bd8296e660b458ee2628c717261e80575ee4e7360633",
+  "error": {
+    "cause": "The whole argv contains Python interpreter -m pytest; this is not a pytest markerfilter. Check must inspect onlyargsafterliteralpytest.",
+    "failing_static_expression": "assert len(commands)==2 and '--collect-only' in commands[0]['argv'] and not any(x in commands[1]['argv'] for x in ['-k','-m','--collect-only'])",
+    "observed_tool_stack": "File <stdin>, line 19; AssertionError",
+    "type": "AssertionError"
+  },
+  "exact_methods_already_written_before_refusal": {
+    "check_full_reference_JUnit_v17_r2.py.txt": "fc804e342e71b0308f05164a332fddcb0023f666be05ee97886d9b57802ac2b6",
+    "freeze_full_reference_collection_v17_r2.py.txt": "901e9eb3dee1a337285eb019fd5606e8159e37dd3706b3d1a506e4bf606f0ccc"
+  },
+  "failure_retroactively_passed": false,
+  "generator_identity_limit": "Inline metadata generator was not a saved sourcefile; no fabricated wholefile SHA or rawpreimage. Exactfailingexpression,actualtoolstack andtwofrozenmethodfileSHAs preserved.",
+  "later_source_correction": "Sameoriginalclock; inspect argvonlyafterpytest. Separateexecution-only --maxfail=1 wasRootexplicitlyproposed/source-reviewed,notacorollaryoftheassertion. Frozen2parserbytes unchanged.",
+  "native_or_app_import_or_test_or_collection_or_I_source_mutation": false,
+  "outputs_NOT_written_before_refusal": [
+    "current-source7-full-reference-requalified-commands-r2.json",
+    "current-source7-full-reference-requalified-readset-r2.json",
+    "current-source7-full-reference-requalified-method-plan-r2.json",
+    "current-source7-full-reference-requalified-source-diff-r2.json"
+  ],
+  "recorded_at_utc": "2026-10-09T04:06:53.105855+00:00",
+  "schema": "v1-7-source-preparation-pytest-filter-boundary-assertion-v2",
+  "source_admission_sha256": "9d833daaef00c1247ee3e83cd5cca0828af6e92771d0ebded27ca6280bf8af3f",
+  "whole_inline_generator_file_sha256": null
+}

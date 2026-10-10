@@ -1,0 +1,171 @@
+from pathlib import Path
+import ast
+import json
+import hashlib
+import datetime
+import shutil
+import os
+import stat
+
+R = Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7')
+D = R / 'docs/reviews/v1-7-recognizable-content'
+T = Path('/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008')
+I = T / 'source7-current-stage-r1'
+case_path = T / 'current-source7-full-default-collected-cases-r1.json'
+inventory_path = D / 'current-source7-full-Python-static-inventory-r3.json'
+admission = D / 'current-source7-fullrun-prerequisites-source-admission-r1.json'
+output = D / 'current-source7-fullrun-other-reference-prerequisites-r1.json'
+readset_output = D / 'current-source7-fullrun-other-reference-readset-r1.json'
+
+def digest(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+cases = json.loads(case_path.read_bytes())
+assert digest(case_path) == 'f6c791d8f40b35443739459c1ffe9e132128ed7c67ad404061c8d77198203b13'
+assert len(cases['nodeids']) == 2733
+inventory = json.loads(inventory_path.read_bytes())
+excluded = {'tests/content_history.py', 'tests/test_critique_pack.py', 'tests/test_release_version_consistency.py'}
+excluded.update('tests/' + name for name in ['test_v45_lant_pending_gate.py', 'test_v46_conexiuni_pending_gate.py', 'test_v47_contexto_pending_gate.py', 'test_v48_alchimie_pending_gate.py', 'test_v49_lant_rejection_ledger.py'])
+assigned = [(row['path'], [use for use in row['uses'] if use['source'] not in excluded]) for row in inventory['missing_paths'] if not (I / row['path']).exists()]
+assigned = [(path, uses) for path, uses in assigned if uses]
+assert len(assigned) == 77
+source_pins = {}
+cache = {}
+
+def inspect_source(name):
+    if name in cache:
+        return cache[name]
+    text = (I / name).read_text()
+    tree = ast.parse(text)
+    functions = {node.name: node for node in tree.body if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))}
+    fixtures = {name for name, node in functions.items() if any('pytest.fixture' in ast.unparse(d) for d in node.decorator_list)}
+    autouse = {name for name in fixtures if any('autouse=True' in ast.unparse(d).replace(' ', '') for d in functions[name].decorator_list)}
+    edges = {}
+    for name, node in functions.items():
+        edges[name] = {call.func.id for call in ast.walk(node) if isinstance(call, ast.Call) and isinstance(call.func, ast.Name) and call.func.id in functions}
+        edges[name].update(arg.arg for arg in node.args.args if arg.arg in fixtures)
+        if name.startswith('test'):
+            edges[name].update(autouse)
+    def callers(function):
+        result = []
+        for nodeid in cases['nodeids']:
+            if nodeid.split('::')[0] != name:
+                continue
+            pending = [nodeid.split('::')[-1].split('[')[0]]
+            seen = set()
+            while pending:
+                item = pending.pop()
+                if item not in seen:
+                    seen.add(item)
+                    pending.extend(edges.get(item, set()) - seen)
+            if function in seen:
+                result.append(nodeid)
+        return result
+    def container(line):
+        nodes = [node for node in functions.values() if node.lineno <= line <= node.end_lineno]
+        return min(nodes, key=lambda node: node.end_lineno - node.lineno).name if nodes else None
+    readers = {name: [call.lineno for call in ast.walk(node) if isinstance(call, ast.Call) and isinstance(call.func, ast.Attribute) and call.func.attr in {'read_bytes', 'read_text', 'open'}] for name, node in functions.items()}
+    readers = {name: lines for name, lines in readers.items() if lines}
+    calls = []
+    for call in ast.walk(tree):
+        if not isinstance(call, ast.Call):
+            continue
+        leaf = call.func.attr if isinstance(call.func, ast.Attribute) else call.func.id if isinstance(call.func, ast.Name) else ''
+        if leaf in {'read_bytes', 'read_text', 'open'} or (isinstance(call.func, ast.Name) and call.func.id in readers):
+            calls.append(call)
+    source_pins[name] = digest(I / name)
+    cache[name] = (text, tree, callers, container, readers, calls)
+    return cache[name]
+
+def proof(name, line, guard=None):
+    text, tree, callers, container, readers, calls = inspect_source(name)
+    statements = [node for node in ast.walk(tree) if isinstance(node, ast.stmt) and hasattr(node, 'lineno') and node.lineno <= line <= node.end_lineno]
+    statement = min(statements, key=lambda node: node.end_lineno - node.lineno)
+    targets = {node.id for node in getattr(statement, 'targets', []) if isinstance(node, ast.Name)}
+    function = container(line)
+    matches = [call for call in calls if call.lineno <= line <= call.end_lineno]
+    if not matches and targets:
+        matches = [call for call in calls if any(isinstance(node, ast.Name) and node.id in targets for node in ast.walk(call)) and (function is None or container(call.lineno) == function)]
+    reads = []
+    for call in matches:
+        caller = container(call.lineno)
+        if caller is None:
+            continue
+        helper = call.func.id if isinstance(call.func, ast.Name) else None
+        reads.append({'line': call.lineno, 'expression': ast.get_source_segment(text, call), 'caller': caller, 'reader_helper_lines': readers.get(helper, []), 'collected_case_ids': callers(caller), 'guard': guard})
+    return {'source': name, 'source_sha256': source_pins[name], 'inventory_use_line': line, 'statement': ast.get_source_segment(text, statement), 'read_proofs': reads, 'classification': 'required immutable read proven' if reads else 'unresolved binding; this use grants no copy authority'}
+
+entries = {}
+def add(path, source, line, guard=None):
+    original = R / path
+    target = I / path
+    assert original.is_file() and not original.is_symlink()
+    row = entries.setdefault(path, {'source_path': str(original), 'target_path': str(target), 'R_sha256': digest(original), 'R_bytes': original.stat().st_size, 'R_mode': stat.S_IMODE(original.stat().st_mode), 'I_exists': target.exists(), 'I_sha256': digest(target) if target.is_file() else None, 'proofs': []})
+    row['proofs'].append(proof(source, line, guard))
+
+for path, uses in assigned:
+    for use in uses:
+        add(path, use['source'], use['line'])
+additional = set()
+def extra(path, source, line, guard):
+    additional.add(path)
+    add(path, source, line, guard)
+
+for prefix, source, line in [('v75-contexto-food', 'tests/test_v75_contexto_food.py', 137), ('v80-clatite-target', 'tests/test_v80_clatite_target.py', 98), ('v82-playable-content-batch', 'tests/test_v82_playable_content.py', 102), ('v83-food-input-and-feedback', 'tests/test_v83_playable_content.py', 83)]:
+    root = 'docs/reviews/' + prefix
+    for role in ('analyst', 'verifier'):
+        extra(root + '/' + role + '-review.json', source, line, 'Finite analyst/verifier tuple; byte-reading helper and provenance hash checks.')
+    if prefix != 'v75-contexto-food':
+        read_line = {'v80-clatite-target': 82, 'v82-playable-content-batch': 91, 'v83-food-input-and-feedback': 72}[prefix]
+        for name in ('verify_factual.json', 'verify_quality.json'):
+            extra(root + '/gastronomie/' + name, source, read_line, 'Finite verification filename tuple; _read calls path.read_bytes.')
+for prefix, source, line in [('v89-feedback-and-conexiuni-recovery', 'tests/test_v89_household_content.py', 145), ('v90-household-discovery-and-critique-gates', 'tests/test_v90_household_graph.py', 359)]:
+    root = 'docs/reviews/' + prefix
+    for role in ('analyst', 'verifier'):
+        extra(root + '/' + role + '.json', source, line, 'Finite analyst/verifier tuple; raw JSON and provenance checks.')
+    for name in ('verify_factual.json', 'verify_quality.json'):
+        extra(root + '/author-candidates/viata_de_roman/' + name, source, 133 if 'v89-' in prefix else 343, 'Finite verification tuple beside the actual candidate.')
+    artifact_path = root + '/final-gate/contexto_verdicts.json'
+    artifact = json.loads((R / artifact_path).read_bytes())
+    source_pins[artifact_path] = digest(R / artifact_path)
+    for item in artifact['perItem']:
+        extra(root + '/dossiers/' + item['id'] + '.json', source, 154 if 'v89-' in prefix else 368, 'Actual finite perItem ID loop reads the dossier and checks review_binding.')
+for root, source, line, stem in [('docs/reviews/v1-testing-release/content', 'tests/test_v1_lant_captions.py', 70, 'lt211-caption-'), ('docs/reviews/v94-words-and-clearer-connections/captions', 'tests/test_v94_lant_captions.py', 58, ''), ('docs/reviews/v94-words-and-clearer-connections/captions/new-rounds', 'tests/test_v94_lant_captions.py', 58, ''), ('docs/reviews/v97-discovery-continuity-and-new-words/integration/captions', 'tests/test_v97_lant_captions.py', 52, ''), ('docs/reviews/v99-refinement-and-discovery/captions', 'tests/test_v99_lant_captions.py', 56, '')]:
+    for role in ('factual', 'quality'):
+        extra(root + '/' + stem + role + '-review.json', source, line, 'Finite factual/quality tuple; V94 additionally has exactly two BATCHES directories.')
+for name, line in [('candidates.json', 226), ('factual-review.json', 228), ('quality-review.json', 228)]:
+    extra('docs/reviews/v1-testing-release/content/recipes/' + name, 'tests/test_v1_recipe_refresh.py', line, 'Fixed REVIEW candidate/raw roles; semantic review roles come from the immutable catalog.')
+extra('docs/reviews/v1-testing-release/content/alchimie-reserve-proposal.json', 'tests/test_v1_recipe_refresh.py', 111, 'prepare_comparison reads fixed CONTENT; comparison fixture reaches this helper.')
+for role in ('factual', 'quality'):
+    extra('docs/reviews/v92-session03-vocabulary-and-interface/alchimie/' + role + '-review.json', 'tests/test_v92_session03_world.py', 64, 'historical_catalog reads both role files and checks every recipe ID and world verdict.')
+extra('docs/reviews/v96-words-and-input-clarity/integration/alchimie/candidate.json', 'tests/test_v96_world_quality.py', 56, 'Fixed historical ARCHIVE candidate read with its original SHA assertion.')
+gate_path = 'docs/reviews/v44-final-gate/contexto_verdicts.json'
+gate = json.loads((R / gate_path).read_bytes())
+assert gate['batch']['input_ids'] == ['ct_literatura_298', 'ct_viata_de_roman_299']
+source_pins[gate_path] = digest(R / gate_path)
+for item in gate['perItem']:
+    extra('docs/reviews/v44-final-gate/dossiers/' + item['id'] + '.json', 'tests/test_v44_contexto_common_words.py', 466, 'Two literal asserted input IDs; actual perItem loop reads each clean bound dossier.')
+assert len(additional) == 46
+missing = {path: row for path, row in entries.items() if not row['I_exists']}
+retained = {path: row for path, row in entries.items() if row['I_exists']}
+unresolved = [{'path': path, 'source': use['source'], 'line': use['inventory_use_line']} for path, row in entries.items() for use in row['proofs'] if not use['read_proofs']]
+packet = {'schema': 'v1-7-other-fullrun-exact-read-prerequisites-v1', 'source_admission_sha256': digest(admission), 'case_manifest_path': str(case_path), 'case_manifest_sha256': digest(case_path), 'actual_collected_cases': 2733, 'actual_default_modules': 151, 'candidate_stage_files': 840, 'assignment_excluded_sources': sorted(excluded), 'original_assigned_missing_paths': 77, 'additional_finite_transitive_paths': 46, 'additional_missing_paths': 41, 'additional_retained_paths': 5, 'additional_missing_bytes': 708779, 'entries': entries, 'missing_unique_paths': len(missing), 'missing_raw_bytes': sum(row['R_bytes'] for row in missing.values()), 'retained_unique_paths': len(retained), 'unresolved_individual_uses': unresolved, 'source_pins': source_pins, 'scope': 'Source-only metadata AST, JSON and source-specific read proofs. No application imports, collection, tests, copying, compilation or source/data changes. No full-run readiness or copying approval.', 'conditional_non_copy_inputs': [{'source': 'tests/test_v1_recipe_refresh.py', 'lines': [32, 37, 49, 52, 225], 'classification': 'Existing autouse fixture generates historical KG, pack, extensions and rubric in its own TempRoot, then scopes ROOT. Catalog binding reads belong to that generated historical context. Never overwrite candidate serving fixtures with R Source6 bytes. Fixed REVIEW/CONTENT documents remain immutable I inputs.'}, {'source': 'tests/test_contexto_incoming_critique.py', 'line': 120, 'classification': 'report.read_text reads a temporary output generated earlier in the test body; it is not a missing immutable prerequisite. The archived dossier read at 154-162 is independently proven.'}], 'limits': 'Path assignments are not read proofs. Unresolved uses remain explicit; a separate reachable read proof may justify that same path, but no blanket copying follows. Caller/fixture reachability is static and tied to actual collected IDs, not execution. Three V1 gzip inputs are whole archive reads; caption .py.txt baselines are parsed as data. Vocabulary source URLs are checked strings, not fetched. Root owns content_history and its dynamic maps. Runtime, imports, Git and environment behavior remain outside this named read closure.', 'source_preparation_failure': {'exception': "SyntaxError: expected 'else' after 'if' expression", 'line': 62, 'offending_text': "133 if 'v89-' in prefix else343", 'before_execution_or_output_write': True, 'repair': 'Add normal whitespace after else; parse the entire corrected owned metadata script with ast.parse before running it under the same original source clock.', 'failed_preparation_remains_failed': True}, 'source_whole_RSS': 'unmeasured'}
+readset = {'schema': 'v1-7-other-fullrun-readproof-readset-v1', 'source_admission_sha256': digest(admission), 'source_pins': source_pins, 'immutable_R_evidence_sha256': {path: row['R_sha256'] for path, row in entries.items()}, 'case_manifest_path': str(case_path), 'case_manifest_sha256': digest(case_path), 'prior_static_inventory_sha256': digest(inventory_path), 'metadata_method_path': __file__, 'metadata_method_sha256': digest(Path(__file__)), 'no_supersession_or_execution_or_copy': True, 'source_whole_RSS': 'unmeasured'}
+for destination, value in [(output, packet), (readset_output, readset)]:
+    if destination == readset_output:
+        value['proof_packet_sha256'] = digest(output)
+    now = datetime.datetime.now(datetime.timezone.utc)
+    memory = int(next(line.split()[1] for line in Path('/proc/meminfo').read_text().splitlines() if line.startswith('MemAvailable:'))) * 1024
+    disk = shutil.disk_usage(R).free
+    value['fresh_before_write'] = {'checked_at_utc': now.isoformat(), 'memory_available_bytes': memory, 'disk_free_bytes': disk}
+    print(json.dumps(value['fresh_before_write']))
+    if now >= datetime.datetime.fromisoformat('2026-10-09T00:51:45+00:00') or min(memory, disk) < 16 * 1024 ** 3:
+        raise SystemExit('Source write stopped by the original cutoff/resource guard.')
+    raw = (json.dumps(value, ensure_ascii=False, sort_keys=True, indent=2) + '\n').encode()
+    assert json.loads(raw) == value
+    with destination.open('xb') as stream:
+        stream.write(raw)
+        stream.flush()
+        os.fsync(stream.fileno())
+    print(json.dumps({'path': str(destination), 'sha256': digest(destination), 'bytes': destination.stat().st_size}))
+print(json.dumps({'entries': len(entries), 'missing': len(missing), 'retained': len(retained), 'unresolved_uses': len(unresolved)}))

@@ -1,0 +1,69 @@
+{
+  "actual_result": {
+    "RSS_zero_means": "no positive sampler observation; real process memory not established",
+    "admission_sha256": "acfb51015ad26b7fc469dbbf13eb451945309f1b9cbdfc4406111655d6634734",
+    "caught_signal": null,
+    "cleanup_errors": [],
+    "existing_snapshots": 0,
+    "guard": "step-failure",
+    "local_failure_message": "",
+    "local_failure_type": "AssertionError",
+    "native_sampled_RSS_bytes": 0,
+    "observed_increment_bytes": 1755,
+    "original_deadline_utc": "2026-10-08T22:28:32.311957+00:00",
+    "original_metadata_reserve_utc": "2026-10-08T22:25:32.311957+00:00",
+    "original_native_admission": "current-source7-history-staging-r3",
+    "owned_new_targets": 0,
+    "publication_reserved_upper_bytes": 67110619,
+    "state_next_index": 1,
+    "state_pending": null,
+    "status": "failed",
+    "step_exit_code": 1
+  },
+  "dependency_sha256": {
+    "/home/dobo/work/_temp/codex__content-v1-7/probe/current-source7-history-staging-r3-0.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/dobo/work/_temp/codex__content-v1-7/probe/current-source7-history-staging-r3-r4-r3-state.json": "fb45acfb436b13c0b5730c6f9fd556c3a63b7cd2e4861cb3ebcdc2dd9b129122",
+    "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/current-source7-history-staging-admission-external-r3.json": "86c2f80122b2466576839e0be229447e7ca2e2fc9146922c2b03a3725d771ab9",
+    "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/current-source7-history-staging-failed-r3-protections.json": "52bb4199af8db843fe3fd83c1ffc6a3f02059c8428f091020e6f77aca1b6d728",
+    "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/current-source7-history-staging-r1/result-r3.json": "98b394a06fef79e220bcd12ce89d4a53bc5f924ce96237b8b6b3971c0f6ba479",
+    "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/current-source7-stage-after-export-inventory-r1.json": "24b6a176a329619957fb6f212a8b55890b34e845a48449f529239d61b050e284",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/current-source7-history-staging-native-admission-r3.json": "acfb51015ad26b7fc469dbbf13eb451945309f1b9cbdfc4406111655d6634734",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/current-source7-history-staging-r3-result.json": "e1652d73992c2129c4b7a0abe7c6f0a6eee9209d3843d7b002be0fffae46271d",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/current-source7-history-staging-r3-step-0-result.json": "63a007b0ca1a7c834bf5461c2b0b6c9f8f5caac1e943ee7f2a3686f4c7cd8fea",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/current-source7-history-staging-root-union-failure-r3.json": "2fe97cce0cdda854c929ec80cf81afa3bf34803d58dfbc17daf7af506ad7d3eb",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/current-source7-history-staging-root-union-repair-source-admission-r4.json": "2e2760521e62eaae50d7262364a72dfd52ca2cd1215e12df8b82f9a1f359a3bd",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/methods/stage_installed_history_v17_r3.py.txt": "85ce817e764cad3d00862151490663380e322d0a4172e8723c94573a49163a50"
+  },
+  "executed_repository_import_test_native_copy": false,
+  "fresh_prewrite": {
+    "MemAvailable_bytes": 78391427072,
+    "disk_free_bytes": 125124591616
+  },
+  "remaining": [
+    "Exact R4 source review must allow only these six readonly paths without dropping pins or broadening write scope, with fresh owned output namespace.",
+    "New executable admission/resources required after source acceptance; oldacfb failed campaign cannot be resumed.",
+    "No actual staging or testing PASS, installed history, current authority or Source7 live adoption approved."
+  ],
+  "reviewed_at_utc": "2026-10-08T22:11:33.763073+00:00",
+  "reviewer": "/root/v17_research_quality",
+  "schema": "v1-7-independent-failed-staging-identity-review-v1",
+  "six_exact_readonly_external_inputs": {
+    "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/_pytest/config/__init__.py": "98b05c2c37d09e1d5c05975efc2d9af98d4aff6ea47de410a8e93956420873c1",
+    "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/_pytest/junitxml.py": "557b8978c66b8010fafc50ada4bf56333f9927f31b2b5909fe4c1a9df1a3c0f0",
+    "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/_pytest/main.py": "8ee2725057ff1811e2ae9ebdf1befb7518195f8f333f9f8ca024d76a4b80780e",
+    "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/_pytest/python.py": "b04488f5e46bf1ffe2e8344f81756e10b970dbfaf2f7f2f4d312becd6404df76",
+    "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/pytest_django/plugin.py": "5c129167e465fabeb2bead63b41c128088cac784c5f0f25fb2575bacc839baa9",
+    "/usr/share/man/man1/env.1.gz": "0d9757863f4e6862c047701d3de97c633b36404dc9a7d6c62efd7ed99b271185"
+  },
+  "source_admission_sha256": "2e2760521e62eaae50d7262364a72dfd52ca2cd1215e12df8b82f9a1f359a3bd",
+  "source_cutoff_utc": "2026-10-08T22:26:55.017640+00:00",
+  "source_whole_RSS": "unmeasured",
+  "verdict": "ACCEPT_FAILED_EVIDENCE_IDENTITY_AND_NO_STAGE_WRITES_ONLY",
+  "verified": [
+    "All seven named failure-producing files/log/state/admission/external/local/outer receipts match frozen hashes. Empty log and operand-free AssertionError are preserved honestly.",
+    "All3603 original input bindings still exact; all3598 non-target post checks pass. The106 false expected-after checks are exactly the uninstalled outputs, not missing immutable inputs or partial installations.",
+    "All716 stage files retain exact byteSHA/size/mode/membership, with no target additions or lock. Five old target beforeimages remain actual current state.",
+    "Original failed state next1/pendingnull and original admission/deadline stay immutable; this receipt does not permit resumption.",
+    "Static writer readset precheck selects S for every non-R path, then read_regular asserts relative containment. Exactly six added testing-tool input paths lie outsideR/S and are rejected before target snapshots/writes. Their actual exactSHAs are retained. This is static diagnosis; original exception did not emit trigger operands."
+  ]
+}

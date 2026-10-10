@@ -1,0 +1,1658 @@
+{
+  "Git_helper": {
+    "called_from": "tests/test_report_content_delta.py::test_cli_reads_baseline_git_content_and_uncommitted_workspace",
+    "commit_identity": "The source passes -c user.name=Test, -c user.email=test@example.test and -c commit.gpgsign=false. Clear ambient author/committer variables so they cannot override that synthetic identity.",
+    "line": 153,
+    "no_shared_Git_cache_write": "All repository objects/index/commits are in the test tmp_path; no remote or shared worktree mutation is authorized.",
+    "operations": [
+      "init",
+      "add",
+      "commit",
+      "rev-parse --verify --end-of-options",
+      "ls-tree --name-only",
+      "show"
+    ],
+    "repository": "The test passes its own tmp_path. The five fixture JSON files are written there. No operation targets R or I, and no fetch/push/remote/provider action exists in this call chain.",
+    "required_environment_unsets": [
+      "GIT_DIR",
+      "GIT_WORK_TREE",
+      "GIT_COMMON_DIR",
+      "GIT_INDEX_FILE",
+      "GIT_OBJECT_DIRECTORY",
+      "GIT_ALTERNATE_OBJECT_DIRECTORIES",
+      "GIT_NAMESPACE",
+      "GIT_PREFIX",
+      "GIT_CONFIG",
+      "GIT_CONFIG_COUNT",
+      "GIT_CONFIG_PARAMETERS",
+      "GIT_SSH_COMMAND",
+      "GIT_PROXY_COMMAND",
+      "GIT_CEILING_DIRECTORIES",
+      "GIT_DISCOVERY_ACROSS_FILESYSTEM",
+      "GIT_AUTHOR_NAME",
+      "GIT_AUTHOR_EMAIL",
+      "GIT_AUTHOR_DATE",
+      "GIT_COMMITTER_NAME",
+      "GIT_COMMITTER_EMAIL",
+      "GIT_COMMITTER_DATE",
+      "GIT_DEFAULT_REF_FORMAT"
+    ],
+    "required_environment_values": {
+      "GIT_ASKPASS": "/bin/false",
+      "GIT_ATTR_NOSYSTEM": "1",
+      "GIT_CONFIG_COUNT": "0",
+      "GIT_CONFIG_GLOBAL": "/dev/null",
+      "GIT_CONFIG_NOSYSTEM": "1",
+      "GIT_CONFIG_SYSTEM": "/dev/null",
+      "GIT_DEFAULT_HASH": "sha1",
+      "GIT_TERMINAL_PROMPT": "0",
+      "SSH_ASKPASS": "/bin/false"
+    },
+    "required_fresh_directories": "Set GIT_TEMPLATE_DIR to a newly created empty directory inside the owned test workspace and XDG_CONFIG_HOME/XDG_CACHE_HOME there. Do not change HOME. Empty templates and null system/global configs prevent inherited hooks, filters, signing and credential helpers; COUNT=0 ignores KEY_n/VALUE_n. The SHA-1 default preserves the test 40-character assertion.",
+    "source": "scripts/report_content_delta.py",
+    "tool": {
+      "path": "/usr/bin/git",
+      "resolved_path": "/usr/bin/git",
+      "sha256": "2a8c18fbf43da9f692d75474c72bea9dfd796c260b0f3dfe456376abc3bbd668"
+    }
+  },
+  "Lant_detour_skip": {
+    "lines": [
+      1059,
+      1081
+    ],
+    "nodeid": "tests/test_wordgames_lant.py::test_over_par_lowers_score_but_never_below_floor",
+    "predicate": "For seeds 0..59 create a greu game; _detour_neighbor finds a legal neighbor with a finite distance to target >= current optimal distance. Only if all sampled games lack that neighbor does the original test skip.",
+    "supported_data_reasoning": "Source7 adds only the Salary alias. Nodes, edges, puzzle bodies, boards, endpoint identities, labels and deterministic selection mechanics are unchanged from the qualified Source6 scope. The detour topology predicate is unchanged. The comment that a greu detour exists in practice does not prove the 60-seed sample for this run; no game/service probe or test was executed. Any skip remains visible and that score case unqualified."
+  },
+  "candidate_file_count": 1192,
+  "candidate_root": "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/source7-current-stage-r1",
+  "dependency_classification": "All 26 installed core/default-web/test distribution metadata and RECORD identities are recorded. Explicit marker branches are classified for qualified CPython 3.12/Linux with no optional extras. Account/allauth/provider extras are not activated by this profile. This is installed metadata evidence, not fresh imports, version-constraint execution or universal native-extension/platform qualification.",
+  "dependency_edges": [
+    {
+      "active": false,
+      "dependency": "brotli",
+      "from": "whitenoise",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "brotli; extra == \"brotli\""
+    },
+    {
+      "active": true,
+      "dependency": "asgiref",
+      "from": "django-cors-headers",
+      "reason": "Unconditional core requirement.",
+      "requirement": "asgiref>=3.6"
+    },
+    {
+      "active": true,
+      "dependency": "django",
+      "from": "django-cors-headers",
+      "reason": "Unconditional core requirement.",
+      "requirement": "django>=4.2"
+    },
+    {
+      "active": true,
+      "dependency": "asgiref",
+      "from": "django",
+      "reason": "Unconditional core requirement.",
+      "requirement": "asgiref>=3.8.1"
+    },
+    {
+      "active": true,
+      "dependency": "sqlparse",
+      "from": "django",
+      "reason": "Unconditional core requirement.",
+      "requirement": "sqlparse>=0.3.1"
+    },
+    {
+      "active": false,
+      "dependency": "tzdata",
+      "from": "django",
+      "reason": "Windows marker is false for the qualified Linux host.",
+      "requirement": "tzdata; sys_platform == \"win32\""
+    },
+    {
+      "active": false,
+      "dependency": "argon2-cffi",
+      "from": "django",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "argon2-cffi>=19.1.0; extra == \"argon2\""
+    },
+    {
+      "active": false,
+      "dependency": "bcrypt",
+      "from": "django",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "bcrypt; extra == \"bcrypt\""
+    },
+    {
+      "active": false,
+      "dependency": "build",
+      "from": "sqlparse",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "build; extra == 'dev'"
+    },
+    {
+      "active": false,
+      "dependency": "sphinx",
+      "from": "sqlparse",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "sphinx; extra == 'doc'"
+    },
+    {
+      "active": false,
+      "dependency": "typing-extensions",
+      "from": "asgiref",
+      "reason": "The explicit older-Python marker is false for qualified CPython 3.12.",
+      "requirement": "typing_extensions>=4; python_version < \"3.11\""
+    },
+    {
+      "active": false,
+      "dependency": "pytest",
+      "from": "asgiref",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "pytest; extra == \"tests\""
+    },
+    {
+      "active": false,
+      "dependency": "pytest-asyncio",
+      "from": "asgiref",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "pytest-asyncio; extra == \"tests\""
+    },
+    {
+      "active": false,
+      "dependency": "mypy",
+      "from": "asgiref",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "mypy>=1.14.0; extra == \"tests\""
+    },
+    {
+      "active": true,
+      "dependency": "django",
+      "from": "drf-spectacular",
+      "reason": "Unconditional core requirement.",
+      "requirement": "Django>=2.2"
+    },
+    {
+      "active": true,
+      "dependency": "djangorestframework",
+      "from": "drf-spectacular",
+      "reason": "Unconditional core requirement.",
+      "requirement": "djangorestframework>=3.10.3"
+    },
+    {
+      "active": true,
+      "dependency": "uritemplate",
+      "from": "drf-spectacular",
+      "reason": "Unconditional core requirement.",
+      "requirement": "uritemplate>=2.0.0"
+    },
+    {
+      "active": true,
+      "dependency": "pyyaml",
+      "from": "drf-spectacular",
+      "reason": "Unconditional core requirement.",
+      "requirement": "PyYAML>=5.1"
+    },
+    {
+      "active": true,
+      "dependency": "jsonschema",
+      "from": "drf-spectacular",
+      "reason": "Unconditional core requirement.",
+      "requirement": "jsonschema>=2.6.0"
+    },
+    {
+      "active": true,
+      "dependency": "inflection",
+      "from": "drf-spectacular",
+      "reason": "Unconditional core requirement.",
+      "requirement": "inflection>=0.3.1"
+    },
+    {
+      "active": false,
+      "dependency": "typing-extensions",
+      "from": "drf-spectacular",
+      "reason": "The explicit older-Python marker is false for qualified CPython 3.12.",
+      "requirement": "typing-extensions; python_version < \"3.10\""
+    },
+    {
+      "active": false,
+      "dependency": "drf-spectacular-sidecar",
+      "from": "drf-spectacular",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "drf-spectacular-sidecar; extra == \"offline\""
+    },
+    {
+      "active": false,
+      "dependency": "drf-spectacular-sidecar",
+      "from": "drf-spectacular",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "drf-spectacular-sidecar; extra == \"sidecar\""
+    },
+    {
+      "active": true,
+      "dependency": "attrs",
+      "from": "jsonschema",
+      "reason": "Unconditional core requirement.",
+      "requirement": "attrs>=22.2.0"
+    },
+    {
+      "active": true,
+      "dependency": "jsonschema-specifications",
+      "from": "jsonschema",
+      "reason": "Unconditional core requirement.",
+      "requirement": "jsonschema-specifications>=2023.03.6"
+    },
+    {
+      "active": true,
+      "dependency": "referencing",
+      "from": "jsonschema",
+      "reason": "Unconditional core requirement.",
+      "requirement": "referencing>=0.28.4"
+    },
+    {
+      "active": true,
+      "dependency": "rpds-py",
+      "from": "jsonschema",
+      "reason": "Unconditional core requirement.",
+      "requirement": "rpds-py>=0.25.0"
+    },
+    {
+      "active": false,
+      "dependency": "fqdn",
+      "from": "jsonschema",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "fqdn; extra == 'format'"
+    },
+    {
+      "active": false,
+      "dependency": "idna",
+      "from": "jsonschema",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "idna; extra == 'format'"
+    },
+    {
+      "active": false,
+      "dependency": "isoduration",
+      "from": "jsonschema",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "isoduration; extra == 'format'"
+    },
+    {
+      "active": false,
+      "dependency": "jsonpointer",
+      "from": "jsonschema",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "jsonpointer>1.13; extra == 'format'"
+    },
+    {
+      "active": false,
+      "dependency": "rfc3339-validator",
+      "from": "jsonschema",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "rfc3339-validator; extra == 'format'"
+    },
+    {
+      "active": false,
+      "dependency": "rfc3987",
+      "from": "jsonschema",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "rfc3987; extra == 'format'"
+    },
+    {
+      "active": false,
+      "dependency": "uri-template",
+      "from": "jsonschema",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "uri-template; extra == 'format'"
+    },
+    {
+      "active": false,
+      "dependency": "webcolors",
+      "from": "jsonschema",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "webcolors>=1.11; extra == 'format'"
+    },
+    {
+      "active": false,
+      "dependency": "fqdn",
+      "from": "jsonschema",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "fqdn; extra == 'format-nongpl'"
+    },
+    {
+      "active": false,
+      "dependency": "idna",
+      "from": "jsonschema",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "idna; extra == 'format-nongpl'"
+    },
+    {
+      "active": false,
+      "dependency": "isoduration",
+      "from": "jsonschema",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "isoduration; extra == 'format-nongpl'"
+    },
+    {
+      "active": false,
+      "dependency": "jsonpointer",
+      "from": "jsonschema",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "jsonpointer>1.13; extra == 'format-nongpl'"
+    },
+    {
+      "active": false,
+      "dependency": "rfc3339-validator",
+      "from": "jsonschema",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "rfc3339-validator; extra == 'format-nongpl'"
+    },
+    {
+      "active": false,
+      "dependency": "rfc3986-validator",
+      "from": "jsonschema",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "rfc3986-validator>0.1.0; extra == 'format-nongpl'"
+    },
+    {
+      "active": false,
+      "dependency": "rfc3987-syntax",
+      "from": "jsonschema",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "rfc3987-syntax>=1.1.0; extra == 'format-nongpl'"
+    },
+    {
+      "active": false,
+      "dependency": "uri-template",
+      "from": "jsonschema",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "uri-template; extra == 'format-nongpl'"
+    },
+    {
+      "active": false,
+      "dependency": "webcolors",
+      "from": "jsonschema",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "webcolors>=24.6.0; extra == 'format-nongpl'"
+    },
+    {
+      "active": true,
+      "dependency": "attrs",
+      "from": "referencing",
+      "reason": "Unconditional core requirement.",
+      "requirement": "attrs>=22.2.0"
+    },
+    {
+      "active": true,
+      "dependency": "rpds-py",
+      "from": "referencing",
+      "reason": "Unconditional core requirement.",
+      "requirement": "rpds-py>=0.7.0"
+    },
+    {
+      "active": true,
+      "dependency": "typing-extensions",
+      "from": "referencing",
+      "reason": "The explicit Python <3.13 marker is true for CPython 3.12.",
+      "requirement": "typing-extensions>=4.4.0; python_version < '3.13'"
+    },
+    {
+      "active": true,
+      "dependency": "referencing",
+      "from": "jsonschema-specifications",
+      "reason": "Unconditional core requirement.",
+      "requirement": "referencing>=0.31.0"
+    },
+    {
+      "active": true,
+      "dependency": "django",
+      "from": "djangorestframework",
+      "reason": "Unconditional core requirement.",
+      "requirement": "django>=4.2"
+    },
+    {
+      "active": true,
+      "dependency": "pytest",
+      "from": "pytest-django",
+      "reason": "Unconditional core requirement.",
+      "requirement": "pytest>=7.0.0"
+    },
+    {
+      "active": false,
+      "dependency": "colorama",
+      "from": "pytest",
+      "reason": "Windows marker is false for the qualified Linux host.",
+      "requirement": "colorama>=0.4; sys_platform == \"win32\""
+    },
+    {
+      "active": false,
+      "dependency": "exceptiongroup",
+      "from": "pytest",
+      "reason": "The explicit older-Python marker is false for qualified CPython 3.12.",
+      "requirement": "exceptiongroup>=1; python_version < \"3.11\""
+    },
+    {
+      "active": true,
+      "dependency": "iniconfig",
+      "from": "pytest",
+      "reason": "Unconditional core requirement.",
+      "requirement": "iniconfig>=1.0.1"
+    },
+    {
+      "active": true,
+      "dependency": "packaging",
+      "from": "pytest",
+      "reason": "Unconditional core requirement.",
+      "requirement": "packaging>=22"
+    },
+    {
+      "active": true,
+      "dependency": "pluggy",
+      "from": "pytest",
+      "reason": "Unconditional core requirement.",
+      "requirement": "pluggy<2,>=1.5"
+    },
+    {
+      "active": true,
+      "dependency": "pygments",
+      "from": "pytest",
+      "reason": "Unconditional core requirement.",
+      "requirement": "pygments>=2.7.2"
+    },
+    {
+      "active": false,
+      "dependency": "tomli",
+      "from": "pytest",
+      "reason": "The explicit older-Python marker is false for qualified CPython 3.12.",
+      "requirement": "tomli>=1; python_version < \"3.11\""
+    },
+    {
+      "active": false,
+      "dependency": "argcomplete",
+      "from": "pytest",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "argcomplete; extra == \"dev\""
+    },
+    {
+      "active": false,
+      "dependency": "attrs",
+      "from": "pytest",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "attrs>=19.2; extra == \"dev\""
+    },
+    {
+      "active": false,
+      "dependency": "hypothesis",
+      "from": "pytest",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "hypothesis>=3.56; extra == \"dev\""
+    },
+    {
+      "active": false,
+      "dependency": "mock",
+      "from": "pytest",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "mock; extra == \"dev\""
+    },
+    {
+      "active": false,
+      "dependency": "requests",
+      "from": "pytest",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "requests; extra == \"dev\""
+    },
+    {
+      "active": false,
+      "dependency": "setuptools",
+      "from": "pytest",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "setuptools; extra == \"dev\""
+    },
+    {
+      "active": false,
+      "dependency": "xmlschema",
+      "from": "pytest",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "xmlschema; extra == \"dev\""
+    },
+    {
+      "active": false,
+      "dependency": "colorama",
+      "from": "pygments",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "colorama>=0.4.6; extra == 'windows-terminal'"
+    },
+    {
+      "active": false,
+      "dependency": "pre-commit",
+      "from": "pluggy",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "pre-commit; extra == \"dev\""
+    },
+    {
+      "active": false,
+      "dependency": "tox",
+      "from": "pluggy",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "tox; extra == \"dev\""
+    },
+    {
+      "active": false,
+      "dependency": "pytest",
+      "from": "pluggy",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "pytest; extra == \"testing\""
+    },
+    {
+      "active": false,
+      "dependency": "pytest-benchmark",
+      "from": "pluggy",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "pytest-benchmark; extra == \"testing\""
+    },
+    {
+      "active": false,
+      "dependency": "coverage",
+      "from": "pluggy",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "coverage; extra == \"testing\""
+    },
+    {
+      "active": true,
+      "dependency": "annotated-types",
+      "from": "pydantic",
+      "reason": "Unconditional core requirement.",
+      "requirement": "annotated-types>=0.6.0"
+    },
+    {
+      "active": true,
+      "dependency": "pydantic-core",
+      "from": "pydantic",
+      "reason": "Unconditional core requirement.",
+      "requirement": "pydantic-core==2.46.4"
+    },
+    {
+      "active": true,
+      "dependency": "typing-extensions",
+      "from": "pydantic",
+      "reason": "Unconditional core requirement.",
+      "requirement": "typing-extensions>=4.14.1"
+    },
+    {
+      "active": true,
+      "dependency": "typing-inspection",
+      "from": "pydantic",
+      "reason": "Unconditional core requirement.",
+      "requirement": "typing-inspection>=0.4.2"
+    },
+    {
+      "active": false,
+      "dependency": "email-validator",
+      "from": "pydantic",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "email-validator>=2.0.0; extra == 'email'"
+    },
+    {
+      "active": false,
+      "dependency": "tzdata",
+      "from": "pydantic",
+      "reason": "Optional extra not selected in the default anonymous reference profile.",
+      "requirement": "tzdata; (python_version >= '3.9' and platform_system == 'Windows') and extra == 'timezone'"
+    },
+    {
+      "active": true,
+      "dependency": "typing-extensions",
+      "from": "typing-inspection",
+      "reason": "Unconditional core requirement.",
+      "requirement": "typing-extensions>=4.12.0"
+    },
+    {
+      "active": true,
+      "dependency": "typing-extensions",
+      "from": "pydantic-core",
+      "reason": "Unconditional core requirement.",
+      "requirement": "typing-extensions>=4.14.1"
+    },
+    {
+      "active": false,
+      "dependency": "typing-extensions",
+      "from": "annotated-types",
+      "reason": "The explicit older-Python marker is false for qualified CPython 3.12.",
+      "requirement": "typing-extensions>=4.0.0; python_version < '3.9'"
+    }
+  ],
+  "environment_names_to_unset_before_forcing_accounts0": [
+    "CAT_ACCOUNTS_ENABLED",
+    "CAT_ALLOWED_HOSTS",
+    "CAT_BOARD_RANKINGS",
+    "CAT_CONSENT_VERSION",
+    "CAT_CSRF_TRUSTED_ORIGINS",
+    "CAT_DATABASE_URL",
+    "CAT_DB_PATH",
+    "CAT_DB_SSL",
+    "CAT_DEBUG",
+    "CAT_DOMAIN",
+    "CAT_DONATE_URL",
+    "CAT_GAMES_PACK",
+    "CAT_HSTS_PRELOAD",
+    "CAT_HSTS_SECONDS",
+    "CAT_HSTS_SUBDOMAINS",
+    "CAT_KG_FIXTURE",
+    "CAT_LEGAL_CONTACT_EMAIL",
+    "CAT_LEGAL_OPERATOR",
+    "CAT_LOG_LEVEL",
+    "CAT_MAX_REQUEST_BYTES",
+    "CAT_MAX_SESSIONS_PER_GAME",
+    "CAT_MIN_SELF_CONSENT_AGE",
+    "CAT_SECRET_KEY",
+    "CAT_SESSION_TTL_SECONDS",
+    "CAT_SSL_REDIRECT",
+    "DATABASE_URL",
+    "GOOGLE_OAUTH_CLIENT_ID",
+    "GOOGLE_OAUTH_CLIENT_SECRET",
+    "ROEDU_API_KEY",
+    "ROEDU_API_URL",
+    "TEST_CAT_CAP",
+    "TEST_CAT_REQUEST_BYTES",
+    "TEST_CAT_TTL"
+  ],
+  "environment_policy": "Use exact I cwd/PYTHONPATH and main venv, bytecode/cache off, standard pytest-django only, fresh owned TMP/XDG/basetemp and previous passing-case cleanup policy. Unset listed environment names and PYTEST_ADDOPTS/PYTEST_PLUGINS/PYTHONHOME/PY_IGNORE_IMPORTMISMATCH, then force CAT_ACCOUNTS_ENABLED=0 and canonical DJANGO_SETTINGS_MODULE. Never inspect or print their inherited values.",
+  "fresh_before_write": {
+    "checked_at_utc": "2026-10-09T02:04:00.780665+00:00",
+    "disk_free_bytes": 118996606976,
+    "memory_available_bytes": 28093722624
+  },
+  "full_run_readiness": "Withheld pending exact method review, fresh post-staging collection, resources, Git isolation and actual case results. Static metadata does not establish test PASS, Source7 installation, current authority or release.",
+  "installed_default_dependency_seeds": [
+    "django",
+    "pytest",
+    "pydantic",
+    "pytest-django",
+    "djangorestframework",
+    "drf-spectacular",
+    "django-cors-headers",
+    "whitenoise"
+  ],
+  "installed_dependency_closure": {
+    "annotated-types": {
+      "metadata_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/annotated_types-0.7.0.dist-info/METADATA",
+      "metadata_sha256": "ee5b6ac64b09274c026051813484025939564067801f485115d9cadc207cf791",
+      "record_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/annotated_types-0.7.0.dist-info/RECORD",
+      "record_sha256": "5bb4f1ca72420634ebd566dafd9d5fbce3051b0c1c1d13980f6ceeb5c4dbb843",
+      "requires_dist": [
+        "typing-extensions>=4.0.0; python_version < '3.9'"
+      ],
+      "version": "0.7.0"
+    },
+    "asgiref": {
+      "metadata_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/asgiref-3.11.1.dist-info/METADATA",
+      "metadata_sha256": "68b78f7093fa37b1e99de09b69c4e63bfe067386f43d14a8d9f58fc2c58b7984",
+      "record_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/asgiref-3.11.1.dist-info/RECORD",
+      "record_sha256": "25b66f4fc8f69ca6f95021f30083c5c6438e82d25a5922f7c3ee31c4a6dd8353",
+      "requires_dist": [
+        "typing_extensions>=4; python_version < \"3.11\"",
+        "pytest; extra == \"tests\"",
+        "pytest-asyncio; extra == \"tests\"",
+        "mypy>=1.14.0; extra == \"tests\""
+      ],
+      "version": "3.11.1"
+    },
+    "attrs": {
+      "metadata_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/attrs-26.1.0.dist-info/METADATA",
+      "metadata_sha256": "4cd40e690f23bf37cbcad34efd6758e062df1df07c86833f7e3ce95bf1fa38cc",
+      "record_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/attrs-26.1.0.dist-info/RECORD",
+      "record_sha256": "6b0b326d4b4ee0fac27909ac7cbb066fc4bdf8e93d87031e27e770db059e5a04",
+      "requires_dist": [],
+      "version": "26.1.0"
+    },
+    "django": {
+      "metadata_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/django-5.2.16.dist-info/METADATA",
+      "metadata_sha256": "a7cd5efa42a22c2e8447ad8076f4c663e838cb2d219f60c8e0e5ca8f3d8e71b7",
+      "record_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/django-5.2.16.dist-info/RECORD",
+      "record_sha256": "282b0864517d309448c8a54380682b722759af7fc313ec138d2c074fbcdf57a1",
+      "requires_dist": [
+        "asgiref>=3.8.1",
+        "sqlparse>=0.3.1",
+        "tzdata; sys_platform == \"win32\"",
+        "argon2-cffi>=19.1.0; extra == \"argon2\"",
+        "bcrypt; extra == \"bcrypt\""
+      ],
+      "version": "5.2.16"
+    },
+    "django-cors-headers": {
+      "metadata_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/django_cors_headers-4.9.0.dist-info/METADATA",
+      "metadata_sha256": "9bc4a9b87f0b832b5925ee99046ca394d1201f2549cc0f72f76ed21d329a8370",
+      "record_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/django_cors_headers-4.9.0.dist-info/RECORD",
+      "record_sha256": "3d9f5c841030fdacdfcd1b8da53a5be39edc5a695a746ca761138945a6007464",
+      "requires_dist": [
+        "asgiref>=3.6",
+        "django>=4.2"
+      ],
+      "version": "4.9.0"
+    },
+    "djangorestframework": {
+      "metadata_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/djangorestframework-3.17.1.dist-info/METADATA",
+      "metadata_sha256": "f5dbea33e402b2ef7ccfce773e014cfe442f95e9725d7f55dadd8642bf32e0f9",
+      "record_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/djangorestframework-3.17.1.dist-info/RECORD",
+      "record_sha256": "b588f1552b1953c9412050e37a0d14ef73c554ad3db7802e717c131ab974bd31",
+      "requires_dist": [
+        "django>=4.2"
+      ],
+      "version": "3.17.1"
+    },
+    "drf-spectacular": {
+      "metadata_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/drf_spectacular-0.30.0.dist-info/METADATA",
+      "metadata_sha256": "4bfc973924d78db48b489033f5176c778818133f1a2da51c7b6d067aa3c4f377",
+      "record_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/drf_spectacular-0.30.0.dist-info/RECORD",
+      "record_sha256": "30ce8d823cb6762fb09fbe1b3a632a58ba84e2c97173db09b8b1c54b2cc76150",
+      "requires_dist": [
+        "Django>=2.2",
+        "djangorestframework>=3.10.3",
+        "uritemplate>=2.0.0",
+        "PyYAML>=5.1",
+        "jsonschema>=2.6.0",
+        "inflection>=0.3.1",
+        "typing-extensions; python_version < \"3.10\"",
+        "drf-spectacular-sidecar; extra == \"offline\"",
+        "drf-spectacular-sidecar; extra == \"sidecar\""
+      ],
+      "version": "0.30.0"
+    },
+    "inflection": {
+      "metadata_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/inflection-0.5.1.dist-info/METADATA",
+      "metadata_sha256": "1f384438420dd71287d030fecfd98f276ff8657bbf9989380d50f199c1e20c25",
+      "record_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/inflection-0.5.1.dist-info/RECORD",
+      "record_sha256": "206baa3990809bbe9fb90855d015a04232487b695f95ad171e14cea4036fafd9",
+      "requires_dist": [],
+      "version": "0.5.1"
+    },
+    "iniconfig": {
+      "metadata_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/iniconfig-2.3.0.dist-info/METADATA",
+      "metadata_sha256": "40d773f84e4e112f495bbf4f1be9cbd2d456c0aeb6ef5311f75d1bf322f2165b",
+      "record_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/iniconfig-2.3.0.dist-info/RECORD",
+      "record_sha256": "4b560f65489a4dc0f32d8403da676d2e6338c371fe844160934b3fe469785185",
+      "requires_dist": [],
+      "version": "2.3.0"
+    },
+    "jsonschema": {
+      "metadata_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/jsonschema-4.26.0.dist-info/METADATA",
+      "metadata_sha256": "05b189866ca98a96da3934bf6b83687ced3ff85325273b77e16b705f6d8b26d2",
+      "record_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/jsonschema-4.26.0.dist-info/RECORD",
+      "record_sha256": "be11035e8c8bcf552c9c89101363983dbed1274c427f1297ccd7c23ca38b372e",
+      "requires_dist": [
+        "attrs>=22.2.0",
+        "jsonschema-specifications>=2023.03.6",
+        "referencing>=0.28.4",
+        "rpds-py>=0.25.0",
+        "fqdn; extra == 'format'",
+        "idna; extra == 'format'",
+        "isoduration; extra == 'format'",
+        "jsonpointer>1.13; extra == 'format'",
+        "rfc3339-validator; extra == 'format'",
+        "rfc3987; extra == 'format'",
+        "uri-template; extra == 'format'",
+        "webcolors>=1.11; extra == 'format'",
+        "fqdn; extra == 'format-nongpl'",
+        "idna; extra == 'format-nongpl'",
+        "isoduration; extra == 'format-nongpl'",
+        "jsonpointer>1.13; extra == 'format-nongpl'",
+        "rfc3339-validator; extra == 'format-nongpl'",
+        "rfc3986-validator>0.1.0; extra == 'format-nongpl'",
+        "rfc3987-syntax>=1.1.0; extra == 'format-nongpl'",
+        "uri-template; extra == 'format-nongpl'",
+        "webcolors>=24.6.0; extra == 'format-nongpl'"
+      ],
+      "version": "4.26.0"
+    },
+    "jsonschema-specifications": {
+      "metadata_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/jsonschema_specifications-2025.9.1.dist-info/METADATA",
+      "metadata_sha256": "35abd41757f32b4ea24756920ded47b70173d77cbc052a5a6d3ab583b2e8d89d",
+      "record_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/jsonschema_specifications-2025.9.1.dist-info/RECORD",
+      "record_sha256": "0b1047ee6c7d5d7c242b642d689820f4572860ecf7886b2074f821ed85cbe7b6",
+      "requires_dist": [
+        "referencing>=0.31.0"
+      ],
+      "version": "2025.9.1"
+    },
+    "packaging": {
+      "metadata_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/packaging-26.2.dist-info/METADATA",
+      "metadata_sha256": "4f9cbcd7933415a4793f7767c98a2b6a512c823fc81c87337815705f230ecabf",
+      "record_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/packaging-26.2.dist-info/RECORD",
+      "record_sha256": "34a791dcc687723f1d7601aa68319f6d51aa00e44d85818995dd33a1b7c5a49c",
+      "requires_dist": [],
+      "version": "26.2"
+    },
+    "pluggy": {
+      "metadata_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/pluggy-1.6.0.dist-info/METADATA",
+      "metadata_sha256": "7438c35ee25a095eb7416f84b461c2d74425c5e734ad54c3912453c65244e01c",
+      "record_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/pluggy-1.6.0.dist-info/RECORD",
+      "record_sha256": "a42a63bcba12ddb7e7db19158c8d05d8fc41d51f48686b411ad3a0213fbd7721",
+      "requires_dist": [
+        "pre-commit; extra == \"dev\"",
+        "tox; extra == \"dev\"",
+        "pytest; extra == \"testing\"",
+        "pytest-benchmark; extra == \"testing\"",
+        "coverage; extra == \"testing\""
+      ],
+      "version": "1.6.0"
+    },
+    "pydantic": {
+      "metadata_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/pydantic-2.13.4.dist-info/METADATA",
+      "metadata_sha256": "d1e56c3412492512fb6b59a9dfc25ab7af2a8204585cd7bca000513023133394",
+      "record_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/pydantic-2.13.4.dist-info/RECORD",
+      "record_sha256": "d0cbe0f34b294885175920bc8f2ece0b3ed6d9874347dc9cfb2caf4931329272",
+      "requires_dist": [
+        "annotated-types>=0.6.0",
+        "pydantic-core==2.46.4",
+        "typing-extensions>=4.14.1",
+        "typing-inspection>=0.4.2",
+        "email-validator>=2.0.0; extra == 'email'",
+        "tzdata; (python_version >= '3.9' and platform_system == 'Windows') and extra == 'timezone'"
+      ],
+      "version": "2.13.4"
+    },
+    "pydantic-core": {
+      "metadata_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/pydantic_core-2.46.4.dist-info/METADATA",
+      "metadata_sha256": "135fa8b2f89473e9191c7078c2164e3ec6c8927a61c2379c2fddcc07f11f3bae",
+      "record_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/pydantic_core-2.46.4.dist-info/RECORD",
+      "record_sha256": "3e55a95c4577dcb5dfd08cb8740db06dad7117273dd4885c090413888e606fc0",
+      "requires_dist": [
+        "typing-extensions>=4.14.1"
+      ],
+      "version": "2.46.4"
+    },
+    "pygments": {
+      "metadata_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/pygments-2.20.0.dist-info/METADATA",
+      "metadata_sha256": "e0528f51b30427fae94723662ba622f8d8db2a4d8d3f1365698d67a52450a845",
+      "record_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/pygments-2.20.0.dist-info/RECORD",
+      "record_sha256": "9bd53d01a50643aac995b358bf936145587b13f7e85ae1c7c23d5b6ad21094e4",
+      "requires_dist": [
+        "colorama>=0.4.6; extra == 'windows-terminal'"
+      ],
+      "version": "2.20.0"
+    },
+    "pytest": {
+      "metadata_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/pytest-9.1.1.dist-info/METADATA",
+      "metadata_sha256": "c5d032518012789cabc870d46589aca3aeda36cf9fa4399ee88bda3d10438451",
+      "record_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/pytest-9.1.1.dist-info/RECORD",
+      "record_sha256": "5a2736a20dc5b2dfd812a44164aba76f8c6ed559489618f0bb161311a1b04424",
+      "requires_dist": [
+        "colorama>=0.4; sys_platform == \"win32\"",
+        "exceptiongroup>=1; python_version < \"3.11\"",
+        "iniconfig>=1.0.1",
+        "packaging>=22",
+        "pluggy<2,>=1.5",
+        "pygments>=2.7.2",
+        "tomli>=1; python_version < \"3.11\"",
+        "argcomplete; extra == \"dev\"",
+        "attrs>=19.2; extra == \"dev\"",
+        "hypothesis>=3.56; extra == \"dev\"",
+        "mock; extra == \"dev\"",
+        "requests; extra == \"dev\"",
+        "setuptools; extra == \"dev\"",
+        "xmlschema; extra == \"dev\""
+      ],
+      "version": "9.1.1"
+    },
+    "pytest-django": {
+      "metadata_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/pytest_django-4.12.0.dist-info/METADATA",
+      "metadata_sha256": "9732ea0eb601c1414f8ce31c26b75b349acbf5aa7410cbb44f0fa78f2daee3e5",
+      "record_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/pytest_django-4.12.0.dist-info/RECORD",
+      "record_sha256": "fbc66cfe35c530a5a6c1b59f372c4ba3d032ec6c8b35b8313e5187f3c2d55541",
+      "requires_dist": [
+        "pytest>=7.0.0"
+      ],
+      "version": "4.12.0"
+    },
+    "pyyaml": {
+      "metadata_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/pyyaml-6.0.3.dist-info/METADATA",
+      "metadata_sha256": "03c3b415ed38d09faedc49360e930769b40c58f68585e6de00e2e4916a858d34",
+      "record_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/pyyaml-6.0.3.dist-info/RECORD",
+      "record_sha256": "7d0856221a182f5b25fde9bb976af79b4883090f54680d86a42b35fc8d6735a2",
+      "requires_dist": [],
+      "version": "6.0.3"
+    },
+    "referencing": {
+      "metadata_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/referencing-0.37.0.dist-info/METADATA",
+      "metadata_sha256": "c93b00e6ab1524fd60848376604c189a114374776475c25a31d57be47b29de6a",
+      "record_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/referencing-0.37.0.dist-info/RECORD",
+      "record_sha256": "d7ecf9906a4a4ea4837d16e324e344f9f00b328570cf695a96a8de46b8766982",
+      "requires_dist": [
+        "attrs>=22.2.0",
+        "rpds-py>=0.7.0",
+        "typing-extensions>=4.4.0; python_version < '3.13'"
+      ],
+      "version": "0.37.0"
+    },
+    "rpds-py": {
+      "metadata_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/rpds_py-2026.6.3.dist-info/METADATA",
+      "metadata_sha256": "f8be7b17da3980b2c48596941411a43c70ac41b1e2d530aa531f2c15eab2eb1c",
+      "record_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/rpds_py-2026.6.3.dist-info/RECORD",
+      "record_sha256": "8e825dd83fbb7bdc9ff8941296bc53b6c0e07d0420ae28efa150830d6cf178fe",
+      "requires_dist": [],
+      "version": "2026.6.3"
+    },
+    "sqlparse": {
+      "metadata_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/sqlparse-0.5.5.dist-info/METADATA",
+      "metadata_sha256": "64608ce1633133346851d8ecfa683931d0a1b70c1620720d8a21958917353621",
+      "record_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/sqlparse-0.5.5.dist-info/RECORD",
+      "record_sha256": "2d75c6f6044f27b462d8c7229d2db05ea03c27c8baaea6ede5b9d33714e4c252",
+      "requires_dist": [
+        "build; extra == 'dev'",
+        "sphinx; extra == 'doc'"
+      ],
+      "version": "0.5.5"
+    },
+    "typing-extensions": {
+      "metadata_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/typing_extensions-4.16.0.dist-info/METADATA",
+      "metadata_sha256": "b05084ca1d50879865178d9fff9fabeab61bdfb1f361bfbde95421ffc8f9be46",
+      "record_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/typing_extensions-4.16.0.dist-info/RECORD",
+      "record_sha256": "9e07fea845cac76293d927afa7157a14ecba39b318bc8af236b8de530b7656c1",
+      "requires_dist": [],
+      "version": "4.16.0"
+    },
+    "typing-inspection": {
+      "metadata_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/typing_inspection-0.4.2.dist-info/METADATA",
+      "metadata_sha256": "61096cd0bfe3c7040b6f98c22b02d190fe01936d0ff7616c5134fed02891953a",
+      "record_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/typing_inspection-0.4.2.dist-info/RECORD",
+      "record_sha256": "96edfd27f64244b308dd9b63a60613ad2a04e5012066fdbd1aeebe85b348ba29",
+      "requires_dist": [
+        "typing-extensions>=4.12.0"
+      ],
+      "version": "0.4.2"
+    },
+    "uritemplate": {
+      "metadata_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/uritemplate-4.2.0.dist-info/METADATA",
+      "metadata_sha256": "352afd43b6f1ab8f94ca31af2a1ad4f0d1a94dbd712c1b6d9e44e35d4bb3a962",
+      "record_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/uritemplate-4.2.0.dist-info/RECORD",
+      "record_sha256": "b06d84680bc9ed70b2a79703745de7129784a2309ab11c4e588da9452d635b63",
+      "requires_dist": [],
+      "version": "4.2.0"
+    },
+    "whitenoise": {
+      "metadata_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/whitenoise-6.12.0.dist-info/METADATA",
+      "metadata_sha256": "9f7b6533495f753a0aa82c4a6ea363882f2482d835e5d7e961c38af1667d7b6f",
+      "record_path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/whitenoise-6.12.0.dist-info/RECORD",
+      "record_sha256": "344bb4b4acaed48fbf8f10d5cc26ea5252ce1cedef3c5b9aaa2115d1d97bd4b8",
+      "requires_dist": [
+        "brotli; extra == \"brotli\""
+      ],
+      "version": "6.12.0"
+    }
+  },
+  "known_blocked_case": {
+    "condition": "Both actual R and I Python static/index.html paths are absent; the original test calls pytest.skip. Go managed dist/legacy are also only .keep.",
+    "lines": [
+      86,
+      87
+    ],
+    "nodeid": "tests/test_web.py::test_built_spa_served_when_present",
+    "qualification": "Keep this case visible and unqualified. No new skip/filter/waiver or synthetic asset. An honest unfiltered eligible reference result may record the original skip, but full zero-omission/serving/assembled PASS remains withheld. Owner asset scope is still unanswered."
+  },
+  "network": {
+    "direct_external_network_call_sites_in_default_test_AST": [],
+    "source_specific_proof": "tests/test_data_client.py and test_app_pack_contract.py use FakeRoeduClient. test_cli.py uses offline fixtures/in-process play. Django Client requests are in-process. Clear ROEDU API names, provider names and DB names without reading values. Imported helper/framework code is not universally proven network-free by an AST scan; unexpected network/environment behavior remains fail-closed, not implicit permission."
+  },
+  "new352_and_parametrization": {
+    "all265_previous_module_source_hashes_still_exact": true,
+    "conclusion": "The reviewed module reads consume the six earlier immutable eager JSON inputs; all 840 prior inputs were retained during the 352-file copy. No direct module/definition glob, directory scan or existence branch was found in the 265-file closure. New documents are body/fixture prerequisites. This supports expecting the same manifest but does not certify runtime import hooks or parameter generation; materially needed fresh normal-I collection must produce and bind the actual post-staging case set before tests.",
+    "module_or_definition_filesystem_enumeration_or_existence_calls": [],
+    "no_recollection_or_parametrization_execution_now": true
+  },
+  "no_unproved_tool_invocations": "No default test caller invokes Node, Go or a native CLI. Such calls exist in imported measurement/parity helpers but are not reached by their collected test cases. The accounts subprocess module is among the eight existing default ignores. Test CLI calls use --offline and in-process cli.play; no external process is launched.",
+  "optional_skip_sites": [
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 7,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_alchimie_scoping.py"
+    },
+    {
+      "expression": "pytest.skip(\"no pair with a cross-category common-neighbour narrowing found\")",
+      "function": "test_common_neighbors_category_scope_restricts_results",
+      "line": 30,
+      "prior_collected_case_ids": [
+        "tests/test_alchimie_scoping.py::test_common_neighbors_category_scope_restricts_results"
+      ],
+      "source": "tests/test_alchimie_scoping.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 15,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_alchimie_sparse_recipes.py"
+    },
+    {
+      "expression": "pytest.skip(\"fixture has no easy puzzle with a usable start distractor edge\")",
+      "function": "_puzzle_with_start_distractor",
+      "line": 55,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_engine.py"
+    },
+    {
+      "expression": "pytest.skip(\"fixture has no easy puzzle with a start detour reaching solution_path[1]\")",
+      "function": "_easy_puzzle_with_start_detour",
+      "line": 78,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_engine.py"
+    },
+    {
+      "expression": "pytest.skip(\"graph node is adjacent to everything\")",
+      "function": "_node_not_adjacent",
+      "line": 89,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_engine.py"
+    },
+    {
+      "expression": "pytest.skip(f\"fixture has no {difficulty!r}/{category!r} puzzle\")",
+      "function": "_first_puzzle",
+      "line": 28,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_engine.py"
+    },
+    {
+      "expression": "pytest.skip(\"fixture has no easy puzzle with >= 3 hops\")",
+      "function": "test_hint_is_immediate_next_solution_node_only",
+      "line": 157,
+      "prior_collected_case_ids": [
+        "tests/test_engine.py::test_hint_is_immediate_next_solution_node_only"
+      ],
+      "source": "tests/test_engine.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": "test_game_constant_mirrors_do_not_drift",
+      "line": 66,
+      "prior_collected_case_ids": [
+        "tests/test_games_pack_invariants.py::test_game_constant_mirrors_do_not_drift"
+      ],
+      "source": "tests/test_games_pack_invariants.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": "test_every_approved_lant_has_real_shortest_path_choices",
+      "line": 154,
+      "prior_collected_case_ids": [
+        "tests/test_games_pack_invariants.py::test_every_approved_lant_has_real_shortest_path_choices"
+      ],
+      "source": "tests/test_games_pack_invariants.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": "test_unresolvable_items_are_pruned_at_load",
+      "line": 179,
+      "prior_collected_case_ids": [
+        "tests/test_games_pack_invariants.py::test_unresolvable_items_are_pruned_at_load"
+      ],
+      "source": "tests/test_games_pack_invariants.py"
+    },
+    {
+      "expression": "pytest.mark.skipif(\n    unicodedata.unidata_version != \"15.0.0\",\n    reason=\"export targets deployed Python 3.12 / Unicode 15\",\n)",
+      "function": null,
+      "line": 14,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_go_content_export.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 13,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_legal.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 20,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_mobile_contract.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": "test_game_level_history_and_starter_fallback_cannot_resurrect_reserve",
+      "line": 195,
+      "prior_collected_case_ids": [
+        "tests/test_v1_release_reserve.py::test_game_level_history_and_starter_fallback_cannot_resurrect_reserve[intrusul]",
+        "tests/test_v1_release_reserve.py::test_game_level_history_and_starter_fallback_cannot_resurrect_reserve[perechi]"
+      ],
+      "source": "tests/test_v1_release_reserve.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": "test_ranked_lant_narrowing_preserves_safe_repeat_semantics",
+      "line": 704,
+      "prior_collected_case_ids": [
+        "tests/test_v37_board_rankings.py::test_ranked_lant_narrowing_preserves_safe_repeat_semantics"
+      ],
+      "source": "tests/test_v37_board_rankings.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": "test_private_ranking_fields_never_leak_from_create_responses",
+      "line": 754,
+      "prior_collected_case_ids": [
+        "tests/test_v37_board_rankings.py::test_private_ranking_fields_never_leak_from_create_responses[conexiuni]",
+        "tests/test_v37_board_rankings.py::test_private_ranking_fields_never_leak_from_create_responses[contexto]",
+        "tests/test_v37_board_rankings.py::test_private_ranking_fields_never_leak_from_create_responses[lant]",
+        "tests/test_v37_board_rankings.py::test_private_ranking_fields_never_leak_from_create_responses[alchimie]"
+      ],
+      "source": "tests/test_v37_board_rankings.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 12,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v39_derived_exposure.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 5,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v42_category_daily_contract.py"
+    },
+    {
+      "expression": "pytest.skip(f\"{game} has no thin category shelf\")",
+      "function": "test_thin_category_daily_mines_in_theme_or_returns_unavailable",
+      "line": 49,
+      "prior_collected_case_ids": [
+        "tests/test_v42_category_daily_contract.py::test_thin_category_daily_mines_in_theme_or_returns_unavailable[alchimie-/api/wordgames/alchimie/games-cat_de_roman_esti.wordgames.alchimie]",
+        "tests/test_v42_category_daily_contract.py::test_thin_category_daily_mines_in_theme_or_returns_unavailable[conexiuni-/api/wordgames/conexiuni/games-cat_de_roman_esti.wordgames.conexiuni]",
+        "tests/test_v42_category_daily_contract.py::test_thin_category_daily_mines_in_theme_or_returns_unavailable[contexto-/api/wordgames/contexto/games-cat_de_roman_esti.wordgames.contexto]",
+        "tests/test_v42_category_daily_contract.py::test_thin_category_daily_mines_in_theme_or_returns_unavailable[lant-/api/wordgames/lant/games-cat_de_roman_esti.wordgames.lant]"
+      ],
+      "source": "tests/test_v42_category_daily_contract.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 24,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v44_contexto_common_words.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 16,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v50_synonyms_basic_words.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 16,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v51_typed_vocabulary.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 15,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v52_typed_vocabulary.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 15,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v53_food_morphology.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 15,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v54_people_morphology.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 15,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v55_place_morphology.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 15,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v56_nature_morphology.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 15,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v57_creative_arts_morphology.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 15,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v58_school_literacy_morphology.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 15,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v59_human_anatomy_morphology.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 15,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v60_sports_ecosystem_morphology.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 15,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v61_home_care_and_maintenance_morphology.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 15,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v62_transport_and_mobility_morphology.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 15,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v63_film_and_television_morphology.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 15,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v64_history_and_heritage_morphology.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 16,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v65_music_and_performance_morphology.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 16,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v66_science_and_discovery_morphology.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 17,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v67_online_content_and_social_media_morphology.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 17,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v68_romanian_language_and_grammar_morphology.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 14,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v69_contexto_impactful_targets.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 17,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v70_social_and_civic_life_morphology.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 17,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v71_literature_and_storytelling_morphology.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 17,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v72_romanian_dishes_and_pastries_morphology.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": "test_new_targets_are_publicly_selectable_warm_and_winnable",
+      "line": 160,
+      "prior_collected_case_ids": [
+        "tests/test_v75_contexto_food.py::test_new_targets_are_publicly_selectable_warm_and_winnable[gr\\u0103tar-mici-n_gas_mici]",
+        "tests/test_v75_contexto_food.py::test_new_targets_are_publicly_selectable_warm_and_winnable[salat\\u0103-salata de boeuf-n_gas_salata_boeuf]"
+      ],
+      "source": "tests/test_v75_contexto_food.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 12,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v76_romanian_input_senses.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 14,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v77_flour_associations.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 13,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v79_gem_feedback.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": "test_public_clatite_round_has_warm_openers_resume_repeats_and_exact_win",
+      "line": 123,
+      "prior_collected_case_ids": [
+        "tests/test_v80_clatite_target.py::test_public_clatite_round_has_warm_openers_resume_repeats_and_exact_win[before_v84-f\\u0103in\\u0103-1-2-Fierbinte]",
+        "tests/test_v80_clatite_target.py::test_public_clatite_round_has_warm_openers_resume_repeats_and_exact_win[before_v84-ou-1-5-Fierbinte]",
+        "tests/test_v80_clatite_target.py::test_public_clatite_round_has_warm_openers_resume_repeats_and_exact_win[before_v84-gem-1-8-Fierbinte]",
+        "tests/test_v80_clatite_target.py::test_public_clatite_round_has_warm_openers_resume_repeats_and_exact_win[before_v84-dulcea\\u021b\\u0103-1-7-Fierbinte]",
+        "tests/test_v80_clatite_target.py::test_public_clatite_round_has_warm_openers_resume_repeats_and_exact_win[before_v84-lapte-2-40-Cald]",
+        "tests/test_v80_clatite_target.py::test_public_clatite_round_has_warm_openers_resume_repeats_and_exact_win[before_v84-br\\xe2nz\\u0103-2-30-Cald]",
+        "tests/test_v80_clatite_target.py::test_public_clatite_round_has_warm_openers_resume_repeats_and_exact_win[before_v84-sm\\xe2nt\\xe2n\\u0103-2-22-Cald]",
+        "tests/test_v80_clatite_target.py::test_public_clatite_round_has_warm_openers_resume_repeats_and_exact_win[before_v85-f\\u0103in\\u0103-1-2-Fierbinte]",
+        "tests/test_v80_clatite_target.py::test_public_clatite_round_has_warm_openers_resume_repeats_and_exact_win[before_v85-ou-1-5-Fierbinte]",
+        "tests/test_v80_clatite_target.py::test_public_clatite_round_has_warm_openers_resume_repeats_and_exact_win[before_v85-gem-1-8-Fierbinte]",
+        "tests/test_v80_clatite_target.py::test_public_clatite_round_has_warm_openers_resume_repeats_and_exact_win[before_v85-dulcea\\u021b\\u0103-1-7-Fierbinte]",
+        "tests/test_v80_clatite_target.py::test_public_clatite_round_has_warm_openers_resume_repeats_and_exact_win[before_v85-lapte-2-40-Cald]",
+        "tests/test_v80_clatite_target.py::test_public_clatite_round_has_warm_openers_resume_repeats_and_exact_win[before_v85-br\\xe2nz\\u0103-2-30-Cald]",
+        "tests/test_v80_clatite_target.py::test_public_clatite_round_has_warm_openers_resume_repeats_and_exact_win[before_v85-sm\\xe2nt\\xe2n\\u0103-2-22-Cald]",
+        "tests/test_v80_clatite_target.py::test_public_clatite_round_has_warm_openers_resume_repeats_and_exact_win[current-f\\u0103in\\u0103-1-2-Fierbinte]",
+        "tests/test_v80_clatite_target.py::test_public_clatite_round_has_warm_openers_resume_repeats_and_exact_win[current-ou-1-5-Fierbinte]",
+        "tests/test_v80_clatite_target.py::test_public_clatite_round_has_warm_openers_resume_repeats_and_exact_win[current-gem-1-8-Fierbinte]",
+        "tests/test_v80_clatite_target.py::test_public_clatite_round_has_warm_openers_resume_repeats_and_exact_win[current-dulcea\\u021b\\u0103-1-7-Fierbinte]",
+        "tests/test_v80_clatite_target.py::test_public_clatite_round_has_warm_openers_resume_repeats_and_exact_win[current-lapte-2-40-Cald]",
+        "tests/test_v80_clatite_target.py::test_public_clatite_round_has_warm_openers_resume_repeats_and_exact_win[current-br\\xe2nz\\u0103-2-30-Cald]",
+        "tests/test_v80_clatite_target.py::test_public_clatite_round_has_warm_openers_resume_repeats_and_exact_win[current-sm\\xe2nt\\xe2n\\u0103-2-22-Cald]"
+      ],
+      "source": "tests/test_v80_clatite_target.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 12,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v81_nuca_feedback.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 9,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v82_alchimie_pair_memo.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 10,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v82_burta_feedback.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": "test_public_food_round_has_useful_guesses_resume_repeats_and_exact_win",
+      "line": 119,
+      "prior_collected_case_ids": [
+        "tests/test_v82_playable_content.py::test_public_food_round_has_useful_guesses_resume_repeats_and_exact_win[n_gas_cozonac-Cozonac-usor-openers0]",
+        "tests/test_v82_playable_content.py::test_public_food_round_has_useful_guesses_resume_repeats_and_exact_win[n_v17gas_pasca-Pasc\\u0103-normal-openers1]",
+        "tests/test_v82_playable_content.py::test_public_food_round_has_useful_guesses_resume_repeats_and_exact_win[n_gas_mustar-Mu\\u0219tar-usor-openers2]",
+        "tests/test_v82_playable_content.py::test_public_food_round_has_useful_guesses_resume_repeats_and_exact_win[n_gas_mujdei-Mujdei-usor-openers3]",
+        "tests/test_v82_playable_content.py::test_public_food_round_has_useful_guesses_resume_repeats_and_exact_win[n_gas_ciorba_burta-Ciorb\\u0103 de burt\\u0103-normal-openers4]",
+        "tests/test_v82_playable_content.py::test_public_food_round_has_useful_guesses_resume_repeats_and_exact_win[n_gas_urda-Urd\\u0103-normal-openers5]",
+        "tests/test_v82_playable_content.py::test_public_food_round_has_useful_guesses_resume_repeats_and_exact_win[n_v3gas_friptura-Friptur\\u0103-usor-openers6]",
+        "tests/test_v82_playable_content.py::test_public_food_round_has_useful_guesses_resume_repeats_and_exact_win[n_gas_bulz-Bulz-normal-openers7]"
+      ],
+      "source": "tests/test_v82_playable_content.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 10,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v83_food_feedback.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": "test_forms_are_exact_nonwinning_guesses_and_repeat_across_spelling_variants",
+      "line": 84,
+      "prior_collected_case_ids": [
+        "tests/test_v83_food_forms.py::test_forms_are_exact_nonwinning_guesses_and_repeat_across_spelling_variants[n_gas_urda-forms0]",
+        "tests/test_v83_food_forms.py::test_forms_are_exact_nonwinning_guesses_and_repeat_across_spelling_variants[n_gas_telemea-forms1]",
+        "tests/test_v83_food_forms.py::test_forms_are_exact_nonwinning_guesses_and_repeat_across_spelling_variants[n_gas_mujdei-forms2]",
+        "tests/test_v83_food_forms.py::test_forms_are_exact_nonwinning_guesses_and_repeat_across_spelling_variants[n_v3gas_friptura-forms3]",
+        "tests/test_v83_food_forms.py::test_forms_are_exact_nonwinning_guesses_and_repeat_across_spelling_variants[n_v3gas_cartofi_prajiti-forms4]",
+        "tests/test_v83_food_forms.py::test_forms_are_exact_nonwinning_guesses_and_repeat_across_spelling_variants[n_gas_bulz-forms5]",
+        "tests/test_v83_food_forms.py::test_forms_are_exact_nonwinning_guesses_and_repeat_across_spelling_variants[n_v21gas_cornulete-forms6]",
+        "tests/test_v83_food_forms.py::test_forms_are_exact_nonwinning_guesses_and_repeat_across_spelling_variants[n_v17gas_gogosi-forms7]"
+      ],
+      "source": "tests/test_v83_food_forms.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": "test_every_reviewed_form_can_win_its_own_target",
+      "line": 119,
+      "prior_collected_case_ids": [
+        "tests/test_v83_food_forms.py::test_every_reviewed_form_can_win_its_own_target[n_gas_urda-forms0]",
+        "tests/test_v83_food_forms.py::test_every_reviewed_form_can_win_its_own_target[n_gas_telemea-forms1]",
+        "tests/test_v83_food_forms.py::test_every_reviewed_form_can_win_its_own_target[n_gas_mujdei-forms2]",
+        "tests/test_v83_food_forms.py::test_every_reviewed_form_can_win_its_own_target[n_v3gas_friptura-forms3]",
+        "tests/test_v83_food_forms.py::test_every_reviewed_form_can_win_its_own_target[n_v3gas_cartofi_prajiti-forms4]",
+        "tests/test_v83_food_forms.py::test_every_reviewed_form_can_win_its_own_target[n_gas_bulz-forms5]",
+        "tests/test_v83_food_forms.py::test_every_reviewed_form_can_win_its_own_target[n_v21gas_cornulete-forms6]",
+        "tests/test_v83_food_forms.py::test_every_reviewed_form_can_win_its_own_target[n_v17gas_gogosi-forms7]"
+      ],
+      "source": "tests/test_v83_food_forms.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": "test_forms_are_legal_direct_hops_in_lant",
+      "line": 140,
+      "prior_collected_case_ids": [
+        "tests/test_v83_food_forms.py::test_forms_are_legal_direct_hops_in_lant[n_gas_urda-forms0]",
+        "tests/test_v83_food_forms.py::test_forms_are_legal_direct_hops_in_lant[n_gas_telemea-forms1]",
+        "tests/test_v83_food_forms.py::test_forms_are_legal_direct_hops_in_lant[n_gas_mujdei-forms2]",
+        "tests/test_v83_food_forms.py::test_forms_are_legal_direct_hops_in_lant[n_v3gas_friptura-forms3]",
+        "tests/test_v83_food_forms.py::test_forms_are_legal_direct_hops_in_lant[n_v3gas_cartofi_prajiti-forms4]",
+        "tests/test_v83_food_forms.py::test_forms_are_legal_direct_hops_in_lant[n_gas_bulz-forms5]",
+        "tests/test_v83_food_forms.py::test_forms_are_legal_direct_hops_in_lant[n_v21gas_cornulete-forms6]",
+        "tests/test_v83_food_forms.py::test_forms_are_legal_direct_hops_in_lant[n_v17gas_gogosi-forms7]"
+      ],
+      "source": "tests/test_v83_food_forms.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": "test_public_round_has_hot_core_guesses_repeat_resume_and_exact_form_win",
+      "line": 100,
+      "prior_collected_case_ids": [
+        "tests/test_v83_playable_content.py::test_public_round_has_hot_core_guesses_repeat_resume_and_exact_form_win[n_v21gas_cornulete-normal-openers0-cornule\\u021bului cu gem]",
+        "tests/test_v83_playable_content.py::test_public_round_has_hot_core_guesses_repeat_resume_and_exact_form_win[n_v17gas_gogosi-usor-openers1-gogoa\\u0219a pr\\u0103jit\\u0103]",
+        "tests/test_v83_playable_content.py::test_public_round_has_hot_core_guesses_repeat_resume_and_exact_form_win[n_gas_telemea-usor-openers2-telemelele]",
+        "tests/test_v83_playable_content.py::test_public_round_has_hot_core_guesses_repeat_resume_and_exact_form_win[n_v3gas_cartofi_prajiti-usor-openers3-cartofilor pr\\u0103ji\\u021bi]",
+        "tests/test_v83_playable_content.py::test_public_round_has_hot_core_guesses_repeat_resume_and_exact_form_win[n_gas_ardei_umpluti-normal-openers4-ardeiului umplut]"
+      ],
+      "source": "tests/test_v83_playable_content.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 9,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v84_alchimie_explanations.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 14,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v84_graph_and_games.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 15,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_v85_ingredient_graph.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 11,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_web.py"
+    },
+    {
+      "expression": "pytest.skip(\"no SPA build present (run: cd frontend && npm run build)\")",
+      "function": "test_built_spa_served_when_present",
+      "line": 87,
+      "prior_collected_case_ids": [
+        "tests/test_web.py::test_built_spa_served_when_present"
+      ],
+      "source": "tests/test_web.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 11,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_wordgames_alchimie.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 7,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_wordgames_conexiuni.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 7,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_wordgames_contexto.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 17,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_wordgames_curated.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 11,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_wordgames_intrusul.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 10,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_wordgames_lant.py"
+    },
+    {
+      "expression": "pytest.skip(\"sampled starts have no neighbour outside the bounded menu\")",
+      "function": "test_valid_direct_hop_outside_visible_menu_stays_legal",
+      "line": 135,
+      "prior_collected_case_ids": [
+        "tests/test_wordgames_lant.py::test_valid_direct_hop_outside_visible_menu_stays_legal"
+      ],
+      "source": "tests/test_wordgames_lant.py"
+    },
+    {
+      "expression": "pytest.skip(\"no detour neighbour found in sampled puzzles\")",
+      "function": "test_over_par_lowers_score_but_never_below_floor",
+      "line": 1081,
+      "prior_collected_case_ids": [
+        "tests/test_wordgames_lant.py::test_over_par_lowers_score_but_never_below_floor"
+      ],
+      "source": "tests/test_wordgames_lant.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 15,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_wordgames_perechi.py"
+    },
+    {
+      "expression": "pytest.importorskip(\"django\")",
+      "function": null,
+      "line": 10,
+      "prior_collected_case_ids": [],
+      "source": "tests/test_wordgames_session_endpoints.py"
+    }
+  ],
+  "other_optional_skips": "Original test_engine.py helpers conditionally skip when specific easy-puzzle/distractor/detour/nonadjacent structures are absent. Preserve all source branches and inspect actual results; do not turn unknown conditional outcomes into predeclared passes. Existing Django importorskip guards should be resolved by the pinned installed dependency closure, not by omitting modules.",
+  "prior_case_manifest_path": "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/current-source7-full-default-collected-cases-r1.json",
+  "prior_case_manifest_sha256": "f6c791d8f40b35443739459c1ffe9e132128ed7c67ad404061c8d77198203b13",
+  "prior_collection": {
+    "accounts_ignored": 8,
+    "cases": 2733,
+    "default_modules": 151,
+    "tests_executed": 0
+  },
+  "schema": "v1-7-full-reference-static-runtime-prerequisites-v1",
+  "scope": "Static AST, source, installed distribution metadata and primary local Git documentation only. No application imports, collection, tests, Git/Go/native commands, copying, source/data/fixture edits or frontend activation.",
+  "source_admission_sha256": "35a16774a8bd285c81a2770601ec8a64a4f462caed4b2d087aaf58d3c2c2ff1f",
+  "source_whole_RSS": "unmeasured",
+  "subprocess_case_calls": [
+    {
+      "expression": "subprocess.run([\"git\", \"init\", \"-q\", str(tmp_path)], check=True)",
+      "function": "test_cli_reads_baseline_git_content_and_uncommitted_workspace",
+      "line": 133,
+      "prior_collected_case_ids": [
+        "tests/test_report_content_delta.py::test_cli_reads_baseline_git_content_and_uncommitted_workspace"
+      ],
+      "source": "tests/test_report_content_delta.py"
+    },
+    {
+      "expression": "subprocess.run([\"git\", \"-C\", str(tmp_path), \"add\", \".\"], check=True)",
+      "function": "test_cli_reads_baseline_git_content_and_uncommitted_workspace",
+      "line": 139,
+      "prior_collected_case_ids": [
+        "tests/test_report_content_delta.py::test_cli_reads_baseline_git_content_and_uncommitted_workspace"
+      ],
+      "source": "tests/test_report_content_delta.py"
+    },
+    {
+      "expression": "subprocess.run(\n        [\"git\", \"-C\", str(tmp_path), \"-c\", \"user.name=Test\", \"-c\", \"user.email=test@example.test\",\n         \"-c\", \"commit.gpgsign=false\", \"commit\", \"-qm\", \"baseline\"], check=True,\n    )",
+      "function": "test_cli_reads_baseline_git_content_and_uncommitted_workspace",
+      "line": 140,
+      "prior_collected_case_ids": [
+        "tests/test_report_content_delta.py::test_cli_reads_baseline_git_content_and_uncommitted_workspace"
+      ],
+      "source": "tests/test_report_content_delta.py"
+    }
+  ]
+}

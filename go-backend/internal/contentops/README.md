@@ -25,6 +25,7 @@ in the task's `_temp` directory. No operation creates a public solution endpoint
 | `build_review_artifact.py` | `build-review --analyst FILE --verifier FILE --dossiers DIR --out NEW_DIR` |
 | `apply_rereview.py` | `apply-review --dir REVIEW_DIR` |
 | `audit_alchimie_projections.py` | `audit-projections --ids SORTED_IDS --dossier DIR --out FILE` |
+| Graph/pack and native sidecar validation | `check` (always read only) |
 | `rank_games_pack.py` | `rank` |
 | `build_derived_catalog_v38.py` | `derive` |
 | `report_content_delta.py` | `delta --baseline COMMIT --text` (omit `--text` for JSON) |
@@ -44,6 +45,14 @@ frozen V38 source set, checks 800/9164 raw derivation counts, applies the histor
 label-identity correction and diversity cap, and compares the 336 resulting boards.
 Both report harmless formatting differences separately; they do not rewrite them
 without `--write`. A pack refresh never widens the frozen derived source set.
+
+`check --root ROOT` validates the graph and pack with the native prospective
+validators, recomputes every ranking and derived row, and verifies source snapshots,
+runtime inventory and both fixture mirrors. The native sidecar formatter sorts JSON
+object keys and preserves array order. A `format_drift` refusal identifies the native
+`rank --write` or `derive --write` command needed to refresh both copies. `check --write`
+is rejected before any source access. Graph and pack retain their supported transaction
+formats. Sealed export validation and current-authority checks remain separate gates.
 
 ## Native review source transition
 

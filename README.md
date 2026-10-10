@@ -1,9 +1,11 @@
 # cat_de_roman_esti
 
-V1.6 is independently accepted and published on `origin/main` at `dccd401`.
-V1.7 has complete prospective evidence and reviewed isolated native Source7 candidates;
-live installation and release gates remain pending. See [current status](docs/STATUS.md)
-and the [V1.7 review](docs/reviews/v1-7-recognizable-content/README.md).
+Content validation and native JSON policy:
+[ADR-0186](docs/adr/0186-go-authoritative-content-validation.md). Run
+`go -C go-backend run ./cmd/cat-content-ops check --root .. --check` for graph,
+pack, ranking and derived-catalog checks. Python/Rust remain optional references.
+Source6 remains live; V1.7 adoption and full qualification are tracked in
+[STATUS](docs/STATUS.md) and the [wave review](docs/reviews/v1-7-recognizable-content/README.md).
 
 A **text-only arcade of six Romanian word games** using a shared concept graph
 (current counts, fixture version, generated hashes and gate state are recorded in

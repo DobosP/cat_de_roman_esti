@@ -1,0 +1,25 @@
+"""Freeze actual fresh full-default collect IDs from one passed producer; metadata only."""
+from pathlib import Path
+import json,hashlib,re,os,sys
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7')
+T=Path('/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008')
+O=T/'current-source7-full-reference-r1'
+h=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+assert len(sys.argv)==2
+row=Path(sys.argv[1]);assert row.is_relative_to(R/'docs/reviews/v1-7-recognizable-content') and row.is_file() and not row.is_symlink()
+r=json.loads(row.read_bytes());assert r['exit_code']==0 and r['guard'] is None and r['failure'] is None and '--collect-only' in r['argv']
+log=Path(r['log_path']);assert log.is_relative_to(T.parent/'probe') and log.is_file() and not log.is_symlink() and log.stat().st_size<=32<<20 and h(log)==r['log_sha256']
+text=log.read_text();lines=[x.strip() for x in text.splitlines()]
+ids=[x for x in lines if re.fullmatch(r'tests/[^:]+[.]py::.+',x)]
+summaries=[re.fullmatch(r'(\d+) tests collected in [0-9.]+s',x) for x in lines];summaries=[x for x in summaries if x is not None]
+assert len(summaries)==1 and len(ids)==len(set(ids))==int(summaries[0].group(1)) and ids
+previous=json.loads((T/'current-source7-full-default-collected-cases-r1.json').read_bytes())
+modules={x.split('::')[0] for x in ids};assert modules==set(previous['by_module'])
+assert 'tests/test_web.py::test_built_spa_served_when_present' in ids
+assert not any(x.startswith('tests/accounts/') for x in ids)
+manifest={'schema':'actual-post1192-full-default-collected-cases-v1','count':len(ids),'nodeids':ids,'by_module':{m:sum(x.startswith(m+'::') for x in ids) for m in sorted(modules)},'prior_pre352_count_not_assumed':previous['count'],'added_vs_prior':sorted(set(ids)-set(previous['nodeids'])),'removed_vs_prior':sorted(set(previous['nodeids'])-set(ids)),'producer_receipt_path':str(row),'producer_receipt_sha256':h(row),'producer_log_path':str(log),'producer_log_sha256':h(log),'admission_sha256':r['manifest_sha256'],'no_test_bodies_executed':True}
+p=O/'actual-cases.json';assert O.resolve(strict=True)==O
+with p.open('x') as f:json.dump(manifest,f,indent=2,sort_keys=True);f.write('\n');f.flush();os.fsync(f.fileno())
+e=O/'actual-cases-external.json'
+with e.open('x') as f:json.dump({'manifest_path':str(p),'manifest_sha256':h(p),'producer_receipt_sha256':h(row)},f,indent=2,sort_keys=True);f.write('\n');f.flush();os.fsync(f.fileno())
+print(json.dumps({'count':len(ids),'manifest_sha256':h(p),'external_sha256':h(e)}))

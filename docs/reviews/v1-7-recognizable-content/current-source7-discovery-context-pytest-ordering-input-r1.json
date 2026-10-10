@@ -1,0 +1,12 @@
+{
+  "prepared_at_utc": "2026-10-09T03:14:20.840839+00:00",
+  "primary_source": {
+    "bytes": 92893,
+    "mode": 436,
+    "path": "/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/_pytest/fixtures.py",
+    "sha256": "f5d4d3f848d97411e456d50400d3aaecc19a9b0c90def9151e395ee8952042b7"
+  },
+  "protection_addition": "One exact installed pytest fixtures.py readonly input in addition to68 original inherited external readonly pins, no broad roots/externalwrites/import/execution.",
+  "schema": "installed-primary-standard-pytest-autouse-order-binding-v1",
+  "static_source_evidence": "FixtureManager.getfixtureinfo lines1763-1764 puts autousenames before explicit argnames; getfixtureclosure lines1853ff traverses dependency closure and groups by scope. Standard function-scoped autouse context must be established before original nonautouse candidate/reviewed_files. Future actual92-case execution validates the intended local context; no monkeypatch of pytest internals."
+}

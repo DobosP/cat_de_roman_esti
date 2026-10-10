@@ -1,0 +1,148 @@
+{
+  "build_reason": "Strict future Extensions build calls contentbuild.Load and must use new reviewedderived/Quick pins. cat-content provides supported source8 validation/export later; cat-content-rail provides guarded catalogue operators. Rebuild ONLY these2affectedcurrent tools from completeisolatedcode. Existing SDK/cache/Source6 tool3589 preserved; no version/download/modverify/rank/derive/audit/candidate replay. -buildvcs=false is the known scope for an isolated tree outside its original Git checkout.",
+  "change_manifest_path": "docs/reviews/v1-7-recognizable-content/current-source7-pins-tools-change-manifest-r1.json",
+  "change_manifest_sha256": "6ba7d67e7c74cd6b7a69b2844c8fed82aefc8caba4ad211d1fde3e3617d9f17b",
+  "changes": {
+    "cat_de_roman_esti/wordgames/derived_catalog.py": {
+      "CRLF_count": 0,
+      "after_bytes": 25777,
+      "after_sha256": "f79956b0e88523e2d79b916daf7b04747d6310cb62291644feeb6bc1c0f44be1",
+      "afterimage_path": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/current-source7-pins-tools-python-derived-after-r1.txt",
+      "before_sha256": "3852e468567e680d66258a5d1b326bac134c7fcc15ed14b8c4ce45e9e51fe7a0",
+      "bytes": 25777,
+      "full_byte_inverse_exact": true,
+      "mode": 436,
+      "path": "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/source7-current-stage-r1/cat_de_roman_esti/wordgames/derived_catalog.py",
+      "raw_unified_diff": "--- a/cat_de_roman_esti/wordgames/derived_catalog.py\n+++ b/cat_de_roman_esti/wordgames/derived_catalog.py\n@@ -39,7 +39,7 @@\n _PREFERRED_STANDARD_SCORE = 55\n # Updated only with a reviewed, generator-produced bundled artifact.\n DEFAULT_DERIVED_CATALOG_SHA256 = (\n-    \"fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a\"\n+    \"df3a01bb5bdbf8c34973b6bc43c9179ab9ffbe0fc6552fb73b5cd1e9bfb24af9\"\n )\n \n _META_FIELDS = {\n",
+      "substitutions": [
+        {
+          "new": "df3a01bb5bdbf8c34973b6bc43c9179ab9ffbe0fc6552fb73b5cd1e9bfb24af9",
+          "old": "fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a"
+        }
+      ]
+    },
+    "cat_de_roman_esti/wordgames/quick_catalog.py": {
+      "CRLF_count": 0,
+      "after_bytes": 11253,
+      "after_sha256": "be3a07e7e32f5b97dfb84a45f0ff4fb75e750fa61b86f129dbb805e85a1751c6",
+      "afterimage_path": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/current-source7-pins-tools-python-quick-after-r1.txt",
+      "before_sha256": "00a5da384b74d856e16955dd02e515b23902aa754ea13bd673a46219843e4a2d",
+      "bytes": 11253,
+      "full_byte_inverse_exact": true,
+      "mode": 436,
+      "path": "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/source7-current-stage-r1/cat_de_roman_esti/wordgames/quick_catalog.py",
+      "raw_unified_diff": "--- a/cat_de_roman_esti/wordgames/quick_catalog.py\n+++ b/cat_de_roman_esti/wordgames/quick_catalog.py\n@@ -32,7 +32,7 @@\n from .service import get_service\n \n CATALOG_PATH = Path(__file__).resolve().parents[1] / \"fixtures/quick_games_v92.json\"\n-CATALOG_SHA256 = \"0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345\"\n+CATALOG_SHA256 = \"34c11c48b28b45c53a741290837288d302c98cea51e4346fb64669d7188c7a8c\"\n MAX_BOARDS = 256\n MAX_BYTES = 2 * 1024 * 1024\n \n",
+      "substitutions": [
+        {
+          "new": "34c11c48b28b45c53a741290837288d302c98cea51e4346fb64669d7188c7a8c",
+          "old": "0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345"
+        }
+      ]
+    },
+    "go-backend/internal/contentbuild/build.go": {
+      "CRLF_count": 0,
+      "after_bytes": 12306,
+      "after_sha256": "60d9c5262287d52cf4e2d97fee056f1462cc3c554dd15cfb0ab267a96304dd61",
+      "afterimage_path": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/current-source7-pins-tools-go-build-after-r1.txt",
+      "before_sha256": "209f99fcda54dc7f2af2affb8bd188605db4e738c32fb1330f8c1fc3216f6cd5",
+      "bytes": 12306,
+      "full_byte_inverse_exact": true,
+      "mode": 436,
+      "path": "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/source7-current-stage-r1/go-backend/internal/contentbuild/build.go",
+      "raw_unified_diff": "--- a/go-backend/internal/contentbuild/build.go\n+++ b/go-backend/internal/contentbuild/build.go\n@@ -16,7 +16,7 @@\n \n // These are the three review-authority pins retained from the former native\n // exporter. New catalog/reserve versions require an explicitly reviewed pin update.\n-var reviewedPins = map[string]string{\"derived_catalog_v38.json\": \"fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a\", \"quick_games_v92.json\": \"0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345\", \"release_reserve_v1.json\": \"fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7\"}\n+var reviewedPins = map[string]string{\"derived_catalog_v38.json\": \"df3a01bb5bdbf8c34973b6bc43c9179ab9ffbe0fc6552fb73b5cd1e9bfb24af9\", \"quick_games_v92.json\": \"34c11c48b28b45c53a741290837288d302c98cea51e4346fb64669d7188c7a8c\", \"release_reserve_v1.json\": \"fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7\"}\n \n const RubricSHA256 = \"3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101\"\n \n",
+      "substitutions": [
+        {
+          "new": "df3a01bb5bdbf8c34973b6bc43c9179ab9ffbe0fc6552fb73b5cd1e9bfb24af9",
+          "old": "fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a"
+        },
+        {
+          "new": "34c11c48b28b45c53a741290837288d302c98cea51e4346fb64669d7188c7a8c",
+          "old": "0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345"
+        }
+      ]
+    }
+  },
+  "execution_performed": false,
+  "failure_and_rollback": "Mutation catches errors/SIGTERM and restores changed owned targets from exactsnapshots, preservinglocalfailure/cleanupreceipt. SIGKILL/storagefailure cannotguarantee receipt/rollback: inspect exactbefore/aftertargets, no consumeruntilqualified. Anyunexpected source/cache/checksum/readonlygraph/build/validation/resourcefailure STOPs dependentsteps; no hiddennetwork/tidy/pinpadding/guardweakening or retryoldnamespace.",
+  "future_build_commands": [
+    {
+      "argv": [
+        "/usr/bin/env",
+        "GOMODCACHE=/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-complete-cache-r1",
+        "GOPATH=/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-legacy-gopath-r1",
+        "GOPROXY=off",
+        "GOSUMDB=off",
+        "GOTOOLCHAIN=local",
+        "GOWORK=off",
+        "GOMAXPROCS=2",
+        "GOFLAGS=-p=2 -mod=readonly",
+        "/home/dobo/work/_temp/codex__content-v1-7/tools/go/bin/go",
+        "-C",
+        "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/source7-current-stage-r1/go-backend",
+        "build",
+        "-buildvcs=false",
+        "-o",
+        "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/current-source7-tools-r1/cat-content",
+        "./cmd/cat-content"
+      ],
+      "name": "build-afterpin-cat-content"
+    },
+    {
+      "argv": [
+        "/usr/bin/env",
+        "GOMODCACHE=/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-complete-cache-r1",
+        "GOPATH=/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-legacy-gopath-r1",
+        "GOPROXY=off",
+        "GOSUMDB=off",
+        "GOTOOLCHAIN=local",
+        "GOWORK=off",
+        "GOMAXPROCS=2",
+        "GOFLAGS=-p=2 -mod=readonly",
+        "/home/dobo/work/_temp/codex__content-v1-7/tools/go/bin/go",
+        "-C",
+        "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/source7-current-stage-r1/go-backend",
+        "build",
+        "-buildvcs=false",
+        "-o",
+        "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/current-source7-tools-r1/cat-content-rail",
+        "./cmd/cat-content-rail"
+      ],
+      "name": "build-afterpin-cat-content-rail"
+    },
+    {
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/current-source7-tools-r1/cat-content",
+        "validate",
+        "--root",
+        "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/source7-current-stage-r1"
+      ],
+      "expected_exitcode": 0,
+      "expected_stdout": "Native sources GREEN\n",
+      "name": "native-current-stage-sources-only-validation"
+    }
+  ],
+  "future_mutation_command": [
+    "/home/dobo/work/cat_de_roman_esti/.venv/bin/python",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/current-source7-pins-tools-method-r2.py.txt",
+    "FRESH_MUTATION_ONLY_ADMISSION"
+  ],
+  "installation_approval": false,
+  "method_path": "docs/reviews/v1-7-recognizable-content/current-source7-pins-tools-method-r2.py.txt",
+  "method_sha256": "0f30688914e8f54e2e3f6b30afe3635c0ad99b93421b1e6f0f3587c2b2a738e8",
+  "only_staged_targets": "Three actual LF-only stage files byteequal liveRbefore. Four digest literal substitutions only, exact raw diff/wholebyteinverse/modes. Frozen12CRLF source unchanged, no whitespace waiver. GoRuntime130 membership/order unchanged; ONLY build.go row hash changes. Python metadata pins are separately protected independent-reference dependencies.",
+  "prepared_at_utc": "2026-10-08T18:39:03.543438+00:00",
+  "preserved_R1_plan_sha256": "2ad019267f572c7fac0560a20951224382898f569c0e29d11d5ececabadecef8",
+  "readset_path": "docs/reviews/v1-7-recognizable-content/current-source7-pins-tools-readset-r2.json",
+  "readset_sha256": "ca1bc51ccb9c5bcbe926a46b37e80f15e7c898410b424f6b64c9fddcd2f02319",
+  "resources": "Each distinctphase fresh17GiBstart16GiBremainingdisk+MemAvailable/2GiBsampledgroupRSS/1GiBfullS-Rgrowth/ONE20minimmutabledeadline180sreserve/Go2existing397686/rootinclusive\u22643. Method/sourcewholeRSSunmeasured. Allgrowth underS/R, noframework orworkers.",
+  "revision_reason": "Narrow atomic-writer interruption safety: add target to rollback set BEFORE its publication; temporary cleanup deletes only the verified owned regular inode and preserves changed/unverifiable files. Distinct r2 receipt. Exactthree afterimages, substitutions, CLI build/validate scope and originalsourceclock unchanged.",
+  "schema": "v1-7-isolated-reviewed-pins-and-fresh-tools-plan-r2",
+  "scope_exclusions": "No liveR/oldstage/code/fixture/Source7authority/pool/GUI/main/remotechange. No sourceexport, embeddedbundlemodification, Extensioncandidate/proposal/audit or currentall4 now.",
+  "separate_immutable_phase_order": [
+    "Mutation-only NEW admission protects beforeimages in inputs, excludes ONLY3targets from scratch/postunchanged and has exactafterimages. Root verifies new3targetkeeper+other713stage/alloldstage/source/cache identities; original inventory retained history.",
+    "Genuinely NEW afterimage-bound offline build/validation admission; no changed beforeimage remains in its preinputs. It does not renew/resume failed prefix; all existing outputs immutable. Exclusive newtools namespace underT must be absent and owned."
+  ],
+  "source_admission_sha256": "7786ee90d318ebb45833ebd37bcab3d27fd6061e84f27150efa244beb9637db7",
+  "source_validation_limits": "Actual contentbuild.ValidateSources checks all8parsed sources/currentpins/fixturemirrors/rubric/graph/pack/rank/derived/Quick/World/Extensions. It does NOTwrite bundled/export or assert sealedSource7/currentauthority, GUI assets/serving, installedhistory or allbackendtests. Current old Extensions schema validates mechanically but fresh native Extensions author/review/audit/guardedproposal remains separate.",
+  "unknown_output_keeper": "Both freshbinary identities are UNKNOWN until actual successful producers. Root freezes actualregularbinarySHA/bytes/producingreceipt+actual log/admission/deadline/baseline/currentafterimages in exclusivekeepers+externalSHA BEFORE sourcevalidation or lateroperatorconsumers; neverplaceholders/admissionmutation. Existing397686 prefixdoesnotrehashlogs; Root explicitlydoes."
+}

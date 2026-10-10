@@ -1,0 +1,65 @@
+{
+  "liveR_and_original_stage_mutation_allowed": false,
+  "only_four_literal_metadata_substitutions": true,
+  "schema": "v1-7-staged-reviewed-pin-literal-afterimages-v1",
+  "targets": {
+    "cat_de_roman_esti/wordgames/derived_catalog.py": {
+      "CRLF_count": 0,
+      "after_bytes": 25777,
+      "after_sha256": "f79956b0e88523e2d79b916daf7b04747d6310cb62291644feeb6bc1c0f44be1",
+      "afterimage_path": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/current-source7-pins-tools-python-derived-after-r1.txt",
+      "before_sha256": "3852e468567e680d66258a5d1b326bac134c7fcc15ed14b8c4ce45e9e51fe7a0",
+      "bytes": 25777,
+      "full_byte_inverse_exact": true,
+      "mode": 436,
+      "path": "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/source7-current-stage-r1/cat_de_roman_esti/wordgames/derived_catalog.py",
+      "raw_unified_diff": "--- a/cat_de_roman_esti/wordgames/derived_catalog.py\n+++ b/cat_de_roman_esti/wordgames/derived_catalog.py\n@@ -39,7 +39,7 @@\n _PREFERRED_STANDARD_SCORE = 55\n # Updated only with a reviewed, generator-produced bundled artifact.\n DEFAULT_DERIVED_CATALOG_SHA256 = (\n-    \"fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a\"\n+    \"df3a01bb5bdbf8c34973b6bc43c9179ab9ffbe0fc6552fb73b5cd1e9bfb24af9\"\n )\n \n _META_FIELDS = {\n",
+      "substitutions": [
+        {
+          "new": "df3a01bb5bdbf8c34973b6bc43c9179ab9ffbe0fc6552fb73b5cd1e9bfb24af9",
+          "old": "fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a"
+        }
+      ]
+    },
+    "cat_de_roman_esti/wordgames/quick_catalog.py": {
+      "CRLF_count": 0,
+      "after_bytes": 11253,
+      "after_sha256": "be3a07e7e32f5b97dfb84a45f0ff4fb75e750fa61b86f129dbb805e85a1751c6",
+      "afterimage_path": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/current-source7-pins-tools-python-quick-after-r1.txt",
+      "before_sha256": "00a5da384b74d856e16955dd02e515b23902aa754ea13bd673a46219843e4a2d",
+      "bytes": 11253,
+      "full_byte_inverse_exact": true,
+      "mode": 436,
+      "path": "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/source7-current-stage-r1/cat_de_roman_esti/wordgames/quick_catalog.py",
+      "raw_unified_diff": "--- a/cat_de_roman_esti/wordgames/quick_catalog.py\n+++ b/cat_de_roman_esti/wordgames/quick_catalog.py\n@@ -32,7 +32,7 @@\n from .service import get_service\n \n CATALOG_PATH = Path(__file__).resolve().parents[1] / \"fixtures/quick_games_v92.json\"\n-CATALOG_SHA256 = \"0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345\"\n+CATALOG_SHA256 = \"34c11c48b28b45c53a741290837288d302c98cea51e4346fb64669d7188c7a8c\"\n MAX_BOARDS = 256\n MAX_BYTES = 2 * 1024 * 1024\n \n",
+      "substitutions": [
+        {
+          "new": "34c11c48b28b45c53a741290837288d302c98cea51e4346fb64669d7188c7a8c",
+          "old": "0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345"
+        }
+      ]
+    },
+    "go-backend/internal/contentbuild/build.go": {
+      "CRLF_count": 0,
+      "after_bytes": 12306,
+      "after_sha256": "60d9c5262287d52cf4e2d97fee056f1462cc3c554dd15cfb0ab267a96304dd61",
+      "afterimage_path": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/current-source7-pins-tools-go-build-after-r1.txt",
+      "before_sha256": "209f99fcda54dc7f2af2affb8bd188605db4e738c32fb1330f8c1fc3216f6cd5",
+      "bytes": 12306,
+      "full_byte_inverse_exact": true,
+      "mode": 436,
+      "path": "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/source7-current-stage-r1/go-backend/internal/contentbuild/build.go",
+      "raw_unified_diff": "--- a/go-backend/internal/contentbuild/build.go\n+++ b/go-backend/internal/contentbuild/build.go\n@@ -16,7 +16,7 @@\n \n // These are the three review-authority pins retained from the former native\n // exporter. New catalog/reserve versions require an explicitly reviewed pin update.\n-var reviewedPins = map[string]string{\"derived_catalog_v38.json\": \"fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a\", \"quick_games_v92.json\": \"0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345\", \"release_reserve_v1.json\": \"fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7\"}\n+var reviewedPins = map[string]string{\"derived_catalog_v38.json\": \"df3a01bb5bdbf8c34973b6bc43c9179ab9ffbe0fc6552fb73b5cd1e9bfb24af9\", \"quick_games_v92.json\": \"34c11c48b28b45c53a741290837288d302c98cea51e4346fb64669d7188c7a8c\", \"release_reserve_v1.json\": \"fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7\"}\n \n const RubricSHA256 = \"3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101\"\n \n",
+      "substitutions": [
+        {
+          "new": "df3a01bb5bdbf8c34973b6bc43c9179ab9ffbe0fc6552fb73b5cd1e9bfb24af9",
+          "old": "fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a"
+        },
+        {
+          "new": "34c11c48b28b45c53a741290837288d302c98cea51e4346fb64669d7188c7a8c",
+          "old": "0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345"
+        }
+      ]
+    }
+  }
+}

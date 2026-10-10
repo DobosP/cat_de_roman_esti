@@ -1,0 +1,28 @@
+"""Freeze exact complete case IDs from the previously successful collection; metadata only."""
+import pathlib,json,hashlib,re,os
+R=pathlib.Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7')
+S=pathlib.Path('/home/dobo/work/_temp/codex__content-v1-7')
+T=S/'resume-windows-20261008'
+D=R/'docs/reviews/v1-7-recognizable-content'
+h=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+row=D/'current-source7-installed-history-tests-r1-step-2-result.json'
+assert row.is_file() and not row.is_symlink() and h(row)=='a9ade47da175780b6cf0d908c157ea74861bb0cd70f647d60fce63abbb825506'
+receipt=json.loads(row.read_bytes())
+assert receipt['exit_code']==0 and receipt['guard'] is None and receipt['failure'] is None
+log=pathlib.Path(receipt['log_path'])
+assert log.is_file() and not log.is_symlink() and h(log)=='83111a46c578d7a5d25448378b9659e36ebc4ee51d8ff673ed4320dba0088193' and receipt['log_sha256']=='83111a46c578d7a5d25448378b9659e36ebc4ee51d8ff673ed4320dba0088193'
+assert log.stat().st_size<1<<20
+lines=[line.strip() for line in log.read_text().splitlines() if line.strip()]
+summary=re.fullmatch(r'(\d+) tests collected in [0-9.]+s',lines[-1])
+assert summary is not None
+ids=lines[:-1]
+pattern=r'tests/test_v(?:50_synonyms_basic_words|1_[67]_content_history)[.]py::.+'
+assert all(re.fullmatch(pattern,line) for line in ids)
+assert len(ids)==len(set(ids))==int(summary.group(1))==99
+assert {name.split('::')[0] for name in ids}=={'tests/test_v50_synonyms_basic_words.py','tests/test_v1_6_content_history.py','tests/test_v1_7_content_history.py'}
+manifest=T/'current-source7-history-tests-python-case-manifest-r3.json'
+value={'schema':'v1-7-exact-actual99-collected-case-manifest-v2','count':len(ids),'nodeids':ids,'producer_receipt_path':str(row),'producer_receipt_sha256':h(row),'producer_log_path':str(log),'producer_log_sha256':h(log),'source_method_sha256':h(pathlib.Path(__file__)),'no_test_execution_or_old_state_continuation':True,'old_root_parser_failure_preserved':True}
+with manifest.open('x') as stream:json.dump(value,stream,indent=2,sort_keys=True);stream.write('\n');stream.flush();os.fsync(stream.fileno())
+external=T/'current-source7-history-tests-python-case-external-r3.json'
+with external.open('x') as stream:json.dump({'manifest_path':str(manifest),'manifest_sha256':h(manifest),'producer_receipt_sha256':h(row)},stream,indent=2,sort_keys=True);stream.write('\n');stream.flush();os.fsync(stream.fileno())
+print(json.dumps({'count':len(ids),'manifest_sha256':h(manifest),'external_sha256':h(external)}))

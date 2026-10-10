@@ -1,0 +1,286 @@
+{
+  "actual_source_comparison": {
+    "Salary_absent_from_World_candidate": true,
+    "Source6_Source7_concept_and_recipe_rows_exact": true,
+    "Source6_world": {
+      "concepts": 252,
+      "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json",
+      "recipes": 352,
+      "sha256": "8f013a8f6b54a97a768a34c42e669addc4f5ab9823302befbe15ad811cae77ad"
+    },
+    "Source7_world": {
+      "concepts": 252,
+      "path": "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/source7-current-stage-r1/cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json",
+      "recipes": 352,
+      "sha256": "1fcd017b33edf3600098306b19c012f709c8a50b905be9d259a6a1e2cbb84049"
+    },
+    "baseline": {
+      "concepts": 249,
+      "path": "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/source7-current-stage-r1/docs/reviews/v96-words-and-input-clarity/integration/alchimie/candidate.json",
+      "recipes": 347,
+      "sha256": "6de6b98871c43e539402fff9680474cc31afe22f5b4923c13dbafa9bd5465496"
+    },
+    "baseline_to_failed_candidate_changed_old_concepts": [
+      {
+        "changed_fields": {
+          "snapshot": {
+            "current": {
+              "aliases": [
+                "uleiul",
+                "uleiuri",
+                "uleiurile",
+                "uleiului",
+                "uleiurilor",
+                "untdelemn"
+              ],
+              "category": "gastronomie",
+              "degree": 6,
+              "description": "Concept cotidian din grupul «ingrediente de bază»: Ulei.",
+              "difficulty_tier": "easy",
+              "facets": {},
+              "id": "n_v24_food_pantry_ulei",
+              "label_ro": "Ulei",
+              "node_type": "concept",
+              "redistributable": false,
+              "salience": 0.88,
+              "source": "",
+              "tags": []
+            },
+            "previous": {
+              "aliases": [
+                "uleiul",
+                "uleiuri",
+                "uleiurile",
+                "uleiului",
+                "uleiurilor"
+              ],
+              "category": "gastronomie",
+              "degree": 6,
+              "description": "Concept cotidian din grupul «ingrediente de bază»: Ulei.",
+              "difficulty_tier": "easy",
+              "facets": {},
+              "id": "n_v24_food_pantry_ulei",
+              "label_ro": "Ulei",
+              "node_type": "concept",
+              "redistributable": false,
+              "salience": 0.88,
+              "source": "",
+              "tags": []
+            }
+          }
+        },
+        "id": "n_v24_food_pantry_ulei"
+      },
+      {
+        "changed_fields": {
+          "snapshot": {
+            "current": {
+              "aliases": [
+                "roșia",
+                "roșii",
+                "roșiile",
+                "roșiei",
+                "roșiilor",
+                "tomată",
+                "tomate",
+                "tomatele",
+                "tomatei",
+                "tomatelor"
+              ],
+              "category": "gastronomie",
+              "degree": 5,
+              "description": "Legumă-fruct comestibilă folosită în salate, sosuri și tocane.",
+              "difficulty_tier": "easy",
+              "facets": {},
+              "id": "n_v4gas_rosie",
+              "label_ro": "Roșie",
+              "node_type": "concept",
+              "redistributable": false,
+              "salience": 0.6714,
+              "source": "",
+              "tags": []
+            },
+            "previous": {
+              "aliases": [
+                "roșia",
+                "roșii",
+                "roșiile",
+                "roșiei",
+                "roșiilor"
+              ],
+              "category": "gastronomie",
+              "degree": 5,
+              "description": "Legumă-fruct comestibilă folosită în salate, sosuri și tocane.",
+              "difficulty_tier": "easy",
+              "facets": {},
+              "id": "n_v4gas_rosie",
+              "label_ro": "Roșie",
+              "node_type": "concept",
+              "redistributable": false,
+              "salience": 0.6714,
+              "source": "",
+              "tags": []
+            }
+          }
+        },
+        "id": "n_v4gas_rosie"
+      }
+    ],
+    "changed_used_KG_records_vs_genuine_historical_input": [
+      {
+        "fields": [
+          "aliases"
+        ],
+        "id": "n_v24_food_pantry_ulei"
+      },
+      {
+        "fields": [
+          "aliases"
+        ],
+        "id": "n_v4gas_rosie"
+      }
+    ],
+    "conclusion": "The four observations do not establish a Source7 alias regression. The equality/inheritance mismatch consists of V1.2 tomată forms and V1.6 untdelemn, which already exist in Source6. Source6 and Source7 serving World rows are identical. This is a source/data comparison and deterministic-construction inference, not a new executable Source6 or Source7 test result.",
+    "failed_candidate": {
+      "bytes": 808890,
+      "concepts": 251,
+      "new_authored_ids": [
+        "alw_food_mancare_spanac",
+        "alw_food_supa_rosii"
+      ],
+      "path": "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/current-source7-full-reference-r1/pytest-run-base/test_reviewed_unchanged_concep0/candidate.json",
+      "recipes": 351,
+      "sha256": "1b77631f6eba7d740b4a6d333fb87765711559b794fef081d2ccbf50982fd48b"
+    },
+    "same_generator_and_Node_snapshot_source_bytes_R_I": true
+  },
+  "exact_four_failures": [
+    {
+      "cause": "Its candidate fixture runs the current Python editorial generator against current KG341 while B.BASELINE is the unchanged V96 candidate bound to the genuine earlier d477 KG. Exactly two previously inherited snapshots gained legitimate old-release aliases.",
+      "failure": "Full original concept equality assertion is false.",
+      "line": 89,
+      "test": "test_editorial_descriptions_keep_original_fixes_and_provenance"
+    },
+    {
+      "cause": "The test marks every old concept inherited and empties sources. B.read_review line330 correctly rejects changed Ulei/Roșie snapshots against the exact immutable baseline; weakening this guard would be wrong.",
+      "failure": "ValueError: factual: altered inherited concept.",
+      "line": 414,
+      "test": "test_reviewed_unchanged_concepts_can_inherit_without_new_source_claims"
+    },
+    {
+      "cause": "The earlier 352-file closure missed this literal argument passed to the local archived_candidate helper.",
+      "failure": "FileNotFoundError for v92-alchimie-more-concepts/candidates.json.",
+      "line": 279,
+      "test": "test_expansion_preserves_all_prior_recipes_goals_and_collections"
+    },
+    {
+      "cause": "Same finite local-helper prerequisite omission; expected test SHA matches the actual independent R archive.",
+      "failure": "FileNotFoundError for v92-alchimie-large-concepts/candidate.json.",
+      "line": 302,
+      "test": "test_recipe_reuse_keeps_complete221_book_and_preparation_sources"
+    }
+  ],
+  "failed_run_evidence": {
+    "case_manifest_path": "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/current-source7-full-reference-r1/actual-cases.json",
+    "case_manifest_sha256": "9f1f1f7810f87816b2430e1df44f24c4458a9a2b4d5f59090f09bb30ccbcb8f6",
+    "native_admission": "552e14bba8018f56d47fa111c269ffb1273bceec2b46cc42bbfd8a2e5767cad7",
+    "observations": "Fresh collection passed 2733 cases/151 modules with exact prior IDs. Full run reported four failures and 197 inner passes plus one incomplete XML shell; all full-run observations remain unqualified. Root interrupted its verified owned group after observing failures. KeyboardInterrupt does not establish a resource cause or another regression.",
+    "raw_manifest_sha256": "1343523cf24ec44e5678a721d0975657305201a97986d2e82183421c220de1fd",
+    "results_path": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/current-source7-full-reference-failed-results-r1.json",
+    "results_sha256": "b5f3fe87250df0268b549c8b99349f0d574b89d0692fb146ab3d90b52b1eb734",
+    "state": "FAILED, next2, pending null; preserve and never resume/replay this original phase.",
+    "workspace_inventory_sha256": "1722a857419d520c21ca51d3ef7388ffe86fe0bcce4b773d438d23d86a9b721a"
+  },
+  "finite_same_helper_scan": {
+    "additional_missing_archives_beyond_the_named_two": [],
+    "copy_authority": false,
+    "default_modules_inspected": 151,
+    "literal_calls": [
+      {
+        "I_exists": false,
+        "I_sha256": null,
+        "R_actual_sha256": "fc863ff35cebe88d1b2364fc3693f7d765bb33606d9a3191b1d8532540c37209",
+        "R_bytes": 148554,
+        "R_mode": 436,
+        "archive_path": "docs/reviews/v92-alchimie-more-concepts/candidates.json",
+        "call_chain": "Collected test -> local archived_candidate(relative, expected_sha256) -> B.file_sha -> Path.read_bytes; then json.loads(path.read_bytes). No descriptor strings or arbitrary paths followed.",
+        "expected_literal_sha256": "fc863ff35cebe88d1b2364fc3693f7d765bb33606d9a3191b1d8532540c37209",
+        "line": 279,
+        "test_source": "tests/test_alchimie_discovery_catalog.py"
+      },
+      {
+        "I_exists": true,
+        "I_sha256": "ac3408616889175f21cd592b8d71ad0a3f63e95054705da8491097d39c0bf1da",
+        "R_actual_sha256": "ac3408616889175f21cd592b8d71ad0a3f63e95054705da8491097d39c0bf1da",
+        "R_bytes": 383438,
+        "R_mode": 436,
+        "archive_path": "docs/reviews/v92-entry-creation-and-gui/alchimie/candidate.json",
+        "call_chain": "Collected test -> local archived_candidate(relative, expected_sha256) -> B.file_sha -> Path.read_bytes; then json.loads(path.read_bytes). No descriptor strings or arbitrary paths followed.",
+        "expected_literal_sha256": "ac3408616889175f21cd592b8d71ad0a3f63e95054705da8491097d39c0bf1da",
+        "line": 283,
+        "test_source": "tests/test_alchimie_discovery_catalog.py"
+      },
+      {
+        "I_exists": false,
+        "I_sha256": null,
+        "R_actual_sha256": "da5a2a1df2790a2cd3f9db0806f8112c7b0ccdb63ed6d7d2e3f418542d4e209a",
+        "R_bytes": 326663,
+        "R_mode": 436,
+        "archive_path": "docs/reviews/v92-alchimie-large-concepts/candidate.json",
+        "call_chain": "Collected test -> local archived_candidate(relative, expected_sha256) -> B.file_sha -> Path.read_bytes; then json.loads(path.read_bytes). No descriptor strings or arbitrary paths followed.",
+        "expected_literal_sha256": "da5a2a1df2790a2cd3f9db0806f8112c7b0ccdb63ed6d7d2e3f418542d4e209a",
+        "line": 302,
+        "test_source": "tests/test_alchimie_discovery_catalog.py"
+      },
+      {
+        "I_exists": true,
+        "I_sha256": "ac3408616889175f21cd592b8d71ad0a3f63e95054705da8491097d39c0bf1da",
+        "R_actual_sha256": "ac3408616889175f21cd592b8d71ad0a3f63e95054705da8491097d39c0bf1da",
+        "R_bytes": 383438,
+        "R_mode": 436,
+        "archive_path": "docs/reviews/v92-entry-creation-and-gui/alchimie/candidate.json",
+        "call_chain": "Collected test -> local archived_candidate(relative, expected_sha256) -> B.file_sha -> Path.read_bytes; then json.loads(path.read_bytes). No descriptor strings or arbitrary paths followed.",
+        "expected_literal_sha256": "ac3408616889175f21cd592b8d71ad0a3f63e95054705da8491097d39c0bf1da",
+        "line": 306,
+        "test_source": "tests/test_alchimie_discovery_catalog.py"
+      }
+    ],
+    "missing_total_bytes": 475217,
+    "missing_unique_archives": 2,
+    "unique_archives": 3
+  },
+  "fresh_before_write": {
+    "checked_at_utc": "2026-10-09T02:49:08.730990+00:00",
+    "disk_free_bytes": 116817252352,
+    "memory_available_bytes": 82010935296
+  },
+  "genuine_historical_context_input": {
+    "I_already_contains_exact_archive": true,
+    "archive_path": "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/source7-current-stage-r1/docs/reviews/v1-testing-release/content/kg-before-v1.json.gz",
+    "compressed_bytes": 431885,
+    "compressed_sha256": "b0cfac884d0d02d5218456fca77c0b91e1135238de2d5dde35f6636f78efcbf6",
+    "matches_original_B_BASELINE_kg_binding": true,
+    "not_a_current_candidate_inverse": true,
+    "raw_bytes": 3668778,
+    "raw_nodes": 2416,
+    "raw_sha256": "d4774bb73d38500eada2d8f3c3a4b0829c660a2241d96f3e6826dd0ee862e109"
+  },
+  "inherited_empty_source_review_context": {
+    "Source6_factual_review_path": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-6-everyday-inputs/native/world/factual-review.json",
+    "all_are_explicitly_inherited": true,
+    "empty_concept_review_source_lists": 109,
+    "qualification": "These are existing unchanged-concept factual review source lists, not empty recipe sources or a cause of the snapshot mismatch. Preserve them honestly; no sources are invented or old judgments retargeted.",
+    "sha256": "fedcff86e30edf5f9033f7c0808eb6f54ef8d8845a6ab82f08c0945a268aa0ce"
+  },
+  "reviewable_proposal_only": {
+    "archive_prerequisites": "After exact independent source review and a fresh resource admission, copy only the two absent immutable V92 archives new-only; preserve all 1192 prior files. No copying occurs in this proposal.",
+    "context_dependency_check": "Those two tests do not use final_files/RUNTIME_SOURCES. Do not blanket-scope all 89 module cases or fabricate copies of runtime files. Candidate creation, bindings and serving validate_world must all use the same authentic historical KG during that narrow context, with restoration independently checked.",
+    "current_contract_separate": "Retain or separately add an explicit current-source contract over actual Source7 KG341 and serving World1f: all 252 concepts/352 recipes/history/provenance rows match genuine Source6 World8f, Salary is outside the World, and current native bindings/known sealed gameplay remain separate evidence. A new negative guard control may assert that current alias-changed snapshots cannot falsely claim inherited approval from V96. Never rebind the old positive test to current snapshots or change the shared inheritance guard.",
+    "future_execution": "Freeze exact reviewed test-context afterimages and current-contract source before any new staging/testing admission. Old full552 remains failed, and its 197 passes are not reused as full-run acceptance. No skipped cases, weakened assertions, fixture/expected-response hand edits or universal full-run readiness follows.",
+    "historical_positive_scope": "Add a narrowly selected, function-scoped standard pytest autouse historical context only for the two positive equality/inheritance tests. Start the context before their existing candidate/reviewed_files fixtures. Preserve every original test-body AST statement, assertion, literal and builder guard. Authenticate/decompress the genuine d477 archive, create an exclusive test TempRoot containing those exact KG bytes and the unchanged rubric, scope B.ROOT and the retained service-loader fixture environment, clear/restore loader caches and globals in finally. Leave B.BASELINE on its exact original 6de6 archive and SOURCE module bytes unchanged. This is a proposal, not an applied fixture or a passing result."
+  },
+  "schema": "v1-7-static-discovery-catalog-four-failure-diagnosis-v1",
+  "scope": "Source-only diagnosis and reviewable proposal. No application import, candidate generation, collection, test/native probe, copying or source/test/helper/currentmetadata/data change.",
+  "source_admission_sha256": "6fcc32360484692efd660823dd1f1fd1225ddede4d4d1e0e9cd7ef534df395bb",
+  "source_whole_RSS": "unmeasured"
+}

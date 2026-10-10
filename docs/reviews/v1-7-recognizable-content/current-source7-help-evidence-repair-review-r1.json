@@ -1,0 +1,49 @@
+{
+  "schema": "v1-7-exactCLIhelp-lossless-representation-only-review-v1",
+  "reviewer": "/root/v17_research_quality",
+  "reviewed_at_utc": "2026-10-08T18:29:32.571048+00:00",
+  "verdict": "accept_lossless_archive_and_explicit_readability_representation_only",
+  "original_source_admission_sha256": "0a5ec38d61d0d3749a70e819be7acb17fd231cdeee55bfbffb7ff43aeb7ff1c3",
+  "repair_admission_sha256": "de9d31868cad9abf054d8bcf630964bbef0e4b2ae4727d17d49455d6c3cb8881",
+  "source_cutoff_utc": "2026-10-08T18:38:06.493436+00:00",
+  "original_deadline_utc": "2026-10-08T18:41:06.493436+00:00",
+  "clock_not_reset": true,
+  "source_worker_whole_RSS_measured": false,
+  "dependencies_sha256": {
+    "current-source7-checkpoint-source-admission-r1.json": "0a5ec38d61d0d3749a70e819be7acb17fd231cdeee55bfbffb7ff43aeb7ff1c3",
+    "current-source7-help-evidence-repair-admission-r1.json": "de9d31868cad9abf054d8bcf630964bbef0e4b2ae4727d17d49455d6c3cb8881",
+    "current-source7-help-evidence-repair-mapping-r1.json": "07f5f17b5e98efebfe64f4301b7414a49534f8fe9f49acf81d9b0aa7868bed6e",
+    "current-source7-checkpoint-staged-whitespace-failure-r1.json": "24a8acbba776c0b39225d24c0414b1ed12ddb2f0b3d7649698c8bf01225dae1a",
+    "current-cli-source6-negative-expected-help-raw-r1.txt.gz": "c588ac6c79a1aea1aecc5c5ecd065c14ff7a804884869ba7189072c808435d6d",
+    "current-cli-source6-negative-expected-help-r1.txt": "5ade717313f997e190b3a931d08d2541efa74dbec9d154a1f1962ea4c02aedf9",
+    "current-cli-source6-negative-actual-help.json": "088edbce346ecba22c429848f5c697ba548ffb22f53b0ccf9d32224a6fc6ec15",
+    "current-cli-source6-negative-actual-report.json": "b16cbeb3fe30baf748e714e6ad0e96bbc75bafe94cd77e3778e1871aaba4a728",
+    "current-cli-source6-negative-method-r1.py.txt": "f974eca0628558d8d45048b5d592f5b489641a3c5241879bbe495cdc0c123125",
+    "current-cli-source6-negative-method-review-r1.json": "2ffd477f0dc827f66bc67da88a92c6cbb66ec2e000c8e92ecabe889baf7743a3",
+    "current-cli-source6-negative-actual-review-r1.json": "d62ce5c90d5ca1454b2297f12b5cc7252eeb5305abae6751eb01f1f34a0f30ec"
+  },
+  "identity_checks": {
+    "raw_original_sha256": "e7c37e4e1429a5738455f375aa0d51e877ea567989beb93afe887777c287237c",
+    "raw_bytes": 1212,
+    "gzip_sha256": "c588ac6c79a1aea1aecc5c5ecd065c14ff7a804884869ba7189072c808435d6d",
+    "view_sha256": "5ade717313f997e190b3a931d08d2541efa74dbec9d154a1f1962ea4c02aedf9",
+    "gzip_decompression_equals_owned_original_equals_decoded_view_lines": true,
+    "all16_sourcehelp_entry_indents_preserved_exact": true,
+    "actual_observed_CLI_help_stderr_and_expected_stderr_equal_raw": true,
+    "readability_view_clearly_labelled_and_contains_escaped_not_literal_tabs": true,
+    "historical_capture_method_and_source_actual_reviews_unchanged": true
+  },
+  "failure_boundary": {
+    "original_default_staged_diff_check": "FAIL_BEFORE_COMMIT:16 space-before-tab lines3,5,...33 in exact raw Go help. The failure remains historical and is not recast as a pass.",
+    "representation_repair": "Exact original source-derived and observed bytes are retained as a durable gzip and owned raw file. Same logical .txt path is now explicitly a JSON escaped-line readability view; only its representation changed.",
+    "no_waiver": "No whitespace configuration/attribute/threshold or expected CLI response change is involved. Fresh default working/staged whitespace and native docs against current representations remain root responsibilities."
+  },
+  "provenance_rules": [
+    "Historical old SHA-bound methods/reviews/readsets resolve to original raw archive bytes via this explicit mapping, never to the new readability view. No original judgment is rewritten or silently rebound to the new file hash.",
+    "The historical capture method still names the original logical text path and is inert. It MUST NOT be reexecuted against the replacement view as if it were raw expected help. Any future use needs an explicitly reviewed raw-archive resolution/new source method and fresh binding. No rerun is needed for already-completed observed evidence.",
+    "Future current-phase admissions/readsets must protect the actual viewSHA, gzipSHA and mappingSHA, while retaining original rawSHA ancestry. Any old current-protection row at this path now differs and must receive an explicit representation mapping ACK, not an unnoticed trust reset.",
+    "This ACK covers lossless representation only. It grants no CLI/native replay, source/code/content/fixture/pin/authority change, new docs execution admission or Source7/GUI/fullgate acceptance."
+  ],
+  "review_operations": "Static bytes/hash/gzip/JSON comparisons only; no CLI/Go/native/test/case/cache/audit execution or broad proof replay.",
+  "current_scope_unchanged": "The previously accepted actual isolated Quick transition remains exact historical evidence. Source7 live adoption, currentauthority, pin/tool/Extensions and full release work stay pending."
+}

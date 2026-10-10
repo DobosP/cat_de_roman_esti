@@ -1,0 +1,1229 @@
+{
+  "schema": "v1-7-root-extra-edgeorder-pre-admission-assertion-failure-v2",
+  "written_at_utc": "2026-10-08T19:11:18.809807+00:00",
+  "same_original_source_admission_sha256": "679b7bc8b1574f238af9d432d2df2d3f98c532e8b4f5418861c5076ef6e0cff3",
+  "same_original_cutoff_utc": "2026-10-08T19:19:15.417042+00:00",
+  "same_original_deadline_utc": "2026-10-08T19:22:15.417042+00:00",
+  "status": "PRE_ADMISSION_ROOT_EXTRA_SORT_ORDER_ASSERTION_FAIL",
+  "exact_stack": "File \"<stdin>\", line 20, in <module>\nAssertionError",
+  "failed_predicate": "add['edge_ids']==sorted({y['fixture_edge']['id'] for y in x['edges']})",
+  "actual_normative_constructor": "eids append text(runtime_edge.id) in row.edges order; pair preserves row.pair order (extensions.go lines270-276)",
+  "source_code_sha256": "c3c5166b6b6975128da9884c70921c7552ce83140575f5b5e90106dffa6c07af",
+  "known_proposal_sha256": "605690ec6b163ab3860fc57c53c21288b2781b85c77f93e414d63207340119bf",
+  "known_candidate_sha256": "f3e316bf46063386c8e4c69fdc8c951c02dbfb66ecf4af94b9a784a33a5d3ec2",
+  "all49_actual_ordered_edge_and_pair_comparisons": [
+    {
+      "candidate_id": "alrecipe-al_arta_cultura_008-52c19b929e8b58a4",
+      "raw_edge_ids": [
+        "de1436",
+        "de331"
+      ],
+      "actual_edge_ids": [
+        "de1436",
+        "de331"
+      ],
+      "raw_pair": [
+        "n_manastiri_pictate_bucovina",
+        "n_sucevita"
+      ],
+      "actual_pair": [
+        "n_manastiri_pictate_bucovina",
+        "n_sucevita"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_arta_cultura_008-6a85794eaee6a351",
+      "raw_edge_ids": [
+        "de1436",
+        "de1423"
+      ],
+      "actual_edge_ids": [
+        "de1436",
+        "de1423"
+      ],
+      "raw_pair": [
+        "n_manastiri_pictate_bucovina",
+        "n_voronet"
+      ],
+      "actual_pair": [
+        "n_manastiri_pictate_bucovina",
+        "n_voronet"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_arta_cultura_008-8b6c73c0ca4a1594",
+      "raw_edge_ids": [
+        "de331",
+        "de1423"
+      ],
+      "actual_edge_ids": [
+        "de331",
+        "de1423"
+      ],
+      "raw_pair": [
+        "n_sucevita",
+        "n_voronet"
+      ],
+      "actual_pair": [
+        "n_sucevita",
+        "n_voronet"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_arta_cultura_013-6a7ca188569f44ac",
+      "raw_edge_ids": [
+        "de602",
+        "de1762"
+      ],
+      "actual_edge_ids": [
+        "de602",
+        "de1762"
+      ],
+      "raw_pair": [
+        "n_artx_pasarea_maiastra",
+        "n_v3art_desen"
+      ],
+      "actual_pair": [
+        "n_artx_pasarea_maiastra",
+        "n_v3art_desen"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_arta_cultura_014-4c40357eabe090ef",
+      "raw_edge_ids": [
+        "de341",
+        "ae152"
+      ],
+      "actual_edge_ids": [
+        "de341",
+        "ae152"
+      ],
+      "raw_pair": [
+        "n_artx_miorita",
+        "n_calusarii"
+      ],
+      "actual_pair": [
+        "n_artx_miorita",
+        "n_calusarii"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_arta_cultura_014-23d573855f4c9fd9",
+      "raw_edge_ids": [
+        "de341",
+        "de3561"
+      ],
+      "actual_edge_ids": [
+        "de341",
+        "de3561"
+      ],
+      "raw_pair": [
+        "n_artx_miorita",
+        "n_v4art_folclor"
+      ],
+      "actual_pair": [
+        "n_artx_miorita",
+        "n_v4art_folclor"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_arta_cultura_014-a3650529b4580ef7",
+      "raw_edge_ids": [
+        "ae152",
+        "de3561"
+      ],
+      "actual_edge_ids": [
+        "ae152",
+        "de3561"
+      ],
+      "raw_pair": [
+        "n_calusarii",
+        "n_v4art_folclor"
+      ],
+      "actual_pair": [
+        "n_calusarii",
+        "n_v4art_folclor"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_arta_cultura_016-df72f2d42cb1eabd",
+      "raw_edge_ids": [
+        "xe3",
+        "de407"
+      ],
+      "actual_edge_ids": [
+        "xe3",
+        "de407"
+      ],
+      "raw_pair": [
+        "n_horezu",
+        "n_v2art_manastire"
+      ],
+      "actual_pair": [
+        "n_horezu",
+        "n_v2art_manastire"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_arta_cultura_017-b0d5443676082705",
+      "raw_edge_ids": [
+        "de1761",
+        "de1760"
+      ],
+      "actual_edge_ids": [
+        "de1761",
+        "de1760"
+      ],
+      "raw_pair": [
+        "n_arta_plastica",
+        "n_v2art_muzeu"
+      ],
+      "actual_pair": [
+        "n_arta_plastica",
+        "n_v2art_muzeu"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_film_tv_020-149912f45a31b25d",
+      "raw_edge_ids": [
+        "de2362",
+        "de3670"
+      ],
+      "actual_edge_ids": [
+        "de2362",
+        "de3670"
+      ],
+      "raw_pair": [
+        "n_v3fil_trailer",
+        "n_v4fil_drama"
+      ],
+      "actual_pair": [
+        "n_v3fil_trailer",
+        "n_v4fil_drama"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_film_tv_020-7b734fe0bab5c288",
+      "raw_edge_ids": [
+        "de2362",
+        "de3610"
+      ],
+      "actual_edge_ids": [
+        "de2362",
+        "de3610"
+      ],
+      "raw_pair": [
+        "n_v3fil_trailer",
+        "n_v4fil_ecran"
+      ],
+      "actual_pair": [
+        "n_v3fil_trailer",
+        "n_v4fil_ecran"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_film_tv_020-f6efc18f7a771723",
+      "raw_edge_ids": [
+        "de3670",
+        "de3610"
+      ],
+      "actual_edge_ids": [
+        "de3670",
+        "de3610"
+      ],
+      "raw_pair": [
+        "n_v4fil_drama",
+        "n_v4fil_ecran"
+      ],
+      "actual_pair": [
+        "n_v4fil_drama",
+        "n_v4fil_ecran"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_film_tv_021-e99d50c411c9eae8",
+      "raw_edge_ids": [
+        "de2247",
+        "de3643"
+      ],
+      "actual_edge_ids": [
+        "de2247",
+        "de3643"
+      ],
+      "raw_pair": [
+        "n_ftv_bd_la_munte_si_la_mare",
+        "n_v4fil_desen_animat"
+      ],
+      "actual_pair": [
+        "n_ftv_bd_la_munte_si_la_mare",
+        "n_v4fil_desen_animat"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_film_tv_021-49df1a5700159b30",
+      "raw_edge_ids": [
+        "de3652",
+        "de3651"
+      ],
+      "actual_edge_ids": [
+        "de3652",
+        "de3651"
+      ],
+      "raw_pair": [
+        "n_v2fil_emisiune_tv",
+        "n_v2fil_televiziune"
+      ],
+      "actual_pair": [
+        "n_v2fil_emisiune_tv",
+        "n_v2fil_televiziune"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_film_tv_023-1a2911a5ae48c1fe",
+      "raw_edge_ids": [
+        "de1459",
+        "de1465"
+      ],
+      "actual_edge_ids": [
+        "de1459",
+        "de1465"
+      ],
+      "raw_pair": [
+        "n_ftv_mugur_mihaescu",
+        "n_ftv_tamara_buciuceanu_botez"
+      ],
+      "actual_pair": [
+        "n_ftv_mugur_mihaescu",
+        "n_ftv_tamara_buciuceanu_botez"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_film_tv_106-81a79e92140edbc2",
+      "raw_edge_ids": [
+        "de376",
+        "de4990"
+      ],
+      "actual_edge_ids": [
+        "de376",
+        "de4990"
+      ],
+      "raw_pair": [
+        "n_ftv_vacanta_mare",
+        "n_v11fil_vocea_romaniei"
+      ],
+      "actual_pair": [
+        "n_ftv_vacanta_mare",
+        "n_v11fil_vocea_romaniei"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_gastronomie_029-271020625db2d988",
+      "raw_edge_ids": [
+        "de1565",
+        "de2944"
+      ],
+      "actual_edge_ids": [
+        "de1565",
+        "de2944"
+      ],
+      "raw_pair": [
+        "n_gas_mici",
+        "n_v3gas_friptura"
+      ],
+      "actual_pair": [
+        "n_gas_mici",
+        "n_v3gas_friptura"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_geografie_002-7ee5c60ea63d8208",
+      "raw_edge_ids": [
+        "de644",
+        "ae60"
+      ],
+      "actual_edge_ids": [
+        "de644",
+        "ae60"
+      ],
+      "raw_pair": [
+        "n_lacul_balea",
+        "n_muntii_fagaras"
+      ],
+      "actual_pair": [
+        "n_lacul_balea",
+        "n_muntii_fagaras"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_geografie_031-ae2b5902f1639453",
+      "raw_edge_ids": [
+        "de3796",
+        "de3794"
+      ],
+      "actual_edge_ids": [
+        "de3796",
+        "de3794"
+      ],
+      "raw_pair": [
+        "n_constanta",
+        "n_v2geo_litoral"
+      ],
+      "actual_pair": [
+        "n_constanta",
+        "n_v2geo_litoral"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_geografie_031-d22705a52fcd5a2b",
+      "raw_edge_ids": [
+        "de1738",
+        "de3833"
+      ],
+      "actual_edge_ids": [
+        "de1738",
+        "de3833"
+      ],
+      "raw_pair": [
+        "n_marea_neagra",
+        "n_v4geo_peninsula"
+      ],
+      "actual_pair": [
+        "n_marea_neagra",
+        "n_v4geo_peninsula"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_geografie_033-bb8bfcd0955f704f",
+      "raw_edge_ids": [
+        "de1740",
+        "de3824"
+      ],
+      "actual_edge_ids": [
+        "de1740",
+        "de3824"
+      ],
+      "raw_pair": [
+        "n_dobrogea",
+        "n_v4geo_nisip"
+      ],
+      "actual_pair": [
+        "n_dobrogea",
+        "n_v4geo_nisip"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_geografie_033-c76764dae62d17b1",
+      "raw_edge_ids": [
+        "de3845",
+        "de3824"
+      ],
+      "actual_edge_ids": [
+        "de3845",
+        "de3824"
+      ],
+      "raw_pair": [
+        "n_v4geo_faleza",
+        "n_v4geo_nisip"
+      ],
+      "actual_pair": [
+        "n_v4geo_faleza",
+        "n_v4geo_nisip"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_istorie_001-018ce4c23d6e8f19",
+      "raw_edge_ids": [
+        "de77",
+        "de677"
+      ],
+      "actual_edge_ids": [
+        "de77",
+        "de677"
+      ],
+      "raw_pair": [
+        "n_geto_daci",
+        "n_razboaiele_daco_romane"
+      ],
+      "actual_pair": [
+        "n_geto_daci",
+        "n_razboaiele_daco_romane"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_istorie_035-ef0a104c82d657a4",
+      "raw_edge_ids": [
+        "xe18",
+        "de1802"
+      ],
+      "actual_edge_ids": [
+        "xe18",
+        "de1802"
+      ],
+      "raw_pair": [
+        "n_iancu_de_hunedoara",
+        "n_istx_batalia_calugareni"
+      ],
+      "actual_pair": [
+        "n_iancu_de_hunedoara",
+        "n_istx_batalia_calugareni"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_istorie_035-9312dad6df475e93",
+      "raw_edge_ids": [
+        "xe18",
+        "de105"
+      ],
+      "actual_edge_ids": [
+        "xe18",
+        "de105"
+      ],
+      "raw_pair": [
+        "n_iancu_de_hunedoara",
+        "n_razboiul_independenta_1877"
+      ],
+      "actual_pair": [
+        "n_iancu_de_hunedoara",
+        "n_razboiul_independenta_1877"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_istorie_035-5f3ec4be108338c6",
+      "raw_edge_ids": [
+        "de1802",
+        "de105"
+      ],
+      "actual_edge_ids": [
+        "de1802",
+        "de105"
+      ],
+      "raw_pair": [
+        "n_istx_batalia_calugareni",
+        "n_razboiul_independenta_1877"
+      ],
+      "actual_pair": [
+        "n_istx_batalia_calugareni",
+        "n_razboiul_independenta_1877"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_istorie_035-4a6467e958c6feb7",
+      "raw_edge_ids": [
+        "de99",
+        "ae12"
+      ],
+      "actual_edge_ids": [
+        "de99",
+        "ae12"
+      ],
+      "raw_pair": [
+        "n_principatele_unite",
+        "n_vlad_tepes"
+      ],
+      "actual_pair": [
+        "n_principatele_unite",
+        "n_vlad_tepes"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_istorie_035-148141c6e6a57495",
+      "raw_edge_ids": [
+        "de105",
+        "xe16"
+      ],
+      "actual_edge_ids": [
+        "de105",
+        "xe16"
+      ],
+      "raw_pair": [
+        "n_razboiul_independenta_1877",
+        "n_vlad_tepes"
+      ],
+      "actual_pair": [
+        "n_razboiul_independenta_1877",
+        "n_vlad_tepes"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_istorie_041-d459ff49861a8dcc",
+      "raw_edge_ids": [
+        "ae15",
+        "h1"
+      ],
+      "actual_edge_ids": [
+        "ae15",
+        "h1"
+      ],
+      "raw_pair": [
+        "n_mica_unire_1859",
+        "n_stefan_cel_mare"
+      ],
+      "actual_pair": [
+        "n_mica_unire_1859",
+        "n_stefan_cel_mare"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_istorie_041-3861fabfa59948a6",
+      "raw_edge_ids": [
+        "ae15",
+        "de5641"
+      ],
+      "actual_edge_ids": [
+        "ae15",
+        "de5641"
+      ],
+      "raw_pair": [
+        "n_mica_unire_1859",
+        "n_v17ist_cultura_cucuteni"
+      ],
+      "actual_pair": [
+        "n_mica_unire_1859",
+        "n_v17ist_cultura_cucuteni"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_istorie_041-4f553c48ba3e2205",
+      "raw_edge_ids": [
+        "ae15",
+        "de1819"
+      ],
+      "actual_edge_ids": [
+        "ae15",
+        "de1819"
+      ],
+      "raw_pair": [
+        "n_mica_unire_1859",
+        "n_vaslui"
+      ],
+      "actual_pair": [
+        "n_mica_unire_1859",
+        "n_vaslui"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_istorie_041-c3ccda2bba00a757",
+      "raw_edge_ids": [
+        "h1",
+        "de5641"
+      ],
+      "actual_edge_ids": [
+        "h1",
+        "de5641"
+      ],
+      "raw_pair": [
+        "n_stefan_cel_mare",
+        "n_v17ist_cultura_cucuteni"
+      ],
+      "actual_pair": [
+        "n_stefan_cel_mare",
+        "n_v17ist_cultura_cucuteni"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_istorie_041-c1f379b6d0a804c6",
+      "raw_edge_ids": [
+        "h1",
+        "de1819"
+      ],
+      "actual_edge_ids": [
+        "h1",
+        "de1819"
+      ],
+      "raw_pair": [
+        "n_stefan_cel_mare",
+        "n_vaslui"
+      ],
+      "actual_pair": [
+        "n_stefan_cel_mare",
+        "n_vaslui"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_istorie_041-467e3999b13b8d6a",
+      "raw_edge_ids": [
+        "de5641",
+        "de1819"
+      ],
+      "actual_edge_ids": [
+        "de5641",
+        "de1819"
+      ],
+      "raw_pair": [
+        "n_v17ist_cultura_cucuteni",
+        "n_vaslui"
+      ],
+      "actual_pair": [
+        "n_v17ist_cultura_cucuteni",
+        "n_vaslui"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_limba_043-e9cbf7fd96e634d8",
+      "raw_edge_ids": [
+        "ae230",
+        "de3052"
+      ],
+      "actual_edge_ids": [
+        "ae230",
+        "de3052"
+      ],
+      "raw_pair": [
+        "n_limba_latina",
+        "n_v3lim_limba"
+      ],
+      "actual_pair": [
+        "n_limba_latina",
+        "n_v3lim_limba"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_literatura_005-7a2b0077f486cfd9",
+      "raw_edge_ids": [
+        "xe107",
+        "e3"
+      ],
+      "actual_edge_ids": [
+        "xe107",
+        "e3"
+      ],
+      "raw_pair": [
+        "n_iasi",
+        "n_mihai_eminescu"
+      ],
+      "actual_pair": [
+        "n_iasi",
+        "n_mihai_eminescu"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_literatura_054-71d8e4d22e0fd986",
+      "raw_edge_ids": [
+        "de2040",
+        "de2059"
+      ],
+      "actual_edge_ids": [
+        "de2040",
+        "de2059"
+      ],
+      "raw_pair": [
+        "n_nichita_stanescu",
+        "n_vasile_alecsandri"
+      ],
+      "actual_pair": [
+        "n_nichita_stanescu",
+        "n_vasile_alecsandri"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_literatura_097-ca5999c028901700",
+      "raw_edge_ids": [
+        "de7523",
+        "de7527"
+      ],
+      "actual_edge_ids": [
+        "de7523",
+        "de7527"
+      ],
+      "raw_pair": [
+        "n_v23lit_punguta_cu_doi_bani",
+        "n_v23lit_ursul_pacalit_de_vulpe"
+      ],
+      "actual_pair": [
+        "n_v23lit_punguta_cu_doi_bani",
+        "n_v23lit_ursul_pacalit_de_vulpe"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_meme_net_057-9c6f7e23358b6241",
+      "raw_edge_ids": [
+        "de759",
+        "de4159"
+      ],
+      "actual_edge_ids": [
+        "de759",
+        "de4159"
+      ],
+      "raw_pair": [
+        "n_net_dorel",
+        "n_v4mem_mema"
+      ],
+      "actual_pair": [
+        "n_net_dorel",
+        "n_v4mem_mema"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_muzica_063-f46b39c98d4c9960",
+      "raw_edge_ids": [
+        "de959",
+        "de2301"
+      ],
+      "actual_edge_ids": [
+        "de959",
+        "de2301"
+      ],
+      "raw_pair": [
+        "n_muz_vama_veche",
+        "n_v2muz_balada_rock"
+      ],
+      "actual_pair": [
+        "n_muz_vama_veche",
+        "n_v2muz_balada_rock"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_personalitati_006-05d70b1015299ff5",
+      "raw_edge_ids": [
+        "ae94",
+        "de1067"
+      ],
+      "actual_edge_ids": [
+        "ae94",
+        "de1067"
+      ],
+      "raw_pair": [
+        "n_paris",
+        "n_targu_jiu"
+      ],
+      "actual_pair": [
+        "n_paris",
+        "n_targu_jiu"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_personalitati_006-46ced8f4e0747830",
+      "raw_edge_ids": [
+        "de1062",
+        "de1067"
+      ],
+      "actual_edge_ids": [
+        "de1062",
+        "de1067"
+      ],
+      "raw_pair": [
+        "n_sculptura",
+        "n_targu_jiu"
+      ],
+      "actual_pair": [
+        "n_sculptura",
+        "n_targu_jiu"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_sport_083-36a787c3d5e29dae",
+      "raw_edge_ids": [
+        "de5353",
+        "de5351"
+      ],
+      "actual_edge_ids": [
+        "de5353",
+        "de5351"
+      ],
+      "raw_pair": [
+        "n_v11spo_dinamo_bucuresti",
+        "n_v11spo_rapid_bucuresti"
+      ],
+      "actual_pair": [
+        "n_v11spo_dinamo_bucuresti",
+        "n_v11spo_rapid_bucuresti"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_sport_083-0579a2e817b3f1f4",
+      "raw_edge_ids": [
+        "de5353",
+        "de6220"
+      ],
+      "actual_edge_ids": [
+        "de5353",
+        "de6220"
+      ],
+      "raw_pair": [
+        "n_v11spo_dinamo_bucuresti",
+        "n_v18spo_cfr_cluj"
+      ],
+      "actual_pair": [
+        "n_v11spo_dinamo_bucuresti",
+        "n_v18spo_cfr_cluj"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_sport_083-bfb3e8b4f2e07b93",
+      "raw_edge_ids": [
+        "de6220",
+        "de6214"
+      ],
+      "actual_edge_ids": [
+        "de6220",
+        "de6214"
+      ],
+      "raw_pair": [
+        "n_v18spo_cfr_cluj",
+        "n_v18spo_fcsb"
+      ],
+      "actual_pair": [
+        "n_v18spo_cfr_cluj",
+        "n_v18spo_fcsb"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_stiinta_008-e33f480433dad310",
+      "raw_edge_ids": [
+        "ae174",
+        "de262"
+      ],
+      "actual_edge_ids": [
+        "ae174",
+        "de262"
+      ],
+      "raw_pair": [
+        "n_biologie_celulara",
+        "n_premiul_nobel"
+      ],
+      "actual_pair": [
+        "n_biologie_celulara",
+        "n_premiul_nobel"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_stiinta_008-6f1bf3883209b8dd",
+      "raw_edge_ids": [
+        "de1271",
+        "de2772"
+      ],
+      "actual_edge_ids": [
+        "de1271",
+        "de2772"
+      ],
+      "raw_pair": [
+        "n_george_palade",
+        "n_v2sti_celula"
+      ],
+      "actual_pair": [
+        "n_george_palade",
+        "n_v2sti_celula"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_stiinta_089-84c874fc6c13d095",
+      "raw_edge_ids": [
+        "de2720",
+        "de4671"
+      ],
+      "actual_edge_ids": [
+        "de2720",
+        "de4671"
+      ],
+      "raw_pair": [
+        "n_v2sti_stiinta",
+        "n_v4sti_insecta"
+      ],
+      "actual_pair": [
+        "n_v2sti_stiinta",
+        "n_v4sti_insecta"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_viata_de_roman_096-7189d7ebb5172e52",
+      "raw_edge_ids": [
+        "de5426",
+        "de1295"
+      ],
+      "actual_edge_ids": [
+        "de5426",
+        "de1295"
+      ],
+      "raw_pair": [
+        "n_v4via_cheie",
+        "n_vdr_copilaria_anilor_90"
+      ],
+      "actual_pair": [
+        "n_v4via_cheie",
+        "n_vdr_copilaria_anilor_90"
+      ]
+    }
+  ],
+  "wrong_sorted_expectation_counterexamples": [
+    {
+      "candidate_id": "alrecipe-al_arta_cultura_008-6a85794eaee6a351",
+      "actual_edge_ids": [
+        "de1436",
+        "de1423"
+      ],
+      "wrong_sorted_expectation": [
+        "de1423",
+        "de1436"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_arta_cultura_008-8b6c73c0ca4a1594",
+      "actual_edge_ids": [
+        "de331",
+        "de1423"
+      ],
+      "wrong_sorted_expectation": [
+        "de1423",
+        "de331"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_arta_cultura_013-6a7ca188569f44ac",
+      "actual_edge_ids": [
+        "de602",
+        "de1762"
+      ],
+      "wrong_sorted_expectation": [
+        "de1762",
+        "de602"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_arta_cultura_014-4c40357eabe090ef",
+      "actual_edge_ids": [
+        "de341",
+        "ae152"
+      ],
+      "wrong_sorted_expectation": [
+        "ae152",
+        "de341"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_arta_cultura_016-df72f2d42cb1eabd",
+      "actual_edge_ids": [
+        "xe3",
+        "de407"
+      ],
+      "wrong_sorted_expectation": [
+        "de407",
+        "xe3"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_arta_cultura_017-b0d5443676082705",
+      "actual_edge_ids": [
+        "de1761",
+        "de1760"
+      ],
+      "wrong_sorted_expectation": [
+        "de1760",
+        "de1761"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_film_tv_020-f6efc18f7a771723",
+      "actual_edge_ids": [
+        "de3670",
+        "de3610"
+      ],
+      "wrong_sorted_expectation": [
+        "de3610",
+        "de3670"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_film_tv_021-49df1a5700159b30",
+      "actual_edge_ids": [
+        "de3652",
+        "de3651"
+      ],
+      "wrong_sorted_expectation": [
+        "de3651",
+        "de3652"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_geografie_002-7ee5c60ea63d8208",
+      "actual_edge_ids": [
+        "de644",
+        "ae60"
+      ],
+      "wrong_sorted_expectation": [
+        "ae60",
+        "de644"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_geografie_031-ae2b5902f1639453",
+      "actual_edge_ids": [
+        "de3796",
+        "de3794"
+      ],
+      "wrong_sorted_expectation": [
+        "de3794",
+        "de3796"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_geografie_033-c76764dae62d17b1",
+      "actual_edge_ids": [
+        "de3845",
+        "de3824"
+      ],
+      "wrong_sorted_expectation": [
+        "de3824",
+        "de3845"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_istorie_001-018ce4c23d6e8f19",
+      "actual_edge_ids": [
+        "de77",
+        "de677"
+      ],
+      "wrong_sorted_expectation": [
+        "de677",
+        "de77"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_istorie_035-ef0a104c82d657a4",
+      "actual_edge_ids": [
+        "xe18",
+        "de1802"
+      ],
+      "wrong_sorted_expectation": [
+        "de1802",
+        "xe18"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_istorie_035-9312dad6df475e93",
+      "actual_edge_ids": [
+        "xe18",
+        "de105"
+      ],
+      "wrong_sorted_expectation": [
+        "de105",
+        "xe18"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_istorie_035-5f3ec4be108338c6",
+      "actual_edge_ids": [
+        "de1802",
+        "de105"
+      ],
+      "wrong_sorted_expectation": [
+        "de105",
+        "de1802"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_istorie_035-4a6467e958c6feb7",
+      "actual_edge_ids": [
+        "de99",
+        "ae12"
+      ],
+      "wrong_sorted_expectation": [
+        "ae12",
+        "de99"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_istorie_041-c3ccda2bba00a757",
+      "actual_edge_ids": [
+        "h1",
+        "de5641"
+      ],
+      "wrong_sorted_expectation": [
+        "de5641",
+        "h1"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_istorie_041-c1f379b6d0a804c6",
+      "actual_edge_ids": [
+        "h1",
+        "de1819"
+      ],
+      "wrong_sorted_expectation": [
+        "de1819",
+        "h1"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_istorie_041-467e3999b13b8d6a",
+      "actual_edge_ids": [
+        "de5641",
+        "de1819"
+      ],
+      "wrong_sorted_expectation": [
+        "de1819",
+        "de5641"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_literatura_005-7a2b0077f486cfd9",
+      "actual_edge_ids": [
+        "xe107",
+        "e3"
+      ],
+      "wrong_sorted_expectation": [
+        "e3",
+        "xe107"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_meme_net_057-9c6f7e23358b6241",
+      "actual_edge_ids": [
+        "de759",
+        "de4159"
+      ],
+      "wrong_sorted_expectation": [
+        "de4159",
+        "de759"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_muzica_063-f46b39c98d4c9960",
+      "actual_edge_ids": [
+        "de959",
+        "de2301"
+      ],
+      "wrong_sorted_expectation": [
+        "de2301",
+        "de959"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_sport_083-36a787c3d5e29dae",
+      "actual_edge_ids": [
+        "de5353",
+        "de5351"
+      ],
+      "wrong_sorted_expectation": [
+        "de5351",
+        "de5353"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_sport_083-bfb3e8b4f2e07b93",
+      "actual_edge_ids": [
+        "de6220",
+        "de6214"
+      ],
+      "wrong_sorted_expectation": [
+        "de6214",
+        "de6220"
+      ]
+    },
+    {
+      "candidate_id": "alrecipe-al_viata_de_roman_096-7189d7ebb5172e52",
+      "actual_edge_ids": [
+        "de5426",
+        "de1295"
+      ],
+      "wrong_sorted_expectation": [
+        "de1295",
+        "de5426"
+      ]
+    }
+  ],
+  "no_new_keeper_or_audit_namespace_or_admission_published": true,
+  "no_native_or_data_or_source_code_change": true,
+  "old540_ROOTFAILSTOP_and_proposal_bytes_unchanged": true,
+  "failure_not_native_response_or_resource_guard": true,
+  "source_worker_RSS": "unmeasured"
+}

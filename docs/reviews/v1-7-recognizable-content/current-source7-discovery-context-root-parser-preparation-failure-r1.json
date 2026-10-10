@@ -1,0 +1,10 @@
+{
+  "archive_path": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/methods/discovery_context_testing_root_failed_generator_r1.py.txt.gz",
+  "archive_sha256": "b5bae7b86002e33fbb5b96b1b99b7189d338fb862a2013843b969f4e4938afa2",
+  "at_utc": "2026-10-09T03:11:28.412110+00:00",
+  "failure": "Static ast.parse SyntaxError before any parser/command output write: D_LITERAL replacement matched suffix of EXPECTED_LITERAL. Generator only, no application import/collection/test/native/I mutation.",
+  "raw_generator_bytes": 7817,
+  "raw_generator_sha256": "6ff05fea21b509a1d413715e2887fbc8f416a953264da36dadda28addaabcc3e",
+  "repair": "Replace full EXPECTED_LITERAL first, then narrower remaining path tokens. Same original source clock; failed script inert, no native failure or failed-clock reset.",
+  "schema": "source-only-parser-template-collision-failure-v1"
+}

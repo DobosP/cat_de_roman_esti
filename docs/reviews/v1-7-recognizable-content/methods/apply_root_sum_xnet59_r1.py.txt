@@ -1,0 +1,39 @@
+"""One exact rootgo.sum checksum-only amendment; no Go/module command.
+Separately reviewed/admitted MUTATION-ONLY lane. Subsequent offline verification
+uses a NEW immutable readset of the exactafterimage, not a changed campaign.
+"""
+import hashlib
+import json
+import os
+from pathlib import Path
+import stat
+import sys
+import tempfile
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7')
+D=R/'docs/reviews/v1-7-recognizable-content'
+S=Path('/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008')
+TARGET=R/'go-backend/go.sum'
+BEFORE='4428f86b6da473a933255e8994a2625d4cab9961868d0ddc562925e00ef90bd6'
+AFTER='aa0fee1fbf66167f8f1f054e2c31f7b4c110d5901307bc6294b7ae1858dbb3db'
+PAYLOAD=D/'methods/root-go.sum-xnet59-after-r1.txt'
+RECEIPT=S/'root-sum-xnet59-apply-r1.json'
+sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+a=json.loads(Path(sys.argv[1]).read_bytes())
+assert sha(__file__)==a['checksum_method_sha256']
+assert all(sha(R/n)==h for n,h in a['inputs'].items())
+assert TARGET.is_file() and not TARGET.is_symlink() and sha(TARGET)==BEFORE
+assert PAYLOAD.is_file() and sha(PAYLOAD)==AFTER
+assert not RECEIPT.exists() and not RECEIPT.is_symlink()
+blob=PAYLOAD.read_bytes();mode=stat.S_IMODE(TARGET.stat().st_mode);name=None
+try:
+ with tempfile.NamedTemporaryFile(dir=TARGET.parent,prefix='.xnet59-owned-',delete=False) as out:
+  name=Path(out.name);out.write(blob);out.flush();os.fsync(out.fileno());os.fchmod(out.fileno(),mode)
+ assert sha(TARGET)==BEFORE and not TARGET.is_symlink()
+ os.replace(name,TARGET);name=None
+ directory=os.open(TARGET.parent,os.O_RDONLY|os.O_DIRECTORY)
+ try:os.fsync(directory)
+ finally:os.close(directory)
+ assert sha(TARGET)==AFTER
+ with RECEIPT.open('x') as out:json.dump({'schema':'exact-two-checksum-root-sum-apply-r1','before_sha256':BEFORE,'after_sha256':AFTER,'module_versions_or_mod_changed':False,'Go_executed':False,'installed_content_or_GUI_activated':False},out,sort_keys=True,indent=2);out.write('\n');out.flush();os.fsync(out.fileno())
+finally:
+ if name is not None:name.unlink(missing_ok=True)

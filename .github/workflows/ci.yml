@@ -81,8 +81,7 @@ jobs:
         run: |
           go -C go-backend run ./cmd/cat-content validate --root ..
           go -C go-backend run ./cmd/cat-content export --root .. --check
-          go -C go-backend run ./cmd/cat-content-ops rank --root .. --check
-          go -C go-backend run ./cmd/cat-content-ops derive --root .. --check
+          go -C go-backend run ./cmd/cat-content-ops check --root .. --check
           go -C go-backend run ./cmd/cat-content-rail all --root .. --check
           go -C go-backend run ./cmd/cat-mobile-pack --root .. --check
           go -C go-backend run ./cmd/cat-doc-check --root ..

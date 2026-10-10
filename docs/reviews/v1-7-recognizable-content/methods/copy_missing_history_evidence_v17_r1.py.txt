@@ -1,0 +1,135 @@
+"""Exact reviewed17missing immutablehistorydocs-only transaction in isolated I only."""
+import hashlib,json,os,signal,stat,sys,tempfile,datetime
+from pathlib import Path
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7')
+T=Path('/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008')
+I=T/'source7-current-stage-r1'
+D=R/'docs/reviews/v1-7-recognizable-content'
+O=T/'current-source7-history-missing-evidence-r1'
+RECEIPT=O/'result.json'
+sha=lambda b:hashlib.sha256(b).hexdigest()
+EXTERNAL_READONLY_INPUTS={'/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/_pytest/config/__init__.py': {'mode': 436, 'readonly': True, 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'sha256': '98b05c2c37d09e1d5c05975efc2d9af98d4aff6ea47de410a8e93956420873c1'}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/_pytest/junitxml.py': {'mode': 436, 'readonly': True, 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'sha256': '557b8978c66b8010fafc50ada4bf56333f9927f31b2b5909fe4c1a9df1a3c0f0'}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/_pytest/main.py': {'mode': 436, 'readonly': True, 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'sha256': '8ee2725057ff1811e2ae9ebdf1befb7518195f8f333f9f8ca024d76a4b80780e'}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/_pytest/python.py': {'mode': 436, 'readonly': True, 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'sha256': 'b04488f5e46bf1ffe2e8344f81756e10b970dbfaf2f7f2f4d312becd6404df76'}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/pytest_django/plugin.py': {'mode': 436, 'readonly': True, 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'sha256': '5c129167e465fabeb2bead63b41c128088cac784c5f0f25fb2575bacc839baa9'}, '/usr/share/man/man1/env.1.gz': {'mode': 420, 'readonly': True, 'root': '/usr/share/man/man1', 'sha256': '0d9757863f4e6862c047701d3de97c633b36404dc9a7d6c62efd7ed99b271185'}, '/home/dobo/work/cat_de_roman_esti/.venv/lib/python3.12/site-packages/_pytest/tmpdir.py': {'sha256': '5099f71d89413191c9e7515c9d4fe9fc7083bb73306f2cf1f73a9f89c862ed90', 'root': '/home/dobo/work/cat_de_roman_esti/.venv', 'mode': 436, 'readonly': True}}
+def read_regular(p,root,maximum):
+    assert p.is_relative_to(root) and root.resolve(strict=True)==root
+    for ancestor in [p,*p.parents]:
+        info=ancestor.lstat();assert not stat.S_ISLNK(info.st_mode)
+        if ancestor==root:break
+    info=p.lstat();assert stat.S_ISREG(info.st_mode) and info.st_size<=maximum
+    fd=os.open(p,os.O_RDONLY|os.O_NOFOLLOW)
+    with os.fdopen(fd,'rb') as f:
+        opened=os.fstat(f.fileno());assert (opened.st_dev,opened.st_ino)==(info.st_dev,info.st_ino)
+        b=f.read(maximum+1)
+    assert len(b)<=maximum and p.lstat().st_ino==info.st_ino
+    return b,info
+assert len(sys.argv)==2 and O.resolve(strict=True)==O and I.resolve(strict=True)==I
+assert not RECEIPT.exists() and not RECEIPT.is_symlink()
+a=json.loads(Path(sys.argv[1]).read_bytes())
+assert sha(Path(__file__).read_bytes())==a['history_staging_method_sha256']
+MP=D/'current-source7-history-missing-evidence-mutation-manifest-r1.json'
+assert sha(MP.read_bytes())==a['mutation_manifest_sha256']
+m=json.loads(MP.read_bytes());assert m['stage_root']==str(I) and m['source_root']==str(R)
+assert m['external_readonly_input_whitelist']==EXTERNAL_READONLY_INPUTS
+assert len(m['writes'])==17 and len(m['retain_exact'])==4
+allowed=set()
+assert set(m['source_afterimage_targets'])==allowed
+assert all(n.startswith('docs/reviews/v1-4-time-links-and-predicates/native/') for n in m['writes'])
+assert m['total_afterimage_and_evidence_write_bytes']<32<<20
+expected_after={str(I/n):v['source_sha256'] for n,v in m['writes'].items()}
+assert a['expected_after']==expected_after
+received=None;failure=None;cleanup_errors=[];observations=[];snapshots={};attempted=[];owned_new={};owned_temps={};owned_dirs=[];lock_identity=None
+lock=I/'.cat-content-ops.lock'
+def interrupt(number,frame):
+    global received
+    received=number;raise InterruptedError('Catchable signal during exact history staging')
+for sig in (signal.SIGTERM,signal.SIGINT):signal.signal(sig,interrupt)
+def check_admission(phase):
+    for group in (('inputs','scratch_bindings') if phase=='pre' else ('unchanged','scratch_bindings')):
+        for n,want in a.get(group,{}).items():
+            p=Path(n) if Path(n).is_absolute() else R/n
+            if p.is_relative_to(R):root=R
+            elif p.is_relative_to(T.parent):root=T.parent
+            else:
+                pin=EXTERNAL_READONLY_INPUTS.get(str(p));assert pin is not None and pin['sha256']==want and pin['readonly'] is True, 'Unlisted external input refused'
+                root=Path(pin['root'])
+            b,info=read_regular(p,root,128<<20);assert sha(b)==want,n
+            if str(p) in EXTERNAL_READONLY_INPUTS:assert stat.S_IMODE(info.st_mode)==EXTERNAL_READONLY_INPUTS[str(p)]['mode']
+
+def ensure_parent(p):
+    missing=[];q=p.parent
+    while not q.exists():
+        assert q.is_relative_to(I) and not q.is_symlink();missing.append(q);q=q.parent
+    assert q.resolve(strict=True)==q
+    for q in reversed(missing):
+        q.mkdir(mode=0o700);s=q.lstat();owned_dirs.append((q,s.st_dev,s.st_ino))
+    assert p.parent.resolve(strict=True)==p.parent
+
+def publish(n,blob,mode,replace):
+    p=I/n;ensure_parent(p)
+    with tempfile.NamedTemporaryFile(prefix='.owned-v17-history-',dir=p.parent,delete=False) as f:
+        q=Path(f.name);s=os.fstat(f.fileno());owned_temps[q]=(s.st_dev,s.st_ino,sha(blob));f.write(blob);f.flush();os.fsync(f.fileno());os.fchmod(f.fileno(),mode)
+    assert sha(q.read_bytes())==sha(blob)
+    if replace:
+        attempted.append((n,s.st_dev,s.st_ino));os.replace(q,p);owned_temps.pop(q)
+    else:
+        mask=signal.pthread_sigmask(signal.SIG_BLOCK,{signal.SIGTERM,signal.SIGINT})
+        try:
+            os.link(q,p);owned_new[n]=(s.st_dev,s.st_ino,sha(blob));q.unlink();owned_temps.pop(q)
+        finally:signal.pthread_sigmask(signal.SIG_SETMASK,mask)
+    fd=os.open(p.parent,os.O_RDONLY)
+    try:os.fsync(fd)
+    finally:os.close(fd)
+try:
+    check_admission('pre')
+    for n,v in {**m['writes'],**m['retain_exact']}.items():
+        source=Path(v['source']);assert source.is_relative_to(R)
+        b,s=read_regular(source,R,16<<20);assert len(b)==v['bytes'] and sha(b)==v['source_sha256'] and stat.S_IMODE(s.st_mode)==v['source_mode']
+        p=I/n
+        if v['before_exists']:
+            old,s=read_regular(p,I,16<<20);assert sha(old)==v['before_sha256'] and stat.S_IMODE(s.st_mode)==v['before_mode']
+            if n in m['writes']:snapshots[n]=(old,v['before_mode'],s.st_dev,s.st_ino)
+        else:assert not p.exists() and not p.is_symlink()
+    assert len(snapshots)==0 and not lock.exists() and not lock.is_symlink()
+    fd=os.open(lock,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600);s=os.fstat(fd);lock_identity=(s.st_dev,s.st_ino);os.close(fd)
+    for n,v in m['writes'].items():
+        b,s=read_regular(Path(v['source']),R,16<<20);assert sha(b)==v['source_sha256'] and stat.S_IMODE(s.st_mode)==v['source_mode']
+        if v['before_exists']:assert sha(read_regular(I/n,I,16<<20)[0])==v['before_sha256']
+        publish(n,b,v['after_mode'],v['before_exists'])
+        out,s=read_regular(I/n,I,16<<20);assert sha(out)==v['source_sha256'] and stat.S_IMODE(s.st_mode)==v['after_mode']
+    check_admission('post')
+    for n,v in {**m['writes'],**m['retain_exact']}.items():
+        source_bytes,source_info=read_regular(Path(v['source']),R,16<<20)
+        assert sha(source_bytes)==v['source_sha256'] and stat.S_IMODE(source_info.st_mode)==v['source_mode']
+        assert sha(read_regular(I/n,I,16<<20)[0])==v['source_sha256']
+except BaseException as exc:
+    failure={'type':type(exc).__name__,'message':str(exc)}
+    for sig in (signal.SIGTERM,signal.SIGINT):signal.signal(sig,signal.SIG_IGN)
+    for n,dev,ino in reversed(attempted):
+        old,mode,olddev,oldino=snapshots[n];p=I/n
+        try:
+            now,s=read_regular(p,I,16<<20);assert (s.st_dev,s.st_ino) in [(dev,ino),(olddev,oldino)] and sha(now) in [sha(old),m['writes'][n]['source_sha256']]
+            # Restoration is same-directory atomic, retaining original rawbytes/mode.
+            with tempfile.NamedTemporaryFile(prefix='.owned-v17-restore-',dir=p.parent,delete=False) as f:
+                q=Path(f.name);s=os.fstat(f.fileno());owned_temps[q]=(s.st_dev,s.st_ino,sha(old));f.write(old);f.flush();os.fsync(f.fileno());os.fchmod(f.fileno(),mode)
+            os.replace(q,p);owned_temps.pop(q);assert p.read_bytes()==old and stat.S_IMODE(p.stat().st_mode)==mode
+        except BaseException as e:cleanup_errors.append({'restore_existing':n,'error':repr(e)})
+    for n,(dev,ino,want) in reversed(list(owned_new.items())):
+        try:
+            b,s=read_regular(I/n,I,16<<20);assert (s.st_dev,s.st_ino)==(dev,ino) and sha(b)==want;(I/n).unlink()
+        except BaseException as e:cleanup_errors.append({'remove_new':n,'error':repr(e)})
+finally:
+    for q,(dev,ino,want) in list(owned_temps.items()):
+        try:
+            b,s=read_regular(q,I,16<<20);assert (s.st_dev,s.st_ino)==(dev,ino) and sha(b)==want;q.unlink()
+        except BaseException as e:cleanup_errors.append({'temporary_preserved':str(q),'error':repr(e)})
+    if failure:
+        for q,dev,ino in reversed(owned_dirs):
+            try:
+                s=q.lstat();assert stat.S_ISDIR(s.st_mode) and (s.st_dev,s.st_ino)==(dev,ino);q.rmdir()
+            except BaseException as e:cleanup_errors.append({'directory_preserved':str(q),'error':repr(e)})
+    if lock_identity is not None:
+        try:
+            b,s=read_regular(lock,I,1);assert b==b'' and (s.st_dev,s.st_ino)==lock_identity;lock.unlink()
+        except BaseException as e:cleanup_errors.append({'lock_preserved':str(lock),'error':repr(e)})
+    result={'schema':'v1-7-exact-history-staging-result-v1','complete':failure is None and not cleanup_errors and received is None,'failure':failure,'cleanup_errors':cleanup_errors,'caught_signal':received,'existing_targets_snapshotted':len(snapshots),'writes_expected':17,'owned_new_paths':list(owned_new),'afterimage_and_evidence_bytes':m['total_afterimage_and_evidence_write_bytes'],'source_R_or_serving_data_changed':False,'test_or_native_execution':False,'finished_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat()}
+    with RECEIPT.open('x') as f:json.dump(result,f,indent=2,sort_keys=True);f.write('\n');f.flush();os.fsync(f.fileno())
+if not result['complete']:raise SystemExit(1)

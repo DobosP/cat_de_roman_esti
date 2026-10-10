@@ -1,0 +1,39 @@
+"""Inspect one successfully produced Go metadata stream; no application imports."""
+import hashlib,json,pathlib,sys
+sha=lambda p:hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest()
+assert len(sys.argv)==6
+plan_path,receipt_path,keeper_path,external_path,out_path=map(pathlib.Path,sys.argv[1:])
+plan=json.loads(plan_path.read_bytes());receipt=json.loads(receipt_path.read_bytes());keeper=json.loads(keeper_path.read_bytes());external=json.loads(external_path.read_bytes())
+assert external['keeper_path']==str(keeper_path) and external['keeper_sha256']==sha(keeper_path)
+for name,pin in keeper['files'].items():assert sha(name)==pin['sha256']
+assert str(receipt_path) in keeper['files']
+assert receipt['status']=='passed' and receipt['exit_code']==0 and receipt['guard'] is None
+index=receipt['index'];assert 3<=index<=8
+command=plan['commands'][index];assert receipt['argv']==command['argv']
+log=pathlib.Path(receipt['log_path']);assert str(log) in keeper['files'] and log.stat().st_size<=command['max_output_bytes_root_post_producer']
+assert sha(log)==receipt['log_sha256']
+text=log.read_text();decoder=json.JSONDecoder();offset=0;rows=[]
+while offset<len(text):
+    while offset<len(text) and text[offset].isspace():offset+=1
+    if offset==len(text):break
+    row,offset=decoder.raw_decode(text,offset);assert isinstance(row,dict)
+    assert row.get('Error') is None and not row.get('DepsErrors'), 'Go Error/DepsErrors present'
+    rows.append(row)
+assert rows, 'Empty metadata refused'
+expected=command.get('expected_owned_base_paths');owned=[];testdirs=[]
+if expected is not None:
+    prefix=expected[0].split('/cmd/')[0].split('/internal/')[0]
+    if len(expected)>1 and '/web-kit/' in expected[0]:prefix='github.com/DobosP/roedu-ui/web-kit'
+    for row in rows:
+        name=row.get('ImportPath');assert isinstance(name,str) and name
+        if row.get('DepOnly') or row.get('ForTest') or name.endswith('.test') or '[' in name:continue
+        if name==prefix or name.startswith(prefix+'/'):
+            owned.append(name)
+            if row.get('TestGoFiles') or row.get('XTestGoFiles'):testdirs.append(name)
+    assert len(owned)==len(set(owned)) and set(owned)==set(expected), 'Actual owned package set differs'
+else:
+    names=[row.get('Path') for row in rows];assert all(isinstance(n,str) and n for n in names)
+    assert len(names)==len(set(names)), 'Duplicate module path'
+summary={'schema':'actual-offline-Go-metadata-summary-v1','producer_index':index,'producer_receipt_sha256':sha(receipt_path),'raw_log_sha256':sha(log),'raw_bytes':log.stat().st_size,'all_json_objects':len(rows),'owned_base_packages':sorted(owned),'owned_test_bearing_packages':sorted(testdirs),'module_rows':len(rows) if expected is None else None,'test_bodies_executed':False,'case_binary_inventory_or_full_qualification':False}
+with out_path.open('x') as out:json.dump(summary,out,sort_keys=True,indent=2);out.write('\n')
+print(json.dumps({'index':index,'objects':len(rows),'owned':len(owned),'test_dirs':len(testdirs)}))

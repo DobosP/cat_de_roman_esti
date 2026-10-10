@@ -1,0 +1,70 @@
+{
+  "schema": "independent-current-offline-integrity-and-rail-build-actual-review-v2",
+  "reviewer": "/root/v17_research_quality",
+  "reviewed_at_utc": "2026-10-08T17:13:31.437039+00:00",
+  "decision": "ACCEPT_DECLARED_SELECTED_CACHE_INTEGRITY_AND_CURRENT_RAIL_BUILD_ONLY",
+  "source_admission_sha256": "933db4d9df0c94c444d4de217eeb68413e1ad2fdcb1f6eb65ee38cacecdb50c8",
+  "bindings": {
+    "current-offline-rail-actual-review-source-admission-r1.json": "933db4d9df0c94c444d4de217eeb68413e1ad2fdcb1f6eb65ee38cacecdb50c8",
+    "complete-cache-offline-plan-r1.json": "5fe78d504f723847f38f7bae492469e61c23e67e1d717790bbbf399984c2ef0e",
+    "complete-cache-offline-readset-r1.json": "e3590eb998f0c6da3402aabe7afc5bd39ba6403927578e23a358e823687b5d25",
+    "complete-cache-offline-method-review-r1.json": "07102ac0b2bd3ec42733b868b309703a54d6a38bf72f29af564ec7d04f59f91f",
+    "complete-cache-offline-native-admission-r2.json": "498ae13216aab3f32085db29799d90d58c53a74b16daad7b5e3a1db83d55a604",
+    "complete-cache-offline-results-r2.json": "94b0d7a05e8a09ee11037fa24e73ea20d9d11fcdcdd281ad68218a115e6c3fcb",
+    "complete-cache-offline-native-stop-r2.json": "b5b014f645b1f114ec61a6b6cd7a73ca3fd317f0af10c04b70106495330a7f37",
+    "complete-cache-offline-publication-accounting-r2.json": "f2d9c87976e90a0ae829ed97b6088a2c933c3051f279c06cdcd8f11fd064ce35",
+    "complete-ownedcache-current-rail-offline-r2-result.json": "9400cdb9233ab2b8e1585bb3d35cf70df03ed8bddff9100a9cc5ba821bba9a27",
+    "complete-ownedcache-current-rail-offline-r2-step-0-result.json": "0bc79c7cd84ce947db8bd8279b11e9b8092e98b56b2d0ef7fb73010da3cf375b",
+    "complete-ownedcache-current-rail-offline-r2-step-1-result.json": "03b3bbb889a2b90fa53f1468c6f9f3b96b728091ff613ca0d36a7d9296f0fe42",
+    "complete-cache-offline-step-0-log-r2.txt": "b4537ed75f533f993f371954de47e42a793b8e5b0587577de7e27fb3e50696bd",
+    "complete-cache-offline-step-1-log-r2.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "legacy-public-module-actual-review-r1.json": "a7954742275af0b5a4318b2314810dc6c16bcf11aa03b30c6633d0b969220ae4"
+  },
+  "producer_and_cache_bindings": {
+    "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/current-offline-rail-keeper-r2.json": "06082fe1c16bef699173144f1e1d3f1927f733a8afde0b8da61bcfc63f72ef3b",
+    "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/current-offline-rail-keeper-external-r2.json": "d19f4f43771437cf3461ef9ad3b62548610b7e33404cc7d84a6a074aab49d094",
+    "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-cache-inventory-r2.json": "83e830f6408e35feef4963ca69088402289fc0eabf77e18db3a54aba3e355311",
+    "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-complete-inventory-r1.json": "c7aab0473f49adffd90b017e12f723425a444ef5f9e57c9aab711a11dbdc3376",
+    "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-legacy-gopath-r1/pkg/sumdb/sum.golang.org/latest": "64a99fe378131c3e0549f50c1e4638e72b1328529ec73a2d836cb5e957cd4c68"
+  },
+  "actual_binary": {
+    "path": "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/offline-rail-tools-r2/cat-content-rail",
+    "bytes": 34761569,
+    "sha256": "3589be2c90aabcc27894bd50c16c295f9458891cc795be25215f466fa0b58c59"
+  },
+  "observations": {
+    "two_commands_passed": true,
+    "known_current_pre_post_pins": 271,
+    "original_cache_files": 5187,
+    "complete_cache_files": 5436,
+    "owned_GOPATH_state_files": 1,
+    "native_peak_sampled_group_RSS_bytes": 457277440,
+    "native_full_S_R_increment_bytes": 111564781,
+    "publication_inclusive_growth_bytes": 111712197,
+    "publication_upper_with64MiB_reserve_bytes": 178821061
+  },
+  "findings": [
+    "Both exact approved offline argv use complete own cache/GOPATH, proxyoff/sumdboff/localSDK/workspaceoff/Go2/readonly. Receipts/logs/state/cumulative/498ae admission/original baseline/deadline agree; completed next2/pending null, zero exit/guard null and all271 pre/post/current source/scratch pins exact.",
+    "Actual first stdout is all modules verified. Per qualified SDK this verifies selected cached zip/extracted contents versus ziphash and can skip wholly absent cache bodies. It does not prove all36 acquired versions were selected/checked or full module availability.",
+    "The separate actual current cat-content-rail build succeeded offline and produced a regular nonsymlink34,761,569-byte binary with exact3589 hash. This proves availability/compilation for its imported current closure only, not all backend/shared tests, serving/GUI or source7 gates.",
+    "Independently rehashed original5187/175909075B and complete5436/178309101B file SHA/sizes/safe exact memberships; owned signed GOPATH state remains unchanged. No source/module versions/go.mod/go.sumaa0/cache/source8 data changed.",
+    "Actual producer keeper06082 and external digest bind binary/integrity/build receipts/logs/current source/SDK/cache/admission/baseline/deadline. It froze after passed build and before any CLI consumer; no new authority or audit CLI ran. Prior acquisition/clone/six producer histories remain immutable.",
+    "Native completion/publication17:07:32 precedes original17:20:31 reserve/17:23:31 deadline; sampled457277440B groupRSS and publication upper178821061B satisfy2GiB/1GiB campaign limits. Separate root/source RSS is unmeasured; no whole-process claim is inferred.",
+    "Old failedceb20 remains failed, earlier unknown-body authentication provenance/source-cut37.47046s failure remains history and no failed prefix was resumed or retroactively passed. Durable small logs/inventories/known binary avoid duplicate archive copies."
+  ],
+  "qualified_scope": "Selected downloaded-module cached integrity plus actual current imported rail dependency closure/binary availability only.",
+  "pending": [
+    "Fresh independently bounded current CLI/known stale-authority negative control with exact refusal attribution, not current all4 authority green.",
+    "Complete current runtime/embed/managed-asset bindings, current Source7 stage/audits/same-role finals and actual history/inverse/sealed serving proofs.",
+    "All required backend/shared/frontend/asset/corpus/current authority/release and assembled gates before content landing."
+  ],
+  "limits": {
+    "declared_offline_integrity_and_build_pass": true,
+    "all36_cache_or_full_graph_integrity_claim": false,
+    "all_backend_HTTP_GUI_Source7_currentauthority_or_release_pass": false,
+    "CLI_consumer_or_installation_approved": false,
+    "old_failed_window_reclassified": false,
+    "source_worker_RSS": "unmeasured",
+    "review_operations": "Static retained source/hash/result/prefix/log/keeper and full cache inventory inspection only; no imports/Go/network/build/tests/CLI or data edits."
+  }
+}

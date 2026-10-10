@@ -1,0 +1,56 @@
+{
+  "schema": "independent-actual-pinned-public-Go-acquisition-review-v2",
+  "reviewer": "/root/v17_research_quality",
+  "reviewed_at_utc": "2026-10-08T16:08:28.984251+00:00",
+  "decision": "ACCEPT_EXACT_PUBLIC_ACQUISITION_IDENTITY_AND_SUM_PROVENANCE_ONLY",
+  "source_admission_sha256": "b087942175938489f8390bd5f47c9c2eb75ac8fc04c31746f69f69b4cad66887",
+  "bindings": {
+    "owned-go-cache-offline-source-admission-r1.json": "b087942175938489f8390bd5f47c9c2eb75ac8fc04c31746f69f69b4cad66887",
+    "pinned-go-dependencies-plan-r2.json": "a969406b5210c5e962a13058a241a2e716af56959c1da8948c682908022ed113",
+    "pinned-go-dependencies-modules-r1.json": "48e9304196f02348efa8c3b0b94f7539d9074a1a4a411e2cdc48dedf7025dbc1",
+    "pinned-go-dependencies-method-review-r2.json": "6840e2e1527786b77aa4fdc28611a556c48bcbd2050072690b047a342ede8ee1",
+    "pinned-go-dependencies-source-stop-r1.json": "70573e62fbf576420f3cfa351514c5ddd029df2d7ab184ed7b9babaa8915f28d",
+    "pinned-go-dependencies-method-review-r1.json": "c18eb1e205cb4d8d157bbc86ce01750d2b2166c856e1142994f0f63ab3e99c60",
+    "pinned-go-dependencies-native-admission-r2.json": "9b097447731c3e6c3526cdfd93ce0d20f40c6e121a502d21ca34cf9833131b12",
+    "pinned-public-go-acquisition-results-r2.json": "11f85284130bdc78c3fff65a90ab05ac4277d72be222f13b62df4960f78b0579",
+    "pinned-public-go-acquisition-native-stop-r2.json": "4966782431aed5f9bf929c536ce43e28607b9a2014c2e65d2da6f3bb5924ca82",
+    "pinned-public-go-acquisition-r2-result.json": "f078c8051e1b285881f9b94a041e7c090325a5f6cb62f5a081cb400f1a6789db",
+    "pinned-public-go-acquisition-r2-step-0-result.json": "0378cba932039a3eaaa426046cc42782ce76b3c11ea4a2c0c45ea7b84c1e0b91",
+    "pinned-public-go-acquisition-log-r2.jsonstream": "478050171295964ce757e63dbc0c7fa1d4701f5613fbcfcc534d5deda6e24bd4"
+  },
+  "producer_cache_bindings": {
+    "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-cache-inventory-r2.json": "83e830f6408e35feef4963ca69088402289fc0eabf77e18db3a54aba3e355311",
+    "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-acquisition-keeper-r2.json": "b16eda15533819ac905a42e64b3b5a056ba1ef0b4d02c42b2d5f2e2fdda01a99",
+    "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-acquisition-keeper-external-r2.json": "defe8809acac0f375728c5935d1c86d902d0f64dec2168444dda13f8c3c5324a",
+    "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/public-module-acquisition-external-r2.json": "6227fc7a0fa09861cae2c450b7bcc17326825febbb51f26cba064c83c11224aa"
+  },
+  "actual_counts": {
+    "requested_unique_public_modules": 30,
+    "current_initial_pins": 27,
+    "byte_inventory_files": 5187,
+    "inventory_regular_bytes": 175909075,
+    "native_peak_sampled_group_RSS_bytes": 24567808,
+    "full_S_R_increment_bytes": 177014182,
+    "publication_upper_increment_bytes": 244123046
+  },
+  "findings": [
+    "Native ONE command exact argv uses currentSDK, explicit outside-project empty cwd, public proxy/sumdb and own cache; private selectors are cleared, original runner/resource code unchanged. All27 pre/post/current known pins and source module/sum files remain exact.",
+    "Actual NDJSON parses to exactly30 unique error-free requested Path/Version objects. BOTH Sum and GoModSum match frozen committed combined-source anchors for every row. All Info/GoMod/Zip/Dir locations are safe regular entries/trees resolving under exact own cache, no foreign/symlink target.",
+    "Independently enumerated and SHA/size-checked all5187 current regular files against immutable inventory83e830, total175909075 bytes; no missing/extra files and listed directories remain contained nonsymlinks. This is byte identity, not an independent recomputation of module h1 extraction integrity.",
+    "Passed receipt/log/cumulative/state/admission/keeper/external identities match original9b097/baseline/deadline. Completed next1/pending null, zero exit/guard null. Durable JSONstream equals producer log; no new bulk cache archive or downloaded-source execution occurred.",
+    "Native stop16:00:50 precedes original16:15:11 reserve/16:18:11 deadline. Sampled24567808B process-group peak and original full S/R/publication bounds are within2GiB/1GiB limits; separate root/source RSS remains unmeasured.",
+    "Project/local module files unchanged; this command targets only own cache and no shared-module cache path. Shared cache contents were not globally snapshotted against unrelated owners, so no unsupported global immutability claim is inferred. Root x/net0.59 main-go.sum gap remains unfixed.",
+    "Original source077 cutoff failure37.470460s, latec18 review and STOP705 remain failed history; freshe091/684 current qualification preceded native acquisition and does not retrospectively pass old timing."
+  ],
+  "qualification_scope": "Authenticated Go-reported exact checksum pairs/public acquisition provenance plus safe owned cache byte identity only.",
+  "next_required": "Separately reviewed exact two-line root-go.sum checksum amendment if needed, then supported OFFLINE own-cache integrity/module-context/current rail qualification with missing-dependency/checksum failures explicit and no silent network/tidy/version change.",
+  "limits": {
+    "acquisition_evidence_accepted": true,
+    "extracted_directory_h1_or_module_graph_integrity_proven": false,
+    "offline_current_rail_build_pass": false,
+    "root_checksum_amendment_approved_here": false,
+    "Source7_GUI_currentauthority_or_release_approved": false,
+    "source_worker_RSS": "unmeasured",
+    "review_operations": "Static JSON/source/hash/current cache path/inventory/prefix inspection only; no imports/Go/native/network/test/sum edit or downloaded-source execution."
+  }
+}

@@ -1,0 +1,253 @@
+{
+  "schema": "v1-7-current-source7-stage-method-review-v3",
+  "reviewer": "/root/v17_research_quality",
+  "role": "independent source-method and quality reviewer",
+  "reviewed_at_utc": "2026-10-08T17:59:52.661240+00:00",
+  "verdict": "accept_exact_R3_owned_stage_creation_only_subject_to_fresh_admission_conditions",
+  "source_admission_sha256": "b633de582454438ac3f538c831f3134301ceb832ffd528675bd1f41839704f3c",
+  "source_cutoff_utc": "2026-10-08T18:03:39.488240+00:00",
+  "source_deadline_utc": "2026-10-08T18:06:39.488240+00:00",
+  "source_worker_whole_RSS_measured": false,
+  "dependencies_sha256": {
+    "current-source7-stage-source-admission-r1.json": "b633de582454438ac3f538c831f3134301ceb832ffd528675bd1f41839704f3c",
+    "current-source7-stage-plan-r1.json": "93c6ad3b7f2bd9e7cda31e5849518125cb26071989a594ff66608ab36d372a84",
+    "current-source7-stage-copy-manifest-r1.json": "84a1b3c3dddc2a0536f0c8658e5e474d0813554db110d87c3e87a1c12bc79fe2",
+    "current-source7-stage-readset-r1.json": "f88a8e2de2fdba9fbd9d4bace08b0638cb29f84d11b30e888636c60462424178",
+    "current-source7-stage-method-r1.py.txt": "d75fe30735389394934e21c2db422d292ee8393ea2dc6cde887b42281a1876e8",
+    "current-source7-stage-plan-r2.json": "689b570564c651eb20aa4cf2db1a335c980232366820a45737cec60810d7a21e",
+    "current-source7-stage-readset-r2.json": "5f27e5c1bf3d1f8e9111a913707dfe5c4ceaf0a723842bd0061a0d095587e46e",
+    "current-source7-stage-plan-r3.json": "72d32e33130d411601ae2b4323c7fd76d18fff961ff52c7d5fbb54e5ca0f490f",
+    "current-source7-stage-copy-manifest-r3.json": "77764fc6a5d04a01ccf1f07024be20e2e4ef3ac07af51caa229f09724daed571",
+    "current-source7-stage-readset-r3.json": "543957c0a593cfa9de6260a78e7a4285a8c4030663b2ee7f8113fcc802e9d684",
+    "current-source7-stage-method-r3.py.txt": "bf9425f133da12e4825efbc1c3f2a24ef2a2dbec34a6632e9c5a53454b3e502f",
+    "current-cli-source6-negative-actual-review-r1.json": "d62ce5c90d5ca1454b2297f12b5cc7252eeb5305abae6751eb01f1f34a0f30ec",
+    "source7-authored-draft-r1.json": "e95ebf937fb435700e6efb88737577b579975d1a3a7a63ab6e41b9a1c6a08ac4",
+    "source7-preparation-actual-identity-review-r1.json": "a8cfe08489c42964b4f3d1f978a31c0b3565c343779a1fa478c4f3fe7be7ffa0",
+    "source7-isolated-world-transition-actual-review-r2.json": "fcd679e4a5914334a35c6d896858ca04bc1d0ea1e8428f73c9ee3dd2cfde5058"
+  },
+  "R1_R2_R3_disposition": {
+    "R1": "Preserved inert original copy packet. Review discovered package ranking/derived inheritance with old Source6 test mirrors; no execution occurred.",
+    "R2": "Preserved inert metadata refinement adding the now-existing actual CLI review; no execution.",
+    "R3": "The only two record substitutions copy the actual supported old-stage test ranking/derived outputs alongside their package counterparts. The other714 rows remain identical; count716 and bytes81530987 unchanged. Eight explicit per-file inherited fixtures now include both ranking/derived mirrors.",
+    "method_change": "Exact reverse substitution of copy-manifest-r3.json and current-source7-stage-r3-result.json reproduces R1 method bytes. No algorithm, source-data or authority change.",
+    "accepted_packet": "Only exact final R3 plan/manifest/readset/method are accepted here; earlier packets remain history."
+  },
+  "finite_copy_closure": {
+    "records": 716,
+    "total_bytes": 81530987,
+    "complete_current_tracked_files_in_declared_roots": 642,
+    "tracked_roots": [
+      "go-backend",
+      "shared-go/authcore",
+      "scripts",
+      "cat_de_roman_esti",
+      "tests"
+    ],
+    "current_runtime_paths": 129,
+    "all_current_runtime_paths_present_exact": true,
+    "current_normal_inputs": 781,
+    "normal_unchanged": 781,
+    "scratch_bindings": 498,
+    "every_bound_source_SHA_current": true,
+    "original_stage_files": 419,
+    "original_stage_all_regular_file_SHA_and_membership_exact": true,
+    "original_stage_immutable_before_after_required": true,
+    "source_record_paths": "Every record is a normalized relative target without traversal and points to an existing regular non-symlinked file within the current task root or original owned stage; exact size/SHA/mode checked. Current runtime/go.mod/go.sum/local-webkit/embed closure is copied completely, not a four-file patch.",
+    "managed_embed_inventory": {
+      "go-backend/embedfs/assets.go": {
+        "bytes": 320,
+        "sha256": "84c7518b0ff65e76b8a7379350fb4cc0187459e6e38dde983316421c6d06a827"
+      },
+      "go-backend/embedfs/dist/.keep": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "go-backend/embedfs/legacy/.keep": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "asset_boundary": "Only assets.go and the two zero-byte .keep inputs exist; exact membership is bound. There is no usable managed manifest/index and no serving/GUI qualification."
+  },
+  "content_runtime_provenance": {
+    "authored_draft_sha256": "e95ebf937fb435700e6efb88737577b579975d1a3a7a63ab6e41b9a1c6a08ac4",
+    "authored_version": 7,
+    "exact_parent_source6_sha256": "a086dc2accd6eb97ab7040f6a0e609cc40209fa6a441ee9d9e3f3f727d76e611",
+    "authored_content_base_commit": "2f291e8ce2f3d89befae901e64e4814333887247",
+    "separate_current_runtime_commit": "705c26819b60ff74d496aa9b5eedb016531a47ef",
+    "interpretation": "Historical e95 content authorship and source/raw semantic judgment bindings remain unchanged. The new manifest independently binds current runtime705. The authored base_commit is not claimed to describe current executable bytes; no stale runtime audit is retargeted.",
+    "prior_source1_to6_archive_union": 25,
+    "source1_to7_archive_union": 28,
+    "all_prior25_paths_and_SHAs_retained": true,
+    "all28_copy_records_exact": true,
+    "all_sources1_to6_current_and_draft7_exact": true,
+    "only_shared_graph_content_delta": "Previously generated supported341 adds only raw singular leafă to Salary; no new node/edge/target/round. No generation or semantics replay occurs in this copy lane."
+  },
+  "eight_exact_fixture_inheritances": {
+    "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json": {
+      "current_live_before_sha256": "8f013a8f6b54a97a768a34c42e669addc4f5ab9823302befbe15ad811cae77ad",
+      "inherited_stage_sha256": "1fcd017b33edf3600098306b19c012f709c8a50b905be9d259a6a1e2cbb84049",
+      "not_live_installation": true
+    },
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": {
+      "current_live_before_sha256": "036c8a00de347939d132ba25512da7cba53b12e9d11a9f86cecc07cc98293c31",
+      "inherited_stage_sha256": "24d36c7ad1968fb5b2e993a38f1c404719edc66bc4faa0e9d8e8eb079e9df7fe",
+      "not_live_installation": true
+    },
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": {
+      "current_live_before_sha256": "fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a",
+      "inherited_stage_sha256": "df3a01bb5bdbf8c34973b6bc43c9179ab9ffbe0fc6552fb73b5cd1e9bfb24af9",
+      "not_live_installation": true
+    },
+    "cat_de_roman_esti/fixtures/kg_sample.json": {
+      "current_live_before_sha256": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf",
+      "inherited_stage_sha256": "3412064a27c79e47b1b4205383e45c156316857bc8a6f6cb303bc65478501749",
+      "not_live_installation": true
+    },
+    "tests/fixtures/board_rankings_v37.json": {
+      "current_live_before_sha256": "036c8a00de347939d132ba25512da7cba53b12e9d11a9f86cecc07cc98293c31",
+      "inherited_stage_sha256": "24d36c7ad1968fb5b2e993a38f1c404719edc66bc4faa0e9d8e8eb079e9df7fe",
+      "not_live_installation": true
+    },
+    "tests/fixtures/cat_mobile_app_pack_contract.json": {
+      "current_live_before_sha256": "282f18f6d81c623be004f28d4c5634bfbbbdf2294e466d842a9192123bc06fae",
+      "inherited_stage_sha256": "95c27815c52af67a1900f8402d272bc1a5d78440f4640abc7fa45704a4033c75",
+      "not_live_installation": true
+    },
+    "tests/fixtures/derived_catalog_v38.json": {
+      "current_live_before_sha256": "fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a",
+      "inherited_stage_sha256": "df3a01bb5bdbf8c34973b6bc43c9179ab9ffbe0fc6552fb73b5cd1e9bfb24af9",
+      "not_live_installation": true
+    },
+    "tests/fixtures/kg_sample.json": {
+      "current_live_before_sha256": "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf",
+      "inherited_stage_sha256": "3412064a27c79e47b1b4205383e45c156316857bc8a6f6cb303bc65478501749",
+      "not_live_installation": true
+    }
+  },
+  "coherence_checks": {
+    "KG_package_and_tests_pair": "3412064a27c79e47b1b4205383e45c156316857bc8a6f6cb303bc65478501749",
+    "ranking_package_and_tests_pair": "24d36c7ad1968fb5b2e993a38f1c404719edc66bc4faa0e9d8e8eb079e9df7fe",
+    "derived_package_and_tests_pair": "df3a01bb5bdbf8c34973b6bc43c9179ab9ffbe0fc6552fb73b5cd1e9bfb24af9",
+    "mobile_contract": "95c27815c52af67a1900f8402d272bc1a5d78440f4640abc7fa45704a4033c75",
+    "isolated_world": "1fcd017b33edf3600098306b19c012f709c8a50b905be9d259a6a1e2cbb84049",
+    "Quick_Extensions_bundle_and_authority": "Copied Quick/Extensions/bundle/installed authority metadata remain Source6 baseline; the stage is an intermediate with explicit mixed binding state and is not a qualified/sealed Source7 export. Future coherence/guarded transitions and fresh audits/finals are mandatory."
+  },
+  "actual_old_producer_identity": [
+    {
+      "keeper_path": "/home/dobo/work/_temp/codex__content-v1-7/probe/source7-isolated-native-r1-keeper-0.json",
+      "keeper_sha256": "1c6387f4e69aefb184071967970031883de6334ec0b3a7dcddb2858139b146e4",
+      "producer_receipt_path": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/source7-isolated-native-r1-step-0-result.json",
+      "producer_receipt_sha256": "6a9809c2ede8fca1720a5323d0b1f48b0e20178645bc002054fcdbe692d46f4c",
+      "producer_log_path": "/home/dobo/work/_temp/codex__content-v1-7/probe/source7-isolated-native-r1-0.log",
+      "producer_log_sha256": "f554cfdb85411c2bb1d503df3f53dfbad1f753eb8271938833166a5d26a7547c"
+    },
+    {
+      "keeper_path": "/home/dobo/work/_temp/codex__content-v1-7/probe/source7-isolated-native-r1-keeper-1.json",
+      "keeper_sha256": "8e2c1ccd655b9b7dd11422e8ae4a88e7c50cdbc998aef341f7672bdf3b07fb6f",
+      "producer_receipt_path": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/source7-isolated-native-r1-step-1-result.json",
+      "producer_receipt_sha256": "94b5d5bc8d1c2673b5ccbf299febf14bf8c3432aeab42b2e90a001d69b56e28c",
+      "producer_log_path": "/home/dobo/work/_temp/codex__content-v1-7/probe/source7-isolated-native-r1-1.log",
+      "producer_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "keeper_path": "/home/dobo/work/_temp/codex__content-v1-7/probe/source7-isolated-native-r1-keeper-2.json",
+      "keeper_sha256": "7976782ff447d0117087f627987b4b7bd8fb638f3a6e6f79cbd748247d78d787",
+      "producer_receipt_path": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/source7-isolated-native-r1-step-2-result.json",
+      "producer_receipt_sha256": "f8fcb0d09d4ab44406c36dbc18d98504ecb8c718da0ea1a58791f646bd91a445",
+      "producer_log_path": "/home/dobo/work/_temp/codex__content-v1-7/probe/source7-isolated-native-r1-2.log",
+      "producer_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "keeper_path": "/home/dobo/work/_temp/codex__content-v1-7/probe/source7-isolated-native-r1-keeper-3.json",
+      "keeper_sha256": "351154d5220c01f484d8859309a114ab1d11a95e1733dbd5db7f0991c4721c7e",
+      "producer_receipt_path": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/source7-isolated-native-r1-step-3-result.json",
+      "producer_receipt_sha256": "5cb3a8eec2b04243122072e6ca9c87434ad8a99f0aa144ebe4f436bfd61a528c",
+      "producer_log_path": "/home/dobo/work/_temp/codex__content-v1-7/probe/source7-isolated-native-r1-3.log",
+      "producer_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "keeper_path": "/home/dobo/work/_temp/codex__content-v1-7/probe/source7-isolated-native-r1-keeper-4.json",
+      "keeper_sha256": "403d265f8a26fe09f6654a1513f9da2c6fa16705caad53ecb10bffa80c5cc81e",
+      "producer_receipt_path": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/source7-isolated-native-r1-step-4-result.json",
+      "producer_receipt_sha256": "ef3bf3016c77fc6d7a5701123e208d1ea0c7b2ca2a0c57c4b41b0b462f91c2fa",
+      "producer_log_path": "/home/dobo/work/_temp/codex__content-v1-7/probe/source7-isolated-native-r1-4.log",
+      "producer_log_sha256": "908b8cf4a524dcaf6c7a8c00dcb34a63d86e190b90dd6da7a039298fb4da30b5"
+    },
+    {
+      "keeper_path": "/home/dobo/work/_temp/codex__content-v1-7/probe/source7-isolated-native-r1-keeper-5.json",
+      "keeper_sha256": "42ecc846196629ff2ff9802e82a526d7ace2ea6e3c790789c4a15f8a9986de70",
+      "producer_receipt_path": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/source7-isolated-native-r1-step-5-result.json",
+      "producer_receipt_sha256": "7dbc74c7590ee6d27f199e897188e9dcb91eaf6555aa9a22ba51b44680d114b0",
+      "producer_log_path": "/home/dobo/work/_temp/codex__content-v1-7/probe/source7-isolated-native-r1-5.log",
+      "producer_log_sha256": "b5d0b92facff8b5ac728fa1015c024dd30c0431dfa3a27072abf6f3516c2f45e"
+    },
+    {
+      "keeper_path": "/home/dobo/work/_temp/codex__content-v1-7/probe/source7-isolated-native-r1-keeper-6.json",
+      "keeper_sha256": "d3f65ee8115f94b6a9d036fd8c9ecafd77ffa5ae420510fb6bee5ce4a2838bfe",
+      "producer_receipt_path": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/source7-isolated-native-r1-step-6-result.json",
+      "producer_receipt_sha256": "a505311d75c6c21149509b6771e6dc0c21b37dfd753bbfb2459e55f372e4c5be",
+      "producer_log_path": "/home/dobo/work/_temp/codex__content-v1-7/probe/source7-isolated-native-r1-6.log",
+      "producer_log_sha256": "d07f8540dcc9043b86e633f10b793e8d8bb3b2a271101d0428d80fbd73384517"
+    },
+    {
+      "keeper_path": "/home/dobo/work/_temp/codex__content-v1-7/probe/source7-isolated-native-r1-keeper-7.json",
+      "keeper_sha256": "99222c80b0f801a390bd3643cd5b294c5b55d523eda97e6db5f6418ab0cf2052",
+      "producer_receipt_path": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/source7-isolated-native-r1-step-7-result.json",
+      "producer_receipt_sha256": "478847ffaa30fc4736d34c7f9814f3c037d71abaca0b7e0c7084ac6693341b87",
+      "producer_log_path": "/home/dobo/work/_temp/codex__content-v1-7/probe/source7-isolated-native-r1-7.log",
+      "producer_log_sha256": "d07f8540dcc9043b86e633f10b793e8d8bb3b2a271101d0428d80fbd73384517"
+    },
+    {
+      "keeper_path": "/home/dobo/work/_temp/codex__content-v1-7/probe/source7-isolated-native-r1-keeper-8.json",
+      "keeper_sha256": "afb0997be666a2ac017e72c1b85fd8025dd18bdb3c3fccf285c1e5e19e97109c",
+      "producer_receipt_path": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/source7-isolated-native-r1-step-8-result.json",
+      "producer_receipt_sha256": "490998b54c80dbe590ab3e25ffefe2ef37bf80651316de229b2efe5803987c1a",
+      "producer_log_path": "/home/dobo/work/_temp/codex__content-v1-7/probe/source7-isolated-native-r1-8.log",
+      "producer_log_sha256": "d07f8540dcc9043b86e633f10b793e8d8bb3b2a271101d0428d80fbd73384517"
+    },
+    {
+      "keeper_path": "/home/dobo/work/_temp/codex__content-v1-7/probe/source7-isolated-world-transition-r2-keeper.json",
+      "keeper_sha256": "ebe7cb95630fecb9cd99493d139b6c4ef0653e89ba316e9f9f3ee8d54865e0a5",
+      "producer_receipt_path": "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/source7-isolated-world-transition-r2-step-0-result.json",
+      "producer_receipt_sha256": "99e7cb1fd93c1adc96687fbd73f30bd298aee778d18a2bfa1119491b41200600",
+      "producer_log_path": "/home/dobo/work/_temp/codex__content-v1-7/probe/source7-isolated-world-transition-r2-0.log",
+      "producer_log_sha256": "5ea60dc70e54e86b9a2e78a8c409b233ed11fb97a0453eb2efc18c5bee79226d"
+    }
+  ],
+  "mandatory_additional_known_producer_receipt_pins": {
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/source7-isolated-native-r1-step-0-result.json": "6a9809c2ede8fca1720a5323d0b1f48b0e20178645bc002054fcdbe692d46f4c",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/source7-isolated-native-r1-step-1-result.json": "94b5d5bc8d1c2673b5ccbf299febf14bf8c3432aeab42b2e90a001d69b56e28c",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/source7-isolated-native-r1-step-2-result.json": "f8fcb0d09d4ab44406c36dbc18d98504ecb8c718da0ea1a58791f646bd91a445",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/source7-isolated-native-r1-step-3-result.json": "5cb3a8eec2b04243122072e6ca9c87434ad8a99f0aa144ebe4f436bfd61a528c",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/source7-isolated-native-r1-step-4-result.json": "ef3bf3016c77fc6d7a5701123e208d1ea0c7b2ca2a0c57c4b41b0b462f91c2fa",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/source7-isolated-native-r1-step-5-result.json": "7dbc74c7590ee6d27f199e897188e9dcb91eaf6555aa9a22ba51b44680d114b0",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/source7-isolated-native-r1-step-6-result.json": "a505311d75c6c21149509b6771e6dc0c21b37dfd753bbfb2459e55f372e4c5be",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/source7-isolated-native-r1-step-7-result.json": "478847ffaa30fc4736d34c7f9814f3c037d71abaca0b7e0c7084ac6693341b87",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/source7-isolated-native-r1-step-8-result.json": "490998b54c80dbe590ab3e25ffefe2ef37bf80651316de229b2efe5803987c1a",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/docs/reviews/v1-7-recognizable-content/source7-isolated-world-transition-r2-step-0-result.json": "99e7cb1fd93c1adc96687fbd73f30bd298aee778d18a2bfa1119491b41200600"
+  },
+  "method_static_review": {
+    "syntax_valid": true,
+    "only_action": "Copy exact manifest bytes into absent task-owned stage and publish exclusive local receipt; no Go, import of repository modules, CLI, builder, audit, install, network or production action.",
+    "path_protection": "Owned T is canonical/non-symlinked; absent target stage and receipt are required; source root/ancestors/regular files checked; no absolute or parent-traversal target. Exclusive binary creates prevent clobber; copied files are fsynced and rehashed; exact modes retained.",
+    "old_and_new_checks": "All old419 files are hashed before/after; every source and output rehashed after copy; all28 archives checked. Root must independently verify full stage membership and regular non-symlinked paths before publication.",
+    "failure_behavior": "Exception retains incomplete local receipt and partial owned stage; no automatic deletion/overwrite/namespace retry. Pre-mkdir guard failure or abrupt process loss may omit local receipt and remains outer failure; never infer completion from partial bytes.",
+    "no_algorithm_or_framework_expansion": true
+  },
+  "mandatory_fresh_execution_conditions": [
+    "Create a NEW immutable one-command stage-copy admission only after this review freezes; supply its real exact path to the inert method, never the literal FRESH_STAGE_ONLY_ADMISSION placeholder. Bind stage_method_sha256=bf9425... and copy_manifest_sha256=77764... plus all final R3 readset inputs/scratch protections. Admission self-identity uses existing qualified runner state/receipt mechanism.",
+    "Add every full path/SHA in mandatory_additional_known_producer_receipt_pins (ten already verified actual passed receipts) to BOTH native inputs and unchanged. Also add actual CLI review d62ce5... and this exact review receipt as current immutable inputs/protections; no frozen old source packet is edited. All existing keeper/external/log/source and original-stage pins remain exact before/after.",
+    "Fresh 17GiB start disk and 16GiB remaining disk+MemAvailable floors, 2GiB sampled process-group RSS, 1GiB full-S/R increment and one immutable20minute deadline with180second metadata reserve using existing397686 runner; root only, no failed clock or namespace reuse. All copied bytes, receipt/keeper publication and cache/state growth are accounted.",
+    "Root verifies all original5187/complete5436 cache files and owned GOPATH1 state before/after; no cache/module/sum/live fixture/authority mutation is authorized. Verify inherited generator341/mobile/rank/derive/World producer lineages and all419 old stage files before/after.",
+    "After actual outer PASS, independently verify exactly716 output members/size/SHA/mode/non-symlink identity and local complete receipt. Freeze actual full stage inventory and passed producer receipt/log/admission into exclusive new keeper+external digest BEFORE any CLI/tool/audit consumer. No future output SHA is invented or original admission modified.",
+    "No downstream operation is authorized by this copy receipt. Current runtime embeds and Source6 bundle remain explicit baseline; any transparent overlay, build, audit, coherent Quick/Extensions transition, pin/export/currentauthority/historical tests and original-role final scope require separately reviewed exact methods and fresh admissions."
+  ],
+  "not_approved": [
+    "Actual stage creation or runtime/serving qualification (not executed yet)",
+    "Reuse of historical native audits/finals as current runtime acceptance",
+    "Source7 live adoption, authority/pin publication, sealed export or historical full-suite/currentgate PASS",
+    "GUI activation/full frontend gates",
+    "Landing/push/deployment or broader discovery"
+  ]
+}

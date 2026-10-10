@@ -1,0 +1,94 @@
+{
+  "actual_candidate_bindings": {
+    "catalog_builder": {
+      "path": "scripts/build_alchimie_recipe_extensions.py",
+      "sha256": "874286c4f26d1b05964b611f91ebb3bc4b524abfca7837c710fec78cecd9ec69"
+    },
+    "core_runtime": {
+      "path": "cat_de_roman_esti/wordgames/alchimie.py",
+      "sha256": "e7684a500a6c8bcea5edac249b49921ce10a8d405b5c43a87eb777f6779b69c9"
+    },
+    "extensions_runtime": {
+      "path": "cat_de_roman_esti/wordgames/recipe_extensions.py",
+      "sha256": "138a48aa48390161270ecb76d4c3c6a43971c3600b66d84c782998fafb1afd79"
+    },
+    "graph_runtime": {
+      "path": "cat_de_roman_esti/graph.py",
+      "sha256": "496b56900c46fec1f9aacbe3ab5c0bb220e06058d64da840aaadee405ab115b0"
+    },
+    "kg": {
+      "path": "cat_de_roman_esti/fixtures/kg_sample.json",
+      "sha256": "3412064a27c79e47b1b4205383e45c156316857bc8a6f6cb303bc65478501749"
+    },
+    "pack": {
+      "path": "cat_de_roman_esti/fixtures/games_pack.json",
+      "sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8"
+    },
+    "packs_runtime": {
+      "path": "cat_de_roman_esti/wordgames/packs.py",
+      "sha256": "801d9515711501201d26783a7f0eaf5008924d9d10c7b98192718515bbb1d3db"
+    },
+    "rankings": {
+      "path": "cat_de_roman_esti/fixtures/board_rankings_v37.json",
+      "sha256": "bf7a88448ce7cb8d21d95defc745517d97c8542f582d66eadbfb92ef54bd4adc"
+    },
+    "release_reserve": {
+      "path": "cat_de_roman_esti/fixtures/release_reserve_v1.json",
+      "sha256": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7"
+    },
+    "rubric": {
+      "path": "docs/CRITIQUE_RUBRIC.md",
+      "sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101"
+    },
+    "service_runtime": {
+      "path": "cat_de_roman_esti/wordgames/service.py",
+      "sha256": "abb3ab9fabd8435293b37e20743db7c94a8baedfb16628d07ffb20d435bc57ea"
+    }
+  },
+  "actual_proposal_bindings": {
+    "kg": {
+      "path": "cat_de_roman_esti/fixtures/kg_sample.json",
+      "sha256": "3412064a27c79e47b1b4205383e45c156316857bc8a6f6cb303bc65478501749"
+    },
+    "pack": {
+      "path": "cat_de_roman_esti/fixtures/games_pack.json",
+      "sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8"
+    },
+    "rubric": {
+      "path": "docs/CRITIQUE_RUBRIC.md",
+      "sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101"
+    }
+  },
+  "all3185_protected_pins_still_exact": 3185,
+  "candidate_schema": "alchimie-bounded-completion-candidates-v1",
+  "candidate_sha256": "f3e316bf46063386c8e4c69fdc8c951c02dbfb66ecf4af94b9a784a33a5d3ec2",
+  "exact_stack": "File \"<stdin>\", line 10, in <module>\nAssertionError",
+  "failed_checker_source": "assert v['bindings']==c['bindings']",
+  "native_audit_step1_NEVER_LAUNCHED": true,
+  "native_proposal_step0_PASS": true,
+  "native_runner_READY1_state_identity_only": {
+    "next_index": 1,
+    "path": "/home/dobo/work/_temp/codex__content-v1-7/probe/current-source7-extensions-proposal-audit-r1-r4-r3-state.json",
+    "pending": null,
+    "sha256": "b06e145c53db71588ecad418edc3fc7eafde262c7e3cb8762921d42b8ca8118f",
+    "status": "ready"
+  },
+  "no_proposal_keeper_or_audit_published": true,
+  "original_admission_sha256": "540858e07d29bb146accedfb3b33104926d285a9c3ca673f8fbcf40dfbf5e5ae",
+  "original_campaign_must_not_resume": true,
+  "original_deadline_utc": "2026-10-08T19:17:19.004560+00:00",
+  "original_metadata_reserve_utc": "2026-10-08T19:14:19.004560+00:00",
+  "pipeline_qualification_or_adoption_approved": false,
+  "potential_static_cause": "Existing native buildExtensions selects only kg/pack/rubric into output bindings; candidate retains additional archived Python-generation provenance. This inference needs independent exact source/schema review, not altered fixture/guards.",
+  "producer_log_path": "/home/dobo/work/_temp/codex__content-v1-7/probe/current-source7-extensions-proposal-audit-r1-0.log",
+  "producer_log_sha256": "e5ff61439be8364598543dfc3bb07e5f242ad7500d70f732630cb56d591ee60a",
+  "producer_receipt_sha256": "88c2b49a0950687545a5cf64cfe1bae9aa74776c3c2ce8ff671311b740710b15",
+  "proposal_bytes": 480012,
+  "proposal_path": "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/current-source7-extensions-r1/proposal.json",
+  "proposal_schema": "alchimie-recipe-extensions-v1",
+  "proposal_sha256": "605690ec6b163ab3860fc57c53c21288b2781b85c77f93e414d63207340119bf",
+  "root_failed_check_is_not_native_badresponse_or_resource_failure": true,
+  "schema": "v1-7-actualExtensions-proposal-rootbinding-checker-failure-v1",
+  "status": "ROOT_POSTCHECK_SCHEMA_ASSERTION_FAILED_STOP",
+  "stopped_at_utc": "2026-10-08T19:02:15.410225+00:00"
+}

@@ -1,0 +1,28 @@
+{
+  "Go_list21_passed_Go_suite_NEVER_RAN": true,
+  "admission_sha256": "fa4c11a1dae84e9c98a9e48e407389a03668df002bd837d9321634f75bb15f54",
+  "all3763_immutable_pins_and_all817_stage_hash_size_mode_exact": true,
+  "all99_cases_executed": true,
+  "candidate_runtime_source_data_unchanged": true,
+  "case_xml_path": "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/current-source7-installed-history-tests-r1/pytest-results.xml",
+  "case_xml_sha256": "775156b9eafd2c94227a3510844265cbbd0bf080ecfaa27fd288b4f80ba0743c",
+  "failed_cases": [
+    {
+      "body": "def test_v16_old_chain_keeps_source5_world_only_and_all_earlier_literals():\n        latest = current(\"alchimie_discovery_world_v92.json\")\n        source5 = inverse(latest, \"alchimie_discovery_world_v92.json\")\n        assert history._v1_3_catalog_digest(source5) == history._V1_5_WORLD_AFTER_SHA256\n        source4 = history.before_v1_5_world_catalog(latest, \"alchimie_discovery_world_v92.json\")\n        assert history._v1_3_catalog_digest(source4) == history._V1_5_WORLD_BEFORE_SHA256\n>       source3 = history.before_v1_4_catalog(latest, \"alchimie_discovery_world_v92.json\")\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_v1_6_content_history.py:158: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/content_history.py:1654: in before_v1_4_catalog\n    assert all(\ntests/content_history.py:1655: in <genexpr>\n    hashlib.sha256((root / path).read_bytes()).hexdigest() == expected\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^\n/usr/lib/python3.12/pathlib.py:1021: in read_bytes\n    with self.open(mode='rb') as f:\n         ^^^^^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = PosixPath('/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/source7-current-stage-r1/docs/reviews/v1-4-time-links-and-predicates/native/extensions/candidate.json')\nmode = 'rb', buffering = -1, encoding = None, errors = None, newline = None\n\n    def open(self, mode='r', buffering=-1, encoding=None,\n             errors=None, newline=None):\n        \"\"\"\n        Open the file pointed by this path and return a file object, as\n        the built-in open() function does.\n        \"\"\"\n        if \"b\" not in mode:\n            encoding = io.text_encoding(encoding)\n>       return io.open(self, mode, buffering, encoding, errors, newline)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE       FileNotFoundError: [Errno 2] No such file or directory: '/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/source7-current-stage-r1/docs/reviews/v1-4-time-links-and-predicates/native/extensions/candidate.json'\n\n/usr/lib/python3.12/pathlib.py:1015: FileNotFoundError",
+      "classname": "tests.test_v1_6_content_history",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/source7-current-stage-r1/docs/reviews/v1-4-time-links-and-predicates/native/extensions/candidate.json'",
+      "name": "test_v16_old_chain_keeps_source5_world_only_and_all_earlier_literals"
+    }
+  ],
+  "inner_passed98_outer_suite_failed": true,
+  "native_receipt_sha256": "f6764078a9da32fdb736c0dbd389785280154577cd14492810715f8b8935d555",
+  "no_tests_assertions_or_fixture_edits": true,
+  "original_deadline_utc": "2026-10-08T22:46:03.303312+00:00",
+  "peak_sampled_group_RSS_bytes": 174211072,
+  "qualification": "Failure and unchangedidentity only; no complete history PASS or98-case retroqualification",
+  "raw_log_path": "/home/dobo/work/_temp/codex__content-v1-7/probe/current-source7-history-tests-remaining-r3-1.log",
+  "raw_log_sha256": "9b37d16a8f51c2ccb5c320aacd3e5c389975b653406d33766fefd4108f1269d1",
+  "recorded_at_utc": "2026-10-08T22:29:05.679490+00:00",
+  "schema": "v1-7-actual-history-suite-missing-immutable-evidence-failure-v1",
+  "state": "FAILED_next2_pendingnull_NEVER_RESUME"
+}

@@ -1,0 +1,51 @@
+"""Prepare ONLY complete current task-owned Source7 scratch bytes; no builders or imports."""
+import hashlib,json,os,stat,sys
+from pathlib import Path
+R=Path('/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7')
+S=Path('/home/dobo/work/_temp/codex__content-v1-7')
+T=S/'resume-windows-20261008'
+OLD=S/'source7-stage-r1'
+I=T/'source7-current-stage-r1'
+D=R/'docs/reviews/v1-7-recognizable-content'
+sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+a=json.loads(Path(sys.argv[1]).read_bytes())
+assert sha(__file__)==a['stage_method_sha256']
+assert all(sha(R/n)==v for n,v in a['inputs'].items())
+assert all(sha(n)==v for n,v in a['scratch_bindings'].items())
+M=D/'current-source7-stage-copy-manifest-r1.json'
+assert sha(M)==a['copy_manifest_sha256']
+m=json.loads(M.read_bytes())
+assert T.resolve(strict=True)==T and not T.is_symlink()
+assert not I.exists() and not I.is_symlink()
+receipt=T/'current-source7-stage-r1-result.json'
+assert not receipt.exists() and not receipt.is_symlink()
+def safe_source(path):
+    p=Path(path);root=R if p.is_relative_to(R) else OLD
+    assert p.is_relative_to(root)
+    assert root.resolve(strict=True)==root and not root.is_symlink()
+    for item in [p]+list(p.parents):
+        if item==root:break
+        assert not item.is_symlink()
+    assert p.is_file() and stat.S_ISREG(p.lstat().st_mode)
+    return p
+assert all(sha(p)==v for p,v in m['original_stage_full_immutable_files'].items())
+I.mkdir(mode=0o700)
+written={};result={'complete':False,'status':'FAILED_RETAIN_PARTIAL_NO_OVERWRITE','native_commands_run':False,'live_data_or_authority_changed':False,'installation_approval':False}
+try:
+    for n,v in m['records'].items():
+        rel=Path(n);assert not rel.is_absolute() and '..' not in rel.parts
+        p=safe_source(v['source']);blob=p.read_bytes();assert len(blob)==v['bytes'] and hashlib.sha256(blob).hexdigest()==v['sha256']
+        target=I/rel;target.parent.mkdir(parents=True,exist_ok=True)
+        with target.open('xb') as f:f.write(blob);f.flush();os.fsync(f.fileno())
+        os.chmod(target,v['mode']);written[n]=sha(target);assert written[n]==v['sha256']
+    assert len(written)==m['count']
+    assert all(sha(v['source'])==v['sha256'] and sha(I/n)==v['sha256'] for n,v in m['records'].items())
+    assert all(sha(p)==v for p,v in m['original_stage_full_immutable_files'].items())
+    assert all(sha(I/n)==v for n,v in m['all28_archives'].items())
+    result.update(complete=True,status='EXACT_CURRENT_SOURCE7_SCRATCH_BYTES_ONLY',copied_files=len(written),copied_bytes=m['total_copy_bytes'],all28_archives_preserved=True)
+except BaseException as exc:
+    result['error']={'type':type(exc).__name__,'message':str(exc)}
+    raise
+finally:
+    result['written_file_sha256']=written
+    with receipt.open('x') as f:json.dump(result,f,indent=2,sort_keys=True);f.write('\n')

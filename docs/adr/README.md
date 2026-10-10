@@ -126,8 +126,14 @@ and the word-grid reflow; its release, reserve and content decisions remain.
 
 - [0184](0184-native-spa-toolchain-and-managed-output.md) — native SPA tooling/managed-output prerequisites; runtime validation pending. ADR0183/Source7 preserved.
 
-- [0185](0185-accepted-eager-startup-bundle-accounting.md) — owner-accepted AccountBar startup JS/CSS accounting; unchanged limits, source applied; Linux qualification pending.
+- [0185 — GUI eager startup accounting](0185-accepted-eager-startup-bundle-accounting.md) — owner-accepted AccountBar startup JS/CSS accounting; unchanged limits, source applied; Linux qualification pending.
 
-- [0186](0186-original-lint-equivalence-for-aria-and-focus.md) — original-source-grounded ARIA/focus advisory equivalence; all genuine guards and runtime assertions retained.
+- [0186 — GUI ARIA/focus lint equivalence](0186-original-lint-equivalence-for-aria-and-focus.md) — original-source-grounded ARIA/focus advisory equivalence; all genuine guards and runtime assertions retained.
 
-- [0187](0187-m1-font-preload-binding.md) — proposed M1 exact-four owned WOFF2 preload/nonce and actual-browser binding; source UNAPPLIED/UNTESTED, no qualification or performance claim.
+- [0187](0187-m1-font-preload-binding.md) — M1 exact-four owned WOFF2 preload/nonce source applied; current full/M1 qualification pending (STATUS).
+
+- [0185 — Current-state content iterations and evidence reuse](0185-content-loop-current-state-and-evidence-reuse.md) — Accepted2026-10-08; concisehandoffs/exactchanged-dependencyreuse/schema-firstchecks withoutgatewaivers.
+
+- [0186 — Go-authoritative content validation](0186-go-authoritative-content-validation.md) — owner-authorized Go content validation and native JSON; Python/Rust references optional.
+
+Parallel lanes allocated0185/0186 independently. Full filenames disambiguate their preserved append-only records; no decision body was renumbered or overwritten.

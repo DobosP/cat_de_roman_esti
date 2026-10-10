@@ -1,0 +1,41 @@
+{
+  "Source6_currentauthority_PASS": false,
+  "Source7_or_GUI_changed": false,
+  "complete": true,
+  "finished_at_utc": "2026-10-08T17:43:19.654498+00:00",
+  "observations": [
+    {
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/offline-rail-tools-r2/cat-content-rail",
+        "quick",
+        "--help"
+      ],
+      "case": "help",
+      "expected_returncode": 1,
+      "expected_stderr": "Usage of quick:\n  -audit-catalog string\n    \texact catalog to audit privately\n  -audit-out string\n    \texplicit native audit output\n  -candidate string\n    \texact native candidate input\n  -candidate-out string\n    \tgenerate source-bound candidate without approvals\n  -check\n    \trebuild unchanged baseline and check exact approved bytes\n  -expected-sha256 string\n    \texplicit reviewed output artifact pin for installation\n  -factual-review string\n    \tcomplete factual review\n  -final-factual-review string\n    \tfinal factual acceptance\n  -final-quality-review string\n    \tfinal quality acceptance\n  -installed-authority-out string\n    \tbuild draft installed-authority entry from current independently reviewed installed artifact; never write manifest or pin\n  -live-audit string\n    \tbound saved native audit\n  -proposal string\n    \texplicit saved proposal output\n  -quality-review string\n    \tcomplete independent quality review\n  -root string\n    \trepository root (default \"..\")\n  -source string\n    \tnative authored JSON; changed source needs version>1 and exact parent_source_sha256\n  -write\n    \tinstall only after bound native audit and final independent judgments\ncat-content-rail: flag: help requested\n",
+      "expected_stdout": "",
+      "returncode": 1,
+      "stderr": "Usage of quick:\n  -audit-catalog string\n    \texact catalog to audit privately\n  -audit-out string\n    \texplicit native audit output\n  -candidate string\n    \texact native candidate input\n  -candidate-out string\n    \tgenerate source-bound candidate without approvals\n  -check\n    \trebuild unchanged baseline and check exact approved bytes\n  -expected-sha256 string\n    \texplicit reviewed output artifact pin for installation\n  -factual-review string\n    \tcomplete factual review\n  -final-factual-review string\n    \tfinal factual acceptance\n  -final-quality-review string\n    \tfinal quality acceptance\n  -installed-authority-out string\n    \tbuild draft installed-authority entry from current independently reviewed installed artifact; never write manifest or pin\n  -live-audit string\n    \tbound saved native audit\n  -proposal string\n    \texplicit saved proposal output\n  -quality-review string\n    \tcomplete independent quality review\n  -root string\n    \trepository root (default \"..\")\n  -source string\n    \tnative authored JSON; changed source needs version>1 and exact parent_source_sha256\n  -write\n    \tinstall only after bound native audit and final independent judgments\ncat-content-rail: flag: help requested\n",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/offline-rail-tools-r2/cat-content-rail",
+        "quick",
+        "--check",
+        "--root",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7",
+        "--source",
+        "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/go-backend/internal/contentrails/sources/authored-v6.json"
+      ],
+      "case": "negative",
+      "expected_returncode": 1,
+      "expected_stderr": "cat-content-rail: final live audit incomplete/stale/unaccepted\n",
+      "expected_stdout": "",
+      "returncode": 1,
+      "stderr": "cat-content-rail: final live audit incomplete/stale/unaccepted\n",
+      "stdout": ""
+    }
+  ],
+  "test_failed": false
+}

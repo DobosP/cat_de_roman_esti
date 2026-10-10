@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/offline-rail-tools-r2/cat-content-rail",
+    "quick",
+    "--check",
+    "--root",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7",
+    "--source",
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/codex__content-v1-7/go-backend/internal/contentrails/sources/authored-v6.json"
+  ],
+  "case": "negative",
+  "expected_returncode": 1,
+  "expected_stderr": "cat-content-rail: final live audit incomplete/stale/unaccepted\n",
+  "expected_stdout": "",
+  "returncode": 1,
+  "stderr": "cat-content-rail: final live audit incomplete/stale/unaccepted\n",
+  "stdout": ""
+}

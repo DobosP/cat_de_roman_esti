@@ -1,0 +1,57 @@
+{
+  "schema": "independent-exact-two-checksum-mutation-and-offline-method-review-v2",
+  "reviewer": "/root/v17_research_quality",
+  "reviewed_at_utc": "2026-10-08T16:17:51.799000+00:00",
+  "decision": "ACCEPT_SEPARATE_EXACT_MUTATION_AND_FRESH_OFFLINE_VERIFY_BUILD_METHODS",
+  "source_admission_sha256": "b087942175938489f8390bd5f47c9c2eb75ac8fc04c31746f69f69b4cad66887",
+  "bindings": {
+    "owned-go-cache-offline-plan-r2.json": "a9618ce83322ee0311402c266910eb52b16df46e271b39370f2b58b533d2c28c",
+    "owned-go-cache-offline-readset-r2.json": "cdb2342b8032ae90b6addb186fac819de0e9ad1ee8041dc1ded9cfd3eb4d04b5",
+    "owned-go-cache-offline-plan-r1.json": "e5dbd8349366531d8d6f40356b84419d574ac36d83ee222cba6307a1fa11f3e9",
+    "owned-go-cache-offline-readset-r1.json": "642b2780ab3489c552e9cf9bc8baa6499f268e949a948cfd73f84a724f7e814e",
+    "methods/apply_root_sum_xnet59_r1.py.txt": "c7c35b208ab8b44ee635980a85ee604c1f232debeb8146411d99a3e4c622ae41",
+    "methods/root-go.sum-xnet59-after-r1.txt": "aa0fee1fbf66167f8f1f054e2c31f7b4c110d5901307bc6294b7ae1858dbb3db",
+    "pinned-public-go-acquisition-actual-review-r2.json": "384d431f8538b1a99e3354910dd32f0feb32c669b52f92f8478305d22bdbfed1"
+  },
+  "checksum_target": {
+    "path": "go-backend/go.sum",
+    "before_sha256": "4428f86b6da473a933255e8994a2625d4cab9961868d0ddc562925e00ef90bd6",
+    "after_sha256": "aa0fee1fbf66167f8f1f054e2c31f7b4c110d5901307bc6294b7ae1858dbb3db",
+    "added_lines": 2,
+    "removed_or_changed_existing_lines": 0
+  },
+  "findings": [
+    "Afterimage5363B/62lines reconstructs the whole5210B/60line preimage by removing exactly two x/net0.59 lines. Both h1 values equal committed local web-kit go.sum and actual accepted download JSON; no version/require/replace/go.mod/tidy/get or unrelated checksum change is proposed.",
+    "Mutation13 pre-input/12 unchanged pins and11 scratch pins are current; only go.sum leaves mutation post-unchanged and expected_after is exactaa0. Fresh offline13 input/unchanged maps deliberately bindaa0, so before mutation their only known mismatch is this explicitly authorized future target. These are separate immutable phase admissions, not an edited campaign.",
+    "Atomic c7c method checks exact source/method/preimage/afterimage, regular target, fresh receipt, writes one same-filesystem temporary, retains mode, fsyncs/replaces and checks actual afterimage. Failure after replacement may leave OLD or EXACTNEW target without local receipt; consumers must never infer success or automatic rollback.",
+    "Actual owned cache acquisition identity/inventory/producer is bound. All5,187 known file hashes are manually checked by root before/after offline calls; builtin runner pins the compact inventory/keeper/producer, not falsely claimed to serialize every file hash again.",
+    "Actual SDK verify.go recomputes selected downloaded zip/extracted directory hashes against cached ziphash, but skips modules with neither zip nor directory. Thus all modules verified proves that selected cached content check only, not availability/full graph or all30 cache-body verification. Actual subsequent readonly current rail build is a distinct prerequisite/availability proof for its imported closure.",
+    "Offline two exact commands use OWN cache, proxyoff/sumdboff/local toolchain/workspaceoff/Go2/readonly. New current rail output path is absent/nonsymlink. No network fallback, GUI/assets activation, Source7 graph/catalogue/pin/authority update is authorized."
+  ],
+  "current_metadata_ack": {
+    "broader_old_runtime_inputs": 198,
+    "still_exact_runtime_source_inputs": 197,
+    "only_changed_path": "docs/STATUS.md",
+    "old_status_sha256": "792ecc571f4c836de01f9e333871ae015fa58113a49143239583cdaa040caa51",
+    "current_status_sha256": "e468ca9c2ab6b64f39714b2dc824f722700cdc6e4ec41121e3fd1d2f2111dbf4",
+    "scope": "Current status truthfully records resumed loop/pure Source6 pass and broader pending prerequisites. Bind current metadata separately; preserve old readset/judgments, with no semantic/data/runtime retarget. Later go.sum supersession is only the exact declared mutation."
+  },
+  "mandatory_execution": [
+    "First obtain a separately fresh MUTATION-ONLY immutable admission with target-before input, only target excluded from post-unchanged, expected_after exactaa0, all other current197+metadata/method/anchor/cache/SDK/producer pins protected and existing17GiBstart16GiBremainingdisk+memory/2GiBRSS1GiBfullSR/20min180reserve limits. No Go/native verification in this phase.",
+    "Require passing outer mutation receipt AND actual exactafterhash AND local receipt, plus mode/source/non-target preservation before any consumer. Interrupted/nonzero/missing-receipt state stops; preserve knownOLD/EXACTNEW evidence without false rollback/success.",
+    "Only then independently admit a fresh OFFLINE verify/build lane bound to actualaa0 and new current STATUS/all other original source pins. Never overwrite old preimage/readset or reset a failed mutation clock.",
+    "Root manually verifies all5,187 cache files/sizes/safe paths/exact membership and immutable inventory/keeper/acquisition receipt+actual log, source/module hashes before AND after each offline command. Any unexpected file/version/checksum/read-only update/network need or cache/source drift stops and preserves failure; no silent tidy/get/extra lines/downgrade.",
+    "After successful current rail build, freeze actual binarySHA with passed producer receipt/log/admission/source+SDK+cache/deadline/baseline in an exclusive keeper+external digest before later separately scoped CLI/audit consumers. No unknown hash placeholder or blanket new trust baseline.",
+    "Existing fresh per-phase resource floors/caps, original397686/accounting/fullS-R/final reserve and exact command-scoped OWNcache override remain unchanged. Shared cache is not a target; no universal claim about other owners is made."
+  ],
+  "limits": {
+    "source_methods_accepted": true,
+    "checksum_mutation_or_Go_execution_by_reviewer": false,
+    "cached_integrity_graph_or_build_pass": false,
+    "network_or_unreviewed_prerequisite_authorized": false,
+    "Source7_GUI_currentauthority_release_or_assembled_approved": false,
+    "old_failed_clock_or_judgment_rebound": false,
+    "source_worker_RSS": "unmeasured",
+    "review_operations": "Static source/AST/current hashes/full-before-after line reconstruction/local SDK verify source/CLI/path inspection only; no repository import/native/Go/network/tests or source edits."
+  }
+}

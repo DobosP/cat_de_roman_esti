@@ -14,7 +14,7 @@ import (
 
 func Run(args []string, out io.Writer) error {
 	if len(args) == 0 {
-		return errors.New("usage: cat-content-ops COMMAND [--root ROOT] [--check|--write]; commands: import-candidates, critique, build-review, apply-review, audit-projections, rank, derive, delta, submissions")
+		return errors.New("usage: cat-content-ops COMMAND [--root ROOT] [--check|--write]; commands: check, import-candidates, critique, build-review, apply-review, audit-projections, rank, derive, delta, submissions")
 	}
 	command := args[0]
 	args = args[1:]
@@ -53,6 +53,9 @@ func Run(args []string, out io.Writer) error {
 	if fs.NArg() != 0 {
 		return errors.New("unexpected positional argument; use --ids")
 	}
+	if command == "check" && *write {
+		return errors.New("check is read only; --write is refused")
+	}
 	if *write && *check {
 		return errors.New("--write and --check are mutually exclusive")
 	}
@@ -85,6 +88,8 @@ func Run(args []string, out io.Writer) error {
 	}
 	var result Object
 	switch command {
+	case "check":
+		result, e = s.Check()
 	case "import-candidates":
 		if !*packOnly || *dir == "" {
 			return errors.New("import-candidates requires --dir and --pack-only")

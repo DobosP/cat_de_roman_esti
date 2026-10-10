@@ -1,0 +1,186 @@
+package contentrails
+
+// Source-only method: run only after independently reviewed compile/execution admission.
+// Every service below receives the same authenticated, unmodified content.Load snapshot.
+import (
+ "bytes"
+ "crypto/sha256"
+ "encoding/json"
+ "fmt"
+ "net/http/httptest"
+ "os"
+ "path/filepath"
+ "reflect"
+ "testing"
+
+ "github.com/DobosP/cat_de_roman_esti/go-backend/internal/alchimie_explore"
+ "github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
+ "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild"
+ "github.com/DobosP/cat_de_roman_esti/go-backend/internal/graph"
+ "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpapi"
+)
+
+func TestV17ProperSealedWorldR1(t *testing.T) {
+ const stage = "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/source7-current-stage-r1"
+ const reportPath = "/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/current-source7-sealed-play-r1/world.jsonl"
+ const bundleSHA = "078657f392828f2784173684c08d89736e38dae46a0d47c485a3ae5fcf1adc73"
+ const digestSHA = "388c8484b949ac173a1edfac5dd2c78f381cad224c754e78d854f31d29dd99ec"
+ const owner = "n_v4soc_salariu"
+ if os.Getenv("CDR_V17_SEALED_WORLD_REPORT") != reportPath { t.Fatal("exact fresh report namespace required") }
+ if resolved, err := filepath.EvalSymlinks(filepath.Dir(reportPath)); err != nil || resolved != filepath.Dir(reportPath) { t.Fatal("exclusive output ancestor drift", err) }
+ f, err := os.OpenFile(reportPath, os.O_CREATE|os.O_EXCL|os.O_WRONLY, 0600)
+ if err != nil { t.Fatal(err) }
+ defer func() { if err := f.Close(); err != nil { t.Error(err) } }()
+ written, requests, goalCount, historyCount, prefixes := 0, 0, 0, 0, 0
+ complete := false
+ emit := func(v any) {
+  t.Helper()
+  b, err := json.Marshal(v); if err != nil { t.Fatal(err) }
+  if written+len(b)+1 > 2<<20 { t.Fatal("world report 2MiB cap") }
+  n, err := f.Write(append(b, '\n')); written += n
+  if err != nil || n != len(b)+1 { t.Fatal("world report incomplete write", err) }
+  if err := f.Sync(); err != nil { t.Fatal(err) }
+ }
+ defer func() { emit(map[string]any{"record":"end", "complete":complete&&!t.Failed(), "failed":t.Failed(), "HTTP_requests":requests, "goal_modes":goalCount, "historical_books":historyCount, "historical_prefixes":prefixes}) }()
+ read := func(path, want string) []byte {
+  t.Helper()
+  info, err := os.Lstat(path); if err != nil || !info.Mode().IsRegular() { t.Fatal("source must remain regular", path, err) }
+  b, err := os.ReadFile(path)
+  if err != nil || fmt.Sprintf("%x", sha256.Sum256(b)) != want { t.Fatal("source hash drift", path, err) }
+  return b
+ }
+ sources := map[string]string{
+  "kg_sample.json":"3412064a27c79e47b1b4205383e45c156316857bc8a6f6cb303bc65478501749",
+  "derived_catalog_v38.json":"df3a01bb5bdbf8c34973b6bc43c9179ab9ffbe0fc6552fb73b5cd1e9bfb24af9",
+  "quick_games_v92.json":"34c11c48b28b45c53a741290837288d302c98cea51e4346fb64669d7188c7a8c",
+  "board_rankings_v37.json":"24d36c7ad1968fb5b2e993a38f1c404719edc66bc4faa0e9d8e8eb079e9df7fe",
+  "release_reserve_v1.json":"fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+  "games_pack.json":"e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+  "alchimie_discovery_world_v92.json":"1fcd017b33edf3600098306b19c012f709c8a50b905be9d259a6a1e2cbb84049",
+  "alchimie_recipe_extensions_v92.json":"605690ec6b163ab3860fc57c53c21288b2781b85c77f93e414d63207340119bf",
+ }
+ checkDisk := func() []byte {
+  t.Helper()
+  b := read(filepath.Join(stage,"go-backend/internal/content/bundled.json"), bundleSHA)
+  pin := read(filepath.Join(stage,"go-backend/internal/content/digest.go"), digestSHA)
+  if len(b) != 7272465 || !bytes.Equal(pin, contentbuild.PinBytes(b)) { t.Fatal("exact bundle/generated digest mismatch") }
+  if len(contentbuild.SourceNames) != 8 { t.Fatal("current eight-source schema drift") }
+  seen := map[string]bool{}
+  for _, name := range contentbuild.SourceNames {
+   want, ok := sources[name]; if !ok || seen[name] { t.Fatal("source membership drift", name) }; seen[name] = true
+   read(filepath.Join(stage,"cat_de_roman_esti/fixtures",name), want)
+  }
+  return b
+ }
+ bundle := checkDisk()
+ c, err := content.Load(); if err != nil { t.Fatal("fresh sealed content.Load authentication", err) }
+ if !reflect.DeepEqual(c.Sources, sources) { t.Fatal("loaded current source8 identity drift") }
+ loadedBytes, err := json.Marshal(c); if err != nil { t.Fatal(err) }
+ var loadedJSON, diskJSON any
+ if err := json.Unmarshal(loadedBytes, &loadedJSON); err != nil { t.Fatal(err) }
+ if err := json.Unmarshal(bundle, &diskJSON); err != nil { t.Fatal(err) }
+ if !reflect.DeepEqual(loadedJSON, diskJSON) { t.Fatal("complete loaded export differs from authenticated disk bundle") }
+ if graph.New(c).Resolve("leafă") != owner || graph.New(c).Resolve("leafa") != owner { t.Fatal("sealed leaf alias ownership drift") }
+ // No Content field assignment, overlay, candidate graph transfer or auditWorld call.
+ world := c.DiscoveryWorld
+ recipes := rows(world["recipes"])
+ if len(rows(world["concepts"])) != 252 || len(recipes) != 352 || len(rows(world["goals"])) != 32 || len(rows(world["compatible_versions"])) != 10 { t.Fatal("sealed World inventory drift") }
+ for _, v := range rows(world["concepts"]) { if text(object(v)["id"]) == owner { t.Fatal("Salary unexpectedly World member") } }
+ for _, v := range recipes {
+  r := object(v); if text(r["result"]) == owner { t.Fatal("Salary World result") }
+  for _, id := range ids(r["pair"]) { if id == owner { t.Fatal("Salary World ingredient") } }
+ }
+ emit(map[string]any{"record":"sealed_identity", "bundle_sha256":bundleSHA, "digest_sha256":digestSHA, "source8":sources, "loaded_export_complete_deep_match":true, "unmodified_sealed_snapshot":true, "scope":"proper isolated Source7 sealed World only; no live installation, authority, full serving or human enjoyment claim"})
+ privacy := func(m map[string]any) {
+  t.Helper()
+  if _, present := m["recipes"]; present { t.Fatal("private World recipe map exposed") }
+  for _, v := range rows(m["goals"]) { g := object(v); if g["completed"] == false && g["target_id"] != nil { t.Fatal("undiscovered goal target exposed") } }
+ }
+ goalIDs := []*string{nil}
+ for _, v := range rows(world["goals"]) { id := text(object(v)["id"]); goalIDs = append(goalIDs, &id) }
+ var reference any
+ for _, goal := range goalIDs {
+  svc := alchimie_explore.New(c)
+  state, failure := svc.Create(nil, goal); if failure != nil { t.Fatal("sealed World create", failure) }
+  sid := text(state["game_id"]); privacy(state)
+  actions := 0
+  for ; actions < 256; actions++ {
+   owned := ownedIDs(state); var chosen map[string]any
+   for _, v := range recipes { r := object(v); pair := ids(r["pair"]); if owned[pair[0]] && owned[pair[1]] && !owned[text(r["result"])] { chosen = r; break } }
+   if chosen == nil { break }
+   pair := ids(chosen["pair"])
+   state, failure = svc.Combine(sid, pair[0], pair[1]); if failure != nil { t.Fatal("sealed productive craft", failure) }
+   if len(rows(state["discovered"])) != 1 || text(object(state["result"])["id"]) != text(chosen["result"]) { t.Fatal("sealed productive recipe result drift") }
+   privacy(state)
+  }
+  if actions >= 256 || state["complete"] != true || len(ownedIDs(state)) != 252 || integer(state["discovered_count"]) != 148 { t.Fatal("sealed full closure or finite bound drift") }
+  for _, v := range rows(state["goals"]) { if object(v)["completed"] != true { t.Fatal("sealed goal not reached") } }
+  checkpoint := clone(state["progress"])
+  if reference != nil && !same(reference, checkpoint) { t.Fatal("goal-dependent recipe mechanics") }; reference = checkpoint
+  repeatedCount := 0
+  for _, v := range recipes {
+   r := object(v); pair := ids(r["pair"])
+   repeated, failure := svc.Combine(sid, pair[0], pair[1])
+   if failure != nil || len(rows(repeated["discovered"])) != 0 || repeated["already_known"] != true || text(object(repeated["result"])["id"]) != text(r["result"]) || !same(repeated["progress"], checkpoint) { t.Fatal("sealed repeated recipe drift", failure) }
+   privacy(repeated); repeatedCount++
+  }
+  restored, failure := svc.Create(object(checkpoint), nil)
+  if failure != nil || !same(restored["progress"], checkpoint) || !same(ownedIDs(restored), ownedIDs(state)) { t.Fatal("sealed complete restore drift", failure) }
+  privacy(restored); goalCount++
+  emit(map[string]any{"record":"sealed_goal_replay", "goal_id":goal, "complete":true, "replayed_discoveries":148, "all_recipes_consistent":repeatedCount, "complete_restore_preserved":true})
+ }
+ for _, v := range rows(world["compatible_versions"]) {
+  version := object(v); m := object(version["mechanics"]); owned := map[string]bool{}
+  for _, id := range ids(m["starters"]) { owned[id] = true }
+  pairs := []any{}; svc := alchimie_explore.New(c); actions := 0
+  for ; actions < 256; actions++ {
+   var next map[string]any
+   for _, v := range rows(m["recipes"]) { r := object(v); p := ids(r["pair"]); if owned[p[0]] && owned[p[1]] && !owned[text(r["result"])] { next = r; break } }
+   if next == nil { break }
+   pairs = append(pairs, clone(next["pair"])); owned[text(next["result"])] = true
+   for _, u := range rows(m["unlocks"]) { unlock := object(u); if len(pairs) >= integer(unlock["after"]) { for _, id := range ids(unlock["concepts"]) { owned[id] = true } } }
+   checkpoint := map[string]any{"world_id":version["world_id"], "recipe_hash":version["recipe_hash"], "discoveries":clone(pairs)}
+   state, failure := svc.Create(checkpoint, nil); if failure != nil { t.Fatal("sealed historical prefix restore", failure) }
+   newOwned := ownedIDs(state)
+   for id := range owned { if !newOwned[id] { t.Fatal("sealed historical prefix lost earned concept", id) } }
+   if !same(object(state["progress"])["discoveries"], pairs) { t.Fatal("sealed historical discoveries changed") }
+   privacy(state); prefixes++
+  }
+  if actions >= 256 { t.Fatal("historical finite action bound reached") }
+  historyCount++
+  emit(map[string]any{"record":"sealed_historical_book", "recipe_hash":version["recipe_hash"], "prefixes_preserved":len(pairs), "previous_owned":len(owned), "all_earned_concepts_preserved":true})
+ }
+ clean := func(m map[string]any) map[string]any { x := map[string]any{}; for k,v := range m { if k != "game_id" { x[k] = v } }; return x }
+ var baselineState map[string]any
+ // Two independent public handlers use this same, unchanged authenticated snapshot.
+ for arm := 0; arm < 2; arm++ {
+  server := httpapi.New(c)
+  request := func(label, method, path string, body any, want int) map[string]any {
+   t.Helper()
+   if requests >= 20 { t.Fatal("World HTTP 20 cap") }
+   var b []byte; if body != nil { var err error; b, err = json.Marshal(body); if err != nil { t.Fatal(err) } }
+   req := httptest.NewRequest(method,"http://testserver"+path,bytes.NewReader(b)); req.Header.Set("Content-Type","application/json")
+   rec := httptest.NewRecorder(); server.ServeHTTP(rec,req)
+   m := map[string]any{}; if err := json.Unmarshal(rec.Body.Bytes(),&m); err != nil { t.Fatal(err) }
+   requests++
+   emit(map[string]any{"record":"sealed_membership_HTTP", "arm":arm, "request_number":requests, "label":label, "method":method, "path":path, "request":body, "status":rec.Code, "response":m})
+   if rec.Code != want { t.Fatalf("World HTTP %s got%d want%d",label,rec.Code,want) }; return m
+  }
+  initial := request("create","POST","/api/alchimie/explore",map[string]any{},200); privacy(initial)
+  if baselineState == nil { baselineState = clean(initial) } else if !reflect.DeepEqual(baselineState,clean(initial)) { t.Fatal("same sealed World initial state drift") }
+  path := "/api/alchimie/explore/"+text(initial["game_id"])
+  got := request("initial_get","GET",path,nil,200); privacy(got)
+  if !reflect.DeepEqual(clean(got),clean(initial)) { t.Fatal("sealed initial Get drift") }
+  for _, input := range []string{"leafă","leafa","salariu",owner} {
+   refusal := request("outsideworld_combine","POST",path+"/combine",map[string]any{"a":input,"b":"n_v4gas_lapte"},400)
+   if !reflect.DeepEqual(refusal,map[string]any{"detail":"Alege două ingrediente diferite din colecția ta."}) { t.Fatal("specific outside-World membership refusal drift") }
+   got = request("refusal_get","GET",path,nil,200); privacy(got)
+   if !reflect.DeepEqual(clean(got),clean(initial)) { t.Fatal("outside-World refusal changed inventory/progress/hints/empty-pair state") }
+  }
+ }
+ if requests != 20 || goalCount != 33 || historyCount != 10 || prefixes != 1156 { t.Fatal("incomplete fixed sealed World coverage") }
+ if !bytes.Equal(checkDisk(),bundle) { t.Fatal("sealed post-run source bytes changed") }
+ afterBytes, err := json.Marshal(c); if err != nil || !bytes.Equal(afterBytes,loadedBytes) { t.Fatal("services modified authenticated Content fields",err) }
+ emit(map[string]any{"record":"postbindings", "bundle_sha256":bundleSHA, "digest_sha256":digestSHA, "source8":sources, "loaded_content_export_unchanged":true, "all33_goal_modes_148_discoveries":true, "all10_histories_1156_prefixes":true, "all20_public_cases_exact":true})
+ complete = true
+}

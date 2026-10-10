@@ -1,0 +1,67 @@
+{
+  "I1192_all_source_runtime_hash_size_mode_membership_unchanged": true,
+  "all5775_initial_pins_and_old_new_logs_exact": true,
+  "collection": {
+    "actual_cases": 2733,
+    "actual_modules": 151,
+    "added_vs_pre352": 0,
+    "external_sha256": "8ceed0f78aef0461b7d2917b6f53eab4456bdc712b100d83fb1534aa2ac91862",
+    "keeper_sha256": "8605b4bef42afde76c9d7794e2cfdeff4d076928a68695ccbfb9fc6ccca6b34b",
+    "manifest_sha256": "9f1f1f7810f87816b2430e1df44f24c4458a9a2b4d5f59090f09bb30ccbcb8f6",
+    "removed_vs_pre352": 0,
+    "status": "PASSED_DECLARED_COLLECT_ONLY_SCOPE"
+  },
+  "failed_workspace_inventory_sha256": "1722a857419d520c21ca51d3ef7388ffe86fe0bcce4b773d438d23d86a9b721a",
+  "failure_classification": "Two named archived-candidate inputs absent; two Alchimie World contract assertions fail. Historical/current context classification needs separate source review; no assertion deletion, fixture edit or Source7 regression claim from these observations alone.",
+  "fullrun": {
+    "all_remaining_cases_unexecuted_or_interrupted_not_qualified": true,
+    "exit_code": 2,
+    "four_observed_failures": [
+      {
+        "file": "tests/test_alchimie_discovery_catalog.py",
+        "message": "assert False\n +  where False = all(<generator object test_editorial_descriptions_keep_original_fixes_and_provenance.<locals>.<genexpr> at 0x7cdf3249be60>)",
+        "name": "test_editorial_descriptions_keep_original_fixes_and_provenance"
+      },
+      {
+        "file": "tests/test_alchimie_discovery_catalog.py",
+        "message": "FileNotFoundError: [Errno 2] No such file or directory: '/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/source7-current-stage-r1/docs/reviews/v92-alchimie-more-concepts/candidates.json'",
+        "name": "test_expansion_preserves_all_prior_recipes_goals_and_collections"
+      },
+      {
+        "file": "tests/test_alchimie_discovery_catalog.py",
+        "message": "FileNotFoundError: [Errno 2] No such file or directory: '/home/dobo/work/_temp/codex__content-v1-7/resume-windows-20261008/source7-current-stage-r1/docs/reviews/v92-alchimie-large-concepts/candidate.json'",
+        "name": "test_recipe_reuse_keeps_complete221_book_and_preparation_sources"
+      },
+      {
+        "file": "tests/test_alchimie_discovery_catalog.py",
+        "message": "ValueError: factual: altered inherited concept",
+        "name": "test_reviewed_unchanged_concepts_can_inherit_without_new_source_claims"
+      }
+    ],
+    "guard": "step-failure",
+    "incomplete_XML_shells_not_passes": 1,
+    "known_SPA_case_not_reached_or_qualified": true,
+    "no_full_or_eligible_reference_PASS": true,
+    "partial_XML_testcase_shells": 202,
+    "root_stop_request_sha256": "24614748ecabf8cd72722676ca0c1e31b232c04bc02748ce61fb50374471722d",
+    "status": "FAILED_STOPPED_ON_OBSERVED_TEST_FAILURES",
+    "terminal_reported_failures": 4,
+    "terminal_reported_inner_passes_UNQUALIFIED": 197
+  },
+  "liveSource6_pool_and_other_owners_unchanged": true,
+  "lossless_raw_manifest_sha256": "1343523cf24ec44e5678a721d0975657305201a97986d2e82183421c220de1fd",
+  "native_admission_sha256": "552e14bba8018f56d47fa111c269ffb1273bceec2b46cc42bbfd8a2e5767cad7",
+  "native_incremental_bytes": 21342784,
+  "native_peak_sampled_group_RSS_bytes": 289693696,
+  "no_original_state_resume_clock_reset_retry_or_test_expectation_change": true,
+  "original_deadline_utc": "2026-10-09T02:46:48.515339+00:00",
+  "original_fullS_R_baseline_bytes": 4415364476,
+  "original_reserve_utc": "2026-10-09T02:43:48.515339+00:00",
+  "publication_current_fullS_R_growth_bytes": 26388847,
+  "publication_reserved_upper_bytes": 93497711,
+  "published_at_utc": "2026-10-09T02:39:48.359720+00:00",
+  "raw_external_sha256": "06c554327efa855a402067f8e31c199a556c7cbb64e1a32edf97ae74197e5286",
+  "raw_keeper_sha256": "c11f11cd2fb86163b019349ccc2afa08a8f41bba36fcddd8e041573f43057232",
+  "schema": "post1192-full-reference-collection-pass-run-failure-results-v1",
+  "source_root_publication_whole_RSS": "unmeasured"
+}
