@@ -1,0 +1,642 @@
+{
+  "schema": 1,
+  "scope": "Actual anonymous loopback identity and entry and largest static-closure JS negotiation witness only; no aggregate/full/budget/device/production qualification",
+  "status": "pass",
+  "binding": {
+    "sha": "6aa75a9313e87f2e6d9fb9531202abba8512b152",
+    "tree_sha256": "fdd03a8e9d2ba469a93f6d13eb8a440332688238076870ecbaf2173c252daf69",
+    "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+    "invocation": "b1fc8c39-1299-47ea-852f-f83cbf65be15",
+    "app_image_id": "sha256:27555c5e912c2379d9e2cfb1d493e563a639836d57c978186fbea2677d24e3d4",
+    "origin": "http://localhost:8080"
+  },
+  "expected_identity": {
+    "sha": "6aa75a9313e87f2e6d9fb9531202abba8512b152",
+    "tree_sha256": "fdd03a8e9d2ba469a93f6d13eb8a440332688238076870ecbaf2173c252daf69",
+    "manifest_sha256": "4722e3df22d6a0d66d000502d26d6d530c807160a341956cd527866d15e77fc9",
+    "versions_lock_sha256": "d15df22e48877d66f17590f6ac1f36b7d5fcfa75c3ecc055079880dc215a8834"
+  },
+  "entry_file": "assets/index-BoCfe88_.js",
+  "selected_owners": [
+    {
+      "key": "entry",
+      "file": "assets/index-BoCfe88_.js",
+      "manifest_key": "index.html",
+      "source": {
+        "path": "go-backend/embedfs/dist/assets/index-BoCfe88_.js",
+        "bytes": 338,
+        "sha256": "9ac495f5f0e76e4b0371dc2d6553f59c6716741fb55a6e5438337e4ca1c9ba05",
+        "full_mode": 33188
+      }
+    },
+    {
+      "key": "largest-static-js",
+      "file": "assets/startup-BP5Pvlg1.js",
+      "manifest_key": "_startup-BP5Pvlg1.js",
+      "source": {
+        "path": "go-backend/embedfs/dist/assets/startup-BP5Pvlg1.js",
+        "bytes": 352124,
+        "sha256": "03eeff874ba05004479639d69e78e19ff1a5c42861797df44438b48e6ac95a74",
+        "full_mode": 33188
+      }
+    }
+  ],
+  "static_closure_js": [
+    {
+      "file": "assets/index-BoCfe88_.js",
+      "manifest_key": "index.html",
+      "source": {
+        "path": "go-backend/embedfs/dist/assets/index-BoCfe88_.js",
+        "bytes": 338,
+        "sha256": "9ac495f5f0e76e4b0371dc2d6553f59c6716741fb55a6e5438337e4ca1c9ba05",
+        "full_mode": 33188
+      }
+    },
+    {
+      "file": "assets/rolldown-runtime-CbXtAM7H.js",
+      "manifest_key": "_rolldown-runtime-CbXtAM7H.js",
+      "source": {
+        "path": "go-backend/embedfs/dist/assets/rolldown-runtime-CbXtAM7H.js",
+        "bytes": 589,
+        "sha256": "bbf7c5086ae414dc3f33777e3eebf16ea8631325b8bb4690d25091c03567f31a",
+        "full_mode": 33188
+      }
+    },
+    {
+      "file": "assets/startup-BP5Pvlg1.js",
+      "manifest_key": "_startup-BP5Pvlg1.js",
+      "source": {
+        "path": "go-backend/embedfs/dist/assets/startup-BP5Pvlg1.js",
+        "bytes": 352124,
+        "sha256": "03eeff874ba05004479639d69e78e19ff1a5c42861797df44438b48e6ac95a74",
+        "full_mode": 33188
+      }
+    }
+  ],
+  "static_closure_collector_sha256": "8e6fdc34a6ec877ccde5e3a9cecaaadbf989c7b294c5ccfe796432e65348c9a3",
+  "inputs": [
+    {
+      "path": ".gate/wrapper-current.json",
+      "bytes": 528,
+      "sha256": "f823b64ce6e5b166f1537554b94a288906600922b5d7f1c0688bddd86014bbb0",
+      "full_mode": 33060
+    },
+    {
+      "path": ".gate/shell/wrapper-current.json",
+      "bytes": 528,
+      "sha256": "f823b64ce6e5b166f1537554b94a288906600922b5d7f1c0688bddd86014bbb0",
+      "full_mode": 33060
+    },
+    {
+      "path": ".gate/shell/source6-native-input/b1fc8c39-1299-47ea-852f-f83cbf65be15/http-static-witness.mjs",
+      "bytes": 14963,
+      "sha256": "65d4fe71fa8bc166b078860bccc80c626dcb72542a93a9ca423ec596cc6b4111",
+      "full_mode": 33152
+    },
+    {
+      "path": ".gate/shell/wrapper-kit-config.json",
+      "bytes": 1125,
+      "sha256": "ee94e0d4ec6322a2017faa5e6e724df21a381fa778e29a0425cab669fb61e8ec",
+      "full_mode": 33060
+    },
+    {
+      "path": "go-backend/embedfs/dist/.vite/manifest.json",
+      "bytes": 7703,
+      "sha256": "4722e3df22d6a0d66d000502d26d6d530c807160a341956cd527866d15e77fc9",
+      "full_mode": 33188
+    },
+    {
+      "path": "versions.lock.json",
+      "bytes": 47093,
+      "sha256": "d15df22e48877d66f17590f6ac1f36b7d5fcfa75c3ecc055079880dc215a8834",
+      "full_mode": 33204
+    },
+    {
+      "path": "frontend/scripts/check-bundle-budget.mjs",
+      "bytes": 6510,
+      "sha256": "8e6fdc34a6ec877ccde5e3a9cecaaadbf989c7b294c5ccfe796432e65348c9a3",
+      "full_mode": 33204
+    },
+    {
+      "path": "go-backend/embedfs/dist/assets/index-BoCfe88_.js",
+      "bytes": 338,
+      "sha256": "9ac495f5f0e76e4b0371dc2d6553f59c6716741fb55a6e5438337e4ca1c9ba05",
+      "full_mode": 33188
+    },
+    {
+      "path": "go-backend/embedfs/dist/assets/rolldown-runtime-CbXtAM7H.js",
+      "bytes": 589,
+      "sha256": "bbf7c5086ae414dc3f33777e3eebf16ea8631325b8bb4690d25091c03567f31a",
+      "full_mode": 33188
+    },
+    {
+      "path": "go-backend/embedfs/dist/assets/startup-BP5Pvlg1.js",
+      "bytes": 352124,
+      "sha256": "03eeff874ba05004479639d69e78e19ff1a5c42861797df44438b48e6ac95a74",
+      "full_mode": 33188
+    }
+  ],
+  "requests": [
+    {
+      "label": "identity-before",
+      "request_url": "http://localhost:8080/api/gui-build",
+      "accept_encoding": "identity",
+      "status": 200,
+      "headers": {
+        "cache-control": [
+          "no-store"
+        ],
+        "content-type": [
+          "application/json"
+        ],
+        "vary": [
+          "origin"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "content-length": [
+          "307"
+        ]
+      },
+      "encoded_body": {
+        "path": ".gate/shell/source6-native-confirmation/b1fc8c39-1299-47ea-852f-f83cbf65be15/http/identity-before-encoded.bin",
+        "bytes": 307,
+        "sha256": "10559a806ddc923981b853ec9cf1a029abb48c3f37db6eebe18cd5349cb70dc5",
+        "full_mode": 33152
+      },
+      "complete": true,
+      "error": null,
+      "encoded_sha256": "10559a806ddc923981b853ec9cf1a029abb48c3f37db6eebe18cd5349cb70dc5",
+      "encoded_bytes": 307,
+      "raw_retained_before_validation": true,
+      "identity_fields": {
+        "sha": "6aa75a9313e87f2e6d9fb9531202abba8512b152",
+        "tree_sha256": "fdd03a8e9d2ba469a93f6d13eb8a440332688238076870ecbaf2173c252daf69",
+        "manifest_sha256": "4722e3df22d6a0d66d000502d26d6d530c807160a341956cd527866d15e77fc9",
+        "versions_lock_sha256": "d15df22e48877d66f17590f6ac1f36b7d5fcfa75c3ecc055079880dc215a8834"
+      }
+    },
+    {
+      "label": "entry-identity",
+      "request_url": "http://localhost:8080/assets/index-BoCfe88_.js",
+      "accept_encoding": "identity",
+      "status": 200,
+      "headers": {
+        "accept-ranges": [
+          "bytes"
+        ],
+        "cache-control": [
+          "max-age=315360000, public, immutable"
+        ],
+        "content-length": [
+          "338"
+        ],
+        "content-type": [
+          "application/javascript"
+        ],
+        "etag": [
+          "3886qn6ka10ez"
+        ],
+        "vary": [
+          "origin",
+          "Accept-Encoding",
+          "Accept-Encoding"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "encoded_body": {
+        "path": ".gate/shell/source6-native-confirmation/b1fc8c39-1299-47ea-852f-f83cbf65be15/http/entry-identity-encoded.bin",
+        "bytes": 338,
+        "sha256": "9ac495f5f0e76e4b0371dc2d6553f59c6716741fb55a6e5438337e4ca1c9ba05",
+        "full_mode": 33152
+      },
+      "complete": true,
+      "error": null,
+      "encoded_sha256": "9ac495f5f0e76e4b0371dc2d6553f59c6716741fb55a6e5438337e4ca1c9ba05",
+      "encoded_bytes": 338,
+      "raw_retained_before_validation": true,
+      "asset_owner": "entry",
+      "manifest_file": "assets/index-BoCfe88_.js",
+      "selected_encoding": "identity",
+      "decoded_sha256": "9ac495f5f0e76e4b0371dc2d6553f59c6716741fb55a6e5438337e4ca1c9ba05",
+      "decoded_bytes": 338,
+      "source_sha256": "9ac495f5f0e76e4b0371dc2d6553f59c6716741fb55a6e5438337e4ca1c9ba05",
+      "source_bytes": 338,
+      "source_bytes_equal": true,
+      "sidecar_present": false,
+      "compression_proven": false,
+      "identity_fallback": false,
+      "representation_status": "identity-bytes-exact"
+    },
+    {
+      "label": "entry-gzip",
+      "request_url": "http://localhost:8080/assets/index-BoCfe88_.js",
+      "accept_encoding": "gzip",
+      "status": 200,
+      "headers": {
+        "accept-ranges": [
+          "bytes"
+        ],
+        "cache-control": [
+          "max-age=315360000, public, immutable"
+        ],
+        "content-length": [
+          "338"
+        ],
+        "content-type": [
+          "application/javascript"
+        ],
+        "etag": [
+          "3886qn6ka10ez"
+        ],
+        "vary": [
+          "origin",
+          "Accept-Encoding",
+          "Accept-Encoding"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "encoded_body": {
+        "path": ".gate/shell/source6-native-confirmation/b1fc8c39-1299-47ea-852f-f83cbf65be15/http/entry-gzip-encoded.bin",
+        "bytes": 338,
+        "sha256": "9ac495f5f0e76e4b0371dc2d6553f59c6716741fb55a6e5438337e4ca1c9ba05",
+        "full_mode": 33152
+      },
+      "complete": true,
+      "error": null,
+      "encoded_sha256": "9ac495f5f0e76e4b0371dc2d6553f59c6716741fb55a6e5438337e4ca1c9ba05",
+      "encoded_bytes": 338,
+      "raw_retained_before_validation": true,
+      "asset_owner": "entry",
+      "manifest_file": "assets/index-BoCfe88_.js",
+      "selected_encoding": "identity",
+      "decoded_sha256": "9ac495f5f0e76e4b0371dc2d6553f59c6716741fb55a6e5438337e4ca1c9ba05",
+      "decoded_bytes": 338,
+      "source_sha256": "9ac495f5f0e76e4b0371dc2d6553f59c6716741fb55a6e5438337e4ca1c9ba05",
+      "source_bytes": 338,
+      "source_bytes_equal": true,
+      "sidecar_present": false,
+      "compression_proven": false,
+      "identity_fallback": true,
+      "representation_status": "identity-fallback-compression-not-proven"
+    },
+    {
+      "label": "entry-br",
+      "request_url": "http://localhost:8080/assets/index-BoCfe88_.js",
+      "accept_encoding": "br",
+      "status": 200,
+      "headers": {
+        "accept-ranges": [
+          "bytes"
+        ],
+        "cache-control": [
+          "max-age=315360000, public, immutable"
+        ],
+        "content-length": [
+          "338"
+        ],
+        "content-type": [
+          "application/javascript"
+        ],
+        "etag": [
+          "3886qn6ka10ez"
+        ],
+        "vary": [
+          "origin",
+          "Accept-Encoding",
+          "Accept-Encoding"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "encoded_body": {
+        "path": ".gate/shell/source6-native-confirmation/b1fc8c39-1299-47ea-852f-f83cbf65be15/http/entry-br-encoded.bin",
+        "bytes": 338,
+        "sha256": "9ac495f5f0e76e4b0371dc2d6553f59c6716741fb55a6e5438337e4ca1c9ba05",
+        "full_mode": 33152
+      },
+      "complete": true,
+      "error": null,
+      "encoded_sha256": "9ac495f5f0e76e4b0371dc2d6553f59c6716741fb55a6e5438337e4ca1c9ba05",
+      "encoded_bytes": 338,
+      "raw_retained_before_validation": true,
+      "asset_owner": "entry",
+      "manifest_file": "assets/index-BoCfe88_.js",
+      "selected_encoding": "identity",
+      "decoded_sha256": "9ac495f5f0e76e4b0371dc2d6553f59c6716741fb55a6e5438337e4ca1c9ba05",
+      "decoded_bytes": 338,
+      "source_sha256": "9ac495f5f0e76e4b0371dc2d6553f59c6716741fb55a6e5438337e4ca1c9ba05",
+      "source_bytes": 338,
+      "source_bytes_equal": true,
+      "sidecar_present": false,
+      "compression_proven": false,
+      "identity_fallback": true,
+      "representation_status": "identity-fallback-compression-not-proven"
+    },
+    {
+      "label": "largest-static-js-identity",
+      "request_url": "http://localhost:8080/assets/startup-BP5Pvlg1.js",
+      "accept_encoding": "identity",
+      "status": 200,
+      "headers": {
+        "accept-ranges": [
+          "bytes"
+        ],
+        "cache-control": [
+          "max-age=315360000, public, immutable"
+        ],
+        "content-length": [
+          "352124"
+        ],
+        "content-type": [
+          "application/javascript"
+        ],
+        "etag": [
+          "2nco4ar958mtd"
+        ],
+        "vary": [
+          "origin",
+          "Accept-Encoding",
+          "Accept-Encoding"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "encoded_body": {
+        "path": ".gate/shell/source6-native-confirmation/b1fc8c39-1299-47ea-852f-f83cbf65be15/http/largest-static-js-identity-encoded.bin",
+        "bytes": 352124,
+        "sha256": "03eeff874ba05004479639d69e78e19ff1a5c42861797df44438b48e6ac95a74",
+        "full_mode": 33152
+      },
+      "complete": true,
+      "error": null,
+      "encoded_sha256": "03eeff874ba05004479639d69e78e19ff1a5c42861797df44438b48e6ac95a74",
+      "encoded_bytes": 352124,
+      "raw_retained_before_validation": true,
+      "asset_owner": "largest-static-js",
+      "manifest_file": "assets/startup-BP5Pvlg1.js",
+      "selected_encoding": "identity",
+      "decoded_sha256": "03eeff874ba05004479639d69e78e19ff1a5c42861797df44438b48e6ac95a74",
+      "decoded_bytes": 352124,
+      "source_sha256": "03eeff874ba05004479639d69e78e19ff1a5c42861797df44438b48e6ac95a74",
+      "source_bytes": 352124,
+      "source_bytes_equal": true,
+      "sidecar_present": false,
+      "compression_proven": false,
+      "identity_fallback": false,
+      "representation_status": "identity-bytes-exact"
+    },
+    {
+      "label": "largest-static-js-gzip",
+      "request_url": "http://localhost:8080/assets/startup-BP5Pvlg1.js",
+      "accept_encoding": "gzip",
+      "status": 200,
+      "headers": {
+        "accept-ranges": [
+          "bytes"
+        ],
+        "cache-control": [
+          "max-age=315360000, public, immutable"
+        ],
+        "content-length": [
+          "352124"
+        ],
+        "content-type": [
+          "application/javascript"
+        ],
+        "etag": [
+          "2nco4ar958mtd"
+        ],
+        "vary": [
+          "origin",
+          "Accept-Encoding",
+          "Accept-Encoding"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "encoded_body": {
+        "path": ".gate/shell/source6-native-confirmation/b1fc8c39-1299-47ea-852f-f83cbf65be15/http/largest-static-js-gzip-encoded.bin",
+        "bytes": 352124,
+        "sha256": "03eeff874ba05004479639d69e78e19ff1a5c42861797df44438b48e6ac95a74",
+        "full_mode": 33152
+      },
+      "complete": true,
+      "error": null,
+      "encoded_sha256": "03eeff874ba05004479639d69e78e19ff1a5c42861797df44438b48e6ac95a74",
+      "encoded_bytes": 352124,
+      "raw_retained_before_validation": true,
+      "asset_owner": "largest-static-js",
+      "manifest_file": "assets/startup-BP5Pvlg1.js",
+      "selected_encoding": "identity",
+      "decoded_sha256": "03eeff874ba05004479639d69e78e19ff1a5c42861797df44438b48e6ac95a74",
+      "decoded_bytes": 352124,
+      "source_sha256": "03eeff874ba05004479639d69e78e19ff1a5c42861797df44438b48e6ac95a74",
+      "source_bytes": 352124,
+      "source_bytes_equal": true,
+      "sidecar_present": false,
+      "compression_proven": false,
+      "identity_fallback": true,
+      "representation_status": "identity-fallback-compression-not-proven"
+    },
+    {
+      "label": "largest-static-js-br",
+      "request_url": "http://localhost:8080/assets/startup-BP5Pvlg1.js",
+      "accept_encoding": "br",
+      "status": 200,
+      "headers": {
+        "accept-ranges": [
+          "bytes"
+        ],
+        "cache-control": [
+          "max-age=315360000, public, immutable"
+        ],
+        "content-length": [
+          "352124"
+        ],
+        "content-type": [
+          "application/javascript"
+        ],
+        "etag": [
+          "2nco4ar958mtd"
+        ],
+        "vary": [
+          "origin",
+          "Accept-Encoding",
+          "Accept-Encoding"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "encoded_body": {
+        "path": ".gate/shell/source6-native-confirmation/b1fc8c39-1299-47ea-852f-f83cbf65be15/http/largest-static-js-br-encoded.bin",
+        "bytes": 352124,
+        "sha256": "03eeff874ba05004479639d69e78e19ff1a5c42861797df44438b48e6ac95a74",
+        "full_mode": 33152
+      },
+      "complete": true,
+      "error": null,
+      "encoded_sha256": "03eeff874ba05004479639d69e78e19ff1a5c42861797df44438b48e6ac95a74",
+      "encoded_bytes": 352124,
+      "raw_retained_before_validation": true,
+      "asset_owner": "largest-static-js",
+      "manifest_file": "assets/startup-BP5Pvlg1.js",
+      "selected_encoding": "identity",
+      "decoded_sha256": "03eeff874ba05004479639d69e78e19ff1a5c42861797df44438b48e6ac95a74",
+      "decoded_bytes": 352124,
+      "source_sha256": "03eeff874ba05004479639d69e78e19ff1a5c42861797df44438b48e6ac95a74",
+      "source_bytes": 352124,
+      "source_bytes_equal": true,
+      "sidecar_present": false,
+      "compression_proven": false,
+      "identity_fallback": true,
+      "representation_status": "identity-fallback-compression-not-proven"
+    },
+    {
+      "label": "identity-after",
+      "request_url": "http://localhost:8080/api/gui-build",
+      "accept_encoding": "identity",
+      "status": 200,
+      "headers": {
+        "cache-control": [
+          "no-store"
+        ],
+        "content-type": [
+          "application/json"
+        ],
+        "vary": [
+          "origin"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "content-length": [
+          "307"
+        ]
+      },
+      "encoded_body": {
+        "path": ".gate/shell/source6-native-confirmation/b1fc8c39-1299-47ea-852f-f83cbf65be15/http/identity-after-encoded.bin",
+        "bytes": 307,
+        "sha256": "10559a806ddc923981b853ec9cf1a029abb48c3f37db6eebe18cd5349cb70dc5",
+        "full_mode": 33152
+      },
+      "complete": true,
+      "error": null,
+      "encoded_sha256": "10559a806ddc923981b853ec9cf1a029abb48c3f37db6eebe18cd5349cb70dc5",
+      "encoded_bytes": 307,
+      "raw_retained_before_validation": true,
+      "identity_fields": {
+        "sha": "6aa75a9313e87f2e6d9fb9531202abba8512b152",
+        "tree_sha256": "fdd03a8e9d2ba469a93f6d13eb8a440332688238076870ecbaf2173c252daf69",
+        "manifest_sha256": "4722e3df22d6a0d66d000502d26d6d530c807160a341956cd527866d15e77fc9",
+        "versions_lock_sha256": "d15df22e48877d66f17590f6ac1f36b7d5fcfa75c3ecc055079880dc215a8834"
+      }
+    }
+  ],
+  "artifacts": [
+    {
+      "path": ".gate/shell/source6-native-confirmation/b1fc8c39-1299-47ea-852f-f83cbf65be15/http/identity-before-encoded.bin",
+      "bytes": 307,
+      "sha256": "10559a806ddc923981b853ec9cf1a029abb48c3f37db6eebe18cd5349cb70dc5",
+      "full_mode": 33152
+    },
+    {
+      "path": ".gate/shell/source6-native-confirmation/b1fc8c39-1299-47ea-852f-f83cbf65be15/http/entry-identity-encoded.bin",
+      "bytes": 338,
+      "sha256": "9ac495f5f0e76e4b0371dc2d6553f59c6716741fb55a6e5438337e4ca1c9ba05",
+      "full_mode": 33152
+    },
+    {
+      "path": ".gate/shell/source6-native-confirmation/b1fc8c39-1299-47ea-852f-f83cbf65be15/http/entry-gzip-encoded.bin",
+      "bytes": 338,
+      "sha256": "9ac495f5f0e76e4b0371dc2d6553f59c6716741fb55a6e5438337e4ca1c9ba05",
+      "full_mode": 33152
+    },
+    {
+      "path": ".gate/shell/source6-native-confirmation/b1fc8c39-1299-47ea-852f-f83cbf65be15/http/entry-br-encoded.bin",
+      "bytes": 338,
+      "sha256": "9ac495f5f0e76e4b0371dc2d6553f59c6716741fb55a6e5438337e4ca1c9ba05",
+      "full_mode": 33152
+    },
+    {
+      "path": ".gate/shell/source6-native-confirmation/b1fc8c39-1299-47ea-852f-f83cbf65be15/http/largest-static-js-identity-encoded.bin",
+      "bytes": 352124,
+      "sha256": "03eeff874ba05004479639d69e78e19ff1a5c42861797df44438b48e6ac95a74",
+      "full_mode": 33152
+    },
+    {
+      "path": ".gate/shell/source6-native-confirmation/b1fc8c39-1299-47ea-852f-f83cbf65be15/http/largest-static-js-gzip-encoded.bin",
+      "bytes": 352124,
+      "sha256": "03eeff874ba05004479639d69e78e19ff1a5c42861797df44438b48e6ac95a74",
+      "full_mode": 33152
+    },
+    {
+      "path": ".gate/shell/source6-native-confirmation/b1fc8c39-1299-47ea-852f-f83cbf65be15/http/largest-static-js-br-encoded.bin",
+      "bytes": 352124,
+      "sha256": "03eeff874ba05004479639d69e78e19ff1a5c42861797df44438b48e6ac95a74",
+      "full_mode": 33152
+    },
+    {
+      "path": ".gate/shell/source6-native-confirmation/b1fc8c39-1299-47ea-852f-f83cbf65be15/http/identity-after-encoded.bin",
+      "bytes": 307,
+      "sha256": "10559a806ddc923981b853ec9cf1a029abb48c3f37db6eebe18cd5349cb70dc5",
+      "full_mode": 33152
+    }
+  ],
+  "errors": [],
+  "automatic_decompression": false,
+  "all_headers_retained": false,
+  "nonce_or_CSP_collected": false,
+  "compressed_reference_manufactured": false,
+  "compression_claim_scope": "Only variants with selected actual gzip/br encoding and exact decoded source bytes; identity fallback does not prove compression",
+  "compression_available": false,
+  "compression_findings": [
+    {
+      "owner": "entry",
+      "manifest_file": "assets/index-BoCfe88_.js",
+      "variant": "gzip",
+      "selected_encoding": "identity",
+      "identity_fallback": true,
+      "sidecar_present": false,
+      "existing_sidecar_encoded_bytes_equal": null
+    },
+    {
+      "owner": "entry",
+      "manifest_file": "assets/index-BoCfe88_.js",
+      "variant": "br",
+      "selected_encoding": "identity",
+      "identity_fallback": true,
+      "sidecar_present": false,
+      "existing_sidecar_encoded_bytes_equal": null
+    },
+    {
+      "owner": "largest-static-js",
+      "manifest_file": "assets/startup-BP5Pvlg1.js",
+      "variant": "gzip",
+      "selected_encoding": "identity",
+      "identity_fallback": true,
+      "sidecar_present": false,
+      "existing_sidecar_encoded_bytes_equal": null
+    },
+    {
+      "owner": "largest-static-js",
+      "manifest_file": "assets/startup-BP5Pvlg1.js",
+      "variant": "br",
+      "selected_encoding": "identity",
+      "identity_fallback": true,
+      "sidecar_present": false,
+      "existing_sidecar_encoded_bytes_equal": null
+    }
+  ],
+  "diagnostic_completion_does_not_accept_compression": true,
+  "source_after_equal": true
+}
