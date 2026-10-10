@@ -137,3 +137,5 @@ and the word-grid reflow; its release, reserve and content decisions remain.
 - [0186 — Go-authoritative content validation](0186-go-authoritative-content-validation.md) — owner-authorized Go content validation and native JSON; Python/Rust references optional.
 
 Parallel lanes allocated0185/0186 independently. Full filenames disambiguate their preserved append-only records; no decision body was renumbered or overwritten.
+
+- [0188](0188-live-home-baseline-alias-and-diagnostics.md) — live exact Home selector equivalence, unchanged strict comparisons and explicit instrumented owner diagnostic; source accepted, execution pending.
