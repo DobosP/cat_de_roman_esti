@@ -16,7 +16,7 @@ type managedSPA struct {
 	files        fs.FS
 	index        []byte
 	static       http.Handler
-	nonceShell   *managedNonceShell
+	nonceShell   managedDocumentShell
 	indexHandler http.Handler
 }
 
@@ -175,11 +175,13 @@ func newManagedSPA(files fs.ReadDirFS, mode string) (*managedSPA, error) {
 		return nil, err
 	}
 	ui := &managedSPA{files: selected, index: index, static: kitstatic.Handler(files, kitstatic.Options{Prefix: root})}
-	if root == "dist" {
+	if root == "legacy" {
+		ui.nonceShell, err = newManagedLegacyShell(manifest)
+	} else {
 		ui.nonceShell, err = newManagedNonceShell(index, manifest)
-		if err != nil {
-			return nil, err
-		}
+	}
+	if err != nil {
+		return nil, err
 	}
 	if err := ui.installIndexHandler(); err != nil {
 		return nil, err

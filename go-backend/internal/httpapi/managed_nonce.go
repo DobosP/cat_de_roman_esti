@@ -15,6 +15,10 @@ import (
 	"golang.org/x/net/html"
 )
 
+type managedDocumentShell interface {
+	render(context.Context) ([]byte, error)
+}
+
 // Only current, trusted build bytes are admitted here. Tokenization records
 // insertion offsets; it never serializes HTML or rewrites existing attributes.
 // SDK Tags emits a replacement asset block. Cat instead retains its exact
@@ -418,9 +422,8 @@ func (s *managedNonceShell) render(ctx context.Context) ([]byte, error) {
 
 func (s *managedSPA) serveIndex(w http.ResponseWriter, r *http.Request) {
 	if s.nonceShell == nil {
-		// Frozen legacy rollback retains its exact raw index and prior policy.
-		w.Header().Set("Cache-Control", "no-cache")
-		websiteBytes(w, r, 200, "text/html; charset=utf-8", s.index)
+		w.Header().Set("Cache-Control", "no-store")
+		websiteBytes(w, r, 500, "text/html; charset=utf-8", nil)
 		return
 	}
 	body, err := s.nonceShell.render(r.Context())
@@ -434,21 +437,22 @@ func (s *managedSPA) serveIndex(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *managedSPA) installIndexHandler() error {
-	s.indexHandler = http.HandlerFunc(s.serveIndex)
-	if s.nonceShell != nil {
-		// This existing app flag selects actual stage B; no caller nonce, relaxed
-		// source list, inline exception or Trusted Types waiver is accepted.
-		flag := os.Getenv("CAT_CSP_ENFORCE")
-		if flag != "" && flag != "false" && flag != "true" {
-			return fmt.Errorf("CAT_CSP_ENFORCE must be true or false")
-		}
-		s.indexHandler = managedNonceNoStore(csp.Middleware(csp.Policy{ReportOnly: flag != "true"})(s.indexHandler))
+	if s.nonceShell == nil {
+		return fmt.Errorf("managed document requires nonce shell")
 	}
+	s.indexHandler = http.HandlerFunc(s.serveIndex)
+	// The delivered wrapper derives this existing flag from CSP_STAGE. Current
+	// and legacy use the same SDK policy; rollback stage is an owner decision.
+	flag := os.Getenv("CAT_CSP_ENFORCE")
+	if flag != "" && flag != "false" && flag != "true" {
+		return fmt.Errorf("CAT_CSP_ENFORCE must be true or false")
+	}
+	s.indexHandler = managedNonceNoStore(csp.Middleware(csp.Policy{ReportOnly: flag != "true"})(s.indexHandler))
 	return nil
 }
 
-// Keep the current document non-cacheable before SDK middleware can refuse
-// entropy/policy and before rendering can fail. Legacy/assets/APIs never use it.
+// Keep managed documents non-cacheable before SDK middleware can refuse
+// entropy/policy and before rendering can fail. Assets/APIs never use it.
 func managedNonceNoStore(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Cache-Control", "no-store")

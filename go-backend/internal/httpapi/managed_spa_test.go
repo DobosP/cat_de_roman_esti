@@ -12,6 +12,7 @@ import (
 	"testing/fstest"
 
 	"github.com/DobosP/cat_de_roman_esti/go-backend/embedfs"
+	"github.com/DobosP/roedu-ui/web-kit/assets"
 )
 
 func managedSPAFixture() fstest.MapFS {
@@ -24,6 +25,9 @@ func managedSPAFixture() fstest.MapFS {
 		files[root+"/.keep"] = &fstest.MapFile{}
 	}
 	addManagedFixtureFonts(files, "dist")
+	legacyIndex := append([]byte(nil), files["legacy/index.html"].Data...)
+	addManagedFixtureFonts(files, "legacy")
+	files["legacy/index.html"].Data = legacyIndex // Frozen HTML has no font preloads.
 	return files
 }
 
@@ -56,8 +60,13 @@ func TestManagedSPACompiledCurrentAndFrozenLegacy(t *testing.T) {
 				t.Fatal("compiled selected tree was not the SPA deep-link response")
 			}
 			if mode == "legacy" {
-				if !bytes.Equal(w.Body.Bytes(), index) {
-					t.Fatal("compiled frozen legacy response changed bytes")
+				manifest, err := assets.Parse(embedfs.Files, root+"/.vite/manifest.json", root, "/")
+				if err != nil {
+					t.Fatal(err)
+				}
+				assertManagedLegacyIndex(t, w, manifest)
+				if bytes.Equal(w.Body.Bytes(), index) {
+					t.Fatal("frozen raw index served instead of manifest-generated nonce shell")
 				}
 			} else {
 				assertManagedCurrentIndex(t, w, index)

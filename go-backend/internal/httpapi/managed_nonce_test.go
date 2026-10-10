@@ -259,11 +259,11 @@ func TestManagedNonceLegacyAndInvalidFlag(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+	manifest := legacyManifestForTest(t, files)
 	w := managedSPARequest(s, "GET", "/intrusul")
-	if w.Code != 200 || !bytes.Equal(w.Body.Bytes(), files["legacy/index.html"].Data) ||
-		w.Header().Get("Content-Security-Policy") != "" || w.Header().Get("Content-Security-Policy-Report-Only") != "" ||
-		w.Header().Get("Cache-Control") != "no-cache" {
-		t.Fatal("legacy bytes/policy changed")
+	assertManagedLegacyIndex(t, w, manifest)
+	if bytes.Equal(w.Body.Bytes(), files["legacy/index.html"].Data) {
+		t.Fatal("frozen legacy index was served instead of the generated manifest shell")
 	}
 	t.Setenv("CAT_CSP_ENFORCE", "TRUE")
 	if ui, err := newManagedSPA(files, "current"); err == nil || ui != nil {
@@ -272,6 +272,13 @@ func TestManagedNonceLegacyAndInvalidFlag(t *testing.T) {
 	s.managedUI, s.managedUIError = newManagedSPA(files, "current")
 	if w := managedSPARequest(s, "GET", "/"); w.Code != 503 {
 		t.Fatal("invalid admission returned raw HTML")
+	}
+	if ui, err := newManagedSPA(files, "legacy"); err == nil || ui != nil {
+		t.Fatal("invalid flag silently weakened legacy policy")
+	}
+	s.managedUI, s.managedUIError = newManagedSPA(files, "legacy")
+	if w := managedSPARequest(s, "GET", "/"); w.Code != 503 {
+		t.Fatal("invalid legacy admission returned raw HTML")
 	}
 }
 
