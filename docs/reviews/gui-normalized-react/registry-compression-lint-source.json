@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "state": "Three reviewed source afterimages applied; corrected runtime NOT RUN",
+  "base": "7207ae76c2f9753e5acf047dfe6cf64f38b68893",
+  "candidate_closure_sha256": "ac1632d84ab4fde1ac63d5b6f63a235de3977f1a504d4b2e796e2e4108b46089",
+  "diff_sha256": "79e80f7e8cbd900eb541136b9a4f72df31afd5ec8a207a9065ef278b42c9cd3b",
+  "files": [
+    {
+      "path": "versions.lock.json",
+      "before_sha256": "d15df22e48877d66f17590f6ac1f36b7d5fcfa75c3ecc055079880dc215a8834",
+      "after_sha256": "afd977316d1749046ba723fb4fdc978bfd9257070c16afa802e4606b9ab861fa",
+      "before_bytes": 47093,
+      "after_bytes": 47558,
+      "before_full_mode": 33204,
+      "after_full_mode": 33204,
+      "full_mode_octal": "0o100664",
+      "git_blob_mode": "100644",
+      "working_and_candidate_permission_bits": "0o664",
+      "worktree_sha256": "d15df22e48877d66f17590f6ac1f36b7d5fcfa75c3ecc055079880dc215a8834",
+      "worktree_bytes_equal_before_and_HEAD": true
+    },
+    {
+      "path": "frontend/scripts/gui-precompressed-assets.mjs",
+      "before_sha256": "ee73b305410287d4f08ecd0170bfea85ee70e3c8401a49b9e69aee4777385ad6",
+      "after_sha256": "7fccd0517b96f46e0e0242bfaa196a37898146651a788183f446b8b39cec11ec",
+      "before_bytes": 9113,
+      "after_bytes": 9499,
+      "before_full_mode": 33204,
+      "after_full_mode": 33204,
+      "full_mode_octal": "0o100664",
+      "git_blob_mode": "100644",
+      "working_and_candidate_permission_bits": "0o664",
+      "worktree_sha256": "ee73b305410287d4f08ecd0170bfea85ee70e3c8401a49b9e69aee4777385ad6",
+      "worktree_bytes_equal_before_and_HEAD": true
+    },
+    {
+      "path": "frontend/tests/gui-precompressed-assets.test.mjs",
+      "before_sha256": "db9eb491230ebb86493714b9826fd0ecd0333a6e2d886a746ce7a39defe083bf",
+      "after_sha256": "4cdc2e9be60d94512621ced81d8bc1a9980c59b01472d3414e3f8212e5618658",
+      "before_bytes": 17334,
+      "after_bytes": 17428,
+      "before_full_mode": 33204,
+      "after_full_mode": 33204,
+      "full_mode_octal": "0o100664",
+      "git_blob_mode": "100644",
+      "working_and_candidate_permission_bits": "0o664",
+      "worktree_sha256": "db9eb491230ebb86493714b9826fd0ecd0333a6e2d886a746ce7a39defe083bf",
+      "worktree_bytes_equal_before_and_HEAD": true
+    }
+  ],
+  "semantic_scope": {
+    "ascii_controls": "Valid charCodeAt indices produce UTF-16 code units. Predicate rejects only0..31 and127 under original typeof/nonempty/absolute/punctuation short circuit. Punctuation guard remains unchanged except separated controls.",
+    "sorts": "Only four actual reported default sorts changed: three helper, one test RHS. Admitted primitive path strings compare using default UTF-16 lexical < >; no localeCompare introduced; existing localeCompare lines preserved. Unreported test LHS default sort stays exact.",
+    "sparse_fixture": "Reflect.deleteProperty(x,0) deletes original index0 and added assert requires success, retaining array length and hole. No splice/fill/renumber.",
+    "controls": "All remaining bytes preserved by independently checked forward, inverse and unchanged spans, including tests, fixtures, canonical paths, alias, ancestry, symlink, FD, size, membership, codec/compression and metadata controls.",
+    "registry": "Exactly one Brotli v1.2.6 ordinary app-scoped gomod row with requested apps and2026-10-10 registration date, same8keys as OIDC. No invented release metadata, approval or exception; all old71rows and root metadata preserved.",
+    "remote_source": "Canonical .info URL recorded following existing Go proxy registry pattern. Web lookup unavailable; no remote metadata or release Time claimed."
+  },
+  "independent_source_review": "program_pack verified exact three before/after/currentGit full modes, all reference hashes, independent whole inverses, old71 rows/metadata, ASCII0..31+127, primitive-string UTF16 ordering and real sparse hole/success assertion. Parent independently repeated exact forward/inverse and current byte/mode checks before application.",
+  "Go_module_reference_hashes_unchanged": {
+    "go-backend/go.mod": "4517bb8f63a6eda31500a06c16cd6aef2a4784f4b506b3c4d56cc83f0b99c59f",
+    "go-backend/go.sum": "aa0fee1fbf66167f8f1f054e2c31f7b4c110d5901307bc6294b7ae1858dbb3db"
+  },
+  "source6_scope": "No changes to any138 RuntimeHashes, Go.mod/sum, nine catalog/rubric bindings or original0437 corpus; current native reconstruction proof stays historical at5efa, no audit/corpus restart justified.",
+  "qualification": "Source correction only; corrected full/E3/M0/M1/KIT_BUMP/device not earned."
+}

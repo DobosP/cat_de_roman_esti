@@ -9,8 +9,15 @@ const code = (name) => /\.(?:[cm]?js|css)(?![\s\S])/.test(name);
 const sidecar = (name) => /\.(?:gz|br)(?![\s\S])/i.test(name);
 const brotliOptions = { params: { [constants.BROTLI_PARAM_QUALITY]: 11, [constants.BROTLI_PARAM_MODE]: constants.BROTLI_MODE_TEXT } };
 const encode = (encoding, raw) => encoding === "gzip" ? gzipSync(raw, { level: 9 }) : brotliCompressSync(raw, brotliOptions);
+function hasAsciiControl(name) {
+  for (let index = 0; index < name.length; index++) {
+    const unit = name.charCodeAt(index);
+    if (unit <= 0x1f || unit === 0x7f) return true;
+  }
+  return false;
+}
 function relative(name) {
-  assert.ok(typeof name === "string" && name && !path.isAbsolute(name) && !/[\\:%?#\x00-\x1f\x7f]/.test(name)
+  assert.ok(typeof name === "string" && name && !path.isAbsolute(name) && !/[\\:%?#]/.test(name) && !hasAsciiControl(name)
     && name.split("/").every((part) => part && part !== "." && part !== ".." && !/[. ]$/.test(part)), "Confined canonical asset path required");
   return name;
 }
@@ -44,7 +51,7 @@ export function manifestCodeFiles(manifest) {
     }
   }
   assert.ok(result.size, "Manifest-owned JS/CSS required");
-  return [...result].sort();
+  return [...result].sort((left, right) => left < right ? -1 : left > right ? 1 : 0);
 }
 export function validatePrecompressedAssets(manifest, records) {
   const owned = manifestCodeFiles(manifest), expected = new Set(owned.flatMap((file) => [file + ".gz", file + ".br"]));
@@ -118,7 +125,7 @@ export function emitPrecompressedAssets(root) {
   validatePrecompressedAssets(manifest, [...before, ...generated]);
   for (const item of generated) writeSidecar(root, item.file, item.bytes);
   const after = outputFiles(root), actual = new Map(after.map((item) => [item.file, item]));
-  assert.deepEqual([...actual.keys()].sort(), [...before, ...generated].map((item) => item.file).sort(), "Final output membership changed");
+  assert.deepEqual([...actual.keys()].sort((left, right) => left < right ? -1 : left > right ? 1 : 0), [...before, ...generated].map((item) => item.file).sort((left, right) => left < right ? -1 : left > right ? 1 : 0), "Final output membership changed");
   for (const item of before) {
     const kept = actual.get(item.file); assert.ok(kept.bytes.equals(item.bytes), "Raw output bytes changed during compression");
     assert.ok(["dev", "ino", "mode", "size", "mtimeNs", "ctimeNs"].every((key) => kept.identity[key] === item.identity[key]), "Raw output metadata changed during compression");

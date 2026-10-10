@@ -80,7 +80,7 @@ void test("final raw manifest-owned JS/CSS receives exact deterministic gzip9 an
   const result = compressed.emitPrecompressedAssets(a.root); compressed.emitPrecompressedAssets(b.root);
   const owned = compressed.manifestCodeFiles(a.manifest);
   assert.deepEqual(result.map((item) => item.file), owned);
-  assert.deepEqual(rows(a.root).map((item) => item.file).sort(), [...before.map((item) => item.file), ...owned.flatMap((file) => [file + ".gz", file + ".br"])].sort());
+  assert.deepEqual(rows(a.root).map((item) => item.file).sort(), [...before.map((item) => item.file), ...owned.flatMap((file) => [file + ".gz", file + ".br"])].sort((left, right) => left < right ? -1 : left > right ? 1 : 0));
   for (const { file, bytes } of before) {
     assert.deepEqual(fs.readFileSync(path.join(a.root, file)), bytes);
     const info = fs.statSync(path.join(a.root, file), { bigint: true });
@@ -112,7 +112,7 @@ for (const [name, mutate] of [
   ["path traversal", (r) => [...r, { file: "assets/../extra.js.gz", bytes: Buffer.from("escape") }]],
   ["absolute path", (r) => [...r, { file: "/assets/extra.js.gz", bytes: Buffer.from("absolute") }]],
   ["encoded path alias", (r) => [...r, { file: "assets/%65ntry.js.gz", bytes: Buffer.from("encoded") }]],
-  ["sparse rows", (r) => { const x = [...r]; delete x[0]; return x; }],
+  ["sparse rows", (r) => { const x = [...r]; assert.equal(Reflect.deleteProperty(x, 0), true); return x; }],
   ["nonbyte row", (r) => r.map((x) => x.file === "assets/entry.js.gz" ? { ...x, bytes: "not actual bytes" } : x)],
 ]) void test("complete pair validation refuses " + name, () => {
   const f = encodedFixture(); assert.throws(() => compressed.validatePrecompressedAssets(f.manifest, mutate(rows(f.root))));

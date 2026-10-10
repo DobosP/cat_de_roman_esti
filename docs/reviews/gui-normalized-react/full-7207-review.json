@@ -1,0 +1,200 @@
+{
+  "schema": 1,
+  "state": "Actual full FAIL201; frontend453/types passed, two finite source causes retained",
+  "tested_source": "7207ae76c2f9753e5acf047dfe6cf64f38b68893",
+  "tree_sha256": "44cc764045cda2ba601d0f443a8fb799ffd216777b027cccb786f0345ba14463",
+  "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+  "runner_invocation": "5e954102-5b71-48bd-83ca-4b5672697adc",
+  "wrapper_invocation": "b5af66ec-183d-43c2-b282-f3fc112bc7d6",
+  "wrapper_exit": 201,
+  "result_sha256": "e359676a67ac3ed08a6aef9fbaf0af7f2c40a06c4b671a56d144680111f84f8a",
+  "frontend_units": {
+    "cancelled": 0,
+    "fail": 0,
+    "pass": 453,
+    "skipped": 0,
+    "suites": 0,
+    "tests": 453,
+    "todo": 0
+  },
+  "frontend_types": "pass",
+  "frontend_lint": {
+    "kit_ast_exit": 1,
+    "kit_error": "go-backend/go.mod: unregistered direct Go requirement github.com/andybalholm/brotli",
+    "oxlint_diagnostics": [
+      {
+        "location": {
+          "column": 84,
+          "line": 13,
+          "path": "scripts/gui-precompressed-assets.mjs"
+        },
+        "rule_and_message": "x eslint(no-control-regex): Unexpected control characters"
+      },
+      {
+        "location": {
+          "column": 10,
+          "line": 47,
+          "path": "scripts/gui-precompressed-assets.mjs"
+        },
+        "rule_and_message": "x typescript(require-array-sort-compare): Require 'compare' argument."
+      },
+      {
+        "location": {
+          "column": 20,
+          "line": 121,
+          "path": "scripts/gui-precompressed-assets.mjs"
+        },
+        "rule_and_message": "x typescript(require-array-sort-compare): Require 'compare' argument."
+      },
+      {
+        "location": {
+          "column": 47,
+          "line": 121,
+          "path": "scripts/gui-precompressed-assets.mjs"
+        },
+        "rule_and_message": "x typescript(require-array-sort-compare): Require 'compare' argument."
+      },
+      {
+        "location": {
+          "column": 66,
+          "line": 83,
+          "path": "tests/gui-precompressed-assets.test.mjs"
+        },
+        "rule_and_message": "x typescript(require-array-sort-compare): Require 'compare' argument."
+      },
+      {
+        "location": {
+          "column": 46,
+          "line": 115,
+          "path": "tests/gui-precompressed-assets.test.mjs"
+        },
+        "rule_and_message": "x typescript(no-array-delete): Using the `delete` operator with an array expression is unsafe."
+      }
+    ],
+    "oxlint_errors": 6,
+    "oxlint_exit": 1,
+    "oxlint_stream_sha256": "93c226607c8f14a7d483fc13752dfe3d744f49caf77eb536c6f5eb67f706f46a",
+    "oxlint_warnings": 41,
+    "source_files": 165,
+    "status": "fail"
+  },
+  "validation_failures": {
+    "lint-scope": {
+      "counts": {
+        "files": 1245,
+        "go_modules": 1,
+        "go_receivers": 1,
+        "manifests": 3,
+        "tools": 71
+      },
+      "errors": [
+        {
+          "paths": [],
+          "rule": "go-modules",
+          "scopable": false,
+          "tool_or_import": "go-backend/go.mod: unregistered direct Go requirement github.com/andybalholm/brotli"
+        }
+      ],
+      "status": "fail"
+    },
+    "toolchain-versions": {
+      "counts": {
+        "files": 1245,
+        "go_modules": 1,
+        "go_receivers": 1,
+        "manifests": 3,
+        "tools": 71
+      },
+      "errors": [
+        {
+          "paths": [],
+          "rule": "go-modules",
+          "scopable": false,
+          "tool_or_import": "go-backend/go.mod: unregistered direct Go requirement github.com/andybalholm/brotli"
+        }
+      ],
+      "status": "fail"
+    },
+    "versions-check": {
+      "counts": {
+        "files": 1245,
+        "go_modules": 1,
+        "go_receivers": 1,
+        "manifests": 3,
+        "tools": 71
+      },
+      "errors": [
+        {
+          "paths": [],
+          "rule": "go-modules",
+          "scopable": false,
+          "tool_or_import": "go-backend/go.mod: unregistered direct Go requirement github.com/andybalholm/brotli"
+        }
+      ],
+      "status": "fail"
+    }
+  },
+  "route_budgets": {
+    "failed_JS_rows": [
+      "active:route-js:/",
+      "active:route-js:/alchimie",
+      "active:route-js:/alchimie?mode=challenges",
+      "active:route-js:/alchimie?mode=explore",
+      "active:route-js:/cald-rece",
+      "active:route-js:/clasament",
+      "active:route-js:/conexiuni",
+      "active:route-js:/intrusul",
+      "active:route-js:/lant",
+      "active:route-js:/perechi",
+      "frozen-legacy:route-js:/",
+      "frozen-legacy:route-js:/alchimie",
+      "frozen-legacy:route-js:/alchimie?mode=challenges",
+      "frozen-legacy:route-js:/alchimie?mode=explore",
+      "frozen-legacy:route-js:/cald-rece",
+      "frozen-legacy:route-js:/clasament",
+      "frozen-legacy:route-js:/conexiuni",
+      "frozen-legacy:route-js:/intrusul",
+      "frozen-legacy:route-js:/lant",
+      "frozen-legacy:route-js:/perechi"
+    ],
+    "failed_count": 20,
+    "measurement_context_valid": true,
+    "no_waiver": true,
+    "status": "fail"
+  },
+  "execution_frontier": {
+    "900_matrix_not_run": true,
+    "CSP_measurement_not_run": true,
+    "CSP_zero_is_unmeasured_default": true,
+    "PG_not_run": true,
+    "actual_command_actions": 16,
+    "app_witness_baselines_not_run": true,
+    "backend_race_not_run": true,
+    "backend_vet_content_not_run_in_this_full": true,
+    "frontend_failed_guard_reached": true,
+    "short_Go_doccheck_identity_commands_did_run": true
+  },
+  "mini_browser_capability": "pass",
+  "app_image_registered": {
+    "image_id": "sha256:03e6e102f98aa998fa7bfeb1480cc789cf4433862b2a25bfda179b9a2d8100e1",
+    "source": "Actual registered result virtual artifact; no extra Docker invocation",
+    "tag": "roedu-app:gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc"
+  },
+  "capture_sha256": "d3ead49c3a15a9c56310a1781c23affbd5dc7eb1024bfbf5a486e404ce0b1909",
+  "capture_seal_sha256": "8d923e88735342962b7b57d813009a34b4c350047cca7cd4ffd646fd356279e4",
+  "capture": {
+    "raw_file_rows": 223,
+    "registered_artifacts": 60,
+    "physical_registered_artifacts": 59,
+    "virtual_image_artifacts": 1,
+    "stored_unique_bodies": 69,
+    "stored_body_bytes": 2215803,
+    "source_git_references": 314,
+    "unchanged_asset_references": 90,
+    "literal_links": 0
+  },
+  "parent_independent_review_sha256": "4ef7d418a0c7538fce14ed4ebd71baab90aefd1f540e328d84cdb5826738e7b2",
+  "review_precision": "Initial review incorrectly said Oxlint exit0 and frontend lint solely the Go registry. Actual receipts/stream show exit1 with six errors/41warnings. Corrected before sealing; raw evidence unchanged.",
+  "retention": "Complete current full-target regular evidence retained once by content; source/mirror rawSHA/fullmodes per-file. Deterministicgzip for large duplicateAST/log bodies has exact rawSHA/roundtrip proof. Unchanged90frontend assets reference retained591c only after bytes/modes verify; no workspace/node_modules/cache/ELF copies.",
+  "qualification": "No backend/explicitPG/900/CSP/witness/baseline pass from this early full. Route budgets remain red; no E3/M0/M1/KIT_BUMP/device/production acceptance."
+}
