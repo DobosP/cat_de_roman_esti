@@ -2,49 +2,96 @@ package contentbuild
 
 import (
 	"bytes"
+	"compress/gzip"
+	"io"
 	"os"
 	"path/filepath"
 	"testing"
 )
 
-// Current Source6 coverage is separate from the immutable Source4/Source5 tests.
-// This runs the real builder using production reviewed pins and installed inputs.
-func TestRebuildSource6TwoAliasReviewedBundleAndPin(t *testing.T) {
+// The live bundle test keeps only generator-backed equalities (ADR-0189): the
+// real builder over the installed sources reproduces the installed bundle and
+// pin, the bundle's source map equals the source files and the reviewed pins,
+// and the installed authority pins equal the installed rail artifacts. No
+// literal here duplicates generated state, so a reviewed content install that
+// updates reviewedPins and the authorities keeps it green.
+func TestRebuildInstalledBundleMatchesReviewedPins(t *testing.T) {
 	root := repoRoot(t)
 	built, err := Build(root)
 	if err != nil {
 		t.Fatal(err)
 	}
 	installed, err := os.ReadFile(filepath.Join(root, "go-backend/internal/content/bundled.json"))
-	if err != nil || !bytes.Equal(built, installed) || len(built) != 7272424 || SHA256(built) != "e0cfe93de076f14a782dc6377b2655d4ef10f86ada1560ae1202bb06dbfdf877" {
-		t.Fatal("reviewed Source6 source rebuild or complete installed bundle differs", err)
+	if err != nil || !bytes.Equal(built, installed) {
+		t.Fatal("source rebuild differs from the installed bundle", err)
 	}
 	pin, err := os.ReadFile(filepath.Join(root, "go-backend/internal/content/digest.go"))
-	if err != nil || SHA256(pin) != "c0bededc869ef4c719d55ab22b7c3fbf6fa973eb972b912860d8dddf92c34b4d" || !bytes.Equal(pin, PinBytes(built)) {
-		t.Fatal("reviewed Source6 digest declaration differs", err)
-	}
-	wantSources := map[string]string{
-		"alchimie_discovery_world_v92.json":   "8f013a8f6b54a97a768a34c42e669addc4f5ab9823302befbe15ad811cae77ad",
-		"alchimie_recipe_extensions_v92.json": "d94647e78f8c2bd375b961f0aab52f3f7207024e60bed745b78c4a3d052d0bfc",
-		"board_rankings_v37.json":             "036c8a00de347939d132ba25512da7cba53b12e9d11a9f86cecc07cc98293c31",
-		"derived_catalog_v38.json":            "fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a",
-		"games_pack.json":                     "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
-		"kg_sample.json":                      "63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf",
-		"quick_games_v92.json":                "0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345",
-		"release_reserve_v1.json":             "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+	if err != nil || !bytes.Equal(pin, PinBytes(built)) {
+		t.Fatal("digest declaration differs from the installed bundle pin", err)
 	}
 	m, err := decodeObject(built)
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(object(m["sources"])) != 8 || len(wantSources) != len(SourceNames) {
-		t.Fatal("Source6 eight-source authority differs")
+	sources := object(m["sources"])
+	if len(sources) != 8 || len(sources) != len(SourceNames) {
+		t.Fatal("eight-source authority differs")
 	}
 	for _, name := range SourceNames {
 		raw, err := os.ReadFile(sourcePath(root, name))
-		if err != nil || TextSHA256(raw) != wantSources[name] || object(m["sources"])[name] != wantSources[name] {
-			t.Fatalf("Source6 complete source identity differs: %s (%v)", name, err)
+		if err != nil || TextSHA256(raw) != sources[name] {
+			t.Fatalf("bundle source identity differs from the source file: %s (%v)", name, err)
 		}
+	}
+	for name, digest := range reviewedPins {
+		if sources[name] != digest {
+			t.Fatalf("bundle source identity differs from the reviewed pin: %s", name)
+		}
+	}
+	authorities, err := os.ReadFile(filepath.Join(root, "go-backend/internal/contentrails/sources/installed-authorities.json"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	manifest, err := decodeObject(authorities)
+	if err != nil {
+		t.Fatal(err)
+	}
+	artifacts := map[string]string{"quick": "quick_games_v92.json", "world": "alchimie_discovery_world_v92.json", "extensions": "alchimie_recipe_extensions_v92.json"}
+	rails := object(manifest["rails"])
+	if len(rails) == 0 {
+		t.Fatal("installed authorities register no rail")
+	}
+	for rail, entry := range rails {
+		name := artifacts[rail]
+		if name == "" {
+			t.Fatalf("installed authority registers an unknown rail: %s", rail)
+		}
+		raw, err := os.ReadFile(sourcePath(root, name))
+		if err != nil || SHA256(raw) != object(entry)["artifact_sha256"] {
+			t.Fatalf("installed artifact differs from its authority pin: %s (%v)", rail, err)
+		}
+	}
+}
+
+// The V1.5 -> V1.6 two-alias delta is history: it is asserted over the archived
+// Source6 bundle against the archived Source5 context, never over live bytes.
+func TestHistoricalSource6TwoAliasDeltaOverArchivedSource5(t *testing.T) {
+	compressed := readHistoricalContextFile(t, source6BundleArchive, 4<<20, source6BundleArchiveSHA256)
+	z, err := gzip.NewReader(bytes.NewReader(compressed))
+	if err != nil {
+		t.Fatal(err)
+	}
+	raw, err := io.ReadAll(io.LimitReader(z, (16<<20)+1))
+	closeErr := z.Close()
+	if err != nil || closeErr != nil || len(raw) > 16<<20 {
+		t.Fatal("historical Source6 bundle decompression or byte bound differs", err, closeErr)
+	}
+	if len(raw) != 7272424 || SHA256(raw) != "e0cfe93de076f14a782dc6377b2655d4ef10f86ada1560ae1202bb06dbfdf877" {
+		t.Fatal("historical Source6 bundle identity differs")
+	}
+	m, err := decodeObject(raw)
+	if err != nil {
+		t.Fatal(err)
 	}
 	historicalRoot := source5HistoricalRoot(t)
 	previousRaw, err := os.ReadFile(filepath.Join(historicalRoot, "go-backend/internal/content/bundled.json"))

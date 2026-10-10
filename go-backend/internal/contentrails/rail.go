@@ -10,6 +10,7 @@ import (
 	"path/filepath"
 	"sort"
 	"strings"
+	"time"
 )
 
 var Rails = []string{"quick", "world", "extensions", "reserve"}
@@ -251,6 +252,43 @@ func RuntimeHashes(root string) ([]any, error) {
 	}
 	return out, nil
 }
+
+// provenanceShape accepts the recorded runtime_sources only as a non-empty list
+// of {path, sha256} rows. The digests are provenance, not an acceptance term
+// (ADR-0189): a Go change that leaves the audited behaviour identical stays green.
+func provenanceShape(v any) bool {
+	list := rows(v)
+	if len(list) == 0 {
+		return false
+	}
+	for _, row := range list {
+		r := object(row)
+		if len(r) != 2 || !allowedKeys(r, "path", "sha256") || text(r["path"]) == "" || !authorityDigest(r["sha256"]) {
+			return false
+		}
+	}
+	return true
+}
+
+// behaviourView is the audit document minus runtime provenance and minus the
+// three installed-artifact digests inside source_bindings. Those artifacts are
+// already bound byte-exactly by the explicit pin (artifact_sha256 == installed
+// fixture == catalog_sha256) and no audit reads them, so excluding them lets a
+// later rail install without invalidating this one. A missing or non-object
+// source_bindings is left as is so that `same` fails against the fresh view.
+func behaviourView(a map[string]any) map[string]any {
+	view := object(clone(a))
+	if view == nil {
+		return nil
+	}
+	delete(view, "runtime_sources")
+	if bind := object(view["source_bindings"]); bind != nil {
+		for _, rail := range []string{"quick", "world", "extensions"} {
+			delete(bind, artifacts[rail])
+		}
+	}
+	return view
+}
 func Audit(ctx context.Context, root, rail string, raw map[string]any) (map[string]any, error) {
 	beforeRuntime, err := RuntimeHashes(root)
 	if err != nil {
@@ -316,6 +354,12 @@ func FinalKind(rail string) string {
 	}
 	return ""
 }
+
+// ConfirmFinal accepts an installed rail when its reviewed documents verify and
+// a fresh native audit, re-run here under the current binary, equals the signed
+// audit modulo runtime provenance (ADR-0189): the proposal bytes, explicit pin,
+// catalog/candidate digests, both finals and reviewer independence stay exact;
+// runtime_sources must be well-formed provenance but is not compared.
 func ConfirmFinal(root, rail string, catalog map[string]any, proposalPath, auditPath, factualPath, qualityPath, expectedPin string) error {
 	if rail == "reserve" {
 		return fmt.Errorf("finite reserve writes use reviewed archival rebuild only")
@@ -340,20 +384,18 @@ func ConfirmFinal(root, rail string, catalog map[string]any, proposalPath, audit
 	if err != nil {
 		return err
 	}
-	hashes, err := RuntimeHashes(root)
-	if err != nil {
-		return err
-	}
-	bindingsNow, err := bindings(root)
-	if err != nil {
-		return err
-	}
 	kind := map[string]string{"quick": "quick-content-live-audit-v1", "world": "alchimie-discovery-world-audit-v1", "extensions": "alchimie-recipe-extension-native-audit-v1"}[rail]
 	accepted := audit["verdict"] == "accept"
 	if rail == "quick" {
 		accepted = audit["passed"] == true && (audit["verdict"] == nil || audit["verdict"] == "accept")
 	}
-	if audit["kind"] != kind || !accepted || audit["native_audit_version"] == nil || integer(audit["native_audit_version"]) != 1 || audit["catalog_sha256"] != sha || audit["candidate_sha256"] != catalog["candidate_sha256"] || !same(audit["runtime_sources"], hashes) || !same(audit["source_bindings"], bindingsNow) {
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Minute)
+	defer cancel()
+	fresh, err := Audit(ctx, root, rail, catalog)
+	if err != nil {
+		return fmt.Errorf("final live audit incomplete/stale/unaccepted: %w", err)
+	}
+	if audit["kind"] != kind || !accepted || audit["native_audit_version"] == nil || integer(audit["native_audit_version"]) != 1 || audit["catalog_sha256"] != sha || audit["candidate_sha256"] != catalog["candidate_sha256"] || !provenanceShape(audit["runtime_sources"]) || !same(behaviourView(audit), behaviourView(fresh)) {
 		return fmt.Errorf("final live audit incomplete/stale/unaccepted")
 	}
 	field := "reviews"
@@ -613,6 +655,9 @@ func inputReadPaths(root string, s *Source, inputs ...string) ([]string, error) 
 
 // InstallProposal snapshots the complete input graph BEFORE building, then the
 // shared operator lock checks it before writes and after the post-write gate.
+// That readset includes every runtimePaths file, so the runtime is frozen for
+// the duration of the install even though its hashes are no longer an
+// acceptance term (ADR-0189).
 func InstallProposal(root string, s *Source, rail, candidate, factual, quality, proposal, audit, finalFactual, finalQuality, expectedPin, sourcePath string) error {
 	root, err := filepath.Abs(root)
 	if err != nil {
@@ -656,12 +701,8 @@ func InstallProposal(root string, s *Source, rail, candidate, factual, quality, 
 		if err != nil {
 			return err
 		}
-		manifest, err := RuntimeHashes(root)
-		if err != nil {
-			return err
-		}
-		if !same(signed["runtime_sources"], manifest) {
-			return fmt.Errorf("runtime inventory changed before/during install")
+		if !provenanceShape(signed["runtime_sources"]) {
+			return fmt.Errorf("signed audit lacks runtime provenance")
 		}
 		if err := validateInstalled(root, rail, value, expectedPin); err != nil {
 			return err
