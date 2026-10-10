@@ -1,0 +1,398 @@
+{
+  "schema": 1,
+  "reviewed_utc": "2026-10-10T00:04:30.167612+00:00",
+  "status": "PARENT AND INDEPENDENT ACTUAL EXECUTION REVIEW CLEAR AS FAILURE EVIDENCE",
+  "source": "6ebc3a9b72dbeacade741d8758f6cceef8cda090",
+  "tree": "b4c856c10431f83f435e66941567ecd0bf6c91169c86dc24b10f4b4b5fc0bc74",
+  "toolchain": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+  "target": "full",
+  "actual_wrapper_exit": 201,
+  "actual_result_status": "fail",
+  "result_sha256": "e22858ab559718134b44c49675bfd1821d8c985701bac39a2ead7d8b4cfab96f",
+  "capture": {
+    "namespace": "cat-6ebc3a9-full-audit-baseline-failure-whole-capture-20261010",
+    "manifest_sha256": "11911380c9645e352941de3a201bf29fec2ffb13ded4294a5ffc040d642fa71a",
+    "all_regular_bytes_size_full_modes_verified": 35594,
+    "all_literal_unfollowed_links_verified": 57,
+    "directories_full_modes_verified": 12090,
+    "original_live_inode_survival_claimed": false
+  },
+  "artifacts": {
+    "registered": 96,
+    "physical_both": 93,
+    "physical_mirror_only": 2,
+    "virtual_image": 1,
+    "mirror_only_paths": [
+      "go-backend/embedfs/build/dist/.gui-build.json",
+      "go-backend/embedfs/build/dist/versions.lock.json"
+    ],
+    "expected_modes_dist_keep": {
+      "source": 33204,
+      "mirror": 33152
+    },
+    "virtual_image_docker_readback": "sha256:762209d4211c765094a9a85d5ddc55f87741322830e6e58e701e79847ece5332"
+  },
+  "checks": [
+    {
+      "name": "bootstrap-evidence",
+      "status": "pass",
+      "duration_ms": 3
+    },
+    {
+      "name": "ui-adoption",
+      "status": "pass",
+      "reason": "ui-staged-pending",
+      "duration_ms": 140
+    },
+    {
+      "name": "cat-setup-npm-ci",
+      "status": "pass",
+      "duration_ms": 4974
+    },
+    {
+      "name": "versions-check",
+      "status": "pass",
+      "reason": "legacy-pending;ui-staged-pending",
+      "duration_ms": 1160
+    },
+    {
+      "name": "toolchain-versions",
+      "status": "pass",
+      "reason": "legacy-pending;ui-staged-pending",
+      "duration_ms": 1387
+    },
+    {
+      "name": "lint-scope",
+      "status": "pass",
+      "reason": "legacy-pending",
+      "duration_ms": 937
+    },
+    {
+      "name": "kit:check",
+      "status": "pass",
+      "reason": "ui-staged-pending",
+      "duration_ms": 375
+    },
+    {
+      "name": "cat-browser-capability",
+      "status": "pass",
+      "duration_ms": 2366
+    },
+    {
+      "name": "cat-doccheck-source-contracts",
+      "status": "pass",
+      "duration_ms": 2177
+    },
+    {
+      "name": "cat-unit-fresh-build-output",
+      "status": "pass",
+      "duration_ms": 174
+    },
+    {
+      "name": "cat-unit-frontend-build",
+      "status": "pass",
+      "duration_ms": 4295
+    },
+    {
+      "name": "cat-unit-emitted-inventory",
+      "status": "pass",
+      "duration_ms": 152
+    },
+    {
+      "name": "cat-unit-assets",
+      "status": "pass",
+      "duration_ms": 180
+    },
+    {
+      "name": "cat-unit-gui-identity",
+      "status": "pass",
+      "duration_ms": 324
+    },
+    {
+      "name": "cat-route-budgets",
+      "status": "fail",
+      "reason": "node failed (1)",
+      "duration_ms": 1035
+    },
+    {
+      "name": "cat-frontend-unit",
+      "status": "pass",
+      "duration_ms": 24321
+    },
+    {
+      "name": "cat-frontend-lint",
+      "status": "pass",
+      "duration_ms": 7027
+    },
+    {
+      "name": "cat-frontend-types",
+      "status": "pass",
+      "duration_ms": 1844
+    },
+    {
+      "name": "cat-backend-race",
+      "status": "fail",
+      "reason": "go failed (1)",
+      "duration_ms": 995206
+    },
+    {
+      "name": "cat-backend-vet",
+      "status": "pass",
+      "duration_ms": 1347
+    },
+    {
+      "name": "cat-authcore-race",
+      "status": "pass",
+      "duration_ms": 130
+    },
+    {
+      "name": "cat-authcore-vet",
+      "status": "pass",
+      "duration_ms": 88
+    },
+    {
+      "name": "cat-doc-check",
+      "status": "pass",
+      "duration_ms": 328
+    },
+    {
+      "name": "cat-content-validate",
+      "status": "pass",
+      "duration_ms": 1399
+    },
+    {
+      "name": "cat-content-export",
+      "status": "pass",
+      "duration_ms": 1505
+    },
+    {
+      "name": "cat-docs-gate",
+      "status": "pass",
+      "duration_ms": 39
+    },
+    {
+      "name": "cat-full-build-cat-server",
+      "status": "pass",
+      "duration_ms": 1182
+    },
+    {
+      "name": "cat-full-build-cat-browser-plan",
+      "status": "pass",
+      "duration_ms": 589
+    },
+    {
+      "name": "cat-pg-accounts",
+      "status": "pass",
+      "duration_ms": 2246
+    },
+    {
+      "name": "cat-pg-httpapi",
+      "status": "pass",
+      "duration_ms": 58904
+    },
+    {
+      "name": "cat-http-parity",
+      "status": "pass",
+      "duration_ms": 1784
+    },
+    {
+      "name": "cat-browser-full",
+      "status": "fail",
+      "reason": "node failed (1)",
+      "duration_ms": 2198334
+    },
+    {
+      "name": "repo-full-exit",
+      "status": "fail",
+      "reason": "Actual hook process exited 201",
+      "duration_ms": 3307788
+    },
+    {
+      "name": "ui-adoption-binding",
+      "status": "pass",
+      "duration_ms": 0
+    },
+    {
+      "name": "csp-measurement",
+      "status": "pass",
+      "duration_ms": 27
+    },
+    {
+      "name": "app-image-evidence",
+      "status": "pass",
+      "duration_ms": 1
+    },
+    {
+      "name": "browser-evidence",
+      "status": "pass",
+      "duration_ms": 196
+    }
+  ],
+  "actual_image_witness": {
+    "sha256": "4acae8e833d18e85afd7988c28c205a57d34bbcdb781ec1eb797603a3d6c490d",
+    "image_id": "sha256:762209d4211c765094a9a85d5ddc55f87741322830e6e58e701e79847ece5332",
+    "exact_captured_asset_rows": 32,
+    "mandatory_font_assets": 4,
+    "result_top_level_app_image_id_present": false,
+    "result_unmodified": true
+  },
+  "actual_csp": {
+    "sha256": "07fc94d51b4d901214af9608853c83724d927c94ba0b35b1f0249705ffa02dbb",
+    "stage": "report-only",
+    "violations": 0,
+    "legacy_violations": 0,
+    "documents": 9,
+    "unique_nonce_hashes": 9,
+    "actual_exact_font_http200_rows": 36,
+    "actual_font_preload_crossorigin": "anonymous",
+    "raw_nonces_not_retained": true
+  },
+  "nonbudget_blockers": [
+    "backend TestAllFourBaselineArtifactsRebuiltFromAuthoredInputsExactBytes: final live audit incomplete/stale/unaccepted",
+    "gui-baseline.mjs:135 exact Axe route/target-selector fingerprint mismatch"
+  ],
+  "baseline_frontier": "All9PNGs and5runs per2journeys captured, compare threw ataxe; later PNG/vitals comparison predicates NOT executed by wrapper. Supplemental exact-byte/metrics review pending; no wrapper PASS inferred.",
+  "budgets": "20 actual JS rows RED; numeric thresholds unchanged, no working-target waiver inferred",
+  "not_qualified": [
+    "aggregate full",
+    "budget-only-red E3 readiness",
+    "CSP-stage-B transition",
+    "M0/M1",
+    "KIT_BUMP",
+    "M2",
+    "physical Samsung",
+    "positive launcher validation",
+    "production activation"
+  ],
+  "parent_readback_attempts": [
+    {
+      "attempt": 1,
+      "status": "INCOMPLETE/unaccepted",
+      "reason": "Assumed source current descriptor exists; read refused before witness verification. Source absence honestly retained; separate guarded successor completed."
+    },
+    {
+      "attempt": 2,
+      "status": "CLEAR",
+      "reason": "guarded literal absent source-root descriptor; source frozen full descriptor and mirror current/frozen descriptor actual SHA c91209 agree; exact32 assets/36fonts and9nonce hashes verified"
+    }
+  ],
+  "independent_review": {
+    "reviewer": "/root/cross_repo_plan",
+    "whole_capture_verified": true,
+    "all_96_artifacts_resolved": true,
+    "aggregate_status": "FAIL201 retained; no budget-only-red E3 readiness"
+  },
+  "prior_parent_review_sha256": "4a3fde1357e632689473a88bc1fcbdcb083bf3181785b60067b0a9905d456b84",
+  "actual_900": {
+    "scope": "Actual completed G900 report, wrapper/capture acceptance still pending",
+    "observedUtc": "2026-10-09T23:55:54.480607+00:00",
+    "source": "6ebc3a9b72dbeacade741d8758f6cceef8cda090",
+    "tree": "b4c856c10431f83f435e66941567ecd0bf6c91169c86dc24b10f4b4b5fc0bc74",
+    "image": "sha256:762209d4211c765094a9a85d5ddc55f87741322830e6e58e701e79847ece5332",
+    "cases": 900,
+    "unique": 900,
+    "desktop": 450,
+    "mobile": 450,
+    "eachOnceRetry0": true,
+    "skipped": 0,
+    "flaky": 0,
+    "unexpected": 0,
+    "globalErrors": [],
+    "inventorySha256": "763e1e7bfab83f4b469e55b87c1491ae2dff4debdc11412979bf3bdbe28fa278",
+    "actualRawReportSha256": "4201a3ae6d8a30dce2bb8c7c0b38830b359f70ef45eb1caba543d5191ae1357d",
+    "browserJourneySha256": "6f5e70c50d0e2fba689a64e7b446387659daac2e480cd0f717b3ad915268f95f",
+    "durationMs": 2092822.6449999998,
+    "laterAssetsCspBaselines": "PENDING, no inferred aggregate approval"
+  },
+  "baseline_supplemental_readback": {
+    "reviewers": [
+      "planning_evidence",
+      "cross_repo_plan",
+      "parent"
+    ],
+    "scope": "Sealed actualreports/PNGs, NOT executed wrappercomparisonPASS",
+    "originalCaptureSha256": "ff055e404bf138ce0442381ab33eb643d431f922e4284f66a5002efcc397be68",
+    "actualCaptureSha256": "105cbba7e66362107fba4b629ae8bb73e04baee0a60bb6f0bc30c00353eaabe7",
+    "all9PngPairsByteIdentical": true,
+    "all18PngHashRowsExact": true,
+    "axe": "OnlyHome six targetselectorstrings drift; IDs/impacts/6+1counts unchanged and other8routefingerprints exact; currentartifacts lackactualnodeHTML/role/namewitness, so semanticmapping/comparatorrelaxation NOT accepted",
+    "conexLcp": {
+      "original": 2836,
+      "actual": 3648,
+      "absoluteDelta": 812,
+      "configuredTolerance": 283.6,
+      "wouldPass": false
+    },
+    "alchimieLcp": {
+      "original": 4228,
+      "actual": 3556,
+      "absoluteDelta": 672,
+      "configuredTolerance": 422.8,
+      "wouldPass": false,
+      "actualImprovement": true
+    },
+    "inp": {
+      "conex": [
+        184,
+        152
+      ],
+      "alchimie": [
+        200,
+        200
+      ],
+      "existingToleranceWouldPass": true
+    },
+    "wrapperFrontier": "Threw atAxe comparisonline135; PNG/vitals assertionsNOT executed",
+    "causalAttribution": "NOT PROVEN; realcurrent5runmetrics retained, originalbimodality noted, no tolerance/budget changes"
+  },
+  "backend_observations": {
+    "scope": "ActualcompletedGcommandlogs; aggregate/captureacceptance pending",
+    "backend": {
+      "passTestEvents": 1334,
+      "failedTestEvents": 1,
+      "failedPackageEvents": 1,
+      "baselinePgSkipTestEvents": 17,
+      "passedPackages": 27,
+      "failedPackage": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentrails",
+      "failedTest": "TestAllFourBaselineArtifactsRebuiltFromAuthoredInputsExactBytes",
+      "failure": "rail_test.go:48 final live audit incomplete/stale/unaccepted",
+      "failedTestElapsedSeconds": 15.36,
+      "packageElapsedSeconds": 767.867,
+      "timeout": false,
+      "cachedPackageOutputCount": 18,
+      "stdoutSHA": "1b35a79757e9d93b7565bace37645d63b2abf05e7ab0d42ec8294c3c57564f42",
+      "freshEveryPackageClaimed": false
+    },
+    "authcore": {
+      "pass": 28,
+      "fail": 0,
+      "skip": 0,
+      "cachedPackageOutputCount": 1,
+      "stdoutSHA": "aed3f5f8dd4a200e75afa2af35801ee664222dd96cc43f6e14a83e12d79a8a1b"
+    },
+    "explicitPgAccounts": {
+      "pass": 12,
+      "fail": 0,
+      "skip": 0,
+      "cached": 0,
+      "stdoutSHA": "98bcc0ebf9eadd86cd91b99d2910739736f71c208d4b590b9b9aabb4b5a16029"
+    },
+    "explicitPgHttpapi": {
+      "pass": 248,
+      "fail": 0,
+      "skip": 0,
+      "cached": 0,
+      "stdoutSHA": "eda35c0f79ef4e8e8601d1db5a035214eedde46f6b8b61dfa1d94a5bc21e4102"
+    },
+    "independentParity": {
+      "ok": true,
+      "requests": 1207,
+      "mode": "independent_parity",
+      "accounts_enabled": false,
+      "elapsedSeconds": 1.032649632,
+      "contentHash": "sha256:7410c200f06f24a23581a78c8804a685013c1aaffa878a6a46388bb8369f44de"
+    },
+    "laterBrowserCspAssetsBaselines": "Stillrunning/pending; no inferredPASS",
+    "substantiveCurrentNonBudgetBlocker": "Source6 final live audit freshness; program_pack read-onlyprecisediagnosisrequested, futuremain notconflated"
+  }
+}
