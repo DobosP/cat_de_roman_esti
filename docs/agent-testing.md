@@ -58,7 +58,10 @@ For browser fixtures, build `cat-browser-plan` and set its absolute scratch path
 
 1. Run docs/whitespace gates; documentation-only changes need no game or asset rebuild.
 2. Native behavior changes run focused Go race/vet and applicable PG/HTTP release lanes.
-3. Content changes run native source/operator/rail freshness and independent review contracts.
+3. Content changes run native source/operator/rail freshness and independent review contracts;
+   `cat-content-rail all --root .. --check` re-runs the quick/world/extensions native audits (about 20 s)
+   and accepts on behaviour equality with the signed audit, not on runtime file hashes (ADR-0189).
+   Go-only changes do not require re-auditing content.
 4. Frontend JS/TS/CSS changes run frontend/build/browser gates and commit regenerated
    original30 preservation and managed output/retirement per ADR-0184; backend/docs-only edits do not regenerate it.
 5. Record exact commands/results in `docs/STATUS.md`; overflow history belongs in WORKLOG.

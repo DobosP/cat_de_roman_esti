@@ -74,8 +74,9 @@ your content changed its expectation, with no generator to refresh it, is report
   sub-steps 4a–4i are bounded only by the budgets), a budget is reached, a BLOCKED or
   NEEDS-OWNER line stands with no research left, or the backlog is exhausted.
 - Install is enabled only while, on main, `cat-content-rail all --root .. --check` is green and
-  `grep -q 7272424 go-backend/internal/contentbuild/source6_build_test.go` finds nothing (that test pins
-  the live bundle bytes). Check at step 0 and again before 4a. Otherwise run research-only: steps 0–3
+  `go -C go-backend test ./internal/contentrails/ ./internal/contentbuild/` is green (ADR-0189: the rail
+  check re-runs the native audits under the current binary; a GUI/runtime commit on main no longer
+  disables install). Check at step 0 and again before 4a. Otherwise run research-only: steps 0–3
   for one wave, post the step-3 table and set `waiting: install disabled` instead of `waiting: review`.
   When the owner clears it, merge main into the wave branch, redo step 0 (new wave_base) and start 4a
   only if install is now enabled. At 4i the rail check and `go test ./internal/contentrails/` must be
@@ -88,7 +89,8 @@ your content changed its expectation, with no generator to refresh it, is report
    and `go -C go-backend test ./internal/contentrails/ ./internal/contentbuild/ ./internal/httpgolden/`.
    Record the results in state.json `baseline`. The install gate later is "no NEW red versus this
    baseline". A red `cat-content validate`, `export --check` or `cat-content-ops check` on the
-   unchanged tree is BLOCKED; a red rail check or contentrails test only disables install.
+   unchanged tree is BLOCKED; a red rail check or contentrails test only disables install. A red rail
+   check now means content, not a runtime commit: report it as BLOCKED.
 1. Candidates. Take 40–60 items (a concept with its links is one item) from the backlog. Before any
    web call, pre-screen every planned form (headword, plural, articulated, genitive) with a scratch
    script. Fold with bundled.json `normalization_map`. Look up `normalized_index`, `labels`, node
@@ -142,9 +144,9 @@ your content changed its expectation, with no generator to refresh it, is report
      --factual-review F --quality-review Q --proposal P`; `--audit-catalog P --audit-out A`; the
      reviewers write final-factual/final-quality reviews bound to A; then `--proposal P --live-audit A
      --final-factual-review FF --final-quality-review FQ --expected-sha256 <sha256 of P> --write`.
-     Write A, FF, FQ and every installed-authority-entry draft under
-     `~/work/_temp/content__v1-<N>-<theme>/rail/<r>/`; only the files installed-authorities.json binds
-     go under docs/reviews/<wave>/native/.
+     Write A as docs/reviews/<wave>/native/<r>/audit.json and FF/FQ as final-factual-review.json /
+     final-quality-review.json in the same directory: these are the documents installed-authorities.json
+     will bind in 4h. Installed-authority-entry drafts go under `~/work/_temp/content__v1-<N>-<theme>/rail/<r>/`.
    - 4f Pins: the derived_catalog_v38 and quick_games_v92 values in `reviewedPins`
      (go-backend/internal/contentbuild/build.go), `CATALOG_SHA256` in wordgames/quick_catalog.py and
      `DEFAULT_DERIVED_CATALOG_SHA256` in wordgames/derived_catalog.py. Then `cat-content export
@@ -156,10 +158,18 @@ your content changed its expectation, with no generator to refresh it, is report
      Move the .json.gz to go-backend/internal/httpgolden/testdata/ and, in golden.go, add only a
      renamed copy of the previous `reviewedV1x()` block, its SHA constant, embed line and ForSources
      entry.
-   - 4h Freeze the runtime. Use the owner's rebind command if it exists; otherwise, per rail, run an
-     installed audit of the installed fixture, have the reviewers sign installed finals, emit
-     `--installed-authority-out`, assemble sources/installed-authorities.json (append to
-     source_chain; replace the three rail entries) and swap the sha in installed_authorities_pin.go.
+   - 4h Bind the installed authorities. Per rail run `cat-content-rail <r> --source <abs> --candidate C
+     --factual-review F --quality-review Q --proposal P --live-audit A --final-factual-review FF
+     --final-quality-review FQ --expected-sha256 <sha256 of P> --installed-authority-out
+     <scratch>/rail/<r>/entry.json` with the 4e documents; the command re-runs the native audit under
+     the current binary and refuses with "final live audit incomplete/stale/unaccepted" if the installed
+     behaviour no longer equals A (after 4f this happens only when the export changed what the
+     quick/world replays observe). On that refusal only: rerun `--audit-catalog P --audit-out A`, have
+     both reviewers re-sign FF and FQ to the new A, retry. Then assemble sources/installed-authorities.json
+     (append authored-v<K+1> to source_chain; replace the three rail entries with the emitted drafts) and
+     swap the sha in installed_authorities_pin.go via the metadata template (the file must equal
+     PinBytesForInstalledAuthorities exactly). No second installed audit, no second reviewer round and
+     no runtime freeze.
    - 4i Gates: `cat-content-rail all --check`, `cat-content validate`, `export --check`,
      `cat-content-ops check --check`, `cat-mobile-pack --check`, `go -C go-backend test -race -timeout 40m ./...`,
      `go -C go-backend vet ./...`, `go -C shared-go/authcore test -race ./...`, `cat-doc-check --root ..`,
@@ -172,7 +182,8 @@ your content changed its expectation, with no generator to refresh it, is report
    alchimie_recipe_extensions_v92 (cat_de_roman_esti/fixtures only); bundled.json and digest.go via
    export; the pins in 4f; authored-v<K+1>.json, installed-authorities.json,
    installed_authorities_pin.go; the corpus and the golden.go block; the rail files under
-   docs/reviews/<wave>/native/; Go or frontend testdata that an existing generator rewrites (name it
+   docs/reviews/<wave>/native/ (including audit.json, final-factual-review.json and
+   final-quality-review.json under docs/reviews/<wave>/native/<r>/); Go or frontend testdata that an existing generator rewrites (name it
    in the README); count mirrors in tests/current_content.py; the pool, the wave README and
    docs/STATUS.md. Never new or edited `_test.go`, new Python tests, new repo scripts or
    rules_unicode15.json. On waking to a dirty worktree mid-step, reset the worktree only
@@ -186,8 +197,9 @@ your content changed its expectation, with no generator to refresh it, is report
    the 120-line budget by appending the moved line to WORKLOG.md (append without reading it), never
    by removing spaces; then rerun `cat-doc-check --root ..` and `git diff --check`. No ADR unless game
    behaviour or a data schema changes. Landing: merge main into the wave branch; if the merge
-   touched go-backend/** or shared-go/**, redo 4g–4i, otherwise rerun validate, export --check and
-   ops check; then `git -C ~/work/cat_de_roman_esti merge
+   touched go-backend/** or shared-go/**, rerun 4i (the rail check re-audits under the merged binary)
+   and redo 4g only if the merge changed go-backend/internal/httpapi or a content/game package,
+   otherwise rerun validate, export --check and ops check; then `git -C ~/work/cat_de_roman_esti merge
    --ff-only content/v1-<N>-<theme>`. If main moved again, retry once, then set
    `waiting: main keeps moving — pause the GUI loop for one landing`. Run `cat-content-rail all
    --check` on main and record it. Never push. Then delete the wave branch, worktree and scratch.

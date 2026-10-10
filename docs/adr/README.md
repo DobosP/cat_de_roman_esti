@@ -131,3 +131,5 @@ and the word-grid reflow; its release, reserve and content decisions remain.
 - [0186](0186-go-authoritative-content-validation.md) — owner-authorized Go content validation and native JSON; Python/Rust references optional.
 
 - [0188](0188-park-v1-7-and-reset-content-loop.md) — park V1.7 unmerged; content waves become batches judged by player-visible additions; rail baseline fix comes first.
+
+- [0189](0189-behaviour-bound-installed-content-authorities.md) — installed content authorities accept on fresh-audit behaviour equality; runtime hashes become provenance; live bundle pin test re-anchored.
