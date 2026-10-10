@@ -1,0 +1,94 @@
+{
+  "schema": 1,
+  "reviewer": "/root/cross_repo_plan",
+  "recorded_at": "2026-10-10T21:51:49.824581+00:00",
+  "scope": "Supplemental read-only existing b03 raw JSON attachment and exact Git source reconciliation; no new execution or SDK/runtime approval.",
+  "supplements_unchanged_review": {
+    "path": "/home/dobo/work/_temp/adhoc-gui-migration-parent-20261006/cat-b03-enforced-full-cross-repo-independent-review-20261010.json",
+    "sha256": "99992ef3f998a157798980da97d550c49021b05b8b9a6e73b758f0018a3581af"
+  },
+  "inspected_reconciliation": {
+    "path": "/home/dobo/work/_temp/adhoc-gui-migration-parent-20261006/cat-b03-workers2-source-successor-20261011/original16-78-reconciliation.json",
+    "bytes": 4841,
+    "sha256": "56c150f3ea6b4ad5568740b1b52bf3be30be1db0e279ceae0ef7e9c9e1c6e8ab"
+  },
+  "source": "b03b2f752b7eef252f4f7869d8cc5bab2c964e61",
+  "actual_raw_report": {
+    "bytes": 23657780,
+    "sha256": "d0df42f2bf431f975a09ca6618f8193a7043271140c1b13afd92ce055f3d4ff7",
+    "capture_observations_sha256": "333771877a56f964eb7d03395d81879956dffcecc08c5208a19f7857b9ef5020"
+  },
+  "fresh_current_image_reused_browser_assertions": {
+    "cases": 32,
+    "per_project": {
+      "desktop": {
+        "unique_cases": 16,
+        "passed_executed_assertions": 78
+      },
+      "mobile": {
+        "unique_cases": 16,
+        "passed_executed_assertions": 78
+      }
+    },
+    "attached_assertion_records": 156,
+    "each_case": "one passed result, retry0/errors[], exactly one application/json executed-original-assertions attachment",
+    "attachment_checks": "executed:true on each fixture and assertion, status:pass on all assertions; exact fixture ID/suite/ordered assertion-ID list matches historical16/78 receipt",
+    "execution_context": "canonical GUI JSON reporter, actual b03 image, desktop/mobile with reducedMotion reduce; subset of the already accepted900, not an additional run"
+  },
+  "source_refs": [
+    {
+      "path": "frontend/e2e/original/runtime.spec.mjs",
+      "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a",
+      "bytes": 16427
+    },
+    {
+      "path": "docs/reviews/gui-original-react/runtime.spec.mjs",
+      "sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a",
+      "bytes": 16427
+    },
+    {
+      "path": "frontend/playwright.config.mjs",
+      "sha256": "06e1433a0ebd9765d9f4b2b0b1f5a5ff63224ade9db522a98de241c5731b2ed6",
+      "bytes": 1632
+    },
+    {
+      "path": "frontend/playwright.gui.config.mjs",
+      "sha256": "766408b7fcd29d257ea9d3b247d6192d47492fe0a13417de2c0d4d523d2161f9",
+      "bytes": 388
+    },
+    {
+      "path": "frontend/playwright.original.config.mjs",
+      "sha256": "6e05214dbbcb1bb5c2881a0a2a228ca1a3292039d1baea0858787856415ad14f",
+      "bytes": 1241
+    },
+    {
+      "path": "scripts/gui-original-execution.mjs",
+      "sha256": "5c39b4d9771468da9365f59304085c67b37e2d974496aa4e94cb8058f039dd79",
+      "bytes": 24566
+    },
+    {
+      "path": "scripts/gui-full-browser.mjs",
+      "sha256": "cb1dc8ec25442c3c3ec521f5f96124541aae24780b2f47ebf921dffa5f33201d",
+      "bytes": 30288
+    }
+  ],
+  "source_semantics": "fixture.check awaits each assertion before recording pass; attachment is emitted only after the awaited fixture operation. Current and historical runtime.spec bodies are byte-identical. executeMatrix validates900 outcomes/inventory without parsing these attachment bodies; this supplement independently decodes them.",
+  "separate_historical_qualification": {
+    "receipt_sha256": "5c5704bc05511f91a02582c17e515500d2c8bca471f1c50cfd2505b646a27e58",
+    "source": "45edcf2ce170c112621c73609e6e169633eb38a8",
+    "fixtures": 16,
+    "assertions": 78,
+    "runtime_sdk": {
+      "name": "@roedu/ui",
+      "version": "0.3.0",
+      "archive_sha256": "1934a81cdfd737a051f591ebcae072f5028943b715456dbb2899b483d399c244",
+      "manifest_sha256": "1e693baa0e9187ffcdd6c35f841370e70ec71551751d10fc01902b6be2f57357",
+      "entry": "dist/index.js",
+      "entry_sha256": "45bc37efd15df1d9671d17e5d5f96518128a19da9af4bdfc3d437906ab8d049d"
+    },
+    "path": "gui-original-execution -> original-motion-on/no-preference/custom reporter -> owning GEN receipt",
+    "rerun_or_refreshed_by_canonical_b03_full": false
+  },
+  "disposition": "Reconciliation supported. b03 freshly reran16 reused cases/78 attached behavioral+Presence assertions per desktop/mobile; the separate sealed original SDK/runtime qualification was not rerun. Prior review sealed_runner_rerun=false remains correct; this supplies the missing positive distinction. Budget-only FAIL201 remains; no workers2/original SDK/full green/E3/M0/M1/BUMP/device acceptance.",
+  "runtime_or_source_actions_by_reviewer": false
+}

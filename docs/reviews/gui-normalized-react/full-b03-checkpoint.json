@@ -1,0 +1,191 @@
+{
+  "schema": 1,
+  "scope": "Completed enforced b03 full failure boundary, not aggregate GREEN/E3 approval/M0/M1/KIT_BUMP/device qualification",
+  "tested_source": {
+    "sha": "b03b2f752b7eef252f4f7869d8cc5bab2c964e61",
+    "tree_sha256": "9fe481bbd5a845d65a0c164fca64d01bba0d986f18e99da447ddf60266477963",
+    "current_git_clean": true,
+    "wrapper_invocation": "34630259-190f-4250-ae0d-64bd7ff1014e",
+    "inner_invocation": "9a40863b-3d84-4f83-b1d1-b62a2ee52235",
+    "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+    "declared_and_witnessed_app_image_id": "sha256:2a78f1593e973e27b1a7a70872e85490416d21ff66614777c9a61aa3f1e65473"
+  },
+  "wrapper_exit": 201,
+  "result_sha256": "c656f60c9c038f5d28436a2e17b61267af005e165ea3cf5f179636b0e44df140",
+  "checks": {
+    "total": 38,
+    "pass": 36,
+    "fail": [
+      "cat-route-budgets",
+      "repo-full-exit"
+    ]
+  },
+  "frontend": {
+    "unit_pass": 453,
+    "fail": 0,
+    "skip": 0,
+    "cancel": 0,
+    "todo": 0,
+    "lint": "pass",
+    "types": "pass"
+  },
+  "go": {
+    "backend_test_run_identities": 1414,
+    "backend_test_pass": 1397,
+    "backend_explicit_db_skip": 17,
+    "backend_test_fail": 0,
+    "backend_tested_packages": 28,
+    "backend_cached_tested_packages": 20,
+    "backend_fresh_tested_packages": 8,
+    "authcore_test_pass": 28,
+    "authcore_package_cached": true,
+    "fresh_pg_accounts_run_pass": 12,
+    "fresh_pg_httpapi_run_pass": 291,
+    "fresh_pg_skip_fail_cache_race": 0,
+    "all_17_generic_skip_ids_matched_fresh_pg_passes": true,
+    "canonical_and_pg_argv_count1_flag": false,
+    "normalized_gen_count1_is_separate": true,
+    "independent_parity_requests": 1207,
+    "independent_parity_status": "pass",
+    "blanket_fresh_backend_claimed": false
+  },
+  "browser": {
+    "cases_pass_once": 900,
+    "desktop": 450,
+    "mobile": 450,
+    "retry_skip_flaky_errors": 0,
+    "actual_workers": 1,
+    "actual_matrix_seconds": 1984.34,
+    "current_reused_fixture_cases_per_project": 16,
+    "current_attached_assertions_per_project": 78,
+    "separate_sealed_original_sdk_runtime_qualification_rerun": false
+  },
+  "csp_assets": {
+    "capability_desktop_mobile_status": "pass",
+    "actual_secure_localhost_native_lock_request_query_acquire_hold_release_absence": "all true",
+    "identity_raw_bytes_each": 307,
+    "identity_raw_sha256": "8557e789757c94086d1c4473d929224a51b65730c5ae1e7afc81be69aa411955",
+    "private_identity_modes_verified": true,
+    "active_stage": "enforced",
+    "documents": 9,
+    "unique_document_nonce_hashes": 9,
+    "active_violations": 0,
+    "actual_asset_responses_joined": 32,
+    "actual_font_responses_joined": 36,
+    "font_rows_per_document": 4,
+    "trusted_types_separate_report_only_policy_preserved": true,
+    "app_witness_sha256": "13e339f58fdec9583d83747d6aeb8be1230e2c5685f44a205591c915108fd361",
+    "active_csp_sha256": "138d16a00ec9599d534842ab7d05902e22a5696a581cff4e9b8dbb4613f893e5",
+    "physical_host_iid_and_app_db_network_cleanup_review": "parent-owned separate review; not independently executed here"
+  },
+  "legacy": {
+    "observation_sha256": "636665a8623dc3319e84f57a08e2ca6618f64f00a677042fd1578f5969c8a818",
+    "frozen_files": 30,
+    "measured_violations": 0,
+    "policy_events": 0,
+    "console_refusals": 0,
+    "same_primary_directives": true,
+    "actual_create_status": 200,
+    "create_count": 1,
+    "real_board_visible": true,
+    "owner_lifecycle_command_rc_and_stream_joins": 12,
+    "recorded_owned_cleanup_verified": true
+  },
+  "baseline": {
+    "capture_sha256": "15b0fa4db0e2a0f4254fa61de7d441b7d593583b1c4205cfa0557a6acb006cd8",
+    "comparison_sha256": "4c8ff351646074978f351c1f64b85f1fa70dd1ad6e20fc1d77b740d6ee3d9cdb",
+    "immutable_original_pngs_byte_equal": 9,
+    "home_live_native_button_name_node_order_joins": 6,
+    "home_original_footer_join": true,
+    "axe_fingerprints_match_except_exact_live_witnessed_home_aliases": true,
+    "comparison_outcomes_pass": 16,
+    "measured_routes": 2,
+    "actual_callback_runs_per_route": 5,
+    "final_lcp_inp_cls_callback_values_and_medians_join": true,
+    "owner_diagnostic_attribution_absent": true,
+    "conexiuni_medians": {
+      "lcp": 1896,
+      "inp": 48,
+      "cls": 0
+    },
+    "alchimie_challenges_medians": {
+      "lcp": 1896,
+      "inp": 56,
+      "cls": 0
+    },
+    "lcp_inp_policy": "Owner-approved ADR0190 positive slowdown delta only, unchanged max(10%,50ms); these four medians are improvements.",
+    "cls_precision": "All ten actual CLS callbacks and both medians are0, matching original CLS medians0. No separate CLS predicate is emitted by comparisonOutcomes; this review independently reads the unchanged criterion for this run, without claiming a new guard."
+  },
+  "budgets": {
+    "measurements_sha256": "6adf4e38eb8e6659de3e869036dbece2bdf67355151d7b42095abdc9acbe9ed6",
+    "bound_input_hash_joins": 37,
+    "active_asset_rows_exact": 90,
+    "frozen_asset_rows_exact": 30,
+    "routes_each_profile": 10,
+    "all_route_static_closure_file_sets_match": true,
+    "mandatory_accountbar_each_route": true,
+    "active_physical_gzip_sums_match": true,
+    "frozen_sizes": "Actual delivered public evaluate execution uses level6 gzip fallback; reviewer does not substitute different host-codec recompression.",
+    "js_limits_bytes": 40960,
+    "js_target_bytes": 30720,
+    "js_red_measurements": 20,
+    "active_home_js_bytes_gz": 115016,
+    "frozen_home_js_bytes_gz": 117271,
+    "css_null_limits": "recorded, not passed",
+    "limits_or_accounting_changed": false
+  },
+  "combined_startup": {
+    "js_gzip_bytes": 115016,
+    "css_gzip_bytes": 7727,
+    "combined": 122743,
+    "configured_limit": 122880,
+    "planning": "Owner says original estimate approximate; no replacement ceiling or qualification waiver inferred"
+  },
+  "capture": {
+    "path": "/home/dobo/work/_temp/adhoc-gui-migration-parent-20261006/cat-b03-enforced-full-completed-20261010",
+    "observations_sha256": "333771877a56f964eb7d03395d81879956dffcecc08c5208a19f7857b9ef5020",
+    "sealed_gzip_blobs_verified": 259,
+    "compressed_bytes": 87530228,
+    "all_regular_rows_bytes_size_full_modes_verified": 671,
+    "logical_regular_bytes": 262824295,
+    "directory_modes_verified": 477,
+    "honest_absences_verified": 6,
+    "literal_link_rows": 0,
+    "live_elf_hash_only_rows_verified": 4,
+    "elf_bytes_not_copied": true,
+    "source_mirror_git_refs_verified": 447,
+    "unchanged_generated_refs_verified_against_retained_591c": 184,
+    "registered_bindings_verified": 289,
+    "physical_bindings": 288,
+    "virtual_iid_bindings": 1,
+    "original_live_inode_survival_claimed": false
+  },
+  "reviews": {
+    "independent_sha256": "99992ef3f998a157798980da97d550c49021b05b8b9a6e73b758f0018a3581af",
+    "original16_supplement_sha256": "3a926a595ece29f99f37803f21effb1c724941ed67a8edaf09b992095faaf88a",
+    "parent_byte_sha256": "3e1f5daa56b0737e944b94500d9327a2c841024cbe1b46d82f68c983892691ba"
+  },
+  "owned_cleanup": {
+    "verified_removed_containers": 2,
+    "verified_removed_networks": 1,
+    "removed_volumes": 0,
+    "exact_project_resources_absent": true,
+    "record_sha256": "6c0ef12fa9c80c9c9d42c8f12a5bb20df5b47f57aae80fb328870a2b13835328",
+    "limitation": "Wrapper discards Compose-down output/status; underlying cleanup failure cause unavailable. Parent cleanup verification required."
+  },
+  "image_availability": {
+    "latest_kept": "sha256:2a78f1593e973e27b1a7a70872e85490416d21ff66614777c9a61aa3f1e65473",
+    "superseded_eae_iid": "sha256:2057a3b229385fdef106abef9e160fa61b4e94345bcdc05b86a290af74bbf6b1",
+    "superseded_eae_bytes_available": false,
+    "pruning_journal_sha256": "650e9e16ac67a41e27bdc09044cc9947818cd17c340723007cde1506b0e044fc"
+  },
+  "source_successor": {
+    "source": "327f96ddfe919293d858c1a7830d44f90ee394dc",
+    "path": "frontend/playwright.gui.config.mjs",
+    "added_line": "  workers: process.env.GATE_APP_URL ? 2 : original.workers,",
+    "source_review": "Parent and program_pack SOURCE CLEAR; exact60B inverse/onepath/8622other Git entries unchanged",
+    "runtime": "NOT RUN; speedup unproven",
+    "unchanged": "900identities/retries0/fullyParallelfalse/assertions/fixtures/serialbaseline-stage/4CPU6GiB/originalGENserial"
+  },
+  "retention": "One rolling591c physical setup plus compact changed evidence; no per-run workspace/deps/cache/ELF copies. Earlier pruned raw trees and images are unavailable; source/unmerged/baseline/canonical keepers preserved."
+}

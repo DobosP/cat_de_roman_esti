@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "source": "b03b2f752b7eef252f4f7869d8cc5bab2c964e61",
+  "wrapper": "34630259-190f-4250-ae0d-64bd7ff1014e",
+  "tree": "9fe481bbd5a845d65a0c164fca64d01bba0d986f18e99da447ddf60266477963",
+  "wrapperExit": 201,
+  "capture": "/home/dobo/work/_temp/adhoc-gui-migration-parent-20261006/cat-b03-enforced-full-completed-20261010",
+  "captureSha256": "333771877a56f964eb7d03395d81879956dffcecc08c5208a19f7857b9ef5020",
+  "state": "PARENT COMPACT BYTE/MODE/IDENTITY CLEAR; independent full semantic review pending",
+  "verified": {
+    "regularRows": 671,
+    "regularRawBytes": 262824295,
+    "blobRoundtrips": 259,
+    "storedBlobBytes": 87530228,
+    "directories": 477,
+    "literalLinks": 0,
+    "recordedAbsences": 6,
+    "ELFHashOnly": 4,
+    "sourceMirrorGitRefs": 447,
+    "retainedGeneratedRefs": 184,
+    "registeredPhysicalArtifacts": 288,
+    "registeredVirtualImageIdentity": 1,
+    "source": "clean literalb03"
+  },
+  "parentReadbackOrder": "All259gziproundtrips/671livebytes-fullmodes/477dirs/6absences/4liveELFs/184retainedphysicalrefs/447source-mirror-Gitchecks passed before generic physical-artifact loop encountered virtualIID; successor separately verified288physical+1typedvirtual identity. No source or wrapper changed between reads.",
+  "metadataReadbackCorrections": "Initial seal filename assumption corrected to actual SEAL.json; virtualIID was then distinguished from files. These were read-only verifier errors, not product/test failures.",
+  "actualAggregate": {
+    "passChecks": 36,
+    "failedChecks": [
+      "cat-route-budgets",
+      "repo-full-exit"
+    ],
+    "resultSha256": "c656f60c9c038f5d28436a2e17b61267af005e165ea3cf5f179636b0e44df140",
+    "csp": {
+      "stage": "enforced",
+      "violations": 0,
+      "legacy_violations": 0
+    }
+  },
+  "ownedCleanup": {
+    "journal": "/home/dobo/work/_temp/adhoc-gui-migration-parent-20261006/cat-b03-full-owner-runtime-20261010/host-cleanup-verified.json",
+    "sha256": "6c0ef12fa9c80c9c9d42c8f12a5bb20df5b47f57aae80fb328870a2b13835328",
+    "state": "Actual exact2containers+1network removed and absence verified;0volumes;latestIID retained",
+    "manualGuardCorrection": "Firstempty-stdout check corrected to actualDocker[]+NoSuch diagnostic in separate readonlyverification, no mutationretry"
+  },
+  "qualification": "Budget-only-red preliminary candidate; fullGREEN/M0/M1/BUMP/device not accepted. Independent semantic review must establish every other obligation.",
+  "observedUtc": "2026-10-10T20:33:27.214901+00:00"
+}
