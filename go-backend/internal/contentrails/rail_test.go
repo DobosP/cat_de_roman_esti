@@ -343,6 +343,22 @@ func TestSyntheticVersionTwoInstallBoundReviewsAuditAndServingPinRefusal(t *test
 	if err = ConfirmFinal(root, "quick", proposal, proposalPath, auditPath, finalPaths[0], finalPaths[1], pin); err != nil {
 		t.Fatal("behaviour-neutral runtime edit refused the original audit/finals", err)
 	}
+	// The auditors stay bound: an edited auditor could reproduce a stale signed
+	// audit, so its recorded digest remains an acceptance term (ADR-0189).
+	auditor := filepath.Join(root, "go-backend/internal/contentrails/quick.go")
+	auditorBytes, err := os.ReadFile(auditor)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err = os.WriteFile(auditor, append(auditorBytes, []byte("\n// edited auditor\n")...), 0644); err != nil {
+		t.Fatal(err)
+	}
+	if err = ConfirmFinal(root, "quick", proposal, proposalPath, auditPath, finalPaths[0], finalPaths[1], pin); err == nil || !strings.HasPrefix(err.Error(), "final live audit incomplete/stale/unaccepted") {
+		t.Fatal("edited auditor kept the original audit acceptable", err)
+	}
+	if err = os.WriteFile(auditor, auditorBytes, 0644); err != nil {
+		t.Fatal(err)
+	}
 	target, _ := ArtifactPath(root, "quick")
 	old, err := os.ReadFile(target)
 	if err != nil {

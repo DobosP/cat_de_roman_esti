@@ -289,6 +289,33 @@ func behaviourView(a map[string]any) map[string]any {
 	}
 	return view
 }
+
+// auditorFiles are the native auditors whose output ConfirmFinal re-derives.
+// Their recorded digests stay an acceptance term (ADR-0189): an edited auditor
+// could otherwise reproduce a stale signed audit. Runtime and GUI commits do not
+// touch them; a deliberate auditor change re-audits and re-signs the rails.
+var auditorFiles = []string{
+	"go-backend/internal/contentrails/extensions.go",
+	"go-backend/internal/contentrails/quick.go",
+	"go-backend/internal/contentrails/world.go",
+}
+
+// auditorUnchanged reports whether every auditor file is recorded in the signed
+// provenance with the digest it has now.
+func auditorUnchanged(root string, recorded any) bool {
+	want := map[string]string{}
+	for _, row := range rows(recorded) {
+		r := object(row)
+		want[text(r["path"])] = text(r["sha256"])
+	}
+	for _, rel := range auditorFiles {
+		raw, err := os.ReadFile(filepath.Join(root, filepath.FromSlash(rel)))
+		if err != nil || want[rel] == "" || want[rel] != digestBytes(raw) {
+			return false
+		}
+	}
+	return true
+}
 func Audit(ctx context.Context, root, rail string, raw map[string]any) (map[string]any, error) {
 	beforeRuntime, err := RuntimeHashes(root)
 	if err != nil {
@@ -359,7 +386,8 @@ func FinalKind(rail string) string {
 // a fresh native audit, re-run here under the current binary, equals the signed
 // audit modulo runtime provenance (ADR-0189): the proposal bytes, explicit pin,
 // catalog/candidate digests, both finals and reviewer independence stay exact;
-// runtime_sources must be well-formed provenance but is not compared.
+// runtime_sources must be well-formed provenance and is compared only for the
+// auditor files themselves.
 func ConfirmFinal(root, rail string, catalog map[string]any, proposalPath, auditPath, factualPath, qualityPath, expectedPin string) error {
 	if rail == "reserve" {
 		return fmt.Errorf("finite reserve writes use reviewed archival rebuild only")
@@ -395,7 +423,7 @@ func ConfirmFinal(root, rail string, catalog map[string]any, proposalPath, audit
 	if err != nil {
 		return fmt.Errorf("final live audit incomplete/stale/unaccepted: %w", err)
 	}
-	if audit["kind"] != kind || !accepted || audit["native_audit_version"] == nil || integer(audit["native_audit_version"]) != 1 || audit["catalog_sha256"] != sha || audit["candidate_sha256"] != catalog["candidate_sha256"] || !provenanceShape(audit["runtime_sources"]) || !same(behaviourView(audit), behaviourView(fresh)) {
+	if audit["kind"] != kind || !accepted || audit["native_audit_version"] == nil || integer(audit["native_audit_version"]) != 1 || audit["catalog_sha256"] != sha || audit["candidate_sha256"] != catalog["candidate_sha256"] || !provenanceShape(audit["runtime_sources"]) || !auditorUnchanged(root, audit["runtime_sources"]) || !same(behaviourView(audit), behaviourView(fresh)) {
 		return fmt.Errorf("final live audit incomplete/stale/unaccepted")
 	}
 	field := "reviews"

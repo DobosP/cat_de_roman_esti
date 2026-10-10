@@ -130,34 +130,46 @@ your content changed its expectation, with no generator to refresh it, is report
    - 4b `cat-content-ops rank --write`, `derive --write`, `check --check`; `cat-mobile-pack --check`
      (apply already refreshed the contract; never write it with the Go tool).
    - 4c Copy authored-v<K>.json to authored-v<K+1>.json: version K+1, `parent_source_sha256` =
-     sha256 of authored-v<K>, `base_commit` = wave_base, and repoint archives.world_candidate,
-     world_previous, world_factual and world_quality to the last installed wave's native/world
-     files (for V1.8: docs/reviews/v1-6-everyday-inputs/native/world/), as v5→v6 did. For quick,
+     sha256 of authored-v<K>, `base_commit` = the full 40-hex wave_base, and repoint the world
+     archives to the last installed wave's native/world files (for V1.8:
+     docs/reviews/v1-6-everyday-inputs/native/world/): world_candidate and world_previous →
+     candidate.json, world_factual → factual-review.json, world_quality → quality-review.json, each
+     with its sha256, as v5→v6 did. For quick,
      world, extensions: `cat-content-rail <r> --source <abs> --candidate-out
      <abs>/docs/reviews/<wave>/native/<r>/candidate.json`.
    - 4d The two reviewers write native/<r>/factual-review.json and quality-review.json covering every
-     item (schema in review.go). Items the KG change did not touch are `inherited: true`, citing the
-     previous record.
+     item (schema in review.go). Items the KG change did not touch are `inherited: true`, keep the
+     predecessor item's `sources` URLs (a factual accept needs at least one http(s) URL; repo paths
+     are refused) and name the previous record in `rationale`. World reviews also carry
+     `world_verdict: "accept"`, `world_rationale` and one `concepts` row per candidate concept {id,
+     concept_sha256 = sha256 of the concept rendered like rail output (sorted keys, two-space indent,
+     trailing newline), verdict, rationale, sources, inherited}.
    - 4e Every rail command in 4c–4h passes `--source <absolute path of authored-v<K+1>.json>`; the
      `--write` and `--installed-authority-out` commands also repeat `--candidate C --factual-review F
      --quality-review Q`. Serially for quick, then world, then extensions: `--candidate C
-     --factual-review F --quality-review Q --proposal P`; `--audit-catalog P --audit-out A`; the
-     reviewers write final-factual/final-quality reviews bound to A; then `--proposal P --live-audit A
+     --factual-review F --quality-review Q --proposal P` (P =
+     docs/reviews/<wave>/native/<r>/proposal.json); `--audit-catalog P --audit-out A`; the reviewers
+     write final-factual/final-quality reviews bound to A; then `--proposal P --live-audit A
      --final-factual-review FF --final-quality-review FQ --expected-sha256 <sha256 of P> --write`.
      Write A as docs/reviews/<wave>/native/<r>/audit.json and FF/FQ as final-factual-review.json /
      final-quality-review.json in the same directory: these are the documents installed-authorities.json
-     will bind in 4h. Installed-authority-entry drafts go under `~/work/_temp/content__v1-<N>-<theme>/rail/<r>/`.
-   - 4f Pins: the derived_catalog_v38 and quick_games_v92 values in `reviewedPins`
-     (go-backend/internal/contentbuild/build.go), `CATALOG_SHA256` in wordgames/quick_catalog.py and
-     `DEFAULT_DERIVED_CATALOG_SHA256` in wordgames/derived_catalog.py. Then `cat-content export
-     --root ..` and `export --root .. --check`.
+     will bind in 4h. Installed-authority-entry drafts go under
+     `~/work/_temp/content__v1-<N>-<theme>/rail/<r>/`. Before the extensions proposal, do the 4f pin
+     edits (derived_catalog_v38 = the digest 4b produced, quick_games_v92 = the digest the quick
+     `--write` installed): the extensions builder refuses `reviewed artifact digest drift` while any
+     `reviewedPins` value is stale.
+   - 4f Pins (edited in 4e, before the extensions proposal): the derived_catalog_v38 and
+     quick_games_v92 values in `reviewedPins` (go-backend/internal/contentbuild/build.go),
+     `CATALOG_SHA256` in cat_de_roman_esti/wordgames/quick_catalog.py and
+     `DEFAULT_DERIVED_CATALOG_SHA256` in cat_de_roman_esti/wordgames/derived_catalog.py. Then
+     `cat-content export --root ..` and `export --root .. --check`.
    - 4g HTTP corpus: build `cat-server` into scratch; copy
      docs/reviews/go-native-toolchain/archived-reference/capture_reference.py.txt to scratch, changing
      only ROOT, the reference label and the output path; run it with the repo venv,
      `CAT_ACCOUNTS_ENABLED=0` and `--binary <cat-server> --runtime go` (expect 1207 matched responses).
      Move the .json.gz to go-backend/internal/httpgolden/testdata/ and, in golden.go, add only a
-     renamed copy of the previous `reviewedV1x()` block, its SHA constant, embed line and ForSources
-     entry.
+     renamed copy of the previous `reviewedV1x()` block, its SHA constant, its embed line, and in
+     ForSources both the `vNN, err := reviewedVNN()` call and the slice entry.
    - 4h Bind the installed authorities. Per rail run `cat-content-rail <r> --source <abs> --candidate C
      --factual-review F --quality-review Q --proposal P --live-audit A --final-factual-review FF
      --final-quality-review FQ --expected-sha256 <sha256 of P> --installed-authority-out
@@ -165,13 +177,14 @@ your content changed its expectation, with no generator to refresh it, is report
      the current binary and refuses with "final live audit incomplete/stale/unaccepted" if the installed
      behaviour no longer equals A (after 4f this happens only when the export changed what the
      quick/world replays observe). On that refusal only: rerun `--audit-catalog P --audit-out A`, have
-     both reviewers re-sign FF and FQ to the new A, retry. Then assemble sources/installed-authorities.json
-     (append authored-v<K+1> to source_chain; replace the three rail entries with the emitted drafts) and
+     both reviewers re-sign FF and FQ to the new A, retry. Then assemble
+     go-backend/internal/contentrails/sources/installed-authorities.json (append authored-v<K+1> to
+     source_chain; replace the three rail entries with the emitted drafts) and
      swap the sha in installed_authorities_pin.go via the metadata template (the file must equal
      PinBytesForInstalledAuthorities exactly). No second installed audit, no second reviewer round and
      no runtime freeze.
    - 4i Gates: `cat-content-rail all --check`, `cat-content validate`, `export --check`,
-     `cat-content-ops check --check`, `cat-mobile-pack --check`, `go -C go-backend test -race -timeout 40m ./...`,
+     `cat-content-ops check --check`, `cat-mobile-pack --check`, `go -C go-backend test -race -timeout 60m ./...`,
      `go -C go-backend vet ./...`, `go -C shared-go/authcore test -race ./...`, `cat-doc-check --root ..`,
      `git diff --check` — no new red versus step 0. Then play each new word once through a local
      cat-server API (a Cald sau Rece guess resolves; an alias shares its node's slot), keeping a log
@@ -183,11 +196,14 @@ your content changed its expectation, with no generator to refresh it, is report
    export; the pins in 4f; authored-v<K+1>.json, installed-authorities.json,
    installed_authorities_pin.go; the corpus and the golden.go block; the rail files under
    docs/reviews/<wave>/native/ (including audit.json, final-factual-review.json and
-   final-quality-review.json under docs/reviews/<wave>/native/<r>/); Go or frontend testdata that an existing generator rewrites (name it
-   in the README); count mirrors in tests/current_content.py; the pool, the wave README and
-   docs/STATUS.md. Never new or edited `_test.go`, new Python tests, new repo scripts or
-   rules_unicode15.json. On waking to a dirty worktree mid-step, reset the worktree only
-   (`git -C <worktree> checkout -- . && git -C <worktree> clean -fd`; never in ~/work/cat_de_roman_esti) and redo the sub-step from its last commit.
+   final-quality-review.json under docs/reviews/<wave>/native/<r>/); Go or frontend testdata that
+   an existing generator rewrites (name it in the README); the pool, the wave README and
+   docs/STATUS.md. The Python reference suite is not a gate (ADR-0186): leave
+   tests/current_content.py alone and note any Python red in the README. Never new or edited
+   `_test.go`, new Python tests, new repo scripts or rules_unicode15.json. On waking to a dirty
+   worktree mid-step, reset the worktree only
+   (`git -C <worktree> checkout -- . && git -C <worktree> clean -fd`; never in
+   ~/work/cat_de_roman_esti) and redo the sub-step from its last commit.
 5. Record and land. Pool records become integrated, held or rejected, each with one reason.
    docs/reviews/<wave>/ holds exactly the rail files installed-authorities.json binds (about 21 files,
    ~6 MiB, byte-exact, no -r2 copies) plus at most 10 small text files: README.md (≤80 lines of plain
@@ -221,8 +237,9 @@ your content changed its expectation, with no generator to refresh it, is report
   with 3 plausible siblings, Alchimie result); with no game, skip it. Give 4–8 truthful links to
   distinct nodes: at least 2 to nodes already on main, at most 2 to other new nodes of this batch,
   and at least 2 in the same category. The writer refuses fewer than 4 or fewer than 2
-  same-category, but it counts batch links, so it cannot catch an island. Give a closed set one honest parent (Anotimp, Punct cardinal, Crăciun) instead of
-  wiring every member to every other. `label_ro` must read true from source to target. Lanț shows
+  same-category, but it counts batch links, so it cannot catch an island. Give a closed set one
+  honest parent (Anotimp, Punct cardinal, Crăciun) instead of wiring every member to every other.
+  `label_ro` must read true from source to target. Lanț shows
   only relation captions (is_a, part_of, created_by, contemporary_of; others show "legătură
   directă"), so prefer an honest is_a or part_of.
 - Never relax a validator limit, rubric floor or threshold, and never invent a link to make a puzzle pass.
