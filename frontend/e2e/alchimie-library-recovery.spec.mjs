@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { applyDoubledText } from "./fixture-text-size.mjs";
 import { readFileSync } from "node:fs";
 
 const BASE = "/api/alchimie/explore";
@@ -92,7 +93,7 @@ test("search reset keeps keyboard recovery visible in a short viewport with doub
   await page.setViewportSize({ width: 320, height: 360 });
   await page.goto("/alchimie");
   await page.getByRole("button", { name: "Începe explorarea →" }).click();
-  await page.addStyleTag({ content: "html { font-size: 200% !important; }" });
+  await applyDoubledText(page);
   await page.locator(".alchemy-library-tools > summary").click();
   await page.getByRole("searchbox", { name: "Caută în colecție" }).fill("zzzz");
   await page.locator(".alchemy-library-tools > summary").click();

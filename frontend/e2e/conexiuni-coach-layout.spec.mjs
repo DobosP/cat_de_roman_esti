@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { applyDoubledText } from "./fixture-text-size.mjs";
 import { games, deterministicStarts, start } from "./games.mjs";
 
 const game = games.find(({ key }) => key === "conexiuni");
@@ -8,7 +9,7 @@ for (const width of [320, 390]) for (const textScale of [1, 2]) {
     await page.setViewportSize({ width, height: 844 });
     await deterministicStarts(page, game);
     await start(page, game);
-    if (textScale === 2) await page.addStyleTag({ content: "html { font-size: 200% !important; }" });
+    if (textScale === 2) await applyDoubledText(page);
     await page.evaluate(() => globalThis.document.fonts.ready);
     for (const selected of [0, 1, 2, 3, 4]) {
       if (selected) await page.locator(".connections-grid button").nth(selected - 1).click();

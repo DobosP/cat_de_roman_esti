@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { applyDoubledText } from "./fixture-text-size.mjs";
 import { readFileSync } from "node:fs";
 
 const BASE = "/api/alchimie/explore";
@@ -53,7 +54,7 @@ test("empty journal search recovers in one action and keeps the crafting selecti
   await journal(page).locator(":scope > summary").click();
   await expect(journal(page).locator(":scope > summary")).toContainText("Căutare: zzzz");
   await journal(page).locator(":scope > summary").click();
-  await page.addStyleTag({ content: "html { font-size: 200% !important; }" });
+  await applyDoubledText(page);
   const reset = page.getByRole("button", { name: "Șterge căutarea din rețete", exact: true });
   await reset.focus();
   await reset.scrollIntoViewIfNeeded();

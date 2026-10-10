@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { applyDoubledText } from "./fixture-text-size.mjs";
 import { games, gameURL, deterministicStarts, solution, start, act } from "./games.mjs";
 
 const game = games.find(({ key }) => key === "contexto");
@@ -103,7 +104,7 @@ test("the options menu preserves explicit reveal confirmation and optional recen
 test("the guess field and reveal confirmation stay usable at 320px with a short viewport and doubled text", async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 480 });
   await start(page, game);
-  await page.addStyleTag({ content: "html { font-size: 200% !important; }" });
+  await applyDoubledText(page);
   await expect(field(page)).toBeVisible();
   await expect(page.locator("#contexto-clue-cost")).toBeVisible();
   const overflow = await page.locator(".contexto-screen").evaluate((element) => ({
