@@ -1,0 +1,148 @@
+{
+  "schema": 1,
+  "target": "build",
+  "status": "pass",
+  "sha": "7cf0704ba2ba9620dfaa30c296bbebea96a3c90e",
+  "dirty": false,
+  "tree_sha256": "9c029680d3ac82892278fbc6ed842efa44ac9b043779f9a956b13c1a1c8f30ca",
+  "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+  "versions_lock_sha256": "afd977316d1749046ba723fb4fdc978bfd9257070c16afa802e4606b9ab861fa",
+  "parallel": 2,
+  "started": "2026-10-10T12:24:50.707Z",
+  "finished": "2026-10-10T12:26:12.895Z",
+  "checks": [
+    {
+      "name": "bootstrap-evidence",
+      "status": "pass",
+      "duration_ms": 3
+    },
+    {
+      "name": "ui-adoption",
+      "status": "pass",
+      "reason": "ui-staged-pending",
+      "duration_ms": 90
+    },
+    {
+      "name": "cat-setup-npm-ci",
+      "status": "pass",
+      "duration_ms": 3996
+    },
+    {
+      "name": "cat-build-fresh-build-output",
+      "status": "pass",
+      "duration_ms": 99
+    },
+    {
+      "name": "cat-build-frontend-build",
+      "status": "pass",
+      "duration_ms": 7173
+    },
+    {
+      "name": "cat-build-emitted-inventory",
+      "status": "pass",
+      "duration_ms": 1163
+    },
+    {
+      "name": "cat-build-assets",
+      "status": "pass",
+      "duration_ms": 1248
+    },
+    {
+      "name": "cat-build-gui-identity",
+      "status": "pass",
+      "duration_ms": 409
+    },
+    {
+      "name": "cat-build-build-cat-server",
+      "status": "pass",
+      "duration_ms": 2519
+    },
+    {
+      "name": "cat-build-build-cat-browser-plan",
+      "status": "pass",
+      "duration_ms": 1497
+    },
+    {
+      "name": "cat-build-managed-serving-format",
+      "status": "pass",
+      "duration_ms": 61
+    },
+    {
+      "name": "cat-build-managed-serving-race",
+      "status": "pass",
+      "duration_ms": 62786
+    },
+    {
+      "name": "ui-adoption-binding",
+      "status": "pass",
+      "duration_ms": 0
+    }
+  ],
+  "csp": {
+    "stage": "report-only",
+    "violations": 0,
+    "legacy_violations": 0
+  },
+  "budgets": {},
+  "artifacts": [
+    ".gate/build/logs/3920f865-4f67-4623-8eb1-7fed205f7f75-bootstrap-config-0.stdout.log sha256:557b4a0935c07456dd43460c45e65ee3bf5f2931d97ea308138f4a8e56457b95",
+    ".gate/build/logs/3920f865-4f67-4623-8eb1-7fed205f7f75-bootstrap-config-0.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/build/logs/3920f865-4f67-4623-8eb1-7fed205f7f75-bootstrap-setup-1.stdout.log sha256:0154a323810100f87343fdd74b29796278801ef3b95249d557b192ed475c7baa",
+    ".gate/build/logs/3920f865-4f67-4623-8eb1-7fed205f7f75-bootstrap-setup-1.stderr.log sha256:b7865be93e1c788d54d2ebf2a362eae09fda9749916b54c52977beccfd7e403b",
+    ".gate/build/logs/3920f865-4f67-4623-8eb1-7fed205f7f75-bootstrap-config-2.stdout.log sha256:557b4a0935c07456dd43460c45e65ee3bf5f2931d97ea308138f4a8e56457b95",
+    ".gate/build/logs/3920f865-4f67-4623-8eb1-7fed205f7f75-bootstrap-config-2.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/build/bootstrap-execution.json sha256:f1686fe255048816fa0a9009cfa74d64cce8dc6f99f7eba91e1958ba4b07b1f5",
+    ".gate/build/ui-adoption-evidence.json sha256:4a5546a95ab9a64c3f1679e9f4eb7ac404fd333712a615b6cdbdfb8c0ae61286",
+    ".gate/build/logs/setup-3920f865-4f67-4623-8eb1-7fed205f7f75-cat-setup-npm-ci-0.stdout.log sha256:88b09df655b4c750461f6ebc75cfdbae4f2e078768692e8a0b532eea986d8f6f",
+    ".gate/build/logs/setup-3920f865-4f67-4623-8eb1-7fed205f7f75-cat-setup-npm-ci-0.stderr.log sha256:c211d12fa3e2f4c92b2151c523b2743bc220c1991e0de3797724e244bb411568",
+    ".gate/build/logs/3920f865-4f67-4623-8eb1-7fed205f7f75-repo-build-14.stdout.log sha256:49d6fdda33f33bece145080c293ad4c866ae5de6eb8e6d4465e70e48ef177fe2",
+    ".gate/build/logs/3920f865-4f67-4623-8eb1-7fed205f7f75-repo-build-14.stderr.log sha256:b6a661b86f5b57fa68de9a3cf9315601c96d39f6ddd9bb34e102bfd202d4bb92",
+    ".gate/build/logs/3920f865-4f67-4623-8eb1-7fed205f7f75-cat-build-fresh-build-output-0.stdout.log sha256:089c3917f3bc4d07de18dcf125671a5ad4216ef5cb4eda592afdc7f62e6b080b",
+    ".gate/build/logs/3920f865-4f67-4623-8eb1-7fed205f7f75-cat-build-fresh-build-output-0.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/build/logs/3920f865-4f67-4623-8eb1-7fed205f7f75-cat-build-frontend-build-1.stdout.log sha256:8cd289abfd609e3a369cde954df57a06a0f7d719029932c9e22061f5bef02a8e",
+    ".gate/build/logs/3920f865-4f67-4623-8eb1-7fed205f7f75-cat-build-frontend-build-1.stderr.log sha256:ee53b77219b80720b42476aa90f6b8a64d4e41e60ebb81c18d204edd804df309",
+    ".gate/build/logs/3920f865-4f67-4623-8eb1-7fed205f7f75-cat-build-emitted-inventory-2.stdout.log sha256:7729819d8c3d19a8ea77124e2ad55ca4e40dfb40b1057856f6082dc92422ce91",
+    ".gate/build/logs/3920f865-4f67-4623-8eb1-7fed205f7f75-cat-build-emitted-inventory-2.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/build/logs/3920f865-4f67-4623-8eb1-7fed205f7f75-cat-build-assets-4.stdout.log sha256:e378dd6040670a9b9abcc126f936e91bcfc50d18371b0d388c6e456f0b729f17",
+    ".gate/build/logs/3920f865-4f67-4623-8eb1-7fed205f7f75-cat-build-assets-4.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/build/logs/3920f865-4f67-4623-8eb1-7fed205f7f75-cat-build-gui-identity-6.stdout.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/build/logs/3920f865-4f67-4623-8eb1-7fed205f7f75-cat-build-gui-identity-6.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "go-backend/embedfs/build/dist/.gui-build.json sha256:216d26bae730045a754e5633902896ea6b8c48b65af2b1daa99918adea41f424",
+    "go-backend/embedfs/build/dist/.keep sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "go-backend/embedfs/build/dist/versions.lock.json sha256:afd977316d1749046ba723fb4fdc978bfd9257070c16afa802e4606b9ab861fa",
+    ".gate/build/logs/3920f865-4f67-4623-8eb1-7fed205f7f75-cat-build-build-cat-server-7.stdout.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/build/logs/3920f865-4f67-4623-8eb1-7fed205f7f75-cat-build-build-cat-server-7.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/build/cat-server sha256:80da48a5a05ec1903dfe8fbe94a666dd294019bc83e410327c5ca670d8db1567",
+    ".gate/build/logs/3920f865-4f67-4623-8eb1-7fed205f7f75-cat-build-build-cat-browser-plan-8.stdout.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/build/logs/3920f865-4f67-4623-8eb1-7fed205f7f75-cat-build-build-cat-browser-plan-8.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/build/cat-browser-plan sha256:3578e18a94f1104d4998511b9ac54373b8ac690ae9a2b8e2e17e9f3ba9a4420b",
+    ".gate/build/logs/3920f865-4f67-4623-8eb1-7fed205f7f75-cat-build-managed-serving-format-10.stdout.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/build/logs/3920f865-4f67-4623-8eb1-7fed205f7f75-cat-build-managed-serving-format-10.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/build/managed-serving/3920f865-4f67-4623-8eb1-7fed205f7f75/format.json sha256:227a834bb619b542254a2cb2ce0937fb4508746e33e3937780902ac8d9e3cc05",
+    ".gate/build/logs/3920f865-4f67-4623-8eb1-7fed205f7f75-cat-build-managed-serving-race-13.stdout.log sha256:db2b0f499ecec0d87ea93251b7a7da2c17c7b590838ad28b1c760c0eafd99abf",
+    ".gate/build/logs/3920f865-4f67-4623-8eb1-7fed205f7f75-cat-build-managed-serving-race-13.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/build/managed-serving/3920f865-4f67-4623-8eb1-7fed205f7f75/native.json sha256:c4ec3741203ad52c5ac9f50d9be060342099be994f081bf7ae794cfb1621958b",
+    ".gate/build/managed-assets/inventory.json sha256:7729819d8c3d19a8ea77124e2ad55ca4e40dfb40b1057856f6082dc92422ce91",
+    ".gate/build/managed-assets/prepare.json sha256:089c3917f3bc4d07de18dcf125671a5ad4216ef5cb4eda592afdc7f62e6b080b",
+    ".gate/build/managed-assets/sync.json sha256:e378dd6040670a9b9abcc126f936e91bcfc50d18371b0d388c6e456f0b729f17",
+    ".gate/build/execution.json sha256:234950c257093d374aea2bc12284f002cca0a0b66e36941a575bee7f67a13f63"
+  ],
+  "ui_adoption": {
+    "mode": "staged-react",
+    "status": "pending",
+    "until": "S1-M2",
+    "source": "repo:kit-config",
+    "config_sha256": "557b4a0935c07456dd43460c45e65ee3bf5f2931d97ea308138f4a8e56457b95",
+    "legacy": {
+      "version": "0.3.0",
+      "archive_sha256": "1934a81cdfd737a051f591ebcae072f5028943b715456dbb2899b483d399c244",
+      "source_sha": "45edcf2ce170c112621c73609e6e169633eb38a8",
+      "receipt": "docs/reviews/gui-original-react/receipt.json",
+      "receipt_sha256": "5c5704bc05511f91a02582c17e515500d2c8bca471f1c50cfd2505b646a27e58"
+    },
+    "selected_ui": {
+      "version": "1.0.6",
+      "archive_sha256": "0221837295b108b20fcae9c6987d4c52b78657d7a3378a408263afc54e9eb046"
+    }
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "schema": 1,
+  "target": "build",
+  "invocation": "3920f865-4f67-4623-8eb1-7fed205f7f75",
+  "sha": "7cf0704ba2ba9620dfaa30c296bbebea96a3c90e",
+  "tree_sha256": "9c029680d3ac82892278fbc6ed842efa44ac9b043779f9a956b13c1a1c8f30ca",
+  "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+  "stage": "report-only",
+  "check": "cat-build-managed-serving-format",
+  "status": "pass",
+  "command": {
+    "check": "cat-build-managed-serving-format",
+    "kind": "command",
+    "command": "gofmt",
+    "argument_count": 7,
+    "args_sha256": "53af5424692c28c741aee52ea24989b9f23e73c79b62de36815c5b283dd4a553",
+    "cwd": ".",
+    "exit_code": 0,
+    "duration_ms": 57,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_log": ".gate/build/logs/3920f865-4f67-4623-8eb1-7fed205f7f75-cat-build-managed-serving-format-10.stdout.log",
+    "stderr_log": ".gate/build/logs/3920f865-4f67-4623-8eb1-7fed205f7f75-cat-build-managed-serving-format-10.stderr.log"
+  },
+  "argv": [
+    "gofmt",
+    "-d",
+    "go-backend/internal/httpapi/managed_spa.go",
+    "go-backend/internal/httpapi/managed_nonce.go",
+    "go-backend/internal/httpapi/managed_legacy.go",
+    "go-backend/internal/httpapi/managed_spa_test.go",
+    "go-backend/internal/httpapi/managed_nonce_test.go",
+    "go-backend/internal/httpapi/managed_legacy_test.go"
+  ],
+  "read_only": true,
+  "stdout_bytes": 0,
+  "stderr_bytes": 0,
+  "source_before": [
+    {
+      "path": "go-backend/internal/httpapi/managed_spa.go",
+      "bytes": 7416,
+      "sha256": "957311f7ab7fc7fd438f5bdc2afc051e3571698d755cd97330ec828fcd556bec",
+      "full_mode": 33204
+    },
+    {
+      "path": "go-backend/internal/httpapi/managed_nonce.go",
+      "bytes": 13834,
+      "sha256": "e0e12246d92a06fd64b985fb007b963e1b0d5a138b13d49c4e03496eec7466fc",
+      "full_mode": 33204
+    },
+    {
+      "path": "go-backend/internal/httpapi/managed_legacy.go",
+      "bytes": 2545,
+      "sha256": "fe1b6337e1608300dc16d49d947ecb102047e3bd20e65e50a82932e908e4cbca",
+      "full_mode": 33204
+    },
+    {
+      "path": "go-backend/internal/httpapi/managed_spa_test.go",
+      "bytes": 14188,
+      "sha256": "080530c696ba265e923cea9d78ab96847f906c770a1cfb390804611c4bbc71d8",
+      "full_mode": 33204
+    },
+    {
+      "path": "go-backend/internal/httpapi/managed_nonce_test.go",
+      "bytes": 18305,
+      "sha256": "e1852827572761fcbe8f80a8706420867275f2e902c4e7d3409102a5e1c4eb24",
+      "full_mode": 33204
+    },
+    {
+      "path": "go-backend/internal/httpapi/managed_legacy_test.go",
+      "bytes": 17502,
+      "sha256": "e41816e26ab67484c053366bc9c5db9825573504f3735d9e78bf2d00c5e71868",
+      "full_mode": 33204
+    }
+  ],
+  "source_after": [
+    {
+      "path": "go-backend/internal/httpapi/managed_spa.go",
+      "bytes": 7416,
+      "sha256": "957311f7ab7fc7fd438f5bdc2afc051e3571698d755cd97330ec828fcd556bec",
+      "full_mode": 33204
+    },
+    {
+      "path": "go-backend/internal/httpapi/managed_nonce.go",
+      "bytes": 13834,
+      "sha256": "e0e12246d92a06fd64b985fb007b963e1b0d5a138b13d49c4e03496eec7466fc",
+      "full_mode": 33204
+    },
+    {
+      "path": "go-backend/internal/httpapi/managed_legacy.go",
+      "bytes": 2545,
+      "sha256": "fe1b6337e1608300dc16d49d947ecb102047e3bd20e65e50a82932e908e4cbca",
+      "full_mode": 33204
+    },
+    {
+      "path": "go-backend/internal/httpapi/managed_spa_test.go",
+      "bytes": 14188,
+      "sha256": "080530c696ba265e923cea9d78ab96847f906c770a1cfb390804611c4bbc71d8",
+      "full_mode": 33204
+    },
+    {
+      "path": "go-backend/internal/httpapi/managed_nonce_test.go",
+      "bytes": 18305,
+      "sha256": "e1852827572761fcbe8f80a8706420867275f2e902c4e7d3409102a5e1c4eb24",
+      "full_mode": 33204
+    },
+    {
+      "path": "go-backend/internal/httpapi/managed_legacy_test.go",
+      "bytes": 17502,
+      "sha256": "e41816e26ab67484c053366bc9c5db9825573504f3735d9e78bf2d00c5e71868",
+      "full_mode": 33204
+    }
+  ],
+  "source_before_after_equal": true,
+  "command_error": null
+}
