@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-10 — V1.7 parked ([ADR-0188](adr/0188-park-v1-7-and-reset-content-loop.md)); Source6 live; content rail baseline red since 5baf581.
+Last verified: 2026-10-10 — [V1.8 baseline](reviews/v1-8-everyday-core/README.md), research-only; V1.7 parked ([ADR-0188](adr/0188-park-v1-7-and-reset-content-loop.md)); Source6 live; content rail baseline red since 5baf581.
 
 - **GUI checkpoint:** core1.2 released; native7/current+candidate andfocusedMotion14 PASS; exact15 accepted/unapplied; deps64ea PASS. Fullnormalized replay/Node3/lint/unit/CSP/device/KIT_BUMP pending. Linuxsupervisor/worker paused.
 - **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
