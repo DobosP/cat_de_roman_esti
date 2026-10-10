@@ -142,4 +142,4 @@ Parallel lanes allocated0185/0186 independently. Full filenames disambiguate the
 
 - [0189](0189-manifest-owned-precompressed-assets.md) — deterministic manifest-owned gzip/Brotli production and strict complete-pair inventory/sync; source accepted, managed/image/browser validation pending.
 
-- [0190](0190-owner-approved-vitals-regression-criterion.md) — explicit owner-approved LCP/INP improvements with unchanged slowdown limits; original baselines/failures retained, targeted/full execution pending.
+- [0190](0190-owner-approved-vitals-regression-criterion.md) — explicit owner-approved LCP/INP improvements with unchanged slowdown limits; original baselines/failures retained, actual focused43 PASS, full qualification pending.

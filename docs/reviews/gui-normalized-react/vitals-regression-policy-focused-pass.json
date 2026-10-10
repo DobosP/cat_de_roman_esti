@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "context": {
+    "schema": 1,
+    "invocation": "594c7c40-1c1b-4176-acbd-494b68c351c1",
+    "target": "shell",
+    "sha": "2a6e1bcc2b13bcc5e434fa83ba3ce6fb7039f5d5",
+    "tree_sha256": "be944cdad36ff230fa63b580e92de0eb0994e4e128592eaacab4f9faafe7ad4b",
+    "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+    "config_sha256": "557b4a0935c07456dd43460c45e65ee3bf5f2931d97ea308138f4a8e56457b95",
+    "config_path": ".gate/shell/wrapper-kit-config.json",
+    "config_file_sha256": "f85f12779582fc5212bf3487c2f3b789c65b8f088f31ad382c55d4e5a0c100b7"
+  },
+  "actual_wrapper_exit": 0,
+  "actual_node_exit": 0,
+  "actual_source_bracket_exit": 0,
+  "actual_after_hash_exit": 0,
+  "node_command": [
+    "node",
+    "--test",
+    "--test-reporter=tap",
+    "frontend/tests/gui-baseline-checks.test.mjs"
+  ],
+  "method_sha256": "ae30a01defbacc6149d5ca4e327be4d960d6152ab49d3b086ccf5530ebf14e32",
+  "tests": 43,
+  "pass": 43,
+  "fail": 0,
+  "skip": 0,
+  "cancelled": 0,
+  "todo": 0,
+  "unique_test_names": 43,
+  "test_ids_once": true,
+  "stderr_bytes": 0,
+  "tap_sha256": "68900e0a58c471f2e74d9aa6c9c7f4e9d44fea96f3bfb849f25ecad83ab56211",
+  "source_before_after_equal": true,
+  "honest_absences": [
+    {
+      "root": "source",
+      "path": ".gate/wrapper-current.json",
+      "absent": true
+    }
+  ],
+  "aggregate_result_absent": true,
+  "scope": "Actual managed focused synthetic policy/refusal tests only; no browser/vitals/device/full/M0/M1/KIT_BUMP acceptance",
+  "retention": "Small new report/control/source-bracket bundle only; old verified591c build setup reused. No full workspace/node_modules copy.",
+  "actual_observations_sha256": "a026477738974315064edd2751ab70dec858e1bcc170c4b190023cd72a938830",
+  "captured_regular_rows": 21,
+  "captured_bytes": 480960,
+  "independent_review": "program_pack verified all21 bytes/fullmodes/context/config/Git/sourcebrackets/TAP43once; actual focused review CLEAR",
+  "wrapper_exit_attribution": "Parent awaited real unifiedexec94123 exit0; supported shell has no aggregate result.json, no unit/full receipt is claimed"
+}

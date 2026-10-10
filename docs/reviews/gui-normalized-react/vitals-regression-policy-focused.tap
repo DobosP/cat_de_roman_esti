@@ -1,0 +1,268 @@
+TAP version 13
+# Subtest: known Home alias DATA preserves immutable ordered original fields and does not mutate either caller
+ok 1 - known Home alias DATA preserves immutable ordered original fields and does not mutate either caller
+  ---
+  duration_ms: 3.216947
+  type: 'test'
+  ...
+# Subtest: Home alias DATA refuses unknown card selector
+ok 2 - Home alias DATA refuses unknown card selector
+  ---
+  duration_ms: 1.189315
+  type: 'test'
+  ...
+# Subtest: Home alias DATA refuses swapped semantic owners
+ok 3 - Home alias DATA refuses swapped semantic owners
+  ---
+  duration_ms: 0.36291
+  type: 'test'
+  ...
+# Subtest: Home alias DATA refuses additional target
+ok 4 - Home alias DATA refuses additional target
+  ---
+  duration_ms: 2.213788
+  type: 'test'
+  ...
+# Subtest: Home alias DATA refuses missing target
+ok 5 - Home alias DATA refuses missing target
+  ---
+  duration_ms: 0.538134
+  type: 'test'
+  ...
+# Subtest: Home alias DATA refuses multi-part shadow target
+ok 6 - Home alias DATA refuses multi-part shadow target
+  ---
+  duration_ms: 0.572067
+  type: 'test'
+  ...
+# Subtest: Home alias DATA refuses new rule ID
+ok 7 - Home alias DATA refuses new rule ID
+  ---
+  duration_ms: 0.561673
+  type: 'test'
+  ...
+# Subtest: Home alias DATA refuses new impact
+ok 8 - Home alias DATA refuses new impact
+  ---
+  duration_ms: 0.35946
+  type: 'test'
+  ...
+# Subtest: Home alias DATA refuses rule order
+ok 9 - Home alias DATA refuses rule order
+  ---
+  duration_ms: 0.234042
+  type: 'test'
+  ...
+# Subtest: Home alias DATA refuses extra rule
+ok 10 - Home alias DATA refuses extra rule
+  ---
+  duration_ms: 0.445829
+  type: 'test'
+  ...
+# Subtest: Home alias DATA refuses unknown footer
+ok 11 - Home alias DATA refuses unknown footer
+  ---
+  duration_ms: 0.239169
+  type: 'test'
+  ...
+# Subtest: Home alias DATA refuses additional fingerprint field
+ok 12 - Home alias DATA refuses additional fingerprint field
+  ---
+  duration_ms: 0.351027
+  type: 'test'
+  ...
+# Subtest: exact raw route/Axe comparison remains strict and needs no selector reinterpretation
+ok 13 - exact raw route/Axe comparison remains strict and needs no selector reinterpretation
+  ---
+  duration_ms: 0.390163
+  type: 'test'
+  ...
+# Subtest: valid declared Home DATA and serialized historical claims cannot authorize live alias comparison
+ok 14 - valid declared Home DATA and serialized historical claims cannot authorize live alias comparison
+  ---
+  duration_ms: 0.902601
+  type: 'test'
+  ...
+# Subtest: declared Home DATA refuses non-native tag without granting runtime authority
+ok 15 - declared Home DATA refuses non-native tag without granting runtime authority
+  ---
+  duration_ms: 0.178139
+  type: 'test'
+  ...
+# Subtest: declared Home DATA refuses different role without granting runtime authority
+ok 16 - declared Home DATA refuses different role without granting runtime authority
+  ---
+  duration_ms: 0.108539
+  type: 'test'
+  ...
+# Subtest: declared Home DATA refuses different exact name without granting runtime authority
+ok 17 - declared Home DATA refuses different exact name without granting runtime authority
+  ---
+  duration_ms: 0.08315
+  type: 'test'
+  ...
+# Subtest: declared Home DATA refuses external labelledby without granting runtime authority
+ok 18 - declared Home DATA refuses external labelledby without granting runtime authority
+  ---
+  duration_ms: 0.076449
+  type: 'test'
+  ...
+# Subtest: declared Home DATA refuses hidden card without granting runtime authority
+ok 19 - declared Home DATA refuses hidden card without granting runtime authority
+  ---
+  duration_ms: 0.075081
+  type: 'test'
+  ...
+# Subtest: declared Home DATA refuses disabled card without granting runtime authority
+ok 20 - declared Home DATA refuses disabled card without granting runtime authority
+  ---
+  duration_ms: 0.077114
+  type: 'test'
+  ...
+# Subtest: declared Home DATA refuses invisible card without granting runtime authority
+ok 21 - declared Home DATA refuses invisible card without granting runtime authority
+  ---
+  duration_ms: 0.098694
+  type: 'test'
+  ...
+# Subtest: declared Home DATA refuses wrong native element join without granting runtime authority
+ok 22 - declared Home DATA refuses wrong native element join without granting runtime authority
+  ---
+  duration_ms: 0.104816
+  type: 'test'
+  ...
+# Subtest: declared Home DATA refuses wrong order without granting runtime authority
+ok 23 - declared Home DATA refuses wrong order without granting runtime authority
+  ---
+  duration_ms: 0.09042
+  type: 'test'
+  ...
+# Subtest: declared Home DATA refuses name resolver mismatch without granting runtime authority
+ok 24 - declared Home DATA refuses name resolver mismatch without granting runtime authority
+  ---
+  duration_ms: 0.075862
+  type: 'test'
+  ...
+# Subtest: declared Home DATA refuses missing snapshot without granting runtime authority
+ok 25 - declared Home DATA refuses missing snapshot without granting runtime authority
+  ---
+  duration_ms: 0.071472
+  type: 'test'
+  ...
+# Subtest: declared Home DATA refuses missing card without granting runtime authority
+ok 26 - declared Home DATA refuses missing card without granting runtime authority
+  ---
+  duration_ms: 0.069581
+  type: 'test'
+  ...
+# Subtest: declared Home DATA refuses different footer text without granting runtime authority
+ok 27 - declared Home DATA refuses different footer text without granting runtime authority
+  ---
+  duration_ms: 0.085114
+  type: 'test'
+  ...
+# Subtest: declared Home DATA refuses different footer node without granting runtime authority
+ok 28 - declared Home DATA refuses different footer node without granting runtime authority
+  ---
+  duration_ms: 0.10512
+  type: 'test'
+  ...
+# Subtest: declared Home DATA refuses different footer role without granting runtime authority
+ok 29 - declared Home DATA refuses different footer role without granting runtime authority
+  ---
+  duration_ms: 0.084503
+  type: 'test'
+  ...
+# Subtest: forged live context refuses before any browser method or observer runs
+ok 30 - forged live context refuses before any browser method or observer runs
+  ---
+  duration_ms: 1.388282
+  type: 'test'
+  ...
+# Subtest: Axe refusal does not hide any of nine exact PNG and four unchanged vitals predicates
+ok 31 - Axe refusal does not hide any of nine exact PNG and four unchanged vitals predicates
+  ---
+  duration_ms: 6.577696
+  type: 'test'
+  ...
+# Subtest: vitals refuse only regressions beyond max(10%,50ms) with valid nonnegative metrics for 1100
+ok 32 - vitals refuse only regressions beyond max(10%,50ms) with valid nonnegative metrics for 1100
+  ---
+  duration_ms: 0.442019
+  type: 'test'
+  ...
+# Subtest: vitals refuse only regressions beyond max(10%,50ms) with valid nonnegative metrics for 1100.01
+ok 33 - vitals refuse only regressions beyond max(10%,50ms) with valid nonnegative metrics for 1100.01
+  ---
+  duration_ms: 0.327944
+  type: 'test'
+  ...
+# Subtest: vitals refuse only regressions beyond max(10%,50ms) with valid nonnegative metrics for 150
+ok 34 - vitals refuse only regressions beyond max(10%,50ms) with valid nonnegative metrics for 150
+  ---
+  duration_ms: 0.207706
+  type: 'test'
+  ...
+# Subtest: vitals refuse only regressions beyond max(10%,50ms) with valid nonnegative metrics for 150.01
+ok 35 - vitals refuse only regressions beyond max(10%,50ms) with valid nonnegative metrics for 150.01
+  ---
+  duration_ms: 0.211325
+  type: 'test'
+  ...
+# Subtest: vitals refuse only regressions beyond max(10%,50ms) with valid nonnegative metrics for 50
+ok 36 - vitals refuse only regressions beyond max(10%,50ms) with valid nonnegative metrics for 50
+  ---
+  duration_ms: 0.194108
+  type: 'test'
+  ...
+# Subtest: vitals refuse only regressions beyond max(10%,50ms) with valid nonnegative metrics for 49.99
+ok 37 - vitals refuse only regressions beyond max(10%,50ms) with valid nonnegative metrics for 49.99
+  ---
+  duration_ms: 0.170485
+  type: 'test'
+  ...
+# Subtest: vitals refuse only regressions beyond max(10%,50ms) with valid nonnegative metrics for null
+ok 38 - vitals refuse only regressions beyond max(10%,50ms) with valid nonnegative metrics for null
+  ---
+  duration_ms: 0.168169
+  type: 'test'
+  ...
+# Subtest: vitals refuse only regressions beyond max(10%,50ms) with valid nonnegative metrics for NaN
+ok 39 - vitals refuse only regressions beyond max(10%,50ms) with valid nonnegative metrics for NaN
+  ---
+  duration_ms: 0.171455
+  type: 'test'
+  ...
+# Subtest: vitals refuse only regressions beyond max(10%,50ms) with valid nonnegative metrics for Infinity
+ok 40 - vitals refuse only regressions beyond max(10%,50ms) with valid nonnegative metrics for Infinity
+  ---
+  duration_ms: 0.234921
+  type: 'test'
+  ...
+# Subtest: vitals refuse only regressions beyond max(10%,50ms) with valid nonnegative metrics for -1
+ok 41 - vitals refuse only regressions beyond max(10%,50ms) with valid nonnegative metrics for -1
+  ---
+  duration_ms: 0.172289
+  type: 'test'
+  ...
+# Subtest: vitals refuse only regressions beyond max(10%,50ms) with valid nonnegative metrics for 0
+ok 42 - vitals refuse only regressions beyond max(10%,50ms) with valid nonnegative metrics for 0
+  ---
+  duration_ms: 0.170263
+  type: 'test'
+  ...
+# Subtest: vitals refuse only regressions beyond max(10%,50ms) with valid nonnegative metrics for 1
+ok 43 - vitals refuse only regressions beyond max(10%,50ms) with valid nonnegative metrics for 1
+  ---
+  duration_ms: 0.180182
+  type: 'test'
+  ...
+1..43
+# tests 43
+# suites 0
+# pass 43
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 119.442651

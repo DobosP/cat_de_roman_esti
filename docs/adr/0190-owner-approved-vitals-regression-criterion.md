@@ -1,7 +1,7 @@
 # ADR-0190: Owner-approved LCP/INP regression criterion
 
 Date: 2026-10-10
-Status: accepted by explicit owner instruction; source applied, targeted and full execution pending
+Status: accepted by explicit owner instruction; actual focused43 PASS at2a6e1bc, full qualification pending
 
 ## Authority and context
 
@@ -22,3 +22,7 @@ No screenshot/Axe/Home-witness, CSP, privacy, content, route, budget, SDK or dev
 Apply exactly the reviewed R2 afterimages: two helper lines change the validity/direction predicate; existing safety controls and reporting remain intact. Existing comparison tests now accept a faster value and retain exact numeric boundaries, just-over-boundary regressions and nonfinite refusals. Two additional controls isolate negative current and negative original values; a separate finite-review successor adds an infinite-original control that directly catches omission of expected-value finiteness. The mixed Axe/PNG/timing case still observes every existing comparison, preserves unrelated failures and rejects its slower Conexiuni metric.
 
 Use a justified `GATE-CHANGE:` commit. Targeted managed execution is pending; source acceptance alone is not a test or full pass. Record actual supported managed results before subsequent qualification.
+
+## Actual targeted validation
+
+At clean2a6e1bcc2b13bcc5e434fa83ba3ce6fb7039f5d5, the supported pinned owner shell ran the complete focused module once:43 unique tests passed, zero fail/skip/cancel/todo and empty stderr. Actual Node, source-bracket and wrapper exits were0. Helper/test/immutable baseline before/after hashes matched. Parent retained a small21-file/480960-byte source/mirror control bundle; independent actual review is clear. [Actual focused proof](../reviews/gui-normalized-react/vitals-regression-policy-focused-pass.json) and raw TAP retain the result. This proves the policy/refusal controls, not new browser timings or full/device/milestone acceptance.

@@ -13,7 +13,7 @@ Preserve the six server-authoritative Romanian games while moving the SPA from R
 
 ## 2. Progress
 
-- [x] 2026-10-10 — Paul explicitly approved allowing LCP/INP improvements with unchanged slowdown limits. Exact reviewed R2 source afterimages and active policy amendment applied; original baselines/failures retained. Targeted managed execution and full qualification remain pending.
+- [x] 2026-10-10 — Paul explicitly approved allowing LCP/INP improvements with unchanged slowdown limits. Exact reviewed R2 source afterimages and active policy amendment applied; original baselines/failures retained. Actual supported managed focused43 passed once/no fail/skip/cancel/todo at2a6e; bounded controls independently reviewed. Full qualification remains pending.
 
 - [x] 2026-10-07 05:38 UTC — verified clean perf/gui-cat worktree; original package graph and source unchanged; owner bootstrap and exact core-v1.1 kit input present. Starting HEAD 0203351956ee19180bed9f25cbde7dfcfbe7af08.
 - [x] 2026-10-07 05:38 UTC — read S1 opening correction, CORE-PATCH-1, PROGRAM E1 and twelve-section plan contract. Original qualification precedes dependency/source changes and first sync.
