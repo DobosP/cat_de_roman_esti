@@ -1,0 +1,148 @@
+{
+  "schema": 1,
+  "utc": "2026-10-10T16:11:19.224668+00:00",
+  "source": "487996c1f22fe2ca592889df92006a4a267193a5",
+  "actual_session": 86479,
+  "actual_exit": 2,
+  "stdout": "gate: no trust pin for gate files 68df34456304f658adecdd05268c90f056f67ad45943d868e2079fdd39d2a5d0 (wrapper/.gate.env/compose/Taskfile changed). Codex: GATE PENDING kit:sync sha=487996c1f22fe2ca592889df92006a4a267193a5 (untrusted gate files)\n",
+  "trust_pin_absent": "/home/dobo/gates/trust/68df34456304f658adecdd05268c90f056f67ad45943d868e2079fdd39d2a5d0",
+  "stage": "Actual wrapper trust guard refused BEFORE new descriptor/runtime/result; common rsync mirrored current source",
+  "new_sync_runtime": "NOT RUN",
+  "prior_context_rows": [
+    {
+      "root": "source",
+      "path": ".gate/kit-sync/wrapper-current.json",
+      "bytes": 534,
+      "sha256": "4d9ea30810c0a3ff2d031cfea9e5205288c2de89dc9bca567a00f6cc179ac54a",
+      "full_mode": 33060,
+      "blob": "blobs/4d9ea30810c0a3ff2d031cfea9e5205288c2de89dc9bca567a00f6cc179ac54a.gz",
+      "observed_prior_source": "25065356943e2decc25768c3688435870ec82be8",
+      "not_new_run": true
+    },
+    {
+      "root": "source",
+      "path": ".gate/full/wrapper-current.json",
+      "bytes": 526,
+      "sha256": "f98cd813b12fd658ac2b6f2352d3521ce88a1ef34660cb76b7e53c9d8dab1a37",
+      "full_mode": 33060,
+      "blob": "blobs/f98cd813b12fd658ac2b6f2352d3521ce88a1ef34660cb76b7e53c9d8dab1a37.gz",
+      "observed_prior_source": "25065356943e2decc25768c3688435870ec82be8",
+      "not_new_run": true
+    },
+    {
+      "root": "mirror",
+      "path": ".gate/wrapper-current.json",
+      "bytes": 526,
+      "sha256": "f98cd813b12fd658ac2b6f2352d3521ce88a1ef34660cb76b7e53c9d8dab1a37",
+      "full_mode": 33060,
+      "blob": "blobs/f98cd813b12fd658ac2b6f2352d3521ce88a1ef34660cb76b7e53c9d8dab1a37.gz",
+      "observed_prior_source": "25065356943e2decc25768c3688435870ec82be8",
+      "not_new_run": true
+    },
+    {
+      "root": "mirror",
+      "path": ".gate/full/wrapper-current.json",
+      "bytes": 526,
+      "sha256": "f98cd813b12fd658ac2b6f2352d3521ce88a1ef34660cb76b7e53c9d8dab1a37",
+      "full_mode": 33060,
+      "blob": "blobs/f98cd813b12fd658ac2b6f2352d3521ce88a1ef34660cb76b7e53c9d8dab1a37.gz",
+      "observed_prior_source": "25065356943e2decc25768c3688435870ec82be8",
+      "not_new_run": true
+    }
+  ],
+  "context_absences": [
+    {
+      "root": "source",
+      "path": ".gate/wrapper-current.json",
+      "absent": true
+    },
+    {
+      "root": "source",
+      "path": ".gate/kit-sync/result.json",
+      "absent": true
+    },
+    {
+      "root": "mirror",
+      "path": ".gate/kit-sync/wrapper-current.json",
+      "absent": true
+    },
+    {
+      "root": "mirror",
+      "path": ".gate/kit-sync/result.json",
+      "absent": true
+    }
+  ],
+  "current_gate_Git_refs": [
+    {
+      "root": "source",
+      "path": "scripts/gate.sh",
+      "bytes": 65032,
+      "sha256": "f949e941ad94a227c69ad9690e4cfcf41689423e0d7cc2f3457a9420a3b39506",
+      "full_mode": 33261,
+      "Git_source": "487996c1f22fe2ca592889df92006a4a267193a5"
+    },
+    {
+      "root": "source",
+      "path": ".gate.env",
+      "bytes": 1867,
+      "sha256": "eda10259ea3f85b360bef8b8d38eba8a2e65a94eb77f7a795fc2b1bb25dbd5bb",
+      "full_mode": 33204,
+      "Git_source": "487996c1f22fe2ca592889df92006a4a267193a5"
+    },
+    {
+      "root": "source",
+      "path": "compose.gate.yml",
+      "bytes": 4094,
+      "sha256": "3b7f63c4a716acfe8883e3dcb7dff38e6a7f5bef44e30548f1727ac25970dbbb",
+      "full_mode": 33188,
+      "Git_source": "487996c1f22fe2ca592889df92006a4a267193a5"
+    },
+    {
+      "root": "source",
+      "path": "Taskfile.yml",
+      "bytes": 63226,
+      "sha256": "3bb2b8c8ff44052d04ec255d5e94677469678a5fa3f7e0145278111eb05bdd1f",
+      "full_mode": 33204,
+      "Git_source": "487996c1f22fe2ca592889df92006a4a267193a5"
+    },
+    {
+      "root": "mirror",
+      "path": "scripts/gate.sh",
+      "bytes": 65032,
+      "sha256": "f949e941ad94a227c69ad9690e4cfcf41689423e0d7cc2f3457a9420a3b39506",
+      "full_mode": 33261,
+      "Git_source": "487996c1f22fe2ca592889df92006a4a267193a5"
+    },
+    {
+      "root": "mirror",
+      "path": ".gate.env",
+      "bytes": 1867,
+      "sha256": "eda10259ea3f85b360bef8b8d38eba8a2e65a94eb77f7a795fc2b1bb25dbd5bb",
+      "full_mode": 33204,
+      "Git_source": "487996c1f22fe2ca592889df92006a4a267193a5"
+    },
+    {
+      "root": "mirror",
+      "path": "compose.gate.yml",
+      "bytes": 4094,
+      "sha256": "3b7f63c4a716acfe8883e3dcb7dff38e6a7f5bef44e30548f1727ac25970dbbb",
+      "full_mode": 33188,
+      "Git_source": "487996c1f22fe2ca592889df92006a4a267193a5"
+    },
+    {
+      "root": "mirror",
+      "path": "Taskfile.yml",
+      "bytes": 63226,
+      "sha256": "3bb2b8c8ff44052d04ec255d5e94677469678a5fa3f7e0145278111eb05bdd1f",
+      "full_mode": 33204,
+      "Git_source": "487996c1f22fe2ca592889df92006a4a267193a5"
+    }
+  ],
+  "source_clean_unchanged": true,
+  "blobs": {
+    "4d9ea30810c0a3ff2d031cfea9e5205288c2de89dc9bca567a00f6cc179ac54a": "45765aa982d3a75f14871e0911b396af302f6ef1f99e55c7ab5c9e7af8f10bd9",
+    "f98cd813b12fd658ac2b6f2352d3521ce88a1ef34660cb76b7e53c9d8dab1a37": "2f227b5090eea76c8d742dc844af27935c1bb2eec501d09b55fd9384a16ec7fd"
+  },
+  "previous_capture_attempt": "Initial incomplete inline capture assumed source root selector existed; FileNotFoundError preserved, no accepted manifest. This successor records literal absences.",
+  "next_supported_action": "Real owner trust pin for reviewed protected config first, capture/review; actual SYNC then finalsameSHAtrust/full. No fake receipt/bypass."
+}

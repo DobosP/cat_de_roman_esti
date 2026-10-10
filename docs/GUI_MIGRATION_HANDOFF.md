@@ -18,9 +18,9 @@ Parent and independent program_pack accepted this bounded E3 budget-only-red/non
 
 ## Current change and next validation
 
-This checkpoint applies only the reviewed protected `CSP_STAGE=report-only`→`enforced` line. The same11 configuration keys and existing flag derivation remain; no Go, SDK, budget, baseline or production behavior is newly approved. The new checkpoint itself has not yet run enforced full.
+This checkpoint applies only the reviewed protected `CSP_STAGE=report-only`→`enforced` line. The same11 configuration keys and existing flag derivation remain; no Go, SDK, budget, baseline or production behavior is newly approved. The new checkpoint itself has not yet run enforced full. Initial owner trust at487 subsequently passed after the real sync preflight correctly refused the missing new pin; see [refusal](reviews/gui-normalized-react/stage-b-sync-preflight-refusal.json) and [actual trust](reviews/gui-normalized-react/stage-b-initial-trust.json). The new docs checkpoint still needs real sync and final same-SHA trust/full.
 
-1. Become clean and idle in the Cat worktree. Parent runs real `kit:sync --sha H --parallel 2`, reviews its actual compact result and sanctioned outputs, then real `GATE_OPERATOR=paul` trust at that same literal cleanH. No empty sync commit.
+1. Become clean and idle in the Cat worktree. Changed protected gate files require real owner `GATE_OPERATOR=paul` trust first; capture/review that pin. Then run real `kit:sync --sha H --parallel 2`, capture/review its actual compact result and sanctioned outputs, and perform final owner trust at the same literal cleanH before full. No empty sync commit or trust bypass.
 2. Run the supported actual full at the sameH. Coordinate the retained reviewed owner-lifecycle method with that new wrapper UUID and actual primary CID/IID. Never reuse an old context or manufacture a legacy zero. The method and its hash are in the Linux parent controller; source checks alone do not provision its separate owned instance.
 3. Await actual wrapper exit, retain compact changed evidence, independently review all required checks and preserve any failures before further Cat edits or another wrapper. No duplicate backend-wide unit. Enforced CSP, budgets and every safety gate must be reported honestly.
 
