@@ -13,6 +13,8 @@ Preserve the six server-authoritative Romanian games while moving the SPA from R
 
 ## 2. Progress
 
+- [x] 2026-10-11 SOURCE successor — focused788 eleven pure tests passed, while independent installed assertGateResult review found nonnull recorded baseline rows cannot enter the wrapper numeric budget table. Only active rows now project to hook.budgets; complete raw/classified baseline reports and named integrity/full requirements remain. A twelfth public installed-validator integration test is authored NOT RUN; old788 packet/focused evidence/integration hold preserved. No new qualification.
+
 - [x] 2026-10-11 SOURCE ONLY — explicit human “Approve baseline policy; keep active UI limits” recorded in ADR0193. Raw20 SDK measurements/statuses remain; active40960/target30720 gates unchanged, exact original freeze/source/archive/manifest/all30 members gain a named baseline-integrity check. Wrapper baseline rows retain raw sdk_status and report links. All new tests NOT RUN; current React red, required full legacy/safety/device/UI prerequisites unchanged.
 
 - [x] 2026-10-10 — Paul explicitly approved allowing LCP/INP improvements with unchanged slowdown limits. Exact reviewed R2 source afterimages and active policy amendment applied; original baselines/failures retained. Actual supported managed focused43 passed once/no fail/skip/cancel/todo at2a6e; bounded controls independently reviewed. Full qualification remains pending.

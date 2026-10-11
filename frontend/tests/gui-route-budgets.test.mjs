@@ -285,3 +285,44 @@ void test("budget classification refuses missing or relabeled frozen integrity a
   assert.throws(() => classifyProfiles({ active: profiles.active }, integrity, "unit"));
   assert.throws(() => classifyProfiles(profiles, integrity, "shell"));
 });
+
+void test("installed public gate-result contract rejects the mixed baseline table and validates only active numeric projection", async (t) => {
+  const f = frozenFixture(t), profiles = { active: measured(f), "frozen-legacy": frozenMeasured(f) };
+  const before = JSON.stringify(profiles), result = classifyProfiles(profiles, verifiedFrozen(f), "unit");
+  // Resolve the shipped validator next to the actual installed public budget
+  // entry. No copied validator, pinned-package edit or synthetic receipt is used.
+  const validatorURL = new URL("../schemas/validate.mjs", import.meta.resolve("@roedu/web-kit/budget"));
+  const validatorPath = fileURLToPath(validatorURL);
+  assert.equal(validatorPath, path.join(repo, "frontend/node_modules/@roedu/web-kit/schemas/validate.mjs"));
+  assert.equal(fs.realpathSync(validatorPath), validatorPath);
+  assert.ok(fs.lstatSync(validatorPath).isFile() && !fs.lstatSync(validatorPath).isSymbolicLink());
+  const { assertGateResult, validate } = await import(validatorURL.href);
+  const schema = JSON.parse(fs.readFileSync(new URL("./result.schema.json", validatorURL)));
+  // In-memory protocol fixture only. It is never written as an actual gate
+  // receipt and carries no application, source/image or runtime qualification.
+  const synthetic = (budgets) => ({ schema: 1, target: "unit", status: "pass",
+    sha: "1".repeat(40), dirty: false, tree_sha256: "2".repeat(64),
+    toolchain_digest: "sha256:" + "3".repeat(64), versions_lock_sha256: "4".repeat(64), parallel: 1,
+    started: "2026-10-11T00:00:00.000Z", finished: "2026-10-11T00:00:01.000Z",
+    checks: [{ name: "synthetic-active-numeric", status: "pass", duration_ms: 0 },
+      { name: "cat-frozen-legacy-integrity", status: "pass", duration_ms: 0 }],
+    csp: { stage: "enforced", violations: 0, legacy_violations: 0 }, budgets, artifacts: [] });
+  validate(schema, synthetic(result.budgets));
+  assert.throws(() => assertGateResult(synthetic(result.budgets)), /budget status must reflect measured actual/);
+  assert.equal(Object.keys(result.gate_budgets).length, Object.keys(profiles.active.budgets).length);
+  assert.ok(Object.keys(result.gate_budgets).every((name) => name.startsWith("gate:active:")));
+  for (const [name, value] of Object.entries(result.gate_budgets)) assert.deepEqual(value, result.budgets[name]);
+  validate(schema, synthetic(result.gate_budgets));
+  assert.doesNotThrow(() => assertGateResult(synthetic(result.gate_budgets)));
+  const over = structuredClone(result.gate_budgets);
+  const key = Object.keys(over).find((name) => name.startsWith("gate:active:route-js:"));
+  assert.ok(key);
+  over[key].actual = over[key].limit + 1; over[key].status = "fail"; over[key].sdk_status = "fail";
+  assert.throws(() => assertGateResult(synthetic(over)), /failed budget cannot pass/);
+  assert.equal(JSON.stringify(profiles), before);
+  assert.equal(profiles["frozen-legacy"].report.routes.length, 10);
+  assert.ok(profiles["frozen-legacy"].report.routes.every((item) => item.js.status === "fail" && item.js.limit_gz === 40960));
+  assert.ok(Object.entries(result.budgets).filter(([name]) => name.startsWith("baseline:frozen-legacy:route-js:")).every(([, value]) => value.status === "recorded" && value.sdk_status === "fail"));
+  assert.equal(actualBudgets.js["cat-initial"].limit_gz, 40960);
+  assert.equal(actualBudgets.js["cat-initial"].target_gz, 30720);
+});

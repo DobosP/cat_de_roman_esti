@@ -91,7 +91,7 @@ function routeBudgets() {
       && measured.sha === hook.context.sha && measured.tree_sha256 === hook.context.tree_sha256
       && measured.toolchain_digest === hook.context.toolchain_digest
       && measured.budgets_sha256 === hash(fs.readFileSync(path.join(root, "budgets.json"))));
-    Object.assign(hook.budgets, measured.qualification.budgets);
+    Object.assign(hook.budgets, measured.qualification.gate_budgets);
     if (failure) throw failure; // preserve the real nonzero budget-red command
     hook.assert("Active numeric budgets pass under the explicit owner-approved frozen baseline policy", () => measured.status === "pass"
       && measured.qualification.policy === "owner-approved-frozen-legacy-baseline-2026-10-11");

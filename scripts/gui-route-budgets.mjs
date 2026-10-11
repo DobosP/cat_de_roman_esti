@@ -276,7 +276,8 @@ export function classifyProfiles(profiles, integrity, target) {
         ...(active ? {} : { integrity_check: "cat-frozen-legacy-integrity" }) };
     }
   }
-  return { status: profiles.active.report.status === "pass" ? "pass" : "fail", budgets: qualified,
+  const gateBudgets = Object.fromEntries(Object.entries(qualified).filter(([name]) => name.startsWith("gate:active:")));
+  return { status: profiles.active.report.status === "pass" ? "pass" : "fail", budgets: qualified, gate_budgets: gateBudgets,
     policy: "owner-approved-frozen-legacy-baseline-2026-10-11",
     authority: "docs/adr/0193-frozen-legacy-budget-baseline.md" };
 }
