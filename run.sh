@@ -56,7 +56,8 @@ fleet task worktree and its trusted gate setup, Docker and Python 3. Compilation
 and installs use the owning pinned wrapper or the canonical Docker recipe.
 The wrapper's real source/tree and binary receipt must match before local execution.
 Accounts and submissions stay off. run accepts HOST/PORT (127.0.0.1:8000 by default).
-dev requires those defaults and publishes only loopback :8000 and :5173. src/index
+dev requires HOST=127.0.0.1. PORT changes only its host API publication (default
+8000); container API :8000 and Vite :5173 stay fixed. PORT=5173 is refused. src/index
 changes hot-reload; restart after backend, configuration or dependency changes.
 HMR edits are development only and do not create a new qualified GUI identity.
 HELP

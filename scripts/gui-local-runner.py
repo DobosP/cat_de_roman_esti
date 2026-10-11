@@ -180,7 +180,7 @@ try {
 '''
 
 
-def dev(identity, lock, mirror, lock_fd):
+def dev(identity, lock, mirror, lock_fd, host_api_port):
     manifest = document(ROOT, "frontend/package.json")
     owning = document(ROOT, "frontend/package-lock.json")["packages"]
     installed = document(mirror, "frontend/node_modules/.package-lock.json")["packages"]
@@ -211,7 +211,7 @@ def dev(identity, lock, mirror, lock_fd):
         args = ["docker", "run", "--rm", "--init", "--pull=never", "--read-only", "--cap-drop", "ALL",
                 "--security-opt", "no-new-privileges", "--cpus", "4", "--memory", "6g", "--user", f"{os.getuid()}:{os.getgid()}",
                 "--cidfile", str(cidfile), "--workdir", "/work/frontend",
-                "--publish", "127.0.0.1:8000:8000", "--publish", "127.0.0.1:5173:5173",
+                "--publish", f"127.0.0.1:{host_api_port}:8000", "--publish", "127.0.0.1:5173:5173",
                 "--mount", f"type=bind,source={mirror},target=/work,readonly",
                 "--mount", f"type=bind,source={ROOT / 'frontend/src'},target=/work/frontend/src,readonly",
                 "--mount", f"type=bind,source={regular(ROOT, 'frontend/index.html')},target=/work/frontend/index.html,readonly",
@@ -264,7 +264,8 @@ def main():
     host, port = os.environ.get("HOST", "127.0.0.1"), os.environ.get("PORT", "8000")
     require(host and re.fullmatch(r"[0-9]{1,5}", port) is not None and 1 <= int(port) <= 65535, "Invalid listener")
     if mode == "dev":
-        require(host == "127.0.0.1" and port == "8000", "Dev requires the existing 127.0.0.1:8000 proxy")
+        require(host == "127.0.0.1" and int(port) != 5173,
+                "Dev requires loopback API publication on a host port other than 5173")
     command(["bash", str(regular(ROOT, "scripts/gate.sh")), "build", "--sha", sha])
     storage = canonical(Path.home() / "work/_temp" / ROOT.name / "gates")
     mirror = canonical(storage / "cat_de_roman_esti")
@@ -277,7 +278,7 @@ def main():
             print("Actual owning build and registered server artifact verified; no app started.")
             return 0
         if mode == "dev":
-            return dev(identity, lock, mirror, fd)
+            return dev(identity, lock, mirror, fd, int(port))
         address = f"[{host}]:{port}" if ":" in host and not host.startswith("[") else f"{host}:{port}"
         os.set_inheritable(fd, True)
         # Forward no database/provider/session settings from the host.

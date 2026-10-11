@@ -101,9 +101,12 @@ Native source/build/operator and qualification commands are in
 # open http://localhost:5173
 ```
 
-Vite reloads frontend changes and proxies `/api` to Go on `127.0.0.1:8000`.
-The prepared API and selected Vite run in the same pinned toolchain container,
-with only loopback ports exposed and accounts/submissions off. Source/index changes
+Vite reloads frontend changes and proxies `/api` to Go on `127.0.0.1:8000`
+inside the same pinned toolchain container. `PORT=9000 ./run.sh dev` changes only
+the host API publication to `127.0.0.1:9000`; container API port 8000 and Vite
+port 5173 stay fixed. Dev requires `HOST=127.0.0.1` and refuses numeric `PORT=5173`;
+a busy selected port fails explicitly. Only loopback ports are exposed and
+accounts/submissions stay off. Source/index changes
 hot-reload; restart after backend, configuration or dependency changes. Development
 edits do not create a new qualified source identity. `make run`, `make dev` and
 `make build` wrap the same launcher and require the same actual qualified pair.
