@@ -362,7 +362,7 @@
   "records": [
     {
       "id": "v110-manusa",
-      "revision": 1,
+      "revision": 2,
       "kind": "new_shared_concept",
       "lemma": "Mănușă",
       "label_ro": "Mănușă",
@@ -375,7 +375,7 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
-      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "link_targets": [
         {
           "node_id": "n_v29_clothing_everyday_haina",
@@ -461,14 +461,59 @@
           "decision": "held: Maintain the existing hold: held: the fourth predeclared Geacă association has only weak equipment/catalogue co-listing. The other three links are sourced, but there is no four-link approval; after Căciulă lands, reconsider that honest same-category neighbor in a later wave. Familiarity or cultural evidence does not override the unresolved admission constraint."
         }
       ],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
-      "research_ready": true,
-      "sources": []
+      "state": "held",
+      "decision": "held: Fourth Căciulă claim still amounts to a generic winter-kit co-listing; three direct links are sound, but the prior quality hold is not yet resolved.",
+      "research_ready": false,
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/m%C4%83nu%C8%99%C4%83/json",
+          "authority": "DEX '09",
+          "definition_id": "886734",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/m%C4%83nu%C8%99%C4%83/json",
+          "authority": "DOOM 3",
+          "definition_id": "1291691",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/m%C4%83nu%C8%99%C4%83",
+          "paraphrase": "Confirms the protective clothing sense and feminine paradigm; no technical-handle or mănunchi sense selected.",
+          "role": "second_source"
+        }
+      ],
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "mănușă",
+        "dex_definition_id": "886734",
+        "doom3_definition_id": "1291691",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "mănușă",
+        "mănuși",
+        "mănușile",
+        "mănușii",
+        "mănușilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          8700,
+          "mănuși",
+          2343
+        ],
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-nasture",
-      "revision": 1,
+      "revision": 2,
       "kind": "new_shared_concept",
       "lemma": "Nasture",
       "label_ro": "Nasture",
@@ -481,35 +526,47 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
-      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "link_targets": [
         {
           "node_id": "n_v29_clothing_everyday_haina",
           "label": "Haină",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "part_of",
+          "label_ro": "Nasturele este o piesă folosită la închiderea unor haine.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v29_clothing_everyday_camasa",
           "label": "Cămașă",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "part_of",
+          "label_ro": "Nasturii pot închide cămăși.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v30_clothing_outer_geaca",
           "label": "Geacă",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "part_of",
+          "label_ro": "Nasturii pot închide geci.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v30_clothing_everyday_pantaloni",
           "label": "Pantaloni",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "part_of",
+          "label_ro": "Nasturele poate închide pantalonii la talie.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         }
       ],
       "planned_forms": [
@@ -577,14 +634,76 @@
           "decision": "Research retained: familiar component with a specific shirt association, but pair uniqueness is untested."
         }
       ],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "state": "researched",
+      "decision": "Exact sense/forms and second source checked; proposed claims await both independent reviews.",
       "research_ready": true,
-      "sources": []
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/nasture/json",
+          "authority": "DEX '09",
+          "definition_id": "881458",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/nasture/json",
+          "authority": "DOOM 3",
+          "definition_id": "1288195",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/nasture",
+          "paraphrase": "Confirms the clothing-fastener sense and full masculine paradigm.",
+          "role": "second_source"
+        },
+        {
+          "url": "https://www.zara.com/ro/ro/camasa-fluida-cu-buzunar-p04038519.html",
+          "paraphrase": "An actual shirt has a button fastening; the same page shows trousers with pockets.",
+          "role": "link_source"
+        },
+        {
+          "url": "https://www.zara.com/ro/ro/geaca-cu-buzunare-p05854717.html",
+          "paraphrase": "An actual jacket has buttons for front and pocket closures.",
+          "role": "link_source"
+        },
+        {
+          "url": "https://www.interbabis.ro/userfiles/525eaf5e-5a4f-4300-bed6-b4b0dea3768b/File/Catalog_Interbabis_2025_v2.pdf",
+          "paraphrase": "The clothing-maker catalogue specifies trouser button closures.",
+          "role": "link_source"
+        }
+      ],
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "nasture",
+        "dex_definition_id": "881458",
+        "doom3_definition_id": "1288195",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "nasture",
+        "nasturele",
+        "nasturelui",
+        "nasturi",
+        "nasturii",
+        "nasturilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          21110,
+          "nasturi",
+          687
+        ],
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "proposed_description": "Piesă mică folosită pentru închiderea sau ornamentarea îmbrăcămintei.",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-buzunar",
-      "revision": 1,
+      "revision": 2,
       "kind": "new_shared_concept",
       "lemma": "Buzunar",
       "label_ro": "Buzunar",
@@ -597,35 +716,47 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
-      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "link_targets": [
         {
           "node_id": "n_v29_clothing_everyday_haina",
           "label": "Haină",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "part_of",
+          "label_ro": "Buzunarul este un compartiment cusut la o haină.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v30_clothing_everyday_pantaloni",
           "label": "Pantaloni",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "part_of",
+          "label_ro": "Buzunarele se găsesc la pantaloni.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v30_clothing_outer_geaca",
           "label": "Geacă",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "part_of",
+          "label_ro": "Buzunarele se găsesc la unele geci.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v29_clothing_everyday_camasa",
           "label": "Cămașă",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "part_of",
+          "label_ro": "Unele cămăși au buzunare aplicate.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         }
       ],
       "planned_forms": [
@@ -674,14 +805,71 @@
         "buzunarelor"
       ],
       "prior_records": [],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "state": "researched",
+      "decision": "Exact sense/forms and second source checked; proposed claims await both independent reviews.",
       "research_ready": true,
-      "sources": []
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/buzunar/json",
+          "authority": "DEX '09",
+          "definition_id": "839470",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/buzunar/json",
+          "authority": "DOOM 3",
+          "definition_id": "1320216",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/buzunar",
+          "paraphrase": "Confirms the sewn clothing compartment and complete neuter paradigm.",
+          "role": "second_source"
+        },
+        {
+          "url": "https://www.zara.com/ro/ro/camasa-fluida-cu-buzunar-p04038519.html",
+          "paraphrase": "Describes a shirt chest pocket and trousers with side pockets.",
+          "role": "link_source"
+        },
+        {
+          "url": "https://www.zara.com/ro/ro/geaca-cu-buzunare-p05854717.html",
+          "paraphrase": "Describes multiple functional jacket pockets.",
+          "role": "link_source"
+        }
+      ],
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "buzunar",
+        "dex_definition_id": "839470",
+        "doom3_definition_id": "1320216",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "buzunar",
+        "buzunarul",
+        "buzunarului",
+        "buzunare",
+        "buzunarele",
+        "buzunarelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          3209,
+          "buzunar",
+          7653
+        ],
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "proposed_description": "Compartiment cusut la o haină, în care se păstrează obiecte mici.",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-gard",
-      "revision": 1,
+      "revision": 2,
       "kind": "new_shared_concept",
       "lemma": "Gard",
       "label_ro": "Gard",
@@ -694,35 +882,47 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
-      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "link_targets": [
         {
           "node_id": "n_v24_home_outdoor_curte",
           "label": "Curte",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Gardul poate împrejmui o curte.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v24_home_outdoor_gradina",
           "label": "Grădină",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Gardul poate împrejmui o grădină.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v1_3_material_lemn",
           "label": "Lemn",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Un gard poate fi construit din lemn.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v4soc_casa",
           "label": "Casă",
           "category": "societate",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Gardul poate delimita terenul unei case.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         }
       ],
       "planned_forms": [
@@ -778,14 +978,66 @@
           "decision": "held: Maintain the existing hold: held: the fourth predeclared target is specifically the monumental carved Poarta maramureșeană; generic regional wooden access-gate evidence does not yet establish that exact scope. Do not broaden the target or invent an edge. Familiarity or cultural evidence does not override the unresolved admission constraint."
         }
       ],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "state": "researched",
+      "decision": "Exact sense/forms and second source checked; proposed claims await both independent reviews.",
       "research_ready": true,
-      "sources": []
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/gard/json",
+          "authority": "DEX '09",
+          "definition_id": "875859",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/gard/json",
+          "authority": "DOOM 3",
+          "definition_id": "1317301",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/gard",
+          "paraphrase": "Literal enclosure sense explicitly covers courtyards, gardens and wood; full neuter paradigm confirmed.",
+          "role": "second_source"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Gard",
+          "paraphrase": "Describes a fence as a construction enclosing a property; no monumental-gate inference is retained.",
+          "role": "link_source"
+        }
+      ],
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "gard",
+        "dex_definition_id": "875859",
+        "doom3_definition_id": "1317301",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "gard",
+        "gardul",
+        "gardului",
+        "garduri",
+        "gardurile",
+        "gardurilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          6502,
+          "gard",
+          3343
+        ],
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "proposed_description": "Împrejmuire din lemn, metal sau alte materiale care delimitează o curte, o grădină ori un teren.",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-borcan",
-      "revision": 1,
+      "revision": 2,
       "kind": "new_shared_concept",
       "lemma": "Borcan",
       "label_ro": "Borcan",
@@ -798,35 +1050,47 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
-      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "link_targets": [
         {
           "node_id": "n_v17gas_dulceata",
           "label": "Dulceață",
           "category": "gastronomie",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "În borcane se păstrează dulceață.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_gas_muraturi",
           "label": "Murături",
           "category": "gastronomie",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "În borcane se pun murături.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v2gas_conserve_iarna",
           "label": "Conserve de iarnă",
           "category": "gastronomie",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Borcanul este folosit la păstrarea conservelor pentru iarnă.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v1_10_capac",
           "label": "Capac",
           "category": "gastronomie",
           "status": "new in this batch",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Borcanul poate fi închis cu un capac.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         }
       ],
       "planned_forms": [
@@ -875,14 +1139,71 @@
         "borcanelor"
       ],
       "prior_records": [],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "state": "researched",
+      "decision": "Exact sense/forms and second source checked; proposed claims await both independent reviews.",
       "research_ready": true,
-      "sources": []
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/borcan/json",
+          "authority": "DEX '09",
+          "definition_id": "836260",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/borcan/json",
+          "authority": "DOOM 3",
+          "definition_id": "1319180",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/borcan",
+          "paraphrase": "Confirms the glass-container sense and full neuter paradigm.",
+          "role": "second_source"
+        },
+        {
+          "url": "https://www.bucatareselevesele.ro/retete-culinare/conserve-si-muraturi/dulceata-de-mure-reteta-clasica.html",
+          "paraphrase": "The author puts jam into sterilized jars and closes their lids.",
+          "role": "link_source"
+        },
+        {
+          "url": "https://lecturisiarome.ro/2019/10/muraturi-asortate-in-saramura-la-borcan/",
+          "paraphrase": "The author prepares mixed pickles in jars as winter preserves.",
+          "role": "link_source"
+        }
+      ],
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "borcan",
+        "dex_definition_id": "836260",
+        "doom3_definition_id": "1319180",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "borcan",
+        "borcanul",
+        "borcanului",
+        "borcane",
+        "borcanele",
+        "borcanelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          12684,
+          "borcan",
+          1410
+        ],
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "proposed_description": "Vas de sticlă cu deschidere largă, folosit în bucătărie pentru păstrarea alimentelor și a conservelor.",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-capac",
-      "revision": 1,
+      "revision": 2,
       "kind": "new_shared_concept",
       "lemma": "Capac",
       "label_ro": "Capac",
@@ -895,35 +1216,47 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
-      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "link_targets": [
         {
           "node_id": "n_v30_kitchen_cookware_oala",
           "label": "Oală",
           "category": "gastronomie",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "part_of",
+          "label_ro": "Capacul poate acoperi o oală.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v88_kitchen_cratita",
           "label": "Cratiță",
           "category": "gastronomie",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "part_of",
+          "label_ro": "Capacul poate acoperi o cratiță.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v30_kitchen_cookware_tigaie",
           "label": "Tigaie",
           "category": "gastronomie",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "part_of",
+          "label_ro": "Capacul poate acoperi o tigaie.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v1_10_borcan",
           "label": "Borcan",
           "category": "gastronomie",
           "status": "new in this batch",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "part_of",
+          "label_ro": "Capacul poate închide un borcan.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         }
       ],
       "planned_forms": [
@@ -980,14 +1313,71 @@
         "capacelor"
       ],
       "prior_records": [],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "state": "researched",
+      "decision": "Exact sense/forms and second source checked; proposed claims await both independent reviews.",
       "research_ready": true,
-      "sources": []
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/capac/json",
+          "authority": "DEX '09",
+          "definition_id": "841058",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/capac/json",
+          "authority": "DOOM 3",
+          "definition_id": "1309536",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/capac",
+          "paraphrase": "Confirms the vessel-cover sense and full neuter paradigm.",
+          "role": "second_source"
+        },
+        {
+          "url": "https://www.services.tefal.ro/Articole-de-buc%C4%83t%C4%83rie/Oale-%C5%9Fi-tig%C4%83i/Gama-de-oale-%C8%99i-tig%C4%83i-Tefal-Daily-Chef/p/RANGE-06GL-G",
+          "paraphrase": "The maker describes covered pots/saucepans and a frying pan with a lid.",
+          "role": "link_source"
+        },
+        {
+          "url": "https://www.bucatareselevesele.ro/retete-culinare/conserve-si-muraturi/dulceata-de-mure-reteta-clasica.html",
+          "paraphrase": "The jam jars are closed with lids.",
+          "role": "link_source"
+        }
+      ],
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "capac",
+        "dex_definition_id": "841058",
+        "doom3_definition_id": "1309536",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "capac",
+        "capacul",
+        "capacului",
+        "capace",
+        "capacele",
+        "capacelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          10256,
+          "capacul",
+          1875
+        ],
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "proposed_description": "Piesă mobilă așezată peste deschiderea unui vas pentru a-l închide sau acoperi; aici, sensul folosit în bucătărie.",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-ibric",
-      "revision": 1,
+      "revision": 2,
       "kind": "new_shared_concept",
       "lemma": "Ibric",
       "label_ro": "Ibric",
@@ -1000,35 +1390,47 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
-      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "link_targets": [
         {
           "node_id": "n_v3gas_cafea",
           "label": "Cafea",
           "category": "gastronomie",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Ibricul se folosește la prepararea cafelei.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v42gas_cafea_ibric",
           "label": "Cafea la ibric",
           "category": "gastronomie",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Cafeaua la ibric se prepară în acest vas.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v4gas_apa",
           "label": "Apă",
           "category": "gastronomie",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "În ibric se încălzește apa pentru cafea.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v24_home_appliances_aragaz",
           "label": "Aragaz",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Ibricul poate fi încălzit pe aragaz.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         }
       ],
       "planned_forms": [
@@ -1085,14 +1487,66 @@
         "ibricelor"
       ],
       "prior_records": [],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "state": "researched",
+      "decision": "Exact sense/forms and second source checked; proposed claims await both independent reviews.",
       "research_ready": true,
-      "sources": []
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/ibric/json",
+          "authority": "DEX '09",
+          "definition_id": "865085",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/ibric/json",
+          "authority": "DOOM 3",
+          "definition_id": "1296874",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/ibric",
+          "paraphrase": "Confirms the coffee-making vessel sense and neuter plural ibrice.",
+          "role": "second_source"
+        },
+        {
+          "url": "https://tchibo.ro/pages/reteta-cafea-la-ibric-usor-si-rapid-in-doar-7-minute",
+          "paraphrase": "The coffee-maker recipe puts water and ground coffee in an ibric and names the stove as a heat source.",
+          "role": "link_source"
+        }
+      ],
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "ibric",
+        "dex_definition_id": "865085",
+        "doom3_definition_id": "1296874",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "ibric",
+        "ibricul",
+        "ibricului",
+        "ibrice",
+        "ibricele",
+        "ibricelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          46560,
+          "ibric",
+          196
+        ],
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "proposed_description": "Vas cu cioc și mâner lung, folosit mai ales la prepararea cafelei pe o sursă de căldură.",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-strecuratoare",
-      "revision": 1,
+      "revision": 2,
       "kind": "new_shared_concept",
       "lemma": "Strecurătoare",
       "label_ro": "Strecurătoare",
@@ -1105,35 +1559,47 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
-      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "link_targets": [
         {
           "node_id": "n_v3gas_paste",
           "label": "Paste",
           "category": "gastronomie",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Strecurătoarea poate scurge apa din paste.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v4gas_legume",
           "label": "Legume",
           "category": "gastronomie",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Strecurătoarea poate scurge lichidul din legume fierte.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v84_food_zer",
           "label": "Zer",
           "category": "gastronomie",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Strecurătoarea din pânză lasă zerul să se scurgă din caș.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v30_kitchen_cookware_oala",
           "label": "Oală",
           "category": "gastronomie",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Unele strecurători se fixează pe oală pentru scurgere.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         }
       ],
       "planned_forms": [
@@ -1197,14 +1663,57 @@
           "decision": "Already a synthetic guess ctxp_c6db589e12e0a4a32e77 anchoredLingură/explicit/penalty0. Hold graph adoption pending deliberate migration, distinct sieve/strainer senses and old feedback preservation."
         }
       ],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "state": "researched",
+      "decision": "Exact sense/forms and second source checked; proposed claims await both independent reviews.",
       "research_ready": true,
-      "sources": []
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/strecur%C4%83toare/json",
+          "authority": "DEX '09",
+          "definition_id": "847451",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/strecur%C4%83toare/json",
+          "authority": "DOOM 3",
+          "definition_id": "1278835",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://indiferent.ro/products/strecuratoare-din-silicon-pentru-oale-cratite-cu-clesti-de-prindere-pentru-paste-legume-se-potriveste-oricarei-marimi-gri",
+          "paraphrase": "The seller describes draining pasta and vegetables directly from a pot; this supports actual functions, not a generic equipment co-listing.",
+          "role": "second_source"
+        }
+      ],
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "strecurătoare",
+        "dex_definition_id": "847451",
+        "doom3_definition_id": "1278835",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "strecurătoare",
+        "strecurătoarea",
+        "strecurătorii",
+        "strecurători",
+        "strecurătorile",
+        "strecurătorilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": null,
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "proposed_description": "Ustensilă găurită sau din pânză rară, folosită în bucătărie pentru a separa lichidul de alimente.",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-vrabie",
-      "revision": 1,
+      "revision": 2,
       "kind": "new_shared_concept",
       "lemma": "Vrabie",
       "label_ro": "Vrabie",
@@ -1217,7 +1726,7 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
-      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "link_targets": [
         {
           "node_id": "n_v4sti_pasare",
@@ -1302,14 +1811,65 @@
         "vrăbiilor"
       ],
       "prior_records": [],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
-      "research_ready": true,
-      "sources": []
+      "state": "held",
+      "decision": "held: Exact DEX scope is Passer domesticus. SOR supports bird identity, insect food and occasional tree nesting, but does not explicitly verify the planned wheat link; do not substitute field-sparrow or unsourced generic grain claims.",
+      "research_ready": false,
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/vrabie/json",
+          "authority": "DEX '09",
+          "definition_id": "827453",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/vrabie/json",
+          "authority": "DOOM 3",
+          "definition_id": "1264782",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ornitodata2.sor.ro/specii/524/vrabie-de-casa-passer-domesticus",
+          "paraphrase": "Confirms common Romanian presence, insect-fed chicks and occasional arboreal nests; no exact wheat claim.",
+          "role": "second_source"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Vrabie",
+          "paraphrase": "Supports familiar sparrow grouping and tree/scorbure nesting, without resolving wheat evidence.",
+          "role": "link_source"
+        }
+      ],
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "vrabie",
+        "dex_definition_id": "827453",
+        "doom3_definition_id": "1264782",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "vrabie",
+        "vrabia",
+        "vrabiei",
+        "vrăbii",
+        "vrăbiile",
+        "vrăbiilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          41472,
+          "vrabie",
+          238
+        ],
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-ciocanitoare",
-      "revision": 1,
+      "revision": 2,
       "kind": "new_shared_concept",
       "lemma": "Ciocănitoare",
       "label_ro": "Ciocănitoare",
@@ -1322,35 +1882,47 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
-      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "link_targets": [
         {
           "node_id": "n_v4sti_pasare",
           "label": "Pasăre",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "is_a",
+          "label_ro": "Ciocănitoarea este o pasăre.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v4sti_copac",
           "label": "Copac",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Ciocănitoarea ciocănește scoarța copacilor.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v4sti_insecta",
           "label": "Insectă",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Ciocănitoarea consumă insecte și larve.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v1_10_cioc",
           "label": "Cioc",
           "category": "stiinta",
           "status": "new in this batch",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Ciocănitoarea folosește un cioc puternic la ciocănit.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         }
       ],
       "planned_forms": [
@@ -1399,14 +1971,57 @@
         "ciocănitorilor"
       ],
       "prior_records": [],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "state": "researched",
+      "decision": "Exact sense/forms and second source checked; proposed claims await both independent reviews.",
       "research_ready": true,
-      "sources": []
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/cioc%C4%83nitoare/json",
+          "authority": "DEX '09",
+          "definition_id": "846627",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/cioc%C4%83nitoare/json",
+          "authority": "DOOM 3",
+          "definition_id": "1311750",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Picide",
+          "paraphrase": "Woodpeckers excavate tree cavities, strike wood with their beaks and consume insects and larvae.",
+          "role": "second_source"
+        }
+      ],
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "ciocănitoare",
+        "dex_definition_id": "846627",
+        "doom3_definition_id": "1311750",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "ciocănitoare",
+        "ciocănitoarea",
+        "ciocănitorii",
+        "ciocănitori",
+        "ciocănitorile",
+        "ciocănitorilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": null,
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "proposed_description": "Pasăre care ciocănește scoarța arborilor cu ciocul puternic și se hrănește cu insecte și larvele lor.",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-cioc",
-      "revision": 1,
+      "revision": 2,
       "kind": "new_shared_concept",
       "lemma": "Cioc",
       "label_ro": "Cioc",
@@ -1419,35 +2034,47 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
-      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "link_targets": [
         {
           "node_id": "n_v4sti_pasare",
           "label": "Pasăre",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "part_of",
+          "label_ro": "Ciocul este o parte a corpului păsării.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v24_body_face_gura",
           "label": "Gură",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Ciocul reprezintă o prelungire cornoasă a gurii păsării.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v4sti_os",
           "label": "Os",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Ciocul are susținere osoasă.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v1_10_ciocanitoare",
           "label": "Ciocănitoare",
           "category": "stiinta",
           "status": "new in this batch",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "part_of",
+          "label_ro": "Ciocănitoarea are un cioc puternic.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         }
       ],
       "planned_forms": [
@@ -1496,14 +2123,76 @@
         "ciocurilor"
       ],
       "prior_records": [],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "state": "researched",
+      "decision": "Exact sense/forms and second source checked; proposed claims await both independent reviews.",
       "research_ready": true,
-      "sources": []
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/cioc/json",
+          "authority": "DEX '09",
+          "definition_id": "846464",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/cioc/json",
+          "authority": "DOOM 3",
+          "definition_id": "1311740",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/cioc",
+          "paraphrase": "The ornithological sense is a horny extension of the mouth, separate from the human figurative sense; full neuter paradigm confirmed.",
+          "role": "second_source"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Cioc",
+          "paraphrase": "Describes upper jaw and mandible forming the beak.",
+          "role": "link_source"
+        },
+        {
+          "url": "https://www.zooland.ro/ciocul-pasarilor-forme-si-tipuri-4163/",
+          "paraphrase": "Explicitly describes the beak jaws, soft tissue and bony support.",
+          "role": "link_source"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Picide",
+          "paraphrase": "Describes the woodpecker using its beak to strike tree wood.",
+          "role": "link_source"
+        }
+      ],
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "cioc",
+        "dex_definition_id": "846464",
+        "doom3_definition_id": "1311740",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "cioc",
+        "ciocul",
+        "ciocului",
+        "ciocuri",
+        "ciocurile",
+        "ciocurilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          7217,
+          "cioc",
+          2961
+        ],
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "proposed_description": "Formațiune cornoasă a fălcilor păsărilor, folosită la apucarea hranei; aici, sensul anatomic.",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-tantar",
-      "revision": 1,
+      "revision": 2,
       "kind": "new_shared_concept",
       "lemma": "Țânțar",
       "label_ro": "Țânțar",
@@ -1516,35 +2205,47 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
-      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "link_targets": [
         {
           "node_id": "n_v4sti_insecta",
           "label": "Insectă",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "is_a",
+          "label_ro": "Țânțarul este o insectă.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v4sti_sange",
           "label": "Sânge",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Femelele multor specii de țânțari se hrănesc cu sânge.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v4gas_apa",
           "label": "Apă",
           "category": "gastronomie",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Larvele de țânțar se dezvoltă în apă.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v1_8_broasca",
           "label": "Broască",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Larvele de țânțar pot fi hrană pentru broaște.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         }
       ],
       "planned_forms": [
@@ -1601,10 +2302,62 @@
         "țânțarilor"
       ],
       "prior_records": [],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "state": "researched",
+      "decision": "Exact sense/forms and second source checked; proposed claims await both independent reviews.",
       "research_ready": true,
-      "sources": []
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/%C8%9B%C3%A2n%C8%9Bar/json",
+          "authority": "DEX '09",
+          "definition_id": "829507",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/%C8%9B%C3%A2n%C8%9Bar/json",
+          "authority": "DOOM 3",
+          "definition_id": "1265228",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/%C8%9A%C3%A2n%C8%9Bar",
+          "paraphrase": "Confirms insect identity, aquatic larval development and blood feeding by females of many species.",
+          "role": "second_source"
+        },
+        {
+          "url": "https://www.portalia.ro/blog/gradina-si-animalele/broastele-si-gradina-de-ce-sunt-un-semn-bun/",
+          "paraphrase": "Identifies mosquito larvae as food for lake frogs, supporting a possible prey relationship rather than all frog diets.",
+          "role": "link_source"
+        }
+      ],
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "țânțar",
+        "dex_definition_id": "829507",
+        "doom3_definition_id": "1265228",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "țânțar",
+        "țânțarul",
+        "țânțarului",
+        "țânțari",
+        "țânțarii",
+        "țânțarilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          24027,
+          "țânțar",
+          569
+        ],
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "proposed_description": "Insectă cu corp și picioare subțiri; femelele multor specii sug sânge, iar larvele trăiesc în apă.",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-rama",
@@ -4492,6 +5245,28 @@
       "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
       "research_ready": true,
       "sources": []
+    }
+  ],
+  "research_ticks": [
+    {
+      "tick": 1,
+      "items": [
+        "v110-manusa",
+        "v110-nasture",
+        "v110-buzunar",
+        "v110-gard",
+        "v110-borcan",
+        "v110-capac",
+        "v110-ibric",
+        "v110-strecuratoare",
+        "v110-vrabie",
+        "v110-ciocanitoare",
+        "v110-cioc",
+        "v110-tantar"
+      ],
+      "moved": 12,
+      "max_items": 12,
+      "item_budget": "At most5 active minutes per item; unresolved fourth links held."
     }
   ]
 }
