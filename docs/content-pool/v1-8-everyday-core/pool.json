@@ -3,7 +3,7 @@
   "theme": "v1-8-everyday-core",
   "baseline_commit": "e164c0c70de38805d2648e271d294ddf36a26c8e",
   "procedure_rev": "17b97a2",
-  "scope": "Step 2d: first 48 items processed; unsupported targets and normative gaps held, no adoption approval.",
+  "scope": "Step 2e: all 60 items processed; source-researched proposals remain unapproved and unresolved source/target/dependency cases are held.",
   "screen": {
     "bundle_sha256": "e0cfe93de076f14a782dc6377b2655d4ef10f86ada1560ae1202bb06dbfdf877",
     "script": "~/work/_temp/content__v1-8-everyday-core/prescreen.py",
@@ -5046,12 +5046,12 @@
     {
       "id": "v18-paianjen",
       "revision": 1,
-      "state": "idea",
+      "state": "held",
       "kind": "new_shared_concept",
       "lemma": "Păianjen",
       "label_ro": "Păianjen",
       "sense": "Arahnid; nu clasifica drept insectă.",
-      "category_hypothesis": "geografie",
+      "category_hypothesis": "stiinta",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
@@ -5104,21 +5104,57 @@
       },
       "prior_records": [],
       "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "next_action": "Find two natural distinct supported links before installation; do not pad with household surfaces.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
+      "decision": "Animal/insect-prey links are credible, but two generic house-surface co-occurrences do not establish four useful distinctive links.",
       "research_ready": false,
-      "link_targets": []
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_animal",
+          "label": "Animal",
+          "status": "exists on wave_base",
+          "category": "stiinta"
+        },
+        {
+          "node_id": "n_v4sti_insecta",
+          "label": "Insectă",
+          "status": "exists on wave_base",
+          "category": "stiinta"
+        },
+        {
+          "node_id": "n_v24_home_structure_perete",
+          "label": "Perete",
+          "status": "exists on wave_base",
+          "category": "viata_de_roman"
+        },
+        {
+          "node_id": "n_v24_home_structure_tavan",
+          "label": "Tavan",
+          "status": "exists on wave_base",
+          "category": "viata_de_roman"
+        }
+      ],
+      "source_search_planned": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "păianjen",
+          "rank": 9297,
+          "count": 2148
+        },
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-bufnita",
       "revision": 1,
-      "state": "idea",
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Bufniță",
       "label_ro": "Bufniță",
-      "sense": "Pasăre răpitoare nocturnă.",
-      "category_hypothesis": "geografie",
+      "sense": "Bufnița în sensul familiar de buhă mare (Bubo bubo), pasăre răpitoare mai ales nocturnă; nu generaliza toate trăsăturile la toate bufnițele.",
+      "category_hypothesis": "stiinta",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
@@ -5131,7 +5167,7 @@
         "bufniței",
         "bufnițelor"
       ],
-      "form_status": "Unverified paradigm hypotheses. Confirm DEX sense/register and DOOM 3 forms in step 2; new forms must also be screened before use.",
+      "form_status": "Exact-lemma dictionary sense and DOOM 3 verified; full non-colliding forms await independent review.",
       "identity_checks": {
         "forms": [
           {
@@ -5165,17 +5201,112 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/Bufni%C8%9B%C4%83/json",
+          "summary": "Exact lemma verified after separating the comma-delimited inflection ending in the dictionary header; DOOM 3 1319879: The common eagle-owl Bubo bubo bird sense; DOOM 3 gives bufnițe and bufniței.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/bufni%C8%9B%C4%83",
+          "summary": "The common bird sense is distinct from figurative uses.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://pasaridinromania.sor.ro/specii/373/buha-bubo-bubo",
+          "summary": "The eagle-owl is predominantly nocturnal, can occupy wooded areas and can hunt rabbits.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Review module; Tocător must use the supported writer for any qualified-proxy refresh and pass same-slot playthrough.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
-      "research_ready": false,
-      "link_targets": []
+      "decision": "Source-researched scoped proposal; exact node, forms, four links and any proxy refresh must pass independent review and the supported transaction.",
+      "research_ready": true,
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_pasare",
+          "label": "Pasăre",
+          "status": "exists on wave_base",
+          "category": "stiinta"
+        },
+        {
+          "node_id": "n_v30_animal_field_iepure",
+          "label": "Iepure",
+          "status": "exists on wave_base",
+          "category": "stiinta"
+        },
+        {
+          "node_id": "n_v29_time_daily_noapte",
+          "label": "Noapte",
+          "status": "exists on wave_base",
+          "category": "societate"
+        },
+        {
+          "node_id": "n_v4geo_padure",
+          "label": "Pădure",
+          "status": "exists on wave_base",
+          "category": "geografie"
+        }
+      ],
+      "source_search_planned": true,
+      "category": "stiinta",
+      "node_id": "n_v1_8_bufnita",
+      "verified_forms": [
+        "bufniță",
+        "bufnițe",
+        "bufnițele",
+        "bufniței",
+        "bufnițelor"
+      ],
+      "proposed_edges": [
+        {
+          "dst": "n_v4sti_pasare",
+          "relation": "is_a",
+          "label_ro": "este o pasăre răpitoare",
+          "strength": 0.95,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v30_animal_field_iepure",
+          "relation": "feeds_on",
+          "label_ro": "poate vâna iepuri",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v29_time_daily_noapte",
+          "relation": "active_in",
+          "label_ro": "este activă mai ales noaptea",
+          "strength": 0.9,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v4geo_padure",
+          "relation": "lives_in",
+          "label_ro": "poate trăi în zone împădurite",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        }
+      ],
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "bufniță",
+          "rank": 23218,
+          "count": 596
+        },
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-nord",
       "revision": 1,
-      "state": "idea",
+      "state": "held",
       "kind": "new_shared_concept",
       "lemma": "Nord",
       "label_ro": "Nord",
@@ -5223,17 +5354,74 @@
           ]
         }
       ],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://ro.wikipedia.org/wiki/Punct_cardinal",
+          "summary": "Orientation evidence distinguishes magnetic/geographic north and solar-noon or approximate sunrise/sunset bearings; it does not clear the held compound-parent dependency.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Busol%C4%83",
+          "summary": "Orientation evidence distinguishes magnetic/geographic north and solar-noon or approximate sunrise/sunset bearings; it does not clear the held compound-parent dependency.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Nord",
+          "summary": "Orientation evidence distinguishes magnetic/geographic north and solar-noon or approximate sunrise/sunset bearings; it does not clear the held compound-parent dependency.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Retain hold until the parent has admissible exact-lemma sources; do not bypass dependencies or count maps as additional unnamed nodes.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
+      "decision": "Directional/compass claims are source-supported, but the four-link plan depends on held Punct cardinal; no unaccepted endpoint is installed.",
       "research_ready": false,
-      "link_targets": []
+      "link_targets": [
+        {
+          "node_id": "n_v1_8_punct_cardinal",
+          "target_record": "v18-punct-cardinal",
+          "label": "Punct cardinal",
+          "status": "batch hypothesis; requires acceptance"
+        },
+        {
+          "node_id": "n_v1_8_busola",
+          "target_record": "v18-busola",
+          "label": "Busolă",
+          "status": "batch hypothesis; requires acceptance"
+        },
+        {
+          "node_id": "n_v3geo_harta",
+          "label": "Hartă",
+          "status": "exists on wave_base",
+          "category": "geografie"
+        },
+        {
+          "node_id": "n_v24_nature_sky_soare",
+          "label": "Soare",
+          "status": "exists on wave_base",
+          "category": "stiinta"
+        }
+      ],
+      "source_search_planned": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "nord",
+          "rank": 1295,
+          "count": 22497
+        },
+        "absence_is_not_rejection": true
+      },
+      "partial_verified_forms": [
+        "nord",
+        "nordul",
+        "nordului"
+      ]
     },
     {
       "id": "v18-sud",
       "revision": 1,
-      "state": "idea",
+      "state": "held",
       "kind": "new_shared_concept",
       "lemma": "Sud",
       "label_ro": "Sud",
@@ -5267,17 +5455,74 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://ro.wikipedia.org/wiki/Punct_cardinal",
+          "summary": "Orientation evidence distinguishes magnetic/geographic north and solar-noon or approximate sunrise/sunset bearings; it does not clear the held compound-parent dependency.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Busol%C4%83",
+          "summary": "Orientation evidence distinguishes magnetic/geographic north and solar-noon or approximate sunrise/sunset bearings; it does not clear the held compound-parent dependency.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Nord",
+          "summary": "Orientation evidence distinguishes magnetic/geographic north and solar-noon or approximate sunrise/sunset bearings; it does not clear the held compound-parent dependency.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Retain hold until the parent has admissible exact-lemma sources; do not bypass dependencies or count maps as additional unnamed nodes.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
+      "decision": "Directional/compass claims are source-supported, but the four-link plan depends on held Punct cardinal; no unaccepted endpoint is installed.",
       "research_ready": false,
-      "link_targets": []
+      "link_targets": [
+        {
+          "node_id": "n_v1_8_punct_cardinal",
+          "target_record": "v18-punct-cardinal",
+          "label": "Punct cardinal",
+          "status": "batch hypothesis; requires acceptance"
+        },
+        {
+          "node_id": "n_v1_8_busola",
+          "target_record": "v18-busola",
+          "label": "Busolă",
+          "status": "batch hypothesis; requires acceptance"
+        },
+        {
+          "node_id": "n_v3geo_harta",
+          "label": "Hartă",
+          "status": "exists on wave_base",
+          "category": "geografie"
+        },
+        {
+          "node_id": "n_v24_nature_sky_soare",
+          "label": "Soare",
+          "status": "exists on wave_base",
+          "category": "stiinta"
+        }
+      ],
+      "source_search_planned": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "sud",
+          "rank": 1356,
+          "count": 21314
+        },
+        "absence_is_not_rejection": true
+      },
+      "partial_verified_forms": [
+        "sud",
+        "sudul",
+        "sudului"
+      ]
     },
     {
       "id": "v18-est",
       "revision": 1,
-      "state": "idea",
+      "state": "held",
       "kind": "new_shared_concept",
       "lemma": "Est",
       "label_ro": "Est",
@@ -5311,17 +5556,79 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://ro.wikipedia.org/wiki/Punct_cardinal",
+          "summary": "Orientation evidence distinguishes magnetic/geographic north and solar-noon or approximate sunrise/sunset bearings; it does not clear the held compound-parent dependency.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Busol%C4%83",
+          "summary": "Orientation evidence distinguishes magnetic/geographic north and solar-noon or approximate sunrise/sunset bearings; it does not clear the held compound-parent dependency.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Nord",
+          "summary": "Orientation evidence distinguishes magnetic/geographic north and solar-noon or approximate sunrise/sunset bearings; it does not clear the held compound-parent dependency.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://astro-urseanu.ro/echinoctiul-de-primavara%EF%BF%BC/",
+          "summary": "Orientation evidence distinguishes magnetic/geographic north and solar-noon or approximate sunrise/sunset bearings; it does not clear the held compound-parent dependency.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Retain hold until the parent has admissible exact-lemma sources; do not bypass dependencies or count maps as additional unnamed nodes.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
+      "decision": "Directional/compass claims are source-supported, but the four-link plan depends on held Punct cardinal; no unaccepted endpoint is installed.",
       "research_ready": false,
-      "link_targets": []
+      "link_targets": [
+        {
+          "node_id": "n_v1_8_punct_cardinal",
+          "target_record": "v18-punct-cardinal",
+          "label": "Punct cardinal",
+          "status": "batch hypothesis; requires acceptance"
+        },
+        {
+          "node_id": "n_v1_8_busola",
+          "target_record": "v18-busola",
+          "label": "Busolă",
+          "status": "batch hypothesis; requires acceptance"
+        },
+        {
+          "node_id": "n_v3geo_harta",
+          "label": "Hartă",
+          "status": "exists on wave_base",
+          "category": "geografie"
+        },
+        {
+          "node_id": "n_v24_nature_sky_soare",
+          "label": "Soare",
+          "status": "exists on wave_base",
+          "category": "stiinta"
+        }
+      ],
+      "source_search_planned": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "est",
+          "rank": 1809,
+          "count": 15146
+        },
+        "absence_is_not_rejection": true
+      },
+      "partial_verified_forms": [
+        "est",
+        "estul",
+        "estului"
+      ]
     },
     {
       "id": "v18-vest",
       "revision": 1,
-      "state": "idea",
+      "state": "held",
       "kind": "new_shared_concept",
       "lemma": "Vest",
       "label_ro": "Vest",
@@ -5355,12 +5662,74 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://ro.wikipedia.org/wiki/Punct_cardinal",
+          "summary": "Orientation evidence distinguishes magnetic/geographic north and solar-noon or approximate sunrise/sunset bearings; it does not clear the held compound-parent dependency.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Busol%C4%83",
+          "summary": "Orientation evidence distinguishes magnetic/geographic north and solar-noon or approximate sunrise/sunset bearings; it does not clear the held compound-parent dependency.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Nord",
+          "summary": "Orientation evidence distinguishes magnetic/geographic north and solar-noon or approximate sunrise/sunset bearings; it does not clear the held compound-parent dependency.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://astro-urseanu.ro/echinoctiul-de-primavara%EF%BF%BC/",
+          "summary": "Orientation evidence distinguishes magnetic/geographic north and solar-noon or approximate sunrise/sunset bearings; it does not clear the held compound-parent dependency.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Retain hold until the parent has admissible exact-lemma sources; do not bypass dependencies or count maps as additional unnamed nodes.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
+      "decision": "Directional/compass claims are source-supported, but the four-link plan depends on held Punct cardinal; no unaccepted endpoint is installed.",
       "research_ready": false,
-      "link_targets": []
+      "link_targets": [
+        {
+          "node_id": "n_v1_8_punct_cardinal",
+          "target_record": "v18-punct-cardinal",
+          "label": "Punct cardinal",
+          "status": "batch hypothesis; requires acceptance"
+        },
+        {
+          "node_id": "n_v1_8_busola",
+          "target_record": "v18-busola",
+          "label": "Busolă",
+          "status": "batch hypothesis; requires acceptance"
+        },
+        {
+          "node_id": "n_v3geo_harta",
+          "label": "Hartă",
+          "status": "exists on wave_base",
+          "category": "geografie"
+        },
+        {
+          "node_id": "n_v24_nature_sky_soare",
+          "label": "Soare",
+          "status": "exists on wave_base",
+          "category": "stiinta"
+        }
+      ],
+      "source_search_planned": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "vest",
+          "rank": 2009,
+          "count": 13486
+        },
+        "absence_is_not_rejection": true
+      },
+      "partial_verified_forms": [
+        "vest",
+        "vestul",
+        "vestului"
+      ]
     },
     {
       "id": "v18-busola",
@@ -5434,17 +5803,81 @@
           ]
         }
       ],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://ro.wikipedia.org/wiki/Punct_cardinal",
+          "summary": "Orientation evidence distinguishes magnetic/geographic north and solar-noon or approximate sunrise/sunset bearings; it does not clear the held compound-parent dependency.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Busol%C4%83",
+          "summary": "Orientation evidence distinguishes magnetic/geographic north and solar-noon or approximate sunrise/sunset bearings; it does not clear the held compound-parent dependency.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Nord",
+          "summary": "Orientation evidence distinguishes magnetic/geographic north and solar-noon or approximate sunrise/sunset bearings; it does not clear the held compound-parent dependency.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://us.suunto.com/pages/compasses",
+          "summary": "Orientation evidence distinguishes magnetic/geographic north and solar-noon or approximate sunrise/sunset bearings; it does not clear the held compound-parent dependency.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Retain hold until the parent has admissible exact-lemma sources; do not bypass dependencies or count maps as additional unnamed nodes.",
       "checked_on": "2026-10-11",
-      "decision": "Prior hold: insufficient truthful existing neighbors; magnetic/geographic north and school compas are distinct (i03-outdoor-01, v17-link-busola-nord).",
+      "decision": "Directional/compass claims are source-supported, but the four-link plan depends on held Punct cardinal; no unaccepted endpoint is installed.",
       "research_ready": false,
-      "link_targets": []
+      "link_targets": [
+        {
+          "node_id": "n_v3geo_harta",
+          "label": "Hartă",
+          "status": "exists on wave_base",
+          "category": "geografie"
+        },
+        {
+          "node_id": "n_v4sti_metal",
+          "label": "Metal",
+          "status": "exists on wave_base",
+          "category": "stiinta"
+        },
+        {
+          "node_id": "n_v1_8_nord",
+          "target_record": "v18-nord",
+          "label": "Nord",
+          "status": "batch hypothesis; requires acceptance"
+        },
+        {
+          "node_id": "n_v1_8_punct_cardinal",
+          "target_record": "v18-punct-cardinal",
+          "label": "Punct cardinal",
+          "status": "batch hypothesis; requires acceptance"
+        }
+      ],
+      "source_search_planned": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "busolă",
+          "rank": 23791,
+          "count": 577
+        },
+        "absence_is_not_rejection": true
+      },
+      "partial_verified_forms": [
+        "busolă",
+        "busole",
+        "busolele",
+        "busolei",
+        "busolelor"
+      ]
     },
     {
       "id": "v18-punct-cardinal",
       "revision": 1,
-      "state": "idea",
+      "state": "held",
       "kind": "new_shared_concept",
       "lemma": "Punct cardinal",
       "label_ro": "Punct cardinal",
@@ -5493,17 +5926,65 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://ro.wikipedia.org/wiki/Punct_cardinal",
+          "summary": "Orientation evidence distinguishes magnetic/geographic north and solar-noon or approximate sunrise/sunset bearings; it does not clear the held compound-parent dependency.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Busol%C4%83",
+          "summary": "Orientation evidence distinguishes magnetic/geographic north and solar-noon or approximate sunrise/sunset bearings; it does not clear the held compound-parent dependency.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Nord",
+          "summary": "Orientation evidence distinguishes magnetic/geographic north and solar-noon or approximate sunrise/sunset bearings; it does not clear the held compound-parent dependency.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Retain hold until the parent has admissible exact-lemma sources; do not bypass dependencies or count maps as additional unnamed nodes.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
+      "decision": "Exact compound dexonline JSON returned HTTP 404; the Punct cardinal parent lacks the procedure-required exact-lemma normative check.",
       "research_ready": false,
-      "link_targets": []
+      "link_targets": [
+        {
+          "node_id": "n_v3geo_harta",
+          "label": "Hartă",
+          "status": "exists on wave_base",
+          "category": "geografie"
+        },
+        {
+          "node_id": "n_v24_nature_sky_soare",
+          "label": "Soare",
+          "status": "exists on wave_base",
+          "category": "stiinta"
+        },
+        {
+          "node_id": "n_v1_8_nord",
+          "target_record": "v18-nord",
+          "label": "Nord",
+          "status": "batch hypothesis; requires acceptance"
+        },
+        {
+          "node_id": "n_v1_8_busola",
+          "target_record": "v18-busola",
+          "label": "Busolă",
+          "status": "batch hypothesis; requires acceptance"
+        }
+      ],
+      "source_search_planned": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": null,
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-scrisoare",
       "revision": 1,
-      "state": "idea",
+      "state": "held",
       "kind": "new_shared_concept",
       "lemma": "Scrisoare",
       "label_ro": "Scrisoare",
@@ -5567,11 +6048,47 @@
         }
       ],
       "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "next_action": "Retain the prior postal-sense hold; revisit after useful supporting concepts exist.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
+      "decision": "The correspondence cluster lacks two source-qualified existing main neighbors and two same-category links per item; no Hârtie owner or arbitrary calendar/pen link is invented.",
       "research_ready": false,
-      "link_targets": []
+      "link_targets": [
+        {
+          "node_id": "n_v17soc_posta_romana",
+          "label": "Poșta Română",
+          "status": "exists on wave_base",
+          "category": "societate"
+        },
+        {
+          "node_id": "n_v1_8_plic",
+          "target_record": "v18-plic",
+          "label": "Plic",
+          "status": "batch hypothesis; requires acceptance"
+        },
+        {
+          "node_id": "n_v1_8_timbru",
+          "target_record": "v18-timbru",
+          "label": "Timbru",
+          "status": "batch hypothesis; requires acceptance"
+        },
+        {
+          "node_id": "n_v24_school_supplies_stilou",
+          "label": "Stilou",
+          "status": "exists on wave_base",
+          "category": "viata_de_roman"
+        }
+      ],
+      "source_search_planned": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "scrisoare",
+          "rank": 1667,
+          "count": 16671
+        },
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-plic",
@@ -5651,16 +6168,52 @@
         }
       ],
       "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "next_action": "Retain the prior postal-sense hold; revisit after useful supporting concepts exist.",
       "checked_on": "2026-10-11",
-      "decision": "Prior hold: insufficient truthful existing neighbors; postal envelope excludes sachets (i03-office-04, v17-link-scrisoare-plic).",
+      "decision": "The correspondence cluster lacks two source-qualified existing main neighbors and two same-category links per item; no Hârtie owner or arbitrary calendar/pen link is invented.",
       "research_ready": false,
-      "link_targets": []
+      "link_targets": [
+        {
+          "node_id": "n_v17soc_posta_romana",
+          "label": "Poșta Română",
+          "status": "exists on wave_base",
+          "category": "societate"
+        },
+        {
+          "node_id": "n_v1_8_scrisoare",
+          "target_record": "v18-scrisoare",
+          "label": "Scrisoare",
+          "status": "batch hypothesis; requires acceptance"
+        },
+        {
+          "node_id": "n_v1_8_timbru",
+          "target_record": "v18-timbru",
+          "label": "Timbru",
+          "status": "batch hypothesis; requires acceptance"
+        },
+        {
+          "node_id": "n_v24_school_supplies_stilou",
+          "label": "Stilou",
+          "status": "exists on wave_base",
+          "category": "viata_de_roman"
+        }
+      ],
+      "source_search_planned": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "plic",
+          "rank": 8752,
+          "count": 2327
+        },
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-timbru",
       "revision": 1,
-      "state": "idea",
+      "state": "held",
       "kind": "new_shared_concept",
       "lemma": "Timbru",
       "label_ro": "Timbru",
@@ -5710,16 +6263,52 @@
       },
       "prior_records": [],
       "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "next_action": "Retain the prior postal-sense hold; revisit after useful supporting concepts exist.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
+      "decision": "The correspondence cluster lacks two source-qualified existing main neighbors and two same-category links per item; no Hârtie owner or arbitrary calendar/pen link is invented.",
       "research_ready": false,
-      "link_targets": []
+      "link_targets": [
+        {
+          "node_id": "n_v17soc_posta_romana",
+          "label": "Poșta Română",
+          "status": "exists on wave_base",
+          "category": "societate"
+        },
+        {
+          "node_id": "n_v1_8_scrisoare",
+          "target_record": "v18-scrisoare",
+          "label": "Scrisoare",
+          "status": "batch hypothesis; requires acceptance"
+        },
+        {
+          "node_id": "n_v1_8_plic",
+          "target_record": "v18-plic",
+          "label": "Plic",
+          "status": "batch hypothesis; requires acceptance"
+        },
+        {
+          "node_id": "n_v29_time_calendar",
+          "label": "Calendar",
+          "status": "exists on wave_base",
+          "category": "societate"
+        }
+      ],
+      "source_search_planned": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "timbre",
+          "rank": 20028,
+          "count": 740
+        },
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-tocator",
       "revision": 1,
-      "state": "idea",
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Tocător",
       "label_ro": "Tocător",
@@ -5744,7 +6333,7 @@
         "tocătoarele de bucătărie",
         "tocătoarelor de bucătărie"
       ],
-      "form_status": "Unverified paradigm hypotheses. Confirm DEX sense/register and DOOM 3 forms in step 2; new forms must also be screened before use.",
+      "form_status": "Exact-lemma dictionary sense and DOOM 3 verified; full non-colliding forms await independent review.",
       "identity_checks": {
         "forms": [
           {
@@ -5826,17 +6415,130 @@
           ]
         }
       ],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/Toc%C4%83tor/json",
+          "summary": "Exact lemma verified after separating the comma-delimited inflection ending in the dictionary header; DOOM 3 1268990: DEX 2009 entry 833793 explicitly distinguishes the flat wood/plastic board from a blade or chopping machine; DOOM 3 gives neuter tocătoare for the board sense.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/toc%C4%83tor",
+          "summary": "The flat food-cutting board is a separate sense from the blade or machine.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://www.ikea.com/ro/ro/rooms/dining/cum-sa-iti-ingrijesti-cutitul-pub0fed03ff/",
+          "summary": "Knife guidance recommends a separate wood/plastic cutting board.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://www.ikea.com/ro/ro/cat/cutite-tocatoare-15934/",
+          "summary": "The Romanian description explicitly mentions cutting vegetables on boards.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://www.ikea.com/ro/ro/p/blandsallad-tocator-bambus-20514027/",
+          "summary": "This board is used to cut/serve bread; its bamboo is not used as proof of tree wood.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://www.ikea.com/ro/ro/p/artistisk-tocator-stejar-80511083/",
+          "summary": "A separate actual board is made of oak wood; only some boards are wooden.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Review module; Tocător must use the supported writer for any qualified-proxy refresh and pass same-slot playthrough.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
+      "decision": "Source-researched scoped proposal; exact node, forms, four links and any proxy refresh must pass independent review and the supported transaction.",
       "risks": [
         "Prior manual/electric chopper ambiguity persists.",
         "Existing qualified proxy identity must be preserved or refreshed by the supported writer; unsupported migration is held.",
         "Four truthful links including two main and two same-category neighbors remain unproved."
       ],
-      "research_ready": false,
-      "link_targets": []
+      "research_ready": true,
+      "link_targets": [
+        {
+          "node_id": "n_v29_kitchen_table_cutit",
+          "label": "Cuțit",
+          "status": "exists on wave_base",
+          "category": "gastronomie"
+        },
+        {
+          "node_id": "n_v4gas_legume",
+          "label": "Legume",
+          "status": "exists on wave_base",
+          "category": "gastronomie"
+        },
+        {
+          "node_id": "n_v4gas_paine",
+          "label": "Pâine",
+          "status": "exists on wave_base",
+          "category": "gastronomie"
+        },
+        {
+          "node_id": "n_v1_3_material_lemn",
+          "label": "Lemn",
+          "status": "exists on wave_base",
+          "category": "viata_de_roman"
+        }
+      ],
+      "source_search_planned": true,
+      "category": "gastronomie",
+      "node_id": "n_v1_8_tocator",
+      "verified_forms": [
+        "tocător",
+        "tocătorul",
+        "tocătorului",
+        "tocătoare",
+        "tocătoarele",
+        "tocătoarelor",
+        "tocător de bucătărie",
+        "tocătorul de bucătărie",
+        "tocătorului de bucătărie",
+        "tocătoare de bucătărie",
+        "tocătoarele de bucătărie",
+        "tocătoarelor de bucătărie"
+      ],
+      "proposed_edges": [
+        {
+          "dst": "n_v29_kitchen_table_cutit",
+          "relation": "used_with",
+          "label_ro": "se folosește împreună cu un cuțit",
+          "strength": 0.9,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v4gas_legume",
+          "relation": "used_to_cut",
+          "label_ro": "pe el se pot tăia legume",
+          "strength": 0.9,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v4gas_paine",
+          "relation": "used_to_cut",
+          "label_ro": "pe unele modele se poate tăia pâine",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v1_3_material_lemn",
+          "relation": "made_from",
+          "label_ro": "unele modele sunt fabricate din lemn",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        }
+      ],
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": null,
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-input-leafa",
@@ -7155,12 +7857,13 @@
   ],
   "counts": {
     "records": 60,
-    "idea": 10,
-    "held": 23,
+    "idea": 0,
+    "held": 31,
     "accepted": 0,
     "installed": 0,
     "planned_unique_forms": 322,
     "proposed_existing_owner_forms": 37,
-    "researched": 27
+    "researched": 29,
+    "rejected": 0
   }
 }
