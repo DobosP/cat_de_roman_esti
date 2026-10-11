@@ -3,7 +3,7 @@
   "theme": "v1-8-everyday-core",
   "baseline_commit": "e164c0c70de38805d2648e271d294ddf36a26c8e",
   "procedure_rev": "17b97a2",
-  "scope": "Step 2c: first 36 items processed; source-researched proposals are unapproved and unresolved items held.",
+  "scope": "Step 2d: first 48 items processed; unsupported targets and normative gaps held, no adoption approval.",
   "screen": {
     "bundle_sha256": "e0cfe93de076f14a782dc6377b2655d4ef10f86ada1560ae1202bb06dbfdf877",
     "script": "~/work/_temp/content__v1-8-everyday-core/prescreen.py",
@@ -2037,7 +2037,7 @@
       "kind": "new_shared_concept",
       "lemma": "Anotimp",
       "label_ro": "Anotimp",
-      "sense": "Una dintre cele patru perioade sezoniere ale anului în România.",
+      "sense": "Perioadă a anului cu trăsături specifice de climă și lumină; în România sunt patru anotimpuri, iar alte regiuni folosesc și diviziuni ploioase/secetoase.",
       "category_hypothesis": "stiinta",
       "games": [
         "Cald sau Rece",
@@ -2097,19 +2097,18 @@
           "url": "https://ro.wikipedia.org/wiki/P%C4%83m%C3%A2nt#Înclinare_axială_și_anotimpuri",
           "summary": "Earth axial tilt changes seasonal solar illumination; solstices and equinoxes define calendar boundaries.",
           "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Sezonul_secetos",
+          "summary": "Tropical seasonal divisions can be defined by precipitation; the new Anotimp scope explicitly includes this and does not treat existing Pământ as the planet.",
+          "checked_on": "2026-10-11"
         }
       ],
       "next_action": "Independent factual and quality review of the exact module.",
       "checked_on": "2026-10-11",
-      "decision": "Source-researched proposal; exact scoped forms, links and dependencies still require independent review.",
+      "decision": "Generic annual climatic/light period, with four Romanian seasons and rainfall-defined tropical seasons; corrected the rejected Earth/soil ownership assumption without changing the existing owner.",
       "research_ready": true,
       "link_targets": [
-        {
-          "node_id": "n_v24_nature_world_pamant",
-          "label": "Pământ",
-          "status": "exists on wave_base",
-          "category": "stiinta"
-        },
         {
           "node_id": "n_v24_nature_sky_soare",
           "label": "Soare",
@@ -2127,6 +2126,13 @@
           "label": "Calendar",
           "status": "exists on wave_base",
           "category": "societate"
+        },
+        {
+          "node_id": "n_v24_weather_precipitation_ploaie",
+          "label": "Ploaie",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "rainy/dry tropical seasonal divisions"
         }
       ],
       "source_search_planned": true,
@@ -2141,14 +2147,6 @@
         "anotimpurilor"
       ],
       "proposed_edges": [
-        {
-          "dst": "n_v24_nature_world_pamant",
-          "relation": "determined_by",
-          "label_ro": "înclinarea axei Pământului contribuie la succesiunea anotimpurilor",
-          "strength": 0.9,
-          "is_distractor": 0,
-          "bidirectional": 0
-        },
         {
           "dst": "n_v24_nature_sky_soare",
           "relation": "associated_with",
@@ -2169,6 +2167,14 @@
           "dst": "n_v29_time_calendar",
           "relation": "represented_in",
           "label_ro": "are intervale reprezentate în calendar",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v24_weather_precipitation_ploaie",
+          "relation": "characterized_by",
+          "label_ro": "în regiunile tropicale anotimpurile pot fi diferențiate prin regimul ploilor",
           "strength": 0.85,
           "is_distractor": 0,
           "bidirectional": 0
@@ -3348,12 +3354,12 @@
     {
       "id": "v18-furnica",
       "revision": 1,
-      "state": "idea",
+      "state": "held",
       "kind": "new_shared_concept",
       "lemma": "Furnică",
       "label_ro": "Furnică",
       "sense": "Insectă socială terestră.",
-      "category_hypothesis": "geografie",
+      "category_hypothesis": "stiinta",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
@@ -3400,22 +3406,69 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://ro.wikipedia.org/wiki/Formicide",
+          "summary": "Source read supports partial scoped claims but does not resolve the recorded fourth-link or normative blocker.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://www.upet.ro/geoeco/doc/vol/2005_Volum%20Geoecologia.pdf",
+          "summary": "Source read supports partial scoped claims but does not resolve the recorded fourth-link or normative blocker.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Retain hold; do not infer wheat from all cereals, grass from hay, or a fourth link from familiarity.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
+      "decision": "Soil/forest nesting and insect identity are supported, but direct Plantă food claim is not verified; only three natural target claims remain.",
       "research_ready": false,
-      "link_targets": []
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_insecta",
+          "label": "insectă",
+          "category": "stiinta",
+          "status": "exists on wave_base"
+        },
+        {
+          "node_id": "n_v4sti_planta",
+          "label": "plantă",
+          "category": "stiinta",
+          "status": "exists on wave_base"
+        },
+        {
+          "node_id": "n_v4geo_padure",
+          "label": "pădure",
+          "category": "geografie",
+          "status": "exists on wave_base"
+        },
+        {
+          "node_id": "n_v24_nature_world_pamant",
+          "label": "Pământ",
+          "category": "stiinta",
+          "status": "exists on wave_base"
+        }
+      ],
+      "source_search_planned": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "furnici",
+          "rank": 12604,
+          "count": 1422
+        },
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-buburuza",
       "revision": 1,
-      "state": "idea",
+      "state": "held",
       "kind": "new_shared_concept",
       "lemma": "Buburuză",
       "label_ro": "Buburuză",
       "sense": "Insectă cunoscută ca buburuză; verifică exact sensul gărgăriță și mărcile de registru ale mămăruță.",
-      "category_hypothesis": "geografie",
+      "category_hypothesis": "stiinta",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
@@ -3504,22 +3557,65 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://ro.wikipedia.org/wiki/Coccinellidae",
+          "summary": "Source read supports partial scoped claims but does not resolve the recorded fourth-link or normative blocker.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://agrointel.ro/220475/buburuzele-metoda-ecologica-pentru-eliminarea-daunatorilor-la-legume",
+          "summary": "Source read supports partial scoped claims but does not resolve the recorded fourth-link or normative blocker.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Retain hold; do not infer wheat from all cereals, grass from hay, or a fourth link from familiarity.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
+      "decision": "Insect identity, plant protection and aphids on leaves are supported, but the fourth flower claim is unverified for the scoped ladybird; no source padding. Gărgăriță is broader plant-pest vocabulary, not an approved alias.",
       "research_ready": false,
-      "link_targets": []
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_insecta",
+          "label": "insectă",
+          "category": "stiinta",
+          "status": "exists on wave_base"
+        },
+        {
+          "node_id": "n_v4sti_planta",
+          "label": "plantă",
+          "category": "stiinta",
+          "status": "exists on wave_base"
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "frunză",
+          "category": "stiinta",
+          "status": "exists on wave_base"
+        },
+        {
+          "node_id": "n_v4sti_floare",
+          "label": "floare",
+          "category": "stiinta",
+          "status": "exists on wave_base"
+        }
+      ],
+      "source_search_planned": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": null,
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-barza",
       "revision": 1,
-      "state": "idea",
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Barză",
       "label_ro": "Barză",
-      "sense": "Pasăre cu picioare și cioc lungi, cunoscută în fauna și poveștile din România.",
-      "category_hypothesis": "geografie",
+      "sense": "Barza albă, pasăre migratoare cunoscută în România; nu generaliza toate trăsăturile la întreaga familie.",
+      "category_hypothesis": "stiinta",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
@@ -3532,7 +3628,7 @@
         "berzei",
         "berzelor"
       ],
-      "form_status": "Unverified paradigm hypotheses. Confirm DEX sense/register and DOOM 3 forms in step 2; new forms must also be screened before use.",
+      "form_status": "Exact-lemma DEX/DOOM 3 and a permitted Romanian second-source class checked; forms still need independent review.",
       "identity_checks": {
         "forms": [
           {
@@ -3558,22 +3654,118 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/Barz%C4%83/json",
+          "summary": "Exact-lemma DEX and DOOM 3 entry 1317424: White-stork bird sense; DOOM 3 gives berze and berzei.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Barz%C4%83_alb%C4%83",
+          "summary": "White storks are birds with the familiar long-legged body form.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://pasaridinromania.sor.ro/specii/184/barza-alba-ciconia-ciconia",
+          "summary": "White storks can nest on trees and eat snakes.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://www.sor.ro/planse-de-colorat/",
+          "summary": "The educational white-stork account includes frogs in its prey.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Review exact module and all incident batch-neighbor limits before installation.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
-      "research_ready": false,
-      "link_targets": []
+      "decision": "Source-researched animal proposal with scoped diet/habitat captions; independent review and dependency limits remain.",
+      "research_ready": true,
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_pasare",
+          "label": "pasăre",
+          "category": "stiinta",
+          "status": "exists on wave_base"
+        },
+        {
+          "node_id": "n_v4sti_copac",
+          "label": "copac",
+          "category": "stiinta",
+          "status": "exists on wave_base"
+        },
+        {
+          "node_id": "n_v1_8_broasca",
+          "target_record": "v18-broasca",
+          "label": "Broască",
+          "status": "batch hypothesis; requires acceptance"
+        },
+        {
+          "node_id": "n_v1_8_sarpe",
+          "target_record": "v18-sarpe",
+          "label": "Șarpe",
+          "status": "batch hypothesis; requires acceptance"
+        }
+      ],
+      "source_search_planned": true,
+      "category": "stiinta",
+      "node_id": "n_v1_8_barza",
+      "verified_forms": [
+        "barză",
+        "berze",
+        "berzele",
+        "berzei",
+        "berzelor"
+      ],
+      "proposed_edges": [
+        {
+          "dst": "n_v4sti_pasare",
+          "relation": "is_a",
+          "label_ro": "este o pasăre",
+          "strength": 0.95,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v4sti_copac",
+          "relation": "nests_in",
+          "label_ro": "își poate construi cuibul în copaci",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v1_8_broasca",
+          "relation": "feeds_on",
+          "label_ro": "se poate hrăni cu broaște",
+          "strength": 0.9,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v1_8_sarpe",
+          "relation": "feeds_on",
+          "label_ro": "se poate hrăni cu șerpi",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        }
+      ],
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": null,
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-randunica",
       "revision": 1,
-      "state": "idea",
+      "state": "held",
       "kind": "new_shared_concept",
       "lemma": "Rândunică",
       "label_ro": "Rândunică",
       "sense": "Pasăre migratoare cu coada bifurcată.",
-      "category_hypothesis": "geografie",
+      "category_hypothesis": "stiinta",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
@@ -3620,22 +3812,60 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://ro.wikipedia.org/wiki/R%C3%A2ndunic%C4%83",
+          "summary": "Source read supports partial scoped claims but does not resolve the recorded fourth-link or normative blocker.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Retain hold; do not infer wheat from all cereals, grass from hay, or a fourth link from familiarity.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
+      "decision": "Seasonal bird/insect claims are supported, but no exact-headword DOOM 3 entry was returned; normative full-paradigm check incomplete.",
       "research_ready": false,
-      "link_targets": []
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_pasare",
+          "label": "pasăre",
+          "category": "stiinta",
+          "status": "exists on wave_base"
+        },
+        {
+          "node_id": "n_v4sti_insecta",
+          "label": "insectă",
+          "category": "stiinta",
+          "status": "exists on wave_base"
+        },
+        {
+          "node_id": "n_v1_8_primavara",
+          "target_record": "v18-primavara",
+          "label": "Primăvară",
+          "status": "batch hypothesis; requires acceptance"
+        },
+        {
+          "node_id": "n_v1_8_toamna",
+          "target_record": "v18-toamna",
+          "label": "Toamnă",
+          "status": "batch hypothesis; requires acceptance"
+        }
+      ],
+      "source_search_planned": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": null,
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-arici",
       "revision": 1,
-      "state": "idea",
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Arici",
       "label_ro": "Arici",
       "sense": "Mamifer cu țepi.",
-      "category_hypothesis": "geografie",
+      "category_hypothesis": "stiinta",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
@@ -3648,7 +3878,7 @@
         "aricii",
         "aricilor"
       ],
-      "form_status": "Unverified paradigm hypotheses. Confirm DEX sense/register and DOOM 3 forms in step 2; new forms must also be screened before use.",
+      "form_status": "Exact-lemma DEX/DOOM 3 and a permitted Romanian second-source class checked; forms still need independent review.",
       "identity_checks": {
         "forms": [
           {
@@ -3674,22 +3904,117 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/Arici/json",
+          "summary": "Exact-lemma DEX and DOOM 3 entry 1323956: Spiny mammal sense; DOOM 3 gives invariant plural arici and articulated aricii.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Arici",
+          "summary": "Hedgehogs are small spiny mammals and eat insects.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://www.retezat.ro/media/files/anexa%2029%20descrierea%20generala%20a%20speciilor%20si%20habitatelor%20de%20interes%20conservativ.pdf",
+          "summary": "A Romanian hedgehog species uses forest edges, avoids extensive forests and enters winter dormancy.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Review exact module and all incident batch-neighbor limits before installation.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
-      "research_ready": false,
-      "link_targets": []
+      "decision": "Source-researched animal proposal with scoped diet/habitat captions; independent review and dependency limits remain.",
+      "research_ready": true,
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_animal",
+          "label": "animal",
+          "category": "stiinta",
+          "status": "exists on wave_base"
+        },
+        {
+          "node_id": "n_v4sti_insecta",
+          "label": "insectă",
+          "category": "stiinta",
+          "status": "exists on wave_base"
+        },
+        {
+          "node_id": "n_v4geo_padure",
+          "label": "pădure",
+          "category": "geografie",
+          "status": "exists on wave_base"
+        },
+        {
+          "node_id": "n_v1_8_iarna",
+          "target_record": "v18-iarna",
+          "label": "Iarnă",
+          "status": "batch hypothesis; requires acceptance"
+        }
+      ],
+      "source_search_planned": true,
+      "category": "stiinta",
+      "node_id": "n_v1_8_arici",
+      "verified_forms": [
+        "arici",
+        "ariciul",
+        "ariciului",
+        "aricii",
+        "aricilor"
+      ],
+      "proposed_edges": [
+        {
+          "dst": "n_v4sti_animal",
+          "relation": "is_a",
+          "label_ro": "este un animal mamifer",
+          "strength": 0.95,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v4sti_insecta",
+          "relation": "feeds_on",
+          "label_ro": "se hrănește și cu insecte",
+          "strength": 0.9,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v4geo_padure",
+          "relation": "lives_in",
+          "label_ro": "poate trăi la marginea pădurilor",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v1_8_iarna",
+          "relation": "dormant_in",
+          "label_ro": "poate intra în somnul de iarnă",
+          "strength": 0.9,
+          "is_distractor": 0,
+          "bidirectional": 0
+        }
+      ],
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "arici",
+          "rank": 29912,
+          "count": 406
+        },
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-broasca",
       "revision": 1,
-      "state": "idea",
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Broască",
       "label_ro": "Broască",
       "sense": "Amfibian; exclude dispozitivul de închidere.",
-      "category_hypothesis": "geografie",
+      "category_hypothesis": "stiinta",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
@@ -3702,7 +4027,7 @@
         "broaștei",
         "broaștelor"
       ],
-      "form_status": "Unverified paradigm hypotheses. Confirm DEX sense/register and DOOM 3 forms in step 2; new forms must also be screened before use.",
+      "form_status": "Exact-lemma DEX/DOOM 3 and a permitted Romanian second-source class checked; forms still need independent review.",
       "identity_checks": {
         "forms": [
           {
@@ -3736,22 +4061,122 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/Broasc%C4%83/json",
+          "summary": "Exact-lemma DEX and DOOM 3 entry 1319557: Amphibian, not lock or plant homonyms; DOOM 3 gives broaște and broaștei.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Broasc%C4%83",
+          "summary": "Frogs are amphibian animals; adult frogs commonly consume insects.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://www.sor.ro/planse-de-colorat/",
+          "summary": "Frogs are included in white-stork prey.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/%C8%98arpe_de_cas%C4%83",
+          "summary": "Grass snakes eat frogs; this supports a some-snake predation claim.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Review exact module and all incident batch-neighbor limits before installation.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
-      "research_ready": false,
-      "link_targets": []
+      "decision": "Source-researched animal proposal with scoped diet/habitat captions; independent review and dependency limits remain.",
+      "research_ready": true,
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_animal",
+          "label": "animal",
+          "category": "stiinta",
+          "status": "exists on wave_base"
+        },
+        {
+          "node_id": "n_v4sti_insecta",
+          "label": "insectă",
+          "category": "stiinta",
+          "status": "exists on wave_base"
+        },
+        {
+          "node_id": "n_v1_8_barza",
+          "target_record": "v18-barza",
+          "label": "Barză",
+          "status": "batch hypothesis; requires acceptance"
+        },
+        {
+          "node_id": "n_v1_8_sarpe",
+          "target_record": "v18-sarpe",
+          "label": "Șarpe",
+          "status": "batch hypothesis; requires acceptance"
+        }
+      ],
+      "source_search_planned": true,
+      "category": "stiinta",
+      "node_id": "n_v1_8_broasca",
+      "verified_forms": [
+        "broască",
+        "broaște",
+        "broaștele",
+        "broaștei",
+        "broaștelor"
+      ],
+      "proposed_edges": [
+        {
+          "dst": "n_v4sti_animal",
+          "relation": "is_a",
+          "label_ro": "este un animal amfibian",
+          "strength": 0.95,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v4sti_insecta",
+          "relation": "feeds_on",
+          "label_ro": "adulții se hrănesc adesea cu insecte",
+          "strength": 0.9,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v1_8_barza",
+          "relation": "prey_of",
+          "label_ro": "poate fi vânată de berze",
+          "strength": 0.9,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v1_8_sarpe",
+          "relation": "prey_of",
+          "label_ro": "poate fi vânată de unele specii de șerpi",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        }
+      ],
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "broască",
+          "rank": 8954,
+          "count": 2254
+        },
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-melc",
       "revision": 1,
-      "state": "idea",
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Melc",
       "label_ro": "Melc",
-      "sense": "Moluștă gasteropodă; exclude mecanismul și sensurile figurate.",
-      "category_hypothesis": "geografie",
+      "sense": "Melc terestru de grădină, ca animal; exclude mecanismul, urechea și prăjitura.",
+      "category_hypothesis": "stiinta",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
@@ -3765,7 +4190,7 @@
         "melcii",
         "melcilor"
       ],
-      "form_status": "Unverified paradigm hypotheses. Confirm DEX sense/register and DOOM 3 forms in step 2; new forms must also be screened before use.",
+      "form_status": "Exact-lemma DEX/DOOM 3 and a permitted Romanian second-source class checked; forms still need independent review.",
       "identity_checks": {
         "forms": [
           {
@@ -3803,22 +4228,118 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/Melc/json",
+          "summary": "Exact-lemma DEX and DOOM 3 entry 1292834: Here the terrestrial snail animal, not mechanical/ear/pastry meanings; DOOM 3 gives melci.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Melc",
+          "summary": "Snails are gastropod animals; terrestrial examples are within the proposed scope.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://www.digi24.ro/magazin/stil-de-viata/casa-si-gradina/sunt-cu-sutele-nu-doar-unu-doi-invazie-de-melci-dupa-ploaie-oameni-disperati-dupa-ce-s-au-trezit-cu-gradinile-distruse-3254513",
+          "summary": "Garden snails feed on plants/leaves and become conspicuous in humidity after rain; do not generalize to all gastropods.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Review exact module and all incident batch-neighbor limits before installation.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
-      "research_ready": false,
-      "link_targets": []
+      "decision": "Source-researched animal proposal with scoped diet/habitat captions; independent review and dependency limits remain.",
+      "research_ready": true,
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_animal",
+          "label": "animal",
+          "category": "stiinta",
+          "status": "exists on wave_base"
+        },
+        {
+          "node_id": "n_v4sti_planta",
+          "label": "plantă",
+          "category": "stiinta",
+          "status": "exists on wave_base"
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "frunză",
+          "category": "stiinta",
+          "status": "exists on wave_base"
+        },
+        {
+          "node_id": "n_v24_weather_precipitation_ploaie",
+          "label": "Ploaie",
+          "category": "stiinta",
+          "status": "exists on wave_base"
+        }
+      ],
+      "source_search_planned": true,
+      "category": "stiinta",
+      "node_id": "n_v1_8_melc",
+      "verified_forms": [
+        "melc",
+        "melcul",
+        "melcului",
+        "melci",
+        "melcii",
+        "melcilor"
+      ],
+      "proposed_edges": [
+        {
+          "dst": "n_v4sti_animal",
+          "relation": "is_a",
+          "label_ro": "este un animal gasteropod",
+          "strength": 0.95,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v4sti_planta",
+          "relation": "feeds_on",
+          "label_ro": "melcii de grădină se hrănesc cu plante",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v4sti_frunza",
+          "relation": "feeds_on",
+          "label_ro": "melcii de grădină pot consuma frunze",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v24_weather_precipitation_ploaie",
+          "relation": "active_after",
+          "label_ro": "melcii de grădină sunt adesea activi după ploaie",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        }
+      ],
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "melci",
+          "rank": 23806,
+          "count": 576
+        },
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-rata",
       "revision": 1,
-      "state": "idea",
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Rață",
       "label_ro": "Rață",
       "sense": "Pasăre de apă; exclude rata financiară și alte sensuri omografe.",
-      "category_hypothesis": "geografie",
+      "category_hypothesis": "stiinta",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
@@ -3831,7 +4352,7 @@
         "raței",
         "rațelor"
       ],
-      "form_status": "Unverified paradigm hypotheses. Confirm DEX sense/register and DOOM 3 forms in step 2; new forms must also be screened before use.",
+      "form_status": "Exact-lemma DEX/DOOM 3 and a permitted Romanian second-source class checked; forms still need independent review.",
       "identity_checks": {
         "forms": [
           {
@@ -3865,22 +4386,122 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/Ra%C8%9B%C4%83/json",
+          "summary": "Exact-lemma DEX and DOOM 3 entry 1274786: Swimming bird, not financial rata; DOOM 3 gives rațe and raței.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Ra%C8%9B%C4%83",
+          "summary": "Ducks are birds with domestic and wild examples.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ornitodata2.sor.ro/specii/210/rata-mare-anas-platyrhynchos",
+          "summary": "Mallards eat plants and invertebrates including insects.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://zetekoprod.ro/pentru-pasari-de-curte/furaj-granulat-grower-pentru-rate-in-crestere/pd/2/5kg",
+          "summary": "A domestic duck-feed formulation explicitly contains wheat; no universal wild-duck diet is asserted.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Review exact module and all incident batch-neighbor limits before installation.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
-      "research_ready": false,
-      "link_targets": []
+      "decision": "Source-researched animal proposal with scoped diet/habitat captions; independent review and dependency limits remain.",
+      "research_ready": true,
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_pasare",
+          "label": "pasăre",
+          "category": "stiinta",
+          "status": "exists on wave_base"
+        },
+        {
+          "node_id": "n_v4sti_insecta",
+          "label": "insectă",
+          "category": "stiinta",
+          "status": "exists on wave_base"
+        },
+        {
+          "node_id": "n_v4sti_planta",
+          "label": "plantă",
+          "category": "stiinta",
+          "status": "exists on wave_base"
+        },
+        {
+          "node_id": "n_v84_food_grau",
+          "label": "Grâu",
+          "category": "gastronomie",
+          "status": "exists on wave_base"
+        }
+      ],
+      "source_search_planned": true,
+      "category": "stiinta",
+      "node_id": "n_v1_8_rata",
+      "verified_forms": [
+        "rață",
+        "rațe",
+        "rațele",
+        "raței",
+        "rațelor"
+      ],
+      "proposed_edges": [
+        {
+          "dst": "n_v4sti_pasare",
+          "relation": "is_a",
+          "label_ro": "este o pasăre",
+          "strength": 0.95,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v4sti_insecta",
+          "relation": "feeds_on",
+          "label_ro": "unele rațe se hrănesc cu insecte",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v4sti_planta",
+          "relation": "feeds_on",
+          "label_ro": "unele rațe se hrănesc cu plante",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v84_food_grau",
+          "relation": "fed_with",
+          "label_ro": "rațele domestice pot primi furaj cu grâu",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        }
+      ],
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "rață",
+          "rank": 12190,
+          "count": 1486
+        },
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-gasca",
       "revision": 1,
-      "state": "idea",
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Gâscă",
       "label_ro": "Gâscă",
       "sense": "Pasăre de apă, domestică sau sălbatică.",
-      "category_hypothesis": "geografie",
+      "category_hypothesis": "stiinta",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
@@ -3893,7 +4514,7 @@
         "gâștei",
         "gâștelor"
       ],
-      "form_status": "Unverified paradigm hypotheses. Confirm DEX sense/register and DOOM 3 forms in step 2; new forms must also be screened before use.",
+      "form_status": "Exact-lemma DEX/DOOM 3 and a permitted Romanian second-source class checked; forms still need independent review.",
       "identity_checks": {
         "forms": [
           {
@@ -3927,22 +4548,117 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/G%C3%A2sc%C4%83/json",
+          "summary": "Exact-lemma DEX and DOOM 3 entry 1319714: Bird sense, not an insulting figurative use; DOOM 3 gives gâște and gâștei.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/G%C3%A2sc%C4%83",
+          "summary": "Geese are birds with familiar domestic forms.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://agroland.ro/c/ce-mananca-gastele/",
+          "summary": "Domestic goose feeding includes grass, wheat and vegetable leaves, with cauliflower leaves named; inaccurate breed wording is not adopted.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Review exact module and all incident batch-neighbor limits before installation.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
-      "research_ready": false,
-      "link_targets": []
+      "decision": "Source-researched animal proposal with scoped diet/habitat captions; independent review and dependency limits remain.",
+      "research_ready": true,
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_pasare",
+          "label": "pasăre",
+          "category": "stiinta",
+          "status": "exists on wave_base"
+        },
+        {
+          "node_id": "n_v24_nature_plant_parts_iarba",
+          "label": "Iarbă",
+          "category": "stiinta",
+          "status": "exists on wave_base"
+        },
+        {
+          "node_id": "n_v84_food_grau",
+          "label": "Grâu",
+          "category": "gastronomie",
+          "status": "exists on wave_base"
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "frunză",
+          "category": "stiinta",
+          "status": "exists on wave_base"
+        }
+      ],
+      "source_search_planned": true,
+      "category": "stiinta",
+      "node_id": "n_v1_8_gasca",
+      "verified_forms": [
+        "gâscă",
+        "gâște",
+        "gâștele",
+        "gâștei",
+        "gâștelor"
+      ],
+      "proposed_edges": [
+        {
+          "dst": "n_v4sti_pasare",
+          "relation": "is_a",
+          "label_ro": "este o pasăre",
+          "strength": 0.95,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v24_nature_plant_parts_iarba",
+          "relation": "feeds_on",
+          "label_ro": "gâștele domestice pasc iarbă",
+          "strength": 0.9,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v84_food_grau",
+          "relation": "fed_with",
+          "label_ro": "gâștele domestice pot fi hrănite cu grâu",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v4sti_frunza",
+          "relation": "feeds_on",
+          "label_ro": "gâștele domestice pot consuma frunze de legume",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        }
+      ],
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "gâscă",
+          "rank": 18306,
+          "count": 846
+        },
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-cocos",
       "revision": 1,
-      "state": "idea",
+      "state": "held",
       "kind": "new_shared_concept",
       "lemma": "Cocoș",
       "label_ro": "Cocoș",
       "sense": "Masculul găinii; exclude piesele mecanice.",
-      "category_hypothesis": "geografie",
+      "category_hypothesis": "stiinta",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
@@ -3986,22 +4702,74 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://ro.wiktionary.org/wiki/coco%C8%99",
+          "summary": "Source read supports partial scoped claims but does not resolve the recorded fourth-link or normative blocker.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://www.descopera.ro/maratoanele-descopera/mari-intrebari/13057592-de-ce-canta-cocosii",
+          "summary": "Source read supports partial scoped claims but does not resolve the recorded fourth-link or normative blocker.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://fnc.agricola.ro/ro/product/nutreturi-combinate-pentru-cocosi/",
+          "summary": "Source read supports partial scoped claims but does not resolve the recorded fourth-link or normative blocker.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Retain hold; do not infer wheat from all cereals, grass from hay, or a fourth link from familiarity.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
+      "decision": "Bird/male-hen/dawn claims are supported, but the producer source only establishes cereals, not the planned wheat link.",
       "research_ready": false,
-      "link_targets": []
+      "link_targets": [
+        {
+          "node_id": "n_v29_animal_farm_gaina",
+          "label": "Găină",
+          "category": "stiinta",
+          "status": "exists on wave_base"
+        },
+        {
+          "node_id": "n_v4sti_pasare",
+          "label": "pasăre",
+          "category": "stiinta",
+          "status": "exists on wave_base"
+        },
+        {
+          "node_id": "n_v84_food_grau",
+          "label": "Grâu",
+          "category": "gastronomie",
+          "status": "exists on wave_base"
+        },
+        {
+          "node_id": "n_v1_8_dimineata",
+          "target_record": "v18-dimineata",
+          "label": "Dimineață",
+          "status": "batch hypothesis; requires acceptance"
+        }
+      ],
+      "source_search_planned": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "cocoș",
+          "rank": 21702,
+          "count": 658
+        },
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-miel",
       "revision": 1,
-      "state": "idea",
+      "state": "held",
       "kind": "new_shared_concept",
       "lemma": "Miel",
       "label_ro": "Miel",
       "sense": "Puiul oii, ca animal; nu defini exclusiv carnea.",
-      "category_hypothesis": "geografie",
+      "category_hypothesis": "stiinta",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
@@ -4053,22 +4821,69 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://ro.wiktionary.org/wiki/miel",
+          "summary": "Source read supports partial scoped claims but does not resolve the recorded fourth-link or normative blocker.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://www.ajcodacia.ro/wp-content/uploads/2019/01/PROGRAM-DE-AMELIORARE-A-RASEI-%C5%A2URCAN%C4%82.pdf",
+          "summary": "Source read supports partial scoped claims but does not resolve the recorded fourth-link or normative blocker.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Retain hold; do not infer wheat from all cereals, grass from hay, or a fourth link from familiarity.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
+      "decision": "Young sheep/animal/milk claims are supported; the successfully read breeding source does not establish the planned fresh-grass link after weaning.",
       "research_ready": false,
-      "link_targets": []
+      "link_targets": [
+        {
+          "node_id": "n_v30_animal_farm_oaie",
+          "label": "Oaie",
+          "category": "stiinta",
+          "status": "exists on wave_base"
+        },
+        {
+          "node_id": "n_v4sti_animal",
+          "label": "animal",
+          "category": "stiinta",
+          "status": "exists on wave_base"
+        },
+        {
+          "node_id": "n_v4gas_lapte",
+          "label": "Lapte",
+          "category": "gastronomie",
+          "status": "exists on wave_base"
+        },
+        {
+          "node_id": "n_v24_nature_plant_parts_iarba",
+          "label": "Iarbă",
+          "category": "stiinta",
+          "status": "exists on wave_base"
+        }
+      ],
+      "source_search_planned": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "miel",
+          "rank": 10044,
+          "count": 1931
+        },
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-sarpe",
       "revision": 1,
-      "state": "idea",
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Șarpe",
       "label_ro": "Șarpe",
       "sense": "Reptilă fără membre, în sensul zoologic.",
-      "category_hypothesis": "geografie",
+      "category_hypothesis": "stiinta",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
@@ -4082,7 +4897,7 @@
         "șerpii",
         "șerpilor"
       ],
-      "form_status": "Unverified paradigm hypotheses. Confirm DEX sense/register and DOOM 3 forms in step 2; new forms must also be screened before use.",
+      "form_status": "Exact-lemma DEX/DOOM 3 and a permitted Romanian second-source class checked; forms still need independent review.",
       "identity_checks": {
         "forms": [
           {
@@ -4120,12 +4935,113 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/%C8%98arpe/json",
+          "summary": "Exact-lemma DEX and DOOM 3 entry 1271039: Legless reptile; DOOM 3 gives șarpele and șerpi.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/%C8%98arpe",
+          "summary": "Snakes are reptile animals.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/%C8%98arpe_de_cas%C4%83",
+          "summary": "A concrete Romanian grass-snake example occurs in woodland and feeds on frogs.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://www.brukenthalmuseum.ro/pdf/final_ghid.pdf",
+          "summary": "The museum account lists storks among grass-snake predators; qualify this to some species.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Review exact module and all incident batch-neighbor limits before installation.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
-      "research_ready": false,
-      "link_targets": []
+      "decision": "Source-researched animal proposal with scoped diet/habitat captions; independent review and dependency limits remain.",
+      "research_ready": true,
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_animal",
+          "label": "animal",
+          "category": "stiinta",
+          "status": "exists on wave_base"
+        },
+        {
+          "node_id": "n_v4geo_padure",
+          "label": "pădure",
+          "category": "geografie",
+          "status": "exists on wave_base"
+        },
+        {
+          "node_id": "n_v1_8_broasca",
+          "target_record": "v18-broasca",
+          "label": "Broască",
+          "status": "batch hypothesis; requires acceptance"
+        },
+        {
+          "node_id": "n_v1_8_barza",
+          "target_record": "v18-barza",
+          "label": "Barză",
+          "status": "batch hypothesis; requires acceptance"
+        }
+      ],
+      "source_search_planned": true,
+      "category": "stiinta",
+      "node_id": "n_v1_8_sarpe",
+      "verified_forms": [
+        "șarpe",
+        "șarpele",
+        "șarpelui",
+        "șerpi",
+        "șerpii",
+        "șerpilor"
+      ],
+      "proposed_edges": [
+        {
+          "dst": "n_v4sti_animal",
+          "relation": "is_a",
+          "label_ro": "este un animal reptilă",
+          "strength": 0.95,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v4geo_padure",
+          "relation": "lives_in",
+          "label_ro": "unele specii trăiesc în păduri",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v1_8_broasca",
+          "relation": "feeds_on",
+          "label_ro": "unele specii se hrănesc cu broaște",
+          "strength": 0.9,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v1_8_barza",
+          "relation": "prey_of",
+          "label_ro": "unele specii pot fi vânate de berze",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        }
+      ],
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "șarpe",
+          "rank": 5019,
+          "count": 4545
+        },
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-paianjen",
@@ -6239,12 +7155,12 @@
   ],
   "counts": {
     "records": 60,
-    "idea": 22,
-    "held": 18,
+    "idea": 10,
+    "held": 23,
     "accepted": 0,
     "installed": 0,
     "planned_unique_forms": 322,
     "proposed_existing_owner_forms": 37,
-    "researched": 20
+    "researched": 27
   }
 }
