@@ -41,6 +41,9 @@ var frozenV18 []byte
 //go:embed testdata/python-http-parity-v1-9.json.gz
 var frozenV19 []byte
 
+//go:embed testdata/python-http-parity-v1-10.json.gz
+var frozenV110 []byte
+
 const FrozenSHA256 = "9041e05f13190a06a526c1aeed1f264d467483cd267ffcdb24f422ed9430b2cb"
 const V12SHA256 = "6293a0dde67ee0b0e5929cc1103bd80795e0aff1af2ba5fdf53e983ab79351fd"
 const V13SHA256 = "67d009c7eaa710bd98281b3300d3df4dc4ed4e224a157934abd7e19bce112670"
@@ -49,6 +52,7 @@ const V15SHA256 = "22995196184b991996b56dccf50e5032f27814d7403fff411a120fa11c76a
 const V16SHA256 = "15c7d1bc33c2775a387a9bfe3229625145c94a0ed300622e6737b557c77ebdfe"
 const V18SHA256 = "2c02ee69ebdffd295f5ebe2f90a53276e4166cb39faecd3b14b51bb9e3d295ed"
 const V19SHA256 = "3cce62aa1c34edeff2db245f4d4977a59808545fd24058fce9858f6516a52141"
+const V110SHA256 = "bd72460000d5b4cd8e642f11d9d03335105ebb55f31faa1661b720a45517f404"
 const MaxCorpusBytes = 32 * 1024 * 1024
 const MaxCases = 4096
 
@@ -200,6 +204,17 @@ func reviewedV19() (*Corpus, error) {
 	return c, err
 }
 
+func reviewedV110() (*Corpus, error) {
+	if fmt.Sprintf("%x", sha256.Sum256(frozenV110)) != V110SHA256 {
+		return nil, fmt.Errorf("independent V1.10 HTTP corpus digest drift")
+	}
+	c, err := ReadCorpus(bytes.NewReader(frozenV110), true)
+	if err == nil && (len(c.Cases) != 1207 || len(c.Sources) != 8) {
+		return nil, fmt.Errorf("expected 1207 independent V1.10 HTTP cases and exact eight sources")
+	}
+	return c, err
+}
+
 // ForSources selects an independently captured reviewed corpus only when its
 // entire source identity equals the requested export. Historical Frozen remains
 // immutable; unknown, partial or mixed source sets never gain expected responses.
@@ -236,7 +251,11 @@ func ForSources(sources map[string]string) (*Corpus, error) {
 	if err != nil {
 		return nil, err
 	}
-	for _, c := range []*Corpus{original, current, latest, v14, v15, v16, v18, v19} {
+	v110, err := reviewedV110()
+	if err != nil {
+		return nil, err
+	}
+	for _, c := range []*Corpus{original, current, latest, v14, v15, v16, v18, v19, v110} {
 		if reflect.DeepEqual(c.Sources, sources) {
 			return c, nil
 		}
