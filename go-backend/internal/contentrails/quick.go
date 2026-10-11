@@ -160,13 +160,16 @@ func auditQuick(ctx context.Context, root string, raw map[string]any) (map[strin
 	data.Boards = combined
 	client, _ := httpgolden.NewClient(httpgolden.Local(httpapi.New(data)), 2000)
 	defer client.Close()
+	// The catalog is a sorted read-only copy and nothing below changes data.Boards,
+	// so one instance serves every seed search in this audit.
+	selector := catalog.New(data)
 	replays := []any{}
 	for _, v := range rows(raw["boards"]) {
 		m := object(v)
 		game, id, category := text(m["game"]), text(m["id"]), text(m["category"])
 		seed := -1
 		for n := 0; n < 5000; n++ {
-			picked := catalog.New(data).PickSeeded(game, pyrandom.New(big.NewInt(int64(n))), catalog.PickOptions{Category: category})
+			picked := selector.PickSeeded(game, pyrandom.New(big.NewInt(int64(n))), catalog.PickOptions{Category: category})
 			if picked != nil && picked.CatalogID == id {
 				seed = n
 				break
