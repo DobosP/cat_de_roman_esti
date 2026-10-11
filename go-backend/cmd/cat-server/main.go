@@ -29,10 +29,16 @@ func main() {
 		}
 		return
 	}
-	addr := flag.String("listen", "127.0.0.1:8081", "HTTP bind address")
+	listen := flag.String("listen", "", "HTTP bind address (default \":$PORT\", PORT defaulting to 8000)")
 	migrate := flag.Bool("migrate", false, "apply native account schema to configured PostgreSQL")
 	replay := flag.Bool("replay", false, "offline JSON-lines HTTP request replay on stdin/stdout")
 	flag.Parse()
+	explicit := false
+	flag.Visit(func(f *flag.Flag) { explicit = explicit || f.Name == "listen" })
+	addr, err := listenAddress(*listen, explicit)
+	if err != nil {
+		log.Fatal(err)
+	}
 	if err := validateRuntimeEnvironment(); err != nil {
 		log.Fatal(err)
 	}
@@ -42,7 +48,7 @@ func main() {
 	}
 	handler := httpapi.New(c)
 	bootCtx, bootCancel := context.WithTimeout(context.Background(), 30*time.Second)
-	closeAccounts, err := enableAccounts(bootCtx, handler, *addr, *migrate)
+	closeAccounts, err := enableAccounts(bootCtx, handler, addr, *migrate)
 	bootCancel()
 	if err != nil {
 		log.Fatal(err)
@@ -54,7 +60,7 @@ func main() {
 		}
 		return
 	}
-	server := &http.Server{Addr: *addr, Handler: handler, ReadHeaderTimeout: 5 * time.Second, ReadTimeout: 15 * time.Second, WriteTimeout: 30 * time.Second, IdleTimeout: 60 * time.Second, MaxHeaderBytes: 16 * 1024}
+	server := &http.Server{Addr: addr, Handler: handler, ReadHeaderTimeout: 5 * time.Second, ReadTimeout: 15 * time.Second, WriteTimeout: 30 * time.Second, IdleTimeout: 60 * time.Second, MaxHeaderBytes: 16 * 1024}
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
 	go func() {
@@ -65,7 +71,7 @@ func main() {
 			log.Print(err)
 		}
 	}()
-	log.Printf("Go arcade %s: all six games and exploration; listen %s", c.AppVersion, *addr)
+	log.Printf("Go arcade %s: all six games and exploration; listen %s", c.AppVersion, addr)
 	if err = server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 		log.Fatal(err)
 	}
