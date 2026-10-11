@@ -3,7 +3,7 @@
   "theme": "home-and-nature",
   "baseline_commit": "6fbd7a4f8aab2003e8a9e2e8ed781c8aece94db3",
   "procedure_rev": "17b97a2",
-  "scope": "Research in progress: 24 items examined in two ticks; 22 researched, two research holds plus three screening holds. No semantic acceptances, new curated rounds or installed content.",
+  "scope": "Research in progress: 36 items examined in three ticks; 34 researched, two research holds plus three screening holds. Nineteen existing-owner families remain. No semantic acceptances, new curated rounds or installed content.",
   "input_policy_baseline": "Preserve landed V1.10 leafă→Salariu and ogradă→Curte policy; no new deferred-term exception.",
   "screen": {
     "normalization": "bundled normalization_map and accent_normalization_map",
@@ -6101,18 +6101,18 @@
         "stejarii",
         "stejarilor"
       ],
-      "revision": 1,
+      "revision": 2,
       "label_ro": "Stejar",
       "origin": "everyday_home_nature_discovery",
-      "form_status": "Unverified paradigm hypothesis. Fold-equivalent article spellings are represented by the lemma key; only distinct noncolliding forms may later be installed.",
+      "form_status": "Exact modern noun sense and appropriate DOOM3 paradigm verified; only distinct pre-screened noncolliding inputs proposed. Independent semantic review pending.",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess/graph vocabulary and meaningful sourced links; no new curated target/round claim.",
-      "state": "idea",
-      "decision": "idea: research only the noncolliding paradigm; each colliding form remains held by its listed owner and is excluded from proposed_forms.",
-      "research_ready": true,
+      "state": "researched",
+      "decision": "researched: Five botanical/material/habitat links supported; stejarii remains with the Rugby owner and is never reassigned.",
+      "research_ready": false,
       "proposed_forms": [
         "stejar",
         "stejarul",
@@ -6202,14 +6202,18 @@
           "node_id": "n_v4sti_copac",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Plantă lemnoasă înaltă, cu trunchi și coroană."
+          "current_owner_description": "Plantă lemnoasă înaltă, cu trunchi și coroană.",
+          "verified_claim": "Stejarul este un copac.",
+          "evidence_url": "https://dexonline.ro/definitie/stejar/json"
         },
         {
           "label": "Ghindă",
           "claim_to_verify": "fructul stejarului",
           "node_id": "n_v1_11_ghinda",
           "category": "stiinta",
-          "status": "planned in this batch; not accepted"
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Stejarul produce ghinde.",
+          "evidence_url": "https://dexonline.ro/definitie/stejar/json"
         },
         {
           "label": "Lemn",
@@ -6217,7 +6221,9 @@
           "node_id": "n_v1_3_material_lemn",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Material provenit din părțile lemnoase ale arborilor, folosit la construcții și obiecte din gospodărie; aici, sensul de material."
+          "current_owner_description": "Material provenit din părțile lemnoase ale arborilor, folosit la construcții și obiecte din gospodărie; aici, sensul de material.",
+          "verified_claim": "Stejarul furnizează lemn folosit la construcții și mobilier.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Stejar"
         },
         {
           "label": "Frunză",
@@ -6225,7 +6231,9 @@
           "node_id": "n_v4sti_frunza",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Organ al plantei care produce hrană prin fotosinteză."
+          "current_owner_description": "Organ al plantei care produce hrană prin fotosinteză.",
+          "verified_claim": "Stejarul are frunze.",
+          "evidence_url": "https://dexonline.ro/definitie/stejar/json"
         },
         {
           "label": "Pădure",
@@ -6233,7 +6241,9 @@
           "node_id": "n_v4geo_padure",
           "category": "geografie",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Suprafață întinsă acoperită cu arbori și vegetație."
+          "current_owner_description": "Suprafață întinsă acoperită cu arbori și vegetație.",
+          "verified_claim": "Stejarii pot forma păduri de stejar.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Stejar"
         }
       ],
       "topology_hypothesis": {
@@ -6244,8 +6254,102 @@
       },
       "prior_records": [],
       "prior_hold_policy": "Exact rejected candidates are skipped. A rejected association remains excluded as that association; it does not reject every input of an existing endpoint. Recorded older reasons remain until addressed by this newly screened proposal; older proxy-retirement prerequisites are superseded by current CONTENT_LOOP step1, which permits graph upgrades.",
-      "sources": [],
-      "next_action": "Research exact lemma/register/DOOM3 forms and each predeclared claim within the per-item budget."
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/stejar/json",
+          "paraphrase": "DEX09 gives the oak-tree sense with leaves, acorn fruit and hard timber; genus Quercus is explicitly distinguished from a species. Exact DOOM3 confirms masculine stejari; the already-owned articulated plural stejarii is excluded."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Stejar",
+          "paraphrase": "The Romanian account of pedunculate oak identifies a tree with lobed leaves and acorn fruit, describes oak forests and timber uses; this species is an example within the broader oak-tree concept."
+        }
+      ],
+      "next_action": "Wait for the remaining batch and independent factual/quality web reviews; not accepted or installed yet.",
+      "verified_forms": [
+        "stejar",
+        "stejarul",
+        "stejarului",
+        "stejari",
+        "stejarilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          15410,
+          "stejar",
+          1078
+        ],
+        "use": "Positive only; absence does not reject."
+      },
+      "checked_on": "2026-10-11",
+      "research_elapsed_seconds": 71.2,
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "stejar",
+        "dex_definition_id": "846497",
+        "doom3_definition_id": "1277945",
+        "register": "Selected literal modern noun sense; scope restrictions and excluded homographs detailed in source notes.",
+        "request_spacing": "Serial dexonline requests separated by >=2.1 seconds; group boundaries longer.",
+        "normative_homograph": null,
+        "excluded": "Only the exact lemma is selected; stress/editorial marks and homograph numbers are metadata."
+      },
+      "verified_links": [
+        {
+          "label": "Copac",
+          "claim_to_verify": "is_a: copac",
+          "node_id": "n_v4sti_copac",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Plantă lemnoasă înaltă, cu trunchi și coroană.",
+          "verified_claim": "Stejarul este un copac.",
+          "evidence_url": "https://dexonline.ro/definitie/stejar/json"
+        },
+        {
+          "label": "Ghindă",
+          "claim_to_verify": "fructul stejarului",
+          "node_id": "n_v1_11_ghinda",
+          "category": "stiinta",
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Stejarul produce ghinde.",
+          "evidence_url": "https://dexonline.ro/definitie/stejar/json"
+        },
+        {
+          "label": "Lemn",
+          "claim_to_verify": "produce lemn de stejar",
+          "node_id": "n_v1_3_material_lemn",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Material provenit din părțile lemnoase ale arborilor, folosit la construcții și obiecte din gospodărie; aici, sensul de material.",
+          "verified_claim": "Stejarul furnizează lemn folosit la construcții și mobilier.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Stejar"
+        },
+        {
+          "label": "Frunză",
+          "claim_to_verify": "arbore cu frunze",
+          "node_id": "n_v4sti_frunza",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Organ al plantei care produce hrană prin fotosinteză.",
+          "verified_claim": "Stejarul are frunze.",
+          "evidence_url": "https://dexonline.ro/definitie/stejar/json"
+        },
+        {
+          "label": "Pădure",
+          "claim_to_verify": "formează păduri de stejar",
+          "node_id": "n_v4geo_padure",
+          "category": "geografie",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Suprafață întinsă acoperită cu arbori și vegetație.",
+          "verified_claim": "Stejarii pot forma păduri de stejar.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Stejar"
+        }
+      ],
+      "topology_verified": {
+        "distinct": 5,
+        "existing": 4,
+        "batch": 1,
+        "same_category": 3
+      }
     },
     {
       "lemma": "Ghindă",
@@ -6262,18 +6366,18 @@
         "ghindele",
         "ghindelor"
       ],
-      "revision": 1,
+      "revision": 2,
       "label_ro": "Ghindă",
       "origin": "everyday_home_nature_discovery",
-      "form_status": "Unverified paradigm hypothesis. Fold-equivalent article spellings are represented by the lemma key; only distinct noncolliding forms may later be installed.",
+      "form_status": "Exact modern noun sense and appropriate DOOM3 paradigm verified; only distinct pre-screened noncolliding inputs proposed. Independent semantic review pending.",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess/graph vocabulary and meaningful sourced links; no new curated target/round claim.",
-      "state": "idea",
-      "decision": "idea: prescreen passed for the proposed forms; exact sense, DOOM3 morphology and every named link still need research.",
-      "research_ready": true,
+      "state": "researched",
+      "decision": "researched: Four explicit botanical/diet links supported, two to existing nodes and two within the batch; not every tree bears acorns.",
+      "research_ready": false,
       "proposed_forms": [
         "ghindă",
         "ghindei",
@@ -6345,7 +6449,9 @@
           "claim_to_verify": "fructul stejarului",
           "node_id": "n_v1_11_stejar",
           "category": "stiinta",
-          "status": "planned in this batch; not accepted"
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Ghinda este fructul stejarului.",
+          "evidence_url": "https://dexonline.ro/definitie/ghind%C4%83/json"
         },
         {
           "label": "Veveriță",
@@ -6353,14 +6459,18 @@
           "node_id": "n_v33_forest_animal_veverita",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Mamifer mic cu coadă stufoasă, care se cațără în copaci."
+          "current_owner_description": "Mamifer mic cu coadă stufoasă, care se cațără în copaci.",
+          "verified_claim": "Ghinda poate fi hrană pentru veveriță.",
+          "evidence_url": "https://targujiu.rosilva.ro/files/content/gorj/meniu/informare_publica/mediu/pades/SEA_OS%20Pades_2024.pdf"
         },
         {
           "label": "Mistreț",
           "claim_to_verify": "hrană pentru mistreț",
           "node_id": "n_v1_11_mistret",
           "category": "stiinta",
-          "status": "planned in this batch; not accepted"
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Ghinda poate fi hrană pentru mistreț.",
+          "evidence_url": "https://neamt.rosilva.ro/articole/specii_de_vanat__p_960.htm"
         },
         {
           "label": "Copac",
@@ -6368,7 +6478,9 @@
           "node_id": "n_v4sti_copac",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Plantă lemnoasă înaltă, cu trunchi și coroană."
+          "current_owner_description": "Plantă lemnoasă înaltă, cu trunchi și coroană.",
+          "verified_claim": "Ghinda este fructul unui copac, precum stejarul.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Stejar"
         }
       ],
       "topology_hypothesis": {
@@ -6379,8 +6491,95 @@
       },
       "prior_records": [],
       "prior_hold_policy": "Exact rejected candidates are skipped. A rejected association remains excluded as that association; it does not reject every input of an existing endpoint. Recorded older reasons remain until addressed by this newly screened proposal; older proxy-retirement prerequisites are superseded by current CONTENT_LOOP step1, which permits graph upgrades.",
-      "sources": [],
-      "next_action": "Research exact lemma/register/DOOM3 forms and each predeclared claim within the per-item budget."
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/ghind%C4%83/json",
+          "paraphrase": "DEX09 defines oak and related-tree fruit; exclude the card-suit sense. Exact DOOM3 confirms feminine ghindei/ghinde."
+        },
+        {
+          "url": "https://targujiu.rosilva.ro/files/content/gorj/meniu/informare_publica/mediu/pades/SEA_OS%20Pades_2024.pdf",
+          "paraphrase": "The forestry environmental report explicitly includes acorns in the red squirrel diet; indexed primary passage checked, direct web PDF open unavailable."
+        },
+        {
+          "url": "https://neamt.rosilva.ro/articole/specii_de_vanat__p_960.htm",
+          "paraphrase": "The Mistreț section explicitly identifies acorns among the foods of wild boar; no facts from adjacent species sections are used."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Stejar",
+          "paraphrase": "The oak article independently describes an oak as a tree and its fruit as the acorn."
+        }
+      ],
+      "next_action": "Wait for the remaining batch and independent factual/quality web reviews; not accepted or installed yet.",
+      "verified_forms": [
+        "ghindă",
+        "ghindei",
+        "ghinde",
+        "ghindele",
+        "ghindelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": null,
+        "use": "Positive only; absence does not reject."
+      },
+      "checked_on": "2026-10-11",
+      "research_elapsed_seconds": 69.0,
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "ghindă",
+        "dex_definition_id": "877961",
+        "doom3_definition_id": "1324890",
+        "register": "Selected literal modern noun sense; scope restrictions and excluded homographs detailed in source notes.",
+        "request_spacing": "Serial dexonline requests separated by >=2.1 seconds; group boundaries longer.",
+        "normative_homograph": null,
+        "excluded": "Only the exact lemma is selected; stress/editorial marks and homograph numbers are metadata."
+      },
+      "verified_links": [
+        {
+          "label": "Stejar",
+          "claim_to_verify": "fructul stejarului",
+          "node_id": "n_v1_11_stejar",
+          "category": "stiinta",
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Ghinda este fructul stejarului.",
+          "evidence_url": "https://dexonline.ro/definitie/ghind%C4%83/json"
+        },
+        {
+          "label": "Veveriță",
+          "claim_to_verify": "hrană pentru veveriță",
+          "node_id": "n_v33_forest_animal_veverita",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Mamifer mic cu coadă stufoasă, care se cațără în copaci.",
+          "verified_claim": "Ghinda poate fi hrană pentru veveriță.",
+          "evidence_url": "https://targujiu.rosilva.ro/files/content/gorj/meniu/informare_publica/mediu/pades/SEA_OS%20Pades_2024.pdf"
+        },
+        {
+          "label": "Mistreț",
+          "claim_to_verify": "hrană pentru mistreț",
+          "node_id": "n_v1_11_mistret",
+          "category": "stiinta",
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Ghinda poate fi hrană pentru mistreț.",
+          "evidence_url": "https://neamt.rosilva.ro/articole/specii_de_vanat__p_960.htm"
+        },
+        {
+          "label": "Copac",
+          "claim_to_verify": "fruct de arbore, explicit stejar, nu al oricărui copac",
+          "node_id": "n_v4sti_copac",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Plantă lemnoasă înaltă, cu trunchi și coroană.",
+          "verified_claim": "Ghinda este fructul unui copac, precum stejarul.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Stejar"
+        }
+      ],
+      "topology_verified": {
+        "distinct": 4,
+        "existing": 2,
+        "batch": 2,
+        "same_category": 4
+      }
     },
     {
       "lemma": "Aripă",
@@ -6397,18 +6596,18 @@
         "aripile",
         "aripilor"
       ],
-      "revision": 1,
+      "revision": 2,
       "label_ro": "Aripă",
       "origin": "everyday_home_nature_discovery",
-      "form_status": "Unverified paradigm hypothesis. Fold-equivalent article spellings are represented by the lemma key; only distinct noncolliding forms may later be installed.",
+      "form_status": "Exact modern noun sense and appropriate DOOM3 paradigm verified; only distinct pre-screened noncolliding inputs proposed. Independent semantic review pending.",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess/graph vocabulary and meaningful sourced links; no new curated target/round claim.",
-      "state": "idea",
-      "decision": "idea: prescreen passed for the proposed forms; exact sense, DOOM3 morphology and every named link still need research.",
-      "research_ready": true,
+      "state": "researched",
+      "decision": "researched: Four direct animal-part links supported, all to existing science nodes; anatomical sense only.",
+      "research_ready": false,
       "proposed_forms": [
         "aripă",
         "aripii",
@@ -6474,7 +6673,9 @@
           "node_id": "n_v4sti_pasare",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Animal vertebrat cu pene, cioc și, de obicei, aripi."
+          "current_owner_description": "Animal vertebrat cu pene, cioc și, de obicei, aripi.",
+          "verified_claim": "Aripa este un organ al păsării.",
+          "evidence_url": "https://dexonline.ro/definitie/arip%C4%83/json"
         },
         {
           "label": "Fluture",
@@ -6482,7 +6683,9 @@
           "node_id": "n_v1_8_fluture",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Insectă din ordinul lepidopterelor, cu aripi acoperite cu solzi; larva sa se numește omidă."
+          "current_owner_description": "Insectă din ordinul lepidopterelor, cu aripi acoperite cu solzi; larva sa se numește omidă.",
+          "verified_claim": "Aripa este un organ al fluturelui.",
+          "evidence_url": "https://antipa.ro/product/cocon/"
         },
         {
           "label": "Albină",
@@ -6490,7 +6693,9 @@
           "node_id": "n_v1_8_albina",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Albina meliferă este o insectă socială care culege nectar și polen din flori și produce miere."
+          "current_owner_description": "Albina meliferă este o insectă socială care culege nectar și polen din flori și produce miere.",
+          "verified_claim": "Aripa este un organ al albinei.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Albin%C4%83"
         },
         {
           "label": "Rândunică",
@@ -6498,7 +6703,9 @@
           "node_id": "n_v1_9_randunica",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Pasăre cu coada bifurcată, care prinde mai ales insecte în zbor; populațiile care cuibăresc în România sosesc primăvara și pleacă toamna."
+          "current_owner_description": "Pasăre cu coada bifurcată, care prinde mai ales insecte în zbor; populațiile care cuibăresc în România sosesc primăvara și pleacă toamna.",
+          "verified_claim": "Aripa este un organ al rândunicii.",
+          "evidence_url": "https://www.sor.ro/randunica-de-la-legenda-la-realitate/"
         }
       ],
       "topology_hypothesis": {
@@ -6509,8 +6716,101 @@
       },
       "prior_records": [],
       "prior_hold_policy": "Exact rejected candidates are skipped. A rejected association remains excluded as that association; it does not reject every input of an existing endpoint. Recorded older reasons remain until addressed by this newly screened proposal; older proxy-retirement prerequisites are superseded by current CONTENT_LOOP step1, which permits graph upgrades.",
-      "sources": [],
-      "next_action": "Research exact lemma/register/DOOM3 forms and each predeclared claim within the per-item budget."
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/arip%C4%83/json",
+          "paraphrase": "DEX09 defines the flight organ of birds and some insects/mammals; exact DOOM3 confirms aripii/aripi. Aircraft, fish-fin, seed and figurative meanings are excluded."
+        },
+        {
+          "url": "https://antipa.ro/product/cocon/",
+          "paraphrase": "The natural-history museum describes the wings of living butterflies emerging from pupae, directly supporting the animal-organ relationship."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Albin%C4%83",
+          "paraphrase": "The body-structure section explicitly describes two pairs of bee wings; no claim from its inconsistent higher-classification summary is used."
+        },
+        {
+          "url": "https://www.sor.ro/randunica-de-la-legenda-la-realitate/",
+          "paraphrase": "The ornithologist account explicitly describes the swallow as a bird with long pointed wings used in aerial life."
+        }
+      ],
+      "next_action": "Wait for the remaining batch and independent factual/quality web reviews; not accepted or installed yet.",
+      "verified_forms": [
+        "aripă",
+        "aripii",
+        "aripi",
+        "aripile",
+        "aripilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          5748,
+          "aripi",
+          3866
+        ],
+        "use": "Positive only; absence does not reject."
+      },
+      "checked_on": "2026-10-11",
+      "research_elapsed_seconds": 66.7,
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "aripă",
+        "dex_definition_id": "829673",
+        "doom3_definition_id": "1323981",
+        "register": "Selected literal modern noun sense; scope restrictions and excluded homographs detailed in source notes.",
+        "request_spacing": "Serial dexonline requests separated by >=2.1 seconds; group boundaries longer.",
+        "normative_homograph": null,
+        "excluded": "Only the exact lemma is selected; stress/editorial marks and homograph numbers are metadata."
+      },
+      "verified_links": [
+        {
+          "label": "Pasăre",
+          "claim_to_verify": "organ de zbor al păsării",
+          "node_id": "n_v4sti_pasare",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Animal vertebrat cu pene, cioc și, de obicei, aripi.",
+          "verified_claim": "Aripa este un organ al păsării.",
+          "evidence_url": "https://dexonline.ro/definitie/arip%C4%83/json"
+        },
+        {
+          "label": "Fluture",
+          "claim_to_verify": "aripi de fluture",
+          "node_id": "n_v1_8_fluture",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Insectă din ordinul lepidopterelor, cu aripi acoperite cu solzi; larva sa se numește omidă.",
+          "verified_claim": "Aripa este un organ al fluturelui.",
+          "evidence_url": "https://antipa.ro/product/cocon/"
+        },
+        {
+          "label": "Albină",
+          "claim_to_verify": "aripi de albină",
+          "node_id": "n_v1_8_albina",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Albina meliferă este o insectă socială care culege nectar și polen din flori și produce miere.",
+          "verified_claim": "Aripa este un organ al albinei.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Albin%C4%83"
+        },
+        {
+          "label": "Rândunică",
+          "claim_to_verify": "aripi ale rândunicii",
+          "node_id": "n_v1_9_randunica",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Pasăre cu coada bifurcată, care prinde mai ales insecte în zbor; populațiile care cuibăresc în România sosesc primăvara și pleacă toamna.",
+          "verified_claim": "Aripa este un organ al rândunicii.",
+          "evidence_url": "https://www.sor.ro/randunica-de-la-legenda-la-realitate/"
+        }
+      ],
+      "topology_verified": {
+        "distinct": 4,
+        "existing": 4,
+        "batch": 0,
+        "same_category": 4
+      }
     },
     {
       "lemma": "Cuib",
@@ -6528,18 +6828,18 @@
         "cuiburile",
         "cuiburilor"
       ],
-      "revision": 1,
+      "revision": 2,
       "label_ro": "Cuib",
       "origin": "everyday_home_nature_discovery",
-      "form_status": "Unverified paradigm hypothesis. Fold-equivalent article spellings are represented by the lemma key; only distinct noncolliding forms may later be installed.",
+      "form_status": "Exact modern noun sense and appropriate DOOM3 paradigm verified; only distinct pre-screened noncolliding inputs proposed. Independent semantic review pending.",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess/graph vocabulary and meaningful sourced links; no new curated target/round claim.",
-      "state": "idea",
-      "decision": "idea: prescreen passed for the proposed forms; exact sense, DOOM3 morphology and every named link still need research.",
-      "research_ready": true,
+      "state": "researched",
+      "decision": "researched: Four direct nesting/placement links supported, all to existing science nodes.",
+      "research_ready": false,
       "proposed_forms": [
         "cuib",
         "cuibul",
@@ -6615,7 +6915,9 @@
           "node_id": "n_v4sti_pasare",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Animal vertebrat cu pene, cioc și, de obicei, aripi."
+          "current_owner_description": "Animal vertebrat cu pene, cioc și, de obicei, aripi.",
+          "verified_claim": "Cuibul este o construcție folosită de păsări pentru reproducere.",
+          "evidence_url": "https://dexonline.ro/definitie/cuib/json"
         },
         {
           "label": "Barză",
@@ -6623,7 +6925,9 @@
           "node_id": "n_v1_8_barza",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Barza albă, pasăre migratoare cu cioc și picioare lungi, cunoscută în România."
+          "current_owner_description": "Barza albă, pasăre migratoare cu cioc și picioare lungi, cunoscută în România.",
+          "verified_claim": "Barza își crește puii în cuib.",
+          "evidence_url": "https://www.sor.ro/rezultatele-recensamantului-international-al-berzelor-albe-2024-2025/"
         },
         {
           "label": "Rândunică",
@@ -6631,7 +6935,9 @@
           "node_id": "n_v1_9_randunica",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Pasăre cu coada bifurcată, care prinde mai ales insecte în zbor; populațiile care cuibăresc în România sosesc primăvara și pleacă toamna."
+          "current_owner_description": "Pasăre cu coada bifurcată, care prinde mai ales insecte în zbor; populațiile care cuibăresc în România sosesc primăvara și pleacă toamna.",
+          "verified_claim": "Rândunica își construiește cuib.",
+          "evidence_url": "https://pasaridinromania.sor.ro/specii/410/randunica-hirundo-rustica"
         },
         {
           "label": "Copac",
@@ -6639,7 +6945,9 @@
           "node_id": "n_v4sti_copac",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Plantă lemnoasă înaltă, cu trunchi și coroană."
+          "current_owner_description": "Plantă lemnoasă înaltă, cu trunchi și coroană.",
+          "verified_claim": "Unele cuiburi de păsări sunt construite în copaci.",
+          "evidence_url": "https://www.sor.ro/rezultatele-recensamantului-international-al-berzelor-albe-2024-2025/"
         }
       ],
       "topology_hypothesis": {
@@ -6650,15 +6958,105 @@
       },
       "prior_records": [],
       "prior_hold_policy": "Exact rejected candidates are skipped. A rejected association remains excluded as that association; it does not reject every input of an existing endpoint. Recorded older reasons remain until addressed by this newly screened proposal; older proxy-retirement prerequisites are superseded by current CONTENT_LOOP step1, which permits graph upgrades.",
-      "sources": [],
-      "next_action": "Research exact lemma/register/DOOM3 forms and each predeclared claim within the per-item budget."
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/cuib/json",
+          "paraphrase": "DEX09 defines a construction for laying eggs and raising young; exact DOOM3 confirms neuter cuiburi. Select bird nesting, excluding metaphor, bee-colony and sowing-hole senses."
+        },
+        {
+          "url": "https://www.sor.ro/rezultatele-recensamantului-international-al-berzelor-albe-2024-2025/",
+          "paraphrase": "The ornithological census reports actual white-stork nests, including nests built directly in trees."
+        },
+        {
+          "url": "https://pasaridinromania.sor.ro/specii/410/randunica-hirundo-rustica",
+          "paraphrase": "The species account describes swallows reusing or building nests at rural buildings; no tree-nesting claim is attributed to swallows."
+        }
+      ],
+      "next_action": "Wait for the remaining batch and independent factual/quality web reviews; not accepted or installed yet.",
+      "verified_forms": [
+        "cuib",
+        "cuibul",
+        "cuibului",
+        "cuiburi",
+        "cuiburile",
+        "cuiburilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          8152,
+          "cuib",
+          2544
+        ],
+        "use": "Positive only; absence does not reject."
+      },
+      "checked_on": "2026-10-11",
+      "research_elapsed_seconds": 90.1,
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "cuib",
+        "dex_definition_id": "854283",
+        "doom3_definition_id": "1316336",
+        "register": "Selected literal modern noun sense; scope restrictions and excluded homographs detailed in source notes.",
+        "request_spacing": "Serial dexonline requests separated by >=2.1 seconds; group boundaries longer.",
+        "normative_homograph": null,
+        "excluded": "Only the exact lemma is selected; stress/editorial marks and homograph numbers are metadata."
+      },
+      "verified_links": [
+        {
+          "label": "Pasăre",
+          "claim_to_verify": "adăpost construit de păsări",
+          "node_id": "n_v4sti_pasare",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Animal vertebrat cu pene, cioc și, de obicei, aripi.",
+          "verified_claim": "Cuibul este o construcție folosită de păsări pentru reproducere.",
+          "evidence_url": "https://dexonline.ro/definitie/cuib/json"
+        },
+        {
+          "label": "Barză",
+          "claim_to_verify": "barza își construiește cuib",
+          "node_id": "n_v1_8_barza",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Barza albă, pasăre migratoare cu cioc și picioare lungi, cunoscută în România.",
+          "verified_claim": "Barza își crește puii în cuib.",
+          "evidence_url": "https://www.sor.ro/rezultatele-recensamantului-international-al-berzelor-albe-2024-2025/"
+        },
+        {
+          "label": "Rândunică",
+          "claim_to_verify": "rândunica își construiește cuib",
+          "node_id": "n_v1_9_randunica",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Pasăre cu coada bifurcată, care prinde mai ales insecte în zbor; populațiile care cuibăresc în România sosesc primăvara și pleacă toamna.",
+          "verified_claim": "Rândunica își construiește cuib.",
+          "evidence_url": "https://pasaridinromania.sor.ro/specii/410/randunica-hirundo-rustica"
+        },
+        {
+          "label": "Copac",
+          "claim_to_verify": "unele păsări construiesc cuiburi în copaci; nu atribui rândunicii acest obicei fără sursă",
+          "node_id": "n_v4sti_copac",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Plantă lemnoasă înaltă, cu trunchi și coroană.",
+          "verified_claim": "Unele cuiburi de păsări sunt construite în copaci.",
+          "evidence_url": "https://www.sor.ro/rezultatele-recensamantului-international-al-berzelor-albe-2024-2025/"
+        }
+      ],
+      "topology_verified": {
+        "distinct": 4,
+        "existing": 4,
+        "batch": 0,
+        "same_category": 4
+      }
     },
     {
       "lemma": "Blană",
       "kind": "new_shared_concept",
       "category_hypothesis": "stiinta",
       "sense": "Învelișul pilos al mamiferelor; nu scândură sau haină de blană.",
-      "paradigm_scope": "Body-covering sense only; confirm whether plural skins/varieties are substitutable before keeping those inputs.",
+      "paradigm_scope": "Living-animal hair covering from DEX09; singular blană/blănii only. DOOM3 homograph1 gloss is piele/haină and its listed processed-pelt/coat count plurals are held; timber homograph2 excluded.",
       "id": "v111-blana",
       "node_id": "n_v1_11_blana",
       "planned_forms": [
@@ -6668,27 +7066,40 @@
         "blănurile",
         "blănurilor"
       ],
-      "revision": 1,
+      "revision": 2,
       "label_ro": "Blană",
       "origin": "everyday_home_nature_discovery",
-      "form_status": "Unverified paradigm hypothesis. Fold-equivalent article spellings are represented by the lemma key; only distinct noncolliding forms may later be installed.",
+      "form_status": "Exact modern noun sense and appropriate DOOM3 paradigm verified; only distinct pre-screened noncolliding inputs proposed. Independent semantic review pending.",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess/graph vocabulary and meaningful sourced links; no new curated target/round claim.",
-      "state": "idea",
-      "decision": "idea: prescreen passed for the proposed forms; exact sense, DOOM3 morphology and every named link still need research.",
-      "research_ready": true,
+      "state": "researched",
+      "decision": "researched: Four anatomical covering links supported; retain singular/material input keys only, not plurals for processed pelts or coats.",
+      "research_ready": false,
       "proposed_forms": [
         "blană",
-        "blănii",
-        "blănuri",
-        "blănurile",
-        "blănurilor"
+        "blănii"
       ],
       "already_resolved_forms": [],
-      "held_forms": [],
+      "held_forms": [
+        {
+          "form": "blănuri",
+          "state": "held",
+          "decision": "held: DOOM3 and DEX09 assign these count plurals to processed pelts or coats; excluded from the selected living-animal hair-covering sense."
+        },
+        {
+          "form": "blănurile",
+          "state": "held",
+          "decision": "held: DOOM3 and DEX09 assign these count plurals to processed pelts or coats; excluded from the selected living-animal hair-covering sense."
+        },
+        {
+          "form": "blănurilor",
+          "state": "held",
+          "decision": "held: DOOM3 and DEX09 assign these count plurals to processed pelts or coats; excluded from the selected living-animal hair-covering sense."
+        }
+      ],
       "identity_checks": {
         "forms": [
           {
@@ -6716,7 +7127,9 @@
             "cald_proxies": [],
             "deferred": false,
             "reviewed_unresolved": false,
-            "state": "proposed"
+            "state": "held",
+            "initial_prescreen_state": "proposed",
+            "decision": "held: DOOM3 and DEX09 assign these count plurals to processed pelts or coats; excluded from the selected living-animal hair-covering sense."
           },
           {
             "form": "blănurile",
@@ -6725,7 +7138,9 @@
             "cald_proxies": [],
             "deferred": false,
             "reviewed_unresolved": false,
-            "state": "proposed"
+            "state": "held",
+            "initial_prescreen_state": "proposed",
+            "decision": "held: DOOM3 and DEX09 assign these count plurals to processed pelts or coats; excluded from the selected living-animal hair-covering sense."
           },
           {
             "form": "blănurilor",
@@ -6734,7 +7149,9 @@
             "cald_proxies": [],
             "deferred": false,
             "reviewed_unresolved": false,
-            "state": "proposed"
+            "state": "held",
+            "initial_prescreen_state": "proposed",
+            "decision": "held: DOOM3 and DEX09 assign these count plurals to processed pelts or coats; excluded from the selected living-animal hair-covering sense."
           }
         ]
       },
@@ -6745,7 +7162,9 @@
           "node_id": "n_v33_forest_animal_vulpe",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Mamifer de pădure cu bot ascuțit și coadă stufoasă."
+          "current_owner_description": "Mamifer de pădure cu bot ascuțit și coadă stufoasă.",
+          "verified_claim": "Blana acoperă corpul vulpii.",
+          "evidence_url": "https://craiova.rosilva.ro/files/content/dolj/meniu/informare_publica/informatii_de_mediu/informatii_de_mediu/SEA_OS_Craiova%202024-final%2005_12_2024.pdf"
         },
         {
           "label": "Urs",
@@ -6753,7 +7172,9 @@
           "node_id": "n_v33_forest_animal_urs",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Mamifer mare de pădure, cu blană deasă și corp puternic."
+          "current_owner_description": "Mamifer mare de pădure, cu blană deasă și corp puternic.",
+          "verified_claim": "Blana acoperă corpul ursului.",
+          "evidence_url": "https://wwf.ro/ce-facem/specii/ursul-brun/"
         },
         {
           "label": "Câine",
@@ -6761,7 +7182,9 @@
           "node_id": "n_v29_animal_pets_caine",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Animal domestic ținut adesea lângă oameni, cunoscut pentru lătrat."
+          "current_owner_description": "Animal domestic ținut adesea lângă oameni, cunoscut pentru lătrat.",
+          "verified_claim": "Câinele poate avea corpul acoperit cu blană.",
+          "evidence_url": "https://www.royalcanin.com/ro/dogs/breeds/ca-de-bestiar"
         },
         {
           "label": "Pisică",
@@ -6769,7 +7192,9 @@
           "node_id": "n_v29_animal_pets_pisica",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Animal domestic agil, cunoscut pentru tors și pentru vânătoarea șoarecilor."
+          "current_owner_description": "Animal domestic agil, cunoscut pentru tors și pentru vânătoarea șoarecilor.",
+          "verified_claim": "Pisica poate avea corpul acoperit cu blană.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Pisic%C4%83_de_cas%C4%83"
         }
       ],
       "topology_hypothesis": {
@@ -6780,8 +7205,102 @@
       },
       "prior_records": [],
       "prior_hold_policy": "Exact rejected candidates are skipped. A rejected association remains excluded as that association; it does not reject every input of an existing endpoint. Recorded older reasons remain until addressed by this newly screened proposal; older proxy-retirement prerequisites are superseded by current CONTENT_LOOP step1, which permits graph upgrades.",
-      "sources": [],
-      "next_action": "Research exact lemma/register/DOOM3 forms and each predeclared claim within the per-item budget."
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/blan%C4%83/json",
+          "paraphrase": "DEX09 first sense is animal hair/wool covering the skin; DOOM3 homograph1 is glossed piele/haină and confirms blănii. Its stated count plurals concern processed pelts/coats and are excluded here; timber homograph2 excluded. The living-covering meaning comes from DEX09, not the abbreviated DOOM3 gloss."
+        },
+        {
+          "url": "https://craiova.rosilva.ro/files/content/dolj/meniu/informare_publica/informatii_de_mediu/informatii_de_mediu/SEA_OS_Craiova%202024-final%2005_12_2024.pdf",
+          "paraphrase": "The forestry species-description passage explicitly describes the reddish fur of Vulpes vulpes; use this living-animal description, not a nearby rodent-claw passage."
+        },
+        {
+          "url": "https://wwf.ro/ce-facem/specii/ursul-brun/",
+          "paraphrase": "The conservation account explicitly describes brown-bear fur colour varying with age and season."
+        },
+        {
+          "url": "https://www.royalcanin.com/ro/dogs/breeds/ca-de-bestiar",
+          "paraphrase": "The original breed description identifies the living dog coat in short-haired and long-haired variants; no medical advice is derived."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Pisic%C4%83_de_cas%C4%83",
+          "paraphrase": "The cat account explicitly describes the hair layers and living coat; no care recommendations or health claims are taken."
+        }
+      ],
+      "next_action": "Wait for the remaining batch and independent factual/quality web reviews; not accepted or installed yet.",
+      "verified_forms": [
+        "blană",
+        "blănii"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          10083,
+          "blană",
+          1919
+        ],
+        "use": "Positive only; absence does not reject."
+      },
+      "checked_on": "2026-10-11",
+      "research_elapsed_seconds": 87.8,
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "blană",
+        "dex_definition_id": "835487",
+        "doom3_definition_id": "1318458",
+        "register": "Selected literal modern noun sense; scope restrictions and excluded homographs detailed in source notes.",
+        "request_spacing": "Serial dexonline requests separated by >=2.1 seconds; group boundaries longer.",
+        "normative_homograph": 1,
+        "excluded": "Only the exact lemma is selected; stress/editorial marks and homograph numbers are metadata."
+      },
+      "verified_links": [
+        {
+          "label": "Vulpe",
+          "claim_to_verify": "înveliș pilos al vulpii",
+          "node_id": "n_v33_forest_animal_vulpe",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Mamifer de pădure cu bot ascuțit și coadă stufoasă.",
+          "verified_claim": "Blana acoperă corpul vulpii.",
+          "evidence_url": "https://craiova.rosilva.ro/files/content/dolj/meniu/informare_publica/informatii_de_mediu/informatii_de_mediu/SEA_OS_Craiova%202024-final%2005_12_2024.pdf"
+        },
+        {
+          "label": "Urs",
+          "claim_to_verify": "înveliș pilos al ursului",
+          "node_id": "n_v33_forest_animal_urs",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Mamifer mare de pădure, cu blană deasă și corp puternic.",
+          "verified_claim": "Blana acoperă corpul ursului.",
+          "evidence_url": "https://wwf.ro/ce-facem/specii/ursul-brun/"
+        },
+        {
+          "label": "Câine",
+          "claim_to_verify": "înveliș pilos al câinelui",
+          "node_id": "n_v29_animal_pets_caine",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Animal domestic ținut adesea lângă oameni, cunoscut pentru lătrat.",
+          "verified_claim": "Câinele poate avea corpul acoperit cu blană.",
+          "evidence_url": "https://www.royalcanin.com/ro/dogs/breeds/ca-de-bestiar"
+        },
+        {
+          "label": "Pisică",
+          "claim_to_verify": "înveliș pilos al pisicii",
+          "node_id": "n_v29_animal_pets_pisica",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Animal domestic agil, cunoscut pentru tors și pentru vânătoarea șoarecilor.",
+          "verified_claim": "Pisica poate avea corpul acoperit cu blană.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Pisic%C4%83_de_cas%C4%83"
+        }
+      ],
+      "topology_verified": {
+        "distinct": 4,
+        "existing": 4,
+        "batch": 0,
+        "same_category": 4
+      }
     },
     {
       "lemma": "Gheară",
@@ -6798,18 +7317,18 @@
         "ghearele",
         "ghearelor"
       ],
-      "revision": 1,
+      "revision": 2,
       "label_ro": "Gheară",
       "origin": "everyday_home_nature_discovery",
-      "form_status": "Unverified paradigm hypothesis. Fold-equivalent article spellings are represented by the lemma key; only distinct noncolliding forms may later be installed.",
+      "form_status": "Exact modern noun sense and appropriate DOOM3 paradigm verified; only distinct pre-screened noncolliding inputs proposed. Independent semantic review pending.",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess/graph vocabulary and meaningful sourced links; no new curated target/round claim.",
-      "state": "idea",
-      "decision": "idea: prescreen passed for the proposed forms; exact sense, DOOM3 morphology and every named link still need research.",
-      "research_ready": true,
+      "state": "researched",
+      "decision": "researched: Four direct anatomical links supported; fox presence inferred from the primary labelled track diagram, with no claim about retractility.",
+      "research_ready": false,
       "proposed_forms": [
         "gheară",
         "ghearei",
@@ -6875,7 +7394,9 @@
           "node_id": "n_v29_animal_pets_pisica",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Animal domestic agil, cunoscut pentru tors și pentru vânătoarea șoarecilor."
+          "current_owner_description": "Animal domestic agil, cunoscut pentru tors și pentru vânătoarea șoarecilor.",
+          "verified_claim": "Gheara este o formațiune de la degetele pisicii.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Pisic%C4%83_de_cas%C4%83"
         },
         {
           "label": "Urs",
@@ -6883,7 +7404,9 @@
           "node_id": "n_v33_forest_animal_urs",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Mamifer mare de pădure, cu blană deasă și corp puternic."
+          "current_owner_description": "Mamifer mare de pădure, cu blană deasă și corp puternic.",
+          "verified_claim": "Gheara este o formațiune de la degetele ursului.",
+          "evidence_url": "https://milvus.ro/wp-content/uploads/2018/02/Nyomhatarozo-RO-print.pdf"
         },
         {
           "label": "Pasăre",
@@ -6891,7 +7414,9 @@
           "node_id": "n_v4sti_pasare",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Animal vertebrat cu pene, cioc și, de obicei, aripi."
+          "current_owner_description": "Animal vertebrat cu pene, cioc și, de obicei, aripi.",
+          "verified_claim": "Unele păsări au gheare.",
+          "evidence_url": "https://dexonline.ro/definitie/ghear%C4%83/json"
         },
         {
           "label": "Vulpe",
@@ -6899,7 +7424,9 @@
           "node_id": "n_v33_forest_animal_vulpe",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Mamifer de pădure cu bot ascuțit și coadă stufoasă."
+          "current_owner_description": "Mamifer de pădure cu bot ascuțit și coadă stufoasă.",
+          "verified_claim": "Vulpea are gheare la degete.",
+          "evidence_url": "https://milvus.ro/wp-content/uploads/2018/02/Nyomhatarozo-RO-print.pdf"
         }
       ],
       "topology_hypothesis": {
@@ -6910,8 +7437,97 @@
       },
       "prior_records": [],
       "prior_hold_policy": "Exact rejected candidates are skipped. A rejected association remains excluded as that association; it does not reject every input of an existing endpoint. Recorded older reasons remain until addressed by this newly screened proposal; older proxy-retirement prerequisites are superseded by current CONTENT_LOOP step1, which permits graph upgrades.",
-      "sources": [],
-      "next_action": "Research exact lemma/register/DOOM3 forms and each predeclared claim within the per-item budget."
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/ghear%C4%83/json",
+          "paraphrase": "DEX09 defines a pointed curved horny structure on the toes of some birds, reptiles and mammals; exact DOOM3 confirms ghearei/gheare. Exclude figurative possession and tool senses."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Pisic%C4%83_de_cas%C4%83",
+          "paraphrase": "The anatomy section explicitly describes claws on the paws of domestic cats."
+        },
+        {
+          "url": "https://milvus.ro/wp-content/uploads/2018/02/Nyomhatarozo-RO-print.pdf",
+          "paraphrase": "The conservation-group track guide explicitly describes bear toes ending in claws. Its fox page was downloaded and visually inspected: the labelled fox paw-track diagram shows claw impressions beyond the toe pads; this last link is an inference from that diagram, not the adjacent lynx text."
+        }
+      ],
+      "next_action": "Wait for the remaining batch and independent factual/quality web reviews; not accepted or installed yet.",
+      "verified_forms": [
+        "gheară",
+        "ghearei",
+        "gheare",
+        "ghearele",
+        "ghearelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          12147,
+          "ghearele",
+          1491
+        ],
+        "use": "Positive only; absence does not reject."
+      },
+      "checked_on": "2026-10-11",
+      "research_elapsed_seconds": 108.9,
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "gheară",
+        "dex_definition_id": "877735",
+        "doom3_definition_id": "1324793",
+        "register": "Selected literal modern noun sense; scope restrictions and excluded homographs detailed in source notes.",
+        "request_spacing": "Serial dexonline requests separated by >=2.1 seconds; group boundaries longer.",
+        "normative_homograph": null,
+        "excluded": "Only the exact lemma is selected; stress/editorial marks and homograph numbers are metadata."
+      },
+      "verified_links": [
+        {
+          "label": "Pisică",
+          "claim_to_verify": "ghearele pisicii",
+          "node_id": "n_v29_animal_pets_pisica",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Animal domestic agil, cunoscut pentru tors și pentru vânătoarea șoarecilor.",
+          "verified_claim": "Gheara este o formațiune de la degetele pisicii.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Pisic%C4%83_de_cas%C4%83"
+        },
+        {
+          "label": "Urs",
+          "claim_to_verify": "ghearele ursului",
+          "node_id": "n_v33_forest_animal_urs",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Mamifer mare de pădure, cu blană deasă și corp puternic.",
+          "verified_claim": "Gheara este o formațiune de la degetele ursului.",
+          "evidence_url": "https://milvus.ro/wp-content/uploads/2018/02/Nyomhatarozo-RO-print.pdf"
+        },
+        {
+          "label": "Pasăre",
+          "claim_to_verify": "gheare la păsări",
+          "node_id": "n_v4sti_pasare",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Animal vertebrat cu pene, cioc și, de obicei, aripi.",
+          "verified_claim": "Unele păsări au gheare.",
+          "evidence_url": "https://dexonline.ro/definitie/ghear%C4%83/json"
+        },
+        {
+          "label": "Vulpe",
+          "claim_to_verify": "ghearele vulpii",
+          "node_id": "n_v33_forest_animal_vulpe",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Mamifer de pădure cu bot ascuțit și coadă stufoasă.",
+          "verified_claim": "Vulpea are gheare la degete.",
+          "evidence_url": "https://milvus.ro/wp-content/uploads/2018/02/Nyomhatarozo-RO-print.pdf"
+        }
+      ],
+      "topology_verified": {
+        "distinct": 4,
+        "existing": 4,
+        "batch": 0,
+        "same_category": 4
+      }
     },
     {
       "lemma": "Hârtie",
@@ -6929,18 +7545,18 @@
         "hârtiile",
         "hârtiilor"
       ],
-      "revision": 1,
+      "revision": 2,
       "label_ro": "Hârtie",
       "origin": "everyday_home_nature_discovery",
-      "form_status": "Unverified paradigm hypothesis. Fold-equivalent article spellings are represented by the lemma key; only distinct noncolliding forms may later be installed.",
+      "form_status": "Exact modern noun sense and appropriate DOOM3 paradigm verified; only distinct pre-screened noncolliding inputs proposed. Independent semantic review pending.",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess/graph vocabulary and meaningful sourced links; no new curated target/round claim.",
-      "state": "idea",
-      "decision": "idea: research only the noncolliding paradigm; each colliding form remains held by its listed owner and is excluded from proposed_forms.",
-      "research_ready": true,
+      "state": "researched",
+      "decision": "researched: Four paper-object/writing-use links supported; hârtii remains with the Harta owner, while distinct noncolliding paradigm forms are retained.",
+      "research_ready": false,
       "proposed_forms": [
         "hârtie",
         "hârtia",
@@ -7030,7 +7646,9 @@
           "node_id": "n_v24_school_writing_caiet",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Concept cotidian din grupul «obiecte pentru scris»: Caiet."
+          "current_owner_description": "Concept cotidian din grupul «obiecte pentru scris»: Caiet.",
+          "verified_claim": "Caietul conține foi de hârtie.",
+          "evidence_url": "https://www.herlitz.ro/cumpara/caiet-a5-48-file-dictando-motiv-megamix-7480"
         },
         {
           "label": "Carte",
@@ -7038,7 +7656,9 @@
           "node_id": "n_v3lit_carte",
           "category": "literatura",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Obiect tipărit sau digital care conține un text literar ori informativ."
+          "current_owner_description": "Obiect tipărit sau digital care conține un text literar ori informativ.",
+          "verified_claim": "Cartea tipărită conține pagini de hârtie.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Carte"
         },
         {
           "label": "Creion",
@@ -7046,7 +7666,9 @@
           "node_id": "n_v24_school_writing_creion",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Concept cotidian din grupul «obiecte pentru scris»: Creion."
+          "current_owner_description": "Concept cotidian din grupul «obiecte pentru scris»: Creion.",
+          "verified_claim": "Pe hârtie se poate scrie cu creionul.",
+          "evidence_url": "https://www.herlitz.ro/catalog/instrumente-de-scris-42/filtru-tip-produs-creion-grafit-810"
         },
         {
           "label": "Pix",
@@ -7054,7 +7676,9 @@
           "node_id": "n_v24_school_writing_pix",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Concept cotidian din grupul «obiecte pentru scris»: Pix."
+          "current_owner_description": "Concept cotidian din grupul «obiecte pentru scris»: Pix.",
+          "verified_claim": "Pe hârtie se poate scrie cu pixul.",
+          "evidence_url": "https://www.herlitz.ro/catalog/instrumente-de-scris-42/filtru-tip-produs-creion-grafit-810"
         }
       ],
       "topology_hypothesis": {
@@ -7090,8 +7714,101 @@
         }
       ],
       "prior_hold_policy": "Exact rejected candidates are skipped. A rejected association remains excluded as that association; it does not reject every input of an existing endpoint. Recorded older reasons remain until addressed by this newly screened proposal; older proxy-retirement prerequisites are superseded by current CONTENT_LOOP step1, which permits graph upgrades.",
-      "sources": [],
-      "next_action": "Research exact lemma/register/DOOM3 forms and each predeclared claim within the per-item budget."
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/h%C3%A2rtie/json",
+          "paraphrase": "DEX09 defines cellulose-based sheet material for writing/printing, with a physical-sheet extension; exact DOOM3 confirms hârtia/hârtiei/hârtii. The plural hârtii is excluded because it folds to Harta’s articulated genitive; documents/banknotes excluded."
+        },
+        {
+          "url": "https://www.herlitz.ro/cumpara/caiet-a5-48-file-dictando-motiv-megamix-7480",
+          "paraphrase": "The stationery maker explicitly specifies paper sheets in a school notebook, distinct from its cardboard covers."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Carte",
+          "paraphrase": "The modern printed-book section explicitly identifies paper pages; no claim is made about digital books."
+        },
+        {
+          "url": "https://www.herlitz.ro/catalog/instrumente-de-scris-42/filtru-tip-produs-creion-grafit-810",
+          "paraphrase": "The original writing-instrument guide describes using pencils and ballpoint pens for handwritten ideas and notes on paper; this supports use rather than mere co-listing."
+        }
+      ],
+      "next_action": "Wait for the remaining batch and independent factual/quality web reviews; not accepted or installed yet.",
+      "verified_forms": [
+        "hârtie",
+        "hârtia",
+        "hârtiei",
+        "hârtiile",
+        "hârtiilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          2319,
+          "hârtie",
+          11193
+        ],
+        "use": "Positive only; absence does not reject."
+      },
+      "checked_on": "2026-10-11",
+      "research_elapsed_seconds": 105.2,
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "hârtie",
+        "dex_definition_id": "881455",
+        "doom3_definition_id": "1299617",
+        "register": "Selected literal modern noun sense; scope restrictions and excluded homographs detailed in source notes.",
+        "request_spacing": "Serial dexonline requests separated by >=2.1 seconds; group boundaries longer.",
+        "normative_homograph": null,
+        "excluded": "Only the exact lemma is selected; stress/editorial marks and homograph numbers are metadata."
+      },
+      "verified_links": [
+        {
+          "label": "Caiet",
+          "claim_to_verify": "caiet alcătuit din foi de hârtie",
+          "node_id": "n_v24_school_writing_caiet",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Concept cotidian din grupul «obiecte pentru scris»: Caiet.",
+          "verified_claim": "Caietul conține foi de hârtie.",
+          "evidence_url": "https://www.herlitz.ro/cumpara/caiet-a5-48-file-dictando-motiv-megamix-7480"
+        },
+        {
+          "label": "Carte",
+          "claim_to_verify": "carte tipărită pe hârtie",
+          "node_id": "n_v3lit_carte",
+          "category": "literatura",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Obiect tipărit sau digital care conține un text literar ori informativ.",
+          "verified_claim": "Cartea tipărită conține pagini de hârtie.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Carte"
+        },
+        {
+          "label": "Creion",
+          "claim_to_verify": "pe hârtie se scrie cu creionul",
+          "node_id": "n_v24_school_writing_creion",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Concept cotidian din grupul «obiecte pentru scris»: Creion.",
+          "verified_claim": "Pe hârtie se poate scrie cu creionul.",
+          "evidence_url": "https://www.herlitz.ro/catalog/instrumente-de-scris-42/filtru-tip-produs-creion-grafit-810"
+        },
+        {
+          "label": "Pix",
+          "claim_to_verify": "pe hârtie se scrie cu pixul",
+          "node_id": "n_v24_school_writing_pix",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Concept cotidian din grupul «obiecte pentru scris»: Pix.",
+          "verified_claim": "Pe hârtie se poate scrie cu pixul.",
+          "evidence_url": "https://www.herlitz.ro/catalog/instrumente-de-scris-42/filtru-tip-produs-creion-grafit-810"
+        }
+      ],
+      "topology_verified": {
+        "distinct": 4,
+        "existing": 4,
+        "batch": 0,
+        "same_category": 3
+      }
     },
     {
       "lemma": "Carton",
@@ -7109,18 +7826,18 @@
         "cartoanele",
         "cartoanelor"
       ],
-      "revision": 1,
+      "revision": 2,
       "label_ro": "Carton",
       "origin": "everyday_home_nature_discovery",
-      "form_status": "Unverified paradigm hypothesis. Fold-equivalent article spellings are represented by the lemma key; only distinct noncolliding forms may later be installed.",
+      "form_status": "Exact modern noun sense and appropriate DOOM3 paradigm verified; only distinct pre-screened noncolliding inputs proposed. Independent semantic review pending.",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess/graph vocabulary and meaningful sourced links; no new curated target/round claim.",
-      "state": "idea",
-      "decision": "idea: prescreen passed for the proposed forms; exact sense, DOOM3 morphology and every named link still need research.",
-      "research_ready": true,
+      "state": "researched",
+      "decision": "researched: Four direct material/product links supported, with two existing and two batch targets; the unsupported fifth wood link is excluded.",
+      "research_ready": false,
       "proposed_forms": [
         "carton",
         "cartonul",
@@ -7195,14 +7912,18 @@
           "claim_to_verify": "relația carton/hârtie trebuie verificată exact",
           "node_id": "n_v1_11_hartie",
           "category": "viata_de_roman",
-          "status": "planned in this batch; not accepted"
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Cartonul este un tip de hârtie groasă și compactă.",
+          "evidence_url": "https://dexonline.ro/definitie/carton/json"
         },
         {
           "label": "Cutie",
           "claim_to_verify": "cutie din carton",
           "node_id": "n_v1_11_cutie",
           "category": "viata_de_roman",
-          "status": "planned in this batch; not accepted"
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Cartonul se folosește la confecționarea unor cutii.",
+          "evidence_url": "https://www.iatc.ro/"
         },
         {
           "label": "Caiet",
@@ -7210,7 +7931,9 @@
           "node_id": "n_v24_school_writing_caiet",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Concept cotidian din grupul «obiecte pentru scris»: Caiet."
+          "current_owner_description": "Concept cotidian din grupul «obiecte pentru scris»: Caiet.",
+          "verified_claim": "Cartonul poate fi folosit la coperțile caietelor.",
+          "evidence_url": "https://www.herlitz.ro/cumpara/caiet-a5-48-file-dictando-motiv-megamix-7480"
         },
         {
           "label": "Carte",
@@ -7218,7 +7941,9 @@
           "node_id": "n_v3lit_carte",
           "category": "literatura",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Obiect tipărit sau digital care conține un text literar ori informativ."
+          "current_owner_description": "Obiect tipărit sau digital care conține un text literar ori informativ.",
+          "verified_claim": "Cartonul poate fi folosit la coperțile cărților.",
+          "evidence_url": "https://ecopertare.ro/magazin/accesorii-legatorie/carton-legatorie-mucava-1-2-5-mm/"
         },
         {
           "label": "Lemn",
@@ -7226,7 +7951,9 @@
           "node_id": "n_v1_3_material_lemn",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Material provenit din părțile lemnoase ale arborilor, folosit la construcții și obiecte din gospodărie; aici, sensul de material."
+          "current_owner_description": "Material provenit din părțile lemnoase ale arborilor, folosit la construcții și obiecte din gospodărie; aici, sensul de material.",
+          "research_state": "held",
+          "decision": "held: No direct selected source qualified the predeclared wood-to-cardboard raw-material link; four other truthful links suffice."
         }
       ],
       "topology_hypothesis": {
@@ -7237,33 +7964,132 @@
       },
       "prior_records": [],
       "prior_hold_policy": "Exact rejected candidates are skipped. A rejected association remains excluded as that association; it does not reject every input of an existing endpoint. Recorded older reasons remain until addressed by this newly screened proposal; older proxy-retirement prerequisites are superseded by current CONTENT_LOOP step1, which permits graph upgrades.",
-      "sources": [],
-      "next_action": "Research exact lemma/register/DOOM3 forms and each predeclared claim within the per-item budget."
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/carton/json",
+          "paraphrase": "DEX09 homograph1 defines thick compact paper with limited flexibility; exclude homograph2 regional textile and painting/filter/container extensions. Exact DOOM3 confirms neuter cartoane."
+        },
+        {
+          "url": "https://www.iatc.ro/",
+          "paraphrase": "The original Romanian packaging maker explicitly manufactures boxes from corrugated and duplex cardboard."
+        },
+        {
+          "url": "https://www.herlitz.ro/cumpara/caiet-a5-48-file-dictando-motiv-megamix-7480",
+          "paraphrase": "The stationery maker specifies cardboard covers for a school notebook."
+        },
+        {
+          "url": "https://ecopertare.ro/magazin/accesorii-legatorie/carton-legatorie-mucava-1-2-5-mm/",
+          "paraphrase": "The original bookbinder explicitly uses bookbinding cardboard for hard book covers."
+        }
+      ],
+      "next_action": "Wait for the remaining batch and independent factual/quality web reviews; not accepted or installed yet.",
+      "verified_forms": [
+        "carton",
+        "cartonul",
+        "cartonului",
+        "cartoane",
+        "cartoanele",
+        "cartoanelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          16226,
+          "carton",
+          1005
+        ],
+        "use": "Positive only; absence does not reject."
+      },
+      "checked_on": "2026-10-11",
+      "research_elapsed_seconds": 102.9,
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "carton",
+        "dex_definition_id": "841971",
+        "doom3_definition_id": "1309938",
+        "register": "Selected literal modern noun sense; scope restrictions and excluded homographs detailed in source notes.",
+        "request_spacing": "Serial dexonline requests separated by >=2.1 seconds; group boundaries longer.",
+        "normative_homograph": null,
+        "excluded": "Only the exact lemma is selected; stress/editorial marks and homograph numbers are metadata.",
+        "dex_homograph": 1
+      },
+      "verified_links": [
+        {
+          "label": "Hârtie",
+          "claim_to_verify": "relația carton/hârtie trebuie verificată exact",
+          "node_id": "n_v1_11_hartie",
+          "category": "viata_de_roman",
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Cartonul este un tip de hârtie groasă și compactă.",
+          "evidence_url": "https://dexonline.ro/definitie/carton/json"
+        },
+        {
+          "label": "Cutie",
+          "claim_to_verify": "cutie din carton",
+          "node_id": "n_v1_11_cutie",
+          "category": "viata_de_roman",
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Cartonul se folosește la confecționarea unor cutii.",
+          "evidence_url": "https://www.iatc.ro/"
+        },
+        {
+          "label": "Caiet",
+          "claim_to_verify": "copertă de caiet din carton",
+          "node_id": "n_v24_school_writing_caiet",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Concept cotidian din grupul «obiecte pentru scris»: Caiet.",
+          "verified_claim": "Cartonul poate fi folosit la coperțile caietelor.",
+          "evidence_url": "https://www.herlitz.ro/cumpara/caiet-a5-48-file-dictando-motiv-megamix-7480"
+        },
+        {
+          "label": "Carte",
+          "claim_to_verify": "copertă de carte din carton",
+          "node_id": "n_v3lit_carte",
+          "category": "literatura",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Obiect tipărit sau digital care conține un text literar ori informativ.",
+          "verified_claim": "Cartonul poate fi folosit la coperțile cărților.",
+          "evidence_url": "https://ecopertare.ro/magazin/accesorii-legatorie/carton-legatorie-mucava-1-2-5-mm/"
+        }
+      ],
+      "held_links": [
+        {
+          "target": "Lemn",
+          "decision": "held: No direct selected source qualified the predeclared wood-to-cardboard raw-material link; four other truthful links suffice."
+        }
+      ],
+      "topology_verified": {
+        "distinct": 4,
+        "existing": 2,
+        "batch": 2,
+        "same_category": 3
+      }
     },
     {
       "lemma": "Sticlă",
       "kind": "new_shared_concept",
       "category_hypothesis": "viata_de_roman",
       "sense": "Materialul transparent și casant; nu recipientul numărat.",
-      "paradigm_scope": "Mass-material sense: bottle/count-container plurals are not proposed.",
+      "paradigm_scope": "Glass material only: singular sticlă/sticlei; DOOM3 marks plural sticle for objects, excluded here.",
       "id": "v111-sticla",
       "node_id": "n_v1_11_sticla",
       "planned_forms": [
         "sticlă",
         "sticlei"
       ],
-      "revision": 1,
+      "revision": 2,
       "label_ro": "Sticlă",
       "origin": "everyday_home_nature_discovery",
-      "form_status": "Unverified paradigm hypothesis. Fold-equivalent article spellings are represented by the lemma key; only distinct noncolliding forms may later be installed.",
+      "form_status": "Exact modern noun sense and appropriate DOOM3 paradigm verified; only distinct pre-screened noncolliding inputs proposed. Independent semantic review pending.",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess/graph vocabulary and meaningful sourced links; no new curated target/round claim.",
-      "state": "idea",
-      "decision": "idea: prescreen passed for the proposed forms; exact sense, DOOM3 morphology and every named link still need research.",
-      "research_ready": true,
+      "state": "researched",
+      "decision": "researched: Four direct material uses supported; material-only singular keys, without implying all mirrors/lenses are glass or all glass is transparent.",
+      "research_ready": false,
       "proposed_forms": [
         "sticlă",
         "sticlei"
@@ -7299,7 +8125,9 @@
           "node_id": "n_v24_home_surfaces_fereastra",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Concept cotidian din grupul «suprafețe și deschideri»: Fereastră."
+          "current_owner_description": "Concept cotidian din grupul «suprafețe și deschideri»: Fereastră.",
+          "verified_claim": "Sticla se folosește pentru geamul ferestrei.",
+          "evidence_url": "https://dexonline.ro/definitie/sticl%C4%83/json"
         },
         {
           "label": "Oglindă",
@@ -7307,7 +8135,9 @@
           "node_id": "n_v24_home_surfaces_oglinda",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Concept cotidian din grupul «suprafețe și deschideri»: Oglindă."
+          "current_owner_description": "Concept cotidian din grupul «suprafețe și deschideri»: Oglindă.",
+          "verified_claim": "Oglinda poate avea suprafață din sticlă.",
+          "evidence_url": "https://www.ikea.com/ro/ro/p/hovet-oglinda-negru-70515915/"
         },
         {
           "label": "Borcan",
@@ -7315,7 +8145,9 @@
           "node_id": "n_v1_10_borcan",
           "category": "gastronomie",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Vas de sticlă cu deschidere largă, folosit în bucătărie pentru păstrarea alimentelor și a conservelor."
+          "current_owner_description": "Vas de sticlă cu deschidere largă, folosit în bucătărie pentru păstrarea alimentelor și a conservelor.",
+          "verified_claim": "Borcanul poate fi confecționat din sticlă.",
+          "evidence_url": "https://www.ikea.com/ro/ro/p/korken-borcan-cu-capac-sticla-transparenta-70213545/"
         },
         {
           "label": "Ochelari",
@@ -7323,7 +8155,9 @@
           "node_id": "n_v1_9_ochelari",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Dispozitiv optic purtat în fața ochilor, cu lentile pentru corectarea vederii sau protecție."
+          "current_owner_description": "Dispozitiv optic purtat în fața ochilor, cu lentile pentru corectarea vederii sau protecție.",
+          "verified_claim": "Sticla optică poate fi folosită pentru lentile de ochelari.",
+          "evidence_url": "https://dexonline.ro/definitie/sticl%C4%83/json"
         }
       ],
       "topology_hypothesis": {
@@ -7349,15 +8183,105 @@
         }
       ],
       "prior_hold_policy": "Exact rejected candidates are skipped. A rejected association remains excluded as that association; it does not reject every input of an existing endpoint. Recorded older reasons remain until addressed by this newly screened proposal; older proxy-retirement prerequisites are superseded by current CONTENT_LOOP step1, which permits graph upgrades.",
-      "sources": [],
-      "next_action": "Research exact lemma/register/DOOM3 forms and each predeclared claim within the per-item budget."
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/sticl%C4%83/json",
+          "paraphrase": "DEX09 defines glass material and explicitly describes optical glass and window glazing; exact DOOM3 confirms sticlei and marks plural sticle for objects, so no bottle/object plurals are installed."
+        },
+        {
+          "url": "https://www.ikea.com/ro/ro/p/hovet-oglinda-negru-70515915/",
+          "paraphrase": "Manufacturer materials explicitly identify glass in the mirror; no unverified reflective-coating material is claimed."
+        },
+        {
+          "url": "https://www.ikea.com/ro/ro/p/korken-borcan-cu-capac-sticla-transparenta-70213545/",
+          "paraphrase": "The manufacturer explicitly identifies the preserving jar body as glass, separate from rubber gasket and steel wire."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Sticl%C4%83",
+          "paraphrase": "The Romanian entry independently identifies the amorphous glass material; the source is not used to claim all glass is transparent."
+        }
+      ],
+      "next_action": "Wait for the remaining batch and independent factual/quality web reviews; not accepted or installed yet.",
+      "verified_forms": [
+        "sticlă",
+        "sticlei"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          1944,
+          "sticlă",
+          13924
+        ],
+        "use": "Positive only; absence does not reject."
+      },
+      "checked_on": "2026-10-11",
+      "research_elapsed_seconds": 100.7,
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "sticlă",
+        "dex_definition_id": "846745",
+        "doom3_definition_id": "1278053",
+        "register": "Selected literal modern noun sense; scope restrictions and excluded homographs detailed in source notes.",
+        "request_spacing": "Serial dexonline requests separated by >=2.1 seconds; group boundaries longer.",
+        "normative_homograph": null,
+        "excluded": "Only the exact lemma is selected; stress/editorial marks and homograph numbers are metadata."
+      },
+      "verified_links": [
+        {
+          "label": "Fereastră",
+          "claim_to_verify": "geamul ferestrei este din sticlă",
+          "node_id": "n_v24_home_surfaces_fereastra",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Concept cotidian din grupul «suprafețe și deschideri»: Fereastră.",
+          "verified_claim": "Sticla se folosește pentru geamul ferestrei.",
+          "evidence_url": "https://dexonline.ro/definitie/sticl%C4%83/json"
+        },
+        {
+          "label": "Oglindă",
+          "claim_to_verify": "oglindă din sticlă cu strat reflectant",
+          "node_id": "n_v24_home_surfaces_oglinda",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Concept cotidian din grupul «suprafețe și deschideri»: Oglindă.",
+          "verified_claim": "Oglinda poate avea suprafață din sticlă.",
+          "evidence_url": "https://www.ikea.com/ro/ro/p/hovet-oglinda-negru-70515915/"
+        },
+        {
+          "label": "Borcan",
+          "claim_to_verify": "recipient de sticlă",
+          "node_id": "n_v1_10_borcan",
+          "category": "gastronomie",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Vas de sticlă cu deschidere largă, folosit în bucătărie pentru păstrarea alimentelor și a conservelor.",
+          "verified_claim": "Borcanul poate fi confecționat din sticlă.",
+          "evidence_url": "https://www.ikea.com/ro/ro/p/korken-borcan-cu-capac-sticla-transparenta-70213545/"
+        },
+        {
+          "label": "Ochelari",
+          "claim_to_verify": "lentile de sticlă; nu pretinde că toate lentilele sunt din sticlă",
+          "node_id": "n_v1_9_ochelari",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Dispozitiv optic purtat în fața ochilor, cu lentile pentru corectarea vederii sau protecție.",
+          "verified_claim": "Sticla optică poate fi folosită pentru lentile de ochelari.",
+          "evidence_url": "https://dexonline.ro/definitie/sticl%C4%83/json"
+        }
+      ],
+      "topology_verified": {
+        "distinct": 4,
+        "existing": 4,
+        "batch": 0,
+        "same_category": 2
+      }
     },
     {
       "lemma": "Cauciuc",
       "kind": "new_shared_concept",
       "category_hypothesis": "viata_de_roman",
       "sense": "Material elastic folosit la obiecte curente; nu alias pentru Anvelopă.",
-      "paradigm_scope": "Mass-material sense: tyre plurals are not proposed.",
+      "paradigm_scope": "Rubber material only: singular cauciuc/cauciucul/cauciucului; DOOM3 assigns plural cauciucuri to tyres, excluded here.",
       "id": "v111-cauciuc",
       "node_id": "n_v1_11_cauciuc",
       "planned_forms": [
@@ -7365,18 +8289,18 @@
         "cauciucul",
         "cauciucului"
       ],
-      "revision": 1,
+      "revision": 2,
       "label_ro": "Cauciuc",
       "origin": "everyday_home_nature_discovery",
-      "form_status": "Unverified paradigm hypothesis. Fold-equivalent article spellings are represented by the lemma key; only distinct noncolliding forms may later be installed.",
+      "form_status": "Exact modern noun sense and appropriate DOOM3 paradigm verified; only distinct pre-screened noncolliding inputs proposed. Independent semantic review pending.",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess/graph vocabulary and meaningful sourced links; no new curated target/round claim.",
-      "state": "idea",
-      "decision": "idea: prescreen passed for the proposed forms; exact sense, DOOM3 morphology and every named link still need research.",
-      "research_ready": true,
+      "state": "researched",
+      "decision": "researched: Four scoped material-use links supported; no tyre-object plurals or claim that entire wheels are rubber.",
+      "research_ready": false,
       "proposed_forms": [
         "cauciuc",
         "cauciucul",
@@ -7422,7 +8346,9 @@
           "node_id": "n_v1_10_anvelopa",
           "category": "societate",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Înveliș elastic montat pe janta unei roți de vehicul, care asigură contactul cu suprafața de rulare."
+          "current_owner_description": "Înveliș elastic montat pe janta unei roți de vehicul, care asigură contactul cu suprafața de rulare.",
+          "verified_claim": "Cauciucul este un material folosit la fabricarea anvelopei.",
+          "evidence_url": "https://www.michelin.ro/auto/sfat/notiuni-de-baza-despre-anvelope/fabricarea-anvelopei-reciclarea"
         },
         {
           "label": "Roată",
@@ -7430,7 +8356,9 @@
           "node_id": "n_v1_10_roata",
           "category": "societate",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Piesă circulară care se rotește în jurul unei axe și permite deplasarea vehiculelor; aici, sensul de roată de vehicul."
+          "current_owner_description": "Piesă circulară care se rotește în jurul unei axe și permite deplasarea vehiculelor; aici, sensul de roată de vehicul.",
+          "verified_claim": "Unele roți au anvelope care conțin cauciuc.",
+          "evidence_url": "https://www.michelin.ro/auto/sfat/notiuni-de-baza-despre-anvelope/fabricarea-anvelopei-reciclarea"
         },
         {
           "label": "Pantof",
@@ -7438,14 +8366,18 @@
           "node_id": "n_v30_clothing_footwear_pantof",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Obiect de încălțăminte care protejează laba piciorului."
+          "current_owner_description": "Obiect de încălțăminte care protejează laba piciorului.",
+          "verified_claim": "Cauciucul poate fi folosit pentru talpa unui pantof.",
+          "evidence_url": "https://www.decathlon.ro/p/incaltaminte-skateboard-vulca-500-ii-adulti/_/R-p-311607"
         },
         {
           "label": "Mănușă",
           "claim_to_verify": "mănușă de cauciuc",
           "node_id": "n_v1_11_manusa",
           "category": "viata_de_roman",
-          "status": "planned in this batch; not accepted"
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Unele mănuși de menaj sunt confecționate din cauciuc.",
+          "evidence_url": "https://www.dedeman.ro/ro/manusi-menaj-misavan-profesionale-marimea-s-latex/p/7021455"
         }
       ],
       "topology_hypothesis": {
@@ -7456,8 +8388,98 @@
       },
       "prior_records": [],
       "prior_hold_policy": "Exact rejected candidates are skipped. A rejected association remains excluded as that association; it does not reject every input of an existing endpoint. Recorded older reasons remain until addressed by this newly screened proposal; older proxy-retirement prerequisites are superseded by current CONTENT_LOOP step1, which permits graph upgrades.",
-      "sources": [],
-      "next_action": "Research exact lemma/register/DOOM3 forms and each predeclared claim within the per-item budget."
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/cauciuc/json",
+          "paraphrase": "DEX09 first sense is elastic industrial material used in tyres; exact DOOM3 explicitly assigns plural cauciucuri to tyres, so only material singular keys are retained and no Anvelopă alias is added."
+        },
+        {
+          "url": "https://www.michelin.ro/auto/sfat/notiuni-de-baza-despre-anvelope/fabricarea-anvelopei-reciclarea",
+          "paraphrase": "The tyre manufacturer describes natural/synthetic rubber as tyre components and explains how the tyre fits the wheel rim; this is material in a wheel covering, not the whole wheel made of rubber."
+        },
+        {
+          "url": "https://www.decathlon.ro/p/incaltaminte-skateboard-vulca-500-ii-adulti/_/R-p-311607",
+          "paraphrase": "The original footwear manufacturer explicitly specifies rubber soles and 100% rubber-latex sole composition in low skate shoes."
+        },
+        {
+          "url": "https://www.dedeman.ro/ro/manusi-menaj-misavan-profesionale-marimea-s-latex/p/7021455",
+          "paraphrase": "Original product specifications explicitly identify natural-rubber household gloves, separate from winter clothing examples."
+        }
+      ],
+      "next_action": "Wait for the remaining batch and independent factual/quality web reviews; not accepted or installed yet.",
+      "verified_forms": [
+        "cauciuc",
+        "cauciucul",
+        "cauciucului"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          6590,
+          "cauciuc",
+          3297
+        ],
+        "use": "Positive only; absence does not reject."
+      },
+      "checked_on": "2026-10-11",
+      "research_elapsed_seconds": 156.9,
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "cauciuc",
+        "dex_definition_id": "842426",
+        "doom3_definition_id": "1310149",
+        "register": "Selected literal modern noun sense; scope restrictions and excluded homographs detailed in source notes.",
+        "request_spacing": "Serial dexonline requests separated by >=2.1 seconds; group boundaries longer.",
+        "normative_homograph": null,
+        "excluded": "Only the exact lemma is selected; stress/editorial marks and homograph numbers are metadata."
+      },
+      "verified_links": [
+        {
+          "label": "Anvelopă",
+          "claim_to_verify": "material al anvelopei",
+          "node_id": "n_v1_10_anvelopa",
+          "category": "societate",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Înveliș elastic montat pe janta unei roți de vehicul, care asigură contactul cu suprafața de rulare.",
+          "verified_claim": "Cauciucul este un material folosit la fabricarea anvelopei.",
+          "evidence_url": "https://www.michelin.ro/auto/sfat/notiuni-de-baza-despre-anvelope/fabricarea-anvelopei-reciclarea"
+        },
+        {
+          "label": "Roată",
+          "claim_to_verify": "anvelopa roții conține cauciuc; verifică relația fără a confunda obiectul cu materialul",
+          "node_id": "n_v1_10_roata",
+          "category": "societate",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Piesă circulară care se rotește în jurul unei axe și permite deplasarea vehiculelor; aici, sensul de roată de vehicul.",
+          "verified_claim": "Unele roți au anvelope care conțin cauciuc.",
+          "evidence_url": "https://www.michelin.ro/auto/sfat/notiuni-de-baza-despre-anvelope/fabricarea-anvelopei-reciclarea"
+        },
+        {
+          "label": "Pantof",
+          "claim_to_verify": "talpă de pantof din cauciuc",
+          "node_id": "n_v30_clothing_footwear_pantof",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Obiect de încălțăminte care protejează laba piciorului.",
+          "verified_claim": "Cauciucul poate fi folosit pentru talpa unui pantof.",
+          "evidence_url": "https://www.decathlon.ro/p/incaltaminte-skateboard-vulca-500-ii-adulti/_/R-p-311607"
+        },
+        {
+          "label": "Mănușă",
+          "claim_to_verify": "mănușă de cauciuc",
+          "node_id": "n_v1_11_manusa",
+          "category": "viata_de_roman",
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Unele mănuși de menaj sunt confecționate din cauciuc.",
+          "evidence_url": "https://www.dedeman.ro/ro/manusi-menaj-misavan-profesionale-marimea-s-latex/p/7021455"
+        }
+      ],
+      "topology_verified": {
+        "distinct": 4,
+        "existing": 3,
+        "batch": 1,
+        "same_category": 2
+      }
     },
     {
       "lemma": "Lipici",
@@ -7475,18 +8497,18 @@
         "lipiciurile",
         "lipiciurilor"
       ],
-      "revision": 1,
+      "revision": 2,
       "label_ro": "Lipici",
       "origin": "named_backlog_replanned",
-      "form_status": "Unverified paradigm hypothesis. Fold-equivalent article spellings are represented by the lemma key; only distinct noncolliding forms may later be installed.",
+      "form_status": "Exact modern noun sense and appropriate DOOM3 paradigm verified; only distinct pre-screened noncolliding inputs proposed. Independent semantic review pending.",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess/graph vocabulary and meaningful sourced links; no new curated target/round claim.",
-      "state": "idea",
-      "decision": "idea: prescreen passed for the proposed forms; exact sense, DOOM3 morphology and every named link still need research.",
-      "research_ready": true,
+      "state": "researched",
+      "decision": "researched: Four narrow current school/hobby uses supported; notebook relation is explicitly label repair and book relation suitable hobby glue, not an invented full restoration or industrial-legătorie claim. Review must judge relevance of the narrow notebook link.",
+      "research_ready": false,
       "proposed_forms": [
         "lipici",
         "lipiciul",
@@ -7568,14 +8590,18 @@
           "claim_to_verify": "lipește hârtie",
           "node_id": "n_v1_11_hartie",
           "category": "viata_de_roman",
-          "status": "planned in this batch; not accepted"
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Lipiciul poate lipi hârtie.",
+          "evidence_url": "https://pictus.ro/produs/adeziv-hobby-universal-pentart/"
         },
         {
           "label": "Carton",
           "claim_to_verify": "lipește carton",
           "node_id": "n_v1_11_carton",
           "category": "viata_de_roman",
-          "status": "planned in this batch; not accepted"
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Lipiciul poate lipi carton.",
+          "evidence_url": "https://pictus.ro/produs/adeziv-hobby-universal-pentart/"
         },
         {
           "label": "Caiet",
@@ -7583,7 +8609,9 @@
           "node_id": "n_v24_school_writing_caiet",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Concept cotidian din grupul «obiecte pentru scris»: Caiet."
+          "current_owner_description": "Concept cotidian din grupul «obiecte pentru scris»: Caiet.",
+          "verified_claim": "Lipiciul poate fi folosit pentru relipirea etichetei unui caiet.",
+          "evidence_url": "https://www.edums.ro/resurseeducationale/files/gimnazial/lbcomunicare/%5BClasa%20a%20VIII-a%5D%20%5BMaghiar%C4%83%5D%20Lec%C8%9Bia%202.pdf"
         },
         {
           "label": "Carte",
@@ -7591,7 +8619,9 @@
           "node_id": "n_v3lit_carte",
           "category": "literatura",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Obiect tipărit sau digital care conține un text literar ori informativ."
+          "current_owner_description": "Obiect tipărit sau digital care conține un text literar ori informativ.",
+          "verified_claim": "Un lipici de hobby potrivit poate fi folosit la legarea cărților.",
+          "evidence_url": "https://pictus.ro/produs/adeziv-hobby-universal-pentart/"
         }
       ],
       "topology_hypothesis": {
@@ -7627,8 +8657,96 @@
         }
       ],
       "prior_hold_policy": "Exact rejected candidates are skipped. A rejected association remains excluded as that association; it does not reject every input of an existing endpoint. Recorded older reasons remain until addressed by this newly screened proposal; older proxy-retirement prerequisites are superseded by current CONTENT_LOOP step1, which permits graph upgrades.",
-      "sources": [],
-      "next_action": "Research exact lemma/register/DOOM3 forms and each predeclared claim within the per-item budget."
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/lipici/json",
+          "paraphrase": "DEX09 first neuter sense is a substance used to glue paper; exact DOOM3 homograph2 confirms neuter lipiciuri. Exclude the plant homograph1, disease and figurative charm."
+        },
+        {
+          "url": "https://pictus.ro/produs/adeziv-hobby-universal-pentart/",
+          "paraphrase": "The current original hobby-product description explicitly specifies water-based glue for paper and cardboard, recommends school/hobby use, and names bookbinding as a use; it does not explicitly claim full book restoration."
+        },
+        {
+          "url": "https://www.edums.ro/resurseeducationale/files/gimnazial/lbcomunicare/%5BClasa%20a%20VIII-a%5D%20%5BMaghiar%C4%83%5D%20Lec%C8%9Bia%202.pdf",
+          "paraphrase": "The official school resource illustrates applying ordinary glue to a loose label while arranging school books/notebooks, and its explanation explicitly connects these labels with books/notebooks. The narrow notebook-label use is supported; full notebook repair is not claimed."
+        }
+      ],
+      "next_action": "Wait for the remaining batch and independent factual/quality web reviews; not accepted or installed yet.",
+      "verified_forms": [
+        "lipici",
+        "lipiciul",
+        "lipiciului",
+        "lipiciuri",
+        "lipiciurile",
+        "lipiciurilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          15652,
+          "lipici",
+          1056
+        ],
+        "use": "Positive only; absence does not reject."
+      },
+      "checked_on": "2026-10-11",
+      "research_elapsed_seconds": 154.7,
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "lipici",
+        "dex_definition_id": "864570",
+        "doom3_definition_id": "1326216",
+        "register": "Selected literal modern noun sense; scope restrictions and excluded homographs detailed in source notes.",
+        "request_spacing": "Serial dexonline requests separated by >=2.1 seconds; group boundaries longer.",
+        "normative_homograph": 2,
+        "excluded": "Only the exact lemma is selected; stress/editorial marks and homograph numbers are metadata."
+      },
+      "verified_links": [
+        {
+          "label": "Hârtie",
+          "claim_to_verify": "lipește hârtie",
+          "node_id": "n_v1_11_hartie",
+          "category": "viata_de_roman",
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Lipiciul poate lipi hârtie.",
+          "evidence_url": "https://pictus.ro/produs/adeziv-hobby-universal-pentart/"
+        },
+        {
+          "label": "Carton",
+          "claim_to_verify": "lipește carton",
+          "node_id": "n_v1_11_carton",
+          "category": "viata_de_roman",
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Lipiciul poate lipi carton.",
+          "evidence_url": "https://pictus.ro/produs/adeziv-hobby-universal-pentart/"
+        },
+        {
+          "label": "Caiet",
+          "claim_to_verify": "repararea lipită a unui caiet; nu simplă co-listare de rechizite",
+          "node_id": "n_v24_school_writing_caiet",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Concept cotidian din grupul «obiecte pentru scris»: Caiet.",
+          "verified_claim": "Lipiciul poate fi folosit pentru relipirea etichetei unui caiet.",
+          "evidence_url": "https://www.edums.ro/resurseeducationale/files/gimnazial/lbcomunicare/%5BClasa%20a%20VIII-a%5D%20%5BMaghiar%C4%83%5D%20Lec%C8%9Bia%202.pdf"
+        },
+        {
+          "label": "Carte",
+          "claim_to_verify": "repararea casnică/școlară a cărții; vechea legătorie industrială nu califică acest sens",
+          "node_id": "n_v3lit_carte",
+          "category": "literatura",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Obiect tipărit sau digital care conține un text literar ori informativ.",
+          "verified_claim": "Un lipici de hobby potrivit poate fi folosit la legarea cărților.",
+          "evidence_url": "https://pictus.ro/produs/adeziv-hobby-universal-pentart/"
+        }
+      ],
+      "topology_verified": {
+        "distinct": 4,
+        "existing": 2,
+        "batch": 2,
+        "same_category": 3
+      }
     },
     {
       "lemma": "Ac",
@@ -7946,18 +9064,18 @@
         "ușile",
         "ușilor"
       ],
-      "revision": 1,
+      "revision": 2,
       "label_ro": "ușă",
       "node_id": "n_v4via_usa",
       "origin": "existing_owner_missing_inputs",
-      "form_status": "Unverified paradigm hypothesis. Fold-equivalent article spellings are represented by the lemma key; only distinct noncolliding forms may later be installed.",
+      "form_status": "Exact modern noun sense and appropriate DOOM3 paradigm verified; only distinct pre-screened noncolliding inputs proposed. Independent semantic review pending.",
       "games": [
         "all six games: shared input resolution"
       ],
       "player_benefit": "Accept missing inflections without changing the established owner or charging an extra alias attempt.",
-      "state": "idea",
-      "decision": "idea: prescreen passed for the proposed forms; exact sense, DOOM3 morphology and every named link still need research.",
-      "research_ready": true,
+      "state": "researched",
+      "decision": "researched: Only two missing genitive/dative inputs ușii/ușilor are proposed for n_v4via_usa; no node or edge addition and no revived rejected Breloc association.",
+      "research_ready": false,
       "proposed_forms": [
         "ușii",
         "ușilor"
@@ -8062,8 +9180,46 @@
         }
       ],
       "prior_hold_policy": "Exact rejected candidates are skipped. A rejected association remains excluded as that association; it does not reject every input of an existing endpoint. Recorded older reasons remain until addressed by this newly screened proposal; older proxy-retirement prerequisites are superseded by current CONTENT_LOOP step1, which permits graph upgrades.",
-      "sources": [],
-      "next_action": "Research exact lemma/register/DOOM3 forms and each predeclared claim within the per-item budget."
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/u%C8%99%C4%83/json",
+          "paraphrase": "DEX09 gives the literal mobile door/opening structure matching the existing household owner; exact DOOM3 confirms articulated genitive ușii and plural uși."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/u%C8%99%C4%83",
+          "paraphrase": "The Romanian noun table independently confirms ușii/ușilor, alongside ușă/uși/ușile already owned; ușa folds to the lemma and is not duplicated."
+        }
+      ],
+      "next_action": "Wait for the remaining batch and independent factual/quality web reviews; not accepted or installed yet.",
+      "verified_forms": [
+        "ușă",
+        "ușii",
+        "uși",
+        "ușile",
+        "ușilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          1377,
+          "ușă",
+          20932
+        ],
+        "use": "Positive only; absence does not reject."
+      },
+      "checked_on": "2026-10-11",
+      "research_elapsed_seconds": 56.5,
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "ușă",
+        "dex_definition_id": "829121",
+        "doom3_definition_id": "1314078",
+        "register": "Selected literal modern noun sense; scope restrictions and excluded homographs detailed in source notes.",
+        "request_spacing": "Serial dexonline requests separated by >=2.1 seconds; group boundaries longer.",
+        "normative_homograph": null,
+        "excluded": "Only the exact lemma is selected; stress/editorial marks and homograph numbers are metadata."
+      },
+      "verified_links": []
     },
     {
       "lemma": "Găleată",
@@ -11301,18 +12457,41 @@
       "dexonline_requests": 12,
       "new_normative_forms_screened": 0,
       "note": "Twelve already-screened candidates; exact source JSON and two-source notes checked, no source definitions copied. Mistreț combined headword morphology read manually; Castor species distinguished."
+    },
+    {
+      "tick": 3,
+      "items": [
+        "v111-stejar",
+        "v111-ghinda",
+        "v111-aripa",
+        "v111-cuib",
+        "v111-blana",
+        "v111-gheara",
+        "v111-hartie",
+        "v111-carton",
+        "v111-sticla",
+        "v111-cauciuc",
+        "v111-lipici",
+        "v111-input-usa"
+      ],
+      "researched": 12,
+      "held": 0,
+      "max_item_elapsed_seconds": 156.9,
+      "dexonline_requests": 12,
+      "new_normative_forms_screened": 0,
+      "note": "Twelve pre-screened candidates; no unscreened forms. Blană excludes three coat/pelt plurals; Carton excludes its unsupported fifth link. Lipici notebook link narrowed to label reattachment, book link to suitable hobby bookbinding; no full restoration claim."
     }
   ],
   "research_summary": {
     "states": {
-      "researched": 22,
+      "researched": 34,
       "held": 5,
-      "idea": 31
+      "idea": 19
     },
-    "remaining_ideas": 31,
+    "remaining_ideas": 19,
     "accepted": 0,
     "installed": 0,
     "new_normative_forms_screened": 7,
-    "note": "Exact normative homographs checked manually where needed: Bumbac textile1, Mistreț animal2, Castor animal1. Castor Canadian/European species are explicitly distinct. No frequency-based hold or rejection."
+    "note": "Exact normative homographs/sense scope checked: Bumbac textile1, Mistreț animal2, Castor animal1, Blană non-timber1, Carton material DEX1, Lipici substance DOOM3 2. Count plurals of Sticlă/Cauciuc and Blană pelts/coats excluded. No frequency-based rejection."
   }
 }
