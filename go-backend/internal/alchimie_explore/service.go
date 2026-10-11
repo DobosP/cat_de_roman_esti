@@ -262,23 +262,37 @@ func (s *exploreSession) hint() any {
 	return map[string]any{"stage": stage, "message": msg, "output": map[string]any{"label": label}, "pair": p}
 }
 func (s *exploreSession) state(id string) map[string]any {
+	type inventoryUse struct {
+		uses, remaining int
+		ready           bool
+	}
+	var usage map[string]inventoryUse
+	if len(s.order) > 0 {
+		usage = make(map[string]inventoryUse, len(s.order))
+		for _, r := range s.world.Recipes {
+			_, resultOwned := s.owned[r.Result]
+			_, a := s.owned[r.Pair[0]]
+			_, b := s.owned[r.Pair[1]]
+			for index, cid := range r.Pair {
+				if index == 1 && cid == r.Pair[0] {
+					continue
+				}
+				use := usage[cid]
+				use.uses++
+				if !resultOwned {
+					use.remaining++
+					use.ready = use.ready || (a && b)
+				}
+				usage[cid] = use
+			}
+		}
+	}
 	inv := []any{}
 	for _, cid := range s.order {
 		c := s.world.concepts[cid]
 		p := s.owned[cid]
-		uses, remaining, ready := 0, 0, false
-		for _, r := range s.world.Recipes {
-			if r.Pair[0] != cid && r.Pair[1] != cid {
-				continue
-			}
-			uses++
-			if _, owned := s.owned[r.Result]; !owned {
-				remaining++
-				_, a := s.owned[r.Pair[0]]
-				_, b := s.owned[r.Pair[1]]
-				ready = ready || (a && b)
-			}
-		}
+		use := usage[cid]
+		uses, remaining, ready := use.uses, use.remaining, use.ready
 		status := "depleted"
 		if uses == 0 {
 			status = "final"
