@@ -229,7 +229,7 @@ def dev(identity, lock, mirror, lock_fd, host_api_port):
                  json.dumps({"identity": identity, **selected}, separators=(",", ":"))]
         child = None
         try:
-            child = subprocess.Popen(args, pass_fds=(lock_fd,))
+            child = subprocess.Popen(args, pass_fds=(lock_fd,), umask=0o077)
             return child.wait()
         finally:
             # Only the CID created in this invocation's private scratch is ours.
