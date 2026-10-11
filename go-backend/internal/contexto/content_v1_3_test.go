@@ -39,6 +39,7 @@ func TestV13EverydayFormsGiveOneWarmPrivateAttempt(t *testing.T) {
 			}
 			if row.id == "n_v1_3_material_lemn" {
 				wantInbound["n_v1_9_cort"] = 1
+				wantInbound["n_v1_10_gard"] = 1
 			}
 			if !maps.Equal(inbound, wantInbound) {
 				t.Fatalf("reviewed inbound vocabulary changed: %v", inbound)
