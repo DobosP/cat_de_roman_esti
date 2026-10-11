@@ -1,0 +1,3237 @@
+{
+  "schema_version": 1,
+  "theme": "v1-9-seasons-and-school",
+  "baseline_commit": "3f327c60c80919f98cf9eb8a9af613484a0258cb",
+  "procedure_rev": "17b97a2",
+  "scope": "Step 1 only: the 18 usable named backlog candidates fill first, then the exhausted usable list is extended by 22 school/home discovery proposals. No web call, acceptance or installation. No main label/description/category changes.",
+  "input_policy_baseline": {
+    "module": "scripts/everyday_core_v1_8_data.py",
+    "removed_deferred_terms": [
+      "leafă",
+      "ogradă"
+    ],
+    "note": "Existing approved leafă/ogradă inputs must remain available; no policy reversion is proposed."
+  },
+  "screen": {
+    "bundle_sha256": "dc572399d0c295a27c8eecb67eb6b91f748bebfbc0ea76bcdede0642aad38862",
+    "script": "~/work/_temp/content__v1-9-seasons-and-school/prescreen.py",
+    "normalization": "Single code-point substitution from bundled normalization_map, then whitespace collapse; no extra Unicode normalization.",
+    "owner_sources": [
+      "normalized_index",
+      "labels",
+      "all node labels/aliases including shadowed owners",
+      "discovery_world labels/snapshots/aliases",
+      "contexto_data.projection_terms",
+      "DEFERRED_AMBIGUOUS_TERMS",
+      "ReviewedUnresolved",
+      "all pool record states"
+    ],
+    "reviewed_unresolved_keys": [
+      "paște",
+      "paștele"
+    ],
+    "cross_item_keys": {}
+  },
+  "owner_catalog": {
+    "n_martisor": {
+      "label_ro": "Mărțișor",
+      "category": "arta_cultura",
+      "description": "Obicei romanesc de 1 martie, in patrimoniul UNESCO."
+    },
+    "n_v1_8_anotimp": {
+      "label_ro": "Anotimp",
+      "category": "stiinta",
+      "description": "Perioadă a anului cu trăsături specifice de climă și lumină; în România sunt patru, iar în alte regiuni există și diviziuni ploioase sau secetoase."
+    },
+    "n_v23via_ghiozdan": {
+      "label_ro": "Ghiozdan",
+      "category": "viata_de_roman",
+      "description": "Geantă purtată pe spate în care elevii își duc la școală manualele, caietele și rechizitele."
+    },
+    "n_v23via_penar": {
+      "label_ro": "Penar",
+      "category": "viata_de_roman",
+      "description": "Etui pentru instrumentele de scris, întâlnit în mod obișnuit printre rechizitele unui elev."
+    },
+    "n_v24_food_salad_veg_castravete": {
+      "label_ro": "Castravete",
+      "category": "gastronomie",
+      "description": "Concept cotidian din grupul «legume pentru salată»: Castravete."
+    },
+    "n_v24_food_small_fruit_strugure": {
+      "label_ro": "Strugure",
+      "category": "gastronomie",
+      "description": "Concept cotidian din grupul «fructe mici»: Strugure."
+    },
+    "n_v24_home_bed_pat": {
+      "label_ro": "Pat",
+      "category": "viata_de_roman",
+      "description": "Concept cotidian din grupul «obiecte pentru somn»: Pat."
+    },
+    "n_v24_home_textiles_patura": {
+      "label_ro": "Pătură",
+      "category": "viata_de_roman",
+      "description": "Concept cotidian din grupul «textile din casă»: Pătură."
+    },
+    "n_v24_school_supplies_radiera": {
+      "label_ro": "Radieră",
+      "category": "viata_de_roman",
+      "description": "Concept cotidian din grupul «rechizite școlare»: Radieră."
+    },
+    "n_v24_school_supplies_rigla": {
+      "label_ro": "Riglă",
+      "category": "viata_de_roman",
+      "description": "Concept cotidian din grupul «rechizite școlare»: Riglă."
+    },
+    "n_v24_school_supplies_stilou": {
+      "label_ro": "Stilou",
+      "category": "viata_de_roman",
+      "description": "Concept cotidian din grupul «rechizite școlare»: Stilou."
+    },
+    "n_v24_school_writing_caiet": {
+      "label_ro": "Caiet",
+      "category": "viata_de_roman",
+      "description": "Concept cotidian din grupul «obiecte pentru scris»: Caiet."
+    },
+    "n_v24_school_writing_creion": {
+      "label_ro": "Creion",
+      "category": "viata_de_roman",
+      "description": "Concept cotidian din grupul «obiecte pentru scris»: Creion."
+    },
+    "n_v30_clothing_everyday_pantaloni": {
+      "label_ro": "Pantaloni",
+      "category": "viata_de_roman",
+      "description": "Haină purtată de la talie în jos, cu câte o parte pentru fiecare picior."
+    },
+    "n_v3geo_harta": {
+      "label_ro": "hartă",
+      "category": "geografie",
+      "description": "Reprezentare grafică a unei zone, cu locuri și forme de relief."
+    },
+    "n_v42vdr_ghiocel": {
+      "label_ro": "Ghiocelul",
+      "category": "viata_de_roman",
+      "description": "Prima floare a primăverii, dăruită de 1 și 8 martie."
+    },
+    "n_v4art_culoare": {
+      "label_ro": "Culoare",
+      "category": "arta_cultura",
+      "description": "Proprietate vizuală folosită în pictură, design și decor."
+    },
+    "n_v4gas_bucatarie": {
+      "label_ro": "Bucătărie",
+      "category": "gastronomie",
+      "description": "Spațiu și domeniu al pregătirii mâncării."
+    },
+    "n_v4sti_frunza": {
+      "label_ro": "frunză",
+      "category": "stiinta",
+      "description": "Organ al plantei care produce hrană prin fotosinteză."
+    },
+    "n_v4sti_insecta": {
+      "label_ro": "insectă",
+      "category": "stiinta",
+      "description": "Animal nevertebrat cu șase picioare și corp segmentat."
+    },
+    "n_v4sti_pasare": {
+      "label_ro": "pasăre",
+      "category": "stiinta",
+      "description": "Animal vertebrat cu pene, cioc și, de obicei, aripi."
+    },
+    "n_v84_food_grau": {
+      "label_ro": "Grâu",
+      "category": "gastronomie",
+      "description": "Cereală ale cărei boabe sunt măcinate pentru făină și griș."
+    }
+  },
+  "records": [
+    {
+      "id": "v19-primavara",
+      "revision": 1,
+      "state": "idea",
+      "kind": "new_shared_concept",
+      "lemma": "Primăvară",
+      "label_ro": "Primăvară",
+      "sense": "Anotimpul dintre iarnă și vară, cu legături delimitate pentru România.",
+      "origin": "remaining_named_backlog",
+      "category_hypothesis": "stiinta",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential shared vocabulary for resolved guesses and truthful adjacency; exposure remains unproved.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": true,
+      "node_id": "n_v1_9_primavara",
+      "planned_forms": [
+        "Primăvară",
+        "primăverii",
+        "primăveri",
+        "primăverile",
+        "primăverilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Primăvară",
+            "key": "primavara",
+            "cald_proxies": [
+              {
+                "public_id": "ctxp_99dfc268fbdb06ecb5e7",
+                "anchor_id": "n_v24_nature_world_natura",
+                "surface": "primăvară",
+                "mapping_kind": "domain_fallback"
+              }
+            ]
+          },
+          {
+            "form": "primăverii",
+            "key": "primaverii"
+          },
+          {
+            "form": "primăveri",
+            "key": "primaveri"
+          },
+          {
+            "form": "primăverile",
+            "key": "primaverile"
+          },
+          {
+            "form": "primăverilor",
+            "key": "primaverilor"
+          }
+        ]
+      },
+      "prior_records": [
+        {
+          "path": "docs/content-pool/v1-8-everyday-core/pool.json",
+          "id": "v18-primavara",
+          "state": "held",
+          "lemma": "Primăvară",
+          "reason": "Source-qualified, deferred to a later wave after Anotimp is on main: this wave selects Iarnă and Vară, preserving the at-most-two-other-new-neighbors constraint on the new parent.",
+          "next_action": "Reuse retained source facts after current parent lands; re-screen forms and dependencies on the new baseline."
+        }
+      ],
+      "decision": "Prior structural hold can be reconsidered: Anotimp is now on main. Recheck the retained source claims and every current form; no acceptance is inherited.",
+      "link_targets": [
+        {
+          "node_id": "n_v1_8_anotimp",
+          "label": "Anotimp",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "is a season",
+          "category": "stiinta"
+        },
+        {
+          "node_id": "n_v42vdr_ghiocel",
+          "label": "Ghiocelul",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "early spring flowering"
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "frunză",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "leaf emergence on many deciduous trees"
+        },
+        {
+          "node_id": "n_martisor",
+          "label": "Mărțișor",
+          "category": "arta_cultura",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Romanian March 1 tradition"
+        }
+      ],
+      "prior_evidence_urls": [
+        "https://dexonline.ro/definitie/Primăvară/json",
+        "https://ro.wikipedia.org/wiki/Prim%C4%83var%C4%83",
+        "https://ro.wikipedia.org/wiki/Ghiocel",
+        "https://ro.wikipedia.org/wiki/M%C4%83r%C8%9Bi%C8%99or",
+        "https://www.sor.ro/frasinul/"
+      ],
+      "cald_upgrade_candidate": true,
+      "risks": [
+        "Preserve or refresh the prior qualified proxy with the supported writer; no unsupported identity migration."
+      ],
+      "next_action": "Before the first source fetch, name 4–8 truthful link hypotheses with at least two existing main nodes, two same-category neighbors and at most two batch neighbors; then verify sources and forms."
+    },
+    {
+      "id": "v19-toamna",
+      "revision": 1,
+      "state": "idea",
+      "kind": "new_shared_concept",
+      "lemma": "Toamnă",
+      "label_ro": "Toamnă",
+      "sense": "Anotimpul dintre vară și iarnă, cu legături delimitate pentru România.",
+      "origin": "remaining_named_backlog",
+      "category_hypothesis": "stiinta",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential shared vocabulary for resolved guesses and truthful adjacency; exposure remains unproved.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": true,
+      "node_id": "n_v1_9_toamna",
+      "planned_forms": [
+        "Toamnă",
+        "toamnei",
+        "toamne",
+        "toamnele",
+        "toamnelor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Toamnă",
+            "key": "toamna",
+            "cald_proxies": [
+              {
+                "public_id": "ctxp_96209cf935ee538e1cc5",
+                "anchor_id": "n_v24_nature_world_natura",
+                "surface": "toamnă",
+                "mapping_kind": "domain_fallback"
+              }
+            ]
+          },
+          {
+            "form": "toamnei",
+            "key": "toamnei"
+          },
+          {
+            "form": "toamne",
+            "key": "toamne"
+          },
+          {
+            "form": "toamnele",
+            "key": "toamnele"
+          },
+          {
+            "form": "toamnelor",
+            "key": "toamnelor"
+          }
+        ]
+      },
+      "prior_records": [
+        {
+          "path": "docs/content-pool/v1-8-everyday-core/pool.json",
+          "id": "v18-toamna",
+          "state": "held",
+          "lemma": "Toamnă",
+          "reason": "Source-qualified, deferred to a later wave after Anotimp is on main: this wave selects Iarnă and Vară, preserving the at-most-two-other-new-neighbors constraint on the new parent.",
+          "next_action": "Reuse retained source facts after current parent lands; re-screen forms and dependencies on the new baseline."
+        }
+      ],
+      "decision": "Prior structural hold can be reconsidered: Anotimp is now on main. Recheck the retained source claims and every current form; no acceptance is inherited.",
+      "link_targets": [
+        {
+          "node_id": "n_v1_8_anotimp",
+          "label": "Anotimp",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "is a season",
+          "category": "stiinta"
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "frunză",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "deciduous leaf fall"
+        },
+        {
+          "node_id": "n_v84_food_grau",
+          "label": "Grâu",
+          "category": "gastronomie",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "autumn sowing of winter wheat"
+        },
+        {
+          "node_id": "n_v24_food_small_fruit_strugure",
+          "label": "Strugure",
+          "category": "gastronomie",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "grape harvest"
+        }
+      ],
+      "prior_evidence_urls": [
+        "https://dexonline.ro/definitie/Toamnă/json",
+        "https://ro.wikipedia.org/wiki/Toamn%C4%83",
+        "https://www.antenasatelor.ro/fermier-in-romania/actualitatea-agricola/graul-de-toamna-cultura-care-da-stabilitate-fermierilor-romani-id41622.html",
+        "https://agerpres.ro/social/2018/09/11/reportaj-vrancea-culesul-viilor-a-inceput-mai-devreme-in-aceasta-toamna-viticultorii-se-plang-de-lip--174031"
+      ],
+      "cald_upgrade_candidate": true,
+      "risks": [
+        "Preserve or refresh the prior qualified proxy with the supported writer; no unsupported identity migration."
+      ],
+      "next_action": "Before the first source fetch, name 4–8 truthful link hypotheses with at least two existing main nodes, two same-category neighbors and at most two batch neighbors; then verify sources and forms."
+    },
+    {
+      "id": "v19-randunica",
+      "revision": 1,
+      "state": "idea",
+      "kind": "new_shared_concept",
+      "lemma": "Rândunică",
+      "label_ro": "Rândunică",
+      "sense": "Pasărea întâlnită în România; specia și migrația trebuie precizate din surse.",
+      "origin": "remaining_named_backlog",
+      "category_hypothesis": "stiinta",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential shared vocabulary for resolved guesses and truthful adjacency; exposure remains unproved.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": true,
+      "node_id": "n_v1_9_randunica",
+      "planned_forms": [
+        "Rândunică",
+        "rândunicii",
+        "rândunici",
+        "rândunicile",
+        "rândunicilor",
+        "rândunele",
+        "rândunelele",
+        "rândunelei",
+        "rândunelelor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Rândunică",
+            "key": "randunica",
+            "cald_proxies": [
+              {
+                "public_id": "ctxp_fa5fed3db303b2d8d773",
+                "anchor_id": "n_v4sti_pasare",
+                "surface": "rândunică",
+                "mapping_kind": "explicit"
+              }
+            ]
+          },
+          {
+            "form": "rândunicii",
+            "key": "randunicii"
+          },
+          {
+            "form": "rândunici",
+            "key": "randunici"
+          },
+          {
+            "form": "rândunicile",
+            "key": "randunicile"
+          },
+          {
+            "form": "rândunicilor",
+            "key": "randunicilor"
+          },
+          {
+            "form": "rândunele",
+            "key": "randunele"
+          },
+          {
+            "form": "rândunelele",
+            "key": "randunelele"
+          },
+          {
+            "form": "rândunelei",
+            "key": "randunelei"
+          },
+          {
+            "form": "rândunelelor",
+            "key": "randunelelor"
+          }
+        ]
+      },
+      "prior_records": [
+        {
+          "path": "docs/content-pool/v1-8-everyday-core/pool.json",
+          "id": "v18-randunica",
+          "state": "held",
+          "lemma": "Rândunică",
+          "reason": "Source-qualified, deferred to a later wave after Anotimp is on main: this wave selects Iarnă and Vară, preserving the at-most-two-other-new-neighbors constraint on the new parent.",
+          "next_action": "Reuse retained source facts after current parent lands; re-screen forms and dependencies on the new baseline."
+        }
+      ],
+      "decision": "Prior structural hold can be reconsidered: Anotimp is now on main. Recheck the retained source claims and every current form; no acceptance is inherited.",
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_pasare",
+          "label": "pasăre",
+          "category": "stiinta",
+          "status": "exists on landed wave_base"
+        },
+        {
+          "node_id": "n_v4sti_insecta",
+          "label": "insectă",
+          "category": "stiinta",
+          "status": "exists on landed wave_base"
+        },
+        {
+          "node_id": "n_v1_9_primavara",
+          "target_record": "v19-primavara",
+          "label": "Primăvară",
+          "status": "batch hypothesis; requires acceptance",
+          "category": "stiinta"
+        },
+        {
+          "node_id": "n_v1_9_toamna",
+          "target_record": "v19-toamna",
+          "label": "Toamnă",
+          "status": "batch hypothesis; requires acceptance",
+          "category": "stiinta"
+        }
+      ],
+      "prior_evidence_urls": [
+        "https://ro.wikipedia.org/wiki/R%C3%A2ndunic%C4%83",
+        "https://dexonline.ro/definitie/r%C3%A2ndunic%C4%83/json"
+      ],
+      "cald_upgrade_candidate": true,
+      "risks": [
+        "Preserve or refresh the prior qualified proxy with the supported writer; no unsupported identity migration."
+      ],
+      "next_action": "Before the first source fetch, name 4–8 truthful link hypotheses with at least two existing main nodes, two same-category neighbors and at most two batch neighbors; then verify sources and forms."
+    },
+    {
+      "id": "v19-cort",
+      "revision": 1,
+      "state": "idea",
+      "kind": "new_shared_concept",
+      "lemma": "Cort",
+      "label_ro": "Cort",
+      "sense": "Adăpost portabil pentru campare.",
+      "origin": "remaining_named_backlog",
+      "category_hypothesis": "viata_de_roman",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential shared vocabulary for resolved guesses and truthful adjacency; exposure remains unproved.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": false,
+      "node_id": "n_v1_9_cort",
+      "planned_forms": [
+        "Cort",
+        "cortul",
+        "cortului",
+        "corturi",
+        "corturile",
+        "corturilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Cort",
+            "key": "cort"
+          },
+          {
+            "form": "cortul",
+            "key": "cortul"
+          },
+          {
+            "form": "cortului",
+            "key": "cortului"
+          },
+          {
+            "form": "corturi",
+            "key": "corturi"
+          },
+          {
+            "form": "corturile",
+            "key": "corturile"
+          },
+          {
+            "form": "corturilor",
+            "key": "corturilor"
+          }
+        ]
+      },
+      "prior_records": [
+        {
+          "path": "docs/content-pool/v1-5-discovery-i03/pool.json",
+          "id": "i03-outdoor-07",
+          "state": "idea",
+          "lemma": "Cort",
+          "reason": "No source or exact sense approval.",
+          "next_action": "Camping instructions and competing tent senses."
+        }
+      ],
+      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "link_targets": [],
+      "next_action": "Before the first source fetch, name 4–8 truthful link hypotheses with at least two existing main nodes, two same-category neighbors and at most two batch neighbors; then verify sources and forms."
+    },
+    {
+      "id": "v19-ochelari",
+      "revision": 1,
+      "state": "idea",
+      "kind": "new_shared_concept",
+      "lemma": "Ochelari",
+      "label_ro": "Ochelari",
+      "sense": "Dispozitiv optic purtat în fața ochilor pentru vedere ori protecție.",
+      "origin": "remaining_named_backlog",
+      "category_hypothesis": "viata_de_roman",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential shared vocabulary for resolved guesses and truthful adjacency; exposure remains unproved.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": false,
+      "node_id": "n_v1_9_ochelari",
+      "planned_forms": [
+        "Ochelari",
+        "ochelarii",
+        "ochelarilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Ochelari",
+            "key": "ochelari"
+          },
+          {
+            "form": "ochelarii",
+            "key": "ochelarii"
+          },
+          {
+            "form": "ochelarilor",
+            "key": "ochelarilor"
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "link_targets": [],
+      "next_action": "Before the first source fetch, name 4–8 truthful link hypotheses with at least two existing main nodes, two same-category neighbors and at most two batch neighbors; then verify sources and forms."
+    },
+    {
+      "id": "v19-caciula",
+      "revision": 1,
+      "state": "idea",
+      "kind": "new_shared_concept",
+      "lemma": "Căciulă",
+      "label_ro": "Căciulă",
+      "sense": "Acoperământ de iarnă pentru cap.",
+      "origin": "remaining_named_backlog",
+      "category_hypothesis": "viata_de_roman",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential shared vocabulary for resolved guesses and truthful adjacency; exposure remains unproved.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": false,
+      "node_id": "n_v1_9_caciula",
+      "planned_forms": [
+        "Căciulă",
+        "căciuli",
+        "căciulile",
+        "căciulii",
+        "căciulilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Căciulă",
+            "key": "caciula",
+            "cald_proxies": [
+              {
+                "public_id": "ctxp_e5177da0f07a1109bf3c",
+                "anchor_id": "n_v30_clothing_outer_geaca",
+                "surface": "căciulă",
+                "mapping_kind": "explicit"
+              }
+            ]
+          },
+          {
+            "form": "căciuli",
+            "key": "caciuli"
+          },
+          {
+            "form": "căciulile",
+            "key": "caciulile"
+          },
+          {
+            "form": "căciulii",
+            "key": "caciulii"
+          },
+          {
+            "form": "căciulilor",
+            "key": "caciulilor"
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "link_targets": [],
+      "cald_upgrade_candidate": true,
+      "risks": [
+        "Preserve or refresh the prior qualified proxy with the supported writer; no unsupported identity migration."
+      ],
+      "next_action": "Before the first source fetch, name 4–8 truthful link hypotheses with at least two existing main nodes, two same-category neighbors and at most two batch neighbors; then verify sources and forms."
+    },
+    {
+      "id": "v19-manusa",
+      "revision": 1,
+      "state": "idea",
+      "kind": "new_shared_concept",
+      "lemma": "Mănușă",
+      "label_ro": "Mănușă",
+      "sense": "Obiect de îmbrăcăminte pentru mână; fără extindere necontrolată la sensuri tehnice.",
+      "origin": "remaining_named_backlog",
+      "category_hypothesis": "viata_de_roman",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential shared vocabulary for resolved guesses and truthful adjacency; exposure remains unproved.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": false,
+      "node_id": "n_v1_9_manusa",
+      "planned_forms": [
+        "Mănușă",
+        "mănuși",
+        "mănușile",
+        "mănușii",
+        "mănușilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Mănușă",
+            "key": "manusa",
+            "cald_proxies": [
+              {
+                "public_id": "ctxp_5d59b51af8893e381ad7",
+                "anchor_id": "n_v30_clothing_outer_geaca",
+                "surface": "mănușă",
+                "mapping_kind": "explicit"
+              }
+            ]
+          },
+          {
+            "form": "mănuși",
+            "key": "manusi"
+          },
+          {
+            "form": "mănușile",
+            "key": "manusile"
+          },
+          {
+            "form": "mănușii",
+            "key": "manusii"
+          },
+          {
+            "form": "mănușilor",
+            "key": "manusilor"
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "link_targets": [],
+      "cald_upgrade_candidate": true,
+      "risks": [
+        "Preserve or refresh the prior qualified proxy with the supported writer; no unsupported identity migration."
+      ],
+      "next_action": "Before the first source fetch, name 4–8 truthful link hypotheses with at least two existing main nodes, two same-category neighbors and at most two batch neighbors; then verify sources and forms."
+    },
+    {
+      "id": "v19-gard",
+      "revision": 1,
+      "state": "idea",
+      "kind": "new_shared_concept",
+      "lemma": "Gard",
+      "label_ro": "Gard",
+      "sense": "Împrejmuire a unei proprietăți.",
+      "origin": "remaining_named_backlog",
+      "category_hypothesis": "viata_de_roman",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential shared vocabulary for resolved guesses and truthful adjacency; exposure remains unproved.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": false,
+      "node_id": "n_v1_9_gard",
+      "planned_forms": [
+        "Gard",
+        "gardul",
+        "gardului",
+        "garduri",
+        "gardurile",
+        "gardurilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Gard",
+            "key": "gard"
+          },
+          {
+            "form": "gardul",
+            "key": "gardul"
+          },
+          {
+            "form": "gardului",
+            "key": "gardului"
+          },
+          {
+            "form": "garduri",
+            "key": "garduri"
+          },
+          {
+            "form": "gardurile",
+            "key": "gardurile"
+          },
+          {
+            "form": "gardurilor",
+            "key": "gardurilor"
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "link_targets": [],
+      "next_action": "Before the first source fetch, name 4–8 truthful link hypotheses with at least two existing main nodes, two same-category neighbors and at most two batch neighbors; then verify sources and forms."
+    },
+    {
+      "id": "v19-sofer",
+      "revision": 1,
+      "state": "idea",
+      "kind": "new_shared_concept",
+      "lemma": "Șofer",
+      "label_ro": "Șofer",
+      "sense": "Persoană care conduce un autovehicul.",
+      "origin": "remaining_named_backlog",
+      "category_hypothesis": "viata_de_roman",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential shared vocabulary for resolved guesses and truthful adjacency; exposure remains unproved.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": false,
+      "node_id": "n_v1_9_sofer",
+      "planned_forms": [
+        "Șofer",
+        "șoferul",
+        "șoferului",
+        "șoferi",
+        "șoferii",
+        "șoferilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Șofer",
+            "key": "sofer",
+            "cald_proxies": [
+              {
+                "public_id": "ctxp_47447145618ec886a05d",
+                "anchor_id": "n_v24_transport_personal_masina",
+                "surface": "șofer",
+                "mapping_kind": "domain_fallback"
+              }
+            ]
+          },
+          {
+            "form": "șoferul",
+            "key": "soferul"
+          },
+          {
+            "form": "șoferului",
+            "key": "soferului"
+          },
+          {
+            "form": "șoferi",
+            "key": "soferi"
+          },
+          {
+            "form": "șoferii",
+            "key": "soferii"
+          },
+          {
+            "form": "șoferilor",
+            "key": "soferilor"
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "link_targets": [],
+      "cald_upgrade_candidate": true,
+      "risks": [
+        "Preserve or refresh the prior qualified proxy with the supported writer; no unsupported identity migration."
+      ],
+      "next_action": "Before the first source fetch, name 4–8 truthful link hypotheses with at least two existing main nodes, two same-category neighbors and at most two batch neighbors; then verify sources and forms."
+    },
+    {
+      "id": "v19-bucatar",
+      "revision": 1,
+      "state": "held",
+      "kind": "new_shared_concept",
+      "lemma": "Bucătar",
+      "label_ro": "Bucătar",
+      "sense": "Persoană care pregătește mâncarea.",
+      "origin": "remaining_named_backlog",
+      "category_hypothesis": "gastronomie",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential shared vocabulary for resolved guesses and truthful adjacency; exposure remains unproved.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": false,
+      "node_id": "n_v1_9_bucatar",
+      "planned_forms": [
+        "Bucătar",
+        "bucătarul",
+        "bucătarului",
+        "bucătari",
+        "bucătarii",
+        "bucătarilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Bucătar",
+            "key": "bucatar"
+          },
+          {
+            "form": "bucătarul",
+            "key": "bucatarul"
+          },
+          {
+            "form": "bucătarului",
+            "key": "bucatarului"
+          },
+          {
+            "form": "bucătari",
+            "key": "bucatari"
+          },
+          {
+            "form": "bucătarii",
+            "key": "bucatarii",
+            "index_owner": "n_v4gas_bucatarie",
+            "graph_owners": [
+              {
+                "id": "n_v4gas_bucatarie",
+                "kind": "node_alias",
+                "surface": "bucătării"
+              }
+            ]
+          },
+          {
+            "form": "bucătarilor",
+            "key": "bucatarilor"
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "owned by n_v4gas_bucatarie; establish same sense before missing-forms-only work, never move an alias.",
+      "link_targets": [],
+      "next_action": "Retain this identity/prior hold or rejection; only revisit if the recorded condition actually changes."
+    },
+    {
+      "id": "v19-politist",
+      "revision": 1,
+      "state": "idea",
+      "kind": "new_shared_concept",
+      "lemma": "Polițist",
+      "label_ro": "Polițist",
+      "sense": "Persoană care lucrează în poliție, distinctă de instituție.",
+      "origin": "remaining_named_backlog",
+      "category_hypothesis": "viata_de_roman",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential shared vocabulary for resolved guesses and truthful adjacency; exposure remains unproved.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": false,
+      "node_id": "n_v1_9_politist",
+      "planned_forms": [
+        "Polițist",
+        "polițistul",
+        "polițistului",
+        "polițiști",
+        "polițiștii",
+        "polițiștilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Polițist",
+            "key": "politist"
+          },
+          {
+            "form": "polițistul",
+            "key": "politistul"
+          },
+          {
+            "form": "polițistului",
+            "key": "politistului"
+          },
+          {
+            "form": "polițiști",
+            "key": "politisti"
+          },
+          {
+            "form": "polițiștii",
+            "key": "politistii"
+          },
+          {
+            "form": "polițiștilor",
+            "key": "politistilor"
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "link_targets": [],
+      "next_action": "Before the first source fetch, name 4–8 truthful link hypotheses with at least two existing main nodes, two same-category neighbors and at most two batch neighbors; then verify sources and forms."
+    },
+    {
+      "id": "v19-vanzator",
+      "revision": 1,
+      "state": "idea",
+      "kind": "new_shared_concept",
+      "lemma": "Vânzător",
+      "label_ro": "Vânzător",
+      "sense": "Persoană care vinde produse, distinctă de magazin sau serviciu.",
+      "origin": "remaining_named_backlog",
+      "category_hypothesis": "viata_de_roman",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential shared vocabulary for resolved guesses and truthful adjacency; exposure remains unproved.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": false,
+      "node_id": "n_v1_9_vanzator",
+      "planned_forms": [
+        "Vânzător",
+        "vânzătorul",
+        "vânzătorului",
+        "vânzători",
+        "vânzătorii",
+        "vânzătorilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Vânzător",
+            "key": "vanzator"
+          },
+          {
+            "form": "vânzătorul",
+            "key": "vanzatorul"
+          },
+          {
+            "form": "vânzătorului",
+            "key": "vanzatorului"
+          },
+          {
+            "form": "vânzători",
+            "key": "vanzatori"
+          },
+          {
+            "form": "vânzătorii",
+            "key": "vanzatorii"
+          },
+          {
+            "form": "vânzătorilor",
+            "key": "vanzatorilor"
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "link_targets": [],
+      "next_action": "Before the first source fetch, name 4–8 truthful link hypotheses with at least two existing main nodes, two same-category neighbors and at most two batch neighbors; then verify sources and forms."
+    },
+    {
+      "id": "v19-dragobete",
+      "revision": 1,
+      "state": "idea",
+      "kind": "new_shared_concept",
+      "lemma": "Dragobete",
+      "label_ro": "Dragobete",
+      "sense": "Sărbătoare populară românească; separă sărbătoarea de personajul mitologic dacă sursele cer.",
+      "origin": "remaining_named_backlog",
+      "category_hypothesis": "arta_cultura",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential shared vocabulary for resolved guesses and truthful adjacency; exposure remains unproved.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": false,
+      "node_id": "n_v1_9_dragobete",
+      "planned_forms": [
+        "Dragobete",
+        "Dragobetele",
+        "Dragobetelui",
+        "Dragobeți",
+        "Dragobeții",
+        "Dragobeților"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Dragobete",
+            "key": "dragobete"
+          },
+          {
+            "form": "Dragobetele",
+            "key": "dragobetele"
+          },
+          {
+            "form": "Dragobetelui",
+            "key": "dragobetelui"
+          },
+          {
+            "form": "Dragobeți",
+            "key": "dragobeti"
+          },
+          {
+            "form": "Dragobeții",
+            "key": "dragobetii"
+          },
+          {
+            "form": "Dragobeților",
+            "key": "dragobetilor"
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "link_targets": [],
+      "next_action": "Before the first source fetch, name 4–8 truthful link hypotheses with at least two existing main nodes, two same-category neighbors and at most two batch neighbors; then verify sources and forms."
+    },
+    {
+      "id": "v19-baba-dochia",
+      "revision": 1,
+      "state": "idea",
+      "kind": "new_shared_concept",
+      "lemma": "Baba Dochia",
+      "label_ro": "Baba Dochia",
+      "sense": "Personaj al tradiției populare; cere verificarea exactă a lemei compuse.",
+      "origin": "remaining_named_backlog",
+      "category_hypothesis": "arta_cultura",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential shared vocabulary for resolved guesses and truthful adjacency; exposure remains unproved.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": false,
+      "node_id": "n_v1_9_baba_dochia",
+      "planned_forms": [
+        "Baba Dochia",
+        "Babei Dochia"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Baba Dochia",
+            "key": "baba dochia"
+          },
+          {
+            "form": "Babei Dochia",
+            "key": "babei dochia"
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "link_targets": [],
+      "next_action": "Before the first source fetch, name 4–8 truthful link hypotheses with at least two existing main nodes, two same-category neighbors and at most two batch neighbors; then verify sources and forms."
+    },
+    {
+      "id": "v19-rosu",
+      "revision": 1,
+      "state": "idea",
+      "kind": "new_shared_concept",
+      "lemma": "Roșu",
+      "label_ro": "Roșu",
+      "sense": "Culoare, în paradigma substantivizată singulară restrânsă cerută de proprietar.",
+      "origin": "remaining_named_backlog",
+      "category_hypothesis": "arta_cultura",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential shared vocabulary for resolved guesses and truthful adjacency; exposure remains unproved.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": false,
+      "node_id": "n_v1_9_rosu",
+      "planned_forms": [
+        "Roșu",
+        "roșul",
+        "roșului"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Roșu",
+            "key": "rosu"
+          },
+          {
+            "form": "roșul",
+            "key": "rosul"
+          },
+          {
+            "form": "roșului",
+            "key": "rosului"
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "link_targets": [],
+      "next_action": "Before the first source fetch, name 4–8 truthful link hypotheses with at least two existing main nodes, two same-category neighbors and at most two batch neighbors; then verify sources and forms.",
+      "paradigm_scope": "Restricted substantivized singular colour forms only; no gender/plural expansion is approved.",
+      "excluded_by_owner_scope": [
+        "roșie",
+        "roșii"
+      ],
+      "parent_hypothesis": {
+        "node_id": "n_v4art_culoare",
+        "label": "Culoare",
+        "status": "exists on baseline; verify each child relation"
+      }
+    },
+    {
+      "id": "v19-galben",
+      "revision": 1,
+      "state": "idea",
+      "kind": "new_shared_concept",
+      "lemma": "Galben",
+      "label_ro": "Galben",
+      "sense": "Culoare, în paradigma substantivizată singulară restrânsă cerută de proprietar.",
+      "origin": "remaining_named_backlog",
+      "category_hypothesis": "arta_cultura",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential shared vocabulary for resolved guesses and truthful adjacency; exposure remains unproved.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": false,
+      "node_id": "n_v1_9_galben",
+      "planned_forms": [
+        "Galben",
+        "galbenul",
+        "galbenului"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Galben",
+            "key": "galben"
+          },
+          {
+            "form": "galbenul",
+            "key": "galbenul"
+          },
+          {
+            "form": "galbenului",
+            "key": "galbenului"
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "link_targets": [],
+      "next_action": "Before the first source fetch, name 4–8 truthful link hypotheses with at least two existing main nodes, two same-category neighbors and at most two batch neighbors; then verify sources and forms.",
+      "paradigm_scope": "Restricted substantivized singular colour forms only; no gender/plural expansion is approved.",
+      "parent_hypothesis": {
+        "node_id": "n_v4art_culoare",
+        "label": "Culoare",
+        "status": "exists on baseline; verify each child relation"
+      }
+    },
+    {
+      "id": "v19-albastru",
+      "revision": 1,
+      "state": "idea",
+      "kind": "new_shared_concept",
+      "lemma": "Albastru",
+      "label_ro": "Albastru",
+      "sense": "Culoare, în paradigma substantivizată singulară restrânsă cerută de proprietar.",
+      "origin": "remaining_named_backlog",
+      "category_hypothesis": "arta_cultura",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential shared vocabulary for resolved guesses and truthful adjacency; exposure remains unproved.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": false,
+      "node_id": "n_v1_9_albastru",
+      "planned_forms": [
+        "Albastru",
+        "albastrul",
+        "albastrului"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Albastru",
+            "key": "albastru"
+          },
+          {
+            "form": "albastrul",
+            "key": "albastrul"
+          },
+          {
+            "form": "albastrului",
+            "key": "albastrului"
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "link_targets": [],
+      "next_action": "Before the first source fetch, name 4–8 truthful link hypotheses with at least two existing main nodes, two same-category neighbors and at most two batch neighbors; then verify sources and forms.",
+      "paradigm_scope": "Restricted substantivized singular colour forms only; no gender/plural expansion is approved.",
+      "parent_hypothesis": {
+        "node_id": "n_v4art_culoare",
+        "label": "Culoare",
+        "status": "exists on baseline; verify each child relation"
+      }
+    },
+    {
+      "id": "v19-verde",
+      "revision": 1,
+      "state": "idea",
+      "kind": "new_shared_concept",
+      "lemma": "Verde",
+      "label_ro": "Verde",
+      "sense": "Culoare, în paradigma substantivizată singulară restrânsă cerută de proprietar.",
+      "origin": "remaining_named_backlog",
+      "category_hypothesis": "arta_cultura",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential shared vocabulary for resolved guesses and truthful adjacency; exposure remains unproved.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": false,
+      "node_id": "n_v1_9_verde",
+      "planned_forms": [
+        "Verde",
+        "verdele",
+        "verdelui"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Verde",
+            "key": "verde"
+          },
+          {
+            "form": "verdele",
+            "key": "verdele"
+          },
+          {
+            "form": "verdelui",
+            "key": "verdelui"
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "link_targets": [],
+      "next_action": "Before the first source fetch, name 4–8 truthful link hypotheses with at least two existing main nodes, two same-category neighbors and at most two batch neighbors; then verify sources and forms.",
+      "paradigm_scope": "Restricted substantivized singular colour forms only; no gender/plural expansion is approved.",
+      "parent_hypothesis": {
+        "node_id": "n_v4art_culoare",
+        "label": "Culoare",
+        "status": "exists on baseline; verify each child relation"
+      }
+    },
+    {
+      "id": "v19-hartie",
+      "revision": 1,
+      "state": "held",
+      "kind": "new_shared_concept",
+      "lemma": "Hârtie",
+      "label_ro": "Hârtie",
+      "sense": "Material subțire folosit la scris, tipar și alte utilizări cotidiene.",
+      "origin": "school_home_discovery_extension",
+      "category_hypothesis": "viata_de_roman",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential shared vocabulary for resolved guesses and truthful adjacency; exposure remains unproved.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": false,
+      "node_id": "n_v1_9_hartie",
+      "planned_forms": [
+        "Hârtie",
+        "hârtia",
+        "hârtiei",
+        "hârtii",
+        "hârtiile",
+        "hârtiilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Hârtie",
+            "key": "hartie"
+          },
+          {
+            "form": "hârtia",
+            "key": "hartia"
+          },
+          {
+            "form": "hârtiei",
+            "key": "hartiei"
+          },
+          {
+            "form": "hârtii",
+            "key": "hartii",
+            "index_owner": "n_v3geo_harta",
+            "graph_owners": [
+              {
+                "id": "n_v3geo_harta",
+                "kind": "node_alias",
+                "surface": "hărții"
+              }
+            ]
+          },
+          {
+            "form": "hârtiile",
+            "key": "hartiile"
+          },
+          {
+            "form": "hârtiilor",
+            "key": "hartiilor"
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "owned by n_v3geo_harta; establish same sense before missing-forms-only work, never move an alias.",
+      "link_targets": [],
+      "next_action": "Retain this identity/prior hold or rejection; only revisit if the recorded condition actually changes."
+    },
+    {
+      "id": "v19-ceasca",
+      "revision": 1,
+      "state": "idea",
+      "kind": "new_shared_concept",
+      "lemma": "Ceașcă",
+      "label_ro": "Ceașcă",
+      "sense": "Vas mic pentru băuturi, distinct în uz de cana mai mare.",
+      "origin": "school_home_discovery_extension",
+      "category_hypothesis": "gastronomie",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential shared vocabulary for resolved guesses and truthful adjacency; exposure remains unproved.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": false,
+      "node_id": "n_v1_9_ceasca",
+      "planned_forms": [
+        "Ceașcă",
+        "cești",
+        "ceștile",
+        "ceștii",
+        "ceștilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Ceașcă",
+            "key": "ceasca"
+          },
+          {
+            "form": "cești",
+            "key": "cesti"
+          },
+          {
+            "form": "ceștile",
+            "key": "cestile"
+          },
+          {
+            "form": "ceștii",
+            "key": "cestii"
+          },
+          {
+            "form": "ceștilor",
+            "key": "cestilor"
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "link_targets": [],
+      "next_action": "Before the first source fetch, name 4–8 truthful link hypotheses with at least two existing main nodes, two same-category neighbors and at most two batch neighbors; then verify sources and forms."
+    },
+    {
+      "id": "v19-tava",
+      "revision": 1,
+      "state": "idea",
+      "kind": "new_shared_concept",
+      "lemma": "Tavă",
+      "label_ro": "Tavă",
+      "sense": "Recipient ori suport de bucătărie; delimitează de sensurile tehnice.",
+      "origin": "school_home_discovery_extension",
+      "category_hypothesis": "gastronomie",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential shared vocabulary for resolved guesses and truthful adjacency; exposure remains unproved.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": false,
+      "node_id": "n_v1_9_tava",
+      "planned_forms": [
+        "Tavă",
+        "tăvi",
+        "tăvile",
+        "tăvii",
+        "tăvilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Tavă",
+            "key": "tava",
+            "cald_proxies": [
+              {
+                "public_id": "ctxp_0da09b9a45e5fe4f7eae",
+                "anchor_id": "n_v30_kitchen_cookware_oala",
+                "surface": "tavă",
+                "mapping_kind": "explicit"
+              }
+            ]
+          },
+          {
+            "form": "tăvi",
+            "key": "tavi"
+          },
+          {
+            "form": "tăvile",
+            "key": "tavile"
+          },
+          {
+            "form": "tăvii",
+            "key": "tavii"
+          },
+          {
+            "form": "tăvilor",
+            "key": "tavilor"
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "link_targets": [],
+      "cald_upgrade_candidate": true,
+      "risks": [
+        "Preserve or refresh the prior qualified proxy with the supported writer; no unsupported identity migration."
+      ],
+      "next_action": "Before the first source fetch, name 4–8 truthful link hypotheses with at least two existing main nodes, two same-category neighbors and at most two batch neighbors; then verify sources and forms."
+    },
+    {
+      "id": "v19-polonic",
+      "revision": 1,
+      "state": "idea",
+      "kind": "new_shared_concept",
+      "lemma": "Polonic",
+      "label_ro": "Polonic",
+      "sense": "Ustensilă pentru porționarea mâncării lichide.",
+      "origin": "school_home_discovery_extension",
+      "category_hypothesis": "gastronomie",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential shared vocabulary for resolved guesses and truthful adjacency; exposure remains unproved.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": false,
+      "node_id": "n_v1_9_polonic",
+      "planned_forms": [
+        "Polonic",
+        "polonicul",
+        "polonicului",
+        "polonice",
+        "polonicele",
+        "polonicelor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Polonic",
+            "key": "polonic",
+            "cald_proxies": [
+              {
+                "public_id": "ctxp_aa006498caf30f55439e",
+                "anchor_id": "n_v30_kitchen_utensil_lingura",
+                "surface": "polonic",
+                "mapping_kind": "explicit"
+              }
+            ]
+          },
+          {
+            "form": "polonicul",
+            "key": "polonicul"
+          },
+          {
+            "form": "polonicului",
+            "key": "polonicului"
+          },
+          {
+            "form": "polonice",
+            "key": "polonice"
+          },
+          {
+            "form": "polonicele",
+            "key": "polonicele"
+          },
+          {
+            "form": "polonicelor",
+            "key": "polonicelor"
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "link_targets": [],
+      "cald_upgrade_candidate": true,
+      "risks": [
+        "Preserve or refresh the prior qualified proxy with the supported writer; no unsupported identity migration."
+      ],
+      "next_action": "Before the first source fetch, name 4–8 truthful link hypotheses with at least two existing main nodes, two same-category neighbors and at most two batch neighbors; then verify sources and forms."
+    },
+    {
+      "id": "v19-plapuma",
+      "revision": 1,
+      "state": "idea",
+      "kind": "new_shared_concept",
+      "lemma": "Plapumă",
+      "label_ro": "Plapumă",
+      "sense": "Învelitoare groasă pentru pat; nu o echivala automat cu pătura.",
+      "origin": "school_home_discovery_extension",
+      "category_hypothesis": "viata_de_roman",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential shared vocabulary for resolved guesses and truthful adjacency; exposure remains unproved.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": false,
+      "node_id": "n_v1_9_plapuma",
+      "planned_forms": [
+        "Plapumă",
+        "plăpumi",
+        "plăpumile",
+        "plăpumii",
+        "plăpumilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Plapumă",
+            "key": "plapuma",
+            "cald_proxies": [
+              {
+                "public_id": "ctxp_6eb621cf86c5acf6cde5",
+                "anchor_id": "n_v24_home_textiles_patura",
+                "surface": "plapumă",
+                "mapping_kind": "explicit"
+              }
+            ]
+          },
+          {
+            "form": "plăpumi",
+            "key": "plapumi"
+          },
+          {
+            "form": "plăpumile",
+            "key": "plapumile"
+          },
+          {
+            "form": "plăpumii",
+            "key": "plapumii"
+          },
+          {
+            "form": "plăpumilor",
+            "key": "plapumilor"
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "link_targets": [],
+      "cald_upgrade_candidate": true,
+      "risks": [
+        "Preserve or refresh the prior qualified proxy with the supported writer; no unsupported identity migration."
+      ],
+      "next_action": "Before the first source fetch, name 4–8 truthful link hypotheses with at least two existing main nodes, two same-category neighbors and at most two batch neighbors; then verify sources and forms."
+    },
+    {
+      "id": "v19-palarie",
+      "revision": 1,
+      "state": "idea",
+      "kind": "new_shared_concept",
+      "lemma": "Pălărie",
+      "label_ro": "Pălărie",
+      "sense": "Acoperământ pentru cap, în sensul obiectului de îmbrăcăminte.",
+      "origin": "school_home_discovery_extension",
+      "category_hypothesis": "viata_de_roman",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential shared vocabulary for resolved guesses and truthful adjacency; exposure remains unproved.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": false,
+      "node_id": "n_v1_9_palarie",
+      "planned_forms": [
+        "Pălărie",
+        "pălăria",
+        "pălăriei",
+        "pălării",
+        "pălăriile",
+        "pălăriilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Pălărie",
+            "key": "palarie",
+            "cald_proxies": [
+              {
+                "public_id": "ctxp_1e3632cdd955395e924e",
+                "anchor_id": "n_v29_clothing_everyday_haina",
+                "surface": "pălărie",
+                "mapping_kind": "domain_fallback"
+              }
+            ]
+          },
+          {
+            "form": "pălăria",
+            "key": "palaria"
+          },
+          {
+            "form": "pălăriei",
+            "key": "palariei"
+          },
+          {
+            "form": "pălării",
+            "key": "palarii"
+          },
+          {
+            "form": "pălăriile",
+            "key": "palariile"
+          },
+          {
+            "form": "pălăriilor",
+            "key": "palariilor"
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "link_targets": [],
+      "cald_upgrade_candidate": true,
+      "risks": [
+        "Preserve or refresh the prior qualified proxy with the supported writer; no unsupported identity migration."
+      ],
+      "next_action": "Before the first source fetch, name 4–8 truthful link hypotheses with at least two existing main nodes, two same-category neighbors and at most two batch neighbors; then verify sources and forms."
+    },
+    {
+      "id": "v19-fular",
+      "revision": 1,
+      "state": "idea",
+      "kind": "new_shared_concept",
+      "lemma": "Fular",
+      "label_ro": "Fular",
+      "sense": "Obiect de îmbrăcăminte purtat în jurul gâtului.",
+      "origin": "school_home_discovery_extension",
+      "category_hypothesis": "viata_de_roman",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential shared vocabulary for resolved guesses and truthful adjacency; exposure remains unproved.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": false,
+      "node_id": "n_v1_9_fular",
+      "planned_forms": [
+        "Fular",
+        "fularul",
+        "fularului",
+        "fulare",
+        "fularele",
+        "fularelor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Fular",
+            "key": "fular"
+          },
+          {
+            "form": "fularul",
+            "key": "fularul"
+          },
+          {
+            "form": "fularului",
+            "key": "fularului"
+          },
+          {
+            "form": "fulare",
+            "key": "fulare"
+          },
+          {
+            "form": "fularele",
+            "key": "fularele"
+          },
+          {
+            "form": "fularelor",
+            "key": "fularelor"
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "link_targets": [],
+      "next_action": "Before the first source fetch, name 4–8 truthful link hypotheses with at least two existing main nodes, two same-category neighbors and at most two batch neighbors; then verify sources and forms."
+    },
+    {
+      "id": "v19-gheata",
+      "revision": 1,
+      "state": "idea",
+      "kind": "new_shared_concept",
+      "lemma": "Gheată",
+      "label_ro": "Gheată",
+      "sense": "Încălțăminte; sens diferit de gheață, verificat înaintea oricărei surse.",
+      "origin": "school_home_discovery_extension",
+      "category_hypothesis": "viata_de_roman",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential shared vocabulary for resolved guesses and truthful adjacency; exposure remains unproved.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": false,
+      "node_id": "n_v1_9_gheata",
+      "planned_forms": [
+        "Gheată",
+        "ghetei",
+        "ghete",
+        "ghetele",
+        "ghetelor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Gheată",
+            "key": "gheata"
+          },
+          {
+            "form": "ghetei",
+            "key": "ghetei"
+          },
+          {
+            "form": "ghete",
+            "key": "ghete"
+          },
+          {
+            "form": "ghetele",
+            "key": "ghetele"
+          },
+          {
+            "form": "ghetelor",
+            "key": "ghetelor"
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "link_targets": [],
+      "next_action": "Before the first source fetch, name 4–8 truthful link hypotheses with at least two existing main nodes, two same-category neighbors and at most two batch neighbors; then verify sources and forms.",
+      "risks": [
+        "Footwear gheată and ice gheață fold equal, although no current bare owner was found. The sense and any qualified-label plan require judgment before acceptance; no bare interpretation is approved here."
+      ]
+    },
+    {
+      "id": "v19-curea",
+      "revision": 1,
+      "state": "idea",
+      "kind": "new_shared_concept",
+      "lemma": "Curea",
+      "label_ro": "Curea",
+      "sense": "Curea de îmbrăcăminte, distinctă de transmisia mecanică.",
+      "origin": "school_home_discovery_extension",
+      "category_hypothesis": "viata_de_roman",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential shared vocabulary for resolved guesses and truthful adjacency; exposure remains unproved.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": false,
+      "node_id": "n_v1_9_curea",
+      "planned_forms": [
+        "Curea",
+        "cureaua",
+        "curelei",
+        "curele",
+        "curelele",
+        "curelelor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Curea",
+            "key": "curea",
+            "cald_proxies": [
+              {
+                "public_id": "ctxp_479720d1d1a4c3c57270",
+                "anchor_id": "n_v30_clothing_everyday_pantaloni",
+                "surface": "curea",
+                "mapping_kind": "explicit"
+              }
+            ]
+          },
+          {
+            "form": "cureaua",
+            "key": "cureaua"
+          },
+          {
+            "form": "curelei",
+            "key": "curelei"
+          },
+          {
+            "form": "curele",
+            "key": "curele"
+          },
+          {
+            "form": "curelele",
+            "key": "curelele"
+          },
+          {
+            "form": "curelelor",
+            "key": "curelelor"
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "link_targets": [],
+      "cald_upgrade_candidate": true,
+      "risks": [
+        "Preserve or refresh the prior qualified proxy with the supported writer; no unsupported identity migration."
+      ],
+      "next_action": "Before the first source fetch, name 4–8 truthful link hypotheses with at least two existing main nodes, two same-category neighbors and at most two batch neighbors; then verify sources and forms."
+    },
+    {
+      "id": "v19-invatator",
+      "revision": 1,
+      "state": "idea",
+      "kind": "new_shared_concept",
+      "lemma": "Învățător",
+      "label_ro": "Învățător",
+      "sense": "Cadru didactic din învățământul primar, fără echivalare automată cu profesorul.",
+      "origin": "school_home_discovery_extension",
+      "category_hypothesis": "viata_de_roman",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential shared vocabulary for resolved guesses and truthful adjacency; exposure remains unproved.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": false,
+      "node_id": "n_v1_9_invatator",
+      "planned_forms": [
+        "Învățător",
+        "învățătorul",
+        "învățătorului",
+        "învățători",
+        "învățătorii",
+        "învățătorilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Învățător",
+            "key": "invatator",
+            "cald_proxies": [
+              {
+                "public_id": "ctxp_d737d13dccb84c9e9045",
+                "anchor_id": "n_v3soc_scoala",
+                "surface": "învățător",
+                "mapping_kind": "domain_fallback"
+              }
+            ]
+          },
+          {
+            "form": "învățătorul",
+            "key": "invatatorul"
+          },
+          {
+            "form": "învățătorului",
+            "key": "invatatorului"
+          },
+          {
+            "form": "învățători",
+            "key": "invatatori"
+          },
+          {
+            "form": "învățătorii",
+            "key": "invatatorii"
+          },
+          {
+            "form": "învățătorilor",
+            "key": "invatatorilor"
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "link_targets": [],
+      "cald_upgrade_candidate": true,
+      "risks": [
+        "Preserve or refresh the prior qualified proxy with the supported writer; no unsupported identity migration."
+      ],
+      "next_action": "Before the first source fetch, name 4–8 truthful link hypotheses with at least two existing main nodes, two same-category neighbors and at most two batch neighbors; then verify sources and forms."
+    },
+    {
+      "id": "v19-frizer",
+      "revision": 1,
+      "state": "idea",
+      "kind": "new_shared_concept",
+      "lemma": "Frizer",
+      "label_ro": "Frizer",
+      "sense": "Persoană care tunde și aranjează părul.",
+      "origin": "school_home_discovery_extension",
+      "category_hypothesis": "viata_de_roman",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential shared vocabulary for resolved guesses and truthful adjacency; exposure remains unproved.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": false,
+      "node_id": "n_v1_9_frizer",
+      "planned_forms": [
+        "Frizer",
+        "frizerul",
+        "frizerului",
+        "frizeri",
+        "frizerii",
+        "frizerilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Frizer",
+            "key": "frizer"
+          },
+          {
+            "form": "frizerul",
+            "key": "frizerul"
+          },
+          {
+            "form": "frizerului",
+            "key": "frizerului"
+          },
+          {
+            "form": "frizeri",
+            "key": "frizeri"
+          },
+          {
+            "form": "frizerii",
+            "key": "frizerii"
+          },
+          {
+            "form": "frizerilor",
+            "key": "frizerilor"
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "link_targets": [],
+      "next_action": "Before the first source fetch, name 4–8 truthful link hypotheses with at least two existing main nodes, two same-category neighbors and at most two batch neighbors; then verify sources and forms."
+    },
+    {
+      "id": "v19-valiza",
+      "revision": 1,
+      "state": "idea",
+      "kind": "new_shared_concept",
+      "lemma": "Valiză",
+      "label_ro": "Valiză",
+      "sense": "Bagaj rigid ori semirigid; geamantan rămâne o propunere separată după stabilirea proprietarului.",
+      "origin": "school_home_discovery_extension",
+      "category_hypothesis": "viata_de_roman",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential shared vocabulary for resolved guesses and truthful adjacency; exposure remains unproved.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": false,
+      "node_id": "n_v1_9_valiza",
+      "planned_forms": [
+        "Valiză",
+        "valizei",
+        "valize",
+        "valizele",
+        "valizelor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Valiză",
+            "key": "valiza"
+          },
+          {
+            "form": "valizei",
+            "key": "valizei"
+          },
+          {
+            "form": "valize",
+            "key": "valize"
+          },
+          {
+            "form": "valizele",
+            "key": "valizele"
+          },
+          {
+            "form": "valizelor",
+            "key": "valizelor"
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "link_targets": [],
+      "next_action": "Before the first source fetch, name 4–8 truthful link hypotheses with at least two existing main nodes, two same-category neighbors and at most two batch neighbors; then verify sources and forms."
+    },
+    {
+      "id": "v19-input-caiet",
+      "revision": 1,
+      "state": "idea",
+      "kind": "accepted_form_family",
+      "lemma": "Caiet",
+      "label_ro": "Caiet → Caiet",
+      "sense": "Concept cotidian din grupul «obiecte pentru scris»: Caiet.",
+      "origin": "school_home_discovery_extension",
+      "category_hypothesis": "viata_de_roman",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential non-colliding inputs for an existing concept.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": true,
+      "owner_id": "n_v24_school_writing_caiet",
+      "planned_forms": [
+        "Caiet",
+        "caietul",
+        "caietului",
+        "caiete",
+        "caietele",
+        "caietelor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Caiet",
+            "key": "caiet",
+            "index_owner": "n_v24_school_writing_caiet",
+            "graph_owners": [
+              {
+                "id": "n_v24_school_writing_caiet",
+                "kind": "node_label",
+                "surface": "Caiet"
+              },
+              {
+                "id": "n_v24_school_writing_caiet",
+                "kind": "labels",
+                "surface": "Caiet"
+              }
+            ]
+          },
+          {
+            "form": "caietul",
+            "key": "caietul",
+            "index_owner": "n_v24_school_writing_caiet",
+            "graph_owners": [
+              {
+                "id": "n_v24_school_writing_caiet",
+                "kind": "node_alias",
+                "surface": "caietul"
+              }
+            ]
+          },
+          {
+            "form": "caietului",
+            "key": "caietului"
+          },
+          {
+            "form": "caiete",
+            "key": "caiete",
+            "index_owner": "n_v24_school_writing_caiet",
+            "graph_owners": [
+              {
+                "id": "n_v24_school_writing_caiet",
+                "kind": "node_alias",
+                "surface": "caiete"
+              }
+            ]
+          },
+          {
+            "form": "caietele",
+            "key": "caietele",
+            "index_owner": "n_v24_school_writing_caiet",
+            "graph_owners": [
+              {
+                "id": "n_v24_school_writing_caiet",
+                "kind": "node_alias",
+                "surface": "caietele"
+              }
+            ]
+          },
+          {
+            "form": "caietelor",
+            "key": "caietelor"
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "already_resolved_forms": [
+        "Caiet",
+        "caietul",
+        "caiete",
+        "caietele"
+      ],
+      "proposed_forms": [
+        "caietului",
+        "caietelor"
+      ],
+      "next_action": "Verify exact lemma/sense and missing forms on dexonline plus a second source; preserve the existing owner."
+    },
+    {
+      "id": "v19-input-creion",
+      "revision": 1,
+      "state": "idea",
+      "kind": "accepted_form_family",
+      "lemma": "Creion",
+      "label_ro": "Creion → Creion",
+      "sense": "Concept cotidian din grupul «obiecte pentru scris»: Creion.",
+      "origin": "school_home_discovery_extension",
+      "category_hypothesis": "viata_de_roman",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential non-colliding inputs for an existing concept.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": true,
+      "owner_id": "n_v24_school_writing_creion",
+      "planned_forms": [
+        "Creion",
+        "creionul",
+        "creionului",
+        "creioane",
+        "creioanele",
+        "creioanelor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Creion",
+            "key": "creion",
+            "index_owner": "n_v24_school_writing_creion",
+            "graph_owners": [
+              {
+                "id": "n_v24_school_writing_creion",
+                "kind": "node_label",
+                "surface": "Creion"
+              },
+              {
+                "id": "n_v24_school_writing_creion",
+                "kind": "labels",
+                "surface": "Creion"
+              }
+            ]
+          },
+          {
+            "form": "creionul",
+            "key": "creionul",
+            "index_owner": "n_v24_school_writing_creion",
+            "graph_owners": [
+              {
+                "id": "n_v24_school_writing_creion",
+                "kind": "node_alias",
+                "surface": "creionul"
+              }
+            ]
+          },
+          {
+            "form": "creionului",
+            "key": "creionului"
+          },
+          {
+            "form": "creioane",
+            "key": "creioane",
+            "index_owner": "n_v24_school_writing_creion",
+            "graph_owners": [
+              {
+                "id": "n_v24_school_writing_creion",
+                "kind": "node_alias",
+                "surface": "creioane"
+              }
+            ]
+          },
+          {
+            "form": "creioanele",
+            "key": "creioanele",
+            "index_owner": "n_v24_school_writing_creion",
+            "graph_owners": [
+              {
+                "id": "n_v24_school_writing_creion",
+                "kind": "node_alias",
+                "surface": "creioanele"
+              }
+            ]
+          },
+          {
+            "form": "creioanelor",
+            "key": "creioanelor"
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "already_resolved_forms": [
+        "Creion",
+        "creionul",
+        "creioane",
+        "creioanele"
+      ],
+      "proposed_forms": [
+        "creionului",
+        "creioanelor"
+      ],
+      "next_action": "Verify exact lemma/sense and missing forms on dexonline plus a second source; preserve the existing owner."
+    },
+    {
+      "id": "v19-input-stilou",
+      "revision": 1,
+      "state": "idea",
+      "kind": "accepted_form_family",
+      "lemma": "Stilou",
+      "label_ro": "Stilou → Stilou",
+      "sense": "Concept cotidian din grupul «rechizite școlare»: Stilou.",
+      "origin": "school_home_discovery_extension",
+      "category_hypothesis": "viata_de_roman",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential non-colliding inputs for an existing concept.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": true,
+      "owner_id": "n_v24_school_supplies_stilou",
+      "planned_forms": [
+        "Stilou",
+        "stiloul",
+        "stiloului",
+        "stilouri",
+        "stilourile",
+        "stilourilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Stilou",
+            "key": "stilou",
+            "index_owner": "n_v24_school_supplies_stilou",
+            "graph_owners": [
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "kind": "node_label",
+                "surface": "Stilou"
+              },
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "kind": "labels",
+                "surface": "Stilou"
+              }
+            ]
+          },
+          {
+            "form": "stiloul",
+            "key": "stiloul",
+            "index_owner": "n_v24_school_supplies_stilou",
+            "graph_owners": [
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "kind": "node_alias",
+                "surface": "stiloul"
+              }
+            ]
+          },
+          {
+            "form": "stiloului",
+            "key": "stiloului"
+          },
+          {
+            "form": "stilouri",
+            "key": "stilouri",
+            "index_owner": "n_v24_school_supplies_stilou",
+            "graph_owners": [
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "kind": "node_alias",
+                "surface": "stilouri"
+              }
+            ]
+          },
+          {
+            "form": "stilourile",
+            "key": "stilourile",
+            "index_owner": "n_v24_school_supplies_stilou",
+            "graph_owners": [
+              {
+                "id": "n_v24_school_supplies_stilou",
+                "kind": "node_alias",
+                "surface": "stilourile"
+              }
+            ]
+          },
+          {
+            "form": "stilourilor",
+            "key": "stilourilor"
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "already_resolved_forms": [
+        "Stilou",
+        "stiloul",
+        "stilouri",
+        "stilourile"
+      ],
+      "proposed_forms": [
+        "stiloului",
+        "stilourilor"
+      ],
+      "next_action": "Verify exact lemma/sense and missing forms on dexonline plus a second source; preserve the existing owner."
+    },
+    {
+      "id": "v19-input-penar",
+      "revision": 1,
+      "state": "idea",
+      "kind": "accepted_form_family",
+      "lemma": "Penar",
+      "label_ro": "Penar → Penar",
+      "sense": "Etui pentru instrumentele de scris, întâlnit în mod obișnuit printre rechizitele unui elev.",
+      "origin": "school_home_discovery_extension",
+      "category_hypothesis": "viata_de_roman",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential non-colliding inputs for an existing concept.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": true,
+      "owner_id": "n_v23via_penar",
+      "planned_forms": [
+        "Penar",
+        "penarul",
+        "penarului",
+        "penare",
+        "penarele",
+        "penarelor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Penar",
+            "key": "penar",
+            "index_owner": "n_v23via_penar",
+            "graph_owners": [
+              {
+                "id": "n_v23via_penar",
+                "kind": "node_label",
+                "surface": "Penar"
+              },
+              {
+                "id": "n_v23via_penar",
+                "kind": "labels",
+                "surface": "Penar"
+              }
+            ]
+          },
+          {
+            "form": "penarul",
+            "key": "penarul",
+            "index_owner": "n_v23via_penar",
+            "graph_owners": [
+              {
+                "id": "n_v23via_penar",
+                "kind": "node_alias",
+                "surface": "penarul"
+              }
+            ]
+          },
+          {
+            "form": "penarului",
+            "key": "penarului"
+          },
+          {
+            "form": "penare",
+            "key": "penare"
+          },
+          {
+            "form": "penarele",
+            "key": "penarele"
+          },
+          {
+            "form": "penarelor",
+            "key": "penarelor"
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "already_resolved_forms": [
+        "Penar",
+        "penarul"
+      ],
+      "proposed_forms": [
+        "penarului",
+        "penare",
+        "penarele",
+        "penarelor"
+      ],
+      "next_action": "Verify exact lemma/sense and missing forms on dexonline plus a second source; preserve the existing owner."
+    },
+    {
+      "id": "v19-input-rigla",
+      "revision": 1,
+      "state": "idea",
+      "kind": "accepted_form_family",
+      "lemma": "Riglă",
+      "label_ro": "Riglă → Riglă",
+      "sense": "Concept cotidian din grupul «rechizite școlare»: Riglă.",
+      "origin": "school_home_discovery_extension",
+      "category_hypothesis": "viata_de_roman",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential non-colliding inputs for an existing concept.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": true,
+      "owner_id": "n_v24_school_supplies_rigla",
+      "planned_forms": [
+        "Riglă",
+        "riglei",
+        "rigle",
+        "riglele",
+        "riglelor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Riglă",
+            "key": "rigla",
+            "index_owner": "n_v24_school_supplies_rigla",
+            "graph_owners": [
+              {
+                "id": "n_v24_school_supplies_rigla",
+                "kind": "node_label",
+                "surface": "Riglă"
+              },
+              {
+                "id": "n_v24_school_supplies_rigla",
+                "kind": "labels",
+                "surface": "Riglă"
+              }
+            ]
+          },
+          {
+            "form": "riglei",
+            "key": "riglei"
+          },
+          {
+            "form": "rigle",
+            "key": "rigle",
+            "index_owner": "n_v24_school_supplies_rigla",
+            "graph_owners": [
+              {
+                "id": "n_v24_school_supplies_rigla",
+                "kind": "node_alias",
+                "surface": "rigle"
+              }
+            ]
+          },
+          {
+            "form": "riglele",
+            "key": "riglele",
+            "index_owner": "n_v24_school_supplies_rigla",
+            "graph_owners": [
+              {
+                "id": "n_v24_school_supplies_rigla",
+                "kind": "node_alias",
+                "surface": "riglele"
+              }
+            ]
+          },
+          {
+            "form": "riglelor",
+            "key": "riglelor"
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "already_resolved_forms": [
+        "Riglă",
+        "rigle",
+        "riglele"
+      ],
+      "proposed_forms": [
+        "riglei",
+        "riglelor"
+      ],
+      "next_action": "Verify exact lemma/sense and missing forms on dexonline plus a second source; preserve the existing owner."
+    },
+    {
+      "id": "v19-input-radiera",
+      "revision": 1,
+      "state": "idea",
+      "kind": "accepted_form_family",
+      "lemma": "Radieră",
+      "label_ro": "Radieră → Radieră",
+      "sense": "Concept cotidian din grupul «rechizite școlare»: Radieră.",
+      "origin": "school_home_discovery_extension",
+      "category_hypothesis": "viata_de_roman",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential non-colliding inputs for an existing concept.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": true,
+      "owner_id": "n_v24_school_supplies_radiera",
+      "planned_forms": [
+        "Radieră",
+        "radierei",
+        "radiere",
+        "radierele",
+        "radierelor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Radieră",
+            "key": "radiera",
+            "index_owner": "n_v24_school_supplies_radiera",
+            "graph_owners": [
+              {
+                "id": "n_v24_school_supplies_radiera",
+                "kind": "node_label",
+                "surface": "Radieră"
+              },
+              {
+                "id": "n_v24_school_supplies_radiera",
+                "kind": "labels",
+                "surface": "Radieră"
+              }
+            ]
+          },
+          {
+            "form": "radierei",
+            "key": "radierei"
+          },
+          {
+            "form": "radiere",
+            "key": "radiere",
+            "index_owner": "n_v24_school_supplies_radiera",
+            "graph_owners": [
+              {
+                "id": "n_v24_school_supplies_radiera",
+                "kind": "node_alias",
+                "surface": "radiere"
+              }
+            ]
+          },
+          {
+            "form": "radierele",
+            "key": "radierele"
+          },
+          {
+            "form": "radierelor",
+            "key": "radierelor"
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "already_resolved_forms": [
+        "Radieră",
+        "radiere"
+      ],
+      "proposed_forms": [
+        "radierei",
+        "radierele",
+        "radierelor"
+      ],
+      "next_action": "Verify exact lemma/sense and missing forms on dexonline plus a second source; preserve the existing owner."
+    },
+    {
+      "id": "v19-input-ghiozdan",
+      "revision": 1,
+      "state": "idea",
+      "kind": "accepted_form_family",
+      "lemma": "Ghiozdan",
+      "label_ro": "Ghiozdan → Ghiozdan",
+      "sense": "Geantă purtată pe spate în care elevii își duc la școală manualele, caietele și rechizitele.",
+      "origin": "school_home_discovery_extension",
+      "category_hypothesis": "viata_de_roman",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential non-colliding inputs for an existing concept.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": true,
+      "owner_id": "n_v23via_ghiozdan",
+      "planned_forms": [
+        "Ghiozdan",
+        "ghiozdanul",
+        "ghiozdanului",
+        "ghiozdane",
+        "ghiozdanele",
+        "ghiozdanelor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Ghiozdan",
+            "key": "ghiozdan",
+            "index_owner": "n_v23via_ghiozdan",
+            "graph_owners": [
+              {
+                "id": "n_v23via_ghiozdan",
+                "kind": "node_label",
+                "surface": "Ghiozdan"
+              },
+              {
+                "id": "n_v23via_ghiozdan",
+                "kind": "labels",
+                "surface": "Ghiozdan"
+              }
+            ]
+          },
+          {
+            "form": "ghiozdanul",
+            "key": "ghiozdanul",
+            "index_owner": "n_v23via_ghiozdan",
+            "graph_owners": [
+              {
+                "id": "n_v23via_ghiozdan",
+                "kind": "node_alias",
+                "surface": "ghiozdanul"
+              }
+            ]
+          },
+          {
+            "form": "ghiozdanului",
+            "key": "ghiozdanului"
+          },
+          {
+            "form": "ghiozdane",
+            "key": "ghiozdane"
+          },
+          {
+            "form": "ghiozdanele",
+            "key": "ghiozdanele"
+          },
+          {
+            "form": "ghiozdanelor",
+            "key": "ghiozdanelor"
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "already_resolved_forms": [
+        "Ghiozdan",
+        "ghiozdanul"
+      ],
+      "proposed_forms": [
+        "ghiozdanului",
+        "ghiozdane",
+        "ghiozdanele",
+        "ghiozdanelor"
+      ],
+      "next_action": "Verify exact lemma/sense and missing forms on dexonline plus a second source; preserve the existing owner."
+    },
+    {
+      "id": "v19-input-castravete",
+      "revision": 1,
+      "state": "idea",
+      "kind": "accepted_form_family",
+      "lemma": "Castravete",
+      "label_ro": "Castravete → Castravete",
+      "sense": "Concept cotidian din grupul «legume pentru salată»: Castravete.",
+      "origin": "school_home_discovery_extension",
+      "category_hypothesis": "gastronomie",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential non-colliding inputs for an existing concept.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": true,
+      "owner_id": "n_v24_food_salad_veg_castravete",
+      "planned_forms": [
+        "Castravete",
+        "castravetele",
+        "castravetelui",
+        "castraveți",
+        "castraveții",
+        "castraveților"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Castravete",
+            "key": "castravete",
+            "index_owner": "n_v24_food_salad_veg_castravete",
+            "graph_owners": [
+              {
+                "id": "n_v24_food_salad_veg_castravete",
+                "kind": "node_label",
+                "surface": "Castravete"
+              },
+              {
+                "id": "n_v24_food_salad_veg_castravete",
+                "kind": "labels",
+                "surface": "Castravete"
+              }
+            ],
+            "world_owners": [
+              {
+                "id": "n_v24_food_salad_veg_castravete",
+                "label": "Castravete",
+                "snapshot_id": "n_v24_food_salad_veg_castravete"
+              }
+            ]
+          },
+          {
+            "form": "castravetele",
+            "key": "castravetele",
+            "index_owner": "n_v24_food_salad_veg_castravete",
+            "graph_owners": [
+              {
+                "id": "n_v24_food_salad_veg_castravete",
+                "kind": "node_alias",
+                "surface": "castravetele"
+              }
+            ],
+            "world_owners": [
+              {
+                "id": "n_v24_food_salad_veg_castravete",
+                "label": "Castravete",
+                "snapshot_id": "n_v24_food_salad_veg_castravete"
+              }
+            ]
+          },
+          {
+            "form": "castravetelui",
+            "key": "castravetelui"
+          },
+          {
+            "form": "castraveți",
+            "key": "castraveti",
+            "index_owner": "n_v24_food_salad_veg_castravete",
+            "graph_owners": [
+              {
+                "id": "n_v24_food_salad_veg_castravete",
+                "kind": "node_alias",
+                "surface": "castraveți"
+              }
+            ],
+            "world_owners": [
+              {
+                "id": "n_v24_food_salad_veg_castravete",
+                "label": "Castravete",
+                "snapshot_id": "n_v24_food_salad_veg_castravete"
+              }
+            ]
+          },
+          {
+            "form": "castraveții",
+            "key": "castravetii",
+            "index_owner": "n_v24_food_salad_veg_castravete",
+            "graph_owners": [
+              {
+                "id": "n_v24_food_salad_veg_castravete",
+                "kind": "node_alias",
+                "surface": "castraveții"
+              }
+            ],
+            "world_owners": [
+              {
+                "id": "n_v24_food_salad_veg_castravete",
+                "label": "Castravete",
+                "snapshot_id": "n_v24_food_salad_veg_castravete"
+              }
+            ]
+          },
+          {
+            "form": "castraveților",
+            "key": "castravetilor"
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "already_resolved_forms": [
+        "Castravete",
+        "castravetele",
+        "castraveți",
+        "castraveții"
+      ],
+      "proposed_forms": [
+        "castravetelui",
+        "castraveților"
+      ],
+      "next_action": "Verify exact lemma/sense and missing forms on dexonline plus a second source; preserve the existing owner."
+    },
+    {
+      "id": "v19-input-pat",
+      "revision": 1,
+      "state": "held",
+      "kind": "accepted_form_family",
+      "lemma": "Pat",
+      "label_ro": "Pat → Pat",
+      "sense": "Concept cotidian din grupul «obiecte pentru somn»: Pat.",
+      "origin": "school_home_discovery_extension",
+      "category_hypothesis": "viata_de_roman",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential non-colliding inputs for an existing concept.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": false,
+      "owner_id": "n_v24_home_bed_pat",
+      "planned_forms": [
+        "Pat",
+        "patul",
+        "patului",
+        "paturi",
+        "paturile",
+        "paturilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Pat",
+            "key": "pat",
+            "index_owner": "n_v24_home_bed_pat",
+            "graph_owners": [
+              {
+                "id": "n_v24_home_bed_pat",
+                "kind": "node_label",
+                "surface": "Pat"
+              },
+              {
+                "id": "n_v24_home_bed_pat",
+                "kind": "labels",
+                "surface": "Pat"
+              }
+            ]
+          },
+          {
+            "form": "patul",
+            "key": "patul",
+            "index_owner": "n_v24_home_bed_pat",
+            "graph_owners": [
+              {
+                "id": "n_v24_home_bed_pat",
+                "kind": "node_alias",
+                "surface": "patul"
+              }
+            ]
+          },
+          {
+            "form": "patului",
+            "key": "patului",
+            "index_owner": "n_v24_home_bed_pat",
+            "graph_owners": [
+              {
+                "id": "n_v24_home_bed_pat",
+                "kind": "node_alias",
+                "surface": "patului"
+              }
+            ]
+          },
+          {
+            "form": "paturi",
+            "key": "paturi",
+            "index_owner": "n_v24_home_textiles_patura",
+            "graph_owners": [
+              {
+                "id": "n_v24_home_textiles_patura",
+                "kind": "node_alias",
+                "surface": "pături"
+              }
+            ]
+          },
+          {
+            "form": "paturile",
+            "key": "paturile",
+            "deferred": [
+              "păturile"
+            ]
+          },
+          {
+            "form": "paturilor",
+            "key": "paturilor",
+            "deferred": [
+              "păturilor"
+            ]
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "Deferred ambiguous input forms require owner/sense resolution; do not override the live ambiguity policy.",
+      "already_resolved_forms": [
+        "Pat",
+        "patul",
+        "patului"
+      ],
+      "proposed_forms": [
+        "paturi",
+        "paturile",
+        "paturilor"
+      ],
+      "next_action": "Retain this identity/prior hold or rejection; only revisit if the recorded condition actually changes."
+    },
+    {
+      "id": "v19-input-pantalon",
+      "revision": 1,
+      "state": "idea",
+      "kind": "accepted_form_family",
+      "lemma": "Pantalon",
+      "label_ro": "Pantalon → Pantaloni",
+      "sense": "Haină purtată de la talie în jos, cu câte o parte pentru fiecare picior.",
+      "origin": "school_home_discovery_extension",
+      "category_hypothesis": "viata_de_roman",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Potential non-colliding inputs for an existing concept.",
+      "sources": [],
+      "checked_on": "2026-10-11",
+      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "research_ready": true,
+      "owner_id": "n_v30_clothing_everyday_pantaloni",
+      "planned_forms": [
+        "Pantaloni",
+        "pantalon",
+        "pantalonul",
+        "pantalonului",
+        "pantalonii",
+        "pantalonilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "Pantaloni",
+            "key": "pantaloni",
+            "index_owner": "n_v30_clothing_everyday_pantaloni",
+            "graph_owners": [
+              {
+                "id": "n_v30_clothing_everyday_pantaloni",
+                "kind": "node_label",
+                "surface": "Pantaloni"
+              },
+              {
+                "id": "n_v30_clothing_everyday_pantaloni",
+                "kind": "labels",
+                "surface": "Pantaloni"
+              }
+            ]
+          },
+          {
+            "form": "pantalon",
+            "key": "pantalon",
+            "index_owner": "n_v30_clothing_everyday_pantaloni",
+            "graph_owners": [
+              {
+                "id": "n_v30_clothing_everyday_pantaloni",
+                "kind": "node_alias",
+                "surface": "pantalon"
+              }
+            ]
+          },
+          {
+            "form": "pantalonul",
+            "key": "pantalonul",
+            "index_owner": "n_v30_clothing_everyday_pantaloni",
+            "graph_owners": [
+              {
+                "id": "n_v30_clothing_everyday_pantaloni",
+                "kind": "node_alias",
+                "surface": "pantalonul"
+              }
+            ]
+          },
+          {
+            "form": "pantalonului",
+            "key": "pantalonului"
+          },
+          {
+            "form": "pantalonii",
+            "key": "pantalonii",
+            "index_owner": "n_v30_clothing_everyday_pantaloni",
+            "graph_owners": [
+              {
+                "id": "n_v30_clothing_everyday_pantaloni",
+                "kind": "node_alias",
+                "surface": "pantalonii"
+              }
+            ]
+          },
+          {
+            "form": "pantalonilor",
+            "key": "pantalonilor",
+            "index_owner": "n_v30_clothing_everyday_pantaloni",
+            "graph_owners": [
+              {
+                "id": "n_v30_clothing_everyday_pantaloni",
+                "kind": "node_alias",
+                "surface": "pantalonilor"
+              }
+            ]
+          }
+        ]
+      },
+      "prior_records": [],
+      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "already_resolved_forms": [
+        "Pantaloni",
+        "pantalon",
+        "pantalonul",
+        "pantalonii",
+        "pantalonilor"
+      ],
+      "proposed_forms": [
+        "pantalonului"
+      ],
+      "next_action": "Verify exact lemma/sense and missing forms on dexonline plus a second source; preserve the existing owner."
+    }
+  ],
+  "counts": {
+    "records": 40,
+    "idea": 37,
+    "held": 3,
+    "accepted": 0,
+    "installed": 0,
+    "planned_unique_forms": 213,
+    "proposed_existing_owner_forms": 25,
+    "researched": 0
+  }
+}
