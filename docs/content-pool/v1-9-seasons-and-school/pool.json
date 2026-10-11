@@ -3,7 +3,7 @@
   "theme": "v1-9-seasons-and-school",
   "baseline_commit": "3f327c60c80919f98cf9eb8a9af613484a0258cb",
   "procedure_rev": "17b97a2",
-  "scope": "Step 1 only: the 18 usable named backlog candidates fill first, then the exhausted usable list is extended by 22 school/home discovery proposals. No web call, acceptance or installation. No main label/description/category changes.",
+  "scope": "Step 2 research in progress: 12 pre-screened records researched, 25 remain ideas and 3 identity holds. No acceptance or installation; standing go still requires independent factual and quality batch reviews.",
   "input_policy_baseline": {
     "module": "scripts/everyday_core_v1_8_data.py",
     "removed_deferred_terms": [
@@ -147,8 +147,8 @@
   "records": [
     {
       "id": "v19-primavara",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Primăvară",
       "label_ro": "Primăvară",
@@ -159,10 +159,43 @@
         "Cald sau Rece",
         "Lanțul Cuvintelor"
       ],
-      "player_benefit": "Potential shared vocabulary for resolved guesses and truthful adjacency; exposure remains unproved.",
-      "sources": [],
+      "player_benefit": "A real shared concept could replace the existing Cald projection and provide an honest Lanț bridge; no installed exposure is claimed yet.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/prim%C4%83var%C4%83/json",
+          "paraphrase": "Anotimpul dintre iarnă și vară este sensul substantival; adverbele și folosirile figurate nu justifică intrări suplimentare.",
+          "authority": "DEX '09",
+          "definition_id": "878220"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/prim%C4%83var%C4%83/json",
+          "paraphrase": "DOOM 3 confirmă substantivul și pluralul normativ; paradigma regulată de caz și articulare este păstrată fără dubluri de normalizare.",
+          "authority": "DOOM 3",
+          "definition_id": "1285054"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Prim%C4%83var%C4%83",
+          "paraphrase": "În climatul temperat, primăvara urmează iernii și precedă vara.",
+          "role": "second_source"
+        },
+        {
+          "url": "https://horticultura.ro/ghiocelul/",
+          "paraphrase": "Ghiocelul comun înflorește la sfârșitul iernii și începutul primăverii, adesea în februarie.",
+          "role": "link_source"
+        },
+        {
+          "url": "https://www.sor.ro/frasinul/",
+          "paraphrase": "Frasinul înfrunzește relativ târziu primăvara; legătura privește arbori foioși, fără generalizare la toți arborii.",
+          "role": "link_source"
+        },
+        {
+          "url": "https://cimec.ro/etnografie2/sarbatori-si-obiceiuri-traditionale/sarbatorile-de-primavara/martisorul/",
+          "paraphrase": "Obiceiul Mărțișorului de 1 martie exprimă bucuria sosirii primăverii; este o asociere culturală, nu o limită astronomică.",
+          "role": "link_source"
+        }
+      ],
       "checked_on": "2026-10-11",
-      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "form_status": "DOOM 3 exact noun headword and normative plural/genitive checked. Regular article/case endings follow that paradigm; equal-fold noun/article spellings are represented once.",
       "research_ready": true,
       "node_id": "n_v1_9_primavara",
       "planned_forms": [
@@ -214,35 +247,51 @@
           "next_action": "Reuse retained source facts after current parent lands; re-screen forms and dependencies on the new baseline."
         }
       ],
-      "decision": "Prior structural hold can be reconsidered: Anotimp is now on main. Recheck the retained source claims and every current form; no acceptance is inherited.",
+      "decision": "Exact noun sense, DOOM 3 forms and predeclared links checked with qualified source scopes; independent factual and quality review still pending.",
       "link_targets": [
         {
           "node_id": "n_v1_8_anotimp",
           "label": "Anotimp",
           "status": "exists on landed wave_base",
           "claim_to_verify": "is a season",
-          "category": "stiinta"
+          "category": "stiinta",
+          "verified_relation": "is_a",
+          "proposed_label_ro": "Primăvara este un anotimp.",
+          "source_url": "https://dexonline.ro/definitie/prim%C4%83var%C4%83/json",
+          "verification": "Supported within the caption scope; target identity unchanged."
         },
         {
           "node_id": "n_v42vdr_ghiocel",
           "label": "Ghiocelul",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "early spring flowering"
+          "claim_to_verify": "early spring flowering",
+          "verified_relation": "related_to",
+          "proposed_label_ro": "La începutul primăverii înflorește ghiocelul, care poate apărea încă de la sfârșitul iernii.",
+          "source_url": "https://horticultura.ro/ghiocelul/",
+          "verification": "Supported within the caption scope; target identity unchanged."
         },
         {
           "node_id": "n_v4sti_frunza",
           "label": "frunză",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "leaf emergence on many deciduous trees"
+          "claim_to_verify": "leaf emergence on many deciduous trees",
+          "verified_relation": "related_to",
+          "proposed_label_ro": "Primăvara, unii arbori foioși își dezvoltă frunzele.",
+          "source_url": "https://www.sor.ro/frasinul/",
+          "verification": "Supported within the caption scope; target identity unchanged."
         },
         {
           "node_id": "n_martisor",
           "label": "Mărțișor",
           "category": "arta_cultura",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Romanian March 1 tradition"
+          "claim_to_verify": "Romanian March 1 tradition",
+          "verified_relation": "related_to",
+          "proposed_label_ro": "Primăvara este întâmpinată în tradiția românească prin Mărțișorul de 1 martie.",
+          "source_url": "https://cimec.ro/etnografie2/sarbatori-si-obiceiuri-traditionale/sarbatorile-de-primavara/martisorul/",
+          "verification": "Supported within the caption scope; target identity unchanged."
         }
       ],
       "prior_evidence_urls": [
@@ -256,12 +305,43 @@
       "risks": [
         "Preserve or refresh the prior qualified proxy with the supported writer; no unsupported identity migration."
       ],
-      "next_action": "Before the first source fetch, name 4–8 truthful link hypotheses with at least two existing main nodes, two same-category neighbors and at most two batch neighbors; then verify sources and forms."
+      "next_action": "Prepare the source-qualified concept and links for the two once-only batch reviews.",
+      "lexical_check": {
+        "response_word": "primăvară",
+        "selected_headword": "primăvară",
+        "headword_equals_lemma": true,
+        "dex_sense": "substantive main sense",
+        "register": "Selected common literal sense has no archaic, poetic-only or regional-only restriction.",
+        "part_of_speech": "noun",
+        "gender": "f.",
+        "normative_plural": "primăveri",
+        "doom3_definition_id": "1285054",
+        "excluded": "Different headwords, compounds, adverbs and unrelated/figurative senses returned by the endpoint were excluded.",
+        "request_spacing": "Root issued the 12 JSON requests serially with 2.1s pause after each response."
+      },
+      "verified_forms": [
+        "Primăvară",
+        "primăverii",
+        "primăveri",
+        "primăverile",
+        "primăverilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "normalization": "ş/ţ replaced with ș/ț before exact form lookup",
+        "best_verified_form": [
+          6161,
+          "Primăvară",
+          3561
+        ],
+        "use": "Positive support only; an absent form does not reject an everyday or school item."
+      },
+      "proposed_description": "Anotimpul dintre iarnă și vară; în România, unii arbori foioși înfrunzesc în această perioadă."
     },
     {
       "id": "v19-toamna",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Toamnă",
       "label_ro": "Toamnă",
@@ -272,10 +352,43 @@
         "Cald sau Rece",
         "Lanțul Cuvintelor"
       ],
-      "player_benefit": "Potential shared vocabulary for resolved guesses and truthful adjacency; exposure remains unproved.",
-      "sources": [],
+      "player_benefit": "A real shared concept could replace the existing Cald projection and provide an honest Lanț bridge; no installed exposure is claimed yet.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/toamn%C4%83/json",
+          "paraphrase": "Anotimpul dintre vară și iarnă este sensul substantival; nu se importă definițiile adverbiale ori compușii.",
+          "authority": "DEX '09",
+          "definition_id": "833762"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/toamn%C4%83/json",
+          "paraphrase": "DOOM 3 confirmă substantivul și pluralul normativ; paradigma regulată de caz și articulare este păstrată fără dubluri de normalizare.",
+          "authority": "DOOM 3",
+          "definition_id": "1268958"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Toamn%C4%83",
+          "paraphrase": "În climatul temperat, toamna urmează verii și precedă iarna.",
+          "role": "second_source"
+        },
+        {
+          "url": "https://www.sor.ro/frasinul/",
+          "paraphrase": "Frasinul își pierde frunzele toamna; legătura păstrează domeniul arborilor foioși.",
+          "role": "link_source"
+        },
+        {
+          "url": "https://www.antenasatelor.ro/fermier-in-romania/actualitatea-agricola/graul-de-toamna-cultura-care-da-stabilitate-fermierilor-romani-id41622.html",
+          "paraphrase": "În România se seamănă toamna grâul de toamnă, cu perioada adaptată zonei; afirmația nu se extinde la tot grâul.",
+          "role": "link_source"
+        },
+        {
+          "url": "https://agerpres.ro/social/2018/09/11/reportaj-vrancea-culesul-viilor-a-inceput-mai-devreme-in-aceasta-toamna-viticultorii-se-plang-de-lip--174031",
+          "paraphrase": "Reportajul din Vrancea, 11 septembrie 2018, documentează culesul strugurilor în acea toamnă, început mai devreme în condițiile acelui an.",
+          "role": "link_source"
+        }
+      ],
       "checked_on": "2026-10-11",
-      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "form_status": "DOOM 3 exact noun headword and normative plural/genitive checked. Regular article/case endings follow that paradigm; equal-fold noun/article spellings are represented once.",
       "research_ready": true,
       "node_id": "n_v1_9_toamna",
       "planned_forms": [
@@ -327,35 +440,51 @@
           "next_action": "Reuse retained source facts after current parent lands; re-screen forms and dependencies on the new baseline."
         }
       ],
-      "decision": "Prior structural hold can be reconsidered: Anotimp is now on main. Recheck the retained source claims and every current form; no acceptance is inherited.",
+      "decision": "Exact noun sense, DOOM 3 forms and predeclared links checked with qualified source scopes; independent factual and quality review still pending.",
       "link_targets": [
         {
           "node_id": "n_v1_8_anotimp",
           "label": "Anotimp",
           "status": "exists on landed wave_base",
           "claim_to_verify": "is a season",
-          "category": "stiinta"
+          "category": "stiinta",
+          "verified_relation": "is_a",
+          "proposed_label_ro": "Toamna este un anotimp.",
+          "source_url": "https://dexonline.ro/definitie/toamn%C4%83/json",
+          "verification": "Supported within the caption scope; target identity unchanged."
         },
         {
           "node_id": "n_v4sti_frunza",
           "label": "frunză",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "deciduous leaf fall"
+          "claim_to_verify": "deciduous leaf fall",
+          "verified_relation": "related_to",
+          "proposed_label_ro": "Toamna, unii arbori foioși își pierd frunzele.",
+          "source_url": "https://www.sor.ro/frasinul/",
+          "verification": "Supported within the caption scope; target identity unchanged."
         },
         {
           "node_id": "n_v84_food_grau",
           "label": "Grâu",
           "category": "gastronomie",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "autumn sowing of winter wheat"
+          "claim_to_verify": "autumn sowing of winter wheat",
+          "verified_relation": "related_to",
+          "proposed_label_ro": "Toamna se seamănă grâul de toamnă în România.",
+          "source_url": "https://www.antenasatelor.ro/fermier-in-romania/actualitatea-agricola/graul-de-toamna-cultura-care-da-stabilitate-fermierilor-romani-id41622.html",
+          "verification": "Supported within the caption scope; target identity unchanged."
         },
         {
           "node_id": "n_v24_food_small_fruit_strugure",
           "label": "Strugure",
           "category": "gastronomie",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "grape harvest"
+          "claim_to_verify": "grape harvest",
+          "verified_relation": "related_to",
+          "proposed_label_ro": "Toamna se culeg struguri în podgoriile românești, inclusiv în Vrancea.",
+          "source_url": "https://agerpres.ro/social/2018/09/11/reportaj-vrancea-culesul-viilor-a-inceput-mai-devreme-in-aceasta-toamna-viticultorii-se-plang-de-lip--174031",
+          "verification": "Supported within the caption scope; target identity unchanged."
         }
       ],
       "prior_evidence_urls": [
@@ -368,12 +497,43 @@
       "risks": [
         "Preserve or refresh the prior qualified proxy with the supported writer; no unsupported identity migration."
       ],
-      "next_action": "Before the first source fetch, name 4–8 truthful link hypotheses with at least two existing main nodes, two same-category neighbors and at most two batch neighbors; then verify sources and forms."
+      "next_action": "Prepare the source-qualified concept and links for the two once-only batch reviews.",
+      "lexical_check": {
+        "response_word": "toamnă",
+        "selected_headword": "toamnă",
+        "headword_equals_lemma": true,
+        "dex_sense": "substantive main sense",
+        "register": "Selected common literal sense has no archaic, poetic-only or regional-only restriction.",
+        "part_of_speech": "noun",
+        "gender": "f.",
+        "normative_plural": "toamne",
+        "doom3_definition_id": "1268958",
+        "excluded": "Different headwords, compounds, adverbs and unrelated/figurative senses returned by the endpoint were excluded.",
+        "request_spacing": "Root issued the 12 JSON requests serially with 2.1s pause after each response."
+      },
+      "verified_forms": [
+        "Toamnă",
+        "toamnei",
+        "toamne",
+        "toamnele",
+        "toamnelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "normalization": "ş/ţ replaced with ș/ț before exact form lookup",
+        "best_verified_form": [
+          11897,
+          "Toamnă",
+          1532
+        ],
+        "use": "Positive support only; an absent form does not reject an everyday or school item."
+      },
+      "proposed_description": "Anotimpul dintre vară și iarnă; în România, frunzele multor arbori foioși se desprind în această perioadă."
     },
     {
       "id": "v19-randunica",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Rândunică",
       "label_ro": "Rândunică",
@@ -384,10 +544,33 @@
         "Cald sau Rece",
         "Lanțul Cuvintelor"
       ],
-      "player_benefit": "Potential shared vocabulary for resolved guesses and truthful adjacency; exposure remains unproved.",
-      "sources": [],
+      "player_benefit": "A real shared concept could replace the existing Cald projection and provide an honest Lanț bridge; no installed exposure is claimed yet.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/r%C3%A2ndunic%C4%83/json",
+          "paraphrase": "Sensul 1 identifică pasărea insectivoră Hirundo rustica; peștele compus și termenul nautic nu sunt vizate.",
+          "authority": "DEX '09",
+          "definition_id": "853405"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/r%C3%A2ndunic%C4%83/json",
+          "paraphrase": "DOOM 3 confirmă substantivul și pluralul normativ; paradigma regulată de caz și articulare este păstrată fără dubluri de normalizare.",
+          "authority": "DOOM 3",
+          "definition_id": "1259212"
+        },
+        {
+          "url": "https://pasaridinromania.sor.ro/specii/410/randunica-hirundo-rustica",
+          "paraphrase": "SOR identifică Hirundo rustica, hrana predominant din insecte și sosirea primăvara/plecarea toamna a populațiilor care cuibăresc în România.",
+          "role": "second_source"
+        },
+        {
+          "url": "https://www.sor.ro/vestitorii-primaverii/",
+          "paraphrase": "Rândunicile reapar în România de la sfârșitul lui martie, mai ales în aprilie, și consumă preponderent insecte în zbor.",
+          "role": "link_source"
+        }
+      ],
       "checked_on": "2026-10-11",
-      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "form_status": "DOOM 3 exact noun headword and normative plural/genitive checked. Regular article/case endings follow that paradigm; equal-fold noun/article spellings are represented once. Both DOOM 3 alternatives are retained: genitive rândunicii/rândunelei and plural rândunici/rândunele, with their regular articles.",
       "research_ready": true,
       "node_id": "n_v1_9_randunica",
       "planned_forms": [
@@ -459,33 +642,49 @@
           "next_action": "Reuse retained source facts after current parent lands; re-screen forms and dependencies on the new baseline."
         }
       ],
-      "decision": "Prior structural hold can be reconsidered: Anotimp is now on main. Recheck the retained source claims and every current form; no acceptance is inherited.",
+      "decision": "Exact noun sense, DOOM 3 forms and predeclared links checked with qualified source scopes; independent factual and quality review still pending.",
       "link_targets": [
         {
           "node_id": "n_v4sti_pasare",
           "label": "pasăre",
           "category": "stiinta",
-          "status": "exists on landed wave_base"
+          "status": "exists on landed wave_base",
+          "verified_relation": "is_a",
+          "proposed_label_ro": "Rândunica este o pasăre.",
+          "source_url": "https://pasaridinromania.sor.ro/specii/410/randunica-hirundo-rustica",
+          "verification": "Supported within the caption scope; target identity unchanged."
         },
         {
           "node_id": "n_v4sti_insecta",
           "label": "insectă",
           "category": "stiinta",
-          "status": "exists on landed wave_base"
+          "status": "exists on landed wave_base",
+          "verified_relation": "related_to",
+          "proposed_label_ro": "Rândunica se hrănește mai ales cu insecte prinse în zbor.",
+          "source_url": "https://pasaridinromania.sor.ro/specii/410/randunica-hirundo-rustica",
+          "verification": "Supported within the caption scope; target identity unchanged."
         },
         {
           "node_id": "n_v1_9_primavara",
           "target_record": "v19-primavara",
           "label": "Primăvară",
           "status": "batch hypothesis; requires acceptance",
-          "category": "stiinta"
+          "category": "stiinta",
+          "verified_relation": "related_to",
+          "proposed_label_ro": "Rândunica sosește primăvara în România pentru cuibărit.",
+          "source_url": "https://pasaridinromania.sor.ro/specii/410/randunica-hirundo-rustica",
+          "verification": "Supported within the caption scope; target identity unchanged."
         },
         {
           "node_id": "n_v1_9_toamna",
           "target_record": "v19-toamna",
           "label": "Toamnă",
           "status": "batch hypothesis; requires acceptance",
-          "category": "stiinta"
+          "category": "stiinta",
+          "verified_relation": "related_to",
+          "proposed_label_ro": "Rândunica pleacă toamna din România spre cartierele de iernare.",
+          "source_url": "https://pasaridinromania.sor.ro/specii/410/randunica-hirundo-rustica",
+          "verification": "Supported within the caption scope; target identity unchanged."
         }
       ],
       "prior_evidence_urls": [
@@ -496,7 +695,38 @@
       "risks": [
         "Preserve or refresh the prior qualified proxy with the supported writer; no unsupported identity migration."
       ],
-      "next_action": "Before the first source fetch, name 4–8 truthful link hypotheses with at least two existing main nodes, two same-category neighbors and at most two batch neighbors; then verify sources and forms."
+      "next_action": "Prepare the source-qualified concept and links for the two once-only batch reviews.",
+      "lexical_check": {
+        "response_word": "rândunică",
+        "selected_headword": "rândunică",
+        "headword_equals_lemma": true,
+        "dex_sense": "1",
+        "register": "Selected common literal sense has no archaic, poetic-only or regional-only restriction.",
+        "part_of_speech": "noun",
+        "gender": "f.",
+        "normative_plural": "rândunici/rândunele",
+        "doom3_definition_id": "1259212",
+        "excluded": "Different headwords, compounds, adverbs and unrelated/figurative senses returned by the endpoint were excluded.",
+        "request_spacing": "Root issued the 12 JSON requests serially with 2.1s pause after each response."
+      },
+      "verified_forms": [
+        "Rândunică",
+        "rândunicii",
+        "rândunici",
+        "rândunicile",
+        "rândunicilor",
+        "rândunele",
+        "rândunelele",
+        "rândunelei",
+        "rândunelelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "normalization": "ş/ţ replaced with ș/ț before exact form lookup",
+        "best_verified_form": null,
+        "use": "Positive support only; an absent form does not reject an everyday or school item."
+      },
+      "proposed_description": "Pasăre cu coada bifurcată, care prinde mai ales insecte în zbor; populațiile care cuibăresc în România sosesc primăvara și pleacă toamna."
     },
     {
       "id": "v19-cort",
@@ -2181,8 +2411,8 @@
     },
     {
       "id": "v19-input-caiet",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "accepted_form_family",
       "lemma": "Caiet",
       "label_ro": "Caiet → Caiet",
@@ -2193,10 +2423,28 @@
         "Cald sau Rece",
         "Lanțul Cuvintelor"
       ],
-      "player_benefit": "Potential non-colliding inputs for an existing concept.",
-      "sources": [],
+      "player_benefit": "Missing school/home input forms would resolve to the existing concept and share its Cald slot; no installation or exposure is claimed yet.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/caiet/json",
+          "paraphrase": "Foile legate pentru scris sau desen reprezintă sensul școlar vizat, fără marcă de registru restrictiv.",
+          "authority": "DEX '09",
+          "definition_id": "839699"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/caiet/json",
+          "paraphrase": "DOOM 3 confirmă substantivul și pluralul normativ; paradigma regulată de caz și articulare este păstrată fără dubluri de normalizare.",
+          "authority": "DOOM 3",
+          "definition_id": "1309110"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/caiet",
+          "paraphrase": "Wikționar confirmă caietul pentru scris/desen și declinarea caietului/caietelor.",
+          "role": "second_source"
+        }
+      ],
       "checked_on": "2026-10-11",
-      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "form_status": "DOOM 3 lemma, gender, plural and any explicit genitive/articulation checked; regular nominative/accusative and genitive/dative article endings corroborated on the second source for input families. Equal-fold headword/articulated spellings occupy one input.",
       "research_ready": true,
       "owner_id": "n_v24_school_writing_caiet",
       "planned_forms": [
@@ -2273,7 +2521,7 @@
         ]
       },
       "prior_records": [],
-      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "decision": "Researched missing case/articulated forms for the existing same-sense owner; independent factual and quality review still pending.",
       "already_resolved_forms": [
         "Caiet",
         "caietul",
@@ -2284,12 +2532,45 @@
         "caietului",
         "caietelor"
       ],
-      "next_action": "Verify exact lemma/sense and missing forms on dexonline plus a second source; preserve the existing owner."
+      "next_action": "Include only proposed_forms in the module, preserve the existing owner and await the two once-only batch reviews.",
+      "lexical_check": {
+        "response_word": "caiet",
+        "selected_headword": "caiet",
+        "headword_equals_lemma": true,
+        "dex_sense": "1",
+        "register": "Selected common literal sense has no archaic, poetic-only or regional-only restriction.",
+        "part_of_speech": "noun",
+        "gender": "n.",
+        "normative_plural": "caiete",
+        "doom3_definition_id": "1309110",
+        "excluded": "Different headwords, compounds, adverbs and unrelated/figurative senses returned by the endpoint were excluded.",
+        "request_spacing": "Root issued the 12 JSON requests serially with 2.1s pause after each response."
+      },
+      "verified_forms": [
+        "Caiet",
+        "caietul",
+        "caietului",
+        "caiete",
+        "caietele",
+        "caietelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "normalization": "ş/ţ replaced with ș/ț before exact form lookup",
+        "best_verified_form": [
+          19333,
+          "caietul",
+          779
+        ],
+        "use": "Positive support only; an absent form does not reject an everyday or school item."
+      },
+      "second_source_provenance": "Wikționar is a permitted second website. It cites DEX online (or lacks an independent bibliography for creion/penar); independent lexical provenance is not claimed.",
+      "proposed_description": "Pasăre cu coada bifurcată, care prinde mai ales insecte în zbor; populațiile care cuibăresc în România sosesc primăvara și pleacă toamna."
     },
     {
       "id": "v19-input-creion",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "accepted_form_family",
       "lemma": "Creion",
       "label_ro": "Creion → Creion",
@@ -2300,10 +2581,28 @@
         "Cald sau Rece",
         "Lanțul Cuvintelor"
       ],
-      "player_benefit": "Potential non-colliding inputs for an existing concept.",
-      "sources": [],
+      "player_benefit": "Missing school/home input forms would resolve to the existing concept and share its Cald slot; no installation or exposure is claimed yet.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/creion/json",
+          "paraphrase": "Instrumentul cu mină protejată este sensul pentru scris/desen; sensurile figurate și cosmetice nu sunt propuse.",
+          "authority": "DEX '09",
+          "definition_id": "853459"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/creion/json",
+          "paraphrase": "DOOM 3 confirmă substantivul și pluralul normativ; paradigma regulată de caz și articulare este păstrată fără dubluri de normalizare.",
+          "authority": "DOOM 3",
+          "definition_id": "1315615"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/creion",
+          "paraphrase": "Wikționar atestă instrumentul de scris cu mină și declinarea creionului/creioanelor.",
+          "role": "second_source"
+        }
+      ],
       "checked_on": "2026-10-11",
-      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "form_status": "DOOM 3 lemma, gender, plural and any explicit genitive/articulation checked; regular nominative/accusative and genitive/dative article endings corroborated on the second source for input families. Equal-fold headword/articulated spellings occupy one input.",
       "research_ready": true,
       "owner_id": "n_v24_school_writing_creion",
       "planned_forms": [
@@ -2380,7 +2679,7 @@
         ]
       },
       "prior_records": [],
-      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "decision": "Researched missing case/articulated forms for the existing same-sense owner; independent factual and quality review still pending.",
       "already_resolved_forms": [
         "Creion",
         "creionul",
@@ -2391,12 +2690,45 @@
         "creionului",
         "creioanelor"
       ],
-      "next_action": "Verify exact lemma/sense and missing forms on dexonline plus a second source; preserve the existing owner."
+      "next_action": "Include only proposed_forms in the module, preserve the existing owner and await the two once-only batch reviews.",
+      "lexical_check": {
+        "response_word": "creion",
+        "selected_headword": "creion",
+        "headword_equals_lemma": true,
+        "dex_sense": "1",
+        "register": "Selected common literal sense has no archaic, poetic-only or regional-only restriction.",
+        "part_of_speech": "noun",
+        "gender": "n.",
+        "normative_plural": "creioane",
+        "doom3_definition_id": "1315615",
+        "excluded": "Different headwords, compounds, adverbs and unrelated/figurative senses returned by the endpoint were excluded.",
+        "request_spacing": "Root issued the 12 JSON requests serially with 2.1s pause after each response."
+      },
+      "verified_forms": [
+        "Creion",
+        "creionul",
+        "creionului",
+        "creioane",
+        "creioanele",
+        "creioanelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "normalization": "ş/ţ replaced with ș/ț before exact form lookup",
+        "best_verified_form": [
+          12034,
+          "Creion",
+          1507
+        ],
+        "use": "Positive support only; an absent form does not reject an everyday or school item."
+      },
+      "second_source_provenance": "Wikționar is a permitted second website. It cites DEX online (or lacks an independent bibliography for creion/penar); independent lexical provenance is not claimed.",
+      "proposed_description": "Pasăre cu coada bifurcată, care prinde mai ales insecte în zbor; populațiile care cuibăresc în România sosesc primăvara și pleacă toamna."
     },
     {
       "id": "v19-input-stilou",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "accepted_form_family",
       "lemma": "Stilou",
       "label_ro": "Stilou → Stilou",
@@ -2407,10 +2739,28 @@
         "Cald sau Rece",
         "Lanțul Cuvintelor"
       ],
-      "player_benefit": "Potential non-colliding inputs for an existing concept.",
-      "sources": [],
+      "player_benefit": "Missing school/home input forms would resolve to the existing concept and share its Cald slot; no installation or exposure is claimed yet.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/stilou/json",
+          "paraphrase": "Instrument de scris cu rezervor și peniță; intrarea nu restrânge registrul uzual.",
+          "authority": "DEX '09",
+          "definition_id": "846830"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/stilou/json",
+          "paraphrase": "DOOM 3 confirmă substantivul și pluralul normativ; paradigma regulată de caz și articulare este păstrată fără dubluri de normalizare.",
+          "authority": "DOOM 3",
+          "definition_id": "1278096"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/stilou",
+          "paraphrase": "Wikționar confirmă instrumentul cu rezervor și formele stiloului/stilourilor.",
+          "role": "second_source"
+        }
+      ],
       "checked_on": "2026-10-11",
-      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "form_status": "DOOM 3 lemma, gender, plural and any explicit genitive/articulation checked; regular nominative/accusative and genitive/dative article endings corroborated on the second source for input families. Equal-fold headword/articulated spellings occupy one input.",
       "research_ready": true,
       "owner_id": "n_v24_school_supplies_stilou",
       "planned_forms": [
@@ -2487,7 +2837,7 @@
         ]
       },
       "prior_records": [],
-      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "decision": "Researched missing case/articulated forms for the existing same-sense owner; independent factual and quality review still pending.",
       "already_resolved_forms": [
         "Stilou",
         "stiloul",
@@ -2498,12 +2848,45 @@
         "stiloului",
         "stilourilor"
       ],
-      "next_action": "Verify exact lemma/sense and missing forms on dexonline plus a second source; preserve the existing owner."
+      "next_action": "Include only proposed_forms in the module, preserve the existing owner and await the two once-only batch reviews.",
+      "lexical_check": {
+        "response_word": "stilou",
+        "selected_headword": "stilou",
+        "headword_equals_lemma": true,
+        "dex_sense": "substantive main sense",
+        "register": "Selected common literal sense has no archaic, poetic-only or regional-only restriction.",
+        "part_of_speech": "noun",
+        "gender": "n.",
+        "normative_plural": "stilouri",
+        "doom3_definition_id": "1278096",
+        "excluded": "Different headwords, compounds, adverbs and unrelated/figurative senses returned by the endpoint were excluded.",
+        "request_spacing": "Root issued the 12 JSON requests serially with 2.1s pause after each response."
+      },
+      "verified_forms": [
+        "Stilou",
+        "stiloul",
+        "stiloului",
+        "stilouri",
+        "stilourile",
+        "stilourilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "normalization": "ş/ţ replaced with ș/ț before exact form lookup",
+        "best_verified_form": [
+          12280,
+          "Stilou",
+          1475
+        ],
+        "use": "Positive support only; an absent form does not reject an everyday or school item."
+      },
+      "second_source_provenance": "Wikționar is a permitted second website. It cites DEX online (or lacks an independent bibliography for creion/penar); independent lexical provenance is not claimed.",
+      "proposed_description": "Pasăre cu coada bifurcată, care prinde mai ales insecte în zbor; populațiile care cuibăresc în România sosesc primăvara și pleacă toamna."
     },
     {
       "id": "v19-input-penar",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "accepted_form_family",
       "lemma": "Penar",
       "label_ro": "Penar → Penar",
@@ -2514,10 +2897,28 @@
         "Cald sau Rece",
         "Lanțul Cuvintelor"
       ],
-      "player_benefit": "Potential non-colliding inputs for an existing concept.",
-      "sources": [],
+      "player_benefit": "Missing school/home input forms would resolve to the existing concept and share its Cald slot; no installation or exposure is claimed yet.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/penar/json",
+          "paraphrase": "Cutia în care școlarii păstrează instrumente de scris este sensul vizat, fără restricție de registru.",
+          "authority": "DEX '09",
+          "definition_id": "869219"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/penar/json",
+          "paraphrase": "DOOM 3 confirmă substantivul și pluralul normativ; paradigma regulată de caz și articulare este păstrată fără dubluri de normalizare.",
+          "authority": "DOOM 3",
+          "definition_id": "1281676"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/penar",
+          "paraphrase": "Wikționar confirmă etuiul școlar și formele penarului/penare/penarele/penarelor.",
+          "role": "second_source"
+        }
+      ],
       "checked_on": "2026-10-11",
-      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "form_status": "DOOM 3 lemma, gender, plural and any explicit genitive/articulation checked; regular nominative/accusative and genitive/dative article endings corroborated on the second source for input families. Equal-fold headword/articulated spellings occupy one input.",
       "research_ready": true,
       "owner_id": "n_v23via_penar",
       "planned_forms": [
@@ -2578,7 +2979,7 @@
         ]
       },
       "prior_records": [],
-      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "decision": "Researched missing case/articulated forms for the existing same-sense owner; independent factual and quality review still pending.",
       "already_resolved_forms": [
         "Penar",
         "penarul"
@@ -2589,12 +2990,41 @@
         "penarele",
         "penarelor"
       ],
-      "next_action": "Verify exact lemma/sense and missing forms on dexonline plus a second source; preserve the existing owner."
+      "next_action": "Include only proposed_forms in the module, preserve the existing owner and await the two once-only batch reviews.",
+      "lexical_check": {
+        "response_word": "penar",
+        "selected_headword": "penar",
+        "headword_equals_lemma": true,
+        "dex_sense": "substantive main sense",
+        "register": "Selected common literal sense has no archaic, poetic-only or regional-only restriction.",
+        "part_of_speech": "noun",
+        "gender": "n.",
+        "normative_plural": "penare",
+        "doom3_definition_id": "1281676",
+        "excluded": "Different headwords, compounds, adverbs and unrelated/figurative senses returned by the endpoint were excluded.",
+        "request_spacing": "Root issued the 12 JSON requests serially with 2.1s pause after each response."
+      },
+      "verified_forms": [
+        "Penar",
+        "penarul",
+        "penarului",
+        "penare",
+        "penarele",
+        "penarelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "normalization": "ş/ţ replaced with ș/ț before exact form lookup",
+        "best_verified_form": null,
+        "use": "Positive support only; an absent form does not reject an everyday or school item."
+      },
+      "second_source_provenance": "Wikționar is a permitted second website. It cites DEX online (or lacks an independent bibliography for creion/penar); independent lexical provenance is not claimed.",
+      "proposed_description": "Pasăre cu coada bifurcată, care prinde mai ales insecte în zbor; populațiile care cuibăresc în România sosesc primăvara și pleacă toamna."
     },
     {
       "id": "v19-input-rigla",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "accepted_form_family",
       "lemma": "Riglă",
       "label_ro": "Riglă → Riglă",
@@ -2605,10 +3035,28 @@
         "Cald sau Rece",
         "Lanțul Cuvintelor"
       ],
-      "player_benefit": "Potential non-colliding inputs for an existing concept.",
-      "sources": [],
+      "player_benefit": "Missing school/home input forms would resolve to the existing concept and share its Cald slot; no installation or exposure is claimed yet.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/rigl%C4%83/json",
+          "paraphrase": "Sensul 1 este obiectul drept pentru trasare, de obicei gradat; sensurile din construcții și metalurgie rămân în afara propunerii.",
+          "authority": "DEX '09",
+          "definition_id": "858554"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/rigl%C4%83/json",
+          "paraphrase": "DOOM 3 confirmă substantivul și pluralul normativ; paradigma regulată de caz și articulare este păstrată fără dubluri de normalizare.",
+          "authority": "DOOM 3",
+          "definition_id": "1296138"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/rigl%C4%83",
+          "paraphrase": "Wikționar confirmă unealta de trasat, de obicei gradată, și formele riglei/riglelor.",
+          "role": "second_source"
+        }
+      ],
       "checked_on": "2026-10-11",
-      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "form_status": "DOOM 3 lemma, gender, plural and any explicit genitive/articulation checked; regular nominative/accusative and genitive/dative article endings corroborated on the second source for input families. Equal-fold headword/articulated spellings occupy one input.",
       "research_ready": true,
       "owner_id": "n_v24_school_supplies_rigla",
       "planned_forms": [
@@ -2672,7 +3120,7 @@
         ]
       },
       "prior_records": [],
-      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "decision": "Researched missing case/articulated forms for the existing same-sense owner; independent factual and quality review still pending.",
       "already_resolved_forms": [
         "Riglă",
         "rigle",
@@ -2682,12 +3130,40 @@
         "riglei",
         "riglelor"
       ],
-      "next_action": "Verify exact lemma/sense and missing forms on dexonline plus a second source; preserve the existing owner."
+      "next_action": "Include only proposed_forms in the module, preserve the existing owner and await the two once-only batch reviews.",
+      "lexical_check": {
+        "response_word": "riglă",
+        "selected_headword": "riglă",
+        "headword_equals_lemma": true,
+        "dex_sense": "1",
+        "register": "Selected common literal sense has no archaic, poetic-only or regional-only restriction.",
+        "part_of_speech": "noun",
+        "gender": "f.",
+        "normative_plural": "rigle",
+        "doom3_definition_id": "1296138",
+        "excluded": "Different headwords, compounds, adverbs and unrelated/figurative senses returned by the endpoint were excluded.",
+        "request_spacing": "Root issued the 12 JSON requests serially with 2.1s pause after each response."
+      },
+      "verified_forms": [
+        "Riglă",
+        "riglei",
+        "rigle",
+        "riglele",
+        "riglelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "normalization": "ş/ţ replaced with ș/ț before exact form lookup",
+        "best_verified_form": null,
+        "use": "Positive support only; an absent form does not reject an everyday or school item."
+      },
+      "second_source_provenance": "Wikționar is a permitted second website. It cites DEX online (or lacks an independent bibliography for creion/penar); independent lexical provenance is not claimed.",
+      "proposed_description": "Pasăre cu coada bifurcată, care prinde mai ales insecte în zbor; populațiile care cuibăresc în România sosesc primăvara și pleacă toamna."
     },
     {
       "id": "v19-input-radiera",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "accepted_form_family",
       "lemma": "Radieră",
       "label_ro": "Radieră → Radieră",
@@ -2698,10 +3174,28 @@
         "Cald sau Rece",
         "Lanțul Cuvintelor"
       ],
-      "player_benefit": "Potential non-colliding inputs for an existing concept.",
-      "sources": [],
+      "player_benefit": "Missing school/home input forms would resolve to the existing concept and share its Cald slot; no installation or exposure is claimed yet.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/radier%C4%83/json",
+          "paraphrase": "Sensul normativ de gumă pentru ștergere corespunde rechizitei; nu are marcă de registru restrictiv.",
+          "authority": "DEX '09",
+          "definition_id": "851536"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/radier%C4%83/json",
+          "paraphrase": "DOOM 3 confirmă substantivul și pluralul normativ; paradigma regulată de caz și articulare este păstrată fără dubluri de normalizare.",
+          "authority": "DOOM 3",
+          "definition_id": "1274480"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/radier%C4%83",
+          "paraphrase": "Wikționar confirmă guma de șters și formele radierei/radierele/radierelor.",
+          "role": "second_source"
+        }
+      ],
       "checked_on": "2026-10-11",
-      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "form_status": "DOOM 3 lemma, gender, plural and any explicit genitive/articulation checked; regular nominative/accusative and genitive/dative article endings corroborated on the second source for input families. Equal-fold headword/articulated spellings occupy one input.",
       "research_ready": true,
       "owner_id": "n_v24_school_supplies_radiera",
       "planned_forms": [
@@ -2757,7 +3251,7 @@
         ]
       },
       "prior_records": [],
-      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "decision": "Researched missing case/articulated forms for the existing same-sense owner; independent factual and quality review still pending.",
       "already_resolved_forms": [
         "Radieră",
         "radiere"
@@ -2767,12 +3261,40 @@
         "radierele",
         "radierelor"
       ],
-      "next_action": "Verify exact lemma/sense and missing forms on dexonline plus a second source; preserve the existing owner."
+      "next_action": "Include only proposed_forms in the module, preserve the existing owner and await the two once-only batch reviews.",
+      "lexical_check": {
+        "response_word": "radieră",
+        "selected_headword": "radieră",
+        "headword_equals_lemma": true,
+        "dex_sense": "substantive main sense",
+        "register": "Selected common literal sense has no archaic, poetic-only or regional-only restriction.",
+        "part_of_speech": "noun",
+        "gender": "f.",
+        "normative_plural": "radiere",
+        "doom3_definition_id": "1274480",
+        "excluded": "Different headwords, compounds, adverbs and unrelated/figurative senses returned by the endpoint were excluded.",
+        "request_spacing": "Root issued the 12 JSON requests serially with 2.1s pause after each response."
+      },
+      "verified_forms": [
+        "Radieră",
+        "radierei",
+        "radiere",
+        "radierele",
+        "radierelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "normalization": "ş/ţ replaced with ș/ț before exact form lookup",
+        "best_verified_form": null,
+        "use": "Positive support only; an absent form does not reject an everyday or school item."
+      },
+      "second_source_provenance": "Wikționar is a permitted second website. It cites DEX online (or lacks an independent bibliography for creion/penar); independent lexical provenance is not claimed.",
+      "proposed_description": "Pasăre cu coada bifurcată, care prinde mai ales insecte în zbor; populațiile care cuibăresc în România sosesc primăvara și pleacă toamna."
     },
     {
       "id": "v19-input-ghiozdan",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "accepted_form_family",
       "lemma": "Ghiozdan",
       "label_ro": "Ghiozdan → Ghiozdan",
@@ -2783,10 +3305,28 @@
         "Cald sau Rece",
         "Lanțul Cuvintelor"
       ],
-      "player_benefit": "Potential non-colliding inputs for an existing concept.",
-      "sources": [],
+      "player_benefit": "Missing school/home input forms would resolve to the existing concept and share its Cald slot; no installation or exposure is claimed yet.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/ghiozdan/json",
+          "paraphrase": "Sensul școlar este geanta pentru cărți și caiete; varianta învechită ghizdan nu este propusă.",
+          "authority": "DEX '09",
+          "definition_id": "878022"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/ghiozdan/json",
+          "paraphrase": "DOOM 3 confirmă substantivul și pluralul normativ; paradigma regulată de caz și articulare este păstrată fără dubluri de normalizare.",
+          "authority": "DOOM 3",
+          "definition_id": "1324974"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/ghiozdan",
+          "paraphrase": "Wikționar confirmă geanta școlară și formele ghiozdanului/ghiozdane/ghiozdanele/ghiozdanelor.",
+          "role": "second_source"
+        }
+      ],
       "checked_on": "2026-10-11",
-      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "form_status": "DOOM 3 lemma, gender, plural and any explicit genitive/articulation checked; regular nominative/accusative and genitive/dative article endings corroborated on the second source for input families. Equal-fold headword/articulated spellings occupy one input.",
       "research_ready": true,
       "owner_id": "n_v23via_ghiozdan",
       "planned_forms": [
@@ -2847,7 +3387,7 @@
         ]
       },
       "prior_records": [],
-      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "decision": "Researched missing case/articulated forms for the existing same-sense owner; independent factual and quality review still pending.",
       "already_resolved_forms": [
         "Ghiozdan",
         "ghiozdanul"
@@ -2858,12 +3398,45 @@
         "ghiozdanele",
         "ghiozdanelor"
       ],
-      "next_action": "Verify exact lemma/sense and missing forms on dexonline plus a second source; preserve the existing owner."
+      "next_action": "Include only proposed_forms in the module, preserve the existing owner and await the two once-only batch reviews.",
+      "lexical_check": {
+        "response_word": "ghiozdan",
+        "selected_headword": "ghiozdan",
+        "headword_equals_lemma": true,
+        "dex_sense": "1",
+        "register": "Selected common literal sense has no archaic, poetic-only or regional-only restriction.",
+        "part_of_speech": "noun",
+        "gender": "n.",
+        "normative_plural": "ghiozdane",
+        "doom3_definition_id": "1324974",
+        "excluded": "Different headwords, compounds, adverbs and unrelated/figurative senses returned by the endpoint were excluded.",
+        "request_spacing": "Root issued the 12 JSON requests serially with 2.1s pause after each response."
+      },
+      "verified_forms": [
+        "Ghiozdan",
+        "ghiozdanul",
+        "ghiozdanului",
+        "ghiozdane",
+        "ghiozdanele",
+        "ghiozdanelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "normalization": "ş/ţ replaced with ș/ț before exact form lookup",
+        "best_verified_form": [
+          29991,
+          "ghiozdanul",
+          405
+        ],
+        "use": "Positive support only; an absent form does not reject an everyday or school item."
+      },
+      "second_source_provenance": "Wikționar is a permitted second website. It cites DEX online (or lacks an independent bibliography for creion/penar); independent lexical provenance is not claimed.",
+      "proposed_description": "Pasăre cu coada bifurcată, care prinde mai ales insecte în zbor; populațiile care cuibăresc în România sosesc primăvara și pleacă toamna."
     },
     {
       "id": "v19-input-castravete",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "accepted_form_family",
       "lemma": "Castravete",
       "label_ro": "Castravete → Castravete",
@@ -2874,10 +3447,28 @@
         "Cald sau Rece",
         "Lanțul Cuvintelor"
       ],
-      "player_benefit": "Potential non-colliding inputs for an existing concept.",
-      "sources": [],
+      "player_benefit": "Missing school/home input forms would resolve to the existing concept and share its Cald slot; no installation or exposure is claimed yet.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/castravete/json",
+          "paraphrase": "Din sensul 1 se reține fructul consumat ca aliment, nu planta în întregime și nici compusul zoologic.",
+          "authority": "DEX '09",
+          "definition_id": "842145"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/castravete/json",
+          "paraphrase": "DOOM 3 confirmă substantivul și pluralul normativ; paradigma regulată de caz și articulare este păstrată fără dubluri de normalizare.",
+          "authority": "DOOM 3",
+          "definition_id": "1310006"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/castravete",
+          "paraphrase": "Wikționar separă fructul alimentar la sensul 2 și confirmă castravetelui/castraveților.",
+          "role": "second_source"
+        }
+      ],
       "checked_on": "2026-10-11",
-      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "form_status": "DOOM 3 lemma, gender, plural and any explicit genitive/articulation checked; regular nominative/accusative and genitive/dative article endings corroborated on the second source for input families. Equal-fold headword/articulated spellings occupy one input.",
       "research_ready": true,
       "owner_id": "n_v24_food_salad_veg_castravete",
       "planned_forms": [
@@ -2982,7 +3573,7 @@
         ]
       },
       "prior_records": [],
-      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "decision": "Researched missing case/articulated forms for the existing same-sense owner; independent factual and quality review still pending.",
       "already_resolved_forms": [
         "Castravete",
         "castravetele",
@@ -2993,7 +3584,40 @@
         "castravetelui",
         "castraveților"
       ],
-      "next_action": "Verify exact lemma/sense and missing forms on dexonline plus a second source; preserve the existing owner."
+      "next_action": "Include only proposed_forms in the module, preserve the existing owner and await the two once-only batch reviews.",
+      "lexical_check": {
+        "response_word": "castravete",
+        "selected_headword": "castravete",
+        "headword_equals_lemma": true,
+        "dex_sense": "1 (fruit restriction)",
+        "register": "Selected common literal sense has no archaic, poetic-only or regional-only restriction.",
+        "part_of_speech": "noun",
+        "gender": "m.",
+        "normative_plural": "castraveți",
+        "doom3_definition_id": "1310006",
+        "excluded": "Different headwords, compounds, adverbs and unrelated/figurative senses returned by the endpoint were excluded.",
+        "request_spacing": "Root issued the 12 JSON requests serially with 2.1s pause after each response."
+      },
+      "verified_forms": [
+        "Castravete",
+        "castravetele",
+        "castravetelui",
+        "castraveți",
+        "castraveții",
+        "castraveților"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "normalization": "ş/ţ replaced with ș/ț before exact form lookup",
+        "best_verified_form": [
+          26966,
+          "Castravete",
+          478
+        ],
+        "use": "Positive support only; an absent form does not reject an everyday or school item."
+      },
+      "second_source_provenance": "Wikționar is a permitted second website. It cites DEX online (or lacks an independent bibliography for creion/penar); independent lexical provenance is not claimed.",
+      "proposed_description": "Pasăre cu coada bifurcată, care prinde mai ales insecte în zbor; populațiile care cuibăresc în România sosesc primăvara și pleacă toamna."
     },
     {
       "id": "v19-input-pat",
@@ -3110,8 +3734,8 @@
     },
     {
       "id": "v19-input-pantalon",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "accepted_form_family",
       "lemma": "Pantalon",
       "label_ro": "Pantalon → Pantaloni",
@@ -3122,10 +3746,28 @@
         "Cald sau Rece",
         "Lanțul Cuvintelor"
       ],
-      "player_benefit": "Potential non-colliding inputs for an existing concept.",
-      "sources": [],
+      "player_benefit": "Missing school/home input forms would resolve to the existing concept and share its Cald slot; no installation or exposure is claimed yet.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/pantalon/json",
+          "paraphrase": "Sensul 1 de îmbrăcăminte, folosit de obicei la plural, susține singularul pantalon; piesa de conductă nu este vizată.",
+          "authority": "DEX '09",
+          "definition_id": "861218"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/pantalon/json",
+          "paraphrase": "DOOM 3 confirmă substantivul și pluralul normativ; paradigma regulată de caz și articulare este păstrată fără dubluri de normalizare.",
+          "authority": "DOOM 3",
+          "definition_id": "1280253"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/pantalon",
+          "paraphrase": "Wikționar confirmă îmbrăcămintea, utilizarea frecventă la plural și genitivul singular pantalonului.",
+          "role": "second_source"
+        }
+      ],
       "checked_on": "2026-10-11",
-      "form_status": "Unverified morphology hypotheses; exact DEX sense/register and DOOM 3 forms are required before acceptance. Screen newly discovered forms before use.",
+      "form_status": "DOOM 3 lemma, gender, plural and any explicit genitive/articulation checked; regular nominative/accusative and genitive/dative article endings corroborated on the second source for input families. Equal-fold headword/articulated spellings occupy one input.",
       "research_ready": true,
       "owner_id": "n_v30_clothing_everyday_pantaloni",
       "planned_forms": [
@@ -3210,7 +3852,7 @@
         ]
       },
       "prior_records": [],
-      "decision": "Idea only: identity pre-screen complete; source, register, morphology and gameplay quality are pending.",
+      "decision": "Researched missing case/articulated forms for the existing same-sense owner; independent factual and quality review still pending.",
       "already_resolved_forms": [
         "Pantaloni",
         "pantalon",
@@ -3221,7 +3863,40 @@
       "proposed_forms": [
         "pantalonului"
       ],
-      "next_action": "Verify exact lemma/sense and missing forms on dexonline plus a second source; preserve the existing owner."
+      "next_action": "Include only proposed_forms in the module, preserve the existing owner and await the two once-only batch reviews.",
+      "lexical_check": {
+        "response_word": "pantalon",
+        "selected_headword": "pantalon",
+        "headword_equals_lemma": true,
+        "dex_sense": "1",
+        "register": "Selected common literal sense has no archaic, poetic-only or regional-only restriction.",
+        "part_of_speech": "noun",
+        "gender": "m.",
+        "normative_plural": "pantaloni",
+        "doom3_definition_id": "1280253",
+        "excluded": "Different headwords, compounds, adverbs and unrelated/figurative senses returned by the endpoint were excluded.",
+        "request_spacing": "Root issued the 12 JSON requests serially with 2.1s pause after each response."
+      },
+      "verified_forms": [
+        "Pantaloni",
+        "pantalon",
+        "pantalonul",
+        "pantalonului",
+        "pantalonii",
+        "pantalonilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "normalization": "ş/ţ replaced with ș/ț before exact form lookup",
+        "best_verified_form": [
+          2547,
+          "Pantaloni",
+          10068
+        ],
+        "use": "Positive support only; an absent form does not reject an everyday or school item."
+      },
+      "second_source_provenance": "Wikționar is a permitted second website. It cites DEX online (or lacks an independent bibliography for creion/penar); independent lexical provenance is not claimed.",
+      "proposed_description": "Pasăre cu coada bifurcată, care prinde mai ales insecte în zbor; populațiile care cuibăresc în România sosesc primăvara și pleacă toamna."
     }
   ],
   "counts": {
@@ -3233,5 +3908,27 @@
     "planned_unique_forms": 213,
     "proposed_existing_owner_forms": 25,
     "researched": 0
-  }
+  },
+  "research_ticks": [
+    {
+      "tick": 3,
+      "items": [
+        "primăvară",
+        "toamnă",
+        "rândunică",
+        "caiet",
+        "creion",
+        "stilou",
+        "penar",
+        "riglă",
+        "radieră",
+        "ghiozdan",
+        "castravete",
+        "pantalon"
+      ],
+      "researched": 12,
+      "held": 0,
+      "note": "Exact-headword DEX/DOOM 3 selection; public second sources and frequency positive-only. Concept links qualified to their source scope."
+    }
+  ]
 }
