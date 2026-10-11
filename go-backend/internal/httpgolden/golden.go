@@ -14,6 +14,7 @@ import (
 	"reflect"
 	"sort"
 	"strings"
+	"sync"
 	"time"
 )
 
@@ -203,45 +204,42 @@ func reviewedV18() (*Corpus, error) {
 // ForSources selects an independently captured reviewed corpus only when its
 // entire source identity equals the requested export. Historical Frozen remains
 // immutable; unknown, partial or mixed source sets never gain expected responses.
+// The embedded corpora are compile-time constants, so their verified source
+// identities are indexed once per process; a match re-loads (and re-verifies)
+// only the selected corpus and returns a fresh value.
 func ForSources(sources map[string]string) (*Corpus, error) {
-	original, err := Frozen()
-	if err != nil {
-		return nil, err
+	reviewedSourcesOnce.Do(indexReviewedSources)
+	if reviewedSourcesErr != nil {
+		return nil, reviewedSourcesErr
 	}
-	current, err := reviewedV12()
-	if err != nil {
-		return nil, err
-	}
-	latest, err := reviewedV13()
-	if err != nil {
-		return nil, err
-	}
-	v14, err := reviewedV14()
-	if err != nil {
-		return nil, err
-	}
-	v15, err := reviewedV15()
-	if err != nil {
-		return nil, err
-	}
-	v16, err := reviewedV16()
-	if err != nil {
-		return nil, err
-	}
-	source6GUIRequalification, err := source6GUIRequalificationCorpus()
-	if err != nil {
-		return nil, err
-	}
-	v18, err := reviewedV18()
-	if err != nil {
-		return nil, err
-	}
-	for _, c := range []*Corpus{original, current, latest, v14, v15, v16, source6GUIRequalification, v18} {
-		if reflect.DeepEqual(c.Sources, sources) {
-			return c, nil
+	for _, reviewed := range reviewedSources {
+		if reflect.DeepEqual(reviewed.sources, sources) {
+			return reviewed.load()
 		}
 	}
 	return nil, fmt.Errorf("no independently reviewed HTTP corpus matches exact source digests")
+}
+
+type reviewedSource struct {
+	sources map[string]string
+	load    func() (*Corpus, error)
+}
+
+var (
+	reviewedSourcesOnce sync.Once
+	reviewedSources     []reviewedSource
+	reviewedSourcesErr  error
+)
+
+func indexReviewedSources() {
+	for _, load := range []func() (*Corpus, error){Frozen, reviewedV12, reviewedV13, reviewedV14, reviewedV15, reviewedV16, source6GUIRequalificationCorpus, reviewedV18} {
+		c, err := load()
+		if err != nil {
+			reviewedSources, reviewedSourcesErr = nil, err
+			return
+		}
+		reviewedSources = append(reviewedSources, reviewedSource{sources: c.Sources, load: load})
+	}
 }
 func replace(text string, aliases map[string]string) string {
 	keys := []string{}
