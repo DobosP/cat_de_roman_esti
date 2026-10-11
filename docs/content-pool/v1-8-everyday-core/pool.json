@@ -3,7 +3,7 @@
   "theme": "v1-8-everyday-core",
   "baseline_commit": "e164c0c70de38805d2648e271d294ddf36a26c8e",
   "procedure_rev": "17b97a2",
-  "scope": "Step 1 only: 60 backlog items screened before web research. No source approval or installation. All morphology and link value remain hypotheses.",
+  "scope": "Step 2a: first 12 items researched; remaining new concepts still require target planning before source fetch. No adoption approval or installation.",
   "screen": {
     "bundle_sha256": "e0cfe93de076f14a782dc6377b2655d4ef10f86ada1560ae1202bb06dbfdf877",
     "script": "~/work/_temp/content__v1-8-everyday-core/prescreen.py",
@@ -3102,7 +3102,7 @@
     {
       "id": "v18-input-leafa",
       "revision": 1,
-      "state": "held",
+      "state": "researched",
       "kind": "accepted_form_family",
       "lemma": "leafă",
       "label_ro": "leafă → Salariu",
@@ -3120,7 +3120,7 @@
         "lefii",
         "lefurilor"
       ],
-      "form_status": "Unverified paradigm hypotheses. Confirm DEX sense/register and DOOM 3 forms in step 2; new forms must also be screened before use.",
+      "form_status": "DEX sense/register, DOOM 3 headword/paradigm and corroborating Romanian usage checked; exact proposed forms remain subject to independent review.",
       "identity_checks": {
         "forms": [
           {
@@ -3187,10 +3187,26 @@
           ]
         }
       ],
-      "sources": [],
-      "next_action": "Verify the scoped sense and missing forms or link using fresh Romanian sources; prior holds remain unresolved.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/leaf%C4%83/json",
+          "summary": "DEX 2009 separates salary from tool/mercenary senses; DOOM 3 entry 1325509 has salary plural lefuri and articulated genitive lefii.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://www.digi24.ro/stiri/actualitate/social/salarii-mai-mari-din-1-iulie-pentru-aproape-18-milioane-de-romani-cati-bani-va-lua-in-mana-un-angajat-care-va-castiga-3-700-de-lei-2810383",
+          "summary": "Romanian employee-wage reporting uses leafă and lefuri as ordinary salary vocabulary.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/leaf%C4%83",
+          "summary": "Salary paradigm corroborates plural/articulated and genitive forms; lexical homonyms remain separate.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Independent whole-module factual and quality review; install only if accepted.",
       "checked_on": "2026-10-11",
-      "decision": "Prior full-paradigm/homonym hold and deferred leafă remain: verify modern employee-pay sense, normative forms and independent review; V1.7 is not resumed.",
+      "decision": "Modern employee salary sense and five distinct input keys supported; exclude regional tool and old mercenary senses. Prior hold revisited with current normative and news evidence; independent adoption review still required.",
       "proposed_forms": [
         "leafă",
         "lefuri",
@@ -3199,12 +3215,26 @@
         "lefurilor"
       ],
       "already_resolved_forms": [],
-      "research_ready": false
+      "research_ready": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": null,
+        "absence_is_not_rejection": true
+      },
+      "verified_forms": [
+        "leafă",
+        "lefuri",
+        "lefurile",
+        "lefii",
+        "lefurilor"
+      ],
+      "input_type": "input forms"
     },
     {
       "id": "v18-input-ograda",
       "revision": 1,
-      "state": "held",
+      "state": "researched",
       "kind": "accepted_form_family",
       "lemma": "ogradă",
       "label_ro": "ogradă → Curte",
@@ -3222,7 +3252,7 @@
         "ogrăzii",
         "ogrăzilor"
       ],
-      "form_status": "Unverified paradigm hypotheses. Confirm DEX sense/register and DOOM 3 forms in step 2; new forms must also be screened before use.",
+      "form_status": "DEX sense/register, DOOM 3 headword/paradigm and corroborating Romanian usage checked; exact proposed forms remain subject to independent review.",
       "identity_checks": {
         "forms": [
           {
@@ -3261,10 +3291,26 @@
           "risks": []
         }
       ],
-      "sources": [],
-      "next_action": "Verify the scoped sense and missing forms or link using fresh Romanian sources; prior holds remain unresolved.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/ograd%C4%83/json",
+          "summary": "DEX 2009 marks the yard sense regional and distinguishes orchard/estate senses; DOOM 3 entry 1286883 gives ogrăzii and ogrăzi.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://stirileprotv.ro/stiri/actualitate/cum-s-a-produs-accidentul-cu-7-victime-din-judetul-iasi-una-dintre-masini-a-ricosat-in-curtea-unui-localnic.html",
+          "summary": "The report uses curte and an eyewitness uses ogradă for the same residential yard.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/ograd%C4%83",
+          "summary": "Corroborates the regional household-yard sense and paradigm without erasing other senses.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Independent whole-module factual and quality review; install only if accepted.",
       "checked_on": "2026-10-11",
-      "decision": "Deferred ogradă and prior V50 reviewer disagreement about Curte compatibility remain unresolved (v1-2-yard).",
+      "decision": "Regional input family for the household-yard sense; not a synonym claim across orchard, estate or retinue senses. Fresh normative/usage evidence revisits the former V50 hold; independent review must settle compatibility.",
       "proposed_forms": [
         "ogradă",
         "ogrăzi",
@@ -3273,12 +3319,26 @@
         "ogrăzilor"
       ],
       "already_resolved_forms": [],
-      "research_ready": false
+      "research_ready": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": null,
+        "absence_is_not_rejection": true
+      },
+      "verified_forms": [
+        "ogradă",
+        "ogrăzi",
+        "ogrăzile",
+        "ogrăzii",
+        "ogrăzilor"
+      ],
+      "input_type": "regional input"
     },
     {
       "id": "v18-input-colinda",
       "revision": 1,
-      "state": "idea",
+      "state": "held",
       "kind": "accepted_form_family",
       "lemma": "colindă",
       "label_ro": "colindă → Colind",
@@ -3346,10 +3406,21 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Verify the scoped sense and missing forms or link using fresh Romanian sources; prior holds remain unresolved.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/colind%C4%83/json",
+          "summary": "DEX 2009 entry 848967 identifies the winter-song noun with plural colinde; exact DOOM 3 absent in this response.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Colind",
+          "summary": "Documents traditional Christmas/New Year songs; this does not approve the full input paradigm.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Retain hold; unresolved source, normative or sense compatibility issue.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
+      "decision": "DEX verifies the winter-song noun, but no exact-headword DOOM 3 entry was returned; normative full-paradigm verification remains incomplete.",
       "proposed_forms": [
         "colindă",
         "colindei"
@@ -3359,12 +3430,23 @@
         "colindele",
         "colindelor"
       ],
-      "research_ready": false
+      "research_ready": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "colinde",
+          "rank": 40430,
+          "count": 248
+        },
+        "absence_is_not_rejection": true
+      },
+      "verified_forms": []
     },
     {
       "id": "v18-input-ghiocel",
       "revision": 1,
-      "state": "idea",
+      "state": "researched",
       "kind": "accepted_form_family",
       "lemma": "ghiocel",
       "label_ro": "ghiocel → Ghiocelul",
@@ -3383,7 +3465,7 @@
         "ghioceii",
         "ghioceilor"
       ],
-      "form_status": "Unverified paradigm hypotheses. Confirm DEX sense/register and DOOM 3 forms in step 2; new forms must also be screened before use.",
+      "form_status": "DEX sense/register, DOOM 3 headword/paradigm and corroborating Romanian usage checked; exact proposed forms remain subject to independent review.",
       "identity_checks": {
         "forms": [
           {
@@ -3434,10 +3516,26 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Verify the scoped sense and missing forms or link using fresh Romanian sources; prior holds remain unresolved.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/ghiocel/json",
+          "summary": "DEX 2009 identifies the early white-flowered plant; DOOM 3 entry 1324916 specifies ghiocei and articulated ghioceii.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/ghiocel",
+          "summary": "The noun paradigm corroborates singular genitive and plural genitive forms.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Ghiocel",
+          "summary": "Uses bare and articulated plant names; broader genus discussion is not used to change the current owner.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Independent whole-module factual and quality review; install only if accepted.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
+      "decision": "Missing forms belong to the existing early-flowering plant owner; no new genus or species concept is introduced.",
       "proposed_forms": [
         "ghiocel",
         "ghiocelului",
@@ -3448,12 +3546,25 @@
         "ghiocelul",
         "ghiocei"
       ],
-      "research_ready": false
+      "research_ready": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": null,
+        "absence_is_not_rejection": true
+      },
+      "verified_forms": [
+        "ghiocel",
+        "ghiocelului",
+        "ghioceii",
+        "ghioceilor"
+      ],
+      "input_type": "input forms"
     },
     {
       "id": "v18-input-bucegi",
       "revision": 1,
-      "state": "idea",
+      "state": "held",
       "kind": "accepted_form_family",
       "lemma": "Bucegi",
       "label_ro": "Bucegi → Munții Bucegi",
@@ -3503,10 +3614,21 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Verify the scoped sense and missing forms or link using fresh Romanian sources; prior holds remain unresolved.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/Bucegi/json",
+          "summary": "Exact headword occurs only in encyclopedic/historical sources in this response; no DOOM 3 entry.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Mun%C8%9Bii_Bucegi",
+          "summary": "Bucegi redirects to the mountain article, which uses the short massif name and Bucegilor.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Retain hold; unresolved source, normative or sense compatibility issue.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
+      "decision": "Mountain-name usage is supported by Wikipedia, but required normative lemma evidence is absent from exact-headword DOOM 3 results; retain existing Bucegii/Bucegilor and hold the new bare form.",
       "proposed_forms": [
         "Bucegi"
       ],
@@ -3514,12 +3636,19 @@
         "Bucegii",
         "Bucegilor"
       ],
-      "research_ready": false
+      "research_ready": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": null,
+        "absence_is_not_rejection": true
+      },
+      "verified_forms": []
     },
     {
       "id": "v18-input-peles",
       "revision": 1,
-      "state": "idea",
+      "state": "held",
       "kind": "accepted_form_family",
       "lemma": "Peleș",
       "label_ro": "Peleș → Castelul Peleș",
@@ -3561,10 +3690,21 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Verify the scoped sense and missing forms or link using fresh Romanian sources; prior holds remain unresolved.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/Pele%C8%99/json",
+          "summary": "Response redirects to lowercase peleș with lexical/historical entries; no matching castle DOOM 3 evidence.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Castelul_Pele%C8%99",
+          "summary": "The castle article uses Peleș and Peleșul, but the disambiguation page also names a river and settlements.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Retain hold; unresolved source, normative or sense compatibility issue.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
+      "decision": "Bare Peleș has several name owners and dexonline returned unrelated lowercase lexical senses; castle usage alone does not clear the required exact-lemma normative/source checks.",
       "proposed_forms": [
         "Peleș",
         "Peleșului"
@@ -3572,7 +3712,14 @@
       "already_resolved_forms": [
         "Peleșul"
       ],
-      "research_ready": false
+      "research_ready": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": null,
+        "absence_is_not_rejection": true
+      },
+      "verified_forms": []
     },
     {
       "id": "v18-input-pompier",
@@ -3655,10 +3802,21 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Verify the scoped sense and missing forms or link using fresh Romanian sources; prior holds remain unresolved.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/pompier/json",
+          "summary": "DEX 2009 defines a trained member of an intervention corps; DOOM 3 entry 1283850 gives plural pompieri.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/pompier",
+          "summary": "Confirms the person sense rather than identity with the whole institutional service.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Retain hold; unresolved source, normative or sense compatibility issue.",
       "checked_on": "2026-10-11",
-      "decision": "Individual firefighter versus institutional-service owner: substitutability is unverified; do not reinterpret the existing node.",
+      "decision": "Dictionary and second source define an individual firefighter, while the existing owner describes the emergency service; missing singular forms do not yet satisfy sense substitution.",
       "proposed_forms": [
         "pompier",
         "pompierului",
@@ -3669,7 +3827,18 @@
         "pompieri",
         "pompierii"
       ],
-      "research_ready": false
+      "research_ready": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "pompieri",
+          "rank": 8773,
+          "count": 2322
+        },
+        "absence_is_not_rejection": true
+      },
+      "verified_forms": []
     },
     {
       "id": "v18-input-drob",
@@ -3731,10 +3900,21 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Verify the scoped sense and missing forms or link using fresh Romanian sources; prior holds remain unresolved.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/drob/json",
+          "summary": "DEX 2009 and DOOM 3 entry 1308706 distinguish neuter food forms from masculine lump/plant homonyms.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://hotnews.ro/drob-de-paste-reteta-traditionala-pentru-drob-de-miel-cum-se-fac-drobul-de-pui-si-drobul-vegetarian-133149",
+          "summary": "The article explicitly discusses lamb, chicken and vegetarian drob, showing the bare food term is broader than lamb.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Retain hold; unresolved source, normative or sense compatibility issue.",
       "checked_on": "2026-10-11",
-      "decision": "Bare drob may name a non-lamb dish or a piece of material; the existing owner is Drob de miel. No broad alias is approved.",
+      "decision": "Modern drob includes chicken and vegetarian dishes; a global bare alias would identify them as the lamb-only owner. Retain hold without moving existing drobul.",
       "proposed_forms": [
         "drob",
         "drobului",
@@ -3745,12 +3925,19 @@
       "already_resolved_forms": [
         "drobul"
       ],
-      "research_ready": false
+      "research_ready": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": null,
+        "absence_is_not_rejection": true
+      },
+      "verified_forms": []
     },
     {
       "id": "v18-input-lemne",
       "revision": 1,
-      "state": "idea",
+      "state": "researched",
       "kind": "accepted_form_family",
       "lemma": "lemn",
       "label_ro": "lemn → Lemn",
@@ -3769,7 +3956,7 @@
         "lemnele",
         "lemnelor"
       ],
-      "form_status": "Unverified paradigm hypotheses. Confirm DEX sense/register and DOOM 3 forms in step 2; new forms must also be screened before use.",
+      "form_status": "DEX sense/register, DOOM 3 headword/paradigm and corroborating Romanian usage checked; exact proposed forms remain subject to independent review.",
       "identity_checks": {
         "forms": [
           {
@@ -3857,10 +4044,21 @@
           ]
         }
       ],
-      "sources": [],
-      "next_action": "Verify the scoped sense and missing forms or link using fresh Romanian sources; prior holds remain unresolved.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/lemn/json",
+          "summary": "DEX 2009 includes cut wooden material for construction/fuel; DOOM 3 entry 1325761 gives the neuter plural lemne.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Lemn",
+          "summary": "Describes wood as plant-derived material with construction and fuel uses.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Independent whole-module factual and quality review; install only if accepted.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
+      "decision": "Plural forms remain within the existing wood-material sense, including cut wood used in construction or as fuel; no tree alias is proposed.",
       "proposed_forms": [
         "lemne",
         "lemnele",
@@ -3871,12 +4069,28 @@
         "lemnul",
         "lemnului"
       ],
-      "research_ready": false
+      "research_ready": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "lemn",
+          "rank": 3060,
+          "count": 8084
+        },
+        "absence_is_not_rejection": true
+      },
+      "verified_forms": [
+        "lemne",
+        "lemnele",
+        "lemnelor"
+      ],
+      "input_type": "input forms"
     },
     {
       "id": "v18-input-drapel",
       "revision": 1,
-      "state": "idea",
+      "state": "researched",
       "kind": "accepted_form_family",
       "lemma": "drapel",
       "label_ro": "drapel → Steag",
@@ -3895,7 +4109,7 @@
         "drapelele",
         "drapelelor"
       ],
-      "form_status": "Unverified paradigm hypotheses. Confirm DEX sense/register and DOOM 3 forms in step 2; new forms must also be screened before use.",
+      "form_status": "DEX sense/register, DOOM 3 headword/paradigm and corroborating Romanian usage checked; exact proposed forms remain subject to independent review.",
       "identity_checks": {
         "forms": [
           {
@@ -3947,10 +4161,21 @@
           ]
         }
       ],
-      "sources": [],
-      "next_action": "Verify the scoped sense and missing forms or link using fresh Romanian sources; prior holds remain unresolved.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/drapel/json",
+          "summary": "DEX 2009 links drapel to symbolic steag; DOOM 3 entry 1308599 gives neuter plural drapele.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/drapel",
+          "summary": "Corroborates the state, military-unit or organization flag sense.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Independent whole-module factual and quality review; install only if accepted.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
+      "decision": "Five missing regular neuter forms extend the already installed drapel headword on the symbolic-flag owner.",
       "proposed_forms": [
         "drapelul",
         "drapelului",
@@ -3961,12 +4186,30 @@
       "already_resolved_forms": [
         "drapel"
       ],
-      "research_ready": false
+      "research_ready": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "drapelul",
+          "rank": 26505,
+          "count": 490
+        },
+        "absence_is_not_rejection": true
+      },
+      "verified_forms": [
+        "drapelul",
+        "drapelului",
+        "drapele",
+        "drapelele",
+        "drapelelor"
+      ],
+      "input_type": "input forms"
     },
     {
       "id": "v18-input-untdelemn",
       "revision": 1,
-      "state": "idea",
+      "state": "held",
       "kind": "accepted_form_family",
       "lemma": "untdelemn",
       "label_ro": "untdelemn → Ulei",
@@ -4022,10 +4265,21 @@
           ]
         }
       ],
-      "sources": [],
-      "next_action": "Verify the scoped sense and missing forms or link using fresh Romanian sources; prior holds remain unresolved.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/untdelemn/json",
+          "summary": "DEX 2009 defines edible vegetable oil; the exact response has DOOM 2 but no DOOM 3 entry.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/untdelemn",
+          "summary": "Corroborates edible vegetable oil, excluding lubricants and technical oils.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Retain hold; unresolved source, normative or sense compatibility issue.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
+      "decision": "The edible-vegetable-oil sense matches, but no exact-headword DOOM 3 entry was returned; hold new inflected forms pending normative verification.",
       "proposed_forms": [
         "untdelemnul",
         "untdelemnului"
@@ -4033,12 +4287,19 @@
       "already_resolved_forms": [
         "untdelemn"
       ],
-      "research_ready": false
+      "research_ready": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": null,
+        "absence_is_not_rejection": true
+      },
+      "verified_forms": []
     },
     {
       "id": "v18-link-poza-fotografie",
       "revision": 1,
-      "state": "idea",
+      "state": "researched",
       "kind": "new_relation",
       "lemma": "Poză–Fotografie",
       "label_ro": "Poză–Fotografie",
@@ -4106,20 +4367,61 @@
           "risks": []
         }
       ],
-      "sources": [],
-      "next_action": "Verify the scoped sense and missing forms or link using fresh Romanian sources; prior holds remain unresolved.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/poz%C4%83/json",
+          "summary": "DEX 2009 distinguishes photograph, illustration and pose senses; the proposed edge uses only the photograph sense.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/fotografie/json",
+          "summary": "DEX 2009 distinguishes image-result and technique; the current node and edge refer to the image result.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/fotografie",
+          "summary": "Corroborates image-result terminology; not all art/process senses are equated with pictures.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/poz%C4%83",
+          "summary": "Corroborates ordinary photograph usage and the broader illustration meaning.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Independent whole-module factual and quality review of direction and caption.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
-      "research_ready": false
+      "decision": "Use one outward association from Fotografie to Poză with the caption «o imagine fotografică poate fi numită poză»; never an identity alias or a claim about all illustrations.",
+      "research_ready": true,
+      "researched_on": "2026-10-11",
+      "proposed_edge": {
+        "src": "n_v4art_fotografie",
+        "dst": "n_v4mem_poza",
+        "relation": "also_called_in_image_sense",
+        "label_ro": "o imagine fotografică poate fi numită poză",
+        "strength": 0.85,
+        "bidirectional": 0,
+        "is_distractor": 0
+      },
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "Poză",
+          "rank": 2053,
+          "count": 13119
+        },
+        "absence_is_not_rejection": true
+      }
     }
   ],
   "counts": {
     "records": 60,
-    "idea": 53,
-    "held": 7,
+    "idea": 45,
+    "held": 9,
     "accepted": 0,
     "installed": 0,
     "planned_unique_forms": 319,
-    "proposed_existing_owner_forms": 37
+    "proposed_existing_owner_forms": 37,
+    "researched": 6
   }
 }
