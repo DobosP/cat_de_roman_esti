@@ -2,7 +2,7 @@
 # Canonical distroless Go image (S1 M1 step 3); the gate's APP_DOCKERFILE and every Compose/CI caller build it.
 # Every image/version below is copied from the current versions.lock.json.
 # Parent supplies actual GATE_SHA/GATE_TREE_SHA256 build arguments; no inferred defaults.
-# Runtime contract: /app on container port 8080, `/app healthcheck` (no shell/curl), UID 10001, /data/submissions 700.
+# Runtime contract: /app binds :$PORT (read in Go, default 8000), `/app healthcheck` (no shell/curl), UID 10001, /data/submissions 700.
 FROM node:26.10.0-trixie-slim@sha256:930557a230abacbc3f4fd9b8648abf8f4bee1e17cb72195dcdfb2f709bc85b33 AS frontend
 WORKDIR /build
 COPY versions.lock.json /build/versions.lock.json
@@ -47,8 +47,7 @@ COPY --from=backend /out/data/ /data/
 COPY shared-go/authcore/LICENSE /usr/share/doc/cat-authcore/LICENSE
 ENV CAT_ACCOUNTS_ENABLED=0
 USER 10001:10001
-EXPOSE 8080
+EXPOSE 8000
 STOPSIGNAL SIGTERM
 HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 CMD ["/app", "healthcheck"]
 ENTRYPOINT ["/app"]
-CMD ["-listen", "0.0.0.0:8080"]

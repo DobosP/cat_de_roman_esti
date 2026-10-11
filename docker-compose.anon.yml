@@ -25,6 +25,7 @@ services:
         GATE_TREE_SHA256: ${GATE_TREE_SHA256:?explicit owner-qualified 64-hex source tree required}
     image: cat-de-roman-esti:latest
     environment:
+      PORT: "8000"
       CAT_ACCOUNTS_ENABLED: "0"
       CAT_DOMAIN: ${CAT_DOMAIN:?set CAT_DOMAIN in .env.anon}
       CAT_CONSENT_VERSION: ${CAT_CONSENT_VERSION:-2026-07-09}
@@ -37,7 +38,7 @@ services:
       # No CAT_SUBMISSIONS_DIR / submissions volume on purpose: the anonymous v1 launch
       # keeps POST /api/submissions disabled (503) so the stack stores zero user data.
     expose:
-      - "8080" # reachable only by Caddy over the compose network (no host port)
+      - "8000" # reachable only by Caddy over the compose network (no host port)
     read_only: true
     cap_drop: [ALL]
     security_opt: ["no-new-privileges:true"]

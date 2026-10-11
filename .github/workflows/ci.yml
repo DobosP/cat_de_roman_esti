@@ -122,7 +122,7 @@ jobs:
           PATH: ${{ steps.native-path.outputs.path }}
         run: |
           test "$(docker image inspect --format '{{.Config.User}}' cat-native-go:ci)" = "10001:10001"
-          container=$(docker run -d --read-only --cap-drop ALL --security-opt no-new-privileges -p 127.0.0.1::8080 -e CAT_LEGAL_OPERATOR=Synthetic-CI -e CAT_LEGAL_CONTACT_EMAIL=operator@example.invalid cat-native-go:ci)
+          container=$(docker run -d --read-only --cap-drop ALL --security-opt no-new-privileges -p 127.0.0.1::8000 -e CAT_LEGAL_OPERATOR=Synthetic-CI -e CAT_LEGAL_CONTACT_EMAIL=operator@example.invalid cat-native-go:ci)
           trap 'docker rm -f "$container" >/dev/null' EXIT
           for attempt in $(seq 1 60); do
             status=$(docker inspect --format '{{.State.Health.Status}}' "$container")
@@ -130,7 +130,7 @@ jobs:
             sleep 1
           done
           test "$status" = healthy
-          address=$(docker port "$container" 8080/tcp)
+          address=$(docker port "$container" 8000/tcp)
           build/cat-qualify smoke --url "http://$address" --static-root cat_de_roman_esti/web/static
           # Distroless has no shell: list the exported filesystem instead of exec'ing into it.
           docker export --output "$RUNNER_TEMP/cat-native-go-rootfs.tar" "$container"

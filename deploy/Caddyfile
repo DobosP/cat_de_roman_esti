@@ -22,5 +22,5 @@
 	request_body {
 		max_size {$CAT_MAX_REQUEST_BYTES}
 	}
-	reverse_proxy app:8080
+	reverse_proxy app:8000
 }

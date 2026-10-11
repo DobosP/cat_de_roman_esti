@@ -122,8 +122,8 @@ The canonical Dockerfile builds the SPA with Node and the backend with Go. Its
 distroless runtime (UID 10001) contains only `/app` with embedded static files and
 its `/app healthcheck` probe; it has no shell, curl or Python. Local and
 anonymous-production Compose use this image, a read-only application filesystem
-and container port 8080, matching Caddy. Change the local published port with
-`PORT=9000 docker compose up`.
+and container port 8000 (`PORT`, read by `/app`), matching Caddy. Change the
+local published port with `PORT=9000 docker compose up`.
 The canonical recipe prepares selected Node/managed embedfs output per
 [ADR-0184](docs/adr/0184-native-spa-toolchain-and-managed-output.md). The launcher
 requires the actual owner-qualified pair bound to clean checkout HEAD, builds with

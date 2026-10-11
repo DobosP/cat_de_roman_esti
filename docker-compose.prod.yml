@@ -41,6 +41,7 @@ services:
       db:
         condition: service_healthy
     environment:
+      PORT: "8000"
       CAT_ACCOUNTS_ENABLED: "1"
       CAT_DEBUG: "0"
       CAT_DOMAIN: ${CAT_DOMAIN:?set CAT_DOMAIN in .env.prod}
@@ -60,12 +61,12 @@ services:
       CAT_MAX_REQUEST_BYTES: ${CAT_MAX_REQUEST_BYTES:-65536}
     volumes:
       - submissions:/data/submissions
-    command: ["-listen", "0.0.0.0:8080", "-migrate"]
+    command: ["-migrate"]
     read_only: true
     cap_drop: [ALL]
     security_opt: ["no-new-privileges:true"]
     expose:
-      - "8080" # reachable only by Caddy over the compose network (no host port)
+      - "8000" # reachable only by Caddy over the compose network (no host port)
     restart: unless-stopped
 
   caddy:

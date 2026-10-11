@@ -37,7 +37,7 @@ cmd_docker() {
   cleanup_iid
   trap - EXIT
   exec docker run --pull=never --rm -it --read-only --cap-drop ALL --security-opt no-new-privileges \
-    -p "$address:8080" -e CAT_ACCOUNTS_ENABLED=0 "$image"
+    -p "$address:8000" -e CAT_ACCOUNTS_ENABLED=0 "$image"
 }
 
 usage() {

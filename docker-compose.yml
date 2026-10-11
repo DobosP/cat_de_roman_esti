@@ -10,8 +10,9 @@ services:
     image: cat-de-roman-esti:latest
     container_name: cat-de-roman-esti
     ports:
-      - "127.0.0.1:${PORT:-8000}:8080"
+      - "127.0.0.1:${PORT:-8000}:8000"
     environment:
+      PORT: "8000"
       CAT_ACCOUNTS_ENABLED: "0"
       CAT_CONSENT_VERSION: "${CAT_CONSENT_VERSION:-2026-07-09}"
       CAT_DONATE_URL: "${CAT_DONATE_URL:-}"
