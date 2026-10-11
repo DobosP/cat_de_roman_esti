@@ -2169,3 +2169,12 @@ Qualified V1.9 KG: `fixture-v1-9-seasons-and-school`, 2456 nodes/9621 links/8897
 - lant_rejection_tombstones.json: `01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d`
 - kg_sample.json: `846c2a4d48f85524b21043ecf52320edfa937946d030f91022ff6a879caae3e8`
 - cat_mobile_app_pack_contract.json: `ef9e281b092ea2dfd7df962d7625e28701b8e413543455242dbfe4e631ce393a`
+
+
+Valid until: V1.11 qualification on 2026-10-12; prior V1.10 status is history.
+- **V1.10 qualified locally:** 35 reviewed items: 20 new concepts, 15 existing-owner input
+  families; +20 nodes/+79 links/+113 forms, zero new curated rounds.
+  All new labels/forms resolve; 18 missing forms for existing owners preserve identity.
+  [Review](reviews/v1-10-everyday-discovery/README.md) and [pool](content-pool/v1-10-everyday-discovery/pool.json).
+  Four exact native rails; owner-approved Cald assertions, HTTP1207 and API148 pass.
+  Full native race has no new red versus main; managed SPA baseline failures remain unchanged.
