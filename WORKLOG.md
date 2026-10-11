@@ -2140,3 +2140,12 @@ Qualified Source6 KG: `fixture-v1-6-everyday-inputs`, 2419 nodes/9473 links/8679
 - cat_mobile_app_pack_contract.json: `282f18f6d81c623be004f28d4c5634bfbbbdf2294e466d842a9192123bc06fae`
 - **V1.7 parked** ([ADR-0188](docs/adr/0188-park-v1-7-and-reset-content-loop.md)): `codex/content-v1-7` (local 3377a68, origin fba9498) and `codex/content-v1-7-qualification` are not merged; zero integrated growth. Source6 stays live; [ADR-0186](docs/adr/0186-go-authoritative-content-validation.md) keeps Go/native JSON authoritative. Outcome: [pool](docs/content-pool/v1-7-recognizable-content/pool.json); leafă returns later as a full-paradigm Salariu input.
 - **Content rail baseline GREEN** (verified 2026-10-11): `cat-content-rail all --root .. --check` and `go -C go-backend test ./internal/contentrails/ ./internal/contentbuild/` pass; installed authorities re-run the native audits under the current binary and accept on behaviour equality, not runtime file hashes ([ADR-0189](docs/adr/0189-behaviour-bound-installed-content-authorities.md)). Content installs enabled per [CONTENT_LOOP.md](docs/CONTENT_LOOP.md).
+
+Valid until: V1.9 lands locally — then treat as history.
+2026-10-11 — prior V1.8 qualified content facts.
+- **V1.8 qualified locally:** 30 reviewed items: 23 new concepts, six existing-owner input
+  families and one directional link; +23 nodes/+93 links/+136 forms, zero new curated rounds.
+  Leafă→Salariu; ogradă→Curte is a regional input; full non-colliding paradigms preserve owners.
+  [Review](docs/reviews/v1-8-everyday-core/README.md) and [pool](docs/content-pool/v1-8-everyday-core/pool.json).
+  Four native rails reconstruct exactly; owner-approved Cald assertions, HTTP1207 and API51 pass.
+  Full native race has no new red versus main; managed SPA baseline failures remain unchanged.
