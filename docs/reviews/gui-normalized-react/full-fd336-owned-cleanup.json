@@ -1,0 +1,88 @@
+{
+  "schema": 1,
+  "utc": "2026-10-11T10:18:14.856108+00:00",
+  "source": "fd336984a09e7e76ca68c4635c7bd617fc2414a2",
+  "wrapper_session": 93549,
+  "wrapper_exit": 201,
+  "before_journal_sha256": "583ae98e987e8ef9d4748179c40c36eb481d53a0c8c4399c76a234f2eebb7739",
+  "state": "OWNED CLEANUP PASS; exact app/db and empty owned network absent; exact ID/name/project resources and already-owned legacy CID absent",
+  "execution_boundary": "Cleanup session82420 reached network absence assertion after all stop20/stopped-inspect/nonforce rm and network-empty/rm exit0 assertions. Its final probe wrongly expected only no such network; actual Docker says not found. This successor independently verifies both IDs/names and project inventory, without relabeling the original exit1.",
+  "actual_cleanup_session": 82420,
+  "cleanup_script_exit": 1,
+  "commands_before_refusal_verified_by_reached_guard": [
+    "Both exactowned containers stop --timeout20 exit0, stopped-state ownership assertion, nonforce rm exit0, ID/name absence",
+    "Exactowned network empty-state ownership assertion and rm exit0"
+  ],
+  "absence_checks": [
+    {
+      "kind": "container",
+      "identifier": "7c33c551613094b5ea2a5f3659efb8a0a31ffb34227bac028ef6676c2ed965db",
+      "exit": 1,
+      "stderr": "error: no such object: 7c33c551613094b5ea2a5f3659efb8a0a31ffb34227bac028ef6676c2ed965db"
+    },
+    {
+      "kind": "container",
+      "identifier": "/gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc-app-1",
+      "exit": 1,
+      "stderr": "error: no such object: /gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc-app-1"
+    },
+    {
+      "kind": "container",
+      "identifier": "91721626c083e3921daed5153e9b999398fd83734a39b1c26c2e0b1fc40395ff",
+      "exit": 1,
+      "stderr": "error: no such object: 91721626c083e3921daed5153e9b999398fd83734a39b1c26c2e0b1fc40395ff"
+    },
+    {
+      "kind": "container",
+      "identifier": "/gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc-db-1",
+      "exit": 1,
+      "stderr": "error: no such object: /gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc-db-1"
+    },
+    {
+      "kind": "network",
+      "identifier": "e8e9558bc1bfcef567756002d1ee171ea3fc508e79f0d381dcdbb0fc47c15525",
+      "exit": 1,
+      "stderr": "Error response from daemon: network e8e9558bc1bfcef567756002d1ee171ea3fc508e79f0d381dcdbb0fc47c15525 not found"
+    },
+    {
+      "kind": "network",
+      "identifier": "gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc_default",
+      "exit": 1,
+      "stderr": "Error response from daemon: network gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc_default not found"
+    },
+    {
+      "kind": "empty project inventory",
+      "command": [
+        "ps",
+        "-aq",
+        "--no-trunc"
+      ],
+      "exit": 0
+    },
+    {
+      "kind": "empty project inventory",
+      "command": [
+        "network",
+        "ls",
+        "-q"
+      ],
+      "exit": 0
+    },
+    {
+      "kind": "empty project inventory",
+      "command": [
+        "volume",
+        "ls",
+        "-q"
+      ],
+      "exit": 0
+    },
+    {
+      "kind": "legacy absence",
+      "identifier": "1675c044c04b386cf8d28d0e1374aa10f39c886a8630a950e0584ddd9031a534",
+      "exit": 1
+    }
+  ],
+  "retained_app_image": "sha256:33274644ba0fbc9f9eb8fbb0e2cf7f5f43899392996c8e88185c2af882417514",
+  "scope": "Only completed validation project; foreign/production/canonical/source/images/volumes untouched"
+}

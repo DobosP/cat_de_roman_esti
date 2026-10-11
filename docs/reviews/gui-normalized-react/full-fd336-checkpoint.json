@@ -1,0 +1,358 @@
+{
+  "schema": 1,
+  "recorded_utc": "2026-10-11T10:32:09.838284+00:00",
+  "tested_source": "fd336984a09e7e76ca68c4635c7bd617fc2414a2",
+  "later_docs_head_is_not_runtime_qualified": true,
+  "actual_wrapper_session": 93549,
+  "actual_wrapper_exit": 201,
+  "wrapper_invocation": "f519e22c-1004-4427-a6b0-03d5876f5a81",
+  "inner_invocation": "f1233359-5bf6-42df-bf0f-48f5a77194ad",
+  "tree_sha256": "79a669bf4c6413507aad41a775a2999afcffa1effd1494510f4c832de0965c9c",
+  "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+  "app_image_id": "sha256:33274644ba0fbc9f9eb8fbb0e2cf7f5f43899392996c8e88185c2af882417514",
+  "actual_checks": {
+    "total": 39,
+    "pass": 37,
+    "failed": [
+      "cat-route-budgets",
+      "repo-full-exit"
+    ]
+  },
+  "browser": {
+    "unique": 900,
+    "desktop": 450,
+    "mobile": 450,
+    "once_each": true,
+    "retry_skip_flaky_global_errors": 0,
+    "raw_report_sha256": "1fdca7cb967d8da54d9c7b420e9795dc7097819965135b9e67ccbf2b6ce6088e",
+    "original_reuse": {
+      "fixtures_per_project": 16,
+      "executed_passing_assertions_per_project": 78,
+      "fixture_executions_total": 32,
+      "executed_passing_assertions_total": 156,
+      "sealed_receipt_path": "docs/reviews/gui-original-react/receipt.json",
+      "sealed_receipt_sha256": "5c5704bc05511f91a02582c17e515500d2c8bca471f1c50cfd2505b646a27e58",
+      "historical_source": "45edcf2ce170c112621c73609e6e169633eb38a8",
+      "historical_sdk": "0.3.0",
+      "historical_qualification_rerun": false,
+      "fixture_sha256": "2b06e9274a39d33352d0f5f9856899530911b90e7cdefe264f6fb75398409e2a",
+      "config_sha256": "6e05214dbbcb1bb5c2881a0a2a228ca1a3292039d1baea0858787856415ad14f",
+      "reporter_sha256": "20f561c1fcd1c0829460fdd4bdf58d51435d8ad5f4c162dfa21441fa5955a3c8",
+      "fixture_config_reporter_equal_frozen_copies": true
+    }
+  },
+  "frontend": {
+    "tests": 459,
+    "pass": 459,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "independent_pass_line_count": 459
+  },
+  "native_and_pg": {
+    "frontend": {
+      "tests": 459,
+      "pass": 459,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "independent_pass_line_count": 459
+    },
+    "go_json_test_executions": {
+      "backend_race": {
+        "pass": 1397,
+        "top_level_pass": 273,
+        "package_pass": 28,
+        "test_skips": 17,
+        "fail": 0
+      },
+      "authcore_race": {
+        "pass": 28,
+        "top_level_pass": 15,
+        "package_pass": 1,
+        "skip": 0,
+        "fail": 0
+      },
+      "explicit_pg_accounts": {
+        "pass": 12,
+        "top_level_pass": 12,
+        "package_pass": 1,
+        "skip": 0,
+        "fail": 0
+      },
+      "explicit_pg_httpapi": {
+        "pass": 291,
+        "top_level_pass": 59,
+        "package_pass": 1,
+        "skip": 0,
+        "fail": 0
+      }
+    },
+    "default_backend_skipped_identities_passed_in_explicit_pg": 17,
+    "uncovered_default_backend_skips": 0,
+    "http_parity": {
+      "ok": true,
+      "requests": 1207,
+      "accounts_enabled": false
+    },
+    "doc_check": {
+      "files": 59,
+      "dead_links": 0,
+      "stale_terms": 0,
+      "retired_verbs": 0,
+      "orphans": 0,
+      "budget_issues": 0
+    },
+    "frontend_lint_types_build_backend_vet_authcore_vet_docs_content_validate_export": "Actual corresponding command records exit0; no project command rerun for this review."
+  },
+  "csp_image_baseline": {
+    "active_observation": {
+      "path": ".gate/full/active-csp-observation.json",
+      "bytes": 69665,
+      "sha256": "a901d7930adfaf59b7a3f09b1e760a617496770a493a44b6b76ab8849bc87ff9"
+    },
+    "measurement": {
+      "path": ".gate/full/csp-measurement.json",
+      "bytes": 69917,
+      "sha256": "c6b3e7a817e88aa217e86b501977f4f87641a5614858250d4ad014ee40a7ad76"
+    },
+    "app_witness": {
+      "path": ".gate/full/app-witness.json",
+      "bytes": 10123,
+      "sha256": "eb5ad04590fba4c7946502e520e5c2f011d4644b283f410f7838ee8aed65ef8f"
+    },
+    "comparisons": {
+      "path": ".gate/full/baseline-comparison/comparisons.json",
+      "bytes": 2736,
+      "sha256": "697bc537d5062a4854b7980162c5f3a9887fb849ed7ad5edb1d21355265c5094"
+    },
+    "enforced_pages": 9,
+    "distinct_nonce_hashes": 9,
+    "violations": 0,
+    "legacy_violations": 0,
+    "app_asset_witnesses": 32,
+    "app_font_witnesses": 4,
+    "baseline_pngs": 9,
+    "all_pngs_byte_equal_originals": true,
+    "permitted_png_difference": 0,
+    "baseline_predicates_passed": 16,
+    "axe": {
+      "reviewed_fingerprints_retained": 10,
+      "targets_retained": 34,
+      "eight_route_fingerprints_literal_match": true,
+      "home_aliases_live_semantic_witnessed": true,
+      "home_serious_finding_retained": true,
+      "zero_axe_findings_claim": false
+    },
+    "vitals": {
+      "runs_per_route": 5,
+      "recomputed_medians_match": true,
+      "conexiuni_current_lcp_inp_ms": [
+        1988,
+        88
+      ],
+      "conexiuni_baseline_lcp_inp_ms": [
+        2836,
+        184
+      ],
+      "alchimie_challenges_current_lcp_inp_ms": [
+        2032,
+        120
+      ],
+      "alchimie_challenges_baseline_lcp_inp_ms": [
+        4228,
+        200
+      ],
+      "cls": 0,
+      "comparative_predicates_passed": 4,
+      "approved_regression_tolerance": "max(10%,50ms)"
+    }
+  },
+  "same_run_legacy_owner": {
+    "owner_session_id_reported_by_parent": 7368,
+    "listener_port": 8081,
+    "request": {
+      "path": ".gate/full/legacy-owner/f519e22c-1004-4427-a6b0-03d5876f5a81/request.json",
+      "bytes": 973,
+      "sha256": "a5018da228073aac51048554834f7b6ebeb5d28c0f5101af829170232dcb391b"
+    },
+    "preflight": {
+      "path": ".gate/full/legacy-owner/f519e22c-1004-4427-a6b0-03d5876f5a81/preflight.json",
+      "bytes": 7191,
+      "sha256": "cf306fb5982e6d48c596fd8e4c26eee6cab8e0666ac3703524f9254ca2d2a9d8"
+    },
+    "probe": {
+      "path": ".gate/full/legacy-owner/f519e22c-1004-4427-a6b0-03d5876f5a81/probe-result.json",
+      "bytes": 15405,
+      "sha256": "be24a0bb1309b73b1d0987319b0512ad72c4b4d2ffb32d1cfa566a3d3235e8d2"
+    },
+    "lifecycle": {
+      "path": ".gate/full/legacy-owner/f519e22c-1004-4427-a6b0-03d5876f5a81/owner-lifecycle.json",
+      "bytes": 11300,
+      "sha256": "17805fd96127ac83ea70d4cecdcd100cab05e6e14b5dbf9d7f0016199024aee4"
+    },
+    "confirm": {
+      "path": ".gate/full/legacy-owner/f519e22c-1004-4427-a6b0-03d5876f5a81/confirm.json",
+      "bytes": 7966,
+      "sha256": "d8d20e23c7464e13f538d3acd1357eb3abebdb0762eb7ef6138050503732246e"
+    },
+    "preflight_probe_confirm_context_matches_selected_run": true,
+    "request_sha256": "a5018da228073aac51048554834f7b6ebeb5d28c0f5101af829170232dcb391b",
+    "probe_method_sha256": "892a71ee5da24d48232b3d744eac85208b6c11a81e823480e7f20893d78c6d3f",
+    "lifecycle_method_sha256": "7bb919e0f97607e9f8e60b70e3f8daad4adbc0a7a5cc8e822fe6305f805942ce",
+    "method_current_bytes_hashes_match": true,
+    "port_closed_preflight": true,
+    "same_image_nonroot_readonly_legacy": true,
+    "shared_primary_network_no_mounts_no_host_ports": true,
+    "cap_drop_all_no_new_privileges": true,
+    "frozen_files": 30,
+    "frozen_archive_sha256": "742bb11130fa2bf52ba5c64cb9cfd452f7d8ac3a4fd9dc6d77e8064a6b8fef65",
+    "frozen_proof_sha256": "5f9897def4020047f9d0fa199ed96b2e52d6facd1cd878da35c65cafb4e78984",
+    "journey": {
+      "path": "/intrusul",
+      "start_post_status": 200,
+      "creates": 1,
+      "game_id_sha256": "f0b768bd8afea5b7fd71cb5c2595f45a504b554dad318bccc5c95ef871c0f447",
+      "real_board_visible": true
+    },
+    "startup_attempts": 1,
+    "font_preloads": 4,
+    "font_responses": 4,
+    "assets": 15,
+    "same_strict_policy_directives_as_primary": true,
+    "policy_events": 0,
+    "console_refusals": 0,
+    "legacy_violations": 0,
+    "lifecycle_command_records": 12,
+    "all_recorded_exits": 0,
+    "timeouts": 0,
+    "all_lifecycle_stdout_stderr_hashes_verified": true,
+    "cleanup_recorded_exact_legacy_id_force_rm": true,
+    "cleanup_verified": true,
+    "exact_legacy_id_and_name_absence_outputs_empty": true,
+    "primary_before_after_snapshot_equal": true,
+    "legacy_before_cleanup_snapshot_equal_ready": true,
+    "confirm_probe_lifecycle_hash_joins_verified": true
+  },
+  "budgets": {
+    "policy": "owner-approved-frozen-legacy-baseline-2026-10-11",
+    "authority": "docs/adr/0193-frozen-legacy-budget-baseline.md",
+    "measurements": {
+      "path": ".gate/full/route-budgets/measurements.json",
+      "bytes": 101115,
+      "sha256": "5d68064c2a71c18bfc0ba160377c3346c1449b9a26c48c07221cea42df9838e6"
+    },
+    "gate_summary": {
+      "path": ".gate/full/route-budgets/gate-summary.json",
+      "bytes": 18087,
+      "sha256": "0b017b15c1c6444f36e49e29842452f6fe0df4e243f00995988f7933bca3bb6c"
+    },
+    "frozen_integrity": {
+      "path": ".gate/full/route-budgets/frozen-integrity.json",
+      "bytes": 6131,
+      "sha256": "ba9de7ebb418c89ecf8e8473ce3d51d7f908563d5ab1b00f2816233e20c0d013"
+    },
+    "budgets_input_sha256": "40f4fc9961a0276663791437417033b0589577ac65811f3863a0fde7a42f9fb4",
+    "raw_rows_retained": 42,
+    "raw_js_failures_retained": 20,
+    "raw_null_css_recorded_rows_retained": 22,
+    "classified_rows_retained": 42,
+    "gate_rows": 21,
+    "gate_exact_active_subset": true,
+    "active_js_failed_rows": 10,
+    "active_null_css_recorded_rows": 11,
+    "frozen_baseline_rows_retained": 21,
+    "frozen_js_sdk_failures_retained": 10,
+    "js_limit_bytes": 40960,
+    "js_target_bytes": 30720,
+    "active_js_gzip_range_bytes": [
+      115016,
+      137985
+    ],
+    "active_js_excess_over_limit_range_bytes": [
+      74056,
+      97025
+    ],
+    "frozen_js_gzip_range_bytes": [
+      117271,
+      138596
+    ],
+    "gate_status": "fail",
+    "raw_sdk_aggregate_status": "fail",
+    "named_frozen_integrity_status": "pass",
+    "frozen_runtime_and_browser_requirements_retained": true,
+    "threshold_waiver": false,
+    "budget_target_met": false
+  },
+  "qualification": {
+    "independently_accepted_E3_preliminary_budget_only_red": true,
+    "overall_green": false,
+    "M0_M1_KIT_BUMP": false,
+    "M2_nativePreact_UI1": false,
+    "Samsung_Chrome_Internet_throttled4G": "UNMET",
+    "startup_estimate": "Working planning target; no new ceiling or blanket waiver",
+    "active_limits": "40960 JS ceiling/30720 target and122880 combined unchanged",
+    "scope": "Actual enforced nonbudget delivery evidence; current React remains over active size limits. No production activation."
+  },
+  "capture": {
+    "observation_sha256": "4e602b61060e225961444e4fe72ba1082e58a01742872463d253bb3a8715cb93",
+    "regular_rows": 675,
+    "gzip_blobs": 261,
+    "compressed_bytes": 87058528,
+    "git_refs": 447,
+    "rolling_refs": 184,
+    "ELF_rows_hash_only": 4,
+    "private_capsule_not_copied_whole": true
+  },
+  "cleanup": {
+    "record_sha256": "89094539c5b91265fb5c95d16b830e8ba4680b8008987b2b0b98811e320e62f3",
+    "exact_owned_resources_absent": true,
+    "script82420_exit1": "Post-removal network-absence wording assertion; separate readback verified ID/name/project absence. Original exit preserved."
+  },
+  "prior_attempt": "Same-source96323 failed from parent missing owner coordinator; preserved separately, never relabeled product failure/success. Retry attached the qualified owner before intent.",
+  "literal_proof_selection": [
+    {
+      "source": "/home/dobo/work/_worktrees/cat_de_roman_esti/fix__gui-cat-prerequisites-linux/.gate/full/result.json",
+      "destination": "docs/reviews/gui-normalized-react/full-fd336-result.json",
+      "bytes": 44424,
+      "sha256": "e92f77a9fdf7fd689adf6ccfb920c52f573111358e4a0ed214ed28b03be1e27c",
+      "source_full_mode": 33188,
+      "destination_full_mode": 33188
+    },
+    {
+      "source": "/home/dobo/work/_temp/adhoc-gui-migration-parent-20261006/cat-fd336-owner-complete-full-parent-actual-review-20261011.json",
+      "destination": "docs/reviews/gui-normalized-react/full-fd336-parent-review.json",
+      "bytes": 3932,
+      "sha256": "dac59649134b5f3f099d9d767a698c043bd7e5ba4ca0ab0e8ec01b840934eb0a",
+      "source_full_mode": 33152,
+      "destination_full_mode": 33188
+    },
+    {
+      "source": "/home/dobo/work/_temp/adhoc-gui-migration-parent-20261006/cat-fd336-complete-full-independent-actual-review-20261011.json",
+      "destination": "docs/reviews/gui-normalized-react/full-fd336-independent-review.json",
+      "bytes": 11663,
+      "sha256": "494530d3b2b87b66068d757e86ed54a73a6c03651bb69c310ccc657d0792a933",
+      "source_full_mode": 33152,
+      "destination_full_mode": 33188
+    },
+    {
+      "source": "/home/dobo/work/_temp/adhoc-gui-migration-parent-20261006/cat-fd336-owner-complete-full-owned-cleanup-20261011.json",
+      "destination": "docs/reviews/gui-normalized-react/full-fd336-owned-cleanup.json",
+      "bytes": 3534,
+      "sha256": "89094539c5b91265fb5c95d16b830e8ba4680b8008987b2b0b98811e320e62f3",
+      "source_full_mode": 33152,
+      "destination_full_mode": 33188
+    },
+    {
+      "source": "/home/dobo/work/_temp/adhoc-gui-migration-parent-20261006/cat-fd336-missing-owner-coordinator-actual-incident-20261011.json",
+      "destination": "docs/reviews/gui-normalized-react/full-fd336-first-attempt-incident.json",
+      "bytes": 2168,
+      "sha256": "f941dccb41e548dad101ba79060331dc4485133ce60576d2285b5fd43cd8d0c8",
+      "source_full_mode": 33204,
+      "destination_full_mode": 33188
+    }
+  ],
+  "retention": "No raw browser/log/body corpus, sourceworkspace, dependencies, caches, ELF or image copies in this public selection. Private latest capsule and one rolling physical base remain distinct; source/original/canonical keepers preserved."
+}

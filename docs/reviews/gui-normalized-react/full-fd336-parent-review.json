@@ -1,0 +1,115 @@
+{
+  "schema": 1,
+  "utc": "2026-10-11T10:23:30.367580+00:00",
+  "source": "fd336984a09e7e76ca68c4635c7bd617fc2414a2",
+  "tree": "79a669bf4c6413507aad41a775a2999afcffa1effd1494510f4c832de0965c9c",
+  "wrapper": "f519e22c-1004-4427-a6b0-03d5876f5a81",
+  "actualWrapperExit": 201,
+  "state": "Parent ACTUAL bounded budget-only-red review CLEAR; independent review pending",
+  "captureSha256": "4e602b61060e225961444e4fe72ba1082e58a01742872463d253bb3a8715cb93",
+  "captureCounts": {
+    "rows": 675,
+    "directories": 477,
+    "registered_artifact_bindings": 293,
+    "unchanged_generated_refs": 184,
+    "source_mirror_git_refs": 447,
+    "live_ELF_hash_only": 4,
+    "absences": 6
+  },
+  "gzipBlobsVerified": 261,
+  "captureAudit": "Prior full readback completed exact675rows/261gzips/292regular+oneimage-reference bindings/447Gitrefs/184rollingrefs/477directorymodes/4liveELF/6absences. Frontend summary parser then refused because reporter uses \u2139 instead of #; this successor verifies literal actual reporter. No source/evidence altered.",
+  "actualChecks": {
+    "total": 39,
+    "pass": 37,
+    "failed": [
+      "cat-route-budgets",
+      "repo-full-exit"
+    ]
+  },
+  "playwright": {
+    "unique": 900,
+    "desktop": 450,
+    "mobile": 450,
+    "allOnce": true,
+    "retrySkipFlakyErrors": 0,
+    "rawReportSha256": "1fdca7cb967d8da54d9c7b420e9795dc7097819965135b9e67ccbf2b6ce6088e"
+  },
+  "frontend": {
+    "tests": 459,
+    "pass": 459,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "goCounts": {
+    "cat-backend-race": {
+      "testRun": 1414,
+      "testPass": 1397,
+      "testSkip": 17,
+      "packagePass": 28,
+      "packageSkip": 12,
+      "stdout_sha256": "33772aa0bf3fa0fc2279ff404bc2dc7422f4b7c982af9453d5aa4cd69fe3262e",
+      "duration_ms": 1089188,
+      "nonGoJsonLines": 0
+    },
+    "cat-authcore-race": {
+      "testRun": 28,
+      "testPass": 28,
+      "testSkip": 0,
+      "packagePass": 1,
+      "packageSkip": 0,
+      "stdout_sha256": "604d094e37b01d982eb66e769e65926bee0bc48887807b8ab37c2201a22ad148",
+      "duration_ms": 200,
+      "nonGoJsonLines": 0
+    },
+    "cat-pg-accounts": {
+      "testRun": 12,
+      "testPass": 12,
+      "testSkip": 0,
+      "packagePass": 1,
+      "packageSkip": 0,
+      "stdout_sha256": "16a7824228b8f81ddee1b0952c179ff2f7321e2096a3a363817f59c6404a3f79",
+      "duration_ms": 2767,
+      "nonGoJsonLines": 0
+    },
+    "cat-pg-httpapi": {
+      "testRun": 291,
+      "testPass": 291,
+      "testSkip": 0,
+      "packagePass": 1,
+      "packageSkip": 0,
+      "stdout_sha256": "1277e9bcdedfa5b268ddac18e85a1352800db9e91eec4bead68619cf87ea60d3",
+      "duration_ms": 104990,
+      "nonGoJsonLines": 0
+    },
+    "cat-http-parity": {
+      "testRun": 0,
+      "testPass": 0,
+      "testSkip": 0,
+      "packagePass": 0,
+      "packageSkip": 0,
+      "stdout_sha256": "12e298644e403dce8df30078e76a2249f5823f2ba1d32ef4c074bd50098e62c8",
+      "duration_ms": 2011,
+      "nonGoJsonLines": 9
+    }
+  },
+  "enforcedCSP": {
+    "documents": 9,
+    "nonceObservations": 9,
+    "activeViolations": 0,
+    "legacyViolations": 0,
+    "actualSameRunLegacyOwner": "PASS cleanup verified"
+  },
+  "baselineComparisons": {
+    "total": 16,
+    "png": 9,
+    "allPass": true,
+    "vitalsImprovementApproved": true,
+    "phoneMeasurement": false
+  },
+  "appImageID": "sha256:33274644ba0fbc9f9eb8fbb0e2cf7f5f43899392996c8e88185c2af882417514",
+  "qualification": "Current active React JS remains above configured40960; not GREEN/M0/M1/KIT_BUMP/M2/device. E3 preliminary bounded evidence only after independent actual acceptance. Frozen exact integrity and all measurements retained; no threshold waiver.",
+  "ownedCleanupSha256": "89094539c5b91265fb5c95d16b830e8ba4680b8008987b2b0b98811e320e62f3",
+  "retention": "One rolling physical base plus compact successor; no workspace, deps, cache or ELF duplicates; hash-only binaries not retained in capture."
+}

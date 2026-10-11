@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "utc": "2026-10-11T08:51:32.533055+00:00",
+  "state": "ACTUAL EARLY NONBUDGET FAILURE; wrapper96323stillrunning",
+  "source": "fd336984a09e7e76ca68c4635c7bd617fc2414a2",
+  "wrapper_invocation": "3b2aaaa5-41d1-43af-9e43-54f8501e6d52",
+  "inner_invocation": "bf798b99-7dc0-40b9-b450-722ae0897863",
+  "failure": "Parent dispatched full without starting the existing qualified owner-lifecycle coordinator; preflight/observe requiredrequest guard timedout; no record supplied and no ownerlegacycontainer started. This is parentcoordination failure, not evidence ofproductregression orwaivedguard.",
+  "stderr_bindings": [
+    {
+      "path": "/home/dobo/work/_temp/fix__gui-cat-prerequisites-linux/gates/cat_de_roman_esti/.gate/full/logs/bf798b99-7dc0-40b9-b450-722ae0897863-cat-legacy-owner-journey-41.stderr.log",
+      "sha256": "eb8e5cb390acaf29f4205477de92902f831f0b28f791d5d03e033b6fa34fd204",
+      "bytes": 430,
+      "reason": "Required owner record absent: request.json"
+    },
+    {
+      "path": "/home/dobo/work/_temp/fix__gui-cat-prerequisites-linux/gates/cat_de_roman_esti/.gate/full/logs/bf798b99-7dc0-40b9-b450-722ae0897863-cat-legacy-owner-journey-42.stderr.log",
+      "sha256": "eb8e5cb390acaf29f4205477de92902f831f0b28f791d5d03e033b6fa34fd204",
+      "bytes": 430,
+      "reason": "Required owner record absent: request.json"
+    }
+  ],
+  "intent_sha256": "ebcf89e5eb7dd5847d4f0f408ff567708a78bf60f419dade9c92b12bd5aa809b",
+  "abort_sha256": "a2543745ec49af3dd83d9e894d43aa575ab8e9a856f7f544ecc0557d2c113663",
+  "owner_method": "/home/dobo/work/_temp/adhoc-gui-migration-parent-20261006/cat-legacy-owner-source-successor-1-20261010/after/owner-lifecycle.py",
+  "owner_method_sha256": "7bb919e0f97607e9f8e60b70e3f8daad4adbc0a7a5cc8e822fe6305f805942ce",
+  "next_required": "Awaitactual96323exit; compactcapture+ownedcleanup+independentreview. Nextsame-Hfull muststart existingowner-lifecycle concurrently atactualnewwrapperUUID+verifiedactualprimaryCID BEFORE ownerintent; methodwaits up to3600s. No currentabort/requestediting, fakehandoff/probe/relabel oraggregateGREEN. Preserveallotheractualchecks andremainingNOTRUNtruthfully."
+}
