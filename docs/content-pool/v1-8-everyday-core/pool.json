@@ -3,7 +3,7 @@
   "theme": "v1-8-everyday-core",
   "baseline_commit": "e164c0c70de38805d2648e271d294ddf36a26c8e",
   "procedure_rev": "17b97a2",
-  "scope": "Research complete, including one bounded five-item recheck; exact module selection and independent review are next. No installation.",
+  "scope": "Step 3: 30 independently reviewed content items selected; requested caption changes applied. Thirty records remain held. No installation or main growth yet.",
   "screen": {
     "bundle_sha256": "e0cfe93de076f14a782dc6377b2655d4ef10f86ada1560ae1202bb06dbfdf877",
     "script": "~/work/_temp/content__v1-8-everyday-core/prescreen.py",
@@ -81,7 +81,7 @@
     {
       "id": "v18-craciun",
       "revision": 1,
-      "state": "researched",
+      "state": "selected_for_refinement",
       "kind": "new_shared_concept",
       "lemma": "Crăciun",
       "label_ro": "Crăciun",
@@ -144,7 +144,7 @@
       ],
       "next_action": "Review whole module; accept the Anotimp dependency before installing seasonal nodes.",
       "checked_on": "2026-10-11",
-      "decision": "Source-researched proposal; exact edges, forms, categories and dependencies still need independent review.",
+      "decision": "Independent factual and quality review conditions applied to the exact module; selected for supported installation, not yet integrated.",
       "research_ready": true,
       "link_targets": [
         {
@@ -231,7 +231,18 @@
           "count": 27688
         },
         "absence_is_not_rejection": true
-      }
+      },
+      "reviews": {
+        "factual": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-factual-review.json",
+          "verdict": "accept"
+        },
+        "quality": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-quality-review.json",
+          "verdict": "accept"
+        }
+      },
+      "review_changes_applied": []
     },
     {
       "id": "v18-mos-craciun",
@@ -322,7 +333,7 @@
     {
       "id": "v18-brad",
       "revision": 1,
-      "state": "researched",
+      "state": "selected_for_refinement",
       "kind": "new_shared_concept",
       "lemma": "Brad",
       "label_ro": "Brad",
@@ -395,7 +406,7 @@
       ],
       "next_action": "Review whole module; accept the Anotimp dependency before installing seasonal nodes.",
       "checked_on": "2026-10-11",
-      "decision": "Source-researched proposal; exact edges, forms, categories and dependencies still need independent review.",
+      "decision": "Independent factual and quality review conditions applied to the exact module; selected for supported installation, not yet integrated.",
       "research_ready": true,
       "link_targets": [
         {
@@ -481,7 +492,18 @@
           "count": 7634
         },
         "absence_is_not_rejection": true
-      }
+      },
+      "reviews": {
+        "factual": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-factual-review.json",
+          "verdict": "accept"
+        },
+        "quality": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-quality-review.json",
+          "verdict": "accept"
+        }
+      },
+      "review_changes_applied": []
     },
     {
       "id": "v18-cadou",
@@ -881,7 +903,7 @@
     {
       "id": "v18-revelion",
       "revision": 1,
-      "state": "researched",
+      "state": "selected_for_refinement",
       "kind": "new_shared_concept",
       "lemma": "Revelion",
       "label_ro": "Revelion",
@@ -954,7 +976,7 @@
       ],
       "next_action": "Review whole module; accept the Anotimp dependency before installing seasonal nodes.",
       "checked_on": "2026-10-11",
-      "decision": "Source-researched proposal; exact edges, forms, categories and dependencies still need independent review.",
+      "decision": "Independent factual and quality review conditions applied to the exact module; selected for supported installation, not yet integrated.",
       "research_ready": true,
       "link_targets": [
         {
@@ -1050,12 +1072,23 @@
           "form": "Anului Nou",
           "reason": "Broader holiday/day sense is not proved equivalent to Revelion night/party."
         }
-      ]
+      ],
+      "reviews": {
+        "factual": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-factual-review.json",
+          "verdict": "accept"
+        },
+        "quality": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-quality-review.json",
+          "verdict": "accept"
+        }
+      },
+      "review_changes_applied": []
     },
     {
       "id": "v18-iarna",
       "revision": 1,
-      "state": "researched",
+      "state": "selected_for_refinement",
       "kind": "new_shared_concept",
       "lemma": "Iarnă",
       "label_ro": "Iarnă",
@@ -1126,7 +1159,7 @@
       ],
       "next_action": "Review whole module; accept the Anotimp dependency before installing seasonal nodes.",
       "checked_on": "2026-10-11",
-      "decision": "Source-researched proposal; exact edges, forms, categories and dependencies still need independent review.",
+      "decision": "Independent factual and quality review conditions applied to the exact module; selected for supported installation, not yet integrated.",
       "research_ready": true,
       "link_targets": [
         {
@@ -1211,12 +1244,23 @@
           "count": 3440
         },
         "absence_is_not_rejection": true
-      }
+      },
+      "reviews": {
+        "factual": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-factual-review.json",
+          "verdict": "accept"
+        },
+        "quality": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-quality-review.json",
+          "verdict": "accept"
+        }
+      },
+      "review_changes_applied": []
     },
     {
       "id": "v18-primavara",
       "revision": 1,
-      "state": "researched",
+      "state": "held",
       "kind": "new_shared_concept",
       "lemma": "Primăvară",
       "label_ro": "Primăvară",
@@ -1295,9 +1339,9 @@
           "checked_on": "2026-10-11"
         }
       ],
-      "next_action": "Review whole module; accept the Anotimp dependency before installing seasonal nodes.",
+      "next_action": "Reuse retained source facts after current parent lands; re-screen forms and dependencies on the new baseline.",
       "checked_on": "2026-10-11",
-      "decision": "Source-researched proposal; exact edges, forms, categories and dependencies still need independent review.",
+      "decision": "Source-qualified, deferred to a later wave after Anotimp is on main: this wave selects Iarnă and Vară, preserving the at-most-two-other-new-neighbors constraint on the new parent.",
       "research_ready": true,
       "link_targets": [
         {
@@ -1387,7 +1431,7 @@
     {
       "id": "v18-vara",
       "revision": 1,
-      "state": "researched",
+      "state": "selected_for_refinement",
       "kind": "new_shared_concept",
       "lemma": "Vară",
       "label_ro": "Vară",
@@ -1463,7 +1507,7 @@
       ],
       "next_action": "Review whole module; accept the Anotimp dependency before installing seasonal nodes.",
       "checked_on": "2026-10-11",
-      "decision": "Source-researched proposal; exact edges, forms, categories and dependencies still need independent review.",
+      "decision": "Independent factual and quality review conditions applied to the exact module; selected for supported installation, not yet integrated.",
       "research_ready": true,
       "link_targets": [
         {
@@ -1517,7 +1561,7 @@
         {
           "dst": "n_v24_nature_sky_soare",
           "relation": "associated_with",
-          "label_ro": "în emisfera nordică primește mai multă energie solară",
+          "label_ro": "emisfera nordică primește mai multă energie solară vara",
           "strength": 0.9,
           "is_distractor": 0,
           "bidirectional": 0
@@ -1548,12 +1592,28 @@
           "count": 7225
         },
         "absence_is_not_rejection": true
-      }
+      },
+      "reviews": {
+        "factual": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-factual-review.json",
+          "verdict": "accept"
+        },
+        "quality": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-quality-review.json",
+          "verdict": "accept"
+        }
+      },
+      "review_changes_applied": [
+        {
+          "old": "în emisfera nordică primește mai multă energie solară",
+          "new": "emisfera nordică primește mai multă energie solară vara"
+        }
+      ]
     },
     {
       "id": "v18-toamna",
       "revision": 1,
-      "state": "researched",
+      "state": "held",
       "kind": "new_shared_concept",
       "lemma": "Toamnă",
       "label_ro": "Toamnă",
@@ -1627,9 +1687,9 @@
           "checked_on": "2026-10-11"
         }
       ],
-      "next_action": "Review whole module; accept the Anotimp dependency before installing seasonal nodes.",
+      "next_action": "Reuse retained source facts after current parent lands; re-screen forms and dependencies on the new baseline.",
       "checked_on": "2026-10-11",
-      "decision": "Source-researched proposal; exact edges, forms, categories and dependencies still need independent review.",
+      "decision": "Source-qualified, deferred to a later wave after Anotimp is on main: this wave selects Iarnă and Vară, preserving the at-most-two-other-new-neighbors constraint on the new parent.",
       "research_ready": true,
       "link_targets": [
         {
@@ -1719,7 +1779,7 @@
     {
       "id": "v18-dimineata",
       "revision": 1,
-      "state": "researched",
+      "state": "selected_for_refinement",
       "kind": "new_shared_concept",
       "lemma": "Dimineață",
       "label_ro": "Dimineață",
@@ -1790,7 +1850,7 @@
       ],
       "next_action": "Independent factual and quality review of the exact module.",
       "checked_on": "2026-10-11",
-      "decision": "Source-researched proposal; exact scoped forms, links and dependencies still require independent review.",
+      "decision": "Independent factual and quality review conditions applied to the exact module; selected for supported installation, not yet integrated.",
       "research_ready": true,
       "link_targets": [
         {
@@ -1871,12 +1931,23 @@
           "count": 45755
         },
         "absence_is_not_rejection": true
-      }
+      },
+      "reviews": {
+        "factual": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-factual-review.json",
+          "verdict": "accept"
+        },
+        "quality": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-quality-review.json",
+          "verdict": "accept"
+        }
+      },
+      "review_changes_applied": []
     },
     {
       "id": "v18-seara",
       "revision": 1,
-      "state": "researched",
+      "state": "selected_for_refinement",
       "kind": "new_shared_concept",
       "lemma": "Seară",
       "label_ro": "Seară",
@@ -1947,7 +2018,7 @@
       ],
       "next_action": "Independent factual and quality review of the exact module.",
       "checked_on": "2026-10-11",
-      "decision": "Source-researched proposal; exact scoped forms, links and dependencies still require independent review.",
+      "decision": "Independent factual and quality review conditions applied to the exact module; selected for supported installation, not yet integrated.",
       "research_ready": true,
       "link_targets": [
         {
@@ -2028,12 +2099,23 @@
           "count": 35225
         },
         "absence_is_not_rejection": true
-      }
+      },
+      "reviews": {
+        "factual": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-factual-review.json",
+          "verdict": "accept"
+        },
+        "quality": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-quality-review.json",
+          "verdict": "accept"
+        }
+      },
+      "review_changes_applied": []
     },
     {
       "id": "v18-anotimp",
       "revision": 1,
-      "state": "researched",
+      "state": "selected_for_refinement",
       "kind": "new_shared_concept",
       "lemma": "Anotimp",
       "label_ro": "Anotimp",
@@ -2106,7 +2188,7 @@
       ],
       "next_action": "Independent factual and quality review of the exact module.",
       "checked_on": "2026-10-11",
-      "decision": "Generic annual climatic/light period, with four Romanian seasons and rainfall-defined tropical seasons; corrected the rejected Earth/soil ownership assumption without changing the existing owner.",
+      "decision": "Independent factual and quality review conditions applied to the exact module; selected for supported installation, not yet integrated.",
       "research_ready": true,
       "link_targets": [
         {
@@ -2189,12 +2271,23 @@
           "count": 400
         },
         "absence_is_not_rejection": true
-      }
+      },
+      "reviews": {
+        "factual": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-factual-review.json",
+          "verdict": "accept"
+        },
+        "quality": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-quality-review.json",
+          "verdict": "accept"
+        }
+      },
+      "review_changes_applied": []
     },
     {
       "id": "v18-vacanta",
       "revision": 1,
-      "state": "researched",
+      "state": "selected_for_refinement",
       "kind": "new_shared_concept",
       "lemma": "Vacanță",
       "label_ro": "Vacanță",
@@ -2252,7 +2345,7 @@
       ],
       "next_action": "Independent factual and quality review of the exact module.",
       "checked_on": "2026-10-11",
-      "decision": "Source-researched proposal; exact scoped forms, links and dependencies still require independent review.",
+      "decision": "Independent factual and quality review conditions applied to the exact module; selected for supported installation, not yet integrated.",
       "research_ready": true,
       "link_targets": [
         {
@@ -2333,7 +2426,18 @@
           "count": 9312
         },
         "absence_is_not_rejection": true
-      }
+      },
+      "reviews": {
+        "factual": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-factual-review.json",
+          "verdict": "accept"
+        },
+        "quality": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-quality-review.json",
+          "verdict": "accept"
+        }
+      },
+      "review_changes_applied": []
     },
     {
       "id": "v18-ziua-copilului",
@@ -2657,7 +2761,7 @@
     {
       "id": "v18-rucsac",
       "revision": 1,
-      "state": "researched",
+      "state": "selected_for_refinement",
       "kind": "new_shared_concept",
       "lemma": "Rucsac",
       "label_ro": "Rucsac",
@@ -2730,7 +2834,7 @@
       ],
       "next_action": "Independent factual and quality review of the exact module.",
       "checked_on": "2026-10-11",
-      "decision": "Source-researched proposal; exact scoped forms, links and dependencies still require independent review.",
+      "decision": "Independent factual and quality review conditions applied to the exact module; selected for supported installation, not yet integrated.",
       "research_ready": true,
       "link_targets": [
         {
@@ -2812,7 +2916,18 @@
           "count": 1714
         },
         "absence_is_not_rejection": true
-      }
+      },
+      "reviews": {
+        "factual": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-factual-review.json",
+          "verdict": "accept"
+        },
+        "quality": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-quality-review.json",
+          "verdict": "accept"
+        }
+      },
+      "review_changes_applied": []
     },
     {
       "id": "v18-umbrela",
@@ -3039,7 +3154,7 @@
     {
       "id": "v18-fluture",
       "revision": 1,
-      "state": "researched",
+      "state": "selected_for_refinement",
       "kind": "new_shared_concept",
       "lemma": "Fluture",
       "label_ro": "Fluture",
@@ -3115,7 +3230,7 @@
       ],
       "next_action": "Independent factual and quality review of the exact module.",
       "checked_on": "2026-10-11",
-      "decision": "Source-researched proposal; exact scoped forms, links and dependencies still require independent review.",
+      "decision": "Independent factual and quality review conditions applied to the exact module; selected for supported installation, not yet integrated.",
       "research_ready": true,
       "link_targets": [
         {
@@ -3166,7 +3281,7 @@
         {
           "dst": "n_v4sti_planta",
           "relation": "feeds_on",
-          "label_ro": "omizile multor specii se hrănesc cu plante",
+          "label_ro": "omizile unor specii se hrănesc cu plante",
           "strength": 0.85,
           "is_distractor": 0,
           "bidirectional": 0
@@ -3174,7 +3289,7 @@
         {
           "dst": "n_v4sti_floare",
           "relation": "feeds_on",
-          "label_ro": "adulții multor specii se hrănesc cu nectarul florilor",
+          "label_ro": "adulții unor specii se hrănesc cu nectarul florilor",
           "strength": 0.85,
           "is_distractor": 0,
           "bidirectional": 0
@@ -3197,12 +3312,32 @@
           "count": 1740
         },
         "absence_is_not_rejection": true
-      }
+      },
+      "reviews": {
+        "factual": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-factual-review.json",
+          "verdict": "accept"
+        },
+        "quality": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-quality-review.json",
+          "verdict": "accept"
+        }
+      },
+      "review_changes_applied": [
+        {
+          "old": "omizile multor specii se hrănesc cu plante",
+          "new": "omizile unor specii se hrănesc cu plante"
+        },
+        {
+          "old": "adulții multor specii se hrănesc cu nectarul florilor",
+          "new": "adulții unor specii se hrănesc cu nectarul florilor"
+        }
+      ]
     },
     {
       "id": "v18-albina",
       "revision": 1,
-      "state": "researched",
+      "state": "selected_for_refinement",
       "kind": "new_shared_concept",
       "lemma": "Albină",
       "label_ro": "Albină",
@@ -3268,7 +3403,7 @@
       ],
       "next_action": "Independent factual and quality review of the exact module.",
       "checked_on": "2026-10-11",
-      "decision": "Source-researched proposal; exact scoped forms, links and dependencies still require independent review.",
+      "decision": "Independent factual and quality review conditions applied to the exact module; selected for supported installation, not yet integrated.",
       "research_ready": true,
       "link_targets": [
         {
@@ -3349,7 +3484,18 @@
           "count": 2008
         },
         "absence_is_not_rejection": true
-      }
+      },
+      "reviews": {
+        "factual": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-factual-review.json",
+          "verdict": "accept"
+        },
+        "quality": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-quality-review.json",
+          "verdict": "accept"
+        }
+      },
+      "review_changes_applied": []
     },
     {
       "id": "v18-furnica",
@@ -3610,7 +3756,7 @@
     {
       "id": "v18-barza",
       "revision": 1,
-      "state": "researched",
+      "state": "selected_for_refinement",
       "kind": "new_shared_concept",
       "lemma": "Barză",
       "label_ro": "Barză",
@@ -3678,7 +3824,7 @@
       ],
       "next_action": "Review exact module and all incident batch-neighbor limits before installation.",
       "checked_on": "2026-10-11",
-      "decision": "Source-researched animal proposal with scoped diet/habitat captions; independent review and dependency limits remain.",
+      "decision": "Independent factual and quality review conditions applied to the exact module; selected for supported installation, not yet integrated.",
       "research_ready": true,
       "link_targets": [
         {
@@ -3755,12 +3901,23 @@
         "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
         "best": null,
         "absence_is_not_rejection": true
-      }
+      },
+      "reviews": {
+        "factual": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-factual-review.json",
+          "verdict": "accept"
+        },
+        "quality": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-quality-review.json",
+          "verdict": "accept"
+        }
+      },
+      "review_changes_applied": []
     },
     {
       "id": "v18-randunica",
       "revision": 1,
-      "state": "researched",
+      "state": "held",
       "kind": "new_shared_concept",
       "lemma": "Rândunică",
       "label_ro": "Rândunică",
@@ -3844,9 +4001,9 @@
           "checked_on": "2026-10-11"
         }
       ],
-      "next_action": "Review accepted seasonal dependencies and the two-new-neighbor cap before installing.",
+      "next_action": "Reuse retained source facts after current parent lands; re-screen forms and dependencies on the new baseline.",
       "checked_on": "2026-10-11",
-      "decision": "Exact DOOM 3 entry 1259212 recovered after excluding the editorial ! marker; seasonal source claims remain valid, but batch dependencies still require review.",
+      "decision": "Source-qualified, deferred to a later wave after Anotimp is on main: this wave selects Iarnă and Vară, preserving the at-most-two-other-new-neighbors constraint on the new parent.",
       "research_ready": true,
       "link_targets": [
         {
@@ -3932,7 +4089,7 @@
     {
       "id": "v18-arici",
       "revision": 1,
-      "state": "researched",
+      "state": "selected_for_refinement",
       "kind": "new_shared_concept",
       "lemma": "Arici",
       "label_ro": "Arici",
@@ -3995,7 +4152,7 @@
       ],
       "next_action": "Review exact module and all incident batch-neighbor limits before installation.",
       "checked_on": "2026-10-11",
-      "decision": "Source-researched animal proposal with scoped diet/habitat captions; independent review and dependency limits remain.",
+      "decision": "Independent factual and quality review conditions applied to the exact module; selected for supported installation, not yet integrated.",
       "research_ready": true,
       "link_targets": [
         {
@@ -4076,12 +4233,23 @@
           "count": 406
         },
         "absence_is_not_rejection": true
-      }
+      },
+      "reviews": {
+        "factual": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-factual-review.json",
+          "verdict": "accept"
+        },
+        "quality": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-quality-review.json",
+          "verdict": "accept"
+        }
+      },
+      "review_changes_applied": []
     },
     {
       "id": "v18-broasca",
       "revision": 1,
-      "state": "researched",
+      "state": "selected_for_refinement",
       "kind": "new_shared_concept",
       "lemma": "Broască",
       "label_ro": "Broască",
@@ -4157,7 +4325,7 @@
       ],
       "next_action": "Review exact module and all incident batch-neighbor limits before installation.",
       "checked_on": "2026-10-11",
-      "decision": "Source-researched animal proposal with scoped diet/habitat captions; independent review and dependency limits remain.",
+      "decision": "Independent factual and quality review conditions applied to the exact module; selected for supported installation, not yet integrated.",
       "research_ready": true,
       "link_targets": [
         {
@@ -4238,12 +4406,23 @@
           "count": 2254
         },
         "absence_is_not_rejection": true
-      }
+      },
+      "reviews": {
+        "factual": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-factual-review.json",
+          "verdict": "accept"
+        },
+        "quality": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-quality-review.json",
+          "verdict": "accept"
+        }
+      },
+      "review_changes_applied": []
     },
     {
       "id": "v18-melc",
       "revision": 1,
-      "state": "researched",
+      "state": "selected_for_refinement",
       "kind": "new_shared_concept",
       "lemma": "Melc",
       "label_ro": "Melc",
@@ -4319,7 +4498,7 @@
       ],
       "next_action": "Review exact module and all incident batch-neighbor limits before installation.",
       "checked_on": "2026-10-11",
-      "decision": "Source-researched animal proposal with scoped diet/habitat captions; independent review and dependency limits remain.",
+      "decision": "Independent factual and quality review conditions applied to the exact module; selected for supported installation, not yet integrated.",
       "research_ready": true,
       "link_targets": [
         {
@@ -4401,12 +4580,23 @@
           "count": 576
         },
         "absence_is_not_rejection": true
-      }
+      },
+      "reviews": {
+        "factual": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-factual-review.json",
+          "verdict": "accept"
+        },
+        "quality": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-quality-review.json",
+          "verdict": "accept"
+        }
+      },
+      "review_changes_applied": []
     },
     {
       "id": "v18-rata",
       "revision": 1,
-      "state": "researched",
+      "state": "selected_for_refinement",
       "kind": "new_shared_concept",
       "lemma": "Rață",
       "label_ro": "Rață",
@@ -4482,7 +4672,7 @@
       ],
       "next_action": "Review exact module and all incident batch-neighbor limits before installation.",
       "checked_on": "2026-10-11",
-      "decision": "Source-researched animal proposal with scoped diet/habitat captions; independent review and dependency limits remain.",
+      "decision": "Independent factual and quality review conditions applied to the exact module; selected for supported installation, not yet integrated.",
       "research_ready": true,
       "link_targets": [
         {
@@ -4563,12 +4753,23 @@
           "count": 1486
         },
         "absence_is_not_rejection": true
-      }
+      },
+      "reviews": {
+        "factual": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-factual-review.json",
+          "verdict": "accept"
+        },
+        "quality": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-quality-review.json",
+          "verdict": "accept"
+        }
+      },
+      "review_changes_applied": []
     },
     {
       "id": "v18-gasca",
       "revision": 1,
-      "state": "researched",
+      "state": "selected_for_refinement",
       "kind": "new_shared_concept",
       "lemma": "Gâscă",
       "label_ro": "Gâscă",
@@ -4639,7 +4840,7 @@
       ],
       "next_action": "Review exact module and all incident batch-neighbor limits before installation.",
       "checked_on": "2026-10-11",
-      "decision": "Source-researched animal proposal with scoped diet/habitat captions; independent review and dependency limits remain.",
+      "decision": "Independent factual and quality review conditions applied to the exact module; selected for supported installation, not yet integrated.",
       "research_ready": true,
       "link_targets": [
         {
@@ -4720,12 +4921,23 @@
           "count": 846
         },
         "absence_is_not_rejection": true
-      }
+      },
+      "reviews": {
+        "factual": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-factual-review.json",
+          "verdict": "accept"
+        },
+        "quality": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-quality-review.json",
+          "verdict": "accept"
+        }
+      },
+      "review_changes_applied": []
     },
     {
       "id": "v18-cocos",
       "revision": 1,
-      "state": "researched",
+      "state": "selected_for_refinement",
       "kind": "new_shared_concept",
       "lemma": "Cocoș",
       "label_ro": "Cocoș",
@@ -4808,7 +5020,7 @@
       ],
       "next_action": "Independent exact-module review of the new target and explicit inference limits.",
       "checked_on": "2026-10-11",
-      "decision": "Revised the unsupported diet target to a narrower source-supported claim; independent review remains required.",
+      "decision": "Independent factual and quality review conditions applied to the exact module; selected for supported installation, not yet integrated.",
       "research_ready": true,
       "link_targets": [
         {
@@ -4891,12 +5103,23 @@
           "is_distractor": 0,
           "bidirectional": 0
         }
-      ]
+      ],
+      "reviews": {
+        "factual": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-factual-review.json",
+          "verdict": "accept"
+        },
+        "quality": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-quality-review.json",
+          "verdict": "accept"
+        }
+      },
+      "review_changes_applied": []
     },
     {
       "id": "v18-miel",
       "revision": 1,
-      "state": "researched",
+      "state": "selected_for_refinement",
       "kind": "new_shared_concept",
       "lemma": "Miel",
       "label_ro": "Miel",
@@ -4977,7 +5200,7 @@
       ],
       "next_action": "Independent exact-module review of the new target and explicit inference limits.",
       "checked_on": "2026-10-11",
-      "decision": "Revised the unsupported diet target to a narrower source-supported claim; independent review remains required.",
+      "decision": "Independent factual and quality review conditions applied to the exact module; selected for supported installation, not yet integrated.",
       "research_ready": true,
       "link_targets": [
         {
@@ -5060,12 +5283,23 @@
           "is_distractor": 0,
           "bidirectional": 0
         }
-      ]
+      ],
+      "reviews": {
+        "factual": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-factual-review.json",
+          "verdict": "accept"
+        },
+        "quality": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-quality-review.json",
+          "verdict": "accept"
+        }
+      },
+      "review_changes_applied": []
     },
     {
       "id": "v18-sarpe",
       "revision": 1,
-      "state": "researched",
+      "state": "selected_for_refinement",
       "kind": "new_shared_concept",
       "lemma": "Șarpe",
       "label_ro": "Șarpe",
@@ -5146,7 +5380,7 @@
       ],
       "next_action": "Review exact module and all incident batch-neighbor limits before installation.",
       "checked_on": "2026-10-11",
-      "decision": "Source-researched animal proposal with scoped diet/habitat captions; independent review and dependency limits remain.",
+      "decision": "Independent factual and quality review conditions applied to the exact module; selected for supported installation, not yet integrated.",
       "research_ready": true,
       "link_targets": [
         {
@@ -5228,7 +5462,18 @@
           "count": 4545
         },
         "absence_is_not_rejection": true
-      }
+      },
+      "reviews": {
+        "factual": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-factual-review.json",
+          "verdict": "accept"
+        },
+        "quality": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-quality-review.json",
+          "verdict": "accept"
+        }
+      },
+      "review_changes_applied": []
     },
     {
       "id": "v18-paianjen",
@@ -5336,7 +5581,7 @@
     {
       "id": "v18-bufnita",
       "revision": 1,
-      "state": "researched",
+      "state": "selected_for_refinement",
       "kind": "new_shared_concept",
       "lemma": "Bufniță",
       "label_ro": "Bufniță",
@@ -5407,7 +5652,7 @@
       ],
       "next_action": "Review module; Tocător must use the supported writer for any qualified-proxy refresh and pass same-slot playthrough.",
       "checked_on": "2026-10-11",
-      "decision": "Source-researched scoped proposal; exact node, forms, four links and any proxy refresh must pass independent review and the supported transaction.",
+      "decision": "Independent factual and quality review conditions applied to the exact module; selected for supported installation, not yet integrated.",
       "research_ready": true,
       "link_targets": [
         {
@@ -5488,7 +5733,18 @@
           "count": 596
         },
         "absence_is_not_rejection": true
-      }
+      },
+      "reviews": {
+        "factual": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-factual-review.json",
+          "verdict": "accept"
+        },
+        "quality": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-quality-review.json",
+          "verdict": "accept"
+        }
+      },
+      "review_changes_applied": []
     },
     {
       "id": "v18-nord",
@@ -6495,7 +6751,7 @@
     {
       "id": "v18-tocator",
       "revision": 1,
-      "state": "researched",
+      "state": "selected_for_refinement",
       "kind": "new_shared_concept",
       "lemma": "Tocător",
       "label_ro": "Tocător",
@@ -6636,7 +6892,7 @@
       ],
       "next_action": "Review module; Tocător must use the supported writer for any qualified-proxy refresh and pass same-slot playthrough.",
       "checked_on": "2026-10-11",
-      "decision": "Source-researched scoped proposal; exact node, forms, four links and any proxy refresh must pass independent review and the supported transaction.",
+      "decision": "Independent factual and quality review conditions applied to the exact module; selected for supported installation, not yet integrated.",
       "risks": [
         "Prior manual/electric chopper ambiguity persists.",
         "Existing qualified proxy identity must be preserved or refreshed by the supported writer; unsupported migration is held.",
@@ -6725,12 +6981,23 @@
         "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
         "best": null,
         "absence_is_not_rejection": true
-      }
+      },
+      "reviews": {
+        "factual": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-factual-review.json",
+          "verdict": "accept"
+        },
+        "quality": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-quality-review.json",
+          "verdict": "accept"
+        }
+      },
+      "review_changes_applied": []
     },
     {
       "id": "v18-input-leafa",
       "revision": 1,
-      "state": "researched",
+      "state": "selected_for_refinement",
       "kind": "accepted_form_family",
       "lemma": "leafă",
       "label_ro": "leafă → Salariu",
@@ -6834,7 +7101,7 @@
       ],
       "next_action": "Independent whole-module factual and quality review; install only if accepted.",
       "checked_on": "2026-10-11",
-      "decision": "Modern employee salary sense and five distinct input keys supported; exclude regional tool and old mercenary senses. Prior hold revisited with current normative and news evidence; independent adoption review still required.",
+      "decision": "Independent factual and quality review conditions applied to the exact module; selected for supported installation, not yet integrated.",
       "proposed_forms": [
         "leafă",
         "lefuri",
@@ -6857,12 +7124,23 @@
         "lefii",
         "lefurilor"
       ],
-      "input_type": "input forms"
+      "input_type": "input forms",
+      "reviews": {
+        "factual": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-factual-review.json",
+          "verdict": "accept"
+        },
+        "quality": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-quality-review.json",
+          "verdict": "accept"
+        }
+      },
+      "review_changes_applied": []
     },
     {
       "id": "v18-input-ograda",
       "revision": 1,
-      "state": "researched",
+      "state": "selected_for_refinement",
       "kind": "accepted_form_family",
       "lemma": "ogradă",
       "label_ro": "ogradă → Curte",
@@ -6938,7 +7216,7 @@
       ],
       "next_action": "Independent whole-module factual and quality review; install only if accepted.",
       "checked_on": "2026-10-11",
-      "decision": "Regional input family for the household-yard sense; not a synonym claim across orchard, estate or retinue senses. Fresh normative/usage evidence revisits the former V50 hold; independent review must settle compatibility.",
+      "decision": "Independent factual and quality review conditions applied to the exact module; selected for supported installation, not yet integrated.",
       "proposed_forms": [
         "ogradă",
         "ogrăzi",
@@ -6961,7 +7239,18 @@
         "ogrăzii",
         "ogrăzilor"
       ],
-      "input_type": "regional input"
+      "input_type": "regional input",
+      "reviews": {
+        "factual": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-factual-review.json",
+          "verdict": "accept"
+        },
+        "quality": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-quality-review.json",
+          "verdict": "accept"
+        }
+      },
+      "review_changes_applied": []
     },
     {
       "id": "v18-input-colinda",
@@ -7070,7 +7359,7 @@
     {
       "id": "v18-input-ghiocel",
       "revision": 1,
-      "state": "researched",
+      "state": "selected_for_refinement",
       "kind": "accepted_form_family",
       "lemma": "ghiocel",
       "label_ro": "ghiocel → Ghiocelul",
@@ -7159,7 +7448,7 @@
       ],
       "next_action": "Independent whole-module factual and quality review; install only if accepted.",
       "checked_on": "2026-10-11",
-      "decision": "Missing forms belong to the existing early-flowering plant owner; no new genus or species concept is introduced.",
+      "decision": "Independent factual and quality review conditions applied to the exact module; selected for supported installation, not yet integrated.",
       "proposed_forms": [
         "ghiocel",
         "ghiocelului",
@@ -7183,7 +7472,18 @@
         "ghioceii",
         "ghioceilor"
       ],
-      "input_type": "input forms"
+      "input_type": "input forms",
+      "reviews": {
+        "factual": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-factual-review.json",
+          "verdict": "accept"
+        },
+        "quality": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-quality-review.json",
+          "verdict": "accept"
+        }
+      },
+      "review_changes_applied": []
     },
     {
       "id": "v18-input-bucegi",
@@ -7557,7 +7857,7 @@
     {
       "id": "v18-input-lemne",
       "revision": 1,
-      "state": "researched",
+      "state": "selected_for_refinement",
       "kind": "accepted_form_family",
       "lemma": "lemn",
       "label_ro": "lemn → Lemn",
@@ -7678,7 +7978,7 @@
       ],
       "next_action": "Independent whole-module factual and quality review; install only if accepted.",
       "checked_on": "2026-10-11",
-      "decision": "Plural forms remain within the existing wood-material sense, including cut wood used in construction or as fuel; no tree alias is proposed.",
+      "decision": "Independent factual and quality review conditions applied to the exact module; selected for supported installation, not yet integrated.",
       "proposed_forms": [
         "lemne",
         "lemnele",
@@ -7705,12 +8005,23 @@
         "lemnele",
         "lemnelor"
       ],
-      "input_type": "input forms"
+      "input_type": "input forms",
+      "reviews": {
+        "factual": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-factual-review.json",
+          "verdict": "accept"
+        },
+        "quality": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-quality-review.json",
+          "verdict": "accept"
+        }
+      },
+      "review_changes_applied": []
     },
     {
       "id": "v18-input-drapel",
       "revision": 1,
-      "state": "researched",
+      "state": "selected_for_refinement",
       "kind": "accepted_form_family",
       "lemma": "drapel",
       "label_ro": "drapel → Steag",
@@ -7795,7 +8106,7 @@
       ],
       "next_action": "Independent whole-module factual and quality review; install only if accepted.",
       "checked_on": "2026-10-11",
-      "decision": "Five missing regular neuter forms extend the already installed drapel headword on the symbolic-flag owner.",
+      "decision": "Independent factual and quality review conditions applied to the exact module; selected for supported installation, not yet integrated.",
       "proposed_forms": [
         "drapelul",
         "drapelului",
@@ -7824,12 +8135,23 @@
         "drapelele",
         "drapelelor"
       ],
-      "input_type": "input forms"
+      "input_type": "input forms",
+      "reviews": {
+        "factual": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-factual-review.json",
+          "verdict": "accept"
+        },
+        "quality": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-quality-review.json",
+          "verdict": "accept"
+        }
+      },
+      "review_changes_applied": []
     },
     {
       "id": "v18-input-untdelemn",
       "revision": 1,
-      "state": "researched",
+      "state": "selected_for_refinement",
       "kind": "accepted_form_family",
       "lemma": "untdelemn",
       "label_ro": "untdelemn → Ulei",
@@ -7919,7 +8241,7 @@
       ],
       "next_action": "Independent exact-module factual/quality review.",
       "checked_on": "2026-10-11",
-      "decision": "Rechecked exact DOOM 3 entry 1260557: editorial ! is not part of the headword; edible-vegetable-oil sense and sort plural untdelemnuri are normative. Full missing paradigm proposed, not installed.",
+      "decision": "Independent factual and quality review conditions applied to the exact module; selected for supported installation, not yet integrated.",
       "proposed_forms": [
         "untdelemnul",
         "untdelemnului",
@@ -7943,12 +8265,23 @@
         "untdelemnuri",
         "untdelemnurile",
         "untdelemnurilor"
-      ]
+      ],
+      "reviews": {
+        "factual": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-factual-review.json",
+          "verdict": "accept"
+        },
+        "quality": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-quality-review.json",
+          "verdict": "accept"
+        }
+      },
+      "review_changes_applied": []
     },
     {
       "id": "v18-link-poza-fotografie",
       "revision": 1,
-      "state": "researched",
+      "state": "selected_for_refinement",
       "kind": "new_relation",
       "lemma": "Poză–Fotografie",
       "label_ro": "Poză–Fotografie",
@@ -8040,7 +8373,7 @@
       ],
       "next_action": "Independent whole-module factual and quality review of direction and caption.",
       "checked_on": "2026-10-11",
-      "decision": "Use one outward association from Fotografie to Poză with the caption «o imagine fotografică poate fi numită poză»; never an identity alias or a claim about all illustrations.",
+      "decision": "Independent factual and quality review conditions applied to the exact module; selected for supported installation, not yet integrated.",
       "research_ready": true,
       "researched_on": "2026-10-11",
       "proposed_edge": {
@@ -8060,18 +8393,30 @@
           "count": 13119
         },
         "absence_is_not_rejection": true
-      }
+      },
+      "reviews": {
+        "factual": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-factual-review.json",
+          "verdict": "accept"
+        },
+        "quality": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-quality-review.json",
+          "verdict": "accept"
+        }
+      },
+      "review_changes_applied": []
     }
   ],
   "counts": {
     "records": 60,
     "idea": 0,
-    "held": 27,
-    "accepted": 0,
+    "held": 30,
+    "accepted": 30,
     "installed": 0,
     "planned_unique_forms": 329,
     "proposed_existing_owner_forms": 40,
-    "researched": 33,
-    "rejected": 0
+    "researched": 0,
+    "rejected": 0,
+    "selected_for_refinement": 30
   }
 }
