@@ -4,12 +4,12 @@
   "app": "cat_de_roman_esti",
   "schema_version": 1,
   "manifest_version": 1,
-  "build_version": "fixture-v1-6-everyday-inputs",
+  "build_version": "fixture-v1-8-everyday-core",
   "generated_at": "2026-06-21T00:00:00Z",
-  "content_hash": "sha256:9b8e304038ae5750d15eb804145dae4428f8fb8289d15873660669865234a0b3",
+  "content_hash": "sha256:80d3f1bfc6ac00644486130ccc0f8ce300cef1eeed11c4586beeeb7a76c75e1d",
   "counts": {
-   "nodes": 2419,
-   "edges": 9473,
+   "nodes": 2442,
+   "edges": 9566,
    "puzzles": 180
   }
  },
@@ -4321,6 +4321,98 @@
   {
    "id": "n_v1_3_material_lemn",
    "label_ro": "Lemn"
+  },
+  {
+   "id": "n_v1_8_albina",
+   "label_ro": "Albină"
+  },
+  {
+   "id": "n_v1_8_anotimp",
+   "label_ro": "Anotimp"
+  },
+  {
+   "id": "n_v1_8_arici",
+   "label_ro": "Arici"
+  },
+  {
+   "id": "n_v1_8_barza",
+   "label_ro": "Barză"
+  },
+  {
+   "id": "n_v1_8_brad",
+   "label_ro": "Brad"
+  },
+  {
+   "id": "n_v1_8_broasca",
+   "label_ro": "Broască"
+  },
+  {
+   "id": "n_v1_8_bufnita",
+   "label_ro": "Bufniță"
+  },
+  {
+   "id": "n_v1_8_cocos",
+   "label_ro": "Cocoș"
+  },
+  {
+   "id": "n_v1_8_craciun",
+   "label_ro": "Crăciun"
+  },
+  {
+   "id": "n_v1_8_dimineata",
+   "label_ro": "Dimineață"
+  },
+  {
+   "id": "n_v1_8_fluture",
+   "label_ro": "Fluture"
+  },
+  {
+   "id": "n_v1_8_gasca",
+   "label_ro": "Gâscă"
+  },
+  {
+   "id": "n_v1_8_iarna",
+   "label_ro": "Iarnă"
+  },
+  {
+   "id": "n_v1_8_melc",
+   "label_ro": "Melc"
+  },
+  {
+   "id": "n_v1_8_miel",
+   "label_ro": "Miel"
+  },
+  {
+   "id": "n_v1_8_rata",
+   "label_ro": "Rață"
+  },
+  {
+   "id": "n_v1_8_revelion",
+   "label_ro": "Revelion"
+  },
+  {
+   "id": "n_v1_8_rucsac",
+   "label_ro": "Rucsac"
+  },
+  {
+   "id": "n_v1_8_sarpe",
+   "label_ro": "Șarpe"
+  },
+  {
+   "id": "n_v1_8_seara",
+   "label_ro": "Seară"
+  },
+  {
+   "id": "n_v1_8_tocator",
+   "label_ro": "Tocător"
+  },
+  {
+   "id": "n_v1_8_vacanta",
+   "label_ro": "Vacanță"
+  },
+  {
+   "id": "n_v1_8_vara",
+   "label_ro": "Vară"
   },
   {
    "id": "n_v20art_balada_porumbescu",
@@ -55643,9 +55735,84 @@
    "dst_id": "n_v24_time_day_ora"
   },
   {
+   "id": "de8815",
+   "src_id": "n_v1_8_craciun",
+   "dst_id": "n_v4art_colind"
+  },
+  {
+   "id": "de8816",
+   "src_id": "n_v1_8_craciun",
+   "dst_id": "n_v4art_traditie"
+  },
+  {
+   "id": "de8817",
+   "src_id": "n_v1_8_craciun",
+   "dst_id": "n_v2via_sarbatori_familie"
+  },
+  {
+   "id": "de8818",
+   "src_id": "n_v1_8_craciun",
+   "dst_id": "n_gas_cozonac"
+  },
+  {
+   "id": "de8819",
+   "src_id": "n_v1_8_brad",
+   "dst_id": "n_v4sti_copac"
+  },
+  {
    "id": "de882",
    "src_id": "n_net_bromania",
    "dst_id": "n_cinematografia_romaneasca"
+  },
+  {
+   "id": "de8820",
+   "src_id": "n_v1_8_brad",
+   "dst_id": "n_v4sti_frunza"
+  },
+  {
+   "id": "de8821",
+   "src_id": "n_v1_8_brad",
+   "dst_id": "n_v4geo_padure"
+  },
+  {
+   "id": "de8822",
+   "src_id": "n_v1_8_brad",
+   "dst_id": "n_v1_8_craciun"
+  },
+  {
+   "id": "de8823",
+   "src_id": "n_v1_8_revelion",
+   "dst_id": "n_v29_time_calendar"
+  },
+  {
+   "id": "de8824",
+   "src_id": "n_v1_8_revelion",
+   "dst_id": "n_v29_time_daily_noapte"
+  },
+  {
+   "id": "de8825",
+   "src_id": "n_v1_8_revelion",
+   "dst_id": "n_v4ist_an"
+  },
+  {
+   "id": "de8826",
+   "src_id": "n_v1_8_revelion",
+   "dst_id": "n_v4art_traditie"
+  },
+  {
+   "id": "de8827",
+   "src_id": "n_v1_8_iarna",
+   "dst_id": "n_v1_8_anotimp"
+  },
+  {
+   "id": "de8828",
+   "src_id": "n_v1_8_iarna",
+   "dst_id": "n_v24_weather_precipitation_zapada"
+  },
+  {
+   "id": "de8829",
+   "src_id": "n_v1_8_iarna",
+   "dst_id": "n_v33_forest_animal_urs"
   },
   {
    "id": "de883",
@@ -55653,9 +55820,109 @@
    "dst_id": "n_net_robotzi"
   },
   {
+   "id": "de8830",
+   "src_id": "n_v1_8_iarna",
+   "dst_id": "n_v29_time_calendar"
+  },
+  {
+   "id": "de8831",
+   "src_id": "n_v1_8_vara",
+   "dst_id": "n_v1_8_anotimp"
+  },
+  {
+   "id": "de8832",
+   "src_id": "n_v1_8_vara",
+   "dst_id": "n_v24_nature_sky_soare"
+  },
+  {
+   "id": "de8833",
+   "src_id": "n_v1_8_vara",
+   "dst_id": "n_v24_time_day_zi"
+  },
+  {
+   "id": "de8834",
+   "src_id": "n_v1_8_vara",
+   "dst_id": "n_v3gas_inghetata"
+  },
+  {
+   "id": "de8835",
+   "src_id": "n_v1_8_dimineata",
+   "dst_id": "n_v24_time_day_zi"
+  },
+  {
+   "id": "de8836",
+   "src_id": "n_v1_8_dimineata",
+   "dst_id": "n_v29_time_daily_noapte"
+  },
+  {
+   "id": "de8837",
+   "src_id": "n_v1_8_dimineata",
+   "dst_id": "n_v24_nature_sky_soare"
+  },
+  {
+   "id": "de8838",
+   "src_id": "n_v1_8_dimineata",
+   "dst_id": "n_v3gas_cafea"
+  },
+  {
+   "id": "de8839",
+   "src_id": "n_v1_8_seara",
+   "dst_id": "n_v24_time_day_zi"
+  },
+  {
    "id": "de884",
    "src_id": "n_net_robotzi",
    "dst_id": "n_net_mo_robotzi"
+  },
+  {
+   "id": "de8840",
+   "src_id": "n_v1_8_seara",
+   "dst_id": "n_v29_time_daily_noapte"
+  },
+  {
+   "id": "de8841",
+   "src_id": "n_v1_8_seara",
+   "dst_id": "n_v24_nature_sky_soare"
+  },
+  {
+   "id": "de8842",
+   "src_id": "n_v1_8_seara",
+   "dst_id": "n_v4fil_televizor"
+  },
+  {
+   "id": "de8843",
+   "src_id": "n_v1_8_anotimp",
+   "dst_id": "n_v24_nature_sky_soare"
+  },
+  {
+   "id": "de8844",
+   "src_id": "n_v1_8_anotimp",
+   "dst_id": "n_v4ist_an"
+  },
+  {
+   "id": "de8845",
+   "src_id": "n_v1_8_anotimp",
+   "dst_id": "n_v29_time_calendar"
+  },
+  {
+   "id": "de8846",
+   "src_id": "n_v1_8_anotimp",
+   "dst_id": "n_v24_weather_precipitation_ploaie"
+  },
+  {
+   "id": "de8847",
+   "src_id": "n_v1_8_vacanta",
+   "dst_id": "n_v3soc_scoala"
+  },
+  {
+   "id": "de8848",
+   "src_id": "n_v1_8_vacanta",
+   "dst_id": "n_v4soc_elev"
+  },
+  {
+   "id": "de8849",
+   "src_id": "n_v1_8_vacanta",
+   "dst_id": "n_v29_time_calendar"
   },
   {
    "id": "de885",
@@ -55663,9 +55930,109 @@
    "dst_id": "n_net_foca_robotzi"
   },
   {
+   "id": "de8850",
+   "src_id": "n_v1_8_vacanta",
+   "dst_id": "n_v1_8_vara"
+  },
+  {
+   "id": "de8851",
+   "src_id": "n_v1_8_rucsac",
+   "dst_id": "n_v1_3_clothing_fermoar"
+  },
+  {
+   "id": "de8852",
+   "src_id": "n_v1_8_rucsac",
+   "dst_id": "n_v3lit_carte"
+  },
+  {
+   "id": "de8853",
+   "src_id": "n_v1_8_rucsac",
+   "dst_id": "n_v24_school_writing_caiet"
+  },
+  {
+   "id": "de8854",
+   "src_id": "n_v1_8_rucsac",
+   "dst_id": "n_v3soc_scoala"
+  },
+  {
+   "id": "de8855",
+   "src_id": "n_v1_8_fluture",
+   "dst_id": "n_v4sti_insecta"
+  },
+  {
+   "id": "de8856",
+   "src_id": "n_v1_8_fluture",
+   "dst_id": "n_v4sti_planta"
+  },
+  {
+   "id": "de8857",
+   "src_id": "n_v1_8_fluture",
+   "dst_id": "n_v4sti_floare"
+  },
+  {
+   "id": "de8858",
+   "src_id": "n_v1_8_fluture",
+   "dst_id": "n_v4geo_padure"
+  },
+  {
+   "id": "de8859",
+   "src_id": "n_v1_8_albina",
+   "dst_id": "n_v4sti_insecta"
+  },
+  {
    "id": "de886",
    "src_id": "n_net_mo_robotzi",
    "dst_id": "n_net_foca_robotzi"
+  },
+  {
+   "id": "de8860",
+   "src_id": "n_v1_8_albina",
+   "dst_id": "n_v4sti_floare"
+  },
+  {
+   "id": "de8861",
+   "src_id": "n_v1_8_albina",
+   "dst_id": "n_v24_food_breakfast_miere"
+  },
+  {
+   "id": "de8862",
+   "src_id": "n_v1_8_albina",
+   "dst_id": "n_v4sti_planta"
+  },
+  {
+   "id": "de8863",
+   "src_id": "n_v1_8_barza",
+   "dst_id": "n_v4sti_pasare"
+  },
+  {
+   "id": "de8864",
+   "src_id": "n_v1_8_barza",
+   "dst_id": "n_v4sti_copac"
+  },
+  {
+   "id": "de8865",
+   "src_id": "n_v1_8_barza",
+   "dst_id": "n_v1_8_broasca"
+  },
+  {
+   "id": "de8866",
+   "src_id": "n_v1_8_barza",
+   "dst_id": "n_v1_8_sarpe"
+  },
+  {
+   "id": "de8867",
+   "src_id": "n_v1_8_arici",
+   "dst_id": "n_v4sti_animal"
+  },
+  {
+   "id": "de8868",
+   "src_id": "n_v1_8_arici",
+   "dst_id": "n_v4sti_insecta"
+  },
+  {
+   "id": "de8869",
+   "src_id": "n_v1_8_arici",
+   "dst_id": "n_v4geo_padure"
   },
   {
    "id": "de887",
@@ -55673,14 +56040,164 @@
    "dst_id": "n_net_parodie_online"
   },
   {
+   "id": "de8870",
+   "src_id": "n_v1_8_arici",
+   "dst_id": "n_v1_8_iarna"
+  },
+  {
+   "id": "de8871",
+   "src_id": "n_v1_8_broasca",
+   "dst_id": "n_v4sti_animal"
+  },
+  {
+   "id": "de8872",
+   "src_id": "n_v1_8_broasca",
+   "dst_id": "n_v4sti_insecta"
+  },
+  {
+   "id": "de8873",
+   "src_id": "n_v1_8_broasca",
+   "dst_id": "n_v1_8_barza"
+  },
+  {
+   "id": "de8874",
+   "src_id": "n_v1_8_broasca",
+   "dst_id": "n_v1_8_sarpe"
+  },
+  {
+   "id": "de8875",
+   "src_id": "n_v1_8_melc",
+   "dst_id": "n_v4sti_animal"
+  },
+  {
+   "id": "de8876",
+   "src_id": "n_v1_8_melc",
+   "dst_id": "n_v4sti_planta"
+  },
+  {
+   "id": "de8877",
+   "src_id": "n_v1_8_melc",
+   "dst_id": "n_v4sti_frunza"
+  },
+  {
+   "id": "de8878",
+   "src_id": "n_v1_8_melc",
+   "dst_id": "n_v24_weather_precipitation_ploaie"
+  },
+  {
+   "id": "de8879",
+   "src_id": "n_v1_8_rata",
+   "dst_id": "n_v4sti_pasare"
+  },
+  {
    "id": "de888",
    "src_id": "n_net_robotzi",
    "dst_id": "n_net_comentarii_online"
   },
   {
+   "id": "de8880",
+   "src_id": "n_v1_8_rata",
+   "dst_id": "n_v4sti_insecta"
+  },
+  {
+   "id": "de8881",
+   "src_id": "n_v1_8_rata",
+   "dst_id": "n_v4sti_planta"
+  },
+  {
+   "id": "de8882",
+   "src_id": "n_v1_8_rata",
+   "dst_id": "n_v84_food_grau"
+  },
+  {
+   "id": "de8883",
+   "src_id": "n_v1_8_gasca",
+   "dst_id": "n_v4sti_pasare"
+  },
+  {
+   "id": "de8884",
+   "src_id": "n_v1_8_gasca",
+   "dst_id": "n_v24_nature_plant_parts_iarba"
+  },
+  {
+   "id": "de8885",
+   "src_id": "n_v1_8_gasca",
+   "dst_id": "n_v84_food_grau"
+  },
+  {
+   "id": "de8886",
+   "src_id": "n_v1_8_gasca",
+   "dst_id": "n_v4sti_frunza"
+  },
+  {
+   "id": "de8887",
+   "src_id": "n_v1_8_cocos",
+   "dst_id": "n_v29_animal_farm_gaina"
+  },
+  {
+   "id": "de8888",
+   "src_id": "n_v1_8_cocos",
+   "dst_id": "n_v4sti_pasare"
+  },
+  {
+   "id": "de8889",
+   "src_id": "n_v1_8_cocos",
+   "dst_id": "n_v1_8_dimineata"
+  },
+  {
    "id": "de889",
    "src_id": "n_net_creative_monkeyz",
    "dst_id": "n_net_parodie_online"
+  },
+  {
+   "id": "de8890",
+   "src_id": "n_v1_8_cocos",
+   "dst_id": "n_v4sti_insecta"
+  },
+  {
+   "id": "de8891",
+   "src_id": "n_v1_8_miel",
+   "dst_id": "n_v30_animal_farm_oaie"
+  },
+  {
+   "id": "de8892",
+   "src_id": "n_v1_8_miel",
+   "dst_id": "n_v4sti_animal"
+  },
+  {
+   "id": "de8893",
+   "src_id": "n_v1_8_miel",
+   "dst_id": "n_v4gas_lapte"
+  },
+  {
+   "id": "de8894",
+   "src_id": "n_v1_8_miel",
+   "dst_id": "n_v4sti_planta"
+  },
+  {
+   "id": "de8895",
+   "src_id": "n_v1_8_sarpe",
+   "dst_id": "n_v4sti_animal"
+  },
+  {
+   "id": "de8896",
+   "src_id": "n_v1_8_sarpe",
+   "dst_id": "n_v4geo_padure"
+  },
+  {
+   "id": "de8897",
+   "src_id": "n_v1_8_sarpe",
+   "dst_id": "n_v1_8_broasca"
+  },
+  {
+   "id": "de8898",
+   "src_id": "n_v1_8_sarpe",
+   "dst_id": "n_v1_8_barza"
+  },
+  {
+   "id": "de8899",
+   "src_id": "n_v1_8_bufnita",
+   "dst_id": "n_v4sti_pasare"
   },
   {
    "id": "de89",
@@ -55691,6 +56208,46 @@
    "id": "de890",
    "src_id": "n_net_creative_monkeyz",
    "dst_id": "n_net_creator_de_continut"
+  },
+  {
+   "id": "de8900",
+   "src_id": "n_v1_8_bufnita",
+   "dst_id": "n_v30_animal_field_iepure"
+  },
+  {
+   "id": "de8901",
+   "src_id": "n_v1_8_bufnita",
+   "dst_id": "n_v29_time_daily_noapte"
+  },
+  {
+   "id": "de8902",
+   "src_id": "n_v1_8_bufnita",
+   "dst_id": "n_v4geo_padure"
+  },
+  {
+   "id": "de8903",
+   "src_id": "n_v1_8_tocator",
+   "dst_id": "n_v29_kitchen_table_cutit"
+  },
+  {
+   "id": "de8904",
+   "src_id": "n_v1_8_tocator",
+   "dst_id": "n_v4gas_legume"
+  },
+  {
+   "id": "de8905",
+   "src_id": "n_v1_8_tocator",
+   "dst_id": "n_v4gas_paine"
+  },
+  {
+   "id": "de8906",
+   "src_id": "n_v1_8_tocator",
+   "dst_id": "n_v1_3_material_lemn"
+  },
+  {
+   "id": "de8907",
+   "src_id": "n_v4art_fotografie",
+   "dst_id": "n_v4mem_poza"
   },
   {
    "id": "de891",
