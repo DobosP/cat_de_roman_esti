@@ -4325,7 +4325,7 @@
     },
     {
       "id": "v110-locomotiva",
-      "revision": 1,
+      "revision": 2,
       "kind": "new_shared_concept",
       "lemma": "Locomotivă",
       "label_ro": "Locomotivă",
@@ -4338,35 +4338,47 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
-      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "link_targets": [
         {
           "node_id": "n_v24_transport_rail_tren",
           "label": "Tren",
           "category": "societate",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "part_of",
+          "label_ro": "Locomotiva remorchează vagoanele unui tren.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v24_transport_terminals_gara",
           "label": "Gară",
           "category": "societate",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Locomotiva cu abur își putea reface rezerva de apă în gară.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v3sti_electricitate",
           "label": "Electricitate",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Locomotivele electrice folosesc electricitate pentru tracțiune.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v1_10_roata",
           "label": "Roată",
           "category": "societate",
           "status": "new in this batch",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Locomotivele obișnuite se deplasează pe roți.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         }
       ],
       "planned_forms": [
@@ -4409,14 +4421,60 @@
         "locomotivelor"
       ],
       "prior_records": [],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "state": "researched",
+      "decision": "Exact sense/forms and second source checked; proposed claims await both independent reviews.",
       "research_ready": true,
-      "sources": []
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/locomotiv%C4%83/json",
+          "authority": "DEX '09",
+          "definition_id": "864805",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/locomotiv%C4%83/json",
+          "authority": "DOOM 3",
+          "definition_id": "1326749",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Locomotiv%C4%83",
+          "paraphrase": "Describes train hauling, steam-locomotive replenishment in stations, electric traction and wheel drive; no Maglev wheel assertion is made.",
+          "role": "second_source"
+        }
+      ],
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "locomotivă",
+        "dex_definition_id": "864805",
+        "doom3_definition_id": "1326749",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "locomotivă",
+        "locomotive",
+        "locomotivele",
+        "locomotivei",
+        "locomotivelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          30479,
+          "locomotivă",
+          395
+        ],
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "proposed_description": "Vehicul motor de cale ferată folosit la remorcarea vagoanelor unui tren.",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-input-haina",
-      "revision": 1,
+      "revision": 2,
       "kind": "existing_owner_form_family",
       "lemma": "Haină",
       "label_ro": "Haină → Haină",
@@ -4429,7 +4487,7 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Missing forms resolve to the existing exact owner and reuse its Cald slot.",
-      "form_status": "Tentative full paradigm, pending DEX/DOOM 3 and second-source verification.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "planned_forms": [
         "haină",
         "haine",
@@ -4508,14 +4566,60 @@
         "hainelor"
       ],
       "prior_records": [],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "state": "researched",
+      "decision": "Exact sense/forms and second source checked; proposed claims await both independent reviews.",
       "research_ready": true,
-      "sources": []
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/hain%C4%83/json",
+          "authority": "DEX '09",
+          "definition_id": "880544",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/hain%C4%83/json",
+          "authority": "DOOM 3",
+          "definition_id": "1299220",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/hain%C4%83",
+          "paraphrase": "Corroborates the ordinary haină sense; DOOM3 supplies the normative noun forms and the missing regular plural genitive is retained for the unchanged existing owner.",
+          "role": "second_source"
+        }
+      ],
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "haină",
+        "dex_definition_id": "880544",
+        "doom3_definition_id": "1299220",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "haină",
+        "haine",
+        "hainele",
+        "hainei",
+        "hainelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          1391,
+          "hainele",
+          20587
+        ],
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "proposed_description": "Obiect de îmbrăcăminte purtat pentru protecție, căldură sau aspect.",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-input-camasa",
-      "revision": 1,
+      "revision": 2,
       "kind": "existing_owner_form_family",
       "lemma": "Cămașă",
       "label_ro": "Cămașă → Cămașă",
@@ -4528,7 +4632,7 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Missing forms resolve to the existing exact owner and reuse its Cald slot.",
-      "form_status": "Tentative full paradigm, pending DEX/DOOM 3 and second-source verification.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "planned_forms": [
         "cămașă",
         "cămăși",
@@ -4607,14 +4711,60 @@
         "cămășilor"
       ],
       "prior_records": [],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "state": "researched",
+      "decision": "Exact sense/forms and second source checked; proposed claims await both independent reviews.",
       "research_ready": true,
-      "sources": []
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/c%C4%83ma%C8%99%C4%83/json",
+          "authority": "DEX '09",
+          "definition_id": "842886",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/c%C4%83ma%C8%99%C4%83/json",
+          "authority": "DOOM 3",
+          "definition_id": "1310351",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/c%C4%83ma%C8%99%C4%83",
+          "paraphrase": "Corroborates the ordinary cămașă sense; DOOM3 supplies the normative noun forms and the missing regular plural genitive is retained for the unchanged existing owner.",
+          "role": "second_source"
+        }
+      ],
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "cămașă",
+        "dex_definition_id": "842886",
+        "doom3_definition_id": "1310351",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "cămașă",
+        "cămăși",
+        "cămășile",
+        "cămășii",
+        "cămășilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          7335,
+          "cămașă",
+          2899
+        ],
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "proposed_description": "Haină pentru partea de sus a corpului, de obicei cu guler și nasturi.",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-input-rochie",
-      "revision": 1,
+      "revision": 2,
       "kind": "existing_owner_form_family",
       "lemma": "Rochie",
       "label_ro": "Rochie → Rochie",
@@ -4627,7 +4777,7 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Missing forms resolve to the existing exact owner and reuse its Cald slot.",
-      "form_status": "Tentative full paradigm, pending DEX/DOOM 3 and second-source verification.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "planned_forms": [
         "rochie",
         "rochia",
@@ -4720,14 +4870,61 @@
         "rochiilor"
       ],
       "prior_records": [],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "state": "researched",
+      "decision": "Exact sense/forms and second source checked; proposed claims await both independent reviews.",
       "research_ready": true,
-      "sources": []
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/rochie/json",
+          "authority": "DEX '09",
+          "definition_id": "858905",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/rochie/json",
+          "authority": "DOOM 3",
+          "definition_id": "1303343",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/rochie",
+          "paraphrase": "Corroborates the ordinary rochie sense; DOOM3 supplies the normative noun forms and the missing regular plural genitive is retained for the unchanged existing owner.",
+          "role": "second_source"
+        }
+      ],
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "rochie",
+        "dex_definition_id": "858905",
+        "doom3_definition_id": "1303343",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "rochie",
+        "rochia",
+        "rochii",
+        "rochiile",
+        "rochiei",
+        "rochiilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          2368,
+          "rochia",
+          10878
+        ],
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "proposed_description": "Haină dintr-o singură piesă care acoperă trunchiul și o parte din picioare.",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-input-fusta",
-      "revision": 1,
+      "revision": 2,
       "kind": "existing_owner_form_family",
       "lemma": "Fustă",
       "label_ro": "Fustă → Fustă",
@@ -4740,7 +4937,7 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Missing forms resolve to the existing exact owner and reuse its Cald slot.",
-      "form_status": "Tentative full paradigm, pending DEX/DOOM 3 and second-source verification.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "planned_forms": [
         "fustă",
         "fuste",
@@ -4819,14 +5016,60 @@
         "fustelor"
       ],
       "prior_records": [],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "state": "researched",
+      "decision": "Exact sense/forms and second source checked; proposed claims await both independent reviews.",
       "research_ready": true,
-      "sources": []
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/fust%C4%83/json",
+          "authority": "DEX '09",
+          "definition_id": "875188",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/fust%C4%83/json",
+          "authority": "DOOM 3",
+          "definition_id": "1302976",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/fust%C4%83",
+          "paraphrase": "Corroborates the ordinary fustă sense; DOOM3 supplies the normative noun forms and the missing regular plural genitive is retained for the unchanged existing owner.",
+          "role": "second_source"
+        }
+      ],
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "fustă",
+        "dex_definition_id": "875188",
+        "doom3_definition_id": "1302976",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "fustă",
+        "fuste",
+        "fustele",
+        "fustei",
+        "fustelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          15702,
+          "fustă",
+          1051
+        ],
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "proposed_description": "Haină purtată de la talie în jos, fără părți separate pentru picioare.",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-input-pantof",
-      "revision": 1,
+      "revision": 2,
       "kind": "existing_owner_form_family",
       "lemma": "Pantof",
       "label_ro": "Pantof → Pantof",
@@ -4839,7 +5082,7 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Missing forms resolve to the existing exact owner and reuse its Cald slot.",
-      "form_status": "Tentative full paradigm, pending DEX/DOOM 3 and second-source verification.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "planned_forms": [
         "pantof",
         "pantoful",
@@ -4932,14 +5175,61 @@
         "pantofilor"
       ],
       "prior_records": [],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "state": "researched",
+      "decision": "Exact sense/forms and second source checked; proposed claims await both independent reviews.",
       "research_ready": true,
-      "sources": []
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/pantof/json",
+          "authority": "DEX '09",
+          "definition_id": "861238",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/pantof/json",
+          "authority": "DOOM 3",
+          "definition_id": "1280265",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/pantof",
+          "paraphrase": "Corroborates the ordinary pantof sense; DOOM3 supplies the normative noun forms and the missing regular plural genitive is retained for the unchanged existing owner.",
+          "role": "second_source"
+        }
+      ],
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "pantof",
+        "dex_definition_id": "861238",
+        "doom3_definition_id": "1280265",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "pantof",
+        "pantoful",
+        "pantofi",
+        "pantofii",
+        "pantofului",
+        "pantofilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          2490,
+          "pantofi",
+          10248
+        ],
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "proposed_description": "Obiect de încălțăminte care protejează laba piciorului.",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-input-soseta",
-      "revision": 1,
+      "revision": 2,
       "kind": "existing_owner_form_family",
       "lemma": "Șosetă",
       "label_ro": "Șosetă → Șosetă",
@@ -4952,7 +5242,7 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Missing forms resolve to the existing exact owner and reuse its Cald slot.",
-      "form_status": "Tentative full paradigm, pending DEX/DOOM 3 and second-source verification.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "planned_forms": [
         "șosetă",
         "șosete",
@@ -5031,14 +5321,60 @@
         "șosetelor"
       ],
       "prior_records": [],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "state": "researched",
+      "decision": "Exact sense/forms and second source checked; proposed claims await both independent reviews.",
       "research_ready": true,
-      "sources": []
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/%C8%99oset%C4%83/json",
+          "authority": "DEX '09",
+          "definition_id": "837855",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/%C8%99oset%C4%83/json",
+          "authority": "DOOM 3",
+          "definition_id": "1271740",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/%C8%99oset%C4%83",
+          "paraphrase": "Corroborates the ordinary șosetă sense; DOOM3 supplies the normative noun forms and the missing regular plural genitive is retained for the unchanged existing owner.",
+          "role": "second_source"
+        }
+      ],
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "șosetă",
+        "dex_definition_id": "837855",
+        "doom3_definition_id": "1271740",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "șosetă",
+        "șosete",
+        "șosetele",
+        "șosetei",
+        "șosetelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          12826,
+          "șosete",
+          1391
+        ],
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "proposed_description": "Piesă moale de îmbrăcăminte purtată pe picior, în interiorul pantofului.",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-input-geaca",
-      "revision": 1,
+      "revision": 2,
       "kind": "existing_owner_form_family",
       "lemma": "Geacă",
       "label_ro": "Geacă → Geacă",
@@ -5051,7 +5387,7 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Missing forms resolve to the existing exact owner and reuse its Cald slot.",
-      "form_status": "Tentative full paradigm, pending DEX/DOOM 3 and second-source verification.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "planned_forms": [
         "geacă",
         "geci",
@@ -5130,14 +5466,65 @@
         "gecilor"
       ],
       "prior_records": [],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "state": "researched",
+      "decision": "Exact sense/forms and second source checked; proposed claims await both independent reviews.",
       "research_ready": true,
-      "sources": []
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/geac%C4%83/json",
+          "authority": "DEX '09",
+          "definition_id": "876815",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/geac%C4%83/json",
+          "authority": "DOOM 3",
+          "definition_id": "1319735",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/geac%C4%83",
+          "paraphrase": "Corroborates the ordinary geacă sense; DOOM3 supplies the normative noun forms and the missing regular plural genitive is retained for the unchanged existing owner.",
+          "role": "second_source"
+        },
+        {
+          "url": "https://www.zara.com/ro/ro/geaca-cu-buzunare-p05854717.html",
+          "paraphrase": "The maker uses geacă for a concrete upper-body jacket with sleeves and pockets; no alternate register is needed.",
+          "role": "link_source"
+        }
+      ],
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "geacă",
+        "dex_definition_id": "876815",
+        "doom3_definition_id": "1319735",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "geacă",
+        "geci",
+        "gecile",
+        "gecii",
+        "gecilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          19115,
+          "geacă",
+          793
+        ],
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "proposed_description": "Haină scurtă purtată peste alte haine pentru protecție și căldură.",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-input-prosop",
-      "revision": 1,
+      "revision": 2,
       "kind": "existing_owner_form_family",
       "lemma": "Prosop",
       "label_ro": "Prosop → Prosop",
@@ -5150,7 +5537,7 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Missing forms resolve to the existing exact owner and reuse its Cald slot.",
-      "form_status": "Tentative full paradigm, pending DEX/DOOM 3 and second-source verification.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "planned_forms": [
         "prosop",
         "prosopul",
@@ -5243,14 +5630,61 @@
         "prosoapelor"
       ],
       "prior_records": [],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "state": "researched",
+      "decision": "Exact sense/forms and second source checked; proposed claims await both independent reviews.",
       "research_ready": true,
-      "sources": []
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/prosop/json",
+          "authority": "DEX '09",
+          "definition_id": "879569",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/prosop/json",
+          "authority": "DOOM 3",
+          "definition_id": "1285593",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/prosop",
+          "paraphrase": "Corroborates the ordinary prosop sense; DOOM3 supplies the normative noun forms and the missing regular plural genitive is retained for the unchanged existing owner.",
+          "role": "second_source"
+        }
+      ],
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "prosop",
+        "dex_definition_id": "879569",
+        "doom3_definition_id": "1285593",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "prosop",
+        "prosopul",
+        "prosoape",
+        "prosoapele",
+        "prosopului",
+        "prosoapelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          8469,
+          "prosop",
+          2421
+        ],
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "proposed_description": "Obiect textil absorbant folosit pentru a șterge și usca mâinile, fața sau corpul.",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-input-sapun",
-      "revision": 1,
+      "revision": 2,
       "kind": "existing_owner_form_family",
       "lemma": "Săpun",
       "label_ro": "Săpun → Săpun",
@@ -5263,7 +5697,7 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Missing forms resolve to the existing exact owner and reuse its Cald slot.",
-      "form_status": "Tentative full paradigm, pending DEX/DOOM 3 and second-source verification.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "planned_forms": [
         "săpun",
         "săpunul",
@@ -5356,14 +5790,61 @@
         "săpunurilor"
       ],
       "prior_records": [],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "state": "researched",
+      "decision": "Exact sense/forms and second source checked; proposed claims await both independent reviews.",
       "research_ready": true,
-      "sources": []
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/s%C4%83pun/json",
+          "authority": "DEX '09",
+          "definition_id": "839168",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/s%C4%83pun/json",
+          "authority": "DOOM 3",
+          "definition_id": "1272835",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/s%C4%83pun",
+          "paraphrase": "Corroborates the ordinary săpun sense; DOOM3 supplies the normative noun forms and the missing regular plural genitive is retained for the unchanged existing owner.",
+          "role": "second_source"
+        }
+      ],
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "săpun",
+        "dex_definition_id": "839168",
+        "doom3_definition_id": "1272835",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "săpun",
+        "săpunul",
+        "săpunuri",
+        "săpunurile",
+        "săpunului",
+        "săpunurilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          9240,
+          "săpun",
+          2164
+        ],
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "proposed_description": "Produs folosit cu apă pentru a spăla mâinile și corpul.",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-input-sampon",
-      "revision": 1,
+      "revision": 2,
       "kind": "existing_owner_form_family",
       "lemma": "Șampon",
       "label_ro": "Șampon → Șampon",
@@ -5376,7 +5857,7 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Missing forms resolve to the existing exact owner and reuse its Cald slot.",
-      "form_status": "Tentative full paradigm, pending DEX/DOOM 3 and second-source verification.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "planned_forms": [
         "șampon",
         "șamponul",
@@ -5469,17 +5950,64 @@
         "șampoanelor"
       ],
       "prior_records": [],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "state": "researched",
+      "decision": "Exact sense/forms and second source checked; proposed claims await both independent reviews.",
       "research_ready": true,
-      "sources": []
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/%C8%99ampon/json",
+          "authority": "DEX '09",
+          "definition_id": "836968",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/%C8%99ampon/json",
+          "authority": "DOOM 3",
+          "definition_id": "1270979",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/%C8%99ampon",
+          "paraphrase": "Corroborates the ordinary șampon sense; DOOM3 supplies the normative noun forms and the missing regular plural genitive is retained for the unchanged existing owner.",
+          "role": "second_source"
+        }
+      ],
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "șampon",
+        "dex_definition_id": "836968",
+        "doom3_definition_id": "1270979",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "șampon",
+        "șamponul",
+        "șampoane",
+        "șampoanele",
+        "șamponului",
+        "șampoanelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          22897,
+          "șampon",
+          609
+        ],
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "proposed_description": "Produs lichid folosit cu apă pentru a spăla părul.",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-input-pieptene",
-      "revision": 1,
+      "revision": 2,
       "kind": "existing_owner_form_family",
-      "lemma": "Pieptene",
-      "label_ro": "Pieptene → Pieptene",
+      "lemma": "Pieptăn",
+      "label_ro": "Pieptăn → Pieptene",
       "sense": "Obiect cu dinți apropiați, folosit pentru a descurca și aranja părul.",
       "origin": "everyday_discovery_extension",
       "category_hypothesis": "viata_de_roman",
@@ -5489,103 +6017,170 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Missing forms resolve to the existing exact owner and reuse its Cald slot.",
-      "form_status": "Tentative full paradigm, pending DEX/DOOM 3 and second-source verification.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "planned_forms": [
-        "pieptene",
-        "pieptenele",
+        "pieptăn",
+        "pieptănul",
+        "pieptănului",
         "piepteni",
         "pieptenii",
-        "pieptenului",
         "pieptenilor"
       ],
       "identity_checks": {
         "forms": [
           {
-            "form": "pieptene",
-            "key": "pieptene",
-            "index_owner": "n_v31_hygiene_hair_pieptene",
-            "all_owners": [
-              {
-                "id": "n_v31_hygiene_hair_pieptene",
-                "kind": "node_label",
-                "surface": "Pieptene"
-              },
-              {
-                "id": "n_v31_hygiene_hair_pieptene",
-                "kind": "labels",
-                "surface": "Pieptene"
-              }
-            ]
+            "form": "pieptăn",
+            "key": "pieptan",
+            "all_owners": [],
+            "index_owner": null,
+            "prior_records": [],
+            "cald_proxies": [],
+            "screen_note": "Corrected normative lemma/paradigm screened before the exact pieptăn source call."
           },
           {
-            "form": "pieptenele",
-            "key": "pieptenele",
-            "index_owner": "n_v31_hygiene_hair_pieptene",
-            "all_owners": [
-              {
-                "id": "n_v31_hygiene_hair_pieptene",
-                "kind": "node_alias",
-                "surface": "pieptenele"
-              }
-            ]
+            "form": "pieptănul",
+            "key": "pieptanul",
+            "all_owners": [],
+            "index_owner": null,
+            "prior_records": [],
+            "cald_proxies": [],
+            "screen_note": "Corrected normative lemma/paradigm screened before the exact pieptăn source call."
+          },
+          {
+            "form": "pieptănului",
+            "key": "pieptanului",
+            "all_owners": [],
+            "index_owner": null,
+            "prior_records": [],
+            "cald_proxies": [],
+            "screen_note": "Corrected normative lemma/paradigm screened before the exact pieptăn source call."
           },
           {
             "form": "piepteni",
             "key": "piepteni",
-            "index_owner": "n_v31_hygiene_hair_pieptene",
             "all_owners": [
               {
                 "id": "n_v31_hygiene_hair_pieptene",
                 "kind": "node_alias",
                 "surface": "piepteni"
               }
-            ]
+            ],
+            "index_owner": "n_v31_hygiene_hair_pieptene",
+            "prior_records": [
+              {
+                "pool": "docs/content-pool/v1-10-everyday-discovery/pool.json",
+                "id": "v110-input-pieptene",
+                "state": "idea",
+                "decision": "Pre-screened idea; morphology, register and all link claims still unverified."
+              }
+            ],
+            "cald_proxies": [],
+            "screen_note": "Corrected normative lemma/paradigm screened before the exact pieptăn source call."
           },
           {
             "form": "pieptenii",
             "key": "pieptenii",
-            "index_owner": "n_v31_hygiene_hair_pieptene",
             "all_owners": [
               {
                 "id": "n_v31_hygiene_hair_pieptene",
                 "kind": "node_alias",
                 "surface": "pieptenii"
               }
-            ]
-          },
-          {
-            "form": "pieptenului",
-            "key": "pieptenului",
+            ],
             "index_owner": "n_v31_hygiene_hair_pieptene",
-            "all_owners": [
+            "prior_records": [
               {
-                "id": "n_v31_hygiene_hair_pieptene",
-                "kind": "node_alias",
-                "surface": "pieptenului"
+                "pool": "docs/content-pool/v1-10-everyday-discovery/pool.json",
+                "id": "v110-input-pieptene",
+                "state": "idea",
+                "decision": "Pre-screened idea; morphology, register and all link claims still unverified."
               }
-            ]
+            ],
+            "cald_proxies": [],
+            "screen_note": "Corrected normative lemma/paradigm screened before the exact pieptăn source call."
           },
           {
             "form": "pieptenilor",
-            "key": "pieptenilor"
+            "key": "pieptenilor",
+            "all_owners": [],
+            "index_owner": null,
+            "prior_records": [
+              {
+                "pool": "docs/content-pool/v1-10-everyday-discovery/pool.json",
+                "id": "v110-input-pieptene",
+                "state": "idea",
+                "decision": "Pre-screened idea; morphology, register and all link claims still unverified."
+              }
+            ],
+            "cald_proxies": [],
+            "screen_note": "Corrected normative lemma/paradigm screened before the exact pieptăn source call."
           }
         ]
       },
       "already_resolved_forms": [
-        "pieptene",
-        "pieptenele",
         "piepteni",
-        "pieptenii",
-        "pieptenului"
+        "pieptenii"
       ],
       "proposed_forms": [
+        "pieptăn",
+        "pieptănul",
+        "pieptănului",
         "pieptenilor"
       ],
       "prior_records": [],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "state": "researched",
+      "decision": "Exact sense/forms and second source checked; proposed claims await both independent reviews.",
       "research_ready": true,
-      "sources": []
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/piept%C4%83n/json",
+          "authority": "DEX '09",
+          "definition_id": "871381",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/piept%C4%83n/json",
+          "authority": "DOOM 3",
+          "definition_id": "1258647",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/piept%C4%83n",
+          "paraphrase": "Corroborates the exact same toiletry object under pieptăn, preserving the existing Pieptene owner and label.",
+          "role": "second_source"
+        }
+      ],
+      "original_lemma": "Pieptene",
+      "form_revision_reason": "DOOM3 selects exact headword pieptăn. Keep existing owner/label, add only its missing same-sense normative inputs; no existing form is removed.",
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "pieptăn",
+        "dex_definition_id": "871381",
+        "doom3_definition_id": "1258647",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "pieptăn",
+        "pieptănul",
+        "pieptănului",
+        "piepteni",
+        "pieptenii",
+        "pieptenilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          49050,
+          "piepteni",
+          179
+        ],
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "proposed_description": "Obiect cu dinți apropiați, folosit pentru a descurca și aranja părul.",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-input-lingura",
@@ -6034,6 +6629,26 @@
         "v110-anvelopa",
         "v110-semafor",
         "v110-troleibuz"
+      ],
+      "moved": 12,
+      "max_items": 12,
+      "item_budget": "At most5 active minutes per item; unresolved fourth links held."
+    },
+    {
+      "tick": 3,
+      "items": [
+        "v110-locomotiva",
+        "v110-input-haina",
+        "v110-input-camasa",
+        "v110-input-rochie",
+        "v110-input-fusta",
+        "v110-input-pantof",
+        "v110-input-soseta",
+        "v110-input-geaca",
+        "v110-input-prosop",
+        "v110-input-sapun",
+        "v110-input-sampon",
+        "v110-input-pieptene"
       ],
       "moved": 12,
       "max_items": 12,
