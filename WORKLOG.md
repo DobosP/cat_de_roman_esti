@@ -2149,3 +2149,23 @@ Valid until: V1.9 lands locally — then treat as history.
   [Review](docs/reviews/v1-8-everyday-core/README.md) and [pool](docs/content-pool/v1-8-everyday-core/pool.json).
   Four native rails reconstruct exactly; owner-approved Cald assertions, HTTP1207 and API51 pass.
   Full native race has no new red versus main; managed SPA baseline failures remain unchanged.
+
+V1.9 content status superseded by V1.10 qualification on 2026-10-11.
+Valid until: V1.10 qualification — then treat as history.
+- **V1.9 qualified locally:** 23 reviewed items: 14 new concepts, nine existing-owner input
+  families; +14 nodes/+55 links/+82 forms, zero new curated rounds.
+  All new labels/forms resolve; 22 missing forms for existing owners preserve identity.
+  [Review](reviews/v1-9-seasons-and-school/README.md) and [pool](content-pool/v1-9-seasons-and-school/pool.json).
+  Four exact native rails; owner-approved Cald assertions, HTTP1207 and API105 pass.
+  Full native race has no new red versus main; managed SPA baseline failures remain unchanged.
+Qualified V1.9 KG: `fixture-v1-9-seasons-and-school`, 2456 nodes/9621 links/8897 forms/180 exact puzzles.
+- alchimie_discovery_world_v92.json: `0c5fb28ecb3a682eecb28d4d192f688d39a61893ce66e69facac56c09b6603d5`
+- alchimie_recipe_extensions_v92.json: `64e046b1f069105184dd5f61ba5a3af02efcb3b11e7f2f77a3afbfd6de8b639e`
+- quick_games_v92.json: `793cc9cf54abf4f655fcf2441405db687c8fe45f0a79fd48819a39249892f8c8`
+- games_pack.json: `e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8`
+- board_rankings_v37.json: `2f7c7d15a95f52f80be5ae219d605edce3a2e9494d6bff2e3b3f03494e4a5110`
+- derived_catalog_v38.json: `49cbcc3fc8473966ebf61ae1f69c2ba6a999d0d2e3376ffc837f8e92717ed6cf`
+- release_reserve_v1.json: `fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7`
+- lant_rejection_tombstones.json: `01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d`
+- kg_sample.json: `846c2a4d48f85524b21043ecf52320edfa937946d030f91022ff6a879caae3e8`
+- cat_mobile_app_pack_contract.json: `ef9e281b092ea2dfd7df962d7625e28701b8e413543455242dbfe4e631ce393a`
