@@ -305,7 +305,10 @@ func TestInstalledAuthorityCannotBeGrantedByPinsWithoutCurrentReviews(t *testing
 func TestInstalledAuthorityStaleSourcesRuntimeAndSymlinksRefuse(t *testing.T) {
 	f := installedFixtureForTest(t)
 	a := authorityForTest(t, f.manifest)
-	for _, relative := range []string{"docs/reviews/synthetic-installed-v2/source-v2.json", "go-backend/internal/graph/service.go", "cat_de_roman_esti/fixtures/kg_sample.json"} {
+	// Chain, behaviour binding, non-artifact binding and installed artifact bytes.
+	// A Go source edit is absent on purpose: it cannot change the behaviour of this
+	// already-compiled binary, and runtime hashes are provenance only (ADR-0189).
+	for _, relative := range []string{"docs/reviews/synthetic-installed-v2/source-v2.json", "cat_de_roman_esti/fixtures/kg_sample.json", "cat_de_roman_esti/fixtures/derived_catalog_v38.json", "cat_de_roman_esti/fixtures/quick_games_v92.json"} {
 		t.Run(relative, func(t *testing.T) {
 			path := filepath.Join(f.root, relative)
 			old, err := os.ReadFile(path)
@@ -317,10 +320,49 @@ func TestInstalledAuthorityStaleSourcesRuntimeAndSymlinksRefuse(t *testing.T) {
 				t.Fatal(err)
 			}
 			if _, _, err = a.rebuild(f.root, f.selected, "quick"); err == nil {
-				t.Fatal("stale source/runtime/audit accepted")
+				t.Fatal("stale source/binding/artifact accepted")
 			}
 		})
 	}
+	t.Run("tampered-audit-resigned", func(t *testing.T) {
+		m := clone(f.manifest).(map[string]any)
+		entry := object(object(m["rails"])["quick"])
+		restore := []func(){}
+		defer func() {
+			for _, fn := range restore {
+				fn()
+			}
+		}()
+		rewrite := func(key string, mutate func(map[string]any)) []byte {
+			d := object(entry[key])
+			path := filepath.Join(f.root, text(d["path"]))
+			old, err := os.ReadFile(path)
+			if err != nil {
+				t.Fatal(err)
+			}
+			restore = append(restore, func() { os.WriteFile(path, old, 0600) })
+			raw, err := Read(path)
+			if err != nil {
+				t.Fatal(err)
+			}
+			mutate(raw)
+			writeJSONTest(t, path, raw)
+			blob, _ := os.ReadFile(path)
+			d["sha256"] = digestBytes(blob)
+			return blob
+		}
+		auditBlob := rewrite("audit", func(raw map[string]any) {
+			replay := object(rows(raw["replays"])[0])
+			replay["public_seed"] = integer(replay["public_seed"]) + 1
+		})
+		for _, key := range []string{"final_factual_review", "final_quality_review"} {
+			rewrite(key, func(raw map[string]any) { raw["audit_sha256"] = digestBytes(auditBlob) })
+		}
+		a := authorityForTest(t, m)
+		if _, _, err := a.rebuild(f.root, f.selected, "quick"); err == nil {
+			t.Fatal("re-signed behaviour tamper granted installed authority")
+		}
+	})
 	for _, key := range []string{"candidate", "factual_review", "audit"} {
 		t.Run("symlink-"+key, func(t *testing.T) {
 			m := clone(f.manifest).(map[string]any)
@@ -337,6 +379,46 @@ func TestInstalledAuthorityStaleSourcesRuntimeAndSymlinksRefuse(t *testing.T) {
 				t.Fatal("symlinked registered authority document accepted")
 			}
 		})
+	}
+}
+
+// Go edits that leave the audited behaviour identical change provenance only;
+// the installed authority is still accepted and reconstructs the same catalog (ADR-0189).
+func TestInstalledAuthorityBehaviourNeutralRuntimeEditStaysGreen(t *testing.T) {
+	f := installedFixtureForTest(t)
+	a := authorityForTest(t, f.manifest)
+	untouched, adopted, err := a.rebuild(f.root, f.selected, "quick")
+	if err != nil || !adopted {
+		t.Fatal("untouched installed authority refused", err)
+	}
+	before, err := RuntimeHashes(f.root)
+	if err != nil {
+		t.Fatal(err)
+	}
+	service := filepath.Join(f.root, "go-backend/internal/graph/service.go")
+	old, err := os.ReadFile(service)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err = os.WriteFile(service, append(old, []byte("\n// provenance only\n")...), 0600); err != nil {
+		t.Fatal(err)
+	}
+	if err = os.WriteFile(filepath.Join(f.root, "go-backend/internal/httpapi/extra_runtime.go"), []byte("package httpapi\n"), 0600); err != nil {
+		t.Fatal(err)
+	}
+	after, err := RuntimeHashes(f.root)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if same(before, after) {
+		t.Fatal("runtime edits escaped provenance")
+	}
+	edited, adopted, err := a.rebuild(f.root, f.selected, "quick")
+	if err != nil || !adopted {
+		t.Fatal("behaviour-neutral runtime edit refused installed authority", err)
+	}
+	if !same(untouched, edited) {
+		t.Fatal("behaviour-neutral runtime edit changed the reconstructed catalog")
 	}
 }
 

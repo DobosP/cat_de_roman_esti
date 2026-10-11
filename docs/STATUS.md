@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-10 — [V1.8 baseline](reviews/v1-8-everyday-core/README.md), research-only; V1.7 parked ([ADR-0188](adr/0188-park-v1-7-and-reset-content-loop.md)); Source6 live; content rail baseline red since 5baf581.
+Last verified: 2026-10-11 — V1.7 parked ([ADR-0188](adr/0188-park-v1-7-and-reset-content-loop.md)); Source6 live; rail baseline green ([ADR-0189](adr/0189-behaviour-bound-installed-content-authorities.md), behaviour-bound installed authorities).
 
 - **GUI checkpoint:** core1.2 released; native7/current+candidate andfocusedMotion14 PASS; exact15 accepted/unapplied; deps64ea PASS. Fullnormalized replay/Node3/lint/unit/CSP/device/KIT_BUMP pending. Linuxsupervisor/worker paused.
 - **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
@@ -109,7 +109,7 @@ Unrevealed answers, recipe maps and routes stay private.
   [ADR-0168](adr/0168-qualify-complete-native-toolchain.md): native qualification remains historical evidence.
 - V1.3: [pool3integrated/5held](content-pool/v1-3-everyday-concepts/pool.json), [integration](reviews/v1-3-everyday-concepts/README.md); graph3/12/12 accepted/applied.
 - **V1.7 parked** ([ADR-0188](adr/0188-park-v1-7-and-reset-content-loop.md)): `codex/content-v1-7` (local 3377a68, origin fba9498) and `codex/content-v1-7-qualification` are not merged; zero integrated growth. Source6 stays live; [ADR-0186](adr/0186-go-authoritative-content-validation.md) keeps Go/native JSON authoritative. Outcome: [pool](content-pool/v1-7-recognizable-content/pool.json); leafă returns later as a full-paradigm Salariu input.
-- **Content rail baseline RED on main** (verified 2026-10-10): `cat-content-rail all --root .. --check` reports "final live audit incomplete/stale/unaccepted" and `go test ./internal/contentrails` fails since 5baf581 (GUI kit sync), because installed authorities hash every Go runtime file. Content installs wait for an owner-approved fix; until then content waves follow [CONTENT_LOOP.md](CONTENT_LOOP.md) research-only.
+- **Content rail baseline GREEN** (verified 2026-10-11): `cat-content-rail all --root .. --check` and `go -C go-backend test ./internal/contentrails/ ./internal/contentbuild/` pass; installed authorities re-run the native audits under the current binary and accept on behaviour equality, not runtime file hashes ([ADR-0189](adr/0189-behaviour-bound-installed-content-authorities.md)). Content installs enabled per [CONTENT_LOOP.md](CONTENT_LOOP.md).
 - Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing
   diacritics in some descriptions ("roman"/"român"), the false Toma Caragiu–Reconstituirea
   casting edge, generic-only Lanț `lt_personalitati_186`, off-theme single-board Conexiuni
@@ -117,4 +117,4 @@ Unrevealed answers, recipe maps and routes stay private.
 - Known limits: Alchimie Greu starts on shelves without a curated board can take seconds (a time cap would break deterministic dailies); older stored score details keep ISO dates
   but display as dd.mm.yyyy. The held Familie gradient and four spare concept slots remain.
 ## Doc map
-- README/AGENTS: orientation; agent-map/testing: gates; ADRs (newest 0188), [content loop](CONTENT_LOOP.md), WORKLOG: history; [GUI motion preparation](reviews/gui-motion-baseline/README.md):29 provisional preview/69 focused checks;48 future cases UNEXECUTED; named-gate placement blocked.
+- README/AGENTS: orientation; agent-map/testing: gates; ADRs (newest 0189), [content loop](CONTENT_LOOP.md), WORKLOG: history; [GUI motion preparation](reviews/gui-motion-baseline/README.md):29 provisional preview/69 focused checks;48 future cases UNEXECUTED; named-gate placement blocked.

@@ -290,7 +290,7 @@ func TestSyntheticVersionTwoInstallBoundReviewsAuditAndServingPinRefusal(t *test
 	if err = ConfirmFinal(root, "quick", proposal, proposalPath, auditPath, finalPaths[0], finalPaths[1], pin); err != nil {
 		t.Fatal(err)
 	}
-	for i, mutate := range []func(map[string]any){func(m map[string]any) { m["kind"] = "world-audit" }, func(m map[string]any) { m["verdict"] = "reject"; m["passed"] = true }, func(m map[string]any) { m["runtime_sources"] = nil }, func(m map[string]any) { m["source_bindings"] = map[string]any{} }} {
+	for i, mutate := range []func(map[string]any){func(m map[string]any) { m["kind"] = "world-audit" }, func(m map[string]any) { m["verdict"] = "reject"; m["passed"] = true }, func(m map[string]any) { m["runtime_sources"] = nil }, func(m map[string]any) { m["source_bindings"] = map[string]any{} }, func(m map[string]any) { m["runtime_sources"] = []any{map[string]any{"path": "x.go"}} }} {
 		bad := clone(audit).(map[string]any)
 		mutate(bad)
 		path := filepath.Join(dir, fmt.Sprintf("audit-bad-%d.json", i))
@@ -298,6 +298,66 @@ func TestSyntheticVersionTwoInstallBoundReviewsAuditAndServingPinRefusal(t *test
 		if err = ConfirmFinal(root, "quick", proposal, proposalPath, path, finalPaths[0], finalPaths[1], pin); err == nil {
 			t.Fatal("invalid final audit accepted", i)
 		}
+	}
+	// A behaviour tamper with every signature consistent: the finals are re-signed
+	// to the tampered audit, so only the fresh-audit comparator can refuse (ADR-0189).
+	tampered := clone(audit).(map[string]any)
+	replay := object(rows(tampered["replays"])[0])
+	replay["public_seed"] = integer(replay["public_seed"]) + 1
+	tamperedPath := filepath.Join(dir, "audit-tampered.json")
+	writeJSONTest(t, tamperedPath, tampered)
+	tamperedBytes, _ := Render(tampered)
+	resigned := []string{}
+	for _, role := range []string{"factual", "quality"} {
+		path := filepath.Join(dir, "final-tampered-"+role+".json")
+		writeJSONTest(t, path, map[string]any{"kind": FinalKind("quick"), "role": role, "reviewer": "synthetic-" + role, "catalog_sha256": pin, "audit_sha256": digestBytes(tamperedBytes), "verdict": "accept", "rationale": "Synthetic fixture-only final judgment."})
+		resigned = append(resigned, path)
+	}
+	if err = ConfirmFinal(root, "quick", proposal, proposalPath, tamperedPath, resigned[0], resigned[1], pin); err == nil || !strings.HasPrefix(err.Error(), "final live audit incomplete/stale/unaccepted") {
+		t.Fatal("re-signed behaviour tamper escaped the fresh audit comparator", err)
+	}
+	// The inverse: behaviour-neutral runtime edits change provenance but keep the
+	// original audit and finals acceptable under the current binary.
+	before, err := RuntimeHashes(root)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err = os.WriteFile(filepath.Join(root, "go-backend/internal/graph/new_runtime.go"), []byte("package graph\n"), 0644); err != nil {
+		t.Fatal(err)
+	}
+	website := filepath.Join(root, "go-backend/internal/httpapi/website.go")
+	websiteBytes, err := os.ReadFile(website)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err = os.WriteFile(website, append(websiteBytes, []byte("\n// provenance only\n")...), 0644); err != nil {
+		t.Fatal(err)
+	}
+	after, err := RuntimeHashes(root)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if same(before, after) {
+		t.Fatal("runtime edits escaped provenance")
+	}
+	if err = ConfirmFinal(root, "quick", proposal, proposalPath, auditPath, finalPaths[0], finalPaths[1], pin); err != nil {
+		t.Fatal("behaviour-neutral runtime edit refused the original audit/finals", err)
+	}
+	// The auditors stay bound: an edited auditor could reproduce a stale signed
+	// audit, so its recorded digest remains an acceptance term (ADR-0189).
+	auditor := filepath.Join(root, "go-backend/internal/contentrails/quick.go")
+	auditorBytes, err := os.ReadFile(auditor)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err = os.WriteFile(auditor, append(auditorBytes, []byte("\n// edited auditor\n")...), 0644); err != nil {
+		t.Fatal(err)
+	}
+	if err = ConfirmFinal(root, "quick", proposal, proposalPath, auditPath, finalPaths[0], finalPaths[1], pin); err == nil || !strings.HasPrefix(err.Error(), "final live audit incomplete/stale/unaccepted") {
+		t.Fatal("edited auditor kept the original audit acceptable", err)
+	}
+	if err = os.WriteFile(auditor, auditorBytes, 0644); err != nil {
+		t.Fatal(err)
 	}
 	target, _ := ArtifactPath(root, "quick")
 	old, err := os.ReadFile(target)
@@ -416,7 +476,9 @@ func TestSecondWorldTransitionRefusesStalePreviousArchive(t *testing.T) {
 	}
 }
 
-func TestRuntimeManifestIncludesRuleReceiptAndNewFileInvalidatesApproval(t *testing.T) {
+// Provenance changes are recorded in every audit, not acceptance criteria (ADR-0189):
+// the manifest must still see every runtime file so the record stays complete.
+func TestRuntimeManifestIncludesRuleReceiptAndNewFileChangesProvenance(t *testing.T) {
 	root, _ := cloneRoot(t)
 	before, err := RuntimeHashes(root)
 	if err != nil {
@@ -440,7 +502,7 @@ func TestRuntimeManifestIncludesRuleReceiptAndNewFileInvalidatesApproval(t *test
 		t.Fatal(err)
 	}
 	if same(before, after) {
-		t.Fatal("new runtime file escaped inventory binding")
+		t.Fatal("new runtime file escaped provenance inventory")
 	}
 }
 func TestLoadedCustomSourceCASRefusesChangedFlagFile(t *testing.T) {
