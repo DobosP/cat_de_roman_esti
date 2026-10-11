@@ -1,0 +1,70 @@
+{
+  "schema": 1,
+  "reviewer": "/root/cross_repo_plan",
+  "verdict": "ACTUAL_SCOPED_POSITIVE_DEV_HMR_CLEAR",
+  "source": "cb84644dd702d925283438254168ca8b5c3fc939",
+  "tree_sha256": "b61fbde1834813e4d35b4ca81849776c3521393990fe532fbd24267ddda9e543",
+  "session": 29428,
+  "exit": 0,
+  "invocation": "aad112ec-2f6f-4d73-a581-9d7e98f998ca",
+  "evidence": "/home/dobo/work/_temp/adhoc-gui-migration-parent-20261006/cat-positive-dev-cb84644-aad112ec-2f6f-4d73-a581-9d7e98f998ca",
+  "CLOSURE_sha256": "6272b41d29b63102868ba0677d706237c0b1e4b783c9ea85071247b99bb05742",
+  "all91_rows_bytes_fullmodes_verified": true,
+  "CLOSURE_total_bytes": 689545,
+  "observation_sha256": "0998ea366d7eaac2feede158ffe4343ffb944505863719d9be9beb40fe488569",
+  "accepted_fresh_build_reference": {
+    "wrapper": "0bf3d0ce-0076-4f00-8296-65fa245b23e4",
+    "PASSchecks": 13,
+    "capture_sha256": "9b5d144c18a291e4a8c55215c9152ef7f209c8274f8838278a069e743cace362",
+    "independent_review_sha256": "8f665ea304ce4d37a60e7b641a99fa2dbfc02f19ed0e8886b5954d63352829b9",
+    "parent_review_sha256": "493b1211b5fc535127de06321ddfadd7ad6c6eb9906cf3257ccba695f160bca3",
+    "parent_HMR_command_after_both_review_file_times": true
+  },
+  "actual_delivery": {
+    "pinned_browser": "153.0.8010.12",
+    "proxy_direct_after_identities_private307_status200_exact": true,
+    "accounts_OFF": true,
+    "external_requests": 0,
+    "page_errors": 0,
+    "Vite_client_status": 200,
+    "Vite_client_bytes": 221349,
+    "HMR_connections": 1,
+    "HMR_js_updates": 2,
+    "actual_changed_then_original_aria_label_and_marker_witnesses": true,
+    "document_navigation_requests": 1,
+    "raw_main_frame_events_initial_and_final": 2,
+    "stable_time_origin_and_window_marker": true,
+    "source_restored_DOM": true,
+    "browser_closed": true,
+    "limits": "HMR counters/DOM/timeOrigin predicates are actual instrumented probe results; no separate raw WebSocket-frame or final DOM snapshot archive is claimed. Vite client body is hashed/sized in the probe report, not retained as a separate raw body."
+  },
+  "source_preservation": {
+    "all19_source_currentGit_bytes_fullmodes_and_browser7_exact": true,
+    "current_source_clean": true,
+    "original_home_preimage_private600_current_bytes_fullmode_exact": true,
+    "edited_hash_exact_one_declared_aria_label_change": true,
+    "held_FD_restore_guards_executed_without_error": true,
+    "inode_limit": "OwnedSourceEdit validates current path and held FD against captured initial dev/inode/UID/mode before/after writing/restoring. Initial numeric inode is not serialized; no independent retained initial-vs-final numeric inode comparison is claimed."
+  },
+  "containers": {
+    "dev_CID": "a94da81969dd5ccf04df78fecf351fea11e27a19f8b1d7f89c838ccd8ce99507",
+    "probe_CID": "65badb399b917768af95c1235d73e044ef54b6ca455e4432b57f54544b1e3b81",
+    "actual_shared_DEV_network_namespace_exact": true,
+    "probe_image_resources_RO_mounts_entrypoint_actual": true,
+    "probe_exit0_noOOM": true,
+    "cleanup_inspect_mount_array_order_only_difference": true,
+    "cleanup": {
+      "probe_removed": true,
+      "probe_process_reaped": true,
+      "launcher_stop_exit": 143,
+      "launcher_reaped": true,
+      "launcher_group_absent": true,
+      "dev_removed": true
+    },
+    "owned_cleanup_journal": "/home/dobo/work/_temp/adhoc-gui-migration-parent-20261006/cat-cb846-r9-positive-dev-owned-cleanup-20261011.json",
+    "owned_cleanup_sha256": "3aef0cea3c0b60257c385c51647a9c36481b65bffe3524406d122c0e7ef7ece6",
+    "exact_CIDs_probeName_absence_and_owned_empty_network_removal_verified_from_records": true
+  },
+  "scope": "Complete bounded positive local DEV/HMR experiment only. Edited source bytes explicitly outside qualified identity; later restored source remains original cb846. No full/GREEN/budget/CSP/device/adoption or release/production claim. No source writes or runtime by reviewer.",
+  "state": "VERIFIED IDLE"
+}

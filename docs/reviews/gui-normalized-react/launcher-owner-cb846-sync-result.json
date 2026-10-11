@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "target": "kit:sync",
+  "status": "pass",
+  "sha": "cb84644dd702d925283438254168ca8b5c3fc939",
+  "dirty": false,
+  "tree_sha256": "b61fbde1834813e4d35b4ca81849776c3521393990fe532fbd24267ddda9e543",
+  "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+  "versions_lock_sha256": "afd977316d1749046ba723fb4fdc978bfd9257070c16afa802e4606b9ab861fa",
+  "parallel": 2,
+  "started": "2026-10-11T03:12:17.801Z",
+  "finished": "2026-10-11T03:12:25.245Z",
+  "checks": [
+    {
+      "name": "bootstrap-kit-input",
+      "status": "pass",
+      "duration_ms": 35
+    },
+    {
+      "name": "kit-input",
+      "status": "pass",
+      "duration_ms": 42
+    },
+    {
+      "name": "runner-runtime",
+      "status": "pass",
+      "duration_ms": 164
+    },
+    {
+      "name": "consumer-config",
+      "status": "pass",
+      "duration_ms": 37
+    },
+    {
+      "name": "deps",
+      "status": "pass",
+      "duration_ms": 6914
+    },
+    {
+      "name": "ui-adoption",
+      "status": "pass",
+      "duration_ms": 15,
+      "reason": "ui-staged-pending"
+    },
+    {
+      "name": "npm-vendor",
+      "status": "pass",
+      "duration_ms": 0
+    },
+    {
+      "name": "go-vendor",
+      "status": "pass",
+      "duration_ms": 1
+    },
+    {
+      "name": "gate-templates",
+      "status": "pass",
+      "duration_ms": 1
+    },
+    {
+      "name": "versions-merge",
+      "status": "pass",
+      "duration_ms": 0
+    }
+  ],
+  "csp": {
+    "stage": "enforced",
+    "violations": 0,
+    "legacy_violations": 0
+  },
+  "budgets": {},
+  "artifacts": [
+    "verified-bootstrap roedu-web-kit-0.1.6.tgz sha256:1736b656a8650cee6fa4f0d033cdc3b14851d4e440dd7b7318ee621478999191",
+    ".gate/kit-sync/logs/19aae2ca-cc4b-4b31-83e2-7afb1a99c16b-bootstrap-kit-sync-0.stdout.log sha256:96c78ae4121b598d773d8f256f279f2a31d826f38f80e727eff18ace7ee81659",
+    ".gate/kit-sync/logs/19aae2ca-cc4b-4b31-83e2-7afb1a99c16b-bootstrap-kit-sync-0.stderr.log sha256:7a51919141d0b3cc3fd30c84010dd9c21551524c606f92474d52b33f384f1c0f",
+    ".gate/kit-sync/bootstrap-execution.json sha256:0585a486655276a87f9920e9516a688525640d023dc686fe1895a904a4ed4aaf"
+  ],
+  "ui_adoption": {
+    "mode": "staged-react",
+    "status": "pending",
+    "until": "S1-M2",
+    "source": "repo:kit-config",
+    "config_sha256": "557b4a0935c07456dd43460c45e65ee3bf5f2931d97ea308138f4a8e56457b95",
+    "legacy": {
+      "version": "0.3.0",
+      "archive_sha256": "1934a81cdfd737a051f591ebcae072f5028943b715456dbb2899b483d399c244",
+      "source_sha": "45edcf2ce170c112621c73609e6e169633eb38a8",
+      "receipt": "docs/reviews/gui-original-react/receipt.json",
+      "receipt_sha256": "5c5704bc05511f91a02582c17e515500d2c8bca471f1c50cfd2505b646a27e58"
+    },
+    "selected_ui": {
+      "version": "1.0.6",
+      "archive_sha256": "0221837295b108b20fcae9c6987d4c52b78657d7a3378a408263afc54e9eb046"
+    }
+  }
+}

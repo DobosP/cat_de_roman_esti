@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "reviewer": "/root/cross_repo_plan",
+  "verdict": "ACTUAL_TRUST_BOUNDARY_CLEAR",
+  "source": "cb84644dd702d925283438254168ca8b5c3fc939",
+  "actual_prior_SYNC_tree_reference": "b61fbde1834813e4d35b4ca81849776c3521393990fe532fbd24267ddda9e543",
+  "observation": "/home/dobo/work/_temp/adhoc-gui-migration-parent-20261006/cat-cb846-final-same-sha-trust-20261011/observation.json",
+  "observation_sha256": "8c86b31867e519086311cf69d1afa9b1829dbc91c73de0bb1ea968f3454a8e0f",
+  "trust_session": 11065,
+  "trust_exit": 0,
+  "live_pin": {
+    "path": "/home/dobo/gates/trust/68df34456304f658adecdd05268c90f056f67ad45943d868e2079fdd39d2a5d0",
+    "bytes": 1053,
+    "sha256": "dccd6b42fb8307950ade58ce4212969c3546ac540e37ceffde078e152b555271",
+    "full_mode": 33204,
+    "matches_private_after": true,
+    "before_prefix_bytes": 936,
+    "one_new_record_bytes": 117,
+    "unique_current_source_record": true,
+    "prior_full_mode_preserved": true
+  },
+  "protected_four_refs_source_mirror_currentGit_exact": [
+    {
+      "path": "scripts/gate.sh",
+      "bytes": 65032,
+      "sha256": "f949e941ad94a227c69ad9690e4cfcf41689423e0d7cc2f3457a9420a3b39506",
+      "source_full_mode": 33261,
+      "mirror_full_mode": 33261
+    },
+    {
+      "path": ".gate.env",
+      "bytes": 1867,
+      "sha256": "eda10259ea3f85b360bef8b8d38eba8a2e65a94eb77f7a795fc2b1bb25dbd5bb",
+      "source_full_mode": 33204,
+      "mirror_full_mode": 33204
+    },
+    {
+      "path": "compose.gate.yml",
+      "bytes": 4094,
+      "sha256": "3b7f63c4a716acfe8883e3dcb7dff38e6a7f5bef44e30548f1727ac25970dbbb",
+      "source_full_mode": 33188,
+      "mirror_full_mode": 33188
+    },
+    {
+      "path": "Taskfile.yml",
+      "bytes": 63226,
+      "sha256": "3bb2b8c8ff44052d04ec255d5e94677469678a5fa3f7e0145278111eb05bdd1f",
+      "source_full_mode": 33204,
+      "mirror_full_mode": 33204
+    }
+  ],
+  "source_clean": true,
+  "source_mirror_CSP_STAGE_enforced": true,
+  "scope": "Only live pin plus four protected tuples and clean current SHA verified. Existing accepted SYNC22877/PASS10/tree reference reused; no sync/canonical/source/whole-capture re-audit, no trust execution by reviewer, and no DEV/HMR/full/adoption/device qualification.",
+  "state": "VERIFIED IDLE"
+}

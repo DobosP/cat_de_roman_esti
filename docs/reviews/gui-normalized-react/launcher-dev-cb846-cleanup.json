@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "utc": "2026-10-11T04:15:20.930434+00:00",
+  "source": "cb84644dd702d925283438254168ca8b5c3fc939",
+  "actual_session": 29428,
+  "actual_dev_exit": 0,
+  "CID_source": "ActualdevCIDwitness+probecreate/exitinspect bindings",
+  "records": [
+    {
+      "argv": [
+        "docker",
+        "container",
+        "inspect",
+        "a94da81969dd5ccf04df78fecf351fea11e27a19f8b1d7f89c838ccd8ce99507"
+      ],
+      "exit": 1,
+      "stdout": "[]\n",
+      "stderr": "Error response from daemon: No such container: a94da81969dd5ccf04df78fecf351fea11e27a19f8b1d7f89c838ccd8ce99507\n"
+    },
+    {
+      "argv": [
+        "docker",
+        "container",
+        "inspect",
+        "65badb399b917768af95c1235d73e044ef54b6ca455e4432b57f54544b1e3b81"
+      ],
+      "exit": 1,
+      "stdout": "[]\n",
+      "stderr": "Error response from daemon: No such container: 65badb399b917768af95c1235d73e044ef54b6ca455e4432b57f54544b1e3b81\n"
+    },
+    {
+      "argv": [
+        "docker",
+        "ps",
+        "-aq",
+        "--no-trunc",
+        "--filter",
+        "name=^/cat-local-probe-aad112ec-2f6f-4d73-a581-9d7e98f998ca$"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "ps",
+        "-aq",
+        "--no-trunc",
+        "--filter",
+        "label=com.docker.compose.project=gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "network",
+        "inspect",
+        "gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc_default"
+      ],
+      "exit": 0,
+      "stdout": "[\n    {\n        \"Name\": \"gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc_default\",\n        \"Id\": \"9149e3cc9503b9006572b85f8b1f0c61472a6c60d8d0229b5588bb718b707a11\",\n        \"Created\": \"2026-10-11T07:08:32.110691334+03:00\",\n        \"Scope\": \"local\",\n        \"Driver\": \"bridge\",\n        \"EnableIPv4\": true,\n        \"EnableIPv6\": false,\n        \"IPAM\": {\n            \"Driver\": \"default\",\n            \"Options\": null,\n            \"Config\": [\n                {\n                    \"Subnet\": \"192.168.208.0/20\",\n                    \"Gateway\": \"192.168.208.1\"\n                }\n            ]\n        },\n        \"Internal\": false,\n        \"Attachable\": false,\n        \"Ingress\": false,\n        \"ConfigFrom\": {\n            \"Network\": \"\"\n        },\n        \"ConfigOnly\": false,\n        \"Options\": {},\n        \"Labels\": {\n            \"com.docker.compose.config-hash\": \"b7b4ddd8040647f2c89121beac046a72af3d12f4b896816f5c2f5f4f5343a8a6\",\n            \"com.docker.compose.network\": \"default\",\n            \"com.docker.compose.project\": \"gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc\",\n            \"com.docker.compose.version\": \"5.1.4\"\n        },\n        \"Containers\": {},\n        \"Status\": {\n            \"IPAM\": {\n                \"Subnets\": {\n                    \"192.168.208.0/20\": {\n                        \"IPsInUse\": 3,\n                        \"DynamicIPsAvailable\": 4093\n                    }\n                }\n            }\n        }\n    }\n]\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "network",
+        "rm",
+        "9149e3cc9503b9006572b85f8b1f0c61472a6c60d8d0229b5588bb718b707a11"
+      ],
+      "exit": 0,
+      "stdout": "9149e3cc9503b9006572b85f8b1f0c61472a6c60d8d0229b5588bb718b707a11\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "network",
+        "inspect",
+        "9149e3cc9503b9006572b85f8b1f0c61472a6c60d8d0229b5588bb718b707a11"
+      ],
+      "exit": 1,
+      "stdout": "[]\n",
+      "stderr": "Error response from daemon: network 9149e3cc9503b9006572b85f8b1f0c61472a6c60d8d0229b5588bb718b707a11 not found\n"
+    }
+  ],
+  "scope": "Only exact completed owned resources; no foreignservices/volumes/globalprune",
+  "exact_CIDs_and_probeName_absent": true,
+  "owned_empty_build_network_removed": true,
+  "network_absent": true,
+  "pass": true
+}
