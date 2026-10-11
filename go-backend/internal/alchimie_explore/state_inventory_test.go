@@ -69,30 +69,30 @@ func TestStateInventoryUsage(t *testing.T) {
 		expected []inventoryUsageExpected
 	}{
 		{
-			name:     "starters-one-partner-missing",
+			name: "starters-one-partner-missing",
 			expected: []inventoryUsageExpected{
 				{"a", "active", true}, {"b", "active", true}, {"h", "active", false}, {"z", "final", false},
 			},
 		},
 		{
-			name:     "discovery-unlocks-nil-parent-ingredients",
-			crafts:   []Pair{{"a", "b"}},
+			name:   "discovery-unlocks-nil-parent-ingredients",
+			crafts: []Pair{{"a", "b"}},
 			expected: []inventoryUsageExpected{
 				{"a", "active", true}, {"b", "active", true}, {"h", "active", true}, {"z", "final", false},
 				{"d", "active", true}, {"c", "active", true},
 			},
 		},
 		{
-			name:     "known-and-unowned-results",
-			crafts:   []Pair{{"a", "b"}, {"a", "c"}},
+			name:   "known-and-unowned-results",
+			crafts: []Pair{{"a", "b"}, {"a", "c"}},
 			expected: []inventoryUsageExpected{
 				{"a", "depleted", false}, {"b", "active", true}, {"h", "active", true}, {"z", "final", false},
 				{"d", "active", true}, {"c", "active", true}, {"e", "final", false},
 			},
 		},
 		{
-			name:     "all-recipe-results-known",
-			crafts:   []Pair{{"a", "b"}, {"a", "c"}, {"b", "d"}, {"c", "h"}},
+			name:   "all-recipe-results-known",
+			crafts: []Pair{{"a", "b"}, {"a", "c"}, {"b", "d"}, {"c", "h"}},
 			expected: []inventoryUsageExpected{
 				{"a", "depleted", false}, {"b", "depleted", false}, {"h", "depleted", false}, {"z", "final", false},
 				{"d", "depleted", false}, {"c", "depleted", false}, {"e", "final", false}, {"f", "final", false}, {"g", "final", false},
