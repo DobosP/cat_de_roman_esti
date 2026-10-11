@@ -2271,6 +2271,35 @@ Qualified Source6 KG: `fixture-v1-6-everyday-inputs`, 2419 nodes/9473 links/8679
 - **V1.7 parked** ([ADR-0188](docs/adr/0188-park-v1-7-and-reset-content-loop.md)): `codex/content-v1-7` (local 3377a68, origin fba9498) and `codex/content-v1-7-qualification` are not merged; zero integrated growth. Source6 stays live; [ADR-0186](docs/adr/0186-go-authoritative-content-validation.md) keeps Go/native JSON authoritative. Outcome: [pool](docs/content-pool/v1-7-recognizable-content/pool.json); leafă returns later as a full-paradigm Salariu input.
 - **Content rail baseline GREEN** (verified 2026-10-11): `cat-content-rail all --root .. --check` and `go -C go-backend test ./internal/contentrails/ ./internal/contentbuild/` pass; installed authorities re-run the native audits under the current binary and accept on behaviour equality, not runtime file hashes ([ADR-0189](docs/adr/0189-behaviour-bound-installed-content-authorities.md)). Content installs enabled per [CONTENT_LOOP.md](docs/CONTENT_LOOP.md).
 
+Valid until: V1.9 lands locally — then treat as history.
+2026-10-11 — prior V1.8 qualified content facts.
+- **V1.8 qualified locally:** 30 reviewed items: 23 new concepts, six existing-owner input
+  families and one directional link; +23 nodes/+93 links/+136 forms, zero new curated rounds.
+  Leafă→Salariu; ogradă→Curte is a regional input; full non-colliding paradigms preserve owners.
+  [Review](docs/reviews/v1-8-everyday-core/README.md) and [pool](docs/content-pool/v1-8-everyday-core/pool.json).
+  Four native rails reconstruct exactly; owner-approved Cald assertions, HTTP1207 and API51 pass.
+  Full native race has no new red versus main; managed SPA baseline failures remain unchanged.
+
+V1.9 content status superseded by V1.10 qualification on 2026-10-11.
+Valid until: V1.10 qualification — then treat as history.
+- **V1.9 qualified locally:** 23 reviewed items: 14 new concepts, nine existing-owner input
+  families; +14 nodes/+55 links/+82 forms, zero new curated rounds.
+  All new labels/forms resolve; 22 missing forms for existing owners preserve identity.
+  [Review](reviews/v1-9-seasons-and-school/README.md) and [pool](content-pool/v1-9-seasons-and-school/pool.json).
+  Four exact native rails; owner-approved Cald assertions, HTTP1207 and API105 pass.
+  Full native race has no new red versus main; managed SPA baseline failures remain unchanged.
+Qualified V1.9 KG: `fixture-v1-9-seasons-and-school`, 2456 nodes/9621 links/8897 forms/180 exact puzzles.
+- alchimie_discovery_world_v92.json: `0c5fb28ecb3a682eecb28d4d192f688d39a61893ce66e69facac56c09b6603d5`
+- alchimie_recipe_extensions_v92.json: `64e046b1f069105184dd5f61ba5a3af02efcb3b11e7f2f77a3afbfd6de8b639e`
+- quick_games_v92.json: `793cc9cf54abf4f655fcf2441405db687c8fe45f0a79fd48819a39249892f8c8`
+- games_pack.json: `e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8`
+- board_rankings_v37.json: `2f7c7d15a95f52f80be5ae219d605edce3a2e9494d6bff2e3b3f03494e4a5110`
+- derived_catalog_v38.json: `49cbcc3fc8473966ebf61ae1f69c2ba6a999d0d2e3376ffc837f8e92717ed6cf`
+- release_reserve_v1.json: `fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7`
+- lant_rejection_tombstones.json: `01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d`
+- kg_sample.json: `846c2a4d48f85524b21043ecf52320edfa937946d030f91022ff6a879caae3e8`
+- cat_mobile_app_pack_contract.json: `ef9e281b092ea2dfd7df962d7625e28701b8e413543455242dbfe4e631ce393a`
+
 ## 2026-10-11 — Source-only main V1.8 / GUI reconciliation
 
 Parent integration joins GUI4f36abf and local main3f327c. Main's complete reviewed
@@ -2289,3 +2318,14 @@ old failed/accepted receipts are retained; ADR0194 records the integration.
 The fd336 E3 preliminary result qualifies only its historical tested source.
 Fresh focused/all-rail/export/1207 and owning GUI gates remain required; active
 size limits, physical Samsung and formal M0/M1/KIT_BUMP/adoption stay open.
+
+## 2026-10-11 — Source-only main V1.9/V1.10 / GUI reconciliation
+
+Parent integration joins GUI review branch a58773f and local main6fbd7a4 (literal
+SHA read at merge time) with the ADR0194 method. Main's reviewed V1.9/V1.10
+pools, native documents, installed authorities, pins, bundle/digest and the two
+1207-case corpora (3cce/bd72) stay byte-identical to main; nothing is regenerated,
+re-signed or re-approved. The GUI indexed `ForSources` loader list gains main's
+V1.9 then V1.10 loaders after V1.8; every digest/count check stays. All earlier
+corpora, GUI0437 and the V1.8 selector contracts remain. ADR0196 records it.
+Combined unit/full NOT RUN: Paul's trust pin at the final tip, then one full.
