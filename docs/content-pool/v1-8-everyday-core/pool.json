@@ -3,7 +3,7 @@
   "theme": "v1-8-everyday-core",
   "baseline_commit": "e164c0c70de38805d2648e271d294ddf36a26c8e",
   "procedure_rev": "17b97a2",
-  "scope": "Step 2a: first 12 items researched; remaining new concepts still require target planning before source fetch. No adoption approval or installation.",
+  "scope": "Step 2b: first 24 items processed; evidence-backed proposals remain unapproved, and unresolved normative/target cases stay held.",
   "screen": {
     "bundle_sha256": "e0cfe93de076f14a782dc6377b2655d4ef10f86ada1560ae1202bb06dbfdf877",
     "script": "~/work/_temp/content__v1-8-everyday-core/prescreen.py",
@@ -81,12 +81,12 @@
     {
       "id": "v18-craciun",
       "revision": 1,
-      "state": "idea",
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Crăciun",
       "label_ro": "Crăciun",
       "sense": "Sărbătoarea creștină și tradițiile calendarului de iarnă; fără schimbarea Colindului existent.",
-      "category_hypothesis": "viata_de_roman",
+      "category_hypothesis": "arta_cultura",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
@@ -95,9 +95,12 @@
       "planned_forms": [
         "Crăciun",
         "Crăciunul",
-        "Crăciunului"
+        "Crăciunului",
+        "Crăciunuri",
+        "Crăciunurile",
+        "Crăciunurilor"
       ],
-      "form_status": "Unverified paradigm hypotheses. Confirm DEX sense/register and DOOM 3 forms in step 2; new forms must also be screened before use.",
+      "form_status": "Exact-lemma DEX and DOOM 3 checked; full non-colliding forms remain proposals pending independent review.",
       "identity_checks": {
         "forms": [
           {
@@ -111,21 +114,129 @@
           {
             "form": "Crăciunului",
             "key": "craciunului"
+          },
+          {
+            "form": "Crăciunuri",
+            "key": "craciunuri"
+          },
+          {
+            "form": "Crăciunurile",
+            "key": "craciunurile"
+          },
+          {
+            "form": "Crăciunurilor",
+            "key": "craciunurilor"
           }
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/Crăciun/json",
+          "summary": "DEX sense/register verified on exact lemma; DOOM 3 entry 1262099: Holiday with Christian and popular traditions; DOOM 3 specifies proper neuter plural Crăciunuri.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Cr%C4%83ciun",
+          "summary": "Holiday with Christian and popular traditions; DOOM 3 specifies proper neuter plural Crăciunuri.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Review whole module; accept the Anotimp dependency before installing seasonal nodes.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
-      "research_ready": false,
-      "link_targets": []
+      "decision": "Source-researched proposal; exact edges, forms, categories and dependencies still need independent review.",
+      "research_ready": true,
+      "link_targets": [
+        {
+          "node_id": "n_v4art_colind",
+          "label": "Colind",
+          "category": "arta_cultura",
+          "status": "exists on wave_base",
+          "claim_to_verify": "winter carols"
+        },
+        {
+          "node_id": "n_v4art_traditie",
+          "label": "Tradiție",
+          "category": "arta_cultura",
+          "status": "exists on wave_base",
+          "claim_to_verify": "holiday customs"
+        },
+        {
+          "node_id": "n_v2via_sarbatori_familie",
+          "label": "Sărbători în familie",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "family celebration"
+        },
+        {
+          "node_id": "n_gas_cozonac",
+          "label": "Cozonac",
+          "category": "gastronomie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Romanian holiday food"
+        }
+      ],
+      "source_search_planned": true,
+      "category_rationale": "Holiday traditions are classified with the existing Mărțișor, Colind and Tradiție cultural concepts.",
+      "category": "arta_cultura",
+      "node_id": "n_v1_8_craciun",
+      "verified_forms": [
+        "Crăciun",
+        "Crăciunul",
+        "Crăciunului",
+        "Crăciunuri",
+        "Crăciunurile",
+        "Crăciunurilor"
+      ],
+      "proposed_edges": [
+        {
+          "dst": "n_v4art_colind",
+          "relation": "celebrated_with",
+          "label_ro": "este sărbătorit cu colinde",
+          "strength": 0.9,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v4art_traditie",
+          "relation": "involves",
+          "label_ro": "are tradiții creștine și populare",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v2via_sarbatori_familie",
+          "relation": "celebrated_in",
+          "label_ro": "se celebrează adesea în familie",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_gas_cozonac",
+          "relation": "celebrated_with",
+          "label_ro": "de Crăciun se pregătește adesea cozonac",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        }
+      ],
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "Crăciun",
+          "rank": 1097,
+          "count": 27688
+        },
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-mos-craciun",
       "revision": 1,
-      "state": "idea",
+      "state": "held",
       "kind": "new_shared_concept",
       "lemma": "Moș Crăciun",
       "label_ro": "Moș Crăciun",
@@ -159,22 +270,64 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://ro.wikipedia.org/wiki/Mo%C8%99_Cr%C4%83ciun",
+          "summary": "Romanian usage source supports the character or customary gift use; it does not resolve the stated normative/target blocker.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Retain hold; do not fabricate normative evidence, force category assignment, or substitute an unaccepted dependency.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
+      "decision": "No exact-headword dexonline/DOOM 3 result for the compound lemma; a definition under Crăciun is not accepted as exact-lemma normative evidence.",
       "research_ready": false,
-      "link_targets": []
+      "link_targets": [
+        {
+          "target_record": "v18-craciun",
+          "node_id": "n_v1_8_craciun",
+          "label": "Crăciun",
+          "status": "batch hypothesis; requires acceptance",
+          "claim_to_verify": "Christmas folklore"
+        },
+        {
+          "node_id": "n_v4art_traditie",
+          "label": "Tradiție",
+          "category": "arta_cultura",
+          "status": "exists on wave_base",
+          "claim_to_verify": "gift-bearing custom"
+        },
+        {
+          "node_id": "n_v4art_colind",
+          "label": "Colind",
+          "category": "arta_cultura",
+          "status": "exists on wave_base",
+          "claim_to_verify": "named Christmas carols evoke the character"
+        },
+        {
+          "node_id": "n_v2via_sarbatori_familie",
+          "label": "Sărbători în familie",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "family Christmas tradition"
+        }
+      ],
+      "source_search_planned": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": null,
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-brad",
       "revision": 1,
-      "state": "idea",
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Brad",
       "label_ro": "Brad",
       "sense": "Arbore conifer; decorarea de Crăciun este o utilizare, nu definiția exclusivă.",
-      "category_hypothesis": "geografie",
+      "category_hypothesis": "stiinta",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
@@ -188,7 +341,7 @@
         "brazii",
         "brazilor"
       ],
-      "form_status": "Unverified paradigm hypotheses. Confirm DEX sense/register and DOOM 3 forms in step 2; new forms must also be screened before use.",
+      "form_status": "Exact-lemma DEX and DOOM 3 checked; full non-colliding forms remain proposals pending independent review.",
       "identity_checks": {
         "forms": [
           {
@@ -218,17 +371,122 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/Brad/json",
+          "summary": "DEX sense/register verified on exact lemma; DOOM 3 entry 1319340: A coniferous tree with persistent needle-shaped leaves; DOOM 3 gives masculine plural brazi.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Brad",
+          "summary": "Claim-specific Romanian source read for the stored link hypotheses; qualifications are preserved in the proposed edge captions.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://stirileprotv.ro/stiri/actualitate/imagini-cu-padurea-de-langa-cheia-pusa-la-pamant-de-vant-zlocul-unui-dezastru-natural.html",
+          "summary": "Claim-specific Romanian source read for the stored link hypotheses; qualifications are preserved in the proposed edge captions.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://stirileprotv.ro/stiri/actualitate/romsilva-scoate-la-vanzare-peste-16-000-de-brazi-de-craciun-care-sunt-preturile.html",
+          "summary": "Claim-specific Romanian source read for the stored link hypotheses; qualifications are preserved in the proposed edge captions.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Review whole module; accept the Anotimp dependency before installing seasonal nodes.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
-      "research_ready": false,
-      "link_targets": []
+      "decision": "Source-researched proposal; exact edges, forms, categories and dependencies still need independent review.",
+      "research_ready": true,
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_copac",
+          "label": "copac",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "is a coniferous tree"
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "frunză",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "needle-shaped leaves"
+        },
+        {
+          "node_id": "n_v4geo_padure",
+          "label": "pădure",
+          "category": "geografie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "forms coniferous forests"
+        },
+        {
+          "target_record": "v18-craciun",
+          "node_id": "n_v1_8_craciun",
+          "label": "Crăciun",
+          "status": "batch hypothesis; requires acceptance",
+          "claim_to_verify": "some fir trees are decorated for Christmas"
+        }
+      ],
+      "source_search_planned": true,
+      "category": "stiinta",
+      "node_id": "n_v1_8_brad",
+      "verified_forms": [
+        "brad",
+        "bradul",
+        "bradului",
+        "brazi",
+        "brazii",
+        "brazilor"
+      ],
+      "proposed_edges": [
+        {
+          "dst": "n_v4sti_copac",
+          "relation": "is_a",
+          "label_ro": "este un arbore conifer",
+          "strength": 0.95,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v4sti_frunza",
+          "relation": "has_leaf",
+          "label_ro": "are frunze aciculare persistente",
+          "strength": 0.9,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v4geo_padure",
+          "relation": "grows_in",
+          "label_ro": "crește în păduri de conifere",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v1_8_craciun",
+          "relation": "used_for",
+          "label_ro": "unele exemplare sunt împodobite de Crăciun",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        }
+      ],
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "brad",
+          "rank": 3212,
+          "count": 7634
+        },
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-cadou",
       "revision": 1,
-      "state": "idea",
+      "state": "held",
       "kind": "new_shared_concept",
       "lemma": "Cadou",
       "label_ro": "Cadou",
@@ -277,17 +535,73 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://ro.wiktionary.org/wiki/cadou",
+          "summary": "Romanian usage source supports the character or customary gift use; it does not resolve the stated normative/target blocker.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://stirileprotv.ro/stiri/social/cadouri-pentru-copiii-nevoiasi-de-la-mos-craciun-patrula-catelusilor.html",
+          "summary": "Romanian usage source supports the character or customary gift use; it does not resolve the stated normative/target blocker.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://stirileprotv.ro/stiri/actualitate/flori-criogenate-sau-trandafiri-care-traiesc-ani-de-zile-cele-mai-inedite-cadouri-de-valentine-s-day-ce-preturi-au.html",
+          "summary": "Romanian usage source supports the character or customary gift use; it does not resolve the stated normative/target blocker.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Retain hold; do not fabricate normative evidence, force category assignment, or substitute an unaccepted dependency.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
+      "decision": "DEX/DOOM 3 and customary gift examples are supported, but the current target set depends on held Moș Crăciun and otherwise has fewer than two same-category neighbors.",
       "research_ready": false,
-      "link_targets": []
+      "link_targets": [
+        {
+          "target_record": "v18-mos-craciun",
+          "node_id": "n_v1_8_mos_craciun",
+          "label": "Moș Crăciun",
+          "status": "batch hypothesis; requires acceptance",
+          "claim_to_verify": "gifts in Santa tradition"
+        },
+        {
+          "node_id": "n_v2via_sarbatori_familie",
+          "label": "Sărbători în familie",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "gift occasions"
+        },
+        {
+          "node_id": "n_v3lit_carte",
+          "label": "Carte",
+          "category": "literatura",
+          "status": "exists on wave_base",
+          "claim_to_verify": "books can be gifts"
+        },
+        {
+          "node_id": "n_v4sti_floare",
+          "label": "floare",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "flowers can be gifts"
+        }
+      ],
+      "source_search_planned": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "cadou",
+          "rank": 1347,
+          "count": 21443
+        },
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-om-de-zapada",
       "revision": 1,
-      "state": "idea",
+      "state": "held",
       "kind": "new_shared_concept",
       "lemma": "Om de zăpadă",
       "label_ro": "Om de zăpadă",
@@ -337,16 +651,52 @@
       },
       "prior_records": [],
       "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "next_action": "Retain hold; find a naturally useful truthful target set before any installation.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
+      "decision": "Candidate target plan cannot yet supply two honest same-category neighbors; do not change the category or pad the graph to satisfy the floor.",
       "research_ready": false,
-      "link_targets": []
+      "link_targets": [
+        {
+          "node_id": "n_v24_weather_precipitation_zapada",
+          "label": "Zăpadă",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "made from snow"
+        },
+        {
+          "node_id": "n_v24_food_salad_veg_morcov",
+          "label": "Morcov",
+          "category": "gastronomie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "some figures have a carrot nose"
+        },
+        {
+          "node_id": "n_v4soc_copil",
+          "label": "copil",
+          "category": "societate",
+          "status": "exists on wave_base",
+          "claim_to_verify": "children build the figure"
+        },
+        {
+          "target_record": "v18-iarna",
+          "node_id": "n_v1_8_iarna",
+          "label": "Iarnă",
+          "status": "batch hypothesis; requires acceptance",
+          "claim_to_verify": "winter play"
+        }
+      ],
+      "source_search_planned": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": null,
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-sanie",
       "revision": 1,
-      "state": "idea",
+      "state": "held",
       "kind": "new_shared_concept",
       "lemma": "Sanie",
       "label_ro": "Sanie",
@@ -396,16 +746,56 @@
       },
       "prior_records": [],
       "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "next_action": "Retain hold; find a naturally useful truthful target set before any installation.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
+      "decision": "Candidate target plan cannot yet supply two honest same-category neighbors; do not change the category or pad the graph to satisfy the floor.",
       "research_ready": false,
-      "link_targets": []
+      "link_targets": [
+        {
+          "node_id": "n_v24_weather_precipitation_zapada",
+          "label": "Zăpadă",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "slides on snow"
+        },
+        {
+          "node_id": "n_v1_3_material_lemn",
+          "label": "Lemn",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "some models have wooden structure"
+        },
+        {
+          "node_id": "n_v4sti_metal",
+          "label": "metal",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "some runners are metal"
+        },
+        {
+          "target_record": "v18-iarna",
+          "node_id": "n_v1_8_iarna",
+          "label": "Iarnă",
+          "status": "batch hypothesis; requires acceptance",
+          "claim_to_verify": "winter transport or play"
+        }
+      ],
+      "source_search_planned": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "sania",
+          "rank": 16315,
+          "count": 998
+        },
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-mos-nicolae",
       "revision": 1,
-      "state": "idea",
+      "state": "held",
       "kind": "new_shared_concept",
       "lemma": "Moș Nicolae",
       "label_ro": "Moș Nicolae",
@@ -434,22 +824,69 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://ro.wikipedia.org/wiki/Mo%C8%99_Nicolae",
+          "summary": "Romanian usage source supports the character or customary gift use; it does not resolve the stated normative/target blocker.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://stirileprotv.ro/divers/cadouri-de-mos-nicolae-ce-se-pune-in-ghetute-si-ce-semnificatie-are-nuielusa.html",
+          "summary": "Romanian usage source supports the character or customary gift use; it does not resolve the stated normative/target blocker.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Retain hold; do not fabricate normative evidence, force category assignment, or substitute an unaccepted dependency.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
+      "decision": "Exact compound dexonline JSON returned HTTP 404; normative lemma/forms remain unverified.",
       "research_ready": false,
-      "link_targets": []
+      "link_targets": [
+        {
+          "target_record": "v18-cadou",
+          "node_id": "n_v1_8_cadou",
+          "label": "Cadou",
+          "status": "batch hypothesis; requires acceptance",
+          "claim_to_verify": "traditional gifts"
+        },
+        {
+          "node_id": "n_v30_clothing_footwear_pantof",
+          "label": "Pantof",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "gifts placed in footwear"
+        },
+        {
+          "node_id": "n_v2via_sarbatori_familie",
+          "label": "Sărbători în familie",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "family custom"
+        },
+        {
+          "node_id": "n_v29_time_calendar",
+          "label": "Calendar",
+          "category": "societate",
+          "status": "exists on wave_base",
+          "claim_to_verify": "December 5/6 custom"
+        }
+      ],
+      "source_search_planned": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": null,
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-revelion",
       "revision": 1,
-      "state": "idea",
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Revelion",
       "label_ro": "Revelion",
       "sense": "Noaptea și sărbătorirea trecerii în noul an; verifică substituibilitatea inputului Anul Nou.",
-      "category_hypothesis": "viata_de_roman",
+      "category_hypothesis": "societate",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
@@ -465,7 +902,7 @@
         "Anul Nou",
         "Anului Nou"
       ],
-      "form_status": "Unverified paradigm hypotheses. Confirm DEX sense/register and DOOM 3 forms in step 2; new forms must also be screened before use.",
+      "form_status": "Exact-lemma DEX and DOOM 3 checked; full non-colliding forms remain proposals pending independent review.",
       "identity_checks": {
         "forms": [
           {
@@ -503,22 +940,127 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/Revelion/json",
+          "summary": "DEX sense/register verified on exact lemma; DOOM 3 entry 1279345: Year-transition night or its celebration; DOOM 3 gives neuter plural revelioane.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Revelion",
+          "summary": "Year-transition night or its celebration; DOOM 3 gives neuter plural revelioane.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Review whole module; accept the Anotimp dependency before installing seasonal nodes.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
-      "research_ready": false,
-      "link_targets": []
+      "decision": "Source-researched proposal; exact edges, forms, categories and dependencies still need independent review.",
+      "research_ready": true,
+      "link_targets": [
+        {
+          "node_id": "n_v29_time_calendar",
+          "label": "Calendar",
+          "category": "societate",
+          "status": "exists on wave_base",
+          "claim_to_verify": "year transition date"
+        },
+        {
+          "node_id": "n_v29_time_daily_noapte",
+          "label": "Noapte",
+          "category": "societate",
+          "status": "exists on wave_base",
+          "claim_to_verify": "New Year night"
+        },
+        {
+          "node_id": "n_v4ist_an",
+          "label": "An",
+          "category": "istorie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "end and start of years"
+        },
+        {
+          "node_id": "n_v4art_traditie",
+          "label": "Tradiție",
+          "category": "arta_cultura",
+          "status": "exists on wave_base",
+          "claim_to_verify": "New Year customs"
+        }
+      ],
+      "source_search_planned": true,
+      "category": "societate",
+      "node_id": "n_v1_8_revelion",
+      "verified_forms": [
+        "revelion",
+        "revelionul",
+        "revelionului",
+        "revelioane",
+        "revelioanele",
+        "revelioanelor"
+      ],
+      "proposed_edges": [
+        {
+          "dst": "n_v29_time_calendar",
+          "relation": "occurs_on",
+          "label_ro": "are loc la trecerea de la 31 decembrie la 1 ianuarie",
+          "strength": 0.9,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v29_time_daily_noapte",
+          "relation": "is_a",
+          "label_ro": "este noaptea trecerii dintre ani",
+          "strength": 0.9,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v4ist_an",
+          "relation": "marks_transition",
+          "label_ro": "marchează trecerea dintre doi ani",
+          "strength": 0.9,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v4art_traditie",
+          "relation": "involves",
+          "label_ro": "este însoțit de tradiții de Anul Nou",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        }
+      ],
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "revelion",
+          "rank": 31221,
+          "count": 379
+        },
+        "absence_is_not_rejection": true
+      },
+      "held_forms": [
+        {
+          "form": "Anul Nou",
+          "reason": "Broader holiday/day sense is not proved equivalent to Revelion night/party."
+        },
+        {
+          "form": "Anului Nou",
+          "reason": "Broader holiday/day sense is not proved equivalent to Revelion night/party."
+        }
+      ]
     },
     {
       "id": "v18-iarna",
       "revision": 1,
-      "state": "idea",
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Iarnă",
       "label_ro": "Iarnă",
       "sense": "Anotimpul rece.",
-      "category_hypothesis": "geografie",
+      "category_hypothesis": "stiinta",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
@@ -531,7 +1073,7 @@
         "iernii",
         "iernilor"
       ],
-      "form_status": "Unverified paradigm hypotheses. Confirm DEX sense/register and DOOM 3 forms in step 2; new forms must also be screened before use.",
+      "form_status": "Exact-lemma DEX and DOOM 3 checked; full non-colliding forms remain proposals pending independent review.",
       "identity_checks": {
         "forms": [
           {
@@ -565,22 +1107,121 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/Iarnă/json",
+          "summary": "DEX sense/register verified on exact lemma; DOOM 3 entry 1296842: Cold season; DOOM 3 gives ierni and articulated genitive iernii.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Iarn%C4%83",
+          "summary": "Claim-specific Romanian source read for the stored link hypotheses; qualifications are preserved in the proposed edge captions.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://carpasit.fundatiacarpati.ro/urs-brun/",
+          "summary": "Claim-specific Romanian source read for the stored link hypotheses; qualifications are preserved in the proposed edge captions.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Review whole module; accept the Anotimp dependency before installing seasonal nodes.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
-      "research_ready": false,
-      "link_targets": []
+      "decision": "Source-researched proposal; exact edges, forms, categories and dependencies still need independent review.",
+      "research_ready": true,
+      "link_targets": [
+        {
+          "target_record": "v18-anotimp",
+          "node_id": "n_v1_8_anotimp",
+          "label": "Anotimp",
+          "status": "batch hypothesis; requires acceptance",
+          "claim_to_verify": "is a season"
+        },
+        {
+          "node_id": "n_v24_weather_precipitation_zapada",
+          "label": "Zăpadă",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "winter snowfall"
+        },
+        {
+          "node_id": "n_v33_forest_animal_urs",
+          "label": "Urs",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "winter dormancy"
+        },
+        {
+          "node_id": "n_v29_time_calendar",
+          "label": "Calendar",
+          "category": "societate",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Romanian winter spans the civil-year boundary"
+        }
+      ],
+      "source_search_planned": true,
+      "category": "stiinta",
+      "node_id": "n_v1_8_iarna",
+      "verified_forms": [
+        "iarnă",
+        "ierni",
+        "iernile",
+        "iernii",
+        "iernilor"
+      ],
+      "proposed_edges": [
+        {
+          "dst": "n_v1_8_anotimp",
+          "relation": "is_a",
+          "label_ro": "este un anotimp",
+          "strength": 0.95,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v24_weather_precipitation_zapada",
+          "relation": "associated_with",
+          "label_ro": "în România este asociată frecvent cu zăpada",
+          "strength": 0.9,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v33_forest_animal_urs",
+          "relation": "associated_with",
+          "label_ro": "ursul poate intra în somnul de iarnă",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v29_time_calendar",
+          "relation": "occurs_in",
+          "label_ro": "în emisfera nordică trece din decembrie în anul următor",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        }
+      ],
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "iarnă",
+          "rank": 6349,
+          "count": 3440
+        },
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-primavara",
       "revision": 1,
-      "state": "idea",
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Primăvară",
       "label_ro": "Primăvară",
       "sense": "Anotimpul dintre iarnă și vară.",
-      "category_hypothesis": "geografie",
+      "category_hypothesis": "stiinta",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
@@ -593,7 +1234,7 @@
         "primăverii",
         "primăverilor"
       ],
-      "form_status": "Unverified paradigm hypotheses. Confirm DEX sense/register and DOOM 3 forms in step 2; new forms must also be screened before use.",
+      "form_status": "Exact-lemma DEX and DOOM 3 checked; full non-colliding forms remain proposals pending independent review.",
       "identity_checks": {
         "forms": [
           {
@@ -627,22 +1268,131 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/Primăvară/json",
+          "summary": "DEX sense/register verified on exact lemma; DOOM 3 entry 1285054: Season between winter and summer; DOOM 3 gives primăveri and articulated genitive primăverii.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Prim%C4%83var%C4%83",
+          "summary": "Claim-specific Romanian source read for the stored link hypotheses; qualifications are preserved in the proposed edge captions.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Ghiocel",
+          "summary": "Claim-specific Romanian source read for the stored link hypotheses; qualifications are preserved in the proposed edge captions.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/M%C4%83r%C8%9Bi%C8%99or",
+          "summary": "Claim-specific Romanian source read for the stored link hypotheses; qualifications are preserved in the proposed edge captions.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://www.sor.ro/frasinul/",
+          "summary": "Claim-specific Romanian source read for the stored link hypotheses; qualifications are preserved in the proposed edge captions.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Review whole module; accept the Anotimp dependency before installing seasonal nodes.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
-      "research_ready": false,
-      "link_targets": []
+      "decision": "Source-researched proposal; exact edges, forms, categories and dependencies still need independent review.",
+      "research_ready": true,
+      "link_targets": [
+        {
+          "target_record": "v18-anotimp",
+          "node_id": "n_v1_8_anotimp",
+          "label": "Anotimp",
+          "status": "batch hypothesis; requires acceptance",
+          "claim_to_verify": "is a season"
+        },
+        {
+          "node_id": "n_v42vdr_ghiocel",
+          "label": "Ghiocelul",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "early spring flowering"
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "frunză",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "leaf emergence on many deciduous trees"
+        },
+        {
+          "node_id": "n_martisor",
+          "label": "Mărțișor",
+          "category": "arta_cultura",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Romanian March 1 tradition"
+        }
+      ],
+      "source_search_planned": true,
+      "category": "stiinta",
+      "node_id": "n_v1_8_primavara",
+      "verified_forms": [
+        "primăvară",
+        "primăveri",
+        "primăverile",
+        "primăverii",
+        "primăverilor"
+      ],
+      "proposed_edges": [
+        {
+          "dst": "n_v1_8_anotimp",
+          "relation": "is_a",
+          "label_ro": "este un anotimp",
+          "strength": 0.95,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v42vdr_ghiocel",
+          "relation": "associated_with",
+          "label_ro": "ghiocelul este un vestitor al primăverii",
+          "strength": 0.9,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v4sti_frunza",
+          "relation": "seasonal_process",
+          "label_ro": "multor arbori le apar frunze noi primăvara",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_martisor",
+          "relation": "celebrated_with",
+          "label_ro": "la începutul primăverii se oferă mărțișoare",
+          "strength": 0.9,
+          "is_distractor": 0,
+          "bidirectional": 0
+        }
+      ],
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "primăvară",
+          "rank": 6161,
+          "count": 3561
+        },
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-vara",
       "revision": 1,
-      "state": "idea",
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Vară",
       "label_ro": "Vară",
       "sense": "Anotimpul cald; exclude verișoara și alte sensuri ale omografului.",
-      "category_hypothesis": "geografie",
+      "category_hypothesis": "stiinta",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
@@ -655,7 +1405,7 @@
         "verii",
         "verilor"
       ],
-      "form_status": "Unverified paradigm hypotheses. Confirm DEX sense/register and DOOM 3 forms in step 2; new forms must also be screened before use.",
+      "form_status": "Exact-lemma DEX and DOOM 3 checked; full non-colliding forms remain proposals pending independent review.",
       "identity_checks": {
         "forms": [
           {
@@ -689,22 +1439,126 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/Vară/json",
+          "summary": "DEX sense/register verified on exact lemma; DOOM 3 entry 1263342: Warm season, not the female-cousin homonym; DOOM 3 gives veri and verii for the season and distinct vere/verei for the relative.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Var%C4%83",
+          "summary": "Claim-specific Romanian source read for the stored link hypotheses; qualifications are preserved in the proposed edge captions.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/P%C4%83m%C3%A2nt#Înclinare_axială_și_anotimpuri",
+          "summary": "Claim-specific Romanian source read for the stored link hypotheses; qualifications are preserved in the proposed edge captions.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://www.kanald.ro/iata-cum-sa-prepari-cea-mai-buna-inghetata-de-casa-pentru-zilele-calduroase-de-vara-20332293",
+          "summary": "Claim-specific Romanian source read for the stored link hypotheses; qualifications are preserved in the proposed edge captions.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Review whole module; accept the Anotimp dependency before installing seasonal nodes.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
-      "research_ready": false,
-      "link_targets": []
+      "decision": "Source-researched proposal; exact edges, forms, categories and dependencies still need independent review.",
+      "research_ready": true,
+      "link_targets": [
+        {
+          "target_record": "v18-anotimp",
+          "node_id": "n_v1_8_anotimp",
+          "label": "Anotimp",
+          "status": "batch hypothesis; requires acceptance",
+          "claim_to_verify": "is a season"
+        },
+        {
+          "node_id": "n_v24_nature_sky_soare",
+          "label": "Soare",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "seasonal solar heating"
+        },
+        {
+          "node_id": "n_v24_time_day_zi",
+          "label": "Zi",
+          "category": "societate",
+          "status": "exists on wave_base",
+          "claim_to_verify": "long daylight near summer solstice"
+        },
+        {
+          "node_id": "n_v3gas_inghetata",
+          "label": "Înghețată",
+          "category": "gastronomie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "common cooling food in summer"
+        }
+      ],
+      "source_search_planned": true,
+      "category": "stiinta",
+      "node_id": "n_v1_8_vara",
+      "verified_forms": [
+        "vară",
+        "veri",
+        "verile",
+        "verii",
+        "verilor"
+      ],
+      "proposed_edges": [
+        {
+          "dst": "n_v1_8_anotimp",
+          "relation": "is_a",
+          "label_ro": "este un anotimp",
+          "strength": 0.95,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v24_nature_sky_soare",
+          "relation": "associated_with",
+          "label_ro": "în emisfera nordică primește mai multă energie solară",
+          "strength": 0.9,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v24_time_day_zi",
+          "relation": "seasonal_process",
+          "label_ro": "în jurul solstițiului de vară zilele au durata maximă în România",
+          "strength": 0.9,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v3gas_inghetata",
+          "relation": "associated_with",
+          "label_ro": "înghețata este consumată frecvent vara pentru răcorire",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        }
+      ],
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "vară",
+          "rank": 3379,
+          "count": 7225
+        },
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-toamna",
       "revision": 1,
-      "state": "idea",
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Toamnă",
       "label_ro": "Toamnă",
       "sense": "Anotimpul dintre vară și iarnă.",
-      "category_hypothesis": "geografie",
+      "category_hypothesis": "stiinta",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
@@ -717,7 +1571,7 @@
         "toamnei",
         "toamnelor"
       ],
-      "form_status": "Unverified paradigm hypotheses. Confirm DEX sense/register and DOOM 3 forms in step 2; new forms must also be screened before use.",
+      "form_status": "Exact-lemma DEX and DOOM 3 checked; full non-colliding forms remain proposals pending independent review.",
       "identity_checks": {
         "forms": [
           {
@@ -751,12 +1605,116 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/Toamnă/json",
+          "summary": "DEX sense/register verified on exact lemma; DOOM 3 entry 1268958: Season after summer and before winter; DOOM 3 gives toamne and toamnei.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Toamn%C4%83",
+          "summary": "Claim-specific Romanian source read for the stored link hypotheses; qualifications are preserved in the proposed edge captions.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://www.antenasatelor.ro/fermier-in-romania/actualitatea-agricola/graul-de-toamna-cultura-care-da-stabilitate-fermierilor-romani-id41622.html",
+          "summary": "Claim-specific Romanian source read for the stored link hypotheses; qualifications are preserved in the proposed edge captions.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://agerpres.ro/social/2018/09/11/reportaj-vrancea-culesul-viilor-a-inceput-mai-devreme-in-aceasta-toamna-viticultorii-se-plang-de-lip--174031",
+          "summary": "Claim-specific Romanian source read for the stored link hypotheses; qualifications are preserved in the proposed edge captions.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Review whole module; accept the Anotimp dependency before installing seasonal nodes.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
-      "research_ready": false,
-      "link_targets": []
+      "decision": "Source-researched proposal; exact edges, forms, categories and dependencies still need independent review.",
+      "research_ready": true,
+      "link_targets": [
+        {
+          "target_record": "v18-anotimp",
+          "node_id": "n_v1_8_anotimp",
+          "label": "Anotimp",
+          "status": "batch hypothesis; requires acceptance",
+          "claim_to_verify": "is a season"
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "frunză",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "deciduous leaf fall"
+        },
+        {
+          "node_id": "n_v84_food_grau",
+          "label": "Grâu",
+          "category": "gastronomie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "autumn sowing of winter wheat"
+        },
+        {
+          "node_id": "n_v24_food_small_fruit_strugure",
+          "label": "Strugure",
+          "category": "gastronomie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "grape harvest"
+        }
+      ],
+      "source_search_planned": true,
+      "category": "stiinta",
+      "node_id": "n_v1_8_toamna",
+      "verified_forms": [
+        "toamnă",
+        "toamne",
+        "toamnele",
+        "toamnei",
+        "toamnelor"
+      ],
+      "proposed_edges": [
+        {
+          "dst": "n_v1_8_anotimp",
+          "relation": "is_a",
+          "label_ro": "este un anotimp",
+          "strength": 0.95,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v4sti_frunza",
+          "relation": "seasonal_process",
+          "label_ro": "multor arbori foioși le cad frunzele toamna",
+          "strength": 0.9,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v84_food_grau",
+          "relation": "sowing_season",
+          "label_ro": "grâul de toamnă se seamănă toamna",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v24_food_small_fruit_strugure",
+          "relation": "harvest_season",
+          "label_ro": "toamna este un sezon de cules al strugurilor în România",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        }
+      ],
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "toamnă",
+          "rank": 11897,
+          "count": 1532
+        },
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-dimineata",
@@ -890,7 +1848,7 @@
       "lemma": "Anotimp",
       "label_ro": "Anotimp",
       "sense": "Una dintre cele patru perioade sezoniere ale anului în România.",
-      "category_hypothesis": "geografie",
+      "category_hypothesis": "stiinta",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
@@ -4416,12 +5374,12 @@
   ],
   "counts": {
     "records": 60,
-    "idea": 45,
-    "held": 9,
+    "idea": 33,
+    "held": 14,
     "accepted": 0,
     "installed": 0,
-    "planned_unique_forms": 319,
+    "planned_unique_forms": 322,
     "proposed_existing_owner_forms": 37,
-    "researched": 6
+    "researched": 13
   }
 }
