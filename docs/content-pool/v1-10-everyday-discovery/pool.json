@@ -2361,7 +2361,7 @@
     },
     {
       "id": "v110-rama",
-      "revision": 1,
+      "revision": 2,
       "kind": "new_shared_concept",
       "lemma": "Râmă",
       "label_ro": "Râmă",
@@ -2374,35 +2374,47 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
-      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "link_targets": [
         {
           "node_id": "n_v4sti_animal",
           "label": "Animal",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "is_a",
+          "label_ro": "Râma este un animal nevertebrat.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v24_nature_world_pamant",
           "label": "Pământ",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Râma trăiește în pământ.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v1_8_arici",
           "label": "Arici",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Râmele sunt o hrană importantă pentru arici.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v4sti_peste",
           "label": "Pește",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Râmele pot fi folosite ca momeală pentru pești.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         }
       ],
       "planned_forms": [
@@ -2453,14 +2465,66 @@
         "râmelor"
       ],
       "prior_records": [],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "state": "researched",
+      "decision": "Exact sense/forms and second source checked; proposed claims await both independent reviews.",
       "research_ready": true,
-      "sources": []
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/r%C3%A2m%C4%83/json",
+          "authority": "DEX '09",
+          "definition_id": "853378",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/r%C3%A2m%C4%83/json",
+          "authority": "DOOM 3",
+          "definition_id": "1275727",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/R%C3%A2m%C4%83",
+          "paraphrase": "Corroborates the annelid animal identity.",
+          "role": "second_source"
+        },
+        {
+          "url": "https://milvus.ro/wp-content/uploads/2008/02/Ghid-22-10-2012-pt-web.pdf",
+          "paraphrase": "The Romanian nature guide names earthworms as important food for the local hedgehog Erinaceus roumanicus.",
+          "role": "link_source"
+        },
+        {
+          "url": "https://pescarmehedintean.ro/momelirama.htm",
+          "paraphrase": "An angler describes using several earthworm types to attract fish.",
+          "role": "link_source"
+        }
+      ],
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "râmă",
+        "dex_definition_id": "853378",
+        "doom3_definition_id": "1275727",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "râmă",
+        "râme",
+        "râmele",
+        "râmei",
+        "râmelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": null,
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "proposed_description": "Vierme inelat cu corp alungit, care trăiește în sol și consumă materie organică descompusă.",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-furnica",
-      "revision": 1,
+      "revision": 2,
       "kind": "new_shared_concept",
       "lemma": "Furnică",
       "label_ro": "Furnică",
@@ -2473,7 +2537,7 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
-      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "link_targets": [
         {
           "node_id": "n_v4sti_insecta",
@@ -2559,14 +2623,59 @@
           "decision": "Soil/forest nesting and insect identity are supported, but direct Plantă food claim is not verified; only three natural target claims remain."
         }
       ],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
-      "research_ready": true,
-      "sources": []
+      "state": "held",
+      "decision": "held: Keep the prior exact-food evidence constraint: soil nesting and insect identity are clear, but the named wheat and Arici-prey links were not directly verified within the item budget. Do not infer wheat from generic seeds.",
+      "research_ready": false,
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/furnic%C4%83/json",
+          "authority": "DEX '09",
+          "definition_id": "875153",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/furnic%C4%83/json",
+          "authority": "DOOM 3",
+          "definition_id": "1302941",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Formicide",
+          "paraphrase": "Corroborates the social-insect identity; the named fourth-link problem remains unresolved.",
+          "role": "second_source"
+        }
+      ],
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "furnică",
+        "dex_definition_id": "875153",
+        "doom3_definition_id": "1302941",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "furnică",
+        "furnici",
+        "furnicile",
+        "furnicii",
+        "furnicilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          12604,
+          "furnici",
+          1422
+        ],
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-buburuza",
-      "revision": 1,
+      "revision": 2,
       "kind": "new_shared_concept",
       "lemma": "Buburuză",
       "label_ro": "Buburuză",
@@ -2579,35 +2688,47 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
-      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "link_targets": [
         {
           "node_id": "n_v4sti_insecta",
           "label": "Insectă",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "is_a",
+          "label_ro": "Buburuza este o insectă.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v4sti_planta",
           "label": "Plantă",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Buburuzele pot proteja plantele prin consumul de afide.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v4sti_frunza",
           "label": "Frunză",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Buburuzele caută afide pe frunzele plantelor.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v1_10_afida",
-          "label": "Afidă",
+          "label": "Afid",
           "category": "stiinta",
           "status": "new in this batch",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Buburuza se hrănește cu afide.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         }
       ],
       "planned_forms": [
@@ -2657,17 +2778,64 @@
           "decision": "Insect identity, plant protection and aphids on leaves are supported, but the fourth flower claim is unverified for the scoped ladybird; no source padding. Gărgăriță is broader plant-pest vocabulary, not an approved alias."
         }
       ],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "state": "researched",
+      "decision": "Exact sense/forms and second source checked; proposed claims await both independent reviews.",
       "research_ready": true,
-      "sources": []
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/buburuz%C4%83/json",
+          "authority": "DEX '09",
+          "definition_id": "838093",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/buburuz%C4%83/json",
+          "authority": "DOOM 3",
+          "definition_id": "1319784",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Coccinellidae",
+          "paraphrase": "Corroborates insect identity and aphid predation, with species-qualified rather than universal family claims.",
+          "role": "second_source"
+        },
+        {
+          "url": "https://agrointel.ro/220475/buburuzele-metoda-ecologica-pentru-eliminarea-daunatorilor-la-legume",
+          "paraphrase": "Romanian vegetable growers describe ladybirds hunting aphids on pepper leaves and protecting the plants.",
+          "role": "link_source"
+        }
+      ],
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "buburuză",
+        "dex_definition_id": "838093",
+        "doom3_definition_id": "1319784",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "buburuză",
+        "buburuze",
+        "buburuzele",
+        "buburuzei",
+        "buburuzelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": null,
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "proposed_description": "Insectă mică, cu corp rotunjit și elitre roșii cu șapte puncte negre, care consumă afide; aici, buburuza cu șapte puncte.",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-afida",
-      "revision": 1,
+      "revision": 2,
       "kind": "new_shared_concept",
-      "lemma": "Afidă",
-      "label_ro": "Afidă",
+      "lemma": "Afid",
+      "label_ro": "Afid",
       "sense": "Insectă mică ce se hrănește cu seva plantelor.",
       "origin": "everyday_discovery_extension",
       "category_hypothesis": "stiinta",
@@ -2677,85 +2845,171 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
-      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "link_targets": [
         {
           "node_id": "n_v4sti_insecta",
           "label": "Insectă",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "is_a",
+          "label_ro": "Afidul este o insectă.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v4sti_planta",
           "label": "Plantă",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Afidul suge seva plantelor.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v4sti_frunza",
           "label": "Frunză",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Afidele se hrănesc adesea pe partea inferioară a frunzelor.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v1_10_buburuza",
           "label": "Buburuză",
           "category": "stiinta",
           "status": "new in this batch",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Afidele sunt hrană pentru buburuze.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         }
       ],
       "planned_forms": [
-        "afidă",
+        "afid",
+        "afidul",
+        "afidului",
         "afide",
         "afidele",
-        "afidei",
         "afidelor"
       ],
       "identity_checks": {
         "forms": [
           {
-            "form": "afidă",
-            "key": "afida"
+            "form": "afid",
+            "key": "afid",
+            "all_owners": [],
+            "index_owner": null,
+            "screen_note": "Re-screened corrected neuter paradigm; no graph/world owner or prior rejection; unchanged policy does not defer afid forms."
+          },
+          {
+            "form": "afidul",
+            "key": "afidul",
+            "all_owners": [],
+            "index_owner": null,
+            "screen_note": "Re-screened corrected neuter paradigm; no graph/world owner or prior rejection; unchanged policy does not defer afid forms."
+          },
+          {
+            "form": "afidului",
+            "key": "afidului",
+            "all_owners": [],
+            "index_owner": null,
+            "screen_note": "Re-screened corrected neuter paradigm; no graph/world owner or prior rejection; unchanged policy does not defer afid forms."
           },
           {
             "form": "afide",
-            "key": "afide"
+            "key": "afide",
+            "all_owners": [],
+            "index_owner": null,
+            "screen_note": "Re-screened corrected neuter paradigm; no graph/world owner or prior rejection; unchanged policy does not defer afid forms."
           },
           {
             "form": "afidele",
-            "key": "afidele"
-          },
-          {
-            "form": "afidei",
-            "key": "afidei"
+            "key": "afidele",
+            "all_owners": [],
+            "index_owner": null,
+            "screen_note": "Re-screened corrected neuter paradigm; no graph/world owner or prior rejection; unchanged policy does not defer afid forms."
           },
           {
             "form": "afidelor",
-            "key": "afidelor"
+            "key": "afidelor",
+            "all_owners": [],
+            "index_owner": null,
+            "screen_note": "Re-screened corrected neuter paradigm; no graph/world owner or prior rejection; unchanged policy does not defer afid forms."
           }
         ]
       },
       "already_resolved_forms": [],
       "proposed_forms": [
-        "afidă",
+        "afid",
+        "afidul",
+        "afidului",
         "afide",
         "afidele",
-        "afidei",
         "afidelor"
       ],
       "prior_records": [],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "state": "researched",
+      "decision": "Exact sense/forms and second source checked; proposed claims await both independent reviews.",
       "research_ready": true,
-      "sources": []
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/afid/json",
+          "authority": "DEX '98",
+          "definition_id": "1175",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/afid/json",
+          "authority": "DOOM 3",
+          "definition_id": "1255186",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Afid%C4%83",
+          "paraphrase": "Describes plant lice, feeding on leaf undersides, and ladybirds as predators.",
+          "role": "second_source"
+        },
+        {
+          "url": "https://agrointel.ro/220475/buburuzele-metoda-ecologica-pentru-eliminarea-daunatorilor-la-legume",
+          "paraphrase": "Growers observe small sap-sucking aphids on pepper leaves and ladybird predation.",
+          "role": "link_source"
+        }
+      ],
+      "original_lemma": "Afidă",
+      "form_revision_reason": "Exact DOOM3 entry is the neuter afid; proposed feminine lemma/paradigm is replaced before further source requests. New free forms screened below.",
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "afid",
+        "dex_definition_id": "1175",
+        "doom3_definition_id": "1255186",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "afid",
+        "afidul",
+        "afidului",
+        "afide",
+        "afidele",
+        "afidelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": null,
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "proposed_description": "Insectă mică, numită și păduche de plante, care suge seva plantelor și poate fi consumată de buburuze.",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-paianjen",
-      "revision": 1,
+      "revision": 2,
       "kind": "new_shared_concept",
       "lemma": "Păianjen",
       "label_ro": "Păianjen",
@@ -2768,7 +3022,7 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
-      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "link_targets": [
         {
           "node_id": "n_v4sti_animal",
@@ -2860,14 +3114,60 @@
           "decision": "Animal/insect-prey links are credible, but two generic house-surface co-occurrences do not establish four useful distinctive links."
         }
       ],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
-      "research_ready": true,
-      "sources": []
+      "state": "held",
+      "decision": "held: Arachnid identity and generic insect predation are supported. The two specific Fluture/Țânțar prey links lack a sufficiently reliable scoped source; the found pet article also makes an erroneous Antarctic-distribution claim, so it is not used to qualify these edges.",
+      "research_ready": false,
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/p%C4%83ianjen/json",
+          "authority": "DEX '09",
+          "definition_id": "867733",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/p%C4%83ianjen/json",
+          "authority": "DOOM 3",
+          "definition_id": "1281119",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/P%C4%83ianjen",
+          "paraphrase": "Corroborates arachnid identity and general insect predation; no insect classification or unsupported household-surface link is proposed.",
+          "role": "second_source"
+        }
+      ],
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "păianjen",
+        "dex_definition_id": "867733",
+        "doom3_definition_id": "1281119",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "păianjen",
+        "păianjenul",
+        "păianjenului",
+        "păianjeni",
+        "păianjenii",
+        "păianjenilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          9297,
+          "păianjen",
+          2148
+        ],
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-greier",
-      "revision": 1,
+      "revision": 2,
       "kind": "new_shared_concept",
       "lemma": "Greier",
       "label_ro": "Greier",
@@ -2880,7 +3180,7 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
-      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "link_targets": [
         {
           "node_id": "n_v4sti_insecta",
@@ -2917,7 +3217,10 @@
         "greierului",
         "greieri",
         "greierii",
-        "greierilor"
+        "greierilor",
+        "greiere",
+        "greierele",
+        "greierelui"
       ],
       "identity_checks": {
         "forms": [
@@ -2944,6 +3247,24 @@
           {
             "form": "greierilor",
             "key": "greierilor"
+          },
+          {
+            "form": "greiere",
+            "key": "greiere",
+            "all_owners": [],
+            "screen_note": "Additional DOOM3 greier/greiere variant screened before use."
+          },
+          {
+            "form": "greierele",
+            "key": "greierele",
+            "all_owners": [],
+            "screen_note": "Additional DOOM3 greier/greiere variant screened before use."
+          },
+          {
+            "form": "greierelui",
+            "key": "greierelui",
+            "all_owners": [],
+            "screen_note": "Additional DOOM3 greier/greiere variant screened before use."
           }
         ]
       },
@@ -2954,17 +3275,74 @@
         "greierului",
         "greieri",
         "greierii",
-        "greierilor"
+        "greierilor",
+        "greiere",
+        "greierele",
+        "greierelui"
       ],
       "prior_records": [],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
-      "research_ready": true,
-      "sources": []
+      "state": "held",
+      "decision": "held: DOOM3 explicitly permits greier/greiere, but the planned exact Iarbă/Frunză diet and Arici-prey links are not all verified within the item budget. No hay-to-grass or generic insect-to-specific-prey inference.",
+      "research_ready": false,
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/greier/json",
+          "authority": "DEX '09",
+          "definition_id": "879666",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/greier/json",
+          "authority": "DOOM 3",
+          "definition_id": "1256817",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Greier",
+          "paraphrase": "Corroborates recognizable cricket anatomy and sound production, without qualifying all proposed diet links.",
+          "role": "second_source"
+        },
+        {
+          "url": "https://www.descopera.ro/natura/20849420-test-de-cultura-generala-ce-mananca-greierii",
+          "paraphrase": "Confirms a broad omnivorous diet and grass habitat; does not establish the complete scoped four-target plan.",
+          "role": "link_source"
+        }
+      ],
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "greier",
+        "dex_definition_id": "879666",
+        "doom3_definition_id": "1256817",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "greier",
+        "greierul",
+        "greierului",
+        "greieri",
+        "greierii",
+        "greierilor",
+        "greiere",
+        "greierele",
+        "greierelui"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          38255,
+          "greieri",
+          273
+        ],
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-volan",
-      "revision": 1,
+      "revision": 2,
       "kind": "new_shared_concept",
       "lemma": "Volan",
       "label_ro": "Volan",
@@ -2977,35 +3355,47 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
-      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "link_targets": [
         {
           "node_id": "n_v24_transport_personal_masina",
           "label": "Mașină",
           "category": "societate",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "part_of",
+          "label_ro": "Volanul este o comandă a mașinii.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v4soc_autobuz",
           "label": "Autobuz",
           "category": "societate",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "part_of",
+          "label_ro": "Autobuzele sunt conduse cu ajutorul unui volan.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v1_9_sofer",
           "label": "Șofer",
           "category": "societate",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Șoferul manevrează volanul pentru a conduce.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v1_10_roata",
           "label": "Roată",
           "category": "societate",
           "status": "new in this batch",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Volanul comandă direcția roților autovehiculului.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         }
       ],
       "planned_forms": [
@@ -3062,14 +3452,66 @@
         "volanelor"
       ],
       "prior_records": [],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "state": "researched",
+      "decision": "Exact sense/forms and second source checked; proposed claims await both independent reviews.",
       "research_ready": true,
-      "sources": []
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/volan/json",
+          "authority": "DEX '09",
+          "definition_id": "827144",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/volan/json",
+          "authority": "DOOM 3",
+          "definition_id": "1264653",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/volan",
+          "paraphrase": "Corroborates the vehicle-control sense, distinct from the decorative fabric homograph.",
+          "role": "second_source"
+        },
+        {
+          "url": "https://ro.e-guide.renault.com/rom/Talisman-ph2/DISPOZITIVE-DE-CORECTARE-SI-DE-ASISTENTA-LA-CONDUCERE",
+          "paraphrase": "The manufacturer describes the steering-wheel sensor as reporting the driver’s intended trajectory and interacting with wheel control.",
+          "role": "link_source"
+        }
+      ],
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "volan",
+        "dex_definition_id": "827144",
+        "doom3_definition_id": "1264653",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "volan",
+        "volanul",
+        "volanului",
+        "volane",
+        "volanele",
+        "volanelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          7884,
+          "volan",
+          2655
+        ],
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "proposed_description": "Comandă circulară a sistemului de direcție al unui autovehicul, manevrată de șofer pentru orientarea roților.",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-parbriz",
-      "revision": 1,
+      "revision": 2,
       "kind": "new_shared_concept",
       "lemma": "Parbriz",
       "label_ro": "Parbriz",
@@ -3082,35 +3524,47 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
-      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "link_targets": [
         {
           "node_id": "n_v24_transport_personal_masina",
           "label": "Mașină",
           "category": "societate",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "part_of",
+          "label_ro": "Parbrizul este geamul din fața mașinii.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v4soc_autobuz",
           "label": "Autobuz",
           "category": "societate",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "part_of",
+          "label_ro": "Parbrizul se găsește și în partea din față a autobuzului.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v1_9_sofer",
           "label": "Șofer",
           "category": "societate",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Parbrizul îl protejează pe șofer de vânt și praf.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_vdr_biletel_in_parbriz",
           "label": "Bilețelul în parbriz",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "La parbriz se poate lăsa un bilețel legat de parcare.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         }
       ],
       "planned_forms": [
@@ -3167,14 +3621,71 @@
         "parbrizelor"
       ],
       "prior_records": [],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "state": "researched",
+      "decision": "Exact sense/forms and second source checked; proposed claims await both independent reviews.",
       "research_ready": true,
-      "sources": []
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/parbriz/json",
+          "authority": "DEX '09",
+          "definition_id": "866119",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/parbriz/json",
+          "authority": "DOOM 3",
+          "definition_id": "1280604",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Parbriz",
+          "paraphrase": "Describes the front vehicle glass and occupant-protection function.",
+          "role": "second_source"
+        },
+        {
+          "url": "https://www.stb.ro/docpdf/ins_autobuz.pdf",
+          "paraphrase": "Public bus operating instructions explicitly name the bus windshield for displaying a defect notice.",
+          "role": "link_source"
+        },
+        {
+          "url": "https://b365.ro/foto-x-marcheaza-locul-de-parcare-fara-plata-unde-un-bucurestean-si-a-lasat-masina-a-blocat-o-poarta-iar-in-schimb-a-primit-un-biletel-data-viitoare-sa-lasi-un-numar-529474/",
+          "paraphrase": "A Romanian parking report describes a note left at a car windshield, matching the existing everyday-note node scope.",
+          "role": "link_source"
+        }
+      ],
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "parbriz",
+        "dex_definition_id": "866119",
+        "doom3_definition_id": "1280604",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "parbriz",
+        "parbrizul",
+        "parbrizului",
+        "parbrize",
+        "parbrizele",
+        "parbrizelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          19750,
+          "parbriz",
+          755
+        ],
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "proposed_description": "Geam din partea din față a unui autovehicul, care protejează conducătorul și ocupanții de vânt, praf și alte obiecte.",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-roata",
-      "revision": 1,
+      "revision": 2,
       "kind": "new_shared_concept",
       "lemma": "Roată",
       "label_ro": "Roată",
@@ -3187,35 +3698,47 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
-      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "link_targets": [
         {
           "node_id": "n_v24_transport_personal_masina",
           "label": "Mașină",
           "category": "societate",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "part_of",
+          "label_ro": "Roțile permit deplasarea mașinii.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v24_transport_personal_bicicleta",
           "label": "Bicicletă",
           "category": "societate",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "part_of",
+          "label_ro": "Bicicleta se deplasează pe roți.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v24_transport_personal_motocicleta",
           "label": "Motocicletă",
           "category": "societate",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "part_of",
+          "label_ro": "Motocicleta se deplasează pe roți.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v24_transport_rail_tren",
           "label": "Tren",
           "category": "societate",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "part_of",
+          "label_ro": "Trenul se deplasează cu roți pe șine.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         }
       ],
       "planned_forms": [
@@ -3266,14 +3789,60 @@
         "roților"
       ],
       "prior_records": [],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "state": "researched",
+      "decision": "Exact sense/forms and second source checked; proposed claims await both independent reviews.",
       "research_ready": true,
-      "sources": []
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/roat%C4%83/json",
+          "authority": "DEX '09",
+          "definition_id": "858867",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/roat%C4%83/json",
+          "authority": "DOOM 3",
+          "definition_id": "1303315",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Roat%C4%83",
+          "paraphrase": "Describes wheels rotating around an axle and enabling land-vehicle movement; other circular and historical military senses excluded.",
+          "role": "second_source"
+        }
+      ],
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "roată",
+        "dex_definition_id": "858867",
+        "doom3_definition_id": "1303315",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "roată",
+        "roți",
+        "roțile",
+        "roții",
+        "roților"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          10501,
+          "roți",
+          1812
+        ],
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "proposed_description": "Piesă circulară care se rotește în jurul unei axe și permite deplasarea vehiculelor; aici, sensul de roată de vehicul.",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-anvelopa",
-      "revision": 1,
+      "revision": 2,
       "kind": "new_shared_concept",
       "lemma": "Anvelopă",
       "label_ro": "Anvelopă",
@@ -3286,35 +3855,47 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
-      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "link_targets": [
         {
           "node_id": "n_v24_transport_personal_masina",
           "label": "Mașină",
           "category": "societate",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "part_of",
+          "label_ro": "Anvelopele sunt montate pe roțile mașinii.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v24_transport_personal_bicicleta",
           "label": "Bicicletă",
           "category": "societate",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "part_of",
+          "label_ro": "Bicicletele folosesc anvelope la roți.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v24_transport_personal_motocicleta",
           "label": "Motocicletă",
           "category": "societate",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "part_of",
+          "label_ro": "Motocicletele folosesc anvelope la roți.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v42vdr_cauciucuri",
           "label": "Cauciucurile de iarnă",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Cauciucurile de iarnă sunt un tip de anvelope.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         }
       ],
       "planned_forms": [
@@ -3365,14 +3946,65 @@
         "anvelopelor"
       ],
       "prior_records": [],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "state": "researched",
+      "decision": "Exact sense/forms and second source checked; proposed claims await both independent reviews.",
       "research_ready": true,
-      "sources": []
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/anvelop%C4%83/json",
+          "authority": "DEX '09",
+          "definition_id": "828561",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/anvelop%C4%83/json",
+          "authority": "DOOM 3",
+          "definition_id": "1323393",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Anvelop%C4%83",
+          "paraphrase": "Describes the tyre on a wheel rim and explicitly includes winter tyres.",
+          "role": "second_source"
+        },
+        {
+          "url": "https://www.michelin.ro/michelin-partenerul-de-incredere-al-brandurilor-auto",
+          "paraphrase": "The tyre maker explicitly describes tyres developed for automobiles, motorcycles and bicycles.",
+          "role": "link_source"
+        }
+      ],
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "anvelopă",
+        "dex_definition_id": "828561",
+        "doom3_definition_id": "1323393",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "anvelopă",
+        "anvelope",
+        "anvelopele",
+        "anvelopei",
+        "anvelopelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          12393,
+          "anvelope",
+          1457
+        ],
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "proposed_description": "Înveliș elastic montat pe janta unei roți de vehicul, care asigură contactul cu suprafața de rulare.",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-semafor",
-      "revision": 1,
+      "revision": 2,
       "kind": "new_shared_concept",
       "lemma": "Semafor",
       "label_ro": "Semafor",
@@ -3385,35 +4017,47 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
-      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "link_targets": [
         {
           "node_id": "n_v24_transport_personal_masina",
           "label": "Mașină",
           "category": "societate",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Semaforul dirijează circulația mașinilor.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v1_9_sofer",
           "label": "Șofer",
           "category": "societate",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Șoferul urmărește semnalele semaforului.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v1_9_rosu",
           "label": "Roșu",
           "category": "arta_cultura",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "La semaforul rutier, lumina roșie indică oprirea.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v4sti_lumina",
           "label": "Lumină",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Semaforul rutier transmite semnale prin lumină.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         }
       ],
       "planned_forms": [
@@ -3470,14 +4114,66 @@
         "semafoarelor"
       ],
       "prior_records": [],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "state": "researched",
+      "decision": "Exact sense/forms and second source checked; proposed claims await both independent reviews.",
       "research_ready": true,
-      "sources": []
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/semafor/json",
+          "authority": "DEX '09",
+          "definition_id": "841195",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/semafor/json",
+          "authority": "DOOM 3",
+          "definition_id": "1274031",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Semafor",
+          "paraphrase": "Confirms optical signalling for circulation, including road traffic.",
+          "role": "second_source"
+        },
+        {
+          "url": "https://politiaromana.ro/files/pages_files/25-08-21-01-42-43Ghid_educatie_rutiera_primar.pdf",
+          "paraphrase": "The primary-school road-education guide explains traffic lights, the red stop signal and attention to vehicle circulation.",
+          "role": "link_source"
+        }
+      ],
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "semafor",
+        "dex_definition_id": "841195",
+        "doom3_definition_id": "1274031",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "semafor",
+        "semaforul",
+        "semaforului",
+        "semafoare",
+        "semafoarele",
+        "semafoarelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          23031,
+          "semafor",
+          603
+        ],
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "proposed_description": "Dispozitiv cu lumini colorate care dirijează circulația rutieră; aici, semaforul întâlnit pe străzi.",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-troleibuz",
-      "revision": 1,
+      "revision": 2,
       "kind": "new_shared_concept",
       "lemma": "Troleibuz",
       "label_ro": "Troleibuz",
@@ -3490,35 +4186,47 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
-      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "form_status": "DOOM 3 exact-headword morphology checked; full distinct-fold noun paradigm retained without stealing other owners.",
       "link_targets": [
         {
           "node_id": "n_v4soc_autobuz",
           "label": "Autobuz",
           "category": "societate",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Troleibuzul este asemănător autobuzului.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v1_9_sofer",
           "label": "Șofer",
           "category": "societate",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Troleibuzul este condus de un șofer.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v3sti_electricitate",
           "label": "Electricitate",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Troleibuzul folosește electricitate pentru tracțiune.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         },
         {
           "node_id": "n_v4geo_strada",
           "label": "Stradă",
           "category": "geografie",
           "status": "exists on landed wave_base",
-          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance.",
+          "relation": "related_to",
+          "label_ro": "Troleibuzul circulă pe străzi.",
+          "evidence": "See item source paraphrases; exact target scope preserved."
         }
       ],
       "planned_forms": [
@@ -3567,10 +4275,53 @@
         "troleibuzelor"
       ],
       "prior_records": [],
-      "state": "idea",
-      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "state": "researched",
+      "decision": "Exact sense/forms and second source checked; proposed claims await both independent reviews.",
       "research_ready": true,
-      "sources": []
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/troleibuz/json",
+          "authority": "DEX '09",
+          "definition_id": "835949",
+          "paraphrase": "Exact-headword common literal noun sense checked; unrelated homographs, figurative and regional technical senses excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/troleibuz/json",
+          "authority": "DOOM 3",
+          "definition_id": "1270199",
+          "paraphrase": "Normative noun gender, plural and any explicit articulation/genitive checked; the noncolliding regular paradigm is retained."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Troleibuz",
+          "paraphrase": "Describes electric public road transport, similarity to buses and circulation on urban road routes.",
+          "role": "second_source"
+        }
+      ],
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "troleibuz",
+        "dex_definition_id": "835949",
+        "doom3_definition_id": "1270199",
+        "register": "Selected literal noun sense is not archaic, poetic-only or regional-only.",
+        "request_spacing": "Root fetched JSON serially with 2.1s pause after each new response.",
+        "excluded": "Other headwords, homographs and unsanctioned synonym paradigms not used."
+      },
+      "verified_forms": [
+        "troleibuz",
+        "troleibuzul",
+        "troleibuzului",
+        "troleibuze",
+        "troleibuzele",
+        "troleibuzelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": null,
+        "use": "Positive only; absence never rejects."
+      },
+      "checked_on": "2026-10-11",
+      "proposed_description": "Vehicul rutier de transport public, asemănător autobuzului, alimentat electric prin trolee și fire de contact.",
+      "second_source_provenance": "Wikționar may derive from DEX; second website is not a claim of independent lexical provenance."
     },
     {
       "id": "v110-locomotiva",
@@ -5263,6 +6014,26 @@
         "v110-ciocanitoare",
         "v110-cioc",
         "v110-tantar"
+      ],
+      "moved": 12,
+      "max_items": 12,
+      "item_budget": "At most5 active minutes per item; unresolved fourth links held."
+    },
+    {
+      "tick": 2,
+      "items": [
+        "v110-rama",
+        "v110-furnica",
+        "v110-buburuza",
+        "v110-afida",
+        "v110-paianjen",
+        "v110-greier",
+        "v110-volan",
+        "v110-parbriz",
+        "v110-roata",
+        "v110-anvelopa",
+        "v110-semafor",
+        "v110-troleibuz"
       ],
       "moved": 12,
       "max_items": 12,
