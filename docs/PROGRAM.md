@@ -51,6 +51,12 @@ Paul explicitly acknowledged ACK 1–6 and PostgreSQL 16 in the GUI migration pa
 - The source Windows record and reviewed Linux pack remain at their pinned commits. Historical preparation defects do not override this active dispatch.
 - Physical measurements and actual release/runtime evidence remain facts to obtain, not approvals to invent. Continue independent authorized code/testing and keep unsafe production activation closed when release-only evidence is unavailable.
 
+### Current Linux continuation — 2026-10-08
+
+Paul's latest direct parent instruction resumes ordinary planned implementation and actual validation on Linux; the earlier Windows transfer's pause/no-tests restriction is historical. The old Windows manager remains paused. Parent review, staging/trust, green landing/publication and verified cleanup ownership continue; physical/device/production facts still require actual evidence. The [living handoff](GUI_MIGRATION_HANDOFF.md) records the current checkpoint and source carriers.
+
+Five physically verified source layers are applied in order: 38 Cat source paths (including 15 accepted style files), 2 eager accounting paths, 9 Cat documentation paths, 2 core documentation paths and 6 Node alignment paths. Sealed input packets remain unchanged. The parent captured actual partial GEN at 2026-10-08 16:03 UTC: source `6d4abaa16e853497f6981a53f843aef9e38201d6`, dirty tree `0f69fcac47107b451b8cfb4ad3935e81f91a4b73c42f3eef5b23dfae215619d4`; all 11 bundle contracts, native TypeScript 7 compilation, 2 API consumer checks and 3 selection-key tests passed. Startup measured 126,067 bytes against 122,880 (3,187 over); lint failed, and native context admission refused before Go contracts/format commands. Normalized 900-case replay, native 1,207 parity cases on the combined source, canonical unit/full, image/CSP and real-device qualification remain pending. No canonical KIT_BUMP has been issued; protected SYNC -> same-final-SHA actual trust + GREEN unit -> KIT_BUMP remains required. React 19/UI 0.3 remain through M1; immutable core-v1.2 source/tag/archives are unchanged.
+
 ## 1. Goal and non-goals
 
 ### 1.1 Goal
@@ -938,3 +944,146 @@ Workers do not edit this owner erratum or the readonly PROGRAM. Implement the
 concrete dispatch on dedicated fleet worktrees with justified gate changes and
 actual trust. No human permission question or manufactured owner evidence is
 required for these authorized repairs. Parent releases only actual green work.
+
+## Native erratum E2 — configured consumer resolver correction
+
+Parent authorized a consumer-tooling core-v1.2 correction for Cat S1 CORE_REQ3 under
+roedu-ui ADR-0010 (`docs/adr/0010-configured-consumer-version-resolution.md`). Keep released
+core-v1.0/core-v1.1 immutable and UI runtime source unchanged. UI1.0.2 versions
+updated published README metadata; web-kit0.1.2 versions the resolver change.
+The packaged resolver must work from configured consumer CWD, owning the npm
+manifest beside vendor_dir and auditing confined source Go module closure.
+It must validate the complete plan before source writes, preserve incoming
+core/environment/Playwright floors and file pointers, and require real E1
+staged-react proof for originalUI0.3. App scope resolution records actual direct
+app dependencies and forbids downgrades. Native deps still generates locks/sums.
+
+The single gen --resolve-versions trigger, trust/current-result identity, original
+fixtures, style/CSP gates and every device/live/privacy/soak checkpoint remain.
+Ship only after genuine unit/full and reproducible owning archives pass review;
+parent applies the exact kit while Cat is clean and idle, then sends the new
+KIT_BUMP. This repairs an SDK prerequisite within Cat's exclusive shakedown,
+without starting S0b or another app implementation lane.
+
+## Native erratum E3 — original-runtime budget and pilot acceptance order
+
+Cat CORE_REQ5 supplied an actual unchanged-original Home entry counterexample:
+114,086 bytes gzip against the literal40,960 limit and30,720 target. Independent
+parent review verified committed manifest/budget hashes. The original program
+requires React throughM1, but also green budget checks before replacing it;
+already-lazy game screens and the documented ReactDOM share provide no credible
+40KiB React entry proof. roedu-ui ADR-0011 (`docs/adr/0011-original-runtime-budget-qualification-order.md`)
+records the parent's correction within the existing implementation authorization.
+
+Preserve budgets.json unchanged. Execute real TestRouteBudgets at every checkpoint,
+with complete actual route/entry bindings, and retain its red measured report.
+The old120KiB combined JS/CSS checker never substitutes for the40KiB JS gate.
+Original qualification and React delivery prerequisite implementation may proceed;
+M0/M1 remain formally unqualified while the mandatory budget is red. Accept no
+other failed mandatory check as a prerequisite. Preserve every failed aggregate
+result; never rename the budget check into a pass, use a skip, omit a route,
+raise/null a limit or claim a green unit/full milestone.
+
+For the preliminary M1 CSP-stage transition, the parent may accept precisely
+scoped non-budget evidence from an actual full report whose only substantive
+failure is the initial budget. Aggregate exit failure remains recorded. Every
+required browser, PG, identity, privacy, safety, nonce, CSP and accessibility check
+must actually pass; cite that actual failed receipt and independent review rather
+than claim the old green-full prerequisite was met. Production activation stays
+closed. The enforced test-stage run must preserve the same honest qualification.
+
+The real Samsung A-series Chrome and Samsung Internet checkpoint remains before
+M2 runtime adoption, with actual source-named measurements and owner provenance.
+An automated desktop observation cannot replace it. Once that prerequisite is
+real, M2 also implements Home and the complete necessary shell previously inM3,
+so the default replacement entry is genuinely measured. Bind every active route
+and separately measured frozen-legacy journey; retain original assertions and
+fallbacks. Require actual active UI proof and clean green unit/full, including
+40,960 bytes and all unchanged safety/privacy/CSP/a11y checks, before accepting
+M2 or startingS0b. An over-budget replacement remains blocked. M3 retains the
+remaining screens and logic. No other dependency or release gate changes.
+
+
+## Native erratum E4 — owner-approved frozen fallback budget baseline
+
+On 2026-10-11 Paul explicitly answered: “Approve baseline policy; keep active UI
+limits”. This resolves only E3's future conflict between a retained immutable
+fallback and green replacement qualification. It does not qualify the current
+React app or change any numeric limit, device or release prerequisite.
+
+Continue measuring every active route and every separately bound frozen-legacy
+journey through the unchanged delivered evaluator, including complete genuine
+entry/AccountBar/static closures, CSS/fonts/assets and original SDK statuses.
+Preserve all old failed receipts and complete registered raw reports. Active
+JS40960/target30720 and existing CSS policy remain unchanged and hard; an
+above-limit active replacement still fails.
+
+For Cat only, the frozen fallback qualifies by exact original freeze producer,
+source, result/execution/stdout, archive/proof/manifest and per-asset byte identity,
+plus required actual legacy serving journeys and unchanged safety checks. Any
+integrity, source, serving or required safety regression fails. Reuse the genuine
+original freeze/archive validators; an editable newly generated manifest cannot
+provide this authority. Keep the fallback through its original deletion milestone.
+
+The consumer aggregate gates active numerical budgets plus an explicit frozen
+integrity check. Wrapper summary must distinguish active gate rows from recorded
+baseline rows and preserve each baseline's original SDK status/limit/actual and
+raw-report reference. Raw frozen numerical failures stay visible; never relabel
+SDK failure as SDK pass or omit a route/root. This explicitly amends E3/§8.2's
+both-profile numerical-green interpretation, not their evidence/retention rules.
+
+M2/S0b acceptance still needs genuinely green unit/full under this policy, active
+UI proof, every mandatory privacy/content/CSP/a11y/focus/touch/Presence/parity check
+and the real Samsung/owner device-budget prerequisite. Released toolkit, kit,
+archives and core qualification are immutable. Consumer source implementation and
+actual managed qualification are separate; no activation or production authority.
+See roedu-ui ADR-0018 (`docs/adr/0018-frozen-fallback-budget-baseline.md`).
+
+## Native erratum E5 — owner decisions 2026-10-11: kit update order and parallel preparation
+
+On 2026-10-11 (~20:24 UTC) Paul answered a structured question set. Provenance:
+owner answer in Claude Code independent-review session (no signature implied).
+This erratum explicitly amends §9-8 item 8 (whose "where their text differs,
+this item wins" now yields to E5 on the points below) and the §10.3 graph text.
+E3/E4 otherwise stay in force.
+
+Kit update order (Q1, "Budget-only-red OK"). While E3 applies, item 8 sequence
+step 5 (`unit --sha <new sha>` green) and the handoff rule "formal KIT_BUMP
+requires actual same-SHA GREEN unit" are amended: a protected kit sync
+(staged-react or UI activation) qualifies for KIT_BUMP when its actual same-SHA
+unit result's only substantive failure is the recorded active route-JS budget
+plus the aggregate exit. Every other check must pass (kit:check, versions:check,
+digest, trust, frontend, backend race, doc/content checks). The KIT_BUMP commit
+body and relay cite that actual failed result. Nothing is renamed, skipped,
+omitted or raised; any other failure blocks KIT_BUMP. This unblocks the pending
+core-v1.6 staged bump and covers the later M2 UI-activation sync. M2 acceptance
+and S0b dispatch still require genuinely green unit/full including 40,960 bytes
+(E3/E4 unchanged). The worker never self-adopts: the `@roedu/ui` pointer moves
+only through the parent's protected `kit:sync` (§9-8). This corrects Cat
+`.agent/S1.md` M2 step 2 "Move `@roedu/ui` to 1.0": the worker consumes the
+parent's sync and never edits the pointer, vendored tarballs or lock merge.
+
+Parallel preparation (Q2, "Authorise prep"). Teacher and Social may run
+original-oracle and pre-M0 preparation slices on their feature branches
+(`feat/gui-app-migration-a`) in parallel with Cat: no landing, no kit sync or
+KIT_BUMP, no formal S2A/S3A milestone claim, never during a timed Cat LCP/INP
+run. Existing slices on those branches are preparation, not S2A/S3A milestones.
+§10.3 reads accordingly: S1 cat M0..M2 stays the only formal milestone session
+(Decision 3's Cat-first pilot and core shakedown are unchanged); formal S2A/S3A
+M0+ still waits for S1 M2 green and the S0b templ-kit tag. Preparation is not a
+split, so "No split runs concurrently with cat's shakedown" is unaffected.
+
+Cat gate changes (Cat repo `GATE-CHANGE:` commits, justified per §4.8). Q3
+approved "Fail fast" (cheap doc/inventory/content checks run before the backend
+race; the full stops when they fail) and "Fresh content tests" (`-count=1` for
+content packages; Go's test cache does not recheck out-of-module inputs).
+"Exclusive timed runs" was not approved. Q4, "Follow the plan": S1 M1 step 3
+makes the canonical `Dockerfile` distroless and points the gate at it
+(`GATE-CHANGE: cat M1 app image`), replacing qualification of `Dockerfile.gui`
+while compose/prod/anon/CI build `Dockerfile`. Port/healthcheck changes are
+recorded in the M1 ADR. The one trust pin is Paul's, never an agent's.
+
+Open, not decided: §4.7 "sets `budgets.json` defaults" vs E3 "Preserve
+budgets.json unchanged" (ruled at the device checkpoint); the physical Samsung
+Chrome + Samsung Internet throttled-4G checkpoint remains UNMET.
+See roedu-ui ADR-0019 (`docs/adr/0019-owner-kit-order-parallel-preparation.md`).
