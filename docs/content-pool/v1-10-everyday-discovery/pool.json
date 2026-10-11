@@ -3,7 +3,7 @@
   "theme": "v1-10-everyday-discovery",
   "baseline_commit": "ba24be4d791d130689042d37173ee4d9b9c0f7a5",
   "procedure_rev": "17b97a2",
-  "scope": "35 accepted items:20 new shared concepts/80 links/95 new-node aliases plus18 missing aliases for15 existing owners;5 held. Both independent reviews complete; source-only corrections applied; installation not yet performed.",
+  "scope": "35 accepted items:20 new shared concepts/79 edge records (80 approved directed arcs)/95 new-node aliases plus18 missing aliases for15 existing owners;5 held. Both independent reviews complete; source-only corrections applied; installation not yet performed.",
   "input_policy_baseline": {
     "module": "scripts/seasons_and_school_v1_9_data.py",
     "removed_deferred_terms": [
@@ -2903,7 +2903,8 @@
         "factual": "accept",
         "quality": "accept"
       },
-      "next_action": "Apply under owner standing go after main rail/test recheck."
+      "next_action": "Apply under owner standing go after main rail/test recheck.",
+      "writer_adaptation": "Reciprocal food association stored once as a bidirectional edge, preserving both reviewed directions."
     },
     {
       "id": "v110-afida",
@@ -3085,7 +3086,8 @@
         "factual": "accept",
         "quality": "accept"
       },
-      "next_action": "Apply under owner standing go after main rail/test recheck."
+      "next_action": "Apply under owner standing go after main rail/test recheck.",
+      "writer_adaptation": "Reciprocal food association stored once as a bidirectional edge, preserving both reviewed directions."
     },
     {
       "id": "v110-paianjen",
@@ -7061,5 +7063,6 @@
     "factual_sha256": "9673765938711c7761fce2ca1d18438150bf434e4f8f7681f81e3ad50dc1505a",
     "quality_sha256": "31bac9bdbc6d1f1fa303f6662aea0b7e5a4d099bcdcab4c4f070cdbddfe8ad15",
     "note": "One whole-batch web judgment per reviewer. Later Anvelopă verdict correction and source metadata updates add no authored claim."
-  }
+  },
+  "writer_adaptation": "Preflight refused the duplicate unordered pair+relation for reciprocal Afid/Buburuză records. One bidirectional related_to record encodes exactly the same two approved directed arcs at the same strength. Both new nodes retain four distinct neighbors; no new claim, moved form, threshold or runtime change."
 }
