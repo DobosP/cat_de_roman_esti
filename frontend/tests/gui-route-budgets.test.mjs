@@ -8,7 +8,8 @@ import { gzipSync } from "node:zlib";
 import ts from "@typescript/typescript6";
 import * as budget from "@roedu/web-kit/budget";
 import { parserBinding } from "../scripts/compiler-runtime.mjs";
-import { appRoutePaths, bindings, journeys, measureProfile, verifyTreeRows } from "../../scripts/gui-route-budgets.mjs";
+import { appRoutePaths, bindings, classifyProfiles, frozenBaselineReferences, journeys, measureProfile, verifyFrozenBaseline, verifyTreeRows } from "../../scripts/gui-route-budgets.mjs";
+import { readTarGz } from "../../tools/gui-bootstrap-webkit/scripts/kit-sync.mjs";
 
 // Synthetic asset attribution contracts only. These execute the installed public
 // evaluator; they are not app/server/browser/device or legacy-runtime proof.
@@ -178,4 +179,109 @@ void test("complete asset ledgers refuse omitted, extra, changed and symlinked f
   write(f.root, "bound/a.js", "one");
   fs.symlinkSync("a.js", path.join(f.root, "bound/alias.js"));
   assert.throws(() => verifyTreeRows(f.root, "bound", rows), /symlink/);
+});
+
+// Copies only the actual immutable frozen archive/source receipts into an owned
+// synthetic transport fixture. This does not fabricate a current sync/runtime.
+function frozenFixture(t) {
+  const f = fixture(t);
+  for (const name of frozenBaselineReferences) write(f.root, name, fs.readFileSync(path.join(repo, name)));
+  const proof = JSON.parse(fs.readFileSync(path.join(f.root, "legacy/original-bundle.json")));
+  for (const name of [proof.archive, proof.archive + ".sha256"]) write(f.root, name, fs.readFileSync(path.join(repo, name)));
+  for (const [name, entry] of readTarGz(fs.readFileSync(path.join(f.root, proof.archive)))) {
+    assert.equal(entry.type, "file");
+    write(f.root, "go-backend/embedfs/legacy/" + name, entry.data);
+  }
+  return { ...f, proof, sync: { legacy_sha256: proof.sha256, legacy: proof.files } };
+}
+function verifiedFrozen(f) { return verifyFrozenBaseline(f.root, f.sync, readTarGz); }
+function frozenMeasured(f) { return measureProfile(path.join(f.root, "go-backend/embedfs/legacy"), actualBudgets, paths, budget); }
+
+void test("owner policy records every frozen SDK failure while compliant active budgets and exact original integrity qualify", (t) => {
+  const active = fixture(t), frozen = frozenFixture(t), integrity = verifiedFrozen(frozen);
+  const profiles = { active: measured(active), "frozen-legacy": frozenMeasured(frozen) };
+  assert.equal(profiles.active.report.status, "pass");
+  assert.equal(profiles["frozen-legacy"].report.status, "fail");
+  assert.equal(profiles["frozen-legacy"].report.routes.length, 10);
+  assert.ok(profiles["frozen-legacy"].report.routes.every((item) => item.js.status === "fail" && item.js.limit_gz === 40960));
+  const before = JSON.stringify(profiles), result = classifyProfiles(profiles, integrity, "unit");
+  assert.equal(result.status, "pass");
+  assert.equal(JSON.stringify(profiles), before, "Raw SDK reports/statuses cannot be rewritten");
+  assert.equal(Object.keys(result.budgets).length, Object.keys(profiles.active.budgets).length + Object.keys(profiles["frozen-legacy"].budgets).length);
+  for (const [name, value] of Object.entries(profiles["frozen-legacy"].budgets)) {
+    const recorded = result.budgets["baseline:frozen-legacy:" + name];
+    assert.equal(recorded.classification, "frozen-baseline-measurement");
+    assert.equal(recorded.sdk_status, value.status);
+    assert.equal(recorded.actual, value.actual); assert.equal(recorded.limit, value.limit);
+    assert.equal(recorded.status, "recorded");
+    assert.equal(recorded.raw_report, ".gate/unit/route-budgets/frozen-legacy.json");
+    assert.equal(recorded.integrity_check, "cat-frozen-legacy-integrity");
+  }
+  assert.deepEqual(integrity.required_full_runtime_checks, ["cat-legacy-owner-journey", "cat-browser-full"]);
+});
+
+void test("owner policy cannot qualify over-limit active bytes and retains unchanged active40960 target30720", (t) => {
+  const active = fixture(t), frozen = frozenFixture(t);
+  let seed = 0x1372ac91;
+  const bytes = Buffer.from(Array.from({ length: 65536 }, () => {
+    seed ^= seed << 13; seed ^= seed >>> 17; seed ^= seed << 5;
+    return seed & 255;
+  }));
+  write(active.root, "assets/entry.js", bytes); // Synthetic attribution bytes, never executed as a program.
+  const profiles = { active: measured(active), "frozen-legacy": frozenMeasured(frozen) };
+  assert.equal(profiles.active.report.status, "fail");
+  assert.ok(profiles.active.report.routes.every((item) => item.js.actual_gz > 40960 && item.js.status === "fail"));
+  const result = classifyProfiles(profiles, verifiedFrozen(frozen), "full");
+  assert.equal(result.status, "fail");
+  assert.ok(Object.entries(result.budgets).filter(([name]) => name.startsWith("gate:active:route-js:")).every(([, item]) => item.status === "fail" && item.sdk_status === "fail" && item.classification === "active-numeric-gate"));
+  assert.equal(actualBudgets.js["cat-initial"].limit_gz, 40960);
+  assert.equal(actualBudgets.js["cat-initial"].target_gz, 30720);
+  assert.deepEqual(fs.readFileSync(new URL("../../budgets.json", import.meta.url)), budgetBytes);
+});
+
+void test("frozen baseline refuses changed producer source receipt stdout proof archive and manifest identities", (t) => {
+  const f = frozenFixture(t);
+  verifiedFrozen(f);
+  for (const name of [...frozenBaselineReferences, f.proof.archive, f.proof.archive + ".sha256", "go-backend/embedfs/legacy/.vite/manifest.json"]) {
+    const file = path.join(f.root, name), original = fs.readFileSync(file), changed = Buffer.from(original);
+    changed[0] ^= 1;
+    write(f.root, name, changed);
+    assert.throws(() => verifiedFrozen(f), "Any original source/receipt/archive/manifest byte change must fail");
+    write(f.root, name, original);
+    verifiedFrozen(f);
+  }
+  const proof = structuredClone(f.proof);
+  proof.sha = "0".repeat(40);
+  write(f.root, "legacy/original-bundle.json", JSON.stringify(proof));
+  assert.throws(() => verifiedFrozen(f), /Original producer proof identity/);
+});
+
+void test("frozen baseline refuses missing extra aliased or changed asset bytes and mismatched sync without dropping roots", (t) => {
+  const f = frozenFixture(t), owner = f.proof.files.find((item) => item.path.endsWith(".woff2"));
+  const name = "go-backend/embedfs/legacy/" + owner.path, file = path.join(f.root, name), original = fs.readFileSync(file);
+  verifiedFrozen(f);
+  fs.unlinkSync(file); assert.throws(() => verifiedFrozen(f)); write(f.root, name, original);
+  write(f.root, name, Buffer.from("changed")); assert.throws(() => verifiedFrozen(f)); write(f.root, name, original);
+  const extra = path.join(f.root, "go-backend/embedfs/legacy/extra.js");
+  write(f.root, "go-backend/embedfs/legacy/extra.js", "extra"); assert.throws(() => verifiedFrozen(f)); fs.unlinkSync(extra);
+  fs.unlinkSync(file); fs.symlinkSync(path.basename(owner.path), file);
+  assert.throws(() => verifiedFrozen(f), /symlink/); fs.unlinkSync(file); write(f.root, name, original);
+  verifiedFrozen(f);
+  const sync = structuredClone(f.sync); sync.legacy[0].sha256 = "0".repeat(64);
+  assert.throws(() => verifyFrozenBaseline(f.root, sync, readTarGz));
+  const profiles = { active: measured(f), "frozen-legacy": frozenMeasured(f) };
+  const missing = structuredClone(profiles); missing["frozen-legacy"].report.routes.pop();
+  assert.throws(() => classifyProfiles(missing, verifiedFrozen(f), "unit"));
+});
+
+void test("budget classification refuses missing or relabeled frozen integrity and unexpected profiles", (t) => {
+  const f = frozenFixture(t), integrity = verifiedFrozen(f);
+  const profiles = { active: measured(f), "frozen-legacy": frozenMeasured(f) };
+  assert.throws(() => classifyProfiles(profiles, null, "unit"));
+  for (const key of ["status", "source", "manifest_sha256", "proof_sha256", "result_sha256", "archive_sha256"]) {
+    const changed = structuredClone(integrity); changed[key] = "changed";
+    assert.throws(() => classifyProfiles(profiles, changed, "unit"));
+  }
+  assert.throws(() => classifyProfiles({ active: profiles.active }, integrity, "unit"));
+  assert.throws(() => classifyProfiles(profiles, integrity, "shell"));
 });

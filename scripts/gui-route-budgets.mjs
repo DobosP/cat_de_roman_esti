@@ -9,6 +9,20 @@ import { resolveHookRuntime } from "./gui-hook-runtime.mjs";
 
 const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const legacyHash = "742bb11130fa2bf52ba5c64cb9cfd452f7d8ac3a4fd9dc6d77e8064a6b8fef65";
+export const frozenBaseline = Object.freeze({
+  source: "93066854f67245d4b70c0ea97dc2401445a3218c",
+  tree_sha256: "5680879ab9a94f00a64e3815fdbda45b8bc6c5b3dbfd8b02150fa265a3ccbbec",
+  toolchain_digest: "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+  proof_sha256: "5f9897def4020047f9d0fa199ed96b2e52d6facd1cd878da35c65cafb4e78984",
+  result_sha256: "b7e861a641817e61af74ecac27ef08818ba7ef138bf676ef588b888c2fda7e25",
+  execution_sha256: "240d56636cdef71b27487d40888bd623c176d992500b919f0a141178da7d9c28",
+  stdout_sha256: "ab679fc4def1fed43cf29d48364e74f7e14e32739690331edabb3e4a58104bda",
+  manifest_sha256: "9ed68d3ff5f73bec7ced96e100ff5718043bcc7efc85cf3b3916df5c82867827",
+});
+const frozenReceipt = "docs/reviews/gui-original-react/legacy-freeze-9306685";
+export const frozenBaselineReferences = Object.freeze(["legacy/original-bundle.json",
+  `${frozenReceipt}/result.json`, `${frozenReceipt}/execution.json`,
+  `${frozenReceipt}/logs/1c0c864f-beec-4d55-98e0-7a1dec14324c-cat-legacy-freeze-0.stdout.log`]);
 const account = "src/components/AccountBar.tsx";
 const screens = Object.freeze({
   "/": null,
@@ -193,6 +207,80 @@ export function verifyTreeRows(root, directory, expected) {
   return expected.map((item) => ({ ...item }));
 }
 
+/** Reuse the genuine freeze receipt/archive and the existing complete-tree check. */
+export function verifyFrozenBaseline(root, sync, readTarGz) {
+  const proofBytes = read(root, frozenBaselineReferences[0]);
+  assert.equal(hash(proofBytes), frozenBaseline.proof_sha256, "Original producer proof identity required");
+  const proof = JSON.parse(proofBytes);
+  for (const key of ["tree_sha256", "toolchain_digest"]) assert.equal(proof[key], frozenBaseline[key]);
+  assert.equal(proof.schema, 1); assert.equal(proof.sha, frozenBaseline.source);
+  assert.equal(proof.archive, `legacy/cat_de_roman_esti-legacy-${frozenBaseline.source}.tgz`);
+  assert.equal(proof.sha256, legacyHash); assert.equal(sync.legacy_sha256, legacyHash);
+  const resultBytes = read(root, frozenBaselineReferences[1]), executionBytes = read(root, frozenBaselineReferences[2]);
+  assert.equal(hash(resultBytes), frozenBaseline.result_sha256, "Genuine original freeze result required");
+  assert.equal(hash(executionBytes), frozenBaseline.execution_sha256, "Genuine original producer execution required");
+  const result = JSON.parse(resultBytes), execution = JSON.parse(executionBytes);
+  assert.equal(result.target, "legacy:freeze"); assert.equal(result.status, "pass"); assert.equal(result.dirty, false);
+  for (const value of [result, execution]) {
+    assert.equal(value.sha, frozenBaseline.source);
+    assert.equal(value.tree_sha256, frozenBaseline.tree_sha256);
+  }
+  assert.equal(result.toolchain_digest, frozenBaseline.toolchain_digest);
+  assert.ok(result.checks.every((item) => item.status === "pass"));
+  const producer = execution.actions.filter((item) => item.check === "cat-legacy-freeze" && item.kind === "command");
+  assert.equal(producer.length, 1); assert.equal(producer[0].command, "node"); assert.equal(producer[0].exit_code, 0);
+  const stdout = read(root, frozenBaselineReferences[3]);
+  assert.equal(hash(stdout), frozenBaseline.stdout_sha256); assert.equal(producer[0].stdout_sha256, hash(stdout));
+  assert.deepEqual(JSON.parse(stdout), proof, "Actual freeze stdout must bind the original proof");
+  assert.equal(proof.files.length, 30);
+  const archiveBytes = read(root, proof.archive);
+  assert.equal(hash(archiveBytes), legacyHash);
+  const sidecar = read(root, proof.archive + ".sha256");
+  assert.equal(sidecar.toString("utf8"), `${legacyHash}  ${path.basename(proof.archive)}\n`);
+  for (const [name, digest] of [[proof.archive, legacyHash], [proof.archive + ".sha256", hash(sidecar)],
+    ["legacy/original-bundle.json", hash(proofBytes)], [".gate/legacy-freeze/execution.json", hash(executionBytes)]]) {
+    assert.ok(result.artifacts.includes(`${name} sha256:${digest}`), "Original result must own each frozen input");
+  }
+  const archive = readTarGz(archiveBytes);
+  assert.equal(archive.size, proof.files.length);
+  for (const item of proof.files) {
+    const entry = archive.get(item.path);
+    assert.ok(entry?.type === "file" && entry.data.length === item.bytes && hash(entry.data) === item.sha256, "Exact frozen archive member required");
+  }
+  const files = verifyTreeRows(root, "go-backend/embedfs/legacy", proof.files);
+  assert.deepEqual(sync.legacy, files);
+  assert.equal(hash(read(root, "go-backend/embedfs/legacy/.vite/manifest.json")), frozenBaseline.manifest_sha256);
+  return { schema: 1, status: "pass", classification: "frozen-baseline-integrity", ...frozenBaseline,
+    archive: proof.archive, archive_sha256: legacyHash, files,
+    required_full_runtime_checks: ["cat-legacy-owner-journey", "cat-browser-full"],
+    scope: "Original artifact integrity only; actual full fallback journey and every safety check remain mandatory" };
+}
+
+/** Owner-approved consumer classification; the delivered SDK reports stay untouched. */
+export function classifyProfiles(profiles, integrity, target) {
+  assert.ok(["unit", "full"].includes(target));
+  assert.deepEqual(Object.keys(profiles).sort(), ["active", "frozen-legacy"]);
+  assert.equal(integrity?.status, "pass"); assert.equal(integrity.classification, "frozen-baseline-integrity");
+  for (const [key, value] of Object.entries(frozenBaseline)) assert.equal(integrity[key], value);
+  assert.equal(integrity.archive_sha256, legacyHash); assert.equal(integrity.files.length, 30);
+  const qualified = {};
+  for (const [name, profile] of Object.entries(profiles)) {
+    assert.equal(profile.report.routes.length, journeys.length);
+    assert.deepEqual(profile.report.routes.map((item) => item.name).sort(), [...journeys].sort());
+    for (const [key, value] of Object.entries(profile.budgets)) {
+      const active = name === "active";
+      qualified[`${active ? "gate" : "baseline"}:${name}:${key}`] = { ...value,
+        status: active ? value.status : "recorded", sdk_status: value.status,
+        classification: active ? "active-numeric-gate" : "frozen-baseline-measurement",
+        raw_report: `.gate/${target}/route-budgets/${name}.json`,
+        ...(active ? {} : { integrity_check: "cat-frozen-legacy-integrity" }) };
+    }
+  }
+  return { status: profiles.active.report.status === "pass" ? "pass" : "fail", budgets: qualified,
+    policy: "owner-approved-frozen-legacy-baseline-2026-10-11",
+    authority: "docs/adr/0193-frozen-legacy-budget-baseline.md" };
+}
+
 async function main() {
   const root = process.cwd(), target = process.argv[2], invocation = process.argv[3];
   assert.ok(process.platform === "linux" && root === "/work" && ["unit", "full"].includes(target), "Actual owning Linux unit/full required");
@@ -229,25 +317,13 @@ async function main() {
   const routePaths = appRoutePaths(read(root, "frontend/src/App.tsx").toString("utf8"), ts);
   const baseline = json(root, "baselines/cat/capture.json");
   assert.deepEqual(baseline.pages.map((item) => item.route).sort(), journeys.filter((name) => name !== "/alchimie").sort(), "All original frozen journeys must remain measured");
-  const proof = json(root, "legacy/original-bundle.json");
-  assert.equal(proof.sha256, legacyHash);
-  assert.equal(sync.legacy_sha256, legacyHash);
-  assert.equal(proof.files.length, 30);
-  const archiveBytes = read(root, proof.archive);
-  assert.equal(hash(archiveBytes), legacyHash);
-  assert.equal(read(root, proof.archive + ".sha256").toString("utf8"), `${legacyHash}  ${path.basename(proof.archive)}\n`);
   const tarPath = config.npm_dir + "/scripts/kit-sync.mjs";
   const { readTarGz } = await import(pathToFileURL(regular(root, tarPath)).href);
-  const archive = readTarGz(archiveBytes);
-  assert.equal(archive.size, proof.files.length);
-  for (const item of proof.files) {
-    const entry = archive.get(item.path);
-    assert.ok(entry?.type === "file" && entry.data.length === item.bytes && hash(entry.data) === item.sha256, "Exact frozen archive member required");
-  }
+  const frozenIntegrity = verifyFrozenBaseline(root, sync, readTarGz);
+  const proof = json(root, "legacy/original-bundle.json");
   const activeRows = verifyTreeRows(root, "frontend/dist", sync.dist);
   verifyTreeRows(root, "go-backend/embedfs/dist", activeRows);
-  const legacyRows = verifyTreeRows(root, "go-backend/embedfs/legacy", proof.files);
-  assert.deepEqual(sync.legacy, legacyRows);
+  const legacyRows = frozenIntegrity.files;
   const budgets = json(root, "budgets.json");
   const profiles = {};
   for (const [name, directory, assets] of [["active", "go-backend/embedfs/dist", activeRows], ["frozen-legacy", "go-backend/embedfs/legacy", legacyRows]]) {
@@ -255,11 +331,12 @@ async function main() {
       ...measureProfile(path.join(root, directory), budgets, routePaths, api) };
   }
   assert.equal(profiles.active.manifest_sha256, sync.manifest_sha256);
+  const qualification = classifyProfiles(profiles, frozenIntegrity, target);
   const inputs = ["budgets.json", "versions.lock.json", "frontend/package.json", "frontend/package-lock.json",
     "frontend/index.html", "frontend/src/main.tsx", "frontend/src/App.tsx", "frontend/src/screens/Home.tsx",
     "frontend/src/components/AccountBar.tsx", ...Object.values(screens).filter(Boolean).map((name) => "frontend/" + name),
     "frontend/src/screens/AlchimieExplore.tsx", "baselines/cat/capture.json",
-    "legacy/original-bundle.json", proof.archive, proof.archive + ".sha256", syncPath, bootstrapPath,
+    ...frozenBaselineReferences, proof.archive, proof.archive + ".sha256", syncPath, bootstrapPath,
     `.gate/${target}/managed-assets/prepare.json`, `.gate/${target}/managed-assets/inventory.json`,
     ".gate/wrapper-current.json", `.gate/${target}/wrapper-current.json`, descriptor.config_path,
     "Taskfile.repo.yml", "scripts/gui-route-budgets.mjs", "scripts/gui-repo-hook.mjs",
@@ -267,7 +344,8 @@ async function main() {
     config.npm_dir + "/schemas/budgets.schema.json", config.npm_dir + "/schemas/validate.mjs", tarPath];
   const result = { schema: 1, check: "cat-route-budgets", target, invocation, wrapper_invocation: descriptor.invocation,
     sha: descriptor.sha, tree_sha256: descriptor.tree_sha256, toolchain_digest: descriptor.toolchain_digest,
-    status: Object.values(profiles).every((item) => item.report.status === "pass") ? "pass" : "fail",
+    status: qualification.status, raw_sdk_aggregate_status: Object.values(profiles).every((item) => item.report.status === "pass") ? "pass" : "fail",
+    qualification, frozen_integrity: frozenIntegrity,
     scope: "actual active SPA routes and separately measured frozen-legacy journeys; no runtime/vitals qualification",
     method: "delivered public evaluate/gateBudgets; verified gzip sidecars or level-6 gzip; explicit entry/AccountBar/route static closures",
     budgets_sha256: hash(read(root, "budgets.json")), route_source_paths: routePaths, wildcard_redirect: "/", parser,
@@ -276,6 +354,8 @@ async function main() {
       Object.entries(profile.budgets).map(([key, value]) => [`${name}:${key}`, value]))) };
   const output = `.gate/${target}/route-budgets`;
   fs.mkdirSync(path.join(root, output), { recursive: true });
+  fs.writeFileSync(path.join(root, output, "frozen-integrity.json"), JSON.stringify(frozenIntegrity, null, 2) + "\n");
+  fs.writeFileSync(path.join(root, output, "gate-summary.json"), JSON.stringify(qualification, null, 2) + "\n");
   for (const [name, profile] of Object.entries(profiles)) fs.writeFileSync(path.join(root, output, name + ".json"), JSON.stringify(profile, null, 2) + "\n");
   fs.writeFileSync(path.join(root, output, "measurements.json"), JSON.stringify(result, null, 2) + "\n");
   process.stdout.write(JSON.stringify(result) + "\n");

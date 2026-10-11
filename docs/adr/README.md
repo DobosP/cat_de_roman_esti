@@ -147,3 +147,5 @@ Parallel lanes allocated0185/0186 independently. Full filenames disambiguate the
 - [0191](0191-image-backed-browser-concurrency.md) — bounded image-backed two-worker browser experiment; exact source reviewed, actual full validation pending.
 
 - [0192](0192-bounded-managed-local-launchers.md) — actual managed native/dev/HMR local modes, loopback host-port selection and private CID creation; bounded proofs, formal GUI adoption remains open.
+
+- [0193](0193-frozen-legacy-budget-baseline.md) — explicit owner-approved frozen fallback baseline integrity; active numeric limits unchanged, consumer source checks NOT RUN.

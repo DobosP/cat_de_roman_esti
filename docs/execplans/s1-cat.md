@@ -13,6 +13,8 @@ Preserve the six server-authoritative Romanian games while moving the SPA from R
 
 ## 2. Progress
 
+- [x] 2026-10-11 SOURCE ONLY — explicit human “Approve baseline policy; keep active UI limits” recorded in ADR0193. Raw20 SDK measurements/statuses remain; active40960/target30720 gates unchanged, exact original freeze/source/archive/manifest/all30 members gain a named baseline-integrity check. Wrapper baseline rows retain raw sdk_status and report links. All new tests NOT RUN; current React red, required full legacy/safety/device/UI prerequisites unchanged.
+
 - [x] 2026-10-10 — Paul explicitly approved allowing LCP/INP improvements with unchanged slowdown limits. Exact reviewed R2 source afterimages and active policy amendment applied; original baselines/failures retained. Actual supported managed focused43 passed once/no fail/skip/cancel/todo at2a6e; bounded controls independently reviewed. Full qualification remains pending.
 
 - [x] 2026-10-07 05:38 UTC — verified clean perf/gui-cat worktree; original package graph and source unchanged; owner bootstrap and exact core-v1.1 kit input present. Starting HEAD 0203351956ee19180bed9f25cbde7dfcfbe7af08.

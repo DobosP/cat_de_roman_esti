@@ -79,22 +79,28 @@ function normalizedContract(check, file, count) {
   });
 }
 function routeBudgets() {
+  let measured;
   hook.check("cat-route-budgets", () => {
     hook.assert("Route budgets require fresh synced managed output", () => passed("cat-unit-gui-identity"));
     let stdout, failure;
     try { stdout = hook.run("node", ["scripts/gui-route-budgets.mjs", target, invocation]); }
     catch (error) { failure = error; stdout = error.stdout; }
-    const measured = JSON.parse(stdout);
+    measured = JSON.parse(stdout);
     hook.assert("Actual complete route-budget receipt matches this invocation", () => measured.schema === 1
       && measured.check === "cat-route-budgets" && measured.target === target && measured.invocation === invocation
       && measured.sha === hook.context.sha && measured.tree_sha256 === hook.context.tree_sha256
       && measured.toolchain_digest === hook.context.toolchain_digest
       && measured.budgets_sha256 === hash(fs.readFileSync(path.join(root, "budgets.json"))));
-    Object.assign(hook.budgets, measured.budgets);
+    Object.assign(hook.budgets, measured.qualification.budgets);
     if (failure) throw failure; // preserve the real nonzero budget-red command
-    hook.assert("Delivered route-budget evaluator passes every measured profile", () => measured.status === "pass");
+    hook.assert("Active numeric budgets pass under the explicit owner-approved frozen baseline policy", () => measured.status === "pass"
+      && measured.qualification.policy === "owner-approved-frozen-legacy-baseline-2026-10-11");
   });
-  for (const name of ["active", "frozen-legacy", "measurements"]) {
+  hook.check("cat-frozen-legacy-integrity", () => {
+    hook.assert("Original freeze producer/source/archive/manifest/all30 asset identities remain exact", () => measured?.frozen_integrity?.status === "pass"
+      && measured.frozen_integrity.classification === "frozen-baseline-integrity");
+  });
+  for (const name of ["active", "frozen-legacy", "measurements", "frozen-integrity", "gate-summary"]) {
     const file = `${directory}/route-budgets/${name}.json`;
     if (fs.existsSync(path.join(root, file))) hook.artifact(file);
   }
