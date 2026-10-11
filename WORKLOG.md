@@ -2113,3 +2113,30 @@ Prior71pass candidate scope and all release blockers remain; Source6 live,
 V1.7 uninstalled/0integratedgrowth. Main+feature transport isexplicitlyauthorized,
 not a release or future push authorization. Preserve unfinishedscratch/worktree
 and featurebranch forcontinuation; no foreign or unfinishedcleanup.
+
+Valid until: V1.8 local landing — then treat as history.
+2026-10-11: prior STATUS content snapshot moved during V1.8 qualification.
+
+- **V1.2 landed locally17f7da1:** four reviewed synonym families (ascensor, tomată, scripcă, prăvălie),
+  22 distinct forms and Cărare↔Potecă; zero new concepts/curated rounds. Old records,
+  recipe cores/histories/pools persist. [Review](docs/reviews/v1-2-content-growth/README.md),
+  [ADR-0170](docs/adr/0170-v1-2-reviewed-content-growth.md), [pool](docs/content-pool/v1-2-synonyms-and-links/pool.json).
+- V1.2 baseline authority reconstructs all four rails exactly; source/export/mobile/rank/derive,
+  independent Python export,1207 current HTTP, history68 and new synonym/hop race checks pass.
+  Full native/shared race/vet,smoke151/assets28/docs and assembled review GREEN; content heartbeat renewed per ADR-0177.
+Qualified Source6 KG: `fixture-v1-6-everyday-inputs`, 2419 nodes/9473 links/8679 forms/180 exact puzzles.
+
+## Current qualified V1.6 pins
+
+- alchimie_discovery_world_v92.json: `8f013a8f6b54a97a768a34c42e669addc4f5ab9823302befbe15ad811cae77ad`
+- alchimie_recipe_extensions_v92.json: `d94647e78f8c2bd375b961f0aab52f3f7207024e60bed745b78c4a3d052d0bfc`
+- quick_games_v92.json: `0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345`
+- games_pack.json: `e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8`
+- board_rankings_v37.json: `036c8a00de347939d132ba25512da7cba53b12e9d11a9f86cecc07cc98293c31`
+- derived_catalog_v38.json: `fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a`
+- release_reserve_v1.json: `fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7`
+- lant_rejection_tombstones.json: `01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d`
+- kg_sample.json: `63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf`
+- cat_mobile_app_pack_contract.json: `282f18f6d81c623be004f28d4c5634bfbbbdf2294e466d842a9192123bc06fae`
+- **V1.7 parked** ([ADR-0188](docs/adr/0188-park-v1-7-and-reset-content-loop.md)): `codex/content-v1-7` (local 3377a68, origin fba9498) and `codex/content-v1-7-qualification` are not merged; zero integrated growth. Source6 stays live; [ADR-0186](docs/adr/0186-go-authoritative-content-validation.md) keeps Go/native JSON authoritative. Outcome: [pool](docs/content-pool/v1-7-recognizable-content/pool.json); leafă returns later as a full-paradigm Salariu input.
+- **Content rail baseline GREEN** (verified 2026-10-11): `cat-content-rail all --root .. --check` and `go -C go-backend test ./internal/contentrails/ ./internal/contentbuild/` pass; installed authorities re-run the native audits under the current binary and accept on behaviour equality, not runtime file hashes ([ADR-0189](docs/adr/0189-behaviour-bound-installed-content-authorities.md)). Content installs enabled per [CONTENT_LOOP.md](docs/CONTENT_LOOP.md).

@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-11 — V1.7 parked ([ADR-0188](adr/0188-park-v1-7-and-reset-content-loop.md)); Source6 live; rail baseline green ([ADR-0189](adr/0189-behaviour-bound-installed-content-authorities.md), behaviour-bound installed authorities).
+Last verified: 2026-10-11 — V1.8 qualified locally; V1.7 remains parked ([ADR-0188](adr/0188-park-v1-7-and-reset-content-loop.md)); four native rails and content gates pass ([ADR-0189](adr/0189-behaviour-bound-installed-content-authorities.md)).
 
 - **GUI checkpoint:** core1.2 released; native7/current+candidate andfocusedMotion14 PASS; exact15 accepted/unapplied; deps64ea PASS. Fullnormalized replay/Node3/lint/unit/CSP/device/KIT_BUMP pending. Linuxsupervisor/worker paused.
 - **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
@@ -27,13 +27,12 @@ Last verified: 2026-10-11 — V1.7 parked ([ADR-0188](adr/0188-park-v1-7-and-res
 - [Content skill](../.agents/skills/romanian-game-content/SKILL.md): refinement/discovery with independent gates.
 - Decision/evidence: [ADR-0158](adr/0158-v1-testing-release.md),
   [release review](reviews/v1-testing-release/README.md), [Romanian tester guide](TESTARE_V1.md).
-- **V1.2 landed locally17f7da1:** four reviewed synonym families (ascensor, tomată, scripcă, prăvălie),
-  22 distinct forms and Cărare↔Potecă; zero new concepts/curated rounds. Old records,
-  recipe cores/histories/pools persist. [Review](reviews/v1-2-content-growth/README.md),
-  [ADR-0170](adr/0170-v1-2-reviewed-content-growth.md), [pool](content-pool/v1-2-synonyms-and-links/pool.json).
-- V1.2 baseline authority reconstructs all four rails exactly; source/export/mobile/rank/derive,
-  independent Python export,1207 current HTTP, history68 and new synonym/hop race checks pass.
-  Full native/shared race/vet,smoke151/assets28/docs and assembled review GREEN; content heartbeat renewed per ADR-0177.
+- **V1.8 qualified locally:** 30 reviewed items: 23 new concepts, six existing-owner input
+  families and one directional link; +23 nodes/+93 links/+136 forms, zero new curated rounds.
+  Leafă→Salariu; ogradă→Curte is a regional input; full non-colliding paradigms preserve owners.
+  [Review](reviews/v1-8-everyday-core/README.md) and [pool](content-pool/v1-8-everyday-core/pool.json).
+  Four native rails reconstruct exactly; owner-approved Cald assertions, HTTP1207 and API51 pass.
+  Full native race has no new red versus main; managed SPA baseline failures remain unchanged.
 ## Inventory and invariants
 
 | Game | Total | Approved | Pending | New-round pool |
@@ -47,7 +46,7 @@ Last verified: 2026-10-11 — V1.7 parked ([ADR-0188](adr/0188-park-v1-7-and-res
 
 Pack **716 = 709 approved + 7 pending**,527 eligible; quick421/418,341 preferred, starter62/61. The85 authored/336 frozen payloads stay exact.
 Pool counts describe curated records; existing on-demand fallback generators remain.
-Qualified Source6 KG: `fixture-v1-6-everyday-inputs`, 2419 nodes/9473 links/8679 forms/180 exact puzzles.
+Qualified V1.8 KG: `fixture-v1-8-everyday-core`, 2442 nodes/9566 links/8815 forms/180 exact puzzles.
 Alchimie challenge refresh: 49 existing additions across 27 books; all 68 selectable books retain
 521 recipes, routes and par. One former addition belongs to a reserved board.
 Exploration has **252 concepts/352 recipes/148 discoveries**, 96 supplies, 12 tiers,
@@ -56,18 +55,18 @@ Sessions retain 7200-second sliding TTL, 1000 entries/game, locks and 64 KiB req
 Exploration stays ≤256 concepts/512 recipes/256 saved crafts/128 observed empty pairs;
 sixteen histories and 2 MiB pre-write bounds remain. Quick supplements ≤256 boards/2 MiB.
 Unrevealed answers, recipe maps and routes stay private.
-## Current qualified V1.6 pins
+## Current qualified V1.8 pins
 
-- alchimie_discovery_world_v92.json: `8f013a8f6b54a97a768a34c42e669addc4f5ab9823302befbe15ad811cae77ad`
-- alchimie_recipe_extensions_v92.json: `d94647e78f8c2bd375b961f0aab52f3f7207024e60bed745b78c4a3d052d0bfc`
-- quick_games_v92.json: `0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345`
+- alchimie_discovery_world_v92.json: `dc0fd8737d3ed187c18f2ba246af524cb20ef2c9e0be35ed282b844decd7528a`
+- alchimie_recipe_extensions_v92.json: `ff14ada7e6a048012fc774fcbe8e4fbd57ed4ed2981d236eabc0ddd82964f063`
+- quick_games_v92.json: `d3a50586c0983cb6f2f291f1b042041840b7403fabc330554977575f7866791b`
 - games_pack.json: `e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8`
-- board_rankings_v37.json: `036c8a00de347939d132ba25512da7cba53b12e9d11a9f86cecc07cc98293c31`
-- derived_catalog_v38.json: `fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a`
+- board_rankings_v37.json: `538cf0db0e9141c3bbb4676404f136ab1faab0f06023dee86d207a0ee775c99c`
+- derived_catalog_v38.json: `e4535a059c253fbf07911ec04e476a4e9725b52aa025faa4967ffbaa936adb7e`
 - release_reserve_v1.json: `fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7`
 - lant_rejection_tombstones.json: `01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d`
-- kg_sample.json: `63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf`
-- cat_mobile_app_pack_contract.json: `282f18f6d81c623be004f28d4c5634bfbbbdf2294e466d842a9192123bc06fae`
+- kg_sample.json: `da14c34310eac3a03c2b5438c18043a2a7da682af9e0d991eb105c0639696c8f`
+- cat_mobile_app_pack_contract.json: `e753434dcc19cab6dd9f69b8349db431bed12807a7a0464fb2140d1db721dcbf`
 ## Verification
 
 - 1.0.1 (2026-09-23): **2466 backend / 53 accounts**, **240 frontend**, lint/typecheck/build
@@ -108,8 +107,9 @@ Unrevealed answers, recipe maps and routes stay private.
   [ADR-0167](adr/0167-close-unread-bodies-on-early-refusal.md):13 TCP gates/32 body/1207 parity and strict scalar envelopes pass; auth unchanged.
   [ADR-0168](adr/0168-qualify-complete-native-toolchain.md): native qualification remains historical evidence.
 - V1.3: [pool3integrated/5held](content-pool/v1-3-everyday-concepts/pool.json), [integration](reviews/v1-3-everyday-concepts/README.md); graph3/12/12 accepted/applied.
-- **V1.7 parked** ([ADR-0188](adr/0188-park-v1-7-and-reset-content-loop.md)): `codex/content-v1-7` (local 3377a68, origin fba9498) and `codex/content-v1-7-qualification` are not merged; zero integrated growth. Source6 stays live; [ADR-0186](adr/0186-go-authoritative-content-validation.md) keeps Go/native JSON authoritative. Outcome: [pool](content-pool/v1-7-recognizable-content/pool.json); leafă returns later as a full-paradigm Salariu input.
-- **Content rail baseline GREEN** (verified 2026-10-11): `cat-content-rail all --root .. --check` and `go -C go-backend test ./internal/contentrails/ ./internal/contentbuild/` pass; installed authorities re-run the native audits under the current binary and accept on behaviour equality, not runtime file hashes ([ADR-0189](adr/0189-behaviour-bound-installed-content-authorities.md)). Content installs enabled per [CONTENT_LOOP.md](CONTENT_LOOP.md).
+- **V1.7 parked** ([ADR-0188](adr/0188-park-v1-7-and-reset-content-loop.md)): `codex/content-v1-7` (local 3377a68, origin fba9498) and `codex/content-v1-7-qualification` are not merged; zero integrated growth. V1.8 is the qualified content; [ADR-0186](adr/0186-go-authoritative-content-validation.md) keeps Go/native JSON authoritative. Outcome: [pool](content-pool/v1-7-recognizable-content/pool.json); leafă was independently integrated via V1.8 as a full-paradigm Salariu input.
+- **V1.8 contentrails GREEN** (verified 2026-10-11): all four rails reconstruct exactly and re-audit under the current binary; contentrails/contentbuild race tests pass.
+  Owner-approved Cald assertions and all content gates pass; only known main `TestManagedSPA*` failures remain. [Procedure](CONTENT_LOOP.md), [ADR-0189](adr/0189-behaviour-bound-installed-content-authorities.md).
 - Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing
   diacritics in some descriptions ("roman"/"român"), the false Toma Caragiu–Reconstituirea
   casting edge, generic-only Lanț `lt_personalitati_186`, off-theme single-board Conexiuni
