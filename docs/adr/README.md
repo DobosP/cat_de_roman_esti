@@ -158,4 +158,4 @@ Parallel lanes also allocated0188/0189 independently. All four full-filename bod
 
 - [0194](0194-integrate-reviewed-v18-with-gui-history.md) — parent source integration of complete main V1.8 with GUI, separate historical Source6 builders/corpora and exact V1.8 tuple; combined qualification NOT RUN.
 
-- [0195](0195-owner-decisions-review-m1-image-test-loop.md) — owner decisions 2026-10-11 (budget-only-red KIT_BUMP, parallel prep, fail-fast/fresh content tests, canonical distroless M1 image) plus no-behaviour test-loop speedups; trust pin and full NOT RUN.
+- [0195](0195-owner-decisions-review-m1-image-test-loop.md) — owner decisions 2026-10-11 (budget-only-red KIT_BUMP, parallel prep, fail-fast/fresh content tests, canonical distroless M1 image, PORT read in Go with default 8000) plus no-behaviour test-loop speedups; trust pin and full NOT RUN.

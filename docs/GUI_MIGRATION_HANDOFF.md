@@ -7,8 +7,9 @@ Publish only `fix/gui-cat-prerequisites-linux` to origin. Shared main stays clea
 ## Current 2026-10-11 (independent review, Codex stopped)
 
 - Branch `fix/gui-review-20261011` (local, unpushed) = e042587 plus: 8e56bae fail-fast/fresh content
-  tests, 83ed8b9 canonical distroless M1 image (`APP_DOCKERFILE=Dockerfile`, container port 8080,
-  `/app healthcheck`, `Dockerfile.gui` deleted), 0f51b96 `run.sh` port, 35e8de9 NATIVE_BACKENDS port,
+  tests, 83ed8b9 canonical distroless M1 image (`APP_DOCKERFILE=Dockerfile`, `/app healthcheck`,
+  `Dockerfile.gui` deleted), Q5 a5d24f0 + 11a6825 `PORT` read in Go (default 8000; gate sets 8080;
+  `run.sh` back to e042587; CI keeps only the no-shell check; 0f51b96/35e8de9 port edits reverted),
   perf aa8d4e3/5d7594a/e6421be (0479930+5d535ed is a hoist/revert pair: land both or neither) and this
   docs sync (PROGRAM E2–E5, S1 notes). Decisions: PROGRAM E5 and [ADR0195](adr/0195-owner-decisions-review-m1-image-test-loop.md).
 - Latest actual full at e042587 (2026-10-11 19:00–19:52 UTC, 52.4 min, wrapper result kept in parent
@@ -20,8 +21,8 @@ Publish only `fix/gui-cat-prerequisites-linux` to origin. Shared main stays clea
 - This branch's test-loop speedups (no behaviour change): httpgolden package 884 s → 115 s; six
   contentrails fixture tests 747 s → 390 s. The `quick.go` hoist needs an ADR-0189 re-audit/re-sign.
 - Open, in priority order:
-  1. Paul's trust pin for `.gate.env` → managed unit, then full on this branch. Port 8080 vs S1's
-     `PORT`-in-Go/8000 and the `run.sh`/CI edits need a parent/owner ruling (ADR0195).
+  1. Paul's trust pin for `.gate.env` → managed unit, then full on this branch (port ruled: Q5,
+     ADR0195).
   2. Integrate local main (V1.9/V1.10, 40 commits after 3f327c) with one combined full.
   3. KIT_BUMP core-v1.6 under E5 (budget-only-red same-SHA unit; parent `kit:sync` only).
   4. Physical Samsung Chrome + Samsung Internet throttled-4G device checkpoint: UNMET.

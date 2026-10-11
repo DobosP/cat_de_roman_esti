@@ -35,6 +35,13 @@ Questions and answers as recorded in the review session (Cat effect after each):
   port/healthcheck changes recorded in the M1 ADR; one trust pin (Paul runs it,
   never an agent). Cat: this ADR records the image contract below.
 
+On 2026-10-11 (~21:35 UTC) Paul answered a follow-up in the same session.
+Provenance: owner answer in Claude Code independent-review session (no
+signature implied).
+
+- Q5 Port → "PORT in Go, default 8000": add `PORT` handling in cat-server and
+  the healthcheck, then revert the compose/Caddy/CI/run.sh port edits.
+
 Still open: PROGRAM §4.7 "sets budgets.json defaults" vs E3 "Preserve
 budgets.json unchanged" (ruled at the device checkpoint); the physical Samsung
 Chrome + Samsung Internet throttled-4G checkpoint remains UNMET.
@@ -49,21 +56,31 @@ unit/lint/types still always run; no check is removed or renamed. The go-backend
 race adds `-count=1` (ten previously cached packages: 10.16 s fresh vs 0.16 s
 cached); `-timeout=30m`, skip allowlist and authcore race are unchanged.
 
-## M1 app image contract (Q4, commits 83ed8b9, 0f51b96)
+## M1 app image contract (Q4 commit 83ed8b9; Q5 port commits a5d24f0, 11a6825)
 
 - `.gate.env` `APP_DOCKERFILE=Dockerfile`; `Dockerfile` is the formerly qualified
   distroless recipe (same digest-pinned bases, identity bake, asset sync, export
   check). `Dockerfile.gui` is deleted; its ignore file is `Dockerfile.dockerignore`.
-- Container port 8000 → 8080 (`-listen 0.0.0.0:8080`; `compose.gate.yml` probes
-  8080); host side stays `127.0.0.1:${PORT:-8000}`. Caddy proxies `app:8080`.
+- Port (Q5): `PORT` is read in Go. Without an explicit `-listen`, `/app` binds
+  `:$PORT`; `PORT` unset or empty means 8000, otherwise ASCII decimal 1–65535,
+  anything else exits non-zero naming `PORT`. An explicit `-listen` wins and does
+  not consult `PORT`. The image has no `CMD`; `EXPOSE 8000`. Container default
+  stays 8000 (Compose `PORT: "8000"`, Caddy `app:8000`, host
+  `127.0.0.1:${PORT:-8000}`); `compose.gate.yml` (unchanged) sets `PORT=8080`,
+  so the gate app listens and is probed on 8080. The native default moved from
+  `127.0.0.1:8081` to `:$PORT`; in-repo native callers pass `-listen` or
+  `-replay`.
 - Entrypoint `/usr/local/bin/cat-server` → `/app`; prod/accounts compose
-  `command` is flags only; healthcheck `curl /api/health` → `/app healthcheck`
-  (probes `/healthz`, port hard-coded 8080). No shell, curl or Python in the image.
+  `command` is `["-migrate"]` (no port); healthcheck `curl /api/health` →
+  `/app healthcheck` (probes `http://127.0.0.1:$PORT/healthz`, same `PORT`
+  rule). No shell, curl or Python in the image.
 - User stays `10001:10001` (CI asserts it); `/data/submissions` 10001 mode 700.
-- Open for parent/owner: S1 §5.4 asks for `PORT` read in Go defaulting to 8000;
-  this source hard-codes 8080. `run.sh` (S1 §5.5 must-not-touch) and CI
-  (PROGRAM: not edited by S1) were changed so they keep working; keep or revert
-  as one decision.
+- `run.sh` is byte-identical to e042587 (S1 §5.5 must-not-touch; 0f51b96
+  reverted). CI keeps port 8000; its only remaining change is the no-shell
+  Python check (`docker export` + `tar` listing), required because the approved
+  distroless image (Q4) has no shell. This conflicts with PROGRAM:644 ("cat's
+  existing GitHub workflow is not edited by S1") and is recorded here as an
+  owner-accepted consequence of Q4.
 
 ## Test-loop speedups (no behaviour change)
 
