@@ -3,7 +3,7 @@
   "theme": "home-and-nature",
   "baseline_commit": "6fbd7a4f8aab2003e8a9e2e8ed781c8aece94db3",
   "procedure_rev": "17b97a2",
-  "scope": "Step1 only: unverified root-authored home/nature candidates and missing existing-owner inputs; no web calls, semantic acceptances or content installation.",
+  "scope": "Research in progress: first12 items examined;11 researched,one newly held for incomplete links. No semantic acceptances, new curated rounds or installed content.",
   "input_policy_baseline": "Preserve landed V1.10 leafă→Salariu and ogradă→Curte policy; no new deferred-term exception.",
   "screen": {
     "normalization": "bundled normalization_map and accent_normalization_map",
@@ -29,7 +29,9 @@
     "web_calls": 0,
     "proposed_inputs": 218,
     "policy": "All other-sense forms stay held. A colliding lemma holds the whole concept; a colliding declined form is excluded under the current quality-bar instruction to drop colliding forms and list them in the review table.",
-    "discovery": "Remaining usable named growth items are replanned first. Fresh everyday home/nature school vocabulary extends the constrained backlog; frequency is checked later as a positive signal only."
+    "discovery": "Remaining usable named growth items are replanned first. Fresh everyday home/nature school vocabulary extends the constrained backlog; frequency is checked later as a positive signal only.",
+    "phase": "initial step1 snapshot",
+    "commit": "b1becfdf89daae3cd65441360e2ff42ba00df7ff"
   },
   "records": [
     {
@@ -47,7 +49,7 @@
         "mănușile",
         "mănușilor"
       ],
-      "revision": 1,
+      "revision": 2,
       "label_ro": "Mănușă",
       "origin": "named_backlog_replanned",
       "form_status": "Unverified paradigm hypothesis. Fold-equivalent article spellings are represented by the lemma key; only distinct noncolliding forms may later be installed.",
@@ -56,9 +58,9 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess/graph vocabulary and meaningful sourced links; no new curated target/round claim.",
-      "state": "idea",
-      "decision": "idea: prescreen passed for the proposed forms; exact sense, DOOM3 morphology and every named link still need research.",
-      "research_ready": true,
+      "state": "researched",
+      "decision": "researched: The predeclared wool-material link replaces the old generic winter-kit co-listing; independent batch reviews remain pending.",
+      "research_ready": false,
       "proposed_forms": [
         "mănușă",
         "mănușii",
@@ -131,7 +133,9 @@
           "node_id": "n_v29_clothing_everyday_haina",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Obiect de îmbrăcăminte purtat pentru protecție, căldură sau aspect."
+          "current_owner_description": "Obiect de îmbrăcăminte purtat pentru protecție, căldură sau aspect.",
+          "verified_claim": "Mănușa este un obiect de îmbrăcăminte.",
+          "evidence_url": "https://dexonline.ro/definitie/m%C4%83nu%C8%99%C4%83/json"
         },
         {
           "label": "Mână",
@@ -139,7 +143,9 @@
           "node_id": "n_v24_body_limbs_mana",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Concept cotidian din grupul «părți ale membrelor»: Mână."
+          "current_owner_description": "Concept cotidian din grupul «părți ale membrelor»: Mână.",
+          "verified_claim": "Mănușa acoperă și protejează mâna.",
+          "evidence_url": "https://dexonline.ro/definitie/m%C4%83nu%C8%99%C4%83/json"
         },
         {
           "label": "Iarnă",
@@ -147,14 +153,18 @@
           "node_id": "n_v1_8_iarna",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Anotimpul rece din zona temperată, cu zile mai scurte și ninsori în numeroase regiuni."
+          "current_owner_description": "Anotimpul rece din zona temperată, cu zile mai scurte și ninsori în numeroase regiuni.",
+          "verified_claim": "Mănușile pentru iarnă protejează mâinile de frig.",
+          "evidence_url": "https://www.decathlon.ro/toate-sporturile/ski-snowboard/manusi-ski"
         },
         {
           "label": "Lână",
           "claim_to_verify": "mănușile tricotate pot fi din lână; înlocuiește vechea co-listare Căciulă",
           "node_id": "n_v1_11_lana",
           "category": "viata_de_roman",
-          "status": "planned in this batch; not accepted"
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Unele mănuși sunt confecționate din lână.",
+          "evidence_url": "https://dexonline.ro/definitie/m%C4%83nu%C8%99%C4%83/json"
         }
       ],
       "topology_hypothesis": {
@@ -210,8 +220,86 @@
         }
       ],
       "prior_hold_policy": "Exact rejected candidates are skipped. A rejected association remains excluded as that association; it does not reject every input of an existing endpoint. Recorded older reasons remain until addressed by this newly screened proposal; older proxy-retirement prerequisites are superseded by current CONTENT_LOOP step1, which permits graph upgrades.",
-      "sources": [],
-      "next_action": "Research exact lemma/register/DOOM3 forms and each predeclared claim within the per-item budget."
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/m%C4%83nu%C8%99%C4%83/json",
+          "paraphrase": "DEX09 confirms hand-covering clothing made from materials including wool; DOOM3 gives the same lemma and the mănuși paradigm."
+        },
+        {
+          "url": "https://www.decathlon.ro/toate-sporturile/ski-snowboard/manusi-ski",
+          "paraphrase": "The Romanian manufacturer explains that winter gloves protect hands and retain warmth during winter activities."
+        }
+      ],
+      "next_action": "Wait for the rest of the batch and the independent factual/quality web reviews; not accepted or installed yet.",
+      "verified_forms": [
+        "mănușă",
+        "mănușii",
+        "mănuși",
+        "mănușile",
+        "mănușilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          8700,
+          "mănuși",
+          2343
+        ],
+        "use": "Positive only; absence does not reject."
+      },
+      "checked_on": "2026-10-11",
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "mănușă",
+        "dex_definition_id": "886734",
+        "doom3_definition_id": "1291691",
+        "register": "Selected literal modern sense; other figurative/popular/regional senses are excluded.",
+        "request_spacing": "Serial dexonline requests separated by >=2.1 seconds; group boundaries were longer.",
+        "normative_homograph": null,
+        "excluded": "Only the exact lemma is selected; homograph indices and stress/editorial marks are metadata."
+      },
+      "research_elapsed_seconds": 112.0,
+      "verified_links": [
+        {
+          "label": "Haină",
+          "claim_to_verify": "is_a: obiect de îmbrăcăminte",
+          "node_id": "n_v29_clothing_everyday_haina",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Obiect de îmbrăcăminte purtat pentru protecție, căldură sau aspect.",
+          "verified_claim": "Mănușa este un obiect de îmbrăcăminte.",
+          "evidence_url": "https://dexonline.ro/definitie/m%C4%83nu%C8%99%C4%83/json"
+        },
+        {
+          "label": "Mână",
+          "claim_to_verify": "acoperă și protejează mâna",
+          "node_id": "n_v24_body_limbs_mana",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Concept cotidian din grupul «părți ale membrelor»: Mână.",
+          "verified_claim": "Mănușa acoperă și protejează mâna.",
+          "evidence_url": "https://dexonline.ro/definitie/m%C4%83nu%C8%99%C4%83/json"
+        },
+        {
+          "label": "Iarnă",
+          "claim_to_verify": "mănușile pentru frig protejează iarna",
+          "node_id": "n_v1_8_iarna",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Anotimpul rece din zona temperată, cu zile mai scurte și ninsori în numeroase regiuni.",
+          "verified_claim": "Mănușile pentru iarnă protejează mâinile de frig.",
+          "evidence_url": "https://www.decathlon.ro/toate-sporturile/ski-snowboard/manusi-ski"
+        },
+        {
+          "label": "Lână",
+          "claim_to_verify": "mănușile tricotate pot fi din lână; înlocuiește vechea co-listare Căciulă",
+          "node_id": "n_v1_11_lana",
+          "category": "viata_de_roman",
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Unele mănuși sunt confecționate din lână.",
+          "evidence_url": "https://dexonline.ro/definitie/m%C4%83nu%C8%99%C4%83/json"
+        }
+      ]
     },
     {
       "lemma": "Vrabie",
@@ -229,7 +317,7 @@
         "vrăbiile",
         "vrăbiilor"
       ],
-      "revision": 1,
+      "revision": 2,
       "label_ro": "Vrabie",
       "origin": "named_backlog_replanned",
       "form_status": "Unverified paradigm hypothesis. Fold-equivalent article spellings are represented by the lemma key; only distinct noncolliding forms may later be installed.",
@@ -238,9 +326,9 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess/graph vocabulary and meaningful sourced links; no new curated target/round claim.",
-      "state": "idea",
-      "decision": "idea: prescreen passed for the proposed forms; exact sense, DOOM3 morphology and every named link still need research.",
-      "research_ready": true,
+      "state": "researched",
+      "decision": "researched: Replacing the unverified wheat claim with the sourced beak link preserves exact house-sparrow scope; independent reviews remain pending.",
+      "research_ready": false,
       "proposed_forms": [
         "vrabie",
         "vrabia",
@@ -323,7 +411,9 @@
           "node_id": "n_v4sti_pasare",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Animal vertebrat cu pene, cioc și, de obicei, aripi."
+          "current_owner_description": "Animal vertebrat cu pene, cioc și, de obicei, aripi.",
+          "verified_claim": "Vrabia este o pasăre.",
+          "evidence_url": "https://dexonline.ro/definitie/vrabie/json"
         },
         {
           "label": "Insectă",
@@ -331,7 +421,9 @@
           "node_id": "n_v4sti_insecta",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Animal nevertebrat cu șase picioare și corp segmentat."
+          "current_owner_description": "Animal nevertebrat cu șase picioare și corp segmentat.",
+          "verified_claim": "Vrabia consumă și insecte, iar puii sunt hrăniți cu insecte.",
+          "evidence_url": "https://ornitodata2.sor.ro/specii/524/vrabie-de-casa-passer-domesticus"
         },
         {
           "label": "Copac",
@@ -339,7 +431,9 @@
           "node_id": "n_v4sti_copac",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Plantă lemnoasă înaltă, cu trunchi și coroană."
+          "current_owner_description": "Plantă lemnoasă înaltă, cu trunchi și coroană.",
+          "verified_claim": "Vrabia de casă își poate amplasa cuibul și în arbori.",
+          "evidence_url": "https://ornitodata2.sor.ro/specii/524/vrabie-de-casa-passer-domesticus"
         },
         {
           "label": "Cioc",
@@ -347,7 +441,9 @@
           "node_id": "n_v1_10_cioc",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Formațiune cornoasă a fălcilor păsărilor, folosită la apucarea hranei; aici, sensul anatomic."
+          "current_owner_description": "Formațiune cornoasă a fălcilor păsărilor, folosită la apucarea hranei; aici, sensul anatomic.",
+          "verified_claim": "Vrabia are cioc scurt și conic.",
+          "evidence_url": "https://dexonline.ro/definitie/vrabie/json"
         }
       ],
       "topology_hypothesis": {
@@ -383,8 +479,88 @@
         }
       ],
       "prior_hold_policy": "Exact rejected candidates are skipped. A rejected association remains excluded as that association; it does not reject every input of an existing endpoint. Recorded older reasons remain until addressed by this newly screened proposal; older proxy-retirement prerequisites are superseded by current CONTENT_LOOP step1, which permits graph upgrades.",
-      "sources": [],
-      "next_action": "Research exact lemma/register/DOOM3 forms and each predeclared claim within the per-item budget."
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/vrabie/json",
+          "paraphrase": "DEX09 scopes the bird to Passer domesticus and describes its beak; exact DOOM3 entry confirms the vrăbii noun paradigm."
+        },
+        {
+          "url": "https://ornitodata2.sor.ro/specii/524/vrabie-de-casa-passer-domesticus",
+          "paraphrase": "SOR identifies the same widespread Romanian species, insect feeding and occasional nesting in trees."
+        }
+      ],
+      "next_action": "Wait for the rest of the batch and the independent factual/quality web reviews; not accepted or installed yet.",
+      "verified_forms": [
+        "vrabie",
+        "vrabia",
+        "vrabiei",
+        "vrăbii",
+        "vrăbiile",
+        "vrăbiilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          41472,
+          "vrabie",
+          238
+        ],
+        "use": "Positive only; absence does not reject."
+      },
+      "checked_on": "2026-10-11",
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "vrabie",
+        "dex_definition_id": "827453",
+        "doom3_definition_id": "1264782",
+        "register": "Selected literal modern sense; other figurative/popular/regional senses are excluded.",
+        "request_spacing": "Serial dexonline requests separated by >=2.1 seconds; group boundaries were longer.",
+        "normative_homograph": null,
+        "excluded": "Only the exact lemma is selected; homograph indices and stress/editorial marks are metadata."
+      },
+      "research_elapsed_seconds": 96.7,
+      "verified_links": [
+        {
+          "label": "Pasăre",
+          "claim_to_verify": "is_a: vrabia de casă este pasăre",
+          "node_id": "n_v4sti_pasare",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Animal vertebrat cu pene, cioc și, de obicei, aripi.",
+          "verified_claim": "Vrabia este o pasăre.",
+          "evidence_url": "https://dexonline.ro/definitie/vrabie/json"
+        },
+        {
+          "label": "Insectă",
+          "claim_to_verify": "insectele fac parte din hrană",
+          "node_id": "n_v4sti_insecta",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Animal nevertebrat cu șase picioare și corp segmentat.",
+          "verified_claim": "Vrabia consumă și insecte, iar puii sunt hrăniți cu insecte.",
+          "evidence_url": "https://ornitodata2.sor.ro/specii/524/vrabie-de-casa-passer-domesticus"
+        },
+        {
+          "label": "Copac",
+          "claim_to_verify": "specia poate cuibări și în arbori",
+          "node_id": "n_v4sti_copac",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Plantă lemnoasă înaltă, cu trunchi și coroană.",
+          "verified_claim": "Vrabia de casă își poate amplasa cuibul și în arbori.",
+          "evidence_url": "https://ornitodata2.sor.ro/specii/524/vrabie-de-casa-passer-domesticus"
+        },
+        {
+          "label": "Cioc",
+          "claim_to_verify": "vrabia are cioc; înlocuiește vechea afirmație neverificată despre grâu",
+          "node_id": "n_v1_10_cioc",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Formațiune cornoasă a fălcilor păsărilor, folosită la apucarea hranei; aici, sensul anatomic.",
+          "verified_claim": "Vrabia are cioc scurt și conic.",
+          "evidence_url": "https://dexonline.ro/definitie/vrabie/json"
+        }
+      ]
     },
     {
       "lemma": "Foarfecă",
@@ -405,7 +581,7 @@
         "foarfecilor",
         "foarfecelui"
       ],
-      "revision": 1,
+      "revision": 2,
       "label_ro": "Foarfecă",
       "origin": "named_backlog_replanned",
       "form_status": "Unverified paradigm hypothesis. Fold-equivalent article spellings are represented by the lemma key; only distinct noncolliding forms may later be installed.",
@@ -414,22 +590,39 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess/graph vocabulary and meaningful sourced links; no new curated target/round claim.",
-      "state": "idea",
-      "decision": "idea: prescreen passed for the proposed forms; exact sense, DOOM3 morphology and every named link still need research.",
-      "research_ready": true,
+      "state": "researched",
+      "decision": "researched: Four directly functional/material links replace the old kit co-listing; only the exact feminine paradigm is retained, with other noun-variant forms excluded.",
+      "research_ready": false,
       "proposed_forms": [
         "foarfecă",
-        "foarfeci",
-        "foarfece",
-        "foarfecile",
-        "foarfecele",
         "foarfecii",
-        "foarfecelor",
-        "foarfecilor",
-        "foarfecelui"
+        "foarfeci",
+        "foarfecile",
+        "foarfecilor"
       ],
       "already_resolved_forms": [],
-      "held_forms": [],
+      "held_forms": [
+        {
+          "form": "foarfece",
+          "state": "held",
+          "decision": "held: Not part of the exact Foarfecă DOOM3 feminine paradigm; alternate Foarfece JSON has no exact-headword DOOM3 entry, so it is not installed."
+        },
+        {
+          "form": "foarfecele",
+          "state": "held",
+          "decision": "held: Not part of the exact Foarfecă DOOM3 feminine paradigm; alternate Foarfece JSON has no exact-headword DOOM3 entry, so it is not installed."
+        },
+        {
+          "form": "foarfecelui",
+          "state": "held",
+          "decision": "held: Not part of the exact Foarfecă DOOM3 feminine paradigm; alternate Foarfece JSON has no exact-headword DOOM3 entry, so it is not installed."
+        },
+        {
+          "form": "foarfecelor",
+          "state": "held",
+          "decision": "held: Not part of the exact Foarfecă DOOM3 feminine paradigm; alternate Foarfece JSON has no exact-headword DOOM3 entry, so it is not installed."
+        }
+      ],
       "identity_checks": {
         "forms": [
           {
@@ -464,7 +657,9 @@
             "cald_proxies": [],
             "deferred": false,
             "reviewed_unresolved": false,
-            "state": "proposed"
+            "state": "held",
+            "initial_prescreen_state": "proposed",
+            "decision": "held: Not part of the exact Foarfecă DOOM3 feminine paradigm; alternate Foarfece JSON has no exact-headword DOOM3 entry, so it is not installed."
           },
           {
             "form": "foarfecile",
@@ -482,7 +677,9 @@
             "cald_proxies": [],
             "deferred": false,
             "reviewed_unresolved": false,
-            "state": "proposed"
+            "state": "held",
+            "initial_prescreen_state": "proposed",
+            "decision": "held: Not part of the exact Foarfecă DOOM3 feminine paradigm; alternate Foarfece JSON has no exact-headword DOOM3 entry, so it is not installed."
           },
           {
             "form": "foarfecii",
@@ -500,7 +697,9 @@
             "cald_proxies": [],
             "deferred": false,
             "reviewed_unresolved": false,
-            "state": "proposed"
+            "state": "held",
+            "initial_prescreen_state": "proposed",
+            "decision": "held: Not part of the exact Foarfecă DOOM3 feminine paradigm; alternate Foarfece JSON has no exact-headword DOOM3 entry, so it is not installed."
           },
           {
             "form": "foarfecilor",
@@ -518,7 +717,9 @@
             "cald_proxies": [],
             "deferred": false,
             "reviewed_unresolved": false,
-            "state": "proposed"
+            "state": "held",
+            "initial_prescreen_state": "proposed",
+            "decision": "held: Not part of the exact Foarfecă DOOM3 feminine paradigm; alternate Foarfece JSON has no exact-headword DOOM3 entry, so it is not installed."
           }
         ]
       },
@@ -529,7 +730,9 @@
           "node_id": "n_v4sti_metal",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Material cu luciu, conductivitate și maleabilitate ridicate."
+          "current_owner_description": "Material cu luciu, conductivitate și maleabilitate ridicate.",
+          "verified_claim": "Foarfeca de croitorie are lame de oțel.",
+          "evidence_url": "https://www.pufo.ro/cumpara/foarfeca-profesionala-pufo-pentru-croitorie-24-cm-precizie-si-confort-4909989"
         },
         {
           "label": "Haină",
@@ -537,21 +740,27 @@
           "node_id": "n_v29_clothing_everyday_haina",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Obiect de îmbrăcăminte purtat pentru protecție, căldură sau aspect."
+          "current_owner_description": "Obiect de îmbrăcăminte purtat pentru protecție, căldură sau aspect.",
+          "verified_claim": "Foarfeca de croitorie este folosită la confecționarea hainelor.",
+          "evidence_url": "https://www.pufo.ro/cumpara/foarfeca-profesionala-pufo-pentru-croitorie-24-cm-precizie-si-confort-4909989"
         },
         {
           "label": "Ață",
           "claim_to_verify": "taie ață",
           "node_id": "n_v1_11_ata",
           "category": "viata_de_roman",
-          "status": "planned in this batch; not accepted"
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Foarfeca mică taie capetele firelor de ață.",
+          "evidence_url": "https://www.educatieonline.md/Files/Manuals/4/IV_Educatia%20tenhologica%20%28a.%202017%2C%20in%20limba%20romana%29.pdf"
         },
         {
           "label": "Pânză",
           "claim_to_verify": "taie pânză",
           "node_id": "n_v1_11_panza",
           "category": "viata_de_roman",
-          "status": "planned in this batch; not accepted"
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Foarfeca mare se folosește la croirea pânzei.",
+          "evidence_url": "https://www.educatieonline.md/Files/Manuals/4/IV_Educatia%20tenhologica%20%28a.%202017%2C%20in%20limba%20romana%29.pdf"
         }
       ],
       "topology_hypothesis": {
@@ -591,15 +800,118 @@
         }
       ],
       "prior_hold_policy": "Exact rejected candidates are skipped. A rejected association remains excluded as that association; it does not reject every input of an existing endpoint. Recorded older reasons remain until addressed by this newly screened proposal; older proxy-retirement prerequisites are superseded by current CONTENT_LOOP step1, which permits graph upgrades.",
-      "sources": [],
-      "next_action": "Research exact lemma/register/DOOM3 forms and each predeclared claim within the per-item budget."
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/foarfec%C4%83/json",
+          "paraphrase": "DEX09 defines the cutting instrument at the exact Foarfecă headword; DOOM3 confirms the feminine foarfeci paradigm."
+        },
+        {
+          "url": "https://www.pufo.ro/cumpara/foarfeca-profesionala-pufo-pentru-croitorie-24-cm-precizie-si-confort-4909989",
+          "paraphrase": "The Romanian brand specifies steel construction and precise textile cutting for sewing and clothing design."
+        },
+        {
+          "url": "https://www.educatieonline.md/Files/Manuals/4/IV_Educatia%20tenhologica%20%28a.%202017%2C%20in%20limba%20romana%29.pdf",
+          "paraphrase": "The Romanian-language primary-school manual distinguishes large scissors for cutting cloth from small scissors for trimming thread ends."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/foarfece/json",
+          "paraphrase": "The alternate noun refers back to Foarfecă in DEX09, but no exact Foarfece DOOM3 result was returned; its forms stay excluded."
+        }
+      ],
+      "next_action": "Wait for the rest of the batch and the independent factual/quality web reviews; not accepted or installed yet.",
+      "verified_forms": [
+        "foarfecă",
+        "foarfecii",
+        "foarfeci",
+        "foarfecile",
+        "foarfecilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          24773,
+          "foarfecă",
+          543
+        ],
+        "use": "Positive only; absence does not reject."
+      },
+      "checked_on": "2026-10-11",
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "foarfecă",
+        "dex_definition_id": "873056",
+        "doom3_definition_id": "1302047",
+        "register": "Selected literal modern sense; other figurative/popular/regional senses are excluded.",
+        "request_spacing": "Serial dexonline requests separated by >=2.1 seconds; group boundaries were longer.",
+        "normative_homograph": null,
+        "excluded": "Only the exact lemma is selected; homograph indices and stress/editorial marks are metadata."
+      },
+      "research_elapsed_seconds": 193.6,
+      "verified_links": [
+        {
+          "label": "Metal",
+          "claim_to_verify": "lamele foarfecii sunt metalice",
+          "node_id": "n_v4sti_metal",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Material cu luciu, conductivitate și maleabilitate ridicate.",
+          "verified_claim": "Foarfeca de croitorie are lame de oțel.",
+          "evidence_url": "https://www.pufo.ro/cumpara/foarfeca-profesionala-pufo-pentru-croitorie-24-cm-precizie-si-confort-4909989"
+        },
+        {
+          "label": "Haină",
+          "claim_to_verify": "foarfeca de croitorie taie haine/țesătura lor",
+          "node_id": "n_v29_clothing_everyday_haina",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Obiect de îmbrăcăminte purtat pentru protecție, căldură sau aspect.",
+          "verified_claim": "Foarfeca de croitorie este folosită la confecționarea hainelor.",
+          "evidence_url": "https://www.pufo.ro/cumpara/foarfeca-profesionala-pufo-pentru-croitorie-24-cm-precizie-si-confort-4909989"
+        },
+        {
+          "label": "Ață",
+          "claim_to_verify": "taie ață",
+          "node_id": "n_v1_11_ata",
+          "category": "viata_de_roman",
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Foarfeca mică taie capetele firelor de ață.",
+          "evidence_url": "https://www.educatieonline.md/Files/Manuals/4/IV_Educatia%20tenhologica%20%28a.%202017%2C%20in%20limba%20romana%29.pdf"
+        },
+        {
+          "label": "Pânză",
+          "claim_to_verify": "taie pânză",
+          "node_id": "n_v1_11_panza",
+          "category": "viata_de_roman",
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Foarfeca mare se folosește la croirea pânzei.",
+          "evidence_url": "https://www.educatieonline.md/Files/Manuals/4/IV_Educatia%20tenhologica%20%28a.%202017%2C%20in%20limba%20romana%29.pdf"
+        }
+      ],
+      "excluded_forms": [
+        {
+          "form": "foarfece",
+          "reason": "Not part of the exact Foarfecă DOOM3 feminine paradigm; alternate Foarfece JSON has no exact-headword DOOM3 entry, so it is not installed."
+        },
+        {
+          "form": "foarfecele",
+          "reason": "Not part of the exact Foarfecă DOOM3 feminine paradigm; alternate Foarfece JSON has no exact-headword DOOM3 entry, so it is not installed."
+        },
+        {
+          "form": "foarfecelui",
+          "reason": "Not part of the exact Foarfecă DOOM3 feminine paradigm; alternate Foarfece JSON has no exact-headword DOOM3 entry, so it is not installed."
+        },
+        {
+          "form": "foarfecelor",
+          "reason": "Not part of the exact Foarfecă DOOM3 feminine paradigm; alternate Foarfece JSON has no exact-headword DOOM3 entry, so it is not installed."
+        }
+      ]
     },
     {
       "lemma": "Lână",
       "kind": "new_shared_concept",
       "category_hypothesis": "viata_de_roman",
       "sense": "Fibră textilă animală, mai ales de la oaie.",
-      "paradigm_scope": "Exact noun sense and DOOM3 paradigm remain hypotheses until step2.",
+      "paradigm_scope": "DOOM3 quantities plural lâni and sorts plural lânuri, with their full distinct-fold articulated/genitive forms.",
       "id": "v111-lana",
       "node_id": "n_v1_11_lana",
       "planned_forms": [
@@ -607,9 +919,12 @@
         "lânii",
         "lânuri",
         "lânurile",
-        "lânurilor"
+        "lânurilor",
+        "lâni",
+        "lânile",
+        "lânilor"
       ],
-      "revision": 1,
+      "revision": 2,
       "label_ro": "Lână",
       "origin": "everyday_home_nature_discovery",
       "form_status": "Unverified paradigm hypothesis. Fold-equivalent article spellings are represented by the lemma key; only distinct noncolliding forms may later be installed.",
@@ -618,12 +933,15 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess/graph vocabulary and meaningful sourced links; no new curated target/round claim.",
-      "state": "idea",
-      "decision": "idea: prescreen passed for the proposed forms; exact sense, DOOM3 morphology and every named link still need research.",
-      "research_ready": true,
+      "state": "researched",
+      "decision": "researched: All five predeclared uses/source links have direct evidence; both DOOM3 plural paradigms are retained after local extra-form prescreen. Independent reviews remain pending.",
+      "research_ready": false,
       "proposed_forms": [
         "lână",
         "lânii",
+        "lâni",
+        "lânile",
+        "lânilor",
         "lânuri",
         "lânurile",
         "lânurilor"
@@ -676,6 +994,39 @@
             "deferred": false,
             "reviewed_unresolved": false,
             "state": "proposed"
+          },
+          {
+            "form": "lâni",
+            "key": "lani",
+            "owners": [],
+            "cald_proxies": [],
+            "deferred": false,
+            "reviewed_unresolved": false,
+            "state": "proposed",
+            "discovered_in": "exact DOOM3 morphology; screened before subsequent web calls",
+            "prior_records": []
+          },
+          {
+            "form": "lânile",
+            "key": "lanile",
+            "owners": [],
+            "cald_proxies": [],
+            "deferred": false,
+            "reviewed_unresolved": false,
+            "state": "proposed",
+            "discovered_in": "exact DOOM3 morphology; screened before subsequent web calls",
+            "prior_records": []
+          },
+          {
+            "form": "lânilor",
+            "key": "lanilor",
+            "owners": [],
+            "cald_proxies": [],
+            "deferred": false,
+            "reviewed_unresolved": false,
+            "state": "proposed",
+            "discovered_in": "exact DOOM3 morphology; screened before subsequent web calls",
+            "prior_records": []
           }
         ]
       },
@@ -686,7 +1037,9 @@
           "node_id": "n_v30_animal_farm_oaie",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Animal domestic crescut în turme pentru lână, lapte și hrană."
+          "current_owner_description": "Animal domestic crescut în turme pentru lână, lapte și hrană.",
+          "verified_claim": "Lâna se obține mai ales de la oi.",
+          "evidence_url": "https://dexonline.ro/definitie/l%C3%A2n%C4%83/json"
         },
         {
           "label": "Pătură",
@@ -694,7 +1047,9 @@
           "node_id": "n_v24_home_textiles_patura",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Concept cotidian din grupul «textile din casă»: Pătură."
+          "current_owner_description": "Concept cotidian din grupul «textile din casă»: Pătură.",
+          "verified_claim": "Din lână se confecționează pături.",
+          "evidence_url": "https://www.ikea.com/ro/ro/cat/paturi-si-cuverturi-20528/f/paturi-lana-f-materials--48361/"
         },
         {
           "label": "Fular",
@@ -702,21 +1057,27 @@
           "node_id": "n_v1_9_fular",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Fâșie textilă purtată în jurul gâtului, adesea pentru protecție împotriva frigului."
+          "current_owner_description": "Fâșie textilă purtată în jurul gâtului, adesea pentru protecție împotriva frigului.",
+          "verified_claim": "Unele fulare sunt confecționate din lână.",
+          "evidence_url": "https://www.decathlon.ro/p/mp/nadura/fular-circular-merino/_/R-p-37f9ba06-8faf-4515-95ce-96c165f8de18"
         },
         {
           "label": "Pulover",
           "claim_to_verify": "material folosit la pulovere",
           "node_id": "n_v1_11_pulover",
           "category": "viata_de_roman",
-          "status": "planned in this batch; not accepted"
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Unele pulovere sunt confecționate din lână.",
+          "evidence_url": "https://www.decathlon.ro/c/htc/care-sunt-avantajele-lanii-merinos_5ae6053e-f08f-4b58-94d9-1efc963b2ffd"
         },
         {
           "label": "Mănușă",
           "claim_to_verify": "material folosit la mănuși tricotate",
           "node_id": "n_v1_11_manusa",
           "category": "viata_de_roman",
-          "status": "planned in this batch; not accepted"
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Unele mănuși sunt confecționate din lână.",
+          "evidence_url": "https://dexonline.ro/definitie/m%C4%83nu%C8%99%C4%83/json"
         }
       ],
       "topology_hypothesis": {
@@ -727,23 +1088,133 @@
       },
       "prior_records": [],
       "prior_hold_policy": "Exact rejected candidates are skipped. A rejected association remains excluded as that association; it does not reject every input of an existing endpoint. Recorded older reasons remain until addressed by this newly screened proposal; older proxy-retirement prerequisites are superseded by current CONTENT_LOOP step1, which permits graph upgrades.",
-      "sources": [],
-      "next_action": "Research exact lemma/register/DOOM3 forms and each predeclared claim within the per-item budget."
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/l%C3%A2n%C4%83/json",
+          "paraphrase": "DEX09 distinguishes animal wool, textile fibre and wool sorts; DOOM3 explicitly gives quantity plural lâni and sort plural lânuri."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/L%C3%A2n%C4%83",
+          "paraphrase": "The Romanian article identifies sheep as the usual wool source and its use in warm clothing."
+        },
+        {
+          "url": "https://www.ikea.com/ro/ro/cat/paturi-si-cuverturi-20528/f/paturi-lana-f-materials--48361/",
+          "paraphrase": "IKEA Romania describes wool blankets and their household use for warmth."
+        },
+        {
+          "url": "https://www.decathlon.ro/p/mp/nadura/fular-circular-merino/_/R-p-37f9ba06-8faf-4515-95ce-96c165f8de18",
+          "paraphrase": "The named Nadura product specifies a wool-merino scarf for winter protection."
+        },
+        {
+          "url": "https://www.decathlon.ro/c/htc/care-sunt-avantajele-lanii-merinos_5ae6053e-f08f-4b58-94d9-1efc963b2ffd",
+          "paraphrase": "The Romanian clothing-maker guide explicitly uses a wool pullover as a warm garment example."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/m%C4%83nu%C8%99%C4%83/json",
+          "paraphrase": "The exact glove definition explicitly includes wool among its clothing materials; this is link evidence, not the Lână normative entry."
+        }
+      ],
+      "next_action": "Wait for the rest of the batch and the independent factual/quality web reviews; not accepted or installed yet.",
+      "verified_forms": [
+        "lână",
+        "lânii",
+        "lâni",
+        "lânile",
+        "lânilor",
+        "lânuri",
+        "lânurile",
+        "lânurilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          17606,
+          "lână",
+          896
+        ],
+        "use": "Positive only; absence does not reject."
+      },
+      "checked_on": "2026-10-11",
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "lână",
+        "dex_definition_id": "863276",
+        "doom3_definition_id": "1325495",
+        "register": "Selected literal modern sense; other figurative/popular/regional senses are excluded.",
+        "request_spacing": "Serial dexonline requests separated by >=2.1 seconds; group boundaries were longer.",
+        "normative_homograph": null,
+        "excluded": "Only the exact lemma is selected; homograph indices and stress/editorial marks are metadata."
+      },
+      "research_elapsed_seconds": 191.3,
+      "verified_links": [
+        {
+          "label": "Oaie",
+          "claim_to_verify": "fibra se obține de la oaie",
+          "node_id": "n_v30_animal_farm_oaie",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Animal domestic crescut în turme pentru lână, lapte și hrană.",
+          "verified_claim": "Lâna se obține mai ales de la oi.",
+          "evidence_url": "https://dexonline.ro/definitie/l%C3%A2n%C4%83/json"
+        },
+        {
+          "label": "Pătură",
+          "claim_to_verify": "material folosit la pături",
+          "node_id": "n_v24_home_textiles_patura",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Concept cotidian din grupul «textile din casă»: Pătură.",
+          "verified_claim": "Din lână se confecționează pături.",
+          "evidence_url": "https://www.ikea.com/ro/ro/cat/paturi-si-cuverturi-20528/f/paturi-lana-f-materials--48361/"
+        },
+        {
+          "label": "Fular",
+          "claim_to_verify": "material folosit la fulare",
+          "node_id": "n_v1_9_fular",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Fâșie textilă purtată în jurul gâtului, adesea pentru protecție împotriva frigului.",
+          "verified_claim": "Unele fulare sunt confecționate din lână.",
+          "evidence_url": "https://www.decathlon.ro/p/mp/nadura/fular-circular-merino/_/R-p-37f9ba06-8faf-4515-95ce-96c165f8de18"
+        },
+        {
+          "label": "Pulover",
+          "claim_to_verify": "material folosit la pulovere",
+          "node_id": "n_v1_11_pulover",
+          "category": "viata_de_roman",
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Unele pulovere sunt confecționate din lână.",
+          "evidence_url": "https://www.decathlon.ro/c/htc/care-sunt-avantajele-lanii-merinos_5ae6053e-f08f-4b58-94d9-1efc963b2ffd"
+        },
+        {
+          "label": "Mănușă",
+          "claim_to_verify": "material folosit la mănuși tricotate",
+          "node_id": "n_v1_11_manusa",
+          "category": "viata_de_roman",
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Unele mănuși sunt confecționate din lână.",
+          "evidence_url": "https://dexonline.ro/definitie/m%C4%83nu%C8%99%C4%83/json"
+        }
+      ],
+      "form_revision_reason": "extra-forms-lana.json: all3 unowned, unblocked and without proxies before subsequent web calls."
     },
     {
       "lemma": "Bumbac",
       "kind": "new_shared_concept",
       "category_hypothesis": "viata_de_roman",
       "sense": "Fibra/materialul textil; nu planta numărată individual.",
-      "paradigm_scope": "Material sense: singular forms only; plant plurals are excluded unless shown substitutable for this sense.",
+      "paradigm_scope": "DOOM3 textile homograph1 is neuter: singular and sorts plural bumbacuri; plant homograph2 is excluded.",
       "id": "v111-bumbac",
       "node_id": "n_v1_11_bumbac",
       "planned_forms": [
         "bumbac",
         "bumbacul",
-        "bumbacului"
+        "bumbacului",
+        "bumbacuri",
+        "bumbacurile",
+        "bumbacurilor"
       ],
-      "revision": 1,
+      "revision": 2,
       "label_ro": "Bumbac",
       "origin": "everyday_home_nature_discovery",
       "form_status": "Unverified paradigm hypothesis. Fold-equivalent article spellings are represented by the lemma key; only distinct noncolliding forms may later be installed.",
@@ -752,13 +1223,16 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess/graph vocabulary and meaningful sourced links; no new curated target/round claim.",
-      "state": "idea",
-      "decision": "idea: prescreen passed for the proposed forms; exact sense, DOOM3 morphology and every named link still need research.",
-      "research_ready": true,
+      "state": "researched",
+      "decision": "researched: Homograph indices are metadata, not part of the lemma; textile sorts plural is retained after prescreen, while the plant homograph is excluded.",
+      "research_ready": false,
       "proposed_forms": [
         "bumbac",
         "bumbacul",
-        "bumbacului"
+        "bumbacului",
+        "bumbacuri",
+        "bumbacurile",
+        "bumbacurilor"
       ],
       "already_resolved_forms": [],
       "held_forms": [],
@@ -790,6 +1264,39 @@
             "deferred": false,
             "reviewed_unresolved": false,
             "state": "proposed"
+          },
+          {
+            "form": "bumbacuri",
+            "key": "bumbacuri",
+            "owners": [],
+            "cald_proxies": [],
+            "deferred": false,
+            "reviewed_unresolved": false,
+            "state": "proposed",
+            "discovered_in": "exact DOOM3 morphology; screened before subsequent web calls",
+            "prior_records": []
+          },
+          {
+            "form": "bumbacurile",
+            "key": "bumbacurile",
+            "owners": [],
+            "cald_proxies": [],
+            "deferred": false,
+            "reviewed_unresolved": false,
+            "state": "proposed",
+            "discovered_in": "exact DOOM3 morphology; screened before subsequent web calls",
+            "prior_records": []
+          },
+          {
+            "form": "bumbacurilor",
+            "key": "bumbacurilor",
+            "owners": [],
+            "cald_proxies": [],
+            "deferred": false,
+            "reviewed_unresolved": false,
+            "state": "proposed",
+            "discovered_in": "exact DOOM3 morphology; screened before subsequent web calls",
+            "prior_records": []
           }
         ]
       },
@@ -800,7 +1307,9 @@
           "node_id": "n_v29_clothing_everyday_haina",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Obiect de îmbrăcăminte purtat pentru protecție, căldură sau aspect."
+          "current_owner_description": "Obiect de îmbrăcăminte purtat pentru protecție, căldură sau aspect.",
+          "verified_claim": "Din bumbac se confecționează haine.",
+          "evidence_url": "https://www.reserved.com/ro/ro/femei/camasi-bluze/camasi"
         },
         {
           "label": "Cămașă",
@@ -808,7 +1317,9 @@
           "node_id": "n_v29_clothing_everyday_camasa",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Haină pentru partea de sus a corpului, de obicei cu guler și nasturi."
+          "current_owner_description": "Haină pentru partea de sus a corpului, de obicei cu guler și nasturi.",
+          "verified_claim": "Unele cămăși sunt confecționate din bumbac.",
+          "evidence_url": "https://www.reserved.com/ro/ro/femei/camasi-bluze/camasi"
         },
         {
           "label": "Prosop",
@@ -816,14 +1327,18 @@
           "node_id": "n_v31_hygiene_bath_prosop",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Obiect textil absorbant folosit pentru a șterge și usca mâinile, fața sau corpul."
+          "current_owner_description": "Obiect textil absorbant folosit pentru a șterge și usca mâinile, fața sau corpul.",
+          "verified_claim": "Unele prosoape sunt confecționate din bumbac.",
+          "evidence_url": "https://www.ikea.com/ro/ro/p/gulvial-prosop-baie-alb-00579661/"
         },
         {
           "label": "Pânză",
           "claim_to_verify": "pânză obținută din bumbac",
           "node_id": "n_v1_11_panza",
           "category": "viata_de_roman",
-          "status": "planned in this batch; not accepted"
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Din bumbac se obține pânză.",
+          "evidence_url": "https://mec.gov.md/sites/default/files/26_educatietehnologica_cl.8_final_compressed.pdf"
         }
       ],
       "topology_hypothesis": {
@@ -834,15 +1349,107 @@
       },
       "prior_records": [],
       "prior_hold_policy": "Exact rejected candidates are skipped. A rejected association remains excluded as that association; it does not reject every input of an existing endpoint. Recorded older reasons remain until addressed by this newly screened proposal; older proxy-retirement prerequisites are superseded by current CONTENT_LOOP step1, which permits graph upgrades.",
-      "sources": [],
-      "next_action": "Research exact lemma/register/DOOM3 forms and each predeclared claim within the per-item budget."
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/bumbac/json",
+          "paraphrase": "DEX09 separates cotton fibre/thread/cloth from the plant; exact DOOM3 homograph1 is the neuter textile sense and explicitly permits sorts plural bumbacuri."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/bumbac",
+          "paraphrase": "The second dictionary separates the plant noun from textile fibre, thread and cotton cloth; it may share DEX provenance."
+        },
+        {
+          "url": "https://www.reserved.com/ro/ro/femei/camasi-bluze/camasi",
+          "paraphrase": "The Romanian clothing-maker page identifies cotton shirts and cotton among their natural fabrics."
+        },
+        {
+          "url": "https://www.ikea.com/ro/ro/p/gulvial-prosop-baie-alb-00579661/",
+          "paraphrase": "The manufacturer specifies the towel as 100% cotton."
+        },
+        {
+          "url": "https://mec.gov.md/sites/default/files/26_educatietehnologica_cl.8_final_compressed.pdf",
+          "paraphrase": "The Romanian-language education text specifies cotton or linen cloth as sewing/crochet material."
+        }
+      ],
+      "next_action": "Wait for the rest of the batch and the independent factual/quality web reviews; not accepted or installed yet.",
+      "verified_forms": [
+        "bumbac",
+        "bumbacul",
+        "bumbacului",
+        "bumbacuri",
+        "bumbacurile",
+        "bumbacurilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          10386,
+          "bumbac",
+          1840
+        ],
+        "use": "Positive only; absence does not reject."
+      },
+      "checked_on": "2026-10-11",
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "bumbac",
+        "dex_definition_id": "838716",
+        "doom3_definition_id": "1319987",
+        "register": "Selected literal modern sense; other figurative/popular/regional senses are excluded.",
+        "request_spacing": "Serial dexonline requests separated by >=2.1 seconds; group boundaries were longer.",
+        "normative_homograph": 1,
+        "excluded": "Only the exact lemma is selected; homograph indices and stress/editorial marks are metadata."
+      },
+      "research_elapsed_seconds": 181.9,
+      "verified_links": [
+        {
+          "label": "Haină",
+          "claim_to_verify": "haine confecționate din bumbac",
+          "node_id": "n_v29_clothing_everyday_haina",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Obiect de îmbrăcăminte purtat pentru protecție, căldură sau aspect.",
+          "verified_claim": "Din bumbac se confecționează haine.",
+          "evidence_url": "https://www.reserved.com/ro/ro/femei/camasi-bluze/camasi"
+        },
+        {
+          "label": "Cămașă",
+          "claim_to_verify": "cămăși din bumbac",
+          "node_id": "n_v29_clothing_everyday_camasa",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Haină pentru partea de sus a corpului, de obicei cu guler și nasturi.",
+          "verified_claim": "Unele cămăși sunt confecționate din bumbac.",
+          "evidence_url": "https://www.reserved.com/ro/ro/femei/camasi-bluze/camasi"
+        },
+        {
+          "label": "Prosop",
+          "claim_to_verify": "prosoape din bumbac",
+          "node_id": "n_v31_hygiene_bath_prosop",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Obiect textil absorbant folosit pentru a șterge și usca mâinile, fața sau corpul.",
+          "verified_claim": "Unele prosoape sunt confecționate din bumbac.",
+          "evidence_url": "https://www.ikea.com/ro/ro/p/gulvial-prosop-baie-alb-00579661/"
+        },
+        {
+          "label": "Pânză",
+          "claim_to_verify": "pânză obținută din bumbac",
+          "node_id": "n_v1_11_panza",
+          "category": "viata_de_roman",
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Din bumbac se obține pânză.",
+          "evidence_url": "https://mec.gov.md/sites/default/files/26_educatietehnologica_cl.8_final_compressed.pdf"
+        }
+      ],
+      "form_revision_reason": "extra-forms-bumbac-matase.json: three sorts-plural forms unowned/unblocked before subsequent web calls."
     },
     {
       "lemma": "Mătase",
       "kind": "new_shared_concept",
       "category_hypothesis": "viata_de_roman",
       "sense": "Fibra și țesătura de mătase, fără sensuri figurate.",
-      "paradigm_scope": "Exact noun sense and DOOM3 paradigm remain hypotheses until step2.",
+      "paradigm_scope": "Exact DOOM3 includes unarticulated genitive mătăsi and sorts plural mătăsuri; item remains held for link evidence.",
       "id": "v111-matase",
       "node_id": "n_v1_11_matase",
       "planned_forms": [
@@ -851,9 +1458,10 @@
         "mătăsii",
         "mătăsuri",
         "mătăsurile",
-        "mătăsurilor"
+        "mătăsurilor",
+        "mătăsi"
       ],
-      "revision": 1,
+      "revision": 2,
       "label_ro": "Mătase",
       "origin": "everyday_home_nature_discovery",
       "form_status": "Unverified paradigm hypothesis. Fold-equivalent article spellings are represented by the lemma key; only distinct noncolliding forms may later be installed.",
@@ -862,12 +1470,13 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess/graph vocabulary and meaningful sourced links; no new curated target/round claim.",
-      "state": "idea",
-      "decision": "idea: prescreen passed for the proposed forms; exact sense, DOOM3 morphology and every named link still need research.",
-      "research_ready": true,
+      "state": "held",
+      "decision": "held: Exact morphology and textile sense are supported, but all four predeclared Fular/Rochie/Cămașă/Pânză claims were not directly qualified within the item budget. Do not infer the planned Pânză boundary or substitute a new target to fill the floor.",
+      "research_ready": false,
       "proposed_forms": [
         "mătase",
         "mătasea",
+        "mătăsi",
         "mătăsii",
         "mătăsuri",
         "mătăsurile",
@@ -930,6 +1539,17 @@
             "deferred": false,
             "reviewed_unresolved": false,
             "state": "proposed"
+          },
+          {
+            "form": "mătăsi",
+            "key": "matasi",
+            "owners": [],
+            "cald_proxies": [],
+            "deferred": false,
+            "reviewed_unresolved": false,
+            "state": "proposed",
+            "discovered_in": "exact DOOM3 morphology; screened before subsequent web calls",
+            "prior_records": []
           }
         ]
       },
@@ -974,8 +1594,53 @@
       },
       "prior_records": [],
       "prior_hold_policy": "Exact rejected candidates are skipped. A rejected association remains excluded as that association; it does not reject every input of an existing endpoint. Recorded older reasons remain until addressed by this newly screened proposal; older proxy-retirement prerequisites are superseded by current CONTENT_LOOP step1, which permits graph upgrades.",
-      "sources": [],
-      "next_action": "Research exact lemma/register/DOOM3 forms and each predeclared claim within the per-item budget."
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/m%C4%83tase/json",
+          "paraphrase": "DEX09 distinguishes silk fibre/cloth and cloth sorts; exact DOOM3 gives unarticulated genitive mătăsi, articulated mătăsii and sorts plural mătăsuri."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/m%C4%83tase",
+          "paraphrase": "The second lexical site describes textile silk and silk cloth; it may derive its lexical content from DEX."
+        },
+        {
+          "url": "https://www2.hm.com/ro_ro/ladies/accessories/scarves.html?page=3",
+          "paraphrase": "The Romanian manufacturer lists current silk scarves, supporting contemporary recognition without establishing every named target link."
+        }
+      ],
+      "next_action": "Retain this incomplete-link hold; no installation.",
+      "verified_forms": [
+        "mătase",
+        "mătasea",
+        "mătăsi",
+        "mătăsii",
+        "mătăsuri",
+        "mătăsurile",
+        "mătăsurilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          8645,
+          "mătase",
+          2359
+        ],
+        "use": "Positive only; absence does not reject."
+      },
+      "checked_on": "2026-10-11",
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "mătase",
+        "dex_definition_id": "887209",
+        "doom3_definition_id": "1292221",
+        "register": "Selected literal modern sense; other figurative/popular/regional senses are excluded.",
+        "request_spacing": "Serial dexonline requests separated by >=2.1 seconds; group boundaries were longer.",
+        "normative_homograph": null,
+        "excluded": "Only the exact lemma is selected; homograph indices and stress/editorial marks are metadata."
+      },
+      "research_elapsed_seconds": 254.7,
+      "verified_links": [],
+      "form_revision_reason": "extra-forms-bumbac-matase.json: unarticulated genitive mătăsi unowned/unblocked before subsequent web calls."
     },
     {
       "lemma": "Pulover",
@@ -993,7 +1658,7 @@
         "puloverele",
         "puloverelor"
       ],
-      "revision": 1,
+      "revision": 2,
       "label_ro": "Pulover",
       "origin": "everyday_home_nature_discovery",
       "form_status": "Unverified paradigm hypothesis. Fold-equivalent article spellings are represented by the lemma key; only distinct noncolliding forms may later be installed.",
@@ -1002,9 +1667,9 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess/graph vocabulary and meaningful sourced links; no new curated target/round claim.",
-      "state": "idea",
-      "decision": "idea: prescreen passed for the proposed forms; exact sense, DOOM3 morphology and every named link still need research.",
-      "research_ready": true,
+      "state": "researched",
+      "decision": "researched: All four predeclared garment/season/material claims have direct sources; phonetic pulovăr is not added as an unverified written alias.",
+      "research_ready": false,
       "proposed_forms": [
         "pulover",
         "puloverul",
@@ -1087,7 +1752,9 @@
           "node_id": "n_v29_clothing_everyday_haina",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Obiect de îmbrăcăminte purtat pentru protecție, căldură sau aspect."
+          "current_owner_description": "Obiect de îmbrăcăminte purtat pentru protecție, căldură sau aspect.",
+          "verified_claim": "Puloverul este un obiect de îmbrăcăminte tricotat.",
+          "evidence_url": "https://dexonline.ro/definitie/pulover/json"
         },
         {
           "label": "Iarnă",
@@ -1095,21 +1762,27 @@
           "node_id": "n_v1_8_iarna",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Anotimpul rece din zona temperată, cu zile mai scurte și ninsori în numeroase regiuni."
+          "current_owner_description": "Anotimpul rece din zona temperată, cu zile mai scurte și ninsori în numeroase regiuni.",
+          "verified_claim": "Puloverele călduroase sunt purtate iarna.",
+          "evidence_url": "https://www.decathlon.ro/c/htc/care-sunt-avantajele-lanii-merinos_5ae6053e-f08f-4b58-94d9-1efc963b2ffd"
         },
         {
           "label": "Lână",
           "claim_to_verify": "pulovere din lână",
           "node_id": "n_v1_11_lana",
           "category": "viata_de_roman",
-          "status": "planned in this batch; not accepted"
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Unele pulovere sunt tricotate din lână.",
+          "evidence_url": "https://www.decathlon.ro/c/htc/care-sunt-avantajele-lanii-merinos_5ae6053e-f08f-4b58-94d9-1efc963b2ffd"
         },
         {
           "label": "Bumbac",
           "claim_to_verify": "pulovere din bumbac",
           "node_id": "n_v1_11_bumbac",
           "category": "viata_de_roman",
-          "status": "planned in this batch; not accepted"
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Unele pulovere sunt tricotate din bumbac.",
+          "evidence_url": "https://www2.hm.com/ro_ro/productpage.1223221006.html"
         }
       ],
       "topology_hypothesis": {
@@ -1120,8 +1793,90 @@
       },
       "prior_records": [],
       "prior_hold_policy": "Exact rejected candidates are skipped. A rejected association remains excluded as that association; it does not reject every input of an existing endpoint. Recorded older reasons remain until addressed by this newly screened proposal; older proxy-retirement prerequisites are superseded by current CONTENT_LOOP step1, which permits graph upgrades.",
-      "sources": [],
-      "next_action": "Research exact lemma/register/DOOM3 forms and each predeclared claim within the per-item budget."
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/pulover/json",
+          "paraphrase": "DEX09 defines knitted upper-body clothing; DOOM3 confirms written pulover and plural pulovere, distinguishing pronunciation from an alternate spelling."
+        },
+        {
+          "url": "https://www2.hm.com/ro_ro/productpage.1223221006.html",
+          "paraphrase": "The Romanian ARKET/H&M specification describes a knitted cotton/linen pullover and gives 48% cotton composition."
+        },
+        {
+          "url": "https://www.decathlon.ro/c/htc/care-sunt-avantajele-lanii-merinos_5ae6053e-f08f-4b58-94d9-1efc963b2ffd",
+          "paraphrase": "The Romanian guide explicitly associates wool pullovers with protection from cold and winter wear."
+        }
+      ],
+      "next_action": "Wait for the rest of the batch and the independent factual/quality web reviews; not accepted or installed yet.",
+      "verified_forms": [
+        "pulover",
+        "puloverul",
+        "puloverului",
+        "pulovere",
+        "puloverele",
+        "puloverelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          11890,
+          "pulover",
+          1533
+        ],
+        "use": "Positive only; absence does not reject."
+      },
+      "checked_on": "2026-10-11",
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "pulover",
+        "dex_definition_id": "880617",
+        "doom3_definition_id": "1259105",
+        "register": "Selected literal modern sense; other figurative/popular/regional senses are excluded.",
+        "request_spacing": "Serial dexonline requests separated by >=2.1 seconds; group boundaries were longer.",
+        "normative_homograph": null,
+        "excluded": "Only the exact lemma is selected; homograph indices and stress/editorial marks are metadata."
+      },
+      "research_elapsed_seconds": 177.0,
+      "verified_links": [
+        {
+          "label": "Haină",
+          "claim_to_verify": "is_a: piesă de îmbrăcăminte",
+          "node_id": "n_v29_clothing_everyday_haina",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Obiect de îmbrăcăminte purtat pentru protecție, căldură sau aspect.",
+          "verified_claim": "Puloverul este un obiect de îmbrăcăminte tricotat.",
+          "evidence_url": "https://dexonline.ro/definitie/pulover/json"
+        },
+        {
+          "label": "Iarnă",
+          "claim_to_verify": "haină călduroasă purtată iarna",
+          "node_id": "n_v1_8_iarna",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Anotimpul rece din zona temperată, cu zile mai scurte și ninsori în numeroase regiuni.",
+          "verified_claim": "Puloverele călduroase sunt purtate iarna.",
+          "evidence_url": "https://www.decathlon.ro/c/htc/care-sunt-avantajele-lanii-merinos_5ae6053e-f08f-4b58-94d9-1efc963b2ffd"
+        },
+        {
+          "label": "Lână",
+          "claim_to_verify": "pulovere din lână",
+          "node_id": "n_v1_11_lana",
+          "category": "viata_de_roman",
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Unele pulovere sunt tricotate din lână.",
+          "evidence_url": "https://www.decathlon.ro/c/htc/care-sunt-avantajele-lanii-merinos_5ae6053e-f08f-4b58-94d9-1efc963b2ffd"
+        },
+        {
+          "label": "Bumbac",
+          "claim_to_verify": "pulovere din bumbac",
+          "node_id": "n_v1_11_bumbac",
+          "category": "viata_de_roman",
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Unele pulovere sunt tricotate din bumbac.",
+          "evidence_url": "https://www2.hm.com/ro_ro/productpage.1223221006.html"
+        }
+      ]
     },
     {
       "lemma": "Cuvertură",
@@ -1138,7 +1893,7 @@
         "cuverturile",
         "cuverturilor"
       ],
-      "revision": 1,
+      "revision": 2,
       "label_ro": "Cuvertură",
       "origin": "everyday_home_nature_discovery",
       "form_status": "Unverified paradigm hypothesis. Fold-equivalent article spellings are represented by the lemma key; only distinct noncolliding forms may later be installed.",
@@ -1147,9 +1902,9 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess/graph vocabulary and meaningful sourced links; no new curated target/round claim.",
-      "state": "idea",
-      "decision": "idea: prescreen passed for the proposed forms; exact sense, DOOM3 morphology and every named link still need research.",
-      "research_ready": true,
+      "state": "researched",
+      "decision": "researched: Four predeclared bed/blanket/material links verified; the fifth sheet claim is dropped rather than inferred from a customer review.",
+      "research_ready": false,
       "proposed_forms": [
         "cuvertură",
         "cuverturii",
@@ -1215,7 +1970,9 @@
           "node_id": "n_v24_home_bed_pat",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Concept cotidian din grupul «obiecte pentru somn»: Pat."
+          "current_owner_description": "Concept cotidian din grupul «obiecte pentru somn»: Pat.",
+          "verified_claim": "Cuvertura se așază peste pat.",
+          "evidence_url": "https://dexonline.ro/definitie/cuvertur%C4%83/json"
         },
         {
           "label": "Pătură",
@@ -1223,41 +1980,122 @@
           "node_id": "n_v24_home_textiles_patura",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Concept cotidian din grupul «textile din casă»: Pătură."
-        },
-        {
-          "label": "Cearșaf",
-          "claim_to_verify": "acoperă/protejează lenjeria de pat; sursă exactă necesară",
-          "node_id": "n_v24_home_textiles_cearsaf",
-          "category": "viata_de_roman",
-          "status": "exists on landed wave_base",
-          "current_owner_description": "Concept cotidian din grupul «textile din casă»: Cearșaf."
+          "current_owner_description": "Concept cotidian din grupul «textile din casă»: Pătură.",
+          "verified_claim": "Unele cuverturi se folosesc și ca pături.",
+          "evidence_url": "https://www.ikea.com/ro/ro/p/pelartuja-cuvertura-alb-50600373/"
         },
         {
           "label": "Lână",
           "claim_to_verify": "cuverturi din lână",
           "node_id": "n_v1_11_lana",
           "category": "viata_de_roman",
-          "status": "planned in this batch; not accepted"
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Unele cuverturi sunt confecționate din lână.",
+          "evidence_url": "https://www.ikea.com/ro/ro/cat/cuverturi-de-pat-20527/"
         },
         {
           "label": "Bumbac",
           "claim_to_verify": "cuverturi din bumbac",
           "node_id": "n_v1_11_bumbac",
           "category": "viata_de_roman",
-          "status": "planned in this batch; not accepted"
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Unele cuverturi sunt confecționate din bumbac.",
+          "evidence_url": "https://www.ikea.com/ro/ro/p/pelartuja-cuvertura-alb-50600373/"
         }
       ],
       "topology_hypothesis": {
-        "distinct": 5,
-        "existing": 3,
+        "distinct": 4,
+        "existing": 2,
         "batch": 2,
-        "same_category": 5
+        "same_category": 4
       },
       "prior_records": [],
       "prior_hold_policy": "Exact rejected candidates are skipped. A rejected association remains excluded as that association; it does not reject every input of an existing endpoint. Recorded older reasons remain until addressed by this newly screened proposal; older proxy-retirement prerequisites are superseded by current CONTENT_LOOP step1, which permits graph upgrades.",
-      "sources": [],
-      "next_action": "Research exact lemma/register/DOOM3 forms and each predeclared claim within the per-item budget."
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/cuvertur%C4%83/json",
+          "paraphrase": "DEX09 includes a cover for a bed; exact DOOM3 confirms feminine genitive cuverturii and plural cuverturi."
+        },
+        {
+          "url": "https://www.ikea.com/ro/ro/cat/cuverturi-de-pat-20527/",
+          "paraphrase": "The manufacturer explains bed covers used as blankets and explicitly names wool and cotton among their materials."
+        },
+        {
+          "url": "https://www.ikea.com/ro/ro/p/pelartuja-cuvertura-alb-50600373/",
+          "paraphrase": "The named cotton coverlet can cover a bed or be used as a large blanket, according to its manufacturer."
+        }
+      ],
+      "next_action": "Wait for the rest of the batch and the independent factual/quality web reviews; not accepted or installed yet.",
+      "verified_forms": [
+        "cuvertură",
+        "cuverturii",
+        "cuverturi",
+        "cuverturile",
+        "cuverturilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": null,
+        "use": "Positive only; absence does not reject."
+      },
+      "checked_on": "2026-10-11",
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "cuvertură",
+        "dex_definition_id": "855208",
+        "doom3_definition_id": "1316735",
+        "register": "Selected literal modern sense; other figurative/popular/regional senses are excluded.",
+        "request_spacing": "Serial dexonline requests separated by >=2.1 seconds; group boundaries were longer.",
+        "normative_homograph": null,
+        "excluded": "Only the exact lemma is selected; homograph indices and stress/editorial marks are metadata."
+      },
+      "research_elapsed_seconds": 58.5,
+      "verified_links": [
+        {
+          "label": "Pat",
+          "claim_to_verify": "acoperă patul",
+          "node_id": "n_v24_home_bed_pat",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Concept cotidian din grupul «obiecte pentru somn»: Pat.",
+          "verified_claim": "Cuvertura se așază peste pat.",
+          "evidence_url": "https://dexonline.ro/definitie/cuvertur%C4%83/json"
+        },
+        {
+          "label": "Pătură",
+          "claim_to_verify": "sensul de învelitoare/pătură de pat trebuie stabilit",
+          "node_id": "n_v24_home_textiles_patura",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Concept cotidian din grupul «textile din casă»: Pătură.",
+          "verified_claim": "Unele cuverturi se folosesc și ca pături.",
+          "evidence_url": "https://www.ikea.com/ro/ro/p/pelartuja-cuvertura-alb-50600373/"
+        },
+        {
+          "label": "Lână",
+          "claim_to_verify": "cuverturi din lână",
+          "node_id": "n_v1_11_lana",
+          "category": "viata_de_roman",
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Unele cuverturi sunt confecționate din lână.",
+          "evidence_url": "https://www.ikea.com/ro/ro/cat/cuverturi-de-pat-20527/"
+        },
+        {
+          "label": "Bumbac",
+          "claim_to_verify": "cuverturi din bumbac",
+          "node_id": "n_v1_11_bumbac",
+          "category": "viata_de_roman",
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Unele cuverturi sunt confecționate din bumbac.",
+          "evidence_url": "https://www.ikea.com/ro/ro/p/pelartuja-cuvertura-alb-50600373/"
+        }
+      ],
+      "dropped_link_targets": [
+        {
+          "target": "Cearșaf",
+          "reason": "A customer-review remark about covering bedding is not used as manufacturer verification for the specific sheet link."
+        }
+      ]
     },
     {
       "lemma": "Umeraș",
@@ -1275,7 +2113,7 @@
         "umerașele",
         "umerașelor"
       ],
-      "revision": 1,
+      "revision": 2,
       "label_ro": "Umeraș",
       "origin": "everyday_home_nature_discovery",
       "form_status": "Unverified paradigm hypothesis. Fold-equivalent article spellings are represented by the lemma key; only distinct noncolliding forms may later be installed.",
@@ -1284,9 +2122,9 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess/graph vocabulary and meaningful sourced links; no new curated target/round claim.",
-      "state": "idea",
-      "decision": "idea: prescreen passed for the proposed forms; exact sense, DOOM3 morphology and every named link still need research.",
-      "research_ready": true,
+      "state": "researched",
+      "decision": "researched: Four garment/storage/material claims are explicit; no co-listed household neighbour is used to meet the floor.",
+      "research_ready": false,
       "proposed_forms": [
         "umeraș",
         "umerașul",
@@ -1362,7 +2200,9 @@
           "node_id": "n_v29_clothing_everyday_haina",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Obiect de îmbrăcăminte purtat pentru protecție, căldură sau aspect."
+          "current_owner_description": "Obiect de îmbrăcăminte purtat pentru protecție, căldură sau aspect.",
+          "verified_claim": "Umerașul susține hainele.",
+          "evidence_url": "https://dexonline.ro/definitie/umera%C8%99/json"
         },
         {
           "label": "Dulap",
@@ -1370,7 +2210,9 @@
           "node_id": "n_v24_home_storage_dulap",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Concept cotidian din grupul «mobilier pentru depozitare»: Dulap."
+          "current_owner_description": "Concept cotidian din grupul «mobilier pentru depozitare»: Dulap.",
+          "verified_claim": "Pe umeraș se păstrează haine în dulap.",
+          "evidence_url": "https://www.ikea.com/ro/ro/p/bumerang-umeras-natur-30238543/"
         },
         {
           "label": "Lemn",
@@ -1378,7 +2220,9 @@
           "node_id": "n_v1_3_material_lemn",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Material provenit din părțile lemnoase ale arborilor, folosit la construcții și obiecte din gospodărie; aici, sensul de material."
+          "current_owner_description": "Material provenit din părțile lemnoase ale arborilor, folosit la construcții și obiecte din gospodărie; aici, sensul de material.",
+          "verified_claim": "Unele umerașe sunt confecționate din lemn.",
+          "evidence_url": "https://www.ikea.com/ro/ro/p/bumerang-umeras-natur-30238543/"
         },
         {
           "label": "Metal",
@@ -1386,7 +2230,9 @@
           "node_id": "n_v4sti_metal",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Material cu luciu, conductivitate și maleabilitate ridicate."
+          "current_owner_description": "Material cu luciu, conductivitate și maleabilitate ridicate.",
+          "verified_claim": "Unele umerașe sunt confecționate din metal.",
+          "evidence_url": "https://www.ikea.com/ro/ro/p/stajlig-umeras-interior-exterior-alb-00291419/"
         }
       ],
       "topology_hypothesis": {
@@ -1397,8 +2243,88 @@
       },
       "prior_records": [],
       "prior_hold_policy": "Exact rejected candidates are skipped. A rejected association remains excluded as that association; it does not reject every input of an existing endpoint. Recorded older reasons remain until addressed by this newly screened proposal; older proxy-retirement prerequisites are superseded by current CONTENT_LOOP step1, which permits graph upgrades.",
-      "sources": [],
-      "next_action": "Research exact lemma/register/DOOM3 forms and each predeclared claim within the per-item budget."
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/umera%C8%99/json",
+          "paraphrase": "Exact DEX09/DEX98 entries identify the garment support, including storage in a wardrobe; DOOM3 gives neuter plural umerașe."
+        },
+        {
+          "url": "https://www.ikea.com/ro/ro/p/bumerang-umeras-natur-30238543/",
+          "paraphrase": "The manufacturer specifies a solid-wood hanger with a steel hook and describes clothes organised in a wardrobe."
+        },
+        {
+          "url": "https://www.ikea.com/ro/ro/p/stajlig-umeras-interior-exterior-alb-00291419/",
+          "paraphrase": "The manufacturer specifies a steel hanger for airing/holding clothes and saving wardrobe space."
+        }
+      ],
+      "next_action": "Wait for the rest of the batch and the independent factual/quality web reviews; not accepted or installed yet.",
+      "verified_forms": [
+        "umeraș",
+        "umerașul",
+        "umerașului",
+        "umerașe",
+        "umerașele",
+        "umerașelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": null,
+        "use": "Positive only; absence does not reject."
+      },
+      "checked_on": "2026-10-11",
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "umeraș",
+        "dex_definition_id": "828235",
+        "doom3_definition_id": "1266543",
+        "register": "Selected literal modern sense; other figurative/popular/regional senses are excluded.",
+        "request_spacing": "Serial dexonline requests separated by >=2.1 seconds; group boundaries were longer.",
+        "normative_homograph": null,
+        "excluded": "Only the exact lemma is selected; homograph indices and stress/editorial marks are metadata."
+      },
+      "research_elapsed_seconds": 56.3,
+      "verified_links": [
+        {
+          "label": "Haină",
+          "claim_to_verify": "susține hainele",
+          "node_id": "n_v29_clothing_everyday_haina",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Obiect de îmbrăcăminte purtat pentru protecție, căldură sau aspect.",
+          "verified_claim": "Umerașul susține hainele.",
+          "evidence_url": "https://dexonline.ro/definitie/umera%C8%99/json"
+        },
+        {
+          "label": "Dulap",
+          "claim_to_verify": "hainele pot fi atârnate în dulap pe umerașe",
+          "node_id": "n_v24_home_storage_dulap",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Concept cotidian din grupul «mobilier pentru depozitare»: Dulap.",
+          "verified_claim": "Pe umeraș se păstrează haine în dulap.",
+          "evidence_url": "https://www.ikea.com/ro/ro/p/bumerang-umeras-natur-30238543/"
+        },
+        {
+          "label": "Lemn",
+          "claim_to_verify": "umerașe din lemn",
+          "node_id": "n_v1_3_material_lemn",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Material provenit din părțile lemnoase ale arborilor, folosit la construcții și obiecte din gospodărie; aici, sensul de material.",
+          "verified_claim": "Unele umerașe sunt confecționate din lemn.",
+          "evidence_url": "https://www.ikea.com/ro/ro/p/bumerang-umeras-natur-30238543/"
+        },
+        {
+          "label": "Metal",
+          "claim_to_verify": "umerașe din metal",
+          "node_id": "n_v4sti_metal",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Material cu luciu, conductivitate și maleabilitate ridicate.",
+          "verified_claim": "Unele umerașe sunt confecționate din metal.",
+          "evidence_url": "https://www.ikea.com/ro/ro/p/stajlig-umeras-interior-exterior-alb-00291419/"
+        }
+      ]
     },
     {
       "lemma": "Cuier",
@@ -1416,7 +2342,7 @@
         "cuierele",
         "cuierelor"
       ],
-      "revision": 1,
+      "revision": 2,
       "label_ro": "Cuier",
       "origin": "everyday_home_nature_discovery",
       "form_status": "Unverified paradigm hypothesis. Fold-equivalent article spellings are represented by the lemma key; only distinct noncolliding forms may later be installed.",
@@ -1425,9 +2351,9 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess/graph vocabulary and meaningful sourced links; no new curated target/round claim.",
-      "state": "idea",
-      "decision": "idea: prescreen passed for the proposed forms; exact sense, DOOM3 morphology and every named link still need research.",
-      "research_ready": true,
+      "state": "researched",
+      "decision": "researched: The umbrella holder is an explicit function, while dictionary/primary-specification evidence supports the other three links.",
+      "research_ready": false,
       "proposed_forms": [
         "cuier",
         "cuierul",
@@ -1510,14 +2436,18 @@
           "node_id": "n_v29_clothing_everyday_haina",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Obiect de îmbrăcăminte purtat pentru protecție, căldură sau aspect."
+          "current_owner_description": "Obiect de îmbrăcăminte purtat pentru protecție, căldură sau aspect.",
+          "verified_claim": "Cuierul are cârlige pentru agățat haine.",
+          "evidence_url": "https://dexonline.ro/definitie/cuier/json"
         },
         {
           "label": "Umbrelă",
           "claim_to_verify": "suportul pentru umbrele trebuie verificat ca funcție explicită",
           "node_id": "n_v1_11_umbrela",
           "category": "viata_de_roman",
-          "status": "planned in this batch; not accepted"
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Unele cuiere includ un suport pentru umbrele.",
+          "evidence_url": "https://prod.aosom.ro/item/homcom-cuier-de-podea-pentru-haine-cu-suport-de-umbrele-si-13-carlige-din-metal-de-culoare-alb-si-bambus~837-161.html"
         },
         {
           "label": "Lemn",
@@ -1525,7 +2455,9 @@
           "node_id": "n_v1_3_material_lemn",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Material provenit din părțile lemnoase ale arborilor, folosit la construcții și obiecte din gospodărie; aici, sensul de material."
+          "current_owner_description": "Material provenit din părțile lemnoase ale arborilor, folosit la construcții și obiecte din gospodărie; aici, sensul de material.",
+          "verified_claim": "Unele cuiere sunt confecționate din lemn.",
+          "evidence_url": "https://dexonline.ro/definitie/cuier/json"
         },
         {
           "label": "Metal",
@@ -1533,7 +2465,9 @@
           "node_id": "n_v4sti_metal",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Material cu luciu, conductivitate și maleabilitate ridicate."
+          "current_owner_description": "Material cu luciu, conductivitate și maleabilitate ridicate.",
+          "verified_claim": "Unele cuiere sunt confecționate din metal.",
+          "evidence_url": "https://prod.aosom.ro/item/homcom-cuier-de-podea-pentru-haine-cu-suport-de-umbrele-si-13-carlige-din-metal-de-culoare-alb-si-bambus~837-161.html"
         }
       ],
       "topology_hypothesis": {
@@ -1544,8 +2478,87 @@
       },
       "prior_records": [],
       "prior_hold_policy": "Exact rejected candidates are skipped. A rejected association remains excluded as that association; it does not reject every input of an existing endpoint. Recorded older reasons remain until addressed by this newly screened proposal; older proxy-retirement prerequisites are superseded by current CONTENT_LOOP step1, which permits graph upgrades.",
-      "sources": [],
-      "next_action": "Research exact lemma/register/DOOM3 forms and each predeclared claim within the per-item budget."
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/cuier/json",
+          "paraphrase": "DEX09 defines a wood/metal support for hanging garments and accessories; exact DOOM3 gives neuter plural cuiere."
+        },
+        {
+          "url": "https://prod.aosom.ro/item/homcom-cuier-de-podea-pentru-haine-cu-suport-de-umbrele-si-13-carlige-din-metal-de-culoare-alb-si-bambus~837-161.html",
+          "paraphrase": "The named HOMCOM stand has clothes hooks, an explicit central umbrella holder and a metal frame; bamboo is not used as proof of wood."
+        }
+      ],
+      "next_action": "Wait for the rest of the batch and the independent factual/quality web reviews; not accepted or installed yet.",
+      "verified_forms": [
+        "cuier",
+        "cuierul",
+        "cuierului",
+        "cuiere",
+        "cuierele",
+        "cuierelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          37084,
+          "cuier",
+          287
+        ],
+        "use": "Positive only; absence does not reject."
+      },
+      "checked_on": "2026-10-11",
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "cuier",
+        "dex_definition_id": "854292",
+        "doom3_definition_id": "1316342",
+        "register": "Selected literal modern sense; other figurative/popular/regional senses are excluded.",
+        "request_spacing": "Serial dexonline requests separated by >=2.1 seconds; group boundaries were longer.",
+        "normative_homograph": null,
+        "excluded": "Only the exact lemma is selected; homograph indices and stress/editorial marks are metadata."
+      },
+      "research_elapsed_seconds": 41.8,
+      "verified_links": [
+        {
+          "label": "Haină",
+          "claim_to_verify": "susține haine",
+          "node_id": "n_v29_clothing_everyday_haina",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Obiect de îmbrăcăminte purtat pentru protecție, căldură sau aspect.",
+          "verified_claim": "Cuierul are cârlige pentru agățat haine.",
+          "evidence_url": "https://dexonline.ro/definitie/cuier/json"
+        },
+        {
+          "label": "Umbrelă",
+          "claim_to_verify": "suportul pentru umbrele trebuie verificat ca funcție explicită",
+          "node_id": "n_v1_11_umbrela",
+          "category": "viata_de_roman",
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Unele cuiere includ un suport pentru umbrele.",
+          "evidence_url": "https://prod.aosom.ro/item/homcom-cuier-de-podea-pentru-haine-cu-suport-de-umbrele-si-13-carlige-din-metal-de-culoare-alb-si-bambus~837-161.html"
+        },
+        {
+          "label": "Lemn",
+          "claim_to_verify": "cuiere din lemn",
+          "node_id": "n_v1_3_material_lemn",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Material provenit din părțile lemnoase ale arborilor, folosit la construcții și obiecte din gospodărie; aici, sensul de material.",
+          "verified_claim": "Unele cuiere sunt confecționate din lemn.",
+          "evidence_url": "https://dexonline.ro/definitie/cuier/json"
+        },
+        {
+          "label": "Metal",
+          "claim_to_verify": "cuiere din metal",
+          "node_id": "n_v4sti_metal",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Material cu luciu, conductivitate și maleabilitate ridicate.",
+          "verified_claim": "Unele cuiere sunt confecționate din metal.",
+          "evidence_url": "https://prod.aosom.ro/item/homcom-cuier-de-podea-pentru-haine-cu-suport-de-umbrele-si-13-carlige-din-metal-de-culoare-alb-si-bambus~837-161.html"
+        }
+      ]
     },
     {
       "lemma": "Umbrelă",
@@ -1562,7 +2575,7 @@
         "umbrelele",
         "umbrelelor"
       ],
-      "revision": 1,
+      "revision": 2,
       "label_ro": "Umbrelă",
       "origin": "named_backlog_replanned",
       "form_status": "Unverified paradigm hypothesis. Fold-equivalent article spellings are represented by the lemma key; only distinct noncolliding forms may later be installed.",
@@ -1571,9 +2584,9 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess/graph vocabulary and meaningful sourced links; no new curated target/round claim.",
-      "state": "idea",
-      "decision": "idea: prescreen passed for the proposed forms; exact sense, DOOM3 morphology and every named link still need research.",
-      "research_ready": true,
+      "state": "researched",
+      "decision": "researched: The new material/function plan has four directly supported links; no school-kit or handheld-object co-listing is used.",
+      "research_ready": false,
       "proposed_forms": [
         "umbrelă",
         "umbrelei",
@@ -1639,7 +2652,9 @@
           "node_id": "n_v24_weather_precipitation_ploaie",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Concept cotidian din grupul «precipitații»: Ploaie."
+          "current_owner_description": "Concept cotidian din grupul «precipitații»: Ploaie.",
+          "verified_claim": "Umbrela protejează de ploaie.",
+          "evidence_url": "https://dexonline.ro/definitie/umbrel%C4%83/json"
         },
         {
           "label": "Metal",
@@ -1647,7 +2662,9 @@
           "node_id": "n_v4sti_metal",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Material cu luciu, conductivitate și maleabilitate ridicate."
+          "current_owner_description": "Material cu luciu, conductivitate și maleabilitate ridicate.",
+          "verified_claim": "Umbrela poate avea spițe metalice.",
+          "evidence_url": "https://dexonline.ro/definitie/umbrel%C4%83/json"
         },
         {
           "label": "Lemn",
@@ -1655,14 +2672,18 @@
           "node_id": "n_v1_3_material_lemn",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Material provenit din părțile lemnoase ale arborilor, folosit la construcții și obiecte din gospodărie; aici, sensul de material."
+          "current_owner_description": "Material provenit din părțile lemnoase ale arborilor, folosit la construcții și obiecte din gospodărie; aici, sensul de material.",
+          "verified_claim": "Unele umbrele au tijă din lemn.",
+          "evidence_url": "https://www.dedeman.ro/ro/umbrela-de-ploaie-pentru-adulti-oslo-ac-tip-baston-automata-diverse-culori-104-cm-rezistenta-la-vant/p/7028928"
         },
         {
           "label": "Pânză",
           "claim_to_verify": "înveliș textil; noul plan înlocuiește vechiul kit școlar",
           "node_id": "n_v1_11_panza",
           "category": "viata_de_roman",
-          "status": "planned in this batch; not accepted"
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Umbrela are un înveliș de pânză.",
+          "evidence_url": "https://dexonline.ro/definitie/umbrel%C4%83/json"
         }
       ],
       "topology_hypothesis": {
@@ -1708,8 +2729,90 @@
         }
       ],
       "prior_hold_policy": "Exact rejected candidates are skipped. A rejected association remains excluded as that association; it does not reject every input of an existing endpoint. Recorded older reasons remain until addressed by this newly screened proposal; older proxy-retirement prerequisites are superseded by current CONTENT_LOOP step1, which permits graph upgrades.",
-      "sources": [],
-      "next_action": "Research exact lemma/register/DOOM3 forms and each predeclared claim within the per-item budget."
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/umbrel%C4%83/json",
+          "paraphrase": "DEX09 defines the portable cloth-and-metal-spoke rain/sun protector; exact DOOM3 confirms feminine umbrelei/umbrele."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/umbrel%C4%83",
+          "paraphrase": "The second site confirms the cloth/spoke rain-protection sense and noun paradigm; its lexical provenance may derive from DEX."
+        },
+        {
+          "url": "https://www.dedeman.ro/ro/umbrela-de-ploaie-pentru-adulti-oslo-ac-tip-baston-automata-diverse-culori-104-cm-rezistenta-la-vant/p/7028928",
+          "paraphrase": "The Romanian rain-umbrella specification explicitly describes rain protection and its wooden shaft."
+        }
+      ],
+      "next_action": "Wait for the rest of the batch and the independent factual/quality web reviews; not accepted or installed yet.",
+      "verified_forms": [
+        "umbrelă",
+        "umbrelei",
+        "umbrele",
+        "umbrelele",
+        "umbrelelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          13610,
+          "umbrele",
+          1285
+        ],
+        "use": "Positive only; absence does not reject."
+      },
+      "checked_on": "2026-10-11",
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "umbrelă",
+        "dex_definition_id": "828220",
+        "doom3_definition_id": "1266531",
+        "register": "Selected literal modern sense; other figurative/popular/regional senses are excluded.",
+        "request_spacing": "Serial dexonline requests separated by >=2.1 seconds; group boundaries were longer.",
+        "normative_homograph": null,
+        "excluded": "Only the exact lemma is selected; homograph indices and stress/editorial marks are metadata."
+      },
+      "research_elapsed_seconds": 117.3,
+      "verified_links": [
+        {
+          "label": "Ploaie",
+          "claim_to_verify": "protejează de ploaie",
+          "node_id": "n_v24_weather_precipitation_ploaie",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Concept cotidian din grupul «precipitații»: Ploaie.",
+          "verified_claim": "Umbrela protejează de ploaie.",
+          "evidence_url": "https://dexonline.ro/definitie/umbrel%C4%83/json"
+        },
+        {
+          "label": "Metal",
+          "claim_to_verify": "spițe/cadru metalic",
+          "node_id": "n_v4sti_metal",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Material cu luciu, conductivitate și maleabilitate ridicate.",
+          "verified_claim": "Umbrela poate avea spițe metalice.",
+          "evidence_url": "https://dexonline.ro/definitie/umbrel%C4%83/json"
+        },
+        {
+          "label": "Lemn",
+          "claim_to_verify": "mâner sau tijă din lemn",
+          "node_id": "n_v1_3_material_lemn",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Material provenit din părțile lemnoase ale arborilor, folosit la construcții și obiecte din gospodărie; aici, sensul de material.",
+          "verified_claim": "Unele umbrele au tijă din lemn.",
+          "evidence_url": "https://www.dedeman.ro/ro/umbrela-de-ploaie-pentru-adulti-oslo-ac-tip-baston-automata-diverse-culori-104-cm-rezistenta-la-vant/p/7028928"
+        },
+        {
+          "label": "Pânză",
+          "claim_to_verify": "înveliș textil; noul plan înlocuiește vechiul kit școlar",
+          "node_id": "n_v1_11_panza",
+          "category": "viata_de_roman",
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Umbrela are un înveliș de pânză.",
+          "evidence_url": "https://dexonline.ro/definitie/umbrel%C4%83/json"
+        }
+      ]
     },
     {
       "lemma": "Perdea",
@@ -1727,7 +2830,7 @@
         "perdelele",
         "perdelelor"
       ],
-      "revision": 1,
+      "revision": 2,
       "label_ro": "Perdea",
       "origin": "everyday_home_nature_discovery",
       "form_status": "Unverified paradigm hypothesis. Fold-equivalent article spellings are represented by the lemma key; only distinct noncolliding forms may later be installed.",
@@ -1736,9 +2839,9 @@
         "Lanțul Cuvintelor"
       ],
       "player_benefit": "Real shared guess/graph vocabulary and meaningful sourced links; no new curated target/round claim.",
-      "state": "idea",
-      "decision": "idea: prescreen passed for the proposed forms; exact sense, DOOM3 morphology and every named link still need research.",
-      "research_ready": true,
+      "state": "researched",
+      "decision": "researched: Four direct placement/function/material claims are supported; the current procedure permits upgrading the old Cald proxy without moving any real owner.",
+      "research_ready": false,
       "proposed_forms": [
         "perdea",
         "perdeaua",
@@ -1821,7 +2924,9 @@
           "node_id": "n_v24_home_surfaces_fereastra",
           "category": "viata_de_roman",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Concept cotidian din grupul «suprafețe și deschideri»: Fereastră."
+          "current_owner_description": "Concept cotidian din grupul «suprafețe și deschideri»: Fereastră.",
+          "verified_claim": "Perdeaua se montează la fereastră.",
+          "evidence_url": "https://dexonline.ro/definitie/perdea/json"
         },
         {
           "label": "Lumină",
@@ -1829,21 +2934,27 @@
           "node_id": "n_v4sti_lumina",
           "category": "stiinta",
           "status": "exists on landed wave_base",
-          "current_owner_description": "Radiație electromagnetică vizibilă pentru ochiul uman."
+          "current_owner_description": "Radiație electromagnetică vizibilă pentru ochiul uman.",
+          "verified_claim": "Perdeaua filtrează lumina.",
+          "evidence_url": "https://www.ikea.com/ro/ro/p/silverloenn-perdele-transparente-2buc-bej-rjns-10493978/"
         },
         {
           "label": "Pânză",
           "claim_to_verify": "înveliș/țesătură pentru perdea",
           "node_id": "n_v1_11_panza",
           "category": "viata_de_roman",
-          "status": "planned in this batch; not accepted"
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Perdeaua este confecționată din țesătură.",
+          "evidence_url": "https://dexonline.ro/definitie/perdea/json"
         },
         {
           "label": "Bumbac",
           "claim_to_verify": "perdea din bumbac",
           "node_id": "n_v1_11_bumbac",
           "category": "viata_de_roman",
-          "status": "planned in this batch; not accepted"
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Unele perdele sunt confecționate din bumbac.",
+          "evidence_url": "https://www.ikea.com/ro/ro/p/silverloenn-perdele-transparente-2buc-bej-rjns-10493978/"
         }
       ],
       "topology_hypothesis": {
@@ -1883,8 +2994,86 @@
         }
       ],
       "prior_hold_policy": "Exact rejected candidates are skipped. A rejected association remains excluded as that association; it does not reject every input of an existing endpoint. Recorded older reasons remain until addressed by this newly screened proposal; older proxy-retirement prerequisites are superseded by current CONTENT_LOOP step1, which permits graph upgrades.",
-      "sources": [],
-      "next_action": "Research exact lemma/register/DOOM3 forms and each predeclared claim within the per-item budget."
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/perdea/json",
+          "paraphrase": "DEX09 defines a textile object hung at windows/doors to limit light or visibility; exact DOOM3 confirms perdeaua/perdelei/perdele."
+        },
+        {
+          "url": "https://www.ikea.com/ro/ro/p/silverloenn-perdele-transparente-2buc-bej-rjns-10493978/",
+          "paraphrase": "The manufacturer specifies woven 100% cotton curtains for windows, with light filtering and privacy as explicit functions."
+        }
+      ],
+      "next_action": "Wait for the rest of the batch and the independent factual/quality web reviews; not accepted or installed yet.",
+      "verified_forms": [
+        "perdea",
+        "perdeaua",
+        "perdelei",
+        "perdele",
+        "perdelele",
+        "perdelelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_verified_form": [
+          21560,
+          "perdele",
+          664
+        ],
+        "use": "Positive only; absence does not reject."
+      },
+      "checked_on": "2026-10-11",
+      "lexical_check": {
+        "headword_equals_lemma": true,
+        "response_word": "perdea",
+        "dex_definition_id": "869735",
+        "doom3_definition_id": "1281813",
+        "register": "Selected literal modern sense; other figurative/popular/regional senses are excluded.",
+        "request_spacing": "Serial dexonline requests separated by >=2.1 seconds; group boundaries were longer.",
+        "normative_homograph": null,
+        "excluded": "Only the exact lemma is selected; homograph indices and stress/editorial marks are metadata."
+      },
+      "research_elapsed_seconds": 76.1,
+      "verified_links": [
+        {
+          "label": "Fereastră",
+          "claim_to_verify": "se montează la fereastră",
+          "node_id": "n_v24_home_surfaces_fereastra",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Concept cotidian din grupul «suprafețe și deschideri»: Fereastră.",
+          "verified_claim": "Perdeaua se montează la fereastră.",
+          "evidence_url": "https://dexonline.ro/definitie/perdea/json"
+        },
+        {
+          "label": "Lumină",
+          "claim_to_verify": "filtrează lumina",
+          "node_id": "n_v4sti_lumina",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "current_owner_description": "Radiație electromagnetică vizibilă pentru ochiul uman.",
+          "verified_claim": "Perdeaua filtrează lumina.",
+          "evidence_url": "https://www.ikea.com/ro/ro/p/silverloenn-perdele-transparente-2buc-bej-rjns-10493978/"
+        },
+        {
+          "label": "Pânză",
+          "claim_to_verify": "înveliș/țesătură pentru perdea",
+          "node_id": "n_v1_11_panza",
+          "category": "viata_de_roman",
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Perdeaua este confecționată din țesătură.",
+          "evidence_url": "https://dexonline.ro/definitie/perdea/json"
+        },
+        {
+          "label": "Bumbac",
+          "claim_to_verify": "perdea din bumbac",
+          "node_id": "n_v1_11_bumbac",
+          "category": "viata_de_roman",
+          "status": "planned in this batch; not accepted",
+          "verified_claim": "Unele perdele sunt confecționate din bumbac.",
+          "evidence_url": "https://www.ikea.com/ro/ro/p/silverloenn-perdele-transparente-2buc-bej-rjns-10493978/"
+        }
+      ]
     },
     {
       "lemma": "Draperie",
@@ -8917,5 +10106,41 @@
         "nucile"
       ]
     }
+  },
+  "research_ticks": [
+    {
+      "tick": 1,
+      "items": [
+        "v111-bumbac",
+        "v111-cuier",
+        "v111-cuvertura",
+        "v111-foarfeca",
+        "v111-lana",
+        "v111-manusa",
+        "v111-matase",
+        "v111-perdea",
+        "v111-pulover",
+        "v111-umbrela",
+        "v111-umeras",
+        "v111-vrabie"
+      ],
+      "researched": 11,
+      "held": 1,
+      "max_item_elapsed_seconds": 254.7,
+      "dexonline_requests": 13,
+      "note": "Twelve items; one extra already-screened alternate-lemma query for Foarfecă. All source notes are paraphrases."
+    }
+  ],
+  "research_summary": {
+    "states": {
+      "researched": 11,
+      "held": 4,
+      "idea": 43
+    },
+    "remaining_ideas": 43,
+    "accepted": 0,
+    "installed": 0,
+    "new_normative_forms_screened": 7,
+    "note": "Bumbac homograph superscript was read manually and independently checked; the scratch filter misses superscript metadata. No unrelated headword or plant sense is selected."
   }
 }
