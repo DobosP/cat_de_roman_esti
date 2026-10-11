@@ -4,11 +4,34 @@ Valid until: the next source or completed gate change. Updated 2026-10-11. Read 
 
 Publish only `fix/gui-cat-prerequisites-linux` to origin. Shared main stays clean. React19/Motion and UI0.3 remain active; Core-v1.6 is released and UI1.0.6 staged. This migration is unfinished.
 
-## Current source integration — checks NOT RUN
+## Current 2026-10-11 (independent review, Codex stopped)
+
+- Branch `fix/gui-review-20261011` (local, unpushed) = e042587 plus: 8e56bae fail-fast/fresh content
+  tests, 83ed8b9 canonical distroless M1 image (`APP_DOCKERFILE=Dockerfile`, container port 8080,
+  `/app healthcheck`, `Dockerfile.gui` deleted), 0f51b96 `run.sh` port, 35e8de9 NATIVE_BACKENDS port,
+  perf aa8d4e3/5d7594a/e6421be (0479930+5d535ed is a hoist/revert pair: land both or neither) and this
+  docs sync (PROGRAM E2–E5, S1 notes). Decisions: PROGRAM E5 and [ADR0195](adr/0195-owner-decisions-review-m1-image-test-loop.md).
+- Latest actual full at e042587 (2026-10-11 19:00–19:52 UTC, 52.4 min, wrapper result kept in parent
+  `_temp`): FAIL only from the 10 active route-JS budgets (Home 115,016 vs 40,960) plus the aggregate exit;
+  37/39 checks passed. Backend race 1,743 s (contentrails 1,384.7 s of the 1,800 s per-binary timeout,
+  httpgolden 777.0 s); browser 1,220 s; CSP enforced, 0 violations.
+- aac8eff (on e042587): three world-audit rail tests 444 s → 236 s on the review host, `state()` CPU
+  151.8 s → 34.1 s; equivalence verified on 3000 random worlds + bundled replays (oracle test e6421be).
+- This branch's test-loop speedups (no behaviour change): httpgolden package 884 s → 115 s; six
+  contentrails fixture tests 747 s → 390 s. The `quick.go` hoist needs an ADR-0189 re-audit/re-sign.
+- Open, in priority order:
+  1. Paul's trust pin for `.gate.env` → managed unit, then full on this branch. Port 8080 vs S1's
+     `PORT`-in-Go/8000 and the `run.sh`/CI edits need a parent/owner ruling (ADR0195).
+  2. Integrate local main (V1.9/V1.10, 40 commits after 3f327c) with one combined full.
+  3. KIT_BUMP core-v1.6 under E5 (budget-only-red same-SHA unit; parent `kit:sync` only).
+  4. Physical Samsung Chrome + Samsung Internet throttled-4G device checkpoint: UNMET.
+  5. PROGRAM §4.7 `budgets.json` defaults vs E3 "preserve unchanged": open.
+
+## Previous source integration (history, 2026-10-11) — checks NOT RUN
 
 Parent began a no-commit merge of local main3f327c into GUI4f36. [ADR0194](adr/0194-integrate-reviewed-v18-with-gui-history.md) records the technical selection of main's existing behaviour-bound installed-authority rule; no new human/content approval is inferred. All78 reviewed main paths stay coupled, with main's live Source7/V1.8 bundle, pins, authorities and native reviews unchanged. Original Source6 and GUI review-only builder assertions now have distinct literal historical contexts; GUI0437/all six earlier HTTP corpora stay immutable and V1.8 adds its exact2c02 eight-source selector. Four colliding0188/0189 decision bodies retain their full filenames. Combined focused/all-rail/export/1207 and owning GUI gates are NOT RUN; fd336 below is historical E3 evidence, never a merged-source receipt. Active budgets, Samsung and formal M0/M1/KIT_BUMP/adoption remain open. Shared main remains unchanged; parent owns staging/merge commit and later review/qualification.
 
-## Latest completed enforced full
+## Earlier completed enforced full (fd336, history)
 
 [fd336 checkpoint](reviews/gui-normalized-react/full-fd336-checkpoint.json), [literal result](reviews/gui-normalized-react/full-fd336-result.json), [parent review](reviews/gui-normalized-react/full-fd336-parent-review.json) and [independent review](reviews/gui-normalized-react/full-fd336-independent-review.json) bind tested fd336984a09e7e76ca68c4635c7bd617fc2414a2, tree79a669bf4c6413507aad41a775a2999afcffa1effd1494510f4c832de0965c9c, wrapperf519e22c-1004-4427-a6b0-03d5876f5a81 and immutable image33274644ba0fbc9f9eb8fbb0e2cf7f5f43899392996c8e88185c2af882417514. FULL93549 completed FAIL201:37/39 checks passed; only active route-JS budgets and the aggregate exit failed. Parent and independent review accept bounded E3 preliminary evidence. This is not GREEN, formal M0/M1/KIT_BUMP, nativePreact/UI1 adoption or a phone checkpoint.
 
