@@ -37,6 +37,12 @@ function frontendFailed() {
   return hook.checks.some((item) => item.status === "fail"
     && ["cat-frontend-unit", "cat-frontend-lint", "cat-frontend-types"].includes(item.name));
 }
+// Cheap deterministic source checks: none reads managed build output, so they run
+// before the build and a failure stops the backend race and the full lanes.
+const sourceChecks = ["cat-doccheck-source-contracts", "cat-doc-check", "cat-content-validate", "cat-content-export", "cat-docs-gate"];
+function sourceFailed() {
+  return hook.checks.some((item) => item.status === "fail" && sourceChecks.includes(item.name));
+}
 function managedFrontendBuild(prefix, prepared = false) {
   if (!prepared) command(`${prefix}-fresh-build-output`, "node", ["scripts/gui-assets.mjs", "prepare"]);
   if (!passed(`${prefix}-fresh-build-output`)) return false;
@@ -107,6 +113,10 @@ function routeBudgets() {
 }
 function nativeUnit() {
   runDoccheckSourcePreflight(hook);
+  command("cat-doc-check", "go", ["run", "./cmd/cat-doc-check", "--root", "..", "--inventory", "docs/tracked-markdown.json"], path.join(root, "go-backend"));
+  command("cat-content-validate", "go", ["run", "./cmd/cat-content", "validate", "--root", ".."], path.join(root, "go-backend"));
+  command("cat-content-export", "go", ["run", "./cmd/cat-content", "export", "--root", "..", "--check"], path.join(root, "go-backend"));
+  command("cat-docs-gate", "python3", [path.join(kitRoot, "lint/check_docs.py"), "."]);
   managedFrontendBuild("cat-unit");
   hook.check("cat-unit-assets", () => {
     hook.assert("Fresh unit build and emitted inventory passed", () => ["cat-unit-fresh-build-output", "cat-unit-frontend-build", "cat-unit-emitted-inventory"].every(passed));
@@ -117,11 +127,12 @@ function nativeUnit() {
   command("cat-frontend-unit", "npm", ["test"], frontend);
   command("cat-frontend-lint", "npm", ["run", "lint"], frontend);
   command("cat-frontend-types", "npm", ["run", "typecheck"], frontend);
-  if (frontendFailed()) return;
+  if (frontendFailed() || sourceFailed()) return;
   for (const [name, module] of [["backend", "go-backend"], ["authcore", "shared-go/authcore"]]) {
     hook.check(`cat-${name}-race`, () => {
       if (module === "go-backend") hook.assert("Backend race requires fresh synced assets and compiled identity inputs", () => passed("cat-unit-gui-identity"));
-      const output = hook.run("go", ["test", "-race", ...(module === "go-backend" ? ["-timeout=30m"] : []), "-json", "./..."], path.join(root, module), { CGO_ENABLED: "1" });
+      // -count=1: content tests read repo-root inputs outside the module, which Go's test cache does not recheck.
+      const output = hook.run("go", ["test", "-race", ...(module === "go-backend" ? ["-timeout=30m", "-count=1"] : []), "-json", "./..."], path.join(root, module), { CGO_ENABLED: "1" });
       const skipped = output.split("\n").filter((line) => line.startsWith("{")).map((line) => JSON.parse(line)).filter((event) => event.Action === "skip" && typeof event.Test === "string" && event.Test.length > 0);
       hook.assert("Only explicit native PG tests may skip without DSN", () => skipped.every((event) =>
         module === "go-backend" && ["github.com/DobosP/cat_de_roman_esti/go-backend/internal/accounts", "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpapi"].includes(event.Package)));
@@ -132,10 +143,6 @@ function nativeUnit() {
     });
   }
   if (fs.existsSync(path.join(root, `${directory}/managed-assets`))) retainArtifacts(`${directory}/managed-assets`);
-  command("cat-doc-check", "go", ["run", "./cmd/cat-doc-check", "--root", "..", "--inventory", "docs/tracked-markdown.json"], path.join(root, "go-backend"));
-  command("cat-content-validate", "go", ["run", "./cmd/cat-content", "validate", "--root", ".."], path.join(root, "go-backend"));
-  command("cat-content-export", "go", ["run", "./cmd/cat-content", "export", "--root", "..", "--check"], path.join(root, "go-backend"));
-  command("cat-docs-gate", "python3", [path.join(kitRoot, "lint/check_docs.py"), "."]);
 }
 switch (target) {
   case "setup": setup("cat-setup"); break;
@@ -480,7 +487,7 @@ switch (target) {
     }
     if (!capabilityPassed) break; // preserve failed probe/logs; no backend/browser work
     nativeUnit();
-    if (!passed("cat-unit-gui-identity") || frontendFailed()) break;
+    if (!passed("cat-unit-gui-identity") || frontendFailed() || sourceFailed()) break;
     binaries("cat-full");
     for (const [name, flag] of [["accounts", "accounts.database"], ["httpapi", "arcade.database"]]) {
       hook.check(`cat-pg-${name}`, () => {
