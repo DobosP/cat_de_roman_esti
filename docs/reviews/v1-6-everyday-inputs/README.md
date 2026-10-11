@@ -620,6 +620,8 @@ finds31changed JSON paths: only the two node aliases/two normalized owners, Ulei
 manifest and source/review metadata. Boards, feedback data, edges, route captions, pack
 records and normalization rules remain exact. This is native qualification only; current
 independent export/HTTP, installed authority and full release gates remain pending.
+[reference/historical-source6-bundle.json.gz](reference/historical-source6-bundle.json.gz) archives this
+exact bundle (gzip -9 -n; decompressed e0cfe93d/7272424 bytes) for the historical two-alias delta test (ADR-0189).
 
 The first next source-preparation admission refused16765857792available-memory bytes
 before workers or native subprocesses; its refusal is preserved. A fresh measured recovery

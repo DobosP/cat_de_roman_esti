@@ -8,11 +8,12 @@ import (
 	"testing"
 )
 
-// Current reviewed-source coverage is distinct from the immutable original
-// Source6 test and from HTTP/image/device qualification.
-// No historical pin override applies to this real current-root Build.
+// Historical GUI Source6 review-only coverage remains distinct from the original
+// Source6 builder and the live installed Source7 generator-backed test. The exact
+// reviewed4f36 context and test-only pins preserve every original assertion.
 func TestRebuildCurrentSource6ReviewOnlyRequalification(t *testing.T) {
-	root := repoRoot(t)
+	root := reviewedSource6HistoricalRoot(t)
+	reviewedSource6ReviewedPins(t)
 	wantPins := map[string]string{
 		"derived_catalog_v38.json": "fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a",
 		"quick_games_v92.json":     "234305a844033cff0914a5213f6c0b8dcd1b21918d57cc851780259c9e87ee59",

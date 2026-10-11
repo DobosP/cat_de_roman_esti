@@ -243,10 +243,6 @@ func (a *installedAuthorities) rebuild(root string, selected *Source, rail strin
 	if s == nil || selected == nil || (selected.SHA256 != AuthoredSHA256 && selected.SHA256 != s.SHA256) {
 		return nil, true, fmt.Errorf("installed authority does not authorize selected authored source")
 	}
-	beforeRuntime, err := RuntimeHashes(root)
-	if err != nil {
-		return nil, true, err
-	}
 	beforeSources, err := bindings(root)
 	if err != nil {
 		return nil, true, err
@@ -277,13 +273,9 @@ func (a *installedAuthorities) rebuild(root string, selected *Source, rail strin
 			return nil, true, err
 		}
 	}
-	afterRuntime, err := RuntimeHashes(root)
-	if err != nil {
-		return nil, true, err
-	}
 	afterSources, err := bindings(root)
-	if err != nil || !same(beforeRuntime, afterRuntime) || !same(beforeSources, afterSources) {
-		return nil, true, fmt.Errorf("installed authority runtime/source inventory changed during check")
+	if err != nil || !same(beforeSources, afterSources) {
+		return nil, true, fmt.Errorf("installed authority source inventory changed during check")
 	}
 	if _, err = loadInstalledAuthorities(root); err != nil {
 		return nil, true, err
@@ -293,17 +285,14 @@ func (a *installedAuthorities) rebuild(root string, selected *Source, rail strin
 
 // BuildInstalledAuthorityEntry constructs metadata for an already installed,
 // independently reviewed rail. It neither writes a pin nor grants approval.
-// The audit/final judgments must bind the frozen current export and all current
-// sources, rather than the pre-installation staging snapshot.
+// The audit/final judgments bind the frozen current export and all current
+// sources; runtime behaviour is re-derived by ConfirmFinal under the current
+// binary rather than frozen as a source-hash snapshot (ADR-0189).
 func BuildInstalledAuthorityEntry(root string, s *Source, rail, candidate, factual, quality, proposal, audit, finalFactual, finalQuality, expectedSHA string) (map[string]any, error) {
 	if s == nil || s.Version <= 1 || FinalKind(rail) == "" {
 		return nil, fmt.Errorf("installed authority requires a reviewed newer source and supported rail")
 	}
 	if _, err := loadInstalledAuthorities(root); err != nil {
-		return nil, err
-	}
-	beforeRuntime, err := RuntimeHashes(root)
-	if err != nil {
 		return nil, err
 	}
 	beforeSources, err := bindings(root)
@@ -347,13 +336,9 @@ func BuildInstalledAuthorityEntry(root string, s *Source, rail, candidate, factu
 			return nil, err
 		}
 	}
-	afterRuntime, err := RuntimeHashes(root)
-	if err != nil {
-		return nil, err
-	}
 	afterSources, err := bindings(root)
-	if err != nil || !same(beforeRuntime, afterRuntime) || !same(beforeSources, afterSources) {
-		return nil, fmt.Errorf("installed authority draft runtime/source inventory changed during construction")
+	if err != nil || !same(beforeSources, afterSources) {
+		return nil, fmt.Errorf("installed authority draft source inventory changed during construction")
 	}
 	if _, err = loadInstalledAuthorities(root); err != nil {
 		return nil, err

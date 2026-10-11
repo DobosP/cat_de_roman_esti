@@ -1,8 +1,8 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-11 — [Enforced fd336](reviews/gui-normalized-react/full-fd336-checkpoint.json) completed FAIL201:37/39 PASS, only active route-JS budgets/aggregate fail;900 browser PASS. Parent+independent bounded E3 preliminary evidence accepted; formal M0/M1/KIT_BUMP and Samsung remain open. [Handover](GUI_MIGRATION_HANDOFF.md).
+Last verified: 2026-10-11 — Source-only GUI4f36/main3f327c integration (ADR0194); combined focused/full checks NOT RUN. Historical fd336 E3 proof and main V1.8 local qualification remain source-scoped.
 
-- **GUI Linux current:** Core1.6 released; UI0.3 active/UI1.0.6 staged. Actual fd336 full passed frontend459/native1207/freshPG12+291/enforcedCSP9/real legacy owner/9PNGs/16 baseline outcomes. All10 active route-JS rows remain red at40960; combined startup122743/122880 is a planning-target measurement, not phone or optimality proof. Approved frozen-baseline exact30 integrity and full fallback passed; raw20 measurements remain. E3 preliminary only, no GREEN/M0/M1/KIT_BUMP/M2/device adoption. Teacher support127/43GET and Social strict receiver56 are accepted finite sections in their feature lanes. [CLS erratum](reviews/gui-normalized-react/full-b03-cls-description-erratum.json), all original/canonical/source keepers remain. Fresh local main3f327c has30 unintegrated commits including V1.8/Source7; current GUI proof does not qualify their combination, and no main merge/push occurred. [Focused d8](reviews/gui-normalized-react/frozen-baseline-focused-d8-checkpoint.json) and old full failures stay historical. Latest full exact-owned app/db/network cleanup is verified; no workspace/deps/cache/ELF copies per iteration.
+- **GUI Linux current:** Core1.6 released; UI0.3 active/UI1.0.6 staged. Actual fd336 full passed frontend459/native1207/freshPG12+291/enforcedCSP9/real legacy owner/9PNGs/16 baseline outcomes. All10 active route-JS rows remain red at40960; combined startup122743/122880 is a planning-target measurement, not phone or optimality proof. Approved frozen-baseline exact30 integrity and full fallback passed; raw20 measurements remain. E3 preliminary only, no GREEN/M0/M1/KIT_BUMP/M2/device adoption. Teacher support127/43GET and Social strict receiver56 are accepted finite sections in their feature lanes. [CLS erratum](reviews/gui-normalized-react/full-b03-cls-description-erratum.json), all original/canonical/source keepers remain. Parent source merge now carries all78 main V1.8/Source7 paths with the existing GUI; combined checks are NOT RUN. Main and old GUI qualification do not transfer. ADR0194 selects main's behaviour-bound authority for live checks while retaining strict auditor/document/source/readset guards. [Focused d8](reviews/gui-normalized-react/frozen-baseline-focused-d8-checkpoint.json) and old full failures stay historical. Latest full exact-owned app/db/network cleanup is verified; no workspace/deps/cache/ELF copies per iteration.
 - **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
 
 ## Current state
@@ -27,13 +27,12 @@ Last verified: 2026-10-11 — [Enforced fd336](reviews/gui-normalized-react/full
 - [Content skill](../.agents/skills/romanian-game-content/SKILL.md): refinement/discovery with independent gates.
 - Decision/evidence: [ADR-0158](adr/0158-v1-testing-release.md),
   [release review](reviews/v1-testing-release/README.md), [Romanian tester guide](TESTARE_V1.md).
-- **V1.2 landed locally17f7da1:** four reviewed synonym families (ascensor, tomată, scripcă, prăvălie),
-  22 distinct forms and Cărare↔Potecă; zero new concepts/curated rounds. Old records,
-  recipe cores/histories/pools persist. [Review](reviews/v1-2-content-growth/README.md),
-  [ADR-0170](adr/0170-v1-2-reviewed-content-growth.md), [pool](content-pool/v1-2-synonyms-and-links/pool.json).
-- V1.2 baseline authority reconstructs all four rails exactly; source/export/mobile/rank/derive,
-  independent Python export,1207 current HTTP, history68 and new synonym/hop race checks pass.
-  Full native/shared race/vet,smoke151/assets28/docs and assembled review GREEN; content heartbeat renewed per ADR-0177.
+- **V1.8 qualified locally on main3f327c (historical):** 30 reviewed items: 23 new concepts, six existing-owner input
+  families and one directional link; +23 nodes/+93 links/+136 forms, zero new curated rounds.
+  Leafă→Salariu; ogradă→Curte is a regional input; full non-colliding paradigms preserve owners.
+  [Review](reviews/v1-8-everyday-core/README.md) and [pool](content-pool/v1-8-everyday-core/pool.json).
+  Four native rails reconstruct exactly; owner-approved Cald assertions, HTTP1207 and API51 pass.
+  Those main-only results do not qualify this combined GUI source; all fresh integration gates remain pending.
 ## Inventory and invariants
 
 | Game | Total | Approved | Pending | New-round pool |
@@ -47,7 +46,7 @@ Last verified: 2026-10-11 — [Enforced fd336](reviews/gui-normalized-react/full
 
 Pack **716 = 709 approved + 7 pending**,527 eligible; quick421/418,341 preferred, starter62/61. The85 authored/336 frozen payloads stay exact.
 Pool counts describe curated records; existing on-demand fallback generators remain.
-Qualified Source6 KG: `fixture-v1-6-everyday-inputs`, 2419 nodes/9473 links/8679 forms/180 exact puzzles.
+Qualified V1.8 KG: `fixture-v1-8-everyday-core`, 2442 nodes/9566 links/8815 forms/180 exact puzzles.
 Alchimie challenge refresh: 49 existing additions across 27 books; all 68 selectable books retain
 521 recipes, routes and par. One former addition belongs to a reserved board.
 Exploration has **252 concepts/352 recipes/148 discoveries**, 96 supplies, 12 tiers,
@@ -56,18 +55,18 @@ Sessions retain 7200-second sliding TTL, 1000 entries/game, locks and 64 KiB req
 Exploration stays ≤256 concepts/512 recipes/256 saved crafts/128 observed empty pairs;
 sixteen histories and 2 MiB pre-write bounds remain. Quick supplements ≤256 boards/2 MiB.
 Unrevealed answers, recipe maps and routes stay private.
-## Original qualified V1.6 pins
+## Current qualified V1.8 pins
 
-- alchimie_discovery_world_v92.json: `8f013a8f6b54a97a768a34c42e669addc4f5ab9823302befbe15ad811cae77ad`
-- alchimie_recipe_extensions_v92.json: `d94647e78f8c2bd375b961f0aab52f3f7207024e60bed745b78c4a3d052d0bfc`
-- quick_games_v92.json: `0c79b9c5cb0f9602c2506ef384ac64d519731dd9add53acf602d2c4f51a3f345`
+- alchimie_discovery_world_v92.json: `dc0fd8737d3ed187c18f2ba246af524cb20ef2c9e0be35ed282b844decd7528a`
+- alchimie_recipe_extensions_v92.json: `ff14ada7e6a048012fc774fcbe8e4fbd57ed4ed2981d236eabc0ddd82964f063`
+- quick_games_v92.json: `d3a50586c0983cb6f2f291f1b042041840b7403fabc330554977575f7866791b`
 - games_pack.json: `e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8`
-- board_rankings_v37.json: `036c8a00de347939d132ba25512da7cba53b12e9d11a9f86cecc07cc98293c31`
-- derived_catalog_v38.json: `fdc94e5ded3477b44aaffe90858ca1070cd1c1d344be22724c0e02f0110bb96a`
+- board_rankings_v37.json: `538cf0db0e9141c3bbb4676404f136ab1faab0f06023dee86d207a0ee775c99c`
+- derived_catalog_v38.json: `e4535a059c253fbf07911ec04e476a4e9725b52aa025faa4967ffbaa936adb7e`
 - release_reserve_v1.json: `fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7`
 - lant_rejection_tombstones.json: `01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d`
-- kg_sample.json: `63f0dcd7992f0d1434eab49b9c1b7e97f0db30a22cd708b7b25c0199f39031bf`
-- cat_mobile_app_pack_contract.json: `282f18f6d81c623be004f28d4c5634bfbbbdf2294e466d842a9192123bc06fae`
+- kg_sample.json: `da14c34310eac3a03c2b5438c18043a2a7da682af9e0d991eb105c0639696c8f`
+- cat_mobile_app_pack_contract.json: `e753434dcc19cab6dd9f69b8349db431bed12807a7a0464fb2140d1db721dcbf`
 ## Verification
 
 - 1.0.1 (2026-09-23): **2466 backend / 53 accounts**, **240 frontend**, lint/typecheck/build
@@ -108,13 +107,14 @@ Unrevealed answers, recipe maps and routes stay private.
   [ADR-0167](adr/0167-close-unread-bodies-on-early-refusal.md):13 TCP gates/32 body/1207 parity and strict scalar envelopes pass; auth unchanged.
   [ADR-0168](adr/0168-qualify-complete-native-toolchain.md): native qualification remains historical evidence.
 - V1.3: [pool3integrated/5held](content-pool/v1-3-everyday-concepts/pool.json), [integration](reviews/v1-3-everyday-concepts/README.md); graph3/12/12 accepted/applied.
-- **Source6 remains live; V1.7 is uninstalled with zero integrated growth.** [ADR-0186](adr/0186-go-authoritative-content-validation.md) makes Go/native JSON authoritative; Python/Rust optional. [Permanent candidate input contracts](reviews/v1-7-recognizable-content/go-source7-input-contracts-results.json) are staged in I1200:2 new Go test files, all1198 prior members/data/history exact. Fresh race compile/list/run passed both parents+69 ordered subcases (71 executions), no failure/skip/race/omission; ordinary2sessions/32requests prove direct leafă→Salary/shared slot/privateGet/earned bank3 clue/4attempts1clue700/share/Progress. Held69 preserve9exact/1projection/2fuzzy/57unknown, frozen graph expectations plus current public confirmation/private/noncharge/advisory checks. Eight HTTP advice lists are new normative checks, not old goldens. [Projection reuse proof](reviews/v1-7-recognizable-content/go-source7-input-contracts-projection-reuse.json) binds unchanged private helper code/complete registry-normalization inputs to archived ordering evidence; no new private-function execution or69HTTP corpus claim. Peak sampledRSS419246080B/combinedgrowth51717329B+64MiB withinlimits. Root Go publication waits for supported Source7 adoption; new tests currently candidate-only. Prior ops840c/rail0724/check and backend389/38/27 metadata accepted, optional full-module inventory remains failed/unrun; do not fetch unused metadata. Next actual native package/case coverage and full tests/vet, fresh corpus/audits/finals/authority/assembled qualification. Runtime131 remains static expectation. For that content lane, asset scope was unanswered and GUI/frontend/PG/provider/remote work stayed paused; current GUI continuation is recorded above. **Windows handover:** owner requested origin/main+feature checkpoint push; Linux loop PAUSED. Exact1200-member candidate source archive5d0ae406/membermanifestc4f30495 supports reconstruction without Linux scratch; see current wave handover. New coverage plans are interrupted/unreviewed drafts, no native execution. No V1.7 release or cleanup claim.
+- **V1.7 parked** ([ADR-0188](adr/0188-park-v1-7-and-reset-content-loop.md)): `codex/content-v1-7` (local 3377a68, origin fba9498) and `codex/content-v1-7-qualification` are not merged; zero integrated growth. V1.8 is the qualified content; [ADR-0186](adr/0186-go-authoritative-content-validation.md) keeps Go/native JSON authoritative. Outcome: [pool](content-pool/v1-7-recognizable-content/pool.json); leafă was independently integrated via V1.8 as a full-paradigm Salariu input.
+- **Main3f327c V1.8 contentrails GREEN history** (verified 2026-10-11; combined NOT RUN): all four rails reconstruct exactly and re-audit under the current binary; contentrails/contentbuild race tests pass.
+  Main records approved Cald assertions/content passes and known `TestManagedSPA*` failures; no combined result is inferred. [Procedure](CONTENT_LOOP.md), [ADR-0189](adr/0189-behaviour-bound-installed-content-authorities.md).
 - Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing
   diacritics in some descriptions ("roman"/"român"), the false Toma Caragiu–Reconstituirea
   casting edge, generic-only Lanț `lt_personalitati_186`, off-theme single-board Conexiuni
   Limbă/Geografie Greu shelves, label spellings (Herta Müller, Mica Unire 1859); forced fallback Societate/Secundă and mixed Personalități predicates.
-- Known limits: Alchimie Greu starts on shelves without a curated board can take seconds
-  (a time cap would break deterministic dailies); older stored score details keep ISO dates
+- Known limits: Alchimie Greu starts on shelves without a curated board can take seconds (a time cap would break deterministic dailies); older stored score details keep ISO dates
   but display as dd.mm.yyyy. The held Familie gradient and four spare concept slots remain.
 ## Doc map
-- README/AGENTS: orientation; agent-map/testing: gates; ADRs (current [0187](adr/0187-m1-font-preload-binding.md); both0185/0186 filename pairs retained), WORKLOG: history; [GUI motion preparation](reviews/gui-motion-baseline/README.md):29 provisional preview/69 focused checks;48 future cases UNEXECUTED; named-gate placement blocked.
+- README/AGENTS: orientation; agent-map/testing: gates; [ADR0194](adr/0194-integrate-reviewed-v18-with-gui-history.md) records current integration and full-filename0185/0186/0188/0189 collisions; [content loop](CONTENT_LOOP.md), WORKLOG and [GUI handover](GUI_MIGRATION_HANDOFF.md) preserve source-scoped history. Motion preparation remains provisional, not a named-gate qualification.

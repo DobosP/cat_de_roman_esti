@@ -27,12 +27,13 @@ go -C go-backend run ./cmd/cat-content-rail all --root .. --check
 A new authored input must have `version` greater than 1 and
 `parent_source_sha256` equal to the reviewed native source hash. New candidates
 require both complete independent semantic reviews. Installation requires the
-exact saved proposal, a fresh native audit over the complete runtime/source
-manifest, the same reviewers' final acceptances, and an explicit reviewed output
-SHA-256. The shared operator lock checks the full original input readset before
+exact saved proposal, a fresh native audit re-run under the current binary that
+equals the signed audit except for recorded runtime provenance (ADR-0189), the
+same reviewers' final acceptances, and an explicit reviewed output SHA-256. The
+shared operator lock checks the full original input readset before
 writes and after post-validation; rollback restores original bytes and modes.
 
 A staged approved catalog does not activate serving: the native exporter and
 server retain their compiled reviewed pins until the separate reviewed pin/code
-transition and rebuild. Stale or unknown source, review, history and runtime
-bindings refuse rather than being silently re-pinned.
+transition and rebuild. Stale or unknown source, review, history and audited
+behaviour bindings refuse rather than being silently re-pinned.

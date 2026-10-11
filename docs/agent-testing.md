@@ -1,6 +1,6 @@
 # Agent Testing Guide — cat_de_roman_esti
 
-Last verified: 2026-10-10 — main/GUI source reconciliation only; actual full6ebc evidence and combined-source qualification limits are in STATUS.
+Last verified: 2026-10-11 — main3f327c/GUI4f36 source integration only; combined checks NOT RUN (ADR0194).
 
 ## Native serving gates
 
@@ -58,7 +58,7 @@ For browser fixtures, build `cat-browser-plan` and set its absolute scratch path
 
 1. Run docs/whitespace gates; documentation-only changes need no game or asset rebuild.
 2. Native behavior changes run focused Go race/vet and applicable PG/HTTP release lanes.
-3. Content changes run native source/operator/rail freshness and independent review contracts.
+3. Content changes run native source/operator/rail freshness and independent review contracts; `cat-content-rail all --root .. --check` runs fresh native audits under main's [behaviour-bound rule](adr/0189-behaviour-bound-installed-content-authorities.md): strict three auditor pins, exact artifact/review/source bindings and guarded runtime readsets remain mandatory. Runtime hashes are recorded provenance; other HTTP/GUI/safety gates remain independent.
 4. Frontend JS/TS/CSS changes run applicable frontend/build/browser gates. Keep original30 frozen;
    managed output sync and reviewed source retirement follow ADR-0184; backend/docs-only edits do not regenerate output.
    [ADR-0185](adr/0185-accepted-eager-startup-bundle-accounting.md) counts entry+mandatory AccountBar recursive static JS/CSS once; retained actual startup122743/122880 is not device proof.

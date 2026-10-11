@@ -21,7 +21,14 @@ const source6ContextManifestSHA256 = "85060d2de045d667cbae26a142d21223b9c3d3c506
 
 func source6HistoricalRoot(t *testing.T) string {
 	t.Helper()
-	manifestRaw := readHistoricalContextFile(t, source6ContextManifest, 32<<10, source6ContextManifestSHA256)
+	return source6ContextRoot(t, source6ContextArchive, source6ContextManifest, source6ContextArchiveSHA256, source6ContextManifestSHA256, "gui-immutable-source6-test-context-v1", "59a9a568c445654f69215d735091c9b3e0405831", "e0cfe93de076f14a782dc6377b2655d4ef10f86ada1560ae1202bb06dbfdf877", "c0bededc869ef4c719d55ab22b7c3fbf6fa973eb972b912860d8dddf92c34b4d")
+}
+
+// Both callers supply immutable literal archive/manifest hashes. All inventory,
+// tar member, source-byte and mirror checks remain shared and strict.
+func source6ContextRoot(t *testing.T, archiveName, manifestName, archiveSHA, manifestSHA, schema, baseline, bundleSHA, pinSHA string) string {
+	t.Helper()
+	manifestRaw := readHistoricalContextFile(t, manifestName, 32<<10, manifestSHA)
 	var manifest struct {
 		Schema         string `json:"schema"`
 		BaselineCommit string `json:"baseline_commit"`
@@ -35,7 +42,7 @@ func source6HistoricalRoot(t *testing.T) string {
 	if err := json.Unmarshal(manifestRaw, &manifest); err != nil {
 		t.Fatal(err)
 	}
-	if manifest.Schema != "gui-immutable-source6-test-context-v1" || manifest.BaselineCommit != "59a9a568c445654f69215d735091c9b3e0405831" || len(manifest.Entries) != 11 {
+	if manifest.Schema != schema || manifest.BaselineCommit != baseline || len(manifest.Entries) != 11 {
 		t.Fatal("historical Source6 manifest provenance differs")
 	}
 	allowed := map[string]bool{
@@ -61,7 +68,7 @@ func source6HistoricalRoot(t *testing.T) string {
 			t.Fatalf("historical Source6 fixture mirror differs: %s", target)
 		}
 	}
-	compressed := readHistoricalContextFile(t, source6ContextArchive, 4<<20, source6ContextArchiveSHA256)
+	compressed := readHistoricalContextFile(t, archiveName, 4<<20, archiveSHA)
 	z, err := gzip.NewReader(bytes.NewReader(compressed))
 	if err != nil {
 		t.Fatal(err)
@@ -98,7 +105,7 @@ func source6HistoricalRoot(t *testing.T) string {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if SHA256(files["go-backend/internal/content/bundled.json"]) != "e0cfe93de076f14a782dc6377b2655d4ef10f86ada1560ae1202bb06dbfdf877" || SHA256(files["go-backend/internal/content/digest.go"]) != "c0bededc869ef4c719d55ab22b7c3fbf6fa973eb972b912860d8dddf92c34b4d" || len(object(bundle["sources"])) != 8 {
+	if SHA256(files["go-backend/internal/content/bundled.json"]) != bundleSHA || SHA256(files["go-backend/internal/content/digest.go"]) != pinSHA || len(object(bundle["sources"])) != 8 {
 		t.Fatal("historical Source6 bundle/pin identity differs")
 	}
 	for _, name := range SourceNames {

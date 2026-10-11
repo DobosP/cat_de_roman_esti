@@ -19,6 +19,11 @@ const source5ContextManifest = "docs/reviews/v1-6-everyday-inputs/reference/hist
 const source5ContextArchiveSHA256 = "ffffa21ccf11f79d817c529123f2583824c62fefaabd17a5887e7ce809507e48"
 const source5ContextManifestSHA256 = "47d93bbae6a5a6f5eec031a09568c20e2f81887598cff9fff9120c9eeff2a48c"
 
+// The V1.6 (Source6) bundle as landed at main 2eb73d1, archived once with
+// `gzip -9 -n` so the two-alias delta test no longer pins live bundle bytes (ADR-0189).
+const source6BundleArchive = "docs/reviews/v1-6-everyday-inputs/reference/historical-source6-bundle.json.gz"
+const source6BundleArchiveSHA256 = "cf95341760f4f9575b77cfa71af435027578144548c1dbac3c73f4b1e20bfe41"
+
 func readHistoricalContextFile(t *testing.T, name string, limit int64, digest string) []byte {
 	t.Helper()
 	f, err := os.Open(filepath.Join(repoRoot(t), filepath.FromSlash(name)))

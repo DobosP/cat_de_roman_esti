@@ -138,9 +138,9 @@ and the word-grid reflow; its release, reserve and content decisions remain.
 
 Parallel lanes allocated0185/0186 independently. Full filenames disambiguate their preserved append-only records; no decision body was renumbered or overwritten.
 
-- [0188](0188-live-home-baseline-alias-and-diagnostics.md) — live exact Home selector equivalence and explicit instrumented owner diagnostic; LCP/INP direction partially superseded by0190, all other strict comparisons retained.
+- [0188-live-home-baseline-alias-and-diagnostics.md — GUI](0188-live-home-baseline-alias-and-diagnostics.md) — live exact Home selector equivalence and explicit instrumented owner diagnostic; LCP/INP direction partially superseded by0190, all other strict comparisons retained.
 
-- [0189](0189-manifest-owned-precompressed-assets.md) — deterministic manifest-owned gzip/Brotli production and strict complete-pair inventory/sync; source accepted, managed/image/browser validation pending.
+- [0189-manifest-owned-precompressed-assets.md — GUI assets](0189-manifest-owned-precompressed-assets.md) — deterministic manifest-owned gzip/Brotli production and strict complete-pair inventory/sync; source accepted, managed/image/browser validation pending.
 
 - [0190](0190-owner-approved-vitals-regression-criterion.md) — explicit owner-approved LCP/INP improvements with unchanged slowdown limits; original baselines/failures retained, actual focused43 PASS, full qualification pending.
 
@@ -149,3 +149,11 @@ Parallel lanes allocated0185/0186 independently. Full filenames disambiguate the
 - [0192](0192-bounded-managed-local-launchers.md) — actual managed native/dev/HMR local modes, loopback host-port selection and private CID creation; bounded proofs, formal GUI adoption remains open.
 
 - [0193](0193-frozen-legacy-budget-baseline.md) — explicit owner-approved frozen fallback baseline integrity; active numeric limits unchanged, consumer source checks NOT RUN.
+
+- [0188-park-v1-7-and-reset-content-loop.md — content](0188-park-v1-7-and-reset-content-loop.md) — preserve parked V1.7; main V1.8 is a distinct reviewed content installation.
+
+- [0189-behaviour-bound-installed-content-authorities.md — content](0189-behaviour-bound-installed-content-authorities.md) — live installed authorities require fresh native behaviour equality with strict auditor/document/artifact/source/readset protections; runtime provenance remains recorded.
+
+Parallel lanes also allocated0188/0189 independently. All four full-filename bodies remain byte-exact; scopes and links disambiguate them without aliases or renumbering.
+
+- [0194](0194-integrate-reviewed-v18-with-gui-history.md) — parent source integration of complete main V1.8 with GUI, separate historical Source6 builders/corpora and exact V1.8 tuple; combined qualification NOT RUN.

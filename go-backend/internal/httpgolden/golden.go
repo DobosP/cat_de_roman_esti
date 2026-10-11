@@ -38,6 +38,9 @@ var frozenV16 []byte
 //go:embed testdata/python-http-parity-source6-gui-requalification.json.gz
 var frozenSource6GUIRequalification []byte
 
+//go:embed testdata/python-http-parity-v1-8.json.gz
+var frozenV18 []byte
+
 const FrozenSHA256 = "9041e05f13190a06a526c1aeed1f264d467483cd267ffcdb24f422ed9430b2cb"
 const V12SHA256 = "6293a0dde67ee0b0e5929cc1103bd80795e0aff1af2ba5fdf53e983ab79351fd"
 const V13SHA256 = "67d009c7eaa710bd98281b3300d3df4dc4ed4e224a157934abd7e19bce112670"
@@ -45,6 +48,7 @@ const V14SHA256 = "9d49bd38bbc20c7ebf3a834cada064bf7e4b48018e53890075106dc8f844c
 const V15SHA256 = "22995196184b991996b56dccf50e5032f27814d7403fff411a120fa11c76a519"
 const V16SHA256 = "15c7d1bc33c2775a387a9bfe3229625145c94a0ed300622e6737b557c77ebdfe"
 const source6GUIRequalificationSHA256 = "0437c53b91b07d7c4323a7c66753d7250d9304b6a32f94f03901285e64c21951"
+const V18SHA256 = "2c02ee69ebdffd295f5ebe2f90a53276e4166cb39faecd3b14b51bb9e3d295ed"
 const MaxCorpusBytes = 32 * 1024 * 1024
 const MaxCases = 4096
 
@@ -185,6 +189,17 @@ func source6GUIRequalificationCorpus() (*Corpus, error) {
 	return c, err
 }
 
+func reviewedV18() (*Corpus, error) {
+	if fmt.Sprintf("%x", sha256.Sum256(frozenV18)) != V18SHA256 {
+		return nil, fmt.Errorf("independent V1.8 HTTP corpus digest drift")
+	}
+	c, err := ReadCorpus(bytes.NewReader(frozenV18), true)
+	if err == nil && (len(c.Cases) != 1207 || len(c.Sources) != 8) {
+		return nil, fmt.Errorf("expected 1207 independent V1.8 HTTP cases and exact eight sources")
+	}
+	return c, err
+}
+
 // ForSources selects an independently captured reviewed corpus only when its
 // entire source identity equals the requested export. Historical Frozen remains
 // immutable; unknown, partial or mixed source sets never gain expected responses.
@@ -217,7 +232,11 @@ func ForSources(sources map[string]string) (*Corpus, error) {
 	if err != nil {
 		return nil, err
 	}
-	for _, c := range []*Corpus{original, current, latest, v14, v15, v16, source6GUIRequalification} {
+	v18, err := reviewedV18()
+	if err != nil {
+		return nil, err
+	}
+	for _, c := range []*Corpus{original, current, latest, v14, v15, v16, source6GUIRequalification, v18} {
 		if reflect.DeepEqual(c.Sources, sources) {
 			return c, nil
 		}
