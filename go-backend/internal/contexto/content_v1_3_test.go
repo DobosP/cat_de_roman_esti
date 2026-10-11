@@ -3,6 +3,7 @@ package contexto
 import (
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/pack"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/pyrandom"
+	"maps"
 	"math/big"
 	"testing"
 
@@ -19,10 +20,11 @@ func TestV13EverydayFormsGiveOneWarmPrivateAttempt(t *testing.T) {
 	cases := []struct {
 		id, target string
 		forms      []string
+		incoming   string
 	}{
-		{"n_v1_3_home_balama", "n_v4via_usa", []string{"balama", "BALAMAUA", "balamale", "balamalele", "balamalei", "balamalelor"}},
-		{"n_v1_3_material_lemn", "n_v4sti_copac", []string{"lemn", "LEMNUL", "lemnului"}},
-		{"n_v1_3_clothing_fermoar", "n_v23via_ghiozdan", []string{"fermoar", "FERMOARUL", "fermoare", "fermoarele", "fermoarului", "fermoarelor"}},
+		{"n_v1_3_home_balama", "n_v4via_usa", []string{"balama", "BALAMAUA", "balamale", "balamalele", "balamalei", "balamalelor"}, ""},
+		{"n_v1_3_material_lemn", "n_v4sti_copac", []string{"lemn", "LEMNUL", "lemnului"}, "n_v1_8_tocator"},
+		{"n_v1_3_clothing_fermoar", "n_v23via_ghiozdan", []string{"fermoar", "FERMOARUL", "fermoare", "fermoarele", "fermoarului", "fermoarelor"}, "n_v1_8_rucsac"},
 	}
 	for _, row := range cases {
 		t.Run(row.id, func(t *testing.T) {
@@ -31,8 +33,12 @@ func TestV13EverydayFormsGiveOneWarmPrivateAttempt(t *testing.T) {
 				t.Fatal("new native vocabulary absent")
 			}
 			inbound := s.g.DistancesTo(row.id)
-			if len(inbound) != 1 || inbound[row.id] != 0 {
-				t.Fatalf("unreviewed hidden target became reachable: %v", inbound)
+			wantInbound := map[string]int{row.id: 0}
+			if row.incoming != "" {
+				wantInbound[row.incoming] = 1
+			}
+			if !maps.Equal(inbound, wantInbound) {
+				t.Fatalf("reviewed inbound vocabulary changed: %v", inbound)
 			}
 			sid, createErr := s.store.Create(s.build(row.target, "normal", nil, ""))
 			if createErr != nil {
