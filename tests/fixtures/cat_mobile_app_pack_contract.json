@@ -4,12 +4,12 @@
   "app": "cat_de_roman_esti",
   "schema_version": 1,
   "manifest_version": 1,
-  "build_version": "fixture-v1-8-everyday-core",
+  "build_version": "fixture-v1-9-seasons-and-school",
   "generated_at": "2026-06-21T00:00:00Z",
-  "content_hash": "sha256:80d3f1bfc6ac00644486130ccc0f8ce300cef1eeed11c4586beeeb7a76c75e1d",
+  "content_hash": "sha256:466dadca1ca6226dbde6c60228ac80f548f9b17ca755913a94a7a0ced38e1795",
   "counts": {
-   "nodes": 2442,
-   "edges": 9566,
+   "nodes": 2456,
+   "edges": 9621,
    "puzzles": 180
   }
  },
@@ -4413,6 +4413,62 @@
   {
    "id": "n_v1_8_vara",
    "label_ro": "Vară"
+  },
+  {
+   "id": "n_v1_9_albastru",
+   "label_ro": "Albastru"
+  },
+  {
+   "id": "n_v1_9_caciula",
+   "label_ro": "Căciulă"
+  },
+  {
+   "id": "n_v1_9_cort",
+   "label_ro": "Cort"
+  },
+  {
+   "id": "n_v1_9_fular",
+   "label_ro": "Fular"
+  },
+  {
+   "id": "n_v1_9_ochelari",
+   "label_ro": "Ochelari"
+  },
+  {
+   "id": "n_v1_9_palarie",
+   "label_ro": "Pălărie"
+  },
+  {
+   "id": "n_v1_9_plapuma",
+   "label_ro": "Plapumă"
+  },
+  {
+   "id": "n_v1_9_polonic",
+   "label_ro": "Polonic"
+  },
+  {
+   "id": "n_v1_9_primavara",
+   "label_ro": "Primăvară"
+  },
+  {
+   "id": "n_v1_9_randunica",
+   "label_ro": "Rândunică"
+  },
+  {
+   "id": "n_v1_9_rosu",
+   "label_ro": "Roșu"
+  },
+  {
+   "id": "n_v1_9_sofer",
+   "label_ro": "Șofer"
+  },
+  {
+   "id": "n_v1_9_toamna",
+   "label_ro": "Toamnă"
+  },
+  {
+   "id": "n_v1_9_vanzator",
+   "label_ro": "Vânzător"
   },
   {
    "id": "n_v20art_balada_porumbescu",
@@ -56250,9 +56306,69 @@
    "dst_id": "n_v4mem_poza"
   },
   {
+   "id": "de8908",
+   "src_id": "n_v1_9_primavara",
+   "dst_id": "n_v1_8_anotimp"
+  },
+  {
+   "id": "de8909",
+   "src_id": "n_v1_9_primavara",
+   "dst_id": "n_v42vdr_ghiocel"
+  },
+  {
    "id": "de891",
    "src_id": "n_net_robotzi",
    "dst_id": "n_limba_romana"
+  },
+  {
+   "id": "de8910",
+   "src_id": "n_v1_9_primavara",
+   "dst_id": "n_v4sti_frunza"
+  },
+  {
+   "id": "de8911",
+   "src_id": "n_v1_9_primavara",
+   "dst_id": "n_martisor"
+  },
+  {
+   "id": "de8912",
+   "src_id": "n_v1_9_toamna",
+   "dst_id": "n_v1_8_anotimp"
+  },
+  {
+   "id": "de8913",
+   "src_id": "n_v1_9_toamna",
+   "dst_id": "n_v4sti_frunza"
+  },
+  {
+   "id": "de8914",
+   "src_id": "n_v1_9_toamna",
+   "dst_id": "n_v84_food_grau"
+  },
+  {
+   "id": "de8915",
+   "src_id": "n_v1_9_toamna",
+   "dst_id": "n_v24_food_small_fruit_strugure"
+  },
+  {
+   "id": "de8916",
+   "src_id": "n_v1_9_randunica",
+   "dst_id": "n_v4sti_pasare"
+  },
+  {
+   "id": "de8917",
+   "src_id": "n_v1_9_randunica",
+   "dst_id": "n_v4sti_insecta"
+  },
+  {
+   "id": "de8918",
+   "src_id": "n_v1_9_randunica",
+   "dst_id": "n_v1_9_primavara"
+  },
+  {
+   "id": "de8919",
+   "src_id": "n_v1_9_randunica",
+   "dst_id": "n_v1_9_toamna"
   },
   {
    "id": "de892",
@@ -56260,9 +56376,109 @@
    "dst_id": "n_cinematografia_romaneasca"
   },
   {
+   "id": "de8920",
+   "src_id": "n_v1_9_cort",
+   "dst_id": "n_v1_3_material_lemn"
+  },
+  {
+   "id": "de8921",
+   "src_id": "n_v1_9_cort",
+   "dst_id": "n_v11via_nunta_la_cort"
+  },
+  {
+   "id": "de8922",
+   "src_id": "n_v1_9_cort",
+   "dst_id": "n_v24_weather_precipitation_ploaie"
+  },
+  {
+   "id": "de8923",
+   "src_id": "n_v1_9_cort",
+   "dst_id": "n_v1_8_vacanta"
+  },
+  {
+   "id": "de8924",
+   "src_id": "n_v1_9_ochelari",
+   "dst_id": "n_v4sti_ochi"
+  },
+  {
+   "id": "de8925",
+   "src_id": "n_v1_9_ochelari",
+   "dst_id": "n_v24_body_face_nas"
+  },
+  {
+   "id": "de8926",
+   "src_id": "n_v1_9_ochelari",
+   "dst_id": "n_v4sti_lumina"
+  },
+  {
+   "id": "de8927",
+   "src_id": "n_v1_9_ochelari",
+   "dst_id": "n_v3lit_carte"
+  },
+  {
+   "id": "de8928",
+   "src_id": "n_v1_9_caciula",
+   "dst_id": "n_v29_clothing_everyday_haina"
+  },
+  {
+   "id": "de8929",
+   "src_id": "n_v1_9_caciula",
+   "dst_id": "n_v24_body_face_cap"
+  },
+  {
    "id": "de893",
    "src_id": "n_net_andrei_terbea",
    "dst_id": "n_net_creator_de_continut"
+  },
+  {
+   "id": "de8930",
+   "src_id": "n_v1_9_caciula",
+   "dst_id": "n_v1_8_iarna"
+  },
+  {
+   "id": "de8931",
+   "src_id": "n_v1_9_caciula",
+   "dst_id": "n_v1_9_fular"
+  },
+  {
+   "id": "de8932",
+   "src_id": "n_v1_9_sofer",
+   "dst_id": "n_v28_work_occupation_meserie"
+  },
+  {
+   "id": "de8933",
+   "src_id": "n_v1_9_sofer",
+   "dst_id": "n_v24_transport_personal_masina"
+  },
+  {
+   "id": "de8934",
+   "src_id": "n_v1_9_sofer",
+   "dst_id": "n_v4soc_autobuz"
+  },
+  {
+   "id": "de8935",
+   "src_id": "n_v1_9_sofer",
+   "dst_id": "n_v20soc_permis_de_conducere"
+  },
+  {
+   "id": "de8936",
+   "src_id": "n_v1_9_vanzator",
+   "dst_id": "n_v28_work_occupation_meserie"
+  },
+  {
+   "id": "de8937",
+   "src_id": "n_v1_9_vanzator",
+   "dst_id": "n_v4soc_magazin"
+  },
+  {
+   "id": "de8938",
+   "src_id": "n_v1_9_vanzator",
+   "dst_id": "n_v4soc_bani"
+  },
+  {
+   "id": "de8939",
+   "src_id": "n_v1_9_vanzator",
+   "dst_id": "n_v3via_piata"
   },
   {
    "id": "de894",
@@ -56270,14 +56486,129 @@
    "dst_id": "n_net_parodie_online"
   },
   {
+   "id": "de8940",
+   "src_id": "n_v1_9_rosu",
+   "dst_id": "n_v4art_culoare"
+  },
+  {
+   "id": "de8941",
+   "src_id": "n_v1_9_rosu",
+   "dst_id": "n_martisor"
+  },
+  {
+   "id": "de8942",
+   "src_id": "n_v1_9_rosu",
+   "dst_id": "n_v21soc_drapelul_romaniei"
+  },
+  {
+   "id": "de8943",
+   "src_id": "n_v1_9_rosu",
+   "dst_id": "n_v4gas_rosie"
+  },
+  {
+   "id": "de8944",
+   "src_id": "n_v1_9_albastru",
+   "dst_id": "n_v4art_culoare"
+  },
+  {
+   "id": "de8945",
+   "src_id": "n_v1_9_albastru",
+   "dst_id": "n_albastru_de_voronet"
+  },
+  {
+   "id": "de8946",
+   "src_id": "n_v1_9_albastru",
+   "dst_id": "n_v21soc_drapelul_romaniei"
+  },
+  {
+   "id": "de8947",
+   "src_id": "n_v1_9_albastru",
+   "dst_id": "n_v28_nature_weather_curcubeu"
+  },
+  {
+   "id": "de8948",
+   "src_id": "n_v1_9_polonic",
+   "dst_id": "n_v30_kitchen_utensil_lingura"
+  },
+  {
+   "id": "de8949",
+   "src_id": "n_v1_9_polonic",
+   "dst_id": "n_v30_kitchen_cookware_oala"
+  },
+  {
    "id": "de895",
    "src_id": "n_net_andrei_terbea",
    "dst_id": "n_net_umor_autoironic"
   },
   {
+   "id": "de8950",
+   "src_id": "n_v1_9_polonic",
+   "dst_id": "n_v4gas_supa"
+  },
+  {
+   "id": "de8951",
+   "src_id": "n_v1_9_polonic",
+   "dst_id": "n_v2gas_ciorba"
+  },
+  {
+   "id": "de8952",
+   "src_id": "n_v1_9_plapuma",
+   "dst_id": "n_v24_home_bed_pat"
+  },
+  {
+   "id": "de8953",
+   "src_id": "n_v1_9_plapuma",
+   "dst_id": "n_v24_home_bed_perna"
+  },
+  {
+   "id": "de8954",
+   "src_id": "n_v1_9_plapuma",
+   "dst_id": "n_v24_home_textiles_cearsaf"
+  },
+  {
+   "id": "de8955",
+   "src_id": "n_v1_9_plapuma",
+   "dst_id": "n_v24_action_routine_a_dormi"
+  },
+  {
+   "id": "de8956",
+   "src_id": "n_v1_9_palarie",
+   "dst_id": "n_v29_clothing_everyday_haina"
+  },
+  {
+   "id": "de8957",
+   "src_id": "n_v1_9_palarie",
+   "dst_id": "n_v24_body_face_cap"
+  },
+  {
+   "id": "de8958",
+   "src_id": "n_v1_9_palarie",
+   "dst_id": "n_v24_nature_sky_soare"
+  },
+  {
+   "id": "de8959",
+   "src_id": "n_v1_9_palarie",
+   "dst_id": "n_v1_9_caciula"
+  },
+  {
    "id": "de896",
    "src_id": "n_net_zaiafet",
    "dst_id": "n_net_creator_de_continut"
+  },
+  {
+   "id": "de8960",
+   "src_id": "n_v1_9_fular",
+   "dst_id": "n_v29_clothing_everyday_haina"
+  },
+  {
+   "id": "de8961",
+   "src_id": "n_v1_9_fular",
+   "dst_id": "n_v29_body_upper_gat"
+  },
+  {
+   "id": "de8962",
+   "src_id": "n_v1_9_fular",
+   "dst_id": "n_v1_8_iarna"
   },
   {
    "id": "de897",
