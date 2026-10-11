@@ -3,9 +3,11 @@ package contentrails
 import (
 	"bytes"
 	"context"
+	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
+	"sync"
 	"testing"
 )
 
@@ -17,9 +19,54 @@ type installedFixture struct {
 	entry    map[string]any
 }
 
+// installedTemplate is the installed-authority fixture built once per test
+// process in a TestMain-owned directory (outside any single test's TempDir).
+// Each test receives a private copy of its tree and of its manifest.
+var installedTemplate struct {
+	once     sync.Once
+	ready    bool
+	dir      string
+	root     string
+	manifest map[string]any
+}
+
+func TestMain(m *testing.M) {
+	code := m.Run()
+	if installedTemplate.dir != "" {
+		_ = os.RemoveAll(installedTemplate.dir)
+	}
+	os.Exit(code)
+}
+
 func installedFixtureForTest(t *testing.T) installedFixture {
 	t.Helper()
-	root, selected := cloneRoot(t)
+	installedTemplate.once.Do(func() { buildInstalledTemplate(t) })
+	if !installedTemplate.ready {
+		t.Fatal("installed authority fixture template failed to build")
+	}
+	root := t.TempDir()
+	copyTreeForTest(t, installedTemplate.root, root)
+	s, err := LoadSource(filepath.Join(root, "docs/reviews/synthetic-installed-v2/source-v2.json"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	manifest := copyJSONForTest(installedTemplate.manifest).(map[string]any)
+	entry := object(object(manifest["rails"])["quick"])
+	return installedFixture{root, sourceForTest(t), s, manifest, entry}
+}
+
+func buildInstalledTemplate(t *testing.T) {
+	t.Helper()
+	parent, err := os.MkdirTemp("", "contentrails-installed-")
+	if err != nil {
+		t.Fatal(err)
+	}
+	installedTemplate.dir = parent
+	root := filepath.Join(parent, "root")
+	if err = os.Mkdir(root, 0700); err != nil {
+		t.Fatal(err)
+	}
+	cloneRootInto(t, root)
 	dir := filepath.Join(root, "docs/reviews/synthetic-installed-v2")
 	s := sourceV2(t, dir)
 	candidate, err := Candidate(root, s, "quick", false)
@@ -60,7 +107,79 @@ func installedFixtureForTest(t *testing.T) installedFixture {
 		t.Fatal(err)
 	}
 	manifest := map[string]any{"schema": "native-content-installed-authorities-v1", "version": 1, "source_chain": []any{map[string]any{"path": "docs/reviews/synthetic-installed-v2/source-v2.json", "sha256": s.SHA256, "version": 2, "parent_source_sha256": AuthoredSHA256}}, "rails": map[string]any{"quick": entry}}
-	return installedFixture{root, selected, s, manifest, entry}
+	// Copies must verify identically, so nothing may bind the template location.
+	blob, err = Render(manifest)
+	if err != nil || bytes.Contains(blob, []byte(parent)) {
+		t.Fatal("installed authority manifest binds the template location", err)
+	}
+	err = filepath.WalkDir(root, func(path string, d os.DirEntry, err error) error {
+		if err != nil || d.IsDir() {
+			return err
+		}
+		blob, err := os.ReadFile(path)
+		if err == nil && bytes.Contains(blob, []byte(parent)) {
+			err = fmt.Errorf("fixture file binds the template location: %s", path)
+		}
+		return err
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	installedTemplate.root, installedTemplate.manifest, installedTemplate.ready = root, manifest, true
+}
+
+// copyTreeForTest copies regular files and directories with their permission
+// bits; any other file type is refused.
+func copyTreeForTest(t *testing.T, from, to string) {
+	t.Helper()
+	err := filepath.WalkDir(from, func(path string, d os.DirEntry, err error) error {
+		if err != nil {
+			return err
+		}
+		relative, err := filepath.Rel(from, path)
+		if err != nil {
+			return err
+		}
+		info, err := d.Info()
+		if err != nil {
+			return err
+		}
+		dest := filepath.Join(to, relative)
+		switch {
+		case d.IsDir():
+			return os.MkdirAll(dest, info.Mode().Perm())
+		case info.Mode().IsRegular():
+			blob, err := os.ReadFile(path)
+			if err != nil {
+				return err
+			}
+			return os.WriteFile(dest, blob, info.Mode().Perm())
+		}
+		return fmt.Errorf("fixture template holds a non-regular file: %s", relative)
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+// copyJSONForTest deep-copies maps and slices and keeps every leaf value and
+// its Go type, so each test can mutate its manifest privately.
+func copyJSONForTest(v any) any {
+	switch x := v.(type) {
+	case map[string]any:
+		out := make(map[string]any, len(x))
+		for k, item := range x {
+			out[k] = copyJSONForTest(item)
+		}
+		return out
+	case []any:
+		out := make([]any, len(x))
+		for i, item := range x {
+			out[i] = copyJSONForTest(item)
+		}
+		return out
+	}
+	return v
 }
 
 func authorityForTest(t *testing.T, raw map[string]any) *installedAuthorities {

@@ -228,13 +228,17 @@ func TestHistoricalWorldTransitionsKeepCurrentBooksAndRefuseChangedRecipes(t *te
 }
 func cloneRoot(t *testing.T) (string, *Source) {
 	t.Helper()
+	target := t.TempDir()
+	return target, cloneRootInto(t, target)
+}
+func cloneRootInto(t *testing.T, target string) *Source {
+	t.Helper()
 	root := rootPath(t)
 	s := sourceForTest(t)
 	paths, err := inputReadPaths(root, s)
 	if err != nil {
 		t.Fatal(err)
 	}
-	target := t.TempDir()
 	for _, path := range paths {
 		relative, err := filepath.Rel(root, path)
 		if err != nil || strings.HasPrefix(relative, "..") {
@@ -252,7 +256,7 @@ func cloneRoot(t *testing.T) (string, *Source) {
 			t.Fatal(err)
 		}
 	}
-	return target, s
+	return s
 }
 func TestSyntheticVersionTwoInstallBoundReviewsAuditAndServingPinRefusal(t *testing.T) {
 	root, _ := cloneRoot(t)
