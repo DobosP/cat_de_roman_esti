@@ -391,6 +391,14 @@ func TestSharedGuardedTransactionsRollbackAndRefuseStaleReadsets(t *testing.T) {
 		if err := os.WriteFile(path, []byte(blob), 0640); err != nil {
 			t.Fatal(err)
 		}
+		// Establish the intended fixture mode before capturing the read set.
+		if err := os.Chmod(path, 0640); err != nil {
+			t.Fatal(err)
+		}
+		info, err := os.Stat(path)
+		if err != nil || info.Mode().Perm() != 0640 {
+			t.Fatal("initial guarded-transaction fixture mode differs", err)
+		}
 	}
 	readset, err := contentops.CaptureReadSet([]string{a, b, input})
 	if err != nil {

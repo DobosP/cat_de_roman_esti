@@ -45,6 +45,14 @@ func TestExportTransactionPartialWriteAndGateRollback(t *testing.T) {
 						if e := os.WriteFile(p, []byte("original:"+filepath.Base(p)), 0640); e != nil {
 							t.Fatal(e)
 						}
+						// Establish the intended fixture mode before testing restoration.
+						if e := os.Chmod(p, 0640); e != nil {
+							t.Fatal(e)
+						}
+						info, e := os.Stat(p)
+						if e != nil || info.Mode().Perm() != 0640 {
+							t.Fatal("initial export fixture mode differs", e)
+						}
 					}
 				}
 				produce := func() ([]byte, []byte, error) {
