@@ -1,8 +1,9 @@
 # syntax=docker/dockerfile:1
-# Canonical Go recipe; fresh managed assets and explicit identity precede compilation.
+# Canonical distroless Go image (S1 M1 step 3); the gate's APP_DOCKERFILE and every Compose/CI caller build it.
+# Every image/version below is copied from the current versions.lock.json.
 # Parent supplies actual GATE_SHA/GATE_TREE_SHA256 build arguments; no inferred defaults.
-# Preserve the existing 8000/curl/cat-server/migration/UID10001 caller contracts.
-FROM node:26.10.0-bookworm-slim@sha256:cfa005801786b8e38fa220af518e43f5654c53b36af36b4ad5b3049225ee261e AS frontend
+# Runtime contract: /app on container port 8080, `/app healthcheck` (no shell/curl), UID 10001, /data/submissions 700.
+FROM node:26.10.0-trixie-slim@sha256:930557a230abacbc3f4fd9b8648abf8f4bee1e17cb72195dcdfb2f709bc85b33 AS frontend
 WORKDIR /build
 COPY versions.lock.json /build/versions.lock.json
 RUN npm install --global npm@12.2.0
@@ -19,7 +20,7 @@ RUN cd frontend && npm run build
 # Owning sync verifies the actual manifest/assets and exact frozen original30.
 RUN node scripts/gui-assets.mjs sync
 
-FROM golang:1.27.1-bookworm@sha256:e114385c58e7280d2f56d6cf374219dda33fef8eb77f72e9f290ccae6160bd90 AS backend
+FROM golang:1.27.1-trixie@sha256:8f58fd67ea075142d947a60e0caa4317746a55118d312f027793d382c7741734 AS backend
 ARG GATE_SHA
 ARG GATE_TREE_SHA256
 ENV GOTOOLCHAIN=local
@@ -35,22 +36,19 @@ COPY --from=frontend /build/go-backend/embedfs/legacy/ ./embedfs/legacy/
 RUN GOMAXPROCS=2 GOFLAGS=-p=2 go run ./cmd/cat-content export --root .. --check
 # No defaults or environment fallback: failure prevents the app compilation.
 RUN GOMAXPROCS=2 GOFLAGS=-p=2 go run ./cmd/cat-gui-build --root .. --sha "$GATE_SHA" --tree-sha256 "$GATE_TREE_SHA256" \
-    && CGO_ENABLED=0 GOMAXPROCS=2 GOFLAGS=-p=2 go build -trimpath -ldflags="-s -w" -o /out/cat-server ./cmd/cat-server
+    && CGO_ENABLED=0 GOMAXPROCS=2 GOFLAGS=-p=2 go build -trimpath -ldflags="-s -w" -o /out/app ./cmd/cat-server
+# Distroless has no shell: the submissions mount point is prepared here.
+RUN mkdir -p /out/data/submissions && chown 10001:10001 /out/data/submissions && chmod 700 /out/data/submissions
 
-FROM debian:bookworm-slim@sha256:a4672c0cb26fbdde88e38fa2dfb6c681942306680e41e4378b28770b6e79ee91 AS runtime
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends ca-certificates curl libpcre2-8-0 \
-    && rm -rf /var/lib/apt/lists/* \
-    && groupadd --gid 10001 app \
-    && useradd --uid 10001 --gid 10001 --no-create-home --shell /usr/sbin/nologin app
-RUN mkdir -p /data/submissions && chown 10001:10001 /data/submissions && chmod 700 /data/submissions
-WORKDIR /app
-COPY --from=backend /out/cat-server /usr/local/bin/cat-server
+FROM gcr.io/distroless/static-debian13:nonroot@sha256:e2e927ec666bae08560abb3c55d0659eceabb657f56b6782ab500a9fc7f555e3
+WORKDIR /
+COPY --from=backend /out/app /app
+COPY --from=backend /out/data/ /data/
 COPY shared-go/authcore/LICENSE /usr/share/doc/cat-authcore/LICENSE
-ENV CAT_ACCOUNTS_ENABLED=0 PORT=8000
+ENV CAT_ACCOUNTS_ENABLED=0
 USER 10001:10001
-EXPOSE 8000
+EXPOSE 8080
 STOPSIGNAL SIGTERM
-HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \
-    CMD curl --fail --silent --show-error --output /dev/null --max-time 3 "http://127.0.0.1:${PORT:-8000}/api/health"
-CMD ["sh", "-c", "exec /usr/local/bin/cat-server -listen \"0.0.0.0:${PORT:-8000}\""]
+HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 CMD ["/app", "healthcheck"]
+ENTRYPOINT ["/app"]
+CMD ["-listen", "0.0.0.0:8080"]

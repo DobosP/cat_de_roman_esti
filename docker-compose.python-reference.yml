@@ -39,7 +39,7 @@ services:
         condition: service_healthy
     environment:
       DJANGO_SETTINGS_MODULE: cat_de_roman_esti.web.settings
-      PORT: "8000"
+      PORT: "8080" # shared deploy/Caddyfile upstream is app:8080
       CAT_ACCOUNTS_ENABLED: "1"
       CAT_DEBUG: "0"
       CAT_DOMAIN: ${CAT_DOMAIN:?set CAT_DOMAIN in .env.prod}
@@ -63,7 +63,7 @@ services:
       - submissions:/data/submissions
     command: ["sh", "/app/entrypoint.sh"]
     expose:
-      - "8000" # reachable only by Caddy over the compose network (no host port)
+      - "8080" # reachable only by Caddy over the compose network (no host port)
     restart: unless-stopped
 
   caddy:

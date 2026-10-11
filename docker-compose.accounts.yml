@@ -2,7 +2,7 @@
 # A separate fixture/development database can use an externally supplied DATABASE_URL.
 services:
   app:
-    command: ["sh", "-c", "exec cat-server -listen 0.0.0.0:8000 -migrate"]
+    command: ["-listen", "0.0.0.0:8080", "-migrate"]
     environment:
       CAT_ACCOUNTS_ENABLED: "1"
       CAT_DATABASE_URL: "${CAT_DATABASE_URL:?Supply the native account PostgreSQL URL through SOPS}"

@@ -41,8 +41,8 @@ function files(directory, prefix = "") {
 function currentContext(required = false) {
   if (!fs.existsSync(path.join(root, ".gate/wrapper-current.json"))) {
     if (required) throw new Error("Actual wrapper context required for managed output preparation");
-    if (process.platform !== "linux" || root !== "/build") throw new Error("Asset sync requires the owning wrapper or Dockerfile.gui build root");
-    return null; // Dockerfile.gui builds and syncs before its explicit identity bake.
+    if (process.platform !== "linux" || root !== "/build") throw new Error("Asset sync requires the owning wrapper or Dockerfile build root");
+    return null; // Dockerfile builds and syncs before its explicit identity bake.
   }
   const descriptorBytes = fs.readFileSync(confined(".gate/wrapper-current.json"));
   const descriptor = JSON.parse(descriptorBytes);

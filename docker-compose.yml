@@ -10,9 +10,8 @@ services:
     image: cat-de-roman-esti:latest
     container_name: cat-de-roman-esti
     ports:
-      - "127.0.0.1:${PORT:-8000}:8000"
+      - "127.0.0.1:${PORT:-8000}:8080"
     environment:
-      PORT: "8000"
       CAT_ACCOUNTS_ENABLED: "0"
       CAT_CONSENT_VERSION: "${CAT_CONSENT_VERSION:-2026-07-09}"
       CAT_DONATE_URL: "${CAT_DONATE_URL:-}"
@@ -26,7 +25,7 @@ services:
     security_opt: ["no-new-privileges:true"]
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "--fail", "--silent", "--show-error", "--output", "/dev/null", "--max-time", "3", "http://127.0.0.1:8000/api/health"]
+      test: ["CMD", "/app", "healthcheck"]
       interval: 30s
       timeout: 5s
       retries: 3
