@@ -1,0 +1,67 @@
+{
+  "schema": 1,
+  "kind": "Descriptive erratum; historical receipts/reviews preserved",
+  "incorrect_historical_statement": "b03 checkpoint/peer/root/WORKLOG claimed both original CLS medians were0; Alchimie original median is0.00057706.",
+  "original_capture_sha256": "ff055e404bf138ce0442381ab33eb643d431f922e4284f66a5002efcc397be68",
+  "original_values": [
+    {
+      "route": "/conexiuni",
+      "five_CLS_values": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "median_CLS": 0
+    },
+    {
+      "route": "/alchimie?mode=challenges",
+      "five_CLS_values": [
+        0,
+        0.00057706,
+        0,
+        0.00057706,
+        0.00057706
+      ],
+      "median_CLS": 0.00057706
+    }
+  ],
+  "latest_tested_source": "b0edd76d9d2ee6a4897f3d79c756fed4ca78048c",
+  "latest_capture_sha256": "dc819a0097d43d430e3168d19417b70fec0c9b1ac303e62babfded98d1045ff9",
+  "latest_values": [
+    {
+      "route": "/conexiuni",
+      "five_CLS_values": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "median_CLS": 0
+    },
+    {
+      "route": "/alchimie?mode=challenges",
+      "five_CLS_values": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "median_CLS": 0
+    }
+  ],
+  "written_requirement": {
+    "path": ".agent/S1.md",
+    "line": 284,
+    "sha256": "8b862b78be5b37b6c3a846d4054a6f0ba53c21884f83b9963b6efe826008a397",
+    "text": "| Vitals (LCP, INP, CLS) | each the median of ≥ 5 runs; LCP/INP require finite nonnegative values and no slowdown beyond max(10%,50ms), allowing improvements under owner-approved ADR-0190; CLS retains the original symmetric ±10 % or ±50 ms criterion, whichever is larger |",
+    "owner_ADR0190_excludes_CLS": true,
+    "ADR_sha256": "ca760b088bb3a6a809b48809052b50b0e80b64e67f976d5a38b98cac9776df02"
+  },
+  "limitation": "The helper emits no standalone CLS comparator outcome. This correction records measurements and the existing written criterion; it supplies no new predicate, policy waiver, fullGREEN/E3 approval, milestone or device qualification.",
+  "historical_frozen_records_not_rewritten": true,
+  "observed_utc": "2026-10-10T23:53:32.669162+00:00"
+}

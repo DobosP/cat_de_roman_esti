@@ -1,0 +1,97 @@
+{
+  "schema": 1,
+  "reviewer": "/root/program_pack",
+  "reviewed_utc": "2026-10-11T00:09:17.083699+00:00",
+  "verdict": "ACTUAL_POSITIVE_BUILD_CLEAR",
+  "scope": "Actual root run.sh build only; no run/dev/HMR or full qualification.",
+  "identity": {
+    "source": "b0edd76d9d2ee6a4897f3d79c756fed4ca78048c",
+    "tree_sha256": "4b88421c64d30cc746c574db5548afdf54e5ea012da3a52698060aef1b6f3980",
+    "wrapper_invocation": "9403e8be-9c51-4ec8-ba71-4644242338b3",
+    "target": "build",
+    "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+    "versions_lock_sha256": "afd977316d1749046ba723fb4fdc978bfd9257070c16afa802e4606b9ab861fa"
+  },
+  "actual_launcher": {
+    "session": 69228,
+    "exit": 0,
+    "exit_record_authority": "parent actual invocation receipt",
+    "parent_receipt_sha256": "e434643d408a027e7994c696a3014f037421a9eddc3db9cb764f89021af9e485",
+    "stdout_path": "/home/dobo/work/_temp/adhoc-gui-migration-parent-20261006/cat-b0-positive-launcher-build-20261011/launcher.stdout.log",
+    "stdout_sha256": "2495159705b9d3cd87229a0be806a3bb34868ccd61c7b07e8e6fdf64e59e712b",
+    "stdout_exact": "Actual owning build and registered server artifact verified; no app started.",
+    "stderr_path": "/home/dobo/work/_temp/adhoc-gui-migration-parent-20261006/cat-b0-positive-launcher-build-20261011/launcher.stderr.log",
+    "stderr_sha256": "65c774e040e0425b0b4b5ea828476a692662957c5080e9bce93ee16eff8442e8",
+    "entry_source_Git_binding_verified": true,
+    "message_emitted_only_after_prepared_before_build_return0": true
+  },
+  "prepared_checks": {
+    "source_mirror_PASS_receipt_equal": true,
+    "source_tree_toolchain_versions_lock_equal": true,
+    "all13_checks_unique_and_PASS": true,
+    "required6_build_checks_present": true,
+    "source_mirror_current_wrapper_equal": true,
+    "frozen_config_hash_and_bytes_equal": true,
+    "source_mirror_dependency_config_inputs_equal": 5,
+    "artifact_paths_unique": 41,
+    "server_registered_source_mirror_bytes_equal": true,
+    "server_sha256": "d6de64e28b230dc5160014e6fe3a86defb6ea2352f4a0ee546b85cb5c99fd0b1",
+    "server_executable_mode": 493,
+    "managed_identity_registered_and_manifest_lock_bound": true,
+    "identity": {
+      "sha": "b0edd76d9d2ee6a4897f3d79c756fed4ca78048c",
+      "tree_sha256": "4b88421c64d30cc746c574db5548afdf54e5ea012da3a52698060aef1b6f3980",
+      "manifest_sha256": "4722e3df22d6a0d66d000502d26d6d530c807160a341956cd527866d15e77fc9",
+      "versions_lock_sha256": "afd977316d1749046ba723fb4fdc978bfd9257070c16afa802e4606b9ab861fa"
+    }
+  },
+  "capture": {
+    "path": "/home/dobo/work/_temp/adhoc-gui-migration-parent-20261006/cat-b0-positive-launcher-build-compact-20261011",
+    "observations_sha256": "e62bec65d15415b1dcffcf9d550714eef229580ee29898c6aeccc121a699ab30",
+    "rows_bytes_fullmodes_verified": 113,
+    "sealed_gzip_roundtrips": 55,
+    "stored_bytes": 417742,
+    "directory_modes": 23,
+    "honest_absences": 4,
+    "Git_source_mirror_refs": 18,
+    "physical_retained_591c_refs": 186,
+    "ELF_hash_only": 4,
+    "ELF_or_workspace_dependency_cache_bytes_copied": false
+  },
+  "actual_build": {
+    "result_sha256": "37f9a80a7f50fe04a8ee6d6cf2f45c099a5e28161f12b081540e05f18de8d634",
+    "status": "pass",
+    "checks": 13,
+    "native_roots_once_PASS": 19,
+    "native_actions_once_PASS": 87,
+    "package_PASS": 1,
+    "native_fail_skip_cache_race": 0,
+    "race": true,
+    "count": 1,
+    "format_paths_readonly": 6,
+    "format_exit": 0,
+    "format_stdout_stderr_bytes": 0,
+    "whole_backend_or_frontend_unit_rerun_claimed": false
+  },
+  "owner_cleanup": {
+    "journal_sha256": "57e4a1280818d61b83e9ba2d31a86f3aa44ff5a33dbcbcebb27c631506322bd5",
+    "one_owned_empty_network_identity_verified_before_removal": true,
+    "network_removal_exit": 0,
+    "removed_networks": 1,
+    "removed_containers": 0,
+    "removed_volumes": 0,
+    "project_absence_recorded": true,
+    "cleanup_not_inferred_from_wrapper_exit": true,
+    "discarded_wrapper_cleanup_cause_inferred": false
+  },
+  "limits": {
+    "run_NOTRUN": true,
+    "dev_NOTRUN": true,
+    "HMR_NOTRUN": true,
+    "app_started_by_launcher": false,
+    "full_GREEN": false,
+    "E3_M0_M1_KIT_BUMP_device_release_approval": false,
+    "production_or_privacy_qualification": false,
+    "reviewer_runtime_or_repo_source_edits": false
+  }
+}

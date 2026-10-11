@@ -1,0 +1,195 @@
+{
+  "schema": 1,
+  "scope": "Reviewed completed b0 enforced full failure boundary plus separate positive root build; no E3/fullGREEN/M0/M1/KIT_BUMP/device approval",
+  "tested_identity": {
+    "tested_source": "b0edd76d9d2ee6a4897f3d79c756fed4ca78048c",
+    "tree_sha256": "4b88421c64d30cc746c574db5548afdf54e5ea012da3a52698060aef1b6f3980",
+    "wrapper_invocation": "41c587cf-2755-4348-87f5-1223b45b7725",
+    "runner_invocation": "82924d72-f138-4aad-bfe1-6dd818832e8c",
+    "app_image_id": "sha256:74d038ade23fb12d33bf2a289438b246bb24837658ebd266893eea0913e88180",
+    "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+    "versions_lock_sha256": "afd977316d1749046ba723fb4fdc978bfd9257070c16afa802e4606b9ab861fa",
+    "source_clean_at_actual_review": true
+  },
+  "full_result": {
+    "status": "fail",
+    "wrapper_exit": 201,
+    "sha256": "43e4d27687aef06127e3f1ce091e0631d79f23941d938ab80ff722e13e6296f6",
+    "checks": 38,
+    "pass": 36,
+    "fail": 2,
+    "failed_checks": [
+      "cat-route-budgets",
+      "repo-full-exit"
+    ]
+  },
+  "browser": {
+    "unique_cases_passed_once": 900,
+    "desktop": 450,
+    "mobile": 450,
+    "retry": 0,
+    "skip": 0,
+    "flaky": 0,
+    "global_errors": 0,
+    "workers": 2,
+    "actual_report_duration_ms": 1044408.853,
+    "historical_b03_workers": 1,
+    "historical_b03_report_duration_ms": 1984340,
+    "causal_speedup_or_optimality_claimed": false,
+    "current_reused_fixture_cases": 32,
+    "current_attached_executed_passing_assertions": 156,
+    "separate_sealed_original_motion_on_SDK_runtime_qualification_rerun": false
+  },
+  "frontend": {
+    "tests": 453,
+    "pass": 453,
+    "fail": 0,
+    "skip": 0,
+    "cancel": 0,
+    "todo": 0,
+    "lint": "pass",
+    "types": "pass"
+  },
+  "native": {
+    "backend_unique_test_run_identities": 1414,
+    "backend_test_pass": 1397,
+    "backend_explicit_PG_test_skips": 17,
+    "backend_test_fail": 0,
+    "backend_packages_pass": 28,
+    "backend_cached_packages": 20,
+    "authcore_test_pass": 28,
+    "authcore_cached_packages": 1,
+    "fresh_PG_accounts_pass_once": 12,
+    "fresh_PG_httpapi_pass_once": 291,
+    "fresh_PG_test_skip_fail_cache_race": 0,
+    "all17_baseline_PG_skip_ids_covered_by_fresh_PG_passes": true,
+    "canonical_and_PG_argv_count1_flag": false,
+    "normalized_GEN_count1_route_is_separate_and_not_rerun": true,
+    "blanket_fresh_backend_claimed": false,
+    "independent_native_HTTP_parity": {
+      "status": "pass",
+      "mode": "independent_parity",
+      "requests": 1207
+    }
+  },
+  "CSP": {
+    "documents": 9,
+    "unique_nonce_hashes": 9,
+    "observed_violations": 0,
+    "asset_rows": 32,
+    "font_HTTP_rows": 36
+  },
+  "legacy": {
+    "same_image": true,
+    "POST_status": 200,
+    "creates": 1,
+    "visible_board": true,
+    "observed_violations": 0,
+    "owned_cleanup_verified": true
+  },
+  "baseline": {
+    "original_capture_sha256": "ff055e404bf138ce0442381ab33eb643d431f922e4284f66a5002efcc397be68",
+    "current_capture_sha256": "dc819a0097d43d430e3168d19417b70fec0c9b1ac303e62babfded98d1045ff9",
+    "PNG_bytes_equal": 9,
+    "comparison_outcomes_pass": 16,
+    "outcome_composition": {
+      "context_Home_axe": 3,
+      "PNG": 9,
+      "LCP_INP": 4
+    },
+    "original_medians": {
+      "/conexiuni": {
+        "lcp": 2836,
+        "inp": 184,
+        "cls": 0
+      },
+      "/alchimie?mode=challenges": {
+        "lcp": 4228,
+        "inp": 200,
+        "cls": 0.00057706
+      }
+    },
+    "current_medians": {
+      "/conexiuni": {
+        "lcp": 2060,
+        "inp": 88,
+        "cls": 0
+      },
+      "/alchimie?mode=challenges": {
+        "lcp": 2028,
+        "inp": 128,
+        "cls": 0
+      }
+    },
+    "CLS_helper_outcome_emitted": false,
+    "separate_descriptive_erratum": "full-b03-cls-description-erratum.json"
+  },
+  "budgets": {
+    "bound_input_hashes_verified": 37,
+    "active_assets": 90,
+    "frozen_assets": 30,
+    "routes_each_profile": 10,
+    "mandatory_entry_and_AccountBar_each_route": true,
+    "all_reported_static_JS_CSS_closures_match_actual_manifest_imports": true,
+    "active_physical_gzip_sidecar_sums_match": true,
+    "route_JS_red_rows": 20,
+    "JS_limit_bytes_gz": 40960,
+    "JS_target_bytes_gz": 30720,
+    "active_Home_JS_bytes_gz": 115016,
+    "active_Home_CSS_bytes_gz": 7727,
+    "frozen_Home_JS_bytes_gz": 117271,
+    "frozen_Home_CSS_bytes_gz": 8770,
+    "CSS_null_limits_are_recorded_not_pass_fabrication": true,
+    "combined_current_startup_bytes_gz": 122743,
+    "configured_combined_startup_limit_bytes_gz": 122880,
+    "combined_current_startup_within_configured_limit": true,
+    "fonts_remain_separately_inventoried_not_in_the_JS_CSS_combined_total": true,
+    "limits_or_root_accounting_changed": false
+  },
+  "capture": {
+    "observations_sha256": "df3060fba7df88112ac127e8c637d9612f26350c16664e6d0cc55572cbd58d38",
+    "rows": 671,
+    "gzip_blobs": 259,
+    "stored_bytes": 86573568,
+    "source_Git_refs": 447,
+    "unchanged_physical_refs": 184,
+    "ELF_hash_only": 4
+  },
+  "reviews": {
+    "independent_sha256": "a4769dbf1712547e26f59679efb1230482c66bff7256ebf450545ac2b80b4096",
+    "parent_bytes_sha256": "cbb002437de60fd048f2fcda9c48a5f556aefed04ab59a1b183af92ef3cf4da9"
+  },
+  "full_owned_cleanup": {
+    "containers_removed": 2,
+    "networks_removed": 1,
+    "volumes_removed": 0,
+    "project_absence_verified": true,
+    "journal_sha256": "f36c9ad70ad77caee9fe62671a511408eb8f34e2eaf0b549d8c390cca8d3dbae",
+    "discarded_wrapper_cleanup_cause_unknown": true
+  },
+  "positive_root_build": {
+    "source": "b0edd76d9d2ee6a4897f3d79c756fed4ca78048c",
+    "launcher_exit": 0,
+    "wrapper": "9403e8be-9c51-4ec8-ba71-4644242338b3",
+    "build_checks_pass": 13,
+    "native_serving_roots": 19,
+    "native_actions": 87,
+    "format_sources_empty0": 6,
+    "matching_receipt_registered_binary_SDK_identity_verified": true,
+    "capture_sha256": "e62bec65d15415b1dcffcf9d550714eef229580ee29898c6aeccc121a699ab30",
+    "peer_sha256": "f4d186e14ce739dab0a0b481963d00ce9187b582f83384d2f4136d7f0786ce88",
+    "empty_owned_network_removed": 1,
+    "cleanup_journal_sha256": "57e4a1280818d61b83e9ba2d31a86f3aa44ff5a33dbcbcebb27c631506322bd5",
+    "run_dev_HMR": "NOTRUN"
+  },
+  "latest_direct_origin_readback": {
+    "feature": "b0edd76d9d2ee6a4897f3d79c756fed4ca78048c",
+    "main": "3d602215a50cd4d42c61c6af58275bb253498802",
+    "local_shared_main": "08fae513eb8a1cb1a0f93abeb6e6f49f4b2fbac5",
+    "local_main_extra_commits_not_in_feature": 5,
+    "local_main_clean": true,
+    "those_changes_not_integrated_or_published_by_this_checkpoint": true
+  },
+  "later_documentation_HEAD_is_not_reexecution": true,
+  "retention": "rolling-retention-b0.json"
+}

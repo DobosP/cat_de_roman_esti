@@ -1,0 +1,270 @@
+{
+  "schema": 1,
+  "reviewer": "/root/program_pack",
+  "review_kind": "independent actual completed-run evidence review",
+  "reviewed_utc": "2026-10-10T23:58:29.050977+00:00",
+  "verdict": "FAILURE_BOUNDARY_CLEAR",
+  "scope": "Actual completed Cat b0 full failure boundary. Evidence integrity and stated execution scopes are verified; no release or milestone approval is conferred.",
+  "identity": {
+    "tested_source": "b0edd76d9d2ee6a4897f3d79c756fed4ca78048c",
+    "tree_sha256": "4b88421c64d30cc746c574db5548afdf54e5ea012da3a52698060aef1b6f3980",
+    "wrapper_invocation": "41c587cf-2755-4348-87f5-1223b45b7725",
+    "runner_invocation": "82924d72-f138-4aad-bfe1-6dd818832e8c",
+    "app_image_id": "sha256:74d038ade23fb12d33bf2a289438b246bb24837658ebd266893eea0913e88180",
+    "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+    "versions_lock_sha256": "afd977316d1749046ba723fb4fdc978bfd9257070c16afa802e4606b9ab861fa",
+    "source_clean_at_actual_review": true
+  },
+  "result": {
+    "status": "fail",
+    "wrapper_exit": 201,
+    "sha256": "43e4d27687aef06127e3f1ce091e0631d79f23941d938ab80ff722e13e6296f6",
+    "checks": 38,
+    "pass": 36,
+    "fail": 2,
+    "failed_checks": [
+      "cat-route-budgets",
+      "repo-full-exit"
+    ]
+  },
+  "capture": {
+    "path": "/home/dobo/work/_temp/adhoc-gui-migration-parent-20261006/cat-b0-workers2-enforced-full-completed-20261011",
+    "observations_sha256": "df3060fba7df88112ac127e8c637d9612f26350c16664e6d0cc55572cbd58d38",
+    "regular_rows_bytes_and_full_modes_verified": 671,
+    "directory_modes_verified": 477,
+    "honest_absences_verified": 6,
+    "literal_unfollowed_links": 0,
+    "sealed_gzip_blobs_roundtrips_verified": 259,
+    "stored_compressed_bytes": 86573568,
+    "source_mirror_Git_references_verified": 447,
+    "physical_retained_591c_byte_and_mode_references_verified": 184,
+    "live_ELF_hash_only_rows_verified": 4,
+    "ELF_bytes_copied": false,
+    "registered_declarations": 146,
+    "raw_physical_declarations": 145,
+    "distinct_physical_declared_paths": 144,
+    "physical_root_bindings": 288,
+    "distinct_physical_root_bindings": 286,
+    "virtual_app_image_bindings": 1,
+    "duplicate_declaration": ".gate/full/legacy-owner/41c587cf-2755-4348-87f5-1223b45b7725/intent.json",
+    "duplicate_declaration_count": 2,
+    "declaration_multiset_matches_all_bindings": true,
+    "mirror_only_generated_metadata_with_honest_source_absence": [
+      "go-backend/embedfs/build/dist/.gui-build.json",
+      "go-backend/embedfs/build/dist/versions.lock.json"
+    ],
+    "future_live_inode_or_image_survival_claimed": false,
+    "workspace_dependency_cache_or_image_bytes_copied_by_reviewer": false
+  },
+  "browser": {
+    "inventory_discovery_execution_identity_sets_equal": true,
+    "unique_cases_passed_once": 900,
+    "desktop": 450,
+    "mobile": 450,
+    "results_per_case": 1,
+    "retry": 0,
+    "skip": 0,
+    "flaky": 0,
+    "unexpected": 0,
+    "global_errors": 0,
+    "workers": 2,
+    "fullyParallel": false,
+    "project_retries": 0,
+    "project_timeout_ms": 45000,
+    "actual_report_duration_ms": 1044408.853,
+    "historical_b03_workers": 1,
+    "historical_b03_report_duration_ms": 1984340,
+    "historical_timing_reference": "docs/reviews/gui-normalized-react/full-b03-checkpoint.json",
+    "causal_speedup_or_optimality_claimed": false,
+    "current_reused_fixture_cases": 32,
+    "current_reused_fixture_cases_per_project": 16,
+    "current_attached_executed_passing_assertions": 156,
+    "current_attached_assertions_per_project": 78,
+    "attachment_identity_sets_match_immutable_original_receipt": true,
+    "separate_sealed_original_motion_on_SDK_runtime_qualification_rerun": false
+  },
+  "frontend": {
+    "tests": 453,
+    "pass": 453,
+    "fail": 0,
+    "skip": 0,
+    "cancel": 0,
+    "todo": 0,
+    "lint": "pass",
+    "types": "pass"
+  },
+  "native": {
+    "backend_unique_test_run_identities": 1414,
+    "backend_test_pass": 1397,
+    "backend_explicit_PG_test_skips": 17,
+    "backend_test_fail": 0,
+    "backend_packages_pass": 28,
+    "backend_cached_packages": 20,
+    "authcore_test_pass": 28,
+    "authcore_cached_packages": 1,
+    "fresh_PG_accounts_pass_once": 12,
+    "fresh_PG_httpapi_pass_once": 291,
+    "fresh_PG_test_skip_fail_cache_race": 0,
+    "all17_baseline_PG_skip_ids_covered_by_fresh_PG_passes": true,
+    "canonical_and_PG_argv_count1_flag": false,
+    "normalized_GEN_count1_route_is_separate_and_not_rerun": true,
+    "blanket_fresh_backend_claimed": false,
+    "independent_native_HTTP_parity": {
+      "status": "pass",
+      "mode": "independent_parity",
+      "requests": 1207
+    }
+  },
+  "current_CSP_assets": {
+    "stage": "enforced",
+    "documents": 9,
+    "unique_document_nonce_hashes": 9,
+    "observed_violations": 0,
+    "asset_witness_rows_joined_to_actual_manifest_files": 32,
+    "font_HTTP200_rows_bytes_and_hashes_joined": 36,
+    "unique_font_sources": 4,
+    "raw_font_total_bytes": 167632,
+    "font_preload_nonce_and_anonymous_CORS_bindings_verified": true,
+    "font_set_ready_status_observed": "loaded",
+    "all_declared_unused_font_faces_claimed_loaded": false,
+    "separate_exact_Trusted_Types_report_only_assertion_preserved_in_executed_source": true,
+    "capability_projects": 2,
+    "actual_secure_context_and_native_locks_request_query_acquire_hold_release_absence": true,
+    "identity_source_tree_manifest_versions_lock_and_image_joins_verified": true
+  },
+  "legacy": {
+    "observation_sha256": "e92e8f81fd9eca93827cad9baa99795d53d8345b948386e348636708cdec1bb0",
+    "same_actual_app_image": true,
+    "stage": "enforced",
+    "document_marker": "html[data-ui=legacy]",
+    "frozen_files_bytes_and_full_modes_verified": 30,
+    "fetched_static_asset_rows_joined": 15,
+    "font_preloads_and_HTTP200_rows_joined": 4,
+    "journey": "/intrusul",
+    "start_POST_status": 200,
+    "creates": 1,
+    "real_board_visible": true,
+    "actual_policy_events": 0,
+    "actual_console_refusals": 0,
+    "measured_legacy_violations": 0,
+    "same_primary_policy_directives_verified": true,
+    "source_tree_wrapper_runner_IID_and_request_hash_joins_verified": true,
+    "owner_lifecycle_command_stream_joins": 12,
+    "owner_lifecycle_command_exit_codes": 0,
+    "only_owned_running_legacy_fullCID_removed_then_ID_name_absence_verified": true,
+    "primary_snapshot_unchanged_at_legacy_cleanup": true,
+    "canonical_CSP_legacy_count_and_observation_hash_joined": true
+  },
+  "baseline": {
+    "immutable_original_capture_sha256": "ff055e404bf138ce0442381ab33eb643d431f922e4284f66a5002efcc397be68",
+    "current_capture_sha256": "dc819a0097d43d430e3168d19417b70fec0c9b1ac303e62babfded98d1045ff9",
+    "comparisons_sha256": "af1d885b07cc93a321659a1508af2b82d8e9d171834790bef3ce30ff527e5316",
+    "immutable_original_PNGs_byte_equal": 9,
+    "comparison_outcomes_pass": 16,
+    "outcome_composition": {
+      "context_Home_axe": 3,
+      "PNG": 9,
+      "LCP_INP": 4
+    },
+    "actual_callback_runs_per_route": 5,
+    "final_LCP_INP_CLS_callbacks_and_medians_joined": true,
+    "method": {
+      "runs": 5,
+      "reducedMotion": "reduce",
+      "cpu": 4,
+      "rtt_ms": 150,
+      "down_kbps": 1600
+    },
+    "original_medians": {
+      "/conexiuni": {
+        "lcp": 2836,
+        "inp": 184,
+        "cls": 0
+      },
+      "/alchimie?mode=challenges": {
+        "lcp": 4228,
+        "inp": 200,
+        "cls": 0.00057706
+      }
+    },
+    "current_medians": {
+      "/conexiuni": {
+        "lcp": 2060,
+        "inp": 88,
+        "cls": 0
+      },
+      "/alchimie?mode=challenges": {
+        "lcp": 2028,
+        "inp": 128,
+        "cls": 0
+      }
+    },
+    "original_Alchimie_final_CLS_values": [
+      0,
+      0.00057706,
+      0,
+      0.00057706,
+      0.00057706
+    ],
+    "all10_current_final_CLS_callbacks": 0,
+    "written_CLS_criterion": {
+      "path": ".agent/S1.md",
+      "line": 284,
+      "source_sha256": "8b862b78be5b37b6c3a846d4054a6f0ba53c21884f83b9963b6efe826008a397",
+      "text": "Median of at least five runs; CLS retains the original symmetric +/-10 percent or +/-50 ms criterion, whichever is larger.",
+      "ADR0190_path": "docs/adr/0190-owner-approved-vitals-regression-criterion.md",
+      "ADR0190_sha256": "ca760b088bb3a6a809b48809052b50b0e80b64e67f976d5a38b98cac9776df02",
+      "ADR0190_changes_CLS": false
+    },
+    "standalone_helper_CLS_comparison_outcome_emitted": false,
+    "new_CLS_predicate_unit_mapping_or_waiver_invented": false,
+    "historical_equal_original_zero_description_is_inaccurate_for_Alchimie": true,
+    "separate_historical_description_erratum_sha256": "dd222a1acde8176c4185d23bc56856cec6bce2f61fa6d96816d5a78fa8bc2c76",
+    "old_receipts_reviews_and_original_bytes_rewritten": false
+  },
+  "budgets": {
+    "bound_input_hashes_verified": 37,
+    "active_assets": 90,
+    "frozen_assets": 30,
+    "routes_each_profile": 10,
+    "mandatory_entry_and_AccountBar_each_route": true,
+    "all_reported_static_JS_CSS_closures_match_actual_manifest_imports": true,
+    "active_physical_gzip_sidecar_sums_match": true,
+    "route_JS_red_rows": 20,
+    "JS_limit_bytes_gz": 40960,
+    "JS_target_bytes_gz": 30720,
+    "active_Home_JS_bytes_gz": 115016,
+    "active_Home_CSS_bytes_gz": 7727,
+    "frozen_Home_JS_bytes_gz": 117271,
+    "frozen_Home_CSS_bytes_gz": 8770,
+    "CSS_null_limits_are_recorded_not_pass_fabrication": true,
+    "combined_current_startup_bytes_gz": 122743,
+    "configured_combined_startup_limit_bytes_gz": 122880,
+    "combined_current_startup_within_configured_limit": true,
+    "fonts_remain_separately_inventoried_not_in_the_JS_CSS_combined_total": true,
+    "limits_or_root_accounting_changed": false
+  },
+  "separate_parent_host_cleanup": {
+    "journal": "/home/dobo/work/_temp/adhoc-gui-migration-parent-20261006/cat-b0-full-owner-runtime-20261011/host-cleanup-verified.json",
+    "journal_sha256": "f36c9ad70ad77caee9fe62671a511408eb8f34e2eaf0b549d8c390cca8d3dbae",
+    "journal_hash_independently_bound": true,
+    "detailed_cleanup_review_owner": "/root",
+    "parent_reported_verified_removed_containers": 2,
+    "parent_reported_verified_removed_networks": 1,
+    "parent_reported_removed_volumes": 0,
+    "parent_reported_project_and_legacy_CID_absence": true,
+    "cleanup_inferred_from_wrapper_exit": false,
+    "discarded_Compose_cleanup_cause_inferred": false
+  },
+  "qualification_limits": {
+    "E3_approved": false,
+    "full_GREEN": false,
+    "M0_approved": false,
+    "M1_approved": false,
+    "KIT_BUMP_approved": false,
+    "physical_device_or_Samsung_approved": false,
+    "production_or_release_approved": false,
+    "new_runtime_or_source_mutation_by_reviewer": false,
+    "later_documentation_HEAD_is_not_a_reexecution": true
+  }
+}
