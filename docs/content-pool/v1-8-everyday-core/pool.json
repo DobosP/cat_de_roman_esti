@@ -3,7 +3,7 @@
   "theme": "v1-8-everyday-core",
   "baseline_commit": "e164c0c70de38805d2648e271d294ddf36a26c8e",
   "procedure_rev": "17b97a2",
-  "scope": "Step 2b: first 24 items processed; evidence-backed proposals remain unapproved, and unresolved normative/target cases stay held.",
+  "scope": "Step 2c: first 36 items processed; source-researched proposals are unapproved and unresolved items held.",
   "screen": {
     "bundle_sha256": "e0cfe93de076f14a782dc6377b2655d4ef10f86ada1560ae1202bb06dbfdf877",
     "script": "~/work/_temp/content__v1-8-everyday-core/prescreen.py",
@@ -1719,12 +1719,12 @@
     {
       "id": "v18-dimineata",
       "revision": 1,
-      "state": "idea",
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Dimineață",
       "label_ro": "Dimineață",
       "sense": "Prima parte a zilei, după noapte.",
-      "category_hypothesis": "viata_de_roman",
+      "category_hypothesis": "societate",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
@@ -1737,7 +1737,7 @@
         "dimineții",
         "dimineților"
       ],
-      "form_status": "Unverified paradigm hypotheses. Confirm DEX sense/register and DOOM 3 forms in step 2; new forms must also be screened before use.",
+      "form_status": "Exact-lemma DEX/DOOM 3 and independent Romanian source checked; forms remain proposals for review.",
       "identity_checks": {
         "forms": [
           {
@@ -1771,22 +1771,117 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/Diminea%C8%9B%C4%83/json",
+          "summary": "Exact-lemma DEX and DOOM 3 entry 1307846: Day part from dawn toward noon; DOOM 3 gives dimineți and dimineții.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Diminea%C8%9B%C4%83",
+          "summary": "Morning is the early day period associated with dawn and sunrise; boundaries are not fixed clock hours.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://stirileprotv.ro/divers/bauturi-cu-care-poti-inlocui-cafeaua-ce-poti-bea-dimineata-pentru-a-avea-energie-toata-ziua.html",
+          "summary": "Morning coffee is described as a customary drink, not universal or medically necessary.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Independent factual and quality review of the exact module.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
-      "research_ready": false,
-      "link_targets": []
+      "decision": "Source-researched proposal; exact scoped forms, links and dependencies still require independent review.",
+      "research_ready": true,
+      "link_targets": [
+        {
+          "node_id": "n_v24_time_day_zi",
+          "label": "Zi",
+          "status": "exists on wave_base",
+          "category": "societate"
+        },
+        {
+          "node_id": "n_v29_time_daily_noapte",
+          "label": "Noapte",
+          "status": "exists on wave_base",
+          "category": "societate"
+        },
+        {
+          "node_id": "n_v24_nature_sky_soare",
+          "label": "Soare",
+          "status": "exists on wave_base",
+          "category": "stiinta"
+        },
+        {
+          "node_id": "n_v3gas_cafea",
+          "label": "Cafea",
+          "status": "exists on wave_base",
+          "category": "gastronomie"
+        }
+      ],
+      "source_search_planned": true,
+      "category": "societate",
+      "node_id": "n_v1_8_dimineata",
+      "verified_forms": [
+        "dimineață",
+        "dimineți",
+        "diminețile",
+        "dimineții",
+        "dimineților"
+      ],
+      "proposed_edges": [
+        {
+          "dst": "n_v24_time_day_zi",
+          "relation": "part_of",
+          "label_ro": "este partea de început a zilei",
+          "strength": 0.95,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v29_time_daily_noapte",
+          "relation": "follows",
+          "label_ro": "urmează după noapte",
+          "strength": 0.9,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v24_nature_sky_soare",
+          "relation": "associated_with",
+          "label_ro": "este asociată cu răsăritul soarelui",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v3gas_cafea",
+          "relation": "associated_with",
+          "label_ro": "multe persoane beau cafea dimineața",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        }
+      ],
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "dimineață",
+          "rank": 728,
+          "count": 45755
+        },
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-seara",
       "revision": 1,
-      "state": "idea",
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Seară",
       "label_ro": "Seară",
       "sense": "Partea zilei dinspre sfârșitul după-amiezii și începutul nopții.",
-      "category_hypothesis": "viata_de_roman",
+      "category_hypothesis": "societate",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
@@ -1799,7 +1894,7 @@
         "serii",
         "serilor"
       ],
-      "form_status": "Unverified paradigm hypotheses. Confirm DEX sense/register and DOOM 3 forms in step 2; new forms must also be screened before use.",
+      "form_status": "Exact-lemma DEX/DOOM 3 and independent Romanian source checked; forms remain proposals for review.",
       "identity_checks": {
         "forms": [
           {
@@ -1833,17 +1928,112 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/Sear%C4%83/json",
+          "summary": "Exact-lemma DEX and DOOM 3 entry 1273842: Late day period around darkening; DOOM 3 gives seri and serii.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Sear%C4%83",
+          "summary": "Evening spans late day and the approach of night around sunset, with variable boundaries.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://www.stirilekanald.ro/kanal-d-locul-2-in-prime-time-la-nivel-national-in-day-time-in-primele-8-luni-ale-anului-kanal-d-a-fost-prima-optiune-a-publicului-din-intreaga-tara-20493780",
+          "summary": "Romanian TV distinguishes evening prime time from daytime; no exclusivity or changing audience number is adopted.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Independent factual and quality review of the exact module.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
-      "research_ready": false,
-      "link_targets": []
+      "decision": "Source-researched proposal; exact scoped forms, links and dependencies still require independent review.",
+      "research_ready": true,
+      "link_targets": [
+        {
+          "node_id": "n_v24_time_day_zi",
+          "label": "Zi",
+          "status": "exists on wave_base",
+          "category": "societate"
+        },
+        {
+          "node_id": "n_v29_time_daily_noapte",
+          "label": "Noapte",
+          "status": "exists on wave_base",
+          "category": "societate"
+        },
+        {
+          "node_id": "n_v24_nature_sky_soare",
+          "label": "Soare",
+          "status": "exists on wave_base",
+          "category": "stiinta"
+        },
+        {
+          "node_id": "n_v4fil_televizor",
+          "label": "Televizor",
+          "status": "exists on wave_base",
+          "category": "film_tv"
+        }
+      ],
+      "source_search_planned": true,
+      "category": "societate",
+      "node_id": "n_v1_8_seara",
+      "verified_forms": [
+        "seară",
+        "seri",
+        "serile",
+        "serii",
+        "serilor"
+      ],
+      "proposed_edges": [
+        {
+          "dst": "n_v24_time_day_zi",
+          "relation": "part_of",
+          "label_ro": "este partea de sfârșit a zilei",
+          "strength": 0.95,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v29_time_daily_noapte",
+          "relation": "precedes",
+          "label_ro": "precedă noaptea",
+          "strength": 0.9,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v24_nature_sky_soare",
+          "relation": "associated_with",
+          "label_ro": "este asociată cu apusul soarelui",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v4fil_televizor",
+          "relation": "associated_with",
+          "label_ro": "este un interval obișnuit al programelor TV de maximă audiență",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        }
+      ],
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "seară",
+          "rank": 892,
+          "count": 35225
+        },
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-anotimp",
       "revision": 1,
-      "state": "idea",
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Anotimp",
       "label_ro": "Anotimp",
@@ -1862,7 +2052,7 @@
         "anotimpurile",
         "anotimpurilor"
       ],
-      "form_status": "Unverified paradigm hypotheses. Confirm DEX sense/register and DOOM 3 forms in step 2; new forms must also be screened before use.",
+      "form_status": "Exact-lemma DEX/DOOM 3 and independent Romanian source checked; forms remain proposals for review.",
       "identity_checks": {
         "forms": [
           {
@@ -1892,22 +2082,118 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/Anotimp/json",
+          "summary": "Exact-lemma DEX and DOOM 3 entry 1322837: One of four climatic/light divisions of the year in the temperate zone; DOOM 3 gives anotimpuri.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Anotimp",
+          "summary": "Seasons divide the year into periods with characteristic climate and light.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/P%C4%83m%C3%A2nt#Înclinare_axială_și_anotimpuri",
+          "summary": "Earth axial tilt changes seasonal solar illumination; solstices and equinoxes define calendar boundaries.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Independent factual and quality review of the exact module.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
-      "research_ready": false,
-      "link_targets": []
+      "decision": "Source-researched proposal; exact scoped forms, links and dependencies still require independent review.",
+      "research_ready": true,
+      "link_targets": [
+        {
+          "node_id": "n_v24_nature_world_pamant",
+          "label": "Pământ",
+          "status": "exists on wave_base",
+          "category": "stiinta"
+        },
+        {
+          "node_id": "n_v24_nature_sky_soare",
+          "label": "Soare",
+          "status": "exists on wave_base",
+          "category": "stiinta"
+        },
+        {
+          "node_id": "n_v4ist_an",
+          "label": "An",
+          "status": "exists on wave_base",
+          "category": "istorie"
+        },
+        {
+          "node_id": "n_v29_time_calendar",
+          "label": "Calendar",
+          "status": "exists on wave_base",
+          "category": "societate"
+        }
+      ],
+      "source_search_planned": true,
+      "category": "stiinta",
+      "node_id": "n_v1_8_anotimp",
+      "verified_forms": [
+        "anotimp",
+        "anotimpul",
+        "anotimpului",
+        "anotimpuri",
+        "anotimpurile",
+        "anotimpurilor"
+      ],
+      "proposed_edges": [
+        {
+          "dst": "n_v24_nature_world_pamant",
+          "relation": "determined_by",
+          "label_ro": "înclinarea axei Pământului contribuie la succesiunea anotimpurilor",
+          "strength": 0.9,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v24_nature_sky_soare",
+          "relation": "associated_with",
+          "label_ro": "se deosebește prin iluminarea solară primită",
+          "strength": 0.9,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v4ist_an",
+          "relation": "part_of",
+          "label_ro": "este o diviziune a anului",
+          "strength": 0.95,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v29_time_calendar",
+          "relation": "represented_in",
+          "label_ro": "are intervale reprezentate în calendar",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        }
+      ],
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "anotimp",
+          "rank": 30210,
+          "count": 400
+        },
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-vacanta",
       "revision": 1,
-      "state": "idea",
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Vacanță",
       "label_ro": "Vacanță",
       "sense": "Perioadă de întrerupere a cursurilor sau de odihnă.",
-      "category_hypothesis": "viata_de_roman",
+      "category_hypothesis": "societate",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
@@ -1920,7 +2206,7 @@
         "vacanței",
         "vacanțelor"
       ],
-      "form_status": "Unverified paradigm hypotheses. Confirm DEX sense/register and DOOM 3 forms in step 2; new forms must also be screened before use.",
+      "form_status": "Exact-lemma DEX/DOOM 3 and independent Romanian source checked; forms remain proposals for review.",
       "identity_checks": {
         "forms": [
           {
@@ -1946,22 +2232,112 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/Vacan%C8%9B%C4%83/json",
+          "summary": "Exact-lemma DEX and DOOM 3 entry 1263166: School or work rest period; DOOM 3 gives vacanțe and vacanței.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://stirileprotv.ro/educatie/vacanta-de-vara-2026-calendar-oficial-cand-se-incheie-cursurile-si-cat-dureaza-vacanta.html",
+          "summary": "The school-calendar report places pupils’ summer break between periods of courses; no changing dates are installed.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Independent factual and quality review of the exact module.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
-      "research_ready": false,
-      "link_targets": []
+      "decision": "Source-researched proposal; exact scoped forms, links and dependencies still require independent review.",
+      "research_ready": true,
+      "link_targets": [
+        {
+          "node_id": "n_v3soc_scoala",
+          "label": "Școală",
+          "status": "exists on wave_base",
+          "category": "societate"
+        },
+        {
+          "node_id": "n_v4soc_elev",
+          "label": "Elev",
+          "status": "exists on wave_base",
+          "category": "societate"
+        },
+        {
+          "node_id": "n_v29_time_calendar",
+          "label": "Calendar",
+          "status": "exists on wave_base",
+          "category": "societate"
+        },
+        {
+          "node_id": "n_v1_8_vara",
+          "target_record": "v18-vara",
+          "label": "Vară",
+          "status": "batch hypothesis; requires acceptance"
+        }
+      ],
+      "source_search_planned": true,
+      "category": "societate",
+      "node_id": "n_v1_8_vacanta",
+      "verified_forms": [
+        "vacanță",
+        "vacanțe",
+        "vacanțele",
+        "vacanței",
+        "vacanțelor"
+      ],
+      "proposed_edges": [
+        {
+          "dst": "n_v3soc_scoala",
+          "relation": "break_from",
+          "label_ro": "vacanța școlară întrerupe cursurile",
+          "strength": 0.9,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v4soc_elev",
+          "relation": "experienced_by",
+          "label_ro": "elevii au vacanțe școlare",
+          "strength": 0.9,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v29_time_calendar",
+          "relation": "represented_in",
+          "label_ro": "vacanțele școlare sunt prevăzute în calendar",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v1_8_vara",
+          "relation": "associated_with",
+          "label_ro": "vacanța de vară are loc vara",
+          "strength": 0.9,
+          "is_distractor": 0,
+          "bidirectional": 0
+        }
+      ],
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "vacanță",
+          "rank": 2725,
+          "count": 9312
+        },
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-ziua-copilului",
       "revision": 1,
-      "state": "idea",
+      "state": "held",
       "kind": "new_shared_concept",
       "lemma": "Ziua Copilului",
       "label_ro": "Ziua Copilului",
       "sense": "Sărbătoarea copiilor din 1 iunie în România.",
-      "category_hypothesis": "viata_de_roman",
+      "category_hypothesis": "societate",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
@@ -1990,17 +2366,60 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://ro.wikipedia.org/wiki/Ziua_Copilului",
+          "summary": "Romanian source read supports partial claims but does not resolve the recorded normative/scope/four-link blocker.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://stirileprotv.ro/divers/copiii-din-cluj-au-sarbatorit-1-iunie-cu-un-concert-interactiv-de-muzica-clasica-jocuri-creative-si-inghetata.html",
+          "summary": "Romanian source read supports partial claims but does not resolve the recorded normative/scope/four-link blocker.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Retain hold; no threshold relaxation or invented relation.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
+      "decision": "Exact compound dexonline JSON returned HTTP 404; a familiar holiday is not a substitute for the required normative lemma/forms check.",
       "research_ready": false,
-      "link_targets": []
+      "link_targets": [
+        {
+          "node_id": "n_v4soc_copil",
+          "label": "Copil",
+          "status": "exists on wave_base",
+          "category": "societate"
+        },
+        {
+          "node_id": "n_v29_time_calendar",
+          "label": "Calendar",
+          "status": "exists on wave_base",
+          "category": "societate"
+        },
+        {
+          "node_id": "n_v24_time_day_zi",
+          "label": "Zi",
+          "status": "exists on wave_base",
+          "category": "societate"
+        },
+        {
+          "node_id": "n_v4soc_familie",
+          "label": "Familie",
+          "status": "exists on wave_base",
+          "category": "societate"
+        }
+      ],
+      "source_search_planned": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": null,
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-foarfeca",
       "revision": 1,
-      "state": "idea",
+      "state": "held",
       "kind": "new_shared_concept",
       "lemma": "Foarfecă",
       "label_ro": "Foarfecă",
@@ -2068,16 +2487,52 @@
       },
       "prior_records": [],
       "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "next_action": "Retain hold; seek natural distinct links in a later source pass without floor padding.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
+      "decision": "Four useful distinct source-qualified links are not established; school-kit/handheld co-occurrence alone is not enough and no absent endpoint is invented.",
       "research_ready": false,
-      "link_targets": []
+      "link_targets": [
+        {
+          "node_id": "n_v3soc_scoala",
+          "label": "Școală",
+          "status": "exists on wave_base",
+          "category": "societate"
+        },
+        {
+          "node_id": "n_v23via_penar",
+          "label": "Penar",
+          "status": "exists on wave_base",
+          "category": "viata_de_roman"
+        },
+        {
+          "node_id": "n_v24_school_writing_caiet",
+          "label": "Caiet",
+          "status": "exists on wave_base",
+          "category": "viata_de_roman"
+        },
+        {
+          "node_id": "n_v24_body_limbs_mana",
+          "label": "Mână",
+          "status": "exists on wave_base",
+          "category": "stiinta"
+        }
+      ],
+      "source_search_planned": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "foarfece",
+          "rank": 16563,
+          "count": 979
+        },
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-lipici",
       "revision": 1,
-      "state": "idea",
+      "state": "held",
       "kind": "new_shared_concept",
       "lemma": "Lipici",
       "label_ro": "Lipici",
@@ -2134,17 +2589,69 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://ro.wikipedia.org/wiki/Adeziv",
+          "summary": "Romanian source read supports partial claims but does not resolve the recorded normative/scope/four-link blocker.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://uhucreativ.ro/produs/uhu-all-purpose-adhesive/",
+          "summary": "Romanian source read supports partial claims but does not resolve the recorded normative/scope/four-link blocker.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://datasheets.tdx.henkel.com/METYLAN-Special-ro_RO.pdf",
+          "summary": "Romanian source read supports partial claims but does not resolve the recorded normative/scope/four-link blocker.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Retain hold; no threshold relaxation or invented relation.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
+      "decision": "Book-binding target was not source-verified, and broad wallpaper/industrial adhesive uses do not automatically match the planned school-glue scope.",
       "research_ready": false,
-      "link_targets": []
+      "link_targets": [
+        {
+          "node_id": "n_v1_3_material_lemn",
+          "label": "Lemn",
+          "status": "exists on wave_base",
+          "category": "viata_de_roman"
+        },
+        {
+          "node_id": "n_v24_home_structure_perete",
+          "label": "Perete",
+          "status": "exists on wave_base",
+          "category": "viata_de_roman"
+        },
+        {
+          "node_id": "n_v3lit_carte",
+          "label": "Carte",
+          "status": "exists on wave_base",
+          "category": "literatura"
+        },
+        {
+          "node_id": "n_v3soc_scoala",
+          "label": "Școală",
+          "status": "exists on wave_base",
+          "category": "societate"
+        }
+      ],
+      "source_search_planned": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "lipici",
+          "rank": 15652,
+          "count": 1056
+        },
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-rucsac",
       "revision": 1,
-      "state": "idea",
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Rucsac",
       "label_ro": "Rucsac",
@@ -2163,7 +2670,7 @@
         "rucsacurile",
         "rucsacurilor"
       ],
-      "form_status": "Unverified paradigm hypotheses. Confirm DEX sense/register and DOOM 3 forms in step 2; new forms must also be screened before use.",
+      "form_status": "Exact-lemma DEX/DOOM 3 and independent Romanian source checked; forms remain proposals for review.",
       "identity_checks": {
         "forms": [
           {
@@ -2193,12 +2700,113 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/Rucsac/json",
+          "summary": "Exact-lemma DEX and DOOM 3 entry 1306218: Back-carried bag; DOOM 3 gives rucsacuri; no identity alias to Ghiozdan.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Rucsac",
+          "summary": "A backpack is a bag carried on the back.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://www.digi24.ro/stiri/actualitate/evenimente/copil-atacat-cu-cutitul-de-un-barbat-in-fata-unui-liceu-din-galati-2748129",
+          "summary": "Only the report’s ordinary school-object fact is used: a pupil’s backpack held books and notebooks; no violent framing is imported.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://www.decathlon.ro/p/rucsac-de-drumetie-cu-buzunare-16l-escape-500-galben/_/R-p-334520",
+          "summary": "A real backpack model has a main compartment closed by a zipper; this is a qualified example, not a universal design claim.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Independent factual and quality review of the exact module.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
-      "research_ready": false,
-      "link_targets": []
+      "decision": "Source-researched proposal; exact scoped forms, links and dependencies still require independent review.",
+      "research_ready": true,
+      "link_targets": [
+        {
+          "node_id": "n_v1_3_clothing_fermoar",
+          "label": "Fermoar",
+          "status": "exists on wave_base",
+          "category": "viata_de_roman"
+        },
+        {
+          "node_id": "n_v3lit_carte",
+          "label": "Carte",
+          "status": "exists on wave_base",
+          "category": "literatura"
+        },
+        {
+          "node_id": "n_v24_school_writing_caiet",
+          "label": "Caiet",
+          "status": "exists on wave_base",
+          "category": "viata_de_roman"
+        },
+        {
+          "node_id": "n_v3soc_scoala",
+          "label": "Școală",
+          "status": "exists on wave_base",
+          "category": "societate"
+        }
+      ],
+      "source_search_planned": true,
+      "category": "viata_de_roman",
+      "node_id": "n_v1_8_rucsac",
+      "verified_forms": [
+        "rucsac",
+        "rucsacul",
+        "rucsacului",
+        "rucsacuri",
+        "rucsacurile",
+        "rucsacurilor"
+      ],
+      "proposed_edges": [
+        {
+          "dst": "n_v1_3_clothing_fermoar",
+          "relation": "closed_with",
+          "label_ro": "unele rucsacuri se închid cu fermoar",
+          "strength": 0.9,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v3lit_carte",
+          "relation": "carries",
+          "label_ro": "poate transporta cărți",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v24_school_writing_caiet",
+          "relation": "carries",
+          "label_ro": "poate transporta caiete",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v3soc_scoala",
+          "relation": "used_for",
+          "label_ro": "poate fi folosit pentru transportul lucrurilor la școală",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        }
+      ],
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "rucsacul",
+          "rank": 10958,
+          "count": 1714
+        },
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-umbrela",
@@ -2271,16 +2879,52 @@
         }
       ],
       "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "next_action": "Retain hold; seek natural distinct links in a later source pass without floor padding.",
       "checked_on": "2026-10-11",
-      "decision": "Prior hold: rain/parasol scope and insufficient truthful graph neighbors remain unresolved (i03-outdoor-03, i07-functional-02).",
+      "decision": "Four useful distinct source-qualified links are not established; school-kit/handheld co-occurrence alone is not enough and no absent endpoint is invented.",
       "research_ready": false,
-      "link_targets": []
+      "link_targets": [
+        {
+          "node_id": "n_v24_weather_precipitation_ploaie",
+          "label": "Ploaie",
+          "status": "exists on wave_base",
+          "category": "stiinta"
+        },
+        {
+          "node_id": "n_v4sti_metal",
+          "label": "Metal",
+          "status": "exists on wave_base",
+          "category": "stiinta"
+        },
+        {
+          "node_id": "n_v24_body_limbs_mana",
+          "label": "Mână",
+          "status": "exists on wave_base",
+          "category": "stiinta"
+        },
+        {
+          "node_id": "n_v1_3_material_lemn",
+          "label": "Lemn",
+          "status": "exists on wave_base",
+          "category": "viata_de_roman"
+        }
+      ],
+      "source_search_planned": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "umbrele",
+          "rank": 13610,
+          "count": 1285
+        },
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-lanterna",
       "revision": 1,
-      "state": "idea",
+      "state": "held",
       "kind": "new_shared_concept",
       "lemma": "Lanternă",
       "label_ro": "Lanternă",
@@ -2345,21 +2989,56 @@
         }
       ],
       "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "next_action": "Retain hold; seek natural distinct links in a later source pass without floor padding.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
+      "decision": "Four useful distinct source-qualified links are not established; school-kit/handheld co-occurrence alone is not enough and no absent endpoint is invented.",
       "research_ready": false,
-      "link_targets": []
+      "link_targets": [
+        {
+          "node_id": "n_v33_electric_light_bec",
+          "label": "Bec",
+          "status": "exists on wave_base",
+          "category": "viata_de_roman"
+        },
+        {
+          "node_id": null,
+          "label": "Priză",
+          "status": "absent; no invented endpoint"
+        },
+        {
+          "node_id": "n_v4sti_lumina",
+          "label": "Lumină",
+          "status": "exists on wave_base",
+          "category": "stiinta"
+        },
+        {
+          "node_id": "n_v29_time_daily_noapte",
+          "label": "Noapte",
+          "status": "exists on wave_base",
+          "category": "societate"
+        }
+      ],
+      "source_search_planned": true,
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "lanternă",
+          "rank": 14400,
+          "count": 1188
+        },
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-fluture",
       "revision": 1,
-      "state": "idea",
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Fluture",
       "label_ro": "Fluture",
       "sense": "Insectă adultă cu aripi solzoase; exclude piesa mecanică omonimă.",
-      "category_hypothesis": "geografie",
+      "category_hypothesis": "stiinta",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
@@ -2373,7 +3052,7 @@
         "fluturelui",
         "fluturilor"
       ],
-      "form_status": "Unverified paradigm hypotheses. Confirm DEX sense/register and DOOM 3 forms in step 2; new forms must also be screened before use.",
+      "form_status": "Exact-lemma DEX/DOOM 3 and independent Romanian source checked; forms remain proposals for review.",
       "identity_checks": {
         "forms": [
           {
@@ -2411,22 +3090,118 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/Fluture/json",
+          "summary": "Exact-lemma DEX and DOOM 3 entry 1302028: Lepidopteran insect, not mechanical/swimming/ornament homonyms; DOOM 3 gives fluturele and fluturi.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Fluture",
+          "summary": "Butterflies are insects with a larval caterpillar stage.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://educa.sor.ro/fluturi/",
+          "summary": "Concrete species examples distinguish larval plant feeding, adult floral nectar and woodland-edge habitats.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Independent factual and quality review of the exact module.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
-      "research_ready": false,
-      "link_targets": []
+      "decision": "Source-researched proposal; exact scoped forms, links and dependencies still require independent review.",
+      "research_ready": true,
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_insecta",
+          "label": "Insectă",
+          "status": "exists on wave_base",
+          "category": "stiinta"
+        },
+        {
+          "node_id": "n_v4sti_planta",
+          "label": "Plantă",
+          "status": "exists on wave_base",
+          "category": "stiinta"
+        },
+        {
+          "node_id": "n_v4sti_floare",
+          "label": "Floare",
+          "status": "exists on wave_base",
+          "category": "stiinta"
+        },
+        {
+          "node_id": "n_v4geo_padure",
+          "label": "Pădure",
+          "status": "exists on wave_base",
+          "category": "geografie"
+        }
+      ],
+      "source_search_planned": true,
+      "category": "stiinta",
+      "node_id": "n_v1_8_fluture",
+      "verified_forms": [
+        "fluture",
+        "fluturele",
+        "fluturi",
+        "fluturii",
+        "fluturelui",
+        "fluturilor"
+      ],
+      "proposed_edges": [
+        {
+          "dst": "n_v4sti_insecta",
+          "relation": "is_a",
+          "label_ro": "este o insectă",
+          "strength": 0.95,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v4sti_planta",
+          "relation": "feeds_on",
+          "label_ro": "omizile multor specii se hrănesc cu plante",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v4sti_floare",
+          "relation": "feeds_on",
+          "label_ro": "adulții multor specii se hrănesc cu nectarul florilor",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v4geo_padure",
+          "relation": "lives_in",
+          "label_ro": "unele specii trăiesc la marginea pădurilor",
+          "strength": 0.85,
+          "is_distractor": 0,
+          "bidirectional": 0
+        }
+      ],
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "fluture",
+          "rank": 10826,
+          "count": 1740
+        },
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-albina",
       "revision": 1,
-      "state": "idea",
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Albină",
       "label_ro": "Albină",
       "sense": "Insectă polenizatoare asociată producerii mierii.",
-      "category_hypothesis": "geografie",
+      "category_hypothesis": "stiinta",
       "games": [
         "Cald sau Rece",
         "Lanțul Cuvintelor"
@@ -2439,7 +3214,7 @@
         "albinei",
         "albinelor"
       ],
-      "form_status": "Unverified paradigm hypotheses. Confirm DEX sense/register and DOOM 3 forms in step 2; new forms must also be screened before use.",
+      "form_status": "Exact-lemma DEX/DOOM 3 and independent Romanian source checked; forms remain proposals for review.",
       "identity_checks": {
         "forms": [
           {
@@ -2473,12 +3248,102 @@
         ]
       },
       "prior_records": [],
-      "sources": [],
-      "next_action": "Before any source fetch, name 4–8 truthful link targets, with at least two existing main nodes and two same-category nodes; then verify the exact lemma, register and full non-colliding paradigm.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/Albin%C4%83/json",
+          "summary": "Exact-lemma DEX and DOOM 3 entry 1321688: Honey-bee insect sense, not the plant homonym; DOOM 3 gives albine and albinei.",
+          "checked_on": "2026-10-11"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Albin%C4%83",
+          "summary": "Bees collect floral nectar/pollen and pollinate flowering plants; honey production is a role of honey bees, not every bee species.",
+          "checked_on": "2026-10-11"
+        }
+      ],
+      "next_action": "Independent factual and quality review of the exact module.",
       "checked_on": "2026-10-11",
-      "decision": "Idea only: identity pre-screen complete; source, morphology and gameplay review pending.",
-      "research_ready": false,
-      "link_targets": []
+      "decision": "Source-researched proposal; exact scoped forms, links and dependencies still require independent review.",
+      "research_ready": true,
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_insecta",
+          "label": "Insectă",
+          "status": "exists on wave_base",
+          "category": "stiinta"
+        },
+        {
+          "node_id": "n_v4sti_floare",
+          "label": "Floare",
+          "status": "exists on wave_base",
+          "category": "stiinta"
+        },
+        {
+          "node_id": "n_v24_food_breakfast_miere",
+          "label": "Miere",
+          "status": "exists on wave_base",
+          "category": "gastronomie"
+        },
+        {
+          "node_id": "n_v4sti_planta",
+          "label": "Plantă",
+          "status": "exists on wave_base",
+          "category": "stiinta"
+        }
+      ],
+      "source_search_planned": true,
+      "category": "stiinta",
+      "node_id": "n_v1_8_albina",
+      "verified_forms": [
+        "albină",
+        "albine",
+        "albinele",
+        "albinei",
+        "albinelor"
+      ],
+      "proposed_edges": [
+        {
+          "dst": "n_v4sti_insecta",
+          "relation": "is_a",
+          "label_ro": "este o insectă",
+          "strength": 0.95,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v4sti_floare",
+          "relation": "feeds_on",
+          "label_ro": "culege nectar și polen din flori",
+          "strength": 0.9,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v24_food_breakfast_miere",
+          "relation": "produces",
+          "label_ro": "albina meliferă produce miere",
+          "strength": 0.9,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "dst": "n_v4sti_planta",
+          "relation": "pollinates",
+          "label_ro": "polenizează numeroase plante cu flori",
+          "strength": 0.9,
+          "is_distractor": 0,
+          "bidirectional": 0
+        }
+      ],
+      "researched_on": "2026-10-11",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best": {
+          "form": "albine",
+          "rank": 9782,
+          "count": 2008
+        },
+        "absence_is_not_rejection": true
+      }
     },
     {
       "id": "v18-furnica",
@@ -5374,12 +6239,12 @@
   ],
   "counts": {
     "records": 60,
-    "idea": 33,
-    "held": 14,
+    "idea": 22,
+    "held": 18,
     "accepted": 0,
     "installed": 0,
     "planned_unique_forms": 322,
     "proposed_existing_owner_forms": 37,
-    "researched": 13
+    "researched": 20
   }
 }
