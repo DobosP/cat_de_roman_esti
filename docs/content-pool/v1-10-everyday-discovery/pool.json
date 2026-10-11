@@ -1,0 +1,4497 @@
+{
+  "schema_version": 1,
+  "theme": "v1-10-everyday-discovery",
+  "baseline_commit": "ba24be4d791d130689042d37173ee4d9b9c0f7a5",
+  "procedure_rev": "17b97a2",
+  "scope": "40 planned growth items:25 new everyday concepts and15 existing-owner full noncolliding paradigms. Discovery extends the exhausted usable named backlog; prior holds retain reasons and revised link plans. No web call before this screen.",
+  "input_policy_baseline": {
+    "module": "scripts/seasons_and_school_v1_9_data.py",
+    "removed_deferred_terms": [
+      "leafă",
+      "ogradă"
+    ],
+    "note": "Preserve installed input policy; no deferral change proposed."
+  },
+  "screen": {
+    "bundle_sha256": "c4f0ef27266d4c619a0455b1113a7946f74aa6dbecc56d2445d9a30edb66da93",
+    "script": "/home/dobo/work/_temp/content__v1-10-everyday-discovery/prescreen.py",
+    "normalization": "Bundled normalization_map single-codepoint substitution and whitespace collapse.",
+    "owner_sources": [
+      "normalized_index",
+      "labels",
+      "all node labels and aliases",
+      "discovery_world labels/snapshots/aliases",
+      "contexto projection terms",
+      "DEFERRED_AMBIGUOUS_TERMS",
+      "ReviewedUnresolved",
+      "all pool.json states"
+    ],
+    "cross_item_keys": {},
+    "reviewed_unresolved_keys": [
+      "paște",
+      "paștele"
+    ]
+  },
+  "owner_catalog": {
+    "n_v29_clothing_everyday_haina": {
+      "label_ro": "Haină",
+      "category": "viata_de_roman",
+      "description": "Obiect de îmbrăcăminte purtat pentru protecție, căldură sau aspect."
+    },
+    "n_v24_body_limbs_mana": {
+      "label_ro": "Mână",
+      "category": "stiinta",
+      "description": "Concept cotidian din grupul «părți ale membrelor»: Mână."
+    },
+    "n_v1_8_iarna": {
+      "label_ro": "Iarnă",
+      "category": "stiinta",
+      "description": "Anotimpul rece din zona temperată, cu zile mai scurte și ninsori în numeroase regiuni."
+    },
+    "n_v1_9_caciula": {
+      "label_ro": "Căciulă",
+      "category": "viata_de_roman",
+      "description": "Obiect de îmbrăcăminte care acoperă capul, purtat mai ales pentru protecție împotriva frigului."
+    },
+    "n_v29_clothing_everyday_camasa": {
+      "label_ro": "Cămașă",
+      "category": "viata_de_roman",
+      "description": "Haină pentru partea de sus a corpului, de obicei cu guler și nasturi."
+    },
+    "n_v30_clothing_outer_geaca": {
+      "label_ro": "Geacă",
+      "category": "viata_de_roman",
+      "description": "Haină scurtă purtată peste alte haine pentru protecție și căldură."
+    },
+    "n_v30_clothing_everyday_pantaloni": {
+      "label_ro": "Pantaloni",
+      "category": "viata_de_roman",
+      "description": "Haină purtată de la talie în jos, cu câte o parte pentru fiecare picior."
+    },
+    "n_v24_home_outdoor_curte": {
+      "label_ro": "Curte",
+      "category": "viata_de_roman",
+      "description": "Concept cotidian din grupul «spații de lângă casă»: Curte."
+    },
+    "n_v24_home_outdoor_gradina": {
+      "label_ro": "Grădină",
+      "category": "viata_de_roman",
+      "description": "Concept cotidian din grupul «spații de lângă casă»: Grădină."
+    },
+    "n_v1_3_material_lemn": {
+      "label_ro": "Lemn",
+      "category": "viata_de_roman",
+      "description": "Material provenit din părțile lemnoase ale arborilor, folosit la construcții și obiecte din gospodărie; aici, sensul de material."
+    },
+    "n_v4soc_casa": {
+      "label_ro": "casă",
+      "category": "societate",
+      "description": "Locuință în care trăiesc persoane sau familii."
+    },
+    "n_v17gas_dulceata": {
+      "label_ro": "Dulceață",
+      "category": "gastronomie",
+      "description": "Fructe fierte în sirop de zahăr și păstrate la borcan pentru iarnă. Se servește peste papanași și clătite sau simplă, cu un pahar de apă rece."
+    },
+    "n_gas_muraturi": {
+      "label_ro": "Murături",
+      "category": "gastronomie",
+      "description": "Legume conservate în saramură sau oțet, puse lângă fripturi, fasole sau șaorma."
+    },
+    "n_v2gas_conserve_iarna": {
+      "label_ro": "Conserve de iarnă",
+      "category": "gastronomie",
+      "description": "Alimente puse la borcan pentru consum în sezonul rece."
+    },
+    "n_v30_kitchen_cookware_oala": {
+      "label_ro": "Oală",
+      "category": "gastronomie",
+      "description": "Vas adânc folosit pe aragaz pentru a fierbe și a găti mâncare."
+    },
+    "n_v88_kitchen_cratita": {
+      "label_ro": "Cratiță",
+      "category": "gastronomie",
+      "description": "Vas de bucătărie cu pereți relativ scunzi, folosit pentru fierberea sau prăjirea preparatelor."
+    },
+    "n_v30_kitchen_cookware_tigaie": {
+      "label_ro": "Tigaie",
+      "category": "gastronomie",
+      "description": "Vas de gătit puțin adânc, cu mâner, folosit mai ales pentru prăjire."
+    },
+    "n_v3gas_cafea": {
+      "label_ro": "Cafea",
+      "category": "gastronomie",
+      "description": "Băutură obținută din boabe de cafea prăjite și măcinate."
+    },
+    "n_v42gas_cafea_ibric": {
+      "label_ro": "Cafea la ibric",
+      "category": "gastronomie",
+      "description": "Cafea fiartă turcește în ibric, ritualul de dimineață al bunicilor."
+    },
+    "n_v4gas_apa": {
+      "label_ro": "Apă",
+      "category": "gastronomie",
+      "description": "Lichid de băut și ingredient de bază în gătit."
+    },
+    "n_v24_home_appliances_aragaz": {
+      "label_ro": "Aragaz",
+      "category": "viata_de_roman",
+      "description": "Concept cotidian din grupul «obiecte utile în casă»: Aragaz."
+    },
+    "n_v3gas_paste": {
+      "label_ro": "Paste",
+      "category": "gastronomie",
+      "description": "Preparat din aluat de grâu dur, fiert și servit cu sos."
+    },
+    "n_v4gas_legume": {
+      "label_ro": "Legume",
+      "category": "gastronomie",
+      "description": "Plante comestibile folosite crude, fierte, coapte sau conservate."
+    },
+    "n_v84_food_zer": {
+      "label_ro": "Zer",
+      "category": "gastronomie",
+      "description": "Lichid separat din laptele coagulat, folosit și la prepararea urdei."
+    },
+    "n_v4sti_pasare": {
+      "label_ro": "pasăre",
+      "category": "stiinta",
+      "description": "Animal vertebrat cu pene, cioc și, de obicei, aripi."
+    },
+    "n_v4sti_insecta": {
+      "label_ro": "insectă",
+      "category": "stiinta",
+      "description": "Animal nevertebrat cu șase picioare și corp segmentat."
+    },
+    "n_v84_food_grau": {
+      "label_ro": "Grâu",
+      "category": "gastronomie",
+      "description": "Cereală ale cărei boabe sunt măcinate pentru făină și griș."
+    },
+    "n_v4sti_copac": {
+      "label_ro": "copac",
+      "category": "stiinta",
+      "description": "Plantă lemnoasă înaltă, cu trunchi și coroană."
+    },
+    "n_v24_body_face_gura": {
+      "label_ro": "Gură",
+      "category": "stiinta",
+      "description": "Concept cotidian din grupul «părți ale capului»: Gură."
+    },
+    "n_v4sti_os": {
+      "label_ro": "os",
+      "category": "stiinta",
+      "description": "Țesut dur care susține corpul și protejează organele."
+    },
+    "n_v4sti_sange": {
+      "label_ro": "sânge",
+      "category": "stiinta",
+      "description": "Țesut lichid care transportă oxigen și substanțe prin corp."
+    },
+    "n_v1_8_broasca": {
+      "label_ro": "Broască",
+      "category": "stiinta",
+      "description": "Animal amfibian fără coadă, cu picioarele dinapoi adaptate pentru sărit."
+    },
+    "n_v4sti_animal": {
+      "label_ro": "animal",
+      "category": "stiinta",
+      "description": "Organism viu care se hrănește cu alte organisme și se mișcă activ."
+    },
+    "n_v24_nature_world_pamant": {
+      "label_ro": "Pământ",
+      "category": "stiinta",
+      "description": "Concept cotidian din grupul «lumea naturală»: Pământ."
+    },
+    "n_v1_8_arici": {
+      "label_ro": "Arici",
+      "category": "stiinta",
+      "description": "Mamifer mic cu țepi, întâlnit și la marginea pădurilor din România."
+    },
+    "n_v4sti_peste": {
+      "label_ro": "pește",
+      "category": "stiinta",
+      "description": "Animal acvatic vertebrat care respiră prin branhii."
+    },
+    "n_v4sti_planta": {
+      "label_ro": "plantă",
+      "category": "stiinta",
+      "description": "Organism viu care face fotosinteză și are celule vegetale."
+    },
+    "n_v4sti_frunza": {
+      "label_ro": "frunză",
+      "category": "stiinta",
+      "description": "Organ al plantei care produce hrană prin fotosinteză."
+    },
+    "n_v1_8_fluture": {
+      "label_ro": "Fluture",
+      "category": "stiinta",
+      "description": "Insectă din ordinul lepidopterelor, cu aripi acoperite cu solzi; larva sa se numește omidă."
+    },
+    "n_v24_nature_plant_parts_iarba": {
+      "label_ro": "Iarbă",
+      "category": "stiinta",
+      "description": "Concept cotidian din grupul «plante și părțile lor»: Iarbă."
+    },
+    "n_v24_transport_personal_masina": {
+      "label_ro": "Mașină",
+      "category": "societate",
+      "description": "Concept cotidian din grupul «transport personal»: Mașină."
+    },
+    "n_v4soc_autobuz": {
+      "label_ro": "autobuz",
+      "category": "societate",
+      "description": "Vehicul de transport public pentru mai mulți pasageri."
+    },
+    "n_v1_9_sofer": {
+      "label_ro": "Șofer",
+      "category": "societate",
+      "description": "Persoană calificată pentru conducerea autovehiculelor."
+    },
+    "n_vdr_biletel_in_parbriz": {
+      "label_ro": "Bilețelul în parbriz",
+      "category": "viata_de_roman",
+      "description": "Mesaj lăsat pe mașină pentru parcare, zgârietură sau rugăminți de mutare."
+    },
+    "n_v24_transport_personal_bicicleta": {
+      "label_ro": "Bicicletă",
+      "category": "societate",
+      "description": "Concept cotidian din grupul «transport personal»: Bicicletă."
+    },
+    "n_v24_transport_personal_motocicleta": {
+      "label_ro": "Motocicletă",
+      "category": "societate",
+      "description": "Concept cotidian din grupul «transport personal»: Motocicletă."
+    },
+    "n_v24_transport_rail_tren": {
+      "label_ro": "Tren",
+      "category": "societate",
+      "description": "Concept cotidian din grupul «transport pe șine»: Tren."
+    },
+    "n_v42vdr_cauciucuri": {
+      "label_ro": "Cauciucurile de iarnă",
+      "category": "viata_de_roman",
+      "description": "Setul de anvelope depozitat pe balcon, între sezoane."
+    },
+    "n_v1_9_rosu": {
+      "label_ro": "Roșu",
+      "category": "arta_cultura",
+      "description": "Culoare întâlnită în tricolorul României și în firul roșu al Mărțișorului."
+    },
+    "n_v4sti_lumina": {
+      "label_ro": "lumină",
+      "category": "stiinta",
+      "description": "Radiație electromagnetică vizibilă pentru ochiul uman."
+    },
+    "n_v3sti_electricitate": {
+      "label_ro": "Electricitate",
+      "category": "stiinta",
+      "description": "Fenomen legat de sarcini electrice și curent electric."
+    },
+    "n_v4geo_strada": {
+      "label_ro": "stradă",
+      "category": "geografie",
+      "description": "Cale urbană de circulație mărginită de clădiri."
+    },
+    "n_v24_transport_terminals_gara": {
+      "label_ro": "Gară",
+      "category": "societate",
+      "description": "Concept cotidian din grupul «puncte de plecare și sosire»: Gară."
+    },
+    "n_v30_clothing_everyday_rochie": {
+      "label_ro": "Rochie",
+      "category": "viata_de_roman",
+      "description": "Haină dintr-o singură piesă care acoperă trunchiul și o parte din picioare."
+    },
+    "n_v30_clothing_everyday_fusta": {
+      "label_ro": "Fustă",
+      "category": "viata_de_roman",
+      "description": "Haină purtată de la talie în jos, fără părți separate pentru picioare."
+    },
+    "n_v30_clothing_footwear_pantof": {
+      "label_ro": "Pantof",
+      "category": "viata_de_roman",
+      "description": "Obiect de încălțăminte care protejează laba piciorului."
+    },
+    "n_v30_clothing_footwear_soseta": {
+      "label_ro": "Șosetă",
+      "category": "viata_de_roman",
+      "description": "Piesă moale de îmbrăcăminte purtată pe picior, în interiorul pantofului."
+    },
+    "n_v31_hygiene_bath_prosop": {
+      "label_ro": "Prosop",
+      "category": "viata_de_roman",
+      "description": "Obiect textil absorbant folosit pentru a șterge și usca mâinile, fața sau corpul."
+    },
+    "n_v31_hygiene_bath_sapun": {
+      "label_ro": "Săpun",
+      "category": "viata_de_roman",
+      "description": "Produs folosit cu apă pentru a spăla mâinile și corpul."
+    },
+    "n_v31_hygiene_hair_sampon": {
+      "label_ro": "Șampon",
+      "category": "viata_de_roman",
+      "description": "Produs lichid folosit cu apă pentru a spăla părul."
+    },
+    "n_v31_hygiene_hair_pieptene": {
+      "label_ro": "Pieptene",
+      "category": "viata_de_roman",
+      "description": "Obiect cu dinți apropiați, folosit pentru a descurca și aranja părul."
+    },
+    "n_v30_kitchen_utensil_lingura": {
+      "label_ro": "Lingură",
+      "category": "gastronomie",
+      "description": "Ustensilă cu mâner și cap adâncit, folosită pentru a lua mâncare lichidă."
+    },
+    "n_v30_kitchen_utensil_furculita": {
+      "label_ro": "Furculiță",
+      "category": "gastronomie",
+      "description": "Ustensilă cu mâner și dinți, folosită pentru a prinde bucăți de mâncare."
+    },
+    "n_v29_kitchen_table_pahar": {
+      "label_ro": "Pahar",
+      "category": "gastronomie",
+      "description": "Recipient mic din care se beau apă și alte băuturi."
+    },
+    "n_v30_kitchen_drink_cana": {
+      "label_ro": "Cană",
+      "category": "gastronomie",
+      "description": "Recipient cu toartă din care se beau apă, lapte, ceai sau alte băuturi."
+    }
+  },
+  "records": [
+    {
+      "id": "v110-manusa",
+      "revision": 1,
+      "kind": "new_shared_concept",
+      "lemma": "Mănușă",
+      "label_ro": "Mănușă",
+      "sense": "Obiect de îmbrăcăminte pentru mână.",
+      "origin": "named_backlog_new_link_plan",
+      "category_hypothesis": "viata_de_roman",
+      "node_id": "n_v1_10_manusa",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
+      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "link_targets": [
+        {
+          "node_id": "n_v29_clothing_everyday_haina",
+          "label": "Haină",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v24_body_limbs_mana",
+          "label": "Mână",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v1_8_iarna",
+          "label": "Iarnă",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v1_9_caciula",
+          "label": "Căciulă",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        }
+      ],
+      "planned_forms": [
+        "mănușă",
+        "mănuși",
+        "mănușile",
+        "mănușii",
+        "mănușilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "mănușă",
+            "key": "manusa",
+            "cald_proxies": [
+              {
+                "public_id": "ctxp_5d59b51af8893e381ad7",
+                "anchor_id": "n_v30_clothing_outer_geaca",
+                "surface": "mănușă",
+                "mapping_kind": "explicit"
+              }
+            ]
+          },
+          {
+            "form": "mănuși",
+            "key": "manusi"
+          },
+          {
+            "form": "mănușile",
+            "key": "manusile"
+          },
+          {
+            "form": "mănușii",
+            "key": "manusii"
+          },
+          {
+            "form": "mănușilor",
+            "key": "manusilor"
+          }
+        ]
+      },
+      "already_resolved_forms": [],
+      "proposed_forms": [
+        "mănușă",
+        "mănuși",
+        "mănușile",
+        "mănușii",
+        "mănușilor"
+      ],
+      "prior_records": [
+        {
+          "pool": "docs/content-pool/v1-9-seasons-and-school/pool.json",
+          "id": "v19-manusa",
+          "state": "held",
+          "decision": "held: Maintain the existing hold: held: the fourth predeclared Geacă association has only weak equipment/catalogue co-listing. The other three links are sourced, but there is no four-link approval; after Căciulă lands, reconsider that honest same-category neighbor in a later wave. Familiarity or cultural evidence does not override the unresolved admission constraint."
+        }
+      ],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-nasture",
+      "revision": 1,
+      "kind": "new_shared_concept",
+      "lemma": "Nasture",
+      "label_ro": "Nasture",
+      "sense": "Piesă care închide sau împodobește îmbrăcămintea.",
+      "origin": "named_backlog_new_link_plan",
+      "category_hypothesis": "viata_de_roman",
+      "node_id": "n_v1_10_nasture",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
+      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "link_targets": [
+        {
+          "node_id": "n_v29_clothing_everyday_haina",
+          "label": "Haină",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v29_clothing_everyday_camasa",
+          "label": "Cămașă",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v30_clothing_outer_geaca",
+          "label": "Geacă",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v30_clothing_everyday_pantaloni",
+          "label": "Pantaloni",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        }
+      ],
+      "planned_forms": [
+        "nasture",
+        "nasturele",
+        "nasturelui",
+        "nasturi",
+        "nasturii",
+        "nasturilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "nasture",
+            "key": "nasture"
+          },
+          {
+            "form": "nasturele",
+            "key": "nasturele"
+          },
+          {
+            "form": "nasturelui",
+            "key": "nasturelui"
+          },
+          {
+            "form": "nasturi",
+            "key": "nasturi"
+          },
+          {
+            "form": "nasturii",
+            "key": "nasturii"
+          },
+          {
+            "form": "nasturilor",
+            "key": "nasturilor"
+          }
+        ]
+      },
+      "already_resolved_forms": [],
+      "proposed_forms": [
+        "nasture",
+        "nasturele",
+        "nasturelui",
+        "nasturi",
+        "nasturii",
+        "nasturilor"
+      ],
+      "prior_records": [
+        {
+          "pool": "docs/content-pool/v1-3-everyday-concepts/pool.json",
+          "id": "v1-3-nasture",
+          "state": "held",
+          "decision": "Held from this bounded V1.3 graph proposal: Root holds this concept rather than use generic Haină as fourth class-level neighbor.; Nasture/Fermoar compete across garments; graph links do not prove a unique pairing board.; Decorative buttons do not necessarily close a garment; captions remain possible-use statements."
+        },
+        {
+          "pool": "docs/content-pool/v1-5-small-objects/pool.json",
+          "id": "v1-5-object-5",
+          "state": "held",
+          "decision": "Retain V1.3 held reasons: generic Haină fourth-neighbor padding, competing garment pairs with Fermoar, decorative button exceptions. New source excerpt does not clear these."
+        },
+        {
+          "pool": "docs/content-pool/v99-everyday-spaces/pool.json",
+          "id": "v99-everyday-nasture",
+          "state": "researched",
+          "decision": "Research retained: familiar component with a specific shirt association, but pair uniqueness is untested."
+        }
+      ],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-buzunar",
+      "revision": 1,
+      "kind": "new_shared_concept",
+      "lemma": "Buzunar",
+      "label_ro": "Buzunar",
+      "sense": "Săculeț cusut la îmbrăcăminte pentru obiecte mici.",
+      "origin": "everyday_discovery_extension",
+      "category_hypothesis": "viata_de_roman",
+      "node_id": "n_v1_10_buzunar",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
+      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "link_targets": [
+        {
+          "node_id": "n_v29_clothing_everyday_haina",
+          "label": "Haină",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v30_clothing_everyday_pantaloni",
+          "label": "Pantaloni",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v30_clothing_outer_geaca",
+          "label": "Geacă",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v29_clothing_everyday_camasa",
+          "label": "Cămașă",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        }
+      ],
+      "planned_forms": [
+        "buzunar",
+        "buzunarul",
+        "buzunarului",
+        "buzunare",
+        "buzunarele",
+        "buzunarelor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "buzunar",
+            "key": "buzunar"
+          },
+          {
+            "form": "buzunarul",
+            "key": "buzunarul"
+          },
+          {
+            "form": "buzunarului",
+            "key": "buzunarului"
+          },
+          {
+            "form": "buzunare",
+            "key": "buzunare"
+          },
+          {
+            "form": "buzunarele",
+            "key": "buzunarele"
+          },
+          {
+            "form": "buzunarelor",
+            "key": "buzunarelor"
+          }
+        ]
+      },
+      "already_resolved_forms": [],
+      "proposed_forms": [
+        "buzunar",
+        "buzunarul",
+        "buzunarului",
+        "buzunare",
+        "buzunarele",
+        "buzunarelor"
+      ],
+      "prior_records": [],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-gard",
+      "revision": 1,
+      "kind": "new_shared_concept",
+      "lemma": "Gard",
+      "label_ro": "Gard",
+      "sense": "Împrejmuire a unei curți, grădini sau proprietăți.",
+      "origin": "named_backlog_new_link_plan",
+      "category_hypothesis": "viata_de_roman",
+      "node_id": "n_v1_10_gard",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
+      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "link_targets": [
+        {
+          "node_id": "n_v24_home_outdoor_curte",
+          "label": "Curte",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v24_home_outdoor_gradina",
+          "label": "Grădină",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v1_3_material_lemn",
+          "label": "Lemn",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v4soc_casa",
+          "label": "Casă",
+          "category": "societate",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        }
+      ],
+      "planned_forms": [
+        "gard",
+        "gardul",
+        "gardului",
+        "garduri",
+        "gardurile",
+        "gardurilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "gard",
+            "key": "gard"
+          },
+          {
+            "form": "gardul",
+            "key": "gardul"
+          },
+          {
+            "form": "gardului",
+            "key": "gardului"
+          },
+          {
+            "form": "garduri",
+            "key": "garduri"
+          },
+          {
+            "form": "gardurile",
+            "key": "gardurile"
+          },
+          {
+            "form": "gardurilor",
+            "key": "gardurilor"
+          }
+        ]
+      },
+      "already_resolved_forms": [],
+      "proposed_forms": [
+        "gard",
+        "gardul",
+        "gardului",
+        "garduri",
+        "gardurile",
+        "gardurilor"
+      ],
+      "prior_records": [
+        {
+          "pool": "docs/content-pool/v1-9-seasons-and-school/pool.json",
+          "id": "v19-gard",
+          "state": "held",
+          "decision": "held: Maintain the existing hold: held: the fourth predeclared target is specifically the monumental carved Poarta maramureșeană; generic regional wooden access-gate evidence does not yet establish that exact scope. Do not broaden the target or invent an edge. Familiarity or cultural evidence does not override the unresolved admission constraint."
+        }
+      ],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-borcan",
+      "revision": 1,
+      "kind": "new_shared_concept",
+      "lemma": "Borcan",
+      "label_ro": "Borcan",
+      "sense": "Vas cu gură largă pentru păstrarea alimentelor.",
+      "origin": "everyday_discovery_extension",
+      "category_hypothesis": "gastronomie",
+      "node_id": "n_v1_10_borcan",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
+      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "link_targets": [
+        {
+          "node_id": "n_v17gas_dulceata",
+          "label": "Dulceață",
+          "category": "gastronomie",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_gas_muraturi",
+          "label": "Murături",
+          "category": "gastronomie",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v2gas_conserve_iarna",
+          "label": "Conserve de iarnă",
+          "category": "gastronomie",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v1_10_capac",
+          "label": "Capac",
+          "category": "gastronomie",
+          "status": "new in this batch",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        }
+      ],
+      "planned_forms": [
+        "borcan",
+        "borcanul",
+        "borcanului",
+        "borcane",
+        "borcanele",
+        "borcanelor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "borcan",
+            "key": "borcan"
+          },
+          {
+            "form": "borcanul",
+            "key": "borcanul"
+          },
+          {
+            "form": "borcanului",
+            "key": "borcanului"
+          },
+          {
+            "form": "borcane",
+            "key": "borcane"
+          },
+          {
+            "form": "borcanele",
+            "key": "borcanele"
+          },
+          {
+            "form": "borcanelor",
+            "key": "borcanelor"
+          }
+        ]
+      },
+      "already_resolved_forms": [],
+      "proposed_forms": [
+        "borcan",
+        "borcanul",
+        "borcanului",
+        "borcane",
+        "borcanele",
+        "borcanelor"
+      ],
+      "prior_records": [],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-capac",
+      "revision": 1,
+      "kind": "new_shared_concept",
+      "lemma": "Capac",
+      "label_ro": "Capac",
+      "sense": "Piesă care acoperă deschiderea vaselor de bucătărie.",
+      "origin": "everyday_discovery_extension",
+      "category_hypothesis": "gastronomie",
+      "node_id": "n_v1_10_capac",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
+      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "link_targets": [
+        {
+          "node_id": "n_v30_kitchen_cookware_oala",
+          "label": "Oală",
+          "category": "gastronomie",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v88_kitchen_cratita",
+          "label": "Cratiță",
+          "category": "gastronomie",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v30_kitchen_cookware_tigaie",
+          "label": "Tigaie",
+          "category": "gastronomie",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v1_10_borcan",
+          "label": "Borcan",
+          "category": "gastronomie",
+          "status": "new in this batch",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        }
+      ],
+      "planned_forms": [
+        "capac",
+        "capacul",
+        "capacului",
+        "capace",
+        "capacele",
+        "capacelor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "capac",
+            "key": "capac",
+            "cald_proxies": [
+              {
+                "public_id": "ctxp_2a1483be8d54b6f59042",
+                "anchor_id": "n_v30_kitchen_cookware_oala",
+                "surface": "capac",
+                "mapping_kind": "explicit"
+              }
+            ]
+          },
+          {
+            "form": "capacul",
+            "key": "capacul"
+          },
+          {
+            "form": "capacului",
+            "key": "capacului"
+          },
+          {
+            "form": "capace",
+            "key": "capace"
+          },
+          {
+            "form": "capacele",
+            "key": "capacele"
+          },
+          {
+            "form": "capacelor",
+            "key": "capacelor"
+          }
+        ]
+      },
+      "already_resolved_forms": [],
+      "proposed_forms": [
+        "capac",
+        "capacul",
+        "capacului",
+        "capace",
+        "capacele",
+        "capacelor"
+      ],
+      "prior_records": [],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-ibric",
+      "revision": 1,
+      "kind": "new_shared_concept",
+      "lemma": "Ibric",
+      "label_ro": "Ibric",
+      "sense": "Vas cu mâner și cioc, folosit mai ales la prepararea cafelei.",
+      "origin": "everyday_discovery_extension",
+      "category_hypothesis": "gastronomie",
+      "node_id": "n_v1_10_ibric",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
+      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "link_targets": [
+        {
+          "node_id": "n_v3gas_cafea",
+          "label": "Cafea",
+          "category": "gastronomie",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v42gas_cafea_ibric",
+          "label": "Cafea la ibric",
+          "category": "gastronomie",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v4gas_apa",
+          "label": "Apă",
+          "category": "gastronomie",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v24_home_appliances_aragaz",
+          "label": "Aragaz",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        }
+      ],
+      "planned_forms": [
+        "ibric",
+        "ibricul",
+        "ibricului",
+        "ibrice",
+        "ibricele",
+        "ibricelor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "ibric",
+            "key": "ibric",
+            "cald_proxies": [
+              {
+                "public_id": "ctxp_34c3d4cca11aabe6546d",
+                "anchor_id": "n_v30_kitchen_cookware_oala",
+                "surface": "ibric",
+                "mapping_kind": "explicit"
+              }
+            ]
+          },
+          {
+            "form": "ibricul",
+            "key": "ibricul"
+          },
+          {
+            "form": "ibricului",
+            "key": "ibricului"
+          },
+          {
+            "form": "ibrice",
+            "key": "ibrice"
+          },
+          {
+            "form": "ibricele",
+            "key": "ibricele"
+          },
+          {
+            "form": "ibricelor",
+            "key": "ibricelor"
+          }
+        ]
+      },
+      "already_resolved_forms": [],
+      "proposed_forms": [
+        "ibric",
+        "ibricul",
+        "ibricului",
+        "ibrice",
+        "ibricele",
+        "ibricelor"
+      ],
+      "prior_records": [],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-strecuratoare",
+      "revision": 1,
+      "kind": "new_shared_concept",
+      "lemma": "Strecurătoare",
+      "label_ro": "Strecurătoare",
+      "sense": "Ustensilă perforată care separă lichidul de alimente.",
+      "origin": "named_backlog_new_link_plan",
+      "category_hypothesis": "gastronomie",
+      "node_id": "n_v1_10_strecuratoare",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
+      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "link_targets": [
+        {
+          "node_id": "n_v3gas_paste",
+          "label": "Paste",
+          "category": "gastronomie",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v4gas_legume",
+          "label": "Legume",
+          "category": "gastronomie",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v84_food_zer",
+          "label": "Zer",
+          "category": "gastronomie",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v30_kitchen_cookware_oala",
+          "label": "Oală",
+          "category": "gastronomie",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        }
+      ],
+      "planned_forms": [
+        "strecurătoare",
+        "strecurătoarea",
+        "strecurătorii",
+        "strecurători",
+        "strecurătorile",
+        "strecurătorilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "strecurătoare",
+            "key": "strecuratoare",
+            "cald_proxies": [
+              {
+                "public_id": "ctxp_c6db589e12e0a4a32e77",
+                "anchor_id": "n_v30_kitchen_utensil_lingura",
+                "surface": "strecurătoare",
+                "mapping_kind": "explicit"
+              }
+            ]
+          },
+          {
+            "form": "strecurătoarea",
+            "key": "strecuratoarea"
+          },
+          {
+            "form": "strecurătorii",
+            "key": "strecuratorii"
+          },
+          {
+            "form": "strecurători",
+            "key": "strecuratori"
+          },
+          {
+            "form": "strecurătorile",
+            "key": "strecuratorile"
+          },
+          {
+            "form": "strecurătorilor",
+            "key": "strecuratorilor"
+          }
+        ]
+      },
+      "already_resolved_forms": [],
+      "proposed_forms": [
+        "strecurătoare",
+        "strecurătoarea",
+        "strecurătorii",
+        "strecurători",
+        "strecurătorile",
+        "strecurătorilor"
+      ],
+      "prior_records": [
+        {
+          "pool": "docs/content-pool/v1-5-small-objects/pool.json",
+          "id": "v1-5-object-8",
+          "state": "held",
+          "decision": "Already a synthetic guess ctxp_c6db589e12e0a4a32e77 anchoredLingură/explicit/penalty0. Hold graph adoption pending deliberate migration, distinct sieve/strainer senses and old feedback preservation."
+        }
+      ],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-vrabie",
+      "revision": 1,
+      "kind": "new_shared_concept",
+      "lemma": "Vrabie",
+      "label_ro": "Vrabie",
+      "sense": "Pasăre mică ce consumă semințe și insecte.",
+      "origin": "everyday_discovery_extension",
+      "category_hypothesis": "stiinta",
+      "node_id": "n_v1_10_vrabie",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
+      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_pasare",
+          "label": "Pasăre",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v4sti_insecta",
+          "label": "Insectă",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v84_food_grau",
+          "label": "Grâu",
+          "category": "gastronomie",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v4sti_copac",
+          "label": "Copac",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        }
+      ],
+      "planned_forms": [
+        "vrabie",
+        "vrabia",
+        "vrabiei",
+        "vrăbii",
+        "vrăbiile",
+        "vrăbiilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "vrabie",
+            "key": "vrabie",
+            "cald_proxies": [
+              {
+                "public_id": "ctxp_b15ecc3818defb06f0c6",
+                "anchor_id": "n_v4sti_pasare",
+                "surface": "vrabie",
+                "mapping_kind": "explicit"
+              }
+            ]
+          },
+          {
+            "form": "vrabia",
+            "key": "vrabia"
+          },
+          {
+            "form": "vrabiei",
+            "key": "vrabiei"
+          },
+          {
+            "form": "vrăbii",
+            "key": "vrabii"
+          },
+          {
+            "form": "vrăbiile",
+            "key": "vrabiile"
+          },
+          {
+            "form": "vrăbiilor",
+            "key": "vrabiilor"
+          }
+        ]
+      },
+      "already_resolved_forms": [],
+      "proposed_forms": [
+        "vrabie",
+        "vrabia",
+        "vrabiei",
+        "vrăbii",
+        "vrăbiile",
+        "vrăbiilor"
+      ],
+      "prior_records": [],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-ciocanitoare",
+      "revision": 1,
+      "kind": "new_shared_concept",
+      "lemma": "Ciocănitoare",
+      "label_ro": "Ciocănitoare",
+      "sense": "Pasăre care ciocănește scoarța arborilor.",
+      "origin": "everyday_discovery_extension",
+      "category_hypothesis": "stiinta",
+      "node_id": "n_v1_10_ciocanitoare",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
+      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_pasare",
+          "label": "Pasăre",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v4sti_copac",
+          "label": "Copac",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v4sti_insecta",
+          "label": "Insectă",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v1_10_cioc",
+          "label": "Cioc",
+          "category": "stiinta",
+          "status": "new in this batch",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        }
+      ],
+      "planned_forms": [
+        "ciocănitoare",
+        "ciocănitoarea",
+        "ciocănitorii",
+        "ciocănitori",
+        "ciocănitorile",
+        "ciocănitorilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "ciocănitoare",
+            "key": "ciocanitoare"
+          },
+          {
+            "form": "ciocănitoarea",
+            "key": "ciocanitoarea"
+          },
+          {
+            "form": "ciocănitorii",
+            "key": "ciocanitorii"
+          },
+          {
+            "form": "ciocănitori",
+            "key": "ciocanitori"
+          },
+          {
+            "form": "ciocănitorile",
+            "key": "ciocanitorile"
+          },
+          {
+            "form": "ciocănitorilor",
+            "key": "ciocanitorilor"
+          }
+        ]
+      },
+      "already_resolved_forms": [],
+      "proposed_forms": [
+        "ciocănitoare",
+        "ciocănitoarea",
+        "ciocănitorii",
+        "ciocănitori",
+        "ciocănitorile",
+        "ciocănitorilor"
+      ],
+      "prior_records": [],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-cioc",
+      "revision": 1,
+      "kind": "new_shared_concept",
+      "lemma": "Cioc",
+      "label_ro": "Cioc",
+      "sense": "Partea cornoasă care acoperă fălcile păsărilor.",
+      "origin": "everyday_discovery_extension",
+      "category_hypothesis": "stiinta",
+      "node_id": "n_v1_10_cioc",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
+      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_pasare",
+          "label": "Pasăre",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v24_body_face_gura",
+          "label": "Gură",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v4sti_os",
+          "label": "Os",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v1_10_ciocanitoare",
+          "label": "Ciocănitoare",
+          "category": "stiinta",
+          "status": "new in this batch",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        }
+      ],
+      "planned_forms": [
+        "cioc",
+        "ciocul",
+        "ciocului",
+        "ciocuri",
+        "ciocurile",
+        "ciocurilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "cioc",
+            "key": "cioc"
+          },
+          {
+            "form": "ciocul",
+            "key": "ciocul"
+          },
+          {
+            "form": "ciocului",
+            "key": "ciocului"
+          },
+          {
+            "form": "ciocuri",
+            "key": "ciocuri"
+          },
+          {
+            "form": "ciocurile",
+            "key": "ciocurile"
+          },
+          {
+            "form": "ciocurilor",
+            "key": "ciocurilor"
+          }
+        ]
+      },
+      "already_resolved_forms": [],
+      "proposed_forms": [
+        "cioc",
+        "ciocul",
+        "ciocului",
+        "ciocuri",
+        "ciocurile",
+        "ciocurilor"
+      ],
+      "prior_records": [],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-tantar",
+      "revision": 1,
+      "kind": "new_shared_concept",
+      "lemma": "Țânțar",
+      "label_ro": "Țânțar",
+      "sense": "Insectă ale cărei femele din multe specii sug sânge.",
+      "origin": "everyday_discovery_extension",
+      "category_hypothesis": "stiinta",
+      "node_id": "n_v1_10_tantar",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
+      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_insecta",
+          "label": "Insectă",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v4sti_sange",
+          "label": "Sânge",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v4gas_apa",
+          "label": "Apă",
+          "category": "gastronomie",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v1_8_broasca",
+          "label": "Broască",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        }
+      ],
+      "planned_forms": [
+        "țânțar",
+        "țânțarul",
+        "țânțarului",
+        "țânțari",
+        "țânțarii",
+        "țânțarilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "țânțar",
+            "key": "tantar",
+            "cald_proxies": [
+              {
+                "public_id": "ctxp_77e618da1d7d619e8925",
+                "anchor_id": "n_v4sti_animal",
+                "surface": "țânțar",
+                "mapping_kind": "domain_fallback"
+              }
+            ]
+          },
+          {
+            "form": "țânțarul",
+            "key": "tantarul"
+          },
+          {
+            "form": "țânțarului",
+            "key": "tantarului"
+          },
+          {
+            "form": "țânțari",
+            "key": "tantari"
+          },
+          {
+            "form": "țânțarii",
+            "key": "tantarii"
+          },
+          {
+            "form": "țânțarilor",
+            "key": "tantarilor"
+          }
+        ]
+      },
+      "already_resolved_forms": [],
+      "proposed_forms": [
+        "țânțar",
+        "țânțarul",
+        "țânțarului",
+        "țânțari",
+        "țânțarii",
+        "țânțarilor"
+      ],
+      "prior_records": [],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-rama",
+      "revision": 1,
+      "kind": "new_shared_concept",
+      "lemma": "Râmă",
+      "label_ro": "Râmă",
+      "sense": "Vierme inelat care trăiește în sol.",
+      "origin": "everyday_discovery_extension",
+      "category_hypothesis": "stiinta",
+      "node_id": "n_v1_10_rama",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
+      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_animal",
+          "label": "Animal",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v24_nature_world_pamant",
+          "label": "Pământ",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v1_8_arici",
+          "label": "Arici",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v4sti_peste",
+          "label": "Pește",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        }
+      ],
+      "planned_forms": [
+        "râmă",
+        "râme",
+        "râmele",
+        "râmei",
+        "râmelor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "râmă",
+            "key": "rama",
+            "cald_proxies": [
+              {
+                "public_id": "ctxp_fabb40d1bf90de828d5c",
+                "anchor_id": "n_v4sti_animal",
+                "surface": "râmă",
+                "mapping_kind": "domain_fallback"
+              }
+            ]
+          },
+          {
+            "form": "râme",
+            "key": "rame"
+          },
+          {
+            "form": "râmele",
+            "key": "ramele"
+          },
+          {
+            "form": "râmei",
+            "key": "ramei"
+          },
+          {
+            "form": "râmelor",
+            "key": "ramelor"
+          }
+        ]
+      },
+      "already_resolved_forms": [],
+      "proposed_forms": [
+        "râmă",
+        "râme",
+        "râmele",
+        "râmei",
+        "râmelor"
+      ],
+      "prior_records": [],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-furnica",
+      "revision": 1,
+      "kind": "new_shared_concept",
+      "lemma": "Furnică",
+      "label_ro": "Furnică",
+      "sense": "Insectă socială care trăiește în colonii.",
+      "origin": "named_backlog_new_link_plan",
+      "category_hypothesis": "stiinta",
+      "node_id": "n_v1_10_furnica",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
+      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_insecta",
+          "label": "Insectă",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v24_nature_world_pamant",
+          "label": "Pământ",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v1_8_arici",
+          "label": "Arici",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v84_food_grau",
+          "label": "Grâu",
+          "category": "gastronomie",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        }
+      ],
+      "planned_forms": [
+        "furnică",
+        "furnici",
+        "furnicile",
+        "furnicii",
+        "furnicilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "furnică",
+            "key": "furnica",
+            "cald_proxies": [
+              {
+                "public_id": "ctxp_53694a999a307cf7392b",
+                "anchor_id": "n_v4sti_animal",
+                "surface": "furnică",
+                "mapping_kind": "domain_fallback"
+              }
+            ]
+          },
+          {
+            "form": "furnici",
+            "key": "furnici"
+          },
+          {
+            "form": "furnicile",
+            "key": "furnicile"
+          },
+          {
+            "form": "furnicii",
+            "key": "furnicii"
+          },
+          {
+            "form": "furnicilor",
+            "key": "furnicilor"
+          }
+        ]
+      },
+      "already_resolved_forms": [],
+      "proposed_forms": [
+        "furnică",
+        "furnici",
+        "furnicile",
+        "furnicii",
+        "furnicilor"
+      ],
+      "prior_records": [
+        {
+          "pool": "docs/content-pool/v1-8-everyday-core/pool.json",
+          "id": "v18-furnica",
+          "state": "held",
+          "decision": "Soil/forest nesting and insect identity are supported, but direct Plantă food claim is not verified; only three natural target claims remain."
+        }
+      ],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-buburuza",
+      "revision": 1,
+      "kind": "new_shared_concept",
+      "lemma": "Buburuză",
+      "label_ro": "Buburuză",
+      "sense": "Insectă cunoscută pentru consumul de afide.",
+      "origin": "named_backlog_new_link_plan",
+      "category_hypothesis": "stiinta",
+      "node_id": "n_v1_10_buburuza",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
+      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_insecta",
+          "label": "Insectă",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v4sti_planta",
+          "label": "Plantă",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "Frunză",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v1_10_afida",
+          "label": "Afidă",
+          "category": "stiinta",
+          "status": "new in this batch",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        }
+      ],
+      "planned_forms": [
+        "buburuză",
+        "buburuze",
+        "buburuzele",
+        "buburuzei",
+        "buburuzelor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "buburuză",
+            "key": "buburuza"
+          },
+          {
+            "form": "buburuze",
+            "key": "buburuze"
+          },
+          {
+            "form": "buburuzele",
+            "key": "buburuzele"
+          },
+          {
+            "form": "buburuzei",
+            "key": "buburuzei"
+          },
+          {
+            "form": "buburuzelor",
+            "key": "buburuzelor"
+          }
+        ]
+      },
+      "already_resolved_forms": [],
+      "proposed_forms": [
+        "buburuză",
+        "buburuze",
+        "buburuzele",
+        "buburuzei",
+        "buburuzelor"
+      ],
+      "prior_records": [
+        {
+          "pool": "docs/content-pool/v1-8-everyday-core/pool.json",
+          "id": "v18-buburuza",
+          "state": "held",
+          "decision": "Insect identity, plant protection and aphids on leaves are supported, but the fourth flower claim is unverified for the scoped ladybird; no source padding. Gărgăriță is broader plant-pest vocabulary, not an approved alias."
+        }
+      ],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-afida",
+      "revision": 1,
+      "kind": "new_shared_concept",
+      "lemma": "Afidă",
+      "label_ro": "Afidă",
+      "sense": "Insectă mică ce se hrănește cu seva plantelor.",
+      "origin": "everyday_discovery_extension",
+      "category_hypothesis": "stiinta",
+      "node_id": "n_v1_10_afida",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
+      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_insecta",
+          "label": "Insectă",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v4sti_planta",
+          "label": "Plantă",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "Frunză",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v1_10_buburuza",
+          "label": "Buburuză",
+          "category": "stiinta",
+          "status": "new in this batch",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        }
+      ],
+      "planned_forms": [
+        "afidă",
+        "afide",
+        "afidele",
+        "afidei",
+        "afidelor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "afidă",
+            "key": "afida"
+          },
+          {
+            "form": "afide",
+            "key": "afide"
+          },
+          {
+            "form": "afidele",
+            "key": "afidele"
+          },
+          {
+            "form": "afidei",
+            "key": "afidei"
+          },
+          {
+            "form": "afidelor",
+            "key": "afidelor"
+          }
+        ]
+      },
+      "already_resolved_forms": [],
+      "proposed_forms": [
+        "afidă",
+        "afide",
+        "afidele",
+        "afidei",
+        "afidelor"
+      ],
+      "prior_records": [],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-paianjen",
+      "revision": 1,
+      "kind": "new_shared_concept",
+      "lemma": "Păianjen",
+      "label_ro": "Păianjen",
+      "sense": "Arahnid prădător; nu este insectă.",
+      "origin": "named_backlog_new_link_plan",
+      "category_hypothesis": "stiinta",
+      "node_id": "n_v1_10_paianjen",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
+      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_animal",
+          "label": "Animal",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v4sti_insecta",
+          "label": "Insectă",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v1_8_fluture",
+          "label": "Fluture",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v1_10_tantar",
+          "label": "Țânțar",
+          "category": "stiinta",
+          "status": "new in this batch",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        }
+      ],
+      "planned_forms": [
+        "păianjen",
+        "păianjenul",
+        "păianjenului",
+        "păianjeni",
+        "păianjenii",
+        "păianjenilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "păianjen",
+            "key": "paianjen",
+            "cald_proxies": [
+              {
+                "public_id": "ctxp_60062e6172a29fd23577",
+                "anchor_id": "n_v4sti_animal",
+                "surface": "păianjen",
+                "mapping_kind": "domain_fallback"
+              }
+            ]
+          },
+          {
+            "form": "păianjenul",
+            "key": "paianjenul"
+          },
+          {
+            "form": "păianjenului",
+            "key": "paianjenului"
+          },
+          {
+            "form": "păianjeni",
+            "key": "paianjeni"
+          },
+          {
+            "form": "păianjenii",
+            "key": "paianjenii"
+          },
+          {
+            "form": "păianjenilor",
+            "key": "paianjenilor"
+          }
+        ]
+      },
+      "already_resolved_forms": [],
+      "proposed_forms": [
+        "păianjen",
+        "păianjenul",
+        "păianjenului",
+        "păianjeni",
+        "păianjenii",
+        "păianjenilor"
+      ],
+      "prior_records": [
+        {
+          "pool": "docs/content-pool/v1-8-everyday-core/pool.json",
+          "id": "v18-paianjen",
+          "state": "held",
+          "decision": "Animal/insect-prey links are credible, but two generic house-surface co-occurrences do not establish four useful distinctive links."
+        }
+      ],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-greier",
+      "revision": 1,
+      "kind": "new_shared_concept",
+      "lemma": "Greier",
+      "label_ro": "Greier",
+      "sense": "Insectă cunoscută pentru sunetele produse de mascul.",
+      "origin": "everyday_discovery_extension",
+      "category_hypothesis": "stiinta",
+      "node_id": "n_v1_10_greier",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
+      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_insecta",
+          "label": "Insectă",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v24_nature_plant_parts_iarba",
+          "label": "Iarbă",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "Frunză",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v1_8_arici",
+          "label": "Arici",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        }
+      ],
+      "planned_forms": [
+        "greier",
+        "greierul",
+        "greierului",
+        "greieri",
+        "greierii",
+        "greierilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "greier",
+            "key": "greier"
+          },
+          {
+            "form": "greierul",
+            "key": "greierul"
+          },
+          {
+            "form": "greierului",
+            "key": "greierului"
+          },
+          {
+            "form": "greieri",
+            "key": "greieri"
+          },
+          {
+            "form": "greierii",
+            "key": "greierii"
+          },
+          {
+            "form": "greierilor",
+            "key": "greierilor"
+          }
+        ]
+      },
+      "already_resolved_forms": [],
+      "proposed_forms": [
+        "greier",
+        "greierul",
+        "greierului",
+        "greieri",
+        "greierii",
+        "greierilor"
+      ],
+      "prior_records": [],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-volan",
+      "revision": 1,
+      "kind": "new_shared_concept",
+      "lemma": "Volan",
+      "label_ro": "Volan",
+      "sense": "Dispozitiv rotund folosit la conducerea vehiculelor.",
+      "origin": "everyday_discovery_extension",
+      "category_hypothesis": "societate",
+      "node_id": "n_v1_10_volan",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
+      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "link_targets": [
+        {
+          "node_id": "n_v24_transport_personal_masina",
+          "label": "Mașină",
+          "category": "societate",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v4soc_autobuz",
+          "label": "Autobuz",
+          "category": "societate",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v1_9_sofer",
+          "label": "Șofer",
+          "category": "societate",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v1_10_roata",
+          "label": "Roată",
+          "category": "societate",
+          "status": "new in this batch",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        }
+      ],
+      "planned_forms": [
+        "volan",
+        "volanul",
+        "volanului",
+        "volane",
+        "volanele",
+        "volanelor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "volan",
+            "key": "volan",
+            "cald_proxies": [
+              {
+                "public_id": "ctxp_af755cb664566d6e5446",
+                "anchor_id": "n_v24_transport_personal_masina",
+                "surface": "volan",
+                "mapping_kind": "domain_fallback"
+              }
+            ]
+          },
+          {
+            "form": "volanul",
+            "key": "volanul"
+          },
+          {
+            "form": "volanului",
+            "key": "volanului"
+          },
+          {
+            "form": "volane",
+            "key": "volane"
+          },
+          {
+            "form": "volanele",
+            "key": "volanele"
+          },
+          {
+            "form": "volanelor",
+            "key": "volanelor"
+          }
+        ]
+      },
+      "already_resolved_forms": [],
+      "proposed_forms": [
+        "volan",
+        "volanul",
+        "volanului",
+        "volane",
+        "volanele",
+        "volanelor"
+      ],
+      "prior_records": [],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-parbriz",
+      "revision": 1,
+      "kind": "new_shared_concept",
+      "lemma": "Parbriz",
+      "label_ro": "Parbriz",
+      "sense": "Geam frontal de protecție al autovehiculelor.",
+      "origin": "everyday_discovery_extension",
+      "category_hypothesis": "societate",
+      "node_id": "n_v1_10_parbriz",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
+      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "link_targets": [
+        {
+          "node_id": "n_v24_transport_personal_masina",
+          "label": "Mașină",
+          "category": "societate",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v4soc_autobuz",
+          "label": "Autobuz",
+          "category": "societate",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v1_9_sofer",
+          "label": "Șofer",
+          "category": "societate",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_vdr_biletel_in_parbriz",
+          "label": "Bilețelul în parbriz",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        }
+      ],
+      "planned_forms": [
+        "parbriz",
+        "parbrizul",
+        "parbrizului",
+        "parbrize",
+        "parbrizele",
+        "parbrizelor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "parbriz",
+            "key": "parbriz",
+            "cald_proxies": [
+              {
+                "public_id": "ctxp_4e05fe626eb3c01ed139",
+                "anchor_id": "n_v24_transport_personal_masina",
+                "surface": "parbriz",
+                "mapping_kind": "domain_fallback"
+              }
+            ]
+          },
+          {
+            "form": "parbrizul",
+            "key": "parbrizul"
+          },
+          {
+            "form": "parbrizului",
+            "key": "parbrizului"
+          },
+          {
+            "form": "parbrize",
+            "key": "parbrize"
+          },
+          {
+            "form": "parbrizele",
+            "key": "parbrizele"
+          },
+          {
+            "form": "parbrizelor",
+            "key": "parbrizelor"
+          }
+        ]
+      },
+      "already_resolved_forms": [],
+      "proposed_forms": [
+        "parbriz",
+        "parbrizul",
+        "parbrizului",
+        "parbrize",
+        "parbrizele",
+        "parbrizelor"
+      ],
+      "prior_records": [],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-roata",
+      "revision": 1,
+      "kind": "new_shared_concept",
+      "lemma": "Roată",
+      "label_ro": "Roată",
+      "sense": "Piesă circulară care permite deplasarea vehiculelor.",
+      "origin": "everyday_discovery_extension",
+      "category_hypothesis": "societate",
+      "node_id": "n_v1_10_roata",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
+      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "link_targets": [
+        {
+          "node_id": "n_v24_transport_personal_masina",
+          "label": "Mașină",
+          "category": "societate",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v24_transport_personal_bicicleta",
+          "label": "Bicicletă",
+          "category": "societate",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v24_transport_personal_motocicleta",
+          "label": "Motocicletă",
+          "category": "societate",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v24_transport_rail_tren",
+          "label": "Tren",
+          "category": "societate",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        }
+      ],
+      "planned_forms": [
+        "roată",
+        "roți",
+        "roțile",
+        "roții",
+        "roților"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "roată",
+            "key": "roata",
+            "cald_proxies": [
+              {
+                "public_id": "ctxp_99ccc8dc194e9a5f4c19",
+                "anchor_id": "n_v24_transport_personal_masina",
+                "surface": "roată",
+                "mapping_kind": "domain_fallback"
+              }
+            ]
+          },
+          {
+            "form": "roți",
+            "key": "roti"
+          },
+          {
+            "form": "roțile",
+            "key": "rotile"
+          },
+          {
+            "form": "roții",
+            "key": "rotii"
+          },
+          {
+            "form": "roților",
+            "key": "rotilor"
+          }
+        ]
+      },
+      "already_resolved_forms": [],
+      "proposed_forms": [
+        "roată",
+        "roți",
+        "roțile",
+        "roții",
+        "roților"
+      ],
+      "prior_records": [],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-anvelopa",
+      "revision": 1,
+      "kind": "new_shared_concept",
+      "lemma": "Anvelopă",
+      "label_ro": "Anvelopă",
+      "sense": "Înveliș exterior elastic montat pe roțile vehiculelor.",
+      "origin": "everyday_discovery_extension",
+      "category_hypothesis": "societate",
+      "node_id": "n_v1_10_anvelopa",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
+      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "link_targets": [
+        {
+          "node_id": "n_v24_transport_personal_masina",
+          "label": "Mașină",
+          "category": "societate",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v24_transport_personal_bicicleta",
+          "label": "Bicicletă",
+          "category": "societate",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v24_transport_personal_motocicleta",
+          "label": "Motocicletă",
+          "category": "societate",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v42vdr_cauciucuri",
+          "label": "Cauciucurile de iarnă",
+          "category": "viata_de_roman",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        }
+      ],
+      "planned_forms": [
+        "anvelopă",
+        "anvelope",
+        "anvelopele",
+        "anvelopei",
+        "anvelopelor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "anvelopă",
+            "key": "anvelopa",
+            "cald_proxies": [
+              {
+                "public_id": "ctxp_cfbfe798b0bbfcde8698",
+                "anchor_id": "n_v24_transport_personal_masina",
+                "surface": "anvelopă",
+                "mapping_kind": "domain_fallback"
+              }
+            ]
+          },
+          {
+            "form": "anvelope",
+            "key": "anvelope"
+          },
+          {
+            "form": "anvelopele",
+            "key": "anvelopele"
+          },
+          {
+            "form": "anvelopei",
+            "key": "anvelopei"
+          },
+          {
+            "form": "anvelopelor",
+            "key": "anvelopelor"
+          }
+        ]
+      },
+      "already_resolved_forms": [],
+      "proposed_forms": [
+        "anvelopă",
+        "anvelope",
+        "anvelopele",
+        "anvelopei",
+        "anvelopelor"
+      ],
+      "prior_records": [],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-semafor",
+      "revision": 1,
+      "kind": "new_shared_concept",
+      "lemma": "Semafor",
+      "label_ro": "Semafor",
+      "sense": "Dispozitiv cu semnale luminoase pentru dirijarea circulației.",
+      "origin": "everyday_discovery_extension",
+      "category_hypothesis": "societate",
+      "node_id": "n_v1_10_semafor",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
+      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "link_targets": [
+        {
+          "node_id": "n_v24_transport_personal_masina",
+          "label": "Mașină",
+          "category": "societate",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v1_9_sofer",
+          "label": "Șofer",
+          "category": "societate",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v1_9_rosu",
+          "label": "Roșu",
+          "category": "arta_cultura",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v4sti_lumina",
+          "label": "Lumină",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        }
+      ],
+      "planned_forms": [
+        "semafor",
+        "semaforul",
+        "semaforului",
+        "semafoare",
+        "semafoarele",
+        "semafoarelor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "semafor",
+            "key": "semafor",
+            "cald_proxies": [
+              {
+                "public_id": "ctxp_2f4b46bc341949c686f9",
+                "anchor_id": "n_v4geo_drum",
+                "surface": "semafor",
+                "mapping_kind": "explicit"
+              }
+            ]
+          },
+          {
+            "form": "semaforul",
+            "key": "semaforul"
+          },
+          {
+            "form": "semaforului",
+            "key": "semaforului"
+          },
+          {
+            "form": "semafoare",
+            "key": "semafoare"
+          },
+          {
+            "form": "semafoarele",
+            "key": "semafoarele"
+          },
+          {
+            "form": "semafoarelor",
+            "key": "semafoarelor"
+          }
+        ]
+      },
+      "already_resolved_forms": [],
+      "proposed_forms": [
+        "semafor",
+        "semaforul",
+        "semaforului",
+        "semafoare",
+        "semafoarele",
+        "semafoarelor"
+      ],
+      "prior_records": [],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-troleibuz",
+      "revision": 1,
+      "kind": "new_shared_concept",
+      "lemma": "Troleibuz",
+      "label_ro": "Troleibuz",
+      "sense": "Vehicul rutier electric pentru transportul călătorilor.",
+      "origin": "everyday_discovery_extension",
+      "category_hypothesis": "societate",
+      "node_id": "n_v1_10_troleibuz",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
+      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "link_targets": [
+        {
+          "node_id": "n_v4soc_autobuz",
+          "label": "Autobuz",
+          "category": "societate",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v1_9_sofer",
+          "label": "Șofer",
+          "category": "societate",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v3sti_electricitate",
+          "label": "Electricitate",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v4geo_strada",
+          "label": "Stradă",
+          "category": "geografie",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        }
+      ],
+      "planned_forms": [
+        "troleibuz",
+        "troleibuzul",
+        "troleibuzului",
+        "troleibuze",
+        "troleibuzele",
+        "troleibuzelor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "troleibuz",
+            "key": "troleibuz"
+          },
+          {
+            "form": "troleibuzul",
+            "key": "troleibuzul"
+          },
+          {
+            "form": "troleibuzului",
+            "key": "troleibuzului"
+          },
+          {
+            "form": "troleibuze",
+            "key": "troleibuze"
+          },
+          {
+            "form": "troleibuzele",
+            "key": "troleibuzele"
+          },
+          {
+            "form": "troleibuzelor",
+            "key": "troleibuzelor"
+          }
+        ]
+      },
+      "already_resolved_forms": [],
+      "proposed_forms": [
+        "troleibuz",
+        "troleibuzul",
+        "troleibuzului",
+        "troleibuze",
+        "troleibuzele",
+        "troleibuzelor"
+      ],
+      "prior_records": [],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-locomotiva",
+      "revision": 1,
+      "kind": "new_shared_concept",
+      "lemma": "Locomotivă",
+      "label_ro": "Locomotivă",
+      "sense": "Vehicul motor care tractează trenuri.",
+      "origin": "everyday_discovery_extension",
+      "category_hypothesis": "societate",
+      "node_id": "n_v1_10_locomotiva",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Real shared guess and graph word; curated target/round expansion is not claimed.",
+      "form_status": "Tentative full paradigm, to verify with exact-headword DEX and DOOM 3.",
+      "link_targets": [
+        {
+          "node_id": "n_v24_transport_rail_tren",
+          "label": "Tren",
+          "category": "societate",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v24_transport_terminals_gara",
+          "label": "Gară",
+          "category": "societate",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v3sti_electricitate",
+          "label": "Electricitate",
+          "category": "stiinta",
+          "status": "exists on landed wave_base",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        },
+        {
+          "node_id": "n_v1_10_roata",
+          "label": "Roată",
+          "category": "societate",
+          "status": "new in this batch",
+          "claim_to_verify": "Specific sense and caption direction must be supported before acceptance."
+        }
+      ],
+      "planned_forms": [
+        "locomotivă",
+        "locomotive",
+        "locomotivele",
+        "locomotivei",
+        "locomotivelor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "locomotivă",
+            "key": "locomotiva"
+          },
+          {
+            "form": "locomotive",
+            "key": "locomotive"
+          },
+          {
+            "form": "locomotivele",
+            "key": "locomotivele"
+          },
+          {
+            "form": "locomotivei",
+            "key": "locomotivei"
+          },
+          {
+            "form": "locomotivelor",
+            "key": "locomotivelor"
+          }
+        ]
+      },
+      "already_resolved_forms": [],
+      "proposed_forms": [
+        "locomotivă",
+        "locomotive",
+        "locomotivele",
+        "locomotivei",
+        "locomotivelor"
+      ],
+      "prior_records": [],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-input-haina",
+      "revision": 1,
+      "kind": "existing_owner_form_family",
+      "lemma": "Haină",
+      "label_ro": "Haină → Haină",
+      "sense": "Obiect de îmbrăcăminte purtat pentru protecție, căldură sau aspect.",
+      "origin": "everyday_discovery_extension",
+      "category_hypothesis": "viata_de_roman",
+      "owner_id": "n_v29_clothing_everyday_haina",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Missing forms resolve to the existing exact owner and reuse its Cald slot.",
+      "form_status": "Tentative full paradigm, pending DEX/DOOM 3 and second-source verification.",
+      "planned_forms": [
+        "haină",
+        "haine",
+        "hainele",
+        "hainei",
+        "hainelor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "haină",
+            "key": "haina",
+            "index_owner": "n_v29_clothing_everyday_haina",
+            "all_owners": [
+              {
+                "id": "n_v29_clothing_everyday_haina",
+                "kind": "node_label",
+                "surface": "Haină"
+              },
+              {
+                "id": "n_v29_clothing_everyday_haina",
+                "kind": "labels",
+                "surface": "Haină"
+              }
+            ]
+          },
+          {
+            "form": "haine",
+            "key": "haine",
+            "index_owner": "n_v29_clothing_everyday_haina",
+            "all_owners": [
+              {
+                "id": "n_v29_clothing_everyday_haina",
+                "kind": "node_alias",
+                "surface": "haine"
+              }
+            ]
+          },
+          {
+            "form": "hainele",
+            "key": "hainele",
+            "index_owner": "n_v29_clothing_everyday_haina",
+            "all_owners": [
+              {
+                "id": "n_v29_clothing_everyday_haina",
+                "kind": "node_alias",
+                "surface": "hainele"
+              }
+            ]
+          },
+          {
+            "form": "hainei",
+            "key": "hainei",
+            "index_owner": "n_v29_clothing_everyday_haina",
+            "all_owners": [
+              {
+                "id": "n_v29_clothing_everyday_haina",
+                "kind": "node_alias",
+                "surface": "hainei"
+              }
+            ]
+          },
+          {
+            "form": "hainelor",
+            "key": "hainelor"
+          }
+        ]
+      },
+      "already_resolved_forms": [
+        "haină",
+        "haine",
+        "hainele",
+        "hainei"
+      ],
+      "proposed_forms": [
+        "hainelor"
+      ],
+      "prior_records": [],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-input-camasa",
+      "revision": 1,
+      "kind": "existing_owner_form_family",
+      "lemma": "Cămașă",
+      "label_ro": "Cămașă → Cămașă",
+      "sense": "Haină pentru partea de sus a corpului, de obicei cu guler și nasturi.",
+      "origin": "everyday_discovery_extension",
+      "category_hypothesis": "viata_de_roman",
+      "owner_id": "n_v29_clothing_everyday_camasa",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Missing forms resolve to the existing exact owner and reuse its Cald slot.",
+      "form_status": "Tentative full paradigm, pending DEX/DOOM 3 and second-source verification.",
+      "planned_forms": [
+        "cămașă",
+        "cămăși",
+        "cămășile",
+        "cămășii",
+        "cămășilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "cămașă",
+            "key": "camasa",
+            "index_owner": "n_v29_clothing_everyday_camasa",
+            "all_owners": [
+              {
+                "id": "n_v29_clothing_everyday_camasa",
+                "kind": "node_label",
+                "surface": "Cămașă"
+              },
+              {
+                "id": "n_v29_clothing_everyday_camasa",
+                "kind": "labels",
+                "surface": "Cămașă"
+              }
+            ]
+          },
+          {
+            "form": "cămăși",
+            "key": "camasi",
+            "index_owner": "n_v29_clothing_everyday_camasa",
+            "all_owners": [
+              {
+                "id": "n_v29_clothing_everyday_camasa",
+                "kind": "node_alias",
+                "surface": "cămăși"
+              }
+            ]
+          },
+          {
+            "form": "cămășile",
+            "key": "camasile",
+            "index_owner": "n_v29_clothing_everyday_camasa",
+            "all_owners": [
+              {
+                "id": "n_v29_clothing_everyday_camasa",
+                "kind": "node_alias",
+                "surface": "cămășile"
+              }
+            ]
+          },
+          {
+            "form": "cămășii",
+            "key": "camasii",
+            "index_owner": "n_v29_clothing_everyday_camasa",
+            "all_owners": [
+              {
+                "id": "n_v29_clothing_everyday_camasa",
+                "kind": "node_alias",
+                "surface": "cămășii"
+              }
+            ]
+          },
+          {
+            "form": "cămășilor",
+            "key": "camasilor"
+          }
+        ]
+      },
+      "already_resolved_forms": [
+        "cămașă",
+        "cămăși",
+        "cămășile",
+        "cămășii"
+      ],
+      "proposed_forms": [
+        "cămășilor"
+      ],
+      "prior_records": [],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-input-rochie",
+      "revision": 1,
+      "kind": "existing_owner_form_family",
+      "lemma": "Rochie",
+      "label_ro": "Rochie → Rochie",
+      "sense": "Haină dintr-o singură piesă care acoperă trunchiul și o parte din picioare.",
+      "origin": "everyday_discovery_extension",
+      "category_hypothesis": "viata_de_roman",
+      "owner_id": "n_v30_clothing_everyday_rochie",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Missing forms resolve to the existing exact owner and reuse its Cald slot.",
+      "form_status": "Tentative full paradigm, pending DEX/DOOM 3 and second-source verification.",
+      "planned_forms": [
+        "rochie",
+        "rochia",
+        "rochii",
+        "rochiile",
+        "rochiei",
+        "rochiilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "rochie",
+            "key": "rochie",
+            "index_owner": "n_v30_clothing_everyday_rochie",
+            "all_owners": [
+              {
+                "id": "n_v30_clothing_everyday_rochie",
+                "kind": "node_label",
+                "surface": "Rochie"
+              },
+              {
+                "id": "n_v30_clothing_everyday_rochie",
+                "kind": "labels",
+                "surface": "Rochie"
+              }
+            ]
+          },
+          {
+            "form": "rochia",
+            "key": "rochia",
+            "index_owner": "n_v30_clothing_everyday_rochie",
+            "all_owners": [
+              {
+                "id": "n_v30_clothing_everyday_rochie",
+                "kind": "node_alias",
+                "surface": "rochia"
+              }
+            ]
+          },
+          {
+            "form": "rochii",
+            "key": "rochii",
+            "index_owner": "n_v30_clothing_everyday_rochie",
+            "all_owners": [
+              {
+                "id": "n_v30_clothing_everyday_rochie",
+                "kind": "node_alias",
+                "surface": "rochii"
+              }
+            ]
+          },
+          {
+            "form": "rochiile",
+            "key": "rochiile",
+            "index_owner": "n_v30_clothing_everyday_rochie",
+            "all_owners": [
+              {
+                "id": "n_v30_clothing_everyday_rochie",
+                "kind": "node_alias",
+                "surface": "rochiile"
+              }
+            ]
+          },
+          {
+            "form": "rochiei",
+            "key": "rochiei",
+            "index_owner": "n_v30_clothing_everyday_rochie",
+            "all_owners": [
+              {
+                "id": "n_v30_clothing_everyday_rochie",
+                "kind": "node_alias",
+                "surface": "rochiei"
+              }
+            ]
+          },
+          {
+            "form": "rochiilor",
+            "key": "rochiilor"
+          }
+        ]
+      },
+      "already_resolved_forms": [
+        "rochie",
+        "rochia",
+        "rochii",
+        "rochiile",
+        "rochiei"
+      ],
+      "proposed_forms": [
+        "rochiilor"
+      ],
+      "prior_records": [],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-input-fusta",
+      "revision": 1,
+      "kind": "existing_owner_form_family",
+      "lemma": "Fustă",
+      "label_ro": "Fustă → Fustă",
+      "sense": "Haină purtată de la talie în jos, fără părți separate pentru picioare.",
+      "origin": "everyday_discovery_extension",
+      "category_hypothesis": "viata_de_roman",
+      "owner_id": "n_v30_clothing_everyday_fusta",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Missing forms resolve to the existing exact owner and reuse its Cald slot.",
+      "form_status": "Tentative full paradigm, pending DEX/DOOM 3 and second-source verification.",
+      "planned_forms": [
+        "fustă",
+        "fuste",
+        "fustele",
+        "fustei",
+        "fustelor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "fustă",
+            "key": "fusta",
+            "index_owner": "n_v30_clothing_everyday_fusta",
+            "all_owners": [
+              {
+                "id": "n_v30_clothing_everyday_fusta",
+                "kind": "node_label",
+                "surface": "Fustă"
+              },
+              {
+                "id": "n_v30_clothing_everyday_fusta",
+                "kind": "labels",
+                "surface": "Fustă"
+              }
+            ]
+          },
+          {
+            "form": "fuste",
+            "key": "fuste",
+            "index_owner": "n_v30_clothing_everyday_fusta",
+            "all_owners": [
+              {
+                "id": "n_v30_clothing_everyday_fusta",
+                "kind": "node_alias",
+                "surface": "fuste"
+              }
+            ]
+          },
+          {
+            "form": "fustele",
+            "key": "fustele",
+            "index_owner": "n_v30_clothing_everyday_fusta",
+            "all_owners": [
+              {
+                "id": "n_v30_clothing_everyday_fusta",
+                "kind": "node_alias",
+                "surface": "fustele"
+              }
+            ]
+          },
+          {
+            "form": "fustei",
+            "key": "fustei",
+            "index_owner": "n_v30_clothing_everyday_fusta",
+            "all_owners": [
+              {
+                "id": "n_v30_clothing_everyday_fusta",
+                "kind": "node_alias",
+                "surface": "fustei"
+              }
+            ]
+          },
+          {
+            "form": "fustelor",
+            "key": "fustelor"
+          }
+        ]
+      },
+      "already_resolved_forms": [
+        "fustă",
+        "fuste",
+        "fustele",
+        "fustei"
+      ],
+      "proposed_forms": [
+        "fustelor"
+      ],
+      "prior_records": [],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-input-pantof",
+      "revision": 1,
+      "kind": "existing_owner_form_family",
+      "lemma": "Pantof",
+      "label_ro": "Pantof → Pantof",
+      "sense": "Obiect de încălțăminte care protejează laba piciorului.",
+      "origin": "everyday_discovery_extension",
+      "category_hypothesis": "viata_de_roman",
+      "owner_id": "n_v30_clothing_footwear_pantof",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Missing forms resolve to the existing exact owner and reuse its Cald slot.",
+      "form_status": "Tentative full paradigm, pending DEX/DOOM 3 and second-source verification.",
+      "planned_forms": [
+        "pantof",
+        "pantoful",
+        "pantofi",
+        "pantofii",
+        "pantofului",
+        "pantofilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "pantof",
+            "key": "pantof",
+            "index_owner": "n_v30_clothing_footwear_pantof",
+            "all_owners": [
+              {
+                "id": "n_v30_clothing_footwear_pantof",
+                "kind": "node_label",
+                "surface": "Pantof"
+              },
+              {
+                "id": "n_v30_clothing_footwear_pantof",
+                "kind": "labels",
+                "surface": "Pantof"
+              }
+            ]
+          },
+          {
+            "form": "pantoful",
+            "key": "pantoful",
+            "index_owner": "n_v30_clothing_footwear_pantof",
+            "all_owners": [
+              {
+                "id": "n_v30_clothing_footwear_pantof",
+                "kind": "node_alias",
+                "surface": "pantoful"
+              }
+            ]
+          },
+          {
+            "form": "pantofi",
+            "key": "pantofi",
+            "index_owner": "n_v30_clothing_footwear_pantof",
+            "all_owners": [
+              {
+                "id": "n_v30_clothing_footwear_pantof",
+                "kind": "node_alias",
+                "surface": "pantofi"
+              }
+            ]
+          },
+          {
+            "form": "pantofii",
+            "key": "pantofii",
+            "index_owner": "n_v30_clothing_footwear_pantof",
+            "all_owners": [
+              {
+                "id": "n_v30_clothing_footwear_pantof",
+                "kind": "node_alias",
+                "surface": "pantofii"
+              }
+            ]
+          },
+          {
+            "form": "pantofului",
+            "key": "pantofului",
+            "index_owner": "n_v30_clothing_footwear_pantof",
+            "all_owners": [
+              {
+                "id": "n_v30_clothing_footwear_pantof",
+                "kind": "node_alias",
+                "surface": "pantofului"
+              }
+            ]
+          },
+          {
+            "form": "pantofilor",
+            "key": "pantofilor"
+          }
+        ]
+      },
+      "already_resolved_forms": [
+        "pantof",
+        "pantoful",
+        "pantofi",
+        "pantofii",
+        "pantofului"
+      ],
+      "proposed_forms": [
+        "pantofilor"
+      ],
+      "prior_records": [],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-input-soseta",
+      "revision": 1,
+      "kind": "existing_owner_form_family",
+      "lemma": "Șosetă",
+      "label_ro": "Șosetă → Șosetă",
+      "sense": "Piesă moale de îmbrăcăminte purtată pe picior, în interiorul pantofului.",
+      "origin": "everyday_discovery_extension",
+      "category_hypothesis": "viata_de_roman",
+      "owner_id": "n_v30_clothing_footwear_soseta",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Missing forms resolve to the existing exact owner and reuse its Cald slot.",
+      "form_status": "Tentative full paradigm, pending DEX/DOOM 3 and second-source verification.",
+      "planned_forms": [
+        "șosetă",
+        "șosete",
+        "șosetele",
+        "șosetei",
+        "șosetelor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "șosetă",
+            "key": "soseta",
+            "index_owner": "n_v30_clothing_footwear_soseta",
+            "all_owners": [
+              {
+                "id": "n_v30_clothing_footwear_soseta",
+                "kind": "node_label",
+                "surface": "Șosetă"
+              },
+              {
+                "id": "n_v30_clothing_footwear_soseta",
+                "kind": "labels",
+                "surface": "Șosetă"
+              }
+            ]
+          },
+          {
+            "form": "șosete",
+            "key": "sosete",
+            "index_owner": "n_v30_clothing_footwear_soseta",
+            "all_owners": [
+              {
+                "id": "n_v30_clothing_footwear_soseta",
+                "kind": "node_alias",
+                "surface": "șosete"
+              }
+            ]
+          },
+          {
+            "form": "șosetele",
+            "key": "sosetele",
+            "index_owner": "n_v30_clothing_footwear_soseta",
+            "all_owners": [
+              {
+                "id": "n_v30_clothing_footwear_soseta",
+                "kind": "node_alias",
+                "surface": "șosetele"
+              }
+            ]
+          },
+          {
+            "form": "șosetei",
+            "key": "sosetei",
+            "index_owner": "n_v30_clothing_footwear_soseta",
+            "all_owners": [
+              {
+                "id": "n_v30_clothing_footwear_soseta",
+                "kind": "node_alias",
+                "surface": "șosetei"
+              }
+            ]
+          },
+          {
+            "form": "șosetelor",
+            "key": "sosetelor"
+          }
+        ]
+      },
+      "already_resolved_forms": [
+        "șosetă",
+        "șosete",
+        "șosetele",
+        "șosetei"
+      ],
+      "proposed_forms": [
+        "șosetelor"
+      ],
+      "prior_records": [],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-input-geaca",
+      "revision": 1,
+      "kind": "existing_owner_form_family",
+      "lemma": "Geacă",
+      "label_ro": "Geacă → Geacă",
+      "sense": "Haină scurtă purtată peste alte haine pentru protecție și căldură.",
+      "origin": "everyday_discovery_extension",
+      "category_hypothesis": "viata_de_roman",
+      "owner_id": "n_v30_clothing_outer_geaca",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Missing forms resolve to the existing exact owner and reuse its Cald slot.",
+      "form_status": "Tentative full paradigm, pending DEX/DOOM 3 and second-source verification.",
+      "planned_forms": [
+        "geacă",
+        "geci",
+        "gecile",
+        "gecii",
+        "gecilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "geacă",
+            "key": "geaca",
+            "index_owner": "n_v30_clothing_outer_geaca",
+            "all_owners": [
+              {
+                "id": "n_v30_clothing_outer_geaca",
+                "kind": "node_label",
+                "surface": "Geacă"
+              },
+              {
+                "id": "n_v30_clothing_outer_geaca",
+                "kind": "labels",
+                "surface": "Geacă"
+              }
+            ]
+          },
+          {
+            "form": "geci",
+            "key": "geci",
+            "index_owner": "n_v30_clothing_outer_geaca",
+            "all_owners": [
+              {
+                "id": "n_v30_clothing_outer_geaca",
+                "kind": "node_alias",
+                "surface": "geci"
+              }
+            ]
+          },
+          {
+            "form": "gecile",
+            "key": "gecile",
+            "index_owner": "n_v30_clothing_outer_geaca",
+            "all_owners": [
+              {
+                "id": "n_v30_clothing_outer_geaca",
+                "kind": "node_alias",
+                "surface": "gecile"
+              }
+            ]
+          },
+          {
+            "form": "gecii",
+            "key": "gecii",
+            "index_owner": "n_v30_clothing_outer_geaca",
+            "all_owners": [
+              {
+                "id": "n_v30_clothing_outer_geaca",
+                "kind": "node_alias",
+                "surface": "gecii"
+              }
+            ]
+          },
+          {
+            "form": "gecilor",
+            "key": "gecilor"
+          }
+        ]
+      },
+      "already_resolved_forms": [
+        "geacă",
+        "geci",
+        "gecile",
+        "gecii"
+      ],
+      "proposed_forms": [
+        "gecilor"
+      ],
+      "prior_records": [],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-input-prosop",
+      "revision": 1,
+      "kind": "existing_owner_form_family",
+      "lemma": "Prosop",
+      "label_ro": "Prosop → Prosop",
+      "sense": "Obiect textil absorbant folosit pentru a șterge și usca mâinile, fața sau corpul.",
+      "origin": "everyday_discovery_extension",
+      "category_hypothesis": "viata_de_roman",
+      "owner_id": "n_v31_hygiene_bath_prosop",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Missing forms resolve to the existing exact owner and reuse its Cald slot.",
+      "form_status": "Tentative full paradigm, pending DEX/DOOM 3 and second-source verification.",
+      "planned_forms": [
+        "prosop",
+        "prosopul",
+        "prosoape",
+        "prosoapele",
+        "prosopului",
+        "prosoapelor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "prosop",
+            "key": "prosop",
+            "index_owner": "n_v31_hygiene_bath_prosop",
+            "all_owners": [
+              {
+                "id": "n_v31_hygiene_bath_prosop",
+                "kind": "node_label",
+                "surface": "Prosop"
+              },
+              {
+                "id": "n_v31_hygiene_bath_prosop",
+                "kind": "labels",
+                "surface": "Prosop"
+              }
+            ]
+          },
+          {
+            "form": "prosopul",
+            "key": "prosopul",
+            "index_owner": "n_v31_hygiene_bath_prosop",
+            "all_owners": [
+              {
+                "id": "n_v31_hygiene_bath_prosop",
+                "kind": "node_alias",
+                "surface": "prosopul"
+              }
+            ]
+          },
+          {
+            "form": "prosoape",
+            "key": "prosoape",
+            "index_owner": "n_v31_hygiene_bath_prosop",
+            "all_owners": [
+              {
+                "id": "n_v31_hygiene_bath_prosop",
+                "kind": "node_alias",
+                "surface": "prosoape"
+              }
+            ]
+          },
+          {
+            "form": "prosoapele",
+            "key": "prosoapele",
+            "index_owner": "n_v31_hygiene_bath_prosop",
+            "all_owners": [
+              {
+                "id": "n_v31_hygiene_bath_prosop",
+                "kind": "node_alias",
+                "surface": "prosoapele"
+              }
+            ]
+          },
+          {
+            "form": "prosopului",
+            "key": "prosopului",
+            "index_owner": "n_v31_hygiene_bath_prosop",
+            "all_owners": [
+              {
+                "id": "n_v31_hygiene_bath_prosop",
+                "kind": "node_alias",
+                "surface": "prosopului"
+              }
+            ]
+          },
+          {
+            "form": "prosoapelor",
+            "key": "prosoapelor"
+          }
+        ]
+      },
+      "already_resolved_forms": [
+        "prosop",
+        "prosopul",
+        "prosoape",
+        "prosoapele",
+        "prosopului"
+      ],
+      "proposed_forms": [
+        "prosoapelor"
+      ],
+      "prior_records": [],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-input-sapun",
+      "revision": 1,
+      "kind": "existing_owner_form_family",
+      "lemma": "Săpun",
+      "label_ro": "Săpun → Săpun",
+      "sense": "Produs folosit cu apă pentru a spăla mâinile și corpul.",
+      "origin": "everyday_discovery_extension",
+      "category_hypothesis": "viata_de_roman",
+      "owner_id": "n_v31_hygiene_bath_sapun",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Missing forms resolve to the existing exact owner and reuse its Cald slot.",
+      "form_status": "Tentative full paradigm, pending DEX/DOOM 3 and second-source verification.",
+      "planned_forms": [
+        "săpun",
+        "săpunul",
+        "săpunuri",
+        "săpunurile",
+        "săpunului",
+        "săpunurilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "săpun",
+            "key": "sapun",
+            "index_owner": "n_v31_hygiene_bath_sapun",
+            "all_owners": [
+              {
+                "id": "n_v31_hygiene_bath_sapun",
+                "kind": "node_label",
+                "surface": "Săpun"
+              },
+              {
+                "id": "n_v31_hygiene_bath_sapun",
+                "kind": "labels",
+                "surface": "Săpun"
+              }
+            ]
+          },
+          {
+            "form": "săpunul",
+            "key": "sapunul",
+            "index_owner": "n_v31_hygiene_bath_sapun",
+            "all_owners": [
+              {
+                "id": "n_v31_hygiene_bath_sapun",
+                "kind": "node_alias",
+                "surface": "săpunul"
+              }
+            ]
+          },
+          {
+            "form": "săpunuri",
+            "key": "sapunuri",
+            "index_owner": "n_v31_hygiene_bath_sapun",
+            "all_owners": [
+              {
+                "id": "n_v31_hygiene_bath_sapun",
+                "kind": "node_alias",
+                "surface": "săpunuri"
+              }
+            ]
+          },
+          {
+            "form": "săpunurile",
+            "key": "sapunurile",
+            "index_owner": "n_v31_hygiene_bath_sapun",
+            "all_owners": [
+              {
+                "id": "n_v31_hygiene_bath_sapun",
+                "kind": "node_alias",
+                "surface": "săpunurile"
+              }
+            ]
+          },
+          {
+            "form": "săpunului",
+            "key": "sapunului",
+            "index_owner": "n_v31_hygiene_bath_sapun",
+            "all_owners": [
+              {
+                "id": "n_v31_hygiene_bath_sapun",
+                "kind": "node_alias",
+                "surface": "săpunului"
+              }
+            ]
+          },
+          {
+            "form": "săpunurilor",
+            "key": "sapunurilor"
+          }
+        ]
+      },
+      "already_resolved_forms": [
+        "săpun",
+        "săpunul",
+        "săpunuri",
+        "săpunurile",
+        "săpunului"
+      ],
+      "proposed_forms": [
+        "săpunurilor"
+      ],
+      "prior_records": [],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-input-sampon",
+      "revision": 1,
+      "kind": "existing_owner_form_family",
+      "lemma": "Șampon",
+      "label_ro": "Șampon → Șampon",
+      "sense": "Produs lichid folosit cu apă pentru a spăla părul.",
+      "origin": "everyday_discovery_extension",
+      "category_hypothesis": "viata_de_roman",
+      "owner_id": "n_v31_hygiene_hair_sampon",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Missing forms resolve to the existing exact owner and reuse its Cald slot.",
+      "form_status": "Tentative full paradigm, pending DEX/DOOM 3 and second-source verification.",
+      "planned_forms": [
+        "șampon",
+        "șamponul",
+        "șampoane",
+        "șampoanele",
+        "șamponului",
+        "șampoanelor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "șampon",
+            "key": "sampon",
+            "index_owner": "n_v31_hygiene_hair_sampon",
+            "all_owners": [
+              {
+                "id": "n_v31_hygiene_hair_sampon",
+                "kind": "node_label",
+                "surface": "Șampon"
+              },
+              {
+                "id": "n_v31_hygiene_hair_sampon",
+                "kind": "labels",
+                "surface": "Șampon"
+              }
+            ]
+          },
+          {
+            "form": "șamponul",
+            "key": "samponul",
+            "index_owner": "n_v31_hygiene_hair_sampon",
+            "all_owners": [
+              {
+                "id": "n_v31_hygiene_hair_sampon",
+                "kind": "node_alias",
+                "surface": "șamponul"
+              }
+            ]
+          },
+          {
+            "form": "șampoane",
+            "key": "sampoane",
+            "index_owner": "n_v31_hygiene_hair_sampon",
+            "all_owners": [
+              {
+                "id": "n_v31_hygiene_hair_sampon",
+                "kind": "node_alias",
+                "surface": "șampoane"
+              }
+            ]
+          },
+          {
+            "form": "șampoanele",
+            "key": "sampoanele",
+            "index_owner": "n_v31_hygiene_hair_sampon",
+            "all_owners": [
+              {
+                "id": "n_v31_hygiene_hair_sampon",
+                "kind": "node_alias",
+                "surface": "șampoanele"
+              }
+            ]
+          },
+          {
+            "form": "șamponului",
+            "key": "samponului",
+            "index_owner": "n_v31_hygiene_hair_sampon",
+            "all_owners": [
+              {
+                "id": "n_v31_hygiene_hair_sampon",
+                "kind": "node_alias",
+                "surface": "șamponului"
+              }
+            ]
+          },
+          {
+            "form": "șampoanelor",
+            "key": "sampoanelor"
+          }
+        ]
+      },
+      "already_resolved_forms": [
+        "șampon",
+        "șamponul",
+        "șampoane",
+        "șampoanele",
+        "șamponului"
+      ],
+      "proposed_forms": [
+        "șampoanelor"
+      ],
+      "prior_records": [],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-input-pieptene",
+      "revision": 1,
+      "kind": "existing_owner_form_family",
+      "lemma": "Pieptene",
+      "label_ro": "Pieptene → Pieptene",
+      "sense": "Obiect cu dinți apropiați, folosit pentru a descurca și aranja părul.",
+      "origin": "everyday_discovery_extension",
+      "category_hypothesis": "viata_de_roman",
+      "owner_id": "n_v31_hygiene_hair_pieptene",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Missing forms resolve to the existing exact owner and reuse its Cald slot.",
+      "form_status": "Tentative full paradigm, pending DEX/DOOM 3 and second-source verification.",
+      "planned_forms": [
+        "pieptene",
+        "pieptenele",
+        "piepteni",
+        "pieptenii",
+        "pieptenului",
+        "pieptenilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "pieptene",
+            "key": "pieptene",
+            "index_owner": "n_v31_hygiene_hair_pieptene",
+            "all_owners": [
+              {
+                "id": "n_v31_hygiene_hair_pieptene",
+                "kind": "node_label",
+                "surface": "Pieptene"
+              },
+              {
+                "id": "n_v31_hygiene_hair_pieptene",
+                "kind": "labels",
+                "surface": "Pieptene"
+              }
+            ]
+          },
+          {
+            "form": "pieptenele",
+            "key": "pieptenele",
+            "index_owner": "n_v31_hygiene_hair_pieptene",
+            "all_owners": [
+              {
+                "id": "n_v31_hygiene_hair_pieptene",
+                "kind": "node_alias",
+                "surface": "pieptenele"
+              }
+            ]
+          },
+          {
+            "form": "piepteni",
+            "key": "piepteni",
+            "index_owner": "n_v31_hygiene_hair_pieptene",
+            "all_owners": [
+              {
+                "id": "n_v31_hygiene_hair_pieptene",
+                "kind": "node_alias",
+                "surface": "piepteni"
+              }
+            ]
+          },
+          {
+            "form": "pieptenii",
+            "key": "pieptenii",
+            "index_owner": "n_v31_hygiene_hair_pieptene",
+            "all_owners": [
+              {
+                "id": "n_v31_hygiene_hair_pieptene",
+                "kind": "node_alias",
+                "surface": "pieptenii"
+              }
+            ]
+          },
+          {
+            "form": "pieptenului",
+            "key": "pieptenului",
+            "index_owner": "n_v31_hygiene_hair_pieptene",
+            "all_owners": [
+              {
+                "id": "n_v31_hygiene_hair_pieptene",
+                "kind": "node_alias",
+                "surface": "pieptenului"
+              }
+            ]
+          },
+          {
+            "form": "pieptenilor",
+            "key": "pieptenilor"
+          }
+        ]
+      },
+      "already_resolved_forms": [
+        "pieptene",
+        "pieptenele",
+        "piepteni",
+        "pieptenii",
+        "pieptenului"
+      ],
+      "proposed_forms": [
+        "pieptenilor"
+      ],
+      "prior_records": [],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-input-lingura",
+      "revision": 1,
+      "kind": "existing_owner_form_family",
+      "lemma": "Lingură",
+      "label_ro": "Lingură → Lingură",
+      "sense": "Ustensilă cu mâner și cap adâncit, folosită pentru a lua mâncare lichidă.",
+      "origin": "everyday_discovery_extension",
+      "category_hypothesis": "gastronomie",
+      "owner_id": "n_v30_kitchen_utensil_lingura",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Missing forms resolve to the existing exact owner and reuse its Cald slot.",
+      "form_status": "Tentative full paradigm, pending DEX/DOOM 3 and second-source verification.",
+      "planned_forms": [
+        "lingură",
+        "linguri",
+        "lingurile",
+        "lingurii",
+        "lingurilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "lingură",
+            "key": "lingura",
+            "index_owner": "n_v30_kitchen_utensil_lingura",
+            "all_owners": [
+              {
+                "id": "n_v30_kitchen_utensil_lingura",
+                "kind": "node_label",
+                "surface": "Lingură"
+              },
+              {
+                "id": "n_v30_kitchen_utensil_lingura",
+                "kind": "labels",
+                "surface": "Lingură"
+              }
+            ]
+          },
+          {
+            "form": "linguri",
+            "key": "linguri",
+            "index_owner": "n_v30_kitchen_utensil_lingura",
+            "all_owners": [
+              {
+                "id": "n_v30_kitchen_utensil_lingura",
+                "kind": "node_alias",
+                "surface": "linguri"
+              }
+            ]
+          },
+          {
+            "form": "lingurile",
+            "key": "lingurile",
+            "index_owner": "n_v30_kitchen_utensil_lingura",
+            "all_owners": [
+              {
+                "id": "n_v30_kitchen_utensil_lingura",
+                "kind": "node_alias",
+                "surface": "lingurile"
+              }
+            ]
+          },
+          {
+            "form": "lingurii",
+            "key": "lingurii",
+            "index_owner": "n_v30_kitchen_utensil_lingura",
+            "all_owners": [
+              {
+                "id": "n_v30_kitchen_utensil_lingura",
+                "kind": "node_alias",
+                "surface": "lingurii"
+              }
+            ]
+          },
+          {
+            "form": "lingurilor",
+            "key": "lingurilor"
+          }
+        ]
+      },
+      "already_resolved_forms": [
+        "lingură",
+        "linguri",
+        "lingurile",
+        "lingurii"
+      ],
+      "proposed_forms": [
+        "lingurilor"
+      ],
+      "prior_records": [],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-input-furculita",
+      "revision": 1,
+      "kind": "existing_owner_form_family",
+      "lemma": "Furculiță",
+      "label_ro": "Furculiță → Furculiță",
+      "sense": "Ustensilă cu mâner și dinți, folosită pentru a prinde bucăți de mâncare.",
+      "origin": "everyday_discovery_extension",
+      "category_hypothesis": "gastronomie",
+      "owner_id": "n_v30_kitchen_utensil_furculita",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Missing forms resolve to the existing exact owner and reuse its Cald slot.",
+      "form_status": "Tentative full paradigm, pending DEX/DOOM 3 and second-source verification.",
+      "planned_forms": [
+        "furculiță",
+        "furculițe",
+        "furculițele",
+        "furculiței",
+        "furculițelor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "furculiță",
+            "key": "furculita",
+            "index_owner": "n_v30_kitchen_utensil_furculita",
+            "all_owners": [
+              {
+                "id": "n_v30_kitchen_utensil_furculita",
+                "kind": "node_label",
+                "surface": "Furculiță"
+              },
+              {
+                "id": "n_v30_kitchen_utensil_furculita",
+                "kind": "labels",
+                "surface": "Furculiță"
+              }
+            ]
+          },
+          {
+            "form": "furculițe",
+            "key": "furculite",
+            "index_owner": "n_v30_kitchen_utensil_furculita",
+            "all_owners": [
+              {
+                "id": "n_v30_kitchen_utensil_furculita",
+                "kind": "node_alias",
+                "surface": "furculițe"
+              }
+            ]
+          },
+          {
+            "form": "furculițele",
+            "key": "furculitele",
+            "index_owner": "n_v30_kitchen_utensil_furculita",
+            "all_owners": [
+              {
+                "id": "n_v30_kitchen_utensil_furculita",
+                "kind": "node_alias",
+                "surface": "furculițele"
+              }
+            ]
+          },
+          {
+            "form": "furculiței",
+            "key": "furculitei",
+            "index_owner": "n_v30_kitchen_utensil_furculita",
+            "all_owners": [
+              {
+                "id": "n_v30_kitchen_utensil_furculita",
+                "kind": "node_alias",
+                "surface": "furculiței"
+              }
+            ]
+          },
+          {
+            "form": "furculițelor",
+            "key": "furculitelor"
+          }
+        ]
+      },
+      "already_resolved_forms": [
+        "furculiță",
+        "furculițe",
+        "furculițele",
+        "furculiței"
+      ],
+      "proposed_forms": [
+        "furculițelor"
+      ],
+      "prior_records": [],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-input-pahar",
+      "revision": 1,
+      "kind": "existing_owner_form_family",
+      "lemma": "Pahar",
+      "label_ro": "Pahar → Pahar",
+      "sense": "Recipient mic din care se beau apă și alte băuturi.",
+      "origin": "everyday_discovery_extension",
+      "category_hypothesis": "gastronomie",
+      "owner_id": "n_v29_kitchen_table_pahar",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Missing forms resolve to the existing exact owner and reuse its Cald slot.",
+      "form_status": "Tentative full paradigm, pending DEX/DOOM 3 and second-source verification.",
+      "planned_forms": [
+        "pahar",
+        "paharul",
+        "pahare",
+        "paharele",
+        "paharului",
+        "paharelor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "pahar",
+            "key": "pahar",
+            "index_owner": "n_v29_kitchen_table_pahar",
+            "all_owners": [
+              {
+                "id": "n_v29_kitchen_table_pahar",
+                "kind": "node_label",
+                "surface": "Pahar"
+              },
+              {
+                "id": "n_v29_kitchen_table_pahar",
+                "kind": "labels",
+                "surface": "Pahar"
+              }
+            ]
+          },
+          {
+            "form": "paharul",
+            "key": "paharul",
+            "index_owner": "n_v29_kitchen_table_pahar",
+            "all_owners": [
+              {
+                "id": "n_v29_kitchen_table_pahar",
+                "kind": "node_alias",
+                "surface": "paharul"
+              }
+            ]
+          },
+          {
+            "form": "pahare",
+            "key": "pahare",
+            "index_owner": "n_v29_kitchen_table_pahar",
+            "all_owners": [
+              {
+                "id": "n_v29_kitchen_table_pahar",
+                "kind": "node_alias",
+                "surface": "pahare"
+              }
+            ]
+          },
+          {
+            "form": "paharele",
+            "key": "paharele",
+            "index_owner": "n_v29_kitchen_table_pahar",
+            "all_owners": [
+              {
+                "id": "n_v29_kitchen_table_pahar",
+                "kind": "node_alias",
+                "surface": "paharele"
+              }
+            ]
+          },
+          {
+            "form": "paharului",
+            "key": "paharului",
+            "index_owner": "n_v29_kitchen_table_pahar",
+            "all_owners": [
+              {
+                "id": "n_v29_kitchen_table_pahar",
+                "kind": "node_alias",
+                "surface": "paharului"
+              }
+            ]
+          },
+          {
+            "form": "paharelor",
+            "key": "paharelor"
+          }
+        ]
+      },
+      "already_resolved_forms": [
+        "pahar",
+        "paharul",
+        "pahare",
+        "paharele",
+        "paharului"
+      ],
+      "proposed_forms": [
+        "paharelor"
+      ],
+      "prior_records": [],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    },
+    {
+      "id": "v110-input-cana",
+      "revision": 1,
+      "kind": "existing_owner_form_family",
+      "lemma": "Cană",
+      "label_ro": "Cană → Cană",
+      "sense": "Recipient cu toartă din care se beau apă, lapte, ceai sau alte băuturi.",
+      "origin": "everyday_discovery_extension",
+      "category_hypothesis": "gastronomie",
+      "owner_id": "n_v30_kitchen_drink_cana",
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "player_benefit": "Missing forms resolve to the existing exact owner and reuse its Cald slot.",
+      "form_status": "Tentative full paradigm, pending DEX/DOOM 3 and second-source verification.",
+      "planned_forms": [
+        "cană",
+        "căni",
+        "cănile",
+        "cănii",
+        "cănilor"
+      ],
+      "identity_checks": {
+        "forms": [
+          {
+            "form": "cană",
+            "key": "cana",
+            "index_owner": "n_v30_kitchen_drink_cana",
+            "all_owners": [
+              {
+                "id": "n_v30_kitchen_drink_cana",
+                "kind": "node_label",
+                "surface": "Cană"
+              },
+              {
+                "id": "n_v30_kitchen_drink_cana",
+                "kind": "labels",
+                "surface": "Cană"
+              }
+            ]
+          },
+          {
+            "form": "căni",
+            "key": "cani",
+            "index_owner": "n_v30_kitchen_drink_cana",
+            "all_owners": [
+              {
+                "id": "n_v30_kitchen_drink_cana",
+                "kind": "node_alias",
+                "surface": "căni"
+              }
+            ]
+          },
+          {
+            "form": "cănile",
+            "key": "canile",
+            "index_owner": "n_v30_kitchen_drink_cana",
+            "all_owners": [
+              {
+                "id": "n_v30_kitchen_drink_cana",
+                "kind": "node_alias",
+                "surface": "cănile"
+              }
+            ]
+          },
+          {
+            "form": "cănii",
+            "key": "canii",
+            "index_owner": "n_v30_kitchen_drink_cana",
+            "all_owners": [
+              {
+                "id": "n_v30_kitchen_drink_cana",
+                "kind": "node_alias",
+                "surface": "cănii"
+              }
+            ]
+          },
+          {
+            "form": "cănilor",
+            "key": "canilor"
+          }
+        ]
+      },
+      "already_resolved_forms": [
+        "cană",
+        "căni",
+        "cănile",
+        "cănii"
+      ],
+      "proposed_forms": [
+        "cănilor"
+      ],
+      "prior_records": [],
+      "state": "idea",
+      "decision": "Pre-screened idea; morphology, register and all link claims still unverified.",
+      "research_ready": true,
+      "sources": []
+    }
+  ]
+}
