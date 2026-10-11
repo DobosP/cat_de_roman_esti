@@ -13,6 +13,8 @@ Preserve the six server-authoritative Romanian games while moving the SPA from R
 
 ## 2. Progress
 
+- [x] 2026-10-11 — [Focused d8 consumer-contract proof](../reviews/gui-normalized-react/frozen-baseline-focused-d8-checkpoint.json) passed12 tests once/no failures, skips, cancellations or TODOs in actual owner shell b6bed300. The installed validator integration closes the earlier4da4 HOLD only for the focused synthetic fixture. All raw20/profile/summary evidence and active40960/30720, existing nullCSS rows and combined122880 policy remain. Automatic wrapper cleanup failed; separate exact parent2-service/network cleanup passed. No production route-budget/unit/full/device/M0/M1/KIT_BUMP or later-docs-HEAD qualification. Historical SOURCE/NOT RUN bullets below retain their original chronology.
+
 - [x] 2026-10-11 SOURCE successor — focused788 eleven pure tests passed, while independent installed assertGateResult review found nonnull recorded baseline rows cannot enter the wrapper numeric budget table. Only active rows now project to hook.budgets; complete raw/classified baseline reports and named integrity/full requirements remain. A twelfth public installed-validator integration test is authored NOT RUN; old788 packet/focused evidence/integration hold preserved. No new qualification.
 
 - [x] 2026-10-11 SOURCE ONLY — explicit human “Approve baseline policy; keep active UI limits” recorded in ADR0193. Raw20 SDK measurements/statuses remain; active40960/target30720 gates unchanged, exact original freeze/source/archive/manifest/all30 members gain a named baseline-integrity check. Wrapper baseline rows retain raw sdk_status and report links. All new tests NOT RUN; current React red, required full legacy/safety/device/UI prerequisites unchanged.

@@ -1,0 +1,370 @@
+{
+  "schema": 1,
+  "utc": "2026-10-11T06:46:27.418855+00:00",
+  "source": "d8be239514423ef51752b54dc544d5fab03adb68",
+  "tree": "a2a4f4c6ac70a952821836cb6bd6db8d4a7cd6fe3c489a9ddd191d453fbe3fde",
+  "wrapperSession": 9123,
+  "wrapperExit": 0,
+  "actualFocusedTestsPASS": 12,
+  "automaticWrapperCleanupSucceeded": false,
+  "exactOwnedContainersRemoved": 2,
+  "owned": [
+    {
+      "Id": "1e60152d720cd5dcfa5b031a5aff7e281fb7ab6a0fbde4cfa5b90e3d000a8cc7",
+      "Name": "/gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc-app-1",
+      "Image": "sha256:94e4ad6441560fbdd1a1bc168348dbb3a9d32343eb74043bc41648f1e08980e7",
+      "Mounts": [],
+      "labels": {
+        "com.docker.compose.config-hash": "47d37c37181e98fcedf8d7c201cddc7e7bef29ed096d2f5863caa6d15edc1ae2",
+        "com.docker.compose.container-number": "1",
+        "com.docker.compose.depends_on": "db:service_healthy:false",
+        "com.docker.compose.image": "sha256:94e4ad6441560fbdd1a1bc168348dbb3a9d32343eb74043bc41648f1e08980e7",
+        "com.docker.compose.oneoff": "False",
+        "com.docker.compose.project": "gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc",
+        "com.docker.compose.project.config_files": "/home/dobo/work/_temp/fix__gui-cat-prerequisites-linux/gates/cat_de_roman_esti.wrapper-shell.TRMOMHKN/compose.gate.yml",
+        "com.docker.compose.project.environment_file": "/home/dobo/work/_temp/fix__gui-cat-prerequisites-linux/gates/cat_de_roman_esti.wrapper-shell.TRMOMHKN/.gate.env",
+        "com.docker.compose.project.working_dir": "/home/dobo/work/_temp/fix__gui-cat-prerequisites-linux/gates/cat_de_roman_esti",
+        "com.docker.compose.service": "app",
+        "com.docker.compose.version": "5.1.4",
+        "org.opencontainers.image.revision": "d8be239514423ef51752b54dc544d5fab03adb68",
+        "org.roedu.tree-sha256": "a2a4f4c6ac70a952821836cb6bd6db8d4a7cd6fe3c489a9ddd191d453fbe3fde"
+      },
+      "initialState": {
+        "Status": "running",
+        "Running": true,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 640652,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-10-11T06:41:01.074218014Z",
+        "FinishedAt": "0001-01-01T00:00:00Z",
+        "Health": {
+          "Status": "healthy",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-11T09:46:17.757381267+03:00",
+              "End": "2026-10-11T09:46:17.8343765+03:00",
+              "ExitCode": 0,
+              "Output": "healthy\n"
+            },
+            {
+              "Start": "2026-10-11T09:46:19.835781152+03:00",
+              "End": "2026-10-11T09:46:19.907585897+03:00",
+              "ExitCode": 0,
+              "Output": "healthy\n"
+            },
+            {
+              "Start": "2026-10-11T09:46:21.909660324+03:00",
+              "End": "2026-10-11T09:46:21.995498319+03:00",
+              "ExitCode": 0,
+              "Output": "healthy\n"
+            },
+            {
+              "Start": "2026-10-11T09:46:23.99657919+03:00",
+              "End": "2026-10-11T09:46:24.070860009+03:00",
+              "ExitCode": 0,
+              "Output": "healthy\n"
+            },
+            {
+              "Start": "2026-10-11T09:46:26.071643971+03:00",
+              "End": "2026-10-11T09:46:26.149702396+03:00",
+              "ExitCode": 0,
+              "Output": "healthy\n"
+            }
+          ]
+        }
+      },
+      "resources": {
+        "NanoCpus": 2000000000,
+        "Memory": 2147483648,
+        "NetworkMode": "gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc_default",
+        "Tmpfs": null,
+        "PortBindings": {},
+        "Privileged": false
+      }
+    },
+    {
+      "Id": "431666d230fa54388628c550047b236fd0d4792dc1e0b506c645a78f0ae7115e",
+      "Name": "/gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc-db-1",
+      "Image": "sha256:275447c94b11b151decd1f29877965301d5a77032037c46de93d990f739f00a9",
+      "Mounts": [],
+      "labels": {
+        "com.docker.compose.config-hash": "62709166d666316d85219b9e6158c60189973bda3baaf98d18d288a35025fbe7",
+        "com.docker.compose.container-number": "1",
+        "com.docker.compose.depends_on": "",
+        "com.docker.compose.image": "sha256:275447c94b11b151decd1f29877965301d5a77032037c46de93d990f739f00a9",
+        "com.docker.compose.oneoff": "False",
+        "com.docker.compose.project": "gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc",
+        "com.docker.compose.project.config_files": "/home/dobo/work/_temp/fix__gui-cat-prerequisites-linux/gates/cat_de_roman_esti.wrapper-shell.TRMOMHKN/compose.gate.yml",
+        "com.docker.compose.project.environment_file": "/home/dobo/work/_temp/fix__gui-cat-prerequisites-linux/gates/cat_de_roman_esti.wrapper-shell.TRMOMHKN/.gate.env",
+        "com.docker.compose.project.working_dir": "/home/dobo/work/_temp/fix__gui-cat-prerequisites-linux/gates/cat_de_roman_esti",
+        "com.docker.compose.service": "db",
+        "com.docker.compose.version": "5.1.4"
+      },
+      "initialState": {
+        "Status": "running",
+        "Running": true,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 640403,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-10-11T06:40:58.30319236Z",
+        "FinishedAt": "0001-01-01T00:00:00Z",
+        "Health": {
+          "Status": "healthy",
+          "FailingStreak": 0,
+          "Log": [
+            {
+              "Start": "2026-10-11T09:46:17.576930338+03:00",
+              "End": "2026-10-11T09:46:17.68088667+03:00",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-11T09:46:19.682396748+03:00",
+              "End": "2026-10-11T09:46:19.793335088+03:00",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-11T09:46:21.794859207+03:00",
+              "End": "2026-10-11T09:46:21.912692082+03:00",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-11T09:46:23.913872836+03:00",
+              "End": "2026-10-11T09:46:24.016492356+03:00",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            },
+            {
+              "Start": "2026-10-11T09:46:26.017604977+03:00",
+              "End": "2026-10-11T09:46:26.134894301+03:00",
+              "ExitCode": 0,
+              "Output": "/var/run/postgresql:5432 - accepting connections\n"
+            }
+          ]
+        }
+      },
+      "resources": {
+        "NanoCpus": 2000000000,
+        "Memory": 2147483648,
+        "NetworkMode": "gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc_default",
+        "Tmpfs": {
+          "/var/lib/postgresql/data": ""
+        },
+        "PortBindings": {},
+        "Privileged": false
+      }
+    }
+  ],
+  "emptyOwnedNetworkRemoved": true,
+  "allExactCIDNameNetworkAbsenceVerified": true,
+  "records": [
+    {
+      "argv": [
+        "docker",
+        "container",
+        "ls",
+        "--all",
+        "--filter",
+        "label=com.docker.compose.project=gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc",
+        "--format",
+        "{{.ID}}"
+      ],
+      "exit": 0,
+      "stdout": "1e60152d720c\n431666d230fa\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "container",
+        "inspect",
+        "1e60152d720c"
+      ],
+      "exit": 0,
+      "stdout": "{\"Id\": \"1e60152d720cd5dcfa5b031a5aff7e281fb7ab6a0fbde4cfa5b90e3d000a8cc7\", \"Name\": \"/gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc-app-1\", \"Image\": \"sha256:94e4ad6441560fbdd1a1bc168348dbb3a9d32343eb74043bc41648f1e08980e7\", \"Mounts\": [], \"labels\": {\"com.docker.compose.config-hash\": \"47d37c37181e98fcedf8d7c201cddc7e7bef29ed096d2f5863caa6d15edc1ae2\", \"com.docker.compose.container-number\": \"1\", \"com.docker.compose.depends_on\": \"db:service_healthy:false\", \"com.docker.compose.image\": \"sha256:94e4ad6441560fbdd1a1bc168348dbb3a9d32343eb74043bc41648f1e08980e7\", \"com.docker.compose.oneoff\": \"False\", \"com.docker.compose.project\": \"gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc\", \"com.docker.compose.project.config_files\": \"/home/dobo/work/_temp/fix__gui-cat-prerequisites-linux/gates/cat_de_roman_esti.wrapper-shell.TRMOMHKN/compose.gate.yml\", \"com.docker.compose.project.environment_file\": \"/home/dobo/work/_temp/fix__gui-cat-prerequisites-linux/gates/cat_de_roman_esti.wrapper-shell.TRMOMHKN/.gate.env\", \"com.docker.compose.project.working_dir\": \"/home/dobo/work/_temp/fix__gui-cat-prerequisites-linux/gates/cat_de_roman_esti\", \"com.docker.compose.service\": \"app\", \"com.docker.compose.version\": \"5.1.4\", \"org.opencontainers.image.revision\": \"d8be239514423ef51752b54dc544d5fab03adb68\", \"org.roedu.tree-sha256\": \"a2a4f4c6ac70a952821836cb6bd6db8d4a7cd6fe3c489a9ddd191d453fbe3fde\"}, \"initialState\": {\"Status\": \"running\", \"Running\": true, \"Paused\": false, \"Restarting\": false, \"OOMKilled\": false, \"Dead\": false, \"Pid\": 640652, \"ExitCode\": 0, \"Error\": \"\", \"StartedAt\": \"2026-10-11T06:41:01.074218014Z\", \"FinishedAt\": \"0001-01-01T00:00:00Z\", \"Health\": {\"Status\": \"healthy\", \"FailingStreak\": 0, \"Log\": [{\"Start\": \"2026-10-11T09:46:17.757381267+03:00\", \"End\": \"2026-10-11T09:46:17.8343765+03:00\", \"ExitCode\": 0, \"Output\": \"healthy\\n\"}, {\"Start\": \"2026-10-11T09:46:19.835781152+03:00\", \"End\": \"2026-10-11T09:46:19.907585897+03:00\", \"ExitCode\": 0, \"Output\": \"healthy\\n\"}, {\"Start\": \"2026-10-11T09:46:21.909660324+03:00\", \"End\": \"2026-10-11T09:46:21.995498319+03:00\", \"ExitCode\": 0, \"Output\": \"healthy\\n\"}, {\"Start\": \"2026-10-11T09:46:23.99657919+03:00\", \"End\": \"2026-10-11T09:46:24.070860009+03:00\", \"ExitCode\": 0, \"Output\": \"healthy\\n\"}, {\"Start\": \"2026-10-11T09:46:26.071643971+03:00\", \"End\": \"2026-10-11T09:46:26.149702396+03:00\", \"ExitCode\": 0, \"Output\": \"healthy\\n\"}]}}, \"resources\": {\"NanoCpus\": 2000000000, \"Memory\": 2147483648, \"NetworkMode\": \"gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc_default\", \"Tmpfs\": null, \"PortBindings\": {}, \"Privileged\": false}}",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "container",
+        "inspect",
+        "431666d230fa"
+      ],
+      "exit": 0,
+      "stdout": "{\"Id\": \"431666d230fa54388628c550047b236fd0d4792dc1e0b506c645a78f0ae7115e\", \"Name\": \"/gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc-db-1\", \"Image\": \"sha256:275447c94b11b151decd1f29877965301d5a77032037c46de93d990f739f00a9\", \"Mounts\": [], \"labels\": {\"com.docker.compose.config-hash\": \"62709166d666316d85219b9e6158c60189973bda3baaf98d18d288a35025fbe7\", \"com.docker.compose.container-number\": \"1\", \"com.docker.compose.depends_on\": \"\", \"com.docker.compose.image\": \"sha256:275447c94b11b151decd1f29877965301d5a77032037c46de93d990f739f00a9\", \"com.docker.compose.oneoff\": \"False\", \"com.docker.compose.project\": \"gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc\", \"com.docker.compose.project.config_files\": \"/home/dobo/work/_temp/fix__gui-cat-prerequisites-linux/gates/cat_de_roman_esti.wrapper-shell.TRMOMHKN/compose.gate.yml\", \"com.docker.compose.project.environment_file\": \"/home/dobo/work/_temp/fix__gui-cat-prerequisites-linux/gates/cat_de_roman_esti.wrapper-shell.TRMOMHKN/.gate.env\", \"com.docker.compose.project.working_dir\": \"/home/dobo/work/_temp/fix__gui-cat-prerequisites-linux/gates/cat_de_roman_esti\", \"com.docker.compose.service\": \"db\", \"com.docker.compose.version\": \"5.1.4\"}, \"initialState\": {\"Status\": \"running\", \"Running\": true, \"Paused\": false, \"Restarting\": false, \"OOMKilled\": false, \"Dead\": false, \"Pid\": 640403, \"ExitCode\": 0, \"Error\": \"\", \"StartedAt\": \"2026-10-11T06:40:58.30319236Z\", \"FinishedAt\": \"0001-01-01T00:00:00Z\", \"Health\": {\"Status\": \"healthy\", \"FailingStreak\": 0, \"Log\": [{\"Start\": \"2026-10-11T09:46:17.576930338+03:00\", \"End\": \"2026-10-11T09:46:17.68088667+03:00\", \"ExitCode\": 0, \"Output\": \"/var/run/postgresql:5432 - accepting connections\\n\"}, {\"Start\": \"2026-10-11T09:46:19.682396748+03:00\", \"End\": \"2026-10-11T09:46:19.793335088+03:00\", \"ExitCode\": 0, \"Output\": \"/var/run/postgresql:5432 - accepting connections\\n\"}, {\"Start\": \"2026-10-11T09:46:21.794859207+03:00\", \"End\": \"2026-10-11T09:46:21.912692082+03:00\", \"ExitCode\": 0, \"Output\": \"/var/run/postgresql:5432 - accepting connections\\n\"}, {\"Start\": \"2026-10-11T09:46:23.913872836+03:00\", \"End\": \"2026-10-11T09:46:24.016492356+03:00\", \"ExitCode\": 0, \"Output\": \"/var/run/postgresql:5432 - accepting connections\\n\"}, {\"Start\": \"2026-10-11T09:46:26.017604977+03:00\", \"End\": \"2026-10-11T09:46:26.134894301+03:00\", \"ExitCode\": 0, \"Output\": \"/var/run/postgresql:5432 - accepting connections\\n\"}]}}, \"resources\": {\"NanoCpus\": 2000000000, \"Memory\": 2147483648, \"NetworkMode\": \"gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc_default\", \"Tmpfs\": {\"/var/lib/postgresql/data\": \"\"}, \"PortBindings\": {}, \"Privileged\": false}}",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "container",
+        "stop",
+        "--time",
+        "20",
+        "1e60152d720cd5dcfa5b031a5aff7e281fb7ab6a0fbde4cfa5b90e3d000a8cc7"
+      ],
+      "exit": 0,
+      "stdout": "Flag --time has been deprecated, use --timeout instead\n1e60152d720cd5dcfa5b031a5aff7e281fb7ab6a0fbde4cfa5b90e3d000a8cc7\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "container",
+        "inspect",
+        "1e60152d720cd5dcfa5b031a5aff7e281fb7ab6a0fbde4cfa5b90e3d000a8cc7"
+      ],
+      "exit": 0,
+      "stdout": "{\"Id\": \"1e60152d720cd5dcfa5b031a5aff7e281fb7ab6a0fbde4cfa5b90e3d000a8cc7\", \"State\": {\"Status\": \"exited\", \"Running\": false, \"Paused\": false, \"Restarting\": false, \"OOMKilled\": false, \"Dead\": false, \"Pid\": 0, \"ExitCode\": 0, \"Error\": \"\", \"StartedAt\": \"2026-10-11T06:41:01.074218014Z\", \"FinishedAt\": \"2026-10-11T06:46:26.490168114Z\", \"Health\": {\"Status\": \"unhealthy\", \"FailingStreak\": 0, \"Log\": [{\"Start\": \"2026-10-11T09:46:17.757381267+03:00\", \"End\": \"2026-10-11T09:46:17.8343765+03:00\", \"ExitCode\": 0, \"Output\": \"healthy\\n\"}, {\"Start\": \"2026-10-11T09:46:19.835781152+03:00\", \"End\": \"2026-10-11T09:46:19.907585897+03:00\", \"ExitCode\": 0, \"Output\": \"healthy\\n\"}, {\"Start\": \"2026-10-11T09:46:21.909660324+03:00\", \"End\": \"2026-10-11T09:46:21.995498319+03:00\", \"ExitCode\": 0, \"Output\": \"healthy\\n\"}, {\"Start\": \"2026-10-11T09:46:23.99657919+03:00\", \"End\": \"2026-10-11T09:46:24.070860009+03:00\", \"ExitCode\": 0, \"Output\": \"healthy\\n\"}, {\"Start\": \"2026-10-11T09:46:26.071643971+03:00\", \"End\": \"2026-10-11T09:46:26.149702396+03:00\", \"ExitCode\": 0, \"Output\": \"healthy\\n\"}]}}}",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "container",
+        "rm",
+        "1e60152d720cd5dcfa5b031a5aff7e281fb7ab6a0fbde4cfa5b90e3d000a8cc7"
+      ],
+      "exit": 0,
+      "stdout": "1e60152d720cd5dcfa5b031a5aff7e281fb7ab6a0fbde4cfa5b90e3d000a8cc7\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "container",
+        "inspect",
+        "1e60152d720cd5dcfa5b031a5aff7e281fb7ab6a0fbde4cfa5b90e3d000a8cc7"
+      ],
+      "exit": 1,
+      "stdout": "[]\n",
+      "stderr": "Error response from daemon: No such container: 1e60152d720cd5dcfa5b031a5aff7e281fb7ab6a0fbde4cfa5b90e3d000a8cc7\n"
+    },
+    {
+      "argv": [
+        "docker",
+        "container",
+        "inspect",
+        "gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc-app-1"
+      ],
+      "exit": 1,
+      "stdout": "[]\n",
+      "stderr": "Error response from daemon: No such container: gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc-app-1\n"
+    },
+    {
+      "argv": [
+        "docker",
+        "container",
+        "stop",
+        "--time",
+        "20",
+        "431666d230fa54388628c550047b236fd0d4792dc1e0b506c645a78f0ae7115e"
+      ],
+      "exit": 0,
+      "stdout": "Flag --time has been deprecated, use --timeout instead\n431666d230fa54388628c550047b236fd0d4792dc1e0b506c645a78f0ae7115e\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "container",
+        "inspect",
+        "431666d230fa54388628c550047b236fd0d4792dc1e0b506c645a78f0ae7115e"
+      ],
+      "exit": 0,
+      "stdout": "{\"Id\": \"431666d230fa54388628c550047b236fd0d4792dc1e0b506c645a78f0ae7115e\", \"State\": {\"Status\": \"exited\", \"Running\": false, \"Paused\": false, \"Restarting\": false, \"OOMKilled\": false, \"Dead\": false, \"Pid\": 0, \"ExitCode\": 0, \"Error\": \"\", \"StartedAt\": \"2026-10-11T06:40:58.30319236Z\", \"FinishedAt\": \"2026-10-11T06:46:26.884161604Z\", \"Health\": {\"Status\": \"unhealthy\", \"FailingStreak\": 0, \"Log\": [{\"Start\": \"2026-10-11T09:46:17.576930338+03:00\", \"End\": \"2026-10-11T09:46:17.68088667+03:00\", \"ExitCode\": 0, \"Output\": \"/var/run/postgresql:5432 - accepting connections\\n\"}, {\"Start\": \"2026-10-11T09:46:19.682396748+03:00\", \"End\": \"2026-10-11T09:46:19.793335088+03:00\", \"ExitCode\": 0, \"Output\": \"/var/run/postgresql:5432 - accepting connections\\n\"}, {\"Start\": \"2026-10-11T09:46:21.794859207+03:00\", \"End\": \"2026-10-11T09:46:21.912692082+03:00\", \"ExitCode\": 0, \"Output\": \"/var/run/postgresql:5432 - accepting connections\\n\"}, {\"Start\": \"2026-10-11T09:46:23.913872836+03:00\", \"End\": \"2026-10-11T09:46:24.016492356+03:00\", \"ExitCode\": 0, \"Output\": \"/var/run/postgresql:5432 - accepting connections\\n\"}, {\"Start\": \"2026-10-11T09:46:26.017604977+03:00\", \"End\": \"2026-10-11T09:46:26.134894301+03:00\", \"ExitCode\": 0, \"Output\": \"/var/run/postgresql:5432 - accepting connections\\n\"}]}}}",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "container",
+        "rm",
+        "431666d230fa54388628c550047b236fd0d4792dc1e0b506c645a78f0ae7115e"
+      ],
+      "exit": 0,
+      "stdout": "431666d230fa54388628c550047b236fd0d4792dc1e0b506c645a78f0ae7115e\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "container",
+        "inspect",
+        "431666d230fa54388628c550047b236fd0d4792dc1e0b506c645a78f0ae7115e"
+      ],
+      "exit": 1,
+      "stdout": "[]\n",
+      "stderr": "Error response from daemon: No such container: 431666d230fa54388628c550047b236fd0d4792dc1e0b506c645a78f0ae7115e\n"
+    },
+    {
+      "argv": [
+        "docker",
+        "container",
+        "inspect",
+        "gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc-db-1"
+      ],
+      "exit": 1,
+      "stdout": "[]\n",
+      "stderr": "Error response from daemon: No such container: gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc-db-1\n"
+    },
+    {
+      "argv": [
+        "docker",
+        "network",
+        "inspect",
+        "gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc_default"
+      ],
+      "exit": 0,
+      "stdout": "[\n    {\n        \"Name\": \"gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc_default\",\n        \"Id\": \"6357f53dacaf55d7c0b445fca4922e5602067579850a5ade498fdb6471c7aa09\",\n        \"Created\": \"2026-10-11T09:38:53.604907137+03:00\",\n        \"Scope\": \"local\",\n        \"Driver\": \"bridge\",\n        \"EnableIPv4\": true,\n        \"EnableIPv6\": false,\n        \"IPAM\": {\n            \"Driver\": \"default\",\n            \"Options\": null,\n            \"Config\": [\n                {\n                    \"Subnet\": \"192.168.208.0/20\",\n                    \"Gateway\": \"192.168.208.1\"\n                }\n            ]\n        },\n        \"Internal\": false,\n        \"Attachable\": false,\n        \"Ingress\": false,\n        \"ConfigFrom\": {\n            \"Network\": \"\"\n        },\n        \"ConfigOnly\": false,\n        \"Options\": {},\n        \"Labels\": {\n            \"com.docker.compose.config-hash\": \"b7b4ddd8040647f2c89121beac046a72af3d12f4b896816f5c2f5f4f5343a8a6\",\n            \"com.docker.compose.network\": \"default\",\n            \"com.docker.compose.project\": \"gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc\",\n            \"com.docker.compose.version\": \"5.1.4\"\n        },\n        \"Containers\": {},\n        \"Status\": {\n            \"IPAM\": {\n                \"Subnets\": {\n                    \"192.168.208.0/20\": {\n                        \"IPsInUse\": 3,\n                        \"DynamicIPsAvailable\": 4093\n                    }\n                }\n            }\n        }\n    }\n]\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "network",
+        "rm",
+        "6357f53dacaf55d7c0b445fca4922e5602067579850a5ade498fdb6471c7aa09"
+      ],
+      "exit": 0,
+      "stdout": "6357f53dacaf55d7c0b445fca4922e5602067579850a5ade498fdb6471c7aa09\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "network",
+        "inspect",
+        "6357f53dacaf55d7c0b445fca4922e5602067579850a5ade498fdb6471c7aa09"
+      ],
+      "exit": 1,
+      "stdout": "[]\n",
+      "stderr": "Error response from daemon: network 6357f53dacaf55d7c0b445fca4922e5602067579850a5ade498fdb6471c7aa09 not found\n"
+    },
+    {
+      "argv": [
+        "docker",
+        "network",
+        "inspect",
+        "gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc_default"
+      ],
+      "exit": 1,
+      "stdout": "[]\n",
+      "stderr": "Error response from daemon: network gate-cat_de_roman_esti-fix__gui-cat-prerequisites-linux-bb979e6b4ffc_default not found\n"
+    }
+  ],
+  "scope": "Parentpostcondition aftercompletedfocused wrapper. Exactrevalidatedownedobjects only; no force/global/foreign/source/SDK operations; environment values omitted.",
+  "pass": true
+}
