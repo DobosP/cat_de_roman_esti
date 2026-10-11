@@ -4,4 +4,4 @@ package contentrails
 // including its own review/audit descriptors in that manifest would be circular.
 // A changed pin never grants approval; every registered rail is reconstructed
 // from its exact independent judgments and current native audit by Check.
-const InstalledAuthoritiesSHA256 = "16a9d79a06fc6d8b0bc84cde78d2d5eda835ceba2b8bfb38df7780111e0232f9"
+const InstalledAuthoritiesSHA256 = "9b794e3879f61e65a2f3e18869b9e013b043c6933e4595d377434a822ad49f03"
