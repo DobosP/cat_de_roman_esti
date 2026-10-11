@@ -57,7 +57,7 @@ embedded content export must never be copied into the public static directory.
 
 Build the root Dockerfile for local, anonymous-production and optional native-account
 profiles. It builds frontend JavaScript with Node and the server with Go, serves on
-container port 8000, and contains no Python interpreter. Anonymous publication and
+container port 8080, and contains no Python interpreter. Anonymous publication and
 account activation are described in [DEPLOY](DEPLOY.md).
 Root/standalone Go builds require explicit owner-qualified `GATE_SHA` (40 lowercase
 hex) and `GATE_TREE_SHA256` (64 lowercase hex), from the actual same-source pinned
@@ -70,7 +70,7 @@ qualification; these commands do not authorize deployment.
 docker build --build-arg "GATE_SHA=$GATE_SHA" --build-arg "GATE_TREE_SHA256=$GATE_TREE_SHA256" \
   -t cat-de-roman-esti:local .
 docker run --rm --read-only --cap-drop ALL --security-opt no-new-privileges \
-  -p 127.0.0.1:8000:8000 -e CAT_ACCOUNTS_ENABLED=0 cat-de-roman-esti:local
+  -p 127.0.0.1:8000:8080 -e CAT_ACCOUNTS_ENABLED=0 cat-de-roman-esti:local
 ```
 
 ## Retained native comparison containers
