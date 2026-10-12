@@ -20,8 +20,12 @@ Publish only `fix/gui-cat-prerequisites-linux` to origin. Shared main stays clea
   Result sha256 85fa8b3b…; leftover app/db/network removed by the run owner, absence verified.
 - Actual unit at 6b10d47, 10:45–11:08 UTC: only the 10 active route-JS rows plus aggregate exit fail
   (result sha256 54dd6441…). This is the E6 Q9 KIT_BUMP evidence; Paul's relay is in the loop owner queue.
-- Next (loop ledger order): commit the owner-lifecycle coordinator as a reproducible entry point, then one
-  full with it attached → M1 close; KIT_BUMP relay (Paul); M2 implementation; device checkpoint (Paul).
+- Reproducible same-full entry point: `python3 -I scripts/gui-full-runner.py --sha <literal HEAD>`
+  (`--fresh` optionally replaces the rolling mirror). It invokes the canonical wrapper, discovers its actual
+  UUID/primary CID and runs committed `scripts/gui-owner-lifecycle.py`; legacy uses the verified image,
+  isolated loopback8081, exact UID10001, no ports/mounts/credentials. The wrapper remains result authority;
+  `.gate/full/supervisor.json` records exit codes and independently verified owned-resource cleanup.
+  Next: missing baseline deps setup, then one full → M1 close; KIT_BUMP relay and device checkpoint (Paul).
 
 ## History 2026-10-11 (independent review, Codex stopped)
 
