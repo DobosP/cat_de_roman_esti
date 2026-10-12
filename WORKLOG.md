@@ -2178,3 +2178,11 @@ Valid until: V1.11 qualification on 2026-10-12; prior V1.10 status is history.
   [Review](reviews/v1-10-everyday-discovery/README.md) and [pool](content-pool/v1-10-everyday-discovery/pool.json).
   Four exact native rails; owner-approved Cald assertions, HTTP1207 and API148 pass.
   Full native race has no new red versus main; managed SPA baseline failures remain unchanged.
+
+Valid until: V1.12 qualification on 2026-10-12 — then treat this superseded V1.11 status as history.
+- **V1.11 qualified locally:** 49 reviewed items: 29 new concepts, 20 existing-owner input
+  families; +29 nodes/+110 links/+154 forms, zero new curated rounds.
+  All 183 added headwords/forms resolve into 49 real slots; 29 missing inputs preserve existing owners.
+  [Review](reviews/v1-11-home-and-nature/README.md) and [pool](content-pool/v1-11-home-and-nature/pool.json).
+  Four exact native rails; owner-approved Cald assertions, HTTP1207 and API183 pass.
+  Full native race has no new red versus main; managed SPA baseline failures remain unchanged.

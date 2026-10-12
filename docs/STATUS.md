@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-12 — V1.11 qualified locally; V1.7 remains parked ([ADR-0188](adr/0188-park-v1-7-and-reset-content-loop.md)); four native rails and content gates pass ([ADR-0189](adr/0189-behaviour-bound-installed-content-authorities.md)).
+Last verified: 2026-10-12 — V1.12 qualified locally; V1.7 remains parked ([ADR-0188](adr/0188-park-v1-7-and-reset-content-loop.md)); four native rails and content gates pass ([ADR-0189](adr/0189-behaviour-bound-installed-content-authorities.md)).
 
 - **GUI checkpoint:** core1.2 released; native7/current+candidate andfocusedMotion14 PASS; exact15 accepted/unapplied; deps64ea PASS. Fullnormalized replay/Node3/lint/unit/CSP/device/KIT_BUMP pending. Linuxsupervisor/worker paused.
 - **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
@@ -27,11 +27,11 @@ Last verified: 2026-10-12 — V1.11 qualified locally; V1.7 remains parked ([ADR
 - [Content skill](../.agents/skills/romanian-game-content/SKILL.md): refinement/discovery with independent gates.
 - Decision/evidence: [ADR-0158](adr/0158-v1-testing-release.md),
   [release review](reviews/v1-testing-release/README.md), [Romanian tester guide](TESTARE_V1.md).
-- **V1.11 qualified locally:** 49 reviewed items: 29 new concepts, 20 existing-owner input
-  families; +29 nodes/+110 links/+154 forms, zero new curated rounds.
-  All 183 added headwords/forms resolve into 49 real slots; 29 missing inputs preserve existing owners.
-  [Review](reviews/v1-11-home-and-nature/README.md) and [pool](content-pool/v1-11-home-and-nature/pool.json).
-  Four exact native rails; owner-approved Cald assertions, HTTP1207 and API183 pass.
+- **V1.12 qualified locally:** 38 reviewed new concepts, including postal and garden vocabulary;
+  +38 nodes/+164 links/+168 exact forms, zero new curated rounds or hidden-target approvals.
+  All 206 added headwords/forms resolve into 38 real slots; foreign Piersic plurals preserve Piersică.
+  [Review](reviews/v1-12-post-and-garden/README.md) and [pool](content-pool/v1-12-post-and-garden/pool.json).
+  Four exact native rails; owner-approved Cald assertions, HTTP1207 and API206 pass.
   Full native race has no new red versus main; managed SPA baseline failures remain unchanged.
 ## Inventory and invariants
 
@@ -46,7 +46,7 @@ Last verified: 2026-10-12 — V1.11 qualified locally; V1.7 remains parked ([ADR
 
 Pack **716 = 709 approved + 7 pending**,527 eligible; quick421/418,341 preferred, starter62/61. The85 authored/336 frozen payloads stay exact.
 Pool counts describe curated records; existing on-demand fallback generators remain.
-Qualified V1.11 KG: `fixture-v1-11-home-and-nature`, 2505 nodes/9810 links/9164 forms/180 exact puzzles.
+Qualified V1.12 KG: `fixture-v1-12-post-and-garden`, 2543 nodes/9974 links/9332 forms/180 exact puzzles.
 Alchimie challenge refresh: 49 existing additions across 27 books; all 68 selectable books retain
 521 recipes, routes and par. One former addition belongs to a reserved board.
 Exploration has **252 concepts/352 recipes/148 discoveries**, 96 supplies, 12 tiers,
@@ -55,18 +55,18 @@ Sessions retain 7200-second sliding TTL, 1000 entries/game, locks and 64 KiB req
 Exploration stays ≤256 concepts/512 recipes/256 saved crafts/128 observed empty pairs;
 sixteen histories and 2 MiB pre-write bounds remain. Quick supplements ≤256 boards/2 MiB.
 Unrevealed answers, recipe maps and routes stay private.
-## Current qualified V1.11 pins
+## Current qualified V1.12 pins
 
-- alchimie_discovery_world_v92.json: `2bd3a1287a369c052a92e76dcf26f40711a82e3498242578e4fa7a11034e3f7c`
-- alchimie_recipe_extensions_v92.json: `b2f26c8205495a8be4d507784026f0973064d0f4caae074166d5c8e417c14183`
-- quick_games_v92.json: `7235db2857785a01c829af90e9345702b1cc40c2f6fbf00ba703687fc3750813`
+- alchimie_discovery_world_v92.json: `c77c62cb28c6b4aae3b3e8c81aea50624cfd561b42d87b606b34f0b052922ad6`
+- alchimie_recipe_extensions_v92.json: `034cf54261de0eb0046c1b6751637c03a610a95da34aeb2681195a13d73d60a5`
+- quick_games_v92.json: `26bda43974c528aa9f04074541f4b248777550a7d6174bd75a17cc57665fd88a`
 - games_pack.json: `e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8`
-- board_rankings_v37.json: `b2d3e5395d174bace8767e8d1258067a286e4a3b917e892df1a0022bca416973`
-- derived_catalog_v38.json: `0c2e458ff3f55c51d1a0fd84f4f8628dc6fcf32a71732f786e06257229db0482`
+- board_rankings_v37.json: `d2e9d8c4193947c0dd821b2bd4cdbf5938732f4257a3ddb1841e4d3c11b85e97`
+- derived_catalog_v38.json: `ae801b16fe240b218ab035296b5d895b37c915ce701efaa68e754ed30ca65d56`
 - release_reserve_v1.json: `fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7`
 - lant_rejection_tombstones.json: `01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d`
-- kg_sample.json: `fb3841b6b1d37078fa482541f6a148213af30a63157ef0e58bf67eeed78b61cd`
-- cat_mobile_app_pack_contract.json: `ddbf24fcad48efee905bc7eb53827ddaa9fa483b573fd32b0ad288794fe08865`
+- kg_sample.json: `9b4c056e16e9a18100f4e376e7b6ae5dd0d82bb0408367e4d940fea0798bd9c6`
+- cat_mobile_app_pack_contract.json: `62566db24792ffb2b8a3843186de3fa4ff1b781a1ecee3745760e882b110432f`
 ## Verification
 
 - 1.0.1 (2026-09-23): **2466 backend / 53 accounts**, **240 frontend**, lint/typecheck/build
@@ -107,8 +107,8 @@ Unrevealed answers, recipe maps and routes stay private.
   [ADR-0167](adr/0167-close-unread-bodies-on-early-refusal.md):13 TCP gates/32 body/1207 parity and strict scalar envelopes pass; auth unchanged.
   [ADR-0168](adr/0168-qualify-complete-native-toolchain.md): native qualification remains historical evidence.
 - V1.3: [pool3integrated/5held](content-pool/v1-3-everyday-concepts/pool.json), [integration](reviews/v1-3-everyday-concepts/README.md); graph3/12/12 accepted/applied.
-- **V1.7 parked** ([ADR-0188](adr/0188-park-v1-7-and-reset-content-loop.md)): `codex/content-v1-7` (local 3377a68, origin fba9498) and `codex/content-v1-7-qualification` are not merged; zero integrated growth. V1.11 is the qualified content; [ADR-0186](adr/0186-go-authoritative-content-validation.md) keeps Go/native JSON authoritative. Outcome: [pool](content-pool/v1-7-recognizable-content/pool.json); leafă was independently integrated via V1.8 as a full-paradigm Salariu input.
-- **V1.11 contentrails GREEN** (verified 2026-10-12): all four rails reconstruct exactly and re-audit under the current binary; contentrails/contentbuild race tests pass.
+- **V1.7 parked** ([ADR-0188](adr/0188-park-v1-7-and-reset-content-loop.md)): `codex/content-v1-7` (local 3377a68, origin fba9498) and `codex/content-v1-7-qualification` are not merged; zero integrated growth. V1.12 is the qualified content; [ADR-0186](adr/0186-go-authoritative-content-validation.md) keeps Go/native JSON authoritative. Outcome: [pool](content-pool/v1-7-recognizable-content/pool.json); leafă was independently integrated via V1.8 as a full-paradigm Salariu input.
+- **V1.12 contentrails GREEN** (verified 2026-10-12): all four rails reconstruct exactly and re-audit under the current binary; contentrails/contentbuild race tests pass.
   Owner-approved Cald assertions and all content gates pass; only known main `TestManagedSPA*` failures remain. [Procedure](CONTENT_LOOP.md), [ADR-0189](adr/0189-behaviour-bound-installed-content-authorities.md).
 - Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing
   diacritics in some descriptions ("roman"/"român"), the false Toma Caragiu–Reconstituirea
