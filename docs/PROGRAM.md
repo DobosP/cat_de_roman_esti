@@ -324,9 +324,9 @@ This is the schema of the shipped `bootstrap/budgets.json` (`measured_at: null`,
 
 **Where "budgets in CI" (Decision 8) runs.** `TestRouteBudgets` is part of `gate:unit`, which every milestone commit and every review runs on Linux through the wrapper; that WSL run **is** the program's CI for the apps. GitHub Actions wiring exists only in roedu-ui (`web-kit/templates/ci.yml`, S0a M5: `push`/`pull_request`/`workflow_dispatch` → toolchain build → `task gate:unit` incl. `TestRouteBudgets`). No app session edits its GitHub workflow: ro's is `workflow_dispatch`-only by ADR-0075, cat's and social's keep their current triggers; adopting the kit `ci.yml` in an app is Paul's own commit after the session (recorded as an ADR there), listed as deviation §0.4-6.
 
-**Cat startup accounting — accepted 2026-10-08, source amendment unapplied.** The frontend's 120 KiB (122,880-byte) combined JS/CSS check counts all entry/static closures plus the immediately mounted AccountBar and its recursive static JS/CSS dependencies, with shared files and cycles counted once. Mandatory manifest roots/imports and emitted JS/CSS assets must exist; game routes and further dynamic children stay excluded. Default helper callers and frozen historical per-key closures retain their static-only scope. This does not replace the canonical cat-initial 40,960-byte JavaScript ceiling/30,720-byte target or separate CSS policy. Fresh startup measurements and Linux qualification remain pending; no threshold, phase or device condition changes. Decision: cat_de_roman_esti/docs/adr/0185-accepted-eager-startup-bundle-accounting.md.
+**Cat startup accounting — accepted and applied 2026-10-08; measured failure retained.** The frontend's 120 KiB (122,880-byte) combined JS/CSS check counts all entry/static closures plus the immediately mounted AccountBar and its recursive static JS/CSS dependencies, with shared files and cycles counted once. Mandatory manifest roots/imports and emitted JS/CSS assets must exist; game routes and further dynamic children stay excluded. Default helper callers and frozen historical per-key closures retain their static-only scope. All 11 amended contracts passed in the source-bound partial GEN above; fresh startup gzip was 126,067 bytes, 3,187 above the unchanged limit. Lint/native admission failed and broader Linux qualification is pending. This does not replace the canonical cat-initial 40,960-byte JavaScript ceiling/30,720-byte target or separate CSS policy; no threshold, phase or device condition changes. Decision: `cat_de_roman_esti/docs/adr/0185-accepted-eager-startup-bundle-accounting.md`, owning branch `fix/gui-cat-prerequisites-linux` at the source above; its UNAPPLIED/NOT RUN consequence text records the earlier Windows decision checkpoint, not current Linux authority or results.
 
-Cat decision and pending application: [ADR-0185](adr/0185-accepted-eager-startup-bundle-accounting.md) and [S1 plan](execplans/s1-cat.md). Historical measurements retain their captured scopes.
+Cat decision: [ADR-0185](adr/0185-accepted-eager-startup-bundle-accounting.md) and [S1 plan](execplans/s1-cat.md). Historical measurements retain their captured scopes.
 
 ### 4.7 Device checkpoint (hard stop)
 After each app's M1 delivery milestone Paul measures LCP/INP on one real Samsung A-series phone over throttled 4G in Chrome and Samsung Internet, records `Device checkpoint: <date> LCP/INP per route` in the app's status doc, sets `budgets.json` defaults from it (`GATE-CHANGE:`), and writes `DEVICE CHECKPOINT DONE` in the ExecPlan Progress (or queues it). No M2 pilot starts without it; tests, fixtures, goldens, codemod prep and docs may continue while waiting. Today **no real-device or 4G measurement exists in any repo**.
@@ -1087,3 +1087,56 @@ Open, not decided: §4.7 "sets `budgets.json` defaults" vs E3 "Preserve
 budgets.json unchanged" (ruled at the device checkpoint); the physical Samsung
 Chrome + Samsung Internet throttled-4G checkpoint remains UNMET.
 See roedu-ui ADR-0019 (`docs/adr/0019-owner-kit-order-parallel-preparation.md`).
+
+## Native erratum E6 — owner decisions 2026-10-12: device gate placement, kit evidence, loop autonomy, GUI scope
+
+On 2026-10-12 (~10:00 UTC) Paul answered a structured question set. Provenance:
+owner answer in Claude Code independent-review session (no signature implied).
+E3/E4/E5 otherwise stay in force; where their text differs on the points below,
+E6 wins.
+
+Device gate placement (Q8, "Gate acceptance, not start"). Codex may implement
+Cat S1 M2 (Preact runtime, pilot screens, Home and the necessary shell) on the
+feature branch now. Paul's physical Samsung A-series Chrome + Samsung Internet
+throttled-4G checkpoint must happen before M2 is accepted, before the §4.7
+`budgets.json` commit, before S0b, and before anything lands or reaches
+production. Desktop and emulator results never count. This amends §4.7 "No M2
+pilot starts without it", E3 "remains before M2 runtime adoption" (and its "Once
+that prerequisite is real" ordering of the Home/shell work), ADR-0011 "before any
+M2 runtime adoption" and Cat `.agent/S1.md` M2 "starts only when both of these
+exist". For Cat, §10.1 "before M2", the §10.2 S1 "hard stop for M2" and the §5.5
+device stop read as "before M2 acceptance". The M1-image device baseline is
+measured on the M1 image (built from the recorded M1-close SHA, `CAT_UI=legacy`
+available), never on M2 branch HEAD. Q8 rules Cat S1 only; S2A/S3A device
+placement is unchanged.
+
+Kit evidence (Q9, "Yes, descendant unit"). E5's "same-SHA" is amended: a unit
+run on a trusted descendant of the core-v1.6 sync commit 89db19d whose only
+substantive failure is the recorded active route-JS budget (plus the aggregate
+exit) is the E5 KIT_BUMP evidence. Claude Code runs that unit on Cat 6b10d47;
+Paul sends the relay. Every other E5 condition stays: all other checks pass, the
+relay cites the failed result, the pointer moves only through the parent sync.
+
+Loop autonomy (Q10, "Push feature branches"). Codex commits, validates and pushes
+its own feature branches after their checks pass. It never lands to `main`, never
+runs Paul-only targets (`trust`, `kit:sync`, `toolchain`, `qualify`, `shell`,
+`e2e`, `perf`) and writes owner items to the owner queue instead of waiting. This
+later owner decision amends §0.2 decision 7 ("Implementation workers never push"),
+the §5.5 "push" stop and the §5.4/§6 "commit locally"/"never push" text for
+those feature branches only; merge, tag, branch deletion and landing stay with
+Paul and the parent.
+
+Content main (Q11, "Milestone boundaries"). Cat content `main` merges into the Cat
+GUI branch only right before a milestone's qualifying full or its landing, by the
+Cat ADR-0194/0196 method, with one combined full each time.
+
+GUI scope (Paul, same session: this work takes care "only of the GUI interface").
+Cat main's V1.x work is game content from other sessions and not GUI work. The
+GUI loop never edits content, content rails or installed authorities. It reports,
+and does not debug, a content-lane failure introduced by a content merge.
+
+Unchanged: M2 acceptance and S0b dispatch need genuinely green unit/full including
+40,960 bytes (E3/E4). Open: §4.7 `budgets.json` defaults vs E3 (ruled at the
+device checkpoint); the physical device checkpoint remains UNMET.
+See roedu-ui ADR-0020 (`docs/adr/0020-owner-device-gate-kit-evidence-loop-autonomy.md`).
+
