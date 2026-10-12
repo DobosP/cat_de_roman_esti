@@ -1,0 +1,1093 @@
+{
+  "schema_version": 1,
+  "kind": "content-loop-graph-factual-review",
+  "wave": "1.13",
+  "theme": "weather-and-landscape",
+  "reviewer": "factual-v1-13",
+  "checked_on": "2026-10-12",
+  "module_path": "scripts/weather_and_landscape_v1_13_data.py",
+  "module_sha256": "202a3c54779fcdf0150c37ca2b927e9c4a63389e6e589db45ec66c944692bb99",
+  "pool_sha256": "027cdb1b39c084804c943b59d3c785dc73d0890408e193f603145f19ea018240",
+  "review_scope": "Single independent factual whole-batch web review of the complete frozen proposal; all43 items,41 new nodes,167 unique edges and188 alias keys. No candidate authoring, installation, curated-round or hidden-target approval.",
+  "rubric_sections": [
+    "CONTENT_LOOP.md quality bar and steps1–3",
+    "CRITIQUE_RUBRIC.md A3/A4/A7 and applicable F source checks; this is shared-guess vocabulary, not a new curated Cald target batch"
+  ],
+  "method": {
+    "whole_module_and_pool_read": true,
+    "fresh_dex_json_items": 43,
+    "dex_request_start_spacing_seconds_min": 2.1,
+    "fresh_lexical_check": "All43 live selected DEX/DOOM3 definition IDs, exact heads, authorities and paradigms agree with the proposal; homograph numbering is compared within each dictionary, not between dictionaries.",
+    "secondary_source_checks": "All87 distinct proposed non-DEX URLs attempted; all item senses and claims independently checked through Romanian article bodies, primary PDFs, and explicitly noted indexed primary passages. Two corrections below repair a stale evidence URL and an incorrectly attributed plant-root passage.",
+    "mechanical_checks": "229 unique retained normalized input keys; existing owners preserved; all41 new concepts satisfy aggregate4–8 neighbors,≥2 old,≥2 same-category and≤2 batch; Versant→Pantă emitted once; held IDs absent.",
+    "source_access_notes": [
+      "Direct access to the Brumă physics textbook returned404; its indexed primary p.26 passage was read and corroborates crystals on grass after nocturnal cooling.",
+      "The Nistru management PDF timed out directly; its indexed primary wetland/vegetation passage was read.",
+      "The Carpathian avalanche report had a TLS hostname error directly; its indexed primary winter/Carpathian passage was read.",
+      "Gardena lawn-special part2 returned404 directly but its full Romanian article body was available through the web reader, including root attachment and garden use.",
+      "The university anatomy PDF reader failed; the indexed primary printed-p.219 figure caption explicitly identifies Typha latifolia roots and rhizomes.",
+      "Secetă old Gardena URL was unavailable directly and through the web reader; a current same-publisher primary source is specified in its modify verdict."
+    ]
+  },
+  "items": [
+    {
+      "id": "v113-furnica",
+      "lemma": "Furnică",
+      "node_id": "n_v1_13_furnica",
+      "verdict": "accept",
+      "reason": "Exact noun and DOOM3 forms; the Romanian field study directly supports forest/soil nesting and seed dispersal by some ants, without inferring wheat or all-species feeding.",
+      "sources": [
+        "https://dexonline.ro/definitie/furnică/json",
+        "https://ro.wikipedia.org/wiki/Furnică",
+        "https://ibn.idsi.md/sites/default/files/imag_file/201-208_3.pdf"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 5,
+      "lexical_ids": {
+        "sense": "875153",
+        "forms": "1302941"
+      }
+    },
+    {
+      "id": "v113-mamaruta",
+      "lemma": "Mămăruță",
+      "node_id": "n_v1_10_buburuza",
+      "verdict": "accept",
+      "reason": "Regional input paradigm is normative; MDA2 1135225 and DLR 1254547 identify Coccinella septempunctata, preserving the existing seven-spotted Buburuză owner.",
+      "sources": [
+        "https://dexonline.ro/definitie/mămăruță/json",
+        "https://ro.wiktionary.org/wiki/mămăruță"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 5,
+      "lexical_ids": {
+        "sense": "886640",
+        "forms": "1291674"
+      },
+      "additional_sense_ids": {
+        "MDA2": "1135225",
+        "DLR": "1254547"
+      }
+    },
+    {
+      "id": "v113-fulg",
+      "lemma": "Fulg",
+      "node_id": "n_v1_13_fulg",
+      "verdict": "accept",
+      "reason": "The selected snow sense, masculine forms and four directed claims are supported; the school annex distinguishes individual ice crystals from aggregates and ties formation to clouds and temperature.",
+      "sources": [
+        "https://dexonline.ro/definitie/fulg/json",
+        "https://ro.wikipedia.org/wiki/Zăpadă",
+        "https://ccd.isjtr.ro/wp-content/uploads/2023/09/Nr_34_Caleidoscop_didactic.pdf"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 6,
+      "lexical_ids": {
+        "sense": "874880",
+        "forms": "1302784"
+      }
+    },
+    {
+      "id": "v113-chiciura",
+      "lemma": "Chiciură",
+      "node_id": "n_v1_13_chiciura",
+      "verdict": "accept",
+      "reason": "Current meteorological sense and feminine paradigm match; conditional freezing-fog, negative-temperature, winter and tree-deposition claims preserve the distinction between granular and crystalline forms.",
+      "sources": [
+        "https://dexonline.ro/definitie/chiciură/json",
+        "https://ro.wikipedia.org/wiki/Chiciură"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 5,
+      "lexical_ids": {
+        "sense": "845326",
+        "forms": "1311313"
+      }
+    },
+    {
+      "id": "v113-bruma",
+      "lemma": "Brumă",
+      "node_id": "n_v1_13_bruma",
+      "verdict": "accept",
+      "reason": "Sources support ice crystals on cooled grass/leaves and cold autumn nights; the module avoids the misleading simplified mechanism in the encyclopedia introduction.",
+      "sources": [
+        "https://dexonline.ro/definitie/brumă/json",
+        "https://ro.wikipedia.org/wiki/Brumă",
+        "https://catalog.manualedigitaleart.ro/art-fizica8/v1/art-fizica8.pdf",
+        "https://www.replicahd.ro/temperaturile-scazute-au-transformat-parangul-intr-un-regat-de-gheata/"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 5,
+      "lexical_ids": {
+        "sense": "837657",
+        "forms": "1319639"
+      }
+    },
+    {
+      "id": "v113-abur",
+      "lemma": "Abur",
+      "node_id": "n_v1_13_abur",
+      "verdict": "accept",
+      "reason": "Water vapor is distinguished from visible condensate; the masculine paradigm and heat/temperature/water/pot claims are supported, with Căldură used in its energy-transfer sense.",
+      "sources": [
+        "https://dexonline.ro/definitie/abur/json",
+        "https://ro.wikipedia.org/wiki/Abur",
+        "https://www.atlascopco.com/ro-ro/rental/resources/industrial-steam-guide-temperature-control/basics/what-is-industrial-steam"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 6,
+      "lexical_ids": {
+        "sense": "821560",
+        "forms": "1320510"
+      }
+    },
+    {
+      "id": "v113-roua",
+      "lemma": "Rouă",
+      "node_id": "n_v1_13_roua",
+      "verdict": "accept",
+      "reason": "Liquid condensation from atmospheric moisture supports all five claims; singular-only rouă/rouăi respects the cited DOOM3 entry and normalization.",
+      "sources": [
+        "https://dexonline.ro/definitie/rouă/json",
+        "https://ro.wikipedia.org/wiki/Rouă",
+        "https://znayshov.com/FR/9325/14.pdf",
+        "https://bibliotecavbielinski.wordpress.com/vreau-sa-stiu-sa-citim-sa-vedem/"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 2,
+      "lexical_ids": {
+        "sense": "859568",
+        "forms": "1304070"
+      }
+    },
+    {
+      "id": "v113-picatura",
+      "lemma": "Picătură",
+      "node_id": "n_v1_13_picatura",
+      "verdict": "accept",
+      "reason": "The liquid-drop sense and feminine forms match; rain/cloud/fog claims explicitly concern water droplets rather than every kind of liquid.",
+      "sources": [
+        "https://dexonline.ro/definitie/picătură/json",
+        "https://ro.wikipedia.org/wiki/Picătură",
+        "https://ro.wikipedia.org/wiki/Ploaie",
+        "https://ro.wikipedia.org/wiki/Nor",
+        "https://ro.wikipedia.org/wiki/Ceață"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 5,
+      "lexical_ids": {
+        "sense": "871160",
+        "forms": "1282323"
+      }
+    },
+    {
+      "id": "v113-baltoaca",
+      "lemma": "Băltoacă",
+      "node_id": "n_v1_13_baltoaca",
+      "verdict": "accept",
+      "reason": "The small rain-puddle sense and forms are supported; the street example corroborates the fourth link without conflating the separate aquatic-habitat Baltă sense.",
+      "sources": [
+        "https://dexonline.ro/definitie/băltoacă/json",
+        "https://ro.wiktionary.org/wiki/băltoacă",
+        "https://www.digi24.ro/stiri/actualitate/de-ce-dupa-fiecare-ploaie-in-cartierele-rezidentiale-apar-ba-un-fluviu-ba-o-delta-arhitect-o-combinatie-intre-nestiinta-si-hotie-1570417"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 5,
+      "lexical_ids": {
+        "sense": "833652",
+        "forms": "1317678"
+      }
+    },
+    {
+      "id": "v113-pietris",
+      "lemma": "Pietriș",
+      "node_id": "n_v1_13_pietris",
+      "verdict": "accept",
+      "reason": "Rock fragments, coarser-than-sand grains, road use and waterside deposits are directly supported; no obsolete barren-ground sense is admitted.",
+      "sources": [
+        "https://dexonline.ro/definitie/pietriș/json",
+        "https://ro.wikipedia.org/wiki/Pietriș",
+        "https://ro.wikipedia.org/wiki/Nisip"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 6,
+      "lexical_ids": {
+        "sense": "871441",
+        "forms": "1282457"
+      }
+    },
+    {
+      "id": "v113-duna",
+      "lemma": "Dună",
+      "node_id": "n_v1_13_duna",
+      "verdict": "accept",
+      "reason": "Sand accumulation by wind and coastal beach/shore examples are supported by dictionary, encyclopedia and the local environmental assessment.",
+      "sources": [
+        "https://dexonline.ro/definitie/dună/json",
+        "https://ro.wikipedia.org/wiki/Dună",
+        "https://primariasacelect.ro/Documente/primarie/urbanism/Evaluare_adecvata_PUG_comuna_SACELE.pdf"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 5,
+      "lexical_ids": {
+        "sense": "863456",
+        "forms": "1308874"
+      }
+    },
+    {
+      "id": "v113-torent",
+      "lemma": "Torent",
+      "node_id": "n_v1_13_torent",
+      "verdict": "accept",
+      "reason": "DOOM3 prescribes masculine torenți; temporary torrent flow, mountain slopes, channels and rainfall are supported, with the stream contrast explicitly limited to a permanent stream.",
+      "sources": [
+        "https://dexonline.ro/definitie/torent/json",
+        "https://ro.wikipedia.org/wiki/Torent",
+        "https://dacoromania.inst-puscariu.ro/articole/2002-2003_4.pdf"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 6,
+      "lexical_ids": {
+        "sense": "834158",
+        "forms": "1260321"
+      }
+    },
+    {
+      "id": "v113-baraj",
+      "lemma": "Baraj",
+      "node_id": "n_v1_13_baraj",
+      "verdict": "accept",
+      "reason": "Hydraulic barriers, impoundment and castor dams are supported; the Vidraru link matches the existing reservoir owner and excludes sports/military senses.",
+      "sources": [
+        "https://dexonline.ro/definitie/baraj/json",
+        "https://ro.wikipedia.org/wiki/Baraj",
+        "https://ro.wikipedia.org/wiki/Lacul_Vidraru"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 6,
+      "lexical_ids": {
+        "sense": "832922",
+        "forms": "1317268"
+      }
+    },
+    {
+      "id": "v113-mlastina",
+      "lemma": "Mlaștină",
+      "node_id": "n_v1_13_mlastina",
+      "verdict": "accept",
+      "reason": "Standing water, Delta wetlands, herbaceous wetland vegetation and lake infilling/marginal water habitats are supported; the vegetation claim remains conditional and does not claim a particular grass species.",
+      "sources": [
+        "https://dexonline.ro/definitie/mlaștină/json",
+        "https://ro.wiktionary.org/wiki/mlaștină",
+        "https://www.worldbank.org/ro/country/romania/brief/romania-danube-delta-integrated-sustainable-development-strategy",
+        "https://www.ibiol.ro/publicatii/imagini/pdf/Fitocenozele%20din%20Romania%20-%20Sanda-Ollerer-Burescu%20-%202008%20-%20CD.pdf",
+        "https://am.gov.md/sites/default/files/document/attachments/MAN-PLAN%20Nistru%20de%20Jos.pdf"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 5,
+      "lexical_ids": {
+        "sense": "890992",
+        "forms": "1294113"
+      }
+    },
+    {
+      "id": "v113-balta",
+      "lemma": "Baltă",
+      "node_id": "n_v1_13_balta",
+      "verdict": "accept",
+      "reason": "The shallow aquatic habitat and feminine paradigm are supported; Delta occurrence, fish and duck feeding are verified without importing the small rain-puddle sense.",
+      "sources": [
+        "https://dexonline.ro/definitie/baltă/json",
+        "https://ro.wikipedia.org/wiki/Baltă",
+        "https://www.worldbank.org/ro/country/romania/brief/romania-danube-delta-integrated-sustainable-development-strategy",
+        "https://www.natura2000corabia-turnu.ro/wp-content/uploads/2019/09/Studiu-inventariere-pasari-merged.pdf"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 5,
+      "lexical_ids": {
+        "sense": "832830",
+        "forms": "1317169"
+      }
+    },
+    {
+      "id": "v113-inundatie",
+      "lemma": "Inundație",
+      "node_id": "n_v1_13_inundatie",
+      "verdict": "accept",
+      "reason": "Actual floodwater covering land and the full feminine paradigm are supported; river/lake overflow, heavy rain and bank overtopping are explicit source claims.",
+      "sources": [
+        "https://dexonline.ro/definitie/inundație/json",
+        "https://ro.wikipedia.org/wiki/Inundație"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 6,
+      "lexical_ids": {
+        "sense": "856111",
+        "forms": "1298626"
+      }
+    },
+    {
+      "id": "v113-avalansa",
+      "lemma": "Avalanșă",
+      "node_id": "n_v1_13_avalansa",
+      "verdict": "accept",
+      "reason": "Moving mountain snow, Carpathian occurrence and winter conditions are supported by the Romanian ministry report and encyclopedia; no prediction or safety advice is added.",
+      "sources": [
+        "https://dexonline.ro/definitie/avalanșă/json",
+        "https://ro.wikipedia.org/wiki/Avalanșă",
+        "https://www.apepaduri.gov.ro/app/webroot/uploads/files/1%20Raport%20privind%20monitorizarea%20situa%C8%9Biilor%20de%20urgen%C8%9B%C4%83%20cu%20ajutorul%20senzorilor%20aeropurta%C8%9Bi.pdf"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 5,
+      "lexical_ids": {
+        "sense": "832214",
+        "forms": "1327438"
+      }
+    },
+    {
+      "id": "v113-cutremur",
+      "lemma": "Cutremur",
+      "node_id": "n_v1_13_cutremur",
+      "verdict": "accept",
+      "reason": "The seismic sense and neuter forms match; the national institute directly supports ground motion, geological structures, Earth physics and energy released as seismic waves.",
+      "sources": [
+        "https://dexonline.ro/definitie/cutremur/json",
+        "https://www.infp.ro/index.php?i=dct",
+        "https://program-nucleu.infp.ro/public/index.php?faza=6&obiectiv=1&opt=nucleu2019&pn=19080102",
+        "https://epos-ro.infp.ro/"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 6,
+      "lexical_ids": {
+        "sense": "855178",
+        "forms": "1316704"
+      }
+    },
+    {
+      "id": "v113-eruptie",
+      "lemma": "Erupție",
+      "node_id": "n_v1_13_eruptie",
+      "verdict": "accept",
+      "reason": "The exact geological DOOM3 headword is selected; volcanic and mud/gas eruptions, crater exit and Călimani formation are supported and kept distinct from skin eruptions.",
+      "sources": [
+        "https://dexonline.ro/definitie/erupție/json",
+        "https://ro.wikipedia.org/wiki/Erupție_vulcanică",
+        "https://cjbuzau.ro/vulcanii-noroiosi-6/",
+        "https://calimani.ro/documente/plan-management-2022-a.pdf",
+        "https://dexonline.ro/definitie/crater/json"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 6,
+      "lexical_ids": {
+        "sense": "866738",
+        "forms": "1304444"
+      }
+    },
+    {
+      "id": "v113-crater",
+      "lemma": "Crater",
+      "node_id": "n_v1_13_crater",
+      "verdict": "accept",
+      "reason": "Volcanic, mud-volcano and lunar-impact examples are separately supported; no claim makes all craters volcanic, and the neuter paradigm matches.",
+      "sources": [
+        "https://dexonline.ro/definitie/crater/json",
+        "https://ro.wikipedia.org/wiki/Luna",
+        "https://ro.wikipedia.org/wiki/Lacul_Sfânta_Ana",
+        "https://cjbuzau.ro/vulcanii-noroiosi-6/"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 6,
+      "lexical_ids": {
+        "sense": "853221",
+        "forms": "1315485"
+      }
+    },
+    {
+      "id": "v113-estuar",
+      "lemma": "Estuar",
+      "node_id": "n_v1_13_estuar",
+      "verdict": "accept",
+      "reason": "River-mouth, sea/ocean and shoreline claims match the geographic sense and neuter forms; the proposal does not confuse an estuary with the Danube delta.",
+      "sources": [
+        "https://dexonline.ro/definitie/estuar/json",
+        "https://ro.wikipedia.org/wiki/Estuar"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 6,
+      "lexical_ids": {
+        "sense": "866942",
+        "forms": "1304554"
+      }
+    },
+    {
+      "id": "v113-stramtoare",
+      "lemma": "Strâmtoare",
+      "node_id": "n_v1_13_stramtoare",
+      "verdict": "accept",
+      "reason": "The geographic waterway sense and forms are supported; connecting seas/oceans and separating an island from adjacent land are explicit source-backed examples.",
+      "sources": [
+        "https://dexonline.ro/definitie/strâmtoare/json",
+        "https://ro.wikipedia.org/wiki/Strâmtoare",
+        "https://ro.wikipedia.org/wiki/Strâmtoarea_Messina"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 6,
+      "lexical_ids": {
+        "sense": "847425",
+        "forms": "1278499"
+      }
+    },
+    {
+      "id": "v113-canion",
+      "lemma": "Canion",
+      "node_id": "n_v1_13_canion",
+      "verdict": "accept",
+      "reason": "A narrow deep river-eroded valley and the neuter paradigm are supported; the four claims name actual geomorphic relationships without equating every Romanian gorge with a canyon.",
+      "sources": [
+        "https://dexonline.ro/definitie/canion/json",
+        "https://ro.wiktionary.org/wiki/canion",
+        "https://pnscc.ro/_res/media/turism/p5-educatie/brosuri/brosura-traseu-tematic-carst.pdf"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 6,
+      "lexical_ids": {
+        "sense": "840872",
+        "forms": "1309464"
+      }
+    },
+    {
+      "id": "v113-versant",
+      "lemma": "Versant",
+      "node_id": "n_v1_13_versant",
+      "verdict": "accept",
+      "reason": "Mountain/hill sides and valley margins match the sources; DOOM3 masculine versanți is used, and the Versant→Pantă classification is emitted once.",
+      "sources": [
+        "https://dexonline.ro/definitie/versant/json",
+        "https://ro.wikipedia.org/wiki/Versant"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 6,
+      "lexical_ids": {
+        "sense": "825970",
+        "forms": "1263844"
+      }
+    },
+    {
+      "id": "v113-varf",
+      "lemma": "Vârf",
+      "node_id": "n_v2geo_varf",
+      "verdict": "accept",
+      "reason": "The mountain-summit sense substitutes for existing n_v2geo_varf; all six missing neuter input keys match the normative and Wikționar paradigms without creating a duplicate node.",
+      "sources": [
+        "https://dexonline.ro/definitie/vârf/json",
+        "https://ro.wiktionary.org/wiki/vârf"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 6,
+      "lexical_ids": {
+        "sense": "825629",
+        "forms": "1263607"
+      }
+    },
+    {
+      "id": "v113-panta",
+      "lemma": "Pantă",
+      "node_id": "n_v1_13_panta",
+      "verdict": "accept",
+      "reason": "The physical terrain slope and feminine forms are supported; the incoming Versant→Pantă edge is reused once, while the remaining mountain/hill/road associations are truthful.",
+      "sources": [
+        "https://dexonline.ro/definitie/pantă/json",
+        "https://ro.wiktionary.org/wiki/pantă",
+        "https://ro.wikipedia.org/wiki/Versant"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 5,
+      "lexical_ids": {
+        "sense": "861224",
+        "forms": "1280257"
+      }
+    },
+    {
+      "id": "v113-namol",
+      "lemma": "Nămol",
+      "node_id": "n_v1_13_namol",
+      "verdict": "accept",
+      "reason": "Soft water-bearing sediment, clay, shore deposition and the distinct Techirghiol/mud-volcano examples match the existing owners; no therapeutic claim is imported.",
+      "sources": [
+        "https://dexonline.ro/definitie/nămol/json",
+        "https://ro.wikipedia.org/wiki/Nămol",
+        "https://ro.wikipedia.org/wiki/Lacul_Techirghiol",
+        "https://cjbuzau.ro/vulcanii-noroiosi-6/"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 6,
+      "lexical_ids": {
+        "sense": "881899",
+        "forms": "1288335"
+      }
+    },
+    {
+      "id": "v113-gazon",
+      "lemma": "Gazon",
+      "node_id": "n_v1_13_gazon",
+      "verdict": "accept",
+      "reason": "Maintained grass cover and its seed/root/garden relationships are supported; only the three singular keys licensed for this mass-noun sense are retained.",
+      "sources": [
+        "https://dexonline.ro/definitie/gazon/json",
+        "https://ro.wikipedia.org/wiki/Gazon",
+        "https://www.gardena.com/ro/c/descoperi/gradinarit/revista-pentru-gradinarit/numar-special-pentru-gazon-partea-1",
+        "https://www.gardena.com/ro/c/descoperi/gradinarit/revista-pentru-gradinarit/numar-special-pentru-gazon-partea-2"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 3,
+      "lexical_ids": {
+        "sense": "876202",
+        "forms": "1318944"
+      }
+    },
+    {
+      "id": "v113-ghetar",
+      "lemma": "Ghețar",
+      "node_id": "n_v1_13_ghetar",
+      "verdict": "accept",
+      "reason": "Natural ice-mass masculine forms are supported; moving alpine ice is kept distinct from persistent cave ice, and Bâlea/Retezat/Scărișoara claims match the Romanian geographic sources.",
+      "sources": [
+        "https://dexonline.ro/definitie/ghețar/json",
+        "https://ro.wikipedia.org/wiki/Ghețar",
+        "https://ro.wikipedia.org/wiki/Lacul_Bâlea",
+        "https://ro.wikipedia.org/wiki/Peștera_Scărișoara",
+        "https://retezat.ro/noutati/38/22-martie-ziua-internationala-a-apei"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 6,
+      "lexical_ids": {
+        "sense": "877792",
+        "forms": "1324834"
+      }
+    },
+    {
+      "id": "v113-viscol",
+      "lemma": "Viscol",
+      "node_id": "n_v1_13_viscol",
+      "verdict": "accept",
+      "reason": "Strong wind transporting snow, winter conditions and the snowstorm classification are supported; the description does not require fresh falling snow in every case.",
+      "sources": [
+        "https://dexonline.ro/definitie/viscol/json",
+        "https://ro.wikipedia.org/wiki/Viscol",
+        "https://www.meteoromania.ro/legenda-simboluri/"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 6,
+      "lexical_ids": {
+        "sense": "826632",
+        "forms": "1264279"
+      }
+    },
+    {
+      "id": "v113-vijelie",
+      "lemma": "Vijelie",
+      "node_id": "n_v1_13_vijelie",
+      "verdict": "accept",
+      "reason": "The gust event, feminine paradigm and conditional storm/rain/lightning links are supported by the ANM study; no rule requires lightning or rain in every vijelie.",
+      "sources": [
+        "https://dexonline.ro/definitie/vijelie/json",
+        "https://ro.wiktionary.org/wiki/vijelie",
+        "https://www.meteoromania.ro/wp-content/uploads/revista_stiintifica/revistastiintifica2018.pdf"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 6,
+      "lexical_ids": {
+        "sense": "826248",
+        "forms": "1264118"
+      }
+    },
+    {
+      "id": "v113-ciclon",
+      "lemma": "Ciclon",
+      "node_id": "n_v1_13_ciclon",
+      "verdict": "accept",
+      "reason": "The low-pressure atmospheric circulation and neuter paradigm are supported; wind, storms, frontal cloud systems and rain are kept conditional where appropriate.",
+      "sources": [
+        "https://dexonline.ro/definitie/ciclon/json",
+        "https://ro.wikipedia.org/wiki/Ciclon",
+        "https://www.meteoromania.ro/wp-content/uploads/revista_stiintifica/revistastiintifica2014.pdf"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 6,
+      "lexical_ids": {
+        "sense": "845883",
+        "forms": "1311591"
+      }
+    },
+    {
+      "id": "v113-tornada",
+      "lemma": "Tornadă",
+      "node_id": "n_v1_13_tornada",
+      "verdict": "accept",
+      "reason": "The rotating air column contacting ground and a storm cloud is supported by the geographic article; the metaphorical and literary homographs are excluded.",
+      "sources": [
+        "https://dexonline.ro/definitie/tornadă/json",
+        "https://ro.wikipedia.org/wiki/Tornadă",
+        "https://apgr.ro/public/storage/pdfs/rGKTFN61uDSXqz2PEZTkIcgEbKO2VV8uXc2F6mbQ.pdf"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 5,
+      "lexical_ids": {
+        "sense": "834164",
+        "forms": "1269337"
+      }
+    },
+    {
+      "id": "v113-uragan",
+      "lemma": "Uragan",
+      "node_id": "n_v1_13_uragan",
+      "verdict": "accept",
+      "reason": "The selected intense tropical-cyclone sense, neuter forms and five claims are supported; no unsupported numerical intensity threshold is added.",
+      "sources": [
+        "https://dexonline.ro/definitie/uragan/json",
+        "https://ro.wikipedia.org/wiki/Ciclon_tropical"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 6,
+      "lexical_ids": {
+        "sense": "828610",
+        "forms": "1313110"
+      }
+    },
+    {
+      "id": "v113-polei",
+      "lemma": "Polei",
+      "node_id": "n_v1_13_polei",
+      "verdict": "accept",
+      "reason": "Natural surface ice is the selected noun in both dictionaries despite differing homograph numbers; water/rain/freezing/road claims and normative forms are supported.",
+      "sources": [
+        "https://dexonline.ro/definitie/polei/json",
+        "https://ro.wikipedia.org/wiki/Polei"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 6,
+      "lexical_ids": {
+        "sense": "874497",
+        "forms": "1283601"
+      }
+    },
+    {
+      "id": "v113-seceta",
+      "lemma": "Secetă",
+      "node_id": "n_v1_13_seceta",
+      "verdict": "modify",
+      "reason": "Sense, forms and all four relationships are sound, but the grass/garden evidence URL is 404; replace that citation with the current primary Gardena passage that explicitly supports insufficient-rain damage.",
+      "sources": [
+        "https://dexonline.ro/definitie/secetă/json",
+        "https://ro.wikipedia.org/wiki/Secetă",
+        "https://www.meteoromania.ro/anm/images/clima/Schimbariclimatice2014.pdf",
+        "https://www.gardena.com/ro/c/descoperi/produse/irigarea/sistem-de-sprinklere"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 5,
+      "lexical_ids": {
+        "sense": "840766",
+        "forms": "1273874"
+      },
+      "required_changes": [
+        {
+          "action": "replace_evidence_url",
+          "scope": "ITEM_EVIDENCE item v113-seceta sources and both claims targeting n_v24_nature_plant_parts_iarba / n_v24_home_outdoor_gradina; mirror the correction in the pool research evidence",
+          "old": "https://www.gardena.com/ro/c/descoperi/gradinarit/revista-pentru-gradinarit/cinci-trucuri-usoare-pentru-un-gazon-frumos",
+          "new": "https://www.gardena.com/ro/c/descoperi/produse/irigarea/sistem-de-sprinklere",
+          "paraphrase": "Gazonul se deteriorează când ploaia este insuficientă, mai ales în zilele fierbinți și uscate; pagina descrie irigarea gazonului din grădini.",
+          "preserve": "All words, forms, node fields, edge endpoints, predicates and captions remain unchanged."
+        }
+      ]
+    },
+    {
+      "id": "v113-umbra",
+      "lemma": "Umbră",
+      "node_id": "n_v1_13_umbra",
+      "verdict": "accept",
+      "reason": "The physical light-blocking sense and three available keys are supported; foreign-owned umbre and umbrele remain excluded, and tree/umbrella shade claims are conditional.",
+      "sources": [
+        "https://dexonline.ro/definitie/umbră/json",
+        "https://ro.wikipedia.org/wiki/Umbră",
+        "https://www.europafm.ro/de-ce-este-mai-racoare-sub-un-copac-decat-sub-o-umbrela/"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 3,
+      "lexical_ids": {
+        "sense": "19992",
+        "forms": "1266530"
+      }
+    },
+    {
+      "id": "v113-racoare",
+      "lemma": "Răcoare",
+      "node_id": "n_v1_13_racoare",
+      "verdict": "accept",
+      "reason": "The moderate physical coolness sense uses only singular keys; its four-neighbor floor depends on accepted Umbră and incoming Adiere, with no energy-transfer Căldură antonym edge.",
+      "sources": [
+        "https://dexonline.ro/definitie/răcoare/json",
+        "https://ro.wiktionary.org/wiki/răcoare",
+        "https://dexonline.ro/definitie/umbră/json"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 3,
+      "lexical_ids": {
+        "sense": "852482",
+        "forms": "1274855"
+      }
+    },
+    {
+      "id": "v113-adiere",
+      "lemma": "Adiere",
+      "node_id": "n_v1_13_adiere",
+      "verdict": "accept",
+      "reason": "Current light-wind sense and forms are supported; the school monitoring guide verifies leaf movement and the manufacturer supports a felt cooling sensation without claiming reduced air temperature.",
+      "sources": [
+        "https://dexonline.ro/definitie/adiere/json",
+        "https://ro.wiktionary.org/wiki/adiere",
+        "https://saptamanaverde.edu.ro/storage/arhiva/biodiversitate-ghid-standard-de-monitorizare-pasari-2014.pdf",
+        "https://ro.trotec.com/shop/ventilator-de-masa-tve-8.html"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 6,
+      "lexical_ids": {
+        "sense": "822992",
+        "forms": "1321015"
+      }
+    },
+    {
+      "id": "v113-zavoi",
+      "lemma": "Zăvoi",
+      "node_id": "n_v1_13_zavoi",
+      "verdict": "accept",
+      "reason": "The waterside woodland sense and neuter forms are supported; sources explicitly support forest, river/bank and willow relationships, distinct from the landform sense of Luncă.",
+      "sources": [
+        "https://dexonline.ro/definitie/zăvoi/json",
+        "https://ro.wiktionary.org/wiki/zăvoi",
+        "https://dexonline.ro/definitie/luncă/json"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 6,
+      "lexical_ids": {
+        "sense": "822368",
+        "forms": "1315028"
+      }
+    },
+    {
+      "id": "v113-lunca",
+      "lemma": "Luncă",
+      "node_id": "n_v1_13_lunca",
+      "verdict": "accept",
+      "reason": "The alluvial landform sense, forms and river/bank/plain/flood relationships are supported; the woodland sense remains separate from Zăvoi.",
+      "sources": [
+        "https://dexonline.ro/definitie/luncă/json",
+        "https://ro.wikipedia.org/wiki/Luncă_(formă_de_relief)"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 5,
+      "lexical_ids": {
+        "sense": "865465",
+        "forms": "1327036"
+      }
+    },
+    {
+      "id": "v113-coliba",
+      "lemma": "Colibă",
+      "node_id": "n_v1_13_coliba",
+      "verdict": "accept",
+      "reason": "Simple temporary wooden shelters with coverings and the specific rural shelter comparison are supported; no generalization about current Romanian villages is made.",
+      "sources": [
+        "https://dexonline.ro/definitie/colibă/json",
+        "https://ro.wiktionary.org/wiki/colibă",
+        "https://www.revistamemoria.ro/wp-content/uploads/2021/06/7mihai-enescu-pelicanu-1.pdf"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 5,
+      "lexical_ids": {
+        "sense": "848945",
+        "forms": "1312799"
+      }
+    },
+    {
+      "id": "v113-papura",
+      "lemma": "Papură",
+      "node_id": "n_v1_13_papura",
+      "verdict": "modify",
+      "reason": "Typha identity, forms, stem/leaves and Delta occurrence are supported; the textbook root-mesh passage describes trees, so narrow the root-edge caption and cite the university Typha anatomy figure.",
+      "sources": [
+        "https://dexonline.ro/definitie/papură/json",
+        "https://ro.wiktionary.org/wiki/papură",
+        "https://manuale2022.edituracorint.ro/biologie-v.pdf",
+        "https://biblioteca-digitala.ro/reviste/carte/universitatea-bucuresti/Cercasov_Popa_Compusi-naturali-actiune-terapeutica_curs-vol-I_2006.pdf"
+      ],
+      "checked_fields": [
+        "exact lemma and register",
+        "DOOM3 paradigm and retained input keys",
+        "description",
+        "every directed claim and existing endpoint sense"
+      ],
+      "qualified_input_keys": 5,
+      "lexical_ids": {
+        "sense": "861491",
+        "forms": "1280352"
+      },
+      "required_changes": [
+        {
+          "action": "delete_caption_clause",
+          "edge": {
+            "src": "n_v1_13_papura",
+            "dst": "n_v24_nature_plant_parts_radacina",
+            "relation": "related_to"
+          },
+          "field": "label_ro",
+          "old": "are rădăcini de fixare în solul mâlos",
+          "new": "are rădăcini",
+          "delete_exact": " de fixare în solul mâlos",
+          "scope": "The single EDGES record, its ITEM_EVIDENCE claim, and mirrored qualified pool claim."
+        },
+        {
+          "action": "correct_root_evidence",
+          "scope": "The Papură→Rădăcină claim only; add this primary source to the item sources, retain the Corint textbook for Delta occurrence and stem context",
+          "new_url": "https://biblioteca-digitala.ro/reviste/carte/universitatea-bucuresti/Cercasov_Popa_Compusi-naturali-actiune-terapeutica_curs-vol-I_2006.pdf",
+          "location": "Printed p.219, fig.29: Typha latifolia root/rhizome anatomy; indexed primary caption read",
+          "paraphrase": "Figura botanică pentru Typha latifolia identifică rădăcinile și rizomii plantei.",
+          "remove_incorrect_attribution": "The Corint p.60 root-mesh sentence belongs to shoreline arin/salcie/plop, not papură; omit that root assertion from its source paraphrase.",
+          "preserve": "No node, input form or edge is added or removed; the four truthful Papură neighbors remain."
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "accept": 41,
+    "modify": 2
+  },
+  "after_exact_modifications": {
+    "qualified_items": 43,
+    "new_nodes": 41,
+    "unique_edges": 167,
+    "alias_keys": 188,
+    "new_normalized_label_and_alias_keys": 229,
+    "item_drops": 0,
+    "edge_drops": 0,
+    "new_claims_or_links": 0,
+    "note": "Both modifications keep the predeclared topology. Apply exact verdict changes without another whole-batch review."
+  },
+  "held_items_preserved": [
+    "v113-gheata",
+    "v113-ger",
+    "v113-trestie",
+    "v113-lichen",
+    "v113-rasina",
+    "v113-cetina"
+  ]
+}
