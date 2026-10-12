@@ -3,7 +3,7 @@
   "theme": "weather-and-landscape",
   "baseline_commit": "a27477dbc52a3279223bcaa202789eecbbeb1825",
   "procedure_rev": "17b97a2",
-  "scope": "Step1 ideas only; no web calls, researched/accepted items or content installation.",
+  "scope": "Step2 research in progress; no accepted or installed items. Player-visible delta remains zero.",
   "screen": {
     "bundle_sha256": "8ac7c271ec37596fd8da72e0f0f2eeeeef3cfd4eb62fa496a9feff110c0f9825",
     "lookup_fields": [
@@ -25,13 +25,15 @@
     "foreign_or_blocked_forms": 2,
     "deferred_matches": 0,
     "reviewed_unresolved_matches": 0,
-    "web_calls": 0
+    "web_calls": 0,
+    "additional_normative_keys_screened": 3,
+    "additional_normative_screen": "Torent masculine plural keys were screened against all original live-owner, world, proxy, ambiguity and historical pool fields before qualification."
   },
   "records": [
     {
       "id": "v113-furnica",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Furnică",
       "label_ro": "Furnică",
@@ -42,7 +44,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "Pending reviews: adds a source-checked everyday or school concept with its full noncolliding inputs and truthful links for Cald sau Rece.",
       "planned_forms": [
         "furnică",
         "furnici",
@@ -51,7 +53,7 @@
         "furnicilor"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm qualified for the selected sense; regular forms included once per normalization key. Independent review is pending.",
       "fold_equivalent_hypotheses_omitted": 1,
       "identity_checks": {
         "forms": [
@@ -311,8 +313,35 @@
         }
       ],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "researched: exact DEX/DOOM3 noun and full noncolliding paradigm; four predeclared claims now qualified, with the Sămânță reopening supported by the Romanian study. Independent reviews still required.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/furnică/json",
+          "role": "sense",
+          "authority": "DEX '09",
+          "definition_id": "875153",
+          "headword": "furnică",
+          "paraphrase": "Sensul comun este insecta socială din familia formicidelor; verbul furnica și variantele rare sunt excluse."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/furnică/json",
+          "role": "forms",
+          "authority": "DOOM 3",
+          "definition_id": "1302941",
+          "headword": "furnică",
+          "paraphrase": "Normează substantivul feminin, pluralul furnici și genitivul-dativ articulat furnicii; celelalte forme urmează paradigma regulată."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Furnică",
+          "role": "second_source",
+          "paraphrase": "Coroborează clasificarea în insecte și organizarea socială în colonii."
+        },
+        {
+          "url": "https://ibn.idsi.md/sites/default/files/imag_file/201-208_3.pdf",
+          "role": "link_evidence",
+          "paraphrase": "Studiul în română descrie furnici de pădure cu cuiburi în pământ și specii care transportă sau răspândesc semințe."
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v4sti_insecta",
@@ -320,8 +349,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "este o insectă",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "Furnica este o insectă.",
+          "relation": "is_a",
+          "label_ro": "este o insectă",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Furnică"
         },
         {
           "node_id": "n_v24_nature_world_pamant",
@@ -329,8 +362,13 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "unele furnici își fac cuiburi în pământ",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "Unele furnici își construiesc cuiburile în pământ.",
+          "relation": "related_to",
+          "label_ro": "unele furnici cuibăresc în pământ",
+          "evidence_url": "https://ibn.idsi.md/sites/default/files/imag_file/201-208_3.pdf",
+          "location": "p.203; p.206–207"
         },
         {
           "node_id": "n_v4geo_padure",
@@ -338,8 +376,13 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "unele furnici trăiesc și cuibăresc în păduri",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "Unele specii de furnici trăiesc în păduri.",
+          "relation": "related_to",
+          "label_ro": "unele furnici trăiesc în păduri",
+          "evidence_url": "https://ibn.idsi.md/sites/default/files/imag_file/201-208_3.pdf",
+          "location": "p.203–204; p.206"
         },
         {
           "node_id": "n_v1_12_samanta",
@@ -347,12 +390,17 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "unele furnici colectează ori răspândesc semințe, de verificat specific",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "Unele furnici transportă semințe și contribuie la răspândirea lor.",
+          "relation": "related_to",
+          "label_ro": "unele furnici răspândesc semințe",
+          "evidence_url": "https://ibn.idsi.md/sites/default/files/imag_file/201-208_3.pdf",
+          "location": "p.207, Temnothorax crassispinus și Tetramorium caespitum"
         }
       ],
-      "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "research_ready": true,
+      "next_action": "Include in the single whole-batch module and both independent web reviews at step3.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "reopening_basis": "Sămânță was added on V1.12 main; earlier three verified links and plant-food hold remain constraints until a specific seed-collection/dispersal claim is sourced.",
       "planned_graph_counts": {
@@ -360,12 +408,66 @@
         "old_main": 4,
         "same_category": 3,
         "batch": 0
-      }
+      },
+      "qualified_graph_counts": {
+        "distinct_neighbors": 4,
+        "old_main": 4,
+        "same_category": 3,
+        "batch": 0
+      },
+      "qualified_forms": [
+        "furnică",
+        "furnici",
+        "furnicile",
+        "furnicii",
+        "furnicilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 12604,
+        "positive_support": true,
+        "hits": [
+          {
+            "rank": 12604,
+            "form": "furnici",
+            "count": 1422
+          },
+          {
+            "rank": 16794,
+            "form": "furnicile",
+            "count": 958
+          },
+          {
+            "rank": 23905,
+            "form": "furnică",
+            "count": 573
+          },
+          {
+            "rank": 39600,
+            "form": "furnica",
+            "count": 257
+          }
+        ],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Mică insectă socială din familia Formicidae, care trăiește în colonii.",
+      "register": "current everyday noun",
+      "research_budget": {
+        "elapsed_seconds": 128,
+        "research_completion_observed_utc": "2026-10-12 10:26:28",
+        "note": "Research completed before helper/receipt bookkeeping; no further Furnică source requests afterwards."
+      },
+      "research_excluded_forms": [
+        {
+          "form": "furnice",
+          "reason": "variantă rară din DEX, nealeasă de paradigma DOOM3"
+        }
+      ]
     },
     {
       "id": "v113-mamaruta",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "regional_input_family",
       "lemma": "Mămăruță",
       "label_ro": "Buburuză",
@@ -376,7 +478,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "Pending reviews: recognizes a complete regional input family on the existing Buburuză slot.",
       "planned_forms": [
         "mămăruță",
         "mămăruțe",
@@ -385,7 +487,7 @@
         "mămăruțelor"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm qualified for the selected sense; regular forms included once per normalization key. Independent review is pending.",
       "fold_equivalent_hypotheses_omitted": 1,
       "identity_checks": {
         "forms": [
@@ -539,18 +641,61 @@
         }
       ],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "researched: exact DEX/DOOM3 lemma, selected sense, complete noncolliding input paradigm and source-supported predeclared claims; independent reviews still required.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/mămăruță/json",
+          "role": "sense",
+          "authority": "DEX '09",
+          "definition_id": "886640",
+          "headword": "mămăruță",
+          "paraphrase": "Formă regională pentru buburuza cu șapte puncte."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/mămăruță/json",
+          "role": "forms",
+          "authority": "DOOM 3",
+          "definition_id": "1291674",
+          "headword": "mămăruță",
+          "paraphrase": "Paradigma normativă a substantivului, cu pluralul și genitivul-dativ articulat; formele regulate sunt completate fără dubluri de normalizare."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/mămăruță",
+          "role": "second_source",
+          "paraphrase": "Confirmă uzul regional pentru buburuză și declinarea feminină mămăruță/mămăruțe, mămăruței/mămăruțelor."
+        }
+      ],
       "link_targets": [],
-      "research_ready": false,
-      "next_action": "Research exact-headword morphology, selected-sense substitution and register only; no new node or links.",
+      "research_ready": true,
+      "next_action": "Include in the single whole-batch module and both independent web reviews at step3.",
       "research_plan": "Input-only family: verify exact DOOM3 lemma, full noncolliding paradigm and substitution for existing owner; regional inputs are not reported as synonyms.",
-      "input_register_hypothesis": "regional input only, never a verified synonym claim"
+      "input_register_hypothesis": "regional input only, never a verified synonym claim",
+      "qualified_forms": [
+        "mămăruță",
+        "mămăruțe",
+        "mămăruțele",
+        "mămăruței",
+        "mămăruțelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": null,
+        "positive_support": false,
+        "hits": [],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Formă regională pentru buburuza cu șapte puncte.",
+      "register": "regional input; never reported as a verified synonym",
+      "research_budget": {
+        "elapsed_seconds": 130,
+        "research_completion_observed_utc": "2026-10-12 10:32:03",
+        "note": "Source qualification complete before compaction; subsequent receipt bookkeeping makes no further source requests."
+      }
     },
     {
       "id": "v113-fulg",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Fulg",
       "label_ro": "Fulg",
@@ -561,7 +706,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "Pending reviews: adds a source-checked everyday or school concept with its full noncolliding inputs and truthful links for Cald sau Rece.",
       "planned_forms": [
         "fulg",
         "fulgul",
@@ -571,7 +716,7 @@
         "fulgilor"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm qualified for the selected sense; regular forms included once per normalization key. Independent review is pending.",
       "fold_equivalent_hypotheses_omitted": 0,
       "identity_checks": {
         "forms": [
@@ -675,8 +820,36 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "researched: exact DEX/DOOM3 lemma, selected sense, complete noncolliding input paradigm and source-supported predeclared claims; independent reviews still required.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/fulg/json",
+          "role": "sense",
+          "authority": "DEX '09",
+          "definition_id": "874880",
+          "headword": "fulg",
+          "paraphrase": "Cristal de gheață sau grup de cristale care cade din nori și alcătuiește zăpada."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/fulg/json",
+          "role": "forms",
+          "authority": "DOOM 3",
+          "definition_id": "1302784",
+          "headword": "fulg",
+          "paraphrase": "Paradigma normativă a substantivului, cu pluralul și genitivul-dativ articulat; formele regulate sunt completate fără dubluri de normalizare."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Zăpadă",
+          "role": "second_source",
+          "paraphrase": "Zăpada este alcătuită din fulgi formați în atmosferă la temperaturi scăzute."
+        },
+        {
+          "url": "https://ccd.isjtr.ro/wp-content/uploads/2023/09/Nr_34_Caleidoscop_didactic.pdf",
+          "role": "link_evidence",
+          "location": "PDF p.86, Informații despre fulgii de zăpadă",
+          "paraphrase": "Materialul didactic explică formarea cristalelor în nori, influența temperaturii și posibilitatea ca un fulg să reunească mai multe cristale."
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v24_weather_precipitation_zapada",
@@ -684,8 +857,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "componentă a zăpezii",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "alcătuiește zăpada",
+          "relation": "part_of",
+          "label_ro": "alcătuiește zăpada",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Zăpadă"
         },
         {
           "node_id": "n_v24_weather_air_nor",
@@ -693,8 +870,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "se formează în nori",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "se formează în nori",
+          "relation": "related_to",
+          "label_ro": "se formează în nori",
+          "evidence_url": "https://ccd.isjtr.ro/wp-content/uploads/2023/09/Nr_34_Caleidoscop_didactic.pdf"
         },
         {
           "node_id": "n_v1_8_iarna",
@@ -702,8 +883,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "ninsoare caracteristică iernii românești",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "este legat de ninsoarea de iarnă",
+          "relation": "related_to",
+          "label_ro": "este legat de ninsoarea de iarnă",
+          "evidence_url": "https://dexonline.ro/definitie/fulg/json"
         },
         {
           "node_id": "n_v4sti_temperatura",
@@ -711,24 +896,72 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "formarea și topirea depind de temperatură",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "formarea sa depinde de temperatură",
+          "relation": "related_to",
+          "label_ro": "formarea sa depinde de temperatură",
+          "evidence_url": "https://ccd.isjtr.ro/wp-content/uploads/2023/09/Nr_34_Caleidoscop_didactic.pdf"
         }
       ],
-      "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "research_ready": true,
+      "next_action": "Include in the single whole-batch module and both independent web reviews at step3.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "planned_graph_counts": {
         "distinct_neighbors": 4,
         "old_main": 4,
         "same_category": 4,
         "batch": 0
+      },
+      "qualified_graph_counts": {
+        "distinct_neighbors": 4,
+        "old_main": 4,
+        "same_category": 4,
+        "batch": 0
+      },
+      "qualified_forms": [
+        "fulg",
+        "fulgul",
+        "fulgi",
+        "fulgii",
+        "fulgului",
+        "fulgilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 14663,
+        "positive_support": true,
+        "hits": [
+          {
+            "rank": 14663,
+            "form": "fulgi",
+            "count": 1157
+          },
+          {
+            "rank": 25245,
+            "form": "fulg",
+            "count": 527
+          },
+          {
+            "rank": 26880,
+            "form": "fulgii",
+            "count": 480
+          }
+        ],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Cristal de gheață sau grup de cristale care cade din nori și alcătuiește zăpada.",
+      "register": "current snow sense; feather, steel and food senses excluded",
+      "research_budget": {
+        "elapsed_seconds": 130,
+        "research_completion_observed_utc": "2026-10-12 10:32:03",
+        "note": "Source qualification complete before compaction; subsequent receipt bookkeeping makes no further source requests."
       }
     },
     {
       "id": "v113-chiciura",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Chiciură",
       "label_ro": "Chiciură",
@@ -739,7 +972,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "Pending reviews: adds a source-checked everyday or school concept with its full noncolliding inputs and truthful links for Cald sau Rece.",
       "planned_forms": [
         "chiciură",
         "chiciuri",
@@ -748,7 +981,7 @@
         "chiciurilor"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm qualified for the selected sense; regular forms included once per normalization key. Independent review is pending.",
       "fold_equivalent_hypotheses_omitted": 1,
       "identity_checks": {
         "forms": [
@@ -836,8 +1069,30 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "researched: exact DEX/DOOM3 lemma, selected sense, complete noncolliding input paradigm and source-supported predeclared claims; independent reviews still required.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/chiciură/json",
+          "role": "sense",
+          "authority": "DEX '09",
+          "definition_id": "845326",
+          "headword": "chiciură",
+          "paraphrase": "Depunere albă de cristale de gheață pe ramuri și alte obiecte, formată în condiții reci."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/chiciură/json",
+          "role": "forms",
+          "authority": "DOOM 3",
+          "definition_id": "1311313",
+          "headword": "chiciură",
+          "paraphrase": "Paradigma normativă a substantivului, cu pluralul și genitivul-dativ articulat; formele regulate sunt completate fără dubluri de normalizare."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Chiciură",
+          "role": "second_source",
+          "paraphrase": "Descrie depunerile pe ramuri la temperaturi negative, inclusiv chiciura granulară produsă prin înghețarea picăturilor de ceață."
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v24_weather_air_ceata",
@@ -845,8 +1100,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "poate proveni din ceață suprarăcită",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate proveni din înghețarea picăturilor de ceață",
+          "relation": "related_to",
+          "label_ro": "poate proveni din înghețarea picăturilor de ceață",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Chiciură"
         },
         {
           "node_id": "n_v4sti_temperatura",
@@ -854,8 +1113,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "necesită condiții de îngheț",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "se formează în condiții de temperatură negativă",
+          "relation": "related_to",
+          "label_ro": "se formează în condiții de temperatură negativă",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Chiciură"
         },
         {
           "node_id": "n_v1_8_iarna",
@@ -863,8 +1126,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "fenomen întâlnit iarna",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "se întâlnește iarna",
+          "relation": "related_to",
+          "label_ro": "se întâlnește iarna",
+          "evidence_url": "https://dexonline.ro/definitie/chiciură/json"
         },
         {
           "node_id": "n_v4sti_copac",
@@ -872,24 +1139,55 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "se poate depune pe ramurile copacilor",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "se depune pe crengile copacilor",
+          "relation": "related_to",
+          "label_ro": "se depune pe crengile copacilor",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Chiciură"
         }
       ],
-      "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "research_ready": true,
+      "next_action": "Include in the single whole-batch module and both independent web reviews at step3.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "planned_graph_counts": {
         "distinct_neighbors": 4,
         "old_main": 4,
         "same_category": 4,
         "batch": 0
+      },
+      "qualified_graph_counts": {
+        "distinct_neighbors": 4,
+        "old_main": 4,
+        "same_category": 4,
+        "batch": 0
+      },
+      "qualified_forms": [
+        "chiciură",
+        "chiciuri",
+        "chiciurile",
+        "chiciurii",
+        "chiciurilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": null,
+        "positive_support": false,
+        "hits": [],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Depunere albă de cristale de gheață pe ramuri și alte obiecte, formată în condiții reci.",
+      "register": "current meteorological sense; regional corn-cob homograph excluded",
+      "research_budget": {
+        "elapsed_seconds": 130,
+        "research_completion_observed_utc": "2026-10-12 10:32:03",
+        "note": "Source qualification complete before compaction; subsequent receipt bookkeeping makes no further source requests."
       }
     },
     {
       "id": "v113-bruma",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Brumă",
       "label_ro": "Brumă",
@@ -900,7 +1198,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "Pending reviews: adds a source-checked everyday or school concept with its full noncolliding inputs and truthful links for Cald sau Rece.",
       "planned_forms": [
         "brumă",
         "brume",
@@ -909,7 +1207,7 @@
         "brumelor"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm qualified for the selected sense; regular forms included once per normalization key. Independent review is pending.",
       "fold_equivalent_hypotheses_omitted": 1,
       "identity_checks": {
         "forms": [
@@ -1003,8 +1301,41 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "researched: exact DEX/DOOM3 lemma, selected sense, complete noncolliding input paradigm and source-supported predeclared claims; independent reviews still required.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/brumă/json",
+          "role": "sense",
+          "authority": "DEX '09",
+          "definition_id": "837657",
+          "headword": "brumă",
+          "paraphrase": "Depunere fină de cristale de gheață pe plante și alte suprafețe răcite în timpul nopții."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/brumă/json",
+          "role": "forms",
+          "authority": "DOOM 3",
+          "definition_id": "1319639",
+          "headword": "brumă",
+          "paraphrase": "Paradigma normativă a substantivului, cu pluralul și genitivul-dativ articulat; formele regulate sunt completate fără dubluri de normalizare."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Brumă",
+          "role": "second_source",
+          "paraphrase": "Coroborează depunerea pe suprafețe reci și ilustrează frunze acoperite de brumă; mecanismul simplificat din introducere nu este preluat."
+        },
+        {
+          "url": "https://catalog.manualedigitaleart.ro/art-fizica8/v1/art-fizica8.pdf",
+          "role": "link_evidence",
+          "location": "p.26; indexed primary manual passage read, direct open unavailable",
+          "paraphrase": "Exemplul din manualul de fizică arată cristale de gheață pe firele de iarbă după răcirea din timpul nopții."
+        },
+        {
+          "url": "https://www.replicahd.ro/temperaturile-scazute-au-transformat-parangul-intr-un-regat-de-gheata/",
+          "role": "link_evidence",
+          "paraphrase": "Relatarea din octombrie 2023 observă brumă pe iarbă și frunze în condiții reci de toamnă."
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v1_9_toamna",
@@ -1012,8 +1343,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "apare în nopți reci de toamnă",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "se poate forma în nopți reci de toamnă",
+          "relation": "related_to",
+          "label_ro": "se poate forma în nopți reci de toamnă",
+          "evidence_url": "https://www.replicahd.ro/temperaturile-scazute-au-transformat-parangul-intr-un-regat-de-gheata/"
         },
         {
           "node_id": "n_v4sti_temperatura",
@@ -1021,8 +1356,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "formarea depinde de temperatura suprafeței",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "se formează pe suprafețe răcite sub îngheț",
+          "relation": "related_to",
+          "label_ro": "se formează pe suprafețe răcite sub îngheț",
+          "evidence_url": "https://catalog.manualedigitaleart.ro/art-fizica8/v1/art-fizica8.pdf"
         },
         {
           "node_id": "n_v24_nature_plant_parts_iarba",
@@ -1030,8 +1369,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "se poate depune pe iarbă",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "se depune pe firele de iarbă",
+          "relation": "related_to",
+          "label_ro": "se depune pe firele de iarbă",
+          "evidence_url": "https://catalog.manualedigitaleart.ro/art-fizica8/v1/art-fizica8.pdf"
         },
         {
           "node_id": "n_v4sti_frunza",
@@ -1039,18 +1382,49 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "se poate depune pe frunze",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "se depune pe frunze",
+          "relation": "related_to",
+          "label_ro": "se depune pe frunze",
+          "evidence_url": "https://www.replicahd.ro/temperaturile-scazute-au-transformat-parangul-intr-un-regat-de-gheata/"
         }
       ],
-      "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "research_ready": true,
+      "next_action": "Include in the single whole-batch module and both independent web reviews at step3.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "planned_graph_counts": {
         "distinct_neighbors": 4,
         "old_main": 4,
         "same_category": 4,
         "batch": 0
+      },
+      "qualified_graph_counts": {
+        "distinct_neighbors": 4,
+        "old_main": 4,
+        "same_category": 4,
+        "batch": 0
+      },
+      "qualified_forms": [
+        "brumă",
+        "brume",
+        "brumele",
+        "brumei",
+        "brumelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": null,
+        "positive_support": false,
+        "hits": [],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Depunere fină de cristale de gheață pe plante și alte suprafețe răcite în timpul nopții.",
+      "register": "current meteorological sense; fruit bloom and figurative senses excluded",
+      "research_budget": {
+        "elapsed_seconds": 130,
+        "research_completion_observed_utc": "2026-10-12 10:32:03",
+        "note": "Source qualification complete before compaction; subsequent receipt bookkeeping makes no further source requests."
       }
     },
     {
@@ -1267,8 +1641,8 @@
     },
     {
       "id": "v113-abur",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Abur",
       "label_ro": "Abur",
@@ -1279,7 +1653,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "Pending reviews: adds a source-checked everyday or school concept with its full noncolliding inputs and truthful links for Cald sau Rece.",
       "planned_forms": [
         "abur",
         "aburul",
@@ -1289,7 +1663,7 @@
         "aburilor"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm qualified for the selected sense; regular forms included once per normalization key. Independent review is pending.",
       "fold_equivalent_hypotheses_omitted": 0,
       "identity_checks": {
         "forms": [
@@ -1393,8 +1767,35 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "researched: exact DEX/DOOM3 headword, selected sense, complete noncolliding paradigm and predeclared links; independent reviews required.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/abur/json",
+          "role": "sense",
+          "authority": "DEX '09",
+          "definition_id": "821560",
+          "headword": "abur",
+          "paraphrase": "Apă în stare de vapori, produsă de exemplu când apa fierbe."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/abur/json",
+          "role": "forms",
+          "authority": "DOOM 3",
+          "definition_id": "1320510",
+          "headword": "abur",
+          "paraphrase": "current masculine noun, plural aburi; visible condensed droplets are distinguished from gaseous water"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Abur",
+          "role": "second_source",
+          "paraphrase": "Distinge vaporii de apă de picăturile care îi fac vizibili și explică dependența stării de temperatură și aportul de căldură."
+        },
+        {
+          "url": "https://www.atlascopco.com/ro-ro/rental/resources/industrial-steam-guide-temperature-control/basics/what-is-industrial-steam",
+          "role": "link_evidence",
+          "paraphrase": "Producătorul explică în română formarea aburului prin încălzirea apei într-o oală."
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v4gas_apa",
@@ -1402,8 +1803,12 @@
           "category": "gastronomie",
           "status": "exists on wave_base",
           "claim_to_verify": "provine din apă",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "este apă în stare de vapori",
+          "relation": "related_to",
+          "label_ro": "este apă în stare de vapori",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Abur"
         },
         {
           "node_id": "n_v4sti_temperatura",
@@ -1411,8 +1816,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "vaporizarea depinde de temperatură",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "starea sa depinde de temperatură",
+          "relation": "related_to",
+          "label_ro": "starea sa depinde de temperatură",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Abur"
         },
         {
           "node_id": "n_v4sti_caldura",
@@ -1420,8 +1829,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "căldura poate vaporiza apa",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "se poate obține prin încălzirea apei",
+          "relation": "related_to",
+          "label_ro": "se poate obține prin încălzirea apei",
+          "evidence_url": "https://www.atlascopco.com/ro-ro/rental/resources/industrial-steam-guide-temperature-control/basics/what-is-industrial-steam"
         },
         {
           "node_id": "n_v30_kitchen_cookware_oala",
@@ -1429,24 +1842,76 @@
           "category": "gastronomie",
           "status": "exists on wave_base",
           "claim_to_verify": "se degajă din oala cu apă fierbinte",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "se formează când apa fierbe în oală",
+          "relation": "related_to",
+          "label_ro": "se formează când apa fierbe în oală",
+          "evidence_url": "https://www.atlascopco.com/ro-ro/rental/resources/industrial-steam-guide-temperature-control/basics/what-is-industrial-steam"
         }
       ],
-      "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "research_ready": true,
+      "next_action": "Include in the single whole-batch module and both independent web reviews at step3.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "planned_graph_counts": {
         "distinct_neighbors": 4,
         "old_main": 4,
         "same_category": 2,
         "batch": 0
+      },
+      "qualified_graph_counts": {
+        "distinct_neighbors": 4,
+        "old_main": 4,
+        "same_category": 2,
+        "batch": 0
+      },
+      "qualified_forms": [
+        "abur",
+        "aburul",
+        "aburi",
+        "aburii",
+        "aburului",
+        "aburilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 12971,
+        "positive_support": true,
+        "hits": [
+          {
+            "rank": 12971,
+            "form": "aburi",
+            "count": 1371
+          },
+          {
+            "rank": 18333,
+            "form": "abur",
+            "count": 844
+          },
+          {
+            "rank": 42368,
+            "form": "aburul",
+            "count": 230
+          },
+          {
+            "rank": 49341,
+            "form": "aburii",
+            "count": 178
+          }
+        ],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Apă în stare de vapori, produsă de exemplu când apa fierbe.",
+      "register": "current masculine noun, plural aburi; visible condensed droplets are distinguished from gaseous water",
+      "research_budget": {
+        "elapsed_seconds": 103,
+        "research_completion_observed_utc": "2026-10-12T10:38:51.564301+00:00"
       }
     },
     {
       "id": "v113-roua",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Rouă",
       "label_ro": "Rouă",
@@ -1457,13 +1922,13 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "Pending reviews: adds a source-checked everyday or school concept with its full noncolliding inputs and truthful links for Cald sau Rece.",
       "planned_forms": [
         "rouă",
         "rouăi"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm qualified for the selected sense; regular forms included once per normalization key. Independent review is pending.",
       "fold_equivalent_hypotheses_omitted": 1,
       "identity_checks": {
         "forms": [
@@ -1509,8 +1974,42 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "researched: exact DEX/DOOM3 headword, selected sense, complete noncolliding paradigm and predeclared links; independent reviews required.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/rouă/json",
+          "role": "sense",
+          "authority": "DEX '09",
+          "definition_id": "859568",
+          "headword": "rouă",
+          "paraphrase": "Picături de apă formate pe suprafețe răcite, prin condensarea vaporilor din aer."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/rouă/json",
+          "role": "forms",
+          "authority": "DOOM 3",
+          "definition_id": "1304070",
+          "headword": "rouă",
+          "paraphrase": "current feminine mass noun; DOOM3 genitive-dative rouăi, no contemporary plural prescribed"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Rouă",
+          "role": "second_source",
+          "paraphrase": "Descrie condensarea vaporilor din aer pe suprafețe reci și rolul temperaturii."
+        },
+        {
+          "url": "https://znayshov.com/FR/9325/14.pdf",
+          "role": "link_evidence",
+          "location": "§13; indexed Romanian physics textbook passage, direct open unavailable",
+          "paraphrase": "Manualul în română exemplifică roua prin picături transparente formate pe frunzele plantelor."
+        },
+        {
+          "url": "https://bibliotecavbielinski.wordpress.com/vreau-sa-stiu-sa-citim-sa-vedem/",
+          "role": "link_evidence",
+          "location": "Picături de rouă",
+          "paraphrase": "Materialul educativ al bibliotecii pentru copii descrie roua de pe firele de iarbă."
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v4gas_apa",
@@ -1518,8 +2017,12 @@
           "category": "gastronomie",
           "status": "exists on wave_base",
           "claim_to_verify": "este formată din apă",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "este alcătuită din picături de apă",
+          "relation": "related_to",
+          "label_ro": "este alcătuită din picături de apă",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Rouă"
         },
         {
           "node_id": "n_v24_nature_plant_parts_iarba",
@@ -1527,8 +2030,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "se depune frecvent pe iarbă",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "se formează pe firele de iarbă",
+          "relation": "related_to",
+          "label_ro": "se formează pe firele de iarbă",
+          "evidence_url": "https://bibliotecavbielinski.wordpress.com/vreau-sa-stiu-sa-citim-sa-vedem/"
         },
         {
           "node_id": "n_v4sti_frunza",
@@ -1536,8 +2043,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "se poate depune pe frunze",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "se formează pe frunze",
+          "relation": "related_to",
+          "label_ro": "se formează pe frunze",
+          "evidence_url": "https://znayshov.com/FR/9325/14.pdf"
         },
         {
           "node_id": "n_v4sti_aer",
@@ -1545,8 +2056,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "provine din vaporii din aer",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "provine din vaporii de apă din aer",
+          "relation": "related_to",
+          "label_ro": "provine din vaporii de apă din aer",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Rouă"
         },
         {
           "node_id": "n_v4sti_temperatura",
@@ -1554,24 +2069,62 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "răcirea favorizează condensarea",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "formarea ei depinde de răcirea suprafețelor",
+          "relation": "related_to",
+          "label_ro": "formarea ei depinde de răcirea suprafețelor",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Rouă"
         }
       ],
-      "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "research_ready": true,
+      "next_action": "Include in the single whole-batch module and both independent web reviews at step3.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "planned_graph_counts": {
         "distinct_neighbors": 5,
         "old_main": 5,
         "same_category": 4,
         "batch": 0
+      },
+      "qualified_graph_counts": {
+        "distinct_neighbors": 5,
+        "old_main": 5,
+        "same_category": 4,
+        "batch": 0
+      },
+      "qualified_forms": [
+        "rouă",
+        "rouăi"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 38701,
+        "positive_support": false,
+        "hits": [
+          {
+            "rank": 38701,
+            "form": "roua",
+            "count": 267
+          },
+          {
+            "rank": 46729,
+            "form": "rouă",
+            "count": 195
+          }
+        ],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Picături de apă formate pe suprafețe răcite, prin condensarea vaporilor din aer.",
+      "register": "current feminine mass noun; DOOM3 genitive-dative rouăi, no contemporary plural prescribed",
+      "research_budget": {
+        "elapsed_seconds": 103,
+        "research_completion_observed_utc": "2026-10-12T10:38:51.564301+00:00"
       }
     },
     {
       "id": "v113-picatura",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Picătură",
       "label_ro": "Picătură",
@@ -1582,7 +2135,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "Pending reviews: adds a source-checked everyday or school concept with its full noncolliding inputs and truthful links for Cald sau Rece.",
       "planned_forms": [
         "picătură",
         "picături",
@@ -1591,7 +2144,7 @@
         "picăturilor"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm qualified for the selected sense; regular forms included once per normalization key. Independent review is pending.",
       "fold_equivalent_hypotheses_omitted": 1,
       "identity_checks": {
         "forms": [
@@ -1679,8 +2232,45 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "researched: exact DEX/DOOM3 headword, selected sense, complete noncolliding paradigm and predeclared links; independent reviews required.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/picătură/json",
+          "role": "sense",
+          "authority": "DEX '09",
+          "definition_id": "871160",
+          "headword": "picătură",
+          "paraphrase": "Cantitate mică de lichid, delimitată de o suprafață, ca un strop de apă."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/picătură/json",
+          "role": "forms",
+          "authority": "DOOM 3",
+          "definition_id": "1282323",
+          "headword": "picătură",
+          "paraphrase": "current feminine noun, plural picături, genitive-dative picăturii; medicinal and figurative senses excluded"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Picătură",
+          "role": "second_source",
+          "paraphrase": "Coroborează sensul de mică porțiune de lichid și formarea picăturilor de apă."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Ploaie",
+          "role": "link_evidence",
+          "paraphrase": "Ploaia este precipitație alcătuită din picături de apă care cad din nori."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Nor",
+          "role": "link_evidence",
+          "paraphrase": "Norii pot conține picături mici de apă rezultate prin condensare."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Ceață",
+          "role": "link_evidence",
+          "paraphrase": "Ceața conține picături mici de apă aflate în suspensie lângă sol."
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v4gas_apa",
@@ -1688,8 +2278,12 @@
           "category": "gastronomie",
           "status": "exists on wave_base",
           "claim_to_verify": "apa se poate prezenta în picături",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate fi un strop de apă",
+          "relation": "related_to",
+          "label_ro": "poate fi un strop de apă",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Picătură"
         },
         {
           "node_id": "n_v24_weather_precipitation_ploaie",
@@ -1697,8 +2291,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "ploaia este alcătuită din picături",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "picăturile de apă alcătuiesc ploaia",
+          "relation": "part_of",
+          "label_ro": "picăturile de apă alcătuiesc ploaia",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Ploaie"
         },
         {
           "node_id": "n_v24_weather_air_nor",
@@ -1706,8 +2304,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "norii pot conține picături de apă",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "picături mici de apă se găsesc în nori",
+          "relation": "related_to",
+          "label_ro": "picături mici de apă se găsesc în nori",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Nor"
         },
         {
           "node_id": "n_v24_weather_air_ceata",
@@ -1715,24 +2317,85 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "ceața cuprinde picături foarte mici",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "picături mici de apă alcătuiesc ceața",
+          "relation": "related_to",
+          "label_ro": "picături mici de apă alcătuiesc ceața",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Ceață"
         }
       ],
-      "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "research_ready": true,
+      "next_action": "Include in the single whole-batch module and both independent web reviews at step3.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "planned_graph_counts": {
         "distinct_neighbors": 4,
         "old_main": 4,
         "same_category": 3,
         "batch": 0
+      },
+      "qualified_graph_counts": {
+        "distinct_neighbors": 4,
+        "old_main": 4,
+        "same_category": 3,
+        "batch": 0
+      },
+      "qualified_forms": [
+        "picătură",
+        "picături",
+        "picăturile",
+        "picăturii",
+        "picăturilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 6377,
+        "positive_support": true,
+        "hits": [
+          {
+            "rank": 6377,
+            "form": "picătură",
+            "count": 3424
+          },
+          {
+            "rank": 12735,
+            "form": "picături",
+            "count": 1403
+          },
+          {
+            "rank": 19572,
+            "form": "picatura",
+            "count": 764
+          },
+          {
+            "rank": 27614,
+            "form": "picăturile",
+            "count": 461
+          },
+          {
+            "rank": 39109,
+            "form": "picaturi",
+            "count": 263
+          },
+          {
+            "rank": 45671,
+            "form": "picătura",
+            "count": 202
+          }
+        ],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Cantitate mică de lichid, delimitată de o suprafață, ca un strop de apă.",
+      "register": "current feminine noun, plural picături, genitive-dative picăturii; medicinal and figurative senses excluded",
+      "research_budget": {
+        "elapsed_seconds": 103,
+        "research_completion_observed_utc": "2026-10-12T10:38:51.564301+00:00"
       }
     },
     {
       "id": "v113-baltoaca",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Băltoacă",
       "label_ro": "Băltoacă",
@@ -1743,7 +2406,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "Pending reviews: adds a source-checked everyday or school concept with its full noncolliding inputs and truthful links for Cald sau Rece.",
       "planned_forms": [
         "băltoacă",
         "băltoace",
@@ -1752,7 +2415,7 @@
         "băltoacelor"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm qualified for the selected sense; regular forms included once per normalization key. Independent review is pending.",
       "fold_equivalent_hypotheses_omitted": 1,
       "identity_checks": {
         "forms": [
@@ -1840,8 +2503,35 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "researched: exact DEX/DOOM3 headword, selected sense, complete noncolliding normative paradigm and predeclared links; independent reviews required.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/băltoacă/json",
+          "role": "sense",
+          "authority": "DEX '09",
+          "definition_id": "833652",
+          "headword": "băltoacă",
+          "paraphrase": "Acumulare mică de apă, adesea murdară, rămasă într-o groapă sau denivelare după ploaie."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/băltoacă/json",
+          "role": "forms",
+          "authority": "DOOM 3",
+          "definition_id": "1317678",
+          "headword": "băltoacă",
+          "paraphrase": "current feminine noun, plural băltoace, genitive-dative băltoacei; spilled-liquid extension excluded"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/băltoacă",
+          "role": "second_source",
+          "paraphrase": "Confirmă băltoaca de apă de ploaie din gropile drumurilor și paradigma feminină."
+        },
+        {
+          "url": "https://www.digi24.ro/stiri/actualitate/de-ce-dupa-fiecare-ploaie-in-cartierele-rezidentiale-apar-ba-un-fluviu-ba-o-delta-arhitect-o-combinatie-intre-nestiinta-si-hotie-1570417",
+          "role": "link_evidence",
+          "paraphrase": "Reportajul observă bălți și o băltoacă rămasă pe strada Roții după ploi."
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v4gas_apa",
@@ -1849,8 +2539,12 @@
           "category": "gastronomie",
           "status": "exists on wave_base",
           "claim_to_verify": "este o acumulare de apă",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "este o acumulare de apă",
+          "relation": "related_to",
+          "label_ro": "este o acumulare de apă",
+          "evidence_url": "https://dexonline.ro/definitie/băltoacă/json"
         },
         {
           "node_id": "n_v24_weather_precipitation_ploaie",
@@ -1858,8 +2552,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "ploaia poate forma băltoace",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "se poate forma după ploaie",
+          "relation": "related_to",
+          "label_ro": "se poate forma după ploaie",
+          "evidence_url": "https://dexonline.ro/definitie/băltoacă/json"
         },
         {
           "node_id": "n_v4geo_drum",
@@ -1867,8 +2565,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "se poate forma în denivelarea unui drum",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "se poate forma în gropile drumurilor",
+          "relation": "related_to",
+          "label_ro": "se poate forma în gropile drumurilor",
+          "evidence_url": "https://dexonline.ro/definitie/băltoacă/json"
         },
         {
           "node_id": "n_v4geo_strada",
@@ -1876,24 +2578,54 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "poate rămâne pe stradă după ploaie",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate rămâne pe stradă după ploaie",
+          "relation": "related_to",
+          "label_ro": "poate rămâne pe stradă după ploaie",
+          "evidence_url": "https://www.digi24.ro/stiri/actualitate/de-ce-dupa-fiecare-ploaie-in-cartierele-rezidentiale-apar-ba-un-fluviu-ba-o-delta-arhitect-o-combinatie-intre-nestiinta-si-hotie-1570417"
         }
       ],
-      "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "research_ready": true,
+      "next_action": "Include in the single whole-batch module and both independent web reviews at step3.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "planned_graph_counts": {
         "distinct_neighbors": 4,
         "old_main": 4,
         "same_category": 2,
         "batch": 0
+      },
+      "qualified_graph_counts": {
+        "distinct_neighbors": 4,
+        "old_main": 4,
+        "same_category": 2,
+        "batch": 0
+      },
+      "qualified_forms": [
+        "băltoacă",
+        "băltoace",
+        "băltoacele",
+        "băltoacei",
+        "băltoacelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": null,
+        "positive_support": false,
+        "hits": [],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Acumulare mică de apă, adesea murdară, rămasă într-o groapă sau denivelare după ploaie.",
+      "register": "current feminine noun, plural băltoace, genitive-dative băltoacei; spilled-liquid extension excluded",
+      "research_budget": {
+        "elapsed_seconds": 148,
+        "research_completion_observed_utc": "2026-10-12T10:41:26.179690+00:00"
       }
     },
     {
       "id": "v113-pietris",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Pietriș",
       "label_ro": "Pietriș",
@@ -1904,7 +2636,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "Pending reviews: adds a source-checked everyday or school concept with its full noncolliding inputs and truthful links for Cald sau Rece.",
       "planned_forms": [
         "pietriș",
         "pietrișul",
@@ -1914,7 +2646,7 @@
         "pietrișurilor"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm qualified for the selected sense; regular forms included once per normalization key. Independent review is pending.",
       "fold_equivalent_hypotheses_omitted": 0,
       "identity_checks": {
         "forms": [
@@ -2018,8 +2750,35 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "researched: exact DEX/DOOM3 headword, selected sense, complete noncolliding normative paradigm and predeclared links; independent reviews required.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/pietriș/json",
+          "role": "sense",
+          "authority": "DEX '09",
+          "definition_id": "871441",
+          "headword": "pietriș",
+          "paraphrase": "Material alcătuit din fragmente mici de piatră, folosit și la pietruirea drumurilor."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/pietriș/json",
+          "role": "forms",
+          "authority": "DOOM 3",
+          "definition_id": "1282457",
+          "headword": "pietriș",
+          "paraphrase": "current neuter noun, plural pietrișuri; obsolete barren-land sense excluded"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Pietriș",
+          "role": "second_source",
+          "paraphrase": "Descrie fragmentele de rocă, amestecul cu nisip de pe maluri și utilizarea pentru drumuri."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Nisip",
+          "role": "link_evidence",
+          "paraphrase": "Nisipul are granule mai fine decât pietrișul; comparația granulometrică folosește și limitele din DEX pentru pietriș."
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v28_nature_material_piatra",
@@ -2027,8 +2786,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "este alcătuit din fragmente de piatră",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "este alcătuit din fragmente de piatră",
+          "relation": "related_to",
+          "label_ro": "este alcătuit din fragmente de piatră",
+          "evidence_url": "https://dexonline.ro/definitie/pietriș/json"
         },
         {
           "node_id": "n_v4geo_nisip",
@@ -2036,8 +2799,13 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "sunt sedimente cu granulații diferite",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "are granule mai mari decât nisipul",
+          "relation": "related_to",
+          "label_ro": "are granule mai mari decât nisipul",
+          "evidence_url": "https://dexonline.ro/definitie/pietriș/json",
+          "additional_evidence_url": "https://ro.wikipedia.org/wiki/Nisip"
         },
         {
           "node_id": "n_v4geo_drum",
@@ -2045,8 +2813,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "se folosește la construirea drumurilor",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "se folosește la pietruirea drumurilor",
+          "relation": "related_to",
+          "label_ro": "se folosește la pietruirea drumurilor",
+          "evidence_url": "https://dexonline.ro/definitie/pietriș/json"
         },
         {
           "node_id": "n_v4geo_mal",
@@ -2054,24 +2826,61 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "se poate acumula pe malurile apelor",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "se poate acumula pe malurile apelor",
+          "relation": "related_to",
+          "label_ro": "se poate acumula pe malurile apelor",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Pietriș"
         }
       ],
-      "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "research_ready": true,
+      "next_action": "Include in the single whole-batch module and both independent web reviews at step3.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "planned_graph_counts": {
         "distinct_neighbors": 4,
         "old_main": 4,
         "same_category": 3,
         "batch": 0
+      },
+      "qualified_graph_counts": {
+        "distinct_neighbors": 4,
+        "old_main": 4,
+        "same_category": 3,
+        "batch": 0
+      },
+      "qualified_forms": [
+        "pietriș",
+        "pietrișul",
+        "pietrișului",
+        "pietrișuri",
+        "pietrișurile",
+        "pietrișurilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 34943,
+        "positive_support": false,
+        "hits": [
+          {
+            "rank": 34943,
+            "form": "pietriş",
+            "count": 315
+          }
+        ],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Material alcătuit din fragmente mici de piatră, folosit și la pietruirea drumurilor.",
+      "register": "current neuter noun, plural pietrișuri; obsolete barren-land sense excluded",
+      "research_budget": {
+        "elapsed_seconds": 148,
+        "research_completion_observed_utc": "2026-10-12T10:41:26.179690+00:00"
       }
     },
     {
       "id": "v113-duna",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Dună",
       "label_ro": "Dună",
@@ -2082,7 +2891,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "Pending reviews: adds a source-checked everyday or school concept with its full noncolliding inputs and truthful links for Cald sau Rece.",
       "planned_forms": [
         "dună",
         "dune",
@@ -2091,7 +2900,7 @@
         "dunelor"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm qualified for the selected sense; regular forms included once per normalization key. Independent review is pending.",
       "fold_equivalent_hypotheses_omitted": 1,
       "identity_checks": {
         "forms": [
@@ -2179,8 +2988,36 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "researched: exact DEX/DOOM3 headword, selected sense, complete noncolliding normative paradigm and predeclared links; independent reviews required.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/dună/json",
+          "role": "sense",
+          "authority": "DEX '09",
+          "definition_id": "863456",
+          "headword": "dună",
+          "paraphrase": "Ridicătură de nisip formată prin acumulare sub acțiunea vântului."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/dună/json",
+          "role": "forms",
+          "authority": "DOOM 3",
+          "definition_id": "1308874",
+          "headword": "dună",
+          "paraphrase": "current feminine landform noun, plural dune, genitive-dative dunei; regional bedding homograph excluded"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Dună",
+          "role": "second_source",
+          "paraphrase": "Coroborează nisipul acumulat de vânt și existența dunelor litorale."
+        },
+        {
+          "url": "https://primariasacelect.ro/Documente/primarie/urbanism/Evaluare_adecvata_PUG_comuna_SACELE.pdf",
+          "role": "link_evidence",
+          "location": "p.110, PDF index109",
+          "paraphrase": "Studiul primăriei documentează dune mobile și fixate în zona plajei Vadu și Grindului Chituc."
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v4geo_nisip",
@@ -2188,8 +3025,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "este alcătuită din nisip",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "este alcătuită din nisip",
+          "relation": "related_to",
+          "label_ro": "este alcătuită din nisip",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Dună"
         },
         {
           "node_id": "n_v24_weather_air_vant",
@@ -2197,8 +3038,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "vântul acumulează nisipul",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "se formează prin acumularea nisipului de către vânt",
+          "relation": "related_to",
+          "label_ro": "se formează prin acumularea nisipului de către vânt",
+          "evidence_url": "https://dexonline.ro/definitie/dună/json"
         },
         {
           "node_id": "n_v4geo_plaja",
@@ -2206,8 +3051,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "se pot forma dune litorale",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "dune litorale apar în zona unor plaje",
+          "relation": "related_to",
+          "label_ro": "dune litorale apar în zona unor plaje",
+          "evidence_url": "https://primariasacelect.ro/Documente/primarie/urbanism/Evaluare_adecvata_PUG_comuna_SACELE.pdf"
         },
         {
           "node_id": "n_v4geo_tarm",
@@ -2215,24 +3064,60 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "dunele litorale apar lângă țărm",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "dune litorale apar lângă țărm",
+          "relation": "related_to",
+          "label_ro": "dune litorale apar lângă țărm",
+          "evidence_url": "https://dexonline.ro/definitie/dună/json"
         }
       ],
-      "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "research_ready": true,
+      "next_action": "Include in the single whole-batch module and both independent web reviews at step3.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "planned_graph_counts": {
         "distinct_neighbors": 4,
         "old_main": 4,
         "same_category": 3,
         "batch": 0
+      },
+      "qualified_graph_counts": {
+        "distinct_neighbors": 4,
+        "old_main": 4,
+        "same_category": 3,
+        "batch": 0
+      },
+      "qualified_forms": [
+        "dună",
+        "dune",
+        "dunele",
+        "dunei",
+        "dunelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 28860,
+        "positive_support": false,
+        "hits": [
+          {
+            "rank": 28860,
+            "form": "dune",
+            "count": 429
+          }
+        ],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Ridicătură de nisip formată prin acumulare sub acțiunea vântului.",
+      "register": "current feminine landform noun, plural dune, genitive-dative dunei; regional bedding homograph excluded",
+      "research_budget": {
+        "elapsed_seconds": 148,
+        "research_completion_observed_utc": "2026-10-12T10:41:26.179690+00:00"
       }
     },
     {
       "id": "v113-torent",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Torent",
       "label_ro": "Torent",
@@ -2243,7 +3128,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "Pending reviews: adds a source-checked everyday or school concept with its full noncolliding inputs and truthful links for Cald sau Rece.",
       "planned_forms": [
         "torent",
         "torentul",
@@ -2253,7 +3138,7 @@
         "torentelor"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm qualified for the selected sense; regular forms included once per normalization key. Independent review is pending.",
       "fold_equivalent_hypotheses_omitted": 0,
       "identity_checks": {
         "forms": [
@@ -2352,13 +3237,89 @@
             "reviewed_unresolved": false,
             "prior_records": [],
             "state": "proposed"
+          },
+          {
+            "form": "torenți",
+            "key": "torenti",
+            "owner_fields": {
+              "normalized_index": [],
+              "labels": [],
+              "nodes": []
+            },
+            "world_hits": [],
+            "cald_proxies": [],
+            "deferred_raw": false,
+            "deferred_current": false,
+            "reviewed_unresolved": false,
+            "prior_records": [],
+            "state": "proposed"
+          },
+          {
+            "form": "torenții",
+            "key": "torentii",
+            "owner_fields": {
+              "normalized_index": [],
+              "labels": [],
+              "nodes": []
+            },
+            "world_hits": [],
+            "cald_proxies": [],
+            "deferred_raw": false,
+            "deferred_current": false,
+            "reviewed_unresolved": false,
+            "prior_records": [],
+            "state": "proposed"
+          },
+          {
+            "form": "torenților",
+            "key": "torentilor",
+            "owner_fields": {
+              "normalized_index": [],
+              "labels": [],
+              "nodes": []
+            },
+            "world_hits": [],
+            "cald_proxies": [],
+            "deferred_raw": false,
+            "deferred_current": false,
+            "reviewed_unresolved": false,
+            "prior_records": [],
+            "state": "proposed"
           }
         ]
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "researched: exact DEX/DOOM3 headword, selected sense, complete noncolliding normative paradigm and predeclared links; independent reviews required.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/torent/json",
+          "role": "sense",
+          "authority": "DEX '09",
+          "definition_id": "834158",
+          "headword": "torent",
+          "paraphrase": "Curs de apă temporar și puternic, format după ploi mari sau topirea rapidă a zăpezii, pe teren înclinat."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/torent/json",
+          "role": "forms",
+          "authority": "DOOM 3",
+          "definition_id": "1260321",
+          "headword": "torent",
+          "paraphrase": "DOOM3 current masculine noun, plural torenți; older neuter plural torente is excluded"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Torent",
+          "role": "second_source",
+          "paraphrase": "Descrie cursul temporar alimentat de ploi ori topirea zăpezii, pantele montane și albiile sau văile torențiale."
+        },
+        {
+          "url": "https://dacoromania.inst-puscariu.ro/articole/2002-2003_4.pdf",
+          "role": "link_evidence",
+          "location": "p.85, PDF index6",
+          "paraphrase": "Studiul lingvistic distinge torentul temporar de cursurile permanente în câmpul semantic al apelor curgătoare."
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v4geo_parau",
@@ -2366,8 +3327,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "este curs de apă distinct de pârâul permanent",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "are curgere temporară, spre deosebire de un pârâu permanent",
+          "relation": "related_to",
+          "label_ro": "are curgere temporară, spre deosebire de un pârâu permanent",
+          "evidence_url": "https://dacoromania.inst-puscariu.ro/articole/2002-2003_4.pdf"
         },
         {
           "node_id": "n_v2geo_munte",
@@ -2375,8 +3340,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "este caracteristic terenurilor montane",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate curge pe povârnișurile munților",
+          "relation": "related_to",
+          "label_ro": "poate curge pe povârnișurile munților",
+          "evidence_url": "https://dexonline.ro/definitie/torent/json"
         },
         {
           "node_id": "n_v3geo_vale",
@@ -2384,8 +3353,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "curge printr-o vale sau albie",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "curge printr-o albie sau vale torențială",
+          "relation": "related_to",
+          "label_ro": "curge printr-o albie sau vale torențială",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Torent"
         },
         {
           "node_id": "n_v24_weather_precipitation_ploaie",
@@ -2393,19 +3366,64 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "este alimentat de ploi puternice",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate fi alimentat de ploi puternice",
+          "relation": "related_to",
+          "label_ro": "poate fi alimentat de ploi puternice",
+          "evidence_url": "https://dexonline.ro/definitie/torent/json"
         }
       ],
-      "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "research_ready": true,
+      "next_action": "Include in the single whole-batch module and both independent web reviews at step3.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "planned_graph_counts": {
         "distinct_neighbors": 4,
         "old_main": 4,
         "same_category": 3,
         "batch": 0
-      }
+      },
+      "qualified_graph_counts": {
+        "distinct_neighbors": 4,
+        "old_main": 4,
+        "same_category": 3,
+        "batch": 0
+      },
+      "qualified_forms": [
+        "torent",
+        "torentul",
+        "torenți",
+        "torenții",
+        "torentului",
+        "torenților"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": null,
+        "positive_support": false,
+        "hits": [],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Curs de apă temporar și puternic, format după ploi mari sau topirea rapidă a zăpezii, pe teren înclinat.",
+      "register": "DOOM3 current masculine noun, plural torenți; older neuter plural torente is excluded",
+      "research_budget": {
+        "elapsed_seconds": 148,
+        "research_completion_observed_utc": "2026-10-12T10:41:26.179690+00:00"
+      },
+      "research_excluded_forms": [
+        {
+          "form": "torente",
+          "reason": "pluralul neutru vechi nu este paradigma masculină prescrisă de DOOM3"
+        },
+        {
+          "form": "torentele",
+          "reason": "pluralul neutru vechi nu este paradigma masculină prescrisă de DOOM3"
+        },
+        {
+          "form": "torentelor",
+          "reason": "pluralul neutru vechi nu este paradigma masculină prescrisă de DOOM3"
+        }
+      ]
     },
     {
       "id": "v113-baraj",
@@ -8831,15 +9849,45 @@
   "planning_note": "Named backlog Furnică and regional Mămăruță inputs come first. Vârf targets existing n_v2geo_varf. Trestie/Stuf is one source-unverified concept/input hypothesis. All new graph counts include distinct incoming and outgoing neighbors; no hidden-target or curated-round approval.",
   "research_summary": {
     "states": {
-      "idea": 48,
-      "held": 1
+      "researched": 12,
+      "held": 1,
+      "idea": 36
     },
-    "researched": 0,
+    "researched": 12,
     "accepted": 0,
-    "installed": 0
+    "installed": 0,
+    "qualified_input_keys_pending_reviews": 61,
+    "qualified_links_pending_reviews": 45
   },
-  "research_ticks": [],
-  "next_research_requirement": "Step2: research at most12 idea items per tick and5minutes per item, with dexonline requests at least2seconds apart. Exact DOOM3 heads, selected-sense/register evidence, a second Romanian source and positive-only frequency signal are still required. Preserve Gheață owner-only hold and both Umbră foreign forms. Do not resume V1.7.",
+  "research_ticks": [
+    {
+      "tick": 1,
+      "checked_on": "2026-10-12",
+      "items": [
+        "v113-abur",
+        "v113-baltoaca",
+        "v113-bruma",
+        "v113-chiciura",
+        "v113-duna",
+        "v113-fulg",
+        "v113-furnica",
+        "v113-mamaruta",
+        "v113-picatura",
+        "v113-pietris",
+        "v113-roua",
+        "v113-torent"
+      ],
+      "researched": 12,
+      "held": 0,
+      "accepted": 0,
+      "installed": 0,
+      "max_item_seconds": 148,
+      "dex_request_start_spacing_seconds_min": 2.1,
+      "mechanical_cache_qa": "factual-v1-13 verified every cited DEX/DOOM3 ID, exact headword and form alignment without web or edits; the step3 factual review remains unused.",
+      "mechanical_quality_qa": "quality-v1-13 verified twelve unique IDs, item budgets,61 unique normalized forms, full additional Torent screen, predeclared targets and graph floors without web or edits; step3 quality review remains unused."
+    }
+  ],
+  "next_research_requirement": "Next step2 tick: at most12 of the remaining36 ideas; begin with Baraj. Preserve Gheață owner-only hold and Umbră foreign-owner exclusions.",
   "backlog_review": {
     "named_surfaces_unresolved_on_wave_base": [
       "Moș Crăciun",
