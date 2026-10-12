@@ -1,0 +1,710 @@
+{
+  "schema_version": 1,
+  "kind": "graph-quality-review-v1",
+  "role": "quality",
+  "reviewer": "quality-v1-11",
+  "module_path": "scripts/home_and_nature_v1_11_data.py",
+  "module_sha256": "821cdf44640e33e8f13c1eed73a5cc4f7460f56b00c549171da5abda5296dff8",
+  "pool_sha256": "08d42510164149cdf909d1f7d9269150c7109beaa44b7c236ebce24fdf335cba",
+  "reviewed_on": "2026-10-12",
+  "scope": "One independent whole-batch quality web pass covering all 58 frozen REVIEW_ITEMS: 33 proposed shared concepts, 20 existing-owner input families and 5 initial held items. This does not approve a new curated target, round, recipe or board.",
+  "method": {
+    "single_whole_batch_pass": true,
+    "criteria": [
+      "CRITIQUE_RUBRIC A, C, D, F as applicable",
+      "Romanian 12-year-old recognition and everyday/school/nature relevance",
+      "literal sense and bundled normalized input ownership",
+      "meaningful truthful distinct associations, captions and direction",
+      "final aggregate incident neighborhood: 4–8 distinct endpoints, >=2 existing, <=2 batch, >=2 same-category"
+    ],
+    "web": "Independently opened/searched live Romanian school, museum, conservation, maker and lexical pages during this pass; cached author notes alone were not treated as independent evidence. Search-indexed primary passages were used when the direct PDF/page failed. No dexonline URL was requested; the factual reviewer owns normative DEX/DOOM checks.",
+    "lexical_independence_limit": "Wikționar morphology tables were inspected live; some definitions derive from DEX and are corroboration, not an independent normative authority.",
+    "ownership": "Checked the frozen proposal against bundled normalization_map, existing index/labels/aliases and world snapshots; retained the recorded colliding-form exclusions and original owners.",
+    "topology": "Counted every distinct incident endpoint of the final canonical graph, including incoming links from other proposed items. Declared outgoing lists do not override aggregate caps.",
+    "target_limit": "C3 hidden-target predecessor/engine floors and complete Lanț board route/difficulty approval are outside this shared-concept proposal; outgoing-only anatomical links confer no hidden-target approval."
+  },
+  "summary": {
+    "items_reviewed": 58,
+    "verdicts": {
+      "accept": 44,
+      "modify": 14
+    },
+    "initial_held_items": [
+      "v111-matase",
+      "v111-burete",
+      "v111-clanta",
+      "v111-ac",
+      "v111-coada"
+    ],
+    "frozen_graph_nodes": 33,
+    "frozen_graph_canonical_edges": 129,
+    "aggregate_cap_violations": [
+      {
+        "id": "n_v1_11_lana",
+        "label": "Lână",
+        "distinct_neighbors": 7,
+        "batch_neighbors": 4,
+        "batch_neighbor_ids": [
+          "n_v1_11_ata",
+          "n_v1_11_cuvertura",
+          "n_v1_11_manusa",
+          "n_v1_11_pulover"
+        ]
+      },
+      {
+        "id": "n_v1_11_bumbac",
+        "label": "Bumbac",
+        "distinct_neighbors": 8,
+        "batch_neighbors": 5,
+        "batch_neighbor_ids": [
+          "n_v1_11_ata",
+          "n_v1_11_cuvertura",
+          "n_v1_11_panza",
+          "n_v1_11_perdea",
+          "n_v1_11_pulover"
+        ]
+      },
+      {
+        "id": "n_v1_11_perdea",
+        "label": "Perdea",
+        "distinct_neighbors": 5,
+        "batch_neighbors": 3,
+        "batch_neighbor_ids": [
+          "n_v1_11_bumbac",
+          "n_v1_11_draperie",
+          "n_v1_11_panza"
+        ]
+      },
+      {
+        "id": "n_v1_11_ata",
+        "label": "Ață",
+        "distinct_neighbors": 5,
+        "batch_neighbors": 3,
+        "batch_neighbor_ids": [
+          "n_v1_11_bumbac",
+          "n_v1_11_foarfeca",
+          "n_v1_11_lana"
+        ]
+      },
+      {
+        "id": "n_v1_11_panza",
+        "label": "Pânză",
+        "distinct_neighbors": 9,
+        "batch_neighbors": 6,
+        "batch_neighbor_ids": [
+          "n_v1_11_bumbac",
+          "n_v1_11_carpa",
+          "n_v1_11_draperie",
+          "n_v1_11_foarfeca",
+          "n_v1_11_perdea",
+          "n_v1_11_umbrela"
+        ]
+      },
+      {
+        "id": "n_v1_11_carton",
+        "label": "Carton",
+        "distinct_neighbors": 5,
+        "batch_neighbors": 3,
+        "batch_neighbor_ids": [
+          "n_v1_11_cutie",
+          "n_v1_11_hartie",
+          "n_v1_11_lipici"
+        ]
+      }
+    ],
+    "required_coupled_resolution": {
+      "hold_whole_concepts": [
+        "v111-cuvertura",
+        "v111-perdea",
+        "v111-draperie",
+        "v111-carpa"
+      ],
+      "remove_existing_proposed_edge_pairs": [
+        [
+          "n_v1_11_lana",
+          "n_v1_11_ata"
+        ],
+        [
+          "n_v1_11_bumbac",
+          "n_v1_11_panza"
+        ],
+        [
+          "n_v1_11_carton",
+          "n_v1_11_hartie"
+        ]
+      ],
+      "invented_replacement_edges": 0,
+      "retained_new_concepts": 29,
+      "retained_existing_owner_families": 20,
+      "retained_canonical_edges": 110,
+      "retained_missing_existing_owner_inputs": 29,
+      "incident_count_check": "All 29 simulated retained concepts meet every endpoint/category count after these exact drops; apply factual reviewer modifications too, then recompute if any other endpoint is dropped."
+    },
+    "decision": "Modify before installation. Preserve five initial holds; the four further coupled holds and three edge removals repair the material-neighborhood breaches without inventing evidence. The other item acceptances remain subject to truthful retained links and the factual review."
+  },
+  "items": [
+    {
+      "id": "v111-manusa",
+      "verdict": "accept",
+      "rationale": "Familiar winter clothing for a Romanian child. Hand protection, cold weather and wool are concrete associations; the maker describes both child gloves and wool construction. Exact noncolliding feminine inputs remain scoped to the physical object.",
+      "sources": [
+        "https://www.decathlon.ro/toate-sporturile/ski-snowboard/manusi-ski",
+        "https://www.decathlon.ro/p/manusi-prim-strat-cu-lana-merinos-mt500-negru/_/R-p-353808"
+      ]
+    },
+    {
+      "id": "v111-vrabie",
+      "verdict": "accept",
+      "rationale": "Common house-sparrow scope is recognizable near homes. SOR explicitly supports insect feeding and occasional tree nesting. The anatomical Cioc→Vrabie part_of direction is honest; the old unverified wheat link is absent.",
+      "sources": [
+        "https://ornitodata2.sor.ro/specii/524/vrabie-de-casa-passer-domesticus"
+      ]
+    },
+    {
+      "id": "v111-foarfeca",
+      "verdict": "accept",
+      "rationale": "Ordinary school/sewing tool with functional cutting and metal links, rather than kit co-listing. School instructions explicitly cut thread with scissors. Keep the exact feminine family; the four unverified Foarfece variants remain held.",
+      "sources": [
+        "https://www.pufo.ro/cumpara/foarfeca-profesionala-pufo-pentru-croitorie-24-cm-precizie-si-confort-4909989",
+        "https://www.educatieonline.md/Files/Manuals/4/IV_Educatia%20tenhologica%20%28a.%202017%2C%20in%20limba%20romana%29.pdf"
+      ]
+    },
+    {
+      "id": "v111-lana",
+      "verdict": "modify",
+      "rationale": "Modern wool and its uses are familiar and sourced, but the frozen incident neighborhood has 7 distinct neighbors, including 4 batch concepts, exceeding the cap of 2. This is an aggregate graph failure despite the declared list passing.",
+      "sources": [
+        "https://www.decathlon.ro/c/htc/care-sunt-avantajele-lanii-merinos_5ae6053e-f08f-4b58-94d9-1efc963b2ffd",
+        "https://ro.wikipedia.org/wiki/L%C3%A2n%C4%83",
+        "https://www.decathlon.ro/p/manusi-prim-strat-cu-lana-merinos-mt500-negru/_/R-p-353808",
+        "https://www.ikea.com/ro/ro/cat/cuverturi-de-pat-20527/"
+      ],
+      "requested_changes": [
+        "Use the documented coupled subset: hold Cuvertură and remove the Lână–Ață edge; retain batch Mănușă/Pulover and existing Oaie/Pătură/Fular.",
+        "Recompute every surviving incident neighborhood after all drops: 4–8 distinct, at least 2 existing, at most 2 batch, at least 2 same-category."
+      ]
+    },
+    {
+      "id": "v111-bumbac",
+      "verdict": "modify",
+      "rationale": "The textile-material scope is contemporary and recognizable; shirts and towels are direct uses. The frozen incident neighborhood has 8 neighbors, including 5 batch concepts, exceeding the batch cap.",
+      "sources": [
+        "https://www.reserved.com/ro/ro/femei/camasi-bluze/camasi",
+        "https://www.ikea.com/ro/ro/p/gulvial-prosop-baie-alb-00579661/",
+        "https://evelintextile.ro/panza-topita/panza-topita-triplu-strat-galben-pai-muselina/"
+      ],
+      "requested_changes": [
+        "Hold Cuvertură and Perdea in the coupled subset and remove Bumbac–Pânză. Retain batch Ață/Pulover and existing Haină/Cămașă/Prosop.",
+        "Keep textile inputs only; do not add the plant homograph."
+      ]
+    },
+    {
+      "id": "v111-matase",
+      "verdict": "modify",
+      "rationale": "Silk is recognizable, but the frozen item is held and supplies no installable four-link proposal. A lexical textile sense does not qualify the missing predeclared use claims.",
+      "sources": [
+        "https://ro.wiktionary.org/wiki/m%C4%83tase"
+      ],
+      "requested_changes": [
+        "Keep held; install no node, edges or aliases for this item in this wave."
+      ]
+    },
+    {
+      "id": "v111-pulover",
+      "verdict": "accept",
+      "rationale": "Everyday knitted garment; the live maker specification confirms a cotton pullover and the wool guide directly ties wool pullovers to cold. Its two batch-material neighbors remain within the proposed retained subset.",
+      "sources": [
+        "https://www2.hm.com/ro_ro/productpage.1223221006.html",
+        "https://www.decathlon.ro/c/htc/care-sunt-avantajele-lanii-merinos_5ae6053e-f08f-4b58-94d9-1efc963b2ffd"
+      ]
+    },
+    {
+      "id": "v111-cuvertura",
+      "verdict": "modify",
+      "rationale": "The bed-cover/blanket and cotton/wool claims are meaningful and familiar, but this concept is the coupled hold chosen to repair the overloaded Lână/Bumbac neighborhoods without inventing replacement links.",
+      "sources": [
+        "https://www.ikea.com/ro/ro/p/pelartuja-cuvertura-alb-50600373/",
+        "https://www.ikea.com/ro/ro/cat/cuverturi-de-pat-20527/"
+      ],
+      "requested_changes": [
+        "Hold the whole item in the documented retained subset; omit its node and all incident edges.",
+        "Retain the explicit Cearșaf evidence hold; do not restore that dropped link."
+      ]
+    },
+    {
+      "id": "v111-umeras",
+      "verdict": "accept",
+      "rationale": "Recognizable household support. The manufacturer explicitly connects hanging clothes with wardrobe storage and specifies wood and steel; these are four concrete relations rather than arbitrary room co-occurrence.",
+      "sources": [
+        "https://www.ikea.com/ro/ro/p/bumerang-umeras-natur-30238543/",
+        "https://www.ikea.com/ro/ro/p/stajlig-umeras-interior-exterior-alb-00291419/"
+      ]
+    },
+    {
+      "id": "v111-cuier",
+      "verdict": "accept",
+      "rationale": "Familiar coat rack. The live lexical page specifies wood/metal clothing hooks and the primary product explicitly includes an umbrella holder. The umbrella relation is a function, not a co-listed household object.",
+      "sources": [
+        "https://prod.aosom.ro/item/homcom-cuier-de-podea-pentru-haine-cu-suport-de-umbrele-si-13-carlige-din-metal-de-culoare-alb-si-bambus~837-161.html",
+        "https://ro.wiktionary.org/wiki/cuier"
+      ]
+    },
+    {
+      "id": "v111-umbrela",
+      "verdict": "accept",
+      "rationale": "Recognizable rain protector. The independent live product specifies a wooden shaft and steel spokes; the cloth cover is the literal lexical object. All four links are functional/material, replacing the old school-kit co-listing.",
+      "sources": [
+        "https://www.dedeman.ro/ro/umbrela-de-ploaie-pentru-adulti-oslo-ac-tip-baston-automata-diverse-culori-104-cm-rezistenta-la-vant/p/7028928",
+        "https://ro.wiktionary.org/wiki/umbrel%C4%83"
+      ]
+    },
+    {
+      "id": "v111-perdea",
+      "verdict": "modify",
+      "rationale": "The live cotton curtain explicitly filters light at a window, but incoming Draperie raises the frozen incident neighborhood to 3 batch concepts. Hold Perdea in the coupled subset to restore the batch cap for itself and its material neighbors.",
+      "sources": [
+        "https://www.ikea.com/ro/ro/p/silverloenn-perdele-transparente-2buc-bej-rjns-10493978/"
+      ],
+      "requested_changes": [
+        "Hold the whole item and all its incident edges in the documented retained subset."
+      ]
+    },
+    {
+      "id": "v111-draperie",
+      "verdict": "modify",
+      "rationale": "A heavy curtain is a recognizable subtype, not an invented synonym; the manufacturer explicitly distinguishes dense blackout fabric. Nevertheless, the coupled repair holds this item together with Perdea so Pânză can stay bounded.",
+      "sources": [
+        "https://www.ikea.com/ro/ro/p/loennstaevmal-draperii-opace-2buc-bej-rjns-70556374/",
+        "https://www.ikea.com/ro/ro/p/silverloenn-perdele-transparente-2buc-bej-rjns-10493978/"
+      ],
+      "requested_changes": [
+        "Hold the whole item in the documented subset; omit Draperie→Perdea and all other incident edges.",
+        "Do not merge its label/aliases into Perdea or rewrite an existing owner."
+      ]
+    },
+    {
+      "id": "v111-burete",
+      "verdict": "modify",
+      "rationale": "The cleaning-object sense is everyday, but the frozen item has only three qualified links and remains held. Its other lexical senses reinforce the need for exact object scope; familiarity cannot supply the fourth relation.",
+      "sources": [
+        "https://ro.wiktionary.org/wiki/burete"
+      ],
+      "requested_changes": [
+        "Keep held; install no node, edges or aliases. Do not infer the missing Pahar relation."
+      ]
+    },
+    {
+      "id": "v111-carpa",
+      "verdict": "modify",
+      "rationale": "The water/soap and dust uses are explicit in live care instructions and the object is familiar. Hold this otherwise plausible item in the coupled subset to reduce Pânză’s overloaded batch neighborhood without new links.",
+      "sources": [
+        "https://www.ikea.com/ro/ro/p/utrusta-incuietoare-pentru-dulapuri-corpuri-negru-80453610/",
+        "https://www.ikea.com/ro/ro/p/ektorp-cadru-canapea-3locuri-20185031/"
+      ],
+      "requested_changes": [
+        "Hold the whole item and all incident edges in the documented subset."
+      ]
+    },
+    {
+      "id": "v111-ata",
+      "verdict": "modify",
+      "rationale": "Thin sewing thread is ordinary school/household vocabulary; indexed manual instructions explicitly use wool thread, and the manufacturer supports cotton/button use. The frozen graph nonetheless has 3 batch neighbors, exceeding the cap.",
+      "sources": [
+        "https://www.tiparedecroitorie.ro/media/catalog/product/file/masini_normale/riff_traducere.pdf",
+        "https://romanofir.ro/prezentare-ata-pentru-cusut/",
+        "https://www.educatieonline.md/Files/Manuals/4/IV_Educatia%20tenhologica%20%28a.%202017%2C%20in%20limba%20romana%29.pdf"
+      ],
+      "requested_changes": [
+        "Remove the Ață–Lână edge for the chosen structural repair, while retaining its research as history rather than calling it false.",
+        "Retain batch Bumbac/Foarfecă and existing Nasture/Cămașă, with no invented replacement edge."
+      ]
+    },
+    {
+      "id": "v111-panza",
+      "verdict": "modify",
+      "rationale": "The literal textile is recognizable; cloth-to-shirt/dress/towel uses are concrete. The frozen graph has 9 neighbors including 6 batch concepts, exceeding both limits; this cannot be excused by its shorter declared list.",
+      "sources": [
+        "https://evelintextile.ro/panza-topita/panza-topita-triplu-strat-galben-pai-muselina/",
+        "https://muzeu.mncr.ro/index.php/pers/28-stergar-din-1927",
+        "https://www.educatieonline.md/Files/Manuals/4/IV_Educatia%20tenhologica%20%28a.%202017%2C%20in%20limba%20romana%29.pdf"
+      ],
+      "requested_changes": [
+        "Hold Perdea, Draperie and Cârpă and remove Bumbac–Pânză in the coupled subset.",
+        "Retain batch Foarfecă/Umbrelă and existing Cămașă/Rochie/Prosop; count all incoming as well as outgoing endpoints."
+      ]
+    },
+    {
+      "id": "v111-sertar",
+      "verdict": "accept",
+      "rationale": "A familiar furniture compartment with legible wardrobe, wood, metal and lock relations. Live manufacturer specifications support each material/function; Sertar→Dulap part_of has the correct direction and does not misuse the administrative Birou owner.",
+      "sources": [
+        "https://www.ikea.com/ro/ro/p/pax-mehamn-auli-dulap-usi-glisante-alb-alb-aspect-stejar-oglinda-s09608881/",
+        "https://www.ikea.com/ro/ro/p/hemnes-corp-usi-sticla-3-sertare-vopsit-alb-maro-des-50413507/",
+        "https://www.ikea.com/ro/ro/p/helmer-comoda-cu-rotile-negru-20341970/",
+        "https://www.ikea.com/ro/ro/p/utrusta-incuietoare-pentru-dulapuri-corpuri-negru-80453610/"
+      ]
+    },
+    {
+      "id": "v111-cutie",
+      "verdict": "accept",
+      "rationale": "Common physical container. The manufacturer explicitly documents wooden-box assembly using driven nails, beyond co-listing nails with packaging. Material captions are qualified to some boxes and avoid gearbox or metaphorical senses.",
+      "sources": [
+        "https://www.alsafix.ro/cuie/cuie-in-role-tip-surub-scrail-fascoat-dimensiuni-diverse.html",
+        "https://www.iatc.ro/"
+      ]
+    },
+    {
+      "id": "v111-incuietoare",
+      "verdict": "accept",
+      "rationale": "Recognizable locking device. The manufacturer catalog explicitly gives cabinet/door locks, physical keys and metal construction; some-model captions correctly allow plastic or keyless alternatives. The physical Ușă/Dulap owners fit.",
+      "sources": [
+        "https://www.metalobox.com/assets/catalog/2021_RO_SF.pdf",
+        "https://www.assaabloy.com/ro/ro/solutions/products/doors/bulletproof-and-burglarproof-solutions/usi-batante-anti-efractie",
+        "https://www.ikea.com/ro/ro/p/utrusta-incuietoare-pentru-dulapuri-corpuri-negru-80453610/"
+      ]
+    },
+    {
+      "id": "v111-lacat",
+      "verdict": "accept",
+      "rationale": "Everyday portable shackle lock. The live product explicitly names cabinet and room/outbuilding-door uses and specifies steel and physical keys. Captions avoid claiming all padlocks require keys and avoid the sports Poartă owner.",
+      "sources": [
+        "https://www.leroymerlin.ro/produse/lacat-cu-cheie-pentru-interior-thirard-reglabil-47-mm-10419542.html",
+        "https://www.metalobox.com/assets/catalog/2021_RO_SF.pdf"
+      ]
+    },
+    {
+      "id": "v111-clanta",
+      "verdict": "modify",
+      "rationale": "A common door handle is recognizable, but the frozen item has no four-link installation proposal and retains its earlier weak generic-hand relation. Modern retail presence cannot replace a distinctive fourth link.",
+      "sources": [
+        "https://www.dedeman.ro/ro/manere-usi/c/658"
+      ],
+      "requested_changes": [
+        "Keep held; do not use generic manual operation to fill the link floor."
+      ]
+    },
+    {
+      "id": "v111-vidra",
+      "verdict": "accept",
+      "rationale": "Familiar Romanian nature animal, with exact Lutra lutra scope. Conservation and field-guide sources independently support fish, wet habitat and rivers; the mammal identity and graded habitat associations are legible.",
+      "sources": [
+        "https://wwf.ro/garla-mare/speciile-de-la-garla-mare/",
+        "https://milvus.ro/wp-content/uploads/2018/02/Nyomhatarozo-RO-print.pdf"
+      ]
+    },
+    {
+      "id": "v111-mistret",
+      "verdict": "accept",
+      "rationale": "Recognizable woodland animal. Romsilva directly verifies acorn feeding and Romanian presence; the domestic-pig connection is ancestry, not the false claim that a wild boar is a domestic pig.",
+      "sources": [
+        "https://neamt.rosilva.ro/articole/specii_de_vanat__p_960.htm",
+        "https://ro.wikipedia.org/wiki/Mistre%C8%9B"
+      ]
+    },
+    {
+      "id": "v111-castor",
+      "verdict": "accept",
+      "rationale": "Recognizable river mammal; the conservation guide directly connects Castor fiber with rivers, water levels, trunks and branches. These concrete behavior/habitat links give legible routes without conflating it with unrelated names.",
+      "sources": [
+        "https://wwf.ro/wp-content/uploads/2023/09/Ghid-WWF-despre-PVRC.pdf"
+      ]
+    },
+    {
+      "id": "v111-stejar",
+      "verdict": "accept",
+      "rationale": "Ordinary school/nature tree with legible fruit, leaf, wood and forest relations. Directed Frunză→Stejar part_of is correct. Rugby-owned stejarii is explicitly excluded; no alias is moved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Stejar",
+        "https://neamt.rosilva.ro/articole/specii_de_vanat__p_960.htm"
+      ]
+    },
+    {
+      "id": "v111-ghinda",
+      "verdict": "accept",
+      "rationale": "Recognizable school/nature fruit with sourced squirrel and boar food associations. Ghindă→Copac is a qualified fruit-part relation through oak, not is_a and not a claim that every tree bears acorns; its direction and caption are honest.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Stejar",
+        "https://fermaanimalelor.ro/exploreaza-ferma/animale/veverita/",
+        "https://neamt.rosilva.ro/articole/specii_de_vanat__p_960.htm",
+        "https://cms.matemaniada.ro/uploads/Clasa_II_Matemaniada_Etapa2_2025_docx_1_fd4b38d463.pdf"
+      ]
+    },
+    {
+      "id": "v111-aripa",
+      "verdict": "accept",
+      "rationale": "An ordinary anatomical word. Museum and SOR educational material explicitly discuss butterfly and swallow wings; the bee source supplies insect anatomy. All four part_of edges point from the organ to the animal and exclude aircraft sense.",
+      "sources": [
+        "https://antipa.ro/product/cocon/",
+        "https://www.sor.ro/planse-de-colorat/",
+        "https://ro.wikipedia.org/wiki/Albin%C4%83"
+      ]
+    },
+    {
+      "id": "v111-cuib",
+      "verdict": "accept",
+      "rationale": "Familiar bird construction, with live SOR examples for storks, swallows and tree nests. The tree caption says some nests and does not wrongly place swallow nests in trees; the neighborhood is legible to children.",
+      "sources": [
+        "https://www.sor.ro/rezultatele-recensamantului-international-al-berzelor-albe-2024-2025/",
+        "https://www.sor.ro/planse-de-colorat/"
+      ]
+    },
+    {
+      "id": "v111-blana",
+      "verdict": "accept",
+      "rationale": "Familiar living-animal covering with concrete fox/bear/dog/cat associations. The source examples retain that physical scope. Only blană/blănii are proposed; count plurals for processed pelts or coats remain held.",
+      "sources": [
+        "https://wwf.ro/ce-facem/specii/ursul-brun/",
+        "https://www.royalcanin.com/ro/dogs/breeds/labrador-retriever",
+        "https://ro.wikipedia.org/wiki/Pisic%C4%83_de_cas%C4%83",
+        "https://ro.wiktionary.org/wiki/vulpe"
+      ]
+    },
+    {
+      "id": "v111-gheara",
+      "verdict": "accept",
+      "rationale": "Recognizable anatomical part, with field-guide and cat anatomy evidence rather than metaphorical gripping tools. The bear/fox/cat/bird endpoints are legible, and part_of direction is correctly from claw to animal.",
+      "sources": [
+        "https://milvus.ro/wp-content/uploads/2018/02/Nyomhatarozo-RO-print.pdf",
+        "https://ro.wikipedia.org/wiki/Pisic%C4%83_de_cas%C4%83",
+        "https://neamt.rosilva.ro/articole/specii_de_vanat__p_960.htm"
+      ]
+    },
+    {
+      "id": "v111-hartie",
+      "verdict": "accept",
+      "rationale": "Ordinary school material with direct notebook/book and writing-tool associations. The manufacturer specifies paper notebook sheets, and school instructions use pencils/pens on drawn sheets. Harta-owned hârtii remains excluded.",
+      "sources": [
+        "https://www.herlitz.ro/cumpara/caiet-a5-48-file-dictando-motiv-megamix-7480",
+        "https://ro.wikipedia.org/wiki/Carte",
+        "https://www.educatieonline.md/Files/Manuals/4/IV_Educatia%20tenhologica%20%28a.%202017%2C%20in%20limba%20romana%29.pdf"
+      ]
+    },
+    {
+      "id": "v111-carton",
+      "verdict": "modify",
+      "rationale": "Cardboard is familiar and live makers verify box/notebook/book-cover uses. Incoming Lipici makes 3 batch neighbors in the frozen graph, exceeding the cap. The unsupported wood relation is already absent.",
+      "sources": [
+        "https://www.iatc.ro/",
+        "https://www.herlitz.ro/cumpara/caiet-a5-48-file-dictando-motiv-megamix-7480",
+        "https://ecopertare.ro/magazin/accesorii-legatorie/carton-legatorie-mucava-1-2-5-mm/",
+        "https://pictus.ro/produs/adeziv-hobby-universal-pentart/"
+      ],
+      "requested_changes": [
+        "Remove Carton→Hârtie is_a from the retained graph for this cap repair.",
+        "Retain batch Cutie/Lipici and existing Caiet/Carte, and retain the held Lemn claim as history."
+      ]
+    },
+    {
+      "id": "v111-sticla",
+      "verdict": "accept",
+      "rationale": "Recognizable glass material with real mirror, jar, window and optical-lens uses. Maker pages corroborate glass mirrors/jars/lenses. Singular-only inputs preserve the material/container boundary; captions do not claim every lens or mirror is glass.",
+      "sources": [
+        "https://www.ikea.com/ro/ro/p/hovet-oglinda-negru-70515915/",
+        "https://www.ikea.com/ro/ro/p/korken-borcan-cu-capac-sticla-transparenta-70213545/",
+        "https://www.zeiss.ro/vision-care/aveti-nevoie-de-lentile-noi/curatarea-lentilelor-si-a-ecranului.html",
+        "https://www.ikea.com/ro/ro/p/hemnes-corp-usi-sticla-3-sertare-vopsit-alb-maro-des-50413507/"
+      ]
+    },
+    {
+      "id": "v111-cauciuc",
+      "verdict": "accept",
+      "rationale": "Familiar elastic material. Michelin explicitly places rubber in tyres attached to rims, so the wheel link stays mediated through a tyre; shoe and glove specifications verify everyday uses. Only material-singular inputs are proposed.",
+      "sources": [
+        "https://www.michelin.ro/auto/sfat/notiuni-de-baza-despre-anvelope/fabricarea-anvelopei-reciclarea",
+        "https://www.decathlon.ro/p/incaltaminte-skateboard-vulca-500-ii-adulti/_/R-p-311607",
+        "https://www.dedeman.ro/ro/manusi-menaj-misavan-profesionale-marimea-s-latex/p/7021455"
+      ]
+    },
+    {
+      "id": "v111-lipici",
+      "verdict": "accept",
+      "rationale": "Recognizable school/hobby adhesive. The live lesson explicitly repairs a notebook label with glue; the specified hobby glue directly supports paper, cardboard and book binding. This narrow repair claim replaces generic school-kit or industrial-legatory inference.",
+      "sources": [
+        "https://pictus.ro/produs/adeziv-hobby-universal-pentart/",
+        "https://www.edums.ro/resurseeducationale/files/gimnazial/lbcomunicare/%5BClasa%20a%20VIII-a%5D%20%5BMaghiar%C4%83%5D%20Lec%C8%9Bia%202.pdf"
+      ]
+    },
+    {
+      "id": "v111-ac",
+      "verdict": "modify",
+      "rationale": "The sewing needle is familiar, but the folded bare ac key belongs to Aerul condiționat in the live bundled ownership. Lexical plausibility cannot authorize stealing it or silently changing a label.",
+      "sources": [
+        "https://ro.wiktionary.org/wiki/ac"
+      ],
+      "requested_changes": [
+        "Keep held; preserve n_v20via_aer_conditionat ownership and install no needle node/aliases/edges."
+      ]
+    },
+    {
+      "id": "v111-coada",
+      "verdict": "modify",
+      "rationale": "Animal tail is familiar, but the queue sense already owns the same folded headword. The live lexical page also shows the competing queue expression, so a new bare-label animal owner would be misleading.",
+      "sources": [
+        "https://ro.wiktionary.org/wiki/coad%C4%83"
+      ],
+      "requested_changes": [
+        "Keep held; preserve n_v3via_coada and install no new tail node/aliases/edges."
+      ]
+    },
+    {
+      "id": "v111-input-usa",
+      "verdict": "accept",
+      "rationale": "Physical door; only ușii/ușilor are missing, while existing ușă/uși/ușile remain the same owner. Live Romanian paradigm inspection and local ownership checks support only the screened missing inputs; no new graph or target approval.",
+      "sources": [
+        "https://ro.wiktionary.org/wiki/u%C8%99%C4%83"
+      ]
+    },
+    {
+      "id": "v111-input-galeata",
+      "verdict": "accept",
+      "rationale": "Ordinary handled container; găleților is the missing plural genitive/dative, not a new bucket concept. Live Romanian paradigm inspection and local ownership checks support only the screened missing inputs; no new graph or target approval.",
+      "sources": [
+        "https://ro.wiktionary.org/wiki/g%C4%83leat%C4%83"
+      ]
+    },
+    {
+      "id": "v111-input-faras",
+      "verdict": "accept",
+      "rationale": "Ordinary dustpan; fărașelor completes the existing owner without re-adding its already present broom links. Live Romanian paradigm inspection and local ownership checks support only the screened missing inputs; no new graph or target approval.",
+      "sources": [
+        "https://ro.wiktionary.org/wiki/f%C4%83ra%C8%99"
+      ]
+    },
+    {
+      "id": "v111-input-mop",
+      "verdict": "accept",
+      "rationale": "Modern household floor-cleaning noun; mopurilor is a regular missing form of the existing object. Live Romanian paradigm inspection and local ownership checks support only the screened missing inputs; no new graph or target approval.",
+      "sources": [
+        "https://ro.wiktionary.org/wiki/mop"
+      ]
+    },
+    {
+      "id": "v111-input-oaie",
+      "verdict": "accept",
+      "rationale": "Common farm animal; oi/oilor are ordinary animal forms, excluding meat, figurative and compound extensions. Live Romanian paradigm inspection and local ownership checks support only the screened missing inputs; no new graph or target approval.",
+      "sources": [
+        "https://ro.wiktionary.org/wiki/oaie"
+      ]
+    },
+    {
+      "id": "v111-input-vaca",
+      "verdict": "accept",
+      "rationale": "Common domestic bovine; vacilor stays with the animal and adds no pejorative or food framing. Live Romanian paradigm inspection and local ownership checks support only the screened missing inputs; no new graph or target approval.",
+      "sources": [
+        "https://ro.wiktionary.org/wiki/vac%C4%83"
+      ]
+    },
+    {
+      "id": "v111-input-cal",
+      "verdict": "accept",
+      "rationale": "Common domestic horse; cai/caii/cailor match the animal family, with no chess or apparatus sense added. Live Romanian paradigm inspection and local ownership checks support only the screened missing inputs; no new graph or target approval.",
+      "sources": [
+        "https://ro.wiktionary.org/wiki/cal"
+      ]
+    },
+    {
+      "id": "v111-input-porc",
+      "verdict": "accept",
+      "rationale": "Common domestic pig; porcilor stays with that animal, not meat or a human epithet. Live Romanian paradigm inspection and local ownership checks support only the screened missing inputs; no new graph or target approval.",
+      "sources": [
+        "https://ro.wiktionary.org/wiki/porc"
+      ]
+    },
+    {
+      "id": "v111-input-caine",
+      "verdict": "accept",
+      "rationale": "Everyday dog; câinilor matches the established domestic-animal owner and excludes human epithets. Live Romanian paradigm inspection and local ownership checks support only the screened missing inputs; no new graph or target approval.",
+      "sources": [
+        "https://ro.wiktionary.org/wiki/c%C3%A2ine"
+      ]
+    },
+    {
+      "id": "v111-input-pisica",
+      "verdict": "accept",
+      "rationale": "Everyday domestic cat; pisicilor preserves that owner and excludes tool names and compounds. Live Romanian paradigm inspection and local ownership checks support only the screened missing inputs; no new graph or target approval.",
+      "sources": [
+        "https://ro.wiktionary.org/wiki/pisic%C4%83"
+      ]
+    },
+    {
+      "id": "v111-input-cerb",
+      "verdict": "accept",
+      "rationale": "Familiar forest deer; cerbilor matches the existing animal and excludes the rare ritual-dance sense. Live Romanian paradigm inspection and local ownership checks support only the screened missing inputs; no new graph or target approval.",
+      "sources": [
+        "https://ro.wiktionary.org/wiki/cerb"
+      ]
+    },
+    {
+      "id": "v111-input-caprioara",
+      "verdict": "accept",
+      "rationale": "Familiar roe-deer label; căprioarelor preserves the existing owner and does not introduce the different căprior lemma. Live Romanian paradigm inspection and local ownership checks support only the screened missing inputs; no new graph or target approval.",
+      "sources": [
+        "https://ro.wiktionary.org/wiki/c%C4%83prioar%C4%83"
+      ]
+    },
+    {
+      "id": "v111-input-veverita",
+      "verdict": "accept",
+      "rationale": "Recognizable tree-dwelling squirrel; veverițelor stays with that animal, excluding epithets and flying-squirrel compounds. Live Romanian paradigm inspection and local ownership checks support only the screened missing inputs; no new graph or target approval.",
+      "sources": [
+        "https://ro.wiktionary.org/wiki/veveri%C8%9B%C4%83"
+      ]
+    },
+    {
+      "id": "v111-input-lup",
+      "verdict": "accept",
+      "rationale": "Familiar wild wolf; lupilor preserves the zoological owner and excludes technical/figurative extensions. Live Romanian paradigm inspection and local ownership checks support only the screened missing inputs; no new graph or target approval.",
+      "sources": [
+        "https://ro.wiktionary.org/wiki/lup"
+      ]
+    },
+    {
+      "id": "v111-input-vulpe",
+      "verdict": "accept",
+      "rationale": "Familiar wild fox; vulpilor preserves the animal, excluding pelts, people and regional customs. Live Romanian paradigm inspection and local ownership checks support only the screened missing inputs; no new graph or target approval.",
+      "sources": [
+        "https://ro.wiktionary.org/wiki/vulpe"
+      ]
+    },
+    {
+      "id": "v111-input-urs",
+      "verdict": "accept",
+      "rationale": "Familiar bear; urșilor matches the animal, excluding regional food and construction meanings. Live Romanian paradigm inspection and local ownership checks support only the screened missing inputs; no new graph or target approval.",
+      "sources": [
+        "https://ro.wiktionary.org/wiki/urs"
+      ]
+    },
+    {
+      "id": "v111-input-nuca",
+      "verdict": "accept",
+      "rationale": "Common walnut fruit/edible kernel; nucii/nuci/nucilor remain the food owner, excluding the tree and mechanical-joint senses. Live Romanian paradigm inspection and local ownership checks support only the screened missing inputs; no new graph or target approval.",
+      "sources": [
+        "https://ro.wiktionary.org/wiki/nuc%C4%83"
+      ]
+    },
+    {
+      "id": "v111-input-iarba",
+      "verdict": "accept",
+      "rationale": "Familiar herbaceous vegetation; ierbii/ierburilor retain botanical-variety scope, excluding slang, powder and seasoning-only readings. Live Romanian paradigm inspection and local ownership checks support only the screened missing inputs; no new graph or target approval.",
+      "sources": [
+        "https://ro.wiktionary.org/wiki/iarb%C4%83"
+      ]
+    },
+    {
+      "id": "v111-input-deget",
+      "verdict": "accept",
+      "rationale": "Everyday anatomical digit; degetului/degetelor preserve the body-part owner and exclude machine parts and old measures. Live Romanian paradigm inspection and local ownership checks support only the screened missing inputs; no new graph or target approval.",
+      "sources": [
+        "https://ro.wiktionary.org/wiki/deget"
+      ]
+    },
+    {
+      "id": "v111-input-ureche",
+      "verdict": "accept",
+      "rationale": "Everyday hearing/balance organ; urechii/urechilor preserve that anatomical owner, excluding handles and apertures. Live Romanian paradigm inspection and local ownership checks support only the screened missing inputs; no new graph or target approval.",
+      "sources": [
+        "https://ro.wiktionary.org/wiki/ureche"
+      ]
+    }
+  ]
+}

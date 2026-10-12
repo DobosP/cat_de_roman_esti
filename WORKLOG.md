@@ -2300,6 +2300,22 @@ Qualified V1.9 KG: `fixture-v1-9-seasons-and-school`, 2456 nodes/9621 links/8897
 - kg_sample.json: `846c2a4d48f85524b21043ecf52320edfa937946d030f91022ff6a879caae3e8`
 - cat_mobile_app_pack_contract.json: `ef9e281b092ea2dfd7df962d7625e28701b8e413543455242dbfe4e631ce393a`
 
+Valid until: V1.11 qualification on 2026-10-12; prior V1.10 status is history.
+- **V1.10 qualified locally:** 35 reviewed items: 20 new concepts, 15 existing-owner input
+  families; +20 nodes/+79 links/+113 forms, zero new curated rounds.
+  All new labels/forms resolve; 18 missing forms for existing owners preserve identity.
+  [Review](reviews/v1-10-everyday-discovery/README.md) and [pool](content-pool/v1-10-everyday-discovery/pool.json).
+  Four exact native rails; owner-approved Cald assertions, HTTP1207 and API148 pass.
+  Full native race has no new red versus main; managed SPA baseline failures remain unchanged.
+
+Valid until: V1.12 qualification on 2026-10-12 — then treat this superseded V1.11 status as history.
+- **V1.11 qualified locally:** 49 reviewed items: 29 new concepts, 20 existing-owner input
+  families; +29 nodes/+110 links/+154 forms, zero new curated rounds.
+  All 183 added headwords/forms resolve into 49 real slots; 29 missing inputs preserve existing owners.
+  [Review](reviews/v1-11-home-and-nature/README.md) and [pool](content-pool/v1-11-home-and-nature/pool.json).
+  Four exact native rails; owner-approved Cald assertions, HTTP1207 and API183 pass.
+  Full native race has no new red versus main; managed SPA baseline failures remain unchanged.
+
 ## 2026-10-11 — Source-only main V1.8 / GUI reconciliation
 
 Parent integration joins GUI4f36abf and local main3f327c. Main's complete reviewed
@@ -2329,3 +2345,15 @@ re-signed or re-approved. The GUI indexed `ForSources` loader list gains main's
 V1.9 then V1.10 loaders after V1.8; every digest/count check stays. All earlier
 corpora, GUI0437 and the V1.8 selector contracts remain. ADR0196 records it.
 Combined unit/full NOT RUN: Paul's trust pin at the final tip, then one full.
+
+## 2026-10-12 — Source-only main V1.11/V1.12 / GUI reconciliation
+
+Parent integration joins GUI review tip 1350038 and local main a27477d (literal
+SHA read at merge time) with the ADR0194/ADR0196 method. Main's reviewed
+V1.11/V1.12 pools, native documents, installed authorities, pins, bundle/digest
+and the two 1207-case corpora (5165/b05a) stay byte-identical to main; nothing is
+regenerated, re-signed or re-approved. The indexed `ForSources` loader list gains
+main's V1.11 then V1.12 loaders after V1.10; every digest/count check stays. The
+V1.10 selector keeps its literal identity, selection and refusals; its live-bundle
+clause moves to the new V1.12 selector test. ADR0196 records it. Combined managed
+unit/full NOT RUN: Paul's trust pin at the final tip, then one full.

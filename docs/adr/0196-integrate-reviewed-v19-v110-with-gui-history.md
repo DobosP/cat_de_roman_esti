@@ -1,6 +1,6 @@
 # ADR-0196 — Integrate reviewed V1.9/V1.10 with GUI history
 
-Status: Accepted for source integration (2026-10-11); combined qualification NOT RUN.
+Status: Accepted for source integration (2026-10-11; extended 2026-10-12 to V1.11/V1.12 at a27477d); combined qualification NOT RUN.
 
 ## Context
 
@@ -49,3 +49,26 @@ trust pin for the `.gate.env` change at the final tip comes first, then one full
 Focused/rail/validate/export results for the merged tree are recorded in the
 [GUI handover](../GUI_MIGRATION_HANDOFF.md). Active size limits, physical Samsung,
 formal M0/M1/KIT_BUMP/M2 and any UI activation/deployment authority stay open.
+
+## V1.11/V1.12 at a27477d (2026-10-12)
+
+The same method integrates local main at the literal SHA
+a27477dbc52a3279223bcaa202789eecbbeb1825 (read at merge time) into GUI review
+tip 1350038. Main adds 39 commits after 6fbd7a4: reviewed V1.11 (home and
+nature) and V1.12 (post and garden) installations, native reviews, installed
+authorities, pins, bundle/digest and two independent 1207-case corpora (5165
+V1.11, b05a V1.12). They stay byte-identical to main; nothing is regenerated,
+re-signed or re-approved. No main commit touches the trust set, ADRs or GUI
+serving/build/gate code.
+
+Textual conflicts were again limited to `docs/STATUS.md`, `WORKLOG.md` and
+`golden.go`; main's `reviewedV111`/`reviewedV112` join the indexed list after
+`reviewedV110` with every digest and 1207-case/eight-source check. Both captures
+keep every ordered request and status of their predecessor; V1.11 changes 23
+bodies versus V1.10 and V1.12 changes 24 versus V1.11. This section supersedes the
+V1.10 live-bundle ownership above: V1.10 keeps its literal identity, selection
+and refusals with a moved-past clause, and V1.12 now owns the live-bundle clause.
+All eleven older tuples still select their own responses; all 62 proper V1.12/V1.11
+and V1.11/V1.10 mixtures, plus changed, missing, extra, nil and empty tuples,
+refuse before HTTP. No assertion is weakened. The qualification boundary above is
+unchanged.

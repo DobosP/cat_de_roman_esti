@@ -1,6 +1,6 @@
 # GUI migration — feature branch handover
 
-Valid until: the next source or completed gate change. Updated 2026-10-11. Read actual HEAD/dirty state and origin refs before continuation.
+Valid until: the next source or completed gate change. Updated 2026-10-12. Read actual HEAD/dirty state and origin refs before continuation.
 
 Publish only `fix/gui-cat-prerequisites-linux` to origin. Shared main stays clean. React19/Motion and UI0.3 remain active; Core-v1.6 is released and UI1.0.6 staged. This migration is unfinished.
 
@@ -12,6 +12,11 @@ Publish only `fix/gui-cat-prerequisites-linux` to origin. Shared main stays clea
   `run.sh` back to e042587; CI keeps only the no-shell check; 0f51b96/35e8de9 port edits reverted),
   perf aa8d4e3/5d7594a/e6421be (0479930+5d535ed is a hoist/revert pair: land both or neither) and this
   docs sync (PROGRAM E2–E5, S1 notes). Decisions: PROGRAM E5 and [ADR0195](adr/0195-owner-decisions-review-m1-image-test-loop.md).
+- Combined source now includes local main a27477d (V1.12): 1350038 merged main 6fbd7a4 (V1.9/V1.10)
+  and the next merge commit merges a27477d (V1.11/V1.12), both by the ADR0194 method and recorded in
+  [ADR0196](adr/0196-integrate-reviewed-v19-v110-with-gui-history.md). Main's content, pins, installed
+  authorities, native reviews and 1207-case corpora are byte-identical to main. Combined managed
+  unit/full NOT RUN: it needs Paul's trust pin for the `.gate.env` change at the final tip.
 - Latest actual full at e042587 (2026-10-11 19:00–19:52 UTC, 52.4 min, wrapper result kept in parent
   `_temp`): FAIL only from the 10 active route-JS budgets (Home 115,016 vs 40,960) plus the aggregate exit;
   37/39 checks passed. Backend race 1,743 s (contentrails 1,384.7 s of the 1,800 s per-binary timeout,
@@ -23,7 +28,7 @@ Publish only `fix/gui-cat-prerequisites-linux` to origin. Shared main stays clea
 - Open, in priority order:
   1. Paul's trust pin for `.gate.env` → managed unit, then full on this branch (port ruled: Q5,
      ADR0195).
-  2. Integrate local main (V1.9/V1.10, 40 commits after 3f327c) with one combined full.
+  2. One combined full of this branch (source already integrates main a27477d; re-merge if main moves).
   3. KIT_BUMP core-v1.6 under E5 (budget-only-red same-SHA unit; parent `kit:sync` only).
   4. Physical Samsung Chrome + Samsung Internet throttled-4G device checkpoint: UNMET.
   5. PROGRAM §4.7 `budgets.json` defaults vs E3 "preserve unchanged": open.

@@ -55,7 +55,7 @@ func TestV18SelectsItsExactEightSourceCorpus(t *testing.T) {
 	}
 	// Main's reviewed V1.10 succeeded V1.8 (ADR-0196); like main's own superseded
 	// tuples, V1.8 keeps its literal identity and selection while the live-tuple
-	// clause moves to TestV110SelectsItsExactEightSourceCorpus.
+	// clause moves to the current version (TestV112SelectsItsExactEightSourceCorpus).
 	data, err := content.Load()
 	if err != nil || len(data.Sources) != 8 || reflect.DeepEqual(data.Sources, want.Sources) {
 		t.Fatal("live compiled bundle did not move past the historical V1.8 source tuple", err)

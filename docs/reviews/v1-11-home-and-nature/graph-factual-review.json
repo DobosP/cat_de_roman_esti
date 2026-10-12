@@ -1,0 +1,569 @@
+{
+  "schema_version": 1,
+  "kind": "graph-factual-review-v1",
+  "reviewer": "factual-v1-11",
+  "role": "factual",
+  "module_path": "scripts/home_and_nature_v1_11_data.py",
+  "module_sha256": "821cdf44640e33e8f13c1eed73a5cc4f7460f56b00c549171da5abda5296dff8",
+  "pool_sha256": "08d42510164149cdf909d1f7d9269150c7109beaa44b7c236ebce24fdf335cba",
+  "reviewed_on": "2026-10-12",
+  "methodology": [
+    "One whole-batch independent factual web review of all 58 frozen REVIEW_ITEMS, under main CONTENT_LOOP procedure revision 17b97a2 and applicable CRITIQUE_RUBRIC A, C, D and F; five preexisting holds remain holds.",
+    "Live dexonline JSON was fetched directly because the browser could not open JSON: Mănușă first, then the remaining 57 serially with at least 2.1 seconds after every response. Selected exact DEX09/DOOM3 IDs and lexical headwords were checked anew; stress/editorial marks, homograph indices and the Mistreț feminine suffix were treated as metadata, not unrelated lemmas.",
+    "All 129 authored edge captions, relation types and orientations were judged against live browsed primary/secondary Romanian sources. Indexed primary passages were used where dynamic pages/PDF fetching failed; notably the sewing-manual wool/button passages. No source claims from adjacent species were borrowed. The primary Milvus PDF was freshly downloaded and page 3 visually inspected.",
+    "The official Lipici school PDF was fetched anew and its pages 8 and 15–18 checked: notebook-label repair only. Current Pictus text supports bookbinding, not an assumed restoration claim. Fresh Romsilva squirrel/acorn evidence replaces reliance on the inaccessible Padeș-only citation.",
+    "The frozen 205 distinct proposed input keys were checked with bundled normalization_map against normalized_index, labels, node labels/aliases and discovery-world labels/aliases/snapshots; every resolved owner is unchanged and no foreign owner is stolen. Stejarii, hârtii, ac and coadă collisions remain excluded or held. All 20 existing-owner families retain their exact current senses.",
+    "Factual acceptance establishes lexical/claim correctness only. It neither relaxes the 4–8 distinct-neighbour, at-least-two-existing, at-most-two-batch or same-category requirements nor approves new curated rounds/hidden targets. Final aggregate topology and playable selection remain subject to the independent quality verdict and owner-applied trims."
+  ],
+  "items": [
+    {
+      "id": "v111-manusa",
+      "verdict": "accept",
+      "rationale": "Modern clothing sense and feminine paradigm are exact; DEX supports clothing, hand protection and wool, while the winter-glove source supports the qualified cold-weather caption.",
+      "sources": [
+        "https://dexonline.ro/definitie/m%C4%83nu%C8%99%C4%83/json",
+        "https://www.decathlon.ro/toate-sporturile/ski-snowboard/manusi-ski"
+      ]
+    },
+    {
+      "id": "v111-vrabie",
+      "verdict": "accept",
+      "rationale": "Exact Passer domesticus sense and vrăbii paradigm; SOR explicitly supports insect food and occasional tree nesting, and the beak-to-bird part_of orientation is correct.",
+      "sources": [
+        "https://dexonline.ro/definitie/vrabie/json",
+        "https://ornitodata2.sor.ro/specii/524/vrabie-de-casa-passer-domesticus"
+      ]
+    },
+    {
+      "id": "v111-foarfeca",
+      "verdict": "accept",
+      "rationale": "Exact feminine foarfecă/foarfeci family only; primary sewing material directly supports steel, garment cutting, thread-end cutting and cloth cutting; no unverified neuter variant admitted.",
+      "sources": [
+        "https://dexonline.ro/definitie/foarfec%C4%83/json",
+        "https://www.pufo.ro/cumpara/foarfeca-profesionala-pufo-pentru-croitorie-24-cm-precizie-si-confort-4909989",
+        "https://www.educatieonline.md/Files/Manuals/4/IV_Educatia%20tenhologica%20%28a.%202017%2C%20in%20limba%20romana%29.pdf"
+      ]
+    },
+    {
+      "id": "v111-lana",
+      "verdict": "accept",
+      "rationale": "DEX distinguishes animal wool and textile fibre; DOOM3 expressly licenses quantity lâni and sorts lânuri, and the qualified blanket, scarf, sweater and glove material captions are supported.",
+      "sources": [
+        "https://dexonline.ro/definitie/l%C3%A2n%C4%83/json",
+        "https://www.ikea.com/ro/ro/cat/paturi-si-cuverturi-20528/f/paturi-lana-f-materials--48361/",
+        "https://www.decathlon.ro/p/mp/nadura/fular-circular-merino/_/R-p-37f9ba06-8faf-4515-95ce-96c165f8de18",
+        "https://www.decathlon.ro/c/htc/care-sunt-avantajele-lanii-merinos_5ae6053e-f08f-4b58-94d9-1efc963b2ffd",
+        "https://dexonline.ro/definitie/m%C4%83nu%C8%99%C4%83/json"
+      ]
+    },
+    {
+      "id": "v111-bumbac",
+      "verdict": "accept",
+      "rationale": "DOOM3 1319987 is the neuter fibre/thread/cloth homograph with sorts bumbacuri; the plant homograph is excluded and cotton garment, shirt, towel and cloth uses are explicit.",
+      "sources": [
+        "https://dexonline.ro/definitie/bumbac/json",
+        "https://www.reserved.com/ro/ro/femei/camasi-bluze/camasi",
+        "https://www.ikea.com/ro/ro/p/gulvial-prosop-baie-alb-00579661/",
+        "https://dexonline.ro/definitie/p%C3%A2nz%C4%83/json"
+      ]
+    },
+    {
+      "id": "v111-matase",
+      "verdict": "modify",
+      "rationale": "held: Exact morphology and textile sense are supported, but all four predeclared Fular/Rochie/Cămașă/Pânză claims were not directly qualified within the item budget. Do not infer the planned Pânză boundary or substitute a new target to fill the floor.",
+      "sources": [
+        "https://dexonline.ro/definitie/m%C4%83tase/json"
+      ],
+      "requested_changes": [
+        "Keep this item held and outside NODES, EDGES and ALIASES; preserve its recorded reason."
+      ]
+    },
+    {
+      "id": "v111-pulover",
+      "verdict": "accept",
+      "rationale": "Modern knitted-garment definition and written pulover/pulovere are exact; current product and wool text support the qualified cotton, wool and cold-weather links.",
+      "sources": [
+        "https://dexonline.ro/definitie/pulover/json",
+        "https://www2.hm.com/ro_ro/productpage.1223221006.html",
+        "https://www.decathlon.ro/c/htc/care-sunt-avantajele-lanii-merinos_5ae6053e-f08f-4b58-94d9-1efc963b2ffd"
+      ]
+    },
+    {
+      "id": "v111-cuvertura",
+      "verdict": "accept",
+      "rationale": "DEX confirms a bed covering; IKEA expressly identifies cotton and wool among bedspread materials and one bedspread usable as a blanket, so all four qualified captions remain literal.",
+      "sources": [
+        "https://dexonline.ro/definitie/cuvertur%C4%83/json",
+        "https://www.ikea.com/ro/ro/cat/cuverturi-de-pat-20527/",
+        "https://www.ikea.com/ro/ro/p/pelartuja-cuvertura-alb-50600373/"
+      ]
+    },
+    {
+      "id": "v111-umeras",
+      "verdict": "accept",
+      "rationale": "Exact hanger noun and neuter paradigm; IKEA explicitly supports wardrobe storage, solid wood and a steel hanger, without changing the wardrobe owner sense.",
+      "sources": [
+        "https://dexonline.ro/definitie/umera%C8%99/json",
+        "https://www.ikea.com/ro/ro/p/bumerang-umeras-natur-30238543/",
+        "https://www.ikea.com/ro/ro/p/stajlig-umeras-interior-exterior-alb-00291419/"
+      ]
+    },
+    {
+      "id": "v111-cuier",
+      "verdict": "accept",
+      "rationale": "Modern garment-support sense and neuter forms; DEX supports wooden/metal examples and the primary HOMCOM description explicitly includes a central umbrella holder.",
+      "sources": [
+        "https://dexonline.ro/definitie/cuier/json",
+        "https://prod.aosom.ro/item/homcom-cuier-de-podea-pentru-haine-cu-suport-de-umbrele-si-13-carlige-din-metal-de-culoare-alb-si-bambus~837-161.html"
+      ]
+    },
+    {
+      "id": "v111-umbrela",
+      "verdict": "accept",
+      "rationale": "DEX supports rain protection, metal spokes and cloth; the named product specifies a wooden shaft, and every material caption is appropriately qualified.",
+      "sources": [
+        "https://dexonline.ro/definitie/umbrel%C4%83/json",
+        "https://www.dedeman.ro/ro/umbrela-de-ploaie-pentru-adulti-oslo-ac-tip-baston-automata-diverse-culori-104-cm-rezistenta-la-vant/p/7028928"
+      ]
+    },
+    {
+      "id": "v111-perdea",
+      "verdict": "accept",
+      "rationale": "Modern window-textile sense and perdeaua/perdelei/perdele morphology; the cotton curtain source explicitly supports light filtering and 100% cotton rather than opaque blackout performance.",
+      "sources": [
+        "https://dexonline.ro/definitie/perdea/json",
+        "https://www.ikea.com/ro/ro/p/silverloenn-perdele-transparente-2buc-bej-rjns-10493978/"
+      ]
+    },
+    {
+      "id": "v111-draperie",
+      "verdict": "accept",
+      "rationale": "DEX makes the heavy curtain a subtype of perdea; the blackout product supports window placement and qualified light blocking, with directed is_a and literal textile material relation.",
+      "sources": [
+        "https://dexonline.ro/definitie/draperie/json",
+        "https://www.ikea.com/ro/ro/p/loennstaevmal-draperii-opace-2buc-bej-rjns-70556374/"
+      ]
+    },
+    {
+      "id": "v111-burete",
+      "verdict": "modify",
+      "rationale": "held: Cleaning-object sense and forms confirmed, but the fourth predeclared link to Pahar was not qualified within the item budget; do not invent a link.",
+      "sources": [
+        "https://dexonline.ro/definitie/burete/json"
+      ],
+      "requested_changes": [
+        "Keep this item held and outside NODES, EDGES and ALIASES; preserve its recorded reason."
+      ]
+    },
+    {
+      "id": "v111-carpa",
+      "verdict": "accept",
+      "rationale": "DEX directly supports cloth and dust wiping; IKEA explicitly describes a cloth wetted in water with mild detergent or soap, so soap is not inferred from an unrelated cleaner.",
+      "sources": [
+        "https://dexonline.ro/definitie/c%C3%A2rp%C4%83/json",
+        "https://www.ikea.com/ro/ro/p/utrusta-incuietoare-pentru-dulapuri-corpuri-negru-80453610/"
+      ]
+    },
+    {
+      "id": "v111-ata",
+      "verdict": "accept",
+      "rationale": "Modern thin sewing-thread sense and aței/ațe forms are exact; indexed sewing-manual passages name wool thread and fine thread for buttons, and the heritage PDF describes shirt pieces joined with thread.",
+      "sources": [
+        "https://dexonline.ro/definitie/a%C8%9B%C4%83/json",
+        "https://www.tiparedecroitorie.ro/media/catalog/product/file/masini_normale/riff_traducere.pdf",
+        "https://clasate.cimec.ro/omc/OMC-2633-2007-11-22.PDF"
+      ]
+    },
+    {
+      "id": "v111-panza",
+      "verdict": "accept",
+      "rationale": "Selected cloth material sense is exact; cotton is definitional, the producer explicitly names shirts and dresses, and the museum describes a particular traditional towel sewn on cotton cloth.",
+      "sources": [
+        "https://dexonline.ro/definitie/p%C3%A2nz%C4%83/json",
+        "https://evelintextile.ro/panza-topita/panza-topita-triplu-strat-galben-pai-muselina/",
+        "https://muzeu.mncr.ro/index.php/pers/28-stergar-din-1927"
+      ]
+    },
+    {
+      "id": "v111-sertar",
+      "verdict": "accept",
+      "rationale": "Modern sliding furniture compartment and neuter forms; primary furniture specifications support wardrobe membership, wooden and steel examples and a drawer lock; no administrative-birou endpoint is used.",
+      "sources": [
+        "https://dexonline.ro/definitie/sertar/json",
+        "https://www.ikea.com/ro/ro/p/pax-mehamn-auli-dulap-usi-glisante-alb-alb-aspect-stejar-oglinda-s09608881/",
+        "https://www.ikea.com/ro/ro/p/hemnes-corp-usi-sticla-3-sertare-vopsit-alb-maro-des-50413507/",
+        "https://www.ikea.com/ro/ro/p/helmer-comoda-cu-rotile-negru-20341970/",
+        "https://www.ikea.com/ro/ro/p/utrusta-incuietoare-pentru-dulapuri-corpuri-negru-80453610/"
+      ]
+    },
+    {
+      "id": "v111-cutie",
+      "verdict": "accept",
+      "rationale": "Literal container definition directly names wood, metal and cardboard; the fastener supplier explicitly identifies wooden-box production, supporting the qualified nail assembly caption.",
+      "sources": [
+        "https://dexonline.ro/definitie/cutie/json",
+        "https://www.alsafix.ro/cuie/cuie-in-role-tip-surub-scrail-fascoat-dimensiuni-diverse.html"
+      ]
+    },
+    {
+      "id": "v111-incuietoare",
+      "verdict": "accept",
+      "rationale": "Literal locking-device noun and încuietorii/încuietori are exact; door hardware and manufacturer catalogue explicitly support door, key, cupboard and metal examples without universalizing keys or metal.",
+      "sources": [
+        "https://dexonline.ro/definitie/%C3%AEncuietoare/json",
+        "https://www.assaabloy.com/ro/ro/solutions/products/doors/bulletproof-and-burglarproof-solutions/usi-batante-anti-efractie",
+        "https://www.metalobox.com/assets/catalog/mb_2024_industrial_catalog.pdf"
+      ]
+    },
+    {
+      "id": "v111-lacat",
+      "verdict": "accept",
+      "rationale": "Modern portable shackle lock and lacăte family; the product explicitly supplies keys, steel body and door/cupboard uses, and the captions correctly allow other lock mechanisms.",
+      "sources": [
+        "https://dexonline.ro/definitie/lac%C4%83t/json",
+        "https://www.leroymerlin.ro/produse/lacat-cu-cheie-pentru-interior-thirard-reglabil-47-mm-10419542.html"
+      ]
+    },
+    {
+      "id": "v111-clanta",
+      "verdict": "modify",
+      "rationale": "held: Retain the prior weak-fourth-link constraint: manual operation still describes the handle/tool class generally. The new lock hypothesis and permitted proxy upgrade do not by themselves establish four distinctive supported links.",
+      "sources": [
+        "https://dexonline.ro/definitie/clan%C8%9B%C4%83/json"
+      ],
+      "requested_changes": [
+        "Keep this item held and outside NODES, EDGES and ALIASES; preserve its recorded reason."
+      ]
+    },
+    {
+      "id": "v111-vidra",
+      "verdict": "accept",
+      "rationale": "Selected Lutra lutra animal sense is supported by exact-headword DEXI as well as WWF; DEX09 historical vulgaris is not substituted for another animal, and fish, semi-aquatic life and river habitat are supported.",
+      "sources": [
+        "https://dexonline.ro/definitie/vidr%C4%83/json",
+        "https://wwf.ro/garla-mare/speciile-de-la-garla-mare/",
+        "https://wwf.ro/noutati/comunicate-de-presa/cum-ar-putea-sfasri-raul-topolog/"
+      ]
+    },
+    {
+      "id": "v111-mistret",
+      "verdict": "accept",
+      "rationale": "DEX morphological suffix -EAȚĂ is not a redirect; DOOM3 animal homograph2 supports mistreți, and forest habitat, domestic-pig ancestry and acorn food are supported.",
+      "sources": [
+        "https://dexonline.ro/definitie/mistre%C8%9B/json",
+        "https://ro.wikipedia.org/wiki/Mistre%C8%9B",
+        "https://resita.rosilva.ro/articole/statia_nr_5__p_3138.htm"
+      ]
+    },
+    {
+      "id": "v111-castor",
+      "verdict": "accept",
+      "rationale": "Animal-only DOOM3 homograph1 and masculine forms are exact; the genus description distinguishes canadensis from European fiber, while WWF explicitly supports the European animal’s wood dams, water and river habitat.",
+      "sources": [
+        "https://dexonline.ro/definitie/castor/json",
+        "https://ro.wikipedia.org/wiki/Castor",
+        "https://wwf.ro/wp-content/uploads/2023/09/Ghid-WWF-despre-PVRC.pdf"
+      ]
+    },
+    {
+      "id": "v111-stejar",
+      "verdict": "accept",
+      "rationale": "Exact oak-tree sense and masculine family; definitional leaves/acorns and documented timber/forest uses support the captions, while Rugby-owned stejarii stays excluded from inputs.",
+      "sources": [
+        "https://dexonline.ro/definitie/stejar/json",
+        "https://ro.wikipedia.org/wiki/Stejar"
+      ]
+    },
+    {
+      "id": "v111-ghinda",
+      "verdict": "modify",
+      "rationale": "Fruit sense and ghindei/ghinde are exact; the fresh primary Romsilva station page explicitly says Sciurus vulgaris gathers acorns and wild boar eat them. The inaccessible Padeș-only squirrel citation should be replaced, preserving the qualified claim.",
+      "sources": [
+        "https://dexonline.ro/definitie/ghind%C4%83/json",
+        "https://resita.rosilva.ro/articole/statia_nr_5__p_3138.htm",
+        "https://ro.wikipedia.org/wiki/Stejar"
+      ],
+      "requested_changes": [
+        "Replace the inaccessible Padeș-only Veveriță→Ghindă evidence citation with https://resita.rosilva.ro/articole/statia_nr_5__p_3138.htm in the module/pool source metadata and verified-link evidence. The primary text explicitly says Sciurus vulgaris gathers acorns; preserve the existing qualified claim and edge orientation."
+      ]
+    },
+    {
+      "id": "v111-aripa",
+      "verdict": "accept",
+      "rationale": "Exact anatomical flight-organ sense and aripii/aripi family; bird, butterfly, bee and swallow organs are supported, and all part_of edges point from organ to animal.",
+      "sources": [
+        "https://dexonline.ro/definitie/arip%C4%83/json",
+        "https://antipa.ro/product/cocon/",
+        "https://ro.wikipedia.org/wiki/Albin%C4%83",
+        "https://www.sor.ro/randunica-de-la-legenda-la-realitate/"
+      ]
+    },
+    {
+      "id": "v111-cuib",
+      "verdict": "accept",
+      "rationale": "Modern bird-nesting construction and neuter family; SOR supports stork and swallow nests and directly reports stork nests in trees, without assigning tree nesting to swallows.",
+      "sources": [
+        "https://dexonline.ro/definitie/cuib/json",
+        "https://www.sor.ro/rezultatele-recensamantului-international-al-berzelor-albe-2024-2025/",
+        "https://www.sor.ro/randunica-de-la-legenda-la-realitate/"
+      ]
+    },
+    {
+      "id": "v111-blana",
+      "verdict": "accept",
+      "rationale": "Living animal covering comes from DEX09, while DOOM3 homograph1 is glossed skin/coat; only blană/blănii are retained, and fur on the named fox, bear, dog and cat is explicitly supported.",
+      "sources": [
+        "https://dexonline.ro/definitie/blan%C4%83/json",
+        "https://dexonline.ro/definitie/vulpe/json",
+        "https://dexonline.ro/definitie/urs/json",
+        "https://dexonline.ro/definitie/pisic%C4%83/json",
+        "https://www.royalcanin.com/ro/dogs/breeds/ca-de-bestiar"
+      ]
+    },
+    {
+      "id": "v111-gheara",
+      "verdict": "accept",
+      "rationale": "Exact anatomical sense and ghearei/gheare family; cat and bear evidence is explicit, and the freshly rendered Milvus fox-labelled diagram supports the claw-presence inference without borrowing adjacent lynx text or claiming retractility.",
+      "sources": [
+        "https://dexonline.ro/definitie/ghear%C4%83/json",
+        "https://dexonline.ro/definitie/pisic%C4%83/json",
+        "https://milvus.ro/wp-content/uploads/2018/02/Nyomhatarozo-RO-print.pdf"
+      ]
+    },
+    {
+      "id": "v111-hartie",
+      "verdict": "accept",
+      "rationale": "DEX distinguishes material/physical sheets from documents and money; notebook paper, printed book pages and pencil/pen writing are explicit, while Hartă-owned hârtii remains excluded.",
+      "sources": [
+        "https://dexonline.ro/definitie/h%C3%A2rtie/json",
+        "https://www.herlitz.ro/cumpara/caiet-a5-48-file-dictando-motiv-megamix-7480",
+        "https://ro.wikipedia.org/wiki/Carte",
+        "https://www.herlitz.ro/catalog/instrumente-de-scris-42/filtru-tip-produs-creion-grafit-810"
+      ]
+    },
+    {
+      "id": "v111-carton",
+      "verdict": "accept",
+      "rationale": "DEX 841971 is the thick-paper material homograph, not the regional textile entry; directed carton-to-paper is_a and qualified box/notebook/book-cover uses are supported.",
+      "sources": [
+        "https://dexonline.ro/definitie/carton/json",
+        "https://www.iatc.ro/",
+        "https://www.herlitz.ro/cumpara/caiet-a5-48-file-dictando-motiv-megamix-7480",
+        "https://ecopertare.ro/magazin/accesorii-legatorie/carton-legatorie-mucava-1-2-5-mm/"
+      ]
+    },
+    {
+      "id": "v111-sticla",
+      "verdict": "accept",
+      "rationale": "Material sense and sticlei are exact; plural sticle is marked for objects and excluded, while window glass, glass mirror/jar examples and possible optical-glass lenses support the qualified captions.",
+      "sources": [
+        "https://dexonline.ro/definitie/sticl%C4%83/json",
+        "https://www.ikea.com/ro/ro/p/hovet-oglinda-negru-70515915/",
+        "https://www.ikea.com/ro/ro/p/korken-borcan-cu-capac-sticla-transparenta-70213545/"
+      ]
+    },
+    {
+      "id": "v111-cauciuc",
+      "verdict": "accept",
+      "rationale": "Only singular material keys are retained because DOOM3 assigns cauciucuri to tyres; primary sources support tyres on wheels, rubber soles and rubber household gloves without making the whole wheel rubber.",
+      "sources": [
+        "https://dexonline.ro/definitie/cauciuc/json",
+        "https://www.michelin.ro/auto/sfat/notiuni-de-baza-despre-anvelope/fabricarea-anvelopei-reciclarea",
+        "https://www.decathlon.ro/p/incaltaminte-skateboard-vulca-500-ii-adulti/_/R-p-311607",
+        "https://www.dedeman.ro/ro/manusi-menaj-misavan-profesionale-marimea-s-latex/p/7021455"
+      ]
+    },
+    {
+      "id": "v111-lipici",
+      "verdict": "accept",
+      "rationale": "DOOM3 substance homograph2 and lipiciuri family are exact; current Pictus text supports paper/cardboard and bookbinding, and the official school PDF supports only notebook-label reattachment, not full notebook restoration.",
+      "sources": [
+        "https://dexonline.ro/definitie/lipici/json",
+        "https://pictus.ro/produs/adeziv-hobby-universal-pentart/",
+        "https://www.edums.ro/resurseeducationale/files/gimnazial/lbcomunicare/%5BClasa%20a%20VIII-a%5D%20%5BMaghiar%C4%83%5D%20Lec%C8%9Bia%202.pdf"
+      ]
+    },
+    {
+      "id": "v111-ac",
+      "verdict": "modify",
+      "rationale": "held: owned by n_v20via_aer_conditionat",
+      "sources": [
+        "https://dexonline.ro/definitie/ac/json"
+      ],
+      "requested_changes": [
+        "Keep this item held and outside NODES, EDGES and ALIASES; preserve its recorded reason."
+      ]
+    },
+    {
+      "id": "v111-coada",
+      "verdict": "modify",
+      "rationale": "held: owned by n_v3via_coada",
+      "sources": [
+        "https://dexonline.ro/definitie/coad%C4%83/json"
+      ],
+      "requested_changes": [
+        "Keep this item held and outside NODES, EDGES and ALIASES; preserve its recorded reason."
+      ]
+    },
+    {
+      "id": "v111-input-usa",
+      "verdict": "accept",
+      "rationale": "Exact modern literal noun sense and DEX09/DOOM3 IDs 829121/1314078 support the paradigm; only ușii, ușilor are added to n_v4via_usa, with current ownership and description preserved.",
+      "sources": [
+        "https://dexonline.ro/definitie/u%C8%99%C4%83/json"
+      ]
+    },
+    {
+      "id": "v111-input-galeata",
+      "verdict": "accept",
+      "rationale": "Exact modern literal noun sense and DEX09/DOOM3 IDs 876337/1319024 support the paradigm; only găleților are added to n_v31_cleaning_water_galeata, with current ownership and description preserved.",
+      "sources": [
+        "https://dexonline.ro/definitie/g%C4%83leat%C4%83/json"
+      ]
+    },
+    {
+      "id": "v111-input-faras",
+      "verdict": "accept",
+      "rationale": "Exact modern literal noun sense and DEX09/DOOM3 IDs 869485/1301054 support the paradigm; only fărașelor are added to n_v31_cleaning_floor_faras, with current ownership and description preserved.",
+      "sources": [
+        "https://dexonline.ro/definitie/f%C4%83ra%C8%99/json"
+      ]
+    },
+    {
+      "id": "v111-input-mop",
+      "verdict": "accept",
+      "rationale": "Exact modern literal noun sense and DEX09/DOOM3 IDs 891821/1294585 support the paradigm; only mopurilor are added to n_v31_cleaning_floor_mop, with current ownership and description preserved.",
+      "sources": [
+        "https://dexonline.ro/definitie/mop/json"
+      ]
+    },
+    {
+      "id": "v111-input-oaie",
+      "verdict": "accept",
+      "rationale": "Exact modern literal noun sense and DEX09/DOOM3 IDs 836399/1286374 support the paradigm; only oi, oilor are added to n_v30_animal_farm_oaie, with current ownership and description preserved.",
+      "sources": [
+        "https://dexonline.ro/definitie/oaie/json"
+      ]
+    },
+    {
+      "id": "v111-input-vaca",
+      "verdict": "accept",
+      "rationale": "Exact modern literal noun sense and DEX09/DOOM3 IDs 824691/1263168 support the paradigm; only vacilor are added to n_v30_animal_farm_vaca, with current ownership and description preserved.",
+      "sources": [
+        "https://dexonline.ro/definitie/vac%C4%83/json"
+      ]
+    },
+    {
+      "id": "v111-input-cal",
+      "verdict": "accept",
+      "rationale": "Exact modern literal noun sense and DEX09/DOOM3 IDs 839710/1309123 support the paradigm; only cai, caii, cailor are added to n_v30_animal_farm_cal, with current ownership and description preserved.",
+      "sources": [
+        "https://dexonline.ro/definitie/cal/json"
+      ]
+    },
+    {
+      "id": "v111-input-porc",
+      "verdict": "accept",
+      "rationale": "Exact modern literal noun sense and DEX09/DOOM3 IDs 875589/1283959 support the paradigm; only porcilor are added to n_v29_animal_farm_porc, with current ownership and description preserved.",
+      "sources": [
+        "https://dexonline.ro/definitie/porc/json"
+      ]
+    },
+    {
+      "id": "v111-input-caine",
+      "verdict": "accept",
+      "rationale": "Exact modern literal noun sense and DEX09/DOOM3 IDs 843366/1310591 support the paradigm; only câinilor are added to n_v29_animal_pets_caine, with current ownership and description preserved.",
+      "sources": [
+        "https://dexonline.ro/definitie/c%C3%A2ine/json"
+      ]
+    },
+    {
+      "id": "v111-input-pisica",
+      "verdict": "accept",
+      "rationale": "Exact modern literal noun sense and DEX09/DOOM3 IDs 872008/1282695 support the paradigm; only pisicilor are added to n_v29_animal_pets_pisica, with current ownership and description preserved.",
+      "sources": [
+        "https://dexonline.ro/definitie/pisic%C4%83/json"
+      ]
+    },
+    {
+      "id": "v111-input-cerb",
+      "verdict": "accept",
+      "rationale": "Exact modern literal noun sense and DEX09/DOOM3 IDs 844439/1310996 support the paradigm; only cerbilor are added to n_v33_forest_animal_cerb, with current ownership and description preserved.",
+      "sources": [
+        "https://dexonline.ro/definitie/cerb/json"
+      ]
+    },
+    {
+      "id": "v111-input-caprioara",
+      "verdict": "accept",
+      "rationale": "Exact modern literal noun sense and DEX09/DOOM3 IDs 842961/1310415 support the paradigm; only căprioarelor are added to n_v33_forest_animal_caprioara, with current ownership and description preserved.",
+      "sources": [
+        "https://dexonline.ro/definitie/c%C4%83prioar%C4%83/json"
+      ]
+    },
+    {
+      "id": "v111-input-veverita",
+      "verdict": "accept",
+      "rationale": "Exact modern literal noun sense and DEX09/DOOM3 IDs 826070/1263971 support the paradigm; only veverițelor are added to n_v33_forest_animal_veverita, with current ownership and description preserved.",
+      "sources": [
+        "https://dexonline.ro/definitie/veveri%C8%9B%C4%83/json"
+      ]
+    },
+    {
+      "id": "v111-input-lup",
+      "verdict": "accept",
+      "rationale": "Exact modern literal noun sense and DEX09/DOOM3 IDs 865500/1327071 support the paradigm; only lupilor are added to n_v33_forest_animal_lup, with current ownership and description preserved.",
+      "sources": [
+        "https://dexonline.ro/definitie/lup/json"
+      ]
+    },
+    {
+      "id": "v111-input-vulpe",
+      "verdict": "accept",
+      "rationale": "Exact modern literal noun sense and DEX09/DOOM3 IDs 827670/1264872 support the paradigm; only vulpilor are added to n_v33_forest_animal_vulpe, with current ownership and description preserved.",
+      "sources": [
+        "https://dexonline.ro/definitie/vulpe/json"
+      ]
+    },
+    {
+      "id": "v111-input-urs",
+      "verdict": "accept",
+      "rationale": "Exact modern literal noun sense and DEX09/DOOM3 IDs 829046/1313787 support the paradigm; only urșilor are added to n_v33_forest_animal_urs, with current ownership and description preserved.",
+      "sources": [
+        "https://dexonline.ro/definitie/urs/json"
+      ]
+    },
+    {
+      "id": "v111-input-nuca",
+      "verdict": "accept",
+      "rationale": "Exact modern literal noun sense and DEX09/DOOM3 IDs 885114/1290512 support the paradigm; only nucii, nuci, nucilor are added to n_v81_food_pantry_nuca, with current ownership and description preserved. These are walnut-fruit inputs, not a new tree synonym.",
+      "sources": [
+        "https://dexonline.ro/definitie/nuc%C4%83/json"
+      ]
+    },
+    {
+      "id": "v111-input-iarba",
+      "verdict": "accept",
+      "rationale": "Exact modern literal noun sense and DEX09/DOOM3 IDs 865048/1296830 support the paradigm; only ierbii, ierburilor are added to n_v24_nature_plant_parts_iarba, with current ownership and description preserved. The plural is scoped to botanical varieties, excluding culinary/slang senses.",
+      "sources": [
+        "https://dexonline.ro/definitie/iarb%C4%83/json"
+      ]
+    },
+    {
+      "id": "v111-input-deget",
+      "verdict": "accept",
+      "rationale": "Exact modern literal noun sense and DEX09/DOOM3 IDs 856896/1306155 support the paradigm; only degetului, degetelor are added to n_v24_body_limbs_deget, with current ownership and description preserved.",
+      "sources": [
+        "https://dexonline.ro/definitie/deget/json"
+      ]
+    },
+    {
+      "id": "v111-input-ureche",
+      "verdict": "accept",
+      "rationale": "Exact modern literal noun sense and DEX09/DOOM3 IDs 828782/1313449 support the paradigm; only urechii, urechilor are added to n_v4sti_ureche, with current ownership and description preserved.",
+      "sources": [
+        "https://dexonline.ro/definitie/ureche/json"
+      ]
+    }
+  ]
+}
