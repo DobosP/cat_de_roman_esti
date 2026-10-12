@@ -3,7 +3,7 @@
   "theme": "post-and-garden",
   "baseline_commit": "932d8c987790314b985a4f24a75bf6be25c9f692",
   "procedure_rev": "17b97a2",
-  "scope": "Growth candidates with source research; formal independent acceptance and installed player-visible delta remain pending.",
+  "scope": "Growth candidates researched; independent whole-batch web reviews and installed player-visible delta remain pending.",
   "screen": {
     "bundle_sha256": "9a1951262818e766796972f29a467f77f613c40f58d313d0d63c1ea9112214c9",
     "lookup_fields": [
@@ -7619,8 +7619,8 @@
     },
     {
       "id": "v112-lalea",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Lalea",
       "label_ro": "Lalea",
@@ -7641,7 +7641,7 @@
         "lalelelor"
       ],
       "held_forms": [],
-      "form_status": "Unverified DOOM3/sense hypotheses; only unique, currently unowned keys are planned. Normative additions need the same screen before web research.",
+      "form_status": "Selected DOOM3 paradigm verified; only screened unowned normalized keys are proposed. Other senses and unplanned synonyms stay excluded.",
       "identity_checks": {
         "forms": [
           {
@@ -7725,16 +7725,123 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and noncolliding paradigm checked; 5 of 5 named targets source-qualified. Independent review remains pending; unqualified links are omitted.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/lalea/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "862691"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/lalea/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1325040"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Lalea",
+          "paraphrase": "Coroborează lalelele cultivate, frunzele și ciclul obișnuit de creștere și înflorire primăvara.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_planta",
+          "label": "plantă",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Laleaua este o plantă erbacee cu bulb.",
+          "verdict": "source_qualified",
+          "verified_claim": "Laleaua este o plantă erbacee cu bulb.",
+          "evidence_url": "https://dexonline.ro/definitie/lalea/json",
+          "relation_hypothesis": "is_a"
+        },
+        {
+          "node_id": "n_v4sti_floare",
+          "label": "floare",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Laleaua are flori ornamentale.",
+          "verdict": "source_qualified",
+          "verified_claim": "Laleaua are flori mari.",
+          "evidence_url": "https://dexonline.ro/definitie/lalea/json",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "frunză",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Laleaua are frunze.",
+          "verdict": "source_qualified",
+          "verified_claim": "Laleaua are frunze late.",
+          "evidence_url": "https://dexonline.ro/definitie/lalea/json",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v24_home_outdoor_gradina",
+          "label": "Grădină",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Lalelele sunt cultivate în grădini.",
+          "verdict": "source_qualified",
+          "verified_claim": "Lalelele sunt cultivate ca plante de grădină.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Lalea",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v1_9_primavara",
+          "label": "Primăvară",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Lalelele înfloresc primăvara.",
+          "verdict": "source_qualified",
+          "verified_claim": "Lalelele înfloresc în mod obișnuit primăvara.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Lalea",
+          "relation_hypothesis": "related_to"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "sense": "Plantă ornamentală cu bulb, frunze late și flori mari de culori variate; aici, laleaua de grădină, Tulipa gesneriana.",
+      "sense_homograph": null,
+      "dexonline_receipt": {
+        "sha256": "6f84b000805b3ccf638c1eb38f16ef5c330139570b13f7d2b18bd76bef5b841f",
+        "exact_lemma": "lalea",
+        "sense_definition_id": "862691",
+        "doom3_definition_id": "1325040",
+        "homograph": null
+      },
+      "proposed_forms": [
+        "lalea",
+        "laleaua",
+        "lalele",
+        "lalelele",
+        "lalelei",
+        "lalelelor"
+      ],
+      "morphology_note": "DOOM3 explicitly: lalea, laleaua, lalelei, lalele; regular articulated plural lalelele and plural genitive lalelelor complete the six already-screened keys.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 33812,
+        "best_form": "lalele",
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded pass; unresolved named claims are held instead of extending searches or inventing endpoints.",
+      "sense_scope_note": "Selected garden tulip. No fixed flower number, petal/tepal count, medical/food use, taxonomic counts, genome figures or claim about forced out-of-season flowering is included."
     },
     {
       "id": "v112-zambila",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Zambilă",
       "label_ro": "Zambilă",
@@ -7754,7 +7861,7 @@
         "zambilelor"
       ],
       "held_forms": [],
-      "form_status": "Unverified DOOM3/sense hypotheses; only unique, currently unowned keys are planned. Normative additions need the same screen before web research.",
+      "form_status": "Selected DOOM3 paradigm verified; only screened unowned normalized keys are proposed. Other senses and unplanned synonyms stay excluded.",
       "identity_checks": {
         "forms": [
           {
@@ -7816,16 +7923,129 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and noncolliding paradigm checked; 5 of 5 named targets source-qualified. Independent review remains pending; unqualified links are omitted.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/zambil%C4%83/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "821605"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/zambil%C4%83/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1263918"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Zambil%C4%83",
+          "paraphrase": "Coroborează bulbul, frunzele alungite, florile parfumate și înflorirea obișnuită la începutul primăverii.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        },
+        {
+          "url": "https://plant-journal.uaic.ro/docs/1995/40.pdf",
+          "paraphrase": "Articolul Grădinii Botanice Iași descrie cultivarea zambilelor pentru decorarea parcurilor și grădinilor.",
+          "role": "horticultural_reference",
+          "checked_on": "2026-10-12",
+          "page": 4
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_planta",
+          "label": "plantă",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Zambila este o plantă erbacee cu bulb.",
+          "verdict": "source_qualified",
+          "verified_claim": "Zambila este o plantă erbacee cu bulb.",
+          "evidence_url": "https://dexonline.ro/definitie/zambil%C4%83/json",
+          "relation_hypothesis": "is_a"
+        },
+        {
+          "node_id": "n_v4sti_floare",
+          "label": "floare",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Zambila are flori parfumate.",
+          "verdict": "source_qualified",
+          "verified_claim": "Zambila are flori parfumate.",
+          "evidence_url": "https://dexonline.ro/definitie/zambil%C4%83/json",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "frunză",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Zambila are frunze.",
+          "verdict": "source_qualified",
+          "verified_claim": "Zambila are frunze alungite.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Zambil%C4%83",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v24_home_outdoor_gradina",
+          "label": "Grădină",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Zambilele sunt cultivate în grădini.",
+          "verdict": "source_qualified",
+          "verified_claim": "Zambilele sunt cultivate pentru decorarea grădinilor.",
+          "evidence_url": "https://plant-journal.uaic.ro/docs/1995/40.pdf",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v1_9_primavara",
+          "label": "Primăvară",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Zambilele înfloresc primăvara.",
+          "verdict": "source_qualified",
+          "verified_claim": "Zambilele înfloresc în mod obișnuit la începutul primăverii.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Zambil%C4%83",
+          "relation_hypothesis": "related_to"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "sense": "Plantă cu bulb și flori parfumate grupate de-a lungul unei tije; Hyacinthus orientalis.",
+      "sense_homograph": null,
+      "dexonline_receipt": {
+        "sha256": "3dfd2b230bd86d791b54ffc8486f89d3caceda9e349fc6d92d71d5423e9ddc52",
+        "exact_lemma": "zambilă",
+        "sense_definition_id": "821605",
+        "doom3_definition_id": "1263918",
+        "homograph": null
+      },
+      "proposed_forms": [
+        "zambilă",
+        "zambile",
+        "zambilele",
+        "zambilei",
+        "zambilelor"
+      ],
+      "morphology_note": "DOOM3 explicit forms plus the regular articulated/genitive noun paradigm; fold-equivalent spellings are represented once. No new unscreened key was added.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": null,
+        "best_form": null,
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded pass; unresolved named claims are held instead of extending searches or inventing endpoints.",
+      "sense_scope_note": "No current-family taxonomy, medicinal/food claims, flower counts, or claim that forced cultivation cannot flower in winter. The spring link describes the ordinary season."
     },
     {
       "id": "v112-urzica",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Urzică",
       "label_ro": "Urzică",
@@ -7845,7 +8065,7 @@
         "urzicilor"
       ],
       "held_forms": [],
-      "form_status": "Unverified DOOM3/sense hypotheses; only unique, currently unowned keys are planned. Normative additions need the same screen before web research.",
+      "form_status": "Selected DOOM3 paradigm verified; only screened unowned normalized keys are proposed. Other senses and unplanned synonyms stay excluded.",
       "identity_checks": {
         "forms": [
           {
@@ -7907,16 +8127,133 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and noncolliding paradigm checked; 6 of 6 named targets source-qualified. Independent review remains pending; unqualified links are omitted.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/urzic%C4%83/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "829082"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/urzic%C4%83/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1313995"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Urzic%C4%83",
+          "paraphrase": "Coroborează urzica obișnuită, rădăcinile, frunzele, florile și prezența în grădini; afirmațiile terapeutice nu sunt folosite.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_planta",
+          "label": "plantă",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Urzica este o plantă erbacee.",
+          "verdict": "source_qualified",
+          "verified_claim": "Urzica este o plantă erbacee.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Urzic%C4%83",
+          "relation_hypothesis": "is_a"
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "frunză",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Urzica are frunze cu peri urticanți.",
+          "verdict": "source_qualified",
+          "verified_claim": "Frunzele urzicii sunt acoperite cu peri urticanți.",
+          "evidence_url": "https://dexonline.ro/definitie/urzic%C4%83/json",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4sti_floare",
+          "label": "floare",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Urzica are flori mici.",
+          "verdict": "source_qualified",
+          "verified_claim": "Urzica are flori grupate în inflorescențe.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Urzic%C4%83",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v24_nature_plant_parts_radacina",
+          "label": "Rădăcină",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Urzica are rădăcini.",
+          "verdict": "source_qualified",
+          "verified_claim": "Urzica are rădăcini prinse de un rizom.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Urzic%C4%83",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v24_home_outdoor_gradina",
+          "label": "Grădină",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Urzicile pot crește în grădini.",
+          "verdict": "source_qualified",
+          "verified_claim": "Urzicile pot crește în grădini.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Urzic%C4%83",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4gas_mancare",
+          "label": "Mâncare",
+          "category": "gastronomie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Frunzele tinere de urzică pot fi gătite.",
+          "verdict": "source_qualified",
+          "verified_claim": "Urzica este folosită în alimentație.",
+          "evidence_url": "https://dexonline.ro/definitie/urzic%C4%83/json",
+          "relation_hypothesis": "related_to"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "sense": "Plantă erbacee ale cărei tulpini și frunze au peri care înțeapă la atingere; aici, urzica obișnuită, Urtica dioica.",
+      "sense_homograph": "DEX botanical sense1 Urtica; common Urtica dioica example, not fabric or compound marine/dead-nettle senses",
+      "dexonline_receipt": {
+        "sha256": "bb74b9dc0b579629a08087255af2e6ea4e4e0e6d082e6c35140478553a0a90e7",
+        "exact_lemma": "urzică",
+        "sense_definition_id": "829082",
+        "doom3_definition_id": "1313995",
+        "homograph": "DEX botanical sense1 Urtica; common Urtica dioica example, not fabric or compound marine/dead-nettle senses"
+      },
+      "proposed_forms": [
+        "urzică",
+        "urzici",
+        "urzicile",
+        "urzicii",
+        "urzicilor"
+      ],
+      "morphology_note": "DOOM3 explicit forms plus the regular articulated/genitive noun paradigm; fold-equivalent spellings are represented once. No new unscreened key was added.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": null,
+        "best_form": null,
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded pass; unresolved named claims are held instead of extending searches or inventing endpoints.",
+      "sense_scope_note": "No treatment, harvesting, cooking or dosage instructions. The food link states ordinary culinary use only, without generalizing edibility to unrelated compound names."
     },
     {
       "id": "v112-menta",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Mentă",
       "label_ro": "Mentă",
@@ -7933,7 +8270,7 @@
         "mentei"
       ],
       "held_forms": [],
-      "form_status": "Unverified DOOM3/sense hypotheses; only unique, currently unowned keys are planned. Normative additions need the same screen before web research.",
+      "form_status": "Selected DOOM3 paradigm verified; only screened unowned normalized keys are proposed. Other senses and unplanned synonyms stay excluded.",
       "identity_checks": {
         "forms": [
           {
@@ -7962,11 +8299,117 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and noncolliding paradigm checked; 4 of 5 named targets source-qualified. Independent review remains pending; unqualified links are omitted.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/ment%C4%83/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "888351"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/ment%C4%83/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1292947"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Ment%C4%83",
+          "paraphrase": "Coroborează plantele aromatice Mentha și utilizarea lor pentru ceai; afirmațiile terapeutice și numărul speciilor nu sunt folosite.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        },
+        {
+          "url": "https://fares.ro/produs/colectie-ceai-fructe-si-plante-180-plicuri/",
+          "paraphrase": "Producătorul include un sortiment de ceai de mentă și declară partea aeriană de mentă ca ingredient.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_planta",
+          "label": "plantă",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Menta este o plantă erbacee aromatică.",
+          "verdict": "source_qualified",
+          "verified_claim": "Menta este o plantă erbacee aromatică.",
+          "evidence_url": "https://dexonline.ro/definitie/ment%C4%83/json",
+          "relation_hypothesis": "is_a"
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "frunză",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Menta are frunze aromate.",
+          "verdict": "source_qualified",
+          "verified_claim": "Menta are frunze dințate.",
+          "evidence_url": "https://dexonline.ro/definitie/ment%C4%83/json",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4sti_floare",
+          "label": "floare",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Menta are flori.",
+          "verdict": "source_qualified",
+          "verified_claim": "Menta are flori.",
+          "evidence_url": "https://dexonline.ro/definitie/ment%C4%83/json",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v24_home_outdoor_gradina",
+          "label": "Grădină",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Menta este cultivată în grădini.",
+          "verdict": "held: claim not fully qualified"
+        },
+        {
+          "node_id": "n_v24_food_snack_ceai",
+          "label": "Ceai",
+          "category": "gastronomie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Frunzele de mentă sunt folosite pentru ceai.",
+          "verdict": "source_qualified",
+          "verified_claim": "Menta este folosită la prepararea ceaiului.",
+          "evidence_url": "https://fares.ro/produs/colectie-ceai-fructe-si-plante-180-plicuri/",
+          "relation_hypothesis": "related_to"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "sense": "Plantă erbacee aromatică din genul Mentha, cu frunze dințate și flori; sensul botanic comun.",
+      "sense_homograph": null,
+      "dexonline_receipt": {
+        "sha256": "d35572986828add340d21014ad9c2940cc86bda9e2c269d058dd79e97668664e",
+        "exact_lemma": "mentă",
+        "sense_definition_id": "888351",
+        "doom3_definition_id": "1292947",
+        "homograph": null
+      },
+      "proposed_forms": [
+        "mentă",
+        "mentei"
+      ],
+      "morphology_note": "DOOM3 gives feminine singular mentă and genitive mentei without a plural. Articulated menta folds equal to mentă, so the two already-screened keys cover this selected mass/plant-name usage; no invented plural or unplanned izmă/mintă alias.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 14585,
+        "best_form": "mentă",
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded pass; unresolved named claims are held instead of extending searches or inventing endpoints.",
+      "sense_scope_note": "Only botanical Mentha sense; no candy, flavor-only, medical, dosage or species-specific substitution claims. Grădină was not directly qualified in this bounded pass and is omitted."
     }
   ],
   "screen_exclusions": [
@@ -7998,17 +8441,16 @@
   "owner_decisions_policy": "Owner-only backlog decisions are not in this candidate set.",
   "research_summary": {
     "states": {
-      "researched": 34,
-      "held": 2,
-      "idea": 4
+      "researched": 38,
+      "held": 2
     },
-    "researched": 34,
+    "researched": 38,
     "held": 2,
     "accepted": 0,
     "installed": 0,
-    "remaining_ideas": 4
+    "remaining_ideas": 0
   },
-  "next_research_requirement": "Before any web request, name4–8 targets for the last4 ideas Lalea/Zambilă/Urzică/Mentă; preserve all incoming/outgoing batch caps. Do not add a third Scoarță or Petală batch neighbor.",
+  "next_research_requirement": "Research complete. Step3 writes the data module from38researched candidates, then factual-v1-12 and quality-v1-12 each review the whole batch once on the web bound to moduleSHA256. Canonicalize five reciprocal postal/petal pairs; Cazma/Furtun remain held. Standing owner go applies only after both reviews and green gates.",
   "research_ticks": [
     {
       "tick": 1,
@@ -8075,7 +8517,21 @@
       "accepted": 0,
       "installed": 0,
       "note": "Exact DEX/DOOM3 heads checked. Polen plural3newkeys fully screened before qualification; botanical nectar singular-only. Piersic3fruit-owned pluralkeys held. CrinwhiteLilium, TrandafirRosa senses selected; reciprocal petals canonicalizeonce. Unqualified Alun–Veveriță and Prun–frunză omitted."
+    },
+    {
+      "tick": 4,
+      "item_ids": [
+        "v112-lalea",
+        "v112-zambila",
+        "v112-urzica",
+        "v112-menta"
+      ],
+      "researched": 4,
+      "held": 0,
+      "accepted": 0,
+      "installed": 0,
+      "note": "Exact DEX/DOOM3 heads and planned paradigms confirmed; Lalea includes laleaua/lalelei. Mentă remains singular with fold-equivalent menta represented once. Ordinary spring flowering only; no medical or dosage claims. Unqualified Mentă–Grădină omitted."
     }
   ],
-  "planning_note": "All incoming/outgoing targets are counted once per neighbor. Postal trio has two batch neighbors each; Scoarță has Fag/Mesteacăn; Petală has Trandafir/Garoafă. Reciprocal postal and petal hypotheses must become a single related_to pair each in the module. No new batch allocation exceeds two."
+  "planning_note": "All40 named target plans count incoming/outgoing distinct neighbors once. Last4 use old owners only. Preserve postal trio, Scoarță(Fag/Mesteacăn) and Petală(Trandafir/Garoafă) two-batch-neighbor caps. Deduplicate reciprocal hypotheses when writing the module."
 }
