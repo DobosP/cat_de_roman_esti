@@ -2590,8 +2590,8 @@
     },
     {
       "id": "v112-buturuga",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Buturugă",
       "label_ro": "Buturugă",
@@ -2673,16 +2673,127 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and noncolliding paradigm checked; 4 of 5 named targets source-qualified. Independent review remains pending; unqualified links are omitted.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/buturug%C4%83/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "839443"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/buturug%C4%83/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1320200"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/buturug%C4%83",
+          "paraphrase": "Coroborează buturuga ca bucată groasă/noduroasă provenită dintr-un trunchi.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/buturug%C4%83/json",
+          "paraphrase": "MDA2 sens1 precizează rădăcina cu o parte din trunchi rămasă după tăierea copacului; sens3 coroborează materialul lemnos.",
+          "role": "sense_detail",
+          "checked_on": "2026-10-12",
+          "authority": "MDA2",
+          "definition_id": "1043850"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_copac",
+          "label": "copac",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Buturuga este partea rămasă după tăierea unui copac.",
+          "verdict": "source_qualified",
+          "verified_claim": "Buturuga poate fi partea rămasă după tăierea unui copac.",
+          "evidence_url": "https://dexonline.ro/definitie/buturug%C4%83/json",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v24_nature_plant_parts_radacina",
+          "label": "Rădăcină",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Buturuga rămasă în sol este legată de rădăcinile copacului.",
+          "verdict": "source_qualified",
+          "verified_claim": "În sensul de rămășiță după tăiere, buturuga poate cuprinde rădăcina și baza trunchiului.",
+          "evidence_url": "https://dexonline.ro/definitie/buturug%C4%83/json",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v1_3_material_lemn",
+          "label": "Lemn",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Buturuga este alcătuită din lemn.",
+          "verdict": "source_qualified",
+          "verified_claim": "Buturuga este o rămășiță lemnoasă.",
+          "evidence_url": "https://dexonline.ro/definitie/buturug%C4%83/json",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4geo_padure",
+          "label": "pădure",
+          "category": "geografie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Buturugile rămân în pădure după tăierea sau ruperea arborilor.",
+          "verdict": "held: claim not fully qualified"
+        },
+        {
+          "node_id": "n_v1_12_trunchi",
+          "label": "Trunchi",
+          "category": "stiinta",
+          "status": "batch hypothesis; not accepted",
+          "claim_to_verify": "Buturuga este partea inferioară rămasă din trunchiul copacului.",
+          "verdict": "source_qualified",
+          "verified_claim": "O buturugă provine dintr-o parte a trunchiului.",
+          "evidence_url": "https://dexonline.ro/definitie/buturug%C4%83/json",
+          "relation_hypothesis": "related_to"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "sense": "Rămășiță lemnoasă din partea de jos a trunchiului unui copac tăiat, care poate cuprinde și rădăcina; fără sensuri figurate.",
+      "sense_homograph": null,
+      "dexonline_receipt": {
+        "sha256": "3915b7867724571b294286dff8679ce66fbfba9e366fce3ff770607b7538b308",
+        "exact_lemma": "buturugă",
+        "sense_definition_id": "839443",
+        "doom3_definition_id": "1320200",
+        "homograph": null
+      },
+      "proposed_forms": [
+        "buturugă",
+        "buturugi",
+        "buturugile",
+        "buturugii",
+        "buturugilor"
+      ],
+      "morphology_note": "DOOM3 explicit forms plus the regular articulated/genitive noun paradigm; fold-equivalent spellings are represented once. No new unscreened key was added.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": null,
+        "best_form": null,
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded pass; unresolved named claims are held instead of extending searches or inventing endpoints.",
+      "sense_scope_note": "The rooted-stump detail is grounded in exact-headword MDA2 sense1, not inferred from every loose block of wood; Pădure was not specifically qualified and is omitted."
     },
     {
       "id": "v112-pin",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Pin",
       "label_ro": "Pin",
@@ -2776,16 +2887,122 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and noncolliding paradigm checked; 5 of 5 named targets source-qualified. Independent review remains pending; unqualified links are omitted.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/pin/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "871546"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/pin/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1282518"
+        },
+        {
+          "url": "https://timisoara.rosilva.ro/articole/pin_silvestru__p_2950.htm",
+          "paraphrase": "Romsilva descrie pinul silvestru, acele, lemnul utilizabil și arboretele pure ori amestecate cu bradul.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_copac",
+          "label": "copac",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Pinul este un arbore conifer.",
+          "verdict": "source_qualified",
+          "verified_claim": "Pinul este un arbore conifer.",
+          "evidence_url": "https://dexonline.ro/definitie/pin/json",
+          "relation_hypothesis": "is_a"
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "frunză",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Acele pinului sunt frunze aciculare.",
+          "verdict": "source_qualified",
+          "verified_claim": "Acele pinului sunt frunze persistente.",
+          "evidence_url": "https://timisoara.rosilva.ro/articole/pin_silvestru__p_2950.htm",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v1_3_material_lemn",
+          "label": "Lemn",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Lemnul de pin are utilizări materiale.",
+          "verdict": "source_qualified",
+          "verified_claim": "Pinul silvestru furnizează lemn folosit ca material.",
+          "evidence_url": "https://timisoara.rosilva.ro/articole/pin_silvestru__p_2950.htm",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4geo_padure",
+          "label": "pădure",
+          "category": "geografie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Pinii alcătuiesc păduri sau intră în compoziția lor.",
+          "verdict": "source_qualified",
+          "verified_claim": "Pinul silvestru formează arborete pure sau amestecate.",
+          "evidence_url": "https://timisoara.rosilva.ro/articole/pin_silvestru__p_2950.htm",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v1_8_brad",
+          "label": "Brad",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Pinul și bradul sunt conifere distincte, nu sinonime.",
+          "verdict": "source_qualified",
+          "verified_claim": "Pinul silvestru poate crește în arborete amestecate cu bradul, fiind un conifer distinct.",
+          "evidence_url": "https://timisoara.rosilva.ro/articole/pin_silvestru__p_2950.htm",
+          "relation_hypothesis": "related_to"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "sense": "Arbore conifer cu frunze persistente în formă de ace; aici, sensul botanic, exemplificat prin pinul silvestru.",
+      "sense_homograph": "DEX pin2 tree and DOOM3 pin(arbore); exclude PIN identifier and electronic connector pin",
+      "dexonline_receipt": {
+        "sha256": "abede70b5edfa0991e710e7cb01b34ae4aa19827d44814e9b195aa54c3f07de0",
+        "exact_lemma": "pin",
+        "sense_definition_id": "871546",
+        "doom3_definition_id": "1282518",
+        "homograph": "DEX pin2 tree and DOOM3 pin(arbore); exclude PIN identifier and electronic connector pin"
+      },
+      "proposed_forms": [
+        "pin",
+        "pinul",
+        "pini",
+        "pinii",
+        "pinului",
+        "pinilor"
+      ],
+      "morphology_note": "DOOM3 explicit forms plus the regular articulated/genitive noun paradigm; fold-equivalent spellings are represented once. No new unscreened key was added.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 11850,
+        "best_form": "pin",
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded pass; unresolved named claims are held instead of extending searches or inventing endpoints."
     },
     {
       "id": "v112-molid",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Molid",
       "label_ro": "Molid",
@@ -2879,16 +3096,128 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and noncolliding paradigm checked; 5 of 5 named targets source-qualified. Independent review remains pending; unqualified links are omitted.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/molid/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "891314"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/molid/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1294348"
+        },
+        {
+          "url": "https://timisoara.rosilva.ro/articole/molid__p_2943.htm",
+          "paraphrase": "Romsilva descrie molidul comun, acele persistente și utilizările lemnului.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        },
+        {
+          "url": "https://sibiu.rosilva.ro/articole/prezentare_generala__p_739.htm",
+          "paraphrase": "Descrie pădurile de molid și amestecurile molid-brad-fag, fără a confunda speciile.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_copac",
+          "label": "copac",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Molidul este un arbore conifer.",
+          "verdict": "source_qualified",
+          "verified_claim": "Molidul este un arbore conifer.",
+          "evidence_url": "https://dexonline.ro/definitie/molid/json",
+          "relation_hypothesis": "is_a"
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "frunză",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Acele molidului sunt frunze aciculare.",
+          "verdict": "source_qualified",
+          "verified_claim": "Acele molidului sunt frunze persistente.",
+          "evidence_url": "https://timisoara.rosilva.ro/articole/molid__p_2943.htm",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v1_3_material_lemn",
+          "label": "Lemn",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Molidul furnizează lemn folosit ca material.",
+          "verdict": "source_qualified",
+          "verified_claim": "Lemnul de molid este folosit ca material.",
+          "evidence_url": "https://timisoara.rosilva.ro/articole/molid__p_2943.htm",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4geo_padure",
+          "label": "pădure",
+          "category": "geografie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Molidul formează păduri montane.",
+          "verdict": "source_qualified",
+          "verified_claim": "Molidul formează păduri montane.",
+          "evidence_url": "https://sibiu.rosilva.ro/articole/prezentare_generala__p_739.htm",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v1_8_brad",
+          "label": "Brad",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Molidul și bradul sunt conifere distincte, nu sinonime.",
+          "verdict": "source_qualified",
+          "verified_claim": "Molidul și bradul sunt specii distincte care pot forma păduri de amestec.",
+          "evidence_url": "https://sibiu.rosilva.ro/articole/prezentare_generala__p_739.htm",
+          "relation_hypothesis": "related_to"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "sense": "Arbore conifer cu frunze aciculare persistente și conuri atârnate; aici, molidul comun.",
+      "sense_homograph": null,
+      "dexonline_receipt": {
+        "sha256": "873bae1906c2071314555cd935cb79e688eb9266bee1a68b1977738b6233bc68",
+        "exact_lemma": "molid",
+        "sense_definition_id": "891314",
+        "doom3_definition_id": "1294348",
+        "homograph": null
+      },
+      "proposed_forms": [
+        "molid",
+        "molidul",
+        "molizi",
+        "molizii",
+        "molidului",
+        "molizilor"
+      ],
+      "morphology_note": "DOOM3 explicit forms plus the regular articulated/genitive noun paradigm; fold-equivalent spellings are represented once. No new unscreened key was added.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": null,
+        "best_form": null,
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded pass; unresolved named claims are held instead of extending searches or inventing endpoints."
     },
     {
       "id": "v112-tei",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Tei",
       "label_ro": "Tei",
@@ -2970,16 +3299,142 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and noncolliding paradigm checked; 5 of 6 named targets source-qualified. Independent review remains pending; unqualified links are omitted.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/tei/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "831794"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/tei/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1270745"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Tei",
+          "paraphrase": "Coroborează arborele și florile de tei.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        },
+        {
+          "url": "https://www.rosilva.ro/articole/miere_apisilva__p_2643.htm",
+          "paraphrase": "Romsilva prezintă mierea produsă de albine și sortimentul de tei.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Teiul_lui_Eminescu",
+          "paraphrase": "Documentează legătura istorică dintre Mihai Eminescu și teiul din Parcul Copou; nu se generalizează istoria exemplarului la toți teii.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_copac",
+          "label": "copac",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Teiul este un arbore.",
+          "verdict": "source_qualified",
+          "verified_claim": "Teiul este un arbore.",
+          "evidence_url": "https://dexonline.ro/definitie/tei/json",
+          "relation_hypothesis": "is_a"
+        },
+        {
+          "node_id": "n_v4sti_floare",
+          "label": "floare",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Teiul are flori cunoscute pentru mirosul lor.",
+          "verdict": "source_qualified",
+          "verified_claim": "Teiul are flori puternic parfumate.",
+          "evidence_url": "https://dexonline.ro/definitie/tei/json",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v1_8_albina",
+          "label": "Albină",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Albinele culeg nectar din florile de tei.",
+          "verdict": "source_qualified",
+          "verified_claim": "Florile melifere de tei sunt o sursă pentru albine.",
+          "evidence_url": "https://www.rosilva.ro/articole/miere_apisilva__p_2643.htm",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v24_food_breakfast_miere",
+          "label": "Miere",
+          "category": "gastronomie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Din nectarul florilor de tei se obține miere de tei.",
+          "verdict": "source_qualified",
+          "verified_claim": "Există miere de tei produsă de albine.",
+          "evidence_url": "https://www.rosilva.ro/articole/miere_apisilva__p_2643.htm",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_mihai_eminescu",
+          "label": "Mihai Eminescu",
+          "category": "literatura",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Teiul este legat de poet prin exemplarul cunoscut din Copou.",
+          "verdict": "source_qualified",
+          "verified_claim": "Teiul este asociat poetului prin exemplarul cunoscut din Parcul Copou.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Teiul_lui_Eminescu",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v1_3_material_lemn",
+          "label": "Lemn",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Lemnul de tei are utilizări ca material.",
+          "verdict": "held: claim not fully qualified"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "sense": "Arbore cunoscut pentru florile parfumate și melifere; numai sensul de copac, nu fibra folosită la legat.",
+      "sense_homograph": "DOOM3 tei1 arbore; masculine pluraltei articulatedteii; exclude tei2 fibre and teie",
+      "dexonline_receipt": {
+        "sha256": "081921bc149b68100225ced3aa3dcba18124856a832d36a8895bf4851393d88d",
+        "exact_lemma": "tei",
+        "sense_definition_id": "831794",
+        "doom3_definition_id": "1270745",
+        "homograph": "DOOM3 tei1 arbore; masculine pluraltei articulatedteii; exclude tei2 fibre and teie"
+      },
+      "proposed_forms": [
+        "tei",
+        "teiul",
+        "teii",
+        "teiului",
+        "teilor"
+      ],
+      "morphology_note": "DOOM3 explicit forms plus the regular articulated/genitive noun paradigm; fold-equivalent spellings are represented once. No new unscreened key was added.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 43318,
+        "best_form": "tei",
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded pass; unresolved named claims are held instead of extending searches or inventing endpoints.",
+      "sense_scope_note": "Only tree forms selected. No medical properties, doses, tree-age figures or numerical ecological claims are included; the unqualified wood-use target is omitted."
     },
     {
       "id": "v112-fag",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Fag",
       "label_ro": "Fag",
@@ -3073,16 +3528,122 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and noncolliding paradigm checked; 5 of 5 named targets source-qualified. Independent review remains pending; unqualified links are omitted.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/fag/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "868652"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/fag/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1300758"
+        },
+        {
+          "url": "https://timisoara.rosilva.ro/articole/fag__p_2931.htm",
+          "paraphrase": "Romsilva descrie frunzele, scoarța netedă, utilizările lemnului și arboretele pure de fag.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_copac",
+          "label": "copac",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Fagul este un arbore foios.",
+          "verdict": "source_qualified",
+          "verified_claim": "Fagul este un arbore foios.",
+          "evidence_url": "https://dexonline.ro/definitie/fag/json",
+          "relation_hypothesis": "is_a"
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "frunză",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Fagul are frunze late care cad sezonier.",
+          "verdict": "source_qualified",
+          "verified_claim": "Fagul are frunze eliptice.",
+          "evidence_url": "https://timisoara.rosilva.ro/articole/fag__p_2931.htm",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v1_3_material_lemn",
+          "label": "Lemn",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Fagul furnizează lemn folosit ca material.",
+          "verdict": "source_qualified",
+          "verified_claim": "Lemnul de fag este folosit ca material.",
+          "evidence_url": "https://timisoara.rosilva.ro/articole/fag__p_2931.htm",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4geo_padure",
+          "label": "pădure",
+          "category": "geografie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Fagul formează păduri numite făgete.",
+          "verdict": "source_qualified",
+          "verified_claim": "Fagul poate forma arborete pure.",
+          "evidence_url": "https://timisoara.rosilva.ro/articole/fag__p_2931.htm",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v1_12_scoarta",
+          "label": "Scoarță",
+          "category": "stiinta",
+          "status": "batch hypothesis; not accepted",
+          "claim_to_verify": "Fagul are scoarță de obicei netedă și cenușie.",
+          "verdict": "source_qualified",
+          "verified_claim": "Fagul are scoarță netedă cenușie.",
+          "evidence_url": "https://timisoara.rosilva.ro/articole/fag__p_2931.htm",
+          "relation_hypothesis": "related_to"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "sense": "Arbore foios cu frunze eliptice și scoarță netedă cenușie; aici, fagul comun.",
+      "sense_homograph": null,
+      "dexonline_receipt": {
+        "sha256": "2a075714c89785000260cde42745ebfecdab7cd37594409c23ce9f82a70ad98b",
+        "exact_lemma": "fag",
+        "sense_definition_id": "868652",
+        "doom3_definition_id": "1300758",
+        "homograph": null
+      },
+      "proposed_forms": [
+        "fag",
+        "fagul",
+        "fagi",
+        "fagii",
+        "fagului",
+        "fagilor"
+      ],
+      "morphology_note": "DOOM3 explicit forms plus the regular articulated/genitive noun paradigm; fold-equivalent spellings are represented once. No new unscreened key was added.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": null,
+        "best_form": null,
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded pass; unresolved named claims are held instead of extending searches or inventing endpoints."
     },
     {
       "id": "v112-salcie",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Salcie",
       "label_ro": "Salcie",
@@ -3176,16 +3737,122 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and noncolliding paradigm checked; 5 of 5 named targets source-qualified. Independent review remains pending; unqualified links are omitted.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/salcie/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "838491"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/salcie/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1272345"
+        },
+        {
+          "url": "https://timisoara.rosilva.ro/articole/salcia_alba__p_2956.htm",
+          "paraphrase": "Romsilva descrie rădăcinile, utilizările lemnului și prezența salciei albe în lunca Dunării și a afluenților.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_copac",
+          "label": "copac",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Salcia selectată este arborele din sensul comun.",
+          "verdict": "source_qualified",
+          "verified_claim": "Salcia, în sensul ales, este un arbore.",
+          "evidence_url": "https://dexonline.ro/definitie/salcie/json",
+          "relation_hypothesis": "is_a"
+        },
+        {
+          "node_id": "n_v24_nature_plant_parts_radacina",
+          "label": "Rădăcină",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Salcia are rădăcini adaptate terenurilor umede.",
+          "verdict": "source_qualified",
+          "verified_claim": "Salcia albă are rădăcini ramificate.",
+          "evidence_url": "https://timisoara.rosilva.ro/articole/salcia_alba__p_2956.htm",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v2geo_rau",
+          "label": "râu",
+          "category": "geografie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Sălciile pot crește pe maluri de râuri.",
+          "verdict": "source_qualified",
+          "verified_claim": "Salcia albă crește în luncile râurilor.",
+          "evidence_url": "https://timisoara.rosilva.ro/articole/salcia_alba__p_2956.htm",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4gas_apa",
+          "label": "Apă",
+          "category": "gastronomie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Salcia preferă locuri cu umiditate ridicată.",
+          "verdict": "source_qualified",
+          "verified_claim": "Salcia albă crește pe terenuri umede, inclusiv inundabile.",
+          "evidence_url": "https://timisoara.rosilva.ro/articole/salcia_alba__p_2956.htm",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v1_3_material_lemn",
+          "label": "Lemn",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Lemnul de salcie poate fi folosit ca material.",
+          "verdict": "source_qualified",
+          "verified_claim": "Lemnul de salcie este folosit ca material.",
+          "evidence_url": "https://timisoara.rosilva.ro/articole/salcia_alba__p_2956.htm",
+          "relation_hypothesis": "related_to"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "sense": "Arbore cu ramuri flexibile, întâlnit pe lângă ape; aici, salcia în sens botanic, exemplificată prin salcia albă.",
+      "sense_homograph": "Tree sense and DOOM3 salcie(arbore); exclude salce herb and adjective sălciu",
+      "dexonline_receipt": {
+        "sha256": "eac4684123a641c55fbfa2895ac98b3346bcad24b78ae3b1b087d76f5a95463b",
+        "exact_lemma": "salcie",
+        "sense_definition_id": "838491",
+        "doom3_definition_id": "1272345",
+        "homograph": "Tree sense and DOOM3 salcie(arbore); exclude salce herb and adjective sălciu"
+      },
+      "proposed_forms": [
+        "salcie",
+        "salcia",
+        "sălcii",
+        "sălciile",
+        "salciei",
+        "sălciilor"
+      ],
+      "morphology_note": "DOOM3: salcie, articulated salcia, genitive salciei, plural sălcii; regular sălciile/sălciilor. The DEX alternate salcii folds equal to sălcii and is represented once.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 41896,
+        "best_form": "salcie",
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded pass; unresolved named claims are held instead of extending searches or inventing endpoints."
     },
     {
       "id": "v112-plop",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Plop",
       "label_ro": "Plop",
@@ -3279,16 +3946,120 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and noncolliding paradigm checked; 4 of 5 named targets source-qualified. Independent review remains pending; unqualified links are omitted.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/plop/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "873558"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/plop/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1283245"
+        },
+        {
+          "url": "https://timisoara.rosilva.ro/articole/plop_alb__p_2952.htm",
+          "paraphrase": "Romsilva descrie frunzele, utilizările lemnului și arboretele pure ori amestecate de plop alb.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_copac",
+          "label": "copac",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Plopul este un arbore.",
+          "verdict": "source_qualified",
+          "verified_claim": "Plopul este un arbore.",
+          "evidence_url": "https://dexonline.ro/definitie/plop/json",
+          "relation_hypothesis": "is_a"
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "frunză",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Plopii au frunze căzătoare.",
+          "verdict": "source_qualified",
+          "verified_claim": "Plopul alb are frunze late.",
+          "evidence_url": "https://timisoara.rosilva.ro/articole/plop_alb__p_2952.htm",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v1_3_material_lemn",
+          "label": "Lemn",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Plopul furnizează lemn folosit ca material.",
+          "verdict": "source_qualified",
+          "verified_claim": "Lemnul de plop alb are utilizări ca material.",
+          "evidence_url": "https://timisoara.rosilva.ro/articole/plop_alb__p_2952.htm",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4geo_padure",
+          "label": "pădure",
+          "category": "geografie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Plopii pot intra în alcătuirea pădurilor de luncă.",
+          "verdict": "source_qualified",
+          "verified_claim": "Plopul alb formează arborete pure sau amestecate în lunca Dunării.",
+          "evidence_url": "https://timisoara.rosilva.ro/articole/plop_alb__p_2952.htm",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v1_11_hartie",
+          "label": "Hârtie",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Lemnul de plop poate fi utilizat la fabricarea hârtiei.",
+          "verdict": "held: claim not fully qualified"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "sense": "Arbore cu frunze late, exemplificat prin plopul alb; fără a transfera particularitățile altor specii.",
+      "sense_homograph": null,
+      "dexonline_receipt": {
+        "sha256": "97af4b23af75a391fcb04e03ab8509d2e0b857ef1f52f033a68efc0aca71dc3c",
+        "exact_lemma": "plop",
+        "sense_definition_id": "873558",
+        "doom3_definition_id": "1283245",
+        "homograph": null
+      },
+      "proposed_forms": [
+        "plop",
+        "plopul",
+        "plopi",
+        "plopii",
+        "plopului",
+        "plopilor"
+      ],
+      "morphology_note": "DOOM3 explicit forms plus the regular articulated/genitive noun paradigm; fold-equivalent spellings are represented once. No new unscreened key was added.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": null,
+        "best_form": null,
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded pass; unresolved named claims are held instead of extending searches or inventing endpoints.",
+      "sense_scope_note": "The named Hârtie target was not directly qualified by the selected white-poplar source and is omitted; generic wood uses do not prove paper production."
     },
     {
       "id": "v112-castan",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Castan",
       "label_ro": "Castan",
@@ -3382,16 +4153,137 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and noncolliding paradigm checked; 5 of 6 named targets source-qualified. Independent review remains pending; unqualified links are omitted.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/castan/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "842129"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/castan/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1309989"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Castan_comestibil",
+          "paraphrase": "Coroborează arborele comestibil, frunzele lungi, fructele și utilizarea lemnului.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        },
+        {
+          "url": "https://baiamare.rosilva.ro/articole/arboretul_de_castan_comestibil__p_2385.htm",
+          "paraphrase": "Romsilva documentează arboretul natural de castan comestibil de la Baia Mare.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_copac",
+          "label": "copac",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Castanul este un arbore.",
+          "verdict": "source_qualified",
+          "verified_claim": "Castanul comestibil este un arbore.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Castan_comestibil",
+          "relation_hypothesis": "is_a"
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "frunză",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Castanul are frunze căzătoare.",
+          "verdict": "source_qualified",
+          "verified_claim": "Castanul comestibil are frunze lungi și dințate.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Castan_comestibil",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v1_3_material_lemn",
+          "label": "Lemn",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Lemnul castanului selectat are utilizări materiale.",
+          "verdict": "source_qualified",
+          "verified_claim": "Lemnul castanului comestibil este folosit ca material.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Castan_comestibil",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4gas_fruct",
+          "label": "Fruct",
+          "category": "gastronomie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Numai pentru sensul comestibil, castanul produce fructe comestibile.",
+          "verdict": "source_qualified",
+          "verified_claim": "Castanul comestibil produce fructe comestibile numite castane.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Castan_comestibil",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4geo_padure",
+          "label": "pădure",
+          "category": "geografie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Numai dacă sensul selectat o susține, castanul intră în păduri/arborete.",
+          "verdict": "source_qualified",
+          "verified_claim": "Castanul comestibil formează arborete forestiere.",
+          "evidence_url": "https://baiamare.rosilva.ro/articole/arboretul_de_castan_comestibil__p_2385.htm",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v24_places_public_parc",
+          "label": "Parc",
+          "category": "societate",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Numai dacă sensul selectat o susține, castanul este cultivat în parcuri.",
+          "verdict": "held: claim not fully qualified"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "sense": "Arbore cu frunze lungi și fructe comestibile numite castane; aici, castanul comestibil, Castanea sativa, nu castanul sălbatic.",
+      "sense_homograph": "DEX sense1 Castanea sativa/vesca, not sense2 ornamental Aesculus hippocastanum",
+      "dexonline_receipt": {
+        "sha256": "40413c52566cb59ba917c3056f43e08c21cbff1f4c3d41e536f6192f45c0d50e",
+        "exact_lemma": "castan",
+        "sense_definition_id": "842129",
+        "doom3_definition_id": "1309989",
+        "homograph": "DEX sense1 Castanea sativa/vesca, not sense2 ornamental Aesculus hippocastanum"
+      },
+      "proposed_forms": [
+        "castan",
+        "castanul",
+        "castani",
+        "castanii",
+        "castanului",
+        "castanilor"
+      ],
+      "morphology_note": "DOOM3 explicit forms plus the regular articulated/genitive noun paradigm; fold-equivalent spellings are represented once. No new unscreened key was added.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": null,
+        "best_form": null,
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded pass; unresolved named claims are held instead of extending searches or inventing endpoints.",
+      "sense_scope_note": "Only edible-chestnut tree selected. No horse-chestnut park facts, health properties or numerical age/growth claims; unqualified Parc target omitted."
     },
     {
       "id": "v112-frasin",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Frasin",
       "label_ro": "Frasin",
@@ -3485,16 +4377,111 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and noncolliding paradigm checked; 4 of 4 named targets source-qualified. Independent review remains pending; unqualified links are omitted.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/frasin/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "874191"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/frasin/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1302496"
+        },
+        {
+          "url": "https://horticultura.ro/frasinul/",
+          "paraphrase": "Horticultura Timișoara coroborează arborele, folosirea lemnului și prezența lui în Pădurea Verde.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_copac",
+          "label": "copac",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Frasinul este un arbore foios.",
+          "verdict": "source_qualified",
+          "verified_claim": "Frasinul este un arbore.",
+          "evidence_url": "https://dexonline.ro/definitie/frasin/json",
+          "relation_hypothesis": "is_a"
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "frunză",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Frasinul are frunze compuse.",
+          "verdict": "source_qualified",
+          "verified_claim": "Frasinul comun are frunze compuse.",
+          "evidence_url": "https://dexonline.ro/definitie/frasin/json",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v1_3_material_lemn",
+          "label": "Lemn",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Lemnul de frasin are utilizări materiale.",
+          "verdict": "source_qualified",
+          "verified_claim": "Lemnul de frasin este folosit la fabricarea unor obiecte.",
+          "evidence_url": "https://horticultura.ro/frasinul/",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4geo_padure",
+          "label": "pădure",
+          "category": "geografie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Frasinul intră în alcătuirea pădurilor.",
+          "verdict": "source_qualified",
+          "verified_claim": "Frasinul se întâlnește și în păduri, de exemplu în Pădurea Verde.",
+          "evidence_url": "https://horticultura.ro/frasinul/",
+          "relation_hypothesis": "related_to"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "sense": "Arbore cu frunze compuse și lemn elastic; aici, frasinul comun, Fraxinus excelsior.",
+      "sense_homograph": null,
+      "dexonline_receipt": {
+        "sha256": "fce3c024b4462179733aa29fa9d5d8655f119d9bb5a43ceee642b82a78f7d7f4",
+        "exact_lemma": "frasin",
+        "sense_definition_id": "874191",
+        "doom3_definition_id": "1302496",
+        "homograph": null
+      },
+      "proposed_forms": [
+        "frasin",
+        "frasinul",
+        "frasini",
+        "frasinii",
+        "frasinului",
+        "frasinilor"
+      ],
+      "morphology_note": "DOOM3 explicit forms plus the regular articulated/genitive noun paradigm; fold-equivalent spellings are represented once. No new unscreened key was added.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 41813,
+        "best_form": "frasin",
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded pass; unresolved named claims are held instead of extending searches or inventing endpoints."
     },
     {
       "id": "v112-mesteacan",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Mesteacăn",
       "label_ro": "Mesteacăn",
@@ -3588,16 +4575,120 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and noncolliding paradigm checked; 4 of 5 named targets source-qualified. Independent review remains pending; unqualified links are omitted.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/mesteac%C4%83n/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "888622"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/mesteac%C4%83n/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1293061"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Mesteac%C4%83n",
+          "paraphrase": "Coroborează arborii Betula, frunzele simple, scoarța caracteristică și lemnul utilizabil.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_copac",
+          "label": "copac",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Mesteacănul este un arbore foios.",
+          "verdict": "source_qualified",
+          "verified_claim": "Mesteacănul este un arbore.",
+          "evidence_url": "https://dexonline.ro/definitie/mesteac%C4%83n/json",
+          "relation_hypothesis": "is_a"
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "frunză",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Mesteacănul are frunze căzătoare.",
+          "verdict": "source_qualified",
+          "verified_claim": "Mesteacănul are frunze simple.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Mesteac%C4%83n",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v1_3_material_lemn",
+          "label": "Lemn",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Lemnul de mesteacăn are utilizări materiale.",
+          "verdict": "source_qualified",
+          "verified_claim": "Mesteacănul furnizează lemn utilizabil.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Mesteac%C4%83n",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4geo_padure",
+          "label": "pădure",
+          "category": "geografie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Mesteacănul intră în păduri sau arborete.",
+          "verdict": "held: claim not fully qualified"
+        },
+        {
+          "node_id": "n_v1_12_scoarta",
+          "label": "Scoarță",
+          "category": "stiinta",
+          "status": "batch hypothesis; not accepted",
+          "claim_to_verify": "Mesteacănul comun are scoarță deschisă/albă caracteristică.",
+          "verdict": "source_qualified",
+          "verified_claim": "Mesteacănul comun are scoarță albă.",
+          "evidence_url": "https://dexonline.ro/definitie/mesteac%C4%83n/json",
+          "relation_hypothesis": "related_to"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "sense": "Arbore cu scoarță albă, ramuri flexibile și frunze simple; sensul comun de copac.",
+      "sense_homograph": null,
+      "dexonline_receipt": {
+        "sha256": "5c6fab549b47fb3bd4c25864539732edb86ac0e23a3c11a5ab5c9c12fcc7d29e",
+        "exact_lemma": "mesteacăn",
+        "sense_definition_id": "888622",
+        "doom3_definition_id": "1293061",
+        "homograph": null
+      },
+      "proposed_forms": [
+        "mesteacăn",
+        "mesteacănul",
+        "mesteceni",
+        "mestecenii",
+        "mesteacănului",
+        "mestecenilor"
+      ],
+      "morphology_note": "DOOM3 explicit forms plus the regular articulated/genitive noun paradigm; fold-equivalent spellings are represented once. No new unscreened key was added.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": null,
+        "best_form": null,
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded pass; unresolved named claims are held instead of extending searches or inventing endpoints.",
+      "sense_scope_note": "Selected common tree sense, not every dwarf species or locality. The named Pădure target was not separately qualified in this bounded pass and is omitted."
     },
     {
       "id": "v112-feriga",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Ferigă",
       "label_ro": "Ferigă",
@@ -3690,16 +4781,117 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and noncolliding paradigm checked; 4 of 4 named targets source-qualified. Independent review remains pending; unqualified links are omitted.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/ferig%C4%83/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "870212"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/ferig%C4%83/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1301326"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Pteridofite",
+          "paraphrase": "Coroborează feriga comună din păduri, cu rădăcini și frunze; sunt folosite numai aceste observații elementare.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        },
+        {
+          "url": "https://scgimpngtitu.ro/pdf/manuale-2025-2026/7%20BIOLOGIE.pdf",
+          "paraphrase": "Manualul de biologie ilustrează sporii ferigilor pe spatele frunzelor.",
+          "role": "school_reference",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_planta",
+          "label": "plantă",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Feriga este o plantă.",
+          "verdict": "source_qualified",
+          "verified_claim": "Feriga este o plantă vasculară.",
+          "evidence_url": "https://dexonline.ro/definitie/ferig%C4%83/json",
+          "relation_hypothesis": "is_a"
+        },
+        {
+          "node_id": "n_v24_nature_plant_parts_radacina",
+          "label": "Rădăcină",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Ferigile au rădăcini.",
+          "verdict": "source_qualified",
+          "verified_claim": "Feriga comună are rădăcini prinse de rizom.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Pteridofite",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "frunză",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Frunzele ferigilor sunt numite fronde.",
+          "verdict": "source_qualified",
+          "verified_claim": "Feriga are frunze pe care se formează spori.",
+          "evidence_url": "https://scgimpngtitu.ro/pdf/manuale-2025-2026/7%20BIOLOGIE.pdf",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4geo_padure",
+          "label": "pădure",
+          "category": "geografie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Ferigile sunt întâlnite în locuri umbroase din păduri.",
+          "verdict": "source_qualified",
+          "verified_claim": "Feriga comună crește în locuri umede din păduri.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Pteridofite",
+          "relation_hypothesis": "related_to"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "sense": "Plantă vasculară fără flori, cu frunze pe care se formează spori; aici, ferigile comune din locuri umede.",
+      "sense_homograph": null,
+      "dexonline_receipt": {
+        "sha256": "c9884c2bbd529913a2b534f316fed22001696badb3f89274047a994131995b20",
+        "exact_lemma": "ferigă",
+        "sense_definition_id": "870212",
+        "doom3_definition_id": "1301326",
+        "homograph": null
+      },
+      "proposed_forms": [
+        "ferigă",
+        "ferigi",
+        "ferigile",
+        "ferigii",
+        "ferigilor"
+      ],
+      "morphology_note": "DOOM3 explicit forms plus the regular articulated/genitive noun paradigm; fold-equivalent spellings are represented once. No new unscreened key was added.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": null,
+        "best_form": null,
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded pass; unresolved named claims are held instead of extending searches or inventing endpoints.",
+      "sense_scope_note": "No flowers or seeds are attributed to ferns. No medical claims, disputed broad Pteridophyta membership, counts or evolutionary ranking are used; regional feregă is not an added alias."
     },
     {
       "id": "v112-petala",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Petală",
       "label_ro": "Petală",
@@ -3792,11 +4984,135 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and noncolliding paradigm checked; 5 of 5 named targets source-qualified. Independent review remains pending; unqualified links are omitted.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/petal%C4%83/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "870948"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/petal%C4%83/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1282195"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/petal%C4%83",
+          "paraphrase": "Coroborează petala ca element al corolei provenit dintr-o frunză modificată și paradigma nominală.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        },
+        {
+          "url": "https://scgimpngtitu.ro/pdf/manuale-2025-2026/7%20BIOLOGIE.pdf",
+          "paraphrase": "Manualul de biologie prezintă petalele ca părți ale învelișului florii.",
+          "role": "school_reference",
+          "checked_on": "2026-10-12"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Trandafir",
+          "paraphrase": "Descrie petalele florilor de trandafir, fără a generaliza numărul lor la toate soiurile.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        },
+        {
+          "url": "https://brgv.ro/dianthus-spp-varietati-din-colectia-de-germoplasma-a-brgv-buzau/",
+          "paraphrase": "BRGV Buzău descrie petalele și corola garoafelor cultivate din colecția proprie.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_floare",
+          "label": "floare",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Petala este parte a florii.",
+          "verdict": "source_qualified",
+          "verified_claim": "Petala este o parte a florii.",
+          "evidence_url": "https://scgimpngtitu.ro/pdf/manuale-2025-2026/7%20BIOLOGIE.pdf",
+          "relation_hypothesis": "part_of"
+        },
+        {
+          "node_id": "n_v4sti_planta",
+          "label": "plantă",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Petala aparține plantei care produce floarea.",
+          "verdict": "source_qualified",
+          "verified_claim": "Petala este o parte a florii unei plante.",
+          "evidence_url": "https://scgimpngtitu.ro/pdf/manuale-2025-2026/7%20BIOLOGIE.pdf",
+          "relation_hypothesis": "part_of"
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "frunză",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Petala este o frunză modificată.",
+          "verdict": "source_qualified",
+          "verified_claim": "Petala corespunde unei frunze modificate, nu frunzei vegetative obișnuite.",
+          "evidence_url": "https://dexonline.ro/definitie/petal%C4%83/json",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v1_12_trandafir",
+          "label": "Trandafir",
+          "category": "stiinta",
+          "status": "batch hypothesis; not accepted",
+          "claim_to_verify": "Florile de trandafir au petale.",
+          "verdict": "source_qualified",
+          "verified_claim": "Florile de trandafir au petale.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Trandafir",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v1_12_garoafa",
+          "label": "Garoafă",
+          "category": "stiinta",
+          "status": "batch hypothesis; not accepted",
+          "claim_to_verify": "Florile de garoafă au petale.",
+          "verdict": "source_qualified",
+          "verified_claim": "Florile de garoafă au petale.",
+          "evidence_url": "https://brgv.ro/dianthus-spp-varietati-din-colectia-de-germoplasma-a-brgv-buzau/",
+          "relation_hypothesis": "related_to"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "sense": "Fiecare dintre elementele de obicei colorate care alcătuiesc corola unei flori.",
+      "sense_homograph": null,
+      "dexonline_receipt": {
+        "sha256": "883ae8d8f0fab1e8e7a7dac56b66a9bbef7479631f49511f2628d9a7f9639169",
+        "exact_lemma": "petală",
+        "sense_definition_id": "870948",
+        "doom3_definition_id": "1282195",
+        "homograph": null
+      },
+      "proposed_forms": [
+        "petală",
+        "petale",
+        "petalele",
+        "petalei",
+        "petalelor"
+      ],
+      "morphology_note": "DOOM3 explicit forms plus the regular articulated/genitive noun paradigm; fold-equivalent spellings are represented once. No new unscreened key was added.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 26887,
+        "best_form": "petale",
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded pass; unresolved named claims are held instead of extending searches or inventing endpoints.",
+      "sense_scope_note": "No fixed petal count is asserted for all roses/carnations; petal-to-leaf is morphological related_to, not a synonym or a vegetative-leaf label. No lily/tepal claim is included."
     },
     {
       "id": "v112-polen",
@@ -5393,17 +6709,17 @@
   "owner_decisions_policy": "Owner-only backlog decisions are not in this candidate set.",
   "research_summary": {
     "states": {
-      "researched": 10,
+      "researched": 22,
       "held": 2,
-      "idea": 28
+      "idea": 16
     },
-    "researched": 10,
+    "researched": 22,
     "held": 2,
     "accepted": 0,
     "installed": 0,
-    "remaining_ideas": 28
+    "remaining_ideas": 16
   },
-  "next_research_requirement": "Next≤12 idea items need four-to-eight distinct named targets and the full planned-form pre-screen before web research; all acceptance remains pending independent reviews.",
+  "next_research_requirement": "Before any web request, name 4–8 targets for the next ≤12 remaining ideas; preserve all incoming/outgoing batch caps, especially postal trio, Scoarță and Petală.",
   "research_ticks": [
     {
       "tick": 1,
@@ -5426,6 +6742,29 @@
       "accepted": 0,
       "installed": 0,
       "note": "Exact DEX/DOOM3 heads and selected noun senses; timbru postal homograph1, sapă tool DOOM3 homograph2. No frequency-based hold. Cazma/Furtun held for the predeclared fourth-link problem; no endpoints invented."
+    },
+    {
+      "tick": 2,
+      "item_ids": [
+        "v112-buturuga",
+        "v112-pin",
+        "v112-molid",
+        "v112-tei",
+        "v112-fag",
+        "v112-salcie",
+        "v112-plop",
+        "v112-castan",
+        "v112-frasin",
+        "v112-mesteacan",
+        "v112-feriga",
+        "v112-petala"
+      ],
+      "researched": 12,
+      "held": 0,
+      "accepted": 0,
+      "installed": 0,
+      "note": "Exact DEX/DOOM3 heads and selected botanical senses; PIN identifier, tei fibre and ornamental horse-chestnut senses excluded. Fold-equivalent salcii/sălcii represented once. Unqualified forest, paper and park hypotheses omitted; no substitute endpoints invented. Independent web reviews remain pending."
     }
-  ]
+  ],
+  "planning_note": "Aggregate incoming/outgoing hypotheses screened: Scoarță has the two new neighbors Fag/Mesteacăn; Petală has the two new neighbors Trandafir/Garoafă; Trunchi currently has only Buturugă as a new neighbor. Later target plans must respect these existing allocations."
 }
