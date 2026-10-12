@@ -27,6 +27,13 @@ Publish only `fix/gui-cat-prerequisites-linux` to origin. Shared main stays clea
   `_temp`): FAIL only from the 10 active route-JS budgets (Home 115,016 vs 40,960) plus the aggregate exit;
   37/39 checks passed. Backend race 1,743 s (contentrails 1,384.7 s of the 1,800 s per-binary timeout,
   httpgolden 777.0 s); browser 1,220 s; CSP enforced, 0 violations.
+- Review validation full at 2417e27 (= e042587 + 8e56bae hook + perf aa8d4e3/5d7594a/e6421be; trust set identical
+  to e042587, existing pin; image/PORT/main merges NOT covered), 2026-10-11 21:42–22:30 UTC, fresh gate slug: 900/900
+  browser cases, backend race with `-count=1` (0 cached; contentrails 1,154.6 s, httpgolden 102.2 s), PG, parity,
+  enforced CSP 0 violations PASS. FAIL: route-JS budgets (E3), legacy-owner journey (owner coordinator not attached:
+  "Required owner record absent: request.json"), baseline comparison (fresh gate copy lacked
+  `tools/gui-baseline-quality/node_modules`), csp-measurement (written after that failed step). Leftover app/db
+  containers and network removed by the run owner; absence verified.
 - aac8eff (on e042587): three world-audit rail tests 444 s → 236 s on the review host, `state()` CPU
   151.8 s → 34.1 s; equivalence verified on 3000 random worlds + bundled replays (oracle test e6421be).
 - This branch's test-loop speedups (no behaviour change): httpgolden package 884 s → 115 s; six
@@ -35,7 +42,10 @@ Publish only `fix/gui-cat-prerequisites-linux` to origin. Shared main stays clea
   1. Paul's trust pin for `.gate.env` → managed unit, then full on this branch (port ruled: Q5,
      ADR0195).
   2. One combined full of this branch (source already integrates main a27477d; re-merge if main moves).
-  3. KIT_BUMP core-v1.6 under E5 (budget-only-red same-SHA unit; parent `kit:sync` only).
+  3. KIT_BUMP core-v1.6 under E5: core-v1.6 entered at 89db19d (SYNC); no unit result exists at or after it.
+     Paul either rules the e042587 kit:sync + trust + budget-only-red full as E5 evidence, or runs one unit;
+     relay `KIT_BUMP: core-v1.6 applied sha=89db19d; delete the shims for REQ-6, then gate unit.` (REQ-6 has no
+     shims) and pre-clear the receipt check (89db19d also touched 4 doc paths).
   4. Physical Samsung Chrome + Samsung Internet throttled-4G device checkpoint: UNMET.
   5. PROGRAM §4.7 `budgets.json` defaults vs E3 "preserve unchanged": open.
 

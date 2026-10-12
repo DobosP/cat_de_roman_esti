@@ -40,7 +40,7 @@ its literal identity, selection and refusals; like main's own superseded tuples
 version. New GUI selector tests bind V1.9/V1.10 bytes, digests, references and
 tuples; V1.10 owns the live-bundle clause; all nine older tuples still select
 their own responses; changed, missing, extra, nil, empty and all62 proper
-V1.10/V1.9 and V1.9/V1.8 mixtures refuse before HTTP. No assertion is weakened.
+V1.10/V1.9 and V1.9/V1.8 mixtures refuse before HTTP. No selection or refusal assertion is removed; the superseded live-bundle equality clause moves to the newest corpus test (95f94e3 pattern), so older tuples are no longer bound to a compiled bundle (no frozen bundle exists to bind them to, unlike V1.5 in 902a341).
 
 ## Qualification boundary
 
@@ -70,5 +70,5 @@ V1.10 live-bundle ownership above: V1.10 keeps its literal identity, selection
 and refusals with a moved-past clause, and V1.12 now owns the live-bundle clause.
 All eleven older tuples still select their own responses; all 62 proper V1.12/V1.11
 and V1.11/V1.10 mixtures, plus changed, missing, extra, nil and empty tuples,
-refuse before HTTP. No assertion is weakened. The qualification boundary above is
+refuse before HTTP. No selection or refusal assertion is removed; the superseded live-bundle equality clause moves to the newest corpus test (95f94e3 pattern), so older tuples are no longer bound to a compiled bundle (no frozen bundle exists to bind them to, unlike V1.5 in 902a341). The qualification boundary above is
 unchanged.
