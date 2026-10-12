@@ -3,7 +3,7 @@
   "theme": "post-and-garden",
   "baseline_commit": "932d8c987790314b985a4f24a75bf6be25c9f692",
   "procedure_rev": "17b97a2",
-  "scope": "Unresearched growth hypotheses only; no reviewed acceptance, gameplay approval or installed player-visible delta.",
+  "scope": "Growth candidates with source research; formal independent acceptance and installed player-visible delta remain pending.",
   "screen": {
     "bundle_sha256": "9a1951262818e766796972f29a467f77f613c40f58d313d0d63c1ea9112214c9",
     "lookup_fields": [
@@ -19,8 +19,8 @@
     ],
     "pool_files_checked": 19,
     "items": 40,
-    "keys_screened": 218,
-    "planned_unowned_keys": 215,
+    "keys_screened": 221,
+    "planned_unowned_keys": 218,
     "foreign_keys_held": 3,
     "deferred_matches": 0,
     "reviewed_unresolved_matches": 0,
@@ -5116,8 +5116,8 @@
     },
     {
       "id": "v112-polen",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Polen",
       "label_ro": "Polen",
@@ -5132,10 +5132,13 @@
       "planned_forms": [
         "polen",
         "polenul",
-        "polenului"
+        "polenului",
+        "polenuri",
+        "polenurile",
+        "polenurilor"
       ],
       "held_forms": [],
-      "form_status": "Unverified DOOM3/sense hypotheses; only unique, currently unowned keys are planned. Normative additions need the same screen before web research.",
+      "form_status": "Selected DOOM3 paradigm verified; only screened unowned normalized keys are proposed. Other senses and held owned forms stay excluded.",
       "identity_checks": {
         "forms": [
           {
@@ -5170,21 +5173,172 @@
             "deferred_current": false,
             "reviewed_unresolved": false,
             "state": "proposed"
+          },
+          {
+            "form": "polenuri",
+            "key": "polenuri",
+            "owners": [],
+            "world_hits": [],
+            "cald_proxies": [],
+            "deferred_raw": false,
+            "deferred_current": false,
+            "reviewed_unresolved": false,
+            "state": "proposed",
+            "screen_note": "New exact DOOM3 polenuri plural screened before further web qualification."
+          },
+          {
+            "form": "polenurile",
+            "key": "polenurile",
+            "owners": [],
+            "world_hits": [],
+            "cald_proxies": [],
+            "deferred_raw": false,
+            "deferred_current": false,
+            "reviewed_unresolved": false,
+            "state": "proposed",
+            "screen_note": "New exact DOOM3 polenuri plural screened before further web qualification."
+          },
+          {
+            "form": "polenurilor",
+            "key": "polenurilor",
+            "owners": [],
+            "world_hits": [],
+            "cald_proxies": [],
+            "deferred_raw": false,
+            "deferred_current": false,
+            "reviewed_unresolved": false,
+            "state": "proposed",
+            "screen_note": "New exact DOOM3 polenuri plural screened before further web qualification."
           }
-        ]
+        ],
+        "additional_screen": {
+          "forms": [
+            "polenuri",
+            "polenurile",
+            "polenurilor"
+          ],
+          "pool_files_checked": 20,
+          "result": "No owner, proxy, deferred, unresolved or prior state hit."
+        }
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and noncolliding paradigm checked; 5 of 5 named targets source-qualified. Independent review remains pending; unqualified links are omitted.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/polen/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "874512"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/polen/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1283612"
+        },
+        {
+          "url": "https://scgimpngtitu.ro/pdf/manuale-2025-2026/7%20BIOLOGIE.pdf",
+          "paraphrase": "Manualul de biologie prezintă polenul florilor și transportul lui prin vânt și insecte, inclusiv albine și fluturi.",
+          "role": "school_reference",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_floare",
+          "label": "floare",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Polenul se formează în flori.",
+          "verdict": "source_qualified",
+          "verified_claim": "Polenul este produs în anterele florilor.",
+          "evidence_url": "https://scgimpngtitu.ro/pdf/manuale-2025-2026/7%20BIOLOGIE.pdf",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4sti_planta",
+          "label": "plantă",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Polenul este produs de plantele cu semințe.",
+          "verdict": "source_qualified",
+          "verified_claim": "Polenul participă la reproducerea plantelor cu semințe.",
+          "evidence_url": "https://scgimpngtitu.ro/pdf/manuale-2025-2026/7%20BIOLOGIE.pdf",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v1_8_albina",
+          "label": "Albină",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Albinele culeg polen din flori.",
+          "verdict": "source_qualified",
+          "verified_claim": "Albinele pot culege și transporta polen între flori.",
+          "evidence_url": "https://scgimpngtitu.ro/pdf/manuale-2025-2026/7%20BIOLOGIE.pdf",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v24_weather_air_vant",
+          "label": "Vânt",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Vântul poate transporta polen.",
+          "verdict": "source_qualified",
+          "verified_claim": "Vântul poate transporta polen.",
+          "evidence_url": "https://scgimpngtitu.ro/pdf/manuale-2025-2026/7%20BIOLOGIE.pdf",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v1_8_fluture",
+          "label": "Fluture",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Fluturii pot transporta polen între flori.",
+          "verdict": "source_qualified",
+          "verified_claim": "Fluturii pot transporta polen între flori.",
+          "evidence_url": "https://scgimpngtitu.ro/pdf/manuale-2025-2026/7%20BIOLOGIE.pdf",
+          "relation_hypothesis": "related_to"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "sense": "Pulbere fină produsă în anterele florilor, implicată în reproducerea plantelor cu semințe.",
+      "sense_homograph": null,
+      "dexonline_receipt": {
+        "sha256": "1c44978ebfc9a4b37652be8bde6506d675fbd3d329d639c4533d5d119b6d43ec",
+        "exact_lemma": "polen",
+        "sense_definition_id": "874512",
+        "doom3_definition_id": "1283612",
+        "homograph": null
+      },
+      "proposed_forms": [
+        "polen",
+        "polenul",
+        "polenului",
+        "polenuri",
+        "polenurile",
+        "polenurilor"
+      ],
+      "morphology_note": "DOOM3 gives plural polenuri; full regular polen/polenul/polenului and polenuri/polenurile/polenurilor retained. The three newly confirmed plural keys received the full owner/world/proxy/deferred/unresolved/prior-pool screen before further qualification.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 24612,
+        "best_form": "polen",
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded pass; unresolved named claims are held instead of extending searches or inventing endpoints."
     },
     {
       "id": "v112-nectar",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Nectar",
       "label_ro": "Nectar",
@@ -5202,7 +5356,7 @@
         "nectarului"
       ],
       "held_forms": [],
-      "form_status": "Unverified DOOM3/sense hypotheses; only unique, currently unowned keys are planned. Normative additions need the same screen before web research.",
+      "form_status": "Selected DOOM3 paradigm verified; only screened unowned normalized keys are proposed. Other senses and held owned forms stay excluded.",
       "identity_checks": {
         "forms": [
           {
@@ -5242,16 +5396,119 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and noncolliding paradigm checked; 5 of 5 named targets source-qualified. Independent review remains pending; unqualified links are omitted.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/nectar/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "882677"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/nectar/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1258117"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Nectar",
+          "paraphrase": "Coroborează secreția plantelor, nectarul floral, consumul de albine/fluturi și transformarea nectarului în miere.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_floare",
+          "label": "floare",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Nectarul se găsește în unele flori.",
+          "verdict": "source_qualified",
+          "verified_claim": "Unele flori secretă nectar.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Nectar",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4sti_planta",
+          "label": "plantă",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Nectarul este o secreție dulce a unor plante.",
+          "verdict": "source_qualified",
+          "verified_claim": "Nectarul este o secreție dulce a unor plante.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Nectar",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v1_8_albina",
+          "label": "Albină",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Albinele culeg nectar.",
+          "verdict": "source_qualified",
+          "verified_claim": "Albinele culeg nectar.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Nectar",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v24_food_breakfast_miere",
+          "label": "Miere",
+          "category": "gastronomie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Albinele folosesc nectarul pentru a produce miere.",
+          "verdict": "source_qualified",
+          "verified_claim": "Albinele transformă nectarul colectat în miere.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Nectar",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v1_8_fluture",
+          "label": "Fluture",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Fluturii se hrănesc cu nectar.",
+          "verdict": "source_qualified",
+          "verified_claim": "Fluturii consumă nectar.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Nectar",
+          "relation_hypothesis": "related_to"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "sense": "Lichid dulce secretat de unele plante, colectat din flori de albine și de alți polenizatori; sensul botanic.",
+      "sense_homograph": "DEX sense1 botanical secretion; DOOM3 plural nectaruri explicitly marked băuturi and excluded, as are mythological and fruit-drink senses",
+      "dexonline_receipt": {
+        "sha256": "8620848ec206da53d0409219b129ad8aa60cfbb2449b28fa922e34feb1e82597",
+        "exact_lemma": "nectar",
+        "sense_definition_id": "882677",
+        "doom3_definition_id": "1258117",
+        "homograph": "DEX sense1 botanical secretion; DOOM3 plural nectaruri explicitly marked băuturi and excluded, as are mythological and fruit-drink senses"
+      },
+      "proposed_forms": [
+        "nectar",
+        "nectarul",
+        "nectarului"
+      ],
+      "morphology_note": "Botanical mass noun: nectar, nectarul, nectarului. DEX/DOOM3 assign the plural to beverages, so nectaruri/nectare and beverage derivatives are not inputs for this botanical node.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 27597,
+        "best_form": "nectar",
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded pass; unresolved named claims are held instead of extending searches or inventing endpoints."
     },
     {
       "id": "v112-alun",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Alun",
       "label_ro": "Alun",
@@ -5272,7 +5529,7 @@
         "alunilor"
       ],
       "held_forms": [],
-      "form_status": "Unverified DOOM3/sense hypotheses; only unique, currently unowned keys are planned. Normative additions need the same screen before web research.",
+      "form_status": "Selected DOOM3 paradigm verified; only screened unowned normalized keys are proposed. Other senses and held owned forms stay excluded.",
       "identity_checks": {
         "forms": [
           {
@@ -5345,16 +5602,120 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and noncolliding paradigm checked; 4 of 5 named targets source-qualified. Independent review remains pending; unqualified links are omitted.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/alun/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "825524"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/alun/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1322057"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Alun",
+          "paraphrase": "Coroborează alunul ca arbust, frunzele rotunjite, florile și fructele comestibile.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_planta",
+          "label": "plantă",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Alunul este un arbust.",
+          "verdict": "source_qualified",
+          "verified_claim": "Alunul este un arbust.",
+          "evidence_url": "https://dexonline.ro/definitie/alun/json",
+          "relation_hypothesis": "is_a"
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "frunză",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Alunul are frunze late.",
+          "verdict": "source_qualified",
+          "verified_claim": "Alunul are frunze rotunjite.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Alun",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4sti_floare",
+          "label": "floare",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Alunul are flori grupate în amenți.",
+          "verdict": "source_qualified",
+          "verified_claim": "Alunul are flori, cele mascule fiind grupate în amenți.",
+          "evidence_url": "https://dexonline.ro/definitie/alun/json",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4gas_fruct",
+          "label": "Fruct",
+          "category": "gastronomie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Alunul produce alune comestibile.",
+          "verdict": "source_qualified",
+          "verified_claim": "Alunul produce alune comestibile.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Alun",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v33_forest_animal_veverita",
+          "label": "Veveriță",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Veverițele se hrănesc cu alune.",
+          "verdict": "held: claim not fully qualified"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "sense": "Arbust cu frunze rotunjite, flori mascule în amenți și fructe comestibile numite alune; Corylus avellana.",
+      "sense_homograph": null,
+      "dexonline_receipt": {
+        "sha256": "c6abb07cc47ec323b669bb3c549c5b08fe43e67e80d1e8525780599468b37a9e",
+        "exact_lemma": "alun",
+        "sense_definition_id": "825524",
+        "doom3_definition_id": "1322057",
+        "homograph": null
+      },
+      "proposed_forms": [
+        "alun",
+        "alunul",
+        "aluni",
+        "alunii",
+        "alunului",
+        "alunilor"
+      ],
+      "morphology_note": "DOOM3 explicit forms plus the regular articulated/genitive noun paradigm; fold-equivalent spellings are represented once. No new unscreened key was added.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": null,
+        "best_form": null,
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded pass; unresolved named claims are held instead of extending searches or inventing endpoints.",
+      "sense_scope_note": "Only Corylus avellana shrub selected; no food-fruit alias alună or folklore/medical claims. Veveriță was not directly qualified in this bounded pass and is omitted."
     },
     {
       "id": "v112-gutui",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Gutui",
       "label_ro": "Gutui",
@@ -5374,7 +5735,7 @@
         "gutuilor"
       ],
       "held_forms": [],
-      "form_status": "Unverified DOOM3/sense hypotheses; only unique, currently unowned keys are planned. Normative additions need the same screen before web research.",
+      "form_status": "Selected DOOM3 paradigm verified; only screened unowned normalized keys are proposed. Other senses and held owned forms stay excluded.",
       "identity_checks": {
         "forms": [
           {
@@ -5436,16 +5797,110 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and noncolliding paradigm checked; 4 of 4 named targets source-qualified. Independent review remains pending; unqualified links are omitted.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/gutui/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "880338"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/gutui/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1327910"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Gutui",
+          "paraphrase": "Coroborează pomul Cydonia oblonga, frunzele simple, florile și utilizarea fructelor în alimentație.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_copac",
+          "label": "copac",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Gutuiul este un pom fructifer.",
+          "verdict": "source_qualified",
+          "verified_claim": "Gutuiul este un pom fructifer.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Gutui",
+          "relation_hypothesis": "is_a"
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "frunză",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Gutuiul are frunze simple.",
+          "verdict": "source_qualified",
+          "verified_claim": "Gutuiul are frunze simple.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Gutui",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4sti_floare",
+          "label": "floare",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Gutuiul are flori.",
+          "verdict": "source_qualified",
+          "verified_claim": "Gutuiul are flori albe sau roz.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Gutui",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4gas_fruct",
+          "label": "Fruct",
+          "category": "gastronomie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Gutuiul produce gutui comestibile.",
+          "verdict": "source_qualified",
+          "verified_claim": "Gutuiul produce gutui comestibile.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Gutui",
+          "relation_hypothesis": "related_to"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "sense": "Pom fructifer cu frunze simple, flori albe sau roz și fructe comestibile numite gutui; Cydonia oblonga.",
+      "sense_homograph": "Tree Cydonia oblonga, not the fruit lemma gutuie or ornamental Japanese quince",
+      "dexonline_receipt": {
+        "sha256": "61e0f26f5273740aa58fd773051f70fd26cecc5ca10e95f0db717bad3de1248a",
+        "exact_lemma": "gutui",
+        "sense_definition_id": "880338",
+        "doom3_definition_id": "1327910",
+        "homograph": "Tree Cydonia oblonga, not the fruit lemma gutuie or ornamental Japanese quince"
+      },
+      "proposed_forms": [
+        "gutui",
+        "gutuiul",
+        "gutuii",
+        "gutuiului",
+        "gutuilor"
+      ],
+      "morphology_note": "DOOM3 explicit forms plus the regular articulated/genitive noun paradigm; fold-equivalent spellings are represented once. No new unscreened key was added.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": null,
+        "best_form": null,
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded pass; unresolved named claims are held instead of extending searches or inventing endpoints."
     },
     {
       "id": "v112-prun",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Prun",
       "label_ro": "Prun",
@@ -5466,7 +5921,7 @@
         "prunilor"
       ],
       "held_forms": [],
-      "form_status": "Unverified DOOM3/sense hypotheses; only unique, currently unowned keys are planned. Normative additions need the same screen before web research.",
+      "form_status": "Selected DOOM3 paradigm verified; only screened unowned normalized keys are proposed. Other senses and held owned forms stay excluded.",
       "identity_checks": {
         "forms": [
           {
@@ -5539,16 +5994,120 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and noncolliding paradigm checked; 4 of 5 named targets source-qualified. Independent review remains pending; unqualified links are omitted.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/prun/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "880103"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/prun/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1285789"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Prun",
+          "paraphrase": "Coroborează prunul ca arbore fructifer și folosirea prunelor în alimentație.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_copac",
+          "label": "copac",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Prunul este un pom fructifer.",
+          "verdict": "source_qualified",
+          "verified_claim": "Prunul este un pom fructifer.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Prun",
+          "relation_hypothesis": "is_a"
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "frunză",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Prunul are frunze simple.",
+          "verdict": "held: claim not fully qualified"
+        },
+        {
+          "node_id": "n_v4sti_floare",
+          "label": "floare",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Prunul are flori.",
+          "verdict": "source_qualified",
+          "verified_claim": "Prunul are flori albe-verzui.",
+          "evidence_url": "https://dexonline.ro/definitie/prun/json",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4gas_fruct",
+          "label": "Fruct",
+          "category": "gastronomie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Prunul produce fructe comestibile.",
+          "verdict": "source_qualified",
+          "verified_claim": "Prunul produce fructe comestibile.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Prun",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v24_food_orchard_pruna",
+          "label": "Prună",
+          "category": "gastronomie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Pruna este fructul prunului.",
+          "verdict": "source_qualified",
+          "verified_claim": "Pruna este fructul prunului.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Prun",
+          "relation_hypothesis": "related_to"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "sense": "Pom fructifer cu flori albe-verzui, cultivat pentru fructele comestibile numite prune; Prunus domestica.",
+      "sense_homograph": null,
+      "dexonline_receipt": {
+        "sha256": "2fa9a06af99dad9ded06b0dfa91593a9970032d25e2da56820dee9867542df15",
+        "exact_lemma": "prun",
+        "sense_definition_id": "880103",
+        "doom3_definition_id": "1285789",
+        "homograph": null
+      },
+      "proposed_forms": [
+        "prun",
+        "prunul",
+        "pruni",
+        "prunii",
+        "prunului",
+        "prunilor"
+      ],
+      "morphology_note": "DOOM3 explicit forms plus the regular articulated/genitive noun paradigm; fold-equivalent spellings are represented once. No new unscreened key was added.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": null,
+        "best_form": null,
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded pass; unresolved named claims are held instead of extending searches or inventing endpoints.",
+      "sense_scope_note": "Selected Prunus domestica; no other Prunus species are aliases. Leaf morphology was not specifically supported by the selected sources in this bounded pass, so that named link is omitted."
     },
     {
       "id": "v112-cires",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Cireș",
       "label_ro": "Cireș",
@@ -5569,7 +6128,7 @@
         "cireșilor"
       ],
       "held_forms": [],
-      "form_status": "Unverified DOOM3/sense hypotheses; only unique, currently unowned keys are planned. Normative additions need the same screen before web research.",
+      "form_status": "Selected DOOM3 paradigm verified; only screened unowned normalized keys are proposed. Other senses and held owned forms stay excluded.",
       "identity_checks": {
         "forms": [
           {
@@ -5642,16 +6201,111 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and noncolliding paradigm checked; 4 of 4 named targets source-qualified. Independent review remains pending; unqualified links are omitted.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/cire%C8%99/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "846906"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/cire%C8%99/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1311893"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Cire%C8%99",
+          "paraphrase": "Coroborează cireșul, frunzele ovale alungite, florile albe și fructele cărnoase.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_copac",
+          "label": "copac",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Cireșul este un pom fructifer.",
+          "verdict": "source_qualified",
+          "verified_claim": "Cireșul este un pom fructifer.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Cire%C8%99",
+          "relation_hypothesis": "is_a"
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "frunză",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Cireșul are frunze simple.",
+          "verdict": "source_qualified",
+          "verified_claim": "Cireșul are frunze ovale alungite.",
+          "evidence_url": "https://dexonline.ro/definitie/cire%C8%99/json",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4sti_floare",
+          "label": "floare",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Cireșul are flori.",
+          "verdict": "source_qualified",
+          "verified_claim": "Cireșul are flori albe.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Cire%C8%99",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4gas_fruct",
+          "label": "Fruct",
+          "category": "gastronomie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Cireșul produce cireșe comestibile.",
+          "verdict": "source_qualified",
+          "verified_claim": "Cireșul produce cireșe comestibile.",
+          "evidence_url": "https://dexonline.ro/definitie/cire%C8%99/json",
+          "relation_hypothesis": "related_to"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "sense": "Pom fructifer cu frunze ovale alungite și flori albe, cultivat pentru cireșe; Prunus avium.",
+      "sense_homograph": null,
+      "dexonline_receipt": {
+        "sha256": "143127fa32b7d64b810380a09cf9976cef1de063b05f3f6e8a1cdd6a2e8af55e",
+        "exact_lemma": "cireș",
+        "sense_definition_id": "846906",
+        "doom3_definition_id": "1311893",
+        "homograph": null
+      },
+      "proposed_forms": [
+        "cireș",
+        "cireșul",
+        "cireși",
+        "cireșii",
+        "cireșului",
+        "cireșilor"
+      ],
+      "morphology_note": "DOOM3 explicit forms plus the regular articulated/genitive noun paradigm; fold-equivalent spellings are represented once. No new unscreened key was added.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": null,
+        "best_form": null,
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded pass; unresolved named claims are held instead of extending searches or inventing endpoints."
     },
     {
       "id": "v112-visin",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Vișin",
       "label_ro": "Vișin",
@@ -5672,7 +6326,7 @@
         "vișinilor"
       ],
       "held_forms": [],
-      "form_status": "Unverified DOOM3/sense hypotheses; only unique, currently unowned keys are planned. Normative additions need the same screen before web research.",
+      "form_status": "Selected DOOM3 paradigm verified; only screened unowned normalized keys are proposed. Other senses and held owned forms stay excluded.",
       "identity_checks": {
         "forms": [
           {
@@ -5745,16 +6399,112 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and noncolliding paradigm checked; 4 of 4 named targets source-qualified. Independent review remains pending; unqualified links are omitted.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/vi%C8%99in/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "826653"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/vi%C8%99in/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1264297"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Vi%C8%99in",
+          "paraphrase": "Coroborează vișinul, frunzele dințate, florile albe și fructele acre-dulci.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_copac",
+          "label": "copac",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Vișinul este un pom fructifer.",
+          "verdict": "source_qualified",
+          "verified_claim": "Vișinul este un pom fructifer.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Vi%C8%99in",
+          "relation_hypothesis": "is_a"
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "frunză",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Vișinul are frunze simple.",
+          "verdict": "source_qualified",
+          "verified_claim": "Vișinul are frunze lucioase, dințate pe margine.",
+          "evidence_url": "https://dexonline.ro/definitie/vi%C8%99in/json",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4sti_floare",
+          "label": "floare",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Vișinul are flori.",
+          "verdict": "source_qualified",
+          "verified_claim": "Vișinul are flori albe.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Vi%C8%99in",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4gas_fruct",
+          "label": "Fruct",
+          "category": "gastronomie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Vișinul produce vișine comestibile.",
+          "verdict": "source_qualified",
+          "verified_claim": "Vișinul produce vișine comestibile.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Vi%C8%99in",
+          "relation_hypothesis": "related_to"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "sense": "Pom fructifer cu frunze lucioase și flori albe, cultivat pentru vișine; Prunus cerasus.",
+      "sense_homograph": null,
+      "dexonline_receipt": {
+        "sha256": "43c709f99f853d9bc1efabf4a86de530bc1ba88b27f2f3115a1d49d75a33dc10",
+        "exact_lemma": "vișin",
+        "sense_definition_id": "826653",
+        "doom3_definition_id": "1264297",
+        "homograph": null
+      },
+      "proposed_forms": [
+        "vișin",
+        "vișinul",
+        "vișini",
+        "vișinii",
+        "vișinului",
+        "vișinilor"
+      ],
+      "morphology_note": "DOOM3 explicit forms plus the regular articulated/genitive noun paradigm; fold-equivalent spellings are represented once. No new unscreened key was added.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": null,
+        "best_form": null,
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded pass; unresolved named claims are held instead of extending searches or inventing endpoints.",
+      "sense_scope_note": "Only Prunus cerasus selected; compound vișin turcesc (Prunus mahaleb) is excluded. No medical, cultivar-count, pollination or age claims are included."
     },
     {
       "id": "v112-cais",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Cais",
       "label_ro": "Cais",
@@ -5775,7 +6525,7 @@
         "caișilor"
       ],
       "held_forms": [],
-      "form_status": "Unverified DOOM3/sense hypotheses; only unique, currently unowned keys are planned. Normative additions need the same screen before web research.",
+      "form_status": "Selected DOOM3 paradigm verified; only screened unowned normalized keys are proposed. Other senses and held owned forms stay excluded.",
       "identity_checks": {
         "forms": [
           {
@@ -5848,16 +6598,123 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and noncolliding paradigm checked; 5 of 5 named targets source-qualified. Independent review remains pending; unqualified links are omitted.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/cais/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "839708"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/cais/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1309121"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Cais",
+          "paraphrase": "Coroborează pomul, frunzele, florile albe-roz și fructele numite caise; fără afirmații despre consumul sâmburilor.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_copac",
+          "label": "copac",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Caisul este un pom fructifer.",
+          "verdict": "source_qualified",
+          "verified_claim": "Caisul este un pom fructifer.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Cais",
+          "relation_hypothesis": "is_a"
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "frunză",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Caisul are frunze simple.",
+          "verdict": "source_qualified",
+          "verified_claim": "Caisul are frunze.",
+          "evidence_url": "https://dexonline.ro/definitie/cais/json",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4sti_floare",
+          "label": "floare",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Caisul are flori.",
+          "verdict": "source_qualified",
+          "verified_claim": "Caisul are flori albe cu nuanțe roz.",
+          "evidence_url": "https://dexonline.ro/definitie/cais/json",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4gas_fruct",
+          "label": "Fruct",
+          "category": "gastronomie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Caisul produce fructe comestibile.",
+          "verdict": "source_qualified",
+          "verified_claim": "Caisul produce fructe comestibile.",
+          "evidence_url": "https://dexonline.ro/definitie/cais/json",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v24_food_summer_fruit_caisa",
+          "label": "Caisă",
+          "category": "gastronomie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Caisa este fructul caisului.",
+          "verdict": "source_qualified",
+          "verified_claim": "Caisa este fructul caisului.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Cais",
+          "relation_hypothesis": "related_to"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "sense": "Pom fructifer cu flori albe sau rozalii, cultivat pentru caise; Prunus armeniaca, numit și Armeniaca vulgaris.",
+      "sense_homograph": null,
+      "dexonline_receipt": {
+        "sha256": "46a8efb064ebcf3562278404538f06df2a57cfd90983a96954566a92c55cd11a",
+        "exact_lemma": "cais",
+        "sense_definition_id": "839708",
+        "doom3_definition_id": "1309121",
+        "homograph": null
+      },
+      "proposed_forms": [
+        "cais",
+        "caisul",
+        "caiși",
+        "caișii",
+        "caisului",
+        "caișilor"
+      ],
+      "morphology_note": "DOOM3 explicit forms plus the regular articulated/genitive noun paradigm; fold-equivalent spellings are represented once. No new unscreened key was added.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": null,
+        "best_form": null,
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded pass; unresolved named claims are held instead of extending searches or inventing endpoints.",
+      "sense_scope_note": "No leaf-shape detail from the inconsistent secondary description, medical/seed-consumption claims, geographic-origin certainty or numerical production facts are included."
     },
     {
       "id": "v112-piersic",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Piersic",
       "label_ro": "Piersic",
@@ -5891,7 +6748,7 @@
           "reason": "held: owned by n_v24_food_summer_fruit_piersica"
         }
       ],
-      "form_status": "Unverified DOOM3/sense hypotheses; only unique, currently unowned keys are planned. Normative additions need the same screen before web research.",
+      "form_status": "Selected DOOM3 paradigm verified; only screened unowned normalized keys are proposed. Other senses and held owned forms stay excluded.",
       "identity_checks": {
         "forms": [
           {
@@ -6003,16 +6860,119 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and noncolliding paradigm checked; 5 of 5 named targets source-qualified. Independent review remains pending; unqualified links are omitted.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/piersic/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "871413"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/piersic/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1282433"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Piersic",
+          "paraphrase": "Coroborează piersicul ca pom fructifer, frunzele alungite, florile și fructele numite piersici.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_copac",
+          "label": "copac",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Piersicul este un pom fructifer.",
+          "verdict": "source_qualified",
+          "verified_claim": "Piersicul este un pom fructifer.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Piersic",
+          "relation_hypothesis": "is_a"
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "frunză",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Piersicul are frunze simple.",
+          "verdict": "source_qualified",
+          "verified_claim": "Piersicul are frunze alungite.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Piersic",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4sti_floare",
+          "label": "floare",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Piersicul are flori.",
+          "verdict": "source_qualified",
+          "verified_claim": "Piersicul are flori trandafirii sau albe.",
+          "evidence_url": "https://dexonline.ro/definitie/piersic/json",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4gas_fruct",
+          "label": "Fruct",
+          "category": "gastronomie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Piersicul produce fructe comestibile.",
+          "verdict": "source_qualified",
+          "verified_claim": "Piersicul produce fructe comestibile numite piersici.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Piersic",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v24_food_summer_fruit_piersica",
+          "label": "Piersică",
+          "category": "gastronomie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Piersica este fructul piersicului.",
+          "verdict": "source_qualified",
+          "verified_claim": "Piersica este fructul piersicului.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Piersic",
+          "relation_hypothesis": "related_to"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "sense": "Pomul care produce piersici, cu frunze alungite și flori trandafirii sau albe; Prunus persica, numit și Persica vulgaris.",
+      "sense_homograph": null,
+      "dexonline_receipt": {
+        "sha256": "91d023bd2cc8c63986f87640a2f0add69e7ba0af00bbd11c3a7866d53989845a",
+        "exact_lemma": "piersic",
+        "sense_definition_id": "871413",
+        "doom3_definition_id": "1282433",
+        "homograph": null
+      },
+      "proposed_forms": [
+        "piersic",
+        "piersicul",
+        "piersicului"
+      ],
+      "morphology_note": "DOOM3 masculine piersic, plural piersici; retain only unowned singular piersic/piersicul/piersicului. All three plural keys piersici/piersicii/piersicilor remain held by Piersică n_v24_food_summer_fruit_piersica; no form is moved.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 49260,
+        "best_form": "piersic",
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded pass; unresolved named claims are held instead of extending searches or inventing endpoints."
     },
     {
       "id": "v112-crin",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Crin",
       "label_ro": "Crin",
@@ -6033,7 +6993,7 @@
         "crinilor"
       ],
       "held_forms": [],
-      "form_status": "Unverified DOOM3/sense hypotheses; only unique, currently unowned keys are planned. Normative additions need the same screen before web research.",
+      "form_status": "Selected DOOM3 paradigm verified; only screened unowned normalized keys are proposed. Other senses and held owned forms stay excluded.",
       "identity_checks": {
         "forms": [
           {
@@ -6117,16 +7077,125 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and noncolliding paradigm checked; 4 of 4 named targets source-qualified. Independent review remains pending; unqualified links are omitted.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/crin/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "853677"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/crin/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1315796"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Crin",
+          "paraphrase": "Coroborează crinii din genul Lilium ca plante erbacee cu flori, cultivate ornamental.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        },
+        {
+          "url": "https://plant-journal.uaic.ro/docs/1995/40.pdf",
+          "paraphrase": "Articolul Grădinii Botanice Iași menționează explicit Lilium candidum între podoabele grădinilor de lângă case.",
+          "role": "horticultural_reference",
+          "checked_on": "2026-10-12",
+          "page": 4
+        },
+        {
+          "url": "https://www.agro.basf.ro/ro/stiri/basf-in-camp/ghid-cultivare-flori-in-camp-si-in-sera.html",
+          "paraphrase": "Ghidul floricol descrie tulpina aeriană a crinului cu frunze și exemplifică specia Lilium candidum.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_planta",
+          "label": "plantă",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Crinul este o plantă erbacee.",
+          "verdict": "source_qualified",
+          "verified_claim": "Crinul alb este o plantă erbacee.",
+          "evidence_url": "https://dexonline.ro/definitie/crin/json",
+          "relation_hypothesis": "is_a"
+        },
+        {
+          "node_id": "n_v4sti_floare",
+          "label": "floare",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Crinul are flori mari.",
+          "verdict": "source_qualified",
+          "verified_claim": "Crinul alb are flori mari parfumate.",
+          "evidence_url": "https://dexonline.ro/definitie/crin/json",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "frunză",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Crinul are frunze.",
+          "verdict": "source_qualified",
+          "verified_claim": "Crinul are frunze pe tulpina aeriană.",
+          "evidence_url": "https://www.agro.basf.ro/ro/stiri/basf-in-camp/ghid-cultivare-flori-in-camp-si-in-sera.html",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v24_home_outdoor_gradina",
+          "label": "Grădină",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Crinul este cultivat în grădini ca plantă ornamentală.",
+          "verdict": "source_qualified",
+          "verified_claim": "Crinul alb este cultivat în grădinile de lângă case.",
+          "evidence_url": "https://plant-journal.uaic.ro/docs/1995/40.pdf",
+          "relation_hypothesis": "related_to"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "sense": "Plantă de grădină care crește dintr-un bulb și are flori mari parfumate; aici, crinul alb, Lilium candidum.",
+      "sense_homograph": "DEX sense1 Lilium candidum; exclude person names and compound Hosta/Hemerocallis/marine-animal senses",
+      "dexonline_receipt": {
+        "sha256": "d13c673ffa567231f2c5fa61b56a218e63aa674d836682b1cf2a67fd03b1f084",
+        "exact_lemma": "crin",
+        "sense_definition_id": "853677",
+        "doom3_definition_id": "1315796",
+        "homograph": "DEX sense1 Lilium candidum; exclude person names and compound Hosta/Hemerocallis/marine-animal senses"
+      },
+      "proposed_forms": [
+        "crin",
+        "crinul",
+        "crini",
+        "crinii",
+        "crinului",
+        "crinilor"
+      ],
+      "morphology_note": "DOOM3 explicit forms plus the regular articulated/genitive noun paradigm; fold-equivalent spellings are represented once. No new unscreened key was added.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 34514,
+        "best_form": "crini",
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded pass; unresolved named claims are held instead of extending searches or inventing endpoints.",
+      "sense_scope_note": "Selected white Lilium candidum; no generic claim that every lily is white, no compound aliases or tepal/petal count, toxicity/medical properties, origin or height figures. Leaf-presence claim only; no BASF geographic-origin generalization."
     },
     {
       "id": "v112-trandafir",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Trandafir",
       "label_ro": "Trandafir",
@@ -6147,7 +7216,7 @@
         "trandafirilor"
       ],
       "held_forms": [],
-      "form_status": "Unverified DOOM3/sense hypotheses; only unique, currently unowned keys are planned. Normative additions need the same screen before web research.",
+      "form_status": "Selected DOOM3 paradigm verified; only screened unowned normalized keys are proposed. Other senses and held owned forms stay excluded.",
       "identity_checks": {
         "forms": [
           {
@@ -6231,16 +7300,123 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and noncolliding paradigm checked; 5 of 5 named targets source-qualified. Independent review remains pending; unqualified links are omitted.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/trandafir/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "834607"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/trandafir/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1269550"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Trandafir",
+          "paraphrase": "Coroborează arbuștii Rosa, frunzele compuse, petalele florilor și cultivarea în grădini.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_planta",
+          "label": "plantă",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Trandafirul este un arbust ornamental.",
+          "verdict": "source_qualified",
+          "verified_claim": "Trandafirul este un arbust ornamental.",
+          "evidence_url": "https://dexonline.ro/definitie/trandafir/json",
+          "relation_hypothesis": "is_a"
+        },
+        {
+          "node_id": "n_v4sti_floare",
+          "label": "floare",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Trandafirul are flori.",
+          "verdict": "source_qualified",
+          "verified_claim": "Trandafirul are flori parfumate.",
+          "evidence_url": "https://dexonline.ro/definitie/trandafir/json",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "frunză",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Trandafirul are frunze compuse.",
+          "verdict": "source_qualified",
+          "verified_claim": "Trandafirul are frunze compuse.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Trandafir",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v24_home_outdoor_gradina",
+          "label": "Grădină",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Trandafirul este cultivat în grădini.",
+          "verdict": "source_qualified",
+          "verified_claim": "Trandafirii sunt cultivați în grădini ca plante ornamentale.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Trandafir",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v1_12_petala",
+          "label": "Petală",
+          "category": "stiinta",
+          "status": "batch hypothesis",
+          "claim_to_verify": "Florile de trandafir au petale.",
+          "verdict": "source_qualified",
+          "verified_claim": "Florile de trandafir au petale.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Trandafir",
+          "relation_hypothesis": "related_to"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "sense": "Arbust ornamental cultivat pentru florile parfumate, din genul Rosa; sensul botanic comun.",
+      "sense_homograph": "DEX botanical sense1 Rosa, not sausage, luxury rosewood, unrelated compound plants or marine animal",
+      "dexonline_receipt": {
+        "sha256": "ab932ca4dbee0877cb58af52bd2474d9ce7c2b42a20edfb50360ded320bb82e3",
+        "exact_lemma": "trandafir",
+        "sense_definition_id": "834607",
+        "doom3_definition_id": "1269550",
+        "homograph": "DEX botanical sense1 Rosa, not sausage, luxury rosewood, unrelated compound plants or marine animal"
+      },
+      "proposed_forms": [
+        "trandafir",
+        "trandafirul",
+        "trandafiri",
+        "trandafirii",
+        "trandafirului",
+        "trandafirilor"
+      ],
+      "morphology_note": "DOOM3 explicit forms plus the regular articulated/genitive noun paradigm; fold-equivalent spellings are represented once. No new unscreened key was added.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 8046,
+        "best_form": "trandafiri",
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded pass; unresolved named claims are held instead of extending searches or inventing endpoints.",
+      "sense_scope_note": "No fixed petal count is asserted for all cultivars. The reciprocal Petală hypothesis represents one undirected related_to pair, not two neighbors or two separate installed edges."
     },
     {
       "id": "v112-garoafa",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Garoafă",
       "label_ro": "Garoafă",
@@ -6260,7 +7436,7 @@
         "garoafelor"
       ],
       "held_forms": [],
-      "form_status": "Unverified DOOM3/sense hypotheses; only unique, currently unowned keys are planned. Normative additions need the same screen before web research.",
+      "form_status": "Selected DOOM3 paradigm verified; only screened unowned normalized keys are proposed. Other senses and held owned forms stay excluded.",
       "identity_checks": {
         "forms": [
           {
@@ -6322,11 +7498,124 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and noncolliding paradigm checked; 5 of 5 named targets source-qualified. Independent review remains pending; unqualified links are omitted.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/garoaf%C4%83/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "876023"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/garoaf%C4%83/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1317329"
+        },
+        {
+          "url": "https://brgv.ro/dianthus-spp-varietati-din-colectia-de-germoplasma-a-brgv-buzau/",
+          "paraphrase": "BRGV Buzău descrie garoafele cultivate din colecția proprie, corolele și petalele lor.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        },
+        {
+          "url": "https://plant-journal.uaic.ro/docs/1995/40.pdf",
+          "paraphrase": "Articolul Grădinii Botanice Iași include Dianthus caryophyllus între garoafele decorative cultivate în grădini.",
+          "role": "horticultural_reference",
+          "checked_on": "2026-10-12",
+          "page": 2
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_planta",
+          "label": "plantă",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Garoafa este o plantă erbacee ornamentală.",
+          "verdict": "source_qualified",
+          "verified_claim": "Garoafa este o plantă erbacee ornamentală.",
+          "evidence_url": "https://dexonline.ro/definitie/garoaf%C4%83/json",
+          "relation_hypothesis": "is_a"
+        },
+        {
+          "node_id": "n_v4sti_floare",
+          "label": "floare",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Garoafa are flori.",
+          "verdict": "source_qualified",
+          "verified_claim": "Garoafa are flori parfumate.",
+          "evidence_url": "https://dexonline.ro/definitie/garoaf%C4%83/json",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "frunză",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Garoafa are frunze înguste.",
+          "verdict": "source_qualified",
+          "verified_claim": "Garoafa are frunze opuse, înguste.",
+          "evidence_url": "https://dexonline.ro/definitie/garoaf%C4%83/json",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v24_home_outdoor_gradina",
+          "label": "Grădină",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Garoafa este cultivată în grădini.",
+          "verdict": "source_qualified",
+          "verified_claim": "Garoafele sunt cultivate pentru decorarea grădinilor.",
+          "evidence_url": "https://plant-journal.uaic.ro/docs/1995/40.pdf",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v1_12_petala",
+          "label": "Petală",
+          "category": "stiinta",
+          "status": "batch hypothesis",
+          "claim_to_verify": "Florile de garoafă au petale.",
+          "verdict": "source_qualified",
+          "verified_claim": "Florile de garoafă au petale.",
+          "evidence_url": "https://brgv.ro/dianthus-spp-varietati-din-colectia-de-germoplasma-a-brgv-buzau/",
+          "relation_hypothesis": "related_to"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "sense": "Plantă ornamentală erbacee, cultivată pentru flori parfumate de culori variate; Dianthus caryophyllus.",
+      "sense_homograph": null,
+      "dexonline_receipt": {
+        "sha256": "6a81b24ceb4dfca13c61022f2a7d95621da3c8b52b31e2ebff35d17f85f85999",
+        "exact_lemma": "garoafă",
+        "sense_definition_id": "876023",
+        "doom3_definition_id": "1317329",
+        "homograph": null
+      },
+      "proposed_forms": [
+        "garoafă",
+        "garoafe",
+        "garoafele",
+        "garoafei",
+        "garoafelor"
+      ],
+      "morphology_note": "DOOM3 explicit forms plus the regular articulated/genitive noun paradigm; fold-equivalent spellings are represented once. No new unscreened key was added.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": null,
+        "best_form": null,
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded pass; unresolved named claims are held instead of extending searches or inventing endpoints.",
+      "sense_scope_note": "Selected Dianthus caryophyllus; no compound garoafă-de-munte alias or fixed petal count. The reciprocal Petală hypothesis is a single related_to pair."
     },
     {
       "id": "v112-lalea",
@@ -6709,17 +7998,17 @@
   "owner_decisions_policy": "Owner-only backlog decisions are not in this candidate set.",
   "research_summary": {
     "states": {
-      "researched": 22,
+      "researched": 34,
       "held": 2,
-      "idea": 16
+      "idea": 4
     },
-    "researched": 22,
+    "researched": 34,
     "held": 2,
     "accepted": 0,
     "installed": 0,
-    "remaining_ideas": 16
+    "remaining_ideas": 4
   },
-  "next_research_requirement": "Before any web request, name 4–8 targets for the next ≤12 remaining ideas; preserve all incoming/outgoing batch caps, especially postal trio, Scoarță and Petală.",
+  "next_research_requirement": "Before any web request, name4–8 targets for the last4 ideas Lalea/Zambilă/Urzică/Mentă; preserve all incoming/outgoing batch caps. Do not add a third Scoarță or Petală batch neighbor.",
   "research_ticks": [
     {
       "tick": 1,
@@ -6764,7 +8053,29 @@
       "accepted": 0,
       "installed": 0,
       "note": "Exact DEX/DOOM3 heads and selected botanical senses; PIN identifier, tei fibre and ornamental horse-chestnut senses excluded. Fold-equivalent salcii/sălcii represented once. Unqualified forest, paper and park hypotheses omitted; no substitute endpoints invented. Independent web reviews remain pending."
+    },
+    {
+      "tick": 3,
+      "item_ids": [
+        "v112-polen",
+        "v112-nectar",
+        "v112-alun",
+        "v112-gutui",
+        "v112-prun",
+        "v112-cires",
+        "v112-visin",
+        "v112-cais",
+        "v112-piersic",
+        "v112-crin",
+        "v112-trandafir",
+        "v112-garoafa"
+      ],
+      "researched": 12,
+      "held": 0,
+      "accepted": 0,
+      "installed": 0,
+      "note": "Exact DEX/DOOM3 heads checked. Polen plural3newkeys fully screened before qualification; botanical nectar singular-only. Piersic3fruit-owned pluralkeys held. CrinwhiteLilium, TrandafirRosa senses selected; reciprocal petals canonicalizeonce. Unqualified Alun–Veveriță and Prun–frunză omitted."
     }
   ],
-  "planning_note": "Aggregate incoming/outgoing hypotheses screened: Scoarță has the two new neighbors Fag/Mesteacăn; Petală has the two new neighbors Trandafir/Garoafă; Trunchi currently has only Buturugă as a new neighbor. Later target plans must respect these existing allocations."
+  "planning_note": "All incoming/outgoing targets are counted once per neighbor. Postal trio has two batch neighbors each; Scoarță has Fag/Mesteacăn; Petală has Trandafir/Garoafă. Reciprocal postal and petal hypotheses must become a single related_to pair each in the module. No new batch allocation exceeds two."
 }
