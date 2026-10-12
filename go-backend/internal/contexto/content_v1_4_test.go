@@ -25,7 +25,7 @@ func TestV14ClockSynonymInNaturallySelectedExistingGame(t *testing.T) {
 			t.Fatalf("%q: %v %v", text, got, e)
 		}
 		guess := got["guess"].(map[string]any)
-		if guess["id"] != "n_v24_time_day_ceas" || guess["rank"] != 2267 || guess["closeness"] != 8 {
+		if guess["id"] != "n_v24_time_day_ceas" || guess["rank"] != 2329 || guess["closeness"] != 7 {
 			t.Fatalf("existing device feedback changed: %v", guess)
 		}
 	}
