@@ -3427,8 +3427,8 @@
     },
     {
       "id": "v113-baraj",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Baraj",
       "label_ro": "Baraj",
@@ -3439,7 +3439,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "Pending reviews: adds a source-checked everyday or school concept with its full noncolliding inputs and truthful links for Cald sau Rece.",
       "planned_forms": [
         "baraj",
         "barajul",
@@ -3449,7 +3449,7 @@
         "barajelor"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm qualified for the selected sense; regular forms included once per normalization key. Independent review is pending.",
       "fold_equivalent_hypotheses_omitted": 0,
       "identity_checks": {
         "forms": [
@@ -3553,8 +3553,35 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "researched: exact DEX/DOOM3 lemma, selected sense, full noncolliding paradigm and predeclared claims supported; independent reviews remain required.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/baraj/json",
+          "role": "sense",
+          "paraphrase": "Obstacol natural sau construit care reține apa ori îi modifică scurgerea.",
+          "authority": "DEX '09",
+          "definition_id": "832922",
+          "headword": "baraj"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/baraj/json",
+          "role": "forms",
+          "paraphrase": "current neuter noun, plural baraje; hydraulic sense, sports and military senses excluded",
+          "authority": "DOOM 3",
+          "definition_id": "1317268",
+          "headword": "baraj"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Baraj",
+          "role": "second_source",
+          "paraphrase": "Descrie baraje naturale, construite de oameni și construite de castori."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Lacul_Vidraru",
+          "role": "link_evidence",
+          "paraphrase": "Lacul Vidraru a fost creat prin bararea râului Argeș."
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v2geo_rau",
@@ -3562,8 +3589,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "poate regla curgerea râului",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate modifica scurgerea unui râu",
+          "relation": "related_to",
+          "label_ro": "poate modifica scurgerea unui râu",
+          "evidence_url": "https://dexonline.ro/definitie/baraj/json"
         },
         {
           "node_id": "n_v2geo_lac",
@@ -3571,8 +3602,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "poate forma un lac de acumulare",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate crea un lac de acumulare",
+          "relation": "related_to",
+          "label_ro": "poate crea un lac de acumulare",
+          "evidence_url": "https://dexonline.ro/definitie/baraj/json"
         },
         {
           "node_id": "n_geox_lacul_vidraru",
@@ -3580,8 +3615,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "este reținut de un baraj",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "barajul Vidraru reține apele lacului",
+          "relation": "related_to",
+          "label_ro": "barajul Vidraru reține apele lacului",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Lacul_Vidraru"
         },
         {
           "node_id": "n_v1_11_castor",
@@ -3589,14 +3628,66 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "castorii construiesc baraje",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate fi construit de castori",
+          "relation": "related_to",
+          "label_ro": "poate fi construit de castori",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Baraj"
         }
       ],
-      "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "research_ready": true,
+      "next_action": "Include in the single whole-batch module and both independent web reviews at step3.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "planned_graph_counts": {
+        "distinct_neighbors": 4,
+        "old_main": 4,
+        "same_category": 3,
+        "batch": 0
+      },
+      "qualified_forms": [
+        "baraj",
+        "barajul",
+        "baraje",
+        "barajele",
+        "barajului",
+        "barajelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 14649,
+        "positive_support": true,
+        "hits": [
+          {
+            "rank": 14649,
+            "form": "baraj",
+            "count": 1159
+          },
+          {
+            "rank": 19506,
+            "form": "barajul",
+            "count": 768
+          },
+          {
+            "rank": 34267,
+            "form": "baraje",
+            "count": 325
+          },
+          {
+            "rank": 43539,
+            "form": "barajului",
+            "count": 219
+          }
+        ],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Obstacol natural sau construit care reține apa ori îi modifică scurgerea.",
+      "register": "current neuter noun, plural baraje; hydraulic sense, sports and military senses excluded",
+      "research_budget": {
+        "elapsed_seconds": 194,
+        "research_completion_observed_utc": "2026-10-12T10:55:47.519478+00:00"
+      },
+      "qualified_graph_counts": {
         "distinct_neighbors": 4,
         "old_main": 4,
         "same_category": 3,
@@ -3605,8 +3696,8 @@
     },
     {
       "id": "v113-mlastina",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Mlaștină",
       "label_ro": "Mlaștină",
@@ -3617,7 +3708,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "Pending reviews: adds a source-checked everyday or school concept with its full noncolliding inputs and truthful links for Cald sau Rece.",
       "planned_forms": [
         "mlaștină",
         "mlaștini",
@@ -3626,7 +3717,7 @@
         "mlaștinilor"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm qualified for the selected sense; regular forms included once per normalization key. Independent review is pending.",
       "fold_equivalent_hypotheses_omitted": 1,
       "identity_checks": {
         "forms": [
@@ -3720,8 +3811,47 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "researched: exact DEX/DOOM3 lemma, selected sense, full noncolliding paradigm and predeclared claims supported; independent reviews remain required.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/mlaștină/json",
+          "role": "sense",
+          "paraphrase": "Teren jos în care apa stagnează și se dezvoltă vegetație adaptată umezelii.",
+          "authority": "DEX '09",
+          "definition_id": "890992",
+          "headword": "mlaștină"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/mlaștină/json",
+          "role": "forms",
+          "paraphrase": "current feminine noun, plural mlaștini, genitive-dative mlaștinii",
+          "authority": "DOOM 3",
+          "definition_id": "1294113",
+          "headword": "mlaștină"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/mlaștină",
+          "role": "second_source",
+          "paraphrase": "Coroborează depresiunea fără scurgere și acumularea apei."
+        },
+        {
+          "url": "https://www.worldbank.org/ro/country/romania/brief/romania-danube-delta-integrated-sustainable-development-strategy",
+          "role": "link_evidence",
+          "paraphrase": "Descrierea regiunii Deltei include explicit mlaștini și bălți; nu sunt preluate superlativele sau statisticile."
+        },
+        {
+          "url": "https://www.ibiol.ro/publicatii/imagini/pdf/Fitocenozele%20din%20Romania%20-%20Sanda-Ollerer-Burescu%20-%202008%20-%20CD.pdf",
+          "role": "link_evidence",
+          "paraphrase": "Monografia Institutului de Biologie descrie formarea unor mlaștini prin colmatarea lacurilor și înmlăștinirea marginilor de râuri.",
+          "location": "p.110, indexed primary passage; direct open unavailable"
+        },
+        {
+          "url": "https://am.gov.md/sites/default/files/document/attachments/MAN-PLAN%20Nistru%20de%20Jos.pdf",
+          "role": "link_evidence",
+          "paraphrase": "Planul de management descrie vegetația ierboasă palustră din mlaștini.",
+          "location": "indexed primary passage; direct open unavailable"
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v4gas_apa",
@@ -3729,8 +3859,12 @@
           "category": "gastronomie",
           "status": "exists on wave_base",
           "claim_to_verify": "este teren saturat cu apă",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "este un teren în care stagnează apa",
+          "relation": "related_to",
+          "label_ro": "este un teren în care stagnează apa",
+          "evidence_url": "https://dexonline.ro/definitie/mlaștină/json"
         },
         {
           "node_id": "n_delta_dunarii",
@@ -3738,8 +3872,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "cuprinde ecosisteme de mlaștină",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "se întâlnește în Delta Dunării",
+          "relation": "related_to",
+          "label_ro": "se întâlnește în Delta Dunării",
+          "evidence_url": "https://www.worldbank.org/ro/country/romania/brief/romania-danube-delta-integrated-sustainable-development-strategy"
         },
         {
           "node_id": "n_v24_nature_plant_parts_iarba",
@@ -3747,8 +3885,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "poate include plante ierboase adaptate apei",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate avea vegetație ierboasă adaptată umezelii",
+          "relation": "related_to",
+          "label_ro": "poate avea vegetație ierboasă adaptată umezelii",
+          "evidence_url": "https://am.gov.md/sites/default/files/document/attachments/MAN-PLAN%20Nistru%20de%20Jos.pdf"
         },
         {
           "node_id": "n_v2geo_lac",
@@ -3756,8 +3898,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "se poate forma prin colmatarea lacurilor",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "se poate forma prin colmatarea unui lac",
+          "relation": "related_to",
+          "label_ro": "se poate forma prin colmatarea unui lac",
+          "evidence_url": "https://www.ibiol.ro/publicatii/imagini/pdf/Fitocenozele%20din%20Romania%20-%20Sanda-Ollerer-Burescu%20-%202008%20-%20CD.pdf"
         },
         {
           "node_id": "n_v4geo_mal",
@@ -3765,14 +3911,71 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "se poate dezvolta în apropierea malurilor",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "se poate dezvolta la marginea apelor",
+          "relation": "related_to",
+          "label_ro": "se poate dezvolta la marginea apelor",
+          "evidence_url": "https://www.ibiol.ro/publicatii/imagini/pdf/Fitocenozele%20din%20Romania%20-%20Sanda-Ollerer-Burescu%20-%202008%20-%20CD.pdf"
         }
       ],
-      "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "research_ready": true,
+      "next_action": "Include in the single whole-batch module and both independent web reviews at step3.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "planned_graph_counts": {
+        "distinct_neighbors": 5,
+        "old_main": 5,
+        "same_category": 3,
+        "batch": 0
+      },
+      "qualified_forms": [
+        "mlaștină",
+        "mlaștini",
+        "mlaștinile",
+        "mlaștinii",
+        "mlaștinilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 11557,
+        "positive_support": true,
+        "hits": [
+          {
+            "rank": 11557,
+            "form": "mlaştină",
+            "count": 1597
+          },
+          {
+            "rank": 20699,
+            "form": "mlaştina",
+            "count": 707
+          },
+          {
+            "rank": 25303,
+            "form": "mlastina",
+            "count": 526
+          },
+          {
+            "rank": 28783,
+            "form": "mlaştini",
+            "count": 431
+          },
+          {
+            "rank": 45828,
+            "form": "mlaştinile",
+            "count": 201
+          }
+        ],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Teren jos în care apa stagnează și se dezvoltă vegetație adaptată umezelii.",
+      "register": "current feminine noun, plural mlaștini, genitive-dative mlaștinii",
+      "research_budget": {
+        "elapsed_seconds": 194,
+        "research_completion_observed_utc": "2026-10-12T10:55:47.576339+00:00"
+      },
+      "review_attention": "Verify that the existing Iarbă owner matches the intended herbaceous wetland vegetation claim; preserve the source scope.",
+      "qualified_graph_counts": {
         "distinct_neighbors": 5,
         "old_main": 5,
         "same_category": 3,
@@ -3781,8 +3984,8 @@
     },
     {
       "id": "v113-balta",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Baltă",
       "label_ro": "Baltă",
@@ -3793,7 +3996,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "Pending reviews: adds a source-checked everyday or school concept with its full noncolliding inputs and truthful links for Cald sau Rece.",
       "planned_forms": [
         "baltă",
         "bălți",
@@ -3802,7 +4005,7 @@
         "bălților"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm qualified for the selected sense; regular forms included once per normalization key. Independent review is pending.",
       "fold_equivalent_hypotheses_omitted": 1,
       "identity_checks": {
         "forms": [
@@ -3890,8 +4093,41 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "researched: exact DEX/DOOM3 lemma, selected sense, full noncolliding paradigm and predeclared claims supported; independent reviews remain required.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/baltă/json",
+          "role": "sense",
+          "paraphrase": "Întindere naturală de apă stătătoare, de obicei puțin adâncă, cu plante și animale acvatice.",
+          "authority": "DEX '09",
+          "definition_id": "832830",
+          "headword": "baltă"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/baltă/json",
+          "role": "forms",
+          "paraphrase": "current feminine noun, plural bălți, genitive-dative bălții; selected aquatic habitat, small rain puddle and figurative senses excluded",
+          "authority": "DOOM 3",
+          "definition_id": "1317169",
+          "headword": "baltă"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Baltă",
+          "role": "second_source",
+          "paraphrase": "Distinge balta puțin adâncă de lac și descrie pești și păsări acvatice."
+        },
+        {
+          "url": "https://www.worldbank.org/ro/country/romania/brief/romania-danube-delta-integrated-sustainable-development-strategy",
+          "role": "link_evidence",
+          "paraphrase": "Regiunea Deltei Dunării cuprinde bălți cu apă dulce."
+        },
+        {
+          "url": "https://www.natura2000corabia-turnu.ro/wp-content/uploads/2019/09/Studiu-inventariere-pasari-merged.pdf",
+          "role": "link_evidence",
+          "paraphrase": "Studiul ornitologic descrie hrănirea raței mari și preferința pentru ape mici, inclusiv bălți.",
+          "location": "indexed primary study passage; direct open exceeds tool size"
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v4gas_apa",
@@ -3899,8 +4135,12 @@
           "category": "gastronomie",
           "status": "exists on wave_base",
           "claim_to_verify": "acumulare de apă stătătoare",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "este o întindere de apă stătătoare",
+          "relation": "related_to",
+          "label_ro": "este o întindere de apă stătătoare",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Baltă"
         },
         {
           "node_id": "n_v2geo_lac",
@@ -3908,8 +4148,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "ambele ape stătătoare, cu diferențe de verificat",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "este de obicei mai mică și mai puțin adâncă decât un lac",
+          "relation": "related_to",
+          "label_ro": "este de obicei mai mică și mai puțin adâncă decât un lac",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Baltă"
         },
         {
           "node_id": "n_delta_dunarii",
@@ -3917,8 +4161,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "cuprinde bălți naturale",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "se întâlnește în Delta Dunării",
+          "relation": "related_to",
+          "label_ro": "se întâlnește în Delta Dunării",
+          "evidence_url": "https://www.worldbank.org/ro/country/romania/brief/romania-danube-delta-integrated-sustainable-development-strategy"
         },
         {
           "node_id": "n_v4sti_peste",
@@ -3926,8 +4174,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "poate găzdui pești",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate găzdui pești",
+          "relation": "related_to",
+          "label_ro": "poate găzdui pești",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Baltă"
         },
         {
           "node_id": "n_v1_8_rata",
@@ -3935,14 +4187,56 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "rațele se pot hrăni în bălți",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate oferi hrană rațelor",
+          "relation": "related_to",
+          "label_ro": "poate oferi hrană rațelor",
+          "evidence_url": "https://www.natura2000corabia-turnu.ro/wp-content/uploads/2019/09/Studiu-inventariere-pasari-merged.pdf"
         }
       ],
-      "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "research_ready": true,
+      "next_action": "Include in the single whole-batch module and both independent web reviews at step3.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "planned_graph_counts": {
+        "distinct_neighbors": 5,
+        "old_main": 5,
+        "same_category": 2,
+        "batch": 0
+      },
+      "qualified_forms": [
+        "baltă",
+        "bălți",
+        "bălțile",
+        "bălții",
+        "bălților"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 1562,
+        "positive_support": true,
+        "hits": [
+          {
+            "rank": 1562,
+            "form": "baltă",
+            "count": 17873
+          },
+          {
+            "rank": 7258,
+            "form": "balta",
+            "count": 2936
+          }
+        ],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Întindere naturală de apă stătătoare, de obicei puțin adâncă, cu plante și animale acvatice.",
+      "register": "current feminine noun, plural bălți, genitive-dative bălții; selected aquatic habitat, small rain puddle and figurative senses excluded",
+      "research_budget": {
+        "elapsed_seconds": 194,
+        "research_completion_observed_utc": "2026-10-12T10:55:47.645250+00:00"
+      },
+      "review_attention": "Keep the shallow aquatic habitat distinct from the small rain-puddle sense of Băltoacă.",
+      "qualified_graph_counts": {
         "distinct_neighbors": 5,
         "old_main": 5,
         "same_category": 2,
@@ -3951,8 +4245,8 @@
     },
     {
       "id": "v113-inundatie",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Inundație",
       "label_ro": "Inundație",
@@ -3963,7 +4257,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "Pending reviews: adds a source-checked everyday or school concept with its full noncolliding inputs and truthful links for Cald sau Rece.",
       "planned_forms": [
         "inundație",
         "inundația",
@@ -3973,7 +4267,7 @@
         "inundațiilor"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm qualified for the selected sense; regular forms included once per normalization key. Independent review is pending.",
       "fold_equivalent_hypotheses_omitted": 0,
       "identity_checks": {
         "forms": [
@@ -4077,8 +4371,30 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "researched: exact DEX/DOOM3 lemma, selected sense, full noncolliding paradigm and predeclared claims supported; independent reviews remain required.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/inundație/json",
+          "role": "sense",
+          "paraphrase": "Acoperire temporară a unui teren cu apă revărsată sau acumulată după precipitații abundente.",
+          "authority": "DEX '09",
+          "definition_id": "856111",
+          "headword": "inundație"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/inundație/json",
+          "role": "forms",
+          "paraphrase": "current feminine noun, articulated inundația/inundațiile, plural inundații and genitive-dative inundației; figurative sense excluded",
+          "authority": "DOOM 3",
+          "definition_id": "1298626",
+          "headword": "inundație"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Inundație",
+          "role": "second_source",
+          "paraphrase": "Explică revărsarea râurilor ori lacurilor peste maluri și acumularea apei după ploi abundente."
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v2geo_rau",
@@ -4086,8 +4402,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "revărsarea râului poate produce inundații",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate fi produsă de revărsarea unui râu",
+          "relation": "related_to",
+          "label_ro": "poate fi produsă de revărsarea unui râu",
+          "evidence_url": "https://dexonline.ro/definitie/inundație/json"
         },
         {
           "node_id": "n_v2geo_lac",
@@ -4095,8 +4415,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "creșterea nivelului lacului poate inunda terenul",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate fi produsă de revărsarea unui lac",
+          "relation": "related_to",
+          "label_ro": "poate fi produsă de revărsarea unui lac",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Inundație"
         },
         {
           "node_id": "n_v24_weather_precipitation_ploaie",
@@ -4104,8 +4428,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "ploile abundente pot provoca inundații",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate fi provocată de ploi abundente",
+          "relation": "related_to",
+          "label_ro": "poate fi provocată de ploi abundente",
+          "evidence_url": "https://dexonline.ro/definitie/inundație/json"
         },
         {
           "node_id": "n_v4geo_mal",
@@ -4113,24 +4441,71 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "apa poate depăși malurile",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate apărea când apa depășește malurile",
+          "relation": "related_to",
+          "label_ro": "poate apărea când apa depășește malurile",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Inundație"
         }
       ],
-      "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "research_ready": true,
+      "next_action": "Include in the single whole-batch module and both independent web reviews at step3.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "planned_graph_counts": {
         "distinct_neighbors": 5,
         "old_main": 4,
         "same_category": 4,
         "batch": 1
+      },
+      "qualified_forms": [
+        "inundație",
+        "inundația",
+        "inundații",
+        "inundațiile",
+        "inundației",
+        "inundațiilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 28803,
+        "positive_support": false,
+        "hits": [
+          {
+            "rank": 28803,
+            "form": "inundaţii",
+            "count": 431
+          },
+          {
+            "rank": 31032,
+            "form": "inundaţie",
+            "count": 384
+          },
+          {
+            "rank": 49623,
+            "form": "inundaţiile",
+            "count": 176
+          }
+        ],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Acoperire temporară a unui teren cu apă revărsată sau acumulată după precipitații abundente.",
+      "register": "current feminine noun, articulated inundația/inundațiile, plural inundații and genitive-dative inundației; figurative sense excluded",
+      "research_budget": {
+        "elapsed_seconds": 194,
+        "research_completion_observed_utc": "2026-10-12T10:55:47.730225+00:00"
+      },
+      "qualified_graph_counts": {
+        "distinct_neighbors": 4,
+        "old_main": 4,
+        "same_category": 3,
+        "batch": 0
       }
     },
     {
       "id": "v113-avalansa",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Avalanșă",
       "label_ro": "Avalanșă",
@@ -4141,7 +4516,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "Pending reviews: adds a source-checked everyday or school concept with its full noncolliding inputs and truthful links for Cald sau Rece.",
       "planned_forms": [
         "avalanșă",
         "avalanșe",
@@ -4150,7 +4525,7 @@
         "avalanșelor"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm qualified for the selected sense; regular forms included once per normalization key. Independent review is pending.",
       "fold_equivalent_hypotheses_omitted": 1,
       "identity_checks": {
         "forms": [
@@ -4238,8 +4613,36 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "researched: exact DEX/DOOM3 lemma, selected sense, full noncolliding paradigm and predeclared claims supported; independent reviews remain required.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/avalanșă/json",
+          "role": "sense",
+          "paraphrase": "Masă de zăpadă care se desprinde și alunecă pe o pantă de munte, putând antrena alte materiale.",
+          "authority": "DEX '09",
+          "definition_id": "832214",
+          "headword": "avalanșă"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/avalanșă/json",
+          "role": "forms",
+          "paraphrase": "current feminine noun, plural avalanșe, genitive-dative avalanșei; figurative abundance sense excluded",
+          "authority": "DOOM 3",
+          "definition_id": "1327438",
+          "headword": "avalanșă"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Avalanșă",
+          "role": "second_source",
+          "paraphrase": "Descrie zăpada în mișcare pe versanți montani."
+        },
+        {
+          "url": "https://www.apepaduri.gov.ro/app/webroot/uploads/files/1%20Raport%20privind%20monitorizarea%20situa%C8%9Biilor%20de%20urgen%C8%9B%C4%83%20cu%20ajutorul%20senzorilor%20aeropurta%C8%9Bi.pdf",
+          "role": "link_evidence",
+          "paraphrase": "Raportul ministerial descrie avalanșele de zăpadă din sezonul de iarnă în Munții Carpați.",
+          "location": "§1.1.7, indexed primary passage; direct open unavailable"
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v24_weather_precipitation_zapada",
@@ -4247,8 +4650,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "este o masă de zăpadă în mișcare",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "este o masă de zăpadă în mișcare",
+          "relation": "related_to",
+          "label_ro": "este o masă de zăpadă în mișcare",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Avalanșă"
         },
         {
           "node_id": "n_v2geo_munte",
@@ -4256,8 +4663,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "se produce în teren montan",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "se produce pe pante de munte",
+          "relation": "related_to",
+          "label_ro": "se produce pe pante de munte",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Avalanșă"
         },
         {
           "node_id": "n_carpati",
@@ -4265,8 +4676,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "în Carpați se produc avalanșe",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "se produce și în Carpați",
+          "relation": "related_to",
+          "label_ro": "se produce și în Carpați",
+          "evidence_url": "https://www.apepaduri.gov.ro/app/webroot/uploads/files/1%20Raport%20privind%20monitorizarea%20situa%C8%9Biilor%20de%20urgen%C8%9B%C4%83%20cu%20ajutorul%20senzorilor%20aeropurta%C8%9Bi.pdf"
         },
         {
           "node_id": "n_v1_8_iarna",
@@ -4274,14 +4689,50 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "se poate produce în condițiile de iarnă",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "se poate produce în condiții de iarnă",
+          "relation": "related_to",
+          "label_ro": "se poate produce în condiții de iarnă",
+          "evidence_url": "https://www.apepaduri.gov.ro/app/webroot/uploads/files/1%20Raport%20privind%20monitorizarea%20situa%C8%9Biilor%20de%20urgen%C8%9B%C4%83%20cu%20ajutorul%20senzorilor%20aeropurta%C8%9Bi.pdf"
         }
       ],
-      "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "research_ready": true,
+      "next_action": "Include in the single whole-batch module and both independent web reviews at step3.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "planned_graph_counts": {
+        "distinct_neighbors": 4,
+        "old_main": 4,
+        "same_category": 2,
+        "batch": 0
+      },
+      "qualified_forms": [
+        "avalanșă",
+        "avalanșe",
+        "avalanșele",
+        "avalanșei",
+        "avalanșelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 30545,
+        "positive_support": false,
+        "hits": [
+          {
+            "rank": 30545,
+            "form": "avalanşă",
+            "count": 393
+          }
+        ],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Masă de zăpadă care se desprinde și alunecă pe o pantă de munte, putând antrena alte materiale.",
+      "register": "current feminine noun, plural avalanșe, genitive-dative avalanșei; figurative abundance sense excluded",
+      "research_budget": {
+        "elapsed_seconds": 152,
+        "research_completion_observed_utc": "2026-10-12T10:58:37.763352+00:00"
+      },
+      "qualified_graph_counts": {
         "distinct_neighbors": 4,
         "old_main": 4,
         "same_category": 2,
@@ -4290,8 +4741,8 @@
     },
     {
       "id": "v113-cutremur",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Cutremur",
       "label_ro": "Cutremur",
@@ -4302,7 +4753,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "Pending reviews: adds a source-checked everyday or school concept with its full noncolliding inputs and truthful links for Cald sau Rece.",
       "planned_forms": [
         "cutremur",
         "cutremurul",
@@ -4312,7 +4763,7 @@
         "cutremurelor"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm qualified for the selected sense; regular forms included once per normalization key. Independent review is pending.",
       "fold_equivalent_hypotheses_omitted": 0,
       "identity_checks": {
         "forms": [
@@ -4416,8 +4867,40 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "researched: exact DEX/DOOM3 lemma, selected sense, full noncolliding paradigm and predeclared claims supported; independent reviews remain required.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/cutremur/json",
+          "role": "sense",
+          "paraphrase": "Mișcare seismică a scoarței terestre, însoțită de propagarea energiei sub formă de unde.",
+          "authority": "DEX '09",
+          "definition_id": "855178",
+          "headword": "cutremur"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/cutremur/json",
+          "role": "forms",
+          "paraphrase": "current neuter noun, plural cutremure; fear and figurative senses excluded",
+          "authority": "DOOM 3",
+          "definition_id": "1316704",
+          "headword": "cutremur"
+        },
+        {
+          "url": "https://www.infp.ro/index.php?i=dct",
+          "role": "second_source",
+          "paraphrase": "Institutul explică eliberarea energiei seismice și mișcarea solului."
+        },
+        {
+          "url": "https://program-nucleu.infp.ro/public/index.php?faza=6&obiectiv=1&opt=nucleu2019&pn=19080102",
+          "role": "link_evidence",
+          "paraphrase": "Proiectul institutului studiază legătura dintre geologie, tensiunile crustale și seismicitate."
+        },
+        {
+          "url": "https://epos-ro.infp.ro/",
+          "role": "link_evidence",
+          "paraphrase": "Infrastructura geofizică studiază procesele fizice ale faliilor și cutremurelor; nu sunt preluate afirmații de predicție."
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v24_nature_world_pamant",
@@ -4425,8 +4908,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "cutremurul provoacă mișcarea pământului sau a solului",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "provoacă mișcarea solului",
+          "relation": "related_to",
+          "label_ro": "provoacă mișcarea solului",
+          "evidence_url": "https://www.infp.ro/index.php?i=dct"
         },
         {
           "node_id": "n_v17sti_geologie",
@@ -4434,8 +4921,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "este studiat de geologie și seismologie",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "este studiat în legătură cu structurile geologice",
+          "relation": "related_to",
+          "label_ro": "este studiat în legătură cu structurile geologice",
+          "evidence_url": "https://program-nucleu.infp.ro/public/index.php?faza=6&obiectiv=1&opt=nucleu2019&pn=19080102"
         },
         {
           "node_id": "n_v2sti_fizica",
@@ -4443,8 +4934,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "este studiat prin principiile fizicii",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "este studiat în fizica Pământului",
+          "relation": "related_to",
+          "label_ro": "este studiat în fizica Pământului",
+          "evidence_url": "https://epos-ro.infp.ro/"
         },
         {
           "node_id": "n_v3sti_energie",
@@ -4452,14 +4947,66 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "eliberează energie seismică",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "eliberează energie sub formă de unde seismice",
+          "relation": "related_to",
+          "label_ro": "eliberează energie sub formă de unde seismice",
+          "evidence_url": "https://www.infp.ro/index.php?i=dct"
         }
       ],
-      "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "research_ready": true,
+      "next_action": "Include in the single whole-batch module and both independent web reviews at step3.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "planned_graph_counts": {
+        "distinct_neighbors": 4,
+        "old_main": 4,
+        "same_category": 4,
+        "batch": 0
+      },
+      "qualified_forms": [
+        "cutremur",
+        "cutremurul",
+        "cutremure",
+        "cutremurele",
+        "cutremurului",
+        "cutremurelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 8343,
+        "positive_support": true,
+        "hits": [
+          {
+            "rank": 8343,
+            "form": "cutremur",
+            "count": 2474
+          },
+          {
+            "rank": 18716,
+            "form": "cutremure",
+            "count": 818
+          },
+          {
+            "rank": 26944,
+            "form": "cutremurul",
+            "count": 478
+          },
+          {
+            "rank": 39656,
+            "form": "cutremurele",
+            "count": 256
+          }
+        ],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Mișcare seismică a scoarței terestre, însoțită de propagarea energiei sub formă de unde.",
+      "register": "current neuter noun, plural cutremure; fear and figurative senses excluded",
+      "research_budget": {
+        "elapsed_seconds": 152,
+        "research_completion_observed_utc": "2026-10-12T10:58:37.837995+00:00"
+      },
+      "qualified_graph_counts": {
         "distinct_neighbors": 4,
         "old_main": 4,
         "same_category": 4,
@@ -4468,8 +5015,8 @@
     },
     {
       "id": "v113-eruptie",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Erupție",
       "label_ro": "Erupție",
@@ -4480,7 +5027,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "Pending reviews: adds a source-checked everyday or school concept with its full noncolliding inputs and truthful links for Cald sau Rece.",
       "planned_forms": [
         "erupție",
         "erupția",
@@ -4490,7 +5037,7 @@
         "erupțiilor"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm qualified for the selected sense; regular forms included once per normalization key. Independent review is pending.",
       "fold_equivalent_hypotheses_omitted": 0,
       "identity_checks": {
         "forms": [
@@ -4594,8 +5141,41 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "researched: exact DEX/DOOM3 lemma, selected sense, full noncolliding paradigm and predeclared claims supported; independent reviews remain required.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/erupție/json",
+          "role": "sense",
+          "paraphrase": "Ieșire la suprafață a unor gaze sau materiale din pământ, ca în activitatea vulcanilor și a vulcanilor noroioși.",
+          "authority": "DEX '09",
+          "definition_id": "866738",
+          "headword": "erupție"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/erupție/json",
+          "role": "forms",
+          "paraphrase": "DOOM3 exact geological headword erupție, articulated erupția/erupțiile, plural erupții, genitive-dative erupției; medical sense excluded",
+          "authority": "DOOM 3",
+          "definition_id": "1304444",
+          "headword": "erupție"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Erupție_vulcanică",
+          "role": "second_source",
+          "paraphrase": "Descrie eliminarea materialului și gazelor în timpul activității vulcanice."
+        },
+        {
+          "url": "https://cjbuzau.ro/vulcanii-noroiosi-6/",
+          "role": "link_evidence",
+          "paraphrase": "Consiliul Județean descrie erupțiile de noroi și gaze și craterele Vulcanilor Noroioși."
+        },
+        {
+          "url": "https://calimani.ro/documente/plan-management-2022-a.pdf",
+          "role": "link_evidence",
+          "paraphrase": "Planul parcului documentează materialele efuzive și explozive care au format structurile vulcanice Călimani.",
+          "location": "p.21–22"
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v4geo_vulcan",
@@ -4603,8 +5183,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "un vulcan poate produce erupții",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate fi produsă de un vulcan",
+          "relation": "related_to",
+          "label_ro": "poate fi produsă de un vulcan",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Erupție_vulcanică"
         },
         {
           "node_id": "n_v1_13_crater",
@@ -4612,8 +5196,13 @@
           "category": "geografie",
           "status": "proposed batch node",
           "claim_to_verify": "materialul poate fi expulzat prin crater",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate elimina materiale printr-un crater",
+          "relation": "related_to",
+          "label_ro": "poate elimina materiale printr-un crater",
+          "evidence_url": "https://dexonline.ro/definitie/crater/json",
+          "dependency": "Install only if this batch concept independently qualifies and is accepted; otherwise recompute the graph floor and hold when it fails."
         },
         {
           "node_id": "n_v17geo_vulcanii_noroiosi",
@@ -4621,8 +5210,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "au erupții de noroi și gaze",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate elimina noroi și gaze la Vulcanii Noroioși",
+          "relation": "related_to",
+          "label_ro": "poate elimina noroi și gaze la Vulcanii Noroioși",
+          "evidence_url": "https://cjbuzau.ro/vulcanii-noroiosi-6/"
         },
         {
           "node_id": "n_v21geo_muntii_calimani",
@@ -4630,14 +5223,61 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "erupțiile vulcanice au contribuit la formarea masivului",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "erupțiile au contribuit la formarea Munților Călimani",
+          "relation": "related_to",
+          "label_ro": "erupțiile au contribuit la formarea Munților Călimani",
+          "evidence_url": "https://calimani.ro/documente/plan-management-2022-a.pdf"
         }
       ],
-      "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "research_ready": true,
+      "next_action": "Include in the single whole-batch module and both independent web reviews at step3.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "planned_graph_counts": {
+        "distinct_neighbors": 4,
+        "old_main": 3,
+        "same_category": 4,
+        "batch": 1
+      },
+      "qualified_forms": [
+        "erupție",
+        "erupția",
+        "erupții",
+        "erupțiile",
+        "erupției",
+        "erupțiilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 26026,
+        "positive_support": false,
+        "hits": [
+          {
+            "rank": 26026,
+            "form": "erupţie",
+            "count": 504
+          },
+          {
+            "rank": 33696,
+            "form": "erupţii",
+            "count": 335
+          },
+          {
+            "rank": 38426,
+            "form": "erupţia",
+            "count": 270
+          }
+        ],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Ieșire la suprafață a unor gaze sau materiale din pământ, ca în activitatea vulcanilor și a vulcanilor noroioși.",
+      "register": "DOOM3 exact geological headword erupție, articulated erupția/erupțiile, plural erupții, genitive-dative erupției; medical sense excluded",
+      "research_budget": {
+        "elapsed_seconds": 152,
+        "research_completion_observed_utc": "2026-10-12T10:58:37.912401+00:00"
+      },
+      "qualified_graph_counts": {
         "distinct_neighbors": 4,
         "old_main": 3,
         "same_category": 4,
@@ -4646,8 +5286,8 @@
     },
     {
       "id": "v113-crater",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Crater",
       "label_ro": "Crater",
@@ -4658,7 +5298,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "Pending reviews: adds a source-checked everyday or school concept with its full noncolliding inputs and truthful links for Cald sau Rece.",
       "planned_forms": [
         "crater",
         "craterul",
@@ -4668,7 +5308,7 @@
         "craterelor"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm qualified for the selected sense; regular forms included once per normalization key. Independent review is pending.",
       "fold_equivalent_hypotheses_omitted": 0,
       "identity_checks": {
         "forms": [
@@ -4772,8 +5412,40 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "researched: exact DEX/DOOM3 lemma, selected sense, full noncolliding paradigm and predeclared claims supported; independent reviews remain required.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/crater/json",
+          "role": "sense",
+          "paraphrase": "Adâncitură aproximativ circulară, întâlnită la vulcani sau formată prin impactul unui corp ceresc.",
+          "authority": "DEX '09",
+          "definition_id": "853221",
+          "headword": "crater"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/crater/json",
+          "role": "forms",
+          "paraphrase": "current neuter noun, plural cratere; volcanic, mud-volcano and impact examples kept distinct; ancient vessel sense excluded",
+          "authority": "DOOM 3",
+          "definition_id": "1315485",
+          "headword": "crater"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Luna",
+          "role": "second_source",
+          "paraphrase": "Craterele lunare de impact sunt produse de ciocnirea asteroizilor ori cometelor cu suprafața Lunii."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Lacul_Sfânta_Ana",
+          "role": "link_evidence",
+          "paraphrase": "Lacul Sfânta Ana ocupă fundul unui crater vulcanic."
+        },
+        {
+          "url": "https://cjbuzau.ro/vulcanii-noroiosi-6/",
+          "role": "link_evidence",
+          "paraphrase": "Descrie craterele noroioase prin care se elimină noroi și gaze, distincte de vulcanismul magmatic."
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v4geo_vulcan",
@@ -4781,8 +5453,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "vulcanul poate avea crater",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "un crater vulcanic se află la un vulcan",
+          "relation": "related_to",
+          "label_ro": "un crater vulcanic se află la un vulcan",
+          "evidence_url": "https://dexonline.ro/definitie/crater/json"
         },
         {
           "node_id": "n_lacul_sfanta_ana",
@@ -4790,8 +5466,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "ocupă un crater vulcanic",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "un crater vulcanic adăpostește Lacul Sfânta Ana",
+          "relation": "related_to",
+          "label_ro": "un crater vulcanic adăpostește Lacul Sfânta Ana",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Lacul_Sfânta_Ana"
         },
         {
           "node_id": "n_v17geo_vulcanii_noroiosi",
@@ -4799,8 +5479,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "au mici cratere de eliminare a noroiului",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "cratere noroioase se găsesc la Vulcanii Noroioși",
+          "relation": "related_to",
+          "label_ro": "cratere noroioase se găsesc la Vulcanii Noroioși",
+          "evidence_url": "https://cjbuzau.ro/vulcanii-noroiosi-6/"
         },
         {
           "node_id": "n_v24_nature_sky_luna",
@@ -4808,14 +5492,62 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "are cratere de impact",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "cratere de impact se găsesc pe Lună",
+          "relation": "related_to",
+          "label_ro": "cratere de impact se găsesc pe Lună",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Luna"
         }
       ],
-      "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "research_ready": true,
+      "next_action": "Include in the single whole-batch module and both independent web reviews at step3.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "planned_graph_counts": {
+        "distinct_neighbors": 5,
+        "old_main": 4,
+        "same_category": 4,
+        "batch": 1
+      },
+      "qualified_forms": [
+        "crater",
+        "craterul",
+        "cratere",
+        "craterele",
+        "craterului",
+        "craterelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 19663,
+        "positive_support": true,
+        "hits": [
+          {
+            "rank": 19663,
+            "form": "crater",
+            "count": 760
+          },
+          {
+            "rank": 37173,
+            "form": "craterul",
+            "count": 285
+          },
+          {
+            "rank": 42919,
+            "form": "cratere",
+            "count": 225
+          }
+        ],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Adâncitură aproximativ circulară, întâlnită la vulcani sau formată prin impactul unui corp ceresc.",
+      "register": "current neuter noun, plural cratere; volcanic, mud-volcano and impact examples kept distinct; ancient vessel sense excluded",
+      "research_budget": {
+        "elapsed_seconds": 152,
+        "research_completion_observed_utc": "2026-10-12T10:58:37.987550+00:00"
+      },
+      "review_attention": "Distinguish volcanic, mud-volcano and lunar impact examples; no claim that all craters are volcanic.",
+      "qualified_graph_counts": {
         "distinct_neighbors": 5,
         "old_main": 4,
         "same_category": 4,
@@ -4824,8 +5556,8 @@
     },
     {
       "id": "v113-estuar",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Estuar",
       "label_ro": "Estuar",
@@ -4836,7 +5568,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "Pending reviews: adds a source-checked everyday or school concept with its full noncolliding inputs and truthful links for Cald sau Rece.",
       "planned_forms": [
         "estuar",
         "estuarul",
@@ -4846,7 +5578,7 @@
         "estuarelor"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm qualified for the selected sense; regular forms included once per normalization key. Independent review is pending.",
       "fold_equivalent_hypotheses_omitted": 0,
       "identity_checks": {
         "forms": [
@@ -4950,8 +5682,30 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "researched: exact DEX/DOOM3 lemma, selected sense, full noncolliding paradigm and predeclared claims supported; independent reviews remain required.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/estuar/json",
+          "role": "sense",
+          "paraphrase": "Gură largă de vărsare a unui râu sau fluviu în mare ori ocean, adesea în formă de pâlnie și influențată de maree.",
+          "authority": "DEX '09",
+          "definition_id": "866942",
+          "headword": "estuar"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/estuar/json",
+          "role": "forms",
+          "paraphrase": "current neuter noun, plural estuare; river-mouth sense, not a delta",
+          "authority": "DOOM 3",
+          "definition_id": "1304554",
+          "headword": "estuar"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Estuar",
+          "role": "second_source",
+          "paraphrase": "Coroborează gura de vărsare a râurilor în mări sau oceane, la țărmuri cu influență mareică."
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v2geo_rau",
@@ -4959,8 +5713,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "este gură de vărsare a râului",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "este o gură de vărsare a unui râu",
+          "relation": "part_of",
+          "label_ro": "este o gură de vărsare a unui râu",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Estuar"
         },
         {
           "node_id": "n_v3geo_ocean",
@@ -4968,8 +5726,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "râul se poate vărsa prin estuar în ocean",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate fi locul de vărsare a unui râu în ocean",
+          "relation": "related_to",
+          "label_ro": "poate fi locul de vărsare a unui râu în ocean",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Estuar"
         },
         {
           "node_id": "n_v3geo_mare",
@@ -4977,8 +5739,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "râul se poate vărsa prin estuar în mare",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate fi locul de vărsare a unui râu în mare",
+          "relation": "related_to",
+          "label_ro": "poate fi locul de vărsare a unui râu în mare",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Estuar"
         },
         {
           "node_id": "n_v4geo_tarm",
@@ -4986,14 +5752,45 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "este la contactul dintre râu și țărm",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "se află la contactul râului cu țărmul",
+          "relation": "related_to",
+          "label_ro": "se află la contactul râului cu țărmul",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Estuar"
         }
       ],
-      "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "research_ready": true,
+      "next_action": "Include in the single whole-batch module and both independent web reviews at step3.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "planned_graph_counts": {
+        "distinct_neighbors": 4,
+        "old_main": 4,
+        "same_category": 4,
+        "batch": 0
+      },
+      "qualified_forms": [
+        "estuar",
+        "estuarul",
+        "estuare",
+        "estuarele",
+        "estuarului",
+        "estuarelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": null,
+        "positive_support": false,
+        "hits": [],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Gură largă de vărsare a unui râu sau fluviu în mare ori ocean, adesea în formă de pâlnie și influențată de maree.",
+      "register": "current neuter noun, plural estuare; river-mouth sense, not a delta",
+      "research_budget": {
+        "elapsed_seconds": 169,
+        "research_completion_observed_utc": "2026-10-12T11:01:51.094448+00:00"
+      },
+      "qualified_graph_counts": {
         "distinct_neighbors": 4,
         "old_main": 4,
         "same_category": 4,
@@ -5002,8 +5799,8 @@
     },
     {
       "id": "v113-stramtoare",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Strâmtoare",
       "label_ro": "Strâmtoare",
@@ -5014,7 +5811,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "Pending reviews: adds a source-checked everyday or school concept with its full noncolliding inputs and truthful links for Cald sau Rece.",
       "planned_forms": [
         "strâmtoare",
         "strâmtoarea",
@@ -5024,7 +5821,7 @@
         "strâmtorilor"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm qualified for the selected sense; regular forms included once per normalization key. Independent review is pending.",
       "fold_equivalent_hypotheses_omitted": 0,
       "identity_checks": {
         "forms": [
@@ -5128,8 +5925,35 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "researched: exact DEX/DOOM3 lemma, selected sense, full noncolliding paradigm and predeclared claims supported; independent reviews remain required.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/strâmtoare/json",
+          "role": "sense",
+          "paraphrase": "Fâșie îngustă de apă între două porțiuni de uscat, care face legătura între întinderi mari de apă.",
+          "authority": "DEX '09",
+          "definition_id": "847425",
+          "headword": "strâmtoare"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/strâmtoare/json",
+          "role": "forms",
+          "paraphrase": "current feminine geographic waterway sense; plural strâmtori, genitive-dative strâmtorii; land passage and figurative hardship senses excluded",
+          "authority": "DOOM 3",
+          "definition_id": "1278499",
+          "headword": "strâmtoare"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Strâmtoare",
+          "role": "second_source",
+          "paraphrase": "Descrie legătura dintre bazine acvatice printr-un canal îngust între mase de uscat."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Strâmtoarea_Messina",
+          "role": "link_evidence",
+          "paraphrase": "Strâmtoarea Messina se află între Sicilia și Calabria, exemplificând despărțirea unei insule de alt uscat; nu se adaugă noduri sau legături către aceste locuri."
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v3geo_mare",
@@ -5137,8 +5961,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "poate lega două mări",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate lega două mări",
+          "relation": "related_to",
+          "label_ro": "poate lega două mări",
+          "evidence_url": "https://dexonline.ro/definitie/strâmtoare/json"
         },
         {
           "node_id": "n_v3geo_ocean",
@@ -5146,8 +5974,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "poate lega întinderi oceanice",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate lega două oceane",
+          "relation": "related_to",
+          "label_ro": "poate lega două oceane",
+          "evidence_url": "https://dexonline.ro/definitie/strâmtoare/json"
         },
         {
           "node_id": "n_v3geo_insula",
@@ -5155,8 +5987,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "poate separa o insulă de alt uscat",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate despărți o insulă de alt uscat",
+          "relation": "related_to",
+          "label_ro": "poate despărți o insulă de alt uscat",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Strâmtoarea_Messina"
         },
         {
           "node_id": "n_v4geo_tarm",
@@ -5164,14 +6000,56 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "este mărginită de țărmuri",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "se află între țărmuri apropiate",
+          "relation": "related_to",
+          "label_ro": "se află între țărmuri apropiate",
+          "evidence_url": "https://dexonline.ro/definitie/strâmtoare/json"
         }
       ],
-      "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "research_ready": true,
+      "next_action": "Include in the single whole-batch module and both independent web reviews at step3.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "planned_graph_counts": {
+        "distinct_neighbors": 4,
+        "old_main": 4,
+        "same_category": 4,
+        "batch": 0
+      },
+      "qualified_forms": [
+        "strâmtoare",
+        "strâmtoarea",
+        "strâmtori",
+        "strâmtorile",
+        "strâmtorii",
+        "strâmtorilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 35202,
+        "positive_support": false,
+        "hits": [
+          {
+            "rank": 35202,
+            "form": "strâmtoarea",
+            "count": 311
+          },
+          {
+            "rank": 43237,
+            "form": "strâmtoare",
+            "count": 222
+          }
+        ],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Fâșie îngustă de apă între două porțiuni de uscat, care face legătura între întinderi mari de apă.",
+      "register": "current feminine geographic waterway sense; plural strâmtori, genitive-dative strâmtorii; land passage and figurative hardship senses excluded",
+      "research_budget": {
+        "elapsed_seconds": 169,
+        "research_completion_observed_utc": "2026-10-12T11:01:51.146627+00:00"
+      },
+      "qualified_graph_counts": {
         "distinct_neighbors": 4,
         "old_main": 4,
         "same_category": 4,
@@ -5180,8 +6058,8 @@
     },
     {
       "id": "v113-canion",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Canion",
       "label_ro": "Canion",
@@ -5192,7 +6070,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "Pending reviews: adds a source-checked everyday or school concept with its full noncolliding inputs and truthful links for Cald sau Rece.",
       "planned_forms": [
         "canion",
         "canionul",
@@ -5202,7 +6080,7 @@
         "canioanelor"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm qualified for the selected sense; regular forms included once per normalization key. Independent review is pending.",
       "fold_equivalent_hypotheses_omitted": 0,
       "identity_checks": {
         "forms": [
@@ -5312,8 +6190,41 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "researched: exact DEX/DOOM3 lemma, selected sense, full noncolliding paradigm and predeclared claims supported; independent reviews remain required.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/canion/json",
+          "role": "sense",
+          "paraphrase": "Vale adâncă și îngustă, cu pereți abrupți, modelată prin eroziunea apelor curgătoare.",
+          "authority": "DEX '09",
+          "definition_id": "840872",
+          "headword": "canion"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/canion/json",
+          "role": "forms",
+          "paraphrase": "current neuter noun, plural canioane; terrestrial eroded-valley sense",
+          "authority": "DOOM 3",
+          "definition_id": "1309464",
+          "headword": "canion"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/canion",
+          "role": "second_source",
+          "paraphrase": "Coroborează valea îngustă și adâncă și întreaga declinare."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/canion/json",
+          "role": "link_evidence",
+          "paraphrase": "MDN 453417 descrie săparea canionului de apa unui râu, iar DN 397942 menționează pereții săpați în stâncă."
+        },
+        {
+          "url": "https://pnscc.ro/_res/media/turism/p5-educatie/brosuri/brosura-traseu-tematic-carst.pdf",
+          "role": "link_evidence",
+          "paraphrase": "Panoul educativ al parcului definește canionul ca porțiune de vale îngustă cu versanți predominant verticali.",
+          "location": "Chei și canioane, indexed primary panel passage; image-only panel not rendered by tool"
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v3geo_vale",
@@ -5321,8 +6232,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "este un tip de vale",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "este un tip de vale",
+          "relation": "is_a",
+          "label_ro": "este un tip de vale",
+          "evidence_url": "https://ro.wiktionary.org/wiki/canion"
         },
         {
           "node_id": "n_v2geo_rau",
@@ -5330,8 +6245,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "poate fi modelat prin eroziunea râului",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate fi săpat de un râu",
+          "relation": "related_to",
+          "label_ro": "poate fi săpat de un râu",
+          "evidence_url": "https://dexonline.ro/definitie/canion/json"
         },
         {
           "node_id": "n_v4geo_stanca",
@@ -5339,8 +6258,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "poate avea pereți de stâncă",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate avea pereți de stâncă",
+          "relation": "related_to",
+          "label_ro": "poate avea pereți de stâncă",
+          "evidence_url": "https://dexonline.ro/definitie/canion/json"
         },
         {
           "node_id": "n_v4gas_apa",
@@ -5348,14 +6271,61 @@
           "category": "gastronomie",
           "status": "exists on wave_base",
           "claim_to_verify": "apa poate produce eroziunea formativă",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate fi modelat de eroziunea apei",
+          "relation": "related_to",
+          "label_ro": "poate fi modelat de eroziunea apei",
+          "evidence_url": "https://dexonline.ro/definitie/canion/json"
         }
       ],
-      "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "research_ready": true,
+      "next_action": "Include in the single whole-batch module and both independent web reviews at step3.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "planned_graph_counts": {
+        "distinct_neighbors": 4,
+        "old_main": 4,
+        "same_category": 3,
+        "batch": 0
+      },
+      "qualified_forms": [
+        "canion",
+        "canionul",
+        "canioane",
+        "canioanele",
+        "canionului",
+        "canioanelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 14051,
+        "positive_support": true,
+        "hits": [
+          {
+            "rank": 14051,
+            "form": "canion",
+            "count": 1231
+          },
+          {
+            "rank": 31757,
+            "form": "canionul",
+            "count": 369
+          },
+          {
+            "rank": 45633,
+            "form": "canionului",
+            "count": 202
+          }
+        ],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Vale adâncă și îngustă, cu pereți abrupți, modelată prin eroziunea apelor curgătoare.",
+      "register": "current neuter noun, plural canioane; terrestrial eroded-valley sense",
+      "research_budget": {
+        "elapsed_seconds": 169,
+        "research_completion_observed_utc": "2026-10-12T11:01:51.198026+00:00"
+      },
+      "qualified_graph_counts": {
         "distinct_neighbors": 4,
         "old_main": 4,
         "same_category": 3,
@@ -5364,8 +6334,8 @@
     },
     {
       "id": "v113-versant",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Versant",
       "label_ro": "Versant",
@@ -5376,7 +6346,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "Pending reviews: adds a source-checked everyday or school concept with its full noncolliding inputs and truthful links for Cald sau Rece.",
       "planned_forms": [
         "versant",
         "versantul",
@@ -5386,7 +6356,7 @@
         "versanților"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm qualified for the selected sense; regular forms included once per normalization key. Independent review is pending.",
       "fold_equivalent_hypotheses_omitted": 0,
       "identity_checks": {
         "forms": [
@@ -5490,8 +6460,35 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "researched: exact DEX/DOOM3 lemma, selected sense, full noncolliding paradigm and predeclared claims supported; independent reviews remain required.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/versant/json",
+          "role": "sense",
+          "paraphrase": "Latură înclinată a unui munte sau deal, ori a unei văi.",
+          "authority": "DEX '09",
+          "definition_id": "825970",
+          "headword": "versant"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/versant/json",
+          "role": "forms",
+          "paraphrase": "DOOM3 current masculine noun, plural versanți; regular articulated and genitive forms; roof sense and older neuter plural excluded",
+          "authority": "DOOM 3",
+          "definition_id": "1263844",
+          "headword": "versant"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Versant",
+          "role": "second_source",
+          "paraphrase": "Definește laturile înclinate ale munților și dealurilor și evoluția versanților ce mărginesc văile."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/versant/json",
+          "role": "link_evidence",
+          "paraphrase": "MDA2 1224985 distinge laturile munților ori dealurilor și cele două pante care delimitează o vale."
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v2geo_munte",
@@ -5499,8 +6496,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "muntele are versanți",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate fi o latură a unui munte",
+          "relation": "part_of",
+          "label_ro": "poate fi o latură a unui munte",
+          "evidence_url": "https://dexonline.ro/definitie/versant/json"
         },
         {
           "node_id": "n_v3geo_deal",
@@ -5508,8 +6509,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "dealul are versanți",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate fi o latură a unui deal",
+          "relation": "part_of",
+          "label_ro": "poate fi o latură a unui deal",
+          "evidence_url": "https://dexonline.ro/definitie/versant/json"
         },
         {
           "node_id": "n_v3geo_vale",
@@ -5517,8 +6522,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "valea este mărginită de versanți",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate mărgini o vale",
+          "relation": "related_to",
+          "label_ro": "poate mărgini o vale",
+          "evidence_url": "https://dexonline.ro/definitie/versant/json"
         },
         {
           "node_id": "n_v1_13_panta",
@@ -5526,14 +6535,52 @@
           "category": "geografie",
           "status": "proposed batch node",
           "claim_to_verify": "versantul este teren în pantă",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "este o suprafață de teren în pantă",
+          "relation": "is_a",
+          "label_ro": "este o suprafață de teren în pantă",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Versant",
+          "dependency": "Install only if this batch concept independently qualifies and is accepted; otherwise recompute the graph floor and hold when it fails."
         }
       ],
-      "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "research_ready": true,
+      "next_action": "Include in the single whole-batch module and both independent web reviews at step3.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "planned_graph_counts": {
+        "distinct_neighbors": 4,
+        "old_main": 3,
+        "same_category": 4,
+        "batch": 1
+      },
+      "qualified_forms": [
+        "versant",
+        "versantul",
+        "versanți",
+        "versanții",
+        "versantului",
+        "versanților"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": null,
+        "positive_support": false,
+        "hits": [],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Latură înclinată a unui munte sau deal, ori a unei văi.",
+      "register": "DOOM3 current masculine noun, plural versanți; regular articulated and genitive forms; roof sense and older neuter plural excluded",
+      "research_budget": {
+        "elapsed_seconds": 169,
+        "research_completion_observed_utc": "2026-10-12T11:01:51.249274+00:00"
+      },
+      "research_excluded_forms": [
+        {
+          "form": "versante",
+          "reason": "plural neutru vechi, exclus în favoarea paradigmei masculine din DOOM3"
+        }
+      ],
+      "qualified_graph_counts": {
         "distinct_neighbors": 4,
         "old_main": 3,
         "same_category": 4,
@@ -9849,15 +10896,15 @@
   "planning_note": "Named backlog Furnică and regional Mămăruță inputs come first. Vârf targets existing n_v2geo_varf. Trestie/Stuf is one source-unverified concept/input hypothesis. All new graph counts include distinct incoming and outgoing neighbors; no hidden-target or curated-round approval.",
   "research_summary": {
     "states": {
-      "researched": 12,
+      "researched": 24,
       "held": 1,
-      "idea": 36
+      "idea": 24
     },
-    "researched": 12,
+    "researched": 24,
     "accepted": 0,
     "installed": 0,
-    "qualified_input_keys_pending_reviews": 61,
-    "qualified_links_pending_reviews": 45
+    "qualified_input_keys_pending_reviews": 130,
+    "qualified_links_pending_reviews": 95
   },
   "research_ticks": [
     {
@@ -9885,9 +10932,35 @@
       "dex_request_start_spacing_seconds_min": 2.1,
       "mechanical_cache_qa": "factual-v1-13 verified every cited DEX/DOOM3 ID, exact headword and form alignment without web or edits; the step3 factual review remains unused.",
       "mechanical_quality_qa": "quality-v1-13 verified twelve unique IDs, item budgets,61 unique normalized forms, full additional Torent screen, predeclared targets and graph floors without web or edits; step3 quality review remains unused."
+    },
+    {
+      "tick": 2,
+      "checked_on": "2026-10-12",
+      "items": [
+        "v113-baraj",
+        "v113-mlastina",
+        "v113-balta",
+        "v113-inundatie",
+        "v113-avalansa",
+        "v113-cutremur",
+        "v113-eruptie",
+        "v113-crater",
+        "v113-estuar",
+        "v113-stramtoare",
+        "v113-canion",
+        "v113-versant"
+      ],
+      "researched": 12,
+      "held": 0,
+      "accepted": 0,
+      "installed": 0,
+      "max_item_seconds": 194,
+      "dex_request_start_spacing_seconds_min": 2.1,
+      "mechanical_cache_qa": "factual-v1-13 verified all12 cited DEX/DOOM3 ID/headword/form matches and budgets without web or edits; step3 factual review remains unused.",
+      "mechanical_quality_qa": "quality-v1-13 verified69 unique screened keys and predeclared graph floors, including incoming Erupție→Crater and conditional Versant→Pantă; no web, edits or formal quality review."
     }
   ],
-  "next_research_requirement": "Next step2 tick: at most12 of the remaining36 ideas; begin with Baraj. Preserve Gheață owner-only hold and Umbră foreign-owner exclusions.",
+  "next_research_requirement": "Next step2 tick: at most12 of the remaining24 ideas; begin with Vârf. Preserve Gheață owner-only hold and Umbră foreign-owner exclusions; do not install before both step3 reviews.",
   "backlog_review": {
     "named_surfaces_unresolved_on_wave_base": [
       "Moș Crăciun",
