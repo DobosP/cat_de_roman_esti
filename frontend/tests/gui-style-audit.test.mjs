@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import ts from "@typescript/typescript6";
+import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
@@ -172,7 +173,7 @@ void test("owned declaration changes bind provenance and the inferred numeric de
   assert.notEqual(explicit.owned_program_source_sha256, dimensional.owned_program_source_sha256);
 });
 
-void test("the current owning source audits every bag, including nested ones, with a stable report", () => {
+void test("the current owning source audits every bag, including nested ones, with a stable report", (t) => {
   const repository = fileURLToPath(new URL("../../", import.meta.url));
   const script = fileURLToPath(new URL("../../scripts/gui-style-audit.mjs", import.meta.url));
   const run = () => spawnSync(process.execPath, [script, "--root", repository], { encoding: "utf8", maxBuffer: 16 << 20 });
@@ -210,4 +211,6 @@ void test("the current owning source audits every bag, including nested ones, wi
   assert.match(result.parser_provenance.implementation.path, /^frontend\/node_modules\//);
   assert.match(result.parser_provenance.implementation.entry_sha256, /^[a-f0-9]{64}$/);
   assert.match(result.parser_provenance.implementation.manifest_sha256, /^[a-f0-9]{64}$/);
+  t.diagnostic("gui-style-audit " + JSON.stringify({ status: result.status, counters: result.counters, findings: result.findings.length,
+    audited_tsx_files: result.audited_tsx_files, sites_sha256: result.sites_sha256, report_sha256: createHash("sha256").update(child.stdout).digest("hex") }));
 });
