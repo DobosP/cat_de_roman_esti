@@ -28,7 +28,7 @@
 - One task = one branch (`<type>/<slug>`) = one worktree `~/work/_worktrees/cat_de_roman_esti/<slug>`, never under `/tmp`:
   `python3 ~/work/agent-ops/scripts/create_task_worktree.py --repo ~/work/cat_de_roman_esti --branch <type>/<slug> --task "..." --write`
   Scratch and one-off scripts: `~/work/_temp/<slug>/`, run against this repo by path (agent-ops ADR-0028).
-- Workers never push. The orchestrating session lands green work on `main` (agent-ops ADR-0014) and finishes the landing
+- Workers never push (GUI programme exception until production: roedu-ui PROGRAM E6/E8 — the loop agent pushes GUI feature branches and runs owner-only gate steps with provenance). The orchestrating session lands green work on `main` (agent-ops ADR-0014) and finishes the landing
   in the same session (agent-ops ADR-0037): delete the verified-merged branch (local + origin), its worktree, `_temp/<slug>/`.
   Unmerged work is deleted only per item, human-confirmed. A branch reaches origin only on land or by
   `ops publish cat_de_roman_esti <branch>` — `ops sync` never creates a remote ref (agent-ops ADR-0077).

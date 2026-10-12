@@ -1185,3 +1185,30 @@ pre-cleared for `docs/GUI_MIGRATION_HANDOFF.md`, `docs/STATUS.md`,
 REQ-7's corrective core-v1.7 (UI 1.0.7 / web-kit 0.1.7, Presence `variant`, ADR-0021 on `main`) is the
 successor kit for the activation. See roedu-ui ADR-0022 (`docs/adr/0022-owner-activation-transaction-device-budgets.md`).
 
+## Native erratum E8 — owner decision 2026-10-12: agent operators before production
+
+Provenance: Paul in the Claude Code session of 2026-10-12 ("Yes, E8 + gate change"; development must be
+autonomous and continuous; the product is pre-release, so nothing in real use can break). E1–E7
+otherwise stay in force; on the points below E8 wins over §0.2 decision 7, §4.9, §9-8 ("Paul, native
+bash") and every "Paul-only"/"parent only" wording, for the GUI programme repos (roedu-ui, Cat, Teacher,
+Social).
+
+Until a consumer app's GUI is activated in production, the orchestrating agent — Claude Code or Codex —
+runs the owner-only gate targets itself (`trust`, `kit:sync`, `deps`, `toolchain`, `qualify`, `shell`,
+`e2e`, `perf`) and the §9-8 owner steps (kit stage commit, protected sync, trust pin, unit, KIT_BUMP
+relay and receipt), and lands, tags and publishes corrective S0a core releases. Interim invocation:
+`GATE_OPERATOR=paul bash scripts/gate.sh <target> --sha <full SHA>` under this delegation; the next core
+release adds an explicit `GATE_OPERATOR=agent:<name>` identity that `gate.sh` records in trust pins and
+results. Every such step records provenance in its commit body or review record: `Operator:
+agent:<claude-code|codex> (PROGRAM E8)`, the exact command and SHA, and the result path plus SHA-256.
+
+Guards that stay: an agent never accepts its own change alone — an independent review (a separate
+reviewer agent or session) precedes landing or tagging a core release, a KIT_BUMP and any milestone
+acceptance; no weakened checks, raised or nulled limits, skips, fabricated evidence, hand-edited
+lockfiles, vendored tarballs or kit-managed bytes; at most two product runtimes; no writer in a tested
+worktree. Still Paul's: the physical Samsung device checkpoint (§4.7; a real phone, DevTools 4G
+throttle allowed by owner 2026-10-12, never desktop or emulator), production activation and deploys,
+paid infrastructure, real-child or accounts go-live, root/system configuration (`sudo`), landing an
+app GUI migration on that app's `main`, and owner content/clinical/privacy rulings.
+See roedu-ui ADR-0023 (`docs/adr/0023-agent-operators-before-production.md`).
+
