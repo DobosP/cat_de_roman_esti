@@ -3,7 +3,7 @@
   "theme": "weather-and-landscape",
   "baseline_commit": "a27477dbc52a3279223bcaa202789eecbbeb1825",
   "procedure_rev": "17b97a2",
-  "scope": "Step2 research in progress; no accepted or installed items. Player-visible delta remains zero.",
+  "scope": "Step2 complete: 43 researched and six held; accepted/installed remain zero until independent reviews.",
   "screen": {
     "bundle_sha256": "8ac7c271ec37596fd8da72e0f0f2eeeeef3cfd4eb62fa496a9feff110c0f9825",
     "lookup_fields": [
@@ -4496,10 +4496,10 @@
         "research_completion_observed_utc": "2026-10-12T10:55:47.730225+00:00"
       },
       "qualified_graph_counts": {
-        "distinct_neighbors": 4,
+        "distinct_neighbors": 5,
         "old_main": 4,
-        "same_category": 3,
-        "batch": 0
+        "same_category": 4,
+        "batch": 1
       }
     },
     {
@@ -9653,8 +9653,8 @@
     },
     {
       "id": "v113-seceta",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Secetă",
       "label_ro": "Secetă",
@@ -9665,7 +9665,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "Pending independent review: recognizable Romanian input and sourced semantic neighbors for Cald sau Rece.",
       "planned_forms": [
         "secetă",
         "secete",
@@ -9674,7 +9674,7 @@
         "secetelor"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm screened; installation requires accepted sense and all graph floors.",
       "fold_equivalent_hypotheses_omitted": 1,
       "identity_checks": {
         "forms": [
@@ -9762,8 +9762,42 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "researched: exact DEX/DOOM3 lemma, selected sense, full noncolliding paradigm and predeclared claims supported; independent reviews remain required.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/secetă/json",
+          "role": "sense",
+          "paraphrase": "Perioadă cu apă și umiditate insuficiente pentru dezvoltarea normală a plantelor, de obicei asociată precipitațiilor reduse.",
+          "authority": "DEX '09",
+          "definition_id": "840766",
+          "headword": "secetă"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/secetă/json",
+          "role": "forms",
+          "paraphrase": "current feminine noun, plural secete, genitive-dative secetei",
+          "authority": "DOOM 3",
+          "definition_id": "1273874",
+          "headword": "secetă"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Secetă",
+          "role": "second_source",
+          "paraphrase": "Distinge lipsa prelungită a precipitațiilor și deficitul de apă necesară vegetației."
+        },
+        {
+          "url": "https://www.meteoromania.ro/anm/images/clima/Schimbariclimatice2014.pdf",
+          "role": "link_evidence",
+          "paraphrase": "Raportul ANM explică agravarea secetei prin evapotranspirație crescută la temperaturi ridicate.",
+          "location": "indexed primary report passage; direct open exceeds tool limit"
+        },
+        {
+          "url": "https://www.gardena.com/ro/c/descoperi/gradinarit/revista-pentru-gradinarit/cinci-trucuri-usoare-pentru-un-gazon-frumos",
+          "role": "link_evidence",
+          "paraphrase": "Descrie ofilirea ierbii când lipsește apa și afectarea gazonului din grădini în perioade secetoase.",
+          "location": "indexed primary guidance passage"
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v24_weather_precipitation_ploaie",
@@ -9771,8 +9805,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "lipsa prelungită a ploii poate provoca secetă",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate fi provocată de lipsa prelungită a ploii",
+          "relation": "related_to",
+          "label_ro": "poate fi provocată de lipsa prelungită a ploii",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Secetă"
         },
         {
           "node_id": "n_v4sti_temperatura",
@@ -9780,8 +9818,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "temperaturile ridicate o pot agrava",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate fi agravată de temperaturi ridicate",
+          "relation": "related_to",
+          "label_ro": "poate fi agravată de temperaturi ridicate",
+          "evidence_url": "https://www.meteoromania.ro/anm/images/clima/Schimbariclimatice2014.pdf"
         },
         {
           "node_id": "n_v24_nature_plant_parts_iarba",
@@ -9789,8 +9831,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "poate provoca uscarea ierbii",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate deshidrata și ofili iarba",
+          "relation": "related_to",
+          "label_ro": "poate deshidrata și ofili iarba",
+          "evidence_url": "https://www.gardena.com/ro/c/descoperi/gradinarit/revista-pentru-gradinarit/cinci-trucuri-usoare-pentru-un-gazon-frumos"
         },
         {
           "node_id": "n_v24_home_outdoor_gradina",
@@ -9798,14 +9844,55 @@
           "category": "viata_de_roman",
           "status": "exists on wave_base",
           "claim_to_verify": "afectează plantele din grădină",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "afectează plantele din grădină",
+          "relation": "related_to",
+          "label_ro": "afectează plantele din grădină",
+          "evidence_url": "https://www.gardena.com/ro/c/descoperi/gradinarit/revista-pentru-gradinarit/cinci-trucuri-usoare-pentru-un-gazon-frumos"
         }
       ],
-      "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "research_ready": true,
+      "next_action": "Include in the single whole-batch module and independent web reviews at step3.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "planned_graph_counts": {
+        "distinct_neighbors": 4,
+        "old_main": 4,
+        "same_category": 3,
+        "batch": 0
+      },
+      "qualified_forms": [
+        "secetă",
+        "secete",
+        "secetele",
+        "secetei",
+        "secetelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 25294,
+        "positive_support": false,
+        "hits": [
+          {
+            "rank": 25294,
+            "form": "secetă",
+            "count": 526
+          },
+          {
+            "rank": 35199,
+            "form": "seceta",
+            "count": 311
+          }
+        ],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Perioadă cu apă și umiditate insuficiente pentru dezvoltarea normală a plantelor, de obicei asociată precipitațiilor reduse.",
+      "register": "current feminine noun, plural secete, genitive-dative secetei",
+      "research_budget": {
+        "elapsed_seconds": 258,
+        "research_completion_observed_utc": "2026-10-12T11:50:41.459052+00:00"
+      },
+      "qualified_graph_counts": {
         "distinct_neighbors": 4,
         "old_main": 4,
         "same_category": 3,
@@ -9814,8 +9901,8 @@
     },
     {
       "id": "v113-umbra",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Umbră",
       "label_ro": "Umbră",
@@ -9826,7 +9913,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "Pending independent review: recognizable Romanian input and sourced semantic neighbors for Cald sau Rece.",
       "planned_forms": [
         "umbră",
         "umbrei",
@@ -9844,7 +9931,7 @@
           "reason": "held: owned by n_v1_11_umbrela"
         }
       ],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm screened; installation requires accepted sense and all graph floors.",
       "fold_equivalent_hypotheses_omitted": 1,
       "identity_checks": {
         "forms": [
@@ -9990,8 +10077,36 @@
         }
       ],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "researched: exact DEX/DOOM3 lemma, selected sense, full noncolliding paradigm and predeclared claims supported; independent reviews remain required.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/umbră/json",
+          "role": "sense",
+          "paraphrase": "Zonă în care lumina directă este oprită de un corp opac.",
+          "authority": "DEX '09",
+          "definition_id": "19992",
+          "headword": "umbră"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/umbră/json",
+          "role": "forms",
+          "paraphrase": "current physical feminine noun, DOOM3 genitive-dative umbrei, plural umbre; only noncolliding forms retained, figurative and supernatural senses excluded",
+          "authority": "DOOM 3",
+          "definition_id": "1266530",
+          "headword": "umbră"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Umbră",
+          "role": "second_source",
+          "paraphrase": "Coroborează umbra produsă prin blocarea luminii de un corp opac."
+        },
+        {
+          "url": "https://www.europafm.ro/de-ce-este-mai-racoare-sub-un-copac-decat-sub-o-umbrela/",
+          "role": "link_evidence",
+          "paraphrase": "Articolul explică blocarea radiației solare de copaci și umbrele; nu se preia vreo afirmație numerică de răcire.",
+          "location": "Romanian popular-science article, indexed passage read"
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v24_nature_sky_soare",
@@ -9999,8 +10114,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "blocarea luminii solare produce umbră",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "se poate forma prin blocarea luminii Soarelui",
+          "relation": "related_to",
+          "label_ro": "se poate forma prin blocarea luminii Soarelui",
+          "evidence_url": "https://www.europafm.ro/de-ce-este-mai-racoare-sub-un-copac-decat-sub-o-umbrela/"
         },
         {
           "node_id": "n_v4sti_lumina",
@@ -10008,8 +10127,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "se formează prin blocarea luminii",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "se formează prin blocarea luminii directe",
+          "relation": "related_to",
+          "label_ro": "se formează prin blocarea luminii directe",
+          "evidence_url": "https://dexonline.ro/definitie/umbră/json"
         },
         {
           "node_id": "n_v4sti_copac",
@@ -10017,8 +10140,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "un copac poate proiecta umbră",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate fi proiectată de un copac",
+          "relation": "related_to",
+          "label_ro": "poate fi proiectată de un copac",
+          "evidence_url": "https://www.europafm.ro/de-ce-este-mai-racoare-sub-un-copac-decat-sub-o-umbrela/"
         },
         {
           "node_id": "n_v1_11_umbrela",
@@ -10026,14 +10153,63 @@
           "category": "viata_de_roman",
           "status": "exists on wave_base",
           "claim_to_verify": "o umbrelă poate produce umbră",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate fi produsă de o umbrelă",
+          "relation": "related_to",
+          "label_ro": "poate fi produsă de o umbrelă",
+          "evidence_url": "https://www.europafm.ro/de-ce-este-mai-racoare-sub-un-copac-decat-sub-o-umbrela/"
         }
       ],
-      "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "research_ready": true,
+      "next_action": "Include in the single whole-batch module and independent web reviews at step3.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "planned_graph_counts": {
+        "distinct_neighbors": 5,
+        "old_main": 4,
+        "same_category": 4,
+        "batch": 1
+      },
+      "qualified_forms": [
+        "umbră",
+        "umbrei",
+        "umbrelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 4883,
+        "positive_support": true,
+        "hits": [
+          {
+            "rank": 4883,
+            "form": "umbra",
+            "count": 4728
+          },
+          {
+            "rank": 5130,
+            "form": "umbră",
+            "count": 4437
+          },
+          {
+            "rank": 16303,
+            "form": "umbrelor",
+            "count": 999
+          },
+          {
+            "rank": 29813,
+            "form": "umbrei",
+            "count": 408
+          }
+        ],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Zonă în care lumina directă este oprită de un corp opac.",
+      "register": "current physical feminine noun, DOOM3 genitive-dative umbrei, plural umbre; only noncolliding forms retained, figurative and supernatural senses excluded",
+      "research_budget": {
+        "elapsed_seconds": 259,
+        "research_completion_observed_utc": "2026-10-12T11:50:41.614067+00:00"
+      },
+      "qualified_graph_counts": {
         "distinct_neighbors": 5,
         "old_main": 4,
         "same_category": 4,
@@ -10042,8 +10218,8 @@
     },
     {
       "id": "v113-racoare",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Răcoare",
       "label_ro": "Răcoare",
@@ -10054,7 +10230,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "Pending independent review: recognizable Romanian input and sourced semantic neighbors for Cald sau Rece.",
       "planned_forms": [
         "răcoare",
         "răcoarea",
@@ -10064,7 +10240,7 @@
         "răcorilor"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm screened; installation requires accepted sense and all graph floors.",
       "fold_equivalent_hypotheses_omitted": 0,
       "identity_checks": {
         "forms": [
@@ -10168,8 +10344,35 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "researched: exact DEX/DOOM3 lemma, selected sense, full noncolliding paradigm and predeclared claims supported; independent reviews remain required.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/răcoare/json",
+          "role": "sense",
+          "paraphrase": "Frig moderat, resimțit în aer sau într-un loc răcoros.",
+          "authority": "DEX '09",
+          "definition_id": "852482",
+          "headword": "răcoare"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/răcoare/json",
+          "role": "forms",
+          "paraphrase": "current physical coolness sense; DOOM3 singular genitive-dative răcorii; plural răcori/răcorile/răcorilor belongs to chills/fear sense and is excluded",
+          "authority": "DOOM 3",
+          "definition_id": "1274855",
+          "headword": "răcoare"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/răcoare",
+          "role": "second_source",
+          "paraphrase": "Distinge temperatura moderat scăzută de pluralul pentru fiori patologici sau emotivi."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/umbră/json",
+          "role": "link_evidence",
+          "paraphrase": "DEX pentru Umbră descrie locul fără raze directe de lumină ca răcoros."
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v4sti_temperatura",
@@ -10177,8 +10380,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "este asociată temperaturii relativ scăzute",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "este asociată unei temperaturi relativ scăzute",
+          "relation": "related_to",
+          "label_ro": "este asociată unei temperaturi relativ scăzute",
+          "evidence_url": "https://dexonline.ro/definitie/răcoare/json"
         },
         {
           "node_id": "n_v4sti_caldura",
@@ -10186,7 +10393,7 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "contrastează termic cu căldura",
-          "verdict": "unresearched",
+          "verdict": "The existing Căldură owner is energy transfer, not high air temperature; the proposed thermal antonym claim is not installed.",
           "relation_hypothesis": "related_to"
         },
         {
@@ -10195,8 +10402,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "aerul poate fi răcoros",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate fi resimțită în aer",
+          "relation": "related_to",
+          "label_ro": "poate fi resimțită în aer",
+          "evidence_url": "https://dexonline.ro/definitie/răcoare/json"
         },
         {
           "node_id": "n_v1_13_umbra",
@@ -10204,24 +10415,90 @@
           "category": "stiinta",
           "status": "proposed batch node",
           "claim_to_verify": "umbra poate oferi răcoare față de soare",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate fi resimțită la umbră",
+          "relation": "related_to",
+          "label_ro": "poate fi resimțită la umbră",
+          "evidence_url": "https://dexonline.ro/definitie/umbră/json",
+          "dependency": "Install only if the batch neighbor independently qualifies and is accepted; recompute all floors after drops."
         }
       ],
-      "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "research_ready": true,
+      "next_action": "Include in the single whole-batch module and independent web reviews at step3.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "planned_graph_counts": {
         "distinct_neighbors": 5,
         "old_main": 3,
         "same_category": 5,
         "batch": 2
+      },
+      "qualified_forms": [
+        "răcoare",
+        "răcoarea",
+        "răcorii"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 12699,
+        "positive_support": true,
+        "hits": [
+          {
+            "rank": 12699,
+            "form": "răcoare",
+            "count": 1408
+          },
+          {
+            "rank": 44783,
+            "form": "racoare",
+            "count": 209
+          }
+        ],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Frig moderat, resimțit în aer sau într-un loc răcoros.",
+      "register": "current physical coolness sense; DOOM3 singular genitive-dative răcorii; plural răcori/răcorile/răcorilor belongs to chills/fear sense and is excluded",
+      "research_budget": {
+        "elapsed_seconds": 259,
+        "research_completion_observed_utc": "2026-10-12T11:50:41.691892+00:00"
+      },
+      "research_excluded_forms": [
+        {
+          "form": "răcori",
+          "reason": "pluralul exprimă fiori patologici ori emotivi, nu temperatura moderat scăzută aleasă"
+        },
+        {
+          "form": "răcorile",
+          "reason": "pluralul exprimă fiori patologici ori emotivi, nu temperatura moderat scăzută aleasă"
+        },
+        {
+          "form": "răcorilor",
+          "reason": "pluralul exprimă fiori patologici ori emotivi, nu temperatura moderat scăzută aleasă"
+        }
+      ],
+      "held_claims": [
+        {
+          "target": "n_v4sti_caldura",
+          "reason": "The existing Căldură owner is energy transfer, not high air temperature; the proposed thermal antonym claim is not installed."
+        }
+      ],
+      "incoming_dependency": {
+        "source": "n_v1_13_adiere",
+        "target": "n_v1_13_racoare",
+        "item": "v113-adiere",
+        "note": "Fourth distinct neighbor is the already-predeclared incoming Adiere claim; hold if that item/link is not accepted."
+      },
+      "qualified_graph_counts": {
+        "distinct_neighbors": 4,
+        "old_main": 2,
+        "same_category": 4,
+        "batch": 2
       }
     },
     {
       "id": "v113-adiere",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Adiere",
       "label_ro": "Adiere",
@@ -10232,7 +10509,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "Pending independent review: recognizable Romanian input and sourced semantic neighbors for Cald sau Rece.",
       "planned_forms": [
         "adiere",
         "adierea",
@@ -10242,7 +10519,7 @@
         "adierilor"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm screened; installation requires accepted sense and all graph floors.",
       "fold_equivalent_hypotheses_omitted": 0,
       "identity_checks": {
         "forms": [
@@ -10346,8 +10623,42 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "researched: exact DEX/DOOM3 lemma, selected sense, full noncolliding paradigm and predeclared claims supported; independent reviews remain required.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/adiere/json",
+          "role": "sense",
+          "paraphrase": "Suflare slabă și lină a vântului.",
+          "authority": "DEX '09",
+          "definition_id": "822992",
+          "headword": "adiere"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/adiere/json",
+          "role": "forms",
+          "paraphrase": "current feminine noun, plural adieri, genitive-dative adierii; not poetical-only",
+          "authority": "DOOM 3",
+          "definition_id": "1321015",
+          "headword": "adiere"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/adiere",
+          "role": "second_source",
+          "paraphrase": "Confirmă sensul comun de suflare lină a vântului și declinarea."
+        },
+        {
+          "url": "https://saptamanaverde.edu.ro/storage/arhiva/biodiversitate-ghid-standard-de-monitorizare-pasari-2014.pdf",
+          "role": "link_evidence",
+          "paraphrase": "Ghidul de monitorizare descrie adierea ușoară observată prin tremurul frunzelor.",
+          "location": "Beaufort table; indexed primary guide, direct open exceeds tool limit"
+        },
+        {
+          "url": "https://ro.trotec.com/shop/ventilator-de-masa-tve-8.html",
+          "role": "link_evidence",
+          "paraphrase": "Producătorul distinge adierea resimțită pe piele de răcirea aerului: curentul produce o senzație de răcorire.",
+          "location": "indexed primary manufacturer passage; direct open unavailable"
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v24_weather_air_vant",
@@ -10355,8 +10666,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "este vânt foarte slab",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "este o suflare slabă de vânt",
+          "relation": "is_a",
+          "label_ro": "este o suflare slabă de vânt",
+          "evidence_url": "https://dexonline.ro/definitie/adiere/json"
         },
         {
           "node_id": "n_v4sti_aer",
@@ -10364,8 +10679,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "este mișcarea ușoară a aerului",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "este o mișcare ușoară a aerului",
+          "relation": "related_to",
+          "label_ro": "este o mișcare ușoară a aerului",
+          "evidence_url": "https://dexonline.ro/definitie/adiere/json"
         },
         {
           "node_id": "n_v4sti_frunza",
@@ -10373,8 +10692,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "poate mișca ușor frunzele, afirmație de probat",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate mișca ușor frunzele",
+          "relation": "related_to",
+          "label_ro": "poate mișca ușor frunzele",
+          "evidence_url": "https://saptamanaverde.edu.ro/storage/arhiva/biodiversitate-ghid-standard-de-monitorizare-pasari-2014.pdf"
         },
         {
           "node_id": "n_v1_13_racoare",
@@ -10382,14 +10705,57 @@
           "category": "stiinta",
           "status": "proposed batch node",
           "claim_to_verify": "poate aduce răcoare, afirmație de probat",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate produce o senzație de răcoare",
+          "relation": "related_to",
+          "label_ro": "poate produce o senzație de răcoare",
+          "evidence_url": "https://ro.trotec.com/shop/ventilator-de-masa-tve-8.html",
+          "dependency": "Install only if the batch neighbor independently qualifies and is accepted; recompute all floors after drops."
         }
       ],
-      "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "research_ready": true,
+      "next_action": "Include in the single whole-batch module and independent web reviews at step3.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "planned_graph_counts": {
+        "distinct_neighbors": 4,
+        "old_main": 3,
+        "same_category": 4,
+        "batch": 1
+      },
+      "qualified_forms": [
+        "adiere",
+        "adierea",
+        "adieri",
+        "adierile",
+        "adierii",
+        "adierilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 23444,
+        "positive_support": false,
+        "hits": [
+          {
+            "rank": 23444,
+            "form": "adiere",
+            "count": 588
+          },
+          {
+            "rank": 42155,
+            "form": "adierea",
+            "count": 232
+          }
+        ],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Suflare slabă și lină a vântului.",
+      "register": "current feminine noun, plural adieri, genitive-dative adierii; not poetical-only",
+      "research_budget": {
+        "elapsed_seconds": 259,
+        "research_completion_observed_utc": "2026-10-12T11:50:41.775898+00:00"
+      },
+      "qualified_graph_counts": {
         "distinct_neighbors": 4,
         "old_main": 3,
         "same_category": 4,
@@ -10398,8 +10764,8 @@
     },
     {
       "id": "v113-zavoi",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Zăvoi",
       "label_ro": "Zăvoi",
@@ -10410,7 +10776,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "Pending independent review: recognizable Romanian input and sourced semantic neighbors for Cald sau Rece.",
       "planned_forms": [
         "zăvoi",
         "zăvoiul",
@@ -10420,7 +10786,7 @@
         "zăvoaielor"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm screened; installation requires accepted sense and all graph floors.",
       "fold_equivalent_hypotheses_omitted": 0,
       "identity_checks": {
         "forms": [
@@ -10524,8 +10890,40 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "researched: exact DEX/DOOM3 lemma, selected sense, full noncolliding paradigm and predeclared claims supported; independent reviews remain required.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/zăvoi/json",
+          "role": "sense",
+          "paraphrase": "Pădurice de pe malul unei ape, alcătuită adesea din sălcii, plopi și alți arbori de luncă.",
+          "authority": "DEX '09",
+          "definition_id": "822368",
+          "headword": "zăvoi"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/zăvoi/json",
+          "role": "forms",
+          "paraphrase": "current neuter woodland noun, plural zăvoaie; regional food and verb homographs excluded",
+          "authority": "DOOM 3",
+          "definition_id": "1315028",
+          "headword": "zăvoi"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/zăvoi",
+          "role": "second_source",
+          "paraphrase": "Confirmă păduricea de mal și întreaga paradigmă."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/zăvoi/json",
+          "role": "link_evidence",
+          "paraphrase": "MDA2 1160558 descrie zăvoiul de la marginea apei cu sălcii și alți arbori."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/luncă/json",
+          "role": "link_evidence",
+          "paraphrase": "DEX sensul2 descrie pădurea de pe malul unei ape curgătoare, numită și zăvoi; nu este sensul de șes instalat separat ca Luncă."
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v4geo_padure",
@@ -10533,8 +10931,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "este pădure de luncă",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "este o pădurice de mal",
+          "relation": "is_a",
+          "label_ro": "este o pădurice de mal",
+          "evidence_url": "https://dexonline.ro/definitie/zăvoi/json"
         },
         {
           "node_id": "n_v2geo_rau",
@@ -10542,8 +10944,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "se dezvoltă pe lângă râuri",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "se poate dezvolta pe lângă un râu",
+          "relation": "related_to",
+          "label_ro": "se poate dezvolta pe lângă un râu",
+          "evidence_url": "https://dexonline.ro/definitie/luncă/json"
         },
         {
           "node_id": "n_v4geo_mal",
@@ -10551,8 +10957,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "se află pe malul unei ape",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "se află pe malul unei ape",
+          "relation": "related_to",
+          "label_ro": "se află pe malul unei ape",
+          "evidence_url": "https://dexonline.ro/definitie/zăvoi/json"
         },
         {
           "node_id": "n_v1_12_salcie",
@@ -10560,14 +10970,45 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "sălciile pot fi arbori caracteristici",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate cuprinde sălcii",
+          "relation": "related_to",
+          "label_ro": "poate cuprinde sălcii",
+          "evidence_url": "https://dexonline.ro/definitie/zăvoi/json"
         }
       ],
-      "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "research_ready": true,
+      "next_action": "Include in the single whole-batch module and independent web reviews at step3.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "planned_graph_counts": {
+        "distinct_neighbors": 4,
+        "old_main": 4,
+        "same_category": 3,
+        "batch": 0
+      },
+      "qualified_forms": [
+        "zăvoi",
+        "zăvoiul",
+        "zăvoaie",
+        "zăvoaiele",
+        "zăvoiului",
+        "zăvoaielor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": null,
+        "positive_support": false,
+        "hits": [],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Pădurice de pe malul unei ape, alcătuită adesea din sălcii, plopi și alți arbori de luncă.",
+      "register": "current neuter woodland noun, plural zăvoaie; regional food and verb homographs excluded",
+      "research_budget": {
+        "elapsed_seconds": 193,
+        "research_completion_observed_utc": "2026-10-12T11:54:35.095822+00:00"
+      },
+      "qualified_graph_counts": {
         "distinct_neighbors": 4,
         "old_main": 4,
         "same_category": 3,
@@ -10576,8 +11017,8 @@
     },
     {
       "id": "v113-lunca",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Luncă",
       "label_ro": "Luncă",
@@ -10588,7 +11029,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "Pending independent review: recognizable Romanian input and sourced semantic neighbors for Cald sau Rece.",
       "planned_forms": [
         "luncă",
         "lunci",
@@ -10597,7 +11038,7 @@
         "luncilor"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm screened; installation requires accepted sense and all graph floors.",
       "fold_equivalent_hypotheses_omitted": 1,
       "identity_checks": {
         "forms": [
@@ -10685,8 +11126,30 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "researched: exact DEX/DOOM3 lemma, selected sense, full noncolliding paradigm and predeclared claims supported; independent reviews remain required.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/luncă/json",
+          "role": "sense",
+          "paraphrase": "Fâșie de teren jos și relativ plan de-a lungul unei ape curgătoare, care poate fi inundată la revărsări.",
+          "authority": "DEX '09",
+          "definition_id": "865465",
+          "headword": "luncă"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/luncă/json",
+          "role": "forms",
+          "paraphrase": "current feminine landform sense, plural lunci, genitive-dative luncii; woodland sense is excluded and kept distinct from Zăvoi",
+          "authority": "DOOM 3",
+          "definition_id": "1327036",
+          "headword": "luncă"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Luncă_(formă_de_relief)",
+          "role": "second_source",
+          "paraphrase": "Descrie fâșia de șes aluvial ce mărginește râul și revărsările periodice."
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v2geo_rau",
@@ -10694,8 +11157,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "se întinde de-a lungul râului",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "se întinde de-a lungul unui râu",
+          "relation": "related_to",
+          "label_ro": "se întinde de-a lungul unui râu",
+          "evidence_url": "https://dexonline.ro/definitie/luncă/json"
         },
         {
           "node_id": "n_v4geo_mal",
@@ -10703,8 +11170,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "se află în apropierea malurilor",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "se află în apropierea malurilor",
+          "relation": "related_to",
+          "label_ro": "se află în apropierea malurilor",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Luncă_(formă_de_relief)"
         },
         {
           "node_id": "n_v2geo_campie",
@@ -10712,8 +11183,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "este teren jos și relativ plan",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "este un șes aluvial relativ plan",
+          "relation": "related_to",
+          "label_ro": "este un șes aluvial relativ plan",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Luncă_(formă_de_relief)"
         },
         {
           "node_id": "n_v1_13_inundatie",
@@ -10721,14 +11196,45 @@
           "category": "geografie",
           "status": "proposed batch node",
           "claim_to_verify": "poate fi inundată la revărsarea râului",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate fi acoperită de apă la inundații",
+          "relation": "related_to",
+          "label_ro": "poate fi acoperită de apă la inundații",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Luncă_(formă_de_relief)",
+          "dependency": "Install only if the batch neighbor independently qualifies and is accepted; recompute all floors after drops."
         }
       ],
-      "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "research_ready": true,
+      "next_action": "Include in the single whole-batch module and independent web reviews at step3.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "planned_graph_counts": {
+        "distinct_neighbors": 4,
+        "old_main": 3,
+        "same_category": 4,
+        "batch": 1
+      },
+      "qualified_forms": [
+        "luncă",
+        "lunci",
+        "luncile",
+        "luncii",
+        "luncilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": null,
+        "positive_support": false,
+        "hits": [],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Fâșie de teren jos și relativ plan de-a lungul unei ape curgătoare, care poate fi inundată la revărsări.",
+      "register": "current feminine landform sense, plural lunci, genitive-dative luncii; woodland sense is excluded and kept distinct from Zăvoi",
+      "research_budget": {
+        "elapsed_seconds": 193,
+        "research_completion_observed_utc": "2026-10-12T11:54:35.288164+00:00"
+      },
+      "qualified_graph_counts": {
         "distinct_neighbors": 4,
         "old_main": 3,
         "same_category": 4,
@@ -10737,8 +11243,8 @@
     },
     {
       "id": "v113-coliba",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Colibă",
       "label_ro": "Colibă",
@@ -10749,7 +11255,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "Pending independent review: recognizable Romanian input and sourced semantic neighbors for Cald sau Rece.",
       "planned_forms": [
         "colibă",
         "colibe",
@@ -10758,7 +11264,7 @@
         "colibelor"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm screened; installation requires accepted sense and all graph floors.",
       "fold_equivalent_hypotheses_omitted": 1,
       "identity_checks": {
         "forms": [
@@ -10846,8 +11352,36 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "researched: exact DEX/DOOM3 lemma, selected sense, full noncolliding paradigm and predeclared claims supported; independent reviews remain required.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/colibă/json",
+          "role": "sense",
+          "paraphrase": "Adăpost simplu, adesea provizoriu, făcut din bârne, crengi ori alte materiale și acoperit pentru protecție.",
+          "authority": "DEX '09",
+          "definition_id": "848945",
+          "headword": "colibă"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/colibă/json",
+          "role": "forms",
+          "paraphrase": "current feminine shelter sense, plural colibe, genitive-dative colibei; no generalized claim about present-day Romanian villages",
+          "authority": "DOOM 3",
+          "definition_id": "1312799",
+          "headword": "colibă"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/colibă",
+          "role": "second_source",
+          "paraphrase": "Confirmă adăpostul simplu și provizoriu din bârne ori crengi, cu învelitoare."
+        },
+        {
+          "url": "https://www.revistamemoria.ro/wp-content/uploads/2021/06/7mihai-enescu-pelicanu-1.pdf",
+          "role": "link_evidence",
+          "paraphrase": "Studiul istoric documentează o așezare rurală provizorie cu colibe acoperite cu paie și corturi ca tipuri distincte de adăpost.",
+          "location": "PDF p.2; example only, no new place or person edge"
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v1_3_material_lemn",
@@ -10855,8 +11389,12 @@
           "category": "viata_de_roman",
           "status": "exists on wave_base",
           "claim_to_verify": "poate fi construită din lemn",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate fi construită din lemn",
+          "relation": "related_to",
+          "label_ro": "poate fi construită din lemn",
+          "evidence_url": "https://dexonline.ro/definitie/colibă/json"
         },
         {
           "node_id": "n_v24_home_structure_acoperis",
@@ -10864,8 +11402,12 @@
           "category": "viata_de_roman",
           "status": "exists on wave_base",
           "claim_to_verify": "are acoperiș protector",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "are o învelitoare care servește drept acoperiș",
+          "relation": "related_to",
+          "label_ro": "are o învelitoare care servește drept acoperiș",
+          "evidence_url": "https://dexonline.ro/definitie/colibă/json"
         },
         {
           "node_id": "n_v1_9_cort",
@@ -10873,8 +11415,12 @@
           "category": "viata_de_roman",
           "status": "exists on wave_base",
           "claim_to_verify": "sunt tipuri distincte de adăpost, comparație de probat",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate servi ca adăpost provizoriu, asemenea unui cort",
+          "relation": "related_to",
+          "label_ro": "poate servi ca adăpost provizoriu, asemenea unui cort",
+          "evidence_url": "https://www.revistamemoria.ro/wp-content/uploads/2021/06/7mihai-enescu-pelicanu-1.pdf"
         },
         {
           "node_id": "n_v4geo_sat",
@@ -10882,14 +11428,55 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "poate exista în așezări rurale, nu generalizare despre satele actuale",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "poate apărea într-o așezare rurală provizorie",
+          "relation": "related_to",
+          "label_ro": "poate apărea într-o așezare rurală provizorie",
+          "evidence_url": "https://www.revistamemoria.ro/wp-content/uploads/2021/06/7mihai-enescu-pelicanu-1.pdf"
         }
       ],
-      "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "research_ready": true,
+      "next_action": "Include in the single whole-batch module and independent web reviews at step3.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "planned_graph_counts": {
+        "distinct_neighbors": 4,
+        "old_main": 4,
+        "same_category": 3,
+        "batch": 0
+      },
+      "qualified_forms": [
+        "colibă",
+        "colibe",
+        "colibele",
+        "colibei",
+        "colibelor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 18212,
+        "positive_support": true,
+        "hits": [
+          {
+            "rank": 18212,
+            "form": "colibă",
+            "count": 853
+          },
+          {
+            "rank": 19568,
+            "form": "coliba",
+            "count": 765
+          }
+        ],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Adăpost simplu, adesea provizoriu, făcut din bârne, crengi ori alte materiale și acoperit pentru protecție.",
+      "register": "current feminine shelter sense, plural colibe, genitive-dative colibei; no generalized claim about present-day Romanian villages",
+      "research_budget": {
+        "elapsed_seconds": 193,
+        "research_completion_observed_utc": "2026-10-12T11:54:35.401485+00:00"
+      },
+      "qualified_graph_counts": {
         "distinct_neighbors": 4,
         "old_main": 4,
         "same_category": 3,
@@ -10898,8 +11485,8 @@
     },
     {
       "id": "v113-papura",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Papură",
       "label_ro": "Papură",
@@ -10910,7 +11497,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "Pending independent review: recognizable Romanian input and sourced semantic neighbors for Cald sau Rece.",
       "planned_forms": [
         "papură",
         "papuri",
@@ -10919,7 +11506,7 @@
         "papurilor"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm screened; installation requires accepted sense and all graph floors.",
       "fold_equivalent_hypotheses_omitted": 1,
       "identity_checks": {
         "forms": [
@@ -11007,8 +11594,36 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "researched: exact DEX/DOOM3 lemma, selected sense, full noncolliding paradigm and predeclared claims supported; independent reviews remain required.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/papură/json",
+          "role": "sense",
+          "paraphrase": "Plantă acvatică din genul Typha, cu tulpină înaltă și frunze lungi și înguste, întâlnită în zone umede.",
+          "authority": "DEX '09",
+          "definition_id": "861491",
+          "headword": "papură"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/papură/json",
+          "role": "forms",
+          "paraphrase": "current feminine Typha plant noun, plural papuri, genitive-dative papurii; leaf-material and regional other-taxon senses excluded",
+          "authority": "DOOM 3",
+          "definition_id": "1280352",
+          "headword": "papură"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/papură",
+          "role": "second_source",
+          "paraphrase": "Coroborează genul Typha, tulpina aeriană și frunzele lungi și înguste."
+        },
+        {
+          "url": "https://manuale2022.edituracorint.ro/biologie-v.pdf",
+          "role": "link_evidence",
+          "paraphrase": "Manualul de biologie pentru clasa a5-a descrie papura din Delta Dunării, tulpinile emergente și rădăcinile de fixare în solul mâlos.",
+          "location": "Delta Dunării – rezervație a biosferei; indexed primary passage read, direct open unavailable"
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v1_12_tulpina",
@@ -11016,8 +11631,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "are tulpină aeriană",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "are o tulpină aeriană înaltă",
+          "relation": "related_to",
+          "label_ro": "are o tulpină aeriană înaltă",
+          "evidence_url": "https://dexonline.ro/definitie/papură/json"
         },
         {
           "node_id": "n_v24_nature_plant_parts_radacina",
@@ -11025,8 +11644,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "are rădăcini și organe subterane",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "are rădăcini de fixare în solul mâlos",
+          "relation": "related_to",
+          "label_ro": "are rădăcini de fixare în solul mâlos",
+          "evidence_url": "https://manuale2022.edituracorint.ro/biologie-v.pdf"
         },
         {
           "node_id": "n_v4sti_frunza",
@@ -11034,8 +11657,12 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "are frunze lungi înguste",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "are frunze lungi și înguste",
+          "relation": "related_to",
+          "label_ro": "are frunze lungi și înguste",
+          "evidence_url": "https://dexonline.ro/definitie/papură/json"
         },
         {
           "node_id": "n_delta_dunarii",
@@ -11043,14 +11670,44 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "crește în ecosistemele umede ale deltei",
-          "verdict": "unresearched",
-          "relation_hypothesis": "related_to"
+          "verdict": "source-supported, pending independent reviews",
+          "relation_hypothesis": "related_to",
+          "verified_claim": "crește în zonele umede ale Deltei Dunării",
+          "relation": "related_to",
+          "label_ro": "crește în zonele umede ale Deltei Dunării",
+          "evidence_url": "https://manuale2022.edituracorint.ro/biologie-v.pdf"
         }
       ],
-      "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "research_ready": true,
+      "next_action": "Include in the single whole-batch module and independent web reviews at step3.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "planned_graph_counts": {
+        "distinct_neighbors": 4,
+        "old_main": 4,
+        "same_category": 3,
+        "batch": 0
+      },
+      "qualified_forms": [
+        "papură",
+        "papuri",
+        "papurile",
+        "papurii",
+        "papurilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": null,
+        "positive_support": false,
+        "hits": [],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Plantă acvatică din genul Typha, cu tulpină înaltă și frunze lungi și înguste, întâlnită în zone umede.",
+      "register": "current feminine Typha plant noun, plural papuri, genitive-dative papurii; leaf-material and regional other-taxon senses excluded",
+      "research_budget": {
+        "elapsed_seconds": 194,
+        "research_completion_observed_utc": "2026-10-12T11:54:35.508758+00:00"
+      },
+      "qualified_graph_counts": {
         "distinct_neighbors": 4,
         "old_main": 4,
         "same_category": 3,
@@ -11059,8 +11716,8 @@
     },
     {
       "id": "v113-trestie",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "held",
       "kind": "new_shared_concept",
       "lemma": "Trestie",
       "label_ro": "Trestie",
@@ -11071,7 +11728,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "No installed gain; unresolved sense or link evidence remains held.",
       "planned_forms": [
         "trestie",
         "trestia",
@@ -11087,7 +11744,7 @@
         "stufurilor"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm screened; installation requires accepted sense and all graph floors.",
       "fold_equivalent_hypotheses_omitted": 0,
       "identity_checks": {
         "forms": [
@@ -11287,8 +11944,30 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "held: the mixed Trestie/Stuf taxon and all four predeclared botanical claims were not fully adjudicated before the item research limit.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/trestie/json",
+          "role": "sense",
+          "authority": "DEX '09",
+          "definition_id": "835356",
+          "headword": "trestie",
+          "paraphrase": "Exact entries distinguish Arundo donax from the Phragmites/stuf sense; Stuf has its own current normative plural."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/trestie/json",
+          "role": "forms",
+          "authority": "DOOM 3",
+          "definition_id": "1269951",
+          "headword": "trestie",
+          "paraphrase": "Current exact-headword nominal paradigm retrieved; not admitted for installation while the concept is held."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/trestie",
+          "role": "second_source_fetched",
+          "paraphrase": "Page fetched during the initial batch; full claim adjudication remained unfinished at the research limit."
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v1_12_tulpina",
@@ -11296,7 +11975,7 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "are tulpină înaltă cu noduri",
-          "verdict": "unresearched",
+          "verdict": "held: the mixed Trestie/Stuf taxon and all four predeclared botanical claims were not fully adjudicated before the item research limit.",
           "relation_hypothesis": "related_to"
         },
         {
@@ -11305,7 +11984,7 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "are rădăcini și organe subterane",
-          "verdict": "unresearched",
+          "verdict": "held: the mixed Trestie/Stuf taxon and all four predeclared botanical claims were not fully adjudicated before the item research limit.",
           "relation_hypothesis": "related_to"
         },
         {
@@ -11314,7 +11993,7 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "are frunze alungite",
-          "verdict": "unresearched",
+          "verdict": "held: the mixed Trestie/Stuf taxon and all four predeclared botanical claims were not fully adjudicated before the item research limit.",
           "relation_hypothesis": "related_to"
         },
         {
@@ -11323,12 +12002,12 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "trestia din sensul ales crește în deltă",
-          "verdict": "unresearched",
+          "verdict": "held: the mixed Trestie/Stuf taxon and all four predeclared botanical claims were not fully adjudicated before the item research limit.",
           "relation_hypothesis": "related_to"
         }
       ],
       "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "next_action": "Preserve hold; no install.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "possible_alias_family": {
         "lemma": "Stuf",
@@ -11340,12 +12019,46 @@
         "same_category": 3,
         "batch": 0
       },
-      "combined_item_budget": "The same at-most5minutes item budget includes any Stuf substitutability/form checks; hold the extra input family if unresolved, never extend the item budget."
+      "combined_item_budget": "The same at-most5minutes item budget includes any Stuf substitutability/form checks; hold the extra input family if unresolved, never extend the item budget.",
+      "qualified_forms": [
+        "trestie",
+        "trestia",
+        "trestii",
+        "trestiile",
+        "trestiei",
+        "trestiilor",
+        "stuf",
+        "stuful",
+        "stufuri",
+        "stufurile",
+        "stufului",
+        "stufurilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 28066,
+        "positive_support": false,
+        "hits": [
+          {
+            "rank": 28066,
+            "form": "trestie",
+            "count": 449
+          }
+        ],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Plantă de zone umede; Stuf este doar ipoteză separată de input, cu taxon și număr de verificat.",
+      "register": "Exact current DEX/DOOM3 headword found; complete sense/link qualification remains held.",
+      "research_budget": {
+        "elapsed_seconds": 338,
+        "research_completion_observed_utc": "2026-10-12T12:00:53+00:00"
+      },
+      "budget_note": "Five-minute research limit expired during context compaction; first stop observation was 338 seconds after start. No additional web requests were made after observing expiry; unresolved items held, not qualified."
     },
     {
       "id": "v113-lichen",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "held",
       "kind": "new_shared_concept",
       "lemma": "Lichen",
       "label_ro": "Lichen",
@@ -11356,7 +12069,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "No installed gain; unresolved sense or link evidence remains held.",
       "planned_forms": [
         "lichen",
         "lichenul",
@@ -11366,7 +12079,7 @@
         "lichenilor"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm screened; installation requires accepted sense and all graph floors.",
       "fold_equivalent_hypotheses_omitted": 0,
       "identity_checks": {
         "forms": [
@@ -11470,8 +12183,30 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "held: the predeclared air-quality bioindicator claim was not verified on a second Romanian source within the research limit.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/lichen/json",
+          "role": "sense",
+          "authority": "DEX '09",
+          "definition_id": "864004",
+          "headword": "lichen",
+          "paraphrase": "The dictionary identifies the symbiosis and tree-bark/rock habitats; medical homonym is excluded."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/lichen/json",
+          "role": "forms",
+          "authority": "DOOM 3",
+          "definition_id": "1325992",
+          "headword": "lichen",
+          "paraphrase": "Current exact-headword nominal paradigm retrieved; not admitted for installation while the concept is held."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Lichen",
+          "role": "second_source_fetched",
+          "paraphrase": "Page fetched during the initial batch; full claim adjudication remained unfinished at the research limit."
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v4sti_copac",
@@ -11479,7 +12214,7 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "poate crește pe copaci",
-          "verdict": "unresearched",
+          "verdict": "held: the predeclared air-quality bioindicator claim was not verified on a second Romanian source within the research limit.",
           "relation_hypothesis": "related_to"
         },
         {
@@ -11488,7 +12223,7 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "poate crește pe scoarță",
-          "verdict": "unresearched",
+          "verdict": "held: the predeclared air-quality bioindicator claim was not verified on a second Romanian source within the research limit.",
           "relation_hypothesis": "related_to"
         },
         {
@@ -11497,7 +12232,7 @@
           "category": "geografie",
           "status": "exists on wave_base",
           "claim_to_verify": "poate crește pe stâncă",
-          "verdict": "unresearched",
+          "verdict": "held: the predeclared air-quality bioindicator claim was not verified on a second Romanian source within the research limit.",
           "relation_hypothesis": "related_to"
         },
         {
@@ -11506,24 +12241,46 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "este folosit ca bioindicator al calității aerului",
-          "verdict": "unresearched",
+          "verdict": "held: the predeclared air-quality bioindicator claim was not verified on a second Romanian source within the research limit.",
           "relation_hypothesis": "related_to"
         }
       ],
       "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "next_action": "Preserve hold; no install.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "planned_graph_counts": {
         "distinct_neighbors": 4,
         "old_main": 4,
         "same_category": 3,
         "batch": 0
-      }
+      },
+      "qualified_forms": [
+        "lichen",
+        "lichenul",
+        "licheni",
+        "lichenii",
+        "lichenului",
+        "lichenilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": null,
+        "positive_support": false,
+        "hits": [],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Asociere fungică și fotosintetică, nu plantă cu frunze.",
+      "register": "Exact current DEX/DOOM3 headword found; complete sense/link qualification remains held.",
+      "research_budget": {
+        "elapsed_seconds": 338,
+        "research_completion_observed_utc": "2026-10-12T12:00:53+00:00"
+      },
+      "budget_note": "Five-minute research limit expired during context compaction; first stop observation was 338 seconds after start. No additional web requests were made after observing expiry; unresolved items held, not qualified."
     },
     {
       "id": "v113-rasina",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "held",
       "kind": "new_shared_concept",
       "lemma": "Rășină",
       "label_ro": "Rășină",
@@ -11534,7 +12291,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "No installed gain; unresolved sense or link evidence remains held.",
       "planned_forms": [
         "rășină",
         "rășini",
@@ -11543,7 +12300,7 @@
         "rășinilor"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm screened; installation requires accepted sense and all graph floors.",
       "fold_equivalent_hypotheses_omitted": 1,
       "identity_checks": {
         "forms": [
@@ -11631,8 +12388,30 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "held: specific Pin/Molid/Brad producers and bark claim were not all verified within the research limit.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/rășină/json",
+          "role": "sense",
+          "authority": "DEX '09",
+          "definition_id": "853018",
+          "headword": "rășină",
+          "paraphrase": "Exact dictionary entries identify natural plant resin, especially conifers, and distinguish synthetic production."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/rășină/json",
+          "role": "forms",
+          "authority": "DOOM 3",
+          "definition_id": "1275595",
+          "headword": "rășină",
+          "paraphrase": "Current exact-headword nominal paradigm retrieved; not admitted for installation while the concept is held."
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Rășină",
+          "role": "second_source_fetched",
+          "paraphrase": "Page fetched during the initial batch; full claim adjudication remained unfinished at the research limit."
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v1_12_pin",
@@ -11640,7 +12419,7 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "pinii produc rășină",
-          "verdict": "unresearched",
+          "verdict": "held: specific Pin/Molid/Brad producers and bark claim were not all verified within the research limit.",
           "relation_hypothesis": "related_to"
         },
         {
@@ -11649,7 +12428,7 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "molidul produce rășină",
-          "verdict": "unresearched",
+          "verdict": "held: specific Pin/Molid/Brad producers and bark claim were not all verified within the research limit.",
           "relation_hypothesis": "related_to"
         },
         {
@@ -11658,7 +12437,7 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "bradul produce rășină",
-          "verdict": "unresearched",
+          "verdict": "held: specific Pin/Molid/Brad producers and bark claim were not all verified within the research limit.",
           "relation_hypothesis": "related_to"
         },
         {
@@ -11667,24 +12446,51 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "poate apărea la scoarță și rănile țesuturilor lemnoase",
-          "verdict": "unresearched",
+          "verdict": "held: specific Pin/Molid/Brad producers and bark claim were not all verified within the research limit.",
           "relation_hypothesis": "related_to"
         }
       ],
       "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "next_action": "Preserve hold; no install.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "planned_graph_counts": {
         "distinct_neighbors": 4,
         "old_main": 4,
         "same_category": 4,
         "batch": 0
-      }
+      },
+      "qualified_forms": [
+        "rășină",
+        "rășini",
+        "rășinile",
+        "rășinii",
+        "rășinilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 48115,
+        "positive_support": false,
+        "hits": [
+          {
+            "rank": 48115,
+            "form": "răşină",
+            "count": 185
+          }
+        ],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Substanță secretată de plante, mai ales conifere, nu sinonim pentru sevă.",
+      "register": "Exact current DEX/DOOM3 headword found; complete sense/link qualification remains held.",
+      "research_budget": {
+        "elapsed_seconds": 338,
+        "research_completion_observed_utc": "2026-10-12T12:00:53+00:00"
+      },
+      "budget_note": "Five-minute research limit expired during context compaction; first stop observation was 338 seconds after start. No additional web requests were made after observing expiry; unresolved items held, not qualified."
     },
     {
       "id": "v113-cetina",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "held",
       "kind": "new_shared_concept",
       "lemma": "Cetină",
       "label_ro": "Cetină",
@@ -11695,7 +12501,7 @@
       "games": [
         "Cald sau Rece"
       ],
-      "player_benefit": "Unaccepted hypothesis: real shared vocabulary or missing same-slot inputs; no content is installed yet.",
+      "player_benefit": "No installed gain; unresolved sense or link evidence remains held.",
       "planned_forms": [
         "cetină",
         "cetini",
@@ -11705,7 +12511,7 @@
         "cetinei"
       ],
       "held_forms": [],
-      "form_status": "Unverified exact-headword DOOM3 hypotheses; only unique noncolliding keys are planned, and every unexpected normative addition must be screened before qualification.",
+      "form_status": "Exact-headword DOOM3 paradigm screened; installation requires accepted sense and all graph floors.",
       "fold_equivalent_hypotheses_omitted": 1,
       "identity_checks": {
         "forms": [
@@ -11809,8 +12615,30 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: local owner screening passed; all sense, register, DOOM3 forms and link claims require Romanian research and both reviews.",
-      "sources": [],
+      "decision": "held: all four predeclared conifer/leaf claims were not verified for one substitutable branch sense within the research limit.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/cetină/json",
+          "role": "sense",
+          "authority": "DEX '09",
+          "definition_id": "844870",
+          "headword": "cetină",
+          "paraphrase": "Exact DOOM3 gives cetinii/cetini; DEX specifically supports fir branches and records additional broader uses."
+        },
+        {
+          "url": "https://dexonline.ro/definitie/cetină/json",
+          "role": "forms",
+          "authority": "DOOM 3",
+          "definition_id": "1311138",
+          "headword": "cetină",
+          "paraphrase": "Current exact-headword nominal paradigm retrieved; not admitted for installation while the concept is held."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/cetină",
+          "role": "second_source_fetched",
+          "paraphrase": "Page fetched during the initial batch; full claim adjudication remained unfinished at the research limit."
+        }
+      ],
       "link_targets": [
         {
           "node_id": "n_v1_8_brad",
@@ -11818,7 +12646,7 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "poate desemna ramuri verzi de brad",
-          "verdict": "unresearched",
+          "verdict": "held: all four predeclared conifer/leaf claims were not verified for one substitutable branch sense within the research limit.",
           "relation_hypothesis": "related_to"
         },
         {
@@ -11827,7 +12655,7 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "poate desemna ramuri verzi de pin",
-          "verdict": "unresearched",
+          "verdict": "held: all four predeclared conifer/leaf claims were not verified for one substitutable branch sense within the research limit.",
           "relation_hypothesis": "related_to"
         },
         {
@@ -11836,7 +12664,7 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "poate desemna ramuri verzi de molid",
-          "verdict": "unresearched",
+          "verdict": "held: all four predeclared conifer/leaf claims were not verified for one substitutable branch sense within the research limit.",
           "relation_hypothesis": "related_to"
         },
         {
@@ -11845,19 +12673,40 @@
           "category": "stiinta",
           "status": "exists on wave_base",
           "claim_to_verify": "poate desemna frunzele aciculare sau ramurile care le poartă",
-          "verdict": "unresearched",
+          "verdict": "held: all four predeclared conifer/leaf claims were not verified for one substitutable branch sense within the research limit.",
           "relation_hypothesis": "related_to"
         }
       ],
       "research_ready": false,
-      "next_action": "Research sense/register/DOOM3 and four independent link claims; hold when unsure.",
+      "next_action": "Preserve hold; no install.",
       "research_plan": "Named targets are source-unverified hypotheses, not approved predicates; never replace a failed claim merely to fill the floor.",
       "planned_graph_counts": {
         "distinct_neighbors": 4,
         "old_main": 4,
         "same_category": 4,
         "batch": 0
-      }
+      },
+      "qualified_forms": [
+        "cetină",
+        "cetini",
+        "cetinile",
+        "cetinii",
+        "cetinilor"
+      ],
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": null,
+        "positive_support": false,
+        "hits": [],
+        "policy": "Positive signal only; absence never rejects an everyday or school word."
+      },
+      "description_candidate": "Ramuri ori frunze verzi de conifere; sensul și genitivul exact se verifică.",
+      "register": "Exact current DEX/DOOM3 headword found; complete sense/link qualification remains held.",
+      "research_budget": {
+        "elapsed_seconds": 338,
+        "research_completion_observed_utc": "2026-10-12T12:00:53+00:00"
+      },
+      "budget_note": "Five-minute research limit expired during context compaction; first stop observation was 338 seconds after start. No additional web requests were made after observing expiry; unresolved items held, not qualified."
     }
   ],
   "history_policy": "All20 matching pool states and held/exclusion containers checked; rejected surfaces skipped and owner-only holds preserved. V1.7 remains parked; no prior pool edited.",
@@ -11866,22 +12715,22 @@
     "2026-10-11: Update the two frozen Cald assertions, rerun gates, merge V1.8 locally once green and continue.",
     "2026-10-11: Continue V1.9 candidates/reviews/gates, merge locally once green and start the next wave without routine approval waits.",
     "2026-10-12: Finish seven V1.11 input families, both reviews/gates; merge locally when green, start next wave; no routine approval waits.",
-    "2026-10-12: Continue V1.13 content wave (clarification of launch message)."
+    "2026-10-12: Continue V1.13 content wave (clarification of launch message).",
+    "2026-10-12: Finish remaining12 V1.13 candidates, both reviews/gates; merge locally green, start next wave; no routine approval waits."
   ],
   "planning_note": "Named backlog Furnică and regional Mămăruță inputs come first. Vârf targets existing n_v2geo_varf. Trestie/Stuf is one source-unverified concept/input hypothesis. All new graph counts include distinct incoming and outgoing neighbors; no hidden-target or curated-round approval.",
   "research_summary": {
     "states": {
-      "researched": 35,
-      "held": 2,
-      "idea": 12
+      "researched": 43,
+      "held": 6
     },
-    "researched": 35,
+    "researched": 43,
     "accepted": 0,
     "installed": 0,
-    "qualified_input_keys_pending_reviews": 191,
-    "qualified_links_pending_reviews": 137,
-    "unique_candidate_edges_pending_reviews": 136,
-    "shared_edge_note": "The incoming Versant→Pantă fact appears in both dossiers but is emitted and counted as one unique candidate edge."
+    "qualified_input_keys_pending_reviews": 229,
+    "qualified_links_pending_reviews": 168,
+    "unique_candidate_edges_pending_reviews": 167,
+    "shared_edge_note": "Versant→Pantă emitted once; Răcoare requires the already-predeclared incoming Adiere edge, without a Căldură edge."
   },
   "research_ticks": [
     {
@@ -11961,9 +12810,35 @@
       "dex_request_start_spacing_seconds_min": 2.1,
       "mechanical_cache_qa": "factual-v1-13 verified all12 cited DEX/DOOM3 ID/headword/form matches and budgets without web or edits; step3 factual review remains unused.",
       "mechanical_quality_qa": "quality-v1-13 verified67 screened unique keys, singular-only Gazon, existing-owner Vârf, held Ger, shared incoming Versant→Pantă and conditional Uragan→Ciclon; no web, edits or formal review."
+    },
+    {
+      "tick": 4,
+      "checked_on": "2026-10-12",
+      "items": [
+        "v113-seceta",
+        "v113-umbra",
+        "v113-racoare",
+        "v113-adiere",
+        "v113-zavoi",
+        "v113-lunca",
+        "v113-coliba",
+        "v113-papura",
+        "v113-trestie",
+        "v113-lichen",
+        "v113-rasina",
+        "v113-cetina"
+      ],
+      "researched": 8,
+      "held": 4,
+      "accepted": 0,
+      "installed": 0,
+      "max_qualified_item_seconds": 259,
+      "last4_stop_observed_seconds": 338,
+      "budget_outcome": "Last four unresolved items held after research cap; expiry observed after compaction. No further web research.",
+      "dex_request_start_spacing_seconds_min": 2.1
     }
   ],
-  "next_research_requirement": "Next step2 tick: at most12 remaining ideas, beginning with Secetă. Preserve Gheață owner-only hold and Ger evidence hold; both formal step3 web reviews remain required.",
+  "next_research_requirement": "No ideas remain. Step3: one module and one independent whole-batch web review per fixed reviewer; held items excluded. Standing owner go applies after reviews and green gates.",
   "backlog_review": {
     "named_surfaces_unresolved_on_wave_base": [
       "Moș Crăciun",
