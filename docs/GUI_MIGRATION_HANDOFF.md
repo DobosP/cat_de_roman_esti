@@ -6,13 +6,24 @@ Publish only `fix/gui-cat-prerequisites-linux` to origin. Shared main stays clea
 
 ## Current 2026-10-12 (completion loop handover)
 
+- M1-close is `b3f5f61` under E3: [compact full](reviews/gui-normalized-react/m1-close-b3f5f61.json),
+  actual FAIL201 only ten active JS budgets plus aggregate;37/39 checks,900browser,16baselines/9exactPNGs,
+ 1207parity,PG,CSP0 and real same-image legacy witness pass. Missing quality deps installed from lock;
+  supervisor verified app/db/network removal, owner verified legacy removal. Image `sha256:601895593c6bd305b8fad3158513ee6c94305f4aa75d5318b6971537570c551b` remains the M1 phone keeper.
+- Later [source preparation](reviews/gui-normalized-react/m2-independent-preparation-20261012.json) removes
+  two approved Conexiuni layout props; nativeTS7,3selection tests and targeted lint pass. Extra audit/routing
+  candidates are unadopted after two failed attempts each; source packets and compact blockers are retained
+  under `_temp/fix__gui-cat-prerequisites-linux/m2-style-draft/current-failed/` and
+  `m2-routing-draft/current-unverified/`. No third attempt, default-suite skip or fabricated context.
+  Checked Preact runtime/Home/pilots await parent UI1 sync and REQ-7; Samsung gates acceptance, not coding.
+
 - Next work is driven by the roedu-ui completion loop: `docs/GUI_COMPLETION_LOOP.md` (ledger, owner queue,
   iteration protocol, anti-stall rules) and `scripts/gui_loop_status.py` on roedu-ui
   `fix/gui-cat-prerequisites-linux`. Owner decisions E6 (roedu-ui ADR-0020): M2 implementation may start
   now and the device checkpoint gates M2 acceptance; a budget-only-red unit on a trusted descendant of
   89db19d is KIT_BUMP evidence; the loop worker pushes GUI feature branches; content main merges only at
   milestone boundaries; this lane owns the GUI interface only.
-- Actual full at 6b10d47 (trust pin 2026-10-12T09:52:43Z; canonical distroless image, `PORT=8080`, main
+- Prior full at 6b10d47 (trust pin 2026-10-12T09:52:43Z; canonical distroless image, `PORT=8080`, main
   a27477d integrated), 09:54–10:44 UTC: 900/900 browser cases, 16/16 baseline outcomes (9 exact PNGs, axe,
   home semantics, 4 vitals), backend race 1,403 s (contentrails 1,061 s of 1,800 s), enforced CSP 0
   violations. Red: 10 active route-JS rows (E3) plus PROCEDURAL `cat-legacy-owner-journey` (owner-lifecycle
@@ -27,7 +38,7 @@ Publish only `fix/gui-cat-prerequisites-linux` to origin. Shared main stays clea
   `.gate/full/supervisor.json` records exit codes and independently verified owned-resource cleanup.
   Missing quality libraries are installed by `scripts/gui-baseline-deps.mjs` with locked `npm ci` only
   in the managed runner; exact versions and baselines remain checked. No hook/trust input changes.
-  Next: one full → M1 close; KIT_BUMP relay and device checkpoint (Paul).
+  M1-close full completed at b3f5f61; continue through the loop owner queue, never repeat it for docs.
 
 ## History 2026-10-11 (independent review, Codex stopped)
 

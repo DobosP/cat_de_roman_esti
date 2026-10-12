@@ -719,7 +719,6 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
                   <CspMotion.button
                     key={t.id}
                     type="button"
-                    layout
                     initial={{ scale: 0.6, opacity: 0 }}
                     animate={{
                       scale: 1,
@@ -904,7 +903,6 @@ function SolvedRow({
 }) {
   return (
     <CspMotion.div
-      layout
       initial={{ scale: 0.9, opacity: 0 }}
       animate={{ scale: 1, opacity: dim ? 0.7 : 1 }}
       transition={{ type: "spring", stiffness: 260, damping: 20 }}

@@ -15,6 +15,10 @@ Preserve the six server-authoritative Romanian games while moving the SPA from R
 
 ## 2. Progress
 
+- [x] 2026-10-12 — M1 preliminary close at b3f5f61, actual full37/39 with onlyE3JS+aggregate red;900browser/16baseline/9PNG/1207parity/PG/CSP0/reallegacy pass, cleanup verified. Canonical result2c5fd984…; no green/device claim.
+- [x] 2026-10-12 — independent M2 source: drop two approved Conexiuni layout props; nativeTS7,3key tests,targetedOxlint pass. Existing explicit-unit conversion is already applied and M1PNG parity is exact. Additional audit/routing drafts parked unadopted at2attempt cap; see compact source-prep record and owner queue.
+- [ ] M2 runtime/Home/Intrusul/Conexiuni await owner UI1 activation and supported Presence exit retention (REQ-7); physicalSamsung gates acceptance only underE6. No pointer/compat/private-tarball bypass.
+
 - [x] 2026-10-12 — committed same-full supervisor/lifecycle source; actual wrapper UUID and primary image/source/tree are observed, never invented. Canonical UID10001 contract replaces the private proposal’s obsolete username. Full run pending; no M1-close or device claim.
 
 - [x] 2026-10-11 — [Actual enforced fd336 full](../reviews/gui-normalized-react/full-fd336-checkpoint.json) completed37/39 PASS, only active route-JS/aggregate FAIL201. Parent+independent accepted bounded E3 preliminary evidence:900 once450each/no retry-skip-flaky-errors, frontend459, backend1397/default17 covered by freshPG12+291, native1207, same-image owner fallback and enforcedCSP9,9PNG/16baseline outcomes. Approved frozen exact baseline policy passed full integration; active40960/30720 and combined122880 unchanged/currentReact red. Exact owned cleanup verified. Separate first-attempt missing-owner incident preserved. No GREEN/M0/M1/KIT_BUMP/nativePreact/device acceptance; later docs HEAD not tested.

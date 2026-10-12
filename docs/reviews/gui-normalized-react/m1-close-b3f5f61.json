@@ -1,0 +1,108 @@
+{
+  "schema": 1,
+  "scope": "E3 preliminary M1 close; FAIL201 is retained, not green/M2/device acceptance",
+  "sha": "b3f5f615d306d9033bd8b069b3c73a77ccf68e84",
+  "tree_sha256": "541f35779769845f88397a2c7ae0076b7fc400946cffbc4ea02c6cfd4bc86990",
+  "dirty": false,
+  "started": "2026-10-12T11:41:55.466Z",
+  "finished": "2026-10-12T12:28:26.141Z",
+  "result_sha256": "2c5fd984de86e569f570a5517ace08da6e2c18813a09887f5fe926dc0e300b67",
+  "canonical_result": ".gate/full/result.json",
+  "status": "fail",
+  "exit_code": 201,
+  "app_image_id": "sha256:601895593c6bd305b8fad3158513ee6c94305f4aa75d5318b6971537570c551b",
+  "wrapper_invocation": "ee7d0252-42ef-4d51-b4e1-5bc0b0a6297a",
+  "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+  "versions_lock_sha256": "afd977316d1749046ba723fb4fdc978bfd9257070c16afa802e4606b9ab861fa",
+  "checks_pass": 37,
+  "failed_checks": [
+    "cat-route-budgets",
+    "repo-full-exit"
+  ],
+  "expected_red_active_route_js": {
+    "/": 115016,
+    "/alchimie": 137985,
+    "/alchimie?mode=challenges": 137985,
+    "/alchimie?mode=explore": 137985,
+    "/cald-rece": 131643,
+    "/clasament": 118003,
+    "/conexiuni": 130955,
+    "/intrusul": 127927,
+    "/lant": 131465,
+    "/perechi": 128752
+  },
+  "unchanged_js_limit_bytes": 40960,
+  "unchanged_js_target_bytes": 30720,
+  "browser": {
+    "startTime": "2026-10-12T12:09:57.788Z",
+    "duration": 1028118.076,
+    "expected": 900,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "browser_results": "900 expected passes,450desktop/450mobile,one result per case,retry0,zero global errors",
+  "baseline_outcomes": {
+    "verification-context-recheck": "pass",
+    "home-live-semantic-witness": "pass",
+    "axe-route-fingerprints": "pass",
+    "png:/": "pass",
+    "png:/intrusul": "pass",
+    "png:/perechi": "pass",
+    "png:/conexiuni": "pass",
+    "png:/alchimie?mode=challenges": "pass",
+    "png:/alchimie?mode=explore": "pass",
+    "png:/cald-rece": "pass",
+    "png:/lant": "pass",
+    "png:/clasament": "pass",
+    "vitals:/conexiuni:lcp": "pass",
+    "vitals:/conexiuni:inp": "pass",
+    "vitals:/alchimie?mode=challenges:lcp": "pass",
+    "vitals:/alchimie?mode=challenges:inp": "pass"
+  },
+  "png_sha256": {
+    "/": "c0b8b632456c32cfe7c58c9801cb887bb140e909c47d7c50ac77014b2f5133e1",
+    "/intrusul": "78a1d16956b1fdd0fb0cc772d26447e5d302e3cbe3917f8344fa4d29a1540ea4",
+    "/perechi": "e2eb15eb02d68aa00771e1f9b0c5cea6e053a720cd5a1bae4548290ff26417d3",
+    "/conexiuni": "48d75018d626e154ecbf7aa3fde73ab4fba2b19971860c7bf8aed2eadd916eb6",
+    "/alchimie?mode=challenges": "8627c586eb858738d0fb9d1e1f148001918018b7eab2d3b83adbc4d8067e1327",
+    "/alchimie?mode=explore": "3e6f20116fff197cc5c1a2e0a7b9364eb6290a94f89ca01e7df579fab42447c6",
+    "/cald-rece": "4cff23ab1c40e1ad5103fcb3460dc334ce0fe8b2ded9c928cac719d31a449819",
+    "/lant": "db6d51349137feafb827363bf6dd9e40aeeeece831c22080ca402cdcd75762b2",
+    "/clasament": "753b66bc04a01d2d02b67947578606f631c0670299b4b1b903368aa7f257b1a6"
+  },
+  "csp": {
+    "stage": "enforced",
+    "violations": 0,
+    "legacy_violations": 0
+  },
+  "frontend_unit": {
+    "pass": 459,
+    "fail": 0,
+    "skip": 0
+  },
+  "backend_race": "1824pass events,0fail;17default PG test skips+12no-test packages covered by explicit PG; contentrails1427.076s/1800s",
+  "explicit_pg": "accounts12/httpapi291 pass events,zero skips",
+  "native_parity_requests": 1207,
+  "legacy": {
+    "status": "pass",
+    "creates": 1,
+    "post_status": 200,
+    "real_board_visible": true,
+    "violations": 0,
+    "cleanup_verified": true,
+    "record_sha256": "0b90ff3927f9d8904218ad1f19221f566c684879b67e8330e6de348e9756284e"
+  },
+  "quality_setup": "Missing quality node_modules installed2locked packages in788ms; axe4.14.0/web-vitals6.2.3; committed package/lock unchanged",
+  "supervisor": {
+    "sha256": "faf250986b955bca91a40e7ee6e3f45df43de2642f5ecd6311e3d1caf97a5fbe",
+    "owner_exit": 0,
+    "errors": [],
+    "cleanup_verified": true,
+    "removed_app_db": 2,
+    "removed_networks": 1
+  },
+  "independent_review": "900raw cases,16predicates and9PNGbyte comparisons; source/tree541f3577 matched canonical b3inputs; four trust inputs unchanged versus6bpin; only30expected frozen legacy generated members differ in post-run mirror",
+  "retention": "Latest raw canonical result/mirror and M1image retained; prior rolling full target replaced, compact prior full/unit history retained; no assertion that replaced raw bytes remain available",
+  "remaining": "UI0.3 active/UI1 staged; owner KIT_BUMP relay and UI activation, physical Samsung and budget decision remain pending"
+}
