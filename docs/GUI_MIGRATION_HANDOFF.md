@@ -4,7 +4,26 @@ Valid until: the next source or completed gate change. Updated 2026-10-12. Read 
 
 Publish only `fix/gui-cat-prerequisites-linux` to origin. Shared main stays clean. React19/Motion and UI0.3 remain active; Core-v1.6 is released and UI1.0.6 staged. This migration is unfinished.
 
-## Current 2026-10-11 (independent review, Codex stopped)
+## Current 2026-10-12 (completion loop handover)
+
+- Next work is driven by the roedu-ui completion loop: `docs/GUI_COMPLETION_LOOP.md` (ledger, owner queue,
+  iteration protocol, anti-stall rules) and `scripts/gui_loop_status.py` on roedu-ui
+  `fix/gui-cat-prerequisites-linux`. Owner decisions E6 (roedu-ui ADR-0020): M2 implementation may start
+  now and the device checkpoint gates M2 acceptance; a budget-only-red unit on a trusted descendant of
+  89db19d is KIT_BUMP evidence; the loop worker pushes GUI feature branches; content main merges only at
+  milestone boundaries; this lane owns the GUI interface only.
+- Actual full at 6b10d47 (trust pin 2026-10-12T09:52:43Z; canonical distroless image, `PORT=8080`, main
+  a27477d integrated), 09:54–10:44 UTC: 900/900 browser cases, 16/16 baseline outcomes (9 exact PNGs, axe,
+  home semantics, 4 vitals), backend race 1,403 s (contentrails 1,061 s of 1,800 s), enforced CSP 0
+  violations. Red: 10 active route-JS rows (E3) plus PROCEDURAL `cat-legacy-owner-journey` (owner-lifecycle
+  coordinator not attached) and its knock-ons (`cat-browser-full` legacy-observation read, `csp-measurement`).
+  Result sha256 85fa8b3b…; leftover app/db/network removed by the run owner, absence verified.
+- Actual unit at 6b10d47, 10:45–11:08 UTC: only the 10 active route-JS rows plus aggregate exit fail
+  (result sha256 54dd6441…). This is the E6 Q9 KIT_BUMP evidence; Paul's relay is in the loop owner queue.
+- Next (loop ledger order): commit the owner-lifecycle coordinator as a reproducible entry point, then one
+  full with it attached → M1 close; KIT_BUMP relay (Paul); M2 implementation; device checkpoint (Paul).
+
+## History 2026-10-11 (independent review, Codex stopped)
 
 - Branch `fix/gui-review-20261011` (local, unpushed) = e042587 plus: 8e56bae fail-fast/fresh content
   tests, 83ed8b9 canonical distroless M1 image (`APP_DOCKERFILE=Dockerfile`, `/app healthcheck`,
