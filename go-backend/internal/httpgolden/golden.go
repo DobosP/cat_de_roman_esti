@@ -50,6 +50,9 @@ var frozenV111 []byte
 //go:embed testdata/python-http-parity-v1-12.json.gz
 var frozenV112 []byte
 
+//go:embed testdata/python-http-parity-v1-13.json.gz
+var frozenV113 []byte
+
 const FrozenSHA256 = "9041e05f13190a06a526c1aeed1f264d467483cd267ffcdb24f422ed9430b2cb"
 const V12SHA256 = "6293a0dde67ee0b0e5929cc1103bd80795e0aff1af2ba5fdf53e983ab79351fd"
 const V13SHA256 = "67d009c7eaa710bd98281b3300d3df4dc4ed4e224a157934abd7e19bce112670"
@@ -61,6 +64,7 @@ const V19SHA256 = "3cce62aa1c34edeff2db245f4d4977a59808545fd24058fce9858f6516a52
 const V110SHA256 = "bd72460000d5b4cd8e642f11d9d03335105ebb55f31faa1661b720a45517f404"
 const V111SHA256 = "51655503ba618016e2ae3d3cc341639f1825864a8619761bc89635fa94bba600"
 const V112SHA256 = "b05affc8f80ab96513973444a6d7345123ffe5678c9dfd2c7b2839725eee01dc"
+const V113SHA256 = "7423ca8b66969fbd10ac236b729eeb9f75982ec93a3a53965d8a86a24975e406"
 const MaxCorpusBytes = 32 * 1024 * 1024
 const MaxCases = 4096
 
@@ -245,6 +249,17 @@ func reviewedV112() (*Corpus, error) {
 	return c, err
 }
 
+func reviewedV113() (*Corpus, error) {
+	if fmt.Sprintf("%x", sha256.Sum256(frozenV113)) != V113SHA256 {
+		return nil, fmt.Errorf("independent V1.13 HTTP corpus digest drift")
+	}
+	c, err := ReadCorpus(bytes.NewReader(frozenV113), true)
+	if err == nil && (len(c.Cases) != 1206 || len(c.Sources) != 8) {
+		return nil, fmt.Errorf("expected 1206 independent V1.13 HTTP cases and exact eight sources")
+	}
+	return c, err
+}
+
 // ForSources selects an independently captured reviewed corpus only when its
 // entire source identity equals the requested export. Historical Frozen remains
 // immutable; unknown, partial or mixed source sets never gain expected responses.
@@ -293,7 +308,11 @@ func ForSources(sources map[string]string) (*Corpus, error) {
 	if err != nil {
 		return nil, err
 	}
-	for _, c := range []*Corpus{original, current, latest, v14, v15, v16, v18, v19, v110, v111, v112} {
+	v113, err := reviewedV113()
+	if err != nil {
+		return nil, err
+	}
+	for _, c := range []*Corpus{original, current, latest, v14, v15, v16, v18, v19, v110, v111, v112, v113} {
 		if reflect.DeepEqual(c.Sources, sources) {
 			return c, nil
 		}
