@@ -17,6 +17,12 @@ Publish only `fix/gui-cat-prerequisites-linux` to origin. Shared main stays clea
   [ADR0196](adr/0196-integrate-reviewed-v19-v110-with-gui-history.md). Main's content, pins, installed
   authorities, native reviews and 1207-case corpora are byte-identical to main. Combined managed
   unit/full NOT RUN: it needs Paul's trust pin for the `.gate.env` change at the final tip.
+- Host checks at merge 6aa3d02 (2026-10-12, shared host load ~13–24, `GOMAXPROCS=4 go test -race -count=1`):
+  cat-content validate/export --check, `go vet ./...`, gofmt PASS; race httpgolden 122.7 s, contentbuild
+  263.6 s, contentops 243.6 s, alchimie_explore 30.8 s, httpapi (minus `TestManagedSPACompiledCurrentAndFrozenLegacy`)
+  70.5 s, contentrails 848.2 s of the 1,800 s per-binary timeout, all PASS; non-race `./...` fails only that
+  managed-SPA test (needs the owning frontend build; NOT RUN here). cat-doc-check inventory and check_docs PASS.
+  Trust set versus 731b0a1 unchanged.
 - Latest actual full at e042587 (2026-10-11 19:00–19:52 UTC, 52.4 min, wrapper result kept in parent
   `_temp`): FAIL only from the 10 active route-JS budgets (Home 115,016 vs 40,960) plus the aggregate exit;
   37/39 checks passed. Backend race 1,743 s (contentrails 1,384.7 s of the 1,800 s per-binary timeout,
