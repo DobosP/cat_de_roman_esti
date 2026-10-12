@@ -3,6 +3,7 @@ import path from "node:path";
 import { spawn } from "node:child_process";
 import { gzipSync, brotliCompressSync } from "node:zlib";
 import { createHash } from "node:crypto";
+import { ensureBaselineDependencies } from "./gui-baseline-deps.mjs";
 import { chromium } from "../frontend/node_modules/playwright/index.mjs";
 import AxeBuilder from "../frontend/node_modules/@axe-core/playwright/dist/index.mjs";
 import { nativePlan } from "../frontend/e2e/native-plan.mjs";
@@ -38,6 +39,7 @@ const closures = Object.fromEntries(Object.keys(manifest).map((entry) => {
   return [entry, { files: measured, gz: measured.reduce((sum, item) => sum + item.gz, 0), br: measured.reduce((sum, item) => sum + item.br, 0) }];
 }));
 const quality = "tools/gui-baseline-quality";
+ensureBaselineDependencies(root);
 const axeSource = fs.readFileSync(`${quality}/node_modules/axe-core/axe.min.js`, "utf8");
 const axeVersion = JSON.parse(fs.readFileSync(`${quality}/node_modules/axe-core/package.json`)).version;
 if (axeVersion !== "4.14.0") throw new Error(`Required axeSource4.14.0 is unavailable (actual ${axeVersion}); retain the original dependency graph until its proof`);

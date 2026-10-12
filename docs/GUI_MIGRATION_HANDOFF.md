@@ -25,7 +25,9 @@ Publish only `fix/gui-cat-prerequisites-linux` to origin. Shared main stays clea
   UUID/primary CID and runs committed `scripts/gui-owner-lifecycle.py`; legacy uses the verified image,
   isolated loopback8081, exact UID10001, no ports/mounts/credentials. The wrapper remains result authority;
   `.gate/full/supervisor.json` records exit codes and independently verified owned-resource cleanup.
-  Next: missing baseline deps setup, then one full → M1 close; KIT_BUMP relay and device checkpoint (Paul).
+  Missing quality libraries are installed by `scripts/gui-baseline-deps.mjs` with locked `npm ci` only
+  in the managed runner; exact versions and baselines remain checked. No hook/trust input changes.
+  Next: one full → M1 close; KIT_BUMP relay and device checkpoint (Paul).
 
 ## History 2026-10-11 (independent review, Codex stopped)
 
