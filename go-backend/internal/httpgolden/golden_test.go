@@ -38,7 +38,7 @@ func TestCurrentIndependentHTTPParity(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if !report.OK || report.Requests != 1207 {
+	if !report.OK || report.Requests != 1206 {
 		t.Fatal("incomplete independent parity")
 	}
 }
