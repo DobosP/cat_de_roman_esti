@@ -1140,3 +1140,48 @@ Unchanged: M2 acceptance and S0b dispatch need genuinely green unit/full includi
 device checkpoint); the physical device checkpoint remains UNMET.
 See roedu-ui ADR-0020 (`docs/adr/0020-owner-device-gate-kit-evidence-loop-autonomy.md`).
 
+## Native erratum E7 — owner decisions 2026-10-12: UI activation transaction, device-budget defaults, auditor re-audit
+
+Provenance: Paul's owner brief to Claude Code on 2026-10-12, confirmed by Paul in chat (no signature
+implied). E3–E6 otherwise stay in force; on the points below E7 wins.
+
+UI activation transaction (Cat UI1 only; amends §9-8 item 8 steps 2–5 for this activation). Keep the
+separate kit-only staging commit (`GATE-CHANGE: kit stage core-v1.N`, `kit/` only). Activation is the
+removal of the optional `ui_adoption` member from `Taskfile.repo.yml` `repo:kit-config`; an explicit
+`mode:"active"` object is rejected. Protected `kit:sync --sha <actual full input SHA>` moves the
+`@roedu/ui` pointer and generates locks; nobody hand-edits lockfiles, vendored tarballs or the lock
+merge. Because React source cannot pass a unit against UI1, the sync outputs are committed in one
+reviewed activation-plus-port integration (subject `GATE-CHANGE: activate UI1 with the M2 port`),
+whose permitted receipt paths are: every path the sync writes (`frontend/vendor/*.tgz[.sha256]`,
+the `@roedu/*` pointers in `frontend/package.json`, generated `frontend/package-lock.json`,
+`go-backend/go.mod`/`go.sum`, `go-backend/third_party/webkit/**`, kit-owned gate templates,
+`versions.lock.json`, the two `TOOLCHAIN_*` lines of `.gate.env`); `Taskfile.repo.yml` (phase change
+only); `frontend/src/**`, `frontend/tests/**`, `frontend/e2e/**`, Playwright configs; Preact 11 and
+preset dependency changes produced through `deps`; Cat GUI delivery sources and tests under
+`go-backend/`; `scripts/gui-*.mjs` hook changes; `lint/scope.json` expiry removals; and docs. Every
+kit-managed path keeps exact canonical-byte verification (`kit:check`) and every source/runtime check
+stays. Dirty or intermediate sync/build results are preparation only. The clean exact final SHA gets
+`trust` (if the trust set changed) and `unit`; React/import/compile failures are never E5
+expected-red; only after that qualifying unit is the successor KIT_BUMP sent. This changes sequencing
+and commit grouping, not safety, budgets or failure classification.
+
+Device-budget defaults (rules the §4.7 vs E3 conflict). `budgets.json` keeps 40,960 bytes / 30,720
+target and every other limit. Paul's device receipt commit (`GATE-CHANGE: budgets from device
+checkpoint <date>`) records the real per-route LCP/INP in `docs/STATUS.md` and `WORKLOG.md`; it changes
+`budgets.json` only when the real measurements justify a different default. When they justify the
+current values, the receipt says so and touches only those docs (a subset of the S1.md (b) path rule);
+no byte change is manufactured.
+
+ADR-0189 `quick.go` re-audit. The reviewed catalogue hoist is not applied; `quick.go` bytes equal the
+installed-authority digest, so it is not part of qualification and no re-audit or re-sign is needed.
+The item closes; content-lane auditor files stay untouched.
+
+core-v1.6 KIT_BUMP acknowledged: `KIT_BUMP: core-v1.6 applied sha=89db19d; delete the shims for REQ-6,
+then gate unit.` E6 Q9 evidence: trusted unit 6b10d47f0bb94b625bc220680435d49575e5ac7a, result SHA256
+54dd644116d356040e1f87bf1be815182c01fca10e2fabf0df0ee1de12cced0b (budget-only red). Receipt check
+pre-cleared for `docs/GUI_MIGRATION_HANDOFF.md`, `docs/STATUS.md`,
+`docs/reviews/gui-normalized-react/core16-owner-sync-result.json` and
+`docs/reviews/gui-normalized-react/core16-owner-sync-review.json`. REQ-6 has no shim, so no unit rerun.
+REQ-7's corrective core-v1.7 (UI 1.0.7 / web-kit 0.1.7, Presence `variant`, ADR-0021 on `main`) is the
+successor kit for the activation. See roedu-ui ADR-0022 (`docs/adr/0022-owner-activation-transaction-device-budgets.md`).
+

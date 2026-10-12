@@ -163,6 +163,7 @@ The current source index had no font preloads and managed_nonce ignored rel=prel
 
 2026-10-09 08:04 UTC — implement the current handover's early real-browser refusal under the existing full target, preserving the original900 and current E3/owner bounds. No new budget, framework, gate target, kit adoption or qualification decision is made. Source acceptance cannot prove browser/native-lock/physical image truth; independent closed-byte review and later admitted Linux execution remain required.
 2026-10-09 12:38 UTC — proposed [ADR-0187](../adr/0187-m1-font-preload-binding.md) implements only missing M1 four-font preload source. No fonts, CSS, weights/display, dependencies, locks, SDK, browser inventory, budgets, framework or score behavior change; no adoption/qualification authority.
+- 2026-10-12 — KIT_BUMP core-v1.6 acknowledged by the owner brief (roedu-ui E7/ADR-0022): `KIT_BUMP: core-v1.6 applied sha=89db19d; delete the shims for REQ-6, then gate unit.`; evidence trusted unit 6b10d47 (result sha256 54dd6441…, budget-only red, E6 Q9); receipt pre-cleared for `docs/GUI_MIGRATION_HANDOFF.md`, `docs/STATUS.md`, `core16-owner-sync-result.json`, `core16-owner-sync-review.json`; REQ-6 has no shim, so no unit rerun. Lock line: `core_tag` core-v1.5 → core-v1.6 (89db19d). Successor kit for UI1 activation: core-v1.7 (REQ-7), activation transaction per E7.
 
 ## 5. Outcomes & Retrospective
 
