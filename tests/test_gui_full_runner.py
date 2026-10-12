@@ -1,9 +1,12 @@
 """Supervisor refuses foreign cleanup and retains the real ownership boundary."""
 import importlib.util
 from pathlib import Path
+import sys
 import unittest
 from unittest.mock import patch
 
+# Wrapper source preflight admits no Python cache directories in the worktree.
+sys.dont_write_bytecode = True
 spec = importlib.util.spec_from_file_location(
     'gui_full_runner', Path(__file__).absolute().parents[1] / 'scripts/gui-full-runner.py')
 runner = importlib.util.module_from_spec(spec)
