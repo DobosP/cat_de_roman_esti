@@ -40,8 +40,8 @@
   "records": [
     {
       "id": "v112-scrisoare",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Scrisoare",
       "label_ro": "Scrisoare",
@@ -155,16 +155,124 @@
         }
       ],
       "historical_hold_preserved": true,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and full planned noncolliding paradigm have two-source support; all four predeclared targets are source-qualified, pending independent review.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/scrisoare/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "840365"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/scrisoare/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1273567"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Scrisoare",
+          "paraphrase": "Prezintă comunicarea prin scrisori și exemplul unei scrisori trimise într-un plic.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        },
+        {
+          "url": "https://www.manual.digital/Manuale/romana536-tts.htm",
+          "paraphrase": "Exercițiul școlar cere alcătuirea unei scrisori către un prieten pe o foaie de hârtie.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        },
+        {
+          "url": "https://www.posta-romana.ro/ajutor.html",
+          "paraphrase": "Poșta Română prezintă expedierea scrisorilor și folosirea timbrelor pentru corespondență.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v1_11_hartie",
+          "label": "Hârtie",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Mesajul fizic este scris pe hârtie.",
+          "verdict": "source_qualified",
+          "verified_claim": "O scrisoare tradițională se poate scrie pe o foaie de hârtie.",
+          "evidence_url": "https://www.manual.digital/Manuale/romana536-tts.htm",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v17soc_posta_romana",
+          "label": "Poșta Română",
+          "category": "societate",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Scrisoarea fizică poate fi transportată de operatorul poștal.",
+          "verdict": "source_qualified",
+          "verified_claim": "Scrisorile fizice pot fi expediate prin Poșta Română.",
+          "evidence_url": "https://www.posta-romana.ro/ajutor.html",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v1_12_plic",
+          "label": "Plic",
+          "category": "viata_de_roman",
+          "status": "batch hypothesis; not accepted",
+          "claim_to_verify": "O scrisoare fizică poate fi introdusă într-un plic.",
+          "verdict": "source_qualified",
+          "verified_claim": "O scrisoare fizică poate fi trimisă într-un plic.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Scrisoare",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v1_12_timbru",
+          "label": "Timbru",
+          "category": "viata_de_roman",
+          "status": "batch hypothesis; not accepted",
+          "claim_to_verify": "O scrisoare poștală poate purta un timbru poștal.",
+          "verdict": "source_qualified",
+          "verified_claim": "O scrisoare poștală poate fi francată cu timbru.",
+          "evidence_url": "https://www.posta-romana.ro/ajutor.html",
+          "relation_hypothesis": "related_to"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "research_plan": "Four distinct predeclared targets recorded before web calls; each claim still needs source evidence. Do not replace a failed claim just to fill the floor.",
+      "sense": "Mesaj adresat cuiva în scris; aici, corespondență tradițională pe hârtie, care poate fi trimisă prin poștă.",
+      "sense_homograph": null,
+      "dexonline_receipt": {
+        "sha256": "587c495957c774818ad750700a5556e0324d468ae3b0dd74642310be4b1d8de6",
+        "exact_lemma": "scrisoare",
+        "sense_definition_id": "840365",
+        "doom3_definition_id": "1273567",
+        "homograph": null
+      },
+      "proposed_forms": [
+        "scrisoare",
+        "scrisoarea",
+        "scrisori",
+        "scrisorile",
+        "scrisorii",
+        "scrisorilor"
+      ],
+      "morphology_note": "DOOM3 explicit forms plus the regular articulated/genitive noun paradigm; fold-equivalent spellings are represented once. No new unscreened key was added.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 1667,
+        "best_form": "scrisoare",
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded research pass; unresolved predeclared claims are held instead of extending searches or inventing endpoints."
     },
     {
       "id": "v112-plic",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Plic",
       "label_ro": "Plic",
@@ -296,16 +404,124 @@
         }
       ],
       "historical_hold_preserved": true,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and full planned noncolliding paradigm have two-source support; all four predeclared targets are source-qualified, pending independent review.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/plic/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "873138"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/plic/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1283167"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Plic",
+          "paraphrase": "Coroborează învelișul din hârtie și folosirea lui pentru scrisori și distribuirea corespondenței.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        },
+        {
+          "url": "https://www.posta-romana.ro/cnpr-data/_editor/files/csr17.pdf",
+          "paraphrase": "Raportul Poștei Române prezintă plicuri de corespondență și plicuri cu timbru preplătit, fără a fundamenta reguli sau tarife curente.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Timbru_po%C8%99tal",
+          "paraphrase": "Descrie aplicarea timbrului poștal pe plic.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v1_11_hartie",
+          "label": "Hârtie",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Plicul pentru corespondență este un înveliș de hârtie.",
+          "verdict": "source_qualified",
+          "verified_claim": "Plicul obișnuit pentru corespondență este făcut din hârtie.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Plic",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v17soc_posta_romana",
+          "label": "Poșta Română",
+          "category": "societate",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Operatorul poștal transportă corespondență în plicuri.",
+          "verdict": "source_qualified",
+          "verified_claim": "Plicurile pentru corespondență fac parte din activitatea documentată a Poștei Române.",
+          "evidence_url": "https://www.posta-romana.ro/cnpr-data/_editor/files/csr17.pdf",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v1_12_scrisoare",
+          "label": "Scrisoare",
+          "category": "viata_de_roman",
+          "status": "batch hypothesis; not accepted",
+          "claim_to_verify": "Plicul poate conține o scrisoare fizică.",
+          "verdict": "source_qualified",
+          "verified_claim": "Plicul poate conține o scrisoare.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Plic",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v1_12_timbru",
+          "label": "Timbru",
+          "category": "viata_de_roman",
+          "status": "batch hypothesis; not accepted",
+          "claim_to_verify": "Pe plic se poate aplica un timbru poștal.",
+          "verdict": "source_qualified",
+          "verified_claim": "Pe plic se poate lipi un timbru poștal.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Timbru_po%C8%99tal",
+          "relation_hypothesis": "related_to"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "research_plan": "Four distinct predeclared targets recorded before web calls; each claim still needs source evidence. Do not replace a failed claim just to fill the floor.",
+      "sense": "Înveliș pliat pentru a păstra ori expedia corespondență; aici, plicul obișnuit de hârtie.",
+      "sense_homograph": null,
+      "dexonline_receipt": {
+        "sha256": "165c305444502c213f4926ca33a3fef121dc93bb20067f6ce1343706027d8c9b",
+        "exact_lemma": "plic",
+        "sense_definition_id": "873138",
+        "doom3_definition_id": "1283167",
+        "homograph": null
+      },
+      "proposed_forms": [
+        "plic",
+        "plicul",
+        "plicuri",
+        "plicurile",
+        "plicului",
+        "plicurilor"
+      ],
+      "morphology_note": "DOOM3 explicit forms plus the regular articulated/genitive noun paradigm; fold-equivalent spellings are represented once. No new unscreened key was added.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 8752,
+        "best_form": "plic",
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded research pass; unresolved predeclared claims are held instead of extending searches or inventing endpoints."
     },
     {
       "id": "v112-timbru",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Timbru",
       "label_ro": "Timbru",
@@ -419,16 +635,124 @@
         }
       ],
       "historical_hold_preserved": true,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and full planned noncolliding paradigm have two-source support; all four predeclared targets are source-qualified, pending independent review.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/timbru/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "833336"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/timbru/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1268791"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Timbru_po%C8%99tal",
+          "paraphrase": "Coroborează imprimatul poștal și aplicarea lui pe plicuri pentru francarea corespondenței.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        },
+        {
+          "url": "https://www.posta-romana.ro/cnpr-data/_editor/files/csr17.pdf",
+          "paraphrase": "Poșta Română documentează timbre tipărite pe hârtie și plicuri de corespondență cu timbru.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        },
+        {
+          "url": "https://www.posta-romana.ro/ajutor.html",
+          "paraphrase": "Descrie scrisorile francate prin aplicarea de timbre poștale.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v1_11_hartie",
+          "label": "Hârtie",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Timbrul poștal fizic este o mică imprimare pe hârtie.",
+          "verdict": "source_qualified",
+          "verified_claim": "Timbrul poștal fizic poate fi tipărit pe hârtie.",
+          "evidence_url": "https://www.posta-romana.ro/cnpr-data/_editor/files/csr17.pdf",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v17soc_posta_romana",
+          "label": "Poșta Română",
+          "category": "societate",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Operatorul poștal utilizează timbre poștale pentru corespondență.",
+          "verdict": "source_qualified",
+          "verified_claim": "Poșta Română documentează tipărirea și utilizarea timbrelor poștale.",
+          "evidence_url": "https://www.posta-romana.ro/cnpr-data/_editor/files/csr17.pdf",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v1_12_scrisoare",
+          "label": "Scrisoare",
+          "category": "viata_de_roman",
+          "status": "batch hypothesis; not accepted",
+          "claim_to_verify": "Timbrul poștal se poate folosi la expedierea unei scrisori.",
+          "verdict": "source_qualified",
+          "verified_claim": "Timbrul poștal se poate folosi la expedierea unei scrisori.",
+          "evidence_url": "https://www.posta-romana.ro/ajutor.html",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v1_12_plic",
+          "label": "Plic",
+          "category": "viata_de_roman",
+          "status": "batch hypothesis; not accepted",
+          "claim_to_verify": "Timbrul poștal poate fi aplicat pe plic.",
+          "verdict": "source_qualified",
+          "verified_claim": "Un timbru poștal poate fi aplicat pe plic.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Timbru_po%C8%99tal",
+          "relation_hypothesis": "related_to"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "research_plan": "Four distinct predeclared targets recorded before web calls; each claim still needs source evidence. Do not replace a failed claim just to fill the floor.",
+      "sense": "Mic imprimat poștal aplicat pe corespondență; aici, timbrul poștal fizic, nu proprietatea vocii.",
+      "sense_homograph": "DOOM3 timbru1 (imprimat/marcă); exclude timbru2 and timbruri",
+      "dexonline_receipt": {
+        "sha256": "23f91f3352a6710c5f5c2a91ef2e58a9febae706f8fd57a6a1c549c8fe250d8b",
+        "exact_lemma": "timbru",
+        "sense_definition_id": "833336",
+        "doom3_definition_id": "1268791",
+        "homograph": "DOOM3 timbru1 (imprimat/marcă); exclude timbru2 and timbruri"
+      },
+      "proposed_forms": [
+        "timbru",
+        "timbrul",
+        "timbre",
+        "timbrele",
+        "timbrului",
+        "timbrelor"
+      ],
+      "morphology_note": "DOOM3 explicit forms plus the regular articulated/genitive noun paradigm; fold-equivalent spellings are represented once. No new unscreened key was added.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 20028,
+        "best_form": "timbre",
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded research pass; unresolved predeclared claims are held instead of extending searches or inventing endpoints."
     },
     {
       "id": "v112-cazma",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "held",
       "kind": "new_shared_concept",
       "lemma": "Cazma",
       "label_ro": "Cazma",
@@ -522,16 +846,103 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
+      "decision": "held: Sensul, DOOM3 și sursa secundară sunt confirmate, dar legătura predeclarată de încărcare a roabei nu a fost calificată, iar tăierea rădăcinilor găsită se referă la o variantă specială cu dinți. Nu sunt patru legături distincte calificate; nu se umple pragul cu simplă coocurență.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/cazma/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "842647"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/cazma/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1310229"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/cazma",
+          "paraphrase": "Coroborează unealta de săpat, asemănătoare cu lopata, și paradigma nominală.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v32_garden_soil_lopata",
+          "label": "Lopată",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Cazmaua este descrisă ca un tip de lopată pentru săpat.",
+          "verdict": "source_qualified",
+          "verified_claim": "Cazmaua este asemănătoare cu lopata; nu se afirmă că este o subclasă universală a acesteia.",
+          "evidence_url": "https://dexonline.ro/definitie/cazma/json",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v24_home_outdoor_gradina",
+          "label": "Grădină",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Cazmaua este folosită la săparea grădinii.",
+          "verdict": "held: claim not fully qualified"
+        },
+        {
+          "node_id": "n_v24_nature_plant_parts_radacina",
+          "label": "Rădăcină",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Cazmaua poate fi folosită la lucrări care scot/dezgroapă rădăcini.",
+          "verdict": "held: claim not fully qualified"
+        },
+        {
+          "node_id": "n_v32_garden_transport_roaba",
+          "label": "Roabă",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Cazmaua poate încărca pământul săpat într-o roabă.",
+          "verdict": "held: claim not fully qualified"
+        }
+      ],
       "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "next_action": "Retain the recorded hold; do not invent a fourth link or substitute an unplanned endpoint.",
+      "research_plan": "Four distinct predeclared targets recorded before web calls; each claim still needs source evidence. Do not replace a failed claim just to fill the floor.",
+      "sense": "Unealtă cu lamă metalică și coadă, folosită la săpat; numai sensul comun de unealtă.",
+      "sense_homograph": null,
+      "dexonline_receipt": {
+        "sha256": "06d6cfdfbae3f77de20c1466cebc85643dad6061056759631e969a9698d47d07",
+        "exact_lemma": "cazma",
+        "sense_definition_id": "842647",
+        "doom3_definition_id": "1310229",
+        "homograph": null
+      },
+      "proposed_forms": [
+        "cazma",
+        "cazmaua",
+        "cazmale",
+        "cazmalele",
+        "cazmalei",
+        "cazmalelor"
+      ],
+      "morphology_note": "DOOM3 explicit forms plus the regular articulated/genitive noun paradigm; fold-equivalent spellings are represented once. No new unscreened key was added.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": null,
+        "best_form": null,
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded research pass; unresolved predeclared claims are held instead of extending searches or inventing endpoints."
     },
     {
       "id": "v112-sapa",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Sapă",
       "label_ro": "Sapă",
@@ -613,16 +1024,117 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and full planned noncolliding paradigm have two-source support; all four predeclared targets are source-qualified, pending independent review.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/sap%C4%83/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "838801"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/sap%C4%83/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1272485"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/sap%C4%83",
+          "paraphrase": "Coroborează substantivul pentru unealta agricolă și paradigma feminină.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        },
+        {
+          "url": "https://www.leroymerlin.ro/produse/gradina-si-amenajare/unelte-de-gradinarit/sape-gradina/",
+          "paraphrase": "Descrie lucrarea grădinii, rolul sapei alături de greblă și lopată și tăierea buruienilor la rădăcină cu o sapă de plivit.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v32_garden_soil_grebla",
+          "label": "Greblă",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Sapa și grebla au roluri complementare explicite la pregătirea straturilor.",
+          "verdict": "source_qualified",
+          "verified_claim": "Sapa și grebla au roluri complementare la pregătirea și întreținerea grădinii.",
+          "evidence_url": "https://www.leroymerlin.ro/produse/gradina-si-amenajare/unelte-de-gradinarit/sape-gradina/",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v24_home_outdoor_gradina",
+          "label": "Grădină",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Sapa se folosește la lucratul grădinii.",
+          "verdict": "source_qualified",
+          "verified_claim": "Sapa se folosește pentru lucrul grădinii.",
+          "evidence_url": "https://www.leroymerlin.ro/produse/gradina-si-amenajare/unelte-de-gradinarit/sape-gradina/",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v24_nature_plant_parts_radacina",
+          "label": "Rădăcină",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "La prășit se pot scoate rădăcinile buruienilor cu sapa.",
+          "verdict": "source_qualified",
+          "verified_claim": "O sapă de plivit poate tăia buruienile la rădăcină.",
+          "evidence_url": "https://www.leroymerlin.ro/produse/gradina-si-amenajare/unelte-de-gradinarit/sape-gradina/",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v32_garden_soil_lopata",
+          "label": "Lopată",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Sapa și lopata au roluri complementare explicite la lucrările de grădinărit.",
+          "verdict": "source_qualified",
+          "verified_claim": "Sapa și lopata sunt folosite pentru lucrări complementare în grădină.",
+          "evidence_url": "https://www.leroymerlin.ro/produse/gradina-si-amenajare/unelte-de-gradinarit/sape-gradina/",
+          "relation_hypothesis": "related_to"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "research_plan": "Four distinct predeclared targets recorded before web calls; each claim still needs source evidence. Do not replace a failed claim just to fill the floor.",
+      "sense": "Unealtă manuală cu lamă și coadă pentru lucrul solului și îndepărtarea buruienilor; nu forma verbală, forajul sau crupa animalului.",
+      "sense_homograph": "DEX sapă1 sens1; DOOM3 sapă2 unealtă; exclude săpa verb and other noun senses",
+      "dexonline_receipt": {
+        "sha256": "3c2ce737f8450c90bf3988040e2cfc0285e4c8dd926662ddbf3c7b6464357981",
+        "exact_lemma": "sapă",
+        "sense_definition_id": "838801",
+        "doom3_definition_id": "1272485",
+        "homograph": "DEX sapă1 sens1; DOOM3 sapă2 unealtă; exclude săpa verb and other noun senses"
+      },
+      "proposed_forms": [
+        "sapă",
+        "sape",
+        "sapele",
+        "sapei",
+        "sapelor"
+      ],
+      "morphology_note": "DOOM3 explicit forms plus the regular articulated/genitive noun paradigm; fold-equivalent spellings are represented once. No new unscreened key was added.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 10924,
+        "best_form": "sapă",
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded research pass; unresolved predeclared claims are held instead of extending searches or inventing endpoints."
     },
     {
       "id": "v112-furtun",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "held",
       "kind": "new_shared_concept",
       "lemma": "Furtun",
       "label_ro": "Furtun",
@@ -716,16 +1228,121 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
+      "decision": "held: Sensul, DOOM3 și sursa secundară sunt confirmate, dar Stropitoare este recipientul manual cu mâner/cioc, nu aspersorul numit uneori stropitoare în paginile de produse. Comparația găsită într-un PDF educativ are afirmații factuale nesigure în context și nu fundamentează a patra legătură. Nu se substituie sensul deținut și nu se inventează un target.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/furtun/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "875169"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/furtun/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1302957"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/furtun",
+          "paraphrase": "Coroborează tubul flexibil și paradigma neutră.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        },
+        {
+          "url": "https://vonroc.ro/sistem-de-irigare-3-moduri-de-stropire-picurare-pulverizare-si-ceata-inclus-furtun-de-15-m",
+          "paraphrase": "Producătorul descrie furtunul de irigare racordat la robinet și alimentat cu apă în grădină.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v33_bathroom_fixture_robinet",
+          "label": "Robinet",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Furtunul de apă se poate racorda la un robinet.",
+          "verdict": "source_qualified",
+          "verified_claim": "Un furtun de apă poate fi racordat la un robinet de grădină.",
+          "evidence_url": "https://vonroc.ro/sistem-de-irigare-3-moduri-de-stropire-picurare-pulverizare-si-ceata-inclus-furtun-de-15-m",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v32_garden_water_stropitoare",
+          "label": "Stropitoare",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Furtunul și stropitoarea sunt mijloace distincte de udare a plantelor.",
+          "verdict": "held: claim not fully qualified"
+        },
+        {
+          "node_id": "n_v4gas_apa",
+          "label": "Apă",
+          "category": "gastronomie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Furtunul din acest sens transportă apă.",
+          "verdict": "source_qualified",
+          "verified_claim": "Furtunul de irigare transportă apă.",
+          "evidence_url": "https://vonroc.ro/sistem-de-irigare-3-moduri-de-stropire-picurare-pulverizare-si-ceata-inclus-furtun-de-15-m",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v24_home_outdoor_gradina",
+          "label": "Grădină",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Furtunul poate fi folosit pentru udarea grădinii.",
+          "verdict": "source_qualified",
+          "verified_claim": "Furtunul poate fi folosit la irigarea grădinii.",
+          "evidence_url": "https://vonroc.ro/sistem-de-irigare-3-moduri-de-stropire-picurare-pulverizare-si-ceata-inclus-furtun-de-15-m",
+          "relation_hypothesis": "related_to"
+        }
+      ],
       "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "next_action": "Retain the recorded hold; do not invent a fourth link or substitute an unplanned endpoint.",
+      "research_plan": "Four distinct predeclared targets recorded before web calls; each claim still needs source evidence. Do not replace a failed claim just to fill the floor.",
+      "sense": "Tub flexibil pentru transportul fluidelor; aici, furtunul de apă folosit la udare.",
+      "sense_homograph": null,
+      "dexonline_receipt": {
+        "sha256": "577f467290be39b2acd75553f692e474c2f5744eb8ea473820bee89b15dc1708",
+        "exact_lemma": "furtun",
+        "sense_definition_id": "875169",
+        "doom3_definition_id": "1302957",
+        "homograph": null
+      },
+      "proposed_forms": [
+        "furtun",
+        "furtunul",
+        "furtunuri",
+        "furtunurile",
+        "furtunului",
+        "furtunurilor"
+      ],
+      "morphology_note": "DOOM3 explicit forms plus the regular articulated/genitive noun paradigm; fold-equivalent spellings are represented once. No new unscreened key was added.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 16948,
+        "best_form": "furtunul",
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded research pass; unresolved predeclared claims are held instead of extending searches or inventing endpoints.",
+      "discarded_sources": [
+        {
+          "url": "https://detectiviiapeipierdute.ro/wp-content/uploads/2018/11/Detectivii-apei-pierdute-2018-7-web-compressed.pdf",
+          "reason": "Contains a plainly unsafe global-water-reserve claim near the watering comparison; not used to qualify the watering-can link."
+        }
+      ]
     },
     {
       "id": "v112-samanta",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Sămânță",
       "label_ro": "Sămânță",
@@ -818,16 +1435,117 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and full planned noncolliding paradigm have two-source support; all four predeclared targets are source-qualified, pending independent review.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/s%C4%83m%C3%A2n%C8%9B%C4%83/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "839061"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/s%C4%83m%C3%A2n%C8%9B%C4%83/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1272808"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/S%C4%83m%C3%A2n%C8%9B%C4%83",
+          "paraphrase": "Coroborează embrionul, dezvoltarea plantei și sensul botanic al seminței.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        },
+        {
+          "url": "https://scgimpngtitu.ro/pdf/manuale-2025-2026/7%20BIOLOGIE.pdf",
+          "paraphrase": "Lucrarea practică folosește boabe de grâu și porumb, explicate ca sămânță cu fruct, și urmărește formarea rădăcinilor și a plantulelor.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_planta",
+          "label": "plantă",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Din semințe pot crește plante.",
+          "verdict": "source_qualified",
+          "verified_claim": "Din sămânță se poate dezvolta o plantă nouă.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/S%C4%83m%C3%A2n%C8%9B%C4%83",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v24_nature_plant_parts_radacina",
+          "label": "Rădăcină",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "La germinarea seminței se dezvoltă rădăcina.",
+          "verdict": "source_qualified",
+          "verified_claim": "În germinarea seminței apare rădăcina plantulei.",
+          "evidence_url": "https://scgimpngtitu.ro/pdf/manuale-2025-2026/7%20BIOLOGIE.pdf",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v84_food_grau",
+          "label": "Grâu",
+          "category": "gastronomie",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Grâul se seamănă folosind semințe/boabe.",
+          "verdict": "source_qualified",
+          "verified_claim": "Bobul de grâu conține sămânța, folosită la încolțire și semănat.",
+          "evidence_url": "https://scgimpngtitu.ro/pdf/manuale-2025-2026/7%20BIOLOGIE.pdf",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v2lim_porumb",
+          "label": "Porumb",
+          "category": "limba",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Porumbul se seamănă folosind semințe/boabe.",
+          "verdict": "source_qualified",
+          "verified_claim": "Bobul de porumb conține sămânța, folosită la încolțire și semănat.",
+          "evidence_url": "https://scgimpngtitu.ro/pdf/manuale-2025-2026/7%20BIOLOGIE.pdf",
+          "relation_hypothesis": "related_to"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "research_plan": "Four distinct predeclared targets recorded before web calls; each claim still needs source evidence. Do not replace a failed claim just to fill the floor.",
+      "sense": "Structură vegetală care păstrează embrionul și poate da naștere unei plante noi; numai sensul botanic.",
+      "sense_homograph": null,
+      "dexonline_receipt": {
+        "sha256": "596e1165655b7ef3080c3eeac6acd370d4b657d53c087249d821ee831b380b88",
+        "exact_lemma": "sămânță",
+        "sense_definition_id": "839061",
+        "doom3_definition_id": "1272808",
+        "homograph": null
+      },
+      "proposed_forms": [
+        "sămânță",
+        "semințe",
+        "semințele",
+        "seminței",
+        "semințelor"
+      ],
+      "morphology_note": "DOOM3 explicit forms plus the regular articulated/genitive noun paradigm; fold-equivalent spellings are represented once. No new unscreened key was added.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 12200,
+        "best_form": "semințe",
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded research pass; unresolved predeclared claims are held instead of extending searches or inventing endpoints."
     },
     {
       "id": "v112-rasad",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Răsad",
       "label_ro": "Răsad",
@@ -932,16 +1650,124 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and full planned noncolliding paradigm have two-source support; all four predeclared targets are source-qualified, pending independent review.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/r%C4%83sad/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "852663"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/r%C4%83sad/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1275478"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/r%C4%83sad",
+          "paraphrase": "Coroborează planta tânără destinată transplantării și formele neutre.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        },
+        {
+          "url": "https://www.botanistii.ro/blog/varza-cum-sa-plantezi-si-sa-ingrijesti-aceasta-leguma/",
+          "paraphrase": "Descrie înființarea culturii de varză prin răsaduri și protejarea rădăcinilor la transplantare.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        },
+        {
+          "url": "https://www.leroymerlin.ro/produse/gradina-si-amenajare/unelte-de-gradinarit/unelte-plantat/",
+          "paraphrase": "Descrie plantarea răsadurilor în grădină și evitarea deteriorării rădăcinilor.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_planta",
+          "label": "plantă",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Răsadul este o plantă tânără pentru transplantare.",
+          "verdict": "source_qualified",
+          "verified_claim": "Răsadul este o plantă tânără.",
+          "evidence_url": "https://dexonline.ro/definitie/r%C4%83sad/json",
+          "relation_hypothesis": "is_a"
+        },
+        {
+          "node_id": "n_v24_nature_plant_parts_radacina",
+          "label": "Rădăcină",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Răsadurile au rădăcini care trebuie păstrate la transplantare.",
+          "verdict": "source_qualified",
+          "verified_claim": "Rădăcinile răsadului trebuie protejate la transplantare.",
+          "evidence_url": "https://www.botanistii.ro/blog/varza-cum-sa-plantezi-si-sa-ingrijesti-aceasta-leguma/",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v24_home_outdoor_gradina",
+          "label": "Grădină",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Răsadurile se pot transplanta în grădină.",
+          "verdict": "source_qualified",
+          "verified_claim": "Răsadurile pot fi plantate în grădini de legume și flori.",
+          "evidence_url": "https://www.leroymerlin.ro/produse/gradina-si-amenajare/unelte-de-gradinarit/unelte-plantat/",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v2lim_varza",
+          "label": "Varză",
+          "category": "limba",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Varza se poate cultiva pornind de la răsaduri.",
+          "verdict": "source_qualified",
+          "verified_claim": "Cultura de varză se poate înființa prin răsaduri.",
+          "evidence_url": "https://www.botanistii.ro/blog/varza-cum-sa-plantezi-si-sa-ingrijesti-aceasta-leguma/",
+          "relation_hypothesis": "related_to"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "research_plan": "Four distinct predeclared targets recorded before web calls; each claim still needs source evidence. Do not replace a failed claim just to fill the floor.",
+      "sense": "Plantă tânără crescută pentru a fi mutată la locul de cultură; fără sensurile figurate de neam ori seminție.",
+      "sense_homograph": null,
+      "dexonline_receipt": {
+        "sha256": "a517750507877590d293ff14224111408e6c710e7256a3c5581b1f8ab4f7f5cd",
+        "exact_lemma": "răsad",
+        "sense_definition_id": "852663",
+        "doom3_definition_id": "1275478",
+        "homograph": null
+      },
+      "proposed_forms": [
+        "răsad",
+        "răsadul",
+        "răsaduri",
+        "răsadurile",
+        "răsadului",
+        "răsadurilor"
+      ],
+      "morphology_note": "DOOM3 explicit forms plus the regular articulated/genitive noun paradigm; fold-equivalent spellings are represented once. No new unscreened key was added.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": null,
+        "best_form": null,
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded research pass; unresolved predeclared claims are held instead of extending searches or inventing endpoints."
     },
     {
       "id": "v112-tulpina",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Tulpină",
       "label_ro": "Tulpină",
@@ -1034,16 +1860,111 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and full planned noncolliding paradigm have two-source support; all four predeclared targets are source-qualified, pending independent review.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/tulpin%C4%83/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "836350"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/tulpin%C4%83/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1270556"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Tulpin%C4%83",
+          "paraphrase": "Explică organul vegetal, susținerea frunzelor și circulația sevei între rădăcină și părțile aeriene; descrie și tulpinile lemnoase ale arborilor.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_planta",
+          "label": "plantă",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Tulpina este o parte a plantei.",
+          "verdict": "source_qualified",
+          "verified_claim": "Tulpina este un organ al plantei.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Tulpin%C4%83",
+          "relation_hypothesis": "part_of"
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "frunză",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Tulpina susține frunzele.",
+          "verdict": "source_qualified",
+          "verified_claim": "Tulpina susține frunzele plantei.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Tulpin%C4%83",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v24_nature_plant_parts_radacina",
+          "label": "Rădăcină",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Tulpina face legătura structurală/transportul între rădăcină și organele aeriene.",
+          "verdict": "source_qualified",
+          "verified_claim": "Tulpina conduce seva de la rădăcină spre frunze.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Tulpin%C4%83",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4sti_copac",
+          "label": "copac",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Trunchiul unui copac este o tulpină lemnoasă.",
+          "verdict": "source_qualified",
+          "verified_claim": "Trunchiul unui copac este o tulpină lemnoasă.",
+          "evidence_url": "https://dexonline.ro/definitie/tulpin%C4%83/json",
+          "relation_hypothesis": "related_to"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "research_plan": "Four distinct predeclared targets recorded before web calls; each claim still needs source evidence. Do not replace a failed claim just to fill the floor.",
+      "sense": "Organ vegetal care susține părțile aeriene și conduce seva; la un copac, partea lemnoasă principală este trunchiul.",
+      "sense_homograph": null,
+      "dexonline_receipt": {
+        "sha256": "052da78e14f78472feadf7a29901ed6a4961117afbf2fe41281fe75b716f9f4c",
+        "exact_lemma": "tulpină",
+        "sense_definition_id": "836350",
+        "doom3_definition_id": "1270556",
+        "homograph": null
+      },
+      "proposed_forms": [
+        "tulpină",
+        "tulpini",
+        "tulpinile",
+        "tulpinii",
+        "tulpinilor"
+      ],
+      "morphology_note": "DOOM3 explicit forms plus the regular articulated/genitive noun paradigm; fold-equivalent spellings are represented once. No new unscreened key was added.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 29056,
+        "best_form": "tulpină",
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded research pass; unresolved predeclared claims are held instead of extending searches or inventing endpoints."
     },
     {
       "id": "v112-mugur",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Mugur",
       "label_ro": "Mugur",
@@ -1148,16 +2069,119 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and full planned noncolliding paradigm have two-source support; all four predeclared targets are source-qualified, pending independent review.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/mugur/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "892477"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/mugur/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1294928"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Mugur",
+          "paraphrase": "Descrie mugurii cu frunze modificate, mugurii latenți ai copacilor din clima temperată și bobocii ca muguri florali.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        },
+        {
+          "url": "https://timisoara.rosilva.ro/articole/stejar_pedunculat__p_2959.htm",
+          "paraphrase": "Descrierea stejarului pedunculat documentează muguri pe lujerii unui copac familiar.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_planta",
+          "label": "plantă",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Mugurul este o structură de creștere a plantei.",
+          "verdict": "source_qualified",
+          "verified_claim": "Mugurul este o structură a plantei.",
+          "evidence_url": "https://dexonline.ro/definitie/mugur/json",
+          "relation_hypothesis": "part_of"
+        },
+        {
+          "node_id": "n_v4sti_copac",
+          "label": "copac",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Copacii pot avea muguri pe ramuri.",
+          "verdict": "source_qualified",
+          "verified_claim": "Copacii din zona temperată au muguri latenți.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Mugur",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4sti_frunza",
+          "label": "frunză",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Din muguri foliari se dezvoltă frunze.",
+          "verdict": "source_qualified",
+          "verified_claim": "Mugurul conține frunze foarte tinere, încă nedezvoltate.",
+          "evidence_url": "https://dexonline.ro/definitie/mugur/json",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v4sti_floare",
+          "label": "floare",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Din muguri floriferi se dezvoltă flori.",
+          "verdict": "source_qualified",
+          "verified_claim": "Bobocul de floare este un mugur floral.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Mugur",
+          "relation_hypothesis": "related_to"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "research_plan": "Four distinct predeclared targets recorded before web calls; each claim still needs source evidence. Do not replace a failed claim just to fill the floor.",
+      "sense": "Structură vegetală de creștere care cuprinde țesuturi și frunze foarte tinere; mugurii florali corespund bobocilor.",
+      "sense_homograph": null,
+      "dexonline_receipt": {
+        "sha256": "fb4ceb4e7cc2842ea8fc0ba65008e265d1415ea05a858a87058a5ec309517b52",
+        "exact_lemma": "mugur",
+        "sense_definition_id": "892477",
+        "doom3_definition_id": "1294928",
+        "homograph": null
+      },
+      "proposed_forms": [
+        "mugur",
+        "mugurul",
+        "muguri",
+        "mugurii",
+        "mugurului",
+        "mugurilor"
+      ],
+      "morphology_note": "DOOM3 explicit forms plus the regular articulated/genitive noun paradigm; fold-equivalent spellings are represented once. No new unscreened key was added.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 41632,
+        "best_form": "muguri",
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded research pass; unresolved predeclared claims are held instead of extending searches or inventing endpoints.",
+      "paradigm_scope": "Full regular mugur paradigm from DOOM3; the distinct DEX variant mugure is not selected as an additional lemma/alias in this batch."
     },
     {
       "id": "v112-scoarta",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Scoarță",
       "label_ro": "Scoarță",
@@ -1239,16 +2263,130 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and full planned noncolliding paradigm have two-source support; all four predeclared targets are source-qualified, pending independent review.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/scoar%C8%9B%C4%83/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "840145"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/scoar%C8%9B%C4%83/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1273418"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/scoar%C8%9B%C4%83",
+          "paraphrase": "Coroborează învelișul trunchiului/crengilor și paradigma feminină.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        },
+        {
+          "url": "https://timisoara.rosilva.ro/articole/stejar_pedunculat__p_2959.htm",
+          "paraphrase": "Romsilva descrie scoarța stejarului pedunculat.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Tulpin%C4%83",
+          "paraphrase": "Secțiunea tulpinii situează scoarța la exterior față de cilindrul cu țesut lemnos.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        },
+        {
+          "url": "https://dir.upsc.md/handle/123456789/4109/Educatie-ambientala-Suport-curs.pdf",
+          "paraphrase": "Activitatea pentru clasele primare folosește explicit pluralele scoarțe/scoarțele copacilor la observarea și amprentarea scoarței.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_copac",
+          "label": "copac",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Scoarța acoperă părțile lemnoase ale copacului.",
+          "verdict": "source_qualified",
+          "verified_claim": "Scoarța este învelișul exterior al părților lemnoase ale copacului.",
+          "evidence_url": "https://ro.wiktionary.org/wiki/scoar%C8%9B%C4%83",
+          "relation_hypothesis": "part_of"
+        },
+        {
+          "node_id": "n_v24_nature_plant_parts_ramura",
+          "label": "Ramură",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Ramurile lemnoase au scoarță.",
+          "verdict": "source_qualified",
+          "verified_claim": "Crengile/ramurile lemnoase sunt acoperite de scoarță.",
+          "evidence_url": "https://ro.wiktionary.org/wiki/scoar%C8%9B%C4%83",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v1_3_material_lemn",
+          "label": "Lemn",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Scoarța este înveliș exterior față de lemnul arborelui.",
+          "verdict": "source_qualified",
+          "verified_claim": "Scoarța se află la exterior față de țesutul lemnos al tulpinii.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Tulpin%C4%83",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v1_11_stejar",
+          "label": "Stejar",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Stejarul are scoarță caracteristică.",
+          "verdict": "source_qualified",
+          "verified_claim": "Romsilva descrie scoarța stejarului pedunculat.",
+          "evidence_url": "https://timisoara.rosilva.ro/articole/stejar_pedunculat__p_2959.htm",
+          "relation_hypothesis": "related_to"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "research_plan": "Four distinct predeclared targets recorded before web calls; each claim still needs source evidence. Do not replace a failed claim just to fill the floor.",
+      "sense": "Învelișul protector exterior al părților lemnoase ale unui copac; numai sensul vegetal, nu scoarța terestră, covorul sau coperta.",
+      "sense_homograph": null,
+      "dexonline_receipt": {
+        "sha256": "199174a76f0e8756399c9cbdc40929509df284ef537a3c3f61f9f7d044e400b1",
+        "exact_lemma": "scoarță",
+        "sense_definition_id": "840145",
+        "doom3_definition_id": "1273418",
+        "homograph": null
+      },
+      "proposed_forms": [
+        "scoarță",
+        "scoarțe",
+        "scoarțele",
+        "scoarței",
+        "scoarțelor"
+      ],
+      "morphology_note": "DOOM3 explicit forms plus the regular articulated/genitive noun paradigm; fold-equivalent spellings are represented once. No new unscreened key was added.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 34659,
+        "best_form": "scoarță",
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded research pass; unresolved predeclared claims are held instead of extending searches or inventing endpoints.",
+      "paradigm_scope": "Bark sense only. Full regular noncolliding forms retained: botanical plural use is independently attested in primary-school environmental-education activities, not inferred from carpet/book-cover senses."
     },
     {
       "id": "v112-trunchi",
-      "revision": 1,
-      "state": "idea",
+      "revision": 2,
+      "state": "researched",
       "kind": "new_shared_concept",
       "lemma": "Trunchi",
       "label_ro": "Trunchi",
@@ -1342,11 +2480,113 @@
       },
       "prior_records": [],
       "historical_hold_preserved": false,
-      "decision": "idea: Surface pre-screen passed; source/DOOM3 research and distinct truthful link qualification remain pending.",
-      "sources": [],
-      "link_targets": [],
-      "research_ready": false,
-      "next_action": "Name 4–8 meaningful distinct link targets before the first web call, including ≥2 existing main nodes, ≤2 batch nodes and ≥2 same-category nodes; then qualify sense/register/forms on dexonline JSON and a second source."
+      "decision": "researched: Exact sense/register and full planned noncolliding paradigm have two-source support; all four predeclared targets are source-qualified, pending independent review.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/trunchi/json",
+          "paraphrase": "Sensul comun exact și registrul au fost verificate; sensurile figurate, istorice și omografele nealese rămân excluse.",
+          "role": "sense",
+          "checked_on": "2026-10-12",
+          "authority": "DEX '09",
+          "definition_id": "836141"
+        },
+        {
+          "url": "https://dexonline.ro/definitie/trunchi/json",
+          "paraphrase": "Genul, pluralul și formele explicite din DOOM3 fundamentează paradigma regulată, limitată la sensul ales.",
+          "role": "forms",
+          "checked_on": "2026-10-12",
+          "authority": "DOOM 3",
+          "definition_id": "1270292"
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/trunchi",
+          "paraphrase": "Coroborează partea groasă a copacului dintre rădăcină și ramuri și paradigma neutră.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        },
+        {
+          "url": "https://ro.wikipedia.org/wiki/Tulpin%C4%83",
+          "paraphrase": "Explică tulpinile lemnoase și țesutul lemnos din corpul plantei.",
+          "role": "second_source",
+          "checked_on": "2026-10-12"
+        }
+      ],
+      "link_targets": [
+        {
+          "node_id": "n_v4sti_copac",
+          "label": "copac",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Trunchiul este partea principală lemnoasă a copacului.",
+          "verdict": "source_qualified",
+          "verified_claim": "Trunchiul este partea principală a copacului.",
+          "evidence_url": "https://ro.wiktionary.org/wiki/trunchi",
+          "relation_hypothesis": "part_of"
+        },
+        {
+          "node_id": "n_v24_nature_plant_parts_ramura",
+          "label": "Ramură",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Ramurile pornesc din trunchi.",
+          "verdict": "source_qualified",
+          "verified_claim": "Ramurile principale ale copacului pornesc din trunchi.",
+          "evidence_url": "https://ro.wiktionary.org/wiki/trunchi",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v24_nature_plant_parts_radacina",
+          "label": "Rădăcină",
+          "category": "stiinta",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Trunchiul se continuă cu sistemul de rădăcini.",
+          "verdict": "source_qualified",
+          "verified_claim": "Trunchiul se află deasupra rădăcinii și se continuă cu aceasta.",
+          "evidence_url": "https://ro.wiktionary.org/wiki/trunchi",
+          "relation_hypothesis": "related_to"
+        },
+        {
+          "node_id": "n_v1_3_material_lemn",
+          "label": "Lemn",
+          "category": "viata_de_roman",
+          "status": "exists on wave_base",
+          "claim_to_verify": "Trunchiul conține lemn.",
+          "verdict": "source_qualified",
+          "verified_claim": "Trunchiul copacului este o tulpină lemnoasă și conține lemn.",
+          "evidence_url": "https://ro.wikipedia.org/wiki/Tulpin%C4%83",
+          "relation_hypothesis": "related_to"
+        }
+      ],
+      "research_ready": true,
+      "next_action": "Independent batch review after all research ticks.",
+      "research_plan": "Four distinct predeclared targets recorded before web calls; each claim still needs source evidence. Do not replace a failed claim just to fill the floor.",
+      "sense": "Partea principală lemnoasă a unui copac între rădăcină și ramurile coroanei; nu trunchiul corpului ori un corp geometric.",
+      "sense_homograph": null,
+      "dexonline_receipt": {
+        "sha256": "d09642c9ca97367f9e6c8f55a46e4aa7a2cba166719ad5cfa6556697d5656180",
+        "exact_lemma": "trunchi",
+        "sense_definition_id": "836141",
+        "doom3_definition_id": "1270292",
+        "homograph": null
+      },
+      "proposed_forms": [
+        "trunchi",
+        "trunchiul",
+        "trunchiuri",
+        "trunchiurile",
+        "trunchiului",
+        "trunchiurilor"
+      ],
+      "morphology_note": "DOOM3 explicit forms plus the regular articulated/genitive noun paradigm; fold-equivalent spellings are represented once. No new unscreened key was added.",
+      "register": "common literal noun; selected sense has no archaic/poetic-only restriction",
+      "frequency": {
+        "url": "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt",
+        "best_rank": 19708,
+        "best_form": "trunchi",
+        "positive_signal_only": true,
+        "absence_is_not_a_rejection": true
+      },
+      "research_time_budget": "Bounded research pass; unresolved predeclared claims are held instead of extending searches or inventing endpoints."
     },
     {
       "id": "v112-buturuga",
@@ -4153,11 +5393,39 @@
   "owner_decisions_policy": "Owner-only backlog decisions are not in this candidate set.",
   "research_summary": {
     "states": {
-      "idea": 40
+      "researched": 10,
+      "held": 2,
+      "idea": 28
     },
+    "researched": 10,
+    "held": 2,
     "accepted": 0,
     "installed": 0,
-    "remaining_ideas": 40
+    "remaining_ideas": 28
   },
-  "next_research_requirement": "Populate and qualify link_targets before web research; no numeric floor or source claim has passed yet."
+  "next_research_requirement": "Next≤12 idea items need four-to-eight distinct named targets and the full planned-form pre-screen before web research; all acceptance remains pending independent reviews.",
+  "research_ticks": [
+    {
+      "tick": 1,
+      "item_ids": [
+        "v112-scrisoare",
+        "v112-plic",
+        "v112-timbru",
+        "v112-cazma",
+        "v112-sapa",
+        "v112-furtun",
+        "v112-samanta",
+        "v112-rasad",
+        "v112-tulpina",
+        "v112-mugur",
+        "v112-scoarta",
+        "v112-trunchi"
+      ],
+      "researched": 10,
+      "held": 2,
+      "accepted": 0,
+      "installed": 0,
+      "note": "Exact DEX/DOOM3 heads and selected noun senses; timbru postal homograph1, sapă tool DOOM3 homograph2. No frequency-based hold. Cazma/Furtun held for the predeclared fourth-link problem; no endpoints invented."
+    }
+  ]
 }
