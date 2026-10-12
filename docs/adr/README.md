@@ -161,3 +161,5 @@ Parallel lanes also allocated0188/0189 independently. All four full-filename bod
 - [0195](0195-owner-decisions-review-m1-image-test-loop.md) — owner decisions 2026-10-11 (budget-only-red KIT_BUMP, parallel prep, fail-fast/fresh content tests, canonical distroless M1 image, PORT read in Go with default 8000) plus no-behaviour test-loop speedups; trust pin and full NOT RUN.
 
 - [0196](0196-integrate-reviewed-v19-v110-with-gui-history.md) — parent source integration of local main V1.9/V1.10 (6fbd7a4), extended to V1.11/V1.12 (a27477d), with GUI history by the ADR-0194 method; each corpus joins the indexed selector; combined qualification NOT RUN.
+
+- [0197](0197-per-route-current-frozen-delivery.md) — M2 per-route current/frozen delivery: the Go-side ported set `/`, `/intrusul`, `/conexiuni` activates only when the current build's `index.html` declares `data-ui="preact"`; every other route serves the frozen legacy shell unchanged; `CAT_UI=legacy` stays whole-app; conflicting shared asset bytes refuse, identical ones dedupe; combined full NOT RUN.

@@ -18,6 +18,9 @@ type managedSPA struct {
 	static       http.Handler
 	nonceShell   managedDocumentShell
 	indexHandler http.Handler
+	ui           string                 // document identity this bundle serves: "", react, preact or legacy
+	frozen       *managedSPA            // frozen legacy bundle behind unported routes; nil for a single bundle
+	owners       map[string]*managedSPA // public asset owner per path; nil for a single bundle
 }
 
 // The SDK recognizes hexadecimal hashes. Cat's Vite hashes also contain other
@@ -176,15 +179,31 @@ func newManagedSPA(files fs.ReadDirFS, mode string) (*managedSPA, error) {
 	}
 	ui := &managedSPA{files: selected, index: index, static: kitstatic.Handler(files, kitstatic.Options{Prefix: root})}
 	if root == "legacy" {
+		ui.ui = "legacy"
 		ui.nonceShell, err = newManagedLegacyShell(manifest)
 	} else {
-		ui.nonceShell, err = newManagedNonceShell(index, manifest)
+		var shell *managedNonceShell
+		if shell, err = newManagedNonceShell(index, manifest); err == nil {
+			ui.ui, ui.nonceShell = shell.ui, shell
+		}
 	}
 	if err != nil {
 		return nil, err
 	}
 	if err := ui.installIndexHandler(); err != nil {
 		return nil, err
+	}
+	// A current build that declares the Preact shell is served per route:
+	// managedPortedRoutes from this bundle, everything else from the frozen
+	// legacy bundle, which must therefore also be admitted. Any other current
+	// build keeps the single-bundle delivery exactly as before.
+	if ui.ui == managedUIPreact {
+		if ui.frozen, err = newManagedSPA(files, "legacy"); err != nil {
+			return nil, fmt.Errorf("preact routes need the frozen legacy bundle: %w", err)
+		}
+		if ui.owners, err = managedAssetOwners(ui, ui.frozen); err != nil {
+			return nil, err
+		}
 	}
 	return ui, nil
 }
@@ -232,11 +251,11 @@ func (s *Server) managedWebsite(w http.ResponseWriter, r *http.Request) bool {
 	}
 	relative := strings.TrimPrefix(requestPath, "/")
 	if relative != "" {
-		if info, err := fs.Stat(s.managedUI.files, relative); err == nil && info.Mode().IsRegular() {
+		if owner := s.managedUI.assetOwner(relative); owner != nil {
 			websiteHeaders(w)
 			response := &managedAssetResponse{ResponseWriter: w, immutable: immutableViteAsset.MatchString(requestPath)}
-			s.managedUI.static.ServeHTTP(response, r)
-			response.finish(s.managedUI.static, r)
+			owner.static.ServeHTTP(response, r)
+			response.finish(owner.static, r)
 			return true
 		}
 	}
@@ -245,6 +264,6 @@ func (s *Server) managedWebsite(w http.ResponseWriter, r *http.Request) bool {
 		return true
 	}
 	websiteHeaders(w)
-	s.managedUI.indexHandler.ServeHTTP(w, r)
+	s.managedUI.document(requestPath).indexHandler.ServeHTTP(w, r)
 	return true
 }

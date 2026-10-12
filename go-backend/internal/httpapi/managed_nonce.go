@@ -25,6 +25,7 @@ type managedDocumentShell interface {
 // metadata, crossorigin attributes and tag order, using the SDK's actual nonce.
 type managedNonceShell struct {
 	index        []byte
+	ui           string // <html data-ui> declared by the build; "" or "react" today
 	metaOffset   int
 	nonceOffsets []int
 }
@@ -278,6 +279,13 @@ func newManagedNonceShell(index []byte, manifest *assets.Manifest) (*managedNonc
 		case "html":
 			if kind != html.StartTagToken || htmls != 0 || heads != 0 {
 				return nil, fmt.Errorf("unsupported managed html")
+			}
+			// The build's own document declares which runtime it is. Only the
+			// frozen bundle may claim legacy; any other value is unknown.
+			switch shell.ui = attrs["data-ui"]; shell.ui {
+			case "", "react", managedUIPreact:
+			default:
+				return nil, fmt.Errorf("unsupported managed UI identity")
 			}
 			htmls++
 		case "head":
