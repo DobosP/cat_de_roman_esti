@@ -2186,3 +2186,12 @@ Valid until: V1.12 qualification on 2026-10-12 — then treat this superseded V1
   [Review](reviews/v1-11-home-and-nature/README.md) and [pool](content-pool/v1-11-home-and-nature/pool.json).
   Four exact native rails; owner-approved Cald assertions, HTTP1207 and API183 pass.
   Full native race has no new red versus main; managed SPA baseline failures remain unchanged.
+
+
+Valid until: V1.13 local landing — this moved V1.12 status is history.
+- **V1.12 qualified locally:** 38 reviewed new concepts, including postal and garden vocabulary;
+  +38 nodes/+164 links/+168 exact forms, zero new curated rounds or hidden-target approvals.
+  All 206 added headwords/forms resolve into 38 real slots; foreign Piersic plurals preserve Piersică.
+  [Review](reviews/v1-12-post-and-garden/README.md) and [pool](content-pool/v1-12-post-and-garden/pool.json).
+  Four exact native rails; owner-approved Cald assertions, HTTP1207 and API206 pass.
+  Full native race has no new red versus main; managed SPA baseline failures remain unchanged.
