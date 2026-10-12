@@ -1,0 +1,415 @@
+{
+  "schema_version": 1,
+  "kind": "graph-factual-review-v1",
+  "reviewer": "factual-v1-12",
+  "role": "factual",
+  "module_path": "scripts/post_and_garden_v1_12_data.py",
+  "module_sha256": "92a38b52090a742255d924916937cb8d56092eefebcfe3e78992c8125ce90462",
+  "pool_sha256": "57925cac0e687dd523e6bd9e0b1851ade8b514334a71f340b1613152a80c8e3d",
+  "reviewed_on": "2026-10-12",
+  "methodology": [
+    "One independent whole-batch factual web review of all 40 frozen REVIEW_ITEMS under main CONTENT_LOOP revision 17b97a2 and applicable rubric A/C/D/F; 38 proposed shared concepts and 2 existing holds were judged once, without authoring replacements.",
+    "All 40 dexonline JSON responses were freshly downloaded serially, with at least 2.1 seconds after each response and redirects followed. Exact NFC accented lexical heads, selected DEX ’09/DOOM 3 IDs, homograph indices, register and complete noncolliding paradigms were checked; stress marks, superscript indices and the DOOM3 leading editorial exclamation mark were excluded from lexical head comparison.",
+    "Fresh direct reads obtained 54 unique corroborating Romanian pages/PDFs; the two Leroy Merlin pages refused direct requests with 403 and were independently read through the web tool, including their gardening guidance. Author cached JSON and receipts were left untouched. The initial HTML text-converter dependency was unavailable; already downloaded pages were then extracted with the standard library, without refetching or installing anything.",
+    "All 164 frozen edge captions, relation types and orientations plus 38 descriptions were compared with live DEX/botany, Romsilva, school, postal, horticultural and philatelic evidence. Species examples were kept qualified, cereal grains were treated as containing seeds, and treatment, dosage, numerical forestry and postal-policy claims were excluded from installed content.",
+    "Bundled normalization_map was independently applied to 206 distinct proposed label/alias keys against normalized_index, all KG labels/aliases, discovery-world labels and snapshots, current deferred terms and reviewed-unresolved keys. No foreign owner or duplicate normalized key is installed; Piersic fruit-owned plural forms stay held and the nine Cald-only proxies remain potential real-node upgrades.",
+    "Aggregate incoming/outgoing distinct neighbors were checked for all 38 proposed nodes: 4–6 total, at least 2 existing and 2 same-category, and at most 2 batch neighbors. This establishes lexical and factual correctness for shared guesses/neighbors only, not new curated rounds, Cald hidden-target eligibility or on-demand game selection; independent quality review and all prescribed install gates remain necessary."
+  ],
+  "items": [
+    {
+      "id": "v112-scrisoare",
+      "verdict": "accept",
+      "rationale": "The ordinary physical correspondence sense and feminine paradigm are exact; the school manual and postal operator substantiate paper, envelope, franking and postal-service captions without borrowing literary-title senses.",
+      "sources": [
+        "https://dexonline.ro/definitie/scrisoare/json",
+        "https://ro.wikipedia.org/wiki/Scrisoare",
+        "https://www.manual.digital/Manuale/romana536-tts.htm",
+        "https://www.posta-romana.ro/ajutor.html"
+      ]
+    },
+    {
+      "id": "v112-plic",
+      "verdict": "accept",
+      "rationale": "Exact neuter envelope paradigm and physical paper sense are supported; postal and philatelic sources substantiate its four distinct paper, letter, stamp and postal-service associations.",
+      "sources": [
+        "https://dexonline.ro/definitie/plic/json",
+        "https://ro.wikipedia.org/wiki/Plic",
+        "https://www.posta-romana.ro/cnpr-data/_editor/files/csr17.pdf",
+        "https://ro.wikipedia.org/wiki/Timbru_po%C8%99tal"
+      ]
+    },
+    {
+      "id": "v112-timbru",
+      "verdict": "accept",
+      "rationale": "The postal printed-mark sense uses DOOM3 timbru1 and plural timbre; sound-quality timbruri is excluded, and physical paper, envelope, letter and postal-production links are truthful.",
+      "sources": [
+        "https://dexonline.ro/definitie/timbru/json",
+        "https://ro.wikipedia.org/wiki/Timbru_po%C8%99tal",
+        "https://www.posta-romana.ro/cnpr-data/_editor/files/csr17.pdf",
+        "https://www.posta-romana.ro/ajutor.html"
+      ]
+    },
+    {
+      "id": "v112-cazma",
+      "verdict": "modify",
+      "rationale": "held: The ordinary spade sense and six-key paradigm are valid, but fewer than four predeclared distinct links were qualified; preserve the hold instead of assuming wheelbarrow or special toothed-spade claims.",
+      "sources": [
+        "https://dexonline.ro/definitie/cazma/json",
+        "https://ro.wiktionary.org/wiki/cazma"
+      ],
+      "requested_changes": [
+        "Keep this item held and outside NODES, EDGES and ALIASES; preserve its recorded insufficient-qualified-neighbors reason."
+      ]
+    },
+    {
+      "id": "v112-sapa",
+      "verdict": "accept",
+      "rationale": "DEX sapă1 agricultural-tool sense and DOOM3 sapă2 agree; the live garden-tool guidance expressly supports garden use, weed-root cutting and complementary rake/shovel roles, without importing drilling or horse-body senses.",
+      "sources": [
+        "https://dexonline.ro/definitie/sap%C4%83/json",
+        "https://ro.wiktionary.org/wiki/sap%C4%83",
+        "https://www.leroymerlin.ro/produse/gradina-si-amenajare/unelte-de-gradinarit/sape-gradina/"
+      ]
+    },
+    {
+      "id": "v112-furtun",
+      "verdict": "modify",
+      "rationale": "held: Exact flexible-tube sense and neuter paradigm are valid, but the missing watering-can link is not supplied by sprinkler product terminology; preserve the existing insufficient-qualified-neighbors hold.",
+      "sources": [
+        "https://dexonline.ro/definitie/furtun/json",
+        "https://ro.wiktionary.org/wiki/furtun",
+        "https://vonroc.ro/sistem-de-irigare-3-moduri-de-stropire-picurare-pulverizare-si-ceata-inclus-furtun-de-15-m"
+      ],
+      "requested_changes": [
+        "Keep this item held and outside NODES, EDGES and ALIASES; preserve its recorded insufficient-qualified-neighbors reason."
+      ]
+    },
+    {
+      "id": "v112-samanta",
+      "verdict": "accept",
+      "rationale": "The exact botanical sense and seminței/semințe paradigm agree; the biology manual supports germination roots and cereal grains containing seeds, rather than falsely equating every grain with a bare seed.",
+      "sources": [
+        "https://dexonline.ro/definitie/s%C4%83m%C3%A2n%C8%9B%C4%83/json",
+        "https://ro.wikipedia.org/wiki/S%C4%83m%C3%A2n%C8%9B%C4%83",
+        "https://scgimpngtitu.ro/pdf/manuale-2025-2026/7%20BIOLOGIE.pdf"
+      ]
+    },
+    {
+      "id": "v112-rasad",
+      "verdict": "accept",
+      "rationale": "Exact young-plant sense and full neuter paradigm are supported; the planting guidance and cabbage source substantiate roots, garden planting and cabbage seedlings while excluding figurative ancestry.",
+      "sources": [
+        "https://dexonline.ro/definitie/r%C4%83sad/json",
+        "https://ro.wiktionary.org/wiki/r%C4%83sad",
+        "https://www.botanistii.ro/blog/varza-cum-sa-plantezi-si-sa-ingrijesti-aceasta-leguma/",
+        "https://www.leroymerlin.ro/produse/gradina-si-amenajare/unelte-de-gradinarit/unelte-plantat/"
+      ]
+    },
+    {
+      "id": "v112-tulpina",
+      "verdict": "accept",
+      "rationale": "The botanical organ sense and feminine paradigm are exact; support and sap-conduction captions match the live botany source, and the tree-trunk example is correctly narrower than stems generally.",
+      "sources": [
+        "https://dexonline.ro/definitie/tulpin%C4%83/json",
+        "https://ro.wikipedia.org/wiki/Tulpin%C4%83"
+      ]
+    },
+    {
+      "id": "v112-mugur",
+      "verdict": "accept",
+      "rationale": "Exact ordinary plant-bud sense and masculine forms are supported; the botanical source distinguishes dormant temperate-tree buds and floral buds without importing animal or pathological senses.",
+      "sources": [
+        "https://dexonline.ro/definitie/mugur/json",
+        "https://ro.wikipedia.org/wiki/Mugur",
+        "https://timisoara.rosilva.ro/articole/stejar_pedunculat__p_2959.htm"
+      ]
+    },
+    {
+      "id": "v112-scoarta",
+      "verdict": "accept",
+      "rationale": "The selected protective woody-bark sense, scoarței and scoarțe agree; branch covering, outer position and pedunculate-oak evidence are factual, while carpet, cover and terrestrial-crust senses remain excluded.",
+      "sources": [
+        "https://dexonline.ro/definitie/scoar%C8%9B%C4%83/json",
+        "https://ro.wiktionary.org/wiki/scoar%C8%9B%C4%83",
+        "https://timisoara.rosilva.ro/articole/stejar_pedunculat__p_2959.htm",
+        "https://ro.wikipedia.org/wiki/Tulpin%C4%83",
+        "https://dir.upsc.md/handle/123456789/4109/Educatie-ambientala-Suport-curs.pdf"
+      ]
+    },
+    {
+      "id": "v112-trunchi",
+      "verdict": "accept",
+      "rationale": "Exact tree-trunk sense and neuter paradigm are supported; its tree, root, branch, wood and stump captions stay within botanical trunk meaning rather than body or geometric senses.",
+      "sources": [
+        "https://dexonline.ro/definitie/trunchi/json",
+        "https://ro.wiktionary.org/wiki/trunchi",
+        "https://ro.wikipedia.org/wiki/Tulpin%C4%83"
+      ]
+    },
+    {
+      "id": "v112-buturuga",
+      "verdict": "accept",
+      "rationale": "DEX and exact-headword MDA2 support the qualified rooted-stump description, DOOM3 supports buturugii/buturugi, and four tree/root/wood/trunk links avoid the unqualified forest claim.",
+      "sources": [
+        "https://dexonline.ro/definitie/buturug%C4%83/json",
+        "https://ro.wiktionary.org/wiki/buturug%C4%83"
+      ]
+    },
+    {
+      "id": "v112-pin",
+      "verdict": "accept",
+      "rationale": "DEX pin2 and DOOM3 pin as a tree match; Romsilva supports persistent needles, material wood and pure or fir-mixed stands, without borrowing identifier or connector meanings.",
+      "sources": [
+        "https://dexonline.ro/definitie/pin/json",
+        "https://timisoara.rosilva.ro/articole/pin_silvestru__p_2950.htm"
+      ]
+    },
+    {
+      "id": "v112-molid",
+      "verdict": "accept",
+      "rationale": "Exact spruce headword and molizi paradigm agree; Romsilva substantiates persistent needles, usable wood, mountain forests and mixed spruce/fir stands while keeping fir a distinct species.",
+      "sources": [
+        "https://dexonline.ro/definitie/molid/json",
+        "https://timisoara.rosilva.ro/articole/molid__p_2943.htm",
+        "https://sibiu.rosilva.ro/articole/prezentare_generala__p_739.htm"
+      ]
+    },
+    {
+      "id": "v112-tei",
+      "verdict": "accept",
+      "rationale": "DOOM3 masculine tree tei1 uses plural tei and articulated teii; floral and honey links are supported, and the Eminescu association is specifically grounded in the Copou tree rather than an invented generic biography link.",
+      "sources": [
+        "https://dexonline.ro/definitie/tei/json",
+        "https://ro.wikipedia.org/wiki/Tei",
+        "https://www.rosilva.ro/articole/miere_apisilva__p_2643.htm",
+        "https://ro.wikipedia.org/wiki/Teiul_lui_Eminescu"
+      ]
+    },
+    {
+      "id": "v112-fag",
+      "verdict": "accept",
+      "rationale": "Exact common-beech sense and fagi paradigm agree; Romsilva supports elliptic leaves, usable wood, pure stands and smooth grey bark, with no medicinal claim installed.",
+      "sources": [
+        "https://dexonline.ro/definitie/fag/json",
+        "https://timisoara.rosilva.ro/articole/fag__p_2931.htm"
+      ]
+    },
+    {
+      "id": "v112-salcie",
+      "verdict": "accept",
+      "rationale": "The selected tree sense and explicit salcia/salciei/sălcii paradigm agree; white-willow evidence substantiates roots, river floodplains, wet terrain and wood without treating every willow as the same species.",
+      "sources": [
+        "https://dexonline.ro/definitie/salcie/json",
+        "https://timisoara.rosilva.ro/articole/salcia_alba__p_2956.htm"
+      ]
+    },
+    {
+      "id": "v112-plop",
+      "verdict": "accept",
+      "rationale": "Exact tree sense and plopi forms agree; the white-poplar example supports broad leaves, wood and pure or mixed Danube-floodplain stands without transferring unqualified paper-production claims.",
+      "sources": [
+        "https://dexonline.ro/definitie/plop/json",
+        "https://timisoara.rosilva.ro/articole/plop_alb__p_2952.htm"
+      ]
+    },
+    {
+      "id": "v112-castan",
+      "verdict": "accept",
+      "rationale": "DEX edible Castanea sense1 is consistently selected over horse chestnut; the sources support leaves, usable wood, edible fruit and actual forest stands, while the unqualified park claim stays omitted.",
+      "sources": [
+        "https://dexonline.ro/definitie/castan/json",
+        "https://ro.wikipedia.org/wiki/Castan_comestibil",
+        "https://baiamare.rosilva.ro/articole/arboretul_de_castan_comestibil__p_2385.htm"
+      ]
+    },
+    {
+      "id": "v112-frasin",
+      "verdict": "accept",
+      "rationale": "Exact Fraxinus excelsior sense and frasini paradigm agree; compound leaves, useful wood and the documented Pădurea Verde occurrence support all four captions.",
+      "sources": [
+        "https://dexonline.ro/definitie/frasin/json",
+        "https://horticultura.ro/frasinul/"
+      ]
+    },
+    {
+      "id": "v112-mesteacan",
+      "verdict": "accept",
+      "rationale": "Exact headword and irregular plural mesteceni agree; the common birch description and simple-leaf, usable-wood and white-bark links are supported without importing unqualified forest claims.",
+      "sources": [
+        "https://dexonline.ro/definitie/mesteac%C4%83n/json",
+        "https://ro.wikipedia.org/wiki/Mesteac%C4%83n"
+      ]
+    },
+    {
+      "id": "v112-feriga",
+      "verdict": "accept",
+      "rationale": "Exact vascular-fern sense and ferigii/ferigi paradigm agree; the sources substantiate rhizome roots, leaf-borne sporangia and damp forest occurrence, without claiming flowers or fruit.",
+      "sources": [
+        "https://dexonline.ro/definitie/ferig%C4%83/json",
+        "https://ro.wikipedia.org/wiki/Pteridofite",
+        "https://scgimpngtitu.ro/pdf/manuale-2025-2026/7%20BIOLOGIE.pdf"
+      ]
+    },
+    {
+      "id": "v112-petala",
+      "verdict": "accept",
+      "rationale": "DEX and DOOM3 substantiate the corolla element and petalei/petale forms; flower/plant part orientation, modified-leaf homology and rose/carnation petal claims are all truthful.",
+      "sources": [
+        "https://dexonline.ro/definitie/petal%C4%83/json",
+        "https://ro.wiktionary.org/wiki/petal%C4%83",
+        "https://scgimpngtitu.ro/pdf/manuale-2025-2026/7%20BIOLOGIE.pdf",
+        "https://ro.wikipedia.org/wiki/Trandafir",
+        "https://brgv.ro/dianthus-spp-varietati-din-colectia-de-germoplasma-a-brgv-buzau/"
+      ]
+    },
+    {
+      "id": "v112-polen",
+      "verdict": "accept",
+      "rationale": "DEX and DOOM3 expressly give polenuri, so its full six-key paradigm is supported; the school source substantiates anthers, seed-plant reproduction and possible bee, wind and butterfly transport.",
+      "sources": [
+        "https://dexonline.ro/definitie/polen/json",
+        "https://scgimpngtitu.ro/pdf/manuale-2025-2026/7%20BIOLOGIE.pdf"
+      ]
+    },
+    {
+      "id": "v112-nectar",
+      "verdict": "accept",
+      "rationale": "The botanical secretion sense is exact and beverage-only nectaruri is correctly excluded; live botanical evidence directly supports flowers, plants, bees, honey transformation and butterfly feeding.",
+      "sources": [
+        "https://dexonline.ro/definitie/nectar/json",
+        "https://ro.wikipedia.org/wiki/Nectar"
+      ]
+    },
+    {
+      "id": "v112-alun",
+      "verdict": "accept",
+      "rationale": "Exact Corylus shrub sense and aluni paradigm agree; plant, rounded-leaf, male-flower and edible-fruit captions are supported, with the unqualified squirrel hypothesis omitted.",
+      "sources": [
+        "https://dexonline.ro/definitie/alun/json",
+        "https://ro.wikipedia.org/wiki/Alun"
+      ]
+    },
+    {
+      "id": "v112-gutui",
+      "verdict": "accept",
+      "rationale": "The masculine tree lemma and plural gutui/articulated gutuii are exact; Cydonia, simple leaves, white or pink flowers and edible quince fruits are consistent without using fruit-lemma gutuie as an input.",
+      "sources": [
+        "https://dexonline.ro/definitie/gutui/json",
+        "https://ro.wikipedia.org/wiki/Gutui"
+      ]
+    },
+    {
+      "id": "v112-prun",
+      "verdict": "accept",
+      "rationale": "Exact Prunus domestica sense and pruni forms agree; tree, pale flowers, edible fruit and the existing plum-fruit owner are truthfully linked without inventing a leaf claim.",
+      "sources": [
+        "https://dexonline.ro/definitie/prun/json",
+        "https://ro.wikipedia.org/wiki/Prun"
+      ]
+    },
+    {
+      "id": "v112-cires",
+      "verdict": "accept",
+      "rationale": "Exact Prunus avium headword and cireși paradigm agree; the live orchard article and DEX support tree, elongated oval leaves, white flowers and edible cherries.",
+      "sources": [
+        "https://dexonline.ro/definitie/cire%C8%99/json",
+        "https://ro.wikipedia.org/wiki/Cire%C8%99"
+      ]
+    },
+    {
+      "id": "v112-visin",
+      "verdict": "accept",
+      "rationale": "Exact Prunus cerasus sense and vișini paradigm agree; glossy toothed leaves, white flowers and sour-cherry fruit remain tied to that tree rather than compound-name species.",
+      "sources": [
+        "https://dexonline.ro/definitie/vi%C8%99in/json",
+        "https://ro.wikipedia.org/wiki/Vi%C8%99in"
+      ]
+    },
+    {
+      "id": "v112-cais",
+      "verdict": "accept",
+      "rationale": "Exact headword and caiși forms agree; Prunus armeniaca and Armeniaca vulgaris identify the same chosen tree, and leaf, flower and apricot-fruit captions are supported.",
+      "sources": [
+        "https://dexonline.ro/definitie/cais/json",
+        "https://ro.wikipedia.org/wiki/Cais"
+      ]
+    },
+    {
+      "id": "v112-piersic",
+      "verdict": "accept",
+      "rationale": "Exact peach-tree sense and singular inputs agree; piersici/piersicii/piersicilor remain with the existing fruit owner, while the new tree links use truthful leaf, flower and peach-fruit claims.",
+      "sources": [
+        "https://dexonline.ro/definitie/piersic/json",
+        "https://ro.wikipedia.org/wiki/Piersic"
+      ]
+    },
+    {
+      "id": "v112-crin",
+      "verdict": "accept",
+      "rationale": "The chosen Lilium candidum sense and crini paradigm are supported; the horticultural article and Romanian botanical paper substantiate bulb growth, aerial leaves, fragrant flowers and domestic gardens without importing compound lily names.",
+      "sources": [
+        "https://dexonline.ro/definitie/crin/json",
+        "https://ro.wikipedia.org/wiki/Crin",
+        "https://plant-journal.uaic.ro/docs/1995/40.pdf",
+        "https://www.agro.basf.ro/ro/stiri/basf-in-camp/ghid-cultivare-flori-in-camp-si-in-sera.html"
+      ]
+    },
+    {
+      "id": "v112-trandafir",
+      "verdict": "accept",
+      "rationale": "The Rosa botanical sense and trandafiri forms agree; compound leaves, fragrant flowers, ornamental gardens and petals are supported, excluding sausage, rosewood and unrelated compound plants.",
+      "sources": [
+        "https://dexonline.ro/definitie/trandafir/json",
+        "https://ro.wikipedia.org/wiki/Trandafir"
+      ]
+    },
+    {
+      "id": "v112-garoafa",
+      "verdict": "accept",
+      "rationale": "Exact Dianthus caryophyllus sense and garoafei/garoafe forms agree; the Romanian germplasm and botanical sources support ornamental gardens, narrow opposite leaves, fragrance and actual petals.",
+      "sources": [
+        "https://dexonline.ro/definitie/garoaf%C4%83/json",
+        "https://brgv.ro/dianthus-spp-varietati-din-colectia-de-germoplasma-a-brgv-buzau/",
+        "https://plant-journal.uaic.ro/docs/1995/40.pdf"
+      ]
+    },
+    {
+      "id": "v112-lalea",
+      "verdict": "accept",
+      "rationale": "DOOM3 expressly gives laleaua/lalelei/lalele; the chosen garden-tulip description, leaves, bulb, flower, garden and usual spring-flowering captions agree with the sources.",
+      "sources": [
+        "https://dexonline.ro/definitie/lalea/json",
+        "https://ro.wikipedia.org/wiki/Lalea"
+      ]
+    },
+    {
+      "id": "v112-zambila",
+      "verdict": "accept",
+      "rationale": "Exact Hyacinthus orientalis sense and zambilei/zambile forms agree; bulb, narrow leaves, fragrant raceme, gardens and ordinary early-spring flowering are substantiated.",
+      "sources": [
+        "https://dexonline.ro/definitie/zambil%C4%83/json",
+        "https://ro.wikipedia.org/wiki/Zambil%C4%83",
+        "https://plant-journal.uaic.ro/docs/1995/40.pdf"
+      ]
+    },
+    {
+      "id": "v112-urzica",
+      "verdict": "accept",
+      "rationale": "The ordinary Urtica plant sense and urzicii/urzici forms agree; root/rhizome, stinging leaves, flowers, garden occurrence and culinary use are supported without transferring cloth or compound dead-nettle/marine senses.",
+      "sources": [
+        "https://dexonline.ro/definitie/urzic%C4%83/json",
+        "https://ro.wikipedia.org/wiki/Urzic%C4%83"
+      ]
+    },
+    {
+      "id": "v112-menta",
+      "verdict": "accept",
+      "rationale": "Exact botanical Mentha sense and DOOM3 mentei agree; two unique keys cover the selected singular usage, and plant, toothed-leaf, flower and tea links require no unsupported plural or variant alias.",
+      "sources": [
+        "https://dexonline.ro/definitie/ment%C4%83/json",
+        "https://ro.wikipedia.org/wiki/Ment%C4%83",
+        "https://fares.ro/produs/colectie-ceai-fructe-si-plante-180-plicuri/"
+      ]
+    }
+  ]
+}

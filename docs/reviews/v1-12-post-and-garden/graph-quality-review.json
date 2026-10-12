@@ -1,0 +1,615 @@
+{
+  "schema_version": 1,
+  "kind": "graph-quality-review-v1",
+  "reviewer": "quality-v1-12",
+  "role": "quality",
+  "module_path": "scripts/post_and_garden_v1_12_data.py",
+  "module_sha256": "92a38b52090a742255d924916937cb8d56092eefebcfe3e78992c8125ce90462",
+  "pool_sha256": "57925cac0e687dd523e6bd9e0b1851ade8b514334a71f340b1613152a80c8e3d",
+  "reviewed_on": "2026-10-12",
+  "methodology": {
+    "scope": "One formal whole-batch quality web review of all40 frozen REVIEW_ITEMS:38 proposed shared concepts and2 excluded holds; earlier offline planning checks were not formal reviews.",
+    "authority": "docs/CONTENT_LOOP.md quality bar and applicable CRITIQUE_RUBRIC sections A/C/D/F; owner procedure governs shared-graph growth.",
+    "web_checks": "Independently opened live Romanian second/primary sources for every item, reading the specific predicates and Romanian landscape, home, garden, correspondence or school exposure. Rechecked current Romsilva honey HTML directly with a browser user agent after a parser failure. The cited school biology PDF was freshly fetched (HTTP200,46813076bytes), parsed with existing pdftotext, and compared with cached extracted text for the precise seed/petal/pollen/fern passages.",
+    "lexical_checks": "Read all40 freshly fetched exact-head dexonline DEX/MDA/DOOM3 records from the factual reviewer serial pass and independently compared the module forms and selected literal senses. Made no dexonline requests while that spaced pass was running. Common noun inflections are inputs, not automatically verified synonyms.",
+    "recognition": "Judged ordinary Romanian home/garden/orchard/forest experience and school botany/correspondence; specific educational, encyclopedic and public horticultural sources supply exposure evidence. No human recognition measurement, pageview statistic or hidden-target approval is claimed. Frequency supports recognition only and never rejects a concrete noun.",
+    "topology": "Recomputed all164 actual module edges over38 proposed nodes plus the live bundle. Every aggregate distinct incoming/outgoing neighborhood meets4–8neighbors,at least2old,at least2same-category,at most2batch; all32distinct old IDs/categories match. Five reciprocal pool hypotheses are already canonicalized, with no parallel pair duplication. The postal trio, Scoarță and Petală each retain exactly2batch neighbors.",
+    "input_identity": "Independently folded all206proposed label/alias keys with the live normalization_map: no duplicate folded keys, other live owners or same-batch collisions;168aliases remain distinct from38new labels. Piersic excludes piersici/piersicii/piersicilor already owned by Piersică; no form ownership moves.",
+    "game_limits": "Approval concerns ordinary shared Cald guesses and semantic neighborhoods only. No curated round, new hidden target, public session replay, ranking fairness, game gate or five-incoming target threshold approval is inferred. Honest is_a/part_of directions were inspected; existing gates and local playthrough remain required.",
+    "requested_change_scope": "Thirteen deletion-only description cleanups remove editorial sense/exclusion metadata while preserving positive definitions and useful physical/species qualifications; two existing holds stay excluded. No new form, edge, fact, threshold or replacement content is requested."
+  },
+  "summary": {
+    "covered": 40,
+    "proposed": 38,
+    "held": 2,
+    "accept": 25,
+    "modify": 15,
+    "reject": 0,
+    "description_cleanup_items": 13,
+    "actual_edges_reviewed": 164,
+    "proposed_input_forms": 206,
+    "aliases": 168
+  },
+  "items": [
+    {
+      "id": "v112-scrisoare",
+      "lemma": "Scrisoare",
+      "verdict": "accept",
+      "rationale": "Recognizable school correspondence; the paper/post/envelope/stamp associations concern a physical letter and do not imply that all written messages use postal delivery.",
+      "sources": [
+        "https://dexonline.ro/definitie/scrisoare/json",
+        "https://ro.wikipedia.org/wiki/Scrisoare",
+        "https://www.manual.digital/Manuale/romana536-tts.htm",
+        "https://www.posta-romana.ro/ajutor.html"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v112-plic",
+      "lemma": "Plic",
+      "verdict": "accept",
+      "rationale": "An everyday stationery object with a clearly physical postal sense; paper, letter, stamp and postal-service connections are legible and source-backed.",
+      "sources": [
+        "https://dexonline.ro/definitie/plic/json",
+        "https://ro.wikipedia.org/wiki/Plic",
+        "https://www.posta-romana.ro/cnpr-data/_editor/files/csr17.pdf"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v112-timbru",
+      "lemma": "Timbru",
+      "verdict": "modify",
+      "rationale": "The physical postal imprint and timbre paradigm are clear and useful; remove the redundant voice-sense exclusion from the player description.",
+      "sources": [
+        "https://dexonline.ro/definitie/timbru/json",
+        "https://ro.wikipedia.org/wiki/Timbru_po%C8%99tal",
+        "https://www.posta-romana.ro/cnpr-data/_editor/files/csr17.pdf"
+      ],
+      "requested_changes": [
+        {
+          "field": "NODES.description",
+          "node_id": "n_v1_12_timbru",
+          "operation": "delete_exact_clause",
+          "text": ", nu proprietatea vocii",
+          "preserve": "Retain all existing positive definition text, period, reviewed forms, links and evidence unchanged."
+        }
+      ]
+    },
+    {
+      "id": "v112-cazma",
+      "lemma": "Cazma",
+      "verdict": "modify",
+      "rationale": "Keep held: a familiar garden tool does not justify inventing a fourth qualified link; the currently excluded proposal remains outside the installed batch.",
+      "sources": [
+        "https://dexonline.ro/definitie/cazma/json",
+        "https://ro.wiktionary.org/wiki/cazma"
+      ],
+      "requested_changes": [
+        "Keep this record held and excluded from NODES/EDGES; do not author replacement links."
+      ]
+    },
+    {
+      "id": "v112-sapa",
+      "lemma": "Sapă",
+      "verdict": "modify",
+      "rationale": "The ordinary hoe and complementary garden-tool/root links are supported; remove the player-facing list of excluded verb, drill and animal senses.",
+      "sources": [
+        "https://dexonline.ro/definitie/sap%C4%83/json",
+        "https://ro.wiktionary.org/wiki/sap%C4%83",
+        "https://www.leroymerlin.ro/produse/gradina-si-amenajare/unelte-de-gradinarit/sape-gradina/"
+      ],
+      "requested_changes": [
+        {
+          "field": "NODES.description",
+          "node_id": "n_v1_12_sapa",
+          "operation": "delete_exact_clause",
+          "text": "; nu forma verbală, forajul sau crupa animalului",
+          "preserve": "Retain all existing positive definition text, period, reviewed forms, links and evidence unchanged."
+        }
+      ]
+    },
+    {
+      "id": "v112-furtun",
+      "lemma": "Furtun",
+      "verdict": "modify",
+      "rationale": "Keep held: the existing Stropitoare owner is a manual vessel, and an irrigation sprinkler does not supply its missing fourth honest connection.",
+      "sources": [
+        "https://dexonline.ro/definitie/furtun/json",
+        "https://ro.wiktionary.org/wiki/furtun"
+      ],
+      "requested_changes": [
+        "Keep this record held and excluded from NODES/EDGES; do not author replacement links."
+      ]
+    },
+    {
+      "id": "v112-samanta",
+      "lemma": "Sămânță",
+      "verdict": "modify",
+      "rationale": "Seed and germination are school vocabulary with specific wheat/maize/root links; delete the redundant editorial botanical-sense suffix.",
+      "sources": [
+        "https://dexonline.ro/definitie/s%C4%83m%C3%A2n%C8%9B%C4%83/json",
+        "https://ro.wikipedia.org/wiki/S%C4%83m%C3%A2n%C8%9B%C4%83",
+        "https://scgimpngtitu.ro/pdf/manuale-2025-2026/7%20BIOLOGIE.pdf"
+      ],
+      "requested_changes": [
+        {
+          "field": "NODES.description",
+          "node_id": "n_v1_12_samanta",
+          "operation": "delete_exact_clause",
+          "text": "; numai sensul botanic",
+          "preserve": "Retain all existing positive definition text, period, reviewed forms, links and evidence unchanged."
+        }
+      ]
+    },
+    {
+      "id": "v112-rasad",
+      "lemma": "Răsad",
+      "verdict": "modify",
+      "rationale": "The young transplantable plant is familiar garden vocabulary and connects honestly to roots, garden and cabbage; delete the figurative-sense exclusion.",
+      "sources": [
+        "https://dexonline.ro/definitie/r%C4%83sad/json",
+        "https://ro.wiktionary.org/wiki/r%C4%83sad",
+        "https://www.botanistii.ro/blog/varza-cum-sa-plantezi-si-sa-ingrijesti-aceasta-leguma/",
+        "https://www.leroymerlin.ro/produse/gradina-si-amenajare/unelte-de-gradinarit/unelte-plantat/"
+      ],
+      "requested_changes": [
+        {
+          "field": "NODES.description",
+          "node_id": "n_v1_12_rasad",
+          "operation": "delete_exact_clause",
+          "text": "; fără sensurile figurate de neam ori seminție",
+          "preserve": "Retain all existing positive definition text, period, reviewed forms, links and evidence unchanged."
+        }
+      ]
+    },
+    {
+      "id": "v112-tulpina",
+      "lemma": "Tulpină",
+      "verdict": "accept",
+      "rationale": "A school-level plant organ, distinct from the narrower woody trunk; its support and transport links are comprehensible and the positive definition is precise.",
+      "sources": [
+        "https://dexonline.ro/definitie/tulpin%C4%83/json",
+        "https://ro.wikipedia.org/wiki/Tulpin%C4%83"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v112-mugur",
+      "lemma": "Mugur",
+      "verdict": "accept",
+      "rationale": "A nameable plant-growth structure with familiar leaf/flower/tree associations; botanical forms remain separate from personal names and pathological senses.",
+      "sources": [
+        "https://dexonline.ro/definitie/mugur/json",
+        "https://ro.wikipedia.org/wiki/Mugur",
+        "https://timisoara.rosilva.ro/articole/stejar_pedunculat__p_2959.htm"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v112-scoarta",
+      "lemma": "Scoarță",
+      "verdict": "modify",
+      "rationale": "The protective woody covering and beech/birch/oak examples make a legible neighborhood; delete the editorial list of excluded geological/textile/book senses.",
+      "sources": [
+        "https://dexonline.ro/definitie/scoar%C8%9B%C4%83/json",
+        "https://ro.wiktionary.org/wiki/scoar%C8%9B%C4%83",
+        "https://ro.wikipedia.org/wiki/Tulpin%C4%83",
+        "https://timisoara.rosilva.ro/articole/stejar_pedunculat__p_2959.htm"
+      ],
+      "requested_changes": [
+        {
+          "field": "NODES.description",
+          "node_id": "n_v1_12_scoarta",
+          "operation": "delete_exact_clause",
+          "text": "; numai sensul vegetal, nu scoarța terestră, covorul sau coperta",
+          "preserve": "Retain all existing positive definition text, period, reviewed forms, links and evidence unchanged."
+        }
+      ]
+    },
+    {
+      "id": "v112-trunchi",
+      "lemma": "Trunchi",
+      "verdict": "modify",
+      "rationale": "The tree trunk is a concrete, school-level part with roots, branches, wood and stump links; delete the unnecessary body/geometric-sense exclusion.",
+      "sources": [
+        "https://dexonline.ro/definitie/trunchi/json",
+        "https://ro.wiktionary.org/wiki/trunchi",
+        "https://ro.wikipedia.org/wiki/Tulpin%C4%83"
+      ],
+      "requested_changes": [
+        {
+          "field": "NODES.description",
+          "node_id": "n_v1_12_trunchi",
+          "operation": "delete_exact_clause",
+          "text": "; nu trunchiul corpului ori un corp geometric",
+          "preserve": "Retain all existing positive definition text, period, reviewed forms, links and evidence unchanged."
+        }
+      ]
+    },
+    {
+      "id": "v112-buturuga",
+      "lemma": "Buturugă",
+      "verdict": "modify",
+      "rationale": "The common woody stump sense is supported by exact-head dictionaries, including the root-bearing remainder; delete the generic figurative-sense disclaimer.",
+      "sources": [
+        "https://dexonline.ro/definitie/buturug%C4%83/json",
+        "https://ro.wiktionary.org/wiki/buturug%C4%83"
+      ],
+      "requested_changes": [
+        {
+          "field": "NODES.description",
+          "node_id": "n_v1_12_buturuga",
+          "operation": "delete_exact_clause",
+          "text": "; fără sensuri figurate",
+          "preserve": "Retain all existing positive definition text, period, reviewed forms, links and evidence unchanged."
+        }
+      ]
+    },
+    {
+      "id": "v112-pin",
+      "lemma": "Pin",
+      "verdict": "accept",
+      "rationale": "An ordinary Romanian conifer with an honest tree parent and specific needle, timber, forest and mixed-fir associations; the Scots-pine example limits species claims.",
+      "sources": [
+        "https://dexonline.ro/definitie/pin/json",
+        "https://timisoara.rosilva.ro/articole/pin_silvestru__p_2950.htm"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v112-molid",
+      "lemma": "Molid",
+      "verdict": "accept",
+      "rationale": "A familiar mountain conifer with persistent needles and hanging cones; timber and mixed-fir forest links are supported without treating it as a fir synonym.",
+      "sources": [
+        "https://dexonline.ro/definitie/molid/json",
+        "https://timisoara.rosilva.ro/articole/molid__p_2943.htm",
+        "https://sibiu.rosilva.ro/articole/prezentare_generala__p_739.htm"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v112-tei",
+      "lemma": "Tei",
+      "verdict": "modify",
+      "rationale": "A recognizable Romanian tree with useful flower, bee, honey and Eminescu associations; delete the redundant fiber-sense exclusion while retaining the positive tree definition.",
+      "sources": [
+        "https://dexonline.ro/definitie/tei/json",
+        "https://ro.wikipedia.org/wiki/Tei",
+        "https://www.rosilva.ro/articole/miere_apisilva__p_2643.htm",
+        "https://ro.wikipedia.org/wiki/Teiul_lui_Eminescu"
+      ],
+      "requested_changes": [
+        {
+          "field": "NODES.description",
+          "node_id": "n_v1_12_tei",
+          "operation": "delete_exact_clause",
+          "text": "; numai sensul de copac, nu fibra folosită la legat",
+          "preserve": "Retain all existing positive definition text, period, reviewed forms, links and evidence unchanged."
+        }
+      ]
+    },
+    {
+      "id": "v112-fag",
+      "lemma": "Fag",
+      "verdict": "accept",
+      "rationale": "A familiar native forest tree, legibly connected through its parent, leaves, timber, forest and smooth gray bark; no unsupported regional exclusivity is implied.",
+      "sources": [
+        "https://dexonline.ro/definitie/fag/json",
+        "https://timisoara.rosilva.ro/articole/fag__p_2931.htm"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v112-salcie",
+      "lemma": "Salcie",
+      "verdict": "accept",
+      "rationale": "The selected tree sense, exemplified by white willow, supports roots, riverbank, wet habitat and timber links without claiming that all Salix species are trees.",
+      "sources": [
+        "https://dexonline.ro/definitie/salcie/json",
+        "https://timisoara.rosilva.ro/articole/salcia_alba__p_2956.htm"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v112-plop",
+      "lemma": "Plop",
+      "verdict": "modify",
+      "rationale": "The white-poplar example keeps leaf, timber and floodplain forest claims bounded; delete the editorial instruction about transferring other species traits.",
+      "sources": [
+        "https://dexonline.ro/definitie/plop/json",
+        "https://timisoara.rosilva.ro/articole/plop_alb__p_2952.htm"
+      ],
+      "requested_changes": [
+        {
+          "field": "NODES.description",
+          "node_id": "n_v1_12_plop",
+          "operation": "delete_exact_clause",
+          "text": "; fără a transfera particularitățile altor specii",
+          "preserve": "Retain all existing positive definition text, period, reviewed forms, links and evidence unchanged."
+        }
+      ]
+    },
+    {
+      "id": "v112-castan",
+      "lemma": "Castan",
+      "verdict": "accept",
+      "rationale": "Accept the expressly edible Castanea sativa sense, with its clear contrast to horse chestnut; tree, leaves, timber, fruit and forest links stay within that sense.",
+      "sources": [
+        "https://dexonline.ro/definitie/castan/json",
+        "https://ro.wikipedia.org/wiki/Castan_comestibil",
+        "https://baiamare.rosilva.ro/articole/arboretul_de_castan_comestibil__p_2385.htm"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v112-frasin",
+      "lemma": "Frasin",
+      "verdict": "accept",
+      "rationale": "Native tree vocabulary documented by Romanian public horticultural education; its tree, compound-leaf, timber and forest links are concrete, without medicine claims.",
+      "sources": [
+        "https://dexonline.ro/definitie/frasin/json",
+        "https://horticultura.ro/frasinul/"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v112-mesteacan",
+      "lemma": "Mesteacăn",
+      "verdict": "modify",
+      "rationale": "The white-barked tree and its simple leaves/wood/bark links are recognizable nature vocabulary; delete the redundant editorial common-tree-sense suffix.",
+      "sources": [
+        "https://dexonline.ro/definitie/mesteac%C4%83n/json",
+        "https://ro.wikipedia.org/wiki/Mesteac%C4%83n"
+      ],
+      "requested_changes": [
+        {
+          "field": "NODES.description",
+          "node_id": "n_v1_12_mesteacan",
+          "operation": "delete_exact_clause",
+          "text": "; sensul comun de copac",
+          "preserve": "Retain all existing positive definition text, period, reviewed forms, links and evidence unchanged."
+        }
+      ]
+    },
+    {
+      "id": "v112-feriga",
+      "lemma": "Ferigă",
+      "verdict": "accept",
+      "rationale": "A school-level vascular plant with honest root, spore-bearing leaf and damp-forest associations; no flower or seed connection is fabricated.",
+      "sources": [
+        "https://dexonline.ro/definitie/ferig%C4%83/json",
+        "https://ro.wikipedia.org/wiki/Pteridofite",
+        "https://scgimpngtitu.ro/pdf/manuale-2025-2026/7%20BIOLOGIE.pdf"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v112-petala",
+      "lemma": "Petală",
+      "verdict": "accept",
+      "rationale": "A familiar flower part with an honest part-of direction, modified-leaf distinction and specific rose/carnation examples; two batch neighbors remain within the cap.",
+      "sources": [
+        "https://dexonline.ro/definitie/petal%C4%83/json",
+        "https://ro.wiktionary.org/wiki/petal%C4%83",
+        "https://scgimpngtitu.ro/pdf/manuale-2025-2026/7%20BIOLOGIE.pdf",
+        "https://ro.wikipedia.org/wiki/Trandafir",
+        "https://brgv.ro/dianthus-spp-varietati-din-colectia-de-germoplasma-a-brgv-buzau/"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v112-polen",
+      "lemma": "Polen",
+      "verdict": "accept",
+      "rationale": "Concrete school biology vocabulary with flower, plant, bee, wind and butterfly transport links; DOOM3 supports the reviewed plural without any allergy or treatment claim.",
+      "sources": [
+        "https://dexonline.ro/definitie/polen/json",
+        "https://scgimpngtitu.ro/pdf/manuale-2025-2026/7%20BIOLOGIE.pdf"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v112-nectar",
+      "lemma": "Nectar",
+      "verdict": "modify",
+      "rationale": "The sweet plant secretion has familiar pollinator and honey associations; retaining singular botanical inputs avoids beverage polysemy, and the editorial sense suffix can be deleted.",
+      "sources": [
+        "https://dexonline.ro/definitie/nectar/json",
+        "https://ro.wikipedia.org/wiki/Nectar",
+        "https://scgimpngtitu.ro/pdf/manuale-2025-2026/7%20BIOLOGIE.pdf"
+      ],
+      "requested_changes": [
+        {
+          "field": "NODES.description",
+          "node_id": "n_v1_12_nectar",
+          "operation": "delete_exact_clause",
+          "text": "; sensul botanic",
+          "preserve": "Retain all existing positive definition text, period, reviewed forms, links and evidence unchanged."
+        }
+      ]
+    },
+    {
+      "id": "v112-alun",
+      "lemma": "Alun",
+      "verdict": "accept",
+      "rationale": "An ordinary hazel shrub with recognizable edible nuts and source-backed leaf/flower links; omission of the unqualified squirrel link preserves an honest four-link neighborhood.",
+      "sources": [
+        "https://dexonline.ro/definitie/alun/json",
+        "https://ro.wikipedia.org/wiki/Alun"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v112-gutui",
+      "lemma": "Gutui",
+      "verdict": "accept",
+      "rationale": "A familiar orchard tree, distinct from its fruit; the invariant tree plural and tree/leaf/flower/edible-fruit links are coherent.",
+      "sources": [
+        "https://dexonline.ro/definitie/gutui/json",
+        "https://ro.wikipedia.org/wiki/Gutui"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v112-prun",
+      "lemma": "Prun",
+      "verdict": "accept",
+      "rationale": "A familiar fruit tree with supported flower, edible-fruit and plum connections; the unqualified leaf hypothesis is properly omitted without dropping below the structural floor.",
+      "sources": [
+        "https://dexonline.ro/definitie/prun/json",
+        "https://ro.wikipedia.org/wiki/Prun",
+        "https://scgimpngtitu.ro/pdf/manuale-2025-2026/7%20BIOLOGIE.pdf"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v112-cires",
+      "lemma": "Cireș",
+      "verdict": "accept",
+      "rationale": "A familiar fruit tree also present in school reading, with legible tree, leaf, flower and edible-fruit links and no conflation with cherries as inputs.",
+      "sources": [
+        "https://dexonline.ro/definitie/cire%C8%99/json",
+        "https://ro.wikipedia.org/wiki/Cire%C8%99",
+        "https://www.manual.digital/Manuale/romana536-tts.htm"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v112-visin",
+      "lemma": "Vișin",
+      "verdict": "accept",
+      "rationale": "A familiar orchard tree with white flowers and distinct sour-cherry fruit; the tree paradigm and leaf/flower/fruit associations fit the selected sense.",
+      "sources": [
+        "https://dexonline.ro/definitie/vi%C8%99in/json",
+        "https://ro.wikipedia.org/wiki/Vi%C8%99in"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v112-cais",
+      "lemma": "Cais",
+      "verdict": "accept",
+      "rationale": "A familiar fruit tree with a useful specific apricot connection; tree, leaves, pale flowers and edible-fruit links remain source-supported.",
+      "sources": [
+        "https://dexonline.ro/definitie/cais/json",
+        "https://ro.wikipedia.org/wiki/Cais"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v112-piersic",
+      "lemma": "Piersic",
+      "verdict": "accept",
+      "rationale": "The peach tree is recognizable and its fruit association is useful; excluding the three forms already owned by Piersică correctly preserves existing input ownership.",
+      "sources": [
+        "https://dexonline.ro/definitie/piersic/json",
+        "https://ro.wikipedia.org/wiki/Piersic"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v112-crin",
+      "lemma": "Crin",
+      "verdict": "accept",
+      "rationale": "A familiar garden flower scoped to white lily; bulbous plant, fragrant flower, stem leaves and garden links are supported without importing compound-name species.",
+      "sources": [
+        "https://dexonline.ro/definitie/crin/json",
+        "https://ro.wikipedia.org/wiki/Crin",
+        "https://plant-journal.uaic.ro/docs/1995/40.pdf",
+        "https://www.agro.basf.ro/ro/stiri/basf-in-camp/ghid-cultivare-flori-in-camp-si-in-sera.html"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v112-trandafir",
+      "lemma": "Trandafir",
+      "verdict": "modify",
+      "rationale": "A familiar ornamental shrub with clear flower, leaf, garden and petal associations; delete only the redundant editorial botanical-sense suffix.",
+      "sources": [
+        "https://dexonline.ro/definitie/trandafir/json",
+        "https://ro.wikipedia.org/wiki/Trandafir",
+        "https://www.agro.basf.ro/ro/stiri/basf-in-camp/ghid-cultivare-flori-in-camp-si-in-sera.html"
+      ],
+      "requested_changes": [
+        {
+          "field": "NODES.description",
+          "node_id": "n_v1_12_trandafir",
+          "operation": "delete_exact_clause",
+          "text": "; sensul botanic comun",
+          "preserve": "Retain all existing positive definition text, period, reviewed forms, links and evidence unchanged."
+        }
+      ]
+    },
+    {
+      "id": "v112-garoafa",
+      "lemma": "Garoafă",
+      "verdict": "accept",
+      "rationale": "A familiar ornamental carnation with supported leaves, fragrance, petals and garden use; the petal pair is canonicalized once and remains interpretable.",
+      "sources": [
+        "https://dexonline.ro/definitie/garoaf%C4%83/json",
+        "https://brgv.ro/dianthus-spp-varietati-din-colectia-de-germoplasma-a-brgv-buzau/",
+        "https://plant-journal.uaic.ro/docs/1995/40.pdf",
+        "https://www.agro.basf.ro/ro/stiri/basf-in-camp/ghid-cultivare-flori-in-camp-si-in-sera.html"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v112-lalea",
+      "lemma": "Lalea",
+      "verdict": "accept",
+      "rationale": "A familiar spring garden flower; bulbous plant, large flower, broad leaf and spring/garden associations are supported without applying a hidden-target floor.",
+      "sources": [
+        "https://dexonline.ro/definitie/lalea/json",
+        "https://ro.wikipedia.org/wiki/Lalea",
+        "https://www.agro.basf.ro/ro/stiri/basf-in-camp/ghid-cultivare-flori-in-camp-si-in-sera.html"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v112-zambila",
+      "lemma": "Zambilă",
+      "verdict": "accept",
+      "rationale": "A familiar fragrant spring bulb plant with legible flower, leaf, garden and season associations, corroborated by current horticultural and older botanical sources.",
+      "sources": [
+        "https://dexonline.ro/definitie/zambil%C4%83/json",
+        "https://ro.wikipedia.org/wiki/Zambil%C4%83",
+        "https://plant-journal.uaic.ro/docs/1995/40.pdf",
+        "https://www.agro.basf.ro/ro/stiri/basf-in-camp/ghid-cultivare-flori-in-camp-si-in-sera.html"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v112-urzica",
+      "lemma": "Urzică",
+      "verdict": "accept",
+      "rationale": "An everyday nameable plant with specific stinging-leaf, root, flower, garden and ordinary-food associations; the content adds no medical or preparation advice.",
+      "sources": [
+        "https://dexonline.ro/definitie/urzic%C4%83/json",
+        "https://ro.wikipedia.org/wiki/Urzic%C4%83"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v112-menta",
+      "lemma": "Mentă",
+      "verdict": "modify",
+      "rationale": "An everyday aromatic plant with familiar tea, leaf and flower links; the restricted singular paradigm is appropriate, and the editorial botanical-sense suffix can be deleted.",
+      "sources": [
+        "https://dexonline.ro/definitie/ment%C4%83/json",
+        "https://ro.wikipedia.org/wiki/Ment%C4%83",
+        "https://fares.ro/produs/colectie-ceai-fructe-si-plante-180-plicuri/"
+      ],
+      "requested_changes": [
+        {
+          "field": "NODES.description",
+          "node_id": "n_v1_12_menta",
+          "operation": "delete_exact_clause",
+          "text": "; sensul botanic comun",
+          "preserve": "Retain all existing positive definition text, period, reviewed forms, links and evidence unchanged."
+        }
+      ]
+    }
+  ]
+}
