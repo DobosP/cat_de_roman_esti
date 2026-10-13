@@ -1,0 +1,106 @@
+{
+  "schema": 1,
+  "reviewer": "agent:codex/gate_design_review",
+  "scope": "independent source/evidence data checks; no product runtimes or gates",
+  "sha": "f8c00f8074f6ef020402ce5569b6e1619b8d8f04",
+  "tree_sha256": "b33dc78ab1c0869f9c9715db782299649ea00aa7f45122a8f61d1a64c7531986",
+  "source_archive_files_independently_verified": 8881,
+  "reviewed_source_hashes_match": 15,
+  "native_audit": {
+    "count": 238,
+    "sha256": "6eb3a47f4fb5d7445dc916c01a47d1db6e627c4ea39752ab16a30e1c63946b3c"
+  },
+  "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+  "versions_lock_sha256": "b860db2344459c5a0cade7192b7003fac0850e9607768510f94405e4f550662e",
+  "unit": {
+    "status": "pass",
+    "checks": 27,
+    "result_sha256": "c8333779ff581c7118a79eb715750d92d80b0d79e03ab626199c6b4b34fc43d8",
+    "minutes": 25.47988333333333,
+    "artifact_files_verified": 81,
+    "outside_target_artifacts_read_from_same_SHA_runner": [
+      "go-backend/embedfs/build/dist/.gui-build.json",
+      "go-backend/embedfs/build/dist/versions.lock.json"
+    ],
+    "commands": 24,
+    "assertions": 31,
+    "closed_invocation_bridge_verified": true,
+    "frontend_tests_passed": 548,
+    "frontend_fail_skip_todo": 0,
+    "native_original_packages": 40,
+    "native_test_pass_events": 1930,
+    "native_allowed_PG_test_skips": 17,
+    "native_reuse": "miss as required for changed kit/source input key",
+    "seven_original_lane_action_sha256": {
+      "cat-frontend-unit": "7e449ac3b9de96ced7e4cdcb6755c03532e7c126d439eee506fcacd15cc3968e",
+      "cat-frontend-lint": "46288182418736a04611d14cc96f8113aa437cb77e35fc7f40f75fe2e40ba65f",
+      "cat-frontend-types": "0a0e2e86583b58acd8284e022bec641d0e02e3e6f44f0f4e04c1354a79a9735c",
+      "cat-backend-race": "2e51538178e0f4bc89081ee8743adfddeb91686bce8fec40698a8310680dd6ec",
+      "cat-backend-vet": "c3fb0ea63ef7bfc451e51c63328a1d3ccd78a74e4b07ea1a52d6c0987989c6d4",
+      "cat-authcore-race": "b17022a4519830f46ddda88f8b9c4e7f6f26e71abca026b2c2053d153cdbb1a9",
+      "cat-authcore-vet": "934a2a787b32b471d832b17b5670785f3d4a71c15e64731ead602c4cafd55540"
+    },
+    "active_UI": "core-v1.10 / UI1.0.10 exact installed proof"
+  },
+  "completed_asset_stage": {
+    "frozen_member_hashes_match_original_archive": 30,
+    "generated_legacy_sentinel_absent": true,
+    "tracked_source_sentinel_regular_empty": true
+  },
+  "verdict": "APPROVE Cat core-v1.10 adoption and local fast-forward landing of exact f8c00f8074f6ef020402ce5569b6e1619b8d8f04. Scope is local landing; app-main push is not authorized. Full 19.15 min exceeds the 15 min aspiration; no performance-equivalence claim or assertion reduction.",
+  "pending": [],
+  "source_writes_by_reviewer": false,
+  "full": {
+    "status": "pass",
+    "checks": 37,
+    "result_sha256": "d11c4c6a06c794e58101ba2f1e89214c437ff9f79a49331155aea3c3750d7aee",
+    "minutes": 19.14545,
+    "aspirational_target_minutes": 15,
+    "target_met": false,
+    "unique_artifact_files_verified": 196,
+    "same_SHA_original_lanes_verified": 7,
+    "retained_original_files_verified": 30,
+    "command_count": 26,
+    "assertion_count": 62,
+    "image_id": "sha256:d635489628ffb2f569627f7511e470fb897b0ae02f694508a75465cc6ee8c444",
+    "browser_cases_once_only": 933,
+    "browser_parallel_indices": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "exact_png_sha256": {
+      "/": "c0b8b632456c32cfe7c58c9801cb887bb140e909c47d7c50ac77014b2f5133e1",
+      "/intrusul": "78a1d16956b1fdd0fb0cc772d26447e5d302e3cbe3917f8344fa4d29a1540ea4",
+      "/perechi": "e2eb15eb02d68aa00771e1f9b0c5cea6e053a720cd5a1bae4548290ff26417d3",
+      "/conexiuni": "48d75018d626e154ecbf7aa3fde73ab4fba2b19971860c7bf8aed2eadd916eb6",
+      "/alchimie?mode=challenges": "8627c586eb858738d0fb9d1e1f148001918018b7eab2d3b83adbc4d8067e1327",
+      "/alchimie?mode=explore": "3e6f20116fff197cc5c1a2e0a7b9364eb6290a94f89ca01e7df579fab42447c6",
+      "/cald-rece": "4cff23ab1c40e1ad5103fcb3460dc334ce0fe8b2ded9c928cac719d31a449819",
+      "/lant": "db6d51349137feafb827363bf6dd9e40aeeeece831c22080ca402cdcd75762b2",
+      "/clasament": "753b66bc04a01d2d02b67947578606f631c0670299b4b1b903368aa7f257b1a6"
+    },
+    "CSP_schema": {
+      "pages": 9,
+      "current": 4,
+      "frozen": 5,
+      "unique_nonces": 9,
+      "violations": 0,
+      "legacy_violations": 0,
+      "exact_manifest_entry_eager_assets_and_origins_verified": true
+    },
+    "frozen_receipt_archive_tree": {
+      "member_count": 30,
+      "receipt_sha256": "5f9897def4020047f9d0fa199ed96b2e52d6facd1cd878da35c65cafb4e78984",
+      "archive_sha256": "742bb11130fa2bf52ba5c64cb9cfd452f7d8ac3a4fd9dc6d77e8064a6b8fef65",
+      "manifest_sha256": "9ed68d3ff5f73bec7ced96e100ff5718043bcc7efc85cf3b3916df5c82867827",
+      "generated_keep_absent": true
+    },
+    "supervisor": "source receipt gate0/owner0/errors[]/cleanup verified",
+    "existing_baseline_predicates_all_pass": 16
+  },
+  "local_main_before_landing": "c352ff4205231a1728355e886003a5301bf66701",
+  "local_main_is_ancestor": true,
+  "performance_note": "Full 19.14545 min exceeds the 15 min target; 933 cases, nine exact PNGs and unchanged vitals predicates pass. Broad timing slowdown; cause not established."
+}

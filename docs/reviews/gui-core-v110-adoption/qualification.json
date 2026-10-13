@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "operator": "agent:codex (PROGRAM E8)",
+  "source": "f8c00f8074f6ef020402ce5569b6e1619b8d8f04",
+  "runs": [
+    {
+      "target": "unit",
+      "command": "bash scripts/gate.sh unit --sha f8c00f8074f6ef020402ce5569b6e1619b8d8f04",
+      "sha": "f8c00f8074f6ef020402ce5569b6e1619b8d8f04",
+      "dirty": false,
+      "tree_sha256": "b33dc78ab1c0869f9c9715db782299649ea00aa7f45122a8f61d1a64c7531986",
+      "result_sha256": "c8333779ff581c7118a79eb715750d92d80b0d79e03ab626199c6b4b34fc43d8",
+      "status": "pass",
+      "checks": 27,
+      "started": "2026-10-13T10:48:12.199Z",
+      "finished": "2026-10-13T11:13:40.992Z",
+      "minutes": 25.4799
+    },
+    {
+      "target": "full",
+      "command": "python3 -I scripts/gui-full-runner.py --sha f8c00f8074f6ef020402ce5569b6e1619b8d8f04",
+      "sha": "f8c00f8074f6ef020402ce5569b6e1619b8d8f04",
+      "dirty": false,
+      "tree_sha256": "b33dc78ab1c0869f9c9715db782299649ea00aa7f45122a8f61d1a64c7531986",
+      "result_sha256": "d11c4c6a06c794e58101ba2f1e89214c437ff9f79a49331155aea3c3750d7aee",
+      "status": "pass",
+      "checks": 37,
+      "started": "2026-10-13T11:16:40.249Z",
+      "finished": "2026-10-13T11:35:48.976Z",
+      "minutes": 19.1455
+    }
+  ],
+  "frontend_unit_cases": 548,
+  "browser_cases": 933,
+  "browser_skips": 0,
+  "browser_flaky": 0,
+  "browser_unexpected": 0,
+  "exact_baseline_PNGs": 9,
+  "CSP_pages": 9,
+  "CSP_current_pages": 4,
+  "CSP_frozen_pages": 5,
+  "CSP_violations": 0,
+  "legacy_CSP_violations": 0,
+  "same_SHA_unit_reused_lanes": 7,
+  "performance_note": "Full19.1455min exceeds15min aspiration; earlier lighter-gate benchmark13.6421min. Broad browser and unchanged PG slowdown is recorded; no performance equivalence or single cause is claimed.",
+  "owned_cleanup": "worktree .gate/full/supervisor.json: gate_exit0,owner_exit0,errors[],cleanup.verified=true",
+  "acceptance": "APPROVE by independent gate_design_review; exact tested f8c00f80 landed on local main. App-main push remains owner-only.",
+  "retention": "Latest rolling unit/full setup retained. Prior lighter full raw tree pruned after successor verification; its committed manifests/results remain history.",
+  "documentation_checks": {
+    "archive_tree": "6d2f6be80e54ce94cb3027bb23b4a2f81fa4ff0c",
+    "cat_live_files": 61,
+    "fleet_live_files": 61,
+    "status": "pass",
+    "log_sha256": "a8a8f456bf17f5370487656b4ab6f3e5c3250ef0df582826c4d064f833160924"
+  },
+  "retained_generated_manifest": "/home/dobo/work/_temp/fix__gui-cat-lighter-gates/v110-retained-generated/manifest.json"
+}

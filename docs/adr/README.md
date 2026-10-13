@@ -170,4 +170,4 @@ Parallel lanes also allocated0188/0189 independently. All four full-filename bod
 
 - [0200](0200-bound-gate-evidence-reuse.md) — accepted bound same-SHA unit and audited unchanged-input native race reuse; full13.64min and warm unit5.42min with all assertions preserved.
 
-- [0201](0201-core-v110-consumer-contracts.md) — core-v1.10 CSS/CSP contract adoption and M2 bootstrap/planner follow-ups; qualification pending.
+- [0201](0201-core-v110-consumer-contracts.md) — accepted core-v1.10 CSS/CSP contracts and M2 bootstrap/planner follow-ups; clean unit27/full37 and independent review, local mainf8c00f80.

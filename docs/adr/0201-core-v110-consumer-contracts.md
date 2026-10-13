@@ -1,7 +1,7 @@
 # ADR-0201: Adopt core-v1.10 consumer contracts
 
 Date: 2026-10-13
-Status: Implemented on the feature branch; clean qualification pending
+Status: Accepted; local main landing 2026-10-13 at f8c00f80
 Authority: PROGRAM E8/E10; core ADR-0028; Cat M2 review follow-ups
 
 ## Decision
@@ -30,4 +30,5 @@ commands, source identity, outcomes and result hashes. Re-audit the native sourc
 signature after the generated Go module pin; do not automatically refresh it.
 [Independent source review](../reviews/gui-core-v110-adoption/source-review.json)
 and [focused checks](../reviews/gui-core-v110-adoption/focused.json) pass. Clean
-unit/full still precede acceptance.
+unit27/full37 pass on exact f8c00f80; [independent acceptance](../reviews/gui-core-v110-adoption/independent-qualification.json) verifies933 browser cases, nine exact PNGs and CSP9/0.
+Full19.15min exceeds the15min aspiration; [timings](../reviews/gui-core-v110-adoption/timing-comparison.json) preserve the measured slowdown.
