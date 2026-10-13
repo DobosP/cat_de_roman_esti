@@ -77,7 +77,7 @@ function fixture() {
 function validate(value, files = value.materialize()) {
   return validateUnitReuse(value.context, (name) => { assert.ok(files.has(name), `fixture file missing: ${name}`); return files.get(name); });
 }
-test("complete same-SHA unit binds distinct invocations and returns only required evidence", () => {
+void test("complete same-SHA unit binds distinct invocations and returns only required evidence", () => {
   const value = fixture(), files = value.materialize(), before = [...files].map(([name, bytes]) => [name, hash(bytes)]);
   const actual = validate(value, files);
   assert.equal(actual.status, "hit"); assert.equal(actual.proof.invocation, inner); assert.equal(actual.proof.wrapper_invocation, outer);
@@ -126,14 +126,14 @@ const refusals = [
   ["substituted assertion", (v) => { v.execution.actions.find((a) => a.kind === "assertion").label = "invented success"; }],
   ["stream traversal", (v) => { v.execution.actions[0].stdout_log = ".gate/unit/../../outside"; }],
 ];
-for (const [name, mutate] of refusals) test(`reuse refuses ${name}`, () => { const value = fixture(); mutate(value); assert.throws(() => validate(value)); });
+for (const [name, mutate] of refusals) void test(`reuse refuses ${String(name)}`, () => { const value = fixture(); mutate(value); assert.throws(() => validate(value)); });
 for (const filename of [".gate/unit/execution.json", ".gate/unit/bootstrap-execution.json", ".gate/unit/wrapper-current.json", ".gate/unit/wrapper-kit-config.json"]) {
-  test(`reuse refuses missing or corrupt ${filename}`, () => {
+  void test(`reuse refuses missing or corrupt ${filename}`, () => {
     const value = fixture(), files = value.materialize(); files.set(filename, Buffer.from("{}")); assert.throws(() => validate(value, files));
     files.delete(filename); assert.throws(() => validate(value, files));
   });
 }
-test("reuse refuses corrupted stdout and stderr, duplicate artifacts and unsafe unused artifacts", () => {
+void test("reuse refuses corrupted stdout and stderr, duplicate artifacts and unsafe unused artifacts", () => {
   for (const stream of ["stdout", "stderr"]) {
     const value = fixture(), files = value.materialize(); files.set(value.execution.actions[0][`${stream}_log`], Buffer.from("tampered"));
     assert.throws(() => validate(value, files), /hash differs/);
@@ -143,7 +143,7 @@ test("reuse refuses corrupted stdout and stderr, duplicate artifacts and unsafe 
     files.set(".gate/unit/result.json", encode(value.result)); assert.throws(() => validate(value, files));
   }
 });
-test("optional native proof retains only result-bound fixed graph artifacts", () => {
+void test("optional native proof retains only result-bound fixed graph artifacts", () => {
   const value = fixture();
   for (const name of ["native-inputs.json", "native-reuse/graph.stdout.json", "native-reuse/graph.stderr.log", "native-reuse/graph-command.json", "native-reuse/graph.json"]) {
     value.logs.set(`.gate/unit/${name}`, Buffer.from("synthetic native proof"));
@@ -153,7 +153,7 @@ test("optional native proof retains only result-bound fixed graph artifacts", ()
   assert.equal(actual.files.size, 26); assert.equal(actual.files.has(".gate/unit/unrelated-big-build.bin"), false);
   files.set(".gate/unit/native-inputs.json", Buffer.from("tampered")); assert.throws(() => validate(value, files), /hash differs/);
 });
-test("production loader returns miss for absent evidence, refuses symlinks, and reads a confined complete fixture", (t) => {
+void test("production loader returns miss for absent evidence, refuses symlinks, and reads a confined complete fixture", (t) => {
   const base = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../.gate"); fs.mkdirSync(base, { recursive: true });
   const root = fs.mkdtempSync(path.join(base, "synthetic-unit-reuse-")); t.after(() => fs.rmSync(root, { force: true, recursive: true }));
   const value = fixture(); assert.equal(loadUnitReuse(root, value.context).status, "miss");
@@ -167,7 +167,7 @@ test("production loader returns miss for absent evidence, refuses symlinks, and 
   const logs = path.join(root, ".gate/unit/logs"), savedLogs = path.join(root, "saved-logs"); fs.renameSync(logs, savedLogs); fs.symlinkSync(savedLogs, logs);
   assert.match(loadUnitReuse(root, value.context).reason, /nonregular/);
 });
-test("capsule reads current versions and every wrapper-failure marker forces real execution", (t) => {
+void test("capsule reads current versions and every wrapper-failure marker forces real execution", (t) => {
   const base = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../.gate"); fs.mkdirSync(base, { recursive: true });
   const directory = fs.mkdtempSync(path.join(base, "synthetic-unit-capsule-")); t.after(() => fs.rmSync(directory, { force: true, recursive: true }));
   const root = path.join(directory, "live"), capsule = path.join(directory, "capsule"); fs.mkdirSync(root); fs.mkdirSync(capsule);
