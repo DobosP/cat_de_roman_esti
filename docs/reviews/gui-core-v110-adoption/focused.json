@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "operator": "agent:codex (PROGRAM E8)",
+  "scope": "Pinned shell diagnostic checks; not clean unit/full acceptance.",
+  "sha": "493728ad606ab697e35abf3a502d80fd0a20b885",
+  "dirty": true,
+  "command": "GATE_OPERATOR=agent:codex bash scripts/gate.sh shell --sha 493728ad606ab697e35abf3a502d80fd0a20b885 --dirty < cheap-kit-checks.sh",
+  "commands": [
+    "node --check scripts/gui-full-browser.mjs",
+    "node --check scripts/gui-repo-hook.mjs",
+    "node --test frontend/tests/gui-csp-observations.test.mjs frontend/tests/gui-precompressed-assets.test.mjs",
+    "node --test --test-name-pattern='retired|retirement dispatch' frontend/tests/gui-style-operation.test.mjs",
+    "node tools/gui-bootstrap-webkit/scripts/wrapper-config-test.mjs",
+    "(cd frontend && npm run lint && npm run typecheck && npm run build)",
+    "go -C go-backend run ./cmd/cat-doc-check --root .. --inventory docs/tracked-markdown.json",
+    "python3 tools/gui-bootstrap-webkit/lint/docs_gate.py ."
+  ],
+  "log_sha256": "a81f3e11e7016b8fb82f75dc2e265dd46b2b6d750d622034ef47dde3bdb41a08",
+  "focused_tests": 52,
+  "wrapper_config_checks": 14,
+  "frontend_lint": "pass;13 pre-existing warnings,0 errors",
+  "frontend_types": "pass",
+  "frontend_build": "pass",
+  "cat_docs_live_files": 61,
+  "fleet_docs_live_files": 61,
+  "first_attempt": "Behavior tests passed; lint found5 promise registrations,1 fixture label and1 explicit sort comparator. All fixed together before this passing run.",
+  "owned_cleanup_verified": true
+}

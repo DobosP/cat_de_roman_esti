@@ -66,3 +66,11 @@ minutes versus 34.44; warm unit took 5.42 minutes versus about21. The five-minut
 unit target remains missed by25seconds; no coverage was removed to reach it.
 Independent source/evidence verification and exact bindings are retained in
 [qualification](../reviews/gui-lighter-gates/qualification.json).
+
+## Addendum 2026-10-13: core-v1.10 repin
+
+An independent re-audit of all238 native files approves the new signature after
+kit:sync changes only the local-replaced Go module version. Vendored Go bytes and
+the semantic boundary are unchanged; source/mode continuity is reconstructed
+against the prior pin. [Audit](../reviews/gui-core-v110-adoption/native-audit.json).
+The successor still requires fresh clean unit/full before acceptance.

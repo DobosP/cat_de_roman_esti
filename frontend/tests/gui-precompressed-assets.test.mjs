@@ -180,6 +180,48 @@ void test("complete current inventory/sync keeps paired representations while th
   assert.throws(() => verifyTreeRows(f.parent, "embedded-current", retainedRows(f.root)), /differs/);
 });
 
+function frozenSyncFixture() {
+  const f = fixture(), destination = path.join(f.parent, "go-backend/embedfs/legacy");
+  const proof = JSON.parse(fs.readFileSync(path.join(repo, "legacy/original-bundle.json")));
+  const archive = readTarGz(fs.readFileSync(path.join(repo, proof.archive)));
+  const source = proof.files.map((item) => {
+    const member = archive.get(item.path);
+    assert.equal(member.type, "file"); assert.equal(member.data.length, item.bytes); assert.equal(hash(member.data), item.sha256);
+    return { file: item.path, bytes: member.data };
+  });
+  write(destination, ".keep", Buffer.alloc(0));
+  compressed.copyManagedAssetFiles(destination, source);
+  return { ...f, destination, source, scaffold: path.join(destination, ".keep") };
+}
+void test("successful frozen sync removes only its verified empty generated scaffold and is repeatable", () => {
+  const f = frozenSyncFixture(), sourceBefore = f.source.map((item) => ({ file: item.file, sha256: hash(item.bytes) }));
+  const before = rows(f.destination).filter((item) => item.file !== ".keep");
+  assert.deepEqual(compressed.finalizeFrozenLegacyAssets(f.destination, f.source), { removed: true });
+  assert.deepEqual(rows(f.destination), before); assert.equal(rows(f.destination).length, 30);
+  assert.deepEqual(compressed.finalizeFrozenLegacyAssets(f.destination, f.source), { removed: false });
+  assert.deepEqual(f.source.map((item) => ({ file: item.file, sha256: hash(item.bytes) })), sourceBefore);
+});
+for (const [name, change] of [
+  ["partial copy", (f) => fs.unlinkSync(path.join(f.destination, "index.html"))],
+  ["changed copied member", (f) => fs.appendFileSync(path.join(f.destination, "index.html"), "changed")],
+  ["extra copied member", (f) => write(f.destination, "extra.txt", "extra")],
+  ["nonempty scaffold", (f) => fs.writeFileSync(f.scaffold, "owned bytes")],
+  ["symlink scaffold", (f) => { fs.unlinkSync(f.scaffold); fs.symlinkSync("index.html", f.scaffold); }],
+  ["directory scaffold", (f) => { fs.unlinkSync(f.scaffold); fs.mkdirSync(f.scaffold); }],
+]) void test(`frozen scaffold finalization refuses ${String(name)} without removing the sentinel`, () => {
+  const f = frozenSyncFixture(); change(f); assert.throws(() => compressed.finalizeFrozenLegacyAssets(f.destination, f.source));
+  assert.ok(fs.lstatSync(f.scaffold));
+});
+void test("frozen finalization refuses an incomplete source and aliases before mutation", () => {
+  const f = frozenSyncFixture();
+  assert.throws(() => compressed.finalizeFrozenLegacyAssets(f.destination, f.source.slice(1)), /thirty-file/);
+  const alias = path.join(f.parent, "alias"); fs.symlinkSync(path.join(f.parent, "go-backend"), alias);
+  assert.throws(() => compressed.finalizeFrozenLegacyAssets(path.join(alias, "embedfs/legacy"), f.source), /ancestry/);
+  const current = path.join(f.parent, "go-backend/embedfs/dist"); compressed.copyManagedAssetFiles(current, f.source); write(current, ".keep", "");
+  assert.throws(() => compressed.finalizeFrozenLegacyAssets(current, f.source), /Only the owning generated legacy/);
+  assert.ok(fs.lstatSync(f.scaffold)); assert.ok(fs.lstatSync(path.join(current, ".keep")));
+});
+
 void test("raw manifest, budget roots and limits remain exact while unchanged SDK accounting measures real level9 sidecars", () => {
   const f = fixture(), original = rows(f.root), manifestBytes = fs.readFileSync(path.join(f.root, ".vite/manifest.json"));
   const selected = collectInitialBundleFiles(f.manifest, { eagerRoots: [account] }), initial = measureGzipFiles(f.root, selected);

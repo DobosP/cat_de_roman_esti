@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 # Native Linux gate; installed byte-identically as scripts/gate.sh and web-kit/templates/gate.sh.
 # Worker: bash /absolute/worktree/scripts/gate.sh unit --sha <literal HEAD> [--dirty] [--parallel N]
-# Targets/flags remain PROGRAM sec 4.2. Owner operations require an ephemeral GATE_OPERATOR=paul.
-# Never set it in a worker. One gate per worktree; no host npm/go/task; no secret inputs.
+# Targets/flags remain PROGRAM sec 4.2. Owner operations require an ephemeral GATE_OPERATOR=paul, or
+# GATE_OPERATOR=agent:<name> for the orchestrating agent (PROGRAM E8, ADR-0024); the operator is recorded
+# in the trust pin line (op=) and in wrapper-current.json. Never set it in a worker. One gate per worktree;
+# no host npm/go/task; no secret inputs.
 set -euo pipefail; { die() { echo "gate: $*" >&2; exit 2; }; ROOT="$HOME/work/_worktrees/"   # { } is parsed whole: kit:sync may replace this file
 [[ "$(pwd -P)" = "$PWD" ]] || die "symlinked worktree path"
 [[ "$PWD/" != *//* && "$PWD/" != */./* && "$PWD/" != */../* && "$PWD/" =~ ^"$ROOT"[^/]+/[^/]+/$ ]] || die "refusing: $PWD is not exactly $ROOT<repo>/<slug>"
@@ -10,9 +12,16 @@ target=${1:-}; [ $# -gt 0 ] && shift; sha=""; dirty=false; par=""; fresh=0; keep
 while [ $# -gt 0 ]; do case "$1" in --sha) [ $# -ge 2 ] || die "--sha needs a value"; sha=$2; shift 2;; --dirty) dirty=true; shift;; --resolve-versions) resolve=1; shift;;
   --tag) [ $# -ge 2 ] || die "--tag needs roedu-toolchain:<new tag>"; tag=$2; shift 2;;
   --parallel) [ $# -ge 2 ] || die "--parallel needs N"; par=$2; shift 2;;  --fresh) fresh=1; shift;;  --keep) keep=1; shift;;  *) die "unknown argument '$1'";; esac; done
+# OPERATOR_FUNCTIONS_BEGIN
+# Owner identity (PROGRAM E8, ADR-0024): Paul himself, or the orchestrating agent as agent:<name>. Any other value is refused
+# for every target so nothing else can reach a pin line or wrapper-current.json; readers of older pin lines (no op=) stay valid.
+owner_operator() { local LC_ALL=C; [ "$1" = paul ] || [[ $1 =~ ^agent:[a-z0-9][a-z0-9-]{1,39}$ ]]; }   # LC_ALL=C scoped to the match: under a UTF-8 locale bash's [a-z0-9] also matches non-ASCII letters/digits (ADR-0024 review N1)
+trust_pin_line() { printf '%s/%s sha=%s %s op=%s\n' "$1" "$2" "$3" "$(date -u +%FT%TZ)" "$4"; }
+# OPERATOR_FUNCTIONS_END
+[ -z "$op" ] || owner_operator "$op" || die "GATE_OPERATOR '$op' is neither paul nor agent:<name> (name matches ^[a-z0-9][a-z0-9-]{1,39}$; PROGRAM E8, ADR-0024)"
 case "$target" in unit|full|gen|deps|kit:sync|build|image|baseline|golden:capture|golden:verify|contract:refresh|legacy:freeze|e2e|perf) ;;
-  qualify|shell|toolchain|trust) [ "$op" = paul ] || die "'$target' is Paul-only (GATE_OPERATOR=paul)";; *) die "unknown target '$target' (see usage above)";; esac
-[ "$keep" = 0 ] || [ "$op" = paul ] || die "--keep is Paul-only"; [ "$resolve" = 0 ] || [ "$target" = gen ] || die "--resolve-versions is valid only with gen"
+  qualify|shell|toolchain|trust) [ -n "$op" ] || die "'$target' is owner-only (GATE_OPERATOR=paul or GATE_OPERATOR=agent:<name>)";; *) die "unknown target '$target' (see usage above)";; esac
+[ "$keep" = 0 ] || [ -n "$op" ] || die "--keep is owner-only (GATE_OPERATOR=paul or GATE_OPERATOR=agent:<name>)"; [ "$resolve" = 0 ] || [ "$target" = gen ] || die "--resolve-versions is valid only with gen"
 [ -z "$tag" ] || [ "$target" = toolchain ] || die "--tag is valid only with toolchain"
 [[ $sha =~ ^[0-9a-f]{40}([0-9a-f]{24})?$ ]] || die "--sha <full commit sha> is mandatory"; tdir=${target//:/-}   # result dir: ':' becomes '-'
 src=$PWD; repo=$(basename "$(dirname "$src")"); rawslug=$(basename "$src"); [[ $repo =~ ^[a-z0-9_-]+$ && $rawslug =~ ^[a-z0-9_-]+$ ]] || die "repo/slug must be lowercase portable names"
@@ -99,7 +108,88 @@ export DJANGO_CSP_ENFORCE=$enf RO_TEACHER_CSP_ENFORCE=$enf CAT_CSP_ENFORCE=$enf 
 case "$target" in full|e2e|perf|baseline|golden:capture|golden:verify|shell|toolchain) profile=full
   [[ $PG_MAJOR =~ ^[0-9]+$ ]] || die "PG_MAJOR in .gate.env is '$PG_MAJOR': Paul fills PROD_PG_MAJOR (PROGRAM.md sec 3)"
   [[ $GATE_DB_IMAGE != *__* && $GATE_DB_IMAGE != *'<'* ]] || die "GATE_DB_IMAGE '$GATE_DB_IMAGE' still holds a placeholder";; *) profile=unit;; esac
-if [ "$profile" = full ]; then export GATE_DB_DSN=postgres://gate:gate@db:5432/gate?sslmode=disable GATE_APP_URL=http://roedu-gate.test:8080; fi
+if [ "$profile" = full ]; then export GATE_DB_DSN=postgres://gate:gate@db:5432/gate?sslmode=disable GATE_APP_URL=http://localhost:8080; fi
+# TRUSTED_ORIGIN_FUNCTIONS_BEGIN
+runtime_observation() {
+  python3 -I -c 'import subprocess,sys; r=subprocess.run(sys.argv[1:],stdout=subprocess.PIPE,timeout=15,check=True); sys.stdout.buffer.write(r.stdout)' "$@"
+}
+runner_service() {
+  case "$1" in unit) printf '%s\n' runner;; full) printf '%s\n' runner-full;; *) return 2;; esac
+}
+verify_app_container() {
+  local expected_container=$1 expected_image=$2 current_container current_image
+  [[ $expected_container =~ ^[0-9a-f]{64}$ && $expected_image =~ ^sha256:[0-9a-f]{64}$ ]] || return 2
+  current_container=$(runtime_observation "${MDC[@]}" --profile full ps -q app) || return 2
+  [ "$current_container" = "$expected_container" ] || return 2
+  current_image=$(runtime_observation docker inspect -f '{{.Image}} {{.State.Running}}' "$current_container") || return 2
+  [ "$current_image" = "$expected_image true" ] || return 2
+}
+# Raw rejected task bytes are diagnostics, never a result authority. No JSON status parsing.
+retain_rejected_app_result() {
+  python3 -I - "$PWD" "$tdir" <<'PY_RUNTIME_REJECT'
+import os,stat,sys
+root,target=sys.argv[1:]
+assert os.path.realpath(root)==root
+assert target not in ('','.','..') and all(c in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._' for c in target)
+directory=os.open(root,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
+for name in ('.gate',target):
+    st=os.stat(name,dir_fd=directory,follow_symlinks=False)
+    assert stat.S_ISDIR(st.st_mode) and not stat.S_ISLNK(st.st_mode), 'unsafe rejection evidence ancestor'
+    child=os.open(name,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW,dir_fd=directory)
+    opened=os.fstat(child); assert (opened.st_dev,opened.st_ino)==(st.st_dev,st.st_ino)
+    os.close(directory); directory=child
+source='result.json'; destination='runtime-rejected-result.json'
+try: original=os.stat(source,dir_fd=directory,follow_symlinks=False)
+except FileNotFoundError: os.close(directory); print("absent"); sys.exit(0)
+fd=None
+try:
+    assert stat.S_ISREG(original.st_mode) and not stat.S_ISLNK(original.st_mode), 'nonregular rejected result'
+    fd=os.open(source,os.O_RDONLY|os.O_NOFOLLOW,dir_fd=directory)
+    opened=os.fstat(fd); assert stat.S_ISREG(opened.st_mode) and (opened.st_dev,opened.st_ino)==(original.st_dev,original.st_ino)
+    with os.fdopen(fd,'rb',closefd=False) as stream: raw=stream.read()
+    output=os.open(destination,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600,dir_fd=directory)
+    with os.fdopen(output,'wb') as stream: stream.write(raw); stream.flush(); os.fsync(stream.fileno())
+finally:
+    if fd is not None: os.close(fd)
+    # Remove the original authority even if diagnostic publication failed. Never unlink a replacement inode.
+    current=os.stat(source,dir_fd=directory,follow_symlinks=False)
+    assert not stat.S_ISDIR(current.st_mode) and (current.st_dev,current.st_ino)==(original.st_dev,original.st_ino)
+    os.unlink(source,dir_fd=directory); os.fsync(directory); os.close(directory)
+print('retained')
+PY_RUNTIME_REJECT
+}
+check_app_after_task() {
+  if [ "$profile" = full ] && [ -n "${running_container:-}" ]; then
+    if ! verify_app_container "$running_container" "$GATE_APP_IMAGE_ID"; then
+      local primary_rc=$rc retention
+      if retention=$(retain_rejected_app_result); then
+        case "$retention" in absent|retained) ;; *) retention=failed;; esac
+      else retention=failed; fi
+      rc=2; stage=runtime-app-changed
+      # The task can alter evidence paths: publish only through no-follow directory FDs.
+      if ! python3 -I - "$PWD" "$tdir" "$primary_rc" "$retention" "$sha" "$GATE_TREE_SHA256" <<'PY_APP_REJECTION'
+import json,os,stat,sys
+root,target,primary,retention,sha,tree=sys.argv[1:]
+assert os.path.realpath(root)==root and target not in ('','.','..')
+assert all(c in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._' for c in target)
+directory=os.open(root,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
+for name in ('.gate',target):
+    st=os.stat(name,dir_fd=directory,follow_symlinks=False)
+    assert stat.S_ISDIR(st.st_mode) and not stat.S_ISLNK(st.st_mode)
+    child=os.open(name,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW,dir_fd=directory)
+    opened=os.fstat(child); assert (opened.st_dev,opened.st_ino)==(st.st_dev,st.st_ino)
+    os.close(directory); directory=child
+record={'status':'fail','reason':'wrapper:runtime-app-changed','rc':2,'primary_rc':int(primary),'retention':retention,'sha':sha,'tree_sha256':tree}
+output=os.open('wrapper-fail.json',os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600,dir_fd=directory)
+with os.fdopen(output,'w') as stream: json.dump(record,stream,separators=(',',':')); stream.write('\n'); stream.flush(); os.fsync(stream.fileno())
+os.close(directory)
+PY_APP_REJECTION
+      then echo 'gate: app rejection diagnostic publication failed (existing or unsafe evidence); result remains rejected' >&2; fi
+      echo "gate: app association changed; primary rc=$primary_rc; rejected task result retention=$retention" >&2
+    fi
+  fi
+}
+# TRUSTED_ORIGIN_FUNCTIONS_END
 bounded_build() {
   local caps mem period quota
   caps=$(docker inspect -f '{{.HostConfig.Memory}} {{.HostConfig.CpuPeriod}} {{.HostConfig.CpuQuota}}' buildx_buildkit_roedu-gates-linux0 2>/dev/null) || die "owner must provision capped roedu-gates-linux builder"
@@ -122,7 +212,7 @@ if [ "$target" = toolchain ]; then   # host-side, Paul only, BEFORE the trust ch
   exit 0; fi
 for f in scripts/gate.sh .gate.env "$COMPOSE_FILE" Taskfile.yml; do [ -f "$f" ] && [ ! -L "$f" ] || die "trust set incomplete"; done
 TP="$HOME/gates/trust"; TRUST=$(snapshot . trust scripts/gate.sh .gate.env "$COMPOSE_FILE" Taskfile.yml) || die "trust set incomplete"
-if [ "$target" = trust ]; then [ "$dirty" = false ] || die "pin a clean commit"; mkdir -p "$TP"; echo "$repo/$slug sha=$sha $(date -u +%FT%TZ)" >> "$TP/$TRUST"; exit 0; fi
+if [ "$target" = trust ]; then [ "$dirty" = false ] || die "pin a clean commit"; mkdir -p "$TP"; trust_pin_line "$repo" "$slug" "$sha" "$op" >> "$TP/$TRUST"; exit 0; fi
 [ -f "$TP/$TRUST" ] || die "no trust pin for gate files $TRUST (wrapper/.gate.env/compose/Taskfile changed). Codex: GATE PENDING $target sha=$sha (untrusted gate files)"
 [[ $TOOLCHAIN_DIGEST =~ ^sha256:[0-9a-f]{64}$ ]] || die "TOOLCHAIN_DIGEST in .gate.env is not pinned ('$TOOLCHAIN_DIGEST'): Paul runs 'toolchain --tag <new>', then GATE-CHANGE: toolchain <tag>"
 have=$(docker image inspect -f '{{.Id}}' "$TOOLCHAIN_IMAGE" 2>/dev/null || true)   # locally built image: compare the image ID, not RepoDigests
@@ -146,10 +236,11 @@ trap cleanup_gate EXIT
 # The current selector is ephemeral; target histories remain intact. Expected bytes
 # live in host-private control, so a task cannot publish a pass after changing it.
 write_current_context() {
-  python3 -I - "$control/config-before.json" "$control/current-wrapper.json" <<'PY_CURRENT_CONTEXT'
+  python3 -I - "$control/config-before.json" "$control/current-wrapper.json" "$op" <<'PY_CURRENT_CONTEXT'
 import hashlib,json,sys,uuid
-source,destination=sys.argv[1:]; raw=open(source,'rb').read(); captured=json.loads(raw)
-record={'schema':1,'invocation':str(uuid.uuid4()),'target':captured['target'],'sha':captured['sha'],'tree_sha256':captured['tree_sha256'],'toolchain_digest':captured['toolchain_digest'],'config_sha256':captured['config_sha256'],'config_path':'.gate/'+captured['target'].replace(':','-')+'/wrapper-kit-config.json','config_file_sha256':hashlib.sha256(raw).hexdigest()}
+source,destination,*rest=sys.argv[1:]; raw=open(source,'rb').read(); captured=json.loads(raw)
+operator=rest[0] if rest and rest[0] else None   # schema 1 unchanged: operator is paul, agent:<name> or null for a worker run (ADR-0024)
+record={'schema':1,'invocation':str(uuid.uuid4()),'target':captured['target'],'sha':captured['sha'],'tree_sha256':captured['tree_sha256'],'toolchain_digest':captured['toolchain_digest'],'config_sha256':captured['config_sha256'],'config_path':'.gate/'+captured['target'].replace(':','-')+'/wrapper-kit-config.json','config_file_sha256':hashlib.sha256(raw).hexdigest(),'operator':operator}
 with open(destination,'xb') as output: output.write((json.dumps(record,separators=(',',':'))+'\n').encode())
 PY_CURRENT_CONTEXT
   safe_path "$dst/.gate/wrapper-current.json"
@@ -492,14 +583,17 @@ if [ "$rc" = 0 ]; then primary_started=1; case "$target" in image) stage=image; 
      if [ "$rc" = 0 ] && [ "$profile" = full ]; then
        "${MDC[@]}" --profile full up -d --wait db app || rc=$?
        if [ "$rc" = 0 ]; then
-         running_container=$("${MDC[@]}" --profile full ps -q app) || rc=$?
+         running_container=$(runtime_observation "${MDC[@]}" --profile full ps -q app) || rc=$?
+         if [ "$rc" = 0 ] && [[ ! $running_container =~ ^[0-9a-f]{64}$ ]]; then rc=2; stage=runtime-container-invalid; fi
          if [ "$rc" = 0 ]; then
-           running_image=$(docker inspect -f '{{.Image}}' "$running_container") || rc=$?
-           if [ "$running_image" != "$GATE_APP_IMAGE_ID" ]; then rc=2; stage=runtime-image-mismatch; fi
+           running_image=$(runtime_observation docker inspect -f '{{.Image}} {{.State.Running}}' "$running_container") || rc=$?
+           if [ "$running_image" != "$GATE_APP_IMAGE_ID true" ]; then rc=2; stage=runtime-image-mismatch; fi
          fi
        fi
      fi
-     if [ "$rc" = 0 ]; then stage=task; "${MDC[@]}" --profile "$profile" run --no-deps --rm --user "$(id -u):$(id -g)" runner "${cmd[@]}" || rc=$?; fi;; esac; fi
+     if [ "$rc" = 0 ]; then selected_runner=$(runner_service "$profile") || { rc=2; stage=runner-profile; }; fi
+     if [ "$rc" = 0 ]; then stage=task; "${MDC[@]}" --profile "$profile" run --no-deps --rm --user "$(id -u):$(id -g)" "$selected_runner" "${cmd[@]}" || rc=$?; fi
+     check_app_after_task;; esac; fi
 if [ "$primary_started" = 1 ] && ! verify_current_context; then rc=4; stage=current-context-changed; fi
 safe_path "$src/.gate/$tdir"; safe_path "$dst/.gate/$tdir"; safe_path "$dst/.gate/$tdir/result.json"
 [ -z "$(find ".gate/$tdir" -type l -print -quit)" ] || die "symlink in gate evidence"
@@ -530,7 +624,7 @@ PY_RESULT
 fi
 if [ "$rc" = 0 ] && [ -f ".gate/$tdir/result.json" ] && ! python3 -I -c 'import json,sys; sys.exit(json.load(open(sys.argv[1]))["status"] != "pass")' ".gate/$tdir/result.json"; then rc=1; stage=task-result-fail; fi
 ro=0; if [ "$primary_started" = 1 ] && [ "$before" != "$(prot "${allow[@]}")" ]; then ro=1; rc=3; stage=read-only-path; rm -f ".gate/$tdir/result.json"; fi   # sec 4.8: no result counts
-if [ "$rc" != 0 ] && [ ! -f ".gate/$tdir/result.json" ]; then printf '{"status":"fail","reason":"wrapper:%s","rc":%s,"sha":"%s","tree_sha256":"%s"}\n' \
+if [ "$rc" != 0 ] && [ ! -f ".gate/$tdir/result.json" ] && [ ! -f ".gate/$tdir/wrapper-fail.json" ]; then printf '{"status":"fail","reason":"wrapper:%s","rc":%s,"sha":"%s","tree_sha256":"%s"}\n' \
   "$stage" "$rc" "$sha" "$GATE_TREE_SHA256" > ".gate/$tdir/wrapper-fail.json"; fi
 if [ "$ro" = 1 ]; then mkdir -p "$src/.gate/$tdir"; rsync -a --delete ".gate/$tdir/" "$src/.gate/$tdir/"; fi   # always: a run without a result clears the source copy too
 if [ "$ro" = 1 ]; then echo "gate: '$target' changed a read-only path (sec 4.8); result discarded, nothing else synced back" >&2; exit 3; fi

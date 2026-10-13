@@ -1,8 +1,8 @@
 # S1 Cat GUI migration execution plan
 
-Branch: fix/gui-cat-prerequisites-linux
+Branch: fix/gui-cat-lighter-gates
 Session: S1, M0 through M4
-Worktree: /home/dobo/work/_worktrees/cat_de_roman_esti/fix__gui-cat-prerequisites-linux
+Worktree: /home/dobo/work/_worktrees/cat_de_roman_esti/fix__gui-cat-lighter-gates
 Valid until: S1 completion or a superseding owner dispatch — then treat as history.
 
 Linux current 2026-10-10: core1.6 is qualified/published, Cat owner sync/deps and final805 sync/trust are actual. UI0.3 remains active/UI1.0.6 staged. Targeted52d Node61/Go5top77 passed; the one actual formatter layout correction is applied. Actual full805 passed real image-bound secure-localhost/native-Web-Locks preflight and frontend380/types, then stopped on17 test-registration promise lint errors before backend/PG/1207/900/CSP/baselines. Exact17-void SOURCE correction is reviewed/applied; postfix full remains NOT RUN. All failed/original packets and older Windows UNAPPLIED paragraphs below remain history; current STATUS/controller supersede those dispositions. Budgets remain red; no formal KIT_BUMP/M0/M1/full/device or fastest/savings acceptance.
@@ -11,9 +11,11 @@ Linux current 2026-10-10: core1.6 is qualified/published, Cat owner sync/deps an
 
 ## 1. Purpose / Big Picture
 
-Preserve the six server-authoritative Romanian games while moving the SPA from React 19 to Preact 11 and preact-iso. Deliver managed embedded, compressed assets from one Go binary under enforced CSP. Measure initial gzip JavaScript against the 40,960-byte ceiling (30,720-byte target), LCP below 2,500 ms and scripted INP below 200 ms. Actual physical measurements and human sign-offs remain facts to obtain.
+Preserve the six server-authoritative Romanian games while moving the SPA from React 19 to Preact 11 and preact-iso. Deliver managed embedded, compressed assets from one Go binary under enforced CSP. Measure initial gzip JavaScript against the 40,960-byte ceiling (30,720-byte target), LCP below 2,500 ms and scripted INP below 200 ms. Emulated gate vitals are the performance evidence; E10 removes physical/device testing. Production and app-main pushes remain owner-only.
 
 ## 2. Progress
+
+- [x] 2026-10-13T10:34Z — E10 lighter gates independently qualified at d98fe50e (cold27/full37/warm27; full13.64min, warm5.42min; all assertions retained). Published core-v1.10 kit staged493728ad; consumer kit:sync/deps pass after fixed-probe rebinding. REQ-9/REQ-10 bootstrap/CSP/CSS and retired planner follow-ups implemented; native re-audit, focused checks and clean unit/full pending. [Decision and records](../adr/0201-core-v110-consumer-contracts.md).
 
 - [x] 2026-10-13 — M2 E7 integration landed on local `main` (owner decision, [ADR-0198](../adr/0198-owner-lands-m2-before-device-checkpoint.md), programme E9): kit stage core-v1.9 → `GATE-CHANGE: activate UI1 with the M2 port` (Perechi pulled forward; seven descriptor readers admit the core-v1.9 `operator` key) → merge of content `main` ed9932fa (V1.13). Full at the first merge found only the Perechi lost-response focus recovery (4 cases), fixed in the integration. KIT_BUMP core-v1.9 acknowledged: `KIT_BUMP: core-v1.9 applied; delete the shims for REQ-8, then gate unit.` (no shim existed). M2 accepted 2026-10-13 on its gate evidence (owner E10, [ADR-0199](../adr/0199-owner-no-device-checkpoint-agent-lands-m3-m4.md); no device checkpoint). Results: [bindings note](../reviews/gui-m2-activation/bindings.md), roedu-ui loop ledger.
 

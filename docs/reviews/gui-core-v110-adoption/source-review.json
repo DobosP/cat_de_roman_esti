@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "reviewer": "agent:codex/gate_design_review",
+  "scope": "Cat core-v1.10 consumer integration source review; no reviewer product tests/runtimes",
+  "base_commit": "493728ad",
+  "verdict": "NO BLOCKING SOURCE FINDINGS; approved native pin applied; corrected focused/lint batch and clean unit/full validation pending",
+  "source_sha256": {
+    "scripts/gui-csp-observations.mjs": "fa4792bdf57f6e8552d5182f3c3b45f8d94ae97aaf2fb955e4612e21380bd899",
+    "scripts/gui-assets.mjs": "7b821370269b8929b5a184e21469fe4462f047aaf668d459ee7cc2f87c05dfff",
+    "scripts/gui-full-browser.mjs": "cb82e209c03d94a0e1c4aad517d7660f6dd231df2fecc92a9179e17072340267",
+    "scripts/gui-repo-hook.mjs": "2c72193ffb50b4565629f283da2f8830359070ad560d59d42d18f45fd03a4046",
+    "scripts/gui-style-operation.mjs": "c08b11efc64af76173391b6602810d7f7f763b4693d331af15bfb51a61fd3589",
+    "frontend/scripts/gui-precompressed-assets.mjs": "6e13efa594e9d86f19d5ab5d7975e6a350f8cb895cbcfa81fe19454d027315ab",
+    "scripts/gui-hook-runtime.mjs": "bcb1392d8af8798bb35eed9dda60ec489631dba3962940d37ee40475a9292b03",
+    "scripts/gui-toolchain-probe.mjs": "75718ed7028e3d5fc91a5bb24efee45eb93f1b0b8244cbff0589e2321169c34b",
+    "frontend/src/main.tsx": "d02e8a2682aac2aad4bf33cfb0844a2cd6958730c72c8b05da3fb162d287f50d",
+    "frontend/tests/gui-csp-observations.test.mjs": "809680220077e65bc5ed3ee30b40e2c9ddc57ce950d79002160a404ce57971ce",
+    "frontend/tests/gui-precompressed-assets.test.mjs": "833d259a83e28e079aa43b14f74eb6fd8664c5d90896956e4ff849b02391b2d8",
+    "frontend/tests/gui-style-operation.test.mjs": "d094519b22995feff4ee08a9625d0588d4b3e76596c70582fe5ae735e26d85f2",
+    "frontend/tests/gui-hook-runtime.test.mjs": "aaae4afd09b1f8ff2f65e0362997de08e2dc581dbd833589f59a89e0f024ff06",
+    "frontend/tests/fixtures/gui-hook-runtime-bootstrap.json": "26a1ea508fd96b392c25f97ef7c26fb0533ccb0aa07173b6cfda83dad1028653",
+    "scripts/gui-native-reuse.mjs": "e03be8cb9cb7edee54f1ba7345fdf763d3ce10abb5d1b01a74a0483248fd6c22"
+  },
+  "delivered_bootstrap_file_sha256": {
+    "package.json": "5e445c33a8354dadc1d6ed925f90686e2ba0434ee744b94085e40feee2b92875",
+    "scripts/run-task.mjs": "d0d6a6177c26e29c19a3f51f7070a2899498331fbd9d08991e2af514becfe818",
+    "scripts/csp-measurement.mjs": "dab858611f52b7e10024fbae58aff74626f8dd67cea7129d0209f649bf9a0465",
+    "scripts/locate-kit.mjs": "1942d09148153cb1802da8bf3e4da6299fa64fbaa01c84c7f7b8e4dc6e4c4a4a",
+    "scripts/ui-adoption-config.mjs": "c1292e5b377b64934cafeaaf3ab2ba45f8f5393229716f4a71b5a65ad9122f60",
+    "scripts/ast-artifacts.mjs": "aaa1ed835db6963d95e345e264d4bdcc5b5d748f345294db67af6be3cd439265",
+    "scripts/kit-sync.mjs": "0d76e09e3d0c9e7d959e98a0e1093b4ad4d82deca29d1e61f77e0576ffb5f300",
+    "schemas/validate.mjs": "32552ef83c2baf911f5412b7053bf70e832ac19e43ed611ebc522c50186f40f4",
+    "schemas/ui-adoption.schema.json": "e8b3f95ffd875a78fc97898d2cedc540ce719ddc84e5f3f9f1ee99f33bbffa64"
+  },
+  "independent_data_checks": {
+    "nine_bootstrap_files_and_fixture_pins_match_canonical_delivered_archive": true,
+    "bootstrap_gate_template_matches_delivered_bytes": true,
+    "new_vendor_archives_and_sidecars_match_core_v110": true,
+    "frozen_receipt_archive_manifest_pins_match_original_bytes": true,
+    "canonical_layer_order_starts_delivered_UI_CSS": true,
+    "no_content_baseline_or_frozen_archive_source_changes": true
+  },
+  "CSP_review": "Exact nine routes/global nonce uniqueness; total=current+frozen; frozen descriptor has exact manifest entry/eager CSS/preloads/URLs; empty frozen fields omitted when all current. Existing assertions preserved.",
+  "scaffold_review": "Only populated generated legacy tree; exactly thirty archive members/bytes before removal; only empty regular .keep; symlink/directory/nonempty/alias/partial/extra cases refuse; tracked source scaffold unchanged.",
+  "planner_review": "Two retired style operations produce named failure before operation context, commands or artifacts; request validation and historical protocol tests remain.",
+  "native_reaudit": {
+    "files": 238,
+    "sha256": "6eb3a47f4fb5d7445dc916c01a47d1db6e627c4ea39752ab16a30e1c63946b3c",
+    "only_native_delta": "go-backend/go.mod: required toolkit core-v1.9 to core-v1.10; all Go implementation/test bytes unchanged",
+    "helper_pin_update": "Applied and inspected; matches the independently recomputed approved v1.10 signature"
+  },
+  "generated_gate_results": {
+    "kit-sync": {
+      "result_sha256": "5860056ac6cea63cdb34b804acfc3bc07ba82c0d4e766fb4d769cb747ee8267b",
+      "checks": 9,
+      "sha": "493728ad606ab697e35abf3a502d80fd0a20b885",
+      "dirty": true,
+      "scope": "generated-input qualification only, not consumer unit/full acceptance"
+    },
+    "deps": {
+      "result_sha256": "9e5b933d18b715bea71e19fc7b80bb2bb3bc6eeeae133e073164787a2baf26ec",
+      "checks": 4,
+      "sha": "493728ad606ab697e35abf3a502d80fd0a20b885",
+      "dirty": true,
+      "scope": "generated-input qualification only, not consumer unit/full acceptance"
+    }
+  },
+  "pending": [
+    "focused/lint batch after lint-only corrections",
+    "clean unit and full on final source SHA",
+    "nine exact PNGs and complete mixed CSP runtime verification"
+  ],
+  "source_writes_by_reviewer": false,
+  "lint_fix_review": "Inspected void test registrations, String(name) fixture label and explicit lexical string comparators; no assertion or string-order semantic changes.",
+  "validation_update": "Root reports focused behavior tests passed before lint corrections; corrected batch and final clean unit/full not independently verified yet."
+}

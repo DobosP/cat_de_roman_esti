@@ -4,7 +4,7 @@ import path from "node:path";
 import { createHash, randomUUID } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
-import { STYLE_OPERATION, NORMALIZED_STYLE_OPERATION, validGenRequest, sourcePath, readStyleIdentity, captureProtected, assertProtectedUnchanged, validatePlannerOutput } from "../../scripts/gui-style-operation.mjs";
+import { STYLE_OPERATION, NORMALIZED_STYLE_OPERATION, validGenRequest, refuseRetiredStyleOperation, sourcePath, readStyleIdentity, captureProtected, assertProtectedUnchanged, validatePlannerOutput } from "../../scripts/gui-style-operation.mjs";
 
 // These are protocol/data fixtures, never actual wrapper/bootstrap/planner receipts.
 // Only a separately authorized native owning gen may earn planning evidence.
@@ -14,6 +14,31 @@ import { STYLE_OPERATION, NORMALIZED_STYLE_OPERATION, validGenRequest, sourcePat
 const repository = fs.realpathSync(fileURLToPath(new URL("../../", import.meta.url)));
 const sha = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const request = { schema: 1, operation: STYLE_OPERATION, fixtures: "frontend/e2e/original/runtime.spec.mjs" };
+for (const operation of [STYLE_OPERATION, NORMALIZED_STYLE_OPERATION]) void test(`retired ${operation} fails before commands, filesystem context or artifacts`, () => {
+  const checks = [], actions = [];
+  const hook = {
+    check(name, callback) {
+      let status = "pass", reason;
+      try { callback(); } catch (error) { status = "fail"; reason = error.message; }
+      checks.push({ name, status, reason });
+    },
+    assert(label, predicate) { const passed = predicate() === true; actions.push({ kind: "assertion", label, passed }); if (!passed) throw Error(label); },
+    get context() { throw Error("retirement must not acquire filesystem context"); },
+    get run() { throw Error("retirement must not execute commands"); },
+    get artifact() { throw Error("retirement must not create artifacts"); },
+  };
+  const selected = { ...request, operation }, before = structuredClone(selected);
+  assert.equal(refuseRetiredStyleOperation(hook, selected), true);
+  assert.deepEqual(selected, before); assert.equal(checks.length, 1); assert.equal(actions.length, 1);
+  assert.equal(checks[0].name, "cat-style-planning-retired"); assert.equal(checks[0].status, "fail");
+  assert.match(checks[0].reason, /retired with UI1 activation/); assert.equal(actions[0].passed, false);
+});
+void test("retirement dispatch leaves other closed gen requests untouched and rejects malformed input", () => {
+  const hook = new Proxy({}, { get() { throw Error("unexpected hook access"); } });
+  for (const operation of ["qualify-original-react", "capture-original-baseline", "replay-normalized-react"])
+    assert.equal(refuseRetiredStyleOperation(hook, { ...request, operation }), false);
+  assert.throws(() => refuseRetiredStyleOperation(hook, { ...request, apply: true }), /Closed gen request/);
+});
 const configuration = { role: "consumer", app: "cat_de_roman_esti", npm_dir: "tools/gui-bootstrap-webkit", vendor_dir: "frontend/vendor", go_dirs: ["go-backend"] };
 function write(root, relative, value) {
   const file = sourcePath(root, relative, true); fs.mkdirSync(path.dirname(file), { recursive: true });

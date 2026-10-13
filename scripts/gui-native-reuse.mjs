@@ -21,7 +21,7 @@ export const NATIVE_REUSE_POLICY = "historical-audited-source-reuse-with-fresh-g
 // Independently reviewed source at e82e5562; never regenerate this pin after a
 // native change without another explicit semantic audit and review. Rows are
 // sorted {path,mode:0777,sha256} for every .go/go.mod/go.sum in both native trees.
-export const AUDITED_NATIVE_SOURCE = Object.freeze({ count: 238, sha256: "047f3f53f1131820bbc5ef04f7d7eb64f74fe05812a1b9b0f40d660465d54e06" });
+export const AUDITED_NATIVE_SOURCE = Object.freeze({ count: 238, sha256: "6eb3a47f4fb5d7445dc916c01a47d1db6e627c4ea39752ab16a30e1c63946b3c" });
 const ignored = new Set([".git", "node_modules", ".gate", ".vitest", "test-results", "TASK_BRIEF.md", "TASK_RESULT.md", "SWARM_RESULT.md"]);
 const frontendInputs = new Set(["frontend/package.json", "frontend/package-lock.json", "frontend/src/release.ts", "frontend/e2e/seeded-starts.json"]);
 export const BACKEND_RACE_ARGS = Object.freeze(["test", "-race", "-timeout=30m", "-count=1", "-json", "./..."]);

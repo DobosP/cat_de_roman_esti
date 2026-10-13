@@ -8,7 +8,8 @@ import { createGateReuse } from "./gui-reuse-driver.mjs";
 import { runOwnerLegacyJourney } from "./gui-legacy-owner.mjs";
 import { createHash } from "node:crypto";
 import { pathToFileURL } from "node:url";
-import { validGenRequest, runOriginalStyleOperation, NORMALIZED_STYLE_OPERATION, runNormalizedStyleOperation } from "./gui-style-operation.mjs";
+import { validGenRequest, refuseRetiredStyleOperation } from "./gui-style-operation.mjs";
+import { catBrowserDescriptor } from "./gui-csp-observations.mjs";
 
 const target = process.argv[2], invocation = process.argv[3];
 const root = process.cwd();
@@ -220,14 +221,7 @@ switch (target) {
     const request = JSON.parse(fs.readFileSync(path.join(root, "scripts/gui-gen-request.json")));
     hook.check("cat-gen-request", () => hook.assert("Explicit committed original qualification or style-plan request", () => validGenRequest(request)));
     if (hook.checks.some((item) => item.status !== "pass")) break;
-    if (request.operation === "plan-original-styles") {
-      runOriginalStyleOperation(hook, config, request);
-      break;
-    }
-    if (request.operation === NORMALIZED_STYLE_OPERATION) {
-      runNormalizedStyleOperation(hook, config, request, process.env);
-      break;
-    }
+    if (refuseRetiredStyleOperation(hook, request)) break;
     if (request.operation === "replay-normalized-react") {
       // Retired with the M2 activation: the sealed React replay needs the React
       // graph that the Preact port removed. Its contracts live on only in the
@@ -554,8 +548,10 @@ switch (target) {
     command("cat-http-parity", "go", ["run", "./cmd/cat-qualify", "parity", "--binary", path.join(scratch, "cat-server")], path.join(root, "go-backend"));
     runOwnerLegacyJourney(hook); // Named failure is retained; the independent browser/baseline command still runs.
     command("cat-browser-full", "node", ["scripts/gui-full-browser.mjs"], root, { CDR_NATIVE_BINARY: path.join(scratch, "cat-server"), CDR_BROWSER_PLAN_BINARY: path.join(scratch, "cat-browser-plan") });
-    if (fs.existsSync(path.join(root, `${directory}/active-csp-observation.json`))) hook.artifact(`${directory}/active-csp-observation.json`);
-    hook.browser = { inventory: "frontend/e2e/gui-inventory.json", asset_root: "go-backend/embedfs/dist", entry: "index.html", asset_prefix: "/" };
+    const cspObservation = `${directory}/active-csp-observation.json`;
+    if (fs.existsSync(path.join(root, cspObservation))) hook.artifact(cspObservation);
+    hook.browser = catBrowserDescriptor(fs.existsSync(path.join(root, cspObservation))
+      ? JSON.parse(fs.readFileSync(path.join(root, cspObservation))).frozen_pages ?? 0 : 0);
     break;
   }
   case "e2e": case "perf":

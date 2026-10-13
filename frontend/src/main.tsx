@@ -1,9 +1,8 @@
 import { render } from "preact";
 import { LocationProvider } from "preact-iso";
 
-// Order matters: the kit's cascade-layer order first (layers.css, REQ-9), then the
-// design-system base, the app's token overrides, self-hosted fonts and the app layer.
-import "./styles/layers.css";
+// The kit stylesheet declares its canonical cascade-layer order before its rules;
+// load it before app token overrides, self-hosted fonts and app styles.
 import "@roedu/ui/styles.css";
 import "./styles/theme.css";
 import "./styles/fonts.css";

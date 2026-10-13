@@ -12,7 +12,7 @@ import { resolveHookRuntime } from '../../scripts/gui-hook-runtime.mjs';
 // Resolution success is never import/setup/installed-byte/phase qualification.
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const bootstrap = 'tools/gui-bootstrap-webkit';
-const closure = ['package.json', 'scripts/run-task.mjs', 'scripts/locate-kit.mjs',
+const closure = ['package.json', 'scripts/run-task.mjs', 'scripts/csp-measurement.mjs', 'scripts/locate-kit.mjs',
   'scripts/ui-adoption-config.mjs', 'scripts/ast-artifacts.mjs', 'scripts/kit-sync.mjs',
   'schemas/validate.mjs', 'schemas/ui-adoption.schema.json'];
 const digest = data => createHash('sha256').update(data).digest('hex');
@@ -309,6 +309,22 @@ void test('transitive schema drift refuses before exposing a module URL', { conc
   const f = fixture(t);
   fs.appendFileSync(path.join(f.root, bootstrap, 'schemas/ui-adoption.schema.json'), '\n ');
   assert.throws(() => resolve(f, 'deps'), /reviewed committed bootstrap source drift/);
+});
+for (const mutation of ['missing', 'modified', 'symlink']) {
+  void test('transitive CSP helper ' + mutation + ' refuses before exposing a bootstrap URL', { concurrency: false }, t => {
+    const f = fixture(t), file = path.join(f.root, bootstrap, 'scripts/csp-measurement.mjs');
+    if (mutation === 'modified') fs.appendFileSync(file, '\n// private mutation\n');
+    else { fs.renameSync(file, file + '.retained'); if (mutation === 'symlink') fs.symlinkSync(file + '.retained', file); }
+    assert.throws(() => resolve(f, 'deps'), /ENOENT|reviewed committed bootstrap source drift|symlink runtime or configuration component/);
+  });
+}
+void test('the selected installed helper must include the regular transitive CSP module', { concurrency: false }, t => {
+  const f = fixture(t, 'full'); installInertSelection(f);
+  const file = path.join(f.root, selected, 'scripts/csp-measurement.mjs');
+  fs.renameSync(file, file + '.retained');
+  assert.throws(() => resolve(f, 'full'), /ENOENT/);
+  fs.symlinkSync(file + '.retained', file);
+  assert.throws(() => resolve(f, 'full'), /symlink runtime or configuration component/);
 });
 void test('runtime symlink components refuse for committed bootstrap', { concurrency: false }, t => {
   const f = fixture(t);

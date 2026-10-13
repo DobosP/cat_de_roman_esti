@@ -4,7 +4,7 @@ import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { readTarGz } from "../tools/gui-bootstrap-webkit/scripts/kit-sync.mjs";
 import { DEFAULT_INITIAL_GZIP_LIMIT_KIB, assertRomanianFontSubsets, collectInitialBundleFiles, measureGzipFiles } from "../frontend/scripts/check-bundle-budget.mjs";
-import { validatePrecompressedAssets, copyManagedAssetFiles as replace } from "../frontend/scripts/gui-precompressed-assets.mjs";
+import { validatePrecompressedAssets, copyManagedAssetFiles as replace, finalizeFrozenLegacyAssets } from "../frontend/scripts/gui-precompressed-assets.mjs";
 
 const root = process.cwd(), mode = process.argv[2];
 const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
@@ -185,6 +185,7 @@ if (mode === "prepare") {
   // must bake metadata from the newly synced manifest before server compilation.
   clearGenerated("go-backend/embedfs/build/dist");
   replace(destinations[0], current); replace(destinations[1], old);
+  finalizeFrozenLegacyAssets(destinations[1], old);
   emit(context, "sync", { schema: 1, sha: process.env.GATE_SHA, tree_sha256: process.env.GATE_TREE_SHA256,
     toolchain_digest: process.env.TOOLCHAIN_DIGEST, dist_files: current.length, legacy_files: old.length,
     legacy_sha256: proof.sha256, manifest_sha256: hash(indexed.get(".vite/manifest.json")), initial_gzip_bytes: initialGzipBytes,

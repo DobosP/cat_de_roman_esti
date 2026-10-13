@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "operator": "agent:codex (PROGRAM E8)",
+  "stage_sha": "493728ad606ab697e35abf3a502d80fd0a20b885",
+  "canonical_kit": "/home/dobo/gates/kits/core-v1.10",
+  "owning_source": "e3d610a6127e895f83bbf88d517c5a606a09163e",
+  "scope": "Generator transactions only; final clean unit/full qualification pending.",
+  "runs": [
+    {
+      "command": "GATE_OPERATOR=agent:codex bash scripts/gate.sh kit:sync --sha 493728ad606ab697e35abf3a502d80fd0a20b885",
+      "sha": "493728ad606ab697e35abf3a502d80fd0a20b885",
+      "status": "fail",
+      "result_sha256": "0784199d421aa2f25d1e861d7f2d4cc2bfae07aaa7dbfc1132197541a7b67ab4",
+      "checks": "bootstrap-kit-input:pass,kit-input:pass,runner-runtime:pass,consumer-config:pass,deps:fail,bootstrap-kit-sync:fail"
+    },
+    {
+      "command": "GATE_OPERATOR=agent:codex bash scripts/gate.sh kit:sync --sha 493728ad606ab697e35abf3a502d80fd0a20b885 --dirty",
+      "sha": "493728ad606ab697e35abf3a502d80fd0a20b885",
+      "dirty": true,
+      "tree_sha256": "dd3f3062228e2dba396869eea92b49ace0a3a0889eef44ac9b0a85fc2b51ff8b",
+      "status": "pass",
+      "result_sha256": "5860056ac6cea63cdb34b804acfc3bc07ba82c0d4e766fb4d769cb747ee8267b",
+      "checks": "bootstrap-kit-input:pass,kit-input:pass,runner-runtime:pass,consumer-config:pass,deps:pass,npm-vendor:pass,go-vendor:pass,gate-templates:pass,versions-merge:pass"
+    },
+    {
+      "command": "GATE_OPERATOR=agent:codex bash scripts/gate.sh deps --sha 493728ad606ab697e35abf3a502d80fd0a20b885 --dirty",
+      "sha": "493728ad606ab697e35abf3a502d80fd0a20b885",
+      "dirty": true,
+      "tree_sha256": "a853683ee83ff7f86000aab63445dabb71953ed806569412031aa5c87d6c2d1a",
+      "status": "pass",
+      "result_sha256": "9e5b933d18b715bea71e19fc7b80bb2bb3bc6eeeae133e073164787a2baf26ec",
+      "checks": "npm-lock:pass,cat-deps-npm-ci:pass,cat-installed-toolchain-probe:pass,go-mod-tidy:pass"
+    }
+  ],
+  "first_failure": "Stale fixed consumer version probes; atomic sync left source unchanged. Corrected before retry.",
+  "generated_delta": "Only selected UI/web-kit archives, consumer pointers/lock, core_tag, Go version pin and bootstrap root lock version.",
+  "trust": "Existing four protected input bytes unchanged; prior E8 trust pin still applies."
+}

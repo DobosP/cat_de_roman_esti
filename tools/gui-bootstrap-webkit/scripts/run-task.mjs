@@ -7,6 +7,7 @@ import { readKitConfig, kitScript, regularPath } from './locate-kit.mjs';
 import { collectAstArtifacts } from './ast-artifacts.mjs';
 import { validateUiAdoptionEvidence } from '../schemas/validate.mjs';
 import { inspectUiAdoption, loadKit, uiAdoptionPending, validateUiAdoption } from './kit-sync.mjs';
+import { loadBrowserDescriptor, validateCspMeasurement, coreCspPagesMatch } from './csp-measurement.mjs';
 
 const sha256 = data => createHash('sha256').update(data).digest('hex');
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
@@ -188,15 +189,7 @@ function common(harness, config) {
   harness.check('kit:check',()=>{const stdout=harness.run(process.execPath,[kitScript(config,'kit-sync.mjs'),config.role==='core'?'--self-test':'--check']);if(config.role==='consumer'){const report=JSON.parse(stdout);harness.assert('Actual consumer kit check must pass',()=>report.mode==='check'&&report.status==='pass');harness.uiAdoption(report.ui_adoption);}});
 }
 function browserDescriptor(harness,config) {
-  const descriptor=config.role==='core'?{inventory:'web-kit/sample/e2e/inventory.json',asset_root:'web-kit/sample/embedfs/dist',entry:'src/sample/main.ts',asset_prefix:'/static/'}:harness.browser;
-  if(!descriptor||typeof descriptor.inventory!=='string'||typeof descriptor.asset_root!=='string'||typeof descriptor.entry!=='string'||/^(?:\.gate|node_modules|dist)(?:\/|$)/.test(descriptor.inventory))throw Error('Full requires committed inventory and actual independent manifest/entry/root');
-  const manifestFile=`${descriptor.asset_root}/.vite/manifest.json`,manifestBytes=fs.readFileSync(regularPath(harness.context.root,manifestFile)),manifest=JSON.parse(manifestBytes),entries=new Set(),files=new Set(),eagerCss=new Set(),eagerPreloads=new Set(),allowedCss=new Set(),allowedJs=new Set();
-  const visit=(key,eager)=>{const entry=manifest[key];if(!entry||typeof entry.file!=='string')throw Error('Missing manifest closure entry');const seen=eager?new Set():entries;if(!eager&&seen.has(key))return;if(!eager)entries.add(key);files.add(entry.file);if(entry.file.endsWith('.js'))allowedJs.add(entry.file);for(const file of [...entry.css??[],...entry.assets??[]])files.add(file);for(const file of entry.css??[]){allowedCss.add(file);if(eager)eagerCss.add(file);}for(const dep of entry.imports??[]){if(eager)eagerPreloads.add(manifest[dep]?.file);visit(dep,eager);}if(!eager)for(const dep of entry.dynamicImports??[])visit(dep,false);};
-  visit(descriptor.entry,false);
-  const eagerVisited=new Set();const eager=(key)=>{if(eagerVisited.has(key))return;eagerVisited.add(key);const entry=manifest[key];if(!entry)throw Error('Missing eager entry');for(const file of entry.css??[])eagerCss.add(file);for(const dep of entry.imports??[]){if(!manifest[dep])throw Error('Missing eager import');eagerPreloads.add(manifest[dep].file);eager(dep);}};eager(descriptor.entry);
-  const prefix=descriptor.asset_prefix??'/static/';if(!prefix.startsWith('/')||prefix.startsWith('//')||!prefix.endsWith('/')||prefix.includes('..'))throw Error('Invalid actual asset prefix');
-  const url=file=>new URL(prefix+file,process.env.GATE_APP_URL).href;
-  return {...descriptor,manifestBytes,manifest,entries,files,eagerCss,eagerPreloads,allowedCss,allowedJs,url};
+  return loadBrowserDescriptor({root:harness.context.root,role:config.role,browser:harness.browser,appURL:process.env.GATE_APP_URL});
 }
 function verifyInventory(harness, config) {
   harness.check('browser-evidence', () => {
@@ -235,16 +228,17 @@ async function writeResult(harness, config) {
   }));
   if (context.target === 'full') {
     harness.check('csp-measurement', () => {
-      const measured = JSON.parse(fs.readFileSync(path.join(context.root, '.gate/full/csp-measurement.json')));
-      const descriptor=browserDescriptor(harness,config),appOrigin=new URL(process.env.GATE_APP_URL).origin;
-      const pathFor=file=>new URL(descriptor.url(file)).pathname;
-      const exactURL=(value,pathname)=>{try{const url=new URL(value);return url.origin===appOrigin&&url.href===new URL(pathname,process.env.GATE_APP_URL).href;}catch{return false;}};
-      harness.assert('Fresh source/image/policy-bound CSP measurement required',()=>measured.schema===1&&measured.sha===context.sha&&measured.tree_sha256===context.tree_sha256&&measured.app_image_id===process.env.GATE_APP_IMAGE_ID&&measured.stage===context.stage&&Number.isInteger(measured.violations)&&measured.violations>=0&&Number.isInteger(measured.legacy_violations)&&measured.legacy_violations>=0&&Number.isInteger(measured.pages)&&measured.pages>0&&Array.isArray(measured.nonceObservations)&&measured.nonceObservations.length===measured.pages&&new Set(measured.nonceObservations.map(item=>item.page)).size===measured.pages&&new Set(measured.nonceObservations.map(item=>item.nonce_sha256)).size===measured.pages&&measured.nonceObservations.every(item=>/^[a-f0-9]{64}$/.test(item.nonce_sha256)&&Number.isInteger(item.scripts)&&item.scripts>0&&Number.isInteger(item.json)&&item.json>=0&&item.json<=item.scripts&&Number.isInteger(item.assetLinks)&&item.assetLinks>0&&item.module===pathFor(descriptor.manifest[descriptor.entry].file)&&exactURL(item.module_url,item.module)&&Array.isArray(item.css)&&Array.isArray(item.preloads)&&Array.isArray(item.css_urls)&&Array.isArray(item.preload_urls)&&item.css_urls.length===item.css.length&&item.preload_urls.length===item.preloads.length&&item.assetLinks===item.css.length+item.preloads.length&&item.css.every((file,i)=>[...descriptor.allowedCss].some(allowed=>pathFor(allowed)===file)&&exactURL(item.css_urls[i],file))&&item.preloads.every((file,i)=>[...descriptor.allowedJs].some(allowed=>pathFor(allowed)===file)&&exactURL(item.preload_urls[i],file))&&[...descriptor.eagerCss].every(file=>item.css.includes(pathFor(file)))&&[...descriptor.eagerPreloads].every(file=>item.preloads.includes(pathFor(file))))&&fs.statSync(path.join(context.root,'.gate/full/csp-measurement.json')).mtimeMs>=Date.parse(context.started));
+      const measurementFile=regularPath(context.root,'.gate/full/csp-measurement.json'),measured=JSON.parse(fs.readFileSync(measurementFile));
+      const descriptor=browserDescriptor(harness,config);
+      harness.assert('Fresh source/image/policy-bound CSP measurement required',()=>{
+        csp=validateCspMeasurement({measured,context,descriptor,role:config.role,appURL:process.env.GATE_APP_URL,
+          appImageId:process.env.GATE_APP_IMAGE_ID,mtimeMs:fs.statSync(measurementFile).mtimeMs});return true;
+      });
       if(config.role==='core'){
         const exported=JSON.parse(fs.readFileSync(path.join(context.root,'.gate/full/budget-routes.json'))).filter(route=>route.template).map(route=>route.path==='/{$}'?'/':route.path).sort();
-        harness.assert('CSP must cover every actual exported sample page',()=>JSON.stringify(measured.nonceObservations.map(item=>item.page).sort())===JSON.stringify(exported));
+        harness.assert('CSP must cover every actual exported sample page',()=>coreCspPagesMatch(measured,exported));
       }
-      csp = { stage: measured.stage, violations: measured.violations, legacy_violations: measured.legacy_violations };
+      if(descriptor.frozen)for(const file of descriptor.frozen.artifacts)harness.artifact(file);
       harness.artifact('.gate/full/csp-measurement.json');
     });
     harness.check('app-image-evidence', () => {

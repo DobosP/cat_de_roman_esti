@@ -146,3 +146,34 @@ export function copyManagedAssetFiles(destination, source) {
     fs.mkdirSync(path.dirname(file), { recursive: true }); fs.writeFileSync(file, item.bytes);
   }
 }
+
+// Only the populated frozen tree must equal its original receipt exactly. The
+// tracked source scaffold is left alone; the owning sync passes its generated
+// destination after every archive member has been copied successfully.
+export function finalizeFrozenLegacyAssets(destination, source) {
+  directory(destination);
+  assert.ok(destination.endsWith("/go-backend/embedfs/legacy"), "Only the owning generated legacy tree can lose its scaffold");
+  const file = path.join(destination, ".keep"), sentinel = fs.lstatSync(file, { throwIfNoEntry: false });
+  assert.ok(!sentinel || (sentinel.isFile() && !sentinel.isSymbolicLink() && sentinel.size === 0), "Only an empty regular generated scaffold may be removed");
+  const expected = new Map(), register = registry();
+  for (const item of dense(source)) {
+    assert.ok(item && Buffer.isBuffer(item.bytes), "Actual frozen member bytes required");
+    register(item.file);
+    assert.ok(item.file !== ".keep" && !expected.has(item.file), "Frozen receipt cannot contain the compile scaffold or duplicate members");
+    expected.set(item.file, item.bytes);
+  }
+  assert.equal(expected.size, 30, "Complete original thirty-file bundle required before scaffold removal");
+  assert.ok(expected.has("index.html") && expected.has(".vite/manifest.json"), "Populated frozen HTML and manifest required");
+  const actual = outputFiles(destination), kept = actual.filter((item) => item.file !== ".keep");
+  assert.deepEqual(kept.map((item) => item.file).sort((a, b) => a < b ? -1 : a > b ? 1 : 0), [...expected.keys()].sort((a, b) => a < b ? -1 : a > b ? 1 : 0), "Copied frozen tree must have every exact archive member");
+  for (const item of kept) assert.ok(item.bytes.equals(expected.get(item.file)), "Copied frozen member differs from archive bytes");
+  const scaffold = actual.find((item) => item.file === ".keep");
+  if (!scaffold) return { removed: false };
+  assert.equal(scaffold.bytes.length, 0, "Only an empty regular generated scaffold may be removed");
+  const current = fs.lstatSync(file, { bigint: true });
+  assert.ok(current.isFile() && !current.isSymbolicLink()
+    && ["dev", "ino", "mode", "size", "mtimeNs", "ctimeNs"].every((key) => current[key] === scaffold.identity[key]), "Generated scaffold changed before removal");
+  directory(destination);
+  fs.unlinkSync(file);
+  return { removed: true };
+}

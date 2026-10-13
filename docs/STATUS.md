@@ -7,8 +7,8 @@ Last verified: 2026-10-13 — GUI S1 M2 landed and accepted on `main` c9017b5b (
 
 ## Current state
 
+- **Core-v1.10 adoption in progress on the GUI feature branch:** canonical kit sync and generated dependencies pass; CSS workaround removed, frozen CSP evidence uses the kit contract, bootstrap copies/lock refreshed and retired planners refuse. Clean unit/full pending ([ADR-0201](adr/0201-core-v110-consumer-contracts.md), [generator records](reviews/gui-core-v110-adoption/generators.json)). `main` remains the accepted core-v1.9 M2 state above.
 - **Lighter GUI gates qualified:** `fix/gui-cat-lighter-gates` d98fe50e: cold unit27, full37 (933 cases/nine exact PNGs/CSP0), warm unit27. Full13.64min vs34.44; warm5.42min vs~21 (five-minute target missed by25s). Independent review verifies retained historical assertions and fresh GUI/API coverage ([ADR-0200](adr/0200-bound-gate-evidence-reuse.md), [qualification](reviews/gui-lighter-gates/qualification.json)).
-
 - Package **1.0.1** (lobby **V1.0.1**) hardens owner-requested mixed-age V1 on phones/desktop;
   independent review/decision [ADR-0159](adr/0159-v1-0-1-testing-hardening.md).
 - 1.0.1: a 0-point loss is never a record; circuit daily intent is single-use (one resume

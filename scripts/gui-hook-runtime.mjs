@@ -8,8 +8,9 @@ import { pathToFileURL } from 'node:url';
 // phase/receipt, prove installed bytes, or return a passing gate/release result.
 const BOOTSTRAP = 'tools/gui-bootstrap-webkit';
 const BOOTSTRAP_FILES = Object.freeze({
-  'package.json': '461fdfffe062b1dddfb5831d1c2a7b91feb04f5f522eb4a73f8ef14d63a98041',
-  'scripts/run-task.mjs': '10c72f96c031e880988fb62f761f9c5ae5f50a6eaf2dd3fd553ed25dba43389f',
+  'package.json': '5e445c33a8354dadc1d6ed925f90686e2ba0434ee744b94085e40feee2b92875',
+  'scripts/run-task.mjs': 'd0d6a6177c26e29c19a3f51f7070a2899498331fbd9d08991e2af514becfe818',
+  'scripts/csp-measurement.mjs': 'dab858611f52b7e10024fbae58aff74626f8dd67cea7129d0209f649bf9a0465',
   'scripts/locate-kit.mjs': '1942d09148153cb1802da8bf3e4da6299fa64fbaa01c84c7f7b8e4dc6e4c4a4a',
   'scripts/ui-adoption-config.mjs': 'c1292e5b377b64934cafeaaf3ab2ba45f8f5393229716f4a71b5a65ad9122f60',
   'scripts/ast-artifacts.mjs': 'aaa1ed835db6963d95e345e264d4bdcc5b5d748f345294db67af6be3cd439265',

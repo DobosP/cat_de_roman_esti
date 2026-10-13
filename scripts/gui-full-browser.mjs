@@ -7,6 +7,7 @@ import { chromium } from "../frontend/node_modules/playwright/index.mjs";
 import { ROMANIAN_FONT_SOURCES } from "../frontend/scripts/check-bundle-budget.mjs";
 import { readActualLegacyObservation } from "./gui-legacy-owner.mjs";
 import { readTarGz } from "../tools/gui-bootstrap-webkit/scripts/kit-sync.mjs";
+import { CAT_CSP_ROUTES, catBrowserDescriptor, catCspObservationSets } from "./gui-csp-observations.mjs";
 
 // M2 binding migration: the original React graph (manifest, lock, SDK 0.3.0
 // archive and its entry) is bound from the frozen original receipt copies, not
@@ -193,6 +194,12 @@ if (reactProfile) {
 }
 assert.match(process.env.GATE_APP_IMAGE_ID || "", /^sha256:[a-f0-9]{64}$/);
 assert.ok(process.env.GATE_APP_URL, "Full browser qualification needs the actual app image URL");
+const PORTED_ROUTES = ["/", "/intrusul", "/perechi", "/conexiuni"];
+const frozenPageCount = CAT_CSP_ROUTES.filter((route) => !PORTED_ROUTES.includes(new URL(route, process.env.GATE_APP_URL).pathname)).length;
+// Validate the delivered kit's complete frozen archive/tree contract before the
+// browser matrix. Missing, extra or changed members cannot consume a full run.
+const { loadBrowserDescriptor } = await import("../frontend/node_modules/@roedu/web-kit/scripts/csp-measurement.mjs");
+const cspDescriptor = loadBrowserDescriptor({ root, role: "consumer", browser: catBrowserDescriptor(frozenPageCount), appURL: process.env.GATE_APP_URL });
 const { inventoryBytes, expected, report, cases } = executeMatrix(discovery);
 fs.writeFileSync(`${output}/browser-pw-journeys.json`, JSON.stringify({ schema: 1, lane: "pw-journeys", sha: process.env.GATE_SHA, tree_sha256: process.env.GATE_TREE_SHA256, app_image_id: process.env.GATE_APP_IMAGE_ID, inventory_sha256: hash(inventoryBytes), expected_count: expected.length, cases }, null, 2) + "\n");
 
@@ -253,14 +260,12 @@ let activeCspObservation;
 const browser = await chromium.launch();
 try {
   const observations = [], legacyObservations = [], violations = [];
-  const routes = ["/", "/intrusul", "/perechi", "/conexiuni", "/alchimie?mode=challenges", "/alchimie?mode=explore", "/cald-rece", "/lant", "/clasament"];
+  const routes = CAT_CSP_ROUTES;
   // ADR-0197: the ported set is served by the current build, every other route by
   // the frozen original bundle. The kit's CSP evidence binds each observed page to
-  // the current manifest, so frozen pages are reported separately and bound here
-  // to the frozen archive's own file list; every CSP/nonce/font assertion below
+  // the current or declared frozen manifest. Every CSP/nonce/font assertion below
   // still runs on all routes and their violations still count.
-  const PORTED_ROUTES = ["/", "/intrusul", "/perechi", "/conexiuni"];
-  const frozenFiles = new Set(JSON.parse(fs.readFileSync("legacy/original-bundle.json", "utf8")).files.map((file) => "/" + file.path));
+  const frozenFiles = new Set([...(cspDescriptor.frozen?.files ?? [])].map((file) => new URL(cspDescriptor.frozen.url(file)).pathname));
   for (const route of routes) {
     const page = await browser.newPage({ reducedMotion: "no-preference" });
     page.on("console", (message) => { if (/Content Security Policy|Refused to (?:execute|apply|load)/i.test(message.text())) violations.push({ route, message: "CSP refusal observed (detail withheld)" }); });
@@ -333,9 +338,15 @@ try {
     const frozenRoute = !PORTED_ROUTES.includes(new URL(route, process.env.GATE_APP_URL).pathname);
     assert.equal(observation.ui, frozenRoute ? "legacy" : "preact", `ADR-0197 delivery for ${route}`);
     if (frozenRoute) {
+      const frozen = cspDescriptor.frozen;
+      assert.ok(frozen, "Frozen page requires a verified frozen descriptor");
+      assert.equal(observation.module, frozen.url(frozen.manifest[frozen.entry].file), "Frozen document must load its exact manifest entry");
+      for (const file of frozen.eagerCss) assert.ok(observation.css.includes(frozen.url(file)), "Frozen document omitted eager CSS");
+      for (const file of frozen.eagerPreloads) assert.ok(observation.preloads.includes(frozen.url(file)), "Frozen document omitted eager preload");
       for (const file of [observation.module, ...observation.css, ...observation.preloads]) {
         const url = new URL(file);
         assert.equal(url.origin, new URL(process.env.GATE_APP_URL).origin);
+        assert.equal(url.href, new URL(url.pathname, process.env.GATE_APP_URL).href, "Frozen asset URL must be exact without aliases");
         assert.ok(frozenFiles.has(url.pathname), `Frozen page ${route} loaded a file outside the frozen archive`);
       }
     }
@@ -346,8 +357,8 @@ try {
       fonts: { links: observation.fontPreloads.map(({ nonce, ...link }) => ({ ...link, nonce_sha256: hash(nonce) })), requests: fontRequests, responses: fontResponses, status: observation.fontStatus, faces: observation.fontFaces } });
     await page.close();
   }
-  activeCspObservation = { schema: 1, sha: process.env.GATE_SHA, tree_sha256: process.env.GATE_TREE_SHA256, app_image_id: process.env.GATE_APP_IMAGE_ID, stage: process.env.CSP_STAGE, violations: violations.length, pages: observations.length, nonceObservations: observations,
-    frozen_pages: legacyObservations.length, frozenNonceObservations: legacyObservations, observedViolations: violations };
+  activeCspObservation = { schema: 1, sha: process.env.GATE_SHA, tree_sha256: process.env.GATE_TREE_SHA256, app_image_id: process.env.GATE_APP_IMAGE_ID, stage: process.env.CSP_STAGE, violations: violations.length,
+    ...catCspObservationSets(observations, legacyObservations), observedViolations: violations };
   assert.equal(observations.length + legacyObservations.length, routes.length);
   fs.writeFileSync(`${output}/active-csp-observation.json`, JSON.stringify(activeCspObservation, null, 2) + "\n");
   assert.equal(violations.length, 0);

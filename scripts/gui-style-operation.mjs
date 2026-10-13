@@ -53,6 +53,18 @@ export function validGenRequest(request) {
     && ["qualify-original-react", "capture-original-baseline", "replay-normalized-react", STYLE_OPERATION, NORMALIZED_STYLE_OPERATION].includes(request.operation)
     && request.fixtures === "frontend/e2e/original/runtime.spec.mjs";
 }
+// These requests remain parseable so old invocations receive a named failure.
+// The post-M2 tree cannot run either historical React planner; do not inspect,
+// restore or execute its removed graph merely to discover that retirement.
+export function refuseRetiredStyleOperation(hook, request) {
+  assert.ok(validGenRequest(request), "Closed gen request required before retirement dispatch");
+  if (![STYLE_OPERATION, NORMALIZED_STYLE_OPERATION].includes(request.operation)) return false;
+  hook.check("cat-style-planning-retired", () => hook.assert(
+    `${request.operation} retired with UI1 activation; historical planning evidence remains in docs/reviews/gui-m2-activation/bindings.md`,
+    () => false,
+  ));
+  return true;
+}
 export function sourcePath(root, relative, missing = false) {
   assert.equal(typeof relative, "string");
   assert.ok(relative && !path.isAbsolute(relative) && !/[\\:\x00-\x1f\x7f]/.test(relative), "Literal confined source path required");

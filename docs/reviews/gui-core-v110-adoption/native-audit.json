@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "kind": "independent-native-source-audit",
+  "not_a_gate_result": true,
+  "reviewer": "agent:codex/native_reuse_builder",
+  "reviewed_at": "2026-10-13T10:36:56+00:00",
+  "source_root": "/home/dobo/work/_worktrees/cat_de_roman_esti/fix__gui-cat-lighter-gates",
+  "comparison_commit": "d98fe50efbb95de688124a97fa51f5b55e706d43",
+  "scope": "All regular .go, go.mod and go.sum under go-backend/ and shared-go/; wrapper ignored/meta/env paths excluded.",
+  "algorithm": "Sort POSIX paths; rows {path,mode:st_mode&0777,sha256:contentSHA256}; hash compact UTF-8 JSON.stringify-compatible array.",
+  "mode_verification": "Git preserves executable bits only. Prior Git bytes with current full0777 modes exactly reproduce the reviewed prior signature; all executable bits also match Git.",
+  "prior": {
+    "count": 238,
+    "sha256": "047f3f53f1131820bbc5ef04f7d7eb64f74fe05812a1b9b0f40d660465d54e06"
+  },
+  "actual": {
+    "count": 238,
+    "sha256": "6eb3a47f4fb5d7445dc916c01a47d1db6e627c4ea39752ab16a30e1c63946b3c"
+  },
+  "changed_native_files": [
+    "go-backend/go.mod"
+  ],
+  "module_delta": "Only v0.0.0-core-v1.9 -> v0.0.0-core-v1.10; local ./third_party/webkit replacement and canonical formatting unchanged.",
+  "go_mod_sha256": "a0af82178fdb9809a84a758bb0efc01f57efaeaa1b3277ecf0b166da9d447c7d",
+  "selected_kit": {
+    "tag": "core-v1.10",
+    "go_archive_sha256": "9549fce45ee1f069e678062e7d80fda23aba958e936097bb14a52054ab920e93",
+    "canonical_archive_byte_equal": true,
+    "vendored_regular_files": 41,
+    "vendored_modes_and_bytes_exact": true
+  },
+  "completed_gates": {
+    "kit-sync": {
+      "sha256": "5860056ac6cea63cdb34b804acfc3bc07ba82c0d4e766fb4d769cb747ee8267b",
+      "source_sha": "493728ad606ab697e35abf3a502d80fd0a20b885",
+      "status": "pass"
+    },
+    "deps": {
+      "sha256": "9e5b933d18b715bea71e19fc7b80bb2bb3bc6eeeae133e073164787a2baf26ec",
+      "source_sha": "493728ad606ab697e35abf3a502d80fd0a20b885",
+      "status": "pass"
+    }
+  },
+  "semantic_verdict": "APPROVE_REPIN",
+  "approved_count": 238,
+  "approved_sha256": "6eb3a47f4fb5d7445dc916c01a47d1db6e627c4ea39752ab16a30e1c63946b3c",
+  "basis": [
+    "No native .go, test, go.sum or vendored Go implementation bytes changed from the audited source.",
+    "The sole contentrails exception still exercises only game JSON APIs; GUI/API/content/doc contracts remain fresh.",
+    "Native source contains no core-version or Go build-info inspection; go.mod remains a hashed provenance/protected-output input.",
+    "Retain full source/data and graph proof checks; this is historical source-based reuse, not binary equivalence."
+  ],
+  "condition": "Repin only this exact actual hash/count. Any subsequent native input change requires a new independent semantic audit.",
+  "execution": "Read-only Git/files/archive inspection and independent Python hashing; no product tests or Go/Node/gates executed."
+}
