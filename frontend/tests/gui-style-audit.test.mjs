@@ -187,10 +187,10 @@ void test("the current owning source audits every bag, including nested ones, wi
   assert.ok(!child.stdout.includes(repository), "Report must not embed the checkout location");
   const result = JSON.parse(child.stdout);
   assert.equal(result.status, "pass");
-  assert.equal(EXPECTED_CSS_BAGS, 162);
-  assert.equal(result.counters.css_bags, 162);
-  assert.equal(result.sites.length, 162);
-  assert.equal(result.counters.nested_css_bags, 9, "Bags nested in other JSX attributes must be counted");
+  assert.equal(EXPECTED_CSS_BAGS, 59);
+  assert.equal(result.counters.css_bags, 59);
+  assert.equal(result.sites.length, 59);
+  assert.equal(result.counters.nested_css_bags, 5, "Bags nested in other JSX attributes must be counted");
   assert.equal(result.sites.filter((site) => site.nested).length, result.counters.nested_css_bags);
   assert.equal(result.counters.raw_style_attributes, 0);
   assert.equal(result.counters.numeric_declarations, result.counters.unitless_numeric + result.counters.custom_numeric);

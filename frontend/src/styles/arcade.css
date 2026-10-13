@@ -1,9 +1,9 @@
 /* arcade.css — cat_de_roman_esti's bespoke styling layer on top of @roedu/ui.
  *
  * Structural rules:
- *  - Themeable values come from the design-system tokens: var(--roedu-*), set by
- *    ThemeProvider (src/theme.ts). Component visuals use tokens; app-scoped layout
- *    places the notification stack in its own row (ADR-0139).
+ *  - Themeable values come from the design-system tokens: var(--roedu-*), set on
+ *    .roedu-root by src/styles/theme.css. Component visuals use tokens; app-scoped
+ *    layout places the notification stack in its own row (ADR-0139).
  *  - App-specific color data (per-game accents, KG categories, the tricolor wordmark)
  *    lives here as --game-* / --cat-* / --brand-* variables, mirrored in TS where JS
  *    needs concrete values (src/games.ts, src/categories.ts).
@@ -47,8 +47,9 @@ body {
 }
 
 /* ------------------------------------------------------------------ app shell */
-/* ThemeProvider renders .roedu-root — that's the app shell and the first place the
-   design-system tokens exist. Everything below inherits from it. */
+/* main.tsx renders the explicit .roedu-root wrapper (theme.css sets the tokens on
+   it) — that's the app shell and the first place the design-system tokens exist.
+   Everything below inherits from it. */
 .roedu-root {
   flex: 1;
   display: flex;
@@ -135,9 +136,13 @@ h3 {
   margin: 0;
 }
 
+/* UI 1.0 ships its component rules in cascade layers, so this unlayered bridge
+   rule would beat the kit's per-variant button colours; kit buttons keep theirs. */
 button {
   font-family: inherit;
   cursor: pointer;
+}
+button:not(.roedu-btn) {
   color: inherit;
 }
 
@@ -154,6 +159,16 @@ a {
   outline: 2px solid var(--roedu-color-focus);
   outline-offset: 3px;
   border-radius: var(--roedu-radius-sm);
+}
+
+/* Interactive elements inside the app keep the React-era ring (2px, offset 2px).
+   UI 0.3 supplied this unlayered (specificity 0,2,0, beating the generic rule
+   above); UI 1.0 moved its focus rules into cascade layers with a 3px ring, which
+   any unlayered rule overrides, so Cat now states its own ring here. The later,
+   more specific Cat rules (.field, inputs, daily circuit, help summary) still win. */
+.roedu-root :where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--roedu-color-focus);
+  outline-offset: 2px;
 }
 
 .field:focus-visible,
@@ -189,19 +204,25 @@ input:focus-visible {
 }
 
 .app-notices:has(.roedu-toast) {
-  padding: max(8px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right))
+  padding: max(4px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right))
     4px max(14px, env(safe-area-inset-left));
 }
 
-.app-notices .roedu-toast-stack {
+.app-notices .roedu-toast-host {
   position: static;
+  inset: auto;
   transform: none;
   width: min(440px, 100%);
+  max-width: none;
   margin-inline: auto;
+  /* UI 1.0 toasts are 46px tall (44px dismiss target + borders): five stacked
+     notices must stay inside the 30dvh row on an 850px-tall viewport. */
+  gap: 4px;
 }
 
 .app-notices .roedu-toast {
   min-height: 44px;
+  padding-block: 0;
   flex-shrink: 0;
 }
 
@@ -1544,3 +1565,155 @@ input:focus-visible {
 /* ===== V42 section: derived-games (builder-5 styles go here) ===== */
 
 /* ===== V42 section: meta-loop (builder-6 styles go here) ===== */
+
+/* ------------------------------------------------------------------ motion (Preact port) */
+/* The kit Presence wraps each retained child in .roedu-presence. The screen frame
+   is absolutely positioned against .app-content, so the wrapper needs no size;
+   feedback/solved wrappers below give their child the layout it had before. */
+.app-content > .roedu-presence {
+  position: absolute;
+  inset: 0;
+}
+.app-content > .roedu-presence[data-state="exiting"] {
+  pointer-events: none;
+}
+/* The retained screen is visibly leaving from the first exit frame, whatever
+   the wrapper's own fade does; its `useIsPresent()` already disabled the controls. */
+.app-content > .roedu-presence[data-state="exiting"] .screen {
+  opacity: 0.6;
+}
+
+/* Entrances that used to be Framer springs/tweens; final frames are identical. */
+@keyframes cat-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes cat-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes cat-word-rise {
+  from { opacity: 0; transform: translateY(26px) rotate(-3deg); }
+  to { opacity: 1; transform: translateY(0) rotate(0deg); }
+}
+@keyframes cat-word-rise-alt {
+  from { opacity: 0; transform: translateY(26px) rotate(3deg); }
+  to { opacity: 1; transform: translateY(0) rotate(0deg); }
+}
+@keyframes cat-intro-rise {
+  from { opacity: 0; transform: translateY(18px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes cat-pop {
+  0% { opacity: 0; transform: scale(0.88); }
+  60% { transform: scale(1.02); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes cat-pop-icon {
+  0% { transform: scale(0.4) rotate(-14deg); }
+  70% { transform: scale(1.08) rotate(2deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+@keyframes cat-pop-icon-plain {
+  0% { transform: scale(0.4); }
+  70% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+@keyframes cat-pop-small {
+  0% { opacity: 0; transform: scale(0.6); }
+  70% { transform: scale(1.06); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes cat-solved-rise {
+  0% { opacity: 0; transform: scale(0.9); }
+  70% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+@keyframes cat-shake {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-6px); }
+  80% { transform: translateX(6px); }
+  100% { transform: translateX(0); }
+}
+
+.home-title-word {
+  display: inline-block;
+  animation: cat-word-rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.home-title-word:nth-child(1) { animation-delay: 0.05s; }
+.home-title-word:nth-child(2) { animation-name: cat-word-rise-alt; animation-delay: 0.13s; }
+.home-title-word:nth-child(3) { animation-delay: 0.21s; }
+.home-title-word:nth-child(4) { animation-name: cat-word-rise-alt; animation-delay: 0.29s; }
+.home-screen .home-description {
+  animation: cat-fade 0.5s ease both;
+  animation-delay: 0.35s;
+}
+.games-grid > .game-card {
+  animation: cat-rise 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.games-grid > .game-card:nth-child(1) { animation-delay: 0.1s; }
+.games-grid > .game-card:nth-child(2) { animation-delay: 0.17s; }
+.games-grid > .game-card:nth-child(3) { animation-delay: 0.24s; }
+.games-grid > .game-card:nth-child(4) { animation-delay: 0.31s; }
+.games-grid > .game-card:nth-child(5) { animation-delay: 0.38s; }
+.games-grid > .game-card:nth-child(6) { animation-delay: 0.45s; }
+/* whileHover / whileTap of the former motion cards */
+.games-grid > .game-card:hover { transform: translateY(-5px) rotate(-0.4deg); }
+.games-grid > .game-card:nth-child(even):hover { transform: translateY(-5px) rotate(0.4deg); }
+.games-grid > .game-card:active { transform: scale(0.97); }
+
+.game-intro-enter {
+  animation: cat-intro-rise 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.result-card-enter {
+  animation: cat-pop 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.result-icon-enter {
+  animation: cat-pop-icon-plain 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.08s;
+}
+.result-icon-enter--won {
+  animation-name: cat-pop-icon;
+}
+.result-score-enter {
+  animation: cat-pop-icon-plain 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.15s;
+}
+.result-record-enter {
+  display: inline-block;
+  animation: cat-pop-small 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.25s;
+}
+.connections-solved-enter {
+  animation: cat-solved-rise 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.connections-grid--shake {
+  animation: cat-shake 0.4s ease both;
+}
+.intrusul-tile:not(:disabled):active,
+.perechi-tile:not(:disabled):active {
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-title-word,
+  .home-screen .home-description,
+  .games-grid > .game-card,
+  .game-intro-enter,
+  .result-card-enter,
+  .result-icon-enter,
+  .result-score-enter,
+  .result-record-enter,
+  .connections-solved-enter,
+  .connections-grid--shake {
+    animation: none !important;
+  }
+  .games-grid > .game-card:hover,
+  .games-grid > .game-card:active,
+  .intrusul-tile:not(:disabled):active,
+  .perechi-tile:not(:disabled):active {
+    transform: none;
+  }
+}

@@ -6,7 +6,8 @@ import { Csp } from "./CspStyle";
 // title so each game keeps its own colour identity while sharing the exact same
 // layout, tap-targets, and accessibility wiring.
 
-import { useLayoutEffect, useRef, type ReactNode } from "react";
+import type { ComponentChildren } from "preact";
+import { useLayoutEffect, useRef } from "preact/hooks";
 import { Button } from "@roedu/ui";
 import type { GameKey } from "../games";
 import { GameHelp } from "./GameHelp";
@@ -24,15 +25,15 @@ export function GameShell({
   /** Game accent colour (used for the title glyph + a11y labels). */
   accent?: string;
   /** Optional small title shown next to the exit button. */
-  title?: ReactNode;
+  title?: ComponentChildren;
   /** Right-aligned status badges. */
-  children?: ReactNode;
+  children?: ComponentChildren;
   /** Disable the exit action while the host is creating or replacing a game. */
   busy?: boolean;
   /** Answer-free rules below the header for an active round. */
   helpGame?: GameKey;
 }) {
-  const headerRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement | null>(null);
 
   useLayoutEffect(() => {
     const header = headerRef.current;

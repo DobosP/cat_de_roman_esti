@@ -1,9 +1,10 @@
 // useDailyIntent — the circuit's `?challenge=daily` is a single-use hint. The
 // first explicit start (daily or free) drops it with a replace navigation that
-// keeps every other param (Alchimie's `mode=challenges`); routes are keyed by
-// pathname, so the screen stays mounted.
+// keeps every other param; routes are keyed by pathname, so the screen stays
+// mounted. preact-iso's location is `pathname + search`; the hash is read from
+// the document so it survives the rewrite exactly as before.
 
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "preact-iso";
 
 export interface DailyIntent {
   active: boolean;
@@ -11,15 +12,16 @@ export interface DailyIntent {
 }
 
 export function useDailyIntent(): DailyIntent {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const active = new URLSearchParams(location.search).get("challenge") === "daily";
+  const { url, route } = useLocation();
+  const target = new URL(url, "http://local.invalid");
+  const active = target.searchParams.get("challenge") === "daily";
   const consume = () => {
-    const params = new URLSearchParams(location.search);
+    const params = new URL(url, "http://local.invalid").searchParams;
     if (!params.has("challenge")) return;
     params.delete("challenge");
     const search = params.toString();
-    void navigate({ pathname: location.pathname, search: search ? `?${search}` : "", hash: location.hash }, { replace: true });
+    const hash = typeof location === "undefined" ? "" : location.hash;
+    route(`${target.pathname}${search ? `?${search}` : ""}${hash}`, true);
   };
   return { active, consume };
 }

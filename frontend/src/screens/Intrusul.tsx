@@ -1,11 +1,13 @@
 import { Csp } from "../components/CspStyle";
 // Intrusul — tap the one concept that does not belong with the other three.
 // Every decision and point comes from the server; the browser only adds compact,
-// touch-first feedback around the earned public state.
+// touch-first feedback around the earned public state. The leaving screen is
+// retained by the shell's Presence; `useIsPresent()` locks every action while
+// it exits. Feedback rows enter/exit through the kit Presence (mode "wait").
 
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence, m, useIsPresent } from "motion/react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "preact/hooks";
 import { Button, type ToastKind } from "@roedu/ui";
+import { Presence, useIsPresent } from "@roedu/ui/motion";
 import {
   acquireFlight,
   releaseFlight,
@@ -58,7 +60,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
   const startInFlight = useRef(false);
   const actionOwner = useMemo(() => createGameActionOwner(active), [active]);
   const tileRefs = useRef(new Map<string, HTMLButtonElement>());
-  const hintButtonRef = useRef<HTMLButtonElement>(null);
+  const hintButtonRef = useRef<HTMLButtonElement | null>(null);
   const pendingHintFocus = useRef<{
     gameId: string;
     savedId: string | null;
@@ -477,7 +479,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
             {state.tiles.map((tile) => {
               const tried = wrong.has(tile.id);
               return (
-                <m.button
+                <button
                   key={tile.id}
                   ref={(node) => {
                     if (node) tileRefs.current.set(tile.id, node);
@@ -488,31 +490,27 @@ export default function Intrusul({ onExit, onToast }: Props) {
                   onClick={() => void choose(tile.id)}
                   disabled={actionsLocked}
                   aria-label={`${tile.label}${tried ? ", face parte din grup; repetarea este fără cost" : ""}`}
-                  whileTap={{ scale: 0.97 }}
                 >
                   <strong>{tile.label}</strong>
                   {tried && <span>ține de grup</span>}
-                </m.button>
+                </button>
               );
             })}
           </div>
         )}
 
-        <AnimatePresence mode="wait">
+        <Presence mode="wait">
           {!finished && !actionSync && feedback && (
-            <m.div
+            <div
               key={feedback}
               className="intrusul-feedback card"
               role="status"
               aria-live="polite"
-              initial={{ opacity: 0, y: -5 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
             >
               {feedback}
-            </m.div>
+            </div>
           )}
-        </AnimatePresence>
+        </Presence>
 
         {!finished && !state.hints_used && (
           <div className="intrusul-actions">

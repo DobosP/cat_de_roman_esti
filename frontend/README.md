@@ -1,6 +1,6 @@
 # cat_de_roman_esti — frontend
 
-Text-only word-game arcade SPA: **React 19.2.7 + Vite 8.3.3 + TypeScript 7.0.2** (no graph
+Text-only word-game arcade SPA: **Preact 11.0.0 + preact-iso 2.12.2 + Vite 8.3.3 + TypeScript 7.0.2** for the M2 ported routes (`/`, `/intrusul`, `/perechi`, `/conexiuni`; ADR-0197); every other route is served by the frozen React legacy bundle until M3 (no graph
 visualization — the old force-graph SPA was removed 2026-06-22, see
 `../docs/adr/0001-pivot-to-word-game-arcade.md`).
 
@@ -86,7 +86,7 @@ Rendered accessibility and keyboard coverage follow [ADR-0103](../docs/adr/0103-
 
 ```
 src/
-  main.tsx            React root.
+  main.tsx            Preact root (.roedu-root wrapper + preact-iso LocationProvider).
   App.tsx             Arcade router — eager home shell + lazy game/ranking routes,
                       LazyMotion/AnimatePresence transitions, and the toast stack.
   api/

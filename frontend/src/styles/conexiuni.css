@@ -121,3 +121,21 @@
   .connections-screen .connections-coach .next-move-action { grid-column: 1 / -1; justify-self: end; }
   .connections-screen .connections-coach strong { font-size: 0.83rem; }
 }
+
+/* Kit Presence wrappers (Preact port): tiles stay direct grid cells of their
+   wrapper, solved rows keep their column width, feedback keeps its column gap. */
+.connections-grid > .roedu-presence {
+  display: grid;
+  min-width: 0;
+}
+.connections-grid > .roedu-presence > .connection-tile {
+  width: 100%;
+  height: 100%;
+}
+.connections-game > .roedu-presence {
+  display: flex;
+  flex-direction: column;
+}
+.connections-feedback > .roedu-presence {
+  display: contents;
+}

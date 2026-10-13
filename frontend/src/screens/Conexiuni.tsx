@@ -1,4 +1,4 @@
-import { Csp, CspButton, CspMotion } from "../components/CspStyle";
+import { Csp, CspButton } from "../components/CspStyle";
 // Conexiuni — NYT Connections over the Romanian KG. Text-only: a 4x4 grid of selectable
 // tile buttons. Pick exactly 4 and "Verifică"; the server says whether they share a
 // category (locks it as a coloured row) or not (one_away feedback + a lost life). Win when
@@ -6,9 +6,13 @@ import { Csp, CspButton, CspMotion } from "../components/CspStyle";
 //
 // Server-authoritative: the grouping + solution live on the server; this component renders
 // what it returns and surfaces a personal best + a shareable result on finish.
+//
+// Motion: the kit Presence owns per-tile exits (enter scale .6 -> 1, exit scale
+// -> .4, spring 320/20 per roedu-ui ADR-0021), the feedback swap and the solved
+// rows; the wrong-guess shake and the solved-row entrance are CSS keyframes.
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence, m } from "motion/react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "preact/hooks";
+import { Presence, type PresenceVariant } from "@roedu/ui/motion";
 import { ApiError } from "../api/client";
 import { createGameActionOwner, recoverOwnedGameAction, type GameActionTicket } from "../gameActionRecovery.mjs";
 import {
@@ -63,6 +67,13 @@ const DIFFICULTY_OPTIONS: { id: Difficulty; label: string; hint: string }[] = [
 ];
 
 const GROUP_COLORS = ["#f4c95d", "#70c1b3", "#5aa9e6", "#a78bfa"] as const;
+
+// Presence-per-tile exits: the exact original Framer keyframes (Conexiuni.tsx:714-728).
+const TILE_VARIANT: PresenceVariant = {
+  enter: { opacity: [0, 1], transform: ["scale(0.6)", "scale(1)"] },
+  exit: { opacity: [1, 0], transform: ["scale(1)", "scale(0.4)"] },
+  transition: { spring: { stiffness: 320, damping: 20 } },
+};
 
 // Mirrors the server's ConexiuniSession clue economy (cat_de_roman_esti/wordgames/
 // conexiuni.py): up to two clues, unlocking at 2 then 3 mistakes.
@@ -605,11 +616,11 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
         </GameShell>
 
         {/* Solved groups as locked coloured rows */}
-        <AnimatePresence initial={false}>
+        <Presence initial={false}>
           {state.solved.map((g, index) => (
             <SolvedRow key={g.key} group={g} color={GROUP_COLORS[index]} />
           ))}
-        </AnimatePresence>
+        </Presence>
 
         {!finished && (
           <div className="connections-coach-stack">
@@ -666,66 +677,51 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
         ) : null}
 
         {/* Feedback stays immediately before the board. */}
-        <AnimatePresence>
+        <Presence>
           {!finished && (feedback || clueMessages.length > 0) && (
-            <m.div
+            <div
               key="connections-feedback"
-              initial={{ opacity: 0, y: -4 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
               className="card connections-feedback col"
             >
-              <AnimatePresence mode="wait">
+              <Presence mode="wait">
                 {feedback && (
-                  <m.span
+                  <span
                     key={feedback}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
                     role="status"
                     aria-live="polite"
                   >
                     <span aria-hidden="true">↻ </span>
                     {feedback}
-                  </m.span>
+                  </span>
                 )}
-              </AnimatePresence>
+              </Presence>
               {clueMessages.map(({ key, message }) => (
                 <span key={key} role="status" aria-live="polite">
                   <span aria-hidden="true">💡 </span>
                   {message}
                 </span>
               ))}
-            </m.div>
+            </div>
           )}
-        </AnimatePresence>
+        </Presence>
 
-        {/* Active board */}
+        {/* Active board: a wrong guess remounts the grid with the shake keyframe. */}
         {!finished && (
-          <CspMotion.div
+          <Csp.div
             key={shake}
-            animate={shake ? { x: [0, -8, 8, -6, 6, 0] } : {}}
-            transition={{ duration: 0.4 }}
-            className="connections-grid"
+            className={shake ? "connections-grid connections-grid--shake" : "connections-grid"}
             css={{
               display: "grid",
               gap: "8px",
             }}
           >
-            <AnimatePresence initial={false}>
+            <Presence initial={false} variant={TILE_VARIANT}>
               {remainingTiles.map((t) => {
                 const isSel = selected.includes(t.id);
                 return (
-                  <CspMotion.button
+                  <Csp.button
                     key={t.id}
                     type="button"
-                    initial={{ scale: 0.6, opacity: 0 }}
-                    animate={{
-                      scale: 1,
-                      opacity: 1,
-                    }}
-                    exit={{ scale: 0.4, opacity: 0 }}
-                    transition={{ type: "spring", stiffness: 320, damping: 20 }}
                     onClick={() => toggle(t.id)}
                     disabled={actionsLocked}
                     aria-pressed={isSel}
@@ -748,11 +744,11 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
                     }}
                   >
                     {t.label}
-                  </CspMotion.button>
+                  </Csp.button>
                 );
               })}
-            </AnimatePresence>
-          </CspMotion.div>
+            </Presence>
+          </Csp.div>
         )}
 
         {/* Controls */}
@@ -859,8 +855,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
         )}
 
         {/* Finish banner */}
-        <AnimatePresence>
-          {finished && (
+        {finished && (
             <ResultCard
               startFailed={startFailed}
               actionsBusy={loading}
@@ -885,8 +880,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
             >
               {state.mistakes} {state.mistakes === 1 ? "greșeală" : "greșeli"}
             </ResultCard>
-          )}
-        </AnimatePresence>
+        )}
       </Csp.div>
     </Csp.div>
   );
@@ -902,16 +896,14 @@ function SolvedRow({
   dim?: boolean;
 }) {
   return (
-    <CspMotion.div
-      initial={{ scale: 0.9, opacity: 0 }}
-      animate={{ scale: 1, opacity: dim ? 0.7 : 1 }}
-      transition={{ type: "spring", stiffness: 260, damping: 20 }}
-      className="card col"
+    <Csp.div
+      className={dim ? "card col connections-solved-enter connections-solved-enter--dim" : "card col connections-solved-enter"}
       css={{
         padding: "12px",
         gap: "6px",
         borderColor: color,
         background: `color-mix(in srgb, var(--surface) 78%, ${color})`,
+        opacity: dim ? 0.7 : 1,
       }}
     >
       <Csp.span css={{ fontWeight: 700, color: "var(--text)", letterSpacing: "0.03em" }}>
@@ -924,6 +916,6 @@ function SolvedRow({
           </Csp.span>
         ))}
       </Csp.div>
-    </CspMotion.div>
+    </Csp.div>
   );
 }

@@ -12,7 +12,7 @@ import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import { parserBinding } from "../frontend/scripts/compiler-runtime.mjs";
 
-export const EXPECTED_CSS_BAGS = 162;
+export const EXPECTED_CSS_BAGS = 59;
 const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const slash = (value) => value.split(path.sep).join("/");
 

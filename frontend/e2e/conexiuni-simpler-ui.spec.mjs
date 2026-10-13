@@ -29,7 +29,8 @@ test("all sixteen tiles and the three actions fit in four columns before optiona
   await expect(tiles).toHaveCount(16);
   const metrics = await tiles.evaluateAll((buttons) => ({
     width: globalThis.innerWidth, height: globalThis.innerHeight,
-    columns: globalThis.getComputedStyle(buttons[0].parentElement).gridTemplateColumns.split(" ").length,
+    // The kit Presence wraps each tile; the column count belongs to the grid element itself.
+    columns: globalThis.getComputedStyle(buttons[0].closest(".connections-grid")).gridTemplateColumns.split(" ").length,
     tiles: buttons.map((button) => {
       const rect = button.getBoundingClientRect();
       return { x: rect.x, y: rect.y, right: rect.right, bottom: rect.bottom, width: rect.width, height: rect.height };

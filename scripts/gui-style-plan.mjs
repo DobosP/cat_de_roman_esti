@@ -28,6 +28,7 @@ export const ORIGINAL_OWNERS = Object.freeze({
   "frontend/src/screens/Alchimie.tsx": { opacity: 0.5, className: "csp-motion-opacity-50", source_sha256: "d5f299fc3189e887147779c19d39218dc9bd60b717d3f598cdfbbb62760fa53b" },
   "frontend/src/screens/Conexiuni.tsx": { opacity: 0.55, className: "csp-motion-opacity-55", source_sha256: "7c5d85dda928a7f385be2a31edc8ea217cf381e0d48fa6ddbd5888c1b02e9338" },
 });
+export const ORIGINAL_RECEIPT = "docs/reviews/gui-original-react";
 export const NORMALIZED_INPUTS = Object.freeze({
   "frontend/package.json": "d2fe548af9b8c097f2e067852332bdaed0daf319826892a6cb1c4e5bf92aa121",
   "frontend/package-lock.json": "fa9800b9a39cf7d30f60bd5b85e1a2bd1edcc662e20b851f4b85b56e09749915",
@@ -369,9 +370,15 @@ export function nativeDiagnosticResult(child) {
 function normalizedBindings(root, bytes, manifest, lock, bindings) {
   for (const [file, expected] of Object.entries(NORMALIZED_INPUTS)) assert.equal(hash(bytes(file)), expected, `Current reviewed normalized input required: ${file}`);
   const selected = JSON.parse(bytes("versions.lock.json")).tools;
+  // M2 binding migration: React identities come from the frozen original receipt
+  // lock (the same 19.2.7 graph the normalized tree carried); the Motion and
+  // compiler identities stay bound to the installed graph.
+  const originalLock = JSON.parse(bytes(`${ORIGINAL_RECEIPT}/original-lock.json`));
   for (const [name, version] of [["react", "19.2.7"], ["react-dom", "19.2.7"], ["motion", "14.0.0"], ["framer-motion", "14.0.0"], ["motion-dom", "14.0.0"], ["typescript", "7.0.2"], ["@typescript/typescript6", "6.0.2"]]) {
-    const installed = JSON.parse(bytes(`frontend/node_modules/${name}/package.json`)), locked = lock.packages[`node_modules/${name}`];
-    assert.equal(installed.name, name); assert.equal(installed.version, version); assert.equal(locked.version, version);
+    const react = ["react", "react-dom"].includes(name);
+    const locked = react ? originalLock.packages[`node_modules/${name}`] : lock.packages[`node_modules/${name}`];
+    assert.ok(locked, `Lock row required: ${name}`); assert.equal(locked.version, version);
+    if (!react) { const installed = JSON.parse(bytes(`frontend/node_modules/${name}/package.json`)); assert.equal(installed.name, name); assert.equal(installed.version, version); }
     if (!["react", "react-dom", "motion-dom"].includes(name)) assert.equal(selected.find((item) => item.tool === name)?.version, version);
     bindings[name] = { version, resolved: locked.resolved, integrity: locked.integrity };
   }
@@ -424,7 +431,7 @@ function candidateProject(root, owned, files, bytes) {
     else { assert.ok(stat.isFile(), "Private compiler graph cannot contain aliases or nonregular files"); if (!declarationsOnly || /\.(?:json|[cm]?tsx?)$/.test(relative)) copy(relative); }
   }
   walk("frontend/src"); walk("frontend/node_modules", true);
-  for (const file of ["frontend/package.json", "frontend/package-lock.json", "frontend/tsconfig.json", "frontend/vite.config.ts", "frontend/tsconfig.tools.json", "frontend/scripts/gui-sdk-allocation-plugin.mts", "frontend/scripts/native-tsc.mjs"]) copy(file);
+  for (const file of ["frontend/package.json", "frontend/package-lock.json", "frontend/tsconfig.json", "frontend/vite.config.ts", "frontend/tsconfig.tools.json", "frontend/scripts/gui-precompressed-plugin.mts", "frontend/scripts/native-tsc.mjs"]) copy(file);
   assert.ok(files.every((file) => copied.has(file.file)), "All candidate sources must enter the native compiler graph");
   return safePath(root, `${graph}/frontend/tsconfig.json`);
 }
@@ -435,7 +442,7 @@ function bindNativeProjectInputs(root, bytes) {
     else { assert.ok(stat.isFile(), "Native source/declaration/package input must be regular"); if (!declarationsOnly || /\.(?:json|[cm]?tsx?)$/.test(relative)) bytes(relative); }
   }
   walk("frontend/src"); walk("frontend/node_modules", true);
-  for (const file of ["frontend/vite.config.ts", "frontend/tsconfig.tools.json", "frontend/scripts/gui-sdk-allocation-plugin.mts", "frontend/scripts/native-tsc.mjs"]) bytes(file);
+  for (const file of ["frontend/vite.config.ts", "frontend/tsconfig.tools.json", "frontend/scripts/gui-precompressed-plugin.mts", "frontend/scripts/native-tsc.mjs"]) bytes(file);
 }
 
 export function main(profile = "original") {
@@ -467,25 +474,31 @@ export function main(profile = "original") {
       assert.equal(hash(manifestBytes), "efde2d3fbdebc5899dc63ca6b518cab0d60370ef36a7301477da720f4978e2e9", "Original frontend manifest bytes required");
       assert.equal(hash(lockBytes), "f72661b4bd7ad129a6771037bf900a616a0fdf84bbb41f70c6d118b69fb1b62c", "Original frontend lock bytes required");
     }
-    assert.equal(manifest.dependencies["@roedu/ui"], "file:vendor/roedu-ui-0.3.0.tgz");
-    assert.equal(hash(bytes("frontend/vendor/roedu-ui-0.3.0.tgz")), "1934a81cdfd737a051f591ebcae072f5028943b715456dbb2899b483d399c244", "Original SDK bytes required");
+    // M2 binding migration: the sealed original graph's SDK pointer and archive come
+    // from the frozen original receipt, never from the live manifest or vendor tree.
+    const originalManifest = JSON.parse(bytes(`${ORIGINAL_RECEIPT}/original-package.json`));
+    assert.equal(originalManifest.dependencies["@roedu/ui"], "file:vendor/roedu-ui-0.3.0.tgz");
+    assert.equal(hash(bytes(`${ORIGINAL_RECEIPT}/original-ui-0.3.0.tgz`)), "1934a81cdfd737a051f591ebcae072f5028943b715456dbb2899b483d399c244", "Original SDK bytes required");
     if (profile === "normalized") normalizedBindings(root, bytes, manifest, lock, bindings);
-    else for (const [name, version] of [["react-dom", "19.2.7"], ["typescript", "5.9.3"]]) {
-      const installed = JSON.parse(bytes(`frontend/node_modules/${name}/package.json`));
-      assert.equal(installed.name, name); assert.equal(installed.version, version); assert.equal(lock.packages[`node_modules/${name}`].version, version);
-      bindings[name] = { version: installed.version, resolved: lock.packages[`node_modules/${name}`].resolved, integrity: lock.packages[`node_modules/${name}`].integrity };
+    else {
+      const originalLock = JSON.parse(bytes(`${ORIGINAL_RECEIPT}/original-lock.json`));
+      for (const [name, version] of [["react-dom", "19.2.7"], ["typescript", "5.9.3"]]) {
+        const locked = originalLock.packages[`node_modules/${name}`];
+        assert.ok(locked, `Original lock row required: ${name}`); assert.equal(locked.version, version);
+        bindings[name] = { version: locked.version, resolved: locked.resolved, integrity: locked.integrity };
+      }
     }
-    if (profile === "original") { assert.equal(ts.version, bindings.typescript.version); bytes("frontend/node_modules/typescript/lib/typescript.js"); }
+    if (profile === "original") assert.equal(ts.version, bindings.typescript.version);
     assert.equal(absolutePath(fs.realpathSync(fileURLToPath(import.meta.url))), absolutePath(fs.realpathSync(safePath(root, "scripts/gui-style-plan.mjs"))), "Executing planner must be the bound repository script");
     const scriptBytes = bytes("scripts/gui-style-plan.mjs"); assert.equal(hash(scriptBytes), hash(fs.readFileSync(fileURLToPath(import.meta.url))), "Executing planner bytes differ");
-    const renderer = extractRendererUnitless(bytes("frontend/node_modules/react-dom/cjs/react-dom-client.development.js"));
-    const policy = extractUnitlessPolicy(bytes("frontend/src/components/cssUnits.ts")); assert.deepEqual(policy, renderer, "Policy must equal actual pinned renderer");
-    let frozen;
-    if (profile === "normalized") {
-      bytes("scripts/gui-style-operation.mjs");
-      const archived = readNormalizedFrozenRenderer(bytes); frozen = archived.bytes; bindings.frozen_renderer = archived.binding;
-    } else { frozen = bytes("cat_de_roman_esti/web/static/assets/index-qYTSE3Vo.js"); assert.equal(hash(frozen), "3aeceaed54e6d8614fa85e68bcf2a5c6ab1a7619bf20f7184624d475259be93a"); }
-    const frozenList = frozen.toString().match(/animationIterationCount.{0,1800}WebkitLineClamp/g); assert.equal(frozenList?.length, 1); assert.deepEqual(policy, frozenList[0].split(" "), "Exact original frozen renderer policy required");
+    // M2 binding migration: the pinned ReactDOM renderer is no longer installed; its
+    // unitless list is bound from the frozen original bundle member (the exact
+    // renderer the legacy archive still serves) for both profiles.
+    bytes("scripts/gui-style-operation.mjs");
+    const archived = readNormalizedFrozenRenderer(bytes); const frozen = archived.bytes; bindings.frozen_renderer = archived.binding;
+    const frozenList = frozen.toString().match(/animationIterationCount.{0,1800}WebkitLineClamp/g); assert.equal(frozenList?.length, 1);
+    const renderer = frozenList[0].split(" ");
+    const policy = extractUnitlessPolicy(bytes("frontend/src/components/cssUnits.ts")); assert.deepEqual(policy, renderer, "Policy must equal the exact original frozen renderer");
     const owners = Object.fromEntries(Object.entries(ORIGINAL_OWNERS).map(([file, owner]) => {
       const actual = hash(bytes(file));
       if (profile === "original") assert.equal(actual, owner.source_sha256, "Exact original Motion owner source bytes required");

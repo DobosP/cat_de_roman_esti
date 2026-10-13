@@ -154,7 +154,11 @@ try {
     const median = (key) => runs.map((item) => item[key]).sort((a, b) => a - b)[2];
     vitals.push({ route, runs, median: { lcp: median("lcp"), inp: median("inp"), cls: median("cls") } });
   }
-  const inputs = Object.fromEntries(["frontend/package.json", "frontend/package-lock.json", "frontend/vendor/roedu-ui-0.3.0.tgz", `${quality}/package.json`, `${quality}/package-lock.json`].map((file) => [file, hash(fs.readFileSync(file))]));
+  // M2 binding migration: the active SDK archive is whatever the manifest pointer selects; the
+  // original 0.3.0 archive is bound from the frozen original receipt, never from the vendor tree.
+  const activeSdk = /^file:(vendor\/roedu-ui-\d+\.\d+\.\d+\.tgz)$/.exec(JSON.parse(fs.readFileSync("frontend/package.json")).dependencies?.["@roedu/ui"] ?? "")?.[1];
+  if (!activeSdk) throw new Error("Active @roedu/ui vendor pointer required");
+  const inputs = Object.fromEntries(["frontend/package.json", "frontend/package-lock.json", `frontend/${activeSdk}`, "docs/reviews/gui-original-react/original-ui-0.3.0.tgz", `${quality}/package.json`, `${quality}/package-lock.json`].map((file) => [file, hash(fs.readFileSync(file))]));
   const report = { schema: 1, mode: capture ? "capture" : mode, proof_scope: mode === "original-capture" ? "pinned-gen-original-runner-built-server" : mode === "owner-diagnostic" ? "owner-shell-baseline-diagnostic-only-not-full-receipt" : "actual-app-image", sha: process.env.GATE_SHA, tree_sha256: process.env.GATE_TREE_SHA256, toolchain_digest: process.env.TOOLCHAIN_DIGEST, inputs, sizes, closures, css, cssTotal, pages, axeVersion, axe_source_sha256: hash(axeSource), vitalsVersion, vitals_source_sha256: hash(vitalsSource), vitals, method: { runs: 5, reducedMotion: "reduce", cpu: 4, rtt_ms: 150, down_kbps: 1600 },
     ...(verification ? { verification: verification.binding, verification_inputs: verification.inputs, identity: verification.identity, home_semantics: homeWitness, home_semantics_failure: homeWitnessFailure } : {}),
     ...(mode === "owner-diagnostic" ? { diagnostic_attribution: { measurement_overhead: "Extra LCP/resource/font instrumentation; overhead is unmeasured and may affect diagnostic timings" } } : {}) };

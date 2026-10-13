@@ -2,7 +2,7 @@
 // private score copy with current consent. Anonymous/offline play needs none of this; the
 // hook degrades to {accounts_enabled:false} if /api/me is unreachable or disabled.
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "preact/hooks";
 import { getMe, type MeResponse } from "../api/auth";
 import { setScoreSyncEnabled, syncAllLocalOnce } from "../scoreSync";
 

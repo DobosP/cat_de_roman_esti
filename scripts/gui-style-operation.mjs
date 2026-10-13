@@ -7,7 +7,7 @@ import { readTarGz } from "../tools/gui-bootstrap-webkit/scripts/kit-sync.mjs";
 
 export const STYLE_OPERATION = "plan-original-styles";
 export const NORMALIZED_STYLE_OPERATION = "plan-normalized-styles";
-export const PLANNER_SHA256 = "715d4f79f9aeca9d46052c0b08661cfdb5524d079d7d3070b282930bfe699a7b";
+export const PLANNER_SHA256 = "2bcdc2ecb81af156920ec9866a03aa0fd0bfcaf889416f7ceb5cedfec53e908c";
 const MOTION_REGRESSION_INPUTS = {
   "frontend/testdata/motion-layout-shadow/runner.test.mjs": "9d1b7ef60605f46d04bd785e70d34dd53a82fd61bb1a4b7cf151b299cf6f63b1",
   "frontend/testdata/motion-layout-shadow/index.html": "4298902a46db2d2e4327577cb3fc542422875f960fd299c39a5f2f8dfe9bb125",
@@ -113,7 +113,10 @@ export function readStyleIdentity(context, configured, request, environment = pr
   if (request.operation === NORMALIZED_STYLE_OPERATION) assert.ok(config.ui_adoption, "Normalized planning requires the actual staged SDK phase");
   assert.deepEqual(JSON.parse(read(root, "scripts/gui-gen-request.json", inputs)), request, "Current source request differs from hook selection");
   const descriptorBytes = read(root, ".gate/wrapper-current.json", inputs), current = JSON.parse(descriptorBytes);
-  assert.ok(own(current, ["schema", "invocation", "target", "sha", "tree_sha256", "toolchain_digest", "config_sha256", "config_path", "config_file_sha256"]));
+  // `operator` is the one optional key the core-v1.8+ wrapper records (core ADR-0024).
+  const operatorKey = Object.hasOwn(current ?? {}, "operator") ? ["operator"] : [];
+  assert.ok(own(current, ["schema", "invocation", "target", "sha", "tree_sha256", "toolchain_digest", "config_sha256", "config_path", "config_file_sha256", ...operatorKey]));
+  assert.ok(current.operator === undefined || current.operator === null || (typeof current.operator === "string" && /^(paul|agent:[a-z0-9][a-z0-9-]{1,39})$/.test(current.operator)));
   assert.equal(current.schema, 1); assert.match(current.invocation, UUID); assert.equal(current.target, "gen");
   assert.equal(current.sha, context.sha); assert.equal(current.tree_sha256, context.tree_sha256); assert.equal(current.toolchain_digest, context.toolchain_digest);
   assert.equal(current.config_path, ".gate/gen/wrapper-kit-config.json"); assert.match(current.config_sha256, HASH); assert.match(current.config_file_sha256, HASH);
@@ -181,7 +184,7 @@ export function captureProtected(root, additional = []) {
       records[relative] = { bytes: bytes.length, sha256: hash(bytes), mode: stat.mode }; }
   }
   for (const relative of new Set(["frontend/src", "frontend/e2e/gui-inventory.json", "frontend/package.json", "frontend/package-lock.json",
-    "frontend/tsconfig.json", "frontend/vendor/roedu-ui-0.3.0.tgz", "versions.lock.json", "kit.lock.json", "scripts/gui-gen-request.json",
+    "frontend/tsconfig.json", "frontend/vendor", "versions.lock.json", "kit.lock.json", "scripts/gui-gen-request.json",
     "docs/reviews/gui-original-react", "baselines/cat", "legacy", ".gate/gen/original", ".gate/gen/styles/runs", ...additional])) collect(relative);
   return records;
 }
@@ -229,9 +232,8 @@ export function validatePlannerOutput(root, summary, identity, previousRuns = []
     assert.equal(report.diagnostics.length + report.candidate_diagnostics.length + report.manual.length, 0); assert.ok(report.files.length > 0);
     for (const file of ["scripts/gui-style-plan.mjs", "frontend/package.json", "frontend/package-lock.json", "frontend/tsconfig.json",
       "frontend/src/components/cssUnits.ts", "frontend/src/components/CspStyle.ts", "frontend/src/components/CspElements.tsx", "frontend/src/screens/Alchimie.tsx", "frontend/src/screens/Conexiuni.tsx",
-      "frontend/node_modules/react-dom/package.json", "frontend/node_modules/react-dom/cjs/react-dom-client.development.js",
-      "frontend/node_modules/typescript/package.json",
-      "frontend/vendor/roedu-ui-0.3.0.tgz"]) assert.ok(Object.hasOwn(inputs, file), `Required actual planner binding missing: ${file}`);
+      "docs/reviews/gui-original-react/original-package.json", "docs/reviews/gui-original-react/original-lock.json",
+      "docs/reviews/gui-original-react/original-ui-0.3.0.tgz"]) assert.ok(Object.hasOwn(inputs, file), `Required actual planner binding missing: ${file}`);
     assert.equal(inputs["scripts/gui-style-plan.mjs"].sha256, PLANNER_SHA256);
     const fixed = {
       "frontend/package.json": "efde2d3fbdebc5899dc63ca6b518cab0d60370ef36a7301477da720f4978e2e9",
@@ -242,8 +244,9 @@ export function validatePlannerOutput(root, summary, identity, previousRuns = []
       "frontend/src/components/CspElements.tsx": "27cf738b5af8a4e4eefab89b513d941261b61d0d41813eca09618ea8a8ef881d",
       "frontend/src/screens/Alchimie.tsx": "d5f299fc3189e887147779c19d39218dc9bd60b717d3f598cdfbbb62760fa53b",
       "frontend/src/screens/Conexiuni.tsx": "7c5d85dda928a7f385be2a31edc8ea217cf381e0d48fa6ddbd5888c1b02e9338",
-      "frontend/vendor/roedu-ui-0.3.0.tgz": "1934a81cdfd737a051f591ebcae072f5028943b715456dbb2899b483d399c244",
-      "cat_de_roman_esti/web/static/assets/index-qYTSE3Vo.js": "3aeceaed54e6d8614fa85e68bcf2a5c6ab1a7619bf20f7184624d475259be93a",
+      "docs/reviews/gui-original-react/original-ui-0.3.0.tgz": "1934a81cdfd737a051f591ebcae072f5028943b715456dbb2899b483d399c244",
+      "docs/reviews/gui-original-react/original-package.json": "efde2d3fbdebc5899dc63ca6b518cab0d60370ef36a7301477da720f4978e2e9",
+      "docs/reviews/gui-original-react/original-lock.json": "f72661b4bd7ad129a6771037bf900a616a0fdf84bbb41f70c6d118b69fb1b62c",
     };
     if (normalized) {
       Object.assign(fixed, {
@@ -255,13 +258,12 @@ export function validatePlannerOutput(root, summary, identity, previousRuns = []
         "frontend/src/components/CspElements.tsx": "f1c5478b8d243223d16baedb9fc6f0ced38f073377e0d7393e252b5a598b32c3",
       });
       delete fixed["frontend/src/screens/Alchimie.tsx"]; delete fixed["frontend/src/screens/Conexiuni.tsx"];
-      delete fixed["cat_de_roman_esti/web/static/assets/index-qYTSE3Vo.js"];
       const frozen = readNormalizedFrozenRenderer((file) => {
         assert.ok(Object.hasOwn(inputs, file), `Required archive-backed renderer input missing: ${file}`);
         return fs.readFileSync(sourcePath(root, file));
       });
       assert.deepEqual(report.bindings.frozen_renderer, frozen.binding, "True archive member binding required");
-      for (const file of ["frontend/tsconfig.tools.json", "frontend/scripts/gui-sdk-allocation-plugin.mts", "frontend/scripts/native-tsc.mjs", "versions.lock.json", "frontend/src/screens/Home.tsx", "frontend/src/screens/Perechi.tsx",
+      for (const file of ["frontend/tsconfig.tools.json", "frontend/scripts/gui-precompressed-plugin.mts", "frontend/scripts/native-tsc.mjs", "versions.lock.json", "frontend/src/screens/Home.tsx", "frontend/src/screens/Perechi.tsx",
         "frontend/node_modules/@typescript/typescript6/package.json", "frontend/node_modules/@typescript/old/package.json",
         "frontend/node_modules/motion/package.json", "frontend/node_modules/framer-motion/package.json", "frontend/node_modules/motion-dom/package.json"])
         assert.ok(Object.hasOwn(inputs, file), `Required normalized input missing: ${file}`);
@@ -272,15 +274,26 @@ export function validatePlannerOutput(root, summary, identity, previousRuns = []
         assert.equal(report.owners.filter((owner) => owner.file === file && owner.owner_class === className).length, 1, "One current bound opacity owner required");
       }
     } else {
-      assert.ok(Object.hasOwn(inputs, "cat_de_roman_esti/web/static/assets/index-qYTSE3Vo.js"), "Original frozen renderer bytes required");
-      assert.ok(Object.hasOwn(inputs, "frontend/node_modules/typescript/lib/typescript.js"), "Original compiler API bytes required");
+      // M2 binding migration: the original profile binds the frozen renderer from the
+      // legacy archive member (readNormalizedFrozenRenderer), like the normalized one.
+      const frozen = readNormalizedFrozenRenderer((file) => {
+        assert.ok(Object.hasOwn(inputs, file), `Required archive-backed renderer input missing: ${file}`);
+        return fs.readFileSync(sourcePath(root, file));
+      });
+      assert.deepEqual(report.bindings.frozen_renderer, frozen.binding, "True archive member binding required");
     }
     for (const [file, expected] of Object.entries(fixed)) assert.equal(inputs[file]?.sha256, expected, `Exact reviewed planner source identity required: ${file}`);
+    // M2 binding migration: React rows are bound to the frozen original receipt lock;
+    // installed/live-lock rows apply only to the identities the port kept installed.
+    const originalLock = JSON.parse(fs.readFileSync(sourcePath(root, "docs/reviews/gui-original-react/original-lock.json")));
     for (const [name, version] of normalized ? [["react-dom", "19.2.7"], ["typescript", "7.0.2"], ["@typescript/typescript6", "6.0.2"], ["motion", "14.0.0"], ["framer-motion", "14.0.0"], ["motion-dom", "14.0.0"]] : [["react-dom", "19.2.7"], ["typescript", "5.9.3"]]) {
       assert.equal(report.bindings[name]?.version, version);
-      const installed = JSON.parse(fs.readFileSync(sourcePath(root, `frontend/node_modules/${name}/package.json`)));
-      assert.equal(installed.name, name); assert.equal(installed.version, version);
-      const locked = JSON.parse(fs.readFileSync(sourcePath(root, "frontend/package-lock.json"))).packages[`node_modules/${name}`];
+      const react = name === "react-dom" || (!normalized && name === "typescript");
+      if (!react) {
+        const installed = JSON.parse(fs.readFileSync(sourcePath(root, `frontend/node_modules/${name}/package.json`)));
+        assert.equal(installed.name, name); assert.equal(installed.version, version);
+      }
+      const locked = (react ? originalLock : JSON.parse(fs.readFileSync(sourcePath(root, "frontend/package-lock.json")))).packages[`node_modules/${name}`];
       assert.equal(locked.version, version); assert.equal(locked.resolved, report.bindings[name].resolved); assert.equal(locked.integrity, report.bindings[name].integrity);
     }
     const wanted = new Set([`${relative}/analysis.json`, report.report_json]);
@@ -350,7 +363,7 @@ function validateNativeEvidence(root, report, inputs, wanted) {
       assert.equal(item.sha256, proposed.get(source)?.after_sha256 ?? inputs[source].sha256, "Private graph changed an unproposed input");
     }
   }
-  for (const file of ["frontend/package.json", "frontend/package-lock.json", "frontend/tsconfig.json", "frontend/vite.config.ts", "frontend/tsconfig.tools.json", "frontend/scripts/gui-sdk-allocation-plugin.mts", "frontend/scripts/native-tsc.mjs", ...proposed.keys()])
+  for (const file of ["frontend/package.json", "frontend/package-lock.json", "frontend/tsconfig.json", "frontend/vite.config.ts", "frontend/tsconfig.tools.json", "frontend/scripts/gui-precompressed-plugin.mts", "frontend/scripts/native-tsc.mjs", ...proposed.keys()])
     assert.ok(wanted.has(`${relative}/native/candidate-graph/${file}`), `Owning config or candidate absent from native graph: ${file}`);
   function requireGraph(relative, declarationsOnly = false) {
     const file = sourcePath(root, relative), stat = fs.lstatSync(file);

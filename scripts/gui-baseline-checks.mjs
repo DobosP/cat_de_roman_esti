@@ -17,7 +17,7 @@ export const FOOTER = "Toate cele șase jocuri folosesc aceeași hartă de legă
 export const ORIGINAL_BASELINE_SHA256 = "ff055e404bf138ce0442381ab33eb643d431f922e4284f66a5002efcc397be68";
 const SOURCES = {
   "frontend/src/games.ts": "ce6a53bd118fae4f0cfa62eb12d6afadb31596a1e265c5122e202560ef26b0ad",
-  "frontend/src/screens/Home.tsx": "1d081bda1472f0a5226116c98f94d1ee68a0c77ec726942670eb9ac15928c29a",
+  "frontend/src/screens/Home.tsx": "06e362d64550f54e39d8a8d342a80558b20c9e5eb08ecafb896eab0d46f11368",
   "baselines/cat/capture.json": ORIGINAL_BASELINE_SHA256,
 };
 const liveContexts = new WeakSet(), identifiedContexts = new WeakSet(), liveWitnesses = new WeakSet();
@@ -73,7 +73,10 @@ export function prepareVerification(root, mode) {
   const acquire = (name) => { const row = read(root, name); inputs.push({ path: name, bytes: row.size, sha256: row.sha256 }); return row; };
   const raw = acquire(".gate/wrapper-current.json"), descriptor = JSON.parse(raw.bytes);
   assert.ok(raw.bytes.equals(acquire(".gate/" + target + "/wrapper-current.json").bytes));
-  assert.ok(fields(descriptor, ["schema", "invocation", "target", "sha", "tree_sha256", "toolchain_digest", "config_sha256", "config_path", "config_file_sha256"])
+  // `operator` is the one optional key the core-v1.8+ wrapper records (core ADR-0024).
+  const operatorKey = Object.hasOwn(descriptor, "operator") ? ["operator"] : [];
+  assert.ok(fields(descriptor, ["schema", "invocation", "target", "sha", "tree_sha256", "toolchain_digest", "config_sha256", "config_path", "config_file_sha256", ...operatorKey])
+    && (descriptor.operator === undefined || descriptor.operator === null || (typeof descriptor.operator === "string" && /^(paul|agent:[a-z0-9][a-z0-9-]{1,39})$/.test(descriptor.operator)))
     && descriptor.schema === 1 && descriptor.target === target && uuid(descriptor.invocation)
     && hex(descriptor.sha, 40) && hex(descriptor.tree_sha256, 64)
     && descriptor.config_path === ".gate/" + target + "/wrapper-kit-config.json");

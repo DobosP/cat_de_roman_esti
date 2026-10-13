@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { games, activeKey, gameURL, deterministicStarts, solution, start, act } from "./games.mjs";
+import { games, activeKey, gameURL, deterministicStarts, portedRoutes, solution, start, act } from "./games.mjs";
 
 const verify = (page) => page.getByRole("button", { name: "Verifică jocul", exact: true });
 const currentGame = (page) => page.getByRole("button", { name: "Încarcă jocul curent", exact: true });
@@ -308,8 +308,14 @@ for (const game of games.filter(({ derived }) => derived)) {
       await held.requested;
       await page.goBack();
       await expect(page).toHaveURL("/");
-      held.release();
-      await performed;
+      if (portedRoutes.includes(game.path)) {
+        held.release();
+        await performed;
+      } else {
+        // ADR-0197: an unported screen is its own legacy document, so Back is a
+        // document navigation and the browser discards the held reply with it.
+        performed.catch(() => undefined);
+      }
       await expect(page.locator(game.board)).toHaveCount(0);
       expect(await played(page, game)).toBe(0);
       expect(await saved(page, game)).toBe(initial.game_id);

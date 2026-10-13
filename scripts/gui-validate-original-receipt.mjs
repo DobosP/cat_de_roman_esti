@@ -13,7 +13,8 @@ const evidence = ".gate/gen/original/evidence", validationRoot = ".gate/gen/orig
 const destination = path.join(validationRoot, "docs/reviews/gui-original-react");
 fs.mkdirSync(destination, { recursive: true });
 for (const name of fs.readdirSync(evidence)) fs.copyFileSync(path.join(evidence, name), path.join(destination, name));
-const archive = fs.readFileSync("frontend/vendor/roedu-ui-0.3.0.tgz"), entries = readTarGz(archive);
+// M2 binding migration: the original SDK archive is the frozen receipt copy, not a vendor file.
+const archive = fs.readFileSync("docs/reviews/gui-original-react/original-ui-0.3.0.tgz"), entries = readTarGz(archive);
 const sdk = { data: archive, entries, manifest: JSON.parse(entries.get("package/package.json").data), filename: "roedu-ui-0.3.0.tgz", sha256: hash(archive), integrity: `sha512-${createHash("sha512").update(archive).digest("base64")}` };
 const receipt = fs.readFileSync(path.join(evidence, "receipt.json"));
 const phase = { mode: "staged-react", until: "S1-M2", legacy: { version: "0.3.0", archive_sha256: hash(archive), source_sha: process.env.GATE_SHA, receipt: "docs/reviews/gui-original-react/receipt.json", receipt_sha256: hash(receipt) } };

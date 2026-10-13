@@ -4,10 +4,12 @@ import { Csp } from "./CspStyle";
 // challenge. All four games previously hand-rolled this with drifting styles.
 //
 // The start button takes initial focus, so Enter starts the game without any
-// global key listener (which used to collide across screens).
+// global key listener (which used to collide across screens). The entrance
+// (opacity/translate/scale) is a CSS keyframe on .game-intro; reduced motion
+// disables it through the stylesheet.
 
-import type { ReactNode } from "react";
-import { CspMotion } from "./CspStyle";
+import type { ComponentChildren } from "preact";
+import { useLayoutEffect, useRef } from "preact/hooks";
 import { Badge, Button } from "@roedu/ui";
 import { useDailyIntent } from "../hooks/useDailyIntent";
 import type { ScoreEntry } from "../scores";
@@ -39,19 +41,19 @@ export function GameIntro({
   startFailed = false,
   resumeRecovery,
 }: {
-  icon: ReactNode;
+  icon: ComponentChildren;
   title: string;
   tag?: string;
   accent: string;
   glow?: string;
   /** How-to copy (free-form). */
-  description: ReactNode;
+  description: ComponentChildren;
   /** Three terse actions that teach the loop without a rules wall. */
   steps?: PlayGuideStep[];
   /** Personal best, if any (renders the record line). */
   best?: ScoreEntry | null;
   /** Difficulty picker + any game-specific extras. */
-  children?: ReactNode;
+  children?: ComponentChildren;
   startLabel?: string;
   onStart: () => void;
   /** Renders the shared daily-challenge button when given. */
@@ -65,6 +67,10 @@ export function GameIntro({
   resumeRecovery?: ResumeRecoveryNotice | null;
 }) {
   const intent = useDailyIntent();
+  const primaryRef = useRef<HTMLButtonElement | null>(null);
+  // Initial focus on mount only (the former autoFocus): a later intro mount in the
+  // same document must focus again, which the HTML attribute does only once.
+  useLayoutEffect(() => { primaryRef.current?.focus(); }, []);
   // The circuit carries intent only. A saved round still resumes normally and
   // creating a daily round always requires the player's explicit start action,
   // which also uses up the intent so a later return here leads with free play.
@@ -74,13 +80,10 @@ export function GameIntro({
     action?.();
   };
   return (
-    <CspMotion.div
-      className="card game-intro"
+    <Csp.div
+      className="card game-intro game-intro-enter"
       inert={starting}
       aria-busy={starting}
-      initial={{ opacity: 0, y: 18, scale: 0.98 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
       css={{
         boxShadow: glow ? `0 0 80px -30px ${glow}, var(--shadow-card)` : undefined,
       }}
@@ -124,7 +127,7 @@ export function GameIntro({
 
       <StartFailureNotice failed={startFailed} />
       <Csp.div className="row center wrap game-intro-actions" css={{ gap: "12px", marginTop: "6px" }}>
-        <Button autoFocus onClick={consumeThen(dailyFirst ? onDaily : onStart)} disabled={starting} size="lg">
+        <Button ref={primaryRef} onClick={consumeThen(dailyFirst ? onDaily : onStart)} disabled={starting} size="lg">
           {dailyFirst ? "Joacă provocarea zilei" : startLabel}
         </Button>
         {onDaily && (
@@ -144,6 +147,6 @@ export function GameIntro({
           Recordul tău: <Csp.strong css={{ color: accent }}>{best.score}</Csp.strong> · {displayDetail(best.detail)}
         </Csp.p>
       )}
-    </CspMotion.div>
+    </Csp.div>
   );
 }

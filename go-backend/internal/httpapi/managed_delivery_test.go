@@ -74,7 +74,7 @@ func managedDeliveryServer(t *testing.T, files fstest.MapFS, mode string) *Serve
 }
 
 func TestManagedDeliveryPortedSetAndDocumentIdentityPerRoute(t *testing.T) {
-	if want := map[string]bool{"/": true, "/intrusul": true, "/conexiuni": true}; !reflect.DeepEqual(managedPortedRoutes, want) {
+	if want := map[string]bool{"/": true, "/intrusul": true, "/perechi": true, "/conexiuni": true}; !reflect.DeepEqual(managedPortedRoutes, want) {
 		t.Fatalf("M2 ported route set differs: %v", managedPortedRoutes)
 	}
 	undeclared := managedSPAFixture()
@@ -129,7 +129,7 @@ func TestManagedDeliverySplitIgnoresRequestSelectors(t *testing.T) {
 	files := preactDeliveryFixture()
 	s := managedDeliveryServer(t, files, "current")
 	for _, tc := range []struct{ target, ui string }{
-		{"/perechi?ui=preact&CAT_UI=current", "legacy"},
+		{"/lant?ui=preact&CAT_UI=current", "legacy"},
 		{"/intrusul?ui=legacy&CAT_UI=legacy", "preact"},
 		{"/conexiuni?difficulty=easy", "preact"},
 		{"/intrusul/?challenge=daily", "legacy"},
@@ -195,10 +195,10 @@ func TestManagedDeliverySplitAssetsKeepSDKMethodCacheAndRefusalContracts(t *test
 		t.Fatal("split delivery changed native API availability")
 	}
 	nonces := map[string]bool{}
-	for _, route := range []string{"/intrusul", "/perechi", "/intrusul", "/perechi"} {
+	for _, route := range []string{"/intrusul", "/lant", "/intrusul", "/lant"} {
 		w := managedSPARequest(s, http.MethodGet, route)
 		var nonce string
-		if route == "/perechi" {
+		if route == "/lant" {
 			nonce = assertManagedLegacyIndex(t, w, legacyManifestForTest(t, files))
 		} else {
 			nonce = assertManagedCurrentIndex(t, w, files["dist/index.html"].Data)

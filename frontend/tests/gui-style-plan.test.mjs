@@ -291,7 +291,9 @@ function publicationFixture(t, label, body) {
     } finally { fs.closeSync(fd); }
   }
   const descriptorBytes = read(".gate/wrapper-current.json"), actual = JSON.parse(descriptorBytes);
-  assert.ok(closed(actual, ["schema", "invocation", "target", "sha", "tree_sha256", "toolchain_digest", "config_sha256", "config_path", "config_file_sha256"]));
+  // `operator` is the one optional key the core-v1.8+ wrapper records (core ADR-0024).
+  assert.ok(closed(actual, ["schema", "invocation", "target", "sha", "tree_sha256", "toolchain_digest", "config_sha256", "config_path", "config_file_sha256"], ["operator"]));
+  assert.ok(actual.operator === undefined || actual.operator === null || (typeof actual.operator === "string" && /^(paul|agent:[a-z0-9][a-z0-9-]{1,39})$/.test(actual.operator)));
   assert.equal(actual.schema, 1); assert.ok(["unit", "full"].includes(actual.target)); assert.match(actual.invocation, uuid);
   assert.match(actual.sha, /^[a-f0-9]{40}$/); assert.match(actual.tree_sha256, hex); assert.match(actual.toolchain_digest, /^sha256:[a-f0-9]{64}$/);
   assert.equal(actual.sha, process.env.GATE_SHA); assert.equal(actual.tree_sha256, process.env.GATE_TREE_SHA256);
@@ -371,11 +373,11 @@ function publicationFixture(t, label, body) {
   }
   assert.equal(used.size, listed.size); assert.equal(listed.size, bootstrap.actions.length * 2); assert.ok(configCommands > 0);
   const sourceInputs = [
-    ["scripts/gui-style-plan.mjs", "715d4f79f9aeca9d46052c0b08661cfdb5524d079d7d3070b282930bfe699a7b"],
+    ["scripts/gui-style-plan.mjs", "2bcdc2ecb81af156920ec9866a03aa0fd0bfcaf889416f7ceb5cedfec53e908c"],
     ["frontend/tests/fixtures/gui-style-plan.json", "24bdcb858dcc74878e99aca0de338bf335cf3b1b3c14e8b68820fca1be9ca8b9"],
     ["frontend/src/components/cssUnits.ts", "5681d320b14511757894cff3a850b7f67114d78e9b1eb0d2c36e4d7551c1b873"],
-    ["frontend/src/components/CspStyle.ts", "2ea61764325b4cb9ecd036d106466594d0f32f2f6d83b09a547981c0317fa320"],
-    ["frontend/src/components/CspElements.tsx", "f1c5478b8d243223d16baedb9fc6f0ced38f073377e0d7393e252b5a598b32c3"],
+    ["frontend/src/components/CspStyle.ts", "18116c906c99ae42fe17fb6be45711d4cd4d6ff97ec8bbad06a7f3c6752479d5"],
+    ["frontend/src/components/CspElements.tsx", "ac05cacdcea34685d5b83c15cfeb7254590d7dbf9187e5dd74c2bd6aef4cbe30"],
   ].map(([name, expected]) => { const bytes = read(name); assert.equal(sha(bytes), expected); return { path: name, bytes: bytes.length, sha256: expected }; });
   const testBytes = read("frontend/tests/gui-style-plan.test.mjs");
   sourceInputs.push({ path: "frontend/tests/gui-style-plan.test.mjs", bytes: testBytes.length, sha256: sha(testBytes) });

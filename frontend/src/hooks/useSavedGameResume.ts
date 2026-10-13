@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "preact/hooks";
 import { ApiError } from "../api/client";
 import type { ActiveGameMemo } from "./useActiveGame";
 import { useDailyIntent } from "./useDailyIntent";

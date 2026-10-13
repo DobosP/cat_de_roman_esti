@@ -6,6 +6,12 @@ import { createHash } from "node:crypto";
 import { chromium } from "../frontend/node_modules/playwright/index.mjs";
 import { ROMANIAN_FONT_SOURCES } from "../frontend/scripts/check-bundle-budget.mjs";
 import { readActualLegacyObservation } from "./gui-legacy-owner.mjs";
+import { readTarGz } from "../tools/gui-bootstrap-webkit/scripts/kit-sync.mjs";
+
+// M2 binding migration: the original React graph (manifest, lock, SDK 0.3.0
+// archive and its entry) is bound from the frozen original receipt copies, not
+// from the live manifest/lock or the installed node_modules the port replaced.
+const originalReceipt = "docs/reviews/gui-original-react";
 
 const root = process.cwd(), originalProfile = process.argv[2] === "original", normalizedProfile = process.argv[2] === "normalized-react";
 const reactProfile = originalProfile || normalizedProfile;
@@ -95,18 +101,18 @@ function originalPrerequisites() {
   const configInput = originalInput(descriptor.config_path); assert.equal(configInput.sha256, descriptor.config_file_sha256);
   const request = JSON.parse(fs.readFileSync("scripts/gui-gen-request.json"));
   assert.equal(request.operation, "qualify-original-react", "Owning existing original qualification request required");
-  const inputs = ["frontend/package.json", "frontend/package-lock.json", "frontend/vendor/roedu-ui-0.3.0.tgz"].map(originalInput);
+  const inputs = [`${originalReceipt}/original-package.json`, `${originalReceipt}/original-lock.json`, `${originalReceipt}/original-ui-0.3.0.tgz`].map(originalInput);
   inputs.push(descriptorInput, originalInput(".gate/gen/wrapper-current.json"), configInput, originalInput(".gate/gen/bootstrap-execution.json"), originalInput("versions.lock.json"));
   for (const [index, expected] of [
     "efde2d3fbdebc5899dc63ca6b518cab0d60370ef36a7301477da720f4978e2e9",
     "f72661b4bd7ad129a6771037bf900a616a0fdf84bbb41f70c6d118b69fb1b62c",
     "1934a81cdfd737a051f591ebcae072f5028943b715456dbb2899b483d399c244",
   ].entries()) assert.equal(inputs[index].sha256, expected, "Exact original manifest/lock/SDK required");
+  const originalLock = JSON.parse(fs.readFileSync(`${originalReceipt}/original-lock.json`));
   for (const [name, version] of [["react", "19.2.7"], ["react-dom", "19.2.7"], ["framer-motion", "12.42.2"], ["@roedu/ui", "0.3.0"]]) {
-    const file = `frontend/node_modules/${name}/package.json`;
-    inputs.push(originalInput(file));
-    const installed = JSON.parse(fs.readFileSync(file));
-    assert.equal(installed.name, name); assert.equal(installed.version, version);
+    const locked = originalLock.packages[`node_modules/${name}`];
+    assert.ok(locked, `Original lock row required: ${name}`);
+    assert.equal(locked.version, version, `Original runtime identity differs: ${name}`);
   }
   for (const [key, name] of [["CDR_NATIVE_BINARY", "cat-server"], ["CDR_BROWSER_PLAN_BINARY", "cat-browser-plan"]]) {
     const absolute = process.env[key];
@@ -117,13 +123,14 @@ function originalPrerequisites() {
     "frontend/playwright.gui.config.mjs", "frontend/playwright.config.mjs", "frontend/e2e/gui-inventory.json",
     "frontend/e2e/games.mjs", "frontend/e2e/native-plan.mjs", "frontend/e2e/seeded-starts.json",
     "frontend/e2e/alchimie-111-checkpoint.json", "frontend/e2e/alchimie-221-checkpoint.json", "frontend/e2e/alchimie-221-expanded-checkpoint.json",
-    "frontend/node_modules/@roedu/ui/dist/index.js", "frontend/node_modules/@playwright/test/cli.js",
+    "frontend/node_modules/@playwright/test/cli.js",
     ".gate/gen/original/evidence/receipt.json", ".gate/gen/original/evidence/source-hashes.json",
     "cat_de_roman_esti/web/static/index.html", "cat_de_roman_esti/web/static/.vite/manifest.json"].map(originalInput));
   const receipt = JSON.parse(fs.readFileSync(".gate/gen/original/evidence/receipt.json"));
   assert.equal(receipt.sha, descriptor.sha); assert.equal(receipt.tree_sha256, descriptor.tree_sha256); assert.equal(receipt.toolchain_digest, descriptor.toolchain_digest);
-  assert.equal(inputs.find((item) => item.path === "frontend/node_modules/@roedu/ui/dist/index.js").sha256,
-    receipt.runtime_sdk.entry_sha256, "Installed original SDK entry differs from the already verified sealed archive");
+  const sdkEntry = readTarGz(fs.readFileSync(`${originalReceipt}/original-ui-0.3.0.tgz`)).get("package/dist/index.js")?.data;
+  assert.ok(sdkEntry, "Original SDK archive entry required");
+  assert.equal(hash(sdkEntry), receipt.runtime_sdk.entry_sha256, "Original SDK entry differs from the already verified sealed archive");
   return inputs;
 }
 async function normalizedPrerequisites() {
@@ -245,8 +252,15 @@ fs.writeFileSync(`${output}/app-witness.json`, JSON.stringify({ schema: 1, sha: 
 let activeCspObservation;
 const browser = await chromium.launch();
 try {
-  const observations = [], violations = [];
+  const observations = [], legacyObservations = [], violations = [];
   const routes = ["/", "/intrusul", "/perechi", "/conexiuni", "/alchimie?mode=challenges", "/alchimie?mode=explore", "/cald-rece", "/lant", "/clasament"];
+  // ADR-0197: the ported set is served by the current build, every other route by
+  // the frozen original bundle. The kit's CSP evidence binds each observed page to
+  // the current manifest, so frozen pages are reported separately and bound here
+  // to the frozen archive's own file list; every CSP/nonce/font assertion below
+  // still runs on all routes and their violations still count.
+  const PORTED_ROUTES = ["/", "/intrusul", "/perechi", "/conexiuni"];
+  const frozenFiles = new Set(JSON.parse(fs.readFileSync("legacy/original-bundle.json", "utf8")).files.map((file) => "/" + file.path));
   for (const route of routes) {
     const page = await browser.newPage({ reducedMotion: "no-preference" });
     page.on("console", (message) => { if (/Content Security Policy|Refused to (?:execute|apply|load)/i.test(message.text())) violations.push({ route, message: "CSP refusal observed (detail withheld)" }); });
@@ -285,7 +299,8 @@ try {
       const fontPreloads = [...document.querySelectorAll('link[rel~="preload"]')].map((item) => ({ href: item.href, rel: item.getAttribute("rel"), as: item.getAttribute("as"), type: item.getAttribute("type"), crossorigin: item.getAttribute("crossorigin"), nonce: item.nonce, attributes: [...item.attributes].map((attr) => attr.name) }));
       const fontFaces = [...document.fonts].map((item) => ({ family: item.family, status: item.status, style: item.style, weight: item.weight, unicodeRange: item.unicodeRange }));
       return { fontPreloads, fontStatus: document.fonts.status, fontFaces, nonces: scripts.map((item) => item.nonce), meta: metas.map((item) => ({ content: item.content, nonce: item.nonce })), assetNonces,
-        module: module?.src, css, preloads, json: scripts.filter((item) => item.type === "application/json").length, violations: window.__cspViolations };
+        module: module?.src, css, preloads, json: scripts.filter((item) => item.type === "application/json").length, violations: window.__cspViolations,
+        ui: document.documentElement.getAttribute("data-ui") };
     });
     const acquiredFonts = await fontsFinished;
     assert.ok(!acquiredFonts.error, acquiredFonts.error?.message);
@@ -312,17 +327,28 @@ try {
     assert.ok(observation.nonces.length > 0 && observation.nonces.every((nonce) => nonce === headerNonce));
     assert.deepEqual(observation.meta, [{ content: headerNonce, nonce: headerNonce }]);
     assert.ok(observation.assetNonces.length > 0 && observation.assetNonces.every((nonce) => nonce === headerNonce));
-    assert.ok(!observations.some((item) => item.nonce_sha256 === hash(headerNonce)), "Actual document request reused a nonce");
+    assert.ok(![...observations, ...legacyObservations].some((item) => item.nonce_sha256 === hash(headerNonce)), "Actual document request reused a nonce");
     assert.ok(observation.module); assert.ok(observation.css.length > 0);
     violations.push(...observation.violations.map((item) => ({ route, ...item })));
-    observations.push({ page: route, nonce_sha256: hash(observation.nonces[0]), scripts: observation.nonces.length, json: observation.json,
+    const frozenRoute = !PORTED_ROUTES.includes(new URL(route, process.env.GATE_APP_URL).pathname);
+    assert.equal(observation.ui, frozenRoute ? "legacy" : "preact", `ADR-0197 delivery for ${route}`);
+    if (frozenRoute) {
+      for (const file of [observation.module, ...observation.css, ...observation.preloads]) {
+        const url = new URL(file);
+        assert.equal(url.origin, new URL(process.env.GATE_APP_URL).origin);
+        assert.ok(frozenFiles.has(url.pathname), `Frozen page ${route} loaded a file outside the frozen archive`);
+      }
+    }
+    (frozenRoute ? legacyObservations : observations).push({ page: route, nonce_sha256: hash(observation.nonces[0]), scripts: observation.nonces.length, json: observation.json,
       assetLinks: observation.css.length + observation.preloads.length, module: new URL(observation.module).pathname, module_url: observation.module,
       css: observation.css.map((url) => new URL(url).pathname), css_urls: observation.css,
       preloads: observation.preloads.map((url) => new URL(url).pathname), preload_urls: observation.preloads,
       fonts: { links: observation.fontPreloads.map(({ nonce, ...link }) => ({ ...link, nonce_sha256: hash(nonce) })), requests: fontRequests, responses: fontResponses, status: observation.fontStatus, faces: observation.fontFaces } });
     await page.close();
   }
-  activeCspObservation = { schema: 1, sha: process.env.GATE_SHA, tree_sha256: process.env.GATE_TREE_SHA256, app_image_id: process.env.GATE_APP_IMAGE_ID, stage: process.env.CSP_STAGE, violations: violations.length, pages: routes.length, nonceObservations: observations, observedViolations: violations };
+  activeCspObservation = { schema: 1, sha: process.env.GATE_SHA, tree_sha256: process.env.GATE_TREE_SHA256, app_image_id: process.env.GATE_APP_IMAGE_ID, stage: process.env.CSP_STAGE, violations: violations.length, pages: observations.length, nonceObservations: observations,
+    frozen_pages: legacyObservations.length, frozenNonceObservations: legacyObservations, observedViolations: violations };
+  assert.equal(observations.length + legacyObservations.length, routes.length);
   fs.writeFileSync(`${output}/active-csp-observation.json`, JSON.stringify(activeCspObservation, null, 2) + "\n");
   assert.equal(violations.length, 0);
 } finally { await browser.close(); }

@@ -1,10 +1,10 @@
-import type { ReactNode } from "react";
+import type { ComponentChildren } from "preact";
 import type { GameKey } from "../games";
 import { GameHelp } from "./GameHelp";
 import "../styles/game-options.css";
 
 /** Optional tools stay available without occupying the main play area. */
-export function GameOptions({ game, help = true, children }: { game: GameKey; help?: boolean; children?: ReactNode }) {
+export function GameOptions({ game, help = true, children }: { game: GameKey; help?: boolean; children?: ComponentChildren }) {
   return (
     <>
       {help && <GameHelp game={game} />}

@@ -1,14 +1,14 @@
-import { Csp, CspMotion } from "./CspStyle";
+import { Csp } from "./CspStyle";
 // ResultCard — the shared end-of-game card used by every word game so winning, losing,
 // the score read-out, the "Record!" celebration, and the share/copy + replay actions all
 // look and behave identically across the arcade. Wins get a confetti burst (skipped
-// under reduced motion).
+// under reduced motion by the kit).
 //
 // It is presentational only: the host owns the game state and passes in the copy handler,
-// the replay handler, and onExit.
+// the replay handler, and onExit. The former Framer springs are CSS keyframes
+// (result-*-enter classes); reduced motion disables them through the stylesheet.
 
-import type { ReactNode } from "react";
-import { m } from "motion/react";
+import type { ComponentChildren } from "preact";
 import { Badge, Button } from "@roedu/ui";
 import { Confetti } from "./Confetti";
 import { StartFailureNotice } from "./StartFailureNotice";
@@ -34,15 +34,15 @@ export function ResultCard({
   startFailed = false,
 }: {
   /** Big celebratory glyph. */
-  icon: ReactNode;
+  icon: ComponentChildren;
   /** Headline (e.g. "Ai făurit ținta!"). */
-  title: ReactNode;
+  title: ComponentChildren;
   /** Game accent colour for the border glow + score number. */
   accent: string;
   /** Win vs. loss styling (loss drops the glow + confetti). */
   won?: boolean;
   /** Free-form body (recap line, target reveal, …). */
-  children?: ReactNode;
+  children?: ComponentChildren;
   /** Numeric score to feature; omit to hide the score block. */
   score?: number;
   scoreLabel?: string;
@@ -68,11 +68,8 @@ export function ResultCard({
 }) {
   const ring = won ? accent : "var(--surface-border-strong)";
   return (
-    <CspMotion.div
-      className="card center col"
-      initial={{ scale: 0.88, opacity: 0 }}
-      animate={{ scale: 1, opacity: 1 }}
-      transition={{ type: "spring", stiffness: 240, damping: 18 }}
+    <Csp.div
+      className="card center col result-card-enter"
       role="status"
       aria-live="polite"
       css={{
@@ -85,16 +82,14 @@ export function ResultCard({
         boxShadow: won ? `0 0 60px -18px ${accent}` : "var(--shadow-pop)",
       }}
     >
-      {won && <Confetti accent={accent} />}
-      <CspMotion.div
+      {won && <Confetti />}
+      <Csp.div
         css={{ fontSize: "2.6rem", lineHeight: 1 }}
         aria-hidden
-        initial={{ scale: 0.4, rotate: won ? -14 : 0 }}
-        animate={{ scale: 1, rotate: 0 }}
-        transition={{ type: "spring", stiffness: 260, damping: 14, delay: 0.08 }}
+        className={won ? "result-icon-enter result-icon-enter--won" : "result-icon-enter"}
       >
         {icon}
-      </CspMotion.div>
+      </Csp.div>
       <Csp.h2 css={{ margin: "2px 0", color: won ? accent : "var(--text)" }}>{title}</Csp.h2>
 
       {children && (
@@ -108,10 +103,8 @@ export function ResultCard({
           <Csp.span className="faint" css={{ fontSize: "0.72rem", letterSpacing: "0.08em" }}>
             {scoreLabel}
           </Csp.span>
-          <CspMotion.div
-            initial={{ scale: 0.7 }}
-            animate={{ scale: 1 }}
-            transition={{ type: "spring", stiffness: 300, damping: 15, delay: 0.15 }}
+          <Csp.div
+            className="result-score-enter"
             css={{
               fontFamily: "var(--font-display)",
               fontWeight: 700,
@@ -121,24 +114,16 @@ export function ResultCard({
             }}
           >
             {score}
-          </CspMotion.div>
+          </Csp.div>
           {isRecord && (
-            <m.span
-              initial={{ scale: 0.6, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ type: "spring", stiffness: 300, damping: 16, delay: 0.25 }}
-            >
+            <span className="result-record-enter">
               <Badge color="var(--warn)">★ Record!</Badge>
-            </m.span>
+            </span>
           )}
           {!isRecord && isPuzzleRecord && (
-            <m.span
-              initial={{ scale: 0.6, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ type: "spring", stiffness: 300, damping: 16, delay: 0.25 }}
-            >
+            <span className="result-record-enter">
               <Badge tone="success">★ Recordul acestei provocări</Badge>
-            </m.span>
+            </span>
           )}
         </Csp.div>
       )}
@@ -166,6 +151,6 @@ export function ResultCard({
           </Button>
         )}
       </Csp.div>
-    </CspMotion.div>
+    </Csp.div>
   );
 }

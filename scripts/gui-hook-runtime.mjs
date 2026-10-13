@@ -8,9 +8,9 @@ import { pathToFileURL } from 'node:url';
 // phase/receipt, prove installed bytes, or return a passing gate/release result.
 const BOOTSTRAP = 'tools/gui-bootstrap-webkit';
 const BOOTSTRAP_FILES = Object.freeze({
-  'package.json': '2e5a3634fccc61eef689b5e61ba77f1e2a6cda12ea3ff6044905ee1a23cf9d8d',
+  'package.json': '461fdfffe062b1dddfb5831d1c2a7b91feb04f5f522eb4a73f8ef14d63a98041',
   'scripts/run-task.mjs': '10c72f96c031e880988fb62f761f9c5ae5f50a6eaf2dd3fd553ed25dba43389f',
-  'scripts/locate-kit.mjs': '3b61fcfd3184c663d1acc5c3764af707b95c2fe6952de77393ef914d1692647c',
+  'scripts/locate-kit.mjs': '1942d09148153cb1802da8bf3e4da6299fa64fbaa01c84c7f7b8e4dc6e4c4a4a',
   'scripts/ui-adoption-config.mjs': 'c1292e5b377b64934cafeaaf3ab2ba45f8f5393229716f4a71b5a65ad9122f60',
   'scripts/ast-artifacts.mjs': 'aaa1ed835db6963d95e345e264d4bdcc5b5d748f345294db67af6be3cd439265',
   'scripts/kit-sync.mjs': '0d76e09e3d0c9e7d959e98a0e1093b4ad4d82deca29d1e61f77e0576ffb5f300',
@@ -113,7 +113,10 @@ function currentConfig(root, target, config) {
   const descriptor = JSON.parse(bytes(root, '.gate/wrapper-current.json'));
   const fields = ['schema', 'invocation', 'target', 'sha', 'tree_sha256', 'toolchain_digest',
     'config_sha256', 'config_path', 'config_file_sha256'];
-  if (!object(descriptor, fields) || descriptor.schema !== 1 || !UUID.test(descriptor.invocation)
+  // `operator` (paul | agent:<name> | null) is the one optional key the core-v1.8+ wrapper records (core ADR-0024).
+  if (!object(descriptor, fields, ['operator']) || !(descriptor.operator === undefined || descriptor.operator === null
+        || (typeof descriptor.operator === 'string' && /^(paul|agent:[a-z0-9][a-z0-9-]{1,39})$/.test(descriptor.operator)))
+      || descriptor.schema !== 1 || !UUID.test(descriptor.invocation)
       || !PRIMARY.has(descriptor.target) || !SHA.test(descriptor.sha)
       || !HEX.test(descriptor.tree_sha256) || !/^sha256:[a-f0-9]{64}$/.test(descriptor.toolchain_digest)
       || descriptor.sha !== process.env.GATE_SHA || descriptor.tree_sha256 !== process.env.GATE_TREE_SHA256

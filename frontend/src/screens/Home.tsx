@@ -1,10 +1,15 @@
 // Home — the arcade lobby: playful wordmark, one card per game (each with its own
 // color identity), and the local records/history panel. Navigation is real URL
 // routing; opening a game also unlocks the shared WebAudio context (user gesture).
+//
+// Entrances (wordmark words, description, cards) are CSS keyframes keyed by
+// nth-child; hover/tap lifts are CSS states. Only the ported routes navigate
+// client-side; every other game is a document navigation to the frozen legacy
+// bundle (ADR-0197).
 
-import { useCallback, useMemo, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { m } from "motion/react";
+import type { TargetedEvent } from "preact";
+import { useCallback, useMemo, useRef, useState } from "preact/hooks";
+import { useLocation } from "preact-iso";
 import { Badge, Button, type ToastKind } from "@roedu/ui";
 import {
   GAMES,
@@ -15,6 +20,7 @@ import {
 } from "../games";
 import { SoundToggle } from "../components/SoundToggle";
 import { RELEASE_LABEL } from "../release";
+import { portedPath } from "../routes";
 import { sound } from "../sound";
 import {
   buildDailyCircuit,
@@ -31,7 +37,6 @@ import { appUrl, copyResult, displayDetail, formatDayKey, roNoun, todayLocal } f
 
 type HistoryTab = "top" | "today" | "recent";
 
-const EASE = [0.22, 1, 0.36, 1] as const;
 const TITLE_WORDS = ["Cât", "de", "român", "ești?"];
 
 export default function Home({
@@ -39,11 +44,11 @@ export default function Home({
 }: {
   onToast: (message: string, kind?: ToastKind) => void;
 }) {
-  const navigate = useNavigate();
+  const { route } = useLocation();
   const [historyTab, setHistoryTab] = useState<HistoryTab>("top");
   const [gameFilter, setGameFilter] = useState<GameKey | "all">("all");
   const [board, setBoard] = useState(() => scoreBoard());
-  const fileRef = useRef<HTMLInputElement>(null);
+  const fileRef = useRef<HTMLInputElement | null>(null);
   const today = todayLocal();
 
   const circuit = useMemo(() => buildDailyCircuit(board, today), [board, today]);
@@ -93,9 +98,10 @@ export default function Home({
       const path = challenge
         ? `${game.path}?${game.key === "alchimie" ? "mode=challenges&" : ""}challenge=daily`
         : game.path;
-      void navigate(path);
+      if (portedPath(game.path)) route(path);
+      else window.location.assign(path);
     },
-    [navigate],
+    [route],
   );
 
   const handleExport = useCallback(() => {
@@ -115,9 +121,10 @@ export default function Home({
   }, [circuit.total, onToast]);
 
   const handleImport = useCallback(
-    async (event: React.ChangeEvent<HTMLInputElement>) => {
-      const file = event.target.files?.[0];
-      event.target.value = "";
+    async (event: TargetedEvent<HTMLInputElement, Event>) => {
+      const input = event.currentTarget;
+      const file = input.files?.[0];
+      input.value = "";
       if (!file) return;
       try {
         const outcome = importScores(await file.text());
@@ -141,21 +148,13 @@ export default function Home({
         <header className="col home-header">
           <div className="row spread home-heading-row">
             <h1 className="hero-title" aria-label="Cât de român ești?">
-              {TITLE_WORDS.map((word, i) => (
-                <m.span
+              {TITLE_WORDS.map((word) => (
+                <span
                   key={word}
-                  className={word === "ești?" ? "wordmark-gradient" : undefined}
-                  initial={{ opacity: 0, y: 26, rotate: i % 2 ? 3 : -3 }}
-                  animate={{ opacity: 1, y: 0, rotate: 0 }}
-                  transition={{
-                    delay: 0.05 + i * 0.08,
-                    type: "spring",
-                    stiffness: 320,
-                    damping: 22,
-                  }}
+                  className={word === "ești?" ? "wordmark-gradient home-title-word" : "home-title-word"}
                 >
                   {word}
-                </m.span>
+                </span>
               ))}
             </h1>
             <div className="col center home-controls">
@@ -163,22 +162,17 @@ export default function Home({
               <Badge size="sm">{RELEASE_LABEL}</Badge>
             </div>
           </div>
-          <m.p
-            className="muted home-description"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.35, duration: 0.5 }}
-          >
+          <p className="muted home-description">
             De la Ștefan cel Mare la Las Fierbinți: șase jocuri scurte din cultura și
             viața românească.
-          </m.p>
+          </p>
         </header>
 
         <div className="games-grid">
-          {GAMES.map((g, i) => {
+          {GAMES.map((g) => {
             const completedToday = circuitByGame.get(g.key)?.completed ?? false;
             return (
-              <m.button
+              <button
                 key={g.key}
                 type="button"
                 onClick={() => openGame(g)}
@@ -189,11 +183,6 @@ export default function Home({
                       ? "Începe aici"
                       : g.tag
                 }`}
-                initial={{ opacity: 0, y: 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 + 0.07 * i, duration: 0.4, ease: EASE }}
-                whileHover={{ y: -5, rotate: i % 2 ? 0.4 : -0.4 }}
-                whileTap={{ scale: 0.97 }}
                 className={`card game-card${g.featured ? " game-card--featured" : ""}${
                   completedToday ? " game-card--daily-complete" : ""
                 } home-game--${g.key}`}
@@ -230,7 +219,7 @@ export default function Home({
                     </span>
                   )}
                 </span>
-              </m.button>
+              </button>
             );
           })}
         </div>
@@ -367,7 +356,7 @@ export default function Home({
               <span className="faint home-history-filter-label">Joc</span>
               <select
                 value={gameFilter}
-                onChange={(event) => setGameFilter(event.target.value as GameKey | "all")}
+                onChange={(event) => setGameFilter(event.currentTarget.value as GameKey | "all")}
                 className="field home-history-filter-select"
               >
                 <option value="all">Toate</option>

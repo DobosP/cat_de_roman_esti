@@ -6,8 +6,7 @@
 // private copy of completed scores; appearing on the separate verified ranking needs opt-in.
 // When accounts are disabled the bar shows just the Donează button (if a URL is set).
 
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "preact/hooks";
 import {
   type AuthUser,
   deleteAccount,
@@ -33,9 +32,11 @@ export default function AccountBarContents({ currentYear }: { currentYear: numbe
   ) : null;
 
   const ranking = me.accounts_enabled ? (
-    <Link className="account-btn" to="/clasament">
+    // The ranking is served by the frozen legacy bundle (ADR-0197): a plain
+    // same-origin link outside the ported link scope is a full navigation.
+    <a className="account-btn" href="/clasament">
       🏆 Clasament
-    </Link>
+    </a>
   ) : null;
 
   return (
@@ -141,7 +142,7 @@ function ConsentGate({ minAge, onResolved, currentYear: CURRENT_YEAR }: { minAge
             type="text"
             maxLength={80}
             value={handle}
-            onChange={(e) => setHandle(e.target.value)}
+            onInput={(e) => setHandle(e.currentTarget.value)}
             placeholder="ex. VulpeaIsteață"
           />
         </label>
@@ -153,12 +154,12 @@ function ConsentGate({ minAge, onResolved, currentYear: CURRENT_YEAR }: { minAge
             min={1900}
             max={CURRENT_YEAR}
             value={birthYear}
-            onChange={(e) => setBirthYear(e.target.value)}
+            onInput={(e) => setBirthYear(e.currentTarget.value)}
             placeholder="ex. 2005"
           />
         </label>
         <label className="account-check">
-          <input type="checkbox" checked={accepted} onChange={(e) => setAccepted(e.target.checked)} />
+          <input type="checkbox" checked={accepted} onChange={(e) => setAccepted(e.currentTarget.checked)} />
           <span>
             Am citit și accept{" "}
             <a href="/legal/privacy" target="_blank" rel="noreferrer">

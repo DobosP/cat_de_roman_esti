@@ -34,6 +34,9 @@ export default defineConfig({
   projects: [
     { name: "desktop", use: { ...devices["Desktop Chrome"] } },
     { name: "mobile", use: { ...devices["Pixel 7"] } },
+    // M2: the ported pilot journeys also run with real motion, so the kit
+    // Presence exits/retention are exercised instead of finishing at duration 0.
+    { name: "motion-on", testMatch: /gui-m2-pilot-journeys\.spec\.mjs$/, use: { ...devices["Desktop Chrome"], reducedMotion: "no-preference" } },
   ],
   webServer: {
     command: `${quotedBinary} -listen 127.0.0.1:${port}`,

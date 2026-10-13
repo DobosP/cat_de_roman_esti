@@ -1,4 +1,4 @@
-import { Component, type ReactNode } from "react";
+import { Component, type ComponentChildren } from "preact";
 
 /**
  * Hide optional shell chrome (the lazy AccountBar) when it fails, so its chunk
@@ -6,7 +6,7 @@ import { Component, type ReactNode } from "react";
  * silent null also hides the consent gate; acceptable while production is
  * anonymous per DEPLOY.md.
  */
-export class OptionalChromeBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
+export class OptionalChromeBoundary extends Component<{ children: ComponentChildren }, { failed: boolean }> {
   state = { failed: false };
 
   static getDerivedStateFromError() {

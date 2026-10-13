@@ -14,14 +14,14 @@ async function importTs(source, replacements = {}) {
   return import(`data:text/javascript;base64,${Buffer.from(code).toString("base64")}`);
 }
 
+// preact-iso's location is `pathname + search`; `route(url, replace)` rewrites it.
 const routerStub = `data:text/javascript;base64,${Buffer.from(`
-  export const useLocation = () => globalThis.__intentLocation;
-  export const useNavigate = () => (to, options) => globalThis.__intentNavigations.push({ to, options });
+  export const useLocation = () => ({ url: globalThis.__intentUrl, route: (url, replace) => globalThis.__intentNavigations.push({ url, replace }) });
 `).toString("base64")}`;
-const { useDailyIntent } = await importTs(intentSource, { '"react-router-dom"': JSON.stringify(routerStub) });
+const { useDailyIntent } = await importTs(intentSource, { '"preact-iso"': JSON.stringify(routerStub) });
 
 function intentAt(search, pathname = "/lant") {
-  globalThis.__intentLocation = { pathname, search, hash: "" };
+  globalThis.__intentUrl = `${pathname}${search}`;
   globalThis.__intentNavigations = [];
   return useDailyIntent();
 }
@@ -30,13 +30,11 @@ void test("the circuit intent is single-use and keeps every other query param", 
   const alchimie = intentAt("?mode=challenges&challenge=daily", "/alchimie");
   assert.equal(alchimie.active, true);
   alchimie.consume();
-  assert.deepEqual(globalThis.__intentNavigations, [
-    { to: { pathname: "/alchimie", search: "?mode=challenges", hash: "" }, options: { replace: true } },
-  ]);
+  assert.deepEqual(globalThis.__intentNavigations, [{ url: "/alchimie?mode=challenges", replace: true }]);
 
   const lant = intentAt("?challenge=daily");
   lant.consume();
-  assert.deepEqual(globalThis.__intentNavigations[0].to, { pathname: "/lant", search: "", hash: "" });
+  assert.deepEqual(globalThis.__intentNavigations, [{ url: "/lant", replace: true }]);
 
   const free = intentAt("?mode=challenges", "/alchimie");
   assert.equal(free.active, false);

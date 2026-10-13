@@ -1,8 +1,8 @@
-import type { ReactNode } from "react";
+import type { ComponentChildren } from "preact";
 import "../styles/game-options.css";
 
 /** Starting uses sensible defaults; selecting a theme or mode is optional. */
-export function GameSetupOptions({ children, summary = "Personalizează jocul" }: { children: ReactNode; summary?: ReactNode }) {
+export function GameSetupOptions({ children, summary = "Personalizează jocul" }: { children: ComponentChildren; summary?: ComponentChildren }) {
   return (
     <details className="game-setup-options">
       <summary>{summary}</summary>

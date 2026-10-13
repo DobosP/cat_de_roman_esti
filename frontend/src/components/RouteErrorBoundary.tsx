@@ -1,9 +1,8 @@
-import { Component, type ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { Component, type ComponentChildren } from "preact";
 import { Button } from "@roedu/ui";
 import { GAMES } from "../games";
 
-type Props = { children: ReactNode; pathname: string };
+type Props = { children: ComponentChildren; pathname: string };
 type State = { failed: boolean; pathname: string };
 
 /** Keep failed lazy content recoverable without retrying or deleting saved play. */
@@ -39,7 +38,7 @@ export class RouteErrorBoundary extends Component<Props, State> {
           <p>{home ? "Reîncarcă pagina." : game ? "Reîncarcă pagina sau alege alt joc." : "Reîncarcă pagina sau întoarce-te la jocuri."}</p>
           <div className="row wrap">
             <Button type="button" onClick={() => window.location.reload()}>Reîncarcă pagina</Button>
-            {!home && <Link to="/">Înapoi la jocuri</Link>}
+            {!home && <a href="/">Înapoi la jocuri</a>}
           </div>
         </section>
       </div>

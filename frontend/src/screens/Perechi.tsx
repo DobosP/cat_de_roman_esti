@@ -1,10 +1,13 @@
 import { Csp } from "../components/CspStyle";
 // Perechi — eight visible words, four semantic matches. Choosing the second tile
 // submits immediately: no drag gesture, no extra confirmation, no client-side answer map.
+// The leaving screen is retained by the shell's Presence; `useIsPresent()` locks
+// every action and drops the pending focus claims while it exits. Feedback rows
+// enter/exit through the kit Presence (mode "wait").
 
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence, m, useIsPresent } from "motion/react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "preact/hooks";
 import { Button, type ToastKind } from "@roedu/ui";
+import { Presence, useIsPresent } from "@roedu/ui/motion";
 import {
   acquireFlight,
   releaseFlight,
@@ -81,8 +84,8 @@ export default function Perechi({ onExit, onToast }: Props) {
   } | null>(null);
   useEffect(() => () => actionOwner.invalidate(), [actionOwner]);
   const tileRefs = useRef(new Map<string, HTMLButtonElement>());
-  const hintButtonRef = useRef<HTMLButtonElement>(null);
-  const resultFocusRef = useRef<HTMLDivElement>(null);
+  const hintButtonRef = useRef<HTMLButtonElement | null>(null);
+  const resultFocusRef = useRef<HTMLDivElement | null>(null);
   const pendingFocus = useRef<PendingFocus | null>(null);
   const focusedTileBeforeMutation = useRef<{ id: string; origin: HTMLButtonElement } | null>(null);
   useLayoutEffect(() => {
@@ -148,7 +151,11 @@ export default function Perechi({ onExit, onToast }: Props) {
     [active],
   );
 
-  useEffect(() => {
+  // Preact commits each awaited update on its own (React batched the recovered
+  // state with the later unlock), so a restoration can meet still-disabled tiles:
+  // keep the claim until the target is focusable, and apply it in the same commit
+  // that unlocks it (Intrusul's pattern).
+  useLayoutEffect(() => {
     const pending = pendingFocus.current;
     if (!pending) return;
     if (pending.kind === "hint" && busy) return;
@@ -169,7 +176,7 @@ export default function Perechi({ onExit, onToast }: Props) {
       pending.kind === "result"
         ? resultFocusRef.current
         : tileRefs.current.get(pending.id);
-    if (!target) return;
+    if (!target || ("disabled" in target && target.disabled)) return;
     target.focus();
     pendingFocus.current = null;
   }, [active, actionsLocked, busy, finished, state?.game_id, state?.solved_count, state?.hints_used]);
@@ -614,7 +621,7 @@ export default function Perechi({ onExit, onToast }: Props) {
               const isSelected = selected === tile.id || Boolean(checking?.includes(tile.id));
               const isHinted = hintIds.has(tile.id);
               return (
-                <m.button
+                <button
                   key={tile.id}
                   ref={(node) => {
                     if (node) tileRefs.current.set(tile.id, node);
@@ -630,31 +637,27 @@ export default function Perechi({ onExit, onToast }: Props) {
                   disabled={actionsLocked}
                   aria-pressed={isSelected}
                   aria-label={`${tile.label}${isHinted ? ", marcat de indiciu" : ""}`}
-                  whileTap={{ scale: 0.97 }}
                 >
                   <strong>{tile.label}</strong>
                   {isHinted && <span>indiciu</span>}
-                </m.button>
+                </button>
               );
             })}
           </div>
         )}
 
-        <AnimatePresence mode="wait">
+        <Presence mode="wait">
           {!finished && !actionSync && feedback && (
-            <m.div
+            <div
               key={feedback}
               className="perechi-feedback card"
               role="status"
               aria-live="polite"
-              initial={{ opacity: 0, y: -5 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
             >
               {feedback}
-            </m.div>
+            </div>
           )}
-        </AnimatePresence>
+        </Presence>
 
         {!finished && !state.hints_used && (
           <div className="perechi-actions">

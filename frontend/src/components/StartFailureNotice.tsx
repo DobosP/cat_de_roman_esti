@@ -1,12 +1,12 @@
 import { Csp } from "./CspStyle";
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "preact/hooks";
 
 /** A failed new round remains visible until the player retries or resumes a game. */
 export function StartFailureNotice({ failed, reserveSpace = false }: {
   failed?: boolean;
   reserveSpace?: boolean;
 }) {
-  const noticeRef = useRef<HTMLParagraphElement>(null);
+  const noticeRef = useRef<HTMLParagraphElement | null>(null);
   useLayoutEffect(() => {
     // Reveal the whole persistent message within its scroller, including when a
     // transient toast above the game later disappears. Keep the player's focus.

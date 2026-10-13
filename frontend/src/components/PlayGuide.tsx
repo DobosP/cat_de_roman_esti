@@ -1,8 +1,8 @@
 import { Csp } from "./CspStyle";
-import type { ReactNode } from "react";
+import type { ComponentChildren } from "preact";
 
 export interface PlayGuideStep {
-  icon: ReactNode;
+  icon: ComponentChildren;
   label: string;
 }
 
@@ -41,14 +41,14 @@ export function NextMove({
   action,
   className,
 }: {
-  icon: ReactNode;
+  icon: ComponentChildren;
   title: string;
   detail?: string;
   progress?: string;
   accent: string;
   ready?: boolean;
   announce?: boolean;
-  action?: ReactNode;
+  action?: ComponentChildren;
   className?: string;
 }) {
   return (

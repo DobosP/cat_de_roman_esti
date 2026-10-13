@@ -1,0 +1,8 @@
+/* layers.css — the @roedu/ui 1.0 cascade-layer order, stated before any other CSS.
+ * The kit stylesheet opens with its `components` layer and never declares the
+ * order, so without this statement `reset` would outrank `components` and the
+ * kit's own `:where(button) { font: inherit }` would beat the `.roedu-btn` sizes
+ * and weights. This declares the order the kit's layers are designed for; it adds
+ * no rules. CORE_REQUESTS REQ-9: redundant (and harmless) once the kit ships it.
+ */
+@layer tokens, reset, base, components, utilities, app;

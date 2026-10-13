@@ -4,7 +4,7 @@
 // game; the server's sliding 7,200-second (2h) session TTL is the natural expiry — a dead id
 // simply 404s and the screen falls back to its intro.
 
-import { useMemo } from "react";
+import { useMemo } from "preact/hooks";
 import type { GameKey } from "../games";
 
 const PREFIX = "cat_active_game_v1_";

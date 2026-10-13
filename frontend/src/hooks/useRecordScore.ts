@@ -3,7 +3,7 @@
 // re-render double-record a result; this hook keys the guard on the server's
 // game id so replays record again but re-renders never do.
 
-import { useCallback, useRef } from "react";
+import { useCallback, useRef } from "preact/hooks";
 import {
   recordScoreCompletionOnce,
   type RecordOutcome,
@@ -19,14 +19,14 @@ export type RecordOnce = (
 ) => Promise<RecordOutcome | null>;
 
 export function useRecordScore(game: string): RecordOnce {
-  const recorded = useRef<{
+  const recordedRef = useRef<{
     gameId: string;
     outcome: Promise<RecordOutcome | null>;
   } | null>(null);
   return useCallback(
     (gameId, score, detail, options) => {
       if (!gameId) return Promise.resolve(null);
-      if (recorded.current?.gameId === gameId) return recorded.current.outcome;
+      if (recordedRef.current?.gameId === gameId) return recordedRef.current.outcome;
       const outcome = recordScoreCompletionOnce(game, gameId, score, detail, options)
         .then((fresh) => {
           // Mirror only a newly recorded row to the account when signed in + consented.
@@ -36,7 +36,7 @@ export function useRecordScore(game: string): RecordOnce {
         .catch(() => null);
       // StrictMode's effect teardown/setup receives the same completion promise. Keeping only
       // the current game bounds the ref across arbitrarily many replays.
-      recorded.current = { gameId, outcome };
+      recordedRef.current = { gameId, outcome };
       return outcome;
     },
     [game],

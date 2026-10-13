@@ -9,7 +9,11 @@ import { readTarGz } from "../tools/gui-bootstrap-webkit/scripts/kit-sync.mjs";
 
 
 // This profile replays the sealed React contracts on the current normalized
-// graph. It cannot replace the original SDK adoption receipt.
+// graph. It cannot replace the original SDK adoption receipt. Since the M2
+// activation the original SDK archive is bound from the frozen original
+// receipt copy; the normalized React graph itself no longer exists in the
+// tree, so this admission fails honestly on the first live-graph assertion.
+const originalReceipt = "docs/reviews/gui-original-react";
 export async function normalizedReactAdmission() {
   const root = process.cwd(), inputs = new Map();
   const hash = (data) => createHash("sha256").update(data).digest("hex");
@@ -57,13 +61,11 @@ export async function normalizedReactAdmission() {
   assert.deepEqual(config.go_dirs, ["go-backend"]);
   assert.equal(phase.mode, "staged-react"); assert.equal(phase.until, "S1-M2");
   assert.equal(phase.legacy.version, "0.3.0");
-  const archive = input("frontend/vendor/roedu-ui-0.3.0.tgz"), archiveHash = hash(archive);
+  const archive = input(`${originalReceipt}/original-ui-0.3.0.tgz`), archiveHash = hash(archive);
   assert.equal(archiveHash, "1934a81cdfd737a051f591ebcae072f5028943b715456dbb2899b483d399c244");
   assert.equal(phase.legacy.archive_sha256, archiveHash);
   const entries = readTarGz(archive), sdkPackage = entries.get("package/package.json").data;
   const sdkEntry = entries.get("package/dist/index.js").data;
-  assert.deepEqual(input("frontend/node_modules/@roedu/ui/package.json"), sdkPackage);
-  assert.deepEqual(input("frontend/node_modules/@roedu/ui/dist/index.js"), sdkEntry);
   const receiptBytes = input(phase.legacy.receipt), receipt = JSON.parse(receiptBytes);
   assert.equal(hash(receiptBytes), phase.legacy.receipt_sha256);
   assert.equal(receipt.check, "cat-original-ui-runtime"); assert.equal(receipt.status, "pass");
@@ -195,13 +197,16 @@ const output = path.join(root, normalizedProfile ? ".gate/gen/normalized-react" 
 fs.mkdirSync(output, { recursive: true });
 const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const bytes = (file) => fs.readFileSync(path.join(root, file));
-const manifestBytes = bytes("frontend/package.json"), lockBytes = bytes("frontend/package-lock.json");
+// M2 binding migration: the original profile binds the sealed original graph
+// from the frozen receipt copies (same bytes/hashes as the original tree).
+const manifestBytes = bytes(normalizedProfile ? "frontend/package.json" : `${originalReceipt}/original-package.json`);
+const lockBytes = bytes(normalizedProfile ? "frontend/package-lock.json" : `${originalReceipt}/original-lock.json`);
 const manifest = JSON.parse(manifestBytes), lock = JSON.parse(lockBytes);
 if (!normalizedProfile && (hash(manifestBytes) !== "efde2d3fbdebc5899dc63ca6b518cab0d60370ef36a7301477da720f4978e2e9" ||
     hash(lockBytes) !== "f72661b4bd7ad129a6771037bf900a616a0fdf84bbb41f70c6d118b69fb1b62c")) {
   throw new Error("Original qualification requires the unchanged original manifest and lock bytes");
 }
-const archive = bytes("frontend/vendor/roedu-ui-0.3.0.tgz");
+const archive = bytes(`${originalReceipt}/original-ui-0.3.0.tgz`);
 if (hash(archive) !== "1934a81cdfd737a051f591ebcae072f5028943b715456dbb2899b483d399c244") throw new Error("Original SDK changed");
 const entries = readTarGz(archive);
 const proofPrefix = normalizedProfile ? ".gate/gen/normalized-react/evidence" : "docs/reviews/gui-original-react";
@@ -257,7 +262,7 @@ if (browser.status !== "pass" || browser.fixtures.length !== expected.length ||
     browser.fixtures.some((item) => item.executed !== true || item.assertions.some((assertion) => assertion.executed !== true || assertion.status !== "pass"))) {
   throw new Error("Original fixture set did not execute completely without skips/retries");
 }
-const runtime = Object.fromEntries(["react", "react-dom", "framer-motion"].map((name) => [name, lock.packages[`node_modules/${name}`].version]));
+const runtime = Object.fromEntries(["react", "react-dom", "framer-motion"].map((name) => [name, lock.packages[`node_modules/${name}`]?.version ?? null]));
 if (!normalizedProfile && (manifest.dependencies["@roedu/ui"] !== "file:vendor/roedu-ui-0.3.0.tgz" || runtime.react !== "19.2.7" || runtime["react-dom"] !== "19.2.7" || runtime["framer-motion"] !== "12.42.2")) throw new Error("Original runtime identity differs");
 if (normalizedProfile) {
   assert.deepEqual(browser.fixtures.map(({ id, suite, assertions }) => ({ id, suite, assertions: assertions.map(({ id }) => id) })).sort((a, b) => a.id.localeCompare(b.id)), [...admission.sealed_fixtures].sort((a, b) => a.id.localeCompare(b.id)), "Unchanged sealed 16/78 assertions required");

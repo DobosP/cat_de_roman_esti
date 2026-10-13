@@ -221,8 +221,15 @@ test("the actual served build keeps optional account/game chunks outside static 
     visitStaticOwner(match.entry);
     const closure = collectInitialBundleFiles(match.manifest);
     expect(closure.length).toBeGreaterThan(0);
-    const optional = ["src/components/AccountBar.tsx", "src/screens/Intrusul.tsx", "src/screens/Perechi.tsx",
-      "src/screens/Alchimie.tsx", "src/screens/CaldRece.tsx", "src/screens/Lant.tsx", "src/screens/Conexiuni.tsx"]
+    // ADR-0197: the current (Preact) build carries the ported screens only; the
+    // unported screens are served by the frozen legacy bundle and must be
+    // absent from the current manifest rather than silently measured.
+    const ui = await page.locator("html").getAttribute("data-ui");
+    const ported = ["src/components/AccountBar.tsx", "src/screens/Intrusul.tsx", "src/screens/Perechi.tsx", "src/screens/Conexiuni.tsx"];
+    const unported = ["src/screens/Alchimie.tsx", "src/screens/CaldRece.tsx", "src/screens/Lant.tsx"];
+    expect(ui).toBe("preact");
+    for (const key of unported) expect(match.manifest[key]).toBeUndefined();
+    const optional = ported
       .map((key) => {
         const row = match.manifest[key];
         expect(row).toBeDefined();

@@ -1,7 +1,7 @@
 # Agent Map — cat_de_roman_esti
 
 ## What this repo owns
-- Romanian-language app/game behavior: the six-game arcade (Go backend + React SPA; Django offline oracle) and the terminal CLI hop game.
+- Romanian-language app/game behavior: the six-game arcade (Go backend + Preact SPA for the ported routes with the frozen React legacy bundle for the rest, ADR-0197; Django offline oracle) and the terminal CLI hop game.
 - Word-game session services and their tests.
 - The curated content pipeline: fixtures, generation/validation scripts, and per-wave review evidence.
 

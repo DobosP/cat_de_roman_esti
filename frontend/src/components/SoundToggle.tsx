@@ -4,7 +4,7 @@
 // sync with changes made elsewhere via the SOUND_MUTED_EVENT. Clicking also counts as a
 // user gesture, so it unlocks the AudioContext and previews a soft click when enabling.
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "preact/hooks";
 import { isMuted, toggleMuted, unlockAudio, playSfx, SOUND_MUTED_EVENT } from "../sound";
 
 export function SoundToggle({ compact = false }: { compact?: boolean }) {

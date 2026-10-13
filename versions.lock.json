@@ -900,11 +900,13 @@
       "apps": [
         "cat_de_roman_esti"
       ],
-      "version": "6.0.3",
+      "status": "banned",
+      "enforced_from": "S1-M2: the Preact 11 port (feat/gui-cat-m2) replaces the React build plugin with @preact/preset-vite; must be absent from every frontend manifest/lock from this milestone on",
+      "version": null,
+      "observed_latest": "6.0.3",
       "source": "https://registry.npmjs.org/@vitejs/plugin-react/6.0.3",
-      "integrity": "sha512-vmFvco5/QuC2f9Oj+wTk0+9XeDFkHxSamwZKYc7MxYwKICfvUvlMhqKI0VuICPltGqh1neqBKDvO4kes1ya8vg==",
-      "date": "2026-10-08",
-      "notes": "Existing actual React19/UI0.3 M1 Vite build plugin from genuine deps/install/lock; exact direct pin replaces historical caret. No runtime/SDK/compiler or phase downgrade; remove/replace on native Preact M2 port."
+      "date": "2026-10-12",
+      "notes": "Previously the exact React19/UI0.3 M1 Vite build plugin pin (6.0.3, integrity sha512-vmFvco5/QuC2f9Oj+wTk0+9XeDFkHxSamwZKYc7MxYwKICfvUvlMhqKI0VuICPltGqh1neqBKDvO4kes1ya8vg==); its reason ended with the native Preact M2 port, so the entry is kept only as a ban. No core entry, toolchain or other version changes."
     }
   ],
   "toolchain_image": {
@@ -956,5 +958,5 @@
     "source": "Paul explicitly acknowledged ACK 1–6 and PostgreSQL 16 in the GUI migration parent chat on 2026-10-06, then authorized end-to-end implementation, no further permission questions, parent review/landing and cleanup of completed managed work.",
     "authority": "direct human launch authorization, not physical/release evidence"
   },
-  "core_tag": "core-v1.6"
+  "core_tag": "core-v1.9"
 }

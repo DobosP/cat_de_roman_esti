@@ -12,11 +12,12 @@ import (
 // environment mode, request value or Go constant never does.
 const managedUIPreact = "preact"
 
-// managedPortedRoutes is the Go-side M2 pilot set (PROGRAM E3/E6). A Preact
-// current bundle serves exactly these document paths; every other path, deep
-// link or client-side fallback is served by the frozen legacy shell. Matching
-// is on the exact request path: queries, cookies and headers never select.
-var managedPortedRoutes = map[string]bool{"/": true, "/intrusul": true, "/conexiuni": true}
+// managedPortedRoutes is the Go-side M2 ported set (PROGRAM E3/E6; ADR-0197
+// addendum: Perechi joined the pilot set). A Preact current bundle serves
+// exactly these document paths; every other path, deep link or client-side
+// fallback is served by the frozen legacy shell. Matching is on the exact
+// request path: queries, cookies and headers never select.
+var managedPortedRoutes = map[string]bool{"/": true, "/intrusul": true, "/perechi": true, "/conexiuni": true}
 
 // document chooses the bundle whose nonce shell answers a document request.
 func (ui *managedSPA) document(requestPath string) *managedSPA {

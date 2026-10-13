@@ -1,7 +1,6 @@
 import path from "node:path";
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import { guiSdkAllocationPlugin } from "./scripts/gui-sdk-allocation-plugin.mts";
+import preact from "@preact/preset-vite";
 import { guiPrecompressedPlugin } from "./scripts/gui-precompressed-plugin.mts";
 
 const accountBarModule = path.resolve("src/components/AccountBar.tsx");
@@ -9,8 +8,10 @@ const mainModule = path.resolve("src/main.tsx");
 
 // Asset sync copies this managed build into the native server's embedded tree.
 // The development proxy keeps the SPA and API on the same browser origin.
+// Preact 11 is the only runtime: no compat aliases, no React import source.
 export default defineConfig({
-  plugins: [react(), guiSdkAllocationPlugin(), guiPrecompressedPlugin()],
+  plugins: [preact({ reactAliasesEnabled: false }), guiPrecompressedPlugin()],
+  resolve: { dedupe: ["preact"] },
   build: {
     outDir: "dist",
     emptyOutDir: true,

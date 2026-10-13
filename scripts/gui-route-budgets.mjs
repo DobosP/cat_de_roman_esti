@@ -24,7 +24,10 @@ export const frozenBaselineReferences = Object.freeze(["legacy/original-bundle.j
   `${frozenReceipt}/result.json`, `${frozenReceipt}/execution.json`,
   `${frozenReceipt}/logs/1c0c864f-beec-4d55-98e0-7a1dec14324c-cat-legacy-freeze-0.stdout.log`]);
 const account = "src/components/AccountBar.tsx";
-const screens = Object.freeze({
+// The frozen legacy bundle (ADR-0193 baseline) still carries every original
+// screen; the current Preact bundle carries exactly the M2 ported set
+// (ADR-0197), so each profile is bound to its own screen table.
+const frozenScreens = Object.freeze({
   "/": null,
   "/alchimie": "src/screens/Alchimie.tsx",
   "/intrusul": "src/screens/Intrusul.tsx",
@@ -34,13 +37,22 @@ const screens = Object.freeze({
   "/conexiuni": "src/screens/Conexiuni.tsx",
   "/clasament": "src/screens/Ranking.tsx",
 });
-const components = { "/": "Home", "/alchimie": "Alchimie", "/intrusul": "Intrusul",
-  "/perechi": "Perechi", "/cald-rece": "CaldRece", "/lant": "Lant",
-  "/conexiuni": "Conexiuni", "/clasament": "Ranking" };
+export const portedScreens = Object.freeze({
+  "/": null,
+  "/intrusul": "src/screens/Intrusul.tsx",
+  "/perechi": "src/screens/Perechi.tsx",
+  "/conexiuni": "src/screens/Conexiuni.tsx",
+});
+const components = { "/": "Home", "/intrusul": "Intrusul", "/perechi": "Perechi", "/conexiuni": "Conexiuni" };
 // The default /alchimie route is measured too. The two existing baseline
 // journeys select different views from its same actual static module closure.
-export const journeys = Object.freeze([...Object.keys(screens),
+export const journeys = Object.freeze([...Object.keys(frozenScreens),
   "/alchimie?mode=challenges", "/alchimie?mode=explore"]);
+export const portedJourneys = Object.freeze(Object.keys(portedScreens));
+export const profiles = Object.freeze({
+  active: Object.freeze({ screens: portedScreens, journeys: portedJourneys }),
+  "frozen-legacy": Object.freeze({ screens: frozenScreens, journeys }),
+});
 
 function relative(value) {
   assert.ok(typeof value === "string" && value && !path.isAbsolute(value)
@@ -66,17 +78,16 @@ function row(root, name) {
   return { path: name, bytes: bytes.length, sha256: hash(bytes) };
 }
 
-/** Discover real JSX Route paths, not source substrings or chunk-name guesses. */
+/** Discover the shell's literal route switch, not source substrings or chunk-name guesses. */
 export function appRoutePaths(source, ts) {
   const file = ts.createSourceFile("App.tsx", source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
   assert.equal(file.parseDiagnostics.length, 0, "Current App route source must parse");
-  const paths = [];
   const modules = new Map();
   function imports(node) {
     if (ts.isImportDeclaration(node) && ts.isStringLiteral(node.moduleSpecifier)
       && node.importClause?.name) modules.set(node.importClause.name.text, node.moduleSpecifier.text);
     if (ts.isVariableDeclaration(node) && ts.isIdentifier(node.name) && node.initializer
-      && ts.isCallExpression(node.initializer) && node.initializer.expression.getText(file) === "lazy") {
+      && ts.isCallExpression(node.initializer) && node.initializer.expression.getText(file) === "lazyScreen") {
       const found = [];
       function dynamic(child) {
         if (ts.isCallExpression(child) && child.expression.kind === ts.SyntaxKind.ImportKeyword) {
@@ -86,7 +97,7 @@ export function appRoutePaths(source, ts) {
         ts.forEachChild(child, dynamic);
       }
       dynamic(node.initializer);
-      assert.equal(found.length, 1, "One actual source module per lazy route component required");
+      assert.equal(found.length, 1, "One actual source module per lazy screen required");
       modules.set(node.name.text, found[0]);
     }
     ts.forEachChild(node, imports);
@@ -94,54 +105,74 @@ export function appRoutePaths(source, ts) {
   imports(file);
   assert.equal(modules.get("AccountBar"), "./components/AccountBar", "Mandatory root must bind its actual module");
   for (const [route, component] of Object.entries(components)) {
-    const expected = screens[route] ?? "src/screens/Home.tsx";
+    const expected = portedScreens[route] ?? "src/screens/Home.tsx";
     assert.equal(modules.get(component), "./" + expected.slice(4, -4), "Route component must bind its real source module");
   }
-  let redirect = 0;
+  function renders(node, name) {
+    let matches = 0;
+    function component(child) {
+      if ((ts.isJsxOpeningElement(child) || ts.isJsxSelfClosingElement(child))
+        && child.tagName.getText(file) === name) matches++;
+      ts.forEachChild(child, component);
+    }
+    component(node);
+    return matches;
+  }
+  const paths = [];
+  let switches = 0, fallbacks = 0;
   function visit(node) {
-    if ((ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node))
-      && ts.isIdentifier(node.tagName) && node.tagName.text === "Route") {
-      const attributes = node.attributes.properties;
-      assert.ok(attributes.every(ts.isJsxAttribute), "Route spreads need explicit budget attribution");
-      const declared = attributes.filter((item) => item.name.getText(file) === "path");
-      assert.equal(declared.length, 1, "Each actual Route needs one literal path");
-      assert.ok(declared[0].initializer && ts.isStringLiteral(declared[0].initializer), "Nonliteral Route path refused");
-      const value = declared[0].initializer.text;
-      if (value === "*") {
-        const element = attributes.find((item) => item.name.getText(file) === "element")?.initializer;
-        assert.ok(element && ts.isJsxExpression(element) && element.expression
-          && ts.isJsxSelfClosingElement(element.expression)
-          && element.expression.tagName.getText(file) === "Navigate", "Only the existing home redirect is unmeasured");
-        const to = element.expression.attributes.properties.find((item) => ts.isJsxAttribute(item) && item.name.getText(file) === "to");
-        assert.ok(to?.initializer && ts.isStringLiteral(to.initializer) && to.initializer.text === "/", "Wildcard must redirect to measured home");
-        redirect++;
-      } else {
-        assert.ok(Object.hasOwn(components, value), "Unbound actual SPA route refused");
-        const element = attributes.find((item) => item.name.getText(file) === "element")?.initializer;
-        assert.ok(element && ts.isJsxExpression(element) && element.expression, "Actual route element required");
-        let matches = 0;
-        function component(child) {
-          if ((ts.isJsxOpeningElement(child) || ts.isJsxSelfClosingElement(child))
-            && child.tagName.getText(file) === components[value]) matches++;
-          ts.forEachChild(child, component);
+    if (ts.isSwitchStatement(node)) {
+      switches++;
+      // The selector is the exact ported-path predicate; every other document path
+      // is the server's frozen legacy route and must not be measured as active.
+      const selector = node.expression;
+      assert.ok(ts.isConditionalExpression(selector) && ts.isCallExpression(selector.condition)
+        && selector.condition.expression.getText(file) === "portedPath"
+        && ts.isStringLiteral(selector.whenFalse) && selector.whenFalse.text === "legacy", "Route switch must select on the ported-path predicate");
+      for (const clause of node.caseBlock.clauses) {
+        if (ts.isDefaultClause(clause)) {
+          assert.equal(renders(clause, "LegacyRoute"), 1, "Unported document paths must fall through to the legacy route");
+          fallbacks++;
+          continue;
         }
-        component(element.expression);
-        assert.equal(matches, 1, "Route must render its bound source component");
+        assert.ok(ts.isStringLiteral(clause.expression), "Nonliteral route case refused");
+        const value = clause.expression.text;
+        assert.ok(Object.hasOwn(components, value), "Unbound actual SPA route refused");
+        assert.equal(renders(clause, components[value]), 1, "Route case must render its bound source component");
         paths.push(value);
       }
     }
     ts.forEachChild(node, visit);
   }
   visit(file);
-  assert.equal(redirect, 1, "Existing wildcard redirect must remain explicit");
-  assert.equal(new Set(paths).size, paths.length, "Duplicate actual Route refused");
-  assert.deepEqual([...paths].sort(), Object.keys(screens).sort(), "Every actual SPA route needs an explicit binding");
+  assert.equal(switches, 1, "Exactly one literal route switch required");
+  assert.equal(fallbacks, 1, "Existing legacy fallback must remain explicit");
+  assert.equal(new Set(paths).size, paths.length, "Duplicate actual route refused");
+  assert.deepEqual([...paths].sort(), Object.keys(portedScreens).sort(), "Every ported SPA route needs an explicit binding");
   return paths;
 }
 
+/** The three declarations of the ported set must agree: shell, client route table, Go server. */
+export function portedSetBindings(root, routePaths) {
+  const client = read(root, "frontend/src/routes.ts").toString("utf8");
+  const clientList = /PORTED_PATHS = Object\.freeze\(\[([^\]]*)\] as const\)/.exec(client);
+  assert.ok(clientList, "Literal client ported-path table required");
+  const clientPaths = [...clientList[1].matchAll(/"([^"]*)"/g)].map((match) => match[1]);
+  const server = read(root, "go-backend/internal/httpapi/managed_delivery.go").toString("utf8");
+  const serverList = /managedPortedRoutes = map\[string\]bool\{([^}]*)\}/.exec(server);
+  assert.ok(serverList, "Literal Go ported-route table required");
+  const serverPaths = [...serverList[1].matchAll(/"([^"]*)": true/g)].map((match) => match[1]);
+  for (const [name, list] of [["client", clientPaths], ["server", serverPaths], ["shell", routePaths]]) {
+    assert.deepEqual([...list].sort(), [...portedJourneys].sort(), `The ${name} ported set differs from the measured active set`);
+  }
+  return { ported: [...portedJourneys], client: "frontend/src/routes.ts", server: "go-backend/internal/httpapi/managed_delivery.go",
+    shell: "frontend/src/App.tsx", frozen_legacy: journeys.filter((name) => !portedJourneys.includes(name.split("?")[0])) };
+}
+
 /** Attribution only: the delivered evaluator owns closure, gzip and limit policy. */
-export function bindings(manifest, routePaths) {
-  assert.deepEqual([...routePaths].sort(), Object.keys(screens).sort(), "Complete current SPA route set required");
+export function bindings(manifest, routePaths, profile = "active") {
+  const { screens, journeys: measured } = profiles[profile];
+  assert.deepEqual([...routePaths].sort(), Object.keys(screens).sort(), `Complete ${profile} SPA route set required`);
   const entries = Object.keys(manifest).filter((key) => manifest[key]?.isEntry);
   assert.deepEqual(entries, ["index.html"], "Exact real served entry required");
   const reachable = new Set();
@@ -159,18 +190,18 @@ export function bindings(manifest, routePaths) {
   for (const key of [account, ...Object.values(screens).filter(Boolean)]) {
     assert.ok(reachable.has(key) && manifest[key].isDynamicEntry === true, `Required source-keyed dynamic root absent: ${key}`);
   }
-  const routes = Object.fromEntries(journeys.map((name) => {
+  const routes = Object.fromEntries(measured.map((name) => {
     const screen = screens[name.split("?")[0]];
     return [name, { class: "cat-initial", entries: ["index.html", account, ...(screen ? [screen] : [])] }];
   }));
   const globalCss = collectInitialBundleFiles(manifest, { eagerRoots: [account] }).filter((file) => file.endsWith(".css"));
-  return { inventory: journeys.map((name) => ({ name, path: name, template: "index.html" })),
+  return { inventory: measured.map((name) => ({ name, path: name, template: "index.html" })),
     config: { schema: 1, routes, global_css: globalCss, vendors: {} } };
 }
 
-export function measureProfile(assetsRoot, budgets, routePaths, api) {
+export function measureProfile(assetsRoot, budgets, routePaths, api, profile = "active") {
   const manifestBytes = read(assetsRoot, ".vite/manifest.json"), manifest = JSON.parse(manifestBytes);
-  const attribution = bindings(manifest, routePaths);
+  const attribution = bindings(manifest, routePaths, profile);
   const report = api.evaluate(budgets, manifest, attribution.inventory, attribution.config, assetsRoot);
   return { manifest_sha256: hash(manifestBytes), ...attribution, report, budgets: api.gateBudgets(report) };
 }
@@ -256,17 +287,21 @@ export function verifyFrozenBaseline(root, sync, readTarGz) {
     scope: "Original artifact integrity only; actual full fallback journey and every safety check remain mandatory" };
 }
 
-/** Owner-approved consumer classification; the delivered SDK reports stay untouched. */
-export function classifyProfiles(profiles, integrity, target) {
+/** Owner-approved consumer classification; the delivered SDK reports stay untouched.
+ * Active rows gate exactly the ported set the server serves from the current
+ * bundle; every other journey is served by the frozen legacy bundle and keeps
+ * its recorded baseline row (ADR-0193 projection), never a raised or absent limit. */
+export function classifyProfiles(measuredProfiles, integrity, target) {
   assert.ok(["unit", "full"].includes(target));
-  assert.deepEqual(Object.keys(profiles).sort(), ["active", "frozen-legacy"]);
+  assert.deepEqual(Object.keys(measuredProfiles).sort(), ["active", "frozen-legacy"]);
   assert.equal(integrity?.status, "pass"); assert.equal(integrity.classification, "frozen-baseline-integrity");
   for (const [key, value] of Object.entries(frozenBaseline)) assert.equal(integrity[key], value);
   assert.equal(integrity.archive_sha256, legacyHash); assert.equal(integrity.files.length, 30);
   const qualified = {};
-  for (const [name, profile] of Object.entries(profiles)) {
-    assert.equal(profile.report.routes.length, journeys.length);
-    assert.deepEqual(profile.report.routes.map((item) => item.name).sort(), [...journeys].sort());
+  for (const [name, profile] of Object.entries(measuredProfiles)) {
+    const expected = profiles[name].journeys;
+    assert.equal(profile.report.routes.length, expected.length);
+    assert.deepEqual(profile.report.routes.map((item) => item.name).sort(), [...expected].sort());
     for (const [key, value] of Object.entries(profile.budgets)) {
       const active = name === "active";
       qualified[`${active ? "gate" : "baseline"}:${name}:${key}`] = { ...value,
@@ -277,9 +312,12 @@ export function classifyProfiles(profiles, integrity, target) {
     }
   }
   const gateBudgets = Object.fromEntries(Object.entries(qualified).filter(([name]) => name.startsWith("gate:active:")));
-  return { status: profiles.active.report.status === "pass" ? "pass" : "fail", budgets: qualified, gate_budgets: gateBudgets,
+  for (const name of portedJourneys) assert.ok(Object.hasOwn(gateBudgets, `gate:active:route-js:${name}`), `Active route row missing: ${name}`);
+  const delivery = Object.fromEntries(journeys.map((name) => [name, portedJourneys.includes(name.split("?")[0]) ? "current" : "frozen-legacy"]));
+  return { status: measuredProfiles.active.report.status === "pass" ? "pass" : "fail", budgets: qualified, gate_budgets: gateBudgets,
+    delivery, ported_routes: [...portedJourneys], frozen_legacy_routes: journeys.filter((name) => delivery[name] === "frozen-legacy"),
     policy: "owner-approved-frozen-legacy-baseline-2026-10-11",
-    authority: "docs/adr/0193-frozen-legacy-budget-baseline.md" };
+    authority: ["docs/adr/0193-frozen-legacy-budget-baseline.md", "docs/adr/0197-per-route-current-frozen-delivery.md"] };
 }
 
 async function main() {
@@ -316,6 +354,7 @@ async function main() {
   const ts = (await import(pathToFileURL(regular(root, parserPath)).href)).default;
   const parser = parserBinding(path.join(root, "frontend"), ts);
   const routePaths = appRoutePaths(read(root, "frontend/src/App.tsx").toString("utf8"), ts);
+  const portedSet = portedSetBindings(root, routePaths);
   const baseline = json(root, "baselines/cat/capture.json");
   assert.deepEqual(baseline.pages.map((item) => item.route).sort(), journeys.filter((name) => name !== "/alchimie").sort(), "All original frozen journeys must remain measured");
   const tarPath = config.npm_dir + "/scripts/kit-sync.mjs";
@@ -326,17 +365,18 @@ async function main() {
   verifyTreeRows(root, "go-backend/embedfs/dist", activeRows);
   const legacyRows = frozenIntegrity.files;
   const budgets = json(root, "budgets.json");
-  const profiles = {};
-  for (const [name, directory, assets] of [["active", "go-backend/embedfs/dist", activeRows], ["frozen-legacy", "go-backend/embedfs/legacy", legacyRows]]) {
-    profiles[name] = { assets_root: directory, assets,
-      ...measureProfile(path.join(root, directory), budgets, routePaths, api) };
+  const measured = {};
+  for (const [name, directory, assets, paths] of [["active", "go-backend/embedfs/dist", activeRows, routePaths],
+    ["frozen-legacy", "go-backend/embedfs/legacy", legacyRows, Object.keys(frozenScreens)]]) {
+    measured[name] = { assets_root: directory, assets,
+      ...measureProfile(path.join(root, directory), budgets, paths, api, name) };
   }
-  assert.equal(profiles.active.manifest_sha256, sync.manifest_sha256);
-  const qualification = classifyProfiles(profiles, frozenIntegrity, target);
+  assert.equal(measured.active.manifest_sha256, sync.manifest_sha256);
+  const qualification = classifyProfiles(measured, frozenIntegrity, target);
   const inputs = ["budgets.json", "versions.lock.json", "frontend/package.json", "frontend/package-lock.json",
-    "frontend/index.html", "frontend/src/main.tsx", "frontend/src/App.tsx", "frontend/src/screens/Home.tsx",
-    "frontend/src/components/AccountBar.tsx", ...Object.values(screens).filter(Boolean).map((name) => "frontend/" + name),
-    "frontend/src/screens/AlchimieExplore.tsx", "baselines/cat/capture.json",
+    "frontend/index.html", "frontend/src/main.tsx", "frontend/src/App.tsx", "frontend/src/routes.ts", "frontend/src/screens/Home.tsx",
+    "frontend/src/components/AccountBar.tsx", ...Object.values(portedScreens).filter(Boolean).map((name) => "frontend/" + name),
+    "go-backend/internal/httpapi/managed_delivery.go", "baselines/cat/capture.json",
     ...frozenBaselineReferences, proof.archive, proof.archive + ".sha256", syncPath, bootstrapPath,
     `.gate/${target}/managed-assets/prepare.json`, `.gate/${target}/managed-assets/inventory.json`,
     ".gate/wrapper-current.json", `.gate/${target}/wrapper-current.json`, descriptor.config_path,
@@ -345,19 +385,19 @@ async function main() {
     config.npm_dir + "/schemas/budgets.schema.json", config.npm_dir + "/schemas/validate.mjs", tarPath];
   const result = { schema: 1, check: "cat-route-budgets", target, invocation, wrapper_invocation: descriptor.invocation,
     sha: descriptor.sha, tree_sha256: descriptor.tree_sha256, toolchain_digest: descriptor.toolchain_digest,
-    status: qualification.status, raw_sdk_aggregate_status: Object.values(profiles).every((item) => item.report.status === "pass") ? "pass" : "fail",
-    qualification, frozen_integrity: frozenIntegrity,
-    scope: "actual active SPA routes and separately measured frozen-legacy journeys; no runtime/vitals qualification",
+    status: qualification.status, raw_sdk_aggregate_status: Object.values(measured).every((item) => item.report.status === "pass") ? "pass" : "fail",
+    qualification, frozen_integrity: frozenIntegrity, ported_set: portedSet,
+    scope: "actual active (ported) SPA routes and separately measured frozen-legacy journeys; no runtime/vitals qualification",
     method: "delivered public evaluate/gateBudgets; verified gzip sidecars or level-6 gzip; explicit entry/AccountBar/route static closures",
-    budgets_sha256: hash(read(root, "budgets.json")), route_source_paths: routePaths, wildcard_redirect: "/", parser,
-    inputs: inputs.map((name) => row(root, name)), profiles,
-    budgets: Object.fromEntries(Object.entries(profiles).flatMap(([name, profile]) =>
+    budgets_sha256: hash(read(root, "budgets.json")), route_source_paths: routePaths, legacy_fallback: "server-served frozen legacy shell (ADR-0197)", parser,
+    inputs: inputs.map((name) => row(root, name)), profiles: measured,
+    budgets: Object.fromEntries(Object.entries(measured).flatMap(([name, profile]) =>
       Object.entries(profile.budgets).map(([key, value]) => [`${name}:${key}`, value]))) };
   const output = `.gate/${target}/route-budgets`;
   fs.mkdirSync(path.join(root, output), { recursive: true });
   fs.writeFileSync(path.join(root, output, "frozen-integrity.json"), JSON.stringify(frozenIntegrity, null, 2) + "\n");
   fs.writeFileSync(path.join(root, output, "gate-summary.json"), JSON.stringify(qualification, null, 2) + "\n");
-  for (const [name, profile] of Object.entries(profiles)) fs.writeFileSync(path.join(root, output, name + ".json"), JSON.stringify(profile, null, 2) + "\n");
+  for (const [name, profile] of Object.entries(measured)) fs.writeFileSync(path.join(root, output, name + ".json"), JSON.stringify(profile, null, 2) + "\n");
   fs.writeFileSync(path.join(root, output, "measurements.json"), JSON.stringify(result, null, 2) + "\n");
   process.stdout.write(JSON.stringify(result) + "\n");
   process.exitCode = result.status === "pass" ? 0 : 1;

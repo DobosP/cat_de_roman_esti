@@ -183,9 +183,10 @@ void test("complete current inventory/sync keeps paired representations while th
 void test("raw manifest, budget roots and limits remain exact while unchanged SDK accounting measures real level9 sidecars", () => {
   const f = fixture(), original = rows(f.root), manifestBytes = fs.readFileSync(path.join(f.root, ".vite/manifest.json"));
   const selected = collectInitialBundleFiles(f.manifest, { eagerRoots: [account] }), initial = measureGzipFiles(f.root, selected);
-  const before = measureProfile(f.root, budgets, routes, budget);
+  // The synthetic manifest carries every original screen, i.e. the frozen-legacy profile shape.
+  const before = measureProfile(f.root, budgets, routes, budget, "frozen-legacy");
   compressed.emitPrecompressedAssets(f.root);
-  const after = measureProfile(f.root, budgets, routes, budget);
+  const after = measureProfile(f.root, budgets, routes, budget, "frozen-legacy");
   assert.deepEqual(fs.readFileSync(path.join(f.root, ".vite/manifest.json")), manifestBytes);
   assert.deepEqual(collectInitialBundleFiles(f.manifest, { eagerRoots: [account] }), selected);
   assert.deepEqual(measureGzipFiles(f.root, selected), initial);

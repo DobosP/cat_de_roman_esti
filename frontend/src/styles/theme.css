@@ -1,0 +1,30 @@
+/* theme.css — cat_de_roman_esti's bespoke identity over the @roedu/ui 1.0 tokens.
+ * "Arcada de noapte": a deep violet night sky, hot-coral primary energy, sunny-gold
+ * accents. UI 1.0 has no ThemeProvider: the app imports the base stylesheet and
+ * sets its token overrides on the explicit .roedu-root wrapper (same values the
+ * former catTheme override produced as custom properties). Only the identity
+ * lives here; per-game accents stay in src/games.ts / arcade.css.
+ */
+.roedu-root {
+  --roedu-color-bg: #0d0b20;
+  --roedu-color-surface: rgba(32, 28, 64, 0.66);
+  --roedu-color-surface-muted: rgba(20, 17, 44, 0.55);
+  --roedu-color-text: #f4f2ff;
+  --roedu-color-text-muted: #a8a1cc;
+  --roedu-color-border: rgba(168, 156, 236, 0.2);
+  --roedu-color-primary: #ff5470;
+  --roedu-color-primary-text: #2b0714;
+  --roedu-color-accent: #ffd166;
+  --roedu-color-danger: #ff4d6d;
+  --roedu-color-success: #3ddc97;
+  --roedu-color-focus: #ffd166;
+  --roedu-font-heading: 'Fredoka Variable', 'Fredoka', system-ui, sans-serif;
+  --roedu-font-body: 'Inter Variable', 'Inter', system-ui, sans-serif;
+  --roedu-radius-sm: 10px;
+  --roedu-radius-md: 16px;
+  --roedu-radius-lg: 24px;
+  --roedu-radius-pill: 999px;
+  --roedu-shadow-sm: 0 2px 10px rgba(4, 2, 18, 0.4);
+  --roedu-shadow-md: 0 12px 32px -10px rgba(4, 2, 18, 0.6);
+  --roedu-shadow-lg: 0 24px 64px -16px rgba(4, 2, 18, 0.8);
+}

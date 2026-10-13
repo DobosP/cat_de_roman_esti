@@ -123,8 +123,12 @@ function acquireContext(invocation) {
   const wrapper = readRegular(root, ".gate/wrapper-current.json"), copy = readRegular(root, ".gate/full/wrapper-current.json");
   requireData(wrapper.bytes.equals(copy.bytes), "Current wrapper descriptor copies differ");
   const descriptor = JSON.parse(wrapper.bytes);
+  // `operator` is the one optional key the core-v1.8+ wrapper records (core ADR-0024).
+  const operatorKey = Object.hasOwn(descriptor ?? {}, "operator") ? ["operator"] : [];
   requireData(closed(descriptor, ["schema", "invocation", "target", "sha", "tree_sha256", "toolchain_digest",
-    "config_sha256", "config_path", "config_file_sha256"]) && descriptor.schema === 1 && descriptor.target === "full"
+    "config_sha256", "config_path", "config_file_sha256", ...operatorKey])
+    && (descriptor.operator === undefined || descriptor.operator === null || (typeof descriptor.operator === "string" && /^(paul|agent:[a-z0-9][a-z0-9-]{1,39})$/.test(descriptor.operator)))
+    && descriptor.schema === 1 && descriptor.target === "full"
     && UUID.test(descriptor.invocation) && descriptor.config_path === ".gate/full/wrapper-kit-config.json"
     && HEX.test(descriptor.config_sha256) && HEX.test(descriptor.config_file_sha256), "Actual frozen full descriptor required");
   for (const [field, value] of [["sha", process.env.GATE_SHA], ["tree_sha256", process.env.GATE_TREE_SHA256],

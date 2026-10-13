@@ -78,8 +78,19 @@ export async function openGameOptions(page, game, { keyboard = false, setup = fa
   await expect(details).toHaveAttribute("open", "");
 }
 
+// ADR-0197 per-route delivery: the Preact shell serves exactly these document
+// paths; every other route is the frozen legacy React bundle (data-ui="legacy").
+export const portedRoutes = Object.freeze(["/", "/intrusul", "/perechi", "/conexiuni"]);
+export const expectedUi = (url) => (portedRoutes.includes(new URL(url, "http://local.invalid").pathname) ? "preact" : "legacy");
+
+/** Every journey states which bundle the server answered with for the current document. */
+export async function expectUi(page, url = page.url()) {
+  await expect(page.locator("html")).toHaveAttribute("data-ui", expectedUi(url));
+}
+
 export async function start(page, game, { keyboard = false } = {}) {
   await page.goto(game.path);
+  await expectUi(page, game.path);
   const response = page.waitForResponse((r) =>
     r.request().method() === "POST" &&
     new URL(r.url()).pathname === `/api/wordgames/${game.key}/games`);

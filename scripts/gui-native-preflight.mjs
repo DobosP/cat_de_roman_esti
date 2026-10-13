@@ -91,7 +91,10 @@ function admit(hook, targets = ["gen"]) {
     const uuid = /^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/;
     const hex = /^[a-f0-9]{64}$/;
     const descriptorBytes = read(".gate/wrapper-current.json"), current = JSON.parse(descriptorBytes);
-    if (!own(current, ["schema", "invocation", "target", "sha", "tree_sha256", "toolchain_digest", "config_sha256", "config_path", "config_file_sha256"])
+    // `operator` is the one optional key the core-v1.8+ wrapper records (core ADR-0024).
+    const operatorKey = Object.hasOwn(current ?? {}, "operator") ? ["operator"] : [];
+    if (!own(current, ["schema", "invocation", "target", "sha", "tree_sha256", "toolchain_digest", "config_sha256", "config_path", "config_file_sha256", ...operatorKey])
+      || !(current.operator === undefined || current.operator === null || (typeof current.operator === "string" && /^(paul|agent:[a-z0-9][a-z0-9-]{1,39})$/.test(current.operator)))
       || current.schema !== 1 || current.target !== ctx.target || !uuid.test(current.invocation) || !uuid.test(ctx.invocation)
       || current.sha !== ctx.sha || current.sha !== process.env.GATE_SHA
       || current.tree_sha256 !== ctx.tree_sha256 || current.tree_sha256 !== process.env.GATE_TREE_SHA256

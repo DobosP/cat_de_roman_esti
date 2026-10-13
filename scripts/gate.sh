@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 # Native Linux gate; installed byte-identically as scripts/gate.sh and web-kit/templates/gate.sh.
 # Worker: bash /absolute/worktree/scripts/gate.sh unit --sha <literal HEAD> [--dirty] [--parallel N]
-# Targets/flags remain PROGRAM sec 4.2. Owner operations require an ephemeral GATE_OPERATOR=paul.
-# Never set it in a worker. One gate per worktree; no host npm/go/task; no secret inputs.
+# Targets/flags remain PROGRAM sec 4.2. Owner operations require an ephemeral GATE_OPERATOR=paul, or
+# GATE_OPERATOR=agent:<name> for the orchestrating agent (PROGRAM E8, ADR-0024); the operator is recorded
+# in the trust pin line (op=) and in wrapper-current.json. Never set it in a worker. One gate per worktree;
+# no host npm/go/task; no secret inputs.
 set -euo pipefail; { die() { echo "gate: $*" >&2; exit 2; }; ROOT="$HOME/work/_worktrees/"   # { } is parsed whole: kit:sync may replace this file
 [[ "$(pwd -P)" = "$PWD" ]] || die "symlinked worktree path"
 [[ "$PWD/" != *//* && "$PWD/" != */./* && "$PWD/" != */../* && "$PWD/" =~ ^"$ROOT"[^/]+/[^/]+/$ ]] || die "refusing: $PWD is not exactly $ROOT<repo>/<slug>"
@@ -10,9 +12,16 @@ target=${1:-}; [ $# -gt 0 ] && shift; sha=""; dirty=false; par=""; fresh=0; keep
 while [ $# -gt 0 ]; do case "$1" in --sha) [ $# -ge 2 ] || die "--sha needs a value"; sha=$2; shift 2;; --dirty) dirty=true; shift;; --resolve-versions) resolve=1; shift;;
   --tag) [ $# -ge 2 ] || die "--tag needs roedu-toolchain:<new tag>"; tag=$2; shift 2;;
   --parallel) [ $# -ge 2 ] || die "--parallel needs N"; par=$2; shift 2;;  --fresh) fresh=1; shift;;  --keep) keep=1; shift;;  *) die "unknown argument '$1'";; esac; done
+# OPERATOR_FUNCTIONS_BEGIN
+# Owner identity (PROGRAM E8, ADR-0024): Paul himself, or the orchestrating agent as agent:<name>. Any other value is refused
+# for every target so nothing else can reach a pin line or wrapper-current.json; readers of older pin lines (no op=) stay valid.
+owner_operator() { local LC_ALL=C; [ "$1" = paul ] || [[ $1 =~ ^agent:[a-z0-9][a-z0-9-]{1,39}$ ]]; }   # LC_ALL=C scoped to the match: under a UTF-8 locale bash's [a-z0-9] also matches non-ASCII letters/digits (ADR-0024 review N1)
+trust_pin_line() { printf '%s/%s sha=%s %s op=%s\n' "$1" "$2" "$3" "$(date -u +%FT%TZ)" "$4"; }
+# OPERATOR_FUNCTIONS_END
+[ -z "$op" ] || owner_operator "$op" || die "GATE_OPERATOR '$op' is neither paul nor agent:<name> (name matches ^[a-z0-9][a-z0-9-]{1,39}$; PROGRAM E8, ADR-0024)"
 case "$target" in unit|full|gen|deps|kit:sync|build|image|baseline|golden:capture|golden:verify|contract:refresh|legacy:freeze|e2e|perf) ;;
-  qualify|shell|toolchain|trust) [ "$op" = paul ] || die "'$target' is Paul-only (GATE_OPERATOR=paul)";; *) die "unknown target '$target' (see usage above)";; esac
-[ "$keep" = 0 ] || [ "$op" = paul ] || die "--keep is Paul-only"; [ "$resolve" = 0 ] || [ "$target" = gen ] || die "--resolve-versions is valid only with gen"
+  qualify|shell|toolchain|trust) [ -n "$op" ] || die "'$target' is owner-only (GATE_OPERATOR=paul or GATE_OPERATOR=agent:<name>)";; *) die "unknown target '$target' (see usage above)";; esac
+[ "$keep" = 0 ] || [ -n "$op" ] || die "--keep is owner-only (GATE_OPERATOR=paul or GATE_OPERATOR=agent:<name>)"; [ "$resolve" = 0 ] || [ "$target" = gen ] || die "--resolve-versions is valid only with gen"
 [ -z "$tag" ] || [ "$target" = toolchain ] || die "--tag is valid only with toolchain"
 [[ $sha =~ ^[0-9a-f]{40}([0-9a-f]{24})?$ ]] || die "--sha <full commit sha> is mandatory"; tdir=${target//:/-}   # result dir: ':' becomes '-'
 src=$PWD; repo=$(basename "$(dirname "$src")"); rawslug=$(basename "$src"); [[ $repo =~ ^[a-z0-9_-]+$ && $rawslug =~ ^[a-z0-9_-]+$ ]] || die "repo/slug must be lowercase portable names"
@@ -203,7 +212,7 @@ if [ "$target" = toolchain ]; then   # host-side, Paul only, BEFORE the trust ch
   exit 0; fi
 for f in scripts/gate.sh .gate.env "$COMPOSE_FILE" Taskfile.yml; do [ -f "$f" ] && [ ! -L "$f" ] || die "trust set incomplete"; done
 TP="$HOME/gates/trust"; TRUST=$(snapshot . trust scripts/gate.sh .gate.env "$COMPOSE_FILE" Taskfile.yml) || die "trust set incomplete"
-if [ "$target" = trust ]; then [ "$dirty" = false ] || die "pin a clean commit"; mkdir -p "$TP"; echo "$repo/$slug sha=$sha $(date -u +%FT%TZ)" >> "$TP/$TRUST"; exit 0; fi
+if [ "$target" = trust ]; then [ "$dirty" = false ] || die "pin a clean commit"; mkdir -p "$TP"; trust_pin_line "$repo" "$slug" "$sha" "$op" >> "$TP/$TRUST"; exit 0; fi
 [ -f "$TP/$TRUST" ] || die "no trust pin for gate files $TRUST (wrapper/.gate.env/compose/Taskfile changed). Codex: GATE PENDING $target sha=$sha (untrusted gate files)"
 [[ $TOOLCHAIN_DIGEST =~ ^sha256:[0-9a-f]{64}$ ]] || die "TOOLCHAIN_DIGEST in .gate.env is not pinned ('$TOOLCHAIN_DIGEST'): Paul runs 'toolchain --tag <new>', then GATE-CHANGE: toolchain <tag>"
 have=$(docker image inspect -f '{{.Id}}' "$TOOLCHAIN_IMAGE" 2>/dev/null || true)   # locally built image: compare the image ID, not RepoDigests
@@ -227,10 +236,11 @@ trap cleanup_gate EXIT
 # The current selector is ephemeral; target histories remain intact. Expected bytes
 # live in host-private control, so a task cannot publish a pass after changing it.
 write_current_context() {
-  python3 -I - "$control/config-before.json" "$control/current-wrapper.json" <<'PY_CURRENT_CONTEXT'
+  python3 -I - "$control/config-before.json" "$control/current-wrapper.json" "$op" <<'PY_CURRENT_CONTEXT'
 import hashlib,json,sys,uuid
-source,destination=sys.argv[1:]; raw=open(source,'rb').read(); captured=json.loads(raw)
-record={'schema':1,'invocation':str(uuid.uuid4()),'target':captured['target'],'sha':captured['sha'],'tree_sha256':captured['tree_sha256'],'toolchain_digest':captured['toolchain_digest'],'config_sha256':captured['config_sha256'],'config_path':'.gate/'+captured['target'].replace(':','-')+'/wrapper-kit-config.json','config_file_sha256':hashlib.sha256(raw).hexdigest()}
+source,destination,*rest=sys.argv[1:]; raw=open(source,'rb').read(); captured=json.loads(raw)
+operator=rest[0] if rest and rest[0] else None   # schema 1 unchanged: operator is paul, agent:<name> or null for a worker run (ADR-0024)
+record={'schema':1,'invocation':str(uuid.uuid4()),'target':captured['target'],'sha':captured['sha'],'tree_sha256':captured['tree_sha256'],'toolchain_digest':captured['toolchain_digest'],'config_sha256':captured['config_sha256'],'config_path':'.gate/'+captured['target'].replace(':','-')+'/wrapper-kit-config.json','config_file_sha256':hashlib.sha256(raw).hexdigest(),'operator':operator}
 with open(destination,'xb') as output: output.write((json.dumps(record,separators=(',',':'))+'\n').encode())
 PY_CURRENT_CONTEXT
   safe_path "$dst/.gate/wrapper-current.json"

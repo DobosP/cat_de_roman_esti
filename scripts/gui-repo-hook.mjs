@@ -6,6 +6,7 @@ import { runNativeSourcePreflight, runDoccheckSourcePreflight } from "./gui-nati
 import { checkFullBrowserCapability } from "./gui-browser-capability.mjs";
 import { runOwnerLegacyJourney } from "./gui-legacy-owner.mjs";
 import { createHash } from "node:crypto";
+import { pathToFileURL } from "node:url";
 import { validGenRequest, runOriginalStyleOperation, NORMALIZED_STYLE_OPERATION, runNormalizedStyleOperation } from "./gui-style-operation.mjs";
 
 const target = process.argv[2], invocation = process.argv[3];
@@ -14,8 +15,14 @@ const configured = spawnSync("task", ["--silent", "repo:kit-config"], { encoding
 if (configured.status !== 0) throw new Error("Actual repo:kit-config failed");
 const config = JSON.parse(configured.stdout);
 const kitRoot = path.join(root, config.npm_dir);
-const { createHook } = await import(resolveHookRuntime(root, target, config).url);
+const runtime = resolveHookRuntime(root, target, config);
+const { createHook } = await import(runtime.url);
 const hook = createHook(target, invocation);
+// The active-UI proof is the configured (installed) kit's own validator; the
+// bootstrap helper used by deps/setup never qualifies an activation.
+const { requireActiveUi } = runtime.mode === "configured-selected-helper"
+  ? await import(pathToFileURL(path.join(kitRoot, "scripts/kit-sync.mjs")).href)
+  : { requireActiveUi: () => { throw new Error("active UI proof requires the configured kit runtime"); } };
 const frontend = path.join(root, "frontend");
 const directory = `.gate/${target.replaceAll(":", "-")}`;
 const scratch = path.join(root, directory);
@@ -111,7 +118,31 @@ function routeBudgets() {
     if (fs.existsSync(path.join(root, file))) hook.artifact(file);
   }
 }
+// M2 unit/full require the kit's enforceable active-UI proof (PROGRAM E3/E7,
+// CONSUMER_NOTES): the installed @roedu/ui must be the committed kit selection,
+// the old SDK archive gone, the owning lock/manifest/installed graph exact. A
+// staged or pending phase can never qualify; the proof itself is retained.
+function activeUi() {
+  hook.check("cat-active-ui", () => {
+    hook.assert("Activation removes the optional staged phase from repo:kit-config", () => !Object.hasOwn(config, "ui_adoption"));
+    let proof;
+    try { proof = requireActiveUi(root, config); }
+    catch (error) { proof = { status: "fail", reason: String(error?.message ?? error) }; }
+    const file = `${directory}/active-ui-proof.json`;
+    fs.writeFileSync(path.join(root, file), JSON.stringify({ schema: 1, check: "cat-active-ui", target, invocation,
+      sha: hook.context.sha, tree_sha256: hook.context.tree_sha256, toolchain_digest: hook.context.toolchain_digest, proof }, null, 2) + "\n");
+    hook.artifact(file);
+    hook.assert("Installed kit UI is the active committed selection (no staged UI pending)", () => proof.status === "pass"
+      && proof.check === "require-active-ui" && proof.mode === "active" && proof.pending === false
+      && typeof proof.version === "string" && proof.version === requiredUiVersion());
+  });
+}
+function requiredUiVersion() {
+  const pointer = JSON.parse(fs.readFileSync(path.join(frontend, "package.json"))).dependencies?.["@roedu/ui"];
+  return /^file:vendor\/roedu-ui-(\d+\.\d+\.\d+)\.tgz$/.exec(pointer ?? "")?.[1] ?? null;
+}
 function nativeUnit() {
+  activeUi();
   runDoccheckSourcePreflight(hook);
   command("cat-doc-check", "go", ["run", "./cmd/cat-doc-check", "--root", "..", "--inventory", "docs/tracked-markdown.json"], path.join(root, "go-backend"));
   command("cat-content-validate", "go", ["run", "./cmd/cat-content", "validate", "--root", ".."], path.join(root, "go-backend"));
@@ -152,9 +183,18 @@ switch (target) {
       const request = JSON.parse(fs.readFileSync("scripts/gui-deps-request.json"));
       hook.assert("Explicit closed dependency scope", () => request.schema === 1 && ["baseline-quality-only", "frontend-and-quality"].includes(request.scope) && Object.keys(request).length === 2);
       const onlyQuality = primary === "deps" && request.scope === "baseline-quality-only";
-      const before = ["frontend/package.json", "frontend/package-lock.json", "frontend/vendor/roedu-ui-0.3.0.tgz"].map((file) => hash(fs.readFileSync(file)));
+      // The frontend-graph exactness proof applies only to the baseline-quality-only scope: the
+      // live manifest, lock and the vendored SDK archive the manifest points at stay byte-exact.
+      const activeSdk = () => {
+        const pointer = JSON.parse(fs.readFileSync("frontend/package.json")).dependencies?.["@roedu/ui"];
+        const archive = /^file:(vendor\/roedu-ui-\d+\.\d+\.\d+\.tgz)$/.exec(pointer ?? "")?.[1];
+        if (!archive) throw new Error("Active @roedu/ui vendor pointer required");
+        return `frontend/${archive}`;
+      };
+      const exact = onlyQuality ? ["frontend/package.json", "frontend/package-lock.json", activeSdk()] : [];
+      const before = exact.map((file) => hash(fs.readFileSync(file)));
       for (const module of [...(onlyQuality ? [] : ["frontend"]), ...(request.scope === "frontend-and-quality" ? ["tools/gui-bootstrap-webkit"] : []), "tools/gui-baseline-quality"]) hook.run("npm", ["install", "--package-lock-only", "--ignore-scripts"], path.join(root, module));
-      if (onlyQuality) hook.assert("Original frontend graph and SDK bytes stayed exact", () => ["frontend/package.json", "frontend/package-lock.json", "frontend/vendor/roedu-ui-0.3.0.tgz"].every((file, index) => hash(fs.readFileSync(file)) === before[index]));
+      if (onlyQuality) hook.assert("Frontend graph and active SDK bytes stayed exact", () => exact.every((file, index) => hash(fs.readFileSync(file)) === before[index]));
     });
     const dependencyRequest = JSON.parse(fs.readFileSync("scripts/gui-deps-request.json"));
     if (dependencyRequest.scope === "frontend-and-quality") {
@@ -182,6 +222,14 @@ switch (target) {
       break;
     }
     if (request.operation === "replay-normalized-react") {
+      // Retired with the M2 activation: the sealed React replay needs the React
+      // graph that the Preact port removed. Its contracts live on only in the
+      // frozen original receipt; this refusal is explicit, never a silent pass.
+      hook.check("cat-normalized-react-retired", () => {
+        hook.assert("The normalized React replay cannot execute after the UI1 activation; see docs/reviews/gui-m2-activation/bindings.md",
+          () => fs.existsSync(path.join(frontend, "node_modules/react/package.json")) && fs.existsSync(path.join(frontend, "scripts/gui-sdk-allocation-audit.mjs")));
+      });
+      if (!hook.checks.every((item) => item.status === "pass")) break;
       const allPassed = () => hook.checks.every((item) => item.status === "pass");
       const environment = { CDR_NATIVE_BINARY: path.join(scratch, "cat-server"), CDR_BROWSER_PLAN_BINARY: path.join(scratch, "cat-browser-plan") };
       const artifacts = `${directory}/normalized-react`;

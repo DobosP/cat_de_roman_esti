@@ -5,7 +5,7 @@ import { Csp } from "./CspStyle";
 // nothing while loading or when the endpoint is unavailable — the picker is an
 // additive layer, never a blocker.
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "preact/hooks";
 import { categoryStyle } from "../categories";
 import {
   getCategories,

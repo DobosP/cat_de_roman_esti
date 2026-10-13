@@ -67,3 +67,12 @@ immunity, split asset ownership/HEAD/immutable cache/405/404/API/302 contracts, 
 fresh nonces across both shells, conflicting-byte refusal, identical-byte dedupe, missing-legacy
 and unknown-identity refusal, and concurrent split serving under `-race`. Commands and results:
 `docs/STATUS.md`. No Preact runtime, 40,960-byte acceptance, device or combined-full claim.
+
+## Addendum 2026-10-12 — Perechi joins the ported set
+
+Owner direction during the M2 port: Perechi is pulled forward from the M3 table so its derived-parity
+focus cases run on the current source (M1 focus guard) instead of the frozen bundle. `managedPortedRoutes`
+is `{"/", "/intrusul", "/perechi", "/conexiuni"}`; the exact-set Go test, the client table
+(`frontend/src/routes.ts`), the shell's literal switch, the route-budget evaluator and the browser
+journeys follow it. Everything else in this record is unchanged: `/perechi/` and every other path stay
+legacy, and the Go tests that used `/perechi` as their legacy example now use `/lant`.
