@@ -47,7 +47,7 @@ function frontendFailed() {
 }
 // Cheap deterministic source checks: none reads managed build output, so they run
 // before the build and a failure stops the backend race and the full lanes.
-const sourceChecks = ["cat-doccheck-source-contracts", "cat-doc-check", "cat-content-validate", "cat-content-export", "cat-docs-gate"];
+const sourceChecks = ["cat-doccheck-source-contracts", "cat-doc-check", "cat-content-validate", "cat-content-export", "cat-docs-gate", "cat-native-reuse-inputs"];
 function sourceFailed() {
   return hook.checks.some((item) => item.status === "fail" && sourceChecks.includes(item.name));
 }
@@ -162,6 +162,7 @@ function nativeUnit() {
   if (!reuse.lane("cat-frontend-types")) command("cat-frontend-types", "npm", ["run", "typecheck"], frontend);
   if (frontendFailed() || sourceFailed()) return;
   const native = reuse.sameSha ? null : reuse.native();
+  if (hook.checks.some((item) => item.name === "cat-native-reuse-inputs" && item.status === "fail")) return;
   for (const [name, module] of [["backend", "go-backend"], ["authcore", "shared-go/authcore"]]) {
     if (!reuse.lane(`cat-${name}-race`)) hook.check(`cat-${name}-race`, () => {
       if (module === "go-backend") hook.assert("Backend race requires fresh synced assets and compiled identity inputs", () => passed("cat-unit-gui-identity"));

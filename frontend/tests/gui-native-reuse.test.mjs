@@ -101,6 +101,15 @@ void test("graph closure detects an embedfs test variant with no direct ordinary
   records.find((item) => item.ImportPath === `${plain}.test`).Deps.push(variant);
   assert.ok(classifyGoPackages(stream(records)).freshPackages.includes(plain));
 });
+void test("actual Go test variants may repeat normal imports without losing dependencies", () => {
+  const records = packages(), original = classifyGoPackages(stream(records));
+  const variant = records.find((item) => item.ImportPath === `${ui} [${ui}.test]`);
+  variant.Imports = [...variant.Imports, embed, embed];
+  const repeated = classifyGoPackages(stream(records));
+  assert.equal(repeated.digest, original.digest);
+  assert.deepEqual(repeated.freshPackages, original.freshPackages);
+  assert.deepEqual(repeated.reusablePackages, original.reusablePackages);
+});
 void test("graph normalization ignores object order, filesystem directories and build-cache identities", () => {
   const records = packages(), graph = classifyGoPackages(stream(records));
   for (const value of records) { value.Dir = "/different/mirror"; value.BuildID = "changed"; value.EmbedFiles = ["different-asset.js"]; }

@@ -97,10 +97,12 @@ export function parseGoPackageStream(raw) {
   demand(start === -1 && records.length > 0, "incomplete or empty Go package stream");
   return records;
 }
-function strings(value = []) {
+function strings(value = [], repeatedImports = false) {
   demand(Array.isArray(value) && value.every((item) => typeof item === "string" && item.length > 0 && !/[\x00-\x1f]/.test(item))
-    && new Set(value).size === value.length, "invalid package graph list");
-  return [...value].sort();
+    && (repeatedImports || new Set(value).size === value.length), "invalid package graph list");
+  // Go test variants concatenate test imports and normal imports, so Imports
+  // can repeat a package. The dependency closure is the complete set of both.
+  return [...new Set(value)].sort();
 }
 function moduleIdentity(value) {
   if (value === undefined) return null;
@@ -116,7 +118,7 @@ export function classifyGoPackages(raw) {
     const maps = value.ImportMap ?? {};
     demand(maps && typeof maps === "object" && !Array.isArray(maps) && Object.values(maps).every((item) => typeof item === "string"), "invalid import map");
     byName.set(value.ImportPath, { ImportPath: value.ImportPath, ForTest: value.ForTest ?? "", Match: strings(value.Match),
-      Imports: strings(value.Imports), Deps: strings(value.Deps), TestImports: strings(value.TestImports), XTestImports: strings(value.XTestImports),
+      Imports: strings(value.Imports, true), Deps: strings(value.Deps), TestImports: strings(value.TestImports), XTestImports: strings(value.XTestImports),
       TestGoFiles: strings(value.TestGoFiles), XTestGoFiles: strings(value.XTestGoFiles),
       ImportMap: Object.fromEntries(Object.entries(maps).sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0)), Module: moduleIdentity(value.Module) });
   }
