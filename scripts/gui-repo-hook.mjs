@@ -4,6 +4,7 @@ import { spawnSync } from "node:child_process";
 import { resolveHookRuntime } from "./gui-hook-runtime.mjs";
 import { runNativeSourcePreflight, runDoccheckSourcePreflight } from "./gui-native-preflight.mjs";
 import { checkFullBrowserCapability } from "./gui-browser-capability.mjs";
+import { createGateReuse } from "./gui-reuse-driver.mjs";
 import { runOwnerLegacyJourney } from "./gui-legacy-owner.mjs";
 import { createHash } from "node:crypto";
 import { pathToFileURL } from "node:url";
@@ -155,20 +156,25 @@ function nativeUnit() {
   });
   managedIdentity("cat-unit-gui-identity", ["cat-unit-frontend-build", "cat-unit-emitted-inventory", "cat-unit-assets"]);
   routeBudgets(); // E3 keeps real red measurements while independent checks continue.
-  command("cat-frontend-unit", "npm", ["test"], frontend);
-  command("cat-frontend-lint", "npm", ["run", "lint"], frontend);
-  command("cat-frontend-types", "npm", ["run", "typecheck"], frontend);
+  const reuse = createGateReuse(hook, config);
+  if (!reuse.lane("cat-frontend-unit")) command("cat-frontend-unit", "npm", ["test"], frontend);
+  if (!reuse.lane("cat-frontend-lint")) command("cat-frontend-lint", "npm", ["run", "lint"], frontend);
+  if (!reuse.lane("cat-frontend-types")) command("cat-frontend-types", "npm", ["run", "typecheck"], frontend);
   if (frontendFailed() || sourceFailed()) return;
+  const native = reuse.sameSha ? null : reuse.native();
   for (const [name, module] of [["backend", "go-backend"], ["authcore", "shared-go/authcore"]]) {
-    hook.check(`cat-${name}-race`, () => {
+    if (!reuse.lane(`cat-${name}-race`)) hook.check(`cat-${name}-race`, () => {
       if (module === "go-backend") hook.assert("Backend race requires fresh synced assets and compiled identity inputs", () => passed("cat-unit-gui-identity"));
       // -count=1: content tests read repo-root inputs outside the module, which Go's test cache does not recheck.
-      const output = hook.run("go", ["test", "-race", ...(module === "go-backend" ? ["-timeout=30m", "-count=1"] : []), "-json", "./..."], path.join(root, module), { CGO_ENABLED: "1" });
+      const reused = module === "go-backend" && native?.selection.status === "hit";
+      const packages = reused ? native.selection.freshPackages : ["./..."];
+      const output = hook.run("go", ["test", "-race", ...(module === "go-backend" ? ["-timeout=30m", "-count=1"] : []), "-json", ...packages], path.join(root, module), { CGO_ENABLED: "1" });
       const skipped = output.split("\n").filter((line) => line.startsWith("{")).map((line) => JSON.parse(line)).filter((event) => event.Action === "skip" && typeof event.Test === "string" && event.Test.length > 0);
       hook.assert("Only explicit native PG tests may skip without DSN", () => skipped.every((event) =>
         module === "go-backend" && ["github.com/DobosP/cat_de_roman_esti/go-backend/internal/accounts", "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpapi"].includes(event.Package)));
+      if (reused) native.assertUnchanged();
     });
-    hook.check(`cat-${name}-vet`, () => {
+    if (!reuse.lane(`cat-${name}-vet`)) hook.check(`cat-${name}-vet`, () => {
       if (module === "go-backend") hook.assert("Backend vet requires fresh synced assets and compiled identity inputs", () => passed("cat-unit-gui-identity"));
       hook.run("go", ["vet", "./..."], path.join(root, module));
     });

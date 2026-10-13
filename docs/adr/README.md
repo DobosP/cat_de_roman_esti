@@ -167,3 +167,5 @@ Parallel lanes also allocated0188/0189 independently. All four full-filename bod
 - [0198](0198-owner-lands-m2-before-device-checkpoint.md) — owner lands S1 M2 on local `main` before the device checkpoint (programme E9); acceptance, S0b, production and pushing `main` stay gated.
 
 - [0199](0199-owner-no-device-checkpoint-agent-lands-m3-m4.md) — owner removes the device checkpoint, accepts M2 on its gate evidence, delegates M3/M4 landing to the agent and sets the gate cadence (programme E10).
+
+- [0200](0200-bound-gate-evidence-reuse.md) — proposed bound same-SHA unit and unchanged-input native race reuse, with wrapper-bounded browser workers; qualification pending.

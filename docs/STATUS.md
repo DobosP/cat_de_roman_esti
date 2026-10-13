@@ -7,6 +7,8 @@ Last verified: 2026-10-13 — GUI S1 M2 landed and accepted on `main` c9017b5b (
 
 ## Current state
 
+- **Lighter GUI gates in progress:** `fix/gui-cat-lighter-gates` implements E10 evidence reuse and bounded browser parallelism; qualification pending ([ADR-0200](adr/0200-bound-gate-evidence-reuse.md), [plan](execplans/gui-lighter-gates.md)). Accepted M2 evidence above remains the latest qualifying run.
+
 - Package **1.0.1** (lobby **V1.0.1**) hardens owner-requested mixed-age V1 on phones/desktop;
   independent review/decision [ADR-0159](adr/0159-v1-0-1-testing-hardening.md).
 - 1.0.1: a 0-point loss is never a record; circuit daily intent is single-use (one resume
@@ -101,8 +103,7 @@ Unrevealed answers, recipe maps and routes stay private.
 - UID10001/read-only, healthy/zero restarts; fixedPCRE2 and zero fixableHIGH/CRITICAL image gate.
   Caddy/certificates/volumes preserved; previousGo+Python rollback profiles retained.
   [Complete rollout proof](reviews/go-completion/README.md). No provider/minor activation.
-- Native source/tooling [ADR-0165](adr/0165-native-source-build-and-qualification.md): eight-source export,
-  terminal180/body32/prefix1009/HTTP1207/smoke151/assets28 and operator/race/vet proofs pass; capture archived.
+- Native source/tooling [ADR-0165](adr/0165-native-source-build-and-qualification.md): eight-source export, terminal180/body32/prefix1009/HTTP1207/smoke151/assets28 and operator/race/vet proofs pass; capture archived.
 - [ADR-0166](adr/0166-native-content-operators-and-builder-rails.md): independent review/rollback/v2 rails pass.
   [ADR-0167](adr/0167-close-unread-bodies-on-early-refusal.md):13 TCP gates/32 body/1207 parity and strict scalar envelopes pass; auth unchanged.
   [ADR-0168](adr/0168-qualify-complete-native-toolchain.md): native qualification remains historical evidence.
@@ -114,7 +115,6 @@ Unrevealed answers, recipe maps and routes stay private.
   diacritics in some descriptions ("roman"/"român"), the false Toma Caragiu–Reconstituirea
   casting edge, generic-only Lanț `lt_personalitati_186`, off-theme single-board Conexiuni
   Limbă/Geografie Greu shelves, label spellings (Herta Müller, Mica Unire 1859); forced fallback Societate/Secundă and mixed Personalități predicates.
-- Known limits: Alchimie Greu starts on shelves without a curated board can take seconds (a time cap would break deterministic dailies); older stored score details keep ISO dates
-  but display as dd.mm.yyyy. The held Familie gradient and four spare concept slots remain.
+- Known limits: Alchimie Greu starts on shelves without a curated board can take seconds (a time cap would break deterministic dailies); older stored score details keep ISO dates but display as dd.mm.yyyy. The held Familie gradient and four spare concept slots remain.
 ## Doc map
 - README/AGENTS: orientation; agent-map/testing: gates; [ADR0194](adr/0194-integrate-reviewed-v18-with-gui-history.md)/[ADR0196](adr/0196-integrate-reviewed-v19-v110-with-gui-history.md) record the integrations and full-filename0185/0186/0188/0189 collisions; [content loop](CONTENT_LOOP.md), WORKLOG and [GUI handover](GUI_MIGRATION_HANDOFF.md) preserve source-scoped history. Motion preparation remains provisional, not a named-gate qualification.
