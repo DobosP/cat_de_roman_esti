@@ -1212,3 +1212,44 @@ paid infrastructure, real-child or accounts go-live, root/system configuration (
 app GUI migration on that app's `main`, and owner content/clinical/privacy rulings.
 See roedu-ui ADR-0023 (`docs/adr/0023-agent-operators-before-production.md`).
 
+## Native erratum E9 — owner decision 2026-10-13: Cat M2 lands before the device checkpoint
+
+Provenance: Paul in the Claude Code session of 2026-10-12/13 ("finish with M2, land it on main, and stop … I will
+add my Samsung when you are done"). E1–E8 otherwise stay in force; on the points below E9 wins over S1 M1 step 7
+(landing waits for M2 acceptance), the loop's "Cat S1 M4 + landing" row and E8's reservation of app GUI landing,
+for Cat M2 only.
+
+- The Cat E7 activation-plus-port integration is landed on Cat's local `main` (fast-forward) by the orchestrating
+  agent once the merge with content `main` has a genuinely green `trust`/`unit`/`full` (40,960 B route budgets,
+  zero skips) and an independent review. Perechi joins the M2 ported set (pulled forward from M3) because its
+  derived focus contract needs current source rather than the frozen bundle.
+- Landing is not acceptance. M2 acceptance still needs §4.7 (a) and (b); the device checkpoint may measure the
+  landed M2 build (the shipped Preact routes) instead of the M1 image, and its receipt names the image measured.
+  S0b still waits for M2 acceptance.
+- Production activation and deploys, and pushing Cat `main` to origin (Cat ADR-0004), stay Paul's. Landing a later
+  Cat milestone (M3, M4) or another app's GUI on its `main` stays Paul's unless he extends this erratum.
+- M3 implementation may start on a feature branch from the landed `main` before M2 acceptance (as E6 Q8 allowed
+  for M2); M3 acceptance waits for M2 acceptance.
+See roedu-ui ADR-0026 (`docs/adr/0026-cat-m2-lands-before-device-checkpoint.md`) and [Cat ADR-0198](adr/0198-owner-lands-m2-before-device-checkpoint.md).
+
+## Native erratum E10 — owner decisions 2026-10-13: no device checkpoint, agent lands Cat M3/M4, lighter gate cadence
+
+Provenance: Paul in the Claude Code session of 2026-10-13 ("I don't want to test on my mobile device … runs the full
+test only once when it's really needed … could you update this full suite to be lighter … land every M3 and M4 on
+main as well … remove any mobile testing step … continue autonomously"). E1–E9 otherwise stay in force; on the
+points below E10 wins, for every GUI programme repo.
+
+- **No physical device checkpoint.** §4.7 and every step that waits for a real phone (Cat S1 M1 step 7 and the M2
+  acceptance pair, Teacher S2A and Social S3A "device checkpoint after M1") are removed. Budgets keep the E7
+  defaults (40,960 / 30,720 B route JS); the gate's emulated vitals (ADR-0190 criterion) are the performance
+  evidence. Cat M2 is accepted on its landed gate evidence and independent reviews (Cat main c9017b5b); S0b may start.
+- **Landing.** The orchestrating agent lands Cat M3 and M4 on Cat's `main` itself (fast-forward after the content-main
+  merge), once the exact landed SHA has a green unit and full and an independent review. Pushing an app's `main`,
+  production activation/deploys and landing Teacher or Social GUI milestones stay Paul's.
+- **Gate cadence.** Iterate with the cheap checks and targeted tests; run `unit` when product or gate inputs changed
+  and before a full; run `full` once per milestone, at its acceptance/landing. When a full fails, fix every finding
+  it reported in one batch, run unit, then one more full. Docs-only changes run only the doc checks.
+- **Lighter gates (allowed, no weakened assertion).** A full may reuse the passing same-SHA unit's lanes instead of
+  re-running them; browser workers may use `GATE_PARALLEL_MAX`; a lane may reuse a passing result whose complete
+  inputs are byte-identical. Each such change is a reviewed `GATE-CHANGE:` qualified once.
+See roedu-ui ADR-0027 (`docs/adr/0027-no-device-checkpoint-agent-landing-gate-cadence.md`) and [Cat ADR-0199](adr/0199-owner-no-device-checkpoint-agent-lands-m3-m4.md).

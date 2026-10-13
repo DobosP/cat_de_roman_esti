@@ -1,7 +1,7 @@
 # ADR-0198: Owner lands M2 on main before the device checkpoint
 
 Date: 2026-10-13
-Status: accepted
+Status: accepted; acceptance conditions superseded by ADR-0199 (no device checkpoint, M2 accepted)
 
 ## Decision
 

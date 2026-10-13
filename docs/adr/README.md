@@ -165,3 +165,5 @@ Parallel lanes also allocated0188/0189 independently. All four full-filename bod
 - [0197](0197-per-route-current-frozen-delivery.md) — M2 per-route current/frozen delivery: the Go-side ported set `/`, `/intrusul`, `/conexiuni` (addendum 2026-10-12: plus `/perechi`) activates only when the current build's `index.html` declares `data-ui="preact"`; every other route serves the frozen legacy shell unchanged; `CAT_UI=legacy` stays whole-app; conflicting shared asset bytes refuse, identical ones dedupe; combined full NOT RUN.
 
 - [0198](0198-owner-lands-m2-before-device-checkpoint.md) — owner lands S1 M2 on local `main` before the device checkpoint (programme E9); acceptance, S0b, production and pushing `main` stay gated.
+
+- [0199](0199-owner-no-device-checkpoint-agent-lands-m3-m4.md) — owner removes the device checkpoint, accepts M2 on its gate evidence, delegates M3/M4 landing to the agent and sets the gate cadence (programme E10).
