@@ -2378,3 +2378,11 @@ Valid until: V1.13 local landing — this moved V1.12 status is history.
   [Review](reviews/v1-12-post-and-garden/README.md) and [pool](content-pool/v1-12-post-and-garden/pool.json).
   Four exact native rails; owner-approved Cald assertions, HTTP1207 and API206 pass.
   Full native race has no new red versus main; managed SPA baseline failures remain unchanged.
+
+## 2026-10-13 — GUI M2 E7 integration landed on local main
+
+Owner decision (ADR-0198, programme E9): the M2 E7 integration lands on local `main` before the device
+checkpoint. The rebuilt merge's message names its first parent instead of the superseded 1d8572ab.
+Full at the first merge (browser 929/933) found only Perechi's lost-response focus recovery; the port now
+restores focus in a layout effect once the tile is enabled. Qualifying trust/unit/full ran on the landed
+SHA; M2 acceptance waits for the physical device checkpoint.

@@ -21,7 +21,7 @@ no value was fabricated — every migrated hash is the one the receipt already c
 | `scripts/gui-style-operation.mjs` `captureProtected` / `validatePlannerOutput` | `frontend/vendor/roedu-ui-0.3.0.tgz`; required planner inputs under `frontend/node_modules/react-dom/**` and `cat_de_roman_esti/web/static/**` | `frontend/vendor` (whole active vendor tree) is the protected snapshot; required inputs are the receipt copies with their exact hashes; the original profile also requires the archive-member `frozen_renderer` binding; React rows validated against `original-lock.json` |
 | `scripts/gui-validate-original-receipt.mjs` | `frontend/vendor/roedu-ui-0.3.0.tgz` | `docs/reviews/gui-original-react/original-ui-0.3.0.tgz` |
 | `scripts/gui-repo-hook.mjs` `deps` (`baseline-quality-only` exactness proof) | live manifest/lock + vendored 0.3.0 archive stay byte-exact | live manifest/lock + the archive the manifest pointer selects stay byte-exact |
-| `frontend/scripts/gui-sdk-allocation-plugin.mts`, `gui-sdk-allocation-audit.mjs` | React production allocation annotation of the 0.3.0 SDK | deleted: the Preact UI 1.0.7 payload has no React `forwardRef` allocations to annotate; the normalized replay that ran the audit is retired (above) |
+| `frontend/scripts/gui-sdk-allocation-plugin.mts`, `gui-sdk-allocation-audit.mjs` | React production allocation annotation of the 0.3.0 SDK | deleted: the Preact UI 1.0.9 payload has no React `forwardRef` allocations to annotate; the normalized replay that ran the audit is retired (above) |
 
 ## Active route-budget classification (ADR-0193 projection over ADR-0197)
 
@@ -114,14 +114,14 @@ reduced motion is the kit change (core-v1.9).
   of `react-router-dom`.
 - `frontend/tests/gui-route-budgets.test.mjs` binds the ported set contracts; the frozen profile
   keeps its ten-route fixture.
-- `scripts/gui-style-audit.mjs` `EXPECTED_CSS_BAGS`: 162 → 53 (unported screens left the active
+- `scripts/gui-style-audit.mjs` `EXPECTED_CSS_BAGS`: 162 → 59 (unported screens left the active
   source; 0 findings is still required).
 - `frontend/tests/gui-style-plan.test.mjs` / `gui-style-operation.test.mjs`: the exact-source pins
   follow the migrated planner (`PLANNER_SHA256`) and the ported `CspStyle.ts`/`CspElements.tsx`;
   the normalized data fixtures model the sealed staged-react phase from the frozen receipt because
   the live `repo:kit-config` no longer carries one; the original React adapter can no longer be
-  derived from the current adapter, so the controlled-refusal fixture copies the current one (the
-  injected refusal never reads it).
+  derived from the current adapter, so the controlled-refusal case was retired with the other
+  React-era proposal cases (19 in all, Decision Log 8).
 - `frontend/tests/gui-style-operation.test.mjs`: the React-era proposal protocol tests (normalized/
   original planner proposals, byte guards, native candidate graphs, the controlled planner refusal;
   18 cases) retired with the React tree they copied (Alchimie/Perechi screens, vendored 0.3.0
@@ -133,8 +133,45 @@ reduced motion is the kit change (core-v1.9).
 - `frontend/tests/gui-precompressed-assets.test.mjs`: its all-screens synthetic manifest is measured
   as the frozen-legacy profile.
 - `frontend/tests/fixtures/gui-hook-runtime-bootstrap.json`: the `package.json` pin follows the
-  bootstrap manifest rebound at da3e0b6b (web-kit 0.1.7); the other seven pins are unchanged. This
-  mismatch predates the port (the preparation commit did not update the fixture).
+  bootstrap manifest, and the `scripts/locate-kit.mjs` pin follows the core-v1.9 file (it admits the
+  optional `operator` descriptor key, core ADR-0024); the other six pins are unchanged.
 - `frontend/testdata/motion-layout-shadow/` (React 19 projected-layout regression lane: React/Framer
   entry, runner outside default discovery) is deleted with the React graph; the retired
   `plan-normalized-styles` gen operation that executed it keeps its bindings and fails honestly.
+
+## E7 integration, content merge and landing (2026-10-13)
+
+- Commits: `GATE-CHANGE: kit stage core-v1.9` (kit only) → `GATE-CHANGE: activate UI1 with the M2 port`
+  (the single E7 integration; detailed history on local branch `archive/gui-cat-m2-prework`) → merge of
+  content `main` ed9932fa (V1.13, ADR-0194/0196 method) → this docs commit. Core-v1.9 (UI 1.0.9, web-kit
+  0.1.9) carries REQ-8; the sync passed 9/9; trust pinned as `op=agent:claude-code`.
+- Seven descriptor readers admit exactly the optional `operator` key the core-v1.9 wrapper records
+  (gui-hook-runtime, gui-baseline-checks, gui-native-preflight, gui-browser-capability,
+  gui-style-operation and its test, gui-style-plan test); every other extra key is still refused.
+- Unit at the first merge passed 26/26 (route JS gz `/` 26,643, `/intrusul` 38,092, `/perechi` 38,909,
+  `/conexiuni` 40,380 ≤ 40,960). Full at the same merge: 34/38, browser 929/933, zero skips/flaky, CSP
+  enforced 0/0, PG and 1,207/1,206 parity pass; all ten sealed Intrusul and the Perechi Presence fixtures
+  passed on core-v1.9 (REQ-8 closed). The 4 failures were Perechi's lost-response focus recovery on both
+  projects: Preact commits the recovered state before the awaited unlock, so the focus effect met disabled
+  tiles and dropped its claim; the port now restores in a layout effect once the tile is enabled
+  (Intrusul's pattern). The next full (81988a01) passed the whole 933-case matrix but its exact PNGs
+  differed on the three game intros: the kit stylesheet states no layer order, so `reset` outranked
+  `components` (REQ-9); `frontend/src/styles/layers.css`, imported first, declares the order. Full
+  76a67431 then matched every PNG except the autofocused intro button's ring (offset 3px vs 2px): UI 0.3
+  supplied the 2px/2px ring unlayered, so Cat now states it after its generic `:focus-visible` rule.
+  Full cb370487 passed every check except the kit's `csp-measurement` shape: the five frozen routes load
+  the frozen entry, which the kit validator cannot represent (REQ-10); the runner now reports them as
+  `frozenNonceObservations` bound to the frozen archive's file list, keeping every CSP assertion. The qualifying unit/full of the landed SHA are recorded in the roedu-ui loop
+  ledger and `docs/STATUS.md`.
+- Additions to E7's permitted paths, accepted as port-required: `frontend/index.html`,
+  `frontend/vite.config.ts`, `frontend/tsconfig*.json`, `frontend/oxlint.config.json` (lane removal), the
+  deleted SDK allocation plugin/audit and `frontend/testdata/motion-layout-shadow/`, the bootstrap tool's
+  core byte copies, `CORE_REQUESTS.md` and `frontend/README.md`.
+- Independent review (Claude Code reviewer agent, 2026-10-13): approve with notes; landing additionally
+  needed the owner's recorded device-checkpoint waiver, which is [ADR-0198](../../adr/0198-owner-lands-m2-before-device-checkpoint.md).
+  Open follow-ups: the gen `plan-*-styles` paths now refuse untested (add a retired-operation refusal
+  check like `cat-normalized-react-retired` or delete them); `tools/gui-bootstrap-webkit/package-lock.json`
+  root version is 0.1.7 until the next `deps`; `tools/gui-bootstrap-webkit/templates/gate.sh` is still a
+  core-v1.5 copy read by `wrapper-config-test.mjs`.
+- Read green budgets correctly: 40,960 B applies to the four ported routes; frozen-legacy rows are
+  recorded only (E3/E4, ADR-0197). Pilot motion assertions are meaningful only in the `motion-on` project.
