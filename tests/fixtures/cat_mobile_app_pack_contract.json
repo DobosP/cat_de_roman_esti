@@ -4,12 +4,12 @@
   "app": "cat_de_roman_esti",
   "schema_version": 1,
   "manifest_version": 1,
-  "build_version": "fixture-v1-12-post-and-garden",
+  "build_version": "fixture-v1-13-weather-and-landscape",
   "generated_at": "2026-06-21T00:00:00Z",
-  "content_hash": "sha256:c1688c2e2a73b94f18b70db1031d3496ff370e476d9401096189d528aaa06ea2",
+  "content_hash": "sha256:36f5a3a53bc4d907bce4a86ece09abaecd65824a9f9b3be4c4debf4ed9ac1138",
   "counts": {
-   "nodes": 2543,
-   "edges": 9974,
+   "nodes": 2584,
+   "edges": 10141,
    "puzzles": 180
   }
  },
@@ -4657,6 +4657,170 @@
   {
    "id": "n_v1_12_zambila",
    "label_ro": "Zambilă"
+  },
+  {
+   "id": "n_v1_13_abur",
+   "label_ro": "Abur"
+  },
+  {
+   "id": "n_v1_13_adiere",
+   "label_ro": "Adiere"
+  },
+  {
+   "id": "n_v1_13_avalansa",
+   "label_ro": "Avalanșă"
+  },
+  {
+   "id": "n_v1_13_balta",
+   "label_ro": "Baltă"
+  },
+  {
+   "id": "n_v1_13_baltoaca",
+   "label_ro": "Băltoacă"
+  },
+  {
+   "id": "n_v1_13_baraj",
+   "label_ro": "Baraj"
+  },
+  {
+   "id": "n_v1_13_bruma",
+   "label_ro": "Brumă"
+  },
+  {
+   "id": "n_v1_13_canion",
+   "label_ro": "Canion"
+  },
+  {
+   "id": "n_v1_13_chiciura",
+   "label_ro": "Chiciură"
+  },
+  {
+   "id": "n_v1_13_ciclon",
+   "label_ro": "Ciclon"
+  },
+  {
+   "id": "n_v1_13_coliba",
+   "label_ro": "Colibă"
+  },
+  {
+   "id": "n_v1_13_crater",
+   "label_ro": "Crater"
+  },
+  {
+   "id": "n_v1_13_cutremur",
+   "label_ro": "Cutremur"
+  },
+  {
+   "id": "n_v1_13_duna",
+   "label_ro": "Dună"
+  },
+  {
+   "id": "n_v1_13_eruptie",
+   "label_ro": "Erupție"
+  },
+  {
+   "id": "n_v1_13_estuar",
+   "label_ro": "Estuar"
+  },
+  {
+   "id": "n_v1_13_fulg",
+   "label_ro": "Fulg"
+  },
+  {
+   "id": "n_v1_13_furnica",
+   "label_ro": "Furnică"
+  },
+  {
+   "id": "n_v1_13_gazon",
+   "label_ro": "Gazon"
+  },
+  {
+   "id": "n_v1_13_ghetar",
+   "label_ro": "Ghețar"
+  },
+  {
+   "id": "n_v1_13_inundatie",
+   "label_ro": "Inundație"
+  },
+  {
+   "id": "n_v1_13_lunca",
+   "label_ro": "Luncă"
+  },
+  {
+   "id": "n_v1_13_mlastina",
+   "label_ro": "Mlaștină"
+  },
+  {
+   "id": "n_v1_13_namol",
+   "label_ro": "Nămol"
+  },
+  {
+   "id": "n_v1_13_panta",
+   "label_ro": "Pantă"
+  },
+  {
+   "id": "n_v1_13_papura",
+   "label_ro": "Papură"
+  },
+  {
+   "id": "n_v1_13_picatura",
+   "label_ro": "Picătură"
+  },
+  {
+   "id": "n_v1_13_pietris",
+   "label_ro": "Pietriș"
+  },
+  {
+   "id": "n_v1_13_polei",
+   "label_ro": "Polei"
+  },
+  {
+   "id": "n_v1_13_racoare",
+   "label_ro": "Răcoare"
+  },
+  {
+   "id": "n_v1_13_roua",
+   "label_ro": "Rouă"
+  },
+  {
+   "id": "n_v1_13_seceta",
+   "label_ro": "Secetă"
+  },
+  {
+   "id": "n_v1_13_stramtoare",
+   "label_ro": "Strâmtoare"
+  },
+  {
+   "id": "n_v1_13_torent",
+   "label_ro": "Torent"
+  },
+  {
+   "id": "n_v1_13_tornada",
+   "label_ro": "Tornadă"
+  },
+  {
+   "id": "n_v1_13_umbra",
+   "label_ro": "Umbră"
+  },
+  {
+   "id": "n_v1_13_uragan",
+   "label_ro": "Uragan"
+  },
+  {
+   "id": "n_v1_13_versant",
+   "label_ro": "Versant"
+  },
+  {
+   "id": "n_v1_13_vijelie",
+   "label_ro": "Vijelie"
+  },
+  {
+   "id": "n_v1_13_viscol",
+   "label_ro": "Viscol"
+  },
+  {
+   "id": "n_v1_13_zavoi",
+   "label_ro": "Zăvoi"
   },
   {
    "id": "n_v1_3_clothing_fermoar",
@@ -58924,9 +59088,79 @@
    "dst_id": "n_v24_food_snack_ceai"
   },
   {
+   "id": "de9316",
+   "src_id": "n_v1_13_furnica",
+   "dst_id": "n_v4sti_insecta"
+  },
+  {
+   "id": "de9317",
+   "src_id": "n_v1_13_furnica",
+   "dst_id": "n_v24_nature_world_pamant"
+  },
+  {
+   "id": "de9318",
+   "src_id": "n_v1_13_furnica",
+   "dst_id": "n_v4geo_padure"
+  },
+  {
+   "id": "de9319",
+   "src_id": "n_v1_13_furnica",
+   "dst_id": "n_v1_12_samanta"
+  },
+  {
    "id": "de932",
    "src_id": "n_muz_florin_salam",
    "dst_id": "n_muz_muzica_petrecere"
+  },
+  {
+   "id": "de9320",
+   "src_id": "n_v1_13_fulg",
+   "dst_id": "n_v24_weather_precipitation_zapada"
+  },
+  {
+   "id": "de9321",
+   "src_id": "n_v1_13_fulg",
+   "dst_id": "n_v24_weather_air_nor"
+  },
+  {
+   "id": "de9322",
+   "src_id": "n_v1_13_fulg",
+   "dst_id": "n_v1_8_iarna"
+  },
+  {
+   "id": "de9323",
+   "src_id": "n_v1_13_fulg",
+   "dst_id": "n_v4sti_temperatura"
+  },
+  {
+   "id": "de9324",
+   "src_id": "n_v1_13_chiciura",
+   "dst_id": "n_v24_weather_air_ceata"
+  },
+  {
+   "id": "de9325",
+   "src_id": "n_v1_13_chiciura",
+   "dst_id": "n_v4sti_temperatura"
+  },
+  {
+   "id": "de9326",
+   "src_id": "n_v1_13_chiciura",
+   "dst_id": "n_v1_8_iarna"
+  },
+  {
+   "id": "de9327",
+   "src_id": "n_v1_13_chiciura",
+   "dst_id": "n_v4sti_copac"
+  },
+  {
+   "id": "de9328",
+   "src_id": "n_v1_13_bruma",
+   "dst_id": "n_v1_9_toamna"
+  },
+  {
+   "id": "de9329",
+   "src_id": "n_v1_13_bruma",
+   "dst_id": "n_v4sti_temperatura"
   },
   {
    "id": "de933",
@@ -58934,9 +59168,109 @@
    "dst_id": "n_muz_manele"
   },
   {
+   "id": "de9330",
+   "src_id": "n_v1_13_bruma",
+   "dst_id": "n_v24_nature_plant_parts_iarba"
+  },
+  {
+   "id": "de9331",
+   "src_id": "n_v1_13_bruma",
+   "dst_id": "n_v4sti_frunza"
+  },
+  {
+   "id": "de9332",
+   "src_id": "n_v1_13_abur",
+   "dst_id": "n_v4gas_apa"
+  },
+  {
+   "id": "de9333",
+   "src_id": "n_v1_13_abur",
+   "dst_id": "n_v4sti_temperatura"
+  },
+  {
+   "id": "de9334",
+   "src_id": "n_v1_13_abur",
+   "dst_id": "n_v4sti_caldura"
+  },
+  {
+   "id": "de9335",
+   "src_id": "n_v1_13_abur",
+   "dst_id": "n_v30_kitchen_cookware_oala"
+  },
+  {
+   "id": "de9336",
+   "src_id": "n_v1_13_roua",
+   "dst_id": "n_v4gas_apa"
+  },
+  {
+   "id": "de9337",
+   "src_id": "n_v1_13_roua",
+   "dst_id": "n_v24_nature_plant_parts_iarba"
+  },
+  {
+   "id": "de9338",
+   "src_id": "n_v1_13_roua",
+   "dst_id": "n_v4sti_frunza"
+  },
+  {
+   "id": "de9339",
+   "src_id": "n_v1_13_roua",
+   "dst_id": "n_v4sti_aer"
+  },
+  {
    "id": "de934",
    "src_id": "n_muz_adrian_minune",
    "dst_id": "n_muz_muzica_petrecere"
+  },
+  {
+   "id": "de9340",
+   "src_id": "n_v1_13_roua",
+   "dst_id": "n_v4sti_temperatura"
+  },
+  {
+   "id": "de9341",
+   "src_id": "n_v1_13_picatura",
+   "dst_id": "n_v4gas_apa"
+  },
+  {
+   "id": "de9342",
+   "src_id": "n_v1_13_picatura",
+   "dst_id": "n_v24_weather_precipitation_ploaie"
+  },
+  {
+   "id": "de9343",
+   "src_id": "n_v1_13_picatura",
+   "dst_id": "n_v24_weather_air_nor"
+  },
+  {
+   "id": "de9344",
+   "src_id": "n_v1_13_picatura",
+   "dst_id": "n_v24_weather_air_ceata"
+  },
+  {
+   "id": "de9345",
+   "src_id": "n_v1_13_baltoaca",
+   "dst_id": "n_v4gas_apa"
+  },
+  {
+   "id": "de9346",
+   "src_id": "n_v1_13_baltoaca",
+   "dst_id": "n_v24_weather_precipitation_ploaie"
+  },
+  {
+   "id": "de9347",
+   "src_id": "n_v1_13_baltoaca",
+   "dst_id": "n_v4geo_drum"
+  },
+  {
+   "id": "de9348",
+   "src_id": "n_v1_13_baltoaca",
+   "dst_id": "n_v4geo_strada"
+  },
+  {
+   "id": "de9349",
+   "src_id": "n_v1_13_pietris",
+   "dst_id": "n_v28_nature_material_piatra"
   },
   {
    "id": "de935",
@@ -58944,9 +59278,109 @@
    "dst_id": "n_muz_manele"
   },
   {
+   "id": "de9350",
+   "src_id": "n_v1_13_pietris",
+   "dst_id": "n_v4geo_nisip"
+  },
+  {
+   "id": "de9351",
+   "src_id": "n_v1_13_pietris",
+   "dst_id": "n_v4geo_drum"
+  },
+  {
+   "id": "de9352",
+   "src_id": "n_v1_13_pietris",
+   "dst_id": "n_v4geo_mal"
+  },
+  {
+   "id": "de9353",
+   "src_id": "n_v1_13_duna",
+   "dst_id": "n_v4geo_nisip"
+  },
+  {
+   "id": "de9354",
+   "src_id": "n_v1_13_duna",
+   "dst_id": "n_v24_weather_air_vant"
+  },
+  {
+   "id": "de9355",
+   "src_id": "n_v1_13_duna",
+   "dst_id": "n_v4geo_plaja"
+  },
+  {
+   "id": "de9356",
+   "src_id": "n_v1_13_duna",
+   "dst_id": "n_v4geo_tarm"
+  },
+  {
+   "id": "de9357",
+   "src_id": "n_v1_13_torent",
+   "dst_id": "n_v4geo_parau"
+  },
+  {
+   "id": "de9358",
+   "src_id": "n_v1_13_torent",
+   "dst_id": "n_v2geo_munte"
+  },
+  {
+   "id": "de9359",
+   "src_id": "n_v1_13_torent",
+   "dst_id": "n_v3geo_vale"
+  },
+  {
    "id": "de936",
    "src_id": "n_muz_vali_vijelie",
    "dst_id": "n_muz_muzica_petrecere"
+  },
+  {
+   "id": "de9360",
+   "src_id": "n_v1_13_torent",
+   "dst_id": "n_v24_weather_precipitation_ploaie"
+  },
+  {
+   "id": "de9361",
+   "src_id": "n_v1_13_baraj",
+   "dst_id": "n_v2geo_rau"
+  },
+  {
+   "id": "de9362",
+   "src_id": "n_v1_13_baraj",
+   "dst_id": "n_v2geo_lac"
+  },
+  {
+   "id": "de9363",
+   "src_id": "n_v1_13_baraj",
+   "dst_id": "n_geox_lacul_vidraru"
+  },
+  {
+   "id": "de9364",
+   "src_id": "n_v1_13_baraj",
+   "dst_id": "n_v1_11_castor"
+  },
+  {
+   "id": "de9365",
+   "src_id": "n_v1_13_mlastina",
+   "dst_id": "n_v4gas_apa"
+  },
+  {
+   "id": "de9366",
+   "src_id": "n_v1_13_mlastina",
+   "dst_id": "n_delta_dunarii"
+  },
+  {
+   "id": "de9367",
+   "src_id": "n_v1_13_mlastina",
+   "dst_id": "n_v24_nature_plant_parts_iarba"
+  },
+  {
+   "id": "de9368",
+   "src_id": "n_v1_13_mlastina",
+   "dst_id": "n_v2geo_lac"
+  },
+  {
+   "id": "de9369",
+   "src_id": "n_v1_13_mlastina",
+   "dst_id": "n_v4geo_mal"
   },
   {
    "id": "de937",
@@ -58954,14 +59388,164 @@
    "dst_id": "n_muz_hip_hop_ro"
   },
   {
+   "id": "de9370",
+   "src_id": "n_v1_13_balta",
+   "dst_id": "n_v4gas_apa"
+  },
+  {
+   "id": "de9371",
+   "src_id": "n_v1_13_balta",
+   "dst_id": "n_v2geo_lac"
+  },
+  {
+   "id": "de9372",
+   "src_id": "n_v1_13_balta",
+   "dst_id": "n_delta_dunarii"
+  },
+  {
+   "id": "de9373",
+   "src_id": "n_v1_13_balta",
+   "dst_id": "n_v4sti_peste"
+  },
+  {
+   "id": "de9374",
+   "src_id": "n_v1_13_balta",
+   "dst_id": "n_v1_8_rata"
+  },
+  {
+   "id": "de9375",
+   "src_id": "n_v1_13_inundatie",
+   "dst_id": "n_v2geo_rau"
+  },
+  {
+   "id": "de9376",
+   "src_id": "n_v1_13_inundatie",
+   "dst_id": "n_v2geo_lac"
+  },
+  {
+   "id": "de9377",
+   "src_id": "n_v1_13_inundatie",
+   "dst_id": "n_v24_weather_precipitation_ploaie"
+  },
+  {
+   "id": "de9378",
+   "src_id": "n_v1_13_inundatie",
+   "dst_id": "n_v4geo_mal"
+  },
+  {
+   "id": "de9379",
+   "src_id": "n_v1_13_avalansa",
+   "dst_id": "n_v24_weather_precipitation_zapada"
+  },
+  {
    "id": "de938",
    "src_id": "n_muz_parazitii",
    "dst_id": "n_muz_hip_hop_ro"
   },
   {
+   "id": "de9380",
+   "src_id": "n_v1_13_avalansa",
+   "dst_id": "n_v2geo_munte"
+  },
+  {
+   "id": "de9381",
+   "src_id": "n_v1_13_avalansa",
+   "dst_id": "n_carpati"
+  },
+  {
+   "id": "de9382",
+   "src_id": "n_v1_13_avalansa",
+   "dst_id": "n_v1_8_iarna"
+  },
+  {
+   "id": "de9383",
+   "src_id": "n_v1_13_cutremur",
+   "dst_id": "n_v24_nature_world_pamant"
+  },
+  {
+   "id": "de9384",
+   "src_id": "n_v1_13_cutremur",
+   "dst_id": "n_v17sti_geologie"
+  },
+  {
+   "id": "de9385",
+   "src_id": "n_v1_13_cutremur",
+   "dst_id": "n_v2sti_fizica"
+  },
+  {
+   "id": "de9386",
+   "src_id": "n_v1_13_cutremur",
+   "dst_id": "n_v3sti_energie"
+  },
+  {
+   "id": "de9387",
+   "src_id": "n_v1_13_eruptie",
+   "dst_id": "n_v4geo_vulcan"
+  },
+  {
+   "id": "de9388",
+   "src_id": "n_v1_13_eruptie",
+   "dst_id": "n_v1_13_crater"
+  },
+  {
+   "id": "de9389",
+   "src_id": "n_v1_13_eruptie",
+   "dst_id": "n_v17geo_vulcanii_noroiosi"
+  },
+  {
    "id": "de939",
    "src_id": "n_muz_la_familia",
    "dst_id": "n_muz_hip_hop_ro"
+  },
+  {
+   "id": "de9390",
+   "src_id": "n_v1_13_eruptie",
+   "dst_id": "n_v21geo_muntii_calimani"
+  },
+  {
+   "id": "de9391",
+   "src_id": "n_v1_13_crater",
+   "dst_id": "n_v4geo_vulcan"
+  },
+  {
+   "id": "de9392",
+   "src_id": "n_v1_13_crater",
+   "dst_id": "n_lacul_sfanta_ana"
+  },
+  {
+   "id": "de9393",
+   "src_id": "n_v1_13_crater",
+   "dst_id": "n_v17geo_vulcanii_noroiosi"
+  },
+  {
+   "id": "de9394",
+   "src_id": "n_v1_13_crater",
+   "dst_id": "n_v24_nature_sky_luna"
+  },
+  {
+   "id": "de9395",
+   "src_id": "n_v1_13_estuar",
+   "dst_id": "n_v2geo_rau"
+  },
+  {
+   "id": "de9396",
+   "src_id": "n_v1_13_estuar",
+   "dst_id": "n_v3geo_ocean"
+  },
+  {
+   "id": "de9397",
+   "src_id": "n_v1_13_estuar",
+   "dst_id": "n_v3geo_mare"
+  },
+  {
+   "id": "de9398",
+   "src_id": "n_v1_13_estuar",
+   "dst_id": "n_v4geo_tarm"
+  },
+  {
+   "id": "de9399",
+   "src_id": "n_v1_13_stramtoare",
+   "dst_id": "n_v3geo_mare"
   },
   {
    "id": "de94",
@@ -58974,9 +59558,109 @@
    "dst_id": "n_muz_hip_hop_ro"
   },
   {
+   "id": "de9400",
+   "src_id": "n_v1_13_stramtoare",
+   "dst_id": "n_v3geo_ocean"
+  },
+  {
+   "id": "de9401",
+   "src_id": "n_v1_13_stramtoare",
+   "dst_id": "n_v3geo_insula"
+  },
+  {
+   "id": "de9402",
+   "src_id": "n_v1_13_stramtoare",
+   "dst_id": "n_v4geo_tarm"
+  },
+  {
+   "id": "de9403",
+   "src_id": "n_v1_13_canion",
+   "dst_id": "n_v3geo_vale"
+  },
+  {
+   "id": "de9404",
+   "src_id": "n_v1_13_canion",
+   "dst_id": "n_v2geo_rau"
+  },
+  {
+   "id": "de9405",
+   "src_id": "n_v1_13_canion",
+   "dst_id": "n_v4geo_stanca"
+  },
+  {
+   "id": "de9406",
+   "src_id": "n_v1_13_canion",
+   "dst_id": "n_v4gas_apa"
+  },
+  {
+   "id": "de9407",
+   "src_id": "n_v1_13_versant",
+   "dst_id": "n_v2geo_munte"
+  },
+  {
+   "id": "de9408",
+   "src_id": "n_v1_13_versant",
+   "dst_id": "n_v3geo_deal"
+  },
+  {
+   "id": "de9409",
+   "src_id": "n_v1_13_versant",
+   "dst_id": "n_v3geo_vale"
+  },
+  {
    "id": "de941",
    "src_id": "n_muz_guess_who",
    "dst_id": "n_muz_hip_hop_ro"
+  },
+  {
+   "id": "de9410",
+   "src_id": "n_v1_13_versant",
+   "dst_id": "n_v1_13_panta"
+  },
+  {
+   "id": "de9411",
+   "src_id": "n_v1_13_panta",
+   "dst_id": "n_v2geo_munte"
+  },
+  {
+   "id": "de9412",
+   "src_id": "n_v1_13_panta",
+   "dst_id": "n_v3geo_deal"
+  },
+  {
+   "id": "de9413",
+   "src_id": "n_v1_13_panta",
+   "dst_id": "n_v4geo_drum"
+  },
+  {
+   "id": "de9414",
+   "src_id": "n_v1_13_namol",
+   "dst_id": "n_v4gas_apa"
+  },
+  {
+   "id": "de9415",
+   "src_id": "n_v1_13_namol",
+   "dst_id": "n_v4art_lut"
+  },
+  {
+   "id": "de9416",
+   "src_id": "n_v1_13_namol",
+   "dst_id": "n_geox_techirghiol"
+  },
+  {
+   "id": "de9417",
+   "src_id": "n_v1_13_namol",
+   "dst_id": "n_v17geo_vulcanii_noroiosi"
+  },
+  {
+   "id": "de9418",
+   "src_id": "n_v1_13_namol",
+   "dst_id": "n_v4geo_mal"
+  },
+  {
+   "id": "de9419",
+   "src_id": "n_v1_13_gazon",
+   "dst_id": "n_v24_nature_plant_parts_iarba"
   },
   {
    "id": "de942",
@@ -58984,9 +59668,109 @@
    "dst_id": "n_muz_pop_dance_ro"
   },
   {
+   "id": "de9420",
+   "src_id": "n_v1_13_gazon",
+   "dst_id": "n_v1_12_samanta"
+  },
+  {
+   "id": "de9421",
+   "src_id": "n_v1_13_gazon",
+   "dst_id": "n_v24_nature_plant_parts_radacina"
+  },
+  {
+   "id": "de9422",
+   "src_id": "n_v1_13_gazon",
+   "dst_id": "n_v24_home_outdoor_gradina"
+  },
+  {
+   "id": "de9423",
+   "src_id": "n_v1_13_ghetar",
+   "dst_id": "n_v2geo_munte"
+  },
+  {
+   "id": "de9424",
+   "src_id": "n_v1_13_ghetar",
+   "dst_id": "n_lacul_balea"
+  },
+  {
+   "id": "de9425",
+   "src_id": "n_v1_13_ghetar",
+   "dst_id": "n_pestera_scarisoara"
+  },
+  {
+   "id": "de9426",
+   "src_id": "n_v1_13_ghetar",
+   "dst_id": "n_geox_retezat"
+  },
+  {
+   "id": "de9427",
+   "src_id": "n_v1_13_viscol",
+   "dst_id": "n_v24_weather_air_vant"
+  },
+  {
+   "id": "de9428",
+   "src_id": "n_v1_13_viscol",
+   "dst_id": "n_v24_weather_precipitation_zapada"
+  },
+  {
+   "id": "de9429",
+   "src_id": "n_v1_13_viscol",
+   "dst_id": "n_v24_weather_storm_furtuna"
+  },
+  {
    "id": "de943",
    "src_id": "n_muz_ozone",
    "dst_id": "n_muz_refren_viral"
+  },
+  {
+   "id": "de9430",
+   "src_id": "n_v1_13_viscol",
+   "dst_id": "n_v1_8_iarna"
+  },
+  {
+   "id": "de9431",
+   "src_id": "n_v1_13_vijelie",
+   "dst_id": "n_v24_weather_air_vant"
+  },
+  {
+   "id": "de9432",
+   "src_id": "n_v1_13_vijelie",
+   "dst_id": "n_v24_weather_storm_furtuna"
+  },
+  {
+   "id": "de9433",
+   "src_id": "n_v1_13_vijelie",
+   "dst_id": "n_v24_weather_precipitation_ploaie"
+  },
+  {
+   "id": "de9434",
+   "src_id": "n_v1_13_vijelie",
+   "dst_id": "n_v24_weather_storm_fulger"
+  },
+  {
+   "id": "de9435",
+   "src_id": "n_v1_13_ciclon",
+   "dst_id": "n_v24_weather_air_vant"
+  },
+  {
+   "id": "de9436",
+   "src_id": "n_v1_13_ciclon",
+   "dst_id": "n_v24_weather_storm_furtuna"
+  },
+  {
+   "id": "de9437",
+   "src_id": "n_v1_13_ciclon",
+   "dst_id": "n_v24_weather_air_nor"
+  },
+  {
+   "id": "de9438",
+   "src_id": "n_v1_13_ciclon",
+   "dst_id": "n_v24_weather_precipitation_ploaie"
+  },
+  {
+   "id": "de9439",
+   "src_id": "n_v1_13_tornada",
+   "dst_id": "n_v24_weather_air_vant"
   },
   {
    "id": "de944",
@@ -58994,9 +59778,109 @@
    "dst_id": "n_muz_pop_dance_ro"
   },
   {
+   "id": "de9440",
+   "src_id": "n_v1_13_tornada",
+   "dst_id": "n_v24_weather_storm_furtuna"
+  },
+  {
+   "id": "de9441",
+   "src_id": "n_v1_13_tornada",
+   "dst_id": "n_v24_weather_air_nor"
+  },
+  {
+   "id": "de9442",
+   "src_id": "n_v1_13_tornada",
+   "dst_id": "n_v4sti_aer"
+  },
+  {
+   "id": "de9443",
+   "src_id": "n_v1_13_uragan",
+   "dst_id": "n_v1_13_ciclon"
+  },
+  {
+   "id": "de9444",
+   "src_id": "n_v1_13_uragan",
+   "dst_id": "n_v24_weather_air_vant"
+  },
+  {
+   "id": "de9445",
+   "src_id": "n_v1_13_uragan",
+   "dst_id": "n_v24_weather_storm_furtuna"
+  },
+  {
+   "id": "de9446",
+   "src_id": "n_v1_13_uragan",
+   "dst_id": "n_v24_weather_precipitation_ploaie"
+  },
+  {
+   "id": "de9447",
+   "src_id": "n_v1_13_uragan",
+   "dst_id": "n_v3geo_ocean"
+  },
+  {
+   "id": "de9448",
+   "src_id": "n_v1_13_polei",
+   "dst_id": "n_v4gas_apa"
+  },
+  {
+   "id": "de9449",
+   "src_id": "n_v1_13_polei",
+   "dst_id": "n_v24_weather_precipitation_ploaie"
+  },
+  {
    "id": "de945",
    "src_id": "n_muz_inna",
    "dst_id": "n_muz_refren_viral"
+  },
+  {
+   "id": "de9450",
+   "src_id": "n_v1_13_polei",
+   "dst_id": "n_v4sti_temperatura"
+  },
+  {
+   "id": "de9451",
+   "src_id": "n_v1_13_polei",
+   "dst_id": "n_v4geo_drum"
+  },
+  {
+   "id": "de9452",
+   "src_id": "n_v1_13_seceta",
+   "dst_id": "n_v24_weather_precipitation_ploaie"
+  },
+  {
+   "id": "de9453",
+   "src_id": "n_v1_13_seceta",
+   "dst_id": "n_v4sti_temperatura"
+  },
+  {
+   "id": "de9454",
+   "src_id": "n_v1_13_seceta",
+   "dst_id": "n_v24_nature_plant_parts_iarba"
+  },
+  {
+   "id": "de9455",
+   "src_id": "n_v1_13_seceta",
+   "dst_id": "n_v24_home_outdoor_gradina"
+  },
+  {
+   "id": "de9456",
+   "src_id": "n_v1_13_umbra",
+   "dst_id": "n_v24_nature_sky_soare"
+  },
+  {
+   "id": "de9457",
+   "src_id": "n_v1_13_umbra",
+   "dst_id": "n_v4sti_lumina"
+  },
+  {
+   "id": "de9458",
+   "src_id": "n_v1_13_umbra",
+   "dst_id": "n_v4sti_copac"
+  },
+  {
+   "id": "de9459",
+   "src_id": "n_v1_13_umbra",
+   "dst_id": "n_v1_11_umbrela"
   },
   {
    "id": "de946",
@@ -59004,14 +59888,129 @@
    "dst_id": "n_muz_pop_dance_ro"
   },
   {
+   "id": "de9460",
+   "src_id": "n_v1_13_racoare",
+   "dst_id": "n_v4sti_temperatura"
+  },
+  {
+   "id": "de9461",
+   "src_id": "n_v1_13_racoare",
+   "dst_id": "n_v4sti_aer"
+  },
+  {
+   "id": "de9462",
+   "src_id": "n_v1_13_racoare",
+   "dst_id": "n_v1_13_umbra"
+  },
+  {
+   "id": "de9463",
+   "src_id": "n_v1_13_adiere",
+   "dst_id": "n_v24_weather_air_vant"
+  },
+  {
+   "id": "de9464",
+   "src_id": "n_v1_13_adiere",
+   "dst_id": "n_v4sti_aer"
+  },
+  {
+   "id": "de9465",
+   "src_id": "n_v1_13_adiere",
+   "dst_id": "n_v4sti_frunza"
+  },
+  {
+   "id": "de9466",
+   "src_id": "n_v1_13_adiere",
+   "dst_id": "n_v1_13_racoare"
+  },
+  {
+   "id": "de9467",
+   "src_id": "n_v1_13_zavoi",
+   "dst_id": "n_v4geo_padure"
+  },
+  {
+   "id": "de9468",
+   "src_id": "n_v1_13_zavoi",
+   "dst_id": "n_v2geo_rau"
+  },
+  {
+   "id": "de9469",
+   "src_id": "n_v1_13_zavoi",
+   "dst_id": "n_v4geo_mal"
+  },
+  {
    "id": "de947",
    "src_id": "n_muz_alexandra_stan",
    "dst_id": "n_muz_refren_viral"
   },
   {
+   "id": "de9470",
+   "src_id": "n_v1_13_zavoi",
+   "dst_id": "n_v1_12_salcie"
+  },
+  {
+   "id": "de9471",
+   "src_id": "n_v1_13_lunca",
+   "dst_id": "n_v2geo_rau"
+  },
+  {
+   "id": "de9472",
+   "src_id": "n_v1_13_lunca",
+   "dst_id": "n_v4geo_mal"
+  },
+  {
+   "id": "de9473",
+   "src_id": "n_v1_13_lunca",
+   "dst_id": "n_v2geo_campie"
+  },
+  {
+   "id": "de9474",
+   "src_id": "n_v1_13_lunca",
+   "dst_id": "n_v1_13_inundatie"
+  },
+  {
+   "id": "de9475",
+   "src_id": "n_v1_13_coliba",
+   "dst_id": "n_v1_3_material_lemn"
+  },
+  {
+   "id": "de9476",
+   "src_id": "n_v1_13_coliba",
+   "dst_id": "n_v24_home_structure_acoperis"
+  },
+  {
+   "id": "de9477",
+   "src_id": "n_v1_13_coliba",
+   "dst_id": "n_v1_9_cort"
+  },
+  {
+   "id": "de9478",
+   "src_id": "n_v1_13_coliba",
+   "dst_id": "n_v4geo_sat"
+  },
+  {
+   "id": "de9479",
+   "src_id": "n_v1_13_papura",
+   "dst_id": "n_v1_12_tulpina"
+  },
+  {
    "id": "de948",
    "src_id": "n_muz_edward_maya",
    "dst_id": "n_muz_pop_dance_ro"
+  },
+  {
+   "id": "de9480",
+   "src_id": "n_v1_13_papura",
+   "dst_id": "n_v24_nature_plant_parts_radacina"
+  },
+  {
+   "id": "de9481",
+   "src_id": "n_v1_13_papura",
+   "dst_id": "n_v4sti_frunza"
+  },
+  {
+   "id": "de9482",
+   "src_id": "n_v1_13_papura",
+   "dst_id": "n_delta_dunarii"
   },
   {
    "id": "de949",
@@ -60332,20 +61331,20 @@
   },
   {
    "id": "pz_geografie_hard_4",
-   "start_id": "n_v29_city_street_trotuar",
-   "target_id": "n_v2geo_lac",
+   "start_id": "n_v1_13_baraj",
+   "target_id": "n_v2geo_oras",
    "difficulty": "hard"
   },
   {
    "id": "pz_geografie_hard_5",
-   "start_id": "n_v2geo_lac",
-   "target_id": "n_v3geo_tara",
+   "start_id": "n_v1_13_canion",
+   "target_id": "n_v2geo_oras",
    "difficulty": "hard"
   },
   {
    "id": "pz_geografie_hard_6",
-   "start_id": "n_v2geo_rau",
-   "target_id": "n_v3geo_continent",
+   "start_id": "n_v1_13_crater",
+   "target_id": "n_v2geo_oras",
    "difficulty": "hard"
   },
   {
@@ -60998,37 +61997,37 @@
   },
   {
    "id": "pz_stiinta_easy_1",
-   "start_id": "n_v29_animal_pets_caine",
+   "start_id": "n_v24_nature_sky_soare",
    "target_id": "n_v3sti_experiment",
    "difficulty": "easy"
   },
   {
    "id": "pz_stiinta_easy_2",
-   "start_id": "n_v29_animal_pets_pisica",
+   "start_id": "n_v29_animal_pets_caine",
    "target_id": "n_v3sti_experiment",
    "difficulty": "easy"
   },
   {
    "id": "pz_stiinta_easy_3",
+   "start_id": "n_v29_animal_pets_pisica",
+   "target_id": "n_v3sti_experiment",
+   "difficulty": "easy"
+  },
+  {
+   "id": "pz_stiinta_easy_4",
    "start_id": "n_v2sti_biologie",
    "target_id": "n_v2sti_fizica",
    "difficulty": "easy"
   },
   {
-   "id": "pz_stiinta_easy_4",
+   "id": "pz_stiinta_easy_5",
    "start_id": "n_v24_body_face_gura",
    "target_id": "n_v3sti_experiment",
    "difficulty": "easy"
   },
   {
-   "id": "pz_stiinta_easy_5",
-   "start_id": "n_v28_body_mouth_dinte",
-   "target_id": "n_v3sti_experiment",
-   "difficulty": "easy"
-  },
-  {
    "id": "pz_stiinta_easy_6",
-   "start_id": "n_v28_nature_material_piatra",
+   "start_id": "n_v28_body_mouth_dinte",
    "target_id": "n_v3sti_experiment",
    "difficulty": "easy"
   },

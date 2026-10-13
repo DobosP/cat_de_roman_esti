@@ -2357,3 +2357,24 @@ main's V1.11 then V1.12 loaders after V1.10; every digest/count check stays. The
 V1.10 selector keeps its literal identity, selection and refusals; its live-bundle
 clause moves to the new V1.12 selector test. ADR0196 records it. Combined managed
 unit/full NOT RUN: Paul's trust pin at the final tip, then one full.
+
+## 2026-10-12 — Main V1.13 / GUI M2 integration reconciliation
+
+Parent integration joins the GUI M2 E7 integration 1d8572ab and local main ed9932fa
+(literal SHA read at merge time) with the ADR0194/ADR0196 method. Main's reviewed
+V1.13 pool, native documents, installed authorities, pins, bundle/digest and the
+1206-case corpus (7423) stay byte-identical to main; nothing is regenerated,
+re-signed or re-approved. The indexed `ForSources` loader list gains main's V1.13
+loader after V1.12; every digest/count check stays. The V1.12 selector keeps its
+literal identity, selection and refusals; its live-bundle clause moves to the new
+V1.13 selector test (1206 cases, so tuple distinctness replaces the equal-length
+body delta; 12 historical selections and 62 V1.13/V1.12 mixtures refuse).
+Combined trust/unit/full run on the merge commit itself.
+
+Valid until: V1.13 local landing — this moved V1.12 status is history.
+- **V1.12 qualified locally:** 38 reviewed new concepts, including postal and garden vocabulary;
+  +38 nodes/+164 links/+168 exact forms, zero new curated rounds or hidden-target approvals.
+  All 206 added headwords/forms resolve into 38 real slots; foreign Piersic plurals preserve Piersică.
+  [Review](reviews/v1-12-post-and-garden/README.md) and [pool](content-pool/v1-12-post-and-garden/pool.json).
+  Four exact native rails; owner-approved Cald assertions, HTTP1207 and API206 pass.
+  Full native race has no new red versus main; managed SPA baseline failures remain unchanged.

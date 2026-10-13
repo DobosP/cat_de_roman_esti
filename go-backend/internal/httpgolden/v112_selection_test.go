@@ -73,9 +73,12 @@ func TestV112SelectsItsExactEightSourceCorpus(t *testing.T) {
 	if err != nil || !reflect.DeepEqual(loaded, want) {
 		t.Fatal("V1.12 loader changed its independent captured responses", err)
 	}
+	// Main's reviewed V1.13 succeeded V1.12 (ed9932fa); like main's own
+	// superseded tuples, V1.12 keeps its literal identity and selection while the
+	// live-tuple clause moves to TestV113SelectsItsExactEightSourceCorpus.
 	data, err := content.Load()
-	if err != nil || !reflect.DeepEqual(data.Sources, want.Sources) {
-		t.Fatal("live compiled bundle does not have the actual V1.12 source tuple", err)
+	if err != nil || len(data.Sources) != 8 || reflect.DeepEqual(data.Sources, want.Sources) {
+		t.Fatal("live compiled bundle did not move past the historical V1.12 source tuple", err)
 	}
 	sources := v112ExpectedSources()
 	before := source6GUICloneSources(sources)

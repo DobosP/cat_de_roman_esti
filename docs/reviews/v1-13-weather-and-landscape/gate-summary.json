@@ -1,0 +1,92 @@
+{
+  "gates": {
+    "validate": {
+      "command": "/usr/local/go/bin/go -C go-backend run ./cmd/cat-content validate --root ..",
+      "returncode": 0,
+      "seconds": 3.24,
+      "failures": [],
+      "status": "PASS"
+    },
+    "export": {
+      "command": "/usr/local/go/bin/go -C go-backend run ./cmd/cat-content export --root .. --check",
+      "returncode": 0,
+      "seconds": 3.54,
+      "failures": [],
+      "status": "PASS"
+    },
+    "mobile": {
+      "command": "/usr/local/go/bin/go -C go-backend run ./cmd/cat-mobile-pack --root .. --check",
+      "returncode": 0,
+      "seconds": 1.37,
+      "failures": [],
+      "status": "PASS"
+    },
+    "vet": {
+      "command": "/usr/local/go/bin/go -C go-backend vet ./...",
+      "returncode": 0,
+      "seconds": 2.69,
+      "failures": [],
+      "status": "PASS"
+    },
+    "ops": {
+      "command": "/usr/local/go/bin/go -C go-backend run ./cmd/cat-content-ops check --root .. --check",
+      "returncode": 0,
+      "seconds": 18.88,
+      "failures": [],
+      "status": "PASS"
+    },
+    "docs": {
+      "command": "/usr/local/go/bin/go -C go-backend run ./cmd/cat-doc-check --root ..",
+      "returncode": 0,
+      "seconds": 1.39,
+      "failures": [],
+      "status": "PASS"
+    },
+    "whitespace": {
+      "command": "git diff --check",
+      "returncode": 0,
+      "seconds": 0.18,
+      "failures": [],
+      "status": "PASS"
+    },
+    "auth": {
+      "command": "/usr/local/go/bin/go -C shared-go/authcore test -race ./...",
+      "returncode": 0,
+      "seconds": 29.02,
+      "failures": [],
+      "status": "PASS"
+    },
+    "rails": {
+      "command": "/usr/local/go/bin/go -C go-backend run ./cmd/cat-content-rail all --root .. --check",
+      "returncode": 0,
+      "seconds": 76.34,
+      "failures": [],
+      "status": "PASS"
+    },
+    "race": {
+      "command": "/usr/local/go/bin/go -C go-backend test -race -timeout 60m ./...",
+      "returncode": 1,
+      "seconds": 2689.05,
+      "failures": [
+        "TestManagedSPACompiledCurrentAndFrozenLegacy",
+        "TestManagedSPANonHexViteCacheUsesActualSDKStatus"
+      ],
+      "status": "BASELINE-RED"
+    }
+  },
+  "baseline": {
+    "main": "a27477dbc52a3279223bcaa202789eecbbeb1825",
+    "command": "go -C go-backend test -race ./internal/httpapi -run ^TestManagedSPA",
+    "returncode": 1,
+    "failures": [
+      "TestManagedSPACompiledCurrentAndFrozenLegacy",
+      "TestManagedSPANonHexViteCacheUsesActualSDKStatus"
+    ],
+    "first_errors": [
+      "owning frontend build and assets-sync required: open dist/index.html: file does not exist",
+      "non-hex Vite hash lost Cat's cache contract: HEAD 200; Cache-Control no-cache"
+    ],
+    "scope": "Existing managed-SPA tests on unchanged local main; no files repaired."
+  },
+  "result": "PASS required content gates and contentrails outright; no new native race red versus unchanged main."
+}

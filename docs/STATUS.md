@@ -1,6 +1,6 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-10-12 — M2 Preact port source applied on feat/gui-cat-m2 (gate results pending in the branch report); V1.12 qualified locally on main a27477d; V1.7 parked (ADR-0188), content authorities/rails unchanged (ADR-0189). GUI M1-close b3f5f61 has E3 budget-only-red full; later Conexiuni layout source has cheap checks only, no later full.
+Last verified: 2026-10-12 — GUI M2 E7 integration (UI1 activation + Preact port, core-v1.9) on feat/gui-cat-m2 merged with main ed9932fa (ADR-0194/0196 method; combined gate results in the GUI line below); V1.13 qualified locally; V1.7 remains parked ([ADR-0188](adr/0188-park-v1-7-and-reset-content-loop.md)); four native rails and content gates pass ([ADR-0189](adr/0189-behaviour-bound-installed-content-authorities.md)).
 
 - **GUI M2 port (feat/gui-cat-m2, E7 activation-plus-port):** Preact 11 + preact-iso shell, Home/Intrusul/Perechi/Conexiuni ported on UI 1.0.7 (kit Presence exits, Conexiuni per-tile `variant`; Perechi pulled forward from M3, ADR-0197 addendum), `frontend/index.html` declares `data-ui="preact"` so ADR-0197 serves the four ported routes from the current bundle and everything else from the frozen legacy bundle; unported screens removed from the active source; lint scope expiries removed; `cat-active-ui` (kit `requireActiveUi`) added to unit/full; route budgets classify active rows = ported set only ([bindings note](reviews/gui-m2-activation/bindings.md)). Unit 41946309 PASS 26/26 with Perechi (active route-JS gz: `/` 26,559, `/intrusul` 38,008, `/perechi` 38,825, `/conexiuni` 40,295 ≤ 40,960; `.gate/unit/result.json`); full 7c69f163 FAIL 34/38 (browser 908/927), full 8bd44c0e FAIL 34/38 (browser 913/927): PG/1207 parity/legacy journey/CSP enforced 0 pass — 10 sealed Intrusul Presence fixtures need the kit change (REQ-8, core-v1.9), the 2 Perechi focus cases and 2 Conexiuni notices cases are fixed on the branch after that run, baseline PNG/axe/vitals NOT RUN ([findings](reviews/gui-m2-activation/bindings.md)). **GUI Linux previous:** [M1-close b3f5f61](reviews/gui-normalized-react/m1-close-b3f5f61.json):37/39, only10E3 route-JS rows+aggregate fail;900browser/16baselines/9PNGs/1207parity/PG/enforcedCSP0/reallegacy pass, cleanup verified. React19/UI0.3 was active, UI1 staged. [M2 source prep](reviews/gui-normalized-react/m2-independent-preparation-20261012.json): two Conexiuni layout props removed; nativeTS7/3key contracts/targeted lint pass; audit draft unadopted at2attempt limit. M2 per-route delivery [ADR-0197](adr/0197-per-route-current-frozen-delivery.md) on `feat/gui-cat-m2-delivery`: dormant until a current build declares `data-ui="preact"`; d301a37 managed `build` 13/13 pass (serving race 87/0/0) and `unit` 26/28 with only the10E3 route-JS rows+aggregate failing, CSP enforced0/0 (`.gate/unit/result.json`); host race httpapi/cat-server on the gate-prepared scaffold, gofmt, vet pass. Next: roedu-ui loop owner queue; UI1sync/REQ-7/device/KIT_BUMP remain open.
 - **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
@@ -27,12 +27,12 @@ Last verified: 2026-10-12 — M2 Preact port source applied on feat/gui-cat-m2 (
 - [Content skill](../.agents/skills/romanian-game-content/SKILL.md): refinement/discovery with independent gates.
 - Decision/evidence: [ADR-0158](adr/0158-v1-testing-release.md),
   [release review](reviews/v1-testing-release/README.md), [Romanian tester guide](TESTARE_V1.md).
-- **V1.12 qualified locally on main a27477d:** 38 reviewed new concepts, including postal and garden vocabulary;
-  +38 nodes/+164 links/+168 exact forms, zero new curated rounds or hidden-target approvals.
-  All 206 added headwords/forms resolve into 38 real slots; foreign Piersic plurals preserve Piersică.
-  [Review](reviews/v1-12-post-and-garden/README.md) and [pool](content-pool/v1-12-post-and-garden/pool.json).
-  Four exact native rails; owner-approved Cald assertions, HTTP1207 and API206 pass.
-  Full native race has no new red versus main; managed SPA baseline failures remain unchanged. Main-only V1.8–V1.12 results do not qualify the combined GUI source (ADR0194/ADR0196).
+- **V1.13 qualified locally:** 43 reviewed items:41 new weather/landscape concepts and two input families;
+  +41 nodes/+167 links/+188 exact forms, zero new curated rounds or hidden-target approvals.
+  All229 added headwords/forms resolve into43 real slots in315 API requests; protected owners remain.
+  [Review](reviews/v1-13-weather-and-landscape/README.md) and [pool](content-pool/v1-13-weather-and-landscape/pool.json); nine legacy HopGame puzzles regenerated.
+  Four exact native rails; owner-approved Cald expectations and V1.13 HTTP1206 pass.
+  Full native race has only the two unchanged main managed-SPA failures; all content gates pass.
 ## Inventory and invariants
 
 | Game | Total | Approved | Pending | New-round pool |
@@ -46,7 +46,7 @@ Last verified: 2026-10-12 — M2 Preact port source applied on feat/gui-cat-m2 (
 
 Pack **716 = 709 approved + 7 pending**,527 eligible; quick421/418,341 preferred, starter62/61. The85 authored/336 frozen payloads stay exact.
 Pool counts describe curated records; existing on-demand fallback generators remain.
-Qualified V1.12 KG: `fixture-v1-12-post-and-garden`, 2543 nodes/9974 links/9332 forms/180 exact puzzles.
+Qualified V1.13 KG: `fixture-v1-13-weather-and-landscape`, 2584 nodes/10141 links/9520 forms/180 puzzle IDs (nine regenerated).
 Alchimie challenge refresh: 49 existing additions across 27 books; all 68 selectable books retain
 521 recipes, routes and par. One former addition belongs to a reserved board.
 Exploration has **252 concepts/352 recipes/148 discoveries**, 96 supplies, 12 tiers,
@@ -55,18 +55,18 @@ Sessions retain 7200-second sliding TTL, 1000 entries/game, locks and 64 KiB req
 Exploration stays ≤256 concepts/512 recipes/256 saved crafts/128 observed empty pairs;
 sixteen histories and 2 MiB pre-write bounds remain. Quick supplements ≤256 boards/2 MiB.
 Unrevealed answers, recipe maps and routes stay private.
-## Current qualified V1.12 pins
+## Current qualified V1.13 pins
 
-- alchimie_discovery_world_v92.json: `c77c62cb28c6b4aae3b3e8c81aea50624cfd561b42d87b606b34f0b052922ad6`
-- alchimie_recipe_extensions_v92.json: `034cf54261de0eb0046c1b6751637c03a610a95da34aeb2681195a13d73d60a5`
-- quick_games_v92.json: `26bda43974c528aa9f04074541f4b248777550a7d6174bd75a17cc57665fd88a`
+- alchimie_discovery_world_v92.json: `2b4e18f8e5f231c0e94f30567366fe18a4d3677093f4fd590d0ecfebefb0cfff`
+- alchimie_recipe_extensions_v92.json: `fe3265069003aaca36cd9d7d1a1a49f2768374f6872e19b0ea53516670192dcd`
+- quick_games_v92.json: `36bed57411692dbb714fc4978b7d8193d3012cf1bb2a2bf4e48e14a01d29af31`
 - games_pack.json: `e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8`
-- board_rankings_v37.json: `d2e9d8c4193947c0dd821b2bd4cdbf5938732f4257a3ddb1841e4d3c11b85e97`
-- derived_catalog_v38.json: `ae801b16fe240b218ab035296b5d895b37c915ce701efaa68e754ed30ca65d56`
+- board_rankings_v37.json: `7380a013c0ee14cd40c78b5469352346e945f42b90ca3a305fb17bc379cbad60`
+- derived_catalog_v38.json: `6ede0ddfb44346bcd5595b08f4de7739aea64e0724f090ba6dd8d54059f525eb`
 - release_reserve_v1.json: `fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7`
 - lant_rejection_tombstones.json: `01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d`
-- kg_sample.json: `9b4c056e16e9a18100f4e376e7b6ae5dd0d82bb0408367e4d940fea0798bd9c6`
-- cat_mobile_app_pack_contract.json: `62566db24792ffb2b8a3843186de3fa4ff1b781a1ecee3745760e882b110432f`
+- kg_sample.json: `d8c7a8226e7b128ef613aeeebedbd6af8529e5dd1d56676c3a8b1a6b86c886fc`
+- cat_mobile_app_pack_contract.json: `8201d8bde02881f36f4d832c863f4ff71fc44f9dc38161010287deedacb7d770`
 ## Verification
 
 - 1.0.1 (2026-09-23): **2466 backend / 53 accounts**, **240 frontend**, lint/typecheck/build
@@ -107,9 +107,9 @@ Unrevealed answers, recipe maps and routes stay private.
   [ADR-0167](adr/0167-close-unread-bodies-on-early-refusal.md):13 TCP gates/32 body/1207 parity and strict scalar envelopes pass; auth unchanged.
   [ADR-0168](adr/0168-qualify-complete-native-toolchain.md): native qualification remains historical evidence.
 - V1.3: [pool3integrated/5held](content-pool/v1-3-everyday-concepts/pool.json), [integration](reviews/v1-3-everyday-concepts/README.md); graph3/12/12 accepted/applied.
-- **V1.7 parked** ([ADR-0188](adr/0188-park-v1-7-and-reset-content-loop.md)): `codex/content-v1-7` (local 3377a68, origin fba9498) and `codex/content-v1-7-qualification` are not merged; zero integrated growth. V1.12 is the qualified content; [ADR-0186](adr/0186-go-authoritative-content-validation.md) keeps Go/native JSON authoritative. Outcome: [pool](content-pool/v1-7-recognizable-content/pool.json); leafă was independently integrated via V1.8 as a full-paradigm Salariu input.
-- **Main a27477d V1.12 contentrails GREEN history** (verified 2026-10-12 on main; combined NOT RUN): all four rails reconstruct exactly and re-audit under the current binary; contentrails/contentbuild race tests pass.
-  Owner-approved Cald assertions and all content gates pass on main; only known main `TestManagedSPA*` failures remain; no combined result is inferred. [Procedure](CONTENT_LOOP.md), [ADR-0189](adr/0189-behaviour-bound-installed-content-authorities.md).
+- **V1.7 parked** ([ADR-0188](adr/0188-park-v1-7-and-reset-content-loop.md)): `codex/content-v1-7` (local 3377a68, origin fba9498) and `codex/content-v1-7-qualification` are not merged; zero integrated growth. V1.13 is the qualified content; [ADR-0186](adr/0186-go-authoritative-content-validation.md) keeps Go/native JSON authoritative. Outcome: [pool](content-pool/v1-7-recognizable-content/pool.json); leafă was independently integrated via V1.8 as a full-paradigm Salariu input.
+- **V1.13 contentrails GREEN** (verified 2026-10-12): all four rails reconstruct exactly and re-audit under the current binary; contentrails/contentbuild race tests pass.
+  Owner-approved Cald assertions and all content gates pass; only known main `TestManagedSPA*` failures remain. [Procedure](CONTENT_LOOP.md), [ADR-0189](adr/0189-behaviour-bound-installed-content-authorities.md).
 - Deferred to one reviewed content wave (each re-pins KG/pack/ranking digests): missing
   diacritics in some descriptions ("roman"/"român"), the false Toma Caragiu–Reconstituirea
   casting edge, generic-only Lanț `lt_personalitati_186`, off-theme single-board Conexiuni
