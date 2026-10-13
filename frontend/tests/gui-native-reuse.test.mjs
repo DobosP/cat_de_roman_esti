@@ -1,12 +1,13 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { digestNativeInputs, parseGoPackageStream, classifyGoPackages, createNativeProof, validateNativeReuse,
-  BACKEND_RACE_ARGS, NATIVE_GRAPH_ARGS } from "../../scripts/gui-native-reuse.mjs";
+import { digestNativeInputs, parseGoPackageStream, classifyGoPackages as classifyActual, createNativeProof, validateNativeReuse,
+  BACKEND_RACE_ARGS, NATIVE_GRAPH_ARGS, AUDITED_NATIVE_SOURCE, NATIVE_REUSE_POLICY } from "../../scripts/gui-native-reuse.mjs";
 
 // Synthetic in-memory parser/security fixtures only; no gate evidence is emitted.
 const module = "github.com/DobosP/cat_de_roman_esti/go-backend";
 const embed = `${module}/embedfs`, plain = `${module}/internal/plain`, ui = `${module}/internal/ui`;
 const external = `${module}/internal/external`, accounts = `${module}/internal/accounts`;
+const rails = `${module}/internal/contentrails`;
 const context = { sha: "a".repeat(40), tree_sha256: "b".repeat(64), toolchain_digest: `sha256:${"c".repeat(64)}` };
 function inputs() {
   return ["go-backend/source.go", "docs/content/evidence.json", "scripts/check.sh", "kit/recipe.json", "legacy/archive.tar", "content/source.json",
@@ -14,6 +15,12 @@ function inputs() {
     "frontend/src/ui.tsx", "go-backend/embedfs/dist/index.html", "go-backend/embedfs/build/dist/id.json", "go-backend/embedfs/legacy/index.html"]
     .map((path) => ({ path, mode: 0o644, bytes: path }));
 }
+// These synthetic signature fields exercise the pinned decision only; they are
+// not calculated evidence for these tiny fixtures and never leave this process.
+function auditedInput() {
+  return { ...digestNativeInputs(inputs()), native_audit_sha256: AUDITED_NATIVE_SOURCE.sha256, native_audit_count: AUDITED_NATIVE_SOURCE.count };
+}
+const classifyGoPackages = (raw, input = auditedInput()) => classifyActual(raw, input);
 function packages() {
   const records = [{ ImportPath: embed, Match: ["./..."] }];
   for (const name of [plain, ui, external, accounts]) {
@@ -36,8 +43,8 @@ function raceEvents(graph) {
 }
 function fixture() {
   const graphOutput = stream(packages()), graph = classifyGoPackages(graphOutput);
-  const proof = createNativeProof({ input: digestNativeInputs(inputs()), graph, context });
-  const current = createNativeProof({ input: digestNativeInputs(inputs()), graph, context: { ...context, sha: "d".repeat(40), tree_sha256: "e".repeat(64) } });
+  const proof = createNativeProof({ input: auditedInput(), graph, context });
+  const current = createNativeProof({ input: auditedInput(), graph, context: { ...context, sha: "d".repeat(40), tree_sha256: "e".repeat(64) } });
   return { proof, current, graphOutput, raceOutput: raceEvents(graph).map((event) => JSON.stringify(event)).join("\n") };
 }
 
@@ -55,6 +62,43 @@ void test("native key permits frontend source changes and exactly generated embe
   for (const name of ["go-backend/embedfs/assets.go", "go-backend/embedfs/build/source.go", "go-backend/embedfs/builder/source.go", "go-backend/embedfs/legacy-source.go", "go-backend/third_party/webkit/dist/contract.go", "shared-go/authcore/dist/contract.go"]) {
     assert.notEqual(digestNativeInputs([...base, { path: name, mode: 0o644, bytes: "new" }]).digest, digestNativeInputs(base).digest);
   }
+});
+void test("native data key retains every source Markdown file including frontend README", () => {
+  const key = digestNativeInputs(inputs()).digest;
+  for (const path of ["frontend/README.md", "frontend/docs/EXPLANATION.MD", "frontend/src/notes.md", "go-backend/embedfs/dist/README.md"]) {
+    const entry = { path, mode: 0o644, bytes: "readable source" }, before = digestNativeInputs([...inputs(), entry]).digest;
+    assert.notEqual(before, key, path);
+    assert.notEqual(digestNativeInputs([...inputs(), { ...entry, bytes: "changed" }]).digest, before, path);
+  }
+});
+void test("generated assets retain every native provenance selector while ordinary UI bytes stay excluded", () => {
+  const key = digestNativeInputs(inputs()).digest;
+  const selectors = ["runtime.go", "runtime_test.go", "go.mod", "go.sum", "rules_unicode15.json", "provenance.json", "rules_provenance.json", "bundled.json",
+    "contentrails/sources/authored-v1.json", "nested/contentrails/sources/nested/source.json"];
+  for (const directory of ["dist", "build/dist", "legacy"]) for (const name of selectors) {
+    const path = `go-backend/embedfs/${directory}/${name}`, entry = { path, mode: 0o644, bytes: "native provenance" };
+    const before = digestNativeInputs([...inputs(), entry]).digest;
+    assert.notEqual(before, key, path);
+    assert.notEqual(digestNativeInputs([...inputs(), { ...entry, bytes: "changed" }]).digest, before, path);
+  }
+  for (const name of ["assets/app.js", "assets/app.css", "assets/font.woff2", ".vite/manifest.json", "identity.json"]) {
+    assert.equal(digestNativeInputs([...inputs(), { path: `go-backend/embedfs/dist/${name}`, mode: 0o644, bytes: "UI asset" }]).digest, key);
+  }
+});
+void test("native semantic signature binds all Go code/tests/modules/modes, including generated native input", () => {
+  const base = inputs(), before = digestNativeInputs(base);
+  for (const path of ["go-backend/new.go", "go-backend/internal/httpapi/new_test.go", "go-backend/go.mod", "go-backend/go.sum",
+    "shared-go/authcore/auth.go", "shared-go/authcore/auth_test.go", "shared-go/authcore/go.mod", "shared-go/authcore/go.sum",
+    "go-backend/embedfs/dist/injected.go"]) {
+    const after = digestNativeInputs([...base, { path, mode: 0o644, bytes: "native source" }]);
+    assert.notEqual(after.native_audit_sha256, before.native_audit_sha256, path);
+    assert.equal(after.native_audit_count, before.native_audit_count + 1, path);
+  }
+  const changed = structuredClone(base); changed[0].bytes += "changed";
+  assert.notEqual(digestNativeInputs(changed).native_audit_sha256, before.native_audit_sha256);
+  changed[0] = { ...base[0], mode: 0o755 };
+  assert.notEqual(digestNativeInputs(changed).native_audit_sha256, before.native_audit_sha256);
+  assert.equal(digestNativeInputs([...base, { path: "docs/audit.md", mode: 0o644, bytes: "documentation" }]).native_audit_sha256, before.native_audit_sha256);
 });
 void test("native key includes executable mode and file additions/deletions, with deterministic ordering", () => {
   const base = inputs(), key = digestNativeInputs(base).digest;
@@ -100,6 +144,39 @@ void test("graph closure detects an embedfs test variant with no direct ordinary
   records.push({ ImportPath: variant, ForTest: plain });
   records.find((item) => item.ImportPath === `${plain}.test`).Deps.push(variant);
   assert.ok(classifyGoPackages(stream(records)).freshPackages.includes(plain));
+});
+function addRoot(records, name, deps = [embed]) {
+  records.push({ ImportPath: name, Match: ["./..."], TestGoFiles: ["contract_test.go"], Imports: deps, Deps: deps });
+  records.push({ ImportPath: `${name} [${name}.test]`, ForTest: name, Imports: deps, Deps: deps });
+  records.push({ ImportPath: `${name}.test`, Imports: [`${name} [${name}.test]`], Deps: [`${name} [${name}.test]`, ...deps] });
+}
+void test("audited source exception admits only contentrails while every other embed closure remains fresh", () => {
+  const records = packages(); addRoot(records, rails); addRoot(records, `${module}/internal/contentrails-extra`);
+  const graph = classifyGoPackages(stream(records));
+  assert.equal(graph.audit.matched, true); assert.equal(graph.audit.policy, NATIVE_REUSE_POLICY);
+  assert.deepEqual(graph.historicalSourcePackages, [rails]); assert.ok(graph.reusablePackages.includes(rails));
+  for (const name of [embed, ui, external, accounts, `${module}/internal/contentrails-extra`]) assert.ok(graph.freshPackages.includes(name));
+});
+void test("GUI/API/content/documentation contracts are fresh even without an embedfs graph edge", () => {
+  const records = packages();
+  const required = ["internal/httpapi", "internal/httpgolden", "internal/guibuild", "cmd/cat-server", "cmd/cat-browser-plan",
+    "internal/browserplan", "internal/content", "internal/doccheck"].map(name => `${module}/${name}`);
+  for (const name of required) addRoot(records, name, []);
+  const graph = classifyGoPackages(stream(records));
+  assert.ok(required.every(name => graph.freshPackages.includes(name)));
+  assert.ok(graph.freshPackages.includes(accounts)); assert.ok(graph.freshPackages.includes(embed));
+});
+void test("any missing or changed semantic audit signature disables all cross-SHA reuse", () => {
+  const records = packages(); addRoot(records, rails);
+  for (const input of [undefined, digestNativeInputs(inputs()), { ...auditedInput(), native_audit_sha256: "f".repeat(64) },
+    { ...auditedInput(), native_audit_count: AUDITED_NATIVE_SOURCE.count + 1 }]) {
+    const graph = classifyActual(stream(records), input);
+    assert.equal(graph.audit.matched, false); assert.deepEqual(graph.reusablePackages, []); assert.deepEqual(graph.historicalSourcePackages, []);
+    assert.deepEqual(graph.freshPackages, graph.roots);
+  }
+  const f = fixture(); f.current.native_audit_sha256 = "f".repeat(64);
+  assert.throws(() => validateNativeReuse(f), /semantic audit/);
+  const count = fixture(); count.proof.native_audit_count++; assert.throws(() => validateNativeReuse(count), /semantic audit/);
 });
 void test("actual Go test variants may repeat normal imports without losing dependencies", () => {
   const records = packages(), original = classifyGoPackages(stream(records));

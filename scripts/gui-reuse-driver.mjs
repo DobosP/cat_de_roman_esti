@@ -110,8 +110,9 @@ export function createGateReuse(hook, config) {
       hook.check("cat-native-reuse-inputs", () => {
         try {
           hook.run("node", ["scripts/gui-native-reuse.mjs", "graph", ctx.target]);
-          const graph = classifyGoPackages(read(ctx.root, `${prefix}/native-reuse/graph.stdout.json`));
-          current = createNativeProof({ input: inputKey(ctx.root), graph, context: ctx });
+          const input = inputKey(ctx.root);
+          const graph = classifyGoPackages(read(ctx.root, `${prefix}/native-reuse/graph.stdout.json`), input);
+          current = createNativeProof({ input, graph, context: ctx });
           save(hook, `${prefix}/native-inputs.json`, current);
           let original;
           try {

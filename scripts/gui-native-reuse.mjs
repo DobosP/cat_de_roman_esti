@@ -1,5 +1,7 @@
-// Cross-source reuse is limited to tests whose entire native input set is exact.
-// Source result/command/log bindings are checked separately by gui-unit-reuse.
+// Historical race evidence may be reused only under an exact reviewed native
+// source audit, unchanged data and fresh GUI/API contracts. This is a source-
+// based audit, not a claim that test binaries or compiler inputs are identical.
+// Original result/command/log bindings are checked by gui-unit-reuse.
 import * as fs from "node:fs";
 import path from "node:path";
 import { createHash } from "node:crypto";
@@ -11,7 +13,15 @@ const HEX = /^[a-f0-9]{64}$/;
 const SHA = /^[a-f0-9]{40}(?:[a-f0-9]{24})?$/;
 const MODULE = "github.com/DobosP/cat_de_roman_esti/go-backend";
 const EMBED = `${MODULE}/embedfs`;
+const CONTENT_RAILS = `${MODULE}/internal/contentrails`;
 const PG = new Set([`${MODULE}/internal/accounts`, `${MODULE}/internal/httpapi`]);
+const ALWAYS_FRESH = new Set([...PG, ...["internal/httpgolden", "internal/guibuild", "cmd/cat-server", "cmd/cat-browser-plan",
+  "internal/browserplan", "internal/content", "internal/doccheck"].map((name) => `${MODULE}/${name}`)]);
+export const NATIVE_REUSE_POLICY = "historical-audited-source-reuse-with-fresh-gui-api-contracts-v2";
+// Independently reviewed source at e82e5562; never regenerate this pin after a
+// native change without another explicit semantic audit and review. Rows are
+// sorted {path,mode:0777,sha256} for every .go/go.mod/go.sum in both native trees.
+export const AUDITED_NATIVE_SOURCE = Object.freeze({ count: 238, sha256: "047f3f53f1131820bbc5ef04f7d7eb64f74fe05812a1b9b0f40d660465d54e06" });
 const ignored = new Set([".git", "node_modules", ".gate", ".vitest", "test-results", "TASK_BRIEF.md", "TASK_RESULT.md", "SWARM_RESULT.md"]);
 const frontendInputs = new Set(["frontend/package.json", "frontend/package-lock.json", "frontend/src/release.ts", "frontend/e2e/seeded-starts.json"]);
 export const BACKEND_RACE_ARGS = Object.freeze(["test", "-race", "-timeout=30m", "-count=1", "-json", "./..."]);
@@ -25,10 +35,23 @@ function relative(name) {
 }
 function excluded(name) {
   return name.split("/").some((part) => ignored.has(part) || part === ".env" || part.startsWith(".env."))
-    || /^(?:dist|frontend\/dist)(?:\/|$)/.test(name)
-    || /^go-backend\/embedfs\/(?:dist|build\/dist|legacy)(?:\/|$)/.test(name);
+    || /^(?:dist|frontend\/dist)(?:\/|$)/.test(name);
 }
-function included(name) { return !excluded(name) && (!name.startsWith("frontend/") || frontendInputs.has(name)); }
+const generated = name => /^go-backend\/embedfs\/(?:dist|build\/dist|legacy)(?:\/|$)/.test(name);
+const markdown = name => /\.md$/i.test(name);
+function nativeProvenanceInput(name) {
+  const base = path.posix.basename(name);
+  // Conservative superset of contentrails/rail.go runtimePaths: retain tests
+  // too, and every JSON member beneath any contentrails/sources directory.
+  return base.endsWith(".go") || ["go.mod", "go.sum", "rules_unicode15.json", "provenance.json", "rules_provenance.json", "bundled.json"].includes(base)
+    || name.includes("/contentrails/sources/") && name.endsWith(".json");
+}
+const nativeAuditInput = name => /^(?:go-backend|shared-go)\//.test(name)
+  && (name.endsWith(".go") || ["go.mod", "go.sum"].includes(path.posix.basename(name)));
+function included(name) {
+  return !excluded(name) && (!generated(name) || nativeProvenanceInput(name) || markdown(name))
+    && (!name.startsWith("frontend/") || frontendInputs.has(name) || markdown(name));
+}
 
 // Pure fixture seam: no synthetic fixture writes a gate receipt or source tree.
 export function digestNativeInputs(entries) {
@@ -43,7 +66,8 @@ export function digestNativeInputs(entries) {
   }
   files.sort((a, b) => a.path < b.path ? -1 : a.path > b.path ? 1 : 0);
   demand(files.length > 0, "empty native input set");
-  return { digest: hash(JSON.stringify(files)), files };
+  const audited = files.filter((file) => nativeAuditInput(file.path));
+  return { digest: hash(JSON.stringify(files)), files, native_audit_sha256: hash(JSON.stringify(audited)), native_audit_count: audited.length };
 }
 
 export function inputKey(root) {
@@ -110,7 +134,7 @@ function moduleIdentity(value) {
   return { path: value.Path, version: value.Version ?? "", sum: value.Sum ?? "", go: value.GoVersion ?? "", main: value.Main === true,
     replace: value.Replace === undefined ? null : moduleIdentity(value.Replace) };
 }
-export function classifyGoPackages(raw) {
+export function classifyGoPackages(raw, input) {
   const originals = parseGoPackageStream(raw), byName = new Map();
   for (const value of originals) {
     demand(typeof value.ImportPath === "string" && value.ImportPath.length > 0 && !/[\x00-\x1f]/.test(value.ImportPath)
@@ -129,7 +153,10 @@ export function classifyGoPackages(raw) {
     demand(typeof record.ForTest === "string", "invalid test package owner");
     for (const name of [...record.Imports, ...record.Deps]) demand(name === "C" || byName.has(name), `incomplete Go dependency graph: ${name}`);
   }
-  const freshPackages = [], reusablePackages = [];
+  const audit = { policy: NATIVE_REUSE_POLICY, expected_sha256: AUDITED_NATIVE_SOURCE.sha256, expected_count: AUDITED_NATIVE_SOURCE.count,
+    actual_sha256: input?.native_audit_sha256 ?? null, actual_count: input?.native_audit_count ?? null,
+    matched: input?.native_audit_sha256 === AUDITED_NATIVE_SOURCE.sha256 && input?.native_audit_count === AUDITED_NATIVE_SOURCE.count };
+  const freshPackages = [], reusablePackages = [], historicalSourcePackages = [];
   for (const name of roots) {
     const original = byName.get(name), hasTests = original.TestGoFiles.length + original.XTestGoFiles.length > 0;
     const testRoots = [...byName.values()].filter((item) => item.ImportPath === name || item.ForTest === name || item.ImportPath === `${name}.test`);
@@ -144,33 +171,45 @@ export function classifyGoPackages(raw) {
     // No-test packages and opt-in PostgreSQL tests stay fresh. Reused packages
     // must have actual run/pass evidence, with no skipped assertion.
     const reachesEmbed = [...closure].some((dependency) => dependency === EMBED || dependency.startsWith(`${EMBED} [`));
-    (reachesEmbed || !hasTests || PG.has(name) ? freshPackages : reusablePackages).push(name);
+    // The sole audited exception calls game JSON APIs without observing GUI
+    // bytes. The exact native audit pin guards that interpretation; all API,
+    // content, HTML and build-identity contracts still execute whole packages.
+    const historicalSource = audit.matched && name === CONTENT_RAILS && hasTests;
+    const fresh = !audit.matched || !hasTests || ALWAYS_FRESH.has(name) || reachesEmbed && !historicalSource;
+    (fresh ? freshPackages : reusablePackages).push(name);
+    if (historicalSource && !fresh) historicalSourcePackages.push(name);
   }
   const records = [...byName.values()].sort((a, b) => a.ImportPath < b.ImportPath ? -1 : a.ImportPath > b.ImportPath ? 1 : 0);
-  return { digest: hash(JSON.stringify(records)), raw_sha256: hash(raw), roots, freshPackages, reusablePackages, records };
+  return { digest: hash(JSON.stringify(records)), raw_sha256: hash(raw), audit, roots, freshPackages, reusablePackages, historicalSourcePackages, records };
 }
 
 function graphSummary(graph) {
-  return { digest: graph.digest, raw_sha256: graph.raw_sha256, roots: graph.roots, freshPackages: graph.freshPackages, reusablePackages: graph.reusablePackages };
+  return { digest: graph.digest, raw_sha256: graph.raw_sha256, audit: graph.audit, roots: graph.roots, freshPackages: graph.freshPackages,
+    reusablePackages: graph.reusablePackages, historicalSourcePackages: graph.historicalSourcePackages };
 }
 export function createNativeProof({ input, graph, context }) {
   demand(HEX.test(input?.digest) && Array.isArray(input.files) && input.files.length > 0 && HEX.test(graph?.digest)
+    && HEX.test(input.native_audit_sha256) && Number.isInteger(input.native_audit_count) && input.native_audit_count >= 0
+    && graph.audit?.actual_sha256 === input.native_audit_sha256 && graph.audit.actual_count === input.native_audit_count
     && SHA.test(context?.sha) && HEX.test(context.tree_sha256) && /^sha256:[a-f0-9]{64}$/.test(context.toolchain_digest), "incomplete native input proof");
-  return { schema: 1, policy: "native-inputs-and-test-dependency-closure-v1", sha: context.sha, tree_sha256: context.tree_sha256,
+  return { schema: 1, policy: NATIVE_REUSE_POLICY, sha: context.sha, tree_sha256: context.tree_sha256,
     toolchain_digest: context.toolchain_digest, input_sha256: input.digest, input_count: input.files.length,
+    native_audit_sha256: input.native_audit_sha256, native_audit_count: input.native_audit_count,
     graph: graphSummary(graph), command: { executable: "go", args_sha256: hash(JSON.stringify(BACKEND_RACE_ARGS)), cwd: "go-backend", CGO_ENABLED: "1" } };
 }
 
 export function validateNativeReuse({ proof, current, graphOutput, raceOutput }) {
-  demand(proof?.schema === 1 && proof.policy === current?.policy && current.schema === 1 && SHA.test(proof.sha) && HEX.test(proof.tree_sha256)
+  demand(proof?.schema === 1 && proof.policy === NATIVE_REUSE_POLICY && current?.policy === NATIVE_REUSE_POLICY && current.schema === 1 && SHA.test(proof.sha) && HEX.test(proof.tree_sha256)
     && proof.toolchain_digest === current.toolchain_digest && /^sha256:[a-f0-9]{64}$/.test(proof.toolchain_digest)
     && HEX.test(proof.input_sha256) && proof.input_sha256 === current.input_sha256 && proof.input_count === current.input_count
     && Number.isInteger(proof.input_count) && proof.input_count > 0, "native input/toolchain identity differs");
+  demand([proof, current].every((value) => value.native_audit_sha256 === AUDITED_NATIVE_SOURCE.sha256
+    && value.native_audit_count === AUDITED_NATIVE_SOURCE.count), "native semantic audit differs; original complete race is required");
   const recipe = { executable: "go", args_sha256: hash(JSON.stringify(BACKEND_RACE_ARGS)), cwd: "go-backend", CGO_ENABLED: "1" };
   demand(equal(proof.command, recipe) && equal(current.command, recipe), "original race recipe differs");
-  const graph = classifyGoPackages(graphOutput);
+  const graph = classifyGoPackages(graphOutput, proof);
   demand(equal(proof.graph, graphSummary(graph)) && proof.graph.digest === current.graph?.digest
-    && ["roots", "freshPackages", "reusablePackages"].every((key) => equal(proof.graph[key], current.graph[key]))
+    && ["audit", "roots", "freshPackages", "reusablePackages", "historicalSourcePackages"].every((key) => equal(proof.graph[key], current.graph[key]))
     && graph.reusablePackages.length > 0, "native test graph differs or has no reusable roots");
   const roots = new Set(graph.roots), reusable = new Set(graph.reusablePackages);
   const states = new Map(graph.roots.map((name) => [name, { started: false, finished: false, tests: new Map(), noTests: false }]));
@@ -203,8 +242,9 @@ export function validateNativeReuse({ proof, current, graphOutput, raceOutput })
     }
   }
   demand([...states.values()].every((state) => state.started && state.finished), "missing original race package completion");
-  return { status: "hit", source_sha: proof.sha, input_sha256: proof.input_sha256, graph_sha256: graph.digest,
-    race_stdout_sha256: hash(raceOutput), freshPackages: graph.freshPackages, reusablePackages: graph.reusablePackages };
+  return { status: "hit", policy: NATIVE_REUSE_POLICY, source_sha: proof.sha, input_sha256: proof.input_sha256, graph_sha256: graph.digest,
+    native_audit: graph.audit, race_stdout_sha256: hash(raceOutput), freshPackages: graph.freshPackages,
+    reusablePackages: graph.reusablePackages, historicalSourcePackages: graph.historicalSourcePackages };
 }
 
 function writeArtifact(root, name, bytes) {
@@ -230,10 +270,11 @@ function graphCommand(target) {
   writeArtifact(root, `${prefix}/graph-command.json`, JSON.stringify({ schema: 1, command: "go", args: NATIVE_GRAPH_ARGS, cwd: "go-backend", CGO_ENABLED: "1",
     exit_code: result.status, duration_ms: Date.now() - started, stdout_sha256: hash(stdout), stderr_sha256: hash(stderr) }, null, 2) + "\n");
   demand(!result.error && result.status === 0, "actual Go test dependency discovery failed");
-  const graph = classifyGoPackages(stdout), bytes = JSON.stringify(graph) + "\n", name = `${prefix}/graph.json`;
+  const graph = classifyGoPackages(stdout, inputKey(root)), bytes = JSON.stringify(graph) + "\n", name = `${prefix}/graph.json`;
   writeArtifact(root, name, bytes);
   process.stdout.write(JSON.stringify({ schema: 1, path: name, sha256: hash(bytes), digest: graph.digest,
-    freshPackages: graph.freshPackages, reusablePackages: graph.reusablePackages }) + "\n");
+    audit: graph.audit, freshPackages: graph.freshPackages, reusablePackages: graph.reusablePackages,
+    historicalSourcePackages: graph.historicalSourcePackages }) + "\n");
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
   try { demand(process.argv.length === 4 && process.argv[2] === "graph", "usage: node scripts/gui-native-reuse.mjs graph <unit|full>"); graphCommand(process.argv[3]); }

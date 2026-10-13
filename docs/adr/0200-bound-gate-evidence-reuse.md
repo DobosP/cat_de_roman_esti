@@ -41,3 +41,20 @@ may prevent the desired five-minute unit target; only measured timings count.
 Independent review and one clean unit/full qualification precede acceptance.
 
 Implementation and validation: [ExecPlan](../execplans/gui-lighter-gates.md).
+
+## Addendum 2026-10-13: Audited content-rails source boundary
+
+The first clean unit at e82e5562 passed 27 checks in 19.95 minutes; contentrails
+alone took 1,123.73 seconds. Its transitive embedfs dependency reflects HTTP
+constructor initialization, while its assertions request only game JSON APIs.
+Two independent source audits support an E10 source-based exception for exactly
+that package, superseding the blanket transitive-rerun clause above.
+
+The exception requires a pinned signature of all 238 native Go/module source
+files, including tests and vendored Go code. Any signature mismatch disables
+reuse until a new audit. Other packages retain the dynamic dependency rule, and
+whole GUI/API/identity/frontend-reader packages remain fresh. All Markdown and
+generated files matching native provenance-reader selectors enter the input key.
+This reuses historical content assertions under identical audited source/data
+inputs; it does not assert identical compiler inputs or newly executed tests.
+The exact signature and boundary evidence are in the [audit](../reviews/gui-lighter-gates/native-source-audit.md).

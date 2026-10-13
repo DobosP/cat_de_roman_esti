@@ -25,6 +25,9 @@ target. Inner SDK and wrapper invocation UUIDs differ; bootstrap evidence joins
 them. Compose forwards GOMAXPROCS but does not forward GATE_PARALLEL_MAX. Native
 tests read content evidence under docs and four frontend files, so excluding all
 docs/frontend bytes would be unsafe.
+Actual Go test variants repeat Imports; the parser now normalizes those edges.
+The first clean unit passed 27 checks, but contentrails consumed 1,123.73 seconds.
+An independently audited source-based exception is required for useful warm reuse.
 
 ## 4. Decision Log
 
@@ -32,6 +35,11 @@ docs/frontend bytes would be unsafe.
 and execute the original commands on a missing or invalid proof. Retain source
 and command evidence in the consuming result. Read the committed parallel cap and
 honor the wrapper's lower per-run limit. Authority: PROGRAM E10 / Cat ADR-0199.
+
+2026-10-13: Keep dynamic dependency closure as default; exempt only contentrails
+under the independently recomputed 238-file native source signature. Bind all
+Markdown and generated native-looking reader inputs. Any changed code signature
+forces original execution; the fresh whole serving/API suites remain mandatory.
 
 ## 5. Outcomes & Retrospective
 
