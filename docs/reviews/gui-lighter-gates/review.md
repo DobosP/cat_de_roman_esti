@@ -2,7 +2,7 @@
 
 Valid until: a reviewed source hash below changes; qualification results remain separate.
 Date: 2026-10-13; reviewer: agent:codex, independent `gate_design_review` agent
-Scope: source/retained graph only; no reviewer Node/Go tests or gates. No blocking findings; unit/full pending.
+Scope: independent source and actual evidence recomputation; no reviewer runtimes. APPROVE at d98fe50e; no blocking findings.
 
 - Same-SHA reuse binds the completed clean unit, exact commands/assertions/logs,
   source/tree/toolchain/lock/config/resource/CSP identities, and distinct invocation bridge.
@@ -21,7 +21,7 @@ promotion refusal is recorded without invalidating separately verified same-SHA 
 
 ## Validation limits
 
-Root's cold unit passed27; final source-policy fixtures, warm timings and full remain pending.
+Cold unit27/full37/warm unit27 pass independently verified; see [qualification](independent-qualification.json). Warm5.42min misses5min; full13.64min meets15min.
 Real Go test-variant Imports repeated dependencies: the fix deduplicates only Imports;
 all other lists remain strict. Discovery failure stops subsequent native and full-only work.
 Independent Python recomputation: 398 records, 40 roots = 23 fresh + 17 historical,

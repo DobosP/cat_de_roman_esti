@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "operator": "agent:codex (PROGRAM E8)",
+  "sha": "d98fe50efbb95de688124a97fa51f5b55e706d43",
+  "evidence_root": "/home/dobo/work/_temp/fix__gui-cat-lighter-gates/gates/cat_de_roman_esti/.gate",
+  "retention": "One rolling mirror; compact bindings remain after successor verification and replacement.",
+  "runs": [
+    {
+      "target": "cold-unit",
+      "command": "bash scripts/gate.sh unit --sha d98fe50efbb95de688124a97fa51f5b55e706d43",
+      "result": "full/unit-reuse-source/.gate/unit/result.json",
+      "result_sha256": "c2480c62b1fa5cb28624774eb0bb69617aee726bfe68ea1a8d714517f144b0e4",
+      "status": "pass",
+      "checks": 27,
+      "started": "2026-10-13T09:13:24.786Z",
+      "finished": "2026-10-13T09:34:51.119Z",
+      "minutes": 21.4389
+    },
+    {
+      "target": "full",
+      "command": "python3 -I scripts/gui-full-runner.py --sha d98fe50efbb95de688124a97fa51f5b55e706d43",
+      "result": "full/result.json",
+      "result_sha256": "b32c19240c2f347a870fe3c9142e5ce04266c238da7b3a60a86fc228f4e0e809",
+      "status": "pass",
+      "checks": 37,
+      "started": "2026-10-13T09:39:51.908Z",
+      "finished": "2026-10-13T09:53:30.436Z",
+      "minutes": 13.6421
+    },
+    {
+      "target": "warm-unit",
+      "command": "bash scripts/gate.sh unit --sha d98fe50efbb95de688124a97fa51f5b55e706d43",
+      "result": "unit/result.json",
+      "result_sha256": "41d542dab15764fdbac17f1cc06531256e3ae72c9312ab69ad94eb809d134414",
+      "status": "pass",
+      "checks": 27,
+      "started": "2026-10-13T09:58:39.734Z",
+      "finished": "2026-10-13T10:04:04.712Z",
+      "minutes": 5.4163
+    }
+  ],
+  "focused_cases": 71,
+  "full_browser_cases": 933,
+  "full_exact_PNGs": 9,
+  "full_CSP_violations": 0,
+  "full_legacy_CSP_violations": 0,
+  "full_browser_workers": 4,
+  "full_same_SHA_reused_lanes": 7,
+  "warm_fresh_package_roots": 23,
+  "warm_historical_package_roots": 17,
+  "full_before_minutes": 34.44,
+  "unit_before_minutes": 20.8,
+  "warm_five_minute_target": "missed by 24.978 seconds; fresh GUI/API coverage retained",
+  "native_reuse_semantics": "Historical audited source/data assertions, not fresh execution or identical compiler inputs.",
+  "native_audit_count": 238,
+  "native_audit_sha256": "047f3f53f1131820bbc5ef04f7d7eb64f74fe05812a1b9b0f40d660465d54e06",
+  "limitations": [
+    "This warm qualification uses unchanged d98fe50e; focused key fixtures verify frontend-only changes can retain the same historical proof.",
+    "A composite warm unit is not an original whole-race authority for full seven-lane reuse; conservative fallback may execute fresh lanes.",
+    "Core-v1.9 CSP shape remains four current/five frozen observations until the separate KIT_BUMP."
+  ],
+  "independent_review": "independent-qualification.json",
+  "independent_verdict": "APPROVE; warm performance target miss explicitly retained",
+  "doc_checks": {
+    "archive_tree": "8358fbee9b1dd94d7386287842bed6bcf6561725",
+    "cat_live_files": 61,
+    "fleet_live_files": 61,
+    "status": "pass",
+    "note": "Fleet scan rerun with archive index so git ls-files enumerated61, not empty."
+  }
+}

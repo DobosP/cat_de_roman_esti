@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "reviewer": "agent:codex/gate_design_review",
+  "scope": "independent source/evidence data verification; no product runtimes or gates",
+  "sha": "d98fe50efbb95de688124a97fa51f5b55e706d43",
+  "tree_sha256": "44f7c6b94d1752e5d57f523a4063338eab6eebac9342695b297ecdc8c42cfad2",
+  "source_file_count": 8872,
+  "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+  "versions_lock_sha256": "78dcb4e6c242ed43044e28c57469c640f39d39dee46f210016decafbee09821e",
+  "native_audit": {
+    "count": 238,
+    "sha256": "047f3f53f1131820bbc5ef04f7d7eb64f74fe05812a1b9b0f40d660465d54e06"
+  },
+  "cold_unit": {
+    "checks": 27,
+    "result_sha256": "c2480c62b1fa5cb28624774eb0bb69617aee726bfe68ea1a8d714517f144b0e4",
+    "minutes": 21.438883333333333,
+    "retained_source": "full/unit-reuse-source/.gate/unit",
+    "seven_actual_lane_command_hashes_verified": true
+  },
+  "full": {
+    "checks": 37,
+    "same_check_names_as_accepted_M2": true,
+    "result_sha256": "b32c19240c2f347a870fe3c9142e5ce04266c238da7b3a60a86fc228f4e0e809",
+    "minutes": 13.642133333333334,
+    "file_artifacts_verified": 163,
+    "outside_target_artifacts_verified_against_same_SHA_runner": [
+      "go-backend/embedfs/build/dist/.gui-build.json",
+      "go-backend/embedfs/build/dist/versions.lock.json"
+    ],
+    "reused_lanes": [
+      "cat-frontend-unit",
+      "cat-frontend-lint",
+      "cat-frontend-types",
+      "cat-backend-race",
+      "cat-backend-vet",
+      "cat-authcore-race",
+      "cat-authcore-vet"
+    ],
+    "all_retained_original_files_verified": 30,
+    "browser_cases": 933,
+    "browser_parallel_indices": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "image_id": "sha256:d9273147d02859de930a3a7f822fc781784abdd132bae4e82389f49a8b0c1d92",
+    "exact_png_sha256": {
+      "/": "c0b8b632456c32cfe7c58c9801cb887bb140e909c47d7c50ac77014b2f5133e1",
+      "/intrusul": "78a1d16956b1fdd0fb0cc772d26447e5d302e3cbe3917f8344fa4d29a1540ea4",
+      "/perechi": "e2eb15eb02d68aa00771e1f9b0c5cea6e053a720cd5a1bae4548290ff26417d3",
+      "/conexiuni": "48d75018d626e154ecbf7aa3fde73ab4fba2b19971860c7bf8aed2eadd916eb6",
+      "/alchimie?mode=challenges": "8627c586eb858738d0fb9d1e1f148001918018b7eab2d3b83adbc4d8067e1327",
+      "/alchimie?mode=explore": "3e6f20116fff197cc5c1a2e0a7b9364eb6290a94f89ca01e7df579fab42447c6",
+      "/cald-rece": "4cff23ab1c40e1ad5103fcb3460dc334ce0fe8b2ded9c928cac719d31a449819",
+      "/lant": "db6d51349137feafb827363bf6dd9e40aeeeece831c22080ca402cdcd75762b2",
+      "/clasament": "753b66bc04a01d2d02b67947578606f631c0670299b4b1b903368aa7f257b1a6"
+    },
+    "current_CSP_pages": 4,
+    "frozen_CSP_pages": 5,
+    "distinct_nonces": 9,
+    "CSP_violations": 0,
+    "supervisor_receipt": "gate_exit0/owner_exit0/cleanup.verified=true"
+  },
+  "assertion_assessment": "same 37 full checks and all seven original command/assertion proofs preserved; no synthetic current test execution",
+  "source_untouched": true,
+  "pending": [],
+  "warm_unit": {
+    "status": "pass",
+    "checks": 27,
+    "result_sha256": "41d542dab15764fdbac17f1cc06531256e3ae72c9312ab69ad94eb809d134414",
+    "minutes": 5.416300000000001,
+    "aspirational_target_minutes": 5,
+    "target_met": false,
+    "artifact_files_verified": 111,
+    "native_input_files": 8675,
+    "independently_recomputed_input_sha256": "38c905956aeb6f32551cd8edbe64a175eaa61f54a0e5a04e01a883f0c31a35f4",
+    "input_key_scope": "completed runner independently hashed before later docs-only mirror resync",
+    "native_audit_pin_matches": true,
+    "fresh_packages": ["cmd/cat-browser-plan","cmd/cat-content","cmd/cat-content-ops","cmd/cat-content-rail","cmd/cat-doc-check","cmd/cat-gui-build","cmd/cat-hop","cmd/cat-mobile-pack","cmd/cat-qualify","cmd/cat-roedu","cmd/cat-server","embedfs","internal/accounts","internal/alchimie_explore","internal/browserplan","internal/content","internal/contentbuild","internal/doccheck","internal/gameapi","internal/guibuild","internal/httpapi","internal/httpgolden","internal/pack"],
+    "historical_packages": ["internal/alchimie","internal/apppack","internal/catalog","internal/conexiuni","internal/contentops","internal/contentrails","internal/contexto","internal/graph","internal/hopcli","internal/intrusul","internal/lant","internal/mobilepack","internal/perechi","internal/pyrandom","internal/roeduclient","internal/session","internal/strictjson"],
+    "complete_disjoint_partition": true,
+    "sole_embed_exception": "internal/contentrails",
+    "current_test_runs": 1156,
+    "current_test_passes": 1139,
+    "historical_test_runs_and_passes": 791,
+    "original_complete_race_authority": true,
+    "same_SHA_benchmark": true,
+    "cross_SHA_actual_runtime_demonstrated": false,
+    "cross_SHA_support_scope": "contract fixtures plus independently verified source-policy/key binding"
+  },
+  "verdict": "APPROVE E10 lighter-gate milestone with performance note: full 13.64min meets 15min target; warm unit 5.42min exceeds aspirational 5min. Coverage/source bindings verified; no assertion reductions or synthetic current events.",
+  "no_reviewer_source_writes": true,
+  "post_run_docs_edits": "Orchestrator began docs-only qualification after both gates; implementation unchanged."
+}

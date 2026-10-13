@@ -15,8 +15,8 @@ race evidence only when every input of the reused tests remains identical.
 - [x] 2026-10-13T07:25Z: Read handover, E10, loop and repository instructions; create branch from c352ff4205231a1728355e886003a5301bf66701.
 - [x] 2026-10-13T07:30Z: Independently inspect wrapper persistence and native read dependencies.
 - [x] 2026-10-13T07:41Z: Implement reuse, 64 focused cases and bounded browser workers; first pinned shell passes; independent source review resolved all findings.
-- [ ] Run cheap checks, independent review, clean unit and one full; record timings.
-- [ ] Publish the feature branch and update the programme ledger.
+- [x] 2026-10-13T10:04Z: 71 pinned focused cases, cold unit27, full37 and warm unit27 pass at d98fe50e; independent evidence review recorded.
+- [x] Published source d98fe50e; qualification documentation and programme ledger follow.
 
 ## 3. Surprises & Discoveries
 
@@ -43,16 +43,19 @@ forces original execution; the fresh whole serving/API suites remain mandatory.
 
 ## 5. Outcomes & Retrospective
 
-Clean qualification pending. Pinned-shell diagnostic checks passed 64 cases and
-documentation checks; final patched verification precedes the commit. Prior unit was 20.8 minutes and full
-34.5 minutes (accepted c9017b5b evidence); no improvement is claimed yet.
+Qualified source `d98fe50efbb95de688124a97fa51f5b55e706d43`: cold unit27
+21.44 minutes; full37 13.64 minutes (previous 34.44); warm unit27 5.42 minutes
+(previous about 21). Full preserved 933 browser cases, nine exact PNGs, PG, parity,
+axe, vitals and CSP0. Warm reuse retained 17 historical package roots and reran 23.
+The five-minute warm target was missed by 25 seconds; conservative fresh coverage
+is retained. Evidence bindings and commands: [qualification](../reviews/gui-lighter-gates/qualification.json).
 
 ## 6. Context and Orientation
 
 `scripts/gui-repo-hook.mjs` calls nativeUnit during both unit and full. The kit SDK
 binds execution actions/logs into `.gate/<target>/result.json`. The wrapper verifies
 the source and protected files after the task. `frontend/playwright.gui.config.mjs`
-currently restricts full browsers to two workers despite the four-worker cap.
+now honors the committed four-worker cap and a lower wrapper resource limit.
 
 ## 7. Plan of Work
 
@@ -85,8 +88,9 @@ during a gate, overwrite canonical keepers or clean another session's resources.
 ## 11. Artifacts and Notes
 
 Actual results live in `.gate/unit/result.json` and `.gate/full/result.json`.
-Record command, literal SHA, duration and SHA-256 after each actual run. Operator:
-agent:codex (PROGRAM E8). No runtime or acceptance result exists for this branch yet.
+Commands, literal SHA, timings and result hashes are recorded in qualification.json.
+Operator: agent:codex (PROGRAM E8). Independent verification is retained alongside it.
+The one rolling mirror retains current unit/full evidence; compact records survive later replacement.
 
 ## 12. Interfaces and Dependencies
 

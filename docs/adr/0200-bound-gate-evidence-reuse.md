@@ -1,7 +1,7 @@
 # ADR-0200: Bound Cat gate evidence reuse
 
 Date: 2026-10-13
-Status: Proposed; qualification pending
+Status: Accepted (2026-10-13 qualification addendum)
 Authority: [ADR-0199](0199-owner-no-device-checkpoint-agent-lands-m3-m4.md), PROGRAM E10
 
 ## Context
@@ -58,3 +58,11 @@ generated files matching native provenance-reader selectors enter the input key.
 This reuses historical content assertions under identical audited source/data
 inputs; it does not assert identical compiler inputs or newly executed tests.
 The exact signature and boundary evidence are in the [audit](../reviews/gui-lighter-gates/native-source-audit.md).
+
+## Qualification 2026-10-13
+
+Source d98fe50e passed cold unit27, full37 and warm unit27. Full took 13.64
+minutes versus 34.44; warm unit took 5.42 minutes versus about21. The five-minute
+unit target remains missed by25seconds; no coverage was removed to reach it.
+Independent source/evidence verification and exact bindings are retained in
+[qualification](../reviews/gui-lighter-gates/qualification.json).

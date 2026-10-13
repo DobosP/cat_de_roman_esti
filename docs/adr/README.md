@@ -168,4 +168,4 @@ Parallel lanes also allocated0188/0189 independently. All four full-filename bod
 
 - [0199](0199-owner-no-device-checkpoint-agent-lands-m3-m4.md) — owner removes the device checkpoint, accepts M2 on its gate evidence, delegates M3/M4 landing to the agent and sets the gate cadence (programme E10).
 
-- [0200](0200-bound-gate-evidence-reuse.md) — proposed bound same-SHA unit and unchanged-input native race reuse, with wrapper-bounded browser workers; qualification pending.
+- [0200](0200-bound-gate-evidence-reuse.md) — accepted bound same-SHA unit and audited unchanged-input native race reuse; full13.64min and warm unit5.42min with all assertions preserved.
