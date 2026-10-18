@@ -7,7 +7,8 @@
 // server actions update that record. Never throws: a failed upload must not break gameplay.
 
 import { postAuth } from "./api/auth";
-import { recentScores, scoreBoard, type GameScoreEntry } from "./scores";
+import { recentScores, scoreBoard } from "./scores/read";
+import type { GameScoreEntry } from "./scores/core";
 
 let enabled = false;
 let didFullSync = false;

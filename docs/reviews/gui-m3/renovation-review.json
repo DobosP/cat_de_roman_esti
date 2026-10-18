@@ -1,0 +1,209 @@
+{
+  "schema": 1,
+  "created_utc": "2026-10-18T18:04:58.814938+00:00",
+  "status": "INDEPENDENT_FOCUSED_EVIDENCE_VERIFIED_BUDGET_FAIL",
+  "scope": "Read-only audit of retained actual focused evidence. No native command/gate/test/build/browser was rerun; only this scratch review was written. This is not unit/full, M3/M4, landing or production acceptance.",
+  "inputs": {
+    "metadata_sha256": "1035c14be8a1ec4d061476d95a3f36411efa94a4d9c964196698d8c0ccb50682",
+    "archive_sha256": "a23f88d53ba29e78fd00fd9c64357e648b54c1e9e375bd0ecc835a1a928eb7a1",
+    "archive_bytes": 116635,
+    "regular_payload_files": 40,
+    "raw_payload_bytes": 656211,
+    "actual_command_result_sha256": "10919571c90663fd066a8eef283d49197cf8a8a906d213f56370f7e1e3f40108",
+    "actual_browser_report_sha256": "6887b4047076ca6c7fe6b0563f686abb5674f21732ca597da9609056d8806e71",
+    "actual_discovery_sha256": "7448c7508974596a74387a6f7dba3fea9b0de531316333afbc42230fd97472e5",
+    "actual_budget_report_sha256": "e633e79d015587a1a02656640d7e8ebaf37285141d3f74337dad3ef9aba8f4b0"
+  },
+  "context": {
+    "schema": 1,
+    "invocation": "e92e1497-52da-471f-977f-57d83195c8b1",
+    "target": "shell",
+    "sha": "e75518c1473be3a32ec2a0f2e1565764bbcf5d5b",
+    "tree_sha256": "2c67bcbd4d34d3934f861ef0b41e8d47563491a90116d6a3768fc55029e98ba6",
+    "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+    "config_sha256": "b88e00bfaad7d77592262b79d6ae633e8979ce1ff54431d722601db5aea7a351",
+    "config_path": ".gate/shell/wrapper-kit-config.json",
+    "config_file_sha256": "f38256ad0b6dc5a35a1b5cab89d2c7b7b193c5e071a1e94ea4fb828abc5caed2",
+    "operator": "agent:codex"
+  },
+  "findings": [],
+  "verified": {
+    "all6_command_stdout_stderr_sizes_hashes_and_exit_sidecars_match": true,
+    "wrapper_build_and_browser_contexts_agree": true,
+    "wrapper_exit_remains1": true,
+    "app_and_tools_typechecks": 0,
+    "native_lint_and_kit_ast": "pass",
+    "build_and_combined_startup_budget": "pass; native log reports37.29KiB against120KiB",
+    "focused_tests": {
+      "tests": 38,
+      "pass": 38,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "todo": 0
+    },
+    "style_audit": {
+      "status": "pass",
+      "counters": {
+        "css_bags": 119,
+        "nested_css_bags": 8,
+        "declarations": 210,
+        "numeric_declarations": 10,
+        "unitless_numeric": 10,
+        "custom_numeric": 0,
+        "raw_style_attributes": 0
+      },
+      "findings": 0,
+      "audited_tsx_files": 31,
+      "sites_sha256": "1ad515eaa46c2c2825223e9bdda0c58b45ed9397c24b2c67e10191fdc91ef042",
+      "report_sha256": "e08bfadb6434e59aecc9db1968d2dea1f366c1c25ed4f81098d16e6d2493a745"
+    },
+    "discovery": {
+      "cases": 933,
+      "identity_set_exact_to_frozen_inventory": true,
+      "all_unique": true,
+      "note": "Discovery is enumeration only, not933 executed tests."
+    },
+    "selected_actual_browser": {
+      "cases": 26,
+      "passed": 26,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "attempts_each": 1,
+      "retry_each": 0,
+      "errors": 0,
+      "projects": {
+        "desktop": 15,
+        "motion-on": 11
+      },
+      "files": {
+        "frontend/e2e/gui-m2-pilot-journeys.spec.mjs": 22,
+        "frontend/e2e/release-recovery-storage.spec.mjs": 4
+      },
+      "exact_selected_frozen_inventory_set": true,
+      "mobile_execution": false
+    },
+    "all8_declared_current_source_hashes_match": true,
+    "all7_packed_current_source_captures_match": true,
+    "packed_source_sha256": {
+      "frontend/src/App.tsx": "2cc18480c0035bc3d73f1899b27569c70ea3f5707f586c432cc29cfdaaf68cae",
+      "frontend/src/lazyScreen.ts": "f2a421153c774ebaf7ecf495ce4e874edcb79f3a81a9103d8b2e4ba4f325db3a",
+      "frontend/src/screens/AlchimieChallenge.tsx": "dd87820ee26344d7b8bd22ba0faf38344df453f15d513d631dc929753b33a2c0",
+      "frontend/src/styles/shared-game-controls.css": "bf6d16fa3f1d834550e9aaca124f09fa4385d4acec0968617b0d723af33ced28",
+      "scripts/gui-game-preflight.sh": "b38c5de4e418549fdaff93107dfe7946330ae71ad1652bea8ed809be2d8c87c9",
+      "scripts/gui-style-audit.mjs": "eb4f7a1f4775b8e0da72e4832c2527eb5c14602c7ef1e5dd822dbc872b46cd5e",
+      "frontend/tests/gui-style-audit.test.mjs": "a3fee6e4c5fd98a52b5aee584c793a253d2a3a0bf8174417b8f346edafa135ef"
+    },
+    "optimizer_reversed": {
+      "vite_base_sha256": "58f61c2b84b46bc3df3a6ef47b9303dce7839eab0dcea9f630af2b672cae1e8e",
+      "three_added_files_absent": [
+        "frontend/scripts/gui-iso-router-export.mjs",
+        "frontend/scripts/gui-iso-router-export.d.mts",
+        "frontend/tests/gui-iso-router-export.test.mjs"
+      ]
+    },
+    "score_split_unapplied": {
+      "scores_sha256": "4527676985c4f107cf38f48eed312d0e654abc9db298cf522751fdc6b9cb5d2c",
+      "scoreSync_sha256": "8a2fd5bd24bc0c42e2bbb2d46077058a3e11717d3f48bcab001fb2ed23ce5f9e",
+      "six_new_files_absent": [
+        "frontend/src/scores/core.ts",
+        "frontend/src/scores/read.ts",
+        "frontend/src/scores/record.ts",
+        "frontend/src/scores/daily.ts",
+        "frontend/src/scores/history.ts",
+        "frontend/tests/helpers/import-ts-graph.mjs"
+      ]
+    }
+  },
+  "routes": [
+    {
+      "route": "/",
+      "js_gzip": 28533,
+      "js_limit": 40960,
+      "css_gzip": 9652,
+      "status": "pass"
+    },
+    {
+      "route": "/alchimie",
+      "js_gzip": 39890,
+      "js_limit": 40960,
+      "css_gzip": 14895,
+      "status": "pass"
+    },
+    {
+      "route": "/alchimie?mode=challenges",
+      "js_gzip": 44322,
+      "js_limit": 40960,
+      "css_gzip": 14895,
+      "status": "fail"
+    },
+    {
+      "route": "/alchimie?mode=explore",
+      "js_gzip": 39890,
+      "js_limit": 40960,
+      "css_gzip": 14895,
+      "status": "pass"
+    },
+    {
+      "route": "/cald-rece",
+      "js_gzip": 39615,
+      "js_limit": 40960,
+      "css_gzip": 11687,
+      "status": "pass"
+    },
+    {
+      "route": "/clasament",
+      "js_gzip": 25569,
+      "js_limit": 40960,
+      "css_gzip": 10087,
+      "status": "pass"
+    },
+    {
+      "route": "/conexiuni",
+      "js_gzip": 38588,
+      "js_limit": 40960,
+      "css_gzip": 11856,
+      "status": "pass"
+    },
+    {
+      "route": "/intrusul",
+      "js_gzip": 37395,
+      "js_limit": 40960,
+      "css_gzip": 11396,
+      "status": "pass"
+    },
+    {
+      "route": "/lant",
+      "js_gzip": 39497,
+      "js_limit": 40960,
+      "css_gzip": 12108,
+      "status": "pass"
+    },
+    {
+      "route": "/perechi",
+      "js_gzip": 38226,
+      "js_limit": 40960,
+      "css_gzip": 11581,
+      "status": "pass"
+    }
+  ],
+  "remaining_failure": {
+    "route": "/alchimie?mode=challenges",
+    "js_gzip": 44322,
+    "unchanged_limit": 40960,
+    "excess": 3362,
+    "css_gzip_recorded_separately": 14895,
+    "other_routes_passing": 9,
+    "home_target30720": "met28533"
+  },
+  "qualification_limits": [
+    "Only26 selected desktop/motion/recovery cases ran. The933 identity enumeration is not the full browser matrix; no mobile/device execution occurred.",
+    "The archive retains actual command/browser/budget reports and selected source captures. This audit cross-checks their bytes, identities, hashes and totals; it does not independently recompress unretained emitted assets or verify every referenced lint child artifact.",
+    "LCP/INP remain listed unmeasured in the budget report; no PNG, full CSP/vitals/PG, canonical unit/full or milestone acceptance is inferred.",
+    "Only declared/packed source captures were rehashed, not the entire dirty working tree. Later documentation changes do not turn this dirty-tree diagnostic into an exact clean-SHA gate.",
+    "Owned runtime cleanup is being handled by root separately and is not established by this archive.",
+    "The reviewed score proposal remains unapplied; this record neither grants nor assumes the requested score/source-freeze exception."
+  ],
+  "conclusion": "Focused functionality checks pass on the recorded dirty source; the actual diagnostic remains FAIL_BUDGET_ONLY with3362bytes to remove from Challenge under the unchanged cap."
+}

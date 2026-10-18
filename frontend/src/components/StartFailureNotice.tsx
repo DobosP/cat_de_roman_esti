@@ -1,4 +1,5 @@
 import { Csp } from "./CspStyle";
+import "../styles/shared-game-controls.css";
 import { useLayoutEffect, useRef } from "preact/hooks";
 
 /** A failed new round remains visible until the player retries or resumes a game. */
@@ -20,7 +21,7 @@ export function StartFailureNotice({ failed, reserveSpace = false }: {
       className="card start-failure-notice"
       role={failed ? "alert" : undefined}
       aria-hidden={!failed || undefined}
-      css={{ padding: "14px", margin: "0px", visibility: failed ? "visible" : "hidden" }}
+      css={{ visibility: failed ? "visible" : "hidden" }}
     >
       Nu am putut porni jocul. Am păstrat opțiunile alese. Poți încerca din nou.
     </Csp.p>

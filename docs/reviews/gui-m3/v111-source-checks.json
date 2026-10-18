@@ -1,0 +1,111 @@
+{
+  "schema": 1,
+  "scope": "Cat core-v1.11 emitted source diagnostic; clean M3 unit/full pending",
+  "operator": "agent:codex (PROGRAM E8)",
+  "command": "GATE_OPERATOR=agent:codex bash scripts/gate.sh shell --sha e75518c1473be3a32ec2a0f2e1565764bbcf5d5b --dirty --parallel 2 < initial-split-checks.sh",
+  "sha": "e75518c1473be3a32ec2a0f2e1565764bbcf5d5b",
+  "dirty": true,
+  "tree_sha256": "d935a7b82c0d9b9cbe1c73d069328409d25c1eeec2e783da01529c6bcd243d86",
+  "report_sha256": "dc12f64e6979ed0db6d676313ed10d498b11797d4eb60da352c2019fbbcfc3ae",
+  "emitted_report_sha256": "ae975fb98dc7996a5c847043062f2bcc0ce4ee29771f09547864a47ba4ebbe62",
+  "status": "fail",
+  "checks": [
+    {
+      "name": "types",
+      "exit_code": 0
+    },
+    {
+      "name": "lint",
+      "exit_code": 0
+    },
+    {
+      "name": "targeted-frontend",
+      "exit_code": 0
+    },
+    {
+      "name": "frontend-build",
+      "exit_code": 0
+    },
+    {
+      "name": "emitted-budgets",
+      "exit_code": 1
+    },
+    {
+      "name": "style-audit",
+      "exit_code": 0
+    },
+    {
+      "name": "doc-check",
+      "exit_code": 0
+    },
+    {
+      "name": "docs-gate",
+      "exit_code": 0
+    }
+  ],
+  "focused_frontend_cases": 84,
+  "route_js": [
+    {
+      "route": "/",
+      "actual_gz": 28586,
+      "limit_gz": 40960,
+      "status": "pass"
+    },
+    {
+      "route": "/alchimie",
+      "actual_gz": 35700,
+      "limit_gz": 40960,
+      "status": "pass"
+    },
+    {
+      "route": "/alchimie?mode=challenges",
+      "actual_gz": 46793,
+      "limit_gz": 40960,
+      "status": "fail"
+    },
+    {
+      "route": "/alchimie?mode=explore",
+      "actual_gz": 35700,
+      "limit_gz": 40960,
+      "status": "pass"
+    },
+    {
+      "route": "/cald-rece",
+      "actual_gz": 42005,
+      "limit_gz": 40960,
+      "status": "fail"
+    },
+    {
+      "route": "/clasament",
+      "actual_gz": 25619,
+      "limit_gz": 40960,
+      "status": "pass"
+    },
+    {
+      "route": "/conexiuni",
+      "actual_gz": 40506,
+      "limit_gz": 40960,
+      "status": "pass"
+    },
+    {
+      "route": "/intrusul",
+      "actual_gz": 37559,
+      "limit_gz": 40960,
+      "status": "pass"
+    },
+    {
+      "route": "/lant",
+      "actual_gz": 41882,
+      "limit_gz": 40960,
+      "status": "fail"
+    },
+    {
+      "route": "/perechi",
+      "actual_gz": 38388,
+      "limit_gz": 40960,
+      "status": "pass"
+    }
+  ],
+  "cleanup_verified": true,
+  "next": "Reduce remaining initial source bytes without changing caps, frozen helpers or gameplay; then clean candidate unit/full."
+}

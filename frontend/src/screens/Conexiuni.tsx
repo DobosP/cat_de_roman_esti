@@ -11,8 +11,8 @@ import { Csp, CspButton } from "../components/CspStyle";
 // -> .4, spring 320/20 per roedu-ui ADR-0021), the feedback swap and the solved
 // rows; the wrong-guess shake and the solved-row entrance are CSS keyframes.
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "preact/hooks";
-import { Presence, type PresenceVariant } from "@roedu/ui/motion";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "preact/hooks";
+import { Presence, useIsPresent, type PresenceVariant } from "@roedu/ui/motion";
 import { ApiError } from "../api/client";
 import { createGameActionOwner, recoverOwnedGameAction, type GameActionTicket } from "../gameActionRecovery.mjs";
 import {
@@ -25,6 +25,7 @@ import {
 } from "../api/conexiuni";
 import { Button, type ToastKind } from "@roedu/ui";
 import { GameShell } from "../components/GameShell";
+import { CONEXIUNI_HELP } from "../gameHelp/conexiuni.mjs";
 import { GameIntro } from "../components/GameIntro";
 import { GameOptions } from "../components/GameOptions";
 import { GameSetupOptions } from "../components/GameSetupOptions";
@@ -40,7 +41,7 @@ import { sound } from "../sound";
 import { categoryColor, categoryLabel } from "../categories";
 import { selectionKey } from "../conexiuniSelectionKey";
 import { CategoryPicker } from "../components/CategoryPicker";
-import { bestScore } from "../scores";
+import { bestScore } from "../scores/read";
 import { gameByKey } from "../games";
 import { buildSharePayload, copyResult, formatDayKey, stableKey, todayLocal } from "../share";
 
@@ -101,6 +102,8 @@ const unsolvedTileIds = (fresh: ConexiuniState) => {
 
 export default function Conexiuni({ onExit, onToast }: SelfProps) {
   const active = useActiveGame(GAME_KEY);
+  const isPresent = useIsPresent();
+  const liveRef = useRef(true), lifetimeRef = useRef(0);
   const [state, setState] = useState<ConexiuniState | null>(null);
   const [startFailed, setStartFailed] = useState(false);
   const startInFlight = useRef(false);
@@ -108,8 +111,12 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   const [busy, setBusy] = useState(false);
   const [actionSync, setActionSync] = useState<ActionSync | null>(null);
   const actionOwner = useMemo(() => createGameActionOwner(active), [active]);
-  useEffect(() => () => actionOwner.invalidate(), [actionOwner]);
-  const actionsLocked = busy || loading || actionSync !== null;
+  useLayoutEffect(() => {
+    liveRef.current = isPresent;
+    if (!isPresent) actionOwner.invalidate();
+    return () => { liveRef.current = false; lifetimeRef.current += 1; actionOwner.invalidate(); };
+  }, [actionOwner, isPresent]);
+  const actionsLocked = !isPresent || busy || loading || actionSync !== null;
   const [selected, setSelected] = useState<string[]>([]);
   // A server-confirmed one-away or duplicate set that must change before resubmission.
   // Only the oneAway flag may surface the stronger 3-of-4 guidance.
@@ -180,6 +187,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
 
   const applyResumedGame = useCallback(
     (s: ConexiuniState, { terminal, bypassed }: { terminal: boolean; bypassed: boolean }) => {
+      if (!liveRef.current) return;
       actionOwner.invalidate();
       setActionSync(null);
       setBusy(false);
@@ -206,13 +214,23 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     isTerminal: isTerminalResume,
     setPending: setLoading,
     onResume: applyResumedGame,
+    onReentry: () => {
+      const savedId = active.peek();
+      startInFlight.current = false;
+      setBusy(false); setStartFailed(false); setLoading(savedId !== null);
+      setSelected([]); setBlockedGuess(null); setHint(null);
+      if (!savedId && state) {
+        if (!finished) setActionSync({ gameId: state.game_id, kind: "failed" });
+      } else { setState(null); setActionSync(null); }
+    },
     onDailyBypassed: () => onToast("Ai continuat jocul liber început. Provocarea zilei te așteaptă după ce îl termini.", "info"),
   });
 
   const start = useCallback(
     async (mode: StartMode) => {
-      if (startInFlight.current) return;
+      if (!liveRef.current || startInFlight.current) return;
       startInFlight.current = true;
+      const epoch = lifetimeRef.current;
       actionOwner.invalidate();
       cancelResume();
       setStartFailed(false);
@@ -226,6 +244,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
                 difficulty: mode.difficulty,
                 category: category ?? undefined,
               });
+        if (!liveRef.current || epoch !== lifetimeRef.current) return;
         setState(s);
         setActionSync(null);
         setBusy(false);
@@ -239,10 +258,12 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
         setShuffleNonce(0);
         setShake(0);
       } catch {
-        setStartFailed(true);
+        if (liveRef.current && epoch === lifetimeRef.current) setStartFailed(true);
       } finally {
-        startInFlight.current = false;
-        setLoading(false);
+        if (epoch === lifetimeRef.current) {
+          startInFlight.current = false;
+          if (liveRef.current) setLoading(false);
+        }
       }
     },
     [active, actionOwner, cancelResume, dismissRecovery, category, difficulty],
@@ -276,7 +297,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
 
   // Record the score + best once, on transition into a finished state.
   useEffect(() => {
-    if (!state || !finished || state.score === undefined) return;
+    if (!liveRef.current || !state || !finished || state.score === undefined) return;
     const detail = state.won
       ? `${state.mistakes} ${state.mistakes === 1 ? "greșeală" : "greșeli"}`
       : `pierdut · ${state.mistakes} greșeli`;
@@ -288,7 +309,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
       category: state.board_category,
     }).then((outcome) => {
       active.forgetIfCurrent(state.game_id);
-      if (!current || !outcome) return;
+      if (!current || !liveRef.current || !outcome) return;
       const { isBest, isPuzzleBest } = outcome;
       if (state.won) sound.playWin();
       else sound.playError();
@@ -303,7 +324,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     return () => {
       current = false;
     };
-  }, [active, finished, puzzleKey, recordOnce, state]);
+  }, [active, finished, isPresent, puzzleKey, recordOnce, state]);
 
   const toggle = useCallback(
     (id: string) => {
@@ -340,7 +361,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   }, [actionsLocked, actionOwner, finished]);
 
   const beginAction = useCallback((previous: ConexiuniState) => {
-    if (startInFlight.current) return null;
+    if (!liveRef.current || startInFlight.current) return null;
     const ticket = actionOwner.begin(previous.game_id);
     if (!ticket) return null;
     if (!actionOwner.owns(ticket)) {
@@ -354,7 +375,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   }, [actionOwner]);
 
   const mayAdoptAction = useCallback((ticket: GameActionTicket) => {
-    if (!actionOwner.isCurrent(ticket)) return false;
+    if (!liveRef.current || !actionOwner.isCurrent(ticket)) return false;
     if (!actionOwner.owns(ticket)) {
       setActionSync({ gameId: ticket.gameId, kind: "changed" });
       return false;
@@ -402,7 +423,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   }, [actionOwner, active, applyAuthoritativeState, mayAdoptAction, onToast]);
 
   const retryActionSync = useCallback(async () => {
-    if (!state || busy || !actionSync) return;
+    if (!liveRef.current || !state || busy || !actionSync) return;
     if (actionSync.kind === "changed") {
       actionOwner.invalidate();
       setActionSync(null);
@@ -493,8 +514,9 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     applyAuthoritativeState, reconcileAction, actionOwner]);
 
   const copyShare = useCallback(async () => {
-    if (!sharePayload) return;
+    if (!liveRef.current || !sharePayload) return;
     const ok = await copyResult(sharePayload);
+    if (!liveRef.current) return;
     if (ok) onToast("Copiat!", "info");
     else onToast("Nu am putut copia.", "error");
   }, [sharePayload, onToast]);
@@ -502,7 +524,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   // An ordinary live-board exit is permanent. Uncertain actions preserve the pointer
   // for resume; terminal score completion owns its conditional cleanup.
   const handleExit = useCallback(() => {
-    if (startInFlight.current) return;
+    if (!liveRef.current || startInFlight.current) return;
     if (!finished && state && !busy && !actionSync && !actionOwner.hasPending()) {
       active.forgetIfCurrent(state.game_id);
     }
@@ -510,15 +532,16 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     setSelected([]);
     setBlockedGuess(null);
     setHint(null);
+    liveRef.current = false;
     onExit();
   }, [active, state, busy, actionSync, actionOwner, finished, onExit]);
 
   // Keyboard: Enter submits a full selection, Escape/Backspace clears it. Inert when
   // no board is active, while a request is in flight, or once the game is finished.
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!state || finished) return;
     const onKey = (e: KeyboardEvent) => {
-      if (actionsLocked || actionOwner.hasPending()) return;
+      if (!liveRef.current || actionsLocked || actionOwner.hasPending()) return;
       const target = e.target instanceof Element ? e.target : null;
       if (
         e.defaultPrevented ||
@@ -577,7 +600,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
             onStart={() => void start({ kind: "seed", difficulty })}
             onDaily={() => void start({ kind: "daily" })}
             dailyLabel="Provocarea zilei"
-            starting={loading}
+            starting={!isPresent || loading}
           >
             <GameSetupOptions>
             <DifficultyPicker
@@ -819,7 +842,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
           </Csp.div>
         )}
 
-        <GameOptions game={GAME_KEY}>
+        <GameOptions help={CONEXIUNI_HELP}>
           <Csp.div className="row wrap" css={{ gap: "8px" }}>
             {state.daily && (
               <StatBadge label="ZILNIC" value={formatDayKey(state.daily)} accent={DEF.accent} title="Provocarea zilei" />
@@ -858,7 +881,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
         {finished && (
             <ResultCard
               startFailed={startFailed}
-              actionsBusy={loading}
+              actionsBusy={!isPresent || loading}
               icon={state.won ? "🎉" : "💔"}
               title={state.won ? "Ai găsit toate grupurile!" : "Nu mai ai greșeli disponibile."}
               accent={DEF.accent}
@@ -870,7 +893,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
               onCopy={copyShare}
               onReplay={() => void start({ kind: "seed", difficulty })}
               onOptions={() => {
-                if (startInFlight.current) return;
+                if (!liveRef.current || startInFlight.current) return;
                 actionOwner.invalidate();
                 setActionSync(null);
                 setBusy(false);

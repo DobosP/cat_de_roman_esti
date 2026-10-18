@@ -5,6 +5,8 @@
 // the document so it survives the rewrite exactly as before.
 
 import { useLocation } from "preact-iso";
+import { useContext } from "preact/hooks";
+import { ScreenURL } from "../screenLocation";
 
 export interface DailyIntent {
   active: boolean;
@@ -12,7 +14,8 @@ export interface DailyIntent {
 }
 
 export function useDailyIntent(): DailyIntent {
-  const { url, route } = useLocation();
+  const { url: liveURL, route } = useLocation();
+  const url = useContext(ScreenURL) ?? liveURL;
   const target = new URL(url, "http://local.invalid");
   const active = target.searchParams.get("challenge") === "daily";
   const consume = () => {

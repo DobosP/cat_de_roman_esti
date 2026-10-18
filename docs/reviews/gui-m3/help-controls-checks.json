@@ -1,0 +1,102 @@
+{
+  "schema": 1,
+  "scope": "M3 per-game help/control packaging diagnostic; Challenge budget blocks qualification",
+  "operator": "agent:codex (PROGRAM E8)",
+  "command": "GATE_OPERATOR=agent:codex bash scripts/gate.sh shell --sha e75518c1473be3a32ec2a0f2e1565764bbcf5d5b --dirty --parallel 2 < budget-checks.sh",
+  "sha": "e75518c1473be3a32ec2a0f2e1565764bbcf5d5b",
+  "dirty": true,
+  "tree_sha256": "398eaaf4869bcb16bd8de4f6c13e71aff0885bb6c6bca6cf39cb84ccf08d828e",
+  "report_sha256": "8634b0e3473fb3a276de7c1b2251933d3cf623a6ffa94c1e9b638bbf7ca71f15",
+  "emitted_report_sha256": "03771a02d4b0fe28276ab8fa13c61444de73e901efdceec79f8b9ffed6feea62",
+  "status": "fail",
+  "checks": [
+    {
+      "name": "frontend-build",
+      "exit_code": 0
+    },
+    {
+      "name": "emitted-budgets",
+      "exit_code": 1
+    },
+    {
+      "name": "doc-check",
+      "exit_code": 0
+    },
+    {
+      "name": "docs-gate",
+      "exit_code": 0
+    }
+  ],
+  "prior_source_checks": {
+    "focused_cases": 88,
+    "types_lint_style_docs": "pass",
+    "result_sha256": "f4a5e14762db6a92e35abda2b005aeb17758de2dd08b9d7aed920b5bcc389767",
+    "subsequent_delta": "Vite priority5 share-module group only; build includes typecheck, actual emitted closure and docs rechecked"
+  },
+  "route_js": [
+    {
+      "route": "/",
+      "actual_gz": 28516,
+      "limit_gz": 40960,
+      "status": "pass"
+    },
+    {
+      "route": "/alchimie",
+      "actual_gz": 37864,
+      "limit_gz": 40960,
+      "status": "pass"
+    },
+    {
+      "route": "/alchimie?mode=challenges",
+      "actual_gz": 45806,
+      "limit_gz": 40960,
+      "status": "fail"
+    },
+    {
+      "route": "/alchimie?mode=explore",
+      "actual_gz": 37864,
+      "limit_gz": 40960,
+      "status": "pass"
+    },
+    {
+      "route": "/cald-rece",
+      "actual_gz": 40592,
+      "limit_gz": 40960,
+      "status": "pass"
+    },
+    {
+      "route": "/clasament",
+      "actual_gz": 25546,
+      "limit_gz": 40960,
+      "status": "pass"
+    },
+    {
+      "route": "/conexiuni",
+      "actual_gz": 39568,
+      "limit_gz": 40960,
+      "status": "pass"
+    },
+    {
+      "route": "/intrusul",
+      "actual_gz": 37965,
+      "limit_gz": 40960,
+      "status": "pass"
+    },
+    {
+      "route": "/lant",
+      "actual_gz": 40478,
+      "limit_gz": 40960,
+      "status": "pass"
+    },
+    {
+      "route": "/perechi",
+      "actual_gz": 38800,
+      "limit_gz": 40960,
+      "status": "pass"
+    }
+  ],
+  "cleanup_verified": true,
+  "tradeoff": "Explore now pays the entire shared controls closure:37864 vs35700 before help/grouping. Home/Ranking do not load those controls. No caps or assertion removals.",
+  "next": "Challenge45806 exceeds40960 by4846. Source-only action deferral and protected-score split rejected as insufficient or unsafe; continue independent core S0b work before a new bounded Cat design.",
+  "retention": "One rolling source/runtime mirror is retained. Earlier shell raw trees were superseded by later checks; their saved result files, hashes, console logs and independent review are historical records, not a claim that old raw streams remain. Current m3-budget raw streams and emitted assets are the latest retained setup."
+}

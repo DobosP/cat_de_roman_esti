@@ -1,0 +1,87 @@
+{
+  "schema": 1,
+  "scope": "M3 source checks only; clean unit/full and milestone acceptance pending",
+  "operator": "agent:codex (PROGRAM E8)",
+  "command": "GATE_OPERATOR=agent:codex bash scripts/gate.sh shell --sha d30b0aa47248b9a5944e015f2daf54cc5a795617 --dirty --parallel 2",
+  "sha": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+  "dirty": true,
+  "tree_sha256": "b5ff171d3c0376b35b81543560854dca29bee3199263dbd396dcdb907a901bd3",
+  "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+  "report_sha256": "596c90780cb58142f7eb10dd1617160300250f58d120d9ca75134b4b642f906f",
+  "status": "pass",
+  "checks": [
+    {
+      "name": "types",
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "f29bc3e1fe96d9bdaf4bfff3ac9fac2885480c4241d841bac8546290fd3a04b6"
+    },
+    {
+      "name": "lint",
+      "exit_code": 0,
+      "stdout_sha256": "2055cd3c2afd59bea7eb5e968138d423e46c50a320c5775bc8a3c0095a69d8e0",
+      "stderr_sha256": "af2116dbe859a7ad9c93fc3775a7ce2cf3787dedf2e32c158c2a33d9193fad0c"
+    },
+    {
+      "name": "targeted-frontend",
+      "exit_code": 0,
+      "stdout_sha256": "2f2a1ac0ac22f4320d0c4040d75457fbadad07ccae2638ab43b3631c52221ec0",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "style-audit",
+      "exit_code": 0,
+      "stdout_sha256": "4f220f09a1ddcead2c76791a987352e84779bdaa26599f594ab0e2414ec3fc8d",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "gofmt",
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "compile-scaffolds",
+      "exit_code": 0,
+      "stdout_sha256": "0c4a94d45acea8f61f2ef7ac461893b29b1e1d506af70e6e142b17ea270abe6c",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "managed-delivery",
+      "exit_code": 0,
+      "stdout_sha256": "092c0ad6c5efb04471cba757e05c7092caeb3004fc80450a1b968e5897de5728",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "httpapi-vet",
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "doc-check",
+      "exit_code": 0,
+      "stdout_sha256": "4cba748fb282d1093da2e6758539bb00fa7d9b37fc7db166c4c3a8cdee647003",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "docs-gate",
+      "exit_code": 0,
+      "stdout_sha256": "b0fe6cd615aa13e1f86c53da86f88fd28b31ca96b8b50f60b81e35471fafa22c",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "frontend_tests": 69,
+  "style_audit": {
+    "bags": 161,
+    "nested_bags": 9,
+    "declarations": 312,
+    "findings": 0
+  },
+  "prior_diagnostics": {
+    "round1": "8 Preact type errors fixed; shell tests not reached",
+    "round2": "63 lint errors fixed; 91 of 554 tests refused shell because they require unit/full; Go lacked CGO and compile scaffolds. No test/rule changes. Round3 uses69 targeted tests and correct Go prerequisites."
+  },
+  "cleanup_verified": true,
+  "retention": "One rolling runner; compact reports in owned scratch. No claim that superseded runner logs remain after refresh."
+}

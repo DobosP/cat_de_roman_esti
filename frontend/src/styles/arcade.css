@@ -421,6 +421,11 @@ input:focus-visible {
   backdrop-filter: blur(14px);
 }
 
+/* M3: reported 0.25–2 GiB opts out; unknown/invalid/>2 GiB keeps 14px. */
+.home-screen[data-card-blur="off"] .card {
+  backdrop-filter: none;
+}
+
 .card-hover,
 .game-card {
   transition:

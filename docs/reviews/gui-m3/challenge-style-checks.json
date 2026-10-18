@@ -1,0 +1,105 @@
+{
+  "schema": 1,
+  "date": "2026-10-16",
+  "scope": "Dirty M3 Challenge style extraction emitted preflight; route budget remains FAIL",
+  "operator": "agent:codex (PROGRAM E8)",
+  "command": "GATE_OPERATOR=agent:codex bash scripts/gate.sh shell --sha e75518c1473be3a32ec2a0f2e1565764bbcf5d5b --dirty --parallel 2 < /home/dobo/work/_temp/feat__gui-cat-m3/budget-checks.sh",
+  "sha": "e75518c1473be3a32ec2a0f2e1565764bbcf5d5b",
+  "dirty": true,
+  "tree_sha256": "08f3a7877403cac91e3d610cfd18956ccb6338b0c0246ca8816da2ffc42f420d",
+  "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+  "wrapper_invocation": "758d5540-2427-4f45-8b49-73c06c506cae",
+  "outer_exit_code": 1,
+  "status": "fail",
+  "product_source_sha256": {
+    "frontend/src/screens/AlchimieChallenge.tsx": "ee880238857198b864737bcfcce44751edae904f6333cc35ea50c05fffae98fb",
+    "frontend/src/styles/alchimie.css": "7f24ce52ad73025f0de895b47feb939c33141616a7228b0f926904e43f435a87"
+  },
+  "source_fullmode_both": 33204,
+  "css_sites_transposed": 24,
+  "checks_exit_code": {
+    "frontend-build": 0,
+    "emitted-budgets": 1,
+    "doc-check": 0,
+    "docs-gate": 0
+  },
+  "route_js_gz": {
+    "/": 28531,
+    "/alchimie": 37895,
+    "/alchimie?mode=challenges": 45441,
+    "/alchimie?mode=explore": 37895,
+    "/cald-rece": 40627,
+    "/clasament": 25569,
+    "/conexiuni": 39602,
+    "/intrusul": 37994,
+    "/lant": 40512,
+    "/perechi": 38830
+  },
+  "route_css_gz": {
+    "/": 9652,
+    "/alchimie": 14520,
+    "/alchimie?mode=challenges": 14520,
+    "/alchimie?mode=explore": 14520,
+    "/cald-rece": 11312,
+    "/clasament": 10087,
+    "/conexiuni": 11481,
+    "/intrusul": 11021,
+    "/lant": 11733,
+    "/perechi": 11206
+  },
+  "route_policy": {
+    "js_limit": 40960,
+    "js_target": 30720,
+    "css_limit": null,
+    "css_status": "recorded",
+    "other_routes_pass": 9,
+    "home_target_status": "met"
+  },
+  "challenge_comparison": {
+    "historical_gz": 45806,
+    "current_gz": 45441,
+    "saving_bytes": 365,
+    "remaining_deficit_bytes": 4481,
+    "historical_result_sha256": "8634b0e3473fb3a276de7c1b2251933d3cf623a6ffa94c1e9b638bbf7ca71f15",
+    "other_route_deltas": "All9 remain passing; positive changes range15 through35bytes, so no universal reduction claim.",
+    "scope": "Route JS gzip only; CSS and total transfer are reported separately below.",
+    "historical_css_gz": 14104,
+    "current_css_gz": 14520,
+    "css_delta_bytes": 416,
+    "historical_js_css_sum": 59910,
+    "current_js_css_sum": 59961,
+    "js_css_delta_bytes": 51,
+    "explore_js_css_delta_bytes": 447
+  },
+  "combined_initial_js_css": {
+    "status": "pass",
+    "actual_gz": 38183,
+    "limit_gz": 122880,
+    "font_subsets": 4,
+    "method": "Existing checkInitialBundle level9; independent audit joins all31 actual finalized gzip sidecars to raw assets/native logs and reconstructs complete static closures."
+  },
+  "retained_proof": {
+    "root": "/home/dobo/work/_temp/feat__gui-cat-m3/challenge-style-measurement-proof",
+    "manifest_sha256": "fb5bbb60199b5668d3e6db31c3c1b7aef81a19454f3c6ac56bf6ead21c18a54f",
+    "payload_files": 121,
+    "payload_bytes": 7628758,
+    "checks_sha256": "234ee0137f9d4c0a4c5b84bf71284c4511df5316917b0fca70b8f23e9c7c52b8",
+    "route_report_sha256": "6d2a3c69da9d0db301e03f5850fcc5596d5de24848d3bb454c83e1ef1510817c",
+    "dist_manifest_sha256": "f5f23788b0c5fb7a4970b215673dc4caab544c00dd9ac82a11aeb2ed4bec0f4e",
+    "source_freeze_sha256": "4562a624c9779fa0e777fe43638821d002ced9d69692c7f79fb767907ca9d45a",
+    "independent_source_review_sha256": "a8e7f055c53444e35678aea6cf1c4fa7ad84686a58f2644afd3203ba1d40d577",
+    "independent_actual_review_sha256": "8be16cc8d396c0c1bfa58d862b27662295d87aef317472b2a294229e4016507b",
+    "actual_review_status": "INDEPENDENT_MEASUREMENT_EVIDENCE_VERIFIED_BUDGET_FAIL",
+    "cleanup_sha256": "9989cfd57a3efdc6d26487cd37db7908ba19c1201db380eb52ebe0c4a9b2b553",
+    "cleanup": "Exact2 owned aux containers and1 network removed; final project inventories empty; outer runner absent after completion."
+  },
+  "limitations": [
+    "Legacy four-command recorder has no per-child group-stop, timeout/stream cap, held-FD or all-close proof. Actual outer exit1/completed streams and independent exact cleanup prove stopped namespace only.",
+    "Audit rehashed all121 retained payload files/fullmodes and10 static closures/31 sidecars. Complete recorded source tree was reconstructed from retained rows; the audit reread selected source/evaluator seams, not every current source byte.",
+    "Historical88 focused/type/lint/style checks remain historical. This preflight ran build/typecheck, route measurement and2 doc rows only; no fresh focused/interaction/style/browser/PNG/vitals/CSP/PG/unit/full/M3 or landing acceptance.",
+    "These metadata bytes postdate the measured dirty tree. No qualification of this later metadata successor or clean source SHA is inferred.",
+    "No device testing, cap changes, assertion removals, content/helper/lock/kit edits or app-main push."
+  ],
+  "retention": "One rolling setup plus this verified selected proof. Exact pre-wrapper shell/current bytes were retained and other physical case/probe trees inventoried in place; superseded historical raw trees are not claimed available.",
+  "next": "A supported further4481-byte net Challenge JS reduction with honest CSS accounting, current focused/browser verification and exact-SHA unit/full plus independent acceptance remain before M3."
+}

@@ -8,7 +8,7 @@ import {
   recordScoreCompletionOnce,
   type RecordOutcome,
   type RecordScoreOptions,
-} from "../scores";
+} from "../scores/record";
 import { pushLatest } from "../scoreSync";
 
 export type RecordOnce = (

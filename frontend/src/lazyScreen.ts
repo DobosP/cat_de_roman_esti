@@ -7,6 +7,7 @@
 // error on the next render, so the existing recovery screen and the
 // vite:preloadError release recovery keep their original behaviour.
 import { h, type Attributes, type ComponentType, type VNode } from "preact";
+import { useState } from "preact/hooks";
 
 export interface LazyScreen<P> {
   (props: P): VNode<P & Attributes>;
@@ -25,10 +26,19 @@ export function lazyScreen<P>(load: () => Promise<{ default: ComponentType<P> }>
     );
     return pending;
   };
-  const render = (props: P): VNode<P & Attributes> => {
+  function LazyComponent(props: P): VNode<P & Attributes> {
+    const [, retry] = useState(0);
+    // A suspended instance has not committed an effect. Register its one-shot
+    // wakeup during initialization without mutating a hook value in render.
+    useState(() => {
+      if (!loaded && !failed) {
+        void start().then(() => retry((revision) => revision + 1));
+      }
+      return null;
+    });
     if (loaded) return h(loaded, props as P & Attributes);
     if (failed) throw failure;
     throw start();
-  };
-  return Object.assign(render, { preload: start });
+  }
+  return Object.assign(LazyComponent, { preload: start });
 }

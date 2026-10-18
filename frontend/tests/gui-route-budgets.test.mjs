@@ -8,7 +8,7 @@ import { gzipSync } from "node:zlib";
 import ts from "@typescript/typescript6";
 import * as budget from "@roedu/web-kit/budget";
 import { parserBinding } from "../scripts/compiler-runtime.mjs";
-import { appRoutePaths, bindings, classifyProfiles, frozenBaselineReferences, journeys, measureProfile, portedJourneys, portedSetBindings, verifyFrozenBaseline, verifyTreeRows } from "../../scripts/gui-route-budgets.mjs";
+import { appRoutePaths, alchimieModeBindings, alchimieModeScreens, bindings, classifyProfiles, frozenBaselineReferences, journeys, measureProfile, portedPaths, portedJourneys, portedSetBindings, verifyFrozenBaseline, verifyTreeRows } from "../../scripts/gui-route-budgets.mjs";
 import { readTarGz } from "../../tools/gui-bootstrap-webkit/scripts/kit-sync.mjs";
 
 // Synthetic asset attribution contracts only. These execute the installed public
@@ -16,10 +16,10 @@ import { readTarGz } from "../../tools/gui-bootstrap-webkit/scripts/kit-sync.mjs
 const repo = fileURLToPath(new URL("../../", import.meta.url)).replace(/\/$/, "");
 const source = fs.readFileSync(new URL("../src/App.tsx", import.meta.url), "utf8");
 // The current (Preact) bundle carries the ported set; the frozen legacy bundle every original route (ADR-0197).
-const paths = ["/", "/intrusul", "/perechi", "/conexiuni"];
+const paths = ["/", "/intrusul", "/perechi", "/conexiuni", "/alchimie", "/cald-rece", "/lant", "/clasament"];
 const frozenPaths = ["/", "/alchimie", "/intrusul", "/perechi", "/cald-rece", "/lant", "/conexiuni", "/clasament"];
 const account = "src/components/AccountBar.tsx";
-const screenKeys = { active: ["Intrusul", "Perechi", "Conexiuni"], "frozen-legacy": ["Alchimie", "Intrusul", "Perechi", "CaldRece", "Lant", "Conexiuni", "Ranking"] };
+const screenKeys = { active: ["Intrusul", "Perechi", "Conexiuni", "Alchimie", "CaldRece", "Lant", "Ranking", "Home"], "frozen-legacy": ["Alchimie", "Intrusul", "Perechi", "CaldRece", "Lant", "Conexiuni", "Ranking"] };
 const routeKeys = screenKeys.active.map((name) => `src/screens/${name}.tsx`);
 const sha = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const budgetBytes = fs.readFileSync(new URL("../../budgets.json", import.meta.url));
@@ -68,6 +68,12 @@ function fixture(t, profile = "active") {
   for (const [index, key] of keys.entries()) manifest[key] = {
     file: `assets/route-${index}.js`, isDynamicEntry: true, imports: ["shared"], css: [`assets/route-${index}.css`],
   };
+  if (profile === "active") {
+    manifest["src/screens/Home.tsx"].imports.push("home-deep");
+    manifest["home-deep"] = { file: "assets/home-deep.js", imports: ["shared"], css: ["assets/home-deep.css"] };
+    manifest["src/screens/Alchimie.tsx"].dynamicImports = Object.values(alchimieModeScreens);
+    for (const [mode, key] of Object.entries(alchimieModeScreens)) manifest[key] = { file: `assets/alchimie-${mode}.js`, isDynamicEntry: true, imports: ["shared"], css: [`assets/alchimie-${mode}.css`] };
+  }
   for (const entry of Object.values(manifest)) {
     write(root, entry.file, `/* ${entry.file} */\n` + "export const n = 42;\n".repeat(5));
     for (const css of entry.css ?? []) write(root, css, `/* ${css} */ .fixture{color:red}\n`);
@@ -79,24 +85,57 @@ function measured(f, budgets = actualBudgets, profile = "active") {
   return measureProfile(f.root, budgets, profile === "active" ? paths : frozenPaths, budget, profile);
 }
 
-void test("the literal route switch, the client table and the Go ported set agree on the four ported routes", () => {
+void test("Alchimie source binds two literal lazy leaves to the captured frame URL", () => {
+  const selector = fs.readFileSync(new URL("../src/screens/Alchimie.tsx", import.meta.url), "utf8");
+  const actual = alchimieModeBindings(selector, ts);
+  assert.deepEqual(actual.modes, alchimieModeScreens); assert.equal(actual.saved_default, "challenges");
+  for (const changed of [
+    selector.replace('import("./AlchimieExplore")', 'import("./AlchimieChallenge")'),
+    selector.replace('alchimieMode(url, legacyResume)', 'alchimieMode(location.href, legacyResume)'),
+    selector.replace('? <AlchimieChallenge', '? <AlchimieExplore'),
+    'import Eager from "./AlchimieExplore";\n' + selector,
+  ]) { assert.notEqual(changed, selector); assert.throws(() => alchimieModeBindings(changed, ts)); }
+});
+void test("Alchimie mode rows charge the selected leaf and refuse missing or eager mode boundaries", (t) => {
+  const f = fixture(t), report = measured(f).report;
+  const current = report.routes.find((item) => item.name === "/alchimie");
+  const explore = report.routes.find((item) => item.name === "/alchimie?mode=explore");
+  const challenge = report.routes.find((item) => item.name === "/alchimie?mode=challenges");
+  assert.deepEqual(current.js.files, explore.js.files);
+  for (const [row, own, other] of [[explore, "explore", "challenges"], [challenge, "challenges", "explore"]]) {
+    assert.ok(row.js.files.includes(`assets/alchimie-${own}.js`));
+    assert.ok(!row.js.files.includes(`assets/alchimie-${other}.js`));
+    assert.ok(row.js.files.includes("assets/route-3.js") && row.js.files.includes("assets/account-deep.js"));
+    assert.equal(row.js.limit_gz, 40960);
+  }
+  for (const mutate of [
+    (m) => { delete m[alchimieModeScreens.explore]; },
+    (m) => { m["src/screens/Alchimie.tsx"].dynamicImports.pop(); },
+    (m) => { m["src/screens/Alchimie.tsx"].imports.push(alchimieModeScreens.challenges); },
+    (m) => { m[alchimieModeScreens.explore].imports.push(alchimieModeScreens.challenges); },
+  ]) { const changed = structuredClone(f.manifest); mutate(changed); assert.throws(() => bindings(changed, paths)); }
+});
+
+void test("the literal route switch, the client table and the Go set agree on all eight current paths", () => {
   parserBinding(path.join(repo, "frontend"), ts);
   assert.deepEqual(appRoutePaths(source, ts), paths);
-  assert.deepEqual([...portedJourneys], paths);
+  assert.deepEqual([...portedPaths], paths);
+  assert.deepEqual([...portedJourneys], [...paths, "/alchimie?mode=challenges", "/alchimie?mode=explore"]);
   assert.equal(journeys.length, 10);
   for (const name of ["/alchimie", "/alchimie?mode=challenges", "/alchimie?mode=explore"]) assert.ok(journeys.includes(name));
   const bound = portedSetBindings(repo, paths);
   assert.deepEqual(bound.ported, paths);
-  assert.deepEqual(bound.frozen_legacy, ["/alchimie", "/cald-rece", "/lant", "/clasament", "/alchimie?mode=challenges", "/alchimie?mode=explore"]);
+  assert.deepEqual(bound.frozen_legacy, []);
   assert.throws(() => portedSetBindings(repo, [...paths, "/lant"]), /ported set differs/);
   assert.throws(() => portedSetBindings(repo, paths.slice(0, -1)), /ported set differs/);
   for (const mutation of [
     source.replace('case "/intrusul":', 'case "/unknown":'),
     source.replace('case "/intrusul":', 'case "/conexiuni":'),
     source.replace('import("./screens/Intrusul")', 'import("./screens/Ranking")'),
+    source.replace('const Home = lazyScreen(() => import("./screens/Home"));', 'import Home from "./screens/Home";'),
     source.replace('<Intrusul onExit={goHome} onToast={pushToast} />', '<Conexiuni onExit={goHome} onToast={pushToast} />'),
-    source.replace('screen = <LegacyRoute url={url} />;', 'screen = <Home onToast={pushToast} />;'),
-    source.replace('portedPath(path) ? path : "legacy"', 'path'),
+    source.replace('screen = <FallbackRoute url={url} />;', 'screen = <Home onToast={pushToast} />;'),
+    source.replace('portedPath(path) ? path : "fallback"', 'path'),
   ]) {
     assert.notEqual(mutation, source, "The authored source mutation must affect its actual input");
     assert.throws(() => appRoutePaths(mutation, ts), "An unbound/mismatched route cannot silently disappear");
@@ -105,17 +144,19 @@ void test("the literal route switch, the client table and the Go ported set agre
 
 void test("public evaluator follows genuine static owners, mandatory deep AccountBar dependencies and shared cycles exactly once", (t) => {
   const f = fixture(t), result = measured(f);
-  assert.equal(result.report.routes.length, 4);
+  assert.equal(result.report.routes.length, 10);
   assert.deepEqual(result.report.routes.map((item) => item.name).sort(), [...portedJourneys].sort());
   const home = result.report.routes.find((item) => item.name === "/");
-  assert.deepEqual(home.js.files, ["assets/account-deep.js", "assets/account.js", "assets/entry.js", "assets/shared.js", "assets/startup.js"]);
+  assert.deepEqual(home.js.files, ["assets/account-deep.js", "assets/account.js", "assets/entry.js", "assets/home-deep.js", "assets/route-7.js", "assets/shared.js", "assets/startup.js"]);
   assert.ok(home.css.files.includes("assets/account.css"));
+  assert.ok(home.css.files.includes("assets/home-deep.css"));
   assert.equal(home.js.files.filter((file) => file === "assets/shared.js").length, 1);
   for (const [index, route] of ["/intrusul", "/perechi", "/conexiuni"].entries()) {
     const item = result.report.routes.find((row) => row.name === route);
     assert.ok(item.js.files.includes(`assets/route-${index}.js`));
     assert.ok(item.js.files.includes("assets/account-deep.js"));
     assert.equal(item.js.files.filter((file) => file.startsWith("assets/route-")).length, 1);
+    assert.ok(!item.js.files.includes("assets/route-7.js") && !item.js.files.includes("assets/home-deep.js"));
   }
   assert.equal(result.report.global_css.status, "recorded");
   assert.equal(result.report.global_css.limit_gz, null);
@@ -123,8 +164,21 @@ void test("public evaluator follows genuine static owners, mandatory deep Accoun
   const frozen = fixture(t, "frozen-legacy"), legacy = measured(frozen, actualBudgets, "frozen-legacy");
   assert.equal(legacy.report.routes.length, 10);
   assert.deepEqual(legacy.report.routes.map((item) => item.name).sort(), [...journeys].sort());
-  assert.throws(() => measureProfile(f.root, actualBudgets, frozenPaths, budget, "active"), "The active profile cannot claim unported routes");
-  assert.throws(() => measureProfile(frozen.root, actualBudgets, paths, budget, "frozen-legacy"), "The frozen profile must keep every original journey");
+  assert.throws(() => measureProfile(f.root, actualBudgets, [...paths, "/unknown"], budget, "active"), "The active profile cannot claim an unknown route");
+  assert.throws(() => measureProfile(frozen.root, actualBudgets, paths.slice(1), budget, "frozen-legacy"), "The frozen profile must keep every original journey");
+});
+
+void test("Home attribution refuses missing selected dependencies or an eagerly shared Home leaf", (t) => {
+  const f = fixture(t), home = "src/screens/Home.tsx";
+  assert.deepEqual(bindings(f.manifest, paths).config.routes["/"].entries, ["index.html", account, home]);
+  for (const mutate of [
+    (m) => { delete m[home]; },
+    (m) => { delete m["home-deep"]; },
+    (m) => { m[home].isDynamicEntry = false; },
+    (m) => { m.startup.imports.push(home); },
+    (m) => { m[account].imports.push(home); },
+    (m) => { m[alchimieModeScreens.challenges].imports.push(home); },
+  ]) { const changed = structuredClone(f.manifest); mutate(changed); assert.throws(() => bindings(changed, paths)); }
 });
 
 void test("missing required source roots, malformed references and incomplete route lists refuse attribution", (t) => {
@@ -153,7 +207,7 @@ void test("actual public budget status stays red with complete nonempty measurem
   budgets.js["cat-initial"].limit_gz = 0; // explicitly synthetic refusal threshold, never written to owning budgets
   const red = measured(f, budgets);
   assert.equal(red.report.status, "fail");
-  assert.equal(red.report.routes.length, 4);
+  assert.equal(red.report.routes.length, 10);
   assert.ok(red.report.routes.every((item) => item.js.status === "fail" && item.js.actual_gz > 0 && item.js.files.length >= 5));
   assert.ok(Object.values(red.budgets).some((item) => item.status === "fail" && item.actual > item.limit));
   assert.equal(actualBudgets.js["cat-initial"].limit_gz, 40960);
@@ -202,7 +256,7 @@ void test("complete asset ledgers refuse omitted, extra, changed and symlinked f
 // Copies only the actual immutable frozen archive/source receipts into an owned
 // synthetic transport fixture. This does not fabricate a current sync/runtime.
 function frozenFixture(t) {
-  const f = fixture(t, "frozen-legacy");
+  const f = fixture(t);
   for (const name of frozenBaselineReferences) write(f.root, name, fs.readFileSync(path.join(repo, name)));
   const proof = JSON.parse(fs.readFileSync(path.join(f.root, "legacy/original-bundle.json")));
   for (const name of [proof.archive, proof.archive + ".sha256"]) write(f.root, name, fs.readFileSync(path.join(repo, name)));
@@ -222,16 +276,16 @@ void test("owner policy records every frozen SDK failure while compliant active 
   assert.equal(profiles["frozen-legacy"].report.status, "fail");
   assert.equal(profiles["frozen-legacy"].report.routes.length, 10);
   assert.ok(profiles["frozen-legacy"].report.routes.every((item) => item.js.status === "fail" && item.js.limit_gz === 40960));
-  assert.equal(profiles.active.report.routes.length, 4);
+  assert.equal(profiles.active.report.routes.length, 10);
   const before = JSON.stringify(profiles), result = classifyProfiles(profiles, integrity, "unit");
   assert.equal(result.status, "pass");
   assert.equal(JSON.stringify(profiles), before, "Raw SDK reports/statuses cannot be rewritten");
   assert.deepEqual(result.ported_routes, paths);
-  assert.deepEqual(Object.keys(result.gate_budgets).filter((name) => name.startsWith("gate:active:route-js:")).sort(), paths.map((name) => `gate:active:route-js:${name}`).sort());
+  assert.deepEqual(Object.keys(result.gate_budgets).filter((name) => name.startsWith("gate:active:route-js:")).sort(), portedJourneys.map((name) => `gate:active:route-js:${name}`).sort());
   for (const name of journeys) assert.equal(result.delivery[name], paths.includes(name.split("?")[0]) ? "current" : "frozen-legacy");
-  assert.equal(result.frozen_legacy_routes.length, 6);
-  for (const name of result.frozen_legacy_routes) {
-    assert.ok(!Object.hasOwn(result.gate_budgets, `gate:active:route-js:${name}`), "An unported route never becomes an active gate row");
+  assert.equal(result.frozen_legacy_routes.length, 0);
+  for (const name of journeys) {
+    assert.ok(Object.hasOwn(result.gate_budgets, `gate:active:route-js:${name}`), "Every M3 journey must earn an active numeric gate row");
     assert.equal(result.budgets[`baseline:frozen-legacy:route-js:${name}`].status, "recorded");
   }
   assert.equal(Object.keys(result.budgets).length, Object.keys(profiles.active.budgets).length + Object.keys(profiles["frozen-legacy"].budgets).length);

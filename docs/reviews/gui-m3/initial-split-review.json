@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "kind": "independent-Cat-M3-initial-split-source-review",
+  "not_a_gate_result": true,
+  "reviewer": "agent:codex/gate_design_review",
+  "reviewed_at": "2026-10-13T14:03:01+00:00",
+  "source_root": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3",
+  "previous_reviewed_state": {"record":"docs/reviews/gui-m3/source-review.json","record_sha256":"5327f3574e0e0843fbce561aabb00da474dd6c877d1a01f4af2c78ebbba0d2fa","prior_source_aggregate":"adf43bddc7fb68fa2982f7ade15191ca38e7347449d53e84ec9603e3761a039b"},
+  "verdict": "SOURCE_CLEAR_FOR_QUALIFICATION",
+  "scope": "Real Home route split, Alchimie absence-only selector and complete initial accounting; no budget pass or milestone/landing acceptance.",
+  "reviewed_properties": ["Home is selected through a literal lazyScreen route boundary; deep game routes do not mount it. AccountBar stays mandatory on every route.","The active / row explicitly charges index+AccountBar+Home and every static JS/CSS dependency. Other route/mode closures remain fully charged.","Frontend Home startup check also unconditionally includes AccountBar+Home; callers cannot omit these required roots.","Negative fixtures reject missing Home/deep imports/styles, eager Home on another closure, and accounting omission.","Browser existing identities and original assertions retained; added actual requests prove Home fetched on /, absent on deep game links and loaded on client-side exit.","Null-only exploration storage absence is equivalent to unchanged reader kind empty; saved challenge truthiness/catch/query precedence/once-per-frame snapshot remain. Invalid or existing exploration bytes stay owned by full Explore validation/merge."],
+  "storage_equivalence_cases": ["missing/null exploration key","empty-string/invalid JSON/null JSON","oversized bytes","valid save","missing/empty/present challenge pointer","blocked localStorage getter or either getItem failure"],
+  "unchanged_exploration_reader": {"path":"frontend/src/explorationSave.ts","sha256":"206a31cad9ff7d046c87c788bb83ecfbeefee97c602cd72a0b4d074334ecbbe1"},
+  "unchanged_limits": {"current_route_javascript_gzip_cap_bytes":40960,"current_route_target_bytes":30720,"frontend_home_initial_js_css_limit_kib":120,"policy":"No ceiling, source assertion, saved-resume closure, baseline or frozen provenance relaxation."},
+  "native_audit": "No native source changes; previously approved count238/signature d8f4b3f2498f2dc431e71b3224f0cf4895fba850a6e5136ddd358e298641dcac remains applicable.",
+  "budget_status": "Measured budget sufficiency belongs to parent emitted reports. Core Motion correction and clean unit/full remain pending; this record does not turn red routes green.",
+  "execution": "Read-only source/Git inspection and Python data hashing; reviewer ran no product runtimes or gates.",
+  "source_hashes": [
+    {"path":"frontend/src/App.tsx","mode":436,"sha256":"7597a740e947c1eb7cd6986bde24951461458dcb6be2c568df3928c34fc69e9d"},
+    {"path":"frontend/src/alchimieSavedMode.ts","mode":436,"sha256":"669009852d04ae04024f77e02a565a56f4a875e66928b6a6458aad34b5f42702"},
+    {"path":"frontend/src/screens/Alchimie.tsx","mode":436,"sha256":"ab882b0ea1cc8b20ea2beede93131fb65a011d362020f33fc5dce00bc7f7cd53"},
+    {"path":"frontend/scripts/check-bundle-budget.mjs","mode":436,"sha256":"3bb18b49c3dd2aca3eb5ce60cbd6d61328515f5291281c49b282d216ed527e26"},
+    {"path":"scripts/gui-route-budgets.mjs","mode":436,"sha256":"0b6bb17db38c246a823f9febe3444c367e66932ffc4899144be69338224576fe"},
+    {"path":"frontend/tests/bundle-budget.test.mjs","mode":436,"sha256":"34ae2f4e3e8cdbc3ae34a90e7695d679dfe0f26db9b855df28d7f8c0d30d11c1"},
+    {"path":"frontend/tests/gui-route-budgets.test.mjs","mode":436,"sha256":"bdeb3df060be1cfdb86633440fb9ea2bb997f40b2d77ab4693c58edd107fcfe9"},
+    {"path":"frontend/tests/alchimie-mode.test.mjs","mode":436,"sha256":"0bb1d9428df44540282f54ea881cee5f9f168d846d19e5f0e59aea57af075481"},
+    {"path":"frontend/e2e/gui-m0-home-parity.spec.mjs","mode":436,"sha256":"e2c7ac3eff3ca5f4b883acd4f55e519613c1f8e2717ad0ea4e6857ad3add30ee"},
+    {"path":"frontend/e2e/gui-m2-pilot-journeys.spec.mjs","mode":436,"sha256":"6ed92d9e6d051072ae04f7de7f7c34d000c47d3cace22be430ba04dd69747159"}
+  ],
+  "source_hashes_aggregate_sha256": "a321cbb63c7ae5fb6cc86072ebc6acec52b9b2bdfbf1bd815272b29aa2e609d8"
+}

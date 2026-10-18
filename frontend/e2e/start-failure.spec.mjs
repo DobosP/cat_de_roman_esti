@@ -242,6 +242,16 @@ test("alchimie retains its live round and blocks actions while another round is 
   expect(await scoreState(page)).toBe(originalScores);
   expect(await (await request.get(gameURL(game, initial.game_id))).json()).toEqual(initial);
 
+  // Dirty independent view fields before the successful replacement. A new
+  // authoritative round must clear them together with the retained selection.
+  await openAlchemyDisclosure(page, ".alchemy-library-tools");
+  const inventorySearch = page.getByRole("searchbox", { name: "Caută în toate conceptele descoperite", exact: true });
+  const allFilter = page.getByRole("button", { name: /^Toate \d+$/ });
+  await allFilter.click();
+  await inventorySearch.fill("zzzz-fără-rezultat-state-reset");
+  await expect(allFilter).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByText("Niciun concept găsit.", { exact: true })).toBeVisible();
+
   const retryResponse = createResponse(page, game);
   await another.click();
   const retried = await retryResponse;
@@ -252,4 +262,13 @@ test("alchimie retains its live round and blocks actions while another round is 
     .toBe(fresh.game_id);
   expect(fresh.game_id).not.toBe(initial.game_id);
   expect(oldMutations).toEqual([]);
+  await expect(page.locator(".alchemy-library-tools")).not.toHaveAttribute("open");
+  await expect(page.locator(".alchemy-menu")).not.toHaveAttribute("open");
+  await expect(page.locator(".alchemy-library-tools input.alchemy-inventory-search")).toHaveValue("");
+  await expect(page.locator(".alchemy-inventory-tab[aria-pressed='true']")).toHaveText(/^Utile \d+$/);
+  await expect(page.locator(".alchemy-slot")).toHaveCount(0);
+  await expect(page.locator(".alchemy-sync-recovery")).toHaveCount(0);
+  await expect(page.locator(".alchemy-inventory-grid .alchemy-word")).toHaveCount(
+    fresh.inventory.filter((item) => item.useful && !item.depleted).length,
+  );
 });

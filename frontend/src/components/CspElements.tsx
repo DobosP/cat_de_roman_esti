@@ -31,6 +31,8 @@ type TagAttributes = {
   footer: preact.HTMLAttributes<HTMLElement>;
   small: preact.HTMLAttributes<HTMLElement>;
   button: preact.ButtonHTMLAttributes<HTMLButtonElement>;
+  input: preact.InputHTMLAttributes<HTMLInputElement>;
+  form: preact.HTMLAttributes<HTMLFormElement>;
 };
 type NativeTag = keyof TagAttributes;
 type NativeProps<K extends NativeTag> = Omit<TagAttributes[K], "style" | "ref"> & {
@@ -66,6 +68,8 @@ const CspUl = native("ul");
 const CspLi = native("li");
 const CspFooter = native("footer");
 const CspSmall = native("small");
+const CspInput = native("input");
+const CspForm = native("form");
 function CspButton({ css, ref, style, ...props }: Omit<ButtonProps, "style" | "ref"> & {
   css?: ExplicitCss; style?: never; ref?: Ref<HTMLButtonElement>;
 }) {
@@ -74,5 +78,5 @@ function CspButton({ css, ref, style, ...props }: Omit<ButtonProps, "style" | "r
 }
 export {
   CspDiv, CspSpan, CspStrong, CspP, CspH1, CspHeader, CspSection, CspNativeButton, CspSummary,
-  CspH2, CspOl, CspUl, CspLi, CspFooter, CspSmall, CspButton,
+  CspH2, CspOl, CspUl, CspLi, CspFooter, CspSmall, CspInput, CspForm, CspButton,
 };

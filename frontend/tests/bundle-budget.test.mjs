@@ -75,6 +75,7 @@ void test("font guard requires both Romanian-capable subsets for both families",
 });
 
 const eagerAccountRoot = "src/components/AccountBar.tsx";
+const homeRoot = "src/screens/Home.tsx";
 
 function eagerAccountManifest() {
   return {
@@ -82,7 +83,7 @@ function eagerAccountManifest() {
       file: "assets/index.js",
       isEntry: true,
       imports: ["_shared.js"],
-      dynamicImports: [eagerAccountRoot, "src/screens/Game.tsx"],
+      dynamicImports: [eagerAccountRoot, homeRoot, "src/screens/Game.tsx"],
       css: ["assets/index.css"],
     },
     "_shared.js": { file: "assets/shared.js", imports: ["_vendor.js"] },
@@ -112,6 +113,8 @@ function eagerAccountManifest() {
       css: ["assets/Game.css"],
       isDynamicEntry: true,
     },
+    [homeRoot]: { file: "assets/Home.js", isDynamicEntry: true, imports: ["_home-deep.js", "_shared.js"], css: ["assets/Home.css"] },
+    "_home-deep.js": { file: "assets/home-deep.js", imports: ["_shared.js"] },
     ...Object.fromEntries(
       ROMANIAN_FONT_SOURCES.map((src, index) => [`font-${index}`, { src }]),
     ),
@@ -134,6 +137,7 @@ const eagerAccountInitialFiles = [
   "assets/account.js",
   ...eagerAccountStaticFiles,
 ].sort();
+const homeInitialFiles = [...eagerAccountInitialFiles, "assets/Home.js", "assets/Home.css", "assets/home-deep.js"].sort();
 
 function writeEagerAccountManifest(root, manifest) {
   writeFileSync(join(root, ".vite", "manifest.json"), JSON.stringify(manifest));
@@ -162,6 +166,9 @@ function writeEagerAccountOutput(root) {
     "assets/account-nested.js": "export const accountAction = 'sign-in';\n",
     "assets/Game.js": "export const gameLabel = 'Intrusul';\n",
     "assets/Game.css": ".game-board { display: flex; }\n",
+    "assets/Home.js": "export const home = 'History and daily circuit';\n",
+    "assets/Home.css": ".home-circuit { display: grid; }\n",
+    "assets/home-deep.js": "export const homeView = 'local scores';\n",
   };
   for (const [file, source] of Object.entries(files)) {
     writeFileSync(join(root, file), source);
@@ -174,7 +181,7 @@ function eagerAccountMeasurements(root, manifest) {
   const staticMeasurements = measureGzipFiles(root, collectInitialBundleFiles(manifest));
   const fullMeasurements = measureGzipFiles(
     root,
-    collectInitialBundleFiles(manifest, { eagerRoots: [eagerAccountRoot] }),
+    collectInitialBundleFiles(manifest, { eagerRoots: [eagerAccountRoot, homeRoot] }),
   );
   const staticBytes = staticMeasurements.reduce((sum, item) => sum + item.bytes, 0);
   const fullBytes = fullMeasurements.reduce((sum, item) => sum + item.bytes, 0);
@@ -239,10 +246,31 @@ void test("initial budget counts eager account bytes that the static-only closur
     });
     assert.equal(passing.totalBytes, measured.fullBytes);
     assert.equal(passing.limitBytes, measured.fullBytes);
-    assert.deepEqual(passing.measurements.map(({ file }) => file), eagerAccountInitialFiles);
+    assert.deepEqual(passing.measurements.map(({ file }) => file), homeInitialFiles);
   } finally {
     rmSync(root, { recursive: true, force: true });
   }
+});
+
+void test("Home startup cannot omit its selected lazy view, deep imports or styles", () => {
+  const root = mkdtempSync(join(tmpdir(), "cat-required-home-root-"));
+  try {
+    const manifest = writeEagerAccountOutput(root);
+    const accountOnly = measureGzipFiles(root, collectInitialBundleFiles(manifest, { eagerRoots: [eagerAccountRoot] }))
+      .reduce((sum, item) => sum + item.bytes, 0);
+    const full = checkInitialBundle({ outputDir: root, limitKiB: 120 });
+    assert.deepEqual(full.measurements.map(({ file }) => file), homeInitialFiles);
+    assert.ok(full.totalBytes > accountOnly);
+    const limitKiB = (accountOnly + full.totalBytes) / (2 * 1024);
+    assert.throws(() => checkInitialBundle({ outputDir: root, limitKiB, eagerRoots: [eagerAccountRoot] }), /Initial JS\/CSS.*budget/);
+    for (const key of [homeRoot, "_home-deep.js"]) {
+      const broken = structuredClone(manifest); delete broken[key]; writeEagerAccountManifest(root, broken);
+      assert.throws(() => checkInitialBundle({ outputDir: root, limitKiB: 120 }), /required eager root|required eager import/);
+    }
+    writeEagerAccountManifest(root, manifest);
+    rmSync(join(root, "assets/Home.css"));
+    assert.throws(() => checkInitialBundle({ outputDir: root, limitKiB: 120 }), /Manifest asset is missing/);
+  } finally { rmSync(root, { recursive: true, force: true }); }
 });
 
 void test("initial budget requires the account root even when the caller supplies empty eager roots", () => {

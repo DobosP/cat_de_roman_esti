@@ -1,4 +1,5 @@
 import { Csp } from "./CspStyle";
+import "../styles/shared-game-controls.css";
 // GameIntro — the shared "before you play" card: icon, title, tag, how-to,
 // difficulty (passed as children), the primary start action and the daily
 // challenge. All four games previously hand-rolled this with drifting styles.
@@ -12,7 +13,7 @@ import type { ComponentChildren } from "preact";
 import { useLayoutEffect, useRef } from "preact/hooks";
 import { Badge, Button } from "@roedu/ui";
 import { useDailyIntent } from "../hooks/useDailyIntent";
-import type { ScoreEntry } from "../scores";
+import type { ScoreEntry } from "../scores/core";
 import { displayDetail } from "../share";
 import { PlayGuide, type PlayGuideStep } from "./PlayGuide";
 import { StartFailureNotice } from "./StartFailureNotice";
@@ -95,21 +96,21 @@ export function GameIntro({
       >
         {icon}
       </Csp.div>
-      <Csp.div className="col center" css={{ gap: "6px" }}>
-        <Csp.h2 css={{ color: accent, fontSize: "1.7rem" }}>{title}</Csp.h2>
+      <div className="col center game-intro-heading">
+        <Csp.h2 className="game-intro-title" css={{ color: accent }}>{title}</Csp.h2>
         {tag && (
           <Badge color={accent} size="sm">
             {tag}
           </Badge>
         )}
-      </Csp.div>
+      </div>
       <div className="muted game-intro-description">{description}</div>
       {steps && <PlayGuide steps={steps} />}
 
       {children && <div className="col game-intro-extras">{children}</div>}
 
       {resumeRecovery && (
-        <Csp.div className="card col" role="alert" css={{ gap: "10px", padding: "14px", width: "100%" }}>
+        <div className="card col game-intro-recovery" role="alert">
           <strong>
             {resumeRecovery.kind === "failed"
               ? "Nu am putut relua jocul salvat. Nu l-am șters."
@@ -122,11 +123,11 @@ export function GameIntro({
                 : "Încarcă jocul curent"}
             </Button>
           )}
-        </Csp.div>
+        </div>
       )}
 
       <StartFailureNotice failed={startFailed} />
-      <Csp.div className="row center wrap game-intro-actions" css={{ gap: "12px", marginTop: "6px" }}>
+      <div className="row center wrap game-intro-actions">
         <Button ref={primaryRef} onClick={consumeThen(dailyFirst ? onDaily : onStart)} disabled={starting} size="lg">
           {dailyFirst ? "Joacă provocarea zilei" : startLabel}
         </Button>
@@ -140,12 +141,12 @@ export function GameIntro({
             {!dailyFirst && <span aria-hidden>📅</span>} {dailyFirst ? "Joacă liber" : dailyLabel}
           </Button>
         )}
-      </Csp.div>
+      </div>
 
       {best && (
-        <Csp.p className="faint" css={{ margin: "0px", fontSize: "0.82rem" }}>
+        <p className="faint game-intro-best">
           Recordul tău: <Csp.strong css={{ color: accent }}>{best.score}</Csp.strong> · {displayDetail(best.detail)}
-        </Csp.p>
+        </p>
       )}
     </Csp.div>
   );

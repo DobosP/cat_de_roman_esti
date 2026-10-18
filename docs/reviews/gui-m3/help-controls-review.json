@@ -1,0 +1,239 @@
+{
+  "schema": 1,
+  "kind": "independent-help-ownership-and-shared-controls-review",
+  "reviewer": "agent:codex/cat_v111_review",
+  "reviewed_at": "2026-10-13T19:17:50.109997+00:00",
+  "not_a_gate_result": true,
+  "verdict": "SOURCE_SEMANTICS_CLEAR_BUDGET_QUALIFICATION_REMAINS_RED",
+  "source_root": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3",
+  "source_head": "e75518c1473be3a32ec2a0f2e1565764bbcf5d5b",
+  "source_dirty": true,
+  "review_scope": "Per-game help ownership and priority-separated CSP/game-controls grouping. Existing M3 lifecycle/functionality review remains separate. No M3 clean unit/full, milestone or landing acceptance.",
+  "source_bindings": {
+    "help_manifest_path": "/home/dobo/work/_temp/feat__gui-cat-m3/help-ownership-source.json",
+    "help_manifest_sha256": "149ab289fd1bdfb1483968e692a875438d05067a077438ad2af7582482d77eb3",
+    "all_manifest_file_hashes_matched": 26,
+    "vite_config_sha256": "ca6529d73646d1cd7974b412030a9b0c1da2422264ab33402b496808e538bdfc",
+    "source_vite_equals_measured_mirror": true,
+    "help_source_hashes": [
+      {
+        "path": "docs/adr/0202-m3-remaining-preact-screens.md",
+        "sha256": "d7301b251942d2ba38f2a290c99912ce8fcaac11ee0e5e60e34558301f71e060"
+      },
+      {
+        "path": "docs/execplans/s1-cat.md",
+        "sha256": "807b2a14135b0e745f52e9a4a9304e694bdf4d8dcc4beec05687f8bee7217176"
+      },
+      {
+        "path": "frontend/src/components/GameHelp.tsx",
+        "sha256": "e3e17a654454ef7a592e88c167e2cf614f96b070bb0ffb11c30a95f943d5e942"
+      },
+      {
+        "path": "frontend/src/components/GameOptions.tsx",
+        "sha256": "3e3e97e5812ce6db6654061bb423dcc16e87c59c929bd547cb9d64d012506b19"
+      },
+      {
+        "path": "frontend/src/components/GameShell.tsx",
+        "sha256": "34a641f66e599ab7c782d5290bc12449bea125b034365775782598c189d0c899"
+      },
+      {
+        "path": "frontend/src/gameHelp.d.mts",
+        "sha256": "17f14da26343c35f7fb001408d313d27c027bd2cbb6f58c37df0e5d692792316"
+      },
+      {
+        "path": "frontend/src/gameHelp.mjs",
+        "sha256": "ff2581c981faf2d143260a948aa1eb6a0d4f242e57330b986486d20e06746837"
+      },
+      {
+        "path": "frontend/src/gameHelp/alchimie.d.mts",
+        "sha256": "254390bb7a70cf1bfa4080330dd46c63d0eadae6a405d34a546bacc4099cf970"
+      },
+      {
+        "path": "frontend/src/gameHelp/alchimie.mjs",
+        "sha256": "7a8c5c2c6cfd7c9627419bf1c25d8494595215404895ef7a2f07162664736f68"
+      },
+      {
+        "path": "frontend/src/gameHelp/conexiuni.d.mts",
+        "sha256": "c7e343ec9a493eff9e58eede6e6d5fb0f5ad49bcd8934cabeee8b7f82177e52e"
+      },
+      {
+        "path": "frontend/src/gameHelp/conexiuni.mjs",
+        "sha256": "cc37f2801810094abcf474ea0151a4f8bb9098979c006bd27bee17b9d4c5d348"
+      },
+      {
+        "path": "frontend/src/gameHelp/contexto.d.mts",
+        "sha256": "ff586590512deb37cac0dfb1ac73166185c89f631697ac1b883d7c1acff7b8e5"
+      },
+      {
+        "path": "frontend/src/gameHelp/contexto.mjs",
+        "sha256": "0c2aae119e955a3ae03fa2f2d2bb8fcf8c6c7769f474f56bd83a7daa3ff81caa"
+      },
+      {
+        "path": "frontend/src/gameHelp/intrusul.d.mts",
+        "sha256": "6448397d919e1c5edac2598f733da8280990be9c6a9c7931ed50b36fa606a8b1"
+      },
+      {
+        "path": "frontend/src/gameHelp/intrusul.mjs",
+        "sha256": "69b88811ff7576a302aca65df68f1fbd48540a6ef262b8702439679aadf2318c"
+      },
+      {
+        "path": "frontend/src/gameHelp/lant.d.mts",
+        "sha256": "3c0da85ca361fe7398295d5874264653d8852a1a2ac6e70f856a79deb61197e9"
+      },
+      {
+        "path": "frontend/src/gameHelp/lant.mjs",
+        "sha256": "427f37b9fb3b5c8103a4fb546ec5ed044cb737f68d3c23ad01d110619325bd45"
+      },
+      {
+        "path": "frontend/src/gameHelp/perechi.d.mts",
+        "sha256": "4ed071a7182d56d0f9003ad1ef869f111fe2abaa60451171bfd058a33020f50d"
+      },
+      {
+        "path": "frontend/src/gameHelp/perechi.mjs",
+        "sha256": "1bb708ad470275ab41d114a3f372ea820fb256e310b04fe2b20c4d71ca55339d"
+      },
+      {
+        "path": "frontend/src/screens/AlchimieChallenge.tsx",
+        "sha256": "2faefb2c41cde66dfc2ba0b1428ca80c5e0fd491ed263ca50ad8ca09577d1ae8"
+      },
+      {
+        "path": "frontend/src/screens/CaldRece.tsx",
+        "sha256": "bc0101face781cf8e068e863ce8d4724d089ff81f9c5cd28643b1d1573dc4421"
+      },
+      {
+        "path": "frontend/src/screens/Conexiuni.tsx",
+        "sha256": "242eb2cf6c0ea2b57c92d36bd2e6cef2e8eb393d2cbe1d855b71c077cd878a24"
+      },
+      {
+        "path": "frontend/src/screens/Intrusul.tsx",
+        "sha256": "7a4552d7df9fef8e3dc64b276a056ce7f478badecce475734a190ae45b96b728"
+      },
+      {
+        "path": "frontend/src/screens/Lant.tsx",
+        "sha256": "5781742302077075a8363bb8e58e3a18ff91168df3abcf788d85ea79b6e4df1d"
+      },
+      {
+        "path": "frontend/src/screens/Perechi.tsx",
+        "sha256": "e11d60f65238649b7977883bf40e5e1b8e9aea0b5d5fe8459f73fe4a79355225"
+      },
+      {
+        "path": "frontend/tests/game-help.test.mjs",
+        "sha256": "b387ee1d4c2aa7c7efa9d658be25b59a97a732fd6fec492c875980d886afc3c9"
+      }
+    ],
+    "latest_code_hashes_unchanged": 24,
+    "packaging_delta": "Removing only new priority5 src/share.ts group exactly reconstructs prior reviewed config8a8f9a88e31f2531175bc594f341d661924a1641c61ed1110805775e223baadb; protected share source is byte-identical to HEAD."
+  },
+  "help_verification": {
+    "text_count": 18,
+    "canonical_aggregate_sha256": "b8ac05ddf1c8d448b247d391358ff055624b246379d4981fef22e8374075504e",
+    "proof": "Independently decoded every literal goal/feedback/recovery string from original HEAD aggregate and each new record; all values and canonical key order match. Compatibility aggregate exports the same keyed record identities.",
+    "renderer_proof": "GameHelp, GameShell and GameOptions return markup is exact after renamed help-prop substitution. JSX position, details/summary, text, child conditions, ARIA and focus logic unchanged.",
+    "callsite_proof": "All six gameplay help sites still import their exact own record and render synchronously in the same state/position. Cald GameOptions help=false becomes omitted help; separate Cald help stays exactly where it was. All other GameOptions callers pass own help. GameShell has no existing helpGame call to lose.",
+    "prior_source_reconstruction": {
+      "AlchimieChallenge": "d719272a80b6c26d1c73abf0a05d2ed0ade1cc4cf282a4a1c2f2cdc8d00e5370",
+      "CaldRece": "4c75c6d64dc1f58a985a36798c3af9753f20a31a05f2b9743b5574858a4f12b4",
+      "Lant": "e33086746229a4409ab107ece4c17f2fd0274e2b46d649e5125eea3f03588c83"
+    },
+    "reconstruction_method": "Reverse only added help record import and help prop substitution; exactly reconstruct all three earlier independently reviewed M3 screen hashes. Intrusul/Perechi/Conexiuni diff only record import and prop substitution from HEAD.",
+    "protected_files": "22 framework-free helper/API/cap files independently compared byte-for-byte with HEAD; exact. No content/API/score/recovery/sound/lock-key modification.",
+    "tests": "Original two game-help assertions preserved; two additive checks prove all18 literal values and actual TypeScript-parsed source closure ownership. No frontend dependency or browser-inventory change from this batch."
+  },
+  "grouping_review": {
+    "strict_entry_facades_preserved": true,
+    "selection": "Existing startup static-importer grouping remains literal priority10. Independent CSP and unchanged share.ts closures have priority5. Explicit game-control modules own recursive dependencies at default priority. Strict entry signatures retained; no screen/selector grouping root, private alias, suppression or replacement manifest.",
+    "source_dependencies": "Independent79-module local static declaration graph has no runtime import cycle. Type-only help declarations introduce no runtime aggregate back-edge. GameHelp has no local runtime dependency; CspElements only cssUnits; GameShell points to CSP/help, never reverse.",
+    "emitted_dependencies": "Fresh final manifest has zero static cycles. Startup/share import no other chunk; CSP imports startup; controls import startup+CSP+share. Both Home and Ranking full static closures exclude game-controls. Dynamic selected screen/Alchimie leaves remain real manifest identities.",
+    "accounting": "Independently traversed every configured root and complete emitted static closure for all10 journeys, matched exact listed file sets, decompressed every gzip sidecar against raw owner, and summed actual sidecar bytes to reported totals. Mandatory AccountBar, Home-on-root, selector and selected mode roots remain charged; Explore includes added shared-control bytes.",
+    "remaining_home_dependency": "RESOLVED by independent priority5 share module. Actual Home28516 and Ranking25546 full closures do not include game-controls. Share source and emitted share chunk basename remain unchanged."
+  },
+  "latest_actual_preflight": {
+    "checks_path": "/home/dobo/work/_temp/feat__gui-cat-m3/gates/cat_de_roman_esti/.gate/shell/m3-budget/checks.json",
+    "checks_sha256": "8634b0e3473fb3a276de7c1b2251933d3cf623a6ffa94c1e9b638bbf7ca71f15",
+    "budget_path": "/home/dobo/work/_temp/feat__gui-cat-m3/gates/cat_de_roman_esti/.gate/shell/m3-budget/emitted-budgets.stdout.log",
+    "budget_sha256": "03771a02d4b0fe28276ab8fa13c61444de73e901efdceec79f8b9ffed6feea62",
+    "tree_sha256": "398eaaf4869bcb16bd8de4f6c13e71aff0885bb6c6bca6cf39cb84ccf08d828e",
+    "manifest_sha256": "0ada1dab7ec6df7741502841bf1a614c8a9cfa8649207bab70b2af5b746e641c",
+    "all8_check_stream_hashes_verified": true,
+    "passing": "Actual frontend build,Go docs and kit docs; source types/lint/88focused/style pass retained at previous pure-packaging state.",
+    "red": "Only emitted budgets: Challenge45806 exceeds40960 by4846. Home28516 meets30720 target; allother9journeys meet40960.",
+    "independent_measurement_check": "All10 complete static closures exactly match reported files; every gzip decodes to raw owner; summed actual gzip lengths equal every reported route total. Home/Ranking exclude game-controls; Explore includes full additional shared-control closure.",
+    "routes": [
+      {
+        "name": "/",
+        "actual_gz": 28516,
+        "limit_gz": 40960,
+        "status": "pass"
+      },
+      {
+        "name": "/alchimie",
+        "actual_gz": 37864,
+        "limit_gz": 40960,
+        "status": "pass"
+      },
+      {
+        "name": "/alchimie?mode=challenges",
+        "actual_gz": 45806,
+        "limit_gz": 40960,
+        "status": "fail"
+      },
+      {
+        "name": "/alchimie?mode=explore",
+        "actual_gz": 37864,
+        "limit_gz": 40960,
+        "status": "pass"
+      },
+      {
+        "name": "/cald-rece",
+        "actual_gz": 40592,
+        "limit_gz": 40960,
+        "status": "pass"
+      },
+      {
+        "name": "/clasament",
+        "actual_gz": 25546,
+        "limit_gz": 40960,
+        "status": "pass"
+      },
+      {
+        "name": "/conexiuni",
+        "actual_gz": 39568,
+        "limit_gz": 40960,
+        "status": "pass"
+      },
+      {
+        "name": "/intrusul",
+        "actual_gz": 37965,
+        "limit_gz": 40960,
+        "status": "pass"
+      },
+      {
+        "name": "/lant",
+        "actual_gz": 40478,
+        "limit_gz": 40960,
+        "status": "pass"
+      },
+      {
+        "name": "/perechi",
+        "actual_gz": 38800,
+        "limit_gz": 40960,
+        "status": "pass"
+      }
+    ]
+  },
+  "findings": [],
+  "remaining_work": [
+    "Continue real bundle reduction; Challenge is still4846 bytes over hard cap.",
+    "Any later grouping/source change needs its own frozen emitted preflight binding; this review approves only recorded file hashes.",
+    "Final exact clean-SHA unit/full and independent milestone acceptance remain required."
+  ],
+  "supersedes_review_sha256": "f5e2283e0121ff2f7b0f6fd9da535f5ab62dd13082faba9b5c3fb207cd99bb32",
+  "prior_focused_source_checks": {
+    "checks_sha256": "f4a5e14762db6a92e35abda2b005aeb17758de2dd08b9d7aed920b5bcc389767",
+    "tree_sha256": "33244e52442a86125f575cf93c7d65ce088b38bef67e8dc5ab96a924549bf1d9",
+    "scope": "Previous separated-CSP source check; only Vite share group changed afterward. types/lint88focused cases/style all passed before final budget-only correction.",
+    "passed": "88 focused tests/zero skips,types,lint,build,style,docs",
+    "historical_budget_sha256": "1f6e843d4bf0c67295cd6be62fb3e6375e656ac64019c6e0cbb0e74175db41c9",
+    "historical_budget_note": "Home33268/Challenge45622 from before share ownership correction; superseded by latest measured rows."
+  }
+}

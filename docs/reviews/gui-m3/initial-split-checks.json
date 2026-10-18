@@ -1,0 +1,110 @@
+{
+  "schema": 1,
+  "scope": "M3 lazy Home/selector diagnostic; core-v1.11 adoption and clean unit/full pending",
+  "operator": "agent:codex (PROGRAM E8)",
+  "command": "GATE_OPERATOR=agent:codex bash scripts/gate.sh shell --sha d30b0aa47248b9a5944e015f2daf54cc5a795617 --dirty --parallel 2",
+  "sha": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+  "dirty": true,
+  "tree_sha256": "5c1e29366432adf1789e7bc377c3c3e5a0f835e81d620497008bf6819136d2a5",
+  "report_sha256": "b398cda513f893b8acfbcfaa6b9eee9ae201adc15b8639d28b701b4bb43bed23",
+  "status": "fail",
+  "checks": [
+    {
+      "name": "types",
+      "exit_code": 0
+    },
+    {
+      "name": "lint",
+      "exit_code": 0
+    },
+    {
+      "name": "targeted-frontend",
+      "exit_code": 0
+    },
+    {
+      "name": "frontend-build",
+      "exit_code": 0
+    },
+    {
+      "name": "emitted-budgets",
+      "exit_code": 1
+    },
+    {
+      "name": "style-audit",
+      "exit_code": 0
+    },
+    {
+      "name": "doc-check",
+      "exit_code": 0
+    },
+    {
+      "name": "docs-gate",
+      "exit_code": 0
+    }
+  ],
+  "focused_frontend_cases": 84,
+  "route_js": [
+    {
+      "route": "/",
+      "actual_gz": 28590,
+      "limit_gz": 40960,
+      "status": "pass"
+    },
+    {
+      "route": "/alchimie",
+      "actual_gz": 35706,
+      "limit_gz": 40960,
+      "status": "pass"
+    },
+    {
+      "route": "/alchimie?mode=challenges",
+      "actual_gz": 51409,
+      "limit_gz": 40960,
+      "status": "fail"
+    },
+    {
+      "route": "/alchimie?mode=explore",
+      "actual_gz": 35706,
+      "limit_gz": 40960,
+      "status": "pass"
+    },
+    {
+      "route": "/cald-rece",
+      "actual_gz": 46632,
+      "limit_gz": 40960,
+      "status": "fail"
+    },
+    {
+      "route": "/clasament",
+      "actual_gz": 25617,
+      "limit_gz": 40960,
+      "status": "pass"
+    },
+    {
+      "route": "/conexiuni",
+      "actual_gz": 40506,
+      "limit_gz": 40960,
+      "status": "pass"
+    },
+    {
+      "route": "/intrusul",
+      "actual_gz": 37557,
+      "limit_gz": 40960,
+      "status": "pass"
+    },
+    {
+      "route": "/lant",
+      "actual_gz": 46507,
+      "limit_gz": 40960,
+      "status": "fail"
+    },
+    {
+      "route": "/perechi",
+      "actual_gz": 38378,
+      "limit_gz": 40960,
+      "status": "pass"
+    }
+  ],
+  "cleanup_verified": true,
+  "next": "Adopt independently qualified shared-Motion core-v1.11, then measure again before further source optimization. Challenge budget remains unresolved."
+}

@@ -22,6 +22,7 @@ import {
 import { GameIntro } from "../components/GameIntro";
 import { GameOptions } from "../components/GameOptions";
 import { GameShell } from "../components/GameShell";
+import { INTRUSUL_HELP } from "../gameHelp/intrusul.mjs";
 import { Hud, StatBadge } from "../components/Hud";
 import { ResultCard } from "../components/ResultCard";
 import { gameByKey } from "../games";
@@ -33,7 +34,8 @@ import {
   lastDerivedReplayId,
   rememberDerivedReplayId,
 } from "../derivedReplay";
-import { bestScore, buildDailyCircuit, needsDerivedStarter, scoreBoard } from "../scores";
+import { bestScore, scoreBoard } from "../scores/read";
+import { buildDailyCircuit, needsDerivedStarter } from "../scores/daily";
 import { buildSharePayload, copyResult, formatDayKey, stableKey, todayLocal } from "../share";
 import { sound } from "../sound";
 import "../styles/intrusul.css";
@@ -56,6 +58,7 @@ interface StartOpts {
 export default function Intrusul({ onExit, onToast }: Props) {
   const active = useActiveGame(GAME_KEY);
   const isPresent = useIsPresent();
+  const liveRef = useRef(true), lifetimeRef = useRef(0);
   const recordOnce = useRecordScore(GAME_KEY);
   const startInFlight = useRef(false);
   const actionOwner = useMemo(() => createGameActionOwner(active), [active]);
@@ -73,12 +76,13 @@ export default function Intrusul({ onExit, onToast }: Props) {
     kind: "failed" | "changed";
     savedId: string | null;
   } | null>(null);
-  useEffect(() => () => actionOwner.invalidate(), [actionOwner]);
   useLayoutEffect(() => {
+    liveRef.current = isPresent;
     if (!isPresent) {
       actionOwner.invalidate();
       pendingHintFocus.current = null;
     }
+    return () => { liveRef.current = false; lifetimeRef.current += 1; actionOwner.invalidate(); };
   }, [actionOwner, isPresent]);
   const [state, setState] = useState<IntrusulState | null>(null);
   const [startFailed, setStartFailed] = useState(false);
@@ -117,13 +121,15 @@ export default function Intrusul({ onExit, onToast }: Props) {
   const [dailyRetry, setDailyRetry] = useState(false);
   const offerDaily = (dailyIntent.active || dailyRetry) && dailyPending && state?.daily !== todayLocal();
   const exitSafely = useCallback(() => {
-    if (startInFlight.current) return;
+    if (!liveRef.current || startInFlight.current) return;
     actionOwner.invalidate();
     pendingHintFocus.current = null;
+    liveRef.current = false;
     onExit();
   }, [actionOwner, onExit]);
 
   const applyResumedGame = useCallback((fresh: IntrusulState) => {
+    if (!liveRef.current) return;
     actionOwner.invalidate();
     pendingHintFocus.current = null;
     setActionSync(null);
@@ -142,13 +148,24 @@ export default function Intrusul({ onExit, onToast }: Props) {
     isTerminal: isTerminalResume,
     setPending: setLoading,
     onResume: applyResumedGame,
+    onReentry: () => {
+      const savedId = active.peek();
+      startInFlight.current = false;
+      setBusy(false); setStartFailed(false); setLoading(savedId !== null);
+      pendingHintFocus.current = null;
+      setFeedback(null);
+      if (!savedId && state) {
+        if (!finished) setActionSync({ previous: state, action: "guess", kind: "failed", savedId: null });
+      } else { setState(null); setActionSync(null); }
+    },
     onDailyBypassed: () => onToast("Ai continuat jocul liber început. Provocarea zilei te așteaptă după ce îl termini.", "info"),
   });
 
   const start = useCallback(
     async ({ daily, previousGameId }: StartOpts = {}) => {
-      if (!isPresent) return;
+      if (!isPresent || !liveRef.current) return;
       if (!acquireFlight(startInFlight)) return;
+      const epoch = lifetimeRef.current;
       actionOwner.invalidate();
       pendingHintFocus.current = null;
       cancelResume();
@@ -163,6 +180,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
           };
       try {
         const fresh = await intrusulApi.create(opts);
+        if (!liveRef.current || epoch !== lifetimeRef.current) return;
         setState(fresh);
         setDailyRetry(false);
         setActionSync(null);
@@ -173,10 +191,12 @@ export default function Intrusul({ onExit, onToast }: Props) {
         setRecordHit(false);
         setPuzzleRecordHit(false);
       } catch {
-        setStartFailed(true);
+        if (liveRef.current && epoch === lifetimeRef.current) setStartFailed(true);
       } finally {
-        releaseFlight(startInFlight);
-        setLoading(false);
+        if (epoch === lifetimeRef.current) {
+          releaseFlight(startInFlight);
+          if (liveRef.current) setLoading(false);
+        }
       }
     },
     [active, actionOwner, cancelResume, dismissRecovery, isPresent],
@@ -203,7 +223,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
   }, [finished, puzzleKey, state]);
 
   useEffect(() => {
-    if (!isPresent || !state || !finished || state.score === undefined) return;
+    if (!isPresent || !liveRef.current || !state || !finished || state.score === undefined) return;
     if (!state.daily) rememberDerivedReplayId(GAME_KEY, state.game_id);
     const detail = state.won
       ? `${state.mistakes} ${state.mistakes === 1 ? "greșeală" : "greșeli"}`
@@ -216,7 +236,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
       category: state.board_category,
     }).then((outcome) => {
       active.forgetIfCurrent(state.game_id);
-      if (!current || !outcome) return;
+      if (!current || !liveRef.current || !outcome) return;
       if (state.won) sound.playWin();
       else sound.playError();
       setRecordHit(outcome.isBest);
@@ -229,7 +249,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
   }, [active, finished, isPresent, puzzleKey, recordOnce, state]);
 
   const beginAction = useCallback((previous: IntrusulState, action: "guess" | "hint") => {
-    if (!isPresent || startInFlight.current) return null;
+    if (!isPresent || !liveRef.current || startInFlight.current) return null;
     const ticket = actionOwner.begin(previous.game_id);
     if (!ticket) return null;
     if (!actionOwner.owns(ticket)) {
@@ -241,7 +261,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
   }, [actionOwner, isPresent]);
 
   const mayAdoptAction = useCallback((ticket: GameActionTicket, previous: IntrusulState, action: "guess" | "hint") => {
-    if (!actionOwner.isCurrent(ticket)) return false;
+    if (!liveRef.current || !actionOwner.isCurrent(ticket)) return false;
     if (!actionOwner.owns(ticket)) {
       setActionSync({ previous, action, savedId: ticket.savedId, kind: "changed" });
       return false;
@@ -289,7 +309,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
   );
 
   const retryActionSync = useCallback(async () => {
-    if (!isPresent || !state || busy || !actionSync) return;
+    if (!isPresent || !liveRef.current || !state || busy || !actionSync) return;
     if (actionSync.kind === "changed") {
       actionOwner.invalidate();
       setActionSync(null);
@@ -425,7 +445,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
             startLabel="Joacă"
             onStart={() => void start()}
             onDaily={() => void start({ daily: todayLocal() })}
-            starting={loading}
+            starting={!isPresent || loading}
           />
         </Csp.div>
       </div>
@@ -530,7 +550,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
           </div>
         )}
 
-        {!finished && <GameOptions game={GAME_KEY} />}
+        {!finished && <GameOptions help={INTRUSUL_HELP} />}
 
         {finished && state.solution && (
           <ResultCard
@@ -542,7 +562,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
             score={state.score}
             isRecord={recordHit}
             isPuzzleRecord={puzzleRecordHit}
-            actionsBusy={loading}
+            actionsBusy={!isPresent || loading}
             shareText={sharePayload}
             onCopy={copyShare}
             onReplay={

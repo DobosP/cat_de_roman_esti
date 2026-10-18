@@ -194,7 +194,7 @@ if (reactProfile) {
 }
 assert.match(process.env.GATE_APP_IMAGE_ID || "", /^sha256:[a-f0-9]{64}$/);
 assert.ok(process.env.GATE_APP_URL, "Full browser qualification needs the actual app image URL");
-const PORTED_ROUTES = ["/", "/intrusul", "/perechi", "/conexiuni"];
+const PORTED_ROUTES = ["/", "/intrusul", "/perechi", "/conexiuni", "/alchimie", "/cald-rece", "/lant", "/clasament"];
 const frozenPageCount = CAT_CSP_ROUTES.filter((route) => !PORTED_ROUTES.includes(new URL(route, process.env.GATE_APP_URL).pathname)).length;
 // Validate the delivered kit's complete frozen archive/tree contract before the
 // browser matrix. Missing, extra or changed members cannot consume a full run.

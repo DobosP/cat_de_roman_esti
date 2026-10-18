@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "preact/hooks";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "preact/hooks";
+import { useIsPresent } from "@roedu/ui/motion";
 import { ApiError } from "../api/client";
 import type { ActiveGameMemo } from "./useActiveGame";
 import { useDailyIntent } from "./useDailyIntent";
@@ -27,6 +28,8 @@ interface SavedGameResumeOptions<T> {
   onResume: (state: T, detail: { gameId: string; terminal: boolean; bypassed: boolean }) => void;
   /** A circuit visit (`?challenge=daily`) resumed an unfinished free round instead. */
   onDailyBypassed?: () => void;
+  /** Retire local presentation before a retained frame reads its saved session again. */
+  onReentry?: () => void;
 }
 
 /** Resume one saved server session without owning any game-specific screen state. */
@@ -37,16 +40,31 @@ export function useSavedGameResume<T>({
   setPending,
   onResume,
   onDailyBypassed,
+  onReentry,
 }: SavedGameResumeOptions<T>): SavedGameResumeControl {
   const [generation, setGeneration] = useState(0);
   const [recovery, setRecovery] = useState<ResumeRecovery | null>(null);
   const unsubscribeRef = useRef<(() => void) | null>(null);
+  const isPresent = useIsPresent(), presentRef = useRef(true);
+  const departedRef = useRef(false), reentryRef = useRef(onReentry);
+  useLayoutEffect(() => { reentryRef.current = onReentry; });
+  useLayoutEffect(() => {
+    presentRef.current = isPresent;
+    if (!isPresent) { departedRef.current = true; unsubscribeRef.current?.(); }
+    else if (departedRef.current) {
+      departedRef.current = false;
+      setRecovery(null);
+      reentryRef.current?.();
+    }
+    return () => { presentRef.current = false; unsubscribeRef.current?.(); };
+  }, [isPresent]);
   const dailyIntent = useDailyIntent();
   // Read at resume time without resubscribing: the callbacks change every render.
   // Returns whether the bypass notice was shown, so the screen skips its own resume toast.
   const dailyResumeRef = useRef<(daily: unknown, terminal: boolean) => boolean>(() => false);
   useEffect(() => {
     dailyResumeRef.current = (daily, terminal) => {
+      if (!presentRef.current) return false;
       if (!dailyIntent.active) return false;
       // Today's resumed daily fulfils the circuit intent. An older day's daily or a
       // free round keeps it for later; only an unfinished free round is announced.
@@ -68,28 +86,31 @@ export function useSavedGameResume<T>({
       }),
     // generation deliberately creates a fresh snapshot of the current saved pointer.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [active, generation, isTerminal, load],
+    [active, generation, isTerminal, load, isPresent],
   );
 
   useEffect(() => {
+    if (!isPresent) return;
     const unsubscribe = subscribeSavedGameResume(attempt, {
-        setPending,
+        setPending: (pending) => { if (presentRef.current) setPending(pending); },
         onResume: (state, detail) => {
+          if (!presentRef.current) return;
           setRecovery(null);
           const bypassed = dailyResumeRef.current((state as { daily?: unknown }).daily, detail.terminal);
           onResume(state, { ...detail, bypassed });
         },
-        onTransientError: () => setRecovery({ kind: "failed" }),
-        onSuperseded: (hasCurrent) => setRecovery({ kind: "changed", hasCurrent }),
+        onTransientError: () => { if (presentRef.current) setRecovery({ kind: "failed" }); },
+        onSuperseded: (hasCurrent) => { if (presentRef.current) setRecovery({ kind: "changed", hasCurrent }); },
       });
     unsubscribeRef.current = unsubscribe;
     return () => {
       unsubscribe();
       if (unsubscribeRef.current === unsubscribe) unsubscribeRef.current = null;
     };
-  }, [attempt, onResume, setPending]);
+  }, [attempt, onResume, setPending, isPresent]);
 
   const retryResume = useCallback(() => {
+    if (!presentRef.current) return;
     unsubscribeRef.current?.();
     setRecovery(null);
     setGeneration((value) => value + 1);

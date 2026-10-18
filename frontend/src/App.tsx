@@ -3,9 +3,7 @@
 // screen changes animate through the kit Presence. Game logic lives per screen;
 // the shell owns only toasts + transitions.
 //
-// Only the M2 ported set is routed here (ADR-0197): the server serves "/",
-// "/intrusul", "/perechi" and "/conexiuni" from this bundle and everything
-// else from the frozen legacy bundle. The exiting screen is retained by Presence until its
+// The full M3 route set is routed here. The exiting screen is retained by Presence until its
 // animation settles; its `useIsPresent()` turns false so held replies and
 // actions stay inert. Screens are chosen per path, not through a live Router,
 // so a retained frame keeps showing the screen it left with.
@@ -14,38 +12,45 @@ import type { ComponentChildren, VNode } from "preact";
 import { useCallback, useEffect, useRef, useState } from "preact/hooks";
 import { ErrorBoundary, useLocation } from "preact-iso";
 import { ToastStack, type ToastData, type ToastKind } from "@roedu/ui";
-import { Presence } from "@roedu/ui/motion";
-import Home from "./screens/Home";
+import { Presence, useIsPresent } from "@roedu/ui/motion";
 import { RouteErrorBoundary } from "./components/RouteErrorBoundary";
 import { OptionalChromeBoundary } from "./components/OptionalChromeBoundary";
 import { lazyScreen } from "./lazyScreen";
-import { portedPath } from "./routes";
+import { pathOf, portedPath } from "./routes";
+import { ScreenURL } from "./screenLocation";
 
-// Home is the only screen every visitor needs. Each game is deliberately loaded
-// on first play so low-end devices do not parse both game engines up front.
+// Load only the selected screen. Deep links do not need the Home view;
+// AccountBar remains immediately mounted and charged on every route.
 const AccountBar = lazyScreen(() => import("./components/AccountBar"));
+const Home = lazyScreen(() => import("./screens/Home"));
 const Intrusul = lazyScreen(() => import("./screens/Intrusul"));
 const Perechi = lazyScreen(() => import("./screens/Perechi"));
 const Conexiuni = lazyScreen(() => import("./screens/Conexiuni"));
+const Alchimie = lazyScreen(() => import("./screens/Alchimie"));
+const CaldRece = lazyScreen(() => import("./screens/CaldRece"));
+const Lant = lazyScreen(() => import("./screens/Lant"));
+const Ranking = lazyScreen(() => import("./screens/Ranking"));
 
 export type { ToastKind };
 
-// The document this shell was served for. A client-side navigation to any
-// other path is a legacy route the server owns, so the browser must load it.
-const initialUrl = typeof location === "undefined" ? "/" : location.pathname + location.search;
-
-function ScreenFrame({ children }: { children: ComponentChildren }) {
-  return <div className="screen">{children}</div>;
+function ScreenFrame({ children, url }: { children: ComponentChildren; url: string }) {
+  const present = useIsPresent();
+  return <ScreenURL.Provider value={url}><div className="screen" inert={!present}>{children}</div></ScreenURL.Provider>;
 }
 
-function LegacyRoute({ url }: { url: string }) {
+function FallbackRoute({ url }: { url: string }) {
+  const { route } = useLocation();
   useEffect(() => {
-    if (url !== initialUrl) window.location.assign(url);
-  }, [url]);
+    const target = new URL(url, "http://local.invalid");
+    // A single trailing slash on a known screen retains its query. Unknown
+    // document paths return Home, matching the original wildcard destination.
+    const canonical = target.pathname.endsWith("/") ? target.pathname.slice(0, -1) : "";
+    route(portedPath(canonical) ? canonical + target.search : "/", true);
+  }, [route, url]);
   return (
     <div className="screen-pad fill">
       <section className="container card col route-error-content" role="status" aria-live="polite">
-        {url === initialUrl ? <p>Pagina nu este disponibilă în această versiune.</p> : <p>Se încarcă…</p>}
+        <p>Se încarcă…</p>
         <div className="row wrap"><a href="/">Înapoi la jocuri</a></div>
       </section>
     </div>
@@ -53,7 +58,11 @@ function LegacyRoute({ url }: { url: string }) {
 }
 
 export default function App() {
-  const { path, url, route } = useLocation();
+  const { url, route } = useLocation();
+  // LocationProvider normalizes trailing slashes in its `path`. Match the raw
+  // document path so the explicit fallback can canonicalize a known slash and
+  // preserve its query before selecting a game.
+  const path = pathOf(url);
   const [toasts, setToasts] = useState<ToastData[]>([]);
   const toastIdRef = useRef(0);
 
@@ -72,11 +81,10 @@ export default function App() {
 
   const goHome = useCallback(() => route("/", true), [route]);
 
-  // The ported set is matched on the exact document path; everything else is
-  // the server's (legacy) route. Keep this switch literal: the route-budget
+  // The ported set is matched on the exact document path. Keep this switch literal: the route-budget
   // evaluator binds every case to its screen module.
   let screen: VNode;
-  switch (portedPath(path) ? path : "legacy") {
+  switch (portedPath(path) ? path : "fallback") {
     case "/":
       screen = <Home onToast={pushToast} />;
       break;
@@ -89,8 +97,20 @@ export default function App() {
     case "/conexiuni":
       screen = <Conexiuni onExit={goHome} onToast={pushToast} />;
       break;
+    case "/alchimie":
+      screen = <Alchimie url={url} onExit={goHome} onToast={pushToast} />;
+      break;
+    case "/cald-rece":
+      screen = <CaldRece onExit={goHome} onToast={pushToast} />;
+      break;
+    case "/lant":
+      screen = <Lant onExit={goHome} onToast={pushToast} />;
+      break;
+    case "/clasament":
+      screen = <Ranking />;
+      break;
     default:
-      screen = <LegacyRoute url={url} />;
+      screen = <FallbackRoute url={url} />;
   }
 
   return (
@@ -106,7 +126,7 @@ export default function App() {
         </div>
         <div className="app-content">
           <Presence mode="wait">
-            <ScreenFrame key={path}>
+            <ScreenFrame key={path} url={url}>
               <ErrorBoundary>{screen}</ErrorBoundary>
             </ScreenFrame>
           </Presence>

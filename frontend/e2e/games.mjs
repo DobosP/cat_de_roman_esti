@@ -79,8 +79,9 @@ export async function openGameOptions(page, game, { keyboard = false, setup = fa
 }
 
 // ADR-0197 per-route delivery: the Preact shell serves exactly these document
-// paths; every other route is the frozen legacy React bundle (data-ui="legacy").
-export const portedRoutes = Object.freeze(["/", "/intrusul", "/perechi", "/conexiuni"]);
+// paths. M3 observes every game through the current Preact bundle; explicit
+// CAT_UI=legacy rollback is qualified independently by its owning journey.
+export const portedRoutes = Object.freeze(["/", "/intrusul", "/perechi", "/conexiuni", "/alchimie", "/cald-rece", "/lant", "/clasament"]);
 export const expectedUi = (url) => (portedRoutes.includes(new URL(url, "http://local.invalid").pathname) ? "preact" : "legacy");
 
 /** Every journey states which bundle the server answered with for the current document. */

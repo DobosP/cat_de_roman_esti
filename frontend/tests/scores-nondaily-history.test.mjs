@@ -1,14 +1,9 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
 import test from "node:test";
-import ts from "@typescript/typescript6";
+import { importTsGraph } from "./helpers/import-ts-graph.mjs";
 
 const STORAGE_KEY = "cat_wordgame_scores_v1";
-const source = readFileSync(new URL("../src/scores.ts", import.meta.url), "utf8");
-const compiled = ts.transpileModule(source, {
-  compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2021 },
-}).outputText;
-const scores = await import(`data:text/javascript;base64,${Buffer.from(compiled).toString("base64")}`);
+const scores = await importTsGraph(new URL("../src/scores.ts", import.meta.url));
 
 class MemoryStorage {
   values = new Map();

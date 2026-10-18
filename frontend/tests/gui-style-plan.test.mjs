@@ -376,8 +376,8 @@ function publicationFixture(t, label, body) {
     ["scripts/gui-style-plan.mjs", "2bcdc2ecb81af156920ec9866a03aa0fd0bfcaf889416f7ceb5cedfec53e908c"],
     ["frontend/tests/fixtures/gui-style-plan.json", "24bdcb858dcc74878e99aca0de338bf335cf3b1b3c14e8b68820fca1be9ca8b9"],
     ["frontend/src/components/cssUnits.ts", "5681d320b14511757894cff3a850b7f67114d78e9b1eb0d2c36e4d7551c1b873"],
-    ["frontend/src/components/CspStyle.ts", "18116c906c99ae42fe17fb6be45711d4cd4d6ff97ec8bbad06a7f3c6752479d5"],
-    ["frontend/src/components/CspElements.tsx", "ac05cacdcea34685d5b83c15cfeb7254590d7dbf9187e5dd74c2bd6aef4cbe30"],
+    ["frontend/src/components/CspStyle.ts", "8097d0f5c1fecb298c8beefe93447f55d9ddb758a52c09b27afb4bc5ac6efc16"],
+    ["frontend/src/components/CspElements.tsx", "7c9041cb80417e4cfa1f6c523bf2dd49ed32b5ce6dd4ab9746ebbc5ca4ae9048"],
   ].map(([name, expected]) => { const bytes = read(name); assert.equal(sha(bytes), expected); return { path: name, bytes: bytes.length, sha256: expected }; });
   const testBytes = read("frontend/tests/gui-style-plan.test.mjs");
   sourceInputs.push({ path: "frontend/tests/gui-style-plan.test.mjs", bytes: testBytes.length, sha256: sha(testBytes) });

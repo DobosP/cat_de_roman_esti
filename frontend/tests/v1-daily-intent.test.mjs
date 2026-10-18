@@ -18,11 +18,14 @@ async function importTs(source, replacements = {}) {
 const routerStub = `data:text/javascript;base64,${Buffer.from(`
   export const useLocation = () => ({ url: globalThis.__intentUrl, route: (url, replace) => globalThis.__intentNavigations.push({ url, replace }) });
 `).toString("base64")}`;
-const { useDailyIntent } = await importTs(intentSource, { '"preact-iso"': JSON.stringify(routerStub) });
+const contextStub = `data:text/javascript;base64,${Buffer.from('export const ScreenURL = {}; export const useContext = () => globalThis.__intentFrameUrl ?? null;').toString("base64")}`;
+const { useDailyIntent } = await importTs(intentSource, { '"preact-iso"': JSON.stringify(routerStub),
+  '"preact/hooks"': JSON.stringify(contextStub), '"../screenLocation"': JSON.stringify(contextStub) });
 
 function intentAt(search, pathname = "/lant") {
   globalThis.__intentUrl = `${pathname}${search}`;
   globalThis.__intentNavigations = [];
+  globalThis.__intentFrameUrl = null;
   return useDailyIntent();
 }
 
@@ -40,6 +43,14 @@ void test("the circuit intent is single-use and keeps every other query param", 
   assert.equal(free.active, false);
   free.consume();
   assert.deepEqual(globalThis.__intentNavigations, [], "no history write without an intent");
+});
+
+void test("a retained screen reads its own captured query while live routing advances", () => {
+  intentAt("?challenge=daily", "/lant");
+  globalThis.__intentFrameUrl = "/alchimie?mode=challenges";
+  const leaving = useDailyIntent(); assert.equal(leaving.active, false); leaving.consume();
+  assert.deepEqual(globalThis.__intentNavigations, []);
+  globalThis.__intentFrameUrl = null;
 });
 
 void test("daily badges show the Romanian dd.mm.yyyy date while seeds keep the raw key", async () => {

@@ -1,4 +1,4 @@
-import { Csp } from "./CspStyle";
+import "../styles/shared-game-controls.css";
 // DifficultyPicker — a shared segmented control for the three difficulty tiers so every
 // game's intro card picks difficulty the same way (same look, tap-targets, a11y wiring).
 //
@@ -24,14 +24,13 @@ export function DifficultyPicker<T extends string>({
   label?: string;
 }) {
   return (
-    <Csp.div className="col" css={{ gap: "8px" }}>
-      <Csp.span
-        className="faint"
-        css={{ letterSpacing: "0.08em", fontSize: "0.72rem" }}
+    <div className="col difficulty-picker">
+      <span
+        className="faint difficulty-picker-label"
         id="difficulty-label"
       >
         {label}
-      </Csp.span>
+      </span>
       <div className="segment" role="group" aria-labelledby="difficulty-label">
         {options.map((o) => (
           <button
@@ -46,6 +45,6 @@ export function DifficultyPicker<T extends string>({
           </button>
         ))}
       </div>
-    </Csp.div>
+    </div>
   );
 }

@@ -15,8 +15,8 @@ import { PORTED_LINK_SCOPE } from "./routes";
 installReleaseRecovery();
 
 // UI 1.0 has no ThemeProvider: the explicit .roedu-root wrapper carries the
-// tokens (theme.css). Links outside the ported scope are left to the browser so
-// the server's frozen legacy bundle answers them (ADR-0197).
+// tokens (theme.css). Links outside the app scope remain document navigations
+// so native account/legal/API endpoints keep their server owner.
 render(
   <div className="roedu-root">
     <LocationProvider scope={PORTED_LINK_SCOPE}>

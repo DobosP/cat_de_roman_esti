@@ -12,19 +12,17 @@ import (
 // environment mode, request value or Go constant never does.
 const managedUIPreact = "preact"
 
-// managedPortedRoutes is the Go-side M2 ported set (PROGRAM E3/E6; ADR-0197
-// addendum: Perechi joined the pilot set). A Preact current bundle serves
-// exactly these document paths; every other path, deep link or client-side
-// fallback is served by the frozen legacy shell. Matching is on the exact
-// request path: queries, cookies and headers never select.
-var managedPortedRoutes = map[string]bool{"/": true, "/intrusul": true, "/perechi": true, "/conexiuni": true}
+// managedPortedRoutes binds all M3 screen paths to their current bundle. Unknown
+// and trailing-slash documents use that same shell, whose explicit fallback
+// returns Home or the canonical known path. Queries never select a bundle.
+var managedPortedRoutes = map[string]bool{"/": true, "/intrusul": true, "/perechi": true, "/conexiuni": true, "/alchimie": true, "/cald-rece": true, "/lant": true, "/clasament": true}
 
 // document chooses the bundle whose nonce shell answers a document request.
-func (ui *managedSPA) document(requestPath string) *managedSPA {
-	if ui.frozen == nil || managedPortedRoutes[requestPath] {
-		return ui
-	}
-	return ui.frozen
+func (ui *managedSPA) document(_ string) *managedSPA {
+	// CAT_UI=legacy already selects a legacy ui at construction. A current
+	// Preact ui never falls back to frozen documents after M3; its admitted
+	// frozen tree remains available for explicit rollback and old asset URLs.
+	return ui
 }
 
 // assetOwner chooses the bundle whose SDK static handler serves a public

@@ -114,10 +114,22 @@ for (const [width, columns] of [[320, 2], [699, 2], [700, 3], [979, 3], [980, 6]
 }
 
 test("Home's hero states its actual cultural range under the unchanged accessible brand", async ({ page }) => {
+  await page.addInitScript(() => {
+    const memory = sessionStorage.getItem("m3-synthetic-memory");
+    if (memory !== null) Object.defineProperty(navigator, "deviceMemory", { configurable: true, value: Number(memory) });
+  });
   await openHome(page, {});
   await expect(page.getByRole("heading", { name: "Cât de român ești?", exact: true })).toBeVisible();
   await expect(page.getByText("De la Ștefan cel Mare la Las Fierbinți: șase jocuri scurte din cultura și viața românească.", { exact: true })).toBeVisible();
   await expect(page.getByText("Șase jocuri românești. Alege unul și intri direct în ritm.", { exact: true })).toHaveCount(0);
+  // Synthetic reports exercise policy + delivered CSS; these are not device measurements.
+  for (const [memory, enabled] of [[2, false], [8, true], [0, true]]) {
+    await page.evaluate((value) => sessionStorage.setItem("m3-synthetic-memory", String(value)), memory);
+    await page.reload();
+    await expect(page.locator(".home-screen")).toHaveAttribute("data-card-blur", enabled ? "on" : "off");
+    expect(await page.locator(".home-screen .card").first().evaluate((node) => getComputedStyle(node).backdropFilter))
+      .toBe(enabled ? "blur(14px)" : "none");
+  }
 });
 
 for (const graduated of [false, true]) {
@@ -164,6 +176,8 @@ function artifactBytes(directory, relative) {
 }
 
 test("the actual served build keeps optional account/game chunks outside static imports while binding emitted bytes", async ({ page, request }, testInfo) => {
+  const requested = new Set();
+  page.on("request", (item) => requested.add(new URL(item.url()).pathname));
   await page.goto("/");
   await expect(page.getByRole("heading", { name: "Cât de român ești?", exact: true })).toBeVisible();
   const origin = new URL(page.url()).origin;
@@ -221,12 +235,11 @@ test("the actual served build keeps optional account/game chunks outside static 
     visitStaticOwner(match.entry);
     const closure = collectInitialBundleFiles(match.manifest);
     expect(closure.length).toBeGreaterThan(0);
-    // ADR-0197: the current (Preact) build carries the ported screens only; the
-    // unported screens are served by the frozen legacy bundle and must be
-    // absent from the current manifest rather than silently measured.
+    // Every M3 screen is current. Home is selected lazily, but its entire
+    // static closure and the mandatory AccountBar are charged for this page.
     const ui = await page.locator("html").getAttribute("data-ui");
-    const ported = ["src/components/AccountBar.tsx", "src/screens/Intrusul.tsx", "src/screens/Perechi.tsx", "src/screens/Conexiuni.tsx"];
-    const unported = ["src/screens/Alchimie.tsx", "src/screens/CaldRece.tsx", "src/screens/Lant.tsx"];
+    const ported = ["src/components/AccountBar.tsx", "src/screens/Home.tsx", "src/screens/Intrusul.tsx", "src/screens/Perechi.tsx", "src/screens/Conexiuni.tsx", "src/screens/Alchimie.tsx", "src/screens/CaldRece.tsx", "src/screens/Lant.tsx", "src/screens/Ranking.tsx"];
+    const unported = [];
     expect(ui).toBe("preact");
     for (const key of unported) expect(match.manifest[key]).toBeUndefined();
     const optional = ported
@@ -238,8 +251,22 @@ test("the actual served build keeps optional account/game chunks outside static 
         expect(dynamicImports.has(key)).toBe(true);
         return { key, file: row.file };
       });
+    const homeClosure = collectInitialBundleFiles(match.manifest, {
+      eagerRoots: ["src/components/AccountBar.tsx", "src/screens/Home.tsx"],
+    });
+    for (const key of ["src/components/AccountBar.tsx", "src/screens/Home.tsx"]) {
+      expect(homeClosure).toContain(match.manifest[key].file);
+    }
+    for (const file of homeClosure) expect(requested.has(match.prefix + file), `Home initial dependency requested: ${file}`).toBe(true);
+    const selector = match.manifest["src/screens/Alchimie.tsx"];
+    for (const key of ["src/screens/AlchimieChallenge.tsx", "src/screens/AlchimieExplore.tsx"]) {
+      const leaf = match.manifest[key];
+      expect(leaf?.isDynamicEntry).toBe(true);
+      expect(selector.dynamicImports).toContain(key);
+      expect(closure).not.toContain(leaf.file);
+    }
     const bound = [];
-    for (const file of [...new Set([...closure, ...optional.map(({ file }) => file)])]) {
+    for (const file of [...new Set([...homeClosure, ...optional.map(({ file }) => file)])]) {
       const bytes = artifactBytes(match.directory, file), url = new URL(match.prefix + file, origin).href;
       const response = await request.get(url);
       expect(response.status()).toBe(200);
@@ -251,7 +278,7 @@ test("the actual served build keeps optional account/game chunks outside static 
     await testInfo.attach(`static-closure-${match.relative.replaceAll("/", "-")}`, {
       body: JSON.stringify({ scope: "Observed build artifact/HTTP byte integrity, not a no-startup-fetch claim",
         artifact_root: match.relative, manifest_sha256: hash(match.manifestBytes), entry: match.entry,
-        initial_static_files: closure, optional_dynamic_files: optional, bound }, null, 2), contentType: "application/json",
+        initial_static_files: closure, home_initial_files: homeClosure, optional_dynamic_files: optional, bound }, null, 2), contentType: "application/json",
     });
   }
 });

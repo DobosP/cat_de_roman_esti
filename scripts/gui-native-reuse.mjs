@@ -18,10 +18,11 @@ const PG = new Set([`${MODULE}/internal/accounts`, `${MODULE}/internal/httpapi`]
 const ALWAYS_FRESH = new Set([...PG, ...["internal/httpgolden", "internal/guibuild", "cmd/cat-server", "cmd/cat-browser-plan",
   "internal/browserplan", "internal/content", "internal/doccheck"].map((name) => `${MODULE}/${name}`)]);
 export const NATIVE_REUSE_POLICY = "historical-audited-source-reuse-with-fresh-gui-api-contracts-v2";
-// Independently reviewed source at e82e5562; never regenerate this pin after a
+// Independently re-audited for M3 routing and core-v1.11's Go module tag;
+// original source-policy review: e82e5562. Never regenerate this pin after a
 // native change without another explicit semantic audit and review. Rows are
 // sorted {path,mode:0777,sha256} for every .go/go.mod/go.sum in both native trees.
-export const AUDITED_NATIVE_SOURCE = Object.freeze({ count: 238, sha256: "6eb3a47f4fb5d7445dc916c01a47d1db6e627c4ea39752ab16a30e1c63946b3c" });
+export const AUDITED_NATIVE_SOURCE = Object.freeze({ count: 238, sha256: "ccf8b44c19805014570fd10457c544f5d6ecd55c84eb6db1d4f225efb380f3dc" });
 const ignored = new Set([".git", "node_modules", ".gate", ".vitest", "test-results", "TASK_BRIEF.md", "TASK_RESULT.md", "SWARM_RESULT.md"]);
 const frontendInputs = new Set(["frontend/package.json", "frontend/package-lock.json", "frontend/src/release.ts", "frontend/e2e/seeded-starts.json"]);
 export const BACKEND_RACE_ARGS = Object.freeze(["test", "-race", "-timeout=30m", "-count=1", "-json", "./..."]);

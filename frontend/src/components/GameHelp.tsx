@@ -1,8 +1,6 @@
-import type { GameKey } from "../games";
-import { GAME_HELP } from "../gameHelp.mjs";
+import type { GameHelpCopy } from "../gameHelp.mjs";
 
-export function GameHelp({ game }: { game: GameKey }) {
-  const help = GAME_HELP[game];
+export function GameHelp({ help }: { help: GameHelpCopy }) {
   return (
     <details className="game-help">
       <summary>Reguli și ajutor</summary>

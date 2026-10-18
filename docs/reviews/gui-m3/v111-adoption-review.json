@@ -1,0 +1,238 @@
+{
+  "schema": 1,
+  "kind": "independent-core-v111-consumer-application-and-native-audit",
+  "not_a_gate_result": true,
+  "reviewer": "agent:codex/cat_v111_review",
+  "reviewed_at": "2026-10-13T18:51:54.626226+00:00",
+  "source_root": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3",
+  "head": "e75518c1473be3a32ec2a0f2e1565764bbcf5d5b",
+  "dirty": true,
+  "verdict": "APPROVE_APPLICATION_SOURCE_AND_EXACT_NATIVE_REPIN",
+  "scope": "Finite core-v1.11 application and native semantic audit only. No consumer unit/full, emitted budget, milestone, landing or production acceptance.",
+  "execution": "Read-only Git, Python hashing, archive and retained receipt inspection. Reviewer ran no product runtime or gate; sole write is this review.",
+  "canonical_release": {
+    "source_sha": "5268b64df5ac185cd97ef652b477d80c089869e1",
+    "tag": "core-v1.11",
+    "keeper_manifest_sha256": "80173e8280f9c14305b18af600dbb339b575816010b29eea329976a758f572fc",
+    "verified_indexed_files": 922,
+    "publication_sha256": "0444e1cfc0ae48376ef749d1cd8df9e9368a6690d71b236f5270ba29e1991841",
+    "independent_final_review_sha256": "2828621abe63491a4ed98bd4f30bc300a103400a726d6df049c4651c884b55f3",
+    "kit": [
+      {
+        "path": "kit/CORE_TAG",
+        "sha256": "a32b8673856216cd1614213d7f1ff4db049214ecd02c59763c7bbfc4dc9df29c"
+      },
+      {
+        "path": "kit/SHA256SUMS",
+        "sha256": "175657cf03f7b4c65a18ac668573008ee526c90f4011cb25f978d96a73ab07c9"
+      },
+      {
+        "path": "kit/roedu-ui-1.0.11.tgz",
+        "sha256": "68641731fc634717fe82f062aaf852a880c1d0082223486645363d329e7fbbb3"
+      },
+      {
+        "path": "kit/roedu-web-kit-0.1.11.tgz",
+        "sha256": "335c834062ff25aac2367ca3fdad189c0e9c513ca44649f0e66a2acd45f1def7"
+      },
+      {
+        "path": "kit/web-kit-go-core-v1.11.tgz",
+        "sha256": "0351832d2e47d3eb9112a142896fd09072e7ac5dd80f58518ee9ad2ee99e8e1b"
+      }
+    ]
+  },
+  "application_results": [
+    {
+      "path": "/home/dobo/work/_temp/feat__gui-cat-m3/kit-sync-v111-result.json",
+      "target": "kit:sync",
+      "sha256": "7940dae06f3a503e261d99a5aed9235b04010dc49b99425cc1a3033c57caf08c",
+      "pass_count": 9,
+      "artifact_files_verified": 3,
+      "tree_sha256": "4974aa987e06c4fd05ee8615f22f7bed03e1e123bf052531b5e0ae25dcf92dea",
+      "bootstrap_invocation": "03d16bbb-8d7d-45fb-968a-ca7110b6a0e9",
+      "wrapper_invocation": "d7cca0ba-f550-484f-887e-92894b4d6b76",
+      "command": "GATE_OPERATOR=agent:codex bash scripts/gate.sh kit:sync --sha e75518c1473be3a32ec2a0f2e1565764bbcf5d5b --dirty --parallel 2",
+      "operator": "agent:codex (PROGRAM E8)"
+    },
+    {
+      "path": "/home/dobo/work/_temp/feat__gui-cat-m3/deps-v111-result.json",
+      "target": "deps",
+      "sha256": "892aa41f63c00c6e55f8dd16caeba4a9b68cc8a2ab64a3076e6392e63d916baa",
+      "pass_count": 4,
+      "artifact_files_verified": 26,
+      "tree_sha256": "0cfb89bc2b78f0a728b54942a2d1c0a6ab06b59f1d75f8af00b6e163f9ae1a6f",
+      "bootstrap_invocation": "27f1a07e-ced2-401c-a57a-acc807f2161e",
+      "wrapper_invocation": "da3db03f-d218-4707-bc49-7ed3af3d454c",
+      "command": "GATE_OPERATOR=agent:codex bash scripts/gate.sh deps --sha e75518c1473be3a32ec2a0f2e1565764bbcf5d5b --dirty --parallel 2",
+      "operator": "agent:codex (PROGRAM E8)"
+    }
+  ],
+  "installed_npm_archive_comparison": [
+    {
+      "package": "@roedu/ui",
+      "file_count": 187,
+      "archive_sha256": "68641731fc634717fe82f062aaf852a880c1d0082223486645363d329e7fbbb3",
+      "comparison": "all extracted regular bytes and executable bits exact"
+    },
+    {
+      "package": "@roedu/web-kit",
+      "file_count": 143,
+      "archive_sha256": "335c834062ff25aac2367ca3fdad189c0e9c513ca44649f0e66a2acd45f1def7",
+      "comparison": "all extracted regular bytes and executable bits exact"
+    }
+  ],
+  "bootstrap": {
+    "count": 9,
+    "source_ref": "5268b64df5ac185cd97ef652b477d80c089869e1",
+    "all_nine_archive_and_runtime_guard_hashes_exact": true,
+    "only_source_change_from_v110": "package.json version 0.1.10 to 0.1.11",
+    "files": [
+      {
+        "path": "tools/gui-bootstrap-webkit/package.json",
+        "sha256": "07b06026e50e8cbd2af2e8663f6f8f80e6b51911a7f0956371e2c97d2c104396"
+      },
+      {
+        "path": "tools/gui-bootstrap-webkit/scripts/run-task.mjs",
+        "sha256": "d0d6a6177c26e29c19a3f51f7070a2899498331fbd9d08991e2af514becfe818"
+      },
+      {
+        "path": "tools/gui-bootstrap-webkit/scripts/csp-measurement.mjs",
+        "sha256": "dab858611f52b7e10024fbae58aff74626f8dd67cea7129d0209f649bf9a0465"
+      },
+      {
+        "path": "tools/gui-bootstrap-webkit/scripts/locate-kit.mjs",
+        "sha256": "1942d09148153cb1802da8bf3e4da6299fa64fbaa01c84c7f7b8e4dc6e4c4a4a"
+      },
+      {
+        "path": "tools/gui-bootstrap-webkit/scripts/ui-adoption-config.mjs",
+        "sha256": "c1292e5b377b64934cafeaaf3ab2ba45f8f5393229716f4a71b5a65ad9122f60"
+      },
+      {
+        "path": "tools/gui-bootstrap-webkit/scripts/ast-artifacts.mjs",
+        "sha256": "aaa1ed835db6963d95e345e264d4bdcc5b5d748f345294db67af6be3cd439265"
+      },
+      {
+        "path": "tools/gui-bootstrap-webkit/scripts/kit-sync.mjs",
+        "sha256": "0d76e09e3d0c9e7d959e98a0e1093b4ad4d82deca29d1e61f77e0576ffb5f300"
+      },
+      {
+        "path": "tools/gui-bootstrap-webkit/schemas/validate.mjs",
+        "sha256": "32552ef83c2baf911f5412b7053bf70e832ac19e43ed611ebc522c50186f40f4"
+      },
+      {
+        "path": "tools/gui-bootstrap-webkit/schemas/ui-adoption.schema.json",
+        "sha256": "e8b3f95ffd875a78fc97898d2cedc540ce719ddc84e5f3f9f1ee99f33bbffa64"
+      }
+    ],
+    "lock_delta": "Only root and packages[empty].version change; full dependency graph unchanged."
+  },
+  "generated_delta": {
+    "frontend_lock_pre_v111_reconstruction_sha256": "64028d67e8adda3d5951e004c892115ab0cab184537d05ec98b70a85804fd21c",
+    "frontend_lock_finite_delta": "Replacing only two core package records and root file pointers with v1.10 exactly reconstructs prior independently reviewed M3 lock, including unchanged signals2.11.3/signals-core1.14.4. All other dependency records unchanged.",
+    "versions_lock_delta": "Only core_tag core-v1.10 to core-v1.11; every selected runtime/tool/library row unchanged.",
+    "go_vendor": "All 41 regular archive members exact in vendor; v1.10 and v1.11 Go archive records byte- and full archive-mode-identical. Current source modes unchanged.",
+    "go_mod_delta": "Only github.com/DobosP/roedu-ui/web-kit require v0.0.0-core-v1.10 to v0.0.0-core-v1.11. Same local ./third_party/webkit replace; go.sum unchanged.",
+    "gate_templates": "All four templates exact current kit bytes/executable bits and unchanged from Cat HEAD."
+  },
+  "probe": {
+    "path": "/home/dobo/work/_temp/feat__gui-cat-m3/gates/cat_de_roman_esti/.gate/deps/toolchain-probe/report.json",
+    "sha256": "de393c7293c81df57ded8bda4beef4513b15bc4c36c6fcf94f624de0a2d25b9c",
+    "checks": 15,
+    "status": "pass",
+    "active_ui": "1.0.11",
+    "declared_web_kit": "0.1.11",
+    "source_change": "Only fixed expected UI and web-kit versions; tool/runtime probes otherwise unchanged."
+  },
+  "native_audit": {
+    "algorithm": "Sorted compact UTF-8 JSON rows {path,mode:0777,sha256}; regular .go/go.mod/go.sum under go-backend and shared-go including tests/vendor, with wrapper ignored/meta/env exclusion.",
+    "prior_review_sha256": "5327f3574e0e0843fbce561aabb00da474dd6c877d1a01f4af2c78ebbba0d2fa",
+    "prior_count": 238,
+    "prior_sha256": "d8f4b3f2498f2dc431e71b3224f0cf4895fba850a6e5136ddd358e298641dcac",
+    "actual_count": 238,
+    "actual_sha256": "ccf8b44c19805014570fd10457c544f5d6ecd55c84eb6db1d4f225efb380f3dc",
+    "delta": [
+      {
+        "path": "go-backend/go.mod",
+        "before_sha256": "a0af82178fdb9809a84a758bb0efc01f57efaeaa1b3277ecf0b166da9d447c7d",
+        "after_sha256": "5af07df8f4e816077d3be20b3d5e55b21527334da4c5f748ac403d4eba87416b",
+        "mode": 436
+      }
+    ],
+    "reconstruction": "Reversing only the require tag exactly recreates every prior audit row and its aggregate. No native file name, mode, other content or new native input changed.",
+    "semantic_verdict": "APPROVE_EXACT_REPIN",
+    "basis": "Identical selected local Go source and sums preserve native behavior. Existing previously audited managed document fallback and tests are unchanged. contentrails quick.go remains a JSON-only Intrusul/Perechi client; no embed/document observation is added. Whole httpapi, guibuild, server, content, doccheck and all other always-fresh closures remain fresh; actual Go graph/input identity and original complete-race event requirements remain mandatory.",
+    "conditions": [
+      "Set guard only to count238 and this exact digest; any later native input change requires another independent semantic audit.",
+      "A cold complete native race baseline is required under the new input/graph identity; no reuse of previous v1.10 proof and no compiler-input equivalence claim.",
+      "Retain original unit/full assertions, browser keys, CSP and route byte caps."
+    ]
+  },
+  "protected_source_files_unchanged": [
+    "budgets.json",
+    "Taskfile.yml",
+    "compose.gate.yml",
+    "Dockerfile.toolchain",
+    "scripts/gate.sh",
+    "go-backend/go.sum",
+    "shared-go/authcore/go.mod",
+    "shared-go/authcore/go.sum"
+  ],
+  "reviewed_source_hashes": [
+    {
+      "path": "frontend/package.json",
+      "mode": 436,
+      "sha256": "9bb4be7e35cfe9101e4dbdfa7e0798c03753139f768c14390b2e02f7fd52719a"
+    },
+    {
+      "path": "frontend/package-lock.json",
+      "mode": 436,
+      "sha256": "41a10de4b4b6fe8c45e42c621d52094d364f4952cc89ee4478409a955105bbc7"
+    },
+    {
+      "path": "versions.lock.json",
+      "mode": 436,
+      "sha256": "d7c0192fb92cb307d9235db1a3004d06d07955b461a59e48ce1924b1ede71e0b"
+    },
+    {
+      "path": "tools/gui-bootstrap-webkit/package.json",
+      "mode": 436,
+      "sha256": "07b06026e50e8cbd2af2e8663f6f8f80e6b51911a7f0956371e2c97d2c104396"
+    },
+    {
+      "path": "tools/gui-bootstrap-webkit/package-lock.json",
+      "mode": 436,
+      "sha256": "fed38045ce06a78eae202221cfaada1d0a49792cda0b0aa6776ed12aeb8c8d6a"
+    },
+    {
+      "path": "scripts/gui-hook-runtime.mjs",
+      "mode": 436,
+      "sha256": "7877213b157c57cc2fdaa55e7aa2bb5ecfc4ceead7502ae660fcbf3bd7e24c88"
+    },
+    {
+      "path": "frontend/tests/fixtures/gui-hook-runtime-bootstrap.json",
+      "mode": 436,
+      "sha256": "3fd5966175ef2cd914ee0b439b28aa1874f953488d10c492fdfbdd41614746ad"
+    },
+    {
+      "path": "scripts/gui-toolchain-probe.mjs",
+      "mode": 436,
+      "sha256": "aa1db70e46ce9cd495c547f0e7ecf0a0655fcf1e3d3d6ba56d8a2d79f0235c89"
+    },
+    {
+      "path": "go-backend/go.mod",
+      "mode": 436,
+      "sha256": "5af07df8f4e816077d3be20b3d5e55b21527334da4c5f748ac403d4eba87416b"
+    },
+    {
+      "path": "scripts/gui-native-reuse.mjs",
+      "mode": 436,
+      "sha256": "f2c563f517c33a2a7551c4b7662ff92f8910632ea47fd08072b98f7882432119"
+    }
+  ],
+  "reviewed_source_hashes_aggregate_sha256": "7d96b0a0d75d763b2b30afdcc667eae061856238b982cde9e0fb134155662f53",
+  "concerns": [],
+  "remaining": [
+    "Parent must perform actual v1.11 emitted bundle measurements; earlier v1.10 red Challenge/Cald/Lant budgets remain historical evidence, not solved by adoption review.",
+    "Consumer exact clean-SHA unit/full and independent final milestone review remain required.",
+    "The prior native guard is expected to refuse current signature until the independently approved repin is applied."
+  ]
+}

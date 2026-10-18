@@ -8,7 +8,7 @@ import { pathToFileURL } from 'node:url';
 // phase/receipt, prove installed bytes, or return a passing gate/release result.
 const BOOTSTRAP = 'tools/gui-bootstrap-webkit';
 const BOOTSTRAP_FILES = Object.freeze({
-  'package.json': '5e445c33a8354dadc1d6ed925f90686e2ba0434ee744b94085e40feee2b92875',
+  'package.json': '07b06026e50e8cbd2af2e8663f6f8f80e6b51911a7f0956371e2c97d2c104396',
   'scripts/run-task.mjs': 'd0d6a6177c26e29c19a3f51f7070a2899498331fbd9d08991e2af514becfe818',
   'scripts/csp-measurement.mjs': 'dab858611f52b7e10024fbae58aff74626f8dd67cea7129d0209f649bf9a0465',
   'scripts/locate-kit.mjs': '1942d09148153cb1802da8bf3e4da6299fa64fbaa01c84c7f7b8e4dc6e4c4a4a',

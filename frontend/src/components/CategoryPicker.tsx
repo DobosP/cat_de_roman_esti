@@ -14,6 +14,7 @@ import {
   type GameKey,
 } from "../api/meta";
 import "../styles/category-picker.css";
+import "../styles/shared-game-controls.css";
 
 export function CategoryPicker({
   game,
@@ -71,12 +72,11 @@ export function CategoryPicker({
       <Csp.button
         key={key ?? "__mix__"}
         type="button"
-        className="chip"
+        className="chip category-picker-chip"
         aria-pressed={selected}
         onClick={() => onChange(key)}
         title={kind === "pop" ? "Cultură pop" : undefined}
         css={{
-          cursor: "pointer",
           borderColor: selected ? color : "var(--surface-border)",
           background: selected
             ? `color-mix(in srgb, var(--surface) 70%, ${color})`
@@ -98,27 +98,25 @@ export function CategoryPicker({
   };
 
   return (
-    <Csp.div className="col" css={{ gap: "8px" }}>
-      <Csp.span
-        className="faint"
-        css={{ letterSpacing: "0.08em", fontSize: "0.72rem" }}
+    <div className="col category-picker">
+      <span
+        className="faint category-picker-label"
         id="category-label"
       >
         CATEGORIE
-      </Csp.span>
-      <Csp.div
+      </span>
+      <div
         className="row wrap category-picker-options"
         role="group"
         aria-labelledby="category-label"
-        css={{ gap: "6px" }}
       >
         {chip(null, "Toate temele", accent)}
         {pop.map(chipFor)}
         {serious.map(chipFor)}
-      </Csp.div>
-      <Csp.span className="faint category-picker-note" css={{ fontSize: "0.72rem" }}>
+      </div>
+      <span className="faint category-picker-note">
         Tema se aplică doar jocurilor libere.
-      </Csp.span>
-    </Csp.div>
+      </span>
+    </div>
   );
 }

@@ -1,4 +1,5 @@
 import { Csp } from "./CspStyle";
+import "../styles/shared-game-controls.css";
 // GameShell — a shared header for every word game so the arcade feels cohesive.
 //
 // Renders a consistent "← Ieși" navigation button (left) and a right-aligned slot for the
@@ -9,7 +10,7 @@ import { Csp } from "./CspStyle";
 import type { ComponentChildren } from "preact";
 import { useLayoutEffect, useRef } from "preact/hooks";
 import { Button } from "@roedu/ui";
-import type { GameKey } from "../games";
+import type { GameHelpCopy } from "../gameHelp.mjs";
 import { GameHelp } from "./GameHelp";
 
 export function GameShell({
@@ -18,7 +19,7 @@ export function GameShell({
   title,
   children,
   busy = false,
-  helpGame,
+  help,
 }: {
   /** Return to the arcade home. */
   onExit: () => void;
@@ -31,7 +32,7 @@ export function GameShell({
   /** Disable the exit action while the host is creating or replacing a game. */
   busy?: boolean;
   /** Answer-free rules below the header for an active round. */
-  helpGame?: GameKey;
+  help?: GameHelpCopy;
 }) {
   const headerRef = useRef<HTMLDivElement | null>(null);
 
@@ -55,8 +56,8 @@ export function GameShell({
 
   return (
     <>
-      <Csp.div ref={headerRef} className="row spread game-shell-header" css={{ gap: "12px" }}>
-        <Csp.div className="row game-shell-main" css={{ gap: "10px", alignItems: "center" }}>
+      <div ref={headerRef} className="row spread game-shell-header">
+        <div className="row game-shell-main">
           <Button
             variant="secondary"
             size="sm"
@@ -71,19 +72,19 @@ export function GameShell({
           {title && (
             <Csp.strong
               className="game-shell-title"
-              css={{ fontFamily: "var(--font-display)", color: accent, fontSize: "1.05rem" }}
+              css={{ color: accent }}
             >
               {title}
             </Csp.strong>
           )}
-        </Csp.div>
+        </div>
         {children && (
           <div className="game-shell-status">
             {children}
           </div>
         )}
-      </Csp.div>
-      {helpGame && <GameHelp game={helpGame} />}
+      </div>
+      {help && <GameHelp help={help} />}
     </>
   );
 }

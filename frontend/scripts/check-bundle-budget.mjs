@@ -5,10 +5,11 @@ import { fileURLToPath } from "node:url";
 
 export const DEFAULT_INITIAL_GZIP_LIMIT_KIB = 120;
 
-// App mounts this lazy component on every route before any play action.
+// App mounts AccountBar everywhere and Home on the initial Home document.
 // The key is Vite's source-relative manifest identity, not a chunk filename.
 const REQUIRED_INITIAL_EAGER_ROOTS = Object.freeze([
   "src/components/AccountBar.tsx",
+  "src/screens/Home.tsx",
 ]);
 export const ROMANIAN_FONT_SOURCES = [
   "node_modules/@fontsource-variable/fredoka/files/fredoka-latin-ext-wght-normal.woff2",

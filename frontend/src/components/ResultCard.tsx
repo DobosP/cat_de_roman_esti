@@ -1,4 +1,5 @@
 import { Csp } from "./CspStyle";
+import "../styles/shared-game-controls.css";
 // ResultCard — the shared end-of-game card used by every word game so winning, losing,
 // the score read-out, the "Record!" celebration, and the share/copy + replay actions all
 // look and behave identically across the arcade. Wins get a confetti burst (skipped
@@ -73,44 +74,34 @@ export function ResultCard({
       role="status"
       aria-live="polite"
       css={{
-        gap: "10px",
-        padding: "24px",
-        textAlign: "center",
-        position: "relative",
-        overflow: "hidden",
         borderColor: ring,
         boxShadow: won ? `0 0 60px -18px ${accent}` : "var(--shadow-pop)",
       }}
     >
       {won && <Confetti />}
-      <Csp.div
-        css={{ fontSize: "2.6rem", lineHeight: 1 }}
+      <div
         aria-hidden
         className={won ? "result-icon-enter result-icon-enter--won" : "result-icon-enter"}
       >
         {icon}
-      </Csp.div>
-      <Csp.h2 css={{ margin: "2px 0", color: won ? accent : "var(--text)" }}>{title}</Csp.h2>
+      </div>
+      <Csp.h2 className="result-card-title" css={{ color: won ? accent : "var(--text)" }}>{title}</Csp.h2>
 
       {children && (
-        <Csp.div className="muted" css={{ margin: "0px", fontSize: "0.95rem" }}>
+        <div className="muted result-card-detail">
           {children}
-        </Csp.div>
+        </div>
       )}
 
       {score !== undefined && (
-        <Csp.div className="col center" css={{ gap: "4px", marginTop: "4px" }}>
-          <Csp.span className="faint" css={{ fontSize: "0.72rem", letterSpacing: "0.08em" }}>
+        <div className="col center result-card-score">
+          <span className="faint result-card-score-label">
             {scoreLabel}
-          </Csp.span>
+          </span>
           <Csp.div
             className="result-score-enter"
             css={{
-              fontFamily: "var(--font-display)",
-              fontWeight: 700,
-              fontSize: "2.2rem",
               color: won ? accent : "var(--text)",
-              fontVariantNumeric: "tabular-nums",
             }}
           >
             {score}
@@ -125,11 +116,11 @@ export function ResultCard({
               <Badge tone="success">★ Recordul acestei provocări</Badge>
             </span>
           )}
-        </Csp.div>
+        </div>
       )}
 
       <StartFailureNotice failed={startFailed} reserveSpace={Boolean(onReplay)} />
-      <Csp.div className="row center wrap" css={{ gap: "12px", marginTop: "12px", position: "relative" }}>
+      <div className="row center wrap result-card-actions">
         {onReplay && (
           <Button onClick={onReplay} disabled={actionsBusy}>
             {actionsBusy ? "Se pregătește…" : replayLabel}
@@ -150,7 +141,7 @@ export function ResultCard({
             Meniu
           </Button>
         )}
-      </Csp.div>
+      </div>
     </Csp.div>
   );
 }

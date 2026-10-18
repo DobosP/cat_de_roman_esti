@@ -22,6 +22,7 @@ import {
 import { GameIntro } from "../components/GameIntro";
 import { GameOptions } from "../components/GameOptions";
 import { GameShell } from "../components/GameShell";
+import { PERECHI_HELP } from "../gameHelp/perechi.mjs";
 import { Hud, StatBadge } from "../components/Hud";
 import { ResultCard } from "../components/ResultCard";
 import { nextActiveTileId } from "../perechiFocus.mjs";
@@ -34,7 +35,8 @@ import {
   lastDerivedReplayId,
   rememberDerivedReplayId,
 } from "../derivedReplay";
-import { bestScore, buildDailyCircuit, needsDerivedStarter, scoreBoard } from "../scores";
+import { bestScore, scoreBoard } from "../scores/read";
+import { buildDailyCircuit, needsDerivedStarter } from "../scores/daily";
 import { buildSharePayload, copyResult, formatDayKey, stableKey, todayLocal } from "../share";
 import { sound } from "../sound";
 import "../styles/perechi.css";
@@ -73,6 +75,7 @@ function focusStillOwned(origin: HTMLButtonElement): boolean {
 export default function Perechi({ onExit, onToast }: Props) {
   const active = useActiveGame(GAME_KEY);
   const isPresent = useIsPresent();
+  const liveRef = useRef(true), lifetimeRef = useRef(0);
   const recordOnce = useRecordScore(GAME_KEY);
   const startInFlight = useRef(false);
   const actionOwner = useMemo(() => createGameActionOwner(active), [active]);
@@ -82,18 +85,19 @@ export default function Perechi({ onExit, onToast }: Props) {
     kind: "failed" | "changed";
     savedId: string | null;
   } | null>(null);
-  useEffect(() => () => actionOwner.invalidate(), [actionOwner]);
   const tileRefs = useRef(new Map<string, HTMLButtonElement>());
   const hintButtonRef = useRef<HTMLButtonElement | null>(null);
   const resultFocusRef = useRef<HTMLDivElement | null>(null);
   const pendingFocus = useRef<PendingFocus | null>(null);
   const focusedTileBeforeMutation = useRef<{ id: string; origin: HTMLButtonElement } | null>(null);
   useLayoutEffect(() => {
+    liveRef.current = isPresent;
     if (!isPresent) {
       actionOwner.invalidate();
       pendingFocus.current = null;
       focusedTileBeforeMutation.current = null;
     }
+    return () => { liveRef.current = false; lifetimeRef.current += 1; actionOwner.invalidate(); };
   }, [actionOwner, isPresent]);
   const [state, setState] = useState<PerechiState | null>(null);
   const [startFailed, setStartFailed] = useState(false);
@@ -121,10 +125,11 @@ export default function Perechi({ onExit, onToast }: Props) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const starterVisible = useMemo(() => needsDerivedStarter(GAME_KEY), [state]);
   const exitSafely = useCallback(() => {
-    if (startInFlight.current) return;
+    if (!liveRef.current || startInFlight.current) return;
     actionOwner.invalidate();
     pendingFocus.current = null;
     focusedTileBeforeMutation.current = null;
+    liveRef.current = false;
     onExit();
   }, [actionOwner, onExit]);
   const queueFocusAfterUpdate = useCallback(
@@ -182,6 +187,7 @@ export default function Perechi({ onExit, onToast }: Props) {
   }, [active, actionsLocked, busy, finished, state?.game_id, state?.solved_count, state?.hints_used]);
 
   const applyResumedGame = useCallback((fresh: PerechiState) => {
+    if (!liveRef.current) return;
     actionOwner.invalidate();
     setActionSync(null);
     setBusy(false);
@@ -199,13 +205,25 @@ export default function Perechi({ onExit, onToast }: Props) {
     isTerminal: isTerminalResume,
     setPending: setLoading,
     onResume: applyResumedGame,
+    onReentry: () => {
+      const savedId = active.peek();
+      startInFlight.current = false;
+      setBusy(false); setStartFailed(false); setLoading(savedId !== null);
+      pendingFocus.current = null; focusedTileBeforeMutation.current = null;
+      setSelected(null); setChecking(null);
+      setFeedback(null);
+      if (!savedId && state) {
+        if (!finished) setActionSync({ previous: state, action: "match", kind: "failed", savedId: null });
+      } else { setState(null); setActionSync(null); }
+    },
     onDailyBypassed: () => onToast("Ai continuat jocul liber început. Provocarea zilei te așteaptă după ce îl termini.", "info"),
   });
 
   const start = useCallback(
     async ({ daily, previousGameId }: StartOpts = {}) => {
-      if (!isPresent) return;
+      if (!isPresent || !liveRef.current) return;
       if (!acquireFlight(startInFlight)) return;
+      const epoch = lifetimeRef.current;
       actionOwner.invalidate();
       pendingFocus.current = null;
       focusedTileBeforeMutation.current = null;
@@ -221,6 +239,7 @@ export default function Perechi({ onExit, onToast }: Props) {
           };
       try {
         const fresh = await perechiApi.create(opts);
+        if (!liveRef.current || epoch !== lifetimeRef.current) return;
         setState(fresh);
         setDailyRetry(false);
         setActionSync(null);
@@ -233,10 +252,12 @@ export default function Perechi({ onExit, onToast }: Props) {
         setRecordHit(false);
         setPuzzleRecordHit(false);
       } catch {
-        setStartFailed(true);
+        if (liveRef.current && epoch === lifetimeRef.current) setStartFailed(true);
       } finally {
-        releaseFlight(startInFlight);
-        setLoading(false);
+        if (epoch === lifetimeRef.current) {
+          releaseFlight(startInFlight);
+          if (liveRef.current) setLoading(false);
+        }
       }
     },
     [active, actionOwner, cancelResume, dismissRecovery, isPresent],
@@ -261,7 +282,7 @@ export default function Perechi({ onExit, onToast }: Props) {
   }, [finished, puzzleKey, state]);
 
   useEffect(() => {
-    if (!isPresent || !state || !finished || state.score === undefined) return;
+    if (!isPresent || !liveRef.current || !state || !finished || state.score === undefined) return;
     if (!state.daily) rememberDerivedReplayId(GAME_KEY, state.game_id);
     const detail = state.won
       ? `${state.mistakes} ${state.mistakes === 1 ? "greșeală" : "greșeli"}`
@@ -273,7 +294,7 @@ export default function Perechi({ onExit, onToast }: Props) {
       category: state.board_category,
     }).then((outcome) => {
       active.forgetIfCurrent(state.game_id);
-      if (!current || !outcome) return;
+      if (!current || !liveRef.current || !outcome) return;
       if (state.won) sound.playWin();
       else sound.playError();
       setRecordHit(outcome.isBest);
@@ -286,7 +307,7 @@ export default function Perechi({ onExit, onToast }: Props) {
   }, [active, finished, isPresent, puzzleKey, recordOnce, state]);
 
   const beginAction = useCallback((previous: PerechiState, action: "match" | "hint") => {
-    if (!isPresent || startInFlight.current) return null;
+    if (!isPresent || !liveRef.current || startInFlight.current) return null;
     const ticket = actionOwner.begin(previous.game_id);
     if (!ticket) return null;
     if (!actionOwner.owns(ticket)) {
@@ -298,7 +319,7 @@ export default function Perechi({ onExit, onToast }: Props) {
   }, [actionOwner, isPresent]);
 
   const mayAdoptAction = useCallback((ticket: GameActionTicket, previous: PerechiState, action: "match" | "hint") => {
-    if (!actionOwner.isCurrent(ticket)) return false;
+    if (!liveRef.current || !actionOwner.isCurrent(ticket)) return false;
     if (!actionOwner.owns(ticket)) {
       setActionSync({ previous, action, savedId: ticket.savedId, kind: "changed" });
       return false;
@@ -356,7 +377,7 @@ export default function Perechi({ onExit, onToast }: Props) {
   );
 
   const retryActionSync = useCallback(async (retryOrigin: HTMLButtonElement) => {
-    if (!isPresent || !state || busy || !actionSync) return;
+    if (!isPresent || !liveRef.current || !state || busy || !actionSync) return;
     if (actionSync.kind === "changed") {
       actionOwner.invalidate();
       setActionSync(null);
@@ -549,7 +570,7 @@ export default function Perechi({ onExit, onToast }: Props) {
             startLabel="Joacă"
             onStart={() => void start()}
             onDaily={() => void start({ daily: todayLocal() })}
-            starting={loading}
+            starting={!isPresent || loading}
           />
         </Csp.div>
       </div>
@@ -688,7 +709,7 @@ export default function Perechi({ onExit, onToast }: Props) {
           </div>
         )}
 
-        {!finished && <GameOptions game={GAME_KEY} />}
+        {!finished && <GameOptions help={PERECHI_HELP} />}
 
         {finished && state.solution && (
           <div ref={resultFocusRef} tabIndex={-1}>
@@ -701,7 +722,7 @@ export default function Perechi({ onExit, onToast }: Props) {
               score={state.score}
               isRecord={recordHit}
               isPuzzleRecord={puzzleRecordHit}
-              actionsBusy={loading}
+              actionsBusy={!isPresent || loading}
               shareText={sharePayload}
               onCopy={copyShare}
               onReplay={

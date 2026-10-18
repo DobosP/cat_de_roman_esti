@@ -15,7 +15,7 @@ import (
 )
 
 // Every route the React app declares (frontend/src/App.tsx), its wildcard
-// fallback and a trailing-slash variant that is deliberately not a ported path.
+// fallback and a trailing-slash variant handled by the current shell.
 var managedAppRoutes = []string{"/", "/alchimie", "/intrusul", "/perechi", "/cald-rece", "/lant", "/conexiuni", "/clasament", "/not-a-route", "/intrusul/"}
 
 // managedDocumentUI reports the served document's <html data-ui> attribute.
@@ -74,8 +74,8 @@ func managedDeliveryServer(t *testing.T, files fstest.MapFS, mode string) *Serve
 }
 
 func TestManagedDeliveryPortedSetAndDocumentIdentityPerRoute(t *testing.T) {
-	if want := map[string]bool{"/": true, "/intrusul": true, "/perechi": true, "/conexiuni": true}; !reflect.DeepEqual(managedPortedRoutes, want) {
-		t.Fatalf("M2 ported route set differs: %v", managedPortedRoutes)
+	if want := map[string]bool{"/": true, "/intrusul": true, "/perechi": true, "/conexiuni": true, "/alchimie": true, "/cald-rece": true, "/lant": true, "/clasament": true}; !reflect.DeepEqual(managedPortedRoutes, want) {
+		t.Fatalf("M3 ported route set differs: %v", managedPortedRoutes)
 	}
 	undeclared := managedSPAFixture()
 	declaredReact := managedSPAFixture()
@@ -88,12 +88,7 @@ func TestManagedDeliveryPortedSetAndDocumentIdentityPerRoute(t *testing.T) {
 	}{
 		{"current-undeclared", "current", undeclared, false, func(string) (string, bool) { return "", false }},
 		{"current-react", "current", declaredReact, false, func(string) (string, bool) { return "react", true }},
-		{"current-preact", "current", preactDeliveryFixture(), true, func(route string) (string, bool) {
-			if managedPortedRoutes[route] {
-				return "preact", true
-			}
-			return "legacy", true
-		}},
+		{"current-preact", "current", preactDeliveryFixture(), true, func(string) (string, bool) { return "preact", true }},
 		{"legacy-overrides-preact", "legacy", preactDeliveryFixture(), false, func(string) (string, bool) { return "legacy", true }},
 	} {
 		t.Run(tc.name, func(t *testing.T) {
@@ -129,10 +124,10 @@ func TestManagedDeliverySplitIgnoresRequestSelectors(t *testing.T) {
 	files := preactDeliveryFixture()
 	s := managedDeliveryServer(t, files, "current")
 	for _, tc := range []struct{ target, ui string }{
-		{"/lant?ui=preact&CAT_UI=current", "legacy"},
+		{"/lant?ui=preact&CAT_UI=current", "preact"},
 		{"/intrusul?ui=legacy&CAT_UI=legacy", "preact"},
 		{"/conexiuni?difficulty=easy", "preact"},
-		{"/intrusul/?challenge=daily", "legacy"},
+		{"/intrusul/?challenge=daily", "preact"},
 	} {
 		r := httptest.NewRequest(http.MethodGet, tc.target, nil)
 		r.Header.Set("Cookie", "CAT_UI=legacy; ui=legacy")
@@ -198,11 +193,7 @@ func TestManagedDeliverySplitAssetsKeepSDKMethodCacheAndRefusalContracts(t *test
 	for _, route := range []string{"/intrusul", "/lant", "/intrusul", "/lant"} {
 		w := managedSPARequest(s, http.MethodGet, route)
 		var nonce string
-		if route == "/lant" {
-			nonce = assertManagedLegacyIndex(t, w, legacyManifestForTest(t, files))
-		} else {
-			nonce = assertManagedCurrentIndex(t, w, files["dist/index.html"].Data)
-		}
+		nonce = assertManagedCurrentIndex(t, w, files["dist/index.html"].Data)
 		if w.Header().Get("Content-Security-Policy") == "" || nonces[nonce] {
 			t.Fatalf("%s: enforced stage or fresh nonce lost across the split", route)
 		}
@@ -300,10 +291,7 @@ func TestManagedDeliverySplitServesConcurrently(t *testing.T) {
 				if strings.HasPrefix(target, "/assets/") {
 					continue
 				}
-				want := "legacy"
-				if managedPortedRoutes[target] {
-					want = "preact"
-				}
+				want := "preact"
 				if !bytes.Contains(w.Body.Bytes(), []byte(`data-ui="`+want+`"`)) {
 					failures <- target
 				}

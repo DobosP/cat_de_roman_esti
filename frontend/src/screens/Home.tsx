@@ -3,9 +3,7 @@
 // routing; opening a game also unlocks the shared WebAudio context (user gesture).
 //
 // Entrances (wordmark words, description, cards) are CSS keyframes keyed by
-// nth-child; hover/tap lifts are CSS states. Only the ported routes navigate
-// client-side; every other game is a document navigation to the frozen legacy
-// bundle (ADR-0197).
+// nth-child; hover/tap lifts are CSS states. Every game now navigates client-side.
 
 import type { TargetedEvent } from "preact";
 import { useCallback, useMemo, useRef, useState } from "preact/hooks";
@@ -21,18 +19,12 @@ import {
 import { SoundToggle } from "../components/SoundToggle";
 import { RELEASE_LABEL } from "../release";
 import { portedPath } from "../routes";
+import { homeCardBlurEnabled } from "../homeCardBlur";
 import { sound } from "../sound";
-import {
-  buildDailyCircuit,
-  exportScores,
-  getDailyStreak,
-  importScores,
-  needsDerivedStarter,
-  scoreBoard,
-  type DerivedStarterGame,
-  type GameScoreEntry,
-  type ScoreEntry,
-} from "../scores";
+import { buildDailyCircuit, getDailyStreak, needsDerivedStarter } from "../scores/daily";
+import { exportScores, importScores } from "../scores/history";
+import { scoreBoard } from "../scores/read";
+import type { DerivedStarterGame, GameScoreEntry, ScoreEntry } from "../scores/core";
 import { appUrl, copyResult, displayDetail, formatDayKey, roNoun, todayLocal } from "../share";
 
 type HistoryTab = "top" | "today" | "recent";
@@ -45,6 +37,7 @@ export default function Home({
   onToast: (message: string, kind?: ToastKind) => void;
 }) {
   const { route } = useLocation();
+  const cardBlur = homeCardBlurEnabled((navigator as Navigator & { deviceMemory?: number }).deviceMemory);
   const [historyTab, setHistoryTab] = useState<HistoryTab>("top");
   const [gameFilter, setGameFilter] = useState<GameKey | "all">("all");
   const [board, setBoard] = useState(() => scoreBoard());
@@ -143,7 +136,7 @@ export default function Home({
   );
 
   return (
-    <div className="screen-pad fill home-screen">
+    <div className="screen-pad fill home-screen" data-card-blur={cardBlur ? "on" : "off"}>
       <div className="container col home-content">
         <header className="col home-header">
           <div className="row spread home-heading-row">

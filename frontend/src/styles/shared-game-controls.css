@@ -1,0 +1,29 @@
+/* Static declarations extracted literally from the shared controls' CSSOM bags.
+ * Repeated classes preserve their priority over existing normal layout rules;
+ * existing !important responsive overrides still win as they did over CSSOM.
+ * Runtime colours, shadows and visibility remain on their original CSSOM refs. */
+.game-shell-header.game-shell-header { gap: 12px; }
+.game-shell-main.game-shell-main { gap: 10px; align-items: center; }
+.game-shell-title.game-shell-title { font-family: var(--font-display); font-size: 1.05rem; }
+.game-intro-heading.game-intro-heading { gap: 6px; }
+.game-intro-title.game-intro-title { font-size: 1.7rem; }
+.game-intro-recovery.game-intro-recovery { gap: 10px; padding: 14px; width: 100%; }
+.game-intro-actions.game-intro-actions { gap: 12px; margin-top: 6px; }
+.game-intro-best.game-intro-best { margin: 0px; font-size: 0.82rem; }
+.result-card-enter.result-card-enter { gap: 10px; padding: 24px; text-align: center; position: relative; overflow: hidden; }
+.result-icon-enter.result-icon-enter { font-size: 2.6rem; line-height: 1; }
+.result-card-title.result-card-title { margin: 2px 0; }
+.result-card-detail.result-card-detail { margin: 0px; font-size: 0.95rem; }
+.result-card-score.result-card-score { gap: 4px; margin-top: 4px; }
+.result-card-score-label.result-card-score-label { font-size: 0.72rem; letter-spacing: 0.08em; }
+.result-score-enter.result-score-enter { font-family: var(--font-display); font-weight: 700; font-size: 2.2rem; font-variant-numeric: tabular-nums; }
+.result-card-actions.result-card-actions { gap: 12px; margin-top: 12px; position: relative; }
+.hud.hud { gap: 8px; align-items: center; }
+.start-failure-notice.start-failure-notice { padding: 14px; margin: 0px; }
+.category-picker.category-picker { gap: 8px; }
+.category-picker-chip.category-picker-chip { cursor: pointer; }
+.category-picker-label.category-picker-label,
+.difficulty-picker-label.difficulty-picker-label { letter-spacing: 0.08em; font-size: 0.72rem; }
+.category-picker-options.category-picker-options { gap: 6px; }
+.category-picker-note.category-picker-note { font-size: 0.72rem; }
+.difficulty-picker.difficulty-picker { gap: 8px; }
