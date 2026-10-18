@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "scope": "Two source-only repairs from actual clean owner baseline diagnostic; not milestone acceptance",
+  "operator": "agent:codex (PROGRAM E8)",
+  "diagnostic_sha": "798f5a696ccbc685c5d2bf19ef29f2179b1815fb",
+  "diagnostic_status": "fail",
+  "findings": [
+    "Six GameIntro Axe targets changed only by an extraction class",
+    "Ranking idle tab glyphs used white instead of original muted token"
+  ],
+  "other_observations": {
+    "png_pass": 8,
+    "png_fail": 1,
+    "home_live_witness": "pass",
+    "five_run_vitals": "both pass"
+  },
+  "repairs": [
+    {
+      "path": "/home/dobo/work/_temp/feat__gui-cat-m3/renovation/game-intro-fingerprint/proposed.patch",
+      "sha256": "2d07f6b0e283b7b5d1513d72bab77129aaeddd805e075060b5b4129c0e3bc054",
+      "review_path": "/home/dobo/work/_temp/feat__gui-cat-m3/renovation/game-intro-fingerprint/independent-review.json",
+      "review_sha256": "a464d2e70f4c2d05207f1af64808fed4595c297e175011146159725ef390d379"
+    },
+    {
+      "path": "/home/dobo/work/_temp/feat__gui-cat-m3/renovation/ranking-idle-colour/proposed.patch",
+      "sha256": "b8f0b893c43b6b8fc1934def92a617ecf491423800d1de009998a9ea01d5364b",
+      "review_path": "/home/dobo/work/_temp/feat__gui-cat-m3/renovation/ranking-idle-colour/independent-review.json",
+      "review_sha256": "5c6a282a8da6ed8d151e4995adbdf313d2db4ab9f61d8f880a2c01a40a404624"
+    }
+  ],
+  "protected": "No baseline, comparator, alias, assertion, threshold, content, API or lock changed; clean successor diagnostic and exact-SHA unit/full remain required.",
+  "failed_diagnostic_archive": {
+    "path": "/home/dobo/work/_temp/feat__gui-cat-m3/renovation/m3-baseline-first/evidence.tar.gz",
+    "sha256": "28ff852723882561793e10ab6afd759fe9f420fd92dc071902291b65e94b2997"
+  }
+}

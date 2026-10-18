@@ -96,7 +96,7 @@ export function GameIntro({
       >
         {icon}
       </Csp.div>
-      <div className="col center game-intro-heading">
+      <div className="col center">
         <Csp.h2 className="game-intro-title" css={{ color: accent }}>{title}</Csp.h2>
         {tag && (
           <Badge color={accent} size="sm">

@@ -1,6 +1,8 @@
 .rank-row { transition: border-color 0.15s ease; }
 .ranking-game-select { display: none; }
 .ranking-game-tabs { grid-auto-columns: minmax(0, 1fr); }
+/* Restore the original idle tab colour without overriding hover or selection. */
+.ranking-game-tabs > .segment-item[aria-pressed="false"]:not(:hover) { color: var(--roedu-color-text-muted); }
 .ranking-state {
   display: grid;
   align-content: center;
