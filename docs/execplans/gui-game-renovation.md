@@ -20,7 +20,7 @@ progress or the accepted design. The owner requested completion on 2026-10-18.
   split and scoreSync import narrowing; all other source freezes remain.
 - [x] Applied approved score split: original34 score tests/147 assertions,38focused,
   types/tools/lint/build/docs62 and26desktop/recovery cases pass.
-- [ ] Qualify native Preact state for the20 Challenge render snapshots (ADR-0204),
+- [x] Qualify native Preact state for the20 Challenge render snapshots (ADR-0204),
   retaining all asynchronous ownership/motion/focus/scoring and existing assertions.
 - [x] 2026-10-18T19:01Z — all10JS caps pass: Challenge40,864/40,960, Home29,011/30,720 target.
 - [x] Broad native-state diagnostic:111passed/2failed,0skip/flaky; exact source, logs and failure traces retained.
@@ -39,8 +39,8 @@ progress or the accepted design. The owner requested completion on 2026-10-18.
 - [x] 2026-10-18T19:18Z — committed71f871ca; clean unit27 passes560frontend/1930backend named/28authcore, independently acceptedcd8725e6.
 - [x] First full actual933browser cases pass with0skip/flaky/retry; livePG12/301 covers all17default DSN skips and9 additional child cases, parity1206/legacy pass.
 - [x] 2026-10-18T20:16Z — reviewed Home source-pin rebind and optional full parallel CLI pass10Python ownership/argument tests,43unchanged baseline DATA controls andGo doccheck62.
-- [ ] Clean owner-diagnostic baseline and exact-SHA successor unit2/full2 must execute remaining PNG/axe/vitals/aggregate CSP before M3 acceptance.
-- [ ] Qualify M3 exact-SHA unit/full, independent acceptance and local landing.
+- [x] Same9c44 diagnostic and unit2/full2 pass original9PNG/Axe/Home/vitals/CSP; unit27/full37 independently accepted.
+- [x] 2026-10-19 — M3 source9c44 independently accepted, feature published and exact tested source landed locally.
 - [ ] Complete M4 CSS/budget ratchets, full qualification, release image and documentation.
 
 ## 3. Surprises & Discoveries
@@ -83,30 +83,34 @@ routes must count the full writer bytes and Home target remains30,720.
 
 ## 5. Outcomes & Retrospective
 
-Product71f871ca passes clean unit27, independently verifiedcd8725e6. The first
-full39rows has36passes and3downstream failures: stale Home source pin blocks
-baseline preparation, then repo exit and aggregate CSP receipt fail. Actual933
-browser cases pass with0skip/retry/flaky; native, livePG12/301, parity1206 and
-legacy/owned cleanup pass. [Independent audit](../reviews/gui-m3/first-full-review.json).
-No baseline PNG/axe/vitals or full/M3 acceptance is claimed.
+M3 source9c44d01f is accepted and landed locally: unit27/full37, independently
+verified4002424e/276eeab6. Full13.38min uses strict same-SHA unit reuse at
+parallel2. Actual933browser cases have zero skips/retries/flaky/errors; all9
+PNG bytes equal immutable originals, Axe/Home/five-run vitals/CSP0 pass, fresh
+PG12/301 closes17 default DSN obligations, parity1206 and actual legacy pass.
+[Qualification](../reviews/gui-m3/qualification.json) records exact commands,
+source/image custody, cleanup and retained artifact/supplement hashes.
 
-A single reviewed current-Home pin update06e362→0d373 admits the allowed M3
-source to the same unchanged original verification. Immutable captureff055,
-Gamesce6, all9 original PNGs and every comparator/assertion stay exact. The
-optional supervisor parallel argument preserves default4 and all ownership
-checks; matching unit2/full2 avoids the actual strict-profile cache miss.
-Required155file-artifact bytes plus image metadata are retained in the first
-full compact archive68f93743. Positive browser traces are rolling, unarchived;
-historical paths will not imply those raw bytes survive successor replacement.
+The stale current-Home source pin and two presentation regressions were repaired
+without changing original captures/comparators/assertions. A diagnostic initially
+refused stale managed assets correctly; canonical unit regenerated the matching
+manifest before the successful diagnostic/full. Optional parallel forwarding
+preserves default4 and ownership guards while matching unit2/full2.
 
-M4 also requires the unchanged original16,093-byte total-CSS ratchet, in addition
-to per-route checks. Current emitted unique CSS totals20,617 gzip bytes; this
-requires real consolidation and visual proof, not a larger cap.
+Superseded raw/positive trace trees were replaced by the rolling run. Required
+regular artifact rows are retained compactly; raw baseline metadata and9 exact
+PNG joins use preserved original image bytes. Historical paths do not imply
+that discarded raw attachments remain. Unique source packets remain intact.
+
+M4 still requires the original16,093-byte total-CSS ceiling, canonical authored
+CSS consolidation, pinned Vitest browser contracts and release-image/docs/full
+qualification. Current all-unique canonical level9 CSS is20,669 bytes; the
+baseline script's default-gzip total20,756 is a separate recorded measurement.
 
 ## 6. Context and Orientation
 
 Local main at entry: `d30b0aa47248b9a5944e015f2daf54cc5a795617`.
-Feature HEAD: `e75518c1473be3a32ec2a0f2e1565764bbcf5d5b`.
+M3 qualified/landed product: `9c44d01ff476637bd1749b51f632312524d6f7ff`.
 Read `.agent/S1.md`, `docs/STATUS.md`, the programme completion ledger and
 `docs/execplans/s1-cat.md`. Original/frozen sources and content stay authoritative.
 

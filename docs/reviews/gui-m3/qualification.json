@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "scope": "M3 exact-product acceptance and local landing; M4 remains pending",
+  "verified_date": "2026-10-19",
+  "operator": "agent:codex (PROGRAM E8/E10)",
+  "product_sha": "9c44d01ff476637bd1749b51f632312524d6f7ff",
+  "tree_sha256": "9f0f45f628718438896530a3e5c9bd0165c59e7f48bced33c85edc4369a1f65d",
+  "local_main_product_landing": "9c44d01ff476637bd1749b51f632312524d6f7ff",
+  "feature_branch": "feat/gui-cat-m3",
+  "feature_published": true,
+  "commands": {
+    "unit": "GATE_OPERATOR=agent:codex bash scripts/gate.sh unit --sha 9c44d01ff476637bd1749b51f632312524d6f7ff --parallel 2",
+    "full": "python3 -I scripts/gui-full-runner.py --sha 9c44d01ff476637bd1749b51f632312524d6f7ff --parallel 2"
+  },
+  "unit": {
+    "checks": "27/27",
+    "result_sha256": "3c18b2877fe4ae8f8b4e4f2f10f91ab828de55c2274e74e9808c948eb3ab7dcd",
+    "archive": {
+      "path": "/home/dobo/work/_temp/feat__gui-cat-m3/renovation/m3-canonical-9c44/unit/evidence.tar.gz",
+      "members": 85,
+      "bytes": 550735,
+      "sha256": "f894c0ad8f7983f48298050b98995d1b3af243a8887ace0567793f30513447cf"
+    },
+    "frontend_pass": 560,
+    "backend_named_pass": 1930,
+    "authcore_pass": 28,
+    "default_DSN_skips": 17,
+    "no_test_packages": 12,
+    "independent_review_sha256": "4002424e86ebcdbdfd2a6dfa3f9e9afc6f49c2c3b03d2584d6320cb1f19b6a1b"
+  },
+  "full": {
+    "checks": "37/37",
+    "result_sha256": "b98db124da1f1b4a3b96cc7a519594661d2735f0e800b08343f7195b90a45ad4",
+    "archive": {
+      "path": "/home/dobo/work/_temp/feat__gui-cat-m3/renovation/m3-canonical-9c44/full/evidence.tar.gz",
+      "members": 171,
+      "bytes": 62361223,
+      "sha256": "7809e025ef6aeb30ce6fbee4ad74512c239551141c53fc5b3d17f7b2976eb0ad"
+    },
+    "elapsed_minutes": 13.3826,
+    "strict_same_SHA_unit_reuse": "hit, parallel2",
+    "browser": "933 expected; zero skips, retries, flaky outcomes or errors",
+    "PNG": "All9 actual bytes equal immutable originals",
+    "CSP": "enforced;9current pages and actual legacy; zero violations",
+    "PG": "12accounts/301HTTP; zero skips/failures; covers all17 default DSN obligations",
+    "parity": 1206,
+    "parity_reference": "Owner-reviewed V1.13 weather-and-landscape",
+    "independent_review_sha256": "276eeab6d472b31289d07cd9efdb1afa6853f3f66fa5147eba04bcfd3b97b670"
+  },
+  "vitals_medians": {
+    "conexiuni": {
+      "LCP_ms": 1760,
+      "INP_ms": 72,
+      "CLS": 0
+    },
+    "alchimie_challenges": {
+      "LCP_ms": 1856,
+      "INP_ms": 72,
+      "CLS": 0
+    }
+  },
+  "budgets": {
+    "Home_JS_gzip": 29009,
+    "Home_target": 30720,
+    "Challenge_JS_gzip": 40853,
+    "route_JS_limit": 40960,
+    "all10_JS": "pass",
+    "current_CSS_canonical_gzip": 20669,
+    "M4_CSS_original_ceiling": 16093
+  },
+  "image_id": "sha256:8f5e8e2974338e1f73885a4661cec89bc76e3c5a463f4e9ad6f538e484cde45b",
+  "cleanup": "Owner/coordinator/supervisor and independent root Docker absence verified; no owned runtimes remain",
+  "baseline_raw_metadata": {
+    "archive_path": "/home/dobo/work/_temp/feat__gui-cat-m3/renovation/m3-canonical-9c44/full/baseline-evidence.tar.gz",
+    "archive_sha256": "d598cf0f1202338307253aa1c6cc4bde7bf90d8a65cc3355898879562aca6245",
+    "join": "baseline-retention.json binds raw capture/comparison/Home/identity and9 actual PNG joins to preserved canonical original bytes"
+  },
+  "retention": "Required164regular rows/163unique files plus IID metadata retained. Superseded rolling raw/positive trace paths are unavailable after replacement; original baselines/source branches/unmerged packets remain.",
+  "remaining_M4": [
+    "Canonical authored CSS consolidation and original16093 total-CSS gate",
+    "Required pinned Vitest5 plain-Preact browser contracts via sanctioned deps",
+    "Actual measurements, exact-SHA unit/full, release image, final docs and independent local landing"
+  ],
+  "owner_only": "App main push, production and real-account/child go-live"
+}

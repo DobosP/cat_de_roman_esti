@@ -1,0 +1,204 @@
+{
+  "schema": 1,
+  "decision": "ACCEPT_CANONICAL_UNIT_ONLY_FULL_M3_ACCEPTANCE_PENDING",
+  "reviewer": "agent:game-migration-review",
+  "reviewed_utc": "2026-10-18T21:08:57.009125+00:00",
+  "sha": "9c44d01ff476637bd1749b51f632312524d6f7ff",
+  "tree_sha256": "9f0f45f628718438896530a3e5c9bd0165c59e7f48bced33c85edc4369a1f65d",
+  "result_sha256": "3c18b2877fe4ae8f8b4e4f2f10f91ab828de55c2274e74e9808c948eb3ab7dcd",
+  "archive": {
+    "sha256": "f894c0ad8f7983f48298050b98995d1b3af243a8887ace0567793f30513447cf",
+    "bytes": 550735,
+    "regular_members": 85,
+    "all81required_artifact_bytes_verified_in_archive": true,
+    "all85members_match_current_retained_bytes": true,
+    "outside_target_generated_members": [
+      "go-backend/embedfs/build/dist/.gui-build.json",
+      "go-backend/embedfs/build/dist/.keep",
+      "go-backend/embedfs/build/dist/versions.lock.json"
+    ]
+  },
+  "binding": {
+    "wrapper_invocation": "c637ce65-b6ff-4ca7-ac18-b75e297de3bc",
+    "runner_invocation": "3e190d70-90ee-4668-bb7d-84e9c71f5940",
+    "operator": "agent:codex",
+    "parallel": 2,
+    "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+    "versions_lock_sha256": "d7c0192fb92cb307d9235db1a3004d06d07955b461a59e48ce1924b1ede71e0b",
+    "source_clean": true,
+    "source_tree_recomputed_files": 8954,
+    "native_input_recomputed_files": 8718,
+    "native_audit_recomputed_files": 238
+  },
+  "execution": {
+    "checks_pass": 27,
+    "command_actions_zero": 24,
+    "assertions_true": 31,
+    "command_stream_hashes_verified": 48,
+    "bootstrap_stream_hashes_verified": 6,
+    "frontend": {
+      "tests": 560,
+      "pass": 560,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "backend": {
+      "named_pass": 1930,
+      "named_DSN_skip": 17,
+      "package_pass": 28,
+      "no_test_package_skip": 12,
+      "fail": 0,
+      "all_named_runs_have_terminal_outcomes": true,
+      "cold_full_source_race": true
+    },
+    "authcore": {
+      "named_pass": 28,
+      "named_skip": 0,
+      "package_pass": 1,
+      "fail": 0
+    }
+  },
+  "named_DSN_skips": [
+    {
+      "package": "accounts",
+      "test": "TestNativeAccountConsentMinorHoldAndCSRF",
+      "reason": "Explicit disposable PostgreSQL DSN flag absent in default unit"
+    },
+    {
+      "package": "accounts",
+      "test": "TestNativePrivateScoresIsolationIdempotencyAndCap",
+      "reason": "Explicit disposable PostgreSQL DSN flag absent in default unit"
+    },
+    {
+      "package": "accounts",
+      "test": "TestNativeServerRankingTiesPrivacyAndMonotonicBest",
+      "reason": "Explicit disposable PostgreSQL DSN flag absent in default unit"
+    },
+    {
+      "package": "accounts",
+      "test": "TestNativePlayedConsentGateAndConcurrentBest",
+      "reason": "Explicit disposable PostgreSQL DSN flag absent in default unit"
+    },
+    {
+      "package": "accounts",
+      "test": "TestNativeEraseRevokesAllAccountData",
+      "reason": "Explicit disposable PostgreSQL DSN flag absent in default unit"
+    },
+    {
+      "package": "accounts",
+      "test": "TestNativeSharedOAuthSingleUseAndThrottle",
+      "reason": "Explicit disposable PostgreSQL DSN flag absent in default unit"
+    },
+    {
+      "package": "accounts",
+      "test": "TestNativeLegacyDjangoImportIsIdempotent",
+      "reason": "Explicit disposable PostgreSQL DSN flag absent in default unit"
+    },
+    {
+      "package": "accounts",
+      "test": "TestNativeProfileVisibilityAndRenewedConsent",
+      "reason": "Explicit disposable PostgreSQL DSN flag absent in default unit"
+    },
+    {
+      "package": "accounts",
+      "test": "TestNativeStoreSessionExpiryDisabledIdentityAndCap",
+      "reason": "Explicit disposable PostgreSQL DSN flag absent in default unit"
+    },
+    {
+      "package": "accounts",
+      "test": "TestNativeConsentInputAndLogoutContracts",
+      "reason": "Explicit disposable PostgreSQL DSN flag absent in default unit"
+    },
+    {
+      "package": "accounts",
+      "test": "TestNativeMigratedAccountPreservesAndErasesLegacyCopies",
+      "reason": "Explicit disposable PostgreSQL DSN flag absent in default unit"
+    },
+    {
+      "package": "httpapi",
+      "test": "TestArcadeAuthenticatedOwnershipTerminalRankingExportAndErase",
+      "reason": "Explicit disposable PostgreSQL DSN flag absent in default unit"
+    },
+    {
+      "package": "httpapi",
+      "test": "TestArcadeAnonymousClaimIsOneOwnerUnderConcurrentHTTPRequests",
+      "reason": "Explicit disposable PostgreSQL DSN flag absent in default unit"
+    },
+    {
+      "package": "httpapi",
+      "test": "TestArcadeCuratedPlayedKeyUsesOwnedServerTerminalResult",
+      "reason": "Explicit disposable PostgreSQL DSN flag absent in default unit"
+    },
+    {
+      "package": "httpapi",
+      "test": "TestArcadeTerminalClaimAndErasureRaceCannotRetainVerifiedIdentity",
+      "reason": "Explicit disposable PostgreSQL DSN flag absent in default unit"
+    },
+    {
+      "package": "httpapi",
+      "test": "TestArcadeOwnershipCapacityFailsClosedWithoutDisablingAnonymousCreation",
+      "reason": "Explicit disposable PostgreSQL DSN flag absent in default unit"
+    },
+    {
+      "package": "httpapi",
+      "test": "TestTCPEarlyAccountAndPrivacyRefusalsWithoutBodyUpload",
+      "reason": "Explicit disposable PostgreSQL DSN flag absent in default unit"
+    }
+  ],
+  "skip_accounting": "17 named DSN-dependent tests are expected default-unit skips and must all pass in the new live-PG full;12 separate package skips mean no test files. Never describe29 as29 skipped tests or full as qualified by default unit. Set matches prior canonical unit exactly.",
+  "assets": {
+    "current_files_rehashed_in_each_of_two_trees": 99,
+    "frozen_files_rehashed": 30,
+    "frozen_byte_source": "Immutable original archive matches every unit sync row; preceding pre-audit verified all30 live generated bytes. Active baseline refresh has cleared generated legacy paths; no restoration/mutation performed.",
+    "generated_legacy_files_still_present": 30,
+    "original_archive_sha256": "742bb11130fa2bf52ba5c64cb9cfd452f7d8ac3a4fd9dc6d77e8064a6b8fef65",
+    "manifest_sha256": "737de3f7f7c08a1d4a1fb8d7fbae1c13b389dd268589bb676944beb49cbb0d7f",
+    "route_input_bindings": {
+      "current_pinned_dependency_or_unchanged_source": 41,
+      "archive": 6,
+      "archived_unit_descriptor_copy": 1
+    }
+  },
+  "budgets": {
+    "active_JS_routes_pass": 10,
+    "actual_JS_by_route": {
+      "/": 29009,
+      "/alchimie": 39290,
+      "/alchimie?mode=challenges": 40853,
+      "/alchimie?mode=explore": 39290,
+      "/cald-rece": 39030,
+      "/clasament": 25000,
+      "/conexiuni": 38160,
+      "/intrusul": 37434,
+      "/lant": 38902,
+      "/perechi": 38273
+    },
+    "JS_limit": 40960,
+    "Home_target": 30720,
+    "frozen_raw_JS": "All10 SDK rows remain failing and recorded under original30-byte integrity; no cap or raw status waived.",
+    "CSS": "Existing null/recorded M3 seed remains; original16093 total ratchet and actual consolidation remain unaccepted M4."
+  },
+  "preaudit": {
+    "sha256": "712a03a021ad367c40c4cd8d3f31a19511ecb55d161c52b2dd55b186004f20d1",
+    "completed_metadata_and_frontend_logs_unchanged": true,
+    "nested_lint": "The earlier pre-audit independently verified52 lint artifact rows and24 retained SDK rows while present. This compact85-member archive retains all required81 top-level rows, not every nested lint/raw/browser trace path; do not imply unarchived bytes survive later pruning."
+  },
+  "timing": {
+    "started": "2026-10-18T20:39:22.219Z",
+    "finished": "2026-10-18T21:04:40.919Z",
+    "elapsed_seconds": 1518.7,
+    "backend_race_ms": 1465341
+  },
+  "cleanup": {
+    "record_sha256": "de17b817e9a8816373a0c726b0111e4f855127222d78fc021fe6f36133e18820",
+    "owner_recorded_absence_verified": true,
+    "recorded_empty_owned_network_removed": [
+      "aabd57a2317c"
+    ],
+    "independent_live_Docker_query_performed": false
+  },
+  "pending": "Same clean9c44 full2, exact933 browser matrix, nine PNGs/axe/vitals, aggregate enforced CSP0/0, live PG including17 obligations, parity1206, legacy/image/owner/supervisor cleanup and independent milestone acceptance. Ongoing baseline diagnostic is not full acceptance.",
+  "runtime_policy": "Read-only filesystem/Git evidence verification only; no owning edits, native tests, product runtime, gate, Docker action or production process control."
+}

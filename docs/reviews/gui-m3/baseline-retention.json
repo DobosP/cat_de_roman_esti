@@ -1,0 +1,183 @@
+{
+  "schema": 1,
+  "scope": "Independent retention of actual full baseline metadata and exact9PNG content joins; not a newly produced capture or gate result",
+  "sha": "9c44d01ff476637bd1749b51f632312524d6f7ff",
+  "tree_sha256": "9f0f45f628718438896530a3e5c9bd0165c59e7f48bced33c85edc4369a1f65d",
+  "binding": {
+    "target": "full",
+    "invocation": "9e874efe-9fc4-47c9-9b6a-d2299466f7f2",
+    "sha": "9c44d01ff476637bd1749b51f632312524d6f7ff",
+    "tree_sha256": "9f0f45f628718438896530a3e5c9bd0165c59e7f48bced33c85edc4369a1f65d",
+    "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+    "config_sha256": "b88e00bfaad7d77592262b79d6ae633e8979ce1ff54431d722601db5aea7a351",
+    "config_file_sha256": "f52a74a369272ddbcfdea1df6f471646352e3404be5fe82f3cad7889697461df",
+    "descriptor_sha256": "b14ed051fc1e31c151eb60c82f975bb882e4455d8016868ec7eba3395d726956",
+    "manifest_sha256": "737de3f7f7c08a1d4a1fb8d7fbae1c13b389dd268589bb676944beb49cbb0d7f",
+    "versions_lock_sha256": "d7c0192fb92cb307d9235db1a3004d06d07955b461a59e48ce1924b1ede71e0b",
+    "app_image_id": "sha256:8f5e8e2974338e1f73885a4661cec89bc76e3c5a463f4e9ad6f538e484cde45b",
+    "image_authority": "Producer declaration; owning wrapper/parent host verify actual CID/IID",
+    "origin": "http://localhost:8080",
+    "dirty": false,
+    "playwright_version": "1.63.0"
+  },
+  "main_baseline_stdout_sha256": "90970a0431f1a9292fee57aa71612f8cf81e0e0fdb7593c4f12d8cd4b1d209c5",
+  "original_capture_sha256": "ff055e404bf138ce0442381ab33eb643d431f922e4284f66a5002efcc397be68",
+  "raw_metadata": [
+    {
+      "path": ".gate/full/baseline-comparison/capture.json",
+      "bytes": 214945,
+      "sha256": "3cacce4c33f236f5e2b1f1a07e8aa6107752e9428b80f1c4aaa292a876dbcbd3"
+    },
+    {
+      "path": ".gate/full/baseline-comparison/comparisons.json",
+      "bytes": 2738,
+      "sha256": "eff82ca590ae5d1137c57edbed0320c43a67c584035b292d1d6d5957a62feeb3"
+    },
+    {
+      "path": ".gate/full/baseline-comparison/home-semantics.json",
+      "bytes": 11737,
+      "sha256": "8278158c7bd9002aeb50e46da6c1c3c06ee182bdc0494370c24652c7544b1723"
+    },
+    {
+      "path": ".gate/full/baseline-comparison/identity-response.bin",
+      "bytes": 307,
+      "sha256": "57c4e0b8b90d8e98017a03fa3928e9e9b7ec949bc7d49aa8ac6628e4a482b95f"
+    },
+    {
+      "path": "baselines/cat/capture.json",
+      "bytes": 197448,
+      "sha256": "ff055e404bf138ce0442381ab33eb643d431f922e4284f66a5002efcc397be68"
+    },
+    {
+      "path": "frontend/src/games.ts",
+      "bytes": 2668,
+      "sha256": "ce6a53bd118fae4f0cfa62eb12d6afadb31596a1e265c5122e202560ef26b0ad"
+    },
+    {
+      "path": "frontend/src/screens/Home.tsx",
+      "bytes": 17342,
+      "sha256": "0d373bd1e1140f2c517f450ce40156f1d4ad97db9c28d3517d29d7f2c944afb5"
+    },
+    {
+      "path": "scripts/gui-baseline-checks.mjs",
+      "bytes": 22021,
+      "sha256": "d65f300d1010e00977bece1f83763c0f39265f7589c2fb3df3d3ad2baa4b33ae"
+    },
+    {
+      "path": "scripts/gui-baseline.mjs",
+      "bytes": 18253,
+      "sha256": "55e45f351d7b7f6a445acecf04d3661c046e70a3fb97e4d94d0b68013367a46b"
+    }
+  ],
+  "actual_png_to_original": [
+    {
+      "route": "/",
+      "actual_rolling_path": ".gate/full/baseline-comparison/route-0.png",
+      "actual_bytes": 318284,
+      "actual_sha256": "c0b8b632456c32cfe7c58c9801cb887bb140e909c47d7c50ac77014b2f5133e1",
+      "immutable_original_path": "baselines/cat/route-0.png",
+      "original_bytes": 318284,
+      "original_sha256": "c0b8b632456c32cfe7c58c9801cb887bb140e909c47d7c50ac77014b2f5133e1",
+      "exact_bytes_equal": true,
+      "actual_path_archived_separately": false,
+      "retained_byte_keeper": "baselines/cat/route-0.png"
+    },
+    {
+      "route": "/intrusul",
+      "actual_rolling_path": ".gate/full/baseline-comparison/route-1.png",
+      "actual_bytes": 315929,
+      "actual_sha256": "78a1d16956b1fdd0fb0cc772d26447e5d302e3cbe3917f8344fa4d29a1540ea4",
+      "immutable_original_path": "baselines/cat/route-1.png",
+      "original_bytes": 315929,
+      "original_sha256": "78a1d16956b1fdd0fb0cc772d26447e5d302e3cbe3917f8344fa4d29a1540ea4",
+      "exact_bytes_equal": true,
+      "actual_path_archived_separately": false,
+      "retained_byte_keeper": "baselines/cat/route-1.png"
+    },
+    {
+      "route": "/perechi",
+      "actual_rolling_path": ".gate/full/baseline-comparison/route-2.png",
+      "actual_bytes": 317373,
+      "actual_sha256": "e2eb15eb02d68aa00771e1f9b0c5cea6e053a720cd5a1bae4548290ff26417d3",
+      "immutable_original_path": "baselines/cat/route-2.png",
+      "original_bytes": 317373,
+      "original_sha256": "e2eb15eb02d68aa00771e1f9b0c5cea6e053a720cd5a1bae4548290ff26417d3",
+      "exact_bytes_equal": true,
+      "actual_path_archived_separately": false,
+      "retained_byte_keeper": "baselines/cat/route-2.png"
+    },
+    {
+      "route": "/conexiuni",
+      "actual_rolling_path": ".gate/full/baseline-comparison/route-3.png",
+      "actual_bytes": 310160,
+      "actual_sha256": "48d75018d626e154ecbf7aa3fde73ab4fba2b19971860c7bf8aed2eadd916eb6",
+      "immutable_original_path": "baselines/cat/route-3.png",
+      "original_bytes": 310160,
+      "original_sha256": "48d75018d626e154ecbf7aa3fde73ab4fba2b19971860c7bf8aed2eadd916eb6",
+      "exact_bytes_equal": true,
+      "actual_path_archived_separately": false,
+      "retained_byte_keeper": "baselines/cat/route-3.png"
+    },
+    {
+      "route": "/alchimie?mode=challenges",
+      "actual_rolling_path": ".gate/full/baseline-comparison/route-4.png",
+      "actual_bytes": 314938,
+      "actual_sha256": "8627c586eb858738d0fb9d1e1f148001918018b7eab2d3b83adbc4d8067e1327",
+      "immutable_original_path": "baselines/cat/route-4.png",
+      "original_bytes": 314938,
+      "original_sha256": "8627c586eb858738d0fb9d1e1f148001918018b7eab2d3b83adbc4d8067e1327",
+      "exact_bytes_equal": true,
+      "actual_path_archived_separately": false,
+      "retained_byte_keeper": "baselines/cat/route-4.png"
+    },
+    {
+      "route": "/alchimie?mode=explore",
+      "actual_rolling_path": ".gate/full/baseline-comparison/route-5.png",
+      "actual_bytes": 378930,
+      "actual_sha256": "3e6f20116fff197cc5c1a2e0a7b9364eb6290a94f89ca01e7df579fab42447c6",
+      "immutable_original_path": "baselines/cat/route-5.png",
+      "original_bytes": 378930,
+      "original_sha256": "3e6f20116fff197cc5c1a2e0a7b9364eb6290a94f89ca01e7df579fab42447c6",
+      "exact_bytes_equal": true,
+      "actual_path_archived_separately": false,
+      "retained_byte_keeper": "baselines/cat/route-5.png"
+    },
+    {
+      "route": "/cald-rece",
+      "actual_rolling_path": ".gate/full/baseline-comparison/route-6.png",
+      "actual_bytes": 314551,
+      "actual_sha256": "4cff23ab1c40e1ad5103fcb3460dc334ce0fe8b2ded9c928cac719d31a449819",
+      "immutable_original_path": "baselines/cat/route-6.png",
+      "original_bytes": 314551,
+      "original_sha256": "4cff23ab1c40e1ad5103fcb3460dc334ce0fe8b2ded9c928cac719d31a449819",
+      "exact_bytes_equal": true,
+      "actual_path_archived_separately": false,
+      "retained_byte_keeper": "baselines/cat/route-6.png"
+    },
+    {
+      "route": "/lant",
+      "actual_rolling_path": ".gate/full/baseline-comparison/route-7.png",
+      "actual_bytes": 307449,
+      "actual_sha256": "db6d51349137feafb827363bf6dd9e40aeeeece831c22080ca402cdcd75762b2",
+      "immutable_original_path": "baselines/cat/route-7.png",
+      "original_bytes": 307449,
+      "original_sha256": "db6d51349137feafb827363bf6dd9e40aeeeece831c22080ca402cdcd75762b2",
+      "exact_bytes_equal": true,
+      "actual_path_archived_separately": false,
+      "retained_byte_keeper": "baselines/cat/route-7.png"
+    },
+    {
+      "route": "/clasament",
+      "actual_rolling_path": ".gate/full/baseline-comparison/route-8.png",
+      "actual_bytes": 316650,
+      "actual_sha256": "753b66bc04a01d2d02b67947578606f631c0670299b4b1b903368aa7f257b1a6",
+      "immutable_original_path": "baselines/cat/route-8.png",
+      "original_bytes": 316650,
+      "original_sha256": "753b66bc04a01d2d02b67947578606f631c0670299b4b1b903368aa7f257b1a6",
+      "exact_bytes_equal": true,
+      "actual_path_archived_separately": false,
+      "retained_byte_keeper": "baselines/cat/route-8.png"
+    }
+  ],
+  "retention": "Actual rolling captured PNG paths are not archived separately. All9 actual byte streams were read and compared equal to preserved canonical original PNG files. After rolling cleanup, those original paths are the explicit identical-byte keepers; no assertion that old actual paths survive."
+}

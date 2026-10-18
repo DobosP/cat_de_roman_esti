@@ -1,6 +1,6 @@
 # ADR-0204: native Preact state for Alchimie Challenge
 
-Status: Accepted implementation revision; qualification remains required.
+Status: Accepted and M3-qualified at9c44d01f; M4 remains separate.
 Date: 2026-10-18
 Authority: orchestrating agent under PROGRAM E8/E10 and the requested efficient game migration.
 
@@ -37,3 +37,9 @@ Require original score tests, held-action/reentry, replay/reset, focus and nativ
 drag/drop journeys, plus complete route JS/CSS measurements. Keep failure packets.
 Clean unit/full, exact PNGs, CSP/vitals and independent review remain mandatory
 before M3/M4 acceptance. Never relax a cap or assertion to admit this revision.
+
+## Qualification — 2026-10-19
+
+Exact source9c44d01f passes unit27/full37, original9PNG/Axe/vitals/CSP and
+independent M3 acceptance; locally landed under ADR-0199. The
+[qualification record](../reviews/gui-m3/qualification.json) binds actual evidence.

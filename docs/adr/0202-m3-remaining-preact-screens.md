@@ -1,7 +1,7 @@
 # ADR-0202: Remaining Preact screens and Alchimie mode boundaries
 
 Date: 2026-10-13
-Status: Implementation direction accepted; Signals choice superseded by ADR-0204; M3 remains unqualified
+Status: M3 qualified at9c44d01f; Signals choice superseded by ADR-0204
 Authority: PROGRAM E10; Cat ADR-0199; S1 M3 dispatch
 
 ## Context
@@ -131,3 +131,9 @@ separate. This trades extra Explore bytes (37864 total) for smaller Cald/Lanț
 initial payloads (40592/40478); all remain below40960. Challenge45806 stays red.
 [Actual measurements and independent review](../reviews/gui-m3/help-controls-checks.json)
 record this partial improvement without M3 qualification or cap changes.
+
+## Qualification — 2026-10-19
+
+Exact source9c44d01f passes unit27/full37, original9PNG/Axe/vitals/CSP and
+independent M3 acceptance; locally landed under ADR-0199. The
+[qualification record](../reviews/gui-m3/qualification.json) binds actual evidence.

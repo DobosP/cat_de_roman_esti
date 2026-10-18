@@ -1,0 +1,188 @@
+{
+  "schema": 1,
+  "decision": "ACCEPT_M3_EXACT_PRODUCT_AND_APPROVE_LOCAL_FAST_FORWARD",
+  "reviewer": "agent:game-migration-review",
+  "reviewed_utc": "2026-10-18T21:30:44.652898+00:00",
+  "sha": "9c44d01ff476637bd1749b51f632312524d6f7ff",
+  "tree_sha256": "9f0f45f628718438896530a3e5c9bd0165c59e7f48bced33c85edc4369a1f65d",
+  "unit_result_sha256": "3c18b2877fe4ae8f8b4e4f2f10f91ab828de55c2274e74e9808c948eb3ab7dcd",
+  "full_result_sha256": "b98db124da1f1b4a3b96cc7a519594661d2735f0e800b08343f7195b90a45ad4",
+  "full_archive": {
+    "sha256": "7809e025ef6aeb30ce6fbee4ad74512c239551141c53fc5b3d17f7b2976eb0ad",
+    "bytes": 62361223,
+    "regular_members": 171,
+    "required_regular_rows_rehashed": 164,
+    "required_unique_regular_files": 163,
+    "image_metadata_rows": 1,
+    "all171members_match_actual_retained_bytes": true
+  },
+  "binding": {
+    "wrapper_invocation": "9e874efe-9fc4-47c9-9b6a-d2299466f7f2",
+    "runner_invocation": "5e85a018-38d8-40fa-add1-2d3a2efeb441",
+    "parallel": 2,
+    "source_clean": true,
+    "source_tree_recomputed_files": 8954,
+    "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+    "versions_lock_sha256": "d7c0192fb92cb307d9235db1a3004d06d07955b461a59e48ce1924b1ede71e0b",
+    "app_image_id": "sha256:8f5e8e2974338e1f73885a4661cec89bc76e3c5a463f4e9ad6f538e484cde45b",
+    "manifest_sha256": "737de3f7f7c08a1d4a1fb8d7fbae1c13b389dd268589bb676944beb49cbb0d7f"
+  },
+  "execution": {
+    "checks_pass": 37,
+    "command_actions_zero": 26,
+    "assertions_true": 80,
+    "command_stream_hashes_verified": 52,
+    "bootstrap_stream_hashes_verified": 6,
+    "same_SHA_unit_reuse": "Strict hit; all7 lanes/30 physically retained files agree with independently accepted canonical unit. Frontend560/backend1930/auth28 are reused unit outcomes, not new full executions.",
+    "PG_actual": {
+      "accounts_named_pass": 12,
+      "httpapi_named_pass": 301,
+      "named_fail": 0,
+      "named_skip": 0,
+      "all17_default_unit_DSN_obligations_pass": true,
+      "additional_child_cases": 9,
+      "default_unit_no_test_packages": 12
+    },
+    "parity": {
+      "requests": 1206,
+      "reference": "Django application, V1.13 weather-and-landscape independently reviewed content",
+      "content_hash": "sha256:96877d109cf6dcbb19e373a3664e1b27efb0adbe19105e97965eb8893fa88970",
+      "authority": "Explicit owner-approved V1.13-only count1206; historical1207 corpora/assertions unchanged"
+    }
+  },
+  "browser": {
+    "raw_report_sha256": "c81027fcf758ff342964043eb95aaab6c3246fae076d53b4b55461b08da93706",
+    "exact_inventory_discovery_execution_match": true,
+    "cases": 933,
+    "passed": 933,
+    "skipped": 0,
+    "retry": 0,
+    "flaky": 0,
+    "unexpected": 0,
+    "errors": 0,
+    "workers": 2,
+    "projects": {
+      "desktop": 461,
+      "mobile": 461,
+      "motion-on": 11
+    },
+    "duration_ms": 599294.535,
+    "list_only_skipped_placeholders": 933
+  },
+  "baseline": {
+    "nine_actual_PNG_bytes_equal_canonical_originals": true,
+    "axe": "Eight non-Home route fingerprints exact; Home actual bound six-node/name/order witness and unchanged approved alias policy pass. Existing original fingerprints preserved.",
+    "comparison_outcomes_pass": 16,
+    "home_cards_exact": 6,
+    "vitals": [
+      {
+        "route": "/conexiuni",
+        "original": {
+          "lcp": 2836,
+          "inp": 184,
+          "cls": 0
+        },
+        "current": {
+          "lcp": 1760,
+          "inp": 72,
+          "cls": 0
+        },
+        "runs": 5
+      },
+      {
+        "route": "/alchimie?mode=challenges",
+        "original": {
+          "lcp": 4228,
+          "inp": 200,
+          "cls": 0.00057706
+        },
+        "current": {
+          "lcp": 1856,
+          "inp": 72,
+          "cls": 0
+        },
+        "runs": 5
+      }
+    ],
+    "method": {
+      "runs": 5,
+      "reducedMotion": "reduce",
+      "cpu": 4,
+      "rtt_ms": 150,
+      "down_kbps": 1600
+    },
+    "axe_version": "4.14.0",
+    "vitals_version": "6.2.3",
+    "supplement_archive_sha256": "d598cf0f1202338307253aa1c6cc4bde7bf90d8a65cc3355898879562aca6245",
+    "supplement_bytes": 40722,
+    "retention_manifest_sha256": "2abd447293a41b8526877c1b5607839f1117348baee415f97ad26064a2e03231",
+    "retention_scope": "Full raw capture/comparison/Home/identity metadata and original source bindings retained. Actual rolling PNG paths are not separately archived; exact identical bytes remain at the explicit canonical original paths in the retained9-row join."
+  },
+  "CSP": {
+    "stage": "enforced",
+    "current_pages": 9,
+    "unique_current_nonces": 9,
+    "current_violations": 0,
+    "legacy_violations": 0,
+    "font_responses_per_page": 4,
+    "aggregate_measurement_sha256": "13cdd8300edfb290e2a173170526bb40f8a213e93a4b0742a0035db361acc94f",
+    "frozen_route_observation_set": "Absent as required for all-current M3; separate actual CAT_UI=legacy witness remains."
+  },
+  "legacy_and_host_custody": {
+    "actual_intrusul_create_status": 200,
+    "actual_creates": 1,
+    "real_board_visible": true,
+    "frozen_members_exact": 30,
+    "same_actual_app_image": true,
+    "legacy_owner_commands_zero": 12,
+    "legacy_owner_stream_hashes_verified": 24,
+    "legacy_cleanup_verified": true,
+    "legacy_absent_by_ID_and_exact_name": true,
+    "primary_survived_owner_cleanup": true,
+    "host_custody_sha256": "52ccaefa20b974a1e71d247347a00b5c45eec0255ebe59dd449285654cf60819",
+    "supervisor_sha256": "587999cd1a4bc466774d925c504dcac60179104dde3339f112ce24b51cd66f57",
+    "supervisor_gate_exit": 0,
+    "supervisor_owner_exit": 0,
+    "supervisor_errors": [],
+    "owned_app_DB_network_cleanup_verified": true,
+    "reviewer_live_Docker_query": false,
+    "root_fresh_post_full_absence_query": "Reported by owning operator; no owned project/owner resources remain. Reviewer verified committed supervisor/owner command evidence without a new runtime query."
+  },
+  "assets_and_budgets": {
+    "current99files_verified_in_frontend_and_embed": true,
+    "actual_HTTP_asset_hashes_verified": 35,
+    "active_JS_routes_pass": 10,
+    "Home_JS": 29009,
+    "Home_target": 30720,
+    "Challenge_JS": 40853,
+    "JS_cap": 40960,
+    "frozen_SDK_raw_JS_failures": "Recorded under exact original30-byte integrity; not waived",
+    "CSS_current_level9_unique": 20669,
+    "CSS_baseline_capture_default_gzip": 20756,
+    "CSS_original_ceiling": 16093,
+    "CSS_M4_gap_level9": 4576,
+    "M4_not_accepted": true
+  },
+  "landing_readiness": {
+    "local_main": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+    "main_clean": true,
+    "main_is_exact_ancestor": true,
+    "main_only_commits": 0,
+    "feature_only_commits": 4,
+    "content_merge_required_now": false,
+    "approved": "Publish reviewed GUI feature and fast-forward local main to exact qualified9c44 product under E8/E10; acceptance docs may follow with docs-only checks explicitly bound to this product SHA. Re-read literal main before landing.",
+    "not_authorized": "No app-main push, production/accounts activation, unlanded content branch merge or deletion of unmerged M4/source packets. Keep current lane into M4 as root directed."
+  },
+  "remaining_M4": [
+    "Reviewed canonical CSS consolidation and all-unique CSS consumer gate<=16093, preserving all old assertions/cascade/screenshots",
+    "Add the source-approved pinned plain-Preact Vitest browser lane via sanctioned deps; M3 unit had560Node cases and does not claim Vitest execution or complete S1 qualification",
+    "Measured budget/source documentation ratchets, same-final-SHA unit2/full2, release-image target and app/base digests, independent M4/local-landing acceptance"
+  ],
+  "timing": {
+    "started": "2026-10-18T21:08:25.448Z",
+    "finished": "2026-10-18T21:21:48.405Z",
+    "seconds": 802.957,
+    "note": "One measured cache-hit full profile; no causal speedup or future latency claim."
+  },
+  "reviewer_policy": "Read-only filesystem/Git evidence audit plus compact scratch retention only; no owning source changes, native tests, product runtime, gate or Docker action."
+}

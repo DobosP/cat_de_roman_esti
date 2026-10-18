@@ -1,10 +1,33 @@
 # GUI migration — feature branch handover
 
-Valid until: the next source or completed gate change. Updated 2026-10-12. Read actual HEAD/dirty state and origin refs before continuation.
+Valid until: the next source or completed gate change. Updated 2026-10-19. Read actual HEAD/dirty state and origin refs before continuation.
+
+
+## Current — M3 accepted, M4 next
+
+M3 source9c44d01f is independently accepted, published on `feat/gui-cat-m3` and
+landed on local `main`: unit27/full37,933browser/0skip-retry-flaky,9exact original
+PNGs/Axe/Home/vitals/CSP0, freshPG12/301, reviewed V1.13 parity1206, actual legacy
+rollback and owned cleanup pass. All normal routes/both Alchimie modes use
+Preact11/core-v1.11 through managed Go delivery. [Current truth](STATUS.md),
+[qualification](reviews/gui-m3/qualification.json), [independent acceptance](reviews/gui-m3/full-acceptance.json).
+
+Continue M4 in the same lane: reviewed authored CSS consolidation and original
+16,093 total-CSS gate (current20,669), required pinned Vitest browser contracts,
+release image and final exact-SHA unit/full/review/docs. Generate locks only with
+the owning deps gate. Preserve frozen original30/legacy, source/API/scoring/content
+contracts and unmerged source packets. Do not rerun full for docs-only changes.
+Use matching unit/full `--parallel 2`; invoke `gui-full-runner.py` without a
+`GATE_OPERATOR` prefix. PROGRAM E8/E10 authorizes GUI feature publication and
+local Cat M3/M4 landing; app-main push/production/real-account go-live remain Paul's.
+Prepared future packets remain under the owning scratch renovation directory;
+no M4 implementation/acceptance is claimed. [Completion plan](execplans/gui-game-renovation.md).
+
+## Historical — superseded 2026-10-12 handover
 
 Publish only `fix/gui-cat-prerequisites-linux` to origin. Shared main stays clean. React19/Motion and UI0.3 remain active; Core-v1.6 is released and UI1.0.6 staged. This migration is unfinished.
 
-## Current 2026-10-12 (completion loop handover)
+## Historical 2026-10-12 (completion loop handover)
 
 - M1-close is `b3f5f61` under E3: [compact full](reviews/gui-normalized-react/m1-close-b3f5f61.json),
   actual FAIL201 only ten active JS budgets plus aggregate;37/39 checks,900browser,16baselines/9exactPNGs,
