@@ -1,0 +1,87 @@
+{
+  "schema": 1,
+  "created_utc": "2026-10-18T21:56:50.366231+00:00",
+  "reviewer": "agent:codex/game_budget_design",
+  "status": "APPROVED_SOURCE_ONLY_PENDING_ACTUAL_NATIVE_TYPE_LINT_BROWSER_REQUALIFICATION",
+  "findings": [],
+  "patch_sha256": "00ba29127204d0999339430c4328bcd25fa6c4546d0c0f19310f3be64ae2201d",
+  "author_source_review_sha256": "8ae66cc7947cdbdc5355609eded1324b7de9264b793793b2de7a011f64a25b7f",
+  "file_bindings": [
+    {
+      "path": "frontend/tsconfig.browser.json",
+      "before_sha256": "839170bd51987a9e751a5c3d54e39f0151d8828b994e4f364b38d282a441c7fd",
+      "after_sha256": "352261961c5e89ef39d7be80743edc6c04504d42c0edb5aa519219bf372dc7e7"
+    },
+    {
+      "path": "frontend/tests/browser/tsconfig.json",
+      "before_sha256": null,
+      "after_sha256": "5ad3d6a88d591f1d5a5c65cea00986f18c538e742fc0f735d18b327ce83a9e32"
+    },
+    {
+      "path": "frontend/tests/gui-browser-tests.test.mjs",
+      "before_sha256": "1e2b984cdf22aa4d892f516de5780eb19d00dd57783007714634ccadd12a4f64",
+      "after_sha256": "fee61059571ab523e1f0b5e71960215942b2f9edab042373467cd014fe272a30"
+    },
+    {
+      "path": "frontend/scripts/gui-browser-tests.mjs",
+      "before_sha256": "bd4fba21e5d4615e0215e590be2fb9a04781b6a29ba47666f39b343cfad32f5b",
+      "after_sha256": "5d380a7334b58bf8314d36491003eac4ad884cfd4b4b83f1c033dbc56ae20159"
+    }
+  ],
+  "all_four_deltas_independently_reconstructed": true,
+  "retained_real_red_archive_sha256": "311f367e64f477489c8ddd0882d357aa090691fa215bdcc256205fcb1e2f284c",
+  "actual_error_headlines": [
+    "x typescript(TS6263): Module '@roedu/ui/styles.css' was resolved to '/work/frontend/node_modules/@roedu/ui/dist/roedu-ui.d.css.ts', but '--allowArbitraryExtensions' is not set.",
+    "x typescript(TS2875): This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.",
+    "x typescript(TS7026): JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.",
+    "x typescript(TS7026): JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.",
+    "x typescript(TS7026): JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.",
+    "x typescript(TS7026): JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.",
+    "x typescript(no-floating-promises): Promises must be awaited, add void operator to ignore.",
+    "x typescript(no-floating-promises): Promises must be awaited, add void operator to ignore.",
+    "x typescript(no-floating-promises): Promises must be awaited, add void operator to ignore.",
+    "x typescript(no-floating-promises): Promises must be awaited, add void operator to ignore.",
+    "x typescript(no-floating-promises): Promises must be awaited, add void operator to ignore.",
+    "x typescript(require-array-sort-compare): Require 'compare' argument."
+  ],
+  "browser_typing": {
+    "only_browser_project_and_child_ownership_change": true,
+    "installed_Vite_client_standard_CSS_declaration_verified": true,
+    "installed_UI_styles_declaration_is_empty_side_effect_module": true,
+    "allowArbitraryExtensions": "Admits declaration-backed non-JS stylesheet extension, resolving actual TS6263. No app source/compiler/lint suppression or any declaration added.",
+    "nearest_child_path": "tests/browser/tsconfig.json extends ../../tsconfig.browser.json, then root tsconfig.json. The child includes current browser TSX and inherits strict/noEmit/noUnused plus jsx react-jsx/importSource preact.",
+    "root_tsconfig_bytes_unchanged": true,
+    "strict_intrinsic_JSX": "Installed preact/jsx-runtime exports JSXInternal; nearest project owns test TSX instead of inferred React JSX runtime/absent IntrinsicElements.",
+    "no_exclusion_or_severity_change": true
+  },
+  "node_registrations": {
+    "count": 5,
+    "only_top_level_await_added": true,
+    "titles_callback_bodies_and_assertions_exact": true,
+    "semantics": "All callbacks are synchronous and use independent valid() report objects. Awaiting each registration promise serializes completion, preserves assertion/failure reporting and introduces no pending fixture or import cycle. The file is already ESM."
+  },
+  "lexical_sort": {
+    "both_sides_use_same_comparator": true,
+    "same_binary_UTF16_order_for_supported_string_identities": true,
+    "reason": "Primitive string relational comparisons order UTF-16 code units lexicographically, matching default Array.sort string ordering. Equal strings return0. The six supported identities are fixed unique strings; no locale/normalization/transformation is introduced.",
+    "malformed_boundary": "Nonstrings cannot equal the fixed string inventory under unchanged deepEqual. All count/uniqueness/status/failure/runtime/provenance checks remain. No generic equivalence for numeric or user-defined objects is claimed."
+  },
+  "unchanged_browser_six_cases_sha256": "f18c351ed886ce4464dc303bd3d0031932524c9256b49a3c00981af76c79b06b",
+  "unchanged_case_inventory_sha256": "b4291a6f26572a13d7ebbef7e23ea4060e596b599e8da88e1b76c35c24b80da3",
+  "all_six_browser_bodies_and_IDs_byte_exact": true,
+  "assertions": {
+    "runner_before_after": [
+      25,
+      25
+    ],
+    "node_guards_before_after": [
+      5,
+      5
+    ],
+    "browser_source_byte_exact": true
+  },
+  "preserved": "No runtime/product/CSS/dependency/lock/vendor/cap/lint-policy/test-inventory or original assertion edits. Main npm pipeline and raw report/provenance guards unchanged.",
+  "read_only_git_apply_check": true,
+  "execution": "Only this scratch independent review written. No owning edits, runtimes/tests/builds/gates or browser/device execution.",
+  "limits": "Source approval does not establish native config acceptance or that any browser case executed. Root must retain genuine type/lint/six-case browser qualification after application."
+}

@@ -1,5 +1,4 @@
 import { Csp } from "./CspStyle";
-import "../styles/shared-game-controls.css";
 // GameIntro — the shared "before you play" card: icon, title, tag, how-to,
 // difficulty (passed as children), the primary start action and the daily
 // challenge. All four games previously hand-rolled this with drifting styles.

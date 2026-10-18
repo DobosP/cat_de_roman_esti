@@ -2,7 +2,7 @@
 
 ## Project summary
 - Purpose: Romanian word-game arcade — six server-authoritative text games (Alchimie, Intrusul,
-  Perechi, Conexiuni, Cald sau Rece, Lanțul Cuvintelor) served by `go-backend/` + React/TypeScript
+  Perechi, Conexiuni, Cald sau Rece, Lanțul Cuvintelor) served by `go-backend/` + Preact/TypeScript
   SPA (`frontend/`) over the bundled Romanian KG build; `cat_de_roman_esti/web/` is an offline oracle
   `cat_de_roman_esti/fixtures/kg_sample.json` (data.py:27); `./cat-de-roman` builds the native
   original terminal hop game. Word-game/session behavior stays bounded, deterministic, test-covered.
@@ -19,7 +19,7 @@
   `ro_data_server` · Downstream: none.
 - Fleet map + parallel-agent protocol: `~/work/AGENTS.md` (agent-ops ADR-0025/0026). Global session, git,
   scratch and secrets rules: `~/.claude/CLAUDE.md` (agent-ops ADR-0027/0028/0037/0063/0074/0077) — cited here, not restated.
-- Delegation: roles and rungs per the `agent-routing` skill (the ladder in `fleet-tiers.sh`); Codex is opt-in (agent-ops ADR-0065).
+- GUI orchestration follows PROGRAM E8/E10 and ADR-0199; outside that scope, retain the fleet delegation policy (agent-ops ADR-0065).
 
 ## Parallel work (mandatory)
 - This shared checkout stays on `main`, clean — clean includes untracked (agent-ops ADR-0063): `git status --porcelain`
@@ -28,7 +28,7 @@
 - One task = one branch (`<type>/<slug>`) = one worktree `~/work/_worktrees/cat_de_roman_esti/<slug>`, never under `/tmp`:
   `python3 ~/work/agent-ops/scripts/create_task_worktree.py --repo ~/work/cat_de_roman_esti --branch <type>/<slug> --task "..." --write`
   Scratch and one-off scripts: `~/work/_temp/<slug>/`, run against this repo by path (agent-ops ADR-0028).
-- Workers never push (GUI programme exception until production: roedu-ui PROGRAM E6/E8 — the loop agent pushes GUI feature branches and runs owner-only gate steps with provenance). The orchestrating session lands green work on `main` (agent-ops ADR-0014) and finishes the landing
+- Workers never push (GUI exception: PROGRAM E8/E10 and ADR-0199 permit the loop agent to push GUI feature branches, operate gates and land Cat M3/M4 locally after exact-SHA unit/full + independent review). The orchestrating session lands green work on `main` (agent-ops ADR-0014) and finishes the landing
   in the same session (agent-ops ADR-0037): delete the verified-merged branch (local + origin), its worktree, `_temp/<slug>/`.
   Unmerged work is deleted only per item, human-confirmed. A branch reaches origin only on land or by
   `ops publish cat_de_roman_esti <branch>` — `ops sync` never creates a remote ref (agent-ops ADR-0077).
@@ -52,14 +52,14 @@
 - Content gates: `go -C go-backend run ./cmd/cat-content validate --root ..` and
   `go -C go-backend run ./cmd/cat-content export --root .. --check`; operator rails: agent-testing.
 - Native lint: `go -C go-backend vet ./...`; optional oracle Ruff · Whitespace: `git diff --check`
-- Frontend, only when `frontend/` changes: `cd frontend && npm ci && npm test && npm run lint && npm run build`
-  (native frontend gate); frozen original30 and managed output/retirement: ADR-0184 (actual gates required).
+- GUI tests/builds/deps run through the owning pinned `scripts/gate.sh`, never host npm/Go; commands and cadence: `docs/agent-testing.md`.
+  Preact/routes: ADR-0202/0204; native TS7/Oxlint + SDK AST and managed Go embedfs: ADR-0184. Original30/legacy stay frozen.
 - Run the Go app: `./run.sh`; runtime/release: `docs/NATIVE_BACKENDS.md`; deploy: `docs/DEPLOY.md`.
 
 ## Safety
 - Never read or print secret values; names only: `ROEDU_API_URL`, `ROEDU_API_KEY` (`.env.example`); values deploy per agent-ops ADR-0027.
-- Landing policy for this repo: ADR-0004 — direct local merge to `main` once the CI gate is green; pushing to
-  origin is explicit-request-only. Never land a red suite.
+- GUI M3/M4 local landing follows ADR-0199: exact-SHA unit/full + independent review; no device testing. Other work follows ADR-0004.
+  App-main pushes, production and real-child/account go-live remain owner-only. Never land a red suite.
 - Keep game/session fixes narrow and test-backed; session stores stay bounded. Worker briefs name the expected
   TTL/size/session behavior and the targeted test command.
 - Content changes pass both validators and the critique rubric (`docs/CRITIQUE_RUBRIC.md`, ADR-0067); never

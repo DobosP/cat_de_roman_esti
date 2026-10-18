@@ -46,7 +46,7 @@ const modes = alchimieModeBindings(readFileSync('frontend/src/screens/Alchimie.t
 const ported = portedSetBindings('/work', routes);
 const measured = measureProfile('/work/frontend/dist', JSON.parse(readFileSync('budgets.json')), routes, api);
 console.log(JSON.stringify({ scope: 'Focused emitted current-route preflight; not unit/full acceptance', ported, modes, ...measured }, null, 2));
-process.exitCode = measured.report.status === 'pass' ? 0 : 1;
+process.exitCode = measured.status === 'pass' ? 0 : 1;
 JS
 fi
 python3 -I - "$out" <<'PY'

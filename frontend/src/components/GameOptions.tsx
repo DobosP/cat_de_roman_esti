@@ -1,7 +1,6 @@
 import type { ComponentChildren } from "preact";
 import type { GameHelpCopy } from "../gameHelp.mjs";
 import { GameHelp } from "./GameHelp";
-import "../styles/game-options.css";
 
 /** Optional tools stay available without occupying the main play area. */
 export function GameOptions({ help, children }: { help?: GameHelpCopy; children?: ComponentChildren }) {

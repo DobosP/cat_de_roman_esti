@@ -1,4 +1,3 @@
-import "../styles/shared-game-controls.css";
 // Hud — the uniform status cluster next to the GameShell header: small stat
 // badges (moves, lives, difficulty, …) that look identical across all six games.
 

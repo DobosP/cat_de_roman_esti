@@ -38,7 +38,6 @@ import { bestScore, scoreBoard } from "../scores/read";
 import { buildDailyCircuit, needsDerivedStarter } from "../scores/daily";
 import { buildSharePayload, copyResult, formatDayKey, stableKey, todayLocal } from "../share";
 import { sound } from "../sound";
-import "../styles/intrusul.css";
 
 const GAME_KEY = "intrusul";
 const DEF = gameByKey(GAME_KEY);

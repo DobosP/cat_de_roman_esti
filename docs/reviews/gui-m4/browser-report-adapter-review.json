@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "created_utc": "2026-10-18T22:10:54.534709+00:00",
+  "reviewer": "agent:codex/game_budget_design",
+  "status": "APPROVED_SOURCE_ONLY_PENDING_ACTUAL_PINNED_NATIVE_ADAPTER_REQUALIFICATION",
+  "findings": [],
+  "patch_sha256": "46428ea5fd621ad485ac3a2e9d489660a2a88200ac50bafe5d6fb1fd01f1c7de",
+  "author_proof_sha256_observed": "cf4420973abeba9f3fc2b7cbeeba7d8b1b24421732fcbe2179758e050c1f6e3d",
+  "before_sha256": "5d380a7334b58bf8314d36491003eac4ad884cfd4b4b83f1c033dbc56ae20159",
+  "candidate_sha256": "b665d3f845b46f55ef92ed198da9a83df15198babc12fe48b8367a80358f2692",
+  "exact_single_file_patch_reconstructed": true,
+  "actual_pinned_Vitest5_sources": [
+    {
+      "path": "frontend/node_modules/vitest/dist/chunks/index.DpLw24bj.js",
+      "sha256": "1530a89d189ebdc57a1577e7fbfcd34eac55a0165589265b8d776b33f83678bd"
+    },
+    {
+      "path": "frontend/node_modules/vitest/dist/chunks/cac.DfDGTQ9W.js",
+      "sha256": "96e83ae033d86fe0880fe4be5653b2f951dc64da1a4949d57e9fe13f30193c2b"
+    }
+  ],
+  "actual_reporter_contract": "Installed JsonReporter writes JSON.stringify(result) UTF8 to explicit outputFile (absolute path retained by resolve); without outputFile it writes shared .vitest report and logs filename. CLI supports --outputFile. Parsing child stdout was therefore wrong for actual pinned reporter.",
+  "custody_review": {
+    "current_wrapper_binding_checks_preserved": true,
+    "scope": "Target restricted to shell/unit/full; actual wrapper v4UUID admitted. Paths descend from canonical owned /work/.gate/<target>; pinned wrapper runs mapped caller UID:GID (gate.sh595), matching owned mirror directories.",
+    "freshness": "mkdtemp creates a new private directory; lstat target must fail ENOENT (dangling symlinks do not pass). Only that explicit outputFile is read after unchanged child status/timeout checks; shared cached report is never adopted.",
+    "directory": "Directory lstat/realpath/UID/non-world-write checks and dev+inode continuity before/after child remain required.",
+    "file": "Positive bounded16MiB regular same-owner sole-link canonical file; O_NOFOLLOW|O_NONBLOCK descriptor read; dev/ino/mode/size/mtimeNs/ctimeNs continuity across lstat/open/fstat/read/path and exact bytes-length check.",
+    "raw_bytes": "stdout now holds the actual report Buffer. Unchanged hash/update, Buffer.byteLength, base64 tag and binding code operate directly on those bytes; JSON.parse alone decodes for the unchanged outcome checker. No normalization or reserialization of reporter bytes.",
+    "scope_limit": "Custody operates within the existing trusted same-UID pinned runner/tool boundary; source review is not adversarial filesystem fault-injection evidence."
+  },
+  "unchanged": {
+    "six_case_source_sha256": "f18c351ed886ce4464dc303bd3d0031932524c9256b49a3c00981af76c79b06b",
+    "six_case_IDs_sha256": "b4291a6f26572a13d7ebbef7e23ea4060e596b599e8da88e1b76c35c24b80da3",
+    "five_guard_bodies_sha256": "fee61059571ab523e1f0b5e71960215942b2f9edab042373467cd014fe272a30",
+    "checker_function_byte_exact": true,
+    "child_run_status_error_timeout_streams_byte_exact": true,
+    "hash_raw_tag_and_binding_suffix_byte_exact": true,
+    "product_CSS_dependencies_locks_caps_rules_inventory_and_original_assertions": true
+  },
+  "TS_lint_review": "Uses existing Node ESM/fs/assert imports and Buffer APIs. Stats numeric UID/mode checks stay separate from bigint:true Stats comparisons; uid cast and byte-length cast use BigInt explicitly. New calls are synchronous; no promise is floated. No source type/lint suppression or new dependency. Actual native lint acceptance remains untested by this reviewer.",
+  "prior_child_evidence": {
+    "report_sha256": "3f792fa282c42a676485ff92e002c87fb9e9a59a52aa88a880698399a8e8056e",
+    "bytes": 2368,
+    "six_child_cases_pass": true,
+    "outer_adapter_failed": true,
+    "not_a_canonical_browser_adapter_pass": true
+  },
+  "read_only_git_apply_check": true,
+  "execution": "Only this scratch review written; no owning edits or native/runtime/test/build/gate/browser execution.",
+  "pending": "Root should apply exact reviewed patch, retain red evidence and run the actual pinned adapter with types/lint and all six browser assertions. Source approval is not a result receipt or milestone acceptance."
+}

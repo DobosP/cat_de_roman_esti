@@ -39,7 +39,8 @@ The name is a pun on *"cât de român ești"* — "how Romanian are you".
   ([native tooling](docs/NATIVE_TOOLCHAIN.md), [ADR-0166](docs/adr/0166-native-content-operators-and-builder-rails.md)).
 - **Python/Rust** sources, tests and rollback profiles remain independent references.
   Legacy Python web dependencies are pinned by `constraints.txt`.
-- Frontend: React 19.2.7 + Vite 8.3.3 + TypeScript 7.0.2; selected Node 26.10.0/npm 12.2.0 ([ADR-0184](docs/adr/0184-native-spa-toolchain-and-managed-output.md)). [Startup accounting](docs/adr/0185-accepted-eager-startup-bundle-accounting.md) is integrated with retained122743/122880 startup bytes and remains unqualified; see the current [owning handover](docs/GUI_MIGRATION_HANDOFF.md) and [`frontend/README.md`](frontend/README.md).
+- Current GUI source: **Preact 11.0.0 + preact-iso 2.12.2**, Vite 8.3.3 and TypeScript 7.0.2; selected Node 26.10.0/npm 12.2.0. [ADR-0202](docs/adr/0202-m3-remaining-preact-screens.md) describes the remaining-screen port and [ADR-0204](docs/adr/0204-native-preact-state-for-challenge.md) supersedes its Challenge Signals direction with native Preact state. Accepted milestones and exact-source qualification are recorded only in [STATUS](docs/STATUS.md).
+- [ADR-0184](docs/adr/0184-native-spa-toolchain-and-managed-output.md) records native TS7, Oxlint/tsgolint and mandatory SDK AST checks. The owning build syncs `frontend/dist` into `go-backend/embedfs/dist` before compiling Go; the original30 `web/static` files and frozen React rollback bundle remain immutable. Do not hand-commit regenerated files into that original tree.
 - Native bounded RO-EDU REST client and provenance-preserving fixture/smoke operators;
   the original vendored Python client remains an independent reference.
 - Native race/vet/source/HTTP/browser gates; retained `pytest`/`ruff` reference commands
@@ -66,8 +67,8 @@ offline fixture.
 
 The compiled SPA and Go server play fully offline against the reviewed embedded
 content. The Go runtime serves all six games and Alchimie exploration, with optional native
-accounts and pending proposals, without a Python server. The React/TypeScript frontend
-remains JavaScript in the browser. Build and deployment details are in
+accounts and pending proposals, without a Python server. The Preact/TypeScript frontend
+runs as JavaScript in the browser; Go serves its compiled managed assets and APIs. Build and deployment details are in
 [`docs/NATIVE_BACKENDS.md`](docs/NATIVE_BACKENDS.md); current qualification is in
 [`docs/STATUS.md`](docs/STATUS.md).
 
@@ -139,7 +140,21 @@ retained reference/rollback artifacts, outside the active serving path.
 
 ## Tests & lint
 
-The CI gate set (`.github/workflows/ci.yml`), runnable locally:
+For GUI work, use the trusted task worktree and its pinned wrapper; host npm/Go
+commands do not establish GUI qualification. The operator records PROGRAM E8
+provenance. Replace `<full-SHA>` with the literal clean checkout commit:
+
+```bash
+GATE_OPERATOR=agent:codex bash scripts/gate.sh unit --sha <full-SHA> --parallel 2
+python3 -I scripts/gui-full-runner.py --sha <full-SHA> --parallel 2
+```
+
+Iterations use focused checks/unit; full runs once per milestone. Docs-only edits
+run documentation and whitespace checks. [ADR-0199](docs/adr/0199-owner-no-device-checkpoint-agent-lands-m3-m4.md)
+and [ADR-0200](docs/adr/0200-bound-gate-evidence-reuse.md) define cadence and validated
+reuse; neither removes assertions or permits device testing. Run focused commands
+inside the owning pinned shell, including frontend install/test/type/lint/build.
+The following are inner native checks, also used by the manually dispatched CI:
 
 ```bash
 go -C go-backend test -race ./... && go -C go-backend vet ./...
@@ -166,16 +181,17 @@ retained Python/Rust reference jobs are opt-in ([ADR-0164](docs/adr/0164-manual-
 
 ## Contributing
 
-Direct **local** merges to `main` are allowed once the CI gate is green; **pushing to
-`origin` stays explicit-request-only**. See [`CONTRIBUTING.md`](CONTRIBUTING.md) and
-[`docs/adr/0004-branch-merge-policy.md`](docs/adr/0004-branch-merge-policy.md).
+For GUI M3/M4, [ADR-0199](docs/adr/0199-owner-no-device-checkpoint-agent-lands-m3-m4.md)
+authorizes the orchestrating agent to land locally only after green unit/full on
+the exact SHA and independent review. App-main pushes, production activation and
+real-child/account go-live remain owner-only. Other work follows
+[`CONTRIBUTING.md`](CONTRIBUTING.md) and [ADR-0004](docs/adr/0004-branch-merge-policy.md).
 
 ## Docs
 
 - [`docs/GO_BACKEND.md`](docs/GO_BACKEND.md) — Go serving runtime, retained Rust research and verification history.
 - [`docs/STATUS.md`](docs/STATUS.md) — current truth: state, pins, verification record, next actions.
-- [`docs/TESTARE_V1.md`](docs/TESTARE_V1.md) — Romanian V1 tester guide: six-game session, feedback form,
-  same-Wi-Fi phone setup for the organizer.
+- [`docs/TESTARE_V1.md`](docs/TESTARE_V1.md) — retained Romanian V1 tester/feedback guide; its phone setup is historical. Current GUI work has no device testing (ADR-0199).
 - [`romanian-game-content`](.agents/skills/romanian-game-content/SKILL.md) — repository skill for
   refinement and experimental concept discovery; workflow: [ADR-0156](docs/adr/0156-two-track-content-growth.md).
 - [`docs/BETA_CANDIDATE.md`](docs/BETA_CANDIDATE.md) — anonymous-beta evidence, bounded quality waves, outstanding gates and Romanian-player playtest protocol.
@@ -205,7 +221,7 @@ Direct **local** merges to `main` are allowed once the CI gate is green; **pushi
 - [`docs/V42_REFINEMENT.md`](docs/V42_REFINEMENT.md) — V42 bounded recovery, truthful
   category dailies, and the local streak/diploma loop (ADR-0062–0064).
 - [`docs/ROEDU_INTEGRATION.md`](docs/ROEDU_INTEGRATION.md) — products, key, field mapping, fail-closed gate, offline fixture.
-- [`frontend/README.md`](frontend/README.md) — SPA develop/build/layout.
+- [`frontend/README.md`](frontend/README.md) — SPA module layout and retained migration records; current tooling/run guidance is above.
 - History (never edited): [`docs/adr/`](docs/adr/) decision records (0001 = arcade pivot, no
   graph UI; newest in [`docs/adr/README.md`](docs/adr/README.md)) · [`docs/reviews/`](docs/reviews/) per-wave evidence ·
   [`docs/handoffs/`](docs/handoffs/) dated records · [`docs/archive/`](docs/archive/)

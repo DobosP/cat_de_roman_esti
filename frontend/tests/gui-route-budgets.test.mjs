@@ -4,11 +4,11 @@ import * as fs from "node:fs";
 import path from "node:path";
 import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
-import { gzipSync } from "node:zlib";
+import { gzipSync, gunzipSync } from "node:zlib";
 import ts from "@typescript/typescript6";
 import * as budget from "@roedu/web-kit/budget";
 import { parserBinding } from "../scripts/compiler-runtime.mjs";
-import { appRoutePaths, alchimieModeBindings, alchimieModeScreens, bindings, classifyProfiles, frozenBaselineReferences, journeys, measureProfile, portedPaths, portedJourneys, portedSetBindings, verifyFrozenBaseline, verifyTreeRows } from "../../scripts/gui-route-budgets.mjs";
+import { CONSUMER_CSS_TOTAL_KEY, measureConsumerCssTotal, appRoutePaths, alchimieModeBindings, alchimieModeScreens, bindings, classifyProfiles, frozenBaselineReferences, journeys, measureProfile, portedPaths, portedJourneys, portedSetBindings, verifyFrozenBaseline, verifyTreeRows } from "../../scripts/gui-route-budgets.mjs";
 import { readTarGz } from "../../tools/gui-bootstrap-webkit/scripts/kit-sync.mjs";
 
 // Synthetic asset attribution contracts only. These execute the installed public
@@ -29,6 +29,11 @@ function write(root, name, data) {
   const file = path.join(root, name);
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, data);
+}
+function writeCurrentCss(root, name, data) {
+  const bytes = Buffer.isBuffer(data) ? data : Buffer.from(data);
+  write(root, name, bytes);
+  write(root, name + ".gz", gzipSync(bytes, { level: 9 }));
 }
 function fixture(t, profile = "active") {
   const keys = screenKeys[profile].map((name) => `src/screens/${name}.tsx`);
@@ -76,13 +81,17 @@ function fixture(t, profile = "active") {
   }
   for (const entry of Object.values(manifest)) {
     write(root, entry.file, `/* ${entry.file} */\n` + "export const n = 42;\n".repeat(5));
-    for (const css of entry.css ?? []) write(root, css, `/* ${css} */ .fixture{color:red}\n`);
+    for (const css of entry.css ?? []) {
+      const bytes = `/* ${css} */ .fixture{color:red}\n`;
+      if (profile === "active") writeCurrentCss(root, css, bytes);
+      else write(root, css, bytes); // synthetic frozen profile keeps its original raw-only transport
+    }
   }
   write(root, ".vite/manifest.json", JSON.stringify(manifest));
   return { root, manifest };
 }
 function measured(f, budgets = actualBudgets, profile = "active") {
-  return measureProfile(f.root, budgets, profile === "active" ? paths : frozenPaths, budget, profile);
+  return measureProfile(f.assetsRoot ?? f.root, budgets, profile === "active" ? paths : frozenPaths, budget, profile);
 }
 
 void test("Alchimie source binds two literal lazy leaves to the captured frame URL", () => {
@@ -158,8 +167,8 @@ void test("public evaluator follows genuine static owners, mandatory deep Accoun
     assert.equal(item.js.files.filter((file) => file.startsWith("assets/route-")).length, 1);
     assert.ok(!item.js.files.includes("assets/route-7.js") && !item.js.files.includes("assets/home-deep.js"));
   }
-  assert.equal(result.report.global_css.status, "recorded");
-  assert.equal(result.report.global_css.limit_gz, null);
+  assert.equal(result.report.global_css.status, "pass");
+  assert.equal(result.report.global_css.limit_gz, 16093);
   assert.deepEqual(result.report.unmeasured_metrics, ["lcp_ms", "inp_ms"]);
   const frozen = fixture(t, "frozen-legacy"), legacy = measured(frozen, actualBudgets, "frozen-legacy");
   assert.equal(legacy.report.routes.length, 10);
@@ -257,6 +266,11 @@ void test("complete asset ledgers refuse omitted, extra, changed and symlinked f
 // synthetic transport fixture. This does not fabricate a current sync/runtime.
 function frozenFixture(t) {
   const f = fixture(t);
+  // Keep actual-current output distinct from the synthetic repository that also
+  // holds the immutable legacy archive. No current CSS scan may skip subtrees.
+  const assetsRoot = path.join(f.root, "synthetic-current-output");
+  fs.mkdirSync(assetsRoot);
+  for (const name of ["assets", ".vite"]) fs.renameSync(path.join(f.root, name), path.join(assetsRoot, name));
   for (const name of frozenBaselineReferences) write(f.root, name, fs.readFileSync(path.join(repo, name)));
   const proof = JSON.parse(fs.readFileSync(path.join(f.root, "legacy/original-bundle.json")));
   for (const name of [proof.archive, proof.archive + ".sha256"]) write(f.root, name, fs.readFileSync(path.join(repo, name)));
@@ -264,7 +278,7 @@ function frozenFixture(t) {
     assert.equal(entry.type, "file");
     write(f.root, "go-backend/embedfs/legacy/" + name, entry.data);
   }
-  return { ...f, proof, sync: { legacy_sha256: proof.sha256, legacy: proof.files } };
+  return { ...f, assetsRoot, proof, sync: { legacy_sha256: proof.sha256, legacy: proof.files } };
 }
 function verifiedFrozen(f) { return verifyFrozenBaseline(f.root, f.sync, readTarGz); }
 function frozenMeasured(f) { return measureProfile(path.join(f.root, "go-backend/embedfs/legacy"), actualBudgets, frozenPaths, budget, "frozen-legacy"); }
@@ -406,4 +420,105 @@ void test("installed public gate-result contract rejects the mixed baseline tabl
   assert.ok(Object.entries(result.budgets).filter(([name]) => name.startsWith("baseline:frozen-legacy:route-js:")).every(([, value]) => value.status === "recorded" && value.sdk_status === "fail"));
   assert.equal(actualBudgets.js["cat-initial"].limit_gz, 40960);
   assert.equal(actualBudgets.js["cat-initial"].target_gz, 30720);
+});
+
+
+// These are synthetic asset-policy controls only, never rendered app qualification.
+void test("consumer CSS total counts every current file once and leaves SDK report bytes untouched", (t) => {
+  const f = fixture(t), first = measured(f);
+  assert.equal(first.status, "pass");
+  assert.equal(actualBudgets.css.global.limit_gz, 16093);
+  assert.deepEqual(first.sdk_budgets, budget.gateBudgets(first.report));
+  const bound = bindings(f.manifest, paths);
+  assert.deepEqual(first.report, budget.evaluate(actualBudgets, f.manifest, bound.inventory, bound.config, f.root));
+  const expectedFiles = fs.readdirSync(path.join(f.root, "assets")).filter((name) => name.endsWith(".css")).sort();
+  assert.deepEqual(first.consumer_css_total.files.map((item) => item.file), expectedFiles.map((name) => "assets/" + name));
+  assert.equal(first.consumer_css_total.actual_gz,
+    expectedFiles.reduce((sum, name) => sum + fs.readFileSync(path.join(f.root, "assets", name + ".gz")).length, 0));
+  f.manifest["same-css-owner"] = { file: "assets/global.css" };
+  write(f.root, ".vite/manifest.json", JSON.stringify(f.manifest));
+  const repeated = measured(f);
+  assert.equal(repeated.consumer_css_total.actual_gz, first.consumer_css_total.actual_gz);
+  assert.equal(repeated.consumer_css_total.files.filter((item) => item.file === "assets/global.css").length, 1);
+});
+
+void test("valid orphan CSS over the limit fails consumer qualification while raw SDK routes still pass", (t) => {
+  const f = fixture(t), frozen = frozenFixture(t);
+  let state = 0x73c21a9d;
+  const bytes = Buffer.from(Array.from({ length: 65536 }, () => {
+    state ^= state << 13; state ^= state >>> 17; state ^= state << 5;
+    return state & 255;
+  }));
+  writeCurrentCss(f.root, "orphan/never-imported.css", bytes);
+  const profiles = { active: measured(f), "frozen-legacy": frozenMeasured(frozen) };
+  assert.equal(profiles.active.report.status, "pass");
+  assert.equal(profiles.active.status, "fail");
+  assert.equal(profiles.active.consumer_css_total.status, "fail");
+  assert.ok(profiles.active.consumer_css_total.actual_gz > 16093);
+  assert.ok(profiles.active.consumer_css_total.files.some((item) => item.file === "orphan/never-imported.css"));
+  const before = JSON.stringify(profiles), result = classifyProfiles(profiles, verifiedFrozen(frozen), "unit");
+  assert.equal(JSON.stringify(profiles), before);
+  assert.equal(result.status, "fail");
+  const consumer = result.gate_budgets["gate:active:" + CONSUMER_CSS_TOTAL_KEY];
+  assert.equal(consumer.status, "fail"); assert.equal(consumer.consumer_status, "fail");
+  assert.equal(consumer.status_source, "consumer-css-total");
+  assert.ok(!Object.hasOwn(consumer, "sdk_status"));
+  const missing = structuredClone(profiles); delete missing.active.budgets[CONSUMER_CSS_TOTAL_KEY];
+  assert.throws(() => classifyProfiles(missing, verifiedFrozen(frozen), "unit"), /consumer CSS total row required/);
+});
+
+void test("positive CSS ceiling retains global and route-specific SDK refusal controls", (t) => {
+  const global = fixture(t), lowered = structuredClone(actualBudgets);
+  lowered.css.global.limit_gz = 0; // synthetic refusal only; owning positive16093 remains exact
+  const all = measured(global, lowered);
+  assert.equal(all.report.global_css.status, "fail");
+  assert.ok(all.report.routes.every((item) => item.css.status === "fail"));
+  const route = fixture(t);
+  let state = 0x6a198c31;
+  const bytes = Buffer.from(Array.from({ length: 65536 }, () => {
+    state ^= state << 13; state ^= state >>> 17; state ^= state << 5;
+    return state & 255;
+  }));
+  writeCurrentCss(route.root, "assets/route-0.css", bytes);
+  const selected = measured(route);
+  assert.equal(selected.report.global_css.status, "pass");
+  assert.equal(selected.report.routes.find((item) => item.name === "/intrusul").css.status, "fail");
+  assert.equal(actualBudgets.css.global.limit_gz, 16093);
+  assert.deepEqual(fs.readFileSync(new URL("../../budgets.json", import.meta.url)), budgetBytes);
+});
+
+void test("current CSS total refuses missing stale invalid and noncanonical sidecars", (t) => {
+  for (const kind of ["missing", "stale", "invalid", "level1", "raw-missing"]) {
+    const f = fixture(t), rawPath = path.join(f.root, "assets/global.css"), gzipPath = rawPath + ".gz";
+    const raw = fs.readFileSync(rawPath);
+    if (kind === "missing") fs.unlinkSync(gzipPath);
+    else if (kind === "raw-missing") fs.unlinkSync(rawPath);
+    else if (kind === "stale") fs.writeFileSync(gzipPath, gzipSync(Buffer.from("different CSS"), { level: 9 }));
+    else if (kind === "invalid") fs.writeFileSync(gzipPath, Buffer.from("not gzip"));
+    else {
+      const level1 = gzipSync(raw, { level: 1 });
+      assert.deepEqual(gunzipSync(level1), raw);
+      assert.notDeepEqual(level1, gzipSync(raw, { level: 9 }));
+      fs.writeFileSync(gzipPath, level1);
+    }
+    assert.throws(() => measureConsumerCssTotal(f.root, 16093),
+      /Missing canonical CSS gzip sidecar|Stale CSS gzip sidecar|Invalid CSS gzip sidecar|Noncanonical level-9 CSS gzip sidecar|without raw CSS refused/, kind);
+  }
+});
+
+void test("current CSS total refuses output aliases and frozen original30 keeps raw-only policy", (t) => {
+  const f = fixture(t), outside = fixture(t);
+  fs.symlinkSync(path.join(outside.root, "assets/global.css"), path.join(f.root, "assets/alias.css"));
+  assert.throws(() => measureConsumerCssTotal(f.root, 16093), /symlink refused/);
+  const alias = path.join(outside.root, "root-alias"); fs.symlinkSync(outside.root, alias);
+  assert.throws(() => measureConsumerCssTotal(alias, 16093), /confined CSS output ancestry/);
+  assert.throws(() => measureConsumerCssTotal(outside.root + "/../escape", 16093), /canonical CSS output root/);
+  const frozen = frozenFixture(t), legacy = frozenMeasured(frozen);
+  assert.equal(frozen.proof.files.length, 30);
+  assert.ok(frozen.proof.files.every((item) => !item.path.endsWith(".gz")));
+  assert.equal(legacy.consumer_css_total, null);
+  assert.equal(legacy.status, legacy.report.status);
+  assert.ok(!Object.hasOwn(legacy.budgets, CONSUMER_CSS_TOTAL_KEY));
+  assert.deepEqual(legacy.budgets, legacy.sdk_budgets);
+  assert.equal(verifiedFrozen(frozen).status, "pass");
 });

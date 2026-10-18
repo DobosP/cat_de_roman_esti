@@ -3,6 +3,7 @@ import * as fs from "node:fs";
 import path from "node:path";
 import { createHash } from "node:crypto";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { gzipSync, gunzipSync } from "node:zlib";
 import { collectInitialBundleFiles } from "../frontend/scripts/check-bundle-budget.mjs";
 import { parserBinding } from "../frontend/scripts/compiler-runtime.mjs";
 import { resolveHookRuntime } from "./gui-hook-runtime.mjs";
@@ -262,11 +263,89 @@ export function bindings(manifest, routePaths, profile = "active") {
     config: { schema: 1, routes, global_css: globalCss, vendors: {} } };
 }
 
+// App-owned total-CSS policy, separate from the unchanged delivered SDK report.
+// Every actual CSS file counts, including unreferenced files in fresh output.
+export const CONSUMER_CSS_TOTAL_KEY = "consumer-css-total:all";
+export function measureConsumerCssTotal(assetsRoot, limit) {
+  assert.ok(Number.isSafeInteger(limit) && limit >= 0, "Finite numeric current CSS total limit required");
+  assert.ok(path.isAbsolute(assetsRoot) && path.resolve(assetsRoot) === assetsRoot,
+    "Absolute canonical CSS output root required");
+  let cursor = path.parse(assetsRoot).root;
+  for (const part of assetsRoot.slice(cursor.length).split(path.sep)) {
+    cursor = path.join(cursor, part);
+    const info = fs.lstatSync(cursor);
+    assert.ok(info.isDirectory() && !info.isSymbolicLink() && fs.realpathSync(cursor) === cursor,
+      "Regular confined CSS output ancestry required");
+  }
+  const inventory = () => {
+    const files = [];
+    function visit(prefix) {
+      const directory = prefix ? path.join(assetsRoot, prefix.slice(0, -1)) : assetsRoot;
+      const info = fs.lstatSync(directory);
+      assert.ok(info.isDirectory() && !info.isSymbolicLink() && fs.realpathSync(directory) === directory,
+        "Regular confined CSS directory required");
+      for (const name of fs.readdirSync(directory).sort()) {
+        const file = relative(prefix + name), absolute = path.join(assetsRoot, file);
+        const entry = fs.lstatSync(absolute);
+        assert.ok(!entry.isSymbolicLink(), "CSS output symlink refused");
+        if (entry.isDirectory()) visit(file + "/");
+        else { assert.ok(entry.isFile(), "Nonregular CSS output refused"); files.push(file); }
+      }
+    }
+    visit("");
+    return files.sort();
+  };
+  const all = inventory(), rawFiles = all.filter((file) => /\.css$/i.test(file));
+  assert.ok(rawFiles.length, "Nonempty actual CSS inventory required");
+  const rawSet = new Set(rawFiles);
+  for (const file of all.filter((file) => /\.css\.gz$/i.test(file))) {
+    assert.ok(rawSet.has(file.slice(0, -3)), "CSS gzip sidecar without raw CSS refused");
+  }
+  const acquire = (file) => {
+    const absolute = regular(assetsRoot, file), previous = fs.lstatSync(absolute, { bigint: true });
+    const fd = fs.openSync(absolute, fs.constants.O_RDONLY | fs.constants.O_NOFOLLOW);
+    try {
+      const opened = fs.fstatSync(fd, { bigint: true }), bytes = fs.readFileSync(fd), after = fs.fstatSync(fd, { bigint: true });
+      assert.ok(opened.isFile() && opened.dev === previous.dev && opened.ino === previous.ino
+        && ["dev", "ino", "mode", "size", "mtimeNs", "ctimeNs"].every((key) => opened[key] === after[key])
+        && BigInt(bytes.length) === after.size, "CSS asset changed during acquisition");
+      return bytes;
+    } finally { fs.closeSync(fd); }
+  };
+  const files = rawFiles.map((file) => {
+    const raw = acquire(file), sidecar = file + ".gz";
+    assert.ok(all.includes(sidecar), "Missing canonical CSS gzip sidecar");
+    const compressed = acquire(sidecar);
+    let restored;
+    try { restored = gunzipSync(compressed, { maxOutputLength: raw.length + 1 }); }
+    catch { throw new Error("Invalid CSS gzip sidecar"); }
+    assert.ok(restored.equals(raw), "Stale CSS gzip sidecar");
+    assert.ok(compressed.equals(gzipSync(raw, { level: 9 })), "Noncanonical level-9 CSS gzip sidecar");
+    return { file, bytes: raw.length, sha256: hash(raw), gzip: { file: sidecar, bytes: compressed.length, sha256: hash(compressed) } };
+  });
+  assert.deepEqual(inventory(), all, "CSS output membership changed during measurement");
+  const actual = files.reduce((sum, item) => sum + item.gzip.bytes, 0);
+  return { schema: 1, status_source: "consumer-css-total", scope: "all-actual-current-css",
+    status: actual <= limit ? "pass" : "fail", limit_gz: limit, actual_gz: actual,
+    compression: "canonical-gzip-level9", inventory_sha256: hash(JSON.stringify(all)), files };
+}
+
 export function measureProfile(assetsRoot, budgets, routePaths, api, profile = "active") {
   const manifestBytes = read(assetsRoot, ".vite/manifest.json"), manifest = JSON.parse(manifestBytes);
   const attribution = bindings(manifest, routePaths, profile);
   const report = api.evaluate(budgets, manifest, attribution.inventory, attribution.config, assetsRoot);
-  return { manifest_sha256: hash(manifestBytes), ...attribution, report, budgets: api.gateBudgets(report) };
+  const sdkBudgets = api.gateBudgets(report);
+  // Frozen original30 files have no sidecars and remain byte-exact. Their raw
+  // SDK profile keeps its existing gzip-fallback measurements and baseline projection.
+  const consumerCssTotal = profile === "active"
+    ? measureConsumerCssTotal(assetsRoot, budgets.css.global.limit_gz) : null;
+  const consumerBudgets = consumerCssTotal ? { [CONSUMER_CSS_TOTAL_KEY]: {
+    limit: consumerCssTotal.limit_gz, actual: consumerCssTotal.actual_gz, status: consumerCssTotal.status,
+    status_source: consumerCssTotal.status_source, inventory_sha256: consumerCssTotal.inventory_sha256,
+  } } : {};
+  const status = report.status === "pass" && (!consumerCssTotal || consumerCssTotal.status === "pass") ? "pass" : "fail";
+  return { status, manifest_sha256: hash(manifestBytes), ...attribution, report, sdk_budgets: sdkBudgets,
+    consumer_css_total: consumerCssTotal, budgets: { ...sdkBudgets, ...consumerBudgets } };
 }
 
 /** Require all actual files, not just the bytes that happen to enter a sum. */
@@ -366,18 +445,32 @@ export function classifyProfiles(measuredProfiles, integrity, target) {
     assert.equal(profile.report.routes.length, expected.length);
     assert.deepEqual(profile.report.routes.map((item) => item.name).sort(), [...expected].sort());
     for (const [key, value] of Object.entries(profile.budgets)) {
-      const active = name === "active";
+      const active = name === "active", consumer = key === CONSUMER_CSS_TOTAL_KEY;
+      assert.ok(consumer ? value.status_source === "consumer-css-total" : !Object.hasOwn(value, "status_source"),
+        "Consumer CSS evidence cannot be relabeled as SDK evidence");
+      if (consumer) {
+        const total = profile.consumer_css_total;
+        assert.ok(active && total?.status_source === "consumer-css-total"
+          && value.status_source === "consumer-css-total"
+          && value.actual === total.actual_gz && value.limit === total.limit_gz && value.status === total.status
+          && value.inventory_sha256 === total.inventory_sha256
+          && value.status === (value.actual <= value.limit ? "pass" : "fail"), "Current consumer CSS total binding differs");
+      }
       qualified[`${active ? "gate" : "baseline"}:${name}:${key}`] = { ...value,
-        status: active ? value.status : "recorded", sdk_status: value.status,
-        classification: active ? "active-numeric-gate" : "frozen-baseline-measurement",
-        raw_report: `.gate/${target}/route-budgets/${name}.json`,
+        status: active ? value.status : "recorded",
+        ...(consumer ? { consumer_status: value.status,
+          classification: "active-consumer-numeric-gate", consumer_report: `.gate/${target}/route-budgets/${name}.json` }
+          : { sdk_status: value.status, classification: active ? "active-numeric-gate" : "frozen-baseline-measurement",
+            raw_report: `.gate/${target}/route-budgets/${name}.json` }),
         ...(active ? {} : { integrity_check: "cat-frozen-legacy-integrity" }) };
     }
   }
+  assert.ok(Object.hasOwn(measuredProfiles.active.budgets, CONSUMER_CSS_TOTAL_KEY), "Current consumer CSS total row required");
   const gateBudgets = Object.fromEntries(Object.entries(qualified).filter(([name]) => name.startsWith("gate:active:")));
   for (const name of portedJourneys) assert.ok(Object.hasOwn(gateBudgets, `gate:active:route-js:${name}`), `Active route row missing: ${name}`);
   const delivery = Object.fromEntries(journeys.map((name) => [name, portedPaths.includes(name.split("?")[0]) ? "current" : "frozen-legacy"]));
-  return { status: measuredProfiles.active.report.status === "pass" ? "pass" : "fail", budgets: qualified, gate_budgets: gateBudgets,
+  return { status: measuredProfiles.active.report.status === "pass"
+      && measuredProfiles.active.consumer_css_total?.status === "pass" ? "pass" : "fail", budgets: qualified, gate_budgets: gateBudgets,
     delivery, ported_routes: [...portedPaths], frozen_legacy_routes: journeys.filter((name) => delivery[name] === "frozen-legacy"),
     policy: "owner-approved-frozen-legacy-baseline-2026-10-11",
     authority: ["docs/adr/0193-frozen-legacy-budget-baseline.md", "docs/adr/0197-per-route-current-frozen-delivery.md"] };

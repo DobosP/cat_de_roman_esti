@@ -1,13 +1,16 @@
 # Agent Testing Guide — cat_de_roman_esti
 
-Last verified: 2026-10-11 — main3f327c/GUI4f36 source integration only; combined checks NOT RUN (ADR0194).
+Last reviewed: 2026-10-18 — guidance/source only; actual qualification and accepted milestones remain in [STATUS](STATUS.md).
 
 ## Native serving gates
 
-Go 1.27.1 serves the arcade, accounts/proposals and native content/tooling; selected Node 26.10.0/npm 12.2.0 SPA tooling follows [ADR-0184](adr/0184-native-spa-toolchain-and-managed-output.md).
+Go 1.27.1 serves the arcade/accounts/content; current GUI source uses Preact11/preact-iso (ADR-0202/0204). Selected Node26.10.0/npm12.2.0, native TS7/Oxlint/tsgolint and SDK AST checks follow [ADR-0184](adr/0184-native-spa-toolchain-and-managed-output.md).
 [ADR-0162](adr/0162-select-go-production-backend.md) and [ADR-0163](adr/0163-complete-native-go-accounts.md)
 record serving boundaries; [ADR-0166](adr/0166-native-content-operators-and-builder-rails.md)
-records native operator/review rails. Python commands below are optional independent references ([ADR-0186](adr/0186-go-authoritative-content-validation.md)); they do not gate Go content adoption.
+records native operator/review rails. Python below is an optional reference ([ADR-0186](adr/0186-go-authoritative-content-validation.md)).
+GUI commands execute inside the owning pinned wrapper, not host npm/Go. From the trusted task worktree use literal clean `<full-SHA>`:
+`GATE_OPERATOR=agent:codex bash scripts/gate.sh unit --sha <full-SHA> --parallel 2`; full: `python3 -I scripts/gui-full-runner.py --sha <full-SHA> --parallel 2`.
+Focused/dirty iterations use the owning `shell --sha <full-SHA> --dirty` and committed preflight. Table commands are inner checks; a shell/preflight pass is not canonical acceptance.
 
 | Scope | Command | Expected |
 |---|---|---|
@@ -17,10 +20,10 @@ records native operator/review rails. Python commands below are optional indepen
 | Native combined HTTP release | `go -C go-backend test -race ./internal/httpapi -arcade.database <disposable-dsn>` | real signup/consent/game ownership/credit/erase races pass |
 | Native content check | `go -C go-backend run ./cmd/cat-content-ops check --root .. --check` | graph/pack, full rank/derive values, exact native format/mirrors and source stability |
 | Native source freshness | `go -C go-backend run ./cmd/cat-content validate --root .. && go -C go-backend run ./cmd/cat-content export --root .. --check` | complete source gates and exact sealed export |
-| Independent frozen HTTP | `go -C go-backend run ./cmd/cat-qualify parity --binary <native-binary>` | all 1207 independent expected responses/source bindings |
-| Frontend | `cd frontend && npm ci && npm test && npm run lint && npm run build` | original30 frozen; managed output/retirement per ADR-0184 |
-| Browser | `cd frontend && npm run test:e2e` after build/browser setup | Go server/private planner; six real journeys on desktop/mobile |
-| Native docs | `go -C go-backend run ./cmd/cat-doc-check --root ..` | empty error/budget arrays |
+| Independent frozen HTTP | `go -C go-backend run ./cmd/cat-qualify parity --binary <native-binary>` | every source-bound independent expected response; current count in STATUS |
+| Frontend (pinned shell) | `cd frontend && npm ci && npm test && npm run typecheck && npm run lint && npm run build` | original30/legacy frozen; managed dist synced before Go rebuild (ADR-0184) |
+| Browser (pinned runner) | `cd frontend && npm run test:e2e` after managed Go/planner/browser setup | original live-game/recovery/keyboard/motion/drag assertions; no device testing (ADR-0199) |
+| Native docs (pinned shell) | `go -C go-backend run ./cmd/cat-doc-check --root .. --inventory docs/tracked-markdown.json` | empty error/budget arrays |
 | Whitespace | `git diff --check` | no output |
 
 Native PG gates require an explicit disposable fixture, never a live or production DSN.
@@ -48,7 +51,7 @@ Other supported Python versions test the retained implementation without regener
 | Reference/content lint | `<interp> -m ruff check` | `All checks passed!` |
 
 `pyproject.toml` adds `-q`; use `-o addopts=""` when recording assertion totals.
-Original Node 24 qualification is historical; selected ADR-0184 tooling needs actual owning Linux context/version evidence and complete normalized qualification. Selected Node26.10.0/npm12.2.0 needs the actual owning wrapper evidence recorded in STATUS.
+Historical Node24/React/ESLint receipts do not qualify current Preact/Oxlint source. Keep historical/frozen references intact; record current wrapper/source/toolchain identities in STATUS.
 Playwright setup uses `npx playwright install chromium`; `CDR_E2E_PORT` and
 `CDR_E2E_OUTPUT_DIR` scope the local server and scratch receipts. Private answer helpers run Go; `CDR_BROWSER_PLAN_BINARY` selects the scratch planner.
 Windows targeted reference tests use `PYTHONUTF8=1`; the full Unix `resource`-using suite needs WSL.
@@ -56,13 +59,11 @@ For browser fixtures, build `cat-browser-plan` and set its absolute scratch path
 
 ## Before commit
 
-1. Run docs/whitespace gates; documentation-only changes need no game or asset rebuild.
+1. Run docs/whitespace checks only for documentation changes; no game/asset rebuild. GUI iterations use focused checks/unit and full once per milestone (ADR-0199/0200); no device tests.
 2. Native behavior changes run focused Go race/vet and applicable PG/HTTP release lanes.
 3. Content changes run native source/operator/rail freshness and independent review contracts; `cat-content-rail all --root .. --check` runs fresh native audits under main's [behaviour-bound rule](adr/0189-behaviour-bound-installed-content-authorities.md): strict three auditor pins, exact artifact/review/source bindings and guarded runtime readsets remain mandatory. Runtime hashes are recorded provenance; other HTTP/GUI/safety gates remain independent.
-4. Frontend JS/TS/CSS changes run applicable frontend/build/browser gates. Keep original30 frozen;
-   managed output sync and reviewed source retirement follow ADR-0184; backend/docs-only edits do not regenerate output.
-   [ADR-0185](adr/0185-accepted-eager-startup-bundle-accounting.md) counts entry+mandatory AccountBar recursive static JS/CSS once; retained actual startup122743/122880 is not device proof.
-   Default/frozen closures stay static-only. FULL6ebc380/900PASS remainsFAIL. ADR-0188 targeted40/HomeAxe9PNGpass,4instrumentedvitalsFAIL. Fresh6aa four-rail/validate/export+2race/current1207PASS; raw gzip/br fallback confirmed.
+4. Frontend changes run required tests/types/lint/build, managed sync/Go rebuild and applicable browser/PNG/axe/CSP/vitals/route budgets. Preserve original30/legacy and historical receipts; never hand-commit a new `web/static` bundle (ADR-0184).
+   Entry, mandatory AccountBar, real selected game/mode leaves and recursive imports stay charged (ADR-0185/0202); no lazy required leaf is omitted. Backend/docs-only changes do not regenerate frontend output.
 5. Record exact commands/results in `docs/STATUS.md`; overflow history belongs in WORKLOG.
 
 ## Optional load-sensitive reference check

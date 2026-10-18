@@ -39,7 +39,6 @@ import { bestScore, scoreBoard } from "../scores/read";
 import { buildDailyCircuit, needsDerivedStarter } from "../scores/daily";
 import { buildSharePayload, copyResult, formatDayKey, stableKey, todayLocal } from "../share";
 import { sound } from "../sound";
-import "../styles/perechi.css";
 
 const GAME_KEY = "perechi";
 const DEF = gameByKey(GAME_KEY);

@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": [
+      "node",
+      "vite/client"
+    ],
+    "allowArbitraryExtensions": true
+  },
+  "include": [
+    "vitest.browser.config.ts",
+    "tests/browser/**/*.tsx"
+  ]
+}

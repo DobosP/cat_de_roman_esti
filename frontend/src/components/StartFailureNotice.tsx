@@ -1,5 +1,4 @@
 import { Csp } from "./CspStyle";
-import "../styles/shared-game-controls.css";
 import { useLayoutEffect, useRef } from "preact/hooks";
 
 /** A failed new round remains visible until the player retries or resumes a game. */

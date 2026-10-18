@@ -8,7 +8,6 @@ import { useLocation } from "preact-iso";
 import { useIsPresent } from "@roedu/ui/motion";
 import { AuthError, getRanking, type RankingResponse } from "../api/auth";
 import { GAMES, type GameKey } from "../games";
-import "../styles/ranking.css";
 
 type RankingError = "unavailable" | "failed";
 

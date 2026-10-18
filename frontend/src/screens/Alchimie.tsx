@@ -5,8 +5,6 @@ import { legacyAlchimieResume } from "../alchimieSavedMode";
 import { alchimieMode } from "../alchimieMode";
 // Preserve the exact original stylesheet precedence for both modes. Splitting
 // JavaScript must not make shared controls depend on visiting exploration first.
-import "../styles/alchimie-explore.css";
-import "../styles/alchimie.css";
 
 const AlchimieChallenge = lazyScreen(() => import("./AlchimieChallenge"));
 const AlchimieExplore = lazyScreen(() => import("./AlchimieExplore"));

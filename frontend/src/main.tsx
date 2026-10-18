@@ -4,9 +4,7 @@ import { LocationProvider } from "preact-iso";
 // The kit stylesheet declares its canonical cascade-layer order before its rules;
 // load it before app token overrides, self-hosted fonts and app styles.
 import "@roedu/ui/styles.css";
-import "./styles/theme.css";
-import "./styles/fonts.css";
-import "./styles/arcade.css";
+import "./styles/app.css";
 
 import App from "./App";
 import { installReleaseRecovery } from "./releaseRecovery.mjs";

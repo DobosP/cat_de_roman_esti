@@ -1,5 +1,4 @@
 import { Csp } from "./CspStyle";
-import "../styles/shared-game-controls.css";
 // GameShell — a shared header for every word game so the arcade feels cohesive.
 //
 // Renders a consistent "← Ieși" navigation button (left) and a right-aligned slot for the

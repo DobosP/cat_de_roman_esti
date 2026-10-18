@@ -42,6 +42,7 @@ progress or the accepted design. The owner requested completion on 2026-10-18.
 - [x] Same9c44 diagnostic and unit2/full2 pass original9PNG/Axe/Home/vitals/CSP; unit27/full37 independently accepted.
 - [x] 2026-10-19 — M3 source9c44 independently accepted, feature published and exact tested source landed locally.
 - [ ] Complete M4 CSS/budget ratchets, full qualification, release image and documentation.
+- [x] 2026-10-19 — applied independently reviewed M4 CSS/total-gate/Vitest/guidance candidates and ADR-0205. Optional CSS contingencies remain unapplied. Owning deps and focused types/lint/build/docs43focused/34scores pass; CSS16,022/16,093, all10JS caps. Six actual browser contracts plus5report guards pass after reviewed setup/report repairs; raw failures retained. Clean measurement and canonical qualification pending.
 
 ## 3. Surprises & Discoveries
 

@@ -1,6 +1,6 @@
 // categories.ts — KG category → color/label map, the single source of truth wherever
 // TS needs a concrete category value (CSS variables are invisible to inline/JS code).
-// Mirrors the --cat-* variables in styles/arcade.css.
+// Category colors are owned here; the retired CSS variable mirror had no consumers.
 
 export interface CategoryStyle {
   /** Human, Romanian-flavoured label. */

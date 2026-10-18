@@ -1,14 +1,10 @@
 .csp-motion-opacity-55 { opacity: .55; }
 
-.connections-coach-action,
 .connections-lives {
   display: flex;
   align-items: center;
 }
 
-.connections-coach-action {
-  gap: 8px;
-}
 
 .connections-coach-stack {
   display: grid;
@@ -42,41 +38,18 @@
   font-size: 0.84rem;
 }
 
-.connections-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
 
 .connection-tile {
-  min-width: 0;
-  overflow-wrap: anywhere;
   hyphens: auto;
 }
 
 @media (max-width: 640px) {
   .connections-coach {
-    background: linear-gradient(
-      100deg,
-      color-mix(in srgb, var(--cue-accent) 18%, #15112d),
-      #15112d
-    );
     backdrop-filter: blur(12px);
   }
 
-  .connections-coach .next-move-progress {
-    display: none;
-  }
 }
 
-@media (max-width: 480px) {
-  .connections-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .connection-tile {
-    min-height: 58px !important;
-    font-size: 0.86rem !important;
-  }
-}
 
 /* ===== V42 section: conexiuni (builder-4 styles go here) ===== */
 /* Clue unlock/remaining hint on the Indiciu button: a small, muted suffix, not a

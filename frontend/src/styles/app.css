@@ -1,0 +1,19 @@
+/* Canonical authored cascade: kit base is imported first by main.tsx.
+ * Preserve the existing cold Alchimie selector order before shared controls;
+ * other route-owned rules follow controls and stay scoped to their own screens.
+ * Fonts, fallback styles and every route are charged to the eager entry. */
+@import "./theme.css";
+@import "./fonts.css";
+@import "./arcade.css";
+@import "./alchimie-explore.css";
+@import "./alchimie.css";
+@import "./csp-style.css";
+@import "./shared-game-controls.css";
+@import "./category-picker.css";
+@import "./game-options.css";
+@import "./contexto.css";
+@import "./conexiuni.css";
+@import "./intrusul.css";
+@import "./lant.css";
+@import "./perechi.css";
+@import "./ranking.css";

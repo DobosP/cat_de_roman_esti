@@ -44,7 +44,6 @@ import { gameByKey } from "../games";
 import { categoryColor, categoryLabel } from "../categories";
 import { CategoryPicker } from "../components/CategoryPicker";
 import { buildSharePayload, copyResult, formatDayKey, stableKey, todayLocal } from "../share";
-import "../styles/contexto.css";
 
 const GAME_KEY = "contexto";
 const DEF = gameByKey("contexto");

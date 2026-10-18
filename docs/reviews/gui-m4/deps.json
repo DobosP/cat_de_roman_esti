@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "scope": "Owning M4 deps generation only; no native browser/build/M4 acceptance",
+  "operator": "agent:codex (PROGRAM E8)",
+  "command": "GATE_OPERATOR=agent:codex bash scripts/gate.sh deps --sha cb6f15fed984c89822a15bdbd4b5bb39f45a8c4b --dirty --parallel 2",
+  "result_sha256": "2f824ab9fa9ae330bf9e86356e877351ec036dff55401cd123509ef50ff02216",
+  "source_tree_sha256": "b227ef965ff2e937097b3f8d1453641e948a10f25e38fa5a9528e1d24637b0be",
+  "checks": "4/4 pass",
+  "pins": {
+    "vitest": "5.0.3",
+    "@vitest/browser": "5.0.3",
+    "@vitest/browser-playwright": "5.0.3",
+    "playwright": "1.63.0",
+    "@playwright/test": "1.63.0",
+    "preact": "11.0.0",
+    "vite": "8.3.3"
+  },
+  "runtime_manifest_and_existing_runtime_versions": "unchanged",
+  "native_modules_versions_lock_vendor_kit": "unchanged",
+  "generated": "frontend/package-lock.json from owning deps only",
+  "archive": {
+    "path": "/home/dobo/work/_temp/feat__gui-cat-m3/renovation/m4-deps/evidence.tar.gz",
+    "bytes": 21029,
+    "sha256": "c2fcc92a20522b77605a70dd4314a61c5276dc61393d7ea5716cb0e4da171775"
+  }
+}

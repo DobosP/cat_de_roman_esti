@@ -29,7 +29,6 @@ import { CONEXIUNI_HELP } from "../gameHelp/conexiuni.mjs";
 import { GameIntro } from "../components/GameIntro";
 import { GameOptions } from "../components/GameOptions";
 import { GameSetupOptions } from "../components/GameSetupOptions";
-import "../styles/conexiuni.css";
 import { Hud, StatBadge } from "../components/Hud";
 import { ResultCard } from "../components/ResultCard";
 import { DifficultyPicker } from "../components/DifficultyPicker";

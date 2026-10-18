@@ -1,4 +1,3 @@
-import "../styles/shared-game-controls.css";
 // DifficultyPicker — a shared segmented control for the three difficulty tiers so every
 // game's intro card picks difficulty the same way (same look, tap-targets, a11y wiring).
 //

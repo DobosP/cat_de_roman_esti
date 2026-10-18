@@ -1,5 +1,4 @@
 import { Csp } from "./CspStyle";
-import "../styles/shared-game-controls.css";
 // ResultCard — the shared end-of-game card used by every word game so winning, losing,
 // the score read-out, the "Record!" celebration, and the share/copy + replay actions all
 // look and behave identically across the arcade. Wins get a confetti burst (skipped

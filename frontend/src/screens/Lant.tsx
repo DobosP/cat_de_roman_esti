@@ -36,7 +36,6 @@ import { gameByKey } from "../games";
 import { categoryLabel } from "../categories";
 import { CategoryPicker } from "../components/CategoryPicker";
 import { buildSharePayload, copyResult, formatDayKey, roNoun, stableKey, todayLocal } from "../share";
-import "../styles/lant.css";
 
 const GAME_KEY = "lant";
 const DEF = gameByKey("lant");

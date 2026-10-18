@@ -9,10 +9,12 @@
     "build": "node scripts/native-tsc.mjs --noEmit && vite build && npm run check:bundle",
     "check:bundle": "node scripts/check-bundle-budget.mjs",
     "preview": "vite preview",
-    "test": "node --test tests/*.test.mjs",
+    "test": "npm run test:contracts && npm run test:browser",
     "test:e2e": "playwright test",
     "typecheck": "node scripts/native-tsc.mjs --noEmit",
-    "lint": "node scripts/gui-lint.mjs"
+    "lint": "node scripts/gui-lint.mjs",
+    "test:contracts": "node --test tests/*.test.mjs",
+    "test:browser": "node scripts/gui-browser-tests.mjs"
   },
   "dependencies": {
     "@fontsource-variable/fredoka": "5.2.10",
@@ -36,7 +38,11 @@
     "oxlint-tsgolint": "7.0.2003",
     "preact-render-to-string": "6.8.0",
     "typescript": "7.0.2",
-    "vite": "8.3.3"
+    "vite": "8.3.3",
+    "vitest": "5.0.3",
+    "@vitest/browser": "5.0.3",
+    "@vitest/browser-playwright": "5.0.3",
+    "playwright": "1.63.0"
   },
   "engines": {
     "node": ">=26.10.0",
