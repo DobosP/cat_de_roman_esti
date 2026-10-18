@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "scope": "Actual clean committed A build and independent asset measurement; final B unit/full/image acceptance pending",
+  "operator": "agent:codex (PROGRAM E8)",
+  "measured_at": "a5d5e1b9d907bf1439422c3c3165aa6426283602",
+  "tree_sha256": "4b1b61fae7de12e7ce441fd8e1e5cae8f545167dd1edc9b631eedce4f6887ce7",
+  "command": "GATE_OPERATOR=agent:codex bash scripts/gate.sh build --sha a5d5e1b9d907bf1439422c3c3165aa6426283602 --parallel 2",
+  "build_result_sha256": "3408c7bed5178945e08b9088e5948fdee99b7ac40b6f6c916d9253a92396776f",
+  "build_checks": "11/11;87 managed-serving tests,zero skip/failure",
+  "measurement": {
+    "path": "/home/dobo/work/_temp/feat__gui-cat-m3/renovation/m4-clean-build-measurement/A-independent-measurement.json",
+    "sha256": "e8ecc356dca4bc47f35500f3d5ad27b54f9c99e184ea5cb612791aacf74d60ae",
+    "script_sha256": "88ad59b0e98c9d9ab8e33c34eb58d8350f169cec93e4e5cb49cd204114f486b1",
+    "manifest_sha256": "be20f5c975a393c13452dc4e5446d08f3a10717199aefdf6197a523b7bdc9781",
+    "raw_SDK_route_status": {
+      "status": "not-run-by-build-target",
+      "build_receipt_budgets_unmodified": {},
+      "note": "Independent numbers never become a raw SDK report or an inferred SDK pass. Canonical unit/full owns actual route reports."
+    }
+  },
+  "route_JS_gzip": {
+    "/": 28848,
+    "/intrusul": 37268,
+    "/perechi": 38106,
+    "/conexiuni": 37996,
+    "/alchimie": 39103,
+    "/cald-rece": 38867,
+    "/lant": 38739,
+    "/clasament": 24837,
+    "/alchimie?mode=challenges": 40665,
+    "/alchimie?mode=explore": 39103
+  },
+  "CSS_gzip": 16022,
+  "CSS_ceiling": 16093,
+  "JS_ceiling": 40960,
+  "Home_target": 30720,
+  "actual_asset_bytes": "Independent sidecar/decompression/manifest closure/inventory/managed copies verified; all actual CSS including orphans counted once",
+  "build_evidence": {
+    "path": "/home/dobo/work/_temp/feat__gui-cat-m3/renovation/m4-clean-build-A/evidence.tar.gz",
+    "members": 44,
+    "bytes": 28062642,
+    "sha256": "681b226a7e3acaccce490659358a590187c756d7437c3665c15fa535ef603066"
+  },
+  "asset_evidence": {
+    "scope": "Actual clean-build A bytes retained; not independent measurement or M4 acceptance",
+    "sha": "a5d5e1b9d907bf1439422c3c3165aa6426283602",
+    "path": "/home/dobo/work/_temp/feat__gui-cat-m3/renovation/m4-clean-build-A/assets.tar.gz",
+    "members": 175,
+    "bytes": 1300367,
+    "sha256": "cb9d4374de3143e50a4f59281dfef6d476df949aad6714c77298400c6c4979c1"
+  },
+  "remaining": "Metadata-only B exact-SHA unit/full2, explicit release image, original screenshots/axe/CSP/vitals/PG/parity, independent final acceptance and docs"
+}
