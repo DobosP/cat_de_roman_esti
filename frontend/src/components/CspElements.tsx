@@ -2,6 +2,7 @@ import { h, type Ref } from "preact";
 import type * as preact from "preact";
 import { Button, useCspSafeStyle, type ButtonProps } from "@roedu/ui";
 import { normalizeExplicitCss, type UnitlessProperty } from "./cssUnits";
+import "../styles/csp-style.css";
 
 // Dimensional declarations must carry explicit units: Preact 11 writes numbers
 // verbatim (no auto-px), so only reviewed unitless and custom properties admit numbers.
