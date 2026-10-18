@@ -63,6 +63,8 @@ test("a completed collection shows every earned word, searches locally and prese
   }
   expect(state.complete).toBe(true);
   await page.goto("/alchimie");
+  await expect(page.getByRole("heading", { name: "O lume de descoperit.", exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Începe explorarea →", exact: true })).toBeEnabled();
   await page.evaluate(({ key, state }) => localStorage.setItem(key, JSON.stringify({
     version: 1, game_id: state.game_id, revision: state.revision,
     progress: state.progress, goal_id: state.goal_id,

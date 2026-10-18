@@ -212,6 +212,8 @@ test("a checkpoint from a different recipe book is retained when restore is reje
 
 test("the original kitchen collection upgrades without losing recipes, pantry supplies or its chosen goal", async ({ page }) => {
   await page.goto("/alchimie");
+  await expect(page.getByRole("heading", { name: "O lume de descoperit.", exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Începe explorarea →", exact: true })).toBeEnabled();
   await page.evaluate(({ key, collection }) => localStorage.setItem(key, JSON.stringify(collection)), {
     key: SAVE, collection: LEGACY_COLLECTION,
   });
@@ -249,6 +251,8 @@ test("the original kitchen collection upgrades without losing recipes, pantry su
 test("a completed 111-concept collection keeps every earned item and opens the larger world", async ({ page }) => {
   const checkpoint = EXPANDED_CHECKPOINT.collection;
   await page.goto("/alchimie");
+  await expect(page.getByRole("heading", { name: "O lume de descoperit.", exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Începe explorarea →", exact: true })).toBeEnabled();
   await page.evaluate(({ key, collection }) => localStorage.setItem(key, JSON.stringify(collection)), {
     key: SAVE, collection: checkpoint,
   });
@@ -294,6 +298,8 @@ for (const [name, previous] of [["285-recipe", LARGE_CHECKPOINT], ["288-recipe",
   test(`a completed221-word ${name} save keeps its journal and opens the new discoveries`, async ({ page }) => {
     const checkpoint = previous.collection;
     await page.goto("/alchimie");
+    await expect(page.getByRole("heading", { name: "O lume de descoperit.", exact: true })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Începe explorarea →", exact: true })).toBeEnabled();
     await page.evaluate(({ key, collection }) => localStorage.setItem(key, JSON.stringify(collection)), {
       key: SAVE, collection: checkpoint,
     });
@@ -335,6 +341,8 @@ for (const example of [
     checkpoint.goal_id = null;
     checkpoint.progress.discoveries = checkpoint.progress.discoveries.slice(0, example.prefix);
     await page.goto("/alchimie");
+    await expect(page.getByRole("heading", { name: "O lume de descoperit.", exact: true })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Începe explorarea →", exact: true })).toBeEnabled();
     await page.evaluate(({ key, value }) => localStorage.setItem(key, JSON.stringify(value)), {
       key: SAVE, value: checkpoint,
     });

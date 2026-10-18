@@ -83,6 +83,8 @@ test("a lost final craft restores collection focus when both inputs are depleted
   checkpoint.goal_id = null;
   checkpoint.progress.discoveries = checkpoint.progress.discoveries.slice(0, 85);
   await page.goto("/alchimie");
+  await expect(page.getByRole("heading", { name: "O lume de descoperit.", exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Începe explorarea →", exact: true })).toBeEnabled();
   await page.evaluate(value => localStorage.setItem("cat_alchimie_exploration_v1", JSON.stringify(value)), checkpoint);
   const restored = response(page, BASE);
   await page.reload();
