@@ -36,7 +36,11 @@ progress or the accepted design. The owner requested completion on 2026-10-18.
   both navigation regressions and immutable loader initialization are verified.
 - [x] Unused Router export compiler candidate measured and rejected: positive
   DCE test fails and JS grows; entire candidate reversed, source/evidence retained.
-- [ ] Qualify clean M3 on the exact merged SHA, obtain independent review and land locally.
+- [x] 2026-10-18T19:18Z — committed71f871ca; clean unit27 passes560frontend/1930backend named/28authcore, independently acceptedcd8725e6.
+- [x] First full actual933browser cases pass with0skip/flaky/retry; livePG12/301 covers all17default DSN skips and9 additional child cases, parity1206/legacy pass.
+- [x] 2026-10-18T20:16Z — reviewed Home source-pin rebind and optional full parallel CLI pass10Python ownership/argument tests,43unchanged baseline DATA controls andGo doccheck62.
+- [ ] Clean owner-diagnostic baseline and exact-SHA successor unit2/full2 must execute remaining PNG/axe/vitals/aggregate CSP before M3 acceptance.
+- [ ] Qualify M3 exact-SHA unit/full, independent acceptance and local landing.
 - [ ] Complete M4 CSS/budget ratchets, full qualification, release image and documentation.
 
 ## 3. Surprises & Discoveries
@@ -79,19 +83,21 @@ routes must count the full writer bytes and Home target remains30,720.
 
 ## 5. Outcomes & Retrospective
 
-Latest dirty focused preflight at e75518c1/tree40981bbe passes app/tools types,
-38focused and34original score tests, lint/build/docs,139desktop cases with0
-skips/flaky. Discovery retains933 identities. All10JS caps pass: Challenge
-40,847/40,960 and Home29,000/30,720 target. The score split retains42 function
-bodies and147 original assertions. [Focused proof](../reviews/gui-m3/renovation-focused.json).
-All6 three-game history scenarios first fail on stale saved-pointer adoption,
-then pass with reviewed live/epoch/reentry guards and stronger response/request
-witnesses. Read-only local recovery remains when storage is unavailable. No
-protected helper/API/scoring semantics change beyond the approved module split.
-[Bounded independent review](../reviews/gui-m3/bounded-source-review.json) is clear
-in its stated scope; exact clean unit/full and final acceptance remain required.
-Original source/failure packets retained. Superseded reproducible planner binary
-was pruned; historical full archive bytes are unavailable, compact logs/traces remain.
+Product71f871ca passes clean unit27, independently verifiedcd8725e6. The first
+full39rows has36passes and3downstream failures: stale Home source pin blocks
+baseline preparation, then repo exit and aggregate CSP receipt fail. Actual933
+browser cases pass with0skip/retry/flaky; native, livePG12/301, parity1206 and
+legacy/owned cleanup pass. [Independent audit](../reviews/gui-m3/first-full-review.json).
+No baseline PNG/axe/vitals or full/M3 acceptance is claimed.
+
+A single reviewed current-Home pin update06e362→0d373 admits the allowed M3
+source to the same unchanged original verification. Immutable captureff055,
+Gamesce6, all9 original PNGs and every comparator/assertion stay exact. The
+optional supervisor parallel argument preserves default4 and all ownership
+checks; matching unit2/full2 avoids the actual strict-profile cache miss.
+Required155file-artifact bytes plus image metadata are retained in the first
+full compact archive68f93743. Positive browser traces are rolling, unarchived;
+historical paths will not imply those raw bytes survive successor replacement.
 
 M4 also requires the unchanged original16,093-byte total-CSS ratchet, in addition
 to per-route checks. Current emitted unique CSS totals20,617 gzip bytes; this
@@ -118,12 +124,18 @@ Work in this worktree. Use the pinned `scripts/gate.sh shell --sha <HEAD> --dirt
 for focused iterations. After clean commits run `scripts/gate.sh unit --sha <SHA>
 --parallel 2`, then `python3 -I scripts/gui-full-runner.py --sha <SHA>`.
 Run image qualification at M4 and record actual command/result hashes.
+After the first failed full, use the reviewed supervisor `--parallel 2` with
+unit `--parallel 2`; the strict reuse validator requires matching settings.
+Use the existing clean owner-diagnostic baseline mode to expose any remaining
+visual findings before the expensive successor unit/full; it is not acceptance.
 
 ## 9. Validation and Acceptance
 
 Existing assertions, gzip caps, saved-game lifetimes, native drag/drop, focus,
 motion/reduced-motion, CSP, nine exact PNGs, full browser inventory, zero-skip PG,
-parity1207 and independent review remain required. No physical device testing.
+the reviewed V1.13 parity1206 and independent review remain required.
+The old1207 count describes the earlier content reference, not an extra case to
+invent; the canonical native parity check already validates current1206. No physical device testing.
 Only a green exact-SHA unit/full plus review permits local main landing.
 
 ## 10. Idempotence and Recovery

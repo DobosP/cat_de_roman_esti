@@ -5,7 +5,7 @@ Session: S1, M0 through M4
 Worktree: /home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3
 Valid until: S1 completion or a superseding owner dispatch — then treat as history.
 
-Current 2026-10-18: approved score split/native state, navigation fixes and three-screen lifecycle repairs pass38focused/34score/139desktop cases with0skip/flaky, discovery933 and all10JS caps: Challenge40,847/40,960, Home29,000/30,720 target. All6 history regressions first fail old source exactly on stale saved-pointer replacement, then pass fixed. Types/tools/lint/build/docs pass on dirty tree40981bbe; [focused proof](../reviews/gui-m3/renovation-focused.json) and [bounded independent source review](../reviews/gui-m3/bounded-source-review.json) are retained. Clean exact-SHA unit/full/M3/local landing remain next. M4 CSS consolidation must meet original16,093 total (current20,617); no cap waiver. [Completion plan](gui-game-renovation.md).
+Current 2026-10-18: clean71f871ca unit27 is independently accepted; first full passes933browser/0skip-flaky-retry, native and livePG12/301, parity1206 and legacy cleanup. Stale reviewed Home pin06e362 blocks baseline preparation before PNG/axe/vitals; missing aggregate CSP is downstream. Reviewed current-only0d373 rebind and optional supervisor parallel argument preserve all original PNGs/thresholds and ownership/cache guards; targeted10Python/43baseline DATA controls/doccheck62 pass. Clean owner diagnostic and exact-SHA unit2/full2 successor are next; no M3/M4 acceptance. [Audit](../reviews/gui-m3/first-full-review.json), [completion plan](gui-game-renovation.md).
 
 Historical 2026-10-13: M3 starts from local main d30b0aa47248b9a5944e015f2daf54cc5a795617 (accepted f8c00f80/core-v1.10 prerequisites). Core-v1.11 applied by kit:sync9/deps4 and independently re-audited; native pin238/ccf8b44c. Per-game help and shared controls pass88 focused cases/types/lint/style/docs; final emitted Challenge45806 remains4846 over40960, Cald40592/Lanț40478 and every other route pass. Home28516/Ranking25546 exclude game controls; Explore37864 honestly charges their extra bytes. No M3 unit/full or landing. Continue core S0b while a new bounded Challenge design is established.
 
@@ -16,6 +16,8 @@ Historical 2026-10-11 integration: parent no-commit merge joined GUI4f36 and mai
 Preserve the six server-authoritative Romanian games while moving the SPA from React 19 to Preact 11 and preact-iso. Deliver managed embedded, compressed assets from one Go binary under enforced CSP. Measure initial gzip JavaScript against the 40,960-byte ceiling (30,720-byte target), LCP below 2,500 ms and scripted INP below 200 ms. Emulated gate vitals are the performance evidence; E10 removes physical/device testing. Production and app-main pushes remain owner-only.
 
 ## 2. Progress
+
+- [x] 2026-10-18 — product71f871ca unit27 accepted; first full933/PG12+301/parity1206/legacy pass, but baseline Home source pin is stale. Reviewed rebind/parallel CLI pass10Python/43DATA/doc62 controls; actual9PNG/axe/vitals/aggregate CSP remain pending.
 
 - [x] 2026-10-18T19:01Z — approved score split, static-control extraction, native state, navigation fixes and two interaction repairs pass38focused/34score/113desktop, all10JS caps and types/tools/lint/build/docs; exactsource608d and compact proof retained.
 - [x] 2026-10-18T19:16Z — three-screen lifetime repairs pass all6 history regressions plus139desktop/38focused/34score andall10JS budgets; independent bounded source review clear.

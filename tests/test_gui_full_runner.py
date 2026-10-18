@@ -60,5 +60,59 @@ class OwnershipTests(unittest.TestCase):
         self.assertEqual(result, {'verified': True, 'removed_containers': [cid], 'removed_networks': [nid]})
 
 
+class ArgumentTests(unittest.TestCase):
+    sha = '1' * 40
+
+    def base(self):
+        return ['bash', str(runner.SOURCE / 'scripts/gate.sh'), 'full', '--sha', self.sha]
+
+    def test_omitted_parallel_keeps_existing_wrapper_default(self):
+        args = runner.parse_args(['--sha', self.sha])
+        self.assertIsNone(args.parallel)
+        self.assertFalse(args.fresh)
+        self.assertEqual(runner.full_command(args.sha, fresh=args.fresh, parallel=args.parallel), self.base())
+
+    def test_each_literal_parallel_is_forwarded_without_change(self):
+        for value in ('1', '2', '3', '4'):
+            with self.subTest(value=value):
+                args = runner.parse_args(['--sha', self.sha, '--parallel', value])
+                self.assertEqual(args.parallel, value)
+                self.assertEqual(runner.full_command(args.sha, parallel=args.parallel),
+                                 self.base() + ['--parallel', value])
+
+    def test_fresh_and_parallel_preserve_sha_and_existing_flag_identity(self):
+        self.assertEqual(runner.full_command(self.sha, fresh=True), self.base() + ['--fresh'])
+        for flags in [ ['--fresh', '--parallel', '2'], ['--parallel', '2', '--fresh'] ]:
+            with self.subTest(flags=flags):
+                args = runner.parse_args(['--sha', self.sha, *flags])
+                self.assertEqual(runner.full_command(args.sha, fresh=args.fresh, parallel=args.parallel),
+                                 self.base() + ['--fresh', '--parallel', '2'])
+
+    def test_invalid_parallel_cli_cannot_reach_runtime_or_cleanup(self):
+        for flags in [ ['--parallel', value] for value in ('0', '5', '-1', '2.0', '02', '+2', ' 2', 'true') ] + [['--parallel']]:
+            with self.subTest(flags=flags), \
+                    patch.object(sys, 'argv', ['gui-full-runner.py', '--sha', self.sha, *flags]), \
+                    patch.object(sys, 'stderr'), \
+                    patch.object(runner, 'containers') as containers, \
+                    patch.object(runner, 'output') as output, \
+                    patch.object(runner.subprocess, 'Popen') as launch, \
+                    patch.object(runner, 'cleanup') as cleanup:
+                with self.assertRaises(SystemExit) as stopped:
+                    runner.main()
+                self.assertEqual(stopped.exception.code, 2)
+                containers.assert_not_called()
+                output.assert_not_called()
+                launch.assert_not_called()
+                cleanup.assert_not_called()
+
+    def test_command_helper_refuses_invalid_parallel_and_sha(self):
+        for value in (0, 2, 5, '0', '5', '02', '+2', '2.0'):
+            with self.subTest(value=value), self.assertRaises(RuntimeError):
+                runner.full_command(self.sha, parallel=value)
+        for value in ('', '1' * 39, 'g' * 40, 'A' * 40):
+            with self.subTest(sha=value), self.assertRaises(RuntimeError):
+                runner.full_command(value, parallel='2')
+
+
 if __name__ == '__main__':
     unittest.main()

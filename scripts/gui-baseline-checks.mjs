@@ -17,7 +17,7 @@ export const FOOTER = "Toate cele șase jocuri folosesc aceeași hartă de legă
 export const ORIGINAL_BASELINE_SHA256 = "ff055e404bf138ce0442381ab33eb643d431f922e4284f66a5002efcc397be68";
 const SOURCES = {
   "frontend/src/games.ts": "ce6a53bd118fae4f0cfa62eb12d6afadb31596a1e265c5122e202560ef26b0ad",
-  "frontend/src/screens/Home.tsx": "06e362d64550f54e39d8a8d342a80558b20c9e5eb08ecafb896eab0d46f11368",
+  "frontend/src/screens/Home.tsx": "0d373bd1e1140f2c517f450ce40156f1d4ad97db9c28d3517d29d7f2c944afb5",
   "baselines/cat/capture.json": ORIGINAL_BASELINE_SHA256,
 };
 const liveContexts = new WeakSet(), identifiedContexts = new WeakSet(), liveWitnesses = new WeakSet();

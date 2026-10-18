@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Run the canonical full with its same-image legacy coordinator and owned cleanup.
 
-  python3 -I scripts/gui-full-runner.py --sha <literal HEAD> [--fresh]
+  python3 -I scripts/gui-full-runner.py --sha <literal HEAD> [--fresh] [--parallel 1..4]
 
 The wrapper remains the result authority. This supervisor supplies no gate input,
 mount or result, and never changes trust. It discovers the real wrapper UUID and
@@ -98,11 +98,31 @@ def stop(child, grace=25):
             child.wait(timeout=5)
 
 
-def main():
+def parse_args(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--sha', required=True)
     parser.add_argument('--fresh', action='store_true')
-    args = parser.parse_args()
+    # Omission keeps the wrapper's committed default. Literal choices also
+    # reject normalized spellings such as02/+2 that the wrapper would refuse.
+    parser.add_argument('--parallel', choices=('1', '2', '3', '4'))
+    return parser.parse_args(argv)
+
+
+def full_command(sha, *, fresh=False, parallel=None):
+    """Construct only registered wrapper arguments; no runtime or environment IO."""
+    require(re.fullmatch(r'[0-9a-f]{40}', sha), 'Full literal SHA required')
+    require(parallel is None or parallel in ('1', '2', '3', '4'),
+            'Parallel must be a literal1..4 choice')
+    command = ['bash', str(SOURCE / 'scripts/gate.sh'), 'full', '--sha', sha]
+    if fresh:
+        command.append('--fresh')
+    if parallel is not None:
+        command.extend(['--parallel', parallel])
+    return command
+
+
+def main():
+    args = parse_args()
     require(re.fullmatch(r'[0-9a-f]{40}', args.sha), 'Full literal SHA required')
     require(SOURCE.resolve() == SOURCE and SOURCE.parents[1].name == '_worktrees',
             'Canonical task worktree required')
@@ -130,9 +150,7 @@ def main():
             raise KeyboardInterrupt('Full supervisor interrupted')
         signal.signal(signal.SIGTERM, interrupted)
         try:
-            command = ['bash', str(SOURCE / 'scripts/gate.sh'), 'full', '--sha', args.sha]
-            if args.fresh:
-                command.append('--fresh')
+            command = full_command(args.sha, fresh=args.fresh, parallel=args.parallel)
             gate = subprocess.Popen(command, cwd=SOURCE, start_new_session=True)
             deadline = time.monotonic() + 7200
             while gate.poll() is None:
