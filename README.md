@@ -130,7 +130,7 @@ The canonical recipe prepares selected Node/managed embedfs output per
 requires the actual owner-qualified pair bound to clean checkout HEAD, builds with
 those explicit arguments and runs the immutable resulting image ID. An ordinary
 clean checkout can use this Docker mode; managed run/build/dev require the fleet
-worktree. Current image binding/qualification remains pending; no deployment follows.
+worktree. Exact GUI product16733891 passed unit/full/image; [qualification](docs/reviews/gui-m4/qualification.json) distinguishes its tested/full and release image IDs. Later documentation commits do not change that qualified product identity; no deployment follows.
 
 The public runtime is anonymous; accounts and submissions remain off. Native account
 staging uses the canonical Go image through `docker-compose.accounts.yml` or

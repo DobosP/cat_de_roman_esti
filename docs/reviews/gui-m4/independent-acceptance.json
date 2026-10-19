@@ -1,0 +1,86 @@
+{
+  "schema": 1,
+  "status": "ACCEPT_M4_E_AND_APPROVE_LOCAL_FAST_FORWARD",
+  "reviewer": "game_css_review",
+  "findings": [],
+  "source_E": "1673389147a3ba432742008d55d28edb84d94af2",
+  "tree_sha256": "0de103c4027967a43b7bc3ae97dab72f4303a7db980d30653d6d133584bebba7",
+  "clean_source_observed": true,
+  "authority": "PROGRAM E8/E10 and Cat ADR-0199 permit local Cat M4 main fast-forward after exact-SHA green unit/full and independent review. App main pushes, production and real account/child activation remain owner-only.",
+  "decision": "All required source, canonical unit/full, baseline, CSP/vitals, PG/parity, legacy, fixture custody and explicit image/payload evidence passes on exact E. No M4 blocker remains.",
+  "actual_results": {
+    "unit": "27/27 pass; parallel 2; result 807c614af052c026b8c7f9084379cce517bf51f95f0f1bad89919838a072b81d",
+    "full": "38/38 pass; parallel 2; result 74ee109bf5bb02e25ef1bf0d6875f4fae4762fe8e7baab02febe8078ab99b262",
+    "image": "2/2 pass; genuine normal SDK result f5674c55802c2cc625c9abdabf6abcb73489f93de8ed4eb020111be0c8e0bcb1",
+    "unit_archive": "f394b6057888a09d063176b3b17b779bca293d27b6c6f8a7a8d8f87ea147da59; 111 file rows, 115 members",
+    "full_archive": "c7ba4a1962f6d85033fa0baed6420e0653a395f460abc2bd7ffcba8179cbc1fc; 187 result rows = 186 file references (185 unique paths) + 1 IID; 193 members",
+    "image_archive": "ca1f9b1e76d5e79c9e8156e1f15000d5006f99ff68947d6598fd993c742bc40b; 7 rows = 6 files + 1 IID; 10 members",
+    "baseline_archive": "2db38cd1417917f4f1a0823adc4bc6b3685c2b8570a753b08771e6abe9594a2e; 19 members, all nine actual PNGs retained"
+  },
+  "executed_checks": {
+    "Node": "570 actual passes, zero failures/skips/cancellations/todo. Full strict lane reuse missed, so frontend ran fresh.",
+    "Vitest": "Six actual plain-Preact browser cases passed, zero failed/pending. Raw report bytes, case IDs and source/tree/wrapper bindings verified.",
+    "Playwright": "933 exact original identities; each passed once, retry 0; zero unexpected/skipped/flaky/errors.",
+    "native": "Unchanged validated D capsule supplies 791 retained passes; 23 fresh GUI/API packages supply 1,139 passes, union exactly 1,930 identities. Fresh authcore: 28 passes. This is not represented as a complete fresh race run.",
+    "PG": "Accounts 12 and HTTP 301 actual passes, zero skips/failures; all 17 explicit unit PG skips executed in full.",
+    "parity": "1,206 actual independent HTTP comparisons passed.",
+    "baseline": "All nine PNGs are byte/hash identical to immutable originals; eight non-Home Axe arrays are exact. Home retains only unchanged reviewed aliases supported by six-card/footer witness. All 16 comparison outcomes pass.",
+    "vitals": "Five runs per group, CPU 4, RTT 150ms, 1600kbps, reduced motion. Conexiuni median LCP 1652ms/INP 64ms/CLS 0; Challenge 1816ms/72ms/0. Original non-regression rules and 2500/200 caps pass.",
+    "CSP": "Actual enforced nine-page observation: zero active and legacy violations. Unique nonces/fonts and same-image legacy journey verified.",
+    "legacy_cleanup": "Original 30-file integrity plus actual same-full legacy board, owner lifecycle, supervisor gate 0/owner 0/errors [] and cleanup verified."
+  },
+  "budgets": {
+    "measured_at_C": "a947688314166152b865febcc8d5c2dc5f7dcfb9",
+    "all_actual_CSS": "16043/16093 gzip bytes; includes both 16022-byte and 21-byte sheets, 50 bytes headroom.",
+    "JS": "All ten 40960-byte ceilings pass. Home 28879 meets target 30720; Challenge 40714. Other route target shortfalls remain visible.",
+    "provenance": "Raw SDK and SDK rows remain unchanged; consumer total is separate. Immutable frozen SDK failures stay recorded baseline evidence, never raised caps or an invented SDK pass."
+  },
+  "explicit_image_payload": {
+    "full_IID": "sha256:1178e19f09c4f44ef16d46f31c4660739f66f7e0fb41e7e36ddb4c0dc93e84e0",
+    "release_IID": "sha256:47185da0586e292ddb3d66d564046443c1bb688e652e69e77399ba74503fe58c",
+    "actual_app": "Both independent never-started IID/CID copies contain /app, 26042528 bytes, SHA256 ac1ccb891da94418c71113af016d068ef1b8f04cc4f7d0a4fdb6c746b0b5ce56.",
+    "payload_archive": "8a22fcd131a5fcba1ca13fc0668b8a0bcf6f174301cd8f49b0ac06f1b4bcb131; one actual blob per unique hash.",
+    "identity": "IIDs and all layer digests differ and are not conflated. Exact source/tree labels, user 10001, entrypoint, healthcheck and runtime base layers agree.",
+    "cleanup": "Both stopped proof containers and all owned image/full resources are verified absent.",
+    "correction": "The earlier assumption that image target has no result.json was wrong. Its genuine normal PASS result is retained and verified."
+  },
+  "independent_reviews": {
+    "unit": {
+      "path": "/home/dobo/work/_temp/feat__gui-cat-m3/renovation/m4-ready-unit/independent-review.json",
+      "sha256": "4fdad42ff56cb56a4f754fbfa04a39bf5ce7b2514a9e4f4c12e19185e10046c3"
+    },
+    "full": {
+      "path": "/home/dobo/work/_temp/feat__gui-cat-m3/renovation/m4-ready-full/independent-review.json",
+      "sha256": "8782ab2efd7af7b263218d7e160ad5706a7bcf6659522b0ae91262da050134fc"
+    },
+    "baseline": {
+      "path": "/home/dobo/work/_temp/feat__gui-cat-m3/renovation/m4-ready-full/independent-baseline-review.json",
+      "sha256": "2e640ef95067183210cc18d354be32dec3c2acda92d7b81bec601d5e81f0a1e8"
+    },
+    "image": {
+      "path": "/home/dobo/work/_temp/feat__gui-cat-m3/renovation/m4-release-image/independent-review.json",
+      "sha256": "529ac13548a8915087dd4a19c57ee8476e469c831c4e13ab7783396b7b5b1227"
+    },
+    "fixture_peer": {
+      "path": "/home/dobo/work/_temp/feat__gui-cat-m3/renovation/m4-ready-unit/publication-fixtures-independent-review.json",
+      "sha256": "39f5d37dee6bbfb908121dde37f1e2650854d5d88e62f41670492f45f6cbed44"
+    },
+    "fixture_admission": {
+      "path": "/home/dobo/work/_temp/feat__gui-cat-m3/renovation/m4-ready-unit/publication-fixtures-admission.json",
+      "sha256": "f90ca18faaff8b7491316370746b8004798ae0542acdb5a3a3637aa07bd2da30"
+    },
+    "source_D": {
+      "path": "/home/dobo/work/_temp/feat__gui-cat-m3/renovation/m4-acceptance/D-preliminary-independent-review.json",
+      "sha256": "1c8ad245c509198234155baf2ad4a192be8ba345ccbbf3f48827a2b0847c105e"
+    },
+    "readiness": {
+      "path": "/home/dobo/work/_temp/feat__gui-cat-m3/renovation/m4-explore-checkpoint-readiness/independent-review.json",
+      "sha256": "776282ec0561acb6aafe0cd89ce45820e6d20f91da57afdda6021de95f1f8b81"
+    }
+  },
+  "retention": "Required unit/full/image keepers and all actual baseline PNGs are retained. Latest E seven physical publication cases, literal symlink and referent pass independent custody review. Whole historical mirrors, node_modules, builds and caches are not thereby claimed retained.",
+  "source_preservation": "Failed D full remains honestly red history. The E test-only repair adds 14 readiness expectations at seven sites and preserves every original byte and all 933 case IDs. Protected CSP source, caps, frozen fixtures, baseline and comparator assertions remain intact. Optional CSS contingencies are unapplied.",
+  "authorized_next": "Root may fast-forward local Cat main to exact E, then write E-bound docs-only acceptance and run required documentation checks. Perform authorized feature publication and verified-merged cleanup after promoting needed keepers. No app main push or production activation.",
+  "excluded": "Teacher contract and unapplied Teacher/Social implementation are not qualified or accepted by this Cat decision. No physical-device, legal, clinical, compliance or production claim.",
+  "execution": "Retained archive, Git, source, JSON and hash reads; this scratch decision only. No owning edits or native/test/gate/Docker/runtime actions by this reviewer."
+}

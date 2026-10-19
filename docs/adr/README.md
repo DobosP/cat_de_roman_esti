@@ -178,4 +178,4 @@ Parallel lanes also allocated0188/0189 independently. All four full-filename bod
 
 - [0204](0204-native-preact-state-for-challenge.md) — native Preact state replaces the unqualified render-snapshot Signals adapter; ownership, motion, scoring and all acceptance gates remain unchanged.
 
-- [0205](0205-canonical-game-css-and-browser-contracts.md) — one authored CSS graph, original16,093 total-CSS gate and existing S1 plain-Preact browser contracts; native M4 qualification pending.
+- [0205](0205-canonical-game-css-and-browser-contracts.md) — one authored CSS graph, original16,093 total-CSS gate and plain-Preact browser contracts; source16733891 unit27/full38/image2 independently accepted and landed locally.

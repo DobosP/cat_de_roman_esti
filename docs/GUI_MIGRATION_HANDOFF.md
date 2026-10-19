@@ -3,25 +3,32 @@
 Valid until: the next source or completed gate change. Updated 2026-10-19. Read actual HEAD/dirty state and origin refs before continuation.
 
 
-## Current — M3 accepted, M4 next
+## Current — Cat S1 complete locally
 
-M3 source9c44d01f is independently accepted, published on `feat/gui-cat-m3` and
-landed on local `main`: unit27/full37,933browser/0skip-retry-flaky,9exact original
-PNGs/Axe/Home/vitals/CSP0, freshPG12/301, reviewed V1.13 parity1206, actual legacy
-rollback and owned cleanup pass. All normal routes/both Alchimie modes use
-Preact11/core-v1.11 through managed Go delivery. [Current truth](STATUS.md),
-[qualification](reviews/gui-m3/qualification.json), [independent acceptance](reviews/gui-m3/full-acceptance.json).
+Final M4 source1673389147a3ba432742008d55d28edb84d94af2 is independently accepted
+and landed locally after unit27/full38/image2. M3 source9c44 remains accepted.
+All933browser cases/9byte-exact PNGs/Axe/Home/vitals/CSP0,freshPG12/301,current
+V1.13 parity1206,actuallegacy and owned cleanup pass. Every current route and
+both Alchimie modes use Preact11/core-v1.11 through managed Go assets. CSS16,043
+passes the original16,093 cap;all10JS ceilings and Home target pass.
+[Qualification](reviews/gui-m4/qualification.json),
+[independent acceptance](reviews/gui-m4/independent-acceptance.json),
+[completion report](execplans/gui-game-renovation.md).
 
-Continue M4 in the same lane: reviewed authored CSS consolidation and original
-16,093 total-CSS gate (current20,669), required pinned Vitest browser contracts,
-release image and final exact-SHA unit/full/review/docs. Generate locks only with
-the owning deps gate. Preserve frozen original30/legacy, source/API/scoring/content
-contracts and unmerged source packets. Do not rerun full for docs-only changes.
-Use matching unit/full `--parallel 2`; invoke `gui-full-runner.py` without a
-`GATE_OPERATOR` prefix. PROGRAM E8/E10 authorizes GUI feature publication and
-local Cat M3/M4 landing; app-main push/production/real-account go-live remain Paul's.
-Prepared future packets remain under the owning scratch renovation directory;
-no M4 implementation/acceptance is claimed. [Completion plan](execplans/gui-game-renovation.md).
+The first failed M4 full and its2document-lifecycle test races remain explicit;
+14additive readiness assertions preserve all original case identities. Latest
+unit physical fixtures,allrequired rows and9actualPNG bytes are retained;older
+rolling raw paths are not implied available. Feature lane stays published while
+app-main push remains Paul's. No production or real-account activation follows.
+
+Paul's next scope is remaining Teacher/Social UI modules,not video/media/AI.
+Teacher parent/adult settings are complete atc4af5b1;the bounded next verified
+email-change contract includes fresh proof,single-useconfirmation,audit/session
+fencing and pending-link invalidation on MFA changes. Social native family/ward
+management can reuse existing services. These remain separate feature workflows;
+no automatic224template conversion,Teacher/Social milestone landing or realchild
+authority. Programme ledger owns the next item. Docs-only changes need only the
+existing nativeGo+fleet documentation checks on a faithful Git archive/index.
 
 ## Historical — superseded 2026-10-12 handover
 

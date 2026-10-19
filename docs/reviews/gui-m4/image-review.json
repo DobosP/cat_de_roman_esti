@@ -1,0 +1,78 @@
+{
+  "schema": 1,
+  "status": "PASS_INDEPENDENT_EXPLICIT_E_IMAGE_AND_PAYLOAD_ACCEPTANCE",
+  "reviewer": "game_css_review",
+  "findings": [],
+  "scope": "Actual cleanE image gate and never-started payload custody only,no deployment/realaccounts/children. Archive/JSON/hash reads,no runtime/Docker/native/tests/gates/owning writes by reviewer.",
+  "sha": "1673389147a3ba432742008d55d28edb84d94af2",
+  "tree_sha256": "0de103c4027967a43b7bc3ae97dab72f4303a7db980d30653d6d133584bebba7",
+  "result_sha256": "f5674c55802c2cc625c9abdabf6abcb73489f93de8ed4eb020111be0c8e0bcb1",
+  "archive_sha256": "ca1f9b1e76d5e79c9e8156e1f15000d5006f99ff68947d6598fd993c742bc40b",
+  "actual_normal_result_present": true,
+  "checks": "2/2pass",
+  "artifact_rows": {
+    "total": 7,
+    "files_rehashed": 6,
+    "immutable_image_reference": "app-image roedu-app:gate-cat_de_roman_esti-feat__gui-cat-m3-6a4ea564939f sha256:47185da0586e292ddb3d66d564046443c1bb688e652e69e77399ba74503fe58c",
+    "archive_members": 10
+  },
+  "image_identity": {
+    "full_IID": "sha256:1178e19f09c4f44ef16d46f31c4660739f66f7e0fb41e7e36ddb4c0dc93e84e0",
+    "release_IID": "sha256:47185da0586e292ddb3d66d564046443c1bb688e652e69e77399ba74503fe58c",
+    "same_IID": false,
+    "same_all_layers": false,
+    "same_first13runtime_base_layers": true,
+    "user": "10001:10001",
+    "entrypoint": [
+      "/app"
+    ],
+    "healthcheck_equal": true,
+    "exact_source_tree_labels": true
+  },
+  "actual_app_payload": {
+    "bytes": 26042528,
+    "sha256": "ac1ccb891da94418c71113af016d068ef1b8f04cc4f7d0a4fdb6c746b0b5ce56",
+    "two_independent_neverstarted_CIDs": [
+      {
+        "role": "full",
+        "image_id": "sha256:1178e19f09c4f44ef16d46f31c4660739f66f7e0fb41e7e36ddb4c0dc93e84e0",
+        "stopped_container_id": "84b5495fce7c1add7e49aad45369e9e28ad2c046acc8b4582364bd60165d5c42",
+        "never_started": true,
+        "path": "/app",
+        "bytes": 26042528,
+        "sha256": "ac1ccb891da94418c71113af016d068ef1b8f04cc4f7d0a4fdb6c746b0b5ce56",
+        "mode": 493,
+        "uid": 0,
+        "gid": 0,
+        "docker_cp_tar_sha256": "5738ba124302d50b8b103b5e6c98715858aea6893bb398bd243f32c063060f8d"
+      },
+      {
+        "role": "release",
+        "image_id": "sha256:47185da0586e292ddb3d66d564046443c1bb688e652e69e77399ba74503fe58c",
+        "stopped_container_id": "8f81a7558bafca4c7579296c7c05106758a7791fbfb1a22ebdaf9f1c55c0714f",
+        "never_started": true,
+        "path": "/app",
+        "bytes": 26042528,
+        "sha256": "ac1ccb891da94418c71113af016d068ef1b8f04cc4f7d0a4fdb6c746b0b5ce56",
+        "mode": 493,
+        "uid": 0,
+        "gid": 0,
+        "docker_cp_tar_sha256": "59ddf306e1131a9dd68f8ee07c14911e8bc27d97d79b52d3d4a1f7036abe9fb9"
+      }
+    ],
+    "retained_unique_blob_archive_sha256": "8a22fcd131a5fcba1ca13fc0668b8a0bcf6f174301cd8f49b0ac06f1b4bcb131",
+    "retained_blob_mode": "0555read-only keeper;original copy metadata mode0755is retained separately in comparison",
+    "both_removed_absence_verified": true
+  },
+  "custody_bindings": {
+    "host-image-verification.json": "44a16fcffe0c11be6c8dbc1d206b2e8945c8af18fdf3bbd0257e578d3b6cc0d0",
+    "payload-comparison.json": "fa9731d11c48fe886c3330b65592d7c4a974b41b2d4a2209845730030240853b",
+    "cleanup.json": "78a3853e59e7502e6a62cdf62fdd6d3dabd54f940859ab9325f655d7b31c8146",
+    "retention.json": "8b6edb6271048a2af9d6e208c199009f185c6adc04cf1549e455933606137df4"
+  },
+  "correction": "Earlier assumption that image target never writes result.json was wrong. Actual installed SDK produced genuine normal PASS2result retained/rehashed here. No synthetic replacement or absence-based acceptance.",
+  "limits": [
+    "Image gate\u2019s schemaCSPzero is not fresh browser proof; actual fullE provides liveCSP/933journeys/PG/parity/baseline. Release and full images have differentIIDs/layers,not falsely conflated;actual /app bytes are independently identical and runtimeconfig/base layers agree.",
+    "Only one unique actual payload blob is retained perhash,with twoIID/CID copy attestations. No wholeimage export or productiondeployment claim."
+  ]
+}

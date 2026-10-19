@@ -41,8 +41,8 @@ progress or the accepted design. The owner requested completion on 2026-10-18.
 - [x] 2026-10-18T20:16Z — reviewed Home source-pin rebind and optional full parallel CLI pass10Python ownership/argument tests,43unchanged baseline DATA controls andGo doccheck62.
 - [x] Same9c44 diagnostic and unit2/full2 pass original9PNG/Axe/Home/vitals/CSP; unit27/full37 independently accepted.
 - [x] 2026-10-19 — M3 source9c44 independently accepted, feature published and exact tested source landed locally.
-- [ ] Complete M4 CSS/budget ratchets, full qualification, release image and documentation.
-- [x] 2026-10-19 — applied independently reviewed M4 CSS/total-gate/Vitest/guidance candidates and ADR-0205. Optional CSS contingencies remain unapplied. Owning deps and focused types/lint/build/docs43focused/34scores pass; CSS16,022/16,093, all10JS caps. Six actual browser contracts plus5report guards pass after reviewed setup/report repairs; raw failures retained. Clean A measured; initial unit B refused4 protected-source fixtures. Restore exact original CspElements import without editing assertions/pins: lint/browser6/build pass, allactual CSS16,043 includes21B newline-only sheet. Clean successor measurement and canonical qualification pending.
+- [x] 2026-10-19 — final M4 source16733891 unit27/full38/image2 independently accepted and landed locally; CSS16,043/16,093,933browser/9exactPNGs/Axe/vitals/CSP0/PG/parity1206/legacy/cleanup pass. Documentation verified separately; owner retains app-main push.
+- [x] Historical M4 setup checkpoint — applied independently reviewed M4 CSS/total-gate/Vitest/guidance candidates and ADR-0205. Optional CSS contingencies remain unapplied. Owning deps and focused types/lint/build/docs43focused/34scores pass; CSS16,022/16,093, all10JS caps. Six actual browser contracts plus5report guards pass after reviewed setup/report repairs; raw failures retained. Clean A measured; initial unit B refused4 protected-source fixtures. Restore exact original CspElements import without editing assertions/pins: lint/browser6/build pass, allactual CSS16,043 includes21B newline-only sheet. Final accepted source16733891 and its qualification below supersede these setup-stage pending items.
 
 ## 3. Surprises & Discoveries
 
@@ -103,10 +103,176 @@ regular artifact rows are retained compactly; raw baseline metadata and9 exact
 PNG joins use preserved original image bytes. Historical paths do not imply
 that discarded raw attachments remain. Unique source packets remain intact.
 
-M4 still requires the original16,093-byte total-CSS ceiling, canonical authored
-CSS consolidation, pinned Vitest browser contracts and release-image/docs/full
-qualification. Current all-unique canonical level9 CSS is20,669 bytes; the
-baseline script's default-gzip total20,756 is a separate recorded measurement.
+M4 qualifies the original16,093-byte all-actual-CSS ceiling with16,043 bytes,
+including the protected import's newline-only21gzip-byte file. Canonical authored
+CSS,pinned browser contracts,full/image and independent acceptance pass. The
+M3 canonical20,669 and separate baseline default-gzip20,756 are historical.
+
+
+### M4 completion report — 2026-10-19
+
+Exact qualified product: `1673389147a3ba432742008d55d28edb84d94af2`; tree SHA256
+`0de103c4027967a43b7bc3ae97dab72f4303a7db980d30653d6d133584bebba7`.
+Unit27/full38/image2 pass on this clean source. Full result74ee109b and versions
+lockd7c0192f are bound in [qualification](../reviews/gui-m4/qualification.json).
+[Independent acceptance](../reviews/gui-m4/independent-acceptance.json) approves
+local landing. Feature publication retains source; app-main push and production
+remain Paul's. No real account/child/provider/government activation occurred.
+
+Main implementation commits, oldest first:
+
+| Commit | Result |
+|---|---|
+| 9c44d01f | Accepted M3 remaining screens,scoring module boundary and preserved original presentation |
+| a5d5e1b9 | Canonical authored CSS,positive total-CSS gate,pinned real browser contracts and current guidance |
+| 5be3556b | Historical clean-A measurement binding; later unit correctly refused4protected source pins |
+| a9476883 | Restore exact original CSP component import without altering any fixture/pin |
+| 271f5aac | Bind final product sizes to actual clean-C measurement |
+| 16733891 | Add14initial readiness assertions at7checkpoint setup sites; preserve all original test bytes/IDs |
+
+Gzip figures below count complete recursive static JavaScript closures: entry,
+mandatory startup AccountBar and the selected screen/mode,with emitted files
+deduplicated. CSS is separate. M0 used one Alchimie root for both modes and
+embedded Home in its entry; current figures use actual shipping sidecars.
+
+| Screen | React before (M0) | Preact after | Delta | Budget |
+|---|---:|---:|---:|---:|
+| Entry/shell + startup AccountBar | 117271 | 22222 | -95049 | 40960 |
+| / | 117271 | 28879 | -88392 | 40960 |
+| /intrusul | 128603 | 37306 | -91297 | 40960 |
+| /perechi | 129357 | 38144 | -91213 | 40960 |
+| /conexiuni | 131545 | 38030 | -93515 | 40960 |
+| /alchimie | 138596 | 39154 | -99442 | 40960 |
+| /cald-rece | 132257 | 38901 | -93356 | 40960 |
+| /lant | 132047 | 38772 | -93275 | 40960 |
+| /clasament | 118689 | 24870 | -93819 | 40960 |
+| /alchimie?mode=challenges | 138596 | 40714 | -97882 | 40960 |
+| /alchimie?mode=explore | 138596 | 39154 | -99442 | 40960 |
+| All actual CSS | 16093 | 16043 | -50 | 16093 |
+
+Home additionally meets the30,720-byte target. Current CSS is4,626bytes smaller
+than accepted M3;50bytes of CSS and246bytes of Challenge JS headroom remain.
+Future growth must pass those same positive ceilings. All8other non-Home/non-
+Ranking routes retain unmet30,720aspirations visibly;the40,960ceiling passes.
+
+| Throttled five-run median | Original LCP / INP / CLS | Final LCP / INP / CLS |
+|---|---|---|
+| Conexiuni select | 2836ms /184ms /0 | 1652ms /64ms /0 |
+| Alchimie combine | 4228ms /200ms /0.00057706 | 1816ms /72ms /0 |
+
+All9actual PNG bytes equal the immutable originals;Axe/Home semantics and
+enforced current+legacy CSP0 pass. Actual933browser outcomes have zero skip,
+retry,unexpected,flaky or global error. FreshPG12accounts/301HTTP has zero
+skips/failures and covers all17defaultDSN obligations. Reviewed V1.13 parity
+is1206;the old1207number remains historical,not a removed/fabricated check.
+
+Warm unit7.12min uses791original plus1,139fresh backend identity results and
+28freshauth;Node570and6actualVitest pass. Full20.07min correctly misses strict
+whole-unit reuse on the warm command shape while preserving narrow native
+reuse and freshGUI/API verification. The15min aspiration was not met;no
+assertion was removed to improve it. Original cold D unit took30.52min.
+
+| Image | Actual identity |
+|---|---|
+| Tested full | `sha256:1178e19f09c4f44ef16d46f31c4660739f66f7e0fb41e7e36ddb4c0dc93e84e0` |
+| Explicit release | `sha256:47185da0586e292ddb3d66d564046443c1bb688e652e69e77399ba74503fe58c` |
+| Both actual /app payloads | 26042528bytes; `sha256:ac1ccb891da94418c71113af016d068ef1b8f04cc4f7d0a4fdb6c746b0b5ce56` |
+| Runtime base | static-debian13 nonroot; `sha256:e2e927ec666bae08560abb3c55d0659eceabb657f56b6782ab500a9fc7f555e3` |
+| Node builder | 26.10.0-trixie-slim; `sha256:930557a230abacbc3f4fd9b8648abf8f4bee1e17cb72195dcdfb2f709bc85b33` |
+| Go builder | 1.27.1-trixie; `sha256:8f58fd67ea075142d947a60e0caa4317746a55118d312f027793d382c7741734` |
+
+Image IDs/layers differ and are not labelled equal. Two never-started image
+copies prove identical app bytes,with exact source/tree labels,UID10001 and
+healthcheck. Full gate/owner/coordinator and root Docker queries verify owned
+cleanup;explicit-image/proof containers and empty network are absent.
+
+| Resolved tooling | Version / exception |
+|---|---|
+| Go / Node / npm | 1.27.1 /26.10.0 /12.2.0 |
+| Preact /preact-iso | 11.0.0 /2.12.2 |
+| UI /web-kit | 1.0.11 /0.1.11;original UI0.3.0 remains only frozen rollback,held until historical M2 |
+| Motion | 14.0.0 public runtime shared with kit;no second engine |
+| TypeScript /parser | Native7.0.2 /separate6.0.2compiler API |
+| Vite /Oxlint /tsgolint | 8.3.3 /1.87.0 /7.0.2003 |
+| Vitest/browser/providers /Playwright | 5.0.3 /1.63.0;generated owning deps lock provenance retained |
+| Dependency exceptions | Runtime manifest unchanged in M4;only pinned test additions generated by deps;no hand locks/vendor edits |
+
+[CORE_REQUESTS](../../CORE_REQUESTS.md) records current dispositions separately
+from historical request text. No app-specific motion/security shim remains.
+
+| REQ | Current disposition | Shim |
+|---|---|---|
+| REQ-1 | nonblocking historical tooling request,not explicitly closed | none |
+| REQ-2 | nonblocking historical sync-back warning,closure not found | none |
+| REQ-3 | resolved producer consumer resolver in core-v1.2 | none |
+| REQ-4 | consumer explicit-unit enforcement implemented;broader producer lint request not explicitly closed | none |
+| REQ-5 | resolved acceptance sequencing/frozen-baseline policy;active M3 budgets genuinely green | none |
+| REQ-6 | resolved core-v1.6 secure native WebLocks origin;consumer accepted | none,never existed |
+| REQ-7 | resolved core-v1.7 Presence variant,accepted through later kit | none |
+| REQ-8 | resolved core-v1.9 one-frame reduced-motion exit hold;M2 accepted | none |
+| REQ-9 | resolved core-v1.10 canonical layer statement | temporary layers.css removed |
+| REQ-10 | resolved core-v1.10 frozen CSP descriptor support;M3 all-current main routes | none;consumer classification is supported contract,not workaround |
+| REQ-11 | resolved producer core-v1.11 and accepted consumer M3 source9c44 | none |
+
+M3/M4 delete no test file or case. M4 replaces only2null/recorded CSS
+expectations with stronger positive16,093/pass expectations and adds controls.
+Historical S1 retirement totals21unique source-test files plus6mixed-file UI
+blocks;three temporary typed guards were later retired only after real typed
+proof. C40original900browser/sealed16/78 passed;the ddbc typed proof was inside
+a failing315/316unit and is not relabelled green. Subsequent accepted suites
+exercise the replacements. Complete exact source references are retained in
+[replacement accounting](../reviews/gui-m4/historical-test-replacements.json).
+
+| Historical source test | Replacement browser / compiled contracts |
+|---|---|
+| `alchimie-empty-recovery.test.mjs` | `alchimie-empty-pairs.spec.mjs`, `alchimie-workbench.spec.mjs`, `alchimie-action-recovery.spec.mjs`, `gui-m0-alchimie-parity.spec.mjs` |
+| `alchimie-lineage.test.mjs` | `gui-m0-alchimie-parity.spec.mjs`, `alchimie-workbench.spec.mjs`, `alchimie-journal-search.spec.mjs`, `help.spec.mjs` |
+| `alchimie-projection.test.mjs` | `alchimie-workbench.spec.mjs`, `alchimie-journal-search.spec.mjs`, `gui-m0-alchimie-parity.spec.mjs`, `alchimie-action-recovery.spec.mjs`, `api-consumer2`, `native-whole-http1207` |
+| `v42-alchimie-fresh-board.test.mjs` | `gui-m0-alchimie-parity.spec.mjs`, `game-touch-targets.spec.mjs` |
+| `contexto-api.test.mjs` | `api-consumer2`, `native-whole-http1207` |
+| `contexto-comparative-controls.test.mjs` | `contexto-simpler-ui.spec.mjs`, `gui-m0-contexto-parity.spec.mjs`, `gui-m0-contexto-lifecycle-parity.spec.mjs`, `api-consumer2`, `native-whole-http1207`, `extended-native7-consumer` |
+| `contexto-progressive-clue.test.mjs` | `gui-m0-contexto-parity.spec.mjs`, `contexto-action-recovery.spec.mjs`, `contexto-simpler-ui.spec.mjs`, `api-consumer2` |
+| `cald-rece-recovery.test.mjs` | `contexto-action-recovery.spec.mjs`, `gui-m0-contexto-lifecycle-parity.spec.mjs`, `gui-m0-contexto-parity.spec.mjs`, `api-consumer2`, `extended-native7-consumer` |
+| `v42-caldrece-legend-confirm.test.mjs` | `gui-m0-contexto-parity.spec.mjs`, `contexto-simpler-ui.spec.mjs`, `api-consumer2` |
+| `conexiuni-one-away.test.mjs` | `conexiuni-action-recovery.spec.mjs`, `gui-m0-conexiuni-parity.spec.mjs`, `conexiuni-coach-layout.spec.mjs`, `conexiuni-simpler-ui.spec.mjs`, `selection-key3` |
+| `persistent-game-navigation.test.mjs` | `lifecycle.spec.mjs`, `conexiuni-action-recovery.spec.mjs`, `conexiuni-coach-layout.spec.mjs`, `conexiuni-simpler-ui.spec.mjs`, `game-touch-targets.spec.mjs` |
+| `lant-recovery-feedback.test.mjs` | `lant-action-recovery.spec.mjs`, `lant-current-position.spec.mjs`, `lant-relationship-captions.spec.mjs`, `lant-simpler-ui.spec.mjs`, `gui-m0-lant-parity.spec.mjs`, `api-consumer2`, `native-whole-http1207` |
+| `v37-pilot-lobby.test.mjs` | `gui-m0-replacement-parity.spec.mjs`, `gui-m0-home-parity.spec.mjs` |
+| `v38-six-game-ui.test.mjs` | `gui-m0-replacement-parity.spec.mjs`, `gui-m0-home-parity.spec.mjs`, `gui-replacement-contracts.spec.mjs`, `game-touch-targets.spec.mjs`, `quick-games-simpler-ui.spec.mjs`, `sealed16-78` |
+| `v39-verified-ranking.test.mjs` | `gui-replacement-contracts.spec.mjs`, `gui-m0-replacement-parity.spec.mjs`, `gui-m0-account-copy-parity.spec.mjs`, `native-whole-http1207`, `preserved-score-receipts`, `extended-native7-consumer` |
+| `v41-ranking-recovery.test.mjs` | `gui-replacement-contracts.spec.mjs` |
+| `v41-category-availability.test.mjs` | `gui-m0-category-parity.spec.mjs`, `contexto-simpler-ui.spec.mjs`, `api-consumer2` |
+| `v1-board-grid-steps.test.mjs` | `v1-board-grid-steps.spec.mjs`, `game-touch-targets.spec.mjs`, `alchimie-workbench.spec.mjs`, `accessibility.spec.mjs` |
+| `v42-derived-loss-and-starter.test.mjs` | `perechi-loss-progress.spec.mjs`, `quick-games-simpler-ui.spec.mjs`, `gui-m0-derived-presentation-parity.spec.mjs`, `native-whole-http1207` |
+| `v14-romanian-replay.test.mjs` | `lifecycle.spec.mjs`, `gui-m0-daily-intent-parity.spec.mjs`, `gui-m0-alchimie-parity.spec.mjs`, `gui-m0-lant-parity.spec.mjs`, `gui-m0-account-copy-parity.spec.mjs`, `help.spec.mjs`, `sealed16-78` |
+| `mobile-beginner-ui.test.mjs` | `help.spec.mjs`, `game-touch-targets.spec.mjs`, `v1-board-grid-steps.spec.mjs`, `mobile-status-notices.spec.mjs`, `accessibility.spec.mjs`, `v96-input-and-focus.spec.mjs` |
+| `game-help.test.mjs` | `help.spec.mjs`, `alchimie-workbench.spec.mjs` |
+| `v38-recovery.test.mjs` | `derived-action-recovery.spec.mjs`, `gui-m0-derived-presentation-parity.spec.mjs`, `sealed16-78` |
+| `v39-derived-ui-clarity.test.mjs` | `gui-m0-derived-presentation-parity.spec.mjs`, `gui-m0-daily-intent-parity.spec.mjs`, `gui-m0-replacement-parity.spec.mjs`, `quick-games-simpler-ui.spec.mjs`, `native-whole-http1207` |
+| `v1-daily-intent.test.mjs` | `gui-m0-daily-intent-parity.spec.mjs`, `v1-testing-ux.spec.mjs`, `resume-recovery.spec.mjs` |
+| `v39-local-daily-circuit.test.mjs` | `gui-m0-home-parity.spec.mjs`, `gui-m0-replacement-parity.spec.mjs`, `gui-replacement-contracts.spec.mjs` |
+| `v42-meta-loop.test.mjs` | `gui-m0-home-parity.spec.mjs`, `gui-m0-replacement-parity.spec.mjs`, `gui-replacement-contracts.spec.mjs` |
+
+Earlier B unit failed4unchanged protected-source fixtures;restoring the
+original import fixed them without pin changes. FirstDfull931/933then found
+2old-document response-body errors during checkpoint setup. Exact trace
+request ordering proves the new document restored correctly. Fourteen
+additive fresh-intro readiness expectations fix all7same-pattern setup sites;
+every original action/assertion/caseID remains. Required failed artifacts and
+raw traces are retained and never presented as acceptance.
+
+Latest required unit/full/image rows,all9actualPNG bytes,rawreport/identity,
+and seven physical publication fixtures plus literal link/referent remain
+compactly archived. Superseded rolling raw/positive trace paths were replaced
+as authorized;manifests do not claim deleted bytes remain. Original baseline,
+source branches,unique unmerged packets and canonical keepers are preserved.
+
+Remaining owner steps: push app main when chosen,production/account go-live,
+and a separately governed eventual legacy-tarball deletion release. The M2
+per-route navigation gap is closed:every normal route is current;explicit
+CAT_UI=legacy remains a verified rollback. No blocking GUI KIT_BUMP is pending.
+Next agent implementation is the bounded Teacher/Social UI programme;their
+main/milestone landing and realchild activation remain owner-only.
 
 ## 6. Context and Orientation
 

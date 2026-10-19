@@ -1,6 +1,6 @@
 # ADR-0205: one authored game stylesheet and browser contracts
 
-Status: Implementation decision; native M4 qualification required.
+Status: Accepted on exact source1673389147a3ba432742008d55d28edb84d94af2; local landing delegated by E10.
 Date: 2026-10-19
 Authority: S1 M4, PROGRAM E8/E10 and the requested efficient game migration.
 
@@ -56,3 +56,26 @@ Required test locks are generated separately; runtime dependency pins stay fixed
 source/proof packet and failed evidence if the single native candidate does not
 meet the ceiling. Independent acceptance precedes local main landing; production
 and app-main pushes remain the owner’s.
+
+## Qualification — 2026-10-19
+
+Exact source16733891 passes unit27/full38/image2 and independent acceptance.
+All933browser cases,9byte-exact original PNGs,axe,Home semantics,five-run vitals,
+enforced CSP0,freshPG12/301,current V1.13 parity1206 and legacy rollback pass.
+The original frozen CSP component import is preserved byte-exact;its comment-only
+source emits a newline-only CSS file charged at21gzip bytes. Total actual CSS
+is16,043/16,093;HomeJS28,879 and Challenge40,714 pass unchanged ceilings.
+
+A first unit correctly refused the removed import's frozen source pin;the exact
+original import was restored without a fixture exception. First fullD931/933
+then proved an old-document checkpoint setup race. Fourteen additive initial
+intro-readiness assertions fix it at7sites;every original test byte/case remains.
+Actual failed evidence is retained. No limit,pin,baseline or assertion was weakened.
+
+Warm unit7.12min/full20.07min are actual observations. Full correctly misses
+whole-unit reuse on the warm command shape while reusing independently verified
+unchanged native evidence and rerunning freshGUI/API packages. Release and full
+image IDs differ;the actual /app payload is byte-identical,with matching source
+and tree labels. [Qualification](../reviews/gui-m4/qualification.json) retains
+commands,raw hashes,cleanup,image custody and independent acceptance. App-main
+push,production and real-account/child activation remain the owner's.

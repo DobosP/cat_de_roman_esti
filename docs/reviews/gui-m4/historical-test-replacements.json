@@ -1,0 +1,78 @@
+{
+  "schema": 1,
+  "scope": "Compact source facts for S1 final report;not new execution or M4 acceptance",
+  "qualified_source_M3": "9c44d01ff476637bd1749b51f632312524d6f7ff",
+  "current_unaccepted_M4_D": "271f5aacc0066ea4d9532c16a47c4c559176c1ca",
+  "report_requirement": ".agent/S1.md:707-727 requires per-deleted/replaced-test and CORE_REQUESTS tables",
+  "test_accounting": {
+    "wholeS1_unique_whole_test_files_retired": 21,
+    "wholeS1_mixed_files_trimmed": 6,
+    "remaining_temporary_typed_guards": 0,
+    "correction": "Historical six-old-assertion progress notes do not mean six deleted files. Git7b9803f4 deleted21 unique files;2610de7f restored3 typed guards;d83cdbbf finally retired those same3 after actual compiled proof. Six mixed files kept executable module blocks.",
+    "M3_M4": "No frontend test/e2e file deletions from accepted core-v1.10 f8c00f80 through finalD. M4 replaces exactly2CSS null/recorded expectations with stronger16093/pass expectations and adds controls/browser cases. Original test inventory and every other assertion retained.",
+    "basis_refs": [
+      "docs/reviews/gui-normalized-react/corrected-retirement-mapping.json",
+      "docs/reviews/gui-normalized-react/final-retirement-mapping.json",
+      "docs/reviews/gui-normalized-react/final-retirement-source-review.json",
+      "docs/reviews/gui-normalized-react/final-retirement-decision.txt"
+    ],
+    "actual_historical_proof": "C40 c40fc14e original900browser/sealed16fixtures78assertions passed. ddbc2b1 actual Native7 typed-consumer and requestClue transport passed inside overallFAIL unit315/316;do not call that historical whole unit green. Subsequent accepted M2/M3 suites cover retained replacements.",
+    "table_prefixes": {
+      "test": "frontend/tests/",
+      "browser": "frontend/e2e/"
+    }
+  },
+  "boundary_aliases": {
+    "api-consumer2": "frontend/tests/gui-api-consumer-contract.test.mjs:39,84;real Native7CLI+actual requestClue transport",
+    "extended-native7-consumer": "same native CLI case+frontend/tests/fixtures/gui-api-consumer-contract.ts;required/optional feedback/ranking fields actually checked atddbc2b1 before final3 guard retirement",
+    "selection-key3": "frontend/tests/conexiuni-selection-key.test.mjs;opaque IDs/permutation/nonmutation",
+    "native-whole-http1207": "Historical acceptedC40 whole-response1207;current owner-reviewedV1.13 parity is1206,not a weakened assertion or fabricated extra case",
+    "sealed16-78": "frontend/e2e/original/runtime.spec.mjs and original fixtures;original16fixtures78assertion identities preserved",
+    "preserved-score-receipts": "frontend/tests/score-receipts.test.mjs;original executable receipt tests retained"
+  },
+  "docs_action": "CORE_REQUESTS header and REQ3/5/6/9/10/11 are stale historical snapshots;finaldocs should record current disposition with these references. Keep REQ1/2 and broader producer REQ4 as nonblocking tooling follow-ups absent explicit closure;no migration blocker remains implied by their old wording. Do not fabricate a new KIT_BUMP or release.",
+  "execution": "Only source/Git/record reads and scratchJSON write;no runtime/test/gate/owning edit."
+,
+  "test_replacement_rows": [
+    {"test": "alchimie-empty-recovery.test.mjs", "disposition": "whole-file-retired-7b9803f4", "browser": ["alchimie-empty-pairs.spec.mjs", "alchimie-workbench.spec.mjs", "alchimie-action-recovery.spec.mjs", "gui-m0-alchimie-parity.spec.mjs"], "other": []},
+    {"test": "alchimie-lineage.test.mjs", "disposition": "whole-file-retired-7b9803f4", "browser": ["gui-m0-alchimie-parity.spec.mjs", "alchimie-workbench.spec.mjs", "alchimie-journal-search.spec.mjs", "help.spec.mjs"], "other": []},
+    {"test": "alchimie-projection.test.mjs", "disposition": "whole-file-retired-7b9803f4", "browser": ["alchimie-workbench.spec.mjs", "alchimie-journal-search.spec.mjs", "gui-m0-alchimie-parity.spec.mjs", "alchimie-action-recovery.spec.mjs"], "other": ["api-consumer2", "native-whole-http1207"]},
+    {"test": "v42-alchimie-fresh-board.test.mjs", "disposition": "whole-file-retired-7b9803f4", "browser": ["gui-m0-alchimie-parity.spec.mjs", "game-touch-targets.spec.mjs"], "other": []},
+    {"test": "contexto-api.test.mjs", "disposition": "whole-file-retired-7b9803f4", "browser": [], "other": ["api-consumer2", "native-whole-http1207"]},
+    {"test": "contexto-comparative-controls.test.mjs", "disposition": "whole-file-retired-after-typed-proof-d83cdbbf", "browser": ["contexto-simpler-ui.spec.mjs", "gui-m0-contexto-parity.spec.mjs", "gui-m0-contexto-lifecycle-parity.spec.mjs"], "other": ["api-consumer2", "native-whole-http1207", "extended-native7-consumer"]},
+    {"test": "contexto-progressive-clue.test.mjs", "disposition": "whole-file-retired-7b9803f4", "browser": ["gui-m0-contexto-parity.spec.mjs", "contexto-action-recovery.spec.mjs", "contexto-simpler-ui.spec.mjs"], "other": ["api-consumer2"]},
+    {"test": "cald-rece-recovery.test.mjs", "disposition": "whole-file-retired-after-typed-proof-d83cdbbf", "browser": ["contexto-action-recovery.spec.mjs", "gui-m0-contexto-lifecycle-parity.spec.mjs", "gui-m0-contexto-parity.spec.mjs"], "other": ["api-consumer2", "extended-native7-consumer"]},
+    {"test": "v42-caldrece-legend-confirm.test.mjs", "disposition": "whole-file-retired-7b9803f4", "browser": ["gui-m0-contexto-parity.spec.mjs", "contexto-simpler-ui.spec.mjs"], "other": ["api-consumer2"]},
+    {"test": "conexiuni-one-away.test.mjs", "disposition": "whole-file-retired-7b9803f4", "browser": ["conexiuni-action-recovery.spec.mjs", "gui-m0-conexiuni-parity.spec.mjs", "conexiuni-coach-layout.spec.mjs", "conexiuni-simpler-ui.spec.mjs"], "other": ["selection-key3"]},
+    {"test": "persistent-game-navigation.test.mjs", "disposition": "whole-file-retired-7b9803f4", "browser": ["lifecycle.spec.mjs", "conexiuni-action-recovery.spec.mjs", "conexiuni-coach-layout.spec.mjs", "conexiuni-simpler-ui.spec.mjs", "game-touch-targets.spec.mjs"], "other": []},
+    {"test": "lant-recovery-feedback.test.mjs", "disposition": "whole-file-retired-7b9803f4", "browser": ["lant-action-recovery.spec.mjs", "lant-current-position.spec.mjs", "lant-relationship-captions.spec.mjs", "lant-simpler-ui.spec.mjs", "gui-m0-lant-parity.spec.mjs"], "other": ["api-consumer2", "native-whole-http1207"]},
+    {"test": "v37-pilot-lobby.test.mjs", "disposition": "whole-file-retired-7b9803f4", "browser": ["gui-m0-replacement-parity.spec.mjs", "gui-m0-home-parity.spec.mjs"], "other": []},
+    {"test": "v38-six-game-ui.test.mjs", "disposition": "whole-file-retired-7b9803f4", "browser": ["gui-m0-replacement-parity.spec.mjs", "gui-m0-home-parity.spec.mjs", "gui-replacement-contracts.spec.mjs", "game-touch-targets.spec.mjs", "quick-games-simpler-ui.spec.mjs"], "other": ["sealed16-78"]},
+    {"test": "v39-verified-ranking.test.mjs", "disposition": "whole-file-retired-after-typed-proof-d83cdbbf", "browser": ["gui-replacement-contracts.spec.mjs", "gui-m0-replacement-parity.spec.mjs", "gui-m0-account-copy-parity.spec.mjs"], "other": ["native-whole-http1207", "preserved-score-receipts", "extended-native7-consumer"]},
+    {"test": "v41-ranking-recovery.test.mjs", "disposition": "whole-file-retired-7b9803f4", "browser": ["gui-replacement-contracts.spec.mjs"], "other": []},
+    {"test": "v41-category-availability.test.mjs", "disposition": "whole-file-retired-7b9803f4", "browser": ["gui-m0-category-parity.spec.mjs", "contexto-simpler-ui.spec.mjs"], "other": ["api-consumer2"]},
+    {"test": "v1-board-grid-steps.test.mjs", "disposition": "whole-file-retired-7b9803f4", "browser": ["v1-board-grid-steps.spec.mjs", "game-touch-targets.spec.mjs", "alchimie-workbench.spec.mjs", "accessibility.spec.mjs"], "other": []},
+    {"test": "v42-derived-loss-and-starter.test.mjs", "disposition": "whole-file-retired-7b9803f4", "browser": ["perechi-loss-progress.spec.mjs", "quick-games-simpler-ui.spec.mjs", "gui-m0-derived-presentation-parity.spec.mjs"], "other": ["native-whole-http1207"]},
+    {"test": "v14-romanian-replay.test.mjs", "disposition": "whole-file-retired-7b9803f4", "browser": ["lifecycle.spec.mjs", "gui-m0-daily-intent-parity.spec.mjs", "gui-m0-alchimie-parity.spec.mjs", "gui-m0-lant-parity.spec.mjs", "gui-m0-account-copy-parity.spec.mjs", "help.spec.mjs"], "other": ["sealed16-78"]},
+    {"test": "mobile-beginner-ui.test.mjs", "disposition": "whole-file-retired-7b9803f4", "browser": ["help.spec.mjs", "game-touch-targets.spec.mjs", "v1-board-grid-steps.spec.mjs", "mobile-status-notices.spec.mjs", "accessibility.spec.mjs", "v96-input-and-focus.spec.mjs"], "other": []},
+    {"test": "game-help.test.mjs", "disposition": "mixed-UI-blocks-retired-kept-executable-blocks-preserved", "browser": ["help.spec.mjs", "alchimie-workbench.spec.mjs"], "other": []},
+    {"test": "v38-recovery.test.mjs", "disposition": "mixed-UI-blocks-retired-kept-executable-blocks-preserved", "browser": ["derived-action-recovery.spec.mjs", "gui-m0-derived-presentation-parity.spec.mjs"], "other": ["sealed16-78"]},
+    {"test": "v39-derived-ui-clarity.test.mjs", "disposition": "mixed-UI-blocks-retired-kept-executable-blocks-preserved", "browser": ["gui-m0-derived-presentation-parity.spec.mjs", "gui-m0-daily-intent-parity.spec.mjs", "gui-m0-replacement-parity.spec.mjs", "quick-games-simpler-ui.spec.mjs"], "other": ["native-whole-http1207"]},
+    {"test": "v1-daily-intent.test.mjs", "disposition": "mixed-UI-blocks-retired-kept-executable-blocks-preserved", "browser": ["gui-m0-daily-intent-parity.spec.mjs", "v1-testing-ux.spec.mjs", "resume-recovery.spec.mjs"], "other": []},
+    {"test": "v39-local-daily-circuit.test.mjs", "disposition": "mixed-UI-blocks-retired-kept-executable-blocks-preserved", "browser": ["gui-m0-home-parity.spec.mjs", "gui-m0-replacement-parity.spec.mjs", "gui-replacement-contracts.spec.mjs"], "other": []},
+    {"test": "v42-meta-loop.test.mjs", "disposition": "mixed-UI-blocks-retired-kept-executable-blocks-preserved", "browser": ["gui-m0-home-parity.spec.mjs", "gui-m0-replacement-parity.spec.mjs", "gui-replacement-contracts.spec.mjs"], "other": []}
+  ],
+  "CORE_REQUESTS_dispositions": [
+    {"REQ": "REQ-1", "current": "nonblocking historical tooling request,not explicitly closed", "shim": "none", "fact": "Configured installed locate-kit still omits gen from setup parents;repo gen retains its own real prerequisites. No current GUI lane requires nesting setup under gen.", "refs": ["CORE_REQUESTS.md:5", "scripts/gui-repo-hook.mjs:317", "installed @roedu/web-kit/scripts/locate-kit.mjs:22"]},
+    {"REQ": "REQ-2", "current": "nonblocking historical sync-back warning,closure not found", "shim": "none", "fact": "Old successful gen rsync warnings never changed source scope;no evidence of a present GUI failure or a documented producer correction. Do not claim fixed or reproduce merely for closure.", "refs": ["CORE_REQUESTS.md:6", "docs/execplans/s1-cat.md:160"]},
+    {"REQ": "REQ-3", "current": "resolved producer consumer resolver in core-v1.2", "shim": "none", "fact": "PROGRAM E2/coreADR0010 authorizes configured consumer resolution. Actual installed core-v1.11 imports planConsumer and configured manifest ownership;bootstrap old script is historical,not active proof.", "refs": ["roedu-ui/docs/PROGRAM.md:944", "roedu-ui/docs/adr/0010-configured-consumer-version-resolution.md", "installed @roedu/web-kit/scripts/resolve-versions.mjs:8"]},
+    {"REQ": "REQ-4", "current": "consumer explicit-unit enforcement implemented;broader producer lint request not explicitly closed", "shim": "none", "fact": "ExplicitCss mapped types,normalizeExplicitCss and actual AST style-audit enforce reviewed unitless/custom numbers and forbid dimensional numeric bags/raw style attributes. Treat producer generic numeric-CSSOM lint as nonblocking tooling follow-up,not an open migration failure.", "refs": ["CORE_REQUESTS.md:8", "frontend/src/components/CspElements.tsx:7", "frontend/src/components/cssUnits.ts", "scripts/gui-style-audit.mjs:136", "frontend/tests/gui-style-audit.test.mjs"]},
+    {"REQ": "REQ-5", "current": "resolved acceptance sequencing/frozen-baseline policy;active M3 budgets genuinely green", "shim": "none", "fact": "E3/ADR0011 retains historical React budget failures;ADR0193/E4 records exact frozen numerical statuses while active output gates. M3 source9c44 unit/full all10JS pass. Do not relabel historical M0/M1 red green.", "refs": ["CORE_REQUESTS.md:9", "roedu-ui/docs/PROGRAM.md:964", "docs/adr/0193-frozen-legacy-budget-baseline.md", "docs/reviews/gui-m3/qualification.json"]},
+    {"REQ": "REQ-6", "current": "resolved core-v1.6 secure native WebLocks origin;consumer accepted", "shim": "none,never existed", "fact": "Owner relay89db19d and trusted unit/core1.6 applied. M2/M3 actual image-backed native WebLocks/browser suites pass without mocked APIs/security overrides.", "refs": ["CORE_REQUESTS.md:11", "docs/execplans/s1-cat.md:197", "docs/GUI_MIGRATION_HANDOFF.md:106", "docs/reviews/gui-m3/qualification.json"]},
+    {"REQ": "REQ-7", "current": "resolved core-v1.7 Presence variant,accepted through later kit", "shim": "none", "fact": "Public variant supports required Conexiuni scale/spring exit retention;M2 and current M3 full retain original motion cases.", "refs": ["CORE_REQUESTS.md:13", "docs/execplans/s1-cat.md:45", "roedu-ui/docs/adr/0021-presence-exit-variant.md"]},
+    {"REQ": "REQ-8", "current": "resolved core-v1.9 one-frame reduced-motion exit hold;M2 accepted", "shim": "none", "fact": "Original Intrusul/Perechi mounted+locked exit fixtures pass on both emulated projects;no consumer Presence engine added.", "refs": ["CORE_REQUESTS.md:15", "roedu-ui/docs/adr/0025-presence-finalized-exit-frame.md", "docs/execplans/s1-cat.md:41", "docs/reviews/gui-m3/qualification.json"]},
+    {"REQ": "REQ-9", "current": "resolved core-v1.10 canonical layer statement", "shim": "temporary layers.css removed", "fact": "ADR0201 removes app layer-order shim;delivered kit stylesheet loads first and exactPNG parity passes M3.", "refs": ["CORE_REQUESTS.md:16", "docs/adr/0201-core-v110-consumer-contracts.md:10", "docs/reviews/gui-core-v110-adoption/source-review.json", "frontend/src/main.tsx:6"]},
+    {"REQ": "REQ-10", "current": "resolved core-v1.10 frozen CSP descriptor support;M3 all-current main routes", "shim": "none;consumer classification is supported contract,not workaround", "fact": "SDK verifies original frozen manifest/assets/nonces. All-current M3 omits frozen descriptors;separate CAT_UI=legacy journey and archive stay. This does not authorize deleting rollback.", "refs": ["CORE_REQUESTS.md:17", "docs/adr/0201-core-v110-consumer-contracts.md:13", "docs/adr/0202-m3-remaining-preact-screens.md:64", "docs/reviews/gui-m3/qualification.json"]},
+    {"REQ": "REQ-11", "current": "resolved producer core-v1.11 and accepted consumer M3 source9c44", "shim": "none", "fact": "Exact public Motion14 externalization followed by consumer source reductions qualified9c44 unit27/full37;Challenge40853<=40960/all10pass. Current CORE_REQUESTS wording remaining budget-red is stale;M4CSS/browser/image qualification remains separate.", "refs": ["CORE_REQUESTS.md:19", "docs/reviews/gui-m3/v111-adoption-review.json", "docs/reviews/gui-m3/qualification.json", "docs/adr/0202-m3-remaining-preact-screens.md:53"]}
+  ]
+}

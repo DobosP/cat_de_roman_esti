@@ -1,5 +1,23 @@
 # Core requests — S1
 
+Current2026-10-19: Cat S1 accepted locally at16733891;current dispositions below supersede dated request snapshots. No blocking GUI request remains. [Qualification](docs/reviews/gui-m4/qualification.json).
+
+| Request | Current disposition | App shim |
+|---|---|---|
+| REQ-1 | nonblocking historical tooling request,not explicitly closed | none |
+| REQ-2 | nonblocking historical sync-back warning,closure not found | none |
+| REQ-3 | resolved producer consumer resolver in core-v1.2 | none |
+| REQ-4 | consumer explicit-unit enforcement implemented;broader producer lint request not explicitly closed | none |
+| REQ-5 | resolved acceptance sequencing/frozen-baseline policy;active M3 budgets genuinely green | none |
+| REQ-6 | resolved core-v1.6 secure native WebLocks origin;consumer accepted | none,never existed |
+| REQ-7 | resolved core-v1.7 Presence variant,accepted through later kit | none |
+| REQ-8 | resolved core-v1.9 one-frame reduced-motion exit hold;M2 accepted | none |
+| REQ-9 | resolved core-v1.10 canonical layer statement | temporary layers.css removed |
+| REQ-10 | resolved core-v1.10 frozen CSP descriptor support;M3 all-current main routes | none;consumer classification is supported contract,not workaround |
+| REQ-11 | resolved producer core-v1.11 and accepted consumer M3 source9c44 | none |
+
+## Historical request snapshots
+
 Record actual core friction here; parent owns core patches. Current2026-10-12: core-v1.6 actual Cat sync plus trusted6b unit and b3M1 full supply consumer loopback evidence (budget-only red). REQ-6 has no shim; the owner KIT_BUMP relay remains pending. UI0.3 stays active until owner UI1 sync; REQ-7 blocks exact pilot motion.
 
 REQ-1 | blocking no | none | core-v1.1 plain gen cannot nest canonical setup (locate-kit.mjs/frozenBootstrapConfig parents omit gen); the original repo:gen runs genuine npm-ci/build/binary prerequisites itself and retains named actions. Consider allowing setup under gen without changing current-invocation binding.
