@@ -83,5 +83,8 @@ found 0 openpgp names in the release `/app`'s own `.gopclntab`. Its notes:
 
 ## Retention
 
-Gate results, scanner logs and the binaries are kept under `~/work/_temp/fix-kit-bump-core-v112/` until
-the evidence is archived. Raw transcripts are never copied.
+The scratch evidence of both lanes is archived on DoboStore, sha256 verified on both ends:
+`dobostore:/volume1/agentops-home/temp-archive/2026-10-21/fix__core-v112-v113-kit-bump-evidence.tar.zst`
+(sha256 `cbc1a3da0d20e1e22af46dc6279562266dc951696b9bb1834895c7c892e6fe0f`). It holds gate results and logs,
+scanner outputs, the release `/app`, the twin builds, the release image tar and this worktree's `.gate`.
+The Trivy DB cache is excluded. The local copies are removed after landing. Raw transcripts are never copied.
