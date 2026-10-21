@@ -39,8 +39,8 @@ function command(name, binary, args) {
 }
 for (const name of ["typescript", "@typescript/typescript6", "motion", "framer-motion", "oxlint", "oxlint-tsgolint", "@ast-grep/cli"])
   check(`installed:${name}`, () => packageInfo(name, selected.get(name).version));
-check("installed:active-ui", () => packageInfo("@roedu/ui", "1.0.11"));
-check("installed:declared-web-kit", () => packageInfo("@roedu/web-kit", "0.1.11"));
+check("installed:active-ui", () => packageInfo("@roedu/ui", "1.0.13"));
+check("installed:declared-web-kit", () => packageInfo("@roedu/web-kit", "0.1.13"));
 check("actual-native-tsc-version", () => {
   const text = command("tsc-version", nativeCompiler(frontend).executable, ["--version"]);
   if (text.trim() !== `Version ${selected.get("typescript").version}`) throw new Error("Actual tsc version differs from selected compiler");
