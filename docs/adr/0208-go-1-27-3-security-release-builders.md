@@ -40,7 +40,7 @@ or Debian finding in the release image.
 The kit pin keeps `golang.org/x/net` v0.59.0 in the binary's build info. Trivy therefore still
 reports CVE-2026-78669 (HIGH, fixed in v0.60.0), and binary-mode govulncheck still lists its five
 HTTP/2 advisories. The binary links only `x/net/html`; its HTTP/2 code is the go1.27.3 standard
-library's own copy. GO-2026-5932 (`x/crypto/openpgp`, no fix, not imported) remains module-level only.
+library's own copy. GO-2026-5932 (`x/crypto/openpgp`, no fix) is not linked: source mode lists it at module level only, and binary mode flags it at package level.
 
 The gate's Go lanes still compile with the core go1.27.1 runner. These are unit backend/authcore
 race and vet, plus the full gate's PG lanes, HTTP parity and legacy journey. Only the full browser

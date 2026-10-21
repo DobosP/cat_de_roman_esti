@@ -2427,3 +2427,29 @@ Valid until: the next change to `main` — then treat as history.
 - EQ-2: `historical-test-replacements.json` erratum + corrected rows; execplan rows; the hash-bound
   `corrected-retirement-mapping.json` stays byte-identical and is superseded for those two rows.
 - Gates: build 11/11; unit 27/27 (18.7 min); full 37/37 (15.2 min; 937 browser, 9 PNG, axe, PG, parity 1206, legacy owner, cleanup verified; same-SHA unit reuse). Independent reviewer PASS-WITH-NOTES, notes applied. `tools/gui-baseline-quality` installed in the fresh mirror from its lock before the full.
+
+## 2026-10-21 — Go 1.27.3 security release builders (partial security-hold fix)
+
+Valid until: the KIT_BUMP that moves kit core Go/x/net pins — then treat as history.
+
+- Branch `fix/go-1-27-3-security` (rebased onto `main` 79669601); operator agent:claude-code; product
+  99f507f4 = GATE-CHANGE 6ee5a8ba ([ADR-0208](docs/adr/0208-go-1-27-3-security-release-builders.md)) + Alchimie
+  resume-race fix. [Record](docs/reviews/go-1-27-3-security/README.md).
+- Canonical `Dockerfile` → `golang:1.27.3-trixie` (new app lock entry `cat-golang-trixie`), `go-backend/Dockerfile`
+  → `golang:1.27.3-bookworm`, CI `setup-go` and `scripts/qualify_go_toolchain.sh` → 1.27.3. Kit core-v1.11 keeps
+  go 1.27.1, `golang:1.27.1-trixie`, x/net v0.59.0 and the runner image: versions-check core-floor and kit:check
+  "Higher core version refused" make those a core-tag change.
+- Gates on 99f507f4: unit 27/27, full 37/37 (937 browser, 0 skip-retry-flaky, CSP0, PG, parity, legacy owner),
+  image 2/2. That came on the second full, after one failed browser case: 6ee5a8ba's full failed
+  `lifecycle.spec.mjs:86` Alchimie mobile (936/937). Its trace showed Play enabled before the
+  saved-game check, because `AlchimieChallenge` started `loading` false. The fix starts it from the
+  saved pointer, like Perechi/Conexiuni/Intrusul/Lanț (Cald sau Rece's `busy` keeps the same latent race:
+  follow-up). Earlier unit/image passes at f2e4033f/3ad049db were
+  superseded by the ADR renumber (0207 belongs to DCR-1) and the rebase.
+- Scans: go1.27.3 source/package 0 affecting; release Trivy exit 1 on 1 HIGH, x/net v0.59.0 CVE-2026-78669
+  (stdlib/Debian 0; main product image had 5 HIGH, deployed V1.0.1 11). Binary-mode govulncheck lists the same
+  x/net advisories. The binary links only `x/net/html`, and its HTTP/2 is the go1.27.3 standard library's own.
+- Ad-hoc go1.27.3 runner evidence (roedu-ui recipe `0d6cdbe`, unpublished local branch): backend race 1936, PG
+  12/302, parity 1206. Evidence archived on DoboStore (sha256 `5230d8e8…`, both ends). Nothing deployed.
+- Docker address pools were exhausted by 31 bridge networks, most empty and months old (other projects).
+  None were removed; the ad-hoc run shared the db container's network namespace instead.

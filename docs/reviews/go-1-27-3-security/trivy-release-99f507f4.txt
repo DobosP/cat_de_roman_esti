@@ -1,0 +1,37 @@
+2026-10-21T14:52:12+03:00	INFO	[vuln] Vulnerability scanning is enabled
+2026-10-21T14:52:12+03:00	INFO	[secret] Secret scanning is enabled
+2026-10-21T14:52:12+03:00	INFO	[secret] If your scanning is slow, please try '--scanners vuln' to disable secret scanning
+2026-10-21T14:52:12+03:00	INFO	[secret] Please see https://trivy.dev/docs/v0.75/guide/scanner/secret#recommendation for faster secret detection
+2026-10-21T14:52:12+03:00	INFO	Detected OS	family="debian" version="13.7"
+2026-10-21T14:52:12+03:00	INFO	[debian] Detecting vulnerabilities...	os_version="13" pkg_num=6
+2026-10-21T14:52:12+03:00	INFO	Number of language-specific files	num=1
+2026-10-21T14:52:12+03:00	INFO	[gobinary] Detecting vulnerabilities...
+2026-10-21T14:52:12+03:00	WARN	Using severities from other vendors for some vulnerabilities. Read https://trivy.dev/docs/v0.75/guide/scanner/vulnerability#severity-selection for details.
+
+Report Summary
+
+┌───────────────────────────────────────────────────────────────────────────────┬──────────┬─────────────────┬─────────┐
+│                                    Target                                     │   Type   │ Vulnerabilities │ Secrets │
+├───────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┼─────────┤
+│ roedu-app:gate-cat_de_roman_esti-fix__go-1-27-3-security-9a3f127cd1f4 (debian │  debian  │        0        │    -    │
+│ 13.7)                                                                         │          │                 │         │
+├───────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┼─────────┤
+│ app                                                                           │ gobinary │        1        │    -    │
+└───────────────────────────────────────────────────────────────────────────────┴──────────┴─────────────────┴─────────┘
+Legend:
+- '-': Not scanned
+- '0': Clean (no security findings detected)
+
+
+app (gobinary)
+==============
+Total: 1 (HIGH: 1, CRITICAL: 0)
+
+┌──────────────────┬────────────────┬──────────┬────────┬───────────────────┬───────────────┬────────────────────────────────────────────────────────────┐
+│     Library      │ Vulnerability  │ Severity │ Status │ Installed Version │ Fixed Version │                           Title                            │
+├──────────────────┼────────────────┼──────────┼────────┼───────────────────┼───────────────┼────────────────────────────────────────────────────────────┤
+│ golang.org/x/net │ CVE-2026-78669 │ HIGH     │ fixed  │ v0.59.0           │ 0.60.0        │ net/http: net/http/internal/http2: golang.org/x/net/http2: │
+│                  │                │          │        │                   │               │ net/http: Denial of Service via excessive HTTP/2 SETTINGS  │
+│                  │                │          │        │                   │               │ frames...                                                  │
+│                  │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2026-78669                 │
+└──────────────────┴────────────────┴──────────┴────────┴───────────────────┴───────────────┴────────────────────────────────────────────────────────────┘

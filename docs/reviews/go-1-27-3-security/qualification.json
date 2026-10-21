@@ -1,0 +1,250 @@
+{
+  "schema": 1,
+  "decision": "docs/adr/0208-go-1-27-3-security-release-builders.md",
+  "branch": "fix/go-1-27-3-security",
+  "base": "79669601",
+  "landing_product_sha": "99f507f4cb4c572f122fc3959c81c1b42094006e",
+  "operator": "agent:claude-code",
+  "gates": {
+    "unit": {
+      "target": "unit",
+      "sha": "99f507f4cb4c572f122fc3959c81c1b42094006e",
+      "status": "pass",
+      "checks": 27,
+      "failed_checks": [],
+      "started": "2026-10-21T11:14:06.929Z",
+      "finished": "2026-10-21T11:32:42.742Z",
+      "tree_sha256": "b2d033c68e31c0bce5c56d671645a693b1449678483b4ebbd0cb4b75d9158f52",
+      "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+      "versions_lock_sha256": "a513e518c0aefd22bfa512537efd787d11fb645345afd041cc97326abbad8e1f",
+      "result_sha256": "a8a9930ff9558319c402ab080b9da29a11810d80d61e9b97790508ae183ba59c"
+    },
+    "full": {
+      "target": "full",
+      "sha": "99f507f4cb4c572f122fc3959c81c1b42094006e",
+      "status": "pass",
+      "checks": 37,
+      "failed_checks": [],
+      "started": "2026-10-21T11:34:50.682Z",
+      "finished": "2026-10-21T11:49:28.297Z",
+      "tree_sha256": "b2d033c68e31c0bce5c56d671645a693b1449678483b4ebbd0cb4b75d9158f52",
+      "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+      "versions_lock_sha256": "a513e518c0aefd22bfa512537efd787d11fb645345afd041cc97326abbad8e1f",
+      "result_sha256": "59b67adaffb17368a59275d6325b9e3dd5699924860a0aaffdedaf8c13356e1c"
+    },
+    "image": {
+      "target": "image",
+      "sha": "99f507f4cb4c572f122fc3959c81c1b42094006e",
+      "status": "pass",
+      "checks": 2,
+      "failed_checks": [],
+      "started": "2026-10-21T11:52:02.694Z",
+      "finished": "2026-10-21T11:52:03.055Z",
+      "tree_sha256": "b2d033c68e31c0bce5c56d671645a693b1449678483b4ebbd0cb4b75d9158f52",
+      "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+      "versions_lock_sha256": "a513e518c0aefd22bfa512537efd787d11fb645345afd041cc97326abbad8e1f",
+      "result_sha256": "6a3f91c504ec7cd718b38cdcb899c02010745d42994302aacd0a7811dbfb29b3"
+    }
+  },
+  "full_browser": {
+    "expected": 937,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "failed_history": [
+    {
+      "sha": "f2e4033f34fc711421a572f77f8705dcd0f16a67",
+      "unit": "pass 27/27",
+      "image": "pass",
+      "superseded_by": "ADR renumber 0207->0208 (claim collision with fix/gui-publication-followups)"
+    },
+    {
+      "sha": "3ad049db4dc48bdbdaa4f8e2c10f6eb68e23b119",
+      "unit": "pass 27/27",
+      "superseded_by": "main moved to 79669601 (DCR-1 landing); rebased"
+    },
+    {
+      "sha": "6ee5a8ba8dda0ba16d345e3b19f4094b6bce7be6",
+      "unit": "pass 27/27",
+      "image": "pass",
+      "full": {
+        "status": "fail",
+        "browser": {
+          "expected": 936,
+          "skipped": 0,
+          "unexpected": 1,
+          "flaky": 0
+        },
+        "failed_case": "lifecycle.spec.mjs:86 alchimie mobile: recovers an expired saved ID into a playable fresh start",
+        "cause": "product race: AlchimieChallenge initialised loading=false, so Play was enabled before the saved-game check; trace (from reload): toBeEnabled resolved +100 ms, stale id read +105 ms, 404 route reached +112 ms",
+        "result_sha256": "0f40a988ade3bc53dca2c5523d7f2b887ffbd5dfe55f33b1d2465866a1f8a48d"
+      },
+      "superseded_by": "99f507f4 (race fix)"
+    }
+  ],
+  "release_image": {
+    "id": "sha256:c1186db45ca5eed88db8301d5c56cfc497928744f32fb5d80aa700022492eeaf",
+    "revision": "99f507f4cb4c572f122fc3959c81c1b42094006e",
+    "tree_sha256": "b2d033c68e31c0bce5c56d671645a693b1449678483b4ebbd0cb4b75d9158f52",
+    "app_sha256": "d0dcfe9f254b26c0ad09c9d412d4b424dbc2792fde6f3598781eed291976faaa",
+    "go": "go1.27.3",
+    "x_net_in_build_info": "v0.59.0"
+  },
+  "scans": {
+    "govulncheck": "v1.8.0, DB 2026-10-21T00:27:29Z",
+    "source_99f507f4": {
+      "go-backend": "0 affecting (module-level: 5 x/net v0.59.0 HTTP/2, GO-2026-5932)",
+      "shared-go/authcore": "0 affecting (module-level: GO-2026-5932)"
+    },
+    "package_99f507f4": {
+      "go-backend": "0 affecting",
+      "shared-go/authcore": "0 affecting"
+    },
+    "binary_release_99f507f4": {
+      "exit": 3,
+      "ids": [
+        "GO-2026-6617",
+        "GO-2026-6612",
+        "GO-2026-6611",
+        "GO-2026-6610",
+        "GO-2026-6603",
+        "GO-2026-5932"
+      ],
+      "note": "x/net v0.59.0 from build info; the binary links only x/net/html, its HTTP/2 is go1.27.3 std net/http/internal/http2 + vendor/golang.org/x/net/http2/hpack"
+    },
+    "trivy": "v0.75.0, DB 2026-10-21T07:13:45Z, --severity HIGH,CRITICAL --ignore-unfixed",
+    "trivy_release_99f507f4": {
+      "exit": 1,
+      "high": 1,
+      "critical": 0,
+      "finding": "golang.org/x/net v0.59.0 CVE-2026-78669 (fixed 0.60.0)",
+      "debian": 0,
+      "stdlib": 0
+    },
+    "trivy_baselines": {
+      "main_product_16733891_image": {
+        "high": 5,
+        "detail": "4 stdlib v1.27.1 + 1 x/net v0.59.0"
+      },
+      "deployed_V1.0.1_abe93377": {
+        "high_critical": 11,
+        "detail": "4 stdlib v1.27.1 + 4 HIGH/3 CRITICAL perl-base deb12"
+      }
+    }
+  },
+  "adhoc_go1_27_3_evidence": {
+    "note": "not a gate result; roedu-toolchain:core-v1.0-go1.27.3-20261021 (sha256:ad81a9bf...) from roedu-ui 0d6cdbe, PG postgres:16-trixie gate pin, copy of the unit-gate working tree",
+    "tree_f2e4033f": {
+      "backend-race": {
+        "rc": 0,
+        "seconds": 1046,
+        "passes": 1930,
+        "fails": 0,
+        "skips": 17
+      },
+      "backend-vet": {
+        "rc": 0,
+        "seconds": 24
+      },
+      "authcore-race": {
+        "rc": 0,
+        "seconds": 22
+      },
+      "authcore-vet": {
+        "rc": 0,
+        "seconds": 1
+      },
+      "pg-accounts": {
+        "rc": 0,
+        "seconds": 6,
+        "passes": 12,
+        "fails": 0,
+        "skips": 0
+      },
+      "pg-httpapi": {
+        "rc": 0,
+        "seconds": 197,
+        "passes": 301,
+        "fails": 0,
+        "skips": 0
+      },
+      "build-cat-server": {
+        "rc": 0,
+        "seconds": 1
+      },
+      "http-parity": {
+        "rc": 0,
+        "seconds": 4,
+        "ok": true,
+        "requests": 1206
+      },
+      "server-version": {
+        "rc": 0,
+        "seconds": 0
+      }
+    },
+    "tree_6ee5a8ba_go_equals_99f507f4": {
+      "backend-race": {
+        "rc": 0,
+        "seconds": 1131,
+        "passes": 1936,
+        "fails": 0,
+        "skips": 17
+      },
+      "backend-vet": {
+        "rc": 0,
+        "seconds": 12
+      },
+      "authcore-race": {
+        "rc": 0,
+        "seconds": 13
+      },
+      "authcore-vet": {
+        "rc": 0,
+        "seconds": 1
+      },
+      "pg-accounts": {
+        "rc": 0,
+        "seconds": 2,
+        "passes": 12,
+        "fails": 0,
+        "skips": 0
+      },
+      "pg-httpapi": {
+        "rc": 0,
+        "seconds": 136,
+        "passes": 302,
+        "fails": 0,
+        "skips": 0
+      },
+      "build-cat-server": {
+        "rc": 0,
+        "seconds": 1
+      },
+      "http-parity": {
+        "rc": 0,
+        "seconds": 3,
+        "ok": true,
+        "requests": 1206
+      },
+      "server-version": {
+        "rc": 0,
+        "seconds": 0
+      }
+    }
+  },
+  "archive": {
+    "path": "dobostore:/volume1/agentops-home/temp-archive/2026-10-21/fix__go-1-27-3-security-evidence.tar.zst",
+    "sha256": "5230d8e87cf492b96b2959f35d7ad7f365f92c3a0c5f629cc9ae3245b7f74b41",
+    "verified": "both ends"
+  },
+  "follow_ups": [
+    "Cald sau Rece busy initialiser: same latent one-frame resume race (not failed)",
+    "kit core tag + KIT_BUMP: x/net v0.60.0, go1.27.3 runtime/runner, go lines; retire cat-golang-trixie"
+  ],
+  "independent_review": {
+    "toolchain_commit": "LAND-WITH-NOTES (no blocker)",
+    "final_99f507f4_and_record": "APPROVE-WITH-NOTES (no blocker)"
+  }
+}
