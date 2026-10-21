@@ -70,6 +70,15 @@ func New(c *content.Content) *Server {
 	return s
 }
 
+// ManagedUIError reports why the embedded managed UI cannot serve pages. A
+// StaticRoot override replaces managed delivery, so it reports none.
+func (s *Server) ManagedUIError() error {
+	if s.StaticRoot != "" {
+		return nil
+	}
+	return s.managedUIError
+}
+
 func write(w http.ResponseWriter, r *http.Request, status int, body any) {
 	var b bytes.Buffer
 	enc := json.NewEncoder(&b)

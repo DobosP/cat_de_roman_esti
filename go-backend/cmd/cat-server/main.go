@@ -47,6 +47,11 @@ func main() {
 		log.Fatal(err)
 	}
 	handler := httpapi.New(c)
+	// An unadmitted managed UI would answer every page 503 while /healthz stays
+	// 200; refuse to serve instead (ADR-0207). Replay carries API contracts only.
+	if err := handler.ManagedUIError(); err != nil && !*replay {
+		log.Fatalf("managed UI unavailable: %v", err)
+	}
 	bootCtx, bootCancel := context.WithTimeout(context.Background(), 30*time.Second)
 	closeAccounts, err := enableAccounts(bootCtx, handler, addr, *migrate)
 	bootCancel()
