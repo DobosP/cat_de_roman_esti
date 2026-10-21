@@ -119,13 +119,14 @@ export default function AlchimieChallenge({
   onExit: () => void;
   onToast: (m: string, k?: ToastKind) => void;
 }) {
+  const active = useActiveGame("alchimie");
   const isPresent = useIsPresent();
   const liveRef = useRef(true);
   const lifetimeRef = useRef(0);
   const [state, setState] = useState<AlchimieState | null>(null);
   const [startFailed, setStartFailed] = useState(false);
   const startInFlightRef = useRef(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(() => active.peek() !== null);
   const [creating, setCreating] = useState(false);
   const [busy, setBusy] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
@@ -148,7 +149,6 @@ export default function AlchimieChallenge({
   const [dragOverId, setDragOverId] = useState<string | null>(null);
   const [toolsOpen, setToolsOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const active = useActiveGame("alchimie");
   const [actionSync, setActionSync] = useState<ActionSync | null>(null);
   const actionOwner = useMemo(() => createGameActionOwner(active), [active]);
   useLayoutEffect(() => {
