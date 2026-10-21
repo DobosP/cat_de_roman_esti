@@ -4,7 +4,7 @@ Last reviewed: 2026-10-18 — guidance/source only; actual qualification and acc
 
 ## Native serving gates
 
-Go 1.27.1 serves the arcade/accounts/content; current GUI source uses Preact11/preact-iso (ADR-0202/0204). Selected Node26.10.0/npm12.2.0, native TS7/Oxlint/tsgolint and SDK AST checks follow [ADR-0184](adr/0184-native-spa-toolchain-and-managed-output.md).
+Go serves the arcade/accounts/content (release builders 1.27.3, kit-core gate runner 1.27.1: [ADR-0208](adr/0208-go-1-27-3-security-release-builders.md)); current GUI source uses Preact11/preact-iso (ADR-0202/0204). Selected Node26.10.0/npm12.2.0, native TS7/Oxlint/tsgolint and SDK AST checks follow [ADR-0184](adr/0184-native-spa-toolchain-and-managed-output.md).
 [ADR-0162](adr/0162-select-go-production-backend.md) and [ADR-0163](adr/0163-complete-native-go-accounts.md)
 record serving boundaries; [ADR-0166](adr/0166-native-content-operators-and-builder-rails.md)
 records native operator/review rails. Python below is an optional reference ([ADR-0186](adr/0186-go-authoritative-content-validation.md)).

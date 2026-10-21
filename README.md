@@ -31,7 +31,7 @@ The name is a pun on *"cât de român ești"* — "how Romanian are you".
 
 ## Stack
 
-- **Go 1.27.1** serves the six games, exploration, site/API routes, optional PostgreSQL
+- **Go** (release builds 1.27.3, [ADR-0208](docs/adr/0208-go-1-27-3-security-release-builders.md)) serves the six games, exploration, site/API routes, optional PostgreSQL
   accounts and private pending proposals ([ADR-0162](docs/adr/0162-select-go-production-backend.md),
   [ADR-0163](docs/adr/0163-complete-native-go-accounts.md)). Accounts/proposals remain off publicly.
 - Native content export/validators/review builders, REST operators, the original terminal
@@ -52,7 +52,7 @@ The name is a pun on *"cât de român ești"* — "how Romanian are you".
 ## Quick start (CLI)
 
 ```bash
-# Go 1.27.1 builds the original terminal game into workspace scratch.
+# Go 1.27.1 or later (releases: 1.27.3) builds the original terminal game into workspace scratch.
 ./cat-de-roman --offline
 ./cat-de-roman --offline --list
 

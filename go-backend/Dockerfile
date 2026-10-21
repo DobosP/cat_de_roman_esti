@@ -18,7 +18,7 @@ RUN cd frontend && npm run build
 # Owning sync verifies the actual manifest/assets and exact frozen original30.
 RUN node scripts/gui-assets.mjs sync
 
-FROM golang:1.27.1-bookworm@sha256:e114385c58e7280d2f56d6cf374219dda33fef8eb77f72e9f290ccae6160bd90 AS backend
+FROM golang:1.27.3-bookworm@sha256:fea12ba16096adec0f699ce1c4da2154d320450e56c1f63671f95d2a3551c77b AS backend
 ARG GATE_SHA
 ARG GATE_TREE_SHA256
 ENV GOTOOLCHAIN=local

@@ -89,7 +89,7 @@ offline fixture, matching the original terminal behavior. A healthy server's con
 availability or legal-provenance refusal remains a failure.
 
 The standalone integration entrypoint is `scripts/qualify_go_toolchain.sh`. After guarded integration of
-this separate alignment, its prechecks require exact Go 1.27.1 linux/amd64 and selected Node 26.10.0 per ADR-0184.
+this separate alignment, its prechecks require exact Go 1.27.3 linux/amd64 (ADR-0208) and selected Node 26.10.0 per ADR-0184.
 It retains `CDR_TOOLCHAIN_SCRATCH` under `~/work/_temp/`, an explicit disposable fixture in
 `CDR_NATIVE_TEST_DSN`, and a `PATH` containing native build/Git/shell utilities with Python/Rust absent.
 Its retained command sequence includes source/operator/builder checks,

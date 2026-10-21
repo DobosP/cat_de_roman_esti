@@ -844,12 +844,26 @@
       "apps": [
         "cat_de_roman_esti"
       ],
-      "version": "golang:1.27.1-bookworm",
-      "image": "golang:1.27.1-bookworm",
-      "digest": "sha256:e114385c58e7280d2f56d6cf374219dda33fef8eb77f72e9f290ccae6160bd90",
-      "date": "2026-10-08",
-      "source": "https://registry-1.docker.io/v2/library/golang/manifests/sha256:e114385c58e7280d2f56d6cf374219dda33fef8eb77f72e9f290ccae6160bd90",
-      "notes": "Actual public linux/amd64 manifest resolved in pinned native owner shell; index/body hashes retained. Digest identity only, not runtime/deploy compatibility qualification."
+      "version": "golang:1.27.3-bookworm",
+      "image": "golang:1.27.3-bookworm",
+      "digest": "sha256:fea12ba16096adec0f699ce1c4da2154d320450e56c1f63671f95d2a3551c77b",
+      "date": "2026-10-21",
+      "source": "https://registry-1.docker.io/v2/library/golang/manifests/sha256:fea12ba16096adec0f699ce1c4da2154d320450e56c1f63671f95d2a3551c77b",
+      "notes": "Go 1.27.3 security toolchain (ADR-0208). Public linux/amd64 manifest of the golang:1.27.3-bookworm index sha256:21ade014faf952365b9ecbd8dbdb87176fbacb82fac9fb132d9f2a7b8cc3f132, resolved 2026-10-21 with docker buildx imagetools inspect. Digest identity only, not runtime/deploy compatibility qualification."
+    },
+    {
+      "tool": "cat-golang-trixie",
+      "kind": "image",
+      "scope": "app",
+      "apps": [
+        "cat_de_roman_esti"
+      ],
+      "version": "golang:1.27.3-trixie",
+      "image": "golang:1.27.3-trixie",
+      "digest": "sha256:604106102d33b1084e37ca08adf98ac0813624ae8595bd0d7f3965ecebded09c",
+      "date": "2026-10-21",
+      "source": "https://hub.docker.com/v2/repositories/library/golang/tags/1.27.3-trixie",
+      "notes": "Canonical Dockerfile build stage (ADR-0208): the Go 1.27.3 security release, one patch above the kit core-v1.11 `golang` pin (1.27.1), which stays unchanged until a core tag moves it. OCI index digest resolved 2026-10-21 with docker buildx imagetools inspect, like the core entry."
     },
     {
       "tool": "cat-debian-bookworm",

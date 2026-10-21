@@ -1,7 +1,7 @@
 # ADR-0184: Native SPA tooling and managed-output prerequisites
 
 Date: 2026-10-08
-Status: accepted; actual normalized validation pending
+Status: accepted; actual normalized validation pending; release-builder Go version amended by ADR-0208
 Supersedes: ADR-0020 tooling/lint and generated-output clauses; bounded session/input and120KiB acceptance remain.
 
 ## Context
