@@ -34,8 +34,8 @@ your content changed its expectation, with no generator to refresh it, is report
 
 ## Environment, names and hazards
 
-- Go 1.27.1: `export PATH=/usr/local/go/bin:$PATH GOTOOLCHAIN=local`; `go version` must report
-  go1.27.1, otherwise BLOCKED. Python importer: `~/work/cat_de_roman_esti/.venv/bin/python`
+- Go 1.27.3: `export PATH=/usr/local/go/bin:$PATH GOTOOLCHAIN=local`; `go version` must report
+  go1.27.3, otherwise BLOCKED (go-backend requires it since the core-v1.13 KIT_BUMP, ADR-0209). Python importer: `~/work/cat_de_roman_esti/.venv/bin/python`
   with `PYTHONPATH=scripts:.` from the worktree; never `python -I`.
 - Wave V1.<N>, theme `<theme>` (say "wave", never "Source<K>"): branch `content/v1-<N>-<theme>`,
   created by `python3 ~/work/agent-ops/scripts/create_task_worktree.py --repo ~/work/cat_de_roman_esti
@@ -93,7 +93,7 @@ your content changed its expectation, with no generator to refresh it, is report
   Otherwise run research-only: steps 0–3, post the step-3 table and set `waiting: install disabled`
   instead of `waiting: review`. When the owner answers, merge main, redo step 0 (new wave_base) and
   start 4a only if install is now enabled. At 4i the rail check and `go test ./internal/contentrails/`
-  must be green outright; "no new red" never excuses them. Missing go1.27.1 is BLOCKED.
+  must be green outright; "no new red" never excuses them. Missing go1.27.3 is BLOCKED.
 
 ## Wave steps (one wave = one batch of 40–60 items; one install pays the cascade once)
 
@@ -369,7 +369,7 @@ only because your content changed its expectation, with no generator, is `NEEDS-
 wave stays unlanded.
 
 ENVIRONMENT
-`export PATH=/usr/local/go/bin:$PATH GOTOOLCHAIN=local` (go1.27.1, otherwise BLOCKED). Python
+`export PATH=/usr/local/go/bin:$PATH GOTOOLCHAIN=local` (go1.27.3, otherwise BLOCKED). Python
 importer: ~/work/cat_de_roman_esti/.venv/bin/python with `PYTHONPATH=scripts:.` from the worktree.
 The shared checkout ~/work/cat_de_roman_esti stays clean on main; each wave works in its own
 worktree (branch `content/v1-<N>-<theme>`) made with ~/work/agent-ops/scripts/create_task_worktree.py.
