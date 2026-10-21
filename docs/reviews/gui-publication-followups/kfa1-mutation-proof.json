@@ -1,0 +1,206 @@
+{
+  "schema": 1,
+  "finding": "KFA-1 (docs/reviews/gui-main-publication/README.md)",
+  "scope": "Focused owning-wrapper shell; not unit/full acceptance. Mutations were applied only inside the gate mirror, rebuilt there and restored; none was committed or synced back.",
+  "operator": "agent:claude",
+  "command": "GATE_OPERATOR=agent:claude bash scripts/gate.sh shell --sha 20dab663247937ea1dec93f5c7870f729a8c4c19 --parallel 2 < kfa1-proof.stdin",
+  "wrapper_context": {
+    "target": "shell",
+    "sha": "20dab663247937ea1dec93f5c7870f729a8c4c19",
+    "tree_sha256": "72e0cb017295d0f8433652eaec2cf78f6069299f329e0da1e8d012f0f0b0faf3",
+    "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+    "invocation": "82d91f81-83b0-4458-a066-ab72e81046d8"
+  },
+  "script_sha256": "e772c9f13384c941adf1950f4d3a86b2a56e46dbb8ca2b721fd0f59f1d266b7c",
+  "server": "product run: .gate/build/cat-server from the passing build target; mutants: cat-server rebuilt from each mutated managed bundle",
+  "projects": [
+    "desktop",
+    "mobile"
+  ],
+  "restored_manifest_sha256": "89cff7213d31aab7e5fbb02d630a9f79b9918fb1af91a8907f7d630c683576e0",
+  "restored_equals_build": true,
+  "runs": [
+    {
+      "label": "head",
+      "mutation": null,
+      "source": null,
+      "exit": 0,
+      "report_sha256": "729a397f8d64a83ec82abedd7dce9778a73fd6aa9972b66f3a8c4b3df18f1614",
+      "cases": [
+        {
+          "project": "desktop",
+          "spec": "conexiuni-keyboard-clear.spec.mjs",
+          "status": "passed",
+          "line": null,
+          "detail": []
+        },
+        {
+          "project": "mobile",
+          "spec": "conexiuni-keyboard-clear.spec.mjs",
+          "status": "passed",
+          "line": null,
+          "detail": []
+        },
+        {
+          "project": "desktop",
+          "spec": "lant-live-region.spec.mjs",
+          "status": "passed",
+          "line": null,
+          "detail": []
+        },
+        {
+          "project": "mobile",
+          "spec": "lant-live-region.spec.mjs",
+          "status": "passed",
+          "line": null,
+          "detail": []
+        }
+      ]
+    },
+    {
+      "label": "no-escape",
+      "mutation": "} else if (e.key === \"Backspace\") {",
+      "source": "frontend/src/screens/Conexiuni.tsx",
+      "exit": 1,
+      "report_sha256": "6997b79cc657df246439d8bcb4776e9c4371e12c2335f6b46eaed06f5783b266",
+      "cases": [
+        {
+          "project": "desktop",
+          "spec": "conexiuni-keyboard-clear.spec.mjs",
+          "status": "failed",
+          "line": 29,
+          "detail": [
+            "Expected: 0",
+            "Received: 2"
+          ]
+        },
+        {
+          "project": "mobile",
+          "spec": "conexiuni-keyboard-clear.spec.mjs",
+          "status": "failed",
+          "line": 29,
+          "detail": [
+            "Expected: 0",
+            "Received: 2"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "no-backspace",
+      "mutation": "} else if (e.key === \"Escape\") {",
+      "source": "frontend/src/screens/Conexiuni.tsx",
+      "exit": 1,
+      "report_sha256": "f9579caef227145e061e8c4aebac7ffe182181c696dca0c78183af4a2c9d6552",
+      "cases": [
+        {
+          "project": "desktop",
+          "spec": "conexiuni-keyboard-clear.spec.mjs",
+          "status": "failed",
+          "line": 33,
+          "detail": [
+            "Expected: 0",
+            "Received: 2"
+          ]
+        },
+        {
+          "project": "mobile",
+          "spec": "conexiuni-keyboard-clear.spec.mjs",
+          "status": "failed",
+          "line": 33,
+          "detail": [
+            "Expected: 0",
+            "Received: 2"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "live-always-polite",
+      "mutation": "<div className=\"lant-current\" aria-live=\"polite\" aria-atomic=\"true\">",
+      "source": "frontend/src/screens/Lant.tsx",
+      "exit": 1,
+      "report_sha256": "b40ca562799d90eb71db783b5e8ee500f7bf4abe66bebf91b37e793ce320d063",
+      "cases": [
+        {
+          "project": "desktop",
+          "spec": "lant-live-region.spec.mjs",
+          "status": "failed",
+          "line": 36,
+          "detail": [
+            "Expected: \"off\"",
+            "Received: \"polite\""
+          ]
+        },
+        {
+          "project": "mobile",
+          "spec": "lant-live-region.spec.mjs",
+          "status": "failed",
+          "line": 36,
+          "detail": [
+            "Expected: \"off\"",
+            "Received: \"polite\""
+          ]
+        }
+      ]
+    },
+    {
+      "label": "live-always-off",
+      "mutation": "<div className=\"lant-current\" aria-live=\"off\" aria-atomic=\"true\">",
+      "source": "frontend/src/screens/Lant.tsx",
+      "exit": 1,
+      "report_sha256": "9ef2367a1acad0edb9f288f5976ed66379c819f5da998db4132b2c53b1ac43a1",
+      "cases": [
+        {
+          "project": "desktop",
+          "spec": "lant-live-region.spec.mjs",
+          "status": "failed",
+          "line": 15,
+          "detail": [
+            "Expected: \"polite\"",
+            "Received: \"off\""
+          ]
+        },
+        {
+          "project": "mobile",
+          "spec": "lant-live-region.spec.mjs",
+          "status": "failed",
+          "line": 15,
+          "detail": [
+            "Expected: \"polite\"",
+            "Received: \"off\""
+          ]
+        }
+      ]
+    },
+    {
+      "label": "no-atomic",
+      "mutation": "<div className=\"lant-current\" aria-live={won ? \"off\" : \"polite\"}>",
+      "source": "frontend/src/screens/Lant.tsx",
+      "exit": 1,
+      "report_sha256": "4095d2f0f463c97dafd5c7570ad9eb3b457137609c2267ea9cc84c5fccd96fd9",
+      "cases": [
+        {
+          "project": "desktop",
+          "spec": "lant-live-region.spec.mjs",
+          "status": "failed",
+          "line": 16,
+          "detail": [
+            "Expected: \"true\"",
+            "Received: \"\""
+          ]
+        },
+        {
+          "project": "mobile",
+          "spec": "lant-live-region.spec.mjs",
+          "status": "failed",
+          "line": 16,
+          "detail": [
+            "Expected: \"true\"",
+            "Received: \"\""
+          ]
+        }
+      ]
+    }
+  ]
+}

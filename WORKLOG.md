@@ -2408,3 +2408,22 @@ Valid until: the next change to `main` — then treat as history.
   the same day. Toolchain bump, requalification and redeploy are owner work; nothing was deployed.
 - Follow-ups: KFA-1 e2e for Conexiuni Esc/Backspace and the Lanț live region; EQ-1/EQ-2 docs
   accuracy; DCR-1 fail-fast before production CSP enforcement; DCR-2 production CSP stage (owner).
+
+## 2026-10-21 — Main publication review follow-ups (KFA-1, EQ-1/EQ-2, DCR-1)
+
+Valid until: the next change to `main` — then treat as history.
+
+- Branch `fix/gui-publication-followups` from `main` 1fbaad12; operator agent:claude; product 20dab663 (e2e cbe86017 + fail-fast 20dab663).
+  [Record](docs/reviews/gui-publication-followups/README.md).
+- KFA-1: `conexiuni-keyboard-clear.spec.mjs` and `lant-live-region.spec.mjs` (desktop+mobile;
+  inventory 933→937). Focused shell: 4/4 pass on the built product; each of five temporary
+  source mutants inside the gate mirror (no Escape, no Backspace, live region always polite,
+  always off, no aria-atomic) fails its spec; the restored bundle's manifest equals the build's.
+- DCR-1 ([ADR-0207](docs/adr/0207-fail-fast-on-unavailable-managed-ui.md)): cat-server exits before
+  serving when the managed UI cannot be admitted; `-replay` exempt. New cmd/cat-server tests fail on
+  the unfixed binary (`/healthz` answered while `GET /` = 503) and pass with the fix.
+- EQ-1: one compressor (toolchain Node26.10.0 zlib) — original 16,046/16,093 and actual 16,043/16,138
+  at gzip level 9/6; like-for-like headroom 3 B (level 9), not 50 B. ADR-0205 erratum; no limit changed.
+- EQ-2: `historical-test-replacements.json` erratum + corrected rows; execplan rows; the hash-bound
+  `corrected-retirement-mapping.json` stays byte-identical and is superseded for those two rows.
+- Gates: build 11/11; unit 27/27 (18.7 min); full 37/37 (15.2 min; 937 browser, 9 PNG, axe, PG, parity 1206, legacy owner, cleanup verified; same-SHA unit reuse). Independent reviewer PASS-WITH-NOTES, notes applied. `tools/gui-baseline-quality` installed in the fresh mirror from its lock before the full.

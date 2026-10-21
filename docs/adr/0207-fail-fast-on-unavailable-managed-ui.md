@@ -27,8 +27,11 @@ unchanged.
 ## Consequences
 
 A bad `CAT_UI`/`CAT_CSP_ENFORCE` or a broken embedded tree is now a crash loop at deploy time, not a
-healthy-looking outage. Every active serving path (the owning gate build, `./run.sh`, the canonical
-Dockerfile) syncs the managed assets before compiling, so none of them changes. Pre-existing: the
+healthy-looking outage. The owning gate `build`/`unit`/`full` lanes, `./run.sh` (it serves the gate
+build's binary) and the canonical Dockerfile sync the managed assets before compiling, so none of them
+changes. The gate's `baseline` and plain `gen` lanes compile against whatever `embedfs/` already holds
+(each gate start resets `embedfs/legacy` to its scaffold), so a current build there already failed
+admission and served 503 pages; it now stops at server start. Pre-existing: the
 manual `native-go-browser` CI job and the unqualified `scripts/qualify_go_toolchain.sh` serve a
 binary compiled before any asset sync; their page journeys could not pass before this change (every
 page was 503) and now fail at server start instead. Tests: `go-backend/cmd/cat-server/managed_ui_test.go`

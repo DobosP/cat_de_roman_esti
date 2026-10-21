@@ -79,3 +79,23 @@ image IDs differ;the actual /app payload is byte-identical,with matching source
 and tree labels. [Qualification](../reviews/gui-m4/qualification.json) retains
 commands,raw hashes,cleanup,image custody and independent acceptance. App-main
 push,production and real-account/child activation remain the owner's.
+
+## Erratum — 2026-10-21 (EQ-1, main publication review)
+
+The CSS comparisons above mix compressors. The ceiling16,093 is the original baseline's
+default-level (level6) gzip total of its eight sheets (`scripts/gui-baseline.mjs`,
+`baselines/cat/capture.json`); the SDK report and the consumer all-actual total measure the
+delivered canonical level9 sidecars (`scripts/gui-route-budgets.mjs`). M3's20,669 is also
+level9. Re-measured with one compressor (pinned toolchain Node26.10.0 zlib; original bytes
+from the frozen legacy archive, actual bytes from the M4 clean-C assets and this branch's build):
+
+| Basis | Original | Actual | Headroom |
+|---|---:|---:|---:|
+| gzip level9 (the gate's basis) | 16,046 | 16,043 | 3 B |
+| gzip level6 (the ceiling's basis) | 16,093 | 16,138 | −45 B |
+
+"16,043/16,093, 50 bytes headroom" is a cross-compressor margin. Like-for-like, actual CSS is
+3 B under the original at level9 and 45 B over it at level6. The gate keeps its level9 actual
+measurement and the 16,093 ceiling: no limit, baseline or assertion changes, and its verdict
+stands. A headroom claim states its compressor. Measurement:
+[record](../reviews/gui-publication-followups/README.md).

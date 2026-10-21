@@ -1,0 +1,123 @@
+set -euo pipefail
+# KFA-1 focused proof (shell, not canonical acceptance): run the two new specs on the
+# built HEAD, then rebuild with one temporary source mutation at a time inside this
+# gate mirror and require the matching spec to FAIL. Sources are restored and the
+# HEAD bundle is rebuilt and verified before exit. Nothing is committed or synced back.
+[ "$PWD" = /work ]
+out=/work/.gate/shell/kfa1-proof
+mkdir -p "$out"
+cp .gate/wrapper-current.json "$out/context.json"
+echo "check: build binaries"; [ -x .gate/build/cat-server ] && [ -x .gate/build/cat-browser-plan ]
+# The gate's source rsync resets embedfs/legacy to its .keep scaffold (only dist is
+# rsync-protected); rebuild the frozen tree exactly as gui-assets sync does.
+archive=$(python3 -I -c 'import json; print(json.load(open("legacy/original-bundle.json"))["archive"])')
+[ "$(sha256sum "$archive" | cut -d' ' -f1)" = 742bb11130fa2bf52ba5c64cb9cfd452f7d8ac3a4fd9dc6d77e8064a6b8fef65 ]
+find go-backend/embedfs/legacy -mindepth 1 -exec rm -rf {} +
+tar -xzf "$archive" -C go-backend/embedfs/legacy
+[ "$(find go-backend/embedfs/legacy -type f | wc -l)" = 30 ]
+echo "check: managed trees"; [ -f go-backend/embedfs/dist/.vite/manifest.json ] && [ -f go-backend/embedfs/legacy/.vite/manifest.json ]
+head_manifest=$(sha256sum go-backend/embedfs/dist/.vite/manifest.json | cut -d' ' -f1)
+printf '%s\n' "$head_manifest" > "$out/head-manifest.sha256"
+export CDR_BROWSER_PLAN_BINARY=/work/.gate/build/cat-browser-plan
+specs="e2e/conexiuni-keyboard-clear.spec.mjs e2e/lant-live-region.spec.mjs"
+
+pw() { # label binary spec... ; records exit code and JSON report
+  label=$1; binary=$2; shift 2
+  rc=0
+  (cd /work/frontend && CDR_NATIVE_BINARY="$binary" CDR_E2E_OUTPUT_DIR="$out/$label/test-results" \
+    timeout 600s node node_modules/@playwright/test/cli.js test "$@" --config playwright.config.mjs \
+    --project desktop --project mobile --reporter json > "$out/$label/playwright.json" 2> "$out/$label/playwright.stderr.log") || rc=$?
+  printf '%s\n' "$rc" > "$out/$label/exit"
+  python3 -I - "$out/$label/playwright.json" "$label" "$rc" <<'REPORT'
+import json,sys
+p,label,rc=sys.argv[1:]
+r=json.load(open(p))
+rows=[]
+def visit(s):
+    for spec in s.get('specs',[]):
+        for t in spec.get('tests',[]):
+            res=t['results'][-1] if t['results'] else {}
+            err=(res.get('error') or {}).get('message','')
+            rows.append({'project':t['projectName'],'title':spec['title'],'status':res.get('status'),'error':err.splitlines()[0:3]})
+    for c in s.get('suites',[]): visit(c)
+for s in r.get('suites',[]): visit(s)
+print(json.dumps({'label':label,'exit':int(rc),'stats':r.get('stats'),'cases':rows}, ensure_ascii=False))
+REPORT
+}
+
+rebuild() { # label ; frontend build -> embedfs/dist copy -> scratch cat-server
+  label=$1
+  mkdir -p "$out/$label"
+  (cd /work/frontend && npm run build) > "$out/$label/frontend-build.log" 2>&1
+  find go-backend/embedfs/dist -mindepth 1 ! -name .keep -exec rm -rf {} +
+  cp -a frontend/dist/. go-backend/embedfs/dist/
+  go -C /work/go-backend build -o "$out/$label/cat-server" ./cmd/cat-server > "$out/$label/server-build.log" 2>&1
+  sha256sum go-backend/embedfs/dist/.vite/manifest.json | cut -d' ' -f1 > "$out/$label/manifest.sha256"
+}
+
+mutate() { # label file python-old python-new
+  label=$1; file=$2; old=$3; new=$4
+  mkdir -p "$out/$label"
+  cp "$file" "$out/$label/original.tsx"
+  python3 -I - "$file" "$old" "$new" <<'MUT'
+import sys
+p,old,new=sys.argv[1:]
+s=open(p,encoding='utf-8').read()
+assert s.count(old)==1, ('mutation anchor not unique', old)
+open(p,'w',encoding='utf-8').write(s.replace(old,new))
+MUT
+  diff -u "$out/$label/original.tsx" "$file" > "$out/$label/mutation.diff" || true
+}
+
+restore() { cp "$out/$1/original.tsx" "$2"; cmp "$out/$1/original.tsx" "$2"; }
+
+failed=0
+mkdir -p "$out/head"
+# EQ-1: one compressor for the original frozen CSS and this build's actual CSS.
+mkdir -p "$out/eq1/original"
+node --input-type=module - "$out/eq1" > "$out/eq1/measurement.json" <<'EQ1'
+import { gzipSync } from "node:zlib";
+import { readFileSync, readdirSync } from "node:fs";
+import { createHash } from "node:crypto";
+import { execFileSync } from "node:child_process";
+const out = process.argv[2];
+const proof = JSON.parse(readFileSync("/work/legacy/original-bundle.json"));
+execFileSync("tar", ["-xzf", `/work/${proof.archive}`, "-C", `${out}/original`, "--wildcards", "assets/*.css"]);
+const measure = (dir) => {
+  const rows = readdirSync(dir).filter((f) => f.endsWith(".css")).sort().map((file) => {
+    const data = readFileSync(`${dir}/${file}`);
+    return { file, bytes: data.length, sha256: createHash("sha256").update(data).digest("hex"),
+      gzip_level6: gzipSync(data, { level: 6 }).length, gzip_level9: gzipSync(data, { level: 9 }).length };
+  });
+  const total = (key) => rows.reduce((n, row) => n + row[key], 0);
+  return { rows, gzip_level6: total("gzip_level6"), gzip_level9: total("gzip_level9") };
+};
+console.log(JSON.stringify({ node: process.versions.node, zlib: process.versions.zlib, original_archive: proof.archive,
+  original: measure(`${out}/original/assets`), actual: measure("/work/go-backend/embedfs/dist/assets") }, null, 2));
+EQ1
+cat "$out/eq1/measurement.json" | python3 -I -c 'import json,sys; d=json.load(sys.stdin); print(json.dumps({k:{"l6":d[k]["gzip_level6"],"l9":d[k]["gzip_level9"]} for k in ("original","actual")}))'
+pw head /work/.gate/build/cat-server $specs
+[ "$(cat "$out/head/exit")" = 0 ] || failed=1
+
+C=frontend/src/screens/Conexiuni.tsx
+L=frontend/src/screens/Lant.tsx
+run_mutation() { # label file old new spec
+  mutate "$1" "$2" "$3" "$4"
+  rebuild "$1"
+  pw "$1" "$out/$1/cat-server" "$5"
+  restore "$1" "$2"
+  # A surviving mutant means the new test does not guard the behaviour.
+  [ "$(cat "$out/$1/exit")" != 0 ] || failed=1
+}
+run_mutation no-escape "$C" 'e.key === "Escape" || e.key === "Backspace"' 'e.key === "Backspace"' e2e/conexiuni-keyboard-clear.spec.mjs
+run_mutation no-backspace "$C" 'e.key === "Escape" || e.key === "Backspace"' 'e.key === "Escape"' e2e/conexiuni-keyboard-clear.spec.mjs
+run_mutation live-always-polite "$L" 'aria-live={won ? "off" : "polite"}' 'aria-live="polite"' e2e/lant-live-region.spec.mjs
+run_mutation live-always-off "$L" 'aria-live={won ? "off" : "polite"}' 'aria-live="off"' e2e/lant-live-region.spec.mjs
+run_mutation no-atomic "$L" ' aria-atomic="true">' '>' e2e/lant-live-region.spec.mjs
+
+# Restore the HEAD bundle and prove it equals the gate build's manifest.
+rebuild restored
+[ "$(cat "$out/restored/manifest.sha256")" = "$head_manifest" ] || failed=1
+git -C /work status --porcelain > "$out/restored/git-status.txt" 2>&1 || true
+echo "failed=$failed"
+exit "$failed"

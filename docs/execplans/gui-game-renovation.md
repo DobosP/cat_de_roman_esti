@@ -107,6 +107,8 @@ M4 qualifies the original16,093-byte all-actual-CSS ceiling with16,043 bytes,
 including the protected import's newline-only21gzip-byte file. Canonical authored
 CSS,pinned browser contracts,full/image and independent acceptance pass. The
 M3 canonical20,669 and separate baseline default-gzip20,756 are historical.
+Erratum 2026-10-21 (EQ-1): 16,093 is level-6 original gzip and 16,043 is level-9 actual gzip;
+like-for-like headroom is 3 B at level 9 and −45 B at level 6 ([ADR-0205](../adr/0205-canonical-game-css-and-browser-contracts.md)).
 
 
 ### M4 completion report — 2026-10-19
@@ -148,10 +150,11 @@ embedded Home in its entry; current figures use actual shipping sidecars.
 | /clasament | 118689 | 24870 | -93819 | 40960 |
 | /alchimie?mode=challenges | 138596 | 40714 | -97882 | 40960 |
 | /alchimie?mode=explore | 138596 | 39154 | -99442 | 40960 |
-| All actual CSS | 16093 | 16043 | -50 | 16093 |
+| All actual CSS (mixed: original level-6, actual level-9; see erratum) | 16093 | 16043 | -50 | 16093 |
 
 Home additionally meets the30,720-byte target. Current CSS is4,626bytes smaller
-than accepted M3;50bytes of CSS and246bytes of Challenge JS headroom remain.
+than accepted M3;246bytes of Challenge JS headroom remain. CSS headroom is3 B at level 9
+(original16,046), not50 B: the50 B compares level-6 with level-9 gzip (EQ-1 erratum above).
 Future growth must pass those same positive ceilings. All8other non-Home/non-
 Ranking routes retain unmet30,720aspirations visibly;the40,960ceiling passes.
 
@@ -215,7 +218,8 @@ from historical request text. No app-specific motion/security shim remains.
 | REQ-11 | resolved producer core-v1.11 and accepted consumer M3 source9c44 | none |
 
 M3/M4 delete no test file or case. M4 replaces only2null/recorded CSS
-expectations with stronger positive16,093/pass expectations and adds controls.
+expectations with positive16,093/pass expectations and adds controls (ceiling basis: level-6
+original gzip; gate basis: level-9 actual, EQ-1).
 Historical S1 retirement totals21unique source-test files plus6mixed-file UI
 blocks;three temporary typed guards were later retired only after real typed
 proof. C40original900browser/sealed16/78 passed;the ddbc typed proof was inside
@@ -235,8 +239,8 @@ exercise the replacements. Complete exact source references are retained in
 | `cald-rece-recovery.test.mjs` | `contexto-action-recovery.spec.mjs`, `gui-m0-contexto-lifecycle-parity.spec.mjs`, `gui-m0-contexto-parity.spec.mjs`, `api-consumer2`, `extended-native7-consumer` |
 | `v42-caldrece-legend-confirm.test.mjs` | `gui-m0-contexto-parity.spec.mjs`, `contexto-simpler-ui.spec.mjs`, `api-consumer2` |
 | `conexiuni-one-away.test.mjs` | `conexiuni-action-recovery.spec.mjs`, `gui-m0-conexiuni-parity.spec.mjs`, `conexiuni-coach-layout.spec.mjs`, `conexiuni-simpler-ui.spec.mjs`, `selection-key3` |
-| `persistent-game-navigation.test.mjs` | `lifecycle.spec.mjs`, `conexiuni-action-recovery.spec.mjs`, `conexiuni-coach-layout.spec.mjs`, `conexiuni-simpler-ui.spec.mjs`, `game-touch-targets.spec.mjs` |
-| `lant-recovery-feedback.test.mjs` | `lant-action-recovery.spec.mjs`, `lant-current-position.spec.mjs`, `lant-relationship-captions.spec.mjs`, `lant-simpler-ui.spec.mjs`, `gui-m0-lant-parity.spec.mjs`, `api-consumer2`, `native-whole-http1207` |
+| `persistent-game-navigation.test.mjs` | `lifecycle.spec.mjs`, `conexiuni-action-recovery.spec.mjs`, `conexiuni-coach-layout.spec.mjs`, `conexiuni-simpler-ui.spec.mjs`, `game-touch-targets.spec.mjs`; Escape/Backspace clear only since KFA-1: `conexiuni-keyboard-clear.spec.mjs` |
+| `lant-recovery-feedback.test.mjs` | `lant-action-recovery.spec.mjs`, `lant-current-position.spec.mjs`, `lant-relationship-captions.spec.mjs`, `lant-simpler-ui.spec.mjs`, `gui-m0-lant-parity.spec.mjs`, `api-consumer2`, `native-whole-http1207`; `.lant-current` live region only since KFA-1: `lant-live-region.spec.mjs` |
 | `v37-pilot-lobby.test.mjs` | `gui-m0-replacement-parity.spec.mjs`, `gui-m0-home-parity.spec.mjs` |
 | `v38-six-game-ui.test.mjs` | `gui-m0-replacement-parity.spec.mjs`, `gui-m0-home-parity.spec.mjs`, `gui-replacement-contracts.spec.mjs`, `game-touch-targets.spec.mjs`, `quick-games-simpler-ui.spec.mjs`, `sealed16-78` |
 | `v39-verified-ranking.test.mjs` | `gui-replacement-contracts.spec.mjs`, `gui-m0-replacement-parity.spec.mjs`, `gui-m0-account-copy-parity.spec.mjs`, `native-whole-http1207`, `preserved-score-receipts`, `extended-native7-consumer` |

@@ -1,0 +1,108 @@
+{
+  "schema": 1,
+  "finding": "EQ-1 (docs/reviews/gui-main-publication/README.md)",
+  "measured": "2026-10-21",
+  "compressor": {
+    "runtime": "node 26.10.0",
+    "zlib": "1.3.2.1-motley-285e94b",
+    "api": "zlib.gzipSync(data,{level})",
+    "image": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9 (versions.lock.json toolchain_image, same image as baselines/cat/capture.json)"
+  },
+  "original": {
+    "source": "legacy/cat_de_roman_esti-legacy-93066854f67245d4b70c0ea97dc2401445a3218c.tgz (frozen original, archive sha256 742bb111…)",
+    "baseline_capture_total": 16093,
+    "baseline_capture_method": "scripts/gui-baseline.mjs gzipSync(data) default level (6)",
+    "files": [
+      {
+        "file": "Alchimie-DdrzYmQc.css",
+        "bytes": 15358,
+        "sha256": "eb7b9a5d9a166ece8084db2ce0a58238702b93a3dc02fe17c3b6f652a6eb8ca4",
+        "gzip_level6": 3474,
+        "gzip_level9": 3464
+      },
+      {
+        "file": "CaldRece-B885PE19.css",
+        "bytes": 1075,
+        "sha256": "b9713b5c0854630c4740d176340c7feae25cc55564bbffff06a1adcfe930679d",
+        "gzip_level6": 419,
+        "gzip_level9": 419
+      },
+      {
+        "file": "Conexiuni-DfW6SbKo.css",
+        "bytes": 3019,
+        "sha256": "0fb208850c976f0cb1f0abd4aaa12373599772e66c7cc64f5ffdb91c3d662e8d",
+        "gzip_level6": 825,
+        "gzip_level9": 823
+      },
+      {
+        "file": "GameOptions-CEWYWGsz.css",
+        "bytes": 1061,
+        "sha256": "cbe029df658db3187af13ffc55d388268d410c9483521d550222bc48d4240bbd",
+        "gzip_level6": 445,
+        "gzip_level9": 445
+      },
+      {
+        "file": "Intrusul-D_KdYx8Y.css",
+        "bytes": 1995,
+        "sha256": "67d3f0b9f8a148fae80dd9f624fd2ac5177258946092ed60755c5e635685fd2b",
+        "gzip_level6": 711,
+        "gzip_level9": 710
+      },
+      {
+        "file": "Lant-BHivICVC.css",
+        "bytes": 1188,
+        "sha256": "193f470c63ac529f7ee3670a36ddd4d5577ebcb3c9fef9595d6b5dd2bec235d1",
+        "gzip_level6": 543,
+        "gzip_level9": 543
+      },
+      {
+        "file": "Perechi-DUzfG4A6.css",
+        "bytes": 2809,
+        "sha256": "c71b5a78f5d94461029283f03515abf7bce1b898489f087b6d0b6d318d96e0d6",
+        "gzip_level6": 906,
+        "gzip_level9": 903
+      },
+      {
+        "file": "index-D9HNWgEs.css",
+        "bytes": 39521,
+        "sha256": "69fdcc4d03965c06d8d2fe53adcbcfcb6ff75cb0c2b64a013e5ec05d6c3988c2",
+        "gzip_level6": 8770,
+        "gzip_level9": 8739
+      }
+    ],
+    "gzip_level6": 16093,
+    "gzip_level9": 16046
+  },
+  "actual": {
+    "sources": [
+      "M4 clean-C assets a947688 (docs/reviews/gui-m4/measurement.json asset_evidence)",
+      "this branch's gate build 20dab663 (go-backend/embedfs/dist, manifest sha256 89cff7213d31aab7e5fbb02d630a9f79b9918fb1af91a8907f7d630c683576e0 = M4 measurement manifest)"
+    ],
+    "gate_method": "scripts/gui-route-budgets.mjs canonical level-9 sidecars",
+    "files": [
+      {
+        "file": "csp-elements-x1XGuNl0.css",
+        "bytes": 1,
+        "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "gzip_level6": 21,
+        "gzip_level9": 21
+      },
+      {
+        "file": "startup-BoM62cgV.css",
+        "bytes": 85650,
+        "sha256": "b86ae327d2a65cdef87952438c068e2202e7454a4a0a70fd2d8e27b0038c180d",
+        "gzip_level6": 16117,
+        "gzip_level9": 16022
+      }
+    ],
+    "gzip_level6": 16138,
+    "gzip_level9": 16043,
+    "delivered_level9_sidecars_verified": true
+  },
+  "headroom": {
+    "level9": 3,
+    "level6": -45,
+    "recorded_cross_compressor": 50
+  },
+  "limits_changed": false
+}

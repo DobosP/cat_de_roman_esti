@@ -3,13 +3,21 @@
   "scope": "Compact source facts for S1 final report;not new execution or M4 acceptance",
   "qualified_source_M3": "9c44d01ff476637bd1749b51f632312524d6f7ff",
   "current_unaccepted_M4_D": "271f5aacc0066ea4d9532c16a47c4c559176c1ca",
+  "erratum_2026_10_21": {
+    "source": "docs/reviews/gui-main-publication/README.md KFA-1/EQ-1/EQ-2; corrections on fix/gui-publication-followups",
+    "M4_status": "D 271f5aac was not the final M4 source. Final accepted M4 is 1673389147a3ba432742008d55d28edb84d94af2 (ADR-0205); main fb829aaa published under ADR-0206.",
+    "overstated_rows": "persistent-game-navigation.test.mjs and lant-recovery-feedback.test.mjs: none of their listed browser files asserted the Conexiuni Escape/Backspace selection clear (Conexiuni.tsx keydown handler) or the Lanț .lant-current aria-live/aria-atomic contract (Lant.tsx). Both rows now also name the KFA-1 specs that do; each failed under temporary source mutations of exactly that behaviour.",
+    "bound_mapping": "docs/reviews/gui-normalized-react/corrected-retirement-mapping.json carries the same two overstated rows but stays byte-identical: its SHA-256 eebdd05b is bound by final-retirement-mapping.json and corrected-retirement-source-review.json. This erratum supersedes those two rows.",
+    "css_basis": "The 16093 ceiling is the original level-6 gzip total; the consumer gate measures actual level-9 sidecars. Like-for-like headroom is 3 B at level 9 (16046 vs 16043) and -45 B at level 6 (16093 vs 16138). The ceiling and gate are unchanged (ADR-0205 erratum).",
+    "scope": "Only the two review-identified rows were re-verified; other rows are unchanged and were not re-audited here."
+  },
   "report_requirement": ".agent/S1.md:707-727 requires per-deleted/replaced-test and CORE_REQUESTS tables",
   "test_accounting": {
     "wholeS1_unique_whole_test_files_retired": 21,
     "wholeS1_mixed_files_trimmed": 6,
     "remaining_temporary_typed_guards": 0,
     "correction": "Historical six-old-assertion progress notes do not mean six deleted files. Git7b9803f4 deleted21 unique files;2610de7f restored3 typed guards;d83cdbbf finally retired those same3 after actual compiled proof. Six mixed files kept executable module blocks.",
-    "M3_M4": "No frontend test/e2e file deletions from accepted core-v1.10 f8c00f80 through finalD. M4 replaces exactly2CSS null/recorded expectations with stronger16093/pass expectations and adds controls/browser cases. Original test inventory and every other assertion retained.",
+    "M3_M4": "No frontend test/e2e file deletions from accepted core-v1.10 f8c00f80 through finalD. M4 replaces exactly2CSS null/recorded expectations with positive16093/pass expectations (ceiling is level-6 original gzip; gate measures actual level-9: see erratum_2026_10_21.css_basis) and adds controls/browser cases. Original test inventory and every other assertion retained.",
     "basis_refs": [
       "docs/reviews/gui-normalized-react/corrected-retirement-mapping.json",
       "docs/reviews/gui-normalized-react/final-retirement-mapping.json",
@@ -44,8 +52,8 @@
     {"test": "cald-rece-recovery.test.mjs", "disposition": "whole-file-retired-after-typed-proof-d83cdbbf", "browser": ["contexto-action-recovery.spec.mjs", "gui-m0-contexto-lifecycle-parity.spec.mjs", "gui-m0-contexto-parity.spec.mjs"], "other": ["api-consumer2", "extended-native7-consumer"]},
     {"test": "v42-caldrece-legend-confirm.test.mjs", "disposition": "whole-file-retired-7b9803f4", "browser": ["gui-m0-contexto-parity.spec.mjs", "contexto-simpler-ui.spec.mjs"], "other": ["api-consumer2"]},
     {"test": "conexiuni-one-away.test.mjs", "disposition": "whole-file-retired-7b9803f4", "browser": ["conexiuni-action-recovery.spec.mjs", "gui-m0-conexiuni-parity.spec.mjs", "conexiuni-coach-layout.spec.mjs", "conexiuni-simpler-ui.spec.mjs"], "other": ["selection-key3"]},
-    {"test": "persistent-game-navigation.test.mjs", "disposition": "whole-file-retired-7b9803f4", "browser": ["lifecycle.spec.mjs", "conexiuni-action-recovery.spec.mjs", "conexiuni-coach-layout.spec.mjs", "conexiuni-simpler-ui.spec.mjs", "game-touch-targets.spec.mjs"], "other": []},
-    {"test": "lant-recovery-feedback.test.mjs", "disposition": "whole-file-retired-7b9803f4", "browser": ["lant-action-recovery.spec.mjs", "lant-current-position.spec.mjs", "lant-relationship-captions.spec.mjs", "lant-simpler-ui.spec.mjs", "gui-m0-lant-parity.spec.mjs"], "other": ["api-consumer2", "native-whole-http1207"]},
+    {"test": "persistent-game-navigation.test.mjs", "disposition": "whole-file-retired-7b9803f4", "browser": ["lifecycle.spec.mjs", "conexiuni-action-recovery.spec.mjs", "conexiuni-coach-layout.spec.mjs", "conexiuni-simpler-ui.spec.mjs", "game-touch-targets.spec.mjs", "conexiuni-keyboard-clear.spec.mjs"], "other": [], "correction": "KFA-1 2026-10-21: only conexiuni-keyboard-clear.spec.mjs asserts the Escape/Backspace clear"},
+    {"test": "lant-recovery-feedback.test.mjs", "disposition": "whole-file-retired-7b9803f4", "browser": ["lant-action-recovery.spec.mjs", "lant-current-position.spec.mjs", "lant-relationship-captions.spec.mjs", "lant-simpler-ui.spec.mjs", "gui-m0-lant-parity.spec.mjs", "lant-live-region.spec.mjs"], "other": ["api-consumer2", "native-whole-http1207"], "correction": "KFA-1 2026-10-21: only lant-live-region.spec.mjs asserts the .lant-current aria-live polite/off and aria-atomic contract"},
     {"test": "v37-pilot-lobby.test.mjs", "disposition": "whole-file-retired-7b9803f4", "browser": ["gui-m0-replacement-parity.spec.mjs", "gui-m0-home-parity.spec.mjs"], "other": []},
     {"test": "v38-six-game-ui.test.mjs", "disposition": "whole-file-retired-7b9803f4", "browser": ["gui-m0-replacement-parity.spec.mjs", "gui-m0-home-parity.spec.mjs", "gui-replacement-contracts.spec.mjs", "game-touch-targets.spec.mjs", "quick-games-simpler-ui.spec.mjs"], "other": ["sealed16-78"]},
     {"test": "v39-verified-ranking.test.mjs", "disposition": "whole-file-retired-after-typed-proof-d83cdbbf", "browser": ["gui-replacement-contracts.spec.mjs", "gui-m0-replacement-parity.spec.mjs", "gui-m0-account-copy-parity.spec.mjs"], "other": ["native-whole-http1207", "preserved-score-receipts", "extended-native7-consumer"]},

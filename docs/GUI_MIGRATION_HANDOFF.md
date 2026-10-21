@@ -10,7 +10,8 @@ and landed locally after unit27/full38/image2. M3 source9c44 remains accepted.
 All933browser cases/9byte-exact PNGs/Axe/Home/vitals/CSP0,freshPG12/301,current
 V1.13 parity1206,actuallegacy and owned cleanup pass. Every current route and
 both Alchimie modes use Preact11/core-v1.11 through managed Go assets. CSS16,043
-passes the original16,093 cap;all10JS ceilings and Home target pass.
+(level-9 gzip) passes the original16,093 cap (level-6 gzip); like-for-like headroom is 3 B
+at level 9 ([ADR-0205 erratum](adr/0205-canonical-game-css-and-browser-contracts.md));all10JS ceilings and Home target pass.
 [Qualification](reviews/gui-m4/qualification.json),
 [independent acceptance](reviews/gui-m4/independent-acceptance.json),
 [completion report](execplans/gui-game-renovation.md).
