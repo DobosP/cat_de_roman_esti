@@ -559,14 +559,14 @@
       "tool": "go",
       "kind": "runtime",
       "scope": "core",
-      "version": "1.27.1",
-      "released": "2026-09-01",
+      "version": "1.27.3",
+      "released": "2026-10-19",
       "source": "https://go.dev/dl/?mode=json",
-      "date": "2026-10-06",
+      "date": "2026-10-21",
       "build_arg": "GO_VERSION",
       "rebuild": "toolchain",
-      "sha256_linux_amd64": "63d339f0da5ab53635a56f2490a7984dfe12dfcff22ad749f63edaf590168445",
-      "sha256_source": "https://go.dev/dl/?mode=json (go1.27.1.linux-amd64.tar.gz)",
+      "sha256_linux_amd64": "65efbc80fdc1fa2cd2631cad5b481777a68e8725f34e89f50fc6ac714e379b40",
+      "sha256_source": "https://go.dev/dl/?mode=json (go1.27.3.linux-amd64.tar.gz)",
       "notes": "versions:check asserts `go version` inside the runner",
       "build_arg_sha256": "GO_SHA256"
     },
@@ -619,10 +619,10 @@
       "tool": "golang",
       "kind": "image",
       "scope": "core",
-      "version": "golang:1.27.1-trixie",
-      "source": "https://hub.docker.com/v2/repositories/library/golang/tags/1.27.1-trixie",
-      "date": "2026-10-06",
-      "digest": "sha256:8f58fd67ea075142d947a60e0caa4317746a55118d312f027793d382c7741734",
+      "version": "golang:1.27.3-trixie",
+      "source": "https://hub.docker.com/v2/repositories/library/golang/tags/1.27.3-trixie",
+      "date": "2026-10-21",
+      "digest": "sha256:604106102d33b1084e37ca08adf98ac0813624ae8595bd0d7f3965ecebded09c",
       "notes": "app Dockerfile build stage; FROM <version>@<digest>"
     },
     {
@@ -735,10 +735,10 @@
       "tool": "golang.org/x/net",
       "kind": "gomod",
       "scope": "core",
-      "version": "v0.59.0",
-      "released": "2026-09-08",
-      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.59.0.info",
-      "date": "2026-10-06"
+      "version": "v0.60.0",
+      "released": "2026-10-08",
+      "source": "https://proxy.golang.org/golang.org/x/net/@v/v0.60.0.info",
+      "date": "2026-10-21"
     },
     {
       "tool": "github.com/jackc/pgx/v5",
@@ -852,20 +852,6 @@
       "notes": "Go 1.27.3 security toolchain (ADR-0208). Public linux/amd64 manifest of the golang:1.27.3-bookworm index sha256:21ade014faf952365b9ecbd8dbdb87176fbacb82fac9fb132d9f2a7b8cc3f132, resolved 2026-10-21 with docker buildx imagetools inspect. Digest identity only, not runtime/deploy compatibility qualification."
     },
     {
-      "tool": "cat-golang-trixie",
-      "kind": "image",
-      "scope": "app",
-      "apps": [
-        "cat_de_roman_esti"
-      ],
-      "version": "golang:1.27.3-trixie",
-      "image": "golang:1.27.3-trixie",
-      "digest": "sha256:604106102d33b1084e37ca08adf98ac0813624ae8595bd0d7f3965ecebded09c",
-      "date": "2026-10-21",
-      "source": "https://hub.docker.com/v2/repositories/library/golang/tags/1.27.3-trixie",
-      "notes": "Canonical Dockerfile build stage (ADR-0208): the Go 1.27.3 security release, one patch above the kit core-v1.11 `golang` pin (1.27.1), which stays unchanged until a core tag moves it. OCI index digest resolved 2026-10-21 with docker buildx imagetools inspect, like the core entry."
-    },
-    {
       "tool": "cat-debian-bookworm",
       "kind": "image",
       "scope": "app",
@@ -927,7 +913,7 @@
     "tool": "roedu-toolchain",
     "kind": "image",
     "scope": "core",
-    "version": "roedu-toolchain:core-v1.0-linux-20261006",
+    "version": "roedu-toolchain:core-v1.13-go1.27.3-20261021",
     "source": "bootstrap/Dockerfile.toolchain (later web-kit/templates/Dockerfile.toolchain)",
     "build_args": [
       "PLAYWRIGHT_IMAGE (tag@digest)",
@@ -943,11 +929,11 @@
       "PG_MAJOR"
     ],
     "build_args_rule": "`build_args` lists exactly the ARG names Dockerfile.toolchain declares, in file order, and every `build_arg` named by an entry above must appear in it. The wrapper's `toolchain` target passes only `--build-arg PG_MAJOR` (from .gate.env); every other ARG is taken from its Dockerfile default, so each default must equal its entry here (`version`, `sha256_linux_x64`, or `build_arg_value` for PLAYWRIGHT_IMAGE). Node and Go tarballs are checksum-verified against `sha256_linux_x64` / `sha256_linux_amd64` (build args NODE_SHA256 / GO_SHA256).",
-    "image_id": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
+    "image_id": "sha256:c84ff601865080c9915159220f136fcfb80218bb91240669d65d62ae654404d6",
     "image_id_note": "`image_id` is this entry's ONLY digest key (linux-prereqs.sh reads it; never add a `digest` field here). Its value is the LOCAL image ID printed by `docker image inspect -f '{{.Id}}' roedu-toolchain:core-v1.0`, and it must equal .gate.env `TOOLCHAIN_DIGEST` (the .gate.env key the wrapper compares with the local image ID); NOT a RepoDigest, buildx manifest or registry digest: recording any of those makes every gate refuse to run.",
     "rule": "Owner builds a new immutable toolchain tag using the capped native Linux builder, fills production PG and image ID only after review, then trust and real gate checks. Synthetic prep build is recorded separately and grants no approval.",
-    "dockerfile_sha256": "eb9ef4aec821103a6df389a0171202bc817bdbfe7556a68ed329b476394ead7d",
-    "build_provenance": "Approved PG16 image built by parent through reviewed wrapper and capped roedu-gates-linux builder; immutable local archive saved. Same reviewed Dockerfile bytes as bootstrap."
+    "dockerfile_sha256": "5e4c8c297913abc9a77c6668eb1bb86577cdcb955d80c1f6ebc4fb809b962910",
+    "build_provenance": "Owner gate toolchain built by GATE_OPERATOR=agent:claude-code (PROGRAM E8) through the reviewed wrapper toolchain target and capped roedu-gates-linux builder at e01e269145eab6961db21493510e3d4ede8027c9 (2026-10-21, same Dockerfile.toolchain bytes as core-v1.12); immutable archive roedu-toolchain_core-v1.13-go1.27.3-20261021.tar sha256 188f2bc2e79a47e53212dada7e3015efb5297a4852bcf2f543a768c647ac9429"
   },
   "not_resolved_2026_10_06": [
     "image digests other than playwright-image (Codex at S0a M0; reviewer re-resolves)",
@@ -972,5 +958,5 @@
     "source": "Paul explicitly acknowledged ACK 1–6 and PostgreSQL 16 in the GUI migration parent chat on 2026-10-06, then authorized end-to-end implementation, no further permission questions, parent review/landing and cleanup of completed managed work.",
     "authority": "direct human launch authorization, not physical/release evidence"
   },
-  "core_tag": "core-v1.11"
+  "core_tag": "core-v1.13"
 }

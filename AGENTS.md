@@ -6,7 +6,7 @@
   SPA (`frontend/`) over the bundled Romanian KG build; `cat_de_roman_esti/web/` is an offline oracle
   `cat_de_roman_esti/fixtures/kg_sample.json` (data.py:27); `./cat-de-roman` builds the native
   original terminal hop game. Word-game/session behavior stays bounded, deterministic, test-covered.
-- Main server: Go (`go-backend/`, release builders 1.27.3 per ADR-0208; kit-core runner 1.27.1), native pgx/shared auth; selected Node26 builds the SPA (ADR-0184).
+- Main server: Go (`go-backend/`, Go 1.27.3 for release builders and the core-v1.13 gate runner per ADR-0208/0209), native pgx/shared auth; selected Node26 builds the SPA (ADR-0184).
   Go builds content/operators/terminal/tools with pinned Unicode 15; Python/Rust remain optional
   independent references. Django web/accounts are offline oracles. ADR-0162/0163/0165/0166.
 - Status source: `docs/STATUS.md`.

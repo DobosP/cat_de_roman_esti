@@ -1,7 +1,7 @@
 # ADR-0208: Build releases with the Go 1.27.3 security toolchain
 
 Date: 2026-10-21
-Status: accepted (security fix under Paul's 2026-10-21 Cat main authorization, [ADR-0206](0206-owner-authorized-main-publication.md)); partial until a kit core tag moves `golang.org/x/net`
+Status: accepted (security fix under Paul's 2026-10-21 Cat main authorization, [ADR-0206](0206-owner-authorized-main-publication.md)); completed by [ADR-0209](0209-kit-bump-core-v1-13.md) (KIT_BUMP core-v1.13)
 Amends: [ADR-0184](0184-native-spa-toolchain-and-managed-output.md) Go version, for release builders only.
 
 ## Decision

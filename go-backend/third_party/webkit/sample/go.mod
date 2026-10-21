@@ -1,12 +1,12 @@
 module github.com/DobosP/roedu-ui/web-kit/sample
 
-go 1.27.1
+go 1.27.3
 
 require (
 	github.com/DobosP/roedu-ui/web-kit v0.0.0
 	github.com/a-h/templ v0.3.1070
 	github.com/jackc/pgx/v5 v5.11.0
-	golang.org/x/net v0.59.0
+	golang.org/x/net v0.60.0
 )
 
 require (

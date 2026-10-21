@@ -10,7 +10,7 @@ follow [ADR-0184](adr/0184-native-spa-toolchain-and-managed-output.md); the sepa
 CI follows accepted manual policy (ADR-0164); native gates default, references opt-in. Current gates are in [STATUS](STATUS.md).
 These local tools never add a public solution endpoint.
 
-From the repository root with Go 1.27.1:
+From the repository root with Go 1.27.3:
 
 ```bash
 go -C go-backend run ./cmd/cat-hop --root .. --offline --list

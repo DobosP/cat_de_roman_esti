@@ -185,3 +185,5 @@ Parallel lanes also allocated0188/0189 independently. All four full-filename bod
 - [0207](0207-fail-fast-on-unavailable-managed-ui.md) — cat-server exits at startup when the managed UI cannot be admitted (DCR-1); `-replay` and StaticRoot overrides are exempt.
 
 - [0208](0208-go-1-27-3-security-release-builders.md) — Go 1.27.3 security release builders (canonical/standalone Dockerfiles, CI, standalone qualification); kit core-v1.11 Go/x/net/runner pins and `go` lines stay until a core tag moves them.
+
+- [0209](0209-kit-bump-core-v1-13.md) — KIT_BUMP core-v1.13: go1.27.3 runtime/runner, golang:1.27.3-trixie, x/net v0.60.0; `cat-golang-trixie` retired; authcore `go` line unchanged (Social hash pin).

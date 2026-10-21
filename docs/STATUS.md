@@ -93,7 +93,7 @@ Unrevealed answers, recipe maps and routes stay private.
 
 ## Production and next work
 
-- **Security hold (2026-10-21), partially resolved in source:** main fb829aaa had 14 reachable go1.27.1 standard-library vulnerabilities (govulncheck v1.8.0). [ADR-0208](adr/0208-go-1-27-3-security-release-builders.md) builds releases/CI with go1.27.3: source and package scans of both modules find 0 affecting, and Trivy finds no stdlib/Debian issue (main product image: 5 HIGH). **Open:** one Trivy HIGH, `golang.org/x/net` v0.59.0 CVE-2026-78669 (fixed 0.60.0), a kit core-v1.11 pin that also keeps the go1.27.1 gate runner and `go` lines; it needs a core tag + KIT_BUMP. The deployed V1.0.1 image is still go1.27.1 (11 HIGH/CRITICAL); redeploy is Paul's decision.
+- **Security hold (2026-10-21), partially resolved in source:** main fb829aaa had 14 reachable go1.27.1 standard-library vulnerabilities (govulncheck v1.8.0). [ADR-0208](adr/0208-go-1-27-3-security-release-builders.md) builds releases/CI with go1.27.3. **In qualification:** the remaining Trivy HIGH (`golang.org/x/net` v0.59.0 CVE-2026-78669) and the go1.27.1 gate runner/`go` lines move with KIT_BUMP core-v1.13 ([ADR-0209](adr/0209-kit-bump-core-v1-13.md), [record](reviews/kit-bump-core-v113/README.md)). The deployed V1.0.1 image is still go1.27.1 (11 HIGH/CRITICAL); redeploy is Paul's decision.
 - Production: anonymous V1.0.1 **Go** `abe933779f04c46a32ff0194b5111e68086ba93f`, deployed
   2026-10-04 after all required [CI37208742166](https://github.com/DobosP/cat_de_roman_esti/actions/runs/37208742166) jobs passed.
   Native account/proposal code is shipped dormant; no Python serving runtime.

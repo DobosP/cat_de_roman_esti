@@ -15,6 +15,7 @@ Current2026-10-19: Cat S1 accepted locally at16733891;current dispositions below
 | REQ-9 | resolved core-v1.10 canonical layer statement | temporary layers.css removed |
 | REQ-10 | resolved core-v1.10 frozen CSP descriptor support;M3 all-current main routes | none;consumer classification is supported contract,not workaround |
 | REQ-11 | resolved producer core-v1.11 and accepted consumer M3 source9c44 | none |
+| REQ-12 | resolved core-v1.13 Go 1.27.3/x/net v0.60.0 security pins (core-v1.12 runner tag refused by kit:sync; ADR-0209) | `cat-golang-trixie` retired |
 
 ## Historical request snapshots
 

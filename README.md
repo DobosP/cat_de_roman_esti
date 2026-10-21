@@ -52,7 +52,7 @@ The name is a pun on *"cât de român ești"* — "how Romanian are you".
 ## Quick start (CLI)
 
 ```bash
-# Go 1.27.1 or later (releases: 1.27.3) builds the original terminal game into workspace scratch.
+# Go 1.27.3 or later builds the original terminal game into workspace scratch.
 ./cat-de-roman --offline
 ./cat-de-roman --offline --list
 
