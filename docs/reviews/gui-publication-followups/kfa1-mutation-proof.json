@@ -3,13 +3,13 @@
   "finding": "KFA-1 (docs/reviews/gui-main-publication/README.md)",
   "scope": "Focused owning-wrapper shell; not unit/full acceptance. Mutations were applied only inside the gate mirror, rebuilt there and restored; none was committed or synced back.",
   "operator": "agent:claude",
-  "command": "GATE_OPERATOR=agent:claude bash scripts/gate.sh shell --sha 20dab663247937ea1dec93f5c7870f729a8c4c19 --parallel 2 < kfa1-proof.stdin",
+  "command": "GATE_OPERATOR=agent:claude bash scripts/gate.sh shell --sha 9a33d380d971a8b5c64d854aea9a640bbcc57b12 --parallel 2 < kfa1-proof.stdin.txt",
   "wrapper_context": {
     "target": "shell",
-    "sha": "20dab663247937ea1dec93f5c7870f729a8c4c19",
-    "tree_sha256": "72e0cb017295d0f8433652eaec2cf78f6069299f329e0da1e8d012f0f0b0faf3",
+    "sha": "9a33d380d971a8b5c64d854aea9a640bbcc57b12",
+    "tree_sha256": "8d80f15cfd12f543f4acdee0b85a924af85770c2bdbfa3a75d3b49255e1158e2",
     "toolchain_digest": "sha256:2e040a5165d79be63755424f707fdb8cf609ace831ada7a9baca398ac25e12b9",
-    "invocation": "82d91f81-83b0-4458-a066-ab72e81046d8"
+    "invocation": "bbb59922-c4e8-49eb-b372-419b994612f9"
   },
   "script_sha256": "e772c9f13384c941adf1950f4d3a86b2a56e46dbb8ca2b721fd0f59f1d266b7c",
   "server": "product run: .gate/build/cat-server from the passing build target; mutants: cat-server rebuilt from each mutated managed bundle",
@@ -25,7 +25,8 @@
       "mutation": null,
       "source": null,
       "exit": 0,
-      "report_sha256": "729a397f8d64a83ec82abedd7dce9778a73fd6aa9972b66f3a8c4b3df18f1614",
+      "report": ".gate/shell/kfa1-proof/head/playwright.json",
+      "report_sha256": "2d80538378f77dc9f543a8d48f1fdbf297a20733447924f35cb328933e2f4f56",
       "cases": [
         {
           "project": "desktop",
@@ -62,7 +63,8 @@
       "mutation": "} else if (e.key === \"Backspace\") {",
       "source": "frontend/src/screens/Conexiuni.tsx",
       "exit": 1,
-      "report_sha256": "6997b79cc657df246439d8bcb4776e9c4371e12c2335f6b46eaed06f5783b266",
+      "report": ".gate/shell/kfa1-proof/no-escape/playwright.json",
+      "report_sha256": "256cdc2763238d0fdf1ecc1442fb5d244a2f010b79dc20a7158482100c370708",
       "cases": [
         {
           "project": "desktop",
@@ -91,7 +93,8 @@
       "mutation": "} else if (e.key === \"Escape\") {",
       "source": "frontend/src/screens/Conexiuni.tsx",
       "exit": 1,
-      "report_sha256": "f9579caef227145e061e8c4aebac7ffe182181c696dca0c78183af4a2c9d6552",
+      "report": ".gate/shell/kfa1-proof/no-backspace/playwright.json",
+      "report_sha256": "4a58f4ce914bdd5dc2fd4208b135ae6fb670b70ff17d132662bc70a3659cadd7",
       "cases": [
         {
           "project": "desktop",
@@ -120,7 +123,8 @@
       "mutation": "<div className=\"lant-current\" aria-live=\"polite\" aria-atomic=\"true\">",
       "source": "frontend/src/screens/Lant.tsx",
       "exit": 1,
-      "report_sha256": "b40ca562799d90eb71db783b5e8ee500f7bf4abe66bebf91b37e793ce320d063",
+      "report": ".gate/shell/kfa1-proof/live-always-polite/playwright.json",
+      "report_sha256": "3cd3250a8457d9d18d1bcb9c515a6289327abacbdc7bd5c805362d948017ee87",
       "cases": [
         {
           "project": "desktop",
@@ -149,7 +153,8 @@
       "mutation": "<div className=\"lant-current\" aria-live=\"off\" aria-atomic=\"true\">",
       "source": "frontend/src/screens/Lant.tsx",
       "exit": 1,
-      "report_sha256": "9ef2367a1acad0edb9f288f5976ed66379c819f5da998db4132b2c53b1ac43a1",
+      "report": ".gate/shell/kfa1-proof/live-always-off/playwright.json",
+      "report_sha256": "cb7a90128ec784db6a221e4ca950a12c7460d496d72ce34bf5b77ec76c493a2e",
       "cases": [
         {
           "project": "desktop",
@@ -178,7 +183,8 @@
       "mutation": "<div className=\"lant-current\" aria-live={won ? \"off\" : \"polite\"}>",
       "source": "frontend/src/screens/Lant.tsx",
       "exit": 1,
-      "report_sha256": "4095d2f0f463c97dafd5c7570ad9eb3b457137609c2267ea9cc84c5fccd96fd9",
+      "report": ".gate/shell/kfa1-proof/no-atomic/playwright.json",
+      "report_sha256": "792b6edf64de34ab6c4b0d80b00f72de71b2813c508a9bd99b8a01bb2dcec5e2",
       "cases": [
         {
           "project": "desktop",
@@ -202,5 +208,17 @@
         }
       ]
     }
-  ]
+  ],
+  "product_note": "9a33d380 is documentation-only over product 20dab663; the product run serves .gate/build/cat-server built at 20dab663",
+  "raw_evidence": {
+    "nas": "dobostore:/volume1/agentops-home/temp-archive/2026-10-21/fix__gui-publication-followups-kfa1-proof.tar.zst",
+    "sha256": "be9210a3ec3c8dcafafa425dcabe90bc2d9c2cd839027f9a056404b73a3918a0",
+    "bytes": 99277392,
+    "members": ".gate/shell (this run)"
+  },
+  "first_run": {
+    "sha": "20dab663247937ea1dec93f5c7870f729a8c4c19",
+    "invocation": "82d91f81-83b0-4458-a066-ab72e81046d8",
+    "note": "Identical outcomes (exit codes, failing lines, expected/received). Its raw reports were replaced by a later shell run before archiving; this second run is the retained proof."
+  }
 }

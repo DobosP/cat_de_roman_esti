@@ -25,6 +25,10 @@ Product: `20dab663` (`cbe86017` e2e, `20dab663` fail-fast); later commits on the
 
 Product run: 4/4 pass. The restored bundle's manifest equals the build's (`89cff721…`, also the M4
 measurement manifest). Script: [kfa1-proof.stdin.txt](kfa1-proof.stdin.txt); summary: [kfa1-mutation-proof.json](kfa1-mutation-proof.json).
+The first run (shell at 20dab663) gave identical outcomes, but a later shell run replaced its raw reports;
+the retained proof is a second run at docs-only 9a33d380 (same product binary). Raw reports and traces:
+`dobostore:/volume1/agentops-home/temp-archive/2026-10-21/fix__gui-publication-followups-kfa1-proof.tar.zst`
+(sha256 `be9210a3…`, verified on both ends).
 
 ## EQ-1 CSS gzip basis
 
@@ -52,8 +56,12 @@ browser, PG, parity, image and baseline lanes ran fresh. Before the full, `tools
 was installed in the fresh gate mirror with `npm ci` from its committed lock (axe-core 4.14.0,
 web-vitals 6.2.3) through the owner shell: a procedural provisioning step, no source change.
 
+Gate evidence (unit/full/build results, logs, reports and scratch drafts) is archived at
+`dobostore:/volume1/agentops-home/temp-archive/2026-10-21/fix__gui-publication-followups-evidence.tar.zst`
+(sha256 `9a901077…`, verified on both ends) before local cleanup.
+
 Independent review (Claude Opus reviewer, read-only, own source copy and host race runs): PASS-WITH-NOTES,
-no blocker. Its notes were applied: ADR-0207 names the `baseline`/plain `gen` lanes (N1), the replacement
+no blocker; a second pass over the documentation commit also passed with a custody note, resolved by the retained run above. Its notes were applied: ADR-0207 names the `baseline`/plain `gen` lanes (N1), the replacement
 accounting is corrected here (N2) and EQ-1 lands in this record's documentation commit (N3).
 
 ## Not done (low, optional)
