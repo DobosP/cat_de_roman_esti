@@ -59,7 +59,7 @@
 ## Safety
 - Never read or print secret values; names only: `ROEDU_API_URL`, `ROEDU_API_KEY` (`.env.example`); values deploy per agent-ops ADR-0027.
 - GUI M3/M4 local landing follows ADR-0199: exact-SHA unit/full + independent review; no device testing. Other work follows ADR-0004.
-  App-main pushes, production and real-child/account go-live remain owner-only. Never land a red suite.
+  App-main pushes need Paul's authorization (the 2026-10-21 reviewed publication: ADR-0206); production and real-child/account go-live remain owner-only. Never land a red suite.
 - Keep game/session fixes narrow and test-backed; session stores stay bounded. Worker briefs name the expected
   TTL/size/session behavior and the targeted test command.
 - Content changes pass both validators and the critique rubric (`docs/CRITIQUE_RUBRIC.md`, ADR-0067); never

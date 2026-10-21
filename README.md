@@ -183,8 +183,9 @@ retained Python/Rust reference jobs are opt-in ([ADR-0164](docs/adr/0164-manual-
 
 For GUI M3/M4, [ADR-0199](docs/adr/0199-owner-no-device-checkpoint-agent-lands-m3-m4.md)
 authorizes the orchestrating agent to land locally only after green unit/full on
-the exact SHA and independent review. App-main pushes, production activation and
-real-child/account go-live remain owner-only. Other work follows
+the exact SHA and independent review. App-main pushes need Paul's authorization
+([ADR-0206](docs/adr/0206-owner-authorized-main-publication.md) records the 2026-10-21 publication);
+production activation and real-child/account go-live remain owner-only. Other work follows
 [`CONTRIBUTING.md`](CONTRIBUTING.md) and [ADR-0004](docs/adr/0004-branch-merge-policy.md).
 
 ## Docs

@@ -2386,3 +2386,25 @@ checkpoint. The rebuilt merge's message names its first parent instead of the su
 Full at the first merge (browser 929/933) found only Perechi's lost-response focus recovery; the port now
 restores focus in a layout effect once the tile is enabled. Qualifying trust/unit/full ran on the landed
 SHA; M2 acceptance waits for the physical device checkpoint.
+
+## 2026-10-21 — Main publication after independent review
+
+Valid until: the next change to `main` — then treat as history.
+
+- Authority: Paul's 2026-10-21 authorization of Cat main landing and pushes after green
+  qualification and independent review ([ADR-0206](docs/adr/0206-owner-authorized-main-publication.md)).
+  Operator: agent:claude-code (orchestrator, independent of the Codex implementation).
+- Verified before the push: `git fetch origin`; `origin/main` 3d602215, local `main` fb829aaa,
+  300/0 ahead/behind, shared checkout clean; `16733891..fb829aaa` documentation only; all six M4
+  archives in `docs/reviews/gui-m4/qualification.json` match their SHA-256 and byte counts.
+- Review: five read-only dimensions plus refutation passes and a final adjudication;
+  ready-with-notes, no blocker ([record](docs/reviews/gui-main-publication/README.md)).
+  No product gate re-run (ADR-0200; docs-only delta over qualified 16733891).
+- Published with `git push origin main` (not `ops sync`: parked `codex/content-v1-7` stays
+  unpublished): `3d602215..fb829aaa`; `git ls-remote origin refs/heads/main` = fb829aaa150c6263a92dc061befd254d4f5aeea8.
+- Security hold: govulncheck v1.8.0 (`go-backend`, go1.27.1, source mode) exits 3 with 14 reachable
+  standard-library vulnerabilities (incl. the bundled HTTP/2 code); go1.27.3 clears all 14 (13 are
+  fixed in go1.27.2) and five also name `golang.org/x/net` v0.59.0, fixed in v0.60.0. Social's canonical image of the same toolchain failed Trivy on four HIGH stdlib CVEs
+  the same day. Toolchain bump, requalification and redeploy are owner work; nothing was deployed.
+- Follow-ups: KFA-1 e2e for Conexiuni Esc/Backspace and the Lanț live region; EQ-1/EQ-2 docs
+  accuracy; DCR-1 fail-fast before production CSP enforcement; DCR-2 production CSP stage (owner).

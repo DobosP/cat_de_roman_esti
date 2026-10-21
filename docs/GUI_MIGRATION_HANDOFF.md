@@ -3,7 +3,7 @@
 Valid until: the next source or completed gate change. Updated 2026-10-19. Read actual HEAD/dirty state and origin refs before continuation.
 
 
-## Current — Cat S1 complete locally
+## Current — Cat S1 complete and published
 
 Final M4 source1673389147a3ba432742008d55d28edb84d94af2 is independently accepted
 and landed locally after unit27/full38/image2. M3 source9c44 remains accepted.
@@ -18,8 +18,8 @@ passes the original16,093 cap;all10JS ceilings and Home target pass.
 The first failed M4 full and its2document-lifecycle test races remain explicit;
 14additive readiness assertions preserve all original case identities. Latest
 unit physical fixtures,allrequired rows and9actualPNG bytes are retained;older
-rolling raw paths are not implied available. Feature lane stays published while
-app-main push remains Paul's. No production or real-account activation follows.
+rolling raw paths are not implied available. `main` fb829aaa was published on
+2026-10-21 under [ADR-0206](adr/0206-owner-authorized-main-publication.md). No production or real-account activation follows.
 
 Paul's next scope is remaining Teacher/Social UI modules,not video/media/AI.
 Teacher parent/adult settings are complete atc4af5b1;the bounded next verified
