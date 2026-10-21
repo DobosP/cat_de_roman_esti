@@ -38,10 +38,12 @@ still compiled with go1.27.1.
 
 ## Consequences
 
-The [qualification record](../reviews/kit-bump-core-v113/README.md) holds the scanner outcome on the
-release image. govulncheck v1.8.0 reports GO-2026-5932 (`x/crypto/openpgp`, no fixed version) for any
-stripped binary that contains the x/crypto module. That holds even when, as here, the package is not
-linked.
+The release image passes Trivy 0.75.0 with exit 0 (HIGH/CRITICAL, `--ignore-unfixed`). govulncheck v1.8.0
+finds 0 affecting vulnerabilities in source and package mode. In binary mode, the symbol-retaining
+same-source twin exits 0; the only difference affecting Go code is `-ldflags="-s -w"`. The twin also lacks the embedded `dist/`, `legacy/` and build-identity data. The stripped release
+binary lists only GO-2026-5932 (`x/crypto/openpgp`, no fixed version, not linked). That finding is a
+documented, non-actionable residual, and the release build flags stay unchanged. The superseded core-v1.12
+tag stays published but unadopted. Details: [qualification record](../reviews/kit-bump-core-v113/README.md).
 
 `go-backend` needs go1.27.3 on every local `PATH`. The [content loop](../CONTENT_LOOP.md) pins host
 go1.27.1 with `GOTOOLCHAIN=local`. Under that setting it now refuses `go-backend` until the owner

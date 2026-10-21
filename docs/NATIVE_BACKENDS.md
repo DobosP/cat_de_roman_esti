@@ -22,7 +22,7 @@ Production account activation still requires the [DEPLOY](DEPLOY.md) go-live che
 
 ## Build locally
 
-The Go module minimum is **Go 1.27.1**; release builders use **Go 1.27.3** ([ADR-0208](adr/0208-go-1-27-3-security-release-builders.md)). The Rust
+The Go module minimum and release builders are **Go 1.27.3** ([ADR-0208](adr/0208-go-1-27-3-security-release-builders.md), [ADR-0209](adr/0209-kit-bump-core-v1-13.md)). The Rust
 package minimum is 1.98; the qualified compiler is **Rust 1.98.1**. Rust dependencies
 are resolved by the checked-in `Cargo.lock`. The Go serving layer uses the standard library, pgx and the shared authentication core.
 

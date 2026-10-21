@@ -2453,3 +2453,25 @@ Valid until: the KIT_BUMP that moves kit core Go/x/net pins — then treat as hi
   12/302, parity 1206. Evidence archived on DoboStore (sha256 `5230d8e8…`, both ends). Nothing deployed.
 - Docker address pools were exhausted by 31 bridge networks, most empty and months old (other projects).
   None were removed; the ad-hoc run shared the db container's network namespace instead.
+
+## 2026-10-21 — KIT_BUMP core-v1.13 (Go 1.27.3 security pins, security hold resolved in source)
+
+Valid until: the next KIT_BUMP — then treat as history.
+
+- Branch `fix/kit-bump-core-v112` on `main` 8a5e6f28; operator agent:claude-code; product ce04b124
+  ([ADR-0209](docs/adr/0209-kit-bump-core-v1-13.md), [record](docs/reviews/kit-bump-core-v113/README.md)).
+- roedu-ui core-v1.12 (x/net v0.60.0, go1.27.3 runtime/image/runner) was refused by this repo's `kit:sync`:
+  `compareVersions` orders runner tag `core-v1.0-linux-20261006` above `core-v1.0-go1.27.3-20261021`. roedu-ui
+  core-v1.13 renamed the runner `core-v1.13-go1.27.3-20261021` (roedu-ui ADR-0036); a candidate kit passed `kit:sync` 9/9 first.
+- Adoption: kit-only stage, `.gate.env` runner commit + trust, probe 1.0.13/0.1.13, `kit:sync` 9/9, `deps` 4/4,
+  `cat-golang-trixie` retired, bootstrap templates rebound (unit 1fe5133e failed one rule: bootstrap Dockerfile FROM 1.27.1).
+- Gates on ce04b124: unit 27/27, full 37/37 (937 browser, CSP enforced 0, cleanup verified), image 2/2.
+- Scans on the release image: Trivy 0.75.0 exit 0. govulncheck v1.8.0 source 0 and package 0. The binary audit
+  ran on a symbol-retaining same-source twin (fleet practice, as in Social native.yml) and exits 0:
+  `cd go-backend && CGO_ENABLED=0 GOTOOLCHAIN=local GOFLAGS=-mod=readonly go build -trimpath ./cmd/cat-server`
+  in the go1.27.3 runner. Its only difference from Dockerfile:39 that affects Go code is `-ldflags="-s -w"`; the build info is identical, and embedded assets are not linked code.
+- The stripped release binary exits 3 on GO-2026-5932 only. That finding is x/crypto/openpgp with no fixed version,
+  and the binary has no openpgp symbol or string. It is a documented, non-actionable residual; release flags are unchanged.
+- Core-v1.12 stays published but unadopted (roedu-ui ADR-0036).
+- `shared-go/authcore` unchanged (Social hash pin). Follow-ups: owner moves the content loop's host Go to
+  1.27.3; Teacher stays on go1.27.1 (ADR-0033); redeploy is Paul's decision. Nothing deployed.

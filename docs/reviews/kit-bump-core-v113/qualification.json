@@ -1,0 +1,195 @@
+{
+ "schema": 1,
+ "decision": "docs/adr/0209-kit-bump-core-v1-13.md",
+ "branch": "fix/kit-bump-core-v112",
+ "base": "8a5e6f28",
+ "landing_product_sha": "ce04b124367e7b66f3048f9ae8f210eca127baee",
+ "operator": "agent:claude-code (PROGRAM E8)",
+ "core": {
+  "tag": "core-v1.13",
+  "tag_object": "78162d89ec3a33834dfaf0ec84abc49ff2eb65ac",
+  "source": "52c1ea2b9388ffe4088bb1808690299571f6f82f",
+  "runner": "roedu-toolchain:core-v1.13-go1.27.3-20261021",
+  "runner_id": "sha256:c84ff601865080c9915159220f136fcfb80218bb91240669d65d62ae654404d6"
+ },
+ "generators": {
+  "trust": {
+   "sha": "8fced572308520c94e6f7ee8ddec322c1ad0b5f0",
+   "pin": "80e5a3a27a0b9823d1660a770c30c860843fbfe2efff3a6cf7005123b221c49d"
+  },
+  "kit_sync": {
+   "command": "GATE_OPERATOR=agent:claude-code bash scripts/gate.sh kit:sync --sha 8fced572308520c94e6f7ee8ddec322c1ad0b5f0",
+   "status": "pass",
+   "checks": 9,
+   "result_sha256": "4ea0807fa19fad3cb811a22ee43abbe89a9bdd2c14cd647776e9e21792394483"
+  },
+  "deps": {
+   "command": "GATE_OPERATOR=agent:claude-code bash scripts/gate.sh deps --sha 8fced572308520c94e6f7ee8ddec322c1ad0b5f0 --dirty",
+   "status": "pass",
+   "checks": 4,
+   "result_sha256": "9a81bbc9604ead5109dec6936e7c9b5578211d4eb3d65dd0c102bfa198f61763"
+  }
+ },
+ "gates": {
+  "unit": {
+   "target": "unit",
+   "sha": "ce04b124367e7b66f3048f9ae8f210eca127baee",
+   "status": "pass",
+   "checks": 27,
+   "failed_checks": [],
+   "started": "2026-10-21T18:56:31.252Z",
+   "finished": "2026-10-21T19:17:43.396Z",
+   "tree_sha256": "e5e03dd3087c78c4d8110003355edf22540c0e3803ff7dddc79cd75024bc600a",
+   "toolchain_digest": "sha256:c84ff601865080c9915159220f136fcfb80218bb91240669d65d62ae654404d6",
+   "versions_lock_sha256": "07b78e8df5330c5463430ea90b3954142b25b25b2550941d071097d5efd8a0ad",
+   "result_sha256": "a2d12cc09da95797b9f80080fd001de5a1bf9e5121b957ee5d0fb0b5b8177cbb"
+  },
+  "full": {
+   "target": "full",
+   "sha": "ce04b124367e7b66f3048f9ae8f210eca127baee",
+   "status": "pass",
+   "checks": 37,
+   "failed_checks": [],
+   "started": "2026-10-21T19:19:38.757Z",
+   "finished": "2026-10-21T19:31:22.896Z",
+   "tree_sha256": "e5e03dd3087c78c4d8110003355edf22540c0e3803ff7dddc79cd75024bc600a",
+   "toolchain_digest": "sha256:c84ff601865080c9915159220f136fcfb80218bb91240669d65d62ae654404d6",
+   "versions_lock_sha256": "07b78e8df5330c5463430ea90b3954142b25b25b2550941d071097d5efd8a0ad",
+   "result_sha256": "bef4d7c0bf6d8cf30ef223f4495257f67ec577ab6bc0b9bd815ba2d9fb96ad72"
+  },
+  "image": {
+   "target": "image",
+   "sha": "ce04b124367e7b66f3048f9ae8f210eca127baee",
+   "status": "pass",
+   "checks": 2,
+   "failed_checks": [],
+   "started": "2026-10-21T19:33:25.757Z",
+   "finished": "2026-10-21T19:33:26.194Z",
+   "tree_sha256": "e5e03dd3087c78c4d8110003355edf22540c0e3803ff7dddc79cd75024bc600a",
+   "toolchain_digest": "sha256:c84ff601865080c9915159220f136fcfb80218bb91240669d65d62ae654404d6",
+   "versions_lock_sha256": "07b78e8df5330c5463430ea90b3954142b25b25b2550941d071097d5efd8a0ad",
+   "result_sha256": "9b385e31288bb9bcbe318737fb7889979ffb36b0e0a9e812a237d6a1cec46016"
+  }
+ },
+ "full_browser": {
+  "expected": 937,
+  "skipped": 0,
+  "unexpected": 0,
+  "flaky": 0
+ },
+ "csp": {
+  "stage": "enforced",
+  "violations": 0,
+  "legacy_violations": 0
+ },
+ "failed_history": [
+  {
+   "sha": "3423601c22a6b89168a45895b23591d52c7f9d16",
+   "target": "kit:sync",
+   "status": "fail",
+   "reason": "consumer-config: Higher core toolchain version refused (core-v1.12 runner tag ordering)",
+   "result_sha256": "62913516df82b47503fcd2d317023f8888de724ccba3dc423dc9cd25e81d1211",
+   "superseded_by": "roedu-ui core-v1.13 (ADR-0036)"
+  },
+  {
+   "sha": "3423601c22a6b89168a45895b23591d52c7f9d16",
+   "target": "kit:sync --dirty (candidate core-v1.13)",
+   "status": "fail",
+   "reason": "deps: Installed package differs @roedu/ui 1.0.13 expected 1.0.11",
+   "result_sha256": "23e4a2a5e04ea974995f4fa02c28a6127b21f25fccb0311be1400c83a973c1f8",
+   "superseded_by": "probe update 8fced572; candidate retry pass 9/9 146fce0ce4f51a42390710c538c5b325a1005c963f5ce59eab183dfb3bef9780"
+  },
+  {
+   "sha": "1fe5133e22556a6fa5da1abb56c54a05f25adf8d",
+   "target": "unit",
+   "status": "fail",
+   "reason": "versions-check/toolchain-versions/lint-scope/frontend kit AST: tools/gui-bootstrap-webkit/templates/Dockerfile unpinned/unregistered FROM image (golang:1.27.1-trixie)",
+   "result_sha256": "ae562f1d9ecd54569b597924bdf5d080493a0ee168ac0130b598292e688b3c87",
+   "superseded_by": "ce04b124 bootstrap template rebind"
+  }
+ ],
+ "release_image": {
+  "id": "sha256:8634dd7f3e2f4f53f1502ae6ff1cd27285d15dc921ae12943d679ff7f20c8645",
+  "revision": "ce04b124367e7b66f3048f9ae8f210eca127baee",
+  "tree_sha256": "e5e03dd3087c78c4d8110003355edf22540c0e3803ff7dddc79cd75024bc600a",
+  "app_sha256": "4f3807f99e233b79f241c259ea85bfd2b52973ab95f9ff3540fdae1ee2f3e15e",
+  "go": "go1.27.3",
+  "x_net_in_build_info": "v0.60.0",
+  "web_kit": "v0.0.0-core-v1.13"
+ },
+ "scans": {
+  "govulncheck": "v1.8.0, DB 2026-10-21T00:27:29Z, run in the core-v1.13 runner",
+  "trivy": "v0.75.0, DB 2026-10-21T13:15:34Z, --severity HIGH,CRITICAL --ignore-unfixed --exit-code 1 on a docker save tar",
+  "trivy_release_ce04b124": {
+   "exit": 0,
+   "debian": 0,
+   "gobinary": 0
+  },
+  "source_1fe5133e": {
+   "go-backend": "exit 0, 0 affecting (module-level GO-2026-5932)",
+   "shared-go/authcore": "exit 0, 0 affecting (module-level GO-2026-5932)",
+   "go_source_equal_ce04b124": true
+  },
+  "package_1fe5133e": {
+   "go-backend": "exit 0",
+   "shared-go/authcore": "exit 0"
+  },
+  "binary_release_ce04b124": {
+   "exit": 3,
+   "ids": [
+    "GO-2026-5932"
+   ],
+   "note": "Documented non-actionable residual: GO-2026-5932 x/crypto/openpgp has no fixed version and is not linked; stripped binaries make govulncheck v1.8.0 fall back to whole-module advisories"
+  },
+  "baseline_99f507f4": {
+   "trivy_high": 1,
+   "binary_ids": [
+    "GO-2026-6617",
+    "GO-2026-6612",
+    "GO-2026-6611",
+    "GO-2026-6610",
+    "GO-2026-6603",
+    "GO-2026-5932"
+   ]
+  },
+  "binary_twin_ce04b124": {
+   "method": "symbol-retaining same-source twin (fleet practice, Social .github/workflows/native.yml)",
+   "command": "cd go-backend && CGO_ENABLED=0 GOTOOLCHAIN=local GOFLAGS=-mod=readonly go build -trimpath -o cat-server-unstripped ./cmd/cat-server (roedu-toolchain:core-v1.13-go1.27.3-20261021, go1.27.3, tree ce04b124)",
+   "release_command": "CGO_ENABLED=0 GOMAXPROCS=2 GOFLAGS=-p=2 go build -trimpath -ldflags=\"-s -w\" -o /out/app ./cmd/cat-server (Dockerfile:39, golang:1.27.3-trixie@sha256:604106..., GOTOOLCHAIN=local)",
+   "build_info_identical": true,
+   "twin_exit": 0,
+   "stripped_twin_exit": 3,
+   "stripped_twin_ids": [
+    "GO-2026-5932"
+   ],
+   "openpgp_symbols_in_twin": 0,
+   "openpgp_strings_in_release": 0,
+   "twin_x_crypto_packages": [
+    "argon2",
+    "bcrypt",
+    "blake2b",
+    "blowfish",
+    "chacha20",
+    "chacha20poly1305",
+    "cryptobyte",
+    "cryptobyte/asn1",
+    "internal/poly1305",
+    "pbkdf2",
+    "scrypt"
+   ],
+   "only_go_code_difference": "-ldflags=\"-s -w\"",
+   "other_difference": "twin lacks embedded dist/, legacy/ and build-identity data (.rodata only)",
+   "twin_sha256": "efcbe944324916384576fedf0fa43d997e3202430bc5328239bd611de96025fc",
+   "stripped_twin_sha256": "67cff513a33309bdc3380905ae749c9121bf84b1b5a3b165d7cbb986e2e3d344",
+   "reproduced_from_git_archive_by_reviewer": true
+  }
+ },
+ "authcore": "shared-go/authcore unchanged (Social services/authcore/SOURCE.json hash pin intact)",
+ "follow_ups": [
+  "Owner: CONTENT_LOOP.md pins host go1.27.1 with GOTOOLCHAIN=local; go-backend now declares go 1.27.3, so the content loop needs host go1.27.3 and an owner edit of that file.",
+  "Teacher remains on go1.27.1 (deferred, ADR-0033).",
+  "Production redeploy is Paul's decision."
+ ],
+ "core_v1_12": "tag core-v1.12 (a8d664f9 -> 8485daa) stays published but unadopted: its runner tag orders below core-v1.0-linux-20261006 under kit-sync compareVersions (roedu-ui ADR-0036)",
+ "independent_review": "independent-review.json"
+}

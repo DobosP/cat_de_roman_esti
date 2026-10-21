@@ -1,0 +1,26 @@
+{
+ "schema": 1,
+ "reviewer": "separate Claude Code reviewer agent (Opus, read-only; scratchpad only), 2026-10-21",
+ "verdict": "APPROVE-WITH-NOTES",
+ "subject": "land ce04b124367e7b66f3048f9ae8f210eca127baee plus a docs commit on Cat main",
+ "verified": {
+  "scope": "kit/ == ~/gates/kits/core-v1.13 (diff -r rc0); vendored UI/web-kit tgz cmp-equal and .sha256 verify; third_party/webkit = kit Go archive (41 files); 51 core entries + toolchain_image deep-equal the kit lock, core_tag core-v1.13; only app-entry change is the cat-golang-trixie removal; bootstrap templates and root Dockerfile.toolchain byte-equal the kit (5e4c8c29...); hand edits limited to .gate.env two lines, probe lines 42-43 and docs; app Dockerfile untouched",
+  "authcore": "diff empty; all 12 files match Social services/authcore/SOURCE.json (go.mod 124899db...)",
+  "gates": "unit a2d12cc0 27/27, full bef4d7c0 37/37, image 9b385e31 2/2; sha ce04b124, dirty false, tree e5e03dd3..., toolchain c84ff601... = .gate.env, versions_lock 07b78e8d... = git show ce04b124:versions.lock.json; 937 browser cases 0 skip/unexpected/flaky; CSP enforced 0/0; supervisor cleanup.verified",
+  "trust": "wrapper snapshot() on git archive ce04b124 = 80e5a3a2... (pin names 8fced572; trust files unchanged to ce04b124); tree e5e03dd3... reproduced",
+  "release_image": "8634dd7f labels revision ce04b124 / tree e5e03dd3; /app 4f3807f9...: go1.27.3, x/net v0.60.0, web-kit v0.0.0-core-v1.13; full-gate image 536d124e has byte-identical /app",
+  "trivy": "0.75.0, own docker save of 8634dd7f, fresh DB, HIGH/CRITICAL --ignore-unfixed --exit-code 1: exit 0 (debian 0, gobinary 0)",
+  "govulncheck_binary": "v1.8.0 (tool dd0e57a7..., DB 2026-10-21T00:27:29Z): release /app exit 3 GO-2026-5932 only; twin exit 0; stripped twin exit 3 GO-2026-5932 only",
+  "twin_same_source": "rebuilt from git archive ce04b124 with the recorded command: bit-identical efcbe944... (stripped 67cff513...); go version -m identical across release, twin and stripped twin; .text/.gopclntab/.go.type/.noptrdata/.data equal size release vs stripped twin, only .rodata differs (embedded assets)",
+  "no_openpgp": "0 openpgp names in the release /app .gopclntab; x/crypto packages argon2, bcrypt, blake2b, blowfish, chacha20, chacha20poly1305, cryptobyte(+asn1), internal/poly1305, pbkdf2, scrypt; twin go tool nm 0 openpgp symbols",
+  "docs": "ADR-0208 status flip, CORE_REQUESTS REQ-12, tracked-markdown sorted/unique 565, qualification.json hashes, cat-doc-check rc0 on ce04b124 + the then-uncommitted docs"
+ },
+ "notes": [
+  "N1: twin differs by -s -w for Go code only; it also lacks embedded dist/legacy/build-identity data (.rodata) - wording applied in the docs commit.",
+  "N2: literal 'binary clean' on the stripped release /app is not met (exit 3); met by the fleet's symbol-retaining twin method (Social native.yml:102-105); GO-2026-5932 has no fix and is not linked - documented residual, named for Paul.",
+  "N3: bootstrap template rebind is a legitimate refresh (templates byte-equal the kit's); the rule is unchanged. templates/compose.gate.yml already differed from the kit before this branch (out of scope).",
+  "N4: content loop BLOCKED after landing until the owner upgrades host Go to 1.27.3 and edits CONTENT_LOOP.md; stale NATIVE_BACKENDS.md:25 and TESTARE_V1.md:80 fixed in the docs commit.",
+  "N5: nothing found that turns main red; re-run cat-doc-check on the final docs commit.",
+  "N6: trivy output contains progress-bar noise (cosmetic)."
+ ]
+}

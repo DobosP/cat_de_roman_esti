@@ -77,7 +77,7 @@ Alchimie. O filă privată sau ștergerea datelor browserului pierde colecția.
 
 ### Pe același calculator
 
-Cu Go 1.27.1 pregătit conform [README](../README.md), rulează din rădăcina
+Cu Go 1.27.3 pregătit conform [README](../README.md), rulează din rădăcina
 repozitoriului; Node 24 este necesar doar dacă pachetul frontend trebuie construit:
 
 ```console
