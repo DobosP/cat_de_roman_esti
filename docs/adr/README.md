@@ -187,3 +187,5 @@ Parallel lanes also allocated0188/0189 independently. All four full-filename bod
 - [0208](0208-go-1-27-3-security-release-builders.md) — Go 1.27.3 security release builders (canonical/standalone Dockerfiles, CI, standalone qualification); kit core-v1.11 Go/x/net/runner pins and `go` lines stay until a core tag moves them.
 
 - [0209](0209-kit-bump-core-v1-13.md) — KIT_BUMP core-v1.13: go1.27.3 runtime/runner, golang:1.27.3-trixie, x/net v0.60.0; `cat-golang-trixie` retired; authcore `go` line unchanged (Social hash pin).
+
+- [0210](0210-curation-waves-and-staged-stock-landing.md) — curation waves install reviewed stock in stages (stage 1: 20+ word-form families from V1.38–V1.42); owner rulings on sucitoare and Ie; step-1 exclusion screen, evidence retention and reviewer independence rules.

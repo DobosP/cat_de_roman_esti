@@ -42,7 +42,7 @@ your content changed its expectation, with no generator to refresh it, is report
   --branch content/v1-<N>-<theme> --task "<theme>" --write`; scratch
   `~/work/_temp/content__v1-<N>-<theme>/`;
   module `scripts/<theme_underscored>_v1_<N>_data.py`; `BUILD_VERSION = "fixture-v1-<N>-<theme>"`;
-  authored source `authored-v<K+1>.json` (K = highest existing, today 6); corpus
+  authored source `authored-v<K+1>.json` (K = highest existing, today 12); corpus
   `python-http-parity-v1-<N>.json.gz`; pool `docs/content-pool/v1-<N>-<theme>/pool.json`;
   reviews `docs/reviews/v1-<N>-<theme>/`. Loop state: `~/work/_temp/content-loop/state.json` (≤2
   KB); if it is
@@ -118,7 +118,9 @@ your content changed its expectation, with no generator to refresh it, is report
    other-sense owner means `held: owned by <id>` (never steal a form). Check
    `contexto_data.projection_terms`: a hit is a Cald-only proxy, so a real concept is an upgrade.
    Check `DEFERRED_AMBIGUOUS_TERMS` (scripts/contexto_common_words_v72_data.py) and
-   `ReviewedUnresolved` in go-backend/internal/graph/service.go. Read the `state` of matching records
+   `ReviewedUnresolved` in go-backend/internal/graph/service.go. Grep `tests/` and every
+   `docs/reviews/*/graph-candidates.json` (pre-V1.8 reviews included) for a recorded exclusion of the
+   form: it stays excluded unless the owner overrides it. Read the `state` of matching records
    in docs/content-pool/*/pool.json (skip `rejected`, reuse held reasons). Known collisions:
    miercuri (Wednesday series), poștașul (Poșta Română), roșie/roșii (tomato), colinde (Colind),
    paste (Paste), mate (Matematică), sarma (Sârmă); homographs to judge: luni, vară, rață.
@@ -133,10 +135,12 @@ your content changed its expectation, with no generator to refresh it, is report
    `https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt`
    (normalize ş/ţ to ș/ț; best rank among forms). Store URL plus a one-line paraphrase, never copied
    definitions. Each new concept names its 4–8 link targets before research. Unresolved items are
-   `held` with one line.
+   `held` with one line. Keep every raw capture under `~/work/_temp/content__v1-<N>-<theme>/` (never
+   `/tmp`) and cite that path, so the evidence survives a reboot.
 3. Review. Write the data module scripts/<theme_underscored>_v1_<N>_data.py from the researched
    items (templates in 4a). `factual-v1-<N>` and `quality-v1-<N>` each judge the whole batch once, on
-   the web, and write docs/reviews/<wave>/graph-factual-review.json and graph-quality-review.json
+   the web, without having seen author drafts or each other's verdict, and each consults at least one
+   source per item that they chose themselves, and write docs/reviews/<wave>/graph-factual-review.json and graph-quality-review.json
    bound to the sha256 of the module they judged (accept/modify/reject plus one line; factual
    accepts
    cite sources; later verdict edits and drops need no re-review). Apply
@@ -192,7 +196,8 @@ your content changed its expectation, with no generator to refresh it, is report
    - 4g HTTP corpus: build `cat-server` into scratch; copy
      docs/reviews/go-native-toolchain/archived-reference/capture_reference.py.txt to scratch, changing
      only ROOT, the reference label and the output path; run it with the repo venv,
-     `CAT_ACCOUNTS_ENABLED=0` and `--binary <cat-server> --runtime go` (expect 1207 matched responses).
+     `CAT_ACCOUNTS_ENABLED=0` and `--binary <cat-server> --runtime go` (expect the case count of the
+     previous reviewed corpus block, 1206 since V1.13; any other count is `NEEDS-OWNER`).
      Move the .json.gz to go-backend/internal/httpgolden/testdata/ and, in golden.go, add only a
      renamed copy of the previous `reviewedV1x()` block, its SHA constant, its embed line, and in
      ForSources both the `vNN, err := reviewedVNN()` call and the slice entry.
@@ -259,6 +264,17 @@ your content changed its expectation, with no generator to refresh it, is report
    all --check` on main and record it. Never push. Delete the wave branch, worktree and scratch, then
    send the proposals message. With LANDING_MODE=hold, do everything before the ff-only merge, then
    set `waiting: land?`.
+
+## Curation wave (installing reviewed stock, ADR-0210)
+
+A curation wave installs items that earlier waves already reviewed, from the canonical stock
+(`docs/content-consolidation/v1-8-through-v1-32/current-stock.json` on its branch), instead of new
+research. Step 0 is unchanged. Step 1 takes at least 20 accepted items or existing-owner families
+from the final module payloads (never planned or observed lists), records each one's original wave,
+record id and closure commit in the pool, re-runs the full step-1 screen against current main, and
+applies the owner rulings in ADR-0210. Step 2 re-binds each item to its retained evidence; an item
+whose evidence is not retained is not eligible. Step 3 writes one consolidated module that the two
+reviewers judge once, as above. Steps 4 and 5 are unchanged.
 
 ## Improvement loop (every wave, landed or closed)
 
