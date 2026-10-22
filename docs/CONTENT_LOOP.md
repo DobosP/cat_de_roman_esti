@@ -2,16 +2,12 @@
 
 Valid until: a later owner-approved procedure supersedes this file.
 Decisions: [ADR-0188](adr/0188-park-v1-7-and-reset-content-loop.md),
-[ADR-0210](adr/0210-curation-waves-and-staged-stock-landing.md), and the proposed
-[V2 procedure packet](adr/0211-content-loop-v2-all-boards.md).
+[ADR-0210](adr/0210-curation-waves-and-staged-stock-landing.md) and
+[ADR-0211](adr/0211-content-loop-v2-all-boards.md).
 
-Phase A draft: stop at `waiting: V2 procedure review`. Phase B starts only after ADR-0211 exists
-on main and Paul explicitly says to start. The retired `romanian-content-discovery-improved-loop`
-automation stays paused permanently. Do not start B1, install content or create a replacement
-schedule while drafting this procedure. The I/J rubric edit changes a compiled reviewed hash:
-Phase A records actual check results, but cannot update runtime pins, catalogs or authorities.
-Native content gates remain BLOCKED until a separately authorized rubric-pin/authority transition
-is reviewed and landed; this draft grants no Phase B qualification.
+The V2 loop (Phase B) starts only after Paul explicitly says to start; landing this procedure
+starts nothing. The retired `romanian-content-discovery-improved-loop` automation stays paused
+permanently; never resume it or create a replacement schedule without that instruction.
 
 ## Product and authority
 
@@ -23,17 +19,20 @@ claims and tooling. `cat-content-ops delta` is a count/identity report, not a pl
 
 Read this whole file on main at cycle start and whenever its last commit differs from state
 `procedure_rev`; re-read the exact current sub-step before acting. Read AGENTS.md, STATUS counts,
-applicable CRITIQUE_RUBRIC sections, PACK_ONLY_CONTENT_WAVES, ADR-0210 and ADR-0211. The approved
+applicable CRITIQUE_RUBRIC sections, the unbound rubric I/J section below, PACK_ONLY_CONTENT_WAVES,
+ADR-0210 and ADR-0211. The approved
 V2 design and read-only review (2026-10-22) explain decisions; their old line numbers and snapshot
 counts are not current authority. Preserve fixed-name reviewers, the hash-bound chain, dictionary
 spacing, source fidelity, holds, tick/commit discipline and the Python-suite-not-a-gate rule.
 Do not open SKILL.md, TASK_BRIEF.md, WORKLOG.md or unrelated older ADRs/review trees; the archived
 4g reference and recorded exclusion searches below are explicit exceptions. User messages win.
-After Phase A, never edit this procedure or ADRs under the content loop; propose changes instead.
+The loop never edits this procedure or ADRs; it proposes changes instead.
 
 Owner words are context-specific: `go` or `drop <ids>` answers only `waiting: review`; `land` answers
-only `waiting: land?`; `continue` starts the next interactive burst. Other messages are questions,
-not approvals. A landing instruction never authorizes the loop to merge/push/delete: Paul's
+only `waiting: land?`; `continue` starts the next interactive burst; `resume <id>` answers
+`waiting: expired <id>; restart?`, `unfinished task worktree`, `main keeps moving`, `disk`, `budget`,
+a BLOCKED/NEEDS-OWNER wait or a fail-twice wait, and only after Paul's instruction names that wait.
+Other messages are questions, not approvals. A landing instruction never authorizes the loop to merge/push/delete: Paul's
 Claude Code session is the landing reviewer/operator. Report actual owner decisions, never infer
 approval from elapsed time, a schedule, signatures, an old gate or an unchanged hash.
 
@@ -52,7 +51,8 @@ Python importer: `~/work/cat_de_roman_esti/.venv/bin/python`, `PYTHONPATH=script
 worktree, never `python -I` for importer execution. All checks run from a task worktree root:
 shared main's .venv makes cat-doc-check refuse. Shared main stays clean and read-only to the loop.
 Create each task from the approved exact main SHA with
-`python3 ~/work/agent-ops/scripts/create_task_worktree.py --repo ~/work/cat_de_roman_esti --branch content/v2-<id>-<slug> --task "<player outcome>" --write`.
+`python3 ~/work/agent-ops/scripts/create_task_worktree.py --repo ~/work/cat_de_roman_esti --branch content/v2-<id>-<slug> --base <exact main SHA> --task "<player outcome>" --write`,
+then confirm `git rev-parse HEAD` equals that SHA; otherwise stop BLOCKED.
 Move its generated TASK_BRIEF.md into that landing's scratch; never overwrite a prior brief.
 IDs are `b1`, `c1`, `b2`, …; branch `content/v2-<id>-<slug>`, module
 `scripts/<slug_underscored>_v2_<id>_data.py`, build version `fixture-v2-<id>-<slug>` and review
@@ -65,7 +65,6 @@ State is `~/work/_temp/content-loop/state.json` (≤2 KB). Phase B's first tick 
 `owner_decisions` and `protected_refs` as one JSON object to `decisions.jsonl`, then replaces state
 with V2 pointers: loop, landing, lane, branch, exact main base, step, budgets, waiting null,
 waiting_since null, procedure_rev and evidence pointer. Keep decisions.jsonl append-only; never drop old holds/refs.
-Do not perform this V2 migration during Phase A.
 Never run bare cat-content or cat-mobile-pack without --check. Only 4f exports content; 4a's
 approved importer is the only KG apply path, with explicit importable --data-module. No importer
 dry-run outside approved 4a: import-candidates requires both review artifacts before any preflight.
@@ -88,8 +87,7 @@ Landing mode is land-or-expire, with at most one batch from M5 freeze to landed;
 until it lands or expires. In Phase B only, after seven days in any waiting set `waiting: expired <id>; restart?`.
 A main KG change invalidating frozen dossiers also expires that batch. Return expired candidates
 to the pool as unapproved attention; keep all files/verdicts unchanged. Fresh M3–M6 is required for
-reuse, but never re-run those steps unprompted. A non-KG bound input change also invalidates review:
-stop for a refreshed main-bound task/review, never merge/rebase the task or transfer old PASS lanes.
+reuse, but never re-run those steps unprompted. The loop never merges or rebases a task branch.
 
 ## Need map, mining and game floors
 
@@ -119,14 +117,15 @@ input; the critic needs visible tile text/captions to play, but no group/predica
 | Cald | ≥5 actual direct non-distractor predecessors, reachable ≥120, responsive ≥40, salience reviewed. Critic supplies five openers before distances; ≥1 within two hops and one dominant sense. Main-served predecessors, not pending-wave totals, decide the floor. |
 | Lanț | Normal shortest path 3–4 hops, greu 4–6; BFS-optimal, ≥2 first hops, layers ≥2, captions on every optimal edge. Critic plays only exposed captions, explains each transition and reaches the target within par+2. |
 | Alchimie | Closure mining, greu gaps first: 5–7 seeds, exact action par, ≥2 openings and live audit-projections. Critic plays audited openings, infers target and rejects free pairs. No new discovery-world concept (252/256 is historical headroom). |
-| Intrusul | Same-type hub trio plus sibling-hub intruder, valid quick shape; ≥2/3 member links ≥0.60, intruder has no member link. Blind critic names one honest predicate and odd tile; another natural odd-one-out reading fails. Rubric I. |
-| Perechi | Four edges ≥0.60, unique maximum-weight perfect matching among 105, all 24 cross-links <0.60; starter has zero real cross-links. Critic pairs eight tiles blind and rejects alternative pairings or ambiguous tiles. Rubric J. |
+| Intrusul | Same-type hub trio plus sibling-hub intruder, valid quick shape; ≥2/3 member links ≥0.60, intruder has no member link. Blind critic names one honest predicate and odd tile; another natural odd-one-out reading fails. Rubric I (below). |
+| Perechi | Four edges ≥0.60, unique maximum-weight perfect matching among 105, all 24 cross-links <0.60; starter has zero real cross-links. Critic pairs eight tiles blind and rejects alternative pairings or ambiguous tiles. Rubric J (below). |
 
 WARN only for first three landings B1/C1/B2: Perechi matching margin ≥0.15, Alchimie productive-pair
-cap ~40%, Lanț typed-edge share ≥50%, Conexiuni cross-link bands usor0–1/normal-greu1–3, and the
-Cald gastronomie-target freeze. Record metrics/denominators and seek ratification after B2; these
+cap ~40%, Lanț typed-edge share ≥50%, Conexiuni cross-link bands usor 0–1/normal-greu 1–3, and the
+Cald gastronomie-target freeze (table in the unbound I/J section below). Record metrics/denominators and seek ratification after B2; these
 proposals never override existing hard FAIL floors. The JS critique mapping stays unchanged:
-I/J require explicit critic/reviewer briefs until a separately authorized code task maps them.
+I/J (unbound section below) require explicit critic/reviewer briefs until a separately authorized
+code task maps them.
 The derived catalog's 123-source freeze/336-board payload stays frozen. Repairing the 83 historical
 FAIL-lint Conexiuni boards is a separate task; do not widen scope to make a batch pass.
 
@@ -136,7 +135,10 @@ FAIL-lint Conexiuni boards is a separate task; do not widen scope to make a batc
   bundle/policy/rubric/procedure digests and current authored source K. No merge. Run the prior
   step-0 checks: cat-content validate, export --check, cat-content-ops check --root .. --check,
   cat-content-rail all --root .. --check, and
-  `go -C go-backend test ./internal/contentrails/ ./internal/contentbuild/ ./internal/httpgolden/`.
+  `go -C go-backend test -count=1 ./internal/contentrails/ ./internal/contentbuild/ ./internal/httpgolden/`
+  (`-count=1`: the rubric is read from outside the module root, so a cached `ok` hides drift).
+  Verify the helpers with `python3 ~/work/_temp/content-loop/miner/sha256_manifest.py verify
+  --manifest ~/work/_temp/content-loop/miner/phase-a-helpers-manifest.json`; a mismatch is BLOCKED.
   Red unchanged validate/export/ops is BLOCKED. Red rail/contentrails disables install, reports the
   first error and grants no waiver. Build the need map and main-bound compat index; historical
   PASS entries and retired feat/gui-cat-m3 bindings do not substitute for this baseline.
@@ -170,7 +172,7 @@ FAIL-lint Conexiuni boards is a separate task; do not widen scope to make a batc
   compat or a missing live mechanic. Seal author sources/URLs separately. Never mutate signed bytes.
 - **M6 Review round 1.** Fixed factual and quality reviewers each judge the whole frozen batch once,
   adversarial fresh web sources, signed before seeing each other. Give reviewer-visible hashes/candidate/dossiers/critic log, withholding author URLs/captures
-  in a separate sealed bundle until both sign. Author sources stay sealed; each item needs ≥1 reviewer-chosen normalized URL outside the author's set. Reject a report with
+  in a separate sealed bundle until both sign. Author sources stay sealed; each new or changed item needs ≥1 reviewer-chosen normalized URL outside the author's set. Reject a report with
   >20% repeated normalized rationale strings, >20% identical rationale rows across the pair, or a
   reviewer name appearing anywhere in an M1–M5 artifact. Record each per-item capture binding.
   Run the sidecar independence guard before accepting the M6 pair. Post the go/drop table ≤24 rows and set `waiting: review`. Only go/drop answers this wait.
@@ -181,8 +183,21 @@ FAIL-lint Conexiuni boards is a separate task; do not widen scope to make a batc
   curation 0–3 then full 4a–4i. Preserve independent ordering in both rounds; native raw JSON exact
   keys stay unchanged, so signed_at, source seals and access receipts are SHA-bound sidecar
   envelopes. Run review_independence.py before build-review; native build-review does not yet
-  implement V2 sidecar checks. Run the same guard before accepting every curation step3, initial
-  rail-review and final-audit signature pair, including flows that never call build-review. Stop if any check cannot be established, never claim future code.
+  implement V2 sidecar checks. Run the guard on M6 (round 1), round 2 and curation step-3 review
+  pairs, including flows that never call build-review. Rail initial/final pairs do not run the
+  guard: record both sidecar envelopes in the manifest and require each `first_peer_read_at` to be
+  later than both `signed_at` values; inherited items are checked by predecessor item-hash equality
+  (4d). The per-item URL and 20% rules reach a rail pair only through a sidecar raw file listing
+  its new or changed items, run through the guard when that list is nonempty (rail finals carry one
+  rationale each and have no 20% metric). Each review round has its own author seal/unseal
+  envelope: the guard requires every `signed_at` before that round's unseal. The helper reads only `{reviewer, items[{id, rationale,
+  sources}]}` raw files and a complete M1–M5 artifact index. Where the native file has another shape
+  (pack-only `verify_*.json`, round-2 reviews, curation graph reviews), the reviewer also signs a
+  sidecar raw file in the helper's shape, SHA-bound to the native file, and the guard runs on the
+  sidecar. Curation has no M3/M4 artifacts: before C1, Claude reviews a helper update that accepts a
+  curation steps 0–2 index and re-pins the helper manifest; without it curation step 3 is
+  BLOCKED. Stop if any check cannot be
+  established, never hand-check instead or claim future code.
 - **M8 Landing packet.** Execute the applicable P/G cascade below, separate pins commit and corpus
   report. Require green gates outright, record each API playthrough, bind exact HEAD and all files.
   Finish step5 prelanding record, then `waiting: land? (pins packet + gates)`. Only Paul's Claude
@@ -200,7 +215,7 @@ The first four are distinct. Reviewers and critic each run as their own
 `~/.claude/skills/agent-routing/scripts/fleet-tiers.sh`; critic and factual use different rungs.
 Do not infer a model alias: retain the selected rung/model/effort, exact prompt and transcript under
 `evidence/<id>/roles/<name>/` and hash each. Only the frozen role-appropriate bundle is provided.
-The same factual/quality names sign round2 as verifier/analyst; roles do not change their identity.
+The same factual/quality names sign round 2 as verifier/analyst; roles do not change their identity.
 
 Source seals, actor artifacts, report signatures, capture IDs and access receipts are retained by
 manifest. Both signed_at timestamps must exist before either receives/reads the other's report;
@@ -211,12 +226,13 @@ review. Native raw review JSON gets no unsupported metadata fields. The scratch 
 the envelopes; the existing native build-review/apply-review binding checks still run unchanged.
 For the 20% rule, normalize whitespace/case; within each report divide duplicate rationale rows
 beyond their first occurrence by all item rows, and across the pair divide identical per-ID rows
-by all IDs. More than20% in either comparison fails. Normalize URL scheme/host/default ports,
+by all IDs. More than 20% in either comparison fails. Normalize URL scheme/host/default ports,
 remove fragments and sort query pairs; preserve path/word accents. URL set difference uses the
 whole sealed author set; every reviewer-chosen capture is independently retained and hash-bound.
 The actor/artifact index lists every M1–M5 path and SHA; scan full bytes, not just actor fields.
 Helper CLI envelope fields and smoke examples are in
-`~/work/_temp/content-loop/miner/INDEPENDENCE.md`.
+`~/work/_temp/content-loop/miner/INDEPENDENCE.md`; where its scope differs (it still names every
+rail pair), this procedure wins.
 
 ## Install cascade — exact substeps 4a–4i
 
@@ -300,10 +316,11 @@ source version and is checked through default all --check, not --source authored
      swap the sha in installed_authorities_pin.go via the metadata template (the file must equal
      PinBytesForInstalledAuthorities exactly). No second installed audit, no second reviewer round and
      no runtime freeze.
-   - 4i Gates: first `df -h /`; below 12 GB free set `waiting: disk`. `cat-content-rail all --check`, `cat-content validate`, `export --check`,
-     `cat-content-ops check --check`, `cat-mobile-pack --check`, `go -C go-backend test -race
+   - 4i Gates: run after the separate `pins` commit exists (moved count and selection
+     expectations are red until then). First `df -h /`; below 12 GB free set `waiting: disk`. `cat-content-rail all --check`, `cat-content validate`, `export --check`,
+     `cat-content-ops check --check`, `cat-mobile-pack --check`, `go -C go-backend test -count=1 -race
      -timeout 60m ./...`,
-     `go -C go-backend vet ./...`, `go -C shared-go/authcore test -race ./...`, `cat-doc-check
+     `go -C go-backend vet ./...`, `go -C shared-go/authcore test -count=1 -race ./...`, `cat-doc-check
      --root ..`,
      `git diff --check` — no new red versus step 0. Known pre-existing reds on main: httpapi
      TestManagedSPA* (frontend not built) are historical examples, not a standing waiver. Any other red without a step-0 record counts as
@@ -331,7 +348,8 @@ source version and is checked through default all --check, not --source authored
    approved counts in internal/contentops (`check_test.go`, `contentops_test.go`) and the Cald
    inbound maps in internal/contexto — list each old -> new value in the README, and land only
    after the owner approves that packet.
-   The separate `pins` commit touches only `go-backend/internal/httpgolden/*_selection_test.go`,
+   The separate `pins` commit touches only `go-backend/internal/httpgolden/v2<id>_selection_test.go`
+   and its predecessor's selection test,
    `go-backend/internal/contentops/{check_test.go,contentops_test.go}`, and
    `go-backend/internal/contexto/content_v1_3_test.go`. List each old → new value and `git show --stat`;
    class P changes no KG/Cald map. No unrelated test logic changes. New/edited Python tests,
@@ -355,29 +373,33 @@ Alchimie has its own review/audit batch even within a multi-game P landing.
 
 Step5 prepares pool dispositions/reasons and docs/reviews/v2-<id>-<slug>/README.md (≤80 plain lines):
 player gain, table summary, actual owner decisions, retrospective, ≤3 proposals and every BLOCKED/
-NEEDS-OWNER. Keep the exact installed-authority rail files plus ≤10 small text files (README,
+NEEDS-OWNER, plus every comparison task worktree the landing created (the landing session removes
+them). Keep the exact installed-authority rail files plus ≤10 small text files (README,
 graph reviews, playthrough log, reference/capture_v2_<id>.py.txt). Raw captures, role transcripts,
 build output and failed attempts stay under evidence, never in repo docs. Preserve all bytes;
 retention cleanup belongs to the later Claude landing session after verified NAS copy.
 Only after the prelanding checks update STATUS counts/Last verified within its 120-line budget;
 if doing so requires an out-of-scope history-file edit, report NEEDS-OWNER. Run cat-doc-check
 --root .. --inventory docs/tracked-markdown.json and git diff --check; commit, stop at land?.
-If main moved, no loop merge: have the owner refresh the task/main binding and required checks;
-repeat once only after explicit direction, then wait `main keeps moving` if unresolved.
+If main moved, the loop does not merge: Claude's landing session merges main into the task branch
+and reruns 4i (and 4g when httpapi or content packages changed). If main moves again, repeat once
+only after explicit direction, then wait `main keeps moving`.
 
 ## Curation wave (class G; ADR-0210)
 
-Curation steps **0–3** replace M1–M4; M2 compatibility still applies fully. Step0 runs M0 gates on
-current main. Step1 chooses ≥20 accepted existing-owner morphology families from final module
+Curation steps **0–3** replace M1–M4; M2 compatibility still applies fully. Step 0 runs M0 gates on
+current main. Step 1 chooses ≥20 accepted existing-owner morphology families from final module
 payloads (never planned/observed lists), recording original wave/id/closure and every exclusion.
-Step2 rebinds retained own-head DEX/DOOM3/table and second-source evidence; missing captures are
-ineligible. Step3 consolidates one module and obtains fresh whole-batch dual review with the V2
-independence sidecars and guard, then posts go/drop as waiting review. Step4 is full 4a–4i and test pins;
-step5 prepares the packet and stops at land?. These source items are not counted as 24 boards.
+The canonical stock is `docs/content-consolidation/v1-8-through-v1-32/current-stock.json` on its
+branch; V1.38–V1.42 payloads are read from their preserved content/v1-* branches with `git show`,
+never executed. Step 2 rebinds retained own-head DEX/DOOM3/table and second-source evidence; missing captures are
+ineligible. Step 3 consolidates one module and obtains fresh whole-batch dual review with the V2
+independence sidecars and guard, then posts go/drop as waiting review. Step 4 is full 4a–4i and test pins;
+step 5 prepares the packet and stops at land?. These source items are not counted as 24 boards.
 
 C1 starts with V1.38–V1.42 final payloads, including Avion, Cinematograf and Interfon; lane labels
-alone do not prove morphology eligibility (Interfon's historical lane differs). Reject any family
-with a key hit in the exact M2 exclusion sources. Mănăstire and Sucitor (without bare sucitoare)
+alone do not prove morphology eligibility (Interfon's historical lane differs). Hold any family
+with a key hit in the exact M2 exclusion sources as `held: recorded exclusion <file:line>`. Mănăstire and Sucitor (without bare sucitoare)
 get separate go/drop rows, each `snapshot rebuild: <files>`; Paul's go on a row accepts it.
 Bare sucitoare always stays excluded; Ie never gets ii/iei. Do not override earlier exclusions,
 clip a required family or reopen a hold automatically. Fresh verification is required for weaker
@@ -390,7 +412,7 @@ then documented board yield; any read-only yield simulation uses in-memory data,
 module execution or import dry-runs. Board candidates are re-screened after each class G landing,
 including Lanț optimal routes and Alchimie par. Stock matches turn vocab-gap into integrate.
 Keep corrected stock measures: 4,968 single-token +766 multiword inputs (three display-only
-labels separate); 3 nodes cross incoming5 using main-served predecessors, 45 only when complete
+labels separate); 3 nodes cross incoming 5 using main-served predecessors, 45 only when complete
 pending waves co-land. Holds are records, may overlap later accepted lemmas, and never leak.
 
 ## First three landings and improvement loop
@@ -400,7 +422,7 @@ pending waves co-land. Holds are records, may overlap later accepted lemmas, and
    greu Lanț cell from the actual need map and name the substitution. Land fewer than four rather
    than wait for filler. Measure actual 4c–4h cascade cost, corpus time/count and pin packet.
 2. **C1 / G:** at least 20 alias-only morphology families as above, then re-screen the B2 queue.
-3. **B2 / P:** at most20 boards: eight Perechi (gastronomie/meme_net, four each), eight Conexiuni
+3. **B2 / P:** at most 20 boards: eight Perechi (gastronomie/meme_net, four each), eight Conexiuni
    (arta_cultura usor/greu, societate usor/greu, sport usor/normal, film_tv usor, geografie normal),
    four Cald greu (literatura/personalitati). These are priorities, not prequalified boards.
 Then use measured cell deficits, maintaining the curation ratio. Every landed or expired wave
@@ -414,52 +436,141 @@ vocabulary-only, not repeatedly researched. Owner-decision-first items wait.
 ## Quality bar
 
 Hold when unsure; reject only factual error, archaic/poetic-only register or duplicate. Familiar
-Romanian everyday/school/culture relevance and an honest readable predicate are mandatory;
-people/places/works use Romanian Wikipedia or better. Frequency is positive only. DEX sense/
+Romanian everyday/school/culture relevance and an honest readable predicate are mandatory: a
+Romanian 12-year-old knows it, or it is school or culture vocabulary; absence from the frequency
+list never rejects a concrete everyday noun, animal, school object or tradition (mărțișor, barză).
+People/places/works use Romanian Wikipedia or better. Frequency is positive only. DEX sense/
 register, exact-head DOOM3 and that head's attributed ordinary flexion table plus one Romanian
 second source are required for lexical additions. Do not borrow another head's table; qualified
 compounds require component morphology and separate compound-sense evidence. Only selected-sense
 substitutable inputs are synonyms; morphology, regional/diminutive/qualified inputs stay distinct.
 Normalize ş/ţ to ș/ț; inspect accent-preserving spellings before trusting folded ranks. No two
 fold-equal spellings are separate additions, no other-sense key theft, no threshold relaxation.
-Truthful label_ro reads from source to target; prefer honest is_a/part_of for displayed Lanț steps.
+Regional or popular forms are inputs only when no other owner exists, reported as "regional input",
+never as synonyms; înv./poet. forms are not aliases. Give a closed set one honest parent (Anotimp,
+Punct cardinal, Crăciun) instead of wiring every member to every other. Truthful label_ro reads
+from source to target. Lanț shows only relation captions (is_a, part_of, created_by,
+contemporary_of; others show "legătură directă"), so prefer an honest is_a or part_of.
 Current game/critic floors above and all applicable rubric FAILs remain binding.
+
+Research method (vocab-gap, curation re-binding and reviewer research): dexonline
+(`https://dexonline.ro/definitie/<word>/json`; DEX for sense and register labels, DOOM 3 for forms;
+follow redirects and keep only definitions whose headword equals the lemma), one second source
+(ro.wikipedia, ro.wiktionary, or Romanian news for a popular sense), and frequency from
+`https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt`
+(best rank among forms). Store URL plus a one-line paraphrase, never copied definitions. The writer
+can only add nodes, edges and aliases and remove edges; anything needing an alias moved or a label,
+description, category or Lanț caption changed is `held: needs owner-approved writer`.
+
+## Rubric I/J and V2 review protocol (unbound trial text)
+
+This section is not digest-bound. `docs/CRITIQUE_RUBRIC.md` is bound into rankings, the derived
+catalog, all three rails and the installed authorities (`contentbuild.RubricSHA256`), so folding
+this text into it changes that digest. That fold is a separate owner-authorized class-G rubric
+transition (rubric constant and Python pin, rank/derive, re-audit of all three rails, authorities,
+corpus), never part of a class-P landing. Rubric section A applies to all six games.
+
+The proposed rules below are **WARN only for the first three V2 landings (B1, C1, B2)**; record the
+observed metric and the reviewers' reasoning, then seek ratification after those landings.
+Existing validator floors and FAIL lints remain hard requirements; this trial does not weaken them.
+
+| Game | Proposed V2 warning target |
+|---|---|
+| Conexiuni | cross-links: `usor` 0–1, `normal`/`greu` 1–3 |
+| Cald sau Rece | freeze new `gastronomie` targets; any proposed addition is a warning |
+| Lanțul Cuvintelor | at least 50% typed edges on the route |
+| Alchimie | productive pairs at most 40% |
+| Perechi | maximum-weight matching margin at least 0.15 |
+
+These are review measurements, not new implemented lints. The workflow's current B–E mapping in
+`.claude/workflows/critique-games.js` stays unchanged; mapping I/J is a separate code task. Until
+then, Intrusul and Perechi briefs apply I/J explicitly, alongside the native quick shape checks and
+rail audit.
+
+**V2 judge-fleet protocol.** M4's gameplay critic is a label/solution-blind pre-review filter, never
+a signer; its log joins the frozen bundle. The fixed `factual-v2-<id>` and `quality-v2-<id>`
+reviewers sign round 1 independently against the frozen candidates, then sign round 2 as verifier
+and analyst against the native dossiers (and Alchimie audit). In each round, both `signed_at`
+timestamps must exist before either reads the other's verdict. Author sources stay sealed until
+both sign; each reviewer chooses at least one URL per new or changed item outside the author's
+normalized URL set. Reject a review with more than 20% identical rationale strings or whose reviewer
+name appears in an M1–M5 artifact. Preserve the rubric's two-signature contract. For V2 this
+overrides rubric section G.3's sequential "overturn the critique" step: the verifier independently
+refutes the candidate and dossier without reading the analyst report, and the two compare
+critiques only after both sign.
+
+**I. Intrusul boards (three members and one intruder)**
+
+- **I1 Honest common predicate.** Build a hub trio with a sibling-hub intruder of the same
+  node type. Every member must satisfy one nameable common predicate; type alone must not
+  reveal the answer. The quick shape validator remains mandatory.
+- **I2 Mechanical separation.** At least two of the three member-to-member links have
+  weight ≥0.60. The intruder has no link to any member. This screen is necessary, but does
+  not prove that the intended odd tile is unambiguous.
+- **I3 Blind odd-one-out.** Shuffle the four displayed tiles, withholding the intended
+  predicate and solution. The gameplay critic chooses the intruder and names the predicate;
+  compare its answer mechanically with the authored answer. A different answer, or any
+  other tile that is arguably odd under a natural predicate, fails the pre-review filter.
+- **I4 Recognizable reasoning.** All four tiles pass A1/A2; a player must be able to explain
+  why the trio belongs together and why the intruder does not. Obscurity, surface spelling
+  accidents and a merely weaker association do not establish a fair intruder.
+
+**J. Perechi boards (four pairs over eight tiles)**
+
+- **J1 Strong pairs, bounded cross-links.** Each of the four intended edges has weight
+  ≥0.60; all 24 non-pair cross-links have weight <0.60. A starter board has zero real
+  cross-links. The quick shape validator and native audit remain mandatory.
+- **J2 Unique matching.** The intended pairing is the unique maximum-weight perfect
+  matching among the 105 possible matchings. Record the best and runner-up matchings and
+  their margin. The proposed margin ≥0.15 is WARN for B1, C1 and B2 under the trial above;
+  uniqueness and the existing hard floors remain required.
+- **J3 Blind pairing.** Shuffle the eight displayed tiles and withhold labels, intended
+  pairs and the solution. The gameplay critic pairs them, then compare unordered pairs
+  mechanically with the authored matching. A different pairing or an ambiguous tile fails
+  the pre-review filter, even when the numeric matching is unique.
+- **J4 Explainable links.** Each intended pair passes A1/A2/A7 and has a short, factual,
+  nameable relation. A strong KG edge alone cannot justify an association a Romanian
+  player would not recognize or distinguish from another plausible partner.
+
 
 ## Heartbeat prompt (new cat-content-v2 only, after approval)
 
 ```text
 Run Cât de român ești V2 from docs/CONTENT_LOOP.md on main (ADR-0188/0210/0211).
-Never resume romanian-content-discovery-improved-loop. Start only after ADR0211 is on main and
-Paul says start; no schedule creation/resume is implied by Phase A approval alone.
-Read state first, then whole procedure at start/procedure_rev change and exact current sub-step.
-Phase B first tick appends old owner_decisions/protected_refs to decisions.jsonl; state stays ≤2KB.
+Never resume romanian-content-discovery-improved-loop. Start only after Paul says start; landing
+the procedure implies no schedule creation or resume.
+Read state first, then the whole procedure at start/procedure_rev change and the exact current sub-step.
+Phase B first tick appends old owner_decisions/protected_refs to decisions.jsonl; state stays ≤2 KB.
 Boards/targets across six games are the product; M0 need map, M1 mine, M2 compat, M3 lint, M4 blind
-critic, M5 freeze, M6 independent round1, M7 stage+round2, M8 landing packet, M9 record. Curation
-uses steps0–3, full M2 screen, then4a–4i/5. B1 up to4 Lanț, C1 ≥20 V1.38–42 morphology families,
-B2 up to20 multi-game boards; later cap24, curation at least1in3 landings. No KG+boards co-land.
-Use current main-bound task worktree, Go1.27.3 PATH=/usr/local/go/bin:$PATH GOTOOLCHAIN=local.
-Never checks from shared main; never source-module execution/apply except approved4a. No importer
-pre-screen dryrun. P pays rank/derive, quick+extensions regeneration, pins/export, corpus,
-authorities and gates with world inherited; G pays full4a–4i. No light path or skipped gate.
-Read scratch-helper interfaces; outputs are unapproved. Preserve sources, original verdicts,
-V1 holds/refs, all evidence and rule exclusions; sucitoare excluded, Ie never ii/iei, V1.33 fresh
-research, V1.14 reapplied not merged. Raw evidence/prompts/modelIDs/transcripts/manifests under
+critic, M5 freeze, M6 independent round 1, M7 stage + round 2, M8 landing packet, M9 record. Curation
+uses steps 0–3, the full M2 screen, then 4a–4i/5. B1 up to 4 Lanț, C1 ≥20 V1.38–42 morphology
+families, B2 up to 20 multi-game boards; later cap 24, curation at least 1 in 3 landings. No KG and
+boards co-land. Rubric I/J are unbound text in CONTENT_LOOP.md; never edit CRITIQUE_RUBRIC.md.
+Use the current main-bound task worktree, Go 1.27.3, PATH=/usr/local/go/bin:$PATH GOTOOLCHAIN=local,
+and go test -count=1. Never run checks from shared main; never execute or apply source modules except
+approved 4a. No importer pre-screen dry run. P pays rank/derive, quick+extensions regeneration,
+pins/export, corpus, authorities and gates with world inherited; G pays full 4a–4i. No light path or
+skipped gate. Read scratch-helper interfaces; outputs are unapproved. Preserve sources, original
+verdicts, V1 holds/refs, all evidence and rule exclusions; sucitoare excluded, Ie never ii/iei, V1.33
+fresh research, V1.14 reapplied not merged. Raw evidence/prompts/model IDs/transcripts/manifests under
 ~/work/_temp/content-loop/evidence/<id>/ only. Never /tmp, delete, reset/clean, merge, push or deploy.
-Fixed author/factual-v2-id/quality-v2-id/critic-v2-id; each reviewer/critic own codex exec subprocess
-from fleet-tiers rungs, critic and factual different rungs. Sealed author URLs until both sign;
-≥1 reviewer-chosen URL per item, signed_at precedes peer reading, >20% identical rationales or
-reviewer actor in M1–M5 voids review. SHA-bound sidecar preflight plus unchanged native checks.
-One sub-step per scheduled tick; interactive burst≤4 then stop until continue. Max24ticks/20commits;
-research≤12items/tick,≤300sec/item, dictionary globally≥2sec, phases serialized. Fail twice waits.
-Only go/drop answers review, land answers land?, continue starts a burst. Notify each new waiting
-once with≤10lines, silence unchanged waits; elapsed time never approves. Seven days waiting or
-invalidating main-KG change expires; never rerun M3–M6 unprompted. df -h / before corpus/fulltests;
-free<12GB waits disk. BLOCKED/NEEDS-OWNER failures are reported, not repaired outside scope.
-Every landing has separate allowlisted pins commit old→new+git show --stat; independent4g script
-changes exactly ROOT/reference/output lines, attached diff, count previous block1206 or NEEDS-OWNER
-with case-listdiff. 4i HTTP-plays every board; every alias gets fuzzy-neighbour probe+Cald guess.
-Stop waiting: review after M6 table≤24rows; then waiting: land? (pins packet + gates). Paul's Claude
-Code session reviews/ff-only/pushes/NAS-verifies/cleans. The loop never lands itself. Record actual
-per-game cell outcomes and ≤10line retrospective/≤3proposals after external landing. No dummy
-requests, cache guarantees or model/cache setting changes.
+Fixed author/factual-v2-<id>/quality-v2-<id>/critic-v2-<id>; each reviewer/critic its own codex exec
+subprocess from fleet-tiers rungs, critic and factual on different rungs. Author URLs sealed until
+both sign; ≥1 reviewer-chosen URL per new or changed item, signed_at precedes peer reading, >20%
+identical rationales or a reviewer name in M1–M5 voids the review. SHA-bound sidecar guard on M6,
+round 2 and curation step 3, plus the unchanged native checks.
+One sub-step per scheduled tick; interactive burst ≤4, then stop until continue. Max 24 ticks/20
+commits; research ≤12 items/tick, ≤300 s/item, dictionary globally ≥2 s apart, phases serialized.
+Fail twice waits. go/drop answers review, land answers land?, continue starts a burst, resume <id>
+answers a wait Paul names. Notify each new waiting once with ≤10 lines, silence unchanged waits;
+elapsed time never approves. Seven days waiting or an invalidating main-KG change expires; never
+rerun M3–M6 unprompted. df -h / before corpus/full tests; free <12 GB waits disk. BLOCKED/NEEDS-OWNER
+failures are reported, not repaired outside scope. Every landing has a separate allowlisted pins
+commit with old→new and git show --stat; the independent 4g script changes exactly the
+ROOT/reference/output lines, diff attached, count equals the previous block (1206) or NEEDS-OWNER
+with a case-list diff. 4i HTTP-plays every board; every alias gets a fuzzy-neighbour probe + Cald
+guess. Stop at waiting: review after the M6 table (≤24 rows); then waiting: land? (pins packet +
+gates). Paul's Claude Code session reviews, merges --ff-only, pushes, NAS-verifies and cleans. The
+loop never lands itself. Record actual per-game cell outcomes and a ≤10-line retrospective/≤3
+proposals after external landing. No dummy requests, cache guarantees or model/cache setting changes.
 ```

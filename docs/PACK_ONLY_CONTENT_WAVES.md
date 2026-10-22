@@ -17,7 +17,8 @@ For V2, follow [ADR-0211](adr/0211-content-loop-v2-all-boards.md) and the exact 
 are **class P**; quick boards use the 4c–4e rail candidate/review/proposal/audit/finals path,
 not an unsupported `import-candidates` payload. Class P has no light path: quick and
 extensions bind the live pack even when their items are inherited. A KG change is class G
-and takes the full 4a–4i cascade in a separate landing.
+and takes the full 4a–4i cascade in a separate landing. Intrusul and Perechi boards also apply
+the unbound rubric I/J section in CONTENT_LOOP.md; the bound rubric stays unchanged.
 
 Use a landing id `<id>` (`b1`, `c1`, `b2`, …), branch `content/v2-<id>-<slug>`, and evidence
 under `~/work/_temp/content-loop/evidence/<id>/` with a SHA-256 manifest. `<ID>` is the

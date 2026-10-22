@@ -190,4 +190,4 @@ Parallel lanes also allocated0188/0189 independently. All four full-filename bod
 
 - [0210](0210-curation-waves-and-staged-stock-landing.md) — curation waves install reviewed stock in stages (stage 1: 20+ word-form families from V1.38–V1.42); owner rulings on sucitoare and Ie; step-1 exclusion screen, evidence retention and reviewer independence rules.
 
-- [0211](0211-content-loop-v2-all-boards.md) — proposed V2 all-board procedure: M0–M9, B1→C1→B2, class P/G cascades, mechanical independence, test-pin packets and Claude Code-only landing; Phase A review pending.
+- [0211](0211-content-loop-v2-all-boards.md) — V2 all-board procedure: M0–M9, B1→C1→B2, class P/G cascades, mechanical independence, test-pin packets and Claude Code-only landing; rubric I/J stay outside the digest-bound rubric.
