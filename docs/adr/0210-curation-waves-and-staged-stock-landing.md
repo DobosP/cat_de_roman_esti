@@ -27,6 +27,9 @@ Owner rulings:
 - Ie never gains the keys `ii` or `iei`.
 
 Procedure rules for every wave:
+- Test-pin packet: a landing updates only the pinned expectations it moves (reviewed-corpus selection
+  test, contentops board/approved counts, Cald inbound maps) in one separate `pins` commit that Paul
+  approves before the landing.
 - Step 1 greps `tests/` and every `docs/reviews/*/graph-candidates.json` for recorded exclusions.
 - Raw evidence stays under `~/work/_temp/<wave>/`, never `/tmp`.
 - Reviewers never see author drafts or each other's verdict before signing.
@@ -50,5 +53,5 @@ failed every install. Step 1 could not see the pre-V1.8 exclusion of `sucitoare`
   lands without green gates.
 - V1.33 items need fresh research before any stage includes them, and V1.14 items are re-applied
   through the cascade, never merged.
-- The V2 discovery loop for all six games' boards is designed separately and will amend this
-  procedure again.
+- The V2 discovery loop for all six games' boards ([design](../reviews/content-loop-v2-design-20261022.md),
+  approved with its defaults, four Lanț chains first) will amend this procedure again.

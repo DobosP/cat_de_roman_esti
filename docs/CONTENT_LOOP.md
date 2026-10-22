@@ -238,7 +238,12 @@ your content changed its expectation, with no generator to refresh it, is report
    docs/STATUS.md. The Python reference suite is not a gate (ADR-0186): leave
    tests/current_content.py alone and note any Python red in the README. Never new or edited
    `_test.go`, new Python tests, new repo scripts other than the wave data module, or
-   rules_unicode15.json. On waking to a dirty worktree or an unfinished merge at any step, reset the
+   rules_unicode15.json, except the test-pin packet (ADR-0210): in one separate `pins` commit,
+   update only the expectations the landing moves — the new `vNNN_selection_test.go` block in
+   go-backend/internal/httpgolden with its predecessor's "did not move past" edit, the board and
+   approved counts in internal/contentops (`check_test.go`, `contentops_test.go`) and the Cald
+   inbound maps in internal/contexto — list each old -> new value in the README, and land only
+   after the owner approves that packet. On waking to a dirty worktree or an unfinished merge at any step, reset the
    worktree only
    (`git -C <worktree> reset --hard HEAD && git -C <worktree> clean -fd`; never in
    ~/work/cat_de_roman_esti) and redo the sub-step from its last commit.
