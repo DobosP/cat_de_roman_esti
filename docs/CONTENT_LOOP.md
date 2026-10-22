@@ -1,180 +1,260 @@
-# Content loop — operating procedure
+# Content loop — V2 operating procedure
 
-Valid until: the owner edits or retires this file. Decision:
-[ADR-0188](adr/0188-park-v1-7-and-reset-content-loop.md).
+Valid until: a later owner-approved procedure supersedes this file.
+Decisions: [ADR-0188](adr/0188-park-v1-7-and-reset-content-loop.md),
+[ADR-0210](adr/0210-curation-waves-and-staged-stock-landing.md), and the proposed
+[V2 procedure packet](adr/0211-content-loop-v2-all-boards.md).
 
-This is the procedure a recurring agent (Codex heartbeat or Claude Code) follows to grow the
-Romanian content of the six games. The goal is more high-quality Romanian words that players meet:
-everyday concepts they type, full inflection sets as inputs, truthful links, and later playable
-rounds, each checked against Romanian sources on the web. Progress is player-visible additions
-counted by `cat-content-ops delta`. Receipts, pins, manifests, archives and tooling are never progress.
+Phase A draft: stop at `waiting: V2 procedure review`. Phase B starts only after ADR-0211 exists
+on main and Paul explicitly says to start. The retired `romanian-content-discovery-improved-loop`
+automation stays paused permanently. Do not start B1, install content or create a replacement
+schedule while drafting this procedure. The I/J rubric edit changes a compiled reviewed hash:
+Phase A records actual check results, but cannot update runtime pins, catalogs or authorities.
+Native content gates remain BLOCKED until a separately authorized rubric-pin/authority transition
+is reviewed and landed; this draft grants no Phase B qualification.
 
-## Authority and reading
+## Product and authority
 
-- ADR-0188 is the decision; this file is its procedure. Where this file is more specific than
-  docs/STATUS.md, the content skill, or ADRs 0170–0187, follow this file: their content-wave
-  process rules are history. AGENTS.md git, scratch, secrets and landing rules stay in force.
-- Read: this file, AGENTS.md, the top of docs/STATUS.md (counts), the docs/CRITIQUE_RUBRIC.md
-  sections you apply, the previous wave's pool.json, and go-backend/internal/contentrails/review.go
-  when you write rail reviews. Do not open SKILL.md, TASK_BRIEF.md, WORKLOG.md, older ADRs or any
-  docs/reviews/ directory from before V1.8, except the archived capture script named in step 4g and
-  the previous installed wave's native/ rail files that 4c repoints and 4d inherits from.
-- Owner messages override this file. Record them under "Owner decisions" in the wave README, never
-  as an ADR. Never edit this file or ADR-0188; propose a change to the owner in one line.
+Playable boards and targets across all six games are the product: Alchimie, Intrusul, Perechi,
+Conexiuni, Cald sau Rece and Lanțul Cuvintelor. Mine the current KG for named board needs; vocabulary
+is added only for a documented `board_ref` gap or through an ADR-0210 curation wave. Report added,
+approved, eligible, actually selected and played boards separately from concepts, aliases, graph
+claims and tooling. `cat-content-ops delta` is a count/identity report, not a playability certificate.
 
-## Scope fence
+Read this whole file on main at cycle start and whenever its last commit differs from state
+`procedure_rev`; re-read the exact current sub-step before acting. Read AGENTS.md, STATUS counts,
+applicable CRITIQUE_RUBRIC sections, PACK_ONLY_CONTENT_WAVES, ADR-0210 and ADR-0211. The approved
+V2 design and read-only review (2026-10-22) explain decisions; their old line numbers and snapshot
+counts are not current authority. Preserve fixed-name reviewers, the hash-bound chain, dictionary
+spacing, source fidelity, holds, tick/commit discipline and the Python-suite-not-a-gate rule.
+Do not open SKILL.md, TASK_BRIEF.md, WORKLOG.md or unrelated older ADRs/review trees; the archived
+4g reference and recorded exclusion searches below are explicit exceptions. User messages win.
+After Phase A, never edit this procedure or ADRs under the content loop; propose changes instead.
 
-Out of scope: GUI/frontend/web static, Go/Python/Rust logic, toolchain or dependency installs,
-Windows/WSL, CI, deploy, any push or remote ref, PostgreSQL/accounts, retention or cleanup policy,
-new validators/gates, and admission, stop, ACK, clock or deadline files. Allowed edits are content
-data, the files generated from it, and the bookkeeping listed in step 4. A non-content failure is
-reported, never repaired: `BLOCKED: <command> -> <first error line>`. A test that fails only because
-your content changed its expectation, with no generator to refresh it, is reported as
-`NEEDS-OWNER: <test> expects <old>, content now <new>`; the wave stays unlanded.
+Owner words are context-specific: `go` or `drop <ids>` answers only `waiting: review`; `land` answers
+only `waiting: land?`; `continue` starts the next interactive burst. Other messages are questions,
+not approvals. A landing instruction never authorizes the loop to merge/push/delete: Paul's
+Claude Code session is the landing reviewer/operator. Report actual owner decisions, never infer
+approval from elapsed time, a schedule, signatures, an old gate or an unchanged hash.
 
-## Environment, names and hazards
+## Scope fence, environment and names
 
-- Go 1.27.3: `export PATH=/usr/local/go/bin:$PATH GOTOOLCHAIN=local`; `go version` must report
-  go1.27.3, otherwise BLOCKED (go-backend requires it since the core-v1.13 KIT_BUMP, ADR-0209). Python importer: `~/work/cat_de_roman_esti/.venv/bin/python`
-  with `PYTHONPATH=scripts:.` from the worktree; never `python -I`.
-- Wave V1.<N>, theme `<theme>` (say "wave", never "Source<K>"): branch `content/v1-<N>-<theme>`,
-  created by `python3 ~/work/agent-ops/scripts/create_task_worktree.py --repo ~/work/cat_de_roman_esti
-  --branch content/v1-<N>-<theme> --task "<theme>" --write`; scratch
-  `~/work/_temp/content__v1-<N>-<theme>/`;
-  module `scripts/<theme_underscored>_v1_<N>_data.py`; `BUILD_VERSION = "fixture-v1-<N>-<theme>"`;
-  authored source `authored-v<K+1>.json` (K = highest existing, today 12); corpus
-  `python-http-parity-v1-<N>.json.gz`; pool `docs/content-pool/v1-<N>-<theme>/pool.json`;
-  reviews `docs/reviews/v1-<N>-<theme>/`. Loop state: `~/work/_temp/content-loop/state.json` (≤2
-  KB); if it is
-  missing, create it for the first open backlog wave at step 0 with `waiting` null.
-- Hazards: bare `cat-content` writes bundled.json/digest.go and bare `cat-mobile-pack` rewrites the
-  mobile contract — use `cat-content validate`, `cat-content export --root .. --check` and
-  `cat-mobile-pack --root .. --check`. Only `cat-content-ops` and `cat-content-rail` print usage
-  when run with no arguments; `--help` is unreliable. `cat-content-ops` needs `--root ..` under
-  `go -C go-backend`. Rail file paths must be absolute and outside fixtures/ and sources/.
-  `apply_common_words_v24.py` always gets `--data-module <theme_underscored>_v1_<N>_data` (an
-  importable name, not a path; the default applies V24). One module may return nodes, edges and aliases.
-  `import_candidates.py` has no dry run.
-- Workers: you (author) plus two reviewer agents with fixed names for the whole wave,
-  `factual-v1-<N>` and `quality-v1-<N>`. Neither authors items. The rails require two different
-  reviewer names, and the same names sign the finals.
+No GUI/frontend/runtime logic, dependency/toolchain/CI/gate changes, deploy, PostgreSQL/accounts,
+mobile/device testing, secret values, remote-ref change, push, merge or deletion by the loop.
+Allowed content writes are the cascade's named data/generated files, review bookkeeping and the
+separate owner-reviewed test-pin packet. Read-only scratch helpers are tooling, not progress;
+porting them into repository code is a separate task. No new repo validators or admission policy.
+Report `BLOCKED: <command> -> <first error line>` without repairing non-content code. An expectation
+outside the pins allowlist stays `NEEDS-OWNER: <test> expects <old>, content now <new>`; never land red.
 
-## Each tick
+Use `export PATH=/usr/local/go/bin:$PATH GOTOOLCHAIN=local`; `go version` must be go1.27.3.
+Python importer: `~/work/cat_de_roman_esti/.venv/bin/python`, `PYTHONPATH=scripts:.` from the task
+worktree, never `python -I` for importer execution. All checks run from a task worktree root:
+shared main's .venv makes cat-doc-check refuse. Shared main stays clean and read-only to the loop.
+Create each task from the approved exact main SHA with
+`python3 ~/work/agent-ops/scripts/create_task_worktree.py --repo ~/work/cat_de_roman_esti --branch content/v2-<id>-<slug> --task "<player outcome>" --write`.
+Move its generated TASK_BRIEF.md into that landing's scratch; never overwrite a prior brief.
+IDs are `b1`, `c1`, `b2`, …; branch `content/v2-<id>-<slug>`, module
+`scripts/<slug_underscored>_v2_<id>_data.py`, build version `fixture-v2-<id>-<slug>` and review
+`docs/reviews/v2-<id>-<slug>/`. V1 branch, module and corpus names remain preserved history.
+Evidence, role prompts/model IDs/transcripts, author captures and SHA manifests live under
+`~/work/_temp/content-loop/evidence/<id>/`, never /tmp. Delete nothing; Claude copies evidence to
+the NAS with SHA verification before owner-operated cleanup. Never create workspace/cache copies.
 
-1. Read state.json: wave, theme, branch, wave_base, step (the NEXT sub-step to do), ticks_used,
-   commits, accepted, installed, no_progress_ticks, waiting, waiting_since, last_reminder,
-   step_ticks (ticks spent per step), baseline, procedure_rev.
-2. If `waiting` is set and no new owner message answers it, reply
-   `waiting since <waiting_since>: <reason>`; add one reminder line only when last_reminder is more
-   than 24 h old (then update it); stop. An owner message in this thread answers it: record it under
-   "Owner decisions" in state.json (and later the README), clear `waiting`, and act on it this tick.
-3. Otherwise do exactly one sub-step (in step 4: one lettered sub-step; in 4e: one rail), commit on
-   the wave branch if files changed, and update state.json (step = next sub-step, counters,
-   step_ticks).
-4. Reply in at most three lines:
-   `V1.<N> step <k>: <what changed> | accepted <a> | delta vs wave_base: <concepts/connections/forms>`,
-   using `go -C go-backend run ./cmd/cat-content-ops delta --root .. --baseline <wave_base> --text`.
-   The step-3 review table, a 10-line waiting summary and the proposals message are the exceptions.
-- Before a step-1, step-4 or step-5 tick, reread that step's section of this file. After reading the
-  whole file, store its last commit hash in procedure_rev.
-- One wave at a time: create the next wave's branch only after the current one has landed or the
-  owner has closed it.
-- Budgets per wave: 28 working ticks and 22 commits, merge commits excluded (a 40-item wave needs
-  about 20: step 1, four
-  research ticks, step 3, 4a–4i with 4e split per rail, step 5); research ≤12 items per tick. A
-  sub-step that fails twice in a row sets `waiting` with its first error line.
-- Set `waiting` (with waiting_since) and write a 10-line plain summary when: two research ticks in a
-  row move no pool item to researched, held or rejected (no_progress_ticks; it resets whenever an
-  item changes state), a budget is reached, a BLOCKED or NEEDS-OWNER line stands with no research
-  left, or the backlog and its discovery extension (Improvement loop, step 3) are exhausted.
-- Install is enabled only while, on main, `cat-content-rail all --root .. --check` and
-  `go -C go-backend test ./internal/contentrails/ ./internal/contentbuild/` are green (ADR-0189: a
-  GUI/runtime commit on main no longer disables install). Check at step 0 and again before 4a.
-  Otherwise run research-only: steps 0–3, post the step-3 table and set `waiting: install disabled`
-  instead of `waiting: review`. When the owner answers, merge main, redo step 0 (new wave_base) and
-  start 4a only if install is now enabled. At 4i the rail check and `go test ./internal/contentrails/`
-  must be green outright; "no new red" never excuses them. Missing go1.27.3 is BLOCKED.
+State is `~/work/_temp/content-loop/state.json` (≤2 KB). Phase B's first tick appends the old
+`owner_decisions` and `protected_refs` as one JSON object to `decisions.jsonl`, then replaces state
+with V2 pointers: loop, landing, lane, branch, exact main base, step, budgets, waiting null,
+waiting_since null, procedure_rev and evidence pointer. Keep decisions.jsonl append-only; never drop old holds/refs.
+Do not perform this V2 migration during Phase A.
+Never run bare cat-content or cat-mobile-pack without --check. Only 4f exports content; 4a's
+approved importer is the only KG apply path, with explicit importable --data-module. No importer
+dry-run outside approved 4a: import-candidates requires both review artifacts before any preflight.
 
-## Wave steps (one wave = one batch of 40–60 items; one install pays the cascade once)
+## Cadence, waiting and expiry
 
-0. Baseline. Create the wave worktree if it does not exist (command in Environment), then merge main
-   into the wave branch (`git -C <worktree> merge --no-edit main`). If the only conflict is
-   docs/STATUS.md, take main's copy (`git -C <worktree> checkout --theirs docs/STATUS.md && git -C
-   <worktree> add docs/STATUS.md`) and commit the merge; any other conflict: `git -C <worktree> merge
-   --abort` and set `waiting: merge conflict in <files>`. Never edit docs/STATUS.md or write the
-   wave README before step 5;
-   remove a wave README that already exists in the step-0 merge commit (step 5 writes it fresh).
-   Record `wave_base` (worktree HEAD) and the pass/fail of `cat-content
-   validate`, `export --check`, `cat-content-ops check --root .. --check`, `cat-content-rail all --root
-   .. --check` and `go -C go-backend test ./internal/contentrails/ ./internal/contentbuild/
-   ./internal/httpgolden/` in state.json `baseline`. A red validate, export --check or ops check on the
-   unchanged tree is BLOCKED. A red rail check or contentrails test disables install; since ADR-0189
-   it means content or auditor drift, not a runtime commit, so report it as BLOCKED with its first
-   error line and keep researching.
-1. Candidates. Take 40–60 items (a concept with its links is one item) from the backlog. Before any
-   web call, pre-screen every planned form (headword, plural, articulated, genitive) with a scratch
-   script. Fold with bundled.json `normalization_map`. Look up `normalized_index`, `labels`, node
-   aliases and `discovery_world.concepts`: a same-sense hit means add only the missing forms; an
-   other-sense owner means `held: owned by <id>` (never steal a form). Check
-   `contexto_data.projection_terms`: a hit is a Cald-only proxy, so a real concept is an upgrade.
-   Check `DEFERRED_AMBIGUOUS_TERMS` (scripts/contexto_common_words_v72_data.py) and
-   `ReviewedUnresolved` in go-backend/internal/graph/service.go. Grep `tests/` and every
-   `docs/reviews/*/graph-candidates.json` (pre-V1.8 reviews included) for a recorded exclusion of the
-   form: it stays excluded unless the owner overrides it. Read the `state` of matching records
-   in docs/content-pool/*/pool.json (skip `rejected`, reuse held reasons). Known collisions:
-   miercuri (Wednesday series), poștașul (Poșta Română), roșie/roșii (tomato), colinde (Colind),
-   paste (Paste), mate (Matematică), sarma (Sârmă); homographs to judge: luni, vară, rață.
-   Never list two spellings that fold equal (leafă/leafa). The writer can only add nodes, edges and
-   aliases and remove edges; anything needing an alias moved or a label, description, category or
-   Lanț caption changed is `held: needs owner-approved writer`. Write survivors to the pool as `idea`.
-2. Research (≤12 items per tick, ≤5 minutes each, pool committed every tick). Per item: dexonline
-   (`https://dexonline.ro/definitie/<word>/json`; DEX for sense and register labels, DOOM 3 for
-   forms; follow redirects and keep only definitions whose headword equals the lemma; ≥2 s between
-   requests), one second source (ro.wikipedia, ro.wiktionary, or Romanian news for a popular
-   sense), and frequency from
-   `https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt`
-   (normalize ş/ţ to ș/ț; best rank among forms). Store URL plus a one-line paraphrase, never copied
-   definitions. Each new concept names its 4–8 link targets before research. Unresolved items are
-   `held` with one line. Keep every raw capture under `~/work/_temp/content__v1-<N>-<theme>/` (never
-   `/tmp`) and cite that path, so the evidence survives a reboot.
-3. Review. Write the data module scripts/<theme_underscored>_v1_<N>_data.py from the researched
-   items (templates in 4a). `factual-v1-<N>` and `quality-v1-<N>` each judge the whole batch once, on
-   the web, without having seen author drafts or each other's verdict, and each consults at least one
-   source per item that they chose themselves, and write docs/reviews/<wave>/graph-factual-review.json and graph-quality-review.json
-   bound to the sha256 of the module they judged (accept/modify/reject plus one line; factual
-   accepts
-   cite sources; later verdict edits and drops need no re-review). Apply
-   their modify and reject verdicts to the module. With fewer than 10 accepted items after two
-   research ticks, do one more backlog pass, then continue with at least 5, or post the table and set
-   `waiting: close as research-only?`. Post the table (word | type | node/edge | games | sources |
-   verdict) and set
-   `waiting: review`. Owner `go` → step 4, one sub-step per tick; `drop <ids>` → remove them from the
-   module (the reviews stay valid for the rest) and continue.
-4. Install (one commit per lettered sub-step; state.step = 4a..4i; Go tools via
-   `go -C go-backend run ./cmd/<tool> ... --root ..`).
+One scheduled run is one tick/one sub-step (4e-quick, 4e-world and 4e-extensions are separate).
+An interactive burst has at most four sub-steps; post one status line and stop until `continue`.
+Each productive sub-step commits/checkpoints separately and updates the next saved step; limits
+are 24 working ticks and 20 commits per landing. Research stays ≤12 items/tick and ≤300 seconds
+per item; all dictionary requests across workers are ≥2 seconds apart, with author/reviewer phases
+serialized. Frequency is positive-only evidence. A sub-step failing twice sets waiting with its
+first error; two no-progress research ticks, budget, unresolved BLOCKED/NEEDS-OWNER, or disk <12 GB
+free also set waiting. Before corpus capture or full tests run `df -h /`.
+Persist waiting_since as UTC when waiting is first set or changes; never reset it on an unchanged tick.
+Post each new waiting value once with a summary ≤10 lines, then stay silent until it changes.
+Never issue empty keepalive requests, promise cache retention, or alter model/cache settings.
+
+Landing mode is land-or-expire, with at most one batch from M5 freeze to landed; no next-batch M1
+until it lands or expires. In Phase B only, after seven days in any waiting set `waiting: expired <id>; restart?`.
+A main KG change invalidating frozen dossiers also expires that batch. Return expired candidates
+to the pool as unapproved attention; keep all files/verdicts unchanged. Fresh M3–M6 is required for
+reuse, but never re-run those steps unprompted. A non-KG bound input change also invalidates review:
+stop for a refreshed main-bound task/review, never merge/rebase the task or transfer old PASS lanes.
+
+## Need map, mining and game floors
+
+The need map replaces the theme backlog. Derive eligible boards per game/category/difficulty
+against exact main blobs, reserve, tombstones and ranking; target four per cell. Publish total,
+approved, held, eligible and starter shelves separately. A no-candidate cell is a shortfall, not
+permission for weak vocabulary or generic links. Read-only helper CLIs under
+`~/work/_temp/content-loop/miner/`:
+
+- `python3 need_map.py --root <task> --out <evidence>/need-map.json`
+- `python3 compat_index.py --root <task> --out <evidence>/compat-index@<sha>.json`
+- `python3 mine.py --root <task> --compat <index> --cell <game>:<category>:<difficulty> --per-cell 3 --budget <bounded-count> --out <evidence>/mining.json`
+- `python3 critic_blind.py build --root <task> --input <candidate> --public-out <evidence>/critic-public.json --key-out <evidence>/critic-key.json`
+- `python3 critic_blind.py compare --key <private-key> --response <critic-answer> --out <evidence>/critic-comparison.json`
+- `python3 sha256_manifest.py create --base <evidence> --out <evidence>/manifest.json`; verify with `verify --manifest <manifest>`.
+- `python3 review_independence.py --author-seal <sealed-urls> --reviews <factual-envelope> <quality-envelope> --artifacts <M1-M5-index> --out <evidence>/independence.json`
+
+Run these by absolute helper path; they read repo bytes, never import/execute source modules, and
+write only inside content-loop scratch. Outputs are hypotheses/measurements; they do not stage,
+reserve, promote or certify a board. Bounded miner shortfalls and unresolved static expressions
+are surfaced. The private critic key and sealed author source set never enter the critic/reviewer
+input; the critic needs visible tile text/captions to play, but no group/predicate/solution labels.
+
+| Game | Existing floors and blind critic |
+| --- | --- |
+| Conexiuni | Four typed 4-member hubs; validate-pack and strict FAIL-clean critique: tile fairness, red-herring budget, duplicates against full inventory/tombstones, reskins, member overuse >8. Critic solves 16 shuffled tiles without group labels, rejects a second valid partition, supplies “each tile …” predicates and recognizes ≥3/4 per group. |
+| Cald | ≥5 actual direct non-distractor predecessors, reachable ≥120, responsive ≥40, salience reviewed. Critic supplies five openers before distances; ≥1 within two hops and one dominant sense. Main-served predecessors, not pending-wave totals, decide the floor. |
+| Lanț | Normal shortest path 3–4 hops, greu 4–6; BFS-optimal, ≥2 first hops, layers ≥2, captions on every optimal edge. Critic plays only exposed captions, explains each transition and reaches the target within par+2. |
+| Alchimie | Closure mining, greu gaps first: 5–7 seeds, exact action par, ≥2 openings and live audit-projections. Critic plays audited openings, infers target and rejects free pairs. No new discovery-world concept (252/256 is historical headroom). |
+| Intrusul | Same-type hub trio plus sibling-hub intruder, valid quick shape; ≥2/3 member links ≥0.60, intruder has no member link. Blind critic names one honest predicate and odd tile; another natural odd-one-out reading fails. Rubric I. |
+| Perechi | Four edges ≥0.60, unique maximum-weight perfect matching among 105, all 24 cross-links <0.60; starter has zero real cross-links. Critic pairs eight tiles blind and rejects alternative pairings or ambiguous tiles. Rubric J. |
+
+WARN only for first three landings B1/C1/B2: Perechi matching margin ≥0.15, Alchimie productive-pair
+cap ~40%, Lanț typed-edge share ≥50%, Conexiuni cross-link bands usor0–1/normal-greu1–3, and the
+Cald gastronomie-target freeze. Record metrics/denominators and seek ratification after B2; these
+proposals never override existing hard FAIL floors. The JS critique mapping stays unchanged:
+I/J require explicit critic/reviewer briefs until a separately authorized code task maps them.
+The derived catalog's 123-source freeze/336-board payload stays frozen. Repairing the 83 historical
+FAIL-lint Conexiuni boards is a separate task; do not widen scope to make a batch pass.
+
+## Wave steps — M0–M9
+
+- **M0 Need map and baseline.** Create from exact clean main; record HEAD, status, relevant blobs,
+  bundle/policy/rubric/procedure digests and current authored source K. No merge. Run the prior
+  step-0 checks: cat-content validate, export --check, cat-content-ops check --root .. --check,
+  cat-content-rail all --root .. --check, and
+  `go -C go-backend test ./internal/contentrails/ ./internal/contentbuild/ ./internal/httpgolden/`.
+  Red unchanged validate/export/ops is BLOCKED. Red rail/contentrails disables install, reports the
+  first error and grants no waiver. Build the need map and main-bound compat index; historical
+  PASS entries and retired feat/gui-cat-m3 bindings do not substitute for this baseline.
+- **M1 Mining.** Select thinnest eligible cells; 503 cells first (historically Perechi gastronomie/
+  meme_net and ten empty Conexiuni cells). Three prospects per slot, max two mining ticks; shrink
+  the batch rather than loop. Vocab-gap requires a named board_ref and minimum truthful KG change;
+  if a lemma is in accepted stock it becomes integrate, not new research. Never mix KG and boards
+  in one landing. Board batches cap at 24, B1 at four; this retires V1's 40–60/minimum20 board rule.
+- **M2 Compatibility.** Screen every planned/observed form and selected sense against normalization_map,
+  normalized_index, labels, aliases, discovery_world, Cald projections, current accepted/held stock,
+  exact accent-preserving ReviewedUnresolved and v72 DEFERRED_AMBIGUOUS_TERMS. Other-sense owners
+  remain owned; never steal aliases. Screen BLOCKED_ALIAS_FORMS, collision pairs, fuzzy deny and all
+  DEFERRED_* in scripts/{contexto_common_words_v44,basic_words_v30,basic_words_v32,basic_words_v33}_data.py,
+  tests/ and every docs/reviews/*/graph-candidates.json, including pre-V1.8. Cite each hit as
+  `held: recorded exclusion <file:line>`; unknown dynamic expressions fail closed. Also screen board
+  signatures (Conexiuni quads/reskins, Lanț endpoint pairs, Cald targets, Intrusul/Perechi sets),
+  reserve/tombstones, demotions and owner holds. No observation is an approval/reservation.
+- **M3 Lint pre-screen.** Use validate-pack and critique --strict on an evidence-directory pack copy,
+  using validate-pack --root <task> --kg <kg-copy> --pack <pack-copy>. For critique there is no
+  pack override: prepare a bounded separate scratch source-readset root with matching fixture
+  mirrors, runtime/rubric/ledger binding files and temporary pending IDs; run critique --root
+  <scratch-readset> --ids <exact-temporary-ids> --strict without --write. Record every copied byte
+  and before/after repo hashes; no workspace, dependencies or build caches are copied. No importer,
+  import-candidates dry run or repo mutation. Unknown parser/CLI support is BLOCKED, not invented.
+- **M4 Gameplay critic.** Independent critic blind-solves the game per the floors above. Use sanitized
+  input and a separately sealed private key; compare its submitted solution mechanically, then
+  adjudicate ambiguity/predicate/recognition in the critic's own words. One line per failure.
+  The critic is a pre-review filter, never a signer; its sanitized log joins the freeze bundle.
+- **M5 Freeze.** One landing module/board unit, candidates.json per category, canonical manifest of
+  every binding/capture and frozen critic log. Refuse missing/hash-mismatched captures, unresolved
+  compat or a missing live mechanic. Seal author sources/URLs separately. Never mutate signed bytes.
+- **M6 Review round 1.** Fixed factual and quality reviewers each judge the whole frozen batch once,
+  adversarial fresh web sources, signed before seeing each other. Give reviewer-visible hashes/candidate/dossiers/critic log, withholding author URLs/captures
+  in a separate sealed bundle until both sign. Author sources stay sealed; each item needs ≥1 reviewer-chosen normalized URL outside the author's set. Reject a report with
+  >20% repeated normalized rationale strings, >20% identical rationale rows across the pair, or a
+  reviewer name appearing anywhere in an M1–M5 artifact. Record each per-item capture binding.
+  Run the sidecar independence guard before accepting the M6 pair. Post the go/drop table ≤24 rows and set `waiting: review`. Only go/drop answers this wait.
+- **M7 Stage plus review round 2.** Only after go/drop and fresh gates. Pack: run PACK_ONLY steps 2–4:
+  import-candidates --pack-only --write, critique --dossier --write, live Alchimie audit for its
+  separate review batch, same two fixed reviewers as verifier/analyst, build-review then
+  apply-review --write. Quick boards follow 4c–4e candidates/reviews/proposal/audit/finals. G uses
+  curation 0–3 then full 4a–4i. Preserve independent ordering in both rounds; native raw JSON exact
+  keys stay unchanged, so signed_at, source seals and access receipts are SHA-bound sidecar
+  envelopes. Run review_independence.py before build-review; native build-review does not yet
+  implement V2 sidecar checks. Run the same guard before accepting every curation step3, initial
+  rail-review and final-audit signature pair, including flows that never call build-review. Stop if any check cannot be established, never claim future code.
+- **M8 Landing packet.** Execute the applicable P/G cascade below, separate pins commit and corpus
+  report. Require green gates outright, record each API playthrough, bind exact HEAD and all files.
+  Finish step5 prelanding record, then `waiting: land? (pins packet + gates)`. Only Paul's Claude
+  Code session reviews the packet, runs merge --ff-only, pushes per ADR-0014, SHA-verifies the NAS
+  evidence copy and deletes branch/worktree per ADR-0037. The loop never merges, pushes or deletes.
+- **M9 Record.** After externally verified landing, record actual player-visible per-game cell changes,
+  source concepts/inputs/claims separately, rejects as tombstones via existing tooling, and the
+  ≤10-line retrospective/≤3 proposals. Never auto-demote approved content or rewrite a signed verdict.
+
+## Fixed roles and mechanical independence
+
+Each landing fixes author, factual-v2-<id>, quality-v2-<id>, critic-v2-<id> and the landing reviewer.
+The first four are distinct. Reviewers and critic each run as their own
+`codex exec -m <model>` subprocess using rungs from
+`~/.claude/skills/agent-routing/scripts/fleet-tiers.sh`; critic and factual use different rungs.
+Do not infer a model alias: retain the selected rung/model/effort, exact prompt and transcript under
+`evidence/<id>/roles/<name>/` and hash each. Only the frozen role-appropriate bundle is provided.
+The same factual/quality names sign round2 as verifier/analyst; roles do not change their identity.
+
+Source seals, actor artifacts, report signatures, capture IDs and access receipts are retained by
+manifest. Both signed_at timestamps must exist before either receives/reads the other's report;
+first-peer-read receipts must be later than both signed_at values. A timestamp assertion is not
+proof of process isolation: retain dispatch/delivery transcripts. After both sign, unseal sources
+for mechanical set-difference checks; stale/missing receipts or >20% identical rationales void the
+review. Native raw review JSON gets no unsupported metadata fields. The scratch preflight checks
+the envelopes; the existing native build-review/apply-review binding checks still run unchanged.
+For the 20% rule, normalize whitespace/case; within each report divide duplicate rationale rows
+beyond their first occurrence by all item rows, and across the pair divide identical per-ID rows
+by all IDs. More than20% in either comparison fails. Normalize URL scheme/host/default ports,
+remove fragments and sort query pairs; preserve path/word accents. URL set difference uses the
+whole sealed author set; every reviewer-chosen capture is independently retained and hash-bound.
+The actor/artifact index lists every M1–M5 path and SHA; scan full bytes, not just actor fields.
+Helper CLI envelope fields and smoke examples are in
+`~/work/_temp/content-loop/miner/INDEPENDENCE.md`.
+
+## Install cascade — exact substeps 4a–4i
+
+One commit per lettered sub-step; each rail in 4e is a separate sub-step. Go tools via
+   `go -C go-backend run ./cmd/<tool> ... --root ..`. Class P skips 4a and retains world; class G runs all three rails. Inherited world keeps its original
+source version and is checked through default all --check, not --source authored-v<K+1>.
    - 4a Apply the step-3 module (templates: scripts/everyday_inputs_v1_6_data.py for aliases,
-     scripts/everyday_graph_v1_3_data.py for nodes and edges). For leafă, export
-     `DEFERRED_AMBIGUOUS_TERMS` without "leafă". Run `apply_common_words_v24.py --data-module <module>
+     scripts/everyday_graph_v1_3_data.py for nodes and edges). Class G only, after owner `go`;
+     no automatic removal from any deferred or blocked list. Run `apply_common_words_v24.py --data-module <module>
      --dry-run` (expect preflight GREEN), then without `--dry-run`.
    - 4b `cat-content-ops rank --write`, `derive --write`, `check --check`; `cat-mobile-pack --check`
-     (apply already refreshed the contract; never write it with the Go tool).
+     (4a refreshed the contract for G; P changes no KG, so retain it; never write it with the Go tool).
    - 4c Copy authored-v<K>.json to authored-v<K+1>.json: version K+1, `parent_source_sha256` =
      sha256 of authored-v<K>, `base_commit` = the full 40-hex wave_base, and repoint the world
-     archives to the last installed wave's native/world files (for V1.8:
-     docs/reviews/v1-6-everyday-inputs/native/world/): world_candidate and world_previous →
-     candidate.json, world_factual → factual-review.json, world_quality → quality-review.json, each
-     with its sha256, as v5→v6 did. For quick,
+     archives to the last installed wave's native/world files listed in installed-authorities.json:
+     world_candidate and world_previous → candidate.json, world_factual → factual-review.json,
+     world_quality → quality-review.json, each with its sha256. K is derived at M0 (currently 12;
+     B1 is expected v13, C1 v14, B2 v15 if no intervening landing). For B-quick append only the
+     frozen, go-accepted quick records to authored-v<K+1>.quick.boards before candidate generation;
+     retain category/difficulty/game/id/payload/rationale/source_id/sources and exact per-record
+     hashes, no new IDs or semantic edits outside the reviewed payload. A mere copy would add no
+     boards. Pack-only B1 changes no authored quick payload, but still regenerates bindings.
+     For P keep the existing world
+     entry and every bound world byte unchanged; rebuild/re-sign quick and extensions. For G use quick,
      world, extensions: `cat-content-rail <r> --source <abs> --candidate-out
      <abs>/docs/reviews/<wave>/native/<r>/candidate.json`.
    - 4d The two reviewers write native/<r>/factual-review.json and quality-review.json covering every
-     item (schema in review.go). Items the KG change did not touch are `inherited: true`, keep the
+     item (schema in review.go). Only authored items whose bytes/semantics are unchanged from their
+     exact predecessor may be inherited: true. New/changed quick boards need fresh judgments even
+     without a KG change. For inherited items keep the
      predecessor item's `sources` URLs (a factual accept needs at least one http(s) URL; repo paths
      are refused) and name the previous record in `rationale`. World reviews also carry
      `world_verdict: "accept"`, `world_rationale` and one `concepts` row per candidate concept {id,
      concept_sha256 = sha256 of the concept rendered like rail output (sorted keys, two-space indent,
      trailing newline), verdict, rationale, sources, inherited}.
-   - 4e Every rail command in 4c–4h passes `--source <absolute path of authored-v<K+1>.json>`; the
-     `--write` and `--installed-authority-out` commands also repeat `--candidate C --factual-review F
+   - 4e Every rebuilt rail command in 4c–4h passes `--source <absolute path of authored-v<K+1>.json>`; the
+     retained class-P world is not rebuilt and uses its original source. The `--write` and
+     `--installed-authority-out` commands also repeat `--candidate C --factual-review F
      --quality-review Q`. Serially for quick, then world, then extensions: `--candidate C
      --factual-review F --quality-review Q --proposal P` (P =
      docs/reviews/<wave>/native/<r>/proposal.json); `--audit-catalog P --audit-out A`; the reviewers
@@ -183,7 +263,7 @@ your content changed its expectation, with no generator to refresh it, is report
      Write A as docs/reviews/<wave>/native/<r>/audit.json and FF/FQ as final-factual-review.json /
      final-quality-review.json in the same directory: these are the documents installed-authorities.json
      will bind in 4h. Installed-authority-entry drafts go under
-     `~/work/_temp/content__v1-<N>-<theme>/rail/<r>/`. Before the extensions proposal, do the 4f pin
+     `~/work/_temp/content-loop/evidence/<id>/rail/<r>/`. Before the extensions proposal, do the 4f pin
      edits (derived_catalog_v38 = the digest 4b produced, quick_games_v92 = the digest the quick
      `--write` installed): the extensions builder refuses `reviewed artifact digest drift` while any
      `reviewedPins` value is stale. Each rail is its own tick and commit (4e-quick, 4e-world,
@@ -193,14 +273,18 @@ your content changed its expectation, with no generator to refresh it, is report
      `CATALOG_SHA256` in cat_de_roman_esti/wordgames/quick_catalog.py and
      `DEFAULT_DERIVED_CATALOG_SHA256` in cat_de_roman_esti/wordgames/derived_catalog.py. Then
      `cat-content export --root ..` and `export --root .. --check`.
-   - 4g HTTP corpus: build `cat-server` into scratch; copy
+   - 4g HTTP corpus: first `df -h /`; below 12 GB free set `waiting: disk`. Build `cat-server` into scratch; copy
      docs/reviews/go-native-toolchain/archived-reference/capture_reference.py.txt to scratch, changing
-     only ROOT, the reference label and the output path; run it with the repo venv,
+     exactly three lines: ROOT (archived line 21), the reference label (line 393) and output path
+     (line 394); attach `diff -u` against the archived reference to the corpus report and refuse any
+     other change. Match assignments by content if line numbers move. Run it with the repo venv,
      `CAT_ACCOUNTS_ENABLED=0` and `--binary <cat-server> --runtime go` (expect the case count of the
-     previous reviewed corpus block, 1206 since V1.13; any other count is `NEEDS-OWNER`).
+     previous reviewed corpus block, 1206 since V1.13; any other count is `NEEDS-OWNER` with a
+     case-list diff). Record the actual count, never edit it to fit and never bypass an HTTP case.
      Move the .json.gz to go-backend/internal/httpgolden/testdata/ and, in golden.go, add only a
-     renamed copy of the previous `reviewedV1x()` block, its SHA constant, its embed line, and in
-     ForSources both the `vNN, err := reviewedVNN()` call and the slice entry.
+     renamed copy of the previous reviewed block as `reviewedV2<ID>()` (e.g. `reviewedV2B1()`), its SHA
+     constant, embed line and ForSources call/slice entry. Corpus: `python-http-parity-v2-<id>.json.gz`;
+     selection test: `v2<id>_selection_test.go` (e.g. `v2b1_selection_test.go`). V1 names stay historical.
    - 4h Bind the installed authorities. Per rail run `cat-content-rail <r> --source <abs> --candidate C
      --factual-review F --quality-review Q --proposal P --live-audit A --final-factual-review FF
      --final-quality-review FQ --expected-sha256 <sha256 of P> --installed-authority-out
@@ -211,21 +295,24 @@ your content changed its expectation, with no generator to refresh it, is report
      both reviewers re-sign FF and FQ to the new A, retry once (a second refusal sets `waiting`). Then
      assemble
      go-backend/internal/contentrails/sources/installed-authorities.json (append authored-v<K+1> to
-     source_chain; replace the three rail entries with the emitted drafts) and
+     source_chain; replace quick/extensions entries for P, preserving the world entry exactly;
+     replace all three rail entries for G) and
      swap the sha in installed_authorities_pin.go via the metadata template (the file must equal
      PinBytesForInstalledAuthorities exactly). No second installed audit, no second reviewer round and
      no runtime freeze.
-   - 4i Gates: `cat-content-rail all --check`, `cat-content validate`, `export --check`,
+   - 4i Gates: first `df -h /`; below 12 GB free set `waiting: disk`. `cat-content-rail all --check`, `cat-content validate`, `export --check`,
      `cat-content-ops check --check`, `cat-mobile-pack --check`, `go -C go-backend test -race
      -timeout 60m ./...`,
      `go -C go-backend vet ./...`, `go -C shared-go/authcore test -race ./...`, `cat-doc-check
      --root ..`,
      `git diff --check` — no new red versus step 0. Known pre-existing reds on main: httpapi
-     TestManagedSPA* (frontend not built). Any other red without a step-0 record counts as
-     pre-existing only if the same command is also red in the shared checkout on main. Then play
-     each new word once through a local
-     cat-server API (a Cald sau Rece guess resolves; an alias shares its node's slot), keeping a log
-     of at most 200 lines.
+     TestManagedSPA* (frontend not built) are historical examples, not a standing waiver. Any other red without a step-0 record counts as
+     pre-existing only if the same command is also red on the exact main baseline in a comparison
+     task worktree, never the shared checkout. Rail checks/contentrails tests must be green outright.
+     Play every new board once through the local cat-server HTTP API to a verified result. For every
+     new alias, retain a before/after fuzzy-neighbour probe plus a Cald guess; verify owner slot,
+     repeats/win identity and snapshot impact. Corpus parity alone does not test alias input behavior.
+     Keep the playthrough log at most 200 lines; link exact per-item results in the manifest.
    Install may touch only: the module; the apply transaction files (both kg_sample.json, both
    games_pack.json, tests/fixtures/cat_mobile_app_pack_contract.json); board_rankings_v37 and
    derived_catalog_v38 (both fixture dirs); quick_games_v92, alchimie_discovery_world_v92 and
@@ -239,249 +326,140 @@ your content changed its expectation, with no generator to refresh it, is report
    tests/current_content.py alone and note any Python red in the README. Never new or edited
    `_test.go`, new Python tests, new repo scripts other than the wave data module, or
    rules_unicode15.json, except the test-pin packet (ADR-0210): in one separate `pins` commit,
-   update only the expectations the landing moves — the new `vNNN_selection_test.go` block in
+   update only the expectations the landing moves — the new `v2<id>_selection_test.go` block in
    go-backend/internal/httpgolden with its predecessor's "did not move past" edit, the board and
    approved counts in internal/contentops (`check_test.go`, `contentops_test.go`) and the Cald
    inbound maps in internal/contexto — list each old -> new value in the README, and land only
-   after the owner approves that packet. On waking to a dirty worktree or an unfinished merge at any step, reset the
-   worktree only
-   (`git -C <worktree> reset --hard HEAD && git -C <worktree> clean -fd`; never in
-   ~/work/cat_de_roman_esti) and redo the sub-step from its last commit.
-5. Record and land. Pool records become integrated, held or rejected, each with one reason. Write
-   docs/reviews/<wave>/README.md (≤80 lines of plain sentences): what players gain, a short summary of
-   the review table, "Owner decisions" (actual owner messages only), the retrospective and the
-   proposals (Improvement loop). docs/reviews/<wave>/ holds exactly the rail files
-   installed-authorities.json binds (about 21 files, ~6 MiB, byte-exact, no -r2 copies) plus at most
-   10 small text files: the README, the graph review JSON, the playthrough log and
-   reference/capture_v1_<N>.py.txt. No tarballs, raw logs, build outputs or failed-attempt packets; a
-   failure is one README line. No ADR unless game behaviour or a data schema changes. Commit.
-   Landing: merge main into the wave branch (same docs/STATUS.md conflict rule as step 0). If the merge
-   touched go-backend/** or shared-go/**, rerun 4i (the rail check re-audits under the merged binary)
-   and redo 4g only if it changed go-backend/internal/httpapi or a content/game package; otherwise
-   rerun validate, export --check and ops check. Only now update docs/STATUS.md counts and `Last
-   verified`, replacing the previous wave's line; stay within the 120-line budget by appending the
-   moved line to WORKLOG.md (append without reading it), never by removing spaces; rerun
-   `cat-doc-check --root ..` and `git diff --check`; commit. Then `git -C ~/work/cat_de_roman_esti
-   merge --ff-only content/v1-<N>-<theme>`. If main moved meanwhile, repeat once from "Landing:"
-   (merge main taking main's docs/STATUS.md,
-   rerun those checks, redo the docs/STATUS.md update and commit, ff-only),
-   then set `waiting: main keeps moving — pause the GUI loop for one landing`. Run `cat-content-rail
-   all --check` on main and record it. Never push. Delete the wave branch, worktree and scratch, then
-   send the proposals message. With LANDING_MODE=hold, do everything before the ff-only merge, then
-   set `waiting: land?`.
+   after the owner approves that packet.
+   The separate `pins` commit touches only `go-backend/internal/httpgolden/*_selection_test.go`,
+   `go-backend/internal/contentops/{check_test.go,contentops_test.go}`, and
+   `go-backend/internal/contexto/content_v1_3_test.go`. List each old → new value and `git show --stat`;
+   class P changes no KG/Cald map. No unrelated test logic changes. New/edited Python tests,
+   `tests/current_content.py`, rules_unicode15.json, runtime and GUI remain outside scope.
+   If the task worktree is dirty or a merge is unfinished on waking, preserve every byte and stop at
+   `waiting: unfinished task worktree`; inspect/recover only the owned sub-step with the owner.
+   Never reset/clean, delete a packet, merge main or touch another task's work.
 
-## Curation wave (installing reviewed stock, ADR-0210)
 
-A curation wave installs items that earlier waves already reviewed, from the canonical stock
-(`docs/content-consolidation/v1-8-through-v1-32/current-stock.json` on its branch), instead of new
-research. Step 0 is unchanged. Step 1 takes at least 20 accepted items or existing-owner families
-from the final module payloads (never planned or observed lists), records each one's original wave,
-record id and closure commit in the pool, re-runs the full step-1 screen against current main, and
-applies the owner rulings in ADR-0210. Step 2 re-binds each item to its retained evidence; an item
-whose evidence is not retained is not eligible. Step 3 writes one consolidated module that the two
-reviewers judge once, as above. Steps 4 and 5 are unchanged.
+## Cascade classes and prelanding record
 
-## Improvement loop (every wave, landed or closed)
+**Class P (pack/quick):** no KG change; M7 pack/quick review as appropriate, then 4b rank/derive,
+4c authored-v<K+1>, 4d–4e quick plus extensions, 4f pins/export, 4g independent corpus, 4h quick/
+extensions authorities, 4i gates and each new board HTTP-played once. World inherits unchanged
+because it has no pack binding: its KG, rubric, editorial source and previous-world bindings must
+all remain exact. Check world through default all --check or its retained original source, never
+pass the new authored source to the inherited world rail. Regeneration/re-signing quick and extensions is mandatory even when
+only the pack changes: their pack/KG/derived bindings must equal live digests. No light path.
+**Class G (curation/vocab-gap):** full 4a–4i including world. No KG and board additions co-land;
+Alchimie has its own review/audit batch even within a multi-game P landing.
 
-1. Retrospective, in the wave README (at most 10 plain lines): items proposed, accepted and
-   installed; the delta against wave_base; the top three rejection or hold reasons; ticks per step
-   (from step_ticks); every BLOCKED or NEEDS-OWNER line and how it ended; what players gain.
-2. Proposals, in the same README and then as one message to the owner: at most three concrete
-   changes to this file or its backlog (old text → new text, each with its evidence). Never apply
-   them yourself; the owner edits this file. A wave closed as research-only commits its README on
-   the wave branch and leaves the branch for the owner.
-3. Next wave, by player value. Keep running growth waves (new everyday words) while the growth
-   backlog has items. A refinement wave (repairs, synonyms, weak or ineligible items) or a rounds
-   wave (Conexiuni and Cald sau Rece rounds on recent words) runs only when it has at least 10 items
-   the writer can install; otherwise fold those items into the next growth wave. A rounds wave runs
-   steps 0–3 only and then sets `waiting: rounds install path` until the owner adds its install
-   steps. A wave takes 40–60 items when available and at least 20 otherwise. When the growth
-   backlog runs out, extend it by discovery: everyday words from the frequency list (top 20k) and
-   school or culture vocabulary that the bundle does not resolve, pre-screened as in step 1, and say
-   so in the proposals. Use the retrospective to sharpen the list, for example by skipping a theme
-   whose items keep colliding with existing owners. Items marked "owner decisions first" wait.
-4. Reset state.json for the new wave (step 0, counters 0, `waiting` null, new theme and branch name)
-   and continue on the next tick.
+Step5 prepares pool dispositions/reasons and docs/reviews/v2-<id>-<slug>/README.md (≤80 plain lines):
+player gain, table summary, actual owner decisions, retrospective, ≤3 proposals and every BLOCKED/
+NEEDS-OWNER. Keep the exact installed-authority rail files plus ≤10 small text files (README,
+graph reviews, playthrough log, reference/capture_v2_<id>.py.txt). Raw captures, role transcripts,
+build output and failed attempts stay under evidence, never in repo docs. Preserve all bytes;
+retention cleanup belongs to the later Claude landing session after verified NAS copy.
+Only after the prelanding checks update STATUS counts/Last verified within its 120-line budget;
+if doing so requires an out-of-scope history-file edit, report NEEDS-OWNER. Run cat-doc-check
+--root .. --inventory docs/tracked-markdown.json and git diff --check; commit, stop at land?.
+If main moved, no loop merge: have the owner refresh the task/main binding and required checks;
+repeat once only after explicit direction, then wait `main keeps moving` if unresolved.
 
-## Quality bar (hold when unsure; reject only for a factual error, archaic/poetic-only register or duplicate)
+## Curation wave (class G; ADR-0210)
 
-- Recognizable: a Romanian 12-year-old knows it, or it is school or culture vocabulary. Frequency is
-  a positive signal only: a top-20k rank supports an item; absence never rejects a concrete everyday
-  noun, animal, school object or tradition (mărțișor, barză and tocător are missing from the list).
-- Relevant: shared Romanian experience (home, school year, folk and religious calendar, landscape
-  and fauna), primary-school themes, or a Romanian-flavoured board (tricolour, winter and spring
-  customs). Facts about people, places and works need ro.wikipedia or better.
-- Aliases: substitutable for the node's sense in everyday speech, with forms from DOOM 3. Drop any
-  form that folds to another owner and list it in the table. Regional or popular forms are allowed as
-  inputs when no other owner exists, reported as "regional input", never as synonyms; înv./poet.
-  forms are not aliases. An alias is an input form, not a verified synonym; report them separately.
-- New concepts: name the game each serves (Cald sau Rece neighbour, Lanț bridge, Conexiuni member
-  with 3 plausible siblings, Alchimie result); with no game, skip it. Give 4–8 truthful links to
-  distinct nodes: at least 2 to nodes already on main, at most 2 to other new nodes of this batch,
-  and at least 2 in the same category. The writer refuses fewer than 4 or fewer than 2
-  same-category, but it counts batch links, so it cannot catch an island. Give a closed set one
-  honest parent (Anotimp, Punct cardinal, Crăciun) instead of wiring every member to every other.
-  `label_ro` must read true from source to target. Lanț shows
-  only relation captions (is_a, part_of, created_by, contemporary_of; others show "legătură
-  directă"), so prefer an honest is_a or part_of.
-- Never relax a validator limit, rubric floor or threshold, and never invent a link to make a puzzle
-  pass.
+Curation steps **0–3** replace M1–M4; M2 compatibility still applies fully. Step0 runs M0 gates on
+current main. Step1 chooses ≥20 accepted existing-owner morphology families from final module
+payloads (never planned/observed lists), recording original wave/id/closure and every exclusion.
+Step2 rebinds retained own-head DEX/DOOM3/table and second-source evidence; missing captures are
+ineligible. Step3 consolidates one module and obtains fresh whole-batch dual review with the V2
+independence sidecars and guard, then posts go/drop as waiting review. Step4 is full 4a–4i and test pins;
+step5 prepares the packet and stops at land?. These source items are not counted as 24 boards.
 
-## Backlog (probed absent on main 3d60221; re-verify every form)
+C1 starts with V1.38–V1.42 final payloads, including Avion, Cinematograf and Interfon; lane labels
+alone do not prove morphology eligibility (Interfon's historical lane differs). Reject any family
+with a key hit in the exact M2 exclusion sources. Mănăstire and Sucitor (without bare sucitoare)
+get separate go/drop rows, each `snapshot rebuild: <files>`; Paul's go on a row accepts it.
+Bare sucitoare always stays excluded; Ie never gets ii/iei. Do not override earlier exclusions,
+clip a required family or reopen a hold automatically. Fresh verification is required for weaker
+review tiers; V1.33 specifically needs new source research, never missing /tmp captures. V1.14
+items are re-applied through this cascade; never merge its partial branch or ask its declined
+HTTP exception. Preserve all content/v1-* refs (NAS bundle ac0a2b63… under
+branch-archive/cat_de_roman_esti/2026-10-22-content-loop-branches/).
+While stock remains, at least one in each three landings is curation. Order by evidence tier,
+then documented board yield; any read-only yield simulation uses in-memory data, never source
+module execution or import dry-runs. Board candidates are re-screened after each class G landing,
+including Lanț optimal routes and Alchimie par. Stock matches turn vocab-gap into integrate.
+Keep corrected stock measures: 4,968 single-token +766 multiword inputs (three display-only
+labels separate); 3 nodes cross incoming5 using main-served predecessors, 45 only when complete
+pending waves co-land. Holds are records, may overlap later accepted lemmas, and never leak.
 
-1. V1.8 everyday core. Winter: Crăciun, Moș Crăciun, Brad, Cadou, Om de zăpadă, Sanie, Moș Nicolae,
-   Revelion (input Anul Nou), Iarnă. Seasons and time: Primăvară, Vară, Toamnă, Dimineață, Seară,
-   parent Anotimp. School and childhood: Vacanță, Ziua Copilului (input 1 Iunie), Foarfecă, Lipici,
-   Rucsac, Umbrelă, Lanternă. Animals: Fluture, Albină, Furnică, Buburuză (inputs gărgăriță,
-   mămăruță), Barză, Rândunică, Arici, Broască, Melc, Rață, Gâscă, Cocoș, Miel, Șarpe, Păianjen,
-   Bufniță. Directions: Nord, Sud, Est, Vest, Busolă, parent Punct cardinal. Post: Scrisoare, Plic,
-   Timbru. Home: Tocător (cutting board, not the grinder), Cort, Ochelari, Căciulă, Mănuși, Gard.
-   Professions: Șofer, Bucătar, Polițist, Vânzător. Customs: Dragobete, Baba Dochia. Colours as one
-   set with a restricted paradigm (roșie/roșii stay with the tomato): Roșu, Galben, Albastru, Verde.
-   Input families: leafă, lefuri, lefurile, lefii → Salariu; ogradă forms → Curte; colindă → Colind;
-   ghiocel → Ghiocelul; Bucegi → Munții Bucegi; Peleș → Castelul Peleș; pompier → Pompierii;
-   drob → Drob de miel; lemne, lemnele → Lemn; drapele, drapelele, drapelului → Steag; untdelemnul,
-   untdelemnului → Ulei. Link: Poză–Fotografie (both nodes exist).
-   Owner decisions first: weekdays (luni homograph; miercuri owned by the Wednesday series), Paște
-   (hard-coded unresolved), Poștaș (poștașul owned by Poșta Română), prânz, manual, Alb/Negru, a
-   harbuz/lubeniță regionalism group.
-2. Refinement (repairs): removing the false Toma Caragiu–Reconstituirea edge fits the writer
-   (REMOVE_EDGES
-   with the full prior record). Description diacritics ("roman"→"român"), the Herta Müller and Mica
-   Unire 1859 labels and the Vioară/Zăpadă categories need an owner-approved writer; keep them held.
-   Synonym: geamantan → Valiză once an owner exists.
-3. Rounds: easy Conexiuni groups and Cald sau Rece targets on the V1.8 concepts through
-   docs/PACK_ONLY_CONTENT_WAVES.md, plus repair of ineligible Conexiuni boards. games_pack.json is
-   bound by the rails, so expect the same cascade; this path is untested.
-Closed, do not research again: Compot, Sandviș, Mărțișor, Ouă roșii, Sarmale, Colind (concept), Poză
-(concept).
+## First three landings and improvement loop
 
-## Heartbeat prompt (paste into the automation)
+1. **B1 / P:** up to four Lanț chains in gastronomie normal, limba normal, personalitati normal,
+   societate greu. If a cell yields none after two mining ticks, select the next-thinnest normal/
+   greu Lanț cell from the actual need map and name the substitution. Land fewer than four rather
+   than wait for filler. Measure actual 4c–4h cascade cost, corpus time/count and pin packet.
+2. **C1 / G:** at least 20 alias-only morphology families as above, then re-screen the B2 queue.
+3. **B2 / P:** at most20 boards: eight Perechi (gastronomie/meme_net, four each), eight Conexiuni
+   (arta_cultura usor/greu, societate usor/greu, sport usor/normal, film_tv usor, geografie normal),
+   four Cald greu (literatura/personalitati). These are priorities, not prequalified boards.
+Then use measured cell deficits, maintaining the curation ratio. Every landed or expired wave
+records a retrospective ≤10 plain lines: proposed/accepted/installed, actual delta, top three hold/
+rejection reasons, step ticks, failures and player gain. Record ≤3 evidence-based old→new proposals;
+never apply procedure changes. New concepts still need a named game, 4–8 truthful links to
+separate endpoints: ≥2 main-served, ≤2 batch peers, ≥2 same-category; check peer closure. No quota
+filler, category repair, hidden target approval or fabricated links. Cold vocabulary is parked
+vocabulary-only, not repeatedly researched. Owner-decision-first items wait.
 
-Self-contained summary of this file for a recurring Codex thread; this file stays the reviewed
-procedure and wins on any conflict.
+## Quality bar
+
+Hold when unsure; reject only factual error, archaic/poetic-only register or duplicate. Familiar
+Romanian everyday/school/culture relevance and an honest readable predicate are mandatory;
+people/places/works use Romanian Wikipedia or better. Frequency is positive only. DEX sense/
+register, exact-head DOOM3 and that head's attributed ordinary flexion table plus one Romanian
+second source are required for lexical additions. Do not borrow another head's table; qualified
+compounds require component morphology and separate compound-sense evidence. Only selected-sense
+substitutable inputs are synonyms; morphology, regional/diminutive/qualified inputs stay distinct.
+Normalize ş/ţ to ș/ț; inspect accent-preserving spellings before trusting folded ranks. No two
+fold-equal spellings are separate additions, no other-sense key theft, no threshold relaxation.
+Truthful label_ro reads from source to target; prefer honest is_a/part_of for displayed Lanț steps.
+Current game/critic floors above and all applicable rubric FAILs remain binding.
+
+## Heartbeat prompt (new cat-content-v2 only, after approval)
 
 ```text
-You are the content editor for "Cât de român ești" (~/work/cat_de_roman_esti), a Romanian
-word-game arcade with six games: Alchimie, Intrusul, Perechi, Conexiuni, Cald sau Rece, Lanțul
-Cuvintelor. You run a recurring content-improvement loop. Goal: the games know and use more
-high-quality Romanian words — everyday concepts players type, full inflection sets as inputs,
-truthful links, then playable rounds — each checked on Romanian sources. Progress is player-visible
-additions counted by `cat-content-ops delta`. Receipts, pins, manifests, archives and tooling are
-never progress.
-
-AUTHORITY
-- docs/CONTENT_LOOP.md on main (ADR-0188, ADR-0189) is the reviewed procedure; this prompt is its
-  summary and the file wins on any conflict. Read the whole file at the start of each wave and
-  whenever `git -C ~/work/cat_de_roman_esti log -1 --format=%h -- docs/CONTENT_LOOP.md` differs from
-  procedure_rev in state.json, then store that hash in procedure_rev. Before every step-1, step-4 or
-  step-5 tick, reread that step's section: it holds exact commands and hazards this summary omits.
-- Older content-loop ADRs (0170–0187), wave READMEs, TASK_BRIEF files and the retired "Romanian
-  content versions — V1.2 onward" heartbeat are history. V1.7 is parked; never resume it.
-- Owner messages in this thread override everything. Record them under "Owner decisions" (state.json,
-  then the wave README), never as an ADR.
-
-NEVER
-GUI/frontend, Go/Python/Rust logic, toolchain or dependency changes, CI, deploy, push or any remote
-ref, PostgreSQL/accounts, retention or cleanup policy, new gates, admission/stop/clock/deadline
-files, tarballs or failed-attempt packets, edits to CONTENT_LOOP.md or any ADR. Report a broken
-non-content gate as `BLOCKED: <command> -> <first error line>` and do not fix it. A test that fails
-only because your content changed its expectation, with no generator, is `NEEDS-OWNER: <test>`; the
-wave stays unlanded.
-
-ENVIRONMENT
-`export PATH=/usr/local/go/bin:$PATH GOTOOLCHAIN=local` (go1.27.3, otherwise BLOCKED). Python
-importer: ~/work/cat_de_roman_esti/.venv/bin/python with `PYTHONPATH=scripts:.` from the worktree.
-The shared checkout ~/work/cat_de_roman_esti stays clean on main; each wave works in its own
-worktree (branch `content/v1-<N>-<theme>`) made with ~/work/agent-ops/scripts/create_task_worktree.py.
-Scratch: ~/work/_temp/content__v1-<N>-<theme>/. State: ~/work/_temp/content-loop/state.json (≤2 KB).
-Never run bare `cat-content` (it writes bundled.json/digest.go) or `cat-mobile-pack` without
-`--check`; the only content export is `cat-content export --root ..` at 4f; rail paths are
-absolute; `--data-module` takes an importable module name. Workers: you plus two reviewer agents
-with fixed names `factual-v1-<N>` and `quality-v1-<N>`; they never author items.
-
-EACH TICK
-1. Read state.json (step = the NEXT sub-step). If `waiting` is set and no new owner message answers
-   it, reply `waiting since <waiting_since>: <reason>`, add one reminder only if last_reminder is over
-   24 h old, and stop. An owner message answers it: record it, clear `waiting`, act on it this tick.
-2. Otherwise do exactly one sub-step (one lettered install sub-step; in 4e one rail), commit on the
-   wave branch if files changed, update state.json (step, counters, step_ticks).
-3. Reply in at most three lines:
-   `V1.<N> step <k>: <what changed> | accepted <a> | delta vs wave_base: <concepts/connections/forms>`.
-   Exceptions: the step-3 review table, a 10-line waiting summary, the proposals message.
-Budgets per wave: 28 working ticks, 22 commits (merge commits excluded), at most 12 researched
-items per tick; a sub-step that fails twice sets `waiting`. Also set `waiting` with a 10-line plain
-summary when two research ticks in a row move no pool item, a budget is reached, a BLOCKED or NEEDS-OWNER line stands with
-nothing left to research, or the backlog and its discovery extension are exhausted.
-
-THE WAVE (40–60 items when available, at least 20; one install pays the cascade once)
-0. Baseline: create the wave worktree if missing, merge main into it (if the only conflict is
-   docs/STATUS.md take main's copy; any other conflict: `merge --abort` and wait), record wave_base
-   and pass/fail of validate, export --check, ops check, the rail check and the
-   contentrails/contentbuild/httpgolden tests. A red validate/export/ops check is BLOCKED. Install is
-   enabled only while the rail check and the contentrails/contentbuild tests are green on main; check
-   again before 4a. Never edit docs/STATUS.md or write the wave README before step 5; remove a wave
-   README that already exists in the step-0 merge commit (step 5 writes it fresh).
-1. Candidates from the backlog. Pre-screen every planned form against the live bundle
-   (normalization_map, normalized_index, labels, aliases, discovery_world, contexto projection terms),
-   DEFERRED_AMBIGUOUS_TERMS, ReviewedUnresolved and pool states BEFORE any web call. An other-sense
-   owner means `held: owned by <id>`; never steal a form; never list two spellings that fold equal;
-   anything beyond adding nodes, edges or aliases (or removing an edge) is `held: needs owner-approved
-   writer`. Survivors go to the wave pool as `idea`.
-2. Research: dexonline JSON (sense, register, DOOM 3 forms; headword must equal the lemma; ≥2 s
-   between requests), one second source, the frequency list as a positive signal only; at most
-   5 minutes per item. Store URL plus a one-line paraphrase; never copy definitions. Unresolved → held.
-3. Review: write the data module, then both reviewers judge the batch once on the web, bound to the
-   module's sha256; apply their verdicts. Post the table (word | type | node/edge | games | sources |
-   verdict) and set `waiting: review`, or `waiting: install disabled` when install is off (when the
-   owner answers, merge main, redo step 0, and start 4a only if install is now enabled). Fewer than
-   10 accepted after two research ticks: one more backlog pass, then continue with at least 5 or set `waiting: close as research-only?`.
-   Owner `go` → step 4, one sub-step per tick; `drop <ids>` → remove them and continue.
-4. Install exactly as CONTENT_LOOP.md 4a–4i: apply the module; rank/derive; authored-v<K+1>; per rail
-   candidate, reviews, proposal, audit, finals and install, with the 4f pins edited before the
-   extensions proposal; export; HTTP corpus capture; installed-authority entries (one retry on
-   refusal); every gate with no new red versus step 0 (the rail check and contentrails tests must be
-   green outright); one local playthrough per new word. Touch only allowlisted files; at any step,
-   on waking to a dirty worktree or unfinished merge, run
-   `git -C <worktree> reset --hard HEAD && git -C <worktree> clean -fd` (that worktree only) and redo
-   the sub-step.
-5. Record and land: pool states with reasons; a README of at most 80 plain lines (what players gain,
-   owner decisions, retrospective, proposals); evidence is the rail files the authorities bind plus
-   at most 10 small text files; commit. Merge main (STATUS.md rule as in step 0), rerun the gates the
-   procedure names, only then update docs/STATUS.md, then
-   `git -C ~/work/cat_de_roman_esti merge --ff-only <wave branch>`; if main moved, redo the merge
-   (main's STATUS.md), the checks and the STATUS.md update once, then wait. Never push. Delete the
-   wave branch, worktree and scratch. LANDING_MODE=hold stops before the ff-only merge with
-   `waiting: land?`.
-
-QUALITY BAR (hold when unsure; reject only for a factual error, archaic/poetic-only register, or a duplicate)
-- A Romanian 12-year-old knows it, or it is school or culture vocabulary. Frequency rank only
-  supports an item; it never rejects a concrete everyday noun, animal, school object or tradition.
-- Relevant means shared Romanian experience (home, school year, folk and religious calendar,
-  landscape and fauna), primary-school themes, or a Romanian-flavoured board. Facts about people,
-  places and works need ro.wikipedia or better.
-- Aliases are substitutable for the node's sense; install the full non-colliding paradigm. Regional
-  forms are "regional inputs", never synonyms.
-- A new concept names the game it serves and gets 4–8 truthful links to distinct nodes: at least 2 to
-  nodes already on main, at most 2 inside the batch, at least 2 in its category. Closed sets get one
-  honest parent. label_ro must read true from source to target; prefer is_a or part_of for Lanț.
-- Never relax a threshold, and never invent a link to make a puzzle pass.
-
-IMPROVEMENT LOOP (every wave, landed or closed)
-1. Retrospective in the wave README (at most 10 lines): items proposed, accepted and installed; the
-   delta; the top three rejection or hold reasons; ticks per step; every BLOCKED or NEEDS-OWNER line
-   and how it ended; what players gain.
-2. Proposals in the same README, then as one message to the owner: at most three concrete changes to
-   CONTENT_LOOP.md or its backlog (old text → new text, with evidence). Never apply them yourself.
-   A wave closed as research-only commits its README on the wave branch and leaves it for the owner.
-3. Next wave by player value: keep running growth waves while growth items remain; a refinement or
-   rounds wave runs only with at least 10 items the writer can install (otherwise fold them into the
-   next growth wave); a rounds wave stops after step 3 with `waiting: rounds install path`. When the
-   growth backlog runs out, extend it by discovery (everyday words from the frequency list and school
-   or culture vocabulary the bundle does not resolve, pre-screened) and say so in the proposals.
-   Use the retrospective to sharpen the list. Items marked "owner decisions first" wait.
-4. Reset state.json for the new wave (step 0, counters 0, `waiting` null, new theme and branch) and
-   continue on the next tick.
-
-LANDING_MODE=local   (local = merge to local main after green gates; hold = wait for "land")
+Run Cât de român ești V2 from docs/CONTENT_LOOP.md on main (ADR-0188/0210/0211).
+Never resume romanian-content-discovery-improved-loop. Start only after ADR0211 is on main and
+Paul says start; no schedule creation/resume is implied by Phase A approval alone.
+Read state first, then whole procedure at start/procedure_rev change and exact current sub-step.
+Phase B first tick appends old owner_decisions/protected_refs to decisions.jsonl; state stays ≤2KB.
+Boards/targets across six games are the product; M0 need map, M1 mine, M2 compat, M3 lint, M4 blind
+critic, M5 freeze, M6 independent round1, M7 stage+round2, M8 landing packet, M9 record. Curation
+uses steps0–3, full M2 screen, then4a–4i/5. B1 up to4 Lanț, C1 ≥20 V1.38–42 morphology families,
+B2 up to20 multi-game boards; later cap24, curation at least1in3 landings. No KG+boards co-land.
+Use current main-bound task worktree, Go1.27.3 PATH=/usr/local/go/bin:$PATH GOTOOLCHAIN=local.
+Never checks from shared main; never source-module execution/apply except approved4a. No importer
+pre-screen dryrun. P pays rank/derive, quick+extensions regeneration, pins/export, corpus,
+authorities and gates with world inherited; G pays full4a–4i. No light path or skipped gate.
+Read scratch-helper interfaces; outputs are unapproved. Preserve sources, original verdicts,
+V1 holds/refs, all evidence and rule exclusions; sucitoare excluded, Ie never ii/iei, V1.33 fresh
+research, V1.14 reapplied not merged. Raw evidence/prompts/modelIDs/transcripts/manifests under
+~/work/_temp/content-loop/evidence/<id>/ only. Never /tmp, delete, reset/clean, merge, push or deploy.
+Fixed author/factual-v2-id/quality-v2-id/critic-v2-id; each reviewer/critic own codex exec subprocess
+from fleet-tiers rungs, critic and factual different rungs. Sealed author URLs until both sign;
+≥1 reviewer-chosen URL per item, signed_at precedes peer reading, >20% identical rationales or
+reviewer actor in M1–M5 voids review. SHA-bound sidecar preflight plus unchanged native checks.
+One sub-step per scheduled tick; interactive burst≤4 then stop until continue. Max24ticks/20commits;
+research≤12items/tick,≤300sec/item, dictionary globally≥2sec, phases serialized. Fail twice waits.
+Only go/drop answers review, land answers land?, continue starts a burst. Notify each new waiting
+once with≤10lines, silence unchanged waits; elapsed time never approves. Seven days waiting or
+invalidating main-KG change expires; never rerun M3–M6 unprompted. df -h / before corpus/fulltests;
+free<12GB waits disk. BLOCKED/NEEDS-OWNER failures are reported, not repaired outside scope.
+Every landing has separate allowlisted pins commit old→new+git show --stat; independent4g script
+changes exactly ROOT/reference/output lines, attached diff, count previous block1206 or NEEDS-OWNER
+with case-listdiff. 4i HTTP-plays every board; every alias gets fuzzy-neighbour probe+Cald guess.
+Stop waiting: review after M6 table≤24rows; then waiting: land? (pins packet + gates). Paul's Claude
+Code session reviews/ff-only/pushes/NAS-verifies/cleans. The loop never lands itself. Record actual
+per-game cell outcomes and ≤10line retrospective/≤3proposals after external landing. No dummy
+requests, cache guarantees or model/cache setting changes.
 ```

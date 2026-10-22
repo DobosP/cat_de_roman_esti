@@ -12,7 +12,26 @@ Gate artifacts use version-2 batch/binding/coverage metadata (section G4) and th
 vocabulary `promote|reject|keep` for pending items. Sweeps over `approved` items output
 *proposals* (`keep|demote|revise`) for the owner — approved content is never auto-demoted.
 
-## A. Universal kill criteria (all four games)
+V2 board acceptance follows [ADR-0211](adr/0211-content-loop-v2-all-boards.md) and
+[the content loop](CONTENT_LOOP.md). The proposed rules below are **WARN only for the first
+three V2 landings (B1, C1, B2)**; record the observed metric and the reviewers' reasoning,
+then seek ratification after those landings. Existing validator floors and FAIL lints remain
+hard requirements; this trial does not weaken them.
+
+| Game | Proposed V2 warning target |
+|---|---|
+| Conexiuni | cross-links: `usor` 0–1, `normal`/`greu` 1–3 |
+| Cald sau Rece | freeze new `gastronomie` targets; any proposed addition is a warning |
+| Lanțul Cuvintelor | at least 50% typed edges on the route |
+| Alchimie | productive pairs at most 40% |
+| Perechi | maximum-weight matching margin at least 0.15 |
+
+These are review measurements, not new implemented lints. The workflow's current B–E
+mapping in `.claude/workflows/critique-games.js` stays unchanged; mapping I/J is a separate
+code task. Until then, Intrusul and Perechi briefs apply I/J explicitly, alongside the native
+quick shape checks and rail audit.
+
+## A. Universal kill criteria (all six games)
 
 - **A1 Recognition floor.** The concepts a player must produce or recognize are things
   an average Romanian (non-specialist, cross-generational) has actually heard of.
@@ -172,6 +191,15 @@ A verifier with web access confirms A1/A2/C2 by checking ≥2 independent signal
 
 ## G. Judge-fleet protocol (fleet skill routing)
 
+For V2, M4's gameplay critic is a label/solution-blind pre-review filter, never a signer;
+its log joins the frozen bundle. The fixed `factual-v2-<id>` and `quality-v2-<id>` reviewers
+sign round 1 independently against the frozen candidates, then sign round 2 as verifier and
+analyst against the native dossiers (and Alchimie audit). In each round, both `signed_at`
+timestamps must exist before either reads the other's verdict. Author sources stay sealed
+until both sign; each reviewer chooses at least one URL per item outside the author's
+normalized URL set. Reject a review with more than 20% identical rationale strings or whose
+reviewer name appears in an M1–M5 artifact. Preserve the two-signature contract below.
+
 1. **Dossier**: `scripts/critique_pack.py --status pending --ids <exact-ids>
    --strict --dossier <dir>` emits one JSON per item and fails on unknown or
    filter-excluded IDs. Dossier degrees and Contexto neighbors use the runtime directed
@@ -180,8 +208,9 @@ A verifier with web access confirms A1/A2/C2 by checking ≥2 independent signal
 2. **Critique** (analyst / Sonnet): per item, walk B, C, D, or E above, simulate a player,
    name failure modes, and use the dossier's labeled routes or pair/recipe evidence for
    Lanț/Alchimie before proposing a verdict + claims needing web verification.
-3. **Adversarial verify** (Opus, web access): refute-first — try to overturn the
-   critique; run section-F checks on every A1/A2/C2 claim; settle the verdict. Gate
+3. **Adversarial verify** (Opus, web access): for V2, independently refute the candidate
+   and dossier without reading the analyst report; compare critiques only after both sign.
+   The earlier sequential “overturn the critique” instruction is non-V2 history. Run section-F checks on every A1/A2/C2 claim; settle the verdict. Gate
    mode verifies every item; only clean approved-stock sweeps may use the stable
    one-in-four sample. Model-returned IDs and review bindings must match the request.
 4. **Batch-bound apply**: before staging, `import_candidates.py` requires complete factual
@@ -226,3 +255,37 @@ A verifier with web access confirms A1/A2/C2 by checking ≥2 independent signal
 
 FAIL blocks promotion (`--strict` exits 1). WARN routes the item to the judge fleet —
 it may pass with justification recorded in the verdict reasoning.
+
+
+## I. Intrusul boards (three members and one intruder)
+
+- **I1 Honest common predicate.** Build a hub trio with a sibling-hub intruder of the same
+  node type. Every member must satisfy one nameable common predicate; type alone must not
+  reveal the answer. The quick shape validator remains mandatory.
+- **I2 Mechanical separation.** At least two of the three member-to-member links have
+  weight ≥0.60. The intruder has no link to any member. This screen is necessary, but does
+  not prove that the intended odd tile is unambiguous.
+- **I3 Blind odd-one-out.** Shuffle the four displayed tiles, withholding the intended
+  predicate and solution. The gameplay critic chooses the intruder and names the predicate;
+  compare its answer mechanically with the authored answer. A different answer, or any
+  other tile that is arguably odd under a natural predicate, fails the pre-review filter.
+- **I4 Recognizable reasoning.** All four tiles pass A1/A2; a player must be able to explain
+  why the trio belongs together and why the intruder does not. Obscurity, surface spelling
+  accidents and a merely weaker association do not establish a fair intruder.
+
+## J. Perechi boards (four pairs over eight tiles)
+
+- **J1 Strong pairs, bounded cross-links.** Each of the four intended edges has weight
+  ≥0.60; all 24 non-pair cross-links have weight <0.60. A starter board has zero real
+  cross-links. The quick shape validator and native audit remain mandatory.
+- **J2 Unique matching.** The intended pairing is the unique maximum-weight perfect
+  matching among the 105 possible matchings. Record the best and runner-up matchings and
+  their margin. The proposed margin ≥0.15 is WARN for B1, C1 and B2 under the trial above;
+  uniqueness and the existing hard floors remain required.
+- **J3 Blind pairing.** Shuffle the eight displayed tiles and withhold labels, intended
+  pairs and the solution. The gameplay critic pairs them, then compare unordered pairs
+  mechanically with the authored matching. A different pairing or an ambiguous tile fails
+  the pre-review filter, even when the numeric matching is unique.
+- **J4 Explainable links.** Each intended pair passes A1/A2/A7 and has a short, factual,
+  nameable relation. A strong KG edge alone cannot justify an association a Romanian
+  player would not recognize or distinguish from another plausible partner.

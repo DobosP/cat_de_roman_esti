@@ -12,11 +12,28 @@ For version scope and outcome reporting, see
 [ADR-0113](adr/0113-outcome-based-version-batches.md). Capture the baseline commit before
 authoring so the final inventory comparison covers the whole batch.
 
+For V2, follow [ADR-0211](adr/0211-content-loop-v2-all-boards.md) and the exact commands in
+[CONTENT_LOOP.md](CONTENT_LOOP.md). Pack records and authored Intrusul/Perechi quick boards
+are **class P**; quick boards use the 4c–4e rail candidate/review/proposal/audit/finals path,
+not an unsupported `import-candidates` payload. Class P has no light path: quick and
+extensions bind the live pack even when their items are inherited. A KG change is class G
+and takes the full 4a–4i cascade in a separate landing.
+
+Use a landing id `<id>` (`b1`, `c1`, `b2`, …), branch `content/v2-<id>-<slug>`, and evidence
+under `~/work/_temp/content-loop/evidence/<id>/` with a SHA-256 manifest. `<ID>` is the
+uppercase id, as in `reviewedV2B1()`. Complete M0–M5 before round 1, including the scratch
+lint screen and the gameplay critic's shuffled, label/solution-blind solve. Compare that
+answer mechanically; the critic is a pre-review filter whose log is frozen, not a signer.
+
 1. Create `<scratch>/<wave>/<category>/candidates.json` with all six arrays. `nodes` and
    `edges` must be empty. Include only supported instance payloads; do not reuse retired IDs.
-2. Obtain independent `verify_factual.json` and `verify_quality.json` artifacts. Each binds
-   the exact candidate SHA-256 and fully covers every raw reference. A quality `keep` only
-   stages `pending`; it is not approval.
+2. **Round 1:** obtain independent `verify_factual.json` and `verify_quality.json` artifacts
+   from the fixed `factual-v2-<id>` and `quality-v2-<id>` reviewers. Each binds the exact
+   frozen candidate SHA-256 and fully covers every raw reference. Each reviewer chooses at
+   least one URL per item outside the author's normalized URL set; author sources remain
+   sealed until both sign. Both `signed_at` timestamps must precede either reviewer reading
+   the other's verdict. More than 20% identical rationales or a reviewer name in any M1–M5
+   artifact voids that review. A quality `keep` only stages `pending`; it is not approval.
 3. Stage the batch, then capture the newly allocated IDs:
 
    ```bash
@@ -26,10 +43,13 @@ authoring so the final inventory comparison covers the whole batch.
      --status pending --ids <exact-ids> --strict --dossier <scratch>/<wave>-dossiers --write
    ```
 
-4. Require an analyst critique and an adversarial Romanian-web verification for every ID.
-   Their separate JSON files use the portable contract in [ADR-0104](adr/0104-portable-independent-review-artifacts.md):
-   exact shared `input_ids`, distinct reviewer IDs, and one dossier-bound judgment per ID.
-   Build the version-2 files, then apply only the fresh, complete batch:
+4. **Round 2:** the same `quality-v2-<id>` signs as analyst and `factual-v2-<id>` as
+   adversarial Romanian-web verifier for every ID, now bound to the native dossiers.
+   They work independently, with both signatures present before either sees the other's
+   verdict. Their separate JSON files use the portable contract in
+   [ADR-0104](adr/0104-portable-independent-review-artifacts.md): exact shared `input_ids`,
+   distinct reviewer IDs, and one dossier-bound judgment per ID. Build the version-2 files,
+   then apply only the fresh, complete batch:
 
    ```bash
    go -C go-backend run ./cmd/cat-content-ops build-review --root .. \
@@ -58,16 +78,37 @@ authoring so the final inventory comparison covers the whole batch.
    evidence and review. Run native `apply-review --write` afterward for the unchanged strict
    prospective-inventory promotion gate; creating the artifact does not promote content.
 
-5. Run the content gates and refresh only the digest-bound artifacts affected by the pack:
+5. Complete the **class P cascade**, using CONTENT_LOOP.md 4b–4i. Start with the pack
+   gates and ranking/derived refresh:
 
    ```bash
    go -C go-backend run ./cmd/cat-content validate-fixture --root ..
    go -C go-backend run ./cmd/cat-content validate-pack --root ..
    go -C go-backend run ./cmd/cat-content-ops rank --root .. --write
    go -C go-backend run ./cmd/cat-content-ops derive --root .. --write
-   go -C go-backend run ./cmd/cat-mobile-pack --root .. \
-     --out ../tests/fixtures/cat_mobile_app_pack_contract.json
+   go -C go-backend run ./cmd/cat-mobile-pack --root .. --check
    ```
+
+   Advance the authored source (`authored-v13.json` is next after v12), regenerate quick
+   and extensions with `inherited: true` for untouched items, and obtain both reviewers'
+   fresh finals. Keep the world rail inherited at its original source version: it has no pack
+   binding; its KG, rubric, editorial-source and previous-world bytes must remain exact. Check it
+   through default all --check, never the newly authored source. Refresh the 4f authority pins before the extensions proposal, export, capture the
+   independent HTTP corpus, bind the installed quick/extensions authorities, and run 4i's
+   gates plus one HTTP playthrough per new board. Do not stop after ranking/derive.
+
+   Name the corpus `python-http-parity-v2-<id>.json.gz`, its golden block `reviewedV2<ID>()`,
+   and its selection test `v2<id>_selection_test.go`. Attach the capture script's diff against
+   the archived reference: exactly the three permitted lines (ROOT, reference label, output
+   path). Report the captured count; any change from the previous reviewed block (1206 since
+   V1.13) is `NEEDS-OWNER` with the case-list diff, never an edit to fit the expectation.
+
+6. Prepare the separate `pins` commit and old → new packet required by
+   [ADR-0210](adr/0210-curation-waves-and-staged-stock-landing.md), including `git show --stat`.
+   Only moved expectations in `go-backend/internal/httpgolden/*_selection_test.go`,
+   `go-backend/internal/contentops/{check_test.go,contentops_test.go}`, and (for class G)
+   `go-backend/internal/contexto/content_v1_3_test.go` may change. Include the predecessor's
+   selection ceiling update; do not change unrelated tests.
 
 The derived builder keeps its frozen source-ID set. A pack digest refreshes its metadata;
 it does not authorize widening the 336-board payload.
@@ -93,3 +134,11 @@ The frozen catalog/reserve/quick authorities and independent HTTP reference reta
 explicit version pins. A reviewed source change requires its affected authority pins and
 independent reference evidence to transition before native export/release freshness can
 pass. Regenerating metadata alone never authorizes new boards or replaces review.
+
+
+V2 stops at `waiting: land? (pins packet + gates)`. Paul's Claude Code session reviews the
+packet, runs `merge --ff-only`, pushes under ADR-0014, copies the SHA-verified evidence to
+the NAS, then deletes the verified-merged branch and worktree under ADR-0037. The loop never
+merges, pushes or deletes. A `land` message answers only that wait; it does not authorize the
+loop to perform Claude Code's landing. One batch may be between freeze and landed; after
+seven days in a wait it expires and needs fresh M3–M6 before reuse.
