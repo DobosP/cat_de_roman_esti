@@ -33,6 +33,9 @@ This ADR extends ADR-0188/0210; it does not rewrite preserved V1 decisions or si
   landing. JS mapping remains a separate code task. Proposed Perechi margin 0.15, Alchimie
   productive-pair 40%, Lanț typed-edge 50%, Conexiuni cross-link bands and Cald gastronomie freeze
   stay WARN for B1/C1/B2; review measured results for later ratification.
+- Paul kept two stricter lexical rules from the draft (2026-10-22): a lexical addition cites its
+  own head's DOOM3 flexion table, never another head's, and a qualified compound needs component
+  morphology plus separate compound-sense evidence.
 - Class P pays quick/extensions regeneration, corpus, authorities and full gates/world inheritance;
   class G pays all 4a–4i. No light path; do not mix KG and boards. Derived 123-source/336-board
   freeze and discovery-world scope stay unchanged; 83 historical Conexiuni FAIL repairs are separate.
