@@ -12,11 +12,11 @@ For version scope and outcome reporting, see
 [ADR-0113](adr/0113-outcome-based-version-batches.md). Capture the baseline commit before
 authoring so the final inventory comparison covers the whole batch.
 
-For V2, follow [ADR-0211](adr/0211-content-loop-v2-all-boards.md) and the exact commands in
+For V2, follow [ADR-0212](adr/0212-bounded-content-workflow-repair.md), extending ADR-0211, and the exact commands in
 [CONTENT_LOOP.md](CONTENT_LOOP.md). Pack records and authored Intrusul/Perechi quick boards
 are **class P**; quick boards use the 4c–4e rail candidate/review/proposal/audit/finals path,
-not an unsupported `import-candidates` payload. Class P has no light path: quick and
-extensions bind the live pack even when their items are inherited. A KG change is class G
+not an unsupported `import-candidates` payload. Class P has no light path: all three rails
+are rebuilt and re-signed; current pack/ranking bindings also reach the world audit. A KG change is class G
 and takes the full 4a–4i cascade in a separate landing. Intrusul and Perechi boards also apply
 the unbound rubric I/J section in CONTENT_LOOP.md; the bound rubric stays unchanged.
 
@@ -90,13 +90,13 @@ answer mechanically; the critic is a pre-review filter whose log is frozen, not 
    go -C go-backend run ./cmd/cat-mobile-pack --root .. --check
    ```
 
-   Advance the authored source (`authored-v13.json` is next after v12), regenerate quick
-   and extensions with `inherited: true` for untouched items, and obtain both reviewers'
-   fresh finals. Keep the world rail inherited at its original source version: it has no pack
-   binding; its KG, rubric, editorial-source and previous-world bytes must remain exact. Check it
-   through default all --check, never the newly authored source. Refresh the 4f authority pins before the extensions proposal, export, capture the
-   independent HTTP corpus, bind the installed quick/extensions authorities, and run 4i's
-   gates plus one HTTP playthrough per new board. Do not stop after ranking/derive.
+   Advance the authored source (`authored-v13.json` is next after v12), regenerate quick,
+   world and extensions, and obtain both independent initial reviews and fresh audit-bound
+   finals for all three rails. Only exact unchanged item semantics may use `inherited: true`
+   under 4d. The world audit binds current pack/ranking bytes, so its old signed audit cannot
+   be retained after those bytes change. Refresh the 4f pins before the extensions proposal,
+   export, capture the independent HTTP corpus, bind all three installed authorities and run
+   default all --check plus every 4i gate and new-board HTTP play. No auditor or gate is weakened.
 
    Name the corpus `python-http-parity-v2-<id>.json.gz`, its golden block `reviewedV2<ID>()`,
    and its selection test `v2<id>_selection_test.go`. Attach the capture script's diff against
@@ -137,9 +137,9 @@ independent reference evidence to transition before native export/release freshn
 pass. Regenerating metadata alone never authorizes new boards or replaces review.
 
 
-V2 stops at `waiting: land? (pins packet + gates)`. Paul's Claude Code session reviews the
-packet, runs `merge --ff-only`, pushes under ADR-0014, copies the SHA-verified evidence to
-the NAS, then deletes the verified-merged branch and worktree under ADR-0037. The loop never
-merges, pushes or deletes. A `land` message answers only that wait; it does not authorize the
-loop to perform Claude Code's landing. One batch may be between freeze and landed; after
-seven days in a wait it expires and needs fresh M3–M6 before reuse.
+Under ADR-0212, queue each fully qualified packet UNLANDED with its exact HEAD, dependencies,
+pins and gates, then continue eligible work autonomously. Claude performs the consolidated
+final review when Paul stops or explicitly requests it. Landing, push and SHA-verified NAS
+cleanup remain external owner operations; the loop never merges, pushes or deletes. An
+unresolved waiting batch still expires after seven days and requires fresh M3–M6 before reuse;
+queued evidence never authorizes a stale binding or unqualified predecessor.

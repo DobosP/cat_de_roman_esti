@@ -3,7 +3,8 @@
 Valid until: a later owner-approved procedure supersedes this file.
 Decisions: [ADR-0188](adr/0188-park-v1-7-and-reset-content-loop.md),
 [ADR-0210](adr/0210-curation-waves-and-staged-stock-landing.md) and
-[ADR-0211](adr/0211-content-loop-v2-all-boards.md).
+[ADR-0211](adr/0211-content-loop-v2-all-boards.md) and
+[ADR-0212](adr/0212-bounded-content-workflow-repair.md).
 
 The V2 loop (Phase B) starts only after Paul explicitly says to start; landing this procedure
 starts nothing. The retired `romanian-content-discovery-improved-loop` automation stays paused
@@ -17,8 +18,10 @@ is added only for a documented `board_ref` gap or through an ADR-0210 curation w
 approved, eligible, actually selected and played boards separately from concepts, aliases, graph
 claims and tooling. `cat-content-ops delta` is a count/identity report, not a playability certificate.
 
-Read this whole file on main at cycle start and whenever its last commit differs from state
-`procedure_rev`; re-read the exact current sub-step before acting. Read AGENTS.md, STATUS counts,
+Read this file from the recorded exact procedure/base commit at cycle start and whenever its
+recorded digest changes; re-read the exact current sub-step before productive work. The base is
+clean main or the exact HEAD of a fully qualified unlanded predecessor, with main anchor and
+dependencies explicit. A draft or partially qualified repair is never a content-wave base. Read AGENTS.md, STATUS counts,
 applicable CRITIQUE_RUBRIC sections, the unbound rubric I/J section below, PACK_ONLY_CONTENT_WAVES,
 ADR-0210 and ADR-0211. The approved
 V2 design and read-only review (2026-10-22) explain decisions; their old line numbers and snapshot
@@ -26,7 +29,8 @@ counts are not current authority. Preserve fixed-name reviewers, the hash-bound 
 spacing, source fidelity, holds, tick/commit discipline and the Python-suite-not-a-gate rule.
 Do not open SKILL.md, TASK_BRIEF.md, WORKLOG.md or unrelated older ADRs/review trees; the archived
 4g reference and recorded exclusion searches below are explicit exceptions. User messages win.
-The loop never edits this procedure or ADRs; it proposes changes instead.
+The content loop proposes procedure changes. Only an explicit bounded owner-authorized workflow
+repair may edit this procedure/ADRs; ADR-0212 records the current repair scope and unchanged gates.
 
 Owner words are context-specific: `go` or `drop <ids>` answers only `waiting: review`; `land` answers
 only `waiting: land?`; `continue` starts the next interactive burst; `resume <id>` answers
@@ -50,10 +54,10 @@ Use `export PATH=/usr/local/go/bin:$PATH GOTOOLCHAIN=local`; `go version` must b
 Python importer: `~/work/cat_de_roman_esti/.venv/bin/python`, `PYTHONPATH=scripts:.` from the task
 worktree, never `python -I` for importer execution. All checks run from a task worktree root:
 shared main's .venv makes cat-doc-check refuse. Shared main stays clean and read-only to the loop.
-Create each task from the approved exact main SHA with
-`python3 ~/work/agent-ops/scripts/create_task_worktree.py --repo ~/work/cat_de_roman_esti --branch content/v2-<id>-<slug> --base <exact main SHA> --task "<player outcome>" --write`,
-then confirm `git rev-parse HEAD` equals that SHA; otherwise stop BLOCKED.
-Move its generated TASK_BRIEF.md into that landing's scratch; never overwrite a prior brief.
+Create each task locally from its approved exact base SHA with
+`git worktree add --no-track -b content/v2-<id>-<slug> <task-path> <exact-local-SHA>`.
+Never use the auto-fetch helper. Confirm HEAD equals the base and no upstream is configured;
+otherwise stop BLOCKED. Record base kind, main anchor and qualified predecessor dependencies.
 IDs are `b1`, `c1`, `b2`, …; branch `content/v2-<id>-<slug>`, module
 `scripts/<slug_underscored>_v2_<id>_data.py`, build version `fixture-v2-<id>-<slug>` and review
 `docs/reviews/v2-<id>-<slug>/`. V1 branch, module and corpus names remain preserved history.
@@ -71,8 +75,9 @@ dry-run outside approved 4a: import-candidates requires both review artifacts be
 
 ## Cadence, waiting and expiry
 
-One scheduled run is one tick/one sub-step (4e-quick, 4e-world and 4e-extensions are separate).
-An interactive burst has at most four sub-steps; post one status line and stop until `continue`.
+One productive scheduled checkpoint is one tick/sub-step; observing a running job is not a
+productive tick. 4e-quick, 4e-world and 4e-extensions remain separate. An interactive burst has
+at most four sub-steps, then the existing same-chat heartbeat resumes without a routine question.
 Each productive sub-step commits/checkpoints separately and updates the next saved step; limits
 are 24 working ticks and 20 commits per landing. Research stays ≤12 items/tick and ≤300 seconds
 per item; all dictionary requests across workers are ≥2 seconds apart, with author/reviewer phases
@@ -83,8 +88,26 @@ Persist waiting_since as UTC when waiting is first set or changes; never reset i
 Post each new waiting value once with a summary ≤10 lines, then stay silent until it changes.
 Never issue empty keepalive requests, promise cache retention, or alter model/cache settings.
 
-Landing mode is land-or-expire, with at most one batch from M5 freeze to landed; no next-batch M1
-until it lands or expires. In Phase B only, after seven days in any waiting set `waiting: expired <id>; restart?`.
+Read state first. For saved active APP agents, inspect the same canonical jobs once; if still
+running and authority/input versions are unchanged, return quietly without setup or duplicate
+dispatch. PID/starttime checks apply only to OS subprocesses. Reuse immutable instructions and
+evidence by exact version/reference, never a stale native/content qualification. Generate path,
+hash and action records mechanically; validate permissions, physical paths, schemas and complete
+output encoding before freezing a bundle. Draft code is editable until frozen; frozen review
+inputs, signed verdicts and captures are immutable. Shared blockers stop all dependent lanes.
+
+The owner-authorized repair r1 has a separate limit of eight productive ticks and six local
+commits. Existing wave counters/waits and five carried successor-planning ticks remain exact;
+no failed wave is reopened or reset. This is not permission to create new repair accounts.
+Implement the existing designs, independently review exact code, run meaningful real regressions
+and pin a separate immutable helper version. Preserve the original 101-file helper manifest and
+its bytes. Do not add generic design/negative-conclusion review stages before a concrete patch.
+Content waves retain the 24-tick/20-commit limit and all required fresh checks.
+
+Each active batch has one frozen review bundle. Fully qualified packets are queued UNLANDED
+with exact HEAD/dependencies, then the next independent eligible scope may begin. A successor
+uses only the last fully qualified unlanded HEAD or explicit clean main, never a failed head.
+In Phase B, after seven days in an unresolved waiting set `waiting: expired <id>; restart?`.
 A main KG change invalidating frozen dossiers also expires that batch. Return expired candidates
 to the pool as unapproved attention; keep all files/verdicts unchanged. Fresh M3–M6 is required for
 reuse, but never re-run those steps unprompted. The loop never merges or rebases a task branch.
@@ -139,6 +162,9 @@ FAIL-lint Conexiuni boards is a separate task; do not widen scope to make a batc
   (`-count=1`: the rubric is read from outside the module root, so a cached `ok` hides drift).
   Verify the helpers with `python3 ~/work/_temp/content-loop/miner/sha256_manifest.py verify
   --manifest ~/work/_temp/content-loop/miner/phase-a-helpers-manifest.json`; a mismatch is BLOCKED.
+  Any supplemental helper also needs its own exact versioned pin, parent baseline reference,
+  fresh independent APP code review and meaningful real-output regression evidence. A helper
+  review is reusable only for identical code/input contracts; every content baseline still runs.
   Red unchanged validate/export/ops is BLOCKED. Red rail/contentrails disables install, reports the
   first error and grants no waiver. Build the need map and main-bound compat index; historical
   PASS entries and retired feat/gui-cat-m3 bindings do not substitute for this baseline.
@@ -175,7 +201,9 @@ FAIL-lint Conexiuni boards is a separate task; do not widen scope to make a batc
   in a separate sealed bundle until both sign. Author sources stay sealed; each new or changed item needs ≥1 reviewer-chosen normalized URL outside the author's set. Reject a report with
   >20% repeated normalized rationale strings, >20% identical rationale rows across the pair, or a
   reviewer name appearing anywhere in an M1–M5 artifact. Record each per-item capture binding.
-  Run the sidecar independence guard before accepting the M6 pair. Post the go/drop table ≤24 rows and set `waiting: review`. Only go/drop answers this wait.
+  Run the sidecar independence guard before accepting the M6 pair. Record the go/drop table
+  ≤24 rows under the standing owner delegation and continue M7. An explicit item hold or
+  separately required owner row remains a hold; delegation is not a new item-specific approval.
 - **M7 Stage plus review round 2.** Only after go/drop and fresh gates. Pack: run PACK_ONLY steps 2–4:
   import-candidates --pack-only --write, critique --dossier --write, live Alchimie audit for its
   separate review batch, same two fixed reviewers as verifier/analyst, build-review then
@@ -194,15 +222,17 @@ FAIL-lint Conexiuni boards is a separate task; do not widen scope to make a batc
   sources}]}` raw files and a complete M1–M5 artifact index. Where the native file has another shape
   (pack-only `verify_*.json`, round-2 reviews, curation graph reviews), the reviewer also signs a
   sidecar raw file in the helper's shape, SHA-bound to the native file, and the guard runs on the
-  sidecar. Curation has no M3/M4 artifacts: before C1, Claude reviews a helper update that accepts a
-  curation steps 0–2 index and re-pins the helper manifest; without it curation step 3 is
+  sidecar. Curation has no M3/M4 artifacts: a fresh independent Codex APP code review and real
+  regressions must qualify a separately pinned helper version accepting the curation steps 0–2
+  index; the original manifest is preserved. Without that prerequisite curation step 3 is
   BLOCKED. Stop if any check cannot be
   established, never hand-check instead or claim future code.
 - **M8 Landing packet.** Execute the applicable P/G cascade below, separate pins commit and corpus
   report. Require green gates outright, record each API playthrough, bind exact HEAD and all files.
-  Finish step5 prelanding record, then `waiting: land? (pins packet + gates)`. Only Paul's Claude
-  Code session reviews the packet, runs merge --ff-only, pushes per ADR-0014, SHA-verifies the NAS
-  evidence copy and deletes branch/worktree per ADR-0037. The loop never merges, pushes or deletes.
+  Finish step5 prelanding record and queue the fully qualified UNLANDED packet with pins/gates.
+  Continue eligible work autonomously. Claude performs only the consolidated final review when
+  Paul stops the run or explicitly requests it. Landing, push and cleanup remain external owner
+  operations; this loop never merges, pushes or deletes.
 - **M9 Record.** After externally verified landing, record actual player-visible per-game cell changes,
   source concepts/inputs/claims separately, rejects as tombstones via existing tooling, and the
   ≤10-line retrospective/≤3 proposals. Never auto-demote approved content or rewrite a signed verdict.
@@ -210,11 +240,12 @@ FAIL-lint Conexiuni boards is a separate task; do not widen scope to make a batc
 ## Fixed roles and mechanical independence
 
 Each landing fixes author, factual-v2-<id>, quality-v2-<id>, critic-v2-<id> and the landing reviewer.
-The first four are distinct. Reviewers and critic each run as their own
-`codex exec -m <model>` subprocess using rungs from
-`~/.claude/skills/agent-routing/scripts/fleet-tiers.sh`; critic and factual use different rungs.
-Do not infer a model alias: retain the selected rung/model/effort, exact prompt and transcript under
-`evidence/<id>/roles/<name>/` and hash each. Only the frozen role-appropriate bundle is provided.
+The first four are distinct. Each working helper, reviewer and critic runs in a separate fresh
+Codex APP context (`fork_turns=none`), using the owner-pinned role model/effort; critic and factual
+use different rungs. Retain exact prompts, native dispatches and action/research logs under
+`evidence/<id>/roles/<name>/`; never fabricate CLI transcripts. Only the frozen role-appropriate
+bundle is provided. Helper authors never approve their own code. No intermediate Claude login,
+CLI/app review or copied verdict is a working prerequisite.
 The same factual/quality names sign round 2 as verifier/analyst; roles do not change their identity.
 
 Source seals, actor artifacts, report signatures, capture IDs and access receipts are retained by
@@ -237,8 +268,10 @@ rail pair), this procedure wins.
 ## Install cascade — exact substeps 4a–4i
 
 One commit per lettered sub-step; each rail in 4e is a separate sub-step. Go tools via
-   `go -C go-backend run ./cmd/<tool> ... --root ..`. Class P skips 4a and retains world; class G runs all three rails. Inherited world keeps its original
-source version and is checked through default all --check, not --source authored-v<K+1>.
+   `go -C go-backend run ./cmd/<tool> ... --root ..`. Class P skips only 4a; both P and G
+rebuild, independently review, audit and re-sign quick, world and extensions under the new source.
+The world audit binds current pack/ranking bytes even when world item semantics are unchanged;
+retaining that old signed audit after those bytes move is forbidden (ADR-0212).
    - 4a Apply the step-3 module (templates: scripts/everyday_inputs_v1_6_data.py for aliases,
      scripts/everyday_graph_v1_3_data.py for nodes and edges). Class G only, after owner `go`;
      no automatic removal from any deferred or blocked list. Run `apply_common_words_v24.py --data-module <module>
@@ -255,9 +288,7 @@ source version and is checked through default all --check, not --source authored
      retain category/difficulty/game/id/payload/rationale/source_id/sources and exact per-record
      hashes, no new IDs or semantic edits outside the reviewed payload. A mere copy would add no
      boards. Pack-only B1 changes no authored quick payload, but still regenerates bindings.
-     For P keep the existing world
-     entry and every bound world byte unchanged; rebuild/re-sign quick and extensions. For G use quick,
-     world, extensions: `cat-content-rail <r> --source <abs> --candidate-out
+     For both P and G use quick, world, extensions, with fresh bindings and world acceptance: `cat-content-rail <r> --source <abs> --candidate-out
      <abs>/docs/reviews/<wave>/native/<r>/candidate.json`.
    - 4d The two reviewers write native/<r>/factual-review.json and quality-review.json covering every
      item (schema in review.go). Only authored items whose bytes/semantics are unchanged from their
@@ -269,7 +300,7 @@ source version and is checked through default all --check, not --source authored
      concept_sha256 = sha256 of the concept rendered like rail output (sorted keys, two-space indent,
      trailing newline), verdict, rationale, sources, inherited}.
    - 4e Every rebuilt rail command in 4c–4h passes `--source <absolute path of authored-v<K+1>.json>`; the
-     retained class-P world is not rebuilt and uses its original source. The `--write` and
+     class-P world is rebuilt and reviewed under that same source. The `--write` and
      `--installed-authority-out` commands also repeat `--candidate C --factual-review F
      --quality-review Q`. Serially for quick, then world, then extensions: `--candidate C
      --factual-review F --quality-review Q --proposal P` (P =
@@ -311,8 +342,7 @@ source version and is checked through default all --check, not --source authored
      both reviewers re-sign FF and FQ to the new A, retry once (a second refusal sets `waiting`). Then
      assemble
      go-backend/internal/contentrails/sources/installed-authorities.json (append authored-v<K+1> to
-     source_chain; replace quick/extensions entries for P, preserving the world entry exactly;
-     replace all three rail entries for G) and
+     source_chain; replace all three rail entries for both P and G) and
      swap the sha in installed_authorities_pin.go via the metadata template (the file must equal
      PinBytesForInstalledAuthorities exactly). No second installed audit, no second reviewer round and
      no runtime freeze.
@@ -361,13 +391,12 @@ source version and is checked through default all --check, not --source authored
 
 ## Cascade classes and prelanding record
 
-**Class P (pack/quick):** no KG change; M7 pack/quick review as appropriate, then 4b rank/derive,
-4c authored-v<K+1>, 4d–4e quick plus extensions, 4f pins/export, 4g independent corpus, 4h quick/
-extensions authorities, 4i gates and each new board HTTP-played once. World inherits unchanged
-because it has no pack binding: its KG, rubric, editorial source and previous-world bindings must
-all remain exact. Check world through default all --check or its retained original source, never
-pass the new authored source to the inherited world rail. Regeneration/re-signing quick and extensions is mandatory even when
-only the pack changes: their pack/KG/derived bindings must equal live digests. No light path.
+**Class P (pack/quick):** no KG change; M7 pack/quick review as appropriate, then full 4b–4i.
+Quick, world and extensions all receive the new authored source, initial reviews, proposal,
+current audit, fresh final acceptance and replacement authority entries. Exact unchanged item
+semantics may use the inherited-item rule in 4d; the world audit/finals themselves are fresh.
+Pack/ranking bytes are world audit inputs, so unchanged world gameplay does not permit stale
+signed bindings. Default all --check, corpus, pins, gates and per-board HTTP play remain mandatory.
 **Class G (curation/vocab-gap):** full 4a–4i including world. No KG and board additions co-land;
 Alchimie has its own review/audit batch even within a multi-game P landing.
 
@@ -380,7 +409,7 @@ build output and failed attempts stay under evidence, never in repo docs. Preser
 retention cleanup belongs to the later Claude landing session after verified NAS copy.
 Only after the prelanding checks update STATUS counts/Last verified within its 120-line budget;
 if doing so requires an out-of-scope history-file edit, report NEEDS-OWNER. Run cat-doc-check
---root .. --inventory docs/tracked-markdown.json and git diff --check; commit, stop at land?.
+--root .. --inventory docs/tracked-markdown.json and git diff --check; commit, queue UNLANDED.
 If main moved, the loop does not merge: Claude's landing session merges main into the task branch
 and reruns 4i (and 4g when httpapi or content packages changed). If main moves again, repeat once
 only after explicit direction, then wait `main keeps moving`.
@@ -394,8 +423,8 @@ The canonical stock is `docs/content-consolidation/v1-8-through-v1-32/current-st
 branch; V1.38–V1.42 payloads are read from their preserved content/v1-* branches with `git show`,
 never executed. Step 2 rebinds retained own-head DEX/DOOM3/table and second-source evidence; missing captures are
 ineligible. Step 3 consolidates one module and obtains fresh whole-batch dual review with the V2
-independence sidecars and guard, then posts go/drop as waiting review. Step 4 is full 4a–4i and test pins;
-step 5 prepares the packet and stops at land?. These source items are not counted as 24 boards.
+independence sidecars and guard, then records go/drop under the standing delegation, retaining
+item-specific owner holds. Step 4 is full 4a–4i and test pins; step 5 queues the qualified packet. These source items are not counted as 24 boards.
 
 C1 starts with V1.38–V1.42 final payloads, including Avion, Cinematograf and Interfon; lane labels
 alone do not prove morphology eligibility (Interfon's historical lane differs). Hold any family
@@ -536,41 +565,26 @@ critiques only after both sign.
 ## Heartbeat prompt (new cat-content-v2 only, after approval)
 
 ```text
-Run Cât de român ești V2 from docs/CONTENT_LOOP.md on main (ADR-0188/0210/0211).
-Never resume romanian-content-discovery-improved-loop. Start only after Paul says start; landing
-the procedure implies no schedule creation or resume.
-Read state first, then the whole procedure at start/procedure_rev change and the exact current sub-step.
-Phase B first tick appends old owner_decisions/protected_refs to decisions.jsonl; state stays ≤2 KB.
-Boards/targets across six games are the product; M0 need map, M1 mine, M2 compat, M3 lint, M4 blind
-critic, M5 freeze, M6 independent round 1, M7 stage + round 2, M8 landing packet, M9 record. Curation
-uses steps 0–3, the full M2 screen, then 4a–4i/5. B1 up to 4 Lanț, C1 ≥20 V1.38–42 morphology
-families, B2 up to 20 multi-game boards; later cap 24, curation at least 1 in 3 landings. No KG and
-boards co-land. Rubric I/J are unbound text in CONTENT_LOOP.md; never edit CRITIQUE_RUBRIC.md.
-Use the current main-bound task worktree, Go 1.27.3, PATH=/usr/local/go/bin:$PATH GOTOOLCHAIN=local,
-and go test -count=1. Never run checks from shared main; never execute or apply source modules except
-approved 4a. No importer pre-screen dry run. P pays rank/derive, quick+extensions regeneration,
-pins/export, corpus, authorities and gates with world inherited; G pays full 4a–4i. No light path or
-skipped gate. Read scratch-helper interfaces; outputs are unapproved. Preserve sources, original
-verdicts, V1 holds/refs, all evidence and rule exclusions; sucitoare excluded, Ie never ii/iei, V1.33
-fresh research, V1.14 reapplied not merged. Raw evidence/prompts/model IDs/transcripts/manifests under
-~/work/_temp/content-loop/evidence/<id>/ only. Never /tmp, delete, reset/clean, merge, push or deploy.
-Fixed author/factual-v2-<id>/quality-v2-<id>/critic-v2-<id>; each reviewer/critic its own codex exec
-subprocess from fleet-tiers rungs, critic and factual on different rungs. Author URLs sealed until
-both sign; ≥1 reviewer-chosen URL per new or changed item, signed_at precedes peer reading, >20%
-identical rationales or a reviewer name in M1–M5 voids the review. SHA-bound sidecar guard on M6,
-round 2 and curation step 3, plus the unchanged native checks.
-One sub-step per scheduled tick; interactive burst ≤4, then stop until continue. Max 24 ticks/20
-commits; research ≤12 items/tick, ≤300 s/item, dictionary globally ≥2 s apart, phases serialized.
-Fail twice waits. go/drop answers review, land answers land?, continue starts a burst, resume <id>
-answers a wait Paul names. Notify each new waiting once with ≤10 lines, silence unchanged waits;
-elapsed time never approves. Seven days waiting or an invalidating main-KG change expires; never
-rerun M3–M6 unprompted. df -h / before corpus/full tests; free <12 GB waits disk. BLOCKED/NEEDS-OWNER
-failures are reported, not repaired outside scope. Every landing has a separate allowlisted pins
-commit with old→new and git show --stat; the independent 4g script changes exactly the
-ROOT/reference/output lines, diff attached, count equals the previous block (1206) or NEEDS-OWNER
-with a case-list diff. 4i HTTP-plays every board; every alias gets a fuzzy-neighbour probe + Cald
-guess. Stop at waiting: review after the M6 table (≤24 rows); then waiting: land? (pins packet +
-gates). Paul's Claude Code session reviews, merges --ff-only, pushes, NAS-verifies and cleans. The
-loop never lands itself. Record actual per-game cell outcomes and a ≤10-line retrospective/≤3
-proposals after external landing. No dummy requests, cache guarantees or model/cache setting changes.
+Continue in this existing chat under the latest explicit owner override and state.json.
+Read state first. Inspect saved canonical APP jobs once; running unchanged work returns quietly.
+Never duplicate a job. PID/starttime checks apply only to saved OS subprocesses.
+For productive work read the current plan/exact step; reread full instructions only on a changed
+recorded digest or missing context. Immutable evidence is referenced, not recopied or reapproved.
+During the specifically authorized repair r1: max8 productive ticks/6local commits, separate
+from all preserved content budgets and carried planning5. Use existing designs for concrete
+code, fresh independent APP review, meaningful real regressions and a separate exact version pin.
+Original helpers/manifests and signed evidence stay unchanged; no generic review-of-review stage.
+Then continue the dataset loop autonomously: one checkpoint/tick, interactive bursts<=4,
+content limits24ticks/20commits, research<=12items/300seconds each, dictionary spacing>=2seconds.
+Fresh fixed factual/quality/critic APP contexts, both whole-batch reviews, seals, URL novelty,
+signatures before peer access/unseal, full actors/captures and native schemas remain mandatory.
+All M0-M8, source/rail/corpus1206/HTTP/fuzzy/exactSHA/pin gates and special holds remain binding.
+ClassP skips only4a; P and G both rebuild/review/audit/re-sign world plus quick/extensions.
+Shared blockers stop dependent lanes. Failed budgets are never reset and failed heads never used.
+Queue fully qualified UNLANDED packets with exact dependencies, then the next eligible scope.
+Only exact qualified predecessor HEAD or cleanmain may be a base; fresh actual-byte checks apply.
+No land/merge/push/fetch/pull/remote-ref/deploy/delete/prune or runtime/GUI/deps/toolchain/CI changes.
+No weakened gate or model/cache changes. Local worktrees use git worktree add --no-track exactSHA.
+Claude is only the final consolidated review when Paul stops or explicitly requests it.
+Notify qualified increments, material failures or genuine new owner rulings once; stay quiet otherwise.
 ```
