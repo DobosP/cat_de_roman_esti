@@ -193,6 +193,14 @@ FAIL-lint Conexiuni boards is a separate task; do not widen scope to make a batc
   input and a separately sealed private key; compare its submitted solution mechanically, then
   adjudicate ambiguity/predicate/recognition in the critic's own words. One line per failure.
   The critic is a pre-review filter, never a signer; its sanitized log joins the freeze bundle.
+  For Cald, the public challenge includes only the exact native player-visible `difficulty` and
+  `board_category` read from the bound board; never add a target/board/source/graph field, neighbour,
+  clue, example or authored guess. The critic commits exactly five ordinary normalized-distinct
+  guesses before feedback using opening response schema 2 (`schema`, `challenge_id`, `openers`);
+  pre-feedback target knowledge is unassessed, while final target/sense ambiguity must be false.
+  Preserve opener bytes/hashes/sequence/receipts and diagnose each property independently. Persist
+  the exact full comparator return exclusively before local assertions. One of those same five
+  openers must have raw distance ≤2; adaptive guesses never satisfy the floor and cap 8 is unchanged.
 - **M5 Freeze.** One landing module/board unit, candidates.json per category, canonical manifest of
   every binding/capture and frozen critic log. Refuse missing/hash-mismatched captures, unresolved
   compat or a missing live mechanic. Seal author sources/URLs separately. Never mutate signed bytes.
@@ -574,6 +582,12 @@ During the specifically authorized repair r1: max8 productive ticks/6local commi
 from all preserved content budgets and carried planning5. Use existing designs for concrete
 code, fresh independent APP review, meaningful real regressions and a separate exact version pin.
 Original helpers/manifests and signed evidence stay unchanged; no generic review-of-review stage.
+Gameplay-protocol GP1 plus rejected GP2 are two carried successor checkpoints, not an r1 reset;
+`gameplay-protocol-v3` is rejected because it admitted caller-selected limits 1–100. GP3 uses the
+separate `gameplay-protocol-v3-cap8` bytes and requires exact integer cap 8 in the builder, direct
+oracle, sealed key and public comparator checks. Preserve opening schema2, exact native Cald
+category/difficulty, independent diagnostics, pre-assertion result capture, and every five-opener
+warmth/final-target/final-sense floor; fresh independent qualification and a pin remain mandatory.
 Then continue the dataset loop autonomously: one checkpoint/tick, interactive bursts<=4,
 content limits24ticks/20commits, research<=12items/300seconds each, dictionary spacing>=2seconds.
 Fresh fixed factual/quality/critic APP contexts, both whole-batch reviews, seals, URL novelty,

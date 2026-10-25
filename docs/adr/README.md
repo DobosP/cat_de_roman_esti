@@ -193,3 +193,5 @@ Parallel lanes also allocated0188/0189 independently. All four full-filename bod
 - [0211](0211-content-loop-v2-all-boards.md) — V2 all-board procedure: M0–M9, B1→C1→B2, class P/G cascades, mechanical independence, test-pin packets and Claude Code-only landing; rubric I/J stay outside the digest-bound rubric.
 
 - [0212](0212-bounded-content-workflow-repair.md) — owner-authorized bounded workflow repair, Codex APP continuation and fresh world acceptance for Class P; all quality gates and old budgets preserved.
+
+- [0213](0213-correct-blind-cald-gameplay-protocol.md) — versioned Cald critic correction with exact integer cap-eight enforcement, independent diagnostics and pre-assertion result capture; quality floors unchanged.
