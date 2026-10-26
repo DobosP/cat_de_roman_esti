@@ -1,7 +1,7 @@
 # ADR-0215: Harden prospective source-pin boundaries
 
 Date: 2026-10-26
-Status: proposed; corrected author candidate awaits fresh independent review and native verification
+Status: partially superseded by ADR-0216 for output creation and input-path handling; production closure and command parsing retained
 
 ## Context
 

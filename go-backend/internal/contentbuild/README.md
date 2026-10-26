@@ -6,12 +6,14 @@ for byte. `validate`, `validate-fixture`, and `validate-pack` run native source
 gates; `--kg`/`--pack` support prospective synthetic fixtures. No server or public
 solution endpoint is created. The standalone validators do not install content.
 
-`prospective-lant-captions` accepts explicit KG, pack and new output paths. It
-strictly validates the prospective pair, binds the rubric, frozen rules, Go version
+`prospective-lant-captions` accepts explicit KG, pack and new output paths. KG and
+pack paths must be absolute, canonical and contain no symlink component; bytes are
+read from the descriptor opened under that policy. It strictly validates the
+prospective pair, binds the rubric, frozen rules, Go version
 and the offline Go production dependency closure (local non-test build inputs,
 relevant embeds and module metadata), and writes an explicitly unapproved caption-only
-artifact outside the repository through a no-symlink directory handle and fd-relative
-exclusive creation. The installed `content/bundled.json` embed is excluded: this path
+artifact outside the repository by resolving and exclusively creating the complete final
+path in one no-symlink `openat2` operation. The installed `content/bundled.json` embed is excluded: this path
 constructs `content.Content` directly and never calls `content.Load` or `content.Decode`;
 its generated digest declaration remains covered as production source. It shares the serving
 builder's caption derivation but never calls the full exporter or supplies serving,
@@ -19,6 +21,10 @@ catalog, ranking, source or rail authority. Consumers must bind its retained
 producer digest separately and recompute the same dependency closure; the artifact's
 own fields are not a trust anchor. Command-specific parsing accepts `--out` only for
 the explicit prospective command, before any default export can run.
+
+The creation guarantee covers the final create boundary. It does not claim protection
+against an arbitrary filesystem move after the command returns. See
+[ADR-0216](../../../docs/adr/0216-close-prospective-path-races.md).
 
 The eight source digests, required reviewed rubric, graph records/defaults, Unicode normalized index,
 reviewed display labels, selector scores/weights, reserve definitions, frozen

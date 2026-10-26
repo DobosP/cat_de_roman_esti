@@ -182,8 +182,106 @@ func TestProspectiveLantCaptionWriteIsOutsideRootAndExclusive(t *testing.T) {
 	if err := os.Symlink(sourcePath(root, "kg_sample.json"), linkedKG); err != nil {
 		t.Fatal(err)
 	}
-	if _, err := BuildProspectiveLantCaptions(root, linkedKG, sourcePath(root, "games_pack.json")); err == nil || !strings.Contains(err.Error(), "direct regular file") {
+	if _, err := BuildProspectiveLantCaptions(root, linkedKG, sourcePath(root, "games_pack.json")); err == nil || !strings.Contains(err.Error(), "canonical without symlinks") {
 		t.Fatalf("symlinked source accepted: %v", err)
+	}
+}
+
+func TestProspectiveInputsRejectSymlinkedAncestors(t *testing.T) {
+	root := repoRoot(t)
+	for _, tc := range []struct {
+		name string
+		kg   bool
+	}{
+		{name: "kg", kg: true},
+		{name: "pack", kg: false},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			realParent := t.TempDir()
+			name := "games_pack.json"
+			if tc.kg {
+				name = "kg_sample.json"
+			}
+			data, err := os.ReadFile(sourcePath(root, name))
+			if err != nil {
+				t.Fatal(err)
+			}
+			if err := os.WriteFile(filepath.Join(realParent, name), data, 0o600); err != nil {
+				t.Fatal(err)
+			}
+			aliasParent := filepath.Join(t.TempDir(), "alias")
+			if err := os.Symlink(realParent, aliasParent); err != nil {
+				t.Fatal(err)
+			}
+			kgPath := sourcePath(root, "kg_sample.json")
+			packPath := sourcePath(root, "games_pack.json")
+			if tc.kg {
+				kgPath = filepath.Join(aliasParent, name)
+			} else {
+				packPath = filepath.Join(aliasParent, name)
+			}
+			if _, err := BuildProspectiveLantCaptions(root, kgPath, packPath); err == nil || !strings.Contains(err.Error(), "canonical without symlinks") {
+				t.Fatalf("symlinked %s ancestor accepted: %v", tc.name, err)
+			}
+		})
+	}
+}
+
+func TestReadDirectBindsOpenedDescriptorAcrossAncestorReplacement(t *testing.T) {
+	parent := t.TempDir()
+	path := filepath.Join(parent, "source.json")
+	original := []byte("original descriptor bytes")
+	if err := os.WriteFile(path, original, 0o600); err != nil {
+		t.Fatal(err)
+	}
+	moved := parent + "-moved"
+	t.Cleanup(func() { _ = os.RemoveAll(moved) })
+	got, err := readDirectAfterOpen(path, 1<<20, func() error {
+		if err := os.Rename(parent, moved); err != nil {
+			return err
+		}
+		if err := os.Mkdir(parent, 0o700); err != nil {
+			return err
+		}
+		return os.WriteFile(path, []byte("replacement bytes"), 0o600)
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !bytes.Equal(got, original) {
+		t.Fatalf("read bytes from replacement path: %q", got)
+	}
+}
+
+func TestProspectiveFinalCreateResolvesWholePathAfterParentRelocation(t *testing.T) {
+	root := repoRoot(t)
+	outside := t.TempDir()
+	parent := filepath.Join(outside, "approved-parent")
+	if err := os.Mkdir(parent, 0o700); err != nil {
+		t.Fatal(err)
+	}
+	out := filepath.Join(parent, "preview.json")
+	var moved string
+	err := writeProspectiveLantCaptionsBeforeCreate(root, sourcePath(root, "kg_sample.json"), sourcePath(root, "games_pack.json"), out, func() error {
+		protectedRoot, err := os.MkdirTemp(root, ".prospective-relocation-test-")
+		if err != nil {
+			return err
+		}
+		t.Cleanup(func() { _ = os.RemoveAll(protectedRoot) })
+		moved = filepath.Join(protectedRoot, "relocated-parent")
+		if err := os.Rename(parent, moved); err != nil {
+			return err
+		}
+		return os.Mkdir(parent, 0o700)
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if _, err := os.Stat(out); err != nil {
+		t.Fatalf("replacement outside path did not receive output: %v", err)
+	}
+	if _, err := os.Lstat(filepath.Join(moved, "preview.json")); !os.IsNotExist(err) {
+		t.Fatalf("output was created in relocated repository parent: %v", err)
 	}
 }
 

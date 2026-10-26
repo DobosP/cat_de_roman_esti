@@ -6,7 +6,8 @@ Decisions: [ADR-0188](adr/0188-park-v1-7-and-reset-content-loop.md),
 [ADR-0211](adr/0211-content-loop-v2-all-boards.md) and
 [ADR-0212](adr/0212-bounded-content-workflow-repair.md) and
 [ADR-0214](adr/0214-prospective-native-lant-captions.md) and
-[ADR-0215](adr/0215-harden-prospective-source-pin-boundaries.md).
+[ADR-0215](adr/0215-harden-prospective-source-pin-boundaries.md) and
+[ADR-0216](adr/0216-close-prospective-path-races.md).
 
 The V2 loop (Phase B) starts only after Paul explicitly says to start; landing this procedure
 starts nothing. The retired `romanian-content-discovery-improved-loop` automation stays paused
@@ -204,11 +205,15 @@ FAIL-lint Conexiuni boards is a separate task; do not widen scope to make a batc
   export/source/ranking/rail approval; the unchanged full exporter must still reject stale pins.
   Native-source identity comes from the pinned Go tool's offline production dependency closure for
   `cmd/cat-content`, including all build-selected local non-test source, relevant embeds and module
-  metadata; the consumer recomputes the same closure. The installed `content/bundled.json` embed is
+  metadata; the consumer recomputes the same closure. Explicit KG and pack paths must be absolute,
+  canonical and free of symlinks in every component; native reads bind bytes from the descriptor
+  opened under that policy, matching the consumer without resolving an alias into permission. The installed `content/bundled.json` embed is
   excluded because this call path constructs `content.Content` directly and never calls
   `content.Load`/`content.Decode`; its production digest declaration remains source-bound. Output
-  creation resolves root before containment checks, rejects symlinked output ancestors and uses a
-  verified no-symlink directory handle with fd-relative exclusive creation. `--out` is registered
+  creation resolves root before containment checks, rejects symlinked output ancestors and creates
+  the complete final path in one no-symlink `openat2` operation with exclusive semantics. This
+  closes the pre-create relocation boundary; it does not promise protection from filesystem moves
+  after the call returns. `--out` is registered
   only by the explicit prospective command; bare/default export and every other command reject it
   during parsing before export or write.
   For Cald, the public challenge includes only the exact native player-visible `difficulty` and
