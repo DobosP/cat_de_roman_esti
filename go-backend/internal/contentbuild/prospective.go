@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/graph"
-	"golang.org/x/sys/unix"
 	"io"
 	"os"
 	"os/exec"
@@ -21,7 +20,7 @@ func readDirect(path string, max int64) ([]byte, error) {
 }
 
 func readDirectAfterOpen(path string, max int64, afterOpen func() error) ([]byte, error) {
-	f, err := openNoSymlinkPath(path, unix.O_RDONLY, 0)
+	f, err := openNoSymlinkPath(path, os.O_RDONLY, 0)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +83,7 @@ type goListPackage struct {
 }
 
 func cleanGoListEnv() []string {
-	blocked := map[string]bool{"GOENV": true, "GOFLAGS": true, "GONOSUMDB": true, "GOPRIVATE": true, "GOPROXY": true, "GOSUMDB": true, "GOWORK": true}
+	blocked := map[string]bool{"GOENV": true, "GOFLAGS": true, "GONOSUMDB": true, "GOPRIVATE": true, "GOPROXY": true, "GOSUMDB": true, "GOTOOLCHAIN": true, "GOWORK": true}
 	env := make([]string, 0, len(os.Environ())+5)
 	for _, item := range os.Environ() {
 		key, _, _ := strings.Cut(item, "=")
@@ -92,7 +91,7 @@ func cleanGoListEnv() []string {
 			env = append(env, item)
 		}
 	}
-	return append(env, "GOENV=off", "GOFLAGS=", "GOPROXY=off", "GOSUMDB=off", "GOWORK=off")
+	return append(env, "GOENV=off", "GOFLAGS=", "GOPROXY=off", "GOSUMDB=off", "GOTOOLCHAIN=local", "GOWORK=off")
 }
 
 // nativeProducerPaths asks the pinned Go tool for the real production
@@ -104,7 +103,13 @@ func cleanGoListEnv() []string {
 // remains covered through content/digest.go.
 func nativeProducerPaths(root string) ([]string, error) {
 	moduleDir := filepath.Join(root, "go-backend")
-	goTool := filepath.Join(runtime.GOROOT(), "bin", "go")
+	// A -trimpath binary without GOROOT in its environment reports an empty
+	// root; a relative "bin/go" would then resolve beneath --root, so refuse.
+	goRoot := runtime.GOROOT()
+	if goRoot == "" || !filepath.IsAbs(goRoot) {
+		return nil, fmt.Errorf("Go root unavailable; set GOROOT to the pinned toolchain")
+	}
+	goTool := filepath.Join(goRoot, "bin", "go")
 	cmd := exec.Command(goTool, "list", "-deps", "-json", "-mod=readonly", "-buildvcs=false", "./cmd/cat-content")
 	cmd.Dir = moduleDir
 	cmd.Env = cleanGoListEnv()
@@ -319,7 +324,7 @@ func writeProspectiveLantCaptionsBeforeCreate(root, kgPath, packPath, out string
 			return err
 		}
 	}
-	f, err := openNoSymlinkPath(physicalOut, unix.O_WRONLY|unix.O_CREAT|unix.O_EXCL, 0o600)
+	f, err := openNoSymlinkPath(physicalOut, os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0o600)
 	if err != nil {
 		return err
 	}
@@ -330,42 +335,4 @@ func writeProspectiveLantCaptionsBeforeCreate(root, kgPath, packPath, out string
 		err = closeErr
 	}
 	return err
-}
-
-func openNoSymlinkPath(path string, flags int, mode uint32) (*os.File, error) {
-	if !filepath.IsAbs(path) || filepath.Clean(path) != path {
-		return nil, fmt.Errorf("path must be absolute and canonical without symlinks")
-	}
-	resolved, err := filepath.EvalSymlinks(path)
-	if err != nil && flags&unix.O_CREAT == 0 {
-		return nil, fmt.Errorf("resolve canonical path without symlinks: %w", err)
-	}
-	if err == nil && resolved != path {
-		return nil, fmt.Errorf("path must be absolute and canonical without symlinks")
-	}
-	if flags&unix.O_CREAT != 0 {
-		resolvedParent, parentErr := filepath.EvalSymlinks(filepath.Dir(path))
-		if parentErr != nil {
-			return nil, fmt.Errorf("resolve canonical parent without symlinks: %w", parentErr)
-		}
-		if resolvedParent != filepath.Dir(path) {
-			return nil, fmt.Errorf("path must be absolute and canonical without symlinks")
-		}
-	}
-	rootFD, err := unix.Open(string(filepath.Separator), unix.O_RDONLY|unix.O_DIRECTORY|unix.O_CLOEXEC|unix.O_NOFOLLOW, 0)
-	if err != nil {
-		return nil, err
-	}
-	rel := strings.TrimPrefix(path, string(filepath.Separator))
-	how := &unix.OpenHow{
-		Flags:   uint64(flags | unix.O_NOFOLLOW | unix.O_CLOEXEC),
-		Mode:    uint64(mode),
-		Resolve: uint64(unix.RESOLVE_BENEATH | unix.RESOLVE_NO_SYMLINKS),
-	}
-	fd, openErr := unix.Openat2(rootFD, rel, how)
-	_ = unix.Close(rootFD)
-	if openErr != nil {
-		return nil, fmt.Errorf("open complete path without symlinks: %w", openErr)
-	}
-	return os.NewFile(uintptr(fd), path), nil
 }

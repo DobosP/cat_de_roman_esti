@@ -1,10 +1,14 @@
+//go:build linux
+
 package contentbuild
 
 import (
 	"bytes"
+	"errors"
 	"os"
 	"path/filepath"
 	"strings"
+	"syscall"
 	"testing"
 )
 
@@ -274,6 +278,9 @@ func TestProspectiveFinalCreateResolvesWholePathAfterParentRelocation(t *testing
 		}
 		return os.Mkdir(parent, 0o700)
 	})
+	if errors.Is(err, syscall.EXDEV) {
+		t.Skip("relocation needs TMPDIR on the checkout filesystem")
+	}
 	if err != nil {
 		t.Fatal(err)
 	}
