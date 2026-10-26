@@ -203,3 +203,5 @@ Parallel lanes also allocated0188/0189 independently. All four full-filename bod
 - [0216](0216-close-prospective-path-races.md) — close the rejected r2 final-create relocation window and align native input reads with the consumer's canonical no-symlink descriptor policy.
 
 - [0217](0217-bind-helper-inputs-to-open-descriptors.md) — bind the prospective helper's artifact, producer and readset parsing, hashes and metadata to one bounded no-follow descriptor snapshot.
+
+- [0218](0218-contain-helper-output-creation.md) — proposed r5 helper output correction after independent r4 FAIL; component no-follow parents and exclusive full-path Linux openat2 beneath the trusted scratch root. Author checks only; fresh independent code/native PASS and later separate pins required.

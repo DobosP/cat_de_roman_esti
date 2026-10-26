@@ -8,7 +8,8 @@ Decisions: [ADR-0188](adr/0188-park-v1-7-and-reset-content-loop.md),
 [ADR-0214](adr/0214-prospective-native-lant-captions.md) and
 [ADR-0215](adr/0215-harden-prospective-source-pin-boundaries.md) and
 [ADR-0216](adr/0216-close-prospective-path-races.md) and
-[ADR-0217](adr/0217-bind-helper-inputs-to-open-descriptors.md).
+[ADR-0217](adr/0217-bind-helper-inputs-to-open-descriptors.md) and
+[ADR-0218](adr/0218-contain-helper-output-creation.md).
 
 The V2 loop (Phase B) starts only after Paul explicitly says to start; landing this procedure
 starts nothing. The retired `romanian-content-discovery-improved-loop` automation stays paused
@@ -220,7 +221,14 @@ FAIL-lint Conexiuni boards is a separate task; do not widen scope to make a batc
   closes the pre-create relocation boundary; it does not promise protection from filesystem moves
   after the call returns. `--out` is registered
   only by the explicit prospective command; bare/default export and every other command reject it
-  during parsing before export or write.
+  during parsing before export or write. The v5 helper output recipe and precise limitations are
+  in ADR-0218: no-follow directory-relative parent creation, then exclusive full-relative-path
+  openat2 beneath an opened trusted scratch root for every public/key/comparison file. Holding a
+  parent descriptor alone is insufficient. The root must stay fixed; parent mkdirat may leave empty
+  directories after hostile relocation. File creation re-resolves beneath the root, while moves
+  after creation and arbitrary privileged mutation remain outside its guarantee. Fresh independent
+  code/native PASS, controller WORKFLOWONLY pin and separate reviewed content-plan/input pin remain
+  required; author regressions grant no content or workflow qualification.
   For Cald, the public challenge includes only the exact native player-visible `difficulty` and
   `board_category` read from the bound board; never add a target/board/source/graph field, neighbour,
   clue, example or authored guess. The critic commits exactly five ordinary normalized-distinct
