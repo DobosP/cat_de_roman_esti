@@ -19,7 +19,11 @@ its generated digest declaration remains covered as production source. It shares
 builder's caption derivation but never calls the full exporter or supplies serving,
 catalog, ranking, source or rail authority. Consumers must bind its retained
 producer digest separately and recompute the same dependency closure; the artifact's
-own fields are not a trust anchor. Command-specific parsing accepts `--out` only for
+own fields are not a trust anchor. The versioned consumer opens artifact, producer and
+source-readset paths component by component without following symlinks, then bounds,
+hashes and strict-parses one descriptor-backed buffer; it verifies the external artifact
+digest before parsing those same bytes ([ADR-0217](../../../docs/adr/0217-bind-helper-inputs-to-open-descriptors.md)).
+Command-specific parsing accepts `--out` only for
 the explicit prospective command, before any default export can run.
 
 The creation guarantee covers the final create boundary. It does not claim protection

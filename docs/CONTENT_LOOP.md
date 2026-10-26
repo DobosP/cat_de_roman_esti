@@ -7,7 +7,8 @@ Decisions: [ADR-0188](adr/0188-park-v1-7-and-reset-content-loop.md),
 [ADR-0212](adr/0212-bounded-content-workflow-repair.md) and
 [ADR-0214](adr/0214-prospective-native-lant-captions.md) and
 [ADR-0215](adr/0215-harden-prospective-source-pin-boundaries.md) and
-[ADR-0216](adr/0216-close-prospective-path-races.md).
+[ADR-0216](adr/0216-close-prospective-path-races.md) and
+[ADR-0217](adr/0217-bind-helper-inputs-to-open-descriptors.md).
 
 The V2 loop (Phase B) starts only after Paul explicitly says to start; landing this procedure
 starts nothing. The retired `romanian-content-discovery-improved-loop` automation stays paused
@@ -207,7 +208,11 @@ FAIL-lint Conexiuni boards is a separate task; do not widen scope to make a batc
   `cmd/cat-content`, including all build-selected local non-test source, relevant embeds and module
   metadata; the consumer recomputes the same closure. Explicit KG and pack paths must be absolute,
   canonical and free of symlinks in every component; native reads bind bytes from the descriptor
-  opened under that policy, matching the consumer without resolving an alias into permission. The installed `content/bundled.json` embed is
+  opened under that policy, matching the consumer without resolving an alias into permission. The
+  consumer must open artifact, producer and source-readset paths component by component without
+  following symlinks, fstat and bound the final regular descriptor, then hash, parse and bind only
+  that one byte buffer. It verifies the independently retained artifact SHA before strict JSON
+  parsing; unsupported descriptor APIs fail closed. The installed `content/bundled.json` embed is
   excluded because this call path constructs `content.Content` directly and never calls
   `content.Load`/`content.Decode`; its production digest declaration remains source-bound. Output
   creation resolves root before containment checks, rejects symlinked output ancestors and creates

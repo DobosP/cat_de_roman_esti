@@ -1,7 +1,7 @@
 # ADR-0216: Close prospective path races
 
 Date: 2026-10-26
-Status: proposed; r3 author candidate awaits fresh independent review and native verification
+Status: partially superseded by ADR-0217 for helper input snapshots; native producer boundaries retained
 
 ## Context
 

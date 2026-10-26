@@ -201,3 +201,5 @@ Parallel lanes also allocated0188/0189 independently. All four full-filename bod
 - [0215](0215-harden-prospective-source-pin-boundaries.md) — correct the rejected v1 preview with a real production dependency closure, canonical no-symlink fd-relative output creation and command-specific `--out` parsing; fresh review remains required.
 
 - [0216](0216-close-prospective-path-races.md) — close the rejected r2 final-create relocation window and align native input reads with the consumer's canonical no-symlink descriptor policy.
+
+- [0217](0217-bind-helper-inputs-to-open-descriptors.md) — bind the prospective helper's artifact, producer and readset parsing, hashes and metadata to one bounded no-follow descriptor snapshot.
