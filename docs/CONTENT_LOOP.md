@@ -5,7 +5,8 @@ Decisions: [ADR-0188](adr/0188-park-v1-7-and-reset-content-loop.md),
 [ADR-0210](adr/0210-curation-waves-and-staged-stock-landing.md) and
 [ADR-0211](adr/0211-content-loop-v2-all-boards.md) and
 [ADR-0212](adr/0212-bounded-content-workflow-repair.md) and
-[ADR-0214](adr/0214-prospective-native-lant-captions.md).
+[ADR-0214](adr/0214-prospective-native-lant-captions.md) and
+[ADR-0215](adr/0215-harden-prospective-source-pin-boundaries.md).
 
 The V2 loop (Phase B) starts only after Paul explicitly says to start; landing this procedure
 starts nothing. The retired `romanian-content-discovery-improved-loop` automation stays paused
@@ -201,6 +202,15 @@ FAIL-lint Conexiuni boards is a separate task; do not widen scope to make a batc
   The helper must rebind exact KG/pack/rubric/rules/native sources, require complete directed-edge
   coverage and keep all provenance in the sealed key. This preview is not a serving bundle or an
   export/source/ranking/rail approval; the unchanged full exporter must still reject stale pins.
+  Native-source identity comes from the pinned Go tool's offline production dependency closure for
+  `cmd/cat-content`, including all build-selected local non-test source, relevant embeds and module
+  metadata; the consumer recomputes the same closure. The installed `content/bundled.json` embed is
+  excluded because this call path constructs `content.Content` directly and never calls
+  `content.Load`/`content.Decode`; its production digest declaration remains source-bound. Output
+  creation resolves root before containment checks, rejects symlinked output ancestors and uses a
+  verified no-symlink directory handle with fd-relative exclusive creation. `--out` is registered
+  only by the explicit prospective command; bare/default export and every other command reject it
+  during parsing before export or write.
   For Cald, the public challenge includes only the exact native player-visible `difficulty` and
   `board_category` read from the bound board; never add a target/board/source/graph field, neighbour,
   clue, example or authored guess. The critic commits exactly five ordinary normalized-distinct

@@ -15,18 +15,35 @@ func main() {
 		os.Exit(1)
 	}
 }
+
+var exportContent = contentbuild.Export
+
 func run(args []string) error {
 	command := "export"
 	if len(args) > 0 && args[0] != "" && args[0][0] != '-' {
 		command = args[0]
 		args = args[1:]
 	}
+	if command != "export" && command != "validate" && command != "validate-fixture" && command != "validate-pack" && command != "prospective-lant-captions" {
+		return fmt.Errorf("unknown command %s", command)
+	}
 	f := flag.NewFlagSet("cat-content "+command, flag.ContinueOnError)
 	root := f.String("root", "..", "repository source root")
-	check := f.Bool("check", false, "check deterministic export freshness without writing")
-	kg := f.String("kg", "", "fixture path for a standalone validator")
-	pack := f.String("pack", "", "pack path for a standalone validator")
-	out := f.String("out", "", "new output path for a private prospective artifact")
+	var check *bool
+	var kg, pack, out *string
+	switch command {
+	case "export":
+		check = f.Bool("check", false, "check deterministic export freshness without writing")
+	case "validate-fixture":
+		kg = f.String("kg", "", "fixture path for a standalone validator")
+	case "validate-pack":
+		kg = f.String("kg", "", "fixture path for a standalone validator")
+		pack = f.String("pack", "", "pack path for a standalone validator")
+	case "prospective-lant-captions":
+		kg = f.String("kg", "", "explicit prospective fixture path")
+		pack = f.String("pack", "", "explicit prospective pack path")
+		out = f.String("out", "", "new output path for a private prospective artifact")
+	}
 	if err := f.Parse(args); err != nil {
 		return err
 	}
@@ -39,7 +56,7 @@ func run(args []string) error {
 	}
 	switch command {
 	case "export":
-		if err := contentbuild.Export(abs, *check); err != nil {
+		if err := exportContent(abs, *check); err != nil {
 			return err
 		}
 		fmt.Printf("Native private content %s\n", map[bool]string{true: "current", false: "exported"}[*check])
@@ -72,15 +89,13 @@ func run(args []string) error {
 		}
 		fmt.Println("games pack GREEN")
 	case "prospective-lant-captions":
-		if *check || *kg == "" || *pack == "" || *out == "" {
-			return fmt.Errorf("prospective-lant-captions requires explicit --kg, --pack and --out and does not accept --check")
+		if *kg == "" || *pack == "" || *out == "" {
+			return fmt.Errorf("prospective-lant-captions requires explicit --kg, --pack and --out")
 		}
 		if err := contentbuild.WriteProspectiveLantCaptions(abs, *kg, *pack, *out); err != nil {
 			return err
 		}
 		fmt.Printf("Unapproved prospective native Lanț captions written to %s\n", *out)
-	default:
-		return fmt.Errorf("unknown command %s", command)
 	}
 	return nil
 }

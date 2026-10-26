@@ -197,3 +197,5 @@ Parallel lanes also allocated0188/0189 independently. All four full-filename bod
 - [0213](0213-correct-blind-cald-gameplay-protocol.md) — versioned Cald critic correction with exact integer cap-eight enforcement, independent diagnostics and pre-assertion result capture; quality floors unchanged.
 
 - [0214](0214-prospective-native-lant-captions.md) — source-bound unapproved native Lanț caption previews break the prospective-source cycle without weakening full export, catalog, ranking, source or rail guards.
+
+- [0215](0215-harden-prospective-source-pin-boundaries.md) — correct the rejected v1 preview with a real production dependency closure, canonical no-symlink fd-relative output creation and command-specific `--out` parsing; fresh review remains required.

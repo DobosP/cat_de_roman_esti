@@ -8,11 +8,17 @@ solution endpoint is created. The standalone validators do not install content.
 
 `prospective-lant-captions` accepts explicit KG, pack and new output paths. It
 strictly validates the prospective pair, binds the rubric, frozen rules, Go version
-and native source inventory, and writes an explicitly unapproved caption-only
-artifact outside the repository with exclusive creation. It shares the serving
+and the offline Go production dependency closure (local non-test build inputs,
+relevant embeds and module metadata), and writes an explicitly unapproved caption-only
+artifact outside the repository through a no-symlink directory handle and fd-relative
+exclusive creation. The installed `content/bundled.json` embed is excluded: this path
+constructs `content.Content` directly and never calls `content.Load` or `content.Decode`;
+its generated digest declaration remains covered as production source. It shares the serving
 builder's caption derivation but never calls the full exporter or supplies serving,
 catalog, ranking, source or rail authority. Consumers must bind its retained
-producer digest separately; the artifact's own fields are not a trust anchor.
+producer digest separately and recompute the same dependency closure; the artifact's
+own fields are not a trust anchor. Command-specific parsing accepts `--out` only for
+the explicit prospective command, before any default export can run.
 
 The eight source digests, required reviewed rubric, graph records/defaults, Unicode normalized index,
 reviewed display labels, selector scores/weights, reserve definitions, frozen

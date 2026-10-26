@@ -160,11 +160,66 @@ func TestProspectiveLantCaptionWriteIsOutsideRootAndExclusive(t *testing.T) {
 	if err := WriteProspectiveLantCaptions(root, sourcePath(root, "kg_sample.json"), sourcePath(root, "games_pack.json"), filepath.Join(linkParent, "preview.json")); err == nil || !strings.Contains(err.Error(), "must not traverse symlinks") {
 		t.Fatalf("symlinked output parent accepted: %v", err)
 	}
+	rootAlias := filepath.Join(t.TempDir(), "root-alias")
+	if err := os.Symlink(root, rootAlias); err != nil {
+		t.Fatal(err)
+	}
+	aliasInside := filepath.Join(root, "prospective-alias-should-not-exist.json")
+	if err := WriteProspectiveLantCaptions(rootAlias, sourcePath(root, "kg_sample.json"), sourcePath(root, "games_pack.json"), aliasInside); err == nil || !strings.Contains(err.Error(), "outside repository root") {
+		t.Fatalf("symlink-aliased root bypassed repository boundary: %v", err)
+	}
+	if _, err := os.Lstat(aliasInside); !os.IsNotExist(err) {
+		t.Fatalf("root-alias refusal wrote inside repository: %v", err)
+	}
+	finalAlias := filepath.Join(t.TempDir(), "preview.json")
+	if err := os.Symlink(filepath.Join(t.TempDir(), "target.json"), finalAlias); err != nil {
+		t.Fatal(err)
+	}
+	if err := WriteProspectiveLantCaptions(root, sourcePath(root, "kg_sample.json"), sourcePath(root, "games_pack.json"), finalAlias); err == nil {
+		t.Fatal("symlink output file accepted")
+	}
 	linkedKG := filepath.Join(t.TempDir(), "kg.json")
 	if err := os.Symlink(sourcePath(root, "kg_sample.json"), linkedKG); err != nil {
 		t.Fatal(err)
 	}
 	if _, err := BuildProspectiveLantCaptions(root, linkedKG, sourcePath(root, "games_pack.json")); err == nil || !strings.Contains(err.Error(), "direct regular file") {
 		t.Fatalf("symlinked source accepted: %v", err)
+	}
+}
+
+func TestProspectiveProducerClosureIsProductionComplete(t *testing.T) {
+	root := repoRoot(t)
+	paths, err := nativeProducerPaths(root)
+	if err != nil {
+		t.Fatal(err)
+	}
+	got := map[string]bool{}
+	for _, path := range paths {
+		rel, err := filepath.Rel(root, path)
+		if err != nil {
+			t.Fatal(err)
+		}
+		rel = filepath.ToSlash(rel)
+		got[rel] = true
+		if strings.HasSuffix(rel, "_test.go") {
+			t.Fatalf("test file entered producer identity: %s", rel)
+		}
+	}
+	for _, required := range []string{
+		"go-backend/go.mod",
+		"go-backend/go.sum",
+		"go-backend/cmd/cat-content/main.go",
+		"go-backend/internal/content/content.go",
+		"go-backend/internal/contentbuild/rules_provenance.json",
+		"go-backend/internal/contentbuild/rules_unicode15.json",
+		"go-backend/internal/graph/service.go",
+		"go-backend/internal/strictjson/validate.go",
+	} {
+		if !got[required] {
+			t.Errorf("producer closure omitted %s", required)
+		}
+	}
+	if got[excludedServingEmbed] {
+		t.Fatalf("semantically unused installed serving bundle entered prospective identity: %s", excludedServingEmbed)
 	}
 }
