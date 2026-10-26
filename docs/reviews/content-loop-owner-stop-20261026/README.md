@@ -23,7 +23,9 @@ and [ADR-0220](../../adr/0220-continuous-codex-content-loop.md).
 ## Landed with this record
 
 - ADR-0212 (Class P rebuilds world acceptance) and ADR-0213 (Cald blind protocol, cap 8).
-- ADR-0214–ADR-0218, the prospective Lanț caption preview, corrected by ADR-0219:
+- ADR-0214–ADR-0218, the prospective Lanț caption preview, corrected by ADR-0219. The review had
+  recommended parking it (D3 b); Paul asked to fix and land, so it lands corrected (D3 c). Helper
+  v5 is still unqualified. Corrections:
   - it builds on every platform and stays Linux-only at run time;
   - FIFO inputs are refused;
   - the Go root is checked;
@@ -34,6 +36,6 @@ and [ADR-0220](../../adr/0220-continuous-codex-content-loop.md).
 
 - C1 alias families. 17 families with 38 forms passed both reviewers; the three failed families go
   back to research. The install cascade still has to run.
-- C2 (20 families, 80 forms), C3 stock and the remaining 1,083 accepted V1 packages.
+- C2 (20 families, 80 forms), C3 stock and the rest of the 1,083 accepted V1 packages.
 - B12 Glazură (blind Cald FAIL) and B13 Ruladă (never judged).
 - All V1 `content/v1-*` branches and V2 `content/v2-*` branches stay preserved.

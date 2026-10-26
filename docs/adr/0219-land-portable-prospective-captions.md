@@ -14,7 +14,8 @@ full-export `kg_sha256` refusal are untouched, but found defects the earlier rev
 
 - `internal/contentbuild` imported Linux-only `openat2` symbols without a build constraint, so
   `cat-content`, `cat-content-ops`, `cat-content-rail`, `contentops` and `contentrails` no longer
-  compiled for macOS or Windows (verified by cross-compiling);
+  compiled for macOS or Windows (verified by cross-compiling `cat-content`; the rest follow from
+  the import graph);
 - a FIFO input blocked the command forever, because the no-symlink open ran before the
   regular-file check without `O_NONBLOCK`;
 - a `-trimpath` binary without `GOROOT` would run a relative `bin/go` beneath `--root`;
@@ -22,7 +23,10 @@ full-export `kg_sha256` refusal are untouched, but found defects the earlier rev
 - ADR-0214 overstated the producer binding, and ADR-0215 wrongly said installed bundle refreshes
   do not affect previews.
 
-Paul asked on 2026-10-26 to fix what was found and land what can be landed.
+The review recommended parking r5 and writing a small portable caption derivation instead (its
+option D3 b). Paul then asked on 2026-10-26 to fix what was found and land what can be landed.
+This ADR therefore lands r5 with every finding in review §4.1 corrected (D3 c). D3 b remains open
+if the preview ever needs simplifying.
 
 ## Decision
 
@@ -42,8 +46,14 @@ Paul asked on 2026-10-26 to fix what was found and land what can be landed.
   previews then; there is no cycle, because the preview never reads the bundle.
 - **Not covered.** Same-user concurrent directory relocation beyond the stated `openat2`
   guarantees, files moved after creation, and privileged mutation.
-- Helper v5 stays in content-loop scratch, pinned by SHA. Before first use on a new base it is run
-  once against that base in the content-loop tool lane (ADR-0220).
+- Helper v5 stays in content-loop scratch and is **not qualified**. Before first use it must pass
+  the ADR-0220 tool lane: fix the review §4.2 gaps (FIFO hang, strict-JSON non-finite/BOM/UTF-16
+  overclaim, uncaught non-object JSON, unpinned GOTOOLCHAIN, post-run tool bindings, key written
+  before the public file), get one fresh independent review of the exact change and receive a new
+  pin.
+- Accepted residual: `go.mod` still marks `golang.org/x/sys` as `// indirect` although
+  `prospective_linux.go` imports it directly. Builds pass with `-mod=readonly`; a later tidy may
+  move it.
 
 ## Consequences
 

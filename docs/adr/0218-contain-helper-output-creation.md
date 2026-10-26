@@ -1,7 +1,8 @@
 # ADR-0218: Contain helper output creation
 
 Date: 2026-10-26
-Status: accepted; independent r5 static review passed on 2026-10-26; landed with
+Status: output-containment design accepted (independent r5 static review passed 2026-10-26);
+helper v5 itself is not qualified; its open gaps are listed in
 [ADR-0219](0219-land-portable-prospective-captions.md)
 
 ## Context

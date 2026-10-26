@@ -53,11 +53,19 @@ Paul's instruction on 2026-10-26:
   the author's captured and cited sources, never every URL-like string in actor inputs.
 - **Tool lane.** Each tool has a written threat model and checklist, is qualified once and is
   reused by SHA. The same-user concurrent adversary is out of scope unless Paul says otherwise.
+  Correctness, output-integrity, portability and overclaim findings always block.
+- **Gameplay critic.** It still plays every board, and every board touched by a new concept, edge
+  or alias. Only form curation on existing owners is exempt, as in V2.
+- **Self-editing.** The loop never edits CONTENT_LOOP.md, the bound rubric or an existing ADR.
+- **No stop rules.** Paul's "no limits" rules out the review's proposed output-stall stops (S1/S2).
+  Output-first status messages, plus a report after 12 active hours without a qualified item,
+  give visibility instead.
 
 ## Consequences
 
-- The V2 automation and its wave/queue files become history. The V3 session replaces the
-  automation when Paul starts it with the V3 prompt (`~/work/_temp/content-loop/CODEX_V3_PROMPT.md`).
+- The V2 automation and its wave/queue files become history. The V2 automation stays paused, and
+  Paul may delete it. V3 starts when Paul gives a Codex chat the start file
+  (`~/work/_temp/content-loop/CODEX_V3_PROMPT.md`). The heartbeat text is in CONTENT_LOOP.md.
 - The landing review becomes the only human-scale checkpoint. Its cost grows with batch size, so
   candidates carry per-game item tables and gate results.
 - Unlanded V2 work stays available as drawing-board input: C1's reviewer-accepted families,

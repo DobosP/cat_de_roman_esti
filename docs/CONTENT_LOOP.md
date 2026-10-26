@@ -12,8 +12,8 @@ and [ADR-0220](adr/0220-continuous-codex-content-loop.md).
 V3 replaces V2's wave, tick, commit and batch-size budgets with one continuous loop. Every V2
 content-quality, review, gameplay, source-binding and install gate below stays binding. V3 starts
 only when Paul gives a Codex session the V3 prompt; landing this file starts nothing. The V2
-automation `cat-content-codex-only-autonomous-dataset-loop` and the V1 automation stay paused; the
-V3 session replaces the V2 one when Paul starts it. V2 state, decisions, queue and evidence under
+automation `cat-content-codex-only-autonomous-dataset-loop` and the V1 automation stay paused;
+Paul may delete them. V2 state, decisions, queue and evidence under
 `~/work/_temp/content-loop/` are read-only history.
 
 ## Product and authority
@@ -33,7 +33,9 @@ fabricated links. A lemma already in accepted stock is curated, not researched a
 Authority is Paul's verbatim messages and his answers to the loop's questions, copied with their
 transcript references into `~/work/_temp/content-loop/continuous/AUTHORITY.md`, plus this file and
 its ADRs. Rules the loop adds for itself go in `PROCEDURE_LOCAL.md` beside it, with origin, date and
-reason; they never carry owner authority and never relax a gate here. An ambiguous owner word gets
+reason; they never carry owner authority and never relax a gate here. The loop never edits this file,
+`docs/CRITIQUE_RUBRIC.md` or an existing ADR; it proposes procedure changes to Paul. The only ADR
+it may add is the one a scope-fence tooling fix requires. An ambiguous owner word gets
 one yes/no question that names the intended action. Never infer approval from elapsed time, a
 schedule, a digest or an old PASS. Read AGENTS.md, STATUS counts and the applicable
 CRITIQUE_RUBRIC sections; read this file again whenever its commit changes.
@@ -44,7 +46,8 @@ No GUI/frontend/runtime logic, dependency/toolchain/CI/gate changes, deploy, Pos
 mobile/device testing, secret values, fetch/pull/push/remote-ref change, merge into `main` or
 deletion of evidence, branches or worktrees by the loop. Content writes are the cascade's named
 data/generated files, review bookkeeping and the separate test-pin packet. A repository tooling
-fix that content genuinely needs is its own commit on the loop branch with an ADR, a fresh
+fix that content genuinely needs (never a validator, pin, rail, exporter or catalog binding,
+digest, importer refusal, GUI/runtime code, or a test outside the pins packet) is its own commit on the loop branch with an ADR, a fresh
 independent code review of the exact diff, full native gates and a portable build check
 (`GOOS=linux`, `darwin`, `windows`); the landing review judges it with the content. Report
 `BLOCKED: <command> -> <first error line>` for anything else outside the fence. An expectation
@@ -72,18 +75,25 @@ before any preflight.
   `scripts/<slug_underscored>_v3_<id>_data.py`, build version `fixture-v3-<id>-<slug>`, review
   directory `docs/reviews/v3-<id>-<slug>/`. V1 and V2 names remain history.
 - When local `main` moves, merge it into the loop branch with `git merge --no-edit main` (local
-  refs only; never rebase), then rerun C0 for the new base. A merge conflict parks the open batch;
-  never resolve it by editing reviewed bytes.
-- When a landing review marks a batch `rework` (see landing review), keep the old tip as branch
-  `content/continuous-archive-<n>`, then `git checkout -B content/continuous main` in the same
-  worktree and re-apply the accepted items of the reworked and later batches as the next batch.
+  refs only; never rebase), then rerun C0 for the new base. On any conflict run `git merge --abort`
+  at once, record the conflicting paths in the ledger, park the open batch, ask Paul with at most
+  three options and continue other work on the old base. Never resolve a conflict by editing
+  reviewed bytes.
+- When a landing review marks a batch `rework` (see landing review), commit the open step so the
+  worktree is clean, keep the old tip as branch `content/continuous-archive-<n>`, mark every later
+  queue row `superseded by <next batch id>` (a superseded row is never landed), then
+  `git checkout -B content/continuous main` in the same worktree and re-apply the accepted items of
+  the reworked and later batches as the next batch.
   Item reviews stay valid for byte-identical items; rails, audits and gates are always fresh.
 - State is `~/work/_temp/content-loop/continuous/state.json` (≤2 KB: current batch, step, open
   question, rolling 24-hour hours by kind) and an append-only `ledger.jsonl`, one row per stage:
   `{stage, batch, kind: content|tool|review|install|wait, start_utc, end_utc, items_in, items_out,
   verdict, first_error}`. Evidence is `~/work/_temp/content-loop/continuous/evidence/<id>/`,
-  text-first, about 50 MB per batch at most; write compact manifests before pruning transient
-  bytes and never prune review inputs. Write nothing else: no publications, prior-state copies,
+  text-first, about 50 MB per batch at most; nothing under evidence is deleted or pruned. Bulky
+  transient bytes (build output, scratch readsets, binaries) go under
+  `~/work/_temp/content-loop/continuous/tmp/<id>/`, which the loop may clear once the batch
+  manifest records each file's SHA-256; review inputs, captures, role transcripts and critic logs
+  never go there. Write nothing else: no publications, prior-state copies,
   per-stage prompt rewrites or consumption reports.
 
 ## Continuous cycle
@@ -95,20 +105,27 @@ the next one. A batch moves through these steps; C3–C7 detail follows.
    `cat-content-ops check --root .. --check`, `cat-content-rail all --root .. --check`,
    `go -C go-backend test -count=1 ./internal/contentrails/ ./internal/contentbuild/ ./internal/httpgolden/`
    (`-count=1`: the rubric is read from outside the module root) and verify the helper manifests.
-   Record the result against the exact base SHA, go version and helper manifest SHA, and reuse it
-   while all three are unchanged; never reuse it across a different base. Red unchanged
+   C0 runs only with HEAD at the base SHA and no tracked modifications; its ledger row records
+   `git rev-parse HEAD` and `git status --porcelain`. Record the result against the exact base
+   SHA, go version and helper manifest SHA, and reuse it while all three are unchanged; never reuse
+   it across a different base. The 4i gates always run fresh on each candidate. Red unchanged
    validate/export/ops stops content work and is reported. Red rails disable install.
-2. **C1 Select.** Aim for 20–60 items in a class G batch (curation or new vocabulary) and up to 24
-   boards in a class P batch; never mix KG and board changes in one batch. Choose from accepted
+2. **C1 Select.** Aim for 20–60 items in a class G batch (curation or new vocabulary) and as many
+   boards as the need map yields in a class P batch (about 24 keeps one landing review readable); never mix KG and board changes in one batch. Choose from accepted
    stock first, then new everyday vocabulary, then the thinnest board cells of the need map. Plan
    a smaller batch only when the eligible pool is smaller, and say so; never plan one item.
 3. **C2 Research and author.** Quality bar and research method below. Dictionary requests across
    all workers stay at least 2 seconds apart as courtesy to the sites; there is no per-tick or
    per-batch item cap.
 4. **C3 Screens.** Compatibility and lint below. A failing item goes to the drawing board; the
-   batch continues.
-5. **C4 Gameplay critic** for boards and for vocabulary that changes a named board's route.
-6. **C5 Freeze.**
+   batch continues, and every remaining new concept's link floor is re-checked without it.
+5. **C4 Gameplay critic** for every board, and for every new concept, edge or alias that touches a
+   node of an existing approved board (a Lanț route node, a Cald target or its direct
+   predecessors, a quick-board tile owner): the critic plays each touched board on the frozen KG.
+   Curation of forms on existing owners (ADR-0210) is exempt, as in V2. Skipping the critic in
+   any other case needs Paul's explicit yes.
+6. **C5 Freeze.** A batch writes repository files only after the previous batch's candidate
+   commit exists; until then its frozen bytes live in evidence.
 7. **C6 Review round 1.** Per-item outcomes; failures go to the drawing board.
 8. **C7 Stage, review round 2, install cascade 4a–4i and the test-pin packet** for the surviving
    items. Gates must be green outright.
@@ -123,7 +140,7 @@ tooling changes; never retry the same bytes without a new reason, and never pad 
 
 ## Failure handling and stop conditions
 
-There are no tick, commit, time or batch-size budgets.
+There are no tick, commit or time budgets, and batch sizes are guidance, not caps.
 
 - A content verdict drops the item, never the batch.
 - A tool or infrastructure failure pauses the batch. Fix the tool in the tool lane, then resume
@@ -138,6 +155,9 @@ There are no tick, commit, time or batch-size budgets.
   capture and full tests), or when the unchanged base fails C0 validate/export/ops. It reports
   each stop once and stays quiet until something changes.
 
+If 12 active hours pass without a newly qualified item, the next status message says so and
+names the stage holding the most items; this is a report, never a stop.
+
 **Status messages** are sent only on change, at most 10 plain lines: qualified, pending and
 drawing-board items per game since the last landing; active hours in the last 24 hours by kind;
 what is running; any question for Paul. Unkeyed SHA-256 digests are called digests, never
@@ -147,10 +167,13 @@ signatures; a reviewer's `signed_at` is that reviewer's own timestamp, not authe
 
 Paul starts a landing review whenever he wants; the loop keeps running. The reviewer:
 
-1. Reads `LANDING_QUEUE.md` and takes the queued candidates in order.
+1. Reads `LANDING_QUEUE.md` and takes the queued candidates in order, skipping `landed` and
+   `superseded` rows. Before landing a SHA it confirms `git merge-base --is-ancestor <SHA> content/continuous`; a
+   SHA no longer on the loop branch is marked `superseded`, never merged.
 2. For each, checks out the candidate commit detached in a review worktree, reruns the 4i gates,
    reviews the items against the quality bar and the floors (all items, or a stated sample per game
-   plus every flagged item), the reviews and critic logs, and the test-pin packet.
+   plus every flagged item), the reviews and critic logs, the owner holds (no bare *sucitoare*,
+   no *ii*/*iei* for Ie, Mănăstire/Sucitor rows only with Paul's go) and the test-pin packet.
 3. Lands the longest fully accepted prefix: `git merge --ff-only <candidate SHA>` on local `main`
    when main has not diverged; otherwise merges the candidate into a landing branch from main,
    reruns 4i and fast-forwards main to it.
@@ -249,8 +272,8 @@ M7 = C7. "M1–M5 artifacts" means every C1–C5 artifact of the batch.
   complete directed-edge coverage and keeps provenance in the sealed key. The preview is not a
   serving bundle or any export, source, ranking or rail approval; the unchanged full exporter must
   still reject stale pins. Path, descriptor and output rules for producer and helper are in
-  ADR-0214–ADR-0219. Before first use on a new base, run helper v5 (ADR-0218) once against it in the
-  tool lane, then reuse it by its pinned SHA.
+  ADR-0214–ADR-0219. Helper v5 (ADR-0218) is not qualified: before its first use the tool lane closes the open gaps
+  listed in ADR-0219, gets one fresh independent review and pins the new version.
   For Cald, the public challenge includes only the exact native player-visible `difficulty` and
   `board_category` read from the bound board; never add a target/board/source/graph field, neighbour,
   clue, example or authored guess. The critic commits exactly five ordinary normalized-distinct
@@ -269,7 +292,11 @@ M7 = C7. "M1–M5 artifacts" means every C1–C5 artifact of the batch.
   reviewer name appearing anywhere in an M1–M5 artifact. Record each per-item capture binding.
   Run the sidecar independence guard before accepting the pair. Outcomes are per item: an item a
   reviewer rejects or holds, or one without a reviewer-chosen source outside the author set, goes
-  to the drawing board with its reason, and the rest continue. A broken whole-review rule (signing
+  to the drawing board with its reason, and the rest continue. After any drop, re-check every remaining new
+  concept's link floor (4–8 truthful links to separate endpoints, ≥2 main-served, ≤2 batch peers,
+  ≥2 same-category, peer closure) without the dropped items; an item that falls below it goes to
+  the drawing board too. The surviving items are re-frozen as a new C5 bundle with a new manifest;
+  signed round-1 reports and the original frozen bytes are never edited. A broken whole-review rule (signing
   order, >20% identical rationales, reviewer name in an author artifact) voids the pair: rerun the
   round once with fresh reviewer contexts, then park the batch and report. Record the go/drop table
   under the standing owner delegation (ADR-0212, ADR-0220) and continue; an explicit item hold or
@@ -341,7 +368,7 @@ retaining that old signed audit after those bytes move is forbidden (ADR-0212).
    - 4b `cat-content-ops rank --write`, `derive --write`, `check --check`; `cat-mobile-pack --check`
      (4a refreshed the contract for G; P changes no KG, so retain it; never write it with the Go tool).
    - 4c Copy authored-v<K>.json to authored-v<K+1>.json: version K+1, `parent_source_sha256` =
-     sha256 of authored-v<K>, `base_commit` = the full 40-hex wave_base, and repoint the world
+     sha256 of authored-v<K>, `base_commit` = the batch's C0 base commit (full 40-hex SHA), and repoint the world
      archives to the last installed wave's native/world files listed in installed-authorities.json:
      world_candidate and world_previous → candidate.json, world_factual → factual-review.json,
      world_quality → quality-review.json, each with its sha256. K is derived at C0 from the current source chain. For B-quick append only the
@@ -371,7 +398,7 @@ retaining that old signed audit after those bytes move is forbidden (ADR-0212).
      Write A as docs/reviews/<wave>/native/<r>/audit.json and FF/FQ as final-factual-review.json /
      final-quality-review.json in the same directory: these are the documents installed-authorities.json
      will bind in 4h. Installed-authority-entry drafts go under
-     `~/work/_temp/content-loop/evidence/<id>/rail/<r>/`. Before the extensions proposal, do the 4f pin
+     `~/work/_temp/content-loop/continuous/evidence/<id>/rail/<r>/`. Before the extensions proposal, do the 4f pin
      edits (derived_catalog_v38 = the digest 4b produced, quick_games_v92 = the digest the quick
      `--write` installed): the extensions builder refuses `reviewed artifact digest drift` while any
      `reviewedPins` value is stale. Each rail is its own commit (4e-quick, 4e-world,
@@ -429,8 +456,9 @@ retaining that old signed audit after those bytes move is forbidden (ADR-0212).
    installed_authorities_pin.go; the corpus and the golden.go block; the rail files under
    docs/reviews/<wave>/native/ (including audit.json, final-factual-review.json and
    final-quality-review.json under docs/reviews/<wave>/native/<r>/); Go or frontend testdata that
-   an existing generator rewrites (name it in the README); the pool, the wave README and
-   docs/STATUS.md. The Python reference suite is not a gate (ADR-0186): leave
+   an existing generator rewrites (name it in the README); the pool, the batch README,
+   docs/STATUS.md and the single new README entry in `docs/tracked-markdown.json` (sorted, nothing
+   else changed). The Python reference suite is not a gate (ADR-0186): leave
    tests/current_content.py alone and note any Python red in the README. Never new or edited
    `_test.go`, new Python tests, new repo scripts other than the wave data module, or
    rules_unicode15.json, except the test-pin packet (ADR-0210): in one separate `pins` commit,
@@ -464,7 +492,7 @@ The prelanding record prepares pool dispositions/reasons and docs/reviews/v3-<id
 player gain, table summary, actual owner decisions, retrospective, ≤3 proposals, every BLOCKED/
 NEEDS-OWNER and every item sent to the drawing board, plus every comparison worktree the batch
 created (the landing session removes them). Keep the exact installed-authority rail files plus ≤10 small text files (README,
-graph reviews, playthrough log, reference/capture_v2_<id>.py.txt). Raw captures, role transcripts,
+graph reviews, playthrough log, reference/capture_v3_<id>.py.txt). Raw captures, role transcripts,
 build output and failed attempts stay under evidence, never in repo docs. Preserve all bytes;
 retention cleanup belongs to the later Claude landing session after verified NAS copy.
 Only after the prelanding checks update STATUS counts/Last verified within its 120-line budget;
@@ -600,3 +628,32 @@ critiques only after both sign.
 - **J4 Explainable links.** Each intended pair passes A1/A2/A7 and has a short, factual,
   nameable relation. A strong KG edge alone cannot justify an association a Romanian
   player would not recognize or distinguish from another plausible partner.
+
+## Start and heartbeat prompts
+
+Paul starts V3 by giving a Codex chat on this repository the start file
+`~/work/_temp/content-loop/CODEX_V3_PROMPT.md`. Landing reviews use
+`~/work/_temp/content-loop/CLAUDE_LANDING_REVIEW_PROMPT.md`. The heartbeat prompt of the
+`cat-content-v3` automation is fixed:
+
+```text
+Cat content loop V3 — follow docs/CONTENT_LOOP.md on main; authority is
+~/work/_temp/content-loop/continuous/AUTHORITY.md only.
+1. Read continuous/state.json and this batch's ledger rows. Nothing else unless the step needs it.
+2. If an agent result has arrived, consume it now: verify it, append ONE ledger row, update state,
+   dispatch the next step in the same turn.
+3. If agents are still running and nothing else is ready, end the turn quietly. Write no files.
+4. Never idle: while a batch waits (reviewer, tool fix, landing), prepare the next batch.
+5. A blocker with no next step: in this turn, ask Paul ONE question with ≤3 options and your
+   recommendation; then keep working on other batches. Never delete this automation.
+6. Main moved? `git merge --no-edit main` into content/continuous (on conflict: `git merge --abort`,
+   park, ask), then C0. A `rework` mark in LANDING_QUEUE.md? Commit the open step, archive the tip
+   as content/continuous-archive-<n>, mark later rows superseded, `git checkout -B
+   content/continuous main`, re-apply accepted items.
+Never: push, fetch, pull, merge into main, delete evidence/branches/worktrees, edit this procedure,
+the rubric, existing ADRs, GUI/runtime/deps/toolchain/CI, weaken or bypass any validator, pin,
+rail, review rule, owner hold or exclusion, author helpers inside a batch, call an unkeyed digest
+a signature, read sealed answer keys, or message a running reviewer except to answer it.
+Report only on change, ≤10 plain lines: qualified/pending/drawing-board items per game since the
+last landing, active hours last 24 h by kind, what runs now, any question for Paul.
+```

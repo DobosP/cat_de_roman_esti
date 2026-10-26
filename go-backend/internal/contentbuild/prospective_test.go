@@ -10,6 +10,7 @@ import (
 	"strings"
 	"syscall"
 	"testing"
+	"time"
 )
 
 func writeObject(t *testing.T, path string, value map[string]any) {
@@ -326,5 +327,38 @@ func TestProspectiveProducerClosureIsProductionComplete(t *testing.T) {
 	}
 	if got[excludedServingEmbed] {
 		t.Fatalf("semantically unused installed serving bundle entered prospective identity: %s", excludedServingEmbed)
+	}
+}
+
+func TestReadDirectRefusesFIFOWithoutBlocking(t *testing.T) {
+	path := filepath.Join(t.TempDir(), "kg.json")
+	if err := syscall.Mkfifo(path, 0o600); err != nil {
+		t.Fatal(err)
+	}
+	done := make(chan error, 1)
+	go func() {
+		_, err := readDirect(path, 1<<20)
+		done <- err
+	}()
+	select {
+	case err := <-done:
+		if err == nil || !strings.Contains(err.Error(), "not a regular file") {
+			t.Fatalf("FIFO input was not refused as a non-regular file: %v", err)
+		}
+	case <-time.After(5 * time.Second):
+		t.Fatal("FIFO input blocked instead of being refused")
+	}
+}
+
+func TestGoListEnvPinsLocalToolchain(t *testing.T) {
+	t.Setenv("GOTOOLCHAIN", "auto")
+	var toolchains []string
+	for _, item := range cleanGoListEnv() {
+		if strings.HasPrefix(item, "GOTOOLCHAIN=") {
+			toolchains = append(toolchains, item)
+		}
+	}
+	if len(toolchains) != 1 || toolchains[0] != "GOTOOLCHAIN=local" {
+		t.Fatalf("go list environment must pin exactly GOTOOLCHAIN=local, got %v", toolchains)
 	}
 }

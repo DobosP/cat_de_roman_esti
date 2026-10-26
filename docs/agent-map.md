@@ -27,6 +27,7 @@
 | Refine or expand game content | [Repository content skill](../.agents/skills/romanian-game-content/SKILL.md), [ADR-0156](adr/0156-two-track-content-growth.md) | refinement, discovery pool and existing promotion gates |
 | Start the next version | `docs/adr/0113-outcome-based-version-batches.md` + current STATUS backlog | explicit player outcomes, focused development checks, integrated gates and `cat-content-ops delta --baseline <commit> --text` |
 | Word-game session fix | `go-backend/internal/session` + matching engine/HTTP test; Python oracle for comparison | native race/vet + targeted parity (`docs/agent-testing.md`) |
+| Content loop (V3) / landing review | `docs/CONTENT_LOOP.md`, ADR-0220, `docs/CRITIQUE_RUBRIC.md` | C0 baseline, 4i gates, test-pin packet |
 | New pack-only content wave | `docs/PACK_ONLY_CONTENT_WAVES.md`, `docs/CRITIQUE_RUBRIC.md`, newest review README | bound native review/validators/race/source/operator gates |
 | Serving API change | `go-backend/internal/httpapi`, `docs/MOBILE_CONTRACT.md` | native race/vet/HTTP parity + manifest hash in `docs/STATUS.md` |
 | Frontend | `frontend/src/`, `docs/agent-testing.md` | owning pinned frontend/unit/browser checks; native TS7/Oxlint + SDK AST; managed `dist` → Go embedfs (ADR-0184, ADR-0202/0204) |

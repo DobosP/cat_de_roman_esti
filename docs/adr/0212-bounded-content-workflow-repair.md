@@ -1,8 +1,9 @@
 # ADR-0212: Bounded repair of the content workflow
 
 Date: 2026-10-25
-Status: accepted; cadence, budget and wave clauses superseded by
-[ADR-0220](0220-continuous-codex-content-loop.md); Class-P world acceptance retained
+Status: accepted; execution, cadence, budget, wave, queueing and Claude-review/landing clauses
+superseded by [ADR-0220](0220-continuous-codex-content-loop.md); the Class-P rebuild with fresh
+world audit and all quality gates are retained
 
 ## Context
 
