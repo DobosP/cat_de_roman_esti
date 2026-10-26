@@ -26,6 +26,7 @@ func run(args []string) error {
 	check := f.Bool("check", false, "check deterministic export freshness without writing")
 	kg := f.String("kg", "", "fixture path for a standalone validator")
 	pack := f.String("pack", "", "pack path for a standalone validator")
+	out := f.String("out", "", "new output path for a private prospective artifact")
 	if err := f.Parse(args); err != nil {
 		return err
 	}
@@ -70,6 +71,14 @@ func run(args []string) error {
 			return fmt.Errorf("games pack RED: %d error(s), first: %s", len(errors), errors[0])
 		}
 		fmt.Println("games pack GREEN")
+	case "prospective-lant-captions":
+		if *check || *kg == "" || *pack == "" || *out == "" {
+			return fmt.Errorf("prospective-lant-captions requires explicit --kg, --pack and --out and does not accept --check")
+		}
+		if err := contentbuild.WriteProspectiveLantCaptions(abs, *kg, *pack, *out); err != nil {
+			return err
+		}
+		fmt.Printf("Unapproved prospective native Lanț captions written to %s\n", *out)
 	default:
 		return fmt.Errorf("unknown command %s", command)
 	}

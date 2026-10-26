@@ -9,7 +9,6 @@ import (
 	"os"
 	"path/filepath"
 	"sort"
-	"strings"
 )
 
 var SourceNames = []string{"kg_sample.json", "derived_catalog_v38.json", "quick_games_v92.json", "board_rankings_v37.json", "release_reserve_v1.json", "games_pack.json", "alchimie_discovery_world_v92.json", "alchimie_recipe_extensions_v92.json"}
@@ -186,27 +185,7 @@ func build(root string, validate bool) (map[string]any, error) {
 	for _, e := range c.Edges {
 		edges = append(edges, edgeMap(e))
 	}
-	captions := map[string]any{}
-	reviewed, fallbacks := object(r["reviewed_captions"]), object(r["caption_fallbacks"])
-	for _, a := range g.AllIDs() {
-		for _, b := range g.NeighborIDs(a) {
-			e := g.Link(a, b)
-			if e == nil {
-				continue
-			}
-			caption := str(fallbacks[e.Relation])
-			if caption == "" {
-				caption = "legătură directă"
-			}
-			pair := []string{a, b}
-			sort.Strings(pair)
-			rv := array(reviewed[strings.Join(pair, "\x00")])
-			if len(rv) == 2 && valueDigest(edgeMap(*e)) == str(rv[0]) {
-				caption = str(rv[1])
-			}
-			captions[a+"\x00"+b] = caption
-		}
-	}
+	captions := lantCaptions(g, r)
 	patterns := map[string]any{}
 	for _, v := range object(r["category_labels"]) {
 		patterns[str(v)] = labelPattern(str(v), r)

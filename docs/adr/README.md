@@ -195,3 +195,5 @@ Parallel lanes also allocated0188/0189 independently. All four full-filename bod
 - [0212](0212-bounded-content-workflow-repair.md) — owner-authorized bounded workflow repair, Codex APP continuation and fresh world acceptance for Class P; all quality gates and old budgets preserved.
 
 - [0213](0213-correct-blind-cald-gameplay-protocol.md) — versioned Cald critic correction with exact integer cap-eight enforcement, independent diagnostics and pre-assertion result capture; quality floors unchanged.
+
+- [0214](0214-prospective-native-lant-captions.md) — source-bound unapproved native Lanț caption previews break the prospective-source cycle without weakening full export, catalog, ranking, source or rail guards.

@@ -6,6 +6,14 @@ for byte. `validate`, `validate-fixture`, and `validate-pack` run native source
 gates; `--kg`/`--pack` support prospective synthetic fixtures. No server or public
 solution endpoint is created. The standalone validators do not install content.
 
+`prospective-lant-captions` accepts explicit KG, pack and new output paths. It
+strictly validates the prospective pair, binds the rubric, frozen rules, Go version
+and native source inventory, and writes an explicitly unapproved caption-only
+artifact outside the repository with exclusive creation. It shares the serving
+builder's caption derivation but never calls the full exporter or supplies serving,
+catalog, ranking, source or rail authority. Consumers must bind its retained
+producer digest separately; the artifact's own fields are not a trust anchor.
+
 The eight source digests, required reviewed rubric, graph records/defaults, Unicode normalized index,
 reviewed display labels, selector scores/weights, reserve definitions, frozen
 quick identities, captions, mechanics/history fingerprints, manifest and metadata

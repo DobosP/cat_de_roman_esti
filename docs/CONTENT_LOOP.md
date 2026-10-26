@@ -4,7 +4,8 @@ Valid until: a later owner-approved procedure supersedes this file.
 Decisions: [ADR-0188](adr/0188-park-v1-7-and-reset-content-loop.md),
 [ADR-0210](adr/0210-curation-waves-and-staged-stock-landing.md) and
 [ADR-0211](adr/0211-content-loop-v2-all-boards.md) and
-[ADR-0212](adr/0212-bounded-content-workflow-repair.md).
+[ADR-0212](adr/0212-bounded-content-workflow-repair.md) and
+[ADR-0214](adr/0214-prospective-native-lant-captions.md).
 
 The V2 loop (Phase B) starts only after Paul explicitly says to start; landing this procedure
 starts nothing. The retired `romanian-content-discovery-improved-loop` automation stays paused
@@ -193,6 +194,13 @@ FAIL-lint Conexiuni boards is a separate task; do not widen scope to make a batc
   input and a separately sealed private key; compare its submitted solution mechanically, then
   adjudicate ambiguity/predicate/recognition in the critic's own words. One line per failure.
   The critic is a pre-review filter, never a signer; its sanitized log joins the freeze bundle.
+  When a prospective KG intentionally precedes later catalog/source/ranking refresh, generate the
+  explicitly unapproved Lanț caption artifact with native `cat-content prospective-lant-captions`
+  from the exact M3 KG and pack. Retain the producer command and artifact SHA, and supply both the
+  artifact and that independently pinned expected SHA to the separately versioned blind helper.
+  The helper must rebind exact KG/pack/rubric/rules/native sources, require complete directed-edge
+  coverage and keep all provenance in the sealed key. This preview is not a serving bundle or an
+  export/source/ranking/rail approval; the unchanged full exporter must still reject stale pins.
   For Cald, the public challenge includes only the exact native player-visible `difficulty` and
   `board_category` read from the bound board; never add a target/board/source/graph field, neighbour,
   clue, example or authored guess. The critic commits exactly five ordinary normalized-distinct

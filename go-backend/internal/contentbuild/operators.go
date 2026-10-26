@@ -53,6 +53,10 @@ func Caption(g *graph.Service, a, b string) string {
 	if err != nil {
 		panic(err)
 	}
+	return caption(r, e, a, b)
+}
+
+func caption(r map[string]any, e *content.Edge, a, b string) string {
 	fallback := str(object(r["caption_fallbacks"])[e.Relation])
 	if fallback == "" {
 		fallback = "legătură directă"
@@ -65,6 +69,19 @@ func Caption(g *graph.Service, a, b string) string {
 		return str(entry[1])
 	}
 	return fallback
+}
+
+func lantCaptions(g *graph.Service, r map[string]any) map[string]any {
+	captions := map[string]any{}
+	for _, a := range g.AllIDs() {
+		for _, b := range g.NeighborIDs(a) {
+			e := g.Link(a, b)
+			if e != nil {
+				captions[a+"\x00"+b] = caption(r, e, a, b)
+			}
+		}
+	}
+	return captions
 }
 
 // ValidReference checks an offline provenance citation under the shared URL
