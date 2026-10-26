@@ -1,7 +1,8 @@
 # ADR-0218: Contain helper output creation
 
 Date: 2026-10-26
-Status: proposed; r5 author candidate requires different fresh independent code review and native verification
+Status: accepted; independent r5 static review passed on 2026-10-26; landed with
+[ADR-0219](0219-land-portable-prospective-captions.md)
 
 ## Context
 

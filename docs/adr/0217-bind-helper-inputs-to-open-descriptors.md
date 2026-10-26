@@ -1,7 +1,7 @@
 # ADR-0217: Bind helper inputs to opened descriptors
 
 Date: 2026-10-26
-Status: input snapshot decision retained; r4 output implementation rejected, corrected by proposed ADR-0218
+Status: input snapshot decision retained; r4 output implementation rejected, corrected by ADR-0218
 
 ## Context
 

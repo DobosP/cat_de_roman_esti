@@ -204,4 +204,8 @@ Parallel lanes also allocated0188/0189 independently. All four full-filename bod
 
 - [0217](0217-bind-helper-inputs-to-open-descriptors.md) — bind the prospective helper's artifact, producer and readset parsing, hashes and metadata to one bounded no-follow descriptor snapshot.
 
-- [0218](0218-contain-helper-output-creation.md) — proposed r5 helper output correction after independent r4 FAIL; component no-follow parents and exclusive full-path Linux openat2 beneath the trusted scratch root. Author checks only; fresh independent code/native PASS and later separate pins required.
+- [0218](0218-contain-helper-output-creation.md) — r5 helper output correction after independent r4 FAIL; component no-follow parents and exclusive full-path Linux openat2 beneath the trusted scratch root; r5 static review passed.
+
+- [0219](0219-land-portable-prospective-captions.md) — land the prospective Lanț caption preview with a Linux-only opener and refusing stub elsewhere, non-blocking reads, a checked Go root and corrected producer-binding and bundle-refresh claims.
+
+- [0220](0220-continuous-codex-content-loop.md) — V3 continuous Codex content loop: one session/worktree/branch, no tick/commit/batch budgets, per-item drawing board, landing-review prefixes; all V2 quality gates kept.

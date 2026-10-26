@@ -1,7 +1,8 @@
 # ADR-0214: Produce source-bound prospective native Lanț captions
 
 Date: 2026-10-26
-Status: proposed; author implementation awaits independent code review and native verification
+Status: accepted as amended by ADR-0215–ADR-0218 and
+[ADR-0219](0219-land-portable-prospective-captions.md), which corrects the producer-binding claim
 
 ## Context
 

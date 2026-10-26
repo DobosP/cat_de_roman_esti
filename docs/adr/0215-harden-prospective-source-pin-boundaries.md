@@ -1,7 +1,9 @@
 # ADR-0215: Harden prospective source-pin boundaries
 
 Date: 2026-10-26
-Status: partially superseded by ADR-0216 for output creation and input-path handling; production closure and command parsing retained
+Status: partially superseded by ADR-0216 for output creation and input-path handling;
+its bundle-refresh consequence is corrected by [ADR-0219](0219-land-portable-prospective-captions.md);
+production closure and command parsing retained
 
 ## Context
 

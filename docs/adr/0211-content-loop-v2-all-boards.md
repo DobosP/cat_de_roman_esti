@@ -1,9 +1,10 @@
 # ADR-0211: V2 content loop for all six games' boards
 
 Date: 2026-10-22
-Status: partially superseded by [ADR-0212](0212-bounded-content-workflow-repair.md) for execution,
-cadence and Class-P world retention; original V2 quality rules remain accepted. Paul approved the
-original procedure on 2026-10-22 with rubric I/J outside the digest-bound rubric
+Status: partially superseded by [ADR-0212](0212-bounded-content-workflow-repair.md) and
+[ADR-0220](0220-continuous-codex-content-loop.md) for execution, cadence, budgets and landing stops;
+original V2 quality rules remain accepted. Paul approved the original procedure on 2026-10-22 with
+rubric I/J outside the digest-bound rubric
 
 ## Context
 

@@ -1,7 +1,8 @@
 # ADR-0212: Bounded repair of the content workflow
 
 Date: 2026-10-25
-Status: accepted; implementation independently qualified locally, executable next-wave plan pending
+Status: accepted; cadence, budget and wave clauses superseded by
+[ADR-0220](0220-continuous-codex-content-loop.md); Class-P world acceptance retained
 
 ## Context
 
