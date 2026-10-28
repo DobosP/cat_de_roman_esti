@@ -43,11 +43,15 @@
     ]
   },
   "unit": {
-    "status": "pending-final-help-copy",
-    "command": "GATE_OPERATOR=agent:codex bash scripts/gate.sh unit --sha <final-clean-sha> --parallel 4"
+    "status": "pass",
+    "sha": "d86a43c225fcf84c1dabd931ccdfd38746b90796",
+    "checks": 27,
+    "command": "GATE_OPERATOR=agent:codex bash scripts/gate.sh unit --sha d86a43c225fcf84c1dabd931ccdfd38746b90796 --parallel 4",
+    "result_sha256": "eeeb61a712e3f90b72e9a879c72a40fe60b4703b387d6672d6e3d82c06184e3f"
   },
   "full": {
-    "status": "pending"
+    "status": "retry-pending-test-only-fix",
+    "unit_lanes": "Full gate executes fresh nativeUnit checks before browser/database acceptance on the final test-only revision"
   },
   "review": {
     "scope": "Independent source review of Challenge/shared CSS/docs; Explore reviewed by root and pinned preflight",
@@ -110,5 +114,27 @@
     "scope": "Only two Alchimie instructions now name Re\u021bete and search",
     "preservation": "Original18-text baseline digest retained for16unchanged texts; revised Alchimie record independently byte-pinned",
     "record_sha256": "8f259cc7c1838c0406234b3e59352ac6bcef4475ecd9b9cab807125bffd06c33"
+  },
+  "full_attempts": [
+    {
+      "sha": "d86a43c225fcf84c1dabd931ccdfd38746b90796",
+      "status": "fail",
+      "result_sha256": "231aedfb8ceae21ea96109fe2f118a9c55359dc55a0adcf3d320e35f47ebc5af",
+      "browser_pass": 933,
+      "browser_fail": 4,
+      "browser_skip": 0,
+      "browser_flaky": 0,
+      "finding": "Two stale test selectors repeated in both layouts; product behavior unchanged"
+    }
+  ],
+  "selector_retry": {
+    "status": "pass",
+    "cases": 4,
+    "source_product_sha": "d86a43c225fcf84c1dabd931ccdfd38746b90796",
+    "layouts": [
+      "desktop",
+      "mobile"
+    ],
+    "log_sha256": "7689f66d3d2c4f6eaa7ea278213d9a88cdf51972699d1abeb4840d299a49446f"
   }
 }

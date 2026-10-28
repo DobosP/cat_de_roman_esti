@@ -30,6 +30,12 @@ async function visibleProgress(page, game, state) {
     await expect(page.getByLabel(`${state.lives} greșeli disponibile`, { exact: true })).toBeVisible();
     return;
   }
+  if (game.key === "alchimie") {
+    const count = page.locator(".alchemy-round-count");
+    await expect(count).toHaveText(`${state.moves} ${state.moves === 1 ? "combinație" : "combinații"}`);
+    await expect(count).toBeVisible();
+    return;
+  }
   const label = game.key === "alchimie" ? /^Combinații$/i :
     game.key === "lant" ? /^Salturi$/i : game.derived ? /^Greșeli$/i : /^Încercări$/i;
   const value = game.key === "alchimie" ? String(state.moves) :

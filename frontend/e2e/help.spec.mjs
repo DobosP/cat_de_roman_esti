@@ -39,8 +39,11 @@ for (const game of games) {
 
     // A ready selection used to make global Enter handlers consume the help key.
     const selectedCount = { alchimie: 1, conexiuni: 4, perechi: 1 }[game.key] ?? 0;
+    const selectable = game.key === "alchimie"
+      ? page.locator(game.board).getByRole("button", { disabled: false })
+      : page.locator(game.board).getByRole("button");
     for (let index = 0; index < selectedCount; index += 1) {
-      await page.locator(game.board).getByRole("button").nth(index).click();
+      await selectable.nth(index).click();
     }
     if (["contexto", "lant"].includes(game.key)) {
       await page.locator(game.board).fill("curiozitate");

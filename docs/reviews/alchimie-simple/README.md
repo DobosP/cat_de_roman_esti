@@ -31,3 +31,7 @@ library toolbar; the original focus and viewport assertions remain unchanged.
 Unit93286a9c passed27/27. The final two help sentences now name Rețete/search; the
 16other texts keep their original baseline pin and the revised record has its own pin.
 Final-copy unit/full acceptance follows; prior run outcomes are historical.
+
+Final-copy unitd86a43c2 passed27/27. Full browser933/937: four stale selector
+failures (enabled-word selection/plain progress count); corrected focused4/4 pass.
+The final test-only revision will execute all unit lanes again inside full acceptance.
