@@ -14,6 +14,9 @@ separate recent-discoveries panel. This is an interface change in Cat only.
 
 ## Decision
 
+The existing introductory screens retain their protected appearance. The simplified
+layout applies after a collection or round is opened.
+
 The normal play area contains the current ingredient, the last earned reaction,
 visible search and one collection of plain word buttons. New acquisitions appear
 first while the relative order of existing words remains stable. Every owned concept

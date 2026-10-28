@@ -303,7 +303,7 @@ export default function AlchimieExplore({ onExit }: {
   );
 
   return (
-    <div className="screen-pad fill alchemy-screen alchemy-explore-screen alchemy-simple" aria-busy={busy}>
+    <div className={`screen-pad fill alchemy-screen alchemy-explore-screen${state ? " alchemy-simple" : " alchemy-intro"}`} aria-busy={busy}>
       <div className="container col game-container alchemy-game">
         <GameShell onExit={() => { generationRef.current += 1; liveRef.current = false; flightRef.current = false; onExit(); }} title="Alchimie" accent={ACCENT} busy={busy} />
         <AlchimieModes mode="explore" busy={busy} />
@@ -315,7 +315,7 @@ export default function AlchimieExplore({ onExit }: {
               <span className="alchemy-eyebrow">UN CUVÂNT DUCE LA ALTUL</span>
               <h1>O lume de descoperit.</h1>
               <p>Atinge două cuvinte și vezi ce creezi. Păstrezi fiecare descoperire și alegi singur ce explorezi mai departe.</p>
-              <div className="alchemy-intro-example" aria-label="Două cuvinte se combină într-o descoperire"><span>Cuvânt</span><b>+</b><span>Cuvânt</span><b>→</b><span>Descoperire</span></div>
+              <div className="alchemy-intro-example" aria-label="Două cuvinte se combină într-o descoperire"><span>Cuvânt</span><b>+</b><span>Cuvânt</span><b>→</b><span>✦ Descoperire</span></div>
               <Button disabled={locked} onClick={() => void loadCollection()}>Începe explorarea →</Button>
               <p className="alchemy-inventory-note">Fără scor sau penalizări. Colecția se salvează pe acest dispozitiv. Obiectivele sunt opționale.</p>
             </section>

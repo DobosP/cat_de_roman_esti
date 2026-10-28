@@ -50,8 +50,7 @@
     "result_sha256": "eeeb61a712e3f90b72e9a879c72a40fe60b4703b387d6672d6e3d82c06184e3f"
   },
   "full": {
-    "status": "retry-pending-test-only-fix",
-    "unit_lanes": "Full gate executes fresh nativeUnit checks before browser/database acceptance on the final test-only revision"
+    "status": "retry-pending-entry-style-isolation"
   },
   "review": {
     "scope": "Independent source review of Challenge/shared CSS/docs; Explore reviewed by root and pinned preflight",
@@ -125,6 +124,21 @@
       "browser_skip": 0,
       "browser_flaky": 0,
       "finding": "Two stale test selectors repeated in both layouts; product behavior unchanged"
+    },
+    {
+      "sha": "0f51c858564df1ee3d27094238e50bf1d7ff42f3",
+      "status": "two-entry-png-mismatches",
+      "result_sha256": "9654ee3b5a05c4639c3812c62375b493f16060045f6b0e7217d070086f8983f0",
+      "browser_pass": 937,
+      "browser_fail": 0,
+      "browser_skip": 0,
+      "browser_flaky": 0,
+      "other_pages_png": 7,
+      "axe": "pass",
+      "vitals": "pass",
+      "csp_observed_violations": 0,
+      "finding": "Shared styling also changed two introductory screens; active play journeys pass",
+      "correction": "Restore original entry appearance with intro-only scope; protected baseline files unchanged"
     }
   ],
   "selector_retry": {
