@@ -79,5 +79,24 @@
     "race": true,
     "skips": 0,
     "result_sha256": "b08c63b60ed6d094fa85f7911aa5e2441e329d0931bde20db11f87293200b46f"
+  },
+  "build": {
+    "status": "pass",
+    "sha": "0848ad4e19217b5f21a358126307e7e9ad77b30a",
+    "command": "GATE_OPERATOR=agent:codex bash scripts/gate.sh build --sha 0848ad4e19217b5f21a358126307e7e9ad77b30a --parallel 2",
+    "result_sha256": "85dadd53bb698d2100927c493ff988399fe4e9e8c797a910995c1240c54cdb37",
+    "serving_pass": 87,
+    "serving_fail": 0,
+    "serving_skip": 0
+  },
+  "focused_browser": {
+    "status": "one-focus-visibility-failure",
+    "sha": "0848ad4e19217b5f21a358126307e7e9ad77b30a",
+    "project": "desktop",
+    "passed": 73,
+    "failed": 1,
+    "log_sha256": "bde4812bff84b187562b3e52f375be11542070c21120533d512b6091dc4ed711",
+    "finding": "Collection fallback scroll used a visually hidden heading",
+    "correction": "Use the visible library toolbar for fallback and clear-search keyboard scrolling; assertion unchanged; focused retry pending"
   }
 }

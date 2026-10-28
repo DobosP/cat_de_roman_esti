@@ -260,7 +260,7 @@ export default function AlchimieExplore({ onExit }: {
     else libraryRef.current?.focus({ preventScroll: true });
     // Keyboard activation must leave its focus visible. Centering clears the bench,
     // whose pinned height is bounded; pointer crafting keeps its browsing position.
-    if (pending.keyboard) (target ?? libraryRef.current?.querySelector("h2"))?.scrollIntoView({ block: "center" });
+    if (pending.keyboard) (target ?? libraryRef.current?.querySelector(".alchemy-library-toolbar"))?.scrollIntoView({ block: "center" });
   }, [state, busy, locked, message]);
 
   useEffect(() => {
@@ -359,7 +359,7 @@ export default function AlchimieExplore({ onExit }: {
                 {(recipesOpen ? journalQuery : query) && <Button variant="secondary" className="alchemy-clear-search" onClick={(event) => {
                   if (recipesOpen) { setJournalQuery(""); journalSearchRef.current?.focus({ preventScroll: true }); }
                   else { setQuery(""); libraryRef.current?.querySelector<HTMLInputElement>(".alchemy-inventory-search")?.focus({ preventScroll: true }); }
-                  if (event.detail === 0) libraryRef.current?.scrollIntoView({ block: "center" });
+                  if (event.detail === 0) libraryRef.current?.querySelector(".alchemy-library-toolbar")?.scrollIntoView({ block: "center" });
                 }}>{recipesOpen ? "Șterge căutarea din rețete" : "Șterge căutarea"}</Button>}
                 <div className="alchemy-inventory-grid" hidden={recipesOpen}>
                   {items.map((item) => {

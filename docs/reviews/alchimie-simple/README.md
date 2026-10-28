@@ -23,3 +23,7 @@ on an unexpected relocation-test skip. The native TMPDIR proposal was reverted;
 checkout/output directories so the relocation assertion executes. Focused pinned race passes with zero skips;
 canonical retry remains pending. No content, frozen
 original bundle, budget or acceptance assertion changed; no deployment.
+
+The built app passed87 serving checks without failures/skips. Focused Alchimie
+browser run:73pass/1keyboard-scroll failure. The fallback now reveals the visible
+library toolbar; the original focus and viewport assertions remain unchanged.
