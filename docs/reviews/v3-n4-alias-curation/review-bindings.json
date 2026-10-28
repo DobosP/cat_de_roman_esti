@@ -1,0 +1,700 @@
+{
+  "actual_after": {
+    "applies_to_reconciled_runtime": "Root verified main merge changes docs/WORKLOG only, with content/httpapi/source/catalog/review/pin/corpus bytes unchanged; no invented new AFTER capture.",
+    "capture_recorded_head": "b3722a9edd7311354099eed808bbdc6a0be97e66",
+    "comparison_summary": {
+      "new92_before_after_snapshot_equal_orders": 182,
+      "new92_canonical_identity_metrics_equal_orders": 184,
+      "new92_canonical_won_state_equal_orders": 184,
+      "new92_orders": 184,
+      "new92_snapshot_deltas": [
+        {
+          "after": {
+            "attempts": 1,
+            "guesses": [
+              {
+                "attempt_number": 1,
+                "closeness": 32,
+                "distance": 4,
+                "id": "n_v3muz_pian",
+                "label": "Pian",
+                "rank": 1747,
+                "temperature": "Foarte rece"
+              }
+            ],
+            "won": false
+          },
+          "before": {
+            "attempts": 2,
+            "guesses": [
+              {
+                "attempt_number": 1,
+                "closeness": 64,
+                "distance": 3,
+                "id": "n_v1_12_pin",
+                "label": "Pin",
+                "rank": 918,
+                "temperature": "Rece"
+              },
+              {
+                "attempt_number": 2,
+                "closeness": 32,
+                "distance": 4,
+                "id": "n_v3muz_pian",
+                "label": "Pian",
+                "rank": 1747,
+                "temperature": "Foarte rece"
+              }
+            ],
+            "won": false
+          },
+          "form": "pianului",
+          "order": "form-first",
+          "owner": "n_v3muz_pian"
+        },
+        {
+          "after": {
+            "attempts": 1,
+            "guesses": [
+              {
+                "attempt_number": 1,
+                "closeness": 32,
+                "distance": 4,
+                "id": "n_v3muz_pian",
+                "label": "Pian",
+                "rank": 1747,
+                "temperature": "Foarte rece"
+              }
+            ],
+            "won": false
+          },
+          "before": {
+            "attempts": 2,
+            "guesses": [
+              {
+                "attempt_number": 2,
+                "closeness": 64,
+                "distance": 3,
+                "id": "n_v1_12_pin",
+                "label": "Pin",
+                "rank": 918,
+                "temperature": "Rece"
+              },
+              {
+                "attempt_number": 1,
+                "closeness": 32,
+                "distance": 4,
+                "id": "n_v3muz_pian",
+                "label": "Pian",
+                "rank": 1747,
+                "temperature": "Foarte rece"
+              }
+            ],
+            "won": false
+          },
+          "form": "pianului",
+          "order": "canonical-first",
+          "owner": "n_v3muz_pian"
+        }
+      ],
+      "new92_status_census": {
+        "canonical-first after direct-owner": 92,
+        "canonical-first before fuzzy-confirmation": 15,
+        "canonical-first before unknown": 77,
+        "form-first after direct-owner": 92,
+        "form-first before fuzzy-confirmation": 15,
+        "form-first before unknown": 77
+      },
+      "normalization_actual_cases": 39,
+      "normalization_single_owner_repeat_and_snapshot_equal": true,
+      "protected319_full_actual_native_event_bodies_and_snapshots_equal_orders": 638,
+      "protected319_orders": 638,
+      "public_actual_target": {
+        "description": "Regiune istorica romaneasca.",
+        "id": "n_transilvania",
+        "label": "Transilvania"
+      },
+      "public_actual_target_identity_equal": true,
+      "public_before_and_after_canonical_wins": true,
+      "public_before_and_after_postwin_terminal400": true,
+      "public_before_and_after_won_snapshots": true
+    },
+    "counts": {
+      "actual_alias_target_win_transitions": 0,
+      "actual_requests": 13368,
+      "main_aliases_after": 92,
+      "main_aliases_before": 92,
+      "normalization_cases_after": 39,
+      "normalization_forms_after": 16,
+      "protected_inputs_after": 319,
+      "protected_inputs_before": 319,
+      "requests_by_invocation": {
+        "after-main": 1472,
+        "after-protected": 5104,
+        "after-variants": 93,
+        "before-main": 1502,
+        "before-protected": 5104,
+        "before-variants": 93
+      }
+    },
+    "manifest": {
+      "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/runtime/after/manifest.json",
+      "sha256": "767b7ad348bd715de20afa650025e44fcabe22793890922678e2c9435bb443c2",
+      "size_bytes": 11246128
+    },
+    "result": {
+      "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/runtime/after/result.json",
+      "sha256": "197a5ca2c6da03a83139caed140b609329a4323962016b2456f51d2b7672769e",
+      "size_bytes": 14511936
+    },
+    "root_mechanically_verified_bindings": 40990
+  },
+  "candidate_qualification": "NO_NEW_NATIVE_RED within exact23aa baseline-red limitations; whole backend suite remains RED; unlanded only.",
+  "comparison_worktrees_retained": [
+    {
+      "head": "052212fa62f0d3646510ec23344687f749f094b8",
+      "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/v3-n1-baseline-comparison",
+      "retained": true,
+      "scope": "Historical exact-main052 comparison, not the current-main waiver.",
+      "tree": "38a44f7c0378562ee4bd857f33f4d08027010eeb"
+    },
+    {
+      "detached": true,
+      "head": "23aa88fa228699eb7dee286196e8b38cb2ab2ec0",
+      "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/v3-n4-reconcile-main23aa-comparison",
+      "retained": true,
+      "scope": "Fresh exact-new-main23aa identical full argv/environment comparison.",
+      "tree": "a31014e68ec2fb47c6e9d7164a49d10356ea8e47"
+    }
+  ],
+  "core_review_reports": {
+    "factual": {
+      "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/roles/factual/interface-rebind/resume-authorized/review.raw.json",
+      "sha256": "00f1dc7304ac7e45e0e777cd718883ddfdf84b1d9638de75f614acc64fed51f6",
+      "size_bytes": 32593
+    },
+    "quality": {
+      "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/roles/quality/interface-rebind/quality-review.json",
+      "sha256": "5f76f2420484c184ddc5196a3826f618b0bd872ebce7f2b08bd51287a6ac9bd1",
+      "size_bytes": 31110
+    }
+  },
+  "current_main_baseline": "23aa88fa228699eb7dee286196e8b38cb2ab2ec0",
+  "exact_installed_native21": {
+    "docs/reviews/v3-n4-alias-curation/native/extensions/audit.json": {
+      "sha256": "ebe1ac958ac9e3d6e54e43a83d28ce00a135de57df69f92f9c4f6851f52cf5be",
+      "size_bytes": 24967
+    },
+    "docs/reviews/v3-n4-alias-curation/native/extensions/candidate.json": {
+      "sha256": "24daccb213293ddceb5261cb85efca3aae9f4102544940f3e6b45c227fa02106",
+      "size_bytes": 2020146
+    },
+    "docs/reviews/v3-n4-alias-curation/native/extensions/factual-review.json": {
+      "sha256": "cc56b1a95e8a8ea7318c7990ae43a3ad9205b00b5660df77b4cf7ca6b5ddf276",
+      "size_bytes": 64600
+    },
+    "docs/reviews/v3-n4-alias-curation/native/extensions/final-factual-review.json": {
+      "sha256": "e72b3376f4d11c5a1f5ca98fe6c0c4e4b8f49f864009f70b08d606d5bd346459",
+      "size_bytes": 1944
+    },
+    "docs/reviews/v3-n4-alias-curation/native/extensions/final-quality-review.json": {
+      "sha256": "e2870b7bc8999b440581897fc9c1a2684539435c6dd52c40d391a429606c07aa",
+      "size_bytes": 2342
+    },
+    "docs/reviews/v3-n4-alias-curation/native/extensions/proposal.json": {
+      "sha256": "8e0325328d3f1297192a2f6f841820333c0d26cbac9493b5da2bb68a42e84850",
+      "size_bytes": 480635
+    },
+    "docs/reviews/v3-n4-alias-curation/native/extensions/quality-review.json": {
+      "sha256": "1095d7881703d4dbc2c02cf386308e120739f823e4ed6b0b97c1c046b393aa38",
+      "size_bytes": 72493
+    },
+    "docs/reviews/v3-n4-alias-curation/native/quick/audit.json": {
+      "sha256": "f6b607acbd8ed81e0cdf472a9f893c8ac0603cc7c7836ae844dc9694a180ffbb",
+      "size_bytes": 49099
+    },
+    "docs/reviews/v3-n4-alias-curation/native/quick/candidate.json": {
+      "sha256": "058ff7cbef3aae8bdedf6ec455b5bbaf4f2b06ca9a7b5cdf5b13e996d279ef37",
+      "size_bytes": 119217
+    },
+    "docs/reviews/v3-n4-alias-curation/native/quick/factual-review.json": {
+      "sha256": "21d7befa3266dbd46aa543c343d24c5154649d83a985d13743a94338c016af31",
+      "size_bytes": 118727
+    },
+    "docs/reviews/v3-n4-alias-curation/native/quick/final-factual-review.json": {
+      "sha256": "b4fd0051f93cdada8cc27332163009e04b7672b4a7138afa7b02f198d2277b7c",
+      "size_bytes": 1820
+    },
+    "docs/reviews/v3-n4-alias-curation/native/quick/final-quality-review.json": {
+      "sha256": "f2d82e565277e0cc690891e87bb0bab420f719e3ba85572334ec4eb0d201982a",
+      "size_bytes": 2059
+    },
+    "docs/reviews/v3-n4-alias-curation/native/quick/proposal.json": {
+      "sha256": "fad794767aeaae12ba7f1b7bccdde69f27ea25a319ae309d2835986a5134ae4c",
+      "size_bytes": 384667
+    },
+    "docs/reviews/v3-n4-alias-curation/native/quick/quality-review.json": {
+      "sha256": "2660528b49b75abeec1caace0bcd8cde8247bdbd5596b39366d827c072fdec6f",
+      "size_bytes": 126547
+    },
+    "docs/reviews/v3-n4-alias-curation/native/world/audit.json": {
+      "sha256": "04c68820711edfe591b04cb3ad7c9f261156ef85cd1744e118dcccac091f5286",
+      "size_bytes": 31926
+    },
+    "docs/reviews/v3-n4-alias-curation/native/world/candidate.json": {
+      "sha256": "051c2d5901a0d45a5a5e98aa8e644650b640c8e860f17cd25183c164543a881c",
+      "size_bytes": 878387
+    },
+    "docs/reviews/v3-n4-alias-curation/native/world/factual-review.json": {
+      "sha256": "ffad67501ccc26546c6068036fa3333d3e372cec34eb0919cb4629950420f267",
+      "size_bytes": 677751
+    },
+    "docs/reviews/v3-n4-alias-curation/native/world/final-factual-review.json": {
+      "sha256": "c1d4f66bb8de0ce6af7d0191038392ae0c04f829294d2a2bdc340f40e69b9bd4",
+      "size_bytes": 2082
+    },
+    "docs/reviews/v3-n4-alias-curation/native/world/final-quality-review.json": {
+      "sha256": "455faad7abe45a90da179342ab6bab79ef2465d0fc342612d80c2a902669c350",
+      "size_bytes": 2322
+    },
+    "docs/reviews/v3-n4-alias-curation/native/world/proposal.json": {
+      "sha256": "66f0feb170696c82b4b804d814059fd7a0c90f90579cd8b3990dd86853532b74",
+      "size_bytes": 889300
+    },
+    "docs/reviews/v3-n4-alias-curation/native/world/quality-review.json": {
+      "sha256": "86b5b72436b220510ee830ed611632acf6f24c74f312e4a66bf50197588544d3",
+      "size_bytes": 729874
+    }
+  },
+  "existing_owners": 55,
+  "hold_projection": {
+    "facts_are_retained_decisions_not_new_rulings": true,
+    "mutable_registry_source": "/home/dobo/work/_temp/content-loop/continuous/DRAWING_BOARD.md",
+    "section_sha256": "dfcebcd8b27967cf40f27cba54f2f880d89c5432ef769789fa51a3a80954959f",
+    "snapshot": {
+      "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/C8/public-held-reasons.txt",
+      "sha256": "dfcebcd8b27967cf40f27cba54f2f880d89c5432ef769789fa51a3a80954959f",
+      "size_bytes": 2841
+    }
+  },
+  "installed_authorities": {
+    "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content-continuous/go-backend/internal/contentrails/sources/installed-authorities.json",
+    "sha256": "f19c39ca6b7acbc6126677ca11719d2b40ec10716bd4184e61193174b32e0997",
+    "size_bytes": 9106
+  },
+  "integrated_pool_records": 0,
+  "kind": "v3-n4-C8-prelanding-bindings-v1",
+  "landed": false,
+  "limits": [
+    "Full suite RED on both exact candidates and fresh exactmain baselines: ManagedSPA current/legacy assets missing; no blanket waiver, cannot land red.",
+    "Zero observed alias-target wins; only recorded nonwinning owner/canonical identity and the separate public Transilvania control are claimed.",
+    "No human enjoyment, device, production/account or release qualification claimed.",
+    "New T2 helper activation remains unapproved/inactive; no helper/gate/procedure changes at C8.",
+    "Final independent Claude landing review and fresh required4i remain mandatory; root alone registers one unlanded queue row."
+  ],
+  "main_serving_qualification_changed": false,
+  "module": {
+    "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content-continuous/scripts/alias_curation_v3_n4_data.py",
+    "sha256": "55f58b8ac7264acb3e506092dd9e6d9a81b2f9f40533018c89c64b1390fecacb",
+    "size_bytes": 3578
+  },
+  "native_pins_packet": {
+    "commit": "b3722a9edd7311354099eed808bbdc6a0be97e66",
+    "old_to_new": {
+      "case_count": {
+        "new": 1206,
+        "old": 1206
+      },
+      "corpus_bytes": {
+        "new": 33617,
+        "old": 33617
+      },
+      "corpus_sha256": {
+        "new": "4c51141f73260267e56f4a91230306155b700bc0c304ddb7083af773a3d6ed38",
+        "old": "765da7b46bbaa46ee8bf30bb73aa81c2f983b41b9e0abaab21f1b9705dd6467f"
+      },
+      "historical_selection_count": {
+        "basis": "Predecessor template14 historical loaders plus the actual installed N2 predecessor loader appended; existing N1 row retained.",
+        "new": 15,
+        "old": 14
+      },
+      "mixed_source_deltas": {
+        "new": 6,
+        "old": 6
+      },
+      "predecessor_live_clause": {
+        "new": "\tif err != nil || len(data.Sources) != 8 || reflect.DeepEqual(data.Sources, want.Sources) {\n\t\tt.Fatal(\"live compiled bundle did not move past the historical V3 n2 source tuple\", err)\n\t}\n",
+        "old": "\tif err != nil || !reflect.DeepEqual(data.Sources, want.Sources) {\n\t\tt.Fatal(\"live compiled bundle does not have the actual V3 n2 source tuple\", err)\n\t}\n"
+      },
+      "proper_mixtures": {
+        "new": 62,
+        "old": 62
+      },
+      "reference": {
+        "new": "existing Django offline oracle versus native Go V3 n4 candidate 97a4b24d4c6f71c711b480d160bed9ae048a24c0; archived capture_reference.py unchanged except three configuration lines",
+        "old": "existing Django offline oracle versus native Go V3 n2 candidate f2fade3e27d2923ca83f5bc44121220233e7e476; archived capture_reference.py unchanged except three configuration lines"
+      },
+      "source_count": {
+        "new": 8,
+        "old": 8
+      },
+      "source_digest_changes": [
+        {
+          "new": "66f0feb170696c82b4b804d814059fd7a0c90f90579cd8b3990dd86853532b74",
+          "old": "207aa0acaefcf76f82fa3107fce8bfd6eee3b958e0a65e7dcf223afc4beff231",
+          "source": "alchimie_discovery_world_v92.json"
+        },
+        {
+          "new": "8e0325328d3f1297192a2f6f841820333c0d26cbac9493b5da2bb68a42e84850",
+          "old": "f8bbcccfec38c0ccd64b14aaedd27ea3a997c6970017769fdb8727aa7f02edf9",
+          "source": "alchimie_recipe_extensions_v92.json"
+        },
+        {
+          "new": "c25e80d9e5a86a6b7c0480f5be5ba9af89b92d1f6b00109f409b6f9d66a9cffe",
+          "old": "8724518f73b4712a05bca1bf5ecbefc29061c66e6a773d592c6dbffecd268670",
+          "source": "board_rankings_v37.json"
+        },
+        {
+          "new": "b207b6e9d12442583e66d06a62912d935691cf3cd7fefcd4ee0415e99eacb003",
+          "old": "1debab737c6c8fa3ad6f2acbbf6086751310d24d0600d83274d6ee51703017ae",
+          "source": "derived_catalog_v38.json"
+        },
+        {
+          "new": "8b8addd26cdc3aa5972a97368196e9593d5ef38477625f2fba988845e10879d4",
+          "old": "7f185988ddc1437ce3923f4dfe0f4d1eda9ad98743e5d178b73f40eb113fec15",
+          "source": "kg_sample.json"
+        },
+        {
+          "new": "fad794767aeaae12ba7f1b7bccdde69f27ea25a319ae309d2835986a5134ae4c",
+          "old": "ad73a0617e8bf7dee77776256860ac3f9abba2b2797ec826439b370127e74ef9",
+          "source": "quick_games_v92.json"
+        }
+      ]
+    },
+    "result": {
+      "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/install/test-pins/result.json",
+      "sha256": "b1e0f716fdbfab460a6a1b8a3f9d4f2de2464b6667cda57374e0c87221526142",
+      "size_bytes": 20598
+    },
+    "stat": {
+      "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/install/test-pins/commit.stat",
+      "sha256": "b6beeabd31672c4a31fc51eb63198a2f68513e6bcc373007d9798d478d84ce7f",
+      "size_bytes": 245
+    }
+  },
+  "new_boards_each_game": {
+    "alchimie": 0,
+    "conexiuni": 0,
+    "contexto": 0,
+    "intrusul": 0,
+    "lant": 0,
+    "perechi": 0
+  },
+  "new_concepts": 0,
+  "original_C0": "a7c2f8586b64be0d4b64f92118233ad52dd27003",
+  "original_public_proposal": {
+    "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/roles/author/import-interface-repair-gated-finalization/public/proposal.json",
+    "sha256": "63c1647a3c2264a5f8a2c124b10a433dfce1c921d8530b21ec3da436667ad8c4",
+    "size_bytes": 51419
+  },
+  "phase_receipts": {
+    "4a": {
+      "manifest": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/install/4a-retry-468/manifest.json",
+        "sha256": "c33daf4a553152d9a52f5ee98bd47f75aa11836595f92648dd625b6981f8c2e2",
+        "size_bytes": 10842
+      },
+      "result": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/install/4a-retry-468/result.json",
+        "sha256": "feec78a06eb79e0825dcd65210164a9225ea55ebdef40ce438496a995fa03b67",
+        "size_bytes": 2344
+      }
+    },
+    "4b": {
+      "manifest": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/install/4b/manifest.json",
+        "sha256": "6d8ce3b78cbec3f20f9b8b60f9224b6e904bc9d5b3ba093eca6e3680105c12fc",
+        "size_bytes": 3839
+      },
+      "result": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/install/4b/result.json",
+        "sha256": "a943e7ad50a584acdb96c15a97551ff62e1e4d9dd3b6e05248c4f41de2d49c69",
+        "size_bytes": 4139
+      }
+    },
+    "4c": {
+      "manifest": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/install/4c/manifest.json",
+        "sha256": "3a2a969fae4d49feac1989b91ccf1e90ee4cd02101bd5d81157dcd9c46607f11",
+        "size_bytes": 4527
+      },
+      "result": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/install/4c/result.json",
+        "sha256": "a3aca3196545bce563d9ffbb79bf45facb0d3b088c2fb8f5e2ebc54dc2d8064b",
+        "size_bytes": 6623
+      }
+    },
+    "4d": {
+      "manifest": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/install/4d/integration/manifest.json",
+        "sha256": "3e94486c6c287a794ab6c37fdb2b0763fbcd6961ef187a4715333de8ceb2c191",
+        "size_bytes": 2464
+      },
+      "result": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/install/4d/integration/result.json",
+        "sha256": "afc09dfcfd735ebf75e3e563608191a62f87664734d96bdce7990780e24e6b98",
+        "size_bytes": 10277
+      }
+    },
+    "4f-final-export": {
+      "manifest": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/install/4f-final-export/manifest.json",
+        "sha256": "1189d98d831d34c8b99f180fcfe22117ee85a7814e50226eccdee016453f38e8",
+        "size_bytes": 7591
+      },
+      "result": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/install/4f-final-export/result.json",
+        "sha256": "7bd7fb72d8f2e38aad461b9c7ef56dc5b06384d4ddd12e9eed4e7b404bec95c1",
+        "size_bytes": 15211
+      }
+    },
+    "4f-pins": {
+      "manifest": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/install/4f/manifest.json",
+        "sha256": "09f8d9384ba70e8ce5ad3b89a3023abe69cd6af390c94b1f7b72e24900a723a8",
+        "size_bytes": 7804
+      },
+      "result": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/install/4f/result.json",
+        "sha256": "745a18ef489b287f1f8f4e0b601f52c88f11e51ad49385d8c9f0d4ddbe1540c8",
+        "size_bytes": 14834
+      }
+    },
+    "4g": {
+      "manifest": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/install/4g/manifest.json",
+        "sha256": "beb3c6af47d4f92b3a78a3186a5249fa8deb94225949883bd01d6e0849ca5567",
+        "size_bytes": 4033
+      },
+      "result": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/install/4g/result.json",
+        "sha256": "625d5fec6763199b61014cf56c1bd128975dabaaf06514178db84a23e8580bf0",
+        "size_bytes": 12767
+      }
+    },
+    "4h-assembly": {
+      "manifest": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/install/4h-assemble/manifest.json",
+        "sha256": "42046a7908b31620811b99cf536f375290e7eff6ecf457c2d3e2f8c01d3f44d7",
+        "size_bytes": 8857
+      },
+      "result": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/install/4h-assemble/result.json",
+        "sha256": "26caa4bc58eb9238778b90cd24bcc00a3af68e53405e32375fb9ba463e763d52",
+        "size_bytes": 14160
+      }
+    },
+    "4h-initial": {
+      "manifest": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/install/4h-initial/manifest.json",
+        "sha256": "0c5af31f81e242d455ad885babb64c6695b263b8e16e3790f42fdaf7ac0b6921",
+        "size_bytes": 8131
+      },
+      "result": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/install/4h-initial/result.json",
+        "sha256": "ec8d667df6f39c886553b64b58ef603c3ae2c3d98321834a3516948b7c0e8772",
+        "size_bytes": 16950
+      }
+    },
+    "extensions-corrected-observer": {
+      "manifest": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/install/4e-extensions-prepare/corrected-observer/manifest.json",
+        "sha256": "63e41ac751faeee396b711f1eb0a8c8e9580a9d63cba90c96d4d60cdc5a98a64",
+        "size_bytes": 6207
+      },
+      "result": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/install/4e-extensions-prepare/corrected-observer/result.json",
+        "sha256": "2cbcb1c54bf7b2774424f99cb5f073159217ac36e4be8bf75036f7efbf677624",
+        "size_bytes": 17811
+      }
+    },
+    "extensions-observer-failure": {
+      "manifest": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/install/4e-extensions-prepare/manifest.json",
+        "sha256": "b665c95d09826622a5686ae78707a504638ec49d4a03a86e8b6f8918e7717b04",
+        "size_bytes": 4099
+      },
+      "result": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/install/4e-extensions-prepare/result.json",
+        "sha256": "50cbab5725d5863cb7ed363b1eecb72ea835fa05f823cc780bd81ebfc11a8c6e",
+        "size_bytes": 7684
+      }
+    },
+    "extensions4e": {
+      "manifest": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/install/4e-extensions-write/manifest.json",
+        "sha256": "b33d624bc891a4c690f391a2f9826d03a6dc80e9d3cfbefdce72331a06ed16b7",
+        "size_bytes": 5680
+      },
+      "result": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/install/4e-extensions-write/result.json",
+        "sha256": "54ba97d3c8850871b848fdd7116d6ec767dc127d7b6cd6f88ed55b5fb1f47df8",
+        "size_bytes": 18975
+      }
+    },
+    "historical4i-052": {
+      "manifest": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/install/4i/manifest.json",
+        "sha256": "fa85bd6d450a3cf61925b37cf39e8ea6c937b3b7872a9c46e05f4c05ebe4598a",
+        "size_bytes": 18276
+      },
+      "result": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/install/4i/result.json",
+        "sha256": "187e29b556fbbc93428a4d070b20bf28de6eb448375e763c8a445197e56f2c52",
+        "size_bytes": 31406
+      }
+    },
+    "quick4e": {
+      "manifest": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/install/4e-quick-write/manifest.json",
+        "sha256": "b903d3df24db4a0315ffa698cc65aac7226b281637dd1fb86f8119cfb141eab0",
+        "size_bytes": 3359
+      },
+      "result": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/install/4e-quick-write/result.json",
+        "sha256": "cd1fab7c0f68626964a4e8c7ee71f8cf783860e50d7d6af6986d27ef56694325",
+        "size_bytes": 11760
+      }
+    },
+    "reconciled-C0-4i-23aa": {
+      "manifest": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/main-reconciliation/23aa/validation/manifest.json",
+        "sha256": "a837395cd9b22e61010d767f076561c6975922980f44e2e3fa3901b68b39a868",
+        "size_bytes": 30761
+      },
+      "result": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/main-reconciliation/23aa/validation/result.json",
+        "sha256": "605f02bd06b32de1ca786abb4b7d7e16e5dd0449a321bd96f805bc3370d357f4",
+        "size_bytes": 49531
+      }
+    },
+    "test-pins": {
+      "manifest": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/install/test-pins/manifest.json",
+        "sha256": "9a5931360f232cd4dd2bf928cbc7a487930a3e8af315f38b1f4035d4c6609bcd",
+        "size_bytes": 10406
+      },
+      "result": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/install/test-pins/result.json",
+        "sha256": "b1e0f716fdbfab460a6a1b8a3f9d4f2de2464b6667cda57374e0c87221526142",
+        "size_bytes": 20598
+      }
+    },
+    "world4e": {
+      "manifest": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/install/4e-world-write/manifest.json",
+        "sha256": "baaceaca504183b388ce8cba8303164132c492a3c4c7f434e79b8f3aefaf8318",
+        "size_bytes": 4072
+      },
+      "result": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/install/4e-world-write/result.json",
+        "sha256": "43366f7cc95de101079b2b1dfe5446f2f5aabe34a3b7c7642c935f35fe9d0f41",
+        "size_bytes": 13890
+      }
+    }
+  },
+  "pushed": false,
+  "qualified_normal_guard": {
+    "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/controller/interface-rebind-guard/owner-approved-468afde4-original19418/guard-retained-paths.json",
+    "sha256": "95b4d61e4dfee54e5cee655343628b8b4a86af82df900f6d078ff101a32c2d8b",
+    "size_bytes": 1607
+  },
+  "recorded_at_utc": "2026-10-28T21:09:03.729870+00:00",
+  "retained_five_holds": [
+    {
+      "forms": [
+        "gălbenușurilor"
+      ],
+      "id": "v117-galbenus",
+      "label": "Gălbenuș",
+      "owner_id": null,
+      "reason": "Selected own-head -uri N24 table was unbadged; the attributed -e table cannot lend its authority. Whole family held pending valid attributed own-head evidence.",
+      "retained_additional_forms": [],
+      "scope": "proposed `gălbenușurilor`"
+    },
+    {
+      "forms": [
+        "cleștilor"
+      ],
+      "id": "v119-cleste",
+      "label": "Clește",
+      "owner_id": "n_v32_workshop_hand_cleste",
+      "reason": "Own-head table `clește1 (pl. -i)`, model M45, had attributed_source=null. Literal presence alone did not establish required table attribution; whole family held.",
+      "retained_additional_forms": [],
+      "scope": "proposed `cleștilor`"
+    },
+    {
+      "forms": [
+        "minutelor"
+      ],
+      "id": "v130-minut",
+      "label": "Minut",
+      "owner_id": "n_v29_time_units_minut",
+      "reason": "Own-head table `minut1 (pl. -e)`, model N1, had attributed_source=null. Whole family held pending attributed own-head evidence.",
+      "retained_additional_forms": [],
+      "scope": "proposed `minutelor`, selected time sense"
+    },
+    {
+      "forms": [
+        "porturile"
+      ],
+      "id": "v132-port",
+      "label": "Port",
+      "owner_id": "n_v2soc_port",
+      "reason": "Excluded before research under its recorded whole-family hold; no request was issued and no clearing decision exists. Preserve the required prior decision/proof boundary; no automatic reopening.",
+      "retained_additional_forms": [
+        "portului",
+        "porturilor"
+      ],
+      "scope": "whole Port family, proposed `porturile`; retained `portului`/`porturilor` holds"
+    },
+    {
+      "forms": [
+        "străzii",
+        "străzilor"
+      ],
+      "id": "v116-strada",
+      "label": "Stradă",
+      "owner_id": "n_v4geo_strada",
+      "reason": "Recorded exclusion `scripts/basic_words_v29_data.py:231 BLOCKED_ALIAS_FORMS stradă`; same current owner does not override the exclusion.",
+      "retained_additional_forms": [],
+      "scope": "proposed `străzii`/`străzilor`, whole family"
+    }
+  ],
+  "scope": "Metadata/provenance only. SHA256 binds bytes; no cryptographic signatures, per-item owner authorization or full-green/landing/live qualification is invented. Raw reports/captures/transcripts/failures/private author seal and large index stay under E.",
+  "source15_original_base": "a7c2f8586b64be0d4b64f92118233ad52dd27003",
+  "source_applied_forms": 92,
+  "source_free_go_drop": {
+    "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n4/controller/interface-rebind-go-drop.json",
+    "sha256": "185856ddc1ff0a78a2294f9efb17425e4b888edbbba67cd5ed2a9ce788a2fe40",
+    "size_bytes": 21729
+  },
+  "standing_exclusions": {
+    "held": [
+      "pix",
+      "frate",
+      "fiu"
+    ],
+    "owner_go_required": [
+      "Mănăstire",
+      "Sucitor"
+    ],
+    "prohibited": [
+      "Ie: ii/iei",
+      "bare sucitoare"
+    ],
+    "separate_carried_prototype": "Ruladă v142-rulada/B13: node/four forms/four edges unapplied; approved Alchimie107 audit refused because supported projection audit required pending IDs; no relabel/rule change approved. Not a sixth curation drop."
+  },
+  "tested_reconciled_commit": "2e92381430f6dc7b8042300b41921bedfe92bccf",
+  "verified_new_synonyms": 0
+}
