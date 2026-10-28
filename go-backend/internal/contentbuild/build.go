@@ -15,7 +15,7 @@ var SourceNames = []string{"kg_sample.json", "derived_catalog_v38.json", "quick_
 
 // These are the three review-authority pins retained from the former native
 // exporter. New catalog/reserve versions require an explicitly reviewed pin update.
-var reviewedPins = map[string]string{"derived_catalog_v38.json": "1debab737c6c8fa3ad6f2acbbf6086751310d24d0600d83274d6ee51703017ae", "quick_games_v92.json": "ad73a0617e8bf7dee77776256860ac3f9abba2b2797ec826439b370127e74ef9", "release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7"}
+var reviewedPins = map[string]string{"derived_catalog_v38.json": "b207b6e9d12442583e66d06a62912d935691cf3cd7fefcd4ee0415e99eacb003", "quick_games_v92.json": "fad794767aeaae12ba7f1b7bccdde69f27ea25a319ae309d2835986a5134ae4c", "release_reserve_v1.json": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7"}
 
 const RubricSHA256 = "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101"
 
