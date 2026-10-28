@@ -120,7 +120,7 @@ test("long Romanian status stays readable with text zoom and a short viewport", 
   // Presentation stress only: no game state or network response is changed.
   await page.evaluate(() => {
     globalThis.document.documentElement.style.fontSize = "200%";
-    globalThis.document.querySelector(".stat-badge-value").textContent = "Personalități și viața de zi cu zi în România";
+    globalThis.document.querySelector(".alchemy-round-count").textContent = "Personalități și viața de zi cu zi în România";
     globalThis.document.querySelector(".game-shell-title").textContent = "Lanțul Cuvintelor Românești";
   });
   await layout(page, testInfo, "long-labels-200-percent");

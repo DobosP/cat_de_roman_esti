@@ -13,7 +13,6 @@ const slot = (page, label) => page.getByRole("button", {
   name: `Scoate ${label} din alambic`, exact: true,
 });
 const slots = (page) => page.getByRole("button", { name: /^Scoate .* din alambic$/ });
-const filter = (page, name) => page.getByRole("button", { name: new RegExp(`^${name} `) });
 const search = (page) => page.getByRole("searchbox", { name: "Caută în toate conceptele descoperite" });
 const responseFor = (page, id) => page.waitForResponse((reply) => reply.request().method() === "POST"
   && new URL(reply.url()).pathname === `${gameURL(game, id)}/combine`);
@@ -84,18 +83,18 @@ test("the initial game puts words above 500px and collapses secondary controls",
   const initial = await start(page, game);
   await expect(page.locator(".alchemy-workspace > .alchemy-bench")).toHaveCount(1);
   await expect(page.locator(".alchemy-workspace > .alchemy-inventory-panel")).toHaveCount(1);
-  await expect(inventory(page).getByRole("button")).toHaveCount(initial.inventory.filter((item) =>
-    item.useful && !item.depleted).length);
+  // User-approved successor: all owned words, plain labels and always-visible search.
+  await expect(inventory(page).getByRole("button")).toHaveCount(initial.inventory.length);
+  await expect(inventory(page).locator(".alchemy-word-label")).toHaveText(initial.inventory.map((item) => item.label).reverse());
+  await expect(inventory(page).locator(".alchemy-word-meta")).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Combină cele două concepte selectate" })).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Golește", exact: true })).toHaveCount(0);
   await expect(slots(page)).toHaveCount(0);
   await expect(page.locator(".alchemy-quick-results")).toHaveCount(0);
-  await expect(search(page)).toBeHidden();
+  await expect(search(page)).toBeVisible();
+  await expect(page.getByRole("button", { name: "Rețete", exact: true })).toBeVisible();
   await expect(page.getByRole("button", { name: /Reia același joc/ })).toBeHidden();
-  for (const [selector, name] of [
-    [".alchemy-library-tools", "Caută și filtrează"],
-    [".alchemy-menu", "Opțiuni de joc"],
-  ]) {
+  for (const [selector, name] of [[".alchemy-menu", "Opțiuni de joc"]]) {
     await expect(page.locator(selector)).not.toHaveAttribute("open");
     await expect(page.locator(selector).locator(":scope > summary")).toContainText(name);
   }
@@ -143,9 +142,12 @@ for (const keyboard of [false, true]) {
     await expect(slots(page)).toHaveCount(1);
     await expect(slot(page, earned.label)).toBeVisible();
     await expect(ingredient(page, earned.label)).toHaveAttribute("aria-pressed", "true");
-    await expect(page.locator(".alchemy-discoveries")).not.toHaveAttribute("open");
-    await expect(page.locator(".alchemy-reaction-result").first()).toBeHidden();
+    await expect(page.locator(".alchemy-reaction-history")).toBeHidden();
+    await expect(page.locator(".alchemy-reaction-history .alchemy-reaction-result").first()).toBeHidden();
     await expect(page.locator(".alchemy-feedback")).toContainText(earned.label);
+    for (const label of steps[0].labels) await expect(page.locator(".alchemy-last-reaction")).toContainText(label);
+    await expect(page.locator(".alchemy-last-reaction .alchemy-result-word")).toHaveText(earned.label);
+    await expect(inventory(page).locator(".alchemy-word-label").first()).toHaveText(earned.label);
     expect(posts).toEqual([steps[0].payload]);
     const partner = steps[1].labels.find((label) => label !== earned.label);
     expect(partner).toBeDefined();
@@ -171,7 +173,8 @@ test("keyboard discovery moves focus from a removed ingredient to the carried wo
   const discovered = await (await response).json();
   const earned = discovered.discovered[0];
   expect(discovered.inventory.find((item) => item.label === second).depleted).toBe(true);
-  await expect(ingredient(page, second)).toHaveCount(0);
+  await expect(ingredient(page, second)).toBeVisible();
+  await expect(ingredient(page, second)).toBeDisabled();
   await expect(slot(page, earned.label)).toBeVisible();
   await expect(ingredient(page, earned.label)).toBeFocused();
   await expect(page.locator(".alchemy-feedback")).toContainText(`${earned.label} rămâne ales.`);
@@ -205,7 +208,8 @@ test("a delayed discovery preserves focus moved to another control while the com
     release();
   }
   const discovered = await (await response).json();
-  await expect(ingredient(page, second)).toHaveCount(0);
+  await expect(ingredient(page, second)).toBeVisible();
+  await expect(ingredient(page, second)).toBeDisabled();
   await expect(slot(page, discovered.discovered[0].label)).toBeVisible();
   await expect(otherControl).toBeFocused();
 });
@@ -321,20 +325,18 @@ for (const view of ["Utile", "Toate"]) {
   test(`a discovery preserves the ${view} view and can be reused from the collapsed journal`, async ({ page }) => {
     const initial = await start(page, game);
     const posts = combineTraffic(page, initial.game_id);
-    await openAlchemyDisclosure(page, ".alchemy-library-tools");
-    await filter(page, view).click();
+    // The removed useful/all filters are replaced by two direct earned-result paths.
+    // Preserve both historical case keys and the same selection/no-extra-request checks.
     const response = responseFor(page, initial.game_id);
     for (const label of solution(game).steps[0].labels) await ingredient(page, label).click();
     const state = await (await response).json();
-    await expect(filter(page, view)).toHaveAttribute("aria-pressed", "true");
-    await expect(filter(page, "Recente")).toHaveAttribute("aria-pressed", "false");
+    await expect(inventory(page).getByRole("button")).toHaveCount(state.inventory.length);
     const earned = state.discovered[0];
     await expect(slot(page, earned.label)).toBeVisible();
     await slot(page, earned.label).click();
-    await expect(page.locator(".alchemy-discoveries")).not.toHaveAttribute("open");
-    await expect(page.locator(".alchemy-discoveries > summary")).toContainText("Descoperiri");
-    await openAlchemyDisclosure(page, ".alchemy-discoveries");
-    const result = page.locator(".alchemy-reaction-result").filter({
+    await expect(page.locator(".alchemy-reaction-history")).toBeHidden();
+    if (view === "Toate") await openAlchemyDisclosure(page, ".alchemy-discoveries");
+    const result = page.locator(view === "Toate" ? ".alchemy-reaction-history .alchemy-reaction-result" : ".alchemy-last-reaction .alchemy-result-word").filter({
       hasText: new RegExp(`${escapeRegex(earned.label)}$`),
     }).first();
     await result.click();
@@ -342,11 +344,17 @@ for (const view of ["Utile", "Toate"]) {
     await expect(slot(page, earned.label)).toBeVisible();
     expect(posts).toHaveLength(1);
     await result.click();
+    await expect(slot(page, earned.label)).toBeVisible();
+    expect(posts).toHaveLength(1);
+    await slot(page, earned.label).click();
     await expect(slots(page)).toHaveCount(0);
-    const partner = solution(game).steps[1].labels.find((label) => label !== earned.label);
-    await ingredient(page, partner).click();
-    const next = responseFor(page, initial.game_id);
     await result.click();
+    await expect(slot(page, earned.label)).toBeVisible();
+    expect(posts).toHaveLength(1);
+    const partner = solution(game).steps[1].labels.find((label) => label !== earned.label);
+    if (view === "Toate") await openAlchemyDisclosure(page, ".alchemy-library-tools");
+    const next = responseFor(page, initial.game_id);
+    await ingredient(page, partner).click();
     expect((await (await next).json()).won).toBe(true);
     expect(posts).toHaveLength(2);
   });
@@ -358,22 +366,20 @@ test("optional search and filters provide a direct way back from an empty result
   await openAlchemyDisclosure(page, ".alchemy-library-tools");
   await search(page).fill(first.label.normalize("NFD").replace(/\p{M}/gu, "").toLocaleLowerCase("ro-RO"));
   await expect(ingredient(page, first.label)).toBeVisible();
-  await filter(page, "Toate").click();
+  await search(page).press("Escape");
   await expect(search(page)).toHaveValue("");
   await expect(inventory(page).getByRole("button")).toHaveCount(initial.inventory.length);
   await search(page).fill("zzzz-fără-rezultat-v92-zzzz");
   await expect(page.getByText("Niciun concept găsit.", { exact: true })).toBeVisible();
-  await page.getByRole("button", { name: "Șterge căutarea", exact: true }).click();
+  await search(page).press("Escape");
   await expect(search(page)).toHaveValue("");
   await expect(inventory(page).getByRole("button")).toHaveCount(initial.inventory.length);
-  await expect(filter(page, "Toate")).toHaveAttribute("aria-pressed", "true");
+  await expect(search(page)).toBeFocused();
   await search(page).fill("zzzz-fără-rezultat-v92-zzzz");
-  await filter(page, "Utile").click();
+  await search(page).press("Escape");
   await expect(search(page)).toHaveValue("");
   await expect(page.getByText("Niciun concept găsit.", { exact: true })).toHaveCount(0);
-  await expect(inventory(page).getByRole("button")).toHaveCount(
-    initial.inventory.filter((item) => item.useful && !item.depleted).length,
-  );
+  await expect(inventory(page).getByRole("button")).toHaveCount(initial.inventory.length);
 });
 
 test("the workbench wraps long Romanian labels at 320px and 200 percent text", async ({ page }, testInfo) => {

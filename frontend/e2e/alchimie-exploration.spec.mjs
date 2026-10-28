@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { readFileSync } from "node:fs";
+import { openAlchemyDisclosure } from "./games.mjs";
 
 const BASE = "/api/alchimie/explore";
 const SAVE = "cat_alchimie_exploration_v1";
@@ -43,8 +44,9 @@ async function begin(page) {
 }
 
 async function getPair(page, state) {
+  await openAlchemyDisclosure(page, ".alchemy-menu");
   let response = responseTo(page, `${BASE}/${state.game_id}/hint`);
-  await page.getByRole("button", { name: "💡 O idee?", exact: true }).click();
+  await page.getByRole("button", { name: "O idee?", exact: true }).click();
   let current = await (await response).json();
   expect(current.hint.stage).toBe("output");
   expect(current.hint.pair).toBeNull();
@@ -71,6 +73,22 @@ test("exploration is the clean default, saves discoveries, searches accents and 
   let state = await begin(page);
   expect(state.goal_id).toBeNull();
   state = await discover(page, state);
+  const equation = page.locator(".alchemy-last-reaction");
+  await expect(equation).toContainText(state.discovered[0].label);
+  const earned = state.inventory.find((item) => item.id === state.discovered[0].id);
+  for (const ingredient of earned.parents) await expect(equation).toContainText(ingredient.label);
+  const equationText = await equation.innerText();
+  const followupPosts = [];
+  const observe = (request) => { if (request.method() === "POST") followupPosts.push(request.url()); };
+  page.on("request", observe);
+  await equation.locator(".alchemy-result-word").first().click();
+  await expect(page.getByRole("button", { name: `Scoate ${state.discovered[0].label} din alambic`, exact: true })).toBeVisible();
+  const visibleSearch = page.getByRole("searchbox", { name: "Caută în colecție" });
+  await visibleSearch.fill("zzzz-continuity");
+  await expect(equation).toHaveText(equationText);
+  await visibleSearch.press("Escape");
+  expect(followupPosts).toEqual([]);
+  page.off("request", observe);
   const checkpoint = await saved(page);
   const get = responseTo(page, `${BASE}/${state.game_id}`, "GET");
   await page.reload();
@@ -79,7 +97,7 @@ test("exploration is the clean default, saves discoveries, searches accents and 
   await expect(page.getByLabel("Obiectiv opțional", { exact: true })).toBeEnabled();
   const query = page.getByRole("searchbox", { name: "Caută în colecție" });
   const item = resumed.inventory.at(-1);
-  await page.locator(".alchemy-library-tools > summary").click();
+  await expect(query).toBeVisible();
   await query.fill(item.label.normalize("NFD").replace(/\p{M}/gu, ""));
   await expect(word(page, item.label)).toBeVisible();
   await query.press("Escape");
@@ -116,8 +134,9 @@ test("optional goal completion keeps exploration playable and pantry gifts arriv
   while (state.discovered_count < 3) state = await discover(page, state);
   expect(state.unlocked.length).toBeGreaterThan(0);
   expect(state.inventory.length).toBeGreaterThan(state.seed_count + state.discovered_count);
-  await page.locator(".alchemy-explore-journal > summary").click();
+  await openAlchemyDisclosure(page, ".alchemy-explore-journal");
   await expect(page.locator(".alchemy-journal-entry")).toHaveCount(state.discovered_count);
+  await openAlchemyDisclosure(page, ".alchemy-library-tools");
   const clear = responseTo(page, `${BASE}/${state.game_id}/goal`);
   await page.getByLabel("Obiectiv opțional", { exact: true }).selectOption("");
   const free = await (await clear).json();
@@ -277,13 +296,13 @@ test("a completed 111-concept collection keeps every earned item and opens the l
   await expect(page.getByRole("alert")).toHaveCount(0);
   await expect(page.getByLabel("Obiectiv opțional", { exact: true })).toHaveValue("cornulete");
   const query = page.getByRole("searchbox", { name: "Caută în colecție" });
-  await page.locator(".alchemy-library-tools > summary").click();
+  await expect(query).toBeVisible();
   await query.fill("cornulete");
   await expect(word(page, "Cornulețe")).toBeVisible();
   await query.press("Escape");
-  await page.locator(".alchemy-explore-journal > summary").click();
+  await openAlchemyDisclosure(page, ".alchemy-explore-journal");
   await expect(page.locator(".alchemy-journal-entry")).toHaveCount(58);
-  await page.locator(".alchemy-explore-journal > summary").click();
+  await openAlchemyDisclosure(page, ".alchemy-library-tools");
   const next = await discover(page, restored);
   expect(next.discovered_count).toBe(59);
   expect(next.progress.discoveries.slice(0, 58)).toEqual(checkpoint.progress.discoveries);
@@ -317,14 +336,15 @@ for (const [name, previous] of [["285-recipe", LARGE_CHECKPOINT], ["288-recipe",
     expect(restored.goal_id).toBe(checkpoint.goal_id);
     await expect.poll(async () => (await saved(page))?.progress).toEqual(restored.progress);
     await expect(page.getByRole("alert")).toHaveCount(0);
-    await page.locator(".alchemy-explore-journal > summary").click();
+    await openAlchemyDisclosure(page, ".alchemy-explore-journal");
     await expect(page.locator(".alchemy-journal-entry")).toHaveCount(117);
-    await page.locator(".alchemy-explore-journal > summary").click();
+    await openAlchemyDisclosure(page, ".alchemy-library-tools");
     const next = await discover(page, restored);
     expect(next.discovered_count).toBe(118);
     expect(next.progress.discoveries.slice(0,117)).toEqual(checkpoint.progress.discoveries);
     await page.reload();
-    await expect(page.locator(".alchemy-collection-count")).toContainText("222 /");
+    expect(next.inventory).toHaveLength(222);
+    await expect(page.locator(".alchemy-word")).toHaveCount(222);
     expect((await saved(page)).progress).toEqual(next.progress);
   });
 }
@@ -399,7 +419,7 @@ test("exploration intro, active collection and earned recipes are accessible", a
   }
   await discover(page, state);
   await audit("exploration-live");
-  await page.locator(".alchemy-explore-journal > summary").click();
+  await openAlchemyDisclosure(page, ".alchemy-explore-journal");
   await audit("exploration-recipes");
   await page.setViewportSize({ width: 320, height: 850 });
   await page.evaluate(() => { globalThis.document.documentElement.style.fontSize = "200%"; });
@@ -413,7 +433,8 @@ for (const width of [390, 320]) {
     await expect(page.locator(".screen")).toHaveCSS("opacity", "1");
     await page.evaluate(() => globalThis.document.fonts.ready);
     await expect(page.locator(".alchemy-explore-goal")).not.toHaveAttribute("open");
-    await expect(page.locator(".alchemy-library-tools")).not.toHaveAttribute("open");
+    await expect(page.getByRole("searchbox", { name: "Caută în colecție" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Rețete", exact: true })).toHaveAttribute("aria-expanded", "false");
     await expect(page.locator(".alchemy-word")).toHaveCount(8);
     for (const tile of await page.locator(".alchemy-word").all()) {
       await expect(tile).toBeInViewport({ ratio: 1 });
@@ -427,12 +448,15 @@ for (const width of [390, 320]) {
       if (request.method() === "POST" && request.url().includes(`${BASE}/${state.game_id}/`)) mutations.push(request.url());
     });
     await word(page, state.inventory[0].label).click();
-    for (const selector of [".alchemy-explore-goal", ".alchemy-library-tools"]) {
+    for (const selector of [".alchemy-explore-goal"]) {
       const summary = page.locator(`${selector} > summary`);
       await summary.click();
       await expect(page.locator(selector)).toHaveAttribute("open", "");
       await summary.click();
     }
+    await openAlchemyDisclosure(page, ".alchemy-explore-journal");
+    await expect(page.locator(".alchemy-explore-journal")).toBeVisible();
+    await openAlchemyDisclosure(page, ".alchemy-library-tools");
     await expect(word(page, state.inventory[0].label)).toHaveAttribute("aria-pressed", "true");
     expect(mutations).toEqual([]);
   });
@@ -451,7 +475,12 @@ test("exploration keeps bottom-of-collection craft feedback visible and lets sho
   await active.nth(-2).click();
   const result = await (await response).json();
   await expect(page.locator(".alchemy-bench .alchemy-feedback").first()).toContainText(result.message);
-  await expect(page.locator(".alchemy-bench .alchemy-feedback").first()).toBeInViewport({ ratio: 1 });
+  // Successful/known recipes use the full visible equation; misses keep visible feedback.
+  const visibleFeedback = result.result || result.discovered.length
+    ? page.locator(".alchemy-last-reaction")
+    : page.locator(".alchemy-bench .alchemy-feedback").first();
+  await expect(visibleFeedback).toBeVisible();
+  await expect(visibleFeedback).toBeInViewport({ ratio: 1 });
   await expect(page.locator(".alchemy-bench")).toHaveCSS("position", "sticky");
   expect(await page.locator(".alchemy-explore-screen").evaluate((element) => element.scrollTop)).toBeGreaterThan(100);
   await page.setViewportSize({ width: 320, height: 360 });

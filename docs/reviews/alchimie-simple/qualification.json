@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "operator": "agent:codex (PROGRAM E8)",
+  "base_sha": "23aa88fa228699eb7dee286196e8b38cb2ab2ec0",
+  "preflight": {
+    "command": "GATE_OPERATOR=agent:codex bash scripts/gate.sh shell --sha 23aa88fa228699eb7dee286196e8b38cb2ab2ec0 --dirty --parallel 2; npm ci --no-audit --no-fund; bash scripts/gui-game-preflight.sh",
+    "invocation": "ce6ada0e-58e6-4a6d-8f4c-84e5152819f3",
+    "tree_sha256": "59e478c4611a1d9c9636ad45bcfc50a0e0d8af47947fd5fb11eb9a8d5b643ffe",
+    "result_sha256": "bb3dbe01f6d38e3b082628d64571825ec9363f70f3b0832b35978e562a20e8ae",
+    "checks": [
+      {
+        "name": "typecheck",
+        "exit_code": 0
+      },
+      {
+        "name": "tools-typecheck",
+        "exit_code": 0
+      },
+      {
+        "name": "focused",
+        "exit_code": 0
+      },
+      {
+        "name": "scores",
+        "exit_code": 0
+      },
+      {
+        "name": "lint",
+        "exit_code": 0
+      },
+      {
+        "name": "build",
+        "exit_code": 0
+      },
+      {
+        "name": "docs",
+        "exit_code": 0
+      },
+      {
+        "name": "budgets",
+        "exit_code": 0
+      }
+    ]
+  },
+  "unit": {
+    "status": "pending"
+  },
+  "full": {
+    "status": "pending"
+  },
+  "review": {
+    "scope": "Independent source review of Challenge/shared CSS/docs; Explore reviewed by root and pinned preflight",
+    "finding": "Paid hint could hide its partner behind a search or recipe view",
+    "resolution": "Hint now clears word search and returns to words; preserves earned reaction and recipe query"
+  },
+  "boundaries": [
+    "No content/backend/save-format changes",
+    "Frozen baselines, budgets, original test titles and gate inputs retained",
+    "No production deployment or main push"
+  ]
+}

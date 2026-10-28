@@ -3,10 +3,8 @@
 // Server-authoritative: we render whatever the backend returns and never know the target
 // id until the server reveals it on a win.
 
-import type { ComponentProps } from "preact";
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "preact/hooks";
-import { Presence, useIsPresent } from "@roedu/ui/motion";
-import { useElementMotion } from "../hooks/useElementMotion";
+import { useIsPresent } from "@roedu/ui/motion";
 import { Button, Spinner, type ToastKind } from "@roedu/ui";
 import {
   alchimieApi,
@@ -21,10 +19,8 @@ import { createGameActionOwner, recoverOwnedGameAction, type GameActionTicket } 
 import { GameShell } from "../components/GameShell";
 import { ALCHIMIE_HELP } from "../gameHelp/alchimie.mjs";
 import { GameHelp } from "../components/GameHelp";
-import { ResultCard } from "../components/ResultCard";
 import { GameIntro } from "../components/GameIntro";
 import { StartFailureNotice } from "../components/StartFailureNotice";
-import { Hud, StatBadge } from "../components/Hud";
 import { DifficultyPicker } from "../components/DifficultyPicker";
 import { useActiveGame } from "../hooks/useActiveGame";
 import { useRecordScore } from "../hooks/useRecordScore";
@@ -40,7 +36,6 @@ import { buildSharePayload, copyResult, formatDayKey, stableKey, todayLocal } fr
 const GAME_KEY = "alchimie";
 const DEF = gameByKey("alchimie");
 
-const GOLD = "#ffd166";
 const REACTION_LOG_LIMIT = 12;
 
 const isTerminalResume = (state: AlchimieState) => state.won === true;
@@ -55,13 +50,12 @@ interface Reaction {
   results: CraftedItem[];
 }
 
-type InventoryView = "recent" | "useful" | "all";
-
-const INVENTORY_VIEW_LABEL: Record<InventoryView, string> = {
-  recent: "Recente",
-  useful: "Utile",
-  all: "Toate",
-};
+interface LatestReaction {
+  gameId: string;
+  parents: [Concept, Concept];
+  results: Concept[];
+  discoveryMessage?: string;
+}
 
 function isCraftedItem(item: InventoryItem): item is CraftedItem {
   return item.parents !== null;
@@ -131,11 +125,11 @@ export default function AlchimieChallenge({
   const [busy, setBusy] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
   const [emptyPairKey, setEmptyPairKey] = useState<string | null>(null);
-  // ids discovered by the most recent combine — used to animate them in.
-  const [freshIds, setFreshIds] = useState<Set<string>>(new Set());
-  // The pair the most recent nudge suggested — gets a glowing outline.
+  const [lastReaction, setLastReaction] = useState<LatestReaction | null>(null);
+  // Only an earned hint may mark a suggested pair.
   const [hintIds, setHintIds] = useState<Set<string>>(new Set());
-  const [inventoryView, setInventoryView] = useState<InventoryView>("useful");
+  const [recipesOpen, setRecipesOpen] = useState(false);
+  const [recipeQuery, setRecipeQuery] = useState("");
   const [inventoryQuery, setInventoryQuery] = useState("");
   const [lastMessage, setLastMessage] = useState<string | null>(null);
   const [difficulty, setDifficulty] = useState<Difficulty>("usor");
@@ -144,10 +138,11 @@ export default function AlchimieChallenge({
   const [isPuzzleRecord, setIsPuzzleRecord] = useState(false);
   const inventoryButtonsRef = useRef(new Map<string, HTMLButtonElement>());
   const inventoryPanelRef = useRef<HTMLElement>(null);
+  const completionHeadingRef = useRef<HTMLHeadingElement>(null);
+  const completionFocusedGameRef = useRef<string | null>(null);
   const pendingCraftFocusRef = useRef<{ gameId: string; origin: HTMLElement; targetId: string | null } | null>(null);
   const dragSourceRef = useRef<{ id: string; gameId: string } | null>(null);
   const [dragOverId, setDragOverId] = useState<string | null>(null);
-  const [toolsOpen, setToolsOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [actionSync, setActionSync] = useState<ActionSync | null>(null);
   const actionOwner = useMemo(() => createGameActionOwner(active), [active]);
@@ -161,15 +156,21 @@ export default function AlchimieChallenge({
 
   const best = useMemo(() => bestScore(GAME_KEY), []);
 
-  const applyAuthoritativeState = useCallback((fresh: AlchimieState) => {
+  const applyAuthoritativeState = useCallback((fresh: AlchimieState, options: { preserveLibrary?: boolean; preserveReaction?: boolean } = {}) => {
     pendingCraftFocusRef.current = null;
     setState(fresh);
     setSelected(fresh.earned_hint?.hint?.slice(0, 1).map((item) => item.id) ?? []);
     setEmptyPairKey(null);
-    setFreshIds(new Set());
     setHintIds(new Set(fresh.earned_hint?.hint?.map((item) => item.id) ?? []));
-    setInventoryView("useful");
-    setInventoryQuery("");
+    if (!options.preserveLibrary) {
+      setInventoryQuery("");
+      setRecipeQuery("");
+      setRecipesOpen(false);
+    }
+    if (!options.preserveReaction) {
+      const latest = buildReactionLog(fresh.inventory)[0];
+      setLastReaction(latest ? { gameId: fresh.game_id, parents: latest.parents, results: latest.results } : null);
+    }
     setLastMessage(null);
   }, []);
 
@@ -230,7 +231,9 @@ export default function AlchimieChallenge({
         const s = await alchimieApi.create(opts);
         if (!liveRef.current || epoch !== lifetimeRef.current) return;
         setState(s);
-        setToolsOpen(false);
+        setRecipesOpen(false);
+        setRecipeQuery("");
+        setLastReaction(null);
         setMenuOpen(false);
         dragSourceRef.current = null;
         setDragOverId(null);
@@ -240,9 +243,7 @@ export default function AlchimieChallenge({
         dismissRecovery();
         setSelected([]);
         setEmptyPairKey(null);
-        setFreshIds(new Set());
         setHintIds(new Set());
-        setInventoryView("useful");
         setInventoryQuery("");
         setLastMessage(null);
         setIsRecord(false);
@@ -260,6 +261,15 @@ export default function AlchimieChallenge({
   );
 
   const won = state?.won ?? false;
+  const currentGameId = state?.game_id;
+  useLayoutEffect(() => {
+    if (!liveRef.current || !isPresent || !won || !currentGameId || completionFocusedGameRef.current === currentGameId) return;
+    const heading = completionHeadingRef.current;
+    if (!heading) return;
+    completionFocusedGameRef.current = currentGameId;
+    heading.focus();
+  }, [won, currentGameId, isPresent]);
+
 
   const puzzleKey = useMemo(() => {
     if (!state?.won || !state.target.id) return null;
@@ -366,7 +376,7 @@ export default function AlchimieChallenge({
       return;
     }
     setActionSync(null);
-    applyAuthoritativeState(outcome.state);
+    applyAuthoritativeState(outcome.state, { preserveLibrary: true });
     // GET has current inventory and an earned cue, not the lost combine verdict.
     if (!outcome.state.won) setLastMessage("Joc sincronizat. Poți continua.");
   }, [actionOwner, active, applyAuthoritativeState, mayAdoptAction, onToast]);
@@ -404,7 +414,9 @@ export default function AlchimieChallenge({
     ) {
       return;
     }
+    const parents = pair.map((id) => state.inventory.find((item) => item.id === id)) as [InventoryItem, InventoryItem];
     if (pairKey(pair) === emptyPairKey) {
+      setLastReaction({ gameId: state.game_id, parents, results: [] });
       setLastMessage("Ai încercat deja această pereche. Atinge un alt partener.");
       return;
     }
@@ -423,9 +435,12 @@ export default function AlchimieChallenge({
         return;
       }
       setState(res);
+      const earnedResults = res.inventory.filter((item) => item.parents !== null && pairKey(item.parents.map((parent) => parent.id)) === pairKey(pair));
+      const publicResults = new Map<string, Concept>(earnedResults.map((item) => [item.id, item]));
+      for (const item of res.discovered) publicResults.set(item.id, item);
+      setLastReaction({ gameId: res.game_id, parents, results: [...publicResults.values()], ...(res.discovered.length > 0 ? { discoveryMessage: res.message } : {}) });
       const recoverableEmpty = res.discovered.length === 0 && !res.won;
       let focusTargetId: string | null = null;
-      let carriedLabel: string | null = null;
       if (recoverableEmpty) {
         setSelected([a]);
         setEmptyPairKey(pairKey([a, b]));
@@ -437,7 +452,6 @@ export default function AlchimieChallenge({
         setSelected(!res.won && usableDiscoveries.length === 1 ? [usableDiscoveries[0].id] : []);
         if (!res.won && usableDiscoveries.length === 1) {
           focusTargetId = usableDiscoveries[0].id;
-          carriedLabel = usableDiscoveries[0].label;
         }
         setEmptyPairKey(null);
       }
@@ -446,7 +460,6 @@ export default function AlchimieChallenge({
       }
       setHintIds(new Set());
       let feedback = res.message;
-      if (carriedLabel) feedback += ` ${carriedLabel} rămâne ales.`;
       if (recoverableEmpty && !res.already_tried) {
         feedback += " Primul cuvânt rămâne ales. Atinge alt partener.";
       }
@@ -455,12 +468,9 @@ export default function AlchimieChallenge({
       }
       setLastMessage(feedback);
       if (res.discovered.length > 0) {
-        setFreshIds(new Set(res.discovered.map((d: Concept) => d.id)));
-        setInventoryQuery("");
         if (!res.won) sound.playHop();
         // win sound handled by the won effect
       } else {
-        setFreshIds(new Set());
         sound.playUndo();
       }
     } catch {
@@ -476,7 +486,6 @@ export default function AlchimieChallenge({
     setSelected([]);
     setEmptyPairKey(null);
     setHintIds(new Set());
-    setLastMessage(null);
   }, [actionsLocked, actionOwner]);
 
   const toggle = useCallback((id: string) => {
@@ -491,9 +500,17 @@ export default function AlchimieChallenge({
       sound.playSelect();
       setSelected([id]);
       setEmptyPairKey(null);
-      setLastMessage(null);
     }
   }, [state, selected, actionsLocked, won, actionOwner, clearSelection, doCombine]);
+
+  const selectResult = useCallback((id: string) => {
+    if (startInFlightRef.current || actionsLocked || won || actionOwner.hasPending()) return;
+    const item = state?.inventory.find((owned) => owned.id === id);
+    if (!item || item.depleted) return;
+    setSelected([id]);
+    setEmptyPairKey(null);
+    sound.playSelect();
+  }, [state, actionsLocked, won, actionOwner]);
 
   const removeFromBench = useCallback((id: string) => {
     if (startInFlightRef.current || actionsLocked || actionOwner.hasPending()) return;
@@ -537,8 +554,10 @@ export default function AlchimieChallenge({
     setBusy(false);
     setSelected([]);
     setEmptyPairKey(null);
-    setInventoryView("useful");
     setInventoryQuery("");
+    setRecipeQuery("");
+    setRecipesOpen(false);
+    setLastReaction(null);
     setState(null);
   }, [active, state, busy, actionSync, actionOwner]);
 
@@ -555,7 +574,9 @@ export default function AlchimieChallenge({
         await reconcileAction(ticket);
         return;
       }
-      applyAuthoritativeState(fresh);
+      applyAuthoritativeState(fresh, { preserveLibrary: true, preserveReaction: true });
+      setInventoryQuery("");
+      setRecipesOpen(false);
       // Defensive no-cue response remains visible, without pretending it was earned.
       if (!fresh.earned_hint) setLastMessage(fresh.message);
       sound.playSelect();
@@ -594,7 +615,7 @@ export default function AlchimieChallenge({
     if (!liveRef.current || !state || state.game_id !== pending.gameId || won) return;
     const focused = document.activeElement;
     // A removed/depleted word can lose focus. Respect navigation to another control
-    // while the request was pending, and leave terminal focus to ResultCard.
+    // while the request was pending; the terminal summary stays in the main flow.
     if (focused !== document.body && focused !== pending.origin) return;
     if (focused === pending.origin && pending.origin.isConnected &&
       !(pending.origin instanceof HTMLButtonElement && pending.origin.disabled)) return;
@@ -602,29 +623,13 @@ export default function AlchimieChallenge({
     if (target && !target.disabled) target.focus({ preventScroll: true });
     else inventoryPanelRef.current?.focus({ preventScroll: true });
   }, [state, busy, won, actionsLocked]);
-  const inventoryCounts = useMemo(
-    () => ({
-      recent: inventory.filter((item) => item.recent && !item.depleted).length,
-      useful: inventory.filter((item) => item.useful && !item.depleted).length,
-      all: inventory.length,
-    }),
-    [inventory],
-  );
   const normalizedInventoryQuery = useMemo(
     () => normalizeInventorySearch(inventoryQuery),
     [inventoryQuery],
   );
   const visibleInventory = useMemo(
-    () =>
-      inventory.filter((item) => {
-        if (normalizedInventoryQuery) {
-          return normalizeInventorySearch(item.label).includes(normalizedInventoryQuery);
-        }
-        if (inventoryView === "all") return true;
-        if (inventoryView === "recent") return item.recent && !item.depleted;
-        return item.useful && !item.depleted;
-      }),
-    [inventory, inventoryView, normalizedInventoryQuery],
+    () => inventory.filter((item) => !normalizedInventoryQuery || normalizeInventorySearch(item.label).includes(normalizedInventoryQuery)).slice().reverse(),
+    [inventory, normalizedInventoryQuery],
   );
   const selectedItems = useMemo(
     () =>
@@ -634,14 +639,10 @@ export default function AlchimieChallenge({
     [selected, inventory],
   );
   const reactionLog = useMemo(() => buildReactionLog(inventory), [inventory]);
-  const winningTargetId = state?.target.id;
-  const winningReaction =
-    won && winningTargetId
-      ? (reactionLog.find((reaction) =>
-          reaction.results.some((item) => item.id === winningTargetId),
-        ) ?? null)
-      : null;
-
+  const normalizedRecipeQuery = normalizeInventorySearch(recipeQuery);
+  const visibleRecipes = reactionLog.filter((reaction) =>
+    !normalizedRecipeQuery || [...reaction.parents, ...reaction.results].some((item) => normalizeInventorySearch(item.label).includes(normalizedRecipeQuery)),
+  );
   // Native button activation handles both taps and keyboard crafting. Escape only cancels.
   useLayoutEffect(() => {
     if (!state || won) return;
@@ -737,19 +738,15 @@ export default function AlchimieChallenge({
     <div className="screen-pad fill alchemy-screen alchemy-challenge" aria-busy={creating}>
       {creating && <span className="visually-hidden" role="status">Se pregătește jocul…</span>}
       <div inert={creating} className="container col game-container alchemy-game">
-        {/* Header */}
         <GameShell onExit={exitSafely} accent={DEF.accent} title={DEF.title} busy={creating}>
-          <Hud>
-            <StatBadge label="Combinații" value={state.moves} accent={DEF.accent} />
-          </Hud>
+          <span className="alchemy-round-count">{state.moves} {state.moves === 1 ? "combinație" : "combinații"}</span>
         </GameShell>
         <AlchimieModes mode="challenges" busy={creating || busy || loading} />
 
         <section className={`alchemy-target${won ? " alchemy-target--won" : ""}`} aria-label="Ținta de făurit">
-          <span className="alchemy-target-icon" aria-hidden>{won ? "★" : "◎"}</span>
           <div className="alchemy-target-copy">
             <div className="alchemy-target-meta">
-              <span className="alchemy-eyebrow">{won ? "ȚINTA FĂURITĂ" : "SCOPUL TĂU · CREEAZĂ"}</span>
+              <span className="alchemy-eyebrow">{won ? "ȚINTA FĂURITĂ" : "CREEAZĂ"}</span>
               <span className="alchemy-theme">
                 {state.board_category && `${categoryLabel(state.board_category)} · `}{DIFFICULTY_LABEL[state.difficulty]}
                 {state.daily && ` · ${formatDayKey(state.daily)}`}
@@ -757,410 +754,125 @@ export default function AlchimieChallenge({
             </div>
             <h2>{state.target.label}</h2>
             {state.target.description && <p>{state.target.description}</p>}
+            {won && <div className="alchemy-challenge-complete">
+              <h2 ref={completionHeadingRef} tabIndex={-1} className="alchemy-completion-heading">Ai făurit ținta!</h2>
+              <p>{state.score} puncte.{isRecord ? " Record personal." : isPuzzleRecord ? " Recordul acestei provocări." : ""}</p>
+              <StartFailureNotice failed={startFailed} reserveSpace />
+              <div className="row wrap alchemy-completion-actions">
+                <Button type="button" disabled={creating} onClick={() => void start({ difficulty: state.difficulty, category: state.board_category ?? undefined })}>{creating ? "Se pregătește…" : "Încă unul →"}</Button>
+                {sharePayload && <Button type="button" variant="secondary" disabled={creating} onClick={() => void handleCopy()}>Copiază rezultatul</Button>}
+                <Button type="button" variant="secondary" disabled={creating} onClick={newGame}>Schimbă opțiunile</Button>
+                <Button type="button" variant="secondary" disabled={creating} onClick={exitSafely}>Meniu</Button>
+              </div>
+            </div>}
           </div>
         </section>
 
         <div className="alchemy-workspace">
-          {/* Combine bench */}
-          {!won && (
-            <div
-              className="card alchemy-bench"
-              aria-label="Alambic"
-            >
-              <div className="alchemy-craft-cue" id="alchemy-instructions">
-                {selectedItems[0] ? (
-                  <>
-                    <Slot item={selectedItems[0]} onRemove={removeFromBench} disabled={actionsLocked} />
-                    <span className="alchemy-craft-plus" aria-hidden>+</span>
-                    <span className="alchemy-craft-prompt">Atinge un alt cuvânt</span>
-                  </>
-                ) : (
-                  <p className="alchemy-craft-prompt">Atinge un cuvânt, apoi altul. Se combină imediat.</p>
-                )}
-              </div>
-              {busy && <span role="status" className="alchemy-working">Se verifică…</span>}
-              {/* Last combine feedback */}
-              <Presence mode="wait" variant={{ enter: { opacity: [0, 1], transform: ["translateY(4px)", "translateY(0px)"] }, exit: { opacity: [1, 0] } }}>
-                {lastMessage && !won && (
-                  <p
-                    key={lastMessage + state.moves}
-                    className={`alchemy-feedback${emptyPairKey ? " alchemy-feedback--empty" : ""}`}
-                    role="status"
-                    aria-live="polite"
-                    aria-atomic="true"
-                  >
-                    {lastMessage}
-                  </p>
-                )}
-              </Presence>
-
-              {!won && actionSync ? (
-                <div className="card col alchemy-sync-recovery" role="alert">
-                  <strong>{actionSync.kind === "changed" ? "Jocul salvat s-a schimbat." : "Verificarea jocului nu a reușit."}</strong>
-                  <span>{actionSync.kind === "changed"
-                    ? "Încarcă jocul curent pentru a continua."
-                    : "Acțiunea poate fi deja salvată. Verifică jocul înainte de o nouă combinație, un indiciu sau o reluare."}</span>
-                  <Button type="button" onClick={() => void retryActionSync()} disabled={busy}>
-                    {busy ? "Se verifică…" : actionSync.kind === "changed" ? "Încarcă jocul curent" : "Verifică jocul"}
-                  </Button>
-                </div>
-              ) : null}
-
-              {!won && state.earned_hint ? (
-                <div className="card alchemy-earned-hint" role="status">
-                  {state.earned_hint.message}
-                </div>
-              ) : null}
-
-              {state.hint_available && (
-                <div className="alchemy-assistance">
-                  <Button
-                    type="button"
-                    variant="secondary"
-                    className="alchemy-challenge-hint"
-                    disabled={actionsLocked}
-                    onClick={() => void doHint()}
-                    title={
-                      state.hint_stage === "output"
-                        ? "Îți arată un rezultat apropiat"
-                        : "Îți arată o pereche utilă"
-                    }
-                    aria-describedby="alchemy-hint-cost"
-                  >
-                    💡 Indiciu
-                  </Button>
-                  <span id="alchemy-hint-cost">Folosește un indiciu · penalizare de 150 puncte.</span>
-                </div>
-              )}
+          <div className="alchemy-bench" aria-label="Alambic">
+            <div className="alchemy-craft-cue" id="alchemy-instructions">
+              {won ? <p className="alchemy-craft-prompt">Poți răsfoi cuvintele și rețetele rundei.</p> : selectedItems[0] ? <>
+                <Slot item={selectedItems[0]} onRemove={removeFromBench} disabled={actionsLocked} />
+                <span className="alchemy-craft-plus" aria-hidden>+</span>
+                <span className="alchemy-craft-prompt">Alege un alt cuvânt</span>
+              </> : <p className="alchemy-craft-prompt">Alege două cuvinte. Se combină imediat.</p>}
             </div>
-          )}
+            {busy && <span role="status" className="alchemy-working">Se verifică…</span>}
+            {lastReaction?.gameId === state.game_id && <div className="alchemy-last-reaction" aria-label="Ultima combinație">
+              <span>{lastReaction.parents[0].label} + {lastReaction.parents[1].label} → </span>
+              {lastReaction.results.length ? lastReaction.results.map((item, index) => <span key={item.id}>
+                {index > 0 && ", "}<button type="button" className="alchemy-result-word alchemy-reaction-result"
+                  disabled={actionsLocked || won || inventoryById.get(item.id)?.depleted !== false}
+                  aria-pressed={selected.includes(item.id)} aria-label={`Alege ${item.label}`} onClick={() => selectResult(item.id)}>{item.label}</button>
+              </span>) : <span>fără descoperiri noi</span>}
+            </div>}
+            {lastMessage && <p className={`alchemy-feedback${emptyPairKey ? " alchemy-feedback--empty" : ""}${lastReaction?.gameId === state.game_id && lastReaction.discoveryMessage === lastMessage ? " visually-hidden" : ""}`} role="status" aria-live="polite" aria-atomic="true">{lastMessage}</p>}
+            {actionSync && <div className="col alchemy-sync-recovery" role="alert">
+              <strong>{actionSync.kind === "changed" ? "Jocul salvat s-a schimbat." : "Verificarea jocului nu a reușit."}</strong>
+              <span>{actionSync.kind === "changed" ? "Încarcă jocul curent pentru a continua." : "Acțiunea poate fi deja salvată. Verifică jocul înainte de o nouă combinație, un indiciu sau o reluare."}</span>
+              <Button type="button" onClick={() => void retryActionSync()} disabled={busy}>{busy ? "Se verifică…" : actionSync.kind === "changed" ? "Încarcă jocul curent" : "Verifică jocul"}</Button>
+            </div>}
+            {!won && state.earned_hint && <p className="alchemy-earned-hint" role="status">{state.earned_hint.message}</p>}
+            {state.hint_available && !won && <div className="alchemy-assistance">
+              <Button type="button" variant="secondary" className="alchemy-challenge-hint" disabled={actionsLocked}
+                onClick={() => void doHint()} aria-describedby="alchemy-hint-cost">Indiciu</Button>
+              <span id="alchemy-hint-cost">Penalizare de 150 puncte.</span>
+            </div>}
+          </div>
 
-          {/* Inventory */}
-          <section ref={inventoryPanelRef} tabIndex={-1} className="card col alchemy-inventory-panel" aria-label="Inventar">
-            <div className="alchemy-panel-heading">
-              <span className="alchemy-step" aria-hidden>Aa</span>
-              <h3>Cuvintele tale</h3>
-              <span className="alchemy-selection-count">{state.inventory_summary.active} utile</span>
-            </div>
-            <details className="alchemy-library-tools" open={toolsOpen} onToggle={(event) => setToolsOpen(event.currentTarget.open)}>
-              <summary>Caută și filtrează</summary>
-              <div className="alchemy-library-content">
-                <p className="alchemy-inventory-note">
-                  Utile arată cuvintele care mai pot produce descoperiri. În Toate găsești și cuvintele puse deoparte.
-                  {state.inventory_summary.depleted > 0 && ` Puse deoparte: ${state.inventory_summary.depleted}.`}
-                </p>
-
-                <div
-                  className="alchemy-inventory-tabs"
-                  role="group"
-                  aria-label="Filtrează inventarul"
-                >
-                  {(["useful", "recent", "all"] as InventoryView[]).map((view) => (
-                    <button
-                      key={view}
-                      type="button"
-                      aria-pressed={inventoryView === view}
-                      className="chip alchemy-inventory-tab"
-                      onClick={() => {
-                        sound.playSelect();
-                        setInventoryView(view);
-                        setInventoryQuery("");
-                      }}
-                    >
-                      {INVENTORY_VIEW_LABEL[view]} {inventoryCounts[view]}
-                    </button>
-                  ))}
-                </div>
-                <div className="alchemy-search-row">
-                  <input
-                    type="search"
-                    className="field alchemy-inventory-search"
-                    value={inventoryQuery}
-                    onInput={(event) => setInventoryQuery(event.currentTarget.value)}
-                    onKeyDown={(event) => {
-                      if (event.key === "Escape" && inventoryQuery) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                        setInventoryQuery("");
-                      }
-                    }}
-                    placeholder="Caută în toate…"
-                    aria-label="Caută în toate conceptele descoperite"
-                    autoComplete="off"
-                    spellcheck={false}
-                  />
-                  {inventoryQuery && (
-                    <button className="alchemy-clear-search" type="button" onClick={() => setInventoryQuery("")}>
-                      Șterge căutarea
-                    </button>
-                  )}
-                </div>
+          <section ref={inventoryPanelRef} tabIndex={-1} className="col alchemy-inventory-panel" aria-label="Inventarul acestei runde">
+            <div className="alchemy-library-tools">
+              <div className="alchemy-library-toolbar">
+                <input type="search" className="field alchemy-inventory-search" value={recipesOpen ? recipeQuery : inventoryQuery}
+                  onInput={(event) => { if (recipesOpen) setRecipeQuery(event.currentTarget.value); else setInventoryQuery(event.currentTarget.value); }}
+                  onKeyDown={(event) => { if (event.key === "Escape" && (recipesOpen ? recipeQuery : inventoryQuery)) { event.preventDefault(); event.stopPropagation(); if (recipesOpen) setRecipeQuery(""); else setInventoryQuery(""); } }}
+                  placeholder={recipesOpen ? "Caută o rețetă…" : "Caută un cuvânt…"}
+                  aria-label={recipesOpen ? "Caută în rețetele descoperite" : "Caută în toate conceptele descoperite"}
+                  autoComplete="off" spellcheck={false} />
+                <button type="button" className="alchemy-recipes-toggle" aria-expanded={recipesOpen} aria-controls="alchemy-challenge-library"
+                  onClick={() => setRecipesOpen((open) => !open)}>{recipesOpen ? "Cuvinte" : "Rețete"}</button>
               </div>
-            </details>
-            <div className="alchemy-inventory-grid">
-              <>
+            </div>
+            <div id="alchemy-challenge-library">
+              {recipesOpen ? <div className="alchemy-reaction-history" role="region" aria-label="Rețetele acestei runde">
+                {visibleRecipes.map((reaction) => <ReactionRow key={`${reaction.ingredientKey}:${reaction.results.map((item) => item.id).join(",")}`}
+                  reaction={reaction} selected={selected} inventoryById={inventoryById} busy={actionsLocked || won} onSelect={selectResult} />)}
+                {!visibleRecipes.length && <p className="alchemy-empty-inventory">{reactionLog.length ? "Nicio rețetă găsită." : "Rețetele apar aici după primele descoperiri."}</p>}
+              </div> : <div className="alchemy-inventory-grid">
                 {visibleInventory.map((item) => {
                   const isSel = selected.includes(item.id);
-                  const isFresh = freshIds.has(item.id);
                   const isHint = hintIds.has(item.id);
-                  const isCrafted = item.parents !== null;
                   const isTried = selected.length === 1 && pairKey([selected[0], item.id]) === emptyPairKey;
-                  const title = item.depleted
-                    ? "Nu mai produce elemente noi"
-                    : item.ready
-                      ? `${parentsOf(item) ?? "Concept de start"} · Pereche utilă gata`
-                      : (parentsOf(item) ?? "Concept de start");
-                  const accessibleLabel = item.depleted
-                    ? `${item.label}, pus deoparte`
-                    : item.ready
-                      ? `${item.label}, gata pentru o combinație utilă`
-                      : item.label;
-                  return (
-                    <AlchemyWord
-                      key={item.id}
-                      buttonRef={(node) => {
-                        if (node) inventoryButtonsRef.current.set(item.id, node);
-                        else inventoryButtonsRef.current.delete(item.id);
-                      }}
-                      type="button"
-                      fresh={isFresh}
-                      pulsing={isHint && !isSel}
-                      onClick={() => toggle(item.id)}
-                      draggable={!actionsLocked && !won && !item.depleted}
-                      onDragStartCapture={(event) => {
-                        if (!event.dataTransfer || actionsLocked || won || item.depleted || actionOwner.hasPending()) {
-                          event.preventDefault();
-                          return;
-                        }
-                        dragSourceRef.current = { id: item.id, gameId: state.game_id };
-                        event.dataTransfer.setData("text/plain", item.id);
-                        event.dataTransfer.effectAllowed = "copy";
-                      }}
-                      onDragOver={(event) => {
-                        if (event.dataTransfer && !actionsLocked && !won && !item.depleted && dragSourceRef.current?.gameId === state.game_id && dragSourceRef.current.id !== item.id) {
-                          event.preventDefault();
-                          event.dataTransfer.dropEffect = "copy";
-                          setDragOverId(item.id);
-                        }
-                      }}
-                      onDragLeave={() => setDragOverId(null)}
-                      onDragEndCapture={() => { dragSourceRef.current = null; setDragOverId(null); }}
-                      onDrop={(event) => {
-                        event.preventDefault();
-                        const source = dragSourceRef.current;
-                        dragSourceRef.current = null;
-                        setDragOverId(null);
-                        if (event.dataTransfer && source?.gameId === state.game_id && source.id === event.dataTransfer.getData("text/plain")) {
-                          void doCombine([source.id, item.id]);
-                        }
-                      }}
-                      disabled={actionsLocked || won || item.depleted}
-                      aria-pressed={isSel}
-                      aria-label={accessibleLabel}
-                      title={title}
-                      className={(`chip alchemy-word${isSel ? " alchemy-word--selected" : ""}${isFresh ? " alchemy-word--fresh" : ""}${isHint ? " alchemy-word--hint" : ""}${isTried ? " alchemy-word--tried" : ""}${dragOverId === item.id ? " alchemy-word--drop" : ""}${isCrafted ? " alchemy-word--crafted" : ""}`) + (item.depleted ? " csp-motion-opacity-50" : "")}
-                    >
-                      <span className="alchemy-word-label">{item.label}</span>
-                      {(isSel || isFresh || isTried || item.depleted) && (
-                        <span className="alchemy-word-meta" aria-hidden="true">
-                          {isSel ? "✓ Ales" : item.depleted ? "Pus deoparte" : isTried ? "Încercat" : "✦ Nou"}
-                        </span>
-                      )}
-                    </AlchemyWord>
-                  );
+                  return <button key={item.id} ref={(node) => { if (node) inventoryButtonsRef.current.set(item.id, node); else inventoryButtonsRef.current.delete(item.id); }}
+                    type="button" onClick={() => toggle(item.id)} draggable={!actionsLocked && !won && !item.depleted}
+                    onDragStartCapture={(event) => {
+                      if (!event.dataTransfer || actionsLocked || won || item.depleted || actionOwner.hasPending()) { event.preventDefault(); return; }
+                      dragSourceRef.current = { id: item.id, gameId: state.game_id };
+                      event.dataTransfer.setData("text/plain", item.id); event.dataTransfer.effectAllowed = "copy";
+                    }}
+                    onDragOver={(event) => { if (event.dataTransfer && !actionsLocked && !won && !item.depleted && dragSourceRef.current?.gameId === state.game_id && dragSourceRef.current.id !== item.id) { event.preventDefault(); event.dataTransfer.dropEffect = "copy"; setDragOverId(item.id); } }}
+                    onDragLeave={() => setDragOverId(null)} onDragEndCapture={() => { dragSourceRef.current = null; setDragOverId(null); }}
+                    onDrop={(event) => { event.preventDefault(); const source = dragSourceRef.current; dragSourceRef.current = null; setDragOverId(null); if (event.dataTransfer && source?.gameId === state.game_id && source.id === event.dataTransfer.getData("text/plain")) void doCombine([source.id, item.id]); }}
+                    disabled={actionsLocked || won || item.depleted} aria-pressed={isSel}
+                    aria-label={item.depleted ? `${item.label}, pus deoparte` : item.label}
+                    title={item.depleted ? "Nu mai produce descoperiri noi. Rețetele rămân disponibile." : parentsOf(item) ?? "Concept de start"}
+                    className={`chip alchemy-word${isSel ? " alchemy-word--selected" : ""}${isHint ? " alchemy-word--hint" : ""}${isTried ? " alchemy-word--tried" : ""}${dragOverId === item.id ? " alchemy-word--drop" : ""}`}>
+                    <span className="alchemy-word-label">{item.label}</span>
+                  </button>;
                 })}
-              </>
-              {!normalizedInventoryQuery && visibleInventory.length === 0 && (
-                <p className="alchemy-empty-inventory">
-                  Niciun cuvânt în acest filtru. <button type="button" onClick={() => setInventoryView("useful")}>Vezi cuvintele utile</button>
-                </p>
-              )}
-              {normalizedInventoryQuery && visibleInventory.length === 0 && (
-                <p className="faint center alchemy-empty-search">
-                  Niciun concept găsit.
-                </p>
-              )}
+                {!visibleInventory.length && <p className="alchemy-empty-inventory">Niciun concept găsit.</p>}
+              </div>}
             </div>
           </section>
-
         </div>
 
         <GameHelp help={ALCHIMIE_HELP} />
         <details className="alchemy-menu" open={menuOpen} onToggle={(event) => setMenuOpen(event.currentTarget.open)}>
           <summary>Opțiuni de joc</summary>
           <div className="alchemy-menu-content">
-            {/* Server-authored lineage is available on request. */}
-            {!won && reactionLog.length > 0 && (
-              <details className="alchemy-discoveries">
-                <summary>Descoperiri</summary>
-                <div className="row spread wrap alchemy-reaction-heading">
-                  <span
-                    id="alchemy-reaction-log-title"
-                    className="faint"
-                  >
-                    ULTIMA DESCOPERIRE
-                  </span>
-                  <span className="muted alchemy-reaction-count">
-                    {reactionLog.length === 1
-                      ? "1 reacție păstrată"
-                      : reactionLog.length + " reacții păstrate"}
-                  </span>
-                </div>
-
-                <ReactionRow
-                  reaction={reactionLog[0]}
-                  selected={selected}
-                  freshIds={freshIds}
-                  inventoryById={inventoryById}
-                  busy={actionsLocked}
-                  onSelect={toggle}
-                />
-
-                {reactionLog.length > 1 && (
-                  <details className="alchemy-reaction-log">
-                    <summary
-                      className="chip alchemy-reaction-log-toggle"
-                    >
-                      Vezi jurnalul ({reactionLog.length})
-                    </summary>
-                    <div className="col alchemy-reaction-history">
-                      {reactionLog.slice(1).map((reaction) => (
-                        <ReactionRow
-                          key={
-                            reaction.ingredientKey +
-                            ":" +
-                            reaction.results.map((item) => item.id).join(",")
-                          }
-                          reaction={reaction}
-                          selected={selected}
-                          freshIds={freshIds}
-                          inventoryById={inventoryById}
-                          busy={actionsLocked}
-                          onSelect={toggle}
-                        />
-                      ))}
-                    </div>
-                  </details>
-                )}
-              </details>
-            )}
-
-            {/* Footer actions stay in-play only; ResultCard owns the terminal actions. */}
-            {!won && (
-              <>
-                <div className="row center wrap alchemy-challenge-actions">
-                  <Button
-                    type="button"
-                    variant="secondary"
-                    disabled={actionsLocked}
-                    onClick={doReset}
-                  >
-                    ↻ Reia același joc
-                  </Button>
-                  <Button
-                    type="button"
-                    variant="secondary"
-                    className="alchimie-other-board"
-                    disabled={!isPresent || creating || busy || loading}
-                    onClick={() =>
-                      void start({
-                        difficulty: state.difficulty,
-                        category: state.board_category ?? undefined,
-                      })
-                    }
-                  >
-                    ⚗ Alt joc
-                  </Button>
-                  <Button
-                    type="button"
-                    variant="secondary"
-                    disabled={actionsLocked}
-                    onClick={newGame}
-                  >
-                    ⚙ Schimbă opțiunile
-                  </Button>
-                </div>
-              </>
-            )}
-
+            {!won && <div className="row wrap alchemy-challenge-actions">
+              <Button type="button" variant="secondary" disabled={actionsLocked} onClick={doReset}>Reia același joc</Button>
+              <Button type="button" variant="secondary" className="alchimie-other-board" disabled={!isPresent || creating || busy || loading}
+                onClick={() => void start({ difficulty: state.difficulty, category: state.board_category ?? undefined })}>Alt joc</Button>
+              <Button type="button" variant="secondary" disabled={actionsLocked} onClick={newGame}>Schimbă opțiunile</Button>
+            </div>}
           </div>
         </details>
         {!won && <StartFailureNotice failed={startFailed} />}
-
-        {/* Win banner */}
-        <Presence>
-          {won && (
-            <ResultCard
-              startFailed={startFailed}
-              actionsBusy={creating}
-              icon="★"
-              title="Ai făurit ținta!"
-              accent={GOLD}
-              score={state.score}
-              isRecord={isRecord}
-              isPuzzleRecord={isPuzzleRecord}
-              shareText={sharePayload}
-              onCopy={() => void handleCopy()}
-              onReplay={() =>
-                void start({
-                  difficulty: state.difficulty,
-                  category: state.board_category ?? undefined,
-                })
-              }
-              onOptions={newGame}
-              onExit={exitSafely}
-            >
-              <>
-                <strong className="alchemy-result-emphasis">{state.target.label}</strong> în{" "}
-                {state.moves} {state.moves === 1 ? "combinație" : "combinații"} ·{" "}
-                {state.discovered_count} concepte descoperite.
-                {winningReaction && (
-                  <span className="alchemy-winning-reaction">
-                    <span
-                      className="faint alchemy-winning-caption"
-                    >
-                      CUM AI FĂURIT-O
-                    </span>
-                    {winningReaction.parents[0].label} +{" "}
-                    {winningReaction.parents[1].label} →{" "}
-                    <strong className="alchemy-result-emphasis">
-                      {winningReaction.results.map((item) => item.label).join(", ")}
-                    </strong>
-                  </span>
-                )}
-                {winningReaction?.results.map((item) => (
-                  <EarnedLinks key={item.id} item={item} />
-                ))}
-              </>
-            </ResultCard>
-          )}
-        </Presence>
       </div>
     </div>
   );
 }
 
-function AlchemyWord({ fresh, pulsing, buttonRef, ...props }: ComponentProps<"button"> & {
-  fresh: boolean; pulsing: boolean; buttonRef: (node: HTMLButtonElement | null) => void;
-}) {
-  const elementRef = useRef<HTMLButtonElement>(null);
-  useElementMotion(elementRef, pulsing ? { scale: [1, 1.08, 1] }
-    : fresh ? { opacity: [0, 1], scale: [0.4, 1] } : false,
-  { spring: { stiffness: 320, damping: 18 } }, [fresh, pulsing]);
-  return <button {...props} ref={(node) => { elementRef.current = node; buttonRef(node); }} />;
-}
-
 function ReactionRow({
   reaction,
   selected,
-  freshIds,
   inventoryById,
   busy,
   onSelect,
 }: {
   reaction: Reaction;
   selected: string[];
-  freshIds: Set<string>;
   inventoryById: ReadonlyMap<string, InventoryItem>;
   busy: boolean;
   onSelect: (id: string) => void;
@@ -1175,21 +887,19 @@ function ReactionRow({
       <span className="row wrap alchemy-reaction-results">
         {reaction.results.map((item) => {
           const isSelected = selected.includes(item.id);
-          const isFresh = freshIds.has(item.id);
           const currentItem = inventoryById.get(item.id);
           const depleted = currentItem?.depleted ?? true;
           return (
             <button
               key={item.id}
               type="button"
-              className={`chip alchemy-reaction-result${isFresh ? " alchemy-reaction-result--fresh" : ""}${depleted ? " alchemy-reaction-result--depleted" : ""}`}
+              className="alchemy-result-word alchemy-reaction-result"
               disabled={busy || depleted}
               aria-pressed={isSelected}
               aria-label={depleted ? `${item.label}, pus deoparte` : `Alege ${item.label}`}
               title={depleted ? "Pus deoparte" : "Pune în alambic"}
               onClick={() => onSelect(item.id)}
             >
-              {isFresh ? "NOU · " : ""}
               {item.label}
             </button>
           );
@@ -1236,7 +946,6 @@ function Slot({
       aria-label={`Scoate ${item.label} din alambic`}
     >
       <span className="alchemy-slot-label">{item.label}</span>
-      <span aria-hidden>×</span>
     </button>
   );
 }

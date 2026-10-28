@@ -153,7 +153,8 @@ test("empty feedback and marked keyboard partner fit 320px with doubled text", a
   await expect(partner).toBeFocused();
   await expect(partner).toBeInViewport();
   expect(await page.locator(".alchemy-screen").evaluate((e) => e.scrollWidth <= e.clientWidth + 1)).toBe(true);
-  await expect(partner).toContainText("Încercat");
+  // Plain labels replace per-word badges; the tried state remains available to AT.
+  await expect(partner).toHaveAccessibleName("Cheag alimentar, încercat fără rezultat cu Făină");
 });
 
 for (const committed of [false, true]) {

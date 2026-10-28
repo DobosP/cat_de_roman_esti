@@ -4,7 +4,7 @@ import { games, activeKey, gameURL, deterministicStarts, solution, start, act, o
 const game = games.find(({ key }) => key === "alchimie");
 const verify = (page) => page.getByRole("button", { name: "Verifică jocul", exact: true });
 const currentGame = (page) => page.getByRole("button", { name: "Încarcă jocul curent", exact: true });
-const hintButton = (page) => page.getByRole("button", { name: "💡 Indiciu", exact: true });
+const hintButton = (page) => page.getByRole("button", { name: "Indiciu", exact: true });
 const resetButton = (page) => page.getByRole("button", { name: /Reia același joc/ });
 const steps = () => solution(game).steps;
 const remembered = (page) => page.evaluate((key) => localStorage.getItem(key), activeKey(game));
@@ -126,7 +126,7 @@ test("lost productive combine restores the exact earned inventory and private ta
   expect(fresh.already_tried).toBeUndefined();
   expect(fresh.moves).toBe(1);
   await openAlchemyDisclosure(page, ".alchemy-library-tools");
-  await page.getByRole("button", { name: /^Toate / }).click();
+  await expect(page.locator(".alchemy-inventory-grid .alchemy-word")).toHaveCount(fresh.inventory.length);
   for (const item of committed().discovered) {
     await expect(page.locator(game.board).getByRole("button", { name: new RegExp(`^${item.label}(?:,|$)`) })).toBeVisible();
   }
@@ -199,8 +199,27 @@ for (const { kind, hints, solved } of [
 }
 
 test("lost reset restores original seeds, clears cue and experiment memory once", async ({ page, request }) => {
-  const initial = await prepare(page, request, { hints: 1 });
-  expect((await askHint(page, initial.game_id)).status()).toBe(200);
+  const initial = await prepare(page, request, { hints: 2 });
+  // A paid pair hint must bring its words back from a filtered recipe view.
+  const collectionSearch = page.getByRole("searchbox", { name: "Caută în toate conceptele descoperite", exact: true });
+  await collectionSearch.fill("zzzz-hidden-hint-pair");
+  await expect(page.locator(game.board).getByRole("button")).toHaveCount(0);
+  await openAlchemyDisclosure(page, ".alchemy-discoveries");
+  await expect(page.getByRole("button", { name: "Cuvinte", exact: true })).toHaveAttribute("aria-expanded", "true");
+  const hintResponse = await askHint(page, initial.game_id);
+  expect(hintResponse.status()).toBe(200);
+  const hinted = await hintResponse.json();
+  expect(hinted.earned_hint.hint_kind).toBe("pair");
+  expect(hinted.earned_hint.hint).toHaveLength(2);
+  await expect(page.locator(game.board)).toBeVisible();
+  await expect(collectionSearch).toHaveValue("");
+  await expect(page.getByRole("button", { name: "Rețete", exact: true })).toHaveAttribute("aria-expanded", "false");
+  for (const item of hinted.earned_hint.hint) {
+    const suggested = page.locator(game.board).getByRole("button", { name: new RegExp(`^${item.label}(?:,|$)`) });
+    await expect(suggested).toBeVisible();
+    await expect(suggested).toBeEnabled();
+    await expect(suggested).toHaveClass(/alchemy-word--hint/);
+  }
   const counts = traffic(page, initial.game_id);
   const committed = await loseCommittedResponse(page, initial.game_id, "reset");
   const response = responseFor(page, initial.game_id, "reset");
