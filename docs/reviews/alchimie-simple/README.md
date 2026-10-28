@@ -1,37 +1,30 @@
 # Simplified Alchimie interface
 
-Valid until: a later Alchimie interface qualification replaces this source — then treat as history.
+Valid until: a later Alchimie qualification supersedes this product — then treat as history.
 
-The approved design uses one flat workbench and a newest-first searchable collection
-in both Alchimie modes. Rețete/Cuvinte switches the same area to earned recipes;
-per-word badges/icons and the separate discovery panel are absent.
-
+Verified 2026-10-29 on product `2cacc8783641acf908cc8bfa572687e13cb2fc30`.
 Operator: agent:codex (PROGRAM E8).
 
-Pinned preflight passed TypeScript, tool TypeScript, focused contracts, score contracts,
-lint, build, documentation and all route budgets. Exact source/context and result hash
-are recorded in [qualification.json](qualification.json). Canonical unit/full remain pending.
+Both active modes use one flat workbench, a retained earned equation, visible search
+and a newest-first full collection. Rețete switches the same area to earned recipes.
+There are no per-word icons/badges or separate recent-discovery panels. Narrow layouts
+stack; wide layouts put the collection alongside the workbench. Saved progress,
+server rules, hint/score costs, owned recovery, keyboard focus, copy and replay remain.
 
-Independent source review identified a paid-hint search/view issue, corrected before
-preflight. Saved ownership, response recovery, hint/score costs and bounded earned
-histories remain. Existing browser assertions for removed layout controls were mapped
-to the approved controls; gameplay/privacy/recovery/geometry and inventory keys stay.
+Canonical full: **38/38 checks pass**, including fresh unit lanes, native/authcore
+race/vet, explicit disposable PostgreSQL, 1206 HTTP parity requests and legacy journey.
+Browser: **937/937**, zero skips, unexpected failures, retries or flaky cases.
+All nine original PNGs are byte-exact; axe and five-run vitals pass. CSP enforced:
+zero current/legacy violations. CSS15135/16093gzip bytes; active route budgets pass.
+Owned containers/networks were removed and absence verified.
 
-The first unit run had 1958 native passes and zero test failures, but correctly failed
-on an unexpected relocation-test skip. The native TMPDIR proposal was reverted;
-[ADR-0223](../../adr/0223-hermetic-relocation-test-filesystem.md) uses sibling temporary
-checkout/output directories so the relocation assertion executes. Focused pinned race passes with zero skips;
-canonical retry remains pending. No content, frozen
-original bundle, budget or acceptance assertion changed; no deployment.
+Command: `python3 -I scripts/gui-full-runner.py --sha 2cacc8783641acf908cc8bfa572687e13cb2fc30 --parallel 4`.
+Exact identities/result hashes and compact prior outcomes: [qualification.json](qualification.json).
+The introductory appearance remains protected; the flat design starts in active play.
+Original baselines, budgets, gate inputs and browser inventory keys are unchanged.
+The existing relocation test now uses sibling temporary checkout/output directories,
+removing its EXDEV skip while preserving all assertions ([ADR-0223](../../adr/0223-hermetic-relocation-test-filesystem.md)).
 
-The built app passed87 serving checks without failures/skips. Focused Alchimie
-browser run:73pass/1keyboard-scroll failure. The fallback now reveals the visible
-library toolbar; the original focus and viewport assertions remain unchanged.
-
-Unit93286a9c passed27/27. The final two help sentences now name Rețete/search; the
-16other texts keep their original baseline pin and the revised record has its own pin.
-Final-copy unit/full acceptance follows; prior run outcomes are historical.
-
-Final-copy unitd86a43c2 passed27/27. Full browser933/937: four stale selector
-failures (enabled-word selection/plain progress count); corrected focused4/4 pass.
-The final test-only revision will execute all unit lanes again inside full acceptance.
+One rolling verified gate setup is retained. Superseded raw target trees were replaced;
+retained manifests describe history, not deleted bytes. Other owners' work is preserved.
+[PR3](https://github.com/DobosP/cat_de_roman_esti/pull/3); no main merge or deployment.
