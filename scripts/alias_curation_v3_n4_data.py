@@ -4,6 +4,9 @@
 remain pending. No nodes, edges, boards, recipes or target changes.
 """
 
+from basic_words_v33_data import BEGINNER_BENCHMARK as BEGINNER_BENCHMARK
+from contexto_common_words_v72_data import DEFERRED_AMBIGUOUS_TERMS as DEFERRED_AMBIGUOUS_TERMS
+
 BUILD_VERSION = "fixture-v3-n4-alias-curation"
 NOTE = "V3 n4: 55 existing-owner morphology families, 92 pending literal input aliases."
 GAME_ITEM_IDS = ()
@@ -66,3 +69,7 @@ ALIASES = {'n_v24_nature_sky_stea': ('stelei', 'stelelor'),
  'n_v3geo_ocean': ('oceanului', 'oceanele'),
  'n_v4geo_fluviu': ('fluviului', 'fluviilor')}
 EDGES = ()
+
+
+def build_nodes_and_edges():
+    return {"nodes": NODES, "edges": EDGES, "aliases": ALIASES}
