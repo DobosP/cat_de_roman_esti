@@ -1,0 +1,283 @@
+{
+  "schema": "source-loop-secondary-main-observation-v1",
+  "observed_at_utc": "2026-10-21T12:09:14.085021+00:00",
+  "cause": "External secondary-main UI/resume and release-builder advance; this source-loop checkpoint changes neither runtime/UI nor toolchain/CI/gates.",
+  "previous_secondary_local_main": "796696011d6fd662a74ea580ae78952d2ccf3ada",
+  "secondary_latest_local_main": "8a5e6f281ea1552a38d377c44c8b7e9d32490042",
+  "previous_observation_preserved": {
+    "path": "observations/secondary-main-79669601.json",
+    "sha256": "5558a2aee210589e5aefaca3c26f235ea4069dddb6f3340fc41bcd261305e6ec",
+    "canonical_parent_ref": "5e25d5a75c45aa1ffa1b87c7c04c362079cc13fe"
+  },
+  "primary_feature": {
+    "branch": "feat/gui-cat-m3",
+    "HEAD": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+    "dirty_untracked_paths": [],
+    "unchanged": true
+  },
+  "documentation_only_advance": false,
+  "changed_paths": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "git_delta_status": "M",
+      "secondary_main_sha256": "32f9436d06342ff889a71e2e1956e0ef52cbcba24fcffdde691fd34b9bb8c5e0",
+      "primary_feature_present": true,
+      "primary_feature_sha256": "924fcbc63905a39b8e08573e759f928867739763ba79dd82877e34bf4115ceb9",
+      "in_retained_source_index": false,
+      "scope": "external_release_builder_or_CI_configuration"
+    },
+    {
+      "path": "AGENTS.md",
+      "git_delta_status": "M",
+      "secondary_main_sha256": "c3621cf4bbbc1207e79531a20256694f6fcbf8504b00cac1aaa8d86aef415532",
+      "primary_feature_present": true,
+      "primary_feature_sha256": "714b0756b25f4e734632b771b27009a624ee00d403d97d3d648335a62d158072",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_retained_external_qualification_evidence"
+    },
+    {
+      "path": "Dockerfile",
+      "git_delta_status": "M",
+      "secondary_main_sha256": "cff4d1ad5ce514d61a4a024fa2c12113396ecff9787c3cb427b91f4711214f28",
+      "primary_feature_present": true,
+      "primary_feature_sha256": "bc862cabd2bc189ff6b5c075a6cfc541e50755ca0efb85b375828a5551abb9c7",
+      "in_retained_source_index": false,
+      "scope": "external_release_builder_or_CI_configuration"
+    },
+    {
+      "path": "README.md",
+      "git_delta_status": "M",
+      "secondary_main_sha256": "ff766a607292f35ab5e1dabdcad48bcc5be60431d811cbad33daa2fbc6807cb5",
+      "primary_feature_present": true,
+      "primary_feature_sha256": "5d0aaef46e61b61f851096927d877a6ddf484fc1f186e72f0d07f10d7a8e2396",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_retained_external_qualification_evidence"
+    },
+    {
+      "path": "WORKLOG.md",
+      "git_delta_status": "M",
+      "secondary_main_sha256": "207ad67742a5d7c3090c010e9335c404691ca8ae83563c39a3a83e10a8b6353e",
+      "primary_feature_present": true,
+      "primary_feature_sha256": "413c5d439cf007050ca76aa56c1dd14feaf8309a7ca67663275faf926a0d07ce",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_retained_external_qualification_evidence"
+    },
+    {
+      "path": "docs/NATIVE_BACKENDS.md",
+      "git_delta_status": "M",
+      "secondary_main_sha256": "e43d11d2f876cd8829f8b3bc1ce0ab19f34f70f8a6e8fd586811dcef9b94c1cd",
+      "primary_feature_present": true,
+      "primary_feature_sha256": "db7a40c8cdd132061e17f34d05466588312794f4f483a88dad838dbac9ec334a",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_retained_external_qualification_evidence"
+    },
+    {
+      "path": "docs/NATIVE_TOOLCHAIN.md",
+      "git_delta_status": "M",
+      "secondary_main_sha256": "f50121bb802f8e0eec5e17a144da12e455445d36403d572e794e938411902b79",
+      "primary_feature_present": true,
+      "primary_feature_sha256": "2b22b139386206634b56d857f98b6b640b6801fe517cd654da6e2038094ee989",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_retained_external_qualification_evidence"
+    },
+    {
+      "path": "docs/STATUS.md",
+      "git_delta_status": "M",
+      "secondary_main_sha256": "7266c0c0249771f8822afea5d24c915d33a1c67b90c5b0d767c739648f50d565",
+      "primary_feature_present": true,
+      "primary_feature_sha256": "4470c036cb0aff89a302e79d2b0fc354fa88cc0daf4c3f26647a846924d3e9e8",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_retained_external_qualification_evidence"
+    },
+    {
+      "path": "docs/adr/0184-native-spa-toolchain-and-managed-output.md",
+      "git_delta_status": "M",
+      "secondary_main_sha256": "791defc20809f5a90ed5c553cf51bc2d92aee8df8064e32cf97857effb99bfe6",
+      "primary_feature_present": true,
+      "primary_feature_sha256": "f68c7bf0e60ef05f7f6f03b673a47bb5e0e97c12e81006737772c74e510af03f",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_retained_external_qualification_evidence"
+    },
+    {
+      "path": "docs/adr/0208-go-1-27-3-security-release-builders.md",
+      "git_delta_status": "A",
+      "secondary_main_sha256": "217cf9fc01db5a5227721c09715ae29008dde78718670ebd16fa77e965440aaf",
+      "primary_feature_present": false,
+      "primary_feature_sha256": null,
+      "in_retained_source_index": false,
+      "scope": "documentation_or_retained_external_qualification_evidence"
+    },
+    {
+      "path": "docs/adr/README.md",
+      "git_delta_status": "M",
+      "secondary_main_sha256": "a7be8875a5df48eae69327acc8e139976789c9bc3e9b07fc2e14a1e3d0446c0f",
+      "primary_feature_present": true,
+      "primary_feature_sha256": "d0b4a71d19e37b9c0029cd41835e46b041f0121a3c4476faf3f82841f9bf1259",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_retained_external_qualification_evidence"
+    },
+    {
+      "path": "docs/agent-testing.md",
+      "git_delta_status": "M",
+      "secondary_main_sha256": "a79c30a9c39d1cfea18b1f01aa395fe0c6946a9fff62aa506a970ec560c11c38",
+      "primary_feature_present": true,
+      "primary_feature_sha256": "386cfc929a90ece1907f797e9108a5a4df77a33e2ed6a1eedebcc0f098651b0d",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_retained_external_qualification_evidence"
+    },
+    {
+      "path": "docs/reviews/go-1-27-3-security/README.md",
+      "git_delta_status": "A",
+      "secondary_main_sha256": "8832776f1caacce8f937068a83637069f554e6fe869e0815de0c537fe545952b",
+      "primary_feature_present": false,
+      "primary_feature_sha256": null,
+      "in_retained_source_index": false,
+      "scope": "documentation_or_retained_external_qualification_evidence"
+    },
+    {
+      "path": "docs/reviews/go-1-27-3-security/govulncheck-binary-release-99f507f4.txt",
+      "git_delta_status": "A",
+      "secondary_main_sha256": "f979dcf79236f11c58f26204e2bded953fab18e5e07422d601dd28cb34eea878",
+      "primary_feature_present": false,
+      "primary_feature_sha256": null,
+      "in_retained_source_index": false,
+      "scope": "documentation_or_retained_external_qualification_evidence"
+    },
+    {
+      "path": "docs/reviews/go-1-27-3-security/qualification.json",
+      "git_delta_status": "A",
+      "secondary_main_sha256": "37aabf595a250a2830956ae3d45282f3a99ccffd585cef44d35c88ce3bd355d6",
+      "primary_feature_present": false,
+      "primary_feature_sha256": null,
+      "in_retained_source_index": false,
+      "scope": "documentation_or_retained_external_qualification_evidence"
+    },
+    {
+      "path": "docs/reviews/go-1-27-3-security/trivy-release-99f507f4.txt",
+      "git_delta_status": "A",
+      "secondary_main_sha256": "75fc56c04306cabe1956cb0bb418c9b9c6e980185e3b435713c0503deb2ddfb8",
+      "primary_feature_present": false,
+      "primary_feature_sha256": null,
+      "in_retained_source_index": false,
+      "scope": "documentation_or_retained_external_qualification_evidence"
+    },
+    {
+      "path": "docs/tracked-markdown.json",
+      "git_delta_status": "M",
+      "secondary_main_sha256": "406be3c1be48f463eb92b3634a3b7f34b8d03fd496feda81086c186d9e62dc02",
+      "primary_feature_present": true,
+      "primary_feature_sha256": "d2988d15888268b95ba4aa3df8a1866e804abbc412144da313005916ea1050bf",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_retained_external_qualification_evidence"
+    },
+    {
+      "path": "frontend/src/screens/AlchimieChallenge.tsx",
+      "git_delta_status": "M",
+      "secondary_main_sha256": "40fed58a2e1bf5aceebd592e5736705c9d3cfb5967e2cbad9d52572599978578",
+      "primary_feature_present": true,
+      "primary_feature_sha256": "b181eb98ac3ba9c9960203af3d99da96a47d4a131a8bd003335ad290856f6afb",
+      "in_retained_source_index": true,
+      "scope": "saved_game_resume_initial_UI_state"
+    },
+    {
+      "path": "go-backend/Dockerfile",
+      "git_delta_status": "M",
+      "secondary_main_sha256": "fcadb23fe94f8d1fd81804762a600980466ab3bb48a57894c9bc420716c52d6a",
+      "primary_feature_present": true,
+      "primary_feature_sha256": "1c7bbb341d2dc0b0fa71cf477fbde755ce6abc5a25ae7bcccde415075332edaf",
+      "in_retained_source_index": false,
+      "scope": "external_release_builder_or_CI_configuration"
+    },
+    {
+      "path": "scripts/qualify_go_toolchain.sh",
+      "git_delta_status": "M",
+      "secondary_main_sha256": "f0ad949f8758469670ad842f580ffeba34b40ac4c705f04c269183f21698587e",
+      "primary_feature_present": true,
+      "primary_feature_sha256": "912e18cdf2e2101cdd2ba8906139515173eb45e5dd689452282c71c78cf5022d",
+      "in_retained_source_index": false,
+      "scope": "external_release_builder_or_CI_configuration"
+    },
+    {
+      "path": "versions.lock.json",
+      "git_delta_status": "M",
+      "secondary_main_sha256": "a513e518c0aefd22bfa512537efd787d11fb645345afd041cc97326abbad8e1f",
+      "primary_feature_present": true,
+      "primary_feature_sha256": "d7c0192fb92cb307d9235db1a3004d06d07955b461a59e48ce1924b1ede71e0b",
+      "in_retained_source_index": false,
+      "scope": "external_release_builder_or_CI_configuration"
+    }
+  ],
+  "retained_index_verification": {
+    "content": {
+      "checked_paths": 244,
+      "primary_feature_changed_paths": [],
+      "secondary_main_equal_paths": 244,
+      "secondary_main_changed_paths": []
+    },
+    "interface": {
+      "checked_paths": 59,
+      "primary_feature_changed_paths": [],
+      "secondary_main_equal_paths": 58,
+      "secondary_main_changed_paths": [
+        {
+          "path": "frontend/src/screens/AlchimieChallenge.tsx",
+          "primary_feature_sha256": "b181eb98ac3ba9c9960203af3d99da96a47d4a131a8bd003335ad290856f6afb",
+          "secondary_main_sha256": "40fed58a2e1bf5aceebd592e5736705c9d3cfb5967e2cbad9d52572599978578"
+        }
+      ]
+    },
+    "adjacent": {
+      "checked_paths": 7,
+      "primary_feature_changed_paths": [],
+      "secondary_main_equal_paths": 7,
+      "secondary_main_changed_paths": []
+    },
+    "policy": {
+      "checked_paths": 2,
+      "primary_feature_changed_paths": [],
+      "secondary_main_equal_paths": 2,
+      "secondary_main_changed_paths": []
+    }
+  },
+  "full_feature_main_interface_equality": false,
+  "affected_contracts": {
+    "secondary_UI_state": "Alchimie active-game memo is initialized before loading; initial loading now reflects active.peek() presence. Saved-session resume therefore starts with actions locked/loading UI instead of initial loading=false. This is a static delta interpretation, not a browser or runtime test.",
+    "typed_and_ID_semantics": "The bounded diff changes no submitted guess/move format, combine-owned-ID payload, alias-aware resolver or KG content. Inventory search remains local display-label behavior under the unchanged designated primary feature contract. Source aliases do not gain free-text combination or board semantics.",
+    "release_builders": "Secondary Docker build images, CI setup-go, versions-lock and qualify_go_toolchain.sh now name Go 1.27.3. The changed AGENTS text distinguishes release builders 1.27.3 from kit-core runner 1.27.1. This checkpoint does not adopt or execute any builder, install/update toolchains, invoke gates, or validate the external security qualification.",
+    "prior_server_delta": "The previously recorded secondary managed-UI startup refusal remains separately bound in the preserved previous observation. The current 59-file index is not full server/build/runtime coverage.",
+    "source_ownership": "All 244 retained content/resolver authority paths and both ownership-policy paths match the unchanged primary. The one changed secondary UI path is separately inspected and bound; original static source ownership findings remain scoped to their actual bytes.",
+    "qualification": "Historical source/UI/runtime and Go1.27.1 read-only check results retain original exact identities and contexts. No results are transferred to latest secondary UI, release-builder configuration or runtime. Later integration still requires separate explicit authority and then-current designated primary/WIP qualification."
+  },
+  "mechanical_delta_classification": {
+    "path": "/home/dobo/work/_temp/content__v1-42-familiar-food-materials-and-selected-inputs/secondary-main-8a5e6f28/mechanical-delta.json",
+    "sha256": "bde7ac6aa03d7605331fbf00bd318441a7bfae845d0c64f719464575f8ae095e",
+    "scope": "Read-only code/configuration classification, not source-semantic review or runtime/integration approval."
+  },
+  "retained_exact_authority_index": {
+    "path": "/home/dobo/work/_temp/content__v1-42-familiar-food-materials-and-selected-inputs/feature-working-observation.json",
+    "sha256": "18de1668a326a5a593549e2998777a0df6f0c7585ce6a610959a40fb782ce851",
+    "scope": "All original index and baseline bytes remain preserved. Primary paths were rehashed; latest secondary difference is explicit instead of claiming full equality."
+  },
+  "original_canonical_feature_baseline_preserved": {
+    "path": "current-feature-working-baseline.json",
+    "sha256": "5d0eb5bf28d8e59d93164fd5afe4887657cfe2087cbefd971ca033b176f6b5e8",
+    "secondary_identity_is_historical": true
+  },
+  "source_closure": "d331f6ad79696019b6882d53035572f3da4c7cd1",
+  "source_pool_sha256": "b7b5be791a6b905d44319bc81259a019499de91a0aa5deaf33d32cefe7354005",
+  "source_module_sha256": "931799a338411d2be4a0115d8f8cf75164f95d1687c1344e643e91fb9ecb9b74",
+  "protected_source_closures_preserved": 29,
+  "historical_baselines_preserved": 22,
+  "curation_wait_unchanged": true,
+  "next_decision": "Separate qualification of the proposed five reviewed existing-owner families/21 keys against then-latest frozen designated feature/WIP, or a concrete uncovered source gap. No application or landing authorized.",
+  "source_approvals_added": 0,
+  "formal_reviews_added": 0,
+  "dictionary_requests": 0,
+  "source_module_execution_or_application": 0,
+  "module_dry_run": false,
+  "runtime_or_test_execution": false,
+  "toolchain_CI_gate_mutations": 0,
+  "installed": 0,
+  "player_visible_source_delta": "0/0/0",
+  "remote_operations_by_this_checkpoint": 0
+}

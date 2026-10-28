@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "wave": "1.33",
+  "status": "reviewed_source_not_landed",
+  "original_reviewed_module_sha256": "81320b87084be3553bc2c58e9f3ea9f000f0edc81ec3db36fff8e384ea4ac9a2",
+  "final_module_sha256": "5acd7c18f062ca0ffee20682217597e3cdfe1f869529959c6568e4e9b62c7fb6",
+  "original_module_copy": "reviewed-module.py",
+  "original_pool_sha256": "57aaf38c6013c59a9087dc828ed1f1c1c9b39fff2958130f79bade2bb4782125",
+  "formal_reviews_used": 2,
+  "reviewers": {
+    "factual": {
+      "path": "graph-factual-review.json",
+      "sha256": "405341a868111e13de4e2c0acbbd4a2e059a61b29d94f3271d3ade07ffa51cc7",
+      "verdicts": {
+        "accept": 30
+      }
+    },
+    "quality": {
+      "path": "graph-quality-review.json",
+      "sha256": "5d369a79a396ba20a278186c1b6a9852e81e077c622f95d0fb6404d9c541d330",
+      "verdicts": {
+        "accept": 28,
+        "modify": 2
+      }
+    }
+  },
+  "exact_signed_edits_applied": [
+    {
+      "item_id": "v133-bucium",
+      "action": "replace_field",
+      "collection": "EDGES",
+      "selector": {
+        "src": "n_v1_33_bucium",
+        "dst": "n_v17muz_nai",
+        "relation": "related_to"
+      },
+      "field": "label_ro",
+      "before": "este,ca naiul,un instrument de suflat",
+      "after": "este, ca naiul, un instrument de suflat",
+      "reason": "Romanian punctuation readability only; unchanged comparative wind-instrument claim."
+    },
+    {
+      "item_id": "v133-cobza",
+      "action": "replace_field",
+      "collection": "EDGES",
+      "selector": {
+        "src": "n_v1_33_cobza",
+        "dst": "n_v3muz_chitara",
+        "relation": "related_to"
+      },
+      "field": "label_ro",
+      "before": "are,ca chitara,coarde ciupite",
+      "after": "are, ca chitara, coarde ciupite",
+      "reason": "Romanian punctuation readability only; unchanged plucked-string comparison."
+    }
+  ],
+  "item_form_edge_drops": [],
+  "semantic_payload_comparison": "Exact AST equality to original payload after only the two signed label_ro whitespace edits. NODES/ALIASES and all other edge fields are unchanged. No new semantic approval from bookkeeping.",
+  "source_provenance_sha256": "c011e8af3e56a8b1d9cac000a3cd3af06afa724077389ca557db55fc4235ac54",
+  "game_impact_limits": {
+    "accepted_source_items": 30,
+    "new_concepts": 29,
+    "existing_owner_input_families": 1,
+    "ordinary_normalized_payload_keys": 170,
+    "canonical_label_only_keys": 0,
+    "qualified_exact_sense_lexical_families": 1,
+    "qualified_family_keys": 6,
+    "unqualified_synonym_families": 0,
+    "regional_input_families": 0,
+    "directed_graph_claims": 114,
+    "installed": 0,
+    "source_applied": false,
+    "player_visible_delta": "0/0/0",
+    "new_playable_rounds": 0,
+    "target_approvals": 0,
+    "salience_approvals": 0,
+    "new_node_predecessor_counts": {
+      "0": 25,
+      "1": 4
+    },
+    "numeric_C3_passes": 0,
+    "C3_limits": "Prospective direct non-distractor predecessors include four proposed batch edges; all29 new IDs have zero current-base predecessors. Numeric counts do not approve targets or recognition/salience/engine floors.",
+    "interfaces": {
+      "Cald sau Rece": "Typed guesses can resolve ordinary aliases after a separately authorized integration; exact/projection/fuzzy competition and identity/snapshot effects need qualification.",
+      "Lanțul Cuvintelor": "Typed moves and clicked displayed labels submit text; aliases and graph edges can alter choices and paths after integration. No route is approved.",
+      "Alchimie": "Combines owned IDs. Inventory/journal search filters display labels and does not resolve KG aliases. No recipe or projection is approved.",
+      "Intrusul/Perechi/Conexiuni": "Active-board IDs are submitted; no board, intended pair or unique partition is approved."
+    },
+    "integration_limits": "Static compatibility/source acceptance cannot establish safe-to-merge or zero disturbance. Existing targets, profiles, routes, recipes, ranks, fuzzy suggestions and complete snapshots may change if applied. Salience0.5 and source flags are not runtime quarantine. Current isolation is that this module remains unapplied. Later authorized integration targets latest owner-designated feature working version, including explicitly frozen WIP; main landing is separate.",
+    "primary_feature": {
+      "branch": "feat/gui-cat-m3",
+      "head": "e75518c1473be3a32ec2a0f2e1565764bbcf5d5b",
+      "working_fingerprint_sha256": "aff6cadfb5521b292b99648eec9d83589d973963c4e1f6572248f4417397b173",
+      "dirty_paths": 98,
+      "baseline_sha256": "1787a725a8b431db32b1a24edafe517078f7156cd97b2b166c9764d7ccf503aa",
+      "WIP_copied_or_executed": false
+    },
+    "secondary_local_main": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+    "serving_authority_bytes_match_both_bases": 244,
+    "baseline_checks_reused_with_exact_hash_proof": true
+  },
+  "held_preserved": 20,
+  "module_application_or_dry_run": false
+}

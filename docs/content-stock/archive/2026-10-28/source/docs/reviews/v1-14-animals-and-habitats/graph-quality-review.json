@@ -1,0 +1,640 @@
+{
+  "schema_version": 1,
+  "kind": "graph-quality-review-v1",
+  "reviewer": "quality-v1-14",
+  "role": "quality",
+  "module_path": "scripts/animals_and_habitats_v1_14_data.py",
+  "module_sha256": "c6100c31e80fadc6b2c48f54d3ca92b620c46fcbf5a8228613ddb746d3b74d65",
+  "pool_sha256": "d1bafd63e272183b7d66cbbbaff7a541ca9288b37eec3f006c0e1dead5a00405",
+  "checked_on": "2026-10-12",
+  "reviewed_on": "2026-10-12",
+  "methodology": {
+    "authority": "Main docs/CONTENT_LOOP.md, procedure_rev17b97a2, and rubric A/C/D/F; this is the single independent whole-batch quality web review.",
+    "coverage": "All54 proposed IDs, all54 node descriptions and inflection families, all217 directed claims and every existing target sense were assessed; no sampling and no authored candidate edits.",
+    "web": "Romanian live/crawled web sources were independently accessed during this review: SOR, farm/zoo education, school texts, conservation and natural-history sources, aquaculture researchers and precise bait sources. Search-indexed source text was used when a direct fetch returned an interstitial; no new DEX request was made.",
+    "morphology": "Every family was checked against cached selected lexical records and cached ordinary noun-family blocks; all54 complete proposed families occur in their cached flexion blocks. DOOM3 versus DOR attribution remains explicit. Aliases are input inflections, not newly asserted synonyms.",
+    "recognition": "Native fauna, ordinary farm/companion animals and primary-school marine/world fauna meet the12-year-old/school-or-culture bar. School material corroborates the less frequent woodland and aquatic names; absence or ambiguous frequency hits never reject an item.",
+    "scope": "Shared guesses and useful neighbors only. No curated round, hidden-target, difficulty-band or incoming-predecessor approval is granted. The target-only C3 floor was not substituted for the content-loop4/2/2/2 graph requirements.",
+    "predicates": "The existing target nodes have the intended living-animal, anatomical, plant-part, food-material or geographical senses. Pământ already participates in soil, shovel and earthworm relations. Related_to captions read truthfully from source to target; is_a captions name honest animal/bird/fish parents.",
+    "entailments": "Păun/Fazan/Potârniche/Prepeliță beaks are explicit living-Aves entailments, not claims of species-specific shape/color. Morsă Arctic presence is an explicitly checked Beaufort-location inference. Aurelia, not Mnemiopsis, supports the medusa fish-larva claim. Crap/Caras captions explicitly describe bait. Șalău and Biban captions retain young/insect-larva scope.",
+    "ownership": "The347-key prescreen remains intact; installed ordinary keys are310 plus two qualified canonical-label keys. Bursucul remains owned by n_v21spo_dan_petrescu. Focă remains the RObotzi robot owner and supplies no invented seal-prey edge. The six held records are absent.",
+    "resulting_batch": "All54 retained concepts satisfy4–8 distinct neighbors, at least2 old-main and2 same-category, and at most2 batch neighbors. All seven dependencies from retained items end at retained researched concepts; none becomes an island or loses its floor.",
+    "independence": "Reviewer quality-v1-14 did not author module, pool or items and did not inspect the other current reviewer verdict. This artifact is bound to the original frozen bytes; later exact edits or drops do not imply a second formal round."
+  },
+  "summary": {
+    "covered": 54,
+    "proposed_shared_concepts": 54,
+    "existing_input_families": 0,
+    "excluded_held": 6,
+    "accept": 54,
+    "modify": 0,
+    "reject": 0,
+    "actual_edges_reviewed": 217,
+    "proposed_input_forms": 310,
+    "aliases": 258,
+    "canonical_labels": 54,
+    "ordinary_lookup_keys": 310,
+    "qualified_label_keys": 2,
+    "total_lookup_keys": 312,
+    "all_graph_floors_pass": true,
+    "requested_changes": 0
+  },
+  "excluded_held_item_ids": [
+    "v114-sobolan",
+    "v114-tap",
+    "v114-porumbel",
+    "v114-cioara",
+    "v114-lebada",
+    "v114-rechin"
+  ],
+  "items": [
+    {
+      "id": "v114-bursuc",
+      "lemma": "Bursuc",
+      "verdict": "accept",
+      "rationale": "Recognizable Romanian woodland animal; the Antipa curator supports digging claws, earthworm food and forest life. Noncolliding inflections serve a concrete guess; bursucul remains with Dan Petrescu.",
+      "sources": [
+        "https://pressone.ro/picaturile-de-noroc-ale-unui-bursuc"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-nevastuica",
+      "lemma": "Nevăstuică",
+      "verdict": "accept",
+      "rationale": "Familiar native carnivore with a legible mouse-hunting association. The selected Mustela nivalis source supports claws and ground burrows; the Șoarece endpoint is included in this resulting batch.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Nev%C4%83stuic%C4%83"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-jder",
+      "lemma": "Jder",
+      "verdict": "accept",
+      "rationale": "School woodland vocabulary, also covered by Romanian natural-history sources. The slender, tree-climbing animal description and forest, claw and fruit neighbors fit the selected living-animal sense.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Jder",
+        "https://www.manual.digital/Manuale/biologie492-tts.htm",
+        "https://www.waidmannsheil.ro/Dihorul%20comun%20Hermelina%20Jderul%20Nevastuica.html"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-dihor",
+      "lemma": "Dihor",
+      "verdict": "accept",
+      "rationale": "A recognizable Romanian mustelid, presented neutrally. The selected wild-polecat source supports the smell description, claws, mice and frogs; the researched mouse dependency is present.",
+      "sources": [
+        "https://www.waidmannsheil.ro/Dihorul%20comun%20Hermelina%20Jderul%20Nevastuica.html"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-cartita",
+      "lemma": "Cârtiță",
+      "verdict": "accept",
+      "rationale": "Ordinary garden and school fauna. The underground description, digging claws, earth and earthworm neighbors form an immediately legible, accurately directed set.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/C%C3%A2rti%C8%9B%C4%83",
+        "https://www.scgimpngtitu.ro/pdf/10.12.2024/MANUALE%20DIGITALE%202024-2025/5%20BIO.pdf"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-liliac",
+      "lemma": "Liliac",
+      "verdict": "accept",
+      "rationale": "The qualified mammal label prevents the plant reading. A Romanian children’s conservation lesson supports wings, hanging claws and scoped insectivory; the aliases remain ordinary inflections.",
+      "sources": [
+        "https://lilieci.ro/lumea-liliecilor/terenul-de-joaca/lilieci-introducere/",
+        "https://www.scgimpngtitu.ro/pdf/10.12.2024/MANUALE%20DIGITALE%202024-2025/5%20BIO.pdf"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-hamster",
+      "lemma": "Hamster",
+      "verdict": "accept",
+      "rationale": "A familiar animal name with a coherent selected European-hamster sense. Romanian sources support claws, seed storage and underground galleries; the text does not imply every pet rodent is this species.",
+      "sources": [
+        "https://familist.ro/specii-de-hamsteri",
+        "https://prodidactica.md/wp-content/uploads/2020/04/Manual-Bune-Practici-de-Cultivare-a-Soiei.pdf"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-cobai",
+      "lemma": "Cobai",
+      "verdict": "accept",
+      "rationale": "A familiar children’s farm-park and companion animal. The Cavia porcellus description and grass, leaf and carrot food links are substitutable within the selected animal sense.",
+      "sources": [
+        "https://www.zooplus.ro/ghid/animale-mici/rase-de-animale-mici/porcusor-de-guineea-peruvian",
+        "https://fermaanimalelor.ro/exploreaza-ferma/animale/"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-soarece",
+      "lemma": "Șoarece",
+      "verdict": "accept",
+      "rationale": "An everyday household and school animal. The small rodent description and seed, claw and cat associations are natural; all inputs stay within the mouse sense and remain unowned on baseline.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/%C8%98oarece_de_cas%C4%83",
+        "https://www.scgimpngtitu.ro/pdf/10.12.2024/MANUALE%20DIGITALE%202024-2025/5%20BIO.pdf"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-magar",
+      "lemma": "Măgar",
+      "verdict": "accept",
+      "rationale": "Familiar farm and story vocabulary. The domestic equid description, horse kinship, grass and pasture links fit Romanian source material and the existing Cal and Câmp endpoints.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/M%C4%83gar",
+        "https://eu.worldhorsewelfare.org/documents/donkey-guide/romanian-version-eu-donkey-guide.pdf"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-catar",
+      "lemma": "Catâr",
+      "verdict": "accept",
+      "rationale": "A recognizable domestic hybrid used in Romanian educational and practical texts. Both parental-species links and the grass link are honest; the included Măgar endpoint preserves its fourth neighbor.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Cat%C3%A2r",
+        "https://eu.worldhorsewelfare.org/documents/donkey-guide/romanian-version-eu-donkey-guide.pdf"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-ponei",
+      "lemma": "Ponei",
+      "verdict": "accept",
+      "rationale": "An immediately nameable children’s farm animal. Small-horse identity, grass, carrot and pasture associations are concrete and supported without confusing a pony with a foal.",
+      "sources": [
+        "https://fermaanimalelor.ro/exploreaza-ferma/animale/poneiul/",
+        "https://fermaanimalelor.ro/exploreaza-ferma/animale/"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-bivol",
+      "lemma": "Bivol",
+      "verdict": "accept",
+      "rationale": "Relevant Romanian farm vocabulary. The domestic buffalo sense and sex-qualified milk caption avoid claiming males produce milk; bovine kinship and grass neighbors are appropriate.",
+      "sources": [
+        "https://fermaanimalelor.ro/exploreaza-ferma/animale/bivolul/",
+        "https://fermaanimalelor.ro/exploreaza-ferma/animale/"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-taur",
+      "lemma": "Taur",
+      "verdict": "accept",
+      "rationale": "A familiar farm-family word, explicitly excluding the zodiac sense. The bull/cow/calf relations and grazing source fit the description; Vițel is researched and retained.",
+      "sources": [
+        "https://fermaanimalelor.ro/exploreaza-ferma/animale/vaca/",
+        "https://carnesia.ro/green-farmsel/"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-vitel",
+      "lemma": "Vițel",
+      "verdict": "accept",
+      "rationale": "Core childhood farm vocabulary. Calf identity, early milk feeding and later grass feeding are clearly staged and connect to the exact living cow and milk endpoints.",
+      "sources": [
+        "https://fermaanimalelor.ro/exploreaza-ferma/animale/vaca/",
+        "https://carnesia.ro/green-farmsel/"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-ied",
+      "lemma": "Ied",
+      "verdict": "accept",
+      "rationale": "Core farm and Romanian story vocabulary. The goat’s young-animal sense, early milk and later grass captions are honest and avoid substituting a deer fawn.",
+      "sources": [
+        "https://fermaanimalelor.ro/exploreaza-ferma/animale/capra/",
+        "https://click.ro/actualitate/fapt-divers/cum-aleg-grecii-mielul-sau-iedul-pentru-friptura-2519886.html"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-berbec",
+      "lemma": "Berbec",
+      "verdict": "accept",
+      "rationale": "A familiar farm-family animal. Male-sheep identity, lamb parenthood and grass food are coherent, source-supported links; no zodiac or tool input is introduced.",
+      "sources": [
+        "https://fermaanimalelor.ro/exploreaza-ferma/animale/oaia/",
+        "https://agriculturae.ro/index.php/produse-traditionale-din-lume/italia-franta-spania/2027-carne-de-miel-cu-denumirea-de-origine-pres-sales-de-la-baie-de-somme"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-corb",
+      "lemma": "Corb",
+      "verdict": "accept",
+      "rationale": "A familiar Romanian bird with current SOR public coverage. The black bird description and beak, forest and animal-flesh neighbors fit Corvus corax rather than the fish homonym.",
+      "sources": [
+        "https://www.sor.ro/pasarile-lunii-noiembrie-ciorile/"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-cuc",
+      "lemma": "Cuc",
+      "verdict": "accept",
+      "rationale": "A culturally familiar bird with a recognizable call. Insect food and laying eggs in other birds’ nests are concrete distinctive associations; Cuib retains its actual bird-nest sense.",
+      "sources": [
+        "https://pasaridinromania.sor.ro/specii/370/cuc-cuculus-canorus",
+        "https://ro.wikipedia.org/wiki/Pas%C4%83re"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-pupaza",
+      "lemma": "Pupăză",
+      "verdict": "accept",
+      "rationale": "Familiar Romanian school and story fauna. SOR supports the crest, curved bill, insects and tree-cavity nesting; the directed captions make a clear biological neighborhood.",
+      "sources": [
+        "https://pasaridinromania.sor.ro/specii/389/pupaza-upupa-epops"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-privighetoare",
+      "lemma": "Privighetoare",
+      "verdict": "accept",
+      "rationale": "A familiar songbird with documented Romanian cultural salience. The discreet brown bird description, insects and woodland-edge habitat are compatible with the sourced nightingale example.",
+      "sources": [
+        "https://pasaridinromania.sor.ro/specii/433/privighetoare-roscata-luscinia-megarhynchos"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-ciocarlie",
+      "lemma": "Ciocârlie",
+      "verdict": "accept",
+      "rationale": "Recognizable countryside and school vocabulary. The open-field singing bird description and insect, beak and field neighbors fit the selected Alauda arvensis example.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Cioc%C3%A2rlie_de_c%C3%A2mp"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-pitigoi",
+      "lemma": "Pițigoi",
+      "verdict": "accept",
+      "rationale": "A common Romanian garden and school bird. The selected great-tit appearance, insects and tree nesting are coherent; no other compound species or figurative child sense becomes an alias.",
+      "sources": [
+        "https://pasaridinromania.sor.ro/specii/503/pitigoi-mare-parus-major",
+        "https://ro.wikipedia.org/wiki/Pas%C4%83re"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-pescarus",
+      "lemma": "Pescăruș",
+      "verdict": "accept",
+      "rationale": "A familiar coastal and increasingly urban bird. The generic description and scoped fish/coast links are supported by the Romanian yellow-legged gull example without universalizing a diet.",
+      "sources": [
+        "https://pasaridinromania.sor.ro/specii/346/pescarus-cu-picioare-galbene-larus-michahellis",
+        "https://www.scgimpngtitu.ro/pdf/10.12.2024/MANUALE%20DIGITALE%202024-2025/5%20BIO.pdf"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-pelican",
+      "lemma": "Pelican",
+      "verdict": "accept",
+      "rationale": "An iconic Romanian Delta bird. SOR supports fish feeding and Delta presence; the large waterbird description and beak neighbor are useful, non-arbitrary associations.",
+      "sources": [
+        "https://pasaridinromania.sor.ro/specii/172/pelican-comun-pelecanus-onocrotalus"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-cormoran",
+      "lemma": "Cormoran",
+      "verdict": "accept",
+      "rationale": "A recognizable Romanian waterbird with current SOR coverage. The long bill/neck description, fish diet and Delta link are appropriate to the sourced great-cormorant example.",
+      "sources": [
+        "https://pasaridinromania.sor.ro/specii/169/cormoran-mare-phalacrocorax-carbo"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-cocor",
+      "lemma": "Cocor",
+      "verdict": "accept",
+      "rationale": "Familiar migratory-bird vocabulary. The long-necked bird description, seeds and marsh nesting make a concrete neighborhood; Mlaștină is the actual wet-ground endpoint.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Cocor_mare"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-paun",
+      "lemma": "Păun",
+      "verdict": "accept",
+      "rationale": "A familiar children’s farm/zoo bird. The male’s decorative train and seed/insect food fit the source; the beak link is explicitly generic living-bird anatomy, with no inferred dimensions or color.",
+      "sources": [
+        "https://fermaanimalelor.ro/exploreaza-ferma/animale/paunul/",
+        "https://ro.wikipedia.org/wiki/Pas%C4%83re"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-fazan",
+      "lemma": "Fazan",
+      "verdict": "accept",
+      "rationale": "A familiar Romanian field bird, with the word-game sense excluded. SOR supports the appearance, seeds and agricultural habitat; the beak claim uses only explicit Aves anatomy.",
+      "sources": [
+        "https://pasaridinromania.sor.ro/specii/272/fazan-phasianus-colchicus",
+        "https://ro.wikipedia.org/wiki/Pas%C4%83re"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-potarniche",
+      "lemma": "Potârniche",
+      "verdict": "accept",
+      "rationale": "Recognizable field and school fauna. The selected Perdix perdix description, seeds and open-ground habitat are coherent; the beak inference stays at the generic living-bird level.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Pot%C3%A2rniche",
+        "https://ro.wikipedia.org/wiki/Pas%C4%83re"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-prepelita",
+      "lemma": "Prepeliță",
+      "verdict": "accept",
+      "rationale": "A familiar Romanian field bird and pitpalac call. SOR supports seeds, open habitat and camouflage; the generic Aves beak entailment adds no species-specific morphology.",
+      "sources": [
+        "https://pasaridinromania.sor.ro/specii/271/prepelita-coturnix-coturnix",
+        "https://ro.wikipedia.org/wiki/Pas%C4%83re",
+        "https://www.sor.ro/pasarile-lunii-noiembrie-galliformele/"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-uliu",
+      "lemma": "Uliu",
+      "verdict": "accept",
+      "rationale": "A familiar native raptor. Curved bill, strong claws and flesh feeding are legible definitional associations; the unusual but ordinary ulii/uliii inflections are retained correctly.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Uliu",
+        "https://ro.wiktionary.org/wiki/uliu"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-soim",
+      "lemma": "Șoim",
+      "verdict": "accept",
+      "rationale": "A familiar raptor in Romanian natural-history and school material. The curved bill, prey-catching claws and flesh-food neighbors match the common zoological sense.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/%C8%98oim"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-vultur",
+      "lemma": "Vultur",
+      "verdict": "accept",
+      "rationale": "A familiar large-raptor name. The common zoological description and bill, claw and flesh links are source-verifiable; the proposal does not introduce a constellation or heraldic sense.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Vultur"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-pinguin",
+      "lemma": "Pinguin",
+      "verdict": "accept",
+      "rationale": "Universally recognizable school and zoo fauna. The flightless bird, swimming-wing and scoped fish-food descriptions are truthful and provide a concrete neighborhood without a hidden-target claim.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Pinguin",
+        "https://ro.wikipedia.org/wiki/Pas%C4%83re"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-strut",
+      "lemma": "Struț",
+      "verdict": "accept",
+      "rationale": "A familiar Romanian farm-park and school animal. The strong-legged flightless bird description and wing, bill and grass links preserve Struthio camelus rather than other ratites.",
+      "sources": [
+        "https://fermaanimalelor.ro/exploreaza-ferma/animale/strutul/",
+        "https://fermaanimalelor.ro/exploreaza-ferma/animale/"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-flamingo",
+      "lemma": "Flamingo",
+      "verdict": "accept",
+      "rationale": "Recognizable zoo and school vocabulary with a Romanian zoo source. The filtering bill, wings and lake habitat form a truthful, simple neighborhood; forms remain the selected ordinary paradigm.",
+      "sources": [
+        "https://bucurestizoo.ro/en/flamingo/"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-papagal",
+      "lemma": "Papagal",
+      "verdict": "accept",
+      "rationale": "A familiar companion and zoo bird. The strong curved bill and scoped seed/fruit captions fit the animal group and avoid the tool or figurative-person senses.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Papagal",
+        "https://fermaanimalelor.ro/exploreaza-ferma/animale/"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-delfin",
+      "lemma": "Delfin",
+      "verdict": "accept",
+      "rationale": "A familiar school and Black Sea animal. The parent caption correctly says animal mammal; fish food and scoped marine/ocean habitats avoid treating river dolphins as marine.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Delfin",
+        "https://www.scgimpngtitu.ro/pdf/10.12.2024/MANUALE%20DIGITALE%202024-2025/5%20BIO.pdf"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-balena",
+      "lemma": "Balenă",
+      "verdict": "accept",
+      "rationale": "Familiar school fauna, including Romanian early-grade material. The baleen-whale description and mammal parent are coherent; fish food is restricted to some species, supported by the humpback example.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Balen%C4%83",
+        "https://info-natura.ro/balenele-cu-cocoasa-cantaretii-oceanelor/",
+        "https://www.isjcta.ro/wp-content/uploads/2020/05/COMUNICARE-%C3%8EN-LIMBA-ROM%C3%82N%C4%82_CLASA-a-II-a_TESTE_EN.pdf"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-morsa",
+      "lemma": "Morsă",
+      "verdict": "accept",
+      "rationale": "Recognizable primary-school fauna. Semiaquatic mammal and bivalve-food links are honest; the Arctic caption transparently combines Beaufort occurrence with Beaufort’s Arctic location. Scoică is retained.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Mors%C4%83",
+        "https://ro.wikipedia.org/wiki/Marea_Beaufort",
+        "https://www.scgimpngtitu.ro/pdf/10.12.2024/MANUALE%20DIGITALE%202024-2025/5%20BIO.pdf",
+        "https://cdn4.libris.ro/userdocspdf/1437/Matematica%20-%20Clasa%204%20-%20Manual%20-%20Corina%20Andrei%2C%20Constanta%20Balan.pdf"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-caracatita",
+      "lemma": "Caracatiță",
+      "verdict": "accept",
+      "rationale": "A familiar school and marine animal. The eight-arm description and crab prey fit Octopus vulgaris; marine/ocean habitats are legible and the included Crab endpoint preserves the graph floor.",
+      "sources": [
+        "https://www.mrgoodfish.com/ro/species/caracatita-comuna/"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-meduza",
+      "lemma": "Meduză",
+      "verdict": "accept",
+      "rationale": "A familiar school and seaside animal. The gelatinous tentacled description and scoped larval-fish prey are supported for Aurelia aurita, without treating Mnemiopsis as a cnidarian medusa.",
+      "sources": [
+        "https://www.acvariidevis.ro/articole/acvariul-cu-meduze"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-crab",
+      "lemma": "Crab",
+      "verdict": "accept",
+      "rationale": "Familiar school marine fauna. The crustacean description, scoped small-fish and bivalve prey, sea and ocean links are supported; the retained Scoică neighbor keeps all five distinct links valid.",
+      "sources": [
+        "https://apepaduri.mmediu.ro/wp-content/uploads/2014/08/Crustaceele.pdf",
+        "https://www.scgimpngtitu.ro/pdf/10.12.2024/MANUALE%20DIGITALE%202024-2025/5%20BIO.pdf"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-rac",
+      "lemma": "Rac",
+      "verdict": "accept",
+      "rationale": "A familiar Romanian freshwater animal. The selected Astacus astacus example supports rivers, lakes and fish predation on young stages; the caption does not imply fish eat every adult.",
+      "sources": [
+        "https://crayfish.ro/astacusRO.html"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-crevete",
+      "lemma": "Crevete",
+      "verdict": "accept",
+      "rationale": "Familiar school and marine vocabulary. The living crustacean description and scoped sea/ocean habitats are sound; the educational marine source directly supports fish predation.",
+      "sources": [
+        "https://apepaduri.mmediu.ro/wp-content/uploads/2014/08/Crustaceele.pdf",
+        "https://www.scgimpngtitu.ro/pdf/10.12.2024/MANUALE%20DIGITALE%202024-2025/5%20BIO.pdf"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-scoica",
+      "lemma": "Scoică",
+      "verdict": "accept",
+      "rationale": "Familiar school and waterside vocabulary, explicitly the living bivalve. The description, marine/lake examples and fish-prey caption are supported; the endpoint is not reduced to an empty shell.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Scoic%C4%83",
+        "https://www.scgimpngtitu.ro/pdf/10.12.2024/MANUALE%20DIGITALE%202024-2025/5%20BIO.pdf"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-pastrav",
+      "lemma": "Păstrăv",
+      "verdict": "accept",
+      "rationale": "A familiar Romanian mountain-water fish. The cold, oxygenated-water description and insect/larva, river and lake links fit the selected native-trout example.",
+      "sources": [
+        "https://www.pastravarie.ro/index.php/puiet-pastrav-indigen/",
+        "https://www.retezat.ro/media/files/planul%20de%20management%20pnr.pdf"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-crap",
+      "lemma": "Crap",
+      "verdict": "accept",
+      "rationale": "A familiar Romanian freshwater fish. The description and river/lake habitat are appropriate; the earthworm caption explicitly describes bait-taking rather than inferring an exclusive natural diet.",
+      "sources": [
+        "https://www.uaic.ro/organizare/statiuni-de-cercetare-si-santiere-arheologice/statiunea-de-cercetari-pentru-acvacultura-si-ecologie-acvatica-iasi/",
+        "https://www.pecarlig.ro/",
+        "https://download.intuitext.ro/manuale/Intuitext_Manual_BIO_cls_5.pdf"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-caras",
+      "lemma": "Caras",
+      "verdict": "accept",
+      "rationale": "A familiar Romanian freshwater fish with a coherent Carassius gibelio sense. The no-barbel description and habitats fit; the earthworm link stays explicitly about bait and preserves the river-name exclusion.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Caras",
+        "https://cenad.ro/doc/Revista_Cena%CC%86zeanul/2016/cenazeanul_2_2016.pdf",
+        "https://download.intuitext.ro/manuale/Intuitext_Manual_BIO_cls_5.pdf"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-somn",
+      "lemma": "Somn",
+      "verdict": "accept",
+      "rationale": "The qualified fish label prevents the sleep reading. School and aquaculture sources support the scaleless, whiskered predator, frogs and freshwater habitats; inputs are the selected fish inflections.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Somn_(pe%C8%99te)",
+        "https://asas-icdeapa.ro/wp-content/uploads/2024/05/Ghid-de-bune-practici-1-1.pdf",
+        "https://download.intuitext.ro/manuale/Intuitext_Manual_BIO_cls_5.pdf"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-biban",
+      "lemma": "Biban",
+      "verdict": "accept",
+      "rationale": "Familiar Romanian school and fishing vocabulary. The striped freshwater-fish description and habitats fit; chironomid-larva evidence supports the generic insect-larva caption without inventing a prey species.",
+      "sources": [
+        "https://www.uaic.ro/organizare/statiuni-de-cercetare-si-santiere-arheologice/statiunea-de-cercetari-pentru-acvacultura-si-ecologie-acvatica-iasi/",
+        "https://download.intuitext.ro/manuale/Intuitext_Manual_BIO_cls_5.pdf"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-stiuca",
+      "lemma": "Știucă",
+      "verdict": "accept",
+      "rationale": "Familiar school freshwater fauna. The elongated predator description and river/lake links are sound; Romanian biology material explicitly supports frog predation.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/%C8%98tiuc%C4%83",
+        "https://www.clb.ro/userdocspdf/144/biologie-v.pdf",
+        "https://journals.ub.uni-heidelberg.de/index.php/amold/article/download/32034/25743"
+      ],
+      "requested_changes": []
+    },
+    {
+      "id": "v114-salau",
+      "lemma": "Șalău",
+      "verdict": "accept",
+      "rationale": "A familiar Romanian freshwater fish. The predatory description and habitats fit Sander lucioperca; the Nucet passage supports occasional insect larvae in young fish, matching the scoped caption.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/%C8%98al%C4%83u",
+        "https://statiuneapiscicolanucet.ro/wp-content/uploads/2025/09/Sisteme-si-tehnologii-inovative-in-acvacultura_compressed.pdf",
+        "https://download.intuitext.ro/manuale/Intuitext_Manual_BIO_cls_5.pdf"
+      ],
+      "requested_changes": []
+    }
+  ]
+}

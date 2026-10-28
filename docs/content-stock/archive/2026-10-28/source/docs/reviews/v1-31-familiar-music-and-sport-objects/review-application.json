@@ -1,0 +1,477 @@
+{
+  "wave": "1.31",
+  "status": "signed_verdicts_applied_to_source_only",
+  "original_reviewed_module_sha256": "22912e68eb23f9cc11977a739e07555f8c5f40f5b64b8161c54deac998e52205",
+  "frozen_pool_sha256": "80790fd55fe9333f8557122e70995b3b6361e6b2ed2f269d9cbec912fa255d4b",
+  "final_module": {
+    "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-31-familiar-music-and-sport-objects/scripts/familiar_music_and_sport_objects_v1_31_data.py",
+    "sha256": "23ecf969717d5380c73ef34a2f4309bb7d7aa311beeda5706bb9c98514482d3e"
+  },
+  "final_source_counts": {
+    "accepted_items": 47,
+    "new_concepts": 31,
+    "existing_input_families": 16,
+    "active_lexical_families": 49,
+    "inactive_empty_lexical_families": 1,
+    "unique_directed_claims": 123,
+    "full_ordinary_forms_reviewed": 272,
+    "new_normalized_keys": 219,
+    "new_node_keys": 174,
+    "existing_missing_keys": 45,
+    "already_resolved_same_owner": 53,
+    "held": 12,
+    "signed_caption_corrections": 13,
+    "verified_synonyms": 0,
+    "regional_or_popular_input_families": 0,
+    "source_applied": false,
+    "installed": 0,
+    "player_visible_delta": "0/0/0",
+    "target_approval": false,
+    "salience_approval": false,
+    "gameplay_approval": false
+  },
+  "reports": {
+    "factual": {
+      "reviewer": "factual-v1-31",
+      "path": "docs/reviews/v1-31-familiar-music-and-sport-objects/graph-factual-review.json",
+      "sha256": "29e426e9b45bc8d6ce91322f8d996ecc8cc06b5832092b782aebb0929f96ded7",
+      "reviewed_module_sha256": "22912e68eb23f9cc11977a739e07555f8c5f40f5b64b8161c54deac998e52205",
+      "frozen_pool_sha256": "80790fd55fe9333f8557122e70995b3b6361e6b2ed2f269d9cbec912fa255d4b",
+      "capture_catalog": {
+        "path": "/home/dobo/work/_temp/content__v1-31-familiar-music-and-sport-objects/factual-web/capture-catalog.json",
+        "sha256": "c4b7dde0c54e787adee40e08a15bbe8a9dfff6981d6ee1675dfe88acc7feb026",
+        "fresh_HTTP_requests": 185,
+        "dictionary_requests": 96,
+        "non_dictionary_requests": 89,
+        "successful_nonempty_responses": 185,
+        "minimum_own_dictionary_start_gap_seconds": 2.150094985961914,
+        "cached_author_pages_claimed_as_fresh": false,
+        "sealed": true
+      },
+      "round": 1,
+      "verdict_counts": {
+        "item_accept": 47,
+        "item_modify": 0,
+        "item_reject": 0,
+        "description_accept": 47,
+        "active_lexical_family_accept": 49,
+        "inactive_secondary_family_holds_preserved": 1,
+        "ordinary_form_accept": 272,
+        "ordinary_form_modify": 0,
+        "ordinary_form_reject": 0,
+        "edge_accept": 123,
+        "edge_modify": 0,
+        "edge_reject": 0,
+        "whole_item_holds_requested": 0,
+        "edge_drops_requested": 0,
+        "form_drops_requested": 0,
+        "original_whole_holds_preserved": 12,
+        "verified_synonyms": 0,
+        "regional_input_families": 0,
+        "source_applied": false,
+        "installed": 0,
+        "player_visible_delta": "0/0/0"
+      }
+    },
+    "quality": {
+      "reviewer": "quality-v1-31",
+      "path": "docs/reviews/v1-31-familiar-music-and-sport-objects/graph-quality-review.json",
+      "sha256": "4b16903f5ffaf28879eae945acad1a740503bcd343d0620e694af5214ab57054",
+      "reviewed_module_sha256": "22912e68eb23f9cc11977a739e07555f8c5f40f5b64b8161c54deac998e52205",
+      "frozen_pool_sha256": "80790fd55fe9333f8557122e70995b3b6361e6b2ed2f269d9cbec912fa255d4b",
+      "capture_catalog": {
+        "path": "/home/dobo/work/_temp/content__v1-31-familiar-music-and-sport-objects/quality-web/capture-catalog.json",
+        "sha256": "47acb25ec6bd319cbf3cb06cfea33167a2e3f77de3fda4344dbf22ced3450f43",
+        "fresh_HTTP_requests": 192,
+        "dictionary_requests": 94,
+        "non_dictionary_requests": 98,
+        "successful_nonempty_responses": 189,
+        "minimum_own_dictionary_start_gap_seconds": 2.1500766277313232,
+        "cached_author_pages_claimed_as_fresh": false
+      },
+      "round": 1,
+      "verdict_counts": {
+        "items": 47,
+        "accept": 34,
+        "modify": 13,
+        "reject": 0,
+        "hold": 0,
+        "source_supported_items_after_exact_caption_modifications": 47,
+        "new_nodes": 31,
+        "existing_input_families": 16,
+        "forms_accept": 272,
+        "forms_modify": 0,
+        "forms_reject": 0,
+        "edges_accept": 110,
+        "edges_modify": 13,
+        "edges_reject": 0,
+        "signed_caption_modifications": 13,
+        "whole_held_context_items": 12,
+        "partial_held_context_families": 1,
+        "installed": 0,
+        "player_visible_delta": {
+          "concepts": 0,
+          "connections": 0,
+          "forms": 0
+        }
+      }
+    }
+  },
+  "exact_signed_caption_corrections": [
+    {
+      "item_id": "v131-tambal",
+      "before": {
+        "src": "n_v1_31_tambal",
+        "dst": "n_v3muz_pian",
+        "relation": "related_to",
+        "label_ro": "ca pianul,produce sunete prin lovirea corzilor",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "after": {
+        "src": "n_v1_31_tambal",
+        "dst": "n_v3muz_pian",
+        "relation": "related_to",
+        "label_ro": "ca pianul, produce sunete prin lovirea corzilor",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "requested_by": [
+        "quality-v1-31"
+      ],
+      "reason": "Insert the ordinary space after a comma. Direction, endpoints, relation, quantifier, factual scope and graph coverage remain exactly unchanged."
+    },
+    {
+      "item_id": "v131-flaut",
+      "before": {
+        "src": "n_v1_31_flaut",
+        "dst": "n_v17muz_nai",
+        "relation": "related_to",
+        "label_ro": "ca naiul,face parte din instrumentele de suflat",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "after": {
+        "src": "n_v1_31_flaut",
+        "dst": "n_v17muz_nai",
+        "relation": "related_to",
+        "label_ro": "ca naiul, face parte din instrumentele de suflat",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "requested_by": [
+        "quality-v1-31"
+      ],
+      "reason": "Insert the ordinary space after a comma. Direction, endpoints, relation, quantifier, factual scope and graph coverage remain exactly unchanged."
+    },
+    {
+      "item_id": "v131-caval",
+      "before": {
+        "src": "n_v1_31_caval",
+        "dst": "n_v17muz_nai",
+        "relation": "related_to",
+        "label_ro": "ca naiul,face parte din instrumentele de suflat",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "after": {
+        "src": "n_v1_31_caval",
+        "dst": "n_v17muz_nai",
+        "relation": "related_to",
+        "label_ro": "ca naiul, face parte din instrumentele de suflat",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "requested_by": [
+        "quality-v1-31"
+      ],
+      "reason": "Insert the ordinary space after a comma. Direction, endpoints, relation, quantifier, factual scope and graph coverage remain exactly unchanged."
+    },
+    {
+      "item_id": "v131-cimpoi",
+      "before": {
+        "src": "n_v1_31_cimpoi",
+        "dst": "n_v17muz_nai",
+        "relation": "related_to",
+        "label_ro": "ca naiul,face parte din instrumentele de suflat",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "after": {
+        "src": "n_v1_31_cimpoi",
+        "dst": "n_v17muz_nai",
+        "relation": "related_to",
+        "label_ro": "ca naiul, face parte din instrumentele de suflat",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "requested_by": [
+        "quality-v1-31"
+      ],
+      "reason": "Insert the ordinary space after a comma. Direction, endpoints, relation, quantifier, factual scope and graph coverage remain exactly unchanged."
+    },
+    {
+      "item_id": "v131-clarinet",
+      "before": {
+        "src": "n_v1_31_clarinet",
+        "dst": "n_v17muz_nai",
+        "relation": "related_to",
+        "label_ro": "ca naiul,face parte din instrumentele de suflat",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "after": {
+        "src": "n_v1_31_clarinet",
+        "dst": "n_v17muz_nai",
+        "relation": "related_to",
+        "label_ro": "ca naiul, face parte din instrumentele de suflat",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "requested_by": [
+        "quality-v1-31"
+      ],
+      "reason": "Insert the ordinary space after a comma. Direction, endpoints, relation, quantifier, factual scope and graph coverage remain exactly unchanged."
+    },
+    {
+      "item_id": "v131-saxofon",
+      "before": {
+        "src": "n_v1_31_saxofon",
+        "dst": "n_v17muz_nai",
+        "relation": "related_to",
+        "label_ro": "ca naiul,face parte din instrumentele de suflat",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "after": {
+        "src": "n_v1_31_saxofon",
+        "dst": "n_v17muz_nai",
+        "relation": "related_to",
+        "label_ro": "ca naiul, face parte din instrumentele de suflat",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "requested_by": [
+        "quality-v1-31"
+      ],
+      "reason": "Insert the ordinary space after a comma. Direction, endpoints, relation, quantifier, factual scope and graph coverage remain exactly unchanged."
+    },
+    {
+      "item_id": "v131-trompeta",
+      "before": {
+        "src": "n_v1_31_trompeta",
+        "dst": "n_v17muz_nai",
+        "relation": "related_to",
+        "label_ro": "ca naiul,face parte din instrumentele de suflat",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "after": {
+        "src": "n_v1_31_trompeta",
+        "dst": "n_v17muz_nai",
+        "relation": "related_to",
+        "label_ro": "ca naiul, face parte din instrumentele de suflat",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "requested_by": [
+        "quality-v1-31"
+      ],
+      "reason": "Insert the ordinary space after a comma. Direction, endpoints, relation, quantifier, factual scope and graph coverage remain exactly unchanged."
+    },
+    {
+      "item_id": "v131-trombon",
+      "before": {
+        "src": "n_v1_31_trombon",
+        "dst": "n_v17muz_nai",
+        "relation": "related_to",
+        "label_ro": "ca naiul,face parte din instrumentele de suflat",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "after": {
+        "src": "n_v1_31_trombon",
+        "dst": "n_v17muz_nai",
+        "relation": "related_to",
+        "label_ro": "ca naiul, face parte din instrumentele de suflat",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "requested_by": [
+        "quality-v1-31"
+      ],
+      "reason": "Insert the ordinary space after a comma. Direction, endpoints, relation, quantifier, factual scope and graph coverage remain exactly unchanged."
+    },
+    {
+      "item_id": "v131-corn-muzical",
+      "before": {
+        "src": "n_v1_31_corn_muzical",
+        "dst": "n_v17muz_nai",
+        "relation": "related_to",
+        "label_ro": "ca naiul,face parte din instrumentele de suflat",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "after": {
+        "src": "n_v1_31_corn_muzical",
+        "dst": "n_v17muz_nai",
+        "relation": "related_to",
+        "label_ro": "ca naiul, face parte din instrumentele de suflat",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "requested_by": [
+        "quality-v1-31"
+      ],
+      "reason": "Insert the ordinary space after a comma. Direction, endpoints, relation, quantifier, factual scope and graph coverage remain exactly unchanged."
+    },
+    {
+      "item_id": "v131-tuba",
+      "before": {
+        "src": "n_v1_31_tuba",
+        "dst": "n_v17muz_nai",
+        "relation": "related_to",
+        "label_ro": "ca naiul,face parte din instrumentele de suflat",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "after": {
+        "src": "n_v1_31_tuba",
+        "dst": "n_v17muz_nai",
+        "relation": "related_to",
+        "label_ro": "ca naiul, face parte din instrumentele de suflat",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "requested_by": [
+        "quality-v1-31"
+      ],
+      "reason": "Insert the ordinary space after a comma. Direction, endpoints, relation, quantifier, factual scope and graph coverage remain exactly unchanged."
+    },
+    {
+      "item_id": "v131-orga",
+      "before": {
+        "src": "n_v1_31_orga",
+        "dst": "n_v3muz_pian",
+        "relation": "related_to",
+        "label_ro": "unele modele sunt acționate cu clape,ca pianul",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "after": {
+        "src": "n_v1_31_orga",
+        "dst": "n_v3muz_pian",
+        "relation": "related_to",
+        "label_ro": "unele modele sunt acționate cu clape, ca pianul",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "requested_by": [
+        "quality-v1-31"
+      ],
+      "reason": "Insert the ordinary space after a comma. Direction, endpoints, relation, quantifier, factual scope and graph coverage remain exactly unchanged."
+    },
+    {
+      "item_id": "v131-acordeon",
+      "before": {
+        "src": "n_v1_31_acordeon",
+        "dst": "n_v3muz_pian",
+        "relation": "related_to",
+        "label_ro": "unele modele sunt acționate cu clape,ca pianul",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "after": {
+        "src": "n_v1_31_acordeon",
+        "dst": "n_v3muz_pian",
+        "relation": "related_to",
+        "label_ro": "unele modele sunt acționate cu clape, ca pianul",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "requested_by": [
+        "quality-v1-31"
+      ],
+      "reason": "Insert the ordinary space after a comma. Direction, endpoints, relation, quantifier, factual scope and graph coverage remain exactly unchanged."
+    },
+    {
+      "item_id": "v131-muzicuta",
+      "before": {
+        "src": "n_v1_31_muzicuta",
+        "dst": "n_v17muz_nai",
+        "relation": "related_to",
+        "label_ro": "ca naiul,face parte din instrumentele de suflat",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "after": {
+        "src": "n_v1_31_muzicuta",
+        "dst": "n_v17muz_nai",
+        "relation": "related_to",
+        "label_ro": "ca naiul, face parte din instrumentele de suflat",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "requested_by": [
+        "quality-v1-31"
+      ],
+      "reason": "Insert the ordinary space after a comma. Direction, endpoints, relation, quantifier, factual scope and graph coverage remain exactly unchanged."
+    }
+  ],
+  "nodes_forms_edge_membership_and_owners_unchanged": true,
+  "held_rows_inactive_Difuzor_and_original_clocks_unchanged": true,
+  "whole_batch_formal_review_rounds": 1,
+  "independent_whole_batch_judgments": 2,
+  "cached_application_audits": {
+    "factual": {
+      "reviewer": "factual-v1-31",
+      "path": "/home/dobo/work/_temp/content__v1-31-familiar-music-and-sport-objects/step3-factual-application-audit.json",
+      "sha256": "eb794b4f2b3f2d0777c60dfd8c6aa4aa7078ebf67d4d350492709ef43270e408",
+      "status": "PASS",
+      "web_calls": 0,
+      "new_formal_review_rounds": 0
+    },
+    "quality": {
+      "reviewer": "quality-v1-31",
+      "path": "/home/dobo/work/_temp/content__v1-31-familiar-music-and-sport-objects/step3-quality-application-audit.json",
+      "sha256": "041bcb90f0cbf25acc868a16ba5a592c1517867353316b993f5e32efa780fd61",
+      "status": "PASS",
+      "web_calls": 0,
+      "new_formal_review_rounds": 0
+    }
+  },
+  "source_applied": false,
+  "installed": 0,
+  "player_visible_delta": "0/0/0",
+  "target_approval": false,
+  "salience_approval": false,
+  "gameplay_approval": false,
+  "no_importer_or_dry_run": true,
+  "scope": "Only thirteen signed comma-spacing corrections and review bookkeeping differ from the original;no node/form/edge drop,new claim,backfill or threshold waiver."
+}

@@ -1,0 +1,324 @@
+{
+  "analyst": "quality-v1-32",
+  "task": "Independent cached/static final consolidation quality audit",
+  "status": "PASS",
+  "issues": [],
+  "observed_at_utc": "2026-10-16T14:23:02.192980+00:00",
+  "scope": {
+    "read_only_analysis": true,
+    "web_calls": 0,
+    "formal_review_used": false,
+    "source_approvals": 0,
+    "candidate_authorship": false,
+    "docs_or_source_edits": 0,
+    "tests_run": 0,
+    "importer_or_dryrun_calls": 0,
+    "source_applied": false,
+    "integration_executed": false,
+    "integration_safety_established": false,
+    "remote_operations": 0,
+    "merge_authorized": false,
+    "new_wave_started": false,
+    "player_visible_delta": "0/0/0"
+  },
+  "latest_local_main": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+  "main_clean_at_seal": true,
+  "bundle_sha256": "f6d983f1ab2cbb7852e8583411eaecd2048fdb5b5da08099129d7e4ff471344c",
+  "analysis_branch": "docs/content-consolidation-v1-8-to-v1-32",
+  "analysis_inventory_commit": "b187f5b308debd318da5df3d44d88d5b57071020",
+  "artifact_sha256": {
+    "assessment.md": "3ea071c9b2e6861d771cf1f31cf52c2c4b849fc0b2297a5bcac3727852dc9812",
+    "candidate-inputs.md": "fc1efc616a136291873eccf3e9b76a4c03483f044a402b8abbc1f24c6d43525d",
+    "connections.json": "fdb6a0fffc61210601146ccab438ee142ffb572378b452b948d8fa5f2fd10912",
+    "forms.json": "3bf536d8a06238668bf38e3f8fd99060725f08b001436cc9f36ae02391fa9bb3",
+    "game-impact.json": "766e98a9d42991f0f08baa260249c44904b9521e1ccedc89a54872d0ce6566c6",
+    "improved-loop-prompt.txt": "2c21dfcfe940d9e7655eb679658aec889bdcaaa7ea40eb4ba0dc5913c76c2738",
+    "inventory.json": "c74fa54938d973bdbf08932edf62253a47dacb74b36c3efc0ae8d965362ca0b4",
+    "main-lexicon.json": "7c5a4d7d2ce98bb6932b2491850fcf3621d12d5faf992cdb9cef7aa5950bd550",
+    "manifest.json": "3cd307383fca8f5053db3b8d9c599f9be14ff811ee6582e04990a491241ed233",
+    "schema-audit.json": "1d6f6ac63ae76f4f2bcdb056f9ea558387c4c878d08167957be9d815a1e3164d",
+    "word-index.md": "f88785bcc312a40473d3b5d056e2b5ca4c57d928ed679c1819a1f62a46ef895a"
+  },
+  "code_and_game_distinctions": {
+    "impact_report_preserved_verbatim": true,
+    "current_code_file_hashes_verified": 22,
+    "exact_code_references": 45,
+    "six_game_matrix_rows": 6,
+    "findings": [
+      "Cald/Lanț directly resolve typed text; Intrusul/Perechi/Conexiuni guess active-board IDs and Alchimie combines owned IDs. The draft correctly avoids granting identical typed-input gains to all six interfaces.",
+      "Existing-owner aliases can change global fuzzy/suggestion competition and Cald exact-versus-projection precedence, repeated-guess identity and target wins. They preserve topology only when nothing beyond alias keys changes.",
+      "Complete node snapshots include aliases. Discovery-world/export provenance can fail and Alchimie extensions can fall back to the core on snapshot mismatch. A missing direct snapshot flag is not global isolation.",
+      "New graph rows are admitted by runtime construction without source_applied/TARGET_APPROVAL/GAMEPLAY_APPROVAL node filters. Salience 0.5 and strength 0.75 are active selection/scoring values, not quarantine.",
+      "Graph changes may affect existing Cald profiles/ranks/clues, Lanț directed distances/choices, Alchimie recipe projections/par and Conexiuni fallbacks. Direction and actual reachability constrain effects; no exact integrated disturbance was executed or measured.",
+      "Source truth, ordinary input coverage, target familiarity/salience and playable rounds remain distinct. Static C3 counts do not qualify recognition or targets."
+    ]
+  },
+  "independently_recomputed_inventory": {
+    "canonical_records": 1364,
+    "source_states": {
+      "integrated": 218,
+      "held": 308,
+      "accepted": 837,
+      "rejected": 1
+    },
+    "pending_accepted_records": 837,
+    "pending_new_nodes": 709,
+    "pending_existing_owner_families": 128,
+    "pending_directed_claims": 2844,
+    "missing_normalized_payload_keys": 4503,
+    "ordinary_source_form_keys": 4500,
+    "canonical_display_label_only_keys": 3,
+    "existing_owner_morphology": {
+      "families": 62,
+      "missing_keys": 101
+    },
+    "existing_owner_selected_lexical_or_qualified": {
+      "families": 66,
+      "missing_keys": 389
+    },
+    "cald_projection_keys_that_would_gain_exact_precedence": 103,
+    "current_foreign_owner_or_competing_pending_owner_collisions": 0,
+    "combined_graph_numeric_predecessor_floor": {
+      "new_nodes_atleast5": 45,
+      "new_nodes_below5": 664,
+      "per_record_adjacency_mismatches": 0,
+      "method": "Unique directed nondistractor predecessors from current bundle plus final source edges; bidirectional traversal both ways, no self predecessors, parallel rows deduplicated; only known endpoints. Numeric observation only, not C3 or target approval."
+    },
+    "existing_owner_families_with_direct_world_or_extension_snapshots": 40,
+    "concrete_first_candidate_subset": {
+      "families": [
+        "Stea",
+        "Picior",
+        "Trotuar",
+        "Stradă",
+        "Tren",
+        "Tramvai",
+        "Gară",
+        "Stație",
+        "Aeroport",
+        "Camion"
+      ],
+      "family_count": 10,
+      "missing_keys": 19,
+      "direct_world_or_extension_snapshot_matches": 0,
+      "status": "Proposed review scope only; global source/authority bindings, exact/fuzzy/proxy behavior and integration remain unqualified."
+    },
+    "all_form_observations": 8597,
+    "unique_observed_normalized_keys": 8290,
+    "held_or_observation_only_form_rows": 2622
+  },
+  "preservation": {
+    "exact_closure_count": 19,
+    "exact_closures": [
+      {
+        "wave": "1.14",
+        "branch": "content/v1-14-animals-and-habitats",
+        "commit": "4b634cab38cbce90ac6eb02e0907578335208c69",
+        "worktree_present": true,
+        "scratch_present": true
+      },
+      {
+        "wave": "1.15",
+        "branch": "content/v1-15-home-school-words",
+        "commit": "2ace3df01d4871fa1990feadd4b485d6be496d81",
+        "worktree_present": true,
+        "scratch_present": true
+      },
+      {
+        "wave": "1.16",
+        "branch": "content/v1-16-travel-and-street-words",
+        "commit": "ecb50b463d8d1f0300d435126f934fe90b29fe5b",
+        "worktree_present": true,
+        "scratch_present": true
+      },
+      {
+        "wave": "1.17",
+        "branch": "content/v1-17-garden-and-kitchen-words",
+        "commit": "df2fd5e5196cb1584cb8e330adbc2b71b855fab8",
+        "worktree_present": true,
+        "scratch_present": true
+      },
+      {
+        "wave": "1.18",
+        "branch": "content/v1-18-body-and-everyday-care",
+        "commit": "69ebb9f3631ac41f4ac80c76c9d6795c29b78fa8",
+        "worktree_present": true,
+        "scratch_present": true
+      },
+      {
+        "wave": "1.19",
+        "branch": "content/v1-19-tools-and-crafts",
+        "commit": "5159b0417d4f62b46f28b3a4a37dabf9c07bc389",
+        "worktree_present": true,
+        "scratch_present": true
+      },
+      {
+        "wave": "1.20",
+        "branch": "content/v1-20-school-and-hobbies",
+        "commit": "bc0ed56c826b9bab0c0f9408ff8fd1a36a539f94",
+        "worktree_present": true,
+        "scratch_present": true
+      },
+      {
+        "wave": "1.21",
+        "branch": "content/v1-21-clothing-and-household-storage",
+        "commit": "be42df68abfbf2a40e879cbe53c671b70d69c6d0",
+        "worktree_present": true,
+        "scratch_present": true
+      },
+      {
+        "wave": "1.22",
+        "branch": "content/v1-22-home-fixtures-and-materials",
+        "commit": "c10e4c2394ae82dae4f7bd22f56f91ca854f26ba",
+        "worktree_present": true,
+        "scratch_present": true
+      },
+      {
+        "wave": "1.23",
+        "branch": "content/v1-23-pantry-and-tableware",
+        "commit": "489504300c8ea2c323de7f4e4e497eeb157947e3",
+        "worktree_present": true,
+        "scratch_present": true
+      },
+      {
+        "wave": "1.24",
+        "branch": "content/v1-24-familiar-foods-and-inputs",
+        "commit": "53a090735baea74bc8c99470070eaf718fe4cc38",
+        "worktree_present": true,
+        "scratch_present": true
+      },
+      {
+        "wave": "1.25",
+        "branch": "content/v1-25-common-places-and-objects",
+        "commit": "b0de8a38abfaf7366418f5c79df6cb74c224920d",
+        "worktree_present": true,
+        "scratch_present": true
+      },
+      {
+        "wave": "1.26",
+        "branch": "content/v1-26-school-play-and-devices",
+        "commit": "c7f45781d071a9b784357f8ef7b10f259d6f5121",
+        "worktree_present": true,
+        "scratch_present": true
+      },
+      {
+        "wave": "1.27",
+        "branch": "content/v1-27-familiar-foods-and-plants",
+        "commit": "93ff482efe7f0c3ce906ce735726f8a3cf8a9649",
+        "worktree_present": true,
+        "scratch_present": true
+      },
+      {
+        "wave": "1.28",
+        "branch": "content/v1-28-familiar-animals-and-outdoor-words",
+        "commit": "6874e9f65e2e8af8debbee9edbf6625c570d9d52",
+        "worktree_present": true,
+        "scratch_present": true
+      },
+      {
+        "wave": "1.29",
+        "branch": "content/v1-29-familiar-people-and-community",
+        "commit": "f53df8b0811537262f68a8c0c19dc4c132db101c",
+        "worktree_present": true,
+        "scratch_present": true
+      },
+      {
+        "wave": "1.30",
+        "branch": "content/v1-30-familiar-shapes-and-school-measures",
+        "commit": "b5b3abdbe8aac9ca21f425db454576a438d21222",
+        "worktree_present": true,
+        "scratch_present": true
+      },
+      {
+        "wave": "1.31",
+        "branch": "content/v1-31-familiar-music-and-sport-objects",
+        "commit": "4aa8d6e504835cc1f2e3051f24c45c729a0d449a",
+        "worktree_present": true,
+        "scratch_present": true
+      },
+      {
+        "wave": "1.32",
+        "branch": "content/v1-32-familiar-water-weather-and-shore",
+        "commit": "772d187160ac6c4d209e24c999a26e42b621c427",
+        "worktree_present": true,
+        "scratch_present": true
+      }
+    ],
+    "canonical_pool_module_review_hash_checks": 100,
+    "hash_mismatches": 0,
+    "source_packets_edited": false,
+    "V1_14_partial_install_or_exception_reopened": false,
+    "holds_or_inactive_families_reopened": false
+  },
+  "improved_prompt_assessment": {
+    "draft_only_not_activated": true,
+    "explicit_later_adoption_required": true,
+    "separate_install_or_merge_authority_required": true,
+    "addresses_run_findings": [
+      "Reconcile canonical pending stock with current local main before discovery and before fresh source calls.",
+      "Choose concrete high-value coverage gaps and distinguish ordinary morphology, selected lexical inputs, graph facts and playable rounds.",
+      "Retain exact ownership, selected-sense classification, partial exclusions, actual normative tables and signed reviewer bindings.",
+      "Declare actual game input contracts and separate numeric graph floors from target/round suitability.",
+      "Keep standing wave/tick/research/review budgets and genuine blockers; preserve source closures and declined V1.14 exception.",
+      "Require exact future integration qualification; source flags cannot invent a words-only runtime tier.",
+      "Do not restart discovery from this draft; later adopted continuous scope still requires a concrete uncovered useful gap."
+    ],
+    "corrected_path_finding": {
+      "status": "RESOLVED_BY_ROOT",
+      "file": "improved-loop-prompt.txt",
+      "line": 12,
+      "before": "docs/content-consolidation-v1-8-through-v1-32/",
+      "after": "docs/content-consolidation/v1-8-through-v1-32/"
+    },
+    "new_assessment_paragraphs_checked": [
+      "Ten named families/19 missing keys and absence from direct world/extension node snapshots independently recomputed. The paragraph explicitly reserves global binding/input qualification.",
+      "No metadata-created runtime words-only tier; keep graph stock uninstalled when unchanged target/rank/routes is required until actual effects are qualified. Any new admission mechanism is a separate owner-approved writer/product decision."
+    ]
+  },
+  "recommendations": [
+    "Present the 10-family/19-form subset as the first concrete proposed integration scope, conditional on separate owner authorization and existing qualification; do not call it tested or zero-impact.",
+    "Keep 709 new graph concepts/2,844 claims uninstalled until game effects and target/round suitability are qualified and accepted; no bulk branch merge.",
+    "Keep this improved prompt as an inactive proposal until explicitly adopted; do not open another wave now."
+  ],
+  "final_limit": "PASS means these analysis documents consistently describe cached source inventory and current code. It is not source re-review, integrated test evidence, install approval, target/round approval or a safe-to-merge determination.",
+  "cached_delta_verification": {
+    "previous_audit_sha256": "60662fc3260eaebcc077e718299bf339f673238ddf74eadaa26de9639bdea640",
+    "status": "PASS",
+    "issues": [],
+    "changed_artifacts": [
+      "forms.json",
+      "inventory.json",
+      "manifest.json"
+    ],
+    "all_previous_form_rows_exact": true,
+    "only_inventory_record_changed": "v130-compas",
+    "inventory_fields_changed": [
+      "source_form_exclusions",
+      "form_assessment_counts"
+    ],
+    "canonical_source_ref": "b5b3abdbe8aac9ca21f425db454576a438d21222",
+    "canonical_pool_path": "docs/content-pool/v1-30-familiar-shapes-and-school-measures/pool.json",
+    "canonical_unplanned_table_variant_attention_exact": true,
+    "retained_inactive_forms": [
+      "compase",
+      "compasele",
+      "compaselor"
+    ],
+    "new_form_rows": 3,
+    "source_approved": false,
+    "module_payload": false,
+    "payload_class": "observation_only",
+    "assessment": "held_or_observation_only",
+    "prior_form_hold": false,
+    "attention_only_nonreserving": true,
+    "accepted_pending_payload_keys_unchanged": 4503,
+    "ordinary_pending_keys_unchanged": 4500,
+    "display_only_keys_unchanged": 3,
+    "source_approvals": 0,
+    "formal_review_used": false,
+    "web_calls": 0,
+    "assessment_prompt_code_and_other_artifact_hashes_unchanged": true,
+    "protected_19_closure_tips_unchanged": true,
+    "note": "Restores exact inactive canonical observations only; these attention rows create no lexical reservation or new owner hold. No new form admission, semantic/source verdict, module payload, game-impact finding or integration qualification."
+  }
+}

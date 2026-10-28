@@ -1,0 +1,82 @@
+{
+  "wave_base": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+  "go_version": "go1.27.1",
+  "procedure_rev": "17b97a2b",
+  "checks": {
+    "validate": {
+      "name": "validate",
+      "command": "go -C go-backend run ./cmd/cat-content validate --root ..",
+      "returncode": 0,
+      "status": "PASS",
+      "first_error": null,
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-23-pantry-and-tableware",
+      "output_sha256": "1d2e645a4a6946dae65ac9fc067442df3e7a430fc9fee3039e41fd1ee3819976"
+    },
+    "export": {
+      "name": "export",
+      "command": "go -C go-backend run ./cmd/cat-content export --root .. --check",
+      "returncode": 0,
+      "status": "PASS",
+      "first_error": null,
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-23-pantry-and-tableware",
+      "output_sha256": "4f715aebbcf4c517ca8a5686959372f4ab156e4e62f897e6e5e607156dc5c8fb"
+    },
+    "ops": {
+      "name": "ops",
+      "command": "go -C go-backend run ./cmd/cat-content-ops check --root .. --check",
+      "returncode": 0,
+      "status": "PASS",
+      "first_error": null,
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-23-pantry-and-tableware",
+      "output_sha256": "e7fd15f1a6e05c103f027645f7ceed93387d123ed27c882c83104a823575e311"
+    },
+    "rails": {
+      "name": "rails",
+      "command": "go -C go-backend run ./cmd/cat-content-rail all --root .. --check",
+      "returncode": 0,
+      "status": "PASS",
+      "first_error": null,
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-23-pantry-and-tableware",
+      "output_sha256": "bea7844de79b62344740900b92f72a8dac18665d946333cb53ecc5f38d6273c7"
+    },
+    "tests": {
+      "name": "tests",
+      "command": "go -C go-backend test ./internal/contentrails/ ./internal/contentbuild/ ./internal/httpgolden/",
+      "returncode": 0,
+      "status": "PASS",
+      "first_error": null,
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-23-pantry-and-tableware",
+      "output_sha256": "af95115f70e1231d8d2410099bbb24adaa3f58f708165f6334455588264ff45f"
+    },
+    "delta": {
+      "name": "delta",
+      "command": "go -C go-backend run ./cmd/cat-content-ops delta --root .. --baseline d30b0aa47248b9a5944e015f2daf54cc5a795617 --text",
+      "returncode": 0,
+      "status": "PASS",
+      "first_error": null,
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-23-pantry-and-tableware",
+      "output_sha256": "b40a630a80b59dd1f32e0aec8fed5fa03768e4fc635c8d8e22378d0ce1ca34ba"
+    },
+    "main-rails": {
+      "name": "main-rails",
+      "command": "go -C go-backend run ./cmd/cat-content-rail all --root .. --check",
+      "returncode": 0,
+      "status": "PASS",
+      "first_error": null,
+      "cwd": "/home/dobo/work/cat_de_roman_esti",
+      "output_sha256": "bea7844de79b62344740900b92f72a8dac18665d946333cb53ecc5f38d6273c7"
+    },
+    "main-tests": {
+      "name": "main-tests",
+      "command": "go -C go-backend test ./internal/contentrails/ ./internal/contentbuild/",
+      "returncode": 0,
+      "status": "PASS",
+      "first_error": null,
+      "cwd": "/home/dobo/work/cat_de_roman_esti",
+      "output_sha256": "93e38a51eb991c42c79393c4de9200a9df082730e5c0311655a0ee8ecabcf63d"
+    }
+  },
+  "install_enabled_by_main_gates": true,
+  "owner_apply_permission": false,
+  "scope": "Read-only unchanged-serving baseline; green checks do not authorize applying this unlanded pool."
+}

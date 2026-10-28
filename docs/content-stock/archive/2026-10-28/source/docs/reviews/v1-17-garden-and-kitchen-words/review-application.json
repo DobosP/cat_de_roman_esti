@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "wave": "1.17",
+  "reviewed_original_module_sha256": "acd2ff4ba18ef7c0577f0def8a97a2535cf1e69473804a5d1ef5d1d8b2db4af1",
+  "original_module_file": "reviewed-module.py.txt",
+  "final_module_path": "scripts/garden_and_kitchen_words_v1_17_data.py",
+  "final_module_sha256": "72b95751972b968f8f420cf8d5bae6174668d2f2aafedb6c21caa1d97dfa26e2",
+  "review_sha256": {
+    "factual": "002894ebb92f418b4d43507966fdd5dd7a2bdc783a5cfa317f2d66bc9f82cb0c",
+    "quality": "b0f98f1d66b16de8435a95ff3d1605e92dcf202e0795d061180ad25158ad1232"
+  },
+  "review_round": 1,
+  "required_changes_applied": [
+    {
+      "action": "replace_edge_sources",
+      "edge": {
+        "src": "n_v1_17_compost",
+        "dst": "n_v2sti_bacterie",
+        "relation": "related_to"
+      },
+      "old_sources": [
+        "https://www.botosanijudetcurat.ro/despre-proiect/despre-compost/"
+      ],
+      "new_sources": [
+        "https://www.cjsm.ro/storage/ddr/pjgd/compostarea-2024.pdf"
+      ],
+      "add_item_source": {
+        "url": "https://www.cjsm.ro/storage/ddr/pjgd/compostarea-2024.pdf",
+        "paraphrase": "Broșura CJ Satu Mare explică descompunerea materiei organice în compost prin microorganisme, inclusiv bacterii și fungi."
+      },
+      "reason": "Botoșani descrie introducerea bacteriilor în sol; noua sursă susține exact participarea lor la formarea compostului. Păstrează endpointurile și captionul.",
+      "item_id": "v117-compost"
+    },
+    {
+      "action": "replace_edge_sources",
+      "edge": {
+        "src": "n_v1_17_chefir",
+        "dst": "n_v3gas_clatite",
+        "relation": "related_to"
+      },
+      "old_sources": [
+        "https://www.napolact.ro/chefir",
+        "https://www.lalena.ro/reteta/89/Buttermilk-Pancakes-Clatite-americane-cu-iaurt/"
+      ],
+      "new_sources": [
+        "https://pofta-buna.com/clatite-cu-cascaval/"
+      ],
+      "replace_item_source": {
+        "old_url": "https://www.lalena.ro/reteta/89/Buttermilk-Pancakes-Clatite-americane-cu-iaurt/",
+        "new_url": "https://pofta-buna.com/clatite-cu-cascaval/",
+        "paraphrase": "Introducerea rețetei Radmilei Girbu, publicată pe Poftă bună, enumeră chefirul în aluatul foilor subțiri de clătite; rețeta exemplificată folosește lapte."
+      },
+      "reason": "LaLena89 documentează pancakes americane, diferite de nodul servit descris ca foi subțiri. Introducerea sursei noi susține exact sensul existent; nu afirmă că ingredientele rețetei exemplificate conțin chefir.",
+      "item_id": "v117-chefir"
+    },
+    {
+      "action": "replace_edge_field",
+      "edge": {
+        "src": "n_v1_17_cas",
+        "dst": "n_v2gas_branza",
+        "relation": "is_a"
+      },
+      "field": "label_ro",
+      "old": "este o brânză proaspătă",
+      "new": "este un sortiment de brânză",
+      "reason": "Sursele susțin sortimentul de brânză; proaspătă este demonstrată pentru un exemplu de rețetă, fără a fi necesară întregului concept. Păstrează sursele și relația is_a.",
+      "item_id": "v117-cas"
+    }
+  ],
+  "quality_change_also_satisfied": {
+    "action": "replace_edge_caption",
+    "src": "n_v1_17_cas",
+    "dst": "n_v2gas_branza",
+    "relation": "is_a",
+    "old": "este o brânză proaspătă",
+    "new": "este un sortiment de brânză",
+    "rationale": "The unqualified Caș concept covers cheese from drained curd; a Romanian producer also markets matured caș. The taxonomic edge is truthful without universally imposing freshness. Keep is_a, endpoints, forms and description unchanged.",
+    "sources": [
+      "https://dexonline.ro/definitie/ca%C8%99/json",
+      "https://www.laktotrio.ro/cas-maturat-cu-lapte-de-oaie-1-kg-cod-00001195"
+    ]
+  },
+  "additional_evidence_metadata": "Compost broader source paraphrase narrowed to its actual scope; quality mature-caș source retained; selected records marked reviewed/unapplied and Bol exact-sense acceptance made explicit. No new forms, nodes, categories or endpoints authored after review.",
+  "retained_counts": {
+    "accepted_reviewed_items": 49,
+    "new_concepts": 39,
+    "connections": 163,
+    "missing_normalized_keys": 227,
+    "held": 11,
+    "installed": 0,
+    "player_visible_delta": "0/0/0"
+  },
+  "status": "not_landed / owner_review_later",
+  "semantic_re_review": "None; explicit verdict application only, allowed by CONTENT_LOOP step3."
+}

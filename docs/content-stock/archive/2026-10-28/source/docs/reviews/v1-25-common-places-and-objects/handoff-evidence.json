@@ -1,0 +1,334 @@
+{
+  "wave": "1.25",
+  "landing_status": "not_landed",
+  "handoff_status": "owner_review_later",
+  "review_commit": "1b676bd6d6b97bdac561cdf1bdd23ec26437a69e",
+  "baseline_commit": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+  "module_sha256": "4c6f820489d1e138603f23d950a2eb14c22122daafc16e911b7b25bb01b3d15b",
+  "reviewed_original_module_sha256": "daeb0e6dd96de8b53553776e73e00357c8202f9328efe4325943780d2707e9f7",
+  "baseline": {
+    "wave_base": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+    "go_version": "go1.27.1",
+    "procedure_rev": "17b97a2b",
+    "checks": {
+      "validate": {
+        "name": "validate",
+        "command": "go -C go-backend run ./cmd/cat-content validate --root ..",
+        "returncode": 0,
+        "status": "PASS",
+        "first_error": null,
+        "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-25-common-places-and-objects",
+        "output_sha256": "1d2e645a4a6946dae65ac9fc067442df3e7a430fc9fee3039e41fd1ee3819976"
+      },
+      "export": {
+        "name": "export",
+        "command": "go -C go-backend run ./cmd/cat-content export --root .. --check",
+        "returncode": 0,
+        "status": "PASS",
+        "first_error": null,
+        "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-25-common-places-and-objects",
+        "output_sha256": "4f715aebbcf4c517ca8a5686959372f4ab156e4e62f897e6e5e607156dc5c8fb"
+      },
+      "ops": {
+        "name": "ops",
+        "command": "go -C go-backend run ./cmd/cat-content-ops check --root .. --check",
+        "returncode": 0,
+        "status": "PASS",
+        "first_error": null,
+        "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-25-common-places-and-objects",
+        "output_sha256": "e7fd15f1a6e05c103f027645f7ceed93387d123ed27c882c83104a823575e311"
+      },
+      "rails": {
+        "name": "rails",
+        "command": "go -C go-backend run ./cmd/cat-content-rail all --root .. --check",
+        "returncode": 0,
+        "status": "PASS",
+        "first_error": null,
+        "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-25-common-places-and-objects",
+        "output_sha256": "bea7844de79b62344740900b92f72a8dac18665d946333cb53ecc5f38d6273c7"
+      },
+      "tests": {
+        "name": "tests",
+        "command": "go -C go-backend test ./internal/contentrails/ ./internal/contentbuild/ ./internal/httpgolden/",
+        "returncode": 0,
+        "status": "PASS",
+        "first_error": null,
+        "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-25-common-places-and-objects",
+        "output_sha256": "a27bc7198b85104325e0ac5eb6d5316403e24e3e4f6f9b19ae58c3518d3eaaae"
+      },
+      "delta": {
+        "name": "delta",
+        "command": "go -C go-backend run ./cmd/cat-content-ops delta --root .. --baseline d30b0aa47248b9a5944e015f2daf54cc5a795617 --text",
+        "returncode": 0,
+        "status": "PASS",
+        "first_error": null,
+        "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-25-common-places-and-objects",
+        "output_sha256": "b40a630a80b59dd1f32e0aec8fed5fa03768e4fc635c8d8e22378d0ce1ca34ba"
+      },
+      "main-rails": {
+        "reviewer": "factual-v1-25",
+        "step": 0,
+        "command": "PATH=/usr/local/go/bin:/usr/bin:/bin GOTOOLCHAIN=local go -C go-backend run ./cmd/cat-content-rail all --root .. --check",
+        "cwd": "/home/dobo/work/cat_de_roman_esti",
+        "goVersion": "go version go1.27.1 linux/amd64",
+        "returncode": 0,
+        "status": "PASS",
+        "firstErrorLine": "",
+        "outputSHA": "bea7844de79b62344740900b92f72a8dac18665d946333cb53ecc5f38d6273c7",
+        "mainHEADBefore": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+        "mainCleanBefore": true,
+        "mainHEADAfter": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+        "mainCleanAfter": true
+      },
+      "main-tests": {
+        "reviewer": "quality-v1-25",
+        "step": "step0",
+        "command": "PATH=/usr/local/go/bin:/usr/bin:/bin GOTOOLCHAIN=local go -C go-backend test ./internal/contentrails/ ./internal/contentbuild/",
+        "cwd": "/home/dobo/work/cat_de_roman_esti",
+        "goVersion": "go version go1.27.1 linux/amd64",
+        "returncode": 0,
+        "status": "PASS",
+        "firstErrorLine": null,
+        "outputSHA": "93e38a51eb991c42c79393c4de9200a9df082730e5c0311655a0ee8ecabcf63d",
+        "mainHEADBefore": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+        "mainCleanBefore": true,
+        "mainBranchBefore": "main",
+        "mainHEADAfter": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+        "mainCleanAfter": true,
+        "mainBranchAfter": "main",
+        "formalReviewsUsed": 0
+      }
+    },
+    "install_enabled_by_main_gates": true,
+    "owner_apply_permission": false,
+    "scope": "Read-only unchanged-serving baseline;green checks do not authorize applying this unlanded pool."
+  },
+  "screen_summary": {
+    "wave": "1.25",
+    "step": "1",
+    "commit": "63be278b7ae30dcb5983d2d9952d44f2ed0fbf1d",
+    "idea_records": 52,
+    "new_concept_hypotheses": 48,
+    "existing_input_family_hypotheses": 4,
+    "held_records": 3,
+    "input_hypotheses": 329,
+    "directed_caption_hypotheses": 194,
+    "accepted": 0,
+    "installed": 0,
+    "delta": "0/0/0",
+    "next_step": "2",
+    "state_bytes": 2020
+  },
+  "reviewed_pool_counts": {
+    "items": 37,
+    "new_nodes": 36,
+    "existing_input_families": 1,
+    "alias_owners": 1,
+    "edges": 144,
+    "missing_normalized_keys": 211,
+    "held": 18,
+    "applied": 0,
+    "installed": 0,
+    "player_visible_delta": "0/0/0"
+  },
+  "review_bindings": {
+    "factual": {
+      "reviewer": "factual-v1-25",
+      "path": "docs/reviews/v1-25-common-places-and-objects/graph-factual-review.json",
+      "sha256": "184e233dabe5b5e265f5fb984619e117444a9711c7b45810c2829dbf75ee70ec",
+      "module_sha256": "daeb0e6dd96de8b53553776e73e00357c8202f9328efe4325943780d2707e9f7",
+      "round": 1
+    },
+    "quality": {
+      "reviewer": "quality-v1-25",
+      "path": "docs/reviews/v1-25-common-places-and-objects/graph-quality-review.json",
+      "sha256": "2b2050e8945e1eef0e0408cb928f593dd8852fb83d995bc7fa94ece29a1b8b97",
+      "module_sha256": "daeb0e6dd96de8b53553776e73e00357c8202f9328efe4325943780d2707e9f7",
+      "round": 1
+    }
+  },
+  "latest_delta": {
+    "path": "/home/dobo/work/_temp/content__v1-25-common-places-and-objects/step3-delta.txt",
+    "sha256": "b40a630a80b59dd1f32e0aec8fed5fa03768e4fc635c8d8e22378d0ce1ca34ba",
+    "player_visible": "0/0/0"
+  },
+  "prior_protected_refs": [
+    {
+      "branch": "content/v1-14-animals-and-habitats",
+      "commit": "4b634cab38cbce90ac6eb02e0907578335208c69"
+    },
+    {
+      "branch": "content/v1-15-home-school-words",
+      "commit": "2ace3df01d4871fa1990feadd4b485d6be496d81"
+    },
+    {
+      "branch": "content/v1-16-travel-and-street-words",
+      "commit": "ecb50b463d8d1f0300d435126f934fe90b29fe5b"
+    },
+    {
+      "branch": "content/v1-17-garden-and-kitchen-words",
+      "commit": "df2fd5e5196cb1584cb8e330adbc2b71b855fab8"
+    },
+    {
+      "branch": "content/v1-18-body-and-everyday-care",
+      "commit": "69ebb9f3631ac41f4ac80c76c9d6795c29b78fa8"
+    },
+    {
+      "branch": "content/v1-19-tools-and-crafts",
+      "commit": "5159b0417d4f62b46f28b3a4a37dabf9c07bc389"
+    },
+    {
+      "branch": "content/v1-20-school-and-hobbies",
+      "commit": "bc0ed56c826b9bab0c0f9408ff8fd1a36a539f94"
+    },
+    {
+      "branch": "content/v1-21-clothing-and-household-storage",
+      "commit": "be42df68abfbf2a40e879cbe53c671b70d69c6d0"
+    },
+    {
+      "branch": "content/v1-22-home-fixtures-and-materials",
+      "commit": "c10e4c2394ae82dae4f7bd22f56f91ca854f26ba"
+    },
+    {
+      "branch": "content/v1-23-pantry-and-tableware",
+      "commit": "489504300c8ea2c323de7f4e4e497eeb157947e3"
+    },
+    {
+      "branch": "content/v1-24-familiar-foods-and-inputs",
+      "commit": "53a090735baea74bc8c99470070eaf718fe4cc38"
+    }
+  ],
+  "this_wave_closure": "branch HEAD;exact SHA pinned in successor scratch after handoff commit",
+  "retrospective": {
+    "proposed": 55,
+    "author_research_starts": 52,
+    "accepted": 37,
+    "held": 18,
+    "installed": 0,
+    "ticks": 9,
+    "commits": 9,
+    "step_ticks": {
+      "0": 1,
+      "1": 1,
+      "2": 5,
+      "3": 1,
+      "5": 1
+    },
+    "primary_hold_buckets": {
+      "incomplete_graph_or_link_proof": 7,
+      "owner_or_alias_scope": 6,
+      "dictionary_sense_head_or_paradigm": 3,
+      "prior_family_hold": 1,
+      "research_cap": 1
+    },
+    "blocked": [],
+    "needs_owner": []
+  },
+  "next_wave_selection": {
+    "wave": "1.26",
+    "theme": "school-play-and-devices",
+    "branch": "content/v1-26-school-play-and-devices",
+    "next_step": "0",
+    "selection_type": "growth discovery extension",
+    "heads_selected": 55,
+    "headwords": [
+      "Târg",
+      "Hală",
+      "Bufet",
+      "Staul",
+      "Zid",
+      "Pardoseală",
+      "Geam",
+      "Ac de siguranță",
+      "Lavoar",
+      "Conductă",
+      "Boiler",
+      "Fotocopiator",
+      "Mixer",
+      "Espressor",
+      "Tacâm",
+      "Portchei",
+      "Pensetă",
+      "Unghieră",
+      "Evidențiator",
+      "Corector",
+      "Socotitoare",
+      "Abac",
+      "Abțibild",
+      "Autocolant",
+      "Legitimație",
+      "Foișor",
+      "Patinoar",
+      "Pârtie",
+      "Ponton",
+      "Debarcader",
+      "Tufiș",
+      "Nuia",
+      "Cioată",
+      "Vază",
+      "Butuc",
+      "Băț",
+      "Balon",
+      "Patină",
+      "Schi",
+      "Sonerie",
+      "Claxon",
+      "Mozaic",
+      "Pietricică",
+      "Prundiș",
+      "Iederă",
+      "Mașină de spălat rufe",
+      "Fier de călcat",
+      "Uscător de păr",
+      "Cuptor cu microunde",
+      "Prăjitor de pâine",
+      "Fierbător de apă",
+      "Râșniță de cafea",
+      "Ceas deșteptător",
+      "Aparat foto",
+      "Telefon mobil"
+    ],
+    "selection_rationale": "Familiar concrete household devices,school objects and outdoor/play vocabulary. Prior accepted/held head families are excluded;ordinary synonym,diminutive and qualified-input possibilities still need exact sense and full-paradigm ownership review. No random abstract or specialist target selection.",
+    "owner_target_policy": "HCI targets remain separately curated:familiar,concrete,Romanian-relevant;no abstract or obscure words. These hypotheses approve no target or source item.",
+    "probe_summary": {
+      "theme": "school-play-and-everyday-objects",
+      "heads_probed": 442,
+      "main_commit": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+      "bundle_sha256": "f6d983f1ab2cbb7852e8583411eaecd2048fdb5b5da08099129d7e4ff471344c",
+      "pool_copies_checked": 717,
+      "unique_pool_versions_checked": 43,
+      "counts": {
+        "already_resolved_or_prior_family_attention": 238,
+        "preliminary_missing_head": 204
+      },
+      "web_calls": 0,
+      "note": "Offline theme-selection head hypotheses only. Complete paradigms,semantic owner/synonym comparisons,DEFERRED/ReviewedUnresolved and graph endpoints remain step1 after baseline. Current owner restricts future HCI targets to common,concrete,important Romanian words;this input discovery approves no target or source item."
+    },
+    "probe_sha256": "0707a7057c901d2fd4f773487d8bc9d1b9b6dee5f4f54d6449b2b4a49d490517",
+    "same_sense_attention": {
+      "Mixer": "Compare actual main Mixer de bucătărie n_v86_kitchen_mixer before any new-node proposal.",
+      "Prundiș": "Compare actual main Pietriș n_v1_13_pietris;possible exact-sense input family,not a new gravel concept.",
+      "Pietricică": "Compare actual Piatră owner as a contextual diminutive,not a universal synonym.",
+      "Geam": "Compare actual Fereastră and Sticlă scopes;do not equate pane,opening and material.",
+      "Pardoseală": "Compare actual Podea scope before calling the missing head new.",
+      "Ac de siguranță": "Only qualified safety-pin forms;bare Ac is already the air-conditioning owner.",
+      "Abac / Socotitoare": "Compare these two hypotheses for a single same-sense family;no unresearched synonym admission.",
+      "Abțibild / Autocolant": "Compare these two hypotheses for a single same-sense family;no unresearched synonym admission."
+    },
+    "already_reserved_exclusion": {
+      "Treaptă": "Already accepted in preserved V1.15;the initially probed plural Trepte is not a new dictionary lemma or concept."
+    },
+    "accepted": 0,
+    "web_calls": 0,
+    "source_applied": false,
+    "target_approval": false,
+    "full_paradigm_and_graph_screen_pending": true
+  },
+  "next_selection_sha256": "e713e10e2d4b0a2bbdf17591326c623ecd6f479ca2c9aeb023ba02bb21f3583e",
+  "next_probe_sha256": "0707a7057c901d2fd4f773487d8bc9d1b9b6dee5f4f54d6449b2b4a49d490517",
+  "source_applied": false,
+  "installed": 0,
+  "player_visible_delta": "0/0/0",
+  "cleanup_operations": 0,
+  "remote_operations": 0
+}

@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "wave": "1.24",
+  "original_module_sha256": "ef750bf8d573c9071b87b35b5346769838bca5cb40e3f2e0963ce92ff29c7429",
+  "final_module_sha256": "7060f8cc25aed25880913a76fb52a1e6a6aaf5aa0ac093a7ec442429c3770da2",
+  "review_bindings": {
+    "factual": {
+      "reviewer": "factual-v1-24",
+      "path": "docs/reviews/v1-24-familiar-foods-and-inputs/graph-factual-review.json",
+      "sha256": "b0e753b28613b240ffb8a000736ebc825886a0cb50c2771c1989bc4c149724f2",
+      "module_sha256": "ef750bf8d573c9071b87b35b5346769838bca5cb40e3f2e0963ce92ff29c7429",
+      "round": 1
+    },
+    "quality": {
+      "reviewer": "quality-v1-24",
+      "path": "docs/reviews/v1-24-familiar-foods-and-inputs/graph-quality-review.json",
+      "sha256": "dbe0ee073e00ace651c21befbd0e6a5c3542a0e1561bd56853f328f844549374",
+      "module_sha256": "ef750bf8d573c9071b87b35b5346769838bca5cb40e3f2e0963ce92ff29c7429",
+      "round": 1
+    }
+  },
+  "changes": [
+    {
+      "operation": "convert_to_existing_input_family",
+      "item_id": "v124-aluna",
+      "original_node_id": "n_v1_24_aluna",
+      "target_node_id": "n_v85_food_alune_padure",
+      "forms": [
+        "alună",
+        "alune",
+        "alunele",
+        "alunei",
+        "alunelor"
+      ],
+      "drop_proposed_edge_keys": [
+        {
+          "src": "n_v1_24_aluna",
+          "dst": "n_v4gas_fruct",
+          "relation": "is_a"
+        },
+        {
+          "src": "n_v1_24_aluna",
+          "dst": "n_v85_food_ciocolata",
+          "relation": "related_to"
+        },
+        {
+          "src": "n_v1_24_aluna",
+          "dst": "n_v4gas_prajitura",
+          "relation": "related_to"
+        },
+        {
+          "src": "n_v1_24_aluna",
+          "dst": "n_v24_food_pantry_ulei",
+          "relation": "related_to"
+        }
+      ],
+      "preserve_existing_owner_metadata": true,
+      "no_edge_retargeting": true,
+      "signed_report_paths": [
+        "graph-factual-review.json",
+        "graph-quality-review.json"
+      ],
+      "signed_report_sha256": {
+        "factual": "b0e753b28613b240ffb8a000736ebc825886a0cb50c2771c1989bc4c149724f2",
+        "quality": "dbe0ee073e00ace651c21befbd0e6a5c3542a0e1561bd56853f328f844549374"
+      }
+    },
+    {
+      "operation": "convert_to_existing_input_family",
+      "item_id": "v124-chifla",
+      "original_node_id": "n_v1_24_chifla",
+      "target_node_id": "n_v4gas_paine",
+      "forms": [
+        "chiflă",
+        "chifle",
+        "chiflele",
+        "chiflei",
+        "chiflelor"
+      ],
+      "drop_proposed_edge_keys": [
+        {
+          "src": "n_v1_24_chifla",
+          "dst": "n_v24_food_pantry_faina",
+          "relation": "related_to"
+        },
+        {
+          "src": "n_v1_24_chifla",
+          "dst": "n_v4gas_apa",
+          "relation": "related_to"
+        },
+        {
+          "src": "n_v1_24_chifla",
+          "dst": "n_v4gas_lapte",
+          "relation": "related_to"
+        },
+        {
+          "src": "n_v1_24_chifla",
+          "dst": "n_v24_food_breakfast_unt",
+          "relation": "related_to"
+        }
+      ],
+      "preserve_existing_owner_metadata": true,
+      "no_edge_retargeting": true,
+      "signed_report_paths": [
+        "graph-factual-review.json",
+        "graph-quality-review.json"
+      ],
+      "signed_report_sha256": {
+        "factual": "b0e753b28613b240ffb8a000736ebc825886a0cb50c2771c1989bc4c149724f2",
+        "quality": "dbe0ee073e00ace651c21befbd0e6a5c3542a0e1561bd56853f328f844549374"
+      }
+    },
+    {
+      "operation": "replace_input_family_forms",
+      "item_id": "v124-boia",
+      "before_forms": [
+        "boia",
+        "boiaua",
+        "boielei"
+      ],
+      "after_forms": [
+        "boia",
+        "boiaua",
+        "boiele",
+        "boielei"
+      ],
+      "form_status": "Both independent reviewers support the singular food-sense paradigm,including singular unarticulated genitive/dative boiele;no paint/cosmetic plural family admitted.",
+      "forms_note": "Food mass sense:boia,boiaua,boiele (singular G-D unarticulated),boielei (singular G-D articulated). The same spelling boiele is not admitted here as a paint/cosmetic plural;boielele and boielelor remain excluded.",
+      "original_before_web_screen_form": "boiele",
+      "author_clocks_unchanged": true,
+      "signed_report_paths": [
+        "graph-factual-review.json",
+        "graph-quality-review.json"
+      ],
+      "signed_report_sha256": {
+        "factual": "b0e753b28613b240ffb8a000736ebc825886a0cb50c2771c1989bc4c149724f2",
+        "quality": "dbe0ee073e00ace651c21befbd0e6a5c3542a0e1561bd56853f328f844549374"
+      }
+    },
+    {
+      "operation": "update_description",
+      "item_id": "v124-tiramisu",
+      "before": "Desert cu cremă și pișcoturi, cunoscut pentru aroma de cafea și stratul de cacao.",
+      "after": "Desert cu cremă de brânză și pișcoturi, biscuiți sau blat, aromat cu cafea și pudrat cu cacao.",
+      "only_unapplied_new_node_metadata_changed": true,
+      "signed_report_paths": [
+        "graph-factual-review.json",
+        "graph-quality-review.json"
+      ],
+      "signed_report_sha256": {
+        "factual": "b0e753b28613b240ffb8a000736ebc825886a0cb50c2771c1989bc4c149724f2",
+        "quality": "dbe0ee073e00ace651c21befbd0e6a5c3542a0e1561bd56853f328f844549374"
+      }
+    }
+  ],
+  "semantic_review_rounds": 1,
+  "mechanical_verification_only_after_review": true,
+  "source_applied": false,
+  "installed": 0,
+  "player_visible_delta": "0/0/0",
+  "counts": {
+    "items": 44,
+    "new_nodes": 26,
+    "existing_input_families": 18,
+    "alias_owners": 10,
+    "edges": 104,
+    "missing_normalized_keys": 248,
+    "held": 11,
+    "applied": 0,
+    "installed": 0,
+    "player_visible_delta": "0/0/0"
+  },
+  "original_research_clocks_unchanged": true,
+  "preserve_all_main_owner_metadata": true
+}

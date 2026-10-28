@@ -1,0 +1,266 @@
+{
+  "wave": "1.36",
+  "original_reviewed_module_sha256": "44f083ac3a0207eec9d0511c03a62572eb06bb1305279785e8a77c628528b2fc",
+  "final_module_sha256": "0285ccd41ac1cca1e974c801006132519e7c92388f96bcdfeddb4b61394df98a",
+  "proposal_sha256": "b63f268608dc492304d97666157e22720c8f16a95f36430ee897992d3d262d0b",
+  "original_pool_sha256": "78f5b04174ee469763b3196f70c28232a2b771976b3121e793cf87d5802ea525",
+  "formal_reports": {
+    "factual": {
+      "reviewer": "factual-v1-36",
+      "path": "docs/reviews/v1-36-familiar-body-household-and-school/graph-factual-review.json",
+      "sha256": "d8be19c7fd7479f5240d0289a902c1bb80c6a798747d37ccfc3377eb35665978",
+      "formal_rounds": 1,
+      "reviewed_module_sha256": "44f083ac3a0207eec9d0511c03a62572eb06bb1305279785e8a77c628528b2fc"
+    },
+    "quality": {
+      "reviewer": "quality-v1-36",
+      "path": "docs/reviews/v1-36-familiar-body-household-and-school/graph-quality-review.json",
+      "sha256": "c3938d3cf1a21ac61d596400c1ab0fc7ed16d4615307a3b525bd7e16de769a8e",
+      "formal_rounds": 1,
+      "reviewed_module_sha256": "44f083ac3a0207eec9d0511c03a62572eb06bb1305279785e8a77c628528b2fc"
+    }
+  },
+  "exact_signed_edits_applied": [
+    {
+      "collection": "EDGES",
+      "selector": {
+        "src": "n_v1_36_puls",
+        "dst": "n_v24_time_day_ceas",
+        "relation": "related_to"
+      },
+      "field": "label_ro",
+      "before": "un ceas poate fi folosit pentru numărarea bătăilor într-un interval; fără recomandări medicale",
+      "after": "un ceas poate fi folosit pentru numărarea bătăilor într-un interval",
+      "reason": "Remove editorial process caution; retain the sourced association.",
+      "record_id": "v136-puls",
+      "signers": [
+        "factual-v1-36",
+        "quality-v1-36"
+      ]
+    },
+    {
+      "collection": "EDGES",
+      "selector": {
+        "src": "n_v1_36_puls",
+        "dst": "n_v29_time_units_minut",
+        "relation": "related_to"
+      },
+      "field": "label_ro",
+      "before": "frecvența pulsului se exprimă frecvent în bătăi pe minut, fără praguri clinice",
+      "after": "frecvența pulsului se exprimă frecvent în bătăi pe minut",
+      "reason": "Remove editorial process caution; retain the sourced unit relationship.",
+      "record_id": "v136-puls",
+      "signers": [
+        "factual-v1-36",
+        "quality-v1-36"
+      ]
+    },
+    {
+      "collection": "EDGES",
+      "selector": {
+        "src": "n_v1_36_glob_pamantesc",
+        "dst": "n_v3sti_planeta",
+        "relation": "related_to"
+      },
+      "field": "label_ro",
+      "before": "este un model geografic al planetei Pământ; nu folosește proprietarul lexical Pământ cu sens de sol",
+      "after": "este un model geografic al planetei Pământ",
+      "reason": "Remove implementation/ownership bookkeeping from a player-facing fact; endpoint remains Planetă.",
+      "record_id": "v136-glob-pamantesc",
+      "signers": [
+        "factual-v1-36",
+        "quality-v1-36"
+      ]
+    },
+    {
+      "collection": "EDGES",
+      "selector": {
+        "src": "n_v1_36_guasa",
+        "dst": "n_pictura",
+        "relation": "related_to"
+      },
+      "field": "label_ro",
+      "before": "este folosită în pictură; categoria veche a nodului Pictură rămâne neschimbată",
+      "after": "este folosită în pictură",
+      "reason": "Remove implementation/category bookkeeping from a player-facing fact.",
+      "record_id": "v136-guasa",
+      "signers": [
+        "factual-v1-36",
+        "quality-v1-36"
+      ]
+    },
+    {
+      "record_id": "__module__",
+      "collection": "MODULE",
+      "selector": {},
+      "field": "footer",
+      "before": "",
+      "after": "\ndef build_nodes_and_edges():\n    return {\"nodes\": NODES, \"edges\": EDGES, \"aliases\": ALIASES}\n",
+      "reason": "Root-authored structural export returns only already-reviewed literal payload; no import/execution or new content.",
+      "signers": [
+        "factual-v1-36",
+        "quality-v1-36"
+      ]
+    },
+    {
+      "record_id": "v136-muschi",
+      "collection": "EDGES",
+      "selector": {
+        "src": "n_v1_36_muschi",
+        "dst": "n_v4sti_os",
+        "relation": "related_to"
+      },
+      "field": "label_ro",
+      "before": "mușchii scheletici pot mișca oasele; nu toți mușchii se fixează pe oase",
+      "after": "mușchii scheletici pot mișca oasele",
+      "reason": "Remove review-process or redundant explanatory clutter while retaining the same evidenced directed claim and its relevant qualifiers.",
+      "signers": [
+        "quality-v1-36"
+      ]
+    },
+    {
+      "record_id": "v136-cos-de-fum",
+      "collection": "EDGES",
+      "selector": {
+        "src": "n_v1_36_cos_de_fum",
+        "dst": "n_v1_36_vatra",
+        "relation": "related_to"
+      },
+      "field": "label_ro",
+      "before": "poate evacua fumul unei vetre interioare; nu orice vatră are coș",
+      "after": "poate evacua fumul unei vetre interioare",
+      "reason": "Remove review-process or redundant explanatory clutter while retaining the same evidenced directed claim and its relevant qualifiers.",
+      "signers": [
+        "quality-v1-36"
+      ]
+    },
+    {
+      "record_id": "v136-carti-de-joc",
+      "collection": "EDGES",
+      "selector": {
+        "src": "n_v1_36_carti_de_joc",
+        "dst": "n_v2ist_rege",
+        "relation": "related_to"
+      },
+      "field": "label_ro",
+      "before": "unele cărți de joc tradiționale reprezintă un rege; nu echivalează piesa cu persoana",
+      "after": "unele cărți de joc tradiționale reprezintă un rege",
+      "reason": "Remove review-process or redundant explanatory clutter while retaining the same evidenced directed claim and its relevant qualifiers.",
+      "signers": [
+        "quality-v1-36"
+      ]
+    },
+    {
+      "record_id": "v136-carti-de-joc",
+      "collection": "EDGES",
+      "selector": {
+        "src": "n_v1_36_carti_de_joc",
+        "dst": "n_v4per_regina",
+        "relation": "related_to"
+      },
+      "field": "label_ro",
+      "before": "unele cărți de joc tradiționale reprezintă o regină; nu echivalează cartea cu persoana",
+      "after": "unele cărți de joc tradiționale reprezintă o regină",
+      "reason": "Remove review-process or redundant explanatory clutter while retaining the same evidenced directed claim and its relevant qualifiers.",
+      "signers": [
+        "quality-v1-36"
+      ]
+    }
+  ],
+  "item_form_edge_drops": {
+    "v136-unghie": [
+      {
+        "disposition": "held",
+        "reason": "Conflicting signed field edits; conservative whole-item hold.",
+        "signers": [
+          "factual-v1-36",
+          "quality-v1-36"
+        ]
+      }
+    ]
+  },
+  "accepted_record_ids": [
+    "v136-muschi",
+    "v136-puls",
+    "v136-deget-de-la-picior",
+    "v136-carbune-mineral",
+    "v136-cenusa",
+    "v136-funingine",
+    "v136-cos-de-fum",
+    "v136-vatra",
+    "v136-glob-pamantesc",
+    "v136-guasa",
+    "v136-carti-de-joc",
+    "v136-taun",
+    "v136-capusa",
+    "v136-radasca",
+    "v136-miriapod",
+    "v136-urechelnita",
+    "v136-seva",
+    "v136-rasadnita"
+  ],
+  "original_holds_unchanged": [
+    "v136-pumn",
+    "v136-subrat",
+    "v136-scalp",
+    "v136-alunita",
+    "v136-pistrui",
+    "v136-buric",
+    "v136-burta",
+    "v136-jar",
+    "v136-cazan",
+    "v136-arzator",
+    "v136-tirbuson",
+    "v136-desfacator-de-conserve",
+    "v136-tocator-de-carne",
+    "v136-sifon",
+    "v136-tusiera",
+    "v136-zar",
+    "v136-pion",
+    "v136-tabla-de-sah",
+    "v136-furnicar",
+    "v136-fagure",
+    "v136-trantor"
+  ],
+  "counts": {
+    "accepted_source_items": 18,
+    "new_concepts": 17,
+    "existing_owner_input_families": 1,
+    "ordinary_normalized_payload_keys": 99,
+    "canonical_label_only_keys": 0,
+    "synonym_families": 0,
+    "regional_input_families": 0,
+    "qualified_existing_owner_input_keys": 9,
+    "directed_graph_claims": 68,
+    "target_approvals": 0,
+    "salience_approvals": 0,
+    "new_playable_rounds": 0,
+    "C3_numeric_passes": 0,
+    "new_node_direct_predecessors": {
+      "0": 14,
+      "1": 2,
+      "2": 1
+    },
+    "source_applied": false,
+    "installed": 0,
+    "player_visible_delta": "0/0/0",
+    "qualified_new_concept_families": 4,
+    "qualified_new_concept_keys": 24,
+    "ordinary_headword_new_concept_keys": 66,
+    "qualified_existing_owner_families": 1,
+    "diminutive_families": 0
+  },
+  "source_applied": false,
+  "module_application_or_dry_run": false,
+  "installed": 0,
+  "player_visible_delta": "0/0/0",
+  "latest_feature_binding": {
+    "branch": "feat/gui-cat-m3",
+    "HEAD": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+    "snapshot_path": "/home/dobo/work/_temp/content__v1-36-familiar-body-household-and-school/step1/step1-feature-working-baseline.json",
+    "snapshot_sha256": "2eaed886d3e50b33172bad5c711527e46e77eba24f50bc0251242c091cc8d00f",
+    "step3_quality_preflight_sha256": "afe17381dd8842244395d68d5845c32ef09ff495045c7809a1bb3be097312857"
+  },
+  "secondary_local_main": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+  "scope": "Exact signed source edits/drops only; no semantic approval by reconciliation, no install or target/round qualification."
+}

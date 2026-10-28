@@ -1,0 +1,278 @@
+{
+  "wave": "1.26",
+  "landing_status": "not_landed",
+  "handoff_status": "owner_review_later",
+  "closed_as": "research_only",
+  "review_commit": "38a2684e470607e279ca3005064b1d6c18180c5b",
+  "wave_base": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+  "module_path": "scripts/school_play_and_devices_v1_26_data.py",
+  "module_sha256": "af97ac63057ddd8cf7f901aad591821afa009d8330362015ba5af110252d2993",
+  "pool_sha256": "5ad38180e6e04ef368979edee93e9be7402900ca95754f589245340570f43bed",
+  "readme_sha256": "cdd19fe24347bb702226f494c5e32f2fd42b826b7984b74083165511a7b6296f",
+  "reviewed_pool": {
+    "items": 34,
+    "new_nodes": 24,
+    "existing_input_families": 10,
+    "alias_owners": 10,
+    "edges": 95,
+    "missing_normalized_keys": 203,
+    "held": 20,
+    "verified_lexical_synonym_families": 4,
+    "verified_qualified_equivalent_families": 1,
+    "applied": 0,
+    "installed": 0,
+    "player_visible_delta": "0/0/0"
+  },
+  "pool_counts": {
+    "idea": 0,
+    "researched": 0,
+    "accepted": 34,
+    "held": 20,
+    "rejected": 0,
+    "installed": 0
+  },
+  "review_bindings": {
+    "factual": {
+      "reviewer": "factual-v1-26",
+      "path": "docs/reviews/v1-26-school-play-and-devices/graph-factual-review.json",
+      "sha256": "bada7e16449529d9a2049802f4d935ef9e96bb16d02be574689e3638b28ce247",
+      "module_sha256": "fae3b0493e63a3445f5126845586550a1b892bb1a9202a9f84d40b248d6eca69",
+      "round": 1
+    },
+    "quality": {
+      "reviewer": "quality-v1-26",
+      "path": "docs/reviews/v1-26-school-play-and-devices/graph-quality-review.json",
+      "sha256": "583ae388214ccf9f6f1940ea5ccbbfbce4df4cac41294bf3eece81bc82abbdce",
+      "module_sha256": "fae3b0493e63a3445f5126845586550a1b892bb1a9202a9f84d40b248d6eca69",
+      "round": 1
+    }
+  },
+  "evidence_files": {
+    "applied-review-changes.json": "93a3df0fe0d59a88e9be037df752c9263026019cdc0bcf027f05d99dfaf1333d",
+    "graph-factual-review.json": "bada7e16449529d9a2049802f4d935ef9e96bb16d02be574689e3638b28ce247",
+    "graph-quality-review.json": "583ae388214ccf9f6f1940ea5ccbbfbce4df4cac41294bf3eece81bc82abbdce",
+    "review-capture-integrity.json": "38b5e10eed1de06d3d3914d2a61671d18a6fbcbf9fc48b6f1af9e87a0e581d58",
+    "review-table.md": "fb89b85a720e28f05fbe5e491c6790fcd9c3122c8371498fa2173b48c1aacb78",
+    "reviewed-original.py.txt": "fae3b0493e63a3445f5126845586550a1b892bb1a9202a9f84d40b248d6eca69",
+    "root-mechanical-check.json": "ff5b2e8de36d2efe554f4945d2f0504879cc9a8c031ddf1ab1906d7db1ba0363"
+  },
+  "baseline": {
+    "validate": "PASS",
+    "export": "PASS",
+    "ops": "PASS",
+    "rails": "PASS",
+    "tests": "PASS",
+    "delta": "PASS",
+    "main-rails": "PASS",
+    "main-tests": "PASS"
+  },
+  "handoff_checks": {
+    "validate": {
+      "command": "go -C go-backend run ./cmd/cat-content validate --root ..",
+      "exit_code": 0,
+      "output": "Native sources GREEN\n"
+    },
+    "export": {
+      "command": "go -C go-backend run ./cmd/cat-content export --root .. --check",
+      "exit_code": 0,
+      "output": "Native private content current\n"
+    },
+    "ops": {
+      "command": "go -C go-backend run ./cmd/cat-content-ops check --root .. --check",
+      "exit_code": 0,
+      "output": "{\n \"boards\": 716,\n \"checks\": 4,\n \"derived\": {\n  \"artifact\": \"derived_catalog_v38.json\",\n  \"counts\": {\n   \"by_game\": {\n    \"intrusul\": 183,\n    \"perechi\": 153\n   },\n   \"sources_by_game\": {\n    \"intrusul\": 66,\n    \"perechi\": 51\n   },\n   \"starter_by_game\": {\n    \"intrusul\": 24,\n    \"perechi\": 26\n   },\n   \"total\": 336\n  },\n  \"format_drift\": false,\n  \"semantic_match\": true,\n  \"write\": false\n },\n \"edges\": 10141,\n \"nodes\": 2584,\n \"puzzles\": 180,\n \"rankings\": {\n  \"artifact\": \"board_rankings_v37.json\",\n  \"counts\": {\n   \"approved\": 709,\n   \"by_game\": {\n    \"alchimie\": 83,\n    \"conexiuni\": 245,\n    \"contexto\": 265,\n    \"lant\": 123\n   },\n   \"eligible_by_game\": {\n    \"alchimie\": 68,\n    \"conexiuni\": 83,\n    \"contexto\": 255,\n    \"lant\": 121\n   },\n   \"pilot_eligible\": 527,\n   \"total\": 716\n  },\n  \"format_drift\": false,\n  \"semantic_match\": true,\n  \"write\": false\n },\n \"scope\": \"graph, pack, native rankings and derived catalog; export and authority checked separately\",\n \"write\": false\n}\n"
+    },
+    "delta": {
+      "command": "go -C go-backend run ./cmd/cat-content-ops delta --root .. --baseline d30b0aa47248b9a5944e015f2daf54cc5a795617 --text",
+      "exit_code": 0,
+      "output": "Content delta: d30b0aa47248b9a5944e015f2daf54cc5a795617 -> working tree\nconcepts: 2584 -> 2584; +0 -0 changed 0; unchanged 2584\nconnections: 10141 -> 10141; +0 -0 changed 0; unchanged 10141\nforms: 9520 -> 9520; +0 -0 changed 0; unchanged 9520\npuzzles: 180 -> 180; +0 -0 changed 0; unchanged 180\nconexiuni records: 245 -> 245; +0 -0 changed 0; unchanged 245\nconexiuni approved: 245 -> 245; +0 -0 changed 0; unchanged 245\nconexiuni declared_ranked_eligible: 83 -> 83; +0 -0 changed 0; unchanged 83\ncontexto records: 265 -> 265; +0 -0 changed 0; unchanged 265\ncontexto approved: 263 -> 263; +0 -0 changed 0; unchanged 263\ncontexto declared_ranked_eligible: 255 -> 255; +0 -0 changed 0; unchanged 255\nlant records: 123 -> 123; +0 -0 changed 0; unchanged 123\nlant approved: 121 -> 121; +0 -0 changed 0; unchanged 121\nlant declared_ranked_eligible: 121 -> 121; +0 -0 changed 0; unchanged 121\nalchimie records: 83 -> 83; +0 -0 changed 0; unchanged 83\nalchimie approved: 80 -> 80; +0 -0 changed 0; unchanged 80\nalchimie declared_ranked_eligible: 68 -> 68; +0 -0 changed 0; unchanged 68\nintrusul catalog boards: 228 -> 228; +0 -0 changed 0; unchanged 228\nperechi catalog boards: 193 -> 193; +0 -0 changed 0; unchanged 193\nForms are exact [node_id, form] pairs, not necessarily new concepts or synonyms.\nConcept changes exclude aliases; other record fields are compared exactly.\nApproved additions include new records and promotions of existing records.\nRanked eligibility is declared by the sidecar; run content/runtime gates separately.\nMissing historical derived catalogs count as zero; missing rankings are unknown.\nQuick-game boards include the frozen V38 catalog and reviewed authored supplements.\n"
+    }
+  },
+  "prior_protected_refs": [
+    {
+      "branch": "content/v1-14-animals-and-habitats",
+      "commit": "4b634cab38cbce90ac6eb02e0907578335208c69"
+    },
+    {
+      "branch": "content/v1-15-home-school-words",
+      "commit": "2ace3df01d4871fa1990feadd4b485d6be496d81"
+    },
+    {
+      "branch": "content/v1-16-travel-and-street-words",
+      "commit": "ecb50b463d8d1f0300d435126f934fe90b29fe5b"
+    },
+    {
+      "branch": "content/v1-17-garden-and-kitchen-words",
+      "commit": "df2fd5e5196cb1584cb8e330adbc2b71b855fab8"
+    },
+    {
+      "branch": "content/v1-18-body-and-everyday-care",
+      "commit": "69ebb9f3631ac41f4ac80c76c9d6795c29b78fa8"
+    },
+    {
+      "branch": "content/v1-19-tools-and-crafts",
+      "commit": "5159b0417d4f62b46f28b3a4a37dabf9c07bc389"
+    },
+    {
+      "branch": "content/v1-20-school-and-hobbies",
+      "commit": "bc0ed56c826b9bab0c0f9408ff8fd1a36a539f94"
+    },
+    {
+      "branch": "content/v1-21-clothing-and-household-storage",
+      "commit": "be42df68abfbf2a40e879cbe53c671b70d69c6d0"
+    },
+    {
+      "branch": "content/v1-22-home-fixtures-and-materials",
+      "commit": "c10e4c2394ae82dae4f7bd22f56f91ca854f26ba"
+    },
+    {
+      "branch": "content/v1-23-pantry-and-tableware",
+      "commit": "489504300c8ea2c323de7f4e4e497eeb157947e3"
+    },
+    {
+      "branch": "content/v1-24-familiar-foods-and-inputs",
+      "commit": "53a090735baea74bc8c99470070eaf718fe4cc38"
+    },
+    {
+      "branch": "content/v1-25-common-places-and-objects",
+      "commit": "b0de8a38abfaf7366418f5c79df6cb74c224920d"
+    }
+  ],
+  "this_wave_closure": "branch HEAD;exact closure SHA is pinned in the successor scratch summary after commit",
+  "retrospective": {
+    "head_hypotheses": 55,
+    "pool_records": 54,
+    "author_research_starts": 45,
+    "author_researched": 36,
+    "accepted": 34,
+    "held": 20,
+    "installed": 0,
+    "ticks": 8,
+    "commits": 8,
+    "step_ticks": {
+      "0": 1,
+      "1": 1,
+      "2": 4,
+      "3": 1,
+      "5": 1
+    },
+    "primary_hold_buckets": {
+      "owner_or_selected_sense_scope": [
+        "targ",
+        "staul",
+        "conducta",
+        "espressor",
+        "autocolant",
+        "tufis",
+        "cuptor_cu_microunde",
+        "fierbator_de_apa",
+        "rasnita_de_cafea"
+      ],
+      "insufficient_supported_graph": [
+        "bufet",
+        "unghiera",
+        "legitimatie",
+        "nuia",
+        "bat",
+        "sonerie"
+      ],
+      "dictionary_sense_head_or_paradigm": [
+        "portchei",
+        "penseta",
+        "evidentiator",
+        "corector",
+        "cioata"
+      ]
+    },
+    "blocked": [],
+    "needs_owner": []
+  },
+  "proposals": [
+    "Step1 \"pre-screen every planned form (headword,plural,articulated,genitive)\" → explicitly list definite singular/plural and both genitives for each lexeme before web,and hold newly discovered unscreened forms for a later wave;Portchei required portcheile/portcheilor outside its screened portcheiuri hypothesis.",
+    "Quality \"label_ro must read true from source to target\" → require the source node as grammatical subject and spell out output/component-mediated links;Prăjitor de pâine→Unt and Aparat foto→Sticlă needed two exact caption clarifications,while Iederă received two sourced botanical refinements.",
+    "Backlog \"everyday core\" → continue discovery with familiar food and plant vocabulary such as Crenvurșt,Gutuie,Mușețel and Păpădie,with full owner screening before research;255 heads yielded84 preliminary misses and55 next-wave hypotheses,none approved as HCI targets."
+  ],
+  "next_wave_selection": {
+    "wave": "1.27",
+    "theme": "familiar-foods-and-plants",
+    "branch": "content/v1-27-familiar-foods-and-plants",
+    "heads_selected": 55,
+    "heads": [
+      "Crenvurșt",
+      "Pârjoală",
+      "Ciulama",
+      "Piure",
+      "Cuișoară",
+      "Bicarbonat",
+      "Tărâță",
+      "Bob",
+      "Nap",
+      "Andivă",
+      "Lăptucă",
+      "Sparanghel",
+      "Ceapă verde",
+      "Ciupercă",
+      "Hrib",
+      "Gălbior",
+      "Gheabă",
+      "Scrumbie",
+      "Hering",
+      "Macrou",
+      "Sardină",
+      "Ton",
+      "Corcodușă",
+      "Nectarină",
+      "Gutuie",
+      "Vișină",
+      "Fragă",
+      "Merișoară",
+      "Cătină",
+      "Măceașă",
+      "Castană",
+      "Arahidă",
+      "Miez",
+      "Cotor",
+      "Caramea",
+      "Turtă",
+      "Mușețel",
+      "Soc",
+      "Salcâm",
+      "Carpen",
+      "Ulm",
+      "Arțar",
+      "Ienupăr",
+      "Bujor",
+      "Narcisă",
+      "Margaretă",
+      "Crizantemă",
+      "Panseluță",
+      "Mușcată",
+      "Orhidee",
+      "Păpădie",
+      "Trifoi",
+      "Albăstrea",
+      "Brândușă",
+      "Toporaș"
+    ],
+    "accepted": 0,
+    "web_calls": 0,
+    "target_approval": false,
+    "source_approval": false,
+    "full_paradigm_and_graph_screen_pending": true,
+    "basis": "Continuing growth discovery;concrete foods,edible plants,ordinary trees and flowers from Romanian home,school and culture. No random abstract target promotion.",
+    "owner_attention": [
+      "Head miss is not semantic novelty:check generic,plural,compound and protected selected-sense owners during step1.",
+      "Bicarbonat may only add missing inputs to actual Bicarbonat de sodiu alimentar.",
+      "Bob,Ton,Miez,Cotor and names with other senses require explicit actual-owner checks before web.",
+      "Fragă is one head hypothesis;plural Fragi is not a separate candidate.",
+      "School/culture recognition and source checks remain pending;no head selected here is an approved HCI target."
+    ]
+  },
+  "next_selection_sha256": "0a2de012c56b840161c9f84851b63c7ab9782bf6c1cc8f8c15770b5a3ceee127",
+  "next_probe_sha256": "a0e64d239c1469fa0af7c96abf08c7f34dbcaabcfaf81b7ea90df9ea96cc95a0",
+  "source_applied": false,
+  "installed": 0,
+  "player_visible_delta": "0/0/0",
+  "cleanup_operations": 0,
+  "remote_operations": 0
+}

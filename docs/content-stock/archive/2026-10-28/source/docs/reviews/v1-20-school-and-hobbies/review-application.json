@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "wave": "1.20",
+  "review_round": 1,
+  "reviewed_original_module_sha256": "5b2c50a6f31745108fb086dd95918505836be44f7b17065734720eb959db26fd",
+  "original_module_file": "reviewed-module.py.txt",
+  "final_module_path": "scripts/school_and_hobbies_v1_20_data.py",
+  "final_module_sha256": "8641e3cdc3bf8125ee09241efb7b618b79689e3e832b29e6eed19ed3deaf1a4b",
+  "review_sha256": {
+    "factual": "89a5bac1ca6af1244a17608a31d28f79a6c83d254503137290cf2350c71996d2",
+    "quality": "1564069abbd6d253a5c4b035940182d7055265171a06548fd8fa66d072a4e5b9"
+  },
+  "required_changes_applied": [
+    {
+      "scope": "all_retained_ITEM_EVIDENCE_rows",
+      "field": "graph_counts_scope",
+      "action": "replace_metadata_only",
+      "value": "Selected-only researched source graph;all held/idea endpoints excluded. Recompute after review drops.",
+      "rationale": "All current_graph_counts match the selected41-node graph;the old active-idea scope text is stale. Historical planned_graph_counts remain history.",
+      "reviewers": [
+        "factual"
+      ]
+    },
+    {
+      "item_id": "v120-orar",
+      "action": "hold_entire_source_package",
+      "node_id": "n_v1_20_orar",
+      "drop_all_four_incident_edges": true,
+      "ordinary_forms_remain_evidence_only": true,
+      "rationale": "School weekly grid proves hours/days but does not substantiate the actual Ceas timepiece and Calendar endpoints. Holding those two edges leaves only2qualified neighbors,below the4-neighbor floor. No replacement edge is authored in this review.",
+      "reviewers": [
+        "factual"
+      ]
+    },
+    {
+      "item_id": "v120-tobogan",
+      "action": "replace_edge_caption_only",
+      "edge": {
+        "src": "n_v1_20_tobogan",
+        "dst": "n_v1_3_material_lemn",
+        "relation": "related_to"
+      },
+      "old_caption": "unele tobogane au o structură din lemn",
+      "new_caption": "poate face parte dintr-un ansamblu de joacă cu structură din lemn",
+      "rationale": "The exact sheet describes a wooden play complex and fiberglass slides. The revised caption attributes wood to the documented supporting complex,not the slide material.",
+      "reviewers": [
+        "factual"
+      ],
+      "item_ids": [
+        "v120-tobogan"
+      ]
+    },
+    {
+      "item_id": "v120-poster",
+      "action": "replace_evidence_metadata_only",
+      "field": "dictionaries[0].flexion_authority",
+      "value": "DOOM3 exact poster noun entry and explicit DOOM3 ordinary postere table;adjacent posteruri table excluded.",
+      "rationale": "Fresh table labels its selected ordinary paradigm DOOM3,not DOR. All6forms remain supported.",
+      "reviewers": [
+        "factual"
+      ]
+    },
+    {
+      "item_id": "v120-sigla",
+      "action": "replace_evidence_metadata_only",
+      "field": "dictionaries[0].flexion_authority",
+      "value": "DOOM3 sigle/siglei noun entry and explicit DOOM3 ordinary feminine siglă table;siglu variant excluded.",
+      "rationale": "Fresh table labels the selected ordinary paradigm DOOM3,not DOR. All5forms remain supported.",
+      "reviewers": [
+        "factual"
+      ]
+    },
+    {
+      "item_id": "v120-insigna",
+      "action": "narrow_selected_sense_metadata_only",
+      "field": "sense",
+      "value": "Semn purtat pe îmbrăcăminte,cu imagini sau inscripții simbolice de apartenență.",
+      "rationale": "Selected DEX877156 supports symbolic affiliation. Its accepted description already matches;remove unqualified distinction/award expansion and categorical negation of Ecuson. Overlap remains disclosed.",
+      "reviewers": [
+        "factual"
+      ]
+    }
+  ],
+  "drops": [
+    {
+      "item_id": "v120-orar",
+      "node_id": "n_v1_20_orar",
+      "reason": "School weekly grid proves hours/days but does not substantiate the actual Ceas timepiece and Calendar endpoints. Holding those two edges leaves only2qualified neighbors,below the4-neighbor floor. No replacement edge is authored in this review.",
+      "removed_node_count": 1,
+      "removed_edges": [
+        {
+          "src": "n_v1_20_orar",
+          "dst": "n_v3soc_scoala",
+          "relation": "related_to",
+          "label_ro": "poate organiza succesiunea orelor de școală",
+          "strength": 0.75,
+          "is_distractor": 0,
+          "bidirectional": 1
+        },
+        {
+          "src": "n_v1_20_orar",
+          "dst": "n_v4soc_elev",
+          "relation": "related_to",
+          "label_ro": "arată elevului ce ore are",
+          "strength": 0.75,
+          "is_distractor": 0,
+          "bidirectional": 1
+        },
+        {
+          "src": "n_v1_20_orar",
+          "dst": "n_v29_time_calendar",
+          "relation": "related_to",
+          "label_ro": "repartizează activități pe zile",
+          "strength": 0.75,
+          "is_distractor": 0,
+          "bidirectional": 1
+        },
+        {
+          "src": "n_v1_20_orar",
+          "dst": "n_v24_time_day_ceas",
+          "relation": "related_to",
+          "label_ro": "indică orele la care încep activitățile",
+          "strength": 0.75,
+          "is_distractor": 0,
+          "bidirectional": 1
+        }
+      ],
+      "excluded_input_forms": [
+        "orar",
+        "orarul",
+        "orare",
+        "orarele",
+        "orarului",
+        "orarelor"
+      ]
+    }
+  ],
+  "unrequested_semantic_changes": 0,
+  "retained_form_changes": 0,
+  "node_endpoint_relation_changes_beyond_requested_drop": 0,
+  "retained_counts": {
+    "items": 40,
+    "new_concepts": 40,
+    "connections": 160,
+    "missing_normalized_keys": 223,
+    "existing_input_families": 0,
+    "verified_synonym_families": 0,
+    "regional_input_keys": 0,
+    "source_applied": false,
+    "installed": 0,
+    "player_visible_delta": "0/0/0",
+    "accepted_reviewed_items": 40,
+    "held": 15,
+    "held_inputs": 0
+  },
+  "metadata_changes": [
+    "Selected-only graph_counts_scope replaces historical active-hypothesis wording; retained current counts are unchanged.",
+    "Accepted source state and copied immutable verdict/rationale metadata only."
+  ],
+  "dex_channel_coordination": {
+    "factual_last_start": 1791928528.14924,
+    "quality_first_start": 1791928596.1952825,
+    "cross_reviewer_gap_seconds": 68.04604244232178,
+    "minimum_required_seconds": 2
+  },
+  "source_applied": false,
+  "scope": "Literal reviewer verdict application and bookkeeping only; no second semantic review or runtime authority."
+}

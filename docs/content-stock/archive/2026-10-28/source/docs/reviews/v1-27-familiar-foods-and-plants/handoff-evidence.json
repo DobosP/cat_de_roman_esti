@@ -1,0 +1,306 @@
+{
+  "wave": "1.27",
+  "landing_status": "not_landed",
+  "handoff_status": "owner_review_later",
+  "closed_as": "research_only",
+  "review_commit": "0b8b5d939dd739cfc92299f97bfc68412e0dbcde",
+  "wave_base": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+  "module_path": "scripts/familiar_foods_and_plants_v1_27_data.py",
+  "module_sha256": "34852b0414025a93a1e7149400579b8c1ff13e82f6dc23ac5bf860cbff6965fc",
+  "pool_sha256": "38f49243affb8a3e2b0d27ee8b382444639eed8e817e6e691c224d7e5759a9dd",
+  "readme_sha256": "14b4a224f38931deebb5a366f32139705dc45d57d77c0f8483f66e2f2cee03c5",
+  "reviewed_pool": {
+    "items": 38,
+    "new_nodes": 35,
+    "existing_input_families": 3,
+    "alias_owners": 3,
+    "edges": 140,
+    "missing_normalized_keys": 219,
+    "held": 17,
+    "proposed_lexical_synonym_families": 2,
+    "verified_lexical_synonym_families": 2,
+    "regional_input_families": 2,
+    "applied": 0,
+    "installed": 0,
+    "player_visible_delta": "0/0/0"
+  },
+  "pool_counts": {
+    "idea": 0,
+    "researched": 0,
+    "accepted": 38,
+    "held": 17,
+    "rejected": 0,
+    "installed": 0
+  },
+  "review_bindings": {
+    "factual": {
+      "reviewer": "factual-v1-27",
+      "path": "docs/reviews/v1-27-familiar-foods-and-plants/graph-factual-review.json",
+      "sha256": "01cab5839bf26d4f336a8c3d16ea4c4100cc3f6c71afae7f77b359f504885277",
+      "module_sha256": "73c942fec085d5c800accf62ea9eaea9950214bc158f1b45240e5a8eb2066dca",
+      "frozen_pool_sha256": "51712443140b8c5f7912c3f512d8c7c53f8cc0a3ecf8093fed4167db9513f338",
+      "round": 1,
+      "capture_catalog_sha256": "765653ade05c8fd6393232a0db70a7d75018c4c867adac3276eab516786b4ee4"
+    },
+    "quality": {
+      "reviewer": "quality-v1-27",
+      "path": "docs/reviews/v1-27-familiar-foods-and-plants/graph-quality-review.json",
+      "sha256": "b2218e743a4fc04c4263bcd765d2ffb5a2dd579490863a1f4d3c60ff2ef7446e",
+      "module_sha256": "73c942fec085d5c800accf62ea9eaea9950214bc158f1b45240e5a8eb2066dca",
+      "frozen_pool_sha256": "51712443140b8c5f7912c3f512d8c7c53f8cc0a3ecf8093fed4167db9513f338",
+      "round": 1,
+      "capture_catalog_sha256": "c32a2988852e6a9ecff5e66b6dbe0898a8fc4510a47d2bbbd4f9f24594597ed2"
+    }
+  },
+  "evidence_files_except_self": {
+    "applied-review-changes.json": "15f691079210e27b3ec4cf6e696279a6adc97f9a599b3f5e72abf499b386f25b",
+    "review-capture-integrity.json": "91dcd1a76a89b1b655d7bfc5da94b4fd7b5fbd13e98eba8aff181f66001bc680",
+    "README.md": "14b4a224f38931deebb5a366f32139705dc45d57d77c0f8483f66e2f2cee03c5",
+    "review-table.md": "9359070871bef314c322ad1f16303452a54e73434d9bf9ef978c8515b1bdcbeb",
+    "root-mechanical-check.json": "75b94b7d63816b6957d647e1e691c2a74a0a3e7f50ac558a92db7e5ad08e9b2f",
+    "reviewed-original.py.txt": "73c942fec085d5c800accf62ea9eaea9950214bc158f1b45240e5a8eb2066dca",
+    "graph-quality-review.json": "b2218e743a4fc04c4263bcd765d2ffb5a2dd579490863a1f4d3c60ff2ef7446e",
+    "graph-factual-review.json": "01cab5839bf26d4f336a8c3d16ea4c4100cc3f6c71afae7f77b359f504885277"
+  },
+  "baseline": {
+    "validate": "PASS",
+    "export": "PASS",
+    "ops": "PASS",
+    "rails": "PASS",
+    "tests": "PASS",
+    "delta": "PASS",
+    "main-rails": "PASS",
+    "main-tests": "PASS"
+  },
+  "handoff_checks": {
+    "validate": {
+      "command": "go -C go-backend run ./cmd/cat-content validate --root ..",
+      "exit_code": 0,
+      "status": "PASS",
+      "output": "Native sources GREEN\n",
+      "output_sha256": "1d2e645a4a6946dae65ac9fc067442df3e7a430fc9fee3039e41fd1ee3819976",
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-27-familiar-foods-and-plants",
+      "go_version": "go version go1.27.1 linux/amd64"
+    },
+    "export": {
+      "command": "go -C go-backend run ./cmd/cat-content export --root .. --check",
+      "exit_code": 0,
+      "status": "PASS",
+      "output": "Native private content current\n",
+      "output_sha256": "4f715aebbcf4c517ca8a5686959372f4ab156e4e62f897e6e5e607156dc5c8fb",
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-27-familiar-foods-and-plants",
+      "go_version": "go version go1.27.1 linux/amd64"
+    },
+    "ops": {
+      "command": "go -C go-backend run ./cmd/cat-content-ops check --root .. --check",
+      "exit_code": 0,
+      "status": "PASS",
+      "output": "{\n \"boards\": 716,\n \"checks\": 4,\n \"derived\": {\n  \"artifact\": \"derived_catalog_v38.json\",\n  \"counts\": {\n   \"by_game\": {\n    \"intrusul\": 183,\n    \"perechi\": 153\n   },\n   \"sources_by_game\": {\n    \"intrusul\": 66,\n    \"perechi\": 51\n   },\n   \"starter_by_game\": {\n    \"intrusul\": 24,\n    \"perechi\": 26\n   },\n   \"total\": 336\n  },\n  \"format_drift\": false,\n  \"semantic_match\": true,\n  \"write\": false\n },\n \"edges\": 10141,\n \"nodes\": 2584,\n \"puzzles\": 180,\n \"rankings\": {\n  \"artifact\": \"board_rankings_v37.json\",\n  \"counts\": {\n   \"approved\": 709,\n   \"by_game\": {\n    \"alchimie\": 83,\n    \"conexiuni\": 245,\n    \"contexto\": 265,\n    \"lant\": 123\n   },\n   \"eligible_by_game\": {\n    \"alchimie\": 68,\n    \"conexiuni\": 83,\n    \"contexto\": 255,\n    \"lant\": 121\n   },\n   \"pilot_eligible\": 527,\n   \"total\": 716\n  },\n  \"format_drift\": false,\n  \"semantic_match\": true,\n  \"write\": false\n },\n \"scope\": \"graph, pack, native rankings and derived catalog; export and authority checked separately\",\n \"write\": false\n}\n",
+      "output_sha256": "e7fd15f1a6e05c103f027645f7ceed93387d123ed27c882c83104a823575e311",
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-27-familiar-foods-and-plants",
+      "go_version": "go version go1.27.1 linux/amd64"
+    },
+    "delta": {
+      "command": "go -C go-backend run ./cmd/cat-content-ops delta --root .. --baseline d30b0aa47248b9a5944e015f2daf54cc5a795617 --text",
+      "exit_code": 0,
+      "status": "PASS",
+      "output": "Content delta: d30b0aa47248b9a5944e015f2daf54cc5a795617 -> working tree\nconcepts: 2584 -> 2584; +0 -0 changed 0; unchanged 2584\nconnections: 10141 -> 10141; +0 -0 changed 0; unchanged 10141\nforms: 9520 -> 9520; +0 -0 changed 0; unchanged 9520\npuzzles: 180 -> 180; +0 -0 changed 0; unchanged 180\nconexiuni records: 245 -> 245; +0 -0 changed 0; unchanged 245\nconexiuni approved: 245 -> 245; +0 -0 changed 0; unchanged 245\nconexiuni declared_ranked_eligible: 83 -> 83; +0 -0 changed 0; unchanged 83\ncontexto records: 265 -> 265; +0 -0 changed 0; unchanged 265\ncontexto approved: 263 -> 263; +0 -0 changed 0; unchanged 263\ncontexto declared_ranked_eligible: 255 -> 255; +0 -0 changed 0; unchanged 255\nlant records: 123 -> 123; +0 -0 changed 0; unchanged 123\nlant approved: 121 -> 121; +0 -0 changed 0; unchanged 121\nlant declared_ranked_eligible: 121 -> 121; +0 -0 changed 0; unchanged 121\nalchimie records: 83 -> 83; +0 -0 changed 0; unchanged 83\nalchimie approved: 80 -> 80; +0 -0 changed 0; unchanged 80\nalchimie declared_ranked_eligible: 68 -> 68; +0 -0 changed 0; unchanged 68\nintrusul catalog boards: 228 -> 228; +0 -0 changed 0; unchanged 228\nperechi catalog boards: 193 -> 193; +0 -0 changed 0; unchanged 193\nForms are exact [node_id, form] pairs, not necessarily new concepts or synonyms.\nConcept changes exclude aliases; other record fields are compared exactly.\nApproved additions include new records and promotions of existing records.\nRanked eligibility is declared by the sidecar; run content/runtime gates separately.\nMissing historical derived catalogs count as zero; missing rankings are unknown.\nQuick-game boards include the frozen V38 catalog and reviewed authored supplements.\n",
+      "output_sha256": "b40a630a80b59dd1f32e0aec8fed5fa03768e4fc635c8d8e22378d0ce1ca34ba",
+      "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-27-familiar-foods-and-plants",
+      "go_version": "go version go1.27.1 linux/amd64"
+    }
+  },
+  "prior_protected_refs": [
+    {
+      "branch": "content/v1-14-animals-and-habitats",
+      "commit": "4b634cab38cbce90ac6eb02e0907578335208c69"
+    },
+    {
+      "branch": "content/v1-15-home-school-words",
+      "commit": "2ace3df01d4871fa1990feadd4b485d6be496d81"
+    },
+    {
+      "branch": "content/v1-16-travel-and-street-words",
+      "commit": "ecb50b463d8d1f0300d435126f934fe90b29fe5b"
+    },
+    {
+      "branch": "content/v1-17-garden-and-kitchen-words",
+      "commit": "df2fd5e5196cb1584cb8e330adbc2b71b855fab8"
+    },
+    {
+      "branch": "content/v1-18-body-and-everyday-care",
+      "commit": "69ebb9f3631ac41f4ac80c76c9d6795c29b78fa8"
+    },
+    {
+      "branch": "content/v1-19-tools-and-crafts",
+      "commit": "5159b0417d4f62b46f28b3a4a37dabf9c07bc389"
+    },
+    {
+      "branch": "content/v1-20-school-and-hobbies",
+      "commit": "bc0ed56c826b9bab0c0f9408ff8fd1a36a539f94"
+    },
+    {
+      "branch": "content/v1-21-clothing-and-household-storage",
+      "commit": "be42df68abfbf2a40e879cbe53c671b70d69c6d0"
+    },
+    {
+      "branch": "content/v1-22-home-fixtures-and-materials",
+      "commit": "c10e4c2394ae82dae4f7bd22f56f91ca854f26ba"
+    },
+    {
+      "branch": "content/v1-23-pantry-and-tableware",
+      "commit": "489504300c8ea2c323de7f4e4e497eeb157947e3"
+    },
+    {
+      "branch": "content/v1-24-familiar-foods-and-inputs",
+      "commit": "53a090735baea74bc8c99470070eaf718fe4cc38"
+    },
+    {
+      "branch": "content/v1-25-common-places-and-objects",
+      "commit": "b0de8a38abfaf7366418f5c79df6cb74c224920d"
+    },
+    {
+      "branch": "content/v1-26-school-play-and-devices",
+      "commit": "c7f45781d071a9b784357f8ef7b10f259d6f5121"
+    }
+  ],
+  "this_wave_closure": "branch HEAD;exact SHA pinned in successor scratch summary after commit",
+  "retrospective": {
+    "head_hypotheses": 55,
+    "pool_records": 55,
+    "author_research_starts": 51,
+    "author_researched": 39,
+    "accepted": 38,
+    "held": 17,
+    "installed": 0,
+    "ticks": 9,
+    "commits": 9,
+    "step_ticks": {
+      "0": 1,
+      "1": 1,
+      "2": 5,
+      "3": 1,
+      "5": 1
+    },
+    "primary_hold_buckets": {
+      "dictionary_head_sense_or_unscreened_paradigm": [
+        "crenvurst",
+        "galbior",
+        "gheaba",
+        "macrou",
+        "nectarina",
+        "merisoara",
+        "catina",
+        "miez",
+        "albastrea"
+      ],
+      "existing_owner_prior_hold_or_botanical_identity": [
+        "piure",
+        "cuisoara",
+        "tarata",
+        "laptuca",
+        "nap",
+        "brandusa"
+      ],
+      "insufficient_supported_graph": [
+        "scrumbie",
+        "andiva"
+      ]
+    },
+    "blocked": [],
+    "needs_owner": []
+  },
+  "proposals": [
+    "Step 1 \"pre-screen every planned form (headword, plural, articulated, genitive)\" → list every ordinary definite singular/plural and genitive/dative form before web, and defer an entire family if a required key was not screened; Macrou, Cătină and edible Miez exposed three incomplete or wrong-paradigm plans.",
+    "Quality \"label_ro must read true from source to target\" → verify the selected ingredient sense in mixed recipes and keep captions no stronger than their source; both reviewers dropped Andivă–Alune de pădure, while Hrib–Ulei and Cotor–Sămânță each needed one narrower caption.",
+    "Backlog \"V1.8 everyday core\" → extend continuing growth discovery with familiar animals, body parts and nearby habitats, keeping HCI target curation separate; 388 offline heads yielded 257 preliminary misses and 55 next-wave hypotheses, with zero source or target approvals."
+  ],
+  "next_wave_selection": {
+    "wave": "1.28",
+    "theme": "familiar-animals-and-outdoor-words",
+    "branch": "content/v1-28-familiar-animals-and-outdoor-words",
+    "heads_selected": 55,
+    "heads": [
+      "Guguștiuc",
+      "Turturică",
+      "Mierlă",
+      "Sturz",
+      "Coțofană",
+      "Graur",
+      "Stârc",
+      "Egretă",
+      "Curcan",
+      "Bibilică",
+      "Gâscan",
+      "Canar",
+      "Peruș",
+      "Cucuvea",
+      "Stup",
+      "Mușuroi",
+      "Scorbură",
+      "Vizuină",
+      "Omidă",
+      "Larvă",
+      "Vierme",
+      "Muscă",
+      "Bondar",
+      "Viespe",
+      "Cărăbuș",
+      "Gândac",
+      "Lăcustă",
+      "Libelulă",
+      "Licurici",
+      "Molie",
+      "Țestoasă",
+      "Mormoloc",
+      "Șopârlă",
+      "Viperă",
+      "Gușter",
+      "Iapă",
+      "Armăsar",
+      "Mânz",
+      "Bou",
+      "Scroafă",
+      "Purcel",
+      "Motan",
+      "Pisoi",
+      "Râs",
+      "Zimbru",
+      "Pană",
+      "Solz",
+      "Coamă",
+      "Bot",
+      "Rât",
+      "Copită",
+      "Carapace",
+      "Cochilie",
+      "Branhie",
+      "Înotătoare"
+    ],
+    "accepted": 0,
+    "web_calls": 0,
+    "target_approval": false,
+    "source_approval": false,
+    "full_paradigm_and_graph_screen_pending": true,
+    "basis": "Continuing growth discovery from familiar Romanian animals,body parts and nearby habitats;frequency is positive only.",
+    "owner_attention": [
+      "Head misses are not proof of semantic novelty;check plural,generic,qualified and protected selected-sense owners before any web.",
+      "Pană has bird,tool and other senses;Râs has animal/laughter homography;Bot,Rât and Înotătoare need selected-sense checks.",
+      "Iapă,Armăsar,Mânz,Bou,Scroafă,Purcel,Motan and Pisoi must not widen existing adult,sex or age owners.",
+      "Țestoasă and Broască țestoasă may be one lexical family;Pană/Pene is one paradigm,not separate concepts.",
+      "No next-wave word is approved as an HCI target;common,concrete,important vocabulary remains the owner policy."
+    ]
+  },
+  "next_selection_sha256": "0c05d73be981a87350111ebdb410cfee9dbed558301d8dd4aea85abfd9af6f3d",
+  "next_probe_sha256": "19d0af0e1945a7950af5d0ddf198668d81ec8eba50db0e3f80793f7808e71fe7",
+  "source_applied": false,
+  "installed": 0,
+  "player_visible_delta": "0/0/0",
+  "cleanup_operations": 0,
+  "remote_operations": 0,
+  "review_scope": {
+    "freshly_web_reviewed_proposals": 39,
+    "earlier_holds_acknowledged_without_new_research": 16,
+    "once_only_formal_rounds": 1
+  }
+}

@@ -1,0 +1,4110 @@
+{
+  "schema_version": 1,
+  "wave": "1.40",
+  "reviewer": "factual-v1-40",
+  "round": 1,
+  "formal_whole_batch_review_rounds": 1,
+  "web_review": true,
+  "status": "complete",
+  "reviewed_module_sha256": "04d64fcfb7eb621c8311c2e07597c3a9562701d4e74fe1b6ed1446423b86bc04",
+  "proposal_sha256": "2c7d2ad6e340759e916945e68c97a2898609570f132e934994e59a294820fbd0",
+  "pool_sha256": "e1cbc01863a85f36c330f3b239e020e1ae57a5e843d58ce00b924aa4f1313ef0",
+  "items": [
+    {
+      "id": "v140-husa",
+      "verdict": "accept",
+      "rationale": "DEX describes a protective covering for furnishings and equipment, with cloth among its materials. IKEA independently demonstrates removable covers for chairs and a sofa and lists a mattress cover component. The conditional furniture captions and material subset are faithful.",
+      "sources": [
+        "https://dexonline.ro/definitie/hus%C4%83/json",
+        "https://dexonline.ro/definitie/hus%C4%83",
+        "https://www.ikea.com/ro/ro/p/kivik-husa-canapea-extensibila-1-loc-tresund-antracit-30527557/",
+        "https://www.ikea.com/ro/ro/cat/huse-scaune-25223/"
+      ],
+      "forms": [
+        {
+          "form": "husă",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged nominativ-acuzativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "husă",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "husa"
+        },
+        {
+          "form": "huse",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged nominativ-acuzativ/genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "huse",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "huse",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "huse",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "huse"
+        },
+        {
+          "form": "husele",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged nominativ-acuzativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "husele",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "husele"
+        },
+        {
+          "form": "husei",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "husei",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "husei"
+        },
+        {
+          "form": "huselor",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "huselor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "huselor"
+        }
+      ],
+      "edges": [
+        {
+          "src": "n_v1_40_husa",
+          "dst": "n_v24_home_seating_scaun",
+          "relation": "related_to",
+          "label_ro": "cea potrivită poate proteja un scaun",
+          "strength": 0.8,
+          "is_distractor": 0,
+          "bidirectional": 0,
+          "verdict": "accept",
+          "rationale": "Fresh IKEA chair-cover page shows removable covers used on dining chairs; the caption restricts protection to a suitable cover.",
+          "current_endpoint_metadata_reference": {
+            "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+            "record_id": "v140-husa",
+            "node_id": "n_v24_home_seating_scaun"
+          }
+        },
+        {
+          "src": "n_v1_40_husa",
+          "dst": "n_v24_home_seating_canapea",
+          "relation": "related_to",
+          "label_ro": "cea potrivită poate înveli o canapea",
+          "strength": 0.8,
+          "is_distractor": 0,
+          "bidirectional": 0,
+          "verdict": "accept",
+          "rationale": "Fresh IKEA KIVIK page explicitly sells a separate cover for a sofa; the suitable-cover condition is retained.",
+          "current_endpoint_metadata_reference": {
+            "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+            "record_id": "v140-husa",
+            "node_id": "n_v24_home_seating_canapea"
+          }
+        },
+        {
+          "src": "n_v1_40_husa",
+          "dst": "n_v24_home_bed_saltea",
+          "relation": "related_to",
+          "label_ro": "cea potrivită poate înveli o saltea",
+          "strength": 0.8,
+          "is_distractor": 0,
+          "bidirectional": 0,
+          "verdict": "accept",
+          "rationale": "Fresh IKEA KIVIK materials identify a mattress-cover component; the caption states capability only for a suitable cover.",
+          "current_endpoint_metadata_reference": {
+            "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+            "record_id": "v140-husa",
+            "node_id": "n_v24_home_bed_saltea"
+          }
+        },
+        {
+          "src": "n_v1_40_husa",
+          "dst": "n_v1_11_panza",
+          "relation": "related_to",
+          "label_ro": "unele sunt din pânză",
+          "strength": 0.8,
+          "is_distractor": 0,
+          "bidirectional": 0,
+          "verdict": "accept",
+          "rationale": "Fresh DEX protective-cover definition explicitly includes cloth as one possible material; unele preserves the material subset.",
+          "current_endpoint_metadata_reference": {
+            "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+            "record_id": "v140-husa",
+            "node_id": "n_v1_11_panza"
+          }
+        }
+      ],
+      "description_verdict": "accept",
+      "description_rationale": "Source-supported literal description and species/material qualifications.",
+      "category_verdict": "accept",
+      "category_rationale": "Concrete household/school object fits viata_de_roman; botanical species fits stiinta.",
+      "selected_sense": "Învelitoare care protejează obiecte, aici în sensul de acoperitoare pentru mobilier și saltele; fără a o echivala cu orice față de pernă.",
+      "scope_judgment": "ordinary selected physical concept; no target or round approval",
+      "dictionary_evidence": {
+        "requested_head": "husă",
+        "json_word": "husă",
+        "selected_DEX_ids": [
+          "884266"
+        ],
+        "selected_DOOM3_ids": [
+          "1300657"
+        ],
+        "json_capture": {
+          "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-husa-ca8e9884309b.json",
+          "sha256": "01734c00d9e4e6506017b33d0faa0e70f77d157a19aca82630ae7bc1d36b1327",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-husa-ca8e9884309b.json.extract.json",
+          "extract_sha256": "288ee35d37a52e5a80c78562b7bd9a5e92dbf22b3543ceb0d82e4fbc74f91ca3"
+        },
+        "own_table": {
+          "index": 0,
+          "entry_card": "Intrare: husă",
+          "lexeme_name": "husă",
+          "attribution_exact": "substantiv feminin ( F1 ) Surse flexiune: DOR",
+          "separate_Surse_flexiune_label_present": true,
+          "attribution_interpretation": "External flexion-source label exactly as displayed on this own-head table.",
+          "table_sha256": "a34799775557bfd74e8a940d76208f0619edabb2562f9a5faa69b58e760a5c2b",
+          "html_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-husa-fdbd79377cea.html",
+          "html_sha256": "fb8f9d0be0f02d4a0197207094d1fccf5eb2989592c28597e05c383beb4c9220",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-husa-fdbd79377cea.html.extract.json",
+          "extract_sha256": "b0b4c71e0c47de187be5239a84164aea176eb45d431d73bab694a53722ca557b",
+          "ordinary_surface_proof": [
+            {
+              "surface": "husă",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "husa",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "huse",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "husele",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "huse",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "husei",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "huse",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "huselor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ]
+        },
+        "full_ordinary_family_normalized_keys": [
+          "husa",
+          "huse",
+          "husei",
+          "husele",
+          "huselor"
+        ],
+        "current_same_owner_keys_retained": [],
+        "submitted_missing_keys": [
+          "husa",
+          "huse",
+          "husei",
+          "husele",
+          "huselor"
+        ],
+        "full_noncolliding_family_completeness": "PASS; union of submitted missing and current same-owner keys equals own-table ordinary N-A/G-D keys",
+        "other_headword_table_borrowed": false,
+        "register_and_sense_judgment": "Modern ordinary feminine noun; no restrictive register applies to this selected protective-cover sense.",
+        "secondary_source_paraphrase": "IKEA offers detachable washable chair covers and a separate KIVIK sofa cover whose materials distinguish a mattress-cover component."
+      },
+      "current_owner": null,
+      "ownership_disposition": "Every submitted normalized key is currently missing/unowned; no final accepted payload, held family, raw/current deferred term or accent-preserving ReviewedUnresolved key is displaced. Existing same-owner keys stay owned.",
+      "ownership_reference": {
+        "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+        "sha256": "09491abfc6d845f0d97ba118231cd1e436b7b4db2599a0747a8e8860ee506cf3",
+        "record_id": "v140-husa"
+      },
+      "signed_edits": [],
+      "target_approvals": 0,
+      "gameplay_approvals": 0,
+      "salience_approvals": 0,
+      "graph_scope": {
+        "directed_claims": 4,
+        "distinct_existing_endpoints": 4,
+        "same_category_current_endpoints": 4,
+        "batch_peer_endpoints": 0,
+        "numeric_new_target_direct_predecessors": 0,
+        "C3_or_hidden_target_approval": false,
+        "player_visible_delta": "0/0/0"
+      }
+    },
+    {
+      "id": "v140-mina",
+      "verdict": "accept",
+      "rationale": "DEX sense 3 is the thin writing core used in pencils; the own DOOM3 entry explicitly includes the pencil part. The fresh Creion article distinguishes graphite, coloured and wax cores, documents graphite/argilă mixtures, erasable graphite marks and writing on paper. Each material or erasing claim keeps the graphite qualifier.",
+      "sources": [
+        "https://dexonline.ro/definitie/min%C4%83/json",
+        "https://dexonline.ro/definitie/min%C4%83",
+        "https://ro.wikipedia.org/wiki/Creion"
+      ],
+      "forms": [
+        {
+          "form": "mină",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged nominativ-acuzativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "mină",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "mina"
+        },
+        {
+          "form": "mine",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged nominativ-acuzativ/genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "mine",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "mine",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "mine",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "mine"
+        },
+        {
+          "form": "minele",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged nominativ-acuzativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "minele",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "minele"
+        },
+        {
+          "form": "minei",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "minei",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "minei"
+        },
+        {
+          "form": "minelor",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "minelor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "minelor"
+        }
+      ],
+      "edges": [
+        {
+          "src": "n_v1_40_mina",
+          "dst": "n_v24_school_writing_creion",
+          "relation": "part_of",
+          "label_ro": "formează miezul de scris",
+          "strength": 0.8,
+          "is_distractor": 0,
+          "bidirectional": 0,
+          "verdict": "accept",
+          "rationale": "Fresh DEX sense 3 and Creion article identify the writing core as a component of the pencil; part_of direction reads correctly.",
+          "current_endpoint_metadata_reference": {
+            "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+            "record_id": "v140-mina",
+            "node_id": "n_v24_school_writing_creion"
+          }
+        },
+        {
+          "src": "n_v1_40_mina",
+          "dst": "n_v1_11_hartie",
+          "relation": "related_to",
+          "label_ro": "cea de grafit lasă urme pe hârtie",
+          "strength": 0.8,
+          "is_distractor": 0,
+          "bidirectional": 0,
+          "verdict": "accept",
+          "rationale": "Fresh Creion history/use text describes graphite writing on paper; cea de grafit retains the material restriction.",
+          "current_endpoint_metadata_reference": {
+            "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+            "record_id": "v140-mina",
+            "node_id": "n_v1_11_hartie"
+          }
+        },
+        {
+          "src": "n_v1_40_mina",
+          "dst": "n_v24_school_supplies_radiera",
+          "relation": "related_to",
+          "label_ro": "urmele de grafit se pot șterge cu radiera",
+          "strength": 0.8,
+          "is_distractor": 0,
+          "bidirectional": 0,
+          "verdict": "accept",
+          "rationale": "Fresh Creion text discusses erasable graphite marks and drawing with an eraser; the caption concerns graphite marks rather than every core.",
+          "current_endpoint_metadata_reference": {
+            "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+            "record_id": "v140-mina",
+            "node_id": "n_v24_school_supplies_radiera"
+          }
+        },
+        {
+          "src": "n_v1_40_mina",
+          "dst": "n_v4art_lut",
+          "relation": "related_to",
+          "label_ro": "unele mine de grafit conțin argilă",
+          "strength": 0.8,
+          "is_distractor": 0,
+          "bidirectional": 0,
+          "verdict": "accept",
+          "rationale": "Fresh Creion text documents graphite-and-clay cores. Current Lut has alias argilă and denotes the natural modelling material; unele mine de grafit prevents universal composition.",
+          "current_endpoint_metadata_reference": {
+            "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+            "record_id": "v140-mina",
+            "node_id": "n_v4art_lut"
+          }
+        }
+      ],
+      "description_verdict": "accept",
+      "description_rationale": "Source-supported literal description and species/material qualifications.",
+      "category_verdict": "accept",
+      "category_rationale": "Concrete household/school object fits viata_de_roman; botanical species fits stiinta.",
+      "selected_sense": "Miezul care lasă urme al unui creion; fără exploatare minieră, exploziv, monedă sau expresie a feței. Legăturile cu lutul și radiera sunt condiționate de grafit.",
+      "scope_judgment": "ordinary selected physical concept; no target or round approval",
+      "dictionary_evidence": {
+        "requested_head": "mină",
+        "json_word": "mină",
+        "selected_DEX_ids": [
+          "890332"
+        ],
+        "selected_DOOM3_ids": [
+          "1293763"
+        ],
+        "json_capture": {
+          "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-mina-512844464b37.json",
+          "sha256": "eee6cfc0d4c9a2cf43d9777fee47c66d7926c663d6c7e2320f877fc24c1d5889",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-mina-512844464b37.json.extract.json",
+          "extract_sha256": "7d2426770eff1cfd4816d4ce89d307f4865efddadb7ab4497ce034d8d95e852d"
+        },
+        "own_table": {
+          "index": 2,
+          "entry_card": "Intrare: mină (subteran, parte a creionului)",
+          "lexeme_name": "mină",
+          "attribution_exact": "substantiv feminin ( F1 ) Surse flexiune: DOOM 3",
+          "separate_Surse_flexiune_label_present": true,
+          "attribution_interpretation": "External flexion-source label exactly as displayed on this own-head table.",
+          "table_sha256": "cfaf2d83b096299cf4147fa7715c128b2d89794812f29451310c24e170934d1a",
+          "html_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-mina-8292403cab47.html",
+          "html_sha256": "b5cb46fa6e93ec785e38bf0857d7f051be09bd77d5b5e8d8246d185a4039ae92",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-mina-8292403cab47.html.extract.json",
+          "extract_sha256": "180740a25cde112d3fae15a81134c8926a17f5afd6f96aad3fdf378f8e086a25",
+          "ordinary_surface_proof": [
+            {
+              "surface": "mină",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "mina",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "mine",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "minele",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "mine",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "minei",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "mine",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "minelor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ]
+        },
+        "full_ordinary_family_normalized_keys": [
+          "mina",
+          "mine",
+          "minei",
+          "minele",
+          "minelor"
+        ],
+        "current_same_owner_keys_retained": [],
+        "submitted_missing_keys": [
+          "mina",
+          "mine",
+          "minei",
+          "minele",
+          "minelor"
+        ],
+        "full_noncolliding_family_completeness": "PASS; union of submitted missing and current same-owner keys equals own-table ordinary N-A/G-D keys",
+        "other_headword_table_borrowed": false,
+        "register_and_sense_judgment": "The selected school-object sense is ordinary. Mining, explosive, coin and facial-expression senses are excluded; the bare label is not approved as an unambiguous hidden target.",
+        "secondary_source_paraphrase": "The Romanian Creion article treats the mine as a component, explains graphite-and-clay cores and describes erasable graphite drawing, including use of an eraser."
+      },
+      "current_owner": null,
+      "ownership_disposition": "Every submitted normalized key is currently missing/unowned; no final accepted payload, held family, raw/current deferred term or accent-preserving ReviewedUnresolved key is displaced. Existing same-owner keys stay owned.",
+      "ownership_reference": {
+        "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+        "sha256": "09491abfc6d845f0d97ba118231cd1e436b7b4db2599a0747a8e8860ee506cf3",
+        "record_id": "v140-mina"
+      },
+      "signed_edits": [],
+      "target_approvals": 0,
+      "gameplay_approvals": 0,
+      "salience_approvals": 0,
+      "graph_scope": {
+        "directed_claims": 4,
+        "distinct_existing_endpoints": 4,
+        "same_category_current_endpoints": 3,
+        "batch_peer_endpoints": 0,
+        "numeric_new_target_direct_predecessors": 0,
+        "C3_or_hidden_target_approval": false,
+        "player_visible_delta": "0/0/0"
+      }
+    },
+    {
+      "id": "v140-lacramioara",
+      "verdict": "accept",
+      "rationale": "Own DEX 863073 cross-refers to lăcrimioară. A separately fetched lăcrimioară page resolves DEX 863082 sense 2 explicitly in the form lăcrămioară to Convallaria majalis. Own DOOM3 1325367 marks the flower; morphology comes exclusively from the own lăcrămioară table. Wikipedia supports large elliptical leaves and the species, while Botanistii supports perennial habit, bell-shaped usually white flowers and April-May bloom.",
+      "sources": [
+        "https://dexonline.ro/definitie/l%C4%83cr%C4%83mioar%C4%83/json",
+        "https://dexonline.ro/definitie/l%C4%83cr%C4%83mioar%C4%83",
+        "https://ro.wikipedia.org/wiki/L%C4%83cr%C4%83mioar%C4%83",
+        "https://dexonline.ro/definitie/l%C4%83crimioar%C4%83/json",
+        "https://dexonline.ro/definitie/l%C4%83crimioar%C4%83",
+        "https://www.botanistii.ro/blog/category/plante-decorative-exterior/lacramioare/"
+      ],
+      "forms": [
+        {
+          "form": "lăcrămioară",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged nominativ-acuzativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "lăcrămioară",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "lacramioara"
+        },
+        {
+          "form": "lăcrămioare",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged nominativ-acuzativ/genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "lăcrămioare",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "lăcrămioare",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "lăcrămioare",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "lacramioare"
+        },
+        {
+          "form": "lăcrămioarele",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged nominativ-acuzativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "lăcrămioarele",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "lacramioarele"
+        },
+        {
+          "form": "lăcrămioarei",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "lăcrămioarei",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "lacramioarei"
+        },
+        {
+          "form": "lăcrămioarelor",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "lăcrămioarelor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "lacramioarelor"
+        }
+      ],
+      "edges": [
+        {
+          "src": "n_v1_40_lacramioara",
+          "dst": "n_v4sti_planta",
+          "relation": "is_a",
+          "label_ro": "este planta Convallaria majalis",
+          "strength": 0.8,
+          "is_distractor": 0,
+          "bidirectional": 0,
+          "verdict": "accept",
+          "rationale": "Separately resolved DEX plant sense and Romanian botanical sources identify Convallaria majalis; the current plant endpoint is the botanical organism.",
+          "current_endpoint_metadata_reference": {
+            "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+            "record_id": "v140-lacramioara",
+            "node_id": "n_v4sti_planta"
+          }
+        },
+        {
+          "src": "n_v1_40_lacramioara",
+          "dst": "n_v4sti_floare",
+          "relation": "related_to",
+          "label_ro": "are flori albe în formă de clopoței",
+          "strength": 0.8,
+          "is_distractor": 0,
+          "bidirectional": 0,
+          "verdict": "accept",
+          "rationale": "Resolved DEX and Botanistii describe small bell-shaped white flowers; the floral-organ endpoint fits and no synonym family is added.",
+          "current_endpoint_metadata_reference": {
+            "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+            "record_id": "v140-lacramioara",
+            "node_id": "n_v4sti_floare"
+          }
+        },
+        {
+          "src": "n_v1_40_lacramioara",
+          "dst": "n_v4sti_frunza",
+          "relation": "related_to",
+          "label_ro": "are frunze mari, eliptice",
+          "strength": 0.8,
+          "is_distractor": 0,
+          "bidirectional": 0,
+          "verdict": "accept",
+          "rationale": "Fresh Wikipedia morphology describes two large elliptical leaves; the current frunză endpoint is the plant organ.",
+          "current_endpoint_metadata_reference": {
+            "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+            "record_id": "v140-lacramioara",
+            "node_id": "n_v4sti_frunza"
+          }
+        },
+        {
+          "src": "n_v1_40_lacramioara",
+          "dst": "n_v1_9_primavara",
+          "relation": "related_to",
+          "label_ro": "înflorește primăvara în România",
+          "strength": 0.8,
+          "is_distractor": 0,
+          "bidirectional": 0,
+          "verdict": "accept",
+          "rationale": "Fresh Romanian Botanistii horticulture guidance gives April-May bloom; the caption limits flowering to the Romanian spring context.",
+          "current_endpoint_metadata_reference": {
+            "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+            "record_id": "v140-lacramioara",
+            "node_id": "n_v1_9_primavara"
+          }
+        }
+      ],
+      "description_verdict": "accept",
+      "description_rationale": "Source-supported literal description and species/material qualifications.",
+      "category_verdict": "accept",
+      "category_rationale": "Concrete household/school object fits viata_de_roman; botanical species fits stiinta.",
+      "selected_sense": "Planta Convallaria majalis, cu flori mici albe în formă de clopoței; nu diminutivul lacrimii, un nume de persoană sau o aprobare a sinonimelor regionale.",
+      "scope_judgment": "ordinary selected physical concept; no target or round approval",
+      "dictionary_evidence": {
+        "requested_head": "lăcrămioară",
+        "json_word": "lăcrămioară",
+        "selected_DEX_ids": [
+          "863073"
+        ],
+        "selected_DOOM3_ids": [
+          "1325367"
+        ],
+        "json_capture": {
+          "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-lacramioara-b0632fa1e265.json",
+          "sha256": "4b6384514fc1d4e28d2b591c42885fea171bbef9cbc058d5c51206081534b372",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-lacramioara-b0632fa1e265.json.extract.json",
+          "extract_sha256": "d2252e8548437e98bf9aab1c09f97853f5490a5c759ad6ab48d399bb0a55a48d"
+        },
+        "own_table": {
+          "index": 0,
+          "entry_card": "Intrare: lăcrămioară",
+          "lexeme_name": "lăcrămioară",
+          "attribution_exact": "substantiv feminin ( F1 ) Surse flexiune: DOOM 3",
+          "separate_Surse_flexiune_label_present": true,
+          "attribution_interpretation": "External flexion-source label exactly as displayed on this own-head table.",
+          "table_sha256": "78b773149725e497c11bea30dabb923d5af86f11cc2bead87163786b7a73cd91",
+          "html_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-lacramioara-e7472fbce7c7.html",
+          "html_sha256": "411166ad758b5b685b2724aae6dcd1149b6deb679da0c0d74f838ef4bb7ba545",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-lacramioara-e7472fbce7c7.html.extract.json",
+          "extract_sha256": "5967c823de45d016765ebf42b6a8a85ff39c06480f193aca2a4f5a745728b25c",
+          "ordinary_surface_proof": [
+            {
+              "surface": "lăcrămioară",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "lăcrămioara",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "lăcrămioare",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "lăcrămioarele",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "lăcrămioare",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "lăcrămioarei",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "lăcrămioare",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "lăcrămioarelor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ]
+        },
+        "full_ordinary_family_normalized_keys": [
+          "lacramioara",
+          "lacramioare",
+          "lacramioarei",
+          "lacramioarele",
+          "lacramioarelor"
+        ],
+        "current_same_owner_keys_retained": [],
+        "submitted_missing_keys": [
+          "lacramioara",
+          "lacramioare",
+          "lacramioarei",
+          "lacramioarele",
+          "lacramioarelor"
+        ],
+        "full_noncolliding_family_completeness": "PASS; union of submitted missing and current same-owner keys equals own-table ordinary N-A/G-D keys",
+        "other_headword_table_borrowed": false,
+        "register_and_sense_judgment": "MDA2 retains an older regional variant note, but current DOOM3 independently distinguishes lăcrămioară (flower) from lăcrimioară (tear). Only the modern flower head and its own forms are admitted; no tear or regional-synonym family is admitted.",
+        "secondary_source_paraphrase": "Botanistii describes perennial Convallaria majalis, basal elliptical leaves, small bell-shaped white or occasionally pink flowers and April-May flowering in its Romanian horticultural guidance.",
+        "cross_reference_resolution": {
+          "own_DEX_cross_reference_id": "863073",
+          "separately_fetched_target": "lăcrimioară",
+          "resolved_definition_id": "863082",
+          "selected_sense_number": 2,
+          "target_capture": {
+            "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-lacramioara-0be4c484ecc9.json",
+            "sha256": "a6a2749bc620ef841003671697e5543405114590e83a000ec563a09a1016dec2",
+            "url": "https://dexonline.ro/definitie/l%C4%83crimioar%C4%83/json"
+          },
+          "paraphrase": "DEX sense 2 explicitly associates the lăcrămioară form with Convallaria majalis; the tear sense belongs outside the selected family. Morphology remains on the own lăcrămioară table."
+        }
+      },
+      "current_owner": null,
+      "ownership_disposition": "Every submitted normalized key is currently missing/unowned; no final accepted payload, held family, raw/current deferred term or accent-preserving ReviewedUnresolved key is displaced. Existing same-owner keys stay owned.",
+      "ownership_reference": {
+        "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+        "sha256": "09491abfc6d845f0d97ba118231cd1e436b7b4db2599a0747a8e8860ee506cf3",
+        "record_id": "v140-lacramioara"
+      },
+      "signed_edits": [],
+      "target_approvals": 0,
+      "gameplay_approvals": 0,
+      "salience_approvals": 0,
+      "graph_scope": {
+        "directed_claims": 4,
+        "distinct_existing_endpoints": 4,
+        "same_category_current_endpoints": 4,
+        "batch_peer_endpoints": 0,
+        "numeric_new_target_direct_predecessors": 0,
+        "C3_or_hidden_target_approval": false,
+        "player_visible_delta": "0/0/0"
+      }
+    },
+    {
+      "id": "v140-cicoare",
+      "verdict": "accept",
+      "rationale": "Own DEX plant sense identifies Cichorium intybus and allows blue, pink or white flowers. SOR independently describes the familiar roadside herb, a taproot and typically light-blue to violet flower heads with rarer colour variants. Description and blue captions retain the usual-colour qualifier.",
+      "sources": [
+        "https://dexonline.ro/definitie/cicoare/json",
+        "https://dexonline.ro/definitie/cicoare",
+        "https://ro.wikipedia.org/wiki/Cicoare",
+        "https://www.sor.ro/cicoarea/"
+      ],
+      "forms": [
+        {
+          "form": "cicoare",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged nominativ-acuzativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "cicoare",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "cicoare"
+        },
+        {
+          "form": "cicoarea",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged nominativ-acuzativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "cicoarea",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "cicoarea"
+        },
+        {
+          "form": "cicori",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged nominativ-acuzativ/genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "cicori",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "cicori",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "cicori",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "cicori"
+        },
+        {
+          "form": "cicorile",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged nominativ-acuzativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "cicorile",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "cicorile"
+        },
+        {
+          "form": "cicorii",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "cicorii",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "cicorii"
+        },
+        {
+          "form": "cicorilor",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "cicorilor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "cicorilor"
+        }
+      ],
+      "edges": [
+        {
+          "src": "n_v1_40_cicoare",
+          "dst": "n_v4sti_planta",
+          "relation": "is_a",
+          "label_ro": "este planta Cichorium intybus",
+          "strength": 0.8,
+          "is_distractor": 0,
+          "bidirectional": 0,
+          "verdict": "accept",
+          "rationale": "Fresh own DEX and SOR identify Cichorium intybus as the herb; is_a correctly leads to the current plant organism.",
+          "current_endpoint_metadata_reference": {
+            "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+            "record_id": "v140-cicoare",
+            "node_id": "n_v4sti_planta"
+          }
+        },
+        {
+          "src": "n_v1_40_cicoare",
+          "dst": "n_v4sti_floare",
+          "relation": "related_to",
+          "label_ro": "are de regulă flori albastre",
+          "strength": 0.8,
+          "is_distractor": 0,
+          "bidirectional": 0,
+          "verdict": "accept",
+          "rationale": "Fresh SOR describes chiefly light-blue/violet flower heads and rare pink/white variants; de regulă preserves the qualifier.",
+          "current_endpoint_metadata_reference": {
+            "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+            "record_id": "v140-cicoare",
+            "node_id": "n_v4sti_floare"
+          }
+        },
+        {
+          "src": "n_v1_40_cicoare",
+          "dst": "n_v1_9_albastru",
+          "relation": "related_to",
+          "label_ro": "florile sunt de obicei albastre",
+          "strength": 0.8,
+          "is_distractor": 0,
+          "bidirectional": 0,
+          "verdict": "accept",
+          "rationale": "The same fresh SOR colour description supports the existing Albastru colour endpoint; de obicei avoids an all-flowers claim.",
+          "current_endpoint_metadata_reference": {
+            "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+            "record_id": "v140-cicoare",
+            "node_id": "n_v1_9_albastru"
+          }
+        },
+        {
+          "src": "n_v1_40_cicoare",
+          "dst": "n_v24_nature_plant_parts_radacina",
+          "relation": "related_to",
+          "label_ro": "are rădăcină pivotantă",
+          "strength": 0.8,
+          "is_distractor": 0,
+          "bidirectional": 0,
+          "verdict": "accept",
+          "rationale": "Fresh SOR explicitly describes a taproot; the existing Rădăcină endpoint is botanical, with unchanged stiinta category.",
+          "current_endpoint_metadata_reference": {
+            "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+            "record_id": "v140-cicoare",
+            "node_id": "n_v24_nature_plant_parts_radacina"
+          }
+        }
+      ],
+      "description_verdict": "accept",
+      "description_rationale": "Source-supported literal description and species/material qualifications.",
+      "category_verdict": "accept",
+      "category_rationale": "Concrete household/school object fits viata_de_roman; botanical species fits stiinta.",
+      "selected_sense": "Planta Cichorium intybus, cu flori de regulă albastre și rădăcină pivotantă; fără insecta omonimă, andivă ca altă varietate sau sensul de surogat de cafea.",
+      "scope_judgment": "ordinary selected physical concept; no target or round approval",
+      "dictionary_evidence": {
+        "requested_head": "cicoare",
+        "json_word": "cicoare",
+        "selected_DEX_ids": [
+          "845979"
+        ],
+        "selected_DOOM3_ids": [
+          "1311608"
+        ],
+        "json_capture": {
+          "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-cicoare-1d9c72d317bf.json",
+          "sha256": "8124694ab92d501703a3ea69278d2910f4c924ed7adc8d722ebf68c98b15163f",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-cicoare-1d9c72d317bf.json.extract.json",
+          "extract_sha256": "6cffb5640fabbaecd22138dada6c79a84d86de3e38e02e724e02b7bde6fa4779"
+        },
+        "own_table": {
+          "index": 1,
+          "entry_card": "Intrare: cicoare (plantă)",
+          "lexeme_name": "cicoare",
+          "attribution_exact": "substantiv feminin ( F116 ) Surse flexiune: DOR",
+          "separate_Surse_flexiune_label_present": true,
+          "attribution_interpretation": "External flexion-source label exactly as displayed on this own-head table.",
+          "table_sha256": "10c90f22e994df47360647f90107b0633bf3bd25f7fc0924b12e37ee7c3e098b",
+          "html_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-cicoare-b6adf0b61ba5.html",
+          "html_sha256": "7b8f3f503e89fd1eadc6f54a6339b8b84a5d881def3282684c85be022831a209",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-cicoare-b6adf0b61ba5.html.extract.json",
+          "extract_sha256": "860404cb6337b06e21318b5b2a99f099d86b3085d3d127378bb439fa1fc9b4ed",
+          "ordinary_surface_proof": [
+            {
+              "surface": "cicoare",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "cicoarea",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "cicori",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "cicorile",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "cicori",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "cicorii",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "cicori",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "cicorilor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ]
+        },
+        "full_ordinary_family_normalized_keys": [
+          "cicoare",
+          "cicoarea",
+          "cicori",
+          "cicorii",
+          "cicorile",
+          "cicorilor"
+        ],
+        "current_same_owner_keys_retained": [],
+        "submitted_missing_keys": [
+          "cicoare",
+          "cicoarea",
+          "cicori",
+          "cicorii",
+          "cicorile",
+          "cicorilor"
+        ],
+        "full_noncolliding_family_completeness": "PASS; union of submitted missing and current same-owner keys equals own-table ordinary N-A/G-D keys",
+        "other_headword_table_borrowed": false,
+        "register_and_sense_judgment": "Ordinary botanical sense; the insect, coffee substitute and andivă meanings are outside this node. No medicinal claim is approved.",
+        "secondary_source_paraphrase": "SOR identifies the common herb as Cichorium intybus, reports its taproot and mainly blue flower heads, and explicitly notes rarer pink or white heads."
+      },
+      "current_owner": null,
+      "ownership_disposition": "Every submitted normalized key is currently missing/unowned; no final accepted payload, held family, raw/current deferred term or accent-preserving ReviewedUnresolved key is displaced. Existing same-owner keys stay owned.",
+      "ownership_reference": {
+        "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+        "sha256": "09491abfc6d845f0d97ba118231cd1e436b7b4db2599a0747a8e8860ee506cf3",
+        "record_id": "v140-cicoare"
+      },
+      "signed_edits": [],
+      "target_approvals": 0,
+      "gameplay_approvals": 0,
+      "salience_approvals": 0,
+      "graph_scope": {
+        "directed_claims": 4,
+        "distinct_existing_endpoints": 4,
+        "same_category_current_endpoints": 3,
+        "batch_peer_endpoints": 0,
+        "numeric_new_target_direct_predecessors": 0,
+        "C3_or_hidden_target_approval": false,
+        "player_visible_delta": "0/0/0"
+      }
+    },
+    {
+      "id": "v140-patent",
+      "verdict": "accept",
+      "rationale": "DEX explicitly permits the neuter substantivized clește patent, and DOOM3 1280889 is the neuter entry with plural patente. The own noun card is N1; it does not display a separate Surse flexiune label. I attribute the observed paradigm to the dexonline platform card only, with independent DOOM3 normative confirmation, and do not invent DOR/DOOM attribution for that table. The merchant independently calls the product a special gripping/cutting clește.",
+      "sources": [
+        "https://dexonline.ro/definitie/patent/json",
+        "https://dexonline.ro/definitie/patent",
+        "https://www.metalochimice.ro/cleste-patent-mare-205-mm/"
+      ],
+      "forms": [
+        {
+          "form": "patent",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged nominativ-acuzativ/genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "patent",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "patent",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "patent"
+        },
+        {
+          "form": "patentul",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged nominativ-acuzativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "patentul",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "patentul"
+        },
+        {
+          "form": "patente",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged nominativ-acuzativ/genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "patente",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "patente",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "patente"
+        },
+        {
+          "form": "patentele",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged nominativ-acuzativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "patentele",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "patentele"
+        },
+        {
+          "form": "patentului",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "patentului",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "patentului"
+        },
+        {
+          "form": "patentelor",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "patentelor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "patentelor"
+        }
+      ],
+      "edges": [],
+      "description_verdict": "accept",
+      "description_rationale": "Existing owner description retained; this source item only extends the verified same-owner input family and does not rewrite legacy description.",
+      "category_verdict": "accept",
+      "category_rationale": "Exact actual current-owner category preserved, with no category repair or change.",
+      "selected_sense": "Substantiv neutru pentru cleștele patent, ca subtip al actualului Clește; fără adjectiv, brevet, capsă sau unealtă de mină și fără sinonimie universală.",
+      "scope_judgment": "selected_tool_subtype_input_hypothesis",
+      "dictionary_evidence": {
+        "requested_head": "patent",
+        "json_word": "patent",
+        "selected_DEX_ids": [
+          "867107"
+        ],
+        "selected_DOOM3_ids": [
+          "1280889"
+        ],
+        "json_capture": {
+          "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-patent-fbaffd997ad5.json",
+          "sha256": "3743886d9b647c9416db8519258a619d5016e178c3a6919453f16dabfe7e3644",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-patent-fbaffd997ad5.json.extract.json",
+          "extract_sha256": "34f20f544a0e56ff5a37eaef9395b33bd8384d2a08a06e9ce5ea83042b9f9906"
+        },
+        "own_table": {
+          "index": 1,
+          "entry_card": "Intrare: patent (s.n.)",
+          "lexeme_name": "patent 2 (s.n.)",
+          "attribution_exact": "substantiv neutru ( N1 )",
+          "separate_Surse_flexiune_label_present": false,
+          "attribution_interpretation": "dexonline platform own N1 noun card; no separate external flexion source is displayed",
+          "table_sha256": "3aec863a1b9fa5854c1e2d08ffabdef7c25c3e9b86221ff910f1132364dcb3d8",
+          "html_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-patent-0eb7153afc98.html",
+          "html_sha256": "37ec6c905a9d1bf18df0a24d7fd5afa924d389e3ce68bde9e42fc5add57a6440",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-patent-0eb7153afc98.html.extract.json",
+          "extract_sha256": "f3487334541d39628189949a5732f8f9c659f76943692ced4ead35b0a06c83a4",
+          "ordinary_surface_proof": [
+            {
+              "surface": "patent",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "patentul",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "patente",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "patentele",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "patent",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "patentului",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "patente",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "patentelor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ]
+        },
+        "full_ordinary_family_normalized_keys": [
+          "patent",
+          "patente",
+          "patentele",
+          "patentelor",
+          "patentul",
+          "patentului"
+        ],
+        "current_same_owner_keys_retained": [],
+        "submitted_missing_keys": [
+          "patent",
+          "patente",
+          "patentele",
+          "patentelor",
+          "patentul",
+          "patentului"
+        ],
+        "full_noncolliding_family_completeness": "PASS; union of submitted missing and current same-owner keys equals own-table ordinary N-A/G-D keys",
+        "other_headword_table_borrowed": false,
+        "register_and_sense_judgment": "Selected physical tool-subtype inputs for existing Clește; this is not ordinary morphology of clește or a universal synonym. Adjective, brevet, fastener and mining-tool senses remain excluded.",
+        "secondary_source_paraphrase": "MetaloChimice describes its clește patent as a special plier for gripping, cutting and tightening and also uses the substantivized patentul."
+      },
+      "current_owner": {
+        "id": "n_v32_workshop_hand_cleste",
+        "label_ro": "Clește",
+        "description": "Unealtă cu două brațe, folosită pentru a prinde, îndoi sau tăia.",
+        "category": "viata_de_roman",
+        "aliases": [
+          "cleștele",
+          "clești",
+          "cleștii",
+          "cleștelui",
+          "cleștelui de atelier",
+          "cleștilor de atelier"
+        ]
+      },
+      "ownership_disposition": "Every submitted normalized key is currently missing/unowned; no final accepted payload, held family, raw/current deferred term or accent-preserving ReviewedUnresolved key is displaced. Existing same-owner keys stay owned.",
+      "ownership_reference": {
+        "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+        "sha256": "09491abfc6d845f0d97ba118231cd1e436b7b4db2599a0747a8e8860ee506cf3",
+        "record_id": "v140-patent"
+      },
+      "signed_edits": [],
+      "target_approvals": 0,
+      "gameplay_approvals": 0,
+      "salience_approvals": 0
+    },
+    {
+      "id": "v140-casa",
+      "verdict": "accept",
+      "rationale": "DEX sense 1 and the residential-building secondary source match the current casă owner. The own table provides casei and caselor; existing casă/case/casele keys cover the other ordinary normalized inputs.",
+      "sources": [
+        "https://dexonline.ro/definitie/cas%C4%83/json",
+        "https://dexonline.ro/definitie/cas%C4%83",
+        "https://ro.wikipedia.org/wiki/Cas%C4%83"
+      ],
+      "forms": [
+        {
+          "form": "casei",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "casei",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "casei"
+        },
+        {
+          "form": "caselor",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "caselor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "caselor"
+        }
+      ],
+      "edges": [],
+      "description_verdict": "accept",
+      "description_rationale": "Existing owner description retained; this source item only extends the verified same-owner input family and does not rewrite legacy description.",
+      "category_verdict": "accept",
+      "category_rationale": "Exact actual current-owner category preserved, with no category repair or change.",
+      "selected_sense": "Casa în sensul de clădire pentru locuit, exact sensul proprietarului actual; fără casierie, dinastie, instituții sau alte sensuri.",
+      "scope_judgment": "ordinary_NA_GD_morphology_of_existing_lemma",
+      "dictionary_evidence": {
+        "requested_head": "casă",
+        "json_word": "casă",
+        "selected_DEX_ids": [
+          "841993"
+        ],
+        "selected_DOOM3_ids": [
+          "1309960"
+        ],
+        "json_capture": {
+          "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-casa-042d41a2b2c3.json",
+          "sha256": "9626e98b69cee90f70910bfcb8276888fb923ff74b83044131ee86a9aedbee75",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-casa-042d41a2b2c3.json.extract.json",
+          "extract_sha256": "fd89a09f8d948e5ee088f48b39858a7581de0ce827865c7f52142b55212f9c66"
+        },
+        "own_table": {
+          "index": 1,
+          "entry_card": "Intrare: casă (clădire)",
+          "lexeme_name": "casă",
+          "attribution_exact": "substantiv feminin ( F1 ) Surse flexiune: DOR",
+          "separate_Surse_flexiune_label_present": true,
+          "attribution_interpretation": "External flexion-source label exactly as displayed on this own-head table.",
+          "table_sha256": "980f3389707873da57c51fa8a9b8fe897e4422b1adc3ec3c187406d4e1f551d1",
+          "html_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-casa-f5415a0f19d8.html",
+          "html_sha256": "cd56cdadcd844844135e47d5b5678df4245f5eca65c33fa23c67aea1b54055de",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-casa-f5415a0f19d8.html.extract.json",
+          "extract_sha256": "18e22e8bbcfeddc7cd67dced8dcd9c17fc221ee477bf3b4a0e3b029868033ba0",
+          "ordinary_surface_proof": [
+            {
+              "surface": "casă",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "casa",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "case",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "casele",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "case",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "casei",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "case",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "caselor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ]
+        },
+        "full_ordinary_family_normalized_keys": [
+          "casa",
+          "case",
+          "casei",
+          "casele",
+          "caselor"
+        ],
+        "current_same_owner_keys_retained": [
+          "casa",
+          "case",
+          "casele"
+        ],
+        "submitted_missing_keys": [
+          "casei",
+          "caselor"
+        ],
+        "full_noncolliding_family_completeness": "PASS; union of submitted missing and current same-owner keys equals own-table ordinary N-A/G-D keys",
+        "other_headword_table_borrowed": false,
+        "register_and_sense_judgment": "Ordinary morphology of the same residential noun; other institutional, dynasty, printing-case or cash-office senses are excluded.",
+        "secondary_source_paraphrase": "The Romanian Casă article describes a residential building and its household living spaces."
+      },
+      "current_owner": {
+        "id": "n_v4soc_casa",
+        "label_ro": "casă",
+        "description": "Locuință în care trăiesc persoane sau familii.",
+        "category": "societate",
+        "aliases": [
+          "case",
+          "casele"
+        ]
+      },
+      "ownership_disposition": "Every submitted normalized key is currently missing/unowned; no final accepted payload, held family, raw/current deferred term or accent-preserving ReviewedUnresolved key is displaced. Existing same-owner keys stay owned.",
+      "ownership_reference": {
+        "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+        "sha256": "09491abfc6d845f0d97ba118231cd1e436b7b4db2599a0747a8e8860ee506cf3",
+        "record_id": "v140-casa"
+      },
+      "signed_edits": [],
+      "target_approvals": 0,
+      "gameplay_approvals": 0,
+      "salience_approvals": 0
+    },
+    {
+      "id": "v140-familie",
+      "verdict": "accept",
+      "rationale": "DEX human-family senses and the secondary source match the current human social-group owner. The two missing G-D forms occur in the own DOOM3-attributed table; no biological or lexical family is added.",
+      "sources": [
+        "https://dexonline.ro/definitie/familie/json",
+        "https://dexonline.ro/definitie/familie",
+        "https://ro.wikipedia.org/wiki/Familie"
+      ],
+      "forms": [
+        {
+          "form": "familiei",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "familiei",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "familiei"
+        },
+        {
+          "form": "familiilor",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "familiilor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "familiilor"
+        }
+      ],
+      "edges": [],
+      "description_verdict": "accept",
+      "description_rationale": "Existing owner description retained; this source item only extends the verified same-owner input family and does not rewrite legacy description.",
+      "category_verdict": "accept",
+      "category_rationale": "Exact actual current-owner category preserved, with no category repair or change.",
+      "selected_sense": "Familie umană, în sensul exact al proprietarului actual; fără taxon biologic, familie lexicală sau grup figurat.",
+      "scope_judgment": "ordinary_NA_GD_morphology_of_existing_lemma",
+      "dictionary_evidence": {
+        "requested_head": "familie",
+        "json_word": "familie",
+        "selected_DEX_ids": [
+          "868817"
+        ],
+        "selected_DOOM3_ids": [
+          "1300821"
+        ],
+        "json_capture": {
+          "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-familie-110ab2c0dcba.json",
+          "sha256": "0b9fa754665f99c435ee2f7709e0abecaf3838da426a58f395bc8ee73f5cdbcb",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-familie-110ab2c0dcba.json.extract.json",
+          "extract_sha256": "36403b7b8591325a7416e18bdb97bba8be833a2d7fd9d2a1b4f77853169de172"
+        },
+        "own_table": {
+          "index": 0,
+          "entry_card": "Intrare: familie",
+          "lexeme_name": "familie",
+          "attribution_exact": "substantiv feminin ( F135 ) Surse flexiune: DOOM 3",
+          "separate_Surse_flexiune_label_present": true,
+          "attribution_interpretation": "External flexion-source label exactly as displayed on this own-head table.",
+          "table_sha256": "6f1cc127678dee163db5821cb477d0aa55a8fd46c52dbf84de9eac703b77916c",
+          "html_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-familie-38cf067b7208.html",
+          "html_sha256": "176eb53b6d49f239ed2b8ed226b8e477adc17677b7d749d37741f739efe73733",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-familie-38cf067b7208.html.extract.json",
+          "extract_sha256": "9ea6fe53349dd595352394920f219b192fc534a7b2df2fb0411a3b47eed749f0",
+          "ordinary_surface_proof": [
+            {
+              "surface": "familie",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "familia",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "familii",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "familiile",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "familii",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "familiei",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "familii",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "familiilor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ]
+        },
+        "full_ordinary_family_normalized_keys": [
+          "familia",
+          "familie",
+          "familiei",
+          "familii",
+          "familiile",
+          "familiilor"
+        ],
+        "current_same_owner_keys_retained": [
+          "familia",
+          "familie",
+          "familii",
+          "familiile"
+        ],
+        "submitted_missing_keys": [
+          "familiei",
+          "familiilor"
+        ],
+        "full_noncolliding_family_completeness": "PASS; union of submitted missing and current same-owner keys equals own-table ordinary N-A/G-D keys",
+        "other_headword_table_borrowed": false,
+        "register_and_sense_judgment": "Ordinary morphology of familie; same human owner and unchanged category.",
+        "secondary_source_paraphrase": "The Romanian Familie article describes related people and several human family structures."
+      },
+      "current_owner": {
+        "id": "n_v4soc_familie",
+        "label_ro": "familie",
+        "description": "Grup social format din rude sau persoane care trăiesc împreună.",
+        "category": "societate",
+        "aliases": [
+          "familia",
+          "familii",
+          "familiile"
+        ]
+      },
+      "ownership_disposition": "Every submitted normalized key is currently missing/unowned; no final accepted payload, held family, raw/current deferred term or accent-preserving ReviewedUnresolved key is displaced. Existing same-owner keys stay owned.",
+      "ownership_reference": {
+        "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+        "sha256": "09491abfc6d845f0d97ba118231cd1e436b7b4db2599a0747a8e8860ee506cf3",
+        "record_id": "v140-familie"
+      },
+      "signed_edits": [],
+      "target_approvals": 0,
+      "gameplay_approvals": 0,
+      "salience_approvals": 0
+    },
+    {
+      "id": "v140-baie",
+      "verdict": "accept",
+      "rationale": "DEX I.2 includes a room fitted for bathing, confirmed by the Romanian Baie article. The own F131 table and DOOM3 support băii/băilor without borrowing the mining or gulf homonym.",
+      "sources": [
+        "https://dexonline.ro/definitie/baie/json",
+        "https://dexonline.ro/definitie/baie",
+        "https://ro.wikipedia.org/wiki/Baie"
+      ],
+      "forms": [
+        {
+          "form": "băii",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "băii",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "baii"
+        },
+        {
+          "form": "băilor",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "băilor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "bailor"
+        }
+      ],
+      "edges": [],
+      "description_verdict": "accept",
+      "description_rationale": "Existing owner description retained; this source item only extends the verified same-owner input family and does not rewrite legacy description.",
+      "category_verdict": "accept",
+      "category_rationale": "Exact actual current-owner category preserved, with no category repair or change.",
+      "selected_sense": "Încăperea de igienă personală a locuinței, exact sensul proprietarului actual; fără golf, exploatare minieră sau instalație tehnică.",
+      "scope_judgment": "ordinary_NA_GD_morphology_of_existing_lemma",
+      "dictionary_evidence": {
+        "requested_head": "baie",
+        "json_word": "baie",
+        "selected_DEX_ids": [
+          "832593"
+        ],
+        "selected_DOOM3_ids": [
+          "1317048"
+        ],
+        "json_capture": {
+          "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-baie-c2eee8b4f564.json",
+          "sha256": "d2c2b025616f3e59c8c3219c44233885590002e2857ad6d6ae110cf08b36b5b5",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-baie-c2eee8b4f564.json.extract.json",
+          "extract_sha256": "abb4dd4ae61b0809c5f0da1521dd9aa69a8f26eff3ceca2a9488af1a4fa33a62"
+        },
+        "own_table": {
+          "index": 0,
+          "entry_card": "Intrare: baie (cadă, scaldă)",
+          "lexeme_name": "baie",
+          "attribution_exact": "substantiv feminin ( F131 ) Surse flexiune: DOOM 3",
+          "separate_Surse_flexiune_label_present": true,
+          "attribution_interpretation": "External flexion-source label exactly as displayed on this own-head table.",
+          "table_sha256": "a3c178403a6bfb7023dd149d46f135160c1c14c731b7ad66fda5c804cbfd5e25",
+          "html_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-baie-40b83e9b70b1.html",
+          "html_sha256": "001bf71f9c5c8d589140700a60c6fc11e471492bf28b001f2378a262b832f004",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-baie-40b83e9b70b1.html.extract.json",
+          "extract_sha256": "e01bc5e52b5fc741b514caba03f021d16f13bcf126ed6cbb1292d48dba77a1ac",
+          "ordinary_surface_proof": [
+            {
+              "surface": "baie",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "baia",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "băi",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "băile",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "băi",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "băii",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "băi",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "băilor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ]
+        },
+        "full_ordinary_family_normalized_keys": [
+          "bai",
+          "baia",
+          "baie",
+          "baii",
+          "baile",
+          "bailor"
+        ],
+        "current_same_owner_keys_retained": [
+          "bai",
+          "baia",
+          "baie",
+          "baile"
+        ],
+        "submitted_missing_keys": [
+          "baii",
+          "bailor"
+        ],
+        "full_noncolliding_family_completeness": "PASS; union of submitted missing and current same-owner keys equals own-table ordinary N-A/G-D keys",
+        "other_headword_table_borrowed": false,
+        "register_and_sense_judgment": "Ordinary morphology of the existing hygiene-room noun; technical vessel, mine and geographical senses are excluded.",
+        "secondary_source_paraphrase": "The Romanian Baie article identifies the dwelling room used for bathing or showering and its sanitary fittings."
+      },
+      "current_owner": {
+        "id": "n_v4via_baie",
+        "label_ro": "baie",
+        "description": "Încăpere pentru spălat, toaletă și igienă zilnică.",
+        "category": "viata_de_roman",
+        "aliases": [
+          "baia",
+          "băi",
+          "băile"
+        ]
+      },
+      "ownership_disposition": "Every submitted normalized key is currently missing/unowned; no final accepted payload, held family, raw/current deferred term or accent-preserving ReviewedUnresolved key is displaced. Existing same-owner keys stay owned.",
+      "ownership_reference": {
+        "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+        "sha256": "09491abfc6d845f0d97ba118231cd1e436b7b4db2599a0747a8e8860ee506cf3",
+        "record_id": "v140-baie"
+      },
+      "signed_edits": [],
+      "target_approvals": 0,
+      "gameplay_approvals": 0,
+      "salience_approvals": 0
+    },
+    {
+      "id": "v140-ramura",
+      "verdict": "accept",
+      "rationale": "DEX sense 1 is a plant-stem branch and the own F43/DOR table supplies ramurii and ramurilor. The initially linked forum contains only weak misspelled user wording; I instead freshly followed its precise linked horticulture article, which repeatedly describes branches, shoots and the trunk/crown structure.",
+      "sources": [
+        "https://dexonline.ro/definitie/ramur%C4%83/json",
+        "https://dexonline.ro/definitie/ramur%C4%83",
+        "https://www.botanistii.ro/forum/informatii-despre/cais-fara-flori-si-frunze/",
+        "https://www.botanistii.ro/blog/cais-cum-sa-plantezi-si-sa-ingrijesti-acest-pom-fructifer/"
+      ],
+      "forms": [
+        {
+          "form": "ramurii",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "ramurii",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "ramurii"
+        },
+        {
+          "form": "ramurilor",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "ramurilor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "ramurilor"
+        }
+      ],
+      "edges": [],
+      "description_verdict": "accept",
+      "description_rationale": "Existing owner description retained; this source item only extends the verified same-owner input family and does not rewrite legacy description.",
+      "category_verdict": "accept",
+      "category_rationale": "Exact actual current-owner category preserved, with no category repair or change.",
+      "selected_sense": "Ramificație a tulpinii unei plante, exact sensul proprietarului actual Ramură; fără sector economic, disciplină, descendență sau structură anatomică.",
+      "scope_judgment": "ordinary_NA_GD_morphology_of_existing_lemma",
+      "dictionary_evidence": {
+        "requested_head": "ramură",
+        "json_word": "ramură",
+        "selected_DEX_ids": [
+          "852022"
+        ],
+        "selected_DOOM3_ids": [
+          "1274675"
+        ],
+        "json_capture": {
+          "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-ramura-be3bd163993d.json",
+          "sha256": "9e39e3f720b7c17a23f37c198db9a76ac463c7d6db2fecd4b4aaf2a0132d3cda",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-ramura-be3bd163993d.json.extract.json",
+          "extract_sha256": "0baf043489c8fa514ef7dbf64a7963f7e7cbaada972d18b09acfa724a6a799ec"
+        },
+        "own_table": {
+          "index": 0,
+          "entry_card": "Intrare: ramură",
+          "lexeme_name": "ramură",
+          "attribution_exact": "substantiv feminin ( F43 ) Surse flexiune: DOR",
+          "separate_Surse_flexiune_label_present": true,
+          "attribution_interpretation": "External flexion-source label exactly as displayed on this own-head table.",
+          "table_sha256": "63de3129be031c291b911f23b47a9186bbd37103ddbe21eec8421e45bc9eafc8",
+          "html_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-ramura-f6ed8f936c8c.html",
+          "html_sha256": "88c07c8e3603cbde4868d9b2b0df5b5319921d9b099842f3f6ce3a88c6e4f1ec",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-ramura-f6ed8f936c8c.html.extract.json",
+          "extract_sha256": "b15547a79f5175f943e97e6853c3d6e5f74fdd741e85b3409670f8b1b5185efe",
+          "ordinary_surface_proof": [
+            {
+              "surface": "ramură",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "ramura",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "ramuri",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "ramurile",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "ramuri",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "ramurii",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "ramuri",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "ramurilor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ]
+        },
+        "full_ordinary_family_normalized_keys": [
+          "ramura",
+          "ramuri",
+          "ramurii",
+          "ramurile",
+          "ramurilor"
+        ],
+        "current_same_owner_keys_retained": [
+          "ramura",
+          "ramuri",
+          "ramurile"
+        ],
+        "submitted_missing_keys": [
+          "ramurii",
+          "ramurilor"
+        ],
+        "full_noncolliding_family_completeness": "PASS; union of submitted missing and current same-owner keys equals own-table ordinary N-A/G-D keys",
+        "other_headword_table_borrowed": false,
+        "register_and_sense_judgment": "Ordinary morphology of the plant-part owner; family, economy, discipline, artery and nerve senses are excluded.",
+        "secondary_source_paraphrase": "The separately fetched Botanistii cais care article discusses main branches, extension shoots, branch positions and crown formation in a fruit tree."
+      },
+      "current_owner": {
+        "id": "n_v24_nature_plant_parts_ramura",
+        "label_ro": "Ramură",
+        "description": "Concept cotidian din grupul «plante și părțile lor»: Ramură.",
+        "category": "stiinta",
+        "aliases": [
+          "ramuri",
+          "ramurile"
+        ]
+      },
+      "ownership_disposition": "Every submitted normalized key is currently missing/unowned; no final accepted payload, held family, raw/current deferred term or accent-preserving ReviewedUnresolved key is displaced. Existing same-owner keys stay owned.",
+      "ownership_reference": {
+        "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+        "sha256": "09491abfc6d845f0d97ba118231cd1e436b7b4db2599a0747a8e8860ee506cf3",
+        "record_id": "v140-ramura"
+      },
+      "signed_edits": [],
+      "target_approvals": 0,
+      "gameplay_approvals": 0,
+      "salience_approvals": 0
+    },
+    {
+      "id": "v140-radacina",
+      "verdict": "accept",
+      "rationale": "DEX botanical sense and the secondary source identify the root as the plant organ with anchoring and absorption functions. The own F43/DOR table gives the two missing G-D forms and agrees with DOOM3.",
+      "sources": [
+        "https://dexonline.ro/definitie/r%C4%83d%C4%83cin%C4%83/json",
+        "https://dexonline.ro/definitie/r%C4%83d%C4%83cin%C4%83",
+        "https://ro.wikipedia.org/wiki/R%C4%83d%C4%83cin%C4%83"
+      ],
+      "forms": [
+        {
+          "form": "rădăcinii",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "rădăcinii",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "radacinii"
+        },
+        {
+          "form": "rădăcinilor",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "rădăcinilor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "radacinilor"
+        }
+      ],
+      "edges": [],
+      "description_verdict": "accept",
+      "description_rationale": "Existing owner description retained; this source item only extends the verified same-owner input family and does not rewrite legacy description.",
+      "category_verdict": "accept",
+      "category_rationale": "Exact actual current-owner category preserved, with no category repair or change.",
+      "selected_sense": "Organul plantei care o fixează de sol și absoarbe apă și substanțe minerale; sensul botanic al proprietarului existent, fără sensuri matematice ori figurate.",
+      "scope_judgment": "ordinary_NA_GD_morphology_of_existing_lemma",
+      "dictionary_evidence": {
+        "requested_head": "rădăcină",
+        "json_word": "rădăcină",
+        "selected_DEX_ids": [
+          "852494"
+        ],
+        "selected_DOOM3_ids": [
+          "1274867"
+        ],
+        "json_capture": {
+          "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-radacina-00983cab2333.json",
+          "sha256": "e0b82405fd87e7f1feb2963bae6c14e5a18e1f8438ee54980f2c6bed303992ae",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-radacina-00983cab2333.json.extract.json",
+          "extract_sha256": "12fab51977e5ecde7b6488442c860625e00d75bfc3ca4c1049a1bc03c3ed8643"
+        },
+        "own_table": {
+          "index": 1,
+          "entry_card": "Intrare: rădăcină",
+          "lexeme_name": "rădăcină",
+          "attribution_exact": "substantiv feminin ( F43 ) Surse flexiune: DOR",
+          "separate_Surse_flexiune_label_present": true,
+          "attribution_interpretation": "External flexion-source label exactly as displayed on this own-head table.",
+          "table_sha256": "a2696baecadfa7c33ad17d9782c971ab0cf580f41ba3e942fc64dc3e594ba040",
+          "html_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-radacina-6c0080e21051.html",
+          "html_sha256": "2aad7e24d61159adb9ee8fa5f9bb049bdc22768cad4f10dab1f95ca2eb4f3a10",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-radacina-6c0080e21051.html.extract.json",
+          "extract_sha256": "b5932650fac057bb0c8fb175b32c1ae331261d7253939583eeb1342b7774dcf1",
+          "ordinary_surface_proof": [
+            {
+              "surface": "rădăcină",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "rădăcina",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "rădăcini",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "rădăcinile",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "rădăcini",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "rădăcinii",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "rădăcini",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "rădăcinilor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ]
+        },
+        "full_ordinary_family_normalized_keys": [
+          "radacina",
+          "radacini",
+          "radacinii",
+          "radacinile",
+          "radacinilor"
+        ],
+        "current_same_owner_keys_retained": [
+          "radacina",
+          "radacini",
+          "radacinile"
+        ],
+        "submitted_missing_keys": [
+          "radacinii",
+          "radacinilor"
+        ],
+        "full_noncolliding_family_completeness": "PASS; union of submitted missing and current same-owner keys equals own-table ordinary N-A/G-D keys",
+        "other_headword_table_borrowed": false,
+        "register_and_sense_judgment": "Ordinary morphology of the botanical owner; mathematical, linguistic, anatomical and figurative meanings remain excluded.",
+        "secondary_source_paraphrase": "The Romanian Rădăcină article describes the vegetative plant organ, anchoring and uptake of water and mineral salts."
+      },
+      "current_owner": {
+        "id": "n_v24_nature_plant_parts_radacina",
+        "label_ro": "Rădăcină",
+        "description": "Concept cotidian din grupul «plante și părțile lor»: Rădăcină.",
+        "category": "stiinta",
+        "aliases": [
+          "rădăcini",
+          "rădăcinile"
+        ]
+      },
+      "ownership_disposition": "Every submitted normalized key is currently missing/unowned; no final accepted payload, held family, raw/current deferred term or accent-preserving ReviewedUnresolved key is displaced. Existing same-owner keys stay owned.",
+      "ownership_reference": {
+        "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+        "sha256": "09491abfc6d845f0d97ba118231cd1e436b7b4db2599a0747a8e8860ee506cf3",
+        "record_id": "v140-radacina"
+      },
+      "signed_edits": [],
+      "target_approvals": 0,
+      "gameplay_approvals": 0,
+      "salience_approvals": 0
+    },
+    {
+      "id": "v140-pix",
+      "verdict": "accept",
+      "rationale": "DEX includes the paste-writing instrument; the secondary source describes its viscous-ink/ball mechanism. The own N24 table contains pixului/pixurilor. Elided pixu- is visibly marked and excluded from the ordinary family.",
+      "sources": [
+        "https://dexonline.ro/definitie/pix/json",
+        "https://dexonline.ro/definitie/pix",
+        "https://ro.wikipedia.org/wiki/Pix"
+      ],
+      "forms": [
+        {
+          "form": "pixului",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "pixului",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "pixului"
+        },
+        {
+          "form": "pixurilor",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "pixurilor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "pixurilor"
+        }
+      ],
+      "edges": [],
+      "description_verdict": "accept",
+      "description_rationale": "Existing owner description retained; this source item only extends the verified same-owner input family and does not rewrite legacy description.",
+      "category_verdict": "accept",
+      "category_rationale": "Exact actual current-owner category preserved, with no category repair or change.",
+      "selected_sense": "Instrument de scris cu pastă, în sensul obiectului școlar al proprietarului existent; numai morfologia aceleiași leme, fără extindere semantică.",
+      "scope_judgment": "ordinary_NA_GD_morphology_of_existing_lemma",
+      "dictionary_evidence": {
+        "requested_head": "pix",
+        "json_word": "pix",
+        "selected_DEX_ids": [
+          "872302"
+        ],
+        "selected_DOOM3_ids": [
+          "1282832"
+        ],
+        "json_capture": {
+          "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-pix-1526b033ef2c.json",
+          "sha256": "a97628c4dd96e7a4ba7d0a277f01f0be2ba66ed438291dbcf24e042475460c50",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-pix-1526b033ef2c.json.extract.json",
+          "extract_sha256": "ce576c80d159d3acc28a32b7701959513cb0b24cfb7955f24e4018e4d55d2be5"
+        },
+        "own_table": {
+          "index": 0,
+          "entry_card": "Intrare: pix",
+          "lexeme_name": "pix",
+          "attribution_exact": "substantiv neutru ( N24 ) Surse flexiune: DOOM 3",
+          "separate_Surse_flexiune_label_present": true,
+          "attribution_interpretation": "External flexion-source label exactly as displayed on this own-head table.",
+          "table_sha256": "f34a6e86a55279fb53653b2d65913b38992534d025b9f03bf48168b1c1baa134",
+          "html_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-pix-3ba72c8ff8f0.html",
+          "html_sha256": "71c5c2107bd426e7a431f9833961e1e353165b6e1253fdc1b769a3f10fdebd60",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-pix-3ba72c8ff8f0.html.extract.json",
+          "extract_sha256": "68a7834afee029f0986401a194ea78974b91bd718a4c45df5510713c142915e7",
+          "ordinary_surface_proof": [
+            {
+              "surface": "pix",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "pixul",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "pixuri",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "pixurile",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "pix",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "pixului",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "pixuri",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "pixurilor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ]
+        },
+        "full_ordinary_family_normalized_keys": [
+          "pix",
+          "pixul",
+          "pixului",
+          "pixuri",
+          "pixurile",
+          "pixurilor"
+        ],
+        "current_same_owner_keys_retained": [
+          "pix",
+          "pixul",
+          "pixuri",
+          "pixurile"
+        ],
+        "submitted_missing_keys": [
+          "pixului",
+          "pixurilor"
+        ],
+        "full_noncolliding_family_completeness": "PASS; union of submitted missing and current same-owner keys equals own-table ordinary N-A/G-D keys",
+        "other_headword_table_borrowed": false,
+        "register_and_sense_judgment": "Ordinary morphology of the existing school writing instrument; no new lexical synonym or new mechanical-pencil interpretation is added.",
+        "secondary_source_paraphrase": "The Romanian Pix article describes an instrument that meters viscous ink/paste through a small ball at the tip."
+      },
+      "current_owner": {
+        "id": "n_v24_school_writing_pix",
+        "label_ro": "Pix",
+        "description": "Concept cotidian din grupul «obiecte pentru scris»: Pix.",
+        "category": "viata_de_roman",
+        "aliases": [
+          "pixul",
+          "pixuri",
+          "pixurile"
+        ]
+      },
+      "ownership_disposition": "Every submitted normalized key is currently missing/unowned; no final accepted payload, held family, raw/current deferred term or accent-preserving ReviewedUnresolved key is displaced. Existing same-owner keys stay owned.",
+      "ownership_reference": {
+        "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+        "sha256": "09491abfc6d845f0d97ba118231cd1e436b7b4db2599a0747a8e8860ee506cf3",
+        "record_id": "v140-pix"
+      },
+      "signed_edits": [],
+      "target_approvals": 0,
+      "gameplay_approvals": 0,
+      "salience_approvals": 0
+    },
+    {
+      "id": "v140-lectie",
+      "verdict": "accept",
+      "rationale": "DEX sense 1 is a school lesson under a teacher; own DOOM3 explicitly identifies class-hour/homework senses. The Ministry TeleȘcoala page documents teachers delivering lessons. The own F135 table contains both missing G-D forms.",
+      "sources": [
+        "https://dexonline.ro/definitie/lec%C8%9Bie/json",
+        "https://dexonline.ro/definitie/lec%C8%9Bie",
+        "https://edu.ro/gala-tele%C8%99coala-festivitatea-de-premiere-profesorilor-care-au-sus%C8%9Binut-lec%C8%9Bii-la-tvr"
+      ],
+      "forms": [
+        {
+          "form": "lecției",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "lecției",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "lectiei"
+        },
+        {
+          "form": "lecțiilor",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "lecțiilor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "lectiilor"
+        }
+      ],
+      "edges": [],
+      "description_verdict": "accept",
+      "description_rationale": "Existing owner description retained; this source item only extends the verified same-owner input family and does not rewrite legacy description.",
+      "category_verdict": "accept",
+      "category_rationale": "Exact actual current-owner category preserved, with no category repair or change.",
+      "selected_sense": "Lecție școlară: activitate de predare și învățare condusă de profesor; aceeași lemă și același sens al proprietarului existent, fără sens de mustrare sau critică textuală.",
+      "scope_judgment": "ordinary_NA_GD_morphology_of_existing_lemma",
+      "dictionary_evidence": {
+        "requested_head": "lecție",
+        "json_word": "lecție",
+        "selected_DEX_ids": [
+          "863401"
+        ],
+        "selected_DOOM3_ids": [
+          "1325531"
+        ],
+        "json_capture": {
+          "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-lectie-3e53321497fa.json",
+          "sha256": "3f618fc7b1790388af810dbe12ed07aba489679d08a14c7e51f520343fa9cb08",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-lectie-3e53321497fa.json.extract.json",
+          "extract_sha256": "0ee9e200f6545cca019304e0f31e13fd37463021813b784811bf07e8f1e72e3f"
+        },
+        "own_table": {
+          "index": 0,
+          "entry_card": "Intrare: lecție",
+          "lexeme_name": "lecție",
+          "attribution_exact": "substantiv feminin ( F135 ) Surse flexiune: DOOM 3",
+          "separate_Surse_flexiune_label_present": true,
+          "attribution_interpretation": "External flexion-source label exactly as displayed on this own-head table.",
+          "table_sha256": "3854380c409ff3f7b39d73919dbc7eb6ba8dcebcc0ac2ddd81c5bbbd2f953785",
+          "html_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-lectie-3b0315e6b61a.html",
+          "html_sha256": "d34b0108cba8131bc782b729d6301f8eea773e3251fcf8d53b270f4765a5193e",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-lectie-3b0315e6b61a.html.extract.json",
+          "extract_sha256": "0f2acb31f85fe42a6bbd7f37b83a8a856f2f64ab4f731dc7c9b960245680e550",
+          "ordinary_surface_proof": [
+            {
+              "surface": "lecție",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "lecția",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "lecții",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "lecțiile",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "lecții",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "lecției",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "lecții",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "lecțiilor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ]
+        },
+        "full_ordinary_family_normalized_keys": [
+          "lectia",
+          "lectie",
+          "lectiei",
+          "lectii",
+          "lectiile",
+          "lectiilor"
+        ],
+        "current_same_owner_keys_retained": [
+          "lectia",
+          "lectie",
+          "lectii",
+          "lectiile"
+        ],
+        "submitted_missing_keys": [
+          "lectiei",
+          "lectiilor"
+        ],
+        "full_noncolliding_family_completeness": "PASS; union of submitted missing and current same-owner keys equals own-table ordinary N-A/G-D keys",
+        "other_headword_table_borrowed": false,
+        "register_and_sense_judgment": "Ordinary morphology of the school-lesson owner, excluding rebuke, textual variant and figurative lesson meanings.",
+        "secondary_source_paraphrase": "The Ministry of Education page reports teachers conducting TeleȘcoala course lessons and educational broadcasts."
+      },
+      "current_owner": {
+        "id": "n_v24_school_classroom_lectie",
+        "label_ro": "Lecție",
+        "description": "Concept cotidian din grupul «sala de clasă»: Lecție.",
+        "category": "viata_de_roman",
+        "aliases": [
+          "lecția",
+          "lecții",
+          "lecțiile"
+        ]
+      },
+      "ownership_disposition": "Every submitted normalized key is currently missing/unowned; no final accepted payload, held family, raw/current deferred term or accent-preserving ReviewedUnresolved key is displaced. Existing same-owner keys stay owned.",
+      "ownership_reference": {
+        "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+        "sha256": "09491abfc6d845f0d97ba118231cd1e436b7b4db2599a0747a8e8860ee506cf3",
+        "record_id": "v140-lectie"
+      },
+      "signed_edits": [],
+      "target_approvals": 0,
+      "gameplay_approvals": 0,
+      "salience_approvals": 0
+    },
+    {
+      "id": "v140-examen",
+      "verdict": "accept",
+      "rationale": "DEX educational assessment sense and the secondary source match the current school-assessment owner. The own N1/DOOM3 table contains examenului and examenelor; elided examenu- is excluded.",
+      "sources": [
+        "https://dexonline.ro/definitie/examen/json",
+        "https://dexonline.ro/definitie/examen",
+        "https://ro.wikipedia.org/wiki/Examen"
+      ],
+      "forms": [
+        {
+          "form": "examenului",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "examenului",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "examenului"
+        },
+        {
+          "form": "examenelor",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "examenelor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "examenelor"
+        }
+      ],
+      "edges": [],
+      "description_verdict": "accept",
+      "description_rationale": "Existing owner description retained; this source item only extends the verified same-owner input family and does not rewrite legacy description.",
+      "category_verdict": "accept",
+      "category_rationale": "Exact actual current-owner category preserved, with no category repair or change.",
+      "selected_sense": "Verificare și apreciere a cunoștințelor elevilor ori studenților; sensul de evaluare școlară al proprietarului existent, fără examinare medicală sau încercare figurată.",
+      "scope_judgment": "ordinary_NA_GD_morphology_of_existing_lemma",
+      "dictionary_evidence": {
+        "requested_head": "examen",
+        "json_word": "examen",
+        "selected_DEX_ids": [
+          "867572"
+        ],
+        "selected_DOOM3_ids": [
+          "1304874"
+        ],
+        "json_capture": {
+          "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-examen-c930c4221684.json",
+          "sha256": "0bc2e297e39794ca6a51a3303dbae0ffda5e65114054dde31a66811aefab042c",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-examen-c930c4221684.json.extract.json",
+          "extract_sha256": "fc96975a5c5e4f14dc24da7009d2db3b949c33260719ae266e11437c56d10e0e"
+        },
+        "own_table": {
+          "index": 0,
+          "entry_card": "Intrare: examen",
+          "lexeme_name": "examen",
+          "attribution_exact": "substantiv neutru ( N1 ) Surse flexiune: DOOM 3",
+          "separate_Surse_flexiune_label_present": true,
+          "attribution_interpretation": "External flexion-source label exactly as displayed on this own-head table.",
+          "table_sha256": "ae5aca1c5fe282d05505663b5628387549cd313623757d7b22eb3f340c6b0584",
+          "html_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-examen-1afddc1cf766.html",
+          "html_sha256": "ca8f08e37722a937c09486922330fb6d66e16e63ebaa98225217ca4ef43a235c",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-examen-1afddc1cf766.html.extract.json",
+          "extract_sha256": "5aa9ffc9209ce6fb962ecf5c82b5195006a81ed6355b806883b6bef101df1b23",
+          "ordinary_surface_proof": [
+            {
+              "surface": "examen",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "examenul",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "examene",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "examenele",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "examen",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "examenului",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "examene",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "examenelor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ]
+        },
+        "full_ordinary_family_normalized_keys": [
+          "examen",
+          "examene",
+          "examenele",
+          "examenelor",
+          "examenul",
+          "examenului"
+        ],
+        "current_same_owner_keys_retained": [
+          "examen",
+          "examene",
+          "examenele",
+          "examenul"
+        ],
+        "submitted_missing_keys": [
+          "examenelor",
+          "examenului"
+        ],
+        "full_noncolliding_family_completeness": "PASS; union of submitted missing and current same-owner keys equals own-table ordinary N-A/G-D keys",
+        "other_headword_table_borrowed": false,
+        "register_and_sense_judgment": "Ordinary morphology of the school assessment noun, without a medical-examination or figurative interpretation.",
+        "secondary_source_paraphrase": "The Romanian Examen article describes educational assessment of knowledge and skills."
+      },
+      "current_owner": {
+        "id": "n_v24_school_assessment_examen",
+        "label_ro": "Examen",
+        "description": "Concept cotidian din grupul «activități de evaluare»: Examen.",
+        "category": "viata_de_roman",
+        "aliases": [
+          "examenul",
+          "examene",
+          "examenele"
+        ]
+      },
+      "ownership_disposition": "Every submitted normalized key is currently missing/unowned; no final accepted payload, held family, raw/current deferred term or accent-preserving ReviewedUnresolved key is displaced. Existing same-owner keys stay owned.",
+      "ownership_reference": {
+        "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+        "sha256": "09491abfc6d845f0d97ba118231cd1e436b7b4db2599a0747a8e8860ee506cf3",
+        "record_id": "v140-examen"
+      },
+      "signed_edits": [],
+      "target_approvals": 0,
+      "gameplay_approvals": 0,
+      "salience_approvals": 0
+    },
+    {
+      "id": "v140-frate",
+      "verdict": "accept",
+      "rationale": "DEX sense 1 defines male sibling through shared parentage, also corroborated by the secondary Frate article. The own M46/DOR table contains fratelui and fraților; DOOM3 is the noun entry rather than the interjection.",
+      "sources": [
+        "https://dexonline.ro/definitie/frate/json",
+        "https://dexonline.ro/definitie/frate",
+        "https://ro.wikipedia.org/wiki/Frate"
+      ],
+      "forms": [
+        {
+          "form": "fratelui",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "fratelui",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "fratelui"
+        },
+        {
+          "form": "fraților",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "fraților",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "fratilor"
+        }
+      ],
+      "edges": [],
+      "description_verdict": "accept",
+      "description_rationale": "Existing owner description retained; this source item only extends the verified same-owner input family and does not rewrite legacy description.",
+      "category_verdict": "accept",
+      "category_rationale": "Exact actual current-owner category preserved, with no category repair or change.",
+      "selected_sense": "Persoană de sex masculin în raport cu un alt copil al acelorași părinți sau al unui părinte comun; numai sensul de rudenie al proprietarului existent, fără interjecție, adresare familiară ori titlu monahal.",
+      "scope_judgment": "ordinary_NA_GD_morphology_of_existing_lemma",
+      "dictionary_evidence": {
+        "requested_head": "frate",
+        "json_word": "frate",
+        "selected_DEX_ids": [
+          "874192"
+        ],
+        "selected_DOOM3_ids": [
+          "1302498"
+        ],
+        "json_capture": {
+          "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-frate-0eefa6fdf7b7.json",
+          "sha256": "e1cc5f4d416174f7abac625fcfed9351f6886685dead6c584b559c6f0f4114b7",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-frate-0eefa6fdf7b7.json.extract.json",
+          "extract_sha256": "c248775eca89795f0ac41ccaf39fac3c292a8afc74a4dbb0b748b5ff9e9eb319"
+        },
+        "own_table": {
+          "index": 1,
+          "entry_card": "Intrare: frate",
+          "lexeme_name": "frate",
+          "attribution_exact": "substantiv masculin ( M46 ) Surse flexiune: DOR",
+          "separate_Surse_flexiune_label_present": true,
+          "attribution_interpretation": "External flexion-source label exactly as displayed on this own-head table.",
+          "table_sha256": "6359c96e1c6b09815c23f8e302acdc4cb42a99318cc97c0390f59c09a25d579f",
+          "html_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-frate-5f0d4bd04d57.html",
+          "html_sha256": "13459284171598267434f0aea5a329a37896206ff7cef7a3c87db6f4f465d5b8",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-frate-5f0d4bd04d57.html.extract.json",
+          "extract_sha256": "7ea5c5c55f6c5612630bacaeefa7db10b1b1b5078d898ea3bfc8f4b0a60a7864",
+          "ordinary_surface_proof": [
+            {
+              "surface": "frate",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "fratele",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "frați",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "frații",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "frate",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "fratelui",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "frați",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "fraților",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ]
+        },
+        "full_ordinary_family_normalized_keys": [
+          "frate",
+          "fratele",
+          "fratelui",
+          "frati",
+          "fratii",
+          "fratilor"
+        ],
+        "current_same_owner_keys_retained": [
+          "frate",
+          "fratele",
+          "frati",
+          "fratii"
+        ],
+        "submitted_missing_keys": [
+          "fratelui",
+          "fratilor"
+        ],
+        "full_noncolliding_family_completeness": "PASS; union of submitted missing and current same-owner keys equals own-table ordinary N-A/G-D keys",
+        "other_headword_table_borrowed": false,
+        "register_and_sense_judgment": "Ordinary morphology of the kinship noun; forms are approved in ordinary G-D use, not as a new familiar address or religious title.",
+        "secondary_source_paraphrase": "The Romanian Frate article explains siblings through one or both shared parents and distinguishes other uses."
+      },
+      "current_owner": {
+        "id": "n_v24_people_relatives_frate",
+        "label_ro": "Frate",
+        "description": "Concept cotidian din grupul «rude apropiate»: Frate.",
+        "category": "societate",
+        "aliases": [
+          "fratele",
+          "frați",
+          "frații"
+        ]
+      },
+      "ownership_disposition": "Every submitted normalized key is currently missing/unowned; no final accepted payload, held family, raw/current deferred term or accent-preserving ReviewedUnresolved key is displaced. Existing same-owner keys stay owned.",
+      "ownership_reference": {
+        "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+        "sha256": "09491abfc6d845f0d97ba118231cd1e436b7b4db2599a0747a8e8860ee506cf3",
+        "record_id": "v140-frate"
+      },
+      "signed_edits": [],
+      "target_approvals": 0,
+      "gameplay_approvals": 0,
+      "salience_approvals": 0
+    },
+    {
+      "id": "v140-nepot",
+      "verdict": "accept",
+      "rationale": "DEX sense 1 includes the grandchild relation selected by this descendant owner. The secondary source explicitly lists a son of a son or daughter relative to grandparents. Own M3-oa/DOR gives nepotului/nepoților.",
+      "sources": [
+        "https://dexonline.ro/definitie/nepot/json",
+        "https://dexonline.ro/definitie/nepot",
+        "https://ro.wikipedia.org/wiki/Nepot"
+      ],
+      "forms": [
+        {
+          "form": "nepotului",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "nepotului",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "nepotului"
+        },
+        {
+          "form": "nepoților",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "nepoților",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "nepotilor"
+        }
+      ],
+      "edges": [],
+      "description_verdict": "accept",
+      "description_rationale": "Existing owner description retained; this source item only extends the verified same-owner input family and does not rewrite legacy description.",
+      "category_verdict": "accept",
+      "category_rationale": "Exact actual current-owner category preserved, with no category repair or change.",
+      "selected_sense": "Persoană de sex masculin în raport cu bunicii săi, în sensul de descendent al proprietarului existent; numai morfologia lemei nepot, fără adresare familiară ori extindere la alte tipuri de rude.",
+      "scope_judgment": "ordinary_NA_GD_morphology_of_existing_lemma",
+      "dictionary_evidence": {
+        "requested_head": "nepot",
+        "json_word": "nepot",
+        "selected_DEX_ids": [
+          "883757"
+        ],
+        "selected_DOOM3_ids": [
+          "1289637"
+        ],
+        "json_capture": {
+          "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-nepot-4960cb276256.json",
+          "sha256": "c3e33426332c2479621f7c0708a2529bc0e0d06114b3946699c32958bfc698d1",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-nepot-4960cb276256.json.extract.json",
+          "extract_sha256": "dc276b0ecb2aea7bbcf5ba4a9a316a75b8069cf7a87733c377eb49fd4c129911"
+        },
+        "own_table": {
+          "index": 0,
+          "entry_card": "Intrare: nepot",
+          "lexeme_name": "nepot",
+          "attribution_exact": "substantiv masculin ( M3-oa ) Surse flexiune: DOR",
+          "separate_Surse_flexiune_label_present": true,
+          "attribution_interpretation": "External flexion-source label exactly as displayed on this own-head table.",
+          "table_sha256": "2990aba9e2b5b75938a8ad7e207d94b6b2a47770c4e694babb8934cdad69cabe",
+          "html_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-nepot-dea0575634d4.html",
+          "html_sha256": "224ac59cc75093e3a03cf8af0902120a1125c41f9a221e0ca220af14aa18cae2",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-nepot-dea0575634d4.html.extract.json",
+          "extract_sha256": "ffc00388b715d06f65e747d7d8e3de619db5bf8d0963cf20c37ba50a27488ca1",
+          "ordinary_surface_proof": [
+            {
+              "surface": "nepot",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "nepotul",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "nepoți",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "nepoții",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "nepot",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "nepotului",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "nepoți",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "nepoților",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ]
+        },
+        "full_ordinary_family_normalized_keys": [
+          "nepot",
+          "nepoti",
+          "nepotii",
+          "nepotilor",
+          "nepotul",
+          "nepotului"
+        ],
+        "current_same_owner_keys_retained": [
+          "nepot",
+          "nepoti",
+          "nepotii",
+          "nepotul"
+        ],
+        "submitted_missing_keys": [
+          "nepotilor",
+          "nepotului"
+        ],
+        "full_noncolliding_family_completeness": "PASS; union of submitted missing and current same-owner keys equals own-table ordinary N-A/G-D keys",
+        "other_headword_table_borrowed": false,
+        "register_and_sense_judgment": "Ordinary morphology of the existing descendant owner; no new nephew, address-term or broader relative owner is created.",
+        "secondary_source_paraphrase": "The Romanian Nepot article explicitly distinguishes a male grandchild from the nephew senses."
+      },
+      "current_owner": {
+        "id": "n_v24_people_descendants_nepot",
+        "label_ro": "Nepot",
+        "description": "Concept cotidian din grupul «copii și nepoți»: Nepot.",
+        "category": "societate",
+        "aliases": [
+          "nepotul",
+          "nepoți",
+          "nepoții"
+        ]
+      },
+      "ownership_disposition": "Every submitted normalized key is currently missing/unowned; no final accepted payload, held family, raw/current deferred term or accent-preserving ReviewedUnresolved key is displaced. Existing same-owner keys stay owned.",
+      "ownership_reference": {
+        "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+        "sha256": "09491abfc6d845f0d97ba118231cd1e436b7b4db2599a0747a8e8860ee506cf3",
+        "record_id": "v140-nepot"
+      },
+      "signed_edits": [],
+      "target_approvals": 0,
+      "gameplay_approvals": 0,
+      "salience_approvals": 0
+    },
+    {
+      "id": "v140-fiu",
+      "verdict": "accept",
+      "rationale": "DEX sense 1 is the male child relative to parents, matching the current descendant owner and secondary source. The own M69/DOOM3 noun table supplies fiului/fiilor without using a verbal fiu paradigm.",
+      "sources": [
+        "https://dexonline.ro/definitie/fiu/json",
+        "https://dexonline.ro/definitie/fiu",
+        "https://ro.wikipedia.org/wiki/Fiu"
+      ],
+      "forms": [
+        {
+          "form": "fiului",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "fiului",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "fiului"
+        },
+        {
+          "form": "fiilor",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "fiilor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "fiilor"
+        }
+      ],
+      "edges": [],
+      "description_verdict": "accept",
+      "description_rationale": "Existing owner description retained; this source item only extends the verified same-owner input family and does not rewrite legacy description.",
+      "category_verdict": "accept",
+      "category_rationale": "Exact actual current-owner category preserved, with no category repair or change.",
+      "selected_sense": "Persoană de sex masculin în raport cu părinții săi; substantivul de rudenie al proprietarului existent, fără forma verbală fiu, adresare afectuoasă ori sens colectiv figurat.",
+      "scope_judgment": "ordinary_NA_GD_morphology_of_existing_lemma",
+      "dictionary_evidence": {
+        "requested_head": "fiu",
+        "json_word": "fiu",
+        "selected_DEX_ids": [
+          "872338"
+        ],
+        "selected_DOOM3_ids": [
+          "1301748"
+        ],
+        "json_capture": {
+          "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-fiu-9182f021475d.json",
+          "sha256": "7bbc243761e6bdf439dd6d1203377dbf85ce291a1acc82c9115b8972e0845c7d",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-fiu-9182f021475d.json.extract.json",
+          "extract_sha256": "0d39bd5797a9c3dc84473fd35f5a72fe19430ac0e46a273dfda95d62c06248ae"
+        },
+        "own_table": {
+          "index": 1,
+          "entry_card": "Intrare: fiu",
+          "lexeme_name": "fiu",
+          "attribution_exact": "substantiv masculin ( M69 ) Surse flexiune: DOOM 3",
+          "separate_Surse_flexiune_label_present": true,
+          "attribution_interpretation": "External flexion-source label exactly as displayed on this own-head table.",
+          "table_sha256": "c870cdcdbdd63f0c754e22f9d0baa7fd7316eed549a9588d79bf8ca31449982e",
+          "html_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-fiu-c64aedd65575.html",
+          "html_sha256": "118e732814336666982c3d375abdd92afb11d870ca8d0a098044f8dcf7ae5585",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-fiu-c64aedd65575.html.extract.json",
+          "extract_sha256": "792fa47fa7f4d369bccf3238c374dd0d22553d5c94f8386a83ac0295c4848ff3",
+          "ordinary_surface_proof": [
+            {
+              "surface": "fiu",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "fiul",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "fii",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "fiii",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "fiu",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "fiului",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "fii",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "fiilor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ]
+        },
+        "full_ordinary_family_normalized_keys": [
+          "fii",
+          "fiii",
+          "fiilor",
+          "fiu",
+          "fiul",
+          "fiului"
+        ],
+        "current_same_owner_keys_retained": [
+          "fii",
+          "fiii",
+          "fiu",
+          "fiul"
+        ],
+        "submitted_missing_keys": [
+          "fiilor",
+          "fiului"
+        ],
+        "full_noncolliding_family_completeness": "PASS; union of submitted missing and current same-owner keys equals own-table ordinary N-A/G-D keys",
+        "other_headword_table_borrowed": false,
+        "register_and_sense_judgment": "Ordinary morphology of the kinship noun; verbal homographs and affectionate or collective figurative senses are excluded.",
+        "secondary_source_paraphrase": "The Romanian Fiu article identifies the male descendant relative to parents and contrasts fiică."
+      },
+      "current_owner": {
+        "id": "n_v24_people_descendants_fiu",
+        "label_ro": "Fiu",
+        "description": "Concept cotidian din grupul «copii și nepoți»: Fiu.",
+        "category": "societate",
+        "aliases": [
+          "fiul",
+          "fii",
+          "fiii"
+        ]
+      },
+      "ownership_disposition": "Every submitted normalized key is currently missing/unowned; no final accepted payload, held family, raw/current deferred term or accent-preserving ReviewedUnresolved key is displaced. Existing same-owner keys stay owned.",
+      "ownership_reference": {
+        "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+        "sha256": "09491abfc6d845f0d97ba118231cd1e436b7b4db2599a0747a8e8860ee506cf3",
+        "record_id": "v140-fiu"
+      },
+      "signed_edits": [],
+      "target_approvals": 0,
+      "gameplay_approvals": 0,
+      "salience_approvals": 0
+    },
+    {
+      "id": "v140-fiica",
+      "verdict": "accept",
+      "rationale": "DEX directly defines the female child relative to parents. Own DOOM3 and F4 table support fiicei/fiicelor; the secondary Fiică article confirms the same relationship.",
+      "sources": [
+        "https://dexonline.ro/definitie/fiic%C4%83/json",
+        "https://dexonline.ro/definitie/fiic%C4%83",
+        "https://ro.wikipedia.org/wiki/Fiic%C4%83"
+      ],
+      "forms": [
+        {
+          "form": "fiicei",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "fiicei",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "fiicei"
+        },
+        {
+          "form": "fiicelor",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "fiicelor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "fiicelor"
+        }
+      ],
+      "edges": [],
+      "description_verdict": "accept",
+      "description_rationale": "Existing owner description retained; this source item only extends the verified same-owner input family and does not rewrite legacy description.",
+      "category_verdict": "accept",
+      "category_rationale": "Exact actual current-owner category preserved, with no category repair or change.",
+      "selected_sense": "Persoană de sex feminin în raport cu părinții săi; aceeași lemă de rudenie și același proprietar existent, fără alte familii lexicale.",
+      "scope_judgment": "ordinary_NA_GD_morphology_of_existing_lemma",
+      "dictionary_evidence": {
+        "requested_head": "fiică",
+        "json_word": "fiică",
+        "selected_DEX_ids": [
+          "870710"
+        ],
+        "selected_DOOM3_ids": [
+          "1301510"
+        ],
+        "json_capture": {
+          "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-fiica-fc799727714d.json",
+          "sha256": "bbf6eab9d903f63e3fb69b173250cabd4c04626c6ba8139b78fcdbf46e4703f6",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-fiica-fc799727714d.json.extract.json",
+          "extract_sha256": "8af6d9b95dc7f774c97deccbd2e5d55f294b6d806a8df8dd0d70bbae4530d756"
+        },
+        "own_table": {
+          "index": 1,
+          "entry_card": "Intrare: fiică",
+          "lexeme_name": "fiică",
+          "attribution_exact": "substantiv feminin ( F4 ) Surse flexiune: DOOM 3",
+          "separate_Surse_flexiune_label_present": true,
+          "attribution_interpretation": "External flexion-source label exactly as displayed on this own-head table.",
+          "table_sha256": "f6e6826d5a5c19f2d20d7f4fab4ee988ce9fa37e84aeb0ed8924322c482e0038",
+          "html_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-fiica-84dc9f6285ee.html",
+          "html_sha256": "f9546805f1c1db1a656ced10fa20b16b5290039d26af23c917ea1a4bd60a9149",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-fiica-84dc9f6285ee.html.extract.json",
+          "extract_sha256": "7d40009741251fe40f7c9453a9d3145d30692791ac87f7788eba83a27c802656",
+          "ordinary_surface_proof": [
+            {
+              "surface": "fiică",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "fiica",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "fiice",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "fiicele",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "fiice",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "fiicei",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "fiice",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "fiicelor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ]
+        },
+        "full_ordinary_family_normalized_keys": [
+          "fiica",
+          "fiice",
+          "fiicei",
+          "fiicele",
+          "fiicelor"
+        ],
+        "current_same_owner_keys_retained": [
+          "fiica",
+          "fiice",
+          "fiicele"
+        ],
+        "submitted_missing_keys": [
+          "fiicei",
+          "fiicelor"
+        ],
+        "full_noncolliding_family_completeness": "PASS; union of submitted missing and current same-owner keys equals own-table ordinary N-A/G-D keys",
+        "other_headword_table_borrowed": false,
+        "register_and_sense_judgment": "Ordinary morphology of fiică, preserving the existing female-descendant owner.",
+        "secondary_source_paraphrase": "The Romanian Fiică article identifies the female descendant relative to parents and contrasts fiu."
+      },
+      "current_owner": {
+        "id": "n_v24_people_descendants_fiica",
+        "label_ro": "Fiică",
+        "description": "Concept cotidian din grupul «copii și nepoți»: Fiică.",
+        "category": "societate",
+        "aliases": [
+          "fiice",
+          "fiicele"
+        ]
+      },
+      "ownership_disposition": "Every submitted normalized key is currently missing/unowned; no final accepted payload, held family, raw/current deferred term or accent-preserving ReviewedUnresolved key is displaced. Existing same-owner keys stay owned.",
+      "ownership_reference": {
+        "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+        "sha256": "09491abfc6d845f0d97ba118231cd1e436b7b4db2599a0747a8e8860ee506cf3",
+        "record_id": "v140-fiica"
+      },
+      "signed_edits": [],
+      "target_approvals": 0,
+      "gameplay_approvals": 0,
+      "salience_approvals": 0
+    },
+    {
+      "id": "v140-matusa",
+      "verdict": "accept",
+      "rationale": "DEX sense 1 directly supports the literal aunt relation, while the secondary Nepot page corroborates the reciprocal nephew/aunt relationship. Own F43/DOR and DOOM3 support mătușii/mătușilor.",
+      "sources": [
+        "https://dexonline.ro/definitie/m%C4%83tu%C8%99%C4%83/json",
+        "https://dexonline.ro/definitie/m%C4%83tu%C8%99%C4%83",
+        "https://ro.wikipedia.org/wiki/Nepot"
+      ],
+      "forms": [
+        {
+          "form": "mătușii",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "mătușii",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "matusii"
+        },
+        {
+          "form": "mătușilor",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "mătușilor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "matusilor"
+        }
+      ],
+      "edges": [],
+      "description_verdict": "accept",
+      "description_rationale": "Existing owner description retained; this source item only extends the verified same-owner input family and does not rewrite legacy description.",
+      "category_verdict": "accept",
+      "category_rationale": "Exact actual current-owner category preserved, with no category repair or change.",
+      "selected_sense": "Sora tatălui sau a mamei, în sensul literal de rudă al proprietarului existent; numai morfologia aceleiași leme, fără adresare populară unei femei în vârstă.",
+      "scope_judgment": "ordinary_NA_GD_morphology_of_existing_lemma",
+      "dictionary_evidence": {
+        "requested_head": "mătușă",
+        "json_word": "mătușă",
+        "selected_DEX_ids": [
+          "887363"
+        ],
+        "selected_DOOM3_ids": [
+          "1292259"
+        ],
+        "json_capture": {
+          "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-matusa-a8209a1c2ab0.json",
+          "sha256": "0082eca66ca64768a127b5bd560c2f49797f04c663255ef896f6c67206004449",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-matusa-a8209a1c2ab0.json.extract.json",
+          "extract_sha256": "c8c716df2fee14ece3aacbde615a6b733aabd13794df398f599cbf0a19eefb5f"
+        },
+        "own_table": {
+          "index": 1,
+          "entry_card": "Intrare: mătușă",
+          "lexeme_name": "mătușă",
+          "attribution_exact": "substantiv feminin ( F43 ) Surse flexiune: DOR",
+          "separate_Surse_flexiune_label_present": true,
+          "attribution_interpretation": "External flexion-source label exactly as displayed on this own-head table.",
+          "table_sha256": "66441e1d5d9c10f72c76cb3ada115d009a95d41abc79257a8064ef8dc390aaa7",
+          "html_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-matusa-7f5ec905be93.html",
+          "html_sha256": "b8421357e4c43b2ecfe05e85019244b9e3f58e2c58438f81799fa865892c4853",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-matusa-7f5ec905be93.html.extract.json",
+          "extract_sha256": "28630c35580532b86ffa8abaae833326b6052a2f4741bf4e8b990122624b79da",
+          "ordinary_surface_proof": [
+            {
+              "surface": "mătușă",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "mătușa",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "mătuși",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "mătușile",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "mătuși",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "mătușii",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "mătuși",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "mătușilor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ]
+        },
+        "full_ordinary_family_normalized_keys": [
+          "matusa",
+          "matusi",
+          "matusii",
+          "matusile",
+          "matusilor"
+        ],
+        "current_same_owner_keys_retained": [
+          "matusa",
+          "matusi",
+          "matusile"
+        ],
+        "submitted_missing_keys": [
+          "matusii",
+          "matusilor"
+        ],
+        "full_noncolliding_family_completeness": "PASS; union of submitted missing and current same-owner keys equals own-table ordinary N-A/G-D keys",
+        "other_headword_table_borrowed": false,
+        "register_and_sense_judgment": "Ordinary morphology of the existing kinship noun; the popular respectful address for an elderly woman is excluded.",
+        "secondary_source_paraphrase": "The Romanian Nepot article places children of siblings in relation to uncles and aunts; it is used only as secondary kinship corroboration."
+      },
+      "current_owner": {
+        "id": "n_v24_people_grandparents_matusa",
+        "label_ro": "Mătușă",
+        "description": "Concept cotidian din grupul «bunici și mătuși»: Mătușă.",
+        "category": "societate",
+        "aliases": [
+          "mătuși",
+          "mătușile"
+        ]
+      },
+      "ownership_disposition": "Every submitted normalized key is currently missing/unowned; no final accepted payload, held family, raw/current deferred term or accent-preserving ReviewedUnresolved key is displaced. Existing same-owner keys stay owned.",
+      "ownership_reference": {
+        "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+        "sha256": "09491abfc6d845f0d97ba118231cd1e436b7b4db2599a0747a8e8860ee506cf3",
+        "record_id": "v140-matusa"
+      },
+      "signed_edits": [],
+      "target_approvals": 0,
+      "gameplay_approvals": 0,
+      "salience_approvals": 0
+    },
+    {
+      "id": "v140-unchi",
+      "verdict": "accept",
+      "rationale": "DEX sense 1 directly supports the literal uncle relation and the secondary Nepot page corroborates its reciprocal kinship use. The own M73/DOR table supplies unchilor; unchiului is already owned and is preserved.",
+      "sources": [
+        "https://dexonline.ro/definitie/unchi/json",
+        "https://dexonline.ro/definitie/unchi",
+        "https://ro.wikipedia.org/wiki/Nepot"
+      ],
+      "forms": [
+        {
+          "form": "unchilor",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "unchilor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "unchilor"
+        }
+      ],
+      "edges": [],
+      "description_verdict": "accept",
+      "description_rationale": "Existing owner description retained; this source item only extends the verified same-owner input family and does not rewrite legacy description.",
+      "category_verdict": "accept",
+      "category_rationale": "Exact actual current-owner category preserved, with no category repair or change.",
+      "selected_sense": "Bărbat în raport cu copiii fraților sau surorilor sale, în sensul de rudă al proprietarului existent; numai morfologia lemei unchi, fără termen general de adresare respectuoasă.",
+      "scope_judgment": "ordinary_NA_GD_morphology_of_existing_lemma",
+      "dictionary_evidence": {
+        "requested_head": "unchi",
+        "json_word": "unchi",
+        "selected_DEX_ids": [
+          "828270"
+        ],
+        "selected_DOOM3_ids": [
+          "1267875"
+        ],
+        "json_capture": {
+          "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-unchi-eeed73facf63.json",
+          "sha256": "275ae32cc0399ab7d3b89270970f8fa980f18978fc32f1aef57058c0a0f089ad",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-unchi-eeed73facf63.json.extract.json",
+          "extract_sha256": "af4957ac9245a23e74ad49b92a57db509d77ed574a4be129162e930b33515315"
+        },
+        "own_table": {
+          "index": 0,
+          "entry_card": "Intrare: unchi",
+          "lexeme_name": "unchi",
+          "attribution_exact": "substantiv masculin ( M73 ) Surse flexiune: DOR",
+          "separate_Surse_flexiune_label_present": true,
+          "attribution_interpretation": "External flexion-source label exactly as displayed on this own-head table.",
+          "table_sha256": "88a36653f2475840af068894e575d8ccd79b06c3485e657e56a0163f5d3c6f04",
+          "html_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-unchi-582e7168e283.html",
+          "html_sha256": "c1aa06eafce02c43f6f5bb084d771df507adec812a49a36d35d3e4385f61ca20",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-unchi-582e7168e283.html.extract.json",
+          "extract_sha256": "08dbab4471692de645e5a86464e0341b8c04c55853e0b704bf34531f0a648a88",
+          "ordinary_surface_proof": [
+            {
+              "surface": "unchi",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "unchiul",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "unchi",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "unchii",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "unchi",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "unchiului",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "unchi",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "unchilor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ]
+        },
+        "full_ordinary_family_normalized_keys": [
+          "unchi",
+          "unchii",
+          "unchilor",
+          "unchiul",
+          "unchiului"
+        ],
+        "current_same_owner_keys_retained": [
+          "unchi",
+          "unchii",
+          "unchiul",
+          "unchiului"
+        ],
+        "submitted_missing_keys": [
+          "unchilor"
+        ],
+        "full_noncolliding_family_completeness": "PASS; union of submitted missing and current same-owner keys equals own-table ordinary N-A/G-D keys",
+        "other_headword_table_borrowed": false,
+        "register_and_sense_judgment": "Ordinary morphology of the existing kinship noun; no generic respectful-address use is approved.",
+        "secondary_source_paraphrase": "The Romanian Nepot article describes the nephew relationship to uncles and aunts."
+      },
+      "current_owner": {
+        "id": "n_v24_people_relatives_unchi",
+        "label_ro": "Unchi",
+        "description": "Concept cotidian din grupul «rude apropiate»: Unchi.",
+        "category": "societate",
+        "aliases": [
+          "unchiul",
+          "unchiului",
+          "unchii"
+        ]
+      },
+      "ownership_disposition": "Every submitted normalized key is currently missing/unowned; no final accepted payload, held family, raw/current deferred term or accent-preserving ReviewedUnresolved key is displaced. Existing same-owner keys stay owned.",
+      "ownership_reference": {
+        "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+        "sha256": "09491abfc6d845f0d97ba118231cd1e436b7b4db2599a0747a8e8860ee506cf3",
+        "record_id": "v140-unchi"
+      },
+      "signed_edits": [],
+      "target_approvals": 0,
+      "gameplay_approvals": 0,
+      "salience_approvals": 0
+    },
+    {
+      "id": "v140-bebelus",
+      "verdict": "accept",
+      "rationale": "DEX defines a child in the first months of life and the own M1/DOOM3 table contains bebelușului/bebelușilor. The secondary requested Bebeluș page redirects to Sugar and includes ordinary use for a four-month-old child; its clinical age bands and feeding advice are not imported.",
+      "sources": [
+        "https://dexonline.ro/definitie/bebelu%C8%99/json",
+        "https://dexonline.ro/definitie/bebelu%C8%99",
+        "https://ro.wikipedia.org/wiki/Bebelu%C8%99"
+      ],
+      "forms": [
+        {
+          "form": "bebelușului",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "bebelușului",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "bebelusului"
+        },
+        {
+          "form": "bebelușilor",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "bebelușilor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "bebelusilor"
+        }
+      ],
+      "edges": [],
+      "description_verdict": "accept",
+      "description_rationale": "Existing owner description retained; this source item only extends the verified same-owner input family and does not rewrite legacy description.",
+      "category_verdict": "accept",
+      "category_rationale": "Exact actual current-owner category preserved, with no category repair or change.",
+      "selected_sense": "Copil în primele luni de viață, sensul literal al lemei și al proprietarului existent; numai forme ordinare, fără noi sinonime ori recomandări clinice.",
+      "scope_judgment": "ordinary_NA_GD_morphology_of_existing_lemma",
+      "dictionary_evidence": {
+        "requested_head": "bebeluș",
+        "json_word": "bebeluș",
+        "selected_DEX_ids": [
+          "834100"
+        ],
+        "selected_DOOM3_ids": [
+          "1317874"
+        ],
+        "json_capture": {
+          "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-bebelus-f5ca474a0241.json",
+          "sha256": "0a1d9ed368884f0755a92ac2744dab0fa7cdba3c8b28a927bfca4f46197619d1",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-bebelus-f5ca474a0241.json.extract.json",
+          "extract_sha256": "b5110017db817ca0f7813052cc69ee1d7aae6b557be013447d4970bbb5f2058b"
+        },
+        "own_table": {
+          "index": 0,
+          "entry_card": "Intrare: bebeluș",
+          "lexeme_name": "bebeluș",
+          "attribution_exact": "substantiv masculin ( M1 ) Surse flexiune: DOOM 3",
+          "separate_Surse_flexiune_label_present": true,
+          "attribution_interpretation": "External flexion-source label exactly as displayed on this own-head table.",
+          "table_sha256": "ef14a367e7cadbb23511dfd4b1298c49d66cf18762cfa8331757e2d833d71263",
+          "html_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-bebelus-a8687695f498.html",
+          "html_sha256": "def637b5bac54414d3bcfdfdd81edeb73832b3df4ee45341af93d1a1e797d893",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-bebelus-a8687695f498.html.extract.json",
+          "extract_sha256": "7521837feb0b5659f58e47300c72535302849e22eee5fecb078b2edf170ea623",
+          "ordinary_surface_proof": [
+            {
+              "surface": "bebeluș",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "bebelușul",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "bebeluși",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "bebelușii",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "bebeluș",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "bebelușului",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "bebeluși",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "bebelușilor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ]
+        },
+        "full_ordinary_family_normalized_keys": [
+          "bebelus",
+          "bebelusi",
+          "bebelusii",
+          "bebelusilor",
+          "bebelusul",
+          "bebelusului"
+        ],
+        "current_same_owner_keys_retained": [
+          "bebelus",
+          "bebelusi",
+          "bebelusii",
+          "bebelusul"
+        ],
+        "submitted_missing_keys": [
+          "bebelusilor",
+          "bebelusului"
+        ],
+        "full_noncolliding_family_completeness": "PASS; union of submitted missing and current same-owner keys equals own-table ordinary N-A/G-D keys",
+        "other_headword_table_borrowed": false,
+        "register_and_sense_judgment": "Ordinary morphology of the existing young-child noun; no synonym substitution, clinical boundary or care recommendation is approved.",
+        "secondary_source_paraphrase": "The fresh Bebeluș request resolves to the Sugar article and illustrates the ordinary word with a four-month-old child; only lexical use corroborates the DEX sense."
+      },
+      "current_owner": {
+        "id": "n_v24_people_parents_bebelus",
+        "label_ro": "Bebeluș",
+        "description": "Concept cotidian din grupul «părinți și copii mici»: Bebeluș.",
+        "category": "societate",
+        "aliases": [
+          "bebelușul",
+          "bebeluși",
+          "bebelușii"
+        ]
+      },
+      "ownership_disposition": "Every submitted normalized key is currently missing/unowned; no final accepted payload, held family, raw/current deferred term or accent-preserving ReviewedUnresolved key is displaced. Existing same-owner keys stay owned.",
+      "ownership_reference": {
+        "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+        "sha256": "09491abfc6d845f0d97ba118231cd1e436b7b4db2599a0747a8e8860ee506cf3",
+        "record_id": "v140-bebelus"
+      },
+      "signed_edits": [],
+      "target_approvals": 0,
+      "gameplay_approvals": 0,
+      "salience_approvals": 0
+    },
+    {
+      "id": "v140-prieten",
+      "verdict": "accept",
+      "rationale": "DEX first sense is the friend relation based on affection, trust and mutual esteem, independently corroborated by the Prietenie article. Own M1/DOOM3 contains prietenului/prietenilor. The newly specified DOOM3 vocative does not affect the selected ordinary N-A/G-D family.",
+      "sources": [
+        "https://dexonline.ro/definitie/prieten/json",
+        "https://dexonline.ro/definitie/prieten",
+        "https://ro.wikipedia.org/wiki/Prietenie"
+      ],
+      "forms": [
+        {
+          "form": "prietenului",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "prietenului",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "prietenului"
+        },
+        {
+          "form": "prietenilor",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "prietenilor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "prietenilor"
+        }
+      ],
+      "edges": [],
+      "description_verdict": "accept",
+      "description_rationale": "Existing owner description retained; this source item only extends the verified same-owner input family and does not rewrite legacy description.",
+      "category_verdict": "accept",
+      "category_rationale": "Exact actual current-owner category preserved, with no category repair or change.",
+      "selected_sense": "Persoană de care cineva este legat prin afecțiune, încredere și stimă reciprocă; numai morfologia lemei prieten, fără sens romantic, regionalisme sau alte sinonime.",
+      "scope_judgment": "ordinary_NA_GD_morphology_of_existing_lemma",
+      "dictionary_evidence": {
+        "requested_head": "prieten",
+        "json_word": "prieten",
+        "selected_DEX_ids": [
+          "878175"
+        ],
+        "selected_DOOM3_ids": [
+          "1258992"
+        ],
+        "json_capture": {
+          "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-prieten-c3e90f23c80e.json",
+          "sha256": "dda20451e11946b9883b035d719f33f0dcfd0c0f767aad8c2ab59ce05ce3e8ce",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-prieten-c3e90f23c80e.json.extract.json",
+          "extract_sha256": "1ee75ce50d6dc0acdb4f1b87fb9e7908753607c61b5237f6952a9f72addb94e6"
+        },
+        "own_table": {
+          "index": 0,
+          "entry_card": "Intrare: prieten",
+          "lexeme_name": "prieten",
+          "attribution_exact": "substantiv masculin ( M1 ) Surse flexiune: DOOM 3",
+          "separate_Surse_flexiune_label_present": true,
+          "attribution_interpretation": "External flexion-source label exactly as displayed on this own-head table.",
+          "table_sha256": "15de5c5286a30b8154d49567bd68d3d76b3b1d1d54e8a8e1ddc88ac9c4834f39",
+          "html_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-prieten-398f93a0b553.html",
+          "html_sha256": "9fcebb100f95fe14ca6aa6905fd367e20d5347df2c811419231c48539255ea23",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-prieten-398f93a0b553.html.extract.json",
+          "extract_sha256": "608d357cff5e77f620ec31fb3089639934382db2b05e1a77adfa7dffa4aa0d7c",
+          "ordinary_surface_proof": [
+            {
+              "surface": "prieten",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "prietenul",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "prieteni",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "prietenii",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "prieten",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "prietenului",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "prieteni",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "prietenilor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ]
+        },
+        "full_ordinary_family_normalized_keys": [
+          "prieten",
+          "prieteni",
+          "prietenii",
+          "prietenilor",
+          "prietenul",
+          "prietenului"
+        ],
+        "current_same_owner_keys_retained": [
+          "prieten",
+          "prieteni",
+          "prietenii",
+          "prietenul"
+        ],
+        "submitted_missing_keys": [
+          "prietenilor",
+          "prietenului"
+        ],
+        "full_noncolliding_family_completeness": "PASS; union of submitted missing and current same-owner keys equals own-table ordinary N-A/G-D keys",
+        "other_headword_table_borrowed": false,
+        "register_and_sense_judgment": "Ordinary morphology of the existing friendship owner; romantic senses, regional prietin and additional synonyms are excluded.",
+        "secondary_source_paraphrase": "The Romanian Prietenie article describes mutual affection, respect, cooperation and trust between friends."
+      },
+      "current_owner": {
+        "id": "n_v24_people_relationships_prieten",
+        "label_ro": "Prieten",
+        "description": "Concept cotidian din grupul «relații apropiate»: Prieten.",
+        "category": "societate",
+        "aliases": [
+          "prietenul",
+          "prieteni",
+          "prietenii",
+          "amic",
+          "amicul",
+          "amici",
+          "amicului",
+          "amicilor"
+        ]
+      },
+      "ownership_disposition": "Every submitted normalized key is currently missing/unowned; no final accepted payload, held family, raw/current deferred term or accent-preserving ReviewedUnresolved key is displaced. Existing same-owner keys stay owned.",
+      "ownership_reference": {
+        "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+        "sha256": "09491abfc6d845f0d97ba118231cd1e436b7b4db2599a0747a8e8860ee506cf3",
+        "record_id": "v140-prieten"
+      },
+      "signed_edits": [],
+      "target_approvals": 0,
+      "gameplay_approvals": 0,
+      "salience_approvals": 0
+    },
+    {
+      "id": "v140-stropitoare",
+      "verdict": "accept",
+      "rationale": "DEX sense 1 describes the handled watering vessel with a spout ending in a sieve. DOOM3 specifies plural stropitori and G-D stropitorii; own F116/DOOM3 table supplies missing stropitorilor. The second source confirms the garden vessel.",
+      "sources": [
+        "https://dexonline.ro/definitie/stropitoare/json",
+        "https://dexonline.ro/definitie/stropitoare",
+        "https://ro.wikipedia.org/wiki/Stropitoare"
+      ],
+      "forms": [
+        {
+          "form": "stropitorilor",
+          "verdict": "accept",
+          "rationale": "Observed as an unflagged genitiv-dativ form on the exact own-head table; its normalized key is missing and unowned in both current bases and final accepted/held stock.",
+          "surface_proof": [
+            {
+              "surface": "stropitorilor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ],
+          "normalized_key": "stropitorilor"
+        }
+      ],
+      "edges": [],
+      "description_verdict": "accept",
+      "description_rationale": "Existing owner description retained; this source item only extends the verified same-owner input family and does not rewrite legacy description.",
+      "category_verdict": "accept",
+      "category_rationale": "Exact actual current-owner category preserved, with no category repair or change.",
+      "selected_sense": "Recipient cu mâner și cioc cu sită pentru udarea plantelor; numai sensul obiectului de grădină și familia actuală DOOM3 cu pluralul stropitori, fără vehicul, pulverizator sau pămătuf de fierărie.",
+      "scope_judgment": "ordinary_NA_GD_morphology_of_existing_lemma",
+      "dictionary_evidence": {
+        "requested_head": "stropitoare",
+        "json_word": "stropitoare",
+        "selected_DEX_ids": [
+          "847722"
+        ],
+        "selected_DOOM3_ids": [
+          "1278912"
+        ],
+        "json_capture": {
+          "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-stropitoare-ba29941d647e.json",
+          "sha256": "593f7054a00414eb91733e10a42ff9136343aa65be164215c1e1b0085657c08c",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-stropitoare-ba29941d647e.json.extract.json",
+          "extract_sha256": "9eca872dc19107d3dd3394a9213897ba84b8e66415f53fb9d9b383cb1bca07f3"
+        },
+        "own_table": {
+          "index": 0,
+          "entry_card": "Intrare: stropitoare",
+          "lexeme_name": "stropitoare 1 (pl. -i)",
+          "attribution_exact": "substantiv feminin ( F116 ) Surse flexiune: DOOM 3",
+          "separate_Surse_flexiune_label_present": true,
+          "attribution_interpretation": "External flexion-source label exactly as displayed on this own-head table.",
+          "table_sha256": "8ae69a6ba28c433aac737a07e9ea047328e2c9f0b749bd0076d081f7a0b39177",
+          "html_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-stropitoare-b9098d846cd3.html",
+          "html_sha256": "532ccdbc3dac3226e9051415f47b8577a2978af89f166a7997f2034c3ef9b937",
+          "extract_path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/v140-stropitoare-b9098d846cd3.html.extract.json",
+          "extract_sha256": "2d91488f10c1773f068242e48e807640681d6a6f9cc55bc59dfa91c278af1fcf",
+          "ordinary_surface_proof": [
+            {
+              "surface": "stropitoare",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "stropitoarea",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "stropitori",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "stropitorile",
+              "case": "nominativ-acuzativ",
+              "classes": []
+            },
+            {
+              "surface": "stropitori",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "stropitorii",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "stropitori",
+              "case": "genitiv-dativ",
+              "classes": []
+            },
+            {
+              "surface": "stropitorilor",
+              "case": "genitiv-dativ",
+              "classes": []
+            }
+          ]
+        },
+        "full_ordinary_family_normalized_keys": [
+          "stropitoare",
+          "stropitoarea",
+          "stropitori",
+          "stropitorii",
+          "stropitorile",
+          "stropitorilor"
+        ],
+        "current_same_owner_keys_retained": [
+          "stropitoare",
+          "stropitoarea",
+          "stropitori",
+          "stropitorii",
+          "stropitorile"
+        ],
+        "submitted_missing_keys": [
+          "stropitorilor"
+        ],
+        "full_noncolliding_family_completeness": "PASS; union of submitted missing and current same-owner keys equals own-table ordinary N-A/G-D keys",
+        "other_headword_table_borrowed": false,
+        "register_and_sense_judgment": "Ordinary morphology of the same garden object, retaining the current normative -i plural; no road vehicle, obsolete sprayer, forge swab or alternate plural family is added.",
+        "secondary_source_paraphrase": "The Romanian Stropitoare article describes a handled container with a perforated spout for watering gardens."
+      },
+      "current_owner": {
+        "id": "n_v32_garden_water_stropitoare",
+        "label_ro": "Stropitoare",
+        "description": "Recipient cu mâner și cioc perforat, folosit pentru a uda plante.",
+        "category": "viata_de_roman",
+        "aliases": [
+          "stropitoarea",
+          "stropitori",
+          "stropitorile",
+          "stropitorii"
+        ]
+      },
+      "ownership_disposition": "Every submitted normalized key is currently missing/unowned; no final accepted payload, held family, raw/current deferred term or accent-preserving ReviewedUnresolved key is displaced. Existing same-owner keys stay owned.",
+      "ownership_reference": {
+        "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+        "sha256": "09491abfc6d845f0d97ba118231cd1e436b7b4db2599a0747a8e8860ee506cf3",
+        "record_id": "v140-stropitoare"
+      },
+      "signed_edits": [],
+      "target_approvals": 0,
+      "gameplay_approvals": 0,
+      "salience_approvals": 0
+    }
+  ],
+  "preserved_held_ids": [
+    "v140-tibie",
+    "v140-peroneu",
+    "v140-cearceaf",
+    "v140-sora"
+  ],
+  "source_provenance": {
+    "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/source-catalog.json",
+    "sha256": "aecc1a709296885c65e93a811f3b6160647c30d088523251811308a05ca3aee6"
+  },
+  "requests": {
+    "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/requests.json",
+    "sha256": "95a6c8585d474c3fdedc54b4cd53c24e0022be6ee8ff4f69fbe7bb3df4abde1b"
+  },
+  "manual_decisions": {
+    "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/manual-decisions.json",
+    "sha256": "9fb19bcf5f34456172a852692078fd688646a449f9fd408cf193bde5618e0d7e"
+  },
+  "ownership_and_state": {
+    "path": "/home/dobo/work/_temp/content__v1-40-familiar-nature-school-and-ordinary-inputs/review/factual/ownership-and-state.json",
+    "sha256": "09491abfc6d845f0d97ba118231cd1e436b7b4db2599a0747a8e8860ee506cf3"
+  },
+  "dictionary_phase": {
+    "completed": true,
+    "last_actual_dictionary_timestamp": "2026-10-20T00:07:53.476844+00:00",
+    "dictionary_requests": 46,
+    "all_HTTP_successful": true,
+    "minimum_start_gap_seconds": 2.150055,
+    "author_and_quality_dictionary_phases_did_not_overlap": true
+  },
+  "signed_edits": [],
+  "signed_conservative_drop_policy": {
+    "reviewer": "factual-v1-40",
+    "signed_at": "2026-10-20T00:10:21.569827+00:00",
+    "record_ids": [
+      "v140-husa",
+      "v140-mina",
+      "v140-lacramioara",
+      "v140-cicoare",
+      "v140-patent",
+      "v140-casa",
+      "v140-familie",
+      "v140-baie",
+      "v140-ramura",
+      "v140-radacina",
+      "v140-pix",
+      "v140-lectie",
+      "v140-examen",
+      "v140-frate",
+      "v140-nepot",
+      "v140-fiu",
+      "v140-fiica",
+      "v140-matusa",
+      "v140-unchi",
+      "v140-bebelus",
+      "v140-prieten",
+      "v140-stropitoare"
+    ],
+    "policy": "If exact signed edits from the two fixed reviewers conflict, a required full family or peer is lost, or any original graph floor fails, hold the whole affected item and dependent peers. Do not invent replacements, silently clip paradigms, repair categories, add links or make unsigned semantic compromises. This policy authorizes conservative drops only; it grants no source application, installation or landing authority.",
+    "replacement_candidates_allowed": false
+  },
+  "counts": {
+    "accepted_source_items": 22,
+    "modified": 0,
+    "held_submitted": 0,
+    "rejected": 0,
+    "preserved_prior_holds": 4,
+    "new_concepts": 4,
+    "new_concept_ordinary_keys": 21,
+    "existing_owner_families": 18,
+    "existing_ordinary_morphology_families": 17,
+    "existing_ordinary_morphology_keys": 32,
+    "selected_tool_subtype_families": 1,
+    "selected_tool_subtype_keys": 6,
+    "missing_normalized_keys": 59,
+    "directed_source_claims": 16,
+    "synonym_or_regional_inputs_approved": 0,
+    "canonical_display_only_keys": 0
+  },
+  "scope": {
+    "source_applied": false,
+    "installed": 0,
+    "player_visible_delta": "0/0/0",
+    "new_target_approvals": 0,
+    "new_playable_rounds": 0,
+    "salience_approval": false,
+    "module_imported_executed_or_applied": false,
+    "GUI_or_integration_qualification": false,
+    "alias_game_contract": "Cald accepts typed guesses; Lanț accepts typed moves/clicked displayed labels. Board-ID games and Alchimie owned-ID combinations do not gain rounds from aliases. Local Alchimie filters search displayed labels, including displayed parent labels.",
+    "impact_limit": "Aliases can change exact/fuzzy/projection competition and repeat/win identity; graph additions can change old profiles, routes, recipes, rankings and snapshots after later installation. Flags and salience 0.5 do not quarantine content; this source module remains outside serving. C3 numeric floors do not approve targets."
+  },
+  "signature": {
+    "reviewer": "factual-v1-40",
+    "signed_at": "2026-10-20T00:10:21.569827+00:00",
+    "independence": "I was not an author, did not read or exchange quality verdicts before this signature, independently inspected the current owner/endpoint metadata and fresh exact-head sources, and performed one whole-batch review of the frozen original payload.",
+    "decisions_sha256": "a7d9bb737ec20e18e5e54bd69389aa02f38abe258514debe92e06f8a37ba5ba9",
+    "immutable_report": "Exclusive create, no later semantic revision or re-review."
+  }
+}

@@ -1,0 +1,5211 @@
+{
+  "schema_version": 1,
+  "wave": "1.16",
+  "reviewer": "factual-v1-16",
+  "review_round": 1,
+  "module_sha256": "862865364f8b63532a54fab602c9c59aa9aa30037687f9d31bee747d368233ae",
+  "scope": "Independent whole selected batch factual web review; reviewed unlanded vocabulary and directed graph proposal only. No curated boards, targets, partitions, recipes, difficulty, application or landing approved.",
+  "review_method": "Fresh exact-headword DEX JSON and attributed ordinary flexion pages for all56 selected items, Romanian second sources for every item, actual stable bundle endpoint senses/owners, and primary examples for conditional feature claims. Local source caching supports this same one review round; earlier mechanical checks did not use web or supply semantic verdicts.",
+  "review_result": "modify",
+  "summary": {
+    "selected_items": 56,
+    "item_verdicts": {
+      "modify": 6,
+      "accept": 50
+    },
+    "unique_edges": 180,
+    "edge_verdicts": {
+      "accept": 175,
+      "modify": 5
+    },
+    "forms_reviewed": 316,
+    "proposed_missing_keys": 278,
+    "new_concepts": 45,
+    "existing_input_families": 11,
+    "new_holds": 0,
+    "original_holds_preserved": 4,
+    "player_visible_delta": "0/0/0"
+  },
+  "process_deviations": [
+    {
+      "type": "dictionary_request_spacing",
+      "rationale": "The serialized direct-fetch pass used >=2.15seconds between starts, but I also opened Pagaie and Corabie together in one web-tool call while that pass was running. Those two extra opens were not coordinated to the spacing requirement. I disclosed the mistake to root immediately, made no further Dex opens outside the paced helper, completed only this review round, and released the dictionary slot to quality after the last paced retry completed. No claim that every review request was paced is made.",
+      "author_research_pacing": "Not reassessed or rewritten; this deviation belongs to the independent review only."
+    }
+  ],
+  "verification": {
+    "dictionary_pages": 112,
+    "dictionary_pages_after_single_transient_dns_retry": "112 HTTP200",
+    "secondary_pages_attempted": 130,
+    "secondary_failures_handled": "Failed direct TLS/403/timeout sources were checked through web-tool readable/indexed primary text where relied upon; unobserved generic page bodies are not accepted as evidence.",
+    "dictionary_entry_and_table_mismatches": 0,
+    "normalization_collisions": 0,
+    "crosscandidate_owner_conflicts": 0,
+    "prior_pools_checked": 33,
+    "same_category_main_batch_graph_floors": "All45 new nodes satisfy aggregate4–8distinct,>=2main,>=2same-category,<=2batch after incoming/deduplicated edges.",
+    "source_correction_scope": "Six item-level source corrections; five edge source bindings. No node sense, ordinary form, caption, endpoint or threshold change requested.",
+    "pdf_limitations": "Municipal204-page scanned PDF first2physical pages visually inspected only. Relevant printed17/55 and33/55 passages independently retrieved through web index; no physical-page equivalence claimed. Readable PS4 article independently confirms metal structure.",
+    "game_quality_scope": "A1/A2/A3/A4 plus relevant A7, C5 and D2 conceptual checks only; whole-board B/C/D/E gates remain for later authoring."
+  },
+  "items": [
+    {
+      "id": "v116-bordura",
+      "word": "Bordură",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_bordura",
+      "verdict": "modify",
+      "rationale": "Street-edge sense is distinct from textile trim; curb material needs the specified source correction.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/bordur%C4%83/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/bordur%C4%83",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        },
+        {
+          "url": "https://www.piatraonline.ro/produs/bordura-granit-bianco-sardo-20-x-25-x-50-cm-bizot-2cm-1l/",
+          "paraphrase": "Furnizorul identifică bordura din granit natural, distinct de o simplă culoare comercială."
+        }
+      ],
+      "forms_reviewed": [
+        "bordură",
+        "borduri",
+        "bordurile",
+        "bordurii",
+        "bordurilor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "bordură",
+        "borduri",
+        "bordurile",
+        "bordurii",
+        "bordurilor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "bordură",
+          "dex_definition_ids": [
+            "836274"
+          ],
+          "doom3_definition_ids": [
+            "1319198"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/bordur%C4%83",
+          "flexion_authority": "DOOM 3",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": [
+        {
+          "action": "replace_source_binding",
+          "src": "n_v1_16_bordura",
+          "dst": "n_v28_nature_material_piatra",
+          "relation": "related_to",
+          "remove_url": "https://mestamarmura.ro/produse/granit-borduri-20x25x50/",
+          "add_url": "https://www.piatraonline.ro/produs/bordura-granit-bianco-sardo-20-x-25-x-50-cm-bizot-2cm-1l/",
+          "paraphrase": "Furnizorul identifică bordura din granit natural, distinct de o simplă culoare comercială.",
+          "instruction": "Replace the Mesta product-page attribution in item/pool evidence and the stone edge; its current response exposes generic filters/products, not the claimed natural-granite curb. Keep the conditional caption and endpoints unchanged."
+        }
+      ]
+    },
+    {
+      "id": "v116-intersectie",
+      "word": "Intersecție",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_intersectie",
+      "verdict": "accept",
+      "rationale": "Road/street junction, excluding mathematical intersection; the municipal intersection example supports lights and urban siting.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/intersec%C8%9Bie/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/intersec%C8%9Bie",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "intersecție",
+        "intersecția",
+        "intersecții",
+        "intersecțiile",
+        "intersecției",
+        "intersecțiilor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "intersecție",
+        "intersecția",
+        "intersecții",
+        "intersecțiile",
+        "intersecției",
+        "intersecțiilor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "intersecție",
+          "dex_definition_ids": [
+            "858471"
+          ],
+          "doom3_definition_ids": [
+            "1298507"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/intersec%C8%9Bie",
+          "flexion_authority": "DOOM 3",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-sosea",
+      "word": "Șosea",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_sosea",
+      "verdict": "accept",
+      "rationale": "Current interurban-road sense supports city/village connections; no obsolete or regional synonyms admitted.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/%C8%99osea/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/%C8%99osea",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "șosea",
+        "șoseaua",
+        "șosele",
+        "șoselele",
+        "șoselei",
+        "șoselelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "șosea",
+        "șoseaua",
+        "șosele",
+        "șoselele",
+        "șoselei",
+        "șoselelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "șosea",
+          "dex_definition_ids": [
+            "837847"
+          ],
+          "doom3_definition_ids": [
+            "1271734"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/%C8%99osea",
+          "flexion_authority": "DOR",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-autostrada",
+      "word": "Autostradă",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_autostrada",
+      "verdict": "accept",
+      "rationale": "High-capacity separated road; aggregate and steel-barrier claims are conditional features with manufacturer evidence.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/autostrad%C4%83/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/autostrad%C4%83",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "autostradă",
+        "autostrăzi",
+        "autostrăzile",
+        "autostrăzii",
+        "autostrăzilor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "autostradă",
+        "autostrăzi",
+        "autostrăzile",
+        "autostrăzii",
+        "autostrăzilor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "autostradă",
+          "dex_definition_ids": [
+            "832056"
+          ],
+          "doom3_definition_ids": [
+            "1327395"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/autostrad%C4%83",
+          "flexion_authority": "DOOM 3",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-sina",
+      "word": "Șină",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_sina",
+      "verdict": "accept",
+      "rationale": "Rail guiding bar, not wheel band or whole railway by metonymy; train, tram and metro uses retain their actual senses.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/%C8%99in%C4%83/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/%C8%99in%C4%83",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "șină",
+        "șine",
+        "șinele",
+        "șinei",
+        "șinelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "șină",
+        "șine",
+        "șinele",
+        "șinei",
+        "șinelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "șină",
+          "dex_definition_ids": [
+            "837471"
+          ],
+          "doom3_definition_ids": [
+            "1271526"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/%C8%99in%C4%83",
+          "flexion_authority": "DOR",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-cale_ferata",
+      "word": "Cale ferată",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_cale_ferata",
+      "verdict": "accept",
+      "rationale": "Railway expression only; inflection follows cale with ferată/ferate agreement and no bare cale ownership.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/cale/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/cale_ferat%C4%83",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "cale ferată",
+        "calea ferată",
+        "căi ferate",
+        "căile ferate",
+        "căii ferate",
+        "căilor ferate"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "cale ferată",
+        "calea ferată",
+        "căi ferate",
+        "căile ferate",
+        "căii ferate",
+        "căilor ferate"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs. Qualified compounds use the checked base-noun paradigm; no bare dictionary head is claimed.",
+      "dictionary_selection": [
+        {
+          "lemma": "cale",
+          "dex_definition_ids": [
+            "839919"
+          ],
+          "doom3_definition_ids": [
+            "1309204"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/cale",
+          "flexion_authority": "DOR",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-peron",
+      "word": "Peron",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_peron",
+      "verdict": "accept",
+      "rationale": "Passenger railway/metro platform, excluding a building entrance platform; Metrorex confirms platform use.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/peron/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/peron",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "peron",
+        "peronul",
+        "peroane",
+        "peroanele",
+        "peronului",
+        "peroanelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "peron",
+        "peronul",
+        "peroane",
+        "peroanele",
+        "peronului",
+        "peroanelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "peron",
+          "dex_definition_ids": [
+            "870435"
+          ],
+          "doom3_definition_ids": [
+            "1282033"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/peron",
+          "flexion_authority": "DOR",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-bilet",
+      "word": "Bilet",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_bilet",
+      "verdict": "accept",
+      "rationale": "Transport entitlement uses exact-headword DEXI/DLRM support plus operators; neither paper material nor admission/financial senses is generalized.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/bilet/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/bilet",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "bilet",
+        "biletul",
+        "bilete",
+        "biletele",
+        "biletului",
+        "biletelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "bilet",
+        "biletul",
+        "bilete",
+        "biletele",
+        "biletului",
+        "biletelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "bilet",
+          "dex_definition_ids": [
+            "834794"
+          ],
+          "doom3_definition_ids": [
+            "1318193"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/bilet",
+          "flexion_authority": "DOOM 3",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-abonament",
+      "word": "Abonament",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_abonament",
+      "verdict": "accept",
+      "rationale": "Period-based transport entitlement; operator examples cover the four modes without importing tariffs or eligibility rules.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/abonament/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/abonament",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "abonament",
+        "abonamentul",
+        "abonamente",
+        "abonamentele",
+        "abonamentului",
+        "abonamentelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "abonament",
+        "abonamentul",
+        "abonamente",
+        "abonamentele",
+        "abonamentului",
+        "abonamentelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "abonament",
+          "dex_definition_ids": [
+            "821292"
+          ],
+          "doom3_definition_ids": [
+            "1320311"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/abonament",
+          "flexion_authority": "DOR",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-vagon",
+      "word": "Vagon",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_vagon",
+      "verdict": "accept",
+      "rationale": "Physical railway vehicle and possible train member; cargo-quantity and house-layout uses excluded.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/vagon/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/vagon",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "vagon",
+        "vagonul",
+        "vagoane",
+        "vagoanele",
+        "vagonului",
+        "vagoanelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "vagon",
+        "vagonul",
+        "vagoane",
+        "vagoanele",
+        "vagonului",
+        "vagoanelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "vagon",
+          "dex_definition_ids": [
+            "824848"
+          ],
+          "doom3_definition_ids": [
+            "1263203"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/vagon",
+          "flexion_authority": "DOOM 3",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-autocar",
+      "word": "Autocar",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_autocar",
+      "verdict": "accept",
+      "rationale": "Coach as a road passenger bus for longer journeys; subtype and driver/wheel/excursion associations agree with current usage.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/autocar/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/autocar",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "autocar",
+        "autocarul",
+        "autocare",
+        "autocarele",
+        "autocarului",
+        "autocarelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "autocar",
+        "autocarul",
+        "autocare",
+        "autocarele",
+        "autocarului",
+        "autocarelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "autocar",
+          "dex_definition_ids": [
+            "831433"
+          ],
+          "doom3_definition_ids": [
+            "1324717"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/autocar",
+          "flexion_authority": "DOOM 3",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-scuter",
+      "word": "Scuter",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_scuter",
+      "verdict": "modify",
+      "rationale": "Motor scooter is distinct from kick scooter; wheels/handlebars are supported and the metal-frame source must be rebound.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/scuter/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/scuter",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        },
+        {
+          "url": "https://www.piaggio.com/ro_RO/models/liberty/liberty-50-4-timpi-3-valve-pe-cilindru-2025/",
+          "paraphrase": "Producătorul descrie concret scuterul Liberty cu ghidon și cadru din oțel."
+        }
+      ],
+      "forms_reviewed": [
+        "scuter",
+        "scuterul",
+        "scutere",
+        "scuterele",
+        "scuterului",
+        "scuterelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "scuter",
+        "scuterul",
+        "scutere",
+        "scuterele",
+        "scuterului",
+        "scuterelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "scuter",
+          "dex_definition_ids": [
+            "840712"
+          ],
+          "doom3_definition_ids": [
+            "1273668"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/scuter",
+          "flexion_authority": "DOR",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": [
+        {
+          "action": "add_source_binding",
+          "src": "n_v1_16_scuter",
+          "dst": "n_v4sti_metal",
+          "relation": "related_to",
+          "add_url": "https://www.piaggio.com/ro_RO/models/liberty/liberty-50-4-timpi-3-valve-pe-cilindru-2025/",
+          "paraphrase": "Producătorul descrie concret scuterul Liberty cu ghidon și cadru din oțel.",
+          "instruction": "Bind the metal-frame claim to this readable model-specific manufacturer page. The generic Beverly/history URLs returned only titles during this review, so do not rely on their unobserved bodies as the material proof."
+        }
+      ]
+    },
+    {
+      "id": "v116-elicopter",
+      "word": "Elicopter",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_elicopter",
+      "verdict": "accept",
+      "rationale": "Rotorcraft comparison to Avion is related_to, never a fixed-wing subtype or synonym; aviation operators support airport/hangar use.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/elicopter/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/elicopter",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "elicopter",
+        "elicopterul",
+        "elicoptere",
+        "elicopterele",
+        "elicopterului",
+        "elicopterelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "elicopter",
+        "elicopterul",
+        "elicoptere",
+        "elicopterele",
+        "elicopterului",
+        "elicopterelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "elicopter",
+          "dex_definition_ids": [
+            "865610"
+          ],
+          "doom3_definition_ids": [
+            "1303731"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/elicopter",
+          "flexion_authority": "DOOM 3",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-hangar",
+      "word": "Hangar",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_hangar",
+      "verdict": "accept",
+      "rationale": "Aviation shelter includes planes and helicopters; airport and steel structure are possible, not universal features.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/hangar/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/hangar",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "hangar",
+        "hangarul",
+        "hangare",
+        "hangarele",
+        "hangarului",
+        "hangarelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "hangar",
+        "hangarul",
+        "hangare",
+        "hangarele",
+        "hangarului",
+        "hangarelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "hangar",
+          "dex_definition_ids": [
+            "880844"
+          ],
+          "doom3_definition_ids": [
+            "1299302"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/hangar",
+          "flexion_authority": "DOR",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-alee",
+      "word": "Alee",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_alee",
+      "verdict": "accept",
+      "rationale": "Ordinary park/urban passage; architectural and municipal examples support street access and stone paving.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/alee/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/alee",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "alee",
+        "aleea",
+        "alei",
+        "aleile",
+        "aleii",
+        "aleilor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "alee",
+        "aleea",
+        "alei",
+        "aleile",
+        "aleii",
+        "aleilor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "alee",
+          "dex_definition_ids": [
+            "824968"
+          ],
+          "doom3_definition_ids": [
+            "1321787"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/alee",
+          "flexion_authority": "DOR",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-pasarela",
+      "word": "Pasarelă",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_pasarela",
+      "verdict": "accept",
+      "rationale": "Pedestrian bridge sense is correct; official road-crossing and indexed municipal access/metal descriptions support the scoped captions.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/pasarel%C4%83/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/pasarel%C4%83",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        },
+        {
+          "url": "https://ps4.ro/comunicate-de-presa/pasarela-pietonala-de-aproape-100-de-tone-care-leaga-sectorul-4-de-orasul-popesti-leordeni-a-fost-montata-astazi/",
+          "paraphrase": "Comunicarea municipală descrie structura metalică a pasarelei pietonale montate."
+        }
+      ],
+      "forms_reviewed": [
+        "pasarelă",
+        "pasarele",
+        "pasarelele",
+        "pasarelei",
+        "pasarelelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "pasarelă",
+        "pasarele",
+        "pasarelele",
+        "pasarelei",
+        "pasarelelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "pasarelă",
+          "dex_definition_ids": [
+            "866812"
+          ],
+          "doom3_definition_ids": [
+            "1280803"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/pasarel%C4%83",
+          "flexion_authority": "DOR",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-tunel",
+      "word": "Tunel",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_tunel",
+      "verdict": "accept",
+      "rationale": "Transport tunnel, not figurative use; both DOOM3 tuneluri and tunele ordinary paradigms are admitted.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/tunel/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/tunel",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "tunel",
+        "tunelul",
+        "tuneluri",
+        "tunelurile",
+        "tunelului",
+        "tunelurilor",
+        "tunele",
+        "tunelele",
+        "tunelelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "tunel",
+        "tunelul",
+        "tuneluri",
+        "tunelurile",
+        "tunelului",
+        "tunelurilor",
+        "tunele",
+        "tunelele",
+        "tunelelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "tunel",
+          "dex_definition_ids": [
+            "836381"
+          ],
+          "doom3_definition_ids": [
+            "1270580"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/tunel",
+          "flexion_authority": "DOOM 3",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-pod",
+      "word": "Pod",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_pod",
+      "verdict": "accept",
+      "rationale": "Bridge construction only; river/road crossings and possible wood/metal construction are supported.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/pod/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/pod",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "pod",
+        "podul",
+        "poduri",
+        "podurile",
+        "podului",
+        "podurilor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "pod",
+        "podul",
+        "poduri",
+        "podurile",
+        "podului",
+        "podurilor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "pod",
+          "dex_definition_ids": [
+            "874085"
+          ],
+          "doom3_definition_ids": [
+            "1283458"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/pod",
+          "flexion_authority": "DOOM 3",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-parapet",
+      "word": "Parapet",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_parapet",
+      "verdict": "accept",
+      "rationale": "Road/bridge protection excludes naval and military senses; DOOM3 parapete selected, not older parapeturi.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/parapet/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/parapet",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "parapet",
+        "parapetul",
+        "parapete",
+        "parapetele",
+        "parapetului",
+        "parapetelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "parapet",
+        "parapetul",
+        "parapete",
+        "parapetele",
+        "parapetului",
+        "parapetelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "parapet",
+          "dex_definition_ids": [
+            "865957"
+          ],
+          "doom3_definition_ids": [
+            "1280545"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/parapet",
+          "flexion_authority": "DOR",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-balustrada",
+      "word": "Balustradă",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_balustrada",
+      "verdict": "accept",
+      "rationale": "Architectural protective railing; real handrail examples support possible wood/metal construction and hand support.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/balustrad%C4%83/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/balustrad%C4%83",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "balustradă",
+        "balustrade",
+        "balustradele",
+        "balustradei",
+        "balustradelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "balustradă",
+        "balustrade",
+        "balustradele",
+        "balustradei",
+        "balustradelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "balustradă",
+          "dex_definition_ids": [
+            "832833"
+          ],
+          "doom3_definition_ids": [
+            "1317172"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/balustrad%C4%83",
+          "flexion_authority": "DOOM 3",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-rampa",
+      "word": "Rampă",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_rampa",
+      "verdict": "accept",
+      "rationale": "Inclined access/passage surface; material proof refers to access ramps, not the unrelated balustrade sense.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/ramp%C4%83/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/ramp%C4%83",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "rampă",
+        "rampe",
+        "rampele",
+        "rampei",
+        "rampelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "rampă",
+        "rampe",
+        "rampele",
+        "rampei",
+        "rampelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "rampă",
+          "dex_definition_ids": [
+            "852021"
+          ],
+          "doom3_definition_ids": [
+            "1274674"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/ramp%C4%83",
+          "flexion_authority": "DOR",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-bariera",
+      "word": "Barieră",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_bariera",
+      "verdict": "accept",
+      "rationale": "Movable access bar; the wood sense and metal product are explicit, while the fence link is only possible joint use.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/barier%C4%83/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/barier%C4%83",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "barieră",
+        "bariere",
+        "barierele",
+        "barierei",
+        "barierelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "barieră",
+        "bariere",
+        "barierele",
+        "barierei",
+        "barierelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "barieră",
+          "dex_definition_ids": [
+            "832968"
+          ],
+          "doom3_definition_ids": [
+            "1317382"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/barier%C4%83",
+          "flexion_authority": "DOOM 3",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-garaj",
+      "word": "Garaj",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_garaj",
+      "verdict": "accept",
+      "rationale": "Vehicle room/building; motorcycles, entrance door and a possible own roof fit the selected scope.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/garaj/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/garaj",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "garaj",
+        "garajul",
+        "garaje",
+        "garajele",
+        "garajului",
+        "garajelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "garaj",
+        "garajul",
+        "garaje",
+        "garajele",
+        "garajului",
+        "garajelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "garaj",
+          "dex_definition_ids": [
+            "875848"
+          ],
+          "doom3_definition_ids": [
+            "1317289"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/garaj",
+          "flexion_authority": "DOOM 3",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-benzina",
+      "word": "Benzină",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_benzina",
+      "verdict": "modify",
+      "rationale": "Fuel substance and ordinary benzine paradigm are correct; the filters-page attribution must be corrected.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/benzin%C4%83/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/benzin%C4%83",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "benzină",
+        "benzine",
+        "benzinele",
+        "benzinei",
+        "benzinelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "benzină",
+        "benzine",
+        "benzinele",
+        "benzinei",
+        "benzinelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "benzină",
+          "dex_definition_ids": [
+            "834328"
+          ],
+          "doom3_definition_ids": [
+            "1317975"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/benzin%C4%83",
+          "flexion_authority": "DOOM 3",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": [
+        {
+          "action": "correct_source_paraphrase",
+          "url": "https://www.boschaftermarket.com/ro/ro/piese/produse/filtre/",
+          "old_claim": "The filters page explicitly explains air required for combustion.",
+          "new_paraphrase": "Pagina prezintă filtrarea aerului și a combustibilului pentru protejarea componentelor motorului.",
+          "instruction": "The retrieved filters page does not state the attributed combustion-air explanation; correct the item/pool paraphrase. Use the separately verified combustion source for that claim."
+        }
+      ]
+    },
+    {
+      "id": "v116-motorina",
+      "word": "Motorină",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_motorina",
+      "verdict": "modify",
+      "rationale": "Diesel fuel and motorine paradigm are correct; bind combustion air to Cummins instead of the filters-page assertion.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/motorin%C4%83/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/motorin%C4%83",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        },
+        {
+          "url": "https://www.cummins.com/ro-eu/components/turbochargers/how-a-turbocharger-works",
+          "paraphrase": "Producătorul explică admisia aerului, aportul oxigenului și arderea combustibilului în motorul diesel."
+        }
+      ],
+      "forms_reviewed": [
+        "motorină",
+        "motorine",
+        "motorinele",
+        "motorinei",
+        "motorinelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "motorină",
+        "motorine",
+        "motorinele",
+        "motorinei",
+        "motorinelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "motorină",
+          "dex_definition_ids": [
+            "892288"
+          ],
+          "doom3_definition_ids": [
+            "1294800"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/motorin%C4%83",
+          "flexion_authority": "DOR",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": [
+        {
+          "action": "correct_source_paraphrase",
+          "url": "https://www.boschaftermarket.com/ro/ro/piese/produse/filtre/",
+          "old_claim": "The filters page explicitly explains air required for combustion.",
+          "new_paraphrase": "Pagina prezintă filtrarea aerului și a combustibilului pentru protejarea componentelor motorului.",
+          "instruction": "The retrieved filters page does not state the attributed combustion-air explanation; correct the item/pool paraphrase. Use the separately verified combustion source for that claim."
+        },
+        {
+          "action": "add_source_binding",
+          "src": "n_v1_16_motorina",
+          "dst": "n_v4sti_aer",
+          "relation": "related_to",
+          "add_url": "https://www.cummins.com/ro-eu/components/turbochargers/how-a-turbocharger-works",
+          "paraphrase": "Producătorul explică admisia aerului, aportul oxigenului și arderea combustibilului în motorul diesel.",
+          "instruction": "Add this independently read manufacturer explanation to the air/combustion edge and item evidence. No caption or topology change is required."
+        }
+      ]
+    },
+    {
+      "id": "v116-combustibil",
+      "word": "Combustibil",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_combustibil",
+      "verdict": "modify",
+      "rationale": "Masculine combustion noun uses DOOM3 1312981, excluding feminine adjective forms and nuclear-fuel expansion; correct the air-source binding.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/combustibil/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/combustibil",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        },
+        {
+          "url": "https://www.cummins.com/ro-eu/components/turbochargers/how-a-turbocharger-works",
+          "paraphrase": "Producătorul explică admisia aerului, aportul oxigenului și arderea combustibilului în motorul diesel."
+        }
+      ],
+      "forms_reviewed": [
+        "combustibil",
+        "combustibilul",
+        "combustibilului",
+        "combustibili",
+        "combustibilii",
+        "combustibililor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "combustibil",
+        "combustibilul",
+        "combustibilului",
+        "combustibili",
+        "combustibilii",
+        "combustibililor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs. Keep masculine combustibili/combustibilii/combustibililor; no feminine adjective forms.",
+      "dictionary_selection": [
+        {
+          "lemma": "combustibil",
+          "dex_definition_ids": [
+            "849406"
+          ],
+          "doom3_definition_ids": [
+            "1312981"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/combustibil",
+          "flexion_authority": "DOR",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": [
+        {
+          "action": "correct_source_paraphrase",
+          "url": "https://www.boschaftermarket.com/ro/ro/piese/produse/filtre/",
+          "old_claim": "The filters page explicitly explains air required for combustion.",
+          "new_paraphrase": "Pagina prezintă filtrarea aerului și a combustibilului pentru protejarea componentelor motorului.",
+          "instruction": "The retrieved filters page does not state the attributed combustion-air explanation; correct the item/pool paraphrase. Use the separately verified combustion source for that claim."
+        },
+        {
+          "action": "add_source_binding",
+          "src": "n_v1_16_combustibil",
+          "dst": "n_v4sti_aer",
+          "relation": "related_to",
+          "add_url": "https://www.cummins.com/ro-eu/components/turbochargers/how-a-turbocharger-works",
+          "paraphrase": "Producătorul explică admisia aerului, aportul oxigenului și arderea combustibilului în motorul diesel.",
+          "instruction": "Add this independently read manufacturer explanation to the air/combustion edge and item evidence. No caption or topology change is required."
+        }
+      ]
+    },
+    {
+      "id": "v116-motor",
+      "word": "Motor",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_motor",
+      "verdict": "modify",
+      "rationale": "Physical noun uses DOOM3 1294796 with motoare, excluding motori adjective forms; correct the combustion-air source.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/motor/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/motor",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        },
+        {
+          "url": "https://www.cummins.com/ro-eu/components/turbochargers/how-a-turbocharger-works",
+          "paraphrase": "Producătorul explică admisia aerului, aportul oxigenului și arderea combustibilului în motorul diesel."
+        }
+      ],
+      "forms_reviewed": [
+        "motor",
+        "motorul",
+        "motoare",
+        "motoarele",
+        "motorului",
+        "motoarelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "motor",
+        "motorul",
+        "motoare",
+        "motoarele",
+        "motorului",
+        "motoarelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "motor",
+          "dex_definition_ids": [
+            "892283"
+          ],
+          "doom3_definition_ids": [
+            "1294796"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/motor",
+          "flexion_authority": "DOR",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": [
+        {
+          "action": "correct_source_paraphrase",
+          "url": "https://www.boschaftermarket.com/ro/ro/piese/produse/filtre/",
+          "old_claim": "The filters page explicitly explains air required for combustion.",
+          "new_paraphrase": "Pagina prezintă filtrarea aerului și a combustibilului pentru protejarea componentelor motorului.",
+          "instruction": "The retrieved filters page does not state the attributed combustion-air explanation; correct the item/pool paraphrase. Use the separately verified combustion source for that claim."
+        },
+        {
+          "action": "add_source_binding",
+          "src": "n_v1_16_motor",
+          "dst": "n_v4sti_aer",
+          "relation": "related_to",
+          "add_url": "https://www.cummins.com/ro-eu/components/turbochargers/how-a-turbocharger-works",
+          "paraphrase": "Producătorul explică admisia aerului, aportul oxigenului și arderea combustibilului în motorul diesel.",
+          "instruction": "Add this independently read manufacturer explanation to the air/combustion edge and item evidence. No caption or topology change is required."
+        }
+      ]
+    },
+    {
+      "id": "v116-frana",
+      "word": "Frână",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_frana",
+      "verdict": "accept",
+      "rationale": "Vehicle braking device, not a figurative obstacle or verb form; possible wheel and vehicle braking functions are truthful.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/fr%C3%A2n%C4%83/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/fr%C3%A2n%C4%83",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "frână",
+        "frâne",
+        "frânele",
+        "frânei",
+        "frânelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "frână",
+        "frâne",
+        "frânele",
+        "frânei",
+        "frânelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "frână",
+          "dex_definition_ids": [
+            "874239"
+          ],
+          "doom3_definition_ids": [
+            "1302544"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/fr%C3%A2n%C4%83",
+          "flexion_authority": "DOR",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-pedala",
+      "word": "Pedală",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_pedala",
+      "verdict": "accept",
+      "rationale": "Foot-operated lever, not musical bass note; bicycle propulsion and possible car/brake commands are supported.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/pedal%C4%83/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/pedal%C4%83",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "pedală",
+        "pedale",
+        "pedalele",
+        "pedalei",
+        "pedalelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "pedală",
+        "pedale",
+        "pedalele",
+        "pedalei",
+        "pedalelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "pedală",
+          "dex_definition_ids": [
+            "868937"
+          ],
+          "doom3_definition_ids": [
+            "1281547"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/pedal%C4%83",
+          "flexion_authority": "DOR",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-janta",
+      "word": "Jantă",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_janta",
+      "verdict": "accept",
+      "rationale": "Wheel rim supports the tyre casing; neither bag-sense geantă nor the broader pneu assembly is added as an alias.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/jant%C4%83/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/jant%C4%83",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "jantă",
+        "jante",
+        "jantele",
+        "jantei",
+        "jantelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "jantă",
+        "jante",
+        "jantele",
+        "jantei",
+        "jantelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "jantă",
+          "dex_definition_ids": [
+            "861674"
+          ],
+          "doom3_definition_ids": [
+            "1291453"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/jant%C4%83",
+          "flexion_authority": "DOR",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-spita",
+      "word": "Spiță",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_spita",
+      "verdict": "accept",
+      "rationale": "Physical wheel spoke, excluding ladder/genealogy/biology; bicycle and motorcycle examples support possible metal construction.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/spi%C8%9B%C4%83/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/spi%C8%9B%C4%83",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "spiță",
+        "spițe",
+        "spițele",
+        "spiței",
+        "spițelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "spiță",
+        "spițe",
+        "spițele",
+        "spiței",
+        "spițelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "spiță",
+          "dex_definition_ids": [
+            "845677"
+          ],
+          "doom3_definition_ids": [
+            "1277586"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/spi%C8%9B%C4%83",
+          "flexion_authority": "DOR",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-ghidon",
+      "word": "Ghidon",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_ghidon",
+      "verdict": "accept",
+      "rationale": "Vehicle handlebar supports direction control and hand use; conditional metal construction avoids overgeneralizing steel.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/ghidon/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/ghidon",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "ghidon",
+        "ghidonul",
+        "ghidoane",
+        "ghidoanele",
+        "ghidonului",
+        "ghidoanelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "ghidon",
+        "ghidonul",
+        "ghidoane",
+        "ghidoanele",
+        "ghidonului",
+        "ghidoanelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "ghidon",
+          "dex_definition_ids": [
+            "877812"
+          ],
+          "doom3_definition_ids": [
+            "1324860"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/ghidon",
+          "flexion_authority": "DOR",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-sa",
+      "word": "Șa",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_sa",
+      "verdict": "accept",
+      "rationale": "Riding/cycling seat; bicycle steel rails support the conditional metal feature, with mountain/anatomical senses excluded.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/%C8%99a/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/%C8%99a",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "șa",
+        "șaua",
+        "șei",
+        "șeile",
+        "șeii",
+        "șeilor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "șa",
+        "șaua",
+        "șei",
+        "șeile",
+        "șeii",
+        "șeilor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "șa",
+          "dex_definition_ids": [
+            "836759"
+          ],
+          "doom3_definition_ids": [
+            "1270907"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/%C8%99a",
+          "flexion_authority": "DOR",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-portbagaj",
+      "word": "Portbagaj",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_portbagaj",
+      "verdict": "accept",
+      "rationale": "Physical luggage compartment or rack; car, motorcycle and bicycle instances support the functional luggage link.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/portbagaj/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/portbagaj",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "portbagaj",
+        "portbagajul",
+        "portbagaje",
+        "portbagajele",
+        "portbagajului",
+        "portbagajelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "portbagaj",
+        "portbagajul",
+        "portbagaje",
+        "portbagajele",
+        "portbagajului",
+        "portbagajelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "portbagaj",
+          "dex_definition_ids": [
+            "875657"
+          ],
+          "doom3_definition_ids": [
+            "1284018"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/portbagaj",
+          "flexion_authority": "DOOM 3",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-centura_de_siguranta",
+      "word": "Centură de siguranță",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_centura_de_siguranta",
+      "verdict": "accept",
+      "rationale": "Vehicle-occupant restraint uses exact-headword MDA2/MDN transport senses; work-at-height harnesses and bare centură are excluded.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/centur%C4%83/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/centur%C4%83",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "centură de siguranță",
+        "centuri de siguranță",
+        "centurile de siguranță",
+        "centurii de siguranță",
+        "centurilor de siguranță"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "centură de siguranță",
+        "centuri de siguranță",
+        "centurile de siguranță",
+        "centurii de siguranță",
+        "centurilor de siguranță"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs. Qualified compounds use the checked base-noun paradigm; no bare dictionary head is claimed.",
+      "dictionary_selection": [
+        {
+          "lemma": "centură",
+          "dex_definition_ids": [
+            "844375"
+          ],
+          "doom3_definition_ids": [
+            "1310956"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/centur%C4%83",
+          "flexion_authority": "DOR",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-casca_de_protectie",
+      "word": "Cască de protecție",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_casca_de_protectie",
+      "verdict": "accept",
+      "rationale": "Qualified head-protection family only; bare cască/căști stay with the music-headphone owner.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/casc%C4%83/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/casc%C4%83",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "cască de protecție",
+        "căști de protecție",
+        "căștile de protecție",
+        "căștii de protecție",
+        "căștilor de protecție"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "cască de protecție",
+        "căști de protecție",
+        "căștile de protecție",
+        "căștii de protecție",
+        "căștilor de protecție"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs. Qualified compounds use the checked base-noun paradigm; no bare dictionary head is claimed.",
+      "dictionary_selection": [
+        {
+          "lemma": "cască",
+          "dex_definition_ids": [
+            "842001"
+          ],
+          "doom3_definition_ids": [
+            "1309969"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/casc%C4%83",
+          "flexion_authority": "DOOM 3",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-caruta",
+      "word": "Căruță",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_caruta",
+      "verdict": "accept",
+      "rationale": "Rural animal-drawn cart is current school/culture vocabulary; museum cart-body wood is physical evidence, not a quantity-of-load sense.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/c%C4%83ru%C8%9B%C4%83/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/c%C4%83ru%C8%9B%C4%83",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "căruță",
+        "căruțe",
+        "căruțele",
+        "căruței",
+        "căruțelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "căruță",
+        "căruțe",
+        "căruțele",
+        "căruței",
+        "căruțelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "căruță",
+          "dex_definition_ids": [
+            "843170"
+          ],
+          "doom3_definition_ids": [
+            "1310504"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/c%C4%83ru%C8%9B%C4%83",
+          "flexion_authority": "DOR",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-vehicul",
+      "word": "Vehicul",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_vehicul",
+      "verdict": "accept",
+      "rationale": "Physical transport parent is appropriate for the five proposed subtype edges; no figurative hub or hidden-target approval.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/vehicul/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/vehicul",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "vehicul",
+        "vehiculul",
+        "vehicule",
+        "vehiculele",
+        "vehiculului",
+        "vehiculelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "vehicul",
+        "vehiculul",
+        "vehicule",
+        "vehiculele",
+        "vehiculului",
+        "vehiculelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "vehicul",
+          "dex_definition_ids": [
+            "825795"
+          ],
+          "doom3_definition_ids": [
+            "1263686"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/vehicul",
+          "flexion_authority": "DOR",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-bagaj",
+      "word": "Bagaj",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_bagaj",
+      "verdict": "accept",
+      "rationale": "Concrete travel belongings may include packed backpack/schoolbag and travel by rail/air; container words are not asserted as synonyms.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/bagaj/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/bagaj",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "bagaj",
+        "bagajul",
+        "bagaje",
+        "bagajele",
+        "bagajului",
+        "bagajelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "bagaj",
+        "bagajul",
+        "bagaje",
+        "bagajele",
+        "bagajului",
+        "bagajelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "bagaj",
+          "dex_definition_ids": [
+            "832573"
+          ],
+          "doom3_definition_ids": [
+            "1317027"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/bagaj",
+          "flexion_authority": "DOOM 3",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-nava",
+      "word": "Navă",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_nava",
+      "verdict": "accept",
+      "rationale": "Watercraft parent, excluding spacecraft/church nave; main Vapor is already a ship and the sailing examples support sea/ocean/port use.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/nav%C4%83/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/nav%C4%83",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "navă",
+        "nave",
+        "navele",
+        "navei",
+        "navelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "navă",
+        "nave",
+        "navele",
+        "navei",
+        "navelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "navă",
+          "dex_definition_ids": [
+            "881650"
+          ],
+          "doom3_definition_ids": [
+            "1288248"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/nav%C4%83",
+          "flexion_authority": "DOOM 3",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-corabie",
+      "word": "Corabie",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_corabie",
+      "verdict": "accept",
+      "rationale": "Historical sailing object is familiar culture vocabulary; DOOM3 corabiei overrides the conflicting Wiktionary surface.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/corabie/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/corabie",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "corabie",
+        "corabia",
+        "corăbii",
+        "corăbiile",
+        "corabiei",
+        "corăbiilor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "corabie",
+        "corabia",
+        "corăbii",
+        "corăbiile",
+        "corabiei",
+        "corăbiilor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs. Keep corabiei; Wiktionary corăbiei is not the selected DOOM3 surface.",
+      "dictionary_selection": [
+        {
+          "lemma": "corabie",
+          "dex_definition_ids": [
+            "851965"
+          ],
+          "doom3_definition_ids": [
+            "1314562"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/corabie",
+          "flexion_authority": "DOOM 3",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-caiac",
+      "word": "Caiac",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_caiac",
+      "verdict": "accept",
+      "rationale": "Boat sense is distinct from the sport and canoe subtype; federation and paddle product explicitly support sports/lake/sea use.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/caiac/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/caiac",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "caiac",
+        "caiacul",
+        "caiace",
+        "caiacele",
+        "caiacului",
+        "caiacelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "caiac",
+        "caiacul",
+        "caiace",
+        "caiacele",
+        "caiacului",
+        "caiacelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "caiac",
+          "dex_definition_ids": [
+            "839690"
+          ],
+          "doom3_definition_ids": [
+            "1309099"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/caiac",
+          "flexion_authority": "DOR",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-pagaie",
+      "word": "Pagaie",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_pagaie",
+      "verdict": "accept",
+      "rationale": "Single-bladed canoe paddle, not double-bladed kayak padelă; DOOM3 invariant plural overrides Wiktionary pagăi, with museum/craft relevance.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/pagaie/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/pagaie",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        },
+        {
+          "url": "https://antipa.ro/product/triunghiul-muzeelor-19-20-septembrie-2026/",
+          "paraphrase": "The museum programme includes paddle/canotcă construction, supporting Romanian educational-cultural relevance."
+        }
+      ],
+      "forms_reviewed": [
+        "pagaie",
+        "pagaia",
+        "pagaiele",
+        "pagaiei",
+        "pagaielor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "pagaie",
+        "pagaia",
+        "pagaiele",
+        "pagaiei",
+        "pagaielor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs. Keep invariant plural pagaie and pagaiele/pagaielor; exclude Wiktionary pagăi forms.",
+      "dictionary_selection": [
+        {
+          "lemma": "pagaie",
+          "dex_definition_ids": [
+            "860259"
+          ],
+          "doom3_definition_ids": [
+            "1279957"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/pagaie",
+          "flexion_authority": "DOR",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-carucior",
+      "word": "Cărucior",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_carucior",
+      "verdict": "accept",
+      "rationale": "Small wheeled child/load vehicle, excluding machine-tool subassembly; manual pushing and metal structure are scoped as possible.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/c%C4%83rucior/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/c%C4%83rucior",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "cărucior",
+        "căruciorul",
+        "cărucioare",
+        "cărucioarele",
+        "căruciorului",
+        "cărucioarelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "cărucior",
+        "căruciorul",
+        "cărucioare",
+        "cărucioarele",
+        "căruciorului",
+        "cărucioarelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "cărucior",
+          "dex_definition_ids": [
+            "843160"
+          ],
+          "doom3_definition_ids": [
+            "1310496"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/c%C4%83rucior",
+          "flexion_authority": "DOR",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-ancora",
+      "word": "Ancoră",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_ancora",
+      "verdict": "accept",
+      "rationale": "Nautical anchor only; port-area anchoring is qualified and never asserts all berth mooring uses an anchor.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/ancor%C4%83/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/ancor%C4%83",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "ancoră",
+        "ancore",
+        "ancorele",
+        "ancorei",
+        "ancorelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "ancoră",
+        "ancore",
+        "ancorele",
+        "ancorei",
+        "ancorelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "ancoră",
+          "dex_definition_ids": [
+            "827268"
+          ],
+          "doom3_definition_ids": [
+            "1322592"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/ancor%C4%83",
+          "flexion_authority": "DOR",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-soferita",
+      "word": "Șoferiță",
+      "kind": "existing_input_family",
+      "node_id": "n_v1_9_sofer",
+      "verdict": "accept",
+      "rationale": "Feminine person input preserves the existing driver role; it is not labeled an unrestricted gender-neutral synonym.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/%C8%99oferi%C8%9B%C4%83/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/%C8%99oferi%C8%9B%C4%83",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "șoferiță",
+        "șoferițe",
+        "șoferițele",
+        "șoferiței",
+        "șoferițelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "șoferiță",
+        "șoferițe",
+        "șoferițele",
+        "șoferiței",
+        "șoferițelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "șoferiță",
+          "dex_definition_ids": [
+            "837750"
+          ],
+          "doom3_definition_ids": [
+            "1271648"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/%C8%99oferi%C8%9B%C4%83",
+          "flexion_authority": "DOOM 3",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-trotuar",
+      "word": "Trotuar",
+      "kind": "existing_input_family",
+      "node_id": "n_v29_city_street_trotuar",
+      "verdict": "accept",
+      "rationale": "Ordinary grammatical completion of the existing same-sense Trotuar node; only its missing keys are proposed.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/trotuar/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/trotuar",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "trotuar",
+        "trotuarul",
+        "trotuare",
+        "trotuarele",
+        "trotuarului",
+        "trotuarelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "trotuarelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "trotuar",
+          "dex_definition_ids": [
+            "836116"
+          ],
+          "doom3_definition_ids": [
+            "1270269"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/trotuar",
+          "flexion_authority": "DOOM 3",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-strada",
+      "word": "Stradă",
+      "kind": "existing_input_family",
+      "node_id": "n_v4geo_strada",
+      "verdict": "accept",
+      "rationale": "Ordinary grammatical completion of the existing same-sense Stradă node; only its missing keys are proposed.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/strad%C4%83/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/strad%C4%83",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "stradă",
+        "străzi",
+        "străzile",
+        "străzii",
+        "străzilor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "străzii",
+        "străzilor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "stradă",
+          "dex_definition_ids": [
+            "847161"
+          ],
+          "doom3_definition_ids": [
+            "1278389"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/strad%C4%83",
+          "flexion_authority": "DOOM 3",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-tren",
+      "word": "Tren",
+      "kind": "existing_input_family",
+      "node_id": "n_v24_transport_rail_tren",
+      "verdict": "accept",
+      "rationale": "Ordinary grammatical completion of the existing same-sense Tren node; only its missing keys are proposed.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/tren/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/tren",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "tren",
+        "trenul",
+        "trenuri",
+        "trenurile",
+        "trenului",
+        "trenurilor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "trenului",
+        "trenurilor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "tren",
+          "dex_definition_ids": [
+            "835320"
+          ],
+          "doom3_definition_ids": [
+            "1269918"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/tren",
+          "flexion_authority": "DOOM 3",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-tramvai",
+      "word": "Tramvai",
+      "kind": "existing_input_family",
+      "node_id": "n_v24_transport_rail_tramvai",
+      "verdict": "accept",
+      "rationale": "Ordinary grammatical completion of the existing same-sense Tramvai node; only its missing keys are proposed.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/tramvai/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/tramvai",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "tramvai",
+        "tramvaiul",
+        "tramvaie",
+        "tramvaiele",
+        "tramvaiului",
+        "tramvaielor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "tramvaiului",
+        "tramvaielor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "tramvai",
+          "dex_definition_ids": [
+            "834598"
+          ],
+          "doom3_definition_ids": [
+            "1269541"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/tramvai",
+          "flexion_authority": "DOOM 3",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-gara",
+      "word": "Gară",
+      "kind": "existing_input_family",
+      "node_id": "n_v24_transport_terminals_gara",
+      "verdict": "accept",
+      "rationale": "Ordinary grammatical completion of the existing same-sense Gară node; only its missing keys are proposed.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/gar%C4%83/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/gar%C4%83",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "gară",
+        "gări",
+        "gările",
+        "gării",
+        "gărilor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "gării",
+        "gărilor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "gară",
+          "dex_definition_ids": [
+            "875858"
+          ],
+          "doom3_definition_ids": [
+            "1317300"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/gar%C4%83",
+          "flexion_authority": "DOR",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-statie",
+      "word": "Stație",
+      "kind": "existing_input_family",
+      "node_id": "n_v24_transport_terminals_statie",
+      "verdict": "accept",
+      "rationale": "Ordinary grammatical completion of the existing same-sense Stație node; only its missing keys are proposed.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/sta%C8%9Bie/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/sta%C8%9Bie",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "stație",
+        "stația",
+        "stații",
+        "stațiile",
+        "stației",
+        "stațiilor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "stației",
+        "stațiilor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "stație",
+          "dex_definition_ids": [
+            "846142"
+          ],
+          "doom3_definition_ids": [
+            "1277836"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/sta%C8%9Bie",
+          "flexion_authority": "DOOM 3",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-aeroport",
+      "word": "Aeroport",
+      "kind": "existing_input_family",
+      "node_id": "n_v24_transport_terminals_aeroport",
+      "verdict": "accept",
+      "rationale": "Ordinary grammatical completion of the existing same-sense Aeroport node; only its missing keys are proposed.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/aeroport/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/aeroport",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "aeroport",
+        "aeroportul",
+        "aeroporturi",
+        "aeroporturile",
+        "aeroportului",
+        "aeroporturilor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "aeroportului",
+        "aeroporturilor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "aeroport",
+          "dex_definition_ids": [
+            "823516"
+          ],
+          "doom3_definition_ids": [
+            "1321218"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/aeroport",
+          "flexion_authority": "DOOM 3",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-camion",
+      "word": "Camion",
+      "kind": "existing_input_family",
+      "node_id": "n_v24_transport_road_camion",
+      "verdict": "accept",
+      "rationale": "Ordinary grammatical completion of the existing same-sense Camion node; only its missing keys are proposed.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/camion/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/camion",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "camion",
+        "camionul",
+        "camioane",
+        "camioanele",
+        "camionului",
+        "camioanelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "camionului",
+        "camioanelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "camion",
+          "dex_definition_ids": [
+            "840665"
+          ],
+          "doom3_definition_ids": [
+            "1309364"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/camion",
+          "flexion_authority": "DOOM 3",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-microbuz",
+      "word": "Microbuz",
+      "kind": "existing_input_family",
+      "node_id": "n_v24_transport_road_microbuz",
+      "verdict": "accept",
+      "rationale": "Ordinary grammatical completion of the existing same-sense Microbuz node; only its missing keys are proposed.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/microbuz/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/microbuz",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "microbuz",
+        "microbuzul",
+        "microbuze",
+        "microbuzele",
+        "microbuzului",
+        "microbuzelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "microbuzului",
+        "microbuzelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "microbuz",
+          "dex_definition_ids": [
+            "889241"
+          ],
+          "doom3_definition_ids": [
+            "1293349"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/microbuz",
+          "flexion_authority": "DOOM 3",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    },
+    {
+      "id": "v116-bicicleta",
+      "word": "Bicicletă",
+      "kind": "existing_input_family",
+      "node_id": "n_v24_transport_personal_bicicleta",
+      "verdict": "accept",
+      "rationale": "Ordinary grammatical completion of the existing same-sense Bicicletă node; only its missing keys are proposed.",
+      "sources": [
+        {
+          "url": "https://dexonline.ro/definitie/biciclet%C4%83/json",
+          "paraphrase": "Exact-headword selected noun sense/register and DOOM3 entry checked; ordinary table attribution verified."
+        },
+        {
+          "url": "https://ro.wiktionary.org/wiki/biciclet%C4%83",
+          "paraphrase": "Second Romanian lexical source confirms the selected ordinary noun; DOOM3 prevails on the explicitly recorded table disagreements."
+        }
+      ],
+      "forms_reviewed": [
+        "bicicletă",
+        "biciclete",
+        "bicicletele",
+        "bicicletei",
+        "bicicletelor"
+      ],
+      "proposed_missing_forms_reviewed": [
+        "bicicletei",
+        "bicicletelor"
+      ],
+      "form_verdict": "accept",
+      "form_rationale": "All listed ordinary N/A and G/D forms are present in the attributed tables; one spelling per bundled normalized key; no vocatives or other-sense inputs.",
+      "dictionary_selection": [
+        {
+          "lemma": "bicicletă",
+          "dex_definition_ids": [
+            "834711"
+          ],
+          "doom3_definition_ids": [
+            "1318120"
+          ],
+          "flexion_url": "https://dexonline.ro/definitie/biciclet%C4%83",
+          "flexion_authority": "DOOM 3",
+          "exact_headword": true
+        }
+      ],
+      "required_changes": []
+    }
+  ],
+  "edge_checks": [
+    {
+      "src": "n_v1_16_bordura",
+      "dst": "n_v29_city_street_trotuar",
+      "relation": "related_to",
+      "label_ro": "poate delimita marginea unui trotuar",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/bordur%C4%83/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_bordura",
+      "dst": "n_v4geo_strada",
+      "relation": "related_to",
+      "label_ro": "poate delimita marginea unei străzi",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/bordur%C4%83/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_bordura",
+      "dst": "n_v4geo_drum",
+      "relation": "related_to",
+      "label_ro": "poate delimita partea carosabilă a unui drum",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/bordur%C4%83/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_bordura",
+      "dst": "n_v28_nature_material_piatra",
+      "relation": "related_to",
+      "label_ro": "unele borduri sunt făcute din piatră",
+      "verdict": "modify",
+      "rationale": "The supplier identifies natural granite curbs; material is conditional, not inferred from colour.",
+      "sources": [
+        "https://www.piatraonline.ro/produs/bordura-granit-bianco-sardo-20-x-25-x-50-cm-bizot-2cm-1l/"
+      ],
+      "required_changes": [
+        {
+          "action": "replace_source_binding",
+          "src": "n_v1_16_bordura",
+          "dst": "n_v28_nature_material_piatra",
+          "relation": "related_to",
+          "remove_url": "https://mestamarmura.ro/produse/granit-borduri-20x25x50/",
+          "add_url": "https://www.piatraonline.ro/produs/bordura-granit-bianco-sardo-20-x-25-x-50-cm-bizot-2cm-1l/",
+          "paraphrase": "Furnizorul identifică bordura din granit natural, distinct de o simplă culoare comercială.",
+          "instruction": "Replace the Mesta product-page attribution in item/pool evidence and the stone edge; its current response exposes generic filters/products, not the claimed natural-granite curb. Keep the conditional caption and endpoints unchanged."
+        }
+      ]
+    },
+    {
+      "src": "n_v1_16_intersectie",
+      "dst": "n_v4geo_drum",
+      "relation": "related_to",
+      "label_ro": "este un loc de întâlnire a drumurilor",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/intersec%C8%9Bie/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_intersectie",
+      "dst": "n_v4geo_strada",
+      "relation": "related_to",
+      "label_ro": "poate fi un loc de întâlnire a străzilor",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/intersec%C8%9Bie/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_intersectie",
+      "dst": "n_v2geo_oras",
+      "relation": "related_to",
+      "label_ro": "poate apărea în rețeaua stradală a unui oraș",
+      "verdict": "accept",
+      "rationale": "The municipal road/street intersection is a concrete urban example.",
+      "sources": [
+        "https://primariaclujnapoca.ro/consiliu-local/hotarare-de-consiliu/hotararea-292-din-2020/"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_intersectie",
+      "dst": "n_v1_10_semafor",
+      "relation": "related_to",
+      "label_ro": "poate avea circulația dirijată prin semafor",
+      "verdict": "accept",
+      "rationale": "The municipal description explicitly includes vehicle/pedestrian signal bodies.",
+      "sources": [
+        "https://primariaclujnapoca.ro/consiliu-local/hotarare-de-consiliu/hotararea-292-din-2020/"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_sosea",
+      "dst": "n_v4geo_drum",
+      "relation": "is_a",
+      "label_ro": "este un drum amenajat pentru vehicule",
+      "verdict": "accept",
+      "rationale": "The selected concrete source is included in the actual target class; no metaphor or alias equivalence asserted.",
+      "sources": [
+        "https://dexonline.ro/definitie/%C8%99osea/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_sosea",
+      "dst": "n_v2geo_oras",
+      "relation": "related_to",
+      "label_ro": "poate lega orașe",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/%C8%99osea/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_sosea",
+      "dst": "n_v4geo_sat",
+      "relation": "related_to",
+      "label_ro": "poate lega sate",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/%C8%99osea/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_sosea",
+      "dst": "n_v1_13_pietris",
+      "relation": "related_to",
+      "label_ro": "unele șosele au straturi de pietriș",
+      "verdict": "accept",
+      "rationale": "Pietruirea plus road aggregates supports possible gravel layers, not every surface.",
+      "sources": [
+        "https://www.heidelbergmaterials.ro/ro/hc-agregate",
+        "https://dexonline.ro/definitie/%C8%99osea/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_autostrada",
+      "dst": "n_v1_16_sosea",
+      "relation": "is_a",
+      "label_ro": "este o șosea pentru trafic rutier rapid",
+      "verdict": "accept",
+      "rationale": "The selected concrete source is included in the actual target class; no metaphor or alias equivalence asserted.",
+      "sources": [
+        "https://dexonline.ro/definitie/autostrad%C4%83/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_autostrada",
+      "dst": "n_v2geo_oras",
+      "relation": "related_to",
+      "label_ro": "poate lega orașe",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/autostrad%C4%83/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_autostrada",
+      "dst": "n_v28_nature_material_piatra",
+      "relation": "related_to",
+      "label_ro": "poate avea straturi rutiere cu agregate din piatră",
+      "verdict": "accept",
+      "rationale": "The supplier documents this possible road-construction feature.",
+      "sources": [
+        "https://www.romcim.ro/solutii-si-produse/agregate/agregate-de-cariera"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_autostrada",
+      "dst": "n_v4sti_metal",
+      "relation": "related_to",
+      "label_ro": "poate avea parapete metalice",
+      "verdict": "accept",
+      "rationale": "The supplier documents this possible road-construction feature.",
+      "sources": [
+        "https://deltabloc.com/ro/produse/steelbloc/seria-prodigy-s"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_sina",
+      "dst": "n_v24_transport_rail_tren",
+      "relation": "related_to",
+      "label_ro": "poate susține și ghida roțile unui tren",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/%C8%99in%C4%83/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_sina",
+      "dst": "n_v24_transport_rail_tramvai",
+      "relation": "related_to",
+      "label_ro": "poate ghida roțile unui tramvai",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/%C8%99in%C4%83/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_sina",
+      "dst": "n_v24_transport_rail_metrou",
+      "relation": "related_to",
+      "label_ro": "poate ghida roțile unui tren de metrou",
+      "verdict": "accept",
+      "rationale": "Metrorex identifies running rails and metro platforms; this is a rail-guidance association.",
+      "sources": [
+        "https://www.metrorex.ro/storage/documents/1765201750Instructia%20de%20miscare%20005M-%202012.pdf"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_sina",
+      "dst": "n_v4sti_metal",
+      "relation": "related_to",
+      "label_ro": "șinele de cale ferată sunt fabricate din metal",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/%C8%99in%C4%83/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_sina",
+      "dst": "n_v1_16_cale_ferata",
+      "relation": "part_of",
+      "label_ro": "face parte dintr-o cale ferată",
+      "verdict": "accept",
+      "rationale": "The physical part/ensemble relationship is supported; conditional membership is retained where stated.",
+      "sources": [
+        "https://dexonline.ro/definitie/%C8%99in%C4%83/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_cale_ferata",
+      "dst": "n_v24_transport_rail_tren",
+      "relation": "related_to",
+      "label_ro": "permite circulația trenurilor",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/cale/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_cale_ferata",
+      "dst": "n_v1_10_locomotiva",
+      "relation": "related_to",
+      "label_ro": "permite circulația locomotivelor",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/cale/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_cale_ferata",
+      "dst": "n_v24_transport_terminals_gara",
+      "relation": "related_to",
+      "label_ro": "poate deservi o gară",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/cale/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_peron",
+      "dst": "n_v24_transport_terminals_gara",
+      "relation": "related_to",
+      "label_ro": "poate face parte dintr-o gară",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/peron/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_peron",
+      "dst": "n_v24_transport_rail_tren",
+      "relation": "related_to",
+      "label_ro": "permite urcarea călătorilor în tren",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/peron/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_peron",
+      "dst": "n_v24_transport_rail_metrou",
+      "relation": "related_to",
+      "label_ro": "poate fi amenajat pentru urcarea în metrou",
+      "verdict": "accept",
+      "rationale": "Metrorex explicitly describes station platforms for metro trains.",
+      "sources": [
+        "https://www.metrorex.ro/storage/documents/1765201750Instructia%20de%20miscare%20005M-%202012.pdf"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_peron",
+      "dst": "n_v24_transport_terminals_statie",
+      "relation": "related_to",
+      "label_ro": "poate face parte dintr-o stație de transport",
+      "verdict": "accept",
+      "rationale": "Metrorex explicitly describes station platforms for metro trains.",
+      "sources": [
+        "https://www.metrorex.ro/storage/documents/1765201750Instructia%20de%20miscare%20005M-%202012.pdf"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_bilet",
+      "dst": "n_v24_transport_rail_tren",
+      "relation": "related_to",
+      "label_ro": "poate da dreptul la o călătorie cu trenul",
+      "verdict": "accept",
+      "rationale": "The transport operator explicitly documents this type of travel entitlement; no tariff rule is claimed.",
+      "sources": [
+        "https://www.cfrcalatori.ro/cumpara-online-bilete-de-tren-in-trafic-intern/"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_bilet",
+      "dst": "n_v4soc_autobuz",
+      "relation": "related_to",
+      "label_ro": "poate da dreptul la o călătorie cu autobuzul",
+      "verdict": "accept",
+      "rationale": "The transport operator explicitly documents this type of travel entitlement; no tariff rule is claimed.",
+      "sources": [
+        "https://www.stb.ro/bilettb"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_bilet",
+      "dst": "n_v24_transport_rail_tramvai",
+      "relation": "related_to",
+      "label_ro": "poate da dreptul la o călătorie cu tramvaiul",
+      "verdict": "accept",
+      "rationale": "The transport operator explicitly documents this type of travel entitlement; no tariff rule is claimed.",
+      "sources": [
+        "https://www.stb.ro/bilettb"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_bilet",
+      "dst": "n_v24_transport_rail_metrou",
+      "relation": "related_to",
+      "label_ro": "poate da dreptul la o călătorie cu metroul",
+      "verdict": "accept",
+      "rationale": "The transport operator explicitly documents this type of travel entitlement; no tariff rule is claimed.",
+      "sources": [
+        "https://www.metrorex.ro/storage/documents/1748254910Situatie%20financiara%20anuala%20-%202024.pdf"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_abonament",
+      "dst": "n_v24_transport_rail_tren",
+      "relation": "related_to",
+      "label_ro": "poate permite călătorii cu trenul într-o perioadă",
+      "verdict": "accept",
+      "rationale": "The transport operator explicitly documents this type of travel entitlement; no tariff rule is claimed.",
+      "sources": [
+        "https://www.cfrcalatori.ro/cumpara-online-bilete-de-tren-in-trafic-intern/"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_abonament",
+      "dst": "n_v4soc_autobuz",
+      "relation": "related_to",
+      "label_ro": "poate permite călătorii cu autobuzul într-o perioadă",
+      "verdict": "accept",
+      "rationale": "The transport operator explicitly documents this type of travel entitlement; no tariff rule is claimed.",
+      "sources": [
+        "https://www.stb.ro/bilettb"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_abonament",
+      "dst": "n_v24_transport_rail_tramvai",
+      "relation": "related_to",
+      "label_ro": "poate permite călătorii cu tramvaiul într-o perioadă",
+      "verdict": "accept",
+      "rationale": "The transport operator explicitly documents this type of travel entitlement; no tariff rule is claimed.",
+      "sources": [
+        "https://www.stb.ro/bilettb"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_abonament",
+      "dst": "n_v24_transport_rail_metrou",
+      "relation": "related_to",
+      "label_ro": "poate permite călătorii cu metroul într-o perioadă",
+      "verdict": "accept",
+      "rationale": "The transport operator explicitly documents this type of travel entitlement; no tariff rule is claimed.",
+      "sources": [
+        "https://www.metrorex.ro/storage/documents/1733207159IL%20-%20Supraveghere%20Acces%20si%20Informare%20Calatori.pdf"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_vagon",
+      "dst": "n_v24_transport_rail_tren",
+      "relation": "part_of",
+      "label_ro": "poate face parte dintr-un tren",
+      "verdict": "accept",
+      "rationale": "The physical part/ensemble relationship is supported; conditional membership is retained where stated.",
+      "sources": [
+        "https://dexonline.ro/definitie/vagon/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_vagon",
+      "dst": "n_v1_10_locomotiva",
+      "relation": "related_to",
+      "label_ro": "poate fi remorcat de o locomotivă",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/vagon/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_vagon",
+      "dst": "n_v1_10_roata",
+      "relation": "related_to",
+      "label_ro": "vagonul feroviar are roți",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/vagon/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_vagon",
+      "dst": "n_v1_16_sina",
+      "relation": "related_to",
+      "label_ro": "poate rula pe șine",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/vagon/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_autocar",
+      "dst": "n_v4soc_autobuz",
+      "relation": "is_a",
+      "label_ro": "este un autobuz pentru călătorii mai lungi",
+      "verdict": "accept",
+      "rationale": "The selected transport taxonomy treats a coach as a bus for longer-distance seated travel.",
+      "sources": [
+        "https://legislatie.just.ro/Public/DetaliiDocument/125769"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_autocar",
+      "dst": "n_v1_9_sofer",
+      "relation": "related_to",
+      "label_ro": "este condus de un șofer",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/autocar/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_autocar",
+      "dst": "n_v1_10_roata",
+      "relation": "related_to",
+      "label_ro": "are roți pentru deplasare",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/autocar/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_autocar",
+      "dst": "n_v1_8_vacanta",
+      "relation": "related_to",
+      "label_ro": "poate transporta călători în vacanță",
+      "verdict": "accept",
+      "rationale": "The operator offers tourist/excursion coach journeys; vacation transport is only possible.",
+      "sources": [
+        "https://transportautocar.ro/"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_scuter",
+      "dst": "n_v24_transport_personal_motocicleta",
+      "relation": "related_to",
+      "label_ro": "este un vehicul cu două roți asemănător unei motociclete ușoare",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/scuter/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_scuter",
+      "dst": "n_v1_10_roata",
+      "relation": "related_to",
+      "label_ro": "are roți pentru deplasare",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/scuter/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_scuter",
+      "dst": "n_v1_16_ghidon",
+      "relation": "related_to",
+      "label_ro": "este dirijat cu ghidonul",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/scuter/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_scuter",
+      "dst": "n_v4sti_metal",
+      "relation": "related_to",
+      "label_ro": "poate avea cadru metalic",
+      "verdict": "modify",
+      "rationale": "The model-specific manufacturer describes a steel scooter frame.",
+      "sources": [
+        "https://www.piaggio.com/ro_RO/models/liberty/liberty-50-4-timpi-3-valve-pe-cilindru-2025/"
+      ],
+      "required_changes": [
+        {
+          "action": "add_source_binding",
+          "src": "n_v1_16_scuter",
+          "dst": "n_v4sti_metal",
+          "relation": "related_to",
+          "add_url": "https://www.piaggio.com/ro_RO/models/liberty/liberty-50-4-timpi-3-valve-pe-cilindru-2025/",
+          "paraphrase": "Producătorul descrie concret scuterul Liberty cu ghidon și cadru din oțel.",
+          "instruction": "Bind the metal-frame claim to this readable model-specific manufacturer page. The generic Beverly/history URLs returned only titles during this review, so do not rely on their unobserved bodies as the material proof."
+        }
+      ]
+    },
+    {
+      "src": "n_v1_16_elicopter",
+      "dst": "n_v2sti_avion",
+      "relation": "related_to",
+      "label_ro": "este un aparat de zbor, asemenea avionului",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/elicopter/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_elicopter",
+      "dst": "n_v4sti_aer",
+      "relation": "related_to",
+      "label_ro": "se deplasează prin aer",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/elicopter/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_elicopter",
+      "dst": "n_v24_transport_terminals_aeroport",
+      "relation": "related_to",
+      "label_ro": "poate utiliza un aeroport",
+      "verdict": "accept",
+      "rationale": "The aviation operator offers helicopter service through airports/its private terminal.",
+      "sources": [
+        "https://www.tiriacgroup.ro/aviatie/",
+        "https://tiriacair.ro/ro"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_elicopter",
+      "dst": "n_v1_16_hangar",
+      "relation": "related_to",
+      "label_ro": "poate fi adăpostit într-un hangar",
+      "verdict": "accept",
+      "rationale": "The hangar builder explicitly accommodates helicopters.",
+      "sources": [
+        "https://alphasteel.ro/hangare/"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_hangar",
+      "dst": "n_v2sti_avion",
+      "relation": "related_to",
+      "label_ro": "poate adăposti avioane",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/hangar/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_hangar",
+      "dst": "n_v24_transport_terminals_aeroport",
+      "relation": "related_to",
+      "label_ro": "poate face parte dintr-un aeroport",
+      "verdict": "accept",
+      "rationale": "The airport operator provides hangaring; membership is possible, not universal.",
+      "sources": [
+        "https://tiriacair.ro/ro"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_hangar",
+      "dst": "n_v4sti_metal",
+      "relation": "related_to",
+      "label_ro": "poate avea structură metalică",
+      "verdict": "accept",
+      "rationale": "The builder specifies metal-structure aircraft hangars.",
+      "sources": [
+        "https://alphasteel.ro/hangare/"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_alee",
+      "dst": "n_v4geo_drum",
+      "relation": "is_a",
+      "label_ro": "este un drum îngust amenajat pentru trecere",
+      "verdict": "accept",
+      "rationale": "The selected concrete source is included in the actual target class; no metaphor or alias equivalence asserted.",
+      "sources": [
+        "https://dexonline.ro/definitie/alee/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_alee",
+      "dst": "n_v4geo_strada",
+      "relation": "related_to",
+      "label_ro": "poate lega o stradă de un parc",
+      "verdict": "accept",
+      "rationale": "The architectural park plan links its pedestrian path to named streets.",
+      "sources": [
+        "https://oar.archi/concursuri/oar/2011-parcul-din-livada-postei-brasov/galerie-proiecte/256-md0736-arh-dascalu-stefan-dragos-finalist/"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_alee",
+      "dst": "n_v24_places_public_parc",
+      "relation": "related_to",
+      "label_ro": "poate fi amenajată într-un parc",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/alee/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_alee",
+      "dst": "n_v28_nature_material_piatra",
+      "relation": "related_to",
+      "label_ro": "poate avea suprafața pietruită",
+      "verdict": "accept",
+      "rationale": "The municipal park announcement explicitly describes natural-stone pedestrian alleys.",
+      "sources": [
+        "https://agerpres.ro/comunicate/2024/09/11/comunicat-de-presa---primaria-targu-mures--1353090"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_pasarela",
+      "dst": "n_v1_16_pod",
+      "relation": "is_a",
+      "label_ro": "este un pod destinat pietonilor",
+      "verdict": "accept",
+      "rationale": "The selected concrete source is included in the actual target class; no metaphor or alias equivalence asserted.",
+      "sources": [
+        "https://dexonline.ro/definitie/pasarel%C4%83/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_pasarela",
+      "dst": "n_v29_city_street_trotuar",
+      "relation": "related_to",
+      "label_ro": "poate continua un traseu pietonal de pe trotuar",
+      "verdict": "accept",
+      "rationale": "Independently retrieved municipal indexed text, printed pages17/55 and33/55, describes adjacent/perimeter sidewalks at access nodes; no physical204-page PDF index inferred.",
+      "sources": [
+        "https://molppl.ro/app/files/hcl--2009-2023/2019/2019-hcl-033.pdf"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_pasarela",
+      "dst": "n_v4geo_drum",
+      "relation": "related_to",
+      "label_ro": "poate permite traversarea unui drum",
+      "verdict": "accept",
+      "rationale": "MAI describes pedestrian overpasses across DN1; no disputed Popești crossing is asserted.",
+      "sources": [
+        "https://www.mai.gov.ro/cresterea-sigurantei-rutiere-si-fluidizarea-traficului-pe-dn1/"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_pasarela",
+      "dst": "n_v4sti_metal",
+      "relation": "related_to",
+      "label_ro": "poate fi construită din metal",
+      "verdict": "accept",
+      "rationale": "The municipality explicitly describes the pedestrian bridge metal structure.",
+      "sources": [
+        "https://ps4.ro/comunicate-de-presa/pasarela-pietonala-de-aproape-100-de-tone-care-leaga-sectorul-4-de-orasul-popesti-leordeni-a-fost-montata-astazi/"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_tunel",
+      "dst": "n_v2geo_munte",
+      "relation": "related_to",
+      "label_ro": "poate străbate un munte",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/tunel/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_tunel",
+      "dst": "n_v4geo_drum",
+      "relation": "related_to",
+      "label_ro": "poate permite trecerea unui drum",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/tunel/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_tunel",
+      "dst": "n_v24_transport_rail_metrou",
+      "relation": "related_to",
+      "label_ro": "poate permite circulația metroului",
+      "verdict": "accept",
+      "rationale": "The article explicitly distinguishes railway and metro transport tunnels.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Tunel"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_tunel",
+      "dst": "n_v24_transport_rail_tren",
+      "relation": "related_to",
+      "label_ro": "poate permite circulația trenurilor",
+      "verdict": "accept",
+      "rationale": "The article explicitly distinguishes railway and metro transport tunnels.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Tunel"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_pod",
+      "dst": "n_v2geo_rau",
+      "relation": "related_to",
+      "label_ro": "poate permite traversarea unui râu",
+      "verdict": "accept",
+      "rationale": "The bridge definition explicitly covers crossing and possible construction material.",
+      "sources": [
+        "https://dexonline.ro/definitie/pod/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_pod",
+      "dst": "n_v4geo_drum",
+      "relation": "related_to",
+      "label_ro": "poate continua un drum peste un obstacol",
+      "verdict": "accept",
+      "rationale": "The bridge definition explicitly covers crossing and possible construction material.",
+      "sources": [
+        "https://dexonline.ro/definitie/pod/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_pod",
+      "dst": "n_v1_3_material_lemn",
+      "relation": "related_to",
+      "label_ro": "poate fi construit din lemn",
+      "verdict": "accept",
+      "rationale": "The bridge definition explicitly covers crossing and possible construction material.",
+      "sources": [
+        "https://dexonline.ro/definitie/pod/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_pod",
+      "dst": "n_v4sti_metal",
+      "relation": "related_to",
+      "label_ro": "poate fi construit din metal",
+      "verdict": "accept",
+      "rationale": "The bridge definition explicitly covers crossing and possible construction material.",
+      "sources": [
+        "https://dexonline.ro/definitie/pod/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_parapet",
+      "dst": "n_v1_16_pod",
+      "relation": "related_to",
+      "label_ro": "poate proteja marginea unui pod",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/parapet/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_parapet",
+      "dst": "n_v4geo_drum",
+      "relation": "related_to",
+      "label_ro": "poate proteja marginea unui drum",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/parapet/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_parapet",
+      "dst": "n_v1_3_material_lemn",
+      "relation": "related_to",
+      "label_ro": "poate fi construit din lemn",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/parapet/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_parapet",
+      "dst": "n_v4sti_metal",
+      "relation": "related_to",
+      "label_ro": "poate fi construit din metal",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/parapet/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_balustrada",
+      "dst": "n_v24_home_outdoor_balcon",
+      "relation": "related_to",
+      "label_ro": "poate proteja marginea unui balcon",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/balustrad%C4%83/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_balustrada",
+      "dst": "n_v1_3_material_lemn",
+      "relation": "related_to",
+      "label_ro": "poate fi făcută din lemn",
+      "verdict": "accept",
+      "rationale": "The completed railing example has an oak handrail and brass parts; hand support is functional inference.",
+      "sources": [
+        "https://www.superfaber.ro/balustrada-b1"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_balustrada",
+      "dst": "n_v4sti_metal",
+      "relation": "related_to",
+      "label_ro": "poate fi făcută din metal",
+      "verdict": "accept",
+      "rationale": "The completed railing example has an oak handrail and brass parts; hand support is functional inference.",
+      "sources": [
+        "https://www.superfaber.ro/balustrada-b1"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_balustrada",
+      "dst": "n_v24_body_limbs_mana",
+      "relation": "related_to",
+      "label_ro": "poate oferi sprijin mâinii",
+      "verdict": "accept",
+      "rationale": "The completed railing example has an oak handrail and brass parts; hand support is functional inference.",
+      "sources": [
+        "https://www.superfaber.ro/balustrada-b1"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_rampa",
+      "dst": "n_v4geo_drum",
+      "relation": "related_to",
+      "label_ro": "poate forma o porțiune înclinată a unui drum",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/ramp%C4%83/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_rampa",
+      "dst": "n_v29_city_street_trotuar",
+      "relation": "related_to",
+      "label_ro": "poate facilita accesul pe un trotuar",
+      "verdict": "accept",
+      "rationale": "The school infrastructure study describes sidewalk/path level differences taken up by ramps.",
+      "sources": [
+        "https://primarie6.ro/primarie_sector6/sites/default/files/2024-02/Anexa%201%20%20final%20%20SF_COLEGIUL%20MOISIL_HG907_rev08_15.02.2024.pdf"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_rampa",
+      "dst": "n_v1_3_material_lemn",
+      "relation": "related_to",
+      "label_ro": "poate fi construită din lemn",
+      "verdict": "accept",
+      "rationale": "The court procurement document explicitly replaces an existing wooden access ramp.",
+      "sources": [
+        "https://portal.just.ro/113/Documents/Solicitare%20oferte%20ramp%C4%83%20acces.PDF"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_rampa",
+      "dst": "n_v4sti_metal",
+      "relation": "related_to",
+      "label_ro": "poate fi construită din metal",
+      "verdict": "accept",
+      "rationale": "The maker specifies aluminium access ramps.",
+      "sources": [
+        "https://schela-mobila.ro/rampa-acces-aluminiu"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_bariera",
+      "dst": "n_v1_10_gard",
+      "relation": "related_to",
+      "label_ro": "poate completa un gard la intrare",
+      "verdict": "accept",
+      "rationale": "The access-control supplier describes complementary fence and barrier use, without requiring either.",
+      "sources": [
+        "https://toptrafic.ro/b/semnalare-lucrari/bariere-si-garduri-pentru-imprejmuirea-lucrarilor-solutii-eficiente-si-sigure"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_bariera",
+      "dst": "n_v4geo_drum",
+      "relation": "related_to",
+      "label_ro": "poate opri accesul pe un drum",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/barier%C4%83/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_bariera",
+      "dst": "n_v1_3_material_lemn",
+      "relation": "related_to",
+      "label_ro": "poate fi făcută din lemn",
+      "verdict": "accept",
+      "rationale": "The same exact-headword DN395976 concrete-bar sense explicitly includes wood.",
+      "sources": [
+        "https://dexonline.ro/definitie/barier%C4%83/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_bariera",
+      "dst": "n_v4sti_metal",
+      "relation": "related_to",
+      "label_ro": "poate fi făcută din metal",
+      "verdict": "accept",
+      "rationale": "The concrete access-barrier product is expressly metal.",
+      "sources": [
+        "https://semnalisticaromania.ro/index.php?product_id=2236&route=product%2Fproduct"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_garaj",
+      "dst": "n_v24_transport_personal_masina",
+      "relation": "related_to",
+      "label_ro": "poate adăposti o mașină",
+      "verdict": "accept",
+      "rationale": "The maker documents a matching vehicle shelter, entrance or own roof; the caption remains possible.",
+      "sources": [
+        "https://www.maritom.ro/"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_garaj",
+      "dst": "n_v24_transport_personal_motocicleta",
+      "relation": "related_to",
+      "label_ro": "poate adăposti o motocicletă",
+      "verdict": "accept",
+      "rationale": "The maker documents a matching vehicle shelter, entrance or own roof; the caption remains possible.",
+      "sources": [
+        "https://www.garajemetalice.ro/produs/garaj-pentru-motocicleta-5x2-m/"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_garaj",
+      "dst": "n_v4via_usa",
+      "relation": "related_to",
+      "label_ro": "poate avea o ușă de acces",
+      "verdict": "accept",
+      "rationale": "The maker documents a matching vehicle shelter, entrance or own roof; the caption remains possible.",
+      "sources": [
+        "https://www.maritom.ro/"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_garaj",
+      "dst": "n_v24_home_structure_acoperis",
+      "relation": "related_to",
+      "label_ro": "poate avea un acoperiș propriu",
+      "verdict": "accept",
+      "rationale": "The maker documents a matching vehicle shelter, entrance or own roof; the caption remains possible.",
+      "sources": [
+        "https://www.maritom.ro/"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_benzina",
+      "dst": "n_v1_16_combustibil",
+      "relation": "is_a",
+      "label_ro": "este un combustibil",
+      "verdict": "accept",
+      "rationale": "The selected concrete source is included in the actual target class; no metaphor or alias equivalence asserted.",
+      "sources": [
+        "https://dexonline.ro/definitie/benzin%C4%83/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_benzina",
+      "dst": "n_v1_16_motor",
+      "relation": "related_to",
+      "label_ro": "poate alimenta un motor",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/benzin%C4%83/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_benzina",
+      "dst": "n_v3sti_energie",
+      "relation": "related_to",
+      "label_ro": "poate elibera energie prin ardere",
+      "verdict": "accept",
+      "rationale": "The school physics text connects burning these fuels with thermal energy.",
+      "sources": [
+        "https://catalog.manualedigitaleart.ro/art-fizica-7-2024/v1/art-fizica-7-2024.pdf"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_benzina",
+      "dst": "n_v4sti_aer",
+      "relation": "related_to",
+      "label_ro": "se amestecă cu aerul în motoare cu ardere internă",
+      "verdict": "accept",
+      "rationale": "The manufacturer describes the compressed fuel-air mixture in a gasoline engine.",
+      "sources": [
+        "https://www.boschaftermarket.com/xrm/media/images/country_specific/ro/services_and_support_3/news_10/25_5_influencer_15/109007_bosch_editorial_spark-plugs_a4_ro.pdf"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_benzina",
+      "dst": "n_v24_transport_personal_masina",
+      "relation": "related_to",
+      "label_ro": "poate alimenta motorul unei mașini",
+      "verdict": "accept",
+      "rationale": "The vehicle maker explicitly distinguishes gasoline/diesel car engines.",
+      "sources": [
+        "https://www.toyota.ro/electrification/hybrid-cars/tipuri-de-autovehicule-hibride-si-electrice"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_motorina",
+      "dst": "n_v1_16_combustibil",
+      "relation": "is_a",
+      "label_ro": "este un combustibil",
+      "verdict": "accept",
+      "rationale": "The selected concrete source is included in the actual target class; no metaphor or alias equivalence asserted.",
+      "sources": [
+        "https://dexonline.ro/definitie/motorin%C4%83/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_motorina",
+      "dst": "n_v1_16_motor",
+      "relation": "related_to",
+      "label_ro": "poate alimenta un motor diesel",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/motorin%C4%83/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_motorina",
+      "dst": "n_v3sti_energie",
+      "relation": "related_to",
+      "label_ro": "poate elibera energie prin ardere",
+      "verdict": "accept",
+      "rationale": "The school physics text connects burning these fuels with thermal energy.",
+      "sources": [
+        "https://catalog.manualedigitaleart.ro/art-fizica-7-2024/v1/art-fizica-7-2024.pdf"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_motorina",
+      "dst": "n_v4sti_aer",
+      "relation": "related_to",
+      "label_ro": "arde în contact cu aerul în motorul diesel",
+      "verdict": "modify",
+      "rationale": "The diesel manufacturer describes air intake, oxygen and fuel combustion.",
+      "sources": [
+        "https://www.cummins.com/ro-eu/components/turbochargers/how-a-turbocharger-works"
+      ],
+      "required_changes": [
+        {
+          "action": "add_source_binding",
+          "src": "n_v1_16_motorina",
+          "dst": "n_v4sti_aer",
+          "relation": "related_to",
+          "add_url": "https://www.cummins.com/ro-eu/components/turbochargers/how-a-turbocharger-works",
+          "paraphrase": "Producătorul explică admisia aerului, aportul oxigenului și arderea combustibilului în motorul diesel.",
+          "instruction": "Add this independently read manufacturer explanation to the air/combustion edge and item evidence. No caption or topology change is required."
+        }
+      ]
+    },
+    {
+      "src": "n_v1_16_motorina",
+      "dst": "n_v24_transport_personal_masina",
+      "relation": "related_to",
+      "label_ro": "poate alimenta motorul diesel al unei mașini",
+      "verdict": "accept",
+      "rationale": "The vehicle maker explicitly distinguishes gasoline/diesel car engines.",
+      "sources": [
+        "https://www.toyota.ro/electrification/hybrid-cars/tipuri-de-autovehicule-hibride-si-electrice"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_combustibil",
+      "dst": "n_v4sti_foc",
+      "relation": "related_to",
+      "label_ro": "poate întreține arderea unui foc",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/combustibil/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_combustibil",
+      "dst": "n_v3sti_energie",
+      "relation": "related_to",
+      "label_ro": "poate elibera energie prin ardere",
+      "verdict": "accept",
+      "rationale": "The physics text explicitly links fuel combustion to energy production.",
+      "sources": [
+        "https://catalog.manualedigitaleart.ro/art-fizica-7-2024/v1/art-fizica-7-2024.pdf"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_combustibil",
+      "dst": "n_v4sti_aer",
+      "relation": "related_to",
+      "label_ro": "poate arde folosind oxigenul din aer",
+      "verdict": "modify",
+      "rationale": "The manufacturer describes combustion air; generic filters prose is not treated as that proof.",
+      "sources": [
+        "https://www.cummins.com/ro-eu/components/turbochargers/how-a-turbocharger-works"
+      ],
+      "required_changes": [
+        {
+          "action": "add_source_binding",
+          "src": "n_v1_16_combustibil",
+          "dst": "n_v4sti_aer",
+          "relation": "related_to",
+          "add_url": "https://www.cummins.com/ro-eu/components/turbochargers/how-a-turbocharger-works",
+          "paraphrase": "Producătorul explică admisia aerului, aportul oxigenului și arderea combustibilului în motorul diesel.",
+          "instruction": "Add this independently read manufacturer explanation to the air/combustion edge and item evidence. No caption or topology change is required."
+        }
+      ]
+    },
+    {
+      "src": "n_v1_16_combustibil",
+      "dst": "n_v1_3_material_lemn",
+      "relation": "related_to",
+      "label_ro": "lemnul poate fi folosit drept combustibil",
+      "verdict": "accept",
+      "rationale": "The fire-service account treats wood used in stoves as combustible; no fire-use instructions are staged.",
+      "sources": [
+        "https://isuhr.igsu.ro/comunicate-de-presa/protejeaza-te-de-incendii-in-sezonul-rece%21-135"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_motor",
+      "dst": "n_v3sti_electricitate",
+      "relation": "related_to",
+      "label_ro": "un motor electric folosește electricitate",
+      "verdict": "accept",
+      "rationale": "The exact noun entry explicitly defines electric motors as converting electrical energy.",
+      "sources": [
+        "https://dexonline.ro/definitie/motor/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_motor",
+      "dst": "n_v3sti_energie",
+      "relation": "related_to",
+      "label_ro": "transformă energie în lucru mecanic",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/motor/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_motor",
+      "dst": "n_v4sti_metal",
+      "relation": "related_to",
+      "label_ro": "poate avea piese metalice",
+      "verdict": "accept",
+      "rationale": "The manufacturer lists aluminium/cast-iron motor housings; possible parts only.",
+      "sources": [
+        "https://www.hongmamotor.com/ro/products"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_motor",
+      "dst": "n_v4sti_aer",
+      "relation": "related_to",
+      "label_ro": "un motor cu ardere internă poate utiliza aer",
+      "verdict": "modify",
+      "rationale": "The manufacturer describes combustion air; generic filters prose is not treated as that proof.",
+      "sources": [
+        "https://www.cummins.com/ro-eu/components/turbochargers/how-a-turbocharger-works"
+      ],
+      "required_changes": [
+        {
+          "action": "add_source_binding",
+          "src": "n_v1_16_motor",
+          "dst": "n_v4sti_aer",
+          "relation": "related_to",
+          "add_url": "https://www.cummins.com/ro-eu/components/turbochargers/how-a-turbocharger-works",
+          "paraphrase": "Producătorul explică admisia aerului, aportul oxigenului și arderea combustibilului în motorul diesel.",
+          "instruction": "Add this independently read manufacturer explanation to the air/combustion edge and item evidence. No caption or topology change is required."
+        }
+      ]
+    },
+    {
+      "src": "n_v1_16_frana",
+      "dst": "n_v24_transport_personal_bicicleta",
+      "relation": "related_to",
+      "label_ro": "poate încetini deplasarea unei biciclete",
+      "verdict": "accept",
+      "rationale": "The bicycle maker manual describes wheel brakes; slowing the wheel is functional inference.",
+      "sources": [
+        "https://www.decathlon.ro/static/LP/servicii/garantie-biciclete-btwin/Ghidul_utilizatorului_informatii_referitoare_la_garantie_pe_viata.pdf"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_frana",
+      "dst": "n_v24_transport_personal_motocicleta",
+      "relation": "related_to",
+      "label_ro": "poate încetini deplasarea unei motociclete",
+      "verdict": "accept",
+      "rationale": "The motor-scooter maker specifies wheel brake discs, consistent with the generic motorcycle class.",
+      "sources": [
+        "https://wlassets.vespa.com/wlassets/vespa/ro/tech_spec/GTV/Vespa_Gtv_Officina8_310_tech_spec_EN_RO-%281%29/original/Vespa_Gtv_Officina8_310_tech_spec_EN_RO%2B%281%29.pdf?1751289052234="
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_frana",
+      "dst": "n_v24_transport_personal_masina",
+      "relation": "related_to",
+      "label_ro": "poate încetini deplasarea unei mașini",
+      "verdict": "accept",
+      "rationale": "The car maker explicitly describes brake operation.",
+      "sources": [
+        "https://www.renault.ro/intrebari-frecvente/vehicule-electrice/functionarea-vehiculului-electric.html"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_frana",
+      "dst": "n_v1_10_roata",
+      "relation": "related_to",
+      "label_ro": "poate încetini rotirea unei roți",
+      "verdict": "accept",
+      "rationale": "The bicycle maker manual describes wheel brakes; slowing the wheel is functional inference.",
+      "sources": [
+        "https://www.decathlon.ro/static/LP/servicii/garantie-biciclete-btwin/Ghidul_utilizatorului_informatii_referitoare_la_garantie_pe_viata.pdf"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_pedala",
+      "dst": "n_v24_transport_personal_bicicleta",
+      "relation": "related_to",
+      "label_ro": "poate fi folosită pentru propulsarea unei biciclete",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/pedal%C4%83/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_pedala",
+      "dst": "n_v24_transport_personal_masina",
+      "relation": "related_to",
+      "label_ro": "poate acționa o comandă a unei mașini",
+      "verdict": "accept",
+      "rationale": "The car maker describes foot-operated brake and accelerator pedals.",
+      "sources": [
+        "https://www.renault.ro/intrebari-frecvente/vehicule-electrice/functionarea-vehiculului-electric.html"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_pedala",
+      "dst": "n_v24_body_limbs_picior",
+      "relation": "related_to",
+      "label_ro": "este acționată cu piciorul",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/pedal%C4%83/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_pedala",
+      "dst": "n_v1_16_frana",
+      "relation": "related_to",
+      "label_ro": "poate acționa o frână",
+      "verdict": "accept",
+      "rationale": "The car maker describes foot-operated brake and accelerator pedals.",
+      "sources": [
+        "https://www.renault.ro/intrebari-frecvente/vehicule-electrice/functionarea-vehiculului-electric.html"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_janta",
+      "dst": "n_v1_10_roata",
+      "relation": "part_of",
+      "label_ro": "face parte dintr-o roată de vehicul",
+      "verdict": "accept",
+      "rationale": "The physical part/ensemble relationship is supported; conditional membership is retained where stated.",
+      "sources": [
+        "https://dexonline.ro/definitie/jant%C4%83/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_janta",
+      "dst": "n_v1_10_anvelopa",
+      "relation": "related_to",
+      "label_ro": "susține anvelopa",
+      "verdict": "accept",
+      "rationale": "The bicycle wheel maker specifies rim material and tyre fit; casing is not conflated with a full pneu assembly.",
+      "sources": [
+        "https://www.decathlon.ro/p/roata-fata-mtb-26-perete-dublu-franare-tip-v-brake-si-za-rapida/_/R-p-196997",
+        "https://www.decathlon.ro/p/roata-fata-bicicleta-polivalenta-28-perete-dublu-frana-pe-disc-negru/_/R-p-177377"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_janta",
+      "dst": "n_v24_transport_personal_bicicleta",
+      "relation": "related_to",
+      "label_ro": "poate face parte din roata unei biciclete",
+      "verdict": "accept",
+      "rationale": "The bicycle wheel maker specifies rim material and tyre fit; casing is not conflated with a full pneu assembly.",
+      "sources": [
+        "https://www.decathlon.ro/p/roata-fata-mtb-26-perete-dublu-franare-tip-v-brake-si-za-rapida/_/R-p-196997",
+        "https://www.decathlon.ro/p/roata-fata-bicicleta-polivalenta-28-perete-dublu-frana-pe-disc-negru/_/R-p-177377"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_janta",
+      "dst": "n_v4sti_metal",
+      "relation": "related_to",
+      "label_ro": "poate fi fabricată din metal",
+      "verdict": "accept",
+      "rationale": "The bicycle wheel maker specifies rim material and tyre fit; casing is not conflated with a full pneu assembly.",
+      "sources": [
+        "https://www.decathlon.ro/p/roata-fata-mtb-26-perete-dublu-franare-tip-v-brake-si-za-rapida/_/R-p-196997",
+        "https://www.decathlon.ro/p/roata-fata-bicicleta-polivalenta-28-perete-dublu-frana-pe-disc-negru/_/R-p-177377"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_spita",
+      "dst": "n_v1_10_roata",
+      "relation": "part_of",
+      "label_ro": "poate face parte dintr-o roată de vehicul",
+      "verdict": "accept",
+      "rationale": "The physical part/ensemble relationship is supported; conditional membership is retained where stated.",
+      "sources": [
+        "https://dexonline.ro/definitie/spi%C8%9B%C4%83/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_spita",
+      "dst": "n_v24_transport_personal_bicicleta",
+      "relation": "related_to",
+      "label_ro": "poate face parte din roata unei biciclete",
+      "verdict": "accept",
+      "rationale": "The bicycle wheel product identifies steel spokes.",
+      "sources": [
+        "https://www.decathlon.ro/p/roata-fata-mtb-26-perete-dublu-franare-tip-v-brake-si-za-rapida/_/R-p-196997"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_spita",
+      "dst": "n_v24_transport_personal_motocicleta",
+      "relation": "related_to",
+      "label_ro": "poate face parte din roata unei motociclete",
+      "verdict": "accept",
+      "rationale": "The motorcycle maker explicitly describes cross-spoked wheels.",
+      "sources": [
+        "https://www.bmw-motorrad.ro/ro/models/adventure/r1300gs-adventure.html"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_spita",
+      "dst": "n_v4sti_metal",
+      "relation": "related_to",
+      "label_ro": "poate fi fabricată din metal",
+      "verdict": "accept",
+      "rationale": "Actual spoke examples specify stainless steel.",
+      "sources": [
+        "https://www.decathlon.ro/p/roata-fata-mtb-26-perete-dublu-franare-tip-v-brake-si-za-rapida/_/R-p-196997",
+        "https://www.bmw-motorrad.ro/ro/models/adventure/r1300gs-adventure.html"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_ghidon",
+      "dst": "n_v24_transport_personal_bicicleta",
+      "relation": "related_to",
+      "label_ro": "poate dirija roata din față a unei biciclete",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/ghidon/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_ghidon",
+      "dst": "n_v24_transport_personal_motocicleta",
+      "relation": "related_to",
+      "label_ro": "poate dirija roata din față a unei motociclete",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/ghidon/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_ghidon",
+      "dst": "n_v24_body_limbs_mana",
+      "relation": "related_to",
+      "label_ro": "este manevrat cu mâinile",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/ghidon/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_ghidon",
+      "dst": "n_v4sti_metal",
+      "relation": "related_to",
+      "label_ro": "poate fi fabricat din metal",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/ghidon/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_sa",
+      "dst": "n_v24_transport_personal_bicicleta",
+      "relation": "related_to",
+      "label_ro": "poate fi scaunul unei biciclete",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/%C8%99a/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_sa",
+      "dst": "n_v24_transport_personal_motocicleta",
+      "relation": "related_to",
+      "label_ro": "poate fi scaunul unei motociclete",
+      "verdict": "accept",
+      "rationale": "The motorcycle maker documents its riding saddle.",
+      "sources": [
+        "https://www.bmw-motorrad.ro/ro/models/adventure/r1250gs/accessories.html"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_sa",
+      "dst": "n_v30_animal_farm_cal",
+      "relation": "related_to",
+      "label_ro": "poate fi pusă pe un cal pentru călărie",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/%C8%99a/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_sa",
+      "dst": "n_v4sti_metal",
+      "relation": "related_to",
+      "label_ro": "unele șei de bicicletă au suporturi metalice",
+      "verdict": "accept",
+      "rationale": "The saddle maker identifies steel rails/supports; the whole saddle is not declared metal.",
+      "sources": [
+        "https://www.decathlon.ro/p/sa-210-mm-270-mm-sina-otel-bicicleta-de-oras-maner/_/R-p-384389"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_portbagaj",
+      "dst": "n_v24_transport_personal_masina",
+      "relation": "related_to",
+      "label_ro": "poate fi compartimentul de bagaje al unei mașini",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/portbagaj/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_portbagaj",
+      "dst": "n_v24_transport_personal_motocicleta",
+      "relation": "related_to",
+      "label_ro": "poate fi montat pe o motocicletă pentru bagaje",
+      "verdict": "accept",
+      "rationale": "The vehicle-specific maker documents a luggage rack/storage unit.",
+      "sources": [
+        "https://www.bmw-motorrad.ro/ro/models/adventure/r1250gs/accessories.html"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_portbagaj",
+      "dst": "n_v24_transport_personal_bicicleta",
+      "relation": "related_to",
+      "label_ro": "poate fi montat pe o bicicletă pentru bagaje",
+      "verdict": "accept",
+      "rationale": "The vehicle-specific maker documents a luggage rack/storage unit.",
+      "sources": [
+        "https://www.decathlon.ro/p/portbagaj-aluminiu-bicicleta-de-oras-elops-27-kg/_/R-p-335374"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_portbagaj",
+      "dst": "n_v1_16_bagaj",
+      "relation": "related_to",
+      "label_ro": "servește la transportarea bagajelor",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/portbagaj/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_centura_de_siguranta",
+      "dst": "n_v24_transport_personal_masina",
+      "relation": "related_to",
+      "label_ro": "poate proteja ocupanții unei mașini",
+      "verdict": "accept",
+      "rationale": "Exact-headword MDA2 sense9 and MDN454474 explicitly describe the automotive occupant restraint.",
+      "sources": [
+        "https://dexonline.ro/definitie/centur%C4%83/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_centura_de_siguranta",
+      "dst": "n_v24_transport_road_camion",
+      "relation": "related_to",
+      "label_ro": "poate proteja ocupanții unui camion",
+      "verdict": "accept",
+      "rationale": "The truck maker or bus procurement identifies occupant seat restraints for the named vehicle.",
+      "sources": [
+        "https://www.volvotrucks.ro/ro-ro/news/press-releases/2019/jun/pressrelease-190727.html"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_centura_de_siguranta",
+      "dst": "n_v4soc_autobuz",
+      "relation": "related_to",
+      "label_ro": "unele autobuze au centuri de siguranță",
+      "verdict": "accept",
+      "rationale": "The truck maker or bus procurement identifies occupant seat restraints for the named vehicle.",
+      "sources": [
+        "https://storage.mtender.gov.md/get/b25490ff-b21c-4f2d-86f0-1bbac637e015-1618406812048"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_centura_de_siguranta",
+      "dst": "n_v24_home_seating_scaun",
+      "relation": "related_to",
+      "label_ro": "poate menține ocupantul pe scaun",
+      "verdict": "accept",
+      "rationale": "Exact-headword MDA2 sense9 and MDN454474 explicitly describe the automotive occupant restraint.",
+      "sources": [
+        "https://dexonline.ro/definitie/centur%C4%83/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_casca_de_protectie",
+      "dst": "n_v24_transport_personal_bicicleta",
+      "relation": "related_to",
+      "label_ro": "poate proteja ciclistul",
+      "verdict": "accept",
+      "rationale": "The bicycle-helmet product documents the protective headgear use.",
+      "sources": [
+        "https://www.decathlon.ro/p/mp/rockbros/casca-de-bicicleta-reglabila/_/R-p-e27762c8-a72d-4641-bbea-1a84fbb9148a"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_casca_de_protectie",
+      "dst": "n_v24_transport_personal_motocicleta",
+      "relation": "related_to",
+      "label_ro": "poate proteja motociclistul",
+      "verdict": "accept",
+      "rationale": "Police school material explicitly names protective helmets for motor-scooter drivers; motorcycle use is the same protective-equipment class, not the headphone sense.",
+      "sources": [
+        "https://gl.politiaromana.ro/files/pages_files/25-10-09-09-49-32Ghid_educatie_rutiera_liceu.pdf"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_casca_de_protectie",
+      "dst": "n_v24_body_face_cap",
+      "relation": "related_to",
+      "label_ro": "protejează capul",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/casc%C4%83/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_casca_de_protectie",
+      "dst": "n_v1_16_scuter",
+      "relation": "related_to",
+      "label_ro": "poate proteja conducătorul unui scuter",
+      "verdict": "accept",
+      "rationale": "Police school material explicitly names protective helmets for motor-scooter drivers; motorcycle use is the same protective-equipment class, not the headphone sense.",
+      "sources": [
+        "https://gl.politiaromana.ro/files/pages_files/25-10-09-09-49-32Ghid_educatie_rutiera_liceu.pdf"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_caruta",
+      "dst": "n_v1_16_vehicul",
+      "relation": "is_a",
+      "label_ro": "este un vehicul cu tracțiune animală",
+      "verdict": "accept",
+      "rationale": "The selected concrete source is included in the actual target class; no metaphor or alias equivalence asserted.",
+      "sources": [
+        "https://dexonline.ro/definitie/c%C4%83ru%C8%9B%C4%83/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_caruta",
+      "dst": "n_v30_animal_farm_cal",
+      "relation": "related_to",
+      "label_ro": "poate fi trasă de un cal",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/c%C4%83ru%C8%9B%C4%83/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_caruta",
+      "dst": "n_v1_3_material_lemn",
+      "relation": "related_to",
+      "label_ro": "poate avea caroserie din lemn",
+      "verdict": "accept",
+      "rationale": "The national heritage catalogue identifies a cart body made of beech wood.",
+      "sources": [
+        "https://clasate.cimec.ro/Detaliu.asp?k=30374BB036104BCFABFA1913406505F3"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_caruta",
+      "dst": "n_v1_10_roata",
+      "relation": "related_to",
+      "label_ro": "are roți pentru deplasare",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/c%C4%83ru%C8%9B%C4%83/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v2sti_avion",
+      "dst": "n_v1_16_vehicul",
+      "relation": "is_a",
+      "label_ro": "este un vehicul aerian",
+      "verdict": "accept",
+      "rationale": "The selected concrete source is included in the actual target class; no metaphor or alias equivalence asserted.",
+      "sources": [
+        "https://dexonline.ro/definitie/vehicul/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v4soc_autobuz",
+      "dst": "n_v1_16_vehicul",
+      "relation": "is_a",
+      "label_ro": "este un vehicul rutier",
+      "verdict": "accept",
+      "rationale": "The selected concrete source is included in the actual target class; no metaphor or alias equivalence asserted.",
+      "sources": [
+        "https://dexonline.ro/definitie/vehicul/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v24_transport_personal_bicicleta",
+      "dst": "n_v1_16_vehicul",
+      "relation": "is_a",
+      "label_ro": "este un vehicul cu două roți",
+      "verdict": "accept",
+      "rationale": "The selected concrete source is included in the actual target class; no metaphor or alias equivalence asserted.",
+      "sources": [
+        "https://dexonline.ro/definitie/vehicul/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_bagaj",
+      "dst": "n_v1_8_rucsac",
+      "relation": "related_to",
+      "label_ro": "poate include un rucsac cu lucruri personale",
+      "verdict": "accept",
+      "rationale": "The excursion organiser lists a packed backpack/schoolbag among travel belongings.",
+      "sources": [
+        "https://adeona.ro/excursie-3-zile-clasa-elevi-bagaj-natura-munte-hai-cu-noi-in-excursie-cu-clasa/"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_bagaj",
+      "dst": "n_v23via_ghiozdan",
+      "relation": "related_to",
+      "label_ro": "poate include un ghiozdan cu lucruri personale",
+      "verdict": "accept",
+      "rationale": "The excursion organiser lists a packed backpack/schoolbag among travel belongings.",
+      "sources": [
+        "https://adeona.ro/excursie-3-zile-clasa-elevi-bagaj-natura-munte-hai-cu-noi-in-excursie-cu-clasa/"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_bagaj",
+      "dst": "n_v2sti_avion",
+      "relation": "related_to",
+      "label_ro": "poate fi transportat cu avionul",
+      "verdict": "accept",
+      "rationale": "The transport operator explicitly carries luggage; no baggage allowance/fee is imported.",
+      "sources": [
+        "https://www.tarom.ro/bagaje"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_bagaj",
+      "dst": "n_v24_transport_rail_tren",
+      "relation": "related_to",
+      "label_ro": "poate fi transportat cu trenul",
+      "verdict": "accept",
+      "rationale": "The transport operator explicitly carries luggage; no baggage allowance/fee is imported.",
+      "sources": [
+        "https://www.cfrcalatori.ro/intrebari-frecvente/"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v28_transport_water_vapor",
+      "dst": "n_v1_16_nava",
+      "relation": "is_a",
+      "label_ro": "este o navă",
+      "verdict": "accept",
+      "rationale": "The selected concrete source is included in the actual target class; no metaphor or alias equivalence asserted.",
+      "sources": [
+        "https://dexonline.ro/definitie/nav%C4%83/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_nava",
+      "dst": "n_v2soc_port",
+      "relation": "related_to",
+      "label_ro": "poate acosta într-un port",
+      "verdict": "accept",
+      "rationale": "Naval accounts give actual port/sea/ocean voyages; possibility rather than a universal itinerary.",
+      "sources": [
+        "https://www.navy.ro/eveniment.php?id=2480",
+        "https://www.navy.ro/eveniment.php?id=2421"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_nava",
+      "dst": "n_v3geo_mare",
+      "relation": "related_to",
+      "label_ro": "poate naviga pe mare",
+      "verdict": "accept",
+      "rationale": "Naval accounts give actual port/sea/ocean voyages; possibility rather than a universal itinerary.",
+      "sources": [
+        "https://www.navy.ro/eveniment.php?id=2480",
+        "https://www.navy.ro/eveniment.php?id=2421"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_nava",
+      "dst": "n_v3geo_ocean",
+      "relation": "related_to",
+      "label_ro": "poate naviga pe ocean",
+      "verdict": "accept",
+      "rationale": "Naval accounts give actual port/sea/ocean voyages; possibility rather than a universal itinerary.",
+      "sources": [
+        "https://www.navy.ro/eveniment.php?id=2480",
+        "https://www.navy.ro/eveniment.php?id=2421"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_corabie",
+      "dst": "n_v1_16_nava",
+      "relation": "is_a",
+      "label_ro": "este o navă",
+      "verdict": "accept",
+      "rationale": "The selected concrete source is included in the actual target class; no metaphor or alias equivalence asserted.",
+      "sources": [
+        "https://dexonline.ro/definitie/corabie/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_corabie",
+      "dst": "n_v2soc_port",
+      "relation": "related_to",
+      "label_ro": "poate acosta într-un port",
+      "verdict": "accept",
+      "rationale": "The sailing-ship class and naval sailing examples support the possible relation; modern training ship is not asserted as an identical historical artifact.",
+      "sources": [
+        "https://www.navy.ro/eveniment.php?id=2513",
+        "https://www.navy.ro/eveniment.php?id=2480",
+        "https://dexonline.ro/definitie/corabie/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_corabie",
+      "dst": "n_v3geo_mare",
+      "relation": "related_to",
+      "label_ro": "poate naviga pe mare",
+      "verdict": "accept",
+      "rationale": "The sailing-ship class and naval sailing examples support the possible relation; modern training ship is not asserted as an identical historical artifact.",
+      "sources": [
+        "https://www.navy.ro/eveniment.php?id=2513",
+        "https://www.navy.ro/eveniment.php?id=2480",
+        "https://dexonline.ro/definitie/corabie/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_corabie",
+      "dst": "n_v24_weather_air_vant",
+      "relation": "related_to",
+      "label_ro": "unele corăbii folosesc vântul pentru propulsie",
+      "verdict": "accept",
+      "rationale": "The sailing-ship class and naval sailing examples support the possible relation; modern training ship is not asserted as an identical historical artifact.",
+      "sources": [
+        "https://www.navy.ro/eveniment.php?id=2513",
+        "https://www.navy.ro/eveniment.php?id=2480",
+        "https://dexonline.ro/definitie/corabie/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_caiac",
+      "dst": "n_spt_canoe",
+      "relation": "related_to",
+      "label_ro": "este o ambarcațiune înrudită cu canoe",
+      "verdict": "accept",
+      "rationale": "The national federation distinguishes kayak/canoe equipment within recognised nautical sport.",
+      "sources": [
+        "https://www.kaiac.ro/kaiac-sprint"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_caiac",
+      "dst": "n_v4spo_sport",
+      "relation": "related_to",
+      "label_ro": "poate fi folosit în sporturi nautice",
+      "verdict": "accept",
+      "rationale": "The national federation distinguishes kayak/canoe equipment within recognised nautical sport.",
+      "sources": [
+        "https://www.kaiac.ro/kaiac-sprint"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_caiac",
+      "dst": "n_v2geo_lac",
+      "relation": "related_to",
+      "label_ro": "poate fi folosit pe un lac",
+      "verdict": "accept",
+      "rationale": "The maker explicitly describes this kayak paddle for sea, lakes and calm rivers.",
+      "sources": [
+        "https://www.decathlon.ro/p/padela-caiac-x500-carbon-plastic-demontabila-reglabila-2-parti-210-220cm/_/R-p-170906"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_caiac",
+      "dst": "n_v3geo_mare",
+      "relation": "related_to",
+      "label_ro": "unele caiace sunt folosite pe mare",
+      "verdict": "accept",
+      "rationale": "The maker explicitly describes this kayak paddle for sea, lakes and calm rivers.",
+      "sources": [
+        "https://www.decathlon.ro/p/padela-caiac-x500-carbon-plastic-demontabila-reglabila-2-parti-210-220cm/_/R-p-170906"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_pagaie",
+      "dst": "n_spt_canoe",
+      "relation": "related_to",
+      "label_ro": "poate propulsa o canoe",
+      "verdict": "accept",
+      "rationale": "The federation explicitly assigns the single-bladed pagaie to canoe sport.",
+      "sources": [
+        "https://www.kaiac.ro/kaiac-sprint"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_pagaie",
+      "dst": "n_v4spo_sport",
+      "relation": "related_to",
+      "label_ro": "poate fi folosită în sporturi nautice",
+      "verdict": "accept",
+      "rationale": "The federation explicitly assigns the single-bladed pagaie to canoe sport.",
+      "sources": [
+        "https://www.kaiac.ro/kaiac-sprint"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_pagaie",
+      "dst": "n_v24_body_limbs_mana",
+      "relation": "related_to",
+      "label_ro": "este manevrată cu mâinile",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/pagaie/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_pagaie",
+      "dst": "n_v1_3_material_lemn",
+      "relation": "related_to",
+      "label_ro": "poate fi fabricată din lemn",
+      "verdict": "accept",
+      "rationale": "The first-person Romanian craft record documents its wooden canoe paddle; a concrete possible material example.",
+      "sources": [
+        "https://alex-outdoor.blogspot.com/2012/08/pagaie-beaver-tail.html"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_carucior",
+      "dst": "n_v1_16_vehicul",
+      "relation": "is_a",
+      "label_ro": "este un vehicul mic pentru transport",
+      "verdict": "accept",
+      "rationale": "The selected concrete source is included in the actual target class; no metaphor or alias equivalence asserted.",
+      "sources": [
+        "https://dexonline.ro/definitie/c%C4%83rucior/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_carucior",
+      "dst": "n_v1_10_roata",
+      "relation": "related_to",
+      "label_ro": "se deplasează pe roți",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/c%C4%83rucior/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_carucior",
+      "dst": "n_v24_body_limbs_mana",
+      "relation": "related_to",
+      "label_ro": "poate fi împins cu mâinile",
+      "verdict": "accept",
+      "rationale": "The makers show manual wheeled carts and metal/aluminium frames; both claims are conditional.",
+      "sources": [
+        "https://www.raris.ro/index.php?ch=produs&id_produs=234",
+        "https://junama.ro/shop/cadru-carucior-junama-diamond-copper/"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_carucior",
+      "dst": "n_v4sti_metal",
+      "relation": "related_to",
+      "label_ro": "poate avea structură metalică",
+      "verdict": "accept",
+      "rationale": "The makers show manual wheeled carts and metal/aluminium frames; both claims are conditional.",
+      "sources": [
+        "https://www.raris.ro/index.php?ch=produs&id_produs=234",
+        "https://junama.ro/shop/cadru-carucior-junama-diamond-copper/"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_ancora",
+      "dst": "n_v28_transport_water_vapor",
+      "relation": "related_to",
+      "label_ro": "poate fixa un vapor pe loc",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/ancor%C4%83/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_ancora",
+      "dst": "n_v2soc_port",
+      "relation": "related_to",
+      "label_ro": "poate fi folosită la ancorare în zona unui port",
+      "verdict": "accept",
+      "rationale": "The nautical definition and naval anchorage accounts support holding a ship in water/port area, not universal berth practice.",
+      "sources": [
+        "https://www.navy.ro/eveniment.php?id=2480",
+        "https://www.navy.ro/eveniment.php?id=2421",
+        "https://dexonline.ro/definitie/ancor%C4%83/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_ancora",
+      "dst": "n_v4sti_metal",
+      "relation": "related_to",
+      "label_ro": "poate fi fabricată din metal",
+      "verdict": "accept",
+      "rationale": "Selected concrete definition/part/function supports the directed caption; actual endpoint sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/ancor%C4%83/json"
+      ],
+      "required_changes": []
+    },
+    {
+      "src": "n_v1_16_ancora",
+      "dst": "n_v3geo_mare",
+      "relation": "related_to",
+      "label_ro": "poate fixa o navă pe fundul mării",
+      "verdict": "accept",
+      "rationale": "The nautical definition and naval anchorage accounts support holding a ship in water/port area, not universal berth practice.",
+      "sources": [
+        "https://www.navy.ro/eveniment.php?id=2480",
+        "https://www.navy.ro/eveniment.php?id=2421",
+        "https://dexonline.ro/definitie/ancor%C4%83/json"
+      ],
+      "required_changes": []
+    }
+  ],
+  "preserved_holds": [
+    {
+      "id": "v116-rulota",
+      "word": "Rulotă",
+      "verdict": "hold",
+      "reason": "held: Remorcă reached its research cap; excluding that batch neighbor leaves only three distinct supported neighbors, below the four-link minimum.",
+      "instruction": "Preserve this original hold; excluded from selected item/edge acceptance and never resurrected by this review."
+    },
+    {
+      "id": "v116-remorca",
+      "word": "Remorcă",
+      "verdict": "hold",
+      "reason": "held: five-minute item research cap reached before the complete record was finalized",
+      "instruction": "Preserve this original hold; excluded from selected item/edge acceptance and never resurrected by this review."
+    },
+    {
+      "id": "v116-tractor",
+      "word": "Tractor",
+      "verdict": "hold",
+      "reason": "held: Remorcă reached its research cap; excluding that batch neighbor leaves three distinct neighbors and only one same-category neighbor, below the graph floors.",
+      "instruction": "Preserve this original hold; excluded from selected item/edge acceptance and never resurrected by this review."
+    },
+    {
+      "id": "v116-pneu",
+      "word": "Pneu",
+      "verdict": "hold",
+      "reason": "held: selected DEX09 and second-source sense is the assembly of casing plus air chamber; existing Anvelopă denotes the elastic casing alone. Exact substitutability is unresolved, so no synonym family is proposed for application.",
+      "instruction": "Preserve this original hold; excluded from selected item/edge acceptance and never resurrected by this review."
+    }
+  ],
+  "owner_direction": "not_landed / owner_review_later; preserve source packet for later owner review/application/landing.",
+  "factual_rulings": [
+    "Aliases are grammatical inputs or qualified/feminine inputs as indicated; no new lexical synonym family is accepted because Pneu remains held.",
+    "Corabie genitive corabiei and Pagaie invariant plural follow exact DOOM3 entries, with both explicit second-source disagreements recorded.",
+    "Combustibil/Motor noun entries are selected independently of their adjective entries; feminine combustibile and adjectival motori forms are excluded.",
+    "Bare cască/căști remain n_v4muz_casti; the qualified protection inputs neither steal nor move existing ownership.",
+    "Historical object relevance does not imply archaic-only word register; ordinary Corabie remains a defensible culture noun.",
+    "Source corrections require root application before a final reviewed-pool handoff; this review never approves installation or local merge."
+  ]
+}

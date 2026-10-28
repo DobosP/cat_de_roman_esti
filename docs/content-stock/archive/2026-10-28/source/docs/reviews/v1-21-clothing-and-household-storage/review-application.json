@@ -1,0 +1,468 @@
+{
+  "schema_version": 1,
+  "wave": "1.21",
+  "round": 1,
+  "reviewed_original_module_sha256": "e74b060acc832e08e3050ff0bf601546bc85ca90fb1cba8d38392635460dbb11",
+  "original_module_file": "reviewed-module.py.txt",
+  "final_module_path": "scripts/clothing_and_household_storage_v1_21_data.py",
+  "final_module_sha256": "c37cb08a6b5c947ee0024e512a14e5f48348edf30092e6a6d555746ce560fc34",
+  "review_sha256": {
+    "factual": "208ce0f4aa851b3d5c8f8a8d6bc53f159a8c3539480b35e7c807907cedb53c79",
+    "quality": "a9d23c3afc43d1e13b42ee6c9d8ed8b34f4b6b3484d241ce62d45c161e99c482"
+  },
+  "exact_caption_changes_applied": [
+    {
+      "operation": "replace_edge_caption",
+      "src": "n_v1_21_seif",
+      "dst": "n_v1_11_cutie",
+      "relation": "is_a",
+      "field": "label_ro",
+      "old_value": "este o cutie pentru păstrarea în siguranță a obiectelor",
+      "new_value": "este o cutie pentru păstrarea obiectelor",
+      "rationale": "Retain the directly supported storage-box purpose without an unmeasured security qualifier."
+    },
+    {
+      "operation": "replace_edge_caption",
+      "src": "n_v1_21_poseta",
+      "dst": "n_v1_11_bumbac",
+      "relation": "related_to",
+      "field": "label_ro",
+      "old_value": "unele modele sunt confecționate din bumbac",
+      "new_value": "unele modele conțin bumbac în țesătură",
+      "rationale": "The specifically named KI0283 fabric is70% jute/30% cotton; cotton-content wording states the observed material precisely."
+    }
+  ],
+  "exact_duplicate_drop_applied": {
+    "id": "drop-duplicate-pilota",
+    "verdict": "reject",
+    "reason": "Reject as a new duplicate concept: the selected filled sleeping cover is already served by n_v1_9_plapuma. Fresh DEX, Wikționar and JYSK use pilotă for that plapumă object; correct forms and useful ordinary vocabulary do not justify a second node.",
+    "existing_main_owner": {
+      "id": "n_v1_9_plapuma",
+      "label_ro": "Plapumă",
+      "description": "Învelitoare groasă pentru dormit, formată dintr-un strat de umplutură între două fețe textile."
+    },
+    "drop_item_id": "v121-pilota",
+    "drop_node": {
+      "old": {
+        "id": "n_v1_21_pilota",
+        "node_type": "concept",
+        "label_ro": "Pilotă",
+        "category": "viata_de_roman",
+        "description": "Plapumă cu umplutură din puf sau fulgi, folosită la dormit.",
+        "salience": 0.72,
+        "aliases": [
+          "pilote",
+          "pilotele",
+          "pilotei",
+          "pilotelor"
+        ]
+      },
+      "new": null
+    },
+    "drop_edges": [
+      {
+        "old": {
+          "src": "n_v1_21_pilota",
+          "dst": "n_v24_home_bed_pat",
+          "relation": "related_to",
+          "label_ro": "poate acoperi un pat",
+          "strength": 0.75,
+          "is_distractor": 0,
+          "bidirectional": 1
+        },
+        "new": null
+      },
+      {
+        "old": {
+          "src": "n_v1_21_pilota",
+          "dst": "n_v24_home_bed_saltea",
+          "relation": "related_to",
+          "label_ro": "poate acoperi o persoană culcată pe saltea",
+          "strength": 0.75,
+          "is_distractor": 0,
+          "bidirectional": 1
+        },
+        "new": null
+      },
+      {
+        "old": {
+          "src": "n_v1_21_pilota",
+          "dst": "n_v1_11_panza",
+          "relation": "related_to",
+          "label_ro": "poate avea un înveliș din pânză",
+          "strength": 0.75,
+          "is_distractor": 0,
+          "bidirectional": 1
+        },
+        "new": null
+      },
+      {
+        "old": {
+          "src": "n_v1_21_pilota",
+          "dst": "n_v1_11_bumbac",
+          "relation": "related_to",
+          "label_ro": "poate avea un înveliș din bumbac",
+          "strength": 0.75,
+          "is_distractor": 0,
+          "bidirectional": 1
+        },
+        "new": null
+      }
+    ],
+    "drop_input_forms": [
+      {
+        "old": "pilotă",
+        "normalized": "pilota",
+        "new": null
+      },
+      {
+        "old": "pilote",
+        "normalized": "pilote",
+        "new": null
+      },
+      {
+        "old": "pilotele",
+        "normalized": "pilotele",
+        "new": null
+      },
+      {
+        "old": "pilotei",
+        "normalized": "pilotei",
+        "new": null
+      },
+      {
+        "old": "pilotelor",
+        "normalized": "pilotelor",
+        "new": null
+      }
+    ],
+    "module_memberships_to_remove": {
+      "PROPOSED_ITEM_IDS": [
+        "v121-pilota"
+      ],
+      "NEW_NODE_IDS": [
+        "n_v1_21_pilota"
+      ],
+      "NODES": [
+        "n_v1_21_pilota"
+      ],
+      "ITEM_EVIDENCE": [
+        "v121-pilota"
+      ],
+      "EDGES": [
+        {
+          "src": "n_v1_21_pilota",
+          "dst": "n_v24_home_bed_pat",
+          "relation": "related_to",
+          "label_ro": "poate acoperi un pat"
+        },
+        {
+          "src": "n_v1_21_pilota",
+          "dst": "n_v24_home_bed_saltea",
+          "relation": "related_to",
+          "label_ro": "poate acoperi o persoană culcată pe saltea"
+        },
+        {
+          "src": "n_v1_21_pilota",
+          "dst": "n_v1_11_panza",
+          "relation": "related_to",
+          "label_ro": "poate avea un înveliș din pânză"
+        },
+        {
+          "src": "n_v1_21_pilota",
+          "dst": "n_v1_11_bumbac",
+          "relation": "related_to",
+          "label_ro": "poate avea un înveliș din bumbac"
+        }
+      ]
+    },
+    "resulting_counts": {
+      "items": 45,
+      "new_concepts": 40,
+      "existing_families": 5,
+      "missing_keys": 245,
+      "new_keys": 219,
+      "existing_keys": 26,
+      "edges": 162
+    },
+    "replacement_node_aliases_edges_or_forms": []
+  },
+  "retained_form_changes": 0,
+  "replacement_aliases_endpoints_or_forms": 0,
+  "unrequested_semantic_changes": 0,
+  "selected_only_graph_floors": {
+    "v121-carlig_de_rufe": {
+      "distinct": 4,
+      "old_main": 4,
+      "same_category": 4,
+      "batch": 0
+    },
+    "v121-cos_de_rufe": {
+      "distinct": 4,
+      "old_main": 4,
+      "same_category": 4,
+      "batch": 0
+    },
+    "v121-catarama": {
+      "distinct": 5,
+      "old_main": 4,
+      "same_category": 4,
+      "batch": 1
+    },
+    "v121-snur": {
+      "distinct": 4,
+      "old_main": 4,
+      "same_category": 4,
+      "batch": 0
+    },
+    "v121-fata_de_perna": {
+      "distinct": 4,
+      "old_main": 4,
+      "same_category": 4,
+      "batch": 0
+    },
+    "v121-servet_de_masa": {
+      "distinct": 4,
+      "old_main": 4,
+      "same_category": 3,
+      "batch": 0
+    },
+    "v121-servetel_de_hartie": {
+      "distinct": 4,
+      "old_main": 4,
+      "same_category": 2,
+      "batch": 0
+    },
+    "v121-fata_de_masa": {
+      "distinct": 4,
+      "old_main": 4,
+      "same_category": 4,
+      "batch": 0
+    },
+    "v121-sort_de_bucatarie": {
+      "distinct": 4,
+      "old_main": 4,
+      "same_category": 3,
+      "batch": 0
+    },
+    "v121-seif": {
+      "distinct": 5,
+      "old_main": 5,
+      "same_category": 3,
+      "batch": 0
+    },
+    "v121-portofel": {
+      "distinct": 4,
+      "old_main": 4,
+      "same_category": 3,
+      "batch": 0
+    },
+    "v121-poseta": {
+      "distinct": 4,
+      "old_main": 4,
+      "same_category": 3,
+      "batch": 0
+    },
+    "v121-borseta": {
+      "distinct": 4,
+      "old_main": 3,
+      "same_category": 4,
+      "batch": 1
+    },
+    "v121-sac": {
+      "distinct": 4,
+      "old_main": 4,
+      "same_category": 3,
+      "batch": 0
+    },
+    "v121-punga": {
+      "distinct": 4,
+      "old_main": 3,
+      "same_category": 4,
+      "batch": 1
+    },
+    "v121-ambalaj": {
+      "distinct": 6,
+      "old_main": 4,
+      "same_category": 6,
+      "batch": 2
+    },
+    "v121-eticheta": {
+      "distinct": 4,
+      "old_main": 3,
+      "same_category": 3,
+      "batch": 1
+    },
+    "v121-bidon": {
+      "distinct": 5,
+      "old_main": 4,
+      "same_category": 4,
+      "batch": 1
+    },
+    "v121-canistra_de_apa": {
+      "distinct": 5,
+      "old_main": 4,
+      "same_category": 2,
+      "batch": 1
+    },
+    "v121-spatula_de_bucatarie": {
+      "distinct": 4,
+      "old_main": 4,
+      "same_category": 3,
+      "batch": 0
+    },
+    "v121-ceainic": {
+      "distinct": 4,
+      "old_main": 4,
+      "same_category": 4,
+      "batch": 0
+    },
+    "v121-termos": {
+      "distinct": 4,
+      "old_main": 4,
+      "same_category": 3,
+      "batch": 0
+    },
+    "v121-lingurita_de_ceai": {
+      "distinct": 4,
+      "old_main": 4,
+      "same_category": 4,
+      "batch": 0
+    },
+    "v121-cizma": {
+      "distinct": 4,
+      "old_main": 4,
+      "same_category": 3,
+      "batch": 0
+    },
+    "v121-bocanc": {
+      "distinct": 4,
+      "old_main": 4,
+      "same_category": 2,
+      "batch": 0
+    },
+    "v121-tenisi": {
+      "distinct": 4,
+      "old_main": 4,
+      "same_category": 2,
+      "batch": 0
+    },
+    "v121-adidasi": {
+      "distinct": 4,
+      "old_main": 4,
+      "same_category": 2,
+      "batch": 0
+    },
+    "v121-guler": {
+      "distinct": 4,
+      "old_main": 4,
+      "same_category": 4,
+      "batch": 0
+    },
+    "v121-maneca": {
+      "distinct": 4,
+      "old_main": 4,
+      "same_category": 4,
+      "batch": 0
+    },
+    "v121-palton": {
+      "distinct": 4,
+      "old_main": 4,
+      "same_category": 3,
+      "batch": 0
+    },
+    "v121-hanorac": {
+      "distinct": 4,
+      "old_main": 4,
+      "same_category": 4,
+      "batch": 0
+    },
+    "v121-jacheta": {
+      "distinct": 4,
+      "old_main": 4,
+      "same_category": 4,
+      "batch": 0
+    },
+    "v121-sacou": {
+      "distinct": 4,
+      "old_main": 4,
+      "same_category": 4,
+      "batch": 0
+    },
+    "v121-vesta": {
+      "distinct": 4,
+      "old_main": 4,
+      "same_category": 4,
+      "batch": 0
+    },
+    "v121-cravata": {
+      "distinct": 4,
+      "old_main": 4,
+      "same_category": 3,
+      "batch": 0
+    },
+    "v121-sapca": {
+      "distinct": 4,
+      "old_main": 4,
+      "same_category": 3,
+      "batch": 0
+    },
+    "v121-boneta": {
+      "distinct": 4,
+      "old_main": 4,
+      "same_category": 3,
+      "batch": 0
+    },
+    "v121-pelerina": {
+      "distinct": 4,
+      "old_main": 4,
+      "same_category": 3,
+      "batch": 0
+    },
+    "v121-impermeabil": {
+      "distinct": 4,
+      "old_main": 4,
+      "same_category": 3,
+      "batch": 0
+    },
+    "v121-abajur": {
+      "distinct": 4,
+      "old_main": 4,
+      "same_category": 4,
+      "batch": 0
+    }
+  },
+  "retained_counts": {
+    "items": 45,
+    "new_concepts": 40,
+    "connections": 162,
+    "missing_normalized_keys": 245,
+    "new_concept_keys": 219,
+    "existing_input_keys": 26,
+    "existing_input_families": 5,
+    "verified_synonym_families": 4,
+    "regional_input_keys": 0,
+    "accepted_reviewed_items": 45,
+    "source_applied": false,
+    "installed": 0,
+    "player_visible_delta": "0/0/0"
+  },
+  "original_holds_preserved": 7,
+  "rejected_duplicate_items": 1,
+  "source_applied": false,
+  "installed": 0,
+  "player_visible_delta": "0/0/0",
+  "acquisition_coordination": {
+    "factual_last_explicit_dex_start": 1791944523.373715,
+    "quality_first_dex_start": 1791944913.9692795,
+    "cross_channel_gap_seconds": 390.59556460380554,
+    "factual_auto_redirect_limitations_preserved": true
+  },
+  "retention": {
+    "factual_owned_transient_bodies_pruned_bytes_description": "48.2 MB, 281 owned transient bodies; reproducible setup/manifests/signed report retained.",
+    "quality_owned_transient_bodies_pruned_bytes_description": "43.35 MB owned transient bodies; reproducible setup and compact provenance retained.",
+    "original_author_research_and_previous_wave_packets_preserved": true,
+    "historical_manifests_not_claims_deleted_bytes_remain": true
+  },
+  "scope": "Literal signed verdict application and structural bookkeeping only; no second semantic review, writer, dry run or installation."
+}

@@ -1,0 +1,5303 @@
+{
+  "schema_version": 1,
+  "reviewer": "quality-v1-16",
+  "review_round": 1,
+  "module_path": "scripts/travel_and_street_words_v1_16_data.py",
+  "module_sha256": "862865364f8b63532a54fab602c9c59aa9aa30037687f9d31bee747d368233ae",
+  "review_kind": "independent whole-batch web quality review",
+  "scope": "Reviewed unlanded vocabulary proposal only; not_landed / owner_review_later. No application, board, target, partition, pairing, recipe, route, difficulty or runtime approval.",
+  "rubric_sections": [
+    "CONTENT_LOOP quality bar",
+    "CRITIQUE_RUBRIC A1-A4 and A7 contextual predicate honesty",
+    "CRITIQUE_RUBRIC F recognition/relevance checks; board-specific B-E rules reserved until a complete board/target/recipe exists"
+  ],
+  "method": {
+    "independence": "Quality review did not read the factual verdict and authored no candidate, alias or new edge endpoint. Every selected item and every unique proposed edge was inspected.",
+    "sources": "Live Romanian Wiktionary/Wikipedia and current operators, manufacturers, municipality, museum and school-road-safety sources; author raw DEX/DOOM entries inspected locally for all selected items. Thirteen ambiguity/paradigm/failed-Wiki items additionally re-fetched directly from DEX JSON after the factual reviewer released the dictionary slot.",
+    "dictionary_pacing": "Waited 2.1 seconds after slot release; one serial helper kept every request start at least 2.1 seconds apart; no parallel DEX requests.",
+    "dictionary_followup": [
+      {
+        "item_id": "v116-corabie",
+        "url": "https://dexonline.ro/definitie/corabie/json",
+        "response_sha256": "240335b58c3dd7da3b5f36a9f3efdb29537cd2eb21642faf04f50f13bf65432c",
+        "selected_entries": [
+          {
+            "id": "851965",
+            "source": "DEX '09",
+            "selected_entry_present": true
+          },
+          {
+            "id": "1314562",
+            "source": "DOOM 3",
+            "selected_entry_present": true
+          }
+        ],
+        "status": "PASS"
+      },
+      {
+        "item_id": "v116-pagaie",
+        "url": "https://dexonline.ro/definitie/pagaie/json",
+        "response_sha256": "cf96cb86d60306156b0810aeaebda0764d17d9cadff1b5cb5c6171f69df7d10f",
+        "selected_entries": [
+          {
+            "id": "860259",
+            "source": "DEX '09",
+            "selected_entry_present": true
+          },
+          {
+            "id": "1279957",
+            "source": "DOOM 3",
+            "selected_entry_present": true
+          }
+        ],
+        "status": "PASS"
+      },
+      {
+        "item_id": "v116-tunel",
+        "url": "https://dexonline.ro/definitie/tunel/json",
+        "response_sha256": "1a68165e68084c0af599f6e1ac18a4d32324185f168bd5ceefce1144a1b9c4ad",
+        "selected_entries": [
+          {
+            "id": "836381",
+            "source": "DEX '09",
+            "selected_entry_present": true
+          },
+          {
+            "id": "1270580",
+            "source": "DOOM 3",
+            "selected_entry_present": true
+          }
+        ],
+        "status": "PASS"
+      },
+      {
+        "item_id": "v116-combustibil",
+        "url": "https://dexonline.ro/definitie/combustibil/json",
+        "response_sha256": "b40ce7b48da55ff9f4e45d245e9bb17867a7fbb6b6852586cb2d71f85f0ad9d9",
+        "selected_entries": [
+          {
+            "id": "849406",
+            "source": "DEX '09",
+            "selected_entry_present": true
+          },
+          {
+            "id": "1312981",
+            "source": "DOOM 3",
+            "selected_entry_present": true
+          }
+        ],
+        "status": "PASS"
+      },
+      {
+        "item_id": "v116-motor",
+        "url": "https://dexonline.ro/definitie/motor/json",
+        "response_sha256": "608ff1ddcc24ecc32f9a9ae0b13418e9a083a602dc4307c72f4fb68dfbd6faa5",
+        "selected_entries": [
+          {
+            "id": "892283",
+            "source": "DEX '09",
+            "selected_entry_present": true
+          },
+          {
+            "id": "1294796",
+            "source": "DOOM 3",
+            "selected_entry_present": true
+          }
+        ],
+        "status": "PASS"
+      },
+      {
+        "item_id": "v116-hangar",
+        "url": "https://dexonline.ro/definitie/hangar/json",
+        "response_sha256": "b0002c48f4d444e98c486f3aab0b1c51d2e8c55b4e27771b1f4d05c1385bf33d",
+        "selected_entries": [
+          {
+            "id": "880844",
+            "source": "DEX '09",
+            "selected_entry_present": true
+          },
+          {
+            "id": "1299302",
+            "source": "DOOM 3",
+            "selected_entry_present": true
+          }
+        ],
+        "status": "PASS"
+      },
+      {
+        "item_id": "v116-pasarela",
+        "url": "https://dexonline.ro/definitie/pasarel%C4%83/json",
+        "response_sha256": "6344a775298ee8382a441a23f47a3fddf94b3e338d8ab7cc09e8b6438cfe2842",
+        "selected_entries": [
+          {
+            "id": "866812",
+            "source": "DEX '09",
+            "selected_entry_present": true
+          },
+          {
+            "id": "1280803",
+            "source": "DOOM 3",
+            "selected_entry_present": true
+          }
+        ],
+        "status": "PASS"
+      },
+      {
+        "item_id": "v116-spita",
+        "url": "https://dexonline.ro/definitie/spi%C8%9B%C4%83/json",
+        "response_sha256": "8ad34507ce8f05105b30478f4854ca46f7327e0ea6e90e91f730f06c3ab01cf3",
+        "selected_entries": [
+          {
+            "id": "845677",
+            "source": "DEX '09",
+            "selected_entry_present": true
+          },
+          {
+            "id": "1277586",
+            "source": "DOOM 3",
+            "selected_entry_present": true
+          }
+        ],
+        "status": "PASS"
+      },
+      {
+        "item_id": "v116-microbuz",
+        "url": "https://dexonline.ro/definitie/microbuz/json",
+        "response_sha256": "34c4e042b3082a32b177d82f3ebc301c9674af631d09869ca476116e850c5229",
+        "selected_entries": [
+          {
+            "id": "889241",
+            "source": "DEX '09",
+            "selected_entry_present": true
+          },
+          {
+            "id": "1293349",
+            "source": "DOOM 3",
+            "selected_entry_present": true
+          }
+        ],
+        "status": "PASS"
+      },
+      {
+        "item_id": "v116-soferita",
+        "url": "https://dexonline.ro/definitie/%C8%99oferi%C8%9B%C4%83/json",
+        "response_sha256": "48fe9355bf5b92f28a85a4b9d4ac71a38dbcf808031ff38eea78e5e111bef399",
+        "selected_entries": [
+          {
+            "id": "837750",
+            "source": "DEX '09",
+            "selected_entry_present": true
+          },
+          {
+            "id": "1271648",
+            "source": "DOOM 3",
+            "selected_entry_present": true
+          }
+        ],
+        "status": "PASS"
+      },
+      {
+        "item_id": "v116-centura_de_siguranta",
+        "url": "https://dexonline.ro/definitie/centur%C4%83/json",
+        "response_sha256": "893b94c40828e50f1e75d8091f895e1c6d1e5b97d7d94219d703ff538fdcc7bb",
+        "selected_entries": [
+          {
+            "id": "844375",
+            "source": "DEX '09",
+            "selected_entry_present": true
+          },
+          {
+            "id": "1310956",
+            "source": "DOOM 3",
+            "selected_entry_present": true
+          }
+        ],
+        "status": "PASS"
+      },
+      {
+        "item_id": "v116-casca_de_protectie",
+        "url": "https://dexonline.ro/definitie/casc%C4%83/json",
+        "response_sha256": "bb4ff5d0fb1344eae6589e2ba7319ce8ea749b9926383cda4d2ceb1dfd78f1b9",
+        "selected_entries": [
+          {
+            "id": "842001",
+            "source": "DEX '09",
+            "selected_entry_present": true
+          },
+          {
+            "id": "1309969",
+            "source": "DOOM 3",
+            "selected_entry_present": true
+          }
+        ],
+        "status": "PASS"
+      },
+      {
+        "item_id": "v116-scuter",
+        "url": "https://dexonline.ro/definitie/scuter/json",
+        "response_sha256": "e3ce86f237082ab826d6b0597488c6db0967a04d57690aa7855c49fa46f3da44",
+        "selected_entries": [
+          {
+            "id": "840712",
+            "source": "DEX '09",
+            "selected_entry_present": true
+          },
+          {
+            "id": "1273668",
+            "source": "DOOM 3",
+            "selected_entry_present": true
+          }
+        ],
+        "status": "PASS"
+      }
+    ],
+    "access_limits": "Some direct web-tool pages returned cache errors or navigation-only extracts; targeted indexed primary-source text and direct paced dictionary checks supplied the stated evidence. Failed-Wiki sources are not listed as successfully checked for Hangar, Pasarelă, Spiță or Microbuz.",
+    "inference": "Common physical function/material associations are judged as explicitly scoped possibilities; museum object/class examples do not become universal claims. Frequency supports recognition only and never rejects an everyday/school/culture noun."
+  },
+  "summary": {
+    "selected_items": 56,
+    "new_concepts": 45,
+    "existing_input_families": 11,
+    "unique_edges": 180,
+    "verdict_counts": {
+      "accept": 54,
+      "modify": 2
+    },
+    "required_field_changes": 3,
+    "new_endpoints_or_input_keys_authored": 0,
+    "curated_game_items_reviewed": 0
+  },
+  "items": [
+    {
+      "id": "v116-bordura",
+      "word": "Bordură",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_bordura",
+      "verdict": "accept",
+      "rationale": "Familiar street component, kept separate from textile edging. The sidewalk/street/road relations name the actual boundary function; natural-granite examples support the conditional stone claim.",
+      "sources": [
+        "https://dexonline.ro/definitie/bordur%C4%83/json",
+        "https://ro.wiktionary.org/wiki/bordur%C4%83",
+        "https://mestamarmura.ro/produse/granit-borduri-20x25x50/"
+      ],
+      "forms_reviewed": [
+        "bordură",
+        "borduri",
+        "bordurile",
+        "bordurii",
+        "bordurilor"
+      ],
+      "proposed_forms_reviewed": [
+        "bordură",
+        "borduri",
+        "bordurile",
+        "bordurii",
+        "bordurilor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_bordura",
+          "target": "n_v29_city_street_trotuar",
+          "relation": "related_to",
+          "label_ro": "poate delimita marginea unui trotuar",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_bordura",
+          "target": "n_v4geo_strada",
+          "relation": "related_to",
+          "label_ro": "poate delimita marginea unei străzi",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_bordura",
+          "target": "n_v4geo_drum",
+          "relation": "related_to",
+          "label_ro": "poate delimita partea carosabilă a unui drum",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_bordura",
+          "target": "n_v28_nature_material_piatra",
+          "relation": "related_to",
+          "label_ro": "unele borduri sunt făcute din piatră",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-intersectie",
+      "word": "Intersecție",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_intersectie",
+      "verdict": "accept",
+      "rationale": "Recognizable traffic and school-road-safety word. The selected road-junction sense excludes mathematical intersection; city and traffic-light associations are possible features of that same physical junction.",
+      "sources": [
+        "https://dexonline.ro/definitie/intersec%C8%9Bie/json",
+        "https://ro.wiktionary.org/wiki/intersec%C8%9Bie",
+        "https://primariaclujnapoca.ro/consiliu-local/hotarare-de-consiliu/hotararea-292-din-2020/"
+      ],
+      "forms_reviewed": [
+        "intersecție",
+        "intersecția",
+        "intersecții",
+        "intersecțiile",
+        "intersecției",
+        "intersecțiilor"
+      ],
+      "proposed_forms_reviewed": [
+        "intersecție",
+        "intersecția",
+        "intersecții",
+        "intersecțiile",
+        "intersecției",
+        "intersecțiilor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_intersectie",
+          "target": "n_v4geo_drum",
+          "relation": "related_to",
+          "label_ro": "este un loc de întâlnire a drumurilor",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_intersectie",
+          "target": "n_v4geo_strada",
+          "relation": "related_to",
+          "label_ro": "poate fi un loc de întâlnire a străzilor",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_intersectie",
+          "target": "n_v2geo_oras",
+          "relation": "related_to",
+          "label_ro": "poate apărea în rețeaua stradală a unui oraș",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_intersectie",
+          "target": "n_v1_10_semafor",
+          "relation": "related_to",
+          "label_ro": "poate avea circulația dirijată prin semafor",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-sosea",
+      "word": "Șosea",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_sosea",
+      "verdict": "accept",
+      "rationale": "Everyday interurban-road vocabulary. A road can connect towns and villages, and sourced road construction uses gravel layers; no regional or obsolete substitute input is introduced.",
+      "sources": [
+        "https://dexonline.ro/definitie/%C8%99osea/json",
+        "https://ro.wiktionary.org/wiki/%C8%99osea",
+        "https://www.romcim.ro/solutii-si-produse/agregate/agregate-de-balastiera"
+      ],
+      "forms_reviewed": [
+        "șosea",
+        "șoseaua",
+        "șosele",
+        "șoselele",
+        "șoselei",
+        "șoselelor"
+      ],
+      "proposed_forms_reviewed": [
+        "șosea",
+        "șoseaua",
+        "șosele",
+        "șoselele",
+        "șoselei",
+        "șoselelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_sosea",
+          "target": "n_v4geo_drum",
+          "relation": "is_a",
+          "label_ro": "este un drum amenajat pentru vehicule",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_sosea",
+          "target": "n_v2geo_oras",
+          "relation": "related_to",
+          "label_ro": "poate lega orașe",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_sosea",
+          "target": "n_v4geo_sat",
+          "relation": "related_to",
+          "label_ro": "poate lega sate",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_sosea",
+          "target": "n_v1_13_pietris",
+          "relation": "related_to",
+          "label_ro": "unele șosele au straturi de pietriș",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-autostrada",
+      "word": "Autostradă",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_autostrada",
+      "verdict": "accept",
+      "rationale": "Recognizable transport infrastructure and an honest child of Șosea. The stone-aggregate and steel-barrier captions are conditional construction examples, not compulsory properties of every motorway.",
+      "sources": [
+        "https://dexonline.ro/definitie/autostrad%C4%83/json",
+        "https://ro.wiktionary.org/wiki/autostrad%C4%83",
+        "https://www.romcim.ro/solutii-si-produse/agregate/agregate-de-cariera",
+        "https://deltabloc.com/ro/produse/steelbloc/seria-prodigy-s"
+      ],
+      "forms_reviewed": [
+        "autostradă",
+        "autostrăzi",
+        "autostrăzile",
+        "autostrăzii",
+        "autostrăzilor"
+      ],
+      "proposed_forms_reviewed": [
+        "autostradă",
+        "autostrăzi",
+        "autostrăzile",
+        "autostrăzii",
+        "autostrăzilor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_autostrada",
+          "target": "n_v1_16_sosea",
+          "relation": "is_a",
+          "label_ro": "este o șosea pentru trafic rutier rapid",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_autostrada",
+          "target": "n_v2geo_oras",
+          "relation": "related_to",
+          "label_ro": "poate lega orașe",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_autostrada",
+          "target": "n_v28_nature_material_piatra",
+          "relation": "related_to",
+          "label_ro": "poate avea straturi rutiere cu agregate din piatră",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_autostrada",
+          "target": "n_v4sti_metal",
+          "relation": "related_to",
+          "label_ro": "poate avea parapete metalice",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-sina",
+      "word": "Șină",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_sina",
+      "verdict": "accept",
+      "rationale": "The metal rail-bar sense is clear and distinct from the complete railway. Train, tram and metro rolling-stock associations use their actual rail senses; ordinary șine morphology is intact.",
+      "sources": [
+        "https://dexonline.ro/definitie/%C8%99in%C4%83/json",
+        "https://ro.wiktionary.org/wiki/%C8%99in%C4%83",
+        "https://metrorex.ro/evenimente_si_actiuni_media/ziua-portilor-deschise-la-dispeceratul-central-al-metrorex-20-septembrie-2025"
+      ],
+      "forms_reviewed": [
+        "șină",
+        "șine",
+        "șinele",
+        "șinei",
+        "șinelor"
+      ],
+      "proposed_forms_reviewed": [
+        "șină",
+        "șine",
+        "șinele",
+        "șinei",
+        "șinelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_sina",
+          "target": "n_v24_transport_rail_tren",
+          "relation": "related_to",
+          "label_ro": "poate susține și ghida roțile unui tren",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_sina",
+          "target": "n_v24_transport_rail_tramvai",
+          "relation": "related_to",
+          "label_ro": "poate ghida roțile unui tramvai",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_sina",
+          "target": "n_v24_transport_rail_metrou",
+          "relation": "related_to",
+          "label_ro": "poate ghida roțile unui tren de metrou",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_sina",
+          "target": "n_v4sti_metal",
+          "relation": "related_to",
+          "label_ro": "șinele de cale ferată sunt fabricate din metal",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-cale_ferata",
+      "word": "Cale ferată",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_cale_ferata",
+      "verdict": "accept",
+      "rationale": "School and everyday transport infrastructure, distinct from an individual rail. The incoming Șină part_of direction is honest; qualified inflections preserve agreement and do not appropriate bare cale.",
+      "sources": [
+        "https://dexonline.ro/definitie/cale/json",
+        "https://ro.wiktionary.org/wiki/cale_ferat%C4%83",
+        "https://ro.wikipedia.org/wiki/Cale_ferat%C4%83"
+      ],
+      "forms_reviewed": [
+        "cale ferată",
+        "calea ferată",
+        "căi ferate",
+        "căile ferate",
+        "căii ferate",
+        "căilor ferate"
+      ],
+      "proposed_forms_reviewed": [
+        "cale ferată",
+        "calea ferată",
+        "căi ferate",
+        "căile ferate",
+        "căii ferate",
+        "căilor ferate"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_sina",
+          "target": "n_v1_16_cale_ferata",
+          "relation": "part_of",
+          "label_ro": "face parte dintr-o cale ferată",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_cale_ferata",
+          "target": "n_v24_transport_rail_tren",
+          "relation": "related_to",
+          "label_ro": "permite circulația trenurilor",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_cale_ferata",
+          "target": "n_v1_10_locomotiva",
+          "relation": "related_to",
+          "label_ro": "permite circulația locomotivelor",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_cale_ferata",
+          "target": "n_v24_transport_terminals_gara",
+          "relation": "related_to",
+          "label_ro": "poate deservi o gară",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-peron",
+      "word": "Peron",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_peron",
+      "verdict": "accept",
+      "rationale": "A familiar boarding platform rather than the unrelated building forecourt. Railway and metro boarding, station membership and platform function remain coherent across the four claims.",
+      "sources": [
+        "https://dexonline.ro/definitie/peron/json",
+        "https://ro.wiktionary.org/wiki/peron",
+        "https://www.metrorex.ro/storage/documents/1725003152INSTRUC%C8%9AIUNE%20DE%20LUCRU%20%E2%80%9CSupraveghere%20Acces%20%C8%99i%20Informare%20C%C4%83l%C4%83tori%E2%80%9D%20%E2%80%93%20cod%204.4.3.1.2%20-%2001%20-%202019.pdf"
+      ],
+      "forms_reviewed": [
+        "peron",
+        "peronul",
+        "peroane",
+        "peroanele",
+        "peronului",
+        "peroanelor"
+      ],
+      "proposed_forms_reviewed": [
+        "peron",
+        "peronul",
+        "peroane",
+        "peroanele",
+        "peronului",
+        "peroanelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_peron",
+          "target": "n_v24_transport_terminals_gara",
+          "relation": "related_to",
+          "label_ro": "poate face parte dintr-o gară",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_peron",
+          "target": "n_v24_transport_rail_tren",
+          "relation": "related_to",
+          "label_ro": "permite urcarea călătorilor în tren",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_peron",
+          "target": "n_v24_transport_rail_metrou",
+          "relation": "related_to",
+          "label_ro": "poate fi amenajat pentru urcarea în metrou",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_peron",
+          "target": "n_v24_transport_terminals_statie",
+          "relation": "related_to",
+          "label_ro": "poate face parte dintr-o stație de transport",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-bilet",
+      "word": "Bilet",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_bilet",
+      "verdict": "accept",
+      "rationale": "The transport-ticket sense is familiar to children using public transport. CFR, STB and Metrorex support the four possible modes; broader note/performance-ticket meanings are not additional aliases or target approvals.",
+      "sources": [
+        "https://dexonline.ro/definitie/bilet/json",
+        "https://ro.wiktionary.org/wiki/bilet",
+        "https://www.cfrcalatori.ro/cumpara-online-bilete-de-tren-in-trafic-intern/",
+        "https://www.stb.ro/bilettb",
+        "https://www.metrorex.ro/storage/documents/1733207159IL%20-%20Supraveghere%20Acces%20si%20Informare%20Calatori.pdf"
+      ],
+      "forms_reviewed": [
+        "bilet",
+        "biletul",
+        "bilete",
+        "biletele",
+        "biletului",
+        "biletelor"
+      ],
+      "proposed_forms_reviewed": [
+        "bilet",
+        "biletul",
+        "bilete",
+        "biletele",
+        "biletului",
+        "biletelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_bilet",
+          "target": "n_v24_transport_rail_tren",
+          "relation": "related_to",
+          "label_ro": "poate da dreptul la o călătorie cu trenul",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_bilet",
+          "target": "n_v4soc_autobuz",
+          "relation": "related_to",
+          "label_ro": "poate da dreptul la o călătorie cu autobuzul",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_bilet",
+          "target": "n_v24_transport_rail_tramvai",
+          "relation": "related_to",
+          "label_ro": "poate da dreptul la o călătorie cu tramvaiul",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_bilet",
+          "target": "n_v24_transport_rail_metrou",
+          "relation": "related_to",
+          "label_ro": "poate da dreptul la o călătorie cu metroul",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-abonament",
+      "word": "Abonament",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_abonament",
+      "verdict": "accept",
+      "rationale": "Familiar recurring transport access, including school travel. The four possible mode links stay within the selected transport sense; generic subscription polysemy warrants future target review, not rejection of shared guess vocabulary.",
+      "sources": [
+        "https://dexonline.ro/definitie/abonament/json",
+        "https://ro.wiktionary.org/wiki/abonament",
+        "https://www.cfrcalatori.ro/cumpara-online-bilete-de-tren-in-trafic-intern/",
+        "https://www.stb.ro/bilettb",
+        "https://www.metrorex.ro/storage/documents/1733207159IL%20-%20Supraveghere%20Acces%20si%20Informare%20Calatori.pdf"
+      ],
+      "forms_reviewed": [
+        "abonament",
+        "abonamentul",
+        "abonamente",
+        "abonamentele",
+        "abonamentului",
+        "abonamentelor"
+      ],
+      "proposed_forms_reviewed": [
+        "abonament",
+        "abonamentul",
+        "abonamente",
+        "abonamentele",
+        "abonamentului",
+        "abonamentelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_abonament",
+          "target": "n_v24_transport_rail_tren",
+          "relation": "related_to",
+          "label_ro": "poate permite călătorii cu trenul într-o perioadă",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_abonament",
+          "target": "n_v4soc_autobuz",
+          "relation": "related_to",
+          "label_ro": "poate permite călătorii cu autobuzul într-o perioadă",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_abonament",
+          "target": "n_v24_transport_rail_tramvai",
+          "relation": "related_to",
+          "label_ro": "poate permite călătorii cu tramvaiul într-o perioadă",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_abonament",
+          "target": "n_v24_transport_rail_metrou",
+          "relation": "related_to",
+          "label_ro": "poate permite călătorii cu metroul într-o perioadă",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-vagon",
+      "word": "Vagon",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_vagon",
+      "verdict": "accept",
+      "rationale": "Recognizable railway vehicle, distinct from the whole train and from a quantity of cargo. Train membership, locomotive hauling, wheels and rails form a legible physical neighborhood.",
+      "sources": [
+        "https://dexonline.ro/definitie/vagon/json",
+        "https://ro.wiktionary.org/wiki/vagon"
+      ],
+      "forms_reviewed": [
+        "vagon",
+        "vagonul",
+        "vagoane",
+        "vagoanele",
+        "vagonului",
+        "vagoanelor"
+      ],
+      "proposed_forms_reviewed": [
+        "vagon",
+        "vagonul",
+        "vagoane",
+        "vagoanele",
+        "vagonului",
+        "vagoanelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_vagon",
+          "target": "n_v24_transport_rail_tren",
+          "relation": "part_of",
+          "label_ro": "poate face parte dintr-un tren",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_vagon",
+          "target": "n_v1_10_locomotiva",
+          "relation": "related_to",
+          "label_ro": "poate fi remorcat de o locomotivă",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_vagon",
+          "target": "n_v1_10_roata",
+          "relation": "related_to",
+          "label_ro": "vagonul feroviar are roți",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_vagon",
+          "target": "n_v1_16_sina",
+          "relation": "related_to",
+          "label_ro": "poate rula pe șine",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-autocar",
+      "word": "Autocar",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_autocar",
+      "verdict": "accept",
+      "rationale": "A familiar excursion and longer-distance bus. Operator usage corroborates the bus subtype, driver and holiday context; wheels are part of that vehicle, not a forced figurative association.",
+      "sources": [
+        "https://dexonline.ro/definitie/autocar/json",
+        "https://ro.wiktionary.org/wiki/autocar",
+        "https://transportautocar.ro/"
+      ],
+      "forms_reviewed": [
+        "autocar",
+        "autocarul",
+        "autocare",
+        "autocarele",
+        "autocarului",
+        "autocarelor"
+      ],
+      "proposed_forms_reviewed": [
+        "autocar",
+        "autocarul",
+        "autocare",
+        "autocarele",
+        "autocarului",
+        "autocarelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_autocar",
+          "target": "n_v4soc_autobuz",
+          "relation": "is_a",
+          "label_ro": "este un autobuz pentru călătorii mai lungi",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_autocar",
+          "target": "n_v1_9_sofer",
+          "relation": "related_to",
+          "label_ro": "este condus de un șofer",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_autocar",
+          "target": "n_v1_10_roata",
+          "relation": "related_to",
+          "label_ro": "are roți pentru deplasare",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_autocar",
+          "target": "n_v1_8_vacanta",
+          "relation": "related_to",
+          "label_ro": "poate transporta călători în vacanță",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-scuter",
+      "word": "Scuter",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_scuter",
+      "verdict": "modify",
+      "rationale": "Recognizable motor scooter, distinct from an electric kick scooter. Current Piaggio sources include both large-wheel and three-wheel scooters, so universal small-wheel/two-wheel wording needs qualification without changing the motorcycle target or edge topology.",
+      "sources": [
+        "https://dexonline.ro/definitie/scuter/json",
+        "https://ro.wiktionary.org/wiki/scuter",
+        "https://www.piaggio.com/ro_RO/models/beverly/",
+        "https://www.piaggio.com/ro_RO/istorie/",
+        "https://www.piaggio.com/ro_RO/models/piaggio-mp3/"
+      ],
+      "forms_reviewed": [
+        "scuter",
+        "scuterul",
+        "scutere",
+        "scuterele",
+        "scuterului",
+        "scuterelor"
+      ],
+      "proposed_forms_reviewed": [
+        "scuter",
+        "scuterul",
+        "scutere",
+        "scuterele",
+        "scuterului",
+        "scuterelor"
+      ],
+      "required_changes": [
+        {
+          "op": "replace_description",
+          "node_id": "n_v1_16_scuter",
+          "old": "Tip de motocicletă ușoară, cu roți mici și ghidon.",
+          "new": "Vehicul cu motor și ghidon, de obicei cu două roți mici.",
+          "reason": "Current Romanian Piaggio sources explicitly include large-wheel scooters and three-wheel MP3 variants. Describe the common configuration conditionally; keep the motor-scooter sense distinct from Trotinetă.",
+          "sources": [
+            "https://www.piaggio.com/ro_RO/models/beverly/",
+            "https://www.piaggio.com/ro_RO/models/piaggio-mp3/"
+          ]
+        },
+        {
+          "op": "replace_edge_caption",
+          "source": "n_v1_16_scuter",
+          "target": "n_v24_transport_personal_motocicleta",
+          "relation": "related_to",
+          "old": "este un vehicul cu două roți asemănător unei motociclete ușoare",
+          "new": "poate avea două roți, asemenea unei motociclete ușoare",
+          "reason": "Use a conditional comparison; do not redefine the existing motorcycle target or claim every motor scooter has two wheels.",
+          "sources": [
+            "https://www.piaggio.com/ro_RO/istorie/",
+            "https://www.piaggio.com/ro_RO/models/piaggio-mp3/"
+          ]
+        }
+      ],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_scuter",
+          "target": "n_v24_transport_personal_motocicleta",
+          "relation": "related_to",
+          "label_ro": "este un vehicul cu două roți asemănător unei motociclete ușoare",
+          "verdict": "modify",
+          "rationale": "Use a conditional comparison; do not redefine the existing motorcycle target or claim every motor scooter has two wheels."
+        },
+        {
+          "source": "n_v1_16_scuter",
+          "target": "n_v1_10_roata",
+          "relation": "related_to",
+          "label_ro": "are roți pentru deplasare",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_scuter",
+          "target": "n_v1_16_ghidon",
+          "relation": "related_to",
+          "label_ro": "este dirijat cu ghidonul",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_scuter",
+          "target": "n_v4sti_metal",
+          "relation": "related_to",
+          "label_ro": "poate avea cadru metalic",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-elicopter",
+      "word": "Elicopter",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_elicopter",
+      "verdict": "accept",
+      "rationale": "Familiar school and emergency-transport aircraft. The Avion comparison is an analogy rather than an incorrect fixed-wing subtype; airport use, air travel and hangar shelter are honest possible relations.",
+      "sources": [
+        "https://dexonline.ro/definitie/elicopter/json",
+        "https://ro.wiktionary.org/wiki/elicopter",
+        "https://alphasteel.ro/hangare/",
+        "https://tiriacair.ro/ro"
+      ],
+      "forms_reviewed": [
+        "elicopter",
+        "elicopterul",
+        "elicoptere",
+        "elicopterele",
+        "elicopterului",
+        "elicopterelor"
+      ],
+      "proposed_forms_reviewed": [
+        "elicopter",
+        "elicopterul",
+        "elicoptere",
+        "elicopterele",
+        "elicopterului",
+        "elicopterelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_elicopter",
+          "target": "n_v2sti_avion",
+          "relation": "related_to",
+          "label_ro": "este un aparat de zbor, asemenea avionului",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_elicopter",
+          "target": "n_v4sti_aer",
+          "relation": "related_to",
+          "label_ro": "se deplasează prin aer",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_elicopter",
+          "target": "n_v24_transport_terminals_aeroport",
+          "relation": "related_to",
+          "label_ro": "poate utiliza un aeroport",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_elicopter",
+          "target": "n_v1_16_hangar",
+          "relation": "related_to",
+          "label_ro": "poate fi adăpostit într-un hangar",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-hangar",
+      "word": "Hangar",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_hangar",
+      "verdict": "accept",
+      "rationale": "Recognizable aviation building, supported by Romanian aircraft-storage services. Aircraft, airport and metal-frame claims use the same sense; the shared incoming helicopter edge is counted once.",
+      "sources": [
+        "https://dexonline.ro/definitie/hangar/json",
+        "https://alphasteel.ro/hangare/",
+        "https://tiriacair.ro/ro"
+      ],
+      "forms_reviewed": [
+        "hangar",
+        "hangarul",
+        "hangare",
+        "hangarele",
+        "hangarului",
+        "hangarelor"
+      ],
+      "proposed_forms_reviewed": [
+        "hangar",
+        "hangarul",
+        "hangare",
+        "hangarele",
+        "hangarului",
+        "hangarelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_hangar",
+          "target": "n_v2sti_avion",
+          "relation": "related_to",
+          "label_ro": "poate adăposti avioane",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_hangar",
+          "target": "n_v24_transport_terminals_aeroport",
+          "relation": "related_to",
+          "label_ro": "poate face parte dintr-un aeroport",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_elicopter",
+          "target": "n_v1_16_hangar",
+          "relation": "related_to",
+          "label_ro": "poate fi adăpostit într-un hangar",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_hangar",
+          "target": "n_v4sti_metal",
+          "relation": "related_to",
+          "label_ro": "poate avea structură metalică",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-alee",
+      "word": "Alee",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_alee",
+      "verdict": "accept",
+      "rationale": "Familiar park and neighborhood path. The architect’s project supports street-to-park access and the municipality documents natural-stone paving; ordinary inflections and the narrow path sense remain coherent.",
+      "sources": [
+        "https://dexonline.ro/definitie/alee/json",
+        "https://ro.wiktionary.org/wiki/alee",
+        "https://agerpres.ro/comunicate/2024/09/11/comunicat-de-presa---primaria-targu-mures--1353090",
+        "https://oar.archi/concursuri/oar/2011-parcul-din-livada-postei-brasov/galerie-proiecte/256-md0736-arh-dascalu-stefan-dragos-finalist/"
+      ],
+      "forms_reviewed": [
+        "alee",
+        "aleea",
+        "alei",
+        "aleile",
+        "aleii",
+        "aleilor"
+      ],
+      "proposed_forms_reviewed": [
+        "alee",
+        "aleea",
+        "alei",
+        "aleile",
+        "aleii",
+        "aleilor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_alee",
+          "target": "n_v4geo_drum",
+          "relation": "is_a",
+          "label_ro": "este un drum îngust amenajat pentru trecere",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_alee",
+          "target": "n_v4geo_strada",
+          "relation": "related_to",
+          "label_ro": "poate lega o stradă de un parc",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_alee",
+          "target": "n_v24_places_public_parc",
+          "relation": "related_to",
+          "label_ro": "poate fi amenajată într-un parc",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_alee",
+          "target": "n_v28_nature_material_piatra",
+          "relation": "related_to",
+          "label_ro": "poate avea suprafața pietruită",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-pasarela",
+      "word": "Pasarelă",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_pasarela",
+      "verdict": "accept",
+      "rationale": "A familiar pedestrian bridge and an honest Pod subtype. Official road-crossing examples support the crossing purpose; metal/access evidence belongs to that physical sense, excluding ship gangways and building galleries.",
+      "sources": [
+        "https://dexonline.ro/definitie/pasarel%C4%83/json",
+        "https://www.mai.gov.ro/cresterea-sigurantei-rutiere-si-fluidizarea-traficului-pe-dn1/"
+      ],
+      "forms_reviewed": [
+        "pasarelă",
+        "pasarele",
+        "pasarelele",
+        "pasarelei",
+        "pasarelelor"
+      ],
+      "proposed_forms_reviewed": [
+        "pasarelă",
+        "pasarele",
+        "pasarelele",
+        "pasarelei",
+        "pasarelelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_pasarela",
+          "target": "n_v1_16_pod",
+          "relation": "is_a",
+          "label_ro": "este un pod destinat pietonilor",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_pasarela",
+          "target": "n_v29_city_street_trotuar",
+          "relation": "related_to",
+          "label_ro": "poate continua un traseu pietonal de pe trotuar",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_pasarela",
+          "target": "n_v4geo_drum",
+          "relation": "related_to",
+          "label_ro": "poate permite traversarea unui drum",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_pasarela",
+          "target": "n_v4sti_metal",
+          "relation": "related_to",
+          "label_ro": "poate fi construită din metal",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-tunel",
+      "word": "Tunel",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_tunel",
+      "verdict": "accept",
+      "rationale": "School and everyday underground passage. Mountain, road, railway and metro relations are legible; live DOOM3 explicitly permits both tuneluri and tunele paradigms, already screened without normalized duplicates.",
+      "sources": [
+        "https://dexonline.ro/definitie/tunel/json",
+        "https://ro.wiktionary.org/wiki/tunel",
+        "https://ro.wikipedia.org/wiki/Tunel"
+      ],
+      "forms_reviewed": [
+        "tunel",
+        "tunelul",
+        "tuneluri",
+        "tunelurile",
+        "tunelului",
+        "tunelurilor",
+        "tunele",
+        "tunelele",
+        "tunelelor"
+      ],
+      "proposed_forms_reviewed": [
+        "tunel",
+        "tunelul",
+        "tuneluri",
+        "tunelurile",
+        "tunelului",
+        "tunelurilor",
+        "tunele",
+        "tunelele",
+        "tunelelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_tunel",
+          "target": "n_v2geo_munte",
+          "relation": "related_to",
+          "label_ro": "poate străbate un munte",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_tunel",
+          "target": "n_v4geo_drum",
+          "relation": "related_to",
+          "label_ro": "poate permite trecerea unui drum",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_tunel",
+          "target": "n_v24_transport_rail_metrou",
+          "relation": "related_to",
+          "label_ro": "poate permite circulația metroului",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_tunel",
+          "target": "n_v24_transport_rail_tren",
+          "relation": "related_to",
+          "label_ro": "poate permite circulația trenurilor",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-pod",
+      "word": "Pod",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_pod",
+      "verdict": "accept",
+      "rationale": "Familiar bridge rather than attic, dental or gymnastic senses. Its water crossing, road continuity and possible wood/metal construction follow the selected physical definition; protected Punte/Bac forms remain untouched.",
+      "sources": [
+        "https://dexonline.ro/definitie/pod/json",
+        "https://ro.wiktionary.org/wiki/pod",
+        "https://ro.wikipedia.org/wiki/Pod"
+      ],
+      "forms_reviewed": [
+        "pod",
+        "podul",
+        "poduri",
+        "podurile",
+        "podului",
+        "podurilor"
+      ],
+      "proposed_forms_reviewed": [
+        "pod",
+        "podul",
+        "poduri",
+        "podurile",
+        "podului",
+        "podurilor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_pod",
+          "target": "n_v2geo_rau",
+          "relation": "related_to",
+          "label_ro": "poate permite traversarea unui râu",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_pod",
+          "target": "n_v4geo_drum",
+          "relation": "related_to",
+          "label_ro": "poate continua un drum peste un obstacol",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_pod",
+          "target": "n_v1_3_material_lemn",
+          "relation": "related_to",
+          "label_ro": "poate fi construit din lemn",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_pod",
+          "target": "n_v4sti_metal",
+          "relation": "related_to",
+          "label_ro": "poate fi construit din metal",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-parapet",
+      "word": "Parapet",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_parapet",
+      "verdict": "accept",
+      "rationale": "Recognizable roadside/bridge protection. Wood and metal are attested possible materials in the same physical guard sense, without importing naval, military or railway-buffer senses.",
+      "sources": [
+        "https://dexonline.ro/definitie/parapet/json",
+        "https://ro.wiktionary.org/wiki/parapet"
+      ],
+      "forms_reviewed": [
+        "parapet",
+        "parapetul",
+        "parapete",
+        "parapetele",
+        "parapetului",
+        "parapetelor"
+      ],
+      "proposed_forms_reviewed": [
+        "parapet",
+        "parapetul",
+        "parapete",
+        "parapetele",
+        "parapetului",
+        "parapetelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_parapet",
+          "target": "n_v1_16_pod",
+          "relation": "related_to",
+          "label_ro": "poate proteja marginea unui pod",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_parapet",
+          "target": "n_v4geo_drum",
+          "relation": "related_to",
+          "label_ro": "poate proteja marginea unui drum",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_parapet",
+          "target": "n_v1_3_material_lemn",
+          "relation": "related_to",
+          "label_ro": "poate fi construit din lemn",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_parapet",
+          "target": "n_v4sti_metal",
+          "relation": "related_to",
+          "label_ro": "poate fi construit din metal",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-balustrada",
+      "word": "Balustradă",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_balustrada",
+      "verdict": "accept",
+      "rationale": "Familiar balcony/stair guard. The hand-support caption is conditional because a handrail supplies that function; real wood/brass construction supports material links without treating every guard as a handrail.",
+      "sources": [
+        "https://dexonline.ro/definitie/balustrad%C4%83/json",
+        "https://ro.wiktionary.org/wiki/balustrad%C4%83",
+        "https://www.superfaber.ro/balustrada-b1",
+        "https://www.prestcon.ro/mobilier-tamplarie-lemn_scari-lemn_mana-curenta-din-lemn-masiv.html"
+      ],
+      "forms_reviewed": [
+        "balustradă",
+        "balustrade",
+        "balustradele",
+        "balustradei",
+        "balustradelor"
+      ],
+      "proposed_forms_reviewed": [
+        "balustradă",
+        "balustrade",
+        "balustradele",
+        "balustradei",
+        "balustradelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_balustrada",
+          "target": "n_v24_home_outdoor_balcon",
+          "relation": "related_to",
+          "label_ro": "poate proteja marginea unui balcon",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_balustrada",
+          "target": "n_v1_3_material_lemn",
+          "relation": "related_to",
+          "label_ro": "poate fi făcută din lemn",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_balustrada",
+          "target": "n_v4sti_metal",
+          "relation": "related_to",
+          "label_ro": "poate fi făcută din metal",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_balustrada",
+          "target": "n_v24_body_limbs_mana",
+          "relation": "related_to",
+          "label_ro": "poate oferi sprijin mâinii",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-rampa",
+      "word": "Rampă",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_rampa",
+      "verdict": "accept",
+      "rationale": "Familiar inclined access surface. Road/trottoir access and wood/metal examples stay within the incline sense; the unrelated balustrade meaning is excluded and no accessibility performance is promised.",
+      "sources": [
+        "https://dexonline.ro/definitie/ramp%C4%83/json",
+        "https://ro.wiktionary.org/wiki/ramp%C4%83",
+        "https://schela-mobila.ro/rampa-acces-aluminiu",
+        "https://portal.just.ro/113/Documents/Solicitare%20oferte%20ramp%C4%83%20acces.PDF"
+      ],
+      "forms_reviewed": [
+        "rampă",
+        "rampe",
+        "rampele",
+        "rampei",
+        "rampelor"
+      ],
+      "proposed_forms_reviewed": [
+        "rampă",
+        "rampe",
+        "rampele",
+        "rampei",
+        "rampelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_rampa",
+          "target": "n_v4geo_drum",
+          "relation": "related_to",
+          "label_ro": "poate forma o porțiune înclinată a unui drum",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_rampa",
+          "target": "n_v29_city_street_trotuar",
+          "relation": "related_to",
+          "label_ro": "poate facilita accesul pe un trotuar",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_rampa",
+          "target": "n_v1_3_material_lemn",
+          "relation": "related_to",
+          "label_ro": "poate fi construită din lemn",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_rampa",
+          "target": "n_v4sti_metal",
+          "relation": "related_to",
+          "label_ro": "poate fi construită din metal",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-bariera",
+      "word": "Barieră",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_bariera",
+      "verdict": "accept",
+      "rationale": "Familiar movable access bar. The gate/fence entry, road closure and possible wood/metal construction remain concrete; historical city-tax gates and figurative obstacles do not become aliases.",
+      "sources": [
+        "https://dexonline.ro/definitie/barier%C4%83/json",
+        "https://ro.wiktionary.org/wiki/barier%C4%83"
+      ],
+      "forms_reviewed": [
+        "barieră",
+        "bariere",
+        "barierele",
+        "barierei",
+        "barierelor"
+      ],
+      "proposed_forms_reviewed": [
+        "barieră",
+        "bariere",
+        "barierele",
+        "barierei",
+        "barierelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_bariera",
+          "target": "n_v1_10_gard",
+          "relation": "related_to",
+          "label_ro": "poate completa un gard la intrare",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_bariera",
+          "target": "n_v4geo_drum",
+          "relation": "related_to",
+          "label_ro": "poate opri accesul pe un drum",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_bariera",
+          "target": "n_v1_3_material_lemn",
+          "relation": "related_to",
+          "label_ro": "poate fi făcută din lemn",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_bariera",
+          "target": "n_v4sti_metal",
+          "relation": "related_to",
+          "label_ro": "poate fi făcută din metal",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-garaj",
+      "word": "Garaj",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_garaj",
+      "verdict": "accept",
+      "rationale": "Familiar vehicle shelter for cars or motorcycles. Access door and a separate roof are conditional, covering both rooms inside buildings and standalone structures without asserting every garage has its own roof.",
+      "sources": [
+        "https://dexonline.ro/definitie/garaj/json",
+        "https://ro.wiktionary.org/wiki/garaj",
+        "https://www.garajemetalice.ro/produs/garaj-pentru-motocicleta-5x2-m/"
+      ],
+      "forms_reviewed": [
+        "garaj",
+        "garajul",
+        "garaje",
+        "garajele",
+        "garajului",
+        "garajelor"
+      ],
+      "proposed_forms_reviewed": [
+        "garaj",
+        "garajul",
+        "garaje",
+        "garajele",
+        "garajului",
+        "garajelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_garaj",
+          "target": "n_v24_transport_personal_masina",
+          "relation": "related_to",
+          "label_ro": "poate adăposti o mașină",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_garaj",
+          "target": "n_v24_transport_personal_motocicleta",
+          "relation": "related_to",
+          "label_ro": "poate adăposti o motocicletă",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_garaj",
+          "target": "n_v4via_usa",
+          "relation": "related_to",
+          "label_ro": "poate avea o ușă de acces",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_garaj",
+          "target": "n_v24_home_structure_acoperis",
+          "relation": "related_to",
+          "label_ro": "poate avea un acoperiș propriu",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-benzina",
+      "word": "Benzină",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_benzina",
+      "verdict": "accept",
+      "rationale": "Everyday fuel substance with school-physics relevance. Combustion energy, air mixture, engine and some car uses are honest; the liquid remains distinct from the engine and the generic fuel parent.",
+      "sources": [
+        "https://dexonline.ro/definitie/benzin%C4%83/json",
+        "https://ro.wiktionary.org/wiki/benzin%C4%83",
+        "https://www.boschaftermarket.com/ro/ro/piese/produse/filtre/"
+      ],
+      "forms_reviewed": [
+        "benzină",
+        "benzine",
+        "benzinele",
+        "benzinei",
+        "benzinelor"
+      ],
+      "proposed_forms_reviewed": [
+        "benzină",
+        "benzine",
+        "benzinele",
+        "benzinei",
+        "benzinelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_benzina",
+          "target": "n_v1_16_combustibil",
+          "relation": "is_a",
+          "label_ro": "este un combustibil",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_benzina",
+          "target": "n_v1_16_motor",
+          "relation": "related_to",
+          "label_ro": "poate alimenta un motor",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_benzina",
+          "target": "n_v3sti_energie",
+          "relation": "related_to",
+          "label_ro": "poate elibera energie prin ardere",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_benzina",
+          "target": "n_v4sti_aer",
+          "relation": "related_to",
+          "label_ro": "se amestecă cu aerul în motoare cu ardere internă",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_benzina",
+          "target": "n_v24_transport_personal_masina",
+          "relation": "related_to",
+          "label_ro": "poate alimenta motorul unei mașini",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-motorina",
+      "word": "Motorină",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_motorina",
+      "verdict": "accept",
+      "rationale": "Everyday diesel fuel, distinct from a diesel engine. The combustion/air/energy and possible diesel-car links stay in the selected fuel sense; normative plural forms are ordinary inputs, not new synonyms.",
+      "sources": [
+        "https://dexonline.ro/definitie/motorin%C4%83/json",
+        "https://ro.wiktionary.org/wiki/motorin%C4%83",
+        "https://www.boschaftermarket.com/ro/ro/piese/produse/filtre/"
+      ],
+      "forms_reviewed": [
+        "motorină",
+        "motorine",
+        "motorinele",
+        "motorinei",
+        "motorinelor"
+      ],
+      "proposed_forms_reviewed": [
+        "motorină",
+        "motorine",
+        "motorinele",
+        "motorinei",
+        "motorinelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_motorina",
+          "target": "n_v1_16_combustibil",
+          "relation": "is_a",
+          "label_ro": "este un combustibil",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_motorina",
+          "target": "n_v1_16_motor",
+          "relation": "related_to",
+          "label_ro": "poate alimenta un motor diesel",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_motorina",
+          "target": "n_v3sti_energie",
+          "relation": "related_to",
+          "label_ro": "poate elibera energie prin ardere",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_motorina",
+          "target": "n_v4sti_aer",
+          "relation": "related_to",
+          "label_ro": "arde în contact cu aerul în motorul diesel",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_motorina",
+          "target": "n_v24_transport_personal_masina",
+          "relation": "related_to",
+          "label_ro": "poate alimenta motorul diesel al unei mașini",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-combustibil",
+      "word": "Combustibil",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_combustibil",
+      "verdict": "accept",
+      "rationale": "School science and household-energy noun, with the masculine noun paradigm separately verified. Honest shared-guess/category hub and material links; no hidden Cald target or dictionary-filler board is approved.",
+      "sources": [
+        "https://dexonline.ro/definitie/combustibil/json",
+        "https://ro.wiktionary.org/wiki/combustibil",
+        "https://www.boschaftermarket.com/ro/ro/piese/produse/filtre/"
+      ],
+      "forms_reviewed": [
+        "combustibil",
+        "combustibilul",
+        "combustibilului",
+        "combustibili",
+        "combustibilii",
+        "combustibililor"
+      ],
+      "proposed_forms_reviewed": [
+        "combustibil",
+        "combustibilul",
+        "combustibilului",
+        "combustibili",
+        "combustibilii",
+        "combustibililor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_combustibil",
+          "target": "n_v4sti_foc",
+          "relation": "related_to",
+          "label_ro": "poate întreține arderea unui foc",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_combustibil",
+          "target": "n_v3sti_energie",
+          "relation": "related_to",
+          "label_ro": "poate elibera energie prin ardere",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_combustibil",
+          "target": "n_v4sti_aer",
+          "relation": "related_to",
+          "label_ro": "poate arde folosind oxigenul din aer",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_combustibil",
+          "target": "n_v1_3_material_lemn",
+          "relation": "related_to",
+          "label_ro": "lemnul poate fi folosit drept combustibil",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-motor",
+      "word": "Motor",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_motor",
+      "verdict": "accept",
+      "rationale": "Familiar physical machine converting energy to mechanical work. Electrical and combustion examples are scoped explicitly; metal parts are conditional. Noun motoare is verified separately from adjectival motori/motoare.",
+      "sources": [
+        "https://dexonline.ro/definitie/motor/json",
+        "https://ro.wiktionary.org/wiki/motor",
+        "https://www.boschaftermarket.com/ro/ro/piese/produse/filtre/"
+      ],
+      "forms_reviewed": [
+        "motor",
+        "motorul",
+        "motoare",
+        "motoarele",
+        "motorului",
+        "motoarelor"
+      ],
+      "proposed_forms_reviewed": [
+        "motor",
+        "motorul",
+        "motoare",
+        "motoarele",
+        "motorului",
+        "motoarelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_motor",
+          "target": "n_v3sti_electricitate",
+          "relation": "related_to",
+          "label_ro": "un motor electric folosește electricitate",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_motor",
+          "target": "n_v3sti_energie",
+          "relation": "related_to",
+          "label_ro": "transformă energie în lucru mecanic",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_motor",
+          "target": "n_v4sti_metal",
+          "relation": "related_to",
+          "label_ro": "poate avea piese metalice",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_motor",
+          "target": "n_v4sti_aer",
+          "relation": "related_to",
+          "label_ro": "un motor cu ardere internă poate utiliza aer",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-frana",
+      "word": "Frână",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_frana",
+      "verdict": "accept",
+      "rationale": "Familiar braking device in road-safety and cycling vocabulary. Bicycle, motorcycle, car and wheel-slowing captions describe the same physical function and do not import the figurative obstacle sense.",
+      "sources": [
+        "https://dexonline.ro/definitie/fr%C3%A2n%C4%83/json",
+        "https://ro.wiktionary.org/wiki/fr%C3%A2n%C4%83"
+      ],
+      "forms_reviewed": [
+        "frână",
+        "frâne",
+        "frânele",
+        "frânei",
+        "frânelor"
+      ],
+      "proposed_forms_reviewed": [
+        "frână",
+        "frâne",
+        "frânele",
+        "frânei",
+        "frânelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_frana",
+          "target": "n_v24_transport_personal_bicicleta",
+          "relation": "related_to",
+          "label_ro": "poate încetini deplasarea unei biciclete",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_frana",
+          "target": "n_v24_transport_personal_motocicleta",
+          "relation": "related_to",
+          "label_ro": "poate încetini deplasarea unei motociclete",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_frana",
+          "target": "n_v24_transport_personal_masina",
+          "relation": "related_to",
+          "label_ro": "poate încetini deplasarea unei mașini",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_frana",
+          "target": "n_v1_10_roata",
+          "relation": "related_to",
+          "label_ro": "poate încetini rotirea unei roți",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-pedala",
+      "word": "Pedală",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_pedala",
+      "verdict": "accept",
+      "rationale": "Familiar foot-operated lever. Bicycle propulsion, vehicle control and possible brake actuation are scoped possibilities; the anatomical Picior target is correct, with musical/verb senses excluded.",
+      "sources": [
+        "https://dexonline.ro/definitie/pedal%C4%83/json",
+        "https://ro.wiktionary.org/wiki/pedal%C4%83",
+        "https://politiaromana.ro/files/pages_files/25-08-21-01-42-37Ghid_educatie_rutiera_gimnaziu.pdf"
+      ],
+      "forms_reviewed": [
+        "pedală",
+        "pedale",
+        "pedalele",
+        "pedalei",
+        "pedalelor"
+      ],
+      "proposed_forms_reviewed": [
+        "pedală",
+        "pedale",
+        "pedalele",
+        "pedalei",
+        "pedalelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_pedala",
+          "target": "n_v24_transport_personal_bicicleta",
+          "relation": "related_to",
+          "label_ro": "poate fi folosită pentru propulsarea unei biciclete",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_pedala",
+          "target": "n_v24_transport_personal_masina",
+          "relation": "related_to",
+          "label_ro": "poate acționa o comandă a unei mașini",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_pedala",
+          "target": "n_v24_body_limbs_picior",
+          "relation": "related_to",
+          "label_ro": "este acționată cu piciorul",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_pedala",
+          "target": "n_v1_16_frana",
+          "relation": "related_to",
+          "label_ro": "poate acționa o frână",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-janta",
+      "word": "Jantă",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_janta",
+      "verdict": "accept",
+      "rationale": "Recognizable wheel component in ordinary bicycle/vehicle experience. Wheel membership, tire support, bicycle use and possible metal construction are honest; no Pneu synonym or geantă variant is admitted.",
+      "sources": [
+        "https://dexonline.ro/definitie/jant%C4%83/json",
+        "https://ro.wiktionary.org/wiki/jant%C4%83",
+        "https://www.decathlon.ro/p/roata-fata-mtb-26-perete-dublu-franare-tip-v-brake-si-za-rapida/_/R-p-196997"
+      ],
+      "forms_reviewed": [
+        "jantă",
+        "jante",
+        "jantele",
+        "jantei",
+        "jantelor"
+      ],
+      "proposed_forms_reviewed": [
+        "jantă",
+        "jante",
+        "jantele",
+        "jantei",
+        "jantelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_janta",
+          "target": "n_v1_10_roata",
+          "relation": "part_of",
+          "label_ro": "face parte dintr-o roată de vehicul",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_janta",
+          "target": "n_v1_10_anvelopa",
+          "relation": "related_to",
+          "label_ro": "susține anvelopa",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_janta",
+          "target": "n_v24_transport_personal_bicicleta",
+          "relation": "related_to",
+          "label_ro": "poate face parte din roata unei biciclete",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_janta",
+          "target": "n_v4sti_metal",
+          "relation": "related_to",
+          "label_ro": "poate fi fabricată din metal",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-spita",
+      "word": "Spiță",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_spita",
+      "verdict": "accept",
+      "rationale": "Familiar bicycle-wheel component and school mechanical vocabulary. Real bicycle and motorcycle wheel examples support metal spokes; lineage, biological and ladder senses are excluded.",
+      "sources": [
+        "https://dexonline.ro/definitie/spi%C8%9B%C4%83/json",
+        "https://www.decathlon.ro/p/roata-fata-mtb-26-perete-dublu-franare-tip-v-brake-si-za-rapida/_/R-p-196997",
+        "https://www.bmw-motorrad.ro/ro/models/adventure/r1300gs-adventure.html"
+      ],
+      "forms_reviewed": [
+        "spiță",
+        "spițe",
+        "spițele",
+        "spiței",
+        "spițelor"
+      ],
+      "proposed_forms_reviewed": [
+        "spiță",
+        "spițe",
+        "spițele",
+        "spiței",
+        "spițelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_spita",
+          "target": "n_v1_10_roata",
+          "relation": "part_of",
+          "label_ro": "poate face parte dintr-o roată de vehicul",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_spita",
+          "target": "n_v24_transport_personal_bicicleta",
+          "relation": "related_to",
+          "label_ro": "poate face parte din roata unei biciclete",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_spita",
+          "target": "n_v24_transport_personal_motocicleta",
+          "relation": "related_to",
+          "label_ro": "poate face parte din roata unei motociclete",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_spita",
+          "target": "n_v4sti_metal",
+          "relation": "related_to",
+          "label_ro": "poate fi fabricată din metal",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-ghidon",
+      "word": "Ghidon",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_ghidon",
+      "verdict": "accept",
+      "rationale": "Familiar hand-operated steering bar. Bicycle and motorcycle steering, hand use and possible metal construction match the actual targets; the naval signal-flag sense is excluded.",
+      "sources": [
+        "https://dexonline.ro/definitie/ghidon/json",
+        "https://ro.wiktionary.org/wiki/ghidon",
+        "https://www.piaggio.com/ro_RO/models/beverly/",
+        "https://politiaromana.ro/files/pages_files/25-08-21-01-42-37Ghid_educatie_rutiera_gimnaziu.pdf"
+      ],
+      "forms_reviewed": [
+        "ghidon",
+        "ghidonul",
+        "ghidoane",
+        "ghidoanele",
+        "ghidonului",
+        "ghidoanelor"
+      ],
+      "proposed_forms_reviewed": [
+        "ghidon",
+        "ghidonul",
+        "ghidoane",
+        "ghidoanele",
+        "ghidonului",
+        "ghidoanelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_ghidon",
+          "target": "n_v24_transport_personal_bicicleta",
+          "relation": "related_to",
+          "label_ro": "poate dirija roata din față a unei biciclete",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_ghidon",
+          "target": "n_v24_transport_personal_motocicleta",
+          "relation": "related_to",
+          "label_ro": "poate dirija roata din față a unei motociclete",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_ghidon",
+          "target": "n_v24_body_limbs_mana",
+          "relation": "related_to",
+          "label_ro": "este manevrat cu mâinile",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_ghidon",
+          "target": "n_v4sti_metal",
+          "relation": "related_to",
+          "label_ro": "poate fi fabricat din metal",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-sa",
+      "word": "Șa",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_sa",
+      "verdict": "accept",
+      "rationale": "Familiar riding and cycling seat, using the ordinary connected physical senses. Horse, bicycle and motorcycle uses are legible; steel bicycle-seat rails support the conditional metal claim, without anatomical/geographical senses.",
+      "sources": [
+        "https://dexonline.ro/definitie/%C8%99a/json",
+        "https://ro.wiktionary.org/wiki/%C8%99a",
+        "https://www.decathlon.ro/p/sa-210-mm-270-mm-sina-otel-bicicleta-de-oras-maner/_/R-p-384389"
+      ],
+      "forms_reviewed": [
+        "șa",
+        "șaua",
+        "șei",
+        "șeile",
+        "șeii",
+        "șeilor"
+      ],
+      "proposed_forms_reviewed": [
+        "șa",
+        "șaua",
+        "șei",
+        "șeile",
+        "șeii",
+        "șeilor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_sa",
+          "target": "n_v24_transport_personal_bicicleta",
+          "relation": "related_to",
+          "label_ro": "poate fi scaunul unei biciclete",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_sa",
+          "target": "n_v24_transport_personal_motocicleta",
+          "relation": "related_to",
+          "label_ro": "poate fi scaunul unei motociclete",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_sa",
+          "target": "n_v30_animal_farm_cal",
+          "relation": "related_to",
+          "label_ro": "poate fi pusă pe un cal pentru călărie",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_sa",
+          "target": "n_v4sti_metal",
+          "relation": "related_to",
+          "label_ro": "unele șei de bicicletă au suporturi metalice",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-portbagaj",
+      "word": "Portbagaj",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_portbagaj",
+      "verdict": "accept",
+      "rationale": "Familiar vehicle luggage space or rack. Car compartment and bicycle/motorcycle supports are coherent physical uses; Bagaj is their possible load/function, not an unrestricted synonym.",
+      "sources": [
+        "https://dexonline.ro/definitie/portbagaj/json",
+        "https://ro.wiktionary.org/wiki/portbagaj",
+        "https://www.decathlon.ro/p/portbagaj-aluminiu-bicicleta-de-oras-elops-27-kg/_/R-p-335374"
+      ],
+      "forms_reviewed": [
+        "portbagaj",
+        "portbagajul",
+        "portbagaje",
+        "portbagajele",
+        "portbagajului",
+        "portbagajelor"
+      ],
+      "proposed_forms_reviewed": [
+        "portbagaj",
+        "portbagajul",
+        "portbagaje",
+        "portbagajele",
+        "portbagajului",
+        "portbagajelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_portbagaj",
+          "target": "n_v24_transport_personal_masina",
+          "relation": "related_to",
+          "label_ro": "poate fi compartimentul de bagaje al unei mașini",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_portbagaj",
+          "target": "n_v24_transport_personal_motocicleta",
+          "relation": "related_to",
+          "label_ro": "poate fi montat pe o motocicletă pentru bagaje",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_portbagaj",
+          "target": "n_v24_transport_personal_bicicleta",
+          "relation": "related_to",
+          "label_ro": "poate fi montat pe o bicicletă pentru bagaje",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_portbagaj",
+          "target": "n_v1_16_bagaj",
+          "relation": "related_to",
+          "label_ro": "servește la transportarea bagajelor",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-centura_de_siguranta",
+      "word": "Centură de siguranță",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_centura_de_siguranta",
+      "verdict": "accept",
+      "rationale": "Familiar vehicle occupant restraint, supported by automotive usage rather than the dictionary’s separate work-at-height harness. Qualified morphology excludes bare centură; bus availability is conditional and no safety standard is promised.",
+      "sources": [
+        "https://dexonline.ro/definitie/centur%C4%83/json",
+        "https://ro.wiktionary.org/wiki/centur%C4%83",
+        "https://www.volvotrucks.ro/ro-ro/news/press-releases/2019/jun/pressrelease-190727.html"
+      ],
+      "forms_reviewed": [
+        "centură de siguranță",
+        "centuri de siguranță",
+        "centurile de siguranță",
+        "centurii de siguranță",
+        "centurilor de siguranță"
+      ],
+      "proposed_forms_reviewed": [
+        "centură de siguranță",
+        "centuri de siguranță",
+        "centurile de siguranță",
+        "centurii de siguranță",
+        "centurilor de siguranță"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_centura_de_siguranta",
+          "target": "n_v24_transport_personal_masina",
+          "relation": "related_to",
+          "label_ro": "poate proteja ocupanții unei mașini",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_centura_de_siguranta",
+          "target": "n_v24_transport_road_camion",
+          "relation": "related_to",
+          "label_ro": "poate proteja ocupanții unui camion",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_centura_de_siguranta",
+          "target": "n_v4soc_autobuz",
+          "relation": "related_to",
+          "label_ro": "unele autobuze au centuri de siguranță",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_centura_de_siguranta",
+          "target": "n_v24_home_seating_scaun",
+          "relation": "related_to",
+          "label_ro": "poate menține ocupantul pe scaun",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-casca_de_protectie",
+      "word": "Cască de protecție",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_casca_de_protectie",
+      "verdict": "accept",
+      "rationale": "Familiar protective head covering in school road-safety material. Qualified forms preserve the existing headphone owner; bicycle, motorcycle and scooter use are possibilities, without claiming every helmet suits every vehicle.",
+      "sources": [
+        "https://dexonline.ro/definitie/casc%C4%83/json",
+        "https://ro.wiktionary.org/wiki/casc%C4%83",
+        "https://gl.politiaromana.ro/files/pages_files/25-10-09-09-49-32Ghid_educatie_rutiera_liceu.pdf",
+        "https://mm.politiaromana.ro/files/pages_files/26-01-23-01-55-55Ghid_educatie_rutiera_primar.pdf"
+      ],
+      "forms_reviewed": [
+        "cască de protecție",
+        "căști de protecție",
+        "căștile de protecție",
+        "căștii de protecție",
+        "căștilor de protecție"
+      ],
+      "proposed_forms_reviewed": [
+        "cască de protecție",
+        "căști de protecție",
+        "căștile de protecție",
+        "căștii de protecție",
+        "căștilor de protecție"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_casca_de_protectie",
+          "target": "n_v24_transport_personal_bicicleta",
+          "relation": "related_to",
+          "label_ro": "poate proteja ciclistul",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_casca_de_protectie",
+          "target": "n_v24_transport_personal_motocicleta",
+          "relation": "related_to",
+          "label_ro": "poate proteja motociclistul",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_casca_de_protectie",
+          "target": "n_v24_body_face_cap",
+          "relation": "related_to",
+          "label_ro": "protejează capul",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_casca_de_protectie",
+          "target": "n_v1_16_scuter",
+          "relation": "related_to",
+          "label_ro": "poate proteja conducătorul unui scuter",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-caruta",
+      "word": "Căruță",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_caruta",
+      "verdict": "accept",
+      "rationale": "Strong Romanian rural and museum-cultural relevance. The vehicle parent, horse traction, wheels and possible wooden body are honest; the later crafting idea remains entirely unapproved.",
+      "sources": [
+        "https://dexonline.ro/definitie/c%C4%83ru%C8%9B%C4%83/json",
+        "https://ro.wiktionary.org/wiki/c%C4%83ru%C8%9B%C4%83",
+        "https://clasate.cimec.ro/Detaliu.asp?k=30374BB036104BCFABFA1913406505F3"
+      ],
+      "forms_reviewed": [
+        "căruță",
+        "căruțe",
+        "căruțele",
+        "căruței",
+        "căruțelor"
+      ],
+      "proposed_forms_reviewed": [
+        "căruță",
+        "căruțe",
+        "căruțele",
+        "căruței",
+        "căruțelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_caruta",
+          "target": "n_v1_16_vehicul",
+          "relation": "is_a",
+          "label_ro": "este un vehicul cu tracțiune animală",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_caruta",
+          "target": "n_v30_animal_farm_cal",
+          "relation": "related_to",
+          "label_ro": "poate fi trasă de un cal",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_caruta",
+          "target": "n_v1_3_material_lemn",
+          "relation": "related_to",
+          "label_ro": "poate avea caroserie din lemn",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_caruta",
+          "target": "n_v1_10_roata",
+          "relation": "related_to",
+          "label_ro": "are roți pentru deplasare",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-vehicul",
+      "word": "Vehicul",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_vehicul",
+      "verdict": "accept",
+      "rationale": "School and everyday physical transport class, with honest incoming subtype edges. It is useful shared vocabulary/hub only; the train-ensemble claim is absent and no generic filler board or hidden target is approved.",
+      "sources": [
+        "https://dexonline.ro/definitie/vehicul/json",
+        "https://ro.wiktionary.org/wiki/vehicul"
+      ],
+      "forms_reviewed": [
+        "vehicul",
+        "vehiculul",
+        "vehicule",
+        "vehiculele",
+        "vehiculului",
+        "vehiculelor"
+      ],
+      "proposed_forms_reviewed": [
+        "vehicul",
+        "vehiculul",
+        "vehicule",
+        "vehiculele",
+        "vehiculului",
+        "vehiculelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v2sti_avion",
+          "target": "n_v1_16_vehicul",
+          "relation": "is_a",
+          "label_ro": "este un vehicul aerian",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v4soc_autobuz",
+          "target": "n_v1_16_vehicul",
+          "relation": "is_a",
+          "label_ro": "este un vehicul rutier",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v24_transport_personal_bicicleta",
+          "target": "n_v1_16_vehicul",
+          "relation": "is_a",
+          "label_ro": "este un vehicul cu două roți",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-bagaj",
+      "word": "Bagaj",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_bagaj",
+      "verdict": "accept",
+      "rationale": "Familiar concrete travel belongings. Backpack/schoolbag may be included containers and train/air transport is possible; neither container is claimed as a substitutable synonym for all luggage.",
+      "sources": [
+        "https://dexonline.ro/definitie/bagaj/json",
+        "https://ro.wiktionary.org/wiki/bagaj"
+      ],
+      "forms_reviewed": [
+        "bagaj",
+        "bagajul",
+        "bagaje",
+        "bagajele",
+        "bagajului",
+        "bagajelor"
+      ],
+      "proposed_forms_reviewed": [
+        "bagaj",
+        "bagajul",
+        "bagaje",
+        "bagajele",
+        "bagajului",
+        "bagajelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_bagaj",
+          "target": "n_v1_8_rucsac",
+          "relation": "related_to",
+          "label_ro": "poate include un rucsac cu lucruri personale",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_bagaj",
+          "target": "n_v23via_ghiozdan",
+          "relation": "related_to",
+          "label_ro": "poate include un ghiozdan cu lucruri personale",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_bagaj",
+          "target": "n_v2sti_avion",
+          "relation": "related_to",
+          "label_ro": "poate fi transportat cu avionul",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_bagaj",
+          "target": "n_v24_transport_rail_tren",
+          "relation": "related_to",
+          "label_ro": "poate fi transportat cu trenul",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-nava",
+      "word": "Navă",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_nava",
+      "verdict": "accept",
+      "rationale": "School and everyday watercraft sense, distinct from church nave and spacecraft. Powered Vapor has an honest incoming parent relation; port, sea and ocean travel are conditional rather than a universal itinerary.",
+      "sources": [
+        "https://dexonline.ro/definitie/nav%C4%83/json",
+        "https://ro.wiktionary.org/wiki/nav%C4%83",
+        "https://www.navy.ro/eveniment.php?id=2480",
+        "https://www.navy.ro/eveniment.php?id=2513"
+      ],
+      "forms_reviewed": [
+        "navă",
+        "nave",
+        "navele",
+        "navei",
+        "navelor"
+      ],
+      "proposed_forms_reviewed": [
+        "navă",
+        "nave",
+        "navele",
+        "navei",
+        "navelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v28_transport_water_vapor",
+          "target": "n_v1_16_nava",
+          "relation": "is_a",
+          "label_ro": "este o navă",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_nava",
+          "target": "n_v2soc_port",
+          "relation": "related_to",
+          "label_ro": "poate acosta într-un port",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_nava",
+          "target": "n_v3geo_mare",
+          "relation": "related_to",
+          "label_ro": "poate naviga pe mare",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_nava",
+          "target": "n_v3geo_ocean",
+          "relation": "related_to",
+          "label_ro": "poate naviga pe ocean",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-corabie",
+      "word": "Corabie",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_corabie",
+      "verdict": "accept",
+      "rationale": "School/history/cultural sailing-ship word; a historical object does not make the current noun archaic-only. Live DOOM3 confirms corabiei despite the Wiktionary error; possible port/sea/wind relations preserve the sailing-vessel sense.",
+      "sources": [
+        "https://dexonline.ro/definitie/corabie/json",
+        "https://ro.wiktionary.org/wiki/corabie",
+        "https://www.navy.ro/eveniment.php?id=2480",
+        "https://www.navy.ro/eveniment.php?id=2513"
+      ],
+      "forms_reviewed": [
+        "corabie",
+        "corabia",
+        "corăbii",
+        "corăbiile",
+        "corabiei",
+        "corăbiilor"
+      ],
+      "proposed_forms_reviewed": [
+        "corabie",
+        "corabia",
+        "corăbii",
+        "corăbiile",
+        "corabiei",
+        "corăbiilor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_corabie",
+          "target": "n_v1_16_nava",
+          "relation": "is_a",
+          "label_ro": "este o navă",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_corabie",
+          "target": "n_v2soc_port",
+          "relation": "related_to",
+          "label_ro": "poate acosta într-un port",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_corabie",
+          "target": "n_v3geo_mare",
+          "relation": "related_to",
+          "label_ro": "poate naviga pe mare",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_corabie",
+          "target": "n_v24_weather_air_vant",
+          "relation": "related_to",
+          "label_ro": "unele corăbii folosesc vântul pentru propulsie",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-caiac",
+      "word": "Caiac",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_caiac",
+      "verdict": "accept",
+      "rationale": "Recognizable Romanian sport/recreation boat. Canoe is related, not an asserted subtype; sport, lake and sea use are honest possibilities. The unsupported single-bladed pagaie edge remains excluded.",
+      "sources": [
+        "https://dexonline.ro/definitie/caiac/json",
+        "https://ro.wiktionary.org/wiki/caiac"
+      ],
+      "forms_reviewed": [
+        "caiac",
+        "caiacul",
+        "caiace",
+        "caiacele",
+        "caiacului",
+        "caiacelor"
+      ],
+      "proposed_forms_reviewed": [
+        "caiac",
+        "caiacul",
+        "caiace",
+        "caiacele",
+        "caiacului",
+        "caiacelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_caiac",
+          "target": "n_spt_canoe",
+          "relation": "related_to",
+          "label_ro": "este o ambarcațiune înrudită cu canoe",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_caiac",
+          "target": "n_v4spo_sport",
+          "relation": "related_to",
+          "label_ro": "poate fi folosit în sporturi nautice",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_caiac",
+          "target": "n_v2geo_lac",
+          "relation": "related_to",
+          "label_ro": "poate fi folosit pe un lac",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_caiac",
+          "target": "n_v3geo_mare",
+          "relation": "related_to",
+          "label_ro": "unele caiace sunt folosite pe mare",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-pagaie",
+      "word": "Pagaie",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_pagaie",
+      "verdict": "accept",
+      "rationale": "Passes school/culture relevance through canoe practice and a current children/family museum craft activity; rarity alone is no rejection. Live DOOM3 confirms invariant plural pagaie; hand use and possible wooden construction fit the single-bladed tool.",
+      "sources": [
+        "https://dexonline.ro/definitie/pagaie/json",
+        "https://ro.wiktionary.org/wiki/pagaie",
+        "https://antipa.ro/product/triunghiul-muzeelor-19-20-septembrie-2026/"
+      ],
+      "forms_reviewed": [
+        "pagaie",
+        "pagaia",
+        "pagaiele",
+        "pagaiei",
+        "pagaielor"
+      ],
+      "proposed_forms_reviewed": [
+        "pagaie",
+        "pagaia",
+        "pagaiele",
+        "pagaiei",
+        "pagaielor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_pagaie",
+          "target": "n_spt_canoe",
+          "relation": "related_to",
+          "label_ro": "poate propulsa o canoe",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_pagaie",
+          "target": "n_v4spo_sport",
+          "relation": "related_to",
+          "label_ro": "poate fi folosită în sporturi nautice",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_pagaie",
+          "target": "n_v24_body_limbs_mana",
+          "relation": "related_to",
+          "label_ro": "este manevrată cu mâinile",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_pagaie",
+          "target": "n_v1_3_material_lemn",
+          "relation": "related_to",
+          "label_ro": "poate fi fabricată din lemn",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-carucior",
+      "word": "Cărucior",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_carucior",
+      "verdict": "accept",
+      "rationale": "Familiar small wheeled transport for children or loads. Vehicle/ wheel relations and possible manual pushing/metal construction are coherent; the machine-tool subassembly sense is excluded.",
+      "sources": [
+        "https://dexonline.ro/definitie/c%C4%83rucior/json",
+        "https://ro.wiktionary.org/wiki/c%C4%83rucior",
+        "https://www.raris.ro/index.php?ch=produs&id_produs=234"
+      ],
+      "forms_reviewed": [
+        "cărucior",
+        "căruciorul",
+        "cărucioare",
+        "cărucioarele",
+        "căruciorului",
+        "cărucioarelor"
+      ],
+      "proposed_forms_reviewed": [
+        "cărucior",
+        "căruciorul",
+        "cărucioare",
+        "cărucioarele",
+        "căruciorului",
+        "cărucioarelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_carucior",
+          "target": "n_v1_16_vehicul",
+          "relation": "is_a",
+          "label_ro": "este un vehicul mic pentru transport",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_carucior",
+          "target": "n_v1_10_roata",
+          "relation": "related_to",
+          "label_ro": "se deplasează pe roți",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_carucior",
+          "target": "n_v24_body_limbs_mana",
+          "relation": "related_to",
+          "label_ro": "poate fi împins cu mâinile",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_carucior",
+          "target": "n_v4sti_metal",
+          "relation": "related_to",
+          "label_ro": "poate avea structură metalică",
+          "verdict": "accept"
+        }
+      ]
+    },
+    {
+      "id": "v116-ancora",
+      "word": "Ancoră",
+      "kind": "new_shared_concept",
+      "node_id": "n_v1_16_ancora",
+      "verdict": "modify",
+      "rationale": "Familiar school and nautical object. Metal, ship holding and port-area use are honest, but the sea caption must identify the anchor as attaching to the seabed instead of suggesting the ship lies on the bottom.",
+      "sources": [
+        "https://dexonline.ro/definitie/ancor%C4%83/json",
+        "https://ro.wiktionary.org/wiki/ancor%C4%83",
+        "https://www.navy.ro/eveniment.php?id=2480"
+      ],
+      "forms_reviewed": [
+        "ancoră",
+        "ancore",
+        "ancorele",
+        "ancorei",
+        "ancorelor"
+      ],
+      "proposed_forms_reviewed": [
+        "ancoră",
+        "ancore",
+        "ancorele",
+        "ancorei",
+        "ancorelor"
+      ],
+      "required_changes": [
+        {
+          "op": "replace_edge_caption",
+          "source": "n_v1_16_ancora",
+          "target": "n_v3geo_mare",
+          "relation": "related_to",
+          "old": "poate fixa o navă pe fundul mării",
+          "new": "se poate fixa în fundul mării pentru a ține nava pe loc",
+          "reason": "The anchor attaches to the seabed; the ship is held in place, rather than placed on the seabed. Same existing endpoints and relation.",
+          "sources": [
+            "https://ro.wiktionary.org/wiki/ancor%C4%83"
+          ]
+        }
+      ],
+      "claims_reviewed": [
+        {
+          "source": "n_v1_16_ancora",
+          "target": "n_v28_transport_water_vapor",
+          "relation": "related_to",
+          "label_ro": "poate fixa un vapor pe loc",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_ancora",
+          "target": "n_v2soc_port",
+          "relation": "related_to",
+          "label_ro": "poate fi folosită la ancorare în zona unui port",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_ancora",
+          "target": "n_v4sti_metal",
+          "relation": "related_to",
+          "label_ro": "poate fi fabricată din metal",
+          "verdict": "accept"
+        },
+        {
+          "source": "n_v1_16_ancora",
+          "target": "n_v3geo_mare",
+          "relation": "related_to",
+          "label_ro": "poate fixa o navă pe fundul mării",
+          "verdict": "modify",
+          "rationale": "The anchor attaches to the seabed; the ship is held in place, rather than placed on the seabed. Same existing endpoints and relation."
+        }
+      ]
+    },
+    {
+      "id": "v116-soferita",
+      "word": "Șoferiță",
+      "kind": "existing_input_family",
+      "node_id": "n_v1_9_sofer",
+      "verdict": "accept",
+      "rationale": "Familiar contemporary feminine driver noun, matching the existing person/driver role. Preserve it as a feminine person input, not an unrestricted gender-neutral lexical synonym; all five normalized forms remain ordinary.",
+      "sources": [
+        "https://dexonline.ro/definitie/%C8%99oferi%C8%9B%C4%83/json",
+        "https://ro.wiktionary.org/wiki/%C8%99oferi%C8%9B%C4%83"
+      ],
+      "forms_reviewed": [
+        "șoferiță",
+        "șoferițe",
+        "șoferițele",
+        "șoferiței",
+        "șoferițelor"
+      ],
+      "proposed_forms_reviewed": [
+        "șoferiță",
+        "șoferițe",
+        "șoferițele",
+        "șoferiței",
+        "șoferițelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": []
+    },
+    {
+      "id": "v116-trotuar",
+      "word": "Trotuar",
+      "kind": "existing_input_family",
+      "node_id": "n_v29_city_street_trotuar",
+      "verdict": "accept",
+      "rationale": "Familiar pedestrian street margin. The missing plural genitive trotuarelor completes the existing same-sense paradigm without relabeling or adding a competing concept.",
+      "sources": [
+        "https://dexonline.ro/definitie/trotuar/json",
+        "https://ro.wiktionary.org/wiki/trotuar"
+      ],
+      "forms_reviewed": [
+        "trotuar",
+        "trotuarul",
+        "trotuare",
+        "trotuarele",
+        "trotuarului",
+        "trotuarelor"
+      ],
+      "proposed_forms_reviewed": [
+        "trotuarelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": []
+    },
+    {
+      "id": "v116-strada",
+      "word": "Stradă",
+      "kind": "existing_input_family",
+      "node_id": "n_v4geo_strada",
+      "verdict": "accept",
+      "rationale": "Universally recognizable urban-road noun. Străzii/străzilor are ordinary genitive/dative completions for the existing physical-street sense, not the collective inhabitants sense.",
+      "sources": [
+        "https://dexonline.ro/definitie/strad%C4%83/json",
+        "https://ro.wiktionary.org/wiki/strad%C4%83"
+      ],
+      "forms_reviewed": [
+        "stradă",
+        "străzi",
+        "străzile",
+        "străzii",
+        "străzilor"
+      ],
+      "proposed_forms_reviewed": [
+        "străzii",
+        "străzilor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": []
+    },
+    {
+      "id": "v116-tren",
+      "word": "Tren",
+      "kind": "existing_input_family",
+      "node_id": "n_v24_transport_rail_tren",
+      "verdict": "accept",
+      "rationale": "Familiar rail convoy. Trenului/trenurilor complete the existing railway sense; no gear-train, aircraft landing gear or other technical meaning is introduced.",
+      "sources": [
+        "https://dexonline.ro/definitie/tren/json",
+        "https://ro.wiktionary.org/wiki/tren"
+      ],
+      "forms_reviewed": [
+        "tren",
+        "trenul",
+        "trenuri",
+        "trenurile",
+        "trenului",
+        "trenurilor"
+      ],
+      "proposed_forms_reviewed": [
+        "trenului",
+        "trenurilor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": []
+    },
+    {
+      "id": "v116-tramvai",
+      "word": "Tramvai",
+      "kind": "existing_input_family",
+      "node_id": "n_v24_transport_rail_tramvai",
+      "verdict": "accept",
+      "rationale": "Familiar urban rail transport. Tramvaiului/tramvaielor complete the ordinary tramvaie paradigm without regional variants or any change to existing puzzle content.",
+      "sources": [
+        "https://dexonline.ro/definitie/tramvai/json",
+        "https://ro.wiktionary.org/wiki/tramvai"
+      ],
+      "forms_reviewed": [
+        "tramvai",
+        "tramvaiul",
+        "tramvaie",
+        "tramvaiele",
+        "tramvaiului",
+        "tramvaielor"
+      ],
+      "proposed_forms_reviewed": [
+        "tramvaiului",
+        "tramvaielor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": []
+    },
+    {
+      "id": "v116-gara",
+      "word": "Gară",
+      "kind": "existing_input_family",
+      "node_id": "n_v24_transport_terminals_gara",
+      "verdict": "accept",
+      "rationale": "Familiar railway station. Gării/gărilor are ordinary missing inflections within the existing station scope; a maritime-terminal meaning is not introduced.",
+      "sources": [
+        "https://dexonline.ro/definitie/gar%C4%83/json",
+        "https://ro.wiktionary.org/wiki/gar%C4%83"
+      ],
+      "forms_reviewed": [
+        "gară",
+        "gări",
+        "gările",
+        "gării",
+        "gărilor"
+      ],
+      "proposed_forms_reviewed": [
+        "gării",
+        "gărilor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": []
+    },
+    {
+      "id": "v116-statie",
+      "word": "Stație",
+      "kind": "existing_input_family",
+      "node_id": "n_v24_transport_terminals_statie",
+      "verdict": "accept",
+      "rationale": "Familiar transport stopping point. Stației/stațiilor complete that exact sense; scientific stations, resorts, bodily posture and funeral stops remain excluded.",
+      "sources": [
+        "https://dexonline.ro/definitie/sta%C8%9Bie/json",
+        "https://ro.wiktionary.org/wiki/sta%C8%9Bie"
+      ],
+      "forms_reviewed": [
+        "stație",
+        "stația",
+        "stații",
+        "stațiile",
+        "stației",
+        "stațiilor"
+      ],
+      "proposed_forms_reviewed": [
+        "stației",
+        "stațiilor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": []
+    },
+    {
+      "id": "v116-aeroport",
+      "word": "Aeroport",
+      "kind": "existing_input_family",
+      "node_id": "n_v24_transport_terminals_aeroport",
+      "verdict": "accept",
+      "rationale": "Familiar school and travel place. Aeroportului/aeroporturilor complete the same airport sense and do not introduce a new aerodrom synonym or change the existing definition.",
+      "sources": [
+        "https://dexonline.ro/definitie/aeroport/json",
+        "https://ro.wiktionary.org/wiki/aeroport"
+      ],
+      "forms_reviewed": [
+        "aeroport",
+        "aeroportul",
+        "aeroporturi",
+        "aeroporturile",
+        "aeroportului",
+        "aeroporturilor"
+      ],
+      "proposed_forms_reviewed": [
+        "aeroportului",
+        "aeroporturilor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": []
+    },
+    {
+      "id": "v116-camion",
+      "word": "Camion",
+      "kind": "existing_input_family",
+      "node_id": "n_v24_transport_road_camion",
+      "verdict": "accept",
+      "rationale": "Familiar motorized goods vehicle. Camionului/camioanelor complete the existing modern truck sense; the separate animal-drawn vehicle meaning is excluded.",
+      "sources": [
+        "https://dexonline.ro/definitie/camion/json",
+        "https://ro.wiktionary.org/wiki/camion"
+      ],
+      "forms_reviewed": [
+        "camion",
+        "camionul",
+        "camioane",
+        "camioanele",
+        "camionului",
+        "camioanelor"
+      ],
+      "proposed_forms_reviewed": [
+        "camionului",
+        "camioanelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": []
+    },
+    {
+      "id": "v116-microbuz",
+      "word": "Microbuz",
+      "kind": "existing_input_family",
+      "node_id": "n_v24_transport_road_microbuz",
+      "verdict": "accept",
+      "rationale": "Familiar small passenger bus. Live DEX/DOOM3 corroborates microbuze and the existing small-bus sense; only missing microbuzului/microbuzelor are proposed.",
+      "sources": [
+        "https://dexonline.ro/definitie/microbuz/json"
+      ],
+      "forms_reviewed": [
+        "microbuz",
+        "microbuzul",
+        "microbuze",
+        "microbuzele",
+        "microbuzului",
+        "microbuzelor"
+      ],
+      "proposed_forms_reviewed": [
+        "microbuzului",
+        "microbuzelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": []
+    },
+    {
+      "id": "v116-bicicleta",
+      "word": "Bicicletă",
+      "kind": "existing_input_family",
+      "node_id": "n_v24_transport_personal_bicicleta",
+      "verdict": "accept",
+      "rationale": "Familiar school and household vehicle. Bicicletei/bicicletelor are ordinary missing genitive/dative forms for the unchanged existing pedal-driven vehicle sense.",
+      "sources": [
+        "https://dexonline.ro/definitie/biciclet%C4%83/json",
+        "https://ro.wiktionary.org/wiki/biciclet%C4%83"
+      ],
+      "forms_reviewed": [
+        "bicicletă",
+        "biciclete",
+        "bicicletele",
+        "bicicletei",
+        "bicicletelor"
+      ],
+      "proposed_forms_reviewed": [
+        "bicicletei",
+        "bicicletelor"
+      ],
+      "required_changes": [],
+      "claims_reviewed": []
+    }
+  ],
+  "edge_coverage": {
+    "expected": 180,
+    "reviewed": 180,
+    "rows": [
+      {
+        "source": "n_v1_16_bordura",
+        "target": "n_v29_city_street_trotuar",
+        "relation": "related_to",
+        "reviewed_caption": "poate delimita marginea unui trotuar",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-bordura"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_bordura",
+        "target": "n_v4geo_strada",
+        "relation": "related_to",
+        "reviewed_caption": "poate delimita marginea unei străzi",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-bordura"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_bordura",
+        "target": "n_v4geo_drum",
+        "relation": "related_to",
+        "reviewed_caption": "poate delimita partea carosabilă a unui drum",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-bordura"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_bordura",
+        "target": "n_v28_nature_material_piatra",
+        "relation": "related_to",
+        "reviewed_caption": "unele borduri sunt făcute din piatră",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-bordura"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_intersectie",
+        "target": "n_v4geo_drum",
+        "relation": "related_to",
+        "reviewed_caption": "este un loc de întâlnire a drumurilor",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-intersectie"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_intersectie",
+        "target": "n_v4geo_strada",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi un loc de întâlnire a străzilor",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-intersectie"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_intersectie",
+        "target": "n_v2geo_oras",
+        "relation": "related_to",
+        "reviewed_caption": "poate apărea în rețeaua stradală a unui oraș",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-intersectie"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_intersectie",
+        "target": "n_v1_10_semafor",
+        "relation": "related_to",
+        "reviewed_caption": "poate avea circulația dirijată prin semafor",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-intersectie"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_sosea",
+        "target": "n_v4geo_drum",
+        "relation": "is_a",
+        "reviewed_caption": "este un drum amenajat pentru vehicule",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-sosea"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_sosea",
+        "target": "n_v2geo_oras",
+        "relation": "related_to",
+        "reviewed_caption": "poate lega orașe",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-sosea"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_sosea",
+        "target": "n_v4geo_sat",
+        "relation": "related_to",
+        "reviewed_caption": "poate lega sate",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-sosea"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_sosea",
+        "target": "n_v1_13_pietris",
+        "relation": "related_to",
+        "reviewed_caption": "unele șosele au straturi de pietriș",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-sosea"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_autostrada",
+        "target": "n_v1_16_sosea",
+        "relation": "is_a",
+        "reviewed_caption": "este o șosea pentru trafic rutier rapid",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-autostrada"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_autostrada",
+        "target": "n_v2geo_oras",
+        "relation": "related_to",
+        "reviewed_caption": "poate lega orașe",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-autostrada"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_autostrada",
+        "target": "n_v28_nature_material_piatra",
+        "relation": "related_to",
+        "reviewed_caption": "poate avea straturi rutiere cu agregate din piatră",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-autostrada"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_autostrada",
+        "target": "n_v4sti_metal",
+        "relation": "related_to",
+        "reviewed_caption": "poate avea parapete metalice",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-autostrada"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_sina",
+        "target": "n_v24_transport_rail_tren",
+        "relation": "related_to",
+        "reviewed_caption": "poate susține și ghida roțile unui tren",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-sina"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_sina",
+        "target": "n_v24_transport_rail_tramvai",
+        "relation": "related_to",
+        "reviewed_caption": "poate ghida roțile unui tramvai",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-sina"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_sina",
+        "target": "n_v24_transport_rail_metrou",
+        "relation": "related_to",
+        "reviewed_caption": "poate ghida roțile unui tren de metrou",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-sina"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_sina",
+        "target": "n_v4sti_metal",
+        "relation": "related_to",
+        "reviewed_caption": "șinele de cale ferată sunt fabricate din metal",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-sina"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_sina",
+        "target": "n_v1_16_cale_ferata",
+        "relation": "part_of",
+        "reviewed_caption": "face parte dintr-o cale ferată",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-cale_ferata"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_cale_ferata",
+        "target": "n_v24_transport_rail_tren",
+        "relation": "related_to",
+        "reviewed_caption": "permite circulația trenurilor",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-cale_ferata"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_cale_ferata",
+        "target": "n_v1_10_locomotiva",
+        "relation": "related_to",
+        "reviewed_caption": "permite circulația locomotivelor",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-cale_ferata"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_cale_ferata",
+        "target": "n_v24_transport_terminals_gara",
+        "relation": "related_to",
+        "reviewed_caption": "poate deservi o gară",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-cale_ferata"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_peron",
+        "target": "n_v24_transport_terminals_gara",
+        "relation": "related_to",
+        "reviewed_caption": "poate face parte dintr-o gară",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-peron"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_peron",
+        "target": "n_v24_transport_rail_tren",
+        "relation": "related_to",
+        "reviewed_caption": "permite urcarea călătorilor în tren",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-peron"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_peron",
+        "target": "n_v24_transport_rail_metrou",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi amenajat pentru urcarea în metrou",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-peron"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_peron",
+        "target": "n_v24_transport_terminals_statie",
+        "relation": "related_to",
+        "reviewed_caption": "poate face parte dintr-o stație de transport",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-peron"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_bilet",
+        "target": "n_v24_transport_rail_tren",
+        "relation": "related_to",
+        "reviewed_caption": "poate da dreptul la o călătorie cu trenul",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-bilet"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_bilet",
+        "target": "n_v4soc_autobuz",
+        "relation": "related_to",
+        "reviewed_caption": "poate da dreptul la o călătorie cu autobuzul",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-bilet"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_bilet",
+        "target": "n_v24_transport_rail_tramvai",
+        "relation": "related_to",
+        "reviewed_caption": "poate da dreptul la o călătorie cu tramvaiul",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-bilet"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_bilet",
+        "target": "n_v24_transport_rail_metrou",
+        "relation": "related_to",
+        "reviewed_caption": "poate da dreptul la o călătorie cu metroul",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-bilet"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_abonament",
+        "target": "n_v24_transport_rail_tren",
+        "relation": "related_to",
+        "reviewed_caption": "poate permite călătorii cu trenul într-o perioadă",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-abonament"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_abonament",
+        "target": "n_v4soc_autobuz",
+        "relation": "related_to",
+        "reviewed_caption": "poate permite călătorii cu autobuzul într-o perioadă",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-abonament"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_abonament",
+        "target": "n_v24_transport_rail_tramvai",
+        "relation": "related_to",
+        "reviewed_caption": "poate permite călătorii cu tramvaiul într-o perioadă",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-abonament"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_abonament",
+        "target": "n_v24_transport_rail_metrou",
+        "relation": "related_to",
+        "reviewed_caption": "poate permite călătorii cu metroul într-o perioadă",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-abonament"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_vagon",
+        "target": "n_v24_transport_rail_tren",
+        "relation": "part_of",
+        "reviewed_caption": "poate face parte dintr-un tren",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-vagon"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_vagon",
+        "target": "n_v1_10_locomotiva",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi remorcat de o locomotivă",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-vagon"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_vagon",
+        "target": "n_v1_10_roata",
+        "relation": "related_to",
+        "reviewed_caption": "vagonul feroviar are roți",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-vagon"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_vagon",
+        "target": "n_v1_16_sina",
+        "relation": "related_to",
+        "reviewed_caption": "poate rula pe șine",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-vagon"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_autocar",
+        "target": "n_v4soc_autobuz",
+        "relation": "is_a",
+        "reviewed_caption": "este un autobuz pentru călătorii mai lungi",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-autocar"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_autocar",
+        "target": "n_v1_9_sofer",
+        "relation": "related_to",
+        "reviewed_caption": "este condus de un șofer",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-autocar"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_autocar",
+        "target": "n_v1_10_roata",
+        "relation": "related_to",
+        "reviewed_caption": "are roți pentru deplasare",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-autocar"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_autocar",
+        "target": "n_v1_8_vacanta",
+        "relation": "related_to",
+        "reviewed_caption": "poate transporta călători în vacanță",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-autocar"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_scuter",
+        "target": "n_v24_transport_personal_motocicleta",
+        "relation": "related_to",
+        "reviewed_caption": "este un vehicul cu două roți asemănător unei motociclete ușoare",
+        "verdict": "modify",
+        "covered_by_items": [
+          "v116-scuter"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_scuter",
+        "target": "n_v1_10_roata",
+        "relation": "related_to",
+        "reviewed_caption": "are roți pentru deplasare",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-scuter"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_scuter",
+        "target": "n_v1_16_ghidon",
+        "relation": "related_to",
+        "reviewed_caption": "este dirijat cu ghidonul",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-scuter"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_scuter",
+        "target": "n_v4sti_metal",
+        "relation": "related_to",
+        "reviewed_caption": "poate avea cadru metalic",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-scuter"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_elicopter",
+        "target": "n_v2sti_avion",
+        "relation": "related_to",
+        "reviewed_caption": "este un aparat de zbor, asemenea avionului",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-elicopter"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_elicopter",
+        "target": "n_v4sti_aer",
+        "relation": "related_to",
+        "reviewed_caption": "se deplasează prin aer",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-elicopter"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_elicopter",
+        "target": "n_v24_transport_terminals_aeroport",
+        "relation": "related_to",
+        "reviewed_caption": "poate utiliza un aeroport",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-elicopter"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_elicopter",
+        "target": "n_v1_16_hangar",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi adăpostit într-un hangar",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-elicopter",
+          "v116-hangar"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_hangar",
+        "target": "n_v2sti_avion",
+        "relation": "related_to",
+        "reviewed_caption": "poate adăposti avioane",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-hangar"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_hangar",
+        "target": "n_v24_transport_terminals_aeroport",
+        "relation": "related_to",
+        "reviewed_caption": "poate face parte dintr-un aeroport",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-hangar"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_hangar",
+        "target": "n_v4sti_metal",
+        "relation": "related_to",
+        "reviewed_caption": "poate avea structură metalică",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-hangar"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_alee",
+        "target": "n_v4geo_drum",
+        "relation": "is_a",
+        "reviewed_caption": "este un drum îngust amenajat pentru trecere",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-alee"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_alee",
+        "target": "n_v4geo_strada",
+        "relation": "related_to",
+        "reviewed_caption": "poate lega o stradă de un parc",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-alee"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_alee",
+        "target": "n_v24_places_public_parc",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi amenajată într-un parc",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-alee"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_alee",
+        "target": "n_v28_nature_material_piatra",
+        "relation": "related_to",
+        "reviewed_caption": "poate avea suprafața pietruită",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-alee"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_pasarela",
+        "target": "n_v1_16_pod",
+        "relation": "is_a",
+        "reviewed_caption": "este un pod destinat pietonilor",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-pasarela"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_pasarela",
+        "target": "n_v29_city_street_trotuar",
+        "relation": "related_to",
+        "reviewed_caption": "poate continua un traseu pietonal de pe trotuar",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-pasarela"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_pasarela",
+        "target": "n_v4geo_drum",
+        "relation": "related_to",
+        "reviewed_caption": "poate permite traversarea unui drum",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-pasarela"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_pasarela",
+        "target": "n_v4sti_metal",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi construită din metal",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-pasarela"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_tunel",
+        "target": "n_v2geo_munte",
+        "relation": "related_to",
+        "reviewed_caption": "poate străbate un munte",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-tunel"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_tunel",
+        "target": "n_v4geo_drum",
+        "relation": "related_to",
+        "reviewed_caption": "poate permite trecerea unui drum",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-tunel"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_tunel",
+        "target": "n_v24_transport_rail_metrou",
+        "relation": "related_to",
+        "reviewed_caption": "poate permite circulația metroului",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-tunel"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_tunel",
+        "target": "n_v24_transport_rail_tren",
+        "relation": "related_to",
+        "reviewed_caption": "poate permite circulația trenurilor",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-tunel"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_pod",
+        "target": "n_v2geo_rau",
+        "relation": "related_to",
+        "reviewed_caption": "poate permite traversarea unui râu",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-pod"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_pod",
+        "target": "n_v4geo_drum",
+        "relation": "related_to",
+        "reviewed_caption": "poate continua un drum peste un obstacol",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-pod"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_pod",
+        "target": "n_v1_3_material_lemn",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi construit din lemn",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-pod"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_pod",
+        "target": "n_v4sti_metal",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi construit din metal",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-pod"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_parapet",
+        "target": "n_v1_16_pod",
+        "relation": "related_to",
+        "reviewed_caption": "poate proteja marginea unui pod",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-parapet"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_parapet",
+        "target": "n_v4geo_drum",
+        "relation": "related_to",
+        "reviewed_caption": "poate proteja marginea unui drum",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-parapet"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_parapet",
+        "target": "n_v1_3_material_lemn",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi construit din lemn",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-parapet"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_parapet",
+        "target": "n_v4sti_metal",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi construit din metal",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-parapet"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_balustrada",
+        "target": "n_v24_home_outdoor_balcon",
+        "relation": "related_to",
+        "reviewed_caption": "poate proteja marginea unui balcon",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-balustrada"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_balustrada",
+        "target": "n_v1_3_material_lemn",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi făcută din lemn",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-balustrada"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_balustrada",
+        "target": "n_v4sti_metal",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi făcută din metal",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-balustrada"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_balustrada",
+        "target": "n_v24_body_limbs_mana",
+        "relation": "related_to",
+        "reviewed_caption": "poate oferi sprijin mâinii",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-balustrada"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_rampa",
+        "target": "n_v4geo_drum",
+        "relation": "related_to",
+        "reviewed_caption": "poate forma o porțiune înclinată a unui drum",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-rampa"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_rampa",
+        "target": "n_v29_city_street_trotuar",
+        "relation": "related_to",
+        "reviewed_caption": "poate facilita accesul pe un trotuar",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-rampa"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_rampa",
+        "target": "n_v1_3_material_lemn",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi construită din lemn",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-rampa"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_rampa",
+        "target": "n_v4sti_metal",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi construită din metal",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-rampa"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_bariera",
+        "target": "n_v1_10_gard",
+        "relation": "related_to",
+        "reviewed_caption": "poate completa un gard la intrare",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-bariera"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_bariera",
+        "target": "n_v4geo_drum",
+        "relation": "related_to",
+        "reviewed_caption": "poate opri accesul pe un drum",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-bariera"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_bariera",
+        "target": "n_v1_3_material_lemn",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi făcută din lemn",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-bariera"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_bariera",
+        "target": "n_v4sti_metal",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi făcută din metal",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-bariera"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_garaj",
+        "target": "n_v24_transport_personal_masina",
+        "relation": "related_to",
+        "reviewed_caption": "poate adăposti o mașină",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-garaj"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_garaj",
+        "target": "n_v24_transport_personal_motocicleta",
+        "relation": "related_to",
+        "reviewed_caption": "poate adăposti o motocicletă",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-garaj"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_garaj",
+        "target": "n_v4via_usa",
+        "relation": "related_to",
+        "reviewed_caption": "poate avea o ușă de acces",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-garaj"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_garaj",
+        "target": "n_v24_home_structure_acoperis",
+        "relation": "related_to",
+        "reviewed_caption": "poate avea un acoperiș propriu",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-garaj"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_benzina",
+        "target": "n_v1_16_combustibil",
+        "relation": "is_a",
+        "reviewed_caption": "este un combustibil",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-benzina"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_benzina",
+        "target": "n_v1_16_motor",
+        "relation": "related_to",
+        "reviewed_caption": "poate alimenta un motor",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-benzina"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_benzina",
+        "target": "n_v3sti_energie",
+        "relation": "related_to",
+        "reviewed_caption": "poate elibera energie prin ardere",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-benzina"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_benzina",
+        "target": "n_v4sti_aer",
+        "relation": "related_to",
+        "reviewed_caption": "se amestecă cu aerul în motoare cu ardere internă",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-benzina"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_benzina",
+        "target": "n_v24_transport_personal_masina",
+        "relation": "related_to",
+        "reviewed_caption": "poate alimenta motorul unei mașini",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-benzina"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_motorina",
+        "target": "n_v1_16_combustibil",
+        "relation": "is_a",
+        "reviewed_caption": "este un combustibil",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-motorina"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_motorina",
+        "target": "n_v1_16_motor",
+        "relation": "related_to",
+        "reviewed_caption": "poate alimenta un motor diesel",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-motorina"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_motorina",
+        "target": "n_v3sti_energie",
+        "relation": "related_to",
+        "reviewed_caption": "poate elibera energie prin ardere",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-motorina"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_motorina",
+        "target": "n_v4sti_aer",
+        "relation": "related_to",
+        "reviewed_caption": "arde în contact cu aerul în motorul diesel",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-motorina"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_motorina",
+        "target": "n_v24_transport_personal_masina",
+        "relation": "related_to",
+        "reviewed_caption": "poate alimenta motorul diesel al unei mașini",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-motorina"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_combustibil",
+        "target": "n_v4sti_foc",
+        "relation": "related_to",
+        "reviewed_caption": "poate întreține arderea unui foc",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-combustibil"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_combustibil",
+        "target": "n_v3sti_energie",
+        "relation": "related_to",
+        "reviewed_caption": "poate elibera energie prin ardere",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-combustibil"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_combustibil",
+        "target": "n_v4sti_aer",
+        "relation": "related_to",
+        "reviewed_caption": "poate arde folosind oxigenul din aer",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-combustibil"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_combustibil",
+        "target": "n_v1_3_material_lemn",
+        "relation": "related_to",
+        "reviewed_caption": "lemnul poate fi folosit drept combustibil",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-combustibil"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_motor",
+        "target": "n_v3sti_electricitate",
+        "relation": "related_to",
+        "reviewed_caption": "un motor electric folosește electricitate",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-motor"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_motor",
+        "target": "n_v3sti_energie",
+        "relation": "related_to",
+        "reviewed_caption": "transformă energie în lucru mecanic",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-motor"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_motor",
+        "target": "n_v4sti_metal",
+        "relation": "related_to",
+        "reviewed_caption": "poate avea piese metalice",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-motor"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_motor",
+        "target": "n_v4sti_aer",
+        "relation": "related_to",
+        "reviewed_caption": "un motor cu ardere internă poate utiliza aer",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-motor"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_frana",
+        "target": "n_v24_transport_personal_bicicleta",
+        "relation": "related_to",
+        "reviewed_caption": "poate încetini deplasarea unei biciclete",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-frana"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_frana",
+        "target": "n_v24_transport_personal_motocicleta",
+        "relation": "related_to",
+        "reviewed_caption": "poate încetini deplasarea unei motociclete",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-frana"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_frana",
+        "target": "n_v24_transport_personal_masina",
+        "relation": "related_to",
+        "reviewed_caption": "poate încetini deplasarea unei mașini",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-frana"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_frana",
+        "target": "n_v1_10_roata",
+        "relation": "related_to",
+        "reviewed_caption": "poate încetini rotirea unei roți",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-frana"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_pedala",
+        "target": "n_v24_transport_personal_bicicleta",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi folosită pentru propulsarea unei biciclete",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-pedala"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_pedala",
+        "target": "n_v24_transport_personal_masina",
+        "relation": "related_to",
+        "reviewed_caption": "poate acționa o comandă a unei mașini",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-pedala"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_pedala",
+        "target": "n_v24_body_limbs_picior",
+        "relation": "related_to",
+        "reviewed_caption": "este acționată cu piciorul",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-pedala"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_pedala",
+        "target": "n_v1_16_frana",
+        "relation": "related_to",
+        "reviewed_caption": "poate acționa o frână",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-pedala"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_janta",
+        "target": "n_v1_10_roata",
+        "relation": "part_of",
+        "reviewed_caption": "face parte dintr-o roată de vehicul",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-janta"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_janta",
+        "target": "n_v1_10_anvelopa",
+        "relation": "related_to",
+        "reviewed_caption": "susține anvelopa",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-janta"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_janta",
+        "target": "n_v24_transport_personal_bicicleta",
+        "relation": "related_to",
+        "reviewed_caption": "poate face parte din roata unei biciclete",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-janta"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_janta",
+        "target": "n_v4sti_metal",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi fabricată din metal",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-janta"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_spita",
+        "target": "n_v1_10_roata",
+        "relation": "part_of",
+        "reviewed_caption": "poate face parte dintr-o roată de vehicul",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-spita"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_spita",
+        "target": "n_v24_transport_personal_bicicleta",
+        "relation": "related_to",
+        "reviewed_caption": "poate face parte din roata unei biciclete",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-spita"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_spita",
+        "target": "n_v24_transport_personal_motocicleta",
+        "relation": "related_to",
+        "reviewed_caption": "poate face parte din roata unei motociclete",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-spita"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_spita",
+        "target": "n_v4sti_metal",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi fabricată din metal",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-spita"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_ghidon",
+        "target": "n_v24_transport_personal_bicicleta",
+        "relation": "related_to",
+        "reviewed_caption": "poate dirija roata din față a unei biciclete",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-ghidon"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_ghidon",
+        "target": "n_v24_transport_personal_motocicleta",
+        "relation": "related_to",
+        "reviewed_caption": "poate dirija roata din față a unei motociclete",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-ghidon"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_ghidon",
+        "target": "n_v24_body_limbs_mana",
+        "relation": "related_to",
+        "reviewed_caption": "este manevrat cu mâinile",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-ghidon"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_ghidon",
+        "target": "n_v4sti_metal",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi fabricat din metal",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-ghidon"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_sa",
+        "target": "n_v24_transport_personal_bicicleta",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi scaunul unei biciclete",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-sa"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_sa",
+        "target": "n_v24_transport_personal_motocicleta",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi scaunul unei motociclete",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-sa"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_sa",
+        "target": "n_v30_animal_farm_cal",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi pusă pe un cal pentru călărie",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-sa"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_sa",
+        "target": "n_v4sti_metal",
+        "relation": "related_to",
+        "reviewed_caption": "unele șei de bicicletă au suporturi metalice",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-sa"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_portbagaj",
+        "target": "n_v24_transport_personal_masina",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi compartimentul de bagaje al unei mașini",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-portbagaj"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_portbagaj",
+        "target": "n_v24_transport_personal_motocicleta",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi montat pe o motocicletă pentru bagaje",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-portbagaj"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_portbagaj",
+        "target": "n_v24_transport_personal_bicicleta",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi montat pe o bicicletă pentru bagaje",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-portbagaj"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_portbagaj",
+        "target": "n_v1_16_bagaj",
+        "relation": "related_to",
+        "reviewed_caption": "servește la transportarea bagajelor",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-portbagaj"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_centura_de_siguranta",
+        "target": "n_v24_transport_personal_masina",
+        "relation": "related_to",
+        "reviewed_caption": "poate proteja ocupanții unei mașini",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-centura_de_siguranta"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_centura_de_siguranta",
+        "target": "n_v24_transport_road_camion",
+        "relation": "related_to",
+        "reviewed_caption": "poate proteja ocupanții unui camion",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-centura_de_siguranta"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_centura_de_siguranta",
+        "target": "n_v4soc_autobuz",
+        "relation": "related_to",
+        "reviewed_caption": "unele autobuze au centuri de siguranță",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-centura_de_siguranta"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_centura_de_siguranta",
+        "target": "n_v24_home_seating_scaun",
+        "relation": "related_to",
+        "reviewed_caption": "poate menține ocupantul pe scaun",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-centura_de_siguranta"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_casca_de_protectie",
+        "target": "n_v24_transport_personal_bicicleta",
+        "relation": "related_to",
+        "reviewed_caption": "poate proteja ciclistul",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-casca_de_protectie"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_casca_de_protectie",
+        "target": "n_v24_transport_personal_motocicleta",
+        "relation": "related_to",
+        "reviewed_caption": "poate proteja motociclistul",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-casca_de_protectie"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_casca_de_protectie",
+        "target": "n_v24_body_face_cap",
+        "relation": "related_to",
+        "reviewed_caption": "protejează capul",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-casca_de_protectie"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_casca_de_protectie",
+        "target": "n_v1_16_scuter",
+        "relation": "related_to",
+        "reviewed_caption": "poate proteja conducătorul unui scuter",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-casca_de_protectie"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_caruta",
+        "target": "n_v1_16_vehicul",
+        "relation": "is_a",
+        "reviewed_caption": "este un vehicul cu tracțiune animală",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-caruta"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_caruta",
+        "target": "n_v30_animal_farm_cal",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi trasă de un cal",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-caruta"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_caruta",
+        "target": "n_v1_3_material_lemn",
+        "relation": "related_to",
+        "reviewed_caption": "poate avea caroserie din lemn",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-caruta"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_caruta",
+        "target": "n_v1_10_roata",
+        "relation": "related_to",
+        "reviewed_caption": "are roți pentru deplasare",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-caruta"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v2sti_avion",
+        "target": "n_v1_16_vehicul",
+        "relation": "is_a",
+        "reviewed_caption": "este un vehicul aerian",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-vehicul"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v4soc_autobuz",
+        "target": "n_v1_16_vehicul",
+        "relation": "is_a",
+        "reviewed_caption": "este un vehicul rutier",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-vehicul"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v24_transport_personal_bicicleta",
+        "target": "n_v1_16_vehicul",
+        "relation": "is_a",
+        "reviewed_caption": "este un vehicul cu două roți",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-vehicul"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_bagaj",
+        "target": "n_v1_8_rucsac",
+        "relation": "related_to",
+        "reviewed_caption": "poate include un rucsac cu lucruri personale",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-bagaj"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_bagaj",
+        "target": "n_v23via_ghiozdan",
+        "relation": "related_to",
+        "reviewed_caption": "poate include un ghiozdan cu lucruri personale",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-bagaj"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_bagaj",
+        "target": "n_v2sti_avion",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi transportat cu avionul",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-bagaj"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_bagaj",
+        "target": "n_v24_transport_rail_tren",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi transportat cu trenul",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-bagaj"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v28_transport_water_vapor",
+        "target": "n_v1_16_nava",
+        "relation": "is_a",
+        "reviewed_caption": "este o navă",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-nava"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_nava",
+        "target": "n_v2soc_port",
+        "relation": "related_to",
+        "reviewed_caption": "poate acosta într-un port",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-nava"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_nava",
+        "target": "n_v3geo_mare",
+        "relation": "related_to",
+        "reviewed_caption": "poate naviga pe mare",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-nava"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_nava",
+        "target": "n_v3geo_ocean",
+        "relation": "related_to",
+        "reviewed_caption": "poate naviga pe ocean",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-nava"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_corabie",
+        "target": "n_v1_16_nava",
+        "relation": "is_a",
+        "reviewed_caption": "este o navă",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-corabie"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_corabie",
+        "target": "n_v2soc_port",
+        "relation": "related_to",
+        "reviewed_caption": "poate acosta într-un port",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-corabie"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_corabie",
+        "target": "n_v3geo_mare",
+        "relation": "related_to",
+        "reviewed_caption": "poate naviga pe mare",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-corabie"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_corabie",
+        "target": "n_v24_weather_air_vant",
+        "relation": "related_to",
+        "reviewed_caption": "unele corăbii folosesc vântul pentru propulsie",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-corabie"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_caiac",
+        "target": "n_spt_canoe",
+        "relation": "related_to",
+        "reviewed_caption": "este o ambarcațiune înrudită cu canoe",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-caiac"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_caiac",
+        "target": "n_v4spo_sport",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi folosit în sporturi nautice",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-caiac"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_caiac",
+        "target": "n_v2geo_lac",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi folosit pe un lac",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-caiac"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_caiac",
+        "target": "n_v3geo_mare",
+        "relation": "related_to",
+        "reviewed_caption": "unele caiace sunt folosite pe mare",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-caiac"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_pagaie",
+        "target": "n_spt_canoe",
+        "relation": "related_to",
+        "reviewed_caption": "poate propulsa o canoe",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-pagaie"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_pagaie",
+        "target": "n_v4spo_sport",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi folosită în sporturi nautice",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-pagaie"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_pagaie",
+        "target": "n_v24_body_limbs_mana",
+        "relation": "related_to",
+        "reviewed_caption": "este manevrată cu mâinile",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-pagaie"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_pagaie",
+        "target": "n_v1_3_material_lemn",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi fabricată din lemn",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-pagaie"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_carucior",
+        "target": "n_v1_16_vehicul",
+        "relation": "is_a",
+        "reviewed_caption": "este un vehicul mic pentru transport",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-carucior"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_carucior",
+        "target": "n_v1_10_roata",
+        "relation": "related_to",
+        "reviewed_caption": "se deplasează pe roți",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-carucior"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_carucior",
+        "target": "n_v24_body_limbs_mana",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi împins cu mâinile",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-carucior"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_carucior",
+        "target": "n_v4sti_metal",
+        "relation": "related_to",
+        "reviewed_caption": "poate avea structură metalică",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-carucior"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_ancora",
+        "target": "n_v28_transport_water_vapor",
+        "relation": "related_to",
+        "reviewed_caption": "poate fixa un vapor pe loc",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-ancora"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_ancora",
+        "target": "n_v2soc_port",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi folosită la ancorare în zona unui port",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-ancora"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_ancora",
+        "target": "n_v4sti_metal",
+        "relation": "related_to",
+        "reviewed_caption": "poate fi fabricată din metal",
+        "verdict": "accept",
+        "covered_by_items": [
+          "v116-ancora"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      },
+      {
+        "source": "n_v1_16_ancora",
+        "target": "n_v3geo_mare",
+        "relation": "related_to",
+        "reviewed_caption": "poate fixa o navă pe fundul mării",
+        "verdict": "modify",
+        "covered_by_items": [
+          "v116-ancora"
+        ],
+        "source_bindings": "Use sources on every covered_by_items row; exact captions and endpoints were judged together."
+      }
+    ],
+    "note": "Per-item claims include the Elicopter-Hangar directed edge in both endpoint records; unique coverage here binds it once.",
+    "source_binding_note": "Each coverage row references its per-item source sets through covered_by_items; URLs are stored once per item instead of repeated for every edge."
+  },
+  "preserved_original_holds": [
+    {
+      "id": "v116-rulota",
+      "word": "Rulotă",
+      "state": "held",
+      "reason": "held: Remorcă reached its research cap; excluding that batch neighbor leaves only three distinct supported neighbors, below the four-link minimum.",
+      "review_action": "preserve; excluded from the 56 selected items and not resurrected"
+    },
+    {
+      "id": "v116-remorca",
+      "word": "Remorcă",
+      "state": "held",
+      "reason": "held: five-minute item research cap reached before the complete record was finalized",
+      "review_action": "preserve; excluded from the 56 selected items and not resurrected"
+    },
+    {
+      "id": "v116-tractor",
+      "word": "Tractor",
+      "state": "held",
+      "reason": "held: Remorcă reached its research cap; excluding that batch neighbor leaves three distinct neighbors and only one same-category neighbor, below the graph floors.",
+      "review_action": "preserve; excluded from the 56 selected items and not resurrected"
+    },
+    {
+      "id": "v116-pneu",
+      "word": "Pneu",
+      "state": "held",
+      "reason": "held: selected DEX09 and second-source sense is the assembly of casing plus air chamber; existing Anvelopă denotes the elastic casing alone. Exact substitutability is unresolved, so no synonym family is proposed for application.",
+      "review_action": "preserve; excluded from the 56 selected items and not resurrected"
+    }
+  ],
+  "later_owner_risks": [
+    "Pagaie qualifies through school/culture relevance; that does not establish universal easy-target recognition or validate its heuristic salience.",
+    "Generic Vehicul and Combustibil are shared guesses and graph hubs; do not use them as hidden targets or generic filler groups without separate review.",
+    "Polysemous unqualified nouns such as Bilet, Abonament, Pod and Navă require explicit sense and unique grouping when later boards are authored.",
+    "Pairing, recipe and six-game tags are prospective only; complete-board fairness, partitions, targets, routes and difficulty still need later gates.",
+    "Preserve headphone and other-sense input owners and both earlier unlanded wave reservations when the owner later applies this pool."
+  ]
+}

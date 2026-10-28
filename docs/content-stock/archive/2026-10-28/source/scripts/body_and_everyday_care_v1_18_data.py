@@ -1,0 +1,6562 @@
+"""V1.18 reviewed unlanded Romanian body/school vocabulary proposal; owner reviews, applies and lands later."""
+from basic_words_v33_data import BEGINNER_BENCHMARK as BEGINNER_BENCHMARK
+from weather_and_landscape_v1_13_data import DEFERRED_AMBIGUOUS_TERMS as DEFERRED_AMBIGUOUS_TERMS
+
+BUILD_VERSION = 'fixture-v1-18-body-and-everyday-care'
+
+LANDING_STATUS = 'not_landed'
+
+HANDOFF_STATUS = 'owner_review_later'
+
+WORK_MODE = 'reviewed-pool'
+
+NOTE = ('School/body and everyday word coverage only; no medical advice, clinical ruling, serving '
+ 'fixtures, boards, targets, recipes or runtime approval.')
+
+GAME_ITEM_IDS = ()
+
+INTUITIVE_PAIRS = ()
+
+PROPOSED_ITEM_IDS = ('v118-ficat',
+ 'v118-rinichi',
+ 'v118-stomac',
+ 'v118-intestin',
+ 'v118-artera',
+ 'v118-vena',
+ 'v118-nerv',
+ 'v118-schelet',
+ 'v118-articulatie',
+ 'v118-tendon',
+ 'v118-ligament',
+ 'v118-maduva_osoasa',
+ 'v118-clavicula',
+ 'v118-omoplat',
+ 'v118-coasta_toracica',
+ 'v118-brat',
+ 'v118-antebrat',
+ 'v118-coapsa',
+ 'v118-glezna',
+ 'v118-calcai',
+ 'v118-talpa',
+ 'v118-palma',
+ 'v118-umar',
+ 'v118-cot',
+ 'v118-genunchi',
+ 'v118-frunte',
+ 'v118-tampla',
+ 'v118-obraz',
+ 'v118-buza',
+ 'v118-spranceana',
+ 'v118-geana',
+ 'v118-pleoapa',
+ 'v118-pupila',
+ 'v118-nara',
+ 'v118-gingie',
+ 'v118-masea',
+ 'v118-saliva',
+ 'v118-lacrima',
+ 'v118-voce',
+ 'v118-retina',
+ 'v118-timpan',
+ 'v118-cornee',
+ 'v118-maxilar',
+ 'v118-inghitire',
+ 'v118-mestecare',
+ 'v118-dantura',
+ 'v118-transpiratie',
+ 'v118-tesut',
+ 'v118-ombilic',
+ 'v118-stern',
+ 'v118-coloana_vertebrala')
+
+HELD_ITEM_IDS = ('v118-organ',
+ 'v118-plaman',
+ 'v118-vertebra',
+ 'v118-cartilaj',
+ 'v118-ceafa',
+ 'v118-barbie',
+ 'v118-iris',
+ 'v118-respiratie',
+ 'v118-trunchi')
+
+NEW_NODE_IDS = ('n_v1_18_ficat',
+ 'n_v1_18_rinichi',
+ 'n_v1_18_stomac',
+ 'n_v1_18_intestin',
+ 'n_v1_18_artera',
+ 'n_v1_18_vena',
+ 'n_v1_18_nerv',
+ 'n_v1_18_schelet',
+ 'n_v1_18_articulatie',
+ 'n_v1_18_tendon',
+ 'n_v1_18_ligament',
+ 'n_v1_18_maduva_osoasa',
+ 'n_v1_18_clavicula',
+ 'n_v1_18_omoplat',
+ 'n_v1_18_coasta_toracica',
+ 'n_v1_18_brat',
+ 'n_v1_18_antebrat',
+ 'n_v1_18_talpa',
+ 'n_v1_18_palma',
+ 'n_v1_18_umar',
+ 'n_v1_18_cot',
+ 'n_v1_18_tampla',
+ 'n_v1_18_geana',
+ 'n_v1_18_pupila',
+ 'n_v1_18_gingie',
+ 'n_v1_18_masea',
+ 'n_v1_18_saliva',
+ 'n_v1_18_lacrima',
+ 'n_v1_18_retina',
+ 'n_v1_18_timpan',
+ 'n_v1_18_cornee',
+ 'n_v1_18_maxilar',
+ 'n_v1_18_inghitire',
+ 'n_v1_18_mestecare',
+ 'n_v1_18_dantura',
+ 'n_v1_18_transpiratie',
+ 'n_v1_18_tesut',
+ 'n_v1_18_ombilic',
+ 'n_v1_18_stern',
+ 'n_v1_18_coloana_vertebrala')
+
+NODES = ({'id': 'n_v1_18_ficat',
+  'node_type': 'concept',
+  'label_ro': 'Ficat',
+  'category': 'stiinta',
+  'description': 'Organ din abdomen care produce bilă și participă la prelucrarea substanțelor '
+                 'nutritive.',
+  'salience': 0.85,
+  'aliases': ['ficatul', 'ficați', 'ficații', 'ficatului', 'ficaților']},
+ {'id': 'n_v1_18_rinichi',
+  'node_type': 'concept',
+  'label_ro': 'Rinichi',
+  'category': 'stiinta',
+  'description': 'Organ pereche care filtrează sângele și formează urina.',
+  'salience': 0.85,
+  'aliases': ['rinichiul', 'rinichii', 'rinichiului', 'rinichilor']},
+ {'id': 'n_v1_18_stomac',
+  'node_type': 'concept',
+  'label_ro': 'Stomac',
+  'category': 'stiinta',
+  'description': 'Organ cavitar al aparatului digestiv, în care alimentele sunt amestecate cu suc '
+                 'gastric.',
+  'salience': 0.85,
+  'aliases': ['stomacul', 'stomacuri', 'stomacurile', 'stomacului', 'stomacurilor']},
+ {'id': 'n_v1_18_intestin',
+  'node_type': 'concept',
+  'label_ro': 'Intestin',
+  'category': 'stiinta',
+  'description': 'Parte a tubului digestiv situată între stomac și anus, alcătuită din intestin '
+                 'subțire și gros.',
+  'salience': 0.85,
+  'aliases': ['intestinul', 'intestine', 'intestinele', 'intestinului', 'intestinelor']},
+ {'id': 'n_v1_18_artera',
+  'node_type': 'concept',
+  'label_ro': 'Arteră',
+  'category': 'stiinta',
+  'description': 'Vas sangvin care transportă sângele de la inimă către organe și țesuturi.',
+  'salience': 0.85,
+  'aliases': ['artere', 'arterele', 'arterei', 'arterelor']},
+ {'id': 'n_v1_18_vena',
+  'node_type': 'concept',
+  'label_ro': 'Venă',
+  'category': 'stiinta',
+  'description': 'Vas sangvin care transportă sângele dinspre țesuturi către inimă.',
+  'salience': 0.85,
+  'aliases': ['vene', 'venele', 'venei', 'venelor']},
+ {'id': 'n_v1_18_nerv',
+  'node_type': 'concept',
+  'label_ro': 'Nerv',
+  'category': 'stiinta',
+  'description': 'Mănunchi de fibre care transmite impulsuri între sistemul nervos central și '
+                 'diferite părți ale corpului.',
+  'salience': 0.85,
+  'aliases': ['nervul', 'nervi', 'nervii', 'nervului', 'nervilor']},
+ {'id': 'n_v1_18_schelet',
+  'node_type': 'concept',
+  'label_ro': 'Schelet',
+  'category': 'stiinta',
+  'description': 'Ansamblul oaselor care susțin corpul unui vertebrat și protejează organe '
+                 'interne.',
+  'salience': 0.85,
+  'aliases': ['scheletul', 'schelete', 'scheletele', 'scheletului', 'scheletelor']},
+ {'id': 'n_v1_18_articulatie',
+  'node_type': 'concept',
+  'label_ro': 'Articulație',
+  'category': 'stiinta',
+  'description': 'Ansamblul elementelor prin care se unesc două sau mai multe oase vecine.',
+  'salience': 0.85,
+  'aliases': ['articulația', 'articulații', 'articulațiile', 'articulației', 'articulațiilor']},
+ {'id': 'n_v1_18_tendon',
+  'node_type': 'concept',
+  'label_ro': 'Tendon',
+  'category': 'stiinta',
+  'description': 'Structură fibroasă rezistentă prin care un mușchi se fixează de un os.',
+  'salience': 0.85,
+  'aliases': ['tendonul', 'tendoane', 'tendoanele', 'tendonului', 'tendoanelor']},
+ {'id': 'n_v1_18_ligament',
+  'node_type': 'concept',
+  'label_ro': 'Ligament',
+  'category': 'stiinta',
+  'description': 'Structură fibroasă rezistentă care poate lega oasele unei articulații sau fixa '
+                 'anumite organe.',
+  'salience': 0.85,
+  'aliases': ['ligamentul', 'ligamente', 'ligamentele', 'ligamentului', 'ligamentelor']},
+ {'id': 'n_v1_18_maduva_osoasa',
+  'node_type': 'concept',
+  'label_ro': 'Măduvă osoasă',
+  'category': 'stiinta',
+  'description': 'Țesut aflat în interiorul unor oase, unde se formează celule ale sângelui.',
+  'salience': 0.85,
+  'aliases': ['măduvei osoase']},
+ {'id': 'n_v1_18_clavicula',
+  'node_type': 'concept',
+  'label_ro': 'Claviculă',
+  'category': 'stiinta',
+  'description': 'Os pereche situat între stern și omoplat, în partea din față a umărului.',
+  'salience': 0.85,
+  'aliases': ['clavicule', 'claviculele', 'claviculei', 'claviculelor']},
+ {'id': 'n_v1_18_omoplat',
+  'node_type': 'concept',
+  'label_ro': 'Omoplat',
+  'category': 'stiinta',
+  'description': 'Os pereche lat și triunghiular, aflat în partea din spate a toracelui, care '
+                 'participă la alcătuirea umărului.',
+  'salience': 0.85,
+  'aliases': ['omoplatul', 'omoplați', 'omoplații', 'omoplatului', 'omoplaților']},
+ {'id': 'n_v1_18_coasta_toracica',
+  'node_type': 'concept',
+  'label_ro': 'Coastă toracică',
+  'category': 'stiinta',
+  'description': 'Os pereche al cutiei toracice, care contribuie la protejarea organelor din '
+                 'torace.',
+  'salience': 0.85,
+  'aliases': ['coaste toracice', 'coastele toracice', 'coastei toracice', 'coastelor toracice']},
+ {'id': 'n_v1_18_brat',
+  'node_type': 'concept',
+  'label_ro': 'Braț',
+  'category': 'stiinta',
+  'description': 'Partea membrului superior aflată între umăr și cot, cu osul humerus.',
+  'salience': 0.85,
+  'aliases': ['brațul', 'brațe', 'brațele', 'brațului', 'brațelor']},
+ {'id': 'n_v1_18_antebrat',
+  'node_type': 'concept',
+  'label_ro': 'Antebraț',
+  'category': 'stiinta',
+  'description': 'Parte a membrului superior aflată între cot și încheietura mâinii, cu oasele '
+                 'radius și ulna.',
+  'salience': 0.85,
+  'aliases': ['antebrațul', 'antebrațe', 'antebrațele', 'antebrațului', 'antebrațelor']},
+ {'id': 'n_v1_18_talpa',
+  'node_type': 'concept',
+  'label_ro': 'Talpă',
+  'category': 'stiinta',
+  'description': 'Partea inferioară a labei piciorului, care se întinde de la călcâi până la '
+                 'degete.',
+  'salience': 0.85,
+  'aliases': ['tălpi', 'tălpile', 'tălpii', 'tălpilor']},
+ {'id': 'n_v1_18_palma',
+  'node_type': 'concept',
+  'label_ro': 'Palmă',
+  'category': 'stiinta',
+  'description': 'Partea interioară a mâinii, cu suprafață acoperită de piele.',
+  'salience': 0.85,
+  'aliases': ['palme', 'palmele', 'palmei', 'palmelor']},
+ {'id': 'n_v1_18_umar',
+  'node_type': 'concept',
+  'label_ro': 'Umăr',
+  'category': 'stiinta',
+  'description': 'Regiunea corpului care leagă membrul superior de trunchi și cuprinde articulația '
+                 'umărului.',
+  'salience': 0.85,
+  'aliases': ['umărul', 'umeri', 'umerii', 'umărului', 'umerilor']},
+ {'id': 'n_v1_18_cot',
+  'node_type': 'concept',
+  'label_ro': 'Cot',
+  'category': 'stiinta',
+  'description': 'Regiunea exterioară a articulației dintre braț și antebraț.',
+  'salience': 0.85,
+  'aliases': ['cotul', 'coate', 'coatele', 'cotului', 'coatelor']},
+ {'id': 'n_v1_18_tampla',
+  'node_type': 'concept',
+  'label_ro': 'Tâmplă',
+  'category': 'stiinta',
+  'description': 'Partea laterală a capului aflată între ochi, ureche, frunte și obraz.',
+  'salience': 0.85,
+  'aliases': ['tâmple', 'tâmplele', 'tâmplei', 'tâmplelor']},
+ {'id': 'n_v1_18_geana',
+  'node_type': 'concept',
+  'label_ro': 'Geană',
+  'category': 'stiinta',
+  'description': 'Fir de păr de pe marginea pleoapei, care ajută la protejarea ochiului.',
+  'salience': 0.85,
+  'aliases': ['gene', 'genele', 'genei', 'genelor']},
+ {'id': 'n_v1_18_pupila',
+  'node_type': 'concept',
+  'label_ro': 'Pupilă',
+  'category': 'stiinta',
+  'description': 'Orificiul din centrul irisului prin care pătrunde lumina în ochi.',
+  'salience': 0.85,
+  'aliases': ['pupile', 'pupilele', 'pupilei', 'pupilelor']},
+ {'id': 'n_v1_18_gingie',
+  'node_type': 'concept',
+  'label_ro': 'Gingie',
+  'category': 'stiinta',
+  'description': 'Țesut al gurii aflat în jurul bazei dinților și măselelor.',
+  'salience': 0.85,
+  'aliases': ['gingia', 'gingii', 'gingiile', 'gingiei', 'gingiilor']},
+ {'id': 'n_v1_18_masea',
+  'node_type': 'concept',
+  'label_ro': 'Măsea',
+  'category': 'stiinta',
+  'description': 'Dinte mare din partea din spate a gurii, care zdrobește și mărunțește '
+                 'alimentele.',
+  'salience': 0.85,
+  'aliases': ['măseaua', 'măsele', 'măselele', 'măselei', 'măselelor']},
+ {'id': 'n_v1_18_saliva',
+  'node_type': 'concept',
+  'label_ro': 'Salivă',
+  'category': 'stiinta',
+  'description': 'Lichid produs de glandele salivare în gură, care participă la formarea bolului '
+                 'alimentar.',
+  'salience': 0.85,
+  'aliases': ['salive', 'salivele', 'salivei', 'salivelor']},
+ {'id': 'n_v1_18_lacrima',
+  'node_type': 'concept',
+  'label_ro': 'Lacrimă',
+  'category': 'stiinta',
+  'description': 'Lichid produs de glandele lacrimale, care umezește suprafața ochiului.',
+  'salience': 0.85,
+  'aliases': ['lacrimi', 'lacrimile', 'lacrimii', 'lacrimilor']},
+ {'id': 'n_v1_18_retina',
+  'node_type': 'concept',
+  'label_ro': 'Retină',
+  'category': 'stiinta',
+  'description': 'Strat sensibil la lumină din interiorul ochiului, care transformă lumina în '
+                 'semnale nervoase.',
+  'salience': 0.85,
+  'aliases': ['retine', 'retinele', 'retinei', 'retinelor']},
+ {'id': 'n_v1_18_timpan',
+  'node_type': 'concept',
+  'label_ro': 'Timpan',
+  'category': 'stiinta',
+  'description': 'Membrană elastică a urechii care vibrează sub acțiunea sunetelor.',
+  'salience': 0.85,
+  'aliases': ['timpanul', 'timpane', 'timpanele', 'timpanului', 'timpanelor']},
+ {'id': 'n_v1_18_cornee',
+  'node_type': 'concept',
+  'label_ro': 'Cornee',
+  'category': 'stiinta',
+  'description': 'Partea transparentă din fața ochiului, prin care pătrunde și este refractată '
+                 'lumina.',
+  'salience': 0.85,
+  'aliases': ['corneea', 'corneele', 'corneei', 'corneelor']},
+ {'id': 'n_v1_18_maxilar',
+  'node_type': 'concept',
+  'label_ro': 'Maxilar',
+  'category': 'stiinta',
+  'description': 'Os al feței pe care sunt fixați dinți.',
+  'salience': 0.85,
+  'aliases': ['maxilarul', 'maxilare', 'maxilarele', 'maxilarului', 'maxilarelor']},
+ {'id': 'n_v1_18_inghitire',
+  'node_type': 'concept',
+  'label_ro': 'Înghițire',
+  'category': 'stiinta',
+  'description': 'Procesul prin care alimentele trec din gură spre stomac.',
+  'salience': 0.85,
+  'aliases': ['înghițirea', 'înghițiri', 'înghițirile', 'înghițirii', 'înghițirilor']},
+ {'id': 'n_v1_18_mestecare',
+  'node_type': 'concept',
+  'label_ro': 'Mestecare',
+  'category': 'stiinta',
+  'description': 'Procesul de mărunțire a alimentelor în gură, cu ajutorul dinților.',
+  'salience': 0.85,
+  'aliases': ['mestecarea', 'mestecări', 'mestecările', 'mestecării', 'mestecărilor']},
+ {'id': 'n_v1_18_dantura',
+  'node_type': 'concept',
+  'label_ro': 'Dantură',
+  'category': 'stiinta',
+  'description': 'Ansamblul dinților unei persoane.',
+  'salience': 0.85,
+  'aliases': ['danturi', 'danturile', 'danturii', 'danturilor']},
+ {'id': 'n_v1_18_transpiratie',
+  'node_type': 'concept',
+  'label_ro': 'Transpirație',
+  'category': 'stiinta',
+  'description': 'Eliminarea sudorii prin piele, cu rol în reglarea temperaturii corpului.',
+  'salience': 0.85,
+  'aliases': ['transpirația',
+              'transpirații',
+              'transpirațiile',
+              'transpirației',
+              'transpirațiilor']},
+ {'id': 'n_v1_18_tesut',
+  'node_type': 'concept',
+  'label_ro': 'Țesut',
+  'category': 'stiinta',
+  'description': 'Grupare de celule cu structură și funcții asemănătoare, care intră în alcătuirea '
+                 'unui organism.',
+  'salience': 0.85,
+  'aliases': ['țesutul', 'țesuturi', 'țesuturile', 'țesutului', 'țesuturilor']},
+ {'id': 'n_v1_18_ombilic',
+  'node_type': 'concept',
+  'label_ro': 'Ombilic',
+  'category': 'stiinta',
+  'description': 'Locul de pe abdomen care, după desprinderea cordonului ombilical, rămâne ca o '
+                 'cicatrice.',
+  'salience': 0.85,
+  'aliases': ['ombilicul', 'ombilicuri', 'ombilicurile', 'ombilicului', 'ombilicurilor']},
+ {'id': 'n_v1_18_stern',
+  'node_type': 'concept',
+  'label_ro': 'Stern',
+  'category': 'stiinta',
+  'description': 'Os plat din centrul pieptului, de care se leagă cartilajele unor coaste.',
+  'salience': 0.85,
+  'aliases': ['sternul', 'sternuri', 'sternurile', 'sternului', 'sternurilor']},
+ {'id': 'n_v1_18_coloana_vertebrala',
+  'node_type': 'concept',
+  'label_ro': 'Coloană vertebrală',
+  'category': 'stiinta',
+  'description': 'Ansamblul vertebrelor care formează axul de susținere al corpului.',
+  'salience': 0.85,
+  'aliases': ['coloane vertebrale',
+              'coloanele vertebrale',
+              'coloanei vertebrale',
+              'coloanelor vertebrale']})
+
+EDGES = ({'src': 'n_v1_18_ficat',
+  'dst': 'n_v4sti_corp',
+  'relation': 'part_of',
+  'label_ro': 'face parte din corp',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_ficat',
+  'dst': 'n_v4sti_sange',
+  'relation': 'related_to',
+  'label_ro': 'primește sânge prin circulația hepatică',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_ficat',
+  'dst': 'n_v4gas_mancare',
+  'relation': 'related_to',
+  'label_ro': 'participă la digestia și prelucrarea substanțelor nutritive din mâncare',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_ficat',
+  'dst': 'n_v1_18_stomac',
+  'relation': 'related_to',
+  'label_ro': 'se află în vecinătatea stomacului',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_rinichi',
+  'dst': 'n_v4sti_corp',
+  'relation': 'part_of',
+  'label_ro': 'face parte din corp',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_rinichi',
+  'dst': 'n_v4sti_sange',
+  'relation': 'related_to',
+  'label_ro': 'filtrează sângele',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_rinichi',
+  'dst': 'n_v4gas_apa',
+  'relation': 'related_to',
+  'label_ro': 'contribuie la echilibrul apei din corp',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_rinichi',
+  'dst': 'n_v1_18_vena',
+  'relation': 'related_to',
+  'label_ro': 'sângele părăsește rinichiul prin vena renală',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_stomac',
+  'dst': 'n_v4sti_corp',
+  'relation': 'part_of',
+  'label_ro': 'face parte din corp',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_stomac',
+  'dst': 'n_v24_body_face_gura',
+  'relation': 'related_to',
+  'label_ro': 'primește hrana pornită din gură',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_stomac',
+  'dst': 'n_v4gas_mancare',
+  'relation': 'related_to',
+  'label_ro': 'participă la digestia mâncării',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_stomac',
+  'dst': 'n_v1_18_intestin',
+  'relation': 'related_to',
+  'label_ro': 'se continuă cu intestinul subțire',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_intestin',
+  'dst': 'n_v4sti_corp',
+  'relation': 'part_of',
+  'label_ro': 'face parte din corp',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_intestin',
+  'dst': 'n_v4gas_mancare',
+  'relation': 'related_to',
+  'label_ro': 'participă la digestia mâncării',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_intestin',
+  'dst': 'n_v4sti_sange',
+  'relation': 'related_to',
+  'label_ro': 'în intestinul subțire, substanțele nutritive absorbite ajung în sânge',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_intestin',
+  'dst': 'n_v1_18_stomac',
+  'relation': 'related_to',
+  'label_ro': 'urmează stomacului pe traseul digestiv',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_artera',
+  'dst': 'n_v4sti_corp',
+  'relation': 'part_of',
+  'label_ro': 'face parte din corp',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_artera',
+  'dst': 'n_v4sti_sange',
+  'relation': 'related_to',
+  'label_ro': 'transportă sânge',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_artera',
+  'dst': 'n_v4sti_inima',
+  'relation': 'related_to',
+  'label_ro': 'duce sângele de la inimă spre țesuturi',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_artera',
+  'dst': 'n_v1_18_vena',
+  'relation': 'related_to',
+  'label_ro': 'circulația poate continua spre vene prin capilare',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_vena',
+  'dst': 'n_v4sti_corp',
+  'relation': 'part_of',
+  'label_ro': 'face parte din corp',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_vena',
+  'dst': 'n_v4sti_sange',
+  'relation': 'related_to',
+  'label_ro': 'transportă sânge',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_vena',
+  'dst': 'n_v4sti_inima',
+  'relation': 'related_to',
+  'label_ro': 'duce sângele spre inimă',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_nerv',
+  'dst': 'n_v4sti_corp',
+  'relation': 'part_of',
+  'label_ro': 'face parte din corp',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_nerv',
+  'dst': 'n_v4sti_creier',
+  'relation': 'related_to',
+  'label_ro': 'poate transmite impulsuri către sau de la creier',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_nerv',
+  'dst': 'n_v4sti_piele',
+  'relation': 'related_to',
+  'label_ro': 'poate transmite senzații provenite de la piele',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_nerv',
+  'dst': 'n_v4sti_ochi',
+  'relation': 'related_to',
+  'label_ro': 'nervul optic transmite informații de la ochi',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_schelet',
+  'dst': 'n_v4sti_corp',
+  'relation': 'part_of',
+  'label_ro': 'face parte din corp',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_schelet',
+  'dst': 'n_v4sti_os',
+  'relation': 'related_to',
+  'label_ro': 'este alcătuit din oase',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_schelet',
+  'dst': 'n_v4sti_creier',
+  'relation': 'related_to',
+  'label_ro': 'oasele craniului său protejează creierul',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_schelet',
+  'dst': 'n_v4sti_inima',
+  'relation': 'related_to',
+  'label_ro': 'cutia sa toracică protejează inima',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_articulatie',
+  'dst': 'n_v4sti_corp',
+  'relation': 'part_of',
+  'label_ro': 'face parte din corp',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_articulatie',
+  'dst': 'n_v4sti_os',
+  'relation': 'related_to',
+  'label_ro': 'poate uni oase',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v31_body_lower_genunchi',
+  'dst': 'n_v1_18_articulatie',
+  'relation': 'is_a',
+  'label_ro': 'este o articulație',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v31_body_lower_glezna',
+  'dst': 'n_v1_18_articulatie',
+  'relation': 'is_a',
+  'label_ro': 'este o articulație',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_tendon',
+  'dst': 'n_v4sti_corp',
+  'relation': 'part_of',
+  'label_ro': 'face parte din corp',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_tendon',
+  'dst': 'n_v4sti_os',
+  'relation': 'related_to',
+  'label_ro': 'poate fixa un mușchi pe un os',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_tendon',
+  'dst': 'n_v24_body_limbs_mana',
+  'relation': 'related_to',
+  'label_ro': 'tendoanele participă la mișcările mâinii',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_tendon',
+  'dst': 'n_v24_body_limbs_deget',
+  'relation': 'related_to',
+  'label_ro': 'poate transmite forța pentru mișcarea degetelor',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_ligament',
+  'dst': 'n_v4sti_corp',
+  'relation': 'part_of',
+  'label_ro': 'face parte din corp',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_ligament',
+  'dst': 'n_v4sti_os',
+  'relation': 'related_to',
+  'label_ro': 'poate lega oasele unei articulații',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_ligament',
+  'dst': 'n_v31_body_lower_genunchi',
+  'relation': 'related_to',
+  'label_ro': 'ligamentele contribuie la stabilitatea genunchiului',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_ligament',
+  'dst': 'n_v31_body_lower_glezna',
+  'relation': 'related_to',
+  'label_ro': 'ligamentele contribuie la stabilitatea gleznei',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_maduva_osoasa',
+  'dst': 'n_v4sti_os',
+  'relation': 'part_of',
+  'label_ro': 'se află în interiorul unor oase',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_maduva_osoasa',
+  'dst': 'n_v4sti_sange',
+  'relation': 'related_to',
+  'label_ro': 'poate produce celule ale sângelui',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_maduva_osoasa',
+  'dst': 'n_v2sti_celula',
+  'relation': 'related_to',
+  'label_ro': 'conține celule stem hematopoietice',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_maduva_osoasa',
+  'dst': 'n_v4sti_corp',
+  'relation': 'part_of',
+  'label_ro': 'face parte din corp',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_clavicula',
+  'dst': 'n_v4sti_os',
+  'relation': 'is_a',
+  'label_ro': 'este un os',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_clavicula',
+  'dst': 'n_v4sti_corp',
+  'relation': 'part_of',
+  'label_ro': 'face parte din corp',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_clavicula',
+  'dst': 'n_v1_18_stern',
+  'relation': 'related_to',
+  'label_ro': 'se articulează cu sternul',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_clavicula',
+  'dst': 'n_v1_18_omoplat',
+  'relation': 'related_to',
+  'label_ro': 'se articulează cu omoplatul',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_omoplat',
+  'dst': 'n_v4sti_os',
+  'relation': 'is_a',
+  'label_ro': 'este un os',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_omoplat',
+  'dst': 'n_v4sti_corp',
+  'relation': 'part_of',
+  'label_ro': 'face parte din corp',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_omoplat',
+  'dst': 'n_v1_18_clavicula',
+  'relation': 'related_to',
+  'label_ro': 'se articulează cu clavicula',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_omoplat',
+  'dst': 'n_v1_18_umar',
+  'relation': 'related_to',
+  'label_ro': 'contribuie la structura umărului',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_coasta_toracica',
+  'dst': 'n_v4sti_os',
+  'relation': 'is_a',
+  'label_ro': 'este un os',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_coasta_toracica',
+  'dst': 'n_v4sti_corp',
+  'relation': 'part_of',
+  'label_ro': 'face parte din corp',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_coasta_toracica',
+  'dst': 'n_v4sti_inima',
+  'relation': 'related_to',
+  'label_ro': 'contribuie la protejarea inimii',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_brat',
+  'dst': 'n_v4sti_corp',
+  'relation': 'part_of',
+  'label_ro': 'face parte din corp',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_brat',
+  'dst': 'n_v4sti_os',
+  'relation': 'related_to',
+  'label_ro': 'conține osul numit humerus',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_brat',
+  'dst': 'n_v1_18_umar',
+  'relation': 'related_to',
+  'label_ro': 'pornește din regiunea umărului',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_antebrat',
+  'dst': 'n_v4sti_corp',
+  'relation': 'part_of',
+  'label_ro': 'face parte din corp',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_antebrat',
+  'dst': 'n_v4sti_os',
+  'relation': 'related_to',
+  'label_ro': 'conține oasele radius și ulna',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_antebrat',
+  'dst': 'n_v24_body_limbs_mana',
+  'relation': 'related_to',
+  'label_ro': 'se continuă distal cu mâna',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_antebrat',
+  'dst': 'n_v1_18_brat',
+  'relation': 'related_to',
+  'label_ro': 'se află între braț și mână',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_talpa',
+  'dst': 'n_v24_body_limbs_picior',
+  'relation': 'part_of',
+  'label_ro': 'face parte din picior',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_talpa',
+  'dst': 'n_v4sti_piele',
+  'relation': 'related_to',
+  'label_ro': 'este acoperită de piele',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_talpa',
+  'dst': 'n_v31_body_lower_calcai',
+  'relation': 'related_to',
+  'label_ro': 'călcâiul formează regiunea sa posterioară',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_talpa',
+  'dst': 'n_v24_body_limbs_deget',
+  'relation': 'related_to',
+  'label_ro': 'se întinde anterior până la degetele piciorului',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_palma',
+  'dst': 'n_v24_body_limbs_mana',
+  'relation': 'part_of',
+  'label_ro': 'face parte din mână',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_palma',
+  'dst': 'n_v4sti_piele',
+  'relation': 'related_to',
+  'label_ro': 'are o suprafață acoperită de piele',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_palma',
+  'dst': 'n_v24_body_limbs_deget',
+  'relation': 'related_to',
+  'label_ro': 'se continuă cu degetele mâinii',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_palma',
+  'dst': 'n_v4sti_os',
+  'relation': 'related_to',
+  'label_ro': 'în regiunea sa se află oasele metacarpiene',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_umar',
+  'dst': 'n_v4sti_corp',
+  'relation': 'part_of',
+  'label_ro': 'face parte din corp',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_umar',
+  'dst': 'n_v4sti_os',
+  'relation': 'related_to',
+  'label_ro': 'structura sa cuprinde oase',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_cot',
+  'dst': 'n_v1_18_articulatie',
+  'relation': 'part_of',
+  'label_ro': 'este partea exterioară a unei articulații',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_cot',
+  'dst': 'n_v4sti_corp',
+  'relation': 'part_of',
+  'label_ro': 'face parte din corp',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_cot',
+  'dst': 'n_v4sti_os',
+  'relation': 'related_to',
+  'label_ro': 'la nivelul său se întâlnesc humerusul și ulna',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_cot',
+  'dst': 'n_v1_18_antebrat',
+  'relation': 'related_to',
+  'label_ro': 'unește brațul cu antebrațul',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_tampla',
+  'dst': 'n_v24_body_face_cap',
+  'relation': 'part_of',
+  'label_ro': 'face parte din cap',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_tampla',
+  'dst': 'n_v4sti_ochi',
+  'relation': 'related_to',
+  'label_ro': 'se află lateral de ochi',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_tampla',
+  'dst': 'n_v4sti_ureche',
+  'relation': 'related_to',
+  'label_ro': 'se află înaintea urechii',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_tampla',
+  'dst': 'n_v32_body_face_frunte',
+  'relation': 'related_to',
+  'label_ro': 'se află lateral de frunte',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_geana',
+  'dst': 'n_v32_body_face_pleoapa',
+  'relation': 'part_of',
+  'label_ro': 'crește pe marginea pleoapei',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_geana',
+  'dst': 'n_v4sti_ochi',
+  'relation': 'related_to',
+  'label_ro': 'ajută la protejarea ochiului de impurități',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_geana',
+  'dst': 'n_v4sti_piele',
+  'relation': 'related_to',
+  'label_ro': 'crește din pielea marginii pleoapei',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_geana',
+  'dst': 'n_v32_body_face_spranceana',
+  'relation': 'related_to',
+  'label_ro': 'se află sub sprânceană',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_pupila',
+  'dst': 'n_v4sti_ochi',
+  'relation': 'part_of',
+  'label_ro': 'face parte din ochi',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_pupila',
+  'dst': 'n_v4sti_lumina',
+  'relation': 'related_to',
+  'label_ro': 'permite trecerea luminii în ochi',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_pupila',
+  'dst': 'n_v1_18_retina',
+  'relation': 'related_to',
+  'label_ro': 'lumina care trece prin ea poate ajunge la retină',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_pupila',
+  'dst': 'n_v1_18_cornee',
+  'relation': 'related_to',
+  'label_ro': 'lumina trece prin cornee înainte de a ajunge la pupilă',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_gingie',
+  'dst': 'n_v24_body_face_gura',
+  'relation': 'part_of',
+  'label_ro': 'face parte din gură',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_gingie',
+  'dst': 'n_v28_body_mouth_dinte',
+  'relation': 'related_to',
+  'label_ro': 'înconjoară baza dinților',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_gingie',
+  'dst': 'n_v4sti_corp',
+  'relation': 'part_of',
+  'label_ro': 'face parte din corp',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_gingie',
+  'dst': 'n_v1_18_masea',
+  'relation': 'related_to',
+  'label_ro': 'înconjoară baza măselelor',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_gingie',
+  'dst': 'n_v1_18_maxilar',
+  'relation': 'related_to',
+  'label_ro': 'acoperă osul alveolar al maxilarului',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_masea',
+  'dst': 'n_v28_body_mouth_dinte',
+  'relation': 'is_a',
+  'label_ro': 'este un dinte',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_masea',
+  'dst': 'n_v24_body_face_gura',
+  'relation': 'part_of',
+  'label_ro': 'se află în gură',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_masea',
+  'dst': 'n_v4gas_mancare',
+  'relation': 'related_to',
+  'label_ro': 'participă la mărunțirea mâncării',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_masea',
+  'dst': 'n_v1_18_gingie',
+  'relation': 'related_to',
+  'label_ro': 'este înconjurată la bază de gingie',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_saliva',
+  'dst': 'n_v24_body_face_gura',
+  'relation': 'related_to',
+  'label_ro': 'este secretată în gură',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_saliva',
+  'dst': 'n_v28_body_mouth_dinte',
+  'relation': 'related_to',
+  'label_ro': 'contribuie la protejarea dinților',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_saliva',
+  'dst': 'n_v4gas_mancare',
+  'relation': 'related_to',
+  'label_ro': 'participă la formarea bolului alimentar din mâncare',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_saliva',
+  'dst': 'n_v4gas_apa',
+  'relation': 'related_to',
+  'label_ro': 'conține în principal apă',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_saliva',
+  'dst': 'n_v1_18_inghitire',
+  'relation': 'related_to',
+  'label_ro': 'ușurează înghițirea alimentelor',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_lacrima',
+  'dst': 'n_v4sti_ochi',
+  'relation': 'related_to',
+  'label_ro': 'umezește suprafața ochiului',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_lacrima',
+  'dst': 'n_v4gas_apa',
+  'relation': 'related_to',
+  'label_ro': 'conține apă în componenta apoasă a filmului lacrimal',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_lacrima',
+  'dst': 'n_v32_body_face_pleoapa',
+  'relation': 'related_to',
+  'label_ro': 'este răspândită pe ochi prin clipitul pleoapelor',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_lacrima',
+  'dst': 'n_v24_body_face_nas',
+  'relation': 'related_to',
+  'label_ro': 'se poate drena spre nas prin căile lacrimale',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_retina',
+  'dst': 'n_v4sti_ochi',
+  'relation': 'part_of',
+  'label_ro': 'face parte din ochi',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_retina',
+  'dst': 'n_v4sti_creier',
+  'relation': 'related_to',
+  'label_ro': 'transmite informații vizuale spre creier prin nervul optic',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_retina',
+  'dst': 'n_v4sti_lumina',
+  'relation': 'related_to',
+  'label_ro': 'detectează lumina',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_retina',
+  'dst': 'n_v1_18_pupila',
+  'relation': 'related_to',
+  'label_ro': 'primește lumina care a trecut prin pupilă',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_timpan',
+  'dst': 'n_v4sti_ureche',
+  'relation': 'part_of',
+  'label_ro': 'face parte din ureche',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_timpan',
+  'dst': 'n_v4sti_aer',
+  'relation': 'related_to',
+  'label_ro': 'vibrează sub acțiunea variațiilor de presiune ale aerului',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_timpan',
+  'dst': 'n_v4muz_voce',
+  'relation': 'related_to',
+  'label_ro': 'poate vibra la sunetele vocii cântate',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_timpan',
+  'dst': 'n_v4lim_sunet',
+  'relation': 'related_to',
+  'label_ro': 'poate vibra când ajung la ureche sunetele vorbirii',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_cornee',
+  'dst': 'n_v4sti_ochi',
+  'relation': 'part_of',
+  'label_ro': 'face parte din ochi',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_cornee',
+  'dst': 'n_v4sti_lumina',
+  'relation': 'related_to',
+  'label_ro': 'refractă lumina care intră în ochi',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_cornee',
+  'dst': 'n_v32_body_face_pleoapa',
+  'relation': 'related_to',
+  'label_ro': 'poate fi acoperită de pleoapă',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_cornee',
+  'dst': 'n_v1_18_pupila',
+  'relation': 'related_to',
+  'label_ro': 'lumina trece prin ea înainte de a ajunge la pupilă',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_maxilar',
+  'dst': 'n_v4sti_os',
+  'relation': 'is_a',
+  'label_ro': 'este un os',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_maxilar',
+  'dst': 'n_v24_body_face_cap',
+  'relation': 'part_of',
+  'label_ro': 'face parte din cap',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_maxilar',
+  'dst': 'n_v28_body_mouth_dinte',
+  'relation': 'related_to',
+  'label_ro': 'în osul său sunt fixați dinți',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_maxilar',
+  'dst': 'n_v24_body_face_gura',
+  'relation': 'related_to',
+  'label_ro': 'poate contribui la delimitarea cavității gurii',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_inghitire',
+  'dst': 'n_v24_body_face_gura',
+  'relation': 'related_to',
+  'label_ro': 'începe în gură',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_inghitire',
+  'dst': 'n_v29_body_upper_gat',
+  'relation': 'related_to',
+  'label_ro': 'alimentele traversează regiunea gâtului',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_inghitire',
+  'dst': 'n_v4gas_mancare',
+  'relation': 'related_to',
+  'label_ro': 'transportă alimente din mâncare spre stomac',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_mestecare',
+  'dst': 'n_v28_body_mouth_dinte',
+  'relation': 'related_to',
+  'label_ro': 'folosește dinții pentru mărunțire',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_mestecare',
+  'dst': 'n_v24_body_face_gura',
+  'relation': 'related_to',
+  'label_ro': 'are loc în gură',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_mestecare',
+  'dst': 'n_v4gas_mancare',
+  'relation': 'related_to',
+  'label_ro': 'mărunțește alimentele din mâncare',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_mestecare',
+  'dst': 'n_v1_18_saliva',
+  'relation': 'related_to',
+  'label_ro': 'amestecă alimentele cu saliva',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_dantura',
+  'dst': 'n_v28_body_mouth_dinte',
+  'relation': 'related_to',
+  'label_ro': 'este alcătuită din dinți',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_dantura',
+  'dst': 'n_v24_body_face_gura',
+  'relation': 'related_to',
+  'label_ro': 'se află în gură',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_dantura',
+  'dst': 'n_v31_hygiene_oral_periuta_dinti',
+  'relation': 'related_to',
+  'label_ro': 'poate fi curățată cu periuța de dinți',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_dantura',
+  'dst': 'n_v31_hygiene_oral_pasta_dinti',
+  'relation': 'related_to',
+  'label_ro': 'poate fi curățată cu pastă de dinți',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_dantura',
+  'dst': 'n_v1_18_mestecare',
+  'relation': 'related_to',
+  'label_ro': 'este folosită la mestecare',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_transpiratie',
+  'dst': 'n_v4sti_piele',
+  'relation': 'related_to',
+  'label_ro': 'elimină sudoare prin piele',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_transpiratie',
+  'dst': 'n_v4gas_apa',
+  'relation': 'related_to',
+  'label_ro': 'sudoarea conține apă',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_transpiratie',
+  'dst': 'n_v4sti_corp',
+  'relation': 'related_to',
+  'label_ro': 'contribuie la răcirea corpului',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_transpiratie',
+  'dst': 'n_v4sti_sange',
+  'relation': 'related_to',
+  'label_ro': 'apa sudorii provine din lichidul derivat din plasma sângelui',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_tesut',
+  'dst': 'n_v2sti_celula',
+  'relation': 'related_to',
+  'label_ro': 'este alcătuit din celule cu roluri asemănătoare',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_tesut',
+  'dst': 'n_v4sti_corp',
+  'relation': 'part_of',
+  'label_ro': 'face parte din corp',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v4sti_os',
+  'dst': 'n_v1_18_tesut',
+  'relation': 'related_to',
+  'label_ro': 'conține țesut osos',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v4sti_sange',
+  'dst': 'n_v1_18_tesut',
+  'relation': 'is_a',
+  'label_ro': 'este un țesut lichid',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_tesut',
+  'dst': 'n_v4sti_piele',
+  'relation': 'related_to',
+  'label_ro': 'pielea conține mai multe tipuri de țesut',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_ombilic',
+  'dst': 'n_v4sti_corp',
+  'relation': 'part_of',
+  'label_ro': 'face parte din corp',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_ombilic',
+  'dst': 'n_v4sti_piele',
+  'relation': 'related_to',
+  'label_ro': 'este o cicatrice pe pielea abdomenului',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_ombilic',
+  'dst': 'n_v24_people_parents_mama',
+  'relation': 'related_to',
+  'label_ro': 'marchează locul fostului cordon care făcea legătura cu placenta mamei',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_ombilic',
+  'dst': 'n_v24_people_parents_bebelus',
+  'relation': 'related_to',
+  'label_ro': 'cicatricea sa se formează după desprinderea restului de cordon la bebeluș',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_stern',
+  'dst': 'n_v4sti_os',
+  'relation': 'is_a',
+  'label_ro': 'este un os',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_stern',
+  'dst': 'n_v4sti_corp',
+  'relation': 'part_of',
+  'label_ro': 'face parte din corp',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_stern',
+  'dst': 'n_v4sti_inima',
+  'relation': 'related_to',
+  'label_ro': 'se află anterior față de inimă',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_stern',
+  'dst': 'n_v1_18_coasta_toracica',
+  'relation': 'related_to',
+  'label_ro': 'unele coaste sunt legate de stern prin cartilaje',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_coloana_vertebrala',
+  'dst': 'n_v4sti_corp',
+  'relation': 'part_of',
+  'label_ro': 'face parte din corp',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 0},
+ {'src': 'n_v1_18_coloana_vertebrala',
+  'dst': 'n_v4sti_os',
+  'relation': 'related_to',
+  'label_ro': 'este alcătuită dintr-o serie de oase',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_coloana_vertebrala',
+  'dst': 'n_v24_body_face_cap',
+  'relation': 'related_to',
+  'label_ro': 'susține capul',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1},
+ {'src': 'n_v1_18_coloana_vertebrala',
+  'dst': 'n_v29_body_upper_gat',
+  'relation': 'related_to',
+  'label_ro': 'regiunea sa cervicală se află la nivelul gâtului',
+  'strength': 0.75,
+  'is_distractor': 0,
+  'bidirectional': 1})
+
+ALIASES = {'n_v31_body_lower_coapsa': ['coapselor'],
+ 'n_v31_body_lower_glezna': ['gleznelor'],
+ 'n_v31_body_lower_calcai': ['călcâielor'],
+ 'n_v31_body_lower_genunchi': ['genunchilor'],
+ 'n_v32_body_face_frunte': ['frunților'],
+ 'n_v32_body_face_obraz': ['obrajilor'],
+ 'n_v32_body_face_buza': ['buzelor'],
+ 'n_v32_body_face_spranceana': ['sprâncenelor'],
+ 'n_v32_body_face_pleoapa': ['pleoapelor'],
+ 'n_v32_body_face_nara': ['nărilor'],
+ 'n_v4muz_voce': ['vocii', 'vocilor']}
+
+REGIONAL_INPUTS = {}
+
+ITEM_EVIDENCE = ({'id': 'v118-ficat',
+  'lemma': 'Ficat',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_ficat',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor'],
+  'sense': 'Organ al aparatului digestiv care produce bilă și prelucrează substanțe nutritive.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['ficat', 'ficatul', 'ficați', 'ficații', 'ficatului', 'ficaților'],
+  'proposed_forms': ['ficat', 'ficatul', 'ficați', 'ficații', 'ficatului', 'ficaților'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [{'form': 'ficate',
+                                'reason': 'Not the selected DOOM3 masculine ficați paradigm; '
+                                          'variant ficate excluded.'},
+                               {'form': 'ficatele',
+                                'reason': 'Not the selected DOOM3 masculine ficați paradigm; '
+                                          'variant ficate excluded.'},
+                               {'form': 'ficatelor',
+                                'reason': 'Not the selected DOOM3 masculine ficați paradigm; '
+                                          'variant ficate excluded.'}],
+  'dictionaries': [{'lemma': 'ficat',
+                    'url': 'https://dexonline.ro/definitie/ficat/json',
+                    'dex_definition_ids': ['870516'],
+                    'doom3_definition_ids': ['1301448'],
+                    'flexion_url': 'https://dexonline.ro/definitie/ficat',
+                    'flexion_authority': 'DOOM3 masculine ficați entry plus explicit DOR M3 table',
+                    'forms_note': 'ficat/ficatul/ficați/ficații/ficatului/ficaților; ficate and '
+                                  'figurative/culinary-only meanings excluded.',
+                    'paraphrase': 'Organ al aparatului digestiv care produce bilă și prelucrează '
+                                  'substanțe nutritive.; selected DEX sense/register and DOOM3 '
+                                  'lexical gender/number checked, ordinary forms from DOOM3 '
+                                  'masculine ficați entry plus explicit DOR M3 table.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/ficat/json',
+               'paraphrase': 'Organ al aparatului digestiv care produce bilă și prelucrează '
+                             'substanțe nutritive.; selected DEX sense/register and DOOM3 lexical '
+                             'gender/number checked, ordinary forms from DOOM3 masculine ficați '
+                             'entry plus explicit DOR M3 table.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Ficat',
+               'paraphrase': 'Confirmă organul abdominal, circulația hepatică, rolurile '
+                             'digestive/metabolice și contactul cu stomacul.'}],
+  'link_targets': [{'node_id': 'n_v4sti_corp',
+                    'label': 'corp',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'face parte din corp',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_ficat',
+                    'edge_dst': 'n_v4sti_corp',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Ficat'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_sange',
+                    'label': 'sânge',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'primește sânge prin circulația hepatică',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_ficat',
+                    'edge_dst': 'n_v4sti_sange',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Ficat'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4gas_mancare',
+                    'label': 'Mâncare',
+                    'category': 'gastronomie',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'participă la digestia și prelucrarea substanțelor '
+                                       'nutritive din mâncare',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_ficat',
+                    'edge_dst': 'n_v4gas_mancare',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Ficat'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v1_18_stomac',
+                    'label': 'Stomac',
+                    'category': 'stiinta',
+                    'status': 'batch',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'se află în vecinătatea stomacului',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_ficat',
+                    'edge_dst': 'n_v1_18_stomac',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Ficat'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'research_corrections': ['Food caption narrowed to sourced digestive/metabolic role; no new '
+                           'endpoint or input planned.'],
+  'current_graph_counts': {'distinct': 4, 'old_main': 3, 'same_category': 3, 'batch': 1},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'Biological liver sense, bile production and '
+                                               'digestive metabolism are supported; hepatic blood '
+                                               'supply and gastric adjacency fit the four directed '
+                                               'captions.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Recognizable school organ; liver location, '
+                                               'vascular inflow, digestive work and stomach '
+                                               'proximity form a coherent anatomical '
+                                               'neighborhood.'}}},
+ {'id': 'v118-rinichi',
+  'lemma': 'Rinichi',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_rinichi',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor'],
+  'sense': 'Organ pereche al aparatului excretor, care filtrează sângele și participă la reglarea '
+           'apei din corp.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['rinichi', 'rinichiul', 'rinichii', 'rinichiului', 'rinichilor'],
+  'proposed_forms': ['rinichi', 'rinichiul', 'rinichii', 'rinichiului', 'rinichilor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'rinichi',
+                    'url': 'https://dexonline.ro/definitie/rinichi/json',
+                    'dex_definition_ids': ['858679'],
+                    'doom3_definition_ids': ['1300562'],
+                    'flexion_url': 'https://dexonline.ro/definitie/rinichi',
+                    'flexion_authority': 'DOOM3 invariant singular/plural rinichi plus DOR M73 '
+                                         'noun table',
+                    'forms_note': 'rinichi/rinichiul/rinichii/rinichiului/rinichilor, one spelling '
+                                  'for shared sg/pl key; variants/elisions excluded.',
+                    'paraphrase': 'Organ pereche al aparatului excretor, care filtrează sângele și '
+                                  'participă la reglarea apei din corp.; selected DEX '
+                                  'sense/register and DOOM3 lexical gender/number checked, '
+                                  'ordinary forms from DOOM3 invariant singular/plural rinichi '
+                                  'plus DOR M73 noun table.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/rinichi/json',
+               'paraphrase': 'Organ pereche al aparatului excretor, care filtrează sângele și '
+                             'participă la reglarea apei din corp.; selected DEX sense/register '
+                             'and DOOM3 lexical gender/number checked, ordinary forms from DOOM3 '
+                             'invariant singular/plural rinichi plus DOR M73 noun table.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Rinichi',
+               'paraphrase': 'Confirmă filtrarea sângelui, resorbția apei și drenajul prin venele '
+                             'renale, în organismul vertebratelor.'}],
+  'link_targets': [{'node_id': 'n_v4sti_corp',
+                    'label': 'corp',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'face parte din corp',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_rinichi',
+                    'edge_dst': 'n_v4sti_corp',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Rinichi'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_sange',
+                    'label': 'sânge',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'filtrează sângele',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_rinichi',
+                    'edge_dst': 'n_v4sti_sange',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Rinichi'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4gas_apa',
+                    'label': 'Apă',
+                    'category': 'gastronomie',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'contribuie la echilibrul apei din corp',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_rinichi',
+                    'edge_dst': 'n_v4gas_apa',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Rinichi'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v1_18_vena',
+                    'label': 'Venă',
+                    'category': 'stiinta',
+                    'status': 'batch',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'sângele părăsește rinichiul prin vena renală',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_rinichi',
+                    'edge_dst': 'n_v1_18_vena',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Rinichi'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'current_graph_counts': {'distinct': 4, 'old_main': 3, 'same_category': 3, 'batch': 1},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The paired excretory organ, filtration, body-water '
+                                               'regulation and renal venous drainage are '
+                                               'supported; culinary and figurative senses are '
+                                               'excluded.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Familiar school organ; filtering, body water and '
+                                               'renal venous drainage are scoped to the anatomical '
+                                               'kidney rather than food.'}}},
+ {'id': 'v118-stomac',
+  'lemma': 'Stomac',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_stomac',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor'],
+  'sense': 'Organ al tubului digestiv situat între esofag și intestinul subțire, în care '
+           'alimentele sunt prelucrate.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['stomac',
+                     'stomacul',
+                     'stomacuri',
+                     'stomacurile',
+                     'stomacului',
+                     'stomacurilor'],
+  'proposed_forms': ['stomac',
+                     'stomacul',
+                     'stomacuri',
+                     'stomacurile',
+                     'stomacului',
+                     'stomacurilor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [{'form': 'stomace',
+                                'reason': 'Not selected DOOM3 stomacuri paradigm.'},
+                               {'form': 'stomacele',
+                                'reason': 'Not selected DOOM3 stomacuri paradigm.'},
+                               {'form': 'stomacelor',
+                                'reason': 'Not selected DOOM3 stomacuri paradigm.'}],
+  'dictionaries': [{'lemma': 'stomac',
+                    'url': 'https://dexonline.ro/definitie/stomac/json',
+                    'dex_definition_ids': ['847013'],
+                    'doom3_definition_ids': ['1278177'],
+                    'flexion_url': 'https://dexonline.ro/definitie/stomac',
+                    'flexion_authority': 'DOOM3 neuter stomacuri plus DOR N24 table',
+                    'forms_note': 'stomac/stomacul/stomacuri/stomacurile/stomacului/stomacurilor; '
+                                  'stomace, old stomah and elisions excluded.',
+                    'paraphrase': 'Organ al tubului digestiv situat între esofag și intestinul '
+                                  'subțire, în care alimentele sunt prelucrate.; selected DEX '
+                                  'sense/register and DOOM3 lexical gender/number checked, '
+                                  'ordinary forms from DOOM3 neuter stomacuri plus DOR N24 '
+                                  'table.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/stomac/json',
+               'paraphrase': 'Organ al tubului digestiv situat între esofag și intestinul subțire, '
+                             'în care alimentele sunt prelucrate.; selected DEX sense/register and '
+                             'DOOM3 lexical gender/number checked, ordinary forms from DOOM3 '
+                             'neuter stomacuri plus DOR N24 table.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Stomac',
+               'paraphrase': 'Confirmă localizarea în corp, hrana provenită din cavitatea bucală, '
+                             'digestia și legătura cu intestinul subțire.'}],
+  'link_targets': [{'node_id': 'n_v4sti_corp',
+                    'label': 'corp',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'face parte din corp',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_stomac',
+                    'edge_dst': 'n_v4sti_corp',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Stomac'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v24_body_face_gura',
+                    'label': 'Gură',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'primește hrana pornită din gură',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_stomac',
+                    'edge_dst': 'n_v24_body_face_gura',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Stomac'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4gas_mancare',
+                    'label': 'Mâncare',
+                    'category': 'gastronomie',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'participă la digestia mâncării',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_stomac',
+                    'edge_dst': 'n_v4gas_mancare',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Stomac'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v1_18_intestin',
+                    'label': 'Intestin',
+                    'category': 'stiinta',
+                    'status': 'batch',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'se continuă cu intestinul subțire',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_stomac',
+                    'edge_dst': 'n_v1_18_intestin',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Stomac'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'research_corrections': ['Dropped predeclared Gât edge: reviewed source establishes oesophageal '
+                           'connection but does not itself establish the detailed neck course. No '
+                           'replacement endpoint invented.'],
+  'current_graph_counts': {'distinct': 5, 'old_main': 3, 'same_category': 4, 'batch': 2},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The digestive cavity receives orally ingested food '
+                                               'and continues into the small intestine; retained '
+                                               'captions avoid the dropped throat-specific claim.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Everyday organ name with a clear food route '
+                                               'through mouth and intestine; conditional digestive '
+                                               'captions avoid treatment claims.'}}},
+ {'id': 'v118-intestin',
+  'lemma': 'Intestin',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_intestin',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor'],
+  'sense': 'Parte a tubului digestiv situată după stomac, cu segmente subțire și gros.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['intestin',
+                     'intestinul',
+                     'intestine',
+                     'intestinele',
+                     'intestinului',
+                     'intestinelor'],
+  'proposed_forms': ['intestin',
+                     'intestinul',
+                     'intestine',
+                     'intestinele',
+                     'intestinului',
+                     'intestinelor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'intestin',
+                    'url': 'https://dexonline.ro/definitie/intestin/json',
+                    'dex_definition_ids': ['858286'],
+                    'doom3_definition_ids': ['1298538'],
+                    'flexion_url': 'https://dexonline.ro/definitie/intestin',
+                    'flexion_authority': 'DOOM3 noun intestin2 plus unbadged N1 neuter noun table, '
+                                         'not first DOR adjective table',
+                    'forms_note': 'intestin/intestinul/intestine/intestinele/intestinului/intestinelor; '
+                                  'adjective intestini/intestină excluded.',
+                    'paraphrase': 'Parte a tubului digestiv situată după stomac, cu segmente '
+                                  'subțire și gros.; selected DEX sense/register and DOOM3 lexical '
+                                  'gender/number checked, ordinary forms from DOOM3 noun intestin2 '
+                                  'plus unbadged N1 neuter noun table, not first DOR adjective '
+                                  'table.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/intestin/json',
+               'paraphrase': 'Parte a tubului digestiv situată după stomac, cu segmente subțire și '
+                             'gros.; selected DEX sense/register and DOOM3 lexical gender/number '
+                             'checked, ordinary forms from DOOM3 noun intestin2 plus unbadged N1 '
+                             'neuter noun table, not first DOR adjective table.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Intestin',
+               'paraphrase': 'Pagina de dezambiguizare confirmă sensul general și cele două '
+                             'segmente, fără a documenta funcțiile detaliate.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Intestin_sub%C8%9Bire',
+               'paraphrase': 'Articolul despre intestinul subțire confirmă digestia și absorbția '
+                             'substanțelor nutritive în sânge.'}],
+  'link_targets': [{'node_id': 'n_v4sti_corp',
+                    'label': 'corp',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'face parte din corp',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_intestin',
+                    'edge_dst': 'n_v4sti_corp',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Intestin'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4gas_mancare',
+                    'label': 'Mâncare',
+                    'category': 'gastronomie',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'participă la digestia mâncării',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_intestin',
+                    'edge_dst': 'n_v4gas_mancare',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Intestin_sub%C8%9Bire'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_sange',
+                    'label': 'sânge',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'în intestinul subțire, substanțele nutritive absorbite '
+                                       'ajung în sânge',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_intestin',
+                    'edge_dst': 'n_v4sti_sange',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Intestin_sub%C8%9Bire'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v1_18_stomac',
+                    'label': 'Stomac',
+                    'category': 'stiinta',
+                    'status': 'batch',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'urmează stomacului pe traseul digestiv',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_intestin',
+                    'edge_dst': 'n_v1_18_stomac',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Intestin'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'current_graph_counts': {'distinct': 4, 'old_main': 3, 'same_category': 3, 'batch': 1},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The noun names the digestive tract beyond the '
+                                               'stomach; the separate small-intestine source '
+                                               'supports nutrient absorption into blood.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'School digestive vocabulary; the general bowel '
+                                               'sense and explicitly small-intestine absorption '
+                                               'claims remain distinguishable.'}}},
+ {'id': 'v118-artera',
+  'lemma': 'Arteră',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_artera',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor', 'Perechi'],
+  'sense': 'Vas sangvin prin care sângele pleacă de la inimă către țesuturi.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['arteră', 'artere', 'arterele', 'arterei', 'arterelor'],
+  'proposed_forms': ['arteră', 'artere', 'arterele', 'arterei', 'arterelor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'arteră',
+                    'url': 'https://dexonline.ro/definitie/arter%C4%83/json',
+                    'dex_definition_ids': ['829871'],
+                    'doom3_definition_ids': ['1324098'],
+                    'flexion_url': 'https://dexonline.ro/definitie/arter%C4%83',
+                    'flexion_authority': 'DOOM3 arterei/artere plus DOR F1 noun table',
+                    'forms_note': 'arteră/artere/arterele/arterei/arterelor; folded artera '
+                                  'omitted, arterie and non-anatomical senses excluded.',
+                    'paraphrase': 'Vas sangvin prin care sângele pleacă de la inimă către '
+                                  'țesuturi.; selected DEX sense/register and DOOM3 lexical '
+                                  'gender/number checked, ordinary forms from DOOM3 arterei/artere '
+                                  'plus DOR F1 noun table.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/arter%C4%83/json',
+               'paraphrase': 'Vas sangvin prin care sângele pleacă de la inimă către țesuturi.; '
+                             'selected DEX sense/register and DOOM3 lexical gender/number checked, '
+                             'ordinary forms from DOOM3 arterei/artere plus DOR F1 noun table.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Arter%C4%83',
+               'paraphrase': 'Confirmă transportul dinspre inimă și continuarea '
+                             'arteriole-capilare-venule; nu se generalizează oxigenarea '
+                             'sângelui.'}],
+  'link_targets': [{'node_id': 'n_v4sti_corp',
+                    'label': 'corp',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'face parte din corp',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_artera',
+                    'edge_dst': 'n_v4sti_corp',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Arter%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_sange',
+                    'label': 'sânge',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'transportă sânge',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_artera',
+                    'edge_dst': 'n_v4sti_sange',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Arter%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_inima',
+                    'label': 'inimă',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'duce sângele de la inimă spre țesuturi',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_artera',
+                    'edge_dst': 'n_v4sti_inima',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Arter%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v1_18_vena',
+                    'label': 'Venă',
+                    'category': 'stiinta',
+                    'status': 'batch',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'circulația poate continua spre vene prin capilare',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_artera',
+                    'edge_dst': 'n_v1_18_vena',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Arter%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'current_graph_counts': {'distinct': 4, 'old_main': 3, 'same_category': 4, 'batch': 1},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The anatomical vessel carries blood away from the '
+                                               'heart; the caption allows capillary continuation '
+                                               'to veins without a false universal oxygenation '
+                                               'claim.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'School circulatory term; the outward direction '
+                                               'from the heart is preserved without falsely '
+                                               'requiring oxygenated blood.'}}},
+ {'id': 'v118-vena',
+  'lemma': 'Venă',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_vena',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor', 'Perechi'],
+  'sense': 'Vas sangvin prin care sângele se întoarce spre inimă.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['venă', 'vene', 'venele', 'venei', 'venelor'],
+  'proposed_forms': ['venă', 'vene', 'venele', 'venei', 'venelor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'venă',
+                    'url': 'https://dexonline.ro/definitie/ven%C4%83/json',
+                    'dex_definition_ids': ['825828'],
+                    'doom3_definition_ids': ['1263720'],
+                    'flexion_url': 'https://dexonline.ro/definitie/ven%C4%83',
+                    'flexion_authority': 'DOOM3 venei/vene plus DOR F1 noun table',
+                    'forms_note': 'venă/vene/venele/venei/venelor; one spelling per fold; gambling '
+                                  'figurative sense excluded.',
+                    'paraphrase': 'Vas sangvin prin care sângele se întoarce spre inimă.; selected '
+                                  'DEX sense/register and DOOM3 lexical gender/number checked, '
+                                  'ordinary forms from DOOM3 venei/vene plus DOR F1 noun table.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/ven%C4%83/json',
+               'paraphrase': 'Vas sangvin prin care sângele se întoarce spre inimă.; selected DEX '
+                             'sense/register and DOOM3 lexical gender/number checked, ordinary '
+                             'forms from DOOM3 venei/vene plus DOR F1 noun table.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Ven%C4%83',
+               'paraphrase': 'Confirmă transportul sângelui spre inimă, structura în corp și '
+                             'venele renale; nu se generalizează lipsa oxigenului.'}],
+  'link_targets': [{'node_id': 'n_v4sti_corp',
+                    'label': 'corp',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'face parte din corp',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_vena',
+                    'edge_dst': 'n_v4sti_corp',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Ven%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_sange',
+                    'label': 'sânge',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'transportă sânge',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_vena',
+                    'edge_dst': 'n_v4sti_sange',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Ven%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_inima',
+                    'label': 'inimă',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'duce sângele spre inimă',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_vena',
+                    'edge_dst': 'n_v4sti_inima',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Ven%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'research_corrections': ['Dropped Piele edge because selected article did not substantiate '
+                           'visibility; two independently predeclared incoming Arteră/Rinichi '
+                           'links still count toward incident graph floor.'],
+  'current_graph_counts': {'distinct': 5, 'old_main': 3, 'same_category': 5, 'batch': 2},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The anatomical vessel returns blood toward the '
+                                               'heart; lexical luck/opportunity and broader '
+                                               'figurative senses are excluded.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'The familiar returning blood-vessel sense is '
+                                               'clear; neither luck nor universal deoxygenation is '
+                                               'introduced.'}}},
+ {'id': 'v118-nerv',
+  'lemma': 'Nerv',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_nerv',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor', 'Perechi'],
+  'sense': 'Formațiune anatomică care transmite impulsuri între sistemul nervos central și '
+           'periferia corpului.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['nerv', 'nervul', 'nervi', 'nervii', 'nervului', 'nervilor'],
+  'proposed_forms': ['nerv', 'nervul', 'nervi', 'nervii', 'nervului', 'nervilor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'nerv',
+                    'url': 'https://dexonline.ro/definitie/nerv/json',
+                    'dex_definition_ids': ['883894'],
+                    'doom3_definition_ids': ['1289711'],
+                    'flexion_url': 'https://dexonline.ro/definitie/nerv',
+                    'flexion_authority': 'DOOM3 masculine nervi plus DOR M1 noun table',
+                    'forms_note': 'nerv/nervul/nervi/nervii/nervului/nervilor; '
+                                  'irritation/metaphor/botanical senses excluded.',
+                    'paraphrase': 'Formațiune anatomică care transmite impulsuri între sistemul '
+                                  'nervos central și periferia corpului.; selected DEX '
+                                  'sense/register and DOOM3 lexical gender/number checked, '
+                                  'ordinary forms from DOOM3 masculine nervi plus DOR M1 noun '
+                                  'table.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/nerv/json',
+               'paraphrase': 'Formațiune anatomică care transmite impulsuri între sistemul nervos '
+                             'central și periferia corpului.; selected DEX sense/register and '
+                             'DOOM3 lexical gender/number checked, ordinary forms from DOOM3 '
+                             'masculine nervi plus DOR M1 noun table.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Nerv',
+               'paraphrase': 'Confirmă funcțiile senzitivă/efectoare și nervii cerebrali, în '
+                             'sensul anatomic.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Nerv_optic',
+               'paraphrase': 'Confirmă nervul optic care preia informații vizuale din retină și '
+                             'părăsește globul ocular.'}],
+  'link_targets': [{'node_id': 'n_v4sti_corp',
+                    'label': 'corp',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'face parte din corp',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_nerv',
+                    'edge_dst': 'n_v4sti_corp',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Nerv'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_creier',
+                    'label': 'creier',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'poate transmite impulsuri către sau de la creier',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_nerv',
+                    'edge_dst': 'n_v4sti_creier',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Nerv'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_piele',
+                    'label': 'piele',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'poate transmite senzații provenite de la piele',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_nerv',
+                    'edge_dst': 'n_v4sti_piele',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://dexonline.ro/definitie/nerv/json'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_ochi',
+                    'label': 'ochi',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'nervul optic transmite informații de la ochi',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_nerv',
+                    'edge_dst': 'n_v4sti_ochi',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Nerv_optic'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'current_graph_counts': {'distinct': 4, 'old_main': 4, 'same_category': 4, 'batch': 0},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The anatomical fiber bundle conducts impulses; DEX '
+                                               'supports peripheral skin sensation and the '
+                                               'optic-nerve article supports the visual '
+                                               'connection.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Recognizable biology vocabulary; sensory and optic '
+                                               'examples remain conditional rather than assigning '
+                                               'every nerve every function.'}}},
+ {'id': 'v118-schelet',
+  'lemma': 'Schelet',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_schelet',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor'],
+  'sense': 'Ansamblul oaselor unui vertebrat, cu rol de susținere și protecție.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['schelet',
+                     'scheletul',
+                     'schelete',
+                     'scheletele',
+                     'scheletului',
+                     'scheletelor'],
+  'proposed_forms': ['schelet',
+                     'scheletul',
+                     'schelete',
+                     'scheletele',
+                     'scheletului',
+                     'scheletelor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'schelet',
+                    'url': 'https://dexonline.ro/definitie/schelet/json',
+                    'dex_definition_ids': ['839829'],
+                    'doom3_definition_ids': ['1273285'],
+                    'flexion_url': 'https://dexonline.ro/definitie/schelet',
+                    'flexion_authority': 'DOOM3 neuter schelete plus DOR N1 noun table, not '
+                                         'proper-name entry',
+                    'forms_note': 'schelet/scheletul/schelete/scheletele/scheletului/scheletelor; '
+                                  'proper name, old variants and construction sense excluded.',
+                    'paraphrase': 'Ansamblul oaselor unui vertebrat, cu rol de susținere și '
+                                  'protecție.; selected DEX sense/register and DOOM3 lexical '
+                                  'gender/number checked, ordinary forms from DOOM3 neuter '
+                                  'schelete plus DOR N1 noun table, not proper-name entry.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/schelet/json',
+               'paraphrase': 'Ansamblul oaselor unui vertebrat, cu rol de susținere și protecție.; '
+                             'selected DEX sense/register and DOOM3 lexical gender/number checked, '
+                             'ordinary forms from DOOM3 neuter schelete plus DOR N1 noun table, '
+                             'not proper-name entry.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Schelet',
+               'paraphrase': 'Confirmă endoscheletul vertebratelor și alcătuirea osoasă.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Schelet_uman',
+               'paraphrase': 'Paragraful despre protecția organelor numește inima și creierul, '
+                             'prin cutia toracică și craniu; nu se preia cifra vădit eronată din '
+                             'introducere.'}],
+  'link_targets': [{'node_id': 'n_v4sti_corp',
+                    'label': 'corp',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'face parte din corp',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_schelet',
+                    'edge_dst': 'n_v4sti_corp',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Schelet'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_os',
+                    'label': 'os',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'este alcătuit din oase',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_schelet',
+                    'edge_dst': 'n_v4sti_os',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Schelet'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_creier',
+                    'label': 'creier',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'oasele craniului său protejează creierul',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_schelet',
+                    'edge_dst': 'n_v4sti_creier',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Schelet_uman'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_inima',
+                    'label': 'inimă',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'cutia sa toracică protejează inima',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_schelet',
+                    'edge_dst': 'n_v4sti_inima',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Schelet_uman'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'target_restriction': 'Shared word/graph coverage only; generic hubs or process labels are not '
+                        'approved hidden targets or filler board groups.',
+  'source_quality_note': 'Schelet_uman lead contains malformed bone-count wording; no count or '
+                         'development/clinical claim adopted. Independent factual review must '
+                         'check the specific protection paragraph, not inherit unchecked numeric '
+                         'text.',
+  'current_graph_counts': {'distinct': 4, 'old_main': 4, 'same_category': 4, 'batch': 0},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The vertebrate bony skeleton and protective '
+                                               'skull/rib-cage functions are corroborated by the '
+                                               'Romanian class-VI textbook; the corrupted '
+                                               'bone-count sentence is excluded.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'School skeleton vocabulary and protection links '
+                                               'are sound; the malformed source lead is excluded '
+                                               'and protection is independently corroborated by '
+                                               'the school manual.'}}},
+ {'id': 'v118-articulatie',
+  'lemma': 'Articulație',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_articulatie',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor'],
+  'sense': 'Legătură anatomică între oase, în sensul aparatului locomotor.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['articulație',
+                     'articulația',
+                     'articulații',
+                     'articulațiile',
+                     'articulației',
+                     'articulațiilor'],
+  'proposed_forms': ['articulație',
+                     'articulația',
+                     'articulații',
+                     'articulațiile',
+                     'articulației',
+                     'articulațiilor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'articulație',
+                    'url': 'https://dexonline.ro/definitie/articula%C8%9Bie/json',
+                    'dex_definition_ids': ['829889'],
+                    'doom3_definition_ids': ['1324111'],
+                    'flexion_url': 'https://dexonline.ro/definitie/articula%C8%9Bie',
+                    'flexion_authority': 'Explicit DOOM3 F135 noun table',
+                    'forms_note': 'articulație/articulația/articulații/articulațiile/articulației/articulațiilor; '
+                                  'phonetic/mechanical senses and articulațiune excluded.',
+                    'paraphrase': 'Legătură anatomică între oase, în sensul aparatului locomotor.; '
+                                  'selected DEX sense/register and DOOM3 lexical gender/number '
+                                  'checked, ordinary forms from Explicit DOOM3 F135 noun table.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/articula%C8%9Bie/json',
+               'paraphrase': 'Legătură anatomică între oase, în sensul aparatului locomotor.; '
+                             'selected DEX sense/register and DOOM3 lexical gender/number checked, '
+                             'ordinary forms from Explicit DOOM3 F135 noun table.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Articula%C8%9Bie',
+               'paraphrase': 'Confirmă unirea oaselor în corp.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Genunchi',
+               'paraphrase': 'Descrie explicit articulația genunchiului.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Glezn%C4%83',
+               'paraphrase': 'Confirmă articulația tibiei cu tarsul la gleznă.'}],
+  'link_targets': [{'node_id': 'n_v4sti_corp',
+                    'label': 'corp',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'face parte din corp',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_articulatie',
+                    'edge_dst': 'n_v4sti_corp',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Articula%C8%9Bie'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_os',
+                    'label': 'os',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'poate uni oase',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_articulatie',
+                    'edge_dst': 'n_v4sti_os',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Articula%C8%9Bie'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v31_body_lower_genunchi',
+                    'label': 'Genunchi',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'is_a',
+                    'claim_to_verify': 'este o articulație',
+                    'direction': 'incoming',
+                    'edge_src': 'n_v31_body_lower_genunchi',
+                    'edge_dst': 'n_v1_18_articulatie',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Genunchi'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v31_body_lower_glezna',
+                    'label': 'Gleznă',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'is_a',
+                    'claim_to_verify': 'este o articulație',
+                    'direction': 'incoming',
+                    'edge_src': 'n_v31_body_lower_glezna',
+                    'edge_dst': 'n_v1_18_articulatie',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Glezn%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'target_restriction': 'Shared word/graph coverage only; generic hubs or process labels are not '
+                        'approved hidden targets or filler board groups.',
+  'research_corrections': ['Dropped detailed Cartilaj surface claim; current pages establish '
+                           'joints and cartilage presence, but not the selected surface caption. '
+                           'No replacement invented.'],
+  'current_graph_counts': {'distinct': 5, 'old_main': 4, 'same_category': 5, 'batch': 1},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The anatomical connection of bones is supported; '
+                                               'the served knee and ankle nodes fit the joint '
+                                               'examples and their directed class captions.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Recognizable body-joint word with honest knee and '
+                                               'ankle examples; mechanical and musical '
+                                               'articulation senses are excluded.'}}},
+ {'id': 'v118-tendon',
+  'lemma': 'Tendon',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_tendon',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor', 'Perechi'],
+  'sense': 'Structură fibroasă prin care mușchiul se fixează pe os și transmite forța pentru '
+           'mișcare.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['tendon', 'tendonul', 'tendoane', 'tendoanele', 'tendonului', 'tendoanelor'],
+  'proposed_forms': ['tendon', 'tendonul', 'tendoane', 'tendoanele', 'tendonului', 'tendoanelor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'tendon',
+                    'url': 'https://dexonline.ro/definitie/tendon/json',
+                    'dex_definition_ids': ['832173'],
+                    'doom3_definition_ids': ['1268343'],
+                    'flexion_url': 'https://dexonline.ro/definitie/tendon',
+                    'flexion_authority': 'DOOM3 neuter tendoane plus DOR N11 noun table',
+                    'forms_note': 'tendon/tendonul/tendoane/tendoanele/tendonului/tendoanelor; old '
+                                  'variants and elisions excluded. DOOM parenthetic ligament is '
+                                  'not an approved synonym mapping.',
+                    'paraphrase': 'Structură fibroasă prin care mușchiul se fixează pe os și '
+                                  'transmite forța pentru mișcare.; selected DEX sense/register '
+                                  'and DOOM3 lexical gender/number checked, ordinary forms from '
+                                  'DOOM3 neuter tendoane plus DOR N11 noun table.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/tendon/json',
+               'paraphrase': 'Structură fibroasă prin care mușchiul se fixează pe os și transmite '
+                             'forța pentru mișcare.; selected DEX sense/register and DOOM3 lexical '
+                             'gender/number checked, ordinary forms from DOOM3 neuter tendoane '
+                             'plus DOR N11 noun table.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Tendon',
+               'paraphrase': 'Confirmă structura fibroasă și fixarea mușchiului pe os.'},
+              {'url': 'https://enayatimedicalcity.ro/blog/degetul-in-resort-tenosinovita-stenosanta-a-flexorilor-degetelor/',
+               'paraphrase': 'Introducerea anatomică a spitalului explică legarea mușchilor '
+                             'antebrațului de oasele degetelor și îndoirea acestora; nu se preia '
+                             'conduită medicală.'}],
+  'link_targets': [{'node_id': 'n_v4sti_corp',
+                    'label': 'corp',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'face parte din corp',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_tendon',
+                    'edge_dst': 'n_v4sti_corp',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Tendon'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_os',
+                    'label': 'os',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'poate fixa un mușchi pe un os',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_tendon',
+                    'edge_dst': 'n_v4sti_os',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Tendon'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v24_body_limbs_mana',
+                    'label': 'Mână',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'tendoanele participă la mișcările mâinii',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_tendon',
+                    'edge_dst': 'n_v24_body_limbs_mana',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://enayatimedicalcity.ro/blog/degetul-in-resort-tenosinovita-stenosanta-a-flexorilor-degetelor/'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v24_body_limbs_deget',
+                    'label': 'Deget',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'poate transmite forța pentru mișcarea degetelor',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_tendon',
+                    'edge_dst': 'n_v24_body_limbs_deget',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://enayatimedicalcity.ro/blog/degetul-in-resort-tenosinovita-stenosanta-a-flexorilor-degetelor/'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'source_access_note': 'Hospital anatomical introduction inspected in same-item web search '
+                        'result; no symptoms, treatment or advice adopted.',
+  'current_graph_counts': {'distinct': 4, 'old_main': 4, 'same_category': 4, 'batch': 0},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'A muscle-to-bone fibrous structure; the primary '
+                                               'hand-clinic account supports finger movement, '
+                                               'while no ligament synonym is admitted.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'School movement vocabulary; muscle-to-bone '
+                                               'attachment and specific hand/deget mechanics are '
+                                               'supported without adopting clinical advice.'}}},
+ {'id': 'v118-ligament',
+  'lemma': 'Ligament',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_ligament',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor', 'Perechi'],
+  'sense': 'Bandă de fibre conjunctive care poate uni oasele la nivelul articulațiilor.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['ligament',
+                     'ligamentul',
+                     'ligamente',
+                     'ligamentele',
+                     'ligamentului',
+                     'ligamentelor'],
+  'proposed_forms': ['ligament',
+                     'ligamentul',
+                     'ligamente',
+                     'ligamentele',
+                     'ligamentului',
+                     'ligamentelor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'ligament',
+                    'url': 'https://dexonline.ro/definitie/ligament/json',
+                    'dex_definition_ids': ['864214'],
+                    'doom3_definition_ids': ['1326028'],
+                    'flexion_url': 'https://dexonline.ro/definitie/ligament',
+                    'flexion_authority': 'DOOM3 ligamente plus DOR ligament1 N1 table, not '
+                                         'unbadged -uri table',
+                    'forms_note': 'ligament/ligamentul/ligamente/ligamentele/ligamentului/ligamentelor; '
+                                  'no ligamenturi or tendon synonym mapping.',
+                    'paraphrase': 'Bandă de fibre conjunctive care poate uni oasele la nivelul '
+                                  'articulațiilor.; selected DEX sense/register and DOOM3 lexical '
+                                  'gender/number checked, ordinary forms from DOOM3 ligamente plus '
+                                  'DOR ligament1 N1 table, not unbadged -uri table.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/ligament/json',
+               'paraphrase': 'Bandă de fibre conjunctive care poate uni oasele la nivelul '
+                             'articulațiilor.; selected DEX sense/register and DOOM3 lexical '
+                             'gender/number checked, ordinary forms from DOOM3 ligamente plus DOR '
+                             'ligament1 N1 table, not unbadged -uri table.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Ligament',
+               'paraphrase': 'Distinge legăturile os-os de tendoanele mușchi-os.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Genunchi',
+               'paraphrase': 'Pagina deja inspectată la Articulație descrie rolul ligamentelor în '
+                             'stabilitatea genunchiului.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Glezn%C4%83',
+               'paraphrase': 'Pagina deja inspectată la Articulație numește ligamentele care '
+                             'sprijină articulația gleznei.'}],
+  'link_targets': [{'node_id': 'n_v4sti_corp',
+                    'label': 'corp',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'face parte din corp',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_ligament',
+                    'edge_dst': 'n_v4sti_corp',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Ligament'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_os',
+                    'label': 'os',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'poate lega oasele unei articulații',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_ligament',
+                    'edge_dst': 'n_v4sti_os',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Ligament'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v31_body_lower_genunchi',
+                    'label': 'Genunchi',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'ligamentele contribuie la stabilitatea genunchiului',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_ligament',
+                    'edge_dst': 'n_v31_body_lower_genunchi',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Genunchi'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v31_body_lower_glezna',
+                    'label': 'Gleznă',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'ligamentele contribuie la stabilitatea gleznei',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_ligament',
+                    'edge_dst': 'n_v31_body_lower_glezna',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Glezn%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'current_graph_counts': {'distinct': 4, 'old_main': 4, 'same_category': 4, 'batch': 0},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The selected anatomical fibrous band can join '
+                                               'bones; knee and ankle stability are independently '
+                                               'supported and tendon remains a distinct concept.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Distinct from tendon; bone-to-bone connection and '
+                                               'knee/ankle support give useful, specific school '
+                                               'anatomy associations.'}}},
+ {'id': 'v118-maduva_osoasa',
+  'lemma': 'Măduvă osoasă',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_maduva_osoasa',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor'],
+  'sense': 'Țesut din interiorul unor oase, în care se formează celule ale sângelui.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['măduvă osoasă', 'măduvei osoase'],
+  'proposed_forms': ['măduvă osoasă', 'măduvei osoase'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [{'form': 'măduve osoase',
+                                'reason': 'Selected DOOM3 entry gives singular and articulated '
+                                          'genitive only; DOR plural is not adopted for this '
+                                          'qualified marrow sense.'},
+                               {'form': 'măduvele osoase',
+                                'reason': 'Selected DOOM3 entry gives singular and articulated '
+                                          'genitive only; DOR plural is not adopted for this '
+                                          'qualified marrow sense.'},
+                               {'form': 'măduvelor osoase',
+                                'reason': 'Selected DOOM3 entry gives singular and articulated '
+                                          'genitive only; DOR plural is not adopted for this '
+                                          'qualified marrow sense.'}],
+  'dictionaries': [{'lemma': 'măduvă',
+                    'url': 'https://dexonline.ro/definitie/m%C4%83duv%C4%83/json',
+                    'dex_definition_ids': ['886511'],
+                    'doom3_definition_ids': ['1291576'],
+                    'flexion_url': 'https://dexonline.ro/definitie/m%C4%83duv%C4%83',
+                    'flexion_authority': 'DOOM3 singular măduvă/măduvei, agreeing with singular '
+                                         'DOR F1 rows; qualified adjective agreement',
+                    'forms_note': 'Only măduvă osoasă and măduvei osoase keys; folded măduva '
+                                  'omitted. No plural, spinal-cord, botanical or bare-head inputs.',
+                    'paraphrase': 'Țesut din interiorul unor oase, în care se formează celule ale '
+                                  'sângelui.; selected DEX sense/register and DOOM3 lexical '
+                                  'gender/number checked, ordinary forms from DOOM3 singular '
+                                  'măduvă/măduvei, agreeing with singular DOR F1 rows; qualified '
+                                  'adjective agreement.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/m%C4%83duv%C4%83/json',
+               'paraphrase': 'Țesut din interiorul unor oase, în care se formează celule ale '
+                             'sângelui.; selected DEX sense/register and DOOM3 lexical '
+                             'gender/number checked, ordinary forms from DOOM3 singular '
+                             'măduvă/măduvei, agreeing with singular DOR F1 rows; qualified '
+                             'adjective agreement.'},
+              {'url': 'https://ro.wikipedia.org/wiki/M%C4%83duv%C4%83_osoas%C4%83',
+               'paraphrase': 'Confirmă localizarea osoasă, hematopoieza și celulele stem; nu se '
+                             'adoptă nicio afirmație de tratament.'}],
+  'link_targets': [{'node_id': 'n_v4sti_os',
+                    'label': 'os',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'se află în interiorul unor oase',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_maduva_osoasa',
+                    'edge_dst': 'n_v4sti_os',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/M%C4%83duv%C4%83_osoas%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_sange',
+                    'label': 'sânge',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'poate produce celule ale sângelui',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_maduva_osoasa',
+                    'edge_dst': 'n_v4sti_sange',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/M%C4%83duv%C4%83_osoas%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v2sti_celula',
+                    'label': 'Celulă',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'conține celule stem hematopoietice',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_maduva_osoasa',
+                    'edge_dst': 'n_v2sti_celula',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/M%C4%83duv%C4%83_osoas%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_corp',
+                    'label': 'corp',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'face parte din corp',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_maduva_osoasa',
+                    'edge_dst': 'n_v4sti_corp',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/M%C4%83duv%C4%83_osoas%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'unqualified_head_policy': 'Bare dictionary head is evidence only; actual proposed inputs remain '
+                             'qualified. Never move or steal an unqualified owner.',
+  'current_graph_counts': {'distinct': 4, 'old_main': 4, 'same_category': 4, 'batch': 0},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The qualified bone-marrow tissue and hematopoietic '
+                                               'cells are supported; only normative singular '
+                                               'qualified forms are admitted, excluding spinal '
+                                               'cord and unsupported plurals.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Qualified school term avoids spinal cord and plant '
+                                               'pith; singular normative inputs and blood-cell '
+                                               'links remain narrowly scoped.'}}},
+ {'id': 'v118-clavicula',
+  'lemma': 'Claviculă',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_clavicula',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor', 'Conexiuni', 'Intrusul'],
+  'sense': 'Os pereche al centurii scapulare, articulat cu sternul și omoplatul.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['claviculă', 'clavicule', 'claviculele', 'claviculei', 'claviculelor'],
+  'proposed_forms': ['claviculă', 'clavicule', 'claviculele', 'claviculei', 'claviculelor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'claviculă',
+                    'url': 'https://dexonline.ro/definitie/clavicul%C4%83/json',
+                    'dex_definition_ids': ['847511'],
+                    'doom3_definition_ids': ['1312164'],
+                    'flexion_url': 'https://dexonline.ro/definitie/clavicul%C4%83',
+                    'flexion_authority': 'DOOM3 claviculei/clavicule plus DOR F1 noun table',
+                    'forms_note': 'claviculă/clavicule/claviculele/claviculei/claviculelor; folded '
+                                  'clavicula omitted; no synonym added.',
+                    'paraphrase': 'Os pereche al centurii scapulare, articulat cu sternul și '
+                                  'omoplatul.; selected DEX sense/register and DOOM3 lexical '
+                                  'gender/number checked, ordinary forms from DOOM3 '
+                                  'claviculei/clavicule plus DOR F1 noun table.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/clavicul%C4%83/json',
+               'paraphrase': 'Os pereche al centurii scapulare, articulat cu sternul și '
+                             'omoplatul.; selected DEX sense/register and DOOM3 lexical '
+                             'gender/number checked, ordinary forms from DOOM3 '
+                             'claviculei/clavicule plus DOR F1 noun table.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Clavicul%C4%83',
+               'paraphrase': 'Confirmă osul din corp și articulațiile sternoclaviculară și '
+                             'acromioclaviculară.'}],
+  'link_targets': [{'node_id': 'n_v4sti_os',
+                    'label': 'os',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'is_a',
+                    'claim_to_verify': 'este un os',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_clavicula',
+                    'edge_dst': 'n_v4sti_os',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Clavicul%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_corp',
+                    'label': 'corp',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'face parte din corp',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_clavicula',
+                    'edge_dst': 'n_v4sti_corp',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Clavicul%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v1_18_stern',
+                    'label': 'Stern',
+                    'category': 'stiinta',
+                    'status': 'batch',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'se articulează cu sternul',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_clavicula',
+                    'edge_dst': 'n_v1_18_stern',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Clavicul%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v1_18_omoplat',
+                    'label': 'Omoplat',
+                    'category': 'stiinta',
+                    'status': 'batch',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'se articulează cu omoplatul',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_clavicula',
+                    'edge_dst': 'n_v1_18_omoplat',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Clavicul%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'current_graph_counts': {'distinct': 4, 'old_main': 2, 'same_category': 4, 'batch': 2},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The paired shoulder-girdle bone articulates with '
+                                               'sternum and scapula; the masculine-looking '
+                                               'alternatives are not the selected feminine '
+                                               'paradigm.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Named in school skeletal diagrams; its bone '
+                                               'identity and sternum/scapula articulations are '
+                                               'specific and recognizable.'}}},
+ {'id': 'v118-omoplat',
+  'lemma': 'Omoplat',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_omoplat',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor', 'Conexiuni', 'Intrusul'],
+  'sense': 'Os pereche lat al centurii scapulare, care participă la alcătuirea umărului.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['omoplat', 'omoplatul', 'omoplați', 'omoplații', 'omoplatului', 'omoplaților'],
+  'proposed_forms': ['omoplat', 'omoplatul', 'omoplați', 'omoplații', 'omoplatului', 'omoplaților'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [{'form': 'omoplate',
+                                'reason': 'Not selected DOOM3 masculine -i table; unbadged -e '
+                                          'variant excluded.'},
+                               {'form': 'omoplatele',
+                                'reason': 'Not selected DOOM3 masculine -i table; unbadged -e '
+                                          'variant excluded.'},
+                               {'form': 'omoplatelor',
+                                'reason': 'Not selected DOOM3 masculine -i table; unbadged -e '
+                                          'variant excluded.'}],
+  'dictionaries': [{'lemma': 'omoplat',
+                    'url': 'https://dexonline.ro/definitie/omoplat/json',
+                    'dex_definition_ids': ['893427'],
+                    'doom3_definition_ids': ['1287077'],
+                    'flexion_url': 'https://dexonline.ro/definitie/omoplat',
+                    'flexion_authority': 'Explicit DOOM3 masculine omoplat1 M3 table, not unbadged '
+                                         'neuter -e/-uri tables',
+                    'forms_note': 'omoplat/omoplatul/omoplați/omoplații/omoplatului/omoplaților; '
+                                  'no unscreened Scapulă family or old neuter plural.',
+                    'paraphrase': 'Os pereche lat al centurii scapulare, care participă la '
+                                  'alcătuirea umărului.; selected DEX sense/register and DOOM3 '
+                                  'lexical gender/number checked, ordinary forms from Explicit '
+                                  'DOOM3 masculine omoplat1 M3 table, not unbadged neuter -e/-uri '
+                                  'tables.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/omoplat/json',
+               'paraphrase': 'Os pereche lat al centurii scapulare, care participă la alcătuirea '
+                             'umărului.; selected DEX sense/register and DOOM3 lexical '
+                             'gender/number checked, ordinary forms from Explicit DOOM3 masculine '
+                             'omoplat1 M3 table, not unbadged neuter -e/-uri tables.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Omoplat',
+               'paraphrase': 'Confirmă osul scapular și participarea sa la umăr.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Clavicul%C4%83',
+               'paraphrase': 'Pagina deja inspectată confirmă articularea claviculei cu acromionul '
+                             'omoplatului.'}],
+  'link_targets': [{'node_id': 'n_v4sti_os',
+                    'label': 'os',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'is_a',
+                    'claim_to_verify': 'este un os',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_omoplat',
+                    'edge_dst': 'n_v4sti_os',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Omoplat'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_corp',
+                    'label': 'corp',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'face parte din corp',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_omoplat',
+                    'edge_dst': 'n_v4sti_corp',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Omoplat'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v1_18_clavicula',
+                    'label': 'Claviculă',
+                    'category': 'stiinta',
+                    'status': 'batch',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'se articulează cu clavicula',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_omoplat',
+                    'edge_dst': 'n_v1_18_clavicula',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Clavicul%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v1_18_umar',
+                    'label': 'Umăr',
+                    'category': 'stiinta',
+                    'status': 'batch',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'contribuie la structura umărului',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_omoplat',
+                    'edge_dst': 'n_v1_18_umar',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Omoplat'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'current_graph_counts': {'distinct': 4, 'old_main': 2, 'same_category': 4, 'batch': 2},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The paired scapular bone contributes to the '
+                                               'shoulder and articulates with the clavicle; the '
+                                               'selected DOOM3 masculine paradigm excludes old '
+                                               'neuter variants.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Familiar school bone; the masculine normative '
+                                               'paradigm and shoulder-girdle connections are '
+                                               'preserved without substituting unscreened '
+                                               'synonyms.'}}},
+ {'id': 'v118-coasta_toracica',
+  'lemma': 'Coastă toracică',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_coasta_toracica',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor', 'Conexiuni', 'Intrusul'],
+  'sense': 'Os pereche al cutiei toracice, în sens anatomic calificat.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['coastă toracică',
+                     'coaste toracice',
+                     'coastele toracice',
+                     'coastei toracice',
+                     'coastelor toracice'],
+  'proposed_forms': ['coastă toracică',
+                     'coaste toracice',
+                     'coastele toracice',
+                     'coastei toracice',
+                     'coastelor toracice'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'coastă',
+                    'url': 'https://dexonline.ro/definitie/coast%C4%83/json',
+                    'dex_definition_ids': ['848134'],
+                    'doom3_definition_ids': ['1312471'],
+                    'flexion_url': 'https://dexonline.ro/definitie/coast%C4%83',
+                    'flexion_authority': 'DOOM3 coastei/coaste plus DOR F1 rows and qualified '
+                                         'adjective agreement',
+                    'forms_note': 'Only coastă toracică/coaste toracice/coastele toracice/coastei '
+                                  'toracice/coastelor toracice. Bare coastă family stays '
+                                  'geographic; folded coasta toracică omitted.',
+                    'paraphrase': 'Os pereche al cutiei toracice, în sens anatomic calificat.; '
+                                  'selected DEX sense/register and DOOM3 lexical gender/number '
+                                  'checked, ordinary forms from DOOM3 coastei/coaste plus DOR F1 '
+                                  'rows and qualified adjective agreement.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/coast%C4%83/json',
+               'paraphrase': 'Os pereche al cutiei toracice, în sens anatomic calificat.; selected '
+                             'DEX sense/register and DOOM3 lexical gender/number checked, ordinary '
+                             'forms from DOOM3 coastei/coaste plus DOR F1 rows and qualified '
+                             'adjective agreement.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Coaste_(anatomie)',
+               'paraphrase': 'Confirmă coastele osoase și apartenența lor la cutia toracică; nu se '
+                             'generalizează articularea tuturor coastelor cu sternul.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Schelet_uman',
+               'paraphrase': 'Paragraful despre protecție numește inima în cutia toracică; cifra '
+                             'eronată din introducere nu este preluată.'},
+              {'url': 'https://catalog.manualedigitaleart.ro/art-biologie-7-2024/v1/art-biologie-7-2024.pdf',
+               'paraphrase': 'Manualul de biologie pentru clasa a VII-a identifică oasele cutiei '
+                             'toracice și rolul lor de protecție a inimii.'}],
+  'link_targets': [{'node_id': 'n_v4sti_os',
+                    'label': 'os',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'is_a',
+                    'claim_to_verify': 'este un os',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_coasta_toracica',
+                    'edge_dst': 'n_v4sti_os',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Coaste_(anatomie)'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_corp',
+                    'label': 'corp',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'face parte din corp',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_coasta_toracica',
+                    'edge_dst': 'n_v4sti_corp',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Coaste_(anatomie)'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_inima',
+                    'label': 'inimă',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'contribuie la protejarea inimii',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_coasta_toracica',
+                    'edge_dst': 'n_v4sti_inima',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://catalog.manualedigitaleart.ro/art-biologie-7-2024/v1/art-biologie-7-2024.pdf'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.',
+                    'source_locator': {'printed_page': 67,
+                                       'pdf_page_zero_based': 68,
+                                       'section': 'Locomoția. Scheletul și tipuri de oase; '
+                                                  'Reținem'}}],
+  'graph_dependency_note': 'Three authored outgoing links plus predeclared incoming Stern link '
+                           'form four incident neighbors. Plămân held and absent from available '
+                           'graph.',
+  'research_corrections': ['Predeclared Plămân target held after cap; excluded before source work. '
+                           'Incident predeclared Stern link remains available, no replacement '
+                           'invented.'],
+  'unqualified_head_policy': 'Bare dictionary head is evidence only; actual proposed inputs remain '
+                             'qualified. Never move or steal an unqualified owner.',
+  'current_graph_counts': {'distinct': 4, 'old_main': 3, 'same_category': 4, 'batch': 1},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The qualified rib sense preserves the geographical '
+                                               'owner of bare coastă; thoracic protection and the '
+                                               'existing stern connection are supported.'},
+                      'quality': {'verdict': 'modify',
+                                  'rationale': 'The qualified school bone avoids geographic '
+                                               'Coastă; strengthen the heart-protection edge '
+                                               'binding with the explicit primary school-manual '
+                                               'passage.'}}},
+ {'id': 'v118-brat',
+  'lemma': 'Braț',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_brat',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor', 'Conexiuni', 'Intrusul'],
+  'sense': 'Segment al membrului superior aflat între umăr și cot.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['braț', 'brațul', 'brațe', 'brațele', 'brațului', 'brațelor'],
+  'proposed_forms': ['braț', 'brațul', 'brațe', 'brațele', 'brațului', 'brațelor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'braț',
+                    'url': 'https://dexonline.ro/definitie/bra%C8%9B/json',
+                    'dex_definition_ids': ['837049'],
+                    'doom3_definition_ids': ['1319402'],
+                    'flexion_url': 'https://dexonline.ro/definitie/bra%C8%9B',
+                    'flexion_authority': 'Explicit DOOM3 N1 braț table',
+                    'forms_note': 'braț/brațul/brațe/brațele/brațului/brațelor; '
+                                  'river/mechanical/metaphor/bras senses excluded.',
+                    'paraphrase': 'Segment al membrului superior aflat între umăr și cot.; '
+                                  'selected DEX sense/register and DOOM3 lexical gender/number '
+                                  'checked, ordinary forms from Explicit DOOM3 N1 braț table.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/bra%C8%9B/json',
+               'paraphrase': 'Segment al membrului superior aflat între umăr și cot.; selected DEX '
+                             'sense/register and DOOM3 lexical gender/number checked, ordinary '
+                             'forms from Explicit DOOM3 N1 braț table.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Bra%C8%9B_%28anatomie%29',
+               'paraphrase': 'Confirmă sensul restrâns, poziția între umăr și cot și humerusul; '
+                             'pagina de dezambiguizare nu susține detaliile.'}],
+  'link_targets': [{'node_id': 'n_v4sti_corp',
+                    'label': 'corp',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'face parte din corp',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_brat',
+                    'edge_dst': 'n_v4sti_corp',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Bra%C8%9B_%28anatomie%29'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_os',
+                    'label': 'os',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'conține osul numit humerus',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_brat',
+                    'edge_dst': 'n_v4sti_os',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Bra%C8%9B_%28anatomie%29'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v1_18_umar',
+                    'label': 'Umăr',
+                    'category': 'stiinta',
+                    'status': 'batch',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'pornește din regiunea umărului',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_brat',
+                    'edge_dst': 'n_v1_18_umar',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Bra%C8%9B_%28anatomie%29'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'research_corrections': ['Dropped detailed Mână proximal claim not directly documented by '
+                           'selected arm article; predeclared incoming Antebraț retains the '
+                           'incident floor without a replacement.'],
+  'current_graph_counts': {'distinct': 4, 'old_main': 2, 'same_category': 4, 'batch': 2},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The selected upper-arm segment lies between '
+                                               'shoulder and elbow and contains the humerus; the '
+                                               'forearm is kept distinct.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Everyday body part narrowed to the upper-arm '
+                                               'segment; humerus and shoulder/forearm '
+                                               'relationships remain consistent with that '
+                                               'sense.'}}},
+ {'id': 'v118-antebrat',
+  'lemma': 'Antebraț',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_antebrat',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor', 'Conexiuni', 'Intrusul'],
+  'sense': 'Segment al membrului superior cuprins între cot și încheietura mâinii.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['antebraț',
+                     'antebrațul',
+                     'antebrațe',
+                     'antebrațele',
+                     'antebrațului',
+                     'antebrațelor'],
+  'proposed_forms': ['antebraț',
+                     'antebrațul',
+                     'antebrațe',
+                     'antebrațele',
+                     'antebrațului',
+                     'antebrațelor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'antebraț',
+                    'url': 'https://dexonline.ro/definitie/antebra%C8%9B/json',
+                    'dex_definition_ids': ['827770'],
+                    'doom3_definition_ids': ['1322864'],
+                    'flexion_url': 'https://dexonline.ro/definitie/antebra%C8%9B',
+                    'flexion_authority': 'Explicit DOOM3 N1 noun table',
+                    'forms_note': 'antebraț/antebrațul/antebrațe/antebrațele/antebrațului/antebrațelor; '
+                                  'no synonym or elision added.',
+                    'paraphrase': 'Segment al membrului superior cuprins între cot și încheietura '
+                                  'mâinii.; selected DEX sense/register and DOOM3 lexical '
+                                  'gender/number checked, ordinary forms from Explicit DOOM3 N1 '
+                                  'noun table.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/antebra%C8%9B/json',
+               'paraphrase': 'Segment al membrului superior cuprins între cot și încheietura '
+                             'mâinii.; selected DEX sense/register and DOOM3 lexical gender/number '
+                             'checked, ordinary forms from Explicit DOOM3 N1 noun table.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Antebra%C8%9B',
+               'paraphrase': 'Confirmă oasele și poziția față de cot și mână.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Bra%C8%9B_%28anatomie%29',
+               'paraphrase': 'Pagina deja inspectată a brațului confirmă continuarea sa inferior '
+                             'cu antebrațul.'}],
+  'link_targets': [{'node_id': 'n_v4sti_corp',
+                    'label': 'corp',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'face parte din corp',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_antebrat',
+                    'edge_dst': 'n_v4sti_corp',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Antebra%C8%9B'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_os',
+                    'label': 'os',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'conține oasele radius și ulna',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_antebrat',
+                    'edge_dst': 'n_v4sti_os',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Antebra%C8%9B'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v24_body_limbs_mana',
+                    'label': 'Mână',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'se continuă distal cu mâna',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_antebrat',
+                    'edge_dst': 'n_v24_body_limbs_mana',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Antebra%C8%9B'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v1_18_brat',
+                    'label': 'Braț',
+                    'category': 'stiinta',
+                    'status': 'batch',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'se află între braț și mână',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_antebrat',
+                    'edge_dst': 'n_v1_18_brat',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Bra%C8%9B_%28anatomie%29'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'current_graph_counts': {'distinct': 5, 'old_main': 3, 'same_category': 5, 'batch': 2},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The segment between elbow and wrist contains '
+                                               'radius and ulna and continues toward the hand; the '
+                                               'arm connection is positional, not a synonym.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Recognizable limb segment; radius/ulna and its '
+                                               'position between arm and hand create a legible '
+                                               'anatomical bridge.'}}},
+ {'id': 'v118-coapsa',
+  'lemma': 'Coapsă',
+  'kind': 'existing_input_family',
+  'node_id': 'n_v31_body_lower_coapsa',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor'],
+  'sense': 'Familie flexionară pentru sensul anatomic al nodului Coapsă.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['coapsă', 'coapse', 'coapsele', 'coapsei', 'coapselor'],
+  'proposed_forms': ['coapselor'],
+  'already_resolved_forms': ['coapsă', 'coapse', 'coapsele', 'coapsei'],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'coapsă',
+                    'url': 'https://dexonline.ro/definitie/coaps%C4%83/json',
+                    'dex_definition_ids': ['848122'],
+                    'doom3_definition_ids': ['1312460'],
+                    'flexion_url': 'https://dexonline.ro/definitie/coaps%C4%83',
+                    'flexion_authority': 'DOOM3 coapsei/coapse plus DOR F1 table and agreeing '
+                                         'Wiktionary table',
+                    'forms_note': 'coapsă/coapse/coapsele/coapsei/coapselor; folded coapsa '
+                                  'omitted; only missing keys proposed, no synonyms.',
+                    'paraphrase': 'Familie flexionară pentru sensul anatomic al nodului Coapsă.; '
+                                  'selected DEX sense/register and DOOM3 lexical gender/number '
+                                  'checked, ordinary forms from DOOM3 coapsei/coapse plus DOR F1 '
+                                  'table and agreeing Wiktionary table.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/coaps%C4%83/json',
+               'paraphrase': 'Familie flexionară pentru sensul anatomic al nodului Coapsă.; '
+                             'selected DEX sense/register and DOOM3 lexical gender/number checked, '
+                             'ordinary forms from DOOM3 coapsei/coapse plus DOR F1 table and '
+                             'agreeing Wiktionary table.'},
+              {'url': 'https://ro.wiktionary.org/wiki/coaps%C4%83',
+               'paraphrase': 'Confirmă segmentul dintre șold și genunchi și formele '
+                             'coapsei/coapselor.'}],
+  'link_targets': [],
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The full feminine anatomical family matches DOOM3 '
+                                               'and Wiktionary; only missing coapselor is proposed '
+                                               'for the already served thigh node.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Only the missing genitive plural completes the '
+                                               'existing anatomical thigh owner; no duplicate '
+                                               'concept or broader alias is added.'}}},
+ {'id': 'v118-glezna',
+  'lemma': 'Gleznă',
+  'kind': 'existing_input_family',
+  'node_id': 'n_v31_body_lower_glezna',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor'],
+  'sense': 'Familie flexionară pentru sensul anatomic al nodului Gleznă.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['gleznă', 'glezne', 'gleznele', 'gleznei', 'gleznelor'],
+  'proposed_forms': ['gleznelor'],
+  'already_resolved_forms': ['gleznă', 'glezne', 'gleznele', 'gleznei'],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'gleznă',
+                    'url': 'https://dexonline.ro/definitie/glezn%C4%83/json',
+                    'dex_definition_ids': ['878492'],
+                    'doom3_definition_ids': ['1326347'],
+                    'flexion_url': 'https://dexonline.ro/definitie/glezn%C4%83',
+                    'flexion_authority': 'DOOM3 gleznei/glezne plus DOR F1 table and agreeing '
+                                         'Wiktionary table',
+                    'forms_note': 'gleznă/glezne/gleznele/gleznei/gleznelor; folded glezna, '
+                                  'vocatives and variants excluded; only missing keys proposed.',
+                    'paraphrase': 'Familie flexionară pentru sensul anatomic al nodului Gleznă.; '
+                                  'selected DEX sense/register and DOOM3 lexical gender/number '
+                                  'checked, ordinary forms from DOOM3 gleznei/glezne plus DOR F1 '
+                                  'table and agreeing Wiktionary table.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/glezn%C4%83/json',
+               'paraphrase': 'Familie flexionară pentru sensul anatomic al nodului Gleznă.; '
+                             'selected DEX sense/register and DOOM3 lexical gender/number checked, '
+                             'ordinary forms from DOOM3 gleznei/glezne plus DOR F1 table and '
+                             'agreeing Wiktionary table.'},
+              {'url': 'https://ro.wiktionary.org/wiki/glezn%C4%83',
+               'paraphrase': 'Confirmă regiunea articulației și paradigma gleznei/gleznelor.'}],
+  'link_targets': [],
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The selected ankle family matches DOOM3 and the '
+                                               'second dictionary; only the absent genitive plural '
+                                               'is proposed for its existing owner.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Only missing ordinary inflection completes the '
+                                               'existing ankle owner, preserving the served '
+                                               'anatomical sense.'}}},
+ {'id': 'v118-calcai',
+  'lemma': 'Călcâi',
+  'kind': 'existing_input_family',
+  'node_id': 'n_v31_body_lower_calcai',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor'],
+  'sense': 'Familie flexionară pentru partea posterioară a piciorului, în sensul nodului Călcâi.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['călcâi', 'călcâiul', 'călcâie', 'călcâiele', 'călcâiului', 'călcâielor'],
+  'proposed_forms': ['călcâielor'],
+  'already_resolved_forms': ['călcâi', 'călcâiul', 'călcâie', 'călcâiele', 'călcâiului'],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'călcâi',
+                    'url': 'https://dexonline.ro/definitie/c%C4%83lc%C3%A2i/json',
+                    'dex_definition_ids': ['842728'],
+                    'doom3_definition_ids': ['1310305'],
+                    'flexion_url': 'https://dexonline.ro/definitie/c%C4%83lc%C3%A2i',
+                    'flexion_authority': 'DOOM3 neuter călcâie plus DOR N65 table and agreeing '
+                                         'Wiktionary table',
+                    'forms_note': 'călcâi/călcâiul/călcâie/călcâiele/călcâiului/călcâielor; '
+                                  'variants, vocatives and non-body senses excluded; only missing '
+                                  'keys proposed.',
+                    'paraphrase': 'Familie flexionară pentru partea posterioară a piciorului, în '
+                                  'sensul nodului Călcâi.; selected DEX sense/register and DOOM3 '
+                                  'lexical gender/number checked, ordinary forms from DOOM3 neuter '
+                                  'călcâie plus DOR N65 table and agreeing Wiktionary table.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/c%C4%83lc%C3%A2i/json',
+               'paraphrase': 'Familie flexionară pentru partea posterioară a piciorului, în sensul '
+                             'nodului Călcâi.; selected DEX sense/register and DOOM3 lexical '
+                             'gender/number checked, ordinary forms from DOOM3 neuter călcâie plus '
+                             'DOR N65 table and agreeing Wiktionary table.'},
+              {'url': 'https://ro.wiktionary.org/wiki/c%C4%83lc%C3%A2i',
+               'paraphrase': 'Confirmă sensul anatomic și călcâiului/călcâielor.'}],
+  'link_targets': [],
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The heel noun uses the normative neuter călcâie '
+                                               'family; only călcâielor is missing, while footwear '
+                                               'extensions and variants are excluded.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'The missing genitive plural completes the existing '
+                                               'heel sense; clothing extensions and regional forms '
+                                               'are not introduced.'}}},
+ {'id': 'v118-talpa',
+  'lemma': 'Talpă',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_talpa',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor', 'Conexiuni', 'Intrusul'],
+  'sense': 'Suprafața inferioară a labei piciorului, dintre degete și călcâi.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['talpă', 'tălpi', 'tălpile', 'tălpii', 'tălpilor'],
+  'proposed_forms': ['talpă', 'tălpi', 'tălpile', 'tălpii', 'tălpilor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'talpă',
+                    'url': 'https://dexonline.ro/definitie/talp%C4%83/json',
+                    'dex_definition_ids': ['830404'],
+                    'doom3_definition_ids': ['1266085'],
+                    'flexion_url': 'https://dexonline.ro/definitie/talp%C4%83',
+                    'flexion_authority': 'DOOM3 tălpii/tălpi plus DOR talpă1 F51 table, not '
+                                         'proper-name or DLRLC -e table',
+                    'forms_note': 'talpă/tălpi/tălpile/tălpii/tălpilor; folded talpa omitted; '
+                                  'shoe/leather/structural/plant senses excluded.',
+                    'paraphrase': 'Suprafața inferioară a labei piciorului, dintre degete și '
+                                  'călcâi.; selected DEX sense/register and DOOM3 lexical '
+                                  'gender/number checked, ordinary forms from DOOM3 tălpii/tălpi '
+                                  'plus DOR talpă1 F51 table, not proper-name or DLRLC -e table.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/talp%C4%83/json',
+               'paraphrase': 'Suprafața inferioară a labei piciorului, dintre degete și călcâi.; '
+                             'selected DEX sense/register and DOOM3 lexical gender/number checked, '
+                             'ordinary forms from DOOM3 tălpii/tălpi plus DOR talpă1 F51 table, '
+                             'not proper-name or DLRLC -e table.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Talp%C4%83',
+               'paraphrase': 'Confirmă partea piciorului și limitele dintre degete și călcâi.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Piele_(anatomie)',
+               'paraphrase': 'Paragraful despre grosime numește explicit pielea palmelor și '
+                             'tălpilor; nicio indicație clinică nu este preluată.'}],
+  'link_targets': [{'node_id': 'n_v24_body_limbs_picior',
+                    'label': 'Picior',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'face parte din picior',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_talpa',
+                    'edge_dst': 'n_v24_body_limbs_picior',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Talp%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_piele',
+                    'label': 'piele',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'este acoperită de piele',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_talpa',
+                    'edge_dst': 'n_v4sti_piele',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Piele_(anatomie)'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v31_body_lower_calcai',
+                    'label': 'Călcâi',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'călcâiul formează regiunea sa posterioară',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_talpa',
+                    'edge_dst': 'n_v31_body_lower_calcai',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Talp%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v24_body_limbs_deget',
+                    'label': 'Deget',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'se întinde anterior până la degetele piciorului',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_talpa',
+                    'edge_dst': 'n_v24_body_limbs_deget',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Talp%C4%83',
+                                'https://dexonline.ro/definitie/talp%C4%83/json'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'current_graph_counts': {'distinct': 4, 'old_main': 4, 'same_category': 4, 'batch': 0},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The anatomical sole extends between heel and toe '
+                                               'bases and is covered by skin; footwear and '
+                                               'technical senses remain excluded.'},
+                      'quality': {'verdict': 'modify',
+                                  'rationale': 'The familiar anatomical sole and its paradigm are '
+                                               'suitable; remove the extra unsupported '
+                                               'base-of-toes qualifier from the Deget caption.'}}},
+ {'id': 'v118-palma',
+  'lemma': 'Palmă',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_palma',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor', 'Conexiuni', 'Intrusul'],
+  'sense': 'Partea interioară a mâinii, în sensul anatomic.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['palmă', 'palme', 'palmele', 'palmei', 'palmelor'],
+  'proposed_forms': ['palmă', 'palme', 'palmele', 'palmei', 'palmelor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'palmă',
+                    'url': 'https://dexonline.ro/definitie/palm%C4%83/json',
+                    'dex_definition_ids': ['860827'],
+                    'doom3_definition_ids': ['1280099'],
+                    'flexion_url': 'https://dexonline.ro/definitie/palm%C4%83',
+                    'flexion_authority': 'DOOM3 palmei/palme plus DOR palmă1 F1 table for hand '
+                                         'sense, not branch/proper-name or DLRLC -i',
+                    'forms_note': 'palmă/palme/palmele/palmei/palmelor; folded palma omitted, '
+                                  'pălmi and other senses excluded.',
+                    'paraphrase': 'Partea interioară a mâinii, în sensul anatomic.; selected DEX '
+                                  'sense/register and DOOM3 lexical gender/number checked, '
+                                  'ordinary forms from DOOM3 palmei/palme plus DOR palmă1 F1 table '
+                                  'for hand sense, not branch/proper-name or DLRLC -i.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/palm%C4%83/json',
+               'paraphrase': 'Partea interioară a mâinii, în sensul anatomic.; selected DEX '
+                             'sense/register and DOOM3 lexical gender/number checked, ordinary '
+                             'forms from DOOM3 palmei/palme plus DOR palmă1 F1 table for hand '
+                             'sense, not branch/proper-name or DLRLC -i.'},
+              {'url': 'https://ro.wiktionary.org/wiki/palm%C4%83',
+               'paraphrase': 'Confirmă sensul mâinii și paradigma palmei/palmelor, separat de '
+                             'lovitură și unitatea de măsură.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Piele_(anatomie)',
+               'paraphrase': 'Sursa deja inspectată la Talpă numește explicit pielea palmelor.'},
+              {'url': 'https://ro.wikipedia.org/wiki/M%C3%A2n%C4%83',
+               'paraphrase': 'Descrie regiunea palmară, degetele și oasele metacarpiene ale '
+                             'mâinii.'}],
+  'link_targets': [{'node_id': 'n_v24_body_limbs_mana',
+                    'label': 'Mână',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'face parte din mână',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_palma',
+                    'edge_dst': 'n_v24_body_limbs_mana',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wiktionary.org/wiki/palm%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_piele',
+                    'label': 'piele',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'are o suprafață acoperită de piele',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_palma',
+                    'edge_dst': 'n_v4sti_piele',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Piele_(anatomie)'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v24_body_limbs_deget',
+                    'label': 'Deget',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'se continuă cu degetele mâinii',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_palma',
+                    'edge_dst': 'n_v24_body_limbs_deget',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/M%C3%A2n%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_os',
+                    'label': 'os',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'în regiunea sa se află oasele metacarpiene',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_palma',
+                    'edge_dst': 'n_v4sti_os',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/M%C3%A2n%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'current_graph_counts': {'distinct': 4, 'old_main': 4, 'same_category': 4, 'batch': 0},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The inner hand surface, skin, fingers and '
+                                               'metacarpal region support the captions; slap and '
+                                               'historical-measure senses are not admitted.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Everyday inner-hand region, separated from a slap '
+                                               'or measuring unit; skin, fingers and metacarpal '
+                                               'associations are coherent.'}}},
+ {'id': 'v118-umar',
+  'lemma': 'Umăr',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_umar',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor', 'Conexiuni', 'Intrusul'],
+  'sense': 'Regiunea corpului în care membrul superior se leagă de trunchi.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['umăr', 'umărul', 'umeri', 'umerii', 'umărului', 'umerilor'],
+  'proposed_forms': ['umăr', 'umărul', 'umeri', 'umerii', 'umărului', 'umerilor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'umăr',
+                    'url': 'https://dexonline.ro/definitie/um%C4%83r/json',
+                    'dex_definition_ids': ['828203'],
+                    'doom3_definition_ids': ['1266398'],
+                    'flexion_url': 'https://dexonline.ro/definitie/um%C4%83r',
+                    'flexion_authority': 'DOOM3 umăr1 masculine umeri plus DOR M27 table, not '
+                                         'regional neuter umere',
+                    'forms_note': 'umăr/umărul/umeri/umerii/umărului/umerilor; all other-sense '
+                                  'neuter, figurative and object senses excluded.',
+                    'paraphrase': 'Regiunea corpului în care membrul superior se leagă de '
+                                  'trunchi.; selected DEX sense/register and DOOM3 lexical '
+                                  'gender/number checked, ordinary forms from DOOM3 umăr1 '
+                                  'masculine umeri plus DOR M27 table, not regional neuter '
+                                  'umere.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/um%C4%83r/json',
+               'paraphrase': 'Regiunea corpului în care membrul superior se leagă de trunchi.; '
+                             'selected DEX sense/register and DOOM3 lexical gender/number checked, '
+                             'ordinary forms from DOOM3 umăr1 masculine umeri plus DOR M27 table, '
+                             'not regional neuter umere.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Um%C4%83r',
+               'paraphrase': 'Confirmă structura osoasă a umărului uman și atașarea humerusului la '
+                             'scapulă.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Bra%C8%9B_%28anatomie%29',
+               'paraphrase': 'Pagina deja inspectată a brațului confirmă limita sa superioară la '
+                             'umăr.'}],
+  'link_targets': [{'node_id': 'n_v4sti_corp',
+                    'label': 'corp',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'face parte din corp',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_umar',
+                    'edge_dst': 'n_v4sti_corp',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Um%C4%83r'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_os',
+                    'label': 'os',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'structura sa cuprinde oase',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_umar',
+                    'edge_dst': 'n_v4sti_os',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Um%C4%83r'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v1_18_brat',
+                    'label': 'Braț',
+                    'category': 'stiinta',
+                    'status': 'batch',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'pornește din regiunea umărului',
+                    'direction': 'incoming',
+                    'edge_src': 'n_v1_18_brat',
+                    'edge_dst': 'n_v1_18_umar',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Bra%C8%9B_%28anatomie%29'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'research_corrections': ['Dropped precise lateral-to-neck claim not established by current '
+                           'sources; predeclared incoming Omoplat and Braț retain four incident '
+                           'neighbors.'],
+  'current_graph_counts': {'distinct': 4, 'old_main': 2, 'same_category': 4, 'batch': 2},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The shoulder region joins upper limb to trunk and '
+                                               'includes its bony structures; the arm and scapular '
+                                               'relationships match the narrow anatomical sense.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Familiar shoulder region; old body/bone anchors '
+                                               'and predeclared arm/scapula links supply a '
+                                               'coherent school neighborhood.'}}},
+ {'id': 'v118-cot',
+  'lemma': 'Cot',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_cot',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor', 'Conexiuni', 'Intrusul'],
+  'sense': 'Partea exterioară a articulației care unește brațul cu antebrațul.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['cot', 'cotul', 'coate', 'coatele', 'cotului', 'coatelor'],
+  'proposed_forms': ['cot', 'cotul', 'coate', 'coatele', 'cotului', 'coatelor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'cot',
+                    'url': 'https://dexonline.ro/definitie/cot/json',
+                    'dex_definition_ids': ['852912'],
+                    'doom3_definition_ids': ['1315152'],
+                    'flexion_url': 'https://dexonline.ro/definitie/cot',
+                    'flexion_authority': 'DOOM3 cot1 coate plus DOR N11 anatomical table',
+                    'forms_note': 'cot/cotul/coate/coatele/cotului/coatelor; coturi and archaic '
+                                  'unit coți excluded; no new synonyms.',
+                    'paraphrase': 'Partea exterioară a articulației care unește brațul cu '
+                                  'antebrațul.; selected DEX sense/register and DOOM3 lexical '
+                                  'gender/number checked, ordinary forms from DOOM3 cot1 coate '
+                                  'plus DOR N11 anatomical table.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/cot/json',
+               'paraphrase': 'Partea exterioară a articulației care unește brațul cu antebrațul.; '
+                             'selected DEX sense/register and DOOM3 lexical gender/number checked, '
+                             'ordinary forms from DOOM3 cot1 coate plus DOR N11 anatomical table.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Cot_(anatomie)',
+               'paraphrase': 'Confirmă partea exterioară a articulației humerus-cubitus și '
+                             'legătura cu antebrațul; nu se preia pagina de dezambiguizare.'}],
+  'link_targets': [{'node_id': 'n_v1_18_articulatie',
+                    'label': 'Articulație',
+                    'category': 'stiinta',
+                    'status': 'batch',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'este partea exterioară a unei articulații',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_cot',
+                    'edge_dst': 'n_v1_18_articulatie',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Cot_(anatomie)'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_corp',
+                    'label': 'corp',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'face parte din corp',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_cot',
+                    'edge_dst': 'n_v4sti_corp',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Cot_(anatomie)'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_os',
+                    'label': 'os',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'la nivelul său se întâlnesc humerusul și ulna',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_cot',
+                    'edge_dst': 'n_v4sti_os',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Cot_(anatomie)'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v1_18_antebrat',
+                    'label': 'Antebraț',
+                    'category': 'stiinta',
+                    'status': 'batch',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'unește brațul cu antebrațul',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_cot',
+                    'edge_dst': 'n_v1_18_antebrat',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Cot_(anatomie)'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'research_corrections': ['Cot source denotes outer joint region, so is_a becomes literal '
+                           'part_of; bone caption limited to humerus/ulna; detailed hand-motion '
+                           'claim dropped. Same predeclared targets only.'],
+  'current_graph_counts': {'distinct': 4, 'old_main': 2, 'same_category': 4, 'batch': 2},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The external elbow region belongs to the joint '
+                                               'linking upper arm and forearm; part_of correctly '
+                                               'avoids equating the whole joint with its external '
+                                               'region.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Everyday elbow sense is kept as the outer part of '
+                                               'a joint; coate and literal part_of avoid unit and '
+                                               'technical-bend senses.'}}},
+ {'id': 'v118-genunchi',
+  'lemma': 'Genunchi',
+  'kind': 'existing_input_family',
+  'node_id': 'n_v31_body_lower_genunchi',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor'],
+  'sense': 'Familie flexionară pentru sensul anatomic al nodului Genunchi.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['genunchi', 'genunchiul', 'genunchii', 'genunchiului', 'genunchilor'],
+  'proposed_forms': ['genunchilor'],
+  'already_resolved_forms': ['genunchi', 'genunchiul', 'genunchii', 'genunchiului'],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'genunchi',
+                    'url': 'https://dexonline.ro/definitie/genunchi/json',
+                    'dex_definition_ids': ['877133'],
+                    'doom3_definition_ids': ['1323107'],
+                    'flexion_url': 'https://dexonline.ro/definitie/genunchi',
+                    'flexion_authority': 'DOOM3 masculine invariant genunchi plus DOR M73 noun '
+                                         'table and agreeing Wiktionary table',
+                    'forms_note': 'genunchi/genunchiul/genunchii/genunchiului/genunchilor; shared '
+                                  'sg/pl key once; old neuter genunche, regional variants and '
+                                  'vocatives excluded.',
+                    'paraphrase': 'Familie flexionară pentru sensul anatomic al nodului Genunchi.; '
+                                  'selected DEX sense/register and DOOM3 lexical gender/number '
+                                  'checked, ordinary forms from DOOM3 masculine invariant genunchi '
+                                  'plus DOR M73 noun table and agreeing Wiktionary table.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/genunchi/json',
+               'paraphrase': 'Familie flexionară pentru sensul anatomic al nodului Genunchi.; '
+                             'selected DEX sense/register and DOOM3 lexical gender/number checked, '
+                             'ordinary forms from DOOM3 masculine invariant genunchi plus DOR M73 '
+                             'noun table and agreeing Wiktionary table.'},
+              {'url': 'https://ro.wiktionary.org/wiki/genunchi',
+               'paraphrase': 'Confirmă sensul anatomic și genunchiului/genunchilor, cu '
+                             'singular/plural nearticulat identic.'}],
+  'link_targets': [],
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The anatomical knee uses an invariant '
+                                               'singular/plural head and masculine articulated '
+                                               'forms; only the missing genitive plural is added.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Only the missing genitive plural completes the '
+                                               'existing knee owner; singular/plural key sharing '
+                                               'is handled without duplicates.'}}},
+ {'id': 'v118-frunte',
+  'lemma': 'Frunte',
+  'kind': 'existing_input_family',
+  'node_id': 'n_v32_body_face_frunte',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor'],
+  'sense': 'Familie flexionară pentru sensul anatomic al nodului Frunte.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['frunte', 'fruntea', 'frunți', 'frunțile', 'frunții', 'frunților'],
+  'proposed_forms': ['frunților'],
+  'already_resolved_forms': ['frunte', 'fruntea', 'frunți', 'frunțile', 'frunții'],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'frunte',
+                    'url': 'https://dexonline.ro/definitie/frunte/json',
+                    'dex_definition_ids': ['874676'],
+                    'doom3_definition_ids': ['1302701'],
+                    'flexion_url': 'https://dexonline.ro/definitie/frunte',
+                    'flexion_authority': 'DOOM3 frunții/frunți plus explicit DOR frunte noun table '
+                                         'and agreeing Wiktionary table',
+                    'forms_note': 'frunte/fruntea/frunți/frunțile/frunții/frunților; proper-name, '
+                                  'metaphor and distillation meanings excluded; missing inputs '
+                                  'only.',
+                    'paraphrase': 'Familie flexionară pentru sensul anatomic al nodului Frunte.; '
+                                  'selected DEX sense/register and DOOM3 lexical gender/number '
+                                  'checked, ordinary forms from DOOM3 frunții/frunți plus explicit '
+                                  'DOR frunte noun table and agreeing Wiktionary table.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/frunte/json',
+               'paraphrase': 'Familie flexionară pentru sensul anatomic al nodului Frunte.; '
+                             'selected DEX sense/register and DOOM3 lexical gender/number checked, '
+                             'ordinary forms from DOOM3 frunții/frunți plus explicit DOR frunte '
+                             'noun table and agreeing Wiktionary table.'},
+              {'url': 'https://ro.wiktionary.org/wiki/frunte',
+               'paraphrase': 'Confirmă partea superioară a feței și paradigma '
+                             'fruntea/frunții/frunților.'}],
+  'link_targets': [],
+  'research_corrections': ['Removed an unverified table model code from attribution; exact DOOM3 '
+                           'and DOR noun/form evidence retained.'],
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The forehead sense and frunții/frunților forms '
+                                               'match the served anatomical owner; figurative '
+                                               'leadership senses are excluded.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Missing ordinary genitive plural completes the '
+                                               'existing forehead owner; metaphoric leadership and '
+                                               'distillation meanings remain excluded.'}}},
+ {'id': 'v118-tampla',
+  'lemma': 'Tâmplă',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_tampla',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor', 'Conexiuni', 'Intrusul'],
+  'sense': 'Regiune laterală a capului, între ochi, ureche, frunte și obraz.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['tâmplă', 'tâmple', 'tâmplele', 'tâmplei', 'tâmplelor'],
+  'proposed_forms': ['tâmplă', 'tâmple', 'tâmplele', 'tâmplei', 'tâmplelor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'tâmplă',
+                    'url': 'https://dexonline.ro/definitie/t%C3%A2mpl%C4%83/json',
+                    'dex_definition_ids': ['831552'],
+                    'doom3_definition_ids': ['1267403'],
+                    'flexion_url': 'https://dexonline.ro/definitie/t%C3%A2mpl%C4%83',
+                    'flexion_authority': 'DOOM3 tâmplei/tâmple plus explicitly selected DOR '
+                                         'anatomical noun table and Wiktionary agreement',
+                    'forms_note': 'tâmplă/tâmple/tâmplele/tâmplei/tâmplelor; folded tâmpla '
+                                  'omitted; church iconostasis and other senses excluded.',
+                    'paraphrase': 'Regiune laterală a capului, între ochi, ureche, frunte și '
+                                  'obraz.; selected DEX sense/register and DOOM3 lexical '
+                                  'gender/number checked, ordinary forms from DOOM3 tâmplei/tâmple '
+                                  'plus explicitly selected DOR anatomical noun table and '
+                                  'Wiktionary agreement.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/t%C3%A2mpl%C4%83/json',
+               'paraphrase': 'Regiune laterală a capului, între ochi, ureche, frunte și obraz.; '
+                             'selected DEX sense/register and DOOM3 lexical gender/number checked, '
+                             'ordinary forms from DOOM3 tâmplei/tâmple plus explicitly selected '
+                             'DOR anatomical noun table and Wiktionary agreement.'},
+              {'url': 'https://ro.wiktionary.org/wiki/t%C3%A2mpl%C4%83',
+               'paraphrase': 'Confirmă regiunea anatomică și vecinătățile; sensul de catapeteasmă '
+                             'rămâne separat.'}],
+  'link_targets': [{'node_id': 'n_v24_body_face_cap',
+                    'label': 'Cap',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'face parte din cap',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_tampla',
+                    'edge_dst': 'n_v24_body_face_cap',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wiktionary.org/wiki/t%C3%A2mpl%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_ochi',
+                    'label': 'ochi',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'se află lateral de ochi',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_tampla',
+                    'edge_dst': 'n_v4sti_ochi',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wiktionary.org/wiki/t%C3%A2mpl%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_ureche',
+                    'label': 'ureche',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'se află înaintea urechii',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_tampla',
+                    'edge_dst': 'n_v4sti_ureche',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wiktionary.org/wiki/t%C3%A2mpl%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v32_body_face_frunte',
+                    'label': 'Frunte',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'se află lateral de frunte',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_tampla',
+                    'edge_dst': 'n_v32_body_face_frunte',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wiktionary.org/wiki/t%C3%A2mpl%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'current_graph_counts': {'distinct': 4, 'old_main': 4, 'same_category': 4, 'batch': 0},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The lateral head region is bounded by eye, ear, '
+                                               'forehead and cheek in the selected anatomical '
+                                               'entry; church-screen and hair senses are '
+                                               'excluded.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Everyday side-of-head region has precise eye, ear '
+                                               'and forehead neighbors; iconostasis and other '
+                                               'homonyms are excluded.'}}},
+ {'id': 'v118-obraz',
+  'lemma': 'Obraz',
+  'kind': 'existing_input_family',
+  'node_id': 'n_v32_body_face_obraz',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor'],
+  'sense': 'Familie flexionară pentru partea laterală a feței, în sensul nodului Obraz.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['obraz', 'obrazul', 'obraji', 'obrajii', 'obrazului', 'obrajilor'],
+  'proposed_forms': ['obrajilor'],
+  'already_resolved_forms': ['obraz', 'obrazul', 'obraji', 'obrajii', 'obrazului'],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'obraz',
+                    'url': 'https://dexonline.ro/definitie/obraz/json',
+                    'dex_definition_ids': ['837575'],
+                    'doom3_definition_ids': ['1286497'],
+                    'flexion_url': 'https://dexonline.ro/definitie/obraz',
+                    'flexion_authority': 'Selected DOOM3 obraz2 masculine part-of-face entry plus '
+                                         'explicit DOOM3 -i noun table',
+                    'forms_note': 'obraz/obrazul/obraji/obrajii/obrazului/obrajilor; DOOM/table '
+                                  'numbering differs, noun gender/plural selects the same sense. '
+                                  'No obraze/obrazuri.',
+                    'paraphrase': 'Familie flexionară pentru partea laterală a feței, în sensul '
+                                  'nodului Obraz.; selected DEX sense/register and DOOM3 lexical '
+                                  'gender/number checked, ordinary forms from Selected DOOM3 '
+                                  'obraz2 masculine part-of-face entry plus explicit DOOM3 -i noun '
+                                  'table.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/obraz/json',
+               'paraphrase': 'Familie flexionară pentru partea laterală a feței, în sensul nodului '
+                             'Obraz.; selected DEX sense/register and DOOM3 lexical gender/number '
+                             'checked, ordinary forms from Selected DOOM3 obraz2 masculine '
+                             'part-of-face entry plus explicit DOOM3 -i noun table.'},
+              {'url': 'https://ro.wiktionary.org/wiki/obraz',
+               'paraphrase': 'Confirmă substantivul masculin obraji/obrajii/obrazului/obrajilor, '
+                             'separat de neutrele arhaice.'}],
+  'link_targets': [],
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The facial cheek selects masculine obraji in '
+                                               'DOOM3; neuter obraze and figurative honor meanings '
+                                               'are not admitted.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'The masculine cheek paradigm completes the '
+                                               'existing face-part owner; neuter social/person and '
+                                               'other variants are excluded.'}}},
+ {'id': 'v118-buza',
+  'lemma': 'Buză',
+  'kind': 'existing_input_family',
+  'node_id': 'n_v32_body_face_buza',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor'],
+  'sense': 'Familie flexionară pentru sensul anatomic al nodului Buză.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['buză', 'buze', 'buzele', 'buzei', 'buzelor'],
+  'proposed_forms': ['buzelor'],
+  'already_resolved_forms': ['buză', 'buze', 'buzele', 'buzei'],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'buză',
+                    'url': 'https://dexonline.ro/definitie/buz%C4%83/json',
+                    'dex_definition_ids': ['839448'],
+                    'doom3_definition_ids': ['1320204'],
+                    'flexion_url': 'https://dexonline.ro/definitie/buz%C4%83',
+                    'flexion_authority': 'Explicit DOOM3 buză noun table and agreeing Wiktionary '
+                                         'table',
+                    'forms_note': 'buză/buze/buzele/buzei/buzelor; folded buza omitted; verb, '
+                                  'vessel-edge and other senses excluded; missing inputs only.',
+                    'paraphrase': 'Familie flexionară pentru sensul anatomic al nodului Buză.; '
+                                  'selected DEX sense/register and DOOM3 lexical gender/number '
+                                  'checked, ordinary forms from Explicit DOOM3 buză noun table and '
+                                  'agreeing Wiktionary table.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/buz%C4%83/json',
+               'paraphrase': 'Familie flexionară pentru sensul anatomic al nodului Buză.; selected '
+                             'DEX sense/register and DOOM3 lexical gender/number checked, ordinary '
+                             'forms from Explicit DOOM3 buză noun table and agreeing Wiktionary '
+                             'table.'},
+              {'url': 'https://ro.wiktionary.org/wiki/buz%C4%83',
+               'paraphrase': 'Confirmă sensul buzelor gurii și paradigma buzei/buzelor.'}],
+  'link_targets': [],
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The lip family matches the existing mouth-part '
+                                               'owner; only the missing genitive plural is '
+                                               'proposed and no edge is added.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Missing genitive plural completes the existing lip '
+                                               'sense; vessel rims and obsolete senses are not '
+                                               'aliases.'}}},
+ {'id': 'v118-spranceana',
+  'lemma': 'Sprânceană',
+  'kind': 'existing_input_family',
+  'node_id': 'n_v32_body_face_spranceana',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor'],
+  'sense': 'Familie flexionară pentru firele de păr deasupra ochiului, în sensul nodului '
+           'Sprânceană.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['sprânceană', 'sprâncene', 'sprâncenele', 'sprâncenei', 'sprâncenelor'],
+  'proposed_forms': ['sprâncenelor'],
+  'already_resolved_forms': ['sprânceană', 'sprâncene', 'sprâncenele', 'sprâncenei'],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [{'form': 'sprâncenii',
+                                'reason': 'Not selected DOOM3 genitive; normative form is '
+                                          'sprâncenei.'}],
+  'dictionaries': [{'lemma': 'sprânceană',
+                    'url': 'https://dexonline.ro/definitie/spr%C3%A2ncean%C4%83/json',
+                    'dex_definition_ids': ['845756'],
+                    'doom3_definition_ids': ['1277662'],
+                    'flexion_url': 'https://dexonline.ro/definitie/spr%C3%A2ncean%C4%83',
+                    'flexion_authority': 'DOOM3 sprâncenei/sprâncene plus explicit DOR anatomical '
+                                         'noun and agreeing Wiktionary tables',
+                    'forms_note': 'sprânceană/sprâncene/sprâncenele/sprâncenei/sprâncenelor; '
+                                  'folded sprânceana, sprâncenii, variants/proper-name/metaphor '
+                                  'excluded.',
+                    'paraphrase': 'Familie flexionară pentru firele de păr deasupra ochiului, în '
+                                  'sensul nodului Sprânceană.; selected DEX sense/register and '
+                                  'DOOM3 lexical gender/number checked, ordinary forms from DOOM3 '
+                                  'sprâncenei/sprâncene plus explicit DOR anatomical noun and '
+                                  'agreeing Wiktionary tables.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/spr%C3%A2ncean%C4%83/json',
+               'paraphrase': 'Familie flexionară pentru firele de păr deasupra ochiului, în sensul '
+                             'nodului Sprânceană.; selected DEX sense/register and DOOM3 lexical '
+                             'gender/number checked, ordinary forms from DOOM3 '
+                             'sprâncenei/sprâncene plus explicit DOR anatomical noun and agreeing '
+                             'Wiktionary tables.'},
+              {'url': 'https://ro.wiktionary.org/wiki/spr%C3%A2ncean%C4%83',
+               'paraphrase': 'Confirmă sensul anatomic și sprâncenei/sprâncenelor.'}],
+  'link_targets': [],
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The eyebrow family matches the served anatomical '
+                                               'sense and normative sprâncenei/sprâncenelor forms; '
+                                               'no geographic metaphor is adopted.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Missing genitive plural completes the existing '
+                                               'eyebrow sense; correct sprâncenei is preserved and '
+                                               'the guessed sprâncenii alternative is excluded.'}}},
+ {'id': 'v118-geana',
+  'lemma': 'Geană',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_geana',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor', 'Conexiuni', 'Intrusul'],
+  'sense': 'Fir de păr care crește la marginea unei pleoape.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['geană', 'gene', 'genele', 'genei', 'genelor'],
+  'proposed_forms': ['geană', 'gene', 'genele', 'genei', 'genelor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'geană',
+                    'url': 'https://dexonline.ro/definitie/gean%C4%83/json',
+                    'dex_definition_ids': ['876917'],
+                    'doom3_definition_ids': ['1320347'],
+                    'flexion_url': 'https://dexonline.ro/definitie/gean%C4%83',
+                    'flexion_authority': 'DOOM3 genei/gene plus DOR selected anatomical noun table',
+                    'forms_note': 'geană/gene/genele/genei/genelor; folded geana omitted; old '
+                                  'eyelid, metaphor, proper-name and geane variants excluded.',
+                    'paraphrase': 'Fir de păr care crește la marginea unei pleoape.; selected DEX '
+                                  'sense/register and DOOM3 lexical gender/number checked, '
+                                  'ordinary forms from DOOM3 genei/gene plus DOR selected '
+                                  'anatomical noun table.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/gean%C4%83/json',
+               'paraphrase': 'Fir de păr care crește la marginea unei pleoape.; selected DEX '
+                             'sense/register and DOOM3 lexical gender/number checked, ordinary '
+                             'forms from DOOM3 genei/gene plus DOR selected anatomical noun '
+                             'table.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Gean%C4%83',
+               'paraphrase': 'Paragrafele anatomice confirmă creșterea la marginea pleoapelor și '
+                             'protecția față de praf; etimologia tradusă greșit nu este adoptată.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Pleoap%C4%83',
+               'paraphrase': 'Confirmă cilii de pe marginea anterioară a pleoapei, în continuarea '
+                             'pielii.'},
+              {'url': 'https://dexonline.ro/definitie/spr%C3%A2ncean%C4%83/json',
+               'paraphrase': 'Intrarea deja verificată a sprâncenei o plasează deasupra orbitei; '
+                             'împreună cu poziția genelor, susține relația spațială simplă.'},
+              {'url': 'https://dexonline.ro/definitie/pleoap%C4%83/json',
+               'paraphrase': 'DEX09 873000, verificat la familia Pleoapă, descrie cutele pielii '
+                             'mărginite de gene; întărește legătura precisă Geană–Piele.'}],
+  'link_targets': [{'node_id': 'n_v32_body_face_pleoapa',
+                    'label': 'Pleoapă',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'crește pe marginea pleoapei',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_geana',
+                    'edge_dst': 'n_v32_body_face_pleoapa',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Gean%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_ochi',
+                    'label': 'ochi',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'ajută la protejarea ochiului de impurități',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_geana',
+                    'edge_dst': 'n_v4sti_ochi',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Gean%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_piele',
+                    'label': 'piele',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'crește din pielea marginii pleoapei',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_geana',
+                    'edge_dst': 'n_v4sti_piele',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Pleoap%C4%83',
+                                'https://dexonline.ro/definitie/pleoap%C4%83/json'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v32_body_face_spranceana',
+                    'label': 'Sprânceană',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'se află sub sprânceană',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_geana',
+                    'edge_dst': 'n_v32_body_face_spranceana',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Gean%C4%83',
+                                'https://dexonline.ro/definitie/spr%C3%A2ncean%C4%83/json'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'source_quality_note': 'Geană Wikipedia etymology wrongly translates English eyelash; no '
+                         'etymology or aesthetic/clinical claim adopted. Only anatomy/function '
+                         'paragraphs used; formal reviewers must judge these specifically.',
+  'current_graph_counts': {'distinct': 4, 'old_main': 4, 'same_category': 4, 'batch': 0},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The eyelash at the eyelid margin and protective '
+                                               'function are supported; eyelid skin and eyebrow '
+                                               'position are checked without adopting the '
+                                               'erroneous English-derived etymology.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Everyday eyelash and its eye/eyelid/skin location '
+                                               "are supported; the page's erroneous English-word "
+                                               'etymology is explicitly unadopted.'}}},
+ {'id': 'v118-pleoapa',
+  'lemma': 'Pleoapă',
+  'kind': 'existing_input_family',
+  'node_id': 'n_v32_body_face_pleoapa',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor'],
+  'sense': 'Familie flexionară pentru sensul anatomic al nodului Pleoapă.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['pleoapă', 'pleoape', 'pleoapele', 'pleoapei', 'pleoapelor'],
+  'proposed_forms': ['pleoapelor'],
+  'already_resolved_forms': ['pleoapă', 'pleoape', 'pleoapele', 'pleoapei'],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'pleoapă',
+                    'url': 'https://dexonline.ro/definitie/pleoap%C4%83/json',
+                    'dex_definition_ids': ['873000'],
+                    'doom3_definition_ids': ['1283107'],
+                    'flexion_url': 'https://dexonline.ro/definitie/pleoap%C4%83',
+                    'flexion_authority': 'Explicit DOOM3 pleoapă noun table and agreeing '
+                                         'Wiktionary table',
+                    'forms_note': 'pleoapă/pleoape/pleoapele/pleoapei/pleoapelor; folded pleoapa, '
+                                  'old coffin-lid sense and variants excluded; missing inputs '
+                                  'only.',
+                    'paraphrase': 'Familie flexionară pentru sensul anatomic al nodului Pleoapă.; '
+                                  'selected DEX sense/register and DOOM3 lexical gender/number '
+                                  'checked, ordinary forms from Explicit DOOM3 pleoapă noun table '
+                                  'and agreeing Wiktionary table.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/pleoap%C4%83/json',
+               'paraphrase': 'Familie flexionară pentru sensul anatomic al nodului Pleoapă.; '
+                             'selected DEX sense/register and DOOM3 lexical gender/number checked, '
+                             'ordinary forms from Explicit DOOM3 pleoapă noun table and agreeing '
+                             'Wiktionary table.'},
+              {'url': 'https://ro.wiktionary.org/wiki/pleoap%C4%83',
+               'paraphrase': 'Confirmă sensul care acoperă ochiul și pleoapei/pleoapelor.'}],
+  'link_targets': [],
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The mobile eye-covering skin fold matches its '
+                                               'existing node; only the missing genitive plural is '
+                                               'added, excluding the old coffin-lid sense.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Only missing genitive plural completes the '
+                                               'existing protective skin-fold owner; coffin-lid '
+                                               'and obsolete variants are excluded.'}}},
+ {'id': 'v118-pupila',
+  'lemma': 'Pupilă',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_pupila',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor', 'Conexiuni', 'Intrusul', 'Perechi'],
+  'sense': 'Orificiu din centrul irisului, prin care lumina pătrunde în ochi spre retină.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['pupilă', 'pupile', 'pupilele', 'pupilei', 'pupilelor'],
+  'proposed_forms': ['pupilă', 'pupile', 'pupilele', 'pupilei', 'pupilelor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'pupilă',
+                    'url': 'https://dexonline.ro/definitie/pupil%C4%83/json',
+                    'dex_definition_ids': ['880784'],
+                    'doom3_definition_ids': ['1286150'],
+                    'flexion_url': 'https://dexonline.ro/definitie/pupil%C4%83',
+                    'flexion_authority': 'DOOM3 pupilei/pupile plus selected DOR anatomical noun '
+                                         'ordinary rows, excluding vocatives',
+                    'forms_note': 'pupilă/pupile/pupilele/pupilei/pupilelor; folded pupila, '
+                                  'pupilo, person pupil and optical-instrument senses excluded.',
+                    'paraphrase': 'Orificiu din centrul irisului, prin care lumina pătrunde în '
+                                  'ochi spre retină.; selected DEX sense/register and DOOM3 '
+                                  'lexical gender/number checked, ordinary forms from DOOM3 '
+                                  'pupilei/pupile plus selected DOR anatomical noun ordinary rows, '
+                                  'excluding vocatives.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/pupil%C4%83/json',
+               'paraphrase': 'Orificiu din centrul irisului, prin care lumina pătrunde în ochi '
+                             'spre retină.; selected DEX sense/register and DOOM3 lexical '
+                             'gender/number checked, ordinary forms from DOOM3 pupilei/pupile plus '
+                             'selected DOR anatomical noun ordinary rows, excluding vocatives.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Pupil%C4%83',
+               'paraphrase': 'Confirmă orificiul ochiului și trecerea luminii; nu se adoptă '
+                             'afirmații clinice.'},
+              {'url': 'https://isjdolj.ro/sites/default/files/POCU/ID%20135712/Stiinte/ID%20135712%20-%20Stiinte%20M2.5%2C%20M2.6%2C%20M2.7.pdf',
+               'paraphrase': 'Materialul școlar de științe al ISJ Dolj descrie în ordine corneea, '
+                             'umoarea apoasă și trecerea prin pupilă; pasaj inspectat în '
+                             'rezultatul web al aceleiași cercetări.'}],
+  'link_targets': [{'node_id': 'n_v4sti_ochi',
+                    'label': 'ochi',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'face parte din ochi',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_pupila',
+                    'edge_dst': 'n_v4sti_ochi',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Pupil%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_lumina',
+                    'label': 'lumină',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'permite trecerea luminii în ochi',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_pupila',
+                    'edge_dst': 'n_v4sti_lumina',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Pupil%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v1_18_retina',
+                    'label': 'Retină',
+                    'category': 'stiinta',
+                    'status': 'batch',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'lumina care trece prin ea poate ajunge la retină',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_pupila',
+                    'edge_dst': 'n_v1_18_retina',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://dexonline.ro/definitie/pupil%C4%83/json'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v1_18_cornee',
+                    'label': 'Cornee',
+                    'category': 'stiinta',
+                    'status': 'batch',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'lumina trece prin cornee înainte de a ajunge la pupilă',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_pupila',
+                    'edge_dst': 'n_v1_18_cornee',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://isjdolj.ro/sites/default/files/POCU/ID%20135712/Stiinte/ID%20135712%20-%20Stiinte%20M2.5%2C%20M2.6%2C%20M2.7.pdf'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'current_graph_counts': {'distinct': 4, 'old_main': 2, 'same_category': 4, 'batch': 2},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The iris aperture admits light toward the retina; '
+                                               'a Romanian school science text verifies that light '
+                                               'crosses the cornea first.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'The ocular opening is school vocabulary, with a '
+                                               'coherent light path through cornea toward retina; '
+                                               'ward and instrument senses stay separate.'}}},
+ {'id': 'v118-nara',
+  'lemma': 'Nară',
+  'kind': 'existing_input_family',
+  'node_id': 'n_v32_body_face_nara',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor'],
+  'sense': 'Familie flexionară pentru orificiul nazal, în sensul nodului Nară.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['nară', 'nări', 'nările', 'nării', 'nărilor'],
+  'proposed_forms': ['nărilor'],
+  'already_resolved_forms': ['nară', 'nări', 'nările', 'nării'],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'nară',
+                    'url': 'https://dexonline.ro/definitie/nar%C4%83/json',
+                    'dex_definition_ids': ['881401'],
+                    'doom3_definition_ids': ['1288161'],
+                    'flexion_url': 'https://dexonline.ro/definitie/nar%C4%83',
+                    'flexion_authority': 'DOOM3 nării/nări plus selected DOR noun and agreeing '
+                                         'Wiktionary tables',
+                    'forms_note': 'nară/nări/nările/nării/nărilor; folded nara, verb, naval sense '
+                                  'and regional variants excluded; missing inputs only.',
+                    'paraphrase': 'Familie flexionară pentru orificiul nazal, în sensul nodului '
+                                  'Nară.; selected DEX sense/register and DOOM3 lexical '
+                                  'gender/number checked, ordinary forms from DOOM3 nării/nări '
+                                  'plus selected DOR noun and agreeing Wiktionary tables.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/nar%C4%83/json',
+               'paraphrase': 'Familie flexionară pentru orificiul nazal, în sensul nodului Nară.; '
+                             'selected DEX sense/register and DOOM3 lexical gender/number checked, '
+                             'ordinary forms from DOOM3 nării/nări plus selected DOR noun and '
+                             'agreeing Wiktionary tables.'},
+              {'url': 'https://ro.wiktionary.org/wiki/nar%C4%83',
+               'paraphrase': 'Confirmă orificiul nazal și nării/nărilor, separat de piesa '
+                             'navală.'}],
+  'link_targets': [],
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The nasal opening family fits the existing owner; '
+                                               'only nărilor is missing, with naval, verbal and '
+                                               'regional meanings excluded.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Missing ordinary genitive plural completes the '
+                                               'existing nasal-opening owner; the nautical fitting '
+                                               'is excluded.'}}},
+ {'id': 'v118-gingie',
+  'lemma': 'Gingie',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_gingie',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor', 'Conexiuni', 'Intrusul'],
+  'sense': 'Țesut al mucoasei orale care înconjoară baza dinților și acoperă osul alveolar.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['gingie', 'gingia', 'gingii', 'gingiile', 'gingiei', 'gingiilor'],
+  'proposed_forms': ['gingie', 'gingia', 'gingii', 'gingiile', 'gingiei', 'gingiilor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'gingie',
+                    'url': 'https://dexonline.ro/definitie/gingie/json',
+                    'dex_definition_ids': ['878092'],
+                    'doom3_definition_ids': ['1325660'],
+                    'flexion_url': 'https://dexonline.ro/definitie/gingie',
+                    'flexion_authority': 'DOOM3 gingia/gingiei/gingii plus explicit DOR F134 noun '
+                                         'table',
+                    'forms_note': 'gingie/gingia/gingii/gingiile/gingiei/gingiilor; older '
+                                  'gingenă/gingină variants excluded.',
+                    'paraphrase': 'Țesut al mucoasei orale care înconjoară baza dinților și '
+                                  'acoperă osul alveolar.; selected DEX sense/register and DOOM3 '
+                                  'lexical gender/number checked, ordinary forms from DOOM3 '
+                                  'gingia/gingiei/gingii plus explicit DOR F134 noun table.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/gingie/json',
+               'paraphrase': 'Țesut al mucoasei orale care înconjoară baza dinților și acoperă '
+                             'osul alveolar.; selected DEX sense/register and DOOM3 lexical '
+                             'gender/number checked, ordinary forms from DOOM3 '
+                             'gingia/gingiei/gingii plus explicit DOR F134 noun table.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Gingie',
+               'paraphrase': 'Confirmă mucoasa orală și acoperirea osului alveolar al maxilarului '
+                             'și mandibulei; nicio patologie sau conduită nu este adoptată.'}],
+  'link_targets': [{'node_id': 'n_v24_body_face_gura',
+                    'label': 'Gură',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'face parte din gură',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_gingie',
+                    'edge_dst': 'n_v24_body_face_gura',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Gingie'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v28_body_mouth_dinte',
+                    'label': 'Dinte',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'înconjoară baza dinților',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_gingie',
+                    'edge_dst': 'n_v28_body_mouth_dinte',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Gingie'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_corp',
+                    'label': 'corp',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'face parte din corp',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_gingie',
+                    'edge_dst': 'n_v4sti_corp',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Gingie'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v1_18_masea',
+                    'label': 'Măsea',
+                    'category': 'stiinta',
+                    'status': 'batch',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'înconjoară baza măselelor',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_gingie',
+                    'edge_dst': 'n_v1_18_masea',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://dexonline.ro/definitie/gingie/json'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v1_18_maxilar',
+                    'label': 'Maxilar',
+                    'category': 'stiinta',
+                    'status': 'batch',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'acoperă osul alveolar al maxilarului',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_gingie',
+                    'edge_dst': 'n_v1_18_maxilar',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Gingie'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'current_graph_counts': {'distinct': 5, 'old_main': 3, 'same_category': 5, 'batch': 2},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The oral tissue surrounds tooth bases and covers '
+                                               'alveolar bone; the specific molar and maxillary '
+                                               'links follow the same supported anatomy.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Everyday oral anatomy with precise tooth, molar '
+                                               'and alveolar-bone relationships; obsolete variants '
+                                               'and clinical prescriptions are absent.'}}},
+ {'id': 'v118-masea',
+  'lemma': 'Măsea',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_masea',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor', 'Conexiuni', 'Intrusul', 'Perechi'],
+  'sense': 'Dinte mare din partea posterioară a gurii, folosit la mărunțirea alimentelor.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['măsea', 'măseaua', 'măsele', 'măselele', 'măselei', 'măselelor'],
+  'proposed_forms': ['măsea', 'măseaua', 'măsele', 'măselele', 'măselei', 'măselelor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'măsea',
+                    'url': 'https://dexonline.ro/definitie/m%C4%83sea/json',
+                    'dex_definition_ids': ['887178'],
+                    'doom3_definition_ids': ['1292191'],
+                    'flexion_url': 'https://dexonline.ro/definitie/m%C4%83sea',
+                    'flexion_authority': 'DOOM3 măseaua/măselei/măsele plus explicit DOR noun and '
+                                         'agreeing Wiktionary tables',
+                    'forms_note': 'măsea/măseaua/măsele/măselele/măselei/măselelor; all screened, '
+                                  'no molar synonym family or technical/plant input adopted.',
+                    'paraphrase': 'Dinte mare din partea posterioară a gurii, folosit la '
+                                  'mărunțirea alimentelor.; selected DEX sense/register and DOOM3 '
+                                  'lexical gender/number checked, ordinary forms from DOOM3 '
+                                  'măseaua/măselei/măsele plus explicit DOR noun and agreeing '
+                                  'Wiktionary tables.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/m%C4%83sea/json',
+               'paraphrase': 'Dinte mare din partea posterioară a gurii, folosit la mărunțirea '
+                             'alimentelor.; selected DEX sense/register and DOOM3 lexical '
+                             'gender/number checked, ordinary forms from DOOM3 '
+                             'măseaua/măselei/măsele plus explicit DOR noun and agreeing '
+                             'Wiktionary tables.'},
+              {'url': 'https://ro.wiktionary.org/wiki/m%C4%83sea',
+               'paraphrase': 'Confirmă dintele posterior și rolul în mărunțirea alimentelor.'},
+              {'url': 'https://dexonline.ro/definitie/gingie/json',
+               'paraphrase': 'DEX09 Gingie, deja verificat, descrie învelirea bazei dinților și '
+                             'măselelor.'}],
+  'link_targets': [{'node_id': 'n_v28_body_mouth_dinte',
+                    'label': 'Dinte',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'is_a',
+                    'claim_to_verify': 'este un dinte',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_masea',
+                    'edge_dst': 'n_v28_body_mouth_dinte',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wiktionary.org/wiki/m%C4%83sea'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v24_body_face_gura',
+                    'label': 'Gură',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'se află în gură',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_masea',
+                    'edge_dst': 'n_v24_body_face_gura',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wiktionary.org/wiki/m%C4%83sea'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4gas_mancare',
+                    'label': 'Mâncare',
+                    'category': 'gastronomie',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'participă la mărunțirea mâncării',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_masea',
+                    'edge_dst': 'n_v4gas_mancare',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wiktionary.org/wiki/m%C4%83sea'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v1_18_gingie',
+                    'label': 'Gingie',
+                    'category': 'stiinta',
+                    'status': 'batch',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'este înconjurată la bază de gingie',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_masea',
+                    'edge_dst': 'n_v1_18_gingie',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://dexonline.ro/definitie/gingie/json'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'current_graph_counts': {'distinct': 4, 'old_main': 3, 'same_category': 3, 'batch': 1},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The posterior crushing tooth fits the served Dinte '
+                                               'and Gură senses; molar synonyms were not screened '
+                                               'or admitted.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Familiar posterior tooth with the full ordinary '
+                                               'paradigm; tooth identity and chewing/gum relations '
+                                               'avoid technical-object homonyms.'}}},
+ {'id': 'v118-saliva',
+  'lemma': 'Salivă',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_saliva',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor'],
+  'sense': 'Lichid produs în gură de glandele salivare, care participă la formarea și înghițirea '
+           'alimentelor.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['salivă', 'salive', 'salivele', 'salivei', 'salivelor'],
+  'proposed_forms': ['salivă', 'salive', 'salivele', 'salivei', 'salivelor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'salivă',
+                    'url': 'https://dexonline.ro/definitie/saliv%C4%83/json',
+                    'dex_definition_ids': ['838522'],
+                    'doom3_definition_ids': ['1272373'],
+                    'flexion_url': 'https://dexonline.ro/definitie/saliv%C4%83',
+                    'flexion_authority': 'DOOM3 salivei/salive plus DOR F1 noun table, not saliva '
+                                         'verb table',
+                    'forms_note': 'salivă/salive/salivele/salivei/salivelor; normative plural '
+                                  'explicitly present, folded saliva omitted; no verb inputs.',
+                    'paraphrase': 'Lichid produs în gură de glandele salivare, care participă la '
+                                  'formarea și înghițirea alimentelor.; selected DEX '
+                                  'sense/register and DOOM3 lexical gender/number checked, '
+                                  'ordinary forms from DOOM3 salivei/salive plus DOR F1 noun '
+                                  'table, not saliva verb table.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/saliv%C4%83/json',
+               'paraphrase': 'Lichid produs în gură de glandele salivare, care participă la '
+                             'formarea și înghițirea alimentelor.; selected DEX sense/register and '
+                             'DOOM3 lexical gender/number checked, ordinary forms from DOOM3 '
+                             'salivei/salive plus DOR F1 noun table, not saliva verb table.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Saliv%C4%83',
+               'paraphrase': 'Confirmă apa predominantă și rolul în protejarea smalțului; nu se '
+                             'adoptă valori, pH sau afirmații clinice.'}],
+  'link_targets': [{'node_id': 'n_v24_body_face_gura',
+                    'label': 'Gură',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'este secretată în gură',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_saliva',
+                    'edge_dst': 'n_v24_body_face_gura',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Saliv%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v28_body_mouth_dinte',
+                    'label': 'Dinte',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'contribuie la protejarea dinților',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_saliva',
+                    'edge_dst': 'n_v28_body_mouth_dinte',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Saliv%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4gas_mancare',
+                    'label': 'Mâncare',
+                    'category': 'gastronomie',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'participă la formarea bolului alimentar din mâncare',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_saliva',
+                    'edge_dst': 'n_v4gas_mancare',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://dexonline.ro/definitie/saliv%C4%83/json'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4gas_apa',
+                    'label': 'Apă',
+                    'category': 'gastronomie',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'conține în principal apă',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_saliva',
+                    'edge_dst': 'n_v4gas_apa',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Saliv%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v1_18_inghitire',
+                    'label': 'Înghițire',
+                    'category': 'stiinta',
+                    'status': 'batch',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'ușurează înghițirea alimentelor',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_saliva',
+                    'edge_dst': 'n_v1_18_inghitire',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://dexonline.ro/definitie/saliv%C4%83/json'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'research_corrections': ['Food caption narrowed to explicitly sourced bolus formation; same '
+                           'planned endpoint.'],
+  'current_graph_counts': {'distinct': 6, 'old_main': 4, 'same_category': 4, 'batch': 2},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The oral secretion supports food-bolus formation, '
+                                               'tooth protection, water content and swallowing; '
+                                               'the caption uses the selected physiological '
+                                               'sense.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Everyday bodily fluid and school digestion '
+                                               'vocabulary; water, mouth, enamel and swallowing '
+                                               'captions stay within sourced physiological '
+                                               'roles.'}}},
+ {'id': 'v118-lacrima',
+  'lemma': 'Lacrimă',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_lacrima',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor'],
+  'sense': 'Lichid secretat de glandele lacrimale, care umezește ochiul.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['lacrimă', 'lacrimi', 'lacrimile', 'lacrimii', 'lacrimilor'],
+  'proposed_forms': ['lacrimă', 'lacrimi', 'lacrimile', 'lacrimii', 'lacrimilor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'lacrimă',
+                    'url': 'https://dexonline.ro/definitie/lacrim%C4%83/json',
+                    'dex_definition_ids': ['862568'],
+                    'doom3_definition_ids': ['1324987'],
+                    'flexion_url': 'https://dexonline.ro/definitie/lacrim%C4%83',
+                    'flexion_authority': 'Explicit DOOM3 F43 lacrimă noun table',
+                    'forms_note': 'lacrimă/lacrimi/lacrimile/lacrimii/lacrimilor; folded lacrima '
+                                  'omitted; old variants and lăcrima verb excluded.',
+                    'paraphrase': 'Lichid secretat de glandele lacrimale, care umezește ochiul.; '
+                                  'selected DEX sense/register and DOOM3 lexical gender/number '
+                                  'checked, ordinary forms from Explicit DOOM3 F43 lacrimă noun '
+                                  'table.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/lacrim%C4%83/json',
+               'paraphrase': 'Lichid secretat de glandele lacrimale, care umezește ochiul.; '
+                             'selected DEX sense/register and DOOM3 lexical gender/number checked, '
+                             'ordinary forms from Explicit DOOM3 F43 lacrimă noun table.'},
+              {'url': 'https://www.reginamaria.ro/articole-medicale/ochi-uscati-este-foarte-important-sa-gasesti-lacrimile-artificiale-corecte',
+               'paraphrase': 'Numai pasajul anatomic despre componenta apoasă a filmului lacrimal '
+                             'este folosit, fără recomandări sau tratament.'},
+              {'url': 'https://www.sanador.ro/canal-lacrimal-infundat',
+               'paraphrase': 'Introducerea anatomică inspectată în rezultatul web descrie '
+                             'scurgerea lacrimilor de pe ochi spre nas, prin căile lacrimale.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Pleoap%C4%83',
+               'paraphrase': 'Sursa deja inspectată descrie distribuirea secreției lacrimale prin '
+                             'mișcările pleoapelor.'}],
+  'link_targets': [{'node_id': 'n_v4sti_ochi',
+                    'label': 'ochi',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'umezește suprafața ochiului',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_lacrima',
+                    'edge_dst': 'n_v4sti_ochi',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://dexonline.ro/definitie/lacrim%C4%83/json'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4gas_apa',
+                    'label': 'Apă',
+                    'category': 'gastronomie',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'conține apă în componenta apoasă a filmului lacrimal',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_lacrima',
+                    'edge_dst': 'n_v4gas_apa',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://www.reginamaria.ro/articole-medicale/ochi-uscati-este-foarte-important-sa-gasesti-lacrimile-artificiale-corecte'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v32_body_face_pleoapa',
+                    'label': 'Pleoapă',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'este răspândită pe ochi prin clipitul pleoapelor',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_lacrima',
+                    'edge_dst': 'n_v32_body_face_pleoapa',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Pleoap%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v24_body_face_nas',
+                    'label': 'Nas',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'se poate drena spre nas prin căile lacrimale',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_lacrima',
+                    'edge_dst': 'n_v24_body_face_nas',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://www.sanador.ro/canal-lacrimal-infundat'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'source_quality_note': 'Wikipedia Lacrimă gland/duct wording was not relied upon; primary '
+                         'hospital anatomy provides Nas/Apă evidence. No symptom, diagnosis, '
+                         'dosage or treatment claim adopted.',
+  'research_corrections': ['Water caption narrowed without an unsupported proportion; inaccurate '
+                           'Wikipedia gland/duct account not used, replaced by hospital drainage '
+                           'evidence.'],
+  'current_graph_counts': {'distinct': 4, 'old_main': 4, 'same_category': 3, 'batch': 0},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The tear secretion moistens the eye and is spread '
+                                               'by blinking; primary hospital anatomy corroborates '
+                                               'water-film and nasal drainage without the '
+                                               'inaccurate Wikipedia duct account.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Everyday tear with independently checked '
+                                               'aqueous-film, blinking and nasal-drainage '
+                                               'passages; no treatment recommendations are '
+                                               'adopted.'}}},
+ {'id': 'v118-voce',
+  'lemma': 'Voce',
+  'kind': 'existing_input_family',
+  'node_id': 'n_v4muz_voce',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor'],
+  'sense': 'Familie flexionară pentru vocea folosită la cântat, în sensul muzical al nodului '
+           'existent.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['voce', 'vocea', 'voci', 'vocile', 'vocii', 'vocilor'],
+  'proposed_forms': ['vocii', 'vocilor'],
+  'already_resolved_forms': ['voce', 'vocea', 'voci', 'vocile'],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'voce',
+                    'url': 'https://dexonline.ro/definitie/voce/json',
+                    'dex_definition_ids': ['826995'],
+                    'doom3_definition_ids': ['1264448'],
+                    'flexion_url': 'https://dexonline.ro/definitie/voce',
+                    'flexion_authority': 'DOOM3 vocea/vocii/voci plus DOR noun and agreeing '
+                                         'Wiktionary tables',
+                    'forms_note': 'voce/vocea/voci/vocile/vocii/vocilor; only two missing keys '
+                                  'proposed within served musical sense. No broad spoken-voice '
+                                  'node or glas synonym family.',
+                    'paraphrase': 'Familie flexionară pentru vocea folosită la cântat, în sensul '
+                                  'muzical al nodului existent.; selected DEX sense/register and '
+                                  'DOOM3 lexical gender/number checked, ordinary forms from DOOM3 '
+                                  'vocea/vocii/voci plus DOR noun and agreeing Wiktionary '
+                                  'tables.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/voce/json',
+               'paraphrase': 'Familie flexionară pentru vocea folosită la cântat, în sensul '
+                             'muzical al nodului existent.; selected DEX sense/register and DOOM3 '
+                             'lexical gender/number checked, ordinary forms from DOOM3 '
+                             'vocea/vocii/voci plus DOR noun and agreeing Wiktionary tables.'},
+              {'url': 'https://ro.wiktionary.org/wiki/voce',
+               'paraphrase': 'Sensurile de cântat și registru muzical corespund nodului; confirmă '
+                             'vocii/vocilor.'}],
+  'link_targets': [],
+  'existing_sense_restriction': 'Preserve musical singing/performance voice sense. Missing '
+                                'ordinary noun inputs are grammatical completion within that node, '
+                                'not a new broad spoken-voice concept or synonym.',
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The selected musical singing sense matches the '
+                                               'served music node; only vocii and vocilor are '
+                                               'proposed, with no new speech node or glas '
+                                               'synonym.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Only vocii/vocilor complete the existing musical '
+                                               'human-voice owner; ordinary inflection does not '
+                                               'broaden its served sense.'}}},
+ {'id': 'v118-retina',
+  'lemma': 'Retină',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_retina',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor', 'Conexiuni', 'Intrusul', 'Perechi'],
+  'sense': 'Membrană sensibilă la lumină din interiorul ochiului, care transmite informații '
+           'vizuale.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['retină', 'retine', 'retinele', 'retinei', 'retinelor'],
+  'proposed_forms': ['retină', 'retine', 'retinele', 'retinei', 'retinelor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'retină',
+                    'url': 'https://dexonline.ro/definitie/retin%C4%83/json',
+                    'dex_definition_ids': ['857456'],
+                    'doom3_definition_ids': ['1278690'],
+                    'flexion_url': 'https://dexonline.ro/definitie/retin%C4%83',
+                    'flexion_authority': 'DOOM3 retinei/retine plus explicit DOR F1 noun table',
+                    'forms_note': 'retină/retine/retinele/retinei/retinelor; folded retina '
+                                  'omitted, all screened.',
+                    'paraphrase': 'Membrană sensibilă la lumină din interiorul ochiului, care '
+                                  'transmite informații vizuale.; selected DEX sense/register and '
+                                  'DOOM3 lexical gender/number checked, ordinary forms from DOOM3 '
+                                  'retinei/retine plus explicit DOR F1 noun table.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/retin%C4%83/json',
+               'paraphrase': 'Membrană sensibilă la lumină din interiorul ochiului, care transmite '
+                             'informații vizuale.; selected DEX sense/register and DOOM3 lexical '
+                             'gender/number checked, ordinary forms from DOOM3 retinei/retine plus '
+                             'explicit DOR F1 noun table.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Retin%C4%83',
+               'paraphrase': 'Confirmă poziția în ochi, fotoreceptorii, calea nervului optic către '
+                             'creier și lumina care a trecut prin pupilă.'}],
+  'link_targets': [{'node_id': 'n_v4sti_ochi',
+                    'label': 'ochi',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'face parte din ochi',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_retina',
+                    'edge_dst': 'n_v4sti_ochi',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Retin%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_creier',
+                    'label': 'creier',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'transmite informații vizuale spre creier prin nervul optic',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_retina',
+                    'edge_dst': 'n_v4sti_creier',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Retin%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_lumina',
+                    'label': 'lumină',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'detectează lumina',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_retina',
+                    'edge_dst': 'n_v4sti_lumina',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Retin%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v1_18_pupila',
+                    'label': 'Pupilă',
+                    'category': 'stiinta',
+                    'status': 'batch',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'primește lumina care a trecut prin pupilă',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_retina',
+                    'edge_dst': 'n_v1_18_pupila',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Retin%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'current_graph_counts': {'distinct': 4, 'old_main': 3, 'same_category': 4, 'batch': 1},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The light-sensitive inner eye layer supplies '
+                                               'visual signals through the optic nerve; the pupil '
+                                               'light path is supported by school optics.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'School eye structure; light detection and the '
+                                               'optic route toward the brain are explicit, without '
+                                               'hidden-target approval.'}}},
+ {'id': 'v118-timpan',
+  'lemma': 'Timpan',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_timpan',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor', 'Perechi'],
+  'sense': 'Membrană a urechii care transmite vibrațiile sonore.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['timpan', 'timpanul', 'timpane', 'timpanele', 'timpanului', 'timpanelor'],
+  'proposed_forms': ['timpan', 'timpanul', 'timpane', 'timpanele', 'timpanului', 'timpanelor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'timpan',
+                    'url': 'https://dexonline.ro/definitie/timpan/json',
+                    'dex_definition_ids': ['833449'],
+                    'doom3_definition_ids': ['1268816'],
+                    'flexion_url': 'https://dexonline.ro/definitie/timpan',
+                    'flexion_authority': 'DOOM3 timpan1 neuter timpane plus DOR N1 noun table',
+                    'forms_note': 'timpan/timpanul/timpane/timpanele/timpanului/timpanelor; person '
+                                  'timpani, unbadged timpanuri, instrument/architecture senses '
+                                  'excluded.',
+                    'paraphrase': 'Membrană a urechii care transmite vibrațiile sonore.; selected '
+                                  'DEX sense/register and DOOM3 lexical gender/number checked, '
+                                  'ordinary forms from DOOM3 timpan1 neuter timpane plus DOR N1 '
+                                  'noun table.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/timpan/json',
+               'paraphrase': 'Membrană a urechii care transmite vibrațiile sonore.; selected DEX '
+                             'sense/register and DOOM3 lexical gender/number checked, ordinary '
+                             'forms from DOOM3 timpan1 neuter timpane plus DOR N1 noun table.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Timpan_(anatomie)',
+               'paraphrase': 'Confirmă membrana urechii și transmiterea variațiilor de presiune '
+                             'din aer.'},
+              {'url': 'https://dexonline.ro/definitie/voce/json',
+               'paraphrase': 'Intrarea deja verificată descrie sunetele vocii și cântatul; '
+                             'exemplul Voce păstrează sensul muzical al nodului existent.'}],
+  'link_targets': [{'node_id': 'n_v4sti_ureche',
+                    'label': 'ureche',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'face parte din ureche',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_timpan',
+                    'edge_dst': 'n_v4sti_ureche',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Timpan_(anatomie)'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_aer',
+                    'label': 'aer',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'vibrează sub acțiunea variațiilor de presiune ale aerului',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_timpan',
+                    'edge_dst': 'n_v4sti_aer',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Timpan_(anatomie)'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4muz_voce',
+                    'label': 'Voce',
+                    'category': 'muzica',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'poate vibra la sunetele vocii cântate',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_timpan',
+                    'edge_dst': 'n_v4muz_voce',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Timpan_(anatomie)',
+                                'https://dexonline.ro/definitie/voce/json'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4lim_sunet',
+                    'label': 'Sunet',
+                    'category': 'limba',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'poate vibra când ajung la ureche sunetele vorbirii',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_timpan',
+                    'edge_dst': 'n_v4lim_sunet',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Timpan_(anatomie)'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'link_scope_note': 'Voce target means singing/performance; Sunet target means phonetic speech. '
+                     'Both conditional audible examples use air-pressure vibration, not '
+                     'percussion-instrument semantics.',
+  'current_graph_counts': {'distinct': 4, 'old_main': 4, 'same_category': 2, 'batch': 0},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The anatomical ear membrane vibrates with airborne '
+                                               'sound, including singing and speech; instrument, '
+                                               'architecture and person senses are excluded.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'School ear membrane; air-pressure and '
+                                               'sung-voice/speech examples preserve the actual '
+                                               'musical Voce and phonetic Sunet owners.'}}},
+ {'id': 'v118-cornee',
+  'lemma': 'Cornee',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_cornee',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor', 'Conexiuni', 'Intrusul'],
+  'sense': 'Segmentul transparent din fața ochiului, cu rol în refracția luminii.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['cornee', 'corneea', 'corneele', 'corneei', 'corneelor'],
+  'proposed_forms': ['cornee', 'corneea', 'corneele', 'corneei', 'corneelor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'cornee',
+                    'url': 'https://dexonline.ro/definitie/cornee/json',
+                    'dex_definition_ids': ['852400'],
+                    'doom3_definition_ids': ['1314730'],
+                    'flexion_url': 'https://dexonline.ro/definitie/cornee',
+                    'flexion_authority': 'DOOM3 corneea/corneei/invariant plural cornee plus DOR '
+                                         'F142 noun table',
+                    'forms_note': 'cornee/corneea/corneele/corneei/corneelor; shared sg/pl key '
+                                  'once; no unscreened linte synonym, no popular '
+                                  'sclera-equivalence alias.',
+                    'paraphrase': 'Segmentul transparent din fața ochiului, cu rol în refracția '
+                                  'luminii.; selected DEX sense/register and DOOM3 lexical '
+                                  'gender/number checked, ordinary forms from DOOM3 '
+                                  'corneea/corneei/invariant plural cornee plus DOR F142 noun '
+                                  'table.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/cornee/json',
+               'paraphrase': 'Segmentul transparent din fața ochiului, cu rol în refracția '
+                             'luminii.; selected DEX sense/register and DOOM3 lexical '
+                             'gender/number checked, ordinary forms from DOOM3 '
+                             'corneea/corneei/invariant plural cornee plus DOR F142 noun table.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Cornee',
+               'paraphrase': 'Confirmă segmentul anterior transparent și rolul optic; nu se adoptă '
+                             'valori sau afirmații de tratament.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Pleoap%C4%83',
+               'paraphrase': 'Sursa deja inspectată descrie pleoapele care acoperă partea '
+                             'anterioară a globului ocular și raportul cu corneea.'},
+              {'url': 'https://isjdolj.ro/sites/default/files/POCU/ID%20135712/Stiinte/ID%20135712%20-%20Stiinte%20M2.5%2C%20M2.6%2C%20M2.7.pdf',
+               'paraphrase': 'Pasajul școlar deja verificat descrie trecerea luminii prin cornee '
+                             'înainte de pupilă.'}],
+  'link_targets': [{'node_id': 'n_v4sti_ochi',
+                    'label': 'ochi',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'face parte din ochi',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_cornee',
+                    'edge_dst': 'n_v4sti_ochi',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Cornee'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_lumina',
+                    'label': 'lumină',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'refractă lumina care intră în ochi',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_cornee',
+                    'edge_dst': 'n_v4sti_lumina',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Cornee'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v32_body_face_pleoapa',
+                    'label': 'Pleoapă',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'poate fi acoperită de pleoapă',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_cornee',
+                    'edge_dst': 'n_v32_body_face_pleoapa',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Pleoap%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v1_18_pupila',
+                    'label': 'Pupilă',
+                    'category': 'stiinta',
+                    'status': 'batch',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'lumina trece prin ea înainte de a ajunge la pupilă',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_cornee',
+                    'edge_dst': 'n_v1_18_pupila',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://isjdolj.ro/sites/default/files/POCU/ID%20135712/Stiinte/ID%20135712%20-%20Stiinte%20M2.5%2C%20M2.6%2C%20M2.7.pdf'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'current_graph_counts': {'distinct': 4, 'old_main': 3, 'same_category': 4, 'batch': 1},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The transparent anterior eye segment refracts '
+                                               'entering light and can be covered by the eyelid; '
+                                               'no popular sclera-equivalence alias is admitted.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'School transparent eye structure; refraction, '
+                                               'eyelid coverage and pupil order are consistent, '
+                                               'with the invariant cornee key listed once.'}}},
+ {'id': 'v118-maxilar',
+  'lemma': 'Maxilar',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_maxilar',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor'],
+  'sense': 'Os al feței în care sunt fixați dinți, în sensul substantival al termenului.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['maxilar',
+                     'maxilarul',
+                     'maxilare',
+                     'maxilarele',
+                     'maxilarului',
+                     'maxilarelor'],
+  'proposed_forms': ['maxilar',
+                     'maxilarul',
+                     'maxilare',
+                     'maxilarele',
+                     'maxilarului',
+                     'maxilarelor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'maxilar',
+                    'url': 'https://dexonline.ro/definitie/maxilar/json',
+                    'dex_definition_ids': ['886401'],
+                    'doom3_definition_ids': ['1291512'],
+                    'flexion_url': 'https://dexonline.ro/definitie/maxilar',
+                    'flexion_authority': 'DOOM3 maxilar2 neuter noun plus unbadged N1 noun table, '
+                                         'not first DOR adjective table',
+                    'forms_note': 'maxilar/maxilarul/maxilare/maxilarele/maxilarului/maxilarelor; '
+                                  'maxilari/maxilară adjective forms excluded.',
+                    'paraphrase': 'Os al feței în care sunt fixați dinți, în sensul substantival '
+                                  'al termenului.; selected DEX sense/register and DOOM3 lexical '
+                                  'gender/number checked, ordinary forms from DOOM3 maxilar2 '
+                                  'neuter noun plus unbadged N1 noun table, not first DOR '
+                                  'adjective table.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/maxilar/json',
+               'paraphrase': 'Os al feței în care sunt fixați dinți, în sensul substantival al '
+                             'termenului.; selected DEX sense/register and DOOM3 lexical '
+                             'gender/number checked, ordinary forms from DOOM3 maxilar2 neuter '
+                             'noun plus unbadged N1 noun table, not first DOR adjective table.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Maxilar',
+               'paraphrase': 'Pagina redirecționează la Maxilă și documentează exemplul '
+                             'maxilarului superior, dinții și participarea la plafonul gurii; nu '
+                             'este extinsă automat la mandibulă.'}],
+  'link_targets': [{'node_id': 'n_v4sti_os',
+                    'label': 'os',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'is_a',
+                    'claim_to_verify': 'este un os',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_maxilar',
+                    'edge_dst': 'n_v4sti_os',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://dexonline.ro/definitie/maxilar/json',
+                                'https://ro.wikipedia.org/wiki/Maxilar'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v24_body_face_cap',
+                    'label': 'Cap',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'face parte din cap',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_maxilar',
+                    'edge_dst': 'n_v24_body_face_cap',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://dexonline.ro/definitie/maxilar/json',
+                                'https://ro.wikipedia.org/wiki/Maxilar'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v28_body_mouth_dinte',
+                    'label': 'Dinte',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'în osul său sunt fixați dinți',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_maxilar',
+                    'edge_dst': 'n_v28_body_mouth_dinte',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://dexonline.ro/definitie/maxilar/json',
+                                'https://ro.wikipedia.org/wiki/Maxilar'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v24_body_face_gura',
+                    'label': 'Gură',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'poate contribui la delimitarea cavității gurii',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_maxilar',
+                    'edge_dst': 'n_v24_body_face_gura',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Maxilar'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'selected_sense_note': 'DEX broad jaw-bone noun defines node; Wikipedia Maxilă is only the '
+                         'upper-jaw anatomical example for detailed conditional claims. No '
+                         'lower/upper count or new mandibulă synonym family proposed.',
+  'current_graph_counts': {'distinct': 5, 'old_main': 4, 'same_category': 5, 'batch': 1},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The selected substantival jaw-bone sense and '
+                                               'neuter DOOM3 entry are supported; the mixed '
+                                               'adjective/noun DEX header is read specifically at '
+                                               'noun sense1.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Recognizable jaw-bone noun with teeth and '
+                                               'head/oral relationships; adjectival forms are '
+                                               'excluded and a specific upper-jaw example does not '
+                                               'redefine every jaw.'}}},
+ {'id': 'v118-inghitire',
+  'lemma': 'Înghițire',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_inghitire',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor'],
+  'sense': 'Trecerea alimentelor din gură, prin regiunea gâtului, spre stomac.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['înghițire',
+                     'înghițirea',
+                     'înghițiri',
+                     'înghițirile',
+                     'înghițirii',
+                     'înghițirilor'],
+  'proposed_forms': ['înghițire',
+                     'înghițirea',
+                     'înghițiri',
+                     'înghițirile',
+                     'înghițirii',
+                     'înghițirilor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'înghițire',
+                    'url': 'https://dexonline.ro/definitie/%C3%AEnghi%C8%9Bire/json',
+                    'dex_definition_ids': ['887483'],
+                    'doom3_definition_ids': ['1296188'],
+                    'flexion_url': 'https://dexonline.ro/definitie/%C3%AEnghi%C8%9Bire',
+                    'flexion_authority': 'DOOM3 înghițirii/înghițiri plus DOR F107 ordinary noun '
+                                         'rows; elisions excluded',
+                    'forms_note': 'înghițire/înghițirea/înghițiri/înghițirile/înghițirii/înghițirilor; '
+                                  'no ‑nghițire elisions, verb forms or unscreened deglutiție '
+                                  'alias.',
+                    'paraphrase': 'Trecerea alimentelor din gură, prin regiunea gâtului, spre '
+                                  'stomac.; selected DEX sense/register and DOOM3 lexical '
+                                  'gender/number checked, ordinary forms from DOOM3 '
+                                  'înghițirii/înghițiri plus DOR F107 ordinary noun rows; elisions '
+                                  'excluded.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/%C3%AEnghi%C8%9Bire/json',
+               'paraphrase': 'Trecerea alimentelor din gură, prin regiunea gâtului, spre stomac.; '
+                             'selected DEX sense/register and DOOM3 lexical gender/number checked, '
+                             'ordinary forms from DOOM3 înghițirii/înghițiri plus DOR F107 '
+                             'ordinary noun rows; elisions excluded.'},
+              {'url': 'https://www.reginamaria.ro/utile/dictionar-de-afectiuni/disfagia-dificultatea-la-inghitire',
+               'paraphrase': 'Numai introducerea și definiția fazei orofaringiene susțin traseul '
+                             'gură-gât al bolului alimentar; nicio patologie sau conduită nu este '
+                             'adoptată.'},
+              {'url': 'https://dexonline.ro/definitie/saliv%C4%83/json',
+               'paraphrase': 'DEX09 Salivă, deja verificat, arată participarea salivei la formarea '
+                             'și înghițirea bolului alimentar.'}],
+  'link_targets': [{'node_id': 'n_v24_body_face_gura',
+                    'label': 'Gură',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'începe în gură',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_inghitire',
+                    'edge_dst': 'n_v24_body_face_gura',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://www.reginamaria.ro/utile/dictionar-de-afectiuni/disfagia-dificultatea-la-inghitire'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v29_body_upper_gat',
+                    'label': 'Gât',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'alimentele traversează regiunea gâtului',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_inghitire',
+                    'edge_dst': 'n_v29_body_upper_gat',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://www.reginamaria.ro/utile/dictionar-de-afectiuni/disfagia-dificultatea-la-inghitire'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4gas_mancare',
+                    'label': 'Mâncare',
+                    'category': 'gastronomie',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'transportă alimente din mâncare spre stomac',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_inghitire',
+                    'edge_dst': 'n_v4gas_mancare',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://www.reginamaria.ro/utile/dictionar-de-afectiuni/disfagia-dificultatea-la-inghitire'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v1_18_saliva',
+                    'label': 'Salivă',
+                    'category': 'stiinta',
+                    'status': 'batch',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'ușurează înghițirea alimentelor',
+                    'direction': 'incoming',
+                    'edge_src': 'n_v1_18_saliva',
+                    'edge_dst': 'n_v1_18_inghitire',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://dexonline.ro/definitie/saliv%C4%83/json'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'target_restriction': 'Shared word/graph coverage only; generic hubs or process labels are not '
+                        'approved hidden targets or filler board groups.',
+  'current_graph_counts': {'distinct': 4, 'old_main': 3, 'same_category': 3, 'batch': 1},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The oral-to-gastric food transfer is supported by '
+                                               'the primary hospital anatomy account and saliva '
+                                               'definition; no clinical advice is approved.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Everyday action word and school digestive process; '
+                                               'mouth, throat and food transport are supported '
+                                               'without diagnosing swallowing problems.'}}},
+ {'id': 'v118-mestecare',
+  'lemma': 'Mestecare',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_mestecare',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor'],
+  'sense': 'Mărunțirea alimentelor în gură, cu ajutorul dinților și al salivei.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['mestecare',
+                     'mestecarea',
+                     'mestecări',
+                     'mestecările',
+                     'mestecării',
+                     'mestecărilor'],
+  'proposed_forms': ['mestecare',
+                     'mestecarea',
+                     'mestecări',
+                     'mestecările',
+                     'mestecării',
+                     'mestecărilor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'mestecare',
+                    'url': 'https://dexonline.ro/definitie/mestecare/json',
+                    'dex_definition_ids': ['888626'],
+                    'doom3_definition_ids': ['1293063'],
+                    'flexion_url': 'https://dexonline.ro/definitie/mestecare',
+                    'flexion_authority': 'DOOM3 mestecării/mestecări plus explicit DOR F113 noun '
+                                         'table, not amesteca/mesteca verb tables',
+                    'forms_note': 'mestecare/mestecarea/mestecări/mestecările/mestecării/mestecărilor; '
+                                  'selected DEX noun refers to mesteca1, fixed to food-chewing by '
+                                  'source context. No stirring, verb or masticație inputs.',
+                    'paraphrase': 'Mărunțirea alimentelor în gură, cu ajutorul dinților și al '
+                                  'salivei.; selected DEX sense/register and DOOM3 lexical '
+                                  'gender/number checked, ordinary forms from DOOM3 '
+                                  'mestecării/mestecări plus explicit DOR F113 noun table, not '
+                                  'amesteca/mesteca verb tables.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/mestecare/json',
+               'paraphrase': 'Mărunțirea alimentelor în gură, cu ajutorul dinților și al salivei.; '
+                             'selected DEX sense/register and DOOM3 lexical gender/number checked, '
+                             'ordinary forms from DOOM3 mestecării/mestecări plus explicit DOR '
+                             'F113 noun table, not amesteca/mesteca verb tables.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Digestie',
+               'paraphrase': 'Pasajul despre începutul digestiei umane descrie mărunțirea hranei '
+                             'în gură cu dinții și amestecarea cu salivă.'}],
+  'link_targets': [{'node_id': 'n_v28_body_mouth_dinte',
+                    'label': 'Dinte',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'folosește dinții pentru mărunțire',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_mestecare',
+                    'edge_dst': 'n_v28_body_mouth_dinte',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Digestie'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v24_body_face_gura',
+                    'label': 'Gură',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'are loc în gură',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_mestecare',
+                    'edge_dst': 'n_v24_body_face_gura',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Digestie'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4gas_mancare',
+                    'label': 'Mâncare',
+                    'category': 'gastronomie',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'mărunțește alimentele din mâncare',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_mestecare',
+                    'edge_dst': 'n_v4gas_mancare',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Digestie'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v1_18_saliva',
+                    'label': 'Salivă',
+                    'category': 'stiinta',
+                    'status': 'batch',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'amestecă alimentele cu saliva',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_mestecare',
+                    'edge_dst': 'n_v1_18_saliva',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Digestie'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'target_restriction': 'Shared word/graph coverage only; generic hubs or process labels are not '
+                        'approved hidden targets or filler board groups.',
+  'current_graph_counts': {'distinct': 5, 'old_main': 3, 'same_category': 4, 'batch': 2},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The oral mechanical breakdown of food using teeth '
+                                               'and saliva is explicit in the digestion account; '
+                                               'the action noun is not an approved hidden target.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Everyday action word with clear tooth, mouth, food '
+                                               'and saliva associations; accepted as shared '
+                                               'vocabulary rather than a generic hidden target.'}}},
+ {'id': 'v118-dantura',
+  'lemma': 'Dantură',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_dantura',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor', 'Perechi'],
+  'sense': 'Ansamblul dinților unei persoane, în sensul anatomic.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['dantură', 'danturi', 'danturile', 'danturii', 'danturilor'],
+  'proposed_forms': ['dantură', 'danturi', 'danturile', 'danturii', 'danturilor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'dantură',
+                    'url': 'https://dexonline.ro/definitie/dantur%C4%83/json',
+                    'dex_definition_ids': ['855572'],
+                    'doom3_definition_ids': ['1305477'],
+                    'flexion_url': 'https://dexonline.ro/definitie/dantur%C4%83',
+                    'flexion_authority': 'DOOM3 danturii/danturi plus selected DOR F43 noun and '
+                                         'agreeing Wiktionary tables',
+                    'forms_note': 'dantură/danturi/danturile/danturii/danturilor; folded dantura '
+                                  'omitted; mechanical/prosthesis equivalence, old variants and '
+                                  'verb excluded.',
+                    'paraphrase': 'Ansamblul dinților unei persoane, în sensul anatomic.; selected '
+                                  'DEX sense/register and DOOM3 lexical gender/number checked, '
+                                  'ordinary forms from DOOM3 danturii/danturi plus selected DOR '
+                                  'F43 noun and agreeing Wiktionary tables.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/dantur%C4%83/json',
+               'paraphrase': 'Ansamblul dinților unei persoane, în sensul anatomic.; selected DEX '
+                             'sense/register and DOOM3 lexical gender/number checked, ordinary '
+                             'forms from DOOM3 danturii/danturi plus selected DOR F43 noun and '
+                             'agreeing Wiktionary tables.'},
+              {'url': 'https://ro.wiktionary.org/wiki/dantur%C4%83',
+               'paraphrase': 'Confirmă ansamblul dinților și formele danturii/danturilor, separat '
+                             'de dantura mecanică.'},
+              {'url': 'https://www.reginamaria.ro/articole-medicale/sanatatea-familiei/cum-ingrijim-dintii-copiilor',
+               'paraphrase': 'Sursa verificată folosește periuța și pasta pentru curățarea '
+                             'dinților; numai scopul obiectelor este preluat, fără vârste, '
+                             'cantități, tehnici sau recomandări.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Digestie',
+               'paraphrase': 'Pasajul deja inspectat descrie mărunțirea alimentelor în gură cu '
+                             'dinții, susținând rolul danturii la mestecare.'}],
+  'link_targets': [{'node_id': 'n_v28_body_mouth_dinte',
+                    'label': 'Dinte',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'este alcătuită din dinți',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_dantura',
+                    'edge_dst': 'n_v28_body_mouth_dinte',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wiktionary.org/wiki/dantur%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v24_body_face_gura',
+                    'label': 'Gură',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'se află în gură',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_dantura',
+                    'edge_dst': 'n_v24_body_face_gura',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Digestie'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v31_hygiene_oral_periuta_dinti',
+                    'label': 'Periuță de dinți',
+                    'category': 'viata_de_roman',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'poate fi curățată cu periuța de dinți',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_dantura',
+                    'edge_dst': 'n_v31_hygiene_oral_periuta_dinti',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://www.reginamaria.ro/articole-medicale/sanatatea-familiei/cum-ingrijim-dintii-copiilor'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v31_hygiene_oral_pasta_dinti',
+                    'label': 'Pastă de dinți',
+                    'category': 'viata_de_roman',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'poate fi curățată cu pastă de dinți',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_dantura',
+                    'edge_dst': 'n_v31_hygiene_oral_pasta_dinti',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://www.reginamaria.ro/articole-medicale/sanatatea-familiei/cum-ingrijim-dintii-copiilor'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v1_18_mestecare',
+                    'label': 'Mestecare',
+                    'category': 'stiinta',
+                    'status': 'batch',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'este folosită la mestecare',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_dantura',
+                    'edge_dst': 'n_v1_18_mestecare',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Digestie'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'current_graph_counts': {'distinct': 5, 'old_main': 4, 'same_category': 3, 'batch': 1},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The collective human dentition is distinct from '
+                                               'machine gearing; the dental-care source supports '
+                                               'conditional toothbrush and toothpaste links '
+                                               'without dosage advice.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Familiar collective of teeth, distinct from '
+                                               'machine gearing; cleaning-object and chewing links '
+                                               'remain factual rather than prescriptive.'}}},
+ {'id': 'v118-transpiratie',
+  'lemma': 'Transpirație',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_transpiratie',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor'],
+  'sense': 'Proces prin care glandele sudoripare elimină sudoare și contribuie la reglarea '
+           'temperaturii corpului.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['transpirație',
+                     'transpirația',
+                     'transpirații',
+                     'transpirațiile',
+                     'transpirației',
+                     'transpirațiilor'],
+  'proposed_forms': ['transpirație',
+                     'transpirația',
+                     'transpirații',
+                     'transpirațiile',
+                     'transpirației',
+                     'transpirațiilor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'transpirație',
+                    'url': 'https://dexonline.ro/definitie/transpira%C8%9Bie/json',
+                    'dex_definition_ids': ['834860'],
+                    'doom3_definition_ids': ['1269645'],
+                    'flexion_url': 'https://dexonline.ro/definitie/transpira%C8%9Bie',
+                    'flexion_authority': 'Explicit DOOM3 F135 noun table',
+                    'forms_note': 'transpirație/transpirația/transpirații/transpirațiile/transpirației/transpirațiilor; '
+                                  'plant process, old variants and verb forms excluded.',
+                    'paraphrase': 'Proces prin care glandele sudoripare elimină sudoare și '
+                                  'contribuie la reglarea temperaturii corpului.; selected DEX '
+                                  'sense/register and DOOM3 lexical gender/number checked, '
+                                  'ordinary forms from Explicit DOOM3 F135 noun table.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/transpira%C8%9Bie/json',
+               'paraphrase': 'Proces prin care glandele sudoripare elimină sudoare și contribuie '
+                             'la reglarea temperaturii corpului.; selected DEX sense/register and '
+                             'DOOM3 lexical gender/number checked, ordinary forms from Explicit '
+                             'DOOM3 F135 noun table.'},
+              {'url': 'https://www.spitalgorj.ro/wp-content/uploads/2021/12/Ghid-de-nursing-tehnici-de-evaluare-si-ingirjiri-L.-Titirca-2008.pdf',
+               'paraphrase': 'Paragraful de terminologie al ghidului publicat de spital descrie '
+                             'sudoarea ca soluție apoasă și pierderea fiziologică de căldură; '
+                             'numai aceste fapte sunt preluate.'},
+              {'url': 'https://www.catena.ro/glande-sudoripare-anatomie-rol-functii-afectiuni',
+               'paraphrase': 'Paragraful anatomic inspectat în rezultatul web arată originea '
+                             'transpirației din plasma sangvină și conținutul de apă; fără '
+                             'recomandări sau tratament.'}],
+  'link_targets': [{'node_id': 'n_v4sti_piele',
+                    'label': 'piele',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'elimină sudoare prin piele',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_transpiratie',
+                    'edge_dst': 'n_v4sti_piele',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://dexonline.ro/definitie/transpira%C8%9Bie/json'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4gas_apa',
+                    'label': 'Apă',
+                    'category': 'gastronomie',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'sudoarea conține apă',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_transpiratie',
+                    'edge_dst': 'n_v4gas_apa',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://www.spitalgorj.ro/wp-content/uploads/2021/12/Ghid-de-nursing-tehnici-de-evaluare-si-ingirjiri-L.-Titirca-2008.pdf'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_corp',
+                    'label': 'corp',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'contribuie la răcirea corpului',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_transpiratie',
+                    'edge_dst': 'n_v4sti_corp',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://www.spitalgorj.ro/wp-content/uploads/2021/12/Ghid-de-nursing-tehnici-de-evaluare-si-ingirjiri-L.-Titirca-2008.pdf'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_sange',
+                    'label': 'sânge',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'apa sudorii provine din lichidul derivat din plasma '
+                                       'sângelui',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_transpiratie',
+                    'edge_dst': 'n_v4sti_sange',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://www.catena.ro/glande-sudoripare-anatomie-rol-functii-afectiuni'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'target_restriction': 'Shared word/graph coverage only; generic hubs or process labels are not '
+                        'approved hidden targets or filler board groups.',
+  'current_graph_counts': {'distinct': 4, 'old_main': 4, 'same_category': 3, 'batch': 0},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'Human sweating, water loss and evaporative cooling '
+                                               'are supported by the hospital-hosted nursing text; '
+                                               'plasma-derived fluid is supported by the pharmacy '
+                                               'anatomy account.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Everyday bodily process with school heat/water '
+                                               'associations; source passages support '
+                                               'physiological roles without treatment or disease '
+                                               'claims.'}}},
+ {'id': 'v118-tesut',
+  'lemma': 'Țesut',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_tesut',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor'],
+  'sense': 'Ansamblu de celule cu structură și funcții asemănătoare într-un organism.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['țesut', 'țesutul', 'țesuturi', 'țesuturile', 'țesutului', 'țesuturilor'],
+  'proposed_forms': ['țesut', 'țesutul', 'țesuturi', 'țesuturile', 'țesutului', 'țesuturilor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'țesut',
+                    'url': 'https://dexonline.ro/definitie/%C8%9Besut/json',
+                    'dex_definition_ids': ['829727'],
+                    'doom3_definition_ids': ['1265297'],
+                    'flexion_url': 'https://dexonline.ro/definitie/%C8%9Besut',
+                    'flexion_authority': 'Explicit DOOM3 țesut1 neuter N24 noun table, not '
+                                         'adjective or țese verb',
+                    'forms_note': 'țesut/țesutul/țesuturi/țesuturile/țesutului/țesuturilor; DOOM '
+                                  'explicitly gives plural for cells; textile/action/adjective '
+                                  'senses excluded.',
+                    'paraphrase': 'Ansamblu de celule cu structură și funcții asemănătoare într-un '
+                                  'organism.; selected DEX sense/register and DOOM3 lexical '
+                                  'gender/number checked, ordinary forms from Explicit DOOM3 '
+                                  'țesut1 neuter N24 noun table, not adjective or țese verb.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/%C8%9Besut/json',
+               'paraphrase': 'Ansamblu de celule cu structură și funcții asemănătoare într-un '
+                             'organism.; selected DEX sense/register and DOOM3 lexical '
+                             'gender/number checked, ordinary forms from Explicit DOOM3 țesut1 '
+                             'neuter N24 noun table, not adjective or țese verb.'},
+              {'url': 'https://ro.wikipedia.org/wiki/%C8%9Aesut_%28biologie%29',
+               'paraphrase': 'Confirmă gruparea celulară și organizarea în organe și organism.'},
+              {'url': 'https://ro.wikipedia.org/wiki/%C8%9Aesut_conjunctiv',
+               'paraphrase': 'Confirmă țesutul osos în oase și sângele ca țesut conjunctiv fluid.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Piele_(anatomie)',
+               'paraphrase': 'Sursa deja verificată descrie învelișul conjunctiv-epitelial și '
+                             'straturile pielii.'}],
+  'link_targets': [{'node_id': 'n_v2sti_celula',
+                    'label': 'Celulă',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'este alcătuit din celule cu roluri asemănătoare',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_tesut',
+                    'edge_dst': 'n_v2sti_celula',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/%C8%9Aesut_%28biologie%29'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_corp',
+                    'label': 'corp',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'face parte din corp',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_tesut',
+                    'edge_dst': 'n_v4sti_corp',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/%C8%9Aesut_%28biologie%29'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_os',
+                    'label': 'os',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'conține țesut osos',
+                    'direction': 'incoming',
+                    'edge_src': 'n_v4sti_os',
+                    'edge_dst': 'n_v1_18_tesut',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/%C8%9Aesut_conjunctiv'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_sange',
+                    'label': 'sânge',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'is_a',
+                    'claim_to_verify': 'este un țesut lichid',
+                    'direction': 'incoming',
+                    'edge_src': 'n_v4sti_sange',
+                    'edge_dst': 'n_v1_18_tesut',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/%C8%9Aesut_conjunctiv'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_piele',
+                    'label': 'piele',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'pielea conține mai multe tipuri de țesut',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_tesut',
+                    'edge_dst': 'n_v4sti_piele',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Piele_(anatomie)'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'target_restriction': 'Shared word/graph coverage only; generic hubs or process labels are not '
+                        'approved hidden targets or filler board groups.',
+  'research_corrections': ['Os incoming edge uses nonexclusive contains-osseous-tissue caption '
+                           'instead of equating entire bone with one tissue; no endpoint added.'],
+  'current_graph_counts': {'distinct': 5, 'old_main': 5, 'same_category': 5, 'batch': 0},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The biological cell grouping, bony tissue, liquid '
+                                               'blood tissue and skin components are supported; '
+                                               'textile and adjective senses are excluded.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'School biological tissue sense, separated from '
+                                               'textiles and adjectives; cellular, bone, blood and '
+                                               'skin links are specific and honest.'}}},
+ {'id': 'v118-ombilic',
+  'lemma': 'Ombilic',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_ombilic',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor'],
+  'sense': 'Locul abdominal al fostului cordon ombilical, vizibil după naștere ca o cicatrice.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['ombilic',
+                     'ombilicul',
+                     'ombilicuri',
+                     'ombilicurile',
+                     'ombilicului',
+                     'ombilicurilor'],
+  'proposed_forms': ['ombilic',
+                     'ombilicul',
+                     'ombilicuri',
+                     'ombilicurile',
+                     'ombilicului',
+                     'ombilicurilor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [{'form': 'ombilice',
+                                'reason': 'Not selected DOOM3 ombilicuri paradigm.'},
+                               {'form': 'ombilicele',
+                                'reason': 'Not selected DOOM3 ombilicuri paradigm.'},
+                               {'form': 'ombilicelor',
+                                'reason': 'Not selected DOOM3 ombilicuri paradigm.'}],
+  'dictionaries': [{'lemma': 'ombilic',
+                    'url': 'https://dexonline.ro/definitie/ombilic/json',
+                    'dex_definition_ids': ['893351'],
+                    'doom3_definition_ids': ['1287016'],
+                    'flexion_url': 'https://dexonline.ro/definitie/ombilic',
+                    'flexion_authority': 'DOOM3 neuter ombilicuri plus DOR N24 noun table',
+                    'forms_note': 'ombilic/ombilicul/ombilicuri/ombilicurile/ombilicului/ombilicurilor; '
+                                  'no -e variant, umbilic or unscreened buric synonym inputs.',
+                    'paraphrase': 'Locul abdominal al fostului cordon ombilical, vizibil după '
+                                  'naștere ca o cicatrice.; selected DEX sense/register and DOOM3 '
+                                  'lexical gender/number checked, ordinary forms from DOOM3 neuter '
+                                  'ombilicuri plus DOR N24 noun table.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/ombilic/json',
+               'paraphrase': 'Locul abdominal al fostului cordon ombilical, vizibil după naștere '
+                             'ca o cicatrice.; selected DEX sense/register and DOOM3 lexical '
+                             'gender/number checked, ordinary forms from DOOM3 neuter ombilicuri '
+                             'plus DOR N24 noun table.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Ombilic',
+               'paraphrase': 'Confirmă cicatricea abdominală după desprinderea cordonului '
+                             'nou-născutului; nicio îngrijire sau practică istorică nu este '
+                             'adoptată.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Cordon_ombilical',
+               'paraphrase': 'Confirmă legătura fostului cordon cu placenta și schimburile dintre '
+                             'mamă și făt, fără afirmații de intervenție.'}],
+  'link_targets': [{'node_id': 'n_v4sti_corp',
+                    'label': 'corp',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'face parte din corp',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_ombilic',
+                    'edge_dst': 'n_v4sti_corp',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Ombilic'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_piele',
+                    'label': 'piele',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'este o cicatrice pe pielea abdomenului',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_ombilic',
+                    'edge_dst': 'n_v4sti_piele',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Ombilic'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v24_people_parents_mama',
+                    'label': 'Mamă',
+                    'category': 'societate',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'marchează locul fostului cordon care făcea legătura cu '
+                                       'placenta mamei',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_ombilic',
+                    'edge_dst': 'n_v24_people_parents_mama',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Ombilic',
+                                'https://ro.wikipedia.org/wiki/Cordon_ombilical'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v24_people_parents_bebelus',
+                    'label': 'Bebeluș',
+                    'category': 'societate',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'cicatricea sa se formează după desprinderea restului de '
+                                       'cordon la bebeluș',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_ombilic',
+                    'edge_dst': 'n_v24_people_parents_bebelus',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Ombilic'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'selected_sense_note': 'DEX defines the fetal abdominal opening; encyclopedic sources document '
+                         'the same anatomical site as postnatal navel scar. Former-cord captions '
+                         'do not assert a current maternal connection in adults.',
+  'current_graph_counts': {'distinct': 4, 'old_main': 4, 'same_category': 2, 'batch': 0},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The postnatal abdominal scar marks the former '
+                                               'cord; placental connection and detachment at '
+                                               'infancy support the qualified mother/baby '
+                                               'captions.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'School/everyday body landmark; the scar and former '
+                                               'placental connection are factual without care '
+                                               'instructions or invented birth timing.'}}},
+ {'id': 'v118-stern',
+  'lemma': 'Stern',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_stern',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor', 'Conexiuni', 'Intrusul'],
+  'sense': 'Os plat median din partea anterioară a toracelui, legat de cartilajele unor coaste.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['stern', 'sternul', 'sternuri', 'sternurile', 'sternului', 'sternurilor'],
+  'proposed_forms': ['stern', 'sternul', 'sternuri', 'sternurile', 'sternului', 'sternurilor'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [{'form': 'sterne',
+                                'reason': 'Not selected DOOM3 sternuri paradigm.'},
+                               {'form': 'sternele',
+                                'reason': 'Not selected DOOM3 sternuri paradigm.'},
+                               {'form': 'sternelor',
+                                'reason': 'Not selected DOOM3 sternuri paradigm.'}],
+  'dictionaries': [{'lemma': 'stern',
+                    'url': 'https://dexonline.ro/definitie/stern/json',
+                    'dex_definition_ids': ['846723'],
+                    'doom3_definition_ids': ['1278037'],
+                    'flexion_url': 'https://dexonline.ro/definitie/stern',
+                    'flexion_authority': 'DOOM3 neuter sternuri plus DOR N24 noun table',
+                    'forms_note': 'stern/sternul/sternuri/sternurile/sternului/sternurilor; '
+                                  'sterne, sternum and prefix forms excluded.',
+                    'paraphrase': 'Os plat median din partea anterioară a toracelui, legat de '
+                                  'cartilajele unor coaste.; selected DEX sense/register and DOOM3 '
+                                  'lexical gender/number checked, ordinary forms from DOOM3 neuter '
+                                  'sternuri plus DOR N24 noun table.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/stern/json',
+               'paraphrase': 'Os plat median din partea anterioară a toracelui, legat de '
+                             'cartilajele unor coaste.; selected DEX sense/register and DOOM3 '
+                             'lexical gender/number checked, ordinary forms from DOOM3 neuter '
+                             'sternuri plus DOR N24 noun table.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Stern',
+               'paraphrase': 'Confirmă osul anterior al toracelui, raportul posterior cu '
+                             'pericardul inimii și legarea prin cartilaje a unor coaste; nu se '
+                             'afirmă că toate coastele se leagă direct.'}],
+  'link_targets': [{'node_id': 'n_v4sti_os',
+                    'label': 'os',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'is_a',
+                    'claim_to_verify': 'este un os',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_stern',
+                    'edge_dst': 'n_v4sti_os',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Stern'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_corp',
+                    'label': 'corp',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'face parte din corp',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_stern',
+                    'edge_dst': 'n_v4sti_corp',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Stern'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_inima',
+                    'label': 'inimă',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'se află anterior față de inimă',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_stern',
+                    'edge_dst': 'n_v4sti_inima',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Stern'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v1_18_coasta_toracica',
+                    'label': 'Coastă toracică',
+                    'category': 'stiinta',
+                    'status': 'batch',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'unele coaste sunt legate de stern prin cartilaje',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_stern',
+                    'edge_dst': 'n_v1_18_coasta_toracica',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Stern'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'current_graph_counts': {'distinct': 5, 'old_main': 3, 'same_category': 5, 'batch': 2},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The median anterior thoracic bone, '
+                                               'costal-cartilage connection and position in front '
+                                               'of the heart are supported; no universal direct '
+                                               'attachment of all ribs is claimed.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Named in school skeletal diagrams; bone identity, '
+                                               'anterior-heart position and limited rib-cartilage '
+                                               'wording avoid universal direct attachment.'}}},
+ {'id': 'v118-coloana_vertebrala',
+  'lemma': 'Coloană vertebrală',
+  'kind': 'new_shared_concept',
+  'node_id': 'n_v1_18_coloana_vertebrala',
+  'games': ['Cald sau Rece', 'Lanțul Cuvintelor'],
+  'sense': 'Ansamblu de vertebre care formează axul de susținere al corpului vertebratelor.',
+  'register': 'Selected school/anatomy or everyday noun sense; unrelated, archaic/poetic-only '
+              'senses excluded; no advice or clinical ruling.',
+  'verified_forms': ['coloană vertebrală',
+                     'coloane vertebrale',
+                     'coloanele vertebrale',
+                     'coloanei vertebrale',
+                     'coloanelor vertebrale'],
+  'proposed_forms': ['coloană vertebrală',
+                     'coloane vertebrale',
+                     'coloanele vertebrale',
+                     'coloanei vertebrale',
+                     'coloanelor vertebrale'],
+  'already_resolved_forms': [],
+  'already_reserved_forms': [],
+  'excluded_form_hypotheses': [],
+  'dictionaries': [{'lemma': 'coloană',
+                    'url': 'https://dexonline.ro/definitie/coloan%C4%83/json',
+                    'dex_definition_ids': ['849078'],
+                    'doom3_definition_ids': ['1312839'],
+                    'flexion_url': 'https://dexonline.ro/definitie/coloan%C4%83',
+                    'flexion_authority': 'DOOM3 coloanei/coloane plus DOR F1 noun table and '
+                                         'qualified adjective agreement',
+                    'forms_note': 'Only coloană vertebrală/coloane vertebrale/coloanele '
+                                  'vertebrale/coloanei vertebrale/coloanelor vertebrale; folded '
+                                  'coloana omitted; no bare head, monument/column sense or '
+                                  'unscreened șira spinării alias.',
+                    'paraphrase': 'Ansamblu de vertebre care formează axul de susținere al '
+                                  'corpului vertebratelor.; selected DEX sense/register and DOOM3 '
+                                  'lexical gender/number checked, ordinary forms from DOOM3 '
+                                  'coloanei/coloane plus DOR F1 noun table and qualified adjective '
+                                  'agreement.'}],
+  'sources': [{'url': 'https://dexonline.ro/definitie/coloan%C4%83/json',
+               'paraphrase': 'Ansamblu de vertebre care formează axul de susținere al corpului '
+                             'vertebratelor.; selected DEX sense/register and DOOM3 lexical '
+                             'gender/number checked, ordinary forms from DOOM3 coloanei/coloane '
+                             'plus DOR F1 noun table and qualified adjective agreement.'},
+              {'url': 'https://ro.wikipedia.org/wiki/Coloan%C4%83_vertebral%C4%83',
+               'paraphrase': 'Confirmă structura osoasă segmentată a coloanei și apartenența la '
+                             'schelet.'},
+              {'url': 'https://ebooks.unitbv.ro/wp-content/uploads/2024/11/978-606-19-1748%E2%80%938-work.pdf',
+               'paraphrase': 'Capitolul universitar de anatomie descrie susținerea capului de '
+                             'către segmentul cervical; pasaj verificat în rezultatul web.'},
+              {'url': 'https://www.reginamaria.ro/utile/dictionar-de-afectiuni/lordoza',
+               'paraphrase': 'Introducerea anatomică plasează regiunea cervicală la nivelul '
+                             'gâtului; nicio patologie, diagnostic sau recomandare nu este '
+                             'adoptată.'}],
+  'link_targets': [{'node_id': 'n_v4sti_corp',
+                    'label': 'corp',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'part_of',
+                    'claim_to_verify': 'face parte din corp',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_coloana_vertebrala',
+                    'edge_dst': 'n_v4sti_corp',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Coloan%C4%83_vertebral%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v4sti_os',
+                    'label': 'os',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'este alcătuită dintr-o serie de oase',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_coloana_vertebrala',
+                    'edge_dst': 'n_v4sti_os',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ro.wikipedia.org/wiki/Coloan%C4%83_vertebral%C4%83'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v24_body_face_cap',
+                    'label': 'Cap',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'susține capul',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_coloana_vertebrala',
+                    'edge_dst': 'n_v24_body_face_cap',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://ebooks.unitbv.ro/wp-content/uploads/2024/11/978-606-19-1748%E2%80%938-work.pdf'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'},
+                   {'node_id': 'n_v29_body_upper_gat',
+                    'label': 'Gât',
+                    'category': 'stiinta',
+                    'status': 'main',
+                    'relation_hypothesis': 'related_to',
+                    'claim_to_verify': 'regiunea sa cervicală se află la nivelul gâtului',
+                    'direction': 'outgoing',
+                    'edge_src': 'n_v1_18_coloana_vertebrala',
+                    'edge_dst': 'n_v29_body_upper_gat',
+                    'verdict': 'accepted_reviewed_unapplied',
+                    'sources': ['https://www.reginamaria.ro/utile/dictionar-de-afectiuni/lordoza'],
+                    'evidence_note': 'Exact source/caption judged independently by both reviewers; '
+                                     'required corrections applied; source proposal remains '
+                                     'unapplied.'}],
+  'unqualified_head_policy': 'Bare dictionary head is evidence only; actual proposed inputs remain '
+                             'qualified. Never move or steal an unqualified owner.',
+  'current_graph_counts': {'distinct': 4, 'old_main': 4, 'same_category': 4, 'batch': 0},
+  'scope': 'Accepted after both independent whole-batch web reviews and explicit verdict '
+           'application; source-only reviewed/unapplied/not_landed; no board, target, recipe, '
+           'clinical or runtime qualification.',
+  'review_verdicts': {'factual': {'verdict': 'accept',
+                                  'rationale': 'The qualified vertebral series supports the body '
+                                               'and head; the university anatomy text confirms the '
+                                               'cervical region at neck level without adding bare '
+                                               'coloană aliases.'},
+                      'quality': {'verdict': 'accept',
+                                  'rationale': 'Qualified school spine term has clear body/bone '
+                                               'anchors; the primary university passage supports '
+                                               'head support and cervical location.'}}})
+
+PROPOSAL_COUNTS = {'items': 51,
+ 'new_concepts': 40,
+ 'connections': 158,
+ 'missing_normalized_keys': 232,
+ 'new_concept_keys': 220,
+ 'existing_input_keys': 12,
+ 'existing_input_families': 11,
+ 'verified_synonym_families': 0,
+ 'regional_input_keys': 0,
+ 'source_applied': False,
+ 'installed': 0,
+ 'player_visible_delta': '0/0/0',
+ 'accepted_reviewed_items': 51}
+
+def build_nodes_and_edges():
+    return {"nodes": NODES, "edges": EDGES, "aliases": ALIASES}

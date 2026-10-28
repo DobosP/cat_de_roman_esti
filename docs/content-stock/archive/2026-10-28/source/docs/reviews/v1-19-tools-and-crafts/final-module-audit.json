@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "auditor": "quality-v1-19",
+  "audit_type": "optional_mechanical_verdict_application_traceability",
+  "semantic_review_round": 1,
+  "scope": "Mechanical application fidelity only; no web calls, new verdicts, semantic rereview, formal review edits, repository edits or commits. This is not a new gate or progress metric.",
+  "original_module_sha256": "28ddf477c5e3aeffc9a3e92c8d814863e331039a0d92e818d9bbf5b1cf8025e0",
+  "final_module_sha256": "71cbd7116b516d0e07730e9268c1239b3d807345ba5937337f80130489114c4d",
+  "review_application_sha256": "44266ae73ff063d46a9b91921ea9cac2406d2fc2a0ab24939f88445279444615",
+  "immutable_review_sha256": {
+    "factual": "242515f12d701ad2b79f3d83911148e5907aa5e93281cfb7f13c445a1edf500d",
+    "quality": "2c67dd6cfb49d2f051632139643affe47fe73736dd6a56d3a0b3286a0e70de08"
+  },
+  "result": "pass",
+  "findings": [],
+  "retained_counts": {
+    "module_item_rows": 49,
+    "new_nodes": 44,
+    "edges": 171,
+    "keys": 255,
+    "existing_families": 5,
+    "synonym_families": 1,
+    "held_rows": 11,
+    "drops": 0,
+    "semantic_caption_changes": 1
+  },
+  "matching_requested_corrections": [
+    {
+      "item_id": "v119-topor",
+      "edge": [
+        "n_v1_19_topor",
+        "n_v32_workshop_cut_fierastrau",
+        "related_to"
+      ],
+      "kind": "replace_edge_source_binding"
+    },
+    {
+      "item_id": "v119-nicovala",
+      "edge": [
+        "n_v1_19_nicovala",
+        "n_v32_workshop_hand_cleste",
+        "related_to"
+      ],
+      "kind": "replace_edge_source_binding"
+    },
+    {
+      "item_id": "v119-teava",
+      "edge": [
+        "n_v1_19_teava",
+        "n_v32_workshop_hand_cleste",
+        "related_to"
+      ],
+      "kind": "replace_edge_source_binding"
+    },
+    {
+      "item_id": "v119-petic",
+      "edge": [
+        "n_v1_19_petic",
+        "n_v30_clothing_everyday_pantaloni",
+        "related_to"
+      ],
+      "kind": "replace_edge_caption"
+    }
+  ],
+  "bookkeeping_note": "Accepted-review status, copied original verdict metadata, source-summary authorities and exact correction notes are allowed traceability updates; they introduce no concepts, forms, endpoints, relations or gameplay claims. Petic caption replacement cites its requested sole Stoklasa source in matching evidence bindings.",
+  "runtime_authority": false,
+  "source_applied": false,
+  "installed": 0,
+  "player_visible_delta": "0/0/0",
+  "checks_summary": {
+    "exact_artifact_hashes": "pass",
+    "unique_review_request_transcription": "pass: five reviewer requests agree on four unique changes",
+    "edges": "pass: sole requested Petic caption replacement; all other edge bytes as data unchanged",
+    "all_selected_item_semantic_fields": "pass: 49 rows; original sense, register, forms, categories, endpoints and relations preserved",
+    "module_and_pool_link_bindings": "pass: every matching correction agrees with immutable before/after/source values",
+    "copied_review_metadata": "pass: every selected item copies its original factual and quality verdict/rationale unchanged",
+    "item_source_summaries": "pass: original entries preserved; additions only from requested corrected authorities",
+    "holds": "pass: all 11 original hold reasons preserved; no proposed or verified inputs",
+    "proposal_and_pool_counts": "pass: 49/44/171/255/5/1 retained; zero drops",
+    "source_unapplied": "pass: all 255 keys and 44 new IDs absent from unchanged serving bundle; installed 0 and delta 0/0/0"
+  }
+}

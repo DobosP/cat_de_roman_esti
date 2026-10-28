@@ -1,0 +1,961 @@
+{
+  "status": "captured_read_only_feature_working_base",
+  "observed_at_utc": "2026-10-16T16:44:05.310437+00:00",
+  "owner_direction": "2026-10-16: Work from the latest feature branch/version;main does not contain all current work. Continue previous content assessment;keep unlanded/no new wave.",
+  "previous_main": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+  "previous_analysis_commit": "1ac91f3a2fbc76ea53b78c4143d31e72d768a051",
+  "working_fingerprint_sha256": "8fa22a4d5529d34a9e15d41ddd6d3d5cecf28d01d1bb534e5073e1978554ade6",
+  "branch": "feat/gui-cat-m3",
+  "head": "e75518c1473be3a32ec2a0f2e1565764bbcf5d5b",
+  "worktree": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3",
+  "comparison_kind": "Actual latest dirty working files,not only branch HEAD;point-in-time read-only analysis.",
+  "porcelain_format": "v1 -z; leading status whitespace preserved",
+  "porcelain_z_sha256": "a59c6cd25ec6663ca57d7364919834b6a89db657f68da6dda5c9d6d8ab683ba2",
+  "dirty_paths": [
+    {
+      "path": "CORE_REQUESTS.md",
+      "status": " M",
+      "present": true,
+      "sha256": "c33470254aa0a0cbd3950843344398fe941d43cdce559f92cf6b6430d6c245a7",
+      "bytes": 8203,
+      "mode": 436
+    },
+    {
+      "path": "docs/STATUS.md",
+      "status": " M",
+      "present": true,
+      "sha256": "b14bda53e71efd863a457a2bcbfbabafc00d7b4d15bff08bb8d055886f0e49f2",
+      "bytes": 13868,
+      "mode": 436
+    },
+    {
+      "path": "docs/adr/README.md",
+      "status": " M",
+      "present": true,
+      "sha256": "9aad47a7f7229a7af00223fb902615c3e0c4097c2a750f769e2ee15269783971",
+      "bytes": 17885,
+      "mode": 436
+    },
+    {
+      "path": "docs/execplans/s1-cat.md",
+      "status": " M",
+      "present": true,
+      "sha256": "2c9f1a098372e218e341f889cb09a25436c912df70077724c43375af6fdf28be",
+      "bytes": 88343,
+      "mode": 436
+    },
+    {
+      "path": "docs/tracked-markdown.json",
+      "status": " M",
+      "present": true,
+      "sha256": "2c27f38013b2e4b9711ec340b385b6085ec7bb030dc6b83a1be5a4588efed150",
+      "bytes": 34139,
+      "mode": 436
+    },
+    {
+      "path": "frontend/e2e/games.mjs",
+      "status": " M",
+      "present": true,
+      "sha256": "5c30c1efcabb4f099df458a9aaf41619cfe6daf41f3a594df70f029a8c447711",
+      "bytes": 8748,
+      "mode": 436
+    },
+    {
+      "path": "frontend/e2e/gui-m0-home-parity.spec.mjs",
+      "status": " M",
+      "present": true,
+      "sha256": "e2c7ac3eff3ca5f4b883acd4f55e519613c1f8e2717ad0ea4e6857ad3add30ee",
+      "bytes": 15593,
+      "mode": 436
+    },
+    {
+      "path": "frontend/e2e/gui-m2-pilot-journeys.spec.mjs",
+      "status": " M",
+      "present": true,
+      "sha256": "6ed92d9e6d051072ae04f7de7f7c34d000c47d3cace22be430ba04dd69747159",
+      "bytes": 18870,
+      "mode": 436
+    },
+    {
+      "path": "frontend/package-lock.json",
+      "status": " M",
+      "present": true,
+      "sha256": "41a10de4b4b6fe8c45e42c621d52094d364f4952cc89ee4478409a955105bbc7",
+      "bytes": 104832,
+      "mode": 436
+    },
+    {
+      "path": "frontend/package.json",
+      "status": " M",
+      "present": true,
+      "sha256": "9bb4be7e35cfe9101e4dbdfa7e0798c03753139f768c14390b2e02f7fd52719a",
+      "bytes": 1419,
+      "mode": 436
+    },
+    {
+      "path": "frontend/scripts/check-bundle-budget.mjs",
+      "status": " M",
+      "present": true,
+      "sha256": "3bb18b49c3dd2aca3eb5ce60cbd6d61328515f5291281c49b282d216ed527e26",
+      "bytes": 6538,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/App.tsx",
+      "status": " M",
+      "present": true,
+      "sha256": "7597a740e947c1eb7cd6986bde24951461458dcb6be2c568df3928c34fc69e9d",
+      "bytes": 5282,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/components/CspElements.tsx",
+      "status": " M",
+      "present": true,
+      "sha256": "7c9041cb80417e4cfa1f6c523bf2dd49ed32b5ce6dd4ab9746ebbc5ca4ae9048",
+      "bytes": 3847,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/components/CspStyle.ts",
+      "status": " M",
+      "present": true,
+      "sha256": "8097d0f5c1fecb298c8beefe93447f55d9ddb758a52c09b27afb4bc5ac6efc16",
+      "bytes": 630,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/components/GameHelp.tsx",
+      "status": " M",
+      "present": true,
+      "sha256": "e3e17a654454ef7a592e88c167e2cf614f96b070bb0ffb11c30a95f943d5e942",
+      "bytes": 593,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/components/GameOptions.tsx",
+      "status": " M",
+      "present": true,
+      "sha256": "3e3e97e5812ce6db6654061bb423dcc16e87c59c929bd547cb9d64d012506b19",
+      "bytes": 635,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/components/GameShell.tsx",
+      "status": " M",
+      "present": true,
+      "sha256": "34a641f66e599ab7c782d5290bc12449bea125b034365775782598c189d0c899",
+      "bytes": 3088,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/gameHelp.d.mts",
+      "status": " M",
+      "present": true,
+      "sha256": "17f14da26343c35f7fb001408d313d27c027bd2cbb6f58c37df0e5d692792316",
+      "bytes": 224,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/gameHelp.mjs",
+      "status": " M",
+      "present": true,
+      "sha256": "ff2581c981faf2d143260a948aa1eb6a0d4f242e57330b986486d20e06746837",
+      "bytes": 675,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/hooks/useDailyIntent.ts",
+      "status": " M",
+      "present": true,
+      "sha256": "09c533b081d8fc3f72cbb313da88202163eb5aaeafd6a230a0594a630c11f7de",
+      "bytes": 1249,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/hooks/useSavedGameResume.ts",
+      "status": " M",
+      "present": true,
+      "sha256": "2bdb911d3edbe3d3f0b4e85c49f921475e42c31faba9e1e7ce28038755a94138",
+      "bytes": 4814,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/main.tsx",
+      "status": " M",
+      "present": true,
+      "sha256": "2d9cc2132c4f63156920239b670259b29352a8e1c01db98cec9d8eadc31c248f",
+      "bytes": 917,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/routes.ts",
+      "status": " M",
+      "present": true,
+      "sha256": "4334df64a0490fef67dbdf4c64c333e315a495ce9cdc3045921e8beed435606c",
+      "bytes": 1075,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/screens/Conexiuni.tsx",
+      "status": " M",
+      "present": true,
+      "sha256": "242eb2cf6c0ea2b57c92d36bd2e6cef2e8eb393d2cbe1d855b71c077cd878a24",
+      "bytes": 35843,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/screens/Home.tsx",
+      "status": " M",
+      "present": true,
+      "sha256": "659bec6589b998cbeaa47ca8966e53e922429645fd9b429425d99ab3f416d3c2",
+      "bytes": 17263,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/screens/Intrusul.tsx",
+      "status": " M",
+      "present": true,
+      "sha256": "7a4552d7df9fef8e3dc64b276a056ce7f478badecce475734a190ae45b96b728",
+      "bytes": 22482,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/screens/Perechi.tsx",
+      "status": " M",
+      "present": true,
+      "sha256": "e11d60f65238649b7977883bf40e5e1b8e9aea0b5d5fe8459f73fe4a79355225",
+      "bytes": 28769,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/styles/arcade.css",
+      "status": " M",
+      "present": true,
+      "sha256": "222f76f22d26ec420731b2192d2229a43d447c94ccf31c352b1380736a6012ce",
+      "bytes": 40324,
+      "mode": 436
+    },
+    {
+      "path": "frontend/tests/bundle-budget.test.mjs",
+      "status": " M",
+      "present": true,
+      "sha256": "34ae2f4e3e8cdbc3ae34a90e7695d679dfe0f26db9b855df28d7f8c0d30d11c1",
+      "bytes": 16526,
+      "mode": 436
+    },
+    {
+      "path": "frontend/tests/fixtures/gui-hook-runtime-bootstrap.json",
+      "status": " M",
+      "present": true,
+      "sha256": "3fd5966175ef2cd914ee0b439b28aa1874f953488d10c492fdfbdd41614746ad",
+      "bytes": 1108,
+      "mode": 436
+    },
+    {
+      "path": "frontend/tests/game-help.test.mjs",
+      "status": " M",
+      "present": true,
+      "sha256": "b387ee1d4c2aa7c7efa9d658be25b59a97a732fd6fec492c875980d886afc3c9",
+      "bytes": 4516,
+      "mode": 436
+    },
+    {
+      "path": "frontend/tests/gui-route-budgets.test.mjs",
+      "status": " M",
+      "present": true,
+      "sha256": "bdeb3df060be1cfdb86633440fb9ea2bb997f40b2d77ab4693c58edd107fcfe9",
+      "bytes": 27646,
+      "mode": 436
+    },
+    {
+      "path": "frontend/tests/gui-style-audit.test.mjs",
+      "status": " M",
+      "present": true,
+      "sha256": "b5eca79eae67049922d41ca219154689d13e66900eca89b8f31f0281f3a3c490",
+      "bytes": 14012,
+      "mode": 436
+    },
+    {
+      "path": "frontend/tests/gui-style-plan.test.mjs",
+      "status": " M",
+      "present": true,
+      "sha256": "aa737fa40e51be775ffb84e61453c660dda8afb1519e0608facd6692835de2bb",
+      "bytes": 40055,
+      "mode": 436
+    },
+    {
+      "path": "frontend/tests/v1-daily-intent.test.mjs",
+      "status": " M",
+      "present": true,
+      "sha256": "1cdbb948b61fabc04fde7741a5ab2f0badcaeefde5e3110009be1610d023122c",
+      "bytes": 3448,
+      "mode": 436
+    },
+    {
+      "path": "frontend/vendor/roedu-ui-1.0.10.tgz",
+      "status": " D",
+      "present": false
+    },
+    {
+      "path": "frontend/vendor/roedu-ui-1.0.10.tgz.sha256",
+      "status": " D",
+      "present": false
+    },
+    {
+      "path": "frontend/vendor/roedu-web-kit-0.1.10.tgz",
+      "status": " D",
+      "present": false
+    },
+    {
+      "path": "frontend/vendor/roedu-web-kit-0.1.10.tgz.sha256",
+      "status": " D",
+      "present": false
+    },
+    {
+      "path": "frontend/vite.config.ts",
+      "status": " M",
+      "present": true,
+      "sha256": "ca6529d73646d1cd7974b412030a9b0c1da2422264ab33402b496808e538bdfc",
+      "bytes": 3852,
+      "mode": 436
+    },
+    {
+      "path": "go-backend/go.mod",
+      "status": " M",
+      "present": true,
+      "sha256": "5af07df8f4e816077d3be20b3d5e55b21527334da4c5f748ac403d4eba87416b",
+      "bytes": 1127,
+      "mode": 436
+    },
+    {
+      "path": "go-backend/internal/httpapi/managed_delivery.go",
+      "status": " M",
+      "present": true,
+      "sha256": "977fc8e28de55575e21011a83c16609c0d48d69da98fd47b832a49d422e3f6d1",
+      "bytes": 2931,
+      "mode": 436
+    },
+    {
+      "path": "go-backend/internal/httpapi/managed_delivery_test.go",
+      "status": " M",
+      "present": true,
+      "sha256": "414d50f3260786a063c82b3bd506ecee6a9a495b35214c44489954c43af51800",
+      "bytes": 13177,
+      "mode": 436
+    },
+    {
+      "path": "scripts/gui-full-browser.mjs",
+      "status": " M",
+      "present": true,
+      "sha256": "48340dd4351208a610d6093f9cb1d7277c21149aec45602e8b22461dfe445fc9",
+      "bytes": 33430,
+      "mode": 436
+    },
+    {
+      "path": "scripts/gui-hook-runtime.mjs",
+      "status": " M",
+      "present": true,
+      "sha256": "7877213b157c57cc2fdaa55e7aa2bb5ecfc4ceead7502ae660fcbf3bd7e24c88",
+      "bytes": 10734,
+      "mode": 436
+    },
+    {
+      "path": "scripts/gui-native-reuse.mjs",
+      "status": " M",
+      "present": true,
+      "sha256": "f2cbdbcee83a77261bf42cc9156dec2b5c8f2e3ce275d438870fd89ff0c7637d",
+      "bytes": 20992,
+      "mode": 436
+    },
+    {
+      "path": "scripts/gui-route-budgets.mjs",
+      "status": " M",
+      "present": true,
+      "sha256": "0b6bb17db38c246a823f9febe3444c367e66932ffc4899144be69338224576fe",
+      "bytes": 31565,
+      "mode": 436
+    },
+    {
+      "path": "scripts/gui-style-audit.mjs",
+      "status": " M",
+      "present": true,
+      "sha256": "24a17815b107e8a62e3336d49cd34a031378f2e92a6f272cf8183096f6f09815",
+      "bytes": 12559,
+      "mode": 436
+    },
+    {
+      "path": "scripts/gui-toolchain-probe.mjs",
+      "status": " M",
+      "present": true,
+      "sha256": "aa1db70e46ce9cd495c547f0e7ecf0a0655fcf1e3d3d6ba56d8a2d79f0235c89",
+      "bytes": 6617,
+      "mode": 436
+    },
+    {
+      "path": "tools/gui-bootstrap-webkit/package-lock.json",
+      "status": " M",
+      "present": true,
+      "sha256": "fed38045ce06a78eae202221cfaada1d0a49792cda0b0aa6776ed12aeb8c8d6a",
+      "bytes": 64716,
+      "mode": 436
+    },
+    {
+      "path": "tools/gui-bootstrap-webkit/package.json",
+      "status": " M",
+      "present": true,
+      "sha256": "07b06026e50e8cbd2af2e8663f6f8f80e6b51911a7f0956371e2c97d2c104396",
+      "bytes": 834,
+      "mode": 436
+    },
+    {
+      "path": "versions.lock.json",
+      "status": " M",
+      "present": true,
+      "sha256": "d7c0192fb92cb307d9235db1a3004d06d07955b461a59e48ce1924b1ede71e0b",
+      "bytes": 47798,
+      "mode": 436
+    },
+    {
+      "path": "docs/adr/0202-m3-remaining-preact-screens.md",
+      "status": "??",
+      "present": true,
+      "sha256": "fbfaba96f731818b4fb371ba489ebc539276b3d350eba1e4c767274f423fa369",
+      "bytes": 8031,
+      "mode": 436
+    },
+    {
+      "path": "docs/reviews/gui-m3/challenge-style-checks.json",
+      "status": "??",
+      "present": true,
+      "sha256": "ec7067428889466a5ff2de1b1c5132628dad75228fa9828a106f993ba7ee6a0f",
+      "bytes": 5506,
+      "mode": 420
+    },
+    {
+      "path": "docs/reviews/gui-m3/help-controls-checks.json",
+      "status": "??",
+      "present": true,
+      "sha256": "7cb31298fd6f1a34d2f466ebb4b1dce98c5ad6c090b15fcd8f010a633684968b",
+      "bytes": 3200,
+      "mode": 436
+    },
+    {
+      "path": "docs/reviews/gui-m3/help-controls-review.json",
+      "status": "??",
+      "present": true,
+      "sha256": "de8905452522e79a2f513bf0f0f16bb9d3ebe00e5f586498dbbbdf7d3ebd4959",
+      "bytes": 12681,
+      "mode": 436
+    },
+    {
+      "path": "docs/reviews/gui-m3/initial-split-checks.json",
+      "status": "??",
+      "present": true,
+      "sha256": "af4690cbff629133885cccf33685ad79231d1d48a7ee3a3eec6c79198f4c5065",
+      "bytes": 2483,
+      "mode": 436
+    },
+    {
+      "path": "docs/reviews/gui-m3/initial-split-review.json",
+      "status": "??",
+      "present": true,
+      "sha256": "0258611b8acc4ff601be6dec81fb94d32a1fed56de8c93c5d5c8cf80c728bb2a",
+      "bytes": 4348,
+      "mode": 436
+    },
+    {
+      "path": "docs/reviews/gui-m3/source-checks.json",
+      "status": "??",
+      "present": true,
+      "sha256": "4337853263446d9101a055592fa6756bcd9687acd0fa5cfd348d3f05bdbd900b",
+      "bytes": 3710,
+      "mode": 436
+    },
+    {
+      "path": "docs/reviews/gui-m3/source-review.json",
+      "status": "??",
+      "present": true,
+      "sha256": "5327f3574e0e0843fbce561aabb00da474dd6c877d1a01f4af2c78ebbba0d2fa",
+      "bytes": 11927,
+      "mode": 436
+    },
+    {
+      "path": "docs/reviews/gui-m3/v111-adoption-review.json",
+      "status": "??",
+      "present": true,
+      "sha256": "62c41576937a5d6a9e92ed114a76227b31604860e1c11b5f094c84bbd031f378",
+      "bytes": 11570,
+      "mode": 436
+    },
+    {
+      "path": "docs/reviews/gui-m3/v111-source-checks.json",
+      "status": "??",
+      "present": true,
+      "sha256": "40e34d9a87bc8c33d3ea861330265b22273b8c94396402504be8aeb6cf7e3def",
+      "bytes": 2564,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/alchimieMode.ts",
+      "status": "??",
+      "present": true,
+      "sha256": "a05941ae664d191ab3128e1aaa0154657175e1467f11de8e9f4e0bc4fca7529a",
+      "bytes": 481,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/alchimieSavedMode.ts",
+      "status": "??",
+      "present": true,
+      "sha256": "669009852d04ae04024f77e02a565a56f4a875e66928b6a6458aad34b5f42702",
+      "bytes": 424,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/components/AlchimieModes.tsx",
+      "status": "??",
+      "present": true,
+      "sha256": "14c8b63dfa904a545442b416fb0298b1e053e31db98cd16013b02b191b49b0e1",
+      "bytes": 477,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/gameHelp/alchimie.d.mts",
+      "status": "??",
+      "present": true,
+      "sha256": "254390bb7a70cf1bfa4080330dd46c63d0eadae6a405d34a546bacc4099cf970",
+      "bytes": 96,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/gameHelp/alchimie.mjs",
+      "status": "??",
+      "present": true,
+      "sha256": "7a8c5c2c6cfd7c9627419bf1c25d8494595215404895ef7a2f07162664736f68",
+      "bytes": 488,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/gameHelp/conexiuni.d.mts",
+      "status": "??",
+      "present": true,
+      "sha256": "c7e343ec9a493eff9e58eede6e6d5fb0f5ad49bcd8934cabeee8b7f82177e52e",
+      "bytes": 97,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/gameHelp/conexiuni.mjs",
+      "status": "??",
+      "present": true,
+      "sha256": "cc37f2801810094abcf474ea0151a4f8bb9098979c006bd27bee17b9d4c5d348",
+      "bytes": 477,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/gameHelp/contexto.d.mts",
+      "status": "??",
+      "present": true,
+      "sha256": "ff586590512deb37cac0dfb1ac73166185c89f631697ac1b883d7c1acff7b8e5",
+      "bytes": 96,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/gameHelp/contexto.mjs",
+      "status": "??",
+      "present": true,
+      "sha256": "0c2aae119e955a3ae03fa2f2d2bb8fcf8c6c7769f474f56bd83a7daa3ff81caa",
+      "bytes": 564,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/gameHelp/intrusul.d.mts",
+      "status": "??",
+      "present": true,
+      "sha256": "6448397d919e1c5edac2598f733da8280990be9c6a9c7931ed50b36fa606a8b1",
+      "bytes": 96,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/gameHelp/intrusul.mjs",
+      "status": "??",
+      "present": true,
+      "sha256": "69b88811ff7576a302aca65df68f1fbd48540a6ef262b8702439679aadf2318c",
+      "bytes": 462,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/gameHelp/lant.d.mts",
+      "status": "??",
+      "present": true,
+      "sha256": "3c0da85ca361fe7398295d5874264653d8852a1a2ac6e70f856a79deb61197e9",
+      "bytes": 92,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/gameHelp/lant.mjs",
+      "status": "??",
+      "present": true,
+      "sha256": "427f37b9fb3b5c8103a4fb546ec5ed044cb737f68d3c23ad01d110619325bd45",
+      "bytes": 570,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/gameHelp/perechi.d.mts",
+      "status": "??",
+      "present": true,
+      "sha256": "4ed071a7182d56d0f9003ad1ef869f111fe2abaa60451171bfd058a33020f50d",
+      "bytes": 95,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/gameHelp/perechi.mjs",
+      "status": "??",
+      "present": true,
+      "sha256": "1bb708ad470275ab41d114a3f372ea820fb256e310b04fe2b20c4d71ca55339d",
+      "bytes": 473,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/homeCardBlur.ts",
+      "status": "??",
+      "present": true,
+      "sha256": "9d76d3642831c292f39481562303d6c0f12589289b9f15dfdeabbecf94b26b75",
+      "bytes": 240,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/hooks/useElementMotion.ts",
+      "status": "??",
+      "present": true,
+      "sha256": "bd890501dd81191c5282332b068c9d762adff80c8e6dcfe260d2bc3a2979807d",
+      "bytes": 2044,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/hooks/useSignalState.ts",
+      "status": "??",
+      "present": true,
+      "sha256": "3ce139207e84c09b99802582319d722b340227efd7ccd7e2eb9864ac237cd7bd",
+      "bytes": 691,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/screenLocation.ts",
+      "status": "??",
+      "present": true,
+      "sha256": "5bb1466beee65f17bd6171ccf04593bb24c3dff4ae6fc288d80a36d03b21e810",
+      "bytes": 265,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/screens/Alchimie.tsx",
+      "status": "??",
+      "present": true,
+      "sha256": "ab882b0ea1cc8b20ea2beede93131fb65a011d362020f33fc5dce00bc7f7cd53",
+      "bytes": 1203,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/screens/AlchimieChallenge.tsx",
+      "status": "??",
+      "present": true,
+      "sha256": "ee880238857198b864737bcfcce44751edae904f6333cc35ea50c05fffae98fb",
+      "bytes": 49886,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/screens/AlchimieExplore.tsx",
+      "status": "??",
+      "present": true,
+      "sha256": "44dcf6dd0ac6cd7657d3cdf2932588acc3118cee99eebe585c2cd71bef3c9230",
+      "bytes": 27711,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/screens/CaldRece.tsx",
+      "status": "??",
+      "present": true,
+      "sha256": "bc0101face781cf8e068e863ce8d4724d089ff81f9c5cd28643b1d1573dc4421",
+      "bytes": 44385,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/screens/Lant.tsx",
+      "status": "??",
+      "present": true,
+      "sha256": "5781742302077075a8363bb8e58e3a18ff91168df3abcf788d85ea79b6e4df1d",
+      "bytes": 39776,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/screens/Ranking.tsx",
+      "status": "??",
+      "present": true,
+      "sha256": "7ad67fbfbfdb7346e7e2a2d6cd5bf293530d995aa956a2998dce93cfdb097ae8",
+      "bytes": 6286,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/styles/alchimie-explore.css",
+      "status": "??",
+      "present": true,
+      "sha256": "59b8c4788e7be48905c1579890a707f9f1b3b9c2b3b5ff4d63b44281594e8332",
+      "bytes": 7367,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/styles/alchimie.css",
+      "status": "??",
+      "present": true,
+      "sha256": "7f24ce52ad73025f0de895b47feb939c33141616a7228b0f926904e43f435a87",
+      "bytes": 16144,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/styles/contexto.css",
+      "status": "??",
+      "present": true,
+      "sha256": "7e5c1dca879c01d237f84400444968205bfd28d2f6d244625d784453daeca150",
+      "bytes": 4503,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/styles/lant.css",
+      "status": "??",
+      "present": true,
+      "sha256": "c640a28e872260f2aea97e63adb23f4e1acf3429bcf8373abcf8e18ebf597dd6",
+      "bytes": 5854,
+      "mode": 436
+    },
+    {
+      "path": "frontend/src/styles/ranking.css",
+      "status": "??",
+      "present": true,
+      "sha256": "d2ba45a501bcc766c87f0ebaecd031677e27112369c8b2c287a3fda039a38a9b",
+      "bytes": 1039,
+      "mode": 436
+    },
+    {
+      "path": "frontend/tests/alchimie-mode.test.mjs",
+      "status": "??",
+      "present": true,
+      "sha256": "0bb1d9428df44540282f54ea881cee5f9f168d846d19e5f0e59aea57af075481",
+      "bytes": 4067,
+      "mode": 436
+    },
+    {
+      "path": "frontend/tests/home-card-blur.test.mjs",
+      "status": "??",
+      "present": true,
+      "sha256": "7661d6f9ce19ffd8d86cf490f0e90230fa5e1dffe3fd9df5faa5d913062b6047",
+      "bytes": 780,
+      "mode": 436
+    },
+    {
+      "path": "frontend/vendor/roedu-ui-1.0.11.tgz",
+      "status": "??",
+      "present": true,
+      "sha256": "68641731fc634717fe82f062aaf852a880c1d0082223486645363d329e7fbbb3",
+      "bytes": 88133,
+      "mode": 420
+    },
+    {
+      "path": "frontend/vendor/roedu-ui-1.0.11.tgz.sha256",
+      "status": "??",
+      "present": true,
+      "sha256": "1c094b11bbea8da6734752b00b0974b35c274aacf549760cb2f1fee5cce4a9b7",
+      "bytes": 86,
+      "mode": 420
+    },
+    {
+      "path": "frontend/vendor/roedu-web-kit-0.1.11.tgz",
+      "status": "??",
+      "present": true,
+      "sha256": "335c834062ff25aac2367ca3fdad189c0e9c513ca44649f0e66a2acd45f1def7",
+      "bytes": 267271,
+      "mode": 420
+    },
+    {
+      "path": "frontend/vendor/roedu-web-kit-0.1.11.tgz.sha256",
+      "status": "??",
+      "present": true,
+      "sha256": "21537a610d53cc9ee176e6630cf8f53e93d21b2ac3302256deda8a33801a2a9a",
+      "bytes": 91,
+      "mode": 420
+    }
+  ],
+  "unchanged_ownership_and_runtime_files": {
+    "go-backend/internal/alchimie/projection.go": {
+      "prior_main_sha256": "c45a46c4836b58b572f4fec15dbc72a355ec3b8a35a0bee6a37672104a8dab86",
+      "feature_working_sha256": "c45a46c4836b58b572f4fec15dbc72a355ec3b8a35a0bee6a37672104a8dab86",
+      "same": true
+    },
+    "go-backend/internal/alchimie/service.go": {
+      "prior_main_sha256": "f63e805e02aecb58aa6ac4f0a64f6e5838b6d14cb2b001135f087db019545cae",
+      "feature_working_sha256": "f63e805e02aecb58aa6ac4f0a64f6e5838b6d14cb2b001135f087db019545cae",
+      "same": true
+    },
+    "go-backend/internal/alchimie_explore/service.go": {
+      "prior_main_sha256": "4b53343d07d332fb9f935947b84f3379481bcbf78660211e53ac1357ec9ec0ce",
+      "feature_working_sha256": "4b53343d07d332fb9f935947b84f3379481bcbf78660211e53ac1357ec9ec0ce",
+      "same": true
+    },
+    "go-backend/internal/catalog/catalog.go": {
+      "prior_main_sha256": "b930bb8cdd1ecfa2a1ace7e8a0a405d1317ca67706460745d88f0c748418c43c",
+      "feature_working_sha256": "b930bb8cdd1ecfa2a1ace7e8a0a405d1317ca67706460745d88f0c748418c43c",
+      "same": true
+    },
+    "go-backend/internal/conexiuni/service.go": {
+      "prior_main_sha256": "d1ca9cca16595b37f9a9c7701c2ef009ee9da01d692dc64605c3a7fe043ff79e",
+      "feature_working_sha256": "d1ca9cca16595b37f9a9c7701c2ef009ee9da01d692dc64605c3a7fe043ff79e",
+      "same": true
+    },
+    "go-backend/internal/content/bundled.json": {
+      "prior_main_sha256": "f6d983f1ab2cbb7852e8583411eaecd2048fdb5b5da08099129d7e4ff471344c",
+      "feature_working_sha256": "f6d983f1ab2cbb7852e8583411eaecd2048fdb5b5da08099129d7e4ff471344c",
+      "same": true
+    },
+    "go-backend/internal/content/content.go": {
+      "prior_main_sha256": "4990f7ba621b0f10519a3a29ef5e998ea4b2db323b4db2e8d15753a9ef6b4f83",
+      "feature_working_sha256": "4990f7ba621b0f10519a3a29ef5e998ea4b2db323b4db2e8d15753a9ef6b4f83",
+      "same": true
+    },
+    "go-backend/internal/contentbuild/build.go": {
+      "prior_main_sha256": "65b7869f1966e659fa24d885456ba1f105ed3a03a64ceff681009dca3858ce6a",
+      "feature_working_sha256": "65b7869f1966e659fa24d885456ba1f105ed3a03a64ceff681009dca3858ce6a",
+      "same": true
+    },
+    "go-backend/internal/contentbuild/catalogs.go": {
+      "prior_main_sha256": "eb0239ed9b57524b2e6a18aa3d5757650de17c674e6fee071a724037c6f78c77",
+      "feature_working_sha256": "eb0239ed9b57524b2e6a18aa3d5757650de17c674e6fee071a724037c6f78c77",
+      "same": true
+    },
+    "go-backend/internal/contentbuild/graph.go": {
+      "prior_main_sha256": "e4e9e54f7350767b5dc35dcde86db6ce22bf681a6be9d364cb723abb298ccf24",
+      "feature_working_sha256": "e4e9e54f7350767b5dc35dcde86db6ce22bf681a6be9d364cb723abb298ccf24",
+      "same": true
+    },
+    "go-backend/internal/contentbuild/world.go": {
+      "prior_main_sha256": "704f3d5d2e4622e753f4c3d521d215c852e600cf00509c80dda20c6a5e8312c1",
+      "feature_working_sha256": "704f3d5d2e4622e753f4c3d521d215c852e600cf00509c80dda20c6a5e8312c1",
+      "same": true
+    },
+    "go-backend/internal/contentops/critique.go": {
+      "prior_main_sha256": "eca8067e24565d797bc90a19d4e4a300c73282b89afed874a7a80785c1ebe80d",
+      "feature_working_sha256": "eca8067e24565d797bc90a19d4e4a300c73282b89afed874a7a80785c1ebe80d",
+      "same": true
+    },
+    "go-backend/internal/contentops/derive.go": {
+      "prior_main_sha256": "589d7f47704f74dabd1d5a3aed6094d42a978173c6ce89e82f733d5bf12601ae",
+      "feature_working_sha256": "589d7f47704f74dabd1d5a3aed6094d42a978173c6ce89e82f733d5bf12601ae",
+      "same": true
+    },
+    "go-backend/internal/contentops/rank.go": {
+      "prior_main_sha256": "8fca7ff8a16976bdf036e6e9d77bd800a140cb5ed174260e0ad9d708b7120722",
+      "feature_working_sha256": "8fca7ff8a16976bdf036e6e9d77bd800a140cb5ed174260e0ad9d708b7120722",
+      "same": true
+    },
+    "go-backend/internal/contexto/service.go": {
+      "prior_main_sha256": "0df6ed5f0d2ef5d01c85b93ae5c0d8aa33e3c7648dd7d4bdeed688d24f9e04d4",
+      "feature_working_sha256": "0df6ed5f0d2ef5d01c85b93ae5c0d8aa33e3c7648dd7d4bdeed688d24f9e04d4",
+      "same": true
+    },
+    "go-backend/internal/graph/service.go": {
+      "prior_main_sha256": "a9cc60e321e905293cee6fa49265281fc5db70a78c669c7ba66315933810002e",
+      "feature_working_sha256": "a9cc60e321e905293cee6fa49265281fc5db70a78c669c7ba66315933810002e",
+      "same": true
+    },
+    "go-backend/internal/httpapi/body.go": {
+      "prior_main_sha256": "22dc70b3656ed389cdf3ae2d289fa3c5207f5e322b643cfba72f4405e00c7815",
+      "feature_working_sha256": "22dc70b3656ed389cdf3ae2d289fa3c5207f5e322b643cfba72f4405e00c7815",
+      "same": true
+    },
+    "go-backend/internal/intrusul/service.go": {
+      "prior_main_sha256": "a8d927ecc20d8293c8ee45b0097edaf989c4ecbbaa9b22d0574c72259446bc82",
+      "feature_working_sha256": "a8d927ecc20d8293c8ee45b0097edaf989c4ecbbaa9b22d0574c72259446bc82",
+      "same": true
+    },
+    "go-backend/internal/lant/service.go": {
+      "prior_main_sha256": "fca0abb9016dc0805c25ae9edc6947f92df41848e6ad3bd0d85a1d5613cffc90",
+      "feature_working_sha256": "fca0abb9016dc0805c25ae9edc6947f92df41848e6ad3bd0d85a1d5613cffc90",
+      "same": true
+    },
+    "go-backend/internal/pack/pack.go": {
+      "prior_main_sha256": "a5c48d9c77365fa1b1e4a56979845a26a1ecc77993b987f84885b7f4579629e7",
+      "feature_working_sha256": "a5c48d9c77365fa1b1e4a56979845a26a1ecc77993b987f84885b7f4579629e7",
+      "same": true
+    },
+    "go-backend/internal/perechi/service.go": {
+      "prior_main_sha256": "3f0bd33043a154f6b084e2321857b398b01e2f3f85fbfacccff7b4064a6a2369",
+      "feature_working_sha256": "3f0bd33043a154f6b084e2321857b398b01e2f3f85fbfacccff7b4064a6a2369",
+      "same": true
+    },
+    "scripts/apply_common_words_v24.py": {
+      "prior_main_sha256": "50c07392950feb2f740108c86fc91619fee29699107bdbd7ad28a5477b09ba91",
+      "feature_working_sha256": "50c07392950feb2f740108c86fc91619fee29699107bdbd7ad28a5477b09ba91",
+      "same": true
+    },
+    "cat_de_roman_esti/fixtures/kg_sample.json": {
+      "prior_main_sha256": "d8c7a8226e7b128ef613aeeebedbd6af8529e5dd1d56676c3a8b1a6b86c886fc",
+      "feature_working_sha256": "d8c7a8226e7b128ef613aeeebedbd6af8529e5dd1d56676c3a8b1a6b86c886fc",
+      "same": true
+    },
+    "cat_de_roman_esti/fixtures/games_pack.json": {
+      "prior_main_sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+      "feature_working_sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+      "same": true
+    },
+    "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json": {
+      "prior_main_sha256": "2b4e18f8e5f231c0e94f30567366fe18a4d3677093f4fd590d0ecfebefb0cfff",
+      "feature_working_sha256": "2b4e18f8e5f231c0e94f30567366fe18a4d3677093f4fd590d0ecfebefb0cfff",
+      "same": true
+    },
+    "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json": {
+      "prior_main_sha256": "fe3265069003aaca36cd9d7d1a1a49f2768374f6872e19b0ea53516670192dcd",
+      "feature_working_sha256": "fe3265069003aaca36cd9d7d1a1a49f2768374f6872e19b0ea53516670192dcd",
+      "same": true
+    },
+    "go-backend/internal/httpapi/server.go": {
+      "prior_main_sha256": "ec363f06cb94fefc79182ff5d9f553295cd27a92b5d3e2ce92b5a9e062ddffb4",
+      "feature_working_sha256": "ec363f06cb94fefc79182ff5d9f553295cd27a92b5d3e2ce92b5a9e062ddffb4",
+      "same": true
+    },
+    "go-backend/internal/httpapi/arcade.go": {
+      "prior_main_sha256": "cb54d41ea9ee66e70bb0c53ac79e4df6ff96b7698fc78b326fa4732722e1be0d",
+      "feature_working_sha256": "cb54d41ea9ee66e70bb0c53ac79e4df6ff96b7698fc78b326fa4732722e1be0d",
+      "same": true
+    },
+    "docs/CONTENT_LOOP.md": {
+      "prior_main_sha256": "2818e00686e1d930b75fa6fcc1a190c143a2d9d972b16032fd53774af414b9c5",
+      "feature_working_sha256": "2818e00686e1d930b75fa6fcc1a190c143a2d9d972b16032fd53774af414b9c5",
+      "same": true
+    },
+    "docs/CRITIQUE_RUBRIC.md": {
+      "prior_main_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+      "feature_working_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+      "same": true
+    },
+    "scripts/contexto_common_words_v72_data.py": {
+      "prior_main_sha256": "f1c6c3fb9fdbc6a0d6d85881aa04d7fd86df9159ef00ff6bac23ac2450a523ee",
+      "feature_working_sha256": "f1c6c3fb9fdbc6a0d6d85881aa04d7fd86df9159ef00ff6bac23ac2450a523ee",
+      "same": true
+    },
+    "scripts/weather_and_landscape_v1_13_data.py": {
+      "prior_main_sha256": "01589eb1721c91544fbc94325c3e16cc2440ed1dada7ab8ceeb0886ad6476279",
+      "feature_working_sha256": "01589eb1721c91544fbc94325c3e16cc2440ed1dada7ab8ceeb0886ad6476279",
+      "same": true
+    }
+  },
+  "dirty_path_count": 98,
+  "tracked_dirty_paths": 52,
+  "untracked_files": 46,
+  "all_prior_core_evidence_files_identical": true,
+  "source_packets_preserved": 19,
+  "source_application": false,
+  "integration_tested": false,
+  "frontend_tested": false,
+  "remote_operations": 0,
+  "new_wave": false,
+  "worktree_mutations": 0
+}

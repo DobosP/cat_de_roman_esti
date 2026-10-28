@@ -1,0 +1,581 @@
+{
+  "schema_version": 1,
+  "wave": "1.36",
+  "branch": "content/v1-36-familiar-body-household-and-school",
+  "reviewed_payload_commit": "15bf5aaf74421f094f0abdae86a96df728aebd61",
+  "handoff_closure_identity": "The source branch commit containing this file; exact closure is recorded post-commit in preserved scratch handoff-summary.json.",
+  "landing_status": "not_landed",
+  "handoff_status": "owner_review_later",
+  "source_packet_complete": true,
+  "canonical_stock_update_complete": false,
+  "source_applied": false,
+  "module_dry_run": false,
+  "installed": 0,
+  "player_visible_delta": "0/0/0",
+  "summary": {
+    "items_proposed": 40,
+    "accepted_source_packages": 18,
+    "new_vocabulary_concepts": 17,
+    "existing_owner_input_families": 1,
+    "ordinary_normalized_payload_keys": 99,
+    "truthful_directed_claims": 68,
+    "held": 22,
+    "rejected": 0,
+    "new_targets": 0,
+    "new_playable_rounds": 0,
+    "ordinary_primary_lemma_families": 13,
+    "ordinary_primary_lemma_keys": 66,
+    "qualified_new_concept_families": 4,
+    "qualified_new_concept_keys": 24,
+    "qualified_existing_owner_families": 1,
+    "qualified_existing_owner_keys": 9,
+    "synonym_families": 0,
+    "regional_input_families": 0,
+    "diminutive_families": 0,
+    "canonical_label_only_keys": 0
+  },
+  "payload_authority": {
+    "pool_path": "docs/content-pool/v1-36-familiar-body-household-and-school/pool.json",
+    "review_commit_pool_sha256": "f85c458837374fd1de63ac46cc3e2ef25abae9b387347196148e2100a4fc4865",
+    "final_module_path": "scripts/familiar_body_household_and_school_v1_36_data.py",
+    "final_module_sha256": "0285ccd41ac1cca1e974c801006132519e7c92388f96bcdfeddb4b61394df98a",
+    "original_reviewed_module_sha256": "44f083ac3a0207eec9d0511c03a62572eb06bb1305279785e8a77c628528b2fc",
+    "original_reviewed_module_archive": "docs/reviews/v1-36-familiar-body-household-and-school/reviewed-module.json",
+    "original_archive_sha256": "34efbc6a951fc80496ddc7759dc76c60709642d13c4fa409d801fc01c9aef10f",
+    "original_source_recovery": "JSON.source_utf8 encoded as UTF-8 recovers the exact original23,500bytes and SHA25644f083ac; no module execution is needed.",
+    "factual_review_sha256": "d8be19c7fd7479f5240d0289a902c1bb80c6a798747d37ccfc3377eb35665978",
+    "quality_review_sha256": "c3938d3cf1a21ac61d596400c1ab0fc7ed16d4615307a3b525bd7e16de769a8e",
+    "source_reconciliation_sha256": "db67313b9aa4495ae729c1da971dca6224629159853828594621cbd274d25e46",
+    "source_provenance_sha256": "be5c799fd62a26ca639c93d35e56cb55c76df429142ecae828c25910b701b806",
+    "exact_signed_field_edits": 9,
+    "signed_caption_edits": 8,
+    "signed_structural_footer_edits": 1,
+    "conservative_whole_item_holds": [
+      "v136-unghie"
+    ],
+    "record_states_plus_final_module_are_retained_payload_authority": true,
+    "original_reports_and_binding_chain_preserved": true
+  },
+  "comparison": {
+    "primary_feature_branch": "feat/gui-cat-m3",
+    "primary_feature_HEAD": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+    "actual_working_binding_path": "/home/dobo/work/_temp/content__v1-36-familiar-body-household-and-school/handoff/feature-working-handoff.json",
+    "actual_working_binding_sha256": "3c3a0b4d6a33bb176d2fe6f6f2d424d0891ac55a47d8cfdf33a6be44ce3908b7",
+    "working_fingerprint_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "relevant_working_bytes_index_sha256": "68841045a72141d158da69ec623382f3f52e1773307a312d32f44b9f32696019",
+    "porcelain_z_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "dirty_untracked_paths_preserved": 0,
+    "content_authority_files_equal_both_bases": 244,
+    "interface_files_bound": 59,
+    "adjacent_dependencies_bound": 7,
+    "secondary_local_main": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+    "original_source_baseline": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+    "bundle_sha256": "f6d983f1ab2cbb7852e8583411eaecd2048fdb5b5da08099129d7e4ff471344c",
+    "procedure_commit": "17b97a2b",
+    "procedure_sha256": "2818e00686e1d930b75fa6fcc1a190c143a2d9d972b16032fd53774af414b9c5",
+    "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "ownership_policy_sha256": {
+      "scripts/contexto_common_words_v72_data.py": "f1c6c3fb9fdbc6a0d6d85881aa04d7fd86df9159ef00ff6bac23ac2450a523ee",
+      "scripts/weather_and_landscape_v1_13_data.py": "01589eb1721c91544fbc94325c3e16cc2440ed1dada7ab8ceeb0886ad6476279",
+      "go-backend/internal/graph/service.go": "a9cc60e321e905293cee6fa49265281fc5db70a78c669c7ba66315933810002e"
+    },
+    "earlier_source_and_feature_bindings_preserved": true,
+    "ownership_screen_reuse": "Completed232form/248key main/feature/all43pool screen reused only because every244authority/59interface/7adjacent and policy byte remains equal. All held dispositions remain closed; no runtime sameness is inferred.",
+    "prior_final_pools_exact": 43,
+    "prior_protected_closures_exact": 22,
+    "feature_WIP_copied_or_executed": false,
+    "source_module_imported_or_executed": false,
+    "feature_mutations_by_content_task": 0,
+    "qualification": "Temporal read-only compatibility only. Later integration requires explicit authority on the latest designated feature working version, frozen accepted WIP if any, existing cascade/gates/playthroughs. No permanent baseline, zero-disturbance or safe-to-merge claim."
+  },
+  "game_impact_limits": {
+    "desired_source_value": "Familiar missing selected words and qualified inputs for future Cald typed guesses and Lanț text moves, plus meaningful readable selected-sense associations; current player gain remains zero.",
+    "typed_contract": "Cald accepts text. Lanț accepts text and clicked displayed-neighbor labels; exact/projection/fuzzy competition, repeat/win identity and snapshots can change after later integration.",
+    "other_interfaces": "Intrusul/Perechi/Conexiuni submit active-board IDs. Alchimie combines owned IDs and filters normalized local display labels; its search does not resolve KG aliases.",
+    "proxy_attention": [
+      {
+        "head": "Unghie",
+        "key": "unghie",
+        "proxies": [
+          {
+            "public_id": "ctxp_c5cff054f0377725a56b",
+            "anchor_id": "n_v24_body_limbs_mana",
+            "domain": "corp",
+            "mapping_kind": "explicit"
+          }
+        ]
+      },
+      {
+        "head": "Mușchi",
+        "key": "muschi",
+        "proxies": [
+          {
+            "public_id": "ctxp_7626cb30da38fc721394",
+            "anchor_id": "n_v4sti_corp",
+            "domain": "corp",
+            "mapping_kind": "domain_fallback"
+          }
+        ]
+      },
+      {
+        "head": "Burtă",
+        "key": "burta",
+        "proxies": [
+          {
+            "public_id": "ctxp_b32f1b5e793a06a4c804",
+            "anchor_id": "n_v4sti_corp",
+            "domain": "corp",
+            "mapping_kind": "domain_fallback"
+          }
+        ]
+      },
+      {
+        "head": "Tirbușon",
+        "key": "tirbuson",
+        "proxies": [
+          {
+            "public_id": "ctxp_bbc3b1287392bbea7b56",
+            "anchor_id": "n_v29_kitchen_table_cutit",
+            "domain": "ustensile de bucătărie",
+            "mapping_kind": "explicit"
+          }
+        ]
+      }
+    ],
+    "target_status": "No target/C3/recognition/concreteness/early-opener/salience/engine-floor approval; no auto-enrollment of graph vocabulary as hidden targets.",
+    "round_status": "No board, pair, partition, recipe, qualified route or playable round approved. Numeric graph/source truth is insufficient.",
+    "integration": "No zero-disturbance or safe-to-merge claim. Later explicit integration targets then-current owner-designated feature, frozen accepted WIP identity if any, through existing cascade/gates/playthroughs. Main landing remains separate. Source flags and salience0.5are not runtime quarantine.",
+    "source_application": false,
+    "module_dry_run": false,
+    "installed": 0,
+    "player_visible_delta": "0/0/0"
+  },
+  "retained_input_projection_attention": {
+    "muschi": {
+      "record_id": "v136-muschi",
+      "current_projection_terms": [
+        {
+          "public_id": "ctxp_7626cb30da38fc721394",
+          "anchor_id": "n_v4sti_corp",
+          "mapping_kind": "domain_fallback",
+          "domain": "corp"
+        }
+      ],
+      "scope": "Potential exact-versus-projection competition after later integration only; not an installed displacement."
+    }
+  },
+  "historical_proxy_attention_scope": "The original candidate scan also lists Unghie,Burtă,Tirbușon. Those held families do not enter retained source payload; the candidate list is not an installed projection delta.",
+  "C3_numeric_only": {
+    "direct_predecessors_histogram": {
+      "0": 14,
+      "1": 2,
+      "2": 1
+    },
+    "new_nodes": 17,
+    "below_numeric_floor": 17,
+    "numeric_passes": 0,
+    "count_scope": "Unique direct non-distractor predecessors from current KG plus retained proposed edges, including declared bidirectional traversal. Proxies and outgoing-only links do not add predecessors.",
+    "target_salience_recognition_concreteness_opener_engine_approvals": 0
+  },
+  "owner_decisions": [
+    "2026-10-12..14: Unlanded source pools;preserve all packets and V1.14;HTTP exception declined.",
+    "2026-10-15: HCI targets common,concrete,Romanian-relevant;no obscure or abstract targets.",
+    "2026-10-16: V1.32/consolidation before next wave(done);latest feature WIP primary,main secondary.",
+    "2026-10-18: Continue with the content generation improved loop.",
+    "2026-10-18: Screen V1.34 vs latest feature/all pools; preserve holds; unlanded.",
+    "2026-10-19: Continue the loop; resumes pending V1.35 source-only web reviews."
+  ],
+  "formal_reviews": {
+    "whole_batch_reports": 2,
+    "whole_batch_rounds_per_reviewer": 1,
+    "reviewed_items_each": 19,
+    "fixed_names": [
+      "factual-v1-36",
+      "quality-v1-36"
+    ],
+    "original_verdict_counts": {
+      "factual": {
+        "modify": 4,
+        "accept": 15
+      },
+      "quality": {
+        "modify": 7,
+        "accept": 12
+      }
+    },
+    "fresh_dictionary_counts": {
+      "factual_dictionary_HTTP200": 51,
+      "factual_dictionary_requests": 51,
+      "factual_primary_dexonline_exact_headwords": 25,
+      "factual_primary_dexonline_requests": 50,
+      "factual_additional_dictionary_requests": 1,
+      "factual_secondary_HTTP_requests_in_shared_ledger": 0,
+      "quality_dictionary_HTTP200": 49,
+      "quality_dictionary_requests": 49,
+      "quality_primary_dexonline_exact_headwords": 24,
+      "quality_primary_dexonline_requests": 48,
+      "quality_additional_dictionary_requests": 1,
+      "quality_secondary_HTTP_requests_in_shared_ledger": 34,
+      "global_minimum_dictionary_start_gap_seconds": 2.150094,
+      "total_dictionary_requests": 100,
+      "failed_dictionary_requests": 0
+    },
+    "cache_provenance_is_not_fresh_review": true,
+    "post_review_edits": "Exactly eight compatible signed caption replacements and the both-signed literal export footer; Unghie held under signed conservative policy for conflicting replacement text. No new forms/endpoints/claims or semantic approval from bookkeeping."
+  },
+  "holds": {
+    "count": 22,
+    "all_preserved": true,
+    "preceding21_unchanged_after_formal_review": true,
+    "additional_conservative_hold": "v136-unghie",
+    "primary_classification_counts": {
+      "predeclared_graph_floors": 18,
+      "selected_sense_or_source_support": 3,
+      "signed_caption_conflict": 1
+    },
+    "primary_classifications": {
+      "predeclared_graph_floors": [
+        "v136-pumn",
+        "v136-subrat",
+        "v136-scalp",
+        "v136-alunita",
+        "v136-pistrui",
+        "v136-buric",
+        "v136-burta",
+        "v136-cazan",
+        "v136-arzator",
+        "v136-tirbuson",
+        "v136-desfacator-de-conserve",
+        "v136-sifon",
+        "v136-tusiera",
+        "v136-zar",
+        "v136-pion",
+        "v136-tabla-de-sah",
+        "v136-fagure",
+        "v136-trantor"
+      ],
+      "selected_sense_or_source_support": [
+        "v136-jar",
+        "v136-tocator-de-carne",
+        "v136-furnicar"
+      ],
+      "signed_caption_conflict": [
+        "v136-unghie"
+      ]
+    },
+    "scope": "Retrospective grouping only; complete original reasons and inactive observations remain authoritative. No hold is reopened or treated as a reservation/approved family.",
+    "specific_source_limits": {
+      "v136-jar": "Literal lexical evidence retained; four declared graph claims lack complete bounded second-source support.",
+      "v136-tocator-de-carne": "Current cutting-board owner preserved; the machine phrase is not silently equated with that owner.",
+      "v136-furnicar": "Earth-mound sense preserved; wood-cavity nest association is not borrowed from another sense.",
+      "v136-unghie": "Both source reviews remain unchanged; distinct exact replacements for one caption are not jointly applied."
+    }
+  },
+  "read_only_checks": {
+    "go_version": "go version go1.27.1 linux/amd64",
+    "scope": "Read-only existing native operators on unchanged serving content; no module application/importer dry-run or integration qualification.",
+    "checks": {
+      "validate": {
+        "command": "go -C go-backend run ./cmd/cat-content validate --root ..",
+        "status": "PASS",
+        "returncode": 0,
+        "output_sha256": "1d2e645a4a6946dae65ac9fc067442df3e7a430fc9fee3039e41fd1ee3819976",
+        "go_version": "go version go1.27.1 linux/amd64",
+        "source_HEAD": "15bf5aaf74421f094f0abdae86a96df728aebd61",
+        "source_applied": false,
+        "module_dry_run": false,
+        "check_scope": "Existing read-only native operator on unchanged serving content; not hypothetical source integration qualification."
+      },
+      "export": {
+        "command": "go -C go-backend run ./cmd/cat-content export --root .. --check",
+        "status": "PASS",
+        "returncode": 0,
+        "output_sha256": "4f715aebbcf4c517ca8a5686959372f4ab156e4e62f897e6e5e607156dc5c8fb",
+        "go_version": "go version go1.27.1 linux/amd64",
+        "source_HEAD": "15bf5aaf74421f094f0abdae86a96df728aebd61",
+        "source_applied": false,
+        "module_dry_run": false,
+        "check_scope": "Existing read-only native operator on unchanged serving content; not hypothetical source integration qualification."
+      },
+      "ops": {
+        "command": "go -C go-backend run ./cmd/cat-content-ops check --root .. --check",
+        "status": "PASS",
+        "returncode": 0,
+        "output_sha256": "e7fd15f1a6e05c103f027645f7ceed93387d123ed27c882c83104a823575e311",
+        "go_version": "go version go1.27.1 linux/amd64",
+        "source_HEAD": "15bf5aaf74421f094f0abdae86a96df728aebd61",
+        "source_applied": false,
+        "module_dry_run": false,
+        "check_scope": "Existing read-only native operator on unchanged serving content; not hypothetical source integration qualification."
+      },
+      "delta": {
+        "command": "go -C go-backend run ./cmd/cat-content-ops delta --root .. --baseline fb829aaa150c6263a92dc061befd254d4f5aeea8 --text",
+        "status": "PASS",
+        "returncode": 0,
+        "output_sha256": "9332fe0756aa9cc6eda5a551cec102c14494b1ff95388802961aa26f2753c1c5",
+        "go_version": "go version go1.27.1 linux/amd64",
+        "source_HEAD": "15bf5aaf74421f094f0abdae86a96df728aebd61",
+        "source_applied": false,
+        "module_dry_run": false,
+        "check_scope": "Existing read-only native operator on unchanged serving content; not hypothetical source integration qualification."
+      }
+    }
+  },
+  "baseline_execution_history": {
+    "wave": "1.36",
+    "wave_base": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+    "primary_application_current_head": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+    "secondary_main": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+    "procedure_rev": "17b97a2b",
+    "procedure_sha256": "2818e00686e1d930b75fa6fcc1a190c143a2d9d972b16032fd53774af414b9c5",
+    "go_version": "go1.27.1",
+    "checks": {
+      "validate": {
+        "name": "validate",
+        "command": "go -C go-backend run ./cmd/cat-content validate --root ..",
+        "returncode": 0,
+        "status": "PASS",
+        "first_error": null,
+        "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-36-familiar-body-household-and-school",
+        "go_version": "go version go1.27.1 linux/amd64",
+        "baseline_commit": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+        "output_sha256": "1d2e645a4a6946dae65ac9fc067442df3e7a430fc9fee3039e41fd1ee3819976",
+        "executed_commit": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+        "worktree_clean_after": true,
+        "scope": "Read-only native content baseline. Current main is secondary; no GUI execution, full native suite or future integration qualification."
+      },
+      "export": {
+        "name": "export",
+        "command": "go -C go-backend run ./cmd/cat-content export --root .. --check",
+        "returncode": 0,
+        "status": "PASS",
+        "first_error": null,
+        "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-36-familiar-body-household-and-school",
+        "go_version": "go version go1.27.1 linux/amd64",
+        "baseline_commit": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+        "output_sha256": "4f715aebbcf4c517ca8a5686959372f4ab156e4e62f897e6e5e607156dc5c8fb",
+        "executed_commit": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+        "worktree_clean_after": true,
+        "scope": "Read-only native content baseline. Current main is secondary; no GUI execution, full native suite or future integration qualification."
+      },
+      "ops": {
+        "name": "ops",
+        "command": "go -C go-backend run ./cmd/cat-content-ops check --root .. --check",
+        "returncode": 0,
+        "status": "PASS",
+        "first_error": null,
+        "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-36-familiar-body-household-and-school",
+        "go_version": "go version go1.27.1 linux/amd64",
+        "baseline_commit": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+        "output_sha256": "e7fd15f1a6e05c103f027645f7ceed93387d123ed27c882c83104a823575e311",
+        "executed_commit": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+        "worktree_clean_after": true,
+        "scope": "Read-only native content baseline. Current main is secondary; no GUI execution, full native suite or future integration qualification."
+      },
+      "rails": {
+        "name": "rails",
+        "command": "go -C go-backend run ./cmd/cat-content-rail all --root .. --check",
+        "returncode": 0,
+        "status": "PASS",
+        "first_error": null,
+        "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-36-familiar-body-household-and-school",
+        "go_version": "go version go1.27.1 linux/amd64",
+        "baseline_commit": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+        "output_sha256": "bea7844de79b62344740900b92f72a8dac18665d946333cb53ecc5f38d6273c7",
+        "executed_commit": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+        "worktree_clean_after": true,
+        "scope": "Read-only native content baseline. Current main is secondary; no GUI execution, full native suite or future integration qualification."
+      },
+      "tests": {
+        "name": "tests",
+        "command": "go -C go-backend test ./internal/contentrails/ ./internal/contentbuild/ ./internal/httpgolden/",
+        "returncode": 0,
+        "status": "PASS",
+        "first_error": null,
+        "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-36-familiar-body-household-and-school",
+        "go_version": "go version go1.27.1 linux/amd64",
+        "baseline_commit": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+        "output_sha256": "a018c0a44e19fc614210000886a4950887b46c8a799422c1192e87d69501a581",
+        "executed_commit": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+        "worktree_clean_after": true,
+        "scope": "Read-only native content baseline. Current main is secondary; no GUI execution, full native suite or future integration qualification."
+      },
+      "delta": {
+        "name": "delta",
+        "command": "go -C go-backend run ./cmd/cat-content-ops delta --root .. --baseline fb829aaa150c6263a92dc061befd254d4f5aeea8 --text",
+        "returncode": 0,
+        "status": "PASS",
+        "first_error": null,
+        "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-36-familiar-body-household-and-school",
+        "go_version": "go version go1.27.1 linux/amd64",
+        "baseline_commit": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+        "output_sha256": "9332fe0756aa9cc6eda5a551cec102c14494b1ff95388802961aa26f2753c1c5",
+        "executed_commit": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+        "worktree_clean_after": true,
+        "scope": "Read-only native content baseline. Current main is secondary; no GUI execution, full native suite or future integration qualification."
+      },
+      "main-rails": {
+        "name": "main-rails",
+        "command": "go -C go-backend run ./cmd/cat-content-rail all --root .. --check",
+        "returncode": 0,
+        "status": "PASS",
+        "first_error": null,
+        "cwd": "/home/dobo/work/cat_de_roman_esti",
+        "go_version": "go version go1.27.1 linux/amd64",
+        "baseline_commit": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+        "output_sha256": "bea7844de79b62344740900b92f72a8dac18665d946333cb53ecc5f38d6273c7",
+        "executed_commit": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+        "worktree_clean_after": true,
+        "scope": "Read-only native content baseline. Current main is secondary; no GUI execution, full native suite or future integration qualification."
+      },
+      "main-tests": {
+        "name": "main-tests",
+        "command": "go -C go-backend test ./internal/contentrails/ ./internal/contentbuild/",
+        "returncode": 0,
+        "status": "PASS",
+        "first_error": null,
+        "cwd": "/home/dobo/work/cat_de_roman_esti",
+        "go_version": "go version go1.27.1 linux/amd64",
+        "baseline_commit": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+        "output_sha256": "501c334027fe804a91d8fd7b6ca6ac3d8e75b9ea37242b8932786e64b182f48a",
+        "executed_commit": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+        "worktree_clean_after": true,
+        "scope": "Read-only native content baseline. Current main is secondary; no GUI execution, full native suite or future integration qualification."
+      }
+    },
+    "main_content_gates_green": true,
+    "install_available_by_main_gates": true,
+    "owner_apply_permission": false,
+    "owner_landing_permission": false,
+    "feature_working_version_bound": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "relevant_working_bytes_index_sha256": "68841045a72141d158da69ec623382f3f52e1773307a312d32f44b9f32696019",
+    "feature_dirty_paths_observed": 0,
+    "feature_WIP_copied_or_tested": false,
+    "scope": "Step0 content-only baseline on current owner-designated committed feature ref. Actual feature working bytes independently bound. No module application/dry-run, install cascade, source review, GUI runtime or landing."
+  },
+  "ticks_after_handoff": 6,
+  "commits_after_handoff": 6,
+  "step_ticks_after_handoff": {
+    "0": 1,
+    "1": 1,
+    "2": 2,
+    "3": 1,
+    "5": 1
+  },
+  "retrospective": {
+    "proposed": 40,
+    "screened_research_ideas": 22,
+    "initial_graph_holds": 18,
+    "author_items_started": 22,
+    "author_research_ticks": 2,
+    "accepted": 18,
+    "held": 22,
+    "rejected": 0,
+    "installed": 0,
+    "author_budget_exceptions": 0,
+    "top_hold_counts": {
+      "predeclared_graph_floors": 18,
+      "selected_sense_or_source_support": 3,
+      "signed_caption_conflict": 1
+    },
+    "player_visible_delta": "0/0/0"
+  },
+  "BLOCKED": [],
+  "NEEDS_OWNER": [],
+  "proposals_not_applied": [
+    {
+      "old_text": "label_ro must read true from source to target.",
+      "new_text": "Before freezing, keep player captions factual and concise; place process, owner and category cautions in evidence, while preserving semantic qualifiers.",
+      "evidence": "Eight retained caption trims remove bookkeeping; Unghie stays held because two independently signed replacements for the same source-supported caption differ. No reviewer verdict was changed."
+    },
+    {
+      "old_text": "DEX for sense and register labels, DOOM 3 for forms.",
+      "new_text": "Preserve DOOM3 sense and number qualifiers when selecting ordinary forms; a shared table can cover a different plural sense.",
+      "evidence": "Guașă material retains only two normalized singular keys: DOOM3 marks guașe as drawings, so the artwork plural family remains excluded."
+    }
+  ],
+  "continuation": {
+    "next_step": "5-consolidation",
+    "action": "Update the canonical pending-stock view from this exact handoff closure before selecting any new discovery gap.",
+    "canonical_branch": "docs/content-consolidation-v1-8-to-v1-32",
+    "canonical_base_commit": "a6e1ef6f33851518e54d50315a31b551347c95c6",
+    "current_canonical_summary": {
+      "pending_source_accepted_records": 909,
+      "pending_new_concepts": 779,
+      "pending_existing_owner_families": 130,
+      "pending_existing_unique_owners": 119,
+      "missing_payload_owner_key_pairs": 4904,
+      "missing_unique_normalized_payload_keys": 4904,
+      "missing_ordinary_source_form_keys": 4901,
+      "missing_canonical_display_label_only_keys": [
+        {
+          "record_id": "v114-liliac",
+          "key": "liliac (mamifer)"
+        },
+        {
+          "record_id": "v114-somn",
+          "key": "somn (peste)"
+        },
+        {
+          "record_id": "v115-cablu",
+          "key": "cablu (electric)"
+        }
+      ],
+      "missing_new_concept_normalized_inputs": 4402,
+      "missing_existing_owner_normalized_inputs": 502,
+      "pending_unique_directed_edges": 3122,
+      "pending_cald_proxy_key_changes": 108,
+      "current_foreign_owner_collisions": 0,
+      "pending_cross_owner_collisions": 0,
+      "source_graph_nodes_below_numeric_incoming5": 734,
+      "source_graph_nodes_atleast_numeric_incoming5": 45,
+      "source_graph_predecessor_distribution": {
+        "0": 332,
+        "1": 28,
+        "2": 21,
+        "3": 163,
+        "4": 190,
+        "5": 32,
+        "6": 13
+      },
+      "existing_input_families_by_lane": {
+        "selected_sense_lexical_or_qualified_input": 68,
+        "existing_lemma_morphology": 62
+      },
+      "existing_input_missing_keys_by_lane": {
+        "existing_lemma_morphology": 101,
+        "selected_sense_lexical_or_qualified_input": 401
+      },
+      "existing_input_families_with_snapshot_dependencies": 40,
+      "all_source_records": 1494,
+      "all_source_states": {
+        "integrated": 218,
+        "held": 366,
+        "accepted": 909,
+        "rejected": 1
+      },
+      "pending_held_records": 297,
+      "source_packets": 28,
+      "protected_unlanded_closures": 22,
+      "new_source_approvals_by_consolidation": 0,
+      "installed_by_this_work": 0,
+      "new_targets_approved_by_this_work": 0,
+      "new_playable_rounds": 0,
+      "player_visible_delta": "0/0/0"
+    },
+    "this_wave_already_in_current_stock": false,
+    "new_discovery_before_stock_refresh": false,
+    "future_discovery": "Only under standing continuous source authority while a concrete high-value uncovered gap remains; screen pending stock first and never pad a quota.",
+    "next_useful_owner_curation": "Unghie remains useful lexical stock but has an unresolved exact-caption outcome; preserve the hold unless an applicable owner decision reopens it. This handoff does not request routine approval.",
+    "integration_authorized": false
+  },
+  "preservation": {
+    "prior_protected_closures": 22,
+    "prior_distinct_final_pools": 43,
+    "V1_14": "Partial packet and declined HTTP-count exception preserved; never resume partial installation.",
+    "V1_7_and_retired_loop": "parked",
+    "historical_source_packets_deleted": 0,
+    "historical_raw_trees_pruned": 0,
+    "retention": "One reproducible bounded source review setup; only hash-verified owned duplicate staging was removed, no workspace/build snapshots or protected raw history pruned."
+  }
+}

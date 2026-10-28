@@ -1,0 +1,1211 @@
+{
+  "schema": "source-loop-uninstalled-residual-backlog-v1",
+  "observed_at_utc": "2026-10-20T02:00:18.613144+00:00",
+  "stock_ref": {
+    "ref": "e3d2142cfcb354a287769befcad9e7580251b89f",
+    "path": "docs/content-consolidation/v1-8-through-v1-32/current-stock.json",
+    "sha256": "f3373323d501f31ce4a9b8e3552600c8149467301d18bc9418f3cf69f0986cf5"
+  },
+  "scope": "Bounded offline author attention only; no full step1/source/target/gameplay approval or reservation. No V1.42 wave created.",
+  "hypotheses": [
+    {
+      "head": "felie",
+      "kind": "new_concept_lexical_backlog_hypothesis",
+      "prospective_id_only": "prospective:felie",
+      "selected_sense_hypothesis": "Porțiune subțire tăiată dintr-un aliment; sensul concret alimentar.",
+      "category_hypothesis": "gastronomie",
+      "planned_ordinary_form_hypotheses": [
+        "felie",
+        "felia",
+        "felii",
+        "feliile",
+        "feliei",
+        "feliilor"
+      ],
+      "form_attention": [
+        {
+          "surface": "felie",
+          "key": "felie",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "felia",
+          "key": "felia",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "felii",
+          "key": "felii",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "feliile",
+          "key": "feliile",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "feliei",
+          "key": "feliei",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "feliilor",
+          "key": "feliilor",
+          "status": "uncovered_head_attention"
+        }
+      ],
+      "graph_skeleton": [
+        {
+          "endpoint_id": "n_v4gas_paine",
+          "label_ro": "Pâine",
+          "category": "gastronomie",
+          "current_description": "Aliment de bază făcut din aluat copt, consumat la masă.",
+          "endpoint_kind": "current_main",
+          "direction": "current_to_new",
+          "src": "n_v4gas_paine",
+          "dst": "prospective:felie",
+          "relation_hypothesis": "portioned_into",
+          "caption_hypothesis_ro": "se poate tăia în felii",
+          "bidirectional": 0,
+          "is_distractor": 0
+        },
+        {
+          "endpoint_id": "n_v3gas_pizza",
+          "label_ro": "Pizza",
+          "category": "gastronomie",
+          "current_description": "Preparat copt cu blat, sos de roșii, brânză și toppinguri.",
+          "endpoint_kind": "current_main",
+          "direction": "current_to_new",
+          "src": "n_v3gas_pizza",
+          "dst": "prospective:felie",
+          "relation_hypothesis": "portioned_into",
+          "caption_hypothesis_ro": "se poate tăia în felii",
+          "bidirectional": 0,
+          "is_distractor": 0
+        },
+        {
+          "endpoint_id": "n_v4gas_prajitura",
+          "label_ro": "Prăjitură",
+          "category": "gastronomie",
+          "current_description": "Preparat dulce copt sau asamblat, servit ca desert.",
+          "endpoint_kind": "current_main",
+          "direction": "current_to_new",
+          "src": "n_v4gas_prajitura",
+          "dst": "prospective:felie",
+          "relation_hypothesis": "portioned_into",
+          "caption_hypothesis_ro": "se poate tăia în felii",
+          "bidirectional": 0,
+          "is_distractor": 0
+        },
+        {
+          "endpoint_id": "n_v29_kitchen_table_cutit",
+          "label_ro": "Cuțit",
+          "category": "gastronomie",
+          "current_description": "Unealtă cu lamă și mâner, folosită pentru a tăia alimente sau alte lucruri.",
+          "endpoint_kind": "current_main",
+          "direction": "new_to_current",
+          "src": "prospective:felie",
+          "dst": "n_v29_kitchen_table_cutit",
+          "relation_hypothesis": "cut_with",
+          "caption_hypothesis_ro": "se poate obține cu un cuțit",
+          "bidirectional": 0,
+          "is_distractor": 0
+        }
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "current_main": 4,
+        "same_unchanged_category": 4,
+        "batch_peers": 0
+      },
+      "source_status": "unresearched; not an eligible wave selection",
+      "game_potential": "After separate source review and authorized integration only: literal Cald typed-input recognition and readable directed Lanț associations. No target, route, recipe, board or round approval.",
+      "normative_paradigm_verified": false,
+      "full_step1_clearance": false,
+      "source_approved": false,
+      "target_approved": false,
+      "playable_round_approved": false,
+      "installed": 0
+    },
+    {
+      "head": "gălușcă",
+      "kind": "new_concept_lexical_backlog_hypothesis",
+      "prospective_id_only": "prospective:galusca",
+      "selected_sense_hypothesis": "Bucată mică de aluat fiartă, inclusiv gălușca de griș din supă; ingredientele păstrează calificatorul.",
+      "category_hypothesis": "gastronomie",
+      "planned_ordinary_form_hypotheses": [
+        "gălușcă",
+        "gălușca",
+        "găluște",
+        "găluștele",
+        "găluștii",
+        "găluștelor",
+        "găluștei"
+      ],
+      "form_attention": [
+        {
+          "surface": "gălușcă",
+          "key": "galusca",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "gălușca",
+          "key": "galusca",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "găluște",
+          "key": "galuste",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "găluștele",
+          "key": "galustele",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "găluștii",
+          "key": "galustii",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "găluștelor",
+          "key": "galustelor",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "găluștei",
+          "key": "galustei",
+          "status": "uncovered_head_attention"
+        }
+      ],
+      "graph_skeleton": [
+        {
+          "endpoint_id": "n_gas_supa_galuste",
+          "label_ro": "Supă cu găluște",
+          "category": "gastronomie",
+          "current_description": "Supă limpede cu găluște de griș, reper al prânzurilor de familie.",
+          "endpoint_kind": "current_main",
+          "direction": "current_to_new",
+          "src": "n_gas_supa_galuste",
+          "dst": "prospective:galusca",
+          "relation_hypothesis": "contains",
+          "caption_hypothesis_ro": "conține găluște de griș",
+          "bidirectional": 0,
+          "is_distractor": 0
+        },
+        {
+          "endpoint_id": "n_v84_food_gris",
+          "label_ro": "Griș",
+          "category": "gastronomie",
+          "current_description": "Produs granular din cereale, folosit inclusiv la găluștele din supă.",
+          "endpoint_kind": "current_main",
+          "direction": "new_to_current",
+          "src": "prospective:galusca",
+          "dst": "n_v84_food_gris",
+          "relation_hypothesis": "can_use",
+          "caption_hypothesis_ro": "găluștele de griș se fac cu griș",
+          "bidirectional": 0,
+          "is_distractor": 0
+        },
+        {
+          "endpoint_id": "n_v4gas_ou",
+          "label_ro": "Ou",
+          "category": "gastronomie",
+          "current_description": "Ingredient alimentar folosit la gătit, copt și preparate festive.",
+          "endpoint_kind": "current_main",
+          "direction": "new_to_current",
+          "src": "prospective:galusca",
+          "dst": "n_v4gas_ou",
+          "relation_hypothesis": "can_use",
+          "caption_hypothesis_ro": "găluștele de griș se pot prepara cu ou",
+          "bidirectional": 0,
+          "is_distractor": 0
+        },
+        {
+          "endpoint_id": "n_v24_food_pantry_faina",
+          "label_ro": "Făină",
+          "category": "gastronomie",
+          "current_description": "Concept cotidian din grupul «ingrediente de bază»: Făină.",
+          "endpoint_kind": "current_main",
+          "direction": "new_to_current",
+          "src": "prospective:galusca",
+          "dst": "n_v24_food_pantry_faina",
+          "relation_hypothesis": "can_use",
+          "caption_hypothesis_ro": "unele găluște se prepară cu făină",
+          "bidirectional": 0,
+          "is_distractor": 0
+        }
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "current_main": 4,
+        "same_unchanged_category": 4,
+        "batch_peers": 0
+      },
+      "source_status": "unresearched; not an eligible wave selection",
+      "game_potential": "After separate source review and authorized integration only: literal Cald typed-input recognition and readable directed Lanț associations. No target, route, recipe, board or round approval.",
+      "morphology_attention_note": "Găluștii / găluștei are alternative unverified genitive hypotheses here; exact-head DOOM3 and attributed own-table proof must determine the retained family. Neither is approved by this pass.",
+      "normative_paradigm_verified": false,
+      "full_step1_clearance": false,
+      "source_approved": false,
+      "target_approved": false,
+      "playable_round_approved": false,
+      "installed": 0
+    },
+    {
+      "head": "glazură",
+      "kind": "new_concept_lexical_backlog_hypothesis",
+      "prospective_id_only": "prospective:glazura",
+      "selected_sense_hypothesis": "Strat de acoperire al unui preparat dulce; fără sensurile de ceramică sau poleire.",
+      "category_hypothesis": "gastronomie",
+      "planned_ordinary_form_hypotheses": [
+        "glazură",
+        "glazura",
+        "glazuri",
+        "glazurile",
+        "glazurii",
+        "glazurilor"
+      ],
+      "form_attention": [
+        {
+          "surface": "glazură",
+          "key": "glazura",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "glazura",
+          "key": "glazura",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "glazuri",
+          "key": "glazuri",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "glazurile",
+          "key": "glazurile",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "glazurii",
+          "key": "glazurii",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "glazurilor",
+          "key": "glazurilor",
+          "status": "uncovered_head_attention"
+        }
+      ],
+      "graph_skeleton": [
+        {
+          "endpoint_id": "n_v85_food_ciocolata",
+          "label_ro": "Ciocolată",
+          "category": "gastronomie",
+          "current_description": "Produs dulce pe bază de cacao, consumat ca atare sau folosit la deserturi.",
+          "endpoint_kind": "current_main",
+          "direction": "new_to_current",
+          "src": "prospective:glazura",
+          "dst": "n_v85_food_ciocolata",
+          "relation_hypothesis": "can_use",
+          "caption_hypothesis_ro": "se poate prepara cu ciocolată",
+          "bidirectional": 0,
+          "is_distractor": 0
+        },
+        {
+          "endpoint_id": "n_v24_food_pantry_zahar",
+          "label_ro": "Zahăr",
+          "category": "gastronomie",
+          "current_description": "Concept cotidian din grupul «ingrediente de bază»: Zahăr.",
+          "endpoint_kind": "current_main",
+          "direction": "new_to_current",
+          "src": "prospective:glazura",
+          "dst": "n_v24_food_pantry_zahar",
+          "relation_hypothesis": "can_use",
+          "caption_hypothesis_ro": "se poate prepara cu zahăr",
+          "bidirectional": 0,
+          "is_distractor": 0
+        },
+        {
+          "endpoint_id": "n_v18gas_amandina",
+          "label_ro": "Amandină",
+          "category": "gastronomie",
+          "current_description": "Prăjitură clasică de cofetărie românească: blat de cacao însiropat, cremă de ciocolată și glazură de fondant. Reper al cofetăriilor de cartier de zeci de ani.",
+          "endpoint_kind": "current_main",
+          "direction": "current_to_new",
+          "src": "n_v18gas_amandina",
+          "dst": "prospective:glazura",
+          "relation_hypothesis": "has_coating",
+          "caption_hypothesis_ro": "are glazură de fondant",
+          "bidirectional": 0,
+          "is_distractor": 0
+        },
+        {
+          "endpoint_id": "n_v21gas_ecler",
+          "label_ro": "Ecler",
+          "category": "gastronomie",
+          "current_description": "Prăjitură de cofetărie din aluat opărit, umplută cu cremă de vanilie și glazurată cu ciocolată sau fondant. Un clasic al cofetăriilor românești, cerut și astăzi la felie cu amandina și savarina.",
+          "endpoint_kind": "current_main",
+          "direction": "current_to_new",
+          "src": "n_v21gas_ecler",
+          "dst": "prospective:glazura",
+          "relation_hypothesis": "has_coating",
+          "caption_hypothesis_ro": "poate avea glazură de ciocolată sau fondant",
+          "bidirectional": 0,
+          "is_distractor": 0
+        }
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "current_main": 4,
+        "same_unchanged_category": 4,
+        "batch_peers": 0
+      },
+      "source_status": "unresearched; not an eligible wave selection",
+      "game_potential": "After separate source review and authorized integration only: literal Cald typed-input recognition and readable directed Lanț associations. No target, route, recipe, board or round approval.",
+      "normative_paradigm_verified": false,
+      "full_step1_clearance": false,
+      "source_approved": false,
+      "target_approved": false,
+      "playable_round_approved": false,
+      "installed": 0
+    },
+    {
+      "head": "conifer",
+      "kind": "new_concept_lexical_backlog_hypothesis",
+      "prospective_id_only": "prospective:conifer",
+      "selected_sense_hypothesis": "Plantă lemnoasă din grupul coniferelor; parent botanic recognoscibil pentru brad, pin și molid.",
+      "category_hypothesis": "stiinta",
+      "planned_ordinary_form_hypotheses": [
+        "conifer",
+        "coniferul",
+        "conifere",
+        "coniferele",
+        "coniferului",
+        "coniferelor"
+      ],
+      "form_attention": [
+        {
+          "surface": "conifer",
+          "key": "conifer",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "coniferul",
+          "key": "coniferul",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "conifere",
+          "key": "conifere",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "coniferele",
+          "key": "coniferele",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "coniferului",
+          "key": "coniferului",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "coniferelor",
+          "key": "coniferelor",
+          "status": "uncovered_head_attention"
+        }
+      ],
+      "graph_skeleton": [
+        {
+          "endpoint_id": "n_v1_8_brad",
+          "label_ro": "Brad",
+          "category": "stiinta",
+          "current_description": "Arbore conifer cu frunze în formă de ace, care rămân verzi și iarna.",
+          "endpoint_kind": "current_main",
+          "direction": "current_to_new",
+          "src": "n_v1_8_brad",
+          "dst": "prospective:conifer",
+          "relation_hypothesis": "is_a",
+          "caption_hypothesis_ro": "este conifer",
+          "bidirectional": 0,
+          "is_distractor": 0
+        },
+        {
+          "endpoint_id": "n_v1_12_pin",
+          "label_ro": "Pin",
+          "category": "stiinta",
+          "current_description": "Arbore conifer cu frunze persistente în formă de ace; aici, sensul botanic, exemplificat prin pinul silvestru.",
+          "endpoint_kind": "current_main",
+          "direction": "current_to_new",
+          "src": "n_v1_12_pin",
+          "dst": "prospective:conifer",
+          "relation_hypothesis": "is_a",
+          "caption_hypothesis_ro": "este conifer",
+          "bidirectional": 0,
+          "is_distractor": 0
+        },
+        {
+          "endpoint_id": "n_v1_12_molid",
+          "label_ro": "Molid",
+          "category": "stiinta",
+          "current_description": "Arbore conifer cu frunze aciculare persistente și conuri atârnate; aici, molidul comun.",
+          "endpoint_kind": "current_main",
+          "direction": "current_to_new",
+          "src": "n_v1_12_molid",
+          "dst": "prospective:conifer",
+          "relation_hypothesis": "is_a",
+          "caption_hypothesis_ro": "este conifer",
+          "bidirectional": 0,
+          "is_distractor": 0
+        },
+        {
+          "endpoint_id": "n_v4sti_planta",
+          "label_ro": "plantă",
+          "category": "stiinta",
+          "current_description": "Organism viu care face fotosinteză și are celule vegetale.",
+          "endpoint_kind": "current_main",
+          "direction": "new_to_current",
+          "src": "prospective:conifer",
+          "dst": "n_v4sti_planta",
+          "relation_hypothesis": "is_a",
+          "caption_hypothesis_ro": "este plantă lemnoasă",
+          "bidirectional": 0,
+          "is_distractor": 0
+        }
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "current_main": 4,
+        "same_unchanged_category": 4,
+        "batch_peers": 0
+      },
+      "source_status": "unresearched; not an eligible wave selection",
+      "game_potential": "After separate source review and authorized integration only: literal Cald typed-input recognition and readable directed Lanț associations. No target, route, recipe, board or round approval.",
+      "normative_paradigm_verified": false,
+      "full_step1_clearance": false,
+      "source_approved": false,
+      "target_approved": false,
+      "playable_round_approved": false,
+      "installed": 0
+    },
+    {
+      "head": "balet",
+      "kind": "new_concept_lexical_backlog_hypothesis",
+      "prospective_id_only": "prospective:balet",
+      "selected_sense_hypothesis": "Formă de dans scenic și reprezentație artistică; sens cultural comun, fără companie sau instituție nouă.",
+      "category_hypothesis": "arta_cultura",
+      "planned_ordinary_form_hypotheses": [
+        "balet",
+        "baletul",
+        "balete",
+        "baletele",
+        "baletului",
+        "baletelor"
+      ],
+      "form_attention": [
+        {
+          "surface": "balet",
+          "key": "balet",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "baletul",
+          "key": "baletul",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "balete",
+          "key": "balete",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "baletele",
+          "key": "baletele",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "baletului",
+          "key": "baletului",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "baletelor",
+          "key": "baletelor",
+          "status": "uncovered_head_attention"
+        }
+      ],
+      "graph_skeleton": [
+        {
+          "endpoint_id": "n_v4art_dans",
+          "label_ro": "Dans",
+          "category": "arta_cultura",
+          "current_description": "Mișcare ritmică a corpului, folosită în artă, ritual și divertisment.",
+          "endpoint_kind": "current_main",
+          "direction": "new_to_current",
+          "src": "prospective:balet",
+          "dst": "n_v4art_dans",
+          "relation_hypothesis": "is_a",
+          "caption_hypothesis_ro": "este formă de dans scenic",
+          "bidirectional": 0,
+          "is_distractor": 0
+        },
+        {
+          "endpoint_id": "n_v4art_scena",
+          "label_ro": "Scenă",
+          "category": "arta_cultura",
+          "current_description": "Spațiu de joc pentru teatru, muzică, dans sau alte reprezentații.",
+          "endpoint_kind": "current_main",
+          "direction": "new_to_current",
+          "src": "prospective:balet",
+          "dst": "n_v4art_scena",
+          "relation_hypothesis": "performed_on",
+          "caption_hypothesis_ro": "se prezintă pe scenă",
+          "bidirectional": 0,
+          "is_distractor": 0
+        },
+        {
+          "endpoint_id": "n_v4art_dansator",
+          "label_ro": "Dansator",
+          "category": "arta_cultura",
+          "current_description": "Persoană care interpretează dansuri pe scenă sau în tradiții populare.",
+          "endpoint_kind": "current_main",
+          "direction": "new_to_current",
+          "src": "prospective:balet",
+          "dst": "n_v4art_dansator",
+          "relation_hypothesis": "performed_by",
+          "caption_hypothesis_ro": "este interpretat de dansatori",
+          "bidirectional": 0,
+          "is_distractor": 0
+        },
+        {
+          "endpoint_id": "n_v4art_spectacol",
+          "label_ro": "Spectacol",
+          "category": "arta_cultura",
+          "current_description": "Reprezentație artistică văzută de public pe scenă sau într-o sală.",
+          "endpoint_kind": "current_main",
+          "direction": "new_to_current",
+          "src": "prospective:balet",
+          "dst": "n_v4art_spectacol",
+          "relation_hypothesis": "presented_as",
+          "caption_hypothesis_ro": "se prezintă ca spectacol artistic",
+          "bidirectional": 0,
+          "is_distractor": 0
+        }
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "current_main": 4,
+        "same_unchanged_category": 4,
+        "batch_peers": 0
+      },
+      "source_status": "unresearched; not an eligible wave selection",
+      "game_potential": "After separate source review and authorized integration only: literal Cald typed-input recognition and readable directed Lanț associations. No target, route, recipe, board or round approval.",
+      "normative_paradigm_verified": false,
+      "full_step1_clearance": false,
+      "source_approved": false,
+      "target_approved": false,
+      "playable_round_approved": false,
+      "installed": 0
+    },
+    {
+      "head": "fabulă",
+      "kind": "new_concept_lexical_backlog_hypothesis",
+      "prospective_id_only": "prospective:fabula",
+      "selected_sense_hypothesis": "Scurtă operă literară cu semnificație morală; specie familiară din școală.",
+      "category_hypothesis": "literatura",
+      "planned_ordinary_form_hypotheses": [
+        "fabulă",
+        "fabula",
+        "fabule",
+        "fabulele",
+        "fabulei",
+        "fabulelor"
+      ],
+      "form_attention": [
+        {
+          "surface": "fabulă",
+          "key": "fabula",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "fabula",
+          "key": "fabula",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "fabule",
+          "key": "fabule",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "fabulele",
+          "key": "fabulele",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "fabulei",
+          "key": "fabulei",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "fabulelor",
+          "key": "fabulelor",
+          "status": "uncovered_head_attention"
+        }
+      ],
+      "graph_skeleton": [
+        {
+          "endpoint_id": "n_v20lit_grigore_alexandrescu",
+          "label_ro": "Grigore Alexandrescu",
+          "category": "literatura",
+          "current_description": "Poet pașoptist, cel mai important fabulist român, autor al fabulelor Câinele și cățelul și Boul și vițelul. A scris și meditația romantică Umbra lui Mircea. La Cozia, inspirată de o vizită la mănăstirea Cozia.",
+          "endpoint_kind": "current_main",
+          "direction": "current_to_new",
+          "src": "n_v20lit_grigore_alexandrescu",
+          "dst": "prospective:fabula",
+          "relation_hypothesis": "wrote",
+          "caption_hypothesis_ro": "a scris fabule",
+          "bidirectional": 0,
+          "is_distractor": 0
+        },
+        {
+          "endpoint_id": "n_v2lit_personaj_literar",
+          "label_ro": "Personaj literar",
+          "category": "literatura",
+          "current_description": "Figură fictivă sau narativă dintr-o operă literară.",
+          "endpoint_kind": "current_main",
+          "direction": "new_to_current",
+          "src": "prospective:fabula",
+          "dst": "n_v2lit_personaj_literar",
+          "relation_hypothesis": "features",
+          "caption_hypothesis_ro": "folosește personaje literare",
+          "bidirectional": 0,
+          "is_distractor": 0
+        },
+        {
+          "endpoint_id": "n_v3lit_vers",
+          "label_ro": "Vers",
+          "category": "literatura",
+          "current_description": "Rând al unei poezii, cu ritm sau rimă.",
+          "endpoint_kind": "current_main",
+          "direction": "new_to_current",
+          "src": "prospective:fabula",
+          "dst": "n_v3lit_vers",
+          "relation_hypothesis": "can_be_written_as",
+          "caption_hypothesis_ro": "poate fi scrisă în versuri",
+          "bidirectional": 0,
+          "is_distractor": 0
+        },
+        {
+          "endpoint_id": "n_v4lit_proza",
+          "label_ro": "proză",
+          "category": "literatura",
+          "current_description": "Formă literară scrisă fără versificație regulată.",
+          "endpoint_kind": "current_main",
+          "direction": "new_to_current",
+          "src": "prospective:fabula",
+          "dst": "n_v4lit_proza",
+          "relation_hypothesis": "can_be_written_as",
+          "caption_hypothesis_ro": "poate fi scrisă în proză",
+          "bidirectional": 0,
+          "is_distractor": 0
+        }
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "current_main": 4,
+        "same_unchanged_category": 4,
+        "batch_peers": 0
+      },
+      "source_status": "unresearched; not an eligible wave selection",
+      "game_potential": "After separate source review and authorized integration only: literal Cald typed-input recognition and readable directed Lanț associations. No target, route, recipe, board or round approval.",
+      "normative_paradigm_verified": false,
+      "full_step1_clearance": false,
+      "source_approved": false,
+      "target_approved": false,
+      "playable_round_approved": false,
+      "installed": 0
+    },
+    {
+      "head": "piele",
+      "kind": "existing_owner_family_backlog_hypothesis",
+      "owner_id": "n_v4sti_piele",
+      "current_owner": {
+        "id": "n_v4sti_piele",
+        "label_ro": "piele",
+        "category": "stiinta",
+        "description": "Învelișul extern al corpului, cu rol de protecție și simț tactil."
+      },
+      "selected_sense_hypothesis": "Învelișul extern al corpului, cu rol de protecție și simț tactil.",
+      "category": "stiinta",
+      "input_classification_hypothesis": "ordinary_morphology_of_existing_selected_lexeme",
+      "planned_ordinary_form_hypotheses": [
+        "piele",
+        "piei",
+        "pieile",
+        "pieilor",
+        "pielea",
+        "pielii"
+      ],
+      "missing_surface_hypotheses": [
+        "piei",
+        "pieile",
+        "pieilor"
+      ],
+      "form_attention": [
+        {
+          "surface": "piele",
+          "key": "piele",
+          "status": "covered_current_owner",
+          "current_owners": [
+            {
+              "id": "n_v4sti_piele",
+              "label_ro": "piele",
+              "category": "stiinta",
+              "description": "Învelișul extern al corpului, cu rol de protecție și simț tactil."
+            }
+          ]
+        },
+        {
+          "surface": "piei",
+          "key": "piei",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "pieile",
+          "key": "pieile",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "pieilor",
+          "key": "pieilor",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "pielea",
+          "key": "pielea",
+          "status": "covered_current_owner",
+          "current_owners": [
+            {
+              "id": "n_v4sti_piele",
+              "label_ro": "piele",
+              "category": "stiinta",
+              "description": "Învelișul extern al corpului, cu rol de protecție și simț tactil."
+            }
+          ]
+        },
+        {
+          "surface": "pielii",
+          "key": "pielii",
+          "status": "covered_current_owner",
+          "current_owners": [
+            {
+              "id": "n_v4sti_piele",
+              "label_ro": "piele",
+              "category": "stiinta",
+              "description": "Învelișul extern al corpului, cu rol de protecție și simț tactil."
+            }
+          ]
+        }
+      ],
+      "head_family_attention": {
+        "surface": "piele",
+        "key": "piele",
+        "status": "covered_current_owner",
+        "current_owners": [
+          {
+            "id": "n_v4sti_piele",
+            "label_ro": "piele",
+            "category": "stiinta",
+            "description": "Învelișul extern al corpului, cu rol de protecție și simț tactil."
+          }
+        ]
+      },
+      "sense_attention_notes": [
+        "Plural piei often evokes detached animal hides; verify exact anatomical-sense compatibility before retaining any plural. No hide/leather sense widening."
+      ],
+      "source_status": "unresearched; not an eligible wave selection",
+      "game_potential": "After exact-sense source review and authorized integration only: literal Cald typed-guess and Lanț typed-move recognition for this existing owner; no new graph claims, targets or rounds.",
+      "normative_paradigm_verified": false,
+      "full_step1_clearance": false,
+      "source_approved": false,
+      "target_approved": false,
+      "playable_round_approved": false,
+      "installed": 0
+    },
+    {
+      "head": "ghicitoare",
+      "kind": "existing_owner_family_backlog_hypothesis",
+      "owner_id": "n_v42lim_ghicitoare",
+      "current_owner": {
+        "id": "n_v42lim_ghicitoare",
+        "label_ro": "Ghicitoare",
+        "category": "limba",
+        "description": "Întrebare-joc din folclor: «Are foi și nu-i copac» (cartea)."
+      },
+      "selected_sense_hypothesis": "Întrebare-joc din folclor: «Are foi și nu-i copac» (cartea).",
+      "category": "limba",
+      "input_classification_hypothesis": "ordinary_morphology_of_existing_selected_lexeme",
+      "planned_ordinary_form_hypotheses": [
+        "ghicitoare",
+        "ghicitori",
+        "ghicitorile",
+        "ghicitorii",
+        "ghicitorilor"
+      ],
+      "missing_surface_hypotheses": [
+        "ghicitori",
+        "ghicitorile",
+        "ghicitorii",
+        "ghicitorilor"
+      ],
+      "form_attention": [
+        {
+          "surface": "ghicitoare",
+          "key": "ghicitoare",
+          "status": "covered_current_owner",
+          "current_owners": [
+            {
+              "id": "n_v42lim_ghicitoare",
+              "label_ro": "Ghicitoare",
+              "category": "limba",
+              "description": "Întrebare-joc din folclor: «Are foi și nu-i copac» (cartea)."
+            }
+          ]
+        },
+        {
+          "surface": "ghicitori",
+          "key": "ghicitori",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "ghicitorile",
+          "key": "ghicitorile",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "ghicitorii",
+          "key": "ghicitorii",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "ghicitorilor",
+          "key": "ghicitorilor",
+          "status": "uncovered_head_attention"
+        }
+      ],
+      "head_family_attention": {
+        "surface": "ghicitoare",
+        "key": "ghicitoare",
+        "status": "covered_current_owner",
+        "current_owners": [
+          {
+            "id": "n_v42lim_ghicitoare",
+            "label_ro": "Ghicitoare",
+            "category": "limba",
+            "description": "Întrebare-joc din folclor: «Are foi și nu-i copac» (cartea)."
+          }
+        ]
+      },
+      "source_status": "unresearched; not an eligible wave selection",
+      "game_potential": "After exact-sense source review and authorized integration only: literal Cald typed-guess and Lanț typed-move recognition for this existing owner; no new graph claims, targets or rounds.",
+      "normative_paradigm_verified": false,
+      "full_step1_clearance": false,
+      "source_approved": false,
+      "target_approved": false,
+      "playable_round_approved": false,
+      "installed": 0
+    },
+    {
+      "head": "virus",
+      "kind": "existing_owner_family_backlog_hypothesis",
+      "owner_id": "n_v4sti_virus",
+      "current_owner": {
+        "id": "n_v4sti_virus",
+        "label_ro": "virus",
+        "category": "stiinta",
+        "description": "Agent infecțios microscopic care se reproduce în celule vii."
+      },
+      "selected_sense_hypothesis": "Agent infecțios microscopic care se reproduce în celule vii.",
+      "category": "stiinta",
+      "input_classification_hypothesis": "ordinary_morphology_of_existing_selected_lexeme",
+      "planned_ordinary_form_hypotheses": [
+        "virus",
+        "viruși",
+        "virușii",
+        "virusul",
+        "virusului",
+        "virușilor"
+      ],
+      "missing_surface_hypotheses": [
+        "virușii",
+        "virusului",
+        "virușilor"
+      ],
+      "form_attention": [
+        {
+          "surface": "virus",
+          "key": "virus",
+          "status": "covered_current_owner",
+          "current_owners": [
+            {
+              "id": "n_v4sti_virus",
+              "label_ro": "virus",
+              "category": "stiinta",
+              "description": "Agent infecțios microscopic care se reproduce în celule vii."
+            }
+          ]
+        },
+        {
+          "surface": "viruși",
+          "key": "virusi",
+          "status": "covered_current_owner",
+          "current_owners": [
+            {
+              "id": "n_v4sti_virus",
+              "label_ro": "virus",
+              "category": "stiinta",
+              "description": "Agent infecțios microscopic care se reproduce în celule vii."
+            }
+          ]
+        },
+        {
+          "surface": "virușii",
+          "key": "virusii",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "virusul",
+          "key": "virusul",
+          "status": "covered_current_owner",
+          "current_owners": [
+            {
+              "id": "n_v4sti_virus",
+              "label_ro": "virus",
+              "category": "stiinta",
+              "description": "Agent infecțios microscopic care se reproduce în celule vii."
+            }
+          ]
+        },
+        {
+          "surface": "virusului",
+          "key": "virusului",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "virușilor",
+          "key": "virusilor",
+          "status": "uncovered_head_attention"
+        }
+      ],
+      "head_family_attention": {
+        "surface": "virus",
+        "key": "virus",
+        "status": "covered_current_owner",
+        "current_owners": [
+          {
+            "id": "n_v4sti_virus",
+            "label_ro": "virus",
+            "category": "stiinta",
+            "description": "Agent infecțios microscopic care se reproduce în celule vii."
+          }
+        ]
+      },
+      "source_status": "unresearched; not an eligible wave selection",
+      "game_potential": "After exact-sense source review and authorized integration only: literal Cald typed-guess and Lanț typed-move recognition for this existing owner; no new graph claims, targets or rounds.",
+      "normative_paradigm_verified": false,
+      "full_step1_clearance": false,
+      "source_approved": false,
+      "target_approved": false,
+      "playable_round_approved": false,
+      "installed": 0
+    },
+    {
+      "head": "vecin",
+      "kind": "existing_owner_family_backlog_hypothesis",
+      "owner_id": "n_v2via_vecini",
+      "current_owner": {
+        "id": "n_v2via_vecini",
+        "label_ro": "Vecini",
+        "category": "viata_de_roman",
+        "description": "Oamenii care locuiesc aproape și apar în rutina scării sau a curții."
+      },
+      "selected_sense_hypothesis": "Oamenii care locuiesc aproape și apar în rutina scării sau a curții.",
+      "category": "viata_de_roman",
+      "input_classification_hypothesis": "ordinary_number_variant_of_existing_plural_label",
+      "planned_ordinary_form_hypotheses": [
+        "vecin",
+        "vecini",
+        "vecinii",
+        "vecinul",
+        "vecinului",
+        "vecinilor"
+      ],
+      "missing_surface_hypotheses": [
+        "vecinul",
+        "vecinului",
+        "vecinilor"
+      ],
+      "form_attention": [
+        {
+          "surface": "vecin",
+          "key": "vecin",
+          "status": "covered_current_owner",
+          "current_owners": [
+            {
+              "id": "n_v2via_vecini",
+              "label_ro": "Vecini",
+              "category": "viata_de_roman",
+              "description": "Oamenii care locuiesc aproape și apar în rutina scării sau a curții."
+            }
+          ]
+        },
+        {
+          "surface": "vecini",
+          "key": "vecini",
+          "status": "covered_current_owner",
+          "current_owners": [
+            {
+              "id": "n_v2via_vecini",
+              "label_ro": "Vecini",
+              "category": "viata_de_roman",
+              "description": "Oamenii care locuiesc aproape și apar în rutina scării sau a curții."
+            }
+          ]
+        },
+        {
+          "surface": "vecinii",
+          "key": "vecinii",
+          "status": "covered_current_owner",
+          "current_owners": [
+            {
+              "id": "n_v2via_vecini",
+              "label_ro": "Vecini",
+              "category": "viata_de_roman",
+              "description": "Oamenii care locuiesc aproape și apar în rutina scării sau a curții."
+            }
+          ]
+        },
+        {
+          "surface": "vecinul",
+          "key": "vecinul",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "vecinului",
+          "key": "vecinului",
+          "status": "uncovered_head_attention"
+        },
+        {
+          "surface": "vecinilor",
+          "key": "vecinilor",
+          "status": "uncovered_head_attention"
+        }
+      ],
+      "head_family_attention": {
+        "surface": "vecin",
+        "key": "vecin",
+        "status": "covered_current_owner",
+        "current_owners": [
+          {
+            "id": "n_v2via_vecini",
+            "label_ro": "Vecini",
+            "category": "viata_de_roman",
+            "description": "Oamenii care locuiesc aproape și apar în rutina scării sau a curții."
+          }
+        ]
+      },
+      "sense_attention_notes": [
+        "Current label is Vecini. Treat selected singular morphology as ordinary_number_variant_of_existing_plural_label, not a new owner or synonym."
+      ],
+      "source_status": "unresearched; not an eligible wave selection",
+      "game_potential": "After exact-sense source review and authorized integration only: literal Cald typed-guess and Lanț typed-move recognition for this existing owner; no new graph claims, targets or rounds.",
+      "normative_paradigm_verified": false,
+      "full_step1_clearance": false,
+      "source_approved": false,
+      "target_approved": false,
+      "playable_round_approved": false,
+      "installed": 0
+    }
+  ],
+  "protected_shared_family_attention": {
+    "owners": [
+      {
+        "id": "n_v24_people_grandparents_bunic",
+        "label_ro": "Bunic",
+        "category": "societate",
+        "description": "Concept cotidian din grupul «bunici și mătuși»: Bunic."
+      },
+      {
+        "id": "n_v24_people_grandparents_bunica",
+        "label_ro": "Bunică",
+        "category": "societate",
+        "description": "Concept cotidian din grupul «bunici și mătuși»: Bunică."
+      }
+    ],
+    "surfaces": [
+      "bunici",
+      "bunicii",
+      "bunicilor"
+    ],
+    "key_statuses": [
+      {
+        "surface": "bunici",
+        "key": "bunici",
+        "status": "uncovered_head_attention"
+      },
+      {
+        "surface": "bunicii",
+        "key": "bunicii",
+        "status": "uncovered_head_attention"
+      },
+      {
+        "surface": "bunicilor",
+        "key": "bunicilor",
+        "status": "uncovered_head_attention"
+      }
+    ],
+    "decision": "Do not select either family in this pass. The proposed ordinary keys would compete between two existing exact owners. This is future family collision attention, not a claim of a current accepted-payload collision, a reservation or a new hold ruling."
+  },
+  "attention_summary": {
+    "fresh_distinct_head_surface_hypotheses": 358,
+    "fresh_head_dispositions": {
+      "uncovered_head_attention": 94,
+      "preserve_family_sense_attention": 4,
+      "covered_accepted_payload": 98,
+      "preserve_hold": 33,
+      "covered_current_owner": 129
+    },
+    "current_owner_families_with_one_exact_owner_checked": 101,
+    "families_with_any_missing_hypothesis": 41,
+    "retained_residual_hypotheses": 10,
+    "new_concept_hypotheses": 6,
+    "existing_owner_family_hypotheses": 4,
+    "new_concept_graph_claim_hypotheses": 24,
+    "all_new_skeletons_use_4_current_main_owners": true,
+    "all_new_skeletons_have_at_least_2_same_unchanged_category_owners": true,
+    "batch_peer_edges": 0,
+    "source_approvals": 0,
+    "next_wave_started": false,
+    "unverified_family_cross_owner_conflicts": {}
+  },
+  "raw_attention_reference": {
+    "path": "/home/dobo/work/_temp/content__v1-41-school-objects-language-and-common-inputs/continuation-selection/offline-attention.json",
+    "sha256": "522f11dcfaf2ea3fce82a3924b864325cd935f05595d039ac027088308ed5d83"
+  },
+  "limitations": [
+    "Planned forms and alternative spellings are unverified hypotheses, never admissions or reservations. Full step1 form/sense/owner/hold clearance and exact-head source evidence remain necessary if separately pursued.",
+    "Actual normalization_map, normalized_index, labels/node aliases, discovery concepts/snapshots and Cald projections were read from identical actual main/feature bundled bytes. Raw/current deferred and accent-preserving ReviewedUnresolved behavior were checked against bound canonical policy and actual unchanged policy sources/service.",
+    "Final accepted canonical payload and final module NODES/ALIASES were used for ownership exclusion; inactive secondary families and final held/legacy dispositions remain protected.",
+    "The six source graph skeletons are author hypotheses, without source support or edge approval. Numeric C3, recognition, opener, salience and gameplay floors were not qualified.",
+    "Cald uses typed guesses; Lanț uses typed moves and clicked displayed labels. Aliases alone add no boards, pairs, partitions, recipes, paths, targets or playable rounds.",
+    "This bounded attention pass does not claim global Romanian vocabulary exhaustion."
+  ],
+  "source_approvals_added": 0,
+  "source_applied": false,
+  "installed": 0,
+  "player_visible_delta": "0/0/0"
+}

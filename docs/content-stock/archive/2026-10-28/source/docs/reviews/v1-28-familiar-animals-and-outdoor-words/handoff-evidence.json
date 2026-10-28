@@ -1,0 +1,300 @@
+{
+  "wave": "1.28",
+  "landing_status": "not_landed",
+  "handoff_status": "owner_review_later",
+  "closed_as": "research_only",
+  "review_commit": "3284c086a6788b7e07edcb3212a477f790483403",
+  "wave_base": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+  "module_path": "scripts/familiar_animals_and_outdoor_words_v1_28_data.py",
+  "module_sha256": "bf1e7d6ef9dd5b351352d957ae2c132a58fc85e3146c19210cb8be005fa4a8f6",
+  "pool_sha256": "17887bfc7938f0d7d5c84804d03072269200239867b7f9e5e7a68d21fccd4e17",
+  "readme_sha256": "6b414f4c0654b9abd30736e0d01e32eafb2ffac3ecc2c968197d2ba8e66ac799",
+  "evidence_files_except_self": {
+    "review-capture-integrity.json": "389d167489df3e8c37fece361d10c5ed8cf529f729c7b9ea7d305990c4bc1536",
+    "README.md": "6b414f4c0654b9abd30736e0d01e32eafb2ffac3ecc2c968197d2ba8e66ac799",
+    "root-mechanical-check.json": "f017d64846694c8943ba7c007ef31dff41494f65fe10e8245c70d615b6a36f19",
+    "reviewed-original.py.txt": "df2c0446273577358c1aa9fd454ca25b0e17650a875f8033ea2b8684895915c6",
+    "review-table.md": "885231d464a392ac3ab5a881fdbcb01b41d065c8353fb95a1ce561a0b7d80938",
+    "graph-quality-review.json": "1c263b798f3824201c11ed5ab20b8010a4ec9a852ac8f35209f96a120069b1c3",
+    "review-application.json": "bcec9851ed1a4fab6de92ff6ce076bcddc1de3da90be2918a657bdef417d9594",
+    "graph-factual-review.json": "78afcc11db1e82aecba088f3ed8d4be7814de37c620845224884f5e752de5cac"
+  },
+  "source_reviewed_pool": {
+    "items": 36,
+    "new_nodes": 36,
+    "existing_input_families": 0,
+    "edges": 144,
+    "missing_normalized_keys": 199,
+    "held": 19,
+    "proposed_lexical_synonym_families": 0,
+    "verified_lexical_synonym_families": 0,
+    "regional_input_families": 0,
+    "applied": 0,
+    "installed": 0,
+    "player_visible_delta": "0/0/0"
+  },
+  "pool_counts": {
+    "idea": 0,
+    "researched": 0,
+    "held": 19,
+    "accepted": 36,
+    "rejected": 0,
+    "installed": 0
+  },
+  "review_bindings": {
+    "factual": {
+      "reviewer": "factual-v1-28",
+      "path": "docs/reviews/v1-28-familiar-animals-and-outdoor-words/graph-factual-review.json",
+      "sha256": "78afcc11db1e82aecba088f3ed8d4be7814de37c620845224884f5e752de5cac",
+      "module_sha256": "df2c0446273577358c1aa9fd454ca25b0e17650a875f8033ea2b8684895915c6",
+      "frozen_pool_sha256": "7248167d6e23e0d3d5fa132503da20b156d181d6518b75c5249d74d782943e6a",
+      "round": 1,
+      "capture_catalog_path": "/home/dobo/work/_temp/content__v1-28-familiar-animals-and-outdoor-words/factual-web/capture-catalog.json",
+      "capture_catalog_sha256": "a54cc0a7e8ac35f3d796a7f1583f7abe7a8c37bd48513f1dc430a576ce30451c"
+    },
+    "quality": {
+      "reviewer": "quality-v1-28",
+      "path": "docs/reviews/v1-28-familiar-animals-and-outdoor-words/graph-quality-review.json",
+      "sha256": "1c263b798f3824201c11ed5ab20b8010a4ec9a852ac8f35209f96a120069b1c3",
+      "module_sha256": "df2c0446273577358c1aa9fd454ca25b0e17650a875f8033ea2b8684895915c6",
+      "frozen_pool_sha256": "7248167d6e23e0d3d5fa132503da20b156d181d6518b75c5249d74d782943e6a",
+      "round": 1,
+      "capture_catalog_path": "/home/dobo/work/_temp/content__v1-28-familiar-animals-and-outdoor-words/quality-web/capture-catalog.json",
+      "capture_catalog_sha256": "5f57254c2e5d4f22ec70826b13ff44a9b28080a77f7d6a6e5d2a6e8f1872fa72"
+    }
+  },
+  "review_scope": {
+    "freshly_web_reviewed_proposals": 37,
+    "directed_captions": 148,
+    "ordinary_keys": 204,
+    "earlier_holds_context_only": 18,
+    "formal_rounds": 1
+  },
+  "baseline": {
+    "validate": "PASS",
+    "export": "PASS",
+    "ops": "PASS",
+    "rails": "PASS",
+    "tests": "PASS",
+    "delta": "PASS",
+    "main-rails": "PASS",
+    "main-tests": "PASS"
+  },
+  "handoff_checks": {
+    "validate": {
+      "command": "go -C go-backend run ./cmd/cat-content validate --root ..",
+      "exit_code": 0,
+      "output_sha256": "1d2e645a4a6946dae65ac9fc067442df3e7a430fc9fee3039e41fd1ee3819976"
+    },
+    "export": {
+      "command": "go -C go-backend run ./cmd/cat-content export --root .. --check",
+      "exit_code": 0,
+      "output_sha256": "4f715aebbcf4c517ca8a5686959372f4ab156e4e62f897e6e5e607156dc5c8fb"
+    },
+    "ops": {
+      "command": "go -C go-backend run ./cmd/cat-content-ops check --root .. --check",
+      "exit_code": 0,
+      "output_sha256": "e7fd15f1a6e05c103f027645f7ceed93387d123ed27c882c83104a823575e311"
+    },
+    "delta": {
+      "command": "go -C go-backend run ./cmd/cat-content-ops delta --root .. --baseline d30b0aa47248b9a5944e015f2daf54cc5a795617 --text",
+      "exit_code": 0,
+      "output_sha256": "b40a630a80b59dd1f32e0aec8fed5fa03768e4fc635c8d8e22378d0ce1ca34ba"
+    }
+  },
+  "prior_protected_refs": [
+    {
+      "branch": "content/v1-14-animals-and-habitats",
+      "commit": "4b634cab38cbce90ac6eb02e0907578335208c69"
+    },
+    {
+      "branch": "content/v1-15-home-school-words",
+      "commit": "2ace3df01d4871fa1990feadd4b485d6be496d81"
+    },
+    {
+      "branch": "content/v1-16-travel-and-street-words",
+      "commit": "ecb50b463d8d1f0300d435126f934fe90b29fe5b"
+    },
+    {
+      "branch": "content/v1-17-garden-and-kitchen-words",
+      "commit": "df2fd5e5196cb1584cb8e330adbc2b71b855fab8"
+    },
+    {
+      "branch": "content/v1-18-body-and-everyday-care",
+      "commit": "69ebb9f3631ac41f4ac80c76c9d6795c29b78fa8"
+    },
+    {
+      "branch": "content/v1-19-tools-and-crafts",
+      "commit": "5159b0417d4f62b46f28b3a4a37dabf9c07bc389"
+    },
+    {
+      "branch": "content/v1-20-school-and-hobbies",
+      "commit": "bc0ed56c826b9bab0c0f9408ff8fd1a36a539f94"
+    },
+    {
+      "branch": "content/v1-21-clothing-and-household-storage",
+      "commit": "be42df68abfbf2a40e879cbe53c671b70d69c6d0"
+    },
+    {
+      "branch": "content/v1-22-home-fixtures-and-materials",
+      "commit": "c10e4c2394ae82dae4f7bd22f56f91ca854f26ba"
+    },
+    {
+      "branch": "content/v1-23-pantry-and-tableware",
+      "commit": "489504300c8ea2c323de7f4e4e497eeb157947e3"
+    },
+    {
+      "branch": "content/v1-24-familiar-foods-and-inputs",
+      "commit": "53a090735baea74bc8c99470070eaf718fe4cc38"
+    },
+    {
+      "branch": "content/v1-25-common-places-and-objects",
+      "commit": "b0de8a38abfaf7366418f5c79df6cb74c224920d"
+    },
+    {
+      "branch": "content/v1-26-school-play-and-devices",
+      "commit": "c7f45781d071a9b784357f8ef7b10f259d6f5121"
+    },
+    {
+      "branch": "content/v1-27-familiar-foods-and-plants",
+      "commit": "93ff482efe7f0c3ce906ce735726f8a3cf8a9649"
+    }
+  ],
+  "this_wave_closure": "branch HEAD;exact SHA pinned in successor scratch summary after commit",
+  "retrospective": {
+    "head_hypotheses": 55,
+    "pool_records": 55,
+    "author_starts": 53,
+    "author_researched": 37,
+    "accepted": 36,
+    "held": 19,
+    "rejected": 0,
+    "installed": 0,
+    "ticks": 9,
+    "commits": 9,
+    "step_ticks": {
+      "0": 1,
+      "1": 1,
+      "2": 5,
+      "3": 1,
+      "5": 1
+    },
+    "primary_hold_buckets": {
+      "dictionary_head_sense_or_unscreened_paradigm": [
+        "turturica",
+        "sturz",
+        "perus",
+        "gandac",
+        "molie",
+        "testoasa",
+        "vipera",
+        "cochilie",
+        "branhie",
+        "inotatoare"
+      ],
+      "unsupported_predeclared_graph_or_dependency": [
+        "bibilica",
+        "gascan",
+        "musuroi",
+        "viespe",
+        "lacusta",
+        "manz",
+        "carapace"
+      ],
+      "preserved_process_boundaries": [
+        "bou",
+        "graur"
+      ]
+    },
+    "blocked": [],
+    "needs_owner": []
+  },
+  "proposals": [
+    "Step 1 \"pre-screen every planned form (headword, plural, articulated, genitive)\" → enumerate every ordinary definite and genitive/dative key explicitly,checking -ie → -ia before web;Molie,Cochilie and Branhie were held because screened -iea guesses differed from observed DOOM3 forms.",
+    "Quality \"label_ro must read true from source to target\" → compare every proposed caption with the endpoint’s full existing description before research,including Cuib’s chick-rearing restriction;quality dropped Bibilică–Cuib and the complete item then had only three neighbours.",
+    "Backlog \"V1.8 everyday core\" → extend continuing growth discovery with familiar professions and community roles,testing Stomatolog/Dentist and Cioban/Păstor as possible exact-sense families;241 offline heads yielded138 preliminary misses and55 next-wave head hypotheses,with zero source or target approvals."
+  ],
+  "next_wave_selection": {
+    "wave": "1.29",
+    "theme": "familiar-people-and-community",
+    "branch": "content/v1-29-familiar-people-and-community",
+    "heads_selected": 55,
+    "heads": [
+      "Bibliotecar",
+      "Pianist",
+      "Violonist",
+      "Chitarist",
+      "Toboșar",
+      "Jurnalist",
+      "Fotograf",
+      "Farmacist",
+      "Stomatolog",
+      "Dentist",
+      "Veterinar",
+      "Infirmier",
+      "Ambulanțier",
+      "Paznic",
+      "Salvamar",
+      "Salvamontist",
+      "Curier",
+      "Taximetrist",
+      "Vatman",
+      "Pilot",
+      "Marinar",
+      "Mecanic",
+      "Dulgher",
+      "Zugrav",
+      "Sudor",
+      "Cizmar",
+      "Coșar",
+      "Ceasornicar",
+      "Olar",
+      "Țesător",
+      "Miner",
+      "Cofetar",
+      "Patiser",
+      "Brutar",
+      "Măcelar",
+      "Ospătar",
+      "Casier",
+      "Coafeză",
+      "Menajeră",
+      "Fermier",
+      "Agricultor",
+      "Grădinar",
+      "Cioban",
+      "Păstor",
+      "Pădurar",
+      "Pescar",
+      "Vânător",
+      "Apicultor",
+      "Morar",
+      "Brânzar",
+      "Lăptar",
+      "Tractorist",
+      "Inginer",
+      "Arhitect",
+      "Traducător"
+    ],
+    "source_accepted": 0,
+    "web_calls": 0,
+    "target_approval": false,
+    "full_paradigm_and_graph_screen_pending": true,
+    "basis": "Continuing growth discovery:ordinary professions and community roles known in Romanian daily life,school and culture. Frequency is positive only.",
+    "owner_attention": [
+      "A head miss does not establish semantic novelty;check all main,qualified/plural and protected pool owners before web.",
+      "Stomatolog/Dentist and Cioban/Păstor are possible exact selected-sense families,not verified synonyms or duplicate-concept grants;reconcile their complete paradigms before research.",
+      "Occupation nouns must not acquire adjective,tool,plant,technical-rank,religious or figurative homographs. Curier has a qualified live Coletul de la curier attention to inspect.",
+      "No medical,care,legal or safety guidance is proposed;role vocabulary still needs exact Romanian sources and honest fixed endpoint senses.",
+      "All new nodes require 4–8 supported predeclared neighbours,at least two on main and in category,at most two in batch;no generic filler to make roles pass.",
+      "No HCI target,salience,board,round,route or recipe is approved by this preliminary selection."
+    ]
+  },
+  "next_selection_sha256": "69a730d01e12126ad93f777111eba2569317a7739396cce1c4fd48346c00cf70",
+  "next_probe_sha256": "c3dc3db5c0c0d60a99eacf821787f6bbc459de2eac1ade312e4e433c38a51cd2",
+  "source_applied": false,
+  "installed": 0,
+  "player_visible_delta": "0/0/0",
+  "cleanup_operations_this_tick": 0,
+  "remote_operations": 0
+}

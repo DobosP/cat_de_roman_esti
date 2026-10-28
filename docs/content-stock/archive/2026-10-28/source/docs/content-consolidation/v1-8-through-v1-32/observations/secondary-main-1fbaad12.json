@@ -1,0 +1,76 @@
+{
+  "schema": "source-loop-secondary-main-observation-v1",
+  "observed_at_utc": "2026-10-21T08:32:52.642930+00:00",
+  "cause": "External local-main advance; this checkpoint performed no remote operations or main/feature mutations.",
+  "previous_secondary_local_main": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+  "secondary_latest_local_main": "1fbaad1274858d7927ada132ccd305861be2a3af",
+  "primary_feature": {
+    "branch": "feat/gui-cat-m3",
+    "HEAD": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+    "dirty_untracked_paths": [],
+    "unchanged": true
+  },
+  "main_documentation_paths_changed": [
+    "AGENTS.md",
+    "README.md",
+    "WORKLOG.md",
+    "docs/GUI_MIGRATION_HANDOFF.md",
+    "docs/STATUS.md",
+    "docs/adr/0206-owner-authorized-main-publication.md",
+    "docs/adr/README.md",
+    "docs/execplans/gui-game-renovation.md",
+    "docs/execplans/s1-cat.md",
+    "docs/reviews/gui-main-publication/README.md",
+    "docs/tracked-markdown.json"
+  ],
+  "documentation_only_advance": true,
+  "actual_relevant_byte_verification": {
+    "content": {
+      "files": 244,
+      "changed_vs_retained_source_index": [],
+      "primary_feature_equals_actual_secondary_main": true
+    },
+    "interface": {
+      "files": 59,
+      "changed_vs_retained_source_index": [],
+      "primary_feature_equals_actual_secondary_main": true
+    },
+    "adjacent": {
+      "files": 7,
+      "changed_vs_retained_source_index": [],
+      "primary_feature_equals_actual_secondary_main": true
+    },
+    "policy": {
+      "files": 2,
+      "changed_vs_retained_source_index": [],
+      "primary_feature_equals_actual_secondary_main": true
+    }
+  },
+  "retained_exact_authority_index": {
+    "path": "/home/dobo/work/_temp/content__v1-42-familiar-food-materials-and-selected-inputs/feature-working-observation.json",
+    "sha256": "18de1668a326a5a593549e2998777a0df6f0c7585ce6a610959a40fb782ce851",
+    "scope": "The original index and every original baseline remain byte-identical. Actual main and feature bytes were rehashed, not inferred from commit ancestry."
+  },
+  "original_canonical_feature_baseline_preserved": {
+    "path": "current-feature-working-baseline.json",
+    "sha256": "5d0eb5bf28d8e59d93164fd5afe4887657cfe2087cbefd971ca033b176f6b5e8",
+    "canonical_ref": "65d9cfa64479f9b2f0b2a11045d65f8876db5cd8",
+    "secondary_identity_is_historical": true
+  },
+  "source_closure": "d331f6ad79696019b6882d53035572f3da4c7cd1",
+  "source_pool_sha256": "b7b5be791a6b905d44319bc81259a019499de91a0aa5deaf33d32cefe7354005",
+  "source_module_sha256": "931799a338411d2be4a0115d8f8cf75164f95d1687c1344e643e91fb9ecb9b74",
+  "protected_source_closures_preserved": 29,
+  "historical_baselines_preserved": 22,
+  "static_reuse_scope": "Exact content, interface, adjacent and policy byte equality permits reuse of retained ownership/static-contract findings only. Original signed verdicts and source comparisons retain their original identities; no current GUI, runtime, integration, publication or landing qualification is inferred.",
+  "curation_wait_unchanged": true,
+  "next_decision": "Separate qualification of the already proposed five existing-owner families/21 keys, or a concrete uncovered high-value discovery gap. No integration authority.",
+  "source_approvals_added": 0,
+  "new_reviews": 0,
+  "dictionary_requests": 0,
+  "source_module_execution_or_application": 0,
+  "module_dry_run": false,
+  "installed": 0,
+  "player_visible_delta": "0/0/0",
+  "remote_operations_by_this_checkpoint": 0
+}

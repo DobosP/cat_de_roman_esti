@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "wave": "1.37",
+  "reviewed_module_sha256": "027b16d2e274efacdd1aaa5fb11473c1b59a6802951ef2dd2d811ae90359820d",
+  "final_module_sha256": "ef26e599eb8c872641f63dcf712bd94a8ce0831504ef87e4a5664852c69a11fe",
+  "proposal_path": "/home/dobo/work/_temp/content__v1-37-familiar-rural-home-and-school/review/proposal.json",
+  "proposal_sha256": "88e1c8383ce2171a67f7eb0baf32ae8b47d4ddd55e82be0ed96e0cec2bbee9c8",
+  "original_pool_path": "/home/dobo/work/_temp/content__v1-37-familiar-rural-home-and-school/review/pool.original.json",
+  "original_pool_sha256": "f9b851dfa48cc03d01296acaa3ef602ad3c68cdecb8a668e63899b2b02a6fdda",
+  "original_reviewed_module_archive": {
+    "repo_path": "docs/reviews/v1-37-familiar-rural-home-and-school/reviewed-module.json",
+    "archive_sha256": "d656210fa8de144d84129a73f8748f440162961dbad0608a47dec0c4eeacdc51",
+    "decoded_source_sha256": "027b16d2e274efacdd1aaa5fb11473c1b59a6802951ef2dd2d811ae90359820d"
+  },
+  "formal_reports": {
+    "factual": {
+      "reviewer": "factual-v1-37",
+      "repo_report": "docs/reviews/v1-37-familiar-rural-home-and-school/graph-factual-review.json",
+      "report_sha256": "1e05b643b12086e3cfde5db2fa949e3cc7e67f0827d75e630a859a1a660b07ae",
+      "fresh_catalog_path": "/home/dobo/work/_temp/content__v1-37-familiar-rural-home-and-school/review/factual/source-provenance.json",
+      "fresh_catalog_sha256": "83af8cfd2efa1bee3dd4e374e9a0aca6ccd39e623a4156a9f2cd2e4f130726be",
+      "request_ledger_path": "/home/dobo/work/_temp/content__v1-37-familiar-rural-home-and-school/review/factual/requests.json",
+      "request_ledger_sha256": "bda01ec04f0ba8acc90315e4e083adb27ea431a7034182ab2f322641a12bf8b1",
+      "retained_file_manifest_path": "/home/dobo/work/_temp/content__v1-37-familiar-rural-home-and-school/review/factual/root-retained-file-manifest.json",
+      "retained_file_manifest_sha256": "9d60951a1dadd19bf7c631c42d2bf6d20184fb5c5ee77aac1d8b82137c70d9fc",
+      "counts": {
+        "submitted_items": 14,
+        "fresh_dictionary_requests": 31,
+        "HTTP_attempts": 61,
+        "failed_HTTP_attempts": 1,
+        "retained_evidence_files": 125,
+        "retained_evidence_bytes": 9998368,
+        "maximum_item_elapsed_seconds": 64.665482
+      }
+    },
+    "quality": {
+      "reviewer": "quality-v1-37",
+      "repo_report": "docs/reviews/v1-37-familiar-rural-home-and-school/graph-quality-review.json",
+      "report_sha256": "a43c5205b7445a331fcedd811e5bd0e6b13e19ec3c5d59d1b9d2f7c9fda41359",
+      "fresh_catalog_path": "/home/dobo/work/_temp/content__v1-37-familiar-rural-home-and-school/review/quality/fresh-source-provenance.json",
+      "fresh_catalog_sha256": "07b1ec5475076d70eebd11eff61d4971e3d55218bbf8346f4c355c31c1f64cd7",
+      "request_ledger_path": "/home/dobo/work/_temp/content__v1-37-familiar-rural-home-and-school/review/quality/requests.json",
+      "request_ledger_sha256": "05b1851f16079744e4a500707149483c634045b67c68c05cc0b15280f17803de",
+      "retained_file_manifest_path": "/home/dobo/work/_temp/content__v1-37-familiar-rural-home-and-school/review/quality/root-retained-file-manifest.json",
+      "retained_file_manifest_sha256": "fae17020a143c4d1ae56b04d03ccb857609131f921e0b50a490370ae34e924d0",
+      "counts": {
+        "submitted_items": 14,
+        "fresh_dictionary_requests": 30,
+        "HTTP_attempts": 57,
+        "failed_HTTP_attempts": 0,
+        "retained_evidence_files": 108,
+        "retained_evidence_bytes": 9603169,
+        "maximum_item_elapsed_seconds": 51.926994
+      }
+    }
+  },
+  "dictionary_counts": {
+    "total_dictionary_requests": 61,
+    "global_minimum_dictionary_start_gap_seconds": 2.150082,
+    "failed_dictionary_requests": 0,
+    "all_requests_after_freeze": true,
+    "serial_reviewer_dictionary_phases": true
+  },
+  "optimization": {
+    "path": "/home/dobo/work/_temp/content__v1-37-familiar-rural-home-and-school/optimization/owner-optimization.json",
+    "sha256": "cdd62a29420b2a38da1af2ef775a57f540a9a5e4ea817a4d6da069b60ba53682",
+    "automation_update_sha256": "5a93e35d285d6fe5bbc66d0404e2bc6e4589c21814aadd2922f27f605f0b5834"
+  },
+  "mechanical_QA_scope": "One root manifest-driven deterministic provenance/reconciliation check. Original separate reviewer catalogs, request ledgers, captures and decisions remain immutable in the bounded review setup; hash/path references avoid repeating their full payload. Author caches are historical provenance, not fresh reviewer evidence. Failed requests do not support claims.",
+  "formal_reviews": 2,
+  "formal_rounds_per_reviewer": 1,
+  "source_approved_by_manifest": 0,
+  "source_applied": false,
+  "module_imported_or_executed": false,
+  "module_dry_run": false,
+  "installed": 0,
+  "target_approvals": 0,
+  "new_playable_rounds": 0,
+  "player_visible_delta": "0/0/0"
+}

@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "wave": "1.19",
+  "review_round": 1,
+  "reviewed_original_module_sha256": "28ddf477c5e3aeffc9a3e92c8d814863e331039a0d92e818d9bbf5b1cf8025e0",
+  "original_module_file": "reviewed-module.py.txt",
+  "final_module_path": "scripts/tools_and_crafts_v1_19_data.py",
+  "final_module_sha256": "71cbd7116b516d0e07730e9268c1239b3d807345ba5937337f80130489114c4d",
+  "review_sha256": {
+    "factual": "242515f12d701ad2b79f3d83911148e5907aa5e93281cfb7f13c445a1edf500d",
+    "quality": "2c67dd6cfb49d2f051632139643affe47fe73736dd6a56d3a0b3286a0e70de08"
+  },
+  "reviewer_requests_applied": 5,
+  "unique_required_changes_applied": 4,
+  "required_changes_applied": [
+    {
+      "action": "replace_edge_source_binding",
+      "src": "n_v1_19_topor",
+      "dst": "n_v32_workshop_cut_fierastrau",
+      "relation": "related_to",
+      "before": [
+        "https://dexonline.ro/definitie/topor/json",
+        "https://www.gardena.com/ro/produse/copac-arbust-ingrijire/ferastraie-ferastrau-de-gradina/ferastrau-pentru-gradinar-300-p/967238601.html"
+      ],
+      "after": [
+        "https://dexonline.ro/definitie/topor/json",
+        "https://dexonline.ro/definitie/fier%C4%83str%C4%83u/json"
+      ],
+      "sources": [
+        "https://dexonline.ro/definitie/topor/json",
+        "https://dexonline.ro/definitie/fier%C4%83str%C4%83u/json"
+      ],
+      "rationale": "Păstrați predicatul despre tăierea lemnului; legați ambele unelte de definițiile DEX exacte proaspăt verificate, deoarece pagina GARDENA a fierăstrăului a furnizat numai cadrul produsului, fără textul necesar despre lemn. Actualizați aceeași legare în link_targets pentru itemul Topor.",
+      "kind": "replace_edge_source_binding",
+      "reviewers": [
+        "factual",
+        "quality"
+      ],
+      "item_ids": [
+        "v119-topor"
+      ]
+    },
+    {
+      "type": "replace_edge_source_binding",
+      "src": "n_v1_19_nicovala",
+      "dst": "n_v32_workshop_hand_cleste",
+      "relation": "related_to",
+      "before": [
+        "https://biblioteca-digitala.ro/reviste/carte/brasov-muzeu/NEGULICI_Feronerie-brasoveana-XV-XIX_2003.pdf"
+      ],
+      "after": [
+        "https://analelebanatului.ro/static/media/articles/2022/01/19/08_tanase.pdf"
+      ],
+      "sources": [
+        "https://analelebanatului.ro/static/media/articles/2022/01/19/08_tanase.pdf"
+      ],
+      "rationale": "The frozen museum-book URL returned 403; the freshly fetched museum journal explicitly describes gripping the piece on an anvil with tongs.",
+      "execution_scope": "Source module evidence binding only; caption replacement also applies to EDGES label_ro and every matching ITEM_EVIDENCE link claim. Preserve endpoints, relation, forms, strength, direction and all original holds.",
+      "kind": "replace_edge_source_binding",
+      "reviewers": [
+        "quality"
+      ],
+      "item_ids": [
+        "v119-nicovala"
+      ]
+    },
+    {
+      "type": "replace_edge_source_binding",
+      "src": "n_v1_19_teava",
+      "dst": "n_v32_workshop_hand_cleste",
+      "relation": "related_to",
+      "before": [
+        "https://www.knipex.com/ro-ro/produse/cle%C8%99ti-pentru-%C8%9Bevi-%C8%99i-pompe-de-ap%C4%83/knipex-alligator-cleste-pentru-instalatori/knipex-alligator-cleste-pentru-instalatori/8801300?sku=8807250&v=9438"
+      ],
+      "after": [
+        "https://ro.rothenberger.com/ro-ro/produse/cleste-pentru-pompa-de-apa/set-de-clesti-cleste-pentru-tevi-1-1-1-2-cleste-tip-papagal-sp-10-070140x/"
+      ],
+      "sources": [
+        "https://ro.rothenberger.com/ro-ro/produse/cleste-pentru-pompa-de-apa/set-de-clesti-cleste-pentru-tevi-1-1-1-2-cleste-tip-papagal-sp-10-070140x/"
+      ],
+      "rationale": "The frozen Knipex URL returned 403; the freshly fetched Romanian manufacturer page directly establishes gripping pipes with this tool class.",
+      "execution_scope": "Source module evidence binding only; caption replacement also applies to EDGES label_ro and every matching ITEM_EVIDENCE link claim. Preserve endpoints, relation, forms, strength, direction and all original holds.",
+      "kind": "replace_edge_source_binding",
+      "reviewers": [
+        "quality"
+      ],
+      "item_ids": [
+        "v119-teava"
+      ]
+    },
+    {
+      "type": "replace_edge_caption",
+      "src": "n_v1_19_petic",
+      "dst": "n_v30_clothing_everyday_pantaloni",
+      "relation": "related_to",
+      "before": "poate acoperi o ruptură în pantaloni",
+      "after": "poate întări o parte a pantalonilor",
+      "sources": [
+        "https://www.stoklasa.ro/petice-termoadezive-imitatie-piele-intoarsa-x147090"
+      ],
+      "rationale": "The source specifies strengthening garment parts including trousers; repair of a tear in trousers is plausible but is not the product claim verified here.",
+      "execution_scope": "Source module evidence binding only; caption replacement also applies to EDGES label_ro and every matching ITEM_EVIDENCE link claim. Preserve endpoints, relation, forms, strength, direction and all original holds.",
+      "kind": "replace_edge_caption",
+      "reviewers": [
+        "quality"
+      ],
+      "item_ids": [
+        "v119-petic"
+      ]
+    }
+  ],
+  "drops": [],
+  "unrequested_semantic_changes": 0,
+  "form_changes": 0,
+  "node_endpoint_relation_changes": 0,
+  "retained_counts": {
+    "accepted_reviewed_items": 49,
+    "new_concepts": 44,
+    "connections": 171,
+    "missing_normalized_keys": 255,
+    "existing_input_families": 5,
+    "verified_exact_sense_synonym_families": 1,
+    "held": 11,
+    "held_inputs": 0,
+    "installed": 0,
+    "player_visible_delta": "0/0/0"
+  },
+  "scope": "Exact reviewer verdict application only,not a second review;original reviewed snapshot preserved. No writer/dry-run,serving-content mutation,install,main merge,push or runtime authority.",
+  "startup_recovery": "Existing reviewer-agent startups hit capacity before formal work. Fresh agents inherited the current parent model without overrides and kept fixed reviewer labels factual-v1-19/quality-v1-19 in the same initial review round.",
+  "dex_channel_coordination": {
+    "factual_final_start_epoch": 1791917308.6409805,
+    "quality_first_start_epoch": 1791917376.3996916,
+    "cross_reviewer_start_gap_seconds": 67.75871109962463,
+    "minimum_required_seconds": 2.2,
+    "factual_no_further_calls_confirmed": true,
+    "quality_channel_released": true
+  },
+  "evidence_retention_note": "Factual reviewer pruned its owned transient raw network tree (13094645 bytes) after retaining compact evidence. Quality reviewer pruned12superseded owned extracts after checking retained successors. These manifests describe history;deleted raw bytes are not claimed retained. Author source caches,all source branches/worktrees and prior unmerged packets preserved."
+}

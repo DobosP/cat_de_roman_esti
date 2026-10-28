@@ -1,0 +1,263 @@
+{
+  "schema": "source-loop-secondary-main-observation-v1",
+  "observed_at_utc": "2026-10-21T10:28:32.444147+00:00",
+  "cause": "External secondary local-main advance; this checkpoint performs no runtime, test, main or feature mutation and no remote operations.",
+  "previous_secondary_local_main": "1fbaad1274858d7927ada132ccd305861be2a3af",
+  "secondary_latest_local_main": "796696011d6fd662a74ea580ae78952d2ccf3ada",
+  "previous_observation_preserved": {
+    "path": "observations/secondary-main-1fbaad12.json",
+    "sha256": "c340eb22612a778fb275a8cafb44f3b9f20dec01b092cfcbaa364f667d69e020",
+    "canonical_parent_ref": "65d9cfa64479f9b2f0b2a11045d65f8876db5cd8"
+  },
+  "primary_feature": {
+    "branch": "feat/gui-cat-m3",
+    "HEAD": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+    "dirty_untracked_paths": [],
+    "unchanged": true
+  },
+  "documentation_only_advance": false,
+  "changed_paths": [
+    {
+      "path": "WORKLOG.md",
+      "git_delta_status": "M",
+      "secondary_main_sha256": "f322bb13e64dfe575482db988c21d08625f45a923992792c5610af41aa2a08e0",
+      "primary_feature_present": true,
+      "primary_feature_sha256": "413c5d439cf007050ca76aa56c1dd14feaf8309a7ca67663275faf926a0d07ce",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_retained_proof"
+    },
+    {
+      "path": "docs/GUI_MIGRATION_HANDOFF.md",
+      "git_delta_status": "M",
+      "secondary_main_sha256": "d989f52f705841984ab361d5bddcfac65ee18ab10e2d2865ed60463660bc9492",
+      "primary_feature_present": true,
+      "primary_feature_sha256": "c499f12a01252169302aee18bdff7dfc86863e90556dc960fe0ead180b0bae65",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_retained_proof"
+    },
+    {
+      "path": "docs/STATUS.md",
+      "git_delta_status": "M",
+      "secondary_main_sha256": "128bae0bafccd83ddec878a8cb0a23ced89055ba991f111e9f721dea40573dc0",
+      "primary_feature_present": true,
+      "primary_feature_sha256": "4470c036cb0aff89a302e79d2b0fc354fa88cc0daf4c3f26647a846924d3e9e8",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_retained_proof"
+    },
+    {
+      "path": "docs/adr/0205-canonical-game-css-and-browser-contracts.md",
+      "git_delta_status": "M",
+      "secondary_main_sha256": "0c26165f95c9a2e98f2b06cb0ad6453deac7f3ccbbab9638adb391b575781dff",
+      "primary_feature_present": true,
+      "primary_feature_sha256": "d72dd74330af9d01e75f65a10d97a729a683f199d94e7dc41a8bdf46f2005de3",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_retained_proof"
+    },
+    {
+      "path": "docs/adr/0207-fail-fast-on-unavailable-managed-ui.md",
+      "git_delta_status": "A",
+      "secondary_main_sha256": "aa54f77ed980a3f193aa05ff7e73ea64b59d8563ee5fa610fa9ce74083dc6731",
+      "primary_feature_present": false,
+      "primary_feature_sha256": null,
+      "in_retained_source_index": false,
+      "scope": "documentation_or_retained_proof"
+    },
+    {
+      "path": "docs/adr/README.md",
+      "git_delta_status": "M",
+      "secondary_main_sha256": "376e574a32ba0982bdd9a8c511d2c9f8dc7f9ade766deeadc3ff486752c2ea09",
+      "primary_feature_present": true,
+      "primary_feature_sha256": "d0b4a71d19e37b9c0029cd41835e46b041f0121a3c4476faf3f82841f9bf1259",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_retained_proof"
+    },
+    {
+      "path": "docs/execplans/gui-game-renovation.md",
+      "git_delta_status": "M",
+      "secondary_main_sha256": "6df71812347eb4a63bc98faa05357da37c9d085d45651944d97ee01d504912cd",
+      "primary_feature_present": true,
+      "primary_feature_sha256": "f9a0bdd4ace89598ae6d4ca9d41d96577a62267d522f37485b4a725ca3d8a411",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_retained_proof"
+    },
+    {
+      "path": "docs/reviews/gui-m4/historical-test-replacements.json",
+      "git_delta_status": "M",
+      "secondary_main_sha256": "fcb1c804a1dd60e2142f5d4f1ecd1ec0ad0e789bc396d544b7484307af671114",
+      "primary_feature_present": true,
+      "primary_feature_sha256": "4e3730c87ca03c6c2e44acdddac821151a49286a708990f118f8cea8beead337",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_retained_proof"
+    },
+    {
+      "path": "docs/reviews/gui-publication-followups/README.md",
+      "git_delta_status": "A",
+      "secondary_main_sha256": "d1290c1aa87bc72c95bd199bf56e1361e16e0b9bc18bc8425e75af743bf391fa",
+      "primary_feature_present": false,
+      "primary_feature_sha256": null,
+      "in_retained_source_index": false,
+      "scope": "documentation_or_retained_proof"
+    },
+    {
+      "path": "docs/reviews/gui-publication-followups/css-gzip-basis.json",
+      "git_delta_status": "A",
+      "secondary_main_sha256": "f5fbac1f43b7f9dc574544c488dc21ecda91e9a28d4f71003682188eed7f3e46",
+      "primary_feature_present": false,
+      "primary_feature_sha256": null,
+      "in_retained_source_index": false,
+      "scope": "documentation_or_retained_proof"
+    },
+    {
+      "path": "docs/reviews/gui-publication-followups/kfa1-mutation-proof.json",
+      "git_delta_status": "A",
+      "secondary_main_sha256": "922c5a25f4dc8ebe32f111a32fb2520a78a7192905227e767bb9846a81303ed7",
+      "primary_feature_present": false,
+      "primary_feature_sha256": null,
+      "in_retained_source_index": false,
+      "scope": "documentation_or_retained_proof"
+    },
+    {
+      "path": "docs/reviews/gui-publication-followups/kfa1-proof.stdin.txt",
+      "git_delta_status": "A",
+      "secondary_main_sha256": "e772c9f13384c941adf1950f4d3a86b2a56e46dbb8ca2b721fd0f59f1d266b7c",
+      "primary_feature_present": false,
+      "primary_feature_sha256": null,
+      "in_retained_source_index": false,
+      "scope": "documentation_or_retained_proof"
+    },
+    {
+      "path": "docs/tracked-markdown.json",
+      "git_delta_status": "M",
+      "secondary_main_sha256": "f6528a589e53d6e58ff7b93c5b60c74c110ee7680a31141203e71d3ba5450586",
+      "primary_feature_present": true,
+      "primary_feature_sha256": "d2988d15888268b95ba4aa3df8a1866e804abbc412144da313005916ea1050bf",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_retained_proof"
+    },
+    {
+      "path": "frontend/e2e/conexiuni-keyboard-clear.spec.mjs",
+      "git_delta_status": "A",
+      "secondary_main_sha256": "f2dca013a458f936bbe36a627b12ece026df0b5f47d4beb8216e59e5cef01978",
+      "primary_feature_present": false,
+      "primary_feature_sha256": null,
+      "in_retained_source_index": false,
+      "scope": "test_or_inventory_only"
+    },
+    {
+      "path": "frontend/e2e/gui-inventory.json",
+      "git_delta_status": "M",
+      "secondary_main_sha256": "30481c41d5995a767cca3eff3d996411c24fe2e7afb383689f182ff37dca87c3",
+      "primary_feature_present": true,
+      "primary_feature_sha256": "19d5cefc9b44ffa5b7ab17a577237e09c0726ea0db3f91616becd4c51943dc49",
+      "in_retained_source_index": false,
+      "scope": "test_or_inventory_only"
+    },
+    {
+      "path": "frontend/e2e/lant-live-region.spec.mjs",
+      "git_delta_status": "A",
+      "secondary_main_sha256": "b72e5c8dd651dab0d9956ce289b851a35b45869b939bdcec69b322e5ce168e77",
+      "primary_feature_present": false,
+      "primary_feature_sha256": null,
+      "in_retained_source_index": false,
+      "scope": "test_or_inventory_only"
+    },
+    {
+      "path": "go-backend/cmd/cat-server/main.go",
+      "git_delta_status": "M",
+      "secondary_main_sha256": "e88076f07f0a01772fbc32653c755a3f2bdf1ab62a78b73435ecf35c747bafbc",
+      "primary_feature_present": true,
+      "primary_feature_sha256": "f8456d9f6dbf17c150537664f7dfd71c93c1d37bff6a6c34070e99fff0591085",
+      "in_retained_source_index": false,
+      "scope": "runtime_startup_delta"
+    },
+    {
+      "path": "go-backend/cmd/cat-server/managed_ui_test.go",
+      "git_delta_status": "A",
+      "secondary_main_sha256": "907ae51a34b1663b165ee43873bdf5cdf2d81b7dcfdf5653db1c36909e95bef7",
+      "primary_feature_present": false,
+      "primary_feature_sha256": null,
+      "in_retained_source_index": false,
+      "scope": "test_or_inventory_only"
+    },
+    {
+      "path": "go-backend/internal/httpapi/managed_ui_error_test.go",
+      "git_delta_status": "A",
+      "secondary_main_sha256": "5d41dc7709162163ff0138378e8c86140c82422879cf68780ff9dbd677bfc76b",
+      "primary_feature_present": false,
+      "primary_feature_sha256": null,
+      "in_retained_source_index": false,
+      "scope": "test_or_inventory_only"
+    },
+    {
+      "path": "go-backend/internal/httpapi/server.go",
+      "git_delta_status": "M",
+      "secondary_main_sha256": "176011b8f55f0b70ea070e346a17e75118ff2909c36dd8c066333461d007859c",
+      "primary_feature_present": true,
+      "primary_feature_sha256": "ec363f06cb94fefc79182ff5d9f553295cd27a92b5d3e2ce92b5a9e062ddffb4",
+      "in_retained_source_index": false,
+      "scope": "runtime_startup_delta"
+    }
+  ],
+  "retained_index_verification": {
+    "content": {
+      "files": 244,
+      "changed_vs_retained_source_index": [],
+      "indexed_primary_feature_paths_equal_actual_secondary_main": true
+    },
+    "interface": {
+      "files": 59,
+      "changed_vs_retained_source_index": [],
+      "indexed_primary_feature_paths_equal_actual_secondary_main": true
+    },
+    "adjacent": {
+      "files": 7,
+      "changed_vs_retained_source_index": [],
+      "indexed_primary_feature_paths_equal_actual_secondary_main": true
+    },
+    "policy": {
+      "files": 2,
+      "changed_vs_retained_source_index": [],
+      "indexed_primary_feature_paths_equal_actual_secondary_main": true
+    }
+  },
+  "index_coverage_limit": "The 59 retained interface paths remain equal, but the two changed server runtime files lie outside that retained index. Equality of indexed paths is not full runtime equality. Those changed files and all new tests are separately hash-bound here.",
+  "affected_contracts": {
+    "startup": "Serving startup now refuses an unavailable managed UI before account bootstrap/listen, while replay bypasses this requirement. This is a static reading of the secondary diff, not a running-server observation.",
+    "http": "ManagedUIError exposes stored managed UI admission failure and returns nil for a StaticRoot override. The diff changes no registered game endpoint, submitted-ID/typed-input payload or graph resolver.",
+    "browser_tests": "New Conexiuni Escape/Backspace and Lant live-region assertions plus the e2e inventory are test changes only; this checkpoint executes none.",
+    "source_ownership": "All 244 retained content/resolver authority bytes and ownership-policy paths match the unchanged primary feature. No source owner/form/edge disposition or game-input semantic change appears in this bounded diff.",
+    "qualification": "All historical GUI/server/runtime results retain their original exact SHAs. They are not transferred to the changed secondary main; this source-only observation runs no gate, browser, server or install cascade."
+  },
+  "mechanical_delta_classification": {
+    "path": "/home/dobo/work/_temp/content__v1-42-familiar-food-materials-and-selected-inputs/secondary-main-79669601/mechanical-delta.json",
+    "sha256": "68abdd7278b864d38cfd5f9ece4b3c1ce4794a6c798ae2ab1d0ca97c9e3abf49",
+    "scope": "Read-only helper classification; not a source-semantic reviewer, added formal review round or runtime/integration approval."
+  },
+  "retained_exact_authority_index": {
+    "path": "/home/dobo/work/_temp/content__v1-42-familiar-food-materials-and-selected-inputs/feature-working-observation.json",
+    "sha256": "18de1668a326a5a593549e2998777a0df6f0c7585ce6a610959a40fb782ce851",
+    "scope": "Original index and baselines preserved; actual indexed primary and main paths rehashed."
+  },
+  "original_canonical_feature_baseline_preserved": {
+    "path": "current-feature-working-baseline.json",
+    "sha256": "5d0eb5bf28d8e59d93164fd5afe4887657cfe2087cbefd971ca033b176f6b5e8",
+    "secondary_identity_is_historical": true
+  },
+  "source_closure": "d331f6ad79696019b6882d53035572f3da4c7cd1",
+  "source_pool_sha256": "b7b5be791a6b905d44319bc81259a019499de91a0aa5deaf33d32cefe7354005",
+  "source_module_sha256": "931799a338411d2be4a0115d8f8cf75164f95d1687c1344e643e91fb9ecb9b74",
+  "protected_source_closures_preserved": 29,
+  "historical_baselines_preserved": 22,
+  "static_reuse_scope": "Retained ownership/static typed-input findings can be reused only for the rechecked equal content and indexed paths on the unchanged designated primary feature. No full secondary runtime, GUI, integration, publication or landing qualification is inferred. Original signed source verdicts retain their exact payload bindings.",
+  "curation_wait_unchanged": true,
+  "next_decision": "Separate qualification of the proposed five reviewed existing-owner families/21 keys against the then-latest frozen designated feature/WIP, or a concrete uncovered high-value source gap. No integration authority.",
+  "source_approvals_added": 0,
+  "formal_reviews_added": 0,
+  "dictionary_requests": 0,
+  "source_module_execution_or_application": 0,
+  "module_dry_run": false,
+  "runtime_or_test_execution": false,
+  "installed": 0,
+  "player_visible_source_delta": "0/0/0",
+  "remote_operations_by_this_checkpoint": 0
+}

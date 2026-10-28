@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "wave": "1.29",
+  "phase": "step3_after_signed_removals",
+  "status": "PASS",
+  "bindings": {
+    "original": "c94a7065c192b4ff8b61434be462de20ef8e688011d6a3dec2ef4b7814f783f0",
+    "original_pool": "25b69705956515feacca02d675b25d7e1599dff1f85d2d368b280f83ca8b3d23",
+    "final": "554449dd2f49940c7489dacd38feae28ebd5d575630f0e332c2b45515a04efa2",
+    "pool": "8b583c226de1d2fa88dcabb60d61e5bfb07cb5bbd064da2e96fd8c4afda34349"
+  },
+  "counts": {
+    "reviewed_original_items": 44,
+    "accepted_source_concepts": 43,
+    "held": 10,
+    "source_connections": 185,
+    "missing_normalized_keys": 264,
+    "lexical_families": 45,
+    "exact_selected_sense_synonym_families": 2,
+    "popular_input_families": 1,
+    "regional_input_families": 0,
+    "module_alias_surfaces": 221,
+    "grammatical_inputs_excluding_lexical_heads": 219
+  },
+  "signed_application": {
+    "complete_Vatman_hold": true,
+    "Vatman_station_drop": true,
+    "Brutar_kitchen_oven_drop": true,
+    "Brutar_neighbours_remaining": 4,
+    "no_replacement_edges_forms_categories_or_descriptions": true,
+    "surviving_nodes_equal_original_nodes": true,
+    "surviving_edges_subset_original": true,
+    "original_nine_holds_unchanged": true,
+    "all_author_clocks_and_request_histories_unchanged": true,
+    "surviving_complete_paradigms_unchanged": true
+  },
+  "source_URL_checks": {
+    "factual": {
+      "unique_signed_source_urls": 193,
+      "all_backed_by_own_fresh_usable_bodies": true,
+      "catalog_sha256": "20e4df0086aa308c39e252fab80ac491bd225036c4433b65c6f22dcdeaeb12b8"
+    },
+    "quality": {
+      "unique_signed_source_urls": 199,
+      "all_backed_by_own_fresh_usable_bodies": true,
+      "catalog_sha256": "a0ffaacc8492c5681f9119e122fd40bb234a1c03f09e28b13b80c59bf81889b6"
+    }
+  },
+  "pure_data_module_import": "PASS;build_nodes_and_edges returns43nodes/185edges/empty existing aliases;importer and apply scripts never invoked",
+  "selected_only_graph_floors": "PASS:4..8distinct,>=2main,>=2category,<=2batch;source stock only",
+  "ownership": "Final keys are a strict subset of exhaustive pre-web screen;all policy files and bundle hashes unchanged;other-sense exclusions remain inactive.",
+  "preservation": "All721 author captures hash verified;both sealed fresh catalogs and signed reports verified;all15 protected refs exact;main clean.",
+  "whitespace": "PASS;tracked diff and every new text file checked",
+  "required_delta": {
+    "command": "go -C go-backend run ./cmd/cat-content-ops delta --root .. --baseline d30b0aa47248b9a5944e015f2daf54cc5a795617 --text",
+    "exit_code": 0,
+    "toolchain_observed": "go version go1.27.1 linux/amd64",
+    "concepts": [
+      2584,
+      2584
+    ],
+    "connections": [
+      10141,
+      10141
+    ],
+    "forms": [
+      9520,
+      9520
+    ],
+    "puzzles": [
+      180,
+      180
+    ],
+    "all_catalog_record_promotion_eligibility_and_board_counters_unchanged": true,
+    "observed_stdout_sha256": "b40a630a80b59dd1f32e0aec8fed5fa03768e4fc635c8d8e22378d0ce1ca34ba",
+    "evidence": "Live command output inspected this tick;no source export or application."
+  },
+  "new_web_calls": 0,
+  "new_formal_review_rounds": 0,
+  "source_applied": false,
+  "installed": 0,
+  "gameplay_approval": false,
+  "target_approval": false,
+  "salience_approval": false,
+  "player_visible_delta": "0/0/0"
+}

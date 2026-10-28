@@ -1,0 +1,308 @@
+{
+  "wave": "1.30",
+  "status": "signed_verdicts_applied_to_source_only",
+  "original_reviewed_module_sha256": "8dc3e1010dd6bf7b0b4e82e78705dabb24ac1f2a296f5c1540373a68d53938e3",
+  "frozen_pool_sha256": "c582d9b5dfa8f5db0372ccb009e1d9fca5e4816a4b49f30aa10e3d496332957b",
+  "final_module": {
+    "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-30-familiar-shapes-and-school-measures/scripts/familiar_shapes_and_school_measures_v1_30_data.py",
+    "sha256": "a893bd913e87e40d2394251dd995f0ae5423a61841e26ec1e52abf2530008819"
+  },
+  "final_source_counts": {
+    "accepted_items": 46,
+    "new_concepts": 40,
+    "existing_input_families": 6,
+    "unique_directed_claims": 156,
+    "full_ordinary_forms_reviewed": 264,
+    "new_normalized_keys": 237,
+    "new_node_keys": 230,
+    "existing_missing_keys": 7,
+    "already_resolved_same_owner": 27,
+    "held": 14,
+    "signed_caption_corrections": 7,
+    "verified_synonyms": 0,
+    "regional_or_popular_input_families": 0,
+    "source_applied": false,
+    "installed": 0,
+    "player_visible_delta": "0/0/0",
+    "target_approval": false,
+    "salience_approval": false,
+    "gameplay_approval": false
+  },
+  "reports": {
+    "factual": {
+      "reviewer": "factual-v1-30",
+      "path": "docs/reviews/v1-30-familiar-shapes-and-school-measures/graph-factual-review.json",
+      "sha256": "9276285f67cc013bbcf8009ddf04250332841a92c5bfbe70aa3938d4899d2735",
+      "reviewed_module_sha256": "8dc3e1010dd6bf7b0b4e82e78705dabb24ac1f2a296f5c1540373a68d53938e3",
+      "frozen_pool_sha256": "c582d9b5dfa8f5db0372ccb009e1d9fca5e4816a4b49f30aa10e3d496332957b",
+      "capture_catalog": {
+        "path": "/home/dobo/work/_temp/content__v1-30-familiar-shapes-and-school-measures/factual-web/capture-catalog.json",
+        "sha256": "830bcf8c9e60a4323b508133313d39b60b487a16cb7e078586632880fe9a3385",
+        "fresh_HTTP_requests": 175,
+        "dictionary_requests": 96,
+        "non_dictionary_requests": 79,
+        "successful_nonempty_responses": 175,
+        "minimum_own_dictionary_start_gap_seconds": 2.150040626525879,
+        "cached_author_pages_claimed_as_fresh": false,
+        "sealed": true
+      },
+      "round": 1,
+      "verdict_counts": {
+        "item_accept": 41,
+        "item_modify": 5,
+        "item_reject": 0,
+        "description_accept": 46,
+        "lexical_family_accept": 46,
+        "ordinary_form_accept": 264,
+        "ordinary_form_modify": 0,
+        "ordinary_form_reject": 0,
+        "edge_accept": 149,
+        "edge_modify": 7,
+        "edge_reject": 0,
+        "whole_item_holds_requested": 0
+      }
+    },
+    "quality": {
+      "reviewer": "quality-v1-30",
+      "path": "docs/reviews/v1-30-familiar-shapes-and-school-measures/graph-quality-review.json",
+      "sha256": "185ad6deec1ccea0a8022aba1612f1d460472126bdd14ab13befe1736b90f251",
+      "reviewed_module_sha256": "8dc3e1010dd6bf7b0b4e82e78705dabb24ac1f2a296f5c1540373a68d53938e3",
+      "frozen_pool_sha256": "c582d9b5dfa8f5db0372ccb009e1d9fca5e4816a4b49f30aa10e3d496332957b",
+      "capture_catalog": {
+        "path": "/home/dobo/work/_temp/content__v1-30-familiar-shapes-and-school-measures/quality-web/capture-catalog.json",
+        "sha256": "68a0b911e07efab7723a1d56d8242c6d4b0bc3cc25ed566fb880e11172f133bb",
+        "fresh_HTTP_requests": 217,
+        "dictionary_requests": 96,
+        "non_dictionary_requests": 121,
+        "successful_nonempty_responses": 210,
+        "minimum_own_dictionary_start_gap_seconds": 2.1500680446624756,
+        "cached_author_pages_claimed_as_fresh": false
+      },
+      "round": 1,
+      "verdict_counts": {
+        "items_accept": 45,
+        "items_modify": 1,
+        "items_reject": 0,
+        "lexical_families_accept": 46,
+        "forms_accept": 264,
+        "edges_accept": 153,
+        "edges_modify": 3,
+        "edges_reject": 0,
+        "verified_synonyms": 0,
+        "regional_or_popular_inputs": 0,
+        "requested_edge_drops": 0,
+        "requested_whole_item_holds": 0
+      }
+    }
+  },
+  "exact_signed_caption_corrections": [
+    {
+      "item_id": "v130-sfera",
+      "before": {
+        "src": "n_v1_30_sfera",
+        "dst": "n_v2sti_matematica",
+        "relation": "related_to",
+        "label_ro": "este studiat în matematică",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "after": {
+        "src": "n_v1_30_sfera",
+        "dst": "n_v2sti_matematica",
+        "relation": "related_to",
+        "label_ro": "este studiată în matematică",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "requested_by": [
+        "factual-v1-30"
+      ],
+      "reason": "The relationship is supported, but the participle must agree with the feminine source noun Sferă. Change only that agreement; the directed claim is unchanged."
+    },
+    {
+      "item_id": "v130-piramida",
+      "before": {
+        "src": "n_v1_30_piramida",
+        "dst": "n_v2sti_matematica",
+        "relation": "related_to",
+        "label_ro": "este studiat în matematică",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "after": {
+        "src": "n_v1_30_piramida",
+        "dst": "n_v2sti_matematica",
+        "relation": "related_to",
+        "label_ro": "este studiată în matematică",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "requested_by": [
+        "factual-v1-30"
+      ],
+      "reason": "The relationship is supported, but the participle must agree with the feminine source noun Piramidă. Change only that agreement; the directed claim is unchanged."
+    },
+    {
+      "item_id": "v130-prisma",
+      "before": {
+        "src": "n_v1_30_prisma",
+        "dst": "n_v2sti_matematica",
+        "relation": "related_to",
+        "label_ro": "este studiat în matematică",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "after": {
+        "src": "n_v1_30_prisma",
+        "dst": "n_v2sti_matematica",
+        "relation": "related_to",
+        "label_ro": "este studiată în matematică",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "requested_by": [
+        "factual-v1-30"
+      ],
+      "reason": "The relationship is supported, but the participle must agree with the feminine source noun Prismă. Change only that agreement; the directed claim is unchanged."
+    },
+    {
+      "item_id": "v130-raza",
+      "before": {
+        "src": "n_v1_30_raza",
+        "dst": "n_v2sti_matematica",
+        "relation": "related_to",
+        "label_ro": "este studiat în matematică",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "after": {
+        "src": "n_v1_30_raza",
+        "dst": "n_v2sti_matematica",
+        "relation": "related_to",
+        "label_ro": "este studiată în matematică",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "requested_by": [
+        "factual-v1-30"
+      ],
+      "reason": "The relationship is supported, but the participle must agree with the feminine source noun Rază. Change only that agreement; the directed claim is unchanged."
+    },
+    {
+      "item_id": "v130-balanta",
+      "before": {
+        "src": "n_v1_30_balanta",
+        "dst": "n_v2sti_fizica",
+        "relation": "related_to",
+        "label_ro": "este folosit la măsurări în fizică",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "after": {
+        "src": "n_v1_30_balanta",
+        "dst": "n_v2sti_fizica",
+        "relation": "related_to",
+        "label_ro": "este folosită la măsurări în fizică",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "requested_by": [
+        "factual-v1-30",
+        "quality-v1-30"
+      ],
+      "reason": "The relationship is supported, but the participle must agree with the feminine source noun Balanță. Change only that agreement; the directed claim is unchanged."
+    },
+    {
+      "item_id": "v130-balanta",
+      "before": {
+        "src": "n_v1_30_balanta",
+        "dst": "n_v24_food_pantry_faina",
+        "relation": "related_to",
+        "label_ro": "poate fi folosit pentru cântărirea făinii",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "after": {
+        "src": "n_v1_30_balanta",
+        "dst": "n_v24_food_pantry_faina",
+        "relation": "related_to",
+        "label_ro": "poate fi folosită pentru cântărirea făinii",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "requested_by": [
+        "factual-v1-30",
+        "quality-v1-30"
+      ],
+      "reason": "The relationship is supported, but the participle must agree with the feminine source noun Balanță. Change only that agreement; the directed claim is unchanged."
+    },
+    {
+      "item_id": "v130-balanta",
+      "before": {
+        "src": "n_v1_30_balanta",
+        "dst": "n_v24_food_pantry_zahar",
+        "relation": "related_to",
+        "label_ro": "poate fi folosit pentru cântărirea zahărului",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "after": {
+        "src": "n_v1_30_balanta",
+        "dst": "n_v24_food_pantry_zahar",
+        "relation": "related_to",
+        "label_ro": "poate fi folosită pentru cântărirea zahărului",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "requested_by": [
+        "factual-v1-30",
+        "quality-v1-30"
+      ],
+      "reason": "The relationship is supported, but the participle must agree with the feminine source noun Balanță. Change only that agreement; the directed claim is unchanged."
+    }
+  ],
+  "nodes_forms_edge_membership_and_owners_unchanged": true,
+  "held_rows_and_original_clocks_unchanged": true,
+  "whole_batch_formal_review_rounds": 1,
+  "independent_whole_batch_judgments": 2,
+  "cached_application_audits": {
+    "factual": {
+      "reviewer": "factual-v1-30",
+      "path": "/home/dobo/work/_temp/content__v1-30-familiar-shapes-and-school-measures/step3-factual-application-audit.json",
+      "sha256": "2c027506aca705d918bb977a8fe8d9bbcb869f01bd4a7deffe1485ef0083577b",
+      "status": "PASS",
+      "web_calls": 0,
+      "new_formal_review_rounds": 0
+    },
+    "quality": {
+      "reviewer": "quality-v1-30",
+      "path": "/home/dobo/work/_temp/content__v1-30-familiar-shapes-and-school-measures/step3-quality-application-audit.json",
+      "sha256": "5323c84b924b52e0cbd1525dd8a35e64ccec7db8c29e3860857473b1d29eeb85",
+      "status": "PASS",
+      "web_calls": 0,
+      "new_formal_review_rounds": 0
+    }
+  },
+  "source_applied": false,
+  "installed": 0,
+  "player_visible_delta": "0/0/0",
+  "target_approval": false,
+  "salience_approval": false,
+  "gameplay_approval": false,
+  "no_importer_or_dry_run": true,
+  "scope": "Only seven signed agreement captions and review bookkeeping differ from the reviewed original;no claim replacement,drop,backfill or threshold waiver."
+}
