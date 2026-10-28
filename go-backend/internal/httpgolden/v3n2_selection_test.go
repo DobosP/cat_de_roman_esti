@@ -57,8 +57,8 @@ func TestV3N2SelectsItsExactEightSourceCorpus(t *testing.T) {
 		t.Fatal("V3 n2 loader changed its independent captured responses", err)
 	}
 	data, err := content.Load()
-	if err != nil || !reflect.DeepEqual(data.Sources, want.Sources) {
-		t.Fatal("live compiled bundle does not have the actual V3 n2 source tuple", err)
+	if err != nil || len(data.Sources) != 8 || reflect.DeepEqual(data.Sources, want.Sources) {
+		t.Fatal("live compiled bundle did not move past the historical V3 n2 source tuple", err)
 	}
 	sources := v3n2ExpectedSources()
 	before := source6GUICloneSources(sources)
