@@ -1,6 +1,6 @@
 # ADR-0142: Make Alchimie crafting direct and reduce repeated actions
 
-- Status: accepted
+- Status: partially superseded by [ADR-0222](0222-simplified-alchimie-collection-interface.md) for library controls and discovery presentation; direct crafting and safety boundaries retained
 - Date: 2026-09-13
 
 ## Context and authority

@@ -22,7 +22,7 @@ async function resumeJournal(page, request) {
   })), { key: SAVE, state });
   await page.reload();
   await expect(page.locator(".alchemy-inventory-grid")).toBeVisible();
-  await journal(page).locator(":scope > summary").click();
+  await page.getByRole("button", { name: "Rețete", exact: true }).click();
   await expect(journal(page).locator("article")).toHaveCount(state.discovered_count);
   return state;
 }
@@ -49,13 +49,17 @@ test("earned recipes can be found by result or ingredient without accents", asyn
 test("empty journal search recovers in one action and keeps the crafting selection", async ({ page, request }) => {
   await page.setViewportSize({ width: 320, height: 480 });
   const state = await resumeJournal(page, request);
+  await page.getByRole("button", { name: "Cuvinte", exact: true }).click();
   await page.locator(".alchemy-word:enabled").first().click();
   const selected = await page.locator(".alchemy-word[aria-pressed=true]").getAttribute("aria-label");
+  await page.getByRole("button", { name: "Rețete", exact: true }).click();
   await search(page).fill("zzzz");
   await expect(journal(page).getByText("Nicio rețetă găsită. Încearcă alt cuvânt sau șterge căutarea.")).toBeVisible();
-  await journal(page).locator(":scope > summary").click();
-  await expect(journal(page).locator(":scope > summary")).toContainText("Căutare: zzzz");
-  await journal(page).locator(":scope > summary").click();
+  // The flat switch preserves journal search while returning to the collection.
+  await page.getByRole("button", { name: "Cuvinte", exact: true }).click();
+  await expect(page.locator(".alchemy-word[aria-pressed=true]")).toHaveAttribute("aria-label", selected);
+  await page.getByRole("button", { name: "Rețete", exact: true }).click();
+  await expect(search(page)).toHaveValue("zzzz");
   await applyDoubledText(page);
   const reset = page.getByRole("button", { name: "Șterge căutarea din rețete", exact: true });
   await reset.focus();
@@ -77,8 +81,10 @@ test("empty journal search recovers in one action and keeps the crafting selecti
 test("a fresh journal exposes no unearned recipes or search controls", async ({ page }) => {
   await page.goto("/alchimie");
   await page.getByRole("button", { name: "Începe explorarea →" }).click();
-  await journal(page).locator(":scope > summary").click();
+  await page.getByRole("button", { name: "Rețete", exact: true }).click();
   await expect(journal(page)).toContainText("Prima rețetă apare aici când creezi un cuvânt nou.");
   await expect(journal(page).locator("article")).toHaveCount(0);
-  await expect(search(page)).toHaveCount(0);
+  // The shared search stays visible; an empty journal still reveals no recipes.
+  await expect(search(page)).toBeVisible();
+  await expect(search(page)).toHaveValue("");
 });

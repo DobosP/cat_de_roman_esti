@@ -53,8 +53,22 @@ async function activate(page, target, keyboard) {
 }
 
 export async function openAlchemyDisclosure(page, selector, { keyboard = false } = {}) {
-  if (selector === ".alchemy-discoveries") {
-    await openAlchemyDisclosure(page, ".alchemy-menu", { keyboard });
+  // The approved flat Alchimie collection replaces nested library/journal details.
+  // Keep callers focused on the same visible controls and earned content.
+  if (selector === ".alchemy-discoveries" || selector === ".alchemy-explore-journal") {
+    const toggle = page.locator("button.alchemy-recipes-toggle");
+    if (await toggle.textContent() === "Rețete") await activate(page, toggle, keyboard);
+    await expect(toggle).toHaveText("Cuvinte");
+    await expect(page.locator(selector === ".alchemy-discoveries"
+      ? ".alchemy-reaction-history" : selector)).toBeVisible();
+    return;
+  }
+  if (selector === ".alchemy-library-tools") {
+    const toggle = page.locator("button.alchemy-recipes-toggle");
+    if (await toggle.textContent() === "Cuvinte") await activate(page, toggle, keyboard);
+    await expect(page.locator(".alchemy-inventory-search")).toBeVisible();
+    await expect(page.locator(".alchemy-inventory-grid")).toBeVisible();
+    return;
   }
   const details = page.locator(selector);
   if (await details.getAttribute("open") === null) {
@@ -118,16 +132,8 @@ export async function act(page, game, step, { keyboard = false } = {}) {
       for (const slot of await page.getByRole("button", { name: /^Scoate .* din alambic$/ }).all()) {
         await activate(page, slot, keyboard);
       }
-      for (const label of step.labels) {
-        const item = page.locator(game.board).getByRole("button", {
-          name: new RegExp(`^${escapeRegex(label)}(?:,|$)`),
-        });
-        if (await item.count() === 0) {
-          await openAlchemyDisclosure(page, ".alchemy-library-tools", { keyboard });
-          await activate(page, page.getByRole("button", { name: /^Toate / }), keyboard);
-          break;
-        }
-      }
+      await openAlchemyDisclosure(page, ".alchemy-library-tools", { keyboard });
+      await expect(page.locator(".alchemy-inventory-search")).toHaveValue("");
     }
     for (const label of step.labels) {
       await activate(page, page.locator(game.board).getByRole("button", {

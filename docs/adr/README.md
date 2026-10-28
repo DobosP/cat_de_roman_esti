@@ -211,3 +211,7 @@ Parallel lanes also allocated0188/0189 independently. All four full-filename bod
 - [0220](0220-continuous-codex-content-loop.md) — V3 continuous Codex content loop: one session/worktree/branch, no tick/commit/batch budgets, per-item drawing board, landing-review prefixes; all V2 quality gates kept.
 
 | 0221 | consolidate-historical-stock-and-retire-checkouts | 2026-10-28 | accepted; one unapplied source archive, preserve live V3/refs/baselines, NAS-verified historical checkout retirement |
+
+- [0222](0222-simplified-alchimie-collection-interface.md) — approved simplified responsive interface for both Alchimie modes; one visible searchable collection and on-demand earned recipes, no per-word badges or recent-discovery panel; qualified product2cacc878, full38/38 and937browser.
+
+- [0223](0223-hermetic-relocation-test-filesystem.md) — hermetic sibling checkout/output setup executes the existing relocation assertion in the pinned container; proposed global TMPDIR adjustment reverted, no skip exemption.

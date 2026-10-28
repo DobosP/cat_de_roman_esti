@@ -4,7 +4,6 @@ package contentbuild
 
 import (
 	"bytes"
-	"errors"
 	"os"
 	"path/filepath"
 	"strings"
@@ -259,15 +258,37 @@ func TestReadDirectBindsOpenedDescriptorAcrossAncestorReplacement(t *testing.T) 
 }
 
 func TestProspectiveFinalCreateResolvesWholePathAfterParentRelocation(t *testing.T) {
-	root := repoRoot(t)
-	outside := t.TempDir()
+	current := repoRoot(t)
+	base := t.TempDir()
+	root := filepath.Join(base, "checkout")
+	// Sibling paths keep rename on one filesystem even when the real checkout
+	// is a container bind mount. Output must still be outside the test checkout.
+	for _, dir := range []string{"go-backend", "shared-go"} {
+		if err := os.CopyFS(filepath.Join(root, dir), os.DirFS(filepath.Join(current, dir))); err != nil {
+			t.Fatal(err)
+		}
+	}
+	rubric, err := os.ReadFile(filepath.Join(current, "docs", "CRITIQUE_RUBRIC.md"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := os.MkdirAll(filepath.Join(root, "docs"), 0o700); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(root, "docs", "CRITIQUE_RUBRIC.md"), rubric, 0o600); err != nil {
+		t.Fatal(err)
+	}
+	outside := filepath.Join(base, "outside")
+	if err := os.Mkdir(outside, 0o700); err != nil {
+		t.Fatal(err)
+	}
 	parent := filepath.Join(outside, "approved-parent")
 	if err := os.Mkdir(parent, 0o700); err != nil {
 		t.Fatal(err)
 	}
 	out := filepath.Join(parent, "preview.json")
 	var moved string
-	err := writeProspectiveLantCaptionsBeforeCreate(root, sourcePath(root, "kg_sample.json"), sourcePath(root, "games_pack.json"), out, func() error {
+	err = writeProspectiveLantCaptionsBeforeCreate(root, sourcePath(current, "kg_sample.json"), sourcePath(current, "games_pack.json"), out, func() error {
 		protectedRoot, err := os.MkdirTemp(root, ".prospective-relocation-test-")
 		if err != nil {
 			return err
@@ -279,9 +300,6 @@ func TestProspectiveFinalCreateResolvesWholePathAfterParentRelocation(t *testing
 		}
 		return os.Mkdir(parent, 0o700)
 	})
-	if errors.Is(err, syscall.EXDEV) {
-		t.Skip("relocation needs TMPDIR on the checkout filesystem")
-	}
 	if err != nil {
 		t.Fatal(err)
 	}

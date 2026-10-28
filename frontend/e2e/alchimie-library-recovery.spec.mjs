@@ -7,7 +7,6 @@ const SAVE = "cat_alchimie_exploration_v1";
 const checkpoint = JSON.parse(readFileSync(new URL("./alchimie-221-checkpoint.json", import.meta.url), "utf8")).collection;
 const responseTo = (page, path) => page.waitForResponse((response) =>
   response.request().method() === "POST" && new URL(response.url()).pathname === path);
-const library = (page) => page.getByRole("region", { name: "Colecția ta", exact: true });
 
 for (const width of [320, 390]) {
   test(`a closed search recovers in one action at ${width}px without losing the chosen word`, async ({ page }) => {
@@ -19,10 +18,10 @@ for (const width of [320, 390]) {
     const firstWord = page.locator(".alchemy-word").first();
     const firstLabel = await firstWord.getAttribute("aria-label");
     await firstWord.click();
-    await page.locator(".alchemy-library-tools > summary").click();
+    // Search is always visible in the approved flat collection.
+    await expect(page.getByRole("searchbox", { name: "Caută în colecție" })).toBeVisible();
     await page.getByRole("searchbox", { name: "Caută în colecție" }).fill("zzzz");
-    await page.locator(".alchemy-library-tools > summary").click();
-    await expect(page.getByRole("searchbox", { name: "Caută în colecție" })).not.toBeVisible();
+    await expect(page.getByRole("searchbox", { name: "Caută în colecție" })).toBeVisible();
     await expect(page.getByText("Niciun cuvânt găsit.", { exact: true })).toBeVisible();
     const savedBefore = await page.evaluate((key) => localStorage.getItem(key), SAVE);
     const reset = page.getByRole("button", { name: "Șterge căutarea", exact: true });
@@ -36,12 +35,12 @@ for (const width of [320, 390]) {
     await page.keyboard.press("Enter");
     await expect(page.locator(".alchemy-word")).toHaveCount(state.inventory.length);
     await expect(page.locator(".alchemy-word[aria-pressed=true]")).toHaveAttribute("aria-label", firstLabel);
-    await expect(library(page)).toBeFocused();
-    await expect(page.locator(".alchemy-library-tools")).not.toHaveAttribute("open", "");
+    await expect(page.getByRole("searchbox", { name: "Caută în colecție" })).toBeFocused();
+    await expect(page.getByRole("searchbox", { name: "Caută în colecție" })).toHaveValue("");
     expect(await page.evaluate((key) => localStorage.getItem(key), SAVE)).toBe(savedBefore);
     expect(posts).toHaveLength(0);
     await page.keyboard.press("Tab");
-    await expect(page.locator(".alchemy-library-tools > summary")).toBeFocused();
+    await expect(page.getByRole("button", { name: "Rețete", exact: true })).toBeFocused();
   });
 }
 
@@ -74,17 +73,15 @@ test("a completed collection shows every earned word, searches locally and prese
   await expect(page.locator(".alchemy-explore-complete")).toBeVisible();
   await expect(page.locator(".alchemy-word")).toHaveCount(state.inventory.length);
   await expect(page.locator(".alchemy-word:enabled")).toHaveCount(0);
-  await expect(page.locator(".alchemy-craft-prompt")).toHaveText("Răsfoiește cuvintele sau deschide „Rețetele mele”.");
+  await expect(page.locator(".alchemy-craft-prompt")).toHaveText("Răsfoiește cuvintele sau deschide „Rețete”.");
   await expect(page.locator(".alchemy-workspace")).not.toContainText("Continuă să descoperi");
   await expect(page.getByRole("checkbox")).toHaveCount(0);
-  await expect(page.getByRole("button", { name: "💡 O idee?", exact: true })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "O idee?", exact: true })).toHaveCount(0);
   const savedBefore = await page.evaluate((key) => localStorage.getItem(key), SAVE);
-  await page.locator(".alchemy-library-tools > summary").click();
   await page.getByRole("searchbox", { name: "Caută în colecție" }).fill("zzzz");
-  await page.locator(".alchemy-library-tools > summary").click();
   await page.getByRole("button", { name: "Șterge căutarea", exact: true }).click();
   await expect(page.locator(".alchemy-word")).toHaveCount(state.inventory.length);
-  await page.locator(".alchemy-explore-journal > summary").click();
+  await page.getByRole("button", { name: "Rețete", exact: true }).click();
   await expect(page.locator(".alchemy-journal-entry")).toHaveCount(state.discovered_count);
   expect(await page.evaluate((key) => localStorage.getItem(key), SAVE)).toBe(savedBefore);
   await page.reload();
@@ -96,15 +93,13 @@ test("search reset keeps keyboard recovery visible in a short viewport with doub
   await page.goto("/alchimie");
   await page.getByRole("button", { name: "Începe explorarea →" }).click();
   await applyDoubledText(page);
-  await page.locator(".alchemy-library-tools > summary").click();
   await page.getByRole("searchbox", { name: "Caută în colecție" }).fill("zzzz");
-  await page.locator(".alchemy-library-tools > summary").click();
   const reset = page.getByRole("button", { name: "Șterge căutarea", exact: true });
   await reset.focus();
   await reset.scrollIntoViewIfNeeded();
   await expect(reset).toBeInViewport();
   await page.keyboard.press("Enter");
-  await expect(library(page)).toBeFocused();
-  await expect(library(page).getByRole("heading", { name: "Cuvintele tale" })).toBeInViewport();
+  await expect(page.getByRole("searchbox", { name: "Caută în colecție" })).toBeFocused();
+  await expect(page.getByRole("searchbox", { name: "Caută în colecție" })).toBeInViewport();
   expect(await page.locator(".alchemy-screen").evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(true);
 });

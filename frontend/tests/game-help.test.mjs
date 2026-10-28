@@ -32,8 +32,20 @@ void test("help explains different kinds of relationship without revealing a boa
 });
 
 void test("separate help records preserve every original text and the public aggregate", async () => {
-  // Captured from the pre-split GAME_HELP, including key order and all 18 texts.
-  assert.equal(createHash("sha256").update(JSON.stringify(GAME_HELP)).digest("hex"),
+  // Preserve the original aggregate pin for the 16 unchanged texts; only the
+  // two Alchimie control instructions are intentionally revised by ADR-0222.
+  // A separate exact record pin below binds the current Alchimie guidance.
+  const historicalHelp = {
+    ...GAME_HELP,
+    alchimie: {
+      ...GAME_HELP.alchimie,
+      feedback: "După o descoperire, citește legăturile dintre rezultat și cele două concepte. Ele explică asocierea.",
+      recovery: "Dacă nu apare nimic nou, schimbă un concept. „Utile” arată ce mai poate contribui; cere un indiciu când devine disponibil.",
+    },
+  };
+  assert.equal(createHash("sha256").update(JSON.stringify(GAME_HELP.alchimie)).digest("hex"),
+    "8f259cc7c1838c0406234b3e59352ac6bcef4475ecd9b9cab807125bffd06c33");
+  assert.equal(createHash("sha256").update(JSON.stringify(historicalHelp)).digest("hex"),
     "b8ac05ddf1c8d448b247d391358ff055624b246379d4981fef22e8374075504e");
   for (const key of Object.keys(screens)) {
     const record = await import(`../src/gameHelp/${key}.mjs`);

@@ -107,18 +107,15 @@ test("challenge lineage DOM presentation caps at12, orders newest first and grou
   await page.reload();
   await expect(page.locator(game.board)).toBeVisible();
   await expect(page.locator(".alchemy-menu")).not.toHaveAttribute("open");
-  await expect(page.locator(".alchemy-discoveries")).not.toHaveAttribute("open");
+  await expect(page.locator(".alchemy-reaction-history")).toBeHidden();
   await openAlchemyDisclosure(page, ".alchemy-discoveries");
-  const discoveries = page.locator(".alchemy-discoveries");
-  await expect(discoveries).toContainText("12 reacții păstrate");
-  const history = page.locator(".alchemy-reaction-log");
-  await expect(history).not.toHaveAttribute("open");
-  await expect(history.locator(":scope > summary")).toHaveText("Vezi jurnalul (12)");
-  expect((await history.locator(":scope > summary").boundingBox()).height).toBeGreaterThanOrEqual(44);
-  await history.locator(":scope > summary").click();
-  const latest = discoveries.locator(":scope > .row.wrap").filter({ has: page.locator(".alchemy-reaction-result") });
-  const earlier = history.locator(".col > .row.wrap");
-  await expect(latest).toHaveCount(1);
+  // The same bounded, consecutive-grouped history now opens in one flat switch.
+  const discoveries = page.locator(".alchemy-reaction-history");
+  expect((await page.getByRole("button", { name: "Cuvinte", exact: true }).boundingBox()).height).toBeGreaterThanOrEqual(44);
+  const rows = discoveries.locator(".alchemy-reaction-row");
+  await expect(rows).toHaveCount(12);
+  const latest = rows.first();
+  const earlier = discoveries.locator(".alchemy-reaction-row:nth-child(n+2)");
   await expect(earlier).toHaveCount(11);
   await expect(latest.locator(".alchemy-reaction-result")).toHaveText([labels.at(-1)]);
   await expect(earlier.nth(0).locator(".alchemy-reaction-result")).toHaveText(["Lineage projection result 12", "Lineage projection result 12-second"]);
@@ -139,7 +136,7 @@ test("successful Alt joc keeps the nondefault challenge category and difficulty 
   const { state, originalRequests } = await themedStart(page);
   await openAlchemyDisclosure(page, ".alchemy-menu");
   const response = createdReply(page);
-  await page.getByRole("button", { name: "⚗ Alt joc", exact: true }).click();
+  await page.getByRole("button", { name: "Alt joc", exact: true }).click();
   const reply = await response;
   expect(reply.status()).toBe(200);
   const next = await reply.json();
