@@ -29,7 +29,7 @@ export interface InventoryItem {
   useful: boolean;
   /** A useful recipe's other ingredient is already owned. */
   ready: boolean;
-  /** Kept for lineage/"Toate", but automatically left out of active views. */
+  /** Retained in the full inventory and earned lineage; no new results remain. */
   depleted: boolean;
 }
 

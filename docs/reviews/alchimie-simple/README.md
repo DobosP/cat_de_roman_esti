@@ -27,3 +27,7 @@ original bundle, budget or acceptance assertion changed; no deployment.
 The built app passed87 serving checks without failures/skips. Focused Alchimie
 browser run:73pass/1keyboard-scroll failure. The fallback now reveals the visible
 library toolbar; the original focus and viewport assertions remain unchanged.
+
+Unit93286a9c passed27/27. The final two help sentences now name Rețete/search; the
+16other texts keep their original baseline pin and the revised record has its own pin.
+Final-copy unit/full acceptance follows; prior run outcomes are historical.

@@ -43,14 +43,8 @@
     ]
   },
   "unit": {
-    "status": "rejected-unexpected-skip",
-    "sha": "05a12153ace1b1503c5df518ba29af17eaeee3d6",
-    "command": "GATE_OPERATOR=agent:codex bash scripts/gate.sh unit --sha 05a12153ace1b1503c5df518ba29af17eaeee3d6 --parallel 2",
-    "result_sha256": "84dc0f55a6b5ca1f5ac165e70557e1b8f4b5331bbc0bdaebb955e8eef1e71e1e",
-    "checks_pass": 26,
-    "failed_check": "cat-backend-race: unexpected contentbuild relocation skip; Go observed 1958 pass, 0 fail",
-    "reason": "TMPDIR must be on checkout filesystem",
-    "correction": "Hermetic sibling checkout/output test setup (ADR-0223) passes focused pinned race with zero skips; canonical retry pending"
+    "status": "pending-final-help-copy",
+    "command": "GATE_OPERATOR=agent:codex bash scripts/gate.sh unit --sha <final-clean-sha> --parallel 4"
   },
   "full": {
     "status": "pending"
@@ -98,5 +92,23 @@
     "log_sha256": "bde4812bff84b187562b3e52f375be11542070c21120533d512b6091dc4ed711",
     "finding": "Collection fallback scroll used a visually hidden heading",
     "correction": "Use the visible library toolbar for fallback and clear-search keyboard scrolling; assertion unchanged; focused retry pending"
+  },
+  "unit_attempts": [
+    {
+      "sha": "05a12153ace1b1503c5df518ba29af17eaeee3d6",
+      "status": "rejected-unexpected-skip",
+      "result_sha256": "84dc0f55a6b5ca1f5ac165e70557e1b8f4b5331bbc0bdaebb955e8eef1e71e1e"
+    },
+    {
+      "sha": "93286a9c83a0e15d7320a02f93e689f65f83c01a",
+      "status": "pass",
+      "checks": 27,
+      "result_sha256": "9559a817a7cdec480087a8eac79c07d88ca2c99830db888c9e92d5f0e7d0228d"
+    }
+  ],
+  "help_copy": {
+    "scope": "Only two Alchimie instructions now name Re\u021bete and search",
+    "preservation": "Original18-text baseline digest retained for16unchanged texts; revised Alchimie record independently byte-pinned",
+    "record_sha256": "8f259cc7c1838c0406234b3e59352ac6bcef4475ecd9b9cab807125bffd06c33"
   }
 }
