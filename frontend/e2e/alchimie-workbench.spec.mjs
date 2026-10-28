@@ -177,7 +177,8 @@ test("keyboard discovery moves focus from a removed ingredient to the carried wo
   await expect(ingredient(page, second)).toBeDisabled();
   await expect(slot(page, earned.label)).toBeVisible();
   await expect(ingredient(page, earned.label)).toBeFocused();
-  await expect(page.locator(".alchemy-feedback")).toContainText(`${earned.label} rămâne ales.`);
+  await expect(page.locator(".alchemy-feedback")).toContainText(earned.label);
+  await expect(ingredient(page, earned.label)).toHaveAttribute("aria-pressed", "true");
 });
 
 test("a delayed discovery preserves focus moved to another control while the combine is pending", async ({ page }) => {

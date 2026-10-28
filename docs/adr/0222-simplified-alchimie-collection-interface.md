@@ -43,4 +43,9 @@ Qualification and commands are recorded in STATUS and the task review record. Ex
 browser checks for game behavior, owned recovery, earned lineage, touch geometry and
 keyboard access are retained. Assertions about removed disclosures, filter badges and
 nested journal layout are replaced by assertions for the explicitly approved interface;
-original inventory keys, frozen bundles, baselines, budgets and gate inputs stay intact.
+original inventory keys, frozen bundles, baselines and budgets stay intact.
+
+The native unit runner uses a private temporary directory on the checkout filesystem.
+This makes the existing parent-relocation test execute inside the container instead of
+skipping on cross-filesystem rename. The gate still rejects unexpected skips; no
+assertion, skip exception or numerical acceptance limit is changed.

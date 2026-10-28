@@ -329,7 +329,7 @@ export default function AlchimieExplore({ onExit }: {
             <div className="alchemy-workspace">
               <div ref={benchRef} className={`alchemy-bench${benchPinned ? " alchemy-bench--pinned" : ""}`} aria-label="Alambic">
                 <div className="alchemy-craft-cue">
-                  {state.complete ? <p className="alchemy-craft-prompt">Răsfoiește cuvintele sau deschide „Rețete”.</p> : selectedItem ? <><button type="button" className="alchemy-slot" disabled={locked} aria-label={`Scoate ${selectedItem.label} din alambic`} onClick={() => setSelected(null)}><span className="alchemy-slot-label">{selectedItem.label}</span><span aria-hidden>×</span></button><span className="alchemy-craft-plus" aria-hidden>+</span><span className="alchemy-craft-prompt">Atinge un alt cuvânt</span></> : <p className="alchemy-craft-prompt">Alege două cuvinte pentru a le combina.</p>}
+                  {state.complete ? <p className="alchemy-craft-prompt">Răsfoiește cuvintele sau deschide „Rețete”.</p> : selectedItem ? <><button type="button" className="alchemy-slot" disabled={locked} aria-label={`Scoate ${selectedItem.label} din alambic`} onClick={() => setSelected(null)}><span className="alchemy-slot-label">{selectedItem.label}</span></button><span className="alchemy-craft-plus" aria-hidden>+</span><span className="alchemy-craft-prompt">Atinge un alt cuvânt</span></> : <p className="alchemy-craft-prompt">Alege două cuvinte pentru a le combina.</p>}
                 </div>
                 {busy && <span className="alchemy-working" role="status">Se verifică…</span>}
                 {lastReaction && <div className="alchemy-last-reaction" role="status" aria-live="polite" aria-atomic="true">

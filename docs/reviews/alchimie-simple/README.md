@@ -17,4 +17,7 @@ preflight. Saved ownership, response recovery, hint/score costs and bounded earn
 histories remain. Existing browser assertions for removed layout controls were mapped
 to the approved controls; gameplay/privacy/recovery/geometry and inventory keys stay.
 
-No content, frozen original bundle, budget or gate-input change; no deployment.
+The first unit run had 1958 native passes and zero test failures, but correctly failed
+on an unexpected relocation-test skip. Native TMPDIR now shares the checkout
+filesystem so that existing check executes; retry remains pending. No content, frozen
+original bundle, budget or acceptance assertion changed; no deployment.

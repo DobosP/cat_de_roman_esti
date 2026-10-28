@@ -43,7 +43,14 @@
     ]
   },
   "unit": {
-    "status": "pending"
+    "status": "rejected-unexpected-skip",
+    "sha": "05a12153ace1b1503c5df518ba29af17eaeee3d6",
+    "command": "GATE_OPERATOR=agent:codex bash scripts/gate.sh unit --sha 05a12153ace1b1503c5df518ba29af17eaeee3d6 --parallel 2",
+    "result_sha256": "84dc0f55a6b5ca1f5ac165e70557e1b8f4b5331bbc0bdaebb955e8eef1e71e1e",
+    "checks_pass": 26,
+    "failed_check": "cat-backend-race: unexpected contentbuild relocation skip; Go observed 1958 pass, 0 fail",
+    "reason": "TMPDIR must be on checkout filesystem",
+    "correction": "Private per-target native TMPDIR inside /work; retry pending"
   },
   "full": {
     "status": "pending"
@@ -51,11 +58,13 @@
   "review": {
     "scope": "Independent source review of Challenge/shared CSS/docs; Explore reviewed by root and pinned preflight",
     "finding": "Paid hint could hide its partner behind a search or recipe view",
-    "resolution": "Hint now clears word search and returns to words; preserves earned reaction and recipe query"
+    "resolution": "Hint now clears word search and returns to words; preserves earned reaction and recipe query",
+    "additional_resolution": "Do not reconstruct a last-attempt verdict from GET; recover earned inventory and keep recipes accessible instead."
   },
   "boundaries": [
     "No content/backend/save-format changes",
-    "Frozen baselines, budgets, original test titles and gate inputs retained",
+    "Frozen baselines, budgets and original test titles retained",
+    "Native unit TMPDIR changed to execute existing relocation check",
     "No production deployment or main push"
   ]
 }

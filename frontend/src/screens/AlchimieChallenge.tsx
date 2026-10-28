@@ -167,10 +167,8 @@ export default function AlchimieChallenge({
       setRecipeQuery("");
       setRecipesOpen(false);
     }
-    if (!options.preserveReaction) {
-      const latest = buildReactionLog(fresh.inventory)[0];
-      setLastReaction(latest ? { gameId: fresh.game_id, parents: latest.parents, results: latest.results } : null);
-    }
+    // GET carries earned inventory, not a verdict for the last attempted pair.
+    if (!options.preserveReaction) setLastReaction(null);
     setLastMessage(null);
   }, []);
 

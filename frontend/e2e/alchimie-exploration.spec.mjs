@@ -77,7 +77,7 @@ test("exploration is the clean default, saves discoveries, searches accents and 
   await expect(equation).toContainText(state.discovered[0].label);
   const earned = state.inventory.find((item) => item.id === state.discovered[0].id);
   for (const ingredient of earned.parents) await expect(equation).toContainText(ingredient.label);
-  const equationText = await equation.innerText();
+  const equationText = await equation.textContent();
   const followupPosts = [];
   const observe = (request) => { if (request.method() === "POST") followupPosts.push(request.url()); };
   page.on("request", observe);

@@ -119,6 +119,8 @@ test("lost productive combine restores the exact earned inventory and private ta
   const committed = await loseCommittedResponse(page, initial.game_id, "combine");
   expect((await act(page, game, steps()[0])).status()).toBe(503);
   await expect(page.getByText("Joc sincronizat. Poți continua.", { exact: true })).toBeVisible();
+  // GET does not prove which pair produced the last attempted result.
+  await expect(page.locator(".alchemy-last-reaction")).toHaveCount(0);
   const fresh = await serverState(request, initial.game_id);
   expect(fresh.inventory).toEqual(committed().inventory);
   expect(fresh.target.id).toBeNull();
@@ -251,6 +253,10 @@ test("lost winning combine records the terminal score exactly once", async ({ pa
   expect(fresh.score).toBe(1000);
   expect(fresh.score).toBe(committed().score);
   expect(fresh.target.id).not.toBeNull();
+  await expect(page.locator(".alchemy-last-reaction")).toHaveCount(0);
+  await openAlchemyDisclosure(page, ".alchemy-discoveries");
+  await expect(page.getByRole("region", { name: "Rețetele acestei runde", exact: true })).toContainText(fresh.target.label);
+  await openAlchemyDisclosure(page, ".alchemy-library-tools");
   expect(counts).toEqual({ reads: 1, mutations: 1 });
   await expect(page.getByText("Ai făurit ținta!", { exact: true }).locator("../..")).toHaveCSS("opacity", "1");
   await settledScreenshot(page, "recovered-win.png", page.getByRole("button", { name: "Copiază rezultatul" }));

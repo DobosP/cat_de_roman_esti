@@ -144,6 +144,9 @@ function requiredUiVersion() {
   return /^file:vendor\/roedu-ui-(\d+\.\d+\.\d+)\.tgz$/.exec(pointer ?? "")?.[1] ?? null;
 }
 function nativeUnit() {
+  // Relocation contracts must exercise rename on the checkout filesystem.
+  const nativeTmp = path.join(scratch, "native-tmp");
+  fs.mkdirSync(nativeTmp, { recursive: true, mode: 0o700 });
   activeUi();
   runDoccheckSourcePreflight(hook);
   command("cat-doc-check", "go", ["run", "./cmd/cat-doc-check", "--root", "..", "--inventory", "docs/tracked-markdown.json"], path.join(root, "go-backend"));
@@ -170,7 +173,7 @@ function nativeUnit() {
       // -count=1: content tests read repo-root inputs outside the module, which Go's test cache does not recheck.
       const reused = module === "go-backend" && native?.selection.status === "hit";
       const packages = reused ? native.selection.freshPackages : ["./..."];
-      const output = hook.run("go", ["test", "-race", ...(module === "go-backend" ? ["-timeout=30m", "-count=1"] : []), "-json", ...packages], path.join(root, module), { CGO_ENABLED: "1" });
+      const output = hook.run("go", ["test", "-race", ...(module === "go-backend" ? ["-timeout=30m", "-count=1"] : []), "-json", ...packages], path.join(root, module), { CGO_ENABLED: "1", TMPDIR: nativeTmp });
       const skipped = output.split("\n").filter((line) => line.startsWith("{")).map((line) => JSON.parse(line)).filter((event) => event.Action === "skip" && typeof event.Test === "string" && event.Test.length > 0);
       hook.assert("Only explicit native PG tests may skip without DSN", () => skipped.every((event) =>
         module === "go-backend" && ["github.com/DobosP/cat_de_roman_esti/go-backend/internal/accounts", "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpapi"].includes(event.Package)));
