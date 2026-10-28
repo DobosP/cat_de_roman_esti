@@ -1,0 +1,1082 @@
+{
+  "branch": "feat/gui-cat-m3",
+  "head": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+  "worktree": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3",
+  "secondary_main": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+  "source_baseline_commit": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+  "observation_started": "2026-10-19T08:42:32.480469+00:00",
+  "observed_at": "2026-10-19T08:42:32.719439+00:00",
+  "dirty_paths": [],
+  "dirty_path_count": 0,
+  "porcelain_z_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "working_fingerprint_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "content_authority_files": {
+    "cat_de_roman_esti/data.py": {
+      "sha256": "dfd183e5a653d64d75ac8f509a2c4b70d33bc76b9cf9c005b2280ce470bb74dc",
+      "git_blob": "0c12e3359dbc3432b9a9bc5260b86d0832a0d01e"
+    },
+    "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json": {
+      "sha256": "2b4e18f8e5f231c0e94f30567366fe18a4d3677093f4fd590d0ecfebefb0cfff",
+      "git_blob": "b927a93dbcf72fcb70cf22dabc51ad08ae6df247"
+    },
+    "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json": {
+      "sha256": "fe3265069003aaca36cd9d7d1a1a49f2768374f6872e19b0ea53516670192dcd",
+      "git_blob": "316be27a1e072c42dfcb6104b5b76f3cb9b6a234"
+    },
+    "cat_de_roman_esti/fixtures/board_demotions_v43.json": {
+      "sha256": "c35261a5208d9b68d39a94f8602a5586db67eaecbe130c0c219f6a43fd1ef0a7",
+      "git_blob": "2dff0e267407a68bff7886f4aad1816765e4edea"
+    },
+    "cat_de_roman_esti/fixtures/board_rankings_v37.json": {
+      "sha256": "7380a013c0ee14cd40c78b5469352346e945f42b90ca3a305fb17bc379cbad60",
+      "git_blob": "865ee3cb64a07268c72e2417fbcc675d5ca5b352"
+    },
+    "cat_de_roman_esti/fixtures/conexiuni_rejection_tombstones.json": {
+      "sha256": "a52eed7f57b607568637960c07f490ded21867de6b47dbf833ce1d3ab52ef869",
+      "git_blob": "8e3c9759c30c34d901ae8fe01536830c2217cc33"
+    },
+    "cat_de_roman_esti/fixtures/contexto_demotions_v44.json": {
+      "sha256": "29c76be1d65fc38bf2e3a754d48ba3b96a8e6b6c95fde28c7c2fbd882ee9996c",
+      "git_blob": "4de0cc89a113e734ee360f75f53b5909ddd51fb9"
+    },
+    "cat_de_roman_esti/fixtures/contexto_impact_reserve_v69.json": {
+      "sha256": "4c41d092c895c61aaccfbda3cb9522c4d5767a88d9af9343efccc182f71e7612",
+      "git_blob": "d1bd231e6319283565a1e7cb3a0d8a1cd44aa0b9"
+    },
+    "cat_de_roman_esti/fixtures/derived_catalog_v38.json": {
+      "sha256": "6ede0ddfb44346bcd5595b08f4de7739aea64e0724f090ba6dd8d54059f525eb",
+      "git_blob": "503347412bdef33e848110b307bba40f9d7c0df5"
+    },
+    "cat_de_roman_esti/fixtures/games_pack.json": {
+      "sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+      "git_blob": "5ebb221e45789cfbd9921f6efe68ff25bade29fc"
+    },
+    "cat_de_roman_esti/fixtures/kg_real.json": {
+      "sha256": "baf3d6c98f809479c5f690373cd297dece73286ec083b2e643191d4bb705c104",
+      "git_blob": "88687bc717b8bd68e9593b192f574ee275e25b58"
+    },
+    "cat_de_roman_esti/fixtures/kg_sample.json": {
+      "sha256": "d8c7a8226e7b128ef613aeeebedbd6af8529e5dd1d56676c3a8b1a6b86c886fc",
+      "git_blob": "98eb1b1739451c27cbd1574e4e7919233192c473"
+    },
+    "cat_de_roman_esti/fixtures/lant_rejection_tombstones.json": {
+      "sha256": "01811f415e93e885a12de76b1a38ec2e9e2055b68b12675c67d0c5c266ca611d",
+      "git_blob": "6fde71e66c6f34ed5a6c37787cb997a0311a4cdf"
+    },
+    "cat_de_roman_esti/fixtures/quick_games_v92.json": {
+      "sha256": "36bed57411692dbb714fc4978b7d8193d3012cf1bb2a2bf4e48e14a01d29af31",
+      "git_blob": "6a044b09af4588297d11e6a7285241076515022e"
+    },
+    "cat_de_roman_esti/fixtures/release_reserve_v1.json": {
+      "sha256": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+      "git_blob": "290511688d5d0693e711007e26038b2cbaa16b7e"
+    },
+    "docs/CONTENT_LOOP.md": {
+      "sha256": "2818e00686e1d930b75fa6fcc1a190c143a2d9d972b16032fd53774af414b9c5",
+      "git_blob": "28f40398cbcd0221f94dc6b2bc86734dc4a7bdc3"
+    },
+    "docs/CRITIQUE_RUBRIC.md": {
+      "sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+      "git_blob": "b52fd2e3938403da08fa3953d36f55b93e64abbd"
+    },
+    "docs/content-pool/v1-10-everyday-discovery/pool.json": {
+      "sha256": "c3d2b86544e2cb9cb83d3f17137b302130f7b174e36042a9dbdbd441d3b2c95a",
+      "git_blob": "bab42a66e6d8cc9321d11fc58ed50eabf8ef19bb"
+    },
+    "docs/content-pool/v1-11-home-and-nature/pool.json": {
+      "sha256": "bf20dbe19b450f823d01fc8cfcdf6e48f65657bea7ea1cb6ff9ad1fdaedd356a",
+      "git_blob": "ee8778cc2842153e662af2bb1a48b56f4f0330b1"
+    },
+    "docs/content-pool/v1-12-post-and-garden/pool.json": {
+      "sha256": "71342d78e211bc40ada3d522409ffb2e88356f0768e08bd62a0ae676474a80a4",
+      "git_blob": "be959772c9ebc4e3c5e58fba795e7ceb8997978b"
+    },
+    "docs/content-pool/v1-13-weather-and-landscape/pool.json": {
+      "sha256": "4425c41a0f85a7a3b47e5b485ae0ff2d275a28f36c4c140bf249e111793bb53e",
+      "git_blob": "17589d344b50182a7fbf86958c7b0e7c16e5f1a0"
+    },
+    "docs/content-pool/v1-8-everyday-core/pool.json": {
+      "sha256": "9b45158bedc4843d3382792812de50385e1779aa259bb290867595bd64221c45",
+      "git_blob": "d77a5152420e0318669ccb900c61f9bc89508e0e"
+    },
+    "docs/content-pool/v1-9-seasons-and-school/pool.json": {
+      "sha256": "b859a92cb4c991f7dd86e7ab7d8dfe5c6e951234842634f5964862f0f800e1f6",
+      "git_blob": "9932fc704daee69b2ca729fcd72ea540174ee239"
+    },
+    "go-backend/cmd/cat-content-ops/main.go": {
+      "sha256": "bd5a1fc382ec39266937ea7168b4a03462dfa1a3c55e643d2f81c2b7a530eb0d",
+      "git_blob": "ed14e0b333c90a0575e3148805631a225c501a30"
+    },
+    "go-backend/cmd/cat-content/main.go": {
+      "sha256": "58a3a29310b771e27ac4f05bfb6ed0ad9cba6fca646ad9916d93071e64fdd722",
+      "git_blob": "703b65d0dc11fd3a16a1f472f3eac83347ff6df1"
+    },
+    "go-backend/internal/alchimie/progress_test.go": {
+      "sha256": "0cf957c07c83ab5ce05d48f1934743395ee75e007f80095352b448a235984977",
+      "git_blob": "4e3e7e9f9640759c8d31025e507b859344bc6dd9"
+    },
+    "go-backend/internal/alchimie/projection.go": {
+      "sha256": "c45a46c4836b58b572f4fec15dbc72a355ec3b8a35a0bee6a37672104a8dab86",
+      "git_blob": "b6142172010c6336c5ac400ce10d8033009ee824"
+    },
+    "go-backend/internal/alchimie/review.go": {
+      "sha256": "6a11184b113672b755fdbe9d6a4802d08c6620cd16462cf675d9f3faa4db6c51",
+      "git_blob": "67e163f6e2e8c0bcef48dd0f4ba8d4a2c0f6e14f"
+    },
+    "go-backend/internal/alchimie/review_test.go": {
+      "sha256": "0bb928fce70c66f7d4e5f722a7649f3a396d1c71dfc31486d687dc161ac98e68",
+      "git_blob": "571b3390ae9a7df170dbe57d89be13794d90e7ee"
+    },
+    "go-backend/internal/alchimie/service.go": {
+      "sha256": "f63e805e02aecb58aa6ac4f0a64f6e5838b6d14cb2b001135f087db019545cae",
+      "git_blob": "b714b4b403c92afe7e096fb4b3f97d68731d118a"
+    },
+    "go-backend/internal/alchimie/service_test.go": {
+      "sha256": "963b404e662d52a75e04e2540fbb75622bc4893b5fcd7471a604a5d15fdebc9d",
+      "git_blob": "d0c30cf006fe50f36bb60f60627f5fe09213e9da"
+    },
+    "go-backend/internal/alchimie/testdata/generate.py": {
+      "sha256": "18dfac8404e29c38cf715d81e32fb37b3326294537fd00527480680784e8ef0a",
+      "git_blob": "1ba8d0fa548bb5c7e2cad3b674a3b75eada89603"
+    },
+    "go-backend/internal/alchimie/testdata/python_parity.json": {
+      "sha256": "7054c2524404da12fd13f3fefbfdf4fe48f8f7c3d9dbe21225bc87266a864d7a",
+      "git_blob": "ed1ec846647b928ec3f09280798e0c83073e23bd"
+    },
+    "go-backend/internal/alchimie/validate.go": {
+      "sha256": "09a5b40b138b263bd6819ae023879c3829a5d168d1c2951c77b891a47c7028ac",
+      "git_blob": "32e964266326f76ba240c86e100c57291c62ced7"
+    },
+    "go-backend/internal/alchimie_explore/content_v1_5_test.go": {
+      "sha256": "0915420c4b22452ccd1f30a73f7fc28616d134401f5bd408af30c0a7055fa65a",
+      "git_blob": "ac7ce9f82b4a28c5b047dfafc13fba180693b85e"
+    },
+    "go-backend/internal/alchimie_explore/saved_prefix_test.go": {
+      "sha256": "f14221d91640b7e0636b5e978dfbfd3a7408da0e48c0f613fb48092bd7c46610",
+      "git_blob": "1902ab186d0f3caa4e2ae82cb675e4304a59ad9d"
+    },
+    "go-backend/internal/alchimie_explore/service.go": {
+      "sha256": "4b53343d07d332fb9f935947b84f3379481bcbf78660211e53ac1357ec9ec0ce",
+      "git_blob": "0c0c4695b43fde8074cea61cf7d3a2b1accca99e"
+    },
+    "go-backend/internal/alchimie_explore/service_test.go": {
+      "sha256": "0a67b8a03392619d711102bbae2985b1fa7b9986fc2577e4f15ea898b6c17488",
+      "git_blob": "576d58337e4beff215e7ec46f8c958d33c649361"
+    },
+    "go-backend/internal/alchimie_explore/state_inventory_test.go": {
+      "sha256": "01de9cb5b4d26ca796c6c42c33a1443d1c242d7b2676d48bb377f8318ea7ee65",
+      "git_blob": "08774b7d967c73caaec25b906722a2eab8881522"
+    },
+    "go-backend/internal/alchimie_explore/state_legacy_diff_test.go": {
+      "sha256": "a061aacbe4f8c839a31092144c861de9c218479c17a217acab316df0bace9c80",
+      "git_blob": "cd635033da7f392f686020a6876e4ac4747e52a8"
+    },
+    "go-backend/internal/alchimie_explore/testdata/README.md": {
+      "sha256": "ad54fcc9f84de10a6c4f79ecb8bdebe1e61762a966a31c9fb68dcc0388b347b7",
+      "git_blob": "ea554b22a7ab0ae4fb871557a04bcc1d8c9b419a"
+    },
+    "go-backend/internal/alchimie_explore/testdata/bundled-v1-4.json.gz": {
+      "sha256": "76245d7d5fd3266981c92e3ad7a7e323395b8edd919a4208a56b01bf3bc5f5d3",
+      "git_blob": "2df12ef5cad7e0aa77eba6ffbcbefd898fbe1fd1"
+    },
+    "go-backend/internal/alchimie_explore/testdata/legacy-saved-prefixes-v92.json": {
+      "sha256": "51eadd294f043991fb9a518a0ea62b7bd1249f2f1d3878db91cd0d3253ab1718",
+      "git_blob": "289810e1c5dd77b11fa7a641b52fc96a5ab82ea3"
+    },
+    "go-backend/internal/catalog/blake2b.go": {
+      "sha256": "7f35b1d27f4d5d3c7194426ab843d7e0d2223bef877046e2d781e3319ca644fd",
+      "git_blob": "6bd71ccd7fe9fdb0b45d3df493931a413ca7bf28"
+    },
+    "go-backend/internal/catalog/catalog.go": {
+      "sha256": "b930bb8cdd1ecfa2a1ace7e8a0a405d1317ca67706460745d88f0c748418c43c",
+      "git_blob": "0750b1dac2687f77a86e8b8517a74c3548d34772"
+    },
+    "go-backend/internal/catalog/catalog_test.go": {
+      "sha256": "7991e3f565c229ce5cacf079dcac6cc2250ef75cff2aea4ca6d191ffba11ed5e",
+      "git_blob": "4118febe2f01f287757ccc0eead7e7555379a926"
+    },
+    "go-backend/internal/catalog/hash.go": {
+      "sha256": "a389a761f331810a0d62c94fe3ef53bac4ccb36ef2ad124211871d809363e0d7",
+      "git_blob": "ccbe2bca04eb5fd2105f8cbabd7a7d5ee3916251"
+    },
+    "go-backend/internal/catalog/testdata/blake2b8.json": {
+      "sha256": "2d77db85ca5e94ec41d1249f64fef8873da71410fa2df43c9bb412ec832d0bc4",
+      "git_blob": "771c2bc7efb64e72cc64b243fc27f009a7d91e73"
+    },
+    "go-backend/internal/catalog/testdata/generate_vectors.py": {
+      "sha256": "7f7b86ea1b57daf34a588a0ffa2b0a3ce7b43faaf4f944502cfda0e7c7c74c82",
+      "git_blob": "0472c8cfda01123dcb50c9954777cd2f0da135f1"
+    },
+    "go-backend/internal/catalog/testdata/python_selector.json": {
+      "sha256": "c6add73c1cd1cbfd2e7ad63c7ac219520501046dadf367a1c118f7a766fd46e0",
+      "git_blob": "5631e9fcbed95856f051b0628a96ec1a59cbfa9a"
+    },
+    "go-backend/internal/catalog/testdata/synthetic_boards.json": {
+      "sha256": "7317e34d86c236f0a34432b3170974ab035da22696fe881325338e0f1cc322b7",
+      "git_blob": "dbde904e047641d0f34320fe4735962b82bb4123"
+    },
+    "go-backend/internal/conexiuni/progress_test.go": {
+      "sha256": "40cd1fa1cada5fc30a6e0ab45f843cb8534460a75343fea8fed7663268fa215f",
+      "git_blob": "01247547b51bb3f4181aad15508cf4ca9fcbcb85"
+    },
+    "go-backend/internal/conexiuni/service.go": {
+      "sha256": "d1ca9cca16595b37f9a9c7701c2ef009ee9da01d692dc64605c3a7fe043ff79e",
+      "git_blob": "b565bf7153ae0500979323310b1707051a7784a3"
+    },
+    "go-backend/internal/conexiuni/service_test.go": {
+      "sha256": "e84a30951f85bb4ff3fca091e6e51742549f5902f9978d6e63711b1485d22efb",
+      "git_blob": "2d25255b86244ebf5f9d3c333bae0f5349102f11"
+    },
+    "go-backend/internal/conexiuni/testdata/python-goldens.json": {
+      "sha256": "6bbdf2b2cad898fc3d41446747e3a7b5f40ff0c9e9c99eafa758b8f27a4cc956",
+      "git_blob": "74608c1fe25c32cc3dfd89b4e8d314bdd2a3d495"
+    },
+    "go-backend/internal/content/bundled.json": {
+      "sha256": "f6d983f1ab2cbb7852e8583411eaecd2048fdb5b5da08099129d7e4ff471344c",
+      "git_blob": "bbdf1f31610cd8b48b9be69354d2b2f303b3249e"
+    },
+    "go-backend/internal/content/content.go": {
+      "sha256": "4990f7ba621b0f10519a3a29ef5e998ea4b2db323b4db2e8d15753a9ef6b4f83",
+      "git_blob": "778bd9279d5e95513c20f49ee3901c402f40e84e"
+    },
+    "go-backend/internal/content/content_test.go": {
+      "sha256": "59568b7ae2d13fbba218f2f0a797fff85e6d7615b7e64cc2581bd87970f988cd",
+      "git_blob": "9b47064b7107ba70a47f9ee1114ddd2eb336163c"
+    },
+    "go-backend/internal/content/digest.go": {
+      "sha256": "28a51b39c4f3c1096e717bed79ccdef484d343bcbc066e288c550ff01ba3f74e",
+      "git_blob": "ed4b57ab4341cb5422412895fd8fa476211d1447"
+    },
+    "go-backend/internal/content/release_version_test.go": {
+      "sha256": "3fff3941f986192e370364b689ae69e32838e8b05746c0d75bfd1c96d107e868",
+      "git_blob": "6a3c04fea6f10759cd32639780d68e8377661135"
+    },
+    "go-backend/internal/contentbuild/README.md": {
+      "sha256": "ca09f6a470b098d0c3828e0cc906f58aa51b8190db2e85e512104db31fc1705c",
+      "git_blob": "24ae07609ac6da5f56e07a0d6f9dc5fb7847c8a4"
+    },
+    "go-backend/internal/contentbuild/build.go": {
+      "sha256": "65b7869f1966e659fa24d885456ba1f105ed3a03a64ceff681009dca3858ce6a",
+      "git_blob": "9c61d8ad39dba6ac6b45502248bd8c1dbeff4856"
+    },
+    "go-backend/internal/contentbuild/build_test.go": {
+      "sha256": "4ba997ad378a26da9d0da0294c84e6af4b644ea699dec7a285db2cfc2772d0f2",
+      "git_blob": "88b6a0988987eec103b8f1103a2dd7bea989d5e3"
+    },
+    "go-backend/internal/contentbuild/catalogs.go": {
+      "sha256": "eb0239ed9b57524b2e6a18aa3d5757650de17c674e6fee071a724037c6f78c77",
+      "git_blob": "570a188886985c658595ff91061322d600ad68e3"
+    },
+    "go-backend/internal/contentbuild/graph.go": {
+      "sha256": "e4e9e54f7350767b5dc35dcde86db6ce22bf681a6be9d364cb723abb298ccf24",
+      "git_blob": "a3a1643b7c9807b48913938f044ec793770f356a"
+    },
+    "go-backend/internal/contentbuild/history_context_test.go": {
+      "sha256": "64d77c5beede28a055a1952f5a618566dbee9f841d88a94859dc74a21fb4163b",
+      "git_blob": "08f4104a0c90b02f0014ef67577f39e6144ed546"
+    },
+    "go-backend/internal/contentbuild/installed_bundle_build_test.go": {
+      "sha256": "0cc18f35c2ec27f3c9ecf190e3f2e69b3f599bea4bfe8b359167d8c64d9de337",
+      "git_blob": "5d949ad3b1b979499c1c73deb839c19945adabdf"
+    },
+    "go-backend/internal/contentbuild/json.go": {
+      "sha256": "fb36a766a175726cf2fa1efe566f67663c35f647bba8ff2138f8f9f588b9664b",
+      "git_blob": "92b9f1200ed24fa3aedb92612de5f2e6d331576d"
+    },
+    "go-backend/internal/contentbuild/operators.go": {
+      "sha256": "3572d808b8890762e3433c504feea71cf7306e52cdc29727be8706afea7c5a2a",
+      "git_blob": "3d8bec01642c0d7c9167bf669fde1d286bc0f4c0"
+    },
+    "go-backend/internal/contentbuild/reviewed_source6_history_context_test.go": {
+      "sha256": "0188a658e2e66f4920fcad35b8e64b6ee443b8d04e195a86d050053b9cdbc556",
+      "git_blob": "97168bc7aa45672f7b12822ab3ce050f6328787a"
+    },
+    "go-backend/internal/contentbuild/rules_provenance.json": {
+      "sha256": "f44128ede2082e2054740fc63675f4bed10d37429914f4e186e24a9502647173",
+      "git_blob": "d097e43ad30907c30b0be3ca7c82f7a1d031256a"
+    },
+    "go-backend/internal/contentbuild/rules_unicode15.json": {
+      "sha256": "cd579dc1d8e583e595f454b0d6ac50ec7afaaf72d9fb3725efbc6e5936fe9558",
+      "git_blob": "c86cbad6de8c21144b07c6f4e1af76b8c6129d97"
+    },
+    "go-backend/internal/contentbuild/source6_build_test.go": {
+      "sha256": "26643081a142d8573cc6e7d85735d3d58506feb77d2d8ca7fcdfbb036fbc82fe",
+      "git_blob": "d9d38e894e20482485cb3426349eec1804a33bbd"
+    },
+    "go-backend/internal/contentbuild/source6_current_requalification_test.go": {
+      "sha256": "bfad4a44c89b97db020a1f56bfdc5ac0cee1eafc4f3156fb4806c4faa1baa8c1",
+      "git_blob": "548a0bbca78185f35ca990372f90989da50287b3"
+    },
+    "go-backend/internal/contentbuild/source6_history_context_test.go": {
+      "sha256": "1fa767ca4339a0199ab285393cf29ab934c0aa9035e26e99d043531614857c2b",
+      "git_blob": "786ba02a640076579f0d51597dedddf5a3b76ee8"
+    },
+    "go-backend/internal/contentbuild/transactions.go": {
+      "sha256": "9418fe16edf5996829694d6c952d2ef99dfc8e2050718526a9580cbeb121b71d",
+      "git_blob": "adc2872c6b00f21b2c389302644b6855475271d6"
+    },
+    "go-backend/internal/contentbuild/transactions_test.go": {
+      "sha256": "6f9d11ac4198698e753305cb10fb7a650acd2c2471529f3221af426d087b0b71",
+      "git_blob": "022652ac78566365a53ed4d71b7e1c49d6076699"
+    },
+    "go-backend/internal/contentbuild/validate.go": {
+      "sha256": "8752f9905dd4582b8718e27b1eea89e6ac0381a60fca9bd1c7a8a25f88017bbd",
+      "git_blob": "6a7f8958ad260ca300fc88419cbd1ae2bda75406"
+    },
+    "go-backend/internal/contentbuild/world.go": {
+      "sha256": "704f3d5d2e4622e753f4c3d521d215c852e600cf00509c80dda20c6a5e8312c1",
+      "git_blob": "46b8df0ccdfbb240450dc083ae4076836ac3361a"
+    },
+    "go-backend/internal/contentops/README.md": {
+      "sha256": "15ed7964d7270e91ef03bcef3cfcef89ef89440f4bb7d5a5e27b5d2911e9aea2",
+      "git_blob": "be6cdc8406edadd66f2b17673195e3296e9c7f9e"
+    },
+    "go-backend/internal/contentops/audit.go": {
+      "sha256": "7da544df52fab1431cbbd7d755283085fcb75c1687e55e58244c9e3a3d977a79",
+      "git_blob": "9d64eb6c6dc92a98b32227b4b121b98fbdb54bcc"
+    },
+    "go-backend/internal/contentops/check.go": {
+      "sha256": "215f7d0d26af99db924cca073f17f9ec096e50fd9be04eb30900bc05a2d30cc1",
+      "git_blob": "c903e553b531450d5023dbcec7020b71a5adaae7"
+    },
+    "go-backend/internal/contentops/check_test.go": {
+      "sha256": "b4b8beb6b57c455a84b21fe4ef97e3973ffa6091b1c4442702d6d354b3a66966",
+      "git_blob": "2da73eab5a2430bb0f8d763ac3e10d202deb3af0"
+    },
+    "go-backend/internal/contentops/command.go": {
+      "sha256": "54733010ac8f059d276a9ec0db9ad710216908f61712fa2dcb6c3bf57da03d7d",
+      "git_blob": "b471055761603a13cf7c75e35a8ee06c1cd0f535"
+    },
+    "go-backend/internal/contentops/contentops_test.go": {
+      "sha256": "fa0286bb98555c3fcc9150ddf868d8701f0a9f781b9c73a338dd011bbd72bf69",
+      "git_blob": "e176cd60f509525cd7915c87fcb742cfc51518c2"
+    },
+    "go-backend/internal/contentops/critique.go": {
+      "sha256": "eca8067e24565d797bc90a19d4e4a300c73282b89afed874a7a80785c1ebe80d",
+      "git_blob": "7588e0d0cdb2b640c8ae9b42b234697dd6319265"
+    },
+    "go-backend/internal/contentops/delta.go": {
+      "sha256": "b6c9a3fbb61bcca723e1413a7e14e889001a23dfa882979a89eb8eef6898c7fd",
+      "git_blob": "339758ab489a87905e71e4730c3317c0c724f6cb"
+    },
+    "go-backend/internal/contentops/derive.go": {
+      "sha256": "589d7f47704f74dabd1d5a3aed6094d42a978173c6ce89e82f733d5bf12601ae",
+      "git_blob": "bcf17596a6824b103df88178c7154112cb197128"
+    },
+    "go-backend/internal/contentops/files.go": {
+      "sha256": "acb5b1661d2ddb61ecc0e5bdca3a22f4b381bc512d8ee7c6068da2fe35210793",
+      "git_blob": "831976b1ecde8833e557dccf57f3a1ca3dd9c66b"
+    },
+    "go-backend/internal/contentops/import.go": {
+      "sha256": "ba520caf4e543fe6ab7fefbfd0d9a80b9a492119ee67d169a2456a96142c04b8",
+      "git_blob": "e76ad2be5ab98324f079801b56a635d3d35c23ce"
+    },
+    "go-backend/internal/contentops/inventory.go": {
+      "sha256": "beca882b53b0d5773275ddd314c3bd19167342ce52792f3d388f9689a0612583",
+      "git_blob": "8cf4f75656e76963d6fbdbb5f9ecebb9a1f2d5a6"
+    },
+    "go-backend/internal/contentops/rank.go": {
+      "sha256": "8fca7ff8a16976bdf036e6e9d77bd800a140cb5ed174260e0ad9d708b7120722",
+      "git_blob": "94548051586dcb2fed869e5b9ab619cf513c4cfc"
+    },
+    "go-backend/internal/contentops/review.go": {
+      "sha256": "73d261187af0f4d873841622e280aa44f36785e347124900ab5b58def0cf982a",
+      "git_blob": "60e1da4e79f0defc623bfa6eba21769b8b4882c5"
+    },
+    "go-backend/internal/contentops/submissions.go": {
+      "sha256": "9e285b1c1a474dc654bb97f82a76d15b73aef4b746c8a76f480ac63850065d94",
+      "git_blob": "607d818c2ae9abb968311caef511994985964a70"
+    },
+    "go-backend/internal/contentops/surface.go": {
+      "sha256": "4025ec8f2ebf4b09733300d299b7f11fd5dafc34284a0ed5f202b18bbfdeed05",
+      "git_blob": "73453b8173779ec45147d985fb290b5ba5f1ac9c"
+    },
+    "go-backend/internal/contentrails/README.md": {
+      "sha256": "c24340cb509fc6e746d216d2b0c530b3aeb55c3563ad6f66eef3a61bc4afa134",
+      "git_blob": "695484c085751b1349311944b17ff7335931a947"
+    },
+    "go-backend/internal/contentrails/extensions.go": {
+      "sha256": "c3c5166b6b6975128da9884c70921c7552ce83140575f5b5e90106dffa6c07af",
+      "git_blob": "78771ca35015336e8905bac194f8e018613d667d"
+    },
+    "go-backend/internal/contentrails/historical_context_v16_test.go": {
+      "sha256": "eb6226ec627412f4906905e4786676e6e36f2438876015e91eb375f9f6f2a61c",
+      "git_blob": "cc2e31f8d35e7054c3ad90f14d677a07d51db954"
+    },
+    "go-backend/internal/contentrails/installed.go": {
+      "sha256": "d236a29074326fd17fd9a92f890adce21a9a5e663736e84919ca2be3822405b0",
+      "git_blob": "cc2993332386a0ecd716eab80f40827ba31c2302"
+    },
+    "go-backend/internal/contentrails/installed_authorities_pin.go": {
+      "sha256": "15fe42a8c806265ad972bccaa1b6f73b6bc7a4d3f7df87b4f123117dbbeb1cc5",
+      "git_blob": "9c4ad948931ef3ddb4ff520deb2137592d93f3b3"
+    },
+    "go-backend/internal/contentrails/installed_test.go": {
+      "sha256": "a64c9c884f2b2bcd55228f0c6190b958649d0ac5e07e218d101778d7ce76dcb4",
+      "git_blob": "2eca05d05d1d86ba91bbfa772311a93a9b5fda8d"
+    },
+    "go-backend/internal/contentrails/quick.go": {
+      "sha256": "75e16613164e35e3c6260b208a98dd152174aeebe329c9ed75a0a72cfe89dd9f",
+      "git_blob": "680710d64269c7e2ba1079583ec38d4e0d73ca6b"
+    },
+    "go-backend/internal/contentrails/rail.go": {
+      "sha256": "076389f89f666b9754f494727d502754e178cafe55c8114e6abab004c97728bd",
+      "git_blob": "0764dbf2dfed856c2bbecd473ba46646fa01a271"
+    },
+    "go-backend/internal/contentrails/rail_test.go": {
+      "sha256": "ff9405bb749b1f7a05c7175b925ef6b5e73ae1211d2aa11e6c8994a9396f92a6",
+      "git_blob": "5be4a7a13d1daa0da2d620909cb7fd681ed786de"
+    },
+    "go-backend/internal/contentrails/reserve.go": {
+      "sha256": "ac2bb53234e366b784562c5f382eed9f5aba4d1669934169354ffe93ac078c00",
+      "git_blob": "5ee3c15cd69111cd02306eee72ad4e3959c268c9"
+    },
+    "go-backend/internal/contentrails/review.go": {
+      "sha256": "065af97857dba7e1c4f72b61a69b1948fa3b1b04fb4bbd276554d58094d9dfc8",
+      "git_blob": "8c3ffe470f8623031c61434ff4c0331d26ae4a27"
+    },
+    "go-backend/internal/contentrails/shape.go": {
+      "sha256": "ee73f903a862de0601685e7bce1204e80d8235eb46befd1dabdd20ce806497de",
+      "git_blob": "9dd917c88c45ac3b56b166c3b7d3d7fd528446ee"
+    },
+    "go-backend/internal/contentrails/source.go": {
+      "sha256": "71f80f89377d6f40a3d9ce3589f4ff15bf7050f084553330b1564dcc3484e0de",
+      "git_blob": "67633da1f0aff379e48f06279316237ad71f680e"
+    },
+    "go-backend/internal/contentrails/sources/README.md": {
+      "sha256": "45ff74df89d4fac9693f6ca5da36d8346b1432dddb0e6453d24f3befda58d08b",
+      "git_blob": "9d51b476bc2f9987b7746cc4b16fc9d99df326d8"
+    },
+    "go-backend/internal/contentrails/sources/authored-v1.json": {
+      "sha256": "bbeffd444e85205a08fdfcdec43914dd69d4ee11dc24e758fdac99a0909529c6",
+      "git_blob": "928397a9d87875415a09137aa132a78e76d83de0"
+    },
+    "go-backend/internal/contentrails/sources/authored-v10.json": {
+      "sha256": "b1c643e30380691f2a272f3e6e26f5dd389cd6485221fecd8114a2d10abb5a38",
+      "git_blob": "7cc460f3622b809a67df6899f8fb7c0bd2af8d9b"
+    },
+    "go-backend/internal/contentrails/sources/authored-v11.json": {
+      "sha256": "48df1f6b2128097f7f5dd1241650457223d76230a1cb91901e3b0d16a952803e",
+      "git_blob": "8641c310cec382e7b64171ed2273dba873e5c095"
+    },
+    "go-backend/internal/contentrails/sources/authored-v12.json": {
+      "sha256": "d1d3eb9b9f7128f5ff5d60fa2708e5a60c3476fd255b9fc8b835fe423436b9bf",
+      "git_blob": "c084256471af5b6c838be248ff9039dba5720bac"
+    },
+    "go-backend/internal/contentrails/sources/authored-v2.json": {
+      "sha256": "a91a257ab17d8cb7ca028afc66a683440511a8c9dd46ef6d9ab37cd6d46ea4d7",
+      "git_blob": "3f0a23eb0f1cad471586f1bffe18813f89b7b17c"
+    },
+    "go-backend/internal/contentrails/sources/authored-v3.json": {
+      "sha256": "56ef795c811a3f97c8c3fe96cf1b658e836babbf9fd88fe841c986ba7e65d4cc",
+      "git_blob": "216f8446946aae5e960368c691a787ca1ae12605"
+    },
+    "go-backend/internal/contentrails/sources/authored-v4.json": {
+      "sha256": "444e4bc1dc9a55fbfccd5840e33975b3b672d9ea2f51ece88044d873653d79b1",
+      "git_blob": "f0fe1a04a5dffa30adf92aeef901584ed4c2ddab"
+    },
+    "go-backend/internal/contentrails/sources/authored-v5.json": {
+      "sha256": "22b7853e3f93c8a0093066d17f36194bef94e5b1156cf83381671ef23b3cb585",
+      "git_blob": "dfe1f63e431fc9ad9831cea437d9885818e69814"
+    },
+    "go-backend/internal/contentrails/sources/authored-v6.json": {
+      "sha256": "a086dc2accd6eb97ab7040f6a0e609cc40209fa6a441ee9d9e3f3f727d76e611",
+      "git_blob": "8e889863887a6559c22d7fbbf69556a776f0d2e6"
+    },
+    "go-backend/internal/contentrails/sources/authored-v7.json": {
+      "sha256": "df0b73882eb3738902685910b645b70d64ee7c7d15aa2dbfaffbd31bde310aa4",
+      "git_blob": "13d8c9b0500bc6969755a183629712f4b5c143d9"
+    },
+    "go-backend/internal/contentrails/sources/authored-v8.json": {
+      "sha256": "1420241851fe7696c1b98cfb6b46653462edcbe4e00b370de5ff52d6d6e7ce1c",
+      "git_blob": "384588709b8f5a72375bc3442067724bb5406eb1"
+    },
+    "go-backend/internal/contentrails/sources/authored-v9.json": {
+      "sha256": "9eb7c466a8e483ae0613e32aaba2d935a3e7bcc5c65a9d48da364ab9e2e473ab",
+      "git_blob": "1f1374806bdd34b06f9fee721152a5fdb7f2a291"
+    },
+    "go-backend/internal/contentrails/sources/installed-authorities.json": {
+      "sha256": "42d3e57d31590e8a62d4c14c4d27cab91e80cdefe6ade3b3c50a37b20f5ce496",
+      "git_blob": "80bc4dcd6d81f6bc23d461d3695474418772e482"
+    },
+    "go-backend/internal/contentrails/world.go": {
+      "sha256": "f4d4e878ab739f06e45907f2431152d9e43df2a8a0d266dbb830339e48e9196f",
+      "git_blob": "89a9a5823b7f593176e0c4c8a79580ce012f70b0"
+    },
+    "go-backend/internal/contentrails/world_audit_test.go": {
+      "sha256": "88232dfd6ff6f4baa0bb7d846a7ab18a4b7f39dd1ed58fe6565890640bda975b",
+      "git_blob": "b328486d8407c35838409b4574b85d53aff3dd18"
+    },
+    "go-backend/internal/contentrails/world_installed_test.go": {
+      "sha256": "e18e015d75f235e6cb632b5e9351a470d1495b4bd454e8edd2a513a162e463b1",
+      "git_blob": "3ea9864f6325abd83ab372de75c2f5702fd252e9"
+    },
+    "go-backend/internal/contexto/content_v1_2_test.go": {
+      "sha256": "310320e0e857ecef064681ca8ae827f36918cea3b39ea0ca01b0258f074597b2",
+      "git_blob": "ac40fb7e5d76cc1ebcd4365d66d18d4a38fc844c"
+    },
+    "go-backend/internal/contexto/content_v1_3_test.go": {
+      "sha256": "8091b0bda7bcaf931c84ee52de2f62a9d070185ad792c1be84ad7218201e1f9d",
+      "git_blob": "7b34af48f3409034e7a68c405fed29c1504409db"
+    },
+    "go-backend/internal/contexto/content_v1_4_test.go": {
+      "sha256": "bec2789e8174682eafeb07c6cef24bcf02db001415baff0ffb77b19dec556601",
+      "git_blob": "0524770de9047e93e4a94e9b4a8f3cd8d1586e23"
+    },
+    "go-backend/internal/contexto/progress_test.go": {
+      "sha256": "ffad14dcb22fe8568858993c1f61276a9fdb272688fda17526eb0682b7ee8e6b",
+      "git_blob": "ceda0f69ddda36f7e18ab343189ddcdb6e625d98"
+    },
+    "go-backend/internal/contexto/service.go": {
+      "sha256": "0df6ed5f0d2ef5d01c85b93ae5c0d8aa33e3c7648dd7d4bdeed688d24f9e04d4",
+      "git_blob": "a2967f1d1ffb706ff45d1b02236b7c1f1729ca00"
+    },
+    "go-backend/internal/contexto/service_test.go": {
+      "sha256": "2382b7fffaf893f3585c6c3e2408c738b01bae7835efec50507316fc0e79399a",
+      "git_blob": "02dea3eb2cc9dc49d6c7f8cbea1140d91e942243"
+    },
+    "go-backend/internal/contexto/testdata/generate_games.py": {
+      "sha256": "31ad4829260a6a284b83655f3abcf0f6f7926fac0d5432b0e095c09fb4f5a513",
+      "git_blob": "cc9e330f31a82bd631dfaf665ae93d09c3d9bd8f"
+    },
+    "go-backend/internal/contexto/testdata/python_games.json": {
+      "sha256": "983d5a8a5cf39dee3dbac9bf7814f90ed5c302c44022982b72b76b22f9a45ccb",
+      "git_blob": "c7c7368be361a5a409dceb9a456799c7def964d6"
+    },
+    "go-backend/internal/gameapi/error.go": {
+      "sha256": "01cf95f79bd7bfc237cda840702c7b0183d09c9c620dd803d412922286f5d2e6",
+      "git_blob": "9ac92ad8db3aa9f922f60c186e459b199aee56d0"
+    },
+    "go-backend/internal/graph/dense.go": {
+      "sha256": "8d74b34539798ac0d64118c390d3a764f5205246cfdf29e8884ea6e760ba96e1",
+      "git_blob": "784de87971440dd13b651b40e8cf8b4be25fef0a"
+    },
+    "go-backend/internal/graph/dense_reference_test.go": {
+      "sha256": "c555d21180f86621e032849a27aaf9a1e8cc465d9304110602a95d0b72cf7949",
+      "git_blob": "965041515f13510a075c0b19d475a475b4b05d82"
+    },
+    "go-backend/internal/graph/service.go": {
+      "sha256": "a9cc60e321e905293cee6fa49265281fc5db70a78c669c7ba66315933810002e",
+      "git_blob": "ce946a7bdb38906580b8b688fef9b242ca40e32d"
+    },
+    "go-backend/internal/graph/service_test.go": {
+      "sha256": "31adfc74c4ec017e57635992130980707c5841937814beb7ae288946c3612827",
+      "git_blob": "c95b63bbe50e21915e166f90042abb7ece3b2e74"
+    },
+    "go-backend/internal/graph/testdata/generate.py": {
+      "sha256": "fe1b677dbc789b390c887be709de9d41e64cc3271c871e86fc47875349700c5b",
+      "git_blob": "8e37af4eb2c9f2bfb96ded754689bfec8575c32f"
+    },
+    "go-backend/internal/graph/testdata/python_graph.json": {
+      "sha256": "2d3545dbbad56de255e07faa984f668319220759e737f35cf88aff4a2461ed13",
+      "git_blob": "13dd3a1da1a9009258f54055b71c01394a341f96"
+    },
+    "go-backend/internal/httpapi/body.go": {
+      "sha256": "22dc70b3656ed389cdf3ae2d289fa3c5207f5e322b643cfba72f4405e00c7815",
+      "git_blob": "e426e0ace040016f64283a4e3c26331e6c589a0b"
+    },
+    "go-backend/internal/httpgolden/benchmark.go": {
+      "sha256": "739a10cf9facd146cb27eb0c92c6a16f08a9f53029f203e50e0b48bbe7b5607e",
+      "git_blob": "d2d0f9b5d914ffebac8730e27d272c361d5c1d72"
+    },
+    "go-backend/internal/httpgolden/client.go": {
+      "sha256": "2228ce4d1011ea43cea2184de89db43f1ac92015a72b7738eb2628c76dd30f03",
+      "git_blob": "44c82785d685cdbdb97eac89ac4c54c177e0a7ca"
+    },
+    "go-backend/internal/httpgolden/golden.go": {
+      "sha256": "96a42757806a0962397c9aa749093e42355a64702b064abb035fca87ec92511a",
+      "git_blob": "7c564cb6c0aebacf6e06003ce3a79572f7a40255"
+    },
+    "go-backend/internal/httpgolden/golden_test.go": {
+      "sha256": "f5542b1cf88aa100e2f19554558ef29ef86a3c8d5edd937c95487a8279c6fbdf",
+      "git_blob": "4008330913c62888433f2e2764180a4d6a8d4e0d"
+    },
+    "go-backend/internal/httpgolden/source6_gui_requalification_test.go": {
+      "sha256": "3b292e3f95eaf39e14fcdae7dc69f4ea9cfe4751b0c904f56e437612abe8e464",
+      "git_blob": "25459fd8713fe6569489b81cc2381e835dca580e"
+    },
+    "go-backend/internal/httpgolden/source6_test.go": {
+      "sha256": "821c02dfd642a2656eae7a919a0a80bf885a2830b0d7dee4d469c58b45550436",
+      "git_blob": "2d6a89037092230b15f963ba3437f9ae8468a11e"
+    },
+    "go-backend/internal/httpgolden/suite.go": {
+      "sha256": "7346aa3ebb56d8dc2ecfa34383968104716a0f05e01784668a41261998256928",
+      "git_blob": "ec2f3278b991dc95e71ee734d9ab7cfd06a71b4f"
+    },
+    "go-backend/internal/httpgolden/testdata/README.md": {
+      "sha256": "347980ef69561fadc4f819a941e3ed4df26bb07f8d8f130bc4490c74c0da6c66",
+      "git_blob": "2fc952c6c1ef1c07dec7e5f3de93f8b89d933140"
+    },
+    "go-backend/internal/httpgolden/testdata/python-http-parity-source6-gui-requalification.json.gz": {
+      "sha256": "0437c53b91b07d7c4323a7c66753d7250d9304b6a32f94f03901285e64c21951",
+      "git_blob": "21dd4c579e1d89ccc08583f790f60ab685d92613"
+    },
+    "go-backend/internal/httpgolden/testdata/python-http-parity-v1-10.json.gz": {
+      "sha256": "bd72460000d5b4cd8e642f11d9d03335105ebb55f31faa1661b720a45517f404",
+      "git_blob": "b372b134a4a47c9fa1cd7db7d8120fe45d311ab2"
+    },
+    "go-backend/internal/httpgolden/testdata/python-http-parity-v1-11.json.gz": {
+      "sha256": "51655503ba618016e2ae3d3cc341639f1825864a8619761bc89635fa94bba600",
+      "git_blob": "2f9ac53acd4f604b766dff74b756457c4beb07ff"
+    },
+    "go-backend/internal/httpgolden/testdata/python-http-parity-v1-12.json.gz": {
+      "sha256": "b05affc8f80ab96513973444a6d7345123ffe5678c9dfd2c7b2839725eee01dc",
+      "git_blob": "70edcfabb44c9174a98447270a9582cd0f6dad20"
+    },
+    "go-backend/internal/httpgolden/testdata/python-http-parity-v1-13.json.gz": {
+      "sha256": "7423ca8b66969fbd10ac236b729eeb9f75982ec93a3a53965d8a86a24975e406",
+      "git_blob": "e84cac58c56c969ff823406d6547694d7374eec2"
+    },
+    "go-backend/internal/httpgolden/testdata/python-http-parity-v1-2.json.gz": {
+      "sha256": "6293a0dde67ee0b0e5929cc1103bd80795e0aff1af2ba5fdf53e983ab79351fd",
+      "git_blob": "4d0b81e7f916236c3adc11ecb3e0886721c2de89"
+    },
+    "go-backend/internal/httpgolden/testdata/python-http-parity-v1-3.json.gz": {
+      "sha256": "67d009c7eaa710bd98281b3300d3df4dc4ed4e224a157934abd7e19bce112670",
+      "git_blob": "3eb066adb1b6d5fc0ba79ee5f44cf3ad26f98428"
+    },
+    "go-backend/internal/httpgolden/testdata/python-http-parity-v1-4.json.gz": {
+      "sha256": "9d49bd38bbc20c7ebf3a834cada064bf7e4b48018e53890075106dc8f844cb1a",
+      "git_blob": "800c3229311c5f6fdad1bc15bcc724bb079de8d4"
+    },
+    "go-backend/internal/httpgolden/testdata/python-http-parity-v1-5.json.gz": {
+      "sha256": "22995196184b991996b56dccf50e5032f27814d7403fff411a120fa11c76a519",
+      "git_blob": "9b1698e628b4577eca9615ca4739b8da95405406"
+    },
+    "go-backend/internal/httpgolden/testdata/python-http-parity-v1-6.json.gz": {
+      "sha256": "15c7d1bc33c2775a387a9bfe3229625145c94a0ed300622e6737b557c77ebdfe",
+      "git_blob": "448418fff369232800c9b26f8177c1d7fee0275c"
+    },
+    "go-backend/internal/httpgolden/testdata/python-http-parity-v1-8.json.gz": {
+      "sha256": "2c02ee69ebdffd295f5ebe2f90a53276e4166cb39faecd3b14b51bb9e3d295ed",
+      "git_blob": "aa6676139017a3d0859c80152264ef093a431a9e"
+    },
+    "go-backend/internal/httpgolden/testdata/python-http-parity-v1-9.json.gz": {
+      "sha256": "3cce62aa1c34edeff2db245f4d4977a59808545fd24058fce9858f6516a52141",
+      "git_blob": "66219006368afa7eac7679152f54ebf2710e18a1"
+    },
+    "go-backend/internal/httpgolden/testdata/python-http-parity.json.gz": {
+      "sha256": "9041e05f13190a06a526c1aeed1f264d467483cd267ffcdb24f422ed9430b2cb",
+      "git_blob": "d9226faa62dfb2fcf2e9efeda84dbf00bbee656d"
+    },
+    "go-backend/internal/httpgolden/v110_selection_test.go": {
+      "sha256": "c1e7891e256815727bb8d4073236817bed062e780acccc219bac52997ba054f8",
+      "git_blob": "a656c0a95936704310d2f84a84c388a7a8e378f1"
+    },
+    "go-backend/internal/httpgolden/v112_selection_test.go": {
+      "sha256": "d983b4b60c725725ab402293e3caa7b9eacd06be344e192b62fec7416c23a4be",
+      "git_blob": "6f5ff7e269dbdb1a4a86d272c4878aa920eebfcc"
+    },
+    "go-backend/internal/httpgolden/v113_selection_test.go": {
+      "sha256": "4ab5669e76ae58f8a7adb9d347578850e0434bd35b7d92a471dde137c3455f7e",
+      "git_blob": "1d51759fa107b860f3b6dba96c85b4d287d42b86"
+    },
+    "go-backend/internal/httpgolden/v18_selection_test.go": {
+      "sha256": "3430f14500434b9155ef4d62e049a0e0fbaf2e2ae97fec85d32a6c5ffbca39bd",
+      "git_blob": "84f6a89ae07f32262d51dbb5532735e12dbc2e6b"
+    },
+    "go-backend/internal/intrusul/service.go": {
+      "sha256": "a8d927ecc20d8293c8ee45b0097edaf989c4ecbbaa9b22d0574c72259446bc82",
+      "git_blob": "bbae3863538e1173ae9f2511c441c71c99d49e43"
+    },
+    "go-backend/internal/intrusul/service_test.go": {
+      "sha256": "cc932331dbbddb86467d9be839f8f2d1fb6c47869754de82c013f34d1c02a742",
+      "git_blob": "99c97fda47180193cd4cb91345c38bd6d60ce4cc"
+    },
+    "go-backend/internal/lant/content_v1_2_test.go": {
+      "sha256": "a85a7bc5caba7b12a558f31da8e949d2f9394ca94970e6dba9bae839c048655b",
+      "git_blob": "67c7ce25265950b65daba9b00b902e2761a2282f"
+    },
+    "go-backend/internal/lant/content_v1_3_test.go": {
+      "sha256": "2d2f0ce69f710744bf4121952a06efa1174aef00e376823d6f4d01e4632d8145",
+      "git_blob": "16d8c666da2160241ed90088b1c4c7d5f11a3523"
+    },
+    "go-backend/internal/lant/content_v1_4_test.go": {
+      "sha256": "ad788b8b4e360cc523243aad53065ecabd4261910919dacca341b3977710adc1",
+      "git_blob": "8e69f3607f12ce1f00c48f79f534f397e8fc5834"
+    },
+    "go-backend/internal/lant/progress_test.go": {
+      "sha256": "783d4591e4fe69dcdca5e6cd81da6ebd9d71db1d8596d488a9b82cfceb6cc296",
+      "git_blob": "4cf4ed8b467a801decf16595a2c08f153f97623b"
+    },
+    "go-backend/internal/lant/service.go": {
+      "sha256": "fca0abb9016dc0805c25ae9edc6947f92df41848e6ad3bd0d85a1d5613cffc90",
+      "git_blob": "41b15a60594997740b87df0d9171a985233ffb8c"
+    },
+    "go-backend/internal/lant/service_test.go": {
+      "sha256": "a87d4389380789fd04dcbc8da3e1cc2f0487037f09f7bb96d90e9093745b9d79",
+      "git_blob": "afceb1a7732df1e2803196e557387cf5d838d15d"
+    },
+    "go-backend/internal/lant/testdata/python_games.json": {
+      "sha256": "9552cf3b7bdc79d9fa2ec30ec2a0e5de63aafe651173c9a8f5279c8b5e715e7e",
+      "git_blob": "e398edbdd25cc32b2fbc2651579e9ba97a789e61"
+    },
+    "go-backend/internal/pack/pack.go": {
+      "sha256": "a5c48d9c77365fa1b1e4a56979845a26a1ecc77993b987f84885b7f4579629e7",
+      "git_blob": "fe7abc820e5a7cde3cdb225f4f49f7a9539f1166"
+    },
+    "go-backend/internal/perechi/service.go": {
+      "sha256": "3f0bd33043a154f6b084e2321857b398b01e2f3f85fbfacccff7b4064a6a2369",
+      "git_blob": "583af65df5538c294341f463d65a63dfb0b515f7"
+    },
+    "go-backend/internal/perechi/service_test.go": {
+      "sha256": "2c69b6e5006ee5245cca4024b38ff93ba5740ddea6251714997673e52da0a65b",
+      "git_blob": "9d892158a368c7665fa6c885d6acb177b6689238"
+    },
+    "go-backend/internal/perechi/testdata/generate_python_goldens.py": {
+      "sha256": "8bb9e5a108108f78895dbdf833a712daeec81132c98e1911ce37c45b012e47d0",
+      "git_blob": "f8d6a6892ed20accecf22aee41060074c9372a16"
+    },
+    "go-backend/internal/perechi/testdata/python-goldens.json": {
+      "sha256": "081f02948ddc9a9fa8bd215f7b214771588dd35612cf7c4a8b66016c79771ab1",
+      "git_blob": "4a35e730ef38e21f7c21a62431ca7ef03b3b2339"
+    },
+    "scripts/apply_common_words_v24.py": {
+      "sha256": "50c07392950feb2f740108c86fc91619fee29699107bdbd7ad28a5477b09ba91",
+      "git_blob": "5f5c30fcecaec92d7e23c1f915c3fe67f1b2bcb5"
+    },
+    "scripts/basic_words_v28_data.py": {
+      "sha256": "f23b9f5fe2b763f05726213021c2d083b5433bf03a9f68eec6997816d4dcb500",
+      "git_blob": "2526c3a0890259a0021356880c1f9d14eab4311d"
+    },
+    "scripts/basic_words_v29_data.py": {
+      "sha256": "2636ee0ea92aba120709f38f373036f4de950dca685924eea14882c4840a7d4e",
+      "git_blob": "e7f2cab7b92543b5d7fc0269e420bb709f4fde94"
+    },
+    "scripts/basic_words_v30_data.py": {
+      "sha256": "cc2eba22243dcd8a096226a0ccd390a5ff5ef4832582707afec7fbab1bb22607",
+      "git_blob": "bb43e5c3dcfa392b57c5ea71d5172130526fc7ed"
+    },
+    "scripts/basic_words_v31_data.py": {
+      "sha256": "66f4b294533cff6fe10677adf169b4253e55c8ec36b258c265d4bacaeec8379c",
+      "git_blob": "4a0b7140432026ebf5586a9ed77e757fec08aa1e"
+    },
+    "scripts/basic_words_v32_data.py": {
+      "sha256": "2d9f09f0134d9b68b705d5146580809475bdb0d78de7efea9221f9f0e08e276c",
+      "git_blob": "cbff2656e0250a987174e626057eac467e810beb"
+    },
+    "scripts/basic_words_v33_data.py": {
+      "sha256": "96a506dbfd0dcdcaeecdebbaffcfe3940af7b720d99917606eb6a96102809033",
+      "git_blob": "5159150ceec8ca16f4eac4c6560d0716134896d6"
+    },
+    "scripts/common_words_v24_data.py": {
+      "sha256": "54d75cffb8e5e5b2b4903de9d872bb37495b58b4a7bde5dd076b56fa51a365fb",
+      "git_blob": "11f92a8fc9814781dda3c7d92b3e3db048e6990d"
+    },
+    "scripts/contexto_common_words_v44_data.py": {
+      "sha256": "e2eb5598cd14d2531ba54b6667edf36467538f14cbe54cf8ee25b337feac6ded",
+      "git_blob": "1c64aa2ae28e28b214f746c502e545b40746f4ae"
+    },
+    "scripts/contexto_common_words_v50_data.py": {
+      "sha256": "88f2d58a7f4c77ab08da2eb5cb0864ebc9bf3206c40d7010d77361c50276bd17",
+      "git_blob": "2aad33a9e7a5ec60950d86e68466cfad9e21d2fe"
+    },
+    "scripts/contexto_common_words_v51_data.py": {
+      "sha256": "059e63d9238b12aeeb6a69c112848f6ba6d71597e71c32b7c0e8f7663daf8b04",
+      "git_blob": "61a3b6a798fc82ae5f78aa6d92f839ce91132fec"
+    },
+    "scripts/contexto_common_words_v52_data.py": {
+      "sha256": "a7a8213e219a215513c1e67fd87f3452fc6d37b17b9ad18a05ba1426b70e2d80",
+      "git_blob": "a7af04f867d35fb616605967a0fb5f2742c16708"
+    },
+    "scripts/contexto_common_words_v53_data.py": {
+      "sha256": "c10353e7aa5f1fbd5e9d7e7ea6ef4ddb4168ac4408c72b41a6b131da8630fdc6",
+      "git_blob": "98e33c61fa1efe2a849be6ce19b13e633f44b6a7"
+    },
+    "scripts/contexto_common_words_v54_data.py": {
+      "sha256": "4873501d99c8956fe33938beafe0f077205b26fb0de36f88c375935f137ecda4",
+      "git_blob": "ce702a3311bfcf16cadce67616b2ed8fc00522c4"
+    },
+    "scripts/contexto_common_words_v55_data.py": {
+      "sha256": "58fbf3fa538f74bb3ee5dbbe3409804630271fad15205a2b45c5ae0486db83fb",
+      "git_blob": "6dd719449c32e6bae7efa009be3401b0b53ec971"
+    },
+    "scripts/contexto_common_words_v56_data.py": {
+      "sha256": "72d0c288d400709717a97ce7c10a0f17c13ee0de968a7f38d50b92cd0525571f",
+      "git_blob": "74616d67439f8baef069588ed28faaaf7ffdff83"
+    },
+    "scripts/contexto_common_words_v57_data.py": {
+      "sha256": "f2d741739c04d40095edf61a66582ec3901d942117852bc83302b67e5d5bb9a2",
+      "git_blob": "677999beb8b1eb5a12532321e1d278f4d14b7876"
+    },
+    "scripts/contexto_common_words_v58_data.py": {
+      "sha256": "779dd22058a5d196d940900b9d1bdffe92e614eb85d390f9122db81eae5a3b99",
+      "git_blob": "49f7cfb1bb6d8c5e3028b6b216b7421b203ff675"
+    },
+    "scripts/contexto_common_words_v59_data.py": {
+      "sha256": "ece70efbe8871fa9dfafe02084212d088623f34eee003f57ee4ce6378f67d794",
+      "git_blob": "5c0ed9e386160a5f68ae0c685d39bcd82dee3673"
+    },
+    "scripts/contexto_common_words_v60_data.py": {
+      "sha256": "a76cdc4f4c1da877fef6cc8fcb13c40084dae6ca47b1aae3593c1d5acd6a5918",
+      "git_blob": "b366cffb4b1f82faf28813c40ba6404eea9a6cf9"
+    },
+    "scripts/contexto_common_words_v61_data.py": {
+      "sha256": "f6f17c8584e861dfd7bd5e137793e97e4adc174b6f7fd87d2fe835065b610007",
+      "git_blob": "6b1e369478cbc4e83675883a1736a973786c2579"
+    },
+    "scripts/contexto_common_words_v62_data.py": {
+      "sha256": "4e78b343dd8931d8647921970919060ff816b2f4c3372d4c7a681ad2364a6a39",
+      "git_blob": "be9868aa3e2a1d6a1eacb280975244b693feeca3"
+    },
+    "scripts/contexto_common_words_v63_data.py": {
+      "sha256": "d539ca7effd835b887361572884e120ee42126c5a2039c37e62c4c34eb153330",
+      "git_blob": "72ddd579237b9b5585a6b0e9ed6f6ce2fa43969c"
+    },
+    "scripts/contexto_common_words_v64_data.py": {
+      "sha256": "a5f36259907bc9dedbb6860d6b2da2251beb72b154755132a3eed957feeaf7c8",
+      "git_blob": "f8c259819f101575249fc33f55d3b42ca1aec80d"
+    },
+    "scripts/contexto_common_words_v65_data.py": {
+      "sha256": "aee9ac4841dba4684cbfd0e316830fd89ee0b41fe8f331b3dfaf8191416faa00",
+      "git_blob": "186ad0f8b150e0178142469f230d5650db58ae40"
+    },
+    "scripts/contexto_common_words_v66_data.py": {
+      "sha256": "5132881287e47a49fc7be61d3d11b06d4d3bc16ec6912eb9b2041d5da0c9e0c1",
+      "git_blob": "bc93e15f7f4e282ee54a2987efd46eea6c645ef6"
+    },
+    "scripts/contexto_common_words_v67_data.py": {
+      "sha256": "1e1f47371a14d68b0fe0aecd4b620023284b02d569d8a7b8e0f410afa4c7f0ba",
+      "git_blob": "4d985aeaead70b4098a7267e1370c35d5334f3ec"
+    },
+    "scripts/contexto_common_words_v68_data.py": {
+      "sha256": "641d13b2ce738c053bf3f3d820ab918613c21f5504afb21ab3fd6821adbd40bf",
+      "git_blob": "a34735356c5c7633b10b107862b7355d27233cd6"
+    },
+    "scripts/contexto_common_words_v70_data.py": {
+      "sha256": "a7007c5d331bab1b8bcf798a20a14766a66a29506dafe807e1702928fde06528",
+      "git_blob": "c9f2c6a46808baaac48ff83a61710a723a43d7f6"
+    },
+    "scripts/contexto_common_words_v71_data.py": {
+      "sha256": "ab55dd00f619c0e0012949e4ec6f227d9e6bb33055bde968097e0699440931a9",
+      "git_blob": "b7364179ae11898dd0cc25e9ae57392217309dbc"
+    },
+    "scripts/contexto_common_words_v72_data.py": {
+      "sha256": "f1c6c3fb9fdbc6a0d6d85881aa04d7fd86df9159ef00ff6bac23ac2450a523ee",
+      "git_blob": "b30ff29815d3013a1618a7ac4cb92a257c9e8c3c"
+    },
+    "scripts/everyday_core_v1_8_data.py": {
+      "sha256": "ab547440b92bc43e0ed65dd414cac69b48307066dce0c2bbc0540fa4438074f5",
+      "git_blob": "ff5bc054dee4d89badbd6ca9b8e4965e0adaca93"
+    },
+    "scripts/everyday_discovery_v1_10_data.py": {
+      "sha256": "e90fbf1756d958c76c0a93c289ba9cfd937e572419bde6627562abca67396ab0",
+      "git_blob": "4bb3e4dec390de720f8300cbcc907a0d58e1177b"
+    },
+    "scripts/everyday_graph_v1_3_data.py": {
+      "sha256": "df08b82ecb038f191bb158c520987d76705a453c8cf6b736913c644863d825c7",
+      "git_blob": "2e31e986f0c49bc0878cddb6d2e8184c3b33edd1"
+    },
+    "scripts/everyday_graph_v88_data.py": {
+      "sha256": "5fa229dd7332b489f509ba9b4f6b7b1e13f71954a6ce86999cc31d69d528a249",
+      "git_blob": "75eea39d76e4a1acd4a3d117f59f8654c32b25eb"
+    },
+    "scripts/everyday_inputs_v1_6_data.py": {
+      "sha256": "9a932fe50589cd67a0073be2a02a0e8a7dd61c2d5f973b39adb83770abbea8f3",
+      "git_blob": "eb6e7777e94aad080e93aed36a05411f2a146dc2"
+    },
+    "scripts/everyday_inputs_v1_7_data.py": {
+      "sha256": "37b0fd5b843d962d886ff660afb64a0c4c1bc844ecdbaae74eb56eecce7b3004",
+      "git_blob": "1023e4ae51120916627c23ff907f883146540bf5"
+    },
+    "scripts/flour_associations_v77_data.py": {
+      "sha256": "a6221d0bdeeea1e6632c1914a076d834411f70fb1e21068b13ff0556c393f973",
+      "git_blob": "afdd3640e965fd905df82e86cad3956434bea4ee"
+    },
+    "scripts/food_input_v83_data.py": {
+      "sha256": "74166e100a3da120e0e1e886af8f406678903ccfb74366120d6948bd878231d6",
+      "git_blob": "7c97407e50f83eda23ece06b021003420874e591"
+    },
+    "scripts/functional_graph_v1_5_data.py": {
+      "sha256": "595117fa0e7d9401354bb14a8520db095c8b11f6af34b6eb12aa224149f721c9",
+      "git_blob": "c5214ac8df439c48baa6c3ea3ed81043029b1306"
+    },
+    "scripts/home_and_nature_v1_11_data.py": {
+      "sha256": "b25c6de488d8ca19be4dc370ed0a3ac59b4e3b43f89551dad778ac90d9542f93",
+      "git_blob": "37e29ba1d8d95483b831fdfe85cad0cb867125b5"
+    },
+    "scripts/household_graph_v90_data.py": {
+      "sha256": "c934e1a01d4f57a9c7e3eb6b47089a012027ed1d5a69e17741e2612bb811767c",
+      "git_blob": "350dbf0fa8b2c812bbbf31183ebba760e35a5d66"
+    },
+    "scripts/ingredient_graph_v85_data.py": {
+      "sha256": "efdbffe1ec142c42ebdd602346819ea49e6b344a1000040f57390ec659fe9c25",
+      "git_blob": "d41901c14ce82c631ea9d7191bf5fe45039f7113"
+    },
+    "scripts/kitchen_graph_v84_data.py": {
+      "sha256": "86ac73d6aec018e246d6b94a73cabad0184cc7c3d8160300ab051756dae9fb25",
+      "git_blob": "5c4f6f56b24c65cf5d6c5258d58e1b279be103b0"
+    },
+    "scripts/nuca_feedback_v81_data.py": {
+      "sha256": "daea0d654ecd7f05fde467b7eccfad00e76d597f67b0a4106554a3de52004f07",
+      "git_blob": "cd1ce275a3559923c43b0db25548a38c52c06d64"
+    },
+    "scripts/post_and_garden_v1_12_data.py": {
+      "sha256": "2d0064f9c3e831bbfec9896327964c8fc0ad45d4274eb31c73020b74941c2a24",
+      "git_blob": "9f344448aced73ed4d5ae44f1d139944e2803060"
+    },
+    "scripts/preparation_graph_v86_data.py": {
+      "sha256": "1f2afac7903fd529245ed326e2bd229ba3d50a80c57f263633d8b741486c5950",
+      "git_blob": "aa0ef88cd5cf1800715614639532a341ff3e6244"
+    },
+    "scripts/seasons_and_school_v1_9_data.py": {
+      "sha256": "68a8c4ef0c56bee2150806073cfc1d5c6aa8cee4deac0b2e14ac9d3dc7a319e3",
+      "git_blob": "d23fe8a262fdd76a273355644a0df51f47236329"
+    },
+    "scripts/semantic_edge_alias_v25_data.py": {
+      "sha256": "073e8233d64c8fce50defbb8b113d7f29752ceab848d471b3079238b5fad8521",
+      "git_blob": "575eff67301760a060fa0e1e6419220017f9a954"
+    },
+    "scripts/snack_graph_v87_data.py": {
+      "sha256": "f781e6b9152dbcfe3019d7cbe8a3f684d5575b221ce67753b8e060e29ddf80f6",
+      "git_blob": "413d1ff6b48a2778d9deedb241481cd6100c5f84"
+    },
+    "scripts/synonym_graph_v1_2_data.py": {
+      "sha256": "03c34a9d54c8e602d99777be5981bab8d50db5fc99b320ae342cd05f733efd1c",
+      "git_blob": "080898c1548919bb27fb3c3e8cafa29cc53563b5"
+    },
+    "scripts/time_graph_v1_4_data.py": {
+      "sha256": "b7c5af54445617975796759ecf22e1c814b749c8bd64dbeb0cd69d3a2dc4326a",
+      "git_blob": "1c0e7685108c26109a0b85f4be863f534efd8540"
+    },
+    "scripts/weather_and_landscape_v1_13_data.py": {
+      "sha256": "01589eb1721c91544fbc94325c3e16cc2440ed1dada7ab8ceeb0886ad6476279",
+      "git_blob": "5900448577d0b98017c18b83f169fe7c56c923fb"
+    },
+    "tests/fixtures/alchimie_v91_source.py.gz": {
+      "sha256": "eee08c0832acc8081755143e68605054a4cbe88ab8f094d300ab8c04922468f0",
+      "git_blob": "02f3a42508081c3476b932d328a0c5a2a1f80f0b"
+    },
+    "tests/fixtures/board_demotions_v43.json": {
+      "sha256": "c35261a5208d9b68d39a94f8602a5586db67eaecbe130c0c219f6a43fd1ef0a7",
+      "git_blob": "2dff0e267407a68bff7886f4aad1816765e4edea"
+    },
+    "tests/fixtures/board_rankings_v37.json": {
+      "sha256": "7380a013c0ee14cd40c78b5469352346e945f42b90ca3a305fb17bc379cbad60",
+      "git_blob": "865ee3cb64a07268c72e2417fbcc675d5ca5b352"
+    },
+    "tests/fixtures/cat_mobile_app_pack_contract.json": {
+      "sha256": "8201d8bde02881f36f4d832c863f4ff71fc44f9dc38161010287deedacb7d770",
+      "git_blob": "b9909f7a7b7f5b9485fc421f62ae5716756e72c3"
+    },
+    "tests/fixtures/contexto_demotions_v44.json": {
+      "sha256": "29c76be1d65fc38bf2e3a754d48ba3b96a8e6b6c95fde28c7c2fbd882ee9996c",
+      "git_blob": "4de0cc89a113e734ee360f75f53b5909ddd51fb9"
+    },
+    "tests/fixtures/contexto_impact_reserve_v69.json": {
+      "sha256": "4c41d092c895c61aaccfbda3cb9522c4d5767a88d9af9343efccc182f71e7612",
+      "git_blob": "d1bd231e6319283565a1e7cb3a0d8a1cd44aa0b9"
+    },
+    "tests/fixtures/derived_catalog_v38.json": {
+      "sha256": "6ede0ddfb44346bcd5595b08f4de7739aea64e0724f090ba6dd8d54059f525eb",
+      "git_blob": "503347412bdef33e848110b307bba40f9d7c0df5"
+    },
+    "tests/fixtures/games_pack.json": {
+      "sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8",
+      "git_blob": "5ebb221e45789cfbd9921f6efe68ff25bade29fc"
+    },
+    "tests/fixtures/kg_app_pack_sample.json": {
+      "sha256": "d8255abebb702bdbb9e0c0de5fdd43612842a42df1644c3e09aacd43607b3098",
+      "git_blob": "0fe16f3c33805edcbb2e263899392eac342327b7"
+    },
+    "tests/fixtures/kg_sample.json": {
+      "sha256": "d8c7a8226e7b128ef613aeeebedbd6af8529e5dd1d56676c3a8b1a6b86c886fc",
+      "git_blob": "98eb1b1739451c27cbd1574e4e7919233192c473"
+    },
+    "tests/fixtures/release_reserve_v1.json": {
+      "sha256": "fd522b637ab87681d0e890ffb38de44fc57480bf37c302746a328d71a9219fb7",
+      "git_blob": "290511688d5d0693e711007e26038b2cbaa16b7e"
+    }
+  },
+  "content_authority_count": 244,
+  "authority_equal_count": 244,
+  "authority_differences": [],
+  "current_relevant_file_sha256": {
+    "frontend/src/App.tsx": "2cc18480c0035bc3d73f1899b27569c70ea3f5707f586c432cc29cfdaaf68cae",
+    "frontend/src/alchimieMode.ts": "a05941ae664d191ab3128e1aaa0154657175e1467f11de8e9f4e0bc4fca7529a",
+    "frontend/src/api/alchimie.ts": "bc2ec047be8e4365da9c6c77eda70dc0b4a4c9d620e4d9d87ae412704325d6f2",
+    "frontend/src/api/alchimieExplore.ts": "15a0a1208318968d2f4b3888167f2bdd71ac9247954c0916b8249134055cc55e",
+    "frontend/src/api/client.ts": "687eb99cd66b4289152070d846fcde692baf679bdba441ae97d9013854be5454",
+    "frontend/src/api/conexiuni.ts": "02f9e3f7fc8d89f6fdb83a9da2955b31adc6912b08174ed934c778f97bdc3c77",
+    "frontend/src/api/contexto.ts": "74dad84ac2c5bdde821f5117c39fb257daa030768c248c7e506095d00537744a",
+    "frontend/src/api/intrusul.ts": "267afeae261fa1c10cbd3be7b3158f557aef9dda6ab701125dc14c67ad89c287",
+    "frontend/src/api/lant.ts": "c5441acbf209193f6b8bf9903a04ea3971f8d4e569ed8ff019ebbf6dfee48f1a",
+    "frontend/src/api/perechi.ts": "07d90f3ab8286a3098105ec4b96f651108a027b36ac795aff1a53f091c9628c8",
+    "frontend/src/components/AlchimieModes.tsx": "14c8b63dfa904a545442b416fb0298b1e053e31db98cd16013b02b191b49b0e1",
+    "frontend/src/components/CategoryPicker.tsx": "81d35fea68dce7ff53cf695ea7793becc2646efd400755671b17c44c9a4bfcf8",
+    "frontend/src/components/DifficultyPicker.tsx": "c733f8f9c73f0fb8b8273692eeecaf34fad347e99f93dc5e7941998ce294467d",
+    "frontend/src/components/GameIntro.tsx": "a693ae1ab40f1efb24bf976787cbb49e1b2ef7920fe94c0bb8b6122ffb4d6120",
+    "frontend/src/components/GameShell.tsx": "5a337a7c18d7c493d5dec3c011f4b5bc2009bed7ce9ed2bbbcec00b0c44116d5",
+    "frontend/src/components/Hud.tsx": "8030880bddc721481d535b2bc58b054a53c1389722a9a6046de2d2ecc386f6bb",
+    "frontend/src/components/ResultCard.tsx": "9922222037b1d683f980d0860c9c276bdb2c2c3f44415fe19a863d86f1a08180",
+    "frontend/src/components/StartFailureNotice.tsx": "7511d4033915e300cf637715f15dcb552161bea8f882ac93b81eeca351b860da",
+    "frontend/src/gameActionRecovery.mjs": "b73851fd616aed6489139cd800bad2e8e6ab3480664470e765fd044ba9eb6267",
+    "frontend/src/gameHelp/alchimie.mjs": "7a8c5c2c6cfd7c9627419bf1c25d8494595215404895ef7a2f07162664736f68",
+    "frontend/src/gameHelp/contexto.mjs": "0c2aae119e955a3ae03fa2f2d2bb8fcf8c6c7769f474f56bd83a7daa3ff81caa",
+    "frontend/src/gameHelp/lant.mjs": "427f37b9fb3b5c8103a4fb546ec5ed044cb737f68d3c23ad01d110619325bd45",
+    "frontend/src/hooks/useDailyIntent.ts": "09c533b081d8fc3f72cbb313da88202163eb5aaeafd6a230a0594a630c11f7de",
+    "frontend/src/hooks/useSavedGameResume.ts": "2bdb911d3edbe3d3f0b4e85c49f921475e42c31faba9e1e7ce28038755a94138",
+    "frontend/src/main.tsx": "8c0f91f63929c07595bb9e26d5adb64eeb00693b0b5f8a2b4a65d4be13d2adba",
+    "frontend/src/routes.ts": "4334df64a0490fef67dbdf4c64c333e315a495ce9cdc3045921e8beed435606c",
+    "frontend/src/screenLocation.ts": "5bb1466beee65f17bd6171ccf04593bb24c3dff4ae6fc288d80a36d03b21e810",
+    "frontend/src/screens/Alchimie.tsx": "18e4b9ce99683deab5c1609c717ffefd27292d6fb7e534f96a838db474252e72",
+    "frontend/src/screens/AlchimieChallenge.tsx": "b181eb98ac3ba9c9960203af3d99da96a47d4a131a8bd003335ad290856f6afb",
+    "frontend/src/screens/AlchimieExplore.tsx": "44dcf6dd0ac6cd7657d3cdf2932588acc3118cee99eebe585c2cd71bef3c9230",
+    "frontend/src/screens/CaldRece.tsx": "66f939ae152f3e01a6e703effaac3d71ebf1eab3d08bff9be37e5b3bdcbc7562",
+    "frontend/src/screens/Conexiuni.tsx": "115a0a475c27722f1ba7f6fb23224d4f9cb1aee8357aef60d9807abd19a6cedc",
+    "frontend/src/screens/Intrusul.tsx": "b1a043eaaa7746b38aac3d197694e79a4bcf96e4634da939e3e8b82b80f8ab60",
+    "frontend/src/screens/Lant.tsx": "2e7cfc1edda15c01e3b55be36d534d775827c1e411ebbd2a164165b5b01cd4a8",
+    "frontend/src/screens/Perechi.tsx": "a342f4c8e86ae57786ee06134d6f99155bb579e508a4ef366910dcc0d2c9d133",
+    "frontend/src/styles/shared-game-controls.css": "311e49a1aa561517f4dc4a7a0d3b7ec61834b5097cd44eaf69bbafcdb764e55d",
+    "go-backend/internal/alchimie/projection.go": "c45a46c4836b58b572f4fec15dbc72a355ec3b8a35a0bee6a37672104a8dab86",
+    "go-backend/internal/alchimie/service.go": "f63e805e02aecb58aa6ac4f0a64f6e5838b6d14cb2b001135f087db019545cae",
+    "go-backend/internal/alchimie_explore/service.go": "4b53343d07d332fb9f935947b84f3379481bcbf78660211e53ac1357ec9ec0ce",
+    "go-backend/internal/catalog/catalog.go": "b930bb8cdd1ecfa2a1ace7e8a0a405d1317ca67706460745d88f0c748418c43c",
+    "go-backend/internal/conexiuni/service.go": "d1ca9cca16595b37f9a9c7701c2ef009ee9da01d692dc64605c3a7fe043ff79e",
+    "go-backend/internal/content/bundled.json": "f6d983f1ab2cbb7852e8583411eaecd2048fdb5b5da08099129d7e4ff471344c",
+    "go-backend/internal/content/content.go": "4990f7ba621b0f10519a3a29ef5e998ea4b2db323b4db2e8d15753a9ef6b4f83",
+    "go-backend/internal/contentbuild/build.go": "65b7869f1966e659fa24d885456ba1f105ed3a03a64ceff681009dca3858ce6a",
+    "go-backend/internal/contentbuild/catalogs.go": "eb0239ed9b57524b2e6a18aa3d5757650de17c674e6fee071a724037c6f78c77",
+    "go-backend/internal/contentbuild/graph.go": "e4e9e54f7350767b5dc35dcde86db6ce22bf681a6be9d364cb723abb298ccf24",
+    "go-backend/internal/contentbuild/world.go": "704f3d5d2e4622e753f4c3d521d215c852e600cf00509c80dda20c6a5e8312c1",
+    "go-backend/internal/contentops/critique.go": "eca8067e24565d797bc90a19d4e4a300c73282b89afed874a7a80785c1ebe80d",
+    "go-backend/internal/contentops/derive.go": "589d7f47704f74dabd1d5a3aed6094d42a978173c6ce89e82f733d5bf12601ae",
+    "go-backend/internal/contentops/rank.go": "8fca7ff8a16976bdf036e6e9d77bd800a140cb5ed174260e0ad9d708b7120722",
+    "go-backend/internal/contexto/service.go": "0df6ed5f0d2ef5d01c85b93ae5c0d8aa33e3c7648dd7d4bdeed688d24f9e04d4",
+    "go-backend/internal/graph/service.go": "a9cc60e321e905293cee6fa49265281fc5db70a78c669c7ba66315933810002e",
+    "go-backend/internal/httpapi/body.go": "22dc70b3656ed389cdf3ae2d289fa3c5207f5e322b643cfba72f4405e00c7815",
+    "go-backend/internal/httpapi/managed_delivery.go": "977fc8e28de55575e21011a83c16609c0d48d69da98fd47b832a49d422e3f6d1",
+    "go-backend/internal/intrusul/service.go": "a8d927ecc20d8293c8ee45b0097edaf989c4ecbbaa9b22d0574c72259446bc82",
+    "go-backend/internal/lant/service.go": "fca0abb9016dc0805c25ae9edc6947f92df41848e6ad3bd0d85a1d5613cffc90",
+    "go-backend/internal/pack/pack.go": "a5c48d9c77365fa1b1e4a56979845a26a1ecc77993b987f84885b7f4579629e7",
+    "go-backend/internal/perechi/service.go": "3f0bd33043a154f6b084e2321857b398b01e2f3f85fbfacccff7b4064a6a2369",
+    "scripts/apply_common_words_v24.py": "50c07392950feb2f740108c86fc91619fee29699107bdbd7ad28a5477b09ba91"
+  },
+  "additional_dependency_sha256": {
+    "frontend/src/categories.ts": "672ddc6e90d925f8369077c1b074dd62a080775d4a2f7674757da4a78123ba10",
+    "frontend/src/components/CspElements.tsx": "7c9041cb80417e4cfa1f6c523bf2dd49ed32b5ce6dd4ab9746ebbc5ca4ae9048",
+    "frontend/src/components/GameOptions.tsx": "765447efe7f5776c50a45ceb88a419df9005d383aff952e641b6563c6789e37e",
+    "frontend/src/components/GameSetupOptions.tsx": "568a506c3be37e337f41175e1463801a2c3392124ef797399d37c991267449cc",
+    "frontend/src/components/CspStyle.ts": "8097d0f5c1fecb298c8beefe93447f55d9ddb758a52c09b27afb4bc5ac6efc16",
+    "frontend/src/components/cssUnits.ts": "5681d320b14511757894cff3a850b7f67114d78e9b1eb0d2c36e4d7551c1b873",
+    "frontend/src/styles/app.css": "8c3ff1b6fd2da640071f709d8d58f50c44bf71e6c36fc5bae2bf2120e4e3205d"
+  },
+  "changed_interfaces": [],
+  "changed_adjacent_dependencies": [],
+  "observation_stable": true,
+  "previous_binding": {
+    "canonical_ref": "97fb496f330d20249f5a9d7a880495b465e94a15",
+    "path": "docs/content-consolidation/v1-8-through-v1-32/current-feature-working-baseline.json",
+    "sha256": "620cb0be6233c6b6ec169c4fe45161d36f0f627a0a5d29e96166c5cd978fde8b",
+    "retained_path": "/home/dobo/work/_temp/content__v1-37-familiar-rural-home-and-school/consolidation/prior-current-feature-working-baseline.json"
+  },
+  "GUI_or_integration_qualification": false,
+  "feature_mutations_by_content_task": 0,
+  "feature_WIP_copied_or_executed": false,
+  "scope": "Fresh main/feature/source hashes match the exact retained authority/path index. Current feature remains primary; equality proves static compatibility only, not GUI/runtime/integration qualification.",
+  "relevant_working_bytes_index_sha256": "e8e38568b70e19d5d08ef3d28beee8d9b98bd5d8d2645632f278dfaebdb93754",
+  "current_observation_reference": {
+    "path": "/home/dobo/work/_temp/content__v1-37-familiar-rural-home-and-school/consolidation/feature-working-observation.json",
+    "sha256": "5f0dec7ea7df78db3245655e6177fb92b0e3e4a6c8242017a8210ea9f9d9c764"
+  }
+}

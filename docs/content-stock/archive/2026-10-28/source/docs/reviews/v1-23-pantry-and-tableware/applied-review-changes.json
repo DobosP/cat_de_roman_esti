@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "wave": "1.23",
+  "original_module_sha256": "e124478d8967d5f6b9464f822173854e407698dfebd2d2aad743a0d99f4acf0e",
+  "final_module_sha256": "8d7b57d126411ce7ad8a4d1a2ad3100cf4ae0f410a2eaf09a0988fc173257bae",
+  "review_bindings": {
+    "factual": {
+      "reviewer": "factual-v1-23",
+      "path": "docs/reviews/v1-23-pantry-and-tableware/graph-factual-review.json",
+      "sha256": "2ff7998eb2b1c89d2a85fd17362ce8c5afdba7ebe8992adb694573a3ffc1680b",
+      "module_sha256": "e124478d8967d5f6b9464f822173854e407698dfebd2d2aad743a0d99f4acf0e",
+      "round": 1
+    },
+    "quality": {
+      "reviewer": "quality-v1-23",
+      "path": "docs/reviews/v1-23-pantry-and-tableware/graph-quality-review.json",
+      "sha256": "3657dd2faf83b17b561d357bb37893c608f65c07fdd02ac82aef2d42fd42dceb",
+      "module_sha256": "e124478d8967d5f6b9464f822173854e407698dfebd2d2aad743a0d99f4acf0e",
+      "round": 1
+    }
+  },
+  "changes": [
+    {
+      "item_id": "v123-amidon",
+      "action": "convert_to_existing_input_family",
+      "remove_new_node_id": "n_v1_23_amidon",
+      "existing_owner_id": "n_v86_food_amidon",
+      "retained_original_forms": [
+        "amidon",
+        "amidonul",
+        "amidonului"
+      ],
+      "removed_edges": 4,
+      "preserve_owner_metadata": true,
+      "no_retargeting": true
+    },
+    {
+      "item_id": "v123-gelatina",
+      "action": "convert_to_existing_input_family",
+      "remove_new_node_id": "n_v1_23_gelatina",
+      "existing_owner_id": "n_v87_food_gelatina",
+      "retained_original_forms": [
+        "gelatină",
+        "gelatine",
+        "gelatinele",
+        "gelatinei",
+        "gelatinelor"
+      ],
+      "removed_edges": 4,
+      "preserve_owner_metadata": true,
+      "no_retargeting": true
+    },
+    {
+      "item_id": "v123-solnita",
+      "action": "narrow_metal_caption",
+      "edge": [
+        "n_v1_23_solnita",
+        "n_v4sti_metal",
+        "related_to"
+      ],
+      "before": "unele modele sunt realizate din metal",
+      "after": "unele modele au capace din metal",
+      "no_endpoint_or_form_change": true
+    },
+    {
+      "item_id": "v123-pipernita",
+      "action": "hold_and_exclude",
+      "removed_node": "n_v1_23_pipernita",
+      "removed_forms": [
+        "piperniță",
+        "pipernițe",
+        "pipernițele",
+        "piperniței",
+        "pipernițelor"
+      ],
+      "removed_edges": 4,
+      "reason": "The physical pepper-serving role is verified and distinct from the selected salt-serving role, but both DEX and DOOM mark the head rare. Current retailers alone do not meet the doubtful-label broad-recognition bar; examined national/school/culture signals concern an unrelated weapon or do not corroborate the food label. Hold without frequency-based rejection."
+    },
+    {
+      "item_id": "v123-carafa",
+      "action": "clarify_new_description",
+      "before": "Vas cu gât folosit pentru păstrarea și servirea băuturilor.",
+      "after": "Vas de sticlă cu gât alungit și partea de jos mai largă, folosit la servirea băuturilor.",
+      "source_instruction": "quality required_supported_facts;forms/endpoints/edges unchanged"
+    },
+    {
+      "item_id": "v123-folie_de_aluminiu",
+      "action": "hold_and_exclude",
+      "removed_node": "n_v1_23_folie_de_aluminiu",
+      "removed_forms": [
+        "folie de aluminiu",
+        "folia de aluminiu",
+        "folii de aluminiu",
+        "foliile de aluminiu",
+        "foliei de aluminiu",
+        "foliilor de aluminiu"
+      ],
+      "removed_edges": 4,
+      "reason": "The everyday metal sheet and all four use/material claims are supported. However, the selected current DOOM3 entry explicitly describes plastic material; MDN supplies a metal extension but does not certify the proposed metal-sense normative table. Hold that sense-specific normative uncertainty rather than borrow a typed other-material entry."
+    },
+    {
+      "item_id": "v123-paleta_de_bucatarie",
+      "action": "hold_and_exclude",
+      "removed_node": "n_v1_23_paleta_de_bucatarie",
+      "removed_forms": [
+        "paletă de bucătărie",
+        "palete de bucătărie",
+        "paletele de bucătărie",
+        "paletei de bucătărie",
+        "paletelor de bucătărie"
+      ],
+      "removed_edges": 4,
+      "reason": "The selected kitchen turner is the same tool sense as accepted protected V1.21 Spatulă de bucătărie (n_v1_21_spatula_de_bucatarie); fresh vendors explicitly use paletă/spatulă for that function. Hold for cross-packet reconciliation, without rewriting or assuming that unapplied owner live."
+    },
+    {
+      "item_id": "v123-rubarba",
+      "action": "correct_same_endpoint_classification",
+      "edge_before": [
+        "n_v1_23_rubarba",
+        "n_v4sti_planta",
+        "related_to"
+      ],
+      "relation_after": "is_a",
+      "caption_before": "provine dintr-o plantă cultivată",
+      "caption_after": "este o plantă cultivată pentru pețiolurile comestibile",
+      "no_new_endpoint": true
+    },
+    {
+      "item_id": "v123-pipernita",
+      "action": "metal_caption_request_not_emitted",
+      "reason": "Quality holds entire item;no active node,forms or edges remain. Factual physical-source approval and requested narrower caption stay in original signed report."
+    }
+  ],
+  "semantic_review_rounds": 1,
+  "mechanical_verification_only_after_review": true,
+  "source_applied": false,
+  "installed": 0,
+  "player_visible_delta": "0/0/0",
+  "counts": {
+    "accepted_items": 40,
+    "new_concepts": 36,
+    "existing_input_families": 4,
+    "connections": 144,
+    "missing_normalized_keys": 190,
+    "held": 14,
+    "verified_synonym_families": 0
+  },
+  "original_research_clocks_unchanged": true,
+  "preserve_all_main_owner_metadata": true
+}

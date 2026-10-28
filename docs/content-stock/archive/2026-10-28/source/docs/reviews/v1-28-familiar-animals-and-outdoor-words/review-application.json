@@ -1,0 +1,109 @@
+{
+  "wave": "1.28",
+  "step": "3",
+  "status": "PASS",
+  "original_module_sha256": "df2c0446273577358c1aa9fd454ca25b0e17650a875f8033ea2b8684895915c6",
+  "frozen_pool_sha256": "7248167d6e23e0d3d5fa132503da20b156d181d6518b75c5249d74d782943e6a",
+  "final_module_sha256": "bf1e7d6ef9dd5b351352d957ae2c132a58fc85e3146c19210cb8be005fa4a8f6",
+  "review_bindings": {
+    "factual": {
+      "reviewer": "factual-v1-28",
+      "path": "docs/reviews/v1-28-familiar-animals-and-outdoor-words/graph-factual-review.json",
+      "sha256": "78afcc11db1e82aecba088f3ed8d4be7814de37c620845224884f5e752de5cac",
+      "module_sha256": "df2c0446273577358c1aa9fd454ca25b0e17650a875f8033ea2b8684895915c6",
+      "frozen_pool_sha256": "7248167d6e23e0d3d5fa132503da20b156d181d6518b75c5249d74d782943e6a",
+      "round": 1,
+      "capture_catalog_path": "/home/dobo/work/_temp/content__v1-28-familiar-animals-and-outdoor-words/factual-web/capture-catalog.json",
+      "capture_catalog_sha256": "a54cc0a7e8ac35f3d796a7f1583f7abe7a8c37bd48513f1dc430a576ce30451c"
+    },
+    "quality": {
+      "reviewer": "quality-v1-28",
+      "path": "docs/reviews/v1-28-familiar-animals-and-outdoor-words/graph-quality-review.json",
+      "sha256": "1c263b798f3824201c11ed5ab20b8010a4ec9a852ac8f35209f96a120069b1c3",
+      "module_sha256": "df2c0446273577358c1aa9fd454ca25b0e17650a875f8033ea2b8684895915c6",
+      "frozen_pool_sha256": "7248167d6e23e0d3d5fa132503da20b156d181d6518b75c5249d74d782943e6a",
+      "round": 1,
+      "capture_catalog_path": "/home/dobo/work/_temp/content__v1-28-familiar-animals-and-outdoor-words/quality-web/capture-catalog.json",
+      "capture_catalog_sha256": "5f57254c2e5d4f22ec70826b13ff44a9b28080a77f7d6a6e5d2a6e8f1872fa72"
+    }
+  },
+  "formal_web_review_rounds": 1,
+  "reviewed_items": 37,
+  "reviewed_directed_captions": 148,
+  "reviewed_ordinary_folded_keys": 204,
+  "surviving_counts": {
+    "items": 36,
+    "new_nodes": 36,
+    "existing_input_families": 0,
+    "edges": 144,
+    "missing_normalized_keys": 199,
+    "held": 19,
+    "proposed_lexical_synonym_families": 0,
+    "verified_lexical_synonym_families": 0,
+    "regional_input_families": 0,
+    "applied": 0,
+    "installed": 0,
+    "player_visible_delta": "0/0/0"
+  },
+  "signed_modifications_applied": [
+    {
+      "item_id": "v128-bibilica",
+      "kind": "drop_edge",
+      "field": "EDGES[(n_v1_28_bibilica,n_v1_11_cuib,related_to)]",
+      "before": {
+        "src": "n_v1_28_bibilica",
+        "dst": "n_v1_11_cuib",
+        "relation": "related_to",
+        "label_ro": "își depune ouăle într-un cuib pe pământ",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "after": null,
+      "reason": "The predeclared egg-laying-only ground nest does not establish the strict live Cuib construction-and-chick-rearing sense. This is an endpoint-scope hold,not rejection of the word or its correct forms.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Galiforme"
+      ],
+      "live_endpoint": {
+        "id": "n_v1_11_cuib",
+        "description": "Construcție făcută de păsări pentru depunerea ouălor și creșterea puilor."
+      }
+    },
+    {
+      "item_id": "v128-bibilica",
+      "kind": "hold_complete_item",
+      "field": "proposed_item_disposition",
+      "before": "proposed_new_shared_concept_with_four_links",
+      "after": "held_not_in_surviving_module",
+      "reason": "After dropping the unsupported Cuib mapping,only three predeclared neighbours remain. Hold the complete concept/form family and its proposal;do not invent a fourth endpoint,partially admit the item or rewrite Cuib.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Galiforme"
+      ]
+    }
+  ],
+  "global_fresh_dictionary_requests": 148,
+  "minimum_global_dictionary_start_gap_seconds": 2.2500524520874023,
+  "factual_fresh_requests": 144,
+  "quality_fresh_requests": 143,
+  "quality_successful_requests": 142,
+  "original_author_captures_verified": 634,
+  "author_source_index_sha256": "20b71200840208884138eb7c804d91fbd8b8279d7f6ae09f25ef57bca8769460",
+  "original_author_holds_preserved": 18,
+  "author_research_clocks_and_requests_unchanged": true,
+  "protected_refs_preserved": 14,
+  "screened_pool_copies_current": 813,
+  "screened_unique_pool_contents_current": 46,
+  "all_original_endpoint_snapshots_preserved": true,
+  "existing_Cald_projection_terms_preserved_without_reassignment": true,
+  "selected_only_graph_floors": "PASS",
+  "all_final_keys_missing_and_noncolliding": "PASS",
+  "qualified_family_context_attention": "Gușter secondary dictionary head Șopârlă is context only;the held family contains only five qualified șopârlă verde keys. Its hold is preserved and none of those keys is admitted.",
+  "module_import_only": true,
+  "importer_or_apply_invoked": false,
+  "source_applied": false,
+  "installed": 0,
+  "player_visible_delta": "0/0/0",
+  "landing_status": "not_landed",
+  "handoff_status": "owner_review_later",
+  "temporary_review_PDF_retention": "All earlier author captures and protected source packets retained. Two owned fresh full PDFs/whole-book text were pruned after retaining hashed,numbered relevant passages and Fig104 image;the catalog does not claim those full bytes remain."
+}

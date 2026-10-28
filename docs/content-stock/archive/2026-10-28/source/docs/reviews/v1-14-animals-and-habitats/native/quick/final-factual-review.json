@@ -1,0 +1,9 @@
+{
+  "audit_sha256": "bc17bdc7e712ab70e3cc4a27dd68f74b5f8cfa0a6815c43aab6d331c00254815",
+  "catalog_sha256": "6bfda896c36ca8cfbe2178d68189361b3f7bd9262e45c49a19b77f94d79e8b35",
+  "kind": "quick-content-final-v1",
+  "rationale": "I inspected the saved audit and exact candidate, proposal and initial-review bindings. All 85 authored payloads and inherited factual claims remain exact. The audit records 85 naturally seeded in-process HTTP-handler replays (45 Intrusul, 40 Perechi), 460 requests, score-1000 wins, hidden-answer preservation and terminal GET preservation on every replay. All 322 node snapshots match current KG fields with the snapshot-format defaults; all 137 runtime hashes and nine source bindings match current files. Core preservation is the auditor’s structural result. Acceptance is limited to these saved finite replays and inherited claims; no external HTTP listener, browser, concurrency, exhaustive routes or full gates are claimed.",
+  "reviewer": "factual-v1-14",
+  "role": "factual",
+  "verdict": "accept"
+}

@@ -1,0 +1,290 @@
+{
+  "wave": "1.35",
+  "original_reviewed_module_sha256": "d4a728f2fd5e56141b53b83887a04e6bef82b91be4f61b5920ec8e9e21300f88",
+  "final_module_sha256": "b2e02e91af66000be2be4891b343965257839a55aef6ee522d26b5e30cb0e199",
+  "proposal_sha256": "d8a2bb26192eed7086cd017bda1957b7c6eb86a0e1e880cfa34e246d1b3a0a54",
+  "original_pool_sha256": "bd714fa6a6e1dc3fd5fc835246527577e759fcb96b9e8b4ad733c8d8f58dabba",
+  "resumed_pool_sha256": "e31ba21a99b8473c175a168cf4717345cad07bd512eb8666a4a5fe02eedb99f4",
+  "formal_reports": {
+    "factual": {
+      "reviewer": "factual-v1-35",
+      "path": "docs/reviews/v1-35-familiar-nature-and-practical-objects/graph-factual-review.json",
+      "sha256": "1348c5a2d8cc17db64c373a6d2fb7ea58a9f37e1b19d4911b1cbff9ba23e7e24",
+      "formal_rounds": 1,
+      "reviewed_module_sha256": "d4a728f2fd5e56141b53b83887a04e6bef82b91be4f61b5920ec8e9e21300f88"
+    },
+    "quality": {
+      "reviewer": "quality-v1-35",
+      "path": "docs/reviews/v1-35-familiar-nature-and-practical-objects/graph-quality-review.json",
+      "sha256": "51519098a06920a66ebb4fd9ccf8c11a090c560e1dd459623d9f5fe9a9fac155",
+      "formal_rounds": 1,
+      "reviewed_module_sha256": "d4a728f2fd5e56141b53b83887a04e6bef82b91be4f61b5920ec8e9e21300f88"
+    }
+  },
+  "exact_signed_edits_applied": [
+    {
+      "record_id": "v135-cactus",
+      "collection": "EDGES",
+      "selector": {
+        "src": "n_v1_35_cactus",
+        "dst": "n_v24_nature_plant_parts_radacina",
+        "relation": "related_to"
+      },
+      "field": "label_ro",
+      "before": "are rădăcini; nu se afirmă o anatomie sau un habitat universal",
+      "after": "are rădăcini",
+      "reason": "Keep the same sourced relationship and qualification; remove process-only commentary from player-facing caption.",
+      "signers": [
+        "factual-v1-35",
+        "quality-v1-35"
+      ]
+    },
+    {
+      "record_id": "v135-plosnita-de-pat",
+      "collection": "EDGES",
+      "selector": {
+        "src": "n_v1_35_plosnita_de_pat",
+        "dst": "n_v4sti_sange",
+        "relation": "related_to"
+      },
+      "field": "label_ro",
+      "before": "se hrănește cu sânge; fără recomandări sanitare",
+      "after": "se hrănește cu sânge",
+      "reason": "Keep the same sourced relationship and qualification; remove process-only commentary from player-facing caption.",
+      "signers": [
+        "factual-v1-35",
+        "quality-v1-35"
+      ]
+    },
+    {
+      "record_id": "v135-salamandra",
+      "collection": "EDGES",
+      "selector": {
+        "src": "n_v1_35_salamandra",
+        "dst": "n_v4sti_insecta",
+        "relation": "is_a"
+      },
+      "field": "relation",
+      "before": "is_a",
+      "after": "related_to",
+      "reason": "Fresh zoological sources describe insect consumption; the amphibian is not an insect.",
+      "signers": [
+        "factual-v1-35",
+        "quality-v1-35"
+      ]
+    },
+    {
+      "record_id": "v135-lumanare",
+      "collection": "EDGES",
+      "selector": {
+        "src": "n_v1_35_lumanare",
+        "dst": "n_v1_35_chibrit",
+        "relation": "related_to"
+      },
+      "field": "label_ro",
+      "before": "poate fi aprinsă cu un chibrit; fără instrucțiuni",
+      "after": "poate fi aprinsă cu un chibrit",
+      "reason": "Keep the same sourced relationship and qualification; remove process-only commentary from player-facing caption.",
+      "signers": [
+        "factual-v1-35",
+        "quality-v1-35"
+      ]
+    },
+    {
+      "record_id": "v135-lumanare",
+      "collection": "EDGES",
+      "selector": {
+        "src": "n_v1_35_lumanare",
+        "dst": "n_v1_35_bricheta",
+        "relation": "related_to"
+      },
+      "field": "label_ro",
+      "before": "poate fi aprinsă cu o brichetă; fără instrucțiuni",
+      "after": "poate fi aprinsă cu o brichetă",
+      "reason": "Keep the same sourced relationship and qualification; remove process-only commentary from player-facing caption.",
+      "signers": [
+        "factual-v1-35",
+        "quality-v1-35"
+      ]
+    },
+    {
+      "record_id": "v135-chibrit",
+      "collection": "EDGES",
+      "selector": {
+        "src": "n_v1_35_chibrit",
+        "dst": "n_v4sti_foc",
+        "relation": "related_to"
+      },
+      "field": "label_ro",
+      "before": "este un obiect folosit pentru aprinderea focului; fără instrucțiuni",
+      "after": "este un obiect folosit pentru aprinderea focului",
+      "reason": "Keep the same sourced relationship and qualification; remove process-only commentary from player-facing caption.",
+      "signers": [
+        "factual-v1-35",
+        "quality-v1-35"
+      ]
+    },
+    {
+      "record_id": "v135-bricheta",
+      "collection": "EDGES",
+      "selector": {
+        "src": "n_v1_35_bricheta",
+        "dst": "n_v24_home_appliances_aragaz",
+        "relation": "related_to"
+      },
+      "field": "label_ro",
+      "before": "poate fi folosită pentru aprinderea unui aragaz; fără instrucțiuni",
+      "after": "poate fi folosită pentru aprinderea unui aragaz",
+      "reason": "Keep the same sourced relationship and qualification; remove process-only commentary from player-facing caption.",
+      "signers": [
+        "factual-v1-35",
+        "quality-v1-35"
+      ]
+    },
+    {
+      "record_id": "v135-frag",
+      "collection": "EDGES",
+      "selector": {
+        "src": "n_v1_35_frag",
+        "dst": "n_v4sti_floare",
+        "relation": "related_to"
+      },
+      "field": "label_ro",
+      "before": "produce flori; fragul comestibil este un receptacul, nu întreaga plantă",
+      "after": "produce flori albe",
+      "reason": "Fresh DEX and Romanian botanical evidence directly support flowers; avoid mixing the selected plant with the edible receptacle in this transition.",
+      "signers": [
+        "quality-v1-35"
+      ]
+    },
+    {
+      "record_id": "v135-capsun",
+      "collection": "NODES",
+      "selector": {
+        "id": "n_v1_35_capsun"
+      },
+      "field": "description",
+      "before": "Plantă erbacee cu flori albe, cultivată pentru fructele numite căpșuni.",
+      "after": "Plantă erbacee cultivată pentru fructele numite căpșuni.",
+      "reason": "The selected ordinary cultivated plant includes cultivar variation; retain the established herbaceous/cultivated/fruit facts without making flower color universal.",
+      "signers": [
+        "quality-v1-35"
+      ]
+    },
+    {
+      "record_id": "v135-lumanare",
+      "collection": "EDGES",
+      "selector": {
+        "src": "n_v1_35_lumanare",
+        "dst": "n_v4sti_lumina",
+        "relation": "related_to"
+      },
+      "field": "label_ro",
+      "before": "produce lumină prin arderea fitilului",
+      "after": "produce lumină prin arderea combustibilului",
+      "reason": "Fresh candle documentation distinguishes fuel burned by the flame from the wick that transports it; the original caption overattributes light production to wick combustion.",
+      "signers": [
+        "quality-v1-35"
+      ]
+    }
+  ],
+  "item_form_edge_drops": {
+    "v135-sort": [
+      {
+        "record_id": "v135-sort",
+        "disposition": "held",
+        "reason": "Exact shorts morphology and four associations are source-supported, but all unqualified șort/șorț input families fold to the same keys for two familiar garment senses; excluding apron spellings in notes cannot isolate runtime interpretation. Preserve lexical observations and hold whole item pending owner sense-routing decision.",
+        "operation": "drop_item",
+        "retained_lexical_source_observations": true,
+        "signer": "factual-v1-35"
+      },
+      {
+        "record_id": "v135-sort",
+        "disposition": "held",
+        "reason": "Hold the unqualified family: șort and ordinary șorț collapse to the same resolver keys, and an editorial apron exclusion cannot make this frozen bare-key payload distinguish the two clothing concepts fairly.",
+        "scope": "Drop the whole frozen item: its node, six ordinary inputs and four outgoing claims. This is an unresolved selected-sense/fairness hold, not a claim that a current served owner already owns these keys. No replacement forms/candidate are authorized by this disposition.",
+        "signer": "quality-v1-35"
+      }
+    ]
+  },
+  "accepted_record_ids": [
+    "v135-maces",
+    "v135-fan",
+    "v135-nuc",
+    "v135-cactus",
+    "v135-lavanda",
+    "v135-coacaz",
+    "v135-zmeur",
+    "v135-mur",
+    "v135-afin",
+    "v135-frag",
+    "v135-capsun",
+    "v135-purice",
+    "v135-plosnita-de-pat",
+    "v135-salamandra",
+    "v135-lumanare",
+    "v135-chibrit",
+    "v135-bricheta",
+    "v135-fitil",
+    "v135-scanteie",
+    "v135-cronometru",
+    "v135-macara",
+    "v135-salopeta",
+    "v135-fes",
+    "v135-pliant",
+    "v135-carte-postala"
+  ],
+  "original_holds_unchanged": [
+    "v135-floarea-soarelui",
+    "v135-paduche",
+    "v135-lipitoare",
+    "v135-ceara",
+    "v135-barometru",
+    "v135-intrerupator",
+    "v135-canistra",
+    "v135-agrafa-de-hartie",
+    "v135-buldozer",
+    "v135-excavator",
+    "v135-betoniera",
+    "v135-halat",
+    "v135-maiou",
+    "v135-servetel"
+  ],
+  "counts": {
+    "accepted_source_items": 25,
+    "new_concepts": 24,
+    "existing_owner_input_families": 1,
+    "ordinary_normalized_payload_keys": 136,
+    "canonical_label_only_keys": 0,
+    "synonym_families": 0,
+    "regional_input_families": 0,
+    "selected_subtype_families": 1,
+    "directed_graph_claims": 96,
+    "target_approvals": 0,
+    "salience_approvals": 0,
+    "new_playable_rounds": 0,
+    "C3_numeric_passes": 0,
+    "new_node_direct_predecessors": {
+      "0": 21,
+      "3": 1,
+      "1": 1,
+      "2": 1
+    },
+    "source_applied": false,
+    "installed": 0,
+    "player_visible_delta": "0/0/0"
+  },
+  "source_applied": false,
+  "module_application_or_dry_run": false,
+  "installed": 0,
+  "player_visible_delta": "0/0/0",
+  "latest_feature_binding": {
+    "branch": "feat/gui-cat-m3",
+    "HEAD": "1673389147a3ba432742008d55d28edb84d94af2",
+    "dirty_paths": 0,
+    "snapshot_path": "/home/dobo/work/_temp/content__v1-35-familiar-nature-and-practical-objects/review/feature-working-final.json",
+    "snapshot_sha256": "459705cf2754463b92ebb5599ca6f6ee398ed39bd831139d35479cbbe50b4404"
+  },
+  "secondary_local_main": "cb6f15fed984c89822a15bdbd4b5bb39f45a8c4b",
+  "scope": "Bookkeeping applies only independently signed source edits and drops. No semantic approval from this reconciliation; no serving/install/target/round qualification."
+}

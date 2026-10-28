@@ -1,0 +1,79 @@
+{
+  "status": "complete_unlanded_owner_review_later",
+  "owner_direction": "2026-10-16: Continue the previous content task against the latest feature branch/version;main does not include all current work.",
+  "primary_application_comparison": {
+    "branch": "feat/gui-cat-m3",
+    "head": "e75518c1473be3a32ec2a0f2e1565764bbcf5d5b",
+    "working_tree_included": true,
+    "working_fingerprint_sha256": "8fa22a4d5529d34a9e15d41ddd6d3d5cecf28d01d1bb534e5073e1978554ade6",
+    "dirty_paths": 98,
+    "tracked_dirty_paths": 52,
+    "untracked_files": 46
+  },
+  "secondary_local_main": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+  "analysis_branch": "docs/content-consolidation-v1-8-to-v1-32",
+  "previous_analysis_commit": "1ac91f3a2fbc76ea53b78c4143d31e72d768a051",
+  "current_assessment": "feature-working-assessment.md",
+  "current_inactive_loop_prompt": "improved-loop-prompt-feature.txt",
+  "original_main_based_artifacts": "Retained byte-for-byte as the historical source inventory and original reviewed comparison.",
+  "unchanged_content_authority_files": 244,
+  "unchanged_previous_impact_files": 22,
+  "examined_current_feature_source_files": 47,
+  "pending_source_items": 837,
+  "pending_new_concepts": 709,
+  "pending_existing_input_families": 128,
+  "missing_normalized_payload_keys": 4503,
+  "first_proposed_input_scope": {
+    "families": 10,
+    "missing_forms": 19,
+    "integration_tested": false
+  },
+  "source_holds_and_rejection_preserved": 309,
+  "protected_source_closures_preserved": 19,
+  "audits": {
+    "factual": {
+      "path": "feature-final-factual-audit.json",
+      "sha256": "cb0ce6f3b9d4d1e6e745f68d92b7fdd4b742e7ee872c7e2caec40c053e8eebf4",
+      "status": "PASS",
+      "scope": "Cached/static latest-feature comparison;no source admission,integration or GUI qualification."
+    },
+    "quality": {
+      "path": "feature-final-quality-audit.json",
+      "sha256": "15e52188bb95d5ae6c8e9dfa870841545c41964dc5f899160efd5f2b118706ae",
+      "status": "PASS",
+      "scope": "Cached/static latest-feature comparison;no source admission,integration or GUI qualification."
+    }
+  },
+  "artifact_sha256": {
+    "feature-working-assessment.md": "52538e599412f26e10485b65fbea1ef91791d34d91cfa2b0ea00893c964b1857",
+    "feature-working-baseline.json": "39aa4423daff5e9ea30ebc89f14493efda7ab11f7838d2555a091168003e4ea4",
+    "feature-working-ownership-findings.json": "5a63c06ad5c3a4752b3352b00473783b0a8a4da96515e2dd251e2781e03e700e",
+    "feature-working-impact-findings.json": "799a913854ab6b481d368ad29b3d84459907dd9f372f6056314046d99dc8d969",
+    "improved-loop-prompt-feature.txt": "e18185d13fb8cc81382a51e8f9d0da96c1b58d22e49bc0cb97b98b92a14933cb",
+    "feature-final-factual-audit.json": "cb0ce6f3b9d4d1e6e745f68d92b7fdd4b742e7ee872c7e2caec40c053e8eebf4",
+    "feature-final-quality-audit.json": "15e52188bb95d5ae6c8e9dfa870841545c41964dc5f899160efd5f2b118706ae"
+  },
+  "feature_worktree_mutations": 0,
+  "source_application": false,
+  "integration_or_GUI_tests_run": 0,
+  "safe_to_merge_or_release_established": false,
+  "player_visible_delta": "0/0/0",
+  "new_wave_started": false,
+  "proposed_loop_activated": false,
+  "old_automation_status": "deleted;not restarted",
+  "merge_or_remote_operations": 0,
+  "next_action": "Owner review of the feature-aware assessment and inactive prompt;no automatic discovery or installation.",
+  "fingerprint_recipe": {
+    "fields": [
+      "branch",
+      "head",
+      "worktree",
+      "comparison_kind",
+      "porcelain_format",
+      "porcelain_z_sha256",
+      "dirty_paths",
+      "unchanged_ownership_and_runtime_files"
+    ],
+    "serialization": "json.dumps(selected_fields,ensure_ascii=False,sort_keys=True,separators=(comma,colon)).encode(UTF-8);SHA256;excludes timestamp and fingerprint itself"
+  }
+}

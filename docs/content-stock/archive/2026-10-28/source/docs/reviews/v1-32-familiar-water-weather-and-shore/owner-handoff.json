@@ -1,0 +1,336 @@
+{
+  "wave": "1.32",
+  "theme": "familiar-water-weather-and-shore",
+  "branch": "content/v1-32-familiar-water-weather-and-shore",
+  "wave_base": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+  "review_commit": "ddd52c4da59ff75ff55be41d7aae806a6c862886",
+  "procedure_rev": "17b97a2b",
+  "landing_status": "not_landed",
+  "handoff_status": "owner_review_later",
+  "closed_as": "research_only_reviewed_pool",
+  "source_applied": false,
+  "installed": 0,
+  "player_visible_delta": "0/0/0",
+  "source_review_summary": {
+    "accepted_items": 39,
+    "new_concepts": 30,
+    "existing_input_families": 9,
+    "unique_directed_claims": 119,
+    "full_ordinary_forms_reviewed": 254,
+    "new_normalized_keys": 215,
+    "already_resolved_same_owner": 39,
+    "held": 19,
+    "signed_caption_corrections": 2,
+    "signed_description_corrections": 3,
+    "source_applied": false,
+    "installed": 0,
+    "player_visible_delta": "0/0/0",
+    "target_approval": false,
+    "salience_approval": false,
+    "gameplay_approval": false,
+    "verified_selected_sense_synonym_families": 1
+  },
+  "pool_counts": {
+    "idea": 0,
+    "researched": 0,
+    "accepted": 39,
+    "held": 19,
+    "rejected": 0,
+    "installed": 0
+  },
+  "pool": {
+    "path": "docs/content-pool/v1-32-familiar-water-weather-and-shore/pool.json",
+    "sha256": "399b81e1d9747287ee06fce7037d324a356835cad892cfd837d1050b1726710a"
+  },
+  "module": {
+    "path": "scripts/familiar_water_weather_and_shore_v1_32_data.py",
+    "sha256": "3b0d40b9ae0cef5a9d88927a61d6d6a177627ee6d44d6552948e3cc632d14005"
+  },
+  "original_reviewed_module_sha256": "d177ac38cdc914e4cf8d04a142956a084d94954fb2db316d8d9c86eede3a404d",
+  "original_frozen_pool": {
+    "path": "/home/dobo/work/_temp/content__v1-32-familiar-water-weather-and-shore/step3-pool-to-review.json",
+    "sha256": "f3bd5bb731028a46839903f4fccfa7dee5f83885affd3b1caedc28ebe89c21a7"
+  },
+  "reviewers": {
+    "factual": {
+      "reviewer": "factual-v1-32",
+      "path": "docs/reviews/v1-32-familiar-water-weather-and-shore/graph-factual-review.json",
+      "sha256": "1d1993d933196d779988f51423f831a9994481f7304c63dcd8d3bb9044e6077c",
+      "reviewed_module_sha256": "d177ac38cdc914e4cf8d04a142956a084d94954fb2db316d8d9c86eede3a404d",
+      "frozen_pool_sha256": "f3bd5bb731028a46839903f4fccfa7dee5f83885affd3b1caedc28ebe89c21a7",
+      "capture_catalog": {
+        "path": "/home/dobo/work/_temp/content__v1-32-familiar-water-weather-and-shore/factual-web/capture-catalog.json",
+        "sha256": "b277bf62e0498879ce9db9b28bb8769ffdfc7ec9c3e77b3372e04f5116553bd8",
+        "fresh_HTTP_requests": 181,
+        "dictionary_requests": 85,
+        "non_dictionary_requests": 96,
+        "successful_nonempty_responses": 181,
+        "minimum_own_dictionary_start_gap_seconds": 2.1501166820526123,
+        "cached_author_pages_claimed_as_fresh": false
+      },
+      "round": 1,
+      "verdict_counts": {
+        "item_accept": 39,
+        "item_modify": 0,
+        "item_hold": 0,
+        "item_reject": 0,
+        "description_accept": 39,
+        "active_lexical_family_accept": 45,
+        "ordinary_form_accept": 254,
+        "ordinary_form_modify": 0,
+        "ordinary_form_hold": 0,
+        "ordinary_form_reject": 0,
+        "edge_accept": 119,
+        "edge_modify": 0,
+        "edge_hold": 0,
+        "edge_reject": 0,
+        "whole_item_holds_requested": 0,
+        "edge_drops_requested": 0,
+        "form_drops_requested": 0,
+        "verified_selected_sense_synonym_families": 1,
+        "ordinary_diminutive_families_not_blanket_synonyms": 1,
+        "regional_input_families": 0,
+        "original_whole_holds_preserved": 19,
+        "source_applied": false,
+        "installed": 0,
+        "player_visible_delta": "0/0/0"
+      }
+    },
+    "quality": {
+      "reviewer": "quality-v1-32",
+      "path": "docs/reviews/v1-32-familiar-water-weather-and-shore/graph-quality-review.json",
+      "sha256": "8de5fc7245abbfa06792439dc3c32be5891b152530db595e7a05b22ad7b41b92",
+      "reviewed_module_sha256": "d177ac38cdc914e4cf8d04a142956a084d94954fb2db316d8d9c86eede3a404d",
+      "frozen_pool_sha256": "f3bd5bb731028a46839903f4fccfa7dee5f83885affd3b1caedc28ebe89c21a7",
+      "capture_catalog": {
+        "path": "/home/dobo/work/_temp/content__v1-32-familiar-water-weather-and-shore/quality-web/capture-catalog.json",
+        "sha256": "c1df62b217b06d54180ed975a1f66c13b5e7ce1361f8ee93dea647f9e498b1b4",
+        "fresh_HTTP_requests": 184,
+        "dictionary_requests": 85,
+        "non_dictionary_requests": 99,
+        "successful_nonempty_responses": 184,
+        "minimum_own_dictionary_start_gap_seconds": 2.15010929107666,
+        "cached_author_pages_claimed_as_fresh": false
+      },
+      "round": 1,
+      "verdict_counts": {
+        "items_accept": 34,
+        "items_modify": 5,
+        "items_reject": 0,
+        "items_hold": 0,
+        "source_accepted_after_exact_modifications": 39,
+        "forms_accept": 254,
+        "forms_modify": 0,
+        "forms_reject": 0,
+        "edges_accept": 117,
+        "edges_modify": 2,
+        "edges_reject": 0,
+        "description_spacing_modifications": 3,
+        "eye_caption_scope_modifications": 2,
+        "verified_exact_selected_sense_synonym_families": 1,
+        "ordinary_diminutive_families_not_synonym_certified": 1,
+        "regional_input_families": 0,
+        "installed": 0,
+        "player_visible_delta": "0/0/0"
+      }
+    }
+  },
+  "formal_whole_batch_web_review_rounds": 1,
+  "independent_whole_batch_judgments": 2,
+  "readme": {
+    "path": "docs/reviews/v1-32-familiar-water-weather-and-shore/README.md",
+    "sha256": "c6dd7c1fbd1818e5ea1e099986d210aa04d616908fdd31893d2edcf00b0490d1"
+  },
+  "evidence": {
+    "README.md": "c6dd7c1fbd1818e5ea1e099986d210aa04d616908fdd31893d2edcf00b0490d1",
+    "graph-factual-review.json": "1d1993d933196d779988f51423f831a9994481f7304c63dcd8d3bb9044e6077c",
+    "graph-quality-review.json": "8de5fc7245abbfa06792439dc3c32be5891b152530db595e7a05b22ad7b41b92",
+    "review-table.md": "f53a4bb4f1fe03f66f936089d75ffb7496ed536787a8747dce04f340aa0df23d",
+    "reviewed-original.py.txt": "d177ac38cdc914e4cf8d04a142956a084d94954fb2db316d8d9c86eede3a404d",
+    "review-application.json": "5f9a0226eedd7461fda0e0f29bb57ad07b6ac0450f3cf7e70e9631be40aa769e",
+    "review-capture-integrity.json": "fa58e5107c6df992a372bc3af9892ecbc0237a8769e439496bd81ff978d15fd5",
+    "root-mechanical-check.json": "d9f73c05fc9a17a679ea1f7f00559de2841692f2e11a5e4a6fe835bc61716af7"
+  },
+  "evidence_files_including_this_handoff": 9,
+  "final_read_only_checks": {
+    "validate": {
+      "command": "go -C go-backend run ./cmd/cat-content validate --root ..",
+      "exit_code": 0,
+      "status": "PASS",
+      "output_path": "/home/dobo/work/_temp/content__v1-32-familiar-water-weather-and-shore/step5-validate.txt",
+      "output_sha256": "1d2e645a4a6946dae65ac9fc067442df3e7a430fc9fee3039e41fd1ee3819976",
+      "go_version": "go version go1.27.1 linux/amd64",
+      "first_error": null
+    },
+    "export": {
+      "command": "go -C go-backend run ./cmd/cat-content export --root .. --check",
+      "exit_code": 0,
+      "status": "PASS",
+      "output_path": "/home/dobo/work/_temp/content__v1-32-familiar-water-weather-and-shore/step5-export.txt",
+      "output_sha256": "4f715aebbcf4c517ca8a5686959372f4ab156e4e62f897e6e5e607156dc5c8fb",
+      "go_version": "go version go1.27.1 linux/amd64",
+      "first_error": null
+    },
+    "ops": {
+      "command": "go -C go-backend run ./cmd/cat-content-ops check --root .. --check",
+      "exit_code": 0,
+      "status": "PASS",
+      "output_path": "/home/dobo/work/_temp/content__v1-32-familiar-water-weather-and-shore/step5-ops.txt",
+      "output_sha256": "e7fd15f1a6e05c103f027645f7ceed93387d123ed27c882c83104a823575e311",
+      "go_version": "go version go1.27.1 linux/amd64",
+      "first_error": null
+    },
+    "delta": {
+      "command": "go -C go-backend run ./cmd/cat-content-ops delta --root .. --baseline d30b0aa47248b9a5944e015f2daf54cc5a795617 --text",
+      "exit_code": 0,
+      "status": "PASS",
+      "output_path": "/home/dobo/work/_temp/content__v1-32-familiar-water-weather-and-shore/step5-delta.txt",
+      "output_sha256": "b40a630a80b59dd1f32e0aec8fed5fa03768e4fc635c8d8e22378d0ce1ca34ba",
+      "go_version": "go version go1.27.1 linux/amd64",
+      "first_error": null
+    }
+  },
+  "protected_prior_closure_refs": [
+    {
+      "branch": "content/v1-14-animals-and-habitats",
+      "commit": "4b634cab38cbce90ac6eb02e0907578335208c69",
+      "wave": "1.14"
+    },
+    {
+      "branch": "content/v1-15-home-school-words",
+      "commit": "2ace3df01d4871fa1990feadd4b485d6be496d81",
+      "wave": "1.15"
+    },
+    {
+      "branch": "content/v1-16-travel-and-street-words",
+      "commit": "ecb50b463d8d1f0300d435126f934fe90b29fe5b",
+      "wave": "1.16"
+    },
+    {
+      "branch": "content/v1-17-garden-and-kitchen-words",
+      "commit": "df2fd5e5196cb1584cb8e330adbc2b71b855fab8",
+      "wave": "1.17"
+    },
+    {
+      "branch": "content/v1-18-body-and-everyday-care",
+      "commit": "69ebb9f3631ac41f4ac80c76c9d6795c29b78fa8",
+      "wave": "1.18"
+    },
+    {
+      "branch": "content/v1-19-tools-and-crafts",
+      "commit": "5159b0417d4f62b46f28b3a4a37dabf9c07bc389",
+      "wave": "1.19"
+    },
+    {
+      "branch": "content/v1-20-school-and-hobbies",
+      "commit": "bc0ed56c826b9bab0c0f9408ff8fd1a36a539f94",
+      "wave": "1.20"
+    },
+    {
+      "branch": "content/v1-21-clothing-and-household-storage",
+      "commit": "be42df68abfbf2a40e879cbe53c671b70d69c6d0",
+      "wave": "1.21"
+    },
+    {
+      "branch": "content/v1-22-home-fixtures-and-materials",
+      "commit": "c10e4c2394ae82dae4f7bd22f56f91ca854f26ba",
+      "wave": "1.22"
+    },
+    {
+      "branch": "content/v1-23-pantry-and-tableware",
+      "commit": "489504300c8ea2c323de7f4e4e497eeb157947e3",
+      "wave": "1.23"
+    },
+    {
+      "branch": "content/v1-24-familiar-foods-and-inputs",
+      "commit": "53a090735baea74bc8c99470070eaf718fe4cc38",
+      "wave": "1.24"
+    },
+    {
+      "branch": "content/v1-25-common-places-and-objects",
+      "commit": "b0de8a38abfaf7366418f5c79df6cb74c224920d",
+      "wave": "1.25"
+    },
+    {
+      "branch": "content/v1-26-school-play-and-devices",
+      "commit": "c7f45781d071a9b784357f8ef7b10f259d6f5121",
+      "wave": "1.26"
+    },
+    {
+      "branch": "content/v1-27-familiar-foods-and-plants",
+      "commit": "93ff482efe7f0c3ce906ce735726f8a3cf8a9649",
+      "wave": "1.27"
+    },
+    {
+      "branch": "content/v1-28-familiar-animals-and-outdoor-words",
+      "commit": "6874e9f65e2e8af8debbee9edbf6625c570d9d52",
+      "wave": "1.28"
+    },
+    {
+      "wave": "1.29",
+      "branch": "content/v1-29-familiar-people-and-community",
+      "commit": "f53df8b0811537262f68a8c0c19dc4c132db101c"
+    },
+    {
+      "wave": "1.30",
+      "branch": "content/v1-30-familiar-shapes-and-school-measures",
+      "commit": "b5b3abdbe8aac9ca21f425db454576a438d21222"
+    },
+    {
+      "wave": "1.31",
+      "branch": "content/v1-31-familiar-music-and-sport-objects",
+      "commit": "4aa8d6e504835cc1f2e3051f24c45c729a0d449a"
+    }
+  ],
+  "protected_prior_ref_count": 18,
+  "preserve_current_branch_worktree_and_scratch": true,
+  "owner_decisions": [
+    "2026-10-12: Keep V1.14 unlanded.",
+    "2026-10-12: Focus on just adding more concepts and more words in all the games. So put them as not landed yet. I'm gonna review and land them later. I'm currently close to publishing the stable version of the new game. It's important to have a larger pool of concepts and synonyms that are gonna be added to the game later, keeping the quality of the game's boards high.",
+    "2026-10-13: Finish the remaining V1.17 candidates and both reviews, keep the batch unlanded for me to review later, then start the next growth pool. Keep going without routine approval waits.",
+    "2026-10-13: Finish V1.18’s screening, research and both reviews. Keep the batch unlanded for me to review later, then start the next growth pool. Keep going without routine approval waits.",
+    "2026-10-13: continue",
+    "2026-10-13: continue after V1.19 research tick3;keep the standing unlanded-pool direction.",
+    "2026-10-13: continue after V1.20 baseline;standing unlanded-pool direction reaffirmed.",
+    "2026-10-14: continue.",
+    "2026-10-14: Finish V1.20’s remaining candidates and both reviews, keep the batch unlanded for me to review later, then start the next growth pool. Keep going without routine approval waits.",
+    "2026-10-15: For word targets in HCI,use strong,normal words important for Romanian and familiar in everyday experience;avoid indiscriminate random,abstract or really strange choices.",
+    "2026-10-16: Continue;standing unlanded-pool direction remains in force.",
+    "2026-10-16: After V1.32,consolidate all loop words against latest local main;assess safe integration and game impact;prepare a better discovery-loop prompt before another wave.No merge authorized.",
+    "2026-10-16: Finish V1.32 reviews/handoff,then consolidate discovered words against latest main and prepare improved prompt.Keep all unlanded;do not start another wave."
+  ],
+  "next_action": "Consolidate all discovered loop words against latest local main;assess safe integration/game impact;prepare improved loop prompt.",
+  "next_wave": null,
+  "start_another_wave": false,
+  "ticks_after_handoff": 8,
+  "commits_after_handoff": 8,
+  "step_ticks": {
+    "0": 1,
+    "1": 1,
+    "2": 4,
+    "3": 1,
+    "5": 1
+  },
+  "proposals": [
+    {
+      "old": "Require each new concept to name4–8links before research.",
+      "new": "Keep useful lexical observations with unresolved topology in an explicit held lexical backlog;research graph support separately without inventing replacement links or relaxing floors.",
+      "evidence": "Colac has valid norm observations but held link set;Nutrie→Baltă and Cârlig→Mână were removed without backfill."
+    },
+    {
+      "old": "DEX for sense/register and DOOM3 for forms.",
+      "new": "Record base-head morphology,qualified-compound sense and actual displayed table authority separately;explicit exact-sense synonym approval is separate from ordinary inputs.",
+      "evidence": "Plută countable-object/material distinction;Vestă base-versus-compound evidence;Strop verified synonym versus ordinary Pârâiaș diminutive."
+    },
+    {
+      "old": "After handoff automatically create the next growth wave.",
+      "new": "Reconcile the complete source inventory against current main and pending source packets before proposing another wave;prioritize compatible inputs and keep target/round approval separate.",
+      "evidence": "Owner direction2026-10-16;19preserved unlanded batches including this handoff;all current player-visible delta remains0/0/0."
+    }
+  ],
+  "procedure_or_backlog_edits_applied": false,
+  "cleanup_operations": 0,
+  "remote_operations": 0,
+  "blocked": [],
+  "needs_owner": []
+}

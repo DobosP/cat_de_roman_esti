@@ -1,0 +1,318 @@
+{
+  "schema_version": 1,
+  "wave": "1.34",
+  "status": "reviewed_source_not_landed",
+  "original_reviewed_module_sha256": "095637db734c81b483a70b7e8c8b099d85be09eef0554ceb57207937be990b69",
+  "final_module_sha256": "fc1f7cdf4873053cf2d92b151a460eeac72fab30b7c44532fbbd0a5a9cb756c1",
+  "original_module_copy": "reviewed-module.py",
+  "original_pool_sha256": "d06c8e6deb64944ec940289eaee3fd2332f9096acd3ca87e9a11e5f483db2eb0",
+  "formal_reviews_used": 2,
+  "formal_rounds_per_reviewer": 1,
+  "reviewers": {
+    "factual": {
+      "reviewer": "factual-v1-34",
+      "path": "graph-factual-review.json",
+      "sha256": "d61de6d967783a55f35a83f3e19213683add91727e74f5ec5bd001dd2470378c"
+    },
+    "quality": {
+      "reviewer": "quality-v1-34",
+      "path": "graph-quality-review.json",
+      "sha256": "6a399f088c350ab1c1a3274c1ea8f997ba804a25b9eab6c8418c3bb374cc79e2"
+    }
+  },
+  "independent_original_edits": {
+    "factual": [
+      {
+        "target": "edge",
+        "selector": {
+          "src": "n_v1_34_trecere_de_pietoni",
+          "dst": "n_v29_city_street_trotuar",
+          "relation": "related_to"
+        },
+        "field": "label_ro",
+        "old": "leagă zonele pietonale de pe cele două laturi ale străzii",
+        "new": "poate lega trotuarele de pe cele două laturi ale unei străzi",
+        "reason": "Scope this readable directed association to applicable crossings; MAI explicitly recognizes roads without sidewalks. This is a qualified physical association, not universal presence."
+      },
+      {
+        "target": "edge",
+        "selector": {
+          "src": "n_v1_34_carja",
+          "dst": "n_v3soc_spital",
+          "relation": "related_to"
+        },
+        "field": "label_ro",
+        "old": "poate fi oferită sau utilizată în recuperarea mobilității unui pacient în spital",
+        "new": "poate fi folosită de un pacient la externarea din spital",
+        "reason": "The fresh hospital account explicitly describes leaving hospital on crutches; it does not establish hospital provision or the entire recovery occurring inside hospital."
+      },
+      {
+        "target": "edge",
+        "selector": {
+          "src": "n_v1_34_carja",
+          "dst": "n_v24_body_limbs_picior",
+          "relation": "related_to"
+        },
+        "field": "label_ro",
+        "old": "reduce încărcarea unui picior în timpul mersului",
+        "new": "poate reduce încărcarea unui picior în timpul mersului",
+        "reason": "Keep the physical support association conditional, without promising a clinical effect for every use."
+      },
+      {
+        "target": "edge",
+        "selector": {
+          "src": "n_v1_34_far_auto",
+          "dst": "n_v24_transport_personal_masina",
+          "relation": "related_to"
+        },
+        "field": "label_ro",
+        "old": "este o lampă frontală a unei mașini",
+        "new": "poate fi montat în partea din față a unei mașini",
+        "reason": "Qualify the association with the current personal-car owner; the frozen headlight sense also permits bus installations."
+      },
+      {
+        "target": "edge",
+        "selector": {
+          "src": "n_v1_34_semnalizator_auto",
+          "dst": "n_v24_transport_personal_masina",
+          "relation": "related_to"
+        },
+        "field": "label_ro",
+        "old": "este un dispozitiv de semnalizare al mașinii",
+        "new": "poate fi montat pe o mașină",
+        "reason": "This selected vehicle-signal class also includes buses; retain a possible association with the exact personal-car owner."
+      },
+      {
+        "target": "edge",
+        "selector": {
+          "src": "n_v1_34_caroserie",
+          "dst": "n_v24_transport_personal_masina",
+          "relation": "related_to"
+        },
+        "field": "label_ro",
+        "old": "formează corpul unei mașini",
+        "new": "poate forma corpul unei mașini",
+        "reason": "The selected vehicle-body class also includes buses and trucks; retain the possible personal-car association, parallel to the other two vehicle captions."
+      },
+      {
+        "target": "edge",
+        "selector": {
+          "src": "n_v1_34_pedala_de_frana",
+          "dst": "n_v24_transport_personal_masina",
+          "relation": "related_to"
+        },
+        "field": "label_ro",
+        "old": "este o comandă de frânare a mașinii",
+        "new": "poate comanda frânarea unei mașini",
+        "reason": "Retain the possible personal-car association without making it exclusive to that owner; the same class also includes buses."
+      }
+    ],
+    "quality": [
+      {
+        "collection": "EDGES",
+        "selector": {
+          "src": "n_v1_34_trecere_de_pietoni",
+          "dst": "n_v29_city_street_trotuar",
+          "relation": "related_to"
+        },
+        "field": "label_ro",
+        "before": "leagă zonele pietonale de pe cele două laturi ale străzii",
+        "after": "poate lega trotuarele de pe cele două laturi ale străzii",
+        "reason": "Qualify existing sidewalk association; crossing infrastructure does not universally imply sidewalks."
+      }
+    ]
+  },
+  "separate_signed_article_amendment": {
+    "path": "caption-wording-amendment.json",
+    "sha256": "06f35099e04ff41ee2a8c15cf5f937d703f6369211c23c9a9e44cd20590dd78e",
+    "record": {
+      "schema_version": 1,
+      "reviewer": "factual-v1-34",
+      "signed_at_UTC": "2026-10-18T18:28:48.524269+00:00",
+      "reviewed_module_sha256": "095637db734c81b483a70b7e8c8b099d85be09eef0554ceb57207937be990b69",
+      "original_factual_report_sha256": "d61de6d967783a55f35a83f3e19213683add91727e74f5ec5bd001dd2470378c",
+      "original_report_path": "/tmp/v134-review/factual/graph-factual-review.json",
+      "formal_review_round": 1,
+      "target": "edge",
+      "selector": {
+        "src": "n_v1_34_trecere_de_pietoni",
+        "dst": "n_v29_city_street_trotuar",
+        "relation": "related_to"
+      },
+      "field": "label_ro",
+      "old": "leagă zonele pietonale de pe cele două laturi ale străzii",
+      "original_after": "poate lega trotuarele de pe cele două laturi ale unei străzi",
+      "accepted_after": "poate lega trotuarele de pe cele două laturi ale străzii",
+      "verdict": "endorse_exact_article_only_replacement",
+      "rationale": "Both after captions retain the same conditional possible connection between two sidewalks. The definite article refers to the street in the selected crossing context and introduces no new factual scope or universal sidewalk-presence claim.",
+      "source_basis": "Only this reviewer already captured item-01 evidence; no quality source evidence or other quality judgments consulted.",
+      "own_existing_source": {
+        "url": "https://www.mai.gov.ro/actiune-pentru-siguranta-pietonilor/",
+        "requested_at": "2026-10-18T17:49:29.771719+00:00",
+        "body_sha256": "045f9630f5f197c491735f82e120506470739a61f3ee88ff590c66f1fda5f4c4"
+      },
+      "article_only_alignment": true,
+      "new_fact": false,
+      "new_input_or_form": false,
+      "new_node_or_edge": false,
+      "new_source_read": false,
+      "new_web_calls": 0,
+      "new_dictionary_requests": 0,
+      "new_whole_batch_review": false,
+      "new_review_round": false,
+      "original_report_bytes_preserved": true,
+      "source_applied": false,
+      "installed": 0,
+      "player_visible_delta": "0/0/0"
+    }
+  },
+  "exact_signed_edits_applied": [
+    {
+      "collection": "EDGES",
+      "selector": {
+        "src": "n_v1_34_trecere_de_pietoni",
+        "dst": "n_v29_city_street_trotuar",
+        "relation": "related_to"
+      },
+      "field": "label_ro",
+      "before": "leagă zonele pietonale de pe cele două laturi ale străzii",
+      "after": "poate lega trotuarele de pe cele două laturi ale străzii",
+      "signers": [
+        "factual-v1-34",
+        "quality-v1-34"
+      ]
+    },
+    {
+      "collection": "EDGES",
+      "selector": {
+        "src": "n_v1_34_carja",
+        "dst": "n_v3soc_spital",
+        "relation": "related_to"
+      },
+      "field": "label_ro",
+      "before": "poate fi oferită sau utilizată în recuperarea mobilității unui pacient în spital",
+      "after": "poate fi folosită de un pacient la externarea din spital",
+      "signers": [
+        "factual-v1-34"
+      ]
+    },
+    {
+      "collection": "EDGES",
+      "selector": {
+        "src": "n_v1_34_carja",
+        "dst": "n_v24_body_limbs_picior",
+        "relation": "related_to"
+      },
+      "field": "label_ro",
+      "before": "reduce încărcarea unui picior în timpul mersului",
+      "after": "poate reduce încărcarea unui picior în timpul mersului",
+      "signers": [
+        "factual-v1-34"
+      ]
+    },
+    {
+      "collection": "EDGES",
+      "selector": {
+        "src": "n_v1_34_far_auto",
+        "dst": "n_v24_transport_personal_masina",
+        "relation": "related_to"
+      },
+      "field": "label_ro",
+      "before": "este o lampă frontală a unei mașini",
+      "after": "poate fi montat în partea din față a unei mașini",
+      "signers": [
+        "factual-v1-34"
+      ]
+    },
+    {
+      "collection": "EDGES",
+      "selector": {
+        "src": "n_v1_34_semnalizator_auto",
+        "dst": "n_v24_transport_personal_masina",
+        "relation": "related_to"
+      },
+      "field": "label_ro",
+      "before": "este un dispozitiv de semnalizare al mașinii",
+      "after": "poate fi montat pe o mașină",
+      "signers": [
+        "factual-v1-34"
+      ]
+    },
+    {
+      "collection": "EDGES",
+      "selector": {
+        "src": "n_v1_34_caroserie",
+        "dst": "n_v24_transport_personal_masina",
+        "relation": "related_to"
+      },
+      "field": "label_ro",
+      "before": "formează corpul unei mașini",
+      "after": "poate forma corpul unei mașini",
+      "signers": [
+        "factual-v1-34"
+      ]
+    },
+    {
+      "collection": "EDGES",
+      "selector": {
+        "src": "n_v1_34_pedala_de_frana",
+        "dst": "n_v24_transport_personal_masina",
+        "relation": "related_to"
+      },
+      "field": "label_ro",
+      "before": "este o comandă de frânare a mașinii",
+      "after": "poate comanda frânarea unei mașini",
+      "signers": [
+        "factual-v1-34"
+      ]
+    }
+  ],
+  "item_form_edge_drops": [],
+  "semantic_payload_comparison": "Exact AST payload equality to original after only seven signed label_ro replacements. All nodes,95forms,68edge endpoints/relations/weights/directions and other constants remain unchanged. The one article-only alignment has explicit reviewer endorsement; bookkeeping adds no new semantic approval.",
+  "source_provenance_sha256": "1a36ff608f5ff11492a6be8e0e58ad64097e3736097627b9c5c453d608a5d4d8",
+  "game_impact_limits": {
+    "accepted_source_items": 17,
+    "new_concepts": 17,
+    "existing_owner_input_families": 0,
+    "ordinary_normalized_payload_keys": 95,
+    "canonical_label_only_keys": 0,
+    "ordinary_primary_lemma_families": 8,
+    "qualified_compound_families": 9,
+    "synonym_families": 0,
+    "regional_input_families": 0,
+    "directed_graph_claims": 68,
+    "source_applied": false,
+    "installed": 0,
+    "player_visible_delta": "0/0/0",
+    "target_approvals": 0,
+    "salience_approvals": 0,
+    "new_playable_rounds": 0,
+    "new_node_direct_predecessors": {
+      "0": 17
+    },
+    "C3_numeric_passes": 0,
+    "C3_limits": "All68proposed edges are outgoing to existing nodes and non-bidirectional; all17new concepts remain below five actual direct non-distractor predecessors. No recognition, opener, salience or engine-floor approval inferred.",
+    "interfaces": {
+      "Cald sau Rece": "Typed resolver inputs; potential exact/projection and fuzzy competition, repeat/win identity, profiles and complete snapshots require later integration qualification.",
+      "Lanțul Cuvintelor": "Typed moves and clicked displayed neighbor labels submit text. Readable truthful directed claims are not approved routes; graph changes may alter existing choices/optimal lengths.",
+      "Alchimie": "Combines owned IDs. Inventory/journal search filters local display labels rather than KG aliases. No recipe or projection is approved.",
+      "Intrusul/Perechi/Conexiuni": "Active-board IDs are submitted. No new board, unique strongest pair or fair partition is approved.",
+      "care_scope": "Common physical object/document identification and narrowly true facts only; no clinical recommendation, diagnosis, dosing or treatment instructions.",
+      "target_status": "No target, C3, salience, difficulty or playable round approval. Graph/source acceptance would not establish these properties.",
+      "integration_limit": "Static provenance/compatibility is not safe-to-merge or zero-disturbance proof. Later separately authorized integration must freeze actual latest feature working identity and run current existing cascade/gates/playthroughs; main landing is separate."
+    },
+    "primary_feature": {
+      "branch": "feat/gui-cat-m3",
+      "head": "e75518c1473be3a32ec2a0f2e1565764bbcf5d5b",
+      "working_observation_sha256": "eaec72e4b8071a9fb512c1fba9b26ff983bd8a07d062044d64f9c31d55734293",
+      "dirty_path_count": 126,
+      "relevant_files": 59,
+      "WIP_copied_or_executed": false
+    },
+    "secondary_local_main": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+    "content_authority_bytes_equal_both_bases": 244,
+    "integration_limit": "Unapplied source module only. Salience0.5/source flags are not runtime quarantine. Later explicit integration must extract bounded payload onto the latest designated feature version with frozen accepted WIP identity, refresh existing authorities/gates and scope-appropriate playthroughs. No whole-wave bulk merge or main landing authority."
+  },
+  "held_preserved": 23,
+  "module_application_or_dry_run": false
+}

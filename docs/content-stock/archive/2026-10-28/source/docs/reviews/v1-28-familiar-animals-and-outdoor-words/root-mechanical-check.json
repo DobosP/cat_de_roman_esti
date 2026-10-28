@@ -1,0 +1,56 @@
+{
+  "wave": "1.28",
+  "status": "PASS",
+  "scope": "Cached source-application/preservation bookkeeping;not another semantic review or an installation.",
+  "module_sha256": "bf1e7d6ef9dd5b351352d957ae2c132a58fc85e3146c19210cb8be005fa4a8f6",
+  "reviewed_original_sha256": "df2c0446273577358c1aa9fd454ca25b0e17650a875f8033ea2b8684895915c6",
+  "frozen_pool_sha256": "7248167d6e23e0d3d5fa132503da20b156d181d6518b75c5249d74d782943e6a",
+  "accepted_source_counts": {
+    "items": 36,
+    "new_nodes": 36,
+    "existing_input_families": 0,
+    "edges": 144,
+    "missing_normalized_keys": 199,
+    "held": 19,
+    "proposed_lexical_synonym_families": 0,
+    "verified_lexical_synonym_families": 0,
+    "regional_input_families": 0,
+    "applied": 0,
+    "installed": 0,
+    "player_visible_delta": "0/0/0"
+  },
+  "signed_edge_drops": 1,
+  "whole_item_holds": [
+    "v128-bibilica"
+  ],
+  "prior_holds_unchanged": 18,
+  "review_application_path": "review-application.json",
+  "review_application_sha256": "bcec9851ed1a4fab6de92ff6ce076bcddc1de3da90be2918a657bdef417d9594",
+  "current_graph_floor_check": "PASS",
+  "owner_metadata_and_projection_terms_unchanged": true,
+  "source_applied": false,
+  "installed": 0,
+  "player_visible_delta": "0/0/0",
+  "step5_checks": {
+    "validate": {
+      "command": "go -C go-backend run ./cmd/cat-content validate --root ..",
+      "exit_code": 0,
+      "output_sha256": "1d2e645a4a6946dae65ac9fc067442df3e7a430fc9fee3039e41fd1ee3819976"
+    },
+    "export": {
+      "command": "go -C go-backend run ./cmd/cat-content export --root .. --check",
+      "exit_code": 0,
+      "output_sha256": "4f715aebbcf4c517ca8a5686959372f4ab156e4e62f897e6e5e607156dc5c8fb"
+    },
+    "ops": {
+      "command": "go -C go-backend run ./cmd/cat-content-ops check --root .. --check",
+      "exit_code": 0,
+      "output_sha256": "e7fd15f1a6e05c103f027645f7ceed93387d123ed27c882c83104a823575e311"
+    },
+    "delta": {
+      "command": "go -C go-backend run ./cmd/cat-content-ops delta --root .. --baseline d30b0aa47248b9a5944e015f2daf54cc5a795617 --text",
+      "exit_code": 0,
+      "output_sha256": "b40a630a80b59dd1f32e0aec8fed5fa03768e4fc635c8d8e22378d0ce1ca34ba"
+    }
+  }
+}

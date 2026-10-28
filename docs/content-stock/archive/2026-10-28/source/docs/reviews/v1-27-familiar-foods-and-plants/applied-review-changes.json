@@ -1,0 +1,223 @@
+{
+  "status": "PASS",
+  "wave": "1.27",
+  "original_module_sha256": "73c942fec085d5c800accf62ea9eaea9950214bc158f1b45240e5a8eb2066dca",
+  "final_module_sha256": "34852b0414025a93a1e7149400579b8c1ff13e82f6dc23ac5bf860cbff6965fc",
+  "pool_draft_sha256": "bd025888b0de3bf7fce443910cfdee1aadc8d90aa0e37c9b8c47e2c02842f1a6",
+  "review_bindings": {
+    "factual": {
+      "reviewer": "factual-v1-27",
+      "path": "docs/reviews/v1-27-familiar-foods-and-plants/graph-factual-review.json",
+      "sha256": "01cab5839bf26d4f336a8c3d16ea4c4100cc3f6c71afae7f77b359f504885277",
+      "module_sha256": "73c942fec085d5c800accf62ea9eaea9950214bc158f1b45240e5a8eb2066dca",
+      "frozen_pool_sha256": "51712443140b8c5f7912c3f512d8c7c53f8cc0a3ecf8093fed4167db9513f338",
+      "round": 1,
+      "capture_catalog_sha256": "765653ade05c8fd6393232a0db70a7d75018c4c867adac3276eab516786b4ee4"
+    },
+    "quality": {
+      "reviewer": "quality-v1-27",
+      "path": "docs/reviews/v1-27-familiar-foods-and-plants/graph-quality-review.json",
+      "sha256": "b2218e743a4fc04c4263bcd765d2ffb5a2dd579490863a1f4d3c60ff2ef7446e",
+      "module_sha256": "73c942fec085d5c800accf62ea9eaea9950214bc158f1b45240e5a8eb2066dca",
+      "frozen_pool_sha256": "51712443140b8c5f7912c3f512d8c7c53f8cc0a3ecf8093fed4167db9513f338",
+      "round": 1,
+      "capture_catalog_sha256": "c32a2988852e6a9ecff5e66b6dbe0898a8fc4510a47d2bbbd4f9f24594597ed2"
+    }
+  },
+  "changes": [
+    {
+      "operation": "drop_edge",
+      "edge_key": {
+        "src": "n_v1_27_andiva",
+        "dst": "n_v85_food_alune_padure",
+        "relation": "related_to"
+      },
+      "before": "poate fi combinată cu alune de pădure în unele salate",
+      "after": null,
+      "signed_requests": [
+        {
+          "role": "factual",
+          "request": {
+            "type": "drop_edge",
+            "item_id": "v127-andiva",
+            "src": "n_v1_27_andiva",
+            "dst": "n_v85_food_alune_padure",
+            "relation": "related_to",
+            "before": "poate fi combinată cu alune de pădure în unele salate",
+            "after": null,
+            "reason": "The recipe names endives only within a mixed frisée/radicchio salad; it does not establish the selected forced white-bud sense.",
+            "sources": [
+              {
+                "url": "https://www.e-retete.ro/retete/salata-cu-telina-branza-de-capra-si-alune-de-padure",
+                "source_ref": "F017"
+              }
+            ]
+          }
+        },
+        {
+          "role": "quality",
+          "request": {
+            "op": "drop_edge",
+            "src": "n_v1_27_andiva",
+            "dst": "n_v85_food_alune_padure",
+            "relation": "related_to",
+            "before_caption": "poate fi combinată cu alune de pădure în unele salate",
+            "reason": "Mixed frisee/andive/radicchio recipe confirms generic endive with hazelnuts but does not resolve forced pale-bud versus C.endivia selected sense;do not transfer the pairing across that explicit scope gap.",
+            "before": {
+              "src": "n_v1_27_andiva",
+              "dst": "n_v85_food_alune_padure",
+              "relation": "related_to",
+              "label_ro": "poate fi combinată cu alune de pădure în unele salate"
+            },
+            "after": null
+          }
+        }
+      ]
+    },
+    {
+      "operation": "update_caption",
+      "edge_key": {
+        "src": "n_v1_27_hrib",
+        "dst": "n_v24_food_pantry_ulei",
+        "relation": "related_to"
+      },
+      "before": "poate fi gătit prin prăjire în ulei",
+      "after": "poate fi gătit cu ulei",
+      "signed_requests": [
+        {
+          "role": "factual",
+          "request": {
+            "type": "edit_edge_caption",
+            "item_id": "v127-hrib",
+            "src": "n_v1_27_hrib",
+            "dst": "n_v24_food_pantry_ulei",
+            "relation": "related_to",
+            "field": "label_ro",
+            "before": "poate fi gătit prin prăjire în ulei",
+            "after": "poate fi gătit cu ulei",
+            "reason": "The recipe cooks mushrooms including hribi with oil; it does not require the stronger frying formulation.",
+            "sources": [
+              {
+                "url": "https://bucate-aromate.ro/2022/07/ciulama-de-ciuperci-cu-smantana/",
+                "source_ref": "F032"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "operation": "update_caption",
+      "edge_key": {
+        "src": "n_v1_27_cotor",
+        "dst": "n_v1_12_samanta",
+        "relation": "related_to"
+      },
+      "before": "înconjoară zona în care se află semințele fructului",
+      "after": "este partea centrală a unor fructe, în zona semințelor",
+      "signed_requests": [
+        {
+          "role": "quality",
+          "request": {
+            "op": "set_edge_caption",
+            "src": "n_v1_27_cotor",
+            "dst": "n_v1_12_samanta",
+            "relation": "related_to",
+            "before_caption": "înconjoară zona în care se află semințele fructului",
+            "reason": "Fresh culinary sources name apple/pear cotor and pome sources place the seed compartment centrally;the synthesis establishes location,but the original surrounding geometry is unnecessary. Keep the narrower central-seed-area association explicit.",
+            "after_caption": "este partea centrală a unor fructe, în zona semințelor",
+            "before": {
+              "src": "n_v1_27_cotor",
+              "dst": "n_v1_12_samanta",
+              "relation": "related_to",
+              "label_ro": "înconjoară zona în care se află semințele fructului"
+            },
+            "after": {
+              "src": "n_v1_27_cotor",
+              "dst": "n_v1_12_samanta",
+              "relation": "related_to",
+              "label_ro": "este partea centrală a unor fructe, în zona semințelor"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "operation": "hold_and_exclude_proposal",
+      "item_id": "v127-andiva",
+      "derived_from_signed_edge_drop": true,
+      "removed_edges": [
+        {
+          "src": "n_v1_27_andiva",
+          "dst": "n_v4gas_legume",
+          "relation": "is_a",
+          "label_ro": "este o legumă de frunze",
+          "strength": 0.75,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "src": "n_v1_27_andiva",
+          "dst": "n_v4sti_frunza",
+          "relation": "related_to",
+          "label_ro": "este un mugure format din frunze strânse",
+          "strength": 0.75,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "src": "n_v1_27_andiva",
+          "dst": "n_v3gas_salata",
+          "relation": "related_to",
+          "label_ro": "frunzele pot fi folosite în salate",
+          "strength": 0.75,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "src": "n_v1_27_andiva",
+          "dst": "n_v85_food_alune_padure",
+          "relation": "related_to",
+          "label_ro": "poate fi combinată cu alune de pădure în unele salate",
+          "strength": 0.75,
+          "is_distractor": 0,
+          "bidirectional": 0
+        }
+      ],
+      "excluded_forms": [
+        "andivă",
+        "andive",
+        "andivele",
+        "andivei",
+        "andivelor"
+      ],
+      "active_forms": []
+    }
+  ],
+  "counts": {
+    "items": 38,
+    "new_nodes": 35,
+    "existing_input_families": 3,
+    "alias_owners": 3,
+    "edges": 140,
+    "missing_normalized_keys": 219,
+    "held": 17,
+    "proposed_lexical_synonym_families": 2,
+    "verified_lexical_synonym_families": 2,
+    "regional_input_families": 2,
+    "applied": 0,
+    "installed": 0,
+    "player_visible_delta": "0/0/0"
+  },
+  "capture_counts": {
+    "factual": 195,
+    "quality": 195
+  },
+  "request_event_count": 394,
+  "review_dex_min_spacing_seconds": 2.100052833557129,
+  "original_research_clocks_unchanged": true,
+  "source_applied": false,
+  "installed": 0,
+  "player_visible_delta": "0/0/0",
+  "semantic_review_rounds": 1
+}

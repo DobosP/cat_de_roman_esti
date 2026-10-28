@@ -1,0 +1,391 @@
+{
+  "status": "PASS",
+  "wave": "1.25",
+  "original_module_sha256": "daeb0e6dd96de8b53553776e73e00357c8202f9328efe4325943780d2707e9f7",
+  "final_module_sha256": "4c6f820489d1e138603f23d950a2eb14c22122daafc16e911b7b25bb01b3d15b",
+  "pool_draft_sha256": "0ce04b80c3c541b3fbdc1f33dccdf33866f639ec53f2fe1680f60d0c3cbd8348",
+  "review_bindings": {
+    "factual": {
+      "reviewer": "factual-v1-25",
+      "path": "docs/reviews/v1-25-common-places-and-objects/graph-factual-review.json",
+      "sha256": "184e233dabe5b5e265f5fb984619e117444a9711c7b45810c2829dbf75ee70ec",
+      "module_sha256": "daeb0e6dd96de8b53553776e73e00357c8202f9328efe4325943780d2707e9f7",
+      "round": 1
+    },
+    "quality": {
+      "reviewer": "quality-v1-25",
+      "path": "docs/reviews/v1-25-common-places-and-objects/graph-quality-review.json",
+      "sha256": "2b2050e8945e1eef0e0408cb928f593dd8852fb83d995bc7fa94ece29a1b8b97",
+      "module_sha256": "daeb0e6dd96de8b53553776e73e00357c8202f9328efe4325943780d2707e9f7",
+      "round": 1
+    }
+  },
+  "changes": [
+    {
+      "item_id": "v125-pupitru",
+      "action": "convert_to_existing_input_family",
+      "source_node_id": "n_v1_25_pupitru",
+      "target_node_id": "n_v24_school_classroom_banca_scolara",
+      "forms": [
+        "pupitru",
+        "pupitrul",
+        "pupitre",
+        "pupitrele",
+        "pupitrului",
+        "pupitrelor"
+      ],
+      "dropped_edges": [
+        {
+          "src": "n_v1_25_pupitru",
+          "dst": "n_v24_school_writing_caiet",
+          "relation": "related_to",
+          "label_ro": "poate susține un caiet",
+          "strength": 0.75,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "src": "n_v1_25_pupitru",
+          "dst": "n_v24_school_writing_creion",
+          "relation": "related_to",
+          "label_ro": "poate fi folosit la scris cu creionul",
+          "strength": 0.75,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "src": "n_v1_25_pupitru",
+          "dst": "n_v24_home_seating_scaun",
+          "relation": "related_to",
+          "label_ro": "poate fi utilizat împreună cu un scaun",
+          "strength": 0.75,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "src": "n_v1_25_pupitru",
+          "dst": "n_v1_3_material_lemn",
+          "relation": "related_to",
+          "label_ro": "unele pupitre sunt realizate din lemn",
+          "strength": 0.75,
+          "is_distractor": 0,
+          "bidirectional": 0
+        }
+      ],
+      "preserve_existing_metadata": true,
+      "signed_requests": [
+        {
+          "role": "factual",
+          "item_id": "v125-pupitru",
+          "request": {
+            "target_node_id": "n_v24_school_classroom_banca_scolara",
+            "forms": [
+              "pupitru",
+              "pupitrul",
+              "pupitre",
+              "pupitrele",
+              "pupitrului",
+              "pupitrelor"
+            ],
+            "action": "convert_to_existing_input_family"
+          }
+        },
+        {
+          "role": "quality",
+          "item_id": "v125-pupitru",
+          "request": {
+            "action": "convert_to_existing_input_family",
+            "target_node_id": "n_v24_school_classroom_banca_scolara",
+            "forms": [
+              "pupitru",
+              "pupitrul",
+              "pupitre",
+              "pupitrele",
+              "pupitrului",
+              "pupitrelor"
+            ],
+            "source_node_id": "n_v1_25_pupitru",
+            "selected_sense": "classroom desk / bancă școlară only",
+            "excluded_senses": [
+              "lectern or generic reading stand",
+              "music stand",
+              "control console",
+              "generic reading/writing furniture"
+            ],
+            "drop_proposed_node": true,
+            "preserve_existing_metadata": true
+          }
+        }
+      ]
+    },
+    {
+      "item_id": "v125-inel",
+      "edge_key": {
+        "src": "n_v1_25_inel",
+        "dst": "n_v1_11_sticla",
+        "relation": "related_to"
+      },
+      "before": "unele modele decorative sunt realizate din sticlă",
+      "after": "unele modele decorative conțin piese din sticlă",
+      "action": "update_caption",
+      "signed_requests": [
+        {
+          "role": "factual",
+          "item_id": "v125-inel",
+          "request": {
+            "edge_key": {
+              "src": "n_v1_25_inel",
+              "dst": "n_v1_11_sticla",
+              "relation": "related_to"
+            },
+            "before": "unele modele decorative sunt realizate din sticlă",
+            "after": "unele modele decorative conțin piese din sticlă",
+            "action": "update_caption"
+          }
+        },
+        {
+          "role": "quality",
+          "item_id": "v125-inel",
+          "request": {
+            "action": "update_caption",
+            "edge_key": {
+              "src": "n_v1_25_inel",
+              "dst": "n_v1_11_sticla",
+              "relation": "related_to"
+            },
+            "before": "unele modele decorative sunt realizate din sticlă",
+            "after": "unele modele decorative conțin piese din sticlă"
+          }
+        }
+      ]
+    },
+    {
+      "item_id": "v125-terasa",
+      "action": "update_description",
+      "node_id": "n_v1_25_terasa",
+      "before": "Spațiu deschis amenajat lângă o locuință,pentru odihnă și petrecerea timpului afară.",
+      "after": "Spațiu deschis amenajat ca anexă a unei clădiri, la sol, la etaj sau pe acoperiș, folosit pentru odihnă.",
+      "signed_requests": [
+        {
+          "role": "quality",
+          "item_id": "v125-terasa",
+          "request": {
+            "action": "update_description",
+            "node_id": "n_v1_25_terasa",
+            "before": "Spațiu deschis amenajat lângă o locuință,pentru odihnă și petrecerea timpului afară.",
+            "after": "Spațiu deschis amenajat ca anexă a unei clădiri, la sol, la etaj sau pe acoperiș, folosit pentru odihnă."
+          }
+        }
+      ]
+    },
+    {
+      "item_id": "v125-brutarie",
+      "action": "update_caption",
+      "edge_key": {
+        "src": "n_v1_25_brutarie",
+        "dst": "n_v24_food_pantry_faina",
+        "relation": "related_to"
+      },
+      "before": "folosește făină la prepararea produselor",
+      "after": "poate folosi făină la prepararea produselor",
+      "signed_requests": [
+        {
+          "role": "quality",
+          "item_id": "v125-brutarie",
+          "request": {
+            "action": "update_caption",
+            "edge_key": {
+              "src": "n_v1_25_brutarie",
+              "dst": "n_v24_food_pantry_faina",
+              "relation": "related_to"
+            },
+            "before": "folosește făină la prepararea produselor",
+            "after": "poate folosi făină la prepararea produselor"
+          }
+        }
+      ]
+    },
+    {
+      "item_id": "v125-brutarie",
+      "action": "update_caption",
+      "edge_key": {
+        "src": "n_v1_25_brutarie",
+        "dst": "n_v84_food_aluat",
+        "relation": "related_to"
+      },
+      "before": "pregătește aluat pentru produse",
+      "after": "poate pregăti aluat pentru produse",
+      "signed_requests": [
+        {
+          "role": "quality",
+          "item_id": "v125-brutarie",
+          "request": {
+            "action": "update_caption",
+            "edge_key": {
+              "src": "n_v1_25_brutarie",
+              "dst": "n_v84_food_aluat",
+              "relation": "related_to"
+            },
+            "before": "pregătește aluat pentru produse",
+            "after": "poate pregăti aluat pentru produse"
+          }
+        }
+      ]
+    },
+    {
+      "item_id": "v125-pensiune",
+      "action": "update_caption",
+      "edge_key": {
+        "src": "n_v1_25_pensiune",
+        "dst": "n_v24_home_rooms_camera",
+        "relation": "related_to"
+      },
+      "before": "oferă camere pentru cazare",
+      "after": "oferă încăperi de cazare asemănătoare camerelor unei locuințe",
+      "signed_requests": [
+        {
+          "role": "quality",
+          "item_id": "v125-pensiune",
+          "request": {
+            "action": "update_caption",
+            "edge_key": {
+              "src": "n_v1_25_pensiune",
+              "dst": "n_v24_home_rooms_camera",
+              "relation": "related_to"
+            },
+            "before": "oferă camere pentru cazare",
+            "after": "oferă încăperi de cazare asemănătoare camerelor unei locuințe"
+          }
+        }
+      ]
+    },
+    {
+      "item_id": "v125-hotel",
+      "action": "update_caption",
+      "edge_key": {
+        "src": "n_v1_25_hotel",
+        "dst": "n_v24_home_rooms_camera",
+        "relation": "related_to"
+      },
+      "before": "oferă camere pentru cazare",
+      "after": "oferă încăperi de cazare asemănătoare camerelor unei locuințe",
+      "signed_requests": [
+        {
+          "role": "quality",
+          "item_id": "v125-hotel",
+          "request": {
+            "action": "update_caption",
+            "edge_key": {
+              "src": "n_v1_25_hotel",
+              "dst": "n_v24_home_rooms_camera",
+              "relation": "related_to"
+            },
+            "before": "oferă camere pentru cazare",
+            "after": "oferă încăperi de cazare asemănătoare camerelor unei locuințe"
+          }
+        }
+      ]
+    },
+    {
+      "item_id": "v125-brosa",
+      "action": "update_caption",
+      "edge_key": {
+        "src": "n_v1_25_brosa",
+        "dst": "n_v4sti_metal",
+        "relation": "related_to"
+      },
+      "before": "unele broșe sunt realizate din metal",
+      "after": "unele broșe au componente din metal",
+      "signed_requests": [
+        {
+          "role": "quality",
+          "item_id": "v125-brosa",
+          "request": {
+            "action": "update_caption",
+            "edge_key": {
+              "src": "n_v1_25_brosa",
+              "dst": "n_v4sti_metal",
+              "relation": "related_to"
+            },
+            "before": "unele broșe sunt realizate din metal",
+            "after": "unele broșe au componente din metal"
+          }
+        }
+      ]
+    },
+    {
+      "item_id": "v125-pupitru",
+      "action": "drop_edges_as_part_of_conversion",
+      "signed_requests": [
+        {
+          "role": "quality",
+          "item_id": "v125-pupitru",
+          "request": {
+            "action": "drop_edge",
+            "edge_key": {
+              "src": "n_v1_25_pupitru",
+              "dst": "n_v24_school_writing_caiet",
+              "relation": "related_to"
+            }
+          }
+        },
+        {
+          "role": "quality",
+          "item_id": "v125-pupitru",
+          "request": {
+            "action": "drop_edge",
+            "edge_key": {
+              "src": "n_v1_25_pupitru",
+              "dst": "n_v24_school_writing_creion",
+              "relation": "related_to"
+            }
+          }
+        },
+        {
+          "role": "quality",
+          "item_id": "v125-pupitru",
+          "request": {
+            "action": "drop_edge",
+            "edge_key": {
+              "src": "n_v1_25_pupitru",
+              "dst": "n_v24_home_seating_scaun",
+              "relation": "related_to"
+            }
+          }
+        },
+        {
+          "role": "quality",
+          "item_id": "v125-pupitru",
+          "request": {
+            "action": "drop_edge",
+            "edge_key": {
+              "src": "n_v1_25_pupitru",
+              "dst": "n_v1_3_material_lemn",
+              "relation": "related_to"
+            }
+          }
+        }
+      ],
+      "dropped_edge_count": 4
+    }
+  ],
+  "counts": {
+    "items": 37,
+    "new_nodes": 36,
+    "existing_input_families": 1,
+    "alias_owners": 1,
+    "edges": 144,
+    "missing_normalized_keys": 211,
+    "held": 18,
+    "applied": 0,
+    "installed": 0,
+    "player_visible_delta": "0/0/0"
+  },
+  "preserved_author_holds": 18,
+  "original_research_clocks_unchanged": true,
+  "source_applied": false,
+  "installed": 0,
+  "player_visible_delta": "0/0/0",
+  "semantic_review_rounds": 1,
+  "mechanical_only_after_review": true
+}

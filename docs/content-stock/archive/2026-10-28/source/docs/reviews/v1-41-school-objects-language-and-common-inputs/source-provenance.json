@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "wave": "1.41",
+  "reviewed_module_sha256": "e4c011e545f2abe91a18c1e92622162cfc5b217ac68d077220ac119acf2695f5",
+  "final_module_sha256": "e4c011e545f2abe91a18c1e92622162cfc5b217ac68d077220ac119acf2695f5",
+  "proposal_path": "/home/dobo/work/_temp/content__v1-41-school-objects-language-and-common-inputs/review/proposal.json",
+  "proposal_sha256": "eeb0cc47480690e08f7be1e49ba5a125ced1803002de7c7397cf07aec55b4436",
+  "original_pool_path": "/home/dobo/work/_temp/content__v1-41-school-objects-language-and-common-inputs/review/pool.original.json",
+  "original_pool_sha256": "0ba53ac45602c7b6106d285e9ae48be22d9bc73f3fe5148e2032e57b663f8b56",
+  "original_reviewed_module_archive": {
+    "repo_path": "docs/reviews/v1-41-school-objects-language-and-common-inputs/reviewed-module.json",
+    "archive_sha256": "34bb8246228b8d9e3e36e36288de95e4c7f70944f02bc31a431c04a0de35893e",
+    "decoded_source_sha256": "e4c011e545f2abe91a18c1e92622162cfc5b217ac68d077220ac119acf2695f5"
+  },
+  "formal_reports": {
+    "factual": {
+      "reviewer": "factual-v1-41",
+      "repo_report": "docs/reviews/v1-41-school-objects-language-and-common-inputs/graph-factual-review.json",
+      "report_sha256": "3404e5d39d2d992d8dd87578ccb333fa974a98574bb40951aadbd2a8545aab24",
+      "fresh_catalog_path": "/home/dobo/work/_temp/content__v1-41-school-objects-language-and-common-inputs/review/factual/source-catalog.json",
+      "fresh_catalog_sha256": "5c695c5249bbf89295acdebd41ce0523931ec6608760bcc235ec5f194f255b10",
+      "request_ledger_path": "/home/dobo/work/_temp/content__v1-41-school-objects-language-and-common-inputs/review/factual/requests.json",
+      "request_ledger_sha256": "11a49b6049fa03e0af65d73e0b76535dda29a73fb2c26f9e9f7950a4ef73ee6c",
+      "retained_file_manifest_path": "/home/dobo/work/_temp/content__v1-41-school-objects-language-and-common-inputs/review/factual/root-retained-file-manifest.json",
+      "retained_file_manifest_sha256": "72376f1e84856194fc88f9f8d30232326129514b655d7d1790126dc32a604016",
+      "counts": {
+        "submitted_items": 21,
+        "fresh_dictionary_requests": 44,
+        "HTTP_attempts": 83,
+        "failed_HTTP_attempts": 1,
+        "unusable_capture_attempts": 1,
+        "fresh_PDF_captures": 3,
+        "fresh_dictionary_head_proofs_required": 22,
+        "component_dictionary_heads_required": 2,
+        "retained_evidence_files": 175,
+        "retained_evidence_bytes": 69219542,
+        "maximum_observed_item_capture_request_span_seconds": 106.471976,
+        "maximum_item_elapsed_seconds": null,
+        "timing_limit": "Actual capture times retained; uninstrumented judgment duration is unknown, never fabricated. Author research budgets are separate."
+      }
+    },
+    "quality": {
+      "reviewer": "quality-v1-41",
+      "repo_report": "docs/reviews/v1-41-school-objects-language-and-common-inputs/graph-quality-review.json",
+      "report_sha256": "0ee872c225076c3988048de2813f54f337899c6bc77af9f2f3575773dafe5ebb",
+      "fresh_catalog_path": "/home/dobo/work/_temp/content__v1-41-school-objects-language-and-common-inputs/review/quality/source-catalog.json",
+      "fresh_catalog_sha256": "dec8d0e79cce79ff98658bdb5aa9daeb66ada780b0f26f0c29ca0235a59b6246",
+      "request_ledger_path": "/home/dobo/work/_temp/content__v1-41-school-objects-language-and-common-inputs/review/quality/requests.json",
+      "request_ledger_sha256": "eb682eadb0af6692ba5ead32c26ac5713c4e95432fbef8e3ca2569bf52125087",
+      "retained_file_manifest_path": "/home/dobo/work/_temp/content__v1-41-school-objects-language-and-common-inputs/review/quality/root-retained-file-manifest.json",
+      "retained_file_manifest_sha256": "bc26ebae4b57c2b32c657c1ecd9b9f22093f17067a33e550bdb3fe3b40cb6153",
+      "counts": {
+        "submitted_items": 21,
+        "fresh_dictionary_requests": 44,
+        "HTTP_attempts": 81,
+        "failed_HTTP_attempts": 0,
+        "unusable_capture_attempts": 0,
+        "fresh_PDF_captures": 3,
+        "fresh_dictionary_head_proofs_required": 22,
+        "component_dictionary_heads_required": 2,
+        "retained_evidence_files": 173,
+        "retained_evidence_bytes": 68677451,
+        "maximum_observed_item_capture_request_span_seconds": 6.708518,
+        "maximum_item_elapsed_seconds": null,
+        "timing_limit": "Actual capture times retained; uninstrumented judgment duration is unknown, never fabricated. Author research budgets are separate."
+      }
+    }
+  },
+  "dictionary_counts": {
+    "total_dictionary_requests": 88,
+    "global_minimum_dictionary_start_gap_seconds": 2.150209,
+    "failed_dictionary_requests": 0,
+    "last_author_to_first_factual_dictionary_gap_seconds": 146.70803,
+    "all_requests_after_freeze": true,
+    "serial_reviewer_dictionary_phases": true
+  },
+  "optimization": {
+    "standing_policy_path": "/home/dobo/work/_temp/content-loop/owner-source-policy.md",
+    "standing_policy_sha256": "febe5f7f4e168af7b14da6fff94400078d79a7761196c40f05314f57b2a6e6d8",
+    "scope": "One manifest-driven root verification, exact retained authority references, fixed fresh independent reviews."
+  },
+  "mechanical_QA_scope": "Original reports, separate reviewer catalogs, ledgers, captures and decision records remain immutable. Author captures are provenance, not fresh review. No source-semantic approval is created by this verification.",
+  "formal_reviews": 2,
+  "formal_rounds_per_reviewer": 1,
+  "source_approved_by_manifest": 0,
+  "source_applied": false,
+  "module_imported_or_executed": false,
+  "module_dry_run": false,
+  "installed": 0,
+  "target_approvals": 0,
+  "new_playable_rounds": 0,
+  "player_visible_delta": "0/0/0"
+}

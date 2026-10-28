@@ -1,0 +1,2709 @@
+{
+  "analyst": "factual-v1-32",
+  "task": "consolidation_schema_findings",
+  "scope": "Cached/read-only canonical V1.8–V1.32 pool and final-module schema inventory;no source re-review,HTTP,word authorship or integration. Canonical own-wave pools read through Git at latest-main or exact protected closure,not repeated copied pools.",
+  "observed_at_utc": "2026-10-16T14:02:15.817159+00:00",
+  "latest_local_main_commit": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+  "latest_main_bundle_sha256": "f6d983f1ab2cbb7852e8583411eaecd2048fdb5b5da08099129d7e4ff471344c",
+  "protected_handoff_summary_sha256": "30000c5c7f1a105533d7097164998ec444cee19ef0d29c16cd8e421e6053b82f",
+  "protected_closure_count": 19,
+  "V1_32_handoff_commit_preserved": true,
+  "status": "PASS_WITH_EXTRACTION_CAVEATS",
+  "issues": [],
+  "summary": {
+    "main_canonical_pools": 6,
+    "main_record_states": {
+      "integrated": 218,
+      "held": 69
+    },
+    "main_integrated_record_count": 218,
+    "main_held_record_count": 69,
+    "main_module_new_nodes": 165,
+    "main_module_alias_owner_groups_sum": 52,
+    "main_pure_relation_records": 1,
+    "main_module_edge_rows_sum": 668,
+    "main_unique_owner_form_pairs": 1006,
+    "main_module_form_mismatches_to_current_index": 0,
+    "unlanded_canonical_pools": 19,
+    "unlanded_record_states": {
+      "accepted": 837,
+      "held": 239,
+      "rejected": 1
+    },
+    "unlanded_module_nodes_sum": 709,
+    "unlanded_module_alias_owner_groups_sum": 119,
+    "unlanded_module_edge_rows_sum": 2844,
+    "unlanded_unique_owner_form_pairs": 4503,
+    "pending_multiowner_folded_keys": 0,
+    "pending_owner_pairs_colliding_with_current_main": 0,
+    "both_graph_review_artifacts_present_pools": 25,
+    "counts_are_source_inventory_not_installed_delta": true,
+    "unlanded_accepted_new_node_records": 709,
+    "unlanded_accepted_existing_input_families": 128,
+    "unlanded_new_node_keys": 4013,
+    "unlanded_existing_alias_keys": 490,
+    "unlanded_unique_normalized_payload_keys": 4503,
+    "all_canonical_records": 1364,
+    "all_record_states": {
+      "integrated": 218,
+      "accepted": 837,
+      "held": 308,
+      "rejected": 1
+    },
+    "all_module_edge_rows_sum": 3512,
+    "pending_records_with_partial_dispositions": 15,
+    "legacy_stale_proposed_description_rows": 9
+  },
+  "canonical_pool_inventory": [
+    {
+      "wave": "1.8",
+      "canonical_ref": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+      "canonical_pool_path": "docs/content-pool/v1-8-everyday-core/pool.json",
+      "pool_sha256": "9b45158bedc4843d3382792812de50385e1779aa259bb290867595bd64221c45",
+      "location": "latest_local_main",
+      "row_count": 60,
+      "record_states": {
+        "integrated": 30,
+        "held": 30
+      },
+      "selected_kind_counts": {
+        "new_shared_concept": 23,
+        "accepted_form_family": 6,
+        "new_relation": 1
+      },
+      "selected_form_field_coverage": {
+        "verified_forms": 29,
+        "qualified_forms": 0,
+        "proposed_forms": 6,
+        "owner_id_fallback_rows": 6,
+        "node_id_rows": 23
+      },
+      "module_path": "scripts/everyday_core_v1_8_data.py",
+      "module_sha256": "ab547440b92bc43e0ed65dd414cac69b48307066dce0c2bbc0540fa4438074f5",
+      "module_nodes": 23,
+      "module_alias_owner_groups": 6,
+      "module_edge_rows": 93,
+      "module_folded_owner_form_pairs": 159,
+      "raw_payload_spellings": 159,
+      "module_selected_item_IDs": 30,
+      "module_evidence_fields": [],
+      "module_new_node_IDs_present_on_main": 23,
+      "pool_landing_status": null,
+      "pool_source_applied": null,
+      "pool_installed": null,
+      "reports": {
+        "factual": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-factual-review.json",
+          "sha256": "ace88b59282b9a013f81aff5e8d0389b91ac5ba741f004c7ad705949a84c67de",
+          "module_binding_fields": {
+            "module_path": "scripts/everyday_core_v1_8_data.py",
+            "module_sha256": "ab547440b92bc43e0ed65dd414cac69b48307066dce0c2bbc0540fa4438074f5",
+            "pool_sha256": "3c866556a579320a1fca6c6d4638cac34ba19645e1a62ef12f51fb2ccc0fa9cf",
+            "reviewed_module_sha256": "746743b7f1b84358d68bc58c1fd18a7f472cf0719f6b3b738763022910a2370c"
+          },
+          "formal_review_used": null,
+          "round": null
+        },
+        "quality": {
+          "path": "docs/reviews/v1-8-everyday-core/graph-quality-review.json",
+          "sha256": "7522f837faad84b907addcfb61073a325d970c986934da740a370726e8e3c40a",
+          "module_binding_fields": {
+            "module_path": "scripts/everyday_core_v1_8_data.py",
+            "module_sha256": "ab547440b92bc43e0ed65dd414cac69b48307066dce0c2bbc0540fa4438074f5",
+            "pool_sha256": "3c866556a579320a1fca6c6d4638cac34ba19645e1a62ef12f51fb2ccc0fa9cf",
+            "reviewed_module_sha256": "746743b7f1b84358d68bc58c1fd18a7f472cf0719f6b3b738763022910a2370c"
+          },
+          "formal_review_used": null,
+          "round": null
+        }
+      },
+      "pure_relation_selected_rows": 1,
+      "stale_existing_owner_description_examples": []
+    },
+    {
+      "wave": "1.9",
+      "canonical_ref": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+      "canonical_pool_path": "docs/content-pool/v1-9-seasons-and-school/pool.json",
+      "pool_sha256": "b859a92cb4c991f7dd86e7ab7d8dfe5c6e951234842634f5964862f0f800e1f6",
+      "location": "latest_local_main",
+      "row_count": 40,
+      "record_states": {
+        "integrated": 23,
+        "held": 17
+      },
+      "selected_kind_counts": {
+        "new_shared_concept": 14,
+        "accepted_form_family": 9
+      },
+      "selected_form_field_coverage": {
+        "verified_forms": 23,
+        "qualified_forms": 0,
+        "proposed_forms": 9,
+        "owner_id_fallback_rows": 9,
+        "node_id_rows": 14
+      },
+      "module_path": "scripts/seasons_and_school_v1_9_data.py",
+      "module_sha256": "68a8c4ef0c56bee2150806073cfc1d5c6aa8cee4deac0b2e14ac9d3dc7a319e3",
+      "module_nodes": 14,
+      "module_alias_owner_groups": 9,
+      "module_edge_rows": 55,
+      "module_folded_owner_form_pairs": 96,
+      "raw_payload_spellings": 96,
+      "module_selected_item_IDs": 23,
+      "module_evidence_fields": [
+        "REVIEW_ITEMS"
+      ],
+      "module_new_node_IDs_present_on_main": 14,
+      "pool_landing_status": null,
+      "pool_source_applied": null,
+      "pool_installed": null,
+      "reports": {
+        "factual": {
+          "path": "docs/reviews/v1-9-seasons-and-school/graph-factual-review.json",
+          "sha256": "4e5319740f646bd514b162d39411436ee269a32816422ac306fd354349f0eb12",
+          "module_binding_fields": {
+            "module_path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-9-seasons-and-school/scripts/seasons_and_school_v1_9_data.py",
+            "module_sha256": "212b1e6eb87eac60510b655aa82535555a7841e2506d844d702ca347afab849a",
+            "pool_sha256": "dc307c888d9ca8f3c5b5235daec56803f77cc08f26612a5f0fd5d1d3079c322e"
+          },
+          "formal_review_used": null,
+          "round": null
+        },
+        "quality": {
+          "path": "docs/reviews/v1-9-seasons-and-school/graph-quality-review.json",
+          "sha256": "5d442d098b3c8f894a1c8f7b10196fba88207fb624dbc24d60813a3646b025bb",
+          "module_binding_fields": {
+            "module_path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-9-seasons-and-school/scripts/seasons_and_school_v1_9_data.py",
+            "module_sha256": "212b1e6eb87eac60510b655aa82535555a7841e2506d844d702ca347afab849a",
+            "pool_sha256": "dc307c888d9ca8f3c5b5235daec56803f77cc08f26612a5f0fd5d1d3079c322e"
+          },
+          "formal_review_used": null,
+          "round": null
+        }
+      },
+      "pure_relation_selected_rows": 0,
+      "stale_existing_owner_description_examples": [
+        {
+          "id": "v19-input-caiet",
+          "owner_id": "n_v24_school_writing_caiet",
+          "proposed_description": "Pasăre cu coada bifurcată, care prinde mai ales insecte în zbor; populațiile care cuibăresc în România sosesc primăvara și pleacă toamna."
+        },
+        {
+          "id": "v19-input-creion",
+          "owner_id": "n_v24_school_writing_creion",
+          "proposed_description": "Pasăre cu coada bifurcată, care prinde mai ales insecte în zbor; populațiile care cuibăresc în România sosesc primăvara și pleacă toamna."
+        },
+        {
+          "id": "v19-input-stilou",
+          "owner_id": "n_v24_school_supplies_stilou",
+          "proposed_description": "Pasăre cu coada bifurcată, care prinde mai ales insecte în zbor; populațiile care cuibăresc în România sosesc primăvara și pleacă toamna."
+        },
+        {
+          "id": "v19-input-penar",
+          "owner_id": "n_v23via_penar",
+          "proposed_description": "Pasăre cu coada bifurcată, care prinde mai ales insecte în zbor; populațiile care cuibăresc în România sosesc primăvara și pleacă toamna."
+        },
+        {
+          "id": "v19-input-rigla",
+          "owner_id": "n_v24_school_supplies_rigla",
+          "proposed_description": "Pasăre cu coada bifurcată, care prinde mai ales insecte în zbor; populațiile care cuibăresc în România sosesc primăvara și pleacă toamna."
+        },
+        {
+          "id": "v19-input-radiera",
+          "owner_id": "n_v24_school_supplies_radiera",
+          "proposed_description": "Pasăre cu coada bifurcată, care prinde mai ales insecte în zbor; populațiile care cuibăresc în România sosesc primăvara și pleacă toamna."
+        },
+        {
+          "id": "v19-input-ghiozdan",
+          "owner_id": "n_v23via_ghiozdan",
+          "proposed_description": "Pasăre cu coada bifurcată, care prinde mai ales insecte în zbor; populațiile care cuibăresc în România sosesc primăvara și pleacă toamna."
+        },
+        {
+          "id": "v19-input-castravete",
+          "owner_id": "n_v24_food_salad_veg_castravete",
+          "proposed_description": "Pasăre cu coada bifurcată, care prinde mai ales insecte în zbor; populațiile care cuibăresc în România sosesc primăvara și pleacă toamna."
+        },
+        {
+          "id": "v19-input-pantalon",
+          "owner_id": "n_v30_clothing_everyday_pantaloni",
+          "proposed_description": "Pasăre cu coada bifurcată, care prinde mai ales insecte în zbor; populațiile care cuibăresc în România sosesc primăvara și pleacă toamna."
+        }
+      ]
+    },
+    {
+      "wave": "1.10",
+      "canonical_ref": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+      "canonical_pool_path": "docs/content-pool/v1-10-everyday-discovery/pool.json",
+      "pool_sha256": "c3d2b86544e2cb9cb83d3f17137b302130f7b174e36042a9dbdbd441d3b2c95a",
+      "location": "latest_local_main",
+      "row_count": 40,
+      "record_states": {
+        "held": 5,
+        "integrated": 35
+      },
+      "selected_kind_counts": {
+        "new_shared_concept": 20,
+        "existing_owner_form_family": 15
+      },
+      "selected_form_field_coverage": {
+        "verified_forms": 35,
+        "qualified_forms": 0,
+        "proposed_forms": 35,
+        "owner_id_fallback_rows": 15,
+        "node_id_rows": 20
+      },
+      "module_path": "scripts/everyday_discovery_v1_10_data.py",
+      "module_sha256": "e90fbf1756d958c76c0a93c289ba9cfd937e572419bde6627562abca67396ab0",
+      "module_nodes": 20,
+      "module_alias_owner_groups": 15,
+      "module_edge_rows": 79,
+      "module_folded_owner_form_pairs": 133,
+      "raw_payload_spellings": 133,
+      "module_selected_item_IDs": 35,
+      "module_evidence_fields": [
+        "REVIEW_ITEMS"
+      ],
+      "module_new_node_IDs_present_on_main": 20,
+      "pool_landing_status": null,
+      "pool_source_applied": null,
+      "pool_installed": null,
+      "reports": {
+        "factual": {
+          "path": "docs/reviews/v1-10-everyday-discovery/graph-factual-review.json",
+          "sha256": "9673765938711c7761fce2ca1d18438150bf434e4f8f7681f81e3ad50dc1505a",
+          "module_binding_fields": {
+            "module_path": "scripts/everyday_discovery_v1_10_data.py",
+            "module_sha256": "70e980fb84d23d60b2e6919e91a2c7235ef1d062c98ca3a2cca71c7fe1e9b8f7",
+            "pool_sha256": "cf3b983a1d0c10429d996629f0f0f7522e52658b14e4d7fd806babf952f5e826"
+          },
+          "formal_review_used": null,
+          "round": null
+        },
+        "quality": {
+          "path": "docs/reviews/v1-10-everyday-discovery/graph-quality-review.json",
+          "sha256": "31bac9bdbc6d1f1fa303f6662aea0b7e5a4d099bcdcab4c4f070cdbddfe8ad15",
+          "module_binding_fields": {
+            "module_path": "scripts/everyday_discovery_v1_10_data.py",
+            "module_sha256": "70e980fb84d23d60b2e6919e91a2c7235ef1d062c98ca3a2cca71c7fe1e9b8f7",
+            "pool_sha256": "cf3b983a1d0c10429d996629f0f0f7522e52658b14e4d7fd806babf952f5e826"
+          },
+          "formal_review_used": null,
+          "round": null
+        }
+      },
+      "pure_relation_selected_rows": 0,
+      "stale_existing_owner_description_examples": []
+    },
+    {
+      "wave": "1.11",
+      "canonical_ref": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+      "canonical_pool_path": "docs/content-pool/v1-11-home-and-nature/pool.json",
+      "pool_sha256": "bf20dbe19b450f823d01fc8cfcdf6e48f65657bea7ea1cb6ff9ad1fdaedd356a",
+      "location": "latest_local_main",
+      "row_count": 58,
+      "record_states": {
+        "integrated": 49,
+        "held": 9
+      },
+      "selected_kind_counts": {
+        "new_shared_concept": 29,
+        "existing_owner_form_family": 20
+      },
+      "selected_form_field_coverage": {
+        "verified_forms": 49,
+        "qualified_forms": 0,
+        "proposed_forms": 49,
+        "owner_id_fallback_rows": 0,
+        "node_id_rows": 49
+      },
+      "module_path": "scripts/home_and_nature_v1_11_data.py",
+      "module_sha256": "b25c6de488d8ca19be4dc370ed0a3ac59b4e3b43f89551dad778ac90d9542f93",
+      "module_nodes": 29,
+      "module_alias_owner_groups": 20,
+      "module_edge_rows": 110,
+      "module_folded_owner_form_pairs": 183,
+      "raw_payload_spellings": 183,
+      "module_selected_item_IDs": 49,
+      "module_evidence_fields": [
+        "REVIEW_ITEMS"
+      ],
+      "module_new_node_IDs_present_on_main": 29,
+      "pool_landing_status": null,
+      "pool_source_applied": null,
+      "pool_installed": null,
+      "reports": {
+        "factual": {
+          "path": "docs/reviews/v1-11-home-and-nature/graph-factual-review.json",
+          "sha256": "bb2764672ddd6887ba852a6a02b80f518b7058180ac79ac01a75ea795413eba0",
+          "module_binding_fields": {
+            "module_path": "scripts/home_and_nature_v1_11_data.py",
+            "module_sha256": "821cdf44640e33e8f13c1eed73a5cc4f7460f56b00c549171da5abda5296dff8",
+            "pool_sha256": "08d42510164149cdf909d1f7d9269150c7109beaa44b7c236ebce24fdf335cba"
+          },
+          "formal_review_used": null,
+          "round": null
+        },
+        "quality": {
+          "path": "docs/reviews/v1-11-home-and-nature/graph-quality-review.json",
+          "sha256": "3e89f905942b2a381dc6fb21c855f0d0e1082afbdc2181641c8b9637a942870e",
+          "module_binding_fields": {
+            "module_path": "scripts/home_and_nature_v1_11_data.py",
+            "module_sha256": "821cdf44640e33e8f13c1eed73a5cc4f7460f56b00c549171da5abda5296dff8",
+            "pool_sha256": "08d42510164149cdf909d1f7d9269150c7109beaa44b7c236ebce24fdf335cba"
+          },
+          "formal_review_used": null,
+          "round": null
+        }
+      },
+      "pure_relation_selected_rows": 0,
+      "stale_existing_owner_description_examples": []
+    },
+    {
+      "wave": "1.12",
+      "canonical_ref": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+      "canonical_pool_path": "docs/content-pool/v1-12-post-and-garden/pool.json",
+      "pool_sha256": "71342d78e211bc40ada3d522409ffb2e88356f0768e08bd62a0ae676474a80a4",
+      "location": "latest_local_main",
+      "row_count": 40,
+      "record_states": {
+        "integrated": 38,
+        "held": 2
+      },
+      "selected_kind_counts": {
+        "new_shared_concept": 38
+      },
+      "selected_form_field_coverage": {
+        "verified_forms": 0,
+        "qualified_forms": 0,
+        "proposed_forms": 38,
+        "owner_id_fallback_rows": 0,
+        "node_id_rows": 38
+      },
+      "module_path": "scripts/post_and_garden_v1_12_data.py",
+      "module_sha256": "2d0064f9c3e831bbfec9896327964c8fc0ad45d4274eb31c73020b74941c2a24",
+      "module_nodes": 38,
+      "module_alias_owner_groups": 0,
+      "module_edge_rows": 164,
+      "module_folded_owner_form_pairs": 206,
+      "raw_payload_spellings": 206,
+      "module_selected_item_IDs": 38,
+      "module_evidence_fields": [
+        "REVIEW_ITEMS"
+      ],
+      "module_new_node_IDs_present_on_main": 38,
+      "pool_landing_status": null,
+      "pool_source_applied": null,
+      "pool_installed": null,
+      "reports": {
+        "factual": {
+          "path": "docs/reviews/v1-12-post-and-garden/graph-factual-review.json",
+          "sha256": "bb08a7472b7dff1c58b587d617fc9c393382f14065599b4c5267315f8d185293",
+          "module_binding_fields": {
+            "module_path": "scripts/post_and_garden_v1_12_data.py",
+            "module_sha256": "92a38b52090a742255d924916937cb8d56092eefebcfe3e78992c8125ce90462",
+            "pool_sha256": "57925cac0e687dd523e6bd9e0b1851ade8b514334a71f340b1613152a80c8e3d"
+          },
+          "formal_review_used": null,
+          "round": null
+        },
+        "quality": {
+          "path": "docs/reviews/v1-12-post-and-garden/graph-quality-review.json",
+          "sha256": "715d3727e19a0e5c01405e5017f332710a0869c6cc7065a1dd0a6720a7dc8d35",
+          "module_binding_fields": {
+            "module_path": "scripts/post_and_garden_v1_12_data.py",
+            "module_sha256": "92a38b52090a742255d924916937cb8d56092eefebcfe3e78992c8125ce90462",
+            "pool_sha256": "57925cac0e687dd523e6bd9e0b1851ade8b514334a71f340b1613152a80c8e3d"
+          },
+          "formal_review_used": null,
+          "round": null
+        }
+      },
+      "pure_relation_selected_rows": 0,
+      "stale_existing_owner_description_examples": []
+    },
+    {
+      "wave": "1.13",
+      "canonical_ref": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+      "canonical_pool_path": "docs/content-pool/v1-13-weather-and-landscape/pool.json",
+      "pool_sha256": "4425c41a0f85a7a3b47e5b485ae0ff2d275a28f36c4c140bf249e111793bb53e",
+      "location": "latest_local_main",
+      "row_count": 49,
+      "record_states": {
+        "integrated": 43,
+        "held": 6
+      },
+      "selected_kind_counts": {
+        "new_shared_concept": 41,
+        "regional_input_family": 1,
+        "existing_input_family": 1
+      },
+      "selected_form_field_coverage": {
+        "verified_forms": 0,
+        "qualified_forms": 43,
+        "proposed_forms": 0,
+        "owner_id_fallback_rows": 0,
+        "node_id_rows": 43
+      },
+      "module_path": "scripts/weather_and_landscape_v1_13_data.py",
+      "module_sha256": "01589eb1721c91544fbc94325c3e16cc2440ed1dada7ab8ceeb0886ad6476279",
+      "module_nodes": 41,
+      "module_alias_owner_groups": 2,
+      "module_edge_rows": 167,
+      "module_folded_owner_form_pairs": 229,
+      "raw_payload_spellings": 229,
+      "module_selected_item_IDs": 43,
+      "module_evidence_fields": [
+        "ITEM_EVIDENCE"
+      ],
+      "module_new_node_IDs_present_on_main": 41,
+      "pool_landing_status": null,
+      "pool_source_applied": null,
+      "pool_installed": null,
+      "reports": {
+        "factual": {
+          "path": "docs/reviews/v1-13-weather-and-landscape/graph-factual-review.json",
+          "sha256": "dbe6058299925a0f8efcbeede5aec46cd8ee429deff4fc24e43225f9a5c4bc5c",
+          "module_binding_fields": {
+            "module_path": "scripts/weather_and_landscape_v1_13_data.py",
+            "module_sha256": "202a3c54779fcdf0150c37ca2b927e9c4a63389e6e589db45ec66c944692bb99",
+            "pool_sha256": "027cdb1b39c084804c943b59d3c785dc73d0890408e193f603145f19ea018240"
+          },
+          "formal_review_used": null,
+          "round": null
+        },
+        "quality": {
+          "path": "docs/reviews/v1-13-weather-and-landscape/graph-quality-review.json",
+          "sha256": "8a5166f0efb2fcbcfe3e25c0657d7e80a74be322d3a526983ce2165e505abee8",
+          "module_binding_fields": {
+            "module_path": "scripts/weather_and_landscape_v1_13_data.py",
+            "module_sha256": "202a3c54779fcdf0150c37ca2b927e9c4a63389e6e589db45ec66c944692bb99",
+            "pool_sha256": "027cdb1b39c084804c943b59d3c785dc73d0890408e193f603145f19ea018240"
+          },
+          "formal_review_used": null,
+          "round": null
+        }
+      },
+      "pure_relation_selected_rows": 0,
+      "stale_existing_owner_description_examples": []
+    },
+    {
+      "wave": "1.14",
+      "canonical_ref": "4b634cab38cbce90ac6eb02e0907578335208c69",
+      "canonical_pool_path": "docs/content-pool/v1-14-animals-and-habitats/pool.json",
+      "pool_sha256": "27f4eb19c7a323cf2202d7baf5943ed9b0d4e9f1aa7ba936f43308c082215580",
+      "location": "exact_unlanded_closure",
+      "row_count": 60,
+      "record_states": {
+        "accepted": 54,
+        "held": 6
+      },
+      "selected_kind_counts": {
+        "new_shared_concept": 54
+      },
+      "selected_form_field_coverage": {
+        "verified_forms": 54,
+        "qualified_forms": 0,
+        "proposed_forms": 0,
+        "owner_id_fallback_rows": 0,
+        "node_id_rows": 54
+      },
+      "module_path": "scripts/animals_and_habitats_v1_14_data.py",
+      "module_sha256": "c69eca9639a0f8528d633534bed19f770479dd2adf210ace61333f5d0e39d577",
+      "module_nodes": 54,
+      "module_alias_owner_groups": 0,
+      "module_edge_rows": 217,
+      "module_folded_owner_form_pairs": 312,
+      "raw_payload_spellings": 312,
+      "module_selected_item_IDs": 54,
+      "module_evidence_fields": [
+        "ITEM_EVIDENCE"
+      ],
+      "module_new_node_IDs_present_on_main": 0,
+      "pool_landing_status": "not_landed",
+      "pool_source_applied": null,
+      "pool_installed": null,
+      "reports": {
+        "factual": {
+          "path": "docs/reviews/v1-14-animals-and-habitats/graph-factual-review.json",
+          "sha256": "e6f809a343a58f7fc6b1ac67c547f04585feb3f6408b59b730be8563979521c5",
+          "module_binding_fields": {
+            "module_path": "scripts/animals_and_habitats_v1_14_data.py",
+            "module_sha256": "c6100c31e80fadc6b2c48f54d3ca92b620c46fcbf5a8228613ddb746d3b74d65",
+            "pool_sha256": "d1bafd63e272183b7d66cbbbaff7a541ca9288b37eec3f006c0e1dead5a00405"
+          },
+          "formal_review_used": null,
+          "round": null
+        },
+        "quality": {
+          "path": "docs/reviews/v1-14-animals-and-habitats/graph-quality-review.json",
+          "sha256": "cb316415b83c28a21ae91a4d8d40b79bc4d0f9ad3c6d7b3d2dfd9a58da84864f",
+          "module_binding_fields": {
+            "module_path": "scripts/animals_and_habitats_v1_14_data.py",
+            "module_sha256": "c6100c31e80fadc6b2c48f54d3ca92b620c46fcbf5a8228613ddb746d3b74d65",
+            "pool_sha256": "d1bafd63e272183b7d66cbbbaff7a541ca9288b37eec3f006c0e1dead5a00405"
+          },
+          "formal_review_used": null,
+          "round": null
+        }
+      },
+      "pure_relation_selected_rows": 0,
+      "stale_existing_owner_description_examples": []
+    },
+    {
+      "wave": "1.15",
+      "canonical_ref": "2ace3df01d4871fa1990feadd4b485d6be496d81",
+      "canonical_pool_path": "docs/content-pool/v1-15-home-school-words/pool.json",
+      "pool_sha256": "c5575a093f63c2a0ec3d72c4f9fc7e044323bbc334b53c634a861c1a7ad12ad5",
+      "location": "exact_unlanded_closure",
+      "row_count": 60,
+      "record_states": {
+        "accepted": 51,
+        "held": 9
+      },
+      "selected_kind_counts": {
+        "new_shared_concept": 42,
+        "existing_input_family": 9
+      },
+      "selected_form_field_coverage": {
+        "verified_forms": 51,
+        "qualified_forms": 0,
+        "proposed_forms": 51,
+        "owner_id_fallback_rows": 0,
+        "node_id_rows": 51
+      },
+      "module_path": "scripts/home_school_words_v1_15_data.py",
+      "module_sha256": "b46b7972e71c55f83363da7f95fae0d560d377b7cce10b5d6caff872d05a1a74",
+      "module_nodes": 42,
+      "module_alias_owner_groups": 9,
+      "module_edge_rows": 168,
+      "module_folded_owner_form_pairs": 287,
+      "raw_payload_spellings": 287,
+      "module_selected_item_IDs": 51,
+      "module_evidence_fields": [
+        "ITEM_EVIDENCE",
+        "HELD_ITEMS"
+      ],
+      "module_new_node_IDs_present_on_main": 0,
+      "pool_landing_status": "not_landed",
+      "pool_source_applied": null,
+      "pool_installed": null,
+      "reports": {
+        "factual": {
+          "path": "docs/reviews/v1-15-home-school-words/graph-factual-review.json",
+          "sha256": "be7b616c77c1488cdf3ad58fb71e0592486ce76db4bbc92eb6730fb61d11df48",
+          "module_binding_fields": {
+            "module": "scripts/home_school_words_v1_15_data.py",
+            "module_sha256": "603b8f51d7a2057d69286633ef003e6627b8c56d42fd22efed5aed631ba58240"
+          },
+          "formal_review_used": null,
+          "round": null
+        },
+        "quality": {
+          "path": "docs/reviews/v1-15-home-school-words/graph-quality-review.json",
+          "sha256": "e98fc79b2b3284dffd3eb913f5f3f91c0c990efff1b6b9e0c296409af6a82259",
+          "module_binding_fields": {
+            "module": "scripts/home_school_words_v1_15_data.py",
+            "module_sha256": "603b8f51d7a2057d69286633ef003e6627b8c56d42fd22efed5aed631ba58240"
+          },
+          "formal_review_used": null,
+          "round": null
+        }
+      },
+      "pure_relation_selected_rows": 0,
+      "stale_existing_owner_description_examples": []
+    },
+    {
+      "wave": "1.16",
+      "canonical_ref": "ecb50b463d8d1f0300d435126f934fe90b29fe5b",
+      "canonical_pool_path": "docs/content-pool/v1-16-travel-and-street-words/pool.json",
+      "pool_sha256": "8d794de89662e3f5cd5a8e50debd08d90d3458a623ecc501345a359874cd6492",
+      "location": "exact_unlanded_closure",
+      "row_count": 60,
+      "record_states": {
+        "accepted": 56,
+        "held": 4
+      },
+      "selected_kind_counts": {
+        "new_shared_concept": 45,
+        "existing_input_family": 11
+      },
+      "selected_form_field_coverage": {
+        "verified_forms": 56,
+        "qualified_forms": 0,
+        "proposed_forms": 56,
+        "owner_id_fallback_rows": 0,
+        "node_id_rows": 56
+      },
+      "module_path": "scripts/travel_and_street_words_v1_16_data.py",
+      "module_sha256": "db23bd6f053a01252f85420dd79832e5ea302081d38a7bdd6bea9bbd87d9ef50",
+      "module_nodes": 45,
+      "module_alias_owner_groups": 11,
+      "module_edge_rows": 180,
+      "module_folded_owner_form_pairs": 278,
+      "raw_payload_spellings": 278,
+      "module_selected_item_IDs": 56,
+      "module_evidence_fields": [
+        "ITEM_EVIDENCE",
+        "HELD_ITEMS"
+      ],
+      "module_new_node_IDs_present_on_main": 0,
+      "pool_landing_status": "not_landed",
+      "pool_source_applied": null,
+      "pool_installed": null,
+      "reports": {
+        "factual": {
+          "path": "docs/reviews/v1-16-travel-and-street-words/graph-factual-review.json",
+          "sha256": "4de192e323e0877cebe5873c1192745dd37560f4b12ccf78a90ff90fc131e9f4",
+          "module_binding_fields": {
+            "module_sha256": "862865364f8b63532a54fab602c9c59aa9aa30037687f9d31bee747d368233ae"
+          },
+          "formal_review_used": null,
+          "round": null
+        },
+        "quality": {
+          "path": "docs/reviews/v1-16-travel-and-street-words/graph-quality-review.json",
+          "sha256": "bb8de5381789d7c6f1fa66f762453cf40624f1cf74b71d7e443596bbef9ed9fd",
+          "module_binding_fields": {
+            "module_path": "scripts/travel_and_street_words_v1_16_data.py",
+            "module_sha256": "862865364f8b63532a54fab602c9c59aa9aa30037687f9d31bee747d368233ae"
+          },
+          "formal_review_used": null,
+          "round": null
+        }
+      },
+      "pure_relation_selected_rows": 0,
+      "stale_existing_owner_description_examples": []
+    },
+    {
+      "wave": "1.17",
+      "canonical_ref": "df2fd5e5196cb1584cb8e330adbc2b71b855fab8",
+      "canonical_pool_path": "docs/content-pool/v1-17-garden-and-kitchen-words/pool.json",
+      "pool_sha256": "d344c0b7a45f74b134898e39dddb7da0580ff2e85eed379f8bbdfb3585310e68",
+      "location": "exact_unlanded_closure",
+      "row_count": 60,
+      "record_states": {
+        "accepted": 49,
+        "held": 11
+      },
+      "selected_kind_counts": {
+        "new_shared_concept": 39,
+        "existing_input_family": 10
+      },
+      "selected_form_field_coverage": {
+        "verified_forms": 49,
+        "qualified_forms": 0,
+        "proposed_forms": 49,
+        "owner_id_fallback_rows": 0,
+        "node_id_rows": 49
+      },
+      "module_path": "scripts/garden_and_kitchen_words_v1_17_data.py",
+      "module_sha256": "72b95751972b968f8f420cf8d5bae6174668d2f2aafedb6c21caa1d97dfa26e2",
+      "module_nodes": 39,
+      "module_alias_owner_groups": 10,
+      "module_edge_rows": 163,
+      "module_folded_owner_form_pairs": 227,
+      "raw_payload_spellings": 227,
+      "module_selected_item_IDs": 49,
+      "module_evidence_fields": [
+        "ITEM_EVIDENCE",
+        "REGIONAL_INPUTS"
+      ],
+      "module_new_node_IDs_present_on_main": 0,
+      "pool_landing_status": "not_landed",
+      "pool_source_applied": null,
+      "pool_installed": null,
+      "reports": {
+        "factual": {
+          "path": "docs/reviews/v1-17-garden-and-kitchen-words/graph-factual-review.json",
+          "sha256": "002894ebb92f418b4d43507966fdd5dd7a2bdc783a5cfa317f2d66bc9f82cb0c",
+          "module_binding_fields": {
+            "module_sha256": "acd2ff4ba18ef7c0577f0def8a97a2535cf1e69473804a5d1ef5d1d8b2db4af1",
+            "live_bundle_sha256": "f6d983f1ab2cbb7852e8583411eaecd2048fdb5b5da08099129d7e4ff471344c"
+          },
+          "formal_review_used": null,
+          "round": null
+        },
+        "quality": {
+          "path": "docs/reviews/v1-17-garden-and-kitchen-words/graph-quality-review.json",
+          "sha256": "b0f98f1d66b16de8435a95ff3d1605e92dcf202e0795d061180ad25158ad1232",
+          "module_binding_fields": {
+            "module_path": "scripts/garden_and_kitchen_words_v1_17_data.py",
+            "module_sha256": "acd2ff4ba18ef7c0577f0def8a97a2535cf1e69473804a5d1ef5d1d8b2db4af1"
+          },
+          "formal_review_used": null,
+          "round": null
+        }
+      },
+      "pure_relation_selected_rows": 0,
+      "stale_existing_owner_description_examples": []
+    },
+    {
+      "wave": "1.18",
+      "canonical_ref": "69ebb9f3631ac41f4ac80c76c9d6795c29b78fa8",
+      "canonical_pool_path": "docs/content-pool/v1-18-body-and-everyday-care/pool.json",
+      "pool_sha256": "935d8e1b089c44b28c1a53c325a22578df87e4ab7590e8d46b68c42800a13d46",
+      "location": "exact_unlanded_closure",
+      "row_count": 60,
+      "record_states": {
+        "held": 9,
+        "accepted": 51
+      },
+      "selected_kind_counts": {
+        "new_shared_concept": 40,
+        "existing_input_family": 11
+      },
+      "selected_form_field_coverage": {
+        "verified_forms": 51,
+        "qualified_forms": 0,
+        "proposed_forms": 51,
+        "owner_id_fallback_rows": 0,
+        "node_id_rows": 51
+      },
+      "module_path": "scripts/body_and_everyday_care_v1_18_data.py",
+      "module_sha256": "a4037424a69886e27a5bd7f0e9ae93169f9ab973aee0f6a3d28226d98faa2c01",
+      "module_nodes": 40,
+      "module_alias_owner_groups": 11,
+      "module_edge_rows": 158,
+      "module_folded_owner_form_pairs": 232,
+      "raw_payload_spellings": 232,
+      "module_selected_item_IDs": 51,
+      "module_evidence_fields": [
+        "ITEM_EVIDENCE",
+        "REGIONAL_INPUTS"
+      ],
+      "module_new_node_IDs_present_on_main": 0,
+      "pool_landing_status": "not_landed",
+      "pool_source_applied": null,
+      "pool_installed": null,
+      "reports": {
+        "factual": {
+          "path": "docs/reviews/v1-18-body-and-everyday-care/graph-factual-review.json",
+          "sha256": "bf6f2f25d3bcc0c42b414fb9400367f098a25035bd2baf4bdd596b08a845d92e",
+          "module_binding_fields": {
+            "module_path": "scripts/body_and_everyday_care_v1_18_data.py",
+            "module_sha256": "71ea9efda01941bd450d96c148434d53e1dc5f1efbd3e6216163c04517d0a837"
+          },
+          "formal_review_used": null,
+          "round": null
+        },
+        "quality": {
+          "path": "docs/reviews/v1-18-body-and-everyday-care/graph-quality-review.json",
+          "sha256": "f7e8947cad5f3aa1d23a4f5113d925d123e28f23a4cbe41f043b0e97b4557717",
+          "module_binding_fields": {
+            "module_path": "scripts/body_and_everyday_care_v1_18_data.py",
+            "module_sha256": "71ea9efda01941bd450d96c148434d53e1dc5f1efbd3e6216163c04517d0a837"
+          },
+          "formal_review_used": null,
+          "round": null
+        }
+      },
+      "pure_relation_selected_rows": 0,
+      "stale_existing_owner_description_examples": []
+    },
+    {
+      "wave": "1.19",
+      "canonical_ref": "5159b0417d4f62b46f28b3a4a37dabf9c07bc389",
+      "canonical_pool_path": "docs/content-pool/v1-19-tools-and-crafts/pool.json",
+      "pool_sha256": "4293c603567b7718d0da3ddd8d2c66a05e59906588d2918db2fc1f5dcd23baf2",
+      "location": "exact_unlanded_closure",
+      "row_count": 60,
+      "record_states": {
+        "held": 11,
+        "accepted": 49
+      },
+      "selected_kind_counts": {
+        "new_shared_concept": 44,
+        "existing_input_family": 5
+      },
+      "selected_form_field_coverage": {
+        "verified_forms": 49,
+        "qualified_forms": 0,
+        "proposed_forms": 49,
+        "owner_id_fallback_rows": 0,
+        "node_id_rows": 49
+      },
+      "module_path": "scripts/tools_and_crafts_v1_19_data.py",
+      "module_sha256": "71cbd7116b516d0e07730e9268c1239b3d807345ba5937337f80130489114c4d",
+      "module_nodes": 44,
+      "module_alias_owner_groups": 5,
+      "module_edge_rows": 171,
+      "module_folded_owner_form_pairs": 255,
+      "raw_payload_spellings": 255,
+      "module_selected_item_IDs": 49,
+      "module_evidence_fields": [
+        "ITEM_EVIDENCE",
+        "REGIONAL_INPUTS"
+      ],
+      "module_new_node_IDs_present_on_main": 0,
+      "pool_landing_status": "not_landed",
+      "pool_source_applied": false,
+      "pool_installed": 0,
+      "reports": {
+        "factual": {
+          "path": "docs/reviews/v1-19-tools-and-crafts/graph-factual-review.json",
+          "sha256": "242515f12d701ad2b79f3d83911148e5907aa5e93281cfb7f13c445a1edf500d",
+          "module_binding_fields": {
+            "module_path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-19-tools-and-crafts/scripts/tools_and_crafts_v1_19_data.py",
+            "module_sha256": "28ddf477c5e3aeffc9a3e92c8d814863e331039a0d92e818d9bbf5b1cf8025e0"
+          },
+          "formal_review_used": null,
+          "round": null
+        },
+        "quality": {
+          "path": "docs/reviews/v1-19-tools-and-crafts/graph-quality-review.json",
+          "sha256": "2c67dd6cfb49d2f051632139643affe47fe73736dd6a56d3a0b3286a0e70de08",
+          "module_binding_fields": {
+            "module_path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-19-tools-and-crafts/scripts/tools_and_crafts_v1_19_data.py",
+            "module_sha256": "28ddf477c5e3aeffc9a3e92c8d814863e331039a0d92e818d9bbf5b1cf8025e0"
+          },
+          "formal_review_used": null,
+          "round": null
+        }
+      },
+      "pure_relation_selected_rows": 0,
+      "stale_existing_owner_description_examples": []
+    },
+    {
+      "wave": "1.20",
+      "canonical_ref": "bc0ed56c826b9bab0c0f9408ff8fd1a36a539f94",
+      "canonical_pool_path": "docs/content-pool/v1-20-school-and-hobbies/pool.json",
+      "pool_sha256": "310e9a31e0ef4c1e81053a1730d89025694c44cdbe35544af4f5d532783d1b8c",
+      "location": "exact_unlanded_closure",
+      "row_count": 55,
+      "record_states": {
+        "held": 15,
+        "accepted": 40
+      },
+      "selected_kind_counts": {
+        "new_shared_concept": 40
+      },
+      "selected_form_field_coverage": {
+        "verified_forms": 40,
+        "qualified_forms": 0,
+        "proposed_forms": 40,
+        "owner_id_fallback_rows": 0,
+        "node_id_rows": 40
+      },
+      "module_path": "scripts/school_and_hobbies_v1_20_data.py",
+      "module_sha256": "8641e3cdc3bf8125ee09241efb7b618b79689e3e832b29e6eed19ed3deaf1a4b",
+      "module_nodes": 40,
+      "module_alias_owner_groups": 0,
+      "module_edge_rows": 160,
+      "module_folded_owner_form_pairs": 223,
+      "raw_payload_spellings": 223,
+      "module_selected_item_IDs": 40,
+      "module_evidence_fields": [
+        "ITEM_EVIDENCE",
+        "REGIONAL_INPUTS"
+      ],
+      "module_new_node_IDs_present_on_main": 0,
+      "pool_landing_status": "not_landed",
+      "pool_source_applied": false,
+      "pool_installed": 0,
+      "reports": {
+        "factual": {
+          "path": "docs/reviews/v1-20-school-and-hobbies/graph-factual-review.json",
+          "sha256": "89a5bac1ca6af1244a17608a31d28f79a6c83d254503137290cf2350c71996d2",
+          "module_binding_fields": {
+            "module_path": "scripts/school_and_hobbies_v1_20_data.py",
+            "module_sha256": "5b2c50a6f31745108fb086dd95918505836be44f7b17065734720eb959db26fd"
+          },
+          "formal_review_used": null,
+          "round": null
+        },
+        "quality": {
+          "path": "docs/reviews/v1-20-school-and-hobbies/graph-quality-review.json",
+          "sha256": "1564069abbd6d253a5c4b035940182d7055265171a06548fd8fa66d072a4e5b9",
+          "module_binding_fields": {
+            "module": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-20-school-and-hobbies/scripts/school_and_hobbies_v1_20_data.py",
+            "module_sha256": "5b2c50a6f31745108fb086dd95918505836be44f7b17065734720eb959db26fd",
+            "review_bound_to_sha256": "5b2c50a6f31745108fb086dd95918505836be44f7b17065734720eb959db26fd"
+          },
+          "formal_review_used": null,
+          "round": null
+        }
+      },
+      "pure_relation_selected_rows": 0,
+      "stale_existing_owner_description_examples": []
+    },
+    {
+      "wave": "1.21",
+      "canonical_ref": "be42df68abfbf2a40e879cbe53c671b70d69c6d0",
+      "canonical_pool_path": "docs/content-pool/v1-21-clothing-and-household-storage/pool.json",
+      "pool_sha256": "969042f166ca66bc63b2a024a8c56638500373e3b6e7c5209c6fba0422ffbf62",
+      "location": "exact_unlanded_closure",
+      "row_count": 53,
+      "record_states": {
+        "accepted": 45,
+        "rejected": 1,
+        "held": 7
+      },
+      "selected_kind_counts": {
+        "new_shared_concept": 40,
+        "existing_input_family": 5
+      },
+      "selected_form_field_coverage": {
+        "verified_forms": 45,
+        "qualified_forms": 0,
+        "proposed_forms": 45,
+        "owner_id_fallback_rows": 0,
+        "node_id_rows": 45
+      },
+      "module_path": "scripts/clothing_and_household_storage_v1_21_data.py",
+      "module_sha256": "c37cb08a6b5c947ee0024e512a14e5f48348edf30092e6a6d555746ce560fc34",
+      "module_nodes": 40,
+      "module_alias_owner_groups": 5,
+      "module_edge_rows": 162,
+      "module_folded_owner_form_pairs": 245,
+      "raw_payload_spellings": 245,
+      "module_selected_item_IDs": 45,
+      "module_evidence_fields": [
+        "ITEM_EVIDENCE",
+        "REGIONAL_INPUTS"
+      ],
+      "module_new_node_IDs_present_on_main": 0,
+      "pool_landing_status": "not_landed",
+      "pool_source_applied": false,
+      "pool_installed": 0,
+      "reports": {
+        "factual": {
+          "path": "docs/reviews/v1-21-clothing-and-household-storage/graph-factual-review.json",
+          "sha256": "208ce0f4aa851b3d5c8f8a8d6bc53f159a8c3539480b35e7c807907cedb53c79",
+          "module_binding_fields": {
+            "module_sha256": "e74b060acc832e08e3050ff0bf601546bc85ca90fb1cba8d38392635460dbb11"
+          },
+          "formal_review_used": null,
+          "round": 1
+        },
+        "quality": {
+          "path": "docs/reviews/v1-21-clothing-and-household-storage/graph-quality-review.json",
+          "sha256": "a9d23c3afc43d1e13b42ee6c9d8ed8b34f4b6b3484d241ce62d45c161e99c482",
+          "module_binding_fields": {
+            "module_sha256": "e74b060acc832e08e3050ff0bf601546bc85ca90fb1cba8d38392635460dbb11",
+            "original_module_sha256": "e74b060acc832e08e3050ff0bf601546bc85ca90fb1cba8d38392635460dbb11"
+          },
+          "formal_review_used": true,
+          "round": 1
+        }
+      },
+      "pure_relation_selected_rows": 0,
+      "stale_existing_owner_description_examples": []
+    },
+    {
+      "wave": "1.22",
+      "canonical_ref": "c10e4c2394ae82dae4f7bd22f56f91ca854f26ba",
+      "canonical_pool_path": "docs/content-pool/v1-22-home-fixtures-and-materials/pool.json",
+      "pool_sha256": "63198b9d7177d9d95ce2244d79ca3927924a1dcf61035e8323a568abf5465524",
+      "location": "exact_unlanded_closure",
+      "row_count": 51,
+      "record_states": {
+        "accepted": 38,
+        "held": 13
+      },
+      "selected_kind_counts": {
+        "new_shared_concept": 28,
+        "existing_input_family": 10
+      },
+      "selected_form_field_coverage": {
+        "verified_forms": 38,
+        "qualified_forms": 0,
+        "proposed_forms": 38,
+        "owner_id_fallback_rows": 0,
+        "node_id_rows": 38
+      },
+      "module_path": "scripts/home_fixtures_and_materials_v1_22_data.py",
+      "module_sha256": "93dea98c325f44d11f5f3f1af066c84ca077ccd4abc4c4a46b73251bae3cca2f",
+      "module_nodes": 28,
+      "module_alias_owner_groups": 9,
+      "module_edge_rows": 111,
+      "module_folded_owner_form_pairs": 239,
+      "raw_payload_spellings": 239,
+      "module_selected_item_IDs": 38,
+      "module_evidence_fields": [
+        "ITEM_EVIDENCE",
+        "REGIONAL_INPUTS"
+      ],
+      "module_new_node_IDs_present_on_main": 0,
+      "pool_landing_status": "not_landed",
+      "pool_source_applied": false,
+      "pool_installed": 0,
+      "reports": {
+        "factual": {
+          "path": "docs/reviews/v1-22-home-fixtures-and-materials/graph-factual-review.json",
+          "sha256": "4d57385250e9038321b66fe3a948830bd485dfd7d6f6b598c14964afa6f2ed61",
+          "module_binding_fields": {
+            "module_sha256": "498a89099c26aaae538bfdd0983af41a6c681c06d2b8ac426e49b5ce4fe7e692"
+          },
+          "formal_review_used": true,
+          "round": 1
+        },
+        "quality": {
+          "path": "docs/reviews/v1-22-home-fixtures-and-materials/graph-quality-review.json",
+          "sha256": "c83973eccf45f2f0d3aae2f13b5c0152ca59169114d0daee2c5e095f203fe398",
+          "module_binding_fields": {
+            "module_path": "scripts/home_fixtures_and_materials_v1_22_data.py",
+            "module_sha256": "498a89099c26aaae538bfdd0983af41a6c681c06d2b8ac426e49b5ce4fe7e692"
+          },
+          "formal_review_used": true,
+          "round": 1
+        }
+      },
+      "pure_relation_selected_rows": 0,
+      "stale_existing_owner_description_examples": []
+    },
+    {
+      "wave": "1.23",
+      "canonical_ref": "489504300c8ea2c323de7f4e4e497eeb157947e3",
+      "canonical_pool_path": "docs/content-pool/v1-23-pantry-and-tableware/pool.json",
+      "pool_sha256": "0ca0549c7a83d0106d0604f46cefd85ff2ee10b5c971254e216883201e2e6b11",
+      "location": "exact_unlanded_closure",
+      "row_count": 54,
+      "record_states": {
+        "held": 14,
+        "accepted": 40
+      },
+      "selected_kind_counts": {
+        "new_shared_concept": 36,
+        "existing_input_family": 4
+      },
+      "selected_form_field_coverage": {
+        "verified_forms": 40,
+        "qualified_forms": 0,
+        "proposed_forms": 40,
+        "owner_id_fallback_rows": 0,
+        "node_id_rows": 40
+      },
+      "module_path": "scripts/pantry_and_tableware_v1_23_data.py",
+      "module_sha256": "8d7b57d126411ce7ad8a4d1a2ad3100cf4ae0f410a2eaf09a0988fc173257bae",
+      "module_nodes": 36,
+      "module_alias_owner_groups": 4,
+      "module_edge_rows": 144,
+      "module_folded_owner_form_pairs": 190,
+      "raw_payload_spellings": 190,
+      "module_selected_item_IDs": 40,
+      "module_evidence_fields": [
+        "ITEM_EVIDENCE",
+        "HELD_ITEMS",
+        "REGIONAL_INPUTS"
+      ],
+      "module_new_node_IDs_present_on_main": 0,
+      "pool_landing_status": "not_landed",
+      "pool_source_applied": false,
+      "pool_installed": 0,
+      "reports": {
+        "factual": {
+          "path": "docs/reviews/v1-23-pantry-and-tableware/graph-factual-review.json",
+          "sha256": "2ff7998eb2b1c89d2a85fd17362ce8c5afdba7ebe8992adb694573a3ffc1680b",
+          "module_binding_fields": {
+            "module_sha256": "e124478d8967d5f6b9464f822173854e407698dfebd2d2aad743a0d99f4acf0e"
+          },
+          "formal_review_used": true,
+          "round": 1
+        },
+        "quality": {
+          "path": "docs/reviews/v1-23-pantry-and-tableware/graph-quality-review.json",
+          "sha256": "3657dd2faf83b17b561d357bb37893c608f65c07fdd02ac82aef2d42fd42dceb",
+          "module_binding_fields": {
+            "module_sha256": "e124478d8967d5f6b9464f822173854e407698dfebd2d2aad743a0d99f4acf0e",
+            "module_path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-23-pantry-and-tableware/scripts/pantry_and_tableware_v1_23_data.py",
+            "main_sha": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+            "live_bundle_sha256": "f6d983f1ab2cbb7852e8583411eaecd2048fdb5b5da08099129d7e4ff471344c",
+            "frozen_pool_sha256": "4bc739b00d05f22d344520e7adf843fd999e4ebf5d810d41946388401e0c72b5"
+          },
+          "formal_review_used": true,
+          "round": 1
+        }
+      },
+      "pure_relation_selected_rows": 0,
+      "stale_existing_owner_description_examples": []
+    },
+    {
+      "wave": "1.24",
+      "canonical_ref": "53a090735baea74bc8c99470070eaf718fe4cc38",
+      "canonical_pool_path": "docs/content-pool/v1-24-familiar-foods-and-inputs/pool.json",
+      "pool_sha256": "bcfed16e7a37ef6e065a21be95a886c6873f57bf860a950308465ef3a0aa1460",
+      "location": "exact_unlanded_closure",
+      "row_count": 55,
+      "record_states": {
+        "accepted": 44,
+        "held": 11
+      },
+      "selected_kind_counts": {
+        "new_shared_concept": 26,
+        "existing_input_family": 18
+      },
+      "selected_form_field_coverage": {
+        "verified_forms": 44,
+        "qualified_forms": 0,
+        "proposed_forms": 44,
+        "owner_id_fallback_rows": 0,
+        "node_id_rows": 44
+      },
+      "module_path": "scripts/familiar_foods_and_inputs_v1_24_data.py",
+      "module_sha256": "7060f8cc25aed25880913a76fb52a1e6a6aaf5aa0ac093a7ec442429c3770da2",
+      "module_nodes": 26,
+      "module_alias_owner_groups": 10,
+      "module_edge_rows": 104,
+      "module_folded_owner_form_pairs": 248,
+      "raw_payload_spellings": 248,
+      "module_selected_item_IDs": 44,
+      "module_evidence_fields": [
+        "ITEM_EVIDENCE",
+        "HELD_ITEMS",
+        "REGIONAL_INPUTS"
+      ],
+      "module_new_node_IDs_present_on_main": 0,
+      "pool_landing_status": "not_landed",
+      "pool_source_applied": false,
+      "pool_installed": 0,
+      "reports": {
+        "factual": {
+          "path": "docs/reviews/v1-24-familiar-foods-and-inputs/graph-factual-review.json",
+          "sha256": "b0e753b28613b240ffb8a000736ebc825886a0cb50c2771c1989bc4c149724f2",
+          "module_binding_fields": {
+            "module_path": "scripts/familiar_foods_and_inputs_v1_24_data.py",
+            "module_sha256": "ef750bf8d573c9071b87b35b5346769838bca5cb40e3f2e0963ce92ff29c7429",
+            "pool_sha256": "a2c77ddb73d46ff4f2e119ca64f699b9fda6cdaba2c0a9623f457f9b4792adce"
+          },
+          "formal_review_used": true,
+          "round": 1
+        },
+        "quality": {
+          "path": "docs/reviews/v1-24-familiar-foods-and-inputs/graph-quality-review.json",
+          "sha256": "dbe0ee073e00ace651c21befbd0e6a5c3542a0e1561bd56853f328f844549374",
+          "module_binding_fields": {
+            "module_path": "scripts/familiar_foods_and_inputs_v1_24_data.py",
+            "module_sha256": "ef750bf8d573c9071b87b35b5346769838bca5cb40e3f2e0963ce92ff29c7429",
+            "pool_sha256": "a2c77ddb73d46ff4f2e119ca64f699b9fda6cdaba2c0a9623f457f9b4792adce"
+          },
+          "formal_review_used": true,
+          "round": 1
+        }
+      },
+      "pure_relation_selected_rows": 0,
+      "stale_existing_owner_description_examples": []
+    },
+    {
+      "wave": "1.25",
+      "canonical_ref": "b0de8a38abfaf7366418f5c79df6cb74c224920d",
+      "canonical_pool_path": "docs/content-pool/v1-25-common-places-and-objects/pool.json",
+      "pool_sha256": "5f7beeee91c3cbbecbc56fc0203c09765a8907933fd601ab5c2e98f61b8d8ab0",
+      "location": "exact_unlanded_closure",
+      "row_count": 55,
+      "record_states": {
+        "accepted": 37,
+        "held": 18
+      },
+      "selected_kind_counts": {
+        "new_shared_concept": 36,
+        "existing_input_family": 1
+      },
+      "selected_form_field_coverage": {
+        "verified_forms": 37,
+        "qualified_forms": 0,
+        "proposed_forms": 37,
+        "owner_id_fallback_rows": 0,
+        "node_id_rows": 37
+      },
+      "module_path": "scripts/common_places_and_objects_v1_25_data.py",
+      "module_sha256": "4c6f820489d1e138603f23d950a2eb14c22122daafc16e911b7b25bb01b3d15b",
+      "module_nodes": 36,
+      "module_alias_owner_groups": 1,
+      "module_edge_rows": 144,
+      "module_folded_owner_form_pairs": 211,
+      "raw_payload_spellings": 211,
+      "module_selected_item_IDs": 37,
+      "module_evidence_fields": [
+        "ITEM_EVIDENCE",
+        "HELD_ITEMS",
+        "REGIONAL_INPUTS"
+      ],
+      "module_new_node_IDs_present_on_main": 0,
+      "pool_landing_status": "not_landed",
+      "pool_source_applied": false,
+      "pool_installed": 0,
+      "reports": {
+        "factual": {
+          "path": "docs/reviews/v1-25-common-places-and-objects/graph-factual-review.json",
+          "sha256": "184e233dabe5b5e265f5fb984619e117444a9711c7b45810c2829dbf75ee70ec",
+          "module_binding_fields": {
+            "module_sha256": "daeb0e6dd96de8b53553776e73e00357c8202f9328efe4325943780d2707e9f7",
+            "frozen_pool_sha256": "e83c8b3b8ca117498205978330f3a20b29670a6bed13276fc8a5bba2208ca0be"
+          },
+          "formal_review_used": true,
+          "round": 1
+        },
+        "quality": {
+          "path": "docs/reviews/v1-25-common-places-and-objects/graph-quality-review.json",
+          "sha256": "2b2050e8945e1eef0e0408cb928f593dd8852fb83d995bc7fa94ece29a1b8b97",
+          "module_binding_fields": {
+            "module_sha256": "daeb0e6dd96de8b53553776e73e00357c8202f9328efe4325943780d2707e9f7",
+            "pool_sha256": "e83c8b3b8ca117498205978330f3a20b29670a6bed13276fc8a5bba2208ca0be",
+            "live_bundle_sha256": "f6d983f1ab2cbb7852e8583411eaecd2048fdb5b5da08099129d7e4ff471344c",
+            "previous_report_sha256": "9495aaa312cca0c12a094dbd2b6fa71c69b6f49f5709928948314f837cf9023e",
+            "detailed_report_sha256": "d212b95aebda227ce766b2ee29e223a05c0e72547da4dad234ec0acf0b6626d4"
+          },
+          "formal_review_used": true,
+          "round": 1
+        }
+      },
+      "pure_relation_selected_rows": 0,
+      "stale_existing_owner_description_examples": []
+    },
+    {
+      "wave": "1.26",
+      "canonical_ref": "c7f45781d071a9b784357f8ef7b10f259d6f5121",
+      "canonical_pool_path": "docs/content-pool/v1-26-school-play-and-devices/pool.json",
+      "pool_sha256": "5ad38180e6e04ef368979edee93e9be7402900ca95754f589245340570f43bed",
+      "location": "exact_unlanded_closure",
+      "row_count": 54,
+      "record_states": {
+        "held": 20,
+        "accepted": 34
+      },
+      "selected_kind_counts": {
+        "new_shared_concept": 24,
+        "existing_input_family": 10
+      },
+      "selected_form_field_coverage": {
+        "verified_forms": 34,
+        "qualified_forms": 0,
+        "proposed_forms": 34,
+        "owner_id_fallback_rows": 0,
+        "node_id_rows": 34
+      },
+      "module_path": "scripts/school_play_and_devices_v1_26_data.py",
+      "module_sha256": "af97ac63057ddd8cf7f901aad591821afa009d8330362015ba5af110252d2993",
+      "module_nodes": 24,
+      "module_alias_owner_groups": 10,
+      "module_edge_rows": 95,
+      "module_folded_owner_form_pairs": 203,
+      "raw_payload_spellings": 203,
+      "module_selected_item_IDs": 34,
+      "module_evidence_fields": [
+        "ITEM_EVIDENCE",
+        "HELD_ITEMS",
+        "REGIONAL_INPUTS"
+      ],
+      "module_new_node_IDs_present_on_main": 0,
+      "pool_landing_status": "not_landed",
+      "pool_source_applied": false,
+      "pool_installed": 0,
+      "reports": {
+        "factual": {
+          "path": "docs/reviews/v1-26-school-play-and-devices/graph-factual-review.json",
+          "sha256": "bada7e16449529d9a2049802f4d935ef9e96bb16d02be574689e3638b28ce247",
+          "module_binding_fields": {
+            "module_sha256": "fae3b0493e63a3445f5126845586550a1b892bb1a9202a9f84d40b248d6eca69",
+            "frozen_pool_sha256": "6d235b8882beacc92290d2beafb61c57dc320c7139cc78cbd6e2cdee519b353b"
+          },
+          "formal_review_used": true,
+          "round": 1
+        },
+        "quality": {
+          "path": "docs/reviews/v1-26-school-play-and-devices/graph-quality-review.json",
+          "sha256": "583ae388214ccf9f6f1940ea5ccbbfbce4df4cac41294bf3eece81bc82abbdce",
+          "module_binding_fields": {
+            "module_sha256": "fae3b0493e63a3445f5126845586550a1b892bb1a9202a9f84d40b248d6eca69",
+            "pool_sha256": "6d235b8882beacc92290d2beafb61c57dc320c7139cc78cbd6e2cdee519b353b"
+          },
+          "formal_review_used": true,
+          "round": 1
+        }
+      },
+      "pure_relation_selected_rows": 0,
+      "stale_existing_owner_description_examples": []
+    },
+    {
+      "wave": "1.27",
+      "canonical_ref": "93ff482efe7f0c3ce906ce735726f8a3cf8a9649",
+      "canonical_pool_path": "docs/content-pool/v1-27-familiar-foods-and-plants/pool.json",
+      "pool_sha256": "38f49243affb8a3e2b0d27ee8b382444639eed8e817e6e691c224d7e5759a9dd",
+      "location": "exact_unlanded_closure",
+      "row_count": 55,
+      "record_states": {
+        "held": 17,
+        "accepted": 38
+      },
+      "selected_kind_counts": {
+        "existing_input_family": 3,
+        "new_shared_concept": 35
+      },
+      "selected_form_field_coverage": {
+        "verified_forms": 38,
+        "qualified_forms": 0,
+        "proposed_forms": 38,
+        "owner_id_fallback_rows": 0,
+        "node_id_rows": 38
+      },
+      "module_path": "scripts/familiar_foods_and_plants_v1_27_data.py",
+      "module_sha256": "34852b0414025a93a1e7149400579b8c1ff13e82f6dc23ac5bf860cbff6965fc",
+      "module_nodes": 35,
+      "module_alias_owner_groups": 3,
+      "module_edge_rows": 140,
+      "module_folded_owner_form_pairs": 219,
+      "raw_payload_spellings": 219,
+      "module_selected_item_IDs": 38,
+      "module_evidence_fields": [
+        "ITEM_EVIDENCE",
+        "HELD_ITEMS",
+        "REGIONAL_INPUTS"
+      ],
+      "module_new_node_IDs_present_on_main": 0,
+      "pool_landing_status": "not_landed",
+      "pool_source_applied": false,
+      "pool_installed": 0,
+      "reports": {
+        "factual": {
+          "path": "docs/reviews/v1-27-familiar-foods-and-plants/graph-factual-review.json",
+          "sha256": "01cab5839bf26d4f336a8c3d16ea4c4100cc3f6c71afae7f77b359f504885277",
+          "module_binding_fields": {
+            "module_sha256": "73c942fec085d5c800accf62ea9eaea9950214bc158f1b45240e5a8eb2066dca",
+            "frozen_pool_sha256": "51712443140b8c5f7912c3f512d8c7c53f8cc0a3ecf8093fed4167db9513f338",
+            "capture_catalog_sha256": "765653ade05c8fd6393232a0db70a7d75018c4c867adac3276eab516786b4ee4"
+          },
+          "formal_review_used": true,
+          "round": 1
+        },
+        "quality": {
+          "path": "docs/reviews/v1-27-familiar-foods-and-plants/graph-quality-review.json",
+          "sha256": "b2218e743a4fc04c4263bcd765d2ffb5a2dd579490863a1f4d3c60ff2ef7446e",
+          "module_binding_fields": {
+            "module_sha256": "73c942fec085d5c800accf62ea9eaea9950214bc158f1b45240e5a8eb2066dca",
+            "frozen_pool_sha256": "51712443140b8c5f7912c3f512d8c7c53f8cc0a3ecf8093fed4167db9513f338"
+          },
+          "formal_review_used": true,
+          "round": 1
+        }
+      },
+      "pure_relation_selected_rows": 0,
+      "stale_existing_owner_description_examples": []
+    },
+    {
+      "wave": "1.28",
+      "canonical_ref": "6874e9f65e2e8af8debbee9edbf6625c570d9d52",
+      "canonical_pool_path": "docs/content-pool/v1-28-familiar-animals-and-outdoor-words/pool.json",
+      "pool_sha256": "17887bfc7938f0d7d5c84804d03072269200239867b7f9e5e7a68d21fccd4e17",
+      "location": "exact_unlanded_closure",
+      "row_count": 55,
+      "record_states": {
+        "accepted": 36,
+        "held": 19
+      },
+      "selected_kind_counts": {
+        "new_shared_concept": 36
+      },
+      "selected_form_field_coverage": {
+        "verified_forms": 36,
+        "qualified_forms": 0,
+        "proposed_forms": 36,
+        "owner_id_fallback_rows": 0,
+        "node_id_rows": 36
+      },
+      "module_path": "scripts/familiar_animals_and_outdoor_words_v1_28_data.py",
+      "module_sha256": "bf1e7d6ef9dd5b351352d957ae2c132a58fc85e3146c19210cb8be005fa4a8f6",
+      "module_nodes": 36,
+      "module_alias_owner_groups": 0,
+      "module_edge_rows": 144,
+      "module_folded_owner_form_pairs": 199,
+      "raw_payload_spellings": 199,
+      "module_selected_item_IDs": 36,
+      "module_evidence_fields": [
+        "ITEM_EVIDENCE",
+        "HELD_ITEMS",
+        "REGIONAL_INPUTS"
+      ],
+      "module_new_node_IDs_present_on_main": 0,
+      "pool_landing_status": "not_landed",
+      "pool_source_applied": false,
+      "pool_installed": 0,
+      "reports": {
+        "factual": {
+          "path": "docs/reviews/v1-28-familiar-animals-and-outdoor-words/graph-factual-review.json",
+          "sha256": "78afcc11db1e82aecba088f3ed8d4be7814de37c620845224884f5e752de5cac",
+          "module_binding_fields": {
+            "module_sha256": "df2c0446273577358c1aa9fd454ca25b0e17650a875f8033ea2b8684895915c6",
+            "frozen_pool_sha256": "7248167d6e23e0d3d5fa132503da20b156d181d6518b75c5249d74d782943e6a",
+            "reviewed_module_path": "scripts/familiar_animals_and_outdoor_words_v1_28_data.py",
+            "reviewed_frozen_module_path": "/home/dobo/work/_temp/content__v1-28-familiar-animals-and-outdoor-words/step3-module-to-review.py"
+          },
+          "formal_review_used": true,
+          "round": 1
+        },
+        "quality": {
+          "path": "docs/reviews/v1-28-familiar-animals-and-outdoor-words/graph-quality-review.json",
+          "sha256": "1c263b798f3824201c11ed5ab20b8010a4ec9a852ac8f35209f96a120069b1c3",
+          "module_binding_fields": {
+            "module_sha256": "df2c0446273577358c1aa9fd454ca25b0e17650a875f8033ea2b8684895915c6",
+            "frozen_pool_sha256": "7248167d6e23e0d3d5fa132503da20b156d181d6518b75c5249d74d782943e6a",
+            "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101"
+          },
+          "formal_review_used": true,
+          "round": 1
+        }
+      },
+      "pure_relation_selected_rows": 0,
+      "stale_existing_owner_description_examples": []
+    },
+    {
+      "wave": "1.29",
+      "canonical_ref": "f53df8b0811537262f68a8c0c19dc4c132db101c",
+      "canonical_pool_path": "docs/content-pool/v1-29-familiar-people-and-community/pool.json",
+      "pool_sha256": "8b583c226de1d2fa88dcabb60d61e5bfb07cb5bbd064da2e96fd8c4afda34349",
+      "location": "exact_unlanded_closure",
+      "row_count": 53,
+      "record_states": {
+        "accepted": 43,
+        "held": 10
+      },
+      "selected_kind_counts": {
+        "new_shared_concept": 43
+      },
+      "selected_form_field_coverage": {
+        "verified_forms": 43,
+        "qualified_forms": 0,
+        "proposed_forms": 43,
+        "owner_id_fallback_rows": 0,
+        "node_id_rows": 43
+      },
+      "module_path": "scripts/familiar_people_and_community_v1_29_data.py",
+      "module_sha256": "554449dd2f49940c7489dacd38feae28ebd5d575630f0e332c2b45515a04efa2",
+      "module_nodes": 43,
+      "module_alias_owner_groups": 0,
+      "module_edge_rows": 185,
+      "module_folded_owner_form_pairs": 264,
+      "raw_payload_spellings": 264,
+      "module_selected_item_IDs": 43,
+      "module_evidence_fields": [
+        "ITEM_EVIDENCE",
+        "HELD_ITEMS",
+        "REGIONAL_INPUTS"
+      ],
+      "module_new_node_IDs_present_on_main": 0,
+      "pool_landing_status": "not_landed",
+      "pool_source_applied": false,
+      "pool_installed": 0,
+      "reports": {
+        "factual": {
+          "path": "docs/reviews/v1-29-familiar-people-and-community/graph-factual-review.json",
+          "sha256": "49d7f9d1ddc0443e34d4c63715c1c425b2adb17afafde02b65ffd9a03415d02a",
+          "module_binding_fields": {
+            "module_sha256": "c94a7065c192b4ff8b61434be462de20ef8e688011d6a3dec2ef4b7814f783f0",
+            "frozen_pool_sha256": "25b69705956515feacca02d675b25d7e1599dff1f85d2d368b280f83ca8b3d23"
+          },
+          "formal_review_used": true,
+          "round": 1
+        },
+        "quality": {
+          "path": "docs/reviews/v1-29-familiar-people-and-community/graph-quality-review.json",
+          "sha256": "cb1a5e09454272e65e9e64776f038fe108fc3a37ba243d56cec9a2eec1701ec1",
+          "module_binding_fields": {
+            "module_sha256": "c94a7065c192b4ff8b61434be462de20ef8e688011d6a3dec2ef4b7814f783f0",
+            "frozen_pool_sha256": "25b69705956515feacca02d675b25d7e1599dff1f85d2d368b280f83ca8b3d23",
+            "capture_catalog_sha256": "a0ffaacc8492c5681f9119e122fd40bb234a1c03f09e28b13b80c59bf81889b6"
+          },
+          "formal_review_used": true,
+          "round": 1
+        }
+      },
+      "pure_relation_selected_rows": 0,
+      "stale_existing_owner_description_examples": []
+    },
+    {
+      "wave": "1.30",
+      "canonical_ref": "b5b3abdbe8aac9ca21f425db454576a438d21222",
+      "canonical_pool_path": "docs/content-pool/v1-30-familiar-shapes-and-school-measures/pool.json",
+      "pool_sha256": "bda38a91b4fc5523526ae2dafd8868dd354a5adeb3b1fe30074f1b26dbb6b59a",
+      "location": "exact_unlanded_closure",
+      "row_count": 60,
+      "record_states": {
+        "accepted": 46,
+        "held": 14
+      },
+      "selected_kind_counts": {
+        "new_shared_concept": 40,
+        "existing_input_family": 6
+      },
+      "selected_form_field_coverage": {
+        "verified_forms": 46,
+        "qualified_forms": 0,
+        "proposed_forms": 46,
+        "owner_id_fallback_rows": 0,
+        "node_id_rows": 46
+      },
+      "module_path": "scripts/familiar_shapes_and_school_measures_v1_30_data.py",
+      "module_sha256": "a893bd913e87e40d2394251dd995f0ae5423a61841e26ec1e52abf2530008819",
+      "module_nodes": 40,
+      "module_alias_owner_groups": 6,
+      "module_edge_rows": 156,
+      "module_folded_owner_form_pairs": 237,
+      "raw_payload_spellings": 237,
+      "module_selected_item_IDs": 46,
+      "module_evidence_fields": [
+        "ITEM_EVIDENCE",
+        "HELD_ITEMS",
+        "VERIFIED_SYNONYMS",
+        "REGIONAL_INPUTS",
+        "SOURCE_REVIEW_SUMMARY"
+      ],
+      "module_new_node_IDs_present_on_main": 0,
+      "pool_landing_status": "not_landed",
+      "pool_source_applied": false,
+      "pool_installed": 0,
+      "reports": {
+        "factual": {
+          "path": "docs/reviews/v1-30-familiar-shapes-and-school-measures/graph-factual-review.json",
+          "sha256": "9276285f67cc013bbcf8009ddf04250332841a92c5bfbe70aa3938d4899d2735",
+          "module_binding_fields": {
+            "module_sha256": "8dc3e1010dd6bf7b0b4e82e78705dabb24ac1f2a296f5c1540373a68d53938e3",
+            "frozen_pool_sha256": "c582d9b5dfa8f5db0372ccb009e1d9fca5e4816a4b49f30aa10e3d496332957b"
+          },
+          "formal_review_used": true,
+          "round": 1
+        },
+        "quality": {
+          "path": "docs/reviews/v1-30-familiar-shapes-and-school-measures/graph-quality-review.json",
+          "sha256": "185ad6deec1ccea0a8022aba1612f1d460472126bdd14ab13befe1736b90f251",
+          "module_binding_fields": {
+            "module_sha256": "8dc3e1010dd6bf7b0b4e82e78705dabb24ac1f2a296f5c1540373a68d53938e3",
+            "frozen_pool_sha256": "c582d9b5dfa8f5db0372ccb009e1d9fca5e4816a4b49f30aa10e3d496332957b"
+          },
+          "formal_review_used": true,
+          "round": 1
+        }
+      },
+      "pure_relation_selected_rows": 0,
+      "stale_existing_owner_description_examples": []
+    },
+    {
+      "wave": "1.31",
+      "canonical_ref": "4aa8d6e504835cc1f2e3051f24c45c729a0d449a",
+      "canonical_pool_path": "docs/content-pool/v1-31-familiar-music-and-sport-objects/pool.json",
+      "pool_sha256": "e6ac6c35dba7b895a5506c437fd33bdd010ae4dbd40f0f927e18fc82d7a89b61",
+      "location": "exact_unlanded_closure",
+      "row_count": 59,
+      "record_states": {
+        "accepted": 47,
+        "held": 12
+      },
+      "selected_kind_counts": {
+        "existing_input_family": 16,
+        "new_shared_concept": 31
+      },
+      "selected_form_field_coverage": {
+        "verified_forms": 47,
+        "qualified_forms": 0,
+        "proposed_forms": 47,
+        "owner_id_fallback_rows": 0,
+        "node_id_rows": 47
+      },
+      "module_path": "scripts/familiar_music_and_sport_objects_v1_31_data.py",
+      "module_sha256": "23ecf969717d5380c73ef34a2f4309bb7d7aa311beeda5706bb9c98514482d3e",
+      "module_nodes": 31,
+      "module_alias_owner_groups": 16,
+      "module_edge_rows": 123,
+      "module_folded_owner_form_pairs": 219,
+      "raw_payload_spellings": 219,
+      "module_selected_item_IDs": 47,
+      "module_evidence_fields": [
+        "ITEM_EVIDENCE",
+        "HELD_ITEMS",
+        "VERIFIED_SYNONYMS",
+        "REGIONAL_INPUTS",
+        "SOURCE_REVIEW_SUMMARY"
+      ],
+      "module_new_node_IDs_present_on_main": 0,
+      "pool_landing_status": "not_landed",
+      "pool_source_applied": false,
+      "pool_installed": 0,
+      "reports": {
+        "factual": {
+          "path": "docs/reviews/v1-31-familiar-music-and-sport-objects/graph-factual-review.json",
+          "sha256": "29e426e9b45bc8d6ce91322f8d996ecc8cc06b5832092b782aebb0929f96ded7",
+          "module_binding_fields": {
+            "module_sha256": "22912e68eb23f9cc11977a739e07555f8c5f40f5b64b8161c54deac998e52205",
+            "frozen_pool_sha256": "80790fd55fe9333f8557122e70995b3b6361e6b2ed2f269d9cbec912fa255d4b"
+          },
+          "formal_review_used": true,
+          "round": 1
+        },
+        "quality": {
+          "path": "docs/reviews/v1-31-familiar-music-and-sport-objects/graph-quality-review.json",
+          "sha256": "4b16903f5ffaf28879eae945acad1a740503bcd343d0620e694af5214ab57054",
+          "module_binding_fields": {
+            "reviewed_module_sha256": "22912e68eb23f9cc11977a739e07555f8c5f40f5b64b8161c54deac998e52205",
+            "frozen_pool_sha256": "80790fd55fe9333f8557122e70995b3b6361e6b2ed2f269d9cbec912fa255d4b",
+            "reviewed_module_path": "/home/dobo/work/_temp/content__v1-31-familiar-music-and-sport-objects/step3-module-to-review.py"
+          },
+          "formal_review_used": true,
+          "round": 1
+        }
+      },
+      "pure_relation_selected_rows": 0,
+      "stale_existing_owner_description_examples": []
+    },
+    {
+      "wave": "1.32",
+      "canonical_ref": "772d187160ac6c4d209e24c999a26e42b621c427",
+      "canonical_pool_path": "docs/content-pool/v1-32-familiar-water-weather-and-shore/pool.json",
+      "pool_sha256": "399b81e1d9747287ee06fce7037d324a356835cad892cfd837d1050b1726710a",
+      "location": "exact_unlanded_closure",
+      "row_count": 58,
+      "record_states": {
+        "accepted": 39,
+        "held": 19
+      },
+      "selected_kind_counts": {
+        "existing_input_family": 9,
+        "new_shared_concept": 30
+      },
+      "selected_form_field_coverage": {
+        "verified_forms": 39,
+        "qualified_forms": 0,
+        "proposed_forms": 39,
+        "owner_id_fallback_rows": 0,
+        "node_id_rows": 39
+      },
+      "module_path": "scripts/familiar_water_weather_and_shore_v1_32_data.py",
+      "module_sha256": "3b0d40b9ae0cef5a9d88927a61d6d6a177627ee6d44d6552948e3cc632d14005",
+      "module_nodes": 30,
+      "module_alias_owner_groups": 9,
+      "module_edge_rows": 119,
+      "module_folded_owner_form_pairs": 215,
+      "raw_payload_spellings": 215,
+      "module_selected_item_IDs": 39,
+      "module_evidence_fields": [
+        "ITEM_EVIDENCE",
+        "HELD_ITEMS",
+        "VERIFIED_SYNONYMS",
+        "REGIONAL_INPUTS",
+        "SOURCE_REVIEW_SUMMARY"
+      ],
+      "module_new_node_IDs_present_on_main": 0,
+      "pool_landing_status": "not_landed",
+      "pool_source_applied": false,
+      "pool_installed": 0,
+      "reports": {
+        "factual": {
+          "path": "docs/reviews/v1-32-familiar-water-weather-and-shore/graph-factual-review.json",
+          "sha256": "1d1993d933196d779988f51423f831a9994481f7304c63dcd8d3bb9044e6077c",
+          "module_binding_fields": {
+            "module_sha256": "d177ac38cdc914e4cf8d04a142956a084d94954fb2db316d8d9c86eede3a404d",
+            "frozen_pool_sha256": "f3bd5bb731028a46839903f4fccfa7dee5f83885affd3b1caedc28ebe89c21a7"
+          },
+          "formal_review_used": true,
+          "round": 1
+        },
+        "quality": {
+          "path": "docs/reviews/v1-32-familiar-water-weather-and-shore/graph-quality-review.json",
+          "sha256": "8de5fc7245abbfa06792439dc3c32be5891b152530db595e7a05b22ad7b41b92",
+          "module_binding_fields": {
+            "module_sha256": "d177ac38cdc914e4cf8d04a142956a084d94954fb2db316d8d9c86eede3a404d",
+            "frozen_pool_sha256": "f3bd5bb731028a46839903f4fccfa7dee5f83885affd3b1caedc28ebe89c21a7"
+          },
+          "formal_review_used": true,
+          "round": 1
+        }
+      },
+      "pure_relation_selected_rows": 0,
+      "stale_existing_owner_description_examples": []
+    }
+  ],
+  "schema_extraction_advice": [
+    {
+      "era": "V1.8–V1.10",
+      "authoritative_fields": [
+        "state",
+        "kind",
+        "node_id or owner_id",
+        "verified_forms",
+        "proposed_forms",
+        "already_resolved_forms",
+        "final module NODES/ALIASES/EDGES"
+      ],
+      "pitfall": "Existing-family label_ro may be a display arrow label,not a lexical form;node_id is often absent in favour of owner_id. V1.8 verified_forms may contain newly added forms only;do not label it a complete paradigm or blindly union planned_forms. One integrated V1.8 row is a relation,not a word/concept."
+    },
+    {
+      "era": "V1.9 existing owner families",
+      "authoritative_fields": [
+        "owner_id",
+        "sense",
+        "final module ALIASES",
+        "latest-main owner metadata"
+      ],
+      "pitfall": "Some proposed_description fields contain stale bird prose on school-input rows. They were not installed owner descriptions. Prefer actual module/live-owner payload;never propose overwriting an old owner from this speculative field."
+    },
+    {
+      "era": "V1.11",
+      "authoritative_fields": [
+        "state",
+        "verified_forms",
+        "installation_links",
+        "final module EDGES",
+        "review_application.removed_edge_pairs"
+      ],
+      "pitfall": "verified_links and reviewed_link_targets_before_drops may preserve pre-drop evidence. Use installation_links/final module for retained graph payload,not a union of every link-like field."
+    },
+    {
+      "era": "V1.12",
+      "authoritative_fields": [
+        "state",
+        "proposed_forms",
+        "approved_description",
+        "dexonline_receipt",
+        "review_verdicts",
+        "final module NODES/EDGES"
+      ],
+      "pitfall": "No verified_forms field exists. proposed_forms is the selected retained set only after filtering integrated rows and checking final module;planned_forms includes hypotheses/held context. REVIEW_ITEMS includes held rows."
+    },
+    {
+      "era": "V1.13",
+      "authoritative_fields": [
+        "state",
+        "qualified_forms",
+        "review",
+        "installation_summary",
+        "final module ITEM_EVIDENCE/NODES/ALIASES/EDGES"
+      ],
+      "pitfall": "qualified_forms also occurs on held records;state filtering is mandatory. Its old V1.13-only HTTP-count exception does not transfer to V1.14."
+    },
+    {
+      "era": "V1.14",
+      "authoritative_fields": [
+        "accepted state",
+        "verified_forms",
+        "review_binding",
+        "review_application",
+        "final module",
+        "handoff.qualified_for_landing",
+        "handoff.qualified_installed_items"
+      ],
+      "pitfall": "Partially applied branch through4f with modified serving fixtures,bundled content and a declined HTTP-count exception. Accepted source is not installed or landed;none of its54new node IDs are on latest main."
+    },
+    {
+      "era": "V1.15–V1.18",
+      "authoritative_fields": [
+        "accepted state",
+        "node_id",
+        "verified_forms",
+        "proposed_forms",
+        "already_resolved_forms",
+        "already_reserved_forms if present",
+        "dictionaries",
+        "lexemes.forms",
+        "final module"
+      ],
+      "pitfall": "Nested secondary families can be held/excluded while the parent is accepted. Preserve explicit held/rejected family decisions;do not resurrect planned/observed fallback forms or certify a synonym from its candidate role."
+    },
+    {
+      "era": "V1.19–V1.32",
+      "authoritative_fields": [
+        "accepted state",
+        "verified_forms",
+        "proposed_forms",
+        "already_resolved_forms",
+        "already_reserved_forms",
+        "source_reviews/review_binding",
+        "review_application",
+        "final module ITEM_EVIDENCE"
+      ],
+      "pitfall": "Pool-level and record-level admitted_input_count/installed/source_applied remain0/false for source stock. Historical research summaries may still show pre-review accepted0;use final record state plus signed application chain for review readiness."
+    },
+    {
+      "era": "V1.30–V1.32 signed-final modules",
+      "authoritative_fields": [
+        "original review SHA",
+        "immutable original module",
+        "signed corrections",
+        "final module SHA",
+        "separate author vs independent_review_sources"
+      ],
+      "pitfall": "Final module hash legitimately differs from the reviewed original after exact signed edits. Verify the correction chain;do not demand an extra semantic review or collapse author source chronology into later peer evidence."
+    },
+    {
+      "era": "All eras: lookup observations",
+      "authoritative_fields": [
+        "explicit state/status/verdict",
+        "held_forms",
+        "partial_family_holds",
+        "owner IDs",
+        "source reasons"
+      ],
+      "pitfall": "Stateless form/key/owner_fields rows in excluded_unqualified_form_checks are nonreserving identity_attention. Container-name inference alone caused a documented false held audio-family conclusion;real held lexical families still persist."
+    },
+    {
+      "era": "All eras: current resolver",
+      "authoritative_fields": [
+        "latest-main normalization_map",
+        "normalized_index",
+        "labels",
+        "node aliases",
+        "discovery_world",
+        "contexto projections",
+        "current ReviewedUnresolved transform"
+      ],
+      "pitfall": "Resolve first checks the accent-preserving decomposed paște/paștele exceptions,then normalized index. Raw/current deferred dictionaries govern new admission history;they are not a blanket runtime rejection of already-landed leafă/ogradă. Preserve both policy observations without erasing existing live owners."
+    },
+    {
+      "era": "All pending waves",
+      "authoritative_fields": [
+        "wave,exact closure commit,record ID,owner ID,folded form",
+        "final module canonical labels+aliases",
+        "state and synonym/regional certification"
+      ],
+      "pitfall": "Read each wave’s own canonical pool once at its pinned closure,not all copied historical pool files on every branch. De-duplicate forms by(owner,folded key),but retain provenance and disagreements. Accepted packets can conflict with current main or each other;never silently choose an owner or move aliases."
+    },
+    {
+      "era": "Game impact",
+      "authoritative_fields": [
+        "source-only false target/salience/gameplay flags",
+        "existing curated round authorities",
+        "cat-content-ops delta only after actual authorized integration"
+      ],
+      "pitfall": "A sourced word/paradigm/truthful edge is not an approved target,round,board,pair,recipe or playable path. Source form counts differ from native exact-alias-pair deltas;do not convert inventory receipts or canonical labels into player-visible progress."
+    },
+    {
+      "era": "Multiple accepted input families sharing one existing owner",
+      "authoritative_fields": [
+        "module ALIASES[owner] intersect record verified/qualified forms",
+        "record proposed_forms",
+        "exact record provenance"
+      ],
+      "pitfall": "V1.22 Covor has2accepted families;V1.24 Pâine has5,Ardei3,and Aluat3. Whole-owner union per record inflates alias key counts. Correct final source alias count is490 across128existing families and119module owner groups."
+    },
+    {
+      "era": "Excluded surfaces sharing an approved key",
+      "authoritative_fields": [
+        "approved exact module surface",
+        "approved record form",
+        "normalization_map",
+        "excluded surface spelling plus reason"
+      ],
+      "pitfall": "Preserve rejected-spelling history without deleting an approved canonical representation solely because the two spellings fold equal. Corabie and Cușcuș require this distinction;this does not newly approve rejected spellings."
+    }
+  ],
+  "V1_14_special_caveat": {
+    "canonical_ref": "4b634cab38cbce90ac6eb02e0907578335208c69",
+    "state_counts": {
+      "accepted": 54,
+      "held": 6
+    },
+    "landing_status": "not_landed",
+    "handoff": {
+      "status": "owner_review_later",
+      "qualified_for_landing": false,
+      "applied_branch_delta": "+54/+217/+258",
+      "qualified_installed_items": 0,
+      "last_completed_install_step": "4f",
+      "http_capture_count": 1206,
+      "http_count_exception_approved": false,
+      "pending": [
+        "HTTP corpus binding",
+        "installed authorities",
+        "final gates and local playthrough",
+        "owner review and landing"
+      ],
+      "future_work": "Reviewed unlanded concept, inflection and genuinely substitutable synonym pools; stable main remains the owner release baseline."
+    },
+    "accepted_node_IDs_on_latest_main": 0,
+    "action": "Retain as reviewed unlanded source only. Do not use its branch-serving fixtures as current authority,claim any qualified installation,or reopen the declined HTTP-count exception."
+  },
+  "legacy_stale_description_examples": [
+    {
+      "id": "v19-input-caiet",
+      "owner_id": "n_v24_school_writing_caiet",
+      "proposed_description": "Pasăre cu coada bifurcată, care prinde mai ales insecte în zbor; populațiile care cuibăresc în România sosesc primăvara și pleacă toamna."
+    },
+    {
+      "id": "v19-input-creion",
+      "owner_id": "n_v24_school_writing_creion",
+      "proposed_description": "Pasăre cu coada bifurcată, care prinde mai ales insecte în zbor; populațiile care cuibăresc în România sosesc primăvara și pleacă toamna."
+    },
+    {
+      "id": "v19-input-stilou",
+      "owner_id": "n_v24_school_supplies_stilou",
+      "proposed_description": "Pasăre cu coada bifurcată, care prinde mai ales insecte în zbor; populațiile care cuibăresc în România sosesc primăvara și pleacă toamna."
+    },
+    {
+      "id": "v19-input-penar",
+      "owner_id": "n_v23via_penar",
+      "proposed_description": "Pasăre cu coada bifurcată, care prinde mai ales insecte în zbor; populațiile care cuibăresc în România sosesc primăvara și pleacă toamna."
+    },
+    {
+      "id": "v19-input-rigla",
+      "owner_id": "n_v24_school_supplies_rigla",
+      "proposed_description": "Pasăre cu coada bifurcată, care prinde mai ales insecte în zbor; populațiile care cuibăresc în România sosesc primăvara și pleacă toamna."
+    },
+    {
+      "id": "v19-input-radiera",
+      "owner_id": "n_v24_school_supplies_radiera",
+      "proposed_description": "Pasăre cu coada bifurcată, care prinde mai ales insecte în zbor; populațiile care cuibăresc în România sosesc primăvara și pleacă toamna."
+    },
+    {
+      "id": "v19-input-ghiozdan",
+      "owner_id": "n_v23via_ghiozdan",
+      "proposed_description": "Pasăre cu coada bifurcată, care prinde mai ales insecte în zbor; populațiile care cuibăresc în România sosesc primăvara și pleacă toamna."
+    },
+    {
+      "id": "v19-input-castravete",
+      "owner_id": "n_v24_food_salad_veg_castravete",
+      "proposed_description": "Pasăre cu coada bifurcată, care prinde mai ales insecte în zbor; populațiile care cuibăresc în România sosesc primăvara și pleacă toamna."
+    },
+    {
+      "id": "v19-input-pantalon",
+      "owner_id": "n_v30_clothing_everyday_pantaloni",
+      "proposed_description": "Pasăre cu coada bifurcată, care prinde mai ales insecte în zbor; populațiile care cuibăresc în România sosesc primăvara și pleacă toamna."
+    }
+  ],
+  "landed_payload_current_index_mismatches": [],
+  "pending_collision_examples_not_new_verdicts": {
+    "multiowner_keys": {},
+    "current_main_pairs": [],
+    "scope": "Mechanical reconciliation observations only;do not change owner states or claim permission to integrate."
+  },
+  "owner_holds_preserved": true,
+  "source_approvals": 0,
+  "formal_review_used": false,
+  "web_calls": 0,
+  "candidate_authorship": false,
+  "source_edits": 0,
+  "source_applied": false,
+  "installed": 0,
+  "player_visible_delta": "0/0/0",
+  "importer_calls": 0,
+  "remote_operations": 0,
+  "new_wave_started": false,
+  "record_to_final_payload_reconciliation": {
+    "status": "PASS",
+    "issues": [],
+    "accepted_records_verified": 837,
+    "new_node_records": 709,
+    "existing_input_family_records": 128,
+    "new_node_normalized_payload_keys": 4013,
+    "existing_alias_normalized_payload_keys": 490,
+    "total_unique_normalized_payload_keys": 4503,
+    "orphan_payload_keys": 0,
+    "accepted_families_with_zero_payload": 0,
+    "per_wave": [
+      {
+        "wave": "1.14",
+        "accepted_records": 54,
+        "new_node_records": 54,
+        "existing_input_family_records": 0,
+        "module_alias_owner_groups": 0,
+        "module_payload_pairs": 312,
+        "mapped_pairs": 312,
+        "unmapped_pairs": 0
+      },
+      {
+        "wave": "1.15",
+        "accepted_records": 51,
+        "new_node_records": 42,
+        "existing_input_family_records": 9,
+        "module_alias_owner_groups": 9,
+        "module_payload_pairs": 287,
+        "mapped_pairs": 287,
+        "unmapped_pairs": 0
+      },
+      {
+        "wave": "1.16",
+        "accepted_records": 56,
+        "new_node_records": 45,
+        "existing_input_family_records": 11,
+        "module_alias_owner_groups": 11,
+        "module_payload_pairs": 278,
+        "mapped_pairs": 278,
+        "unmapped_pairs": 0
+      },
+      {
+        "wave": "1.17",
+        "accepted_records": 49,
+        "new_node_records": 39,
+        "existing_input_family_records": 10,
+        "module_alias_owner_groups": 10,
+        "module_payload_pairs": 227,
+        "mapped_pairs": 227,
+        "unmapped_pairs": 0
+      },
+      {
+        "wave": "1.18",
+        "accepted_records": 51,
+        "new_node_records": 40,
+        "existing_input_family_records": 11,
+        "module_alias_owner_groups": 11,
+        "module_payload_pairs": 232,
+        "mapped_pairs": 232,
+        "unmapped_pairs": 0
+      },
+      {
+        "wave": "1.19",
+        "accepted_records": 49,
+        "new_node_records": 44,
+        "existing_input_family_records": 5,
+        "module_alias_owner_groups": 5,
+        "module_payload_pairs": 255,
+        "mapped_pairs": 255,
+        "unmapped_pairs": 0
+      },
+      {
+        "wave": "1.20",
+        "accepted_records": 40,
+        "new_node_records": 40,
+        "existing_input_family_records": 0,
+        "module_alias_owner_groups": 0,
+        "module_payload_pairs": 223,
+        "mapped_pairs": 223,
+        "unmapped_pairs": 0
+      },
+      {
+        "wave": "1.21",
+        "accepted_records": 45,
+        "new_node_records": 40,
+        "existing_input_family_records": 5,
+        "module_alias_owner_groups": 5,
+        "module_payload_pairs": 245,
+        "mapped_pairs": 245,
+        "unmapped_pairs": 0
+      },
+      {
+        "wave": "1.22",
+        "accepted_records": 38,
+        "new_node_records": 28,
+        "existing_input_family_records": 10,
+        "module_alias_owner_groups": 9,
+        "module_payload_pairs": 239,
+        "mapped_pairs": 239,
+        "unmapped_pairs": 0
+      },
+      {
+        "wave": "1.23",
+        "accepted_records": 40,
+        "new_node_records": 36,
+        "existing_input_family_records": 4,
+        "module_alias_owner_groups": 4,
+        "module_payload_pairs": 190,
+        "mapped_pairs": 190,
+        "unmapped_pairs": 0
+      },
+      {
+        "wave": "1.24",
+        "accepted_records": 44,
+        "new_node_records": 26,
+        "existing_input_family_records": 18,
+        "module_alias_owner_groups": 10,
+        "module_payload_pairs": 248,
+        "mapped_pairs": 248,
+        "unmapped_pairs": 0
+      },
+      {
+        "wave": "1.25",
+        "accepted_records": 37,
+        "new_node_records": 36,
+        "existing_input_family_records": 1,
+        "module_alias_owner_groups": 1,
+        "module_payload_pairs": 211,
+        "mapped_pairs": 211,
+        "unmapped_pairs": 0
+      },
+      {
+        "wave": "1.26",
+        "accepted_records": 34,
+        "new_node_records": 24,
+        "existing_input_family_records": 10,
+        "module_alias_owner_groups": 10,
+        "module_payload_pairs": 203,
+        "mapped_pairs": 203,
+        "unmapped_pairs": 0
+      },
+      {
+        "wave": "1.27",
+        "accepted_records": 38,
+        "new_node_records": 35,
+        "existing_input_family_records": 3,
+        "module_alias_owner_groups": 3,
+        "module_payload_pairs": 219,
+        "mapped_pairs": 219,
+        "unmapped_pairs": 0
+      },
+      {
+        "wave": "1.28",
+        "accepted_records": 36,
+        "new_node_records": 36,
+        "existing_input_family_records": 0,
+        "module_alias_owner_groups": 0,
+        "module_payload_pairs": 199,
+        "mapped_pairs": 199,
+        "unmapped_pairs": 0
+      },
+      {
+        "wave": "1.29",
+        "accepted_records": 43,
+        "new_node_records": 43,
+        "existing_input_family_records": 0,
+        "module_alias_owner_groups": 0,
+        "module_payload_pairs": 264,
+        "mapped_pairs": 264,
+        "unmapped_pairs": 0
+      },
+      {
+        "wave": "1.30",
+        "accepted_records": 46,
+        "new_node_records": 40,
+        "existing_input_family_records": 6,
+        "module_alias_owner_groups": 6,
+        "module_payload_pairs": 237,
+        "mapped_pairs": 237,
+        "unmapped_pairs": 0
+      },
+      {
+        "wave": "1.31",
+        "accepted_records": 47,
+        "new_node_records": 31,
+        "existing_input_family_records": 16,
+        "module_alias_owner_groups": 16,
+        "module_payload_pairs": 219,
+        "mapped_pairs": 219,
+        "unmapped_pairs": 0
+      },
+      {
+        "wave": "1.32",
+        "accepted_records": 39,
+        "new_node_records": 30,
+        "existing_input_family_records": 9,
+        "module_alias_owner_groups": 9,
+        "module_payload_pairs": 215,
+        "mapped_pairs": 215,
+        "unmapped_pairs": 0
+      }
+    ],
+    "shared_existing_owner_family_groups": [
+      {
+        "wave": "1.22",
+        "owner_id": "n_v24_home_textiles_covor",
+        "accepted_input_family_lemmas": [
+          "Mochetă",
+          "Covoraș de baie"
+        ],
+        "rule": "Intersect owner ALIASES with each record approved form set;do not assign the whole owner alias union independently to each family."
+      },
+      {
+        "wave": "1.24",
+        "owner_id": "n_v4gas_paine",
+        "accepted_input_family_lemmas": [
+          "Chiflă",
+          "Baghetă",
+          "Franzelă",
+          "Pâine integrală",
+          "Pâine de secară"
+        ],
+        "rule": "Intersect owner ALIASES with each record approved form set;do not assign the whole owner alias union independently to each family."
+      },
+      {
+        "wave": "1.24",
+        "owner_id": "n_v24_food_salad_veg_ardei",
+        "accepted_input_family_lemmas": [
+          "Ardei iute",
+          "Ardei gras",
+          "Gogoșar"
+        ],
+        "rule": "Intersect owner ALIASES with each record approved form set;do not assign the whole owner alias union independently to each family."
+      },
+      {
+        "wave": "1.24",
+        "owner_id": "n_v84_food_aluat",
+        "accepted_input_family_lemmas": [
+          "Aluat fraged",
+          "Aluat de pâine",
+          "Aluat dospit"
+        ],
+        "rule": "Intersect owner ALIASES with each record approved form set;do not assign the whole owner alias union independently to each family."
+      }
+    ],
+    "qualified_canonical_display_labels_outside_record_verified_forms": [
+      {
+        "wave": "1.14",
+        "id": "v114-liliac",
+        "canonical_label": "Liliac (mamifer)",
+        "canonical_folded_key": "liliac (mamifer)",
+        "present_in_approved_module": true,
+        "not_an_extra_dictionary_inflection": true
+      },
+      {
+        "wave": "1.14",
+        "id": "v114-somn",
+        "canonical_label": "Somn (pește)",
+        "canonical_folded_key": "somn (peste)",
+        "present_in_approved_module": true,
+        "not_an_extra_dictionary_inflection": true
+      },
+      {
+        "wave": "1.15",
+        "id": "v115-cablu",
+        "canonical_label": "Cablu (electric)",
+        "canonical_folded_key": "cablu (electric)",
+        "present_in_approved_module": true,
+        "not_an_extra_dictionary_inflection": true
+      }
+    ],
+    "canonical_label_rule": "An approved final module canonical label is its own identity/input payload even if not repeated in verified_forms;map it to the same record label_ro and distinguish display-label qualification from ordinary dictionary inflections. No new words are authored."
+  },
+  "accepted_parent_partial_dispositions": {
+    "record_count": 15,
+    "inactive_secondary_family_count": 5,
+    "records": [
+      {
+        "wave": "1.14",
+        "id": "v114-bursuc",
+        "lemma": "Bursuc",
+        "accepted_parent_does_not_accept_all_subfamilies": true,
+        "inactive_lexemes": [],
+        "held_forms": [
+          {
+            "form": "bursucul",
+            "key": "bursucul",
+            "owners": [
+              "n_v21spo_dan_petrescu"
+            ],
+            "reason": "held: owned by n_v21spo_dan_petrescu; sense adjudication remains explicit and no form is moved."
+          }
+        ],
+        "partial_family_hold_names": [],
+        "excluded_surface_names": [],
+        "disposition_authority": "Keep canonical explicit held/rejected reasons;do not infer acceptance from the parent state or planned lists."
+      },
+      {
+        "wave": "1.15",
+        "id": "v115-laveta",
+        "lemma": "Lavetă",
+        "accepted_parent_does_not_accept_all_subfamilies": true,
+        "inactive_lexemes": [
+          {
+            "lemma": "Cârpă",
+            "role": "selected_cleaning_sense_synonym_hypothesis",
+            "status": null,
+            "active_forms": []
+          }
+        ],
+        "held_forms": [],
+        "partial_family_hold_names": [],
+        "excluded_surface_names": [
+          "cârpă",
+          "cârpe",
+          "cârpele",
+          "cârpei",
+          "cârpelor"
+        ],
+        "disposition_authority": "Keep canonical explicit held/rejected reasons;do not infer acceptance from the parent state or planned lists."
+      },
+      {
+        "wave": "1.15",
+        "id": "v115-candelabru",
+        "lemma": "Candelabru",
+        "accepted_parent_does_not_accept_all_subfamilies": true,
+        "inactive_lexemes": [
+          {
+            "lemma": "Lustră",
+            "role": "selected_electric_fixture_synonym_hypothesis",
+            "status": null,
+            "active_forms": []
+          }
+        ],
+        "held_forms": [],
+        "partial_family_hold_names": [],
+        "excluded_surface_names": [
+          "lustră",
+          "lustre",
+          "lustrele",
+          "lustrei",
+          "lustrelor"
+        ],
+        "disposition_authority": "Keep canonical explicit held/rejected reasons;do not infer acceptance from the parent state or planned lists."
+      },
+      {
+        "wave": "1.20",
+        "id": "v120-pastel",
+        "lemma": "Pastel",
+        "accepted_parent_does_not_accept_all_subfamilies": true,
+        "inactive_lexemes": [],
+        "held_forms": [
+          {
+            "form": "pastele",
+            "reason": "held: owned by n_v3gas_paste"
+          }
+        ],
+        "partial_family_hold_names": [],
+        "excluded_surface_names": [
+          "pastele",
+          "pastelele",
+          "pastelelor"
+        ],
+        "disposition_authority": "Keep canonical explicit held/rejected reasons;do not infer acceptance from the parent state or planned lists."
+      },
+      {
+        "wave": "1.21",
+        "id": "v121-portofel",
+        "lemma": "Portofel",
+        "accepted_parent_does_not_accept_all_subfamilies": true,
+        "inactive_lexemes": [
+          {
+            "lemma": "Portmoneu",
+            "role": "unadmitted_narrower_coin_purse_hypothesis",
+            "status": null,
+            "active_forms": []
+          }
+        ],
+        "held_forms": [],
+        "partial_family_hold_names": [],
+        "excluded_surface_names": [
+          "portmoneu",
+          "portmoneul",
+          "portmonee",
+          "portmoneele",
+          "portmoneului",
+          "portmoneelor",
+          "portmoneuri",
+          "portmoneurile",
+          "portmoneurilor"
+        ],
+        "disposition_authority": "Keep canonical explicit held/rejected reasons;do not infer acceptance from the parent state or planned lists."
+      },
+      {
+        "wave": "1.21",
+        "id": "v121-tenisi",
+        "lemma": "Teniși",
+        "accepted_parent_does_not_accept_all_subfamilies": true,
+        "inactive_lexemes": [],
+        "held_forms": [
+          {
+            "form": "tenis",
+            "reason": "held: owned by n_tenis"
+          },
+          {
+            "form": "tenisul",
+            "reason": "held: owned by n_tenis"
+          },
+          {
+            "form": "tenisului",
+            "reason": "excluded: unowned singular key of the same base as existing Tenis sport owner;selected footwear family is plural-only here,no sport-sense singular admission."
+          }
+        ],
+        "partial_family_hold_names": [],
+        "excluded_surface_names": [
+          "tenis",
+          "tenisul",
+          "tenisului"
+        ],
+        "disposition_authority": "Keep canonical explicit held/rejected reasons;do not infer acceptance from the parent state or planned lists."
+      },
+      {
+        "wave": "1.24",
+        "id": "v124-franzela",
+        "lemma": "Franzelă",
+        "accepted_parent_does_not_accept_all_subfamilies": true,
+        "inactive_lexemes": [
+          {
+            "lemma": "Jimblă",
+            "role": "rejected_archaic_only_secondary_lexeme",
+            "status": null,
+            "active_forms": []
+          }
+        ],
+        "held_forms": [],
+        "partial_family_hold_names": [],
+        "excluded_surface_names": [
+          "Pâine",
+          "jimblă",
+          "jimble",
+          "jimblele",
+          "jimblei",
+          "jimblelor"
+        ],
+        "disposition_authority": "Keep canonical explicit held/rejected reasons;do not infer acceptance from the parent state or planned lists."
+      },
+      {
+        "wave": "1.27",
+        "id": "v127-gutuie",
+        "lemma": "Gutuie",
+        "accepted_parent_does_not_accept_all_subfamilies": true,
+        "inactive_lexemes": [],
+        "held_forms": [
+          {
+            "form": "gutui",
+            "reason": "held: owned by n_v1_12_gutui"
+          },
+          {
+            "form": "gutuii",
+            "reason": "held: owned by n_v1_12_gutui"
+          },
+          {
+            "form": "gutuilor",
+            "reason": "held: owned by n_v1_12_gutui"
+          }
+        ],
+        "partial_family_hold_names": [],
+        "excluded_surface_names": [
+          "gutui",
+          "gutuii",
+          "gutuilor"
+        ],
+        "disposition_authority": "Keep canonical explicit held/rejected reasons;do not infer acceptance from the parent state or planned lists."
+      },
+      {
+        "wave": "1.29",
+        "id": "v129-fotograf",
+        "lemma": "Fotograf",
+        "accepted_parent_does_not_accept_all_subfamilies": true,
+        "inactive_lexemes": [],
+        "held_forms": [
+          {
+            "form": "fotografii",
+            "reason": "held: owned by n_v4art_fotografie"
+          }
+        ],
+        "partial_family_hold_names": [],
+        "excluded_surface_names": [
+          "fotografii"
+        ],
+        "disposition_authority": "Keep canonical explicit held/rejected reasons;do not infer acceptance from the parent state or planned lists."
+      },
+      {
+        "wave": "1.29",
+        "id": "v129-marinar",
+        "lemma": "Marinar",
+        "accepted_parent_does_not_accept_all_subfamilies": true,
+        "inactive_lexemes": [],
+        "held_forms": [
+          {
+            "form": "marinarii",
+            "reason": "held: owned by n_v20spo_farul_constanta"
+          }
+        ],
+        "partial_family_hold_names": [],
+        "excluded_surface_names": [
+          "marinarii"
+        ],
+        "disposition_authority": "Keep canonical explicit held/rejected reasons;do not infer acceptance from the parent state or planned lists."
+      },
+      {
+        "wave": "1.29",
+        "id": "v129-cofetar",
+        "lemma": "Cofetar",
+        "accepted_parent_does_not_accept_all_subfamilies": true,
+        "inactive_lexemes": [],
+        "held_forms": [
+          {
+            "form": "cofetarii",
+            "reason": "held: owned by n_v1_25_cofetarie"
+          }
+        ],
+        "partial_family_hold_names": [],
+        "excluded_surface_names": [
+          "cofetarii"
+        ],
+        "disposition_authority": "Keep canonical explicit held/rejected reasons;do not infer acceptance from the parent state or planned lists."
+      },
+      {
+        "wave": "1.29",
+        "id": "v129-brutar",
+        "lemma": "Brutar",
+        "accepted_parent_does_not_accept_all_subfamilies": true,
+        "inactive_lexemes": [],
+        "held_forms": [
+          {
+            "form": "brutarii",
+            "reason": "held: owned by n_v1_25_brutarie"
+          }
+        ],
+        "partial_family_hold_names": [],
+        "excluded_surface_names": [
+          "brutarii"
+        ],
+        "disposition_authority": "Keep canonical explicit held/rejected reasons;do not infer acceptance from the parent state or planned lists."
+      },
+      {
+        "wave": "1.29",
+        "id": "v129-macelar",
+        "lemma": "Măcelar",
+        "accepted_parent_does_not_accept_all_subfamilies": true,
+        "inactive_lexemes": [],
+        "held_forms": [
+          {
+            "form": "măcelarii",
+            "reason": "held: owned by n_v1_25_macelarie"
+          }
+        ],
+        "partial_family_hold_names": [],
+        "excluded_surface_names": [
+          "măcelarii"
+        ],
+        "disposition_authority": "Keep canonical explicit held/rejected reasons;do not infer acceptance from the parent state or planned lists."
+      },
+      {
+        "wave": "1.31",
+        "id": "v131-boxa",
+        "lemma": "Boxă",
+        "accepted_parent_does_not_accept_all_subfamilies": true,
+        "inactive_lexemes": [
+          {
+            "lemma": "Difuzor",
+            "role": "candidate_exact_sense_synonym",
+            "status": "held: Difuzor names an electroacoustic transducer mounted in a box/incintă;exact substitution for the complete fixed Boxă owner is unresolved,so the whole candidate synonym family stays inactive.",
+            "active_forms": []
+          }
+        ],
+        "held_forms": [],
+        "partial_family_hold_names": [
+          "Difuzor"
+        ],
+        "excluded_surface_names": [
+          "difuzor",
+          "difuzorul",
+          "difuzorului",
+          "difuzoare",
+          "difuzoarele",
+          "difuzoarelor"
+        ],
+        "disposition_authority": "Keep canonical explicit held/rejected reasons;do not infer acceptance from the parent state or planned lists."
+      },
+      {
+        "wave": "1.32",
+        "id": "v132-port",
+        "lemma": "Port",
+        "accepted_parent_does_not_accept_all_subfamilies": true,
+        "inactive_lexemes": [],
+        "held_forms": [
+          {
+            "form": "portului",
+            "reason": "held: owner decisions first / reviewed unresolved input"
+          },
+          {
+            "form": "porturilor",
+            "reason": "held: owner decisions first / reviewed unresolved input"
+          }
+        ],
+        "partial_family_hold_names": [],
+        "excluded_surface_names": [
+          "portului",
+          "porturilor"
+        ],
+        "disposition_authority": "Keep canonical explicit held/rejected reasons;do not infer acceptance from the parent state or planned lists."
+      }
+    ],
+    "not_new_research_or_owner_decisions": true
+  },
+  "existing_input_source_description_differences": {
+    "count": 89,
+    "scope": "These are source/input-family descriptions or paraphrases,not new owner payloads. Use latest-main owner metadata for integration;preserve original source text as provenance. They are not automatically source errors.",
+    "examples": [
+      {
+        "wave": "1.15",
+        "id": "v115-sofa",
+        "lemma": "Sofa",
+        "owner_id": "n_v24_home_seating_canapea",
+        "source_description": "Familie de intrări pentru sensul de canapea.",
+        "current_owner_description": "Concept cotidian din grupul «mobilier pentru șezut»: Canapea.",
+        "interpretation": "Source/input-family description,not permission to overwrite the current owner;this difference alone is not a new factual rejection."
+      },
+      {
+        "wave": "1.15",
+        "id": "v115-lexicon",
+        "lemma": "Lexicon",
+        "owner_id": "n_v3lim_dictionar",
+        "source_description": "Familie de intrări pentru sensul de dicționar.",
+        "current_owner_description": "Lucrare care explică sau traduce cuvinte, de obicei în ordine alfabetică.",
+        "interpretation": "Source/input-family description,not permission to overwrite the current owner;this difference alone is not a new factual rejection."
+      },
+      {
+        "wave": "1.15",
+        "id": "v115-scolar",
+        "lemma": "Școlar",
+        "owner_id": "n_v4soc_elev",
+        "source_description": "Familie de intrări pentru sensul de elev.",
+        "current_owner_description": "Copil sau tânăr care învață într-o școală.",
+        "interpretation": "Source/input-family description,not permission to overwrite the current owner;this difference alone is not a new factual rejection."
+      },
+      {
+        "wave": "1.15",
+        "id": "v115-guma_de_sters",
+        "lemma": "Gumă",
+        "owner_id": "n_v24_school_supplies_radiera",
+        "source_description": "Forme ale intrării deja existente gumă de șters.",
+        "current_owner_description": "Concept cotidian din grupul «rechizite școlare»: Radieră.",
+        "interpretation": "Source/input-family description,not permission to overwrite the current owner;this difference alone is not a new factual rejection."
+      },
+      {
+        "wave": "1.15",
+        "id": "v115-foaie_de_hartie",
+        "lemma": "Foaie",
+        "owner_id": "n_v1_11_hartie",
+        "source_description": "Intrări calificate pentru foile de hârtie.",
+        "current_owner_description": "Material în foi subțiri, folosit la scris, desenat, tipărit și împachetat; aici, materialul și foile sale.",
+        "interpretation": "Source/input-family description,not permission to overwrite the current owner;this difference alone is not a new factual rejection."
+      },
+      {
+        "wave": "1.15",
+        "id": "v115-aeroplan",
+        "lemma": "Aeroplan",
+        "owner_id": "n_v2sti_avion",
+        "source_description": "Forme gramaticale ale intrării aeroplan pentru Avion.",
+        "current_owner_description": "Aparat de zbor mai greu decât aerul, cu aripi și propulsie proprie.",
+        "interpretation": "Source/input-family description,not permission to overwrite the current owner;this difference alone is not a new factual rejection."
+      },
+      {
+        "wave": "1.15",
+        "id": "v115-doctor",
+        "lemma": "Doctor",
+        "owner_id": "n_v3per_medic",
+        "source_description": "Forme gramaticale ale intrării doctor pentru Medic.",
+        "current_owner_description": "Specialist care previne, diagnostichează și tratează boli.",
+        "interpretation": "Source/input-family description,not permission to overwrite the current owner;this difference alone is not a new factual rejection."
+      },
+      {
+        "wave": "1.15",
+        "id": "v115-stea",
+        "lemma": "Stea",
+        "owner_id": "n_v24_nature_sky_stea",
+        "source_description": "Forme gramaticale pentru conceptul astronomic Stea.",
+        "current_owner_description": "Concept cotidian din grupul «corpuri văzute pe cer»: Stea.",
+        "interpretation": "Source/input-family description,not permission to overwrite the current owner;this difference alone is not a new factual rejection."
+      },
+      {
+        "wave": "1.15",
+        "id": "v115-picior",
+        "lemma": "Picior",
+        "owner_id": "n_v24_body_limbs_picior",
+        "source_description": "Forme gramaticale pentru partea corpului numită Picior.",
+        "current_owner_description": "Concept cotidian din grupul «părți ale membrelor»: Picior.",
+        "interpretation": "Source/input-family description,not permission to overwrite the current owner;this difference alone is not a new factual rejection."
+      },
+      {
+        "wave": "1.16",
+        "id": "v116-soferita",
+        "lemma": "Șoferiță",
+        "owner_id": "n_v1_9_sofer",
+        "source_description": "Femeie care conduce un autovehicul.",
+        "current_owner_description": "Persoană calificată pentru conducerea autovehiculelor.",
+        "interpretation": "Source/input-family description,not permission to overwrite the current owner;this difference alone is not a new factual rejection."
+      },
+      {
+        "wave": "1.16",
+        "id": "v116-trotuar",
+        "lemma": "Trotuar",
+        "owner_id": "n_v29_city_street_trotuar",
+        "source_description": "Parte ridicată a străzii destinată mersului pe jos.",
+        "current_owner_description": "Parte ridicată a străzii rezervată mersului pe jos.",
+        "interpretation": "Source/input-family description,not permission to overwrite the current owner;this difference alone is not a new factual rejection."
+      },
+      {
+        "wave": "1.16",
+        "id": "v116-strada",
+        "lemma": "Stradă",
+        "owner_id": "n_v4geo_strada",
+        "source_description": "Cale de circulație din interiorul unei localități.",
+        "current_owner_description": "Cale urbană de circulație mărginită de clădiri.",
+        "interpretation": "Source/input-family description,not permission to overwrite the current owner;this difference alone is not a new factual rejection."
+      }
+    ]
+  },
+  "legacy_stale_description_examples_count": 9
+}

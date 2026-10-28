@@ -1,0 +1,454 @@
+{
+  "schema_version": 1,
+  "wave": "1.35",
+  "branch": "content/v1-35-familiar-nature-and-practical-objects",
+  "reviewed_payload_commit": "fe8181a64a72e2cc2f2f1296cab07f46f3dcde1d",
+  "handoff_closure_identity": "The source branch commit containing this file; post-commit closure is recorded in preserved scratch handoff-summary.json.",
+  "landing_status": "not_landed",
+  "handoff_status": "owner_review_later",
+  "source_packet_complete": true,
+  "canonical_stock_update_complete": false,
+  "source_applied": false,
+  "module_dry_run": false,
+  "installed": 0,
+  "player_visible_delta": "0/0/0",
+  "summary": {
+    "items_proposed": 40,
+    "accepted_source_packages": 25,
+    "new_vocabulary_concepts": 24,
+    "existing_owner_input_families": 1,
+    "ordinary_normalized_payload_keys": 136,
+    "truthful_directed_claims": 96,
+    "held": 15,
+    "rejected": 0,
+    "new_targets": 0,
+    "new_playable_rounds": 0,
+    "ordinary_primary_lemma_families": 22,
+    "ordinary_primary_lemma_keys": 119,
+    "qualified_compound_families": 2,
+    "qualified_compound_keys": 11,
+    "selected_subtype_families": 1,
+    "selected_subtype_keys": 6,
+    "synonym_families": 0,
+    "regional_input_families": 0,
+    "canonical_label_only_keys": 0
+  },
+  "payload_authority": {
+    "pool_path": "docs/content-pool/v1-35-familiar-nature-and-practical-objects/pool.json",
+    "review_commit_pool_sha256": "b60d7556820f408f0d84ff0b475e223fb82e5d4735182b652a6afe6a8b6e49a0",
+    "final_module_path": "scripts/familiar_nature_and_practical_objects_v1_35_data.py",
+    "final_module_sha256": "b2e02e91af66000be2be4891b343965257839a55aef6ee522d26b5e30cb0e199",
+    "original_reviewed_module_sha256": "d4a728f2fd5e56141b53b83887a04e6bef82b91be4f61b5920ec8e9e21300f88",
+    "original_reviewed_module_path": "docs/reviews/v1-35-familiar-nature-and-practical-objects/reviewed-module.py",
+    "factual_review_sha256": "1348c5a2d8cc17db64c373a6d2fb7ea58a9f37e1b19d4911b1cbff9ba23e7e24",
+    "quality_review_sha256": "51519098a06920a66ebb4fd9ccf8c11a090c560e1dd459623d9f5fe9a9fac155",
+    "source_reconciliation_sha256": "6d1f3adc8c8f591f4964da6a012989f6ba0e58857f5ac7af40d6549254956a34",
+    "source_provenance_sha256": "538ee95afff767a639fc045211dce8dbe0519a8ebbec219bae7027da1f66527e",
+    "exact_signed_field_edits": 10,
+    "signed_relation_edits": 1,
+    "signed_description_edits": 1,
+    "signed_caption_edits": 8,
+    "signed_whole_item_drops": [
+      "v135-sort"
+    ],
+    "record_states_plus_final_module_are_retained_payload_authority": true,
+    "original_reports_and_original_to_final_binding_chain_preserved": true
+  },
+  "comparison": {
+    "primary_feature_branch": "feat/gui-cat-m3",
+    "primary_feature_HEAD": "1673389147a3ba432742008d55d28edb84d94af2",
+    "actual_working_binding_path": "/home/dobo/work/_temp/content__v1-35-familiar-nature-and-practical-objects/handoff/feature-working-handoff.json",
+    "actual_working_binding_sha256": "53896d90824bc4395cc04b058ed3679e74345a4f8f57474200bd12c84fed091b",
+    "working_fingerprint_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "relevant_working_bytes_index_sha256": "e185498222e048f099cff4c2b3fde51368e2de0dae5ba2c0ee4c731ad1a9de7e",
+    "porcelain_z_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "dirty_untracked_paths_preserved": 0,
+    "content_authority_files_equal_both_bases": 244,
+    "interface_files_bound": 59,
+    "adjacent_dependencies_bound": 7,
+    "secondary_local_main": "cb6f15fed984c89822a15bdbd4b5bb39f45a8c4b",
+    "original_source_baseline": "71f871ca6196025652a28484ea736d401109d78b",
+    "bundle_sha256": "f6d983f1ab2cbb7852e8583411eaecd2048fdb5b5da08099129d7e4ff471344c",
+    "procedure_commit": "17b97a2b",
+    "procedure_sha256": "2818e00686e1d930b75fa6fcc1a190c143a2d9d972b16032fd53774af414b9c5",
+    "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
+    "ownership_policy_sha256": {
+      "scripts/contexto_common_words_v72_data.py": "f1c6c3fb9fdbc6a0d6d85881aa04d7fd86df9159ef00ff6bac23ac2450a523ee",
+      "scripts/weather_and_landscape_v1_13_data.py": "01589eb1721c91544fbc94325c3e16cc2440ed1dada7ab8ceeb0886ad6476279",
+      "go-backend/internal/graph/service.go": "a9cc60e321e905293cee6fa49265281fc5db70a78c669c7ba66315933810002e"
+    },
+    "source_review_observation_preserved": {
+      "path": "/home/dobo/work/_temp/content__v1-35-familiar-nature-and-practical-objects/review/feature-working-final.json",
+      "sha256": "459705cf2754463b92ebb5599ca6f6ee398ed39bd831139d35479cbbe50b4404"
+    },
+    "earlier_source_and_feature_bindings_preserved": true,
+    "ownership_screen_reuse": "Every proposed key/sense/owner/node/connection remains covered by the completed main/feature/all42pool screen because all244authority files and prior pool bytes are exactly equal. No GUI/runtime sameness is inferred.",
+    "prior_final_pools_exact": 42,
+    "prior_protected_closures_exact": 21,
+    "feature_WIP_copied_or_executed": false,
+    "source_module_imported_or_executed": false,
+    "feature_mutations_by_content_task": 0,
+    "qualification": "Read-only temporal compatibility only. Later integration must freeze the actual latest designated feature version/WIP and run existing cascade/gates/playthroughs; this is not permanent baseline, zero-disturbance or safe-to-merge proof."
+  },
+  "game_impact_limits": {
+    "Cald sau Rece": "Typed guesses. Exact/projection/fuzzy competition, repeats/win identity, profiles and complete snapshots need later integration qualification.",
+    "Lanțul Cuvintelor": "Typed moves and clicked displayed labels submit text. Source truth does not approve routes or game difficulty; graph changes can alter choices and optimal paths.",
+    "Alchimie": "Owned-ID combinations; inventory/journal search filters normalized local display labels, not KG aliases. No recipe, projection or par approval.",
+    "Intrusul/Perechi/Conexiuni": "Active-board IDs; no board, uniquely strongest pair or fair partition is approved.",
+    "target_status": "No target, C3, salience, early opener, engine floor or playable round approval; graph/source counts do not establish these properties.",
+    "nature_and_object_scope": "Source identification and narrowly true selected-sense facts only. No clinical/treatment advice, fire-use instructions or universal cactus habitat/spine claims.",
+    "integration_limit": "No static safe-to-merge or zero-disturbance guarantee. Later explicit integration must use latest designated feature identity, existing cascade/authorities/gates and game-specific playthroughs. Source flags/salience0.5are not runtime quarantine; main landing remains separate."
+  },
+  "C3_numeric_only": {
+    "direct_predecessors_histogram": {
+      "0": 21,
+      "1": 1,
+      "2": 1,
+      "3": 1
+    },
+    "new_nodes": 24,
+    "below_numeric_floor": 24,
+    "numeric_passes": 0,
+    "count_scope": "Unique direct non-distractor predecessors; bidirectional traversal only when declared. Light-cluster peers yield Lumânare3/Brichetă2/Chibrit1; outgoing-only edges and projections do not add predecessors.",
+    "target_salience_recognition_opener_engine_approvals": 0
+  },
+  "owner_decisions": [
+    "2026-10-12..14: Unlanded source pools;preserve all packets and V1.14;HTTP exception declined.",
+    "2026-10-15: HCI targets common,concrete,Romanian-relevant;no obscure or abstract targets.",
+    "2026-10-16: V1.32/consolidation before next wave(done);latest feature WIP primary,main secondary.",
+    "2026-10-18: Continue with the content generation improved loop.",
+    "2026-10-18: Screen V1.34 vs latest feature/all pools; preserve holds; unlanded.",
+    "2026-10-19: Continue the loop; resumes pending V1.35 source-only web reviews."
+  ],
+  "formal_reviews": {
+    "whole_batch_reports": 2,
+    "whole_batch_rounds_per_reviewer": 1,
+    "fixed_names": [
+      "factual-v1-35",
+      "quality-v1-35"
+    ],
+    "original_factual_verdict_counts": {
+      "accept": 19,
+      "modify": 7
+    },
+    "original_quality_verdict_counts": {
+      "accept": 17,
+      "modify": 9
+    },
+    "fresh_dictionary_HTTP200": 108,
+    "fresh_dictionary_exact_heads_each": 27,
+    "global_minimum_start_gap_seconds": 2.150103,
+    "phase_timing": "Immutable reports preserve factual item windows and quality phased total time including root/dictionary-lane coordination waits. No false claim that the entire review is a step2 author300second window.",
+    "cache_provenance_is_not_fresh_review": true,
+    "post_review_edits": "Exactly the ten compatible signed field replacements and both-signed whole-item Șort drop. No new form, endpoint, claim or semantic approval from bookkeeping."
+  },
+  "holds": {
+    "count": 15,
+    "all_preserved": true,
+    "initial14_unchanged_after_formal_review": true,
+    "additional_signed_hold": "v135-sort",
+    "primary_classification_counts": {
+      "graph_qualification": 11,
+      "exact_source_or_attributed_morphology": 2,
+      "sense_or_owner": 2
+    },
+    "primary_classifications": {
+      "graph_qualification": [
+        "v135-paduche",
+        "v135-lipitoare",
+        "v135-ceara",
+        "v135-barometru",
+        "v135-canistra",
+        "v135-agrafa-de-hartie",
+        "v135-buldozer",
+        "v135-excavator",
+        "v135-betoniera",
+        "v135-maiou",
+        "v135-servetel"
+      ],
+      "exact_source_or_attributed_morphology": [
+        "v135-floarea-soarelui",
+        "v135-intrerupator"
+      ],
+      "sense_or_owner": [
+        "v135-halat",
+        "v135-sort"
+      ]
+    },
+    "classification_scope": "Retrospective primary reason grouping only; original complete reasons, secondary concerns, inactive families and existing owners remain authoritative and unchanged.",
+    "active_secondary_family_not_admitted": {
+      "v135-intrerupator": "Existing lighting-owner observations stay held; no broader switch family is admitted.",
+      "v135-halat": "Current Halat de baie owner remains; no broad replacement is admitted.",
+      "v135-sort": "Six observed ordinary forms/four associations remain held for unresolved shorts/apron normalization fairness."
+    }
+  },
+  "read_only_checks": {
+    "go_version": "go version go1.27.1 linux/amd64",
+    "scope": "Existing read-only native operators on unchanged serving content. No module application/importer dry-run or hypothetical integration qualification.",
+    "checks": {
+      "validate": {
+        "command": "go -C go-backend run ./cmd/cat-content validate --root ..",
+        "status": "PASS",
+        "returncode": 0,
+        "output_sha256": "1d2e645a4a6946dae65ac9fc067442df3e7a430fc9fee3039e41fd1ee3819976",
+        "go_version": "go version go1.27.1 linux/amd64",
+        "source_HEAD": "fe8181a64a72e2cc2f2f1296cab07f46f3dcde1d",
+        "source_applied": false,
+        "module_dry_run": false,
+        "check_scope": "Existing read-only native operator on unchanged serving content; not hypothetical source integration qualification."
+      },
+      "export": {
+        "command": "go -C go-backend run ./cmd/cat-content export --root .. --check",
+        "status": "PASS",
+        "returncode": 0,
+        "output_sha256": "4f715aebbcf4c517ca8a5686959372f4ab156e4e62f897e6e5e607156dc5c8fb",
+        "go_version": "go version go1.27.1 linux/amd64",
+        "source_HEAD": "fe8181a64a72e2cc2f2f1296cab07f46f3dcde1d",
+        "source_applied": false,
+        "module_dry_run": false,
+        "check_scope": "Existing read-only native operator on unchanged serving content; not hypothetical source integration qualification."
+      },
+      "ops": {
+        "command": "go -C go-backend run ./cmd/cat-content-ops check --root .. --check",
+        "status": "PASS",
+        "returncode": 0,
+        "output_sha256": "e7fd15f1a6e05c103f027645f7ceed93387d123ed27c882c83104a823575e311",
+        "go_version": "go version go1.27.1 linux/amd64",
+        "source_HEAD": "fe8181a64a72e2cc2f2f1296cab07f46f3dcde1d",
+        "source_applied": false,
+        "module_dry_run": false,
+        "check_scope": "Existing read-only native operator on unchanged serving content; not hypothetical source integration qualification."
+      },
+      "delta": {
+        "command": "go -C go-backend run ./cmd/cat-content-ops delta --root .. --baseline 71f871ca6196025652a28484ea736d401109d78b --text",
+        "status": "PASS",
+        "returncode": 0,
+        "output_sha256": "9d13e2777cc7417196430fbb3d917fb0559354bb8eacf35a2959aa8c7dec4381",
+        "go_version": "go version go1.27.1 linux/amd64",
+        "source_HEAD": "fe8181a64a72e2cc2f2f1296cab07f46f3dcde1d",
+        "source_applied": false,
+        "module_dry_run": false,
+        "check_scope": "Existing read-only native operator on unchanged serving content; not hypothetical source integration qualification."
+      }
+    }
+  },
+  "baseline_execution_history": {
+    "wave": "1.35",
+    "wave_base": "71f871ca6196025652a28484ea736d401109d78b",
+    "primary_application_current_head": "798f5a696ccbc685c5d2bf19ef29f2179b1815fb",
+    "native_go_tree_equality": {
+      "go-backend": {
+        "source_baseline_tree": "c791aa806f16129e31fed358e68f7a66ae779aa3",
+        "current_application_tree": "c791aa806f16129e31fed358e68f7a66ae779aa3",
+        "equal": true
+      },
+      "shared-go": {
+        "source_baseline_tree": "a693cb7507be248beaecf2fe4dcbd942b66026b5",
+        "current_application_tree": "a693cb7507be248beaecf2fe4dcbd942b66026b5",
+        "equal": true
+      }
+    },
+    "secondary_main": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+    "procedure_rev": "17b97a2b",
+    "go_version": "go1.27.1",
+    "checks": {
+      "validate": {
+        "name": "validate",
+        "command": "go -C go-backend run ./cmd/cat-content validate --root ..",
+        "returncode": 0,
+        "status": "PASS",
+        "first_error": null,
+        "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-35-familiar-nature-and-practical-objects",
+        "go_version": "go version go1.27.1 linux/amd64",
+        "baseline_commit": "71f871ca6196025652a28484ea736d401109d78b",
+        "output_sha256": "1d2e645a4a6946dae65ac9fc067442df3e7a430fc9fee3039e41fd1ee3819976",
+        "executed_commit": "71f871ca6196025652a28484ea736d401109d78b",
+        "worktree_clean_after": true,
+        "scope": "Required read-only content baseline; main is secondary. No source application, GUI build, full native suite or prospective integration is qualified."
+      },
+      "export": {
+        "name": "export",
+        "command": "go -C go-backend run ./cmd/cat-content export --root .. --check",
+        "returncode": 0,
+        "status": "PASS",
+        "first_error": null,
+        "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-35-familiar-nature-and-practical-objects",
+        "go_version": "go version go1.27.1 linux/amd64",
+        "baseline_commit": "71f871ca6196025652a28484ea736d401109d78b",
+        "output_sha256": "4f715aebbcf4c517ca8a5686959372f4ab156e4e62f897e6e5e607156dc5c8fb",
+        "executed_commit": "71f871ca6196025652a28484ea736d401109d78b",
+        "worktree_clean_after": true,
+        "scope": "Required read-only content baseline; main is secondary. No source application, GUI build, full native suite or prospective integration is qualified."
+      },
+      "ops": {
+        "name": "ops",
+        "command": "go -C go-backend run ./cmd/cat-content-ops check --root .. --check",
+        "returncode": 0,
+        "status": "PASS",
+        "first_error": null,
+        "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-35-familiar-nature-and-practical-objects",
+        "go_version": "go version go1.27.1 linux/amd64",
+        "baseline_commit": "71f871ca6196025652a28484ea736d401109d78b",
+        "output_sha256": "e7fd15f1a6e05c103f027645f7ceed93387d123ed27c882c83104a823575e311",
+        "executed_commit": "71f871ca6196025652a28484ea736d401109d78b",
+        "worktree_clean_after": true,
+        "scope": "Required read-only content baseline; main is secondary. No source application, GUI build, full native suite or prospective integration is qualified."
+      },
+      "rails": {
+        "name": "rails",
+        "command": "go -C go-backend run ./cmd/cat-content-rail all --root .. --check",
+        "returncode": 0,
+        "status": "PASS",
+        "first_error": null,
+        "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-35-familiar-nature-and-practical-objects",
+        "go_version": "go version go1.27.1 linux/amd64",
+        "baseline_commit": "71f871ca6196025652a28484ea736d401109d78b",
+        "output_sha256": "bea7844de79b62344740900b92f72a8dac18665d946333cb53ecc5f38d6273c7",
+        "executed_commit": "71f871ca6196025652a28484ea736d401109d78b",
+        "worktree_clean_after": true,
+        "scope": "Required read-only content baseline; main is secondary. No source application, GUI build, full native suite or prospective integration is qualified."
+      },
+      "tests": {
+        "name": "tests",
+        "command": "go -C go-backend test ./internal/contentrails/ ./internal/contentbuild/ ./internal/httpgolden/",
+        "returncode": 0,
+        "status": "PASS",
+        "first_error": null,
+        "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-35-familiar-nature-and-practical-objects",
+        "go_version": "go version go1.27.1 linux/amd64",
+        "baseline_commit": "71f871ca6196025652a28484ea736d401109d78b",
+        "output_sha256": "c7e72dd08f0e68e9cb1d807529561fa6891c267a9a3a032848831f951d01f524",
+        "executed_commit": "71f871ca6196025652a28484ea736d401109d78b",
+        "worktree_clean_after": true,
+        "scope": "Required read-only content baseline; main is secondary. No source application, GUI build, full native suite or prospective integration is qualified."
+      },
+      "delta": {
+        "name": "delta",
+        "command": "go -C go-backend run ./cmd/cat-content-ops delta --root .. --baseline 71f871ca6196025652a28484ea736d401109d78b --text",
+        "returncode": 0,
+        "status": "PASS",
+        "first_error": null,
+        "cwd": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v1-35-familiar-nature-and-practical-objects",
+        "go_version": "go version go1.27.1 linux/amd64",
+        "baseline_commit": "71f871ca6196025652a28484ea736d401109d78b",
+        "output_sha256": "9d13e2777cc7417196430fbb3d917fb0559354bb8eacf35a2959aa8c7dec4381",
+        "executed_commit": "71f871ca6196025652a28484ea736d401109d78b",
+        "worktree_clean_after": true,
+        "scope": "Required read-only content baseline; main is secondary. No source application, GUI build, full native suite or prospective integration is qualified."
+      },
+      "main-rails": {
+        "name": "main-rails",
+        "command": "go -C go-backend run ./cmd/cat-content-rail all --root .. --check",
+        "returncode": 0,
+        "status": "PASS",
+        "first_error": null,
+        "cwd": "/home/dobo/work/cat_de_roman_esti",
+        "go_version": "go version go1.27.1 linux/amd64",
+        "baseline_commit": "71f871ca6196025652a28484ea736d401109d78b",
+        "output_sha256": "bea7844de79b62344740900b92f72a8dac18665d946333cb53ecc5f38d6273c7",
+        "executed_commit": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+        "worktree_clean_after": true,
+        "scope": "Required read-only content baseline; main is secondary. No source application, GUI build, full native suite or prospective integration is qualified."
+      },
+      "main-tests": {
+        "name": "main-tests",
+        "command": "go -C go-backend test ./internal/contentrails/ ./internal/contentbuild/",
+        "returncode": 0,
+        "status": "PASS",
+        "first_error": null,
+        "cwd": "/home/dobo/work/cat_de_roman_esti",
+        "go_version": "go version go1.27.1 linux/amd64",
+        "baseline_commit": "71f871ca6196025652a28484ea736d401109d78b",
+        "output_sha256": "93e38a51eb991c42c79393c4de9200a9df082730e5c0311655a0ee8ecabcf63d",
+        "executed_commit": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+        "worktree_clean_after": true,
+        "scope": "Required read-only content baseline; main is secondary. No source application, GUI build, full native suite or prospective integration is qualified."
+      }
+    },
+    "main_content_gates_green": true,
+    "install_available_by_main_gates": true,
+    "owner_apply_permission": false,
+    "owner_landing_permission": false,
+    "feature_working_version_bound": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "relevant_working_bytes_index_sha256": "ef5ed5ce211ac598c84c5df863d83ef571ebef855e9c187a7347ffa04b473b2f",
+    "feature_dirty_paths_observed": 0,
+    "feature_WIP_copied_or_tested": false,
+    "scope": "Step0 content-only baseline on the owner-designated latest committed feature ref; actual application working bytes independently bound. No module application/dry-run, install cascade, source review, GUI runtime or landing."
+  },
+  "ticks_after_handoff": 8,
+  "commits_after_handoff": 8,
+  "step_ticks_after_handoff": {
+    "0": 1,
+    "1": 1,
+    "2": 3,
+    "3": 2,
+    "5": 1
+  },
+  "retrospective": {
+    "proposed": 40,
+    "screened_ideas": 32,
+    "pre_screen_holds": 8,
+    "author_researched_items": 32,
+    "author_research_ticks": 3,
+    "accepted": 25,
+    "held": 15,
+    "rejected": 0,
+    "installed": 0,
+    "author_budget_exceptions": 0,
+    "player_visible_delta": "0/0/0",
+    "top_primary_hold_counts": {
+      "graph_qualification": 11,
+      "exact_source_or_attributed_morphology": 2,
+      "sense_or_owner": 2
+    },
+    "resolved_automatic_approval_issue": "Initial automatic approval review rejected exact V1.35 scope. The owner answered the explicit V1.35 source-review question with Continue the loop; original paired-message proof resolved stale denials and both fresh reviews completed. No installation authorized."
+  },
+  "BLOCKED": [],
+  "NEEDS_OWNER": [],
+  "proposals_not_applied": [
+    {
+      "old_text": "label_ro must read true from source to target.",
+      "new_text": "Check the relation and caption together: a feeding association must not be encoded as is_a.",
+      "evidence": "Both original reviews signed Salamandră→insectă is_a→related_to at the same declared endpoints; no graph floor changed."
+    },
+    {
+      "old_text": "Never list two spellings that fold equal.",
+      "new_text": "Also document familiar competing senses that fold equal even when no current owner exists; hold a family whose selected interpretation remains unresolved.",
+      "evidence": "Both reviewers held all six unqualified Șort inputs because Șort and Șorț share resolver keys; an editorial exclusion cannot separate runtime interpretations."
+    },
+    {
+      "old_text": "Per item: DEX for sense/register and DOOM3 for forms.",
+      "new_text": "Separate qualified-compound sense evidence from exact-headword morphology and record the actual attributed noun/adjective tables used.",
+      "evidence": "Floarea-soarelui and Întrerupător remain held for exact-head/own-table evidence gaps; accepted Carte poștală binds carte and poștal agreement separately."
+    }
+  ],
+  "continuation": {
+    "next_step": "5-consolidation",
+    "action": "Update canonical pending-stock view from this exact handoff closure, preserving old layers and holds and refreshing actual latest feature-working/main comparisons.",
+    "canonical_branch": "docs/content-consolidation-v1-8-to-v1-32",
+    "canonical_base_commit": "dba3f9f8c883cea6649b2e62eba486ccbd167343",
+    "current_canonical_inventory": {
+      "accepted_pending_packages": 884,
+      "missing_normalized_keys": 4768,
+      "graph_claims": 3026
+    },
+    "this_wave_already_in_current_stock": false,
+    "new_discovery_before_stock_refresh": false,
+    "future_discovery": "Only within the standing owner-adopted continuous source loop and after a concrete high-value uncovered gap is established; pending stock is screened first. No quota padding or automatic integration.",
+    "integration_authorized": false
+  },
+  "preservation": {
+    "prior_protected_closures": 21,
+    "prior_distinct_final_pools": 42,
+    "V1_14": "Partial packet and declined HTTP-count exception preserved; never resume its partial install.",
+    "V1_7_and_retired_loop": "parked",
+    "historical_source_packets_deleted": 0,
+    "historical_raw_trees_pruned": 0,
+    "owned_transient_cleanup": "Only the hash-verified duplicate temporary review buffer was removed after all447files were retained in one bounded source setup; no workspace/build capture.",
+    "external_remote_ref_history": "Other GUI task advanced its remote ref after this wave began; this read-only context drift is recorded by factual-preflight.json and is not a new content gate. This content task performed no remote operation/ref mutation.",
+    "feature_mutations": 0,
+    "main_mutations": 0,
+    "remote_operations": 0,
+    "serving_pin_STATUS_changes": 0
+  }
+}

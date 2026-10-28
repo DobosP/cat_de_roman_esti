@@ -1,0 +1,858 @@
+{
+  "analyst": "quality-v1-32",
+  "task": "Read-only latest feature working-tree input/presentation/HTTP impact supplement",
+  "status": "COMPLETE_STATIC_WORKING_SOURCE_ANALYSIS; INTEGRATION_AND_GUI_RUNTIME_NOT_TESTED",
+  "observed_at_utc": "2026-10-16T16:40:52.245671+00:00",
+  "feature_binding": {
+    "worktree": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3",
+    "branch": "feat/gui-cat-m3",
+    "feature_HEAD": "e75518c1473be3a32ec2a0f2e1565764bbcf5d5b",
+    "recorded_main_reference": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+    "main_commits_not_in_HEAD": 0,
+    "HEAD_commits_not_in_main": 1,
+    "basis": "Working files including untracked screens,not HEAD alone. The dirty tree is owned ongoing GUI work and was preserved.",
+    "porcelain_command": "git status --porcelain=v1 --untracked-files=all",
+    "porcelain_sha256": "97d49f561993b6bc0564a84f58f558231f8f01e5a16ed2226089e2a5c9cb836e",
+    "dirty_entry_count": 98,
+    "tracked_dirty_entries": 52,
+    "untracked_entries": 46,
+    "dirty_entries": [
+      " M CORE_REQUESTS.md",
+      " M docs/STATUS.md",
+      " M docs/adr/README.md",
+      " M docs/execplans/s1-cat.md",
+      " M docs/tracked-markdown.json",
+      " M frontend/e2e/games.mjs",
+      " M frontend/e2e/gui-m0-home-parity.spec.mjs",
+      " M frontend/e2e/gui-m2-pilot-journeys.spec.mjs",
+      " M frontend/package-lock.json",
+      " M frontend/package.json",
+      " M frontend/scripts/check-bundle-budget.mjs",
+      " M frontend/src/App.tsx",
+      " M frontend/src/components/CspElements.tsx",
+      " M frontend/src/components/CspStyle.ts",
+      " M frontend/src/components/GameHelp.tsx",
+      " M frontend/src/components/GameOptions.tsx",
+      " M frontend/src/components/GameShell.tsx",
+      " M frontend/src/gameHelp.d.mts",
+      " M frontend/src/gameHelp.mjs",
+      " M frontend/src/hooks/useDailyIntent.ts",
+      " M frontend/src/hooks/useSavedGameResume.ts",
+      " M frontend/src/main.tsx",
+      " M frontend/src/routes.ts",
+      " M frontend/src/screens/Conexiuni.tsx",
+      " M frontend/src/screens/Home.tsx",
+      " M frontend/src/screens/Intrusul.tsx",
+      " M frontend/src/screens/Perechi.tsx",
+      " M frontend/src/styles/arcade.css",
+      " M frontend/tests/bundle-budget.test.mjs",
+      " M frontend/tests/fixtures/gui-hook-runtime-bootstrap.json",
+      " M frontend/tests/game-help.test.mjs",
+      " M frontend/tests/gui-route-budgets.test.mjs",
+      " M frontend/tests/gui-style-audit.test.mjs",
+      " M frontend/tests/gui-style-plan.test.mjs",
+      " M frontend/tests/v1-daily-intent.test.mjs",
+      " D frontend/vendor/roedu-ui-1.0.10.tgz",
+      " D frontend/vendor/roedu-ui-1.0.10.tgz.sha256",
+      " D frontend/vendor/roedu-web-kit-0.1.10.tgz",
+      " D frontend/vendor/roedu-web-kit-0.1.10.tgz.sha256",
+      " M frontend/vite.config.ts",
+      " M go-backend/go.mod",
+      " M go-backend/internal/httpapi/managed_delivery.go",
+      " M go-backend/internal/httpapi/managed_delivery_test.go",
+      " M scripts/gui-full-browser.mjs",
+      " M scripts/gui-hook-runtime.mjs",
+      " M scripts/gui-native-reuse.mjs",
+      " M scripts/gui-route-budgets.mjs",
+      " M scripts/gui-style-audit.mjs",
+      " M scripts/gui-toolchain-probe.mjs",
+      " M tools/gui-bootstrap-webkit/package-lock.json",
+      " M tools/gui-bootstrap-webkit/package.json",
+      " M versions.lock.json",
+      "?? docs/adr/0202-m3-remaining-preact-screens.md",
+      "?? docs/reviews/gui-m3/challenge-style-checks.json",
+      "?? docs/reviews/gui-m3/help-controls-checks.json",
+      "?? docs/reviews/gui-m3/help-controls-review.json",
+      "?? docs/reviews/gui-m3/initial-split-checks.json",
+      "?? docs/reviews/gui-m3/initial-split-review.json",
+      "?? docs/reviews/gui-m3/source-checks.json",
+      "?? docs/reviews/gui-m3/source-review.json",
+      "?? docs/reviews/gui-m3/v111-adoption-review.json",
+      "?? docs/reviews/gui-m3/v111-source-checks.json",
+      "?? frontend/src/alchimieMode.ts",
+      "?? frontend/src/alchimieSavedMode.ts",
+      "?? frontend/src/components/AlchimieModes.tsx",
+      "?? frontend/src/gameHelp/alchimie.d.mts",
+      "?? frontend/src/gameHelp/alchimie.mjs",
+      "?? frontend/src/gameHelp/conexiuni.d.mts",
+      "?? frontend/src/gameHelp/conexiuni.mjs",
+      "?? frontend/src/gameHelp/contexto.d.mts",
+      "?? frontend/src/gameHelp/contexto.mjs",
+      "?? frontend/src/gameHelp/intrusul.d.mts",
+      "?? frontend/src/gameHelp/intrusul.mjs",
+      "?? frontend/src/gameHelp/lant.d.mts",
+      "?? frontend/src/gameHelp/lant.mjs",
+      "?? frontend/src/gameHelp/perechi.d.mts",
+      "?? frontend/src/gameHelp/perechi.mjs",
+      "?? frontend/src/homeCardBlur.ts",
+      "?? frontend/src/hooks/useElementMotion.ts",
+      "?? frontend/src/hooks/useSignalState.ts",
+      "?? frontend/src/screenLocation.ts",
+      "?? frontend/src/screens/Alchimie.tsx",
+      "?? frontend/src/screens/AlchimieChallenge.tsx",
+      "?? frontend/src/screens/AlchimieExplore.tsx",
+      "?? frontend/src/screens/CaldRece.tsx",
+      "?? frontend/src/screens/Lant.tsx",
+      "?? frontend/src/screens/Ranking.tsx",
+      "?? frontend/src/styles/alchimie-explore.css",
+      "?? frontend/src/styles/alchimie.css",
+      "?? frontend/src/styles/contexto.css",
+      "?? frontend/src/styles/lant.css",
+      "?? frontend/src/styles/ranking.css",
+      "?? frontend/tests/alchimie-mode.test.mjs",
+      "?? frontend/tests/home-card-blur.test.mjs",
+      "?? frontend/vendor/roedu-ui-1.0.11.tgz",
+      "?? frontend/vendor/roedu-ui-1.0.11.tgz.sha256",
+      "?? frontend/vendor/roedu-web-kit-0.1.11.tgz",
+      "?? frontend/vendor/roedu-web-kit-0.1.11.tgz.sha256"
+    ],
+    "examined_files_and_status_stable_during_sealing": true
+  },
+  "scope": {
+    "read_only": true,
+    "repository_or_GUI_edits": 0,
+    "tests": 0,
+    "GUI_or_browser_execution": 0,
+    "HTTP_calls": 0,
+    "source_approvals": 0,
+    "formal_review_used": false,
+    "importer_or_apply_or_dryrun": 0,
+    "reset_clean_stage_commit": 0,
+    "remote_operations": 0,
+    "new_wave": false,
+    "safe_to_merge_or_release_established": false
+  },
+  "prior_main_impact_report": {
+    "path": "/home/dobo/work/_temp/content__v1-32-familiar-water-weather-and-shore/consolidation-game-impact.json",
+    "sha256": "766e98a9d42991f0f08baa260249c44904b9521e1ccedc89a54872d0ce6566c6",
+    "examined_files": 22,
+    "all_those_working_files_equal_prior_main_bytes": true,
+    "all_those_feature_HEAD_files_equal_prior_main_bytes": true,
+    "core_paths": [
+      "go-backend/internal/alchimie/projection.go",
+      "go-backend/internal/alchimie/service.go",
+      "go-backend/internal/alchimie_explore/service.go",
+      "go-backend/internal/catalog/catalog.go",
+      "go-backend/internal/conexiuni/service.go",
+      "go-backend/internal/content/bundled.json",
+      "go-backend/internal/content/content.go",
+      "go-backend/internal/contentbuild/build.go",
+      "go-backend/internal/contentbuild/catalogs.go",
+      "go-backend/internal/contentbuild/graph.go",
+      "go-backend/internal/contentbuild/world.go",
+      "go-backend/internal/contentops/critique.go",
+      "go-backend/internal/contentops/derive.go",
+      "go-backend/internal/contentops/rank.go",
+      "go-backend/internal/contexto/service.go",
+      "go-backend/internal/graph/service.go",
+      "go-backend/internal/httpapi/body.go",
+      "go-backend/internal/intrusul/service.go",
+      "go-backend/internal/lant/service.go",
+      "go-backend/internal/pack/pack.go",
+      "go-backend/internal/perechi/service.go",
+      "scripts/apply_common_words_v24.py"
+    ],
+    "bundle_sha256": "f6d983f1ab2cbb7852e8583411eaecd2048fdb5b5da08099129d7e4ff471344c",
+    "meaning": "The prior graph/input/ranking/snapshot mechanism conclusions remain supported by identical code and content. It was still incomplete as a description of latest product work because it did not bind the dirty M3 screens/routing."
+  },
+  "material_findings": [
+    {
+      "id": "latest_product_basis_is_working_feature",
+      "finding": "Latest GUI work is feat/gui-cat-m3 at the stated HEAD plus substantial modified and untracked sources. Main alone or feature HEAD alone omits the new screens. Preserve separate content/release and active-development baselines.",
+      "evidence": [
+        "routes",
+        "app",
+        "app_switch",
+        "document_delivery"
+      ]
+    },
+    {
+      "id": "backend_conclusions_not_reversed",
+      "finding": "All 22 files hashed by the prior game-impact report are identical in feature working tree and HEAD to the main analysis,including the embedded bundle. The API helper files and request-body handlers are also unchanged. No new per-node admission flag, dictionary-input API, selector or graph quarantine was found in these current paths. This is static equivalence,not an integrated regression test.",
+      "evidence": [
+        "http_transport",
+        "server_bodies",
+        "server_world_body"
+      ]
+    },
+    {
+      "id": "m3_routing_changes_are_real_uncommitted_source",
+      "finding": "Dirty App/routes and Go document delivery intend all-game Preact routing rather than the old four-route pilot/frozen-document split. Cald/Lanț/Alchimie screen files are untracked working source. Their presence and intended routing do not establish a current built, admitted or deployed GUI.",
+      "evidence": [
+        "routes",
+        "app",
+        "app_switch",
+        "document_delivery"
+      ]
+    },
+    {
+      "id": "typed_gameplay_and_local_search_are_different",
+      "finding": "Cald posts text and correction token. Lanț accepts both clicked relation-labelled choices and typed next-concept text. Alchimie has search fields,so saying it has no typing at all would be inaccurate; those fields locally filter owned display labels/results/parent labels and still combine IDs. Adding KG aliases alone does not feed these local searches or create recipes.",
+      "evidence": [
+        "cald_submit",
+        "cald_confirm",
+        "lant_submit",
+        "lant_controls",
+        "lant_text",
+        "alchemy_filter",
+        "alchemy_search_control",
+        "explore_filter",
+        "alchemy_combine",
+        "explore_combine"
+      ]
+    },
+    {
+      "id": "no_new_integration_safety_grant",
+      "finding": "The first proposed ordinary-input scope and graph-qualification caution remain conditional. Identical server code/bundle does not qualify dirty GUI behavior,alias search UX,content integration or release. Do not import content into or reset/stage/clean this owner’s dirty GUI checkout.",
+      "evidence": [
+        "http_transport",
+        "alchemy_filter",
+        "explore_filter",
+        "server_bodies"
+      ]
+    }
+  ],
+  "six_game_working_matrix": [
+    {
+      "game": "Cald sau Rece",
+      "working_presentation": "Untracked CaldRece screen: typed guesses, suggestions and explicit server correction confirmation.",
+      "HTTP_payload": "text, optional confirm",
+      "change_to_previous_conclusion": "Direct free-text input conclusion confirmed; add current working-screen provenance,not merely server-code provenance.",
+      "evidence": [
+        "cald_submit",
+        "cald_control",
+        "cald_confirm",
+        "cald_api"
+      ]
+    },
+    {
+      "game": "Lanțul Cuvintelor",
+      "working_presentation": "Untracked Lant screen: clickable choices show relations and typed next-concept field remains available. Clicks send the choice label as text.",
+      "HTTP_payload": "text",
+      "change_to_previous_conclusion": "Direct typed input conclusion confirmed; document click/typing hybrid and its server label resolution.",
+      "evidence": [
+        "lant_submit",
+        "lant_controls",
+        "lant_text",
+        "lant_api"
+      ]
+    },
+    {
+      "game": "Alchimie",
+      "working_presentation": "Untracked container chooses challenge/exploration; both use selected owned-ID tiles. Challenge/collection/journal have local label-search fields.",
+      "HTTP_payload": "a,b IDs; exploration has separate endpoint",
+      "change_to_previous_conclusion": "ID-based combinations and explicit world/recipe scope confirmed. Clarify that local search is text entry but does not consume KG aliases/full paradigms.",
+      "evidence": [
+        "alchemy_modes",
+        "alchemy_mode_rule",
+        "alchemy_combine",
+        "alchemy_filter",
+        "alchemy_search_control",
+        "alchemy_api",
+        "explore_combine",
+        "explore_filter",
+        "explore_controls",
+        "explore_api"
+      ]
+    },
+    {
+      "game": "Intrusul",
+      "working_presentation": "Modified existing screen selects a board tile and submits its ID.",
+      "HTTP_payload": "id",
+      "change_to_previous_conclusion": "ID submission conclusion confirmed; no new server alias-guess path.",
+      "evidence": [
+        "intrusul",
+        "intrusul_api"
+      ]
+    },
+    {
+      "game": "Perechi",
+      "working_presentation": "Modified existing screen selects two owned board tiles by ID.",
+      "HTTP_payload": "ids[2]",
+      "change_to_previous_conclusion": "ID matching conclusion confirmed; aliases do not create a pair.",
+      "evidence": [
+        "perechi",
+        "perechi_api"
+      ]
+    },
+    {
+      "game": "Conexiuni",
+      "working_presentation": "Modified existing screen selects four board tiles by ID.",
+      "HTTP_payload": "ids[4]",
+      "change_to_previous_conclusion": "ID grouping conclusion confirmed; aliases do not create a group.",
+      "evidence": [
+        "conexiuni",
+        "conexiuni_api"
+      ]
+    }
+  ],
+  "recommended_assessment_and_prompt_changes": [
+    {
+      "change": "Correct the latest-work baseline",
+      "old": "Latest local main is the only product basis to inspect.",
+      "proposed": "Record latest local main as one explicit content/release comparison and also inspect the owner-designated active feature HEAD plus dirty/untracked working files for latest input/presentation behavior. Bind all examined bytes and preserve owned work.",
+      "reason": "Feature HEAD is one commit beyond recorded main,and substantial M3 sources are uncommitted/untracked."
+    },
+    {
+      "change": "Name the actual interaction type",
+      "old": "Four games use IDs,therefore imply they contain no relevant typing.",
+      "proposed": "Distinguish server free-text guesses/moves,clicked choices serialized as text,local display-label filtering and ID-based combinations/board selections. Cald/Lanț accept dictionary-resolved text; Alchimie searches display labels locally and still combines IDs.",
+      "reason": "Latest working Alchimie screens contain search fields; KG aliases are not included in those filters. Lanț is a click/typing hybrid."
+    },
+    {
+      "change": "Keep integration recommendation conditional",
+      "old": "Infer GUI or integration qualification from unchanged main checks or feature code presence.",
+      "proposed": "Keep reviewed source stock uninstalled pending separate authorization and current integration qualification; assess actual interactions against the chosen latest GUI baseline through its existing authorized workflow. Do not claim a feature build/test/release or safe merge from this static audit.",
+      "reason": "No feature tests,GUI runs,HTTP calls,content integration or deployment were performed."
+    }
+  ],
+  "evidence": {
+    "routes": {
+      "file": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3/frontend/src/routes.ts",
+      "line": 1,
+      "end_line": 15,
+      "observation": "Working M3 route table includes all six games plus home/ranking; differs from committed pilot route table."
+    },
+    "app": {
+      "file": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3/frontend/src/App.tsx",
+      "line": 24,
+      "end_line": 49,
+      "observation": "Working shell lazy-loads all six game screens, captures frame URL and canonicalizes/falls back document routes."
+    },
+    "app_switch": {
+      "file": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3/frontend/src/App.tsx",
+      "line": 82,
+      "end_line": 109,
+      "observation": "Working App mounts new Alchimie/Cald/Lanț screens as well as the three previously ported board games."
+    },
+    "document_delivery": {
+      "file": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3/go-backend/internal/httpapi/managed_delivery.go",
+      "line": 15,
+      "end_line": 25,
+      "observation": "Dirty Go delivery returns the current ui for document requests instead of choosing frozen documents for unported routes. This is source behavior,not proof of a built/admitted/deployed bundle."
+    },
+    "http_transport": {
+      "file": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3/frontend/src/api/client.ts",
+      "line": 8,
+      "end_line": 37,
+      "observation": "Game API helpers use createApiClient, same-origin post and CSRF header; this file is byte-identical to feature HEAD/main. No transport was executed."
+    },
+    "cald_submit": {
+      "file": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3/frontend/src/screens/CaldRece.tsx",
+      "line": 484,
+      "end_line": 515,
+      "observation": "Untracked screen posts trimmed typed text plus optional server confirmation token and adopts server suggestions/correction metadata."
+    },
+    "cald_control": {
+      "file": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3/frontend/src/screens/CaldRece.tsx",
+      "line": 795,
+      "end_line": 831,
+      "observation": "Typed guess form and rank guide; this is not a tile-ID-only UI."
+    },
+    "cald_confirm": {
+      "file": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3/frontend/src/screens/CaldRece.tsx",
+      "line": 986,
+      "end_line": 1018,
+      "observation": "Suggestion buttons populate text; explicit correction confirmation echoes server token via handleGuess."
+    },
+    "cald_api": {
+      "file": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3/frontend/src/api/contexto.ts",
+      "line": 192,
+      "end_line": 205,
+      "observation": "Guess request sends {text,confirm?}; unchanged API contract."
+    },
+    "lant_submit": {
+      "file": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3/frontend/src/screens/Lant.tsx",
+      "line": 486,
+      "end_line": 505,
+      "observation": "Untracked screen submits either clicked choice.label or typed text through moveLant; hints/errors/choices remain server-driven."
+    },
+    "lant_controls": {
+      "file": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3/frontend/src/screens/Lant.tsx",
+      "line": 734,
+      "end_line": 751,
+      "observation": "Visible relation-labelled choice buttons call submit(choice); clickable path choices coexist with typed input."
+    },
+    "lant_text": {
+      "file": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3/frontend/src/screens/Lant.tsx",
+      "line": 829,
+      "end_line": 852,
+      "observation": "Text field and Enter/submit remain available for alternative next concepts."
+    },
+    "lant_api": {
+      "file": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3/frontend/src/api/lant.ts",
+      "line": 133,
+      "end_line": 138,
+      "observation": "Move sends {text}; unchanged API contract."
+    },
+    "alchemy_modes": {
+      "file": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3/frontend/src/screens/Alchimie.tsx",
+      "line": 11,
+      "end_line": 25,
+      "observation": "Untracked container chooses separate challenge/exploration screens from captured URL and saved challenge fallback."
+    },
+    "alchemy_mode_rule": {
+      "file": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3/frontend/src/alchimieMode.ts",
+      "line": 1,
+      "end_line": 6,
+      "observation": "Explore/challenges query and saved-round precedence select the mode; default is exploration absent a challenge cue."
+    },
+    "alchemy_combine": {
+      "file": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3/frontend/src/screens/AlchimieChallenge.tsx",
+      "line": 400,
+      "end_line": 424,
+      "observation": "Challenge combine verifies owned nondepleted IDs and posts selected a,b IDs."
+    },
+    "alchemy_filter": {
+      "file": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3/frontend/src/screens/AlchimieChallenge.tsx",
+      "line": 618,
+      "end_line": 630,
+      "observation": "Typed inventory search locally normalizes and substring-matches item.label; no KG alias lookup or full-paradigm morphology here."
+    },
+    "alchemy_search_control": {
+      "file": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3/frontend/src/screens/AlchimieChallenge.tsx",
+      "line": 879,
+      "end_line": 895,
+      "observation": "Challenge includes a search text input; its existence must not be confused with server free-text combine semantics."
+    },
+    "alchemy_api": {
+      "file": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3/frontend/src/api/alchimie.ts",
+      "line": 142,
+      "end_line": 150,
+      "observation": "Challenge combine posts {a,b}; unchanged request contract."
+    },
+    "explore_combine": {
+      "file": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3/frontend/src/screens/AlchimieExplore.tsx",
+      "line": 200,
+      "end_line": 237,
+      "observation": "Exploration selects/crafts active owned item IDs through explorationApi.combine; selection/drag-drop is not dictionary text resolution."
+    },
+    "explore_filter": {
+      "file": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3/frontend/src/screens/AlchimieExplore.tsx",
+      "line": 262,
+      "end_line": 275,
+      "observation": "Collection search filters item.label; recipe journal search filters result/parent labels. Neither reads KG aliases."
+    },
+    "explore_controls": {
+      "file": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3/frontend/src/screens/AlchimieExplore.tsx",
+      "line": 340,
+      "end_line": 361,
+      "observation": "Search plus clickable/draggable item-ID tiles in the working exploration screen."
+    },
+    "explore_api": {
+      "file": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3/frontend/src/api/alchimieExplore.ts",
+      "line": 52,
+      "end_line": 63,
+      "observation": "Exploration combine posts {a,b} to its separate /api/alchimie/explore contract."
+    },
+    "intrusul": {
+      "file": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3/frontend/src/screens/Intrusul.tsx",
+      "line": 321,
+      "end_line": 328,
+      "observation": "Current screen submits the selected board node ID."
+    },
+    "intrusul_api": {
+      "file": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3/frontend/src/api/intrusul.ts",
+      "line": 88,
+      "end_line": 99,
+      "observation": "Guess serializes {id:selected}."
+    },
+    "perechi": {
+      "file": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3/frontend/src/screens/Perechi.tsx",
+      "line": 447,
+      "end_line": 462,
+      "observation": "Two selected tile IDs form the pair passed to submitPair/match."
+    },
+    "perechi_api": {
+      "file": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3/frontend/src/api/perechi.ts",
+      "line": 86,
+      "end_line": 101,
+      "observation": "Match validates two unique IDs and posts {ids:clean}."
+    },
+    "conexiuni": {
+      "file": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3/frontend/src/screens/Conexiuni.tsx",
+      "line": 426,
+      "end_line": 434,
+      "observation": "Four selected IDs are copied and submitted to the authoritative API."
+    },
+    "conexiuni_api": {
+      "file": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3/frontend/src/api/conexiuni.ts",
+      "line": 98,
+      "end_line": 109,
+      "observation": "Guess validates four distinct tile IDs and posts {ids:[...ids]}."
+    },
+    "server_bodies": {
+      "file": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3/go-backend/internal/httpapi/arcade.go",
+      "line": 128,
+      "end_line": 171,
+      "observation": "Working server still dispatches pair IDs, four IDs, Cald text/confirm, Lanț text, Alchimie a/b; unchanged from recorded main."
+    },
+    "server_world_body": {
+      "file": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3/go-backend/internal/httpapi/arcade.go",
+      "line": 226,
+      "end_line": 230,
+      "observation": "Exploration combine still receives a/b through pairBody; unchanged from recorded main."
+    }
+  },
+  "examined_working_file_bindings": {
+    "frontend/src/App.tsx": {
+      "working_sha256": "7597a740e947c1eb7cd6986bde24951461458dcb6be2c568df3928c34fc69e9d",
+      "git_status": " M",
+      "untracked": false,
+      "working_equals_feature_HEAD": false,
+      "working_equals_recorded_main": false,
+      "feature_HEAD_sha256": "8abc49d5cea78878d69db066818c5cd9cf917ad0201d8dae71e49667f0fe5127",
+      "recorded_main_sha256": "8abc49d5cea78878d69db066818c5cd9cf917ad0201d8dae71e49667f0fe5127"
+    },
+    "frontend/src/alchimieMode.ts": {
+      "working_sha256": "a05941ae664d191ab3128e1aaa0154657175e1467f11de8e9f4e0bc4fca7529a",
+      "git_status": "??",
+      "untracked": true,
+      "feature_HEAD_source": null,
+      "basis": "untracked working source;absent from HEAD"
+    },
+    "frontend/src/api/alchimie.ts": {
+      "working_sha256": "bc2ec047be8e4365da9c6c77eda70dc0b4a4c9d620e4d9d87ae412704325d6f2",
+      "git_status": "  ",
+      "untracked": false,
+      "working_equals_feature_HEAD": true,
+      "working_equals_recorded_main": true
+    },
+    "frontend/src/api/alchimieExplore.ts": {
+      "working_sha256": "15a0a1208318968d2f4b3888167f2bdd71ac9247954c0916b8249134055cc55e",
+      "git_status": "  ",
+      "untracked": false,
+      "working_equals_feature_HEAD": true,
+      "working_equals_recorded_main": true
+    },
+    "frontend/src/api/client.ts": {
+      "working_sha256": "687eb99cd66b4289152070d846fcde692baf679bdba441ae97d9013854be5454",
+      "git_status": "  ",
+      "untracked": false,
+      "working_equals_feature_HEAD": true,
+      "working_equals_recorded_main": true
+    },
+    "frontend/src/api/conexiuni.ts": {
+      "working_sha256": "02f9e3f7fc8d89f6fdb83a9da2955b31adc6912b08174ed934c778f97bdc3c77",
+      "git_status": "  ",
+      "untracked": false,
+      "working_equals_feature_HEAD": true,
+      "working_equals_recorded_main": true
+    },
+    "frontend/src/api/contexto.ts": {
+      "working_sha256": "74dad84ac2c5bdde821f5117c39fb257daa030768c248c7e506095d00537744a",
+      "git_status": "  ",
+      "untracked": false,
+      "working_equals_feature_HEAD": true,
+      "working_equals_recorded_main": true
+    },
+    "frontend/src/api/intrusul.ts": {
+      "working_sha256": "267afeae261fa1c10cbd3be7b3158f557aef9dda6ab701125dc14c67ad89c287",
+      "git_status": "  ",
+      "untracked": false,
+      "working_equals_feature_HEAD": true,
+      "working_equals_recorded_main": true
+    },
+    "frontend/src/api/lant.ts": {
+      "working_sha256": "c5441acbf209193f6b8bf9903a04ea3971f8d4e569ed8ff019ebbf6dfee48f1a",
+      "git_status": "  ",
+      "untracked": false,
+      "working_equals_feature_HEAD": true,
+      "working_equals_recorded_main": true
+    },
+    "frontend/src/api/perechi.ts": {
+      "working_sha256": "07d90f3ab8286a3098105ec4b96f651108a027b36ac795aff1a53f091c9628c8",
+      "git_status": "  ",
+      "untracked": false,
+      "working_equals_feature_HEAD": true,
+      "working_equals_recorded_main": true
+    },
+    "frontend/src/components/AlchimieModes.tsx": {
+      "working_sha256": "14c8b63dfa904a545442b416fb0298b1e053e31db98cd16013b02b191b49b0e1",
+      "git_status": "??",
+      "untracked": true,
+      "feature_HEAD_source": null,
+      "basis": "untracked working source;absent from HEAD"
+    },
+    "frontend/src/gameHelp/alchimie.mjs": {
+      "working_sha256": "7a8c5c2c6cfd7c9627419bf1c25d8494595215404895ef7a2f07162664736f68",
+      "git_status": "??",
+      "untracked": true,
+      "feature_HEAD_source": null,
+      "basis": "untracked working source;absent from HEAD"
+    },
+    "frontend/src/gameHelp/contexto.mjs": {
+      "working_sha256": "0c2aae119e955a3ae03fa2f2d2bb8fcf8c6c7769f474f56bd83a7daa3ff81caa",
+      "git_status": "??",
+      "untracked": true,
+      "feature_HEAD_source": null,
+      "basis": "untracked working source;absent from HEAD"
+    },
+    "frontend/src/gameHelp/lant.mjs": {
+      "working_sha256": "427f37b9fb3b5c8103a4fb546ec5ed044cb737f68d3c23ad01d110619325bd45",
+      "git_status": "??",
+      "untracked": true,
+      "feature_HEAD_source": null,
+      "basis": "untracked working source;absent from HEAD"
+    },
+    "frontend/src/main.tsx": {
+      "working_sha256": "2d9cc2132c4f63156920239b670259b29352a8e1c01db98cec9d8eadc31c248f",
+      "git_status": " M",
+      "untracked": false,
+      "working_equals_feature_HEAD": false,
+      "working_equals_recorded_main": false,
+      "feature_HEAD_sha256": "d02e8a2682aac2aad4bf33cfb0844a2cd6958730c72c8b05da3fb162d287f50d",
+      "recorded_main_sha256": "d02e8a2682aac2aad4bf33cfb0844a2cd6958730c72c8b05da3fb162d287f50d"
+    },
+    "frontend/src/routes.ts": {
+      "working_sha256": "4334df64a0490fef67dbdf4c64c333e315a495ce9cdc3045921e8beed435606c",
+      "git_status": " M",
+      "untracked": false,
+      "working_equals_feature_HEAD": false,
+      "working_equals_recorded_main": false,
+      "feature_HEAD_sha256": "6ef49a85773a91198d296a841b25c3c0ceb6a6bcfffb12e147e242504bc6fede",
+      "recorded_main_sha256": "6ef49a85773a91198d296a841b25c3c0ceb6a6bcfffb12e147e242504bc6fede"
+    },
+    "frontend/src/screens/Alchimie.tsx": {
+      "working_sha256": "ab882b0ea1cc8b20ea2beede93131fb65a011d362020f33fc5dce00bc7f7cd53",
+      "git_status": "??",
+      "untracked": true,
+      "feature_HEAD_source": null,
+      "basis": "untracked working source;absent from HEAD"
+    },
+    "frontend/src/screens/AlchimieChallenge.tsx": {
+      "working_sha256": "ee880238857198b864737bcfcce44751edae904f6333cc35ea50c05fffae98fb",
+      "git_status": "??",
+      "untracked": true,
+      "feature_HEAD_source": null,
+      "basis": "untracked working source;absent from HEAD"
+    },
+    "frontend/src/screens/AlchimieExplore.tsx": {
+      "working_sha256": "44dcf6dd0ac6cd7657d3cdf2932588acc3118cee99eebe585c2cd71bef3c9230",
+      "git_status": "??",
+      "untracked": true,
+      "feature_HEAD_source": null,
+      "basis": "untracked working source;absent from HEAD"
+    },
+    "frontend/src/screens/CaldRece.tsx": {
+      "working_sha256": "bc0101face781cf8e068e863ce8d4724d089ff81f9c5cd28643b1d1573dc4421",
+      "git_status": "??",
+      "untracked": true,
+      "feature_HEAD_source": null,
+      "basis": "untracked working source;absent from HEAD"
+    },
+    "frontend/src/screens/Conexiuni.tsx": {
+      "working_sha256": "242eb2cf6c0ea2b57c92d36bd2e6cef2e8eb393d2cbe1d855b71c077cd878a24",
+      "git_status": " M",
+      "untracked": false,
+      "working_equals_feature_HEAD": false,
+      "working_equals_recorded_main": false,
+      "feature_HEAD_sha256": "dc98a5db1417d447f2476767d1c7e27962bd909aa714a6ea3a10b43d1baa8f20",
+      "recorded_main_sha256": "dc98a5db1417d447f2476767d1c7e27962bd909aa714a6ea3a10b43d1baa8f20"
+    },
+    "frontend/src/screens/Intrusul.tsx": {
+      "working_sha256": "7a4552d7df9fef8e3dc64b276a056ce7f478badecce475734a190ae45b96b728",
+      "git_status": " M",
+      "untracked": false,
+      "working_equals_feature_HEAD": false,
+      "working_equals_recorded_main": false,
+      "feature_HEAD_sha256": "91eeeb85bfbbde90adba4b2d2937599389c2f15fba9c52f2a2f72115dd5f30be",
+      "recorded_main_sha256": "91eeeb85bfbbde90adba4b2d2937599389c2f15fba9c52f2a2f72115dd5f30be"
+    },
+    "frontend/src/screens/Lant.tsx": {
+      "working_sha256": "5781742302077075a8363bb8e58e3a18ff91168df3abcf788d85ea79b6e4df1d",
+      "git_status": "??",
+      "untracked": true,
+      "feature_HEAD_source": null,
+      "basis": "untracked working source;absent from HEAD"
+    },
+    "frontend/src/screens/Perechi.tsx": {
+      "working_sha256": "e11d60f65238649b7977883bf40e5e1b8e9aea0b5d5fe8459f73fe4a79355225",
+      "git_status": " M",
+      "untracked": false,
+      "working_equals_feature_HEAD": false,
+      "working_equals_recorded_main": false,
+      "feature_HEAD_sha256": "893e3923e29074c4636dcf5f97977271f057c6644fdc5ef61538cb942538fa75",
+      "recorded_main_sha256": "893e3923e29074c4636dcf5f97977271f057c6644fdc5ef61538cb942538fa75"
+    },
+    "go-backend/internal/alchimie/projection.go": {
+      "working_sha256": "c45a46c4836b58b572f4fec15dbc72a355ec3b8a35a0bee6a37672104a8dab86",
+      "git_status": "  ",
+      "untracked": false,
+      "working_equals_feature_HEAD": true,
+      "working_equals_recorded_main": true
+    },
+    "go-backend/internal/alchimie/service.go": {
+      "working_sha256": "f63e805e02aecb58aa6ac4f0a64f6e5838b6d14cb2b001135f087db019545cae",
+      "git_status": "  ",
+      "untracked": false,
+      "working_equals_feature_HEAD": true,
+      "working_equals_recorded_main": true
+    },
+    "go-backend/internal/alchimie_explore/service.go": {
+      "working_sha256": "4b53343d07d332fb9f935947b84f3379481bcbf78660211e53ac1357ec9ec0ce",
+      "git_status": "  ",
+      "untracked": false,
+      "working_equals_feature_HEAD": true,
+      "working_equals_recorded_main": true
+    },
+    "go-backend/internal/catalog/catalog.go": {
+      "working_sha256": "b930bb8cdd1ecfa2a1ace7e8a0a405d1317ca67706460745d88f0c748418c43c",
+      "git_status": "  ",
+      "untracked": false,
+      "working_equals_feature_HEAD": true,
+      "working_equals_recorded_main": true
+    },
+    "go-backend/internal/conexiuni/service.go": {
+      "working_sha256": "d1ca9cca16595b37f9a9c7701c2ef009ee9da01d692dc64605c3a7fe043ff79e",
+      "git_status": "  ",
+      "untracked": false,
+      "working_equals_feature_HEAD": true,
+      "working_equals_recorded_main": true
+    },
+    "go-backend/internal/content/bundled.json": {
+      "working_sha256": "f6d983f1ab2cbb7852e8583411eaecd2048fdb5b5da08099129d7e4ff471344c",
+      "git_status": "  ",
+      "untracked": false,
+      "working_equals_feature_HEAD": true,
+      "working_equals_recorded_main": true
+    },
+    "go-backend/internal/content/content.go": {
+      "working_sha256": "4990f7ba621b0f10519a3a29ef5e998ea4b2db323b4db2e8d15753a9ef6b4f83",
+      "git_status": "  ",
+      "untracked": false,
+      "working_equals_feature_HEAD": true,
+      "working_equals_recorded_main": true
+    },
+    "go-backend/internal/contentbuild/build.go": {
+      "working_sha256": "65b7869f1966e659fa24d885456ba1f105ed3a03a64ceff681009dca3858ce6a",
+      "git_status": "  ",
+      "untracked": false,
+      "working_equals_feature_HEAD": true,
+      "working_equals_recorded_main": true
+    },
+    "go-backend/internal/contentbuild/catalogs.go": {
+      "working_sha256": "eb0239ed9b57524b2e6a18aa3d5757650de17c674e6fee071a724037c6f78c77",
+      "git_status": "  ",
+      "untracked": false,
+      "working_equals_feature_HEAD": true,
+      "working_equals_recorded_main": true
+    },
+    "go-backend/internal/contentbuild/graph.go": {
+      "working_sha256": "e4e9e54f7350767b5dc35dcde86db6ce22bf681a6be9d364cb723abb298ccf24",
+      "git_status": "  ",
+      "untracked": false,
+      "working_equals_feature_HEAD": true,
+      "working_equals_recorded_main": true
+    },
+    "go-backend/internal/contentbuild/world.go": {
+      "working_sha256": "704f3d5d2e4622e753f4c3d521d215c852e600cf00509c80dda20c6a5e8312c1",
+      "git_status": "  ",
+      "untracked": false,
+      "working_equals_feature_HEAD": true,
+      "working_equals_recorded_main": true
+    },
+    "go-backend/internal/contentops/critique.go": {
+      "working_sha256": "eca8067e24565d797bc90a19d4e4a300c73282b89afed874a7a80785c1ebe80d",
+      "git_status": "  ",
+      "untracked": false,
+      "working_equals_feature_HEAD": true,
+      "working_equals_recorded_main": true
+    },
+    "go-backend/internal/contentops/derive.go": {
+      "working_sha256": "589d7f47704f74dabd1d5a3aed6094d42a978173c6ce89e82f733d5bf12601ae",
+      "git_status": "  ",
+      "untracked": false,
+      "working_equals_feature_HEAD": true,
+      "working_equals_recorded_main": true
+    },
+    "go-backend/internal/contentops/rank.go": {
+      "working_sha256": "8fca7ff8a16976bdf036e6e9d77bd800a140cb5ed174260e0ad9d708b7120722",
+      "git_status": "  ",
+      "untracked": false,
+      "working_equals_feature_HEAD": true,
+      "working_equals_recorded_main": true
+    },
+    "go-backend/internal/contexto/service.go": {
+      "working_sha256": "0df6ed5f0d2ef5d01c85b93ae5c0d8aa33e3c7648dd7d4bdeed688d24f9e04d4",
+      "git_status": "  ",
+      "untracked": false,
+      "working_equals_feature_HEAD": true,
+      "working_equals_recorded_main": true
+    },
+    "go-backend/internal/graph/service.go": {
+      "working_sha256": "a9cc60e321e905293cee6fa49265281fc5db70a78c669c7ba66315933810002e",
+      "git_status": "  ",
+      "untracked": false,
+      "working_equals_feature_HEAD": true,
+      "working_equals_recorded_main": true
+    },
+    "go-backend/internal/httpapi/body.go": {
+      "working_sha256": "22dc70b3656ed389cdf3ae2d289fa3c5207f5e322b643cfba72f4405e00c7815",
+      "git_status": "  ",
+      "untracked": false,
+      "working_equals_feature_HEAD": true,
+      "working_equals_recorded_main": true
+    },
+    "go-backend/internal/httpapi/managed_delivery.go": {
+      "working_sha256": "977fc8e28de55575e21011a83c16609c0d48d69da98fd47b832a49d422e3f6d1",
+      "git_status": " M",
+      "untracked": false,
+      "working_equals_feature_HEAD": false,
+      "working_equals_recorded_main": false,
+      "feature_HEAD_sha256": "5121b807aa1b3f8d5a64d0743b532402b064d77e52cfe2e6dec86cb4e3e6cbc0",
+      "recorded_main_sha256": "5121b807aa1b3f8d5a64d0743b532402b064d77e52cfe2e6dec86cb4e3e6cbc0"
+    },
+    "go-backend/internal/intrusul/service.go": {
+      "working_sha256": "a8d927ecc20d8293c8ee45b0097edaf989c4ecbbaa9b22d0574c72259446bc82",
+      "git_status": "  ",
+      "untracked": false,
+      "working_equals_feature_HEAD": true,
+      "working_equals_recorded_main": true
+    },
+    "go-backend/internal/lant/service.go": {
+      "working_sha256": "fca0abb9016dc0805c25ae9edc6947f92df41848e6ad3bd0d85a1d5613cffc90",
+      "git_status": "  ",
+      "untracked": false,
+      "working_equals_feature_HEAD": true,
+      "working_equals_recorded_main": true
+    },
+    "go-backend/internal/pack/pack.go": {
+      "working_sha256": "a5c48d9c77365fa1b1e4a56979845a26a1ecc77993b987f84885b7f4579629e7",
+      "git_status": "  ",
+      "untracked": false,
+      "working_equals_feature_HEAD": true,
+      "working_equals_recorded_main": true
+    },
+    "go-backend/internal/perechi/service.go": {
+      "working_sha256": "3f0bd33043a154f6b084e2321857b398b01e2f3f85fbfacccff7b4064a6a2369",
+      "git_status": "  ",
+      "untracked": false,
+      "working_equals_feature_HEAD": true,
+      "working_equals_recorded_main": true
+    },
+    "scripts/apply_common_words_v24.py": {
+      "working_sha256": "50c07392950feb2f740108c86fc91619fee29699107bdbd7ad28a5477b09ba91",
+      "git_status": "  ",
+      "untracked": false,
+      "working_equals_feature_HEAD": true,
+      "working_equals_recorded_main": true
+    }
+  },
+  "limitations": [
+    "No build,browser,gameplay,HTTP or integration execution. Intended working-source behavior is not proof of UI correctness or a deployed route.",
+    "This is a bounded relevant-file snapshot,not a complete content hash of every dirty artifact or dependency package. Git status binds dirty paths; examined source hashes bind the files analyzed.",
+    "Current feature bundle and graph/game implementation equality supports reuse of the main-based mechanical counts,but this supplement does not grant source,target,round,salience or integration approval.",
+    "No owned file,untracked screen,branch,source packet or raw artifact was removed,staged or edited."
+  ]
+}

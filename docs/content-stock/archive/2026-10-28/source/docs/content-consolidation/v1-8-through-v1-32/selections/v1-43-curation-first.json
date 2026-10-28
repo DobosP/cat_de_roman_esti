@@ -1,0 +1,4229 @@
+{
+  "schema": "content-loop-bounded-curation-decision-v1",
+  "observed_at_utc": "2026-10-20T19:40:16.479961+00:00",
+  "decision": "curation_first_no_eligible_next_growth_wave_in_retained_high_priority_scope",
+  "completed_wave": "1.42",
+  "completed_source_ref": "d331f6ad79696019b6882d53035572f3da4c7cd1",
+  "canonical_stock_before_decision": {
+    "ref": "cd20308f2def9b0bd831f7693e37c40e26b56654",
+    "path": "docs/content-consolidation/v1-8-through-v1-32/current-stock.json",
+    "sha256": "99017f72cd3f77b61d5577e3a670a1ba2affcdb53e7176bca72e233d0227433f"
+  },
+  "current_stock_summary": {
+    "pending_source_accepted_records": 1083,
+    "pending_new_concepts": 855,
+    "pending_existing_owner_families": 228,
+    "pending_existing_unique_owners": 201,
+    "missing_payload_owner_key_pairs": 5737,
+    "missing_unique_normalized_payload_keys": 5737,
+    "missing_ordinary_source_form_keys": 5734,
+    "missing_canonical_display_label_only_keys": 3,
+    "missing_new_concept_normalized_inputs": 4807,
+    "missing_existing_owner_normalized_inputs": 930,
+    "pending_unique_directed_edges": 3426,
+    "pending_cald_proxy_key_changes": 117,
+    "current_foreign_owner_collisions": 0,
+    "pending_cross_owner_collisions": 0,
+    "source_graph_nodes_below_numeric_incoming5": 810,
+    "source_graph_nodes_atleast_numeric_incoming5": 45,
+    "source_graph_predecessor_distribution": {
+      "0": 386,
+      "1": 36,
+      "2": 25,
+      "3": 168,
+      "4": 195,
+      "5": 32,
+      "6": 13
+    },
+    "existing_input_families_by_lane": {
+      "selected_sense_lexical_or_qualified_input": 140,
+      "existing_lemma_morphology": 88
+    },
+    "existing_input_missing_keys_by_lane": {
+      "existing_lemma_morphology": 164,
+      "selected_sense_lexical_or_qualified_input": 766
+    },
+    "existing_input_families_with_snapshot_dependencies": 49,
+    "all_source_records": 1741,
+    "all_source_states": {
+      "integrated": 218,
+      "held": 439,
+      "accepted": 1083,
+      "rejected": 1
+    },
+    "pending_held_records": 370,
+    "source_packets": 35,
+    "protected_unlanded_closures": 29,
+    "new_source_approvals_by_consolidation": 0,
+    "installed_by_this_work": 0,
+    "new_targets_approved_by_this_work": 0,
+    "new_playable_rounds": 0,
+    "player_visible_delta": "0/0/0",
+    "missing_source_reviewed_dictionary_input_keys": 5734,
+    "missing_explicit_component_composed_phrase_keys": 6,
+    "new_packet_input_breakdown": {
+      "normalized_payload_keys": 153,
+      "ordinary_normalized_payload_keys": 153,
+      "qualified_compound_typed_phrase_keys": 0,
+      "existing_owner_families_by_classification": {
+        "ordinary_morphology_of_existing_selected_lexeme": 11,
+        "ordinary_morphology_of_existing_feminine_lexeme": 1,
+        "ordinary_NA_GD_morphology_of_existing_lemma": 6,
+        "ordinary_article_variant_of_existing_articulated_label": 1,
+        "ordinary_number_variant_of_existing_plural_label": 2
+      },
+      "existing_owner_keys_by_classification": {
+        "ordinary_morphology_of_existing_selected_lexeme": 51,
+        "ordinary_morphology_of_existing_feminine_lexeme": 3,
+        "ordinary_NA_GD_morphology_of_existing_lemma": 17,
+        "ordinary_article_variant_of_existing_articulated_label": 4,
+        "ordinary_number_variant_of_existing_plural_label": 6
+      }
+    },
+    "legacy_ordinary_source_form_count_scope": "The legacy missing_ordinary_source_form_keys/payload_class ordinary_source_reviewed_key groups reviewed dictionary inputs including qualified compounds. It is not a single-headword-only count. Original historical classifications are preserved; exact ordinary/qualified subdivisions are recorded in each reviewed packet, and explicit component-composition counts are partial historical coverage, not a new approval."
+  },
+  "source_packet_complete": true,
+  "canonical_stock_update_complete": true,
+  "minimum_growth_wave_items": 20,
+  "finding": {
+    "retained_new_concept_hypotheses": 5,
+    "retained_ranked_existing_family_hypotheses": 8,
+    "conservative_high_priority_upper_bound_before_full_eligibility": 13,
+    "optional_exact_sense_families_not_promoted_to_fill_quota": 8,
+    "scope_limit": "A bounded retained-backlog assessment, not a claim that Romanian vocabulary or future discovery is exhausted. Pending reviewed stock already supplies useful everyday, school, culture and home coverage.",
+    "graphless_lexical_backlogs_preserved": {
+      "landscape_count": 53,
+      "home_food_count": 24,
+      "reason": "No strong four-link skeleton with two unchanged same-category current-main endpoints was established. No generic filler, repeated research or category repair added."
+    },
+    "old_same_owner_rally_families": "Manifestație and demonstrație remain distinct selected-family attention for the same Protest owner; neither is a new concept or an extra source approval."
+  },
+  "new_concept_attention": [
+    {
+      "head": "conifer",
+      "kind": "unresearched_new_concept_attention",
+      "selected_sense": "Plantă lemnoasă din grupul coniferelor; parent botanic recognoscibil pentru brad, pin și molid.",
+      "planned_form_attention": [
+        {
+          "head": "conifer",
+          "key": "conifer",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "coniferul",
+          "key": "coniferul",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "conifere",
+          "key": "conifere",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "coniferele",
+          "key": "coniferele",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "coniferului",
+          "key": "coniferului",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "coniferelor",
+          "key": "coniferelor",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        }
+      ],
+      "head_attention": {
+        "head": "conifer",
+        "key": "conifer",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "approved_payload": [],
+        "historical_approved_form_attention": [],
+        "primary_source_dispositions": [],
+        "lexeme_dispositions": [],
+        "observations_not_reservations": [],
+        "legacy_final_record_attention": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+      },
+      "graph_skeleton_reference_only": [
+        {
+          "endpoint_id": "n_v1_8_brad",
+          "label_ro": "Brad",
+          "category": "stiinta",
+          "current_description": "Arbore conifer cu frunze în formă de ace, care rămân verzi și iarna.",
+          "endpoint_kind": "current_main",
+          "direction": "current_to_new",
+          "src": "n_v1_8_brad",
+          "dst": "prospective:conifer",
+          "relation_hypothesis": "is_a",
+          "caption_hypothesis_ro": "este conifer",
+          "bidirectional": 0,
+          "is_distractor": 0
+        },
+        {
+          "endpoint_id": "n_v1_12_pin",
+          "label_ro": "Pin",
+          "category": "stiinta",
+          "current_description": "Arbore conifer cu frunze persistente în formă de ace; aici, sensul botanic, exemplificat prin pinul silvestru.",
+          "endpoint_kind": "current_main",
+          "direction": "current_to_new",
+          "src": "n_v1_12_pin",
+          "dst": "prospective:conifer",
+          "relation_hypothesis": "is_a",
+          "caption_hypothesis_ro": "este conifer",
+          "bidirectional": 0,
+          "is_distractor": 0
+        },
+        {
+          "endpoint_id": "n_v1_12_molid",
+          "label_ro": "Molid",
+          "category": "stiinta",
+          "current_description": "Arbore conifer cu frunze aciculare persistente și conuri atârnate; aici, molidul comun.",
+          "endpoint_kind": "current_main",
+          "direction": "current_to_new",
+          "src": "n_v1_12_molid",
+          "dst": "prospective:conifer",
+          "relation_hypothesis": "is_a",
+          "caption_hypothesis_ro": "este conifer",
+          "bidirectional": 0,
+          "is_distractor": 0
+        },
+        {
+          "endpoint_id": "n_v4sti_planta",
+          "label_ro": "plantă",
+          "category": "stiinta",
+          "current_description": "Organism viu care face fotosinteză și are celule vegetale.",
+          "endpoint_kind": "current_main",
+          "direction": "new_to_current",
+          "src": "prospective:conifer",
+          "dst": "n_v4sti_planta",
+          "relation_hypothesis": "is_a",
+          "caption_hypothesis_ro": "este plantă lemnoasă",
+          "bidirectional": 0,
+          "is_distractor": 0
+        }
+      ],
+      "source_approved": false,
+      "note": "Retained candidate hypothesis only; graph/source/register and full-family eligibility are not yet established."
+    },
+    {
+      "head": "balet",
+      "kind": "unresearched_new_concept_attention",
+      "selected_sense": "Formă de dans scenic și reprezentație artistică; sens cultural comun, fără companie sau instituție nouă.",
+      "planned_form_attention": [
+        {
+          "head": "balet",
+          "key": "balet",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": {
+            "rank": 10468,
+            "surface": "balet",
+            "count": 1818
+          },
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "baletul",
+          "key": "baletul",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": {
+            "rank": 25642,
+            "surface": "baletul",
+            "count": 516
+          },
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "balete",
+          "key": "balete",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "baletele",
+          "key": "baletele",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "baletului",
+          "key": "baletului",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "baletelor",
+          "key": "baletelor",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        }
+      ],
+      "head_attention": {
+        "head": "balet",
+        "key": "balet",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "approved_payload": [],
+        "historical_approved_form_attention": [],
+        "primary_source_dispositions": [],
+        "lexeme_dispositions": [],
+        "observations_not_reservations": [],
+        "legacy_final_record_attention": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 10468,
+          "surface": "balet",
+          "count": 1818
+        },
+        "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+      },
+      "graph_skeleton_reference_only": [
+        {
+          "endpoint_id": "n_v4art_dans",
+          "label_ro": "Dans",
+          "category": "arta_cultura",
+          "current_description": "Mișcare ritmică a corpului, folosită în artă, ritual și divertisment.",
+          "endpoint_kind": "current_main",
+          "direction": "new_to_current",
+          "src": "prospective:balet",
+          "dst": "n_v4art_dans",
+          "relation_hypothesis": "is_a",
+          "caption_hypothesis_ro": "este formă de dans scenic",
+          "bidirectional": 0,
+          "is_distractor": 0
+        },
+        {
+          "endpoint_id": "n_v4art_scena",
+          "label_ro": "Scenă",
+          "category": "arta_cultura",
+          "current_description": "Spațiu de joc pentru teatru, muzică, dans sau alte reprezentații.",
+          "endpoint_kind": "current_main",
+          "direction": "new_to_current",
+          "src": "prospective:balet",
+          "dst": "n_v4art_scena",
+          "relation_hypothesis": "performed_on",
+          "caption_hypothesis_ro": "se prezintă pe scenă",
+          "bidirectional": 0,
+          "is_distractor": 0
+        },
+        {
+          "endpoint_id": "n_v4art_dansator",
+          "label_ro": "Dansator",
+          "category": "arta_cultura",
+          "current_description": "Persoană care interpretează dansuri pe scenă sau în tradiții populare.",
+          "endpoint_kind": "current_main",
+          "direction": "new_to_current",
+          "src": "prospective:balet",
+          "dst": "n_v4art_dansator",
+          "relation_hypothesis": "performed_by",
+          "caption_hypothesis_ro": "este interpretat de dansatori",
+          "bidirectional": 0,
+          "is_distractor": 0
+        },
+        {
+          "endpoint_id": "n_v4art_spectacol",
+          "label_ro": "Spectacol",
+          "category": "arta_cultura",
+          "current_description": "Reprezentație artistică văzută de public pe scenă sau într-o sală.",
+          "endpoint_kind": "current_main",
+          "direction": "new_to_current",
+          "src": "prospective:balet",
+          "dst": "n_v4art_spectacol",
+          "relation_hypothesis": "presented_as",
+          "caption_hypothesis_ro": "se prezintă ca spectacol artistic",
+          "bidirectional": 0,
+          "is_distractor": 0
+        }
+      ],
+      "source_approved": false,
+      "note": "Retained candidate hypothesis only; graph/source/register and full-family eligibility are not yet established."
+    },
+    {
+      "head": "fabulă",
+      "kind": "unresearched_new_concept_attention",
+      "selected_sense": "Scurtă operă literară cu semnificație morală; specie familiară din școală.",
+      "planned_form_attention": [
+        {
+          "head": "fabulă",
+          "key": "fabula",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "fabula",
+          "key": "fabula",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "fabule",
+          "key": "fabule",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "fabulele",
+          "key": "fabulele",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "fabulei",
+          "key": "fabulei",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "fabulelor",
+          "key": "fabulelor",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        }
+      ],
+      "head_attention": {
+        "head": "fabulă",
+        "key": "fabula",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "approved_payload": [],
+        "historical_approved_form_attention": [],
+        "primary_source_dispositions": [],
+        "lexeme_dispositions": [],
+        "observations_not_reservations": [],
+        "legacy_final_record_attention": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+      },
+      "graph_skeleton_reference_only": [
+        {
+          "endpoint_id": "n_v20lit_grigore_alexandrescu",
+          "label_ro": "Grigore Alexandrescu",
+          "category": "literatura",
+          "current_description": "Poet pașoptist, cel mai important fabulist român, autor al fabulelor Câinele și cățelul și Boul și vițelul. A scris și meditația romantică Umbra lui Mircea. La Cozia, inspirată de o vizită la mănăstirea Cozia.",
+          "endpoint_kind": "current_main",
+          "direction": "current_to_new",
+          "src": "n_v20lit_grigore_alexandrescu",
+          "dst": "prospective:fabula",
+          "relation_hypothesis": "wrote",
+          "caption_hypothesis_ro": "a scris fabule",
+          "bidirectional": 0,
+          "is_distractor": 0
+        },
+        {
+          "endpoint_id": "n_v2lit_personaj_literar",
+          "label_ro": "Personaj literar",
+          "category": "literatura",
+          "current_description": "Figură fictivă sau narativă dintr-o operă literară.",
+          "endpoint_kind": "current_main",
+          "direction": "new_to_current",
+          "src": "prospective:fabula",
+          "dst": "n_v2lit_personaj_literar",
+          "relation_hypothesis": "features",
+          "caption_hypothesis_ro": "folosește personaje literare",
+          "bidirectional": 0,
+          "is_distractor": 0
+        },
+        {
+          "endpoint_id": "n_v3lit_vers",
+          "label_ro": "Vers",
+          "category": "literatura",
+          "current_description": "Rând al unei poezii, cu ritm sau rimă.",
+          "endpoint_kind": "current_main",
+          "direction": "new_to_current",
+          "src": "prospective:fabula",
+          "dst": "n_v3lit_vers",
+          "relation_hypothesis": "can_be_written_as",
+          "caption_hypothesis_ro": "poate fi scrisă în versuri",
+          "bidirectional": 0,
+          "is_distractor": 0
+        },
+        {
+          "endpoint_id": "n_v4lit_proza",
+          "label_ro": "proză",
+          "category": "literatura",
+          "current_description": "Formă literară scrisă fără versificație regulată.",
+          "endpoint_kind": "current_main",
+          "direction": "new_to_current",
+          "src": "prospective:fabula",
+          "dst": "n_v4lit_proza",
+          "relation_hypothesis": "can_be_written_as",
+          "caption_hypothesis_ro": "poate fi scrisă în proză",
+          "bidirectional": 0,
+          "is_distractor": 0
+        }
+      ],
+      "source_approved": false,
+      "note": "Retained candidate hypothesis only; graph/source/register and full-family eligibility are not yet established."
+    },
+    {
+      "head": "mineral",
+      "kind": "unresearched_new_concept_attention",
+      "selected_sense": "Substanță naturală anorganică cu alcătuire și structură caracteristice; sensul geologic de mineral.",
+      "planned_form_attention": [
+        {
+          "head": "mineral",
+          "key": "mineral",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [
+            {
+              "record_id": "v136-carbune-mineral",
+              "wave": "1.36",
+              "owner_id": "n_v1_36_carbune_mineral",
+              "source_approved": false,
+              "module_payload": false,
+              "assessment": "held_or_observation_only",
+              "prior_form_hold": false
+            }
+          ],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": {
+            "rank": 38452,
+            "surface": "mineral",
+            "count": 270
+          },
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "mineralul",
+          "key": "mineralul",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [
+            {
+              "record_id": "v136-carbune-mineral",
+              "wave": "1.36",
+              "owner_id": "n_v1_36_carbune_mineral",
+              "source_approved": false,
+              "module_payload": false,
+              "assessment": "held_or_observation_only",
+              "prior_form_hold": false
+            }
+          ],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "minerale",
+          "key": "minerale",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [
+            {
+              "record_id": "v136-carbune-mineral",
+              "wave": "1.36",
+              "owner_id": "n_v1_36_carbune_mineral",
+              "source_approved": false,
+              "module_payload": false,
+              "assessment": "held_or_observation_only",
+              "prior_form_hold": false
+            }
+          ],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": {
+            "rank": 20188,
+            "surface": "minerale",
+            "count": 733
+          },
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "mineralele",
+          "key": "mineralele",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [
+            {
+              "record_id": "v136-carbune-mineral",
+              "wave": "1.36",
+              "owner_id": "n_v1_36_carbune_mineral",
+              "source_approved": false,
+              "module_payload": false,
+              "assessment": "held_or_observation_only",
+              "prior_form_hold": false
+            }
+          ],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "mineralului",
+          "key": "mineralului",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [
+            {
+              "record_id": "v136-carbune-mineral",
+              "wave": "1.36",
+              "owner_id": "n_v1_36_carbune_mineral",
+              "source_approved": false,
+              "module_payload": false,
+              "assessment": "held_or_observation_only",
+              "prior_form_hold": false
+            }
+          ],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "mineralelor",
+          "key": "mineralelor",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [
+            {
+              "record_id": "v136-carbune-mineral",
+              "wave": "1.36",
+              "owner_id": "n_v1_36_carbune_mineral",
+              "source_approved": false,
+              "module_payload": false,
+              "assessment": "held_or_observation_only",
+              "prior_form_hold": false
+            }
+          ],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        }
+      ],
+      "head_attention": {
+        "head": "mineral",
+        "key": "mineral",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "approved_payload": [],
+        "historical_approved_form_attention": [],
+        "primary_source_dispositions": [],
+        "lexeme_dispositions": [],
+        "observations_not_reservations": [
+          {
+            "record_id": "v136-carbune-mineral",
+            "wave": "1.36",
+            "owner_id": "n_v1_36_carbune_mineral",
+            "source_approved": false,
+            "module_payload": false,
+            "assessment": "held_or_observation_only",
+            "prior_form_hold": false
+          }
+        ],
+        "legacy_final_record_attention": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 38452,
+          "surface": "mineral",
+          "count": 270
+        },
+        "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+      },
+      "graph_skeleton_reference_only": [
+        {
+          "endpoint_id": "n_v4gas_sare",
+          "label_ro": "Sare",
+          "category": "gastronomie",
+          "current_description": "Mineral alimentar folosit pentru gust și conservare.",
+          "endpoint_sense_authority": "exact current description; no category repair",
+          "current_main": true,
+          "current_primary": true,
+          "src": "n_v4gas_sare",
+          "dst": "prospective:mineral",
+          "direction": "current_to_new",
+          "relation_hypothesis": "is_a",
+          "caption_hypothesis_ro": "sarea alimentară este un mineral",
+          "bidirectional": false,
+          "is_distractor": false
+        },
+        {
+          "endpoint_id": "n_v28_nature_material_piatra",
+          "label_ro": "Piatră",
+          "category": "stiinta",
+          "current_description": "Bucată tare de rocă, întâlnită în natură și folosită la construcții.",
+          "endpoint_sense_authority": "exact current description; no category repair",
+          "current_main": true,
+          "current_primary": true,
+          "src": "n_v28_nature_material_piatra",
+          "dst": "prospective:mineral",
+          "direction": "current_to_new",
+          "relation_hypothesis": "composed_of",
+          "caption_hypothesis_ro": "este alcătuită din unul sau mai multe minerale",
+          "bidirectional": false,
+          "is_distractor": false
+        },
+        {
+          "endpoint_id": "n_v17sti_geologie",
+          "label_ro": "Geologie",
+          "category": "stiinta",
+          "current_description": "Știința care studiază structura, alcătuirea și istoria Pământului, inclusiv rocile, mineralele și zăcămintele. Ajută la găsirea resurselor precum petrolul și cărbunele.",
+          "endpoint_sense_authority": "exact current description; no category repair",
+          "current_main": true,
+          "current_primary": true,
+          "src": "n_v17sti_geologie",
+          "dst": "prospective:mineral",
+          "direction": "current_to_new",
+          "relation_hypothesis": "studies",
+          "caption_hypothesis_ro": "studiază mineralele",
+          "bidirectional": false,
+          "is_distractor": false
+        },
+        {
+          "endpoint_id": "n_v4sti_solid",
+          "label_ro": "solid",
+          "category": "stiinta",
+          "current_description": "Stare a materiei cu formă și volum proprii.",
+          "endpoint_sense_authority": "exact current description; no category repair",
+          "current_main": true,
+          "current_primary": true,
+          "src": "prospective:mineral",
+          "dst": "n_v4sti_solid",
+          "direction": "new_to_current",
+          "relation_hypothesis": "usually_has_state",
+          "caption_hypothesis_ro": "mineralele sunt de obicei solide",
+          "bidirectional": false,
+          "is_distractor": false
+        }
+      ],
+      "source_approved": false,
+      "note": "Retained candidate hypothesis only; graph/source/register and full-family eligibility are not yet established."
+    },
+    {
+      "head": "clorofilă",
+      "kind": "unresearched_new_concept_attention",
+      "selected_sense": "Pigment verde care absoarbe lumina folosită în fotosinteză.",
+      "planned_form_attention": [
+        {
+          "head": "clorofilă",
+          "key": "clorofila",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "clorofila",
+          "key": "clorofila",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "clorofilei",
+          "key": "clorofilei",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        }
+      ],
+      "head_attention": {
+        "head": "clorofilă",
+        "key": "clorofila",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "approved_payload": [],
+        "historical_approved_form_attention": [],
+        "primary_source_dispositions": [],
+        "lexeme_dispositions": [],
+        "observations_not_reservations": [],
+        "legacy_final_record_attention": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+      },
+      "graph_skeleton_reference_only": [
+        {
+          "endpoint_id": "n_v4sti_frunza",
+          "label_ro": "frunză",
+          "category": "stiinta",
+          "current_description": "Organ al plantei care produce hrană prin fotosinteză.",
+          "endpoint_sense_authority": "exact current description; no category repair",
+          "current_main": true,
+          "current_primary": true,
+          "src": "n_v4sti_frunza",
+          "dst": "prospective:clorofila",
+          "direction": "current_to_new",
+          "relation_hypothesis": "can_contain",
+          "caption_hypothesis_ro": "frunzele verzi conțin clorofilă",
+          "bidirectional": false,
+          "is_distractor": false
+        },
+        {
+          "endpoint_id": "n_v4sti_planta",
+          "label_ro": "plantă",
+          "category": "stiinta",
+          "current_description": "Organism viu care face fotosinteză și are celule vegetale.",
+          "endpoint_sense_authority": "exact current description; no category repair",
+          "current_main": true,
+          "current_primary": true,
+          "src": "n_v4sti_planta",
+          "dst": "prospective:clorofila",
+          "direction": "current_to_new",
+          "relation_hypothesis": "can_contain",
+          "caption_hypothesis_ro": "plantele verzi conțin clorofilă",
+          "bidirectional": false,
+          "is_distractor": false
+        },
+        {
+          "endpoint_id": "n_v4sti_lumina",
+          "label_ro": "lumină",
+          "category": "stiinta",
+          "current_description": "Radiație electromagnetică vizibilă pentru ochiul uman.",
+          "endpoint_sense_authority": "exact current description; no category repair",
+          "current_main": true,
+          "current_primary": true,
+          "src": "prospective:clorofila",
+          "dst": "n_v4sti_lumina",
+          "direction": "new_to_current",
+          "relation_hypothesis": "absorbs",
+          "caption_hypothesis_ro": "absoarbe lumină pentru fotosinteză",
+          "bidirectional": false,
+          "is_distractor": false
+        },
+        {
+          "endpoint_id": "n_v24_nature_plant_parts_iarba",
+          "label_ro": "Iarbă",
+          "category": "stiinta",
+          "current_description": "Concept cotidian din grupul «plante și părțile lor»: Iarbă.",
+          "endpoint_sense_authority": "exact current description; no category repair",
+          "current_main": true,
+          "current_primary": true,
+          "src": "n_v24_nature_plant_parts_iarba",
+          "dst": "prospective:clorofila",
+          "direction": "current_to_new",
+          "relation_hypothesis": "colored_by",
+          "caption_hypothesis_ro": "iarba verde își datorează culoarea clorofilei",
+          "bidirectional": false,
+          "is_distractor": false
+        }
+      ],
+      "source_approved": false,
+      "note": "Retained candidate hypothesis only; graph/source/register and full-family eligibility are not yet established."
+    }
+  ],
+  "ranked_existing_family_attention": [
+    {
+      "head": "regizoare",
+      "kind": "existing_owner_family_attention",
+      "owner": {
+        "id": "n_v2fil_regizor",
+        "label_ro": "Regizor",
+        "category": "film_tv",
+        "description": "Autor artistic care coordonează realizarea unui film sau spectacol."
+      },
+      "selected_sense": "Female artistic director of a film or performance; existing Regizor person owner.",
+      "active_anchor": "regizoare",
+      "head_attention": {
+        "head": "regizoare",
+        "key": "regizoare",
+        "status": "live_owner",
+        "live_owners": [
+          {
+            "id": "n_v2fil_regizor",
+            "label": "Regizor"
+          }
+        ],
+        "world_ids": [],
+        "approved_payload": [],
+        "historical_approved_form_attention": [],
+        "primary_source_dispositions": [],
+        "lexeme_dispositions": [],
+        "observations_not_reservations": [],
+        "legacy_final_record_attention": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+      },
+      "family_attention": [
+        {
+          "head": "regizoare",
+          "key": "regizoare",
+          "status": "live_owner",
+          "live_owners": [
+            {
+              "id": "n_v2fil_regizor",
+              "label": "Regizor"
+            }
+          ],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "regizoarea",
+          "key": "regizoarea",
+          "status": "live_owner",
+          "live_owners": [
+            {
+              "id": "n_v2fil_regizor",
+              "label": "Regizor"
+            }
+          ],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "regizoarei",
+          "key": "regizoarei",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "regizoare",
+          "key": "regizoare",
+          "status": "live_owner",
+          "live_owners": [
+            {
+              "id": "n_v2fil_regizor",
+              "label": "Regizor"
+            }
+          ],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "regizoarele",
+          "key": "regizoarele",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "regizoarelor",
+          "key": "regizoarelor",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        }
+      ],
+      "historical_missing_practical_keys": [
+        {
+          "surface": "regizoarele",
+          "key": "regizoarele",
+          "role": "plural_articulated"
+        }
+      ],
+      "source_approved": false,
+      "note": "Existing selected-family attention, not a new concept or normative paradigm. Current approved/held dispositions take precedence."
+    },
+    {
+      "head": "peliculă",
+      "kind": "existing_owner_family_attention",
+      "owner": {
+        "id": "n_v3fil_film",
+        "label_ro": "Film",
+        "category": "film_tv",
+        "description": "Operă audiovisuală proiectată la cinema, TV sau online."
+      },
+      "selected_sense": "Audiovisual film work; exclude film strip/material coating senses.",
+      "active_anchor": "peliculă",
+      "head_attention": {
+        "head": "peliculă",
+        "key": "pelicula",
+        "status": "live_owner",
+        "live_owners": [
+          {
+            "id": "n_v3fil_film",
+            "label": "Film"
+          }
+        ],
+        "world_ids": [],
+        "approved_payload": [],
+        "historical_approved_form_attention": [],
+        "primary_source_dispositions": [],
+        "lexeme_dispositions": [],
+        "observations_not_reservations": [],
+        "legacy_final_record_attention": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 35069,
+          "surface": "peliculă",
+          "count": 313
+        },
+        "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+      },
+      "family_attention": [
+        {
+          "head": "peliculă",
+          "key": "pelicula",
+          "status": "live_owner",
+          "live_owners": [
+            {
+              "id": "n_v3fil_film",
+              "label": "Film"
+            }
+          ],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": {
+            "rank": 35069,
+            "surface": "peliculă",
+            "count": 313
+          },
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "pelicula",
+          "key": "pelicula",
+          "status": "live_owner",
+          "live_owners": [
+            {
+              "id": "n_v3fil_film",
+              "label": "Film"
+            }
+          ],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": {
+            "rank": 35069,
+            "surface": "peliculă",
+            "count": 313
+          },
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "peliculei",
+          "key": "peliculei",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "pelicule",
+          "key": "pelicule",
+          "status": "live_owner",
+          "live_owners": [
+            {
+              "id": "n_v3fil_film",
+              "label": "Film"
+            }
+          ],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "peliculele",
+          "key": "peliculele",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "peliculelor",
+          "key": "peliculelor",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        }
+      ],
+      "historical_missing_practical_keys": [
+        {
+          "surface": "peliculele",
+          "key": "peliculele",
+          "role": "plural_articulated"
+        }
+      ],
+      "source_approved": false,
+      "note": "Existing selected-family attention, not a new concept or normative paradigm. Current approved/held dispositions take precedence."
+    },
+    {
+      "head": "manifestație",
+      "kind": "existing_owner_family_attention",
+      "owner": {
+        "id": "n_v3soc_protest",
+        "label_ro": "Protest",
+        "category": "societate",
+        "description": "Acțiune publică prin care oamenii își exprimă nemulțumirea sau revendicările."
+      },
+      "selected_sense": "Public protest expressing grievances or demands; not every manifestation/event.",
+      "active_anchor": "manifestație",
+      "head_attention": {
+        "head": "manifestație",
+        "key": "manifestatie",
+        "status": "live_owner",
+        "live_owners": [
+          {
+            "id": "n_v3soc_protest",
+            "label": "Protest"
+          }
+        ],
+        "world_ids": [],
+        "approved_payload": [],
+        "historical_approved_form_attention": [],
+        "primary_source_dispositions": [],
+        "lexeme_dispositions": [],
+        "observations_not_reservations": [],
+        "legacy_final_record_attention": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+      },
+      "family_attention": [
+        {
+          "head": "manifestație",
+          "key": "manifestatie",
+          "status": "live_owner",
+          "live_owners": [
+            {
+              "id": "n_v3soc_protest",
+              "label": "Protest"
+            }
+          ],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "manifestația",
+          "key": "manifestatia",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "manifestației",
+          "key": "manifestatiei",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "manifestații",
+          "key": "manifestatii",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "manifestațiile",
+          "key": "manifestatiile",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "manifestațiilor",
+          "key": "manifestatiilor",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        }
+      ],
+      "historical_missing_practical_keys": [
+        {
+          "surface": "manifestația",
+          "key": "manifestatia",
+          "role": "singular_articulated"
+        },
+        {
+          "surface": "manifestații",
+          "key": "manifestatii",
+          "role": "plural_bare"
+        },
+        {
+          "surface": "manifestațiile",
+          "key": "manifestatiile",
+          "role": "plural_articulated"
+        }
+      ],
+      "source_approved": false,
+      "note": "Existing selected-family attention, not a new concept or normative paradigm. Current approved/held dispositions take precedence."
+    },
+    {
+      "head": "demonstrație",
+      "kind": "existing_owner_family_attention",
+      "owner": {
+        "id": "n_v3soc_protest",
+        "label_ro": "Protest",
+        "category": "societate",
+        "description": "Acțiune publică prin care oamenii își exprimă nemulțumirea sau revendicările."
+      },
+      "selected_sense": "Public protest demonstration; exclude mathematical proof/product demonstration.",
+      "active_anchor": "demonstrație",
+      "head_attention": {
+        "head": "demonstrație",
+        "key": "demonstratie",
+        "status": "live_owner",
+        "live_owners": [
+          {
+            "id": "n_v3soc_protest",
+            "label": "Protest"
+          }
+        ],
+        "world_ids": [],
+        "approved_payload": [],
+        "historical_approved_form_attention": [],
+        "primary_source_dispositions": [],
+        "lexeme_dispositions": [],
+        "observations_not_reservations": [],
+        "legacy_final_record_attention": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 11513,
+          "surface": "demonstraţie",
+          "count": 1607
+        },
+        "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+      },
+      "family_attention": [
+        {
+          "head": "demonstrație",
+          "key": "demonstratie",
+          "status": "live_owner",
+          "live_owners": [
+            {
+              "id": "n_v3soc_protest",
+              "label": "Protest"
+            }
+          ],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": {
+            "rank": 11513,
+            "surface": "demonstraţie",
+            "count": 1607
+          },
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "demonstrația",
+          "key": "demonstratia",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": {
+            "rank": 29539,
+            "surface": "demonstraţia",
+            "count": 414
+          },
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "demonstrației",
+          "key": "demonstratiei",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "demonstrații",
+          "key": "demonstratii",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": {
+            "rank": 41363,
+            "surface": "demonstraţii",
+            "count": 239
+          },
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "demonstrațiile",
+          "key": "demonstratiile",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "demonstrațiilor",
+          "key": "demonstratiilor",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        }
+      ],
+      "historical_missing_practical_keys": [
+        {
+          "surface": "demonstrația",
+          "key": "demonstratia",
+          "role": "singular_articulated"
+        },
+        {
+          "surface": "demonstrații",
+          "key": "demonstratii",
+          "role": "plural_bare"
+        },
+        {
+          "surface": "demonstrațiile",
+          "key": "demonstratiile",
+          "role": "plural_articulated"
+        }
+      ],
+      "source_approved": false,
+      "note": "Existing selected-family attention, not a new concept or normative paradigm. Current approved/held dispositions take precedence."
+    },
+    {
+      "head": "sendviș",
+      "kind": "existing_owner_family_attention",
+      "owner": {
+        "id": "n_v24_food_snack_sandvis",
+        "label_ro": "Sandviș",
+        "category": "gastronomie",
+        "description": "Concept cotidian din grupul «gustare simplă»: Sandviș."
+      },
+      "selected_sense": "Sandwich; active spelling variant, normative spelling/table still require own source.",
+      "active_anchor": "sendviș",
+      "head_attention": {
+        "head": "sendviș",
+        "key": "sendvis",
+        "status": "live_owner",
+        "live_owners": [
+          {
+            "id": "n_v24_food_snack_sandvis",
+            "label": "Sandviș"
+          }
+        ],
+        "world_ids": [
+          "n_v24_food_snack_sandvis"
+        ],
+        "approved_payload": [],
+        "historical_approved_form_attention": [],
+        "primary_source_dispositions": [],
+        "lexeme_dispositions": [],
+        "observations_not_reservations": [],
+        "legacy_final_record_attention": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 30693,
+          "surface": "sendviş",
+          "count": 390
+        },
+        "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+      },
+      "family_attention": [
+        {
+          "head": "sendviș",
+          "key": "sendvis",
+          "status": "live_owner",
+          "live_owners": [
+            {
+              "id": "n_v24_food_snack_sandvis",
+              "label": "Sandviș"
+            }
+          ],
+          "world_ids": [
+            "n_v24_food_snack_sandvis"
+          ],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": {
+            "rank": 30693,
+            "surface": "sendviş",
+            "count": 390
+          },
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "sendvișul",
+          "key": "sendvisul",
+          "status": "live_owner",
+          "live_owners": [
+            {
+              "id": "n_v24_food_snack_sandvis",
+              "label": "Sandviș"
+            }
+          ],
+          "world_ids": [
+            "n_v24_food_snack_sandvis"
+          ],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "sendvișului",
+          "key": "sendvisului",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "sendvișuri",
+          "key": "sendvisuri",
+          "status": "live_owner",
+          "live_owners": [
+            {
+              "id": "n_v24_food_snack_sandvis",
+              "label": "Sandviș"
+            }
+          ],
+          "world_ids": [
+            "n_v24_food_snack_sandvis"
+          ],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "sendvișurile",
+          "key": "sendvisurile",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "sendvișurilor",
+          "key": "sendvisurilor",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        }
+      ],
+      "historical_missing_practical_keys": [
+        {
+          "surface": "sendvișurile",
+          "key": "sendvisurile",
+          "role": "plural_articulated"
+        }
+      ],
+      "source_approved": false,
+      "note": "Existing selected-family attention, not a new concept or normative paradigm. Current approved/held dispositions take precedence."
+    },
+    {
+      "head": "răcitură",
+      "kind": "existing_owner_family_attention",
+      "owner": {
+        "id": "n_gas_piftie",
+        "label_ro": "Piftie",
+        "category": "gastronomie",
+        "description": "Aspic de porc sau pasăre cu usturoi, fel rece clasic al sărbătorilor de iarnă."
+      },
+      "selected_sense": "Pork or poultry aspic as cold dish; not cooled leftovers/other meanings.",
+      "active_anchor": "răcitură",
+      "head_attention": {
+        "head": "răcitură",
+        "key": "racitura",
+        "status": "live_owner",
+        "live_owners": [
+          {
+            "id": "n_gas_piftie",
+            "label": "Piftie"
+          }
+        ],
+        "world_ids": [
+          "n_gas_piftie"
+        ],
+        "approved_payload": [],
+        "historical_approved_form_attention": [],
+        "primary_source_dispositions": [],
+        "lexeme_dispositions": [],
+        "observations_not_reservations": [],
+        "legacy_final_record_attention": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+      },
+      "family_attention": [
+        {
+          "head": "răcitură",
+          "key": "racitura",
+          "status": "live_owner",
+          "live_owners": [
+            {
+              "id": "n_gas_piftie",
+              "label": "Piftie"
+            }
+          ],
+          "world_ids": [
+            "n_gas_piftie"
+          ],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "răcitura",
+          "key": "racitura",
+          "status": "live_owner",
+          "live_owners": [
+            {
+              "id": "n_gas_piftie",
+              "label": "Piftie"
+            }
+          ],
+          "world_ids": [
+            "n_gas_piftie"
+          ],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "răciturii",
+          "key": "raciturii",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "răcituri",
+          "key": "racituri",
+          "status": "live_owner",
+          "live_owners": [
+            {
+              "id": "n_gas_piftie",
+              "label": "Piftie"
+            }
+          ],
+          "world_ids": [
+            "n_gas_piftie"
+          ],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "răciturile",
+          "key": "raciturile",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "răciturilor",
+          "key": "raciturilor",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        }
+      ],
+      "historical_missing_practical_keys": [
+        {
+          "surface": "răciturile",
+          "key": "raciturile",
+          "role": "plural_articulated"
+        }
+      ],
+      "source_approved": false,
+      "note": "Existing selected-family attention, not a new concept or normative paradigm. Current approved/held dispositions take precedence."
+    },
+    {
+      "head": "dulceață",
+      "kind": "existing_owner_family_attention",
+      "owner": {
+        "id": "n_v17gas_dulceata",
+        "label_ro": "Dulceață",
+        "category": "gastronomie",
+        "description": "Fructe fierte în sirop de zahăr și păstrate la borcan pentru iarnă. Se servește peste papanași și clătite sau simplă, cu un pahar de apă rece."
+      },
+      "selected_sense": "Current fruit preserve food sense; not sweetness.",
+      "active_anchor": "dulceață",
+      "head_attention": {
+        "head": "dulceață",
+        "key": "dulceata",
+        "status": "live_owner",
+        "live_owners": [
+          {
+            "id": "n_v17gas_dulceata",
+            "label": "Dulceață"
+          }
+        ],
+        "world_ids": [
+          "n_v17gas_dulceata"
+        ],
+        "approved_payload": [],
+        "historical_approved_form_attention": [],
+        "primary_source_dispositions": [],
+        "lexeme_dispositions": [],
+        "observations_not_reservations": [],
+        "legacy_final_record_attention": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 7615,
+          "surface": "dulceaţă",
+          "count": 2757
+        },
+        "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+      },
+      "family_attention": [
+        {
+          "head": "dulceață",
+          "key": "dulceata",
+          "status": "live_owner",
+          "live_owners": [
+            {
+              "id": "n_v17gas_dulceata",
+              "label": "Dulceață"
+            }
+          ],
+          "world_ids": [
+            "n_v17gas_dulceata"
+          ],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": {
+            "rank": 7615,
+            "surface": "dulceaţă",
+            "count": 2757
+          },
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "dulceața",
+          "key": "dulceata",
+          "status": "live_owner",
+          "live_owners": [
+            {
+              "id": "n_v17gas_dulceata",
+              "label": "Dulceață"
+            }
+          ],
+          "world_ids": [
+            "n_v17gas_dulceata"
+          ],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": {
+            "rank": 7615,
+            "surface": "dulceaţă",
+            "count": 2757
+          },
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "dulceții",
+          "key": "dulcetii",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "dulcețuri",
+          "key": "dulceturi",
+          "status": "live_owner",
+          "live_owners": [
+            {
+              "id": "n_v17gas_dulceata",
+              "label": "Dulceață"
+            }
+          ],
+          "world_ids": [
+            "n_v17gas_dulceata"
+          ],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "dulcețurile",
+          "key": "dulceturile",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "dulcețurilor",
+          "key": "dulceturilor",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        }
+      ],
+      "historical_missing_practical_keys": [
+        {
+          "surface": "dulcețurile",
+          "key": "dulceturile",
+          "role": "plural_articulated"
+        }
+      ],
+      "source_approved": false,
+      "note": "Existing selected-family attention, not a new concept or normative paradigm. Current approved/held dispositions take precedence."
+    },
+    {
+      "head": "regizor",
+      "kind": "existing_owner_family_attention",
+      "owner": {
+        "id": "n_v2fil_regizor",
+        "label_ro": "Regizor",
+        "category": "film_tv",
+        "description": "Autor artistic care coordonează realizarea unui film sau spectacol."
+      },
+      "selected_sense": "Current artistic film/performance director person sense.",
+      "active_anchor": "regizor",
+      "head_attention": {
+        "head": "regizor",
+        "key": "regizor",
+        "status": "live_owner",
+        "live_owners": [
+          {
+            "id": "n_v2fil_regizor",
+            "label": "Regizor"
+          }
+        ],
+        "world_ids": [],
+        "approved_payload": [],
+        "historical_approved_form_attention": [],
+        "primary_source_dispositions": [],
+        "lexeme_dispositions": [],
+        "observations_not_reservations": [],
+        "legacy_final_record_attention": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 10785,
+          "surface": "regizor",
+          "count": 1748
+        },
+        "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+      },
+      "family_attention": [
+        {
+          "head": "regizor",
+          "key": "regizor",
+          "status": "live_owner",
+          "live_owners": [
+            {
+              "id": "n_v2fil_regizor",
+              "label": "Regizor"
+            }
+          ],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": {
+            "rank": 10785,
+            "surface": "regizor",
+            "count": 1748
+          },
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "regizorul",
+          "key": "regizorul",
+          "status": "live_owner",
+          "live_owners": [
+            {
+              "id": "n_v2fil_regizor",
+              "label": "Regizor"
+            }
+          ],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": {
+            "rank": 12383,
+            "surface": "regizorul",
+            "count": 1458
+          },
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "regizorului",
+          "key": "regizorului",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": {
+            "rank": 46715,
+            "surface": "regizorului",
+            "count": 195
+          },
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "regizori",
+          "key": "regizori",
+          "status": "live_owner",
+          "live_owners": [
+            {
+              "id": "n_v2fil_regizor",
+              "label": "Regizor"
+            }
+          ],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": {
+            "rank": 41715,
+            "surface": "regizori",
+            "count": 236
+          },
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "regizorii",
+          "key": "regizorii",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "regizorilor",
+          "key": "regizorilor",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        }
+      ],
+      "historical_missing_practical_keys": [
+        {
+          "surface": "regizorii",
+          "key": "regizorii",
+          "role": "plural_articulated"
+        }
+      ],
+      "source_approved": false,
+      "note": "Existing selected-family attention, not a new concept or normative paradigm. Current approved/held dispositions take precedence."
+    }
+  ],
+  "optional_exact_sense_attention": [
+    {
+      "head": "grafie",
+      "kind": "existing_owner_family_attention",
+      "owner": {
+        "id": "n_v2lim_scriere",
+        "label_ro": "Scriere",
+        "category": "limba",
+        "description": "Reprezentarea limbii prin litere, semne și reguli grafice."
+      },
+      "selected_sense": "Graphic representation/writing system in the present Scriere sense.",
+      "active_anchor": "grafie",
+      "head_attention": {
+        "head": "grafie",
+        "key": "grafie",
+        "status": "live_owner",
+        "live_owners": [
+          {
+            "id": "n_v2lim_scriere",
+            "label": "Scriere"
+          }
+        ],
+        "world_ids": [],
+        "approved_payload": [],
+        "historical_approved_form_attention": [],
+        "primary_source_dispositions": [],
+        "lexeme_dispositions": [],
+        "observations_not_reservations": [],
+        "legacy_final_record_attention": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+      },
+      "family_attention": [
+        {
+          "head": "grafie",
+          "key": "grafie",
+          "status": "live_owner",
+          "live_owners": [
+            {
+              "id": "n_v2lim_scriere",
+              "label": "Scriere"
+            }
+          ],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "grafia",
+          "key": "grafia",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "grafiei",
+          "key": "grafiei",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "grafii",
+          "key": "grafii",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "grafiile",
+          "key": "grafiile",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "grafiilor",
+          "key": "grafiilor",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        }
+      ],
+      "historical_missing_practical_keys": [
+        {
+          "surface": "grafia",
+          "key": "grafia",
+          "role": "singular_articulated"
+        },
+        {
+          "surface": "grafii",
+          "key": "grafii",
+          "role": "plural_bare"
+        },
+        {
+          "surface": "grafiile",
+          "key": "grafiile",
+          "role": "plural_articulated"
+        }
+      ],
+      "source_approved": false,
+      "note": "Existing selected-family attention, not a new concept or normative paradigm. Current approved/held dispositions take precedence."
+    },
+    {
+      "head": "poem",
+      "kind": "existing_owner_family_attention",
+      "owner": {
+        "id": "n_v2lit_poezie_lirica",
+        "label_ro": "Poezie lirică",
+        "category": "literatura",
+        "description": "Text literar concentrat pe expresie, ritm și subiectivitate."
+      },
+      "selected_sense": "Lyrical literary text only; existing alias does not establish equivalence of all poems to lyric poetry.",
+      "active_anchor": "poem",
+      "head_attention": {
+        "head": "poem",
+        "key": "poem",
+        "status": "live_owner",
+        "live_owners": [
+          {
+            "id": "n_v2lit_poezie_lirica",
+            "label": "Poezie lirică"
+          }
+        ],
+        "world_ids": [],
+        "approved_payload": [],
+        "historical_approved_form_attention": [],
+        "primary_source_dispositions": [],
+        "lexeme_dispositions": [],
+        "observations_not_reservations": [],
+        "legacy_final_record_attention": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 13080,
+          "surface": "poem",
+          "count": 1357
+        },
+        "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+      },
+      "family_attention": [
+        {
+          "head": "poem",
+          "key": "poem",
+          "status": "live_owner",
+          "live_owners": [
+            {
+              "id": "n_v2lit_poezie_lirica",
+              "label": "Poezie lirică"
+            }
+          ],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": {
+            "rank": 13080,
+            "surface": "poem",
+            "count": 1357
+          },
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "poemul",
+          "key": "poemul",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": {
+            "rank": 25986,
+            "surface": "poemul",
+            "count": 505
+          },
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "poemului",
+          "key": "poemului",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "poeme",
+          "key": "poeme",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": {
+            "rank": 35509,
+            "surface": "poeme",
+            "count": 307
+          },
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "poemele",
+          "key": "poemele",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": {
+            "rank": 42339,
+            "surface": "poemele",
+            "count": 230
+          },
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "poemelor",
+          "key": "poemelor",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        }
+      ],
+      "historical_missing_practical_keys": [
+        {
+          "surface": "poemul",
+          "key": "poemul",
+          "role": "singular_articulated"
+        },
+        {
+          "surface": "poeme",
+          "key": "poeme",
+          "role": "plural_bare"
+        },
+        {
+          "surface": "poemele",
+          "key": "poemele",
+          "role": "plural_articulated"
+        }
+      ],
+      "source_approved": false,
+      "note": "Existing selected-family attention, not a new concept or normative paradigm. Current approved/held dispositions take precedence."
+    },
+    {
+      "head": "citire",
+      "kind": "existing_owner_family_attention",
+      "owner": {
+        "id": "n_v3lit_lectura",
+        "label_ro": "Lectură",
+        "category": "literatura",
+        "description": "Activitatea de a citi și înțelege texte."
+      },
+      "selected_sense": "Reading and understanding text; exclude measurement-reading senses.",
+      "active_anchor": "citire",
+      "head_attention": {
+        "head": "citire",
+        "key": "citire",
+        "status": "live_owner",
+        "live_owners": [
+          {
+            "id": "n_v3lit_lectura",
+            "label": "Lectură"
+          }
+        ],
+        "world_ids": [],
+        "approved_payload": [],
+        "historical_approved_form_attention": [],
+        "primary_source_dispositions": [],
+        "lexeme_dispositions": [],
+        "observations_not_reservations": [],
+        "legacy_final_record_attention": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 23420,
+          "surface": "citire",
+          "count": 589
+        },
+        "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+      },
+      "family_attention": [
+        {
+          "head": "citire",
+          "key": "citire",
+          "status": "live_owner",
+          "live_owners": [
+            {
+              "id": "n_v3lit_lectura",
+              "label": "Lectură"
+            }
+          ],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": {
+            "rank": 23420,
+            "surface": "citire",
+            "count": 589
+          },
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "citirea",
+          "key": "citirea",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": {
+            "rank": 21348,
+            "surface": "citirea",
+            "count": 675
+          },
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "citirii",
+          "key": "citirii",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "citiri",
+          "key": "citiri",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "citirile",
+          "key": "citirile",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "citirilor",
+          "key": "citirilor",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        }
+      ],
+      "historical_missing_practical_keys": [
+        {
+          "surface": "citirea",
+          "key": "citirea",
+          "role": "singular_articulated"
+        },
+        {
+          "surface": "citiri",
+          "key": "citiri",
+          "role": "plural_bare"
+        },
+        {
+          "surface": "citirile",
+          "key": "citirile",
+          "role": "plural_articulated"
+        }
+      ],
+      "source_approved": false,
+      "note": "Existing selected-family attention, not a new concept or normative paradigm. Current approved/held dispositions take precedence."
+    },
+    {
+      "head": "horincă",
+      "kind": "existing_owner_family_attention",
+      "owner": {
+        "id": "n_gas_palinca",
+        "label_ro": "Pălincă",
+        "category": "gastronomie",
+        "description": "Distilat tare din fructe, emblematic mai ales în Transilvania și Maramureș."
+      },
+      "selected_sense": "Regional fruit spirit within current Pălincă owner; register and exact drink equivalence need evidence.",
+      "active_anchor": "horincă",
+      "head_attention": {
+        "head": "horincă",
+        "key": "horinca",
+        "status": "live_owner",
+        "live_owners": [
+          {
+            "id": "n_gas_palinca",
+            "label": "Pălincă"
+          }
+        ],
+        "world_ids": [],
+        "approved_payload": [],
+        "historical_approved_form_attention": [],
+        "primary_source_dispositions": [],
+        "lexeme_dispositions": [],
+        "observations_not_reservations": [],
+        "legacy_final_record_attention": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+      },
+      "family_attention": [
+        {
+          "head": "horincă",
+          "key": "horinca",
+          "status": "live_owner",
+          "live_owners": [
+            {
+              "id": "n_gas_palinca",
+              "label": "Pălincă"
+            }
+          ],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "horinca",
+          "key": "horinca",
+          "status": "live_owner",
+          "live_owners": [
+            {
+              "id": "n_gas_palinca",
+              "label": "Pălincă"
+            }
+          ],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "horincii",
+          "key": "horincii",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "horinci",
+          "key": "horinci",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "horincile",
+          "key": "horincile",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "horincilor",
+          "key": "horincilor",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        }
+      ],
+      "historical_missing_practical_keys": [
+        {
+          "surface": "horinci",
+          "key": "horinci",
+          "role": "plural_bare"
+        },
+        {
+          "surface": "horincile",
+          "key": "horincile",
+          "role": "plural_articulated"
+        }
+      ],
+      "source_approved": false,
+      "note": "Existing selected-family attention, not a new concept or normative paradigm. Current approved/held dispositions take precedence."
+    },
+    {
+      "head": "cartaboș",
+      "kind": "existing_owner_family_attention",
+      "owner": {
+        "id": "n_gas_caltabos",
+        "label_ro": "Caltaboș",
+        "category": "gastronomie",
+        "description": "Preparat tradițional de porc, fiert în maț, prezent pe masa de Crăciun."
+      },
+      "selected_sense": "Current pork Caltaboș preparation; normative variant/table need own head source.",
+      "active_anchor": "cartaboș",
+      "head_attention": {
+        "head": "cartaboș",
+        "key": "cartabos",
+        "status": "live_owner",
+        "live_owners": [
+          {
+            "id": "n_gas_caltabos",
+            "label": "Caltaboș"
+          }
+        ],
+        "world_ids": [],
+        "approved_payload": [],
+        "historical_approved_form_attention": [],
+        "primary_source_dispositions": [],
+        "lexeme_dispositions": [],
+        "observations_not_reservations": [],
+        "legacy_final_record_attention": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+      },
+      "family_attention": [
+        {
+          "head": "cartaboș",
+          "key": "cartabos",
+          "status": "live_owner",
+          "live_owners": [
+            {
+              "id": "n_gas_caltabos",
+              "label": "Caltaboș"
+            }
+          ],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "cartaboșul",
+          "key": "cartabosul",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "cartaboșului",
+          "key": "cartabosului",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "cartaboși",
+          "key": "cartabosi",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "cartaboșii",
+          "key": "cartabosii",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "cartaboșilor",
+          "key": "cartabosilor",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        }
+      ],
+      "historical_missing_practical_keys": [
+        {
+          "surface": "cartaboșul",
+          "key": "cartabosul",
+          "role": "singular_articulated"
+        },
+        {
+          "surface": "cartaboși",
+          "key": "cartabosi",
+          "role": "plural_bare"
+        },
+        {
+          "surface": "cartaboșii",
+          "key": "cartabosii",
+          "role": "plural_articulated"
+        }
+      ],
+      "source_approved": false,
+      "note": "Existing selected-family attention, not a new concept or normative paradigm. Current approved/held dispositions take precedence."
+    },
+    {
+      "head": "leber",
+      "kind": "existing_owner_family_attention",
+      "owner": {
+        "id": "n_gas_lebar",
+        "label_ro": "Lebăr",
+        "category": "gastronomie",
+        "description": "Preparat de porc cu ficat, specific tăierii porcului și platourilor de iarnă."
+      },
+      "selected_sense": "Current liver-based pork sausage Lebăr; own normative head may constrain variants/plural.",
+      "active_anchor": "leber",
+      "head_attention": {
+        "head": "leber",
+        "key": "leber",
+        "status": "live_owner",
+        "live_owners": [
+          {
+            "id": "n_gas_lebar",
+            "label": "Lebăr"
+          }
+        ],
+        "world_ids": [],
+        "approved_payload": [],
+        "historical_approved_form_attention": [],
+        "primary_source_dispositions": [],
+        "lexeme_dispositions": [],
+        "observations_not_reservations": [],
+        "legacy_final_record_attention": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+      },
+      "family_attention": [
+        {
+          "head": "leber",
+          "key": "leber",
+          "status": "live_owner",
+          "live_owners": [
+            {
+              "id": "n_gas_lebar",
+              "label": "Lebăr"
+            }
+          ],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "leberul",
+          "key": "leberul",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "leberului",
+          "key": "leberului",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "leberi",
+          "key": "leberi",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "leberii",
+          "key": "leberii",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "leberilor",
+          "key": "leberilor",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        }
+      ],
+      "historical_missing_practical_keys": [
+        {
+          "surface": "leberul",
+          "key": "leberul",
+          "role": "singular_articulated"
+        },
+        {
+          "surface": "leberi",
+          "key": "leberi",
+          "role": "plural_bare"
+        },
+        {
+          "surface": "leberii",
+          "key": "leberii",
+          "role": "plural_articulated"
+        }
+      ],
+      "source_approved": false,
+      "note": "Existing selected-family attention, not a new concept or normative paradigm. Current approved/held dispositions take precedence."
+    },
+    {
+      "head": "ciubuc",
+      "kind": "existing_owner_family_attention",
+      "owner": {
+        "id": "n_v11via_bacsis",
+        "label_ro": "Bacșiș",
+        "category": "viata_de_roman",
+        "description": "Suma lăsată peste nota de plată pentru servicii."
+      },
+      "selected_sense": "Tip paid over a service bill; exclude pipe, molding, or corruption meanings.",
+      "active_anchor": "ciubuc",
+      "head_attention": {
+        "head": "ciubuc",
+        "key": "ciubuc",
+        "status": "live_owner",
+        "live_owners": [
+          {
+            "id": "n_v11via_bacsis",
+            "label": "Bacșiș"
+          }
+        ],
+        "world_ids": [],
+        "approved_payload": [],
+        "historical_approved_form_attention": [],
+        "primary_source_dispositions": [],
+        "lexeme_dispositions": [],
+        "observations_not_reservations": [],
+        "legacy_final_record_attention": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+      },
+      "family_attention": [
+        {
+          "head": "ciubuc",
+          "key": "ciubuc",
+          "status": "live_owner",
+          "live_owners": [
+            {
+              "id": "n_v11via_bacsis",
+              "label": "Bacșiș"
+            }
+          ],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "ciubucul",
+          "key": "ciubucul",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "ciubucului",
+          "key": "ciubucului",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "ciubucuri",
+          "key": "ciubucuri",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "ciubucurile",
+          "key": "ciubucurile",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "ciubucurilor",
+          "key": "ciubucurilor",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        }
+      ],
+      "historical_missing_practical_keys": [
+        {
+          "surface": "ciubucul",
+          "key": "ciubucul",
+          "role": "singular_articulated"
+        },
+        {
+          "surface": "ciubucuri",
+          "key": "ciubucuri",
+          "role": "plural_bare"
+        },
+        {
+          "surface": "ciubucurile",
+          "key": "ciubucurile",
+          "role": "plural_articulated"
+        }
+      ],
+      "source_approved": false,
+      "note": "Existing selected-family attention, not a new concept or normative paradigm. Current approved/held dispositions take precedence."
+    },
+    {
+      "head": "cârpeală",
+      "kind": "existing_owner_family_attention",
+      "owner": {
+        "id": "n_v2via_improvizatie",
+        "label_ro": "Improvizație",
+        "category": "viata_de_roman",
+        "description": "Soluție făcută rapid cu resurse la îndemână, nu mereu elegantă."
+      },
+      "selected_sense": "Makeshift improvised solution; exclude literal patching-only sense unless same-sense equivalence is sourced.",
+      "active_anchor": "cârpeală",
+      "head_attention": {
+        "head": "cârpeală",
+        "key": "carpeala",
+        "status": "live_owner",
+        "live_owners": [
+          {
+            "id": "n_v2via_improvizatie",
+            "label": "Improvizație"
+          }
+        ],
+        "world_ids": [],
+        "approved_payload": [],
+        "historical_approved_form_attention": [],
+        "primary_source_dispositions": [],
+        "lexeme_dispositions": [],
+        "observations_not_reservations": [],
+        "legacy_final_record_attention": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+      },
+      "family_attention": [
+        {
+          "head": "cârpeală",
+          "key": "carpeala",
+          "status": "live_owner",
+          "live_owners": [
+            {
+              "id": "n_v2via_improvizatie",
+              "label": "Improvizație"
+            }
+          ],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "cârpeala",
+          "key": "carpeala",
+          "status": "live_owner",
+          "live_owners": [
+            {
+              "id": "n_v2via_improvizatie",
+              "label": "Improvizație"
+            }
+          ],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "cârpelii",
+          "key": "carpelii",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "cârpeli",
+          "key": "carpeli",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "cârpelile",
+          "key": "carpelile",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        },
+        {
+          "head": "cârpelilor",
+          "key": "carpelilor",
+          "status": "uncovered_head_hypothesis",
+          "live_owners": [],
+          "world_ids": [],
+          "approved_payload": [],
+          "historical_approved_form_attention": [],
+          "primary_source_dispositions": [],
+          "lexeme_dispositions": [],
+          "observations_not_reservations": [],
+          "legacy_final_record_attention": [],
+          "raw_deferred": false,
+          "current_deferred": false,
+          "reviewed_unresolved": false,
+          "Cald_proxies": [],
+          "frequency_positive_signal": null,
+          "scope": "Offline root-authored head hypothesis only; no planned paradigm, source truth, reservation, synonym or graph approval."
+        }
+      ],
+      "historical_missing_practical_keys": [
+        {
+          "surface": "cârpeli",
+          "key": "carpeli",
+          "role": "plural_bare"
+        },
+        {
+          "surface": "cârpelile",
+          "key": "carpelile",
+          "role": "plural_articulated"
+        }
+      ],
+      "source_approved": false,
+      "note": "Existing selected-family attention, not a new concept or normative paradigm. Current approved/held dispositions take precedence."
+    }
+  ],
+  "attention_references": {
+    "/home/dobo/work/_worktrees/cat_de_roman_esti/docs__content-consolidation-v1-8-to-v1-32/docs/content-consolidation/v1-8-through-v1-32/selections/v1-42-residual-backlog.json": "56e013f35f2041d39a47fd42fd64c43e05658606c8ec4deb930edb0a684b9b83",
+    "/home/dobo/work/_temp/content__v1-41-school-objects-language-and-common-inputs/resumed-discovery/authors/landscape-attention.json": "6ead6813535b1837e90d20e365e51531c60d76e1d99351c9c8358376d2c42f00",
+    "/home/dobo/work/_temp/content__v1-41-school-objects-language-and-common-inputs/resumed-discovery/authors/alias-attention.json": "d5e7e19ed5a4b4bf8f8b13a7e720bf1f644a49d2f92ba5a4520018c1d6f69e21",
+    "/home/dobo/work/_temp/content__v1-41-school-objects-language-and-common-inputs/resumed-discovery/authors/food-home-attention.json": "c0d341a7ca699de24f6653d1897a6eed1909328110b8a85b823caf5883cd8c06"
+  },
+  "recommended_first_qualification_slice": {
+    "scope": "Decision proposal only: separately authorize qualification of these five already reviewed ordinary input families against then-latest frozen designated feature/WIP. No application, install or landing permission inferred.",
+    "families": [
+      {
+        "record_id": "v141-avion",
+        "lemma": "avion",
+        "owner_id": "n_v2sti_avion",
+        "current_label": "Avion",
+        "selected_sense": "Aparat de zbor cu aripi și propulsie proprie, exact sensul actualului Avion; numai formele propriei leme, inclusiv pluralul comun, fără alte sinonime sau subtipuri.",
+        "reviewed_missing_forms": [
+          "avioane",
+          "avioanele",
+          "avionului",
+          "avioanelor"
+        ],
+        "current_owner_sha256": "92c0372a15c871f3a83da68e73f023d9bfaac2b553dcc104b40c273119cf300f",
+        "source_ref": "19667bf430d1d6af9409bc2ea1c5e60be0b67aab",
+        "source_pool_path": "docs/content-pool/v1-41-school-objects-language-and-common-inputs/pool.json",
+        "source_module_path": "scripts/school_objects_language_and_common_inputs_v1_41_data.py",
+        "existing_signed_source_approval_only": true
+      },
+      {
+        "record_id": "v141-manastire",
+        "lemma": "mănăstire",
+        "owner_id": "n_v2art_manastire",
+        "current_label": "Mănăstire",
+        "selected_sense": "Așezământ religios cu viață monahală și ansamblul său de clădiri, în sensul proprietarului existent; numai lema mănăstire și propria familie actuală, fără variantele mânăstire sau monastire.",
+        "reviewed_missing_forms": [
+          "mănăstirea",
+          "mănăstiri",
+          "mănăstirile",
+          "mănăstirii",
+          "mănăstirilor"
+        ],
+        "current_owner_sha256": "8dc732d0658b973f02eb48f2c815b32907397e817efbbb702630dda9e8c01486",
+        "source_ref": "19667bf430d1d6af9409bc2ea1c5e60be0b67aab",
+        "source_pool_path": "docs/content-pool/v1-41-school-objects-language-and-common-inputs/pool.json",
+        "source_module_path": "scripts/school_objects_language_and_common_inputs_v1_41_data.py",
+        "existing_signed_source_approval_only": true
+      },
+      {
+        "record_id": "v141-cinematograf",
+        "lemma": "cinematograf",
+        "owner_id": "n_v3fil_cinematograf",
+        "current_label": "Cinematograf",
+        "selected_sense": "Se păstrează exclusiv proprietarul existent pentru sala publică de proiecție; nu se extinde către arta sau tehnica cinematografiei.",
+        "reviewed_missing_forms": [
+          "cinematograful",
+          "cinematografe",
+          "cinematografele",
+          "cinematografului",
+          "cinematografelor"
+        ],
+        "current_owner_sha256": "c6a8223b71aecd3af72f6cd8b612bb3a2bbf0d3dd9decc05d6b06cc28f1ae40d",
+        "source_ref": "19667bf430d1d6af9409bc2ea1c5e60be0b67aab",
+        "source_pool_path": "docs/content-pool/v1-41-school-objects-language-and-common-inputs/pool.json",
+        "source_module_path": "scripts/school_objects_language_and_common_inputs_v1_41_data.py",
+        "existing_signed_source_approval_only": true
+      },
+      {
+        "record_id": "v142-interfon",
+        "lemma": "interfon",
+        "owner_id": "n_vdr_interfon",
+        "current_label": "Interfonul",
+        "selected_sense": "Interfon de bloc, comunicare între intrare și apartament; morfologie a aceleiași leme la proprietarul Interfonul, fără extindere la alte sisteme de comunicații.",
+        "reviewed_missing_forms": [
+          "interfoane",
+          "interfoanele",
+          "interfonului",
+          "interfoanelor"
+        ],
+        "current_owner_sha256": "5b7ff26ef4b700e3a8e18fa65bf58c4ef852319539fbe9873bdfd44c6f416a31",
+        "source_ref": "d331f6ad79696019b6882d53035572f3da4c7cd1",
+        "source_pool_path": "docs/content-pool/v1-42-familiar-food-materials-and-selected-inputs/pool.json",
+        "source_module_path": "scripts/familiar_food_materials_and_selected_inputs_v1_42_data.py",
+        "existing_signed_source_approval_only": true
+      },
+      {
+        "record_id": "v142-sucitor",
+        "lemma": "sucitor",
+        "owner_id": "n_v84_food_sucitor",
+        "current_label": "Sucitor",
+        "selected_sense": "DEX09 1 unealta pentru întinderea foii de aluat; excluse amestecarea mămăligii și dispozitivele de tensionare de la fierăstrău sau război de țesut.",
+        "reviewed_missing_forms": [
+          "sucitoare",
+          "sucitoarele",
+          "sucitoarelor"
+        ],
+        "current_owner_sha256": "f0b5bc64aad07d4fb97a38e4634319662c698b0120a8e89d276ed83b23c59c37",
+        "source_ref": "d331f6ad79696019b6882d53035572f3da4c7cd1",
+        "source_pool_path": "docs/content-pool/v1-42-familiar-food-materials-and-selected-inputs/pool.json",
+        "source_module_path": "scripts/familiar_food_materials_and_selected_inputs_v1_42_data.py",
+        "existing_signed_source_approval_only": true
+      }
+    ],
+    "families_count": 5,
+    "normalized_keys": 21,
+    "reason": "Familiar typed plural/case forms and household intercom/rolling-pin terms; exact existing owners and accepted source forms. No new nodes/edges or playable rounds are proposed for this slice.",
+    "required_future_work": "Any later authorized integration must rebind actual feature working bytes and use the existing cascade/gates/playthroughs for exact/fuzzy/projection competition, repeats/wins, snapshots and downstream game effects.",
+    "previous_three_family_proposal_reference": {
+      "path": "selections/v1-42-curation-first.json",
+      "sha256": "f4b93655a7313c193836b2fc5b2052c85ee869a997367bc7202330809961df92"
+    },
+    "source_module_execution_or_application": false,
+    "module_dry_run": false,
+    "integration_authorized": false
+  },
+  "waiting": "curation: stock covers useful gaps",
+  "owner_decision_history_reference": {
+    "source_ref": "d331f6ad79696019b6882d53035572f3da4c7cd1",
+    "path": "docs/reviews/v1-42-familiar-food-materials-and-selected-inputs/owner-handoff.json",
+    "sha256": "98b6aef28b0440f82fbe8df03ab75ee7e681f9d9bfc2a22bf5ae56a96225197e"
+  },
+  "source_approvals_added": 0,
+  "new_web_reviews": 0,
+  "dictionary_requests": 0,
+  "module_execution_or_application": 0,
+  "module_dry_run": false,
+  "source_applied": false,
+  "installed": 0,
+  "target_approvals": 0,
+  "playable_rounds": 0,
+  "player_visible_delta": "0/0/0"
+}

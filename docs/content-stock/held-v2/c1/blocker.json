@@ -1,0 +1,33 @@
+{
+  "schema": "cat-v2-curation-blocker-1",
+  "recorded_at_utc": "2026-10-23T21:06:54.634425+00:00",
+  "wave": "c1",
+  "proposal_commit": "f7ae0f9860da25c2d32aeb7b25258651126ab5f9",
+  "main_anchor_sha": "8a477ccb397f3bb096c9dda2d8e90e48324c8b77",
+  "status": "BLOCKED: paired source independence",
+  "failed_gate": {
+    "path": "/home/dobo/work/_temp/content-loop/evidence/c1/c3-review/paired-guard/independence-v2.json",
+    "sha256": "5f575c95ae8083424cdb8e04f7fe72b20fcb561684f39d0173572fc0a52cbf08",
+    "status": "FAIL",
+    "errors": [
+      "no reviewer-chosen captured URL outside author set: factual-v2-c1:v140-pix",
+      "no reviewer-chosen captured URL outside author set: factual-v2-c1:v140-frate",
+      "no reviewer-chosen captured URL outside author set: factual-v2-c1:v140-fiu",
+      "no reviewer-chosen captured URL outside author set: quality-v2-c1:v140-pix",
+      "no reviewer-chosen captured URL outside author set: quality-v2-c1:v140-frate",
+      "no reviewer-chosen captured URL outside author set: quality-v2-c1:v140-fiu"
+    ]
+  },
+  "affected_ids": [
+    "v140-pix",
+    "v140-frate",
+    "v140-fiu"
+  ],
+  "both_whole_batch_signatures_preserved": true,
+  "no_failed_gate_waiver": true,
+  "content_factual_rejection_claimed": false,
+  "application_allowed": false,
+  "installed": 0,
+  "player_visible_delta": "0/0/0",
+  "next_independent_work": "Prepare a different existing-owner stock scope excluding ALL20 C1 families; baseline only from exact recorded main, never this unqualified proposal branch. All C1 budgets, signatures and evidence remain preserved; C1 dependent work stays stopped."
+}

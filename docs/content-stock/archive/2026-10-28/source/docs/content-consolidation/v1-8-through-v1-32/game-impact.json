@@ -1,0 +1,608 @@
+{
+  "analyst": "quality-v1-32",
+  "task": "read-only consolidation game-impact analysis",
+  "status": "COMPLETE_READ_ONLY_ANALYSIS; INTEGRATION_NOT_QUALIFIED",
+  "main_sha_examined": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+  "main_clean_at_seal": true,
+  "preserved_v1_32": {
+    "branch": "content/v1-32-familiar-water-weather-and-shore",
+    "handoff_commit": "772d187160ac6c4d209e24c999a26e42b621c427"
+  },
+  "scope": {
+    "web_calls": 0,
+    "formal_review_used": false,
+    "source_approvals": 0,
+    "go_or_test_executions": 0,
+    "importer_or_dryrun_executions": 0,
+    "source_edits": 0,
+    "apply_or_export_executions": 0,
+    "remote_operations": 0,
+    "merge_authorized": false,
+    "new_wave": false,
+    "integration_executed": false,
+    "safe_to_merge_established": false
+  },
+  "conclusion": "The reviewed source stock remains unapplied. Runtime isolation comes from keeping it out of the installed/exported bundle; source bookkeeping flags and salience 0.5 would not isolate it after integration. Existing-owner forms are a narrower potential integration lane, but neither zero gameplay impact nor safe integration has been established.",
+  "claim_layers": [
+    {
+      "layer": "source evidence",
+      "establishes": "Romanian spelling, ordinary paradigm, exact selected sense and independently reviewed factual claims.",
+      "does_not_establish": "Runtime ownership after current-main reconciliation, editorial target salience, round suitability or game balance."
+    },
+    {
+      "layer": "ordinary input coverage",
+      "establishes": "After successful integration/export, a noncolliding alias/index key can resolve to an existing owner. Inflection and approved synonym aliases use the same runtime mapping mechanism.",
+      "does_not_establish": "A new node, a separate guess slot, a target, a synonym relation in every sense or new content in all six game interfaces."
+    },
+    {
+      "layer": "target suitability",
+      "establishes": "An editorial judgment of familiarity, concrete intended sense and difficulty, with game-specific qualification.",
+      "does_not_establish": "It is not implied by a source verdict, numeric salience 0.5, or automatic topology eligibility."
+    },
+    {
+      "layer": "truthful links",
+      "establishes": "A source-to-target claim in its selected sense/direction.",
+      "does_not_establish": "An intuitive Alchimie recipe, an unambiguous group/pair, a useful Lanț clue or a calibrated Cald ranking."
+    },
+    {
+      "layer": "playable rounds",
+      "establishes": "A selected board/target/path/recipe with qualified mechanics, explanations, difficulty and current source bindings.",
+      "does_not_establish": "It is not created automatically by documenting accepted source vocabulary."
+    }
+  ],
+  "cross_cutting_findings": [
+    {
+      "id": "metadata_is_not_admission",
+      "finding": "Runtime Node/Edge have no source_applied/gameplay_approved filter. Export parses all graph rows and graph construction admits them. The importer loader also does not treat those source constants as an install lock. Unknown fields directly added to strict runtime JSON would be rejected, not safely quarantined.",
+      "evidence": [
+        "runtime_schema",
+        "embedded_load",
+        "export_index",
+        "runtime_graph",
+        "source_module_loader"
+      ]
+    },
+    {
+      "id": "salience_is_not_quarantine",
+      "finding": "0.5 is an active ranking value: above Alchimie mining seed/target minimum 0.4, eligible in ordinary full-graph pools, and not excluded by Lanț normal/hard mining. Cald hard sorts toward low salience. Some easy filters use 0.6 but fallbacks differ. Edge strength 0.75 is likewise a real path/scoring weight.",
+      "evidence": [
+        "graph_sets",
+        "edge_weight",
+        "cald_targets",
+        "lant_mining",
+        "alchimie_mining",
+        "salience_warning"
+      ]
+    },
+    {
+      "id": "typed_inputs_are_game_specific",
+      "finding": "Cald/Lanț directly resolve typed text. Intrusul/Perechi/Conexiuni submit active-board node IDs; Alchimie combines owned IDs. The Go contracts therefore do not support claiming that an alias-only patch grants ordinary typed-input coverage equally across all six games.",
+      "evidence": [
+        "body_contract",
+        "intrusul_guess",
+        "perechi_guess",
+        "conexiuni_guess",
+        "cald_input",
+        "lant_input",
+        "alchimie_input",
+        "world_input"
+      ]
+    },
+    {
+      "id": "aliases_can_affect_behavior_and_provenance",
+      "finding": "Exact same-owner aliases preserve node identity and graph topology when that is the only change, but alter the global normalized-key set and fuzzy/suggestion competition. In Cald, a new exact key can supersede projection-term fallback and change guess identity/anchor/win/repeat semantics. Complete node snapshots in recipe extensions, discovery world and authored boards include aliases; stale bindings can fail validation or omit reviewed additions.",
+      "evidence": [
+        "export_index",
+        "text_resolution",
+        "cald_input",
+        "alchimie_extension",
+        "world_snapshot",
+        "quick_snapshot",
+        "complete_node_snapshot"
+      ]
+    },
+    {
+      "id": "graph_changes_reach_old_rounds",
+      "finding": "Nodes/edges can alter predecessor populations, weighted ranks, route distances/choices, fallback pools and graph-derived scores even when no new curated rounds are authored. Direction and reachability constrain actual effect; this analysis does not claim every old round changes or compute an integrated delta.",
+      "evidence": [
+        "runtime_graph",
+        "common_neighbors",
+        "cald_profile",
+        "cald_rank",
+        "lant_choices",
+        "conexiuni_fallback",
+        "alchimie_recipe",
+        "round_ranking"
+      ]
+    },
+    {
+      "id": "round_gate_is_separate",
+      "finding": "Ranked pack eligibility/selection is per round. Missing or thin curated shelves invoke game-specific fallback/error paths. Quick boards are exported catalog stock, and derivation uses fixed sources plus graph-sensitive scores/association checks. Source approval is not a per-node gameplay gate.",
+      "evidence": [
+        "pack_eligibility",
+        "pack_daily_floor",
+        "rank_admission",
+        "quick_catalog",
+        "derive",
+        "derive_selection",
+        "conexiuni_create",
+        "cald_targets",
+        "alchimie_challenge"
+      ]
+    },
+    {
+      "id": "relation_truth_is_not_presentation_or_game_design",
+      "finding": "Lanț exports relation fallback captions unless an exact reviewed override is present. Alchimie recipes use common outgoing neighbours; quick-game derivation treats nondistractor associations as undirected strengths. Both direction and player-facing interpretation require later qualification.",
+      "evidence": [
+        "lant_captions",
+        "alchimie_recipe",
+        "common_neighbors",
+        "derive"
+      ]
+    }
+  ],
+  "six_game_impact_matrix": [
+    {
+      "game": "Alchimie",
+      "input_contract": "Challenge combines two owned KG node IDs. Discovery world combines two owned world IDs. Neither submission path resolves generic typed aliases.",
+      "existing_owner_forms_or_aliases": "No new combination or world recipe from aliases alone. However complete-node snapshots may invalidate reviewed challenge extensions or world/board provenance even without graph topology changes.",
+      "new_nodes_or_edges": "Challenge common-neighbour recipes, closure, candidate seed/target pools, bounded projections and hints may change. Salience 0.5 passes the 0.4 mining threshold if other constraints hold. Source truths do not automatically make intuitive recipes. Fixed discovery-world recipes still require explicit world content/provenance.",
+      "round_dependency": "Curated seeds/target must keep matching projection/par; otherwise mining is possible. World mode uses its separate concept/recipe table.",
+      "future_qualification": "Exact snapshot reconciliation; current bounded projection/recipe/minimum-plan/par and curated/fallback behavior; editorial recipe plausibility; explicit world vocabulary/recipes when desired.",
+      "evidence": [
+        "alchimie_challenge",
+        "alchimie_input",
+        "alchimie_recipe",
+        "alchimie_extension",
+        "alchimie_mining",
+        "world_recipes",
+        "world_input",
+        "world_snapshot"
+      ]
+    },
+    {
+      "game": "Intrusul",
+      "input_contract": "Selected node ID must belong to the current exported board; correctness is equality with the board intruder ID.",
+      "existing_owner_forms_or_aliases": "No direct new free-text guess vocabulary in this Go interface. Same-owner alias-only changes need source-snapshot qualification where boards pin node snapshots.",
+      "new_nodes_or_edges": "New KG nodes alone do not create boards. Edges/salience can affect future derivation association eligibility, scoring and board caps; current runtime selects exported catalog boards.",
+      "round_dependency": "Exported board catalog, source/difficulty/category/starter filters and scoring; unavailable stock is an error.",
+      "future_qualification": "Explicit board derivation/authorship through existing path; one clear group predicate and intruder; familiarity/difficulty/cross-association and current snapshot/ranking bindings.",
+      "evidence": [
+        "intrusul_board",
+        "intrusul_pick",
+        "intrusul_guess",
+        "quick_catalog",
+        "quick_snapshot",
+        "derive",
+        "derive_selection"
+      ]
+    },
+    {
+      "game": "Perechi",
+      "input_contract": "Two distinct active-board node IDs are compared with four fixed pair memberships.",
+      "existing_owner_forms_or_aliases": "No direct free-text alias gain in this Go guessing path. Existing-owner alias-only changes can affect complete node snapshots.",
+      "new_nodes_or_edges": "Do not automatically create an eight-node board. Future derived pair eligibility/fairness/scoring uses graph association strength, including undirected treatment of directed nondistractor edges.",
+      "round_dependency": "Exported catalog and its scored/filterable fixed pair payloads.",
+      "future_qualification": "Four uniquely strongest intended pairs, tempting cross-pairs checked, target familiarity and difficulty, current authored snapshot/source/ranking bindings.",
+      "evidence": [
+        "perechi_board",
+        "perechi_guess",
+        "quick_catalog",
+        "quick_snapshot",
+        "derive",
+        "derive_selection"
+      ]
+    },
+    {
+      "game": "Conexiuni",
+      "input_contract": "Four distinct IDs currently on the board are compared with fixed session groups.",
+      "existing_owner_forms_or_aliases": "No direct new typed-alias guess path. Labels/categories are board presentation; aliases alone do not author groups.",
+      "new_nodes_or_edges": "Graph fallback category sizes, candidate nodes, salience ordering, entanglement and own/foreign association fairness may change. Curated payload remains separate; a missing category-specific curated round returns 503 rather than graph fallback.",
+      "round_dependency": "Curated ranked pack first; graph fallback for an eligible unfiltered selection miss, with graph-based fairness attempts.",
+      "future_qualification": "Unique intended four-group partition, plausible alternate partitions/cross-links, category balance/familiarity/difficulty, curated and fallback availability and ranking bindings.",
+      "evidence": [
+        "conexiuni_fallback",
+        "conexiuni_create",
+        "conexiuni_guess",
+        "pack_eligibility",
+        "pack_daily_floor",
+        "round_ranking"
+      ]
+    },
+    {
+      "game": "Cald sau Rece",
+      "input_contract": "Typed text resolves exact graph keys first, then projection terms and guarded fuzzy/suggestions. Guesses/repeats/wins use resolved node or projection identity.",
+      "existing_owner_forms_or_aliases": "Direct ordinary input coverage for the same node, with shared repeat identity. Exact-key additions can supersede prior projection behavior and change fuzzy/suggestion competition; strict sense ownership remains essential.",
+      "new_nodes_or_edges": "Can expand fallback target pools and change reverse reachability, weighted distance buckets, relative ranks/temperature and clues for existing targets. Curated target selection does not freeze its profile.",
+      "round_dependency": "Ranked curated target first; full-graph reachability fallback under game-specific salience/category rules; exact/proxy projection data is separate.",
+      "future_qualification": "Exact/fuzzy/proxy/collision and repeat/win checks; existing-target rank/temperature/clue behavior; sufficient meaningful incoming associations; independently curated familiar targets/difficulty.",
+      "evidence": [
+        "text_resolution",
+        "cald_input",
+        "cald_targets",
+        "cald_profile",
+        "cald_rank",
+        "pack_daily_floor",
+        "round_ranking"
+      ]
+    },
+    {
+      "game": "Lanțul Cuvintelor",
+      "input_contract": "Typed contextual neighbour labels or exact/fuzzy graph inputs must resolve to a real outgoing neighbour; resolved IDs determine progress/win.",
+      "existing_owner_forms_or_aliases": "Direct same-owner typed-input coverage when the resolved owner is an allowed next neighbour. Global fuzzy competition changes remain possible; aliases do not add paths.",
+      "new_nodes_or_edges": "Can change reachable targets, mined start/target pools, shortest/optimal paths, branch widths, choices/hints/dead ends and edge ordering. Salience 0.5 is not a normal/hard exclusion.",
+      "round_dependency": "Curated ranked path first with route checks; otherwise graph mining; exported edge captions depend on relation fallback or exact reviewed override.",
+      "future_qualification": "Owner-safe typed inputs; real directed routes and current optimal length/branch floors; readable true transition captions; meaningful choice/hint quality and suitable familiar start/target difficulty.",
+      "evidence": [
+        "lant_quality",
+        "lant_choices",
+        "lant_mining",
+        "lant_input",
+        "lant_captions",
+        "round_ranking"
+      ]
+    }
+  ],
+  "future_integration_qualification": {
+    "authorization": "These are future checks/criteria using existing reviewed workflows, not execution, new gates or authorization to install/merge.",
+    "criteria": [
+      "Reconcile every full normalized paradigm/synonym against the latest live index, labels/aliases, discovery world, Cald projections, unresolved/deferred policy and all preserved pools; preserve exact owner and selected sense. Source acceptance does not override an owner collision.",
+      "Keep same-owner input coverage, new graph vocabulary/claims and authored rounds as separate proposed integration scopes. Alias-only is a narrower hypothesis, not an established zero-impact or safe-to-merge lane.",
+      "For any integrated alias patch, qualify Cald/Lanț exact and fuzzy resolution, proxy precedence, ambiguity, repeat identity and target wins; check all complete node snapshots and current authorities rather than assuming unchanged edges imply unchanged bindings.",
+      "For graph additions, qualify changed reachable profiles/ranks/clues, directed paths/optimal lengths/choices, Alchimie common-neighbour recipes/projection/par, Conexiuni category/group fairness and quick-board derivation/ranking effects on existing stock.",
+      "Approve target salience/familiarity/difficulty independently from lexicographic evidence and mechanical topology. Neither source flags nor salience 0.5 prevents runtime fallback selection.",
+      "Use only the already-reviewed installation cascade, authority refresh and gates after integration is authorized; preserve all original unmerged source packets. This analysis ran none of them and establishes no integrated player-visible delta.",
+      "Qualify actual local playthroughs/round examples for desired game gains: explicit quick boards, Conexiuni partitions, Cald targets, Lanț routes, Alchimie recipes/world vocabulary. Six game names in source metadata are not playable-round evidence."
+    ]
+  },
+  "limitations": [
+    "Static code/data analysis only on the stated local-main SHA. No hypothetical content integration, endpoint simulation, tests, importer, export, new formal source review, HTTP or remote operations.",
+    "Actual numerical rank, target-selection, catalog/recipe/world validity and regression deltas remain unknown until an authorized exact integration is exercised.",
+    "No recommendation to merge, no claimed zero runtime effect, no new content wave and no modification of source/module/pool/state/serving files."
+  ],
+  "evidence": {
+    "runtime_schema": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/content/content.go",
+      "line": 33,
+      "end_line": 114,
+      "observation": "Runtime content has graph, round, world and metadata fields. Node/Edge have aliases/salience/strength but no source_applied or gameplay_approved admission fields. PackItem eligibility is a round-level field."
+    },
+    "embedded_load": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/content/content.go",
+      "line": 116,
+      "end_line": 128,
+      "observation": "Load verifies the embedded export digest; Decode disallows unknown fields. Unapplied source modules are not dynamically read by the serving graph."
+    },
+    "export_index": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/contentbuild/graph.go",
+      "line": 34,
+      "end_line": 78,
+      "observation": "Exports every parsed node/edge; labels and IDs enter the normalized index, then sorted-owner aliases fill absent keys. Colliding aliases do not override prior keys."
+    },
+    "complete_node_snapshot": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/contentbuild/graph.go",
+      "line": 95,
+      "end_line": 99,
+      "observation": "nodeMap snapshots include aliases, description, salience, category and other node fields; edgeMap includes endpoint/relation/strength/direction."
+    },
+    "runtime_graph": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/graph/service.go",
+      "line": 29,
+      "end_line": 108,
+      "observation": "Admits every content node and edge, adds reverse edges only for Bidirectional, excludes distractors from real adjacency, picks strongest parallel neighbour, and builds reverse/dense weighted adjacency."
+    },
+    "graph_sets": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/graph/service.go",
+      "line": 133,
+      "end_line": 169,
+      "observation": "Salience is a node value, AllIDs returns the full graph, ByCategory filters category, and BySalience applies a numeric minimum/sort."
+    },
+    "common_neighbors": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/graph/service.go",
+      "line": 194,
+      "end_line": 232,
+      "observation": "CommonNeighbors intersects outgoing real neighbours; DistancesFrom and DistancesTo use directed adjacency/reverse adjacency."
+    },
+    "edge_weight": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/graph/service.go",
+      "line": 280,
+      "end_line": 284,
+      "observation": "Path edge cost is 2 minus clamped strength; a valid strength of 0.75 costs 1.25."
+    },
+    "text_resolution": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/graph/service.go",
+      "line": 302,
+      "end_line": 426,
+      "observation": "Exact normalized-index resolution precedes global fuzzy/suggestion matching; fuzzy requires similarity at least 0.90 and sufficient top-two margin. More alias keys can change fuzzy competition."
+    },
+    "body_contract": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/httpapi/body.go",
+      "line": 279,
+      "end_line": 314,
+      "observation": "idsBody accepts string IDs; textBody accepts text; pairBody accepts a and b strings. Resolution behavior is in each service."
+    },
+    "intrusul_board": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/intrusul/service.go",
+      "line": 65,
+      "end_line": 112,
+      "observation": "Intrusul uses exported boards/catalog and shuffles fixed member/intruder IDs."
+    },
+    "intrusul_pick": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/intrusul/service.go",
+      "line": 134,
+      "end_line": 195,
+      "observation": "Daily/seeded selection uses catalog and Content.Labels; missing catalog stock returns an error rather than mining the KG."
+    },
+    "intrusul_guess": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/intrusul/service.go",
+      "line": 277,
+      "end_line": 296,
+      "observation": "Guess must be an ID in the active board order and is correct when equal to its intruder ID; no graph text resolver here."
+    },
+    "perechi_board": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/perechi/service.go",
+      "line": 61,
+      "end_line": 161,
+      "observation": "Perechi stores four exported pairs/eight IDs, selects via catalog, and presents Content.Labels."
+    },
+    "perechi_guess": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/perechi/service.go",
+      "line": 247,
+      "end_line": 273,
+      "observation": "Guess requires two distinct IDs on the active board and matches fixed pair membership; no graph text resolver."
+    },
+    "quick_catalog": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/catalog/catalog.go",
+      "line": 29,
+      "end_line": 75,
+      "observation": "Quick-game catalog copies exported boards, filters game/category/difficulty/source/starter and uses score-based pools."
+    },
+    "quick_snapshot": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/contentbuild/catalogs.go",
+      "line": 518,
+      "end_line": 543,
+      "observation": "Authored quick-board node provenance compares complete nodeMap snapshots, which include aliases."
+    },
+    "pack_eligibility": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/pack/pack.go",
+      "line": 39,
+      "end_line": 55,
+      "observation": "Pack filtering uses game/category/difficulty; eligible is determined by each PackItem.PilotEligible."
+    },
+    "pack_daily_floor": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/pack/pack.go",
+      "line": 131,
+      "end_line": 151,
+      "observation": "Ranked daily selection returns nil when eligible shelf is below default minimum 8 overall or 4 within a category."
+    },
+    "conexiuni_fallback": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/conexiuni/service.go",
+      "line": 103,
+      "end_line": 274,
+      "observation": "Graph fallback uses category node counts, crossing outgoing links, category entanglement and fairness, then four nodes/category; salience sorts easy/hard, normal shuffles."
+    },
+    "conexiuni_create": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/conexiuni/service.go",
+      "line": 290,
+      "end_line": 345,
+      "observation": "Curated groups/IDs are used first; a category-specific request with no curated round returns 503, while an unfiltered request can fall back to graph generation."
+    },
+    "conexiuni_guess": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/conexiuni/service.go",
+      "line": 531,
+      "end_line": 568,
+      "observation": "Guess requires four distinct active-board IDs and compares fixed session groups; no free-text alias resolution."
+    },
+    "cald_profile": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/contexto/service.go",
+      "line": 115,
+      "end_line": 140,
+      "observation": "Every target profile uses all reverse-reachable nodes and weighted distances to calculate bucket populations and closer counts."
+    },
+    "cald_targets": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/contexto/service.go",
+      "line": 163,
+      "end_line": 244,
+      "observation": "Curated target first; fallback normal starts from AllIDs, easy initially salience >=0.6, hard low-salience half, then reachability preference and category-dependent fallbacks."
+    },
+    "cald_rank": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/contexto/service.go",
+      "line": 286,
+      "end_line": 365,
+      "observation": "Exact/proxy projections anchor guesses; ranks depend on target profile, weighted buckets and nonwinning/proxy penalties."
+    },
+    "cald_input": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/contexto/service.go",
+      "line": 687,
+      "end_line": 764,
+      "observation": "Exact graph resolution precedes projection terms; fuzzy/suggestions can follow. Exact node guesses and public projection terms have distinct IDs; repeats share the resolved node/public ID; winning requires an exact target node."
+    },
+    "lant_quality": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/lant/service.go",
+      "line": 97,
+      "end_line": 178,
+      "observation": "Lanț uses exported captions, strengths, salience, graph distances and route-layer widths."
+    },
+    "lant_choices": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/lant/service.go",
+      "line": 253,
+      "end_line": 305,
+      "observation": "Choices are real outgoing neighbours reaching the target, ordered/constrained using path distance and strength/salience."
+    },
+    "lant_mining": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/lant/service.go",
+      "line": 425,
+      "end_line": 502,
+      "observation": "Mined routes use AllIDs or category nodes with degree >=2; easy restricts to >=0.6 only if at least eight salient candidates. Paths, widths and salience govern choice."
+    },
+    "lant_input": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/lant/service.go",
+      "line": 579,
+      "end_line": 669,
+      "observation": "Lanț resolves contextual neighbour labels then exact/fuzzy graph inputs, with special unresolved-term protection; a real outgoing Link is required and resolved IDs determine wins/dead ends."
+    },
+    "lant_captions": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/contentbuild/build.go",
+      "line": 182,
+      "end_line": 207,
+      "observation": "Export writes all parsed nodes/edges. Lanț captions come from relation fallbacks or exact edge-digest-bound reviewed overrides, not automatically from edge label_ro."
+    },
+    "alchimie_challenge": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/alchimie/service.go",
+      "line": 64,
+      "end_line": 97,
+      "observation": "Curated seeds/target must produce bounded projection with matching target_depth/par; otherwise service mines a challenge."
+    },
+    "alchimie_input": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/alchimie/service.go",
+      "line": 233,
+      "end_line": 255,
+      "observation": "Combination requires distinct a,b IDs already owned in inventory; there is no graph text alias resolver in this submission path."
+    },
+    "alchimie_recipe": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/alchimie/projection.go",
+      "line": 393,
+      "end_line": 411,
+      "observation": "Recipe candidates are common outgoing graph neighbours, subject to category; a true factual edge alone does not certify an intuitive combination."
+    },
+    "alchimie_extension": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/alchimie/projection.go",
+      "line": 624,
+      "end_line": 675,
+      "observation": "Reviewed additions bind exact core plus complete node/edge snapshots; any mismatch can return core without additions. Added recipe must remain a common neighbour and preserve a bounded minimum plan/par."
+    },
+    "alchimie_mining": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/alchimie/projection.go",
+      "line": 803,
+      "end_line": 866,
+      "observation": "Mining chooses categories with enough nodes, seeds at salience >=0.4 with >=2 outgoing neighbours (or full-graph fallback), and closure targets at salience >=0.4 plus depth constraints."
+    },
+    "world_recipes": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/alchimie_explore/service.go",
+      "line": 89,
+      "end_line": 124,
+      "observation": "Discovery world loads its own concepts and fixed recipe table with known IDs, not all KG nodes as recipes."
+    },
+    "world_input": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/alchimie_explore/service.go",
+      "line": 219,
+      "end_line": 237,
+      "observation": "Discovery craft requires owned world IDs and a fixed world recipe pair; generic KG aliases do not create world recipes."
+    },
+    "world_snapshot": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/contentbuild/world.go",
+      "line": 138,
+      "end_line": 154,
+      "observation": "Authored world labels may not shadow graph resolution; KG-origin concepts must match complete nodeMap snapshots and presentation/source."
+    },
+    "derive": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/contentops/derive.go",
+      "line": 139,
+      "end_line": 171,
+      "observation": "Quick-board derivation treats nondistractor edge strengths as undirected maxima and uses salience in familiarity scoring."
+    },
+    "derive_selection": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/contentops/derive.go",
+      "line": 173,
+      "end_line": 345,
+      "observation": "Derivation iterates fixed source sets, screens trio/pair strengths and cross-associations, scores/caps boards, and checks strict count drift. Nodes alone do not author new curated boards."
+    },
+    "round_ranking": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/contentops/rank.go",
+      "line": 170,
+      "end_line": 246,
+      "observation": "Conexiuni crossing links, Cald incoming/reachable counts and Lanț paths/widths contribute to round score."
+    },
+    "rank_admission": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/contentops/rank.go",
+      "line": 383,
+      "end_line": 428,
+      "observation": "Round pilot eligibility is approved status without owner hold or FAIL findings; rank sorts score and assigns selection weights 1..5."
+    },
+    "salience_warning": {
+      "file": "/home/dobo/work/cat_de_roman_esti/go-backend/internal/contentops/critique.go",
+      "line": 191,
+      "end_line": 233,
+      "observation": "Salience floors are warnings; existing approved stock also downgrades some topology findings to warnings. Mechanical green is not independent editorial target approval."
+    },
+    "source_module_loader": {
+      "file": "/home/dobo/work/cat_de_roman_esti/scripts/apply_common_words_v24.py",
+      "line": 298,
+      "end_line": 382,
+      "observation": "Read-only inspection: importer loader calls build_nodes_and_edges and reads known batch constants; no SOURCE_APPLIED/GAMEPLAY_APPROVAL check was found. Importer was not run."
+    }
+  },
+  "static_main_observations": {
+    "pack_ranked": true,
+    "eligible_pack_totals": {
+      "contexto": 255,
+      "lant": 121,
+      "conexiuni": 83,
+      "alchimie": 68
+    },
+    "thin_or_empty_shelf_examples": [
+      {
+        "game": "lant",
+        "category": "sport",
+        "difficulty": "greu",
+        "eligible_curated_items": 0
+      },
+      {
+        "game": "alchimie",
+        "category": "geografie",
+        "difficulty": "greu",
+        "eligible_curated_items": 0
+      },
+      {
+        "game": "alchimie",
+        "category": "sport",
+        "difficulty": "normal",
+        "eligible_curated_items": 0
+      },
+      {
+        "game": "contexto",
+        "category": "geografie",
+        "difficulty": "greu",
+        "eligible_curated_items": 2
+      },
+      {
+        "game": "conexiuni",
+        "category": "geografie",
+        "difficulty": "normal",
+        "eligible_curated_items": 0
+      }
+    ],
+    "interpretation": "These are existing-bundle counts, not endpoint executions or proof that any particular unintegrated source node will be selected. Code shows how nil/insufficient selection is handled per game.",
+    "evidence": [
+      "pack_daily_floor",
+      "conexiuni_create",
+      "cald_targets",
+      "lant_mining",
+      "alchimie_challenge"
+    ]
+  },
+  "examined_file_sha256": {
+    "/home/dobo/work/cat_de_roman_esti/go-backend/internal/alchimie/projection.go": "c45a46c4836b58b572f4fec15dbc72a355ec3b8a35a0bee6a37672104a8dab86",
+    "/home/dobo/work/cat_de_roman_esti/go-backend/internal/alchimie/service.go": "f63e805e02aecb58aa6ac4f0a64f6e5838b6d14cb2b001135f087db019545cae",
+    "/home/dobo/work/cat_de_roman_esti/go-backend/internal/alchimie_explore/service.go": "4b53343d07d332fb9f935947b84f3379481bcbf78660211e53ac1357ec9ec0ce",
+    "/home/dobo/work/cat_de_roman_esti/go-backend/internal/catalog/catalog.go": "b930bb8cdd1ecfa2a1ace7e8a0a405d1317ca67706460745d88f0c748418c43c",
+    "/home/dobo/work/cat_de_roman_esti/go-backend/internal/conexiuni/service.go": "d1ca9cca16595b37f9a9c7701c2ef009ee9da01d692dc64605c3a7fe043ff79e",
+    "/home/dobo/work/cat_de_roman_esti/go-backend/internal/content/bundled.json": "f6d983f1ab2cbb7852e8583411eaecd2048fdb5b5da08099129d7e4ff471344c",
+    "/home/dobo/work/cat_de_roman_esti/go-backend/internal/content/content.go": "4990f7ba621b0f10519a3a29ef5e998ea4b2db323b4db2e8d15753a9ef6b4f83",
+    "/home/dobo/work/cat_de_roman_esti/go-backend/internal/contentbuild/build.go": "65b7869f1966e659fa24d885456ba1f105ed3a03a64ceff681009dca3858ce6a",
+    "/home/dobo/work/cat_de_roman_esti/go-backend/internal/contentbuild/catalogs.go": "eb0239ed9b57524b2e6a18aa3d5757650de17c674e6fee071a724037c6f78c77",
+    "/home/dobo/work/cat_de_roman_esti/go-backend/internal/contentbuild/graph.go": "e4e9e54f7350767b5dc35dcde86db6ce22bf681a6be9d364cb723abb298ccf24",
+    "/home/dobo/work/cat_de_roman_esti/go-backend/internal/contentbuild/world.go": "704f3d5d2e4622e753f4c3d521d215c852e600cf00509c80dda20c6a5e8312c1",
+    "/home/dobo/work/cat_de_roman_esti/go-backend/internal/contentops/critique.go": "eca8067e24565d797bc90a19d4e4a300c73282b89afed874a7a80785c1ebe80d",
+    "/home/dobo/work/cat_de_roman_esti/go-backend/internal/contentops/derive.go": "589d7f47704f74dabd1d5a3aed6094d42a978173c6ce89e82f733d5bf12601ae",
+    "/home/dobo/work/cat_de_roman_esti/go-backend/internal/contentops/rank.go": "8fca7ff8a16976bdf036e6e9d77bd800a140cb5ed174260e0ad9d708b7120722",
+    "/home/dobo/work/cat_de_roman_esti/go-backend/internal/contexto/service.go": "0df6ed5f0d2ef5d01c85b93ae5c0d8aa33e3c7648dd7d4bdeed688d24f9e04d4",
+    "/home/dobo/work/cat_de_roman_esti/go-backend/internal/graph/service.go": "a9cc60e321e905293cee6fa49265281fc5db70a78c669c7ba66315933810002e",
+    "/home/dobo/work/cat_de_roman_esti/go-backend/internal/httpapi/body.go": "22dc70b3656ed389cdf3ae2d289fa3c5207f5e322b643cfba72f4405e00c7815",
+    "/home/dobo/work/cat_de_roman_esti/go-backend/internal/intrusul/service.go": "a8d927ecc20d8293c8ee45b0097edaf989c4ecbbaa9b22d0574c72259446bc82",
+    "/home/dobo/work/cat_de_roman_esti/go-backend/internal/lant/service.go": "fca0abb9016dc0805c25ae9edc6947f92df41848e6ad3bd0d85a1d5613cffc90",
+    "/home/dobo/work/cat_de_roman_esti/go-backend/internal/pack/pack.go": "a5c48d9c77365fa1b1e4a56979845a26a1ecc77993b987f84885b7f4579629e7",
+    "/home/dobo/work/cat_de_roman_esti/go-backend/internal/perechi/service.go": "3f0bd33043a154f6b084e2321857b398b01e2f3f85fbfacccff7b4064a6a2369",
+    "/home/dobo/work/cat_de_roman_esti/scripts/apply_common_words_v24.py": "50c07392950feb2f740108c86fc91619fee29699107bdbd7ad28a5477b09ba91"
+  }
+}

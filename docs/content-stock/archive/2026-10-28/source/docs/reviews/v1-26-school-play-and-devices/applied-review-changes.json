@@ -1,0 +1,436 @@
+{
+  "status": "PASS",
+  "wave": "1.26",
+  "original_module_sha256": "fae3b0493e63a3445f5126845586550a1b892bb1a9202a9f84d40b248d6eca69",
+  "final_module_sha256": "af97ac63057ddd8cf7f901aad591821afa009d8330362015ba5af110252d2993",
+  "pool_draft_sha256": "0eff7f4c42971bdc50ef4e1b6d01c421358e995726baa76f88372fd83a5e5d4d",
+  "review_bindings": {
+    "factual": {
+      "reviewer": "factual-v1-26",
+      "path": "docs/reviews/v1-26-school-play-and-devices/graph-factual-review.json",
+      "sha256": "bada7e16449529d9a2049802f4d935ef9e96bb16d02be574689e3638b28ce247",
+      "module_sha256": "fae3b0493e63a3445f5126845586550a1b892bb1a9202a9f84d40b248d6eca69",
+      "round": 1
+    },
+    "quality": {
+      "reviewer": "quality-v1-26",
+      "path": "docs/reviews/v1-26-school-play-and-devices/graph-quality-review.json",
+      "sha256": "583ae388214ccf9f6f1940ea5ccbbfbce4df4cac41294bf3eece81bc82abbdce",
+      "module_sha256": "fae3b0493e63a3445f5126845586550a1b892bb1a9202a9f84d40b248d6eca69",
+      "round": 1
+    }
+  },
+  "changes": [
+    {
+      "operation": "update_caption",
+      "edge_key": {
+        "src": "n_v1_26_prajitor_de_paine",
+        "dst": "n_v24_food_breakfast_unt",
+        "relation": "related_to"
+      },
+      "before": "pâinea prăjită poate fi servită cu unt",
+      "after": "poate pregăti pâine prăjită pentru servire cu unt",
+      "signed_requests": [
+        {
+          "role": "factual",
+          "request": {
+            "item_id": "v126-prajitor_de_paine",
+            "edge_key": {
+              "src": "n_v1_26_prajitor_de_paine",
+              "dst": "n_v24_food_breakfast_unt",
+              "relation": "related_to"
+            },
+            "field": "label_ro",
+            "before": "pâinea prăjită poate fi servită cu unt",
+            "after": "poate pregăti pâine prăjită pentru servire cu unt",
+            "reason": "Make the toaster the grammatical subject and express the indirect association through its prepared output; butter is not inserted into the appliance.",
+            "source_refs": [
+              "F132",
+              "F133"
+            ]
+          }
+        },
+        {
+          "role": "quality",
+          "request": {
+            "operation": "replace_edge_caption",
+            "edge_key": {
+              "src": "n_v1_26_prajitor_de_paine",
+              "relation": "related_to",
+              "dst": "n_v24_food_breakfast_unt"
+            },
+            "before": "pâinea prăjită poate fi servită cu unt",
+            "after": "poate pregăti pâine prăjită pentru servire cu unt",
+            "source_refs": [
+              "q132",
+              "q133"
+            ],
+            "endpoints_relation_unchanged": true
+          }
+        }
+      ]
+    },
+    {
+      "operation": "update_caption",
+      "edge_key": {
+        "src": "n_v1_26_aparat_foto",
+        "dst": "n_v1_11_sticla",
+        "relation": "related_to"
+      },
+      "before": "unele obiective au lentile din sticlă",
+      "after": "poate folosi un obiectiv cu lentile din sticlă",
+      "signed_requests": [
+        {
+          "role": "factual",
+          "request": {
+            "item_id": "v126-aparat_foto",
+            "edge_key": {
+              "src": "n_v1_26_aparat_foto",
+              "dst": "n_v1_11_sticla",
+              "relation": "related_to"
+            },
+            "field": "label_ro",
+            "before": "unele obiective au lentile din sticlă",
+            "after": "poate folosi un obiectiv cu lentile din sticlă",
+            "reason": "Make the camera the subject and disclose the conditional camera-to-lens-component-to-glass relationship.",
+            "source_refs": [
+              "F140",
+              "F141",
+              "F142"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "operation": "update_caption",
+      "edge_key": {
+        "src": "n_v1_26_iedera",
+        "relation": "related_to",
+        "dst": "n_v4sti_frunza"
+      },
+      "before": "are frunze",
+      "after": "are frunze persistente",
+      "signed_requests": [
+        {
+          "role": "quality",
+          "request": {
+            "operation": "replace_edge_caption",
+            "edge_key": {
+              "src": "n_v1_26_iedera",
+              "relation": "related_to",
+              "dst": "n_v4sti_frunza"
+            },
+            "before": "are frunze",
+            "after": "are frunze persistente",
+            "source_refs": [
+              "qe001"
+            ],
+            "endpoints_relation_unchanged": true
+          }
+        }
+      ]
+    },
+    {
+      "operation": "update_caption",
+      "edge_key": {
+        "src": "n_v1_26_iedera",
+        "relation": "related_to",
+        "dst": "n_v24_nature_plant_parts_radacina"
+      },
+      "before": "are rădăcini",
+      "after": "se poate fixa de suport cu rădăcini adventive",
+      "signed_requests": [
+        {
+          "role": "quality",
+          "request": {
+            "operation": "replace_edge_caption",
+            "edge_key": {
+              "src": "n_v1_26_iedera",
+              "relation": "related_to",
+              "dst": "n_v24_nature_plant_parts_radacina"
+            },
+            "before": "are rădăcini",
+            "after": "se poate fixa de suport cu rădăcini adventive",
+            "source_refs": [
+              "qe001"
+            ],
+            "endpoints_relation_unchanged": true
+          }
+        }
+      ]
+    },
+    {
+      "item_id": "v126-nuia",
+      "operation": "hold_and_exclude_proposal",
+      "signed_request": {
+        "operation": "hold_and_exclude_proposal",
+        "item_id": "v126-nuia",
+        "node_id": "n_v1_26_nuia",
+        "before": {
+          "module_included": true,
+          "proposed_forms": [
+            "nuia",
+            "nuiaua",
+            "nuiele",
+            "nuielele",
+            "nuielei",
+            "nuielelor"
+          ],
+          "incident_edge_keys": [
+            {
+              "src": "n_v1_26_nuia",
+              "relation": "related_to",
+              "dst": "n_v24_nature_plant_parts_ramura"
+            },
+            {
+              "src": "n_v1_26_nuia",
+              "relation": "related_to",
+              "dst": "n_v4sti_copac"
+            },
+            {
+              "src": "n_v1_26_nuia",
+              "relation": "related_to",
+              "dst": "n_v4sti_planta"
+            },
+            {
+              "src": "n_v1_26_nuia",
+              "relation": "related_to",
+              "dst": "n_v1_3_material_lemn"
+            }
+          ]
+        },
+        "after": {
+          "module_included": false,
+          "state": "held",
+          "active_forms": [],
+          "active_edges": []
+        },
+        "reason": "After the signed A7 edge drop only three distinct neighbors remain. Preserve vocabulary evidence for owner review; do not add replacement links or lower the four-neighbor floor."
+      },
+      "derived_removed_edges": [
+        {
+          "src": "n_v1_26_nuia",
+          "dst": "n_v24_nature_plant_parts_ramura",
+          "relation": "related_to",
+          "label_ro": "poate proveni dintr-o ramură subțire",
+          "strength": 0.75,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "src": "n_v1_26_nuia",
+          "dst": "n_v4sti_copac",
+          "relation": "related_to",
+          "label_ro": "poate fi obținută dintr-un copac",
+          "strength": 0.75,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "src": "n_v1_26_nuia",
+          "dst": "n_v4sti_planta",
+          "relation": "related_to",
+          "label_ro": "provine dintr-o plantă lemnoasă",
+          "strength": 0.75,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "src": "n_v1_26_nuia",
+          "dst": "n_v1_3_material_lemn",
+          "relation": "related_to",
+          "label_ro": "conține lemn",
+          "strength": 0.75,
+          "is_distractor": 0,
+          "bidirectional": 0
+        }
+      ],
+      "new_forms": []
+    },
+    {
+      "item_id": "v126-bat",
+      "operation": "hold_and_exclude_proposal",
+      "signed_request": {
+        "operation": "hold_and_exclude_proposal",
+        "item_id": "v126-bat",
+        "node_id": "n_v1_26_bat",
+        "before": {
+          "module_included": true,
+          "proposed_forms": [
+            "băț",
+            "bățul",
+            "bețe",
+            "bețele",
+            "bățului",
+            "bețelor"
+          ],
+          "incident_edge_keys": [
+            {
+              "src": "n_v1_26_bat",
+              "relation": "related_to",
+              "dst": "n_v24_nature_plant_parts_ramura"
+            },
+            {
+              "src": "n_v1_26_bat",
+              "relation": "related_to",
+              "dst": "n_v4sti_copac"
+            },
+            {
+              "src": "n_v1_26_bat",
+              "relation": "related_to",
+              "dst": "n_v1_3_material_lemn"
+            },
+            {
+              "src": "n_v1_26_bat",
+              "relation": "related_to",
+              "dst": "n_v32_workshop_cut_fierastrau"
+            }
+          ]
+        },
+        "after": {
+          "module_included": false,
+          "state": "held",
+          "active_forms": [],
+          "active_edges": []
+        },
+        "reason": "After the signed A7 edge drop only three distinct neighbors remain. Preserve vocabulary evidence for owner review; do not add replacement links or lower the four-neighbor floor."
+      },
+      "derived_removed_edges": [
+        {
+          "src": "n_v1_26_bat",
+          "dst": "n_v24_nature_plant_parts_ramura",
+          "relation": "related_to",
+          "label_ro": "un băț de lemn poate proveni dintr-o ramură",
+          "strength": 0.75,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "src": "n_v1_26_bat",
+          "dst": "n_v4sti_copac",
+          "relation": "related_to",
+          "label_ro": "poate proveni dintr-un copac",
+          "strength": 0.75,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "src": "n_v1_26_bat",
+          "dst": "n_v1_3_material_lemn",
+          "relation": "related_to",
+          "label_ro": "unele bețe sunt din lemn",
+          "strength": 0.75,
+          "is_distractor": 0,
+          "bidirectional": 0
+        },
+        {
+          "src": "n_v1_26_bat",
+          "dst": "n_v32_workshop_cut_fierastrau",
+          "relation": "related_to",
+          "label_ro": "un băț de lemn poate fi obținut prin tăiere cu fierăstrăul",
+          "strength": 0.75,
+          "is_distractor": 0,
+          "bidirectional": 0
+        }
+      ],
+      "new_forms": []
+    },
+    {
+      "item_id": "v126-zid",
+      "operation": "classify_contextual_selected_sense_input",
+      "signed_request": {
+        "item_id": "v126-zid",
+        "disposition": "retain contextual masonry/building-wall input; exact_synonym=false",
+        "owner_id": "n_v24_home_structure_perete",
+        "retained_forms": [
+          "zid",
+          "zidul",
+          "ziduri",
+          "zidurile",
+          "zidului",
+          "zidurilor"
+        ],
+        "exact_synonym": false,
+        "operations": [
+          {
+            "field": "PROPOSED_SYNONYM_FAMILIES[item_id=v126-zid]",
+            "before": {
+              "item_id": "v126-zid",
+              "owner_node_id": "n_v24_home_structure_perete",
+              "owner_label": "Perete",
+              "candidate_lemma": "Zid",
+              "forms": [
+                "zid",
+                "zidul",
+                "ziduri",
+                "zidurile",
+                "zidului",
+                "zidurilor"
+              ],
+              "sense": "Masonry/concrete building-wall sense that forms a Perete;not fortification,freestanding fence or sonic metaphor.",
+              "status": "unapproved_exact_sense_synonym_candidate",
+              "source_accepted": false,
+              "review_required": "Explicit exact-sense substitutability judgment by both once-only whole-batch reviewers"
+            },
+            "after": null
+          },
+          {
+            "field": "INPUT_ALIAS_CLASSIFICATION.unapproved_exact_sense_synonym_candidates",
+            "before": [
+              "v126-zid",
+              "v126-pardoseala",
+              "v126-geam",
+              "v126-lavoar",
+              "v126-prundis",
+              "v126-aparat_foto/Aparat de fotografiat"
+            ],
+            "after": [
+              "v126-pardoseala",
+              "v126-geam",
+              "v126-lavoar",
+              "v126-prundis",
+              "v126-aparat_foto/Aparat de fotografiat"
+            ]
+          },
+          {
+            "field": "INPUT_ALIAS_CLASSIFICATION.contextual_selected_sense_inputs",
+            "before": null,
+            "after": [
+              "v126-zid"
+            ]
+          }
+        ],
+        "unchanged": [
+          "ALIASES",
+          "owner metadata",
+          "VERIFIED_SYNONYM_FAMILIES (Zid must not be added)"
+        ],
+        "reason": "Zid selects the masonry/concrete building-wall sense; the existing Perete owner also includes wood and stone, so this is contextual input rather than a broad exact synonym.",
+        "source_refs": [
+          "F006",
+          "F151"
+        ]
+      }
+    }
+  ],
+  "counts": {
+    "items": 34,
+    "new_nodes": 24,
+    "existing_input_families": 10,
+    "alias_owners": 10,
+    "edges": 95,
+    "missing_normalized_keys": 203,
+    "held": 20,
+    "verified_lexical_synonym_families": 4,
+    "verified_qualified_equivalent_families": 1,
+    "applied": 0,
+    "installed": 0,
+    "player_visible_delta": "0/0/0"
+  },
+  "original_research_clocks_unchanged": true,
+  "source_applied": false,
+  "installed": 0,
+  "player_visible_delta": "0/0/0",
+  "semantic_review_rounds": 1
+}

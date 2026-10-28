@@ -1,0 +1,2534 @@
+{
+  "schema": "content-loop-next-work-selection-v1",
+  "observed_at_utc": "2026-10-18T15:18:22.487220+00:00",
+  "valid_until": "Either serving authority changes, the owner changes scope, or full wave screening revises this provisional selection. Rebind at step0 and before research/handoff.",
+  "scope": "One offline NEXT-WORK selection sub-step after V1.33 source handoff and canonical reconciliation; no new baseline, pool, planned-paradigm approval, web research or integration.",
+  "previous_wave": {
+    "wave": "1.33",
+    "closed_source_ref": "76bcda234d90ccec450fcd30835531bfab41e705",
+    "canonical_stock_ref": "f2dab377d6e97ea84aa170d9fc0ce48e120f2d8a",
+    "stock_sha256": "e7506042390b663c2f213a6ce00b861e20a5ee9cc6cf71b9c1ed08cfee497b9f",
+    "ticks_after_selection": 10,
+    "commits_after_selection": 10,
+    "selection_substep": "next-work"
+  },
+  "owner_authority": "2026-10-18 adopted continuous source-only loop. No additional routine approval wait; integration and landing still require separate explicit authorization.",
+  "stock_considered": {
+    "pending_source_accepted_records": 867,
+    "pending_new_concepts": 738,
+    "pending_existing_owner_families": 129,
+    "pending_existing_unique_owners": 118,
+    "missing_payload_owner_key_pairs": 4673,
+    "missing_unique_normalized_payload_keys": 4673,
+    "missing_ordinary_source_form_keys": 4670,
+    "missing_canonical_display_label_only_keys": [
+      {
+        "record_id": "v114-liliac",
+        "key": "liliac (mamifer)"
+      },
+      {
+        "record_id": "v114-somn",
+        "key": "somn (peste)"
+      },
+      {
+        "record_id": "v115-cablu",
+        "key": "cablu (electric)"
+      }
+    ],
+    "missing_new_concept_normalized_inputs": 4177,
+    "missing_existing_owner_normalized_inputs": 496,
+    "pending_unique_directed_edges": 2958,
+    "pending_cald_proxy_key_changes": 105,
+    "current_foreign_owner_collisions": 0,
+    "pending_cross_owner_collisions": 0,
+    "source_graph_nodes_below_numeric_incoming5": 693,
+    "source_graph_nodes_atleast_numeric_incoming5": 45,
+    "source_graph_predecessor_distribution": {
+      "0": 294,
+      "1": 27,
+      "2": 20,
+      "3": 162,
+      "4": 190,
+      "5": 32,
+      "6": 13
+    },
+    "existing_input_families_by_lane": {
+      "selected_sense_lexical_or_qualified_input": 67,
+      "existing_lemma_morphology": 62
+    },
+    "existing_input_missing_keys_by_lane": {
+      "existing_lemma_morphology": 101,
+      "selected_sense_lexical_or_qualified_input": 395
+    },
+    "existing_input_families_with_snapshot_dependencies": 40,
+    "all_source_records": 1414,
+    "all_source_states": {
+      "integrated": 218,
+      "held": 328,
+      "accepted": 867,
+      "rejected": 1
+    },
+    "pending_held_records": 259,
+    "source_packets": 26,
+    "protected_unlanded_closures": 20,
+    "new_source_approvals_by_consolidation": 0,
+    "installed_by_this_work": 0,
+    "new_targets_approved_by_this_work": 0,
+    "new_playable_rounds": 0,
+    "player_visible_delta": "0/0/0"
+  },
+  "priority_decision": {
+    "next_wave": "1.34",
+    "theme": "familiar-service-and-journey-objects",
+    "branch": "content/v1-34-familiar-service-and-journey-objects",
+    "next_step": "0",
+    "primary_committed_start_ref": "feat/gui-cat-m3",
+    "primary_committed_start_sha": "e75518c1473be3a32ec2a0f2e1565764bbcf5d5b",
+    "primary_working_tree_bound_read_only": true,
+    "selected_head_hypotheses": 40,
+    "rationale": "Existing 867 pending packages already cover much familiar home/school vocabulary. This bounded40-head scope addresses physical payment, street access, care-service and everyday vehicle/rail objects missing as exact heads in both content bases and retained pending payloads. It excludes semantic duplicates and old holds; no technical tail is used merely to meet size. The set is provisional and can shrink at full screening/research.",
+    "gap_extension": "Discovery beyond the historical growth backlog, using root-authored familiar-word hypotheses and cached positive frequency signals. This is not an exhaustive inventory of all remaining Romanian words.",
+    "existing_stock_first_lane": "62 families/101 missing matching-lemma keys remain the narrower prospective integration/curation priority; no new source research is claimed for them. Their installation is not authorized, so this tick queues source discovery rather than executing that integration.",
+    "worktree_created": false,
+    "baseline_executed": false,
+    "candidate_pool_created": false,
+    "source_review_started": false,
+    "installable_items_claimed": 0
+  },
+  "bindings": {
+    "primary_feature_working": {
+      "branch": "feat/gui-cat-m3",
+      "head": "e75518c1473be3a32ec2a0f2e1565764bbcf5d5b",
+      "worktree": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3",
+      "binding_path": "../current-feature-working-baseline.json",
+      "binding_sha256": "1787a725a8b431db32b1a24edafe517078f7156cd97b2b166c9764d7ccf503aa",
+      "dirty_paths": 98,
+      "porcelain_z_sha256": "a59c6cd25ec6663ca57d7364919834b6a89db657f68da6dda5c9d6d8ab683ba2",
+      "working_fingerprint_sha256": "aff6cadfb5521b292b99648eec9d83589d973963c4e1f6572248f4417397b173",
+      "WIP_copied_or_executed": false
+    },
+    "secondary_latest_local_main": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+    "bundle_sha256": "f6d983f1ab2cbb7852e8583411eaecd2048fdb5b5da08099129d7e4ff471344c",
+    "procedure_rev": "17b97a2b",
+    "authority_files_matching_primary_secondary_and_closed_source": 244,
+    "historical_files_preserved": 22,
+    "protected_source_refs_rechecked": 20,
+    "frequency_cache_sha256": "af4d7d1fc980ee7f988a5114dd34478dd5c7abd1e66a45c25a5da330f06faba5",
+    "probe_code_sha256": "ea89a44746b5b74a092a8e6fdb4eff7dfdb3677fda69d92084a60890cd0ed0bc"
+  },
+  "method": [
+    "Compare exact normalized head against live normalization/index/labels/aliases, discovery concepts/snapshots and current Cald proxies. Exact authority hashes match primary feature working and secondary main; this does not establish GUI equivalence.",
+    "Read historical canonical records and final module-approved forms once plus V1.33 continuation. Accepted/integrated approved payloads reserve keys; held/planned/excluded/inactive observations do not become reservations. Named prior holds remain preserved.",
+    "Check canonical raw/current deferred and actual accent-preserving ReviewedUnresolved literals under unchanged policy bytes.",
+    "Manually compare known selected-sense overlaps using canonical record definitions. Missing qualified heads can still duplicate an approved concept; exclude Șină de tren and defer shopping trolley rather than count exact-string novelty as new meaning.",
+    "Do not infer full-form ownership/synonymy from a missing head. Step1 must screen every planned form and actual protected source dispositions before any web call. No ordinary paradigm or secondary lexeme is admitted here."
+  ],
+  "selected_head_hypotheses": [
+    {
+      "head": "Card bancar",
+      "normalized_head": "card bancar",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "payments",
+      "sense_hypothesis_ro": "Instrument fizic de plată și retragere legat de un cont bancar; nu orice cartelă.",
+      "head_probe": {
+        "head": "Card bancar",
+        "key": "card bancar",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Bancomat",
+      "normalized_head": "bancomat",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "payments",
+      "sense_hypothesis_ro": "Aparat bancar pentru operațiuni cu numerar; nu bancă ori simplu automat de vânzare.",
+      "head_probe": {
+        "head": "Bancomat",
+        "key": "bancomat",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 19732,
+          "surface": "bancomat",
+          "count": 756
+        },
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Bon fiscal",
+      "normalized_head": "bon fiscal",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "payments",
+      "sense_hypothesis_ro": "Document comercial care consemnează vânzarea; nu interjecție ori cupon generic.",
+      "head_probe": {
+        "head": "Bon fiscal",
+        "key": "bon fiscal",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Chitanță",
+      "normalized_head": "chitanta",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "payments",
+      "sense_hypothesis_ro": "Document care dovedește primirea unei sume; nu bon tratat automat drept sinonim.",
+      "head_probe": {
+        "head": "Chitanță",
+        "key": "chitanta",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 17765,
+          "surface": "chitanţa",
+          "count": 885
+        },
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Bancnotă",
+      "normalized_head": "bancnota",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "payments",
+      "sense_hypothesis_ro": "Semn monetar fizic din hârtie sau polimer; nu orice hârtie ori monedă metalică.",
+      "head_probe": {
+        "head": "Bancnotă",
+        "key": "bancnota",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 19525,
+          "surface": "bancnotă",
+          "count": 767
+        },
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Monedă",
+      "normalized_head": "moneda",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "payments",
+      "sense_hypothesis_ro": "Piesă monetară metalică; exclude sensul general de valută.",
+      "head_probe": {
+        "head": "Monedă",
+        "key": "moneda",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 8083,
+          "surface": "monedă",
+          "count": 2572
+        },
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Trecere de pietoni",
+      "normalized_head": "trecere de pietoni",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "street-and-public-access",
+      "sense_hypothesis_ro": "Loc amenajat pentru traversarea pietonilor; nu orice traversare.",
+      "head_probe": {
+        "head": "Trecere de pietoni",
+        "key": "trecere de pietoni",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [
+          {
+            "public_id": "ctxp_863afa694b125a34d1f9",
+            "anchor_id": "n_v4geo_drum",
+            "domain": "transport rutier",
+            "mapping_kind": "explicit"
+          }
+        ],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Scară rulantă",
+      "normalized_head": "scara rulanta",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "street-and-public-access",
+      "sense_hypothesis_ro": "Instalație mecanizată cu trepte mobile; subtip distinct, nu sinonim al oricărei scări.",
+      "head_probe": {
+        "head": "Scară rulantă",
+        "key": "scara rulanta",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Turnichet",
+      "normalized_head": "turnichet",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "street-and-public-access",
+      "sense_hypothesis_ro": "Dispozitiv rotativ pentru accesul persoanelor; nu orice barieră.",
+      "head_probe": {
+        "head": "Turnichet",
+        "key": "turnichet",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Parcometru",
+      "normalized_head": "parcometru",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "street-and-public-access",
+      "sense_hypothesis_ro": "Aparat de înregistrare sau plată a parcării; nu parcarea ca loc.",
+      "head_probe": {
+        "head": "Parcometru",
+        "key": "parcometru",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Hidrant",
+      "normalized_head": "hidrant",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "street-and-public-access",
+      "sense_hypothesis_ro": "Dispozitiv de racord la o conductă de apă pentru intervenții; nu furtun ori robinet domestic.",
+      "head_probe": {
+        "head": "Hidrant",
+        "key": "hidrant",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 46341,
+          "surface": "hidrant",
+          "count": 197
+        },
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Capac de canal",
+      "normalized_head": "capac de canal",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "street-and-public-access",
+      "sense_hypothesis_ro": "Piesă care acoperă o gură de acces a canalizării; nu canalul geografic navigabil.",
+      "head_probe": {
+        "head": "Capac de canal",
+        "key": "capac de canal",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Rigolă",
+      "normalized_head": "rigola",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "street-and-public-access",
+      "sense_hypothesis_ro": "Canal mic amenajat pentru scurgerea apei, selectat în context stradal.",
+      "head_probe": {
+        "head": "Rigolă",
+        "key": "rigola",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Indicator rutier",
+      "normalized_head": "indicator rutier",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "street-and-public-access",
+      "sense_hypothesis_ro": "Panou sau semn fizic de circulație; nu indicator statistic.",
+      "head_probe": {
+        "head": "Indicator rutier",
+        "key": "indicator rutier",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Targă",
+      "normalized_head": "targa",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "care-service-objects",
+      "sense_hypothesis_ro": "Dispozitiv fizic de transport al persoanelor care nu se pot deplasa.",
+      "head_probe": {
+        "head": "Targă",
+        "key": "targa",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 18026,
+          "surface": "targă",
+          "count": 865
+        },
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Cârjă",
+      "normalized_head": "carja",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "care-service-objects",
+      "sense_hypothesis_ro": "Obiect de sprijin pentru mers; exclude sensul figurat.",
+      "head_probe": {
+        "head": "Cârjă",
+        "key": "carja",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Baston",
+      "normalized_head": "baston",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "care-service-objects",
+      "sense_hypothesis_ro": "Obiect de sprijin la mers; nu armă, baghetă ori simplă metaforă.",
+      "head_probe": {
+        "head": "Baston",
+        "key": "baston",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 16126,
+          "surface": "baston",
+          "count": 1014
+        },
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Scaun cu rotile",
+      "normalized_head": "scaun cu rotile",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "care-service-objects",
+      "sense_hypothesis_ro": "Dispozitiv de șezut și mobilitate pe roți; subtip distinct de scaun și de căruciorul de marfă/copii.",
+      "head_probe": {
+        "head": "Scaun cu rotile",
+        "key": "scaun cu rotile",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Stetoscop",
+      "normalized_head": "stetoscop",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "care-service-objects",
+      "sense_hypothesis_ro": "Instrument de ascultare a sunetelor corpului; numai identificarea obiectului.",
+      "head_probe": {
+        "head": "Stetoscop",
+        "key": "stetoscop",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Seringă",
+      "normalized_head": "seringa",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "care-service-objects",
+      "sense_hypothesis_ro": "Instrument fizic cu cilindru și piston pentru introducerea ori extragerea de lichide.",
+      "head_probe": {
+        "head": "Seringă",
+        "key": "seringa",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 23124,
+          "surface": "seringă",
+          "count": 599
+        },
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Bandaj",
+      "normalized_head": "bandaj",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "care-service-objects",
+      "sense_hypothesis_ro": "Material/dispozitiv de susținere sau acoperire medicală, fără instrucțiuni de tratament.",
+      "head_probe": {
+        "head": "Bandaj",
+        "key": "bandaj",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [
+          {
+            "public_id": "ctxp_221740590c2f143f3ddf",
+            "anchor_id": "n_v24_places_public_farmacie",
+            "domain": "sănătate",
+            "mapping_kind": "explicit"
+          }
+        ],
+        "frequency_positive_signal": {
+          "rank": 19435,
+          "surface": "bandaj",
+          "count": 773
+        },
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Rețetă medicală",
+      "normalized_head": "reteta medicala",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "care-service-objects",
+      "sense_hypothesis_ro": "Document al prescripției medicale; nu rețetă culinară ori sfat de tratament.",
+      "head_probe": {
+        "head": "Rețetă medicală",
+        "key": "reteta medicala",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [
+          {
+            "public_id": "ctxp_b68e201618091e4dae2f",
+            "anchor_id": "n_v24_places_public_farmacie",
+            "domain": "sănătate",
+            "mapping_kind": "explicit"
+          }
+        ],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Coș de cumpărături",
+      "normalized_head": "cos de cumparaturi",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "shopping-container",
+      "sense_hypothesis_ro": "Recipient fizic portabil din magazin; nu cărucior, coș de rufe/gunoi/baschet sau coș virtual.",
+      "head_probe": {
+        "head": "Coș de cumpărături",
+        "key": "cos de cumparaturi",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Torpedou",
+      "normalized_head": "torpedou",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "vehicle-objects-and-rail",
+      "sense_hypothesis_ro": "Compartiment de depozitare din automobil; exclude vehiculul ori sensul nautic vechi.",
+      "head_probe": {
+        "head": "Torpedou",
+        "key": "torpedou",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 30273,
+          "surface": "torpedou",
+          "count": 399
+        },
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Ștergător de parbriz",
+      "normalized_head": "stergator de parbriz",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "vehicle-objects-and-rail",
+      "sense_hypothesis_ro": "Dispozitiv care curăță parbrizul; nu prosop ori ștergător pentru alte suprafețe.",
+      "head_probe": {
+        "head": "Ștergător de parbriz",
+        "key": "stergator de parbriz",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Oglindă retrovizoare",
+      "normalized_head": "oglinda retrovizoare",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "vehicle-objects-and-rail",
+      "sense_hypothesis_ro": "Oglindă de vehicul pentru vederea înapoi; nu orice oglindă.",
+      "head_probe": {
+        "head": "Oglindă retrovizoare",
+        "key": "oglinda retrovizoare",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [
+          {
+            "public_id": "ctxp_707e00b5df073eadd06e",
+            "anchor_id": "n_v24_transport_personal_masina",
+            "domain": "transport rutier",
+            "mapping_kind": "explicit"
+          }
+        ],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Far",
+      "normalized_head": "far",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "vehicle-objects-and-rail",
+      "sense_hypothesis_ro": "Lampă frontală de vehicul; exclude farul maritim. Calificarea poate fi necesară la pasul1.",
+      "head_probe": {
+        "head": "Far",
+        "key": "far",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 11672,
+          "surface": "far",
+          "count": 1574
+        },
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Semnalizator",
+      "normalized_head": "semnalizator",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "vehicle-objects-and-rail",
+      "sense_hypothesis_ro": "Dispozitiv luminos de vehicul care indică schimbarea direcției; exclude rolul uman.",
+      "head_probe": {
+        "head": "Semnalizator",
+        "key": "semnalizator",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Capotă",
+      "normalized_head": "capota",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "vehicle-objects-and-rail",
+      "sense_hypothesis_ro": "Panou mobil al automobilului care acoperă compartimentul motorului; nu articol vestimentar.",
+      "head_probe": {
+        "head": "Capotă",
+        "key": "capota",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 15108,
+          "surface": "capota",
+          "count": 1108
+        },
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Caroserie",
+      "normalized_head": "caroserie",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "vehicle-objects-and-rail",
+      "sense_hypothesis_ro": "Corpul vehiculului destinat ocupanților ori încărcăturii; nu capota luată ca întreg.",
+      "head_probe": {
+        "head": "Caroserie",
+        "key": "caroserie",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Airbag",
+      "normalized_head": "airbag",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "vehicle-objects-and-rail",
+      "sense_hypothesis_ro": "Dispozitiv gonflabil de protecție din vehicul; nu orice pernă ori sac.",
+      "head_probe": {
+        "head": "Airbag",
+        "key": "airbag",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Cric",
+      "normalized_head": "cric",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "vehicle-objects-and-rail",
+      "sense_hypothesis_ro": "Dispozitiv de ridicare a vehiculului; nu simplă roată.",
+      "head_probe": {
+        "head": "Cric",
+        "key": "cric",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 48689,
+          "surface": "cric",
+          "count": 182
+        },
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Pompă de bicicletă",
+      "normalized_head": "pompa de bicicleta",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "vehicle-objects-and-rail",
+      "sense_hypothesis_ro": "Dispozitiv pentru introducerea aerului în anvelope; numai compusul calificat.",
+      "head_probe": {
+        "head": "Pompă de bicicletă",
+        "key": "pompa de bicicleta",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Cheie de roți",
+      "normalized_head": "cheie de roti",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "vehicle-objects-and-rail",
+      "sense_hypothesis_ro": "Unealtă pentru piulițele roților; nu cheia de casă deja deținută.",
+      "head_probe": {
+        "head": "Cheie de roți",
+        "key": "cheie de roti",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Pedală de frână",
+      "normalized_head": "pedala de frana",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "vehicle-objects-and-rail",
+      "sense_hypothesis_ro": "Comandă fizică de picior a frânei; nu orice pedală.",
+      "head_probe": {
+        "head": "Pedală de frână",
+        "key": "pedala de frana",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Schimbător de viteze",
+      "normalized_head": "schimbator de viteze",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "vehicle-objects-and-rail",
+      "sense_hypothesis_ro": "Comandă a treptelor de viteză ale vehiculului; nu întregul mecanism al cutiei.",
+      "head_probe": {
+        "head": "Schimbător de viteze",
+        "key": "schimbator de viteze",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Furgonetă",
+      "normalized_head": "furgoneta",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "vehicle-objects-and-rail",
+      "sense_hypothesis_ro": "Vehicul ușor cu spațiu închis pentru transportul mărfurilor; subtip de delimitat față de camion.",
+      "head_probe": {
+        "head": "Furgonetă",
+        "key": "furgoneta",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 27066,
+          "surface": "furgoneta",
+          "count": 475
+        },
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Cușetă",
+      "normalized_head": "cuseta",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "vehicle-objects-and-rail",
+      "sense_hypothesis_ro": "Loc amenajat pentru culcat într-un vehicul de călătorie; nu orice pat ori vagon.",
+      "head_probe": {
+        "head": "Cușetă",
+        "key": "cuseta",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Compartiment de tren",
+      "normalized_head": "compartiment de tren",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "vehicle-objects-and-rail",
+      "sense_hypothesis_ro": "Spațiu separat pentru călători într-un vagon; nu vagonul întreg.",
+      "head_probe": {
+        "head": "Compartiment de tren",
+        "key": "compartiment de tren",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Macaz",
+      "normalized_head": "macaz",
+      "lane": "C: new concrete vocabulary / selected-sense facts, provisional",
+      "editorial_cluster": "vehicle-objects-and-rail",
+      "sense_hypothesis_ro": "Dispozitiv de cale ferată care dirijează trenul către o altă linie.",
+      "head_probe": {
+        "head": "Macaz",
+        "key": "macaz",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    }
+  ],
+  "semantic_comparison_records": [
+    {
+      "id": "v115-scara",
+      "wave": "1.15",
+      "source_state": "accepted",
+      "owner_id": "n_v1_15_scara",
+      "label_ro": "Scară",
+      "selected_sense": "Structură cu trepte pentru urcarea sau coborârea între niveluri; include scara portabilă și cea de clădire.",
+      "hold_reason": null
+    },
+    {
+      "id": "v116-sina",
+      "wave": "1.16",
+      "source_state": "accepted",
+      "owner_id": "n_v1_16_sina",
+      "label_ro": "Șină",
+      "selected_sense": "Bară metalică profilată care susține și ghidează roțile unui vehicul feroviar.",
+      "hold_reason": null
+    },
+    {
+      "id": "v116-bilet",
+      "wave": "1.16",
+      "source_state": "accepted",
+      "owner_id": "n_v1_16_bilet",
+      "label_ro": "Bilet",
+      "selected_sense": "Titlu care confirmă dreptul la o călătorie; aici, sensul de bilet de transport.",
+      "hold_reason": null
+    },
+    {
+      "id": "v116-vagon",
+      "wave": "1.16",
+      "source_state": "accepted",
+      "owner_id": "n_v1_16_vagon",
+      "label_ro": "Vagon",
+      "selected_sense": "Vehicul feroviar pentru persoane ori mărfuri, care poate intra în compunerea unui tren.",
+      "hold_reason": null
+    },
+    {
+      "id": "v116-carucior",
+      "wave": "1.16",
+      "source_state": "accepted",
+      "owner_id": "n_v1_16_carucior",
+      "label_ro": "Cărucior",
+      "selected_sense": "Vehicul mic cu roți pentru deplasarea copiilor sau a unor încărcături.",
+      "hold_reason": null
+    },
+    {
+      "id": "v116-camion",
+      "wave": "1.16",
+      "source_state": "accepted",
+      "owner_id": "n_v24_transport_road_camion",
+      "label_ro": "Camion",
+      "selected_sense": "Autovehicul rutier folosit pentru transportul mărfurilor.",
+      "hold_reason": null
+    },
+    {
+      "id": "v121-cos_de_rufe",
+      "wave": "1.21",
+      "source_state": "accepted",
+      "owner_id": "n_v1_21_cos_de_rufe",
+      "label_ro": "Coș de rufe",
+      "selected_sense": "Coș pentru depozitarea rufelor;selectat sensul1,recipient împletit,nu horn,coș de baschet ori bubuliță.",
+      "hold_reason": null
+    },
+    {
+      "id": "v122-cos_de_gunoi",
+      "wave": "1.22",
+      "source_state": "accepted",
+      "owner_id": "n_v1_22_cos_de_gunoi",
+      "label_ro": "Coș de gunoi",
+      "selected_sense": "Recipient portabil pentru depozitarea gunoiului menajer înainte de colectare.",
+      "hold_reason": null
+    },
+    {
+      "id": "v131-cos-de-baschet",
+      "wave": "1.31",
+      "source_state": "accepted",
+      "owner_id": "n_v1_31_cos_de_baschet",
+      "label_ro": "Coș de baschet",
+      "selected_sense": "Echipamentul fizic de baschet format din inel și plasă,prin care se trece mingea.",
+      "hold_reason": null
+    }
+  ],
+  "excluded_or_deferred_selection_observations": [
+    {
+      "head": "Șină de tren",
+      "selection_decision": "already-covered-selected-sense",
+      "related_record": "v116-sina",
+      "reason": "The qualified expression denotes the railway rail already covered by accepted Șină. No new concept or new source approval.",
+      "head_probe": {
+        "head": "Șină de tren",
+        "key": "sina de tren",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Cărucior de cumpărături",
+      "selection_decision": "defer-pending-sense-overlap",
+      "related_record": "v116-carucior",
+      "reason": "Accepted Cărucior already includes small wheeled load carriers. Keep as a qualified-input curation observation; do not duplicate a concept.",
+      "head_probe": {
+        "head": "Cărucior de cumpărături",
+        "key": "carucior de cumparaturi",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Bilet de tren",
+      "selection_decision": "already-covered-selected-sense",
+      "related_record": "v116-bilet",
+      "reason": "Accepted Bilet selects the transport ticket. No new ticket concept; compound curation remains separate.",
+      "head_probe": {
+        "head": "Bilet de tren",
+        "key": "bilet de tren",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Cărucior cu rotile",
+      "selection_decision": "secondary-expression-not-separate-item",
+      "related_record": null,
+      "reason": "Potential wording for the selected Scaun cu rotile family only if later source/sense/ownership verification supports it; no synonym or payload approval now.",
+      "head_probe": {
+        "head": "Cărucior cu rotile",
+        "key": "carucior cu rotile",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Escalator",
+      "selection_decision": "secondary-expression-not-separate-item",
+      "related_record": null,
+      "reason": "Potential wording for selected Scară rulantă only after separate lexical verification; not a second concept or approved synonym.",
+      "head_probe": {
+        "head": "Escalator",
+        "key": "escalator",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Centură de siguranță",
+      "selection_decision": "accepted-pending-stock",
+      "related_record": "v116-centura_de_siguranta",
+      "reason": "Retain approved source payload once; not already installed and not a new item.",
+      "head_probe": {
+        "head": "Centură de siguranță",
+        "key": "centura de siguranta",
+        "status": "pending",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [
+          {
+            "record_id": "v116-centura_de_siguranta",
+            "wave": "1.16",
+            "owner_id": "n_v1_16_centura_de_siguranta",
+            "source_approved": true,
+            "module_payload": true,
+            "assessment": "new_concept_input_candidate"
+          }
+        ],
+        "source_dispositions": [
+          {
+            "id": "v116-centura_de_siguranta",
+            "wave": "1.16",
+            "state": "accepted",
+            "owner_id": "n_v1_16_centura_de_siguranta",
+            "label": "Centură de siguranță",
+            "reason": null,
+            "kind": "new_shared_concept"
+          }
+        ],
+        "observations_not_reservations": [
+          {
+            "record_id": "v116-centura_de_siguranta",
+            "wave": "1.16",
+            "owner_id": "n_v1_16_centura_de_siguranta",
+            "source_approved": true,
+            "module_payload": true,
+            "assessment": "new_concept_input_candidate"
+          }
+        ],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [
+          {
+            "public_id": "ctxp_94c595d44ecdd983ae5b",
+            "anchor_id": "n_v24_transport_personal_masina",
+            "domain": "transport rutier",
+            "mapping_kind": "domain_fallback"
+          }
+        ],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Motor",
+      "selection_decision": "accepted-pending-stock",
+      "related_record": "v116-motor",
+      "reason": "Retain pending owner; not an existing-main endpoint.",
+      "head_probe": {
+        "head": "Motor",
+        "key": "motor",
+        "status": "pending",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [
+          {
+            "record_id": "v116-motor",
+            "wave": "1.16",
+            "owner_id": "n_v1_16_motor",
+            "source_approved": true,
+            "module_payload": true,
+            "assessment": "new_concept_input_candidate"
+          }
+        ],
+        "source_dispositions": [
+          {
+            "id": "v116-motor",
+            "wave": "1.16",
+            "state": "accepted",
+            "owner_id": "n_v1_16_motor",
+            "label": "Motor",
+            "reason": null,
+            "kind": "new_shared_concept"
+          }
+        ],
+        "observations_not_reservations": [
+          {
+            "record_id": "v116-motor",
+            "wave": "1.16",
+            "owner_id": "n_v1_16_motor",
+            "source_approved": true,
+            "module_payload": true,
+            "assessment": "new_concept_input_candidate"
+          }
+        ],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 3924,
+          "surface": "motor",
+          "count": 6087
+        },
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Valiză",
+      "selection_decision": "accepted-pending-stock",
+      "related_record": "v115-valiza",
+      "reason": "Retain final accepted source record and older held provenance; do not count again.",
+      "head_probe": {
+        "head": "Valiză",
+        "key": "valiza",
+        "status": "pending",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [
+          {
+            "record_id": "v115-valiza",
+            "wave": "1.15",
+            "owner_id": "n_v1_15_valiza",
+            "source_approved": true,
+            "module_payload": true,
+            "assessment": "new_concept_input_candidate"
+          }
+        ],
+        "source_dispositions": [
+          {
+            "id": "v19-valiza",
+            "wave": "1.9",
+            "state": "held",
+            "owner_id": "n_v1_9_valiza",
+            "label": "Valiză",
+            "reason": "held: Maintain the existing hold: held: the Sacoșa association has only generic bag-class co-listing/co-occurrence, leaving fewer than four supported meaningful links. Familiarity or cultural evidence does not override the unresolved admission constraint.",
+            "kind": "new_shared_concept"
+          },
+          {
+            "id": "v115-valiza",
+            "wave": "1.15",
+            "state": "accepted",
+            "owner_id": "n_v1_15_valiza",
+            "label": "Valiză",
+            "reason": null,
+            "kind": "new_shared_concept"
+          }
+        ],
+        "observations_not_reservations": [
+          {
+            "record_id": "v19-valiza",
+            "wave": "1.9",
+            "owner_id": "n_v1_9_valiza",
+            "source_approved": false,
+            "module_payload": false,
+            "assessment": "held_or_observation_only"
+          },
+          {
+            "record_id": "v115-valiza",
+            "wave": "1.15",
+            "owner_id": "n_v1_15_valiza",
+            "source_approved": true,
+            "module_payload": true,
+            "assessment": "new_concept_input_candidate"
+          }
+        ],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 6582,
+          "surface": "valiza",
+          "count": 3303
+        },
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Bagaj",
+      "selection_decision": "accepted-pending-stock",
+      "related_record": "v116-bagaj",
+      "reason": "Retain pending source owner once.",
+      "head_probe": {
+        "head": "Bagaj",
+        "key": "bagaj",
+        "status": "pending",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [
+          {
+            "record_id": "v116-bagaj",
+            "wave": "1.16",
+            "owner_id": "n_v1_16_bagaj",
+            "source_approved": true,
+            "module_payload": true,
+            "assessment": "new_concept_input_candidate"
+          }
+        ],
+        "source_dispositions": [
+          {
+            "id": "v116-bagaj",
+            "wave": "1.16",
+            "state": "accepted",
+            "owner_id": "n_v1_16_bagaj",
+            "label": "Bagaj",
+            "reason": null,
+            "kind": "new_shared_concept"
+          }
+        ],
+        "observations_not_reservations": [
+          {
+            "record_id": "v116-bagaj",
+            "wave": "1.16",
+            "owner_id": "n_v1_16_bagaj",
+            "source_approved": true,
+            "module_payload": true,
+            "assessment": "new_concept_input_candidate"
+          }
+        ],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 15789,
+          "surface": "bagaj",
+          "count": 1043
+        },
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Rampă",
+      "selection_decision": "accepted-pending-stock",
+      "related_record": "v116-rampa",
+      "reason": "Retain pending source owner once.",
+      "head_probe": {
+        "head": "Rampă",
+        "key": "rampa",
+        "status": "pending",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [
+          {
+            "record_id": "v116-rampa",
+            "wave": "1.16",
+            "owner_id": "n_v1_16_rampa",
+            "source_approved": true,
+            "module_payload": true,
+            "assessment": "new_concept_input_candidate"
+          }
+        ],
+        "source_dispositions": [
+          {
+            "id": "v116-rampa",
+            "wave": "1.16",
+            "state": "accepted",
+            "owner_id": "n_v1_16_rampa",
+            "label": "Rampă",
+            "reason": null,
+            "kind": "new_shared_concept"
+          }
+        ],
+        "observations_not_reservations": [
+          {
+            "record_id": "v116-rampa",
+            "wave": "1.16",
+            "owner_id": "n_v1_16_rampa",
+            "source_approved": true,
+            "module_payload": true,
+            "assessment": "new_concept_input_candidate"
+          }
+        ],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 18514,
+          "surface": "rampa",
+          "count": 833
+        },
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Barieră",
+      "selection_decision": "accepted-pending-stock",
+      "related_record": "v116-bariera",
+      "reason": "Retain pending source owner once; distinguish a turnstile without automatically linking to pending endpoint.",
+      "head_probe": {
+        "head": "Barieră",
+        "key": "bariera",
+        "status": "pending",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [
+          {
+            "record_id": "v116-bariera",
+            "wave": "1.16",
+            "owner_id": "n_v1_16_bariera",
+            "source_approved": true,
+            "module_payload": true,
+            "assessment": "new_concept_input_candidate"
+          }
+        ],
+        "source_dispositions": [
+          {
+            "id": "v116-bariera",
+            "wave": "1.16",
+            "state": "accepted",
+            "owner_id": "n_v1_16_bariera",
+            "label": "Barieră",
+            "reason": null,
+            "kind": "new_shared_concept"
+          }
+        ],
+        "observations_not_reservations": [
+          {
+            "record_id": "v116-bariera",
+            "wave": "1.16",
+            "owner_id": "n_v1_16_bariera",
+            "source_approved": true,
+            "module_payload": true,
+            "assessment": "new_concept_input_candidate"
+          }
+        ],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 14327,
+          "surface": "bariera",
+          "count": 1197
+        },
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Portbagaj",
+      "selection_decision": "accepted-pending-stock",
+      "related_record": "v116-portbagaj",
+      "reason": "Retain pending source owner once; do not substitute for Torpedou.",
+      "head_probe": {
+        "head": "Portbagaj",
+        "key": "portbagaj",
+        "status": "pending",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [
+          {
+            "record_id": "v116-portbagaj",
+            "wave": "1.16",
+            "owner_id": "n_v1_16_portbagaj",
+            "source_approved": true,
+            "module_payload": true,
+            "assessment": "new_concept_input_candidate"
+          }
+        ],
+        "source_dispositions": [
+          {
+            "id": "v116-portbagaj",
+            "wave": "1.16",
+            "state": "accepted",
+            "owner_id": "n_v1_16_portbagaj",
+            "label": "Portbagaj",
+            "reason": null,
+            "kind": "new_shared_concept"
+          }
+        ],
+        "observations_not_reservations": [
+          {
+            "record_id": "v116-portbagaj",
+            "wave": "1.16",
+            "owner_id": "n_v1_16_portbagaj",
+            "source_approved": true,
+            "module_payload": true,
+            "assessment": "new_concept_input_candidate"
+          }
+        ],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [
+          {
+            "public_id": "ctxp_252fb56b8d88384d9d85",
+            "anchor_id": "n_v24_transport_personal_masina",
+            "domain": "transport rutier",
+            "mapping_kind": "domain_fallback"
+          }
+        ],
+        "frequency_positive_signal": {
+          "rank": 6911,
+          "surface": "portbagaj",
+          "count": 3115
+        },
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Ghișeu",
+      "selection_decision": "accepted-pending-stock",
+      "related_record": "v125-ghiseu",
+      "reason": "Retain pending source owner once.",
+      "head_probe": {
+        "head": "Ghișeu",
+        "key": "ghiseu",
+        "status": "pending",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [
+          {
+            "record_id": "v125-ghiseu",
+            "wave": "1.25",
+            "owner_id": "n_v1_25_ghiseu",
+            "source_approved": true,
+            "module_payload": true,
+            "assessment": "new_concept_input_candidate"
+          }
+        ],
+        "source_dispositions": [
+          {
+            "id": "v125-ghiseu",
+            "wave": "1.25",
+            "state": "accepted",
+            "owner_id": "n_v1_25_ghiseu",
+            "label": "Ghișeu",
+            "reason": null,
+            "kind": "new_shared_concept"
+          }
+        ],
+        "observations_not_reservations": [
+          {
+            "record_id": "v125-ghiseu",
+            "wave": "1.25",
+            "owner_id": "n_v1_25_ghiseu",
+            "source_approved": true,
+            "module_payload": true,
+            "assessment": "new_concept_input_candidate"
+          }
+        ],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 45212,
+          "surface": "ghişeu",
+          "count": 205
+        },
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Termometru",
+      "selection_decision": "accepted-pending-stock",
+      "related_record": "v130-termometru",
+      "reason": "Retain pending source owner once.",
+      "head_probe": {
+        "head": "Termometru",
+        "key": "termometru",
+        "status": "pending",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [
+          {
+            "record_id": "v130-termometru",
+            "wave": "1.30",
+            "owner_id": "n_v1_30_termometru",
+            "source_approved": true,
+            "module_payload": true,
+            "assessment": "new_concept_input_candidate"
+          }
+        ],
+        "source_dispositions": [
+          {
+            "id": "v130-termometru",
+            "wave": "1.30",
+            "state": "accepted",
+            "owner_id": "n_v1_30_termometru",
+            "label": "Termometru",
+            "reason": null,
+            "kind": "new_shared_concept"
+          }
+        ],
+        "observations_not_reservations": [
+          {
+            "record_id": "v130-termometru",
+            "wave": "1.30",
+            "owner_id": "n_v1_30_termometru",
+            "source_approved": true,
+            "module_payload": true,
+            "assessment": "new_concept_input_candidate"
+          }
+        ],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 38586,
+          "surface": "termometru",
+          "count": 268
+        },
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Acumulator",
+      "selection_decision": "accepted-pending-stock",
+      "related_record": "v115-acumulator",
+      "reason": "Retain pending source owner once.",
+      "head_probe": {
+        "head": "Acumulator",
+        "key": "acumulator",
+        "status": "pending",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [
+          {
+            "record_id": "v115-acumulator",
+            "wave": "1.15",
+            "owner_id": "n_v1_15_acumulator",
+            "source_approved": true,
+            "module_payload": true,
+            "assessment": "new_concept_input_candidate"
+          }
+        ],
+        "source_dispositions": [
+          {
+            "id": "v115-acumulator",
+            "wave": "1.15",
+            "state": "accepted",
+            "owner_id": "n_v1_15_acumulator",
+            "label": "Acumulator",
+            "reason": null,
+            "kind": "new_shared_concept"
+          }
+        ],
+        "observations_not_reservations": [
+          {
+            "record_id": "v115-acumulator",
+            "wave": "1.15",
+            "owner_id": "n_v1_15_acumulator",
+            "source_approved": true,
+            "module_payload": true,
+            "assessment": "new_concept_input_candidate"
+          }
+        ],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Rulotă",
+      "selection_decision": "preserve-existing-hold",
+      "related_record": "v116-rulota",
+      "reason": "Existing graph-link hold is not reopened.",
+      "head_probe": {
+        "head": "Rulotă",
+        "key": "rulota",
+        "status": "preserve_hold",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [
+          {
+            "id": "v116-rulota",
+            "wave": "1.16",
+            "state": "held",
+            "owner_id": "n_v1_16_rulota",
+            "label": "Rulotă",
+            "reason": "held: Remorcă reached its research cap; excluding that batch neighbor leaves only three distinct supported neighbors, below the four-link minimum.",
+            "kind": "new_shared_concept"
+          }
+        ],
+        "observations_not_reservations": [
+          {
+            "record_id": "v116-rulota",
+            "wave": "1.16",
+            "owner_id": "n_v1_16_rulota",
+            "source_approved": false,
+            "module_payload": false,
+            "assessment": "held_or_observation_only"
+          }
+        ],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 10388,
+          "surface": "rulota",
+          "count": 1840
+        },
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Plasture",
+      "selection_decision": "preserve-existing-hold",
+      "related_record": "v125-plasture",
+      "reason": "Existing graph/sense hold is not reopened; no clinical scope added.",
+      "head_probe": {
+        "head": "Plasture",
+        "key": "plasture",
+        "status": "preserve_hold",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [
+          {
+            "id": "v125-plasture",
+            "wave": "1.25",
+            "state": "held",
+            "owner_id": "n_v1_25_plasture",
+            "label": "Plasture",
+            "reason": "held: four predeclared physical-object links remain incomplete,including generic water-resistance versus the live Apă drinking/cooking sense;no widened owner scope,clinical advice or replacement edge. Exact DOOM3 masculine plasturii is observed;planned plasturile is unsupported.",
+            "kind": "new_shared_concept"
+          }
+        ],
+        "observations_not_reservations": [
+          {
+            "record_id": "v125-plasture",
+            "wave": "1.25",
+            "owner_id": "n_v1_25_plasture",
+            "source_approved": false,
+            "module_payload": false,
+            "assessment": "held_or_observation_only"
+          }
+        ],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [
+          {
+            "public_id": "ctxp_a861ce761f54a1562bdf",
+            "anchor_id": "n_v24_places_public_farmacie",
+            "domain": "sănătate",
+            "mapping_kind": "explicit"
+          }
+        ],
+        "frequency_positive_signal": {
+          "rank": 25264,
+          "surface": "plasture",
+          "count": 527
+        },
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Plastic",
+      "selection_decision": "preserve-existing-hold",
+      "related_record": "v115-plastic",
+      "reason": "Held source material is not an installed graph endpoint.",
+      "head_probe": {
+        "head": "Plastic",
+        "key": "plastic",
+        "status": "preserve_hold",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [
+          {
+            "id": "v115-plastic",
+            "wave": "1.15",
+            "state": "held",
+            "owner_id": "n_v1_15_plastic",
+            "label": "Plastic",
+            "reason": "held: everyday material noun versus exact DEX/DOOM3 explosive noun remains ambiguous; do not adopt guessed plastice/plasticuri",
+            "kind": "new_shared_concept"
+          }
+        ],
+        "observations_not_reservations": [
+          {
+            "record_id": "v115-plastic",
+            "wave": "1.15",
+            "owner_id": "n_v1_15_plastic",
+            "source_approved": false,
+            "module_payload": false,
+            "assessment": "held_or_observation_only"
+          }
+        ],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 4637,
+          "surface": "plastic",
+          "count": 4996
+        },
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Cheie",
+      "selection_decision": "live-other-sense",
+      "related_record": null,
+      "reason": "House-key owner remains unchanged. Only the qualified wheel-wrench hypothesis can be considered.",
+      "head_probe": {
+        "head": "Cheie",
+        "key": "cheie",
+        "status": "live",
+        "live_owners": [
+          {
+            "id": "n_v4via_cheie",
+            "label": "cheie"
+          }
+        ],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 2514,
+          "surface": "cheie",
+          "count": 10179
+        },
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Canal",
+      "selection_decision": "live-other-sense",
+      "related_record": "v132-canal",
+      "reason": "Geographic waterway owner and its accepted morphology remain unchanged. Street-drain compounds require their own selected-sense proof.",
+      "head_probe": {
+        "head": "Canal",
+        "key": "canal",
+        "status": "live",
+        "live_owners": [
+          {
+            "id": "n_v4geo_canal",
+            "label": "canal"
+          }
+        ],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [
+          {
+            "id": "v132-canal",
+            "wave": "1.32",
+            "state": "accepted",
+            "owner_id": "n_v4geo_canal",
+            "label": "canal",
+            "reason": null,
+            "kind": "existing_input_family"
+          }
+        ],
+        "observations_not_reservations": [
+          {
+            "record_id": "v132-canal",
+            "wave": "1.32",
+            "owner_id": "n_v4geo_canal",
+            "source_approved": true,
+            "module_payload": false,
+            "assessment": "already_same_owner"
+          }
+        ],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 5006,
+          "surface": "canal",
+          "count": 4562
+        },
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Sacoșă",
+      "selection_decision": "already-live",
+      "related_record": null,
+      "reason": "Existing live Sacoșa owner is not a new vocabulary item.",
+      "head_probe": {
+        "head": "Sacoșă",
+        "key": "sacosa",
+        "status": "live",
+        "live_owners": [
+          {
+            "id": "n_v3via_sacosa",
+            "label": "Sacoșa"
+          }
+        ],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 28909,
+          "surface": "sacoşă",
+          "count": 428
+        },
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Trotinetă",
+      "selection_decision": "live-qualified-owner",
+      "related_record": null,
+      "reason": "Current owner is Trotineta electrică; bare ordinary vehicle wording cannot silently overwrite that scope.",
+      "head_probe": {
+        "head": "Trotinetă",
+        "key": "trotineta",
+        "status": "live",
+        "live_owners": [
+          {
+            "id": "n_v18via_trotineta_electrica",
+            "label": "Trotineta electrică"
+          }
+        ],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Ambreiaj",
+      "selection_decision": "unselected-technical-tail",
+      "related_record": null,
+      "reason": "Not needed to fill this concrete 40-item scope; no rejection or hold is created.",
+      "head_probe": {
+        "head": "Ambreiaj",
+        "key": "ambreiaj",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 44430,
+          "surface": "ambreiaj",
+          "count": 211
+        },
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Accelerator",
+      "selection_decision": "unselected-ambiguous-tail",
+      "related_record": null,
+      "reason": "Mechanism/vehicle/physics ambiguity needs a separate purpose; no rejection or hold is created.",
+      "head_probe": {
+        "head": "Accelerator",
+        "key": "accelerator",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 28434,
+          "surface": "accelerator",
+          "count": 440
+        },
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Hayon",
+      "selection_decision": "unselected-technical-tail",
+      "related_record": null,
+      "reason": "Do not pad this wave with additional body-panel terminology; no rejection or hold is created.",
+      "head_probe": {
+        "head": "Hayon",
+        "key": "hayon",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Semnalizare",
+      "selection_decision": "unselected-abstract-family",
+      "related_record": null,
+      "reason": "Prefer the selected physical vehicle indicator; no abstract hidden-target proposal.",
+      "head_probe": {
+        "head": "Semnalizare",
+        "key": "semnalizare",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": {
+          "rank": 20101,
+          "surface": "semnalizare",
+          "count": 737
+        },
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Autocisternă",
+      "selection_decision": "unselected-later-gap",
+      "related_record": null,
+      "reason": "A further concrete vehicle gap may remain; this selection does not exhaust the backlog.",
+      "head_probe": {
+        "head": "Autocisternă",
+        "key": "autocisterna",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    },
+    {
+      "head": "Automat de bilete",
+      "selection_decision": "unselected-later-gap",
+      "related_record": null,
+      "reason": "A useful machine gap may remain, but accepted Bilet stock and selected access/payment objects take priority; no source verdict.",
+      "head_probe": {
+        "head": "Automat de bilete",
+        "key": "automat de bilete",
+        "status": "uncovered_head_hypothesis",
+        "live_owners": [],
+        "world_ids": [],
+        "pending": [],
+        "source_dispositions": [],
+        "observations_not_reservations": [],
+        "raw_deferred": false,
+        "current_deferred": false,
+        "reviewed_unresolved": false,
+        "Cald_proxies": [],
+        "frequency_positive_signal": null,
+        "scope": "Offline head-only selection hypothesis;not full planned-paradigm screening, source/word approval, ownership reservation or graph qualification."
+      }
+    }
+  ],
+  "live_reference_points_not_approved_edges": [
+    {
+      "id": "n_v4soc_banca",
+      "label_ro": "bancă",
+      "category": "societate",
+      "description": "Instituție financiară care păstrează bani și oferă servicii bancare."
+    },
+    {
+      "id": "n_v4soc_bani",
+      "label_ro": "bani",
+      "category": "societate",
+      "description": "Mijloc de plată folosit în economie și în viața de zi cu zi."
+    },
+    {
+      "id": "n_v4soc_magazin",
+      "label_ro": "magazin",
+      "category": "societate",
+      "description": "Loc comercial unde se vând produse către cumpărători."
+    },
+    {
+      "id": "n_v24_transport_personal_masina",
+      "label_ro": "Mașină",
+      "category": "societate",
+      "description": "Concept cotidian din grupul «transport personal»: Mașină."
+    },
+    {
+      "id": "n_v4soc_autobuz",
+      "label_ro": "autobuz",
+      "category": "societate",
+      "description": "Vehicul de transport public pentru mai mulți pasageri."
+    },
+    {
+      "id": "n_v24_transport_rail_tren",
+      "label_ro": "Tren",
+      "category": "societate",
+      "description": "Concept cotidian din grupul «transport pe șine»: Tren."
+    },
+    {
+      "id": "n_v24_transport_personal_bicicleta",
+      "label_ro": "Bicicletă",
+      "category": "societate",
+      "description": "Concept cotidian din grupul «transport personal»: Bicicletă."
+    },
+    {
+      "id": "n_v1_10_roata",
+      "label_ro": "Roată",
+      "category": "societate",
+      "description": "Piesă circulară care se rotește în jurul unei axe și permite deplasarea vehiculelor; aici, sensul de roată de vehicul."
+    },
+    {
+      "id": "n_v1_10_parbriz",
+      "label_ro": "Parbriz",
+      "category": "societate",
+      "description": "Geam din partea din față a unui autovehicul, care protejează conducătorul și ocupanții de vânt, praf și alte obiecte."
+    },
+    {
+      "id": "n_v24_transport_terminals_gara",
+      "label_ro": "Gară",
+      "category": "societate",
+      "description": "Concept cotidian din grupul «puncte de plecare și sosire»: Gară."
+    },
+    {
+      "id": "n_v24_transport_terminals_statie",
+      "label_ro": "Stație",
+      "category": "societate",
+      "description": "Concept cotidian din grupul «puncte de plecare și sosire»: Stație."
+    },
+    {
+      "id": "n_v3soc_spital",
+      "label_ro": "Spital",
+      "category": "societate",
+      "description": "Instituție medicală pentru îngrijirea și tratarea pacienților."
+    },
+    {
+      "id": "n_v4soc_pacient",
+      "label_ro": "pacient",
+      "category": "societate",
+      "description": "Persoană care primește îngrijiri medicale."
+    },
+    {
+      "id": "n_v24_places_public_farmacie",
+      "label_ro": "Farmacie",
+      "category": "societate",
+      "description": "Concept cotidian din grupul «locuri publice cotidiene»: Farmacie."
+    },
+    {
+      "id": "n_v4geo_drum",
+      "label_ro": "drum",
+      "category": "geografie",
+      "description": "Cale de circulație între locuri sau așezări."
+    },
+    {
+      "id": "n_v4geo_strada",
+      "label_ro": "stradă",
+      "category": "geografie",
+      "description": "Cale urbană de circulație mărginită de clădiri."
+    },
+    {
+      "id": "n_v1_11_hartie",
+      "label_ro": "Hârtie",
+      "category": "viata_de_roman",
+      "description": "Material în foi subțiri, folosit la scris, desenat, tipărit și împachetat; aici, materialul și foile sale."
+    },
+    {
+      "id": "n_v4sti_metal",
+      "label_ro": "metal",
+      "category": "stiinta",
+      "description": "Material cu luciu, conductivitate și maleabilitate ridicate."
+    },
+    {
+      "id": "n_v4sti_lumina",
+      "label_ro": "lumină",
+      "category": "stiinta",
+      "description": "Radiație electromagnetică vizibilă pentru ochiul uman."
+    },
+    {
+      "id": "n_v3sti_electricitate",
+      "label_ro": "Electricitate",
+      "category": "stiinta",
+      "description": "Fenomen legat de sarcini electrice și curent electric."
+    },
+    {
+      "id": "n_v24_home_seating_scaun",
+      "label_ro": "Scaun",
+      "category": "viata_de_roman",
+      "description": "Concept cotidian din grupul «mobilier pentru șezut»: Scaun."
+    },
+    {
+      "id": "n_v4via_cheie",
+      "label_ro": "cheie",
+      "category": "viata_de_roman",
+      "description": "Obiect metalic folosit pentru încuierea și descuierea unei uși."
+    },
+    {
+      "id": "n_v4geo_canal",
+      "label_ro": "canal",
+      "category": "geografie",
+      "description": "Curs de apă amenajat sau braț îngust pentru circulația apei."
+    }
+  ],
+  "category_and_graph_limits": "No edge is approved or constructed by selection. Step1 must predeclare 4–8 readable truthful distinct links with at least 2 current-main nodes, at least 2 same-category nodes and at most 2 current-batch nodes. The live categories above are binding metadata, not permission to recategorize or add generic filler. Older pending nodes, including Bilet/Vagon/Motor/Plastic, cannot supply installed endpoints. Missing support means held.",
+  "compound_and_subtype_limits": [
+    "Scară rulantă versus pending broad Scară: distinct motorized subtype is a hypothesis, not an exact-synonym claim. Evidence must warrant a useful separate concept without stealing the broad paradigm.",
+    "Scaun cu rotile versus live Scaun and pending Cărucior: selected mobility-device subtype only; no bare Scaun/Cărucior forms reassigned. Secondary expression Cărucior cu rotile is not preapproved.",
+    "Furgonetă versus current Camion: useful subtype distinction remains to be verified, not a synonym or automatic separate-node verdict.",
+    "Coș de cumpărături is a physical hand basket hypothesis; pending laundry/waste/basketball senses stay separate. Unqualified Coș forms require full ownership/sense screening.",
+    "Card bancar, Bon fiscal, Rețetă medicală, Cheie de roți, Pompă de bicicletă and other compounds require ordinary headword morphology plus independent compound-sense evidence. Bare colliding/ambiguous forms are not admitted."
+  ],
+  "game_effect_limits": {
+    "desired_source_value": "Familiar physical words people may type as Cald guesses or Lanț moves, plus meaningful selected-sense associations. This states the intended gap, not current player gains.",
+    "current_typed_contract": "Cald accepts text; Lanț accepts text and clicked displayed-neighbor labels. Existing exact/projection/fuzzy precedence, repeats, win identity and complete snapshots can change after integration.",
+    "other_interfaces": "Intrusul/Perechi/Conexiuni submit active-board IDs. Alchimie combines owned IDs; inventory/journal search filters local display labels. No free-text alias benefit to those ID interfaces is claimed.",
+    "Cald_proxies_requiring_later_precedence_review": [
+      {
+        "head": "Trecere de pietoni",
+        "key": "trecere de pietoni",
+        "current_proxies": [
+          {
+            "public_id": "ctxp_863afa694b125a34d1f9",
+            "anchor_id": "n_v4geo_drum",
+            "domain": "transport rutier",
+            "mapping_kind": "explicit"
+          }
+        ]
+      },
+      {
+        "head": "Bandaj",
+        "key": "bandaj",
+        "current_proxies": [
+          {
+            "public_id": "ctxp_221740590c2f143f3ddf",
+            "anchor_id": "n_v24_places_public_farmacie",
+            "domain": "sănătate",
+            "mapping_kind": "explicit"
+          }
+        ]
+      },
+      {
+        "head": "Rețetă medicală",
+        "key": "reteta medicala",
+        "current_proxies": [
+          {
+            "public_id": "ctxp_b68e201618091e4dae2f",
+            "anchor_id": "n_v24_places_public_farmacie",
+            "domain": "sănătate",
+            "mapping_kind": "explicit"
+          }
+        ]
+      },
+      {
+        "head": "Oglindă retrovizoare",
+        "key": "oglinda retrovizoare",
+        "current_proxies": [
+          {
+            "public_id": "ctxp_707e00b5df073eadd06e",
+            "anchor_id": "n_v24_transport_personal_masina",
+            "domain": "transport rutier",
+            "mapping_kind": "explicit"
+          }
+        ]
+      }
+    ],
+    "targets": "Zero target, salience or C3 approvals. Incoming numeric floors, recognition, concreteness, opener and engine qualification remain future separate checks. Do not auto-enroll selected graph vocabulary as targets.",
+    "rounds": "Zero playable rounds, boards, pairs, unique partitions, recipes or qualified routes. No graph/source count proves these properties.",
+    "care_scope": "Identification of common objects/documents and narrowly true physical/use facts only; no diagnosis, dosing, clinical recommendation, treatment instructions or changed clinical ruling.",
+    "integration": "No safe-to-merge or zero-disturbance claim. A separately authorized future integration must freeze actual latest feature WIP, refresh existing authorities/cascade and pass existing gates/playthroughs. Main remains secondary and landing authority separate.",
+    "source_application": false,
+    "module_dry_run": false,
+    "installed": 0,
+    "player_visible_delta": "0/0/0"
+  },
+  "next_tick": "Read actual state and whole procedure at wave start; run only step0 baseline in a separate source worktree using the required helper from approved feature committed ref without remote operations. Bind feature WIP read-only. Do not research until later full step1 ownership/sense/dependency screening.",
+  "remaining_work_not_exhausted": true,
+  "new_source_approvals": 0,
+  "new_web_reviews": 0,
+  "web_calls": 0,
+  "dictionary_requests": 0,
+  "remote_operations": 0,
+  "serving_changes": false
+}

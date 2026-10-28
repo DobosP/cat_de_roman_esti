@@ -209,3 +209,5 @@ Parallel lanes also allocated0188/0189 independently. All four full-filename bod
 - [0219](0219-land-portable-prospective-captions.md) — land the prospective Lanț caption preview with a Linux-only opener and refusing stub elsewhere, non-blocking reads, a checked Go root and corrected producer-binding and bundle-refresh claims.
 
 - [0220](0220-continuous-codex-content-loop.md) — V3 continuous Codex content loop: one session/worktree/branch, no tick/commit/batch budgets, per-item drawing board, landing-review prefixes; all V2 quality gates kept.
+
+| 0221 | consolidate-historical-stock-and-retire-checkouts | 2026-10-28 | accepted; one unapplied source archive, preserve live V3/refs/baselines, NAS-verified historical checkout retirement |

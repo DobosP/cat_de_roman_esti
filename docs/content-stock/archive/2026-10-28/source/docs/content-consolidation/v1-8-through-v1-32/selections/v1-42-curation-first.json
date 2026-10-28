@@ -1,0 +1,296 @@
+{
+  "schema": "source-loop-curation-first-decision-v1",
+  "observed_at_utc": "2026-10-20T02:00:18.613144+00:00",
+  "decision": "curation_first_no_next_growth_wave",
+  "completed_wave": "1.41",
+  "completed_source_ref": "19667bf430d1d6af9409bc2ea1c5e60be0b67aab",
+  "canonical_stock_before_decision": {
+    "ref": "e3d2142cfcb354a287769befcad9e7580251b89f",
+    "path": "docs/content-consolidation/v1-8-through-v1-32/current-stock.json",
+    "sha256": "f3373323d501f31ce4a9b8e3552600c8149467301d18bc9418f3cf69f0986cf5"
+  },
+  "current_stock_summary": {
+    "pending_source_accepted_records": 1048,
+    "pending_new_concepts": 841,
+    "pending_existing_owner_families": 207,
+    "pending_existing_unique_owners": 182,
+    "missing_payload_owner_key_pairs": 5584,
+    "missing_unique_normalized_payload_keys": 5584,
+    "missing_ordinary_source_form_keys": 5581,
+    "missing_canonical_display_label_only_keys": 3,
+    "missing_new_concept_normalized_inputs": 4735,
+    "missing_existing_owner_normalized_inputs": 849,
+    "pending_unique_directed_edges": 3370,
+    "pending_cald_proxy_key_changes": 117,
+    "current_foreign_owner_collisions": 0,
+    "pending_cross_owner_collisions": 0,
+    "source_graph_nodes_below_numeric_incoming5": 796,
+    "source_graph_nodes_atleast_numeric_incoming5": 45,
+    "source_graph_predecessor_distribution": {
+      "0": 385,
+      "1": 32,
+      "2": 23,
+      "3": 163,
+      "4": 193,
+      "5": 32,
+      "6": 13
+    },
+    "existing_input_families_by_lane": {
+      "selected_sense_lexical_or_qualified_input": 125,
+      "existing_lemma_morphology": 82
+    },
+    "existing_input_missing_keys_by_lane": {
+      "existing_lemma_morphology": 147,
+      "selected_sense_lexical_or_qualified_input": 702
+    },
+    "existing_input_families_with_snapshot_dependencies": 42,
+    "all_source_records": 1701,
+    "all_source_states": {
+      "integrated": 218,
+      "held": 434,
+      "accepted": 1048,
+      "rejected": 1
+    },
+    "pending_held_records": 365,
+    "source_packets": 34,
+    "protected_unlanded_closures": 28,
+    "new_source_approvals_by_consolidation": 0,
+    "installed_by_this_work": 0,
+    "new_targets_approved_by_this_work": 0,
+    "new_playable_rounds": 0,
+    "player_visible_delta": "0/0/0",
+    "missing_source_reviewed_dictionary_input_keys": 5581,
+    "missing_explicit_component_composed_phrase_keys": 6,
+    "new_packet_input_breakdown": {
+      "normalized_payload_keys": 110,
+      "ordinary_normalized_payload_keys": 104,
+      "qualified_compound_typed_phrase_keys": 6,
+      "existing_owner_families_by_classification": {
+        "ordinary_NA_GD_morphology_of_existing_lemma": 3,
+        "ordinary_number_variant_of_existing_plural_label": 1,
+        "ordinary_morphology_of_existing_selected_lexeme": 1
+      },
+      "existing_owner_keys_by_classification": {
+        "ordinary_NA_GD_morphology_of_existing_lemma": 14,
+        "ordinary_number_variant_of_existing_plural_label": 3,
+        "ordinary_morphology_of_existing_selected_lexeme": 4
+      }
+    },
+    "legacy_ordinary_source_form_count_scope": "The legacy missing_ordinary_source_form_keys/payload_class ordinary_source_reviewed_key groups reviewed dictionary inputs including qualified compounds. It is not a single-headword-only count. Original historical classifications are preserved; exact ordinary/qualified subdivisions are recorded in each reviewed packet, and explicit component-composition counts are partial historical coverage, not a new approval."
+  },
+  "source_packet_complete": true,
+  "canonical_stock_update_complete": true,
+  "source_packet_unchanged": true,
+  "minimum_growth_wave_items": 20,
+  "procedure_requirement": {
+    "path": "docs/CONTENT_LOOP.md",
+    "commit": "17b97a2b",
+    "section": "Improvement loop, item3",
+    "exact_text": "A wave takes 40–60 items when available and at least 20 otherwise."
+  },
+  "finding": "Reviewed pending stock already covers most useful familiar vocabulary. This bounded fresh pass retained only 10 credible residual hypotheses (6 new graph vocabulary concepts and 4 practical existing-owner families), below the unchanged 20-item wave floor. Do not pad with abstract parents, tail inflections, weak graph links, compounds or reopened holds.",
+  "bounded_attention": {
+    "fresh_surfaces": 358,
+    "current_owner_families": 101,
+    "residual_hypotheses": 10,
+    "new_concept_hypotheses": 6,
+    "existing_owner_hypotheses": 4,
+    "raw_path": "/home/dobo/work/_temp/content__v1-41-school-objects-language-and-common-inputs/continuation-selection/offline-attention.json",
+    "raw_sha256": "522f11dcfaf2ea3fce82a3924b864325cd935f05595d039ac027088308ed5d83",
+    "residual_backlog_path": "selections/v1-42-residual-backlog.json",
+    "residual_backlog_sha256": "56e013f35f2041d39a47fd42fd64c43e05658606c8ec4deb930edb0a684b9b83",
+    "global_vocabulary_exhaustion_claimed": false
+  },
+  "recommended_first_qualification_slice": {
+    "scope": "Proposal for a later separately authorized integration qualification on the then-latest frozen owner-designated feature/WIP. This is not a source wave, apply module, installation, writer execution or landing instruction.",
+    "families": [
+      {
+        "record_id": "v141-avion",
+        "lemma": "avion",
+        "owner_id": "n_v2sti_avion",
+        "current_label": "Avion",
+        "current_category": "stiinta",
+        "selected_sense": "Aparat de zbor cu aripi și propulsie proprie, exact sensul actualului Avion; numai formele propriei leme, inclusiv pluralul comun, fără alte sinonime sau subtipuri.",
+        "proposed_exact_missing_forms": [
+          "avioane",
+          "avioanele",
+          "avionului",
+          "avioanelor"
+        ],
+        "source_approval": "Existing signed V1.41 family approval only; no new approval by curation.",
+        "owner_snapshot_reference": {
+          "bundle_path": "go-backend/internal/content/bundled.json",
+          "bundle_sha256": "f6d983f1ab2cbb7852e8583411eaecd2048fdb5b5da08099129d7e4ff471344c",
+          "node_id": "n_v2sti_avion",
+          "node_json_sha256": "92c0372a15c871f3a83da68e73f023d9bfaac2b553dcc104b40c273119cf300f"
+        },
+        "source_record_reference": {
+          "source_ref": "19667bf430d1d6af9409bc2ea1c5e60be0b67aab",
+          "pool_path": "docs/content-pool/v1-41-school-objects-language-and-common-inputs/pool.json",
+          "pool_sha256": "cb86884a0858628f6c81b549c9ff55398c3c1cf7c60c303cf0a2fcf0ad0ca7b9",
+          "record_id": "v141-avion",
+          "module_path": "scripts/school_objects_language_and_common_inputs_v1_41_data.py",
+          "module_sha256": "e4c011e545f2abe91a18c1e92622162cfc5b217ac68d077220ac119acf2695f5"
+        },
+        "review_binding": {
+          "factual": {
+            "reviewer": "factual-v1-41",
+            "path": "docs/reviews/v1-41-school-objects-language-and-common-inputs/graph-factual-review.json",
+            "sha256": "3404e5d39d2d992d8dd87578ccb333fa974a98574bb40951aadbd2a8545aab24",
+            "formal_rounds": 1,
+            "reviewed_module_sha256": "e4c011e545f2abe91a18c1e92622162cfc5b217ac68d077220ac119acf2695f5"
+          },
+          "quality": {
+            "reviewer": "quality-v1-41",
+            "path": "docs/reviews/v1-41-school-objects-language-and-common-inputs/graph-quality-review.json",
+            "sha256": "0ee872c225076c3988048de2813f54f337899c6bc77af9f2f3575773dafe5ebb",
+            "formal_rounds": 1,
+            "reviewed_module_sha256": "e4c011e545f2abe91a18c1e92622162cfc5b217ac68d077220ac119acf2695f5"
+          }
+        }
+      },
+      {
+        "record_id": "v141-manastire",
+        "lemma": "mănăstire",
+        "owner_id": "n_v2art_manastire",
+        "current_label": "Mănăstire",
+        "current_category": "arta_cultura",
+        "selected_sense": "Așezământ religios cu viață monahală și ansamblul său de clădiri, în sensul proprietarului existent; numai lema mănăstire și propria familie actuală, fără variantele mânăstire sau monastire.",
+        "proposed_exact_missing_forms": [
+          "mănăstirea",
+          "mănăstiri",
+          "mănăstirile",
+          "mănăstirii",
+          "mănăstirilor"
+        ],
+        "source_approval": "Existing signed V1.41 family approval only; no new approval by curation.",
+        "owner_snapshot_reference": {
+          "bundle_path": "go-backend/internal/content/bundled.json",
+          "bundle_sha256": "f6d983f1ab2cbb7852e8583411eaecd2048fdb5b5da08099129d7e4ff471344c",
+          "node_id": "n_v2art_manastire",
+          "node_json_sha256": "8dc732d0658b973f02eb48f2c815b32907397e817efbbb702630dda9e8c01486"
+        },
+        "source_record_reference": {
+          "source_ref": "19667bf430d1d6af9409bc2ea1c5e60be0b67aab",
+          "pool_path": "docs/content-pool/v1-41-school-objects-language-and-common-inputs/pool.json",
+          "pool_sha256": "cb86884a0858628f6c81b549c9ff55398c3c1cf7c60c303cf0a2fcf0ad0ca7b9",
+          "record_id": "v141-manastire",
+          "module_path": "scripts/school_objects_language_and_common_inputs_v1_41_data.py",
+          "module_sha256": "e4c011e545f2abe91a18c1e92622162cfc5b217ac68d077220ac119acf2695f5"
+        },
+        "review_binding": {
+          "factual": {
+            "reviewer": "factual-v1-41",
+            "path": "docs/reviews/v1-41-school-objects-language-and-common-inputs/graph-factual-review.json",
+            "sha256": "3404e5d39d2d992d8dd87578ccb333fa974a98574bb40951aadbd2a8545aab24",
+            "formal_rounds": 1,
+            "reviewed_module_sha256": "e4c011e545f2abe91a18c1e92622162cfc5b217ac68d077220ac119acf2695f5"
+          },
+          "quality": {
+            "reviewer": "quality-v1-41",
+            "path": "docs/reviews/v1-41-school-objects-language-and-common-inputs/graph-quality-review.json",
+            "sha256": "0ee872c225076c3988048de2813f54f337899c6bc77af9f2f3575773dafe5ebb",
+            "formal_rounds": 1,
+            "reviewed_module_sha256": "e4c011e545f2abe91a18c1e92622162cfc5b217ac68d077220ac119acf2695f5"
+          }
+        }
+      },
+      {
+        "record_id": "v141-cinematograf",
+        "lemma": "cinematograf",
+        "owner_id": "n_v3fil_cinematograf",
+        "current_label": "Cinematograf",
+        "current_category": "film_tv",
+        "selected_sense": "Se păstrează exclusiv proprietarul existent pentru sala publică de proiecție; nu se extinde către arta sau tehnica cinematografiei.",
+        "proposed_exact_missing_forms": [
+          "cinematograful",
+          "cinematografe",
+          "cinematografele",
+          "cinematografului",
+          "cinematografelor"
+        ],
+        "source_approval": "Existing signed V1.41 family approval only; no new approval by curation.",
+        "owner_snapshot_reference": {
+          "bundle_path": "go-backend/internal/content/bundled.json",
+          "bundle_sha256": "f6d983f1ab2cbb7852e8583411eaecd2048fdb5b5da08099129d7e4ff471344c",
+          "node_id": "n_v3fil_cinematograf",
+          "node_json_sha256": "c6a8223b71aecd3af72f6cd8b612bb3a2bbf0d3dd9decc05d6b06cc28f1ae40d"
+        },
+        "source_record_reference": {
+          "source_ref": "19667bf430d1d6af9409bc2ea1c5e60be0b67aab",
+          "pool_path": "docs/content-pool/v1-41-school-objects-language-and-common-inputs/pool.json",
+          "pool_sha256": "cb86884a0858628f6c81b549c9ff55398c3c1cf7c60c303cf0a2fcf0ad0ca7b9",
+          "record_id": "v141-cinematograf",
+          "module_path": "scripts/school_objects_language_and_common_inputs_v1_41_data.py",
+          "module_sha256": "e4c011e545f2abe91a18c1e92622162cfc5b217ac68d077220ac119acf2695f5"
+        },
+        "review_binding": {
+          "factual": {
+            "reviewer": "factual-v1-41",
+            "path": "docs/reviews/v1-41-school-objects-language-and-common-inputs/graph-factual-review.json",
+            "sha256": "3404e5d39d2d992d8dd87578ccb333fa974a98574bb40951aadbd2a8545aab24",
+            "formal_rounds": 1,
+            "reviewed_module_sha256": "e4c011e545f2abe91a18c1e92622162cfc5b217ac68d077220ac119acf2695f5"
+          },
+          "quality": {
+            "reviewer": "quality-v1-41",
+            "path": "docs/reviews/v1-41-school-objects-language-and-common-inputs/graph-quality-review.json",
+            "sha256": "0ee872c225076c3988048de2813f54f337899c6bc77af9f2f3575773dafe5ebb",
+            "formal_rounds": 1,
+            "reviewed_module_sha256": "e4c011e545f2abe91a18c1e92622162cfc5b217ac68d077220ac119acf2695f5"
+          }
+        }
+      }
+    ],
+    "counts": {
+      "families": 3,
+      "ordinary_missing_normalized_inputs": 14,
+      "new_nodes": 0,
+      "new_edges": 0,
+      "new_synonyms": 0,
+      "new_targets": 0,
+      "new_playable_rounds": 0
+    },
+    "why_this_slice": "These recent independently reviewed same-lemma families include familiar bare plurals and articulated forms, retain exact existing owners, and make a small concrete qualification scope. Alias changes still require matching/identity/snapshot and affected-game qualification.",
+    "required_future_authority": "Separate explicit owner authorization to apply/dry-run/install/qualify a bounded slice; main landing remains separately unauthorized.",
+    "required_future_target": "Then-latest actual feat/gui-cat-m3 working version, with explicit frozen identity for any accepted WIP; local main recorded separately. Refresh affected authorities/snapshots through the existing cascade, gates and scope-appropriate playthroughs.",
+    "unassessed_effects": [
+      "exact/fuzzy/projection/suggestion competition",
+      "repeat/win identity",
+      "complete node snapshots and affected discovery/recipe catalogs",
+      "affected game behavior, not inferred from source truth"
+    ],
+    "zero_disturbance_or_merge_safety_claimed": false
+  },
+  "waiting": {
+    "step": "next-work",
+    "reason": "Curation first: residual10 below growth20; owner scope needed.",
+    "since": "2026-10-20T02:00:18.613144+00:00",
+    "resume_condition": "New explicit owner curation/integration scope or a concrete eligible uncovered batch; no automatic threshold waiver, hold reopening, installation or elapsed-time approval."
+  },
+  "dispatch": {
+    "existing_chat": true,
+    "automatic_recovery_schedule_unchanged": true,
+    "no_next_source_wave_started": true,
+    "no_empty_keepalive_requests": true,
+    "model_or_cache_settings_changed": false,
+    "no_cache_retention_guarantee": true
+  },
+  "owner_decision_history_reference": {
+    "source_ref": "19667bf430d1d6af9409bc2ea1c5e60be0b67aab",
+    "path": "docs/reviews/v1-41-school-objects-language-and-common-inputs/owner-handoff.json",
+    "field": "owner_decisions",
+    "sha256": "a3aec9bdc0d1f4f4f7431acc6e07ef64ccd91091b43d31450c0b258698cd7363"
+  },
+  "state_compaction": "Compact equivalent date-bounded owner-decision synopsis; full original eight decision records remain in the exact protected source handoff and prior state snapshot. No owner ruling is changed.",
+  "source_approvals_added": 0,
+  "new_web_reviews": 0,
+  "dictionary_requests": 0,
+  "module_execution_or_application": false,
+  "module_dry_run": false,
+  "source_applied": false,
+  "installed": 0,
+  "target_approvals": 0,
+  "playable_rounds": 0,
+  "player_visible_delta": "0/0/0"
+}

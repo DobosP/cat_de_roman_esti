@@ -1,0 +1,5408 @@
+{
+  "reviewer": "factual-v1-18",
+  "review_round": 1,
+  "review_type": "independent whole-batch factual web review",
+  "module_path": "scripts/body_and_everyday_care_v1_18_data.py",
+  "module_sha256": "71ea9efda01941bd450d96c148434d53e1dc5f1efbd3e6216163c04517d0a837",
+  "verdict": "accept",
+  "rationale": "All 51 selected source-only proposals and 158 directed captions are supported in the exact selected senses and non-colliding paradigms; nine original holds remain outside the module. No runtime or board promotion is approved.",
+  "landing_status": "not_landed",
+  "handoff_status": "owner_review_later",
+  "source_applied": false,
+  "installed": 0,
+  "player_visible_delta": "0/0/0",
+  "scope": [
+    "Romanian ordinary/school vocabulary, selected sense/register, exact DOOM3 heads and fully attributed ordinary noun forms.",
+    "All selected item descriptions, 158 edge directions/captions, actual endpoint senses, normalized ownership and incident graph floors.",
+    "No new lexical synonym is proposed; input aliases here are grammatical forms.",
+    "Six-game vocabulary/graph potential only; no curated board, partition, pairing, target, recipe, route or difficulty promotion.",
+    "No clinical, symptom, treatment or diagnostic advice."
+  ],
+  "fresh_web_evidence": {
+    "dictionary_requests": 102,
+    "dictionary_HTTP_200": 102,
+    "minimum_dictionary_start_gap_seconds": 2.1600358486175537,
+    "non_dictionary_requests": 68,
+    "non_dictionary_HTTP_200": 68,
+    "additional_primary_textbook_HTTP_200": 1,
+    "dictionary_fetch_inventory_sha256": "5c74d7ac9618c71640f02f2342b20330c660f0b9cde581c2e36849aad89d17ac",
+    "other_fetch_inventory_sha256": "2f1cba2a6669494cd456c8326a1c7c007159b65f87e52eda95e8b825e8f649dd",
+    "textbook_response_sha256": "4a7b8b85174471710346ab1b606168f740d51ed5d2d2cb163ca72dee18579be1",
+    "textbook_source": "https://www.educatieonline.md/Files/Manuals/6/VI_Biologie%20%28a.%202017%2C%20in%20limba%20romana%29.pdf",
+    "textbook_identification": "Tudor Cozari, Biologie, clasa a 6-a, Știința 2017, Romanian-language approved textbook; skeletal protection passage on printed p.72.",
+    "method": "Fresh direct HTTP JSON/pages plus fresh source HTML/PDF passages; selected definitions and full attributed ordinary noun tables checked item by item. School and hospital PDF passages were extracted from fresh PDF bytes rather than accepted from indexed snippets alone.",
+    "exclusive_Dex_channel_released": true,
+    "peer_review_artifact_read": false
+  },
+  "source_quality_notes": [
+    {
+      "item_ids": [
+        "v118-schelet",
+        "v118-coasta_toracica"
+      ],
+      "issue": "Fresh Schelet_uman contains a corrupted bone-count sentence.",
+      "resolution": "No count is proposed. The specific skull/brain and thorax/heart claims are independently corroborated on printed p72 of the Romanian class-VI textbook; no source-wide factual endorsement."
+    },
+    {
+      "item_ids": [
+        "v118-geana"
+      ],
+      "issue": "Geană Wikipedia gives an erroneous English-derived etymology.",
+      "resolution": "Etymology and cosmetic/clinical content are excluded. DEX/DOOM3 establish the Romanian lexeme; selected anatomy/protection paragraphs and the eyelid definition support only the four retained claims."
+    },
+    {
+      "item_ids": [
+        "v118-lacrima"
+      ],
+      "issue": "The original gland/duct wording was reported inaccurate.",
+      "resolution": "The module binds primary hospital sources for nasal drainage and aqueous film; fresh passages corroborate both and no symptom or treatment material is adopted."
+    },
+    {
+      "item_ids": [
+        "v118-maxilar"
+      ],
+      "issue": "DEX uses a mixed MAXILAR,-Ă noun/adjective heading.",
+      "resolution": "The canonical stem is maxilar, selected sense1 is explicitly a neuter noun, and DOOM3 maxilar2 plus the neuter N1 table supply the noun paradigm; adjective forms are excluded."
+    }
+  ],
+  "ownership_and_graph_checks": {
+    "all232_proposed_normalized_keys_unique_and_missing": true,
+    "normalized_index_labels_node_aliases_and_world_snapshots_checked": true,
+    "deferred_and_exact_ReviewedUnresolved_exclusions_checked": true,
+    "preserved_unlanded_actual_reservations_checked": [
+      {
+        "wave": "1.14",
+        "branch": "content/v1-14-animals-and-habitats",
+        "commit": "4b634cab38cbce90ac6eb02e0907578335208c69"
+      },
+      {
+        "wave": "1.15",
+        "branch": "content/v1-15-home-school-words",
+        "commit": "2ace3df01d4871fa1990feadd4b485d6be496d81"
+      },
+      {
+        "wave": "1.16",
+        "branch": "content/v1-16-travel-and-street-words",
+        "commit": "ecb50b463d8d1f0300d435126f934fe90b29fe5b"
+      },
+      {
+        "wave": "1.17",
+        "branch": "content/v1-17-garden-and-kitchen-words",
+        "commit": "df2fd5e5196cb1584cb8e330adbc2b71b855fab8"
+      }
+    ],
+    "no_form_owner_changed": true,
+    "all40_new_concepts_have4_to8_distinct_neighbors": true,
+    "each_has_at_least2_old_main_and2_same_category_neighbors": true,
+    "each_has_at_most2_batch_neighbors": true,
+    "held_nodes_excluded": true,
+    "actual_endpoint_descriptions_and_categories_checked": true
+  },
+  "coverage": {
+    "original_pool_items": 60,
+    "selected_items_reviewed": 51,
+    "selected_items_accepted": 51,
+    "selected_items_modified": 0,
+    "selected_items_rejected": 0,
+    "preserved_original_holds": 9,
+    "new_concepts": 40,
+    "existing_input_families": 11,
+    "module_edges": 158,
+    "edge_rows": 158,
+    "accepted_edges": 158,
+    "rejected_edges": 0,
+    "modified_edges": 0,
+    "proposed_missing_normalized_keys": 232,
+    "verified_lexical_synonym_families": 0,
+    "all_items_covered": true,
+    "all_edges_covered": true
+  },
+  "required_changes": [],
+  "items": [
+    {
+      "id": "v118-organ",
+      "lemma": "Organ",
+      "node_id": "n_v1_18_organ",
+      "kind": "new_shared_concept",
+      "selected": false,
+      "verdict": "modify",
+      "action": "retain_held_outside_module",
+      "rationale": "held: five-minute item research cap reached before the complete record was finalized; preserve this hold and zero admitted inputs; this review does not reopen bounded research.",
+      "sources": [
+        "https://dexonline.ro/definitie/organ/json"
+      ],
+      "fresh_research_reopened": false,
+      "proposed_missing_forms": [],
+      "preserved_unresearched_form_hypotheses": [],
+      "modifications": [
+        {
+          "action": "retain_held",
+          "id": "v118-organ",
+          "admit_inputs": false
+        }
+      ]
+    },
+    {
+      "id": "v118-plaman",
+      "lemma": "Plămân",
+      "node_id": "n_v1_18_plaman",
+      "kind": "new_shared_concept",
+      "selected": false,
+      "verdict": "modify",
+      "action": "retain_held_outside_module",
+      "rationale": "held: five-minute item research cap reached before the complete record was finalized; preserve this hold and zero admitted inputs; this review does not reopen bounded research.",
+      "sources": [
+        "https://dexonline.ro/definitie/pl%C4%83m%C3%A2n/json",
+        "https://ro.wikipedia.org/wiki/Pl%C4%83m%C3%A2n"
+      ],
+      "fresh_research_reopened": false,
+      "proposed_missing_forms": [],
+      "preserved_unresearched_form_hypotheses": [],
+      "modifications": [
+        {
+          "action": "retain_held",
+          "id": "v118-plaman",
+          "admit_inputs": false
+        }
+      ]
+    },
+    {
+      "id": "v118-ficat",
+      "lemma": "Ficat",
+      "node_id": "n_v1_18_ficat",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "Biological liver sense, bile production and digestive metabolism are supported; hepatic blood supply and gastric adjacency fit the four directed captions.",
+      "sources": [
+        "https://dexonline.ro/definitie/ficat",
+        "https://dexonline.ro/definitie/ficat/json",
+        "https://ro.wikipedia.org/wiki/Ficat"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "ficat",
+          "DEX_ids": [
+            "870516"
+          ],
+          "DOOM3_ids": [
+            "1301448"
+          ],
+          "ordinary_form_authority": "DOOM3 masculine ficați entry plus explicit DOR M3 table"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv masculin ( M3 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "ficat",
+        "ficatul",
+        "ficați",
+        "ficații",
+        "ficatului",
+        "ficaților"
+      ],
+      "verified_family_forms": [
+        "ficat",
+        "ficatul",
+        "ficați",
+        "ficații",
+        "ficatului",
+        "ficaților"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "old_main": 3,
+        "same_category": 3,
+        "batch": 1
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-rinichi",
+      "lemma": "Rinichi",
+      "node_id": "n_v1_18_rinichi",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The paired excretory organ, filtration, body-water regulation and renal venous drainage are supported; culinary and figurative senses are excluded.",
+      "sources": [
+        "https://dexonline.ro/definitie/rinichi",
+        "https://dexonline.ro/definitie/rinichi/json",
+        "https://ro.wikipedia.org/wiki/Rinichi"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "rinichi",
+          "DEX_ids": [
+            "858679"
+          ],
+          "DOOM3_ids": [
+            "1300562"
+          ],
+          "ordinary_form_authority": "DOOM3 invariant singular/plural rinichi plus DOR M73 noun table"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv masculin ( M73 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "rinichi",
+        "rinichiul",
+        "rinichii",
+        "rinichiului",
+        "rinichilor"
+      ],
+      "verified_family_forms": [
+        "rinichi",
+        "rinichiul",
+        "rinichii",
+        "rinichiului",
+        "rinichilor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "old_main": 3,
+        "same_category": 3,
+        "batch": 1
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-stomac",
+      "lemma": "Stomac",
+      "node_id": "n_v1_18_stomac",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The digestive cavity receives orally ingested food and continues into the small intestine; retained captions avoid the dropped throat-specific claim.",
+      "sources": [
+        "https://dexonline.ro/definitie/stomac",
+        "https://dexonline.ro/definitie/stomac/json",
+        "https://ro.wikipedia.org/wiki/Stomac"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "stomac",
+          "DEX_ids": [
+            "847013"
+          ],
+          "DOOM3_ids": [
+            "1278177"
+          ],
+          "ordinary_form_authority": "DOOM3 neuter stomacuri plus DOR N24 table"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv neutru ( N24 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "stomac",
+        "stomacul",
+        "stomacuri",
+        "stomacurile",
+        "stomacului",
+        "stomacurilor"
+      ],
+      "verified_family_forms": [
+        "stomac",
+        "stomacul",
+        "stomacuri",
+        "stomacurile",
+        "stomacului",
+        "stomacurilor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "graph_counts": {
+        "distinct": 5,
+        "old_main": 3,
+        "same_category": 4,
+        "batch": 2
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-intestin",
+      "lemma": "Intestin",
+      "node_id": "n_v1_18_intestin",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The noun names the digestive tract beyond the stomach; the separate small-intestine source supports nutrient absorption into blood.",
+      "sources": [
+        "https://dexonline.ro/definitie/intestin",
+        "https://dexonline.ro/definitie/intestin/json",
+        "https://ro.wikipedia.org/wiki/Intestin",
+        "https://ro.wikipedia.org/wiki/Intestin_sub%C8%9Bire"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "intestin",
+          "DEX_ids": [
+            "858286"
+          ],
+          "DOOM3_ids": [
+            "1298538"
+          ],
+          "ordinary_form_authority": "DOOM3 noun intestin2 plus unbadged N1 neuter noun table, not first DOR adjective table"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv neutru ( N1 ) nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "intestin",
+        "intestinul",
+        "intestine",
+        "intestinele",
+        "intestinului",
+        "intestinelor"
+      ],
+      "verified_family_forms": [
+        "intestin",
+        "intestinul",
+        "intestine",
+        "intestinele",
+        "intestinului",
+        "intestinelor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "old_main": 3,
+        "same_category": 3,
+        "batch": 1
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-artera",
+      "lemma": "Arteră",
+      "node_id": "n_v1_18_artera",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The anatomical vessel carries blood away from the heart; the caption allows capillary continuation to veins without a false universal oxygenation claim.",
+      "sources": [
+        "https://dexonline.ro/definitie/arter%C4%83",
+        "https://dexonline.ro/definitie/arter%C4%83/json",
+        "https://ro.wikipedia.org/wiki/Arter%C4%83"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "arteră",
+          "DEX_ids": [
+            "829871"
+          ],
+          "DOOM3_ids": [
+            "1324098"
+          ],
+          "ordinary_form_authority": "DOOM3 arterei/artere plus DOR F1 noun table"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv feminin ( F1 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "arteră",
+        "artere",
+        "arterele",
+        "arterei",
+        "arterelor"
+      ],
+      "verified_family_forms": [
+        "arteră",
+        "artere",
+        "arterele",
+        "arterei",
+        "arterelor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor",
+        "Perechi"
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "old_main": 3,
+        "same_category": 4,
+        "batch": 1
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-vena",
+      "lemma": "Venă",
+      "node_id": "n_v1_18_vena",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The anatomical vessel returns blood toward the heart; lexical luck/opportunity and broader figurative senses are excluded.",
+      "sources": [
+        "https://dexonline.ro/definitie/ven%C4%83",
+        "https://dexonline.ro/definitie/ven%C4%83/json",
+        "https://ro.wikipedia.org/wiki/Ven%C4%83"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "venă",
+          "DEX_ids": [
+            "825828"
+          ],
+          "DOOM3_ids": [
+            "1263720"
+          ],
+          "ordinary_form_authority": "DOOM3 venei/vene plus DOR F1 noun table"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv feminin ( F1 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "venă",
+        "vene",
+        "venele",
+        "venei",
+        "venelor"
+      ],
+      "verified_family_forms": [
+        "venă",
+        "vene",
+        "venele",
+        "venei",
+        "venelor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor",
+        "Perechi"
+      ],
+      "graph_counts": {
+        "distinct": 5,
+        "old_main": 3,
+        "same_category": 5,
+        "batch": 2
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-nerv",
+      "lemma": "Nerv",
+      "node_id": "n_v1_18_nerv",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The anatomical fiber bundle conducts impulses; DEX supports peripheral skin sensation and the optic-nerve article supports the visual connection.",
+      "sources": [
+        "https://dexonline.ro/definitie/nerv",
+        "https://dexonline.ro/definitie/nerv/json",
+        "https://ro.wikipedia.org/wiki/Nerv",
+        "https://ro.wikipedia.org/wiki/Nerv_optic"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "nerv",
+          "DEX_ids": [
+            "883894"
+          ],
+          "DOOM3_ids": [
+            "1289711"
+          ],
+          "ordinary_form_authority": "DOOM3 masculine nervi plus DOR M1 noun table"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv masculin ( M1 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "nerv",
+        "nervul",
+        "nervi",
+        "nervii",
+        "nervului",
+        "nervilor"
+      ],
+      "verified_family_forms": [
+        "nerv",
+        "nervul",
+        "nervi",
+        "nervii",
+        "nervului",
+        "nervilor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor",
+        "Perechi"
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "old_main": 4,
+        "same_category": 4,
+        "batch": 0
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-schelet",
+      "lemma": "Schelet",
+      "node_id": "n_v1_18_schelet",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The vertebrate bony skeleton and protective skull/rib-cage functions are corroborated by the Romanian class-VI textbook; the corrupted bone-count sentence is excluded.",
+      "sources": [
+        "https://dexonline.ro/definitie/schelet",
+        "https://dexonline.ro/definitie/schelet/json",
+        "https://ro.wikipedia.org/wiki/Schelet",
+        "https://ro.wikipedia.org/wiki/Schelet_uman",
+        "https://www.educatieonline.md/Files/Manuals/6/VI_Biologie%20%28a.%202017%2C%20in%20limba%20romana%29.pdf"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "schelet",
+          "DEX_ids": [
+            "839829"
+          ],
+          "DOOM3_ids": [
+            "1273285"
+          ],
+          "ordinary_form_authority": "DOOM3 neuter schelete plus DOR N1 noun table, not proper-name entry"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv neutru ( N1 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "schelet",
+        "scheletul",
+        "schelete",
+        "scheletele",
+        "scheletului",
+        "scheletelor"
+      ],
+      "verified_family_forms": [
+        "schelet",
+        "scheletul",
+        "schelete",
+        "scheletele",
+        "scheletului",
+        "scheletelor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "old_main": 4,
+        "same_category": 4,
+        "batch": 0
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-vertebra",
+      "lemma": "Vertebră",
+      "node_id": "n_v1_18_vertebra",
+      "kind": "new_shared_concept",
+      "selected": false,
+      "verdict": "modify",
+      "action": "retain_held_outside_module",
+      "rationale": "held: dependency graph floors after researched holds/edge removals: {'distinct': 3, 'old_main': 2, 'same_category': 3, 'batch': 1}; preserve this hold and zero admitted inputs; this review does not reopen bounded research.",
+      "sources": [
+        "https://dexonline.ro/definitie/vertebr%C4%83/json",
+        "https://ro.wikipedia.org/wiki/Vertebr%C4%83"
+      ],
+      "fresh_research_reopened": false,
+      "proposed_missing_forms": [],
+      "preserved_unresearched_form_hypotheses": [],
+      "modifications": [
+        {
+          "action": "retain_held",
+          "id": "v118-vertebra",
+          "admit_inputs": false
+        }
+      ]
+    },
+    {
+      "id": "v118-articulatie",
+      "lemma": "Articulație",
+      "node_id": "n_v1_18_articulatie",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The anatomical connection of bones is supported; the served knee and ankle nodes fit the joint examples and their directed class captions.",
+      "sources": [
+        "https://dexonline.ro/definitie/articula%C8%9Bie",
+        "https://dexonline.ro/definitie/articula%C8%9Bie/json",
+        "https://ro.wikipedia.org/wiki/Articula%C8%9Bie",
+        "https://ro.wikipedia.org/wiki/Genunchi",
+        "https://ro.wikipedia.org/wiki/Glezn%C4%83"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "articulație",
+          "DEX_ids": [
+            "829889"
+          ],
+          "DOOM3_ids": [
+            "1324111"
+          ],
+          "ordinary_form_authority": "Explicit DOOM3 F135 noun table"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv feminin ( F135 ) Surse flexiune: DOOM 3 nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "articulație",
+        "articulația",
+        "articulații",
+        "articulațiile",
+        "articulației",
+        "articulațiilor"
+      ],
+      "verified_family_forms": [
+        "articulație",
+        "articulația",
+        "articulații",
+        "articulațiile",
+        "articulației",
+        "articulațiilor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "graph_counts": {
+        "distinct": 5,
+        "old_main": 4,
+        "same_category": 5,
+        "batch": 1
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-tendon",
+      "lemma": "Tendon",
+      "node_id": "n_v1_18_tendon",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "A muscle-to-bone fibrous structure; the primary hand-clinic account supports finger movement, while no ligament synonym is admitted.",
+      "sources": [
+        "https://dexonline.ro/definitie/tendon",
+        "https://dexonline.ro/definitie/tendon/json",
+        "https://enayatimedicalcity.ro/blog/degetul-in-resort-tenosinovita-stenosanta-a-flexorilor-degetelor/",
+        "https://ro.wikipedia.org/wiki/Tendon"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "tendon",
+          "DEX_ids": [
+            "832173"
+          ],
+          "DOOM3_ids": [
+            "1268343"
+          ],
+          "ordinary_form_authority": "DOOM3 neuter tendoane plus DOR N11 noun table"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv neutru ( N11 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "tendon",
+        "tendonul",
+        "tendoane",
+        "tendoanele",
+        "tendonului",
+        "tendoanelor"
+      ],
+      "verified_family_forms": [
+        "tendon",
+        "tendonul",
+        "tendoane",
+        "tendoanele",
+        "tendonului",
+        "tendoanelor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor",
+        "Perechi"
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "old_main": 4,
+        "same_category": 4,
+        "batch": 0
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-ligament",
+      "lemma": "Ligament",
+      "node_id": "n_v1_18_ligament",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The selected anatomical fibrous band can join bones; knee and ankle stability are independently supported and tendon remains a distinct concept.",
+      "sources": [
+        "https://dexonline.ro/definitie/ligament",
+        "https://dexonline.ro/definitie/ligament/json",
+        "https://ro.wikipedia.org/wiki/Genunchi",
+        "https://ro.wikipedia.org/wiki/Glezn%C4%83",
+        "https://ro.wikipedia.org/wiki/Ligament"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "ligament",
+          "DEX_ids": [
+            "864214"
+          ],
+          "DOOM3_ids": [
+            "1326028"
+          ],
+          "ordinary_form_authority": "DOOM3 ligamente plus DOR ligament1 N1 table, not unbadged -uri table"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv neutru ( N1 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "ligament",
+        "ligamentul",
+        "ligamente",
+        "ligamentele",
+        "ligamentului",
+        "ligamentelor"
+      ],
+      "verified_family_forms": [
+        "ligament",
+        "ligamentul",
+        "ligamente",
+        "ligamentele",
+        "ligamentului",
+        "ligamentelor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor",
+        "Perechi"
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "old_main": 4,
+        "same_category": 4,
+        "batch": 0
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-cartilaj",
+      "lemma": "Cartilaj",
+      "node_id": "n_v1_18_cartilaj",
+      "kind": "new_shared_concept",
+      "selected": false,
+      "verdict": "modify",
+      "action": "retain_held_outside_module",
+      "rationale": "held: exact-headword DOOM3 Cartilaj entry missing; DOOM3/table belong to Cartilagiu, while Cartilaj has DOOM2 only. Unscreened Cartilagiu forms are not substituted.; preserve this hold and zero admitted inputs; this review does not reopen bounded research.",
+      "sources": [
+        "https://dexonline.ro/definitie/cartilaj/json",
+        "https://ro.wikipedia.org/wiki/Cartilaj"
+      ],
+      "fresh_research_reopened": false,
+      "proposed_missing_forms": [],
+      "preserved_unresearched_form_hypotheses": [],
+      "modifications": [
+        {
+          "action": "retain_held",
+          "id": "v118-cartilaj",
+          "admit_inputs": false
+        }
+      ]
+    },
+    {
+      "id": "v118-maduva_osoasa",
+      "lemma": "Măduvă osoasă",
+      "node_id": "n_v1_18_maduva_osoasa",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The qualified bone-marrow tissue and hematopoietic cells are supported; only normative singular qualified forms are admitted, excluding spinal cord and unsupported plurals.",
+      "sources": [
+        "https://dexonline.ro/definitie/m%C4%83duv%C4%83",
+        "https://dexonline.ro/definitie/m%C4%83duv%C4%83/json",
+        "https://ro.wikipedia.org/wiki/M%C4%83duv%C4%83_osoas%C4%83"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "măduvă",
+          "DEX_ids": [
+            "886511"
+          ],
+          "DOOM3_ids": [
+            "1291576"
+          ],
+          "ordinary_form_authority": "DOOM3 singular măduvă/măduvei, agreeing with singular DOR F1 rows; qualified adjective agreement"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv feminin ( F1 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "măduvă osoasă",
+        "măduvei osoase"
+      ],
+      "verified_family_forms": [
+        "măduvă osoasă",
+        "măduvei osoase"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "old_main": 4,
+        "same_category": 4,
+        "batch": 0
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-clavicula",
+      "lemma": "Claviculă",
+      "node_id": "n_v1_18_clavicula",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The paired shoulder-girdle bone articulates with sternum and scapula; the masculine-looking alternatives are not the selected feminine paradigm.",
+      "sources": [
+        "https://dexonline.ro/definitie/clavicul%C4%83",
+        "https://dexonline.ro/definitie/clavicul%C4%83/json",
+        "https://ro.wikipedia.org/wiki/Clavicul%C4%83"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "claviculă",
+          "DEX_ids": [
+            "847511"
+          ],
+          "DOOM3_ids": [
+            "1312164"
+          ],
+          "ordinary_form_authority": "DOOM3 claviculei/clavicule plus DOR F1 noun table"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv feminin ( F1 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "claviculă",
+        "clavicule",
+        "claviculele",
+        "claviculei",
+        "claviculelor"
+      ],
+      "verified_family_forms": [
+        "claviculă",
+        "clavicule",
+        "claviculele",
+        "claviculei",
+        "claviculelor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor",
+        "Conexiuni",
+        "Intrusul"
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "old_main": 2,
+        "same_category": 4,
+        "batch": 2
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-omoplat",
+      "lemma": "Omoplat",
+      "node_id": "n_v1_18_omoplat",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The paired scapular bone contributes to the shoulder and articulates with the clavicle; the selected DOOM3 masculine paradigm excludes old neuter variants.",
+      "sources": [
+        "https://dexonline.ro/definitie/omoplat",
+        "https://dexonline.ro/definitie/omoplat/json",
+        "https://ro.wikipedia.org/wiki/Clavicul%C4%83",
+        "https://ro.wikipedia.org/wiki/Omoplat"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "omoplat",
+          "DEX_ids": [
+            "893427"
+          ],
+          "DOOM3_ids": [
+            "1287077"
+          ],
+          "ordinary_form_authority": "Explicit DOOM3 masculine omoplat1 M3 table, not unbadged neuter -e/-uri tables"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv masculin ( M3 ) Surse flexiune: DOOM 3 nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "omoplat",
+        "omoplatul",
+        "omoplați",
+        "omoplații",
+        "omoplatului",
+        "omoplaților"
+      ],
+      "verified_family_forms": [
+        "omoplat",
+        "omoplatul",
+        "omoplați",
+        "omoplații",
+        "omoplatului",
+        "omoplaților"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor",
+        "Conexiuni",
+        "Intrusul"
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "old_main": 2,
+        "same_category": 4,
+        "batch": 2
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-coasta_toracica",
+      "lemma": "Coastă toracică",
+      "node_id": "n_v1_18_coasta_toracica",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The qualified rib sense preserves the geographical owner of bare coastă; thoracic protection and the existing stern connection are supported.",
+      "sources": [
+        "https://dexonline.ro/definitie/coast%C4%83",
+        "https://dexonline.ro/definitie/coast%C4%83/json",
+        "https://ro.wikipedia.org/wiki/Coaste_(anatomie)",
+        "https://ro.wikipedia.org/wiki/Schelet_uman",
+        "https://www.educatieonline.md/Files/Manuals/6/VI_Biologie%20%28a.%202017%2C%20in%20limba%20romana%29.pdf"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "coastă",
+          "DEX_ids": [
+            "848134"
+          ],
+          "DOOM3_ids": [
+            "1312471"
+          ],
+          "ordinary_form_authority": "DOOM3 coastei/coaste plus DOR F1 rows and qualified adjective agreement"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv feminin ( F1 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "coastă toracică",
+        "coaste toracice",
+        "coastele toracice",
+        "coastei toracice",
+        "coastelor toracice"
+      ],
+      "verified_family_forms": [
+        "coastă toracică",
+        "coaste toracice",
+        "coastele toracice",
+        "coastei toracice",
+        "coastelor toracice"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor",
+        "Conexiuni",
+        "Intrusul"
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "old_main": 3,
+        "same_category": 4,
+        "batch": 1
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-brat",
+      "lemma": "Braț",
+      "node_id": "n_v1_18_brat",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The selected upper-arm segment lies between shoulder and elbow and contains the humerus; the forearm is kept distinct.",
+      "sources": [
+        "https://dexonline.ro/definitie/bra%C8%9B",
+        "https://dexonline.ro/definitie/bra%C8%9B/json",
+        "https://ro.wikipedia.org/wiki/Bra%C8%9B_%28anatomie%29"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "braț",
+          "DEX_ids": [
+            "837049"
+          ],
+          "DOOM3_ids": [
+            "1319402"
+          ],
+          "ordinary_form_authority": "Explicit DOOM3 N1 braț table"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv neutru ( N1 ) Surse flexiune: DOOM 3 nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "braț",
+        "brațul",
+        "brațe",
+        "brațele",
+        "brațului",
+        "brațelor"
+      ],
+      "verified_family_forms": [
+        "braț",
+        "brațul",
+        "brațe",
+        "brațele",
+        "brațului",
+        "brațelor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor",
+        "Conexiuni",
+        "Intrusul"
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "old_main": 2,
+        "same_category": 4,
+        "batch": 2
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-antebrat",
+      "lemma": "Antebraț",
+      "node_id": "n_v1_18_antebrat",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The segment between elbow and wrist contains radius and ulna and continues toward the hand; the arm connection is positional, not a synonym.",
+      "sources": [
+        "https://dexonline.ro/definitie/antebra%C8%9B",
+        "https://dexonline.ro/definitie/antebra%C8%9B/json",
+        "https://ro.wikipedia.org/wiki/Antebra%C8%9B",
+        "https://ro.wikipedia.org/wiki/Bra%C8%9B_%28anatomie%29"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "antebraț",
+          "DEX_ids": [
+            "827770"
+          ],
+          "DOOM3_ids": [
+            "1322864"
+          ],
+          "ordinary_form_authority": "Explicit DOOM3 N1 noun table"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv neutru ( N1 ) Surse flexiune: DOOM 3 nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "antebraț",
+        "antebrațul",
+        "antebrațe",
+        "antebrațele",
+        "antebrațului",
+        "antebrațelor"
+      ],
+      "verified_family_forms": [
+        "antebraț",
+        "antebrațul",
+        "antebrațe",
+        "antebrațele",
+        "antebrațului",
+        "antebrațelor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor",
+        "Conexiuni",
+        "Intrusul"
+      ],
+      "graph_counts": {
+        "distinct": 5,
+        "old_main": 3,
+        "same_category": 5,
+        "batch": 2
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-coapsa",
+      "lemma": "Coapsă",
+      "node_id": "n_v31_body_lower_coapsa",
+      "kind": "existing_input_family",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The full feminine anatomical family matches DOOM3 and Wiktionary; only missing coapselor is proposed for the already served thigh node.",
+      "sources": [
+        "https://dexonline.ro/definitie/coaps%C4%83",
+        "https://dexonline.ro/definitie/coaps%C4%83/json",
+        "https://ro.wiktionary.org/wiki/coaps%C4%83"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "coapsă",
+          "DEX_ids": [
+            "848122"
+          ],
+          "DOOM3_ids": [
+            "1312460"
+          ],
+          "ordinary_form_authority": "DOOM3 coapsei/coapse plus DOR F1 table and agreeing Wiktionary table"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv feminin ( F1 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "coapselor"
+      ],
+      "verified_family_forms": [
+        "coapsă",
+        "coapse",
+        "coapsele",
+        "coapsei",
+        "coapselor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "graph_counts": null,
+      "modifications": []
+    },
+    {
+      "id": "v118-glezna",
+      "lemma": "Gleznă",
+      "node_id": "n_v31_body_lower_glezna",
+      "kind": "existing_input_family",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The selected ankle family matches DOOM3 and the second dictionary; only the absent genitive plural is proposed for its existing owner.",
+      "sources": [
+        "https://dexonline.ro/definitie/glezn%C4%83",
+        "https://dexonline.ro/definitie/glezn%C4%83/json",
+        "https://ro.wiktionary.org/wiki/glezn%C4%83"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "gleznă",
+          "DEX_ids": [
+            "878492"
+          ],
+          "DOOM3_ids": [
+            "1326347"
+          ],
+          "ordinary_form_authority": "DOOM3 gleznei/glezne plus DOR F1 table and agreeing Wiktionary table"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv feminin ( F1 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "gleznelor"
+      ],
+      "verified_family_forms": [
+        "gleznă",
+        "glezne",
+        "gleznele",
+        "gleznei",
+        "gleznelor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "graph_counts": null,
+      "modifications": []
+    },
+    {
+      "id": "v118-calcai",
+      "lemma": "Călcâi",
+      "node_id": "n_v31_body_lower_calcai",
+      "kind": "existing_input_family",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The heel noun uses the normative neuter călcâie family; only călcâielor is missing, while footwear extensions and variants are excluded.",
+      "sources": [
+        "https://dexonline.ro/definitie/c%C4%83lc%C3%A2i",
+        "https://dexonline.ro/definitie/c%C4%83lc%C3%A2i/json",
+        "https://ro.wiktionary.org/wiki/c%C4%83lc%C3%A2i"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "călcâi",
+          "DEX_ids": [
+            "842728"
+          ],
+          "DOOM3_ids": [
+            "1310305"
+          ],
+          "ordinary_form_authority": "DOOM3 neuter călcâie plus DOR N65 table and agreeing Wiktionary table"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv neutru ( N65 ) Surse flexiune: DOR nearticulat articulat",
+        "substantiv neutru ( N65 ) nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "călcâielor"
+      ],
+      "verified_family_forms": [
+        "călcâi",
+        "călcâiul",
+        "călcâie",
+        "călcâiele",
+        "călcâiului",
+        "călcâielor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "graph_counts": null,
+      "modifications": []
+    },
+    {
+      "id": "v118-talpa",
+      "lemma": "Talpă",
+      "node_id": "n_v1_18_talpa",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The anatomical sole extends between heel and toe bases and is covered by skin; footwear and technical senses remain excluded.",
+      "sources": [
+        "https://dexonline.ro/definitie/talp%C4%83",
+        "https://dexonline.ro/definitie/talp%C4%83/json",
+        "https://ro.wikipedia.org/wiki/Piele_(anatomie)",
+        "https://ro.wikipedia.org/wiki/Talp%C4%83"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "talpă",
+          "DEX_ids": [
+            "830404"
+          ],
+          "DOOM3_ids": [
+            "1266085"
+          ],
+          "ordinary_form_authority": "DOOM3 tălpii/tălpi plus DOR talpă1 F51 table, not proper-name or DLRLC -e table"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv feminin ( F51 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "talpă",
+        "tălpi",
+        "tălpile",
+        "tălpii",
+        "tălpilor"
+      ],
+      "verified_family_forms": [
+        "talpă",
+        "tălpi",
+        "tălpile",
+        "tălpii",
+        "tălpilor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor",
+        "Conexiuni",
+        "Intrusul"
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "old_main": 4,
+        "same_category": 4,
+        "batch": 0
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-palma",
+      "lemma": "Palmă",
+      "node_id": "n_v1_18_palma",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The inner hand surface, skin, fingers and metacarpal region support the captions; slap and historical-measure senses are not admitted.",
+      "sources": [
+        "https://dexonline.ro/definitie/palm%C4%83",
+        "https://dexonline.ro/definitie/palm%C4%83/json",
+        "https://ro.wikipedia.org/wiki/M%C3%A2n%C4%83",
+        "https://ro.wikipedia.org/wiki/Piele_(anatomie)",
+        "https://ro.wiktionary.org/wiki/palm%C4%83"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "palmă",
+          "DEX_ids": [
+            "860827"
+          ],
+          "DOOM3_ids": [
+            "1280099"
+          ],
+          "ordinary_form_authority": "DOOM3 palmei/palme plus DOR palmă1 F1 table for hand sense, not branch/proper-name or DLRLC -i"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv feminin ( F1 ) Surse flexiune: DOR nearticulat articulat",
+        "substantiv feminin ( F1 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "palmă",
+        "palme",
+        "palmele",
+        "palmei",
+        "palmelor"
+      ],
+      "verified_family_forms": [
+        "palmă",
+        "palme",
+        "palmele",
+        "palmei",
+        "palmelor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor",
+        "Conexiuni",
+        "Intrusul"
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "old_main": 4,
+        "same_category": 4,
+        "batch": 0
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-umar",
+      "lemma": "Umăr",
+      "node_id": "n_v1_18_umar",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The shoulder region joins upper limb to trunk and includes its bony structures; the arm and scapular relationships match the narrow anatomical sense.",
+      "sources": [
+        "https://dexonline.ro/definitie/um%C4%83r",
+        "https://dexonline.ro/definitie/um%C4%83r/json",
+        "https://ro.wikipedia.org/wiki/Bra%C8%9B_%28anatomie%29",
+        "https://ro.wikipedia.org/wiki/Um%C4%83r"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "umăr",
+          "DEX_ids": [
+            "828203"
+          ],
+          "DOOM3_ids": [
+            "1266398"
+          ],
+          "ordinary_form_authority": "DOOM3 umăr1 masculine umeri plus DOR M27 table, not regional neuter umere"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv masculin ( M27 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "umăr",
+        "umărul",
+        "umeri",
+        "umerii",
+        "umărului",
+        "umerilor"
+      ],
+      "verified_family_forms": [
+        "umăr",
+        "umărul",
+        "umeri",
+        "umerii",
+        "umărului",
+        "umerilor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor",
+        "Conexiuni",
+        "Intrusul"
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "old_main": 2,
+        "same_category": 4,
+        "batch": 2
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-cot",
+      "lemma": "Cot",
+      "node_id": "n_v1_18_cot",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The external elbow region belongs to the joint linking upper arm and forearm; part_of correctly avoids equating the whole joint with its external region.",
+      "sources": [
+        "https://dexonline.ro/definitie/cot",
+        "https://dexonline.ro/definitie/cot/json",
+        "https://ro.wikipedia.org/wiki/Cot_(anatomie)"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "cot",
+          "DEX_ids": [
+            "852912"
+          ],
+          "DOOM3_ids": [
+            "1315152"
+          ],
+          "ordinary_form_authority": "DOOM3 cot1 coate plus DOR N11 anatomical table"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv neutru ( N11 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "cot",
+        "cotul",
+        "coate",
+        "coatele",
+        "cotului",
+        "coatelor"
+      ],
+      "verified_family_forms": [
+        "cot",
+        "cotul",
+        "coate",
+        "coatele",
+        "cotului",
+        "coatelor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor",
+        "Conexiuni",
+        "Intrusul"
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "old_main": 2,
+        "same_category": 4,
+        "batch": 2
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-genunchi",
+      "lemma": "Genunchi",
+      "node_id": "n_v31_body_lower_genunchi",
+      "kind": "existing_input_family",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The anatomical knee uses an invariant singular/plural head and masculine articulated forms; only the missing genitive plural is added.",
+      "sources": [
+        "https://dexonline.ro/definitie/genunchi",
+        "https://dexonline.ro/definitie/genunchi/json",
+        "https://ro.wiktionary.org/wiki/genunchi"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "genunchi",
+          "DEX_ids": [
+            "877133"
+          ],
+          "DOOM3_ids": [
+            "1323107"
+          ],
+          "ordinary_form_authority": "DOOM3 masculine invariant genunchi plus DOR M73 noun table and agreeing Wiktionary table"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv masculin ( M73 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "genunchilor"
+      ],
+      "verified_family_forms": [
+        "genunchi",
+        "genunchiul",
+        "genunchii",
+        "genunchiului",
+        "genunchilor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "graph_counts": null,
+      "modifications": []
+    },
+    {
+      "id": "v118-frunte",
+      "lemma": "Frunte",
+      "node_id": "n_v32_body_face_frunte",
+      "kind": "existing_input_family",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The forehead sense and frunții/frunților forms match the served anatomical owner; figurative leadership senses are excluded.",
+      "sources": [
+        "https://dexonline.ro/definitie/frunte",
+        "https://dexonline.ro/definitie/frunte/json",
+        "https://ro.wiktionary.org/wiki/frunte"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "frunte",
+          "DEX_ids": [
+            "874676"
+          ],
+          "DOOM3_ids": [
+            "1302701"
+          ],
+          "ordinary_form_authority": "DOOM3 frunții/frunți plus explicit DOR frunte noun table and agreeing Wiktionary table"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv feminin ( F109 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "frunților"
+      ],
+      "verified_family_forms": [
+        "frunte",
+        "fruntea",
+        "frunți",
+        "frunțile",
+        "frunții",
+        "frunților"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "graph_counts": null,
+      "modifications": []
+    },
+    {
+      "id": "v118-tampla",
+      "lemma": "Tâmplă",
+      "node_id": "n_v1_18_tampla",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The lateral head region is bounded by eye, ear, forehead and cheek in the selected anatomical entry; church-screen and hair senses are excluded.",
+      "sources": [
+        "https://dexonline.ro/definitie/t%C3%A2mpl%C4%83",
+        "https://dexonline.ro/definitie/t%C3%A2mpl%C4%83/json",
+        "https://ro.wiktionary.org/wiki/t%C3%A2mpl%C4%83"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "tâmplă",
+          "DEX_ids": [
+            "831552"
+          ],
+          "DOOM3_ids": [
+            "1267403"
+          ],
+          "ordinary_form_authority": "DOOM3 tâmplei/tâmple plus explicitly selected DOR anatomical noun table and Wiktionary agreement"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv feminin ( F1 ) Surse flexiune: DOR nearticulat articulat",
+        "substantiv feminin ( F1 ) Surse flexiune: DOR nearticulat articulat",
+        "substantiv feminin ( F1 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "tâmplă",
+        "tâmple",
+        "tâmplele",
+        "tâmplei",
+        "tâmplelor"
+      ],
+      "verified_family_forms": [
+        "tâmplă",
+        "tâmple",
+        "tâmplele",
+        "tâmplei",
+        "tâmplelor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor",
+        "Conexiuni",
+        "Intrusul"
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "old_main": 4,
+        "same_category": 4,
+        "batch": 0
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-ceafa",
+      "lemma": "Ceafă",
+      "node_id": "n_v1_18_ceafa",
+      "kind": "new_shared_concept",
+      "selected": false,
+      "verdict": "modify",
+      "action": "retain_held_outside_module",
+      "rationale": "held: five-minute item research cap reached before the complete record was finalized; preserve this hold and zero admitted inputs; this review does not reopen bounded research.",
+      "sources": [
+        "https://dexonline.ro/definitie/ceaf%C4%83/json",
+        "https://ro.wiktionary.org/wiki/ceaf%C4%83"
+      ],
+      "fresh_research_reopened": false,
+      "proposed_missing_forms": [],
+      "preserved_unresearched_form_hypotheses": [],
+      "modifications": [
+        {
+          "action": "retain_held",
+          "id": "v118-ceafa",
+          "admit_inputs": false
+        }
+      ]
+    },
+    {
+      "id": "v118-barbie",
+      "lemma": "Bărbie",
+      "node_id": "n_v1_18_barbie",
+      "kind": "new_shared_concept",
+      "selected": false,
+      "verdict": "modify",
+      "action": "retain_held_outside_module",
+      "rationale": "held: complete DOOM3 bărbii/bărbiile/bărbiilor paradigm was not in the pre-screened plan; no partial family or beard forms admitted.; preserve this hold and zero admitted inputs; this review does not reopen bounded research.",
+      "sources": [
+        "https://dexonline.ro/definitie/b%C4%83rbie/json",
+        "https://ro.wiktionary.org/wiki/b%C4%83rbie"
+      ],
+      "fresh_research_reopened": false,
+      "proposed_missing_forms": [],
+      "preserved_unresearched_form_hypotheses": [],
+      "modifications": [
+        {
+          "action": "retain_held",
+          "id": "v118-barbie",
+          "admit_inputs": false
+        }
+      ]
+    },
+    {
+      "id": "v118-obraz",
+      "lemma": "Obraz",
+      "node_id": "n_v32_body_face_obraz",
+      "kind": "existing_input_family",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The facial cheek selects masculine obraji in DOOM3; neuter obraze and figurative honor meanings are not admitted.",
+      "sources": [
+        "https://dexonline.ro/definitie/obraz",
+        "https://dexonline.ro/definitie/obraz/json",
+        "https://ro.wiktionary.org/wiki/obraz"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "obraz",
+          "DEX_ids": [
+            "837575"
+          ],
+          "DOOM3_ids": [
+            "1286497"
+          ],
+          "ordinary_form_authority": "Selected DOOM3 obraz2 masculine part-of-face entry plus explicit DOOM3 -i noun table"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv masculin ( M10 ) Surse flexiune: DOOM 3 nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "obrajilor"
+      ],
+      "verified_family_forms": [
+        "obraz",
+        "obrazul",
+        "obraji",
+        "obrajii",
+        "obrazului",
+        "obrajilor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "graph_counts": null,
+      "modifications": []
+    },
+    {
+      "id": "v118-buza",
+      "lemma": "Buză",
+      "node_id": "n_v32_body_face_buza",
+      "kind": "existing_input_family",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The lip family matches the existing mouth-part owner; only the missing genitive plural is proposed and no edge is added.",
+      "sources": [
+        "https://dexonline.ro/definitie/buz%C4%83",
+        "https://dexonline.ro/definitie/buz%C4%83/json",
+        "https://ro.wiktionary.org/wiki/buz%C4%83"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "buză",
+          "DEX_ids": [
+            "839448"
+          ],
+          "DOOM3_ids": [
+            "1320204"
+          ],
+          "ordinary_form_authority": "Explicit DOOM3 buză noun table and agreeing Wiktionary table"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv feminin ( F1 ) Surse flexiune: DOOM 3 nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "buzelor"
+      ],
+      "verified_family_forms": [
+        "buză",
+        "buze",
+        "buzele",
+        "buzei",
+        "buzelor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "graph_counts": null,
+      "modifications": []
+    },
+    {
+      "id": "v118-spranceana",
+      "lemma": "Sprânceană",
+      "node_id": "n_v32_body_face_spranceana",
+      "kind": "existing_input_family",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The eyebrow family matches the served anatomical sense and normative sprâncenei/sprâncenelor forms; no geographic metaphor is adopted.",
+      "sources": [
+        "https://dexonline.ro/definitie/spr%C3%A2ncean%C4%83",
+        "https://dexonline.ro/definitie/spr%C3%A2ncean%C4%83/json",
+        "https://ro.wiktionary.org/wiki/spr%C3%A2ncean%C4%83"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "sprânceană",
+          "DEX_ids": [
+            "845756"
+          ],
+          "DOOM3_ids": [
+            "1277662"
+          ],
+          "ordinary_form_authority": "DOOM3 sprâncenei/sprâncene plus explicit DOR anatomical noun and agreeing Wiktionary tables"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv feminin ( F16 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "sprâncenelor"
+      ],
+      "verified_family_forms": [
+        "sprânceană",
+        "sprâncene",
+        "sprâncenele",
+        "sprâncenei",
+        "sprâncenelor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "graph_counts": null,
+      "modifications": []
+    },
+    {
+      "id": "v118-geana",
+      "lemma": "Geană",
+      "node_id": "n_v1_18_geana",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The eyelash at the eyelid margin and protective function are supported; eyelid skin and eyebrow position are checked without adopting the erroneous English-derived etymology.",
+      "sources": [
+        "https://dexonline.ro/definitie/gean%C4%83",
+        "https://dexonline.ro/definitie/gean%C4%83/json",
+        "https://dexonline.ro/definitie/pleoap%C4%83/json",
+        "https://dexonline.ro/definitie/spr%C3%A2ncean%C4%83/json",
+        "https://ro.wikipedia.org/wiki/Gean%C4%83",
+        "https://ro.wikipedia.org/wiki/Pleoap%C4%83"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "geană",
+          "DEX_ids": [
+            "876917"
+          ],
+          "DOOM3_ids": [
+            "1320347"
+          ],
+          "ordinary_form_authority": "DOOM3 genei/gene plus DOR selected anatomical noun table"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv feminin ( F16 ) Surse flexiune: DOR nearticulat articulat",
+        "substantiv feminin ( F16 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "geană",
+        "gene",
+        "genele",
+        "genei",
+        "genelor"
+      ],
+      "verified_family_forms": [
+        "geană",
+        "gene",
+        "genele",
+        "genei",
+        "genelor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor",
+        "Conexiuni",
+        "Intrusul"
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "old_main": 4,
+        "same_category": 4,
+        "batch": 0
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-pleoapa",
+      "lemma": "Pleoapă",
+      "node_id": "n_v32_body_face_pleoapa",
+      "kind": "existing_input_family",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The mobile eye-covering skin fold matches its existing node; only the missing genitive plural is added, excluding the old coffin-lid sense.",
+      "sources": [
+        "https://dexonline.ro/definitie/pleoap%C4%83",
+        "https://dexonline.ro/definitie/pleoap%C4%83/json",
+        "https://ro.wiktionary.org/wiki/pleoap%C4%83"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "pleoapă",
+          "DEX_ids": [
+            "873000"
+          ],
+          "DOOM3_ids": [
+            "1283107"
+          ],
+          "ordinary_form_authority": "Explicit DOOM3 pleoapă noun table and agreeing Wiktionary table"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv feminin ( F1 ) Surse flexiune: DOOM 3 nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "pleoapelor"
+      ],
+      "verified_family_forms": [
+        "pleoapă",
+        "pleoape",
+        "pleoapele",
+        "pleoapei",
+        "pleoapelor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "graph_counts": null,
+      "modifications": []
+    },
+    {
+      "id": "v118-pupila",
+      "lemma": "Pupilă",
+      "node_id": "n_v1_18_pupila",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The iris aperture admits light toward the retina; a Romanian school science text verifies that light crosses the cornea first.",
+      "sources": [
+        "https://dexonline.ro/definitie/pupil%C4%83",
+        "https://dexonline.ro/definitie/pupil%C4%83/json",
+        "https://isjdolj.ro/sites/default/files/POCU/ID%20135712/Stiinte/ID%20135712%20-%20Stiinte%20M2.5%2C%20M2.6%2C%20M2.7.pdf",
+        "https://ro.wikipedia.org/wiki/Pupil%C4%83"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "pupilă",
+          "DEX_ids": [
+            "880784"
+          ],
+          "DOOM3_ids": [
+            "1286150"
+          ],
+          "ordinary_form_authority": "DOOM3 pupilei/pupile plus selected DOR anatomical noun ordinary rows, excluding vocatives"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv feminin ( F1 ) Surse flexiune: DOR nearticulat articulat",
+        "substantiv feminin ( F1 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "pupilă",
+        "pupile",
+        "pupilele",
+        "pupilei",
+        "pupilelor"
+      ],
+      "verified_family_forms": [
+        "pupilă",
+        "pupile",
+        "pupilele",
+        "pupilei",
+        "pupilelor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor",
+        "Conexiuni",
+        "Intrusul",
+        "Perechi"
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "old_main": 2,
+        "same_category": 4,
+        "batch": 2
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-nara",
+      "lemma": "Nară",
+      "node_id": "n_v32_body_face_nara",
+      "kind": "existing_input_family",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The nasal opening family fits the existing owner; only nărilor is missing, with naval, verbal and regional meanings excluded.",
+      "sources": [
+        "https://dexonline.ro/definitie/nar%C4%83",
+        "https://dexonline.ro/definitie/nar%C4%83/json",
+        "https://ro.wiktionary.org/wiki/nar%C4%83"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "nară",
+          "DEX_ids": [
+            "881401"
+          ],
+          "DOOM3_ids": [
+            "1288161"
+          ],
+          "ordinary_form_authority": "DOOM3 nării/nări plus selected DOR noun and agreeing Wiktionary tables"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv feminin ( F51 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "nărilor"
+      ],
+      "verified_family_forms": [
+        "nară",
+        "nări",
+        "nările",
+        "nării",
+        "nărilor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "graph_counts": null,
+      "modifications": []
+    },
+    {
+      "id": "v118-gingie",
+      "lemma": "Gingie",
+      "node_id": "n_v1_18_gingie",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The oral tissue surrounds tooth bases and covers alveolar bone; the specific molar and maxillary links follow the same supported anatomy.",
+      "sources": [
+        "https://dexonline.ro/definitie/gingie",
+        "https://dexonline.ro/definitie/gingie/json",
+        "https://ro.wikipedia.org/wiki/Gingie"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "gingie",
+          "DEX_ids": [
+            "878092"
+          ],
+          "DOOM3_ids": [
+            "1325660"
+          ],
+          "ordinary_form_authority": "DOOM3 gingia/gingiei/gingii plus explicit DOR F134 noun table"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv feminin ( F134 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "gingie",
+        "gingia",
+        "gingii",
+        "gingiile",
+        "gingiei",
+        "gingiilor"
+      ],
+      "verified_family_forms": [
+        "gingie",
+        "gingia",
+        "gingii",
+        "gingiile",
+        "gingiei",
+        "gingiilor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor",
+        "Conexiuni",
+        "Intrusul"
+      ],
+      "graph_counts": {
+        "distinct": 5,
+        "old_main": 3,
+        "same_category": 5,
+        "batch": 2
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-masea",
+      "lemma": "Măsea",
+      "node_id": "n_v1_18_masea",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The posterior crushing tooth fits the served Dinte and Gură senses; molar synonyms were not screened or admitted.",
+      "sources": [
+        "https://dexonline.ro/definitie/gingie/json",
+        "https://dexonline.ro/definitie/m%C4%83sea",
+        "https://dexonline.ro/definitie/m%C4%83sea/json",
+        "https://ro.wiktionary.org/wiki/m%C4%83sea"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "măsea",
+          "DEX_ids": [
+            "887178"
+          ],
+          "DOOM3_ids": [
+            "1292191"
+          ],
+          "ordinary_form_authority": "DOOM3 măseaua/măselei/măsele plus explicit DOR noun and agreeing Wiktionary tables"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv feminin ( F151 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "măsea",
+        "măseaua",
+        "măsele",
+        "măselele",
+        "măselei",
+        "măselelor"
+      ],
+      "verified_family_forms": [
+        "măsea",
+        "măseaua",
+        "măsele",
+        "măselele",
+        "măselei",
+        "măselelor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor",
+        "Conexiuni",
+        "Intrusul",
+        "Perechi"
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "old_main": 3,
+        "same_category": 3,
+        "batch": 1
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-saliva",
+      "lemma": "Salivă",
+      "node_id": "n_v1_18_saliva",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The oral secretion supports food-bolus formation, tooth protection, water content and swallowing; the caption uses the selected physiological sense.",
+      "sources": [
+        "https://dexonline.ro/definitie/saliv%C4%83",
+        "https://dexonline.ro/definitie/saliv%C4%83/json",
+        "https://ro.wikipedia.org/wiki/Saliv%C4%83"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "salivă",
+          "DEX_ids": [
+            "838522"
+          ],
+          "DOOM3_ids": [
+            "1272373"
+          ],
+          "ordinary_form_authority": "DOOM3 salivei/salive plus DOR F1 noun table, not saliva verb table"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv feminin ( F1 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "salivă",
+        "salive",
+        "salivele",
+        "salivei",
+        "salivelor"
+      ],
+      "verified_family_forms": [
+        "salivă",
+        "salive",
+        "salivele",
+        "salivei",
+        "salivelor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "graph_counts": {
+        "distinct": 6,
+        "old_main": 4,
+        "same_category": 4,
+        "batch": 2
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-lacrima",
+      "lemma": "Lacrimă",
+      "node_id": "n_v1_18_lacrima",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The tear secretion moistens the eye and is spread by blinking; primary hospital anatomy corroborates water-film and nasal drainage without the inaccurate Wikipedia duct account.",
+      "sources": [
+        "https://dexonline.ro/definitie/lacrim%C4%83",
+        "https://dexonline.ro/definitie/lacrim%C4%83/json",
+        "https://ro.wikipedia.org/wiki/Pleoap%C4%83",
+        "https://www.reginamaria.ro/articole-medicale/ochi-uscati-este-foarte-important-sa-gasesti-lacrimile-artificiale-corecte",
+        "https://www.sanador.ro/canal-lacrimal-infundat"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "lacrimă",
+          "DEX_ids": [
+            "862568"
+          ],
+          "DOOM3_ids": [
+            "1324987"
+          ],
+          "ordinary_form_authority": "Explicit DOOM3 F43 lacrimă noun table"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv feminin ( F43 ) Surse flexiune: DOOM 3 nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "lacrimă",
+        "lacrimi",
+        "lacrimile",
+        "lacrimii",
+        "lacrimilor"
+      ],
+      "verified_family_forms": [
+        "lacrimă",
+        "lacrimi",
+        "lacrimile",
+        "lacrimii",
+        "lacrimilor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "old_main": 4,
+        "same_category": 3,
+        "batch": 0
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-voce",
+      "lemma": "Voce",
+      "node_id": "n_v4muz_voce",
+      "kind": "existing_input_family",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The selected musical singing sense matches the served music node; only vocii and vocilor are proposed, with no new speech node or glas synonym.",
+      "sources": [
+        "https://dexonline.ro/definitie/voce",
+        "https://dexonline.ro/definitie/voce/json",
+        "https://ro.wiktionary.org/wiki/voce"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "voce",
+          "DEX_ids": [
+            "826995"
+          ],
+          "DOOM3_ids": [
+            "1264448"
+          ],
+          "ordinary_form_authority": "DOOM3 vocea/vocii/voci plus DOR noun and agreeing Wiktionary tables"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv feminin ( F122 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "vocii",
+        "vocilor"
+      ],
+      "verified_family_forms": [
+        "voce",
+        "vocea",
+        "voci",
+        "vocile",
+        "vocii",
+        "vocilor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "graph_counts": null,
+      "modifications": []
+    },
+    {
+      "id": "v118-retina",
+      "lemma": "Retină",
+      "node_id": "n_v1_18_retina",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The light-sensitive inner eye layer supplies visual signals through the optic nerve; the pupil light path is supported by school optics.",
+      "sources": [
+        "https://dexonline.ro/definitie/retin%C4%83",
+        "https://dexonline.ro/definitie/retin%C4%83/json",
+        "https://ro.wikipedia.org/wiki/Retin%C4%83"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "retină",
+          "DEX_ids": [
+            "857456"
+          ],
+          "DOOM3_ids": [
+            "1278690"
+          ],
+          "ordinary_form_authority": "DOOM3 retinei/retine plus explicit DOR F1 noun table"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv feminin ( F1 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "retină",
+        "retine",
+        "retinele",
+        "retinei",
+        "retinelor"
+      ],
+      "verified_family_forms": [
+        "retină",
+        "retine",
+        "retinele",
+        "retinei",
+        "retinelor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor",
+        "Conexiuni",
+        "Intrusul",
+        "Perechi"
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "old_main": 3,
+        "same_category": 4,
+        "batch": 1
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-timpan",
+      "lemma": "Timpan",
+      "node_id": "n_v1_18_timpan",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The anatomical ear membrane vibrates with airborne sound, including singing and speech; instrument, architecture and person senses are excluded.",
+      "sources": [
+        "https://dexonline.ro/definitie/timpan",
+        "https://dexonline.ro/definitie/timpan/json",
+        "https://dexonline.ro/definitie/voce/json",
+        "https://ro.wikipedia.org/wiki/Timpan_(anatomie)"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "timpan",
+          "DEX_ids": [
+            "833449"
+          ],
+          "DOOM3_ids": [
+            "1268816"
+          ],
+          "ordinary_form_authority": "DOOM3 timpan1 neuter timpane plus DOR N1 noun table"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv neutru ( N1 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "timpan",
+        "timpanul",
+        "timpane",
+        "timpanele",
+        "timpanului",
+        "timpanelor"
+      ],
+      "verified_family_forms": [
+        "timpan",
+        "timpanul",
+        "timpane",
+        "timpanele",
+        "timpanului",
+        "timpanelor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor",
+        "Perechi"
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "old_main": 4,
+        "same_category": 2,
+        "batch": 0
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-cornee",
+      "lemma": "Cornee",
+      "node_id": "n_v1_18_cornee",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The transparent anterior eye segment refracts entering light and can be covered by the eyelid; no popular sclera-equivalence alias is admitted.",
+      "sources": [
+        "https://dexonline.ro/definitie/cornee",
+        "https://dexonline.ro/definitie/cornee/json",
+        "https://isjdolj.ro/sites/default/files/POCU/ID%20135712/Stiinte/ID%20135712%20-%20Stiinte%20M2.5%2C%20M2.6%2C%20M2.7.pdf",
+        "https://ro.wikipedia.org/wiki/Cornee",
+        "https://ro.wikipedia.org/wiki/Pleoap%C4%83"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "cornee",
+          "DEX_ids": [
+            "852400"
+          ],
+          "DOOM3_ids": [
+            "1314730"
+          ],
+          "ordinary_form_authority": "DOOM3 corneea/corneei/invariant plural cornee plus DOR F142 noun table"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv feminin ( F142 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "cornee",
+        "corneea",
+        "corneele",
+        "corneei",
+        "corneelor"
+      ],
+      "verified_family_forms": [
+        "cornee",
+        "corneea",
+        "corneele",
+        "corneei",
+        "corneelor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor",
+        "Conexiuni",
+        "Intrusul"
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "old_main": 3,
+        "same_category": 4,
+        "batch": 1
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-iris",
+      "lemma": "Iris",
+      "node_id": "n_v1_18_iris",
+      "kind": "new_shared_concept",
+      "selected": false,
+      "verdict": "modify",
+      "action": "retain_held_outside_module",
+      "rationale": "held: owned or reserved by n_muz_iris; preserve this hold and zero admitted inputs; this review does not reopen bounded research.",
+      "sources": [],
+      "fresh_research_reopened": false,
+      "proposed_missing_forms": [],
+      "preserved_unresearched_form_hypotheses": [
+        "irisul",
+        "irisuri",
+        "irisurile",
+        "irisului",
+        "irisurilor",
+        "iriși",
+        "irișii",
+        "irișilor"
+      ],
+      "modifications": [
+        {
+          "action": "retain_held",
+          "id": "v118-iris",
+          "admit_inputs": false
+        }
+      ]
+    },
+    {
+      "id": "v118-maxilar",
+      "lemma": "Maxilar",
+      "node_id": "n_v1_18_maxilar",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The selected substantival jaw-bone sense and neuter DOOM3 entry are supported; the mixed adjective/noun DEX header is read specifically at noun sense1.",
+      "sources": [
+        "https://dexonline.ro/definitie/maxilar",
+        "https://dexonline.ro/definitie/maxilar/json",
+        "https://ro.wikipedia.org/wiki/Maxilar"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "maxilar",
+          "DEX_ids": [
+            "886401"
+          ],
+          "DOOM3_ids": [
+            "1291512"
+          ],
+          "ordinary_form_authority": "DOOM3 maxilar2 neuter noun plus unbadged N1 noun table, not first DOR adjective table"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv neutru ( N1 ) nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "maxilar",
+        "maxilarul",
+        "maxilare",
+        "maxilarele",
+        "maxilarului",
+        "maxilarelor"
+      ],
+      "verified_family_forms": [
+        "maxilar",
+        "maxilarul",
+        "maxilare",
+        "maxilarele",
+        "maxilarului",
+        "maxilarelor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "graph_counts": {
+        "distinct": 5,
+        "old_main": 4,
+        "same_category": 5,
+        "batch": 1
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-respiratie",
+      "lemma": "Respirație",
+      "node_id": "n_v1_18_respiratie",
+      "kind": "new_shared_concept",
+      "selected": false,
+      "verdict": "modify",
+      "action": "retain_held_outside_module",
+      "rationale": "held: dependency graph floors after researched holds/edge removals: {'distinct': 3, 'old_main': 3, 'same_category': 3, 'batch': 0}; preserve this hold and zero admitted inputs; this review does not reopen bounded research.",
+      "sources": [],
+      "fresh_research_reopened": false,
+      "proposed_missing_forms": [],
+      "preserved_unresearched_form_hypotheses": [],
+      "modifications": [
+        {
+          "action": "retain_held",
+          "id": "v118-respiratie",
+          "admit_inputs": false
+        }
+      ]
+    },
+    {
+      "id": "v118-inghitire",
+      "lemma": "Înghițire",
+      "node_id": "n_v1_18_inghitire",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The oral-to-gastric food transfer is supported by the primary hospital anatomy account and saliva definition; no clinical advice is approved.",
+      "sources": [
+        "https://dexonline.ro/definitie/%C3%AEnghi%C8%9Bire",
+        "https://dexonline.ro/definitie/%C3%AEnghi%C8%9Bire/json",
+        "https://dexonline.ro/definitie/saliv%C4%83/json",
+        "https://www.reginamaria.ro/utile/dictionar-de-afectiuni/disfagia-dificultatea-la-inghitire"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "înghițire",
+          "DEX_ids": [
+            "887483"
+          ],
+          "DOOM3_ids": [
+            "1296188"
+          ],
+          "ordinary_form_authority": "DOOM3 înghițirii/înghițiri plus DOR F107 ordinary noun rows; elisions excluded"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv feminin ( F107 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "înghițire",
+        "înghițirea",
+        "înghițiri",
+        "înghițirile",
+        "înghițirii",
+        "înghițirilor"
+      ],
+      "verified_family_forms": [
+        "înghițire",
+        "înghițirea",
+        "înghițiri",
+        "înghițirile",
+        "înghițirii",
+        "înghițirilor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "old_main": 3,
+        "same_category": 3,
+        "batch": 1
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-mestecare",
+      "lemma": "Mestecare",
+      "node_id": "n_v1_18_mestecare",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The oral mechanical breakdown of food using teeth and saliva is explicit in the digestion account; the action noun is not an approved hidden target.",
+      "sources": [
+        "https://dexonline.ro/definitie/mestecare",
+        "https://dexonline.ro/definitie/mestecare/json",
+        "https://ro.wikipedia.org/wiki/Digestie"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "mestecare",
+          "DEX_ids": [
+            "888626"
+          ],
+          "DOOM3_ids": [
+            "1293063"
+          ],
+          "ordinary_form_authority": "DOOM3 mestecării/mestecări plus explicit DOR F113 noun table, not amesteca/mesteca verb tables"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv feminin ( F113 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "mestecare",
+        "mestecarea",
+        "mestecări",
+        "mestecările",
+        "mestecării",
+        "mestecărilor"
+      ],
+      "verified_family_forms": [
+        "mestecare",
+        "mestecarea",
+        "mestecări",
+        "mestecările",
+        "mestecării",
+        "mestecărilor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "graph_counts": {
+        "distinct": 5,
+        "old_main": 3,
+        "same_category": 4,
+        "batch": 2
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-dantura",
+      "lemma": "Dantură",
+      "node_id": "n_v1_18_dantura",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The collective human dentition is distinct from machine gearing; the dental-care source supports conditional toothbrush and toothpaste links without dosage advice.",
+      "sources": [
+        "https://dexonline.ro/definitie/dantur%C4%83",
+        "https://dexonline.ro/definitie/dantur%C4%83/json",
+        "https://ro.wikipedia.org/wiki/Digestie",
+        "https://ro.wiktionary.org/wiki/dantur%C4%83",
+        "https://www.reginamaria.ro/articole-medicale/sanatatea-familiei/cum-ingrijim-dintii-copiilor"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "dantură",
+          "DEX_ids": [
+            "855572"
+          ],
+          "DOOM3_ids": [
+            "1305477"
+          ],
+          "ordinary_form_authority": "DOOM3 danturii/danturi plus selected DOR F43 noun and agreeing Wiktionary tables"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv feminin ( F43 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "dantură",
+        "danturi",
+        "danturile",
+        "danturii",
+        "danturilor"
+      ],
+      "verified_family_forms": [
+        "dantură",
+        "danturi",
+        "danturile",
+        "danturii",
+        "danturilor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor",
+        "Perechi"
+      ],
+      "graph_counts": {
+        "distinct": 5,
+        "old_main": 4,
+        "same_category": 3,
+        "batch": 1
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-transpiratie",
+      "lemma": "Transpirație",
+      "node_id": "n_v1_18_transpiratie",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "Human sweating, water loss and evaporative cooling are supported by the hospital-hosted nursing text; plasma-derived fluid is supported by the pharmacy anatomy account.",
+      "sources": [
+        "https://dexonline.ro/definitie/transpira%C8%9Bie",
+        "https://dexonline.ro/definitie/transpira%C8%9Bie/json",
+        "https://www.catena.ro/glande-sudoripare-anatomie-rol-functii-afectiuni",
+        "https://www.spitalgorj.ro/wp-content/uploads/2021/12/Ghid-de-nursing-tehnici-de-evaluare-si-ingirjiri-L.-Titirca-2008.pdf"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "transpirație",
+          "DEX_ids": [
+            "834860"
+          ],
+          "DOOM3_ids": [
+            "1269645"
+          ],
+          "ordinary_form_authority": "Explicit DOOM3 F135 noun table"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv feminin ( F135 ) Surse flexiune: DOOM 3 nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "transpirație",
+        "transpirația",
+        "transpirații",
+        "transpirațiile",
+        "transpirației",
+        "transpirațiilor"
+      ],
+      "verified_family_forms": [
+        "transpirație",
+        "transpirația",
+        "transpirații",
+        "transpirațiile",
+        "transpirației",
+        "transpirațiilor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "old_main": 4,
+        "same_category": 3,
+        "batch": 0
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-tesut",
+      "lemma": "Țesut",
+      "node_id": "n_v1_18_tesut",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The biological cell grouping, bony tissue, liquid blood tissue and skin components are supported; textile and adjective senses are excluded.",
+      "sources": [
+        "https://dexonline.ro/definitie/%C8%9Besut",
+        "https://dexonline.ro/definitie/%C8%9Besut/json",
+        "https://ro.wikipedia.org/wiki/%C8%9Aesut_%28biologie%29",
+        "https://ro.wikipedia.org/wiki/%C8%9Aesut_conjunctiv",
+        "https://ro.wikipedia.org/wiki/Piele_(anatomie)"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "țesut",
+          "DEX_ids": [
+            "829727"
+          ],
+          "DOOM3_ids": [
+            "1265297"
+          ],
+          "ordinary_form_authority": "Explicit DOOM3 țesut1 neuter N24 noun table, not adjective or țese verb"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv neutru ( N24 ) Surse flexiune: DOOM 3 nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "țesut",
+        "țesutul",
+        "țesuturi",
+        "țesuturile",
+        "țesutului",
+        "țesuturilor"
+      ],
+      "verified_family_forms": [
+        "țesut",
+        "țesutul",
+        "țesuturi",
+        "țesuturile",
+        "țesutului",
+        "țesuturilor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "graph_counts": {
+        "distinct": 5,
+        "old_main": 5,
+        "same_category": 5,
+        "batch": 0
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-trunchi",
+      "lemma": "Trunchi",
+      "node_id": "n_v1_18_trunchi",
+      "kind": "new_shared_concept",
+      "selected": false,
+      "verdict": "modify",
+      "action": "retain_held_outside_module",
+      "rationale": "held: owned or reserved by n_v1_12_trunchi; preserve this hold and zero admitted inputs; this review does not reopen bounded research.",
+      "sources": [],
+      "fresh_research_reopened": false,
+      "proposed_missing_forms": [],
+      "preserved_unresearched_form_hypotheses": [],
+      "modifications": [
+        {
+          "action": "retain_held",
+          "id": "v118-trunchi",
+          "admit_inputs": false
+        }
+      ]
+    },
+    {
+      "id": "v118-ombilic",
+      "lemma": "Ombilic",
+      "node_id": "n_v1_18_ombilic",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The postnatal abdominal scar marks the former cord; placental connection and detachment at infancy support the qualified mother/baby captions.",
+      "sources": [
+        "https://dexonline.ro/definitie/ombilic",
+        "https://dexonline.ro/definitie/ombilic/json",
+        "https://ro.wikipedia.org/wiki/Cordon_ombilical",
+        "https://ro.wikipedia.org/wiki/Ombilic"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "ombilic",
+          "DEX_ids": [
+            "893351"
+          ],
+          "DOOM3_ids": [
+            "1287016"
+          ],
+          "ordinary_form_authority": "DOOM3 neuter ombilicuri plus DOR N24 noun table"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv neutru ( N24 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "ombilic",
+        "ombilicul",
+        "ombilicuri",
+        "ombilicurile",
+        "ombilicului",
+        "ombilicurilor"
+      ],
+      "verified_family_forms": [
+        "ombilic",
+        "ombilicul",
+        "ombilicuri",
+        "ombilicurile",
+        "ombilicului",
+        "ombilicurilor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "old_main": 4,
+        "same_category": 2,
+        "batch": 0
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-stern",
+      "lemma": "Stern",
+      "node_id": "n_v1_18_stern",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The median anterior thoracic bone, costal-cartilage connection and position in front of the heart are supported; no universal direct attachment of all ribs is claimed.",
+      "sources": [
+        "https://dexonline.ro/definitie/stern",
+        "https://dexonline.ro/definitie/stern/json",
+        "https://ro.wikipedia.org/wiki/Stern"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "stern",
+          "DEX_ids": [
+            "846723"
+          ],
+          "DOOM3_ids": [
+            "1278037"
+          ],
+          "ordinary_form_authority": "DOOM3 neuter sternuri plus DOR N24 noun table"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv neutru ( N24 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "stern",
+        "sternul",
+        "sternuri",
+        "sternurile",
+        "sternului",
+        "sternurilor"
+      ],
+      "verified_family_forms": [
+        "stern",
+        "sternul",
+        "sternuri",
+        "sternurile",
+        "sternului",
+        "sternurilor"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor",
+        "Conexiuni",
+        "Intrusul"
+      ],
+      "graph_counts": {
+        "distinct": 5,
+        "old_main": 3,
+        "same_category": 5,
+        "batch": 2
+      },
+      "modifications": []
+    },
+    {
+      "id": "v118-coloana_vertebrala",
+      "lemma": "Coloană vertebrală",
+      "node_id": "n_v1_18_coloana_vertebrala",
+      "kind": "new_shared_concept",
+      "selected": true,
+      "verdict": "accept",
+      "rationale": "The qualified vertebral series supports the body and head; the university anatomy text confirms the cervical region at neck level without adding bare coloană aliases.",
+      "sources": [
+        "https://dexonline.ro/definitie/coloan%C4%83",
+        "https://dexonline.ro/definitie/coloan%C4%83/json",
+        "https://ebooks.unitbv.ro/wp-content/uploads/2024/11/978-606-19-1748%E2%80%938-work.pdf",
+        "https://ro.wikipedia.org/wiki/Coloan%C4%83_vertebral%C4%83",
+        "https://www.reginamaria.ro/utile/dictionar-de-afectiuni/lordoza"
+      ],
+      "dictionary_heads_and_ids": [
+        {
+          "lemma": "coloană",
+          "DEX_ids": [
+            "849078"
+          ],
+          "DOOM3_ids": [
+            "1312839"
+          ],
+          "ordinary_form_authority": "DOOM3 coloanei/coloane plus DOR F1 noun table and qualified adjective agreement"
+        }
+      ],
+      "fresh_matching_noun_tables": [
+        "substantiv feminin ( F1 ) Surse flexiune: DOR nearticulat articulat"
+      ],
+      "proposed_missing_forms": [
+        "coloană vertebrală",
+        "coloane vertebrale",
+        "coloanele vertebrale",
+        "coloanei vertebrale",
+        "coloanelor vertebrale"
+      ],
+      "verified_family_forms": [
+        "coloană vertebrală",
+        "coloane vertebrale",
+        "coloanele vertebrale",
+        "coloanei vertebrale",
+        "coloanelor vertebrale"
+      ],
+      "verified_synonyms": [],
+      "games": [
+        "Cald sau Rece",
+        "Lanțul Cuvintelor"
+      ],
+      "graph_counts": {
+        "distinct": 4,
+        "old_main": 4,
+        "same_category": 4,
+        "batch": 0
+      },
+      "modifications": []
+    }
+  ],
+  "edges": [
+    {
+      "src": "n_v1_18_ficat",
+      "dst": "n_v4sti_corp",
+      "relation": "part_of",
+      "label_ro": "face parte din corp",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Ficat → corp); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Ficat"
+      ],
+      "item_ids": [
+        "v118-ficat"
+      ]
+    },
+    {
+      "src": "n_v1_18_ficat",
+      "dst": "n_v4sti_sange",
+      "relation": "related_to",
+      "label_ro": "primește sânge prin circulația hepatică",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Ficat relative to sânge; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Ficat"
+      ],
+      "item_ids": [
+        "v118-ficat"
+      ]
+    },
+    {
+      "src": "n_v1_18_ficat",
+      "dst": "n_v4gas_mancare",
+      "relation": "related_to",
+      "label_ro": "participă la digestia și prelucrarea substanțelor nutritive din mâncare",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Ficat relative to Mâncare; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Ficat"
+      ],
+      "item_ids": [
+        "v118-ficat"
+      ]
+    },
+    {
+      "src": "n_v1_18_ficat",
+      "dst": "n_v1_18_stomac",
+      "relation": "related_to",
+      "label_ro": "se află în vecinătatea stomacului",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Ficat relative to Stomac; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Ficat"
+      ],
+      "item_ids": [
+        "v118-ficat"
+      ]
+    },
+    {
+      "src": "n_v1_18_rinichi",
+      "dst": "n_v4sti_corp",
+      "relation": "part_of",
+      "label_ro": "face parte din corp",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Rinichi → corp); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Rinichi"
+      ],
+      "item_ids": [
+        "v118-rinichi"
+      ]
+    },
+    {
+      "src": "n_v1_18_rinichi",
+      "dst": "n_v4sti_sange",
+      "relation": "related_to",
+      "label_ro": "filtrează sângele",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Rinichi relative to sânge; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Rinichi"
+      ],
+      "item_ids": [
+        "v118-rinichi"
+      ]
+    },
+    {
+      "src": "n_v1_18_rinichi",
+      "dst": "n_v4gas_apa",
+      "relation": "related_to",
+      "label_ro": "contribuie la echilibrul apei din corp",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Rinichi relative to Apă; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Rinichi"
+      ],
+      "item_ids": [
+        "v118-rinichi"
+      ]
+    },
+    {
+      "src": "n_v1_18_rinichi",
+      "dst": "n_v1_18_vena",
+      "relation": "related_to",
+      "label_ro": "sângele părăsește rinichiul prin vena renală",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Rinichi relative to Venă; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Rinichi"
+      ],
+      "item_ids": [
+        "v118-rinichi"
+      ]
+    },
+    {
+      "src": "n_v1_18_stomac",
+      "dst": "n_v4sti_corp",
+      "relation": "part_of",
+      "label_ro": "face parte din corp",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Stomac → corp); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Stomac"
+      ],
+      "item_ids": [
+        "v118-stomac"
+      ]
+    },
+    {
+      "src": "n_v1_18_stomac",
+      "dst": "n_v24_body_face_gura",
+      "relation": "related_to",
+      "label_ro": "primește hrana pornită din gură",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Stomac relative to Gură; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Stomac"
+      ],
+      "item_ids": [
+        "v118-stomac"
+      ]
+    },
+    {
+      "src": "n_v1_18_stomac",
+      "dst": "n_v4gas_mancare",
+      "relation": "related_to",
+      "label_ro": "participă la digestia mâncării",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Stomac relative to Mâncare; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Stomac"
+      ],
+      "item_ids": [
+        "v118-stomac"
+      ]
+    },
+    {
+      "src": "n_v1_18_stomac",
+      "dst": "n_v1_18_intestin",
+      "relation": "related_to",
+      "label_ro": "se continuă cu intestinul subțire",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Stomac relative to Intestin; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Stomac"
+      ],
+      "item_ids": [
+        "v118-stomac"
+      ]
+    },
+    {
+      "src": "n_v1_18_intestin",
+      "dst": "n_v4sti_corp",
+      "relation": "part_of",
+      "label_ro": "face parte din corp",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Intestin → corp); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Intestin"
+      ],
+      "item_ids": [
+        "v118-intestin"
+      ]
+    },
+    {
+      "src": "n_v1_18_intestin",
+      "dst": "n_v4gas_mancare",
+      "relation": "related_to",
+      "label_ro": "participă la digestia mâncării",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Intestin relative to Mâncare; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Intestin_sub%C8%9Bire"
+      ],
+      "item_ids": [
+        "v118-intestin"
+      ]
+    },
+    {
+      "src": "n_v1_18_intestin",
+      "dst": "n_v4sti_sange",
+      "relation": "related_to",
+      "label_ro": "în intestinul subțire, substanțele nutritive absorbite ajung în sânge",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Intestin relative to sânge; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Intestin_sub%C8%9Bire"
+      ],
+      "item_ids": [
+        "v118-intestin"
+      ]
+    },
+    {
+      "src": "n_v1_18_intestin",
+      "dst": "n_v1_18_stomac",
+      "relation": "related_to",
+      "label_ro": "urmează stomacului pe traseul digestiv",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Intestin relative to Stomac; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Intestin"
+      ],
+      "item_ids": [
+        "v118-intestin"
+      ]
+    },
+    {
+      "src": "n_v1_18_artera",
+      "dst": "n_v4sti_corp",
+      "relation": "part_of",
+      "label_ro": "face parte din corp",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Arteră → corp); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Arter%C4%83"
+      ],
+      "item_ids": [
+        "v118-artera"
+      ]
+    },
+    {
+      "src": "n_v1_18_artera",
+      "dst": "n_v4sti_sange",
+      "relation": "related_to",
+      "label_ro": "transportă sânge",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Arteră relative to sânge; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Arter%C4%83"
+      ],
+      "item_ids": [
+        "v118-artera"
+      ]
+    },
+    {
+      "src": "n_v1_18_artera",
+      "dst": "n_v4sti_inima",
+      "relation": "related_to",
+      "label_ro": "duce sângele de la inimă spre țesuturi",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Arteră relative to inimă; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Arter%C4%83"
+      ],
+      "item_ids": [
+        "v118-artera"
+      ]
+    },
+    {
+      "src": "n_v1_18_artera",
+      "dst": "n_v1_18_vena",
+      "relation": "related_to",
+      "label_ro": "circulația poate continua spre vene prin capilare",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Arteră relative to Venă; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Arter%C4%83"
+      ],
+      "item_ids": [
+        "v118-artera"
+      ]
+    },
+    {
+      "src": "n_v1_18_vena",
+      "dst": "n_v4sti_corp",
+      "relation": "part_of",
+      "label_ro": "face parte din corp",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Venă → corp); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Ven%C4%83"
+      ],
+      "item_ids": [
+        "v118-vena"
+      ]
+    },
+    {
+      "src": "n_v1_18_vena",
+      "dst": "n_v4sti_sange",
+      "relation": "related_to",
+      "label_ro": "transportă sânge",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Venă relative to sânge; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Ven%C4%83"
+      ],
+      "item_ids": [
+        "v118-vena"
+      ]
+    },
+    {
+      "src": "n_v1_18_vena",
+      "dst": "n_v4sti_inima",
+      "relation": "related_to",
+      "label_ro": "duce sângele spre inimă",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Venă relative to inimă; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Ven%C4%83"
+      ],
+      "item_ids": [
+        "v118-vena"
+      ]
+    },
+    {
+      "src": "n_v1_18_nerv",
+      "dst": "n_v4sti_corp",
+      "relation": "part_of",
+      "label_ro": "face parte din corp",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Nerv → corp); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Nerv"
+      ],
+      "item_ids": [
+        "v118-nerv"
+      ]
+    },
+    {
+      "src": "n_v1_18_nerv",
+      "dst": "n_v4sti_creier",
+      "relation": "related_to",
+      "label_ro": "poate transmite impulsuri către sau de la creier",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Nerv relative to creier; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Nerv"
+      ],
+      "item_ids": [
+        "v118-nerv"
+      ]
+    },
+    {
+      "src": "n_v1_18_nerv",
+      "dst": "n_v4sti_piele",
+      "relation": "related_to",
+      "label_ro": "poate transmite senzații provenite de la piele",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Nerv relative to piele; conditional wording and direction are preserved.",
+      "sources": [
+        "https://dexonline.ro/definitie/nerv/json"
+      ],
+      "item_ids": [
+        "v118-nerv"
+      ]
+    },
+    {
+      "src": "n_v1_18_nerv",
+      "dst": "n_v4sti_ochi",
+      "relation": "related_to",
+      "label_ro": "nervul optic transmite informații de la ochi",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Nerv relative to ochi; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Nerv_optic"
+      ],
+      "item_ids": [
+        "v118-nerv"
+      ]
+    },
+    {
+      "src": "n_v1_18_schelet",
+      "dst": "n_v4sti_corp",
+      "relation": "part_of",
+      "label_ro": "face parte din corp",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Schelet → corp); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Schelet"
+      ],
+      "item_ids": [
+        "v118-schelet"
+      ]
+    },
+    {
+      "src": "n_v1_18_schelet",
+      "dst": "n_v4sti_os",
+      "relation": "related_to",
+      "label_ro": "este alcătuit din oase",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Schelet relative to os; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Schelet"
+      ],
+      "item_ids": [
+        "v118-schelet"
+      ]
+    },
+    {
+      "src": "n_v1_18_schelet",
+      "dst": "n_v4sti_creier",
+      "relation": "related_to",
+      "label_ro": "oasele craniului său protejează creierul",
+      "verdict": "accept",
+      "rationale": "The Romanian class-VI textbook independently identifies skull protection of the brain and thoracic protection of the heart; the corrupted bone-count sentence is not used.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Schelet_uman",
+        "https://www.educatieonline.md/Files/Manuals/6/VI_Biologie%20%28a.%202017%2C%20in%20limba%20romana%29.pdf"
+      ],
+      "item_ids": [
+        "v118-schelet"
+      ]
+    },
+    {
+      "src": "n_v1_18_schelet",
+      "dst": "n_v4sti_inima",
+      "relation": "related_to",
+      "label_ro": "cutia sa toracică protejează inima",
+      "verdict": "accept",
+      "rationale": "The Romanian class-VI textbook independently identifies skull protection of the brain and thoracic protection of the heart; the corrupted bone-count sentence is not used.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Schelet_uman",
+        "https://www.educatieonline.md/Files/Manuals/6/VI_Biologie%20%28a.%202017%2C%20in%20limba%20romana%29.pdf"
+      ],
+      "item_ids": [
+        "v118-schelet"
+      ]
+    },
+    {
+      "src": "n_v1_18_articulatie",
+      "dst": "n_v4sti_corp",
+      "relation": "part_of",
+      "label_ro": "face parte din corp",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Articulație → corp); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Articula%C8%9Bie"
+      ],
+      "item_ids": [
+        "v118-articulatie"
+      ]
+    },
+    {
+      "src": "n_v1_18_articulatie",
+      "dst": "n_v4sti_os",
+      "relation": "related_to",
+      "label_ro": "poate uni oase",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Articulație relative to os; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Articula%C8%9Bie"
+      ],
+      "item_ids": [
+        "v118-articulatie"
+      ]
+    },
+    {
+      "src": "n_v31_body_lower_genunchi",
+      "dst": "n_v1_18_articulatie",
+      "relation": "is_a",
+      "label_ro": "este o articulație",
+      "verdict": "accept",
+      "rationale": "The selected Genunchi sense is an anatomical instance of Articulație; the caption and class direction agree with the cited noun/anatomy source.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Genunchi"
+      ],
+      "item_ids": [
+        "v118-articulatie"
+      ]
+    },
+    {
+      "src": "n_v31_body_lower_glezna",
+      "dst": "n_v1_18_articulatie",
+      "relation": "is_a",
+      "label_ro": "este o articulație",
+      "verdict": "accept",
+      "rationale": "The selected Gleznă sense is an anatomical instance of Articulație; the caption and class direction agree with the cited noun/anatomy source.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Glezn%C4%83"
+      ],
+      "item_ids": [
+        "v118-articulatie"
+      ]
+    },
+    {
+      "src": "n_v1_18_tendon",
+      "dst": "n_v4sti_corp",
+      "relation": "part_of",
+      "label_ro": "face parte din corp",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Tendon → corp); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Tendon"
+      ],
+      "item_ids": [
+        "v118-tendon"
+      ]
+    },
+    {
+      "src": "n_v1_18_tendon",
+      "dst": "n_v4sti_os",
+      "relation": "related_to",
+      "label_ro": "poate fixa un mușchi pe un os",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Tendon relative to os; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Tendon"
+      ],
+      "item_ids": [
+        "v118-tendon"
+      ]
+    },
+    {
+      "src": "n_v1_18_tendon",
+      "dst": "n_v24_body_limbs_mana",
+      "relation": "related_to",
+      "label_ro": "tendoanele participă la mișcările mâinii",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Tendon relative to Mână; conditional wording and direction are preserved.",
+      "sources": [
+        "https://enayatimedicalcity.ro/blog/degetul-in-resort-tenosinovita-stenosanta-a-flexorilor-degetelor/"
+      ],
+      "item_ids": [
+        "v118-tendon"
+      ]
+    },
+    {
+      "src": "n_v1_18_tendon",
+      "dst": "n_v24_body_limbs_deget",
+      "relation": "related_to",
+      "label_ro": "poate transmite forța pentru mișcarea degetelor",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Tendon relative to Deget; conditional wording and direction are preserved.",
+      "sources": [
+        "https://enayatimedicalcity.ro/blog/degetul-in-resort-tenosinovita-stenosanta-a-flexorilor-degetelor/"
+      ],
+      "item_ids": [
+        "v118-tendon"
+      ]
+    },
+    {
+      "src": "n_v1_18_ligament",
+      "dst": "n_v4sti_corp",
+      "relation": "part_of",
+      "label_ro": "face parte din corp",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Ligament → corp); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Ligament"
+      ],
+      "item_ids": [
+        "v118-ligament"
+      ]
+    },
+    {
+      "src": "n_v1_18_ligament",
+      "dst": "n_v4sti_os",
+      "relation": "related_to",
+      "label_ro": "poate lega oasele unei articulații",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Ligament relative to os; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Ligament"
+      ],
+      "item_ids": [
+        "v118-ligament"
+      ]
+    },
+    {
+      "src": "n_v1_18_ligament",
+      "dst": "n_v31_body_lower_genunchi",
+      "relation": "related_to",
+      "label_ro": "ligamentele contribuie la stabilitatea genunchiului",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Ligament relative to Genunchi; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Genunchi"
+      ],
+      "item_ids": [
+        "v118-ligament"
+      ]
+    },
+    {
+      "src": "n_v1_18_ligament",
+      "dst": "n_v31_body_lower_glezna",
+      "relation": "related_to",
+      "label_ro": "ligamentele contribuie la stabilitatea gleznei",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Ligament relative to Gleznă; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Glezn%C4%83"
+      ],
+      "item_ids": [
+        "v118-ligament"
+      ]
+    },
+    {
+      "src": "n_v1_18_maduva_osoasa",
+      "dst": "n_v4sti_os",
+      "relation": "part_of",
+      "label_ro": "se află în interiorul unor oase",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Măduvă osoasă → os); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/M%C4%83duv%C4%83_osoas%C4%83"
+      ],
+      "item_ids": [
+        "v118-maduva_osoasa"
+      ]
+    },
+    {
+      "src": "n_v1_18_maduva_osoasa",
+      "dst": "n_v4sti_sange",
+      "relation": "related_to",
+      "label_ro": "poate produce celule ale sângelui",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Măduvă osoasă relative to sânge; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/M%C4%83duv%C4%83_osoas%C4%83"
+      ],
+      "item_ids": [
+        "v118-maduva_osoasa"
+      ]
+    },
+    {
+      "src": "n_v1_18_maduva_osoasa",
+      "dst": "n_v2sti_celula",
+      "relation": "related_to",
+      "label_ro": "conține celule stem hematopoietice",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Măduvă osoasă relative to Celulă; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/M%C4%83duv%C4%83_osoas%C4%83"
+      ],
+      "item_ids": [
+        "v118-maduva_osoasa"
+      ]
+    },
+    {
+      "src": "n_v1_18_maduva_osoasa",
+      "dst": "n_v4sti_corp",
+      "relation": "part_of",
+      "label_ro": "face parte din corp",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Măduvă osoasă → corp); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/M%C4%83duv%C4%83_osoas%C4%83"
+      ],
+      "item_ids": [
+        "v118-maduva_osoasa"
+      ]
+    },
+    {
+      "src": "n_v1_18_clavicula",
+      "dst": "n_v4sti_os",
+      "relation": "is_a",
+      "label_ro": "este un os",
+      "verdict": "accept",
+      "rationale": "The selected Claviculă sense is an anatomical instance of os; the caption and class direction agree with the cited noun/anatomy source.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Clavicul%C4%83"
+      ],
+      "item_ids": [
+        "v118-clavicula"
+      ]
+    },
+    {
+      "src": "n_v1_18_clavicula",
+      "dst": "n_v4sti_corp",
+      "relation": "part_of",
+      "label_ro": "face parte din corp",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Claviculă → corp); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Clavicul%C4%83"
+      ],
+      "item_ids": [
+        "v118-clavicula"
+      ]
+    },
+    {
+      "src": "n_v1_18_clavicula",
+      "dst": "n_v1_18_stern",
+      "relation": "related_to",
+      "label_ro": "se articulează cu sternul",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Claviculă relative to Stern; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Clavicul%C4%83"
+      ],
+      "item_ids": [
+        "v118-clavicula"
+      ]
+    },
+    {
+      "src": "n_v1_18_clavicula",
+      "dst": "n_v1_18_omoplat",
+      "relation": "related_to",
+      "label_ro": "se articulează cu omoplatul",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Claviculă relative to Omoplat; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Clavicul%C4%83"
+      ],
+      "item_ids": [
+        "v118-clavicula"
+      ]
+    },
+    {
+      "src": "n_v1_18_omoplat",
+      "dst": "n_v4sti_os",
+      "relation": "is_a",
+      "label_ro": "este un os",
+      "verdict": "accept",
+      "rationale": "The selected Omoplat sense is an anatomical instance of os; the caption and class direction agree with the cited noun/anatomy source.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Omoplat"
+      ],
+      "item_ids": [
+        "v118-omoplat"
+      ]
+    },
+    {
+      "src": "n_v1_18_omoplat",
+      "dst": "n_v4sti_corp",
+      "relation": "part_of",
+      "label_ro": "face parte din corp",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Omoplat → corp); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Omoplat"
+      ],
+      "item_ids": [
+        "v118-omoplat"
+      ]
+    },
+    {
+      "src": "n_v1_18_omoplat",
+      "dst": "n_v1_18_clavicula",
+      "relation": "related_to",
+      "label_ro": "se articulează cu clavicula",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Omoplat relative to Claviculă; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Clavicul%C4%83"
+      ],
+      "item_ids": [
+        "v118-omoplat"
+      ]
+    },
+    {
+      "src": "n_v1_18_omoplat",
+      "dst": "n_v1_18_umar",
+      "relation": "related_to",
+      "label_ro": "contribuie la structura umărului",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Omoplat relative to Umăr; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Omoplat"
+      ],
+      "item_ids": [
+        "v118-omoplat"
+      ]
+    },
+    {
+      "src": "n_v1_18_coasta_toracica",
+      "dst": "n_v4sti_os",
+      "relation": "is_a",
+      "label_ro": "este un os",
+      "verdict": "accept",
+      "rationale": "The selected Coastă toracică sense is an anatomical instance of os; the caption and class direction agree with the cited noun/anatomy source.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Coaste_(anatomie)"
+      ],
+      "item_ids": [
+        "v118-coasta_toracica"
+      ]
+    },
+    {
+      "src": "n_v1_18_coasta_toracica",
+      "dst": "n_v4sti_corp",
+      "relation": "part_of",
+      "label_ro": "face parte din corp",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Coastă toracică → corp); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Coaste_(anatomie)"
+      ],
+      "item_ids": [
+        "v118-coasta_toracica"
+      ]
+    },
+    {
+      "src": "n_v1_18_coasta_toracica",
+      "dst": "n_v4sti_inima",
+      "relation": "related_to",
+      "label_ro": "contribuie la protejarea inimii",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Coastă toracică relative to inimă; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Coaste_(anatomie)",
+        "https://ro.wikipedia.org/wiki/Schelet_uman",
+        "https://www.educatieonline.md/Files/Manuals/6/VI_Biologie%20%28a.%202017%2C%20in%20limba%20romana%29.pdf"
+      ],
+      "item_ids": [
+        "v118-coasta_toracica"
+      ]
+    },
+    {
+      "src": "n_v1_18_brat",
+      "dst": "n_v4sti_corp",
+      "relation": "part_of",
+      "label_ro": "face parte din corp",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Braț → corp); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Bra%C8%9B_%28anatomie%29"
+      ],
+      "item_ids": [
+        "v118-brat"
+      ]
+    },
+    {
+      "src": "n_v1_18_brat",
+      "dst": "n_v4sti_os",
+      "relation": "related_to",
+      "label_ro": "conține osul numit humerus",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Braț relative to os; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Bra%C8%9B_%28anatomie%29"
+      ],
+      "item_ids": [
+        "v118-brat"
+      ]
+    },
+    {
+      "src": "n_v1_18_brat",
+      "dst": "n_v1_18_umar",
+      "relation": "related_to",
+      "label_ro": "pornește din regiunea umărului",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Braț relative to Umăr; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Bra%C8%9B_%28anatomie%29"
+      ],
+      "item_ids": [
+        "v118-brat",
+        "v118-umar"
+      ]
+    },
+    {
+      "src": "n_v1_18_antebrat",
+      "dst": "n_v4sti_corp",
+      "relation": "part_of",
+      "label_ro": "face parte din corp",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Antebraț → corp); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Antebra%C8%9B"
+      ],
+      "item_ids": [
+        "v118-antebrat"
+      ]
+    },
+    {
+      "src": "n_v1_18_antebrat",
+      "dst": "n_v4sti_os",
+      "relation": "related_to",
+      "label_ro": "conține oasele radius și ulna",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Antebraț relative to os; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Antebra%C8%9B"
+      ],
+      "item_ids": [
+        "v118-antebrat"
+      ]
+    },
+    {
+      "src": "n_v1_18_antebrat",
+      "dst": "n_v24_body_limbs_mana",
+      "relation": "related_to",
+      "label_ro": "se continuă distal cu mâna",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Antebraț relative to Mână; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Antebra%C8%9B"
+      ],
+      "item_ids": [
+        "v118-antebrat"
+      ]
+    },
+    {
+      "src": "n_v1_18_antebrat",
+      "dst": "n_v1_18_brat",
+      "relation": "related_to",
+      "label_ro": "se află între braț și mână",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Antebraț relative to Braț; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Bra%C8%9B_%28anatomie%29"
+      ],
+      "item_ids": [
+        "v118-antebrat"
+      ]
+    },
+    {
+      "src": "n_v1_18_talpa",
+      "dst": "n_v24_body_limbs_picior",
+      "relation": "part_of",
+      "label_ro": "face parte din picior",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Talpă → Picior); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Talp%C4%83"
+      ],
+      "item_ids": [
+        "v118-talpa"
+      ]
+    },
+    {
+      "src": "n_v1_18_talpa",
+      "dst": "n_v4sti_piele",
+      "relation": "related_to",
+      "label_ro": "este acoperită de piele",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Talpă relative to piele; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Piele_(anatomie)"
+      ],
+      "item_ids": [
+        "v118-talpa"
+      ]
+    },
+    {
+      "src": "n_v1_18_talpa",
+      "dst": "n_v31_body_lower_calcai",
+      "relation": "related_to",
+      "label_ro": "călcâiul formează regiunea sa posterioară",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Talpă relative to Călcâi; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Talp%C4%83"
+      ],
+      "item_ids": [
+        "v118-talpa"
+      ]
+    },
+    {
+      "src": "n_v1_18_talpa",
+      "dst": "n_v24_body_limbs_deget",
+      "relation": "related_to",
+      "label_ro": "se întinde anterior până la baza degetelor piciorului",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Talpă relative to Deget; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Talp%C4%83"
+      ],
+      "item_ids": [
+        "v118-talpa"
+      ]
+    },
+    {
+      "src": "n_v1_18_palma",
+      "dst": "n_v24_body_limbs_mana",
+      "relation": "part_of",
+      "label_ro": "face parte din mână",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Palmă → Mână); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wiktionary.org/wiki/palm%C4%83"
+      ],
+      "item_ids": [
+        "v118-palma"
+      ]
+    },
+    {
+      "src": "n_v1_18_palma",
+      "dst": "n_v4sti_piele",
+      "relation": "related_to",
+      "label_ro": "are o suprafață acoperită de piele",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Palmă relative to piele; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Piele_(anatomie)"
+      ],
+      "item_ids": [
+        "v118-palma"
+      ]
+    },
+    {
+      "src": "n_v1_18_palma",
+      "dst": "n_v24_body_limbs_deget",
+      "relation": "related_to",
+      "label_ro": "se continuă cu degetele mâinii",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Palmă relative to Deget; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/M%C3%A2n%C4%83"
+      ],
+      "item_ids": [
+        "v118-palma"
+      ]
+    },
+    {
+      "src": "n_v1_18_palma",
+      "dst": "n_v4sti_os",
+      "relation": "related_to",
+      "label_ro": "în regiunea sa se află oasele metacarpiene",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Palmă relative to os; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/M%C3%A2n%C4%83"
+      ],
+      "item_ids": [
+        "v118-palma"
+      ]
+    },
+    {
+      "src": "n_v1_18_umar",
+      "dst": "n_v4sti_corp",
+      "relation": "part_of",
+      "label_ro": "face parte din corp",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Umăr → corp); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Um%C4%83r"
+      ],
+      "item_ids": [
+        "v118-umar"
+      ]
+    },
+    {
+      "src": "n_v1_18_umar",
+      "dst": "n_v4sti_os",
+      "relation": "related_to",
+      "label_ro": "structura sa cuprinde oase",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Umăr relative to os; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Um%C4%83r"
+      ],
+      "item_ids": [
+        "v118-umar"
+      ]
+    },
+    {
+      "src": "n_v1_18_cot",
+      "dst": "n_v1_18_articulatie",
+      "relation": "part_of",
+      "label_ro": "este partea exterioară a unei articulații",
+      "verdict": "accept",
+      "rationale": "The external elbow region is part of the articulation; part_of preserves the explicit external-region sense rather than asserting identity with the whole joint.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Cot_(anatomie)"
+      ],
+      "item_ids": [
+        "v118-cot"
+      ]
+    },
+    {
+      "src": "n_v1_18_cot",
+      "dst": "n_v4sti_corp",
+      "relation": "part_of",
+      "label_ro": "face parte din corp",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Cot → corp); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Cot_(anatomie)"
+      ],
+      "item_ids": [
+        "v118-cot"
+      ]
+    },
+    {
+      "src": "n_v1_18_cot",
+      "dst": "n_v4sti_os",
+      "relation": "related_to",
+      "label_ro": "la nivelul său se întâlnesc humerusul și ulna",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Cot relative to os; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Cot_(anatomie)"
+      ],
+      "item_ids": [
+        "v118-cot"
+      ]
+    },
+    {
+      "src": "n_v1_18_cot",
+      "dst": "n_v1_18_antebrat",
+      "relation": "related_to",
+      "label_ro": "unește brațul cu antebrațul",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Cot relative to Antebraț; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Cot_(anatomie)"
+      ],
+      "item_ids": [
+        "v118-cot"
+      ]
+    },
+    {
+      "src": "n_v1_18_tampla",
+      "dst": "n_v24_body_face_cap",
+      "relation": "part_of",
+      "label_ro": "face parte din cap",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Tâmplă → Cap); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wiktionary.org/wiki/t%C3%A2mpl%C4%83"
+      ],
+      "item_ids": [
+        "v118-tampla"
+      ]
+    },
+    {
+      "src": "n_v1_18_tampla",
+      "dst": "n_v4sti_ochi",
+      "relation": "related_to",
+      "label_ro": "se află lateral de ochi",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Tâmplă relative to ochi; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wiktionary.org/wiki/t%C3%A2mpl%C4%83"
+      ],
+      "item_ids": [
+        "v118-tampla"
+      ]
+    },
+    {
+      "src": "n_v1_18_tampla",
+      "dst": "n_v4sti_ureche",
+      "relation": "related_to",
+      "label_ro": "se află înaintea urechii",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Tâmplă relative to ureche; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wiktionary.org/wiki/t%C3%A2mpl%C4%83"
+      ],
+      "item_ids": [
+        "v118-tampla"
+      ]
+    },
+    {
+      "src": "n_v1_18_tampla",
+      "dst": "n_v32_body_face_frunte",
+      "relation": "related_to",
+      "label_ro": "se află lateral de frunte",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Tâmplă relative to Frunte; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wiktionary.org/wiki/t%C3%A2mpl%C4%83"
+      ],
+      "item_ids": [
+        "v118-tampla"
+      ]
+    },
+    {
+      "src": "n_v1_18_geana",
+      "dst": "n_v32_body_face_pleoapa",
+      "relation": "part_of",
+      "label_ro": "crește pe marginea pleoapei",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Geană → Pleoapă); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Gean%C4%83"
+      ],
+      "item_ids": [
+        "v118-geana"
+      ]
+    },
+    {
+      "src": "n_v1_18_geana",
+      "dst": "n_v4sti_ochi",
+      "relation": "related_to",
+      "label_ro": "ajută la protejarea ochiului de impurități",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Geană relative to ochi; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Gean%C4%83"
+      ],
+      "item_ids": [
+        "v118-geana"
+      ]
+    },
+    {
+      "src": "n_v1_18_geana",
+      "dst": "n_v4sti_piele",
+      "relation": "related_to",
+      "label_ro": "crește din pielea marginii pleoapei",
+      "verdict": "accept",
+      "rationale": "Exact Pleoapă DEX identifies the eyelid as skin folds edged by lashes; that source supports eyelid-margin skin without relying on the bad etymology.",
+      "sources": [
+        "https://dexonline.ro/definitie/pleoap%C4%83/json",
+        "https://ro.wikipedia.org/wiki/Pleoap%C4%83"
+      ],
+      "item_ids": [
+        "v118-geana"
+      ]
+    },
+    {
+      "src": "n_v1_18_geana",
+      "dst": "n_v32_body_face_spranceana",
+      "relation": "related_to",
+      "label_ro": "se află sub sprânceană",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Geană relative to Sprânceană; conditional wording and direction are preserved.",
+      "sources": [
+        "https://dexonline.ro/definitie/spr%C3%A2ncean%C4%83/json",
+        "https://ro.wikipedia.org/wiki/Gean%C4%83"
+      ],
+      "item_ids": [
+        "v118-geana"
+      ]
+    },
+    {
+      "src": "n_v1_18_pupila",
+      "dst": "n_v4sti_ochi",
+      "relation": "part_of",
+      "label_ro": "face parte din ochi",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Pupilă → ochi); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Pupil%C4%83"
+      ],
+      "item_ids": [
+        "v118-pupila"
+      ]
+    },
+    {
+      "src": "n_v1_18_pupila",
+      "dst": "n_v4sti_lumina",
+      "relation": "related_to",
+      "label_ro": "permite trecerea luminii în ochi",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Pupilă relative to lumină; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Pupil%C4%83"
+      ],
+      "item_ids": [
+        "v118-pupila"
+      ]
+    },
+    {
+      "src": "n_v1_18_pupila",
+      "dst": "n_v1_18_retina",
+      "relation": "related_to",
+      "label_ro": "lumina care trece prin ea poate ajunge la retină",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Pupilă relative to Retină; conditional wording and direction are preserved.",
+      "sources": [
+        "https://dexonline.ro/definitie/pupil%C4%83/json"
+      ],
+      "item_ids": [
+        "v118-pupila"
+      ]
+    },
+    {
+      "src": "n_v1_18_pupila",
+      "dst": "n_v1_18_cornee",
+      "relation": "related_to",
+      "label_ro": "lumina trece prin cornee înainte de a ajunge la pupilă",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Pupilă relative to Cornee; conditional wording and direction are preserved.",
+      "sources": [
+        "https://isjdolj.ro/sites/default/files/POCU/ID%20135712/Stiinte/ID%20135712%20-%20Stiinte%20M2.5%2C%20M2.6%2C%20M2.7.pdf"
+      ],
+      "item_ids": [
+        "v118-pupila"
+      ]
+    },
+    {
+      "src": "n_v1_18_gingie",
+      "dst": "n_v24_body_face_gura",
+      "relation": "part_of",
+      "label_ro": "face parte din gură",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Gingie → Gură); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Gingie"
+      ],
+      "item_ids": [
+        "v118-gingie"
+      ]
+    },
+    {
+      "src": "n_v1_18_gingie",
+      "dst": "n_v28_body_mouth_dinte",
+      "relation": "related_to",
+      "label_ro": "înconjoară baza dinților",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Gingie relative to Dinte; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Gingie"
+      ],
+      "item_ids": [
+        "v118-gingie"
+      ]
+    },
+    {
+      "src": "n_v1_18_gingie",
+      "dst": "n_v4sti_corp",
+      "relation": "part_of",
+      "label_ro": "face parte din corp",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Gingie → corp); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Gingie"
+      ],
+      "item_ids": [
+        "v118-gingie"
+      ]
+    },
+    {
+      "src": "n_v1_18_gingie",
+      "dst": "n_v1_18_masea",
+      "relation": "related_to",
+      "label_ro": "înconjoară baza măselelor",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Gingie relative to Măsea; conditional wording and direction are preserved.",
+      "sources": [
+        "https://dexonline.ro/definitie/gingie/json"
+      ],
+      "item_ids": [
+        "v118-gingie"
+      ]
+    },
+    {
+      "src": "n_v1_18_gingie",
+      "dst": "n_v1_18_maxilar",
+      "relation": "related_to",
+      "label_ro": "acoperă osul alveolar al maxilarului",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Gingie relative to Maxilar; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Gingie"
+      ],
+      "item_ids": [
+        "v118-gingie"
+      ]
+    },
+    {
+      "src": "n_v1_18_masea",
+      "dst": "n_v28_body_mouth_dinte",
+      "relation": "is_a",
+      "label_ro": "este un dinte",
+      "verdict": "accept",
+      "rationale": "The selected Măsea sense is an anatomical instance of Dinte; the caption and class direction agree with the cited noun/anatomy source.",
+      "sources": [
+        "https://ro.wiktionary.org/wiki/m%C4%83sea"
+      ],
+      "item_ids": [
+        "v118-masea"
+      ]
+    },
+    {
+      "src": "n_v1_18_masea",
+      "dst": "n_v24_body_face_gura",
+      "relation": "part_of",
+      "label_ro": "se află în gură",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Măsea → Gură); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wiktionary.org/wiki/m%C4%83sea"
+      ],
+      "item_ids": [
+        "v118-masea"
+      ]
+    },
+    {
+      "src": "n_v1_18_masea",
+      "dst": "n_v4gas_mancare",
+      "relation": "related_to",
+      "label_ro": "participă la mărunțirea mâncării",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Măsea relative to Mâncare; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wiktionary.org/wiki/m%C4%83sea"
+      ],
+      "item_ids": [
+        "v118-masea"
+      ]
+    },
+    {
+      "src": "n_v1_18_masea",
+      "dst": "n_v1_18_gingie",
+      "relation": "related_to",
+      "label_ro": "este înconjurată la bază de gingie",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Măsea relative to Gingie; conditional wording and direction are preserved.",
+      "sources": [
+        "https://dexonline.ro/definitie/gingie/json"
+      ],
+      "item_ids": [
+        "v118-masea"
+      ]
+    },
+    {
+      "src": "n_v1_18_saliva",
+      "dst": "n_v24_body_face_gura",
+      "relation": "related_to",
+      "label_ro": "este secretată în gură",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Salivă relative to Gură; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Saliv%C4%83"
+      ],
+      "item_ids": [
+        "v118-saliva"
+      ]
+    },
+    {
+      "src": "n_v1_18_saliva",
+      "dst": "n_v28_body_mouth_dinte",
+      "relation": "related_to",
+      "label_ro": "contribuie la protejarea dinților",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Salivă relative to Dinte; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Saliv%C4%83"
+      ],
+      "item_ids": [
+        "v118-saliva"
+      ]
+    },
+    {
+      "src": "n_v1_18_saliva",
+      "dst": "n_v4gas_mancare",
+      "relation": "related_to",
+      "label_ro": "participă la formarea bolului alimentar din mâncare",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Salivă relative to Mâncare; conditional wording and direction are preserved.",
+      "sources": [
+        "https://dexonline.ro/definitie/saliv%C4%83/json"
+      ],
+      "item_ids": [
+        "v118-saliva"
+      ]
+    },
+    {
+      "src": "n_v1_18_saliva",
+      "dst": "n_v4gas_apa",
+      "relation": "related_to",
+      "label_ro": "conține în principal apă",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Salivă relative to Apă; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Saliv%C4%83"
+      ],
+      "item_ids": [
+        "v118-saliva"
+      ]
+    },
+    {
+      "src": "n_v1_18_saliva",
+      "dst": "n_v1_18_inghitire",
+      "relation": "related_to",
+      "label_ro": "ușurează înghițirea alimentelor",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Salivă relative to Înghițire; conditional wording and direction are preserved.",
+      "sources": [
+        "https://dexonline.ro/definitie/saliv%C4%83/json"
+      ],
+      "item_ids": [
+        "v118-inghitire",
+        "v118-saliva"
+      ]
+    },
+    {
+      "src": "n_v1_18_lacrima",
+      "dst": "n_v4sti_ochi",
+      "relation": "related_to",
+      "label_ro": "umezește suprafața ochiului",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Lacrimă relative to ochi; conditional wording and direction are preserved.",
+      "sources": [
+        "https://dexonline.ro/definitie/lacrim%C4%83/json"
+      ],
+      "item_ids": [
+        "v118-lacrima"
+      ]
+    },
+    {
+      "src": "n_v1_18_lacrima",
+      "dst": "n_v4gas_apa",
+      "relation": "related_to",
+      "label_ro": "conține apă în componenta apoasă a filmului lacrimal",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Lacrimă relative to Apă; conditional wording and direction are preserved.",
+      "sources": [
+        "https://www.reginamaria.ro/articole-medicale/ochi-uscati-este-foarte-important-sa-gasesti-lacrimile-artificiale-corecte"
+      ],
+      "item_ids": [
+        "v118-lacrima"
+      ]
+    },
+    {
+      "src": "n_v1_18_lacrima",
+      "dst": "n_v32_body_face_pleoapa",
+      "relation": "related_to",
+      "label_ro": "este răspândită pe ochi prin clipitul pleoapelor",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Lacrimă relative to Pleoapă; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Pleoap%C4%83"
+      ],
+      "item_ids": [
+        "v118-lacrima"
+      ]
+    },
+    {
+      "src": "n_v1_18_lacrima",
+      "dst": "n_v24_body_face_nas",
+      "relation": "related_to",
+      "label_ro": "se poate drena spre nas prin căile lacrimale",
+      "verdict": "accept",
+      "rationale": "The primary hospital explains tear passage through canaliculi, sac and nasolacrimal canal into the nose; the incorrect gland/duct paragraph was not used.",
+      "sources": [
+        "https://www.sanador.ro/canal-lacrimal-infundat"
+      ],
+      "item_ids": [
+        "v118-lacrima"
+      ]
+    },
+    {
+      "src": "n_v1_18_retina",
+      "dst": "n_v4sti_ochi",
+      "relation": "part_of",
+      "label_ro": "face parte din ochi",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Retină → ochi); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Retin%C4%83"
+      ],
+      "item_ids": [
+        "v118-retina"
+      ]
+    },
+    {
+      "src": "n_v1_18_retina",
+      "dst": "n_v4sti_creier",
+      "relation": "related_to",
+      "label_ro": "transmite informații vizuale spre creier prin nervul optic",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Retină relative to creier; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Retin%C4%83"
+      ],
+      "item_ids": [
+        "v118-retina"
+      ]
+    },
+    {
+      "src": "n_v1_18_retina",
+      "dst": "n_v4sti_lumina",
+      "relation": "related_to",
+      "label_ro": "detectează lumina",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Retină relative to lumină; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Retin%C4%83"
+      ],
+      "item_ids": [
+        "v118-retina"
+      ]
+    },
+    {
+      "src": "n_v1_18_retina",
+      "dst": "n_v1_18_pupila",
+      "relation": "related_to",
+      "label_ro": "primește lumina care a trecut prin pupilă",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Retină relative to Pupilă; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Retin%C4%83"
+      ],
+      "item_ids": [
+        "v118-retina"
+      ]
+    },
+    {
+      "src": "n_v1_18_timpan",
+      "dst": "n_v4sti_ureche",
+      "relation": "part_of",
+      "label_ro": "face parte din ureche",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Timpan → ureche); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Timpan_(anatomie)"
+      ],
+      "item_ids": [
+        "v118-timpan"
+      ]
+    },
+    {
+      "src": "n_v1_18_timpan",
+      "dst": "n_v4sti_aer",
+      "relation": "related_to",
+      "label_ro": "vibrează sub acțiunea variațiilor de presiune ale aerului",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Timpan relative to aer; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Timpan_(anatomie)"
+      ],
+      "item_ids": [
+        "v118-timpan"
+      ]
+    },
+    {
+      "src": "n_v1_18_timpan",
+      "dst": "n_v4muz_voce",
+      "relation": "related_to",
+      "label_ro": "poate vibra la sunetele vocii cântate",
+      "verdict": "accept",
+      "rationale": "Airborne singing and articulated speech produce pressure variations that vibrate the ear membrane; actual music-voice and language-sound target senses fit the qualified captions.",
+      "sources": [
+        "https://dexonline.ro/definitie/voce/json",
+        "https://ro.wikipedia.org/wiki/Timpan_(anatomie)"
+      ],
+      "item_ids": [
+        "v118-timpan"
+      ]
+    },
+    {
+      "src": "n_v1_18_timpan",
+      "dst": "n_v4lim_sunet",
+      "relation": "related_to",
+      "label_ro": "poate vibra când ajung la ureche sunetele vorbirii",
+      "verdict": "accept",
+      "rationale": "Airborne singing and articulated speech produce pressure variations that vibrate the ear membrane; actual music-voice and language-sound target senses fit the qualified captions.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Timpan_(anatomie)"
+      ],
+      "item_ids": [
+        "v118-timpan"
+      ]
+    },
+    {
+      "src": "n_v1_18_cornee",
+      "dst": "n_v4sti_ochi",
+      "relation": "part_of",
+      "label_ro": "face parte din ochi",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Cornee → ochi); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Cornee"
+      ],
+      "item_ids": [
+        "v118-cornee"
+      ]
+    },
+    {
+      "src": "n_v1_18_cornee",
+      "dst": "n_v4sti_lumina",
+      "relation": "related_to",
+      "label_ro": "refractă lumina care intră în ochi",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Cornee relative to lumină; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Cornee"
+      ],
+      "item_ids": [
+        "v118-cornee"
+      ]
+    },
+    {
+      "src": "n_v1_18_cornee",
+      "dst": "n_v32_body_face_pleoapa",
+      "relation": "related_to",
+      "label_ro": "poate fi acoperită de pleoapă",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Cornee relative to Pleoapă; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Pleoap%C4%83"
+      ],
+      "item_ids": [
+        "v118-cornee"
+      ]
+    },
+    {
+      "src": "n_v1_18_cornee",
+      "dst": "n_v1_18_pupila",
+      "relation": "related_to",
+      "label_ro": "lumina trece prin ea înainte de a ajunge la pupilă",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Cornee relative to Pupilă; conditional wording and direction are preserved.",
+      "sources": [
+        "https://isjdolj.ro/sites/default/files/POCU/ID%20135712/Stiinte/ID%20135712%20-%20Stiinte%20M2.5%2C%20M2.6%2C%20M2.7.pdf"
+      ],
+      "item_ids": [
+        "v118-cornee"
+      ]
+    },
+    {
+      "src": "n_v1_18_maxilar",
+      "dst": "n_v4sti_os",
+      "relation": "is_a",
+      "label_ro": "este un os",
+      "verdict": "accept",
+      "rationale": "The selected Maxilar sense is an anatomical instance of os; the caption and class direction agree with the cited noun/anatomy source.",
+      "sources": [
+        "https://dexonline.ro/definitie/maxilar/json",
+        "https://ro.wikipedia.org/wiki/Maxilar"
+      ],
+      "item_ids": [
+        "v118-maxilar"
+      ]
+    },
+    {
+      "src": "n_v1_18_maxilar",
+      "dst": "n_v24_body_face_cap",
+      "relation": "part_of",
+      "label_ro": "face parte din cap",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Maxilar → Cap); the actual served target sense was checked.",
+      "sources": [
+        "https://dexonline.ro/definitie/maxilar/json",
+        "https://ro.wikipedia.org/wiki/Maxilar"
+      ],
+      "item_ids": [
+        "v118-maxilar"
+      ]
+    },
+    {
+      "src": "n_v1_18_maxilar",
+      "dst": "n_v28_body_mouth_dinte",
+      "relation": "related_to",
+      "label_ro": "în osul său sunt fixați dinți",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Maxilar relative to Dinte; conditional wording and direction are preserved.",
+      "sources": [
+        "https://dexonline.ro/definitie/maxilar/json",
+        "https://ro.wikipedia.org/wiki/Maxilar"
+      ],
+      "item_ids": [
+        "v118-maxilar"
+      ]
+    },
+    {
+      "src": "n_v1_18_maxilar",
+      "dst": "n_v24_body_face_gura",
+      "relation": "related_to",
+      "label_ro": "poate contribui la delimitarea cavității gurii",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Maxilar relative to Gură; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Maxilar"
+      ],
+      "item_ids": [
+        "v118-maxilar"
+      ]
+    },
+    {
+      "src": "n_v1_18_inghitire",
+      "dst": "n_v24_body_face_gura",
+      "relation": "related_to",
+      "label_ro": "începe în gură",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Înghițire relative to Gură; conditional wording and direction are preserved.",
+      "sources": [
+        "https://www.reginamaria.ro/utile/dictionar-de-afectiuni/disfagia-dificultatea-la-inghitire"
+      ],
+      "item_ids": [
+        "v118-inghitire"
+      ]
+    },
+    {
+      "src": "n_v1_18_inghitire",
+      "dst": "n_v29_body_upper_gat",
+      "relation": "related_to",
+      "label_ro": "alimentele traversează regiunea gâtului",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Înghițire relative to Gât; conditional wording and direction are preserved.",
+      "sources": [
+        "https://www.reginamaria.ro/utile/dictionar-de-afectiuni/disfagia-dificultatea-la-inghitire"
+      ],
+      "item_ids": [
+        "v118-inghitire"
+      ]
+    },
+    {
+      "src": "n_v1_18_inghitire",
+      "dst": "n_v4gas_mancare",
+      "relation": "related_to",
+      "label_ro": "transportă alimente din mâncare spre stomac",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Înghițire relative to Mâncare; conditional wording and direction are preserved.",
+      "sources": [
+        "https://www.reginamaria.ro/utile/dictionar-de-afectiuni/disfagia-dificultatea-la-inghitire"
+      ],
+      "item_ids": [
+        "v118-inghitire"
+      ]
+    },
+    {
+      "src": "n_v1_18_mestecare",
+      "dst": "n_v28_body_mouth_dinte",
+      "relation": "related_to",
+      "label_ro": "folosește dinții pentru mărunțire",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Mestecare relative to Dinte; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Digestie"
+      ],
+      "item_ids": [
+        "v118-mestecare"
+      ]
+    },
+    {
+      "src": "n_v1_18_mestecare",
+      "dst": "n_v24_body_face_gura",
+      "relation": "related_to",
+      "label_ro": "are loc în gură",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Mestecare relative to Gură; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Digestie"
+      ],
+      "item_ids": [
+        "v118-mestecare"
+      ]
+    },
+    {
+      "src": "n_v1_18_mestecare",
+      "dst": "n_v4gas_mancare",
+      "relation": "related_to",
+      "label_ro": "mărunțește alimentele din mâncare",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Mestecare relative to Mâncare; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Digestie"
+      ],
+      "item_ids": [
+        "v118-mestecare"
+      ]
+    },
+    {
+      "src": "n_v1_18_mestecare",
+      "dst": "n_v1_18_saliva",
+      "relation": "related_to",
+      "label_ro": "amestecă alimentele cu saliva",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Mestecare relative to Salivă; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Digestie"
+      ],
+      "item_ids": [
+        "v118-mestecare"
+      ]
+    },
+    {
+      "src": "n_v1_18_dantura",
+      "dst": "n_v28_body_mouth_dinte",
+      "relation": "related_to",
+      "label_ro": "este alcătuită din dinți",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Dantură relative to Dinte; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wiktionary.org/wiki/dantur%C4%83"
+      ],
+      "item_ids": [
+        "v118-dantura"
+      ]
+    },
+    {
+      "src": "n_v1_18_dantura",
+      "dst": "n_v24_body_face_gura",
+      "relation": "related_to",
+      "label_ro": "se află în gură",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Dantură relative to Gură; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Digestie"
+      ],
+      "item_ids": [
+        "v118-dantura"
+      ]
+    },
+    {
+      "src": "n_v1_18_dantura",
+      "dst": "n_v31_hygiene_oral_periuta_dinti",
+      "relation": "related_to",
+      "label_ro": "poate fi curățată cu periuța de dinți",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Dantură relative to Periuță de dinți; conditional wording and direction are preserved.",
+      "sources": [
+        "https://www.reginamaria.ro/articole-medicale/sanatatea-familiei/cum-ingrijim-dintii-copiilor"
+      ],
+      "item_ids": [
+        "v118-dantura"
+      ]
+    },
+    {
+      "src": "n_v1_18_dantura",
+      "dst": "n_v31_hygiene_oral_pasta_dinti",
+      "relation": "related_to",
+      "label_ro": "poate fi curățată cu pastă de dinți",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Dantură relative to Pastă de dinți; conditional wording and direction are preserved.",
+      "sources": [
+        "https://www.reginamaria.ro/articole-medicale/sanatatea-familiei/cum-ingrijim-dintii-copiilor"
+      ],
+      "item_ids": [
+        "v118-dantura"
+      ]
+    },
+    {
+      "src": "n_v1_18_dantura",
+      "dst": "n_v1_18_mestecare",
+      "relation": "related_to",
+      "label_ro": "este folosită la mestecare",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Dantură relative to Mestecare; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Digestie"
+      ],
+      "item_ids": [
+        "v118-dantura"
+      ]
+    },
+    {
+      "src": "n_v1_18_transpiratie",
+      "dst": "n_v4sti_piele",
+      "relation": "related_to",
+      "label_ro": "elimină sudoare prin piele",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Transpirație relative to piele; conditional wording and direction are preserved.",
+      "sources": [
+        "https://dexonline.ro/definitie/transpira%C8%9Bie/json"
+      ],
+      "item_ids": [
+        "v118-transpiratie"
+      ]
+    },
+    {
+      "src": "n_v1_18_transpiratie",
+      "dst": "n_v4gas_apa",
+      "relation": "related_to",
+      "label_ro": "sudoarea conține apă",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Transpirație relative to Apă; conditional wording and direction are preserved.",
+      "sources": [
+        "https://www.spitalgorj.ro/wp-content/uploads/2021/12/Ghid-de-nursing-tehnici-de-evaluare-si-ingirjiri-L.-Titirca-2008.pdf"
+      ],
+      "item_ids": [
+        "v118-transpiratie"
+      ]
+    },
+    {
+      "src": "n_v1_18_transpiratie",
+      "dst": "n_v4sti_corp",
+      "relation": "related_to",
+      "label_ro": "contribuie la răcirea corpului",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Transpirație relative to corp; conditional wording and direction are preserved.",
+      "sources": [
+        "https://www.spitalgorj.ro/wp-content/uploads/2021/12/Ghid-de-nursing-tehnici-de-evaluare-si-ingirjiri-L.-Titirca-2008.pdf"
+      ],
+      "item_ids": [
+        "v118-transpiratie"
+      ]
+    },
+    {
+      "src": "n_v1_18_transpiratie",
+      "dst": "n_v4sti_sange",
+      "relation": "related_to",
+      "label_ro": "apa sudorii provine din lichidul derivat din plasma sângelui",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Transpirație relative to sânge; conditional wording and direction are preserved.",
+      "sources": [
+        "https://www.catena.ro/glande-sudoripare-anatomie-rol-functii-afectiuni"
+      ],
+      "item_ids": [
+        "v118-transpiratie"
+      ]
+    },
+    {
+      "src": "n_v1_18_tesut",
+      "dst": "n_v2sti_celula",
+      "relation": "related_to",
+      "label_ro": "este alcătuit din celule cu roluri asemănătoare",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Țesut relative to Celulă; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/%C8%9Aesut_%28biologie%29"
+      ],
+      "item_ids": [
+        "v118-tesut"
+      ]
+    },
+    {
+      "src": "n_v1_18_tesut",
+      "dst": "n_v4sti_corp",
+      "relation": "part_of",
+      "label_ro": "face parte din corp",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Țesut → corp); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/%C8%9Aesut_%28biologie%29"
+      ],
+      "item_ids": [
+        "v118-tesut"
+      ]
+    },
+    {
+      "src": "n_v4sti_os",
+      "dst": "n_v1_18_tesut",
+      "relation": "related_to",
+      "label_ro": "conține țesut osos",
+      "verdict": "accept",
+      "rationale": "The caption says bone contains bony tissue; related_to avoids equating an anatomical bone organ with only one of its constituent tissues.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/%C8%9Aesut_conjunctiv"
+      ],
+      "item_ids": [
+        "v118-tesut"
+      ]
+    },
+    {
+      "src": "n_v4sti_sange",
+      "dst": "n_v1_18_tesut",
+      "relation": "is_a",
+      "label_ro": "este un țesut lichid",
+      "verdict": "accept",
+      "rationale": "The selected sânge sense is an anatomical instance of Țesut; the caption and class direction agree with the cited noun/anatomy source.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/%C8%9Aesut_conjunctiv"
+      ],
+      "item_ids": [
+        "v118-tesut"
+      ]
+    },
+    {
+      "src": "n_v1_18_tesut",
+      "dst": "n_v4sti_piele",
+      "relation": "related_to",
+      "label_ro": "pielea conține mai multe tipuri de țesut",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Țesut relative to piele; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Piele_(anatomie)"
+      ],
+      "item_ids": [
+        "v118-tesut"
+      ]
+    },
+    {
+      "src": "n_v1_18_ombilic",
+      "dst": "n_v4sti_corp",
+      "relation": "part_of",
+      "label_ro": "face parte din corp",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Ombilic → corp); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Ombilic"
+      ],
+      "item_ids": [
+        "v118-ombilic"
+      ]
+    },
+    {
+      "src": "n_v1_18_ombilic",
+      "dst": "n_v4sti_piele",
+      "relation": "related_to",
+      "label_ro": "este o cicatrice pe pielea abdomenului",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Ombilic relative to piele; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Ombilic"
+      ],
+      "item_ids": [
+        "v118-ombilic"
+      ]
+    },
+    {
+      "src": "n_v1_18_ombilic",
+      "dst": "n_v24_people_parents_mama",
+      "relation": "related_to",
+      "label_ro": "marchează locul fostului cordon care făcea legătura cu placenta mamei",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Ombilic relative to Mamă; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Cordon_ombilical",
+        "https://ro.wikipedia.org/wiki/Ombilic"
+      ],
+      "item_ids": [
+        "v118-ombilic"
+      ]
+    },
+    {
+      "src": "n_v1_18_ombilic",
+      "dst": "n_v24_people_parents_bebelus",
+      "relation": "related_to",
+      "label_ro": "cicatricea sa se formează după desprinderea restului de cordon la bebeluș",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Ombilic relative to Bebeluș; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Ombilic"
+      ],
+      "item_ids": [
+        "v118-ombilic"
+      ]
+    },
+    {
+      "src": "n_v1_18_stern",
+      "dst": "n_v4sti_os",
+      "relation": "is_a",
+      "label_ro": "este un os",
+      "verdict": "accept",
+      "rationale": "The selected Stern sense is an anatomical instance of os; the caption and class direction agree with the cited noun/anatomy source.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Stern"
+      ],
+      "item_ids": [
+        "v118-stern"
+      ]
+    },
+    {
+      "src": "n_v1_18_stern",
+      "dst": "n_v4sti_corp",
+      "relation": "part_of",
+      "label_ro": "face parte din corp",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Stern → corp); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Stern"
+      ],
+      "item_ids": [
+        "v118-stern"
+      ]
+    },
+    {
+      "src": "n_v1_18_stern",
+      "dst": "n_v4sti_inima",
+      "relation": "related_to",
+      "label_ro": "se află anterior față de inimă",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Stern relative to inimă; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Stern"
+      ],
+      "item_ids": [
+        "v118-stern"
+      ]
+    },
+    {
+      "src": "n_v1_18_stern",
+      "dst": "n_v1_18_coasta_toracica",
+      "relation": "related_to",
+      "label_ro": "unele coaste sunt legate de stern prin cartilaje",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Stern relative to Coastă toracică; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Stern"
+      ],
+      "item_ids": [
+        "v118-stern"
+      ]
+    },
+    {
+      "src": "n_v1_18_coloana_vertebrala",
+      "dst": "n_v4sti_corp",
+      "relation": "part_of",
+      "label_ro": "face parte din corp",
+      "verdict": "accept",
+      "rationale": "The selected anatomical structure belongs to the named bodily whole (Coloană vertebrală → corp); the actual served target sense was checked.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Coloan%C4%83_vertebral%C4%83"
+      ],
+      "item_ids": [
+        "v118-coloana_vertebrala"
+      ]
+    },
+    {
+      "src": "n_v1_18_coloana_vertebrala",
+      "dst": "n_v4sti_os",
+      "relation": "related_to",
+      "label_ro": "este alcătuită dintr-o serie de oase",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Coloană vertebrală relative to os; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ro.wikipedia.org/wiki/Coloan%C4%83_vertebral%C4%83"
+      ],
+      "item_ids": [
+        "v118-coloana_vertebrala"
+      ]
+    },
+    {
+      "src": "n_v1_18_coloana_vertebrala",
+      "dst": "n_v24_body_face_cap",
+      "relation": "related_to",
+      "label_ro": "susține capul",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Coloană vertebrală relative to Cap; conditional wording and direction are preserved.",
+      "sources": [
+        "https://ebooks.unitbv.ro/wp-content/uploads/2024/11/978-606-19-1748%E2%80%938-work.pdf"
+      ],
+      "item_ids": [
+        "v118-coloana_vertebrala"
+      ]
+    },
+    {
+      "src": "n_v1_18_coloana_vertebrala",
+      "dst": "n_v29_body_upper_gat",
+      "relation": "related_to",
+      "label_ro": "regiunea sa cervicală se află la nivelul gâtului",
+      "verdict": "accept",
+      "rationale": "The cited source supports the specific stated location, component or function of Coloană vertebrală relative to Gât; conditional wording and direction are preserved.",
+      "sources": [
+        "https://www.reginamaria.ro/utile/dictionar-de-afectiuni/lordoza"
+      ],
+      "item_ids": [
+        "v118-coloana_vertebrala"
+      ]
+    }
+  ],
+  "limits": [
+    "Acceptance is for this exact original source-only module and owner review later.",
+    "Pool acceptance is not installation, integration, board eligibility or player-visible progress.",
+    "Source warnings remain explicit; the unadopted false passages are not approved.",
+    "Keep all nine holds and all previous unmerged packets intact; no V1.14 HTTP-count exception is reopened."
+  ]
+}

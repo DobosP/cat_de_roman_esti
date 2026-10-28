@@ -1,0 +1,713 @@
+{
+  "reviewer": "factual-v1-32",
+  "task": "final_cached_consolidation_factual_audit",
+  "status": "PASS",
+  "issues": [],
+  "observed_at_utc": "2026-10-16T14:22:47.569611+00:00",
+  "scope": "Read-only/cached canonical source fidelity,normalization/ownership and report/prompt bookkeeping audit;no new source judgment,formal review,HTTP,application or gameplay certification.",
+  "artifact_sha256": {
+    "assessment.md": "3ea071c9b2e6861d771cf1f31cf52c2c4b849fc0b2297a5bcac3727852dc9812",
+    "candidate-inputs.md": "fc1efc616a136291873eccf3e9b76a4c03483f044a402b8abbc1f24c6d43525d",
+    "game-impact.json": "766e98a9d42991f0f08baa260249c44904b9521e1ccedc89a54872d0ce6566c6",
+    "forms.json": "3bf536d8a06238668bf38e3f8fd99060725f08b001436cc9f36ae02391fa9bb3",
+    "schema-audit.json": "1d6f6ac63ae76f4f2bcdb056f9ea558387c4c878d08167957be9d815a1e3164d",
+    "improved-loop-prompt.txt": "2c21dfcfe940d9e7655eb679658aec889bdcaaa7ea40eb4ba0dc5913c76c2738",
+    "word-index.md": "f88785bcc312a40473d3b5d056e2b5ca4c57d928ed679c1819a1f62a46ef895a",
+    "inventory.json": "c74fa54938d973bdbf08932edf62253a47dacb74b36c3efc0ae8d965362ca0b4",
+    "manifest.json": "3cd307383fca8f5053db3b8d9c599f9be14ff811ee6582e04990a491241ed233",
+    "connections.json": "fdb6a0fffc61210601146ccab438ee142ffb572378b452b948d8fa5f2fd10912",
+    "main-lexicon.json": "7c5a4d7d2ce98bb6932b2491850fcf3621d12d5faf992cdb9cef7aa5950bd550"
+  },
+  "artifact_directory": "/home/dobo/work/_worktrees/cat_de_roman_esti/docs__content-consolidation-v1-8-to-v1-32/docs/content-consolidation/v1-8-through-v1-32",
+  "latest_local_main": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+  "main_clean": true,
+  "bundle_sha256": "f6d983f1ab2cbb7852e8583411eaecd2048fdb5b5da08099129d7e4ff471344c",
+  "inventory_base_commit": "b187f5b308debd318da5df3d44d88d5b57071020",
+  "canonical_packets": 25,
+  "canonical_pool_module_hashes": {
+    "1.8": {
+      "pool": "9b45158bedc4843d3382792812de50385e1779aa259bb290867595bd64221c45",
+      "module": "ab547440b92bc43e0ed65dd414cac69b48307066dce0c2bbc0540fa4438074f5"
+    },
+    "1.9": {
+      "pool": "b859a92cb4c991f7dd86e7ab7d8dfe5c6e951234842634f5964862f0f800e1f6",
+      "module": "68a8c4ef0c56bee2150806073cfc1d5c6aa8cee4deac0b2e14ac9d3dc7a319e3"
+    },
+    "1.10": {
+      "pool": "c3d2b86544e2cb9cb83d3f17137b302130f7b174e36042a9dbdbd441d3b2c95a",
+      "module": "e90fbf1756d958c76c0a93c289ba9cfd937e572419bde6627562abca67396ab0"
+    },
+    "1.11": {
+      "pool": "bf20dbe19b450f823d01fc8cfcdf6e48f65657bea7ea1cb6ff9ad1fdaedd356a",
+      "module": "b25c6de488d8ca19be4dc370ed0a3ac59b4e3b43f89551dad778ac90d9542f93"
+    },
+    "1.12": {
+      "pool": "71342d78e211bc40ada3d522409ffb2e88356f0768e08bd62a0ae676474a80a4",
+      "module": "2d0064f9c3e831bbfec9896327964c8fc0ad45d4274eb31c73020b74941c2a24"
+    },
+    "1.13": {
+      "pool": "4425c41a0f85a7a3b47e5b485ae0ff2d275a28f36c4c140bf249e111793bb53e",
+      "module": "01589eb1721c91544fbc94325c3e16cc2440ed1dada7ab8ceeb0886ad6476279"
+    },
+    "1.14": {
+      "pool": "27f4eb19c7a323cf2202d7baf5943ed9b0d4e9f1aa7ba936f43308c082215580",
+      "module": "c69eca9639a0f8528d633534bed19f770479dd2adf210ace61333f5d0e39d577"
+    },
+    "1.15": {
+      "pool": "c5575a093f63c2a0ec3d72c4f9fc7e044323bbc334b53c634a861c1a7ad12ad5",
+      "module": "b46b7972e71c55f83363da7f95fae0d560d377b7cce10b5d6caff872d05a1a74"
+    },
+    "1.16": {
+      "pool": "8d794de89662e3f5cd5a8e50debd08d90d3458a623ecc501345a359874cd6492",
+      "module": "db23bd6f053a01252f85420dd79832e5ea302081d38a7bdd6bea9bbd87d9ef50"
+    },
+    "1.17": {
+      "pool": "d344c0b7a45f74b134898e39dddb7da0580ff2e85eed379f8bbdfb3585310e68",
+      "module": "72b95751972b968f8f420cf8d5bae6174668d2f2aafedb6c21caa1d97dfa26e2"
+    },
+    "1.18": {
+      "pool": "935d8e1b089c44b28c1a53c325a22578df87e4ab7590e8d46b68c42800a13d46",
+      "module": "a4037424a69886e27a5bd7f0e9ae93169f9ab973aee0f6a3d28226d98faa2c01"
+    },
+    "1.19": {
+      "pool": "4293c603567b7718d0da3ddd8d2c66a05e59906588d2918db2fc1f5dcd23baf2",
+      "module": "71cbd7116b516d0e07730e9268c1239b3d807345ba5937337f80130489114c4d"
+    },
+    "1.20": {
+      "pool": "310e9a31e0ef4c1e81053a1730d89025694c44cdbe35544af4f5d532783d1b8c",
+      "module": "8641e3cdc3bf8125ee09241efb7b618b79689e3e832b29e6eed19ed3deaf1a4b"
+    },
+    "1.21": {
+      "pool": "969042f166ca66bc63b2a024a8c56638500373e3b6e7c5209c6fba0422ffbf62",
+      "module": "c37cb08a6b5c947ee0024e512a14e5f48348edf30092e6a6d555746ce560fc34"
+    },
+    "1.22": {
+      "pool": "63198b9d7177d9d95ce2244d79ca3927924a1dcf61035e8323a568abf5465524",
+      "module": "93dea98c325f44d11f5f3f1af066c84ca077ccd4abc4c4a46b73251bae3cca2f"
+    },
+    "1.23": {
+      "pool": "0ca0549c7a83d0106d0604f46cefd85ff2ee10b5c971254e216883201e2e6b11",
+      "module": "8d7b57d126411ce7ad8a4d1a2ad3100cf4ae0f410a2eaf09a0988fc173257bae"
+    },
+    "1.24": {
+      "pool": "bcfed16e7a37ef6e065a21be95a886c6873f57bf860a950308465ef3a0aa1460",
+      "module": "7060f8cc25aed25880913a76fb52a1e6a6aaf5aa0ac093a7ec442429c3770da2"
+    },
+    "1.25": {
+      "pool": "5f7beeee91c3cbbecbc56fc0203c09765a8907933fd601ab5c2e98f61b8d8ab0",
+      "module": "4c6f820489d1e138603f23d950a2eb14c22122daafc16e911b7b25bb01b3d15b"
+    },
+    "1.26": {
+      "pool": "5ad38180e6e04ef368979edee93e9be7402900ca95754f589245340570f43bed",
+      "module": "af97ac63057ddd8cf7f901aad591821afa009d8330362015ba5af110252d2993"
+    },
+    "1.27": {
+      "pool": "38f49243affb8a3e2b0d27ee8b382444639eed8e817e6e691c224d7e5759a9dd",
+      "module": "34852b0414025a93a1e7149400579b8c1ff13e82f6dc23ac5bf860cbff6965fc"
+    },
+    "1.28": {
+      "pool": "17887bfc7938f0d7d5c84804d03072269200239867b7f9e5e7a68d21fccd4e17",
+      "module": "bf1e7d6ef9dd5b351352d957ae2c132a58fc85e3146c19210cb8be005fa4a8f6"
+    },
+    "1.29": {
+      "pool": "8b583c226de1d2fa88dcabb60d61e5bfb07cb5bbd064da2e96fd8c4afda34349",
+      "module": "554449dd2f49940c7489dacd38feae28ebd5d575630f0e332c2b45515a04efa2"
+    },
+    "1.30": {
+      "pool": "bda38a91b4fc5523526ae2dafd8868dd354a5adeb3b1fe30074f1b26dbb6b59a",
+      "module": "a893bd913e87e40d2394251dd995f0ae5423a61841e26ec1e52abf2530008819"
+    },
+    "1.31": {
+      "pool": "e6ac6c35dba7b895a5506c437fd33bdd010ae4dbd40f0f927e18fc82d7a89b61",
+      "module": "23ecf969717d5380c73ef34a2f4309bb7d7aa311beeda5706bb9c98514482d3e"
+    },
+    "1.32": {
+      "pool": "399b81e1d9747287ee06fce7037d324a356835cad892cfd837d1050b1726710a",
+      "module": "3b0d40b9ae0cef5a9d88927a61d6d6a177627ee6d44d6552948e3cc632d14005"
+    }
+  },
+  "checks": {
+    "canonical_records": 1364,
+    "states": {
+      "integrated": 218,
+      "held": 308,
+      "accepted": 837,
+      "rejected": 1
+    },
+    "pending": 837,
+    "new": 709,
+    "existing": 128,
+    "existing_unique_owners": 117,
+    "pending_keys": 4503,
+    "unique_pending_owner_keys": 4503,
+    "newkeys": 4013,
+    "existingkeys": 490,
+    "displaykeys": [
+      {
+        "id": "v114-liliac",
+        "key": "liliac (mamifer)"
+      },
+      {
+        "id": "v114-somn",
+        "key": "somn (peste)"
+      },
+      {
+        "id": "v115-cablu",
+        "key": "cablu (electric)"
+      }
+    ],
+    "ordinary_pending_keys": 4500,
+    "lanes": {
+      "existing_lemma_morphology": {
+        "families": 62,
+        "missing_keys": 101
+      },
+      "selected_sense_lexical_or_qualified_input": {
+        "families": 66,
+        "missing_keys": 389
+      }
+    },
+    "first_subset": [
+      {
+        "lemma": "Stea",
+        "ids": [
+          "v115-stea"
+        ],
+        "forms": [
+          [
+            "stelei"
+          ],
+          [
+            "stelelor"
+          ]
+        ],
+        "count": 2,
+        "snapshot_deps": [
+          {
+            "discovery_world": false,
+            "recipe_extension_board_ids": []
+          }
+        ]
+      },
+      {
+        "lemma": "Picior",
+        "ids": [
+          "v115-picior"
+        ],
+        "forms": [
+          [
+            "piciorului"
+          ],
+          [
+            "picioarelor"
+          ]
+        ],
+        "count": 2,
+        "snapshot_deps": [
+          {
+            "discovery_world": false,
+            "recipe_extension_board_ids": []
+          }
+        ]
+      },
+      {
+        "lemma": "Trotuar",
+        "ids": [
+          "v116-trotuar"
+        ],
+        "forms": [
+          [
+            "trotuarelor"
+          ]
+        ],
+        "count": 1,
+        "snapshot_deps": [
+          {
+            "discovery_world": false,
+            "recipe_extension_board_ids": []
+          }
+        ]
+      },
+      {
+        "lemma": "Stradă",
+        "ids": [
+          "v116-strada"
+        ],
+        "forms": [
+          [
+            "străzii"
+          ],
+          [
+            "străzilor"
+          ]
+        ],
+        "count": 2,
+        "snapshot_deps": [
+          {
+            "discovery_world": false,
+            "recipe_extension_board_ids": []
+          }
+        ]
+      },
+      {
+        "lemma": "Tren",
+        "ids": [
+          "v116-tren"
+        ],
+        "forms": [
+          [
+            "trenului"
+          ],
+          [
+            "trenurilor"
+          ]
+        ],
+        "count": 2,
+        "snapshot_deps": [
+          {
+            "discovery_world": false,
+            "recipe_extension_board_ids": []
+          }
+        ]
+      },
+      {
+        "lemma": "Tramvai",
+        "ids": [
+          "v116-tramvai"
+        ],
+        "forms": [
+          [
+            "tramvaiului"
+          ],
+          [
+            "tramvaielor"
+          ]
+        ],
+        "count": 2,
+        "snapshot_deps": [
+          {
+            "discovery_world": false,
+            "recipe_extension_board_ids": []
+          }
+        ]
+      },
+      {
+        "lemma": "Gară",
+        "ids": [
+          "v116-gara"
+        ],
+        "forms": [
+          [
+            "gării"
+          ],
+          [
+            "gărilor"
+          ]
+        ],
+        "count": 2,
+        "snapshot_deps": [
+          {
+            "discovery_world": false,
+            "recipe_extension_board_ids": []
+          }
+        ]
+      },
+      {
+        "lemma": "Stație",
+        "ids": [
+          "v116-statie"
+        ],
+        "forms": [
+          [
+            "stației"
+          ],
+          [
+            "stațiilor"
+          ]
+        ],
+        "count": 2,
+        "snapshot_deps": [
+          {
+            "discovery_world": false,
+            "recipe_extension_board_ids": []
+          }
+        ]
+      },
+      {
+        "lemma": "Aeroport",
+        "ids": [
+          "v116-aeroport"
+        ],
+        "forms": [
+          [
+            "aeroportului"
+          ],
+          [
+            "aeroporturilor"
+          ]
+        ],
+        "count": 2,
+        "snapshot_deps": [
+          {
+            "discovery_world": false,
+            "recipe_extension_board_ids": []
+          }
+        ]
+      },
+      {
+        "lemma": "Camion",
+        "ids": [
+          "v116-camion"
+        ],
+        "forms": [
+          [
+            "camionului"
+          ],
+          [
+            "camioanelor"
+          ]
+        ],
+        "count": 2,
+        "snapshot_deps": [
+          {
+            "discovery_world": false,
+            "recipe_extension_board_ids": []
+          }
+        ]
+      }
+    ],
+    "first_subset_forms": 19,
+    "observation_count": 8597,
+    "unique_observed_keys": 8290,
+    "canonical_source_edges": 3512,
+    "pending_source_edges": 2844,
+    "incoming_counts": {
+      "below5": 664,
+      "atleast5": 45
+    },
+    "snapshot_dependent_families": 40,
+    "proxy_behavior_keys": 103,
+    "hold_dispositions": 309,
+    "partial_dispositions": 15,
+    "canonical_record_id_state_owner_correspondence": "PASS",
+    "all_837_final_record_to_module_payload_mappings_exact": true,
+    "orphan_module_payload_pairs": 0,
+    "landed_owner_form_payload_pairs_already_same_owner": 1006,
+    "main_integrated_records": 218,
+    "main_integrated_new_node_rows": 165,
+    "main_integrated_existing_alias_groups": 52,
+    "main_integrated_pure_relation_records": 1,
+    "priority_subset_direct_snapshot_dependencies": 0,
+    "material_unrepresented_nested_normalized_keys_after_correction": 0,
+    "additional_folded_equivalent_nested_case_spelling_observations": 46,
+    "source_url_omissions_from_record_and_module_source_lists": [],
+    "signed_source_review_artifacts_present_and_hash_exact": 50,
+    "landed_source_edge_rows": 668,
+    "foreign_current_owner_collisions": 0,
+    "cross_pending_competing_owner_collisions": 0,
+    "preserved_record_holds": 308,
+    "preserved_record_rejections": 1,
+    "inactive_secondary_families": [
+      "Cârpă",
+      "Lustră",
+      "Portmoneu",
+      "Jimblă",
+      "Difuzor"
+    ],
+    "legacy_stale_description_caveats_retained": 9,
+    "V1_14_partial_install_and_declined_exception_not_reopened": true,
+    "main_lexicon_literal_exact": {
+      "nodes": 2584,
+      "discovery_concepts": 252,
+      "Cald_projection_terms": 464
+    },
+    "unchanged_code_bound_impact_files": 22,
+    "code_references_bound": 45,
+    "assessment_prompt_numbers_and_unlanded_scope": "PASS",
+    "prompt_owner_adoption_required_before_activation": true,
+    "source_flags_do_not_claim_runtime_quarantine": true,
+    "no_safe_to_merge_or_installed_gameplay_claim": true
+  },
+  "resolved_observation_correction": {
+    "record": "v130-compas",
+    "source_field": "unplanned_table_variant_attention",
+    "exact_retained": {
+      "forms": [
+        "compase",
+        "compasele",
+        "compaselor"
+      ],
+      "status": "Unselected dexonline table display,not the selected DOOM3 plural;no source or input admission."
+    },
+    "added_keys": [
+      "compase",
+      "compasele",
+      "compaselor"
+    ],
+    "observation_only": true,
+    "source_approved": false,
+    "module_payload": false,
+    "modified_preexisting_form_rows": 0,
+    "deleted_form_rows": 0,
+    "changed_inventory_records": [
+      "v130-compas"
+    ],
+    "manifest_changed_fields": [
+      "form_observation_count",
+      "unique_observed_keys",
+      "form_assessments",
+      "source_fidelity_notes"
+    ],
+    "attention_only_nonreserving": true,
+    "prior_form_hold": false
+  },
+  "protected_refs": [
+    {
+      "branch": "content/v1-14-animals-and-habitats",
+      "commit": "4b634cab38cbce90ac6eb02e0907578335208c69",
+      "wave": "1.14"
+    },
+    {
+      "branch": "content/v1-15-home-school-words",
+      "commit": "2ace3df01d4871fa1990feadd4b485d6be496d81",
+      "wave": "1.15"
+    },
+    {
+      "branch": "content/v1-16-travel-and-street-words",
+      "commit": "ecb50b463d8d1f0300d435126f934fe90b29fe5b",
+      "wave": "1.16"
+    },
+    {
+      "branch": "content/v1-17-garden-and-kitchen-words",
+      "commit": "df2fd5e5196cb1584cb8e330adbc2b71b855fab8",
+      "wave": "1.17"
+    },
+    {
+      "branch": "content/v1-18-body-and-everyday-care",
+      "commit": "69ebb9f3631ac41f4ac80c76c9d6795c29b78fa8",
+      "wave": "1.18"
+    },
+    {
+      "branch": "content/v1-19-tools-and-crafts",
+      "commit": "5159b0417d4f62b46f28b3a4a37dabf9c07bc389",
+      "wave": "1.19"
+    },
+    {
+      "branch": "content/v1-20-school-and-hobbies",
+      "commit": "bc0ed56c826b9bab0c0f9408ff8fd1a36a539f94",
+      "wave": "1.20"
+    },
+    {
+      "branch": "content/v1-21-clothing-and-household-storage",
+      "commit": "be42df68abfbf2a40e879cbe53c671b70d69c6d0",
+      "wave": "1.21"
+    },
+    {
+      "branch": "content/v1-22-home-fixtures-and-materials",
+      "commit": "c10e4c2394ae82dae4f7bd22f56f91ca854f26ba",
+      "wave": "1.22"
+    },
+    {
+      "branch": "content/v1-23-pantry-and-tableware",
+      "commit": "489504300c8ea2c323de7f4e4e497eeb157947e3",
+      "wave": "1.23"
+    },
+    {
+      "branch": "content/v1-24-familiar-foods-and-inputs",
+      "commit": "53a090735baea74bc8c99470070eaf718fe4cc38",
+      "wave": "1.24"
+    },
+    {
+      "branch": "content/v1-25-common-places-and-objects",
+      "commit": "b0de8a38abfaf7366418f5c79df6cb74c224920d",
+      "wave": "1.25"
+    },
+    {
+      "branch": "content/v1-26-school-play-and-devices",
+      "commit": "c7f45781d071a9b784357f8ef7b10f259d6f5121",
+      "wave": "1.26"
+    },
+    {
+      "branch": "content/v1-27-familiar-foods-and-plants",
+      "commit": "93ff482efe7f0c3ce906ce735726f8a3cf8a9649",
+      "wave": "1.27"
+    },
+    {
+      "branch": "content/v1-28-familiar-animals-and-outdoor-words",
+      "commit": "6874e9f65e2e8af8debbee9edbf6625c570d9d52",
+      "wave": "1.28"
+    },
+    {
+      "wave": "1.29",
+      "branch": "content/v1-29-familiar-people-and-community",
+      "commit": "f53df8b0811537262f68a8c0c19dc4c132db101c"
+    },
+    {
+      "wave": "1.30",
+      "branch": "content/v1-30-familiar-shapes-and-school-measures",
+      "commit": "b5b3abdbe8aac9ca21f425db454576a438d21222"
+    },
+    {
+      "wave": "1.31",
+      "branch": "content/v1-31-familiar-music-and-sport-objects",
+      "commit": "4aa8d6e504835cc1f2e3051f24c45c729a0d449a"
+    },
+    {
+      "wave": "1.32",
+      "branch": "content/v1-32-familiar-water-weather-and-shore",
+      "commit": "772d187160ac6c4d209e24c999a26e42b621c427"
+    }
+  ],
+  "protected_worktree_scratch_preservation": [
+    {
+      "wave": "1.14",
+      "worktree_exists": true,
+      "scratch_exists": true,
+      "worktree_head": "4b634cab38cbce90ac6eb02e0907578335208c69",
+      "expected": "4b634cab38cbce90ac6eb02e0907578335208c69"
+    },
+    {
+      "wave": "1.15",
+      "worktree_exists": true,
+      "scratch_exists": true,
+      "worktree_head": "2ace3df01d4871fa1990feadd4b485d6be496d81",
+      "expected": "2ace3df01d4871fa1990feadd4b485d6be496d81"
+    },
+    {
+      "wave": "1.16",
+      "worktree_exists": true,
+      "scratch_exists": true,
+      "worktree_head": "ecb50b463d8d1f0300d435126f934fe90b29fe5b",
+      "expected": "ecb50b463d8d1f0300d435126f934fe90b29fe5b"
+    },
+    {
+      "wave": "1.17",
+      "worktree_exists": true,
+      "scratch_exists": true,
+      "worktree_head": "df2fd5e5196cb1584cb8e330adbc2b71b855fab8",
+      "expected": "df2fd5e5196cb1584cb8e330adbc2b71b855fab8"
+    },
+    {
+      "wave": "1.18",
+      "worktree_exists": true,
+      "scratch_exists": true,
+      "worktree_head": "69ebb9f3631ac41f4ac80c76c9d6795c29b78fa8",
+      "expected": "69ebb9f3631ac41f4ac80c76c9d6795c29b78fa8"
+    },
+    {
+      "wave": "1.19",
+      "worktree_exists": true,
+      "scratch_exists": true,
+      "worktree_head": "5159b0417d4f62b46f28b3a4a37dabf9c07bc389",
+      "expected": "5159b0417d4f62b46f28b3a4a37dabf9c07bc389"
+    },
+    {
+      "wave": "1.20",
+      "worktree_exists": true,
+      "scratch_exists": true,
+      "worktree_head": "bc0ed56c826b9bab0c0f9408ff8fd1a36a539f94",
+      "expected": "bc0ed56c826b9bab0c0f9408ff8fd1a36a539f94"
+    },
+    {
+      "wave": "1.21",
+      "worktree_exists": true,
+      "scratch_exists": true,
+      "worktree_head": "be42df68abfbf2a40e879cbe53c671b70d69c6d0",
+      "expected": "be42df68abfbf2a40e879cbe53c671b70d69c6d0"
+    },
+    {
+      "wave": "1.22",
+      "worktree_exists": true,
+      "scratch_exists": true,
+      "worktree_head": "c10e4c2394ae82dae4f7bd22f56f91ca854f26ba",
+      "expected": "c10e4c2394ae82dae4f7bd22f56f91ca854f26ba"
+    },
+    {
+      "wave": "1.23",
+      "worktree_exists": true,
+      "scratch_exists": true,
+      "worktree_head": "489504300c8ea2c323de7f4e4e497eeb157947e3",
+      "expected": "489504300c8ea2c323de7f4e4e497eeb157947e3"
+    },
+    {
+      "wave": "1.24",
+      "worktree_exists": true,
+      "scratch_exists": true,
+      "worktree_head": "53a090735baea74bc8c99470070eaf718fe4cc38",
+      "expected": "53a090735baea74bc8c99470070eaf718fe4cc38"
+    },
+    {
+      "wave": "1.25",
+      "worktree_exists": true,
+      "scratch_exists": true,
+      "worktree_head": "b0de8a38abfaf7366418f5c79df6cb74c224920d",
+      "expected": "b0de8a38abfaf7366418f5c79df6cb74c224920d"
+    },
+    {
+      "wave": "1.26",
+      "worktree_exists": true,
+      "scratch_exists": true,
+      "worktree_head": "c7f45781d071a9b784357f8ef7b10f259d6f5121",
+      "expected": "c7f45781d071a9b784357f8ef7b10f259d6f5121"
+    },
+    {
+      "wave": "1.27",
+      "worktree_exists": true,
+      "scratch_exists": true,
+      "worktree_head": "93ff482efe7f0c3ce906ce735726f8a3cf8a9649",
+      "expected": "93ff482efe7f0c3ce906ce735726f8a3cf8a9649"
+    },
+    {
+      "wave": "1.28",
+      "worktree_exists": true,
+      "scratch_exists": true,
+      "worktree_head": "6874e9f65e2e8af8debbee9edbf6625c570d9d52",
+      "expected": "6874e9f65e2e8af8debbee9edbf6625c570d9d52"
+    },
+    {
+      "wave": "1.29",
+      "worktree_exists": true,
+      "scratch_exists": true,
+      "worktree_head": "f53df8b0811537262f68a8c0c19dc4c132db101c",
+      "expected": "f53df8b0811537262f68a8c0c19dc4c132db101c"
+    },
+    {
+      "wave": "1.30",
+      "worktree_exists": true,
+      "scratch_exists": true,
+      "worktree_head": "b5b3abdbe8aac9ca21f425db454576a438d21222",
+      "expected": "b5b3abdbe8aac9ca21f425db454576a438d21222"
+    },
+    {
+      "wave": "1.31",
+      "worktree_exists": true,
+      "scratch_exists": true,
+      "worktree_head": "4aa8d6e504835cc1f2e3051f24c45c729a0d449a",
+      "expected": "4aa8d6e504835cc1f2e3051f24c45c729a0d449a"
+    },
+    {
+      "wave": "1.32",
+      "worktree_exists": true,
+      "scratch_exists": true,
+      "worktree_head": "772d187160ac6c4d209e24c999a26e42b621c427",
+      "expected": "772d187160ac6c4d209e24c999a26e42b621c427"
+    }
+  ],
+  "limitations": [
+    "Historical source acceptances and review bindings were compared literally,not linguistically re-reviewed.",
+    "No importer,dry-run,installation,simulation or integrated gameplay tests ran;static counts/collisions do not establish target,round or merge safety.",
+    "The normalized observation index retains canonical surfaces;46 additional nested case/spelling hypotheses share already retained keys and are not separate admitted inputs.",
+    "The three Compas variants remain nonreserving unplanned attention only,not approved forms or synthesized owner holds."
+  ],
+  "web_calls": 0,
+  "formal_review_used": false,
+  "source_approvals": 0,
+  "source_edits": false,
+  "word_authorship": false,
+  "source_applied": false,
+  "installed": 0,
+  "player_visible_delta": "0/0/0",
+  "new_wave_started": false,
+  "remote_operations": 0,
+  "safe_to_merge_established": false
+}

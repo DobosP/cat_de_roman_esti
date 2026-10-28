@@ -1,0 +1,247 @@
+{
+  "schema_version": 1,
+  "wave": "1.29",
+  "original_module_sha256": "c94a7065c192b4ff8b61434be462de20ef8e688011d6a3dec2ef4b7814f783f0",
+  "frozen_pool_sha256": "25b69705956515feacca02d675b25d7e1599dff1f85d2d368b280f83ca8b3d23",
+  "final_module_sha256": "554449dd2f49940c7489dacd38feae28ebd5d575630f0e332c2b45515a04efa2",
+  "final_pool_sha256": "8b583c226de1d2fa88dcabb60d61e5bfb07cb5bbd064da2e96fd8c4afda34349",
+  "review_bindings": {
+    "factual": {
+      "reviewer": "factual-v1-29",
+      "path": "docs/reviews/v1-29-familiar-people-and-community/graph-factual-review.json",
+      "sha256": "49d7f9d1ddc0443e34d4c63715c1c425b2adb17afafde02b65ffd9a03415d02a",
+      "module_sha256": "c94a7065c192b4ff8b61434be462de20ef8e688011d6a3dec2ef4b7814f783f0",
+      "frozen_pool_sha256": "25b69705956515feacca02d675b25d7e1599dff1f85d2d368b280f83ca8b3d23",
+      "round": 1,
+      "capture_catalog_path": "/home/dobo/work/_temp/content__v1-29-familiar-people-and-community/factual-web/capture-catalog.json",
+      "capture_catalog_sha256": "20e4df0086aa308c39e252fab80ac491bd225036c4433b65c6f22dcdeaeb12b8"
+    },
+    "quality": {
+      "reviewer": "quality-v1-29",
+      "path": "docs/reviews/v1-29-familiar-people-and-community/graph-quality-review.json",
+      "sha256": "cb1a5e09454272e65e9e64776f038fe108fc3a37ba243d56cec9a2eec1701ec1",
+      "module_sha256": "c94a7065c192b4ff8b61434be462de20ef8e688011d6a3dec2ef4b7814f783f0",
+      "frozen_pool_sha256": "25b69705956515feacca02d675b25d7e1599dff1f85d2d368b280f83ca8b3d23",
+      "round": 1,
+      "capture_catalog_path": "/home/dobo/work/_temp/content__v1-29-familiar-people-and-community/quality-web/capture-catalog.json",
+      "capture_catalog_sha256": "a0ffaacc8492c5681f9119e122fd40bb234a1c03f09e28b13b80c59bf81889b6"
+    }
+  },
+  "formal_whole_batch_rounds": 1,
+  "reviewed_original": {
+    "factual": {
+      "items": 44,
+      "lexical_families": 46,
+      "input_keys": 270,
+      "directed_captions": 190,
+      "complete_original_coverage": true
+    },
+    "quality": {
+      "items": 44,
+      "lexical_families": 46,
+      "input_keys": 270,
+      "directed_captions": 190,
+      "complete_original_coverage": true
+    }
+  },
+  "surviving_source_proposals": {
+    "original_module_sha256": "c94a7065c192b4ff8b61434be462de20ef8e688011d6a3dec2ef4b7814f783f0",
+    "frozen_pool_sha256": "25b69705956515feacca02d675b25d7e1599dff1f85d2d368b280f83ca8b3d23",
+    "formal_rounds": 1,
+    "reviewed_original": {
+      "items": 44,
+      "lexical_families": 46,
+      "input_keys": 270,
+      "directed_claims": 190
+    },
+    "accepted_source_proposals": 43,
+    "held": 10,
+    "new_concepts_proposed": 43,
+    "directed_connections_proposed": 185,
+    "missing_normalized_keys_proposed": 264,
+    "lexical_families": 45,
+    "primary_lexical_families": 43,
+    "verified_exact_selected_sense_synonym_families": 2,
+    "popular_input_families": 1,
+    "regional_input_families": 0,
+    "module_alias_surfaces": 221,
+    "grammatical_inputs_excluding_all45_lemma_heads": 219,
+    "signed_edge_drops": 2,
+    "new_whole_item_holds": 1,
+    "source_applied": false,
+    "installed": 0,
+    "player_visible_delta": "0/0/0",
+    "generic_anchor_scope": "Source taxonomy/association stock only;no A7,C3,D2,target,salience,gameplay approval.",
+    "final_module_sha256": "554449dd2f49940c7489dacd38feae28ebd5d575630f0e332c2b45515a04efa2"
+  },
+  "signed_modifications": [
+    {
+      "reviewer": "factual-v1-29",
+      "report_sha256": "49d7f9d1ddc0443e34d4c63715c1c425b2adb17afafde02b65ffd9a03415d02a",
+      "item_id": "v129-vatman",
+      "kind": "drop_edge",
+      "field": "EDGES[(n_v1_29_vatman,n_v24_transport_terminals_statie,related_to)]",
+      "before": {
+        "src": "n_v1_29_vatman",
+        "dst": "n_v24_transport_terminals_statie",
+        "relation": "related_to",
+        "label_ro": "poate opri tramvaiul în stațiile de pe traseu",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "after": null,
+      "edge_key": {
+        "src": "n_v1_29_vatman",
+        "dst": "n_v24_transport_terminals_statie",
+        "relation": "related_to"
+      },
+      "reason": "The report describes station stops for a mixed vehicle fleet, not specifically this tram-driver/station mapping. Drop the disclosed inference rather than promote it.",
+      "sources": [
+        "https://stbsa.ro/docpdf/RAPORT%20DE%20ACTIVITATE%202018.pdf",
+        "https://ro.wiktionary.org/wiki/vatman",
+        "https://dexonline.ro/definitie/vatman/json"
+      ],
+      "fresh_capture_refs": [
+        {
+          "id": "F068",
+          "reviewer": "factual-v1-29",
+          "url": "https://www.stb.ro/docpdf/RAPORT%20DE%20ACTIVITATE%202018.pdf",
+          "initial_url": "https://stbsa.ro/docpdf/RAPORT%20DE%20ACTIVITATE%202018.pdf",
+          "sha256": "4ccbcbd76cd06f696215afebbc692462408dcd047479ab0646eee5d30897299d",
+          "capture_path": "/home/dobo/work/_temp/content__v1-29-familiar-people-and-community/factual-web/bodies/4ccbcbd76cd06f696215afebbc692462408dcd047479ab0646eee5d30897299d.bin",
+          "fresh_request": true
+        },
+        {
+          "id": "F066",
+          "reviewer": "factual-v1-29",
+          "url": "https://ro.wiktionary.org/wiki/vatman",
+          "initial_url": "https://ro.wiktionary.org/wiki/vatman",
+          "sha256": "fd8b802b98075b93b840753fb9fea10b494171e871b872c25cce839817eea5ed",
+          "capture_path": "/home/dobo/work/_temp/content__v1-29-familiar-people-and-community/factual-web/bodies/fd8b802b98075b93b840753fb9fea10b494171e871b872c25cce839817eea5ed.bin",
+          "fresh_request": true
+        },
+        {
+          "id": "F064",
+          "reviewer": "factual-v1-29",
+          "url": "https://dexonline.ro/definitie/vatman/json",
+          "initial_url": "https://dexonline.ro/definitie/vatman/json",
+          "sha256": "dbc43307a57c52916bc08519dfb367a0c707d10a123fc3d9a4bf41bf54d5a9ff",
+          "capture_path": "/home/dobo/work/_temp/content__v1-29-familiar-people-and-community/factual-web/bodies/dbc43307a57c52916bc08519dfb367a0c707d10a123fc3d9a4bf41bf54d5a9ff.bin",
+          "fresh_request": true
+        }
+      ],
+      "live_endpoint": {
+        "id": "n_v24_transport_terminals_statie",
+        "description": "Concept cotidian din grupul «puncte de plecare și sosire»: Stație."
+      }
+    },
+    {
+      "reviewer": "factual-v1-29",
+      "report_sha256": "49d7f9d1ddc0443e34d4c63715c1c425b2adb17afafde02b65ffd9a03415d02a",
+      "item_id": "v129-vatman",
+      "kind": "hold_complete_item",
+      "field": "proposed_item_disposition",
+      "before": "proposed_new_shared_concept_with_four_links",
+      "after": "held_not_in_surviving_module",
+      "reason": "After dropping the unsupported station mapping only three predeclared neighbours remain. Hold the whole concept/form family and all its proposal edges; no fourth endpoint or partial admission. The noun and forms themselves are factually sound.",
+      "sources": [
+        "https://stbsa.ro/docpdf/RAPORT%20DE%20ACTIVITATE%202018.pdf",
+        "https://ro.wiktionary.org/wiki/vatman",
+        "https://dexonline.ro/definitie/vatman/json"
+      ],
+      "fresh_capture_refs": [
+        {
+          "id": "F068",
+          "reviewer": "factual-v1-29",
+          "url": "https://www.stb.ro/docpdf/RAPORT%20DE%20ACTIVITATE%202018.pdf",
+          "initial_url": "https://stbsa.ro/docpdf/RAPORT%20DE%20ACTIVITATE%202018.pdf",
+          "sha256": "4ccbcbd76cd06f696215afebbc692462408dcd047479ab0646eee5d30897299d",
+          "capture_path": "/home/dobo/work/_temp/content__v1-29-familiar-people-and-community/factual-web/bodies/4ccbcbd76cd06f696215afebbc692462408dcd047479ab0646eee5d30897299d.bin",
+          "fresh_request": true
+        },
+        {
+          "id": "F066",
+          "reviewer": "factual-v1-29",
+          "url": "https://ro.wiktionary.org/wiki/vatman",
+          "initial_url": "https://ro.wiktionary.org/wiki/vatman",
+          "sha256": "fd8b802b98075b93b840753fb9fea10b494171e871b872c25cce839817eea5ed",
+          "capture_path": "/home/dobo/work/_temp/content__v1-29-familiar-people-and-community/factual-web/bodies/fd8b802b98075b93b840753fb9fea10b494171e871b872c25cce839817eea5ed.bin",
+          "fresh_request": true
+        },
+        {
+          "id": "F064",
+          "reviewer": "factual-v1-29",
+          "url": "https://dexonline.ro/definitie/vatman/json",
+          "initial_url": "https://dexonline.ro/definitie/vatman/json",
+          "sha256": "dbc43307a57c52916bc08519dfb367a0c707d10a123fc3d9a4bf41bf54d5a9ff",
+          "capture_path": "/home/dobo/work/_temp/content__v1-29-familiar-people-and-community/factual-web/bodies/dbc43307a57c52916bc08519dfb367a0c707d10a123fc3d9a4bf41bf54d5a9ff.bin",
+          "fresh_request": true
+        }
+      ]
+    },
+    {
+      "reviewer": "factual-v1-29",
+      "report_sha256": "49d7f9d1ddc0443e34d4c63715c1c425b2adb17afafde02b65ffd9a03415d02a",
+      "item_id": "v129-brutar",
+      "kind": "drop_edge",
+      "field": "EDGES[(n_v1_29_brutar,n_v84_food_cuptor,related_to)]",
+      "before": {
+        "src": "n_v1_29_brutar",
+        "dst": "n_v84_food_cuptor",
+        "relation": "related_to",
+        "label_ro": "coace pâine în cuptor",
+        "strength": 0.75,
+        "is_distractor": 0,
+        "bidirectional": 0
+      },
+      "after": null,
+      "edge_key": {
+        "src": "n_v1_29_brutar",
+        "dst": "n_v84_food_cuptor",
+        "relation": "related_to"
+      },
+      "reason": "The inspected curriculum establishes specialized bakery ovens, not specifically the frozen kitchen-oven endpoint. Drop this mapping without broadening that owner.",
+      "sources": [
+        "https://www.alegetidrumul.ro/uploads/calificari/124/Programe%20scolare/CRR_stagii%20720_Brutar-patiser%20prep%20prod%20fainoase.pdf"
+      ],
+      "fresh_capture_refs": [
+        {
+          "id": "F123",
+          "reviewer": "factual-v1-29",
+          "url": "https://www.alegetidrumul.ro/uploads/calificari/124/Programe%20scolare/CRR_stagii%20720_Brutar-patiser%20prep%20prod%20fainoase.pdf",
+          "initial_url": "https://www.alegetidrumul.ro/uploads/calificari/124/Programe%20scolare/CRR_stagii%20720_Brutar-patiser%20prep%20prod%20fainoase.pdf",
+          "sha256": "83cfddb883ad25d1980265b401dba28e7a6580cbd252341e676fb8c08401bf44",
+          "capture_path": "/home/dobo/work/_temp/content__v1-29-familiar-people-and-community/factual-web/bodies/83cfddb883ad25d1980265b401dba28e7a6580cbd252341e676fb8c08401bf44.bin",
+          "fresh_request": true
+        }
+      ],
+      "live_endpoint": {
+        "id": "n_v84_food_cuptor",
+        "description": "Aparat sau instalație de bucătărie folosită la coacerea alimentelor."
+      }
+    }
+  ],
+  "application_rule": "Apply the conservative union of both signed reviews. Quality requested no changes;factual drops control. No replacement edges,forms,categories or metadata rewriting. Vatman noun/forms remain valid observations,not rejected.",
+  "preservation": {
+    "prior_nine_held_records_exactly_unchanged": true,
+    "author_clocks_requests_identity_and_pre_screened_forms_unchanged": true,
+    "source_index_path": "/home/dobo/work/_temp/content__v1-29-familiar-people-and-community/step2-tick5-source-index.json",
+    "source_index_sha256": "23951ec20fdbac71184da33453d1a357579a7b7f5c156ff42965922d9256c507",
+    "author_captured_files_retained_and_hash_verified": 721,
+    "protected_unlanded_refs_exact": 15,
+    "main_clean": true,
+    "ownership_policy_sha256": {
+      "go-backend/internal/content/bundled.json": "f6d983f1ab2cbb7852e8583411eaecd2048fdb5b5da08099129d7e4ff471344c",
+      "scripts/contexto_common_words_v72_data.py": "f1c6c3fb9fdbc6a0d6d85881aa04d7fd86df9159ef00ff6bac23ac2450a523ee",
+      "scripts/weather_and_landscape_v1_13_data.py": "01589eb1721c91544fbc94325c3e16cc2440ed1dada7ab8ceeb0886ad6476279",
+      "go-backend/internal/graph/service.go": "a9cc60e321e905293cee6fa49265281fc5db70a78c669c7ba66315933810002e"
+    }
+  },
+  "source_applied": false,
+  "installed": 0,
+  "target_approval": false,
+  "salience_approval": false,
+  "gameplay_approval": false,
+  "player_visible_delta": "0/0/0"
+}

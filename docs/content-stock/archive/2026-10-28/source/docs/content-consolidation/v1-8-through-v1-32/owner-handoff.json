@@ -1,0 +1,107 @@
+{
+  "status": "completed_unlanded_owner_review_later",
+  "latest_local_main": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+  "bundle_sha256": "f6d983f1ab2cbb7852e8583411eaecd2048fdb5b5da08099129d7e4ff471344c",
+  "analysis_branch": "docs/content-consolidation-v1-8-to-v1-32",
+  "inventory_commit": "b187f5b308debd318da5df3d44d88d5b57071020",
+  "V1_32_handoff_commit": "772d187160ac6c4d209e24c999a26e42b621c427",
+  "canonical_waves": 25,
+  "source_records": 1364,
+  "source_states": {
+    "integrated": 218,
+    "held": 308,
+    "accepted": 837,
+    "rejected": 1
+  },
+  "pending_source_stock": {
+    "pending_source_accepted_records": 837,
+    "pending_new_concepts": 709,
+    "pending_existing_owner_families": 128,
+    "pending_existing_unique_owners": 117,
+    "missing_existing_owner_normalized_inputs": 490,
+    "missing_new_concept_normalized_inputs": 4013,
+    "missing_canonical_display_label_only_keys": [
+      {
+        "record_id": "v114-liliac",
+        "key": "liliac (mamifer)"
+      },
+      {
+        "record_id": "v114-somn",
+        "key": "somn (peste)"
+      },
+      {
+        "record_id": "v115-cablu",
+        "key": "cablu (electric)"
+      }
+    ],
+    "pending_unique_directed_edges": 2844,
+    "pending_cald_proxy_key_changes": 103,
+    "current_foreign_owner_collisions": 0,
+    "pending_cross_owner_collisions": 0,
+    "source_graph_nodes_below_numeric_incoming5": 664,
+    "source_graph_nodes_atleast_numeric_incoming5": 45,
+    "existing_input_families_by_lane": {
+      "selected_sense_lexical_or_qualified_input": 66,
+      "existing_lemma_morphology": 62
+    },
+    "existing_input_families_with_snapshot_dependencies": 40
+  },
+  "recommended_first_candidate_scope": {
+    "families": [
+      "Stea",
+      "Picior",
+      "Trotuar",
+      "Stradă",
+      "Tren",
+      "Tramvai",
+      "Gară",
+      "Stație",
+      "Aeroport",
+      "Camion"
+    ],
+    "families_count": 10,
+    "missing_forms": 19,
+    "integration_executed": false,
+    "integration_safety_qualified": false
+  },
+  "preserved_source_closures": 19,
+  "final_audits": {
+    "factual": {
+      "path": "final-factual-audit.json",
+      "sha256": "4ac3a62e9ad4992408393995ba50ec357e85808d49b579d0596e9afc9ec5f20d",
+      "status": "PASS",
+      "scope": "Cached/static consolidation audit only;no source approval or integration qualification."
+    },
+    "quality": {
+      "path": "final-quality-audit.json",
+      "sha256": "79be38d02320795b43653bf86416f30b432e5351eb388d2e2b723ae3006a2aae",
+      "status": "PASS",
+      "scope": "Cached/static consolidation audit only;no source approval or integration qualification."
+    }
+  },
+  "artifact_sha256": {
+    "assessment.md": "3ea071c9b2e6861d771cf1f31cf52c2c4b849fc0b2297a5bcac3727852dc9812",
+    "candidate-inputs.md": "fc1efc616a136291873eccf3e9b76a4c03483f044a402b8abbc1f24c6d43525d",
+    "connections.json": "fdb6a0fffc61210601146ccab438ee142ffb572378b452b948d8fa5f2fd10912",
+    "final-factual-audit.json": "4ac3a62e9ad4992408393995ba50ec357e85808d49b579d0596e9afc9ec5f20d",
+    "final-quality-audit.json": "79be38d02320795b43653bf86416f30b432e5351eb388d2e2b723ae3006a2aae",
+    "forms.json": "3bf536d8a06238668bf38e3f8fd99060725f08b001436cc9f36ae02391fa9bb3",
+    "game-impact.json": "766e98a9d42991f0f08baa260249c44904b9521e1ccedc89a54872d0ce6566c6",
+    "improved-loop-prompt.txt": "2c21dfcfe940d9e7655eb679658aec889bdcaaa7ea40eb4ba0dc5913c76c2738",
+    "inventory.json": "c74fa54938d973bdbf08932edf62253a47dacb74b36c3efc0ae8d965362ca0b4",
+    "main-lexicon.json": "7c5a4d7d2ce98bb6932b2491850fcf3621d12d5faf992cdb9cef7aa5950bd550",
+    "manifest.json": "3cd307383fca8f5053db3b8d9c599f9be14ff811ee6582e04990a491241ed233",
+    "schema-audit.json": "1d6f6ac63ae76f4f2bcdb056f9ea558387c4c878d08167957be9d815a1e3164d",
+    "word-index.md": "f88785bcc312a40473d3b5d056e2b5ca4c57d928ed679c1819a1f62a46ef895a"
+  },
+  "source_application_in_this_task": false,
+  "installed_by_this_task": 0,
+  "player_visible_delta": "0/0/0",
+  "merge_or_remote_operations": 0,
+  "new_wave_started": false,
+  "proposed_prompt_activated": false,
+  "next_wave": null,
+  "next_action": "Owner review of the assessment and inactive proposed loop;no automatic discovery or installation.",
+  "preservation": "Every original baseline,owner hold,unmerged source packet and closure retained;V1.14 exception remains declined;V1.7/retired loop remain parked.",
+  "qualification_limit": "All source candidates remain conditional on later authorized exact integration and existing game-specific qualification. Static ownership/code consistency is not safe-to-merge evidence."
+}

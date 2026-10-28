@@ -1,0 +1,1230 @@
+{
+  "schema": "content-consolidation-current-stock-v1",
+  "observed_at_utc": "2026-10-20T19:36:02.624127+00:00",
+  "scope": "Active V1.8–V1.42 source stock; exact own-wave closures counted once; already-serving history retained.",
+  "owner_adopted_loop": "2026-10-18 source-only adoption; 2026-10-19 optimize/resume, then owner clarified “Keep the cache warm; continue automatically.” Dispatch/cadence changed, source gates and landing restrictions remain.",
+  "summary": {
+    "pending_source_accepted_records": 1083,
+    "pending_new_concepts": 855,
+    "pending_existing_owner_families": 228,
+    "pending_existing_unique_owners": 201,
+    "missing_payload_owner_key_pairs": 5737,
+    "missing_unique_normalized_payload_keys": 5737,
+    "missing_ordinary_source_form_keys": 5734,
+    "missing_canonical_display_label_only_keys": 3,
+    "missing_new_concept_normalized_inputs": 4807,
+    "missing_existing_owner_normalized_inputs": 930,
+    "pending_unique_directed_edges": 3426,
+    "pending_cald_proxy_key_changes": 117,
+    "current_foreign_owner_collisions": 0,
+    "pending_cross_owner_collisions": 0,
+    "source_graph_nodes_below_numeric_incoming5": 810,
+    "source_graph_nodes_atleast_numeric_incoming5": 45,
+    "source_graph_predecessor_distribution": {
+      "0": 386,
+      "1": 36,
+      "2": 25,
+      "3": 168,
+      "4": 195,
+      "5": 32,
+      "6": 13
+    },
+    "existing_input_families_by_lane": {
+      "selected_sense_lexical_or_qualified_input": 140,
+      "existing_lemma_morphology": 88
+    },
+    "existing_input_missing_keys_by_lane": {
+      "existing_lemma_morphology": 164,
+      "selected_sense_lexical_or_qualified_input": 766
+    },
+    "existing_input_families_with_snapshot_dependencies": 49,
+    "all_source_records": 1741,
+    "all_source_states": {
+      "integrated": 218,
+      "held": 439,
+      "accepted": 1083,
+      "rejected": 1
+    },
+    "pending_held_records": 370,
+    "source_packets": 35,
+    "protected_unlanded_closures": 29,
+    "new_source_approvals_by_consolidation": 0,
+    "installed_by_this_work": 0,
+    "new_targets_approved_by_this_work": 0,
+    "new_playable_rounds": 0,
+    "player_visible_delta": "0/0/0",
+    "missing_source_reviewed_dictionary_input_keys": 5734,
+    "missing_explicit_component_composed_phrase_keys": 6,
+    "new_packet_input_breakdown": {
+      "normalized_payload_keys": 153,
+      "ordinary_normalized_payload_keys": 153,
+      "qualified_compound_typed_phrase_keys": 0,
+      "existing_owner_families_by_classification": {
+        "ordinary_morphology_of_existing_selected_lexeme": 11,
+        "ordinary_morphology_of_existing_feminine_lexeme": 1,
+        "ordinary_NA_GD_morphology_of_existing_lemma": 6,
+        "ordinary_article_variant_of_existing_articulated_label": 1,
+        "ordinary_number_variant_of_existing_plural_label": 2
+      },
+      "existing_owner_keys_by_classification": {
+        "ordinary_morphology_of_existing_selected_lexeme": 51,
+        "ordinary_morphology_of_existing_feminine_lexeme": 3,
+        "ordinary_NA_GD_morphology_of_existing_lemma": 17,
+        "ordinary_article_variant_of_existing_articulated_label": 4,
+        "ordinary_number_variant_of_existing_plural_label": 6
+      }
+    },
+    "legacy_ordinary_source_form_count_scope": "The legacy missing_ordinary_source_form_keys/payload_class ordinary_source_reviewed_key groups reviewed dictionary inputs including qualified compounds. It is not a single-headword-only count. Original historical classifications are preserved; exact ordinary/qualified subdivisions are recorded in each reviewed packet, and explicit component-composition counts are partial historical coverage, not a new approval."
+  },
+  "canonical_layers": [
+    {
+      "scope": "V1.8–V1.32 historical canonical records, including integrated and held stock",
+      "source_analysis_commit": "83382590d7b40ec51a5d08998fe653cfb71f920c",
+      "inventory": {
+        "path": "inventory.json",
+        "sha256": "c74fa54938d973bdbf08932edf62253a47dacb74b36c3efc0ae8d965362ca0b4",
+        "records_key": "records"
+      },
+      "forms": {
+        "path": "forms.json",
+        "sha256": "3bf536d8a06238668bf38e3f8fd99060725f08b001436cc9f36ae02391fa9bb3",
+        "forms_key": "forms"
+      },
+      "connections": {
+        "path": "connections.json",
+        "sha256": "fdb6a0fffc61210601146ccab438ee142ffb572378b452b948d8fa5f2fd10912",
+        "edges_key": "final_source_edges"
+      },
+      "manifest": {
+        "path": "manifest.json",
+        "sha256": "3cd307383fca8f5053db3b8d9c599f9be14ff811ee6582e04990a491241ed233"
+      }
+    },
+    {
+      "scope": "V1.33 exact own-wave source closure only",
+      "path": "continuations/v1-33.json",
+      "sha256": "f028e9ffddf51e64f9e67982468ce7fb5571530f03a3c92f23d3537b3b19941a",
+      "records_key": "records",
+      "forms_key": "forms",
+      "edges_key": "final_source_edges",
+      "source_ref": "76bcda234d90ccec450fcd30835531bfab41e705"
+    },
+    {
+      "scope": "V1.34 exact own-wave reviewed source closure only",
+      "path": "continuations/v1-34.json",
+      "sha256": "5dc5534817a604e580900e5c0bb07494520ea05056fa1398d5f658b7f5d5cff5",
+      "records_key": "records",
+      "forms_key": "forms",
+      "edges_key": "final_source_edges",
+      "source_ref": "535f1ff653df958239190554dd88ed3ce9885db4"
+    },
+    {
+      "scope": "V1.35 exact own-wave reviewed source closure only",
+      "path": "continuations/v1-35.json",
+      "sha256": "0b2e4a41f5bb9c8aa52ba395783801329e4ea207d44021bb58f6f65a58f88788",
+      "records_key": "records",
+      "forms_key": "forms",
+      "edges_key": "final_source_edges",
+      "source_ref": "b7d18c34cd3aae97092c2b9687976c0d8a037ca7"
+    },
+    {
+      "scope": "V1.36 exact own-wave reviewed source closure only",
+      "path": "continuations/v1-36.json",
+      "sha256": "b8892dc1c47d553f4d8275c4a1c3e69f2306321034cc0fdc8215fc11f36a6794",
+      "records_key": "records",
+      "forms_key": "forms",
+      "edges_key": "final_source_edges",
+      "source_ref": "868173b62921373d805171d26312501afbbed7a9"
+    },
+    {
+      "scope": "V1.37 exact own-wave reviewed source closure only",
+      "path": "continuations/v1-37.json",
+      "sha256": "0680817cfb3d4d6f0d228611d618a05989bee2106d2faf949b5642718436ab4d",
+      "records_key": "records",
+      "forms_key": "forms",
+      "edges_key": "final_source_edges",
+      "source_ref": "dc61975c9106d1666e25178c43dc1d085f6f0282"
+    },
+    {
+      "scope": "V1.38 exact own-wave reviewed source closure only",
+      "path": "continuations/v1-38.json",
+      "sha256": "0907c26d0a21b3aaf2e034787145dc2e960317fd76d0ed04bde358f96a0e6a9a",
+      "records_key": "records",
+      "forms_key": "forms",
+      "edges_key": "final_source_edges",
+      "source_ref": "0c53e69813cc7d068e68d07e5dfb27a9565b78ff"
+    },
+    {
+      "scope": "V1.39 exact own-wave reviewed source closure only",
+      "path": "continuations/v1-39.json",
+      "sha256": "0b89ffd7cc1a3c8108516f0fad98ede9f9231804fa52eb3459c64f864f7a981e",
+      "records_key": "records",
+      "forms_key": "forms",
+      "edges_key": "final_source_edges",
+      "source_ref": "b4f399bbab705039743dd7ce49cebcb85a517cb2"
+    },
+    {
+      "scope": "V1.40 exact own-wave reviewed source closure only",
+      "path": "continuations/v1-40.json",
+      "sha256": "ccd5ec69f40c7b37cfc3951822260414d0c35216c11ec19aca75da51bf6dc4f9",
+      "records_key": "records",
+      "forms_key": "forms",
+      "edges_key": "final_source_edges",
+      "source_ref": "7760e0742f6ee953d428ceb4194a53e33a9b1f80"
+    },
+    {
+      "scope": "V1.41 exact own-wave reviewed source closure only",
+      "path": "continuations/v1-41.json",
+      "sha256": "1775f45ebfef724f357dea85678e8ec9e024d78ce0d97c7b6c6131a09ae37b4b",
+      "records_key": "records",
+      "forms_key": "forms",
+      "edges_key": "final_source_edges",
+      "source_ref": "19667bf430d1d6af9409bc2ea1c5e60be0b67aab"
+    },
+    {
+      "scope": "V1.42 exact own-wave reviewed source closure only",
+      "path": "continuations/v1-42.json",
+      "sha256": "b6204202a5c62b6ba7c628e3ff436b5c938ee43e677dcf22c4d0c086fc1bf953",
+      "records_key": "records",
+      "forms_key": "forms",
+      "edges_key": "final_source_edges",
+      "source_ref": "d331f6ad79696019b6882d53035572f3da4c7cd1"
+    }
+  ],
+  "current_serving_lexicon": {
+    "path": "main-lexicon.json",
+    "sha256": "7c5a4d7d2ce98bb6932b2491850fcf3621d12d5faf992cdb9cef7aa5950bd550",
+    "counts": {
+      "nodes": 2584,
+      "edges": 10141,
+      "normalized_keys": 14685,
+      "discovery_concepts": 252,
+      "cald_projection_terms": 464
+    },
+    "authority_bytes_still_match_latest_bases": true
+  },
+  "current_primary_feature": {
+    "branch": "feat/gui-cat-m3",
+    "HEAD": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+    "worktree": "/home/dobo/work/_worktrees/cat_de_roman_esti/feat__gui-cat-m3",
+    "actual_working_binding": "current-feature-working-baseline.json",
+    "actual_working_binding_sha256": "5d0eb5bf28d8e59d93164fd5afe4887657cfe2087cbefd971ca033b176f6b5e8",
+    "dirty_paths": 0,
+    "working_fingerprint_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "porcelain_z_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "WIP_copied_or_executed": false,
+    "current_relevant_sources": 59,
+    "adjacent_dependencies_bound": 7,
+    "relevant_working_bytes_index_sha256": "e8e38568b70e19d5d08ef3d28beee8d9b98bd5d8d2645632f278dfaebdb93754",
+    "feature_observation_note": "Actual designated feature working bytes remain PRIMARY; local main is separately bound. Exact hash equality does not prove GUI/runtime behavior or authorize integration.",
+    "previous_current_feature_binding": {
+      "canonical_ref": "fc65926efcc90888e772d2c341d2d116958637d6",
+      "path": "current-feature-working-baseline.json",
+      "sha256": "5d0eb5bf28d8e59d93164fd5afe4887657cfe2087cbefd971ca033b176f6b5e8",
+      "retained_prior_view_path": "/home/dobo/work/_worktrees/cat_de_roman_esti/docs__content-consolidation-v1-8-to-v1-32/docs/content-consolidation/v1-8-through-v1-32/current-feature-working-baseline.json"
+    },
+    "source_only_current_interface_inspections": {
+      "exact_byte_reuse_of_review_and_handoff": true,
+      "current_observation": {
+        "path": "/home/dobo/work/_temp/content__v1-42-familiar-food-materials-and-selected-inputs/consolidation/feature-working-observation.json",
+        "sha256": "5badec0bb44ce6d6016ca2da6f31bc0170b8fdbfd383467c0d0e5acfccb87b0c"
+      },
+      "source_handoff_binding": {
+        "path": "/home/dobo/work/_temp/content__v1-42-familiar-food-materials-and-selected-inputs/handoff/feature-working-handoff.json",
+        "sha256": "9f4616ff8496f65c20ea0588765d16a52ae36322d57954946a17cd6175d796ca"
+      },
+      "prior_inspections_reference": {
+        "canonical_ref": "fc65926efcc90888e772d2c341d2d116958637d6",
+        "path": "current-stock.json",
+        "field": "current_primary_feature.source_only_current_interface_inspections",
+        "sha256": "2f24e2b016c4c3ea2ef30e4b9f1f18ba0b23a437215ceb4b6478bf8d1bbd4e0a"
+      },
+      "latest_scope_note": "Exact-byte reuse remains scoped to unchanged designated primary. Secondary now also has outside-index core-v1.13 package and Go1.27.3 runner/module selections; retained index equality cannot certify those dependencies. See chained secondary_main_observation."
+    },
+    "claims": "Temporal ownership/static input-contract observation only; no permanent baseline or release/integration certificate."
+  },
+  "secondary_latest_local_main": "e531358c94f946e8bb575eb4f68fb391160dd6ac",
+  "bundle_sha256": "f6d983f1ab2cbb7852e8583411eaecd2048fdb5b5da08099129d7e4ff471344c",
+  "procedure_rev": "17b97a2b",
+  "ownership_policy_sha256": {
+    "scripts/contexto_common_words_v72_data.py": "f1c6c3fb9fdbc6a0d6d85881aa04d7fd86df9159ef00ff6bac23ac2450a523ee",
+    "scripts/weather_and_landscape_v1_13_data.py": "01589eb1721c91544fbc94325c3e16cc2440ed1dada7ab8ceeb0886ad6476279",
+    "go-backend/internal/graph/service.go": "a9cc60e321e905293cee6fa49265281fc5db70a78c669c7ba66315933810002e"
+  },
+  "content_authority_files_rechecked": 244,
+  "historical_baseline_files_preserved": {
+    "feature-working-assessment.md": "52538e599412f26e10485b65fbea1ef91791d34d91cfa2b0ea00893c964b1857",
+    "improved-loop-prompt-feature.txt": "e18185d13fb8cc81382a51e8f9d0da96c1b58d22e49bc0cb97b98b92a14933cb",
+    "assessment.md": "3ea071c9b2e6861d771cf1f31cf52c2c4b849fc0b2297a5bcac3727852dc9812",
+    "feature-final-quality-audit.json": "15e52188bb95d5ae6c8e9dfa870841545c41964dc5f899160efd5f2b118706ae",
+    "owner-handoff.json": "926ed40a9fcf49b8b81de2cca7b298bb47d5b7b226521895540404922024269d",
+    "feature-working-ownership-findings.json": "5a63c06ad5c3a4752b3352b00473783b0a8a4da96515e2dd251e2781e03e700e",
+    "feature-final-factual-audit.json": "cb0ce6f3b9d4d1e6e745f68d92b7fdd4b742e7ee872c7e2caec40c053e8eebf4",
+    "feature-owner-handoff.json": "d41c6d07b5b0e0b101ace9614c3e67dbb4b06638297d88c7be33dff1da7c8e27",
+    "candidate-inputs.md": "fc1efc616a136291873eccf3e9b76a4c03483f044a402b8abbc1f24c6d43525d",
+    "game-impact.json": "766e98a9d42991f0f08baa260249c44904b9521e1ccedc89a54872d0ce6566c6",
+    "forms.json": "3bf536d8a06238668bf38e3f8fd99060725f08b001436cc9f36ae02391fa9bb3",
+    "final-quality-audit.json": "79be38d02320795b43653bf86416f30b432e5351eb388d2e2b723ae3006a2aae",
+    "schema-audit.json": "1d6f6ac63ae76f4f2bcdb056f9ea558387c4c878d08167957be9d815a1e3164d",
+    "improved-loop-prompt.txt": "2c21dfcfe940d9e7655eb679658aec889bdcaaa7ea40eb4ba0dc5913c76c2738",
+    "feature-working-impact-findings.json": "799a913854ab6b481d368ad29b3d84459907dd9f372f6056314046d99dc8d969",
+    "word-index.md": "f88785bcc312a40473d3b5d056e2b5ca4c57d928ed679c1819a1f62a46ef895a",
+    "inventory.json": "c74fa54938d973bdbf08932edf62253a47dacb74b36c3efc0ae8d965362ca0b4",
+    "manifest.json": "3cd307383fca8f5053db3b8d9c599f9be14ff811ee6582e04990a491241ed233",
+    "connections.json": "fdb6a0fffc61210601146ccab438ee142ffb572378b452b948d8fa5f2fd10912",
+    "final-factual-audit.json": "4ac3a62e9ad4992408393995ba50ec357e85808d49b579d0596e9afc9ec5f20d",
+    "main-lexicon.json": "7c5a4d7d2ce98bb6932b2491850fcf3621d12d5faf992cdb9cef7aa5950bd550",
+    "feature-working-baseline.json": "39aa4423daff5e9ea30ebc89f14493efda7ab11f7838d2555a091168003e4ea4"
+  },
+  "protected_source_refs": [
+    {
+      "branch": "content/v1-14-animals-and-habitats",
+      "commit": "4b634cab38cbce90ac6eb02e0907578335208c69",
+      "wave": "1.14"
+    },
+    {
+      "branch": "content/v1-15-home-school-words",
+      "commit": "2ace3df01d4871fa1990feadd4b485d6be496d81",
+      "wave": "1.15"
+    },
+    {
+      "branch": "content/v1-16-travel-and-street-words",
+      "commit": "ecb50b463d8d1f0300d435126f934fe90b29fe5b",
+      "wave": "1.16"
+    },
+    {
+      "branch": "content/v1-17-garden-and-kitchen-words",
+      "commit": "df2fd5e5196cb1584cb8e330adbc2b71b855fab8",
+      "wave": "1.17"
+    },
+    {
+      "branch": "content/v1-18-body-and-everyday-care",
+      "commit": "69ebb9f3631ac41f4ac80c76c9d6795c29b78fa8",
+      "wave": "1.18"
+    },
+    {
+      "branch": "content/v1-19-tools-and-crafts",
+      "commit": "5159b0417d4f62b46f28b3a4a37dabf9c07bc389",
+      "wave": "1.19"
+    },
+    {
+      "branch": "content/v1-20-school-and-hobbies",
+      "commit": "bc0ed56c826b9bab0c0f9408ff8fd1a36a539f94",
+      "wave": "1.20"
+    },
+    {
+      "branch": "content/v1-21-clothing-and-household-storage",
+      "commit": "be42df68abfbf2a40e879cbe53c671b70d69c6d0",
+      "wave": "1.21"
+    },
+    {
+      "branch": "content/v1-22-home-fixtures-and-materials",
+      "commit": "c10e4c2394ae82dae4f7bd22f56f91ca854f26ba",
+      "wave": "1.22"
+    },
+    {
+      "branch": "content/v1-23-pantry-and-tableware",
+      "commit": "489504300c8ea2c323de7f4e4e497eeb157947e3",
+      "wave": "1.23"
+    },
+    {
+      "branch": "content/v1-24-familiar-foods-and-inputs",
+      "commit": "53a090735baea74bc8c99470070eaf718fe4cc38",
+      "wave": "1.24"
+    },
+    {
+      "branch": "content/v1-25-common-places-and-objects",
+      "commit": "b0de8a38abfaf7366418f5c79df6cb74c224920d",
+      "wave": "1.25"
+    },
+    {
+      "branch": "content/v1-26-school-play-and-devices",
+      "commit": "c7f45781d071a9b784357f8ef7b10f259d6f5121",
+      "wave": "1.26"
+    },
+    {
+      "branch": "content/v1-27-familiar-foods-and-plants",
+      "commit": "93ff482efe7f0c3ce906ce735726f8a3cf8a9649",
+      "wave": "1.27"
+    },
+    {
+      "branch": "content/v1-28-familiar-animals-and-outdoor-words",
+      "commit": "6874e9f65e2e8af8debbee9edbf6625c570d9d52",
+      "wave": "1.28"
+    },
+    {
+      "wave": "1.29",
+      "branch": "content/v1-29-familiar-people-and-community",
+      "commit": "f53df8b0811537262f68a8c0c19dc4c132db101c"
+    },
+    {
+      "wave": "1.30",
+      "branch": "content/v1-30-familiar-shapes-and-school-measures",
+      "commit": "b5b3abdbe8aac9ca21f425db454576a438d21222"
+    },
+    {
+      "wave": "1.31",
+      "branch": "content/v1-31-familiar-music-and-sport-objects",
+      "commit": "4aa8d6e504835cc1f2e3051f24c45c729a0d449a"
+    },
+    {
+      "wave": "1.32",
+      "branch": "content/v1-32-familiar-water-weather-and-shore",
+      "commit": "772d187160ac6c4d209e24c999a26e42b621c427"
+    },
+    {
+      "wave": "1.33",
+      "branch": "content/v1-33-familiar-celebration-and-traditional-objects",
+      "commit": "76bcda234d90ccec450fcd30835531bfab41e705"
+    },
+    {
+      "wave": "1.34",
+      "branch": "content/v1-34-familiar-service-and-journey-objects",
+      "commit": "535f1ff653df958239190554dd88ed3ce9885db4"
+    },
+    {
+      "wave": "1.35",
+      "branch": "content/v1-35-familiar-nature-and-practical-objects",
+      "commit": "b7d18c34cd3aae97092c2b9687976c0d8a037ca7"
+    },
+    {
+      "wave": "1.36",
+      "branch": "content/v1-36-familiar-body-household-and-school",
+      "commit": "868173b62921373d805171d26312501afbbed7a9"
+    },
+    {
+      "wave": "1.37",
+      "branch": "content/v1-37-familiar-rural-home-and-school",
+      "commit": "dc61975c9106d1666e25178c43dc1d085f6f0282"
+    },
+    {
+      "wave": "1.38",
+      "branch": "content/v1-38-familiar-diminutive-and-nature-inputs",
+      "commit": "0c53e69813cc7d068e68d07e5dfb27a9565b78ff"
+    },
+    {
+      "wave": "1.39",
+      "branch": "content/v1-39-familiar-clothing-home-and-family-inputs",
+      "commit": "b4f399bbab705039743dd7ce49cebcb85a517cb2"
+    },
+    {
+      "wave": "1.40",
+      "branch": "content/v1-40-familiar-nature-school-and-ordinary-inputs",
+      "commit": "7760e0742f6ee953d428ceb4194a53e33a9b1f80"
+    },
+    {
+      "wave": "1.41",
+      "branch": "content/v1-41-school-objects-language-and-common-inputs",
+      "commit": "19667bf430d1d6af9409bc2ea1c5e60be0b67aab"
+    },
+    {
+      "wave": "1.42",
+      "branch": "content/v1-42-familiar-food-materials-and-selected-inputs",
+      "commit": "d331f6ad79696019b6882d53035572f3da4c7cd1"
+    }
+  ],
+  "source_packet_counting_rule": "Compose the original canonical layer and each subsequent exact own-wave closure once. Final accepted record state and final module intersection govern retained payload; copied pools/observations do not reserve keys.",
+  "new_source_packet": {
+    "wave": "1.42",
+    "source_ref": "d331f6ad79696019b6882d53035572f3da4c7cd1",
+    "branch": "content/v1-42-familiar-food-materials-and-selected-inputs",
+    "unlanded": true,
+    "pool_path": "docs/content-pool/v1-42-familiar-food-materials-and-selected-inputs/pool.json",
+    "pool_sha256": "b7b5be791a6b905d44319bc81259a019499de91a0aa5deaf33d32cefe7354005",
+    "module_path": "scripts/familiar_food_materials_and_selected_inputs_v1_42_data.py",
+    "module_sha256": "931799a338411d2be4a0115d8f8cf75164f95d1687c1344e643e91fb9ecb9b74",
+    "baseline_commit": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+    "record_count": 40,
+    "states": {
+      "idea": 0,
+      "researched": 0,
+      "accepted": 35,
+      "held": 5,
+      "rejected": 0,
+      "installed": 0
+    },
+    "module_nodes": 14,
+    "module_edges": 56,
+    "module_alias_owners": 21,
+    "review_binding": {
+      "original_module_sha256": "931799a338411d2be4a0115d8f8cf75164f95d1687c1344e643e91fb9ecb9b74",
+      "original_module_archive_path": "docs/reviews/v1-42-familiar-food-materials-and-selected-inputs/reviewed-module.json",
+      "original_module_archive_sha256": "7fae943bf6710abd95c9eef559ffef020f12cf4781a954f793040d82f023e497",
+      "final_module_sha256": "931799a338411d2be4a0115d8f8cf75164f95d1687c1344e643e91fb9ecb9b74",
+      "reconciliation_sha256": "a95575f9b3f506cd773f71a87b21109e156a826eb7262cdbb520717a9ba54c7b",
+      "factual_review_sha256": "f8269d847f2109ddb250807fe1fefc963e470302ad55f58cd7ae352a0c35447b",
+      "quality_review_sha256": "ca233d504be210e4dd8677c9ef6e593d254e04104117698cb7a3360f4cf2365b",
+      "source_provenance_sha256": "f149eeaee4ba1f6550b9032959a884760cbea254a879262fd534f76ce888288e",
+      "README_sha256": "5490c11133ea33aecda85777cc102d06d645586ee87c20d268fc11c4ea1db9c1",
+      "owner_handoff_sha256": "98b6aef28b0440f82fbe8df03ab75ee7e681f9d9bfc2a22bf5ae56a96225197e",
+      "signed_edits": {
+        "retained_exact_field_edits": 0,
+        "conservative_whole_item_drops": [],
+        "scope": "Unchanged original reports and exact original-to-final chain; consolidation grants no semantic approval."
+      }
+    }
+  },
+  "compatibility": {
+    "primary_feature_working": "All 5737 retained missing payload keys checked against actual designated feature/main ownership and policy under exact authority-byte equality. Source senses keep their signed provenance; no new semantic approval.",
+    "secondary_main": "Latest secondary main e531358c94f946e8bb575eb4f68fb391160dd6ac selects core-v1.13 packages and Go1.27.3 runner/module dependencies. Designated primary fb829aaa150c6263a92dc061befd254d4f5aeea8 remains unchanged. All 244 content, 58 unchanged indexed interface, seven adjacent and two policy paths match. Prior Alchimie/server differences and current outside-index dependency/build selections remain separately bound; archive contents and external qualification were not evaluated.",
+    "foreign_live_or_cross_pending_owners": 0,
+    "current_or_raw_deferred_conflicts_in_retained_V1_33_payload": 0,
+    "V1_33_keys_already_served_or_reserved": 0,
+    "prior_pending_predecessor_sets_changed": 0,
+    "new_projection_attention": [],
+    "current_or_raw_deferred_conflicts_in_retained_V1_34_payload": 0,
+    "V1_34_keys_already_served_or_reserved": 0,
+    "current_or_raw_deferred_conflicts_in_retained_V1_35_payload": 0,
+    "V1_35_keys_already_served_or_reserved": 0,
+    "current_or_raw_deferred_conflicts_in_retained_V1_36_payload": 0,
+    "V1_36_keys_already_served_or_reserved": 0,
+    "current_or_raw_deferred_conflicts_in_retained_V1_37_payload": 0,
+    "V1_37_keys_already_served_or_reserved": 0,
+    "current_or_raw_deferred_conflicts_in_retained_V1_38_payload": 0,
+    "V1_38_keys_already_served_or_reserved": 0,
+    "current_or_raw_deferred_conflicts_in_retained_V1_39_payload": 0,
+    "V1_39_keys_already_served_or_reserved": 0,
+    "current_or_raw_deferred_conflicts_in_retained_V1_40_payload": 0,
+    "V1_40_keys_already_served_or_reserved": 0,
+    "current_or_raw_deferred_conflicts_in_retained_V1_41_payload": 0,
+    "V1_41_keys_already_served_or_reserved": 0,
+    "current_or_raw_deferred_conflicts_in_retained_V1_42_payload": 0,
+    "V1_42_keys_already_served_or_reserved": 0,
+    "secondary_runtime_index_coverage_limit": "One of 59 indexed secondary interface paths differs (AlchimieChallenge.tsx, previously inspected). The index excludes prior server changes and current package archives, module/package manifests and runner/build selections. Chained observations grant no latest-secondary runtime, UI, security or integration qualification.",
+    "secondary_full_index_equality": false
+  },
+  "V1_33_source_and_game_qualification_limits": {
+    "accepted_source_items": 30,
+    "new_concepts": 29,
+    "existing_owner_input_families": 1,
+    "ordinary_normalized_payload_keys": 170,
+    "canonical_label_only_keys": 0,
+    "qualified_exact_sense_lexical_families": 1,
+    "qualified_family_keys": 6,
+    "unqualified_synonym_families": 0,
+    "regional_input_families": 0,
+    "directed_graph_claims": 114,
+    "installed": 0,
+    "source_applied": false,
+    "player_visible_delta": "0/0/0",
+    "new_playable_rounds": 0,
+    "target_approvals": 0,
+    "salience_approvals": 0,
+    "new_node_predecessor_counts": {
+      "0": 25,
+      "1": 4
+    },
+    "numeric_C3_passes": 0,
+    "C3_limits": "Prospective direct non-distractor predecessors include four proposed batch edges; all29 new IDs have zero current-base predecessors. Numeric counts do not approve targets or recognition/salience/engine floors.",
+    "interfaces": {
+      "Cald sau Rece": "Typed guesses can resolve ordinary aliases after a separately authorized integration; exact/projection/fuzzy competition and identity/snapshot effects need qualification.",
+      "Lanțul Cuvintelor": "Typed moves and clicked displayed labels submit text; aliases and graph edges can alter choices and paths after integration. No route is approved.",
+      "Alchimie": "Combines owned IDs. Inventory/journal search filters display labels and does not resolve KG aliases. No recipe or projection is approved.",
+      "Intrusul/Perechi/Conexiuni": "Active-board IDs are submitted; no board, intended pair or unique partition is approved."
+    },
+    "integration_limits": "Static compatibility/source acceptance cannot establish safe-to-merge or zero disturbance. Existing targets, profiles, routes, recipes, ranks, fuzzy suggestions and complete snapshots may change if applied. Salience0.5 and source flags are not runtime quarantine. Current isolation is that this module remains unapplied. Later authorized integration targets latest owner-designated feature working version, including explicitly frozen WIP; main landing is separate.",
+    "primary_feature": {
+      "branch": "feat/gui-cat-m3",
+      "head": "e75518c1473be3a32ec2a0f2e1565764bbcf5d5b",
+      "working_fingerprint_sha256": "aff6cadfb5521b292b99648eec9d83589d973963c4e1f6572248f4417397b173",
+      "dirty_paths": 98,
+      "baseline_sha256": "1787a725a8b431db32b1a24edafe517078f7156cd97b2b166c9764d7ccf503aa",
+      "WIP_copied_or_executed": false
+    },
+    "secondary_local_main": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+    "serving_authority_bytes_match_both_bases": 244,
+    "baseline_checks_reused_with_exact_hash_proof": true
+  },
+  "broader_stock_limits": [
+    "45 numeric incoming-floor passes remain unapproved targets; 810 proposed nodes are below that floor.",
+    "117 pending keys could change current Cald projections; source truth does not qualify exact/fuzzy/projection competition, identity, feedback or snapshot behavior.",
+    "Existing-owner source lanes:{'selected_sense_lexical_or_qualified_input': 140, 'existing_lemma_morphology': 88};missing keys:{'existing_lemma_morphology': 164, 'selected_sense_lexical_or_qualified_input': 766}. Selected lexical, size/subtype, qualified and regional inputs retain their classifications.",
+    "Typed inputs are Cald/Lanț; boards use active IDs. Alchimie combines owned IDs and filters local display labels, not KG aliases. No board/pair/partition/recipe/qualified path or round is added.",
+    "Only remaining outside serving content isolates unapplied modules. Flags/salience0.5 are not runtime quarantine. V1.14 partial apply/declined exception, V1.7 and retired loop remain parked."
+  ],
+  "continuation": {
+    "wave_1_42_source_and_canonical_handoff_complete": true,
+    "next_step": "next-work",
+    "next_action": "Curation decision: consider separate qualification of Avion, Mănăstire, Cinematograf, Interfon and Sucitor (21 reviewed keys), or identify a concrete uncovered high-value discovery gap; no source application or landing authorized.",
+    "new_discovery_wave_started": false,
+    "integration_authorized": false,
+    "small_existing_owner_candidate_scope": [
+      "Stea",
+      "Picior",
+      "Trotuar",
+      "Stradă",
+      "Tren",
+      "Tramvai",
+      "Gară",
+      "Stație",
+      "Aeroport",
+      "Camion"
+    ],
+    "candidate_scope_note": "Preserved10-family/19-key first-lane proposal; not installed, integrated or newly approved by this analysis.",
+    "previous_selection_preserved": {
+      "path": "selections/v1-42-next-work.json",
+      "sha256": "79af41277c97f9bf5d7b82f02a1de2fe9e332ae1220231ac4ff16a1d1b224945"
+    },
+    "selection_complete": true,
+    "dispatch": "Consecutive atomic substeps in this chat, with same-chat five-minute recovery; each substep retains its own working-tick/commit/state count.",
+    "waiting": "curation: stock covers useful gaps",
+    "selection_evidence": {
+      "path": "selections/v1-43-curation-first.json",
+      "sha256": "21a597a2ecd0135b99fee922e884fe10f8eae1df1233d05150b8f982e94b7fb6",
+      "authority_reuse_note": "Original curation decision and signed source verdicts remain unchanged. Primary authority bytes remain exact. Later secondary observations record indexed UI, server and dependency/runner differences; no latest-secondary qualification is inferred."
+    },
+    "authority_refresh": {
+      "path": "observations/secondary-main-e531358c.json",
+      "sha256": "4b55215e70f9edb9623ddbf1cac05be1e1136d9eb1d5ca6bb46226ef62afa136",
+      "canonical_parent_ref": "076ccadd46226ccbb3fcd54143957faf3e5bf79b"
+    }
+  },
+  "preserved_partial_branch_application": {
+    "wave": "1.14",
+    "source_ref": "4b634cab38cbce90ac6eb02e0907578335208c69",
+    "concepts_applied_on_preserved_branch": 54,
+    "through_substep": "4f",
+    "qualified_installations": 0,
+    "current_serving_base_landing": false,
+    "HTTP_count_exception": "declined; never ask again",
+    "resume_partial_install": false
+  },
+  "source_application": false,
+  "module_dry_run": false,
+  "serving_changes": false,
+  "target_or_round_approvals": 0,
+  "new_source_reviews": 0,
+  "remote_operations": 0,
+  "V1_34_source_and_game_qualification_limits": {
+    "accepted_source_items": 17,
+    "new_concepts": 17,
+    "existing_owner_input_families": 0,
+    "ordinary_normalized_payload_keys": 95,
+    "canonical_label_only_keys": 0,
+    "ordinary_primary_lemma_families": 8,
+    "qualified_compound_families": 9,
+    "synonym_families": 0,
+    "regional_input_families": 0,
+    "directed_graph_claims": 68,
+    "source_applied": false,
+    "installed": 0,
+    "player_visible_delta": "0/0/0",
+    "target_approvals": 0,
+    "salience_approvals": 0,
+    "new_playable_rounds": 0,
+    "new_node_direct_predecessors": {
+      "0": 17
+    },
+    "C3_numeric_passes": 0,
+    "C3_limits": "All68proposed edges are outgoing to existing nodes and non-bidirectional; all17new concepts remain below five actual direct non-distractor predecessors. No recognition, opener, salience or engine-floor approval inferred.",
+    "interfaces": {
+      "Cald sau Rece": "Typed resolver inputs; potential exact/projection and fuzzy competition, repeat/win identity, profiles and complete snapshots require later integration qualification.",
+      "Lanțul Cuvintelor": "Typed moves and clicked displayed neighbor labels submit text. Readable truthful directed claims are not approved routes; graph changes may alter existing choices/optimal lengths.",
+      "Alchimie": "Combines owned IDs. Inventory/journal search filters local display labels rather than KG aliases. No recipe or projection is approved.",
+      "Intrusul/Perechi/Conexiuni": "Active-board IDs are submitted. No new board, unique strongest pair or fair partition is approved.",
+      "care_scope": "Common physical object/document identification and narrowly true facts only; no clinical recommendation, diagnosis, dosing or treatment instructions.",
+      "target_status": "No target, C3, salience, difficulty or playable round approval. Graph/source acceptance would not establish these properties.",
+      "integration_limit": "Static provenance/compatibility is not safe-to-merge or zero-disturbance proof. Later separately authorized integration must freeze actual latest feature working identity and run current existing cascade/gates/playthroughs; main landing is separate."
+    },
+    "primary_feature": {
+      "branch": "feat/gui-cat-m3",
+      "head": "71f871ca6196025652a28484ea736d401109d78b",
+      "working_observation_sha256": "6ff39b60bb0860dcfc86d53e79758e15fd49ca65aff9c56536cc3b5a854e9a7e",
+      "dirty_path_count": 0,
+      "relevant_files": 59,
+      "WIP_copied_or_executed": false,
+      "working_fingerprint_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "secondary_local_main": "d30b0aa47248b9a5944e015f2daf54cc5a795617",
+    "content_authority_bytes_equal_both_bases": 244,
+    "integration_limit": "No new source, GUI/runtime, target, route or round approval from consolidation. Static compatibility cannot establish safe-to-merge or zero disturbance; later explicit integration must freeze accepted latest feature/WIP identity, use existing authorities/cascade/gates and scope-specific playthroughs. Main landing remains separate.",
+    "source_review_feature_snapshot_preserved": "eaec72e4b8071a9fb512c1fba9b26ff983bd8a07d062044d64f9c31d55734293",
+    "source_handoff_observation_preserved": {
+      "path": "/home/dobo/work/_temp/content__v1-34-familiar-service-and-journey-objects/handoff/feature-working-handoff.json",
+      "sha256": "e76312e26f7563d0c34e9130257685df20de2088c7c35e2b08bf21ea9b9ded88"
+    }
+  },
+  "V1_35_source_and_game_qualification_limits": {
+    "items_proposed": 40,
+    "accepted_source_packages": 25,
+    "new_vocabulary_concepts": 24,
+    "existing_owner_input_families": 1,
+    "ordinary_normalized_payload_keys": 136,
+    "truthful_directed_claims": 96,
+    "held": 15,
+    "rejected": 0,
+    "new_targets": 0,
+    "new_playable_rounds": 0,
+    "ordinary_primary_lemma_families": 22,
+    "ordinary_primary_lemma_keys": 119,
+    "qualified_compound_families": 2,
+    "qualified_compound_keys": 11,
+    "selected_subtype_families": 1,
+    "selected_subtype_keys": 6,
+    "synonym_families": 0,
+    "regional_input_families": 0,
+    "canonical_label_only_keys": 0,
+    "accepted_source_items": 25,
+    "new_concepts": 24,
+    "directed_graph_claims": 96,
+    "source_applied": false,
+    "installed": 0,
+    "player_visible_delta": "0/0/0",
+    "target_approvals": 0,
+    "salience_approvals": 0,
+    "new_node_direct_predecessors": {
+      "0": 21,
+      "1": 1,
+      "2": 1,
+      "3": 1
+    },
+    "C3_numeric_passes": 0,
+    "C3_limits": "All24new IDs are below five unique direct non-distractor predecessors; light-cluster peers yield Lumânare3/Brichetă2/Chibrit1, allothers0. Numeric source graph counts establish no recognition, opener, salience or engine-floor approval.",
+    "interfaces": {
+      "Cald sau Rece": "Typed guesses. Exact/projection/fuzzy competition, repeats/win identity, profiles and complete snapshots need later integration qualification.",
+      "Lanțul Cuvintelor": "Typed moves and clicked displayed labels submit text. Source truth does not approve routes or game difficulty; graph changes can alter choices and optimal paths.",
+      "Alchimie": "Owned-ID combinations; inventory/journal search filters normalized local display labels, not KG aliases. No recipe, projection or par approval.",
+      "Intrusul/Perechi/Conexiuni": "Active-board IDs; no board, uniquely strongest pair or fair partition is approved.",
+      "target_status": "No target, C3, salience, early opener, engine floor or playable round approval; graph/source counts do not establish these properties.",
+      "nature_and_object_scope": "Source identification and narrowly true selected-sense facts only. No clinical/treatment advice, fire-use instructions or universal cactus habitat/spine claims.",
+      "integration_limit": "No static safe-to-merge or zero-disturbance guarantee. Later explicit integration must use latest designated feature identity, existing cascade/authorities/gates and game-specific playthroughs. Source flags/salience0.5are not runtime quarantine; main landing remains separate."
+    },
+    "primary_feature": {
+      "branch": "feat/gui-cat-m3",
+      "head": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+      "working_observation_sha256": "a7e3fcc8257d0255a2ae90afd58dd63fd810afb9bdd372074e5b8a5e53443f4c",
+      "working_fingerprint_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "dirty_path_count": 0,
+      "relevant_files": 59,
+      "adjacent_dependencies": 7,
+      "WIP_copied_or_executed": false
+    },
+    "secondary_local_main": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+    "content_authority_bytes_equal_both_bases": 244,
+    "source_review_feature_snapshot_preserved": "1673389147a3ba432742008d55d28edb84d94af2",
+    "source_handoff_observation_preserved": {
+      "path": "/home/dobo/work/_temp/content__v1-35-familiar-nature-and-practical-objects/handoff/feature-working-handoff.json",
+      "sha256": "53896d90824bc4395cc04b058ed3679e74345a4f8f57474200bd12c84fed091b"
+    },
+    "integration_limit": "No new source/gameplay/GUI/runtime or target/round approval by consolidation. Later explicit integration must freeze the latest designated feature working identity and use existing cascade/gates/playthroughs. Source flags/salience0.5 are not runtime quarantine; main landing remains separate."
+  },
+  "V1_36_source_and_game_qualification_limits": {
+    "items_proposed": 40,
+    "accepted_source_packages": 18,
+    "new_vocabulary_concepts": 17,
+    "existing_owner_input_families": 1,
+    "ordinary_normalized_payload_keys": 99,
+    "truthful_directed_claims": 68,
+    "held": 22,
+    "rejected": 0,
+    "new_targets": 0,
+    "new_playable_rounds": 0,
+    "ordinary_primary_lemma_families": 13,
+    "ordinary_primary_lemma_keys": 66,
+    "qualified_new_concept_families": 4,
+    "qualified_new_concept_keys": 24,
+    "qualified_existing_owner_families": 1,
+    "qualified_existing_owner_keys": 9,
+    "synonym_families": 0,
+    "regional_input_families": 0,
+    "diminutive_families": 0,
+    "canonical_label_only_keys": 0,
+    "accepted_source_items": 18,
+    "new_concepts": 17,
+    "directed_graph_claims": 68,
+    "source_applied": false,
+    "installed": 0,
+    "player_visible_delta": "0/0/0",
+    "target_approvals": 0,
+    "salience_approvals": 0,
+    "new_node_direct_predecessors": {
+      "0": 14,
+      "1": 2,
+      "2": 1
+    },
+    "C3_numeric_passes": 0,
+    "C3_limits": "All17new IDs are below five unique direct non-distractor predecessors;14have0,2have1,1has2. Proxies and outgoing-only claims are excluded. No target-level recognition, concreteness, opener, salience or engine qualification follows.",
+    "interfaces": {
+      "desired_source_value": "Familiar missing selected words and qualified inputs for future Cald typed guesses and Lanț text moves, plus meaningful readable selected-sense associations; current player gain remains zero.",
+      "typed_contract": "Cald accepts text. Lanț accepts text and clicked displayed-neighbor labels; exact/projection/fuzzy competition, repeat/win identity and snapshots can change after later integration.",
+      "other_interfaces": "Intrusul/Perechi/Conexiuni submit active-board IDs. Alchimie combines owned IDs and filters normalized local display labels; its search does not resolve KG aliases.",
+      "proxy_attention": [
+        {
+          "head": "Unghie",
+          "key": "unghie",
+          "proxies": [
+            {
+              "public_id": "ctxp_c5cff054f0377725a56b",
+              "anchor_id": "n_v24_body_limbs_mana",
+              "domain": "corp",
+              "mapping_kind": "explicit"
+            }
+          ]
+        },
+        {
+          "head": "Mușchi",
+          "key": "muschi",
+          "proxies": [
+            {
+              "public_id": "ctxp_7626cb30da38fc721394",
+              "anchor_id": "n_v4sti_corp",
+              "domain": "corp",
+              "mapping_kind": "domain_fallback"
+            }
+          ]
+        },
+        {
+          "head": "Burtă",
+          "key": "burta",
+          "proxies": [
+            {
+              "public_id": "ctxp_b32f1b5e793a06a4c804",
+              "anchor_id": "n_v4sti_corp",
+              "domain": "corp",
+              "mapping_kind": "domain_fallback"
+            }
+          ]
+        },
+        {
+          "head": "Tirbușon",
+          "key": "tirbuson",
+          "proxies": [
+            {
+              "public_id": "ctxp_bbc3b1287392bbea7b56",
+              "anchor_id": "n_v29_kitchen_table_cutit",
+              "domain": "ustensile de bucătărie",
+              "mapping_kind": "explicit"
+            }
+          ]
+        }
+      ],
+      "target_status": "No target/C3/recognition/concreteness/early-opener/salience/engine-floor approval; no auto-enrollment of graph vocabulary as hidden targets.",
+      "round_status": "No board, pair, partition, recipe, qualified route or playable round approved. Numeric graph/source truth is insufficient.",
+      "integration": "No zero-disturbance or safe-to-merge claim. Later explicit integration targets then-current owner-designated feature, frozen accepted WIP identity if any, through existing cascade/gates/playthroughs. Main landing remains separate. Source flags and salience0.5are not runtime quarantine.",
+      "source_application": false,
+      "module_dry_run": false,
+      "installed": 0,
+      "player_visible_delta": "0/0/0"
+    },
+    "retained_input_projection_attention": {
+      "muschi": {
+        "record_id": "v136-muschi",
+        "current_projection_terms": [
+          {
+            "public_id": "ctxp_7626cb30da38fc721394",
+            "anchor_id": "n_v4sti_corp",
+            "mapping_kind": "domain_fallback",
+            "domain": "corp"
+          }
+        ],
+        "scope": "Potential exact-versus-projection competition after later integration only; not an installed displacement."
+      }
+    },
+    "historical_proxy_attention_scope": "The original candidate scan also lists Unghie,Burtă,Tirbușon. Those held families do not enter retained source payload; the candidate list is not an installed projection delta.",
+    "primary_feature": {
+      "branch": "feat/gui-cat-m3",
+      "head": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+      "working_observation_sha256": "620cb0be6233c6b6ec169c4fe45161d36f0f627a0a5d29e96166c5cd978fde8b",
+      "working_fingerprint_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "dirty_path_count": 0,
+      "relevant_files": 59,
+      "adjacent_dependencies": 7,
+      "WIP_copied_or_executed": false
+    },
+    "secondary_local_main": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+    "content_authority_bytes_equal_both_bases": 244,
+    "source_handoff_observation_preserved": {
+      "path": "/home/dobo/work/_temp/content__v1-36-familiar-body-household-and-school/handoff/feature-working-handoff.json",
+      "sha256": "3c3a0b4d6a33bb176d2fe6f6f2d424d0891ac55a47d8cfdf33a6be44ce3908b7"
+    },
+    "integration_limit": "No new source/gameplay/GUI/runtime/target/round approval. Later explicit integration must freeze the latest designated feature working identity and use existing cascade/gates/playthroughs. Source flags/salience0.5are not runtime quarantine; main landing remains separate."
+  },
+  "owner_continuation_decisions": {
+    "owner_decisions": [
+      "2026-10-12..16: Preserve packets/holds/V1.14;HTTP exception declined;V1.32 consolidation done;latest feature WIP primary,main secondary.",
+      "2026-10-15: Common,concrete,Romanian-relevant targets;no obscure/abstract targets.",
+      "2026-10-18..19: Continue/optimize source-only loop in this chat;keep cache warm and continue automatically;no landing.",
+      "Full owner history: protected V1.41 owner-handoff.json; standing owner-source-policy.md.",
+      "2026-10-20: Continue with the loop; source-only, no integration/landing inferred."
+    ],
+    "record_path": "/home/dobo/work/_temp/content-loop/owner-source-policy.md",
+    "record_sha256": "febe5f7f4e168af7b14da6fff94400078d79a7761196c40f05314f57b2a6e6d8",
+    "model_or_cache_settings_changed": false,
+    "previous_stock_ref": "fc65926efcc90888e772d2c341d2d116958637d6"
+  },
+  "V1_37_source_and_game_qualification_limits": {
+    "accepted_source_items": 11,
+    "new_concepts": 10,
+    "existing_owner_input_families": 1,
+    "ordinary_normalized_payload_keys": 59,
+    "ordinary_headword_new_concept_keys": 47,
+    "qualified_new_concept_keys": 6,
+    "selected_size_existing_owner_keys": 6,
+    "canonical_label_only_keys": 0,
+    "synonym_families": 0,
+    "regional_input_families": 0,
+    "diminutive_families": 0,
+    "directed_graph_claims": 40,
+    "target_approvals": 0,
+    "salience_approvals": 0,
+    "new_playable_rounds": 0,
+    "C3_numeric_passes": 0,
+    "new_node_direct_predecessors": {
+      "0": 8,
+      "1": 2
+    },
+    "source_applied": false,
+    "installed": 0,
+    "player_visible_delta": "0/0/0",
+    "interfaces": {
+      "potential_value": "Familiar selected typed-word recognition and readable directed facts after later separately authorized integration; no installed gain now.",
+      "typed_contract": "Cald typed guesses; Lanț typed moves/clicked displayed labels. Exact/projection/fuzzy competition and repeat/win identity may change.",
+      "other_contracts": "Intrusul/Perechi/Conexiuni use active-board IDs. Alchimie uses owned IDs and filters normalized local display labels, not KG aliases.",
+      "proxy_attention": [
+        {
+          "head": "Bolovan",
+          "proxies": [
+            {
+              "public_id": "ctxp_290e3606858168a62e12",
+              "anchor_id": "n_v24_nature_world_pamant",
+              "domain": "peisaj",
+              "mapping_kind": "explicit"
+            }
+          ]
+        },
+        {
+          "head": "Buruiană",
+          "proxies": [
+            {
+              "public_id": "ctxp_246a82c5b98d3cf079b7",
+              "anchor_id": "n_v24_nature_plant_parts_iarba",
+              "domain": "plante și grădină",
+              "mapping_kind": "explicit"
+            }
+          ]
+        },
+        {
+          "head": "Prăpastie",
+          "proxies": [
+            {
+              "public_id": "ctxp_295c66c172f722fe139e",
+              "anchor_id": "n_v24_nature_world_natura",
+              "domain": "peisaj",
+              "mapping_kind": "domain_fallback"
+            }
+          ]
+        },
+        {
+          "head": "Puzzle",
+          "proxies": [
+            {
+              "public_id": "ctxp_c01c6389560750730c1a",
+              "anchor_id": "n_v3lit_carte",
+              "domain": "timp liber și artă",
+              "mapping_kind": "explicit"
+            }
+          ]
+        }
+      ],
+      "projection_note": "Four selected heads are already recognized via Cald projections; they are not all unknown typed guesses. This selection changes no resolver or projection.",
+      "target_status": "No target, target-level recognition/concreteness/opener/salience/engine or C3 approval. Graph vocabulary is not auto-enrolled.",
+      "round_status": "No board,pair,partition,recipe,qualified path or playable round approved. Source truth does not establish these properties.",
+      "integration": "No zero-disturbance or safe-to-merge claim; later explicit integration targets then-latest frozen designated feature/WIP via existing cascade/gates/playthroughs. Source flags/salience0.5are not runtime quarantine. Main landing remains separate.",
+      "source_application": false,
+      "module_dry_run": false,
+      "installed": 0,
+      "player_visible_delta": "0/0/0"
+    },
+    "primary_feature": {
+      "branch": "feat/gui-cat-m3",
+      "HEAD": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+      "actual_working_binding_sha256": "5d0eb5bf28d8e59d93164fd5afe4887657cfe2087cbefd971ca033b176f6b5e8"
+    },
+    "secondary_local_main": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+    "content_authority_bytes_equal_both_bases": 244,
+    "source_ref": "dc61975c9106d1666e25178c43dc1d085f6f0282",
+    "integration_limit": "No new source/gameplay/target/salience/GUI/runtime/integration approval. Later integration requires explicit owner authority on the latest frozen designated feature/WIP and existing cascade/gates/playthroughs."
+  },
+  "V1_38_source_and_game_qualification_limits": {
+    "accepted_source_items": 35,
+    "new_concepts": 6,
+    "existing_owner_input_families": 29,
+    "ordinary_normalized_payload_keys": 180,
+    "ordinary_headword_new_concept_keys": 31,
+    "qualified_new_concept_keys": 0,
+    "selected_lexical_existing_owner_keys": 149,
+    "canonical_label_only_keys": 0,
+    "synonym_families": 0,
+    "regional_input_families": 0,
+    "diminutive_or_selected_size_families": 29,
+    "directed_graph_claims": 24,
+    "target_approvals": 0,
+    "salience_approvals": 0,
+    "new_playable_rounds": 0,
+    "C3_numeric_passes": 0,
+    "new_node_direct_predecessors": {
+      "0": 6
+    },
+    "source_applied": false,
+    "installed": 0,
+    "player_visible_delta": "0/0/0",
+    "interfaces": {
+      "potential_value": "Familiar literal Cald/Lanț typed-input recognition after later authorized integration; seven new concrete words/associations may serve graph vocabulary. No installed value now.",
+      "typed_contract": "Cald typed guesses; Lanț typed moves/clicked displayed labels. Exact/projection/fuzzy competition, repeat/win identity and snapshots can change.",
+      "other_contracts": "Intrusul/Perechi/Conexiuni submit board IDs; Alchimie combines owned IDs and filters local display labels, including displayed parent labels, not KG aliases.",
+      "target_status": "No hidden target, C3 recognition/concreteness/opener/salience/engine approval.",
+      "round_status": "No board,pair,partition,recipe,qualified path or playable round approved.",
+      "integration": "Separate explicit authority must target then-latest frozen designated feature/WIP using existing cascade/gates/playthroughs. Source flags/salience0.5 are not quarantine.",
+      "source_application": false,
+      "module_dry_run": false,
+      "installed": 0,
+      "player_visible_delta": "0/0/0"
+    },
+    "primary_feature": {
+      "branch": "feat/gui-cat-m3",
+      "HEAD": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+      "actual_working_binding_sha256": "5d0eb5bf28d8e59d93164fd5afe4887657cfe2087cbefd971ca033b176f6b5e8"
+    },
+    "secondary_local_main": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+    "content_authority_bytes_equal_both_bases": 244,
+    "source_ref": "0c53e69813cc7d068e68d07e5dfb27a9565b78ff",
+    "integration_limit": "No new source/gameplay/target/salience/GUI/runtime/integration approval. Later integration requires explicit owner authority on the latest frozen designated feature/WIP and existing cascade/gates/playthroughs."
+  },
+  "V1_39_source_and_game_qualification_limits": {
+    "accepted_source_items": 32,
+    "new_concepts": 9,
+    "existing_owner_input_families": 23,
+    "ordinary_normalized_payload_keys": 173,
+    "ordinary_headword_new_concept_keys": 49,
+    "qualified_new_concept_keys": 0,
+    "selected_lexical_existing_owner_keys": 124,
+    "canonical_label_only_keys": 0,
+    "synonym_families": 0,
+    "regional_input_families": 0,
+    "diminutive_or_selected_size_families": 20,
+    "selected_sex_subtype_families": 3,
+    "directed_graph_claims": 36,
+    "target_approvals": 0,
+    "salience_approvals": 0,
+    "new_playable_rounds": 0,
+    "C3_numeric_passes": 0,
+    "new_node_direct_predecessors": {
+      "0": 9
+    },
+    "source_applied": false,
+    "installed": 0,
+    "player_visible_delta": "0/0/0",
+    "interfaces": {
+      "potential_value": "Familiar literal Cald/Lanț typed-input recognition after later authorized integration; 9 new concrete concepts/associations remain source graph vocabulary. No installed value now.",
+      "typed_contract": "Cald typed guesses; Lanț typed moves/clicked displayed labels. Exact/projection/fuzzy competition, repeat/win identity and snapshots can change.",
+      "other_contracts": "Intrusul/Perechi/Conexiuni submit board IDs; Alchimie combines owned IDs and filters local display labels, including displayed parent labels, not KG aliases.",
+      "target_status": "No hidden target, C3 recognition/concreteness/opener/salience/engine approval.",
+      "round_status": "No board,pair,partition,recipe,qualified path or playable round approved.",
+      "integration": "Separate explicit authority must target then-latest frozen designated feature/WIP using existing cascade/gates/playthroughs. Source flags/salience0.5 are not quarantine.",
+      "source_application": false,
+      "module_dry_run": false,
+      "installed": 0,
+      "player_visible_delta": "0/0/0"
+    },
+    "primary_feature": {
+      "branch": "feat/gui-cat-m3",
+      "HEAD": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+      "actual_working_binding_sha256": "5d0eb5bf28d8e59d93164fd5afe4887657cfe2087cbefd971ca033b176f6b5e8"
+    },
+    "secondary_local_main": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+    "content_authority_bytes_equal_both_bases": 244,
+    "source_ref": "b4f399bbab705039743dd7ce49cebcb85a517cb2",
+    "integration_limit": "No new source/gameplay/target/salience/GUI/runtime/integration approval. Later integration requires explicit owner authority on the latest frozen designated feature/WIP and existing cascade/gates/playthroughs."
+  },
+  "V1_40_source_and_game_qualification_limits": {
+    "accepted_source_items": 22,
+    "new_concepts": 4,
+    "existing_owner_input_families": 18,
+    "ordinary_normalized_payload_keys": 59,
+    "ordinary_headword_new_concept_keys": 21,
+    "qualified_new_concept_keys": 0,
+    "selected_lexical_existing_owner_keys": 38,
+    "canonical_label_only_keys": 0,
+    "synonym_families": 0,
+    "regional_input_families": 0,
+    "diminutive_or_selected_size_families": 0,
+    "selected_sex_subtype_families": 0,
+    "ordinary_morphology_existing_owner_families": 17,
+    "ordinary_morphology_existing_owner_keys": 32,
+    "selected_non_morphology_existing_owner_keys": 6,
+    "selected_tool_subtype_families": 1,
+    "directed_graph_claims": 16,
+    "target_approvals": 0,
+    "salience_approvals": 0,
+    "new_playable_rounds": 0,
+    "C3_numeric_passes": 0,
+    "new_node_direct_predecessors": {
+      "0": 4
+    },
+    "source_applied": false,
+    "installed": 0,
+    "player_visible_delta": "0/0/0",
+    "interfaces": {
+      "potential_value": "After separately authorized integration, 32 ordinary morphology inputs and 6 selected tool-subtype inputs may improve exact Cald/Lanț typed recognition; 4 new concrete concepts and 16 source links remain uninstalled graph vocabulary. No installed player gain or gameplay approval.",
+      "typed_contract": "Cald typed guesses; Lanț typed moves/clicked displayed labels. Exact/projection/fuzzy competition, repeat/win identity and snapshots can change.",
+      "other_contracts": "Intrusul/Perechi/Conexiuni submit board IDs; Alchimie combines owned IDs and filters local display labels, including displayed parent labels, not KG aliases.",
+      "target_status": "No hidden target, C3 recognition/concreteness/opener/salience/engine approval.",
+      "round_status": "No board,pair,partition,recipe,qualified path or playable round approved.",
+      "integration": "Separate explicit authority must target then-latest frozen designated feature/WIP using existing cascade/gates/playthroughs. Source flags/salience0.5 are not quarantine.",
+      "source_application": false,
+      "module_dry_run": false,
+      "installed": 0,
+      "player_visible_delta": "0/0/0"
+    },
+    "primary_feature": {
+      "branch": "feat/gui-cat-m3",
+      "HEAD": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+      "actual_working_binding_sha256": "5d0eb5bf28d8e59d93164fd5afe4887657cfe2087cbefd971ca033b176f6b5e8"
+    },
+    "secondary_local_main": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+    "content_authority_bytes_equal_both_bases": 244,
+    "source_ref": "7760e0742f6ee953d428ceb4194a53e33a9b1f80",
+    "integration_limit": "No new source/gameplay/target/salience/GUI/runtime/integration approval. Later integration requires explicit owner authority on the latest frozen designated feature/WIP and existing cascade/gates/playthroughs."
+  },
+  "V1_41_source_and_game_qualification_limits": {
+    "accepted_source_items": 21,
+    "new_concepts": 16,
+    "existing_owner_input_families": 5,
+    "ordinary_normalized_payload_keys": 104,
+    "ordinary_headword_new_concept_keys": 83,
+    "qualified_new_concept_keys": 6,
+    "selected_lexical_existing_owner_keys": 21,
+    "canonical_label_only_keys": 0,
+    "synonym_families": 0,
+    "regional_input_families": 0,
+    "diminutive_or_selected_size_families": 0,
+    "selected_sex_subtype_families": 0,
+    "ordinary_morphology_existing_owner_families": 5,
+    "ordinary_morphology_existing_owner_keys": 21,
+    "selected_non_morphology_existing_owner_keys": 0,
+    "selected_tool_subtype_families": 0,
+    "directed_graph_claims": 64,
+    "target_approvals": 0,
+    "salience_approvals": 0,
+    "new_playable_rounds": 0,
+    "C3_numeric_passes": 0,
+    "new_node_direct_predecessors": {
+      "4": 3,
+      "0": 12,
+      "2": 1
+    },
+    "source_applied": false,
+    "installed": 0,
+    "player_visible_delta": "0/0/0",
+    "normalized_payload_keys": 110,
+    "qualified_compound_typed_phrase_keys": 6,
+    "ordinary_headword_and_existing_owner_keys": 104,
+    "existing_owner_families_by_classification": {
+      "ordinary_NA_GD_morphology_of_existing_lemma": 3,
+      "ordinary_number_variant_of_existing_plural_label": 1,
+      "ordinary_morphology_of_existing_selected_lexeme": 1
+    },
+    "existing_owner_keys_by_classification": {
+      "ordinary_NA_GD_morphology_of_existing_lemma": 14,
+      "ordinary_number_variant_of_existing_plural_label": 3,
+      "ordinary_morphology_of_existing_selected_lexeme": 4
+    },
+    "interfaces": {
+      "potential_value": "Reviewed source stock: prospective literal typed-input fairness for selected families in Cald/Lanț and truthful source associations after separate authorized integration. No installed gain or target/round approval; current player-visible delta0/0/0.",
+      "typed_contract": "Cald typed guesses; Lanț typed moves/clicked displayed labels. Exact/projection/fuzzy competition, repeat/win identity and snapshots can change.",
+      "other_contracts": "Intrusul/Perechi/Conexiuni submit board IDs; Alchimie combines owned IDs and filters local display labels, including displayed parent labels, not KG aliases.",
+      "target_status": "No hidden target, C3 recognition/concreteness/opener/salience/engine approval.",
+      "round_status": "No board,pair,partition,recipe,qualified path or playable round approved.",
+      "integration": "Separate explicit authority must target then-latest frozen designated feature/WIP using existing cascade/gates/playthroughs. Source flags/salience0.5 are not quarantine.",
+      "source_application": false,
+      "module_dry_run": false,
+      "installed": 0,
+      "player_visible_delta": "0/0/0"
+    },
+    "primary_feature": {
+      "branch": "feat/gui-cat-m3",
+      "HEAD": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+      "actual_working_binding_sha256": "5d0eb5bf28d8e59d93164fd5afe4887657cfe2087cbefd971ca033b176f6b5e8"
+    },
+    "secondary_local_main": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+    "content_authority_bytes_equal_both_bases": 244,
+    "source_ref": "19667bf430d1d6af9409bc2ea1c5e60be0b67aab",
+    "integration_limit": "No new source/gameplay/target/salience/GUI/runtime/integration approval. Later integration requires explicit owner authority on the latest frozen designated feature/WIP and existing cascade/gates/playthroughs."
+  },
+  "V1_42_source_and_game_qualification_limits": {
+    "accepted_source_items": 35,
+    "new_concepts": 14,
+    "existing_owner_input_families": 21,
+    "ordinary_normalized_payload_keys": 153,
+    "ordinary_headword_new_concept_keys": 72,
+    "qualified_new_concept_keys": 0,
+    "selected_lexical_existing_owner_keys": 81,
+    "canonical_label_only_keys": 0,
+    "synonym_families": 0,
+    "regional_input_families": 0,
+    "diminutive_or_selected_size_families": 0,
+    "selected_sex_subtype_families": 0,
+    "ordinary_morphology_existing_owner_families": 21,
+    "ordinary_morphology_existing_owner_keys": 81,
+    "selected_non_morphology_existing_owner_keys": 0,
+    "selected_tool_subtype_families": 0,
+    "directed_graph_claims": 56,
+    "target_approvals": 0,
+    "salience_approvals": 0,
+    "new_playable_rounds": 0,
+    "C3_numeric_passes": 0,
+    "new_node_direct_predecessors": {
+      "3": 5,
+      "4": 2,
+      "0": 1,
+      "1": 4,
+      "2": 2
+    },
+    "source_applied": false,
+    "installed": 0,
+    "player_visible_delta": "0/0/0",
+    "normalized_payload_keys": 153,
+    "qualified_compound_typed_phrase_keys": 0,
+    "ordinary_headword_and_existing_owner_keys": 153,
+    "existing_owner_families_by_classification": {
+      "ordinary_morphology_of_existing_selected_lexeme": 11,
+      "ordinary_morphology_of_existing_feminine_lexeme": 1,
+      "ordinary_NA_GD_morphology_of_existing_lemma": 6,
+      "ordinary_article_variant_of_existing_articulated_label": 1,
+      "ordinary_number_variant_of_existing_plural_label": 2
+    },
+    "existing_owner_keys_by_classification": {
+      "ordinary_morphology_of_existing_selected_lexeme": 51,
+      "ordinary_morphology_of_existing_feminine_lexeme": 3,
+      "ordinary_NA_GD_morphology_of_existing_lemma": 17,
+      "ordinary_article_variant_of_existing_articulated_label": 4,
+      "ordinary_number_variant_of_existing_plural_label": 6
+    },
+    "interfaces": {
+      "potential_value": "Reviewed unlanded typed-input forms for existing selected lexemes and new concrete concepts, plus directed source associations. Any player benefit requires separately authorized qualification against the then-current feature working bytes.",
+      "typed_contract": "Cald typed guesses; Lanț typed moves/clicked displayed labels. Exact/projection/fuzzy competition, repeat/win identity and snapshots can change.",
+      "other_contracts": "Intrusul/Perechi/Conexiuni submit board IDs; Alchimie combines owned IDs and filters local display labels, including displayed parent labels, not KG aliases.",
+      "target_status": "No hidden target, C3 recognition/concreteness/opener/salience/engine approval.",
+      "round_status": "No board,pair,partition,recipe,qualified path or playable round approved.",
+      "integration": "Separate explicit authority must target then-latest frozen designated feature/WIP using existing cascade/gates/playthroughs. Source flags/salience0.5 are not quarantine.",
+      "source_application": false,
+      "module_dry_run": false,
+      "installed": 0,
+      "player_visible_delta": "0/0/0"
+    },
+    "primary_feature": {
+      "branch": "feat/gui-cat-m3",
+      "HEAD": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+      "actual_working_binding_sha256": "5d0eb5bf28d8e59d93164fd5afe4887657cfe2087cbefd971ca033b176f6b5e8"
+    },
+    "secondary_local_main": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+    "content_authority_bytes_equal_both_bases": 244,
+    "source_ref": "d331f6ad79696019b6882d53035572f3da4c7cd1",
+    "integration_limit": "No new source/gameplay/target/salience/GUI/runtime/integration approval. Later integration requires explicit owner authority on the latest frozen designated feature/WIP and existing cascade/gates/playthroughs."
+  },
+  "secondary_main_observation": {
+    "path": "observations/secondary-main-e531358c.json",
+    "sha256": "4b55215e70f9edb9623ddbf1cac05be1e1136d9eb1d5ca6bb46226ef62afa136",
+    "canonical_parent_ref": "076ccadd46226ccbb3fcd54143957faf3e5bf79b"
+  }
+}

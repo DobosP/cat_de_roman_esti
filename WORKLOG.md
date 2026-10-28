@@ -1,5 +1,15 @@
 # Work log
 
+## 2026-10-28 — Consolidate historical source; NAS-gated checkout retirement
+
+Valid until: later source curation or checkout restoration changes these recorded identities — then treat as history.
+
+Paul asked whether historical Cat loops were merged, to consolidate useful missing work on one branch and then remove old checkouts. He explicitly retained the live continuous loop. Inspection found 30 unmerged V1/consolidation tips (272 unique commits), not 272 missing runtime fixes: reusable source/evidence is archived byte-exact under docs/content-stock, without installing vocabulary or replaying old fixtures. The historical snapshot's 1,083 source-accepted packages remain subject to current ADR-0210/0220 gates. Six C1/C2/B12 held inputs are preserved separately; V1.7 has no missing data/code, old GUI fixes are already ported/superseded, and V2 workflow/source-pin fixes already landed.
+
+Validation (installed Go1.27.3, GOTOOLCHAIN=local and offline modules): cat-doc-check --inventory sees all654 physical Markdown paths, checks63 live documents, and reports no dead links/stale terms/retired verbs/orphans/budgets; cat-content validate is GREEN; export --check is current; cat-content-ops check --check reports exact native graph/pack/ranking/derived values with write=false. All374 staged V1 blobs/modes and six held V2 byte digests equal their historical inputs; active code/fixture/pin diff is empty and git diff --check passes. This documentation/archive-only change runs no frontend/GUI/application build and claims no new GUI or content qualification. The direct native checks avoid the shell wrapper's full-app build, following the docs-only no-rebuild cadence; the first sandbox attempt needed host access to the existing Go cache, not a source repair. The scoped status note stays in the unchanged Doc map area rather than editing the live loop's concurrently changed product-status header.
+
+No serving source, generated payload, current fixture, source registry, pin, root governance, original baseline or live V3 controller/state/evidence is changed. All old refs remain; current data counts are unchanged. Exact old branch/path/blob provenance and portable access are in docs/content-stock/README.md and its manifests. ADR-0221 authorizes the physical checkout retirement only after verified complete NAS recovery, independent review and fresh usage checks. Actual removed/held paths and freed allocation are recorded in the machine-local fleet-cleanup run 2026-10-28T183252Z-cat-checkout-consolidation; this inventory is not a claim those paths are currently present or already deleted.
+
 Valid until: the recorded verification run ends — then treat as history.
 
 

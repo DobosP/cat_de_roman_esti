@@ -1,0 +1,580 @@
+{
+  "schema": "source-loop-secondary-main-observation-v1",
+  "observed_at_utc": "2026-10-21T20:11:50.193218+00:00",
+  "cause": "External secondary-main core-v1.13 dependency and gate-runner advance. This checkpoint changes source bookkeeping only.",
+  "previous_secondary_local_main": "8a5e6f281ea1552a38d377c44c8b7e9d32490042",
+  "secondary_latest_local_main": "e531358c94f946e8bb575eb4f68fb391160dd6ac",
+  "previous_observation_preserved": {
+    "path": "observations/secondary-main-8a5e6f28.json",
+    "sha256": "00c2c10caee1fb47bee87a7b6366a8599c56f0e3d2dffd1cabb8bed5037432d8",
+    "canonical_parent_ref": "470147c45fa6749aebc534dd297bcee51096f8c2"
+  },
+  "primary_feature": {
+    "branch": "feat/gui-cat-m3",
+    "HEAD": "fb829aaa150c6263a92dc061befd254d4f5aeea8",
+    "dirty_untracked_paths": [],
+    "unchanged": true
+  },
+  "documentation_only_advance": false,
+  "changed_paths": [
+    {
+      "path": ".gate.env",
+      "git_delta_status": "M",
+      "previous_blob": "45f2da3d1e926d77dbf4370f0610d8d2f2252050",
+      "secondary_blob": "f9ef080e3830f791add3441d93f3a5430970bafa",
+      "secondary_main_sha256": "caf3c1e2e9530a57e4f9392d6eeae794b3a949b0d242f8053a035362e68d1dbd",
+      "in_retained_source_index": false,
+      "scope": "external_dependency_build_toolchain_or_probe_selection"
+    },
+    {
+      "path": "AGENTS.md",
+      "git_delta_status": "M",
+      "previous_blob": "bbd6f524ca8d404359aa3c50fa06bae26be2af82",
+      "secondary_blob": "73f3f450cfb155744090854a4cefd264be2a47e4",
+      "secondary_main_sha256": "2b989877f0514e916f7c64c649ddf4daaf8b85c12d74503787574faef402db05",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_external_qualification_evidence"
+    },
+    {
+      "path": "CORE_REQUESTS.md",
+      "git_delta_status": "M",
+      "previous_blob": "fb3c5c9ee66f05dc0c5eee7c46423a58810396e6",
+      "secondary_blob": "210e4bbb6b11c76c0c2bdae2d57d5d996f87b4f1",
+      "secondary_main_sha256": "5ade4fbf6f465574cbd44f29635fbba20ac097ba8464c0e15f9138e4f98c463d",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_external_qualification_evidence"
+    },
+    {
+      "path": "Dockerfile.toolchain",
+      "git_delta_status": "M",
+      "previous_blob": "2397c027a837036e77944182f1d39ffb8ec45f50",
+      "secondary_blob": "4e70a812b2747bd642ea68bcb261b6bc764bcf44",
+      "secondary_main_sha256": "5e4c8c297913abc9a77c6668eb1bb86577cdcb955d80c1f6ebc4fb809b962910",
+      "in_retained_source_index": false,
+      "scope": "external_dependency_build_toolchain_or_probe_selection"
+    },
+    {
+      "path": "README.md",
+      "git_delta_status": "M",
+      "previous_blob": "f93bb86f49cffe638818da3448e3ac02f3deb08d",
+      "secondary_blob": "25466ed882566a7081c92a98efa37b808b36988c",
+      "secondary_main_sha256": "6be1d9775c00de492082523583dd10c1dd7c461c8a0557c1d901910e6d4babfa",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_external_qualification_evidence"
+    },
+    {
+      "path": "WORKLOG.md",
+      "git_delta_status": "M",
+      "previous_blob": "58ba572e609df6625fbf3824ff6a2da3a0fbd515",
+      "secondary_blob": "013bd3f63868e09b29050115bbf8100c75ed6ebd",
+      "secondary_main_sha256": "3bdd4f4d22486329cf8ed4e389c186331fd3c72ab1f858be553914466a8b9082",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_external_qualification_evidence"
+    },
+    {
+      "path": "docs/NATIVE_BACKENDS.md",
+      "git_delta_status": "M",
+      "previous_blob": "ce90b1e8f5a1469f9de983292881c3624e92e783",
+      "secondary_blob": "87e735542b3b0fc66473a730d3c4b683d72b3ace",
+      "secondary_main_sha256": "602f2f612139b07d74fc9c67d616151c856b62dac2744ca6e42469f0984eec0c",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_external_qualification_evidence"
+    },
+    {
+      "path": "docs/NATIVE_TOOLCHAIN.md",
+      "git_delta_status": "M",
+      "previous_blob": "4787e88eb6187baecdb9084d13ce8ea997fcef74",
+      "secondary_blob": "1b31d863be564b86faaaf92a316460a3946c4c77",
+      "secondary_main_sha256": "843385da24780e9396cd77121a0e2159b169978ccc7b0d0de3e56589c6a62d2e",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_external_qualification_evidence"
+    },
+    {
+      "path": "docs/STATUS.md",
+      "git_delta_status": "M",
+      "previous_blob": "bd01d18fd1b14d45ff7c01925e90a1d6030d3827",
+      "secondary_blob": "08ec4c9f2adf94ed3a66719d4bc7867407125db8",
+      "secondary_main_sha256": "82062c94890606d403b9a50fb8532e6bb3fd62fb461124740ae70eabae82af1c",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_external_qualification_evidence"
+    },
+    {
+      "path": "docs/TESTARE_V1.md",
+      "git_delta_status": "M",
+      "previous_blob": "3021b7f9a78b68011c99786f34e50e6d6d953917",
+      "secondary_blob": "379bc25288ba05a09992fcebae122312df13367d",
+      "secondary_main_sha256": "68a53cfa3060d23c18eacfd661e6073f7c01415f71fedfcbd4aa5cd52a722c1a",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_external_qualification_evidence"
+    },
+    {
+      "path": "docs/adr/0208-go-1-27-3-security-release-builders.md",
+      "git_delta_status": "M",
+      "previous_blob": "fa67ef867b40457d4aae9fadcb5618e619f4ccb4",
+      "secondary_blob": "a936bb41a149c7f9b47af24e1ba563ccff5acf77",
+      "secondary_main_sha256": "da24c1afc43758be56d7bc528c7c651ad41fab34afef8c86125dc4b87c33b9fc",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_external_qualification_evidence"
+    },
+    {
+      "path": "docs/adr/0209-kit-bump-core-v1-13.md",
+      "git_delta_status": "A",
+      "previous_blob": "0000000000000000000000000000000000000000",
+      "secondary_blob": "2d984c07fc76dbf31ecdcbbcc25d5390f9930071",
+      "secondary_main_sha256": "9acfae30f5406e8986ef3c37189b8255cecb9b21eb5628c51dc16e85397cd64b",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_external_qualification_evidence"
+    },
+    {
+      "path": "docs/adr/README.md",
+      "git_delta_status": "M",
+      "previous_blob": "916496537768ec90008340a7cc5f6302fada1737",
+      "secondary_blob": "45b8f33ed8ef376c3745068b1f873ce8a47c1d0f",
+      "secondary_main_sha256": "8ddfec4bba8c1840785e0885ce73ca26984b07358a7399e917a025dde62ac5e2",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_external_qualification_evidence"
+    },
+    {
+      "path": "docs/agent-testing.md",
+      "git_delta_status": "M",
+      "previous_blob": "e5beb34ec67abbb7919adab6cbd17388d5c24e07",
+      "secondary_blob": "9ffd561a73d112de4463bf0cfd183bcacd61afbf",
+      "secondary_main_sha256": "f18fa23439787dbaa10f68dfd3bfd6c5aefd553d3d14a17e22f2f536315b9411",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_external_qualification_evidence"
+    },
+    {
+      "path": "docs/reviews/kit-bump-core-v113/README.md",
+      "git_delta_status": "A",
+      "previous_blob": "0000000000000000000000000000000000000000",
+      "secondary_blob": "3745b85188f815f5f51241edfc9ff8db801b1f61",
+      "secondary_main_sha256": "e68a7499e83fd9998a4fb03543d55e67ea15468e6f196aa2711fdb3507ffedbb",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_external_qualification_evidence"
+    },
+    {
+      "path": "docs/reviews/kit-bump-core-v113/govulncheck-binary-release-ce04b124.txt",
+      "git_delta_status": "A",
+      "previous_blob": "0000000000000000000000000000000000000000",
+      "secondary_blob": "3a9b452ddd6c31e9dd2f023bc6a5eb88c1cb1d25",
+      "secondary_main_sha256": "fbc6c4e021d9e492bbbd5f3c06f9894427d9b8bf8bd16929c65abd5bf2a2620d",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_external_qualification_evidence"
+    },
+    {
+      "path": "docs/reviews/kit-bump-core-v113/govulncheck-control-stripped-ce04b124.txt",
+      "git_delta_status": "A",
+      "previous_blob": "0000000000000000000000000000000000000000",
+      "secondary_blob": "3a9b452ddd6c31e9dd2f023bc6a5eb88c1cb1d25",
+      "secondary_main_sha256": "fbc6c4e021d9e492bbbd5f3c06f9894427d9b8bf8bd16929c65abd5bf2a2620d",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_external_qualification_evidence"
+    },
+    {
+      "path": "docs/reviews/kit-bump-core-v113/govulncheck-control-unstripped-ce04b124.txt",
+      "git_delta_status": "A",
+      "previous_blob": "0000000000000000000000000000000000000000",
+      "secondary_blob": "d718f223b8878b42bf243417dfd62d285444a745",
+      "secondary_main_sha256": "b5ae54ddcfa4cb39e85f84ad2d9e43556bd817c480eaab2a71bab63bfc29353b",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_external_qualification_evidence"
+    },
+    {
+      "path": "docs/reviews/kit-bump-core-v113/govulncheck-package-authcore.txt",
+      "git_delta_status": "A",
+      "previous_blob": "0000000000000000000000000000000000000000",
+      "secondary_blob": "d57f393c53c41bcb5eb25ff9623f08dac1dbe7cc",
+      "secondary_main_sha256": "d1cff3665cba0d4709c2be90cd3c31a6977166a8dfc49b4e9e903e87ff8a1ca7",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_external_qualification_evidence"
+    },
+    {
+      "path": "docs/reviews/kit-bump-core-v113/govulncheck-package-go-backend.txt",
+      "git_delta_status": "A",
+      "previous_blob": "0000000000000000000000000000000000000000",
+      "secondary_blob": "d57f393c53c41bcb5eb25ff9623f08dac1dbe7cc",
+      "secondary_main_sha256": "d1cff3665cba0d4709c2be90cd3c31a6977166a8dfc49b4e9e903e87ff8a1ca7",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_external_qualification_evidence"
+    },
+    {
+      "path": "docs/reviews/kit-bump-core-v113/govulncheck-source-authcore.txt",
+      "git_delta_status": "A",
+      "previous_blob": "0000000000000000000000000000000000000000",
+      "secondary_blob": "0e03f753e24230fc69598b85d3186a726f11d3cf",
+      "secondary_main_sha256": "d8dd3483d0e7466cdc7aafd79801833606fc55f8b7b843d5d38d56e2c20ca9ba",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_external_qualification_evidence"
+    },
+    {
+      "path": "docs/reviews/kit-bump-core-v113/govulncheck-source-go-backend.txt",
+      "git_delta_status": "A",
+      "previous_blob": "0000000000000000000000000000000000000000",
+      "secondary_blob": "77d4e77a78239ca2d604be0bd3f95151da5ea256",
+      "secondary_main_sha256": "f2130c34751b05fc078ed19c38ae22e785ebba30daba2f897b702212eaee9e9a",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_external_qualification_evidence"
+    },
+    {
+      "path": "docs/reviews/kit-bump-core-v113/independent-review.json",
+      "git_delta_status": "A",
+      "previous_blob": "0000000000000000000000000000000000000000",
+      "secondary_blob": "511fda4c801231868640202e76d6921f5a7af58b",
+      "secondary_main_sha256": "e1a62b74959214b6aaa74ccedb4f901aced4f4516b5bee0cc92affbe0457f4d9",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_external_qualification_evidence"
+    },
+    {
+      "path": "docs/reviews/kit-bump-core-v113/qualification.json",
+      "git_delta_status": "A",
+      "previous_blob": "0000000000000000000000000000000000000000",
+      "secondary_blob": "bdfa0a404e8b9e94757d9bca853fab6a6f65d0dd",
+      "secondary_main_sha256": "7f815a1f2ba05b735c7386799aa59298d3e61e255fd3bba85f77f1ca6c384ee6",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_external_qualification_evidence"
+    },
+    {
+      "path": "docs/reviews/kit-bump-core-v113/trivy-release-ce04b124.txt",
+      "git_delta_status": "A",
+      "previous_blob": "0000000000000000000000000000000000000000",
+      "secondary_blob": "7515463135bcc8c4d25cf25b5a7d59a55a025cca",
+      "secondary_main_sha256": "17a96b814314d1a086117fbd655058ff4e5467d4db393c331ace55556245c6a6",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_external_qualification_evidence"
+    },
+    {
+      "path": "docs/tracked-markdown.json",
+      "git_delta_status": "M",
+      "previous_blob": "939690ca627e776106a3093d2053c516504c958f",
+      "secondary_blob": "037afcafed88f0e54a1a7fda5f70d7e21dcf2f27",
+      "secondary_main_sha256": "4b0d22203708d15f5e16969482685e4eab94c126d40fd7339dc6ac7c144c0873",
+      "in_retained_source_index": false,
+      "scope": "documentation_or_external_qualification_evidence"
+    },
+    {
+      "path": "frontend/package-lock.json",
+      "git_delta_status": "M",
+      "previous_blob": "bdb905cdb0b950df3ab17383debcaf425012661a",
+      "secondary_blob": "e3f7cd72c7f795c5fdb9bd5d56003cf3a6c6ed04",
+      "secondary_main_sha256": "f121b381a3051351e181ab4c0ee6c4c875d4357ed13db1750447b51ba43b715e",
+      "in_retained_source_index": false,
+      "scope": "external_dependency_build_toolchain_or_probe_selection"
+    },
+    {
+      "path": "frontend/package.json",
+      "git_delta_status": "M",
+      "previous_blob": "0a2d2029e1abb0c6053e0ae097fcc8c23b220441",
+      "secondary_blob": "c9f3cebb52c0135ed4c1a44ed0c1597be1888580",
+      "secondary_main_sha256": "0490b7b3b57bee57c906be96e73409ea4b44ee6f091c8aabeadae8530f6ff5ce",
+      "in_retained_source_index": false,
+      "scope": "external_dependency_build_toolchain_or_probe_selection"
+    },
+    {
+      "path": "frontend/vendor/roedu-ui-1.0.11.tgz",
+      "git_delta_status": "D",
+      "previous_blob": "98b012cd112650bb7a01e4b08b4e5a5c740d75b8",
+      "secondary_blob": "0000000000000000000000000000000000000000",
+      "secondary_main_sha256": null,
+      "in_retained_source_index": false,
+      "scope": "external_package_archive_identity_only_contents_uninspected"
+    },
+    {
+      "path": "frontend/vendor/roedu-ui-1.0.11.tgz.sha256",
+      "git_delta_status": "D",
+      "previous_blob": "b5e11bd33657e3fff704baae680ffb9786c5d774",
+      "secondary_blob": "0000000000000000000000000000000000000000",
+      "secondary_main_sha256": null,
+      "in_retained_source_index": false,
+      "scope": "external_dependency_build_toolchain_or_probe_selection"
+    },
+    {
+      "path": "frontend/vendor/roedu-ui-1.0.13.tgz",
+      "git_delta_status": "A",
+      "previous_blob": "0000000000000000000000000000000000000000",
+      "secondary_blob": "e2234db61a81c24726e6cd2513117b4590fed552",
+      "secondary_main_sha256": null,
+      "in_retained_source_index": false,
+      "scope": "external_package_archive_identity_only_contents_uninspected"
+    },
+    {
+      "path": "frontend/vendor/roedu-ui-1.0.13.tgz.sha256",
+      "git_delta_status": "A",
+      "previous_blob": "0000000000000000000000000000000000000000",
+      "secondary_blob": "9ee5f88724a1b93ab2183cf71145a69a61ef5b80",
+      "secondary_main_sha256": "ca5e93ae23768f8d69d57021bd1228a32732c64c3ec2b88f8f4b9035170d205b",
+      "in_retained_source_index": false,
+      "scope": "external_dependency_build_toolchain_or_probe_selection"
+    },
+    {
+      "path": "frontend/vendor/roedu-web-kit-0.1.11.tgz",
+      "git_delta_status": "D",
+      "previous_blob": "904bd35d106ffbd8cd6977c6d4e87d0258677754",
+      "secondary_blob": "0000000000000000000000000000000000000000",
+      "secondary_main_sha256": null,
+      "in_retained_source_index": false,
+      "scope": "external_package_archive_identity_only_contents_uninspected"
+    },
+    {
+      "path": "frontend/vendor/roedu-web-kit-0.1.11.tgz.sha256",
+      "git_delta_status": "D",
+      "previous_blob": "e6fc070c571bd6fb1d855df1c56a70a0acf2181e",
+      "secondary_blob": "0000000000000000000000000000000000000000",
+      "secondary_main_sha256": null,
+      "in_retained_source_index": false,
+      "scope": "external_dependency_build_toolchain_or_probe_selection"
+    },
+    {
+      "path": "frontend/vendor/roedu-web-kit-0.1.13.tgz",
+      "git_delta_status": "A",
+      "previous_blob": "0000000000000000000000000000000000000000",
+      "secondary_blob": "6e083be75375ca3c030d80ea9f6317b0e1f87aa4",
+      "secondary_main_sha256": null,
+      "in_retained_source_index": false,
+      "scope": "external_package_archive_identity_only_contents_uninspected"
+    },
+    {
+      "path": "frontend/vendor/roedu-web-kit-0.1.13.tgz.sha256",
+      "git_delta_status": "A",
+      "previous_blob": "0000000000000000000000000000000000000000",
+      "secondary_blob": "50999af16e609f652fee54422dc3de25a8dcd080",
+      "secondary_main_sha256": "3eb0eea9b30fbb05cfa6726d59c8e105d8e71dff7cd58866d64fff9946525ed2",
+      "in_retained_source_index": false,
+      "scope": "external_dependency_build_toolchain_or_probe_selection"
+    },
+    {
+      "path": "go-backend/go.mod",
+      "git_delta_status": "M",
+      "previous_blob": "ecb5d8f76a73ae7737b5f0703a0a70ee013e42a1",
+      "secondary_blob": "410f2a1e5e9351049e9119d4e33874acce421bf1",
+      "secondary_main_sha256": "65ad4452651000c7bb3c0c903046499e8fb33c190493072cd625dad98389c984",
+      "in_retained_source_index": false,
+      "scope": "external_dependency_build_toolchain_or_probe_selection"
+    },
+    {
+      "path": "go-backend/go.sum",
+      "git_delta_status": "M",
+      "previous_blob": "966d1dd48add86e2022f9f11ddeae804abe1ec2e",
+      "secondary_blob": "e73409471fdaf205aa735b49be3adcaaa05f824d",
+      "secondary_main_sha256": "df4bf5f1d70df9d237126649e7875364f7ccbda7ac58dc059acb0538e2e34f18",
+      "in_retained_source_index": false,
+      "scope": "external_dependency_build_toolchain_or_probe_selection"
+    },
+    {
+      "path": "go-backend/third_party/webkit/go.mod",
+      "git_delta_status": "M",
+      "previous_blob": "9de9a0a083a203be7da0804951a720d811ed2f0a",
+      "secondary_blob": "eecef4430c4e08ff677b334aa0472d1197c0a22c",
+      "secondary_main_sha256": "e085c910a58c3cdfe6aacb0051ae85c4b8a9ad999decf9d8db3d6a0e244ad126",
+      "in_retained_source_index": false,
+      "scope": "external_dependency_build_toolchain_or_probe_selection"
+    },
+    {
+      "path": "go-backend/third_party/webkit/go.sum",
+      "git_delta_status": "M",
+      "previous_blob": "565e9da37897eb192dfececed873bc6b86c33e9e",
+      "secondary_blob": "816484c8b002537e00bdde131c9333f384ed5fa8",
+      "secondary_main_sha256": "4f356651a999cf88f0fded128a5286af3de54d6a39737f82d6e40988b76707fe",
+      "in_retained_source_index": false,
+      "scope": "external_dependency_build_toolchain_or_probe_selection"
+    },
+    {
+      "path": "go-backend/third_party/webkit/sample/go.mod",
+      "git_delta_status": "M",
+      "previous_blob": "b7cb7e731e3fc3241fa1c6229e5992d73c123731",
+      "secondary_blob": "e63a1247798b4123579b77c811c505a1d2736606",
+      "secondary_main_sha256": "315d0b4993bc5b976b0f21d0ef22fe9299d06cf59102376c12b9ec6a8e6f1e01",
+      "in_retained_source_index": false,
+      "scope": "external_dependency_build_toolchain_or_probe_selection"
+    },
+    {
+      "path": "go-backend/third_party/webkit/sample/go.sum",
+      "git_delta_status": "M",
+      "previous_blob": "164c4182eb0390b592e895e056be07b8fae0c3e2",
+      "secondary_blob": "c68ea5c8320d7f296b108bcb16a0ee783626773b",
+      "secondary_main_sha256": "d4f755c03e8f183cb5493bd89f9e177ee7238013d95160ca15607f34142cee59",
+      "in_retained_source_index": false,
+      "scope": "external_dependency_build_toolchain_or_probe_selection"
+    },
+    {
+      "path": "kit/CORE_TAG",
+      "git_delta_status": "M",
+      "previous_blob": "e8f2f603d912b3903f24f60dfce171d9ccdb99ad",
+      "secondary_blob": "79faca5d7450c076df2a232dfb3f4a0167cf7627",
+      "secondary_main_sha256": "8caf5baefedb196981a199a66584338db7dca31bbb0028b513d731898233f26e",
+      "in_retained_source_index": false,
+      "scope": "external_dependency_build_toolchain_or_probe_selection"
+    },
+    {
+      "path": "kit/SHA256SUMS",
+      "git_delta_status": "M",
+      "previous_blob": "26ed59bd43dfaaddd9141ece349eb47b21e9e385",
+      "secondary_blob": "5c2f905602cf59f6db55765923b0c9fb2d0c7266",
+      "secondary_main_sha256": "b8c778a96694a805af85982e09dba638b9e085faae2c069a398d2adb29f9365b",
+      "in_retained_source_index": false,
+      "scope": "external_dependency_build_toolchain_or_probe_selection"
+    },
+    {
+      "path": "kit/roedu-ui-1.0.11.tgz",
+      "git_delta_status": "D",
+      "previous_blob": "98b012cd112650bb7a01e4b08b4e5a5c740d75b8",
+      "secondary_blob": "0000000000000000000000000000000000000000",
+      "secondary_main_sha256": null,
+      "in_retained_source_index": false,
+      "scope": "external_package_archive_identity_only_contents_uninspected"
+    },
+    {
+      "path": "kit/roedu-ui-1.0.13.tgz",
+      "git_delta_status": "A",
+      "previous_blob": "0000000000000000000000000000000000000000",
+      "secondary_blob": "e2234db61a81c24726e6cd2513117b4590fed552",
+      "secondary_main_sha256": null,
+      "in_retained_source_index": false,
+      "scope": "external_package_archive_identity_only_contents_uninspected"
+    },
+    {
+      "path": "kit/roedu-web-kit-0.1.11.tgz",
+      "git_delta_status": "D",
+      "previous_blob": "904bd35d106ffbd8cd6977c6d4e87d0258677754",
+      "secondary_blob": "0000000000000000000000000000000000000000",
+      "secondary_main_sha256": null,
+      "in_retained_source_index": false,
+      "scope": "external_package_archive_identity_only_contents_uninspected"
+    },
+    {
+      "path": "kit/roedu-web-kit-0.1.13.tgz",
+      "git_delta_status": "A",
+      "previous_blob": "0000000000000000000000000000000000000000",
+      "secondary_blob": "6e083be75375ca3c030d80ea9f6317b0e1f87aa4",
+      "secondary_main_sha256": null,
+      "in_retained_source_index": false,
+      "scope": "external_package_archive_identity_only_contents_uninspected"
+    },
+    {
+      "path": "kit/web-kit-go-core-v1.11.tgz",
+      "git_delta_status": "D",
+      "previous_blob": "7e6fa1746aac40212f301703c3594c5ac0a38cdf",
+      "secondary_blob": "0000000000000000000000000000000000000000",
+      "secondary_main_sha256": null,
+      "in_retained_source_index": false,
+      "scope": "external_package_archive_identity_only_contents_uninspected"
+    },
+    {
+      "path": "kit/web-kit-go-core-v1.13.tgz",
+      "git_delta_status": "A",
+      "previous_blob": "0000000000000000000000000000000000000000",
+      "secondary_blob": "cf67c144788c24e2e33e7d7be0f7c9f0d26c36cf",
+      "secondary_main_sha256": null,
+      "in_retained_source_index": false,
+      "scope": "external_package_archive_identity_only_contents_uninspected"
+    },
+    {
+      "path": "scripts/gui-toolchain-probe.mjs",
+      "git_delta_status": "M",
+      "previous_blob": "a142395547a00d62d6fba10b03dd30259bd47964",
+      "secondary_blob": "d750bfe1c700764f7c711dfc347b6a3200223335",
+      "secondary_main_sha256": "7b6afea9ac49393a1743f37ced09d324cac3e2ad5f747b1694a1dc9ec3b79264",
+      "in_retained_source_index": false,
+      "scope": "external_dependency_build_toolchain_or_probe_selection"
+    },
+    {
+      "path": "tools/gui-bootstrap-webkit/templates/Dockerfile",
+      "git_delta_status": "M",
+      "previous_blob": "0eade1cffcd0ecd0a2df77721fa2e8f75c756b45",
+      "secondary_blob": "b87571ed20bc14941def1176f45ae25344dd2fce",
+      "secondary_main_sha256": "c1576a7e06627fd2261039283ee003d5ffabedae9eda78921cc806136c961c5b",
+      "in_retained_source_index": false,
+      "scope": "external_dependency_build_toolchain_or_probe_selection"
+    },
+    {
+      "path": "tools/gui-bootstrap-webkit/templates/Dockerfile.toolchain",
+      "git_delta_status": "M",
+      "previous_blob": "2397c027a837036e77944182f1d39ffb8ec45f50",
+      "secondary_blob": "4e70a812b2747bd642ea68bcb261b6bc764bcf44",
+      "secondary_main_sha256": "5e4c8c297913abc9a77c6668eb1bb86577cdcb955d80c1f6ebc4fb809b962910",
+      "in_retained_source_index": false,
+      "scope": "external_dependency_build_toolchain_or_probe_selection"
+    },
+    {
+      "path": "versions.lock.json",
+      "git_delta_status": "M",
+      "previous_blob": "c8241726c5b40d3fea639c8d824305ad75f3ad96",
+      "secondary_blob": "1f7ae3da1c1aa099af8ea2a47cead103b6fc37ec",
+      "secondary_main_sha256": "07b78e8df5330c5463430ea90b3954142b25b25b2550941d071097d5efd8a0ad",
+      "in_retained_source_index": false,
+      "scope": "external_dependency_build_toolchain_or_probe_selection"
+    }
+  ],
+  "retained_index_verification": {
+    "content": {
+      "checked_paths": 244,
+      "primary_feature_changed_paths": [],
+      "secondary_main_equal_paths": 244,
+      "secondary_main_changed_paths": []
+    },
+    "interface": {
+      "checked_paths": 59,
+      "primary_feature_changed_paths": [],
+      "secondary_main_equal_paths": 58,
+      "secondary_main_changed_paths": [
+        {
+          "path": "frontend/src/screens/AlchimieChallenge.tsx",
+          "primary_feature_sha256": "b181eb98ac3ba9c9960203af3d99da96a47d4a131a8bd003335ad290856f6afb",
+          "secondary_main_sha256": "40fed58a2e1bf5aceebd592e5736705c9d3cfb5967e2cbad9d52572599978578"
+        }
+      ]
+    },
+    "adjacent": {
+      "checked_paths": 7,
+      "primary_feature_changed_paths": [],
+      "secondary_main_equal_paths": 7,
+      "secondary_main_changed_paths": []
+    },
+    "policy": {
+      "checked_paths": 2,
+      "primary_feature_changed_paths": [],
+      "secondary_main_equal_paths": 2,
+      "secondary_main_changed_paths": []
+    }
+  },
+  "full_feature_main_interface_equality": false,
+  "affected_contracts": {
+    "application_source_delta": "No application Go/TypeScript/Python/Rust source changes in this delta. The toolchain probe changes expected installed package versions. This is bounded static inspection only.",
+    "content_and_submission": "All 244 retained content/resolver paths, all seven adjacent paths and both policy paths match unchanged designated primary. The prior Alchimie saved-session initialization difference remains the sole changed indexed secondary interface path. The inspected text delta changes no submitted text/ID format or ownership rules.",
+    "dependency_selection": "Secondary selects core-v1.13, frontend @roedu/ui 1.0.13 and @roedu/web-kit 0.1.13, local Go web-kit core-v1.13, Go module directives 1.27.3 and golang.org/x/net v0.60.0. Package archives were neither opened nor extracted; replacement identities are recorded from Git metadata. These selections do not prove runtime equivalence.",
+    "runner_selection": "Secondary Dockerfile.toolchain, bootstrap templates, versions lock and .gate.env select a core-v1.13 Go1.27.3 runner. Current AGENTS names Go1.27.3 for both release builders and the core-v1.13 gate runner. This loop adopts no environment/toolchain change and runs no check with these selections.",
+    "coverage_limit": "The retained source/interface index excludes dependency archives, package/module manifests and runner/build files. Earlier server-startup and indexed Alchimie differences remain bound through chained observations. No full runtime or UI equality is inferred.",
+    "qualification": "Historical Go1.27.1 baseline checks and signed source verdicts keep their original exact SHA contexts. External security/kit qualification reports were not evaluated. No result transfers to the latest secondary dependency/runner stack; any future integration needs separate explicit authority and then-current designated primary/WIP qualification."
+  },
+  "mechanical_delta_classification": {
+    "path": "/home/dobo/work/_temp/content__v1-42-familiar-food-materials-and-selected-inputs/secondary-main-e531358c/mechanical-delta.json",
+    "sha256": "459fe1758e713bc2dfb4ca88aaa86f5e40024b32092c04a2ecf2c1365ce3b347",
+    "scope": "Read-only classification; no source review, runtime or security approval."
+  },
+  "retained_exact_authority_index": {
+    "path": "/home/dobo/work/_temp/content__v1-42-familiar-food-materials-and-selected-inputs/feature-working-observation.json",
+    "sha256": "18de1668a326a5a593549e2998777a0df6f0c7585ce6a610959a40fb782ce851",
+    "scope": "Original index bytes preserved; all primary paths rehashed, secondary differences and index omissions explicit."
+  },
+  "original_canonical_feature_baseline_preserved": {
+    "path": "current-feature-working-baseline.json",
+    "sha256": "5d0eb5bf28d8e59d93164fd5afe4887657cfe2087cbefd971ca033b176f6b5e8",
+    "secondary_identity_is_historical": true
+  },
+  "source_closure": "d331f6ad79696019b6882d53035572f3da4c7cd1",
+  "source_pool_sha256": "b7b5be791a6b905d44319bc81259a019499de91a0aa5deaf33d32cefe7354005",
+  "source_module_sha256": "931799a338411d2be4a0115d8f8cf75164f95d1687c1344e643e91fb9ecb9b74",
+  "protected_source_closures_preserved": 29,
+  "historical_baselines_preserved": 22,
+  "curation_wait_unchanged": true,
+  "next_decision": "Curation decision: consider separate qualification of Avion, Mănăstire, Cinematograf, Interfon and Sucitor (21 reviewed keys), or identify a concrete uncovered high-value discovery gap; no source application or landing authorized.",
+  "source_approvals_added": 0,
+  "formal_reviews_added": 0,
+  "dictionary_requests": 0,
+  "source_module_execution_or_application": 0,
+  "module_dry_run": false,
+  "runtime_or_test_execution": false,
+  "toolchain_CI_gate_mutations": 0,
+  "installed": 0,
+  "player_visible_source_delta": "0/0/0",
+  "remote_operations_by_this_checkpoint": 0
+}
