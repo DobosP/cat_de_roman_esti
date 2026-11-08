@@ -219,3 +219,5 @@ Parallel lanes also allocated0188/0189 independently. All four full-filename bod
 - [0224](0224-target-based-alchimie.md) — a single target-based Alchimie experience and its workbench.
 
 - [0225](0225-retire-v3-content-loop-artefacts.md) — V3 content-loop branch, worktree and `_temp` evidence archived to the NAS with byte verification and deleted locally; V4 seed inputs kept in scratch.
+
+- [0226](0226-content-loop-v4.md) — V4 in-chat Codex content loop, independent roles, standing source policy, local Git landings.
