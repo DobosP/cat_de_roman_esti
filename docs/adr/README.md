@@ -215,3 +215,5 @@ Parallel lanes also allocated0188/0189 independently. All four full-filename bod
 - [0222](0222-simplified-alchimie-collection-interface.md) — approved simplified responsive interface for both Alchimie modes; one visible searchable collection and on-demand earned recipes, no per-word badges or recent-discovery panel; qualified product2cacc878, full38/38 and937browser.
 
 - [0223](0223-hermetic-relocation-test-filesystem.md) — hermetic sibling checkout/output setup executes the existing relocation assertion in the pinned container; proposed global TMPDIR adjustment reverted, no skip exemption.
+
+- [0224](0224-target-based-alchimie.md) — a single target-based Alchimie experience and its workbench.

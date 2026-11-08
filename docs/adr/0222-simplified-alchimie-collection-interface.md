@@ -1,6 +1,6 @@
 # ADR-0222: Simplified Alchimie collection interface
 
-- Status: accepted; qualified on product2cacc878 (2026-10-29); native TMPDIR paragraph superseded by [ADR-0223](0223-hermetic-relocation-test-filesystem.md)
+- Status: historical; qualified on product2cacc878 (2026-10-29); current two-mode GUI superseded by [ADR-0224](0224-target-based-alchimie.md); native TMPDIR paragraph superseded by [ADR-0223](0223-hermetic-relocation-test-filesystem.md)
 - Date: 2026-10-28
 - Partially supersedes: ADR-0142 for the library controls and discovery presentation,
   and ADR-0149 for collapsed search/filter and progress presentation. Their gameplay,

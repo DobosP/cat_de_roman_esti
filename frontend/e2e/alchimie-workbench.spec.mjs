@@ -13,6 +13,9 @@ const slot = (page, label) => page.getByRole("button", {
   name: `Scoate ${label} din alambic`, exact: true,
 });
 const slots = (page) => page.getByRole("button", { name: /^Scoate .* din alambic$/ });
+const useLastResult = (page, label) => page.locator(".alchemy-last-reaction").getByRole("button", {
+  name: `Folosește ${label}`, exact: true,
+});
 const search = (page) => page.getByRole("searchbox", { name: "Caută în toate conceptele descoperite" });
 const responseFor = (page, id) => page.waitForResponse((reply) => reply.request().method() === "POST"
   && new URL(reply.url()).pathname === `${gameURL(game, id)}/combine`);
@@ -41,7 +44,7 @@ async function measure(page, testInfo, phase) {
   const metrics = await page.evaluate(() => {
     const selectors = [
       ".alchemy-target", ".alchemy-workspace", ".alchemy-bench",
-      ".alchemy-inventory-panel", ".alchemy-inventory-grid", ".alchemy-slot",
+      ".alchemy-inventory-panel", ".alchemy-inventory-grid", ".alchemy-ingredient-slot", ".alchemy-slot",
     ];
     const box = (element) => {
       const rect = element.getBoundingClientRect();
@@ -83,9 +86,14 @@ test("the initial game puts words above 500px and collapses secondary controls",
   const initial = await start(page, game);
   await expect(page.locator(".alchemy-workspace > .alchemy-bench")).toHaveCount(1);
   await expect(page.locator(".alchemy-workspace > .alchemy-inventory-panel")).toHaveCount(1);
-  // User-approved successor: all owned words, plain labels and always-visible search.
+  await expect(page.locator(".alchemy-bench .alchemy-target")).toContainText(initial.target.label);
+  await expect(page.locator(".alchemy-bench .alchemy-round-count")).toHaveText("0 combinații");
+  await expect(page.getByRole("group", { name: "Primul cuvânt", exact: true })).toBeVisible();
+  await expect(page.getByRole("group", { name: "Al doilea cuvânt", exact: true })).toBeVisible();
+  await expect(page.locator(".alchemy-ingredient-slot")).toHaveCount(2);
+  await expect(page.locator(".alchemy-library-count")).toContainText(String(initial.inventory.length));
   await expect(inventory(page).getByRole("button")).toHaveCount(initial.inventory.length);
-  await expect(inventory(page).locator(".alchemy-word-label")).toHaveText(initial.inventory.map((item) => item.label).reverse());
+  await expect(inventory(page).locator(".alchemy-word-label")).toHaveText(initial.inventory.map((item) => item.label));
   await expect(inventory(page).locator(".alchemy-word-meta")).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Combină cele două concepte selectate" })).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Golește", exact: true })).toHaveCount(0);
@@ -119,7 +127,7 @@ test("the initial game puts words above 500px and collapses secondary controls",
 });
 
 for (const keyboard of [false, true]) {
-  test(`${keyboard ? "keyboard" : "tap"}: two word activations discover, then one activation continues to the target`, async ({ page }, testInfo) => {
+  test(`${keyboard ? "keyboard" : "tap"}: two words discover a result that can be explicitly reused to reach the target`, async ({ page }, testInfo) => {
     const initial = await start(page, game);
     const posts = combineTraffic(page, initial.game_id);
     const steps = solution(game).steps;
@@ -133,34 +141,47 @@ for (const keyboard of [false, true]) {
     await choose(steps[0].labels[0]);
     await expect(slot(page, steps[0].labels[0])).toBeVisible();
     expect(posts).toEqual([]);
+    const partnerQuery = steps[0].labels[1];
+    await search(page).fill(partnerQuery);
     const discoveryResponse = responseFor(page, initial.game_id);
     await choose(steps[0].labels[1]);
     const discovery = await (await discoveryResponse).json();
     expect(discovery.discovered).toHaveLength(1);
     expect(discovery.won).toBe(false);
     const earned = discovery.discovered[0];
-    await expect(slots(page)).toHaveCount(1);
-    await expect(slot(page, earned.label)).toBeVisible();
-    await expect(ingredient(page, earned.label)).toHaveAttribute("aria-pressed", "true");
+    await expect(slots(page)).toHaveCount(0);
+    await expect(search(page)).toHaveValue(partnerQuery);
+    await expect(ingredient(page, earned.label)).toHaveCount(0);
     await expect(page.locator(".alchemy-reaction-history")).toBeHidden();
     await expect(page.locator(".alchemy-reaction-history .alchemy-reaction-result").first()).toBeHidden();
-    await expect(page.locator(".alchemy-feedback")).toContainText(earned.label);
     for (const label of steps[0].labels) await expect(page.locator(".alchemy-last-reaction")).toContainText(label);
-    await expect(page.locator(".alchemy-last-reaction .alchemy-result-word")).toHaveText(earned.label);
-    await expect(inventory(page).locator(".alchemy-word-label").first()).toHaveText(earned.label);
+    await expect(page.locator(".alchemy-last-reaction .alchemy-result-emphasis")).toHaveText(earned.label);
+    await expect(page.locator(".alchemy-bench .alchemy-round-count")).toHaveText("1 combinație");
+    await search(page).press("Escape");
+    await expect(inventory(page).locator(".alchemy-word-label")).toHaveText(discovery.inventory.map((item) => item.label));
+    const use = useLastResult(page, earned.label);
+    if (keyboard) {
+      await tabTo(page, use);
+      await page.keyboard.press("Enter");
+    } else await use.click();
+    await expect(slot(page, earned.label)).toBeVisible();
+    await expect(ingredient(page, earned.label)).toHaveAttribute("aria-pressed", "true");
     expect(posts).toEqual([steps[0].payload]);
     const partner = steps[1].labels.find((label) => label !== earned.label);
     expect(partner).toBeDefined();
     const winningResponse = responseFor(page, initial.game_id);
     await choose(partner);
-    expect((await (await winningResponse).json()).won).toBe(true);
+    const won = await (await winningResponse).json();
+    expect(won.won).toBe(true);
+    await expect(page.locator(".alchemy-last-reaction .alchemy-reaction-caption")).toHaveText("Combinația câștigătoare");
+    await expect(page.locator(".alchemy-last-reaction .alchemy-result-emphasis")).toContainText(won.target.label);
     await expect(page.getByRole("button", { name: "Copiază rezultatul" })).toBeVisible();
     expect(posts).toHaveLength(2);
     expect(new Set(Object.values(posts[1]))).toEqual(new Set(Object.values(steps[1].payload)));
   });
 }
 
-test("keyboard discovery moves focus from a removed ingredient to the carried word", async ({ page }) => {
+test("keyboard discovery moves focus from a depleted ingredient to the result action", async ({ page }) => {
   await deterministicStarts(page, footballGame);
   const initial = await start(page, footballGame);
   const [first, second] = solution(footballGame).steps[0].labels;
@@ -175,9 +196,12 @@ test("keyboard discovery moves focus from a removed ingredient to the carried wo
   expect(discovered.inventory.find((item) => item.label === second).depleted).toBe(true);
   await expect(ingredient(page, second)).toBeVisible();
   await expect(ingredient(page, second)).toBeDisabled();
+  await expect(slots(page)).toHaveCount(0);
+  await expect(useLastResult(page, earned.label)).toBeFocused();
+  await expect(page.locator(".alchemy-last-reaction .alchemy-result-emphasis")).toHaveText(earned.label);
+  await expect(ingredient(page, earned.label)).toHaveAttribute("aria-pressed", "false");
+  await page.keyboard.press("Enter");
   await expect(slot(page, earned.label)).toBeVisible();
-  await expect(ingredient(page, earned.label)).toBeFocused();
-  await expect(page.locator(".alchemy-feedback")).toContainText(earned.label);
   await expect(ingredient(page, earned.label)).toHaveAttribute("aria-pressed", "true");
 });
 
@@ -211,7 +235,8 @@ test("a delayed discovery preserves focus moved to another control while the com
   const discovered = await (await response).json();
   await expect(ingredient(page, second)).toBeVisible();
   await expect(ingredient(page, second)).toBeDisabled();
-  await expect(slot(page, discovered.discovered[0].label)).toBeVisible();
+  await expect(slots(page)).toHaveCount(0);
+  await expect(useLastResult(page, discovered.discovered[0].label)).toBeVisible();
   await expect(otherControl).toBeFocused();
 });
 
@@ -274,8 +299,9 @@ test("rapid partner taps send one combine while the response is pending", async 
   } finally {
     release();
   }
-  expect((await response).status()).toBe(200);
-  await expect(slots(page)).toHaveCount(1);
+  const discovered = await (await response).json();
+  await expect(slots(page)).toHaveCount(0);
+  await expect(useLastResult(page, discovered.discovered[0].label)).toBeVisible();
   expect(posts).toHaveLength(1);
 });
 
@@ -289,7 +315,8 @@ test("dragging one word onto another combines without separate selection or conf
   const discovered = await (await response).json();
   expect(discovered.discovered).toHaveLength(1);
   expect(posts).toEqual([solution(game).steps[0].payload]);
-  await expect(slot(page, discovered.discovered[0].label)).toBeVisible();
+  await expect(slots(page)).toHaveCount(0);
+  await expect(useLastResult(page, discovered.discovered[0].label)).toBeVisible();
 });
 
 test("the anchor cancels by tapping it or Escape and removal preserves keyboard focus", async ({ page }) => {
@@ -322,38 +349,47 @@ test("the anchor cancels by tapping it or Escape and removal preserves keyboard 
   expect(posts).toEqual([]);
 });
 
-for (const view of ["Utile", "Toate"]) {
-  test(`a discovery preserves the ${view} view and can be reused from the collapsed journal`, async ({ page }) => {
+for (const view of ["the workbench", "the earned recipes"]) {
+  test(`a discovery can be reused from ${view} without submitting another combination`, async ({ page }) => {
     const initial = await start(page, game);
     const posts = combineTraffic(page, initial.game_id);
-    // The removed useful/all filters are replaced by two direct earned-result paths.
-    // Preserve both historical case keys and the same selection/no-extra-request checks.
     const response = responseFor(page, initial.game_id);
     for (const label of solution(game).steps[0].labels) await ingredient(page, label).click();
     const state = await (await response).json();
     await expect(inventory(page).getByRole("button")).toHaveCount(state.inventory.length);
     const earned = state.discovered[0];
-    await expect(slot(page, earned.label)).toBeVisible();
-    await slot(page, earned.label).click();
-    await expect(page.locator(".alchemy-reaction-history")).toBeHidden();
-    if (view === "Toate") await openAlchemyDisclosure(page, ".alchemy-discoveries");
-    const result = page.locator(view === "Toate" ? ".alchemy-reaction-history .alchemy-reaction-result" : ".alchemy-last-reaction .alchemy-result-word").filter({
-      hasText: new RegExp(`${escapeRegex(earned.label)}$`),
-    }).first();
-    await result.click();
-    await expect(result).toHaveAttribute("aria-pressed", "true");
-    await expect(slot(page, earned.label)).toBeVisible();
-    expect(posts).toHaveLength(1);
-    await result.click();
-    await expect(slot(page, earned.label)).toBeVisible();
-    expect(posts).toHaveLength(1);
-    await slot(page, earned.label).click();
     await expect(slots(page)).toHaveCount(0);
-    await result.click();
+    await expect(page.locator(".alchemy-reaction-history")).toBeHidden();
+    if (view === "the earned recipes") {
+      const wordQuery = "zzzz-filtered-word";
+      await search(page).fill(wordQuery);
+      await openAlchemyDisclosure(page, ".alchemy-discoveries");
+      const recipeSearch = page.getByRole("searchbox", { name: "Caută în rețetele descoperite" });
+      await recipeSearch.fill(earned.label);
+      await page.locator(".alchemy-reaction-history").getByRole("button", {
+        name: `Folosește ${earned.label}`, exact: true,
+      }).click();
+      await expect(page.locator(".alchemy-reaction-history")).toBeHidden();
+      await expect(search(page)).toHaveValue(wordQuery);
+      await expect(search(page)).toBeFocused();
+      await expect(slot(page, earned.label)).toBeVisible();
+      expect(posts).toHaveLength(1);
+      await openAlchemyDisclosure(page, ".alchemy-discoveries");
+      await expect(recipeSearch).toHaveValue(earned.label);
+      await openAlchemyDisclosure(page, ".alchemy-library-tools");
+      await search(page).press("Escape");
+    } else {
+      await useLastResult(page, earned.label).click();
+      await expect(slot(page, earned.label)).toBeVisible();
+      expect(posts).toHaveLength(1);
+      await slot(page, earned.label).click();
+      await expect(slots(page)).toHaveCount(0);
+      await useLastResult(page, earned.label).click();
+    }
     await expect(slot(page, earned.label)).toBeVisible();
+    await expect(ingredient(page, earned.label)).toHaveAttribute("aria-pressed", "true");
     expect(posts).toHaveLength(1);
     const partner = solution(game).steps[1].labels.find((label) => label !== earned.label);
-    if (view === "Toate") await openAlchemyDisclosure(page, ".alchemy-library-tools");
     const next = responseFor(page, initial.game_id);
     await ingredient(page, partner).click();
     expect((await (await next).json()).won).toBe(true);

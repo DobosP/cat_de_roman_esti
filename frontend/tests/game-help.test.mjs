@@ -92,7 +92,7 @@ void test("each game statically owns only its own help and shared renderers own 
     assert.deepEqual(closure.filter((file) => file.startsWith("gameHelp/")), [`gameHelp/${game}.mjs`]);
   }
   for (const entry of ["components/GameHelp.tsx", "components/GameShell.tsx", "components/GameOptions.tsx",
-    "screens/Home.tsx", "screens/AlchimieExplore.tsx", "App.tsx"]) {
+    "screens/Home.tsx", "App.tsx"]) {
     assert.deepEqual(staticSourceClosure(entry).filter((file) => file === "gameHelp.mjs" || file.startsWith("gameHelp/")),
       [], `${entry}: no unrelated rules in its static closure`);
   }

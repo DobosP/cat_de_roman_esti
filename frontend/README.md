@@ -1,6 +1,6 @@
 # cat_de_roman_esti — frontend
 
-Text-only arcade GUI source: **Preact 11.0.0 + preact-iso 2.12.2 + Vite 8.3.3 + TypeScript 7.0.2** on all eight app paths, including both Alchimie modes ([ADR-0202](../docs/adr/0202-m3-remaining-preact-screens.md), [ADR-0204](../docs/adr/0204-native-preact-state-for-challenge.md)). The frozen React bundle remains for explicit rollback; accepted milestones and exact-source qualification are recorded in [STATUS](../docs/STATUS.md). There is no graph visualization; the old force-graph SPA was removed 2026-06-22 ([ADR-0001](../docs/adr/0001-pivot-to-word-game-arcade.md)).
+Text-only arcade GUI source: **Preact 11.0.0 + preact-iso 2.12.2 + Vite 8.3.3 + TypeScript 7.0.2** on all eight app paths ([ADR-0202](../docs/adr/0202-m3-remaining-preact-screens.md), [ADR-0204](../docs/adr/0204-native-preact-state-for-challenge.md)). The frozen React bundle remains for explicit rollback; accepted milestones and exact-source qualification are recorded in [STATUS](../docs/STATUS.md). There is no graph visualization; the old force-graph SPA was removed 2026-06-22 ([ADR-0001](../docs/adr/0001-pivot-to-word-game-arcade.md)).
 
 Six word games over the Romanian concept graph, all **server-authoritative**: the
 Go backend owns the sealed reviewed content, validates every move, and hides answers under
@@ -111,9 +111,8 @@ src/
                       (same-origin session cookies + X-CSRFToken).
   screens/
     Home.tsx          Arcade lobby: one card per game plus the local records/history panel.
-    Alchimie.tsx      URL/saved-round mode selector for independent lazy leaves.
+    Alchimie.tsx      Alchimie lazy route entry.
     AlchimieChallenge.tsx  Scored target-crafting rounds.
-    AlchimieExplore.tsx    Saved collection, recipes, goals and discovery journal.
     CaldRece.tsx      Hidden secret concept; each guess reports hot/cold closeness
                       (à la Contexto — server game key: "contexto").
     Lant.tsx          Type a linked concept and hop word-by-word to the target

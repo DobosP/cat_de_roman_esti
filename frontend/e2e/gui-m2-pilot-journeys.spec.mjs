@@ -1,6 +1,6 @@
 // Stable M2 inventory identities, extended for M3: every game document now
 // uses Preact. Historical test titles stay fixed; assertions qualify the new
-// current-route behavior and add both lazy Alchimie modes without new case keys.
+// current-route behavior and the single lazy Alchimie route without new case keys.
 // The motion-on project runs this file with real motion so the kit Presence
 // retention/exit variant is exercised instead of finishing at duration 0.
 import { test, expect } from "@playwright/test";
@@ -289,20 +289,21 @@ test("every unported route is the frozen legacy bundle", async ({ page }) => {
     await expect(page.locator(".screen").first()).toBeVisible();
   }
   const manifest = JSON.parse(readFileSync(new URL("../dist/.vite/manifest.json", import.meta.url)));
-  const challenge = manifest["src/screens/AlchimieChallenge.tsx"], explore = manifest["src/screens/AlchimieExplore.tsx"];
-  expect(challenge?.isDynamicEntry).toBe(true); expect(explore?.isDynamicEntry).toBe(true);
+  const alchimie = manifest["src/screens/Alchimie.tsx"];
+  expect(alchimie?.isDynamicEntry).toBe(true);
+  expect(manifest["src/screens/AlchimieExplore.tsx"]).toBeUndefined();
   const fetched = [], navigations = documentRequests(page);
   page.on("request", (request) => fetched.push(new URL(request.url()).pathname));
   await page.goto("/alchimie?mode=explore");
-  await expect(page.getByRole("heading", { name: "O lume de descoperit.", exact: true })).toBeVisible();
-  expect(fetched).toContain("/" + explore.file); expect(fetched).not.toContain("/" + challenge.file);
-  await page.getByRole("link", { name: "Provocări", exact: true }).click();
-  await expect(page).toHaveURL(/\/alchimie\?mode=challenges$/);
   await expect(page.locator(".game-intro")).toBeVisible();
-  expect(fetched).toContain("/" + challenge.file); expect(navigations).toHaveLength(1);
-  await page.getByRole("link", { name: "Explorează", exact: true }).click();
-  await expect(page.getByRole("heading", { name: "O lume de descoperit.", exact: true })).toBeVisible();
-  expect(fetched.filter((file) => file === "/" + explore.file)).toHaveLength(1);
+  await expect(page.getByRole("navigation", { name: "Modul Alchimie" })).toHaveCount(0);
+  expect(fetched).toContain("/" + alchimie.file);
+  await page.getByRole("button", { name: "Ieși la lista de jocuri", exact: true }).click();
+  await expect(page).toHaveURL(/\/$/);
+  await page.getByRole("button", { name: /^Joacă Alchimie —/ }).click();
+  await expect(page).toHaveURL(/\/alchimie$/);
+  await expect(page.locator(".game-intro")).toBeVisible();
+  expect(fetched.filter((file) => file === "/" + alchimie.file)).toHaveLength(1);
   expect(navigations).toHaveLength(1);
   await page.goto("/not-a-route");
   await expect(page).toHaveURL(/\/$/); await expectUi(page, "/");

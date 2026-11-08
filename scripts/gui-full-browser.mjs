@@ -366,7 +366,7 @@ try {
 const baseline = spawnSync("node", ["scripts/gui-baseline.mjs", "verify"], { cwd: root, env: process.env, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
 if (baseline.stderr) process.stderr.write(baseline.stderr);
 fs.writeFileSync(`${output}/baseline-stdout.log`, baseline.stdout || "");
-assert.equal(baseline.status, 0, "Actual screenshots/axe/vitals must match original baselines");
+assert.equal(baseline.status, 0, "Actual screenshot, axe and vitals contracts must pass");
 // The owner failure must not suppress the unchanged current matrix/CSP/baselines.
 // Validate the required legacy observation only after those independent checks.
 const fullDescriptorBytes = fs.readFileSync(`${output}/wrapper-current.json`);

@@ -27,8 +27,7 @@ export const frozenBaselineReferences = Object.freeze(["legacy/original-bundle.j
 const account = "src/components/AccountBar.tsx";
 const home = "src/screens/Home.tsx";
 // The frozen legacy bundle (ADR-0193 baseline) still carries every original
-// screen; the current Preact bundle carries every M3 route with separate lazy
-// Alchimie mode leaves (ADR-0202). Each profile binds its own screen table.
+// screen. Each profile binds its own screen table.
 const frozenScreens = Object.freeze({
   "/": null,
   "/alchimie": "src/screens/Alchimie.tsx",
@@ -50,13 +49,15 @@ export const portedScreens = Object.freeze({
   "/clasament": "src/screens/Ranking.tsx",
 });
 const components = { "/": "Home", "/intrusul": "Intrusul", "/perechi": "Perechi", "/conexiuni": "Conexiuni", "/alchimie": "Alchimie", "/cald-rece": "CaldRece", "/lant": "Lant", "/clasament": "Ranking" };
-export const alchimieModeScreens = Object.freeze({ challenges: "src/screens/AlchimieChallenge.tsx", explore: "src/screens/AlchimieExplore.tsx" });
-// The default /alchimie route is measured too. The two existing baseline
-// journeys select different views from its same actual static module closure.
+const alchimieEntry = portedScreens["/alchimie"];
+export const alchimieTargetScreen = "src/screens/AlchimieChallenge.tsx";
+const alchimieAliases = ["/alchimie?mode=challenges", "/alchimie?mode=explore"];
+// Keep the original URL measurements. Both current aliases load the same
+// target workbench, while the frozen profile retains its original behavior.
 export const journeys = Object.freeze([...Object.keys(frozenScreens),
-  "/alchimie?mode=challenges", "/alchimie?mode=explore"]);
+  ...alchimieAliases]);
 export const portedPaths = Object.freeze(Object.keys(portedScreens));
-export const portedJourneys = Object.freeze([...portedPaths, "/alchimie?mode=challenges", "/alchimie?mode=explore"]);
+export const portedJourneys = Object.freeze([...portedPaths, ...alchimieAliases]);
 export const profiles = Object.freeze({
   active: Object.freeze({ screens: portedScreens, journeys: portedJourneys }),
   "frozen-legacy": Object.freeze({ screens: frozenScreens, journeys }),
@@ -114,6 +115,7 @@ export function appRoutePaths(source, ts) {
   imports(file);
   assert.equal(modules.get("AccountBar"), "./components/AccountBar", "Mandatory root must bind its actual module");
   assert.ok(lazyModules.has("Home"), "Home must retain its actual route-lazy boundary");
+  assert.ok(lazyModules.has("Alchimie"), "Alchimie must retain its actual route-lazy boundary");
   for (const [route, component] of Object.entries(components)) {
     const expected = portedScreens[route] ?? "src/screens/Home.tsx";
     assert.equal(modules.get(component), "./" + expected.slice(4, -4), "Route component must bind its real source module");
@@ -162,37 +164,20 @@ export function appRoutePaths(source, ts) {
   return paths;
 }
 
-/** Bind both dynamically mounted leaves; a tiny selector alone is not a route budget. */
-export function alchimieModeBindings(source, ts) {
+/** Bind the route facade to its sole static implementation. */
+export function alchimieRouteBinding(source, ts) {
   const file = ts.createSourceFile("Alchimie.tsx", source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
-  assert.equal(file.parseDiagnostics.length, 0, "Alchimie selector must parse");
-  const expected = { AlchimieChallenge: "./AlchimieChallenge", AlchimieExplore: "./AlchimieExplore" }, found = new Map();
-  let calls = 0, selections = 0;
-  function visit(node) {
-    if (ts.isImportDeclaration(node)) assert.ok(!Object.values(expected).includes(node.moduleSpecifier.text), "A mode leaf cannot be statically imported by its selector");
-    if (ts.isCallExpression(node) && node.expression.kind === ts.SyntaxKind.ImportKeyword) calls++;
-    if (ts.isVariableDeclaration(node) && ts.isIdentifier(node.name) && Object.hasOwn(expected, node.name.text)) {
-      assert.ok(node.initializer && ts.isCallExpression(node.initializer) && node.initializer.expression.getText(file) === "lazyScreen", "Each mode needs the owning lazyScreen boundary");
-      const imports = [];
-      function inspect(child) {
-        if (ts.isCallExpression(child) && child.expression.kind === ts.SyntaxKind.ImportKeyword) imports.push(child);
-        ts.forEachChild(child, inspect);
-      }
-      inspect(node.initializer);
-      assert.ok(imports.length === 1 && imports[0].arguments.length === 1 && ts.isStringLiteral(imports[0].arguments[0])
-        && imports[0].arguments[0].text === expected[node.name.text], "Mode leaf source differs from its literal import");
-      assert.ok(!found.has(node.name.text), "Duplicate mode boundary"); found.set(node.name.text, imports[0].arguments[0].text);
-    }
-    if (ts.isVariableDeclaration(node) && ts.isIdentifier(node.name) && node.name.text === "mode") {
-      assert.equal(node.initializer?.getText(file), "alchimieMode(url, legacyResume)", "Mode must use the frame URL and saved-round snapshot"); selections++;
-    }
-    if (ts.isCallExpression(node)) assert.notEqual(node.expression.getText(file), "useLocation", "Mode selector cannot follow another frame's live location");
-    ts.forEachChild(node, visit);
-  }
-  visit(file);
-  assert.equal(calls, 2); assert.equal(found.size, 2); assert.equal(selections, 1);
-  assert.match(source, /return mode === "challenges"\s*\? <AlchimieChallenge\b[^>]*\/>\s*: <AlchimieExplore\b[^>]*\/>;/, "Both selector branches must render their charged mode leaf");
-  return { selector: "src/screens/Alchimie.tsx", modes: { ...alchimieModeScreens }, default: "explore", saved_default: "challenges" };
+  assert.equal(file.parseDiagnostics.length, 0, "Alchimie route source must parse");
+  const [statement] = file.statements;
+  assert.ok(file.statements.length === 1 && ts.isExportDeclaration(statement) && !statement.isTypeOnly
+    && statement.moduleSpecifier && ts.isStringLiteral(statement.moduleSpecifier)
+    && statement.moduleSpecifier.text === "./AlchimieChallenge" && !statement.attributes
+    && statement.exportClause && ts.isNamedExports(statement.exportClause)
+    && statement.exportClause.elements.length === 1, "Alchimie must statically re-export its sole target workbench");
+  const [binding] = statement.exportClause.elements;
+  assert.ok(!binding.isTypeOnly && !binding.propertyName && ts.isIdentifier(binding.name)
+    && binding.name.text === "default", "Alchimie must re-export the workbench default");
+  return { entry: alchimieEntry, implementation: alchimieTargetScreen, aliases: [...alchimieAliases] };
 }
 
 /** The three declarations of the ported set must agree: shell, client route table, Go server. */
@@ -230,33 +215,35 @@ export function bindings(manifest, routePaths, profile = "active") {
     for (const dependency of [...manifest[key].imports ?? [], ...manifest[key].dynamicImports ?? []]) visit(dependency);
   }
   visit("index.html");
-  for (const key of [account, ...Object.values(screens).filter(Boolean), ...(profile === "active" ? Object.values(alchimieModeScreens) : [])]) {
+  for (const key of [account, ...Object.values(screens).filter(Boolean)]) {
     assert.ok(reachable.has(key) && manifest[key].isDynamicEntry === true, `Required source-keyed dynamic root absent: ${key}`);
   }
   if (profile === "active") {
-    const selector = manifest["src/screens/Alchimie.tsx"];
-    assert.deepEqual([...(selector.dynamicImports ?? [])].sort(), Object.values(alchimieModeScreens).sort(), "Selector must dynamically select exactly both charged leaves");
-    const staticFiles = (key, files = new Set(), seen = new Set()) => {
-      if (seen.has(key)) return files;
-      seen.add(key); files.add(manifest[key].file);
-      for (const dependency of manifest[key].imports ?? []) staticFiles(dependency, files, seen);
-      return files;
+    assert.equal((manifest[alchimieEntry].dynamicImports ?? []).length, 0, "Alchimie cannot defer a second mode or its target workbench");
+    assert.ok(!Object.hasOwn(manifest, "src/screens/AlchimieExplore.tsx"), "Exploration cannot appear in the current manifest");
+    const staticKeys = (key, seen = new Set()) => {
+      if (seen.has(key)) return seen;
+      seen.add(key);
+      for (const dependency of manifest[key].imports ?? []) staticKeys(dependency, seen);
+      return seen;
     };
-    const selectorFiles = staticFiles("src/screens/Alchimie.tsx");
-    for (const key of ["index.html", account, ...Object.values(screens).filter((key) => key !== home), ...Object.values(alchimieModeScreens)]) {
-      assert.ok(!staticFiles(key).has(manifest[home].file), "Home cannot be eagerly loaded by another route or the shared shell");
+    const staticFiles = (key) => new Set([...staticKeys(key)].map((entry) => manifest[entry].file));
+    // The bundler can inline the implementation in the route facade. If it
+    // emits a source-keyed chunk, that chunk must stay in the charged closure.
+    if (Object.hasOwn(manifest, alchimieTargetScreen)) {
+      const target = manifest[alchimieTargetScreen];
+      assert.ok(staticKeys(alchimieEntry).has(alchimieTargetScreen)
+        && !target.isDynamicEntry && !(target.dynamicImports ?? []).length, "Alchimie target chunk must be a static dependency without extra modes");
     }
-    for (const [mode, key] of Object.entries(alchimieModeScreens)) {
-      assert.ok(!selectorFiles.has(manifest[key].file), "Mode selector eagerly imports a leaf");
-      const other = alchimieModeScreens[mode === "challenges" ? "explore" : "challenges"];
-      assert.ok(!staticFiles(key).has(manifest[other].file), "One mode eagerly imports the other mode");
+    assert.ok(!staticFiles("index.html").has(manifest[alchimieEntry].file)
+      && !staticFiles(account).has(manifest[alchimieEntry].file), "Alchimie cannot load eagerly with the shared shell");
+    for (const key of ["index.html", account, ...Object.values(screens).filter((key) => key !== home)]) {
+      assert.ok(!staticFiles(key).has(manifest[home].file), "Home cannot be eagerly loaded by another route or the shared shell");
     }
   }
   const routes = Object.fromEntries(measured.map((name) => {
     const screen = screens[name.split("?")[0]];
-    const mode = profile === "active" && name.split("?")[0] === "/alchimie"
-      ? name === "/alchimie?mode=challenges" ? "challenges" : "explore" : null;
-    return [name, { class: "cat-initial", entries: ["index.html", account, ...(screen ? [screen] : []), ...(mode ? [alchimieModeScreens[mode]] : [])] }];
+    return [name, { class: "cat-initial", entries: ["index.html", account, ...(screen ? [screen] : [])] }];
   }));
   const globalCss = collectInitialBundleFiles(manifest, { eagerRoots: [account] }).filter((file) => file.endsWith(".css"));
   return { inventory: measured.map((name) => ({ name, path: name, template: "index.html" })),
@@ -510,7 +497,7 @@ async function main() {
   const ts = (await import(pathToFileURL(regular(root, parserPath)).href)).default;
   const parser = parserBinding(path.join(root, "frontend"), ts);
   const routePaths = appRoutePaths(read(root, "frontend/src/App.tsx").toString("utf8"), ts);
-  const modeBindings = alchimieModeBindings(read(root, "frontend/src/screens/Alchimie.tsx").toString("utf8"), ts);
+  const alchimieBinding = alchimieRouteBinding(read(root, "frontend/" + alchimieEntry).toString("utf8"), ts);
   const portedSet = portedSetBindings(root, routePaths);
   const baseline = json(root, "baselines/cat/capture.json");
   assert.deepEqual(baseline.pages.map((item) => item.route).sort(), journeys.filter((name) => name !== "/alchimie").sort(), "All original frozen journeys must remain measured");
@@ -533,7 +520,7 @@ async function main() {
   const inputs = ["budgets.json", "versions.lock.json", "frontend/package.json", "frontend/package-lock.json",
     "frontend/index.html", "frontend/src/main.tsx", "frontend/src/App.tsx", "frontend/src/routes.ts", "frontend/src/homeCardBlur.ts",
     "frontend/src/components/AccountBar.tsx", ...Object.values(portedScreens).filter(Boolean).map((name) => "frontend/" + name),
-    ...Object.values(alchimieModeScreens).map((name) => "frontend/" + name), "frontend/src/alchimieMode.ts", "frontend/src/alchimieSavedMode.ts", "frontend/src/lazyScreen.ts", "frontend/src/screenLocation.ts",
+    "frontend/" + alchimieTargetScreen, "frontend/src/lazyScreen.ts", "frontend/src/screenLocation.ts",
     "go-backend/internal/httpapi/managed_delivery.go", "baselines/cat/capture.json",
     ...frozenBaselineReferences, proof.archive, proof.archive + ".sha256", syncPath, bootstrapPath,
     `.gate/${target}/managed-assets/prepare.json`, `.gate/${target}/managed-assets/inventory.json`,
@@ -544,8 +531,8 @@ async function main() {
   const result = { schema: 1, check: "cat-route-budgets", target, invocation, wrapper_invocation: descriptor.invocation,
     sha: descriptor.sha, tree_sha256: descriptor.tree_sha256, toolchain_digest: descriptor.toolchain_digest,
     status: qualification.status, raw_sdk_aggregate_status: Object.values(measured).every((item) => item.report.status === "pass") ? "pass" : "fail",
-    qualification, frozen_integrity: frozenIntegrity, ported_set: portedSet, mode_bindings: modeBindings,
-    scope: "all current M3 SPA journeys with selected Alchimie mode closures; frozen rollback measured separately; no runtime/vitals qualification",
+    qualification, frozen_integrity: frozenIntegrity, ported_set: portedSet, alchimie_binding: alchimieBinding,
+    scope: "all current SPA journeys with one Alchimie target workbench at every alias; frozen rollback measured separately; no runtime/vitals qualification",
     method: "delivered public evaluate/gateBudgets; verified gzip sidecars or level-6 gzip; explicit entry/AccountBar/route static closures",
     budgets_sha256: hash(read(root, "budgets.json")), route_source_paths: routePaths, legacy_fallback: "explicit CAT_UI=legacy rollback only; normal managed documents use the current M3 shell (ADR-0202)", parser,
     inputs: inputs.map((name) => row(root, name)), profiles: measured,

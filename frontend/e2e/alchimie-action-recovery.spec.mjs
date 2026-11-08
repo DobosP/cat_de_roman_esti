@@ -121,6 +121,7 @@ test("lost productive combine restores the exact earned inventory and private ta
   await expect(page.getByText("Joc sincronizat. Poți continua.", { exact: true })).toBeVisible();
   // GET does not prove which pair produced the last attempted result.
   await expect(page.locator(".alchemy-last-reaction")).toHaveCount(0);
+  await expect(page.locator(".alchemy-earned-reaction .alchemy-reaction-caption")).toHaveText("Ultima rețetă descoperită");
   const fresh = await serverState(request, initial.game_id);
   expect(fresh.inventory).toEqual(committed().inventory);
   expect(fresh.target.id).toBeNull();
@@ -254,6 +255,11 @@ test("lost winning combine records the terminal score exactly once", async ({ pa
   expect(fresh.score).toBe(committed().score);
   expect(fresh.target.id).not.toBeNull();
   await expect(page.locator(".alchemy-last-reaction")).toHaveCount(0);
+  const winning = fresh.inventory.find((item) => item.id === fresh.target.id);
+  const equation = page.locator(".alchemy-winning-reaction");
+  await expect(equation).toContainText("Combinația câștigătoare");
+  await expect(equation).toContainText(fresh.target.label);
+  for (const parent of winning.parents) await expect(equation).toContainText(parent.label);
   await openAlchemyDisclosure(page, ".alchemy-discoveries");
   await expect(page.getByRole("region", { name: "Rețetele acestei runde", exact: true })).toContainText(fresh.target.label);
   await openAlchemyDisclosure(page, ".alchemy-library-tools");

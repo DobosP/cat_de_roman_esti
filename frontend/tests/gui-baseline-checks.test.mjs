@@ -108,3 +108,30 @@ for (const [expected, actual, pass] of [[1000, 1100, true], [1000, 1100.01, fals
     assert.equal(rows.find((row) => row.name === "vitals:/fixture:lcp").status, pass ? "pass" : "fail");
   });
 }
+
+void test("target-only Alchimie compares both live aliases and preserves their original bytes", () => {
+  const pages = ["/alchimie?mode=challenges", "/alchimie?mode=explore", "/perechi"].map((route) => ({ route }));
+  const pngs = pages.map(({ route }) => ({ original: Buffer.from(route), current: Buffer.from("target intro") }));
+  for (const [index, page] of pages.entries()) page.sha256 = createHash("sha256").update(pngs[index].original).digest("hex");
+  pngs[2].current = pngs[2].original;
+  const check = () => comparisonOutcomes({ pages, vitals: [] }, { pages, vitals: [] }, null, null, pngs, { targetOnlyAlchimie: true })
+    .filter(({ name }) => name.includes("png:"));
+  assert.ok(check().every(({ status }) => status === "pass"));
+  pngs[0].original = Buffer.from("changed archive");
+  pngs[1].current = Buffer.from("old mode");
+  pngs[2].current = Buffer.from("unrelated regression");
+  assert.deepEqual(check().filter(({ status }) => status === "fail").map(({ name }) => name), [
+    "historical-png:/alchimie?mode=challenges", "png:/perechi", "png:alchimie-target-aliases",
+  ]);
+});
+
+void test("target-only axe comparison uses the original target fingerprint for both aliases", () => {
+  const [target, explore] = baseline.pages.slice(4, 6);
+  const pages = [target, explore];
+  const current = structuredClone([target, { ...explore, axe: target.axe }]);
+  const check = () => comparisonOutcomes({ pages, vitals: [] }, { pages: current, vitals: [] }, null, null, [], { targetOnlyAlchimie: true })
+    .find(({ name }) => name === "axe-route-fingerprints").status;
+  assert.equal(check(), "pass");
+  current[1].axe.push({ id: "new-violation", targets: [[".target"]] });
+  assert.equal(check(), "fail");
+});

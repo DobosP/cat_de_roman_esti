@@ -98,7 +98,7 @@ export default function App() {
       screen = <Conexiuni onExit={goHome} onToast={pushToast} />;
       break;
     case "/alchimie":
-      screen = <Alchimie url={url} onExit={goHome} onToast={pushToast} />;
+      screen = <Alchimie onExit={goHome} onToast={pushToast} />;
       break;
     case "/cald-rece":
       screen = <CaldRece onExit={goHome} onToast={pushToast} />;

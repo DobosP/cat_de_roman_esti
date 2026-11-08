@@ -258,12 +258,8 @@ test("the actual served build keeps optional account/game chunks outside static 
       expect(homeClosure).toContain(match.manifest[key].file);
     }
     for (const file of homeClosure) expect(requested.has(match.prefix + file), `Home initial dependency requested: ${file}`).toBe(true);
-    const selector = match.manifest["src/screens/Alchimie.tsx"];
     for (const key of ["src/screens/AlchimieChallenge.tsx", "src/screens/AlchimieExplore.tsx"]) {
-      const leaf = match.manifest[key];
-      expect(leaf?.isDynamicEntry).toBe(true);
-      expect(selector.dynamicImports).toContain(key);
-      expect(closure).not.toContain(leaf.file);
+      expect(match.manifest[key], "Alchimie is one lazy route, with no separately emitted mode leaf").toBeUndefined();
     }
     const bound = [];
     for (const file of [...new Set([...homeClosure, ...optional.map(({ file }) => file)])]) {

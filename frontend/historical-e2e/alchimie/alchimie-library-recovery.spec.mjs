@@ -1,10 +1,10 @@
 import { test, expect } from "@playwright/test";
-import { applyDoubledText } from "./fixture-text-size.mjs";
+import { applyDoubledText } from "../../e2e/fixture-text-size.mjs";
 import { readFileSync } from "node:fs";
 
 const BASE = "/api/alchimie/explore";
 const SAVE = "cat_alchimie_exploration_v1";
-const checkpoint = JSON.parse(readFileSync(new URL("./alchimie-221-checkpoint.json", import.meta.url), "utf8")).collection;
+const checkpoint = JSON.parse(readFileSync(new URL("../../e2e/alchimie-221-checkpoint.json", import.meta.url), "utf8")).collection;
 const responseTo = (page, path) => page.waitForResponse((response) =>
   response.request().method() === "POST" && new URL(response.url()).pathname === path);
 

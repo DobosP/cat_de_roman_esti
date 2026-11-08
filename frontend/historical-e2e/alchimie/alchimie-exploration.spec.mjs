@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { readFileSync } from "node:fs";
-import { openAlchemyDisclosure } from "./games.mjs";
+import { openAlchemyDisclosure } from "../../e2e/games.mjs";
 
 const BASE = "/api/alchimie/explore";
 const SAVE = "cat_alchimie_exploration_v1";
@@ -9,9 +9,9 @@ const escapeRegex = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 const word = (page, label) => page.locator(".alchemy-inventory-grid").getByRole("button", { name: new RegExp(`^${escapeRegex(label)}(?:,|$)`) });
 const responseTo = (page, path, method = "POST") => page.waitForResponse((response) => response.request().method() === method && new URL(response.url()).pathname === path);
 const saved = (page) => page.evaluate((key) => JSON.parse(localStorage.getItem(key) || "null"), SAVE);
-const EXPANDED_CHECKPOINT = JSON.parse(readFileSync(new URL("./alchimie-111-checkpoint.json", import.meta.url), "utf8"));
-const LARGE_CHECKPOINT = JSON.parse(readFileSync(new URL("./alchimie-221-checkpoint.json", import.meta.url), "utf8"));
-const LATEST_CHECKPOINT = JSON.parse(readFileSync(new URL("./alchimie-221-expanded-checkpoint.json", import.meta.url), "utf8"));
+const EXPANDED_CHECKPOINT = JSON.parse(readFileSync(new URL("../../e2e/alchimie-111-checkpoint.json", import.meta.url), "utf8"));
+const LARGE_CHECKPOINT = JSON.parse(readFileSync(new URL("../../e2e/alchimie-221-checkpoint.json", import.meta.url), "utf8"));
+const LATEST_CHECKPOINT = JSON.parse(readFileSync(new URL("../../e2e/alchimie-221-expanded-checkpoint.json", import.meta.url), "utf8"));
 
 // The original 75-concept world shipped in 2257766. This historical checkpoint must
 // keep its original fingerprint; changing it would hide a broken upgrade path.

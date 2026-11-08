@@ -67,6 +67,11 @@ try {
       await page.locator(".ranking-game-select").waitFor({ state: "attached" });
       await page.getByRole("heading", { name: "🏆 Clasament" }).waitFor();
       await page.waitForFunction(() => !document.querySelector('.ranking-state[aria-busy="true"]'));
+    } else if (mode !== "original-capture" && route.startsWith("/alchimie?")) {
+      await page.locator(".alchemy-challenge .game-intro").waitFor();
+      if (await page.locator(".alchemy-modes, .alchemy-explore-screen").count()) {
+        throw new Error("An Alchimie alias exposed the retired mode chooser or Explore screen");
+      }
     } else if (route.includes("mode=explore")) await page.locator(".alchemy-explore-screen").waitFor();
     else await page.locator(".game-intro").waitFor();
     await page.locator(".screen").first().waitFor();
@@ -172,7 +177,7 @@ try {
       try { return { original: fs.readFileSync(baseline.pages[index].screenshot), current: fs.readFileSync(page.screenshot) }; }
       catch { return { original: null, current: null }; }
     });
-    const outcomes = comparisonOutcomes(baseline, report, sourceFailed ? null : homeWitness, verification.binding, pngs);
+    const outcomes = comparisonOutcomes(baseline, report, sourceFailed ? null : homeWitness, verification.binding, pngs, { targetOnlyAlchimie: true });
     outcomes.unshift({ name: "verification-context-recheck", status: sourceFailed ? "fail" : "pass" });
     writeVerification(verification, output, "comparisons.json", { scope: mode === "owner-diagnostic" ? "Owner-shell diagnostic only; no full/baseline qualification receipt" : "Actual baseline predicates", binding: verification.binding, outcomes });
     const failures = outcomes.filter((item) => item.status === "fail").map((item) => item.name);

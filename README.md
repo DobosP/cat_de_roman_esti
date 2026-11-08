@@ -9,12 +9,11 @@ Source6 remains live; V1.7 adoption and full qualification are tracked in
 
 A **text-only arcade of six Romanian word games** using a shared concept graph
 (current counts, fixture version, generated hashes and gate state are recorded in
-`docs/STATUS.md`; no graph visualization). Alchimie exploration also has its
-own reviewed vocabulary and recipe catalog. All six are **server-authoritative**:
+`docs/STATUS.md`; no graph visualization). All six are **server-authoritative**:
 the Go server validates every move and hides the answers.
 
-- **Alchimie** — explore a saved Romanian kitchen collection with consistent recipes
-  and optional goals, search your earned recipes, or play short scored target challenges ([ADR-0151](docs/adr/0151-expand-game-vocabulary-and-search-earned-recipes.md)).
+- **Alchimie** — combine words to craft a target and search the recipes you earn
+  along the way ([ADR-0224](docs/adr/0224-target-based-alchimie.md)).
 - **Intrusul** — tap the one word that does not belong with the other three.
 - **Perechi** — match eight words into four hidden semantic pairs.
 - **Conexiuni** *(à la NYT Connections)* — group 16 concepts into 4 hidden categories,
@@ -66,8 +65,8 @@ offline fixture.
 ## Run (web app)
 
 The compiled SPA and Go server play fully offline against the reviewed embedded
-content. The Go runtime serves all six games and Alchimie exploration, with optional native
-accounts and pending proposals, without a Python server. The Preact/TypeScript frontend
+content. The Go runtime serves all six games and the legacy Alchimie exploration API, with
+optional native accounts and pending proposals, without a Python server. The Preact/TypeScript frontend
 runs as JavaScript in the browser; Go serves its compiled managed assets and APIs. Build and deployment details are in
 [`docs/NATIVE_BACKENDS.md`](docs/NATIVE_BACKENDS.md); current qualification is in
 [`docs/STATUS.md`](docs/STATUS.md).

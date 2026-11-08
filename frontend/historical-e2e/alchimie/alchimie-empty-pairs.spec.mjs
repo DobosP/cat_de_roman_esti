@@ -1,4 +1,4 @@
-/* global document */
+/* global globalThis.document */
 import { test, expect } from "@playwright/test";
 
 const BASE = "/api/alchimie/explore";
@@ -143,7 +143,7 @@ test("an aged observation rechecks the server and a newer book clears old marker
 test("empty feedback and marked keyboard partner fit 320px with doubled text", async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 844 });
   await page.addInitScript(() => {
-    document.addEventListener("DOMContentLoaded", () => { document.documentElement.style.fontSize = "200%"; });
+    globalThis.document.addEventListener("DOMContentLoaded", () => { globalThis.document.documentElement.style.fontSize = "200%"; });
   });
   await miss(page, await begin(page));
   const partner = word(page, "Cheag alimentar");

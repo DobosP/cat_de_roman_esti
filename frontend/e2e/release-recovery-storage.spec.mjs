@@ -34,13 +34,6 @@ test("denied localStorage and sessionStorage getters still allow all six games",
     await deterministicStarts(page, game);
     await start(page, game);
   }
-  // Alchimie's default exploration entry must also work without local storage.
-  await page.goto("/alchimie");
-  const explored = page.waitForResponse((response) => response.request().method() === "POST" &&
-    new URL(response.url()).pathname === "/api/alchimie/explore");
-  await page.getByRole("button", { name: "Începe explorarea →" }).click();
-  expect((await explored).status()).toBe(200);
-  await expect(page.locator(".alchemy-inventory-grid")).toBeVisible();
   expect(errors).toEqual([]);
 });
 

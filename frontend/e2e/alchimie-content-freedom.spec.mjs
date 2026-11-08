@@ -28,6 +28,7 @@ for (const [left, right] of [
     expect(crafted.target.id).toBeNull();
     expect(crafted.recipes).toBeUndefined();
     expect(crafted.routes).toBeUndefined();
+    await activate(page.getByRole("button", { name: "Folosește Club sportiv", exact: true }));
     await expect(page.getByRole("button", { name: "Scoate Club sportiv din alambic" })).toBeVisible();
     const last = reply(page);
     await activate(word(page, "Cristina Neagu"));
@@ -52,6 +53,7 @@ test("empty experiments stay free while a real two-craft solution still complete
   const first = reply(page);
   await activate(word(page, "Echipă națională"));
   expect((await (await first).json()).discovered.map((item) => item.label)).toContain("Handbal feminin");
+  await activate(page.getByRole("button", { name: "Folosește Handbal feminin", exact: true }));
   await expect(page.getByRole("button", { name: "Scoate Handbal feminin din alambic" })).toBeVisible();
   const last = reply(page);
   await activate(word(page, "Cristina Neagu"));

@@ -139,6 +139,13 @@ test.describe("V74 saved-game recovery", () => {
       await page.reload();
 
       await expect(page.getByRole("button", { name: "Copiază rezultatul" })).toBeVisible();
+      if (game.key === "alchimie") {
+        const winning = terminal.inventory.find((item) => item.id === terminal.target.id);
+        const equation = page.locator(".alchemy-winning-reaction");
+        await expect(equation).toContainText("Combinația câștigătoare");
+        await expect(equation).toContainText(terminal.target.label);
+        for (const parent of winning.parents) await expect(equation).toContainText(parent.label);
+      }
       await expect.poll(() => timesPlayed(page, game)).toBe(1);
       await expect.poll(() => page.evaluate((key) => localStorage.getItem(key), activeKey(game)))
         .toBeNull();

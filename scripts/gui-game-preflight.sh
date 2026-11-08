@@ -27,7 +27,7 @@ run() {
 cd /work/frontend
 run typecheck npm run typecheck
 run tools-typecheck node scripts/native-tsc.mjs --project tsconfig.tools.json --noEmit
-run focused node --test tests/alchimie-mode.test.mjs tests/home-card-blur.test.mjs tests/game-help.test.mjs tests/gui-route-budgets.test.mjs tests/gui-style-audit.test.mjs tests/v1-daily-intent.test.mjs
+run focused node --test tests/home-card-blur.test.mjs tests/game-help.test.mjs tests/gui-route-budgets.test.mjs tests/gui-style-audit.test.mjs tests/v1-daily-intent.test.mjs
 run scores node --test tests/score-receipts.test.mjs tests/scores-nondaily-history.test.mjs tests/v1-record-on-loss.test.mjs tests/v39-local-daily-circuit.test.mjs tests/v42-meta-loop.test.mjs
 run lint npm run lint
 run build npm run build
@@ -37,15 +37,15 @@ if [ "$(cat "$out/build.exit")" = 0 ]; then
   run budgets node --input-type=module - <<'JS'
 import { readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
-import { appRoutePaths, alchimieModeBindings, portedSetBindings, measureProfile } from './scripts/gui-route-budgets.mjs';
+import { appRoutePaths, alchimieRouteBinding, portedSetBindings, measureProfile } from './scripts/gui-route-budgets.mjs';
 import * as api from './frontend/node_modules/@roedu/web-kit/budget/index.mjs';
 const require = createRequire('/work/frontend/package.json');
 const ts = require('@typescript/typescript6');
 const routes = appRoutePaths(readFileSync('frontend/src/App.tsx', 'utf8'), ts);
-const modes = alchimieModeBindings(readFileSync('frontend/src/screens/Alchimie.tsx', 'utf8'), ts);
+const alchimie = alchimieRouteBinding(readFileSync('frontend/src/screens/Alchimie.tsx', 'utf8'), ts);
 const ported = portedSetBindings('/work', routes);
 const measured = measureProfile('/work/frontend/dist', JSON.parse(readFileSync('budgets.json')), routes, api);
-console.log(JSON.stringify({ scope: 'Focused emitted current-route preflight; not unit/full acceptance', ported, modes, ...measured }, null, 2));
+console.log(JSON.stringify({ scope: 'Focused emitted current-route preflight; not unit/full acceptance', ported, alchimie, ...measured }, null, 2));
 process.exitCode = measured.status === 'pass' ? 0 : 1;
 JS
 fi

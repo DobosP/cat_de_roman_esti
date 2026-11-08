@@ -248,17 +248,39 @@ export function assertAxePages(original, current, witness, binding) {
   }
   assert.deepEqual(candidate, before, "Axe or route fingerprint changed");
 }
-export function comparisonOutcomes(baseline, current, witness, binding, pngs) {
+const ALCHEMY_ALIASES = ["/alchimie?mode=challenges", "/alchimie?mode=explore"];
+
+export function comparisonOutcomes(baseline, current, witness, binding, pngs, { targetOnlyAlchimie = false } = {}) {
   const outcomes = [];
   const check = (name, operation) => {
     try { operation(); outcomes.push({ name, status: "pass" }); }
     catch { outcomes.push({ name, status: "fail" }); }
   };
   check("home-live-semantic-witness", () => assert.ok(liveWitnesses.has(witness) && witness.binding === binding));
-  check("axe-route-fingerprints", () => assertAxePages(baseline.pages, current.pages, witness, binding));
-  for (const [index, page] of current.pages.entries()) check("png:" + page.route, () => {
+  check("axe-route-fingerprints", () => {
+    const [targetRoute, retiredRoute] = ALCHEMY_ALIASES;
+    const originalTarget = baseline.pages.find(({ route }) => route === targetRoute);
+    const expected = targetOnlyAlchimie ? baseline.pages.map((page) =>
+      page.route === retiredRoute ? { ...page, axe: originalTarget.axe } : page) : baseline.pages;
+    assertAxePages(expected, current.pages, witness, binding);
+  });
+  for (const [index, page] of current.pages.entries()) {
     const original = baseline.pages[index], pair = pngs[index];
-    assert.ok(original.route === page.route && Buffer.isBuffer(pair.original) && Buffer.isBuffer(pair.current) && pair.original.equals(pair.current), "Exact original screenshot pixels changed");
+    if (targetOnlyAlchimie && ALCHEMY_ALIASES.includes(page.route)) {
+      check("historical-png:" + page.route, () => {
+        assert.equal(original.route, page.route);
+        assert.equal(hash(pair.original), original.sha256, "Original Alchimie screenshot bytes changed");
+      });
+    } else {
+      check("png:" + page.route, () => {
+        assert.ok(original.route === page.route && Buffer.isBuffer(pair.original) && Buffer.isBuffer(pair.current) && pair.original.equals(pair.current), "Exact original screenshot pixels changed");
+      });
+    }
+  }
+  if (targetOnlyAlchimie) check("png:alchimie-target-aliases", () => {
+    const [first, second] = ALCHEMY_ALIASES.map((route) =>
+      pngs[current.pages.findIndex((page) => page.route === route)]?.current);
+    assert.ok(Buffer.isBuffer(first) && Buffer.isBuffer(second) && first.equals(second), "Alchimie aliases must render the same target-based intro");
   });
   for (const [index, item] of current.vitals.entries()) for (const key of ["lcp", "inp"]) {
     const expected = baseline.vitals[index].median[key], actual = item.median[key];

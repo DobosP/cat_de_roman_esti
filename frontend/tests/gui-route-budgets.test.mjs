@@ -8,7 +8,7 @@ import { gzipSync, gunzipSync } from "node:zlib";
 import ts from "@typescript/typescript6";
 import * as budget from "@roedu/web-kit/budget";
 import { parserBinding } from "../scripts/compiler-runtime.mjs";
-import { CONSUMER_CSS_TOTAL_KEY, measureConsumerCssTotal, appRoutePaths, alchimieModeBindings, alchimieModeScreens, bindings, classifyProfiles, frozenBaselineReferences, journeys, measureProfile, portedPaths, portedJourneys, portedSetBindings, verifyFrozenBaseline, verifyTreeRows } from "../../scripts/gui-route-budgets.mjs";
+import { CONSUMER_CSS_TOTAL_KEY, measureConsumerCssTotal, appRoutePaths, alchimieRouteBinding, alchimieTargetScreen, bindings, classifyProfiles, frozenBaselineReferences, journeys, measureProfile, portedPaths, portedJourneys, portedSetBindings, verifyFrozenBaseline, verifyTreeRows } from "../../scripts/gui-route-budgets.mjs";
 import { readTarGz } from "../../tools/gui-bootstrap-webkit/scripts/kit-sync.mjs";
 
 // Synthetic asset attribution contracts only. These execute the installed public
@@ -19,6 +19,7 @@ const source = fs.readFileSync(new URL("../src/App.tsx", import.meta.url), "utf8
 const paths = ["/", "/intrusul", "/perechi", "/conexiuni", "/alchimie", "/cald-rece", "/lant", "/clasament"];
 const frozenPaths = ["/", "/alchimie", "/intrusul", "/perechi", "/cald-rece", "/lant", "/conexiuni", "/clasament"];
 const account = "src/components/AccountBar.tsx";
+const alchimieEntry = "src/screens/Alchimie.tsx";
 const screenKeys = { active: ["Intrusul", "Perechi", "Conexiuni", "Alchimie", "CaldRece", "Lant", "Ranking", "Home"], "frozen-legacy": ["Alchimie", "Intrusul", "Perechi", "CaldRece", "Lant", "Conexiuni", "Ranking"] };
 const routeKeys = screenKeys.active.map((name) => `src/screens/${name}.tsx`);
 const sha = (bytes) => createHash("sha256").update(bytes).digest("hex");
@@ -76,8 +77,9 @@ function fixture(t, profile = "active") {
   if (profile === "active") {
     manifest["src/screens/Home.tsx"].imports.push("home-deep");
     manifest["home-deep"] = { file: "assets/home-deep.js", imports: ["shared"], css: ["assets/home-deep.css"] };
-    manifest["src/screens/Alchimie.tsx"].dynamicImports = Object.values(alchimieModeScreens);
-    for (const [mode, key] of Object.entries(alchimieModeScreens)) manifest[key] = { file: `assets/alchimie-${mode}.js`, isDynamicEntry: true, imports: ["shared"], css: [`assets/alchimie-${mode}.css`] };
+    manifest[alchimieEntry].imports.push(alchimieTargetScreen);
+    manifest[alchimieTargetScreen] = { file: "assets/alchimie-target.js", imports: ["alchemy-deep"], css: ["assets/alchimie-target.css"] };
+    manifest["alchemy-deep"] = { file: "assets/alchimie-deep.js", imports: ["shared"], css: ["assets/alchimie-deep.css"] };
   }
   for (const entry of Object.values(manifest)) {
     write(root, entry.file, `/* ${entry.file} */\n` + "export const n = 42;\n".repeat(5));
@@ -94,35 +96,48 @@ function measured(f, budgets = actualBudgets, profile = "active") {
   return measureProfile(f.assetsRoot ?? f.root, budgets, profile === "active" ? paths : frozenPaths, budget, profile);
 }
 
-void test("Alchimie source binds two literal lazy leaves to the captured frame URL", () => {
-  const selector = fs.readFileSync(new URL("../src/screens/Alchimie.tsx", import.meta.url), "utf8");
-  const actual = alchimieModeBindings(selector, ts);
-  assert.deepEqual(actual.modes, alchimieModeScreens); assert.equal(actual.saved_default, "challenges");
+void test("Alchimie source re-exports only the target workbench default", () => {
+  const facade = fs.readFileSync(new URL("../src/screens/Alchimie.tsx", import.meta.url), "utf8");
+  assert.deepEqual(alchimieRouteBinding(facade, ts), {
+    entry: alchimieEntry, implementation: alchimieTargetScreen,
+    aliases: ["/alchimie?mode=challenges", "/alchimie?mode=explore"],
+  });
   for (const changed of [
-    selector.replace('import("./AlchimieExplore")', 'import("./AlchimieChallenge")'),
-    selector.replace('alchimieMode(url, legacyResume)', 'alchimieMode(location.href, legacyResume)'),
-    selector.replace('? <AlchimieChallenge', '? <AlchimieExplore'),
-    'import Eager from "./AlchimieExplore";\n' + selector,
-  ]) { assert.notEqual(changed, selector); assert.throws(() => alchimieModeBindings(changed, ts)); }
+    'export { default } from "./AlchimieExplore";',
+    'export { default as alternate } from "./AlchimieChallenge";',
+    'export type { default } from "./AlchimieChallenge";',
+    'export default () => import("./AlchimieChallenge");',
+    'import "./AlchimieExplore";\n' + facade,
+  ]) { assert.notEqual(changed, facade); assert.throws(() => alchimieRouteBinding(changed, ts)); }
 });
-void test("Alchimie mode rows charge the selected leaf and refuse missing or eager mode boundaries", (t) => {
+void test("all Alchimie URLs charge the full target route and refuse additional mode boundaries", (t) => {
   const f = fixture(t), report = measured(f).report;
-  const current = report.routes.find((item) => item.name === "/alchimie");
-  const explore = report.routes.find((item) => item.name === "/alchimie?mode=explore");
-  const challenge = report.routes.find((item) => item.name === "/alchimie?mode=challenges");
-  assert.deepEqual(current.js.files, explore.js.files);
-  for (const [row, own, other] of [[explore, "explore", "challenges"], [challenge, "challenges", "explore"]]) {
-    assert.ok(row.js.files.includes(`assets/alchimie-${own}.js`));
-    assert.ok(!row.js.files.includes(`assets/alchimie-${other}.js`));
-    assert.ok(row.js.files.includes("assets/route-3.js") && row.js.files.includes("assets/account-deep.js"));
+  const urls = ["/alchimie", "/alchimie?mode=explore", "/alchimie?mode=challenges"];
+  const rows = urls.map((url) => report.routes.find((item) => item.name === url));
+  for (const row of rows) {
+    assert.deepEqual(row.js.files, rows[0].js.files);
+    assert.deepEqual(row.css.files, rows[0].css.files);
+    for (const file of ["assets/entry.js", "assets/route-3.js", "assets/account-deep.js",
+      "assets/alchimie-target.js", "assets/alchimie-deep.js"]) assert.ok(row.js.files.includes(file));
+    for (const file of ["assets/alchimie-target.css", "assets/alchimie-deep.css"]) assert.ok(row.css.files.includes(file));
     assert.equal(row.js.limit_gz, 40960);
   }
   for (const mutate of [
-    (m) => { delete m[alchimieModeScreens.explore]; },
-    (m) => { m["src/screens/Alchimie.tsx"].dynamicImports.pop(); },
-    (m) => { m["src/screens/Alchimie.tsx"].imports.push(alchimieModeScreens.challenges); },
-    (m) => { m[alchimieModeScreens.explore].imports.push(alchimieModeScreens.challenges); },
+    (m) => { delete m[alchimieEntry]; },
+    (m) => { delete m["alchemy-deep"]; },
+    (m) => { m[alchimieEntry].imports = ["shared"]; },
+    (m) => { m[alchimieEntry].dynamicImports = [alchimieTargetScreen]; },
+    (m) => { m[alchimieTargetScreen].isDynamicEntry = true; },
+    (m) => { m[alchimieTargetScreen].dynamicImports = ["alchemy-deep"]; },
+    (m) => { m["src/screens/AlchimieExplore.tsx"] = { file: "assets/explore.js", isDynamicEntry: true }; },
+    (m) => { m.startup.imports.push(alchimieEntry); },
   ]) { const changed = structuredClone(f.manifest); mutate(changed); assert.throws(() => bindings(changed, paths)); }
+  // A single emitted facade may also contain the implementation itself.
+  const merged = structuredClone(f.manifest);
+  delete merged[alchimieTargetScreen];
+  merged[alchimieEntry].imports = ["alchemy-deep"];
+  const bound = bindings(merged, paths);
+  for (const url of urls) assert.deepEqual(bound.config.routes[url].entries, ["index.html", account, alchimieEntry]);
 });
 
 void test("the literal route switch, the client table and the Go set agree on all eight current paths", () => {
@@ -142,6 +157,7 @@ void test("the literal route switch, the client table and the Go set agree on al
     source.replace('case "/intrusul":', 'case "/conexiuni":'),
     source.replace('import("./screens/Intrusul")', 'import("./screens/Ranking")'),
     source.replace('const Home = lazyScreen(() => import("./screens/Home"));', 'import Home from "./screens/Home";'),
+    source.replace('const Alchimie = lazyScreen(() => import("./screens/Alchimie"));', 'import Alchimie from "./screens/Alchimie";'),
     source.replace('<Intrusul onExit={goHome} onToast={pushToast} />', '<Conexiuni onExit={goHome} onToast={pushToast} />'),
     source.replace('screen = <FallbackRoute url={url} />;', 'screen = <Home onToast={pushToast} />;'),
     source.replace('portedPath(path) ? path : "fallback"', 'path'),
@@ -186,7 +202,7 @@ void test("Home attribution refuses missing selected dependencies or an eagerly 
     (m) => { m[home].isDynamicEntry = false; },
     (m) => { m.startup.imports.push(home); },
     (m) => { m[account].imports.push(home); },
-    (m) => { m[alchimieModeScreens.challenges].imports.push(home); },
+    (m) => { m[alchimieTargetScreen].imports.push(home); },
   ]) { const changed = structuredClone(f.manifest); mutate(changed); assert.throws(() => bindings(changed, paths)); }
 });
 
