@@ -1,7 +1,7 @@
 # ADR-0224 — Target-based Alchimie
 
 - Date: 2026-11-08
-- Status: accepted design; release qualification pending
+- Status: accepted; qualified on product a4ed7013
 - Supersedes the two-mode current GUI in [ADR-0222](0222-simplified-alchimie-collection-interface.md).
 
 Alchimie opens directly to target-based rounds. The old mode query URLs resolve to
