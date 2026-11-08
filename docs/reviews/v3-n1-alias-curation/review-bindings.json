@@ -1,0 +1,94 @@
+{
+  "schema": "cat-v3-n1-review-bindings-1",
+  "base_sha": "3d4758ce8f78a36ce9a04d28107f5ded935d3848",
+  "step": "4a",
+  "records": {
+    "module": {
+      "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content-continuous/scripts/alias_curation_v3_n1_data.py",
+      "bytes": 1765,
+      "sha256": "51ddf0a97570697de5079fddcffc64d60d15bd6653a0799e9d76cd6d622174b7"
+    },
+    "proposal": {
+      "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content-continuous/docs/reviews/v3-n1-alias-curation/proposal.json",
+      "bytes": 13701,
+      "sha256": "de79761e105a54f30899b3ee8c3cdcc7e755add77de4312082983d72a344c853"
+    },
+    "go_drop": {
+      "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n1/round2-private/go-drop-round2.json",
+      "bytes": 4543,
+      "sha256": "ddbb2ec83ab06c351e007da727f1a0770df2212717e46a32c06762a73b8af309"
+    },
+    "guard_pass": {
+      "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n1/round2-private/independence-retained-roots.json",
+      "bytes": 1444,
+      "sha256": "7933d728d874222ceb26fabc6b36a49b1d066e103febe16249d5fc2e7a8c798f"
+    },
+    "guard_pass_receipt": {
+      "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n1/round2-private/guard-retained-roots.receipt.json",
+      "bytes": 1739,
+      "sha256": "60ba177b49ae95d4448930463225734086171bd621cc3fd8f324210368c49a42"
+    },
+    "retained_roots_index": {
+      "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n1/round2-private/actor-artifact-index-retained-roots.json",
+      "bytes": 704153,
+      "sha256": "af5d7109985eba98ba365e2ca44a2078b6acfdcb5494a7122254f77ef7f14ec6"
+    },
+    "original_packaging_error_receipt": {
+      "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n1/round2-private/guard.receipt.json",
+      "bytes": 1559,
+      "sha256": "05539af3ef99308831c6a7375d78daf367425ce43ade87f213a66542f7ecdc7f"
+    },
+    "original_packaging_error_stderr": {
+      "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n1/round2-private/guard.stderr",
+      "bytes": 323,
+      "sha256": "89a7a033dd2a81f7d054f8b4c85bb090cc34bc955169b4907189d08ab2badda0"
+    },
+    "original_packaging_index": {
+      "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n1/round2-private/actor-artifact-index.json",
+      "bytes": 666433,
+      "sha256": "451af1f8bfa8c1b6529a060c580e3ce5c17aad09d8b0aa4a69a67ceee54f01c4"
+    },
+    "author_release": {
+      "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n1/round2-private/author-release.json",
+      "bytes": 24825,
+      "sha256": "13025ccad4e992f282bbef5cfbb9a458860fc0fa5c767d883bccf063f1c34dcd"
+    },
+    "factual_native": {
+      "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n1/roles/factual-v2-c1/round2/graph-factual-review.json",
+      "bytes": 42308,
+      "sha256": "516186876454ab35b038442670872cde93e698b9722a5dbef09729b1244a9c8a"
+    },
+    "factual_sidecar": {
+      "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n1/roles/factual-v2-c1/round2/review-envelope.json",
+      "bytes": 22963,
+      "sha256": "bd173a49d11666801285bf2717b1f5340c101f7a50a8e0cdfb9d5fee464945fc"
+    },
+    "quality_native": {
+      "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n1/roles/quality-v2-c1/round2/graph-quality-review.json",
+      "bytes": 54699,
+      "sha256": "5c201eddd75268128ca190ef92909dd7ec250a1aca6b80576ebec1194b934928"
+    },
+    "quality_sidecar": {
+      "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n1/roles/quality-v2-c1/round2/review-envelope.json",
+      "bytes": 22144,
+      "sha256": "e3bf8797048adaa766ba28954e3f40bc2038f130382fa58e00b10b83170709aa"
+    }
+  },
+  "native_report_copies": {
+    "factual": {
+      "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content-continuous/docs/reviews/v3-n1-alias-curation/graph-factual-review.json",
+      "bytes": 42308,
+      "sha256": "516186876454ab35b038442670872cde93e698b9722a5dbef09729b1244a9c8a"
+    },
+    "quality": {
+      "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content-continuous/docs/reviews/v3-n1-alias-curation/graph-quality-review.json",
+      "bytes": 54699,
+      "sha256": "5c201eddd75268128ca190ef92909dd7ec250a1aca6b80576ebec1194b934928"
+    }
+  },
+  "guard_status": "PASS; zero errors; native guard exit 0",
+  "original_guard_status": "ERROR; packaging failure exit 2 preserved with original index and stderr",
+  "scope": "17 accepted existing-owner morphology families, 38 forms. Exact native JSON copies; no report, seal, helper or payload altered. Raw captures remain in evidence outside the repository.",
+  "limits": "Paths, hashes and sidecars are bookkeeping only, not authentication or a cryptographic signature and not content qualification. Source applied locally at 4a; bundle, rails, test pins, corpus, after-native fuzzy/Cald repeat/win/snapshot proof and all 4b–4i gates remain pending.",
+  "content_qualified": false
+}

@@ -1,0 +1,559 @@
+{
+  "author_source_url_seal": {
+    "bytes": 85097,
+    "payload_opened": false,
+    "sha256": "1da17406d18989e44be2e7d14d673e55ca3bb0673f2728d2e88fa472ee39c7ca"
+  },
+  "candidate_bindings": {
+    "extensions": {
+      "bytes": 2020146,
+      "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content-continuous/docs/reviews/v3-n2-alias-curation/native/extensions/candidate.json",
+      "sha256": "cff78236fcd3fbcee2add82fd153fe436b20782f21190b267bc9be9f9d230caf"
+    },
+    "quick": {
+      "bytes": 119217,
+      "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content-continuous/docs/reviews/v3-n2-alias-curation/native/quick/candidate.json",
+      "sha256": "28c875d5040791c3a6cb1e07e6d02eec610496dc92629571312434f7d8682b20"
+    },
+    "world": {
+      "bytes": 878153,
+      "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content-continuous/docs/reviews/v3-n2-alias-curation/native/world/candidate.json",
+      "sha256": "d6344cfc51ded8e7f14ac0491f34b3e3dffb3c7e4e30b60e23b215d297bfada0"
+    }
+  },
+  "chronology": {
+    "all_native_and_world_sidecar_signings_before_guard_start": true,
+    "all_six_first_peer_read_at": null,
+    "dispatch_isolation_limit": "Own dated attestations are provenance; SHA256 is integrity only, not cryptographic authentication. Dispatch/transcript isolation remains a separate review obligation.",
+    "latest_own_signed_at": "2026-10-27T22:33:14.335364+00:00",
+    "source_release_timing": "Normal guard PASS checks each own signing before the round source unseal; release-view metadata referenced without opening its payload."
+  },
+  "dependency_context": {
+    "all_other_tracked_paths_unchanged_required": true,
+    "bundled_and_authorities_git_blob_metadata_only": "100644 blob 43c73e949e24d9ee5872b14e50dedffa764aa36d\tgo-backend/internal/content/bundled.json\n100644 blob 468e23066960959147b45cbd97299a2d19de2c24\tgo-backend/internal/content/digest.go\n100644 blob 0efbea1881351db7a3adc13d87a51584c64d1aa3\tgo-backend/internal/contentrails/installed_authorities_pin.go\n100644 blob 62ca9ed3a34dccf7865890c81cd290ec08385917\tgo-backend/internal/contentrails/sources/installed-authorities.json\n",
+    "candidate_source_fields": "Current source14/KG/rubric and supported core/pack bindings retained. Legacy extension rank/runtime fields remain historical authored references; no current native production closure inferred.",
+    "source_protected_hashes": {
+      "cat_de_roman_esti/fixtures/board_rankings_v37.json": {
+        "bytes": 164784,
+        "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content-continuous/cat_de_roman_esti/fixtures/board_rankings_v37.json",
+        "sha256": "8724518f73b4712a05bca1bf5ecbefc29061c66e6a773d592c6dbffecd268670"
+      },
+      "cat_de_roman_esti/fixtures/derived_catalog_v38.json": {
+        "bytes": 249190,
+        "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content-continuous/cat_de_roman_esti/fixtures/derived_catalog_v38.json",
+        "sha256": "1debab737c6c8fa3ad6f2acbbf6086751310d24d0600d83274d6ee51703017ae"
+      },
+      "cat_de_roman_esti/fixtures/games_pack.json": {
+        "bytes": 410839,
+        "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content-continuous/cat_de_roman_esti/fixtures/games_pack.json",
+        "sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8"
+      },
+      "cat_de_roman_esti/fixtures/kg_sample.json": {
+        "bytes": 3937852,
+        "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content-continuous/cat_de_roman_esti/fixtures/kg_sample.json",
+        "sha256": "7f185988ddc1437ce3923f4dfe0f4d1eda9ad98743e5d178b73f40eb113fec15"
+      },
+      "tests/fixtures/board_rankings_v37.json": {
+        "bytes": 164784,
+        "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content-continuous/tests/fixtures/board_rankings_v37.json",
+        "sha256": "8724518f73b4712a05bca1bf5ecbefc29061c66e6a773d592c6dbffecd268670"
+      },
+      "tests/fixtures/cat_mobile_app_pack_contract.json": {
+        "bytes": 1187171,
+        "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content-continuous/tests/fixtures/cat_mobile_app_pack_contract.json",
+        "sha256": "c510035c1241ca734acbf1b37de9989a165b84b8cb1d361c7abe5bdcdda7f860"
+      },
+      "tests/fixtures/derived_catalog_v38.json": {
+        "bytes": 249190,
+        "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content-continuous/tests/fixtures/derived_catalog_v38.json",
+        "sha256": "1debab737c6c8fa3ad6f2acbbf6086751310d24d0600d83274d6ee51703017ae"
+      },
+      "tests/fixtures/games_pack.json": {
+        "bytes": 410839,
+        "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content-continuous/tests/fixtures/games_pack.json",
+        "sha256": "e24eb3622c81f3bb0425f975bf74ec3b5a50f9cb719544794704541dc65ff5d8"
+      },
+      "tests/fixtures/kg_sample.json": {
+        "bytes": 3937852,
+        "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content-continuous/tests/fixtures/kg_sample.json",
+        "sha256": "7f185988ddc1437ce3923f4dfe0f4d1eda9ad98743e5d178b73f40eb113fec15"
+      }
+    }
+  },
+  "kind": "v3-n2-native-initial-review-bindings-v1",
+  "main_head": "052212fa62f0d3646510ec23344687f749f094b8",
+  "normal_changed_world_guard": {
+    "artifact_index_reference": {
+      "bytes": 1650395,
+      "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/round2-private/actor-artifact-index.json",
+      "sha256": "a4ffc9a64766b3379703f61a5697d5a3c1bf5dd60e13622b9a85ca74a6e4a096"
+    },
+    "command": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/home/dobo/work/_temp/content-loop/helpers/curation-v1/review_independence.py",
+      "--artifact-mode",
+      "curation-0-2",
+      "--author-seal",
+      "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/controller/rail-initial/author-seal-release.json",
+      "--reviews",
+      "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/roles/factual-v3-n2/rail-initial/world/guard-envelope.json",
+      "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/roles/quality-v3-n2/rail-initial/world/guard-envelope.json",
+      "--artifacts",
+      "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/round2-private/actor-artifact-index.json",
+      "--out",
+      "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/controller/rail-initial/world-changed-concepts-independence.json"
+    ],
+    "end_utc": "2026-10-27T22:44:03.661820+00:00",
+    "exit_code": 0,
+    "guard_helper_reference": {
+      "bytes": 7604,
+      "path": "/home/dobo/work/_temp/content-loop/helpers/curation-v1/review_independence.py",
+      "sha256": "8d33b23f8f6bda3e6eea635f18859ebcb0d848f493fb9f4cd86bd21ca92693bf"
+    },
+    "limits": "Sidecar claims and retained capture bindings checked; dispatch/transcript isolation and source semantics still require independent human review. No native schema/gate changed.",
+    "metrics": {
+      "cross_pair_denominator": 4,
+      "cross_pair_identical_rows": 0,
+      "within_report_metrics": [
+        {
+          "denominator": 4,
+          "duplicate_rows_beyond_first": 0,
+          "reviewer": "factual-v3-n2"
+        },
+        {
+          "denominator": 4,
+          "duplicate_rows_beyond_first": 0,
+          "reviewer": "quality-v3-n2"
+        }
+      ]
+    },
+    "receipt": {
+      "bytes": 4733,
+      "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/controller/rail-initial/guard.receipt.json",
+      "sha256": "e5e8be4cd7ca2493a29e0162972c8e047af4c3bd8165279af5e159ac3c59d01b"
+    },
+    "result": {
+      "bytes": 1462,
+      "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/controller/rail-initial/world-changed-concepts-independence.json",
+      "sha256": "21a6970b03c1c1dbcd9cf6724686be8cebef44bddda5f4aac413ed73933fd7d5"
+    },
+    "source_release_payload_opened": false,
+    "source_release_reference": {
+      "bytes": 87138,
+      "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/controller/rail-initial/author-seal-release.json",
+      "sha256": "ea5ed350ed012d556ad3a04600fd955ba7823eba955758300f670eb8dfcaad77"
+    },
+    "start_utc": "2026-10-27T22:44:02.089557+00:00",
+    "status": "PASS"
+  },
+  "pending_gates": [
+    "4e quick proposal/current audit/fresh finals/install",
+    "4e world proposal/current audit/fresh finals/install",
+    "4f pins before extensions as required",
+    "4e extensions proposal/current audit/fresh finals/install",
+    "4f export and remaining test-pin packet",
+    "4g corpus",
+    "4h installed authorities",
+    "4i gates",
+    "native alias AFTER controls",
+    "C8 landing candidate",
+    "independent landing review"
+  ],
+  "qualification": {
+    "content_qualified": false,
+    "installed": false,
+    "landed": false,
+    "last_qualified_forms": 38,
+    "n2content_qualified": false,
+    "new_boards": 0,
+    "new_concepts": 0,
+    "overall_qualification": false,
+    "production_qualification": false,
+    "pushed": false,
+    "source_applied_forms": 80
+  },
+  "quick_extensions_guard": "Not run: actual new/changed authored item lists empty; native/process/inheritance/chronology checks retained separately.",
+  "recorded_at": "2026-10-27T22:59:31.743754+00:00",
+  "retention": "No historical raw artifact tree pruned; prior failures and retained captures remain in their original evidence locations. No private captures, identity map, seal payload or bundled payload opened by this installer.",
+  "reviews": [
+    {
+      "candidate": {
+        "bytes": 119217,
+        "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content-continuous/docs/reviews/v3-n2-alias-curation/native/quick/candidate.json",
+        "sha256": "28c875d5040791c3a6cb1e07e6d02eec610496dc92629571312434f7d8682b20"
+      },
+      "canonical": {
+        "bytes": 203280,
+        "path": "docs/reviews/v3-n2-alias-curation/native/quick/factual-review.json",
+        "sha256": "44ef8c7fb3b534f89c6bc80123ccb34f75921a26a58976eada72e39280f1d97a"
+      },
+      "coverage": {
+        "accepted_items": 85,
+        "inherited_items": 85,
+        "items": 85
+      },
+      "first_peer_read_at": null,
+      "inheritance_proof_reference": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/roles/factual-v3-n2/rail-initial/inheritance-proof.json",
+        "read_by_installer": false,
+        "sha256": "d31eb40b7c819067f8046e78e2238818a4d388a8ed1879d717cb916ef92ba510"
+      },
+      "original": {
+        "bytes": 203280,
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/roles/factual-v3-n2/rail-initial/quick/factual-review.json",
+        "sha256": "44ef8c7fb3b534f89c6bc80123ccb34f75921a26a58976eada72e39280f1d97a"
+      },
+      "predecessor_review_reference": {
+        "bytes": 110182,
+        "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content-continuous/docs/reviews/v3-n1-alias-curation/native/quick/factual-review.json",
+        "sha256": "2cbc0e910887e35b63a53c98769d466f75ca5025f91bd033dd616d5f1becbcdc"
+      },
+      "process_envelope": {
+        "bytes": 1477,
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/roles/factual-v3-n2/rail-initial/quick/process-envelope.json",
+        "sha256": "f9ce9710db4714711cfdb9b007b91e709e6c9f177f04cad957f10c19d723736f"
+      },
+      "rail": "quick",
+      "role": "factual",
+      "signed_at": "2026-10-27T22:32:30.740787+00:00"
+    },
+    {
+      "candidate": {
+        "bytes": 878153,
+        "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content-continuous/docs/reviews/v3-n2-alias-curation/native/world/candidate.json",
+        "sha256": "d6344cfc51ded8e7f14ac0491f34b3e3dffb3c7e4e30b60e23b215d297bfada0"
+      },
+      "canonical": {
+        "bytes": 1131493,
+        "path": "docs/reviews/v3-n2-alias-curation/native/world/factual-review.json",
+        "sha256": "1dc97028957a0c9a014ec123a85686498d7c1732c5052621d3d7787021b9a258"
+      },
+      "coverage": {
+        "accepted_items": 352,
+        "concepts": 252,
+        "fresh_changed_concept_ids": [
+          "n_gas_placinte_poale_brau",
+          "n_v20gas_cascaval",
+          "n_v20gas_chiftele",
+          "n_v20gas_snitel"
+        ],
+        "fresh_whole_world_accept": true,
+        "goals": 32,
+        "inherited_concepts": 248,
+        "inherited_items": 352,
+        "initial_inherited_empty_sources_preserved": 86,
+        "items": 352,
+        "unlocks": 12
+      },
+      "first_peer_read_at": null,
+      "inheritance_proof_reference": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/roles/factual-v3-n2/rail-initial/inheritance-proof.json",
+        "read_by_installer": false,
+        "sha256": "d31eb40b7c819067f8046e78e2238818a4d388a8ed1879d717cb916ef92ba510"
+      },
+      "original": {
+        "bytes": 1131493,
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/roles/factual-v3-n2/rail-initial/world/factual-review.json",
+        "sha256": "1dc97028957a0c9a014ec123a85686498d7c1732c5052621d3d7787021b9a258"
+      },
+      "predecessor_review_reference": {
+        "bytes": 599191,
+        "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content-continuous/docs/reviews/v3-n1-alias-curation/native/world/factual-review.json",
+        "sha256": "65dc32a684ae538f8b4af8cb44807b3e77689009cefdeeb764b23da055aa3b50"
+      },
+      "process_envelope": {
+        "bytes": 1690,
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/roles/factual-v3-n2/rail-initial/world/process-envelope.json",
+        "sha256": "e7cb04a4d3888d19e6d274c5fe5c3598baa7a86dd037ec49c80b68f97e0541ee"
+      },
+      "rail": "world",
+      "role": "factual",
+      "signed_at": "2026-10-27T22:32:30.741200+00:00"
+    },
+    {
+      "candidate": {
+        "bytes": 2020146,
+        "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content-continuous/docs/reviews/v3-n2-alias-curation/native/extensions/candidate.json",
+        "sha256": "cff78236fcd3fbcee2add82fd153fe436b20782f21190b267bc9be9f9d230caf"
+      },
+      "canonical": {
+        "bytes": 113075,
+        "path": "docs/reviews/v3-n2-alias-curation/native/extensions/factual-review.json",
+        "sha256": "31e01e3666e3838554a13de93d0a3a345f39ff7a6cfbcc401ae253679299b6e1"
+      },
+      "coverage": {
+        "accepted_items": 49,
+        "inherited_items": 49,
+        "items": 49
+      },
+      "first_peer_read_at": null,
+      "inheritance_proof_reference": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/roles/factual-v3-n2/rail-initial/inheritance-proof.json",
+        "read_by_installer": false,
+        "sha256": "d31eb40b7c819067f8046e78e2238818a4d388a8ed1879d717cb916ef92ba510"
+      },
+      "original": {
+        "bytes": 113075,
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/roles/factual-v3-n2/rail-initial/extensions/factual-review.json",
+        "sha256": "31e01e3666e3838554a13de93d0a3a345f39ff7a6cfbcc401ae253679299b6e1"
+      },
+      "predecessor_review_reference": {
+        "bytes": 58018,
+        "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content-continuous/docs/reviews/v3-n1-alias-curation/native/extensions/factual-review.json",
+        "sha256": "be5cb3e60cf04d0547fe314677a2a8b555236c835c92d24fbf1e07765b07aeb0"
+      },
+      "process_envelope": {
+        "bytes": 1497,
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/roles/factual-v3-n2/rail-initial/extensions/process-envelope.json",
+        "sha256": "3dc4b7e00e297260d09332dbb6bf4c0efeca946b521920bdae2e9bd66f463360"
+      },
+      "rail": "extensions",
+      "role": "factual",
+      "signed_at": "2026-10-27T22:32:30.741570+00:00"
+    },
+    {
+      "candidate": {
+        "bytes": 119217,
+        "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content-continuous/docs/reviews/v3-n2-alias-curation/native/quick/candidate.json",
+        "sha256": "28c875d5040791c3a6cb1e07e6d02eec610496dc92629571312434f7d8682b20"
+      },
+      "canonical": {
+        "bytes": 138051,
+        "path": "docs/reviews/v3-n2-alias-curation/native/quick/quality-review.json",
+        "sha256": "f8df801a0b5048a968b01e66bb9603ef5625e22b5002a76ec2ad01d4414bc56b"
+      },
+      "coverage": {
+        "accepted_items": 85,
+        "inherited_items": 85,
+        "items": 85
+      },
+      "first_peer_read_at": null,
+      "inheritance_proof_reference": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/roles/quality-v3-n2/rail-initial/quick/inheritance-proof.json",
+        "read_by_installer": false,
+        "sha256": "203d3493ff60e14865f794df97d5091378f00f3672b9967752c6fd244fb14030"
+      },
+      "original": {
+        "bytes": 138051,
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/roles/quality-v3-n2/rail-initial/quick/quality-review.json",
+        "sha256": "f8df801a0b5048a968b01e66bb9603ef5625e22b5002a76ec2ad01d4414bc56b"
+      },
+      "predecessor_review_reference": {
+        "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content-continuous/docs/reviews/v3-n1-alias-curation/native/quick/quality-review.json",
+        "sha256": "96649939c67c484c84f250ab6511288fb64283bca2d8e6ac56cf25c58e0a8c1f"
+      },
+      "process_envelope": {
+        "bytes": 1886,
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/roles/quality-v3-n2/rail-initial/quick/process-envelope.json",
+        "sha256": "4527205727f41fb71e650ec088b35e5b608b2bceceb32d25879eef6fbd0a49f1"
+      },
+      "rail": "quick",
+      "role": "quality",
+      "signed_at": "2026-10-27T22:33:14.334904+00:00"
+    },
+    {
+      "candidate": {
+        "bytes": 878153,
+        "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content-continuous/docs/reviews/v3-n2-alias-curation/native/world/candidate.json",
+        "sha256": "d6344cfc51ded8e7f14ac0491f34b3e3dffb3c7e4e30b60e23b215d297bfada0"
+      },
+      "canonical": {
+        "bytes": 764089,
+        "path": "docs/reviews/v3-n2-alias-curation/native/world/quality-review.json",
+        "sha256": "86ec033a8638ce643bbb88ac3cce35b819d8797d1b4478b932dd3598326f589f"
+      },
+      "coverage": {
+        "accepted_items": 352,
+        "concepts": 252,
+        "fresh_changed_concept_ids": [
+          "n_gas_placinte_poale_brau",
+          "n_v20gas_cascaval",
+          "n_v20gas_chiftele",
+          "n_v20gas_snitel"
+        ],
+        "fresh_whole_world_accept": true,
+        "goals": 32,
+        "inherited_concepts": 248,
+        "inherited_items": 352,
+        "initial_inherited_empty_sources_preserved": 224,
+        "items": 352,
+        "unlocks": 12
+      },
+      "first_peer_read_at": null,
+      "inheritance_proof_reference": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/roles/quality-v3-n2/rail-initial/world/inheritance-proof.json",
+        "read_by_installer": false,
+        "sha256": "d80ec8413b3c12f94192358755d06ea5c3157f5cbbff660660aff73dd52ca2f2"
+      },
+      "original": {
+        "bytes": 764089,
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/roles/quality-v3-n2/rail-initial/world/quality-review.json",
+        "sha256": "86ec033a8638ce643bbb88ac3cce35b819d8797d1b4478b932dd3598326f589f"
+      },
+      "predecessor_review_reference": {
+        "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content-continuous/docs/reviews/v3-n1-alias-curation/native/world/quality-review.json",
+        "sha256": "c153700926e423ca204b7bea6b906dc60da9593d2f006245995e6f650a8d2897"
+      },
+      "process_envelope": {
+        "bytes": 1886,
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/roles/quality-v3-n2/rail-initial/world/process-envelope.json",
+        "sha256": "e9964ffe3495dc6b5618cc0c50a19493c9a37a56753276185ed5a58c7b220b99"
+      },
+      "rail": "world",
+      "role": "quality",
+      "signed_at": "2026-10-27T22:33:14.335045+00:00"
+    },
+    {
+      "candidate": {
+        "bytes": 2020146,
+        "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content-continuous/docs/reviews/v3-n2-alias-curation/native/extensions/candidate.json",
+        "sha256": "cff78236fcd3fbcee2add82fd153fe436b20782f21190b267bc9be9f9d230caf"
+      },
+      "canonical": {
+        "bytes": 80513,
+        "path": "docs/reviews/v3-n2-alias-curation/native/extensions/quality-review.json",
+        "sha256": "9a1663d1bd85ffb390cbfe4cd38244f6f274f5271f8f77d93e8b30a23d1dd956"
+      },
+      "coverage": {
+        "accepted_items": 49,
+        "inherited_items": 49,
+        "items": 49
+      },
+      "first_peer_read_at": null,
+      "inheritance_proof_reference": {
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/roles/quality-v3-n2/rail-initial/extensions/inheritance-proof.json",
+        "read_by_installer": false,
+        "sha256": "2ad37fca4dc1774125a3b64f2e4dff44d5f21be46ff025c2c48706c8b21a04da"
+      },
+      "original": {
+        "bytes": 80513,
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/roles/quality-v3-n2/rail-initial/extensions/quality-review.json",
+        "sha256": "9a1663d1bd85ffb390cbfe4cd38244f6f274f5271f8f77d93e8b30a23d1dd956"
+      },
+      "predecessor_review_reference": {
+        "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content-continuous/docs/reviews/v3-n1-alias-curation/native/extensions/quality-review.json",
+        "sha256": "9af6e0e06c0014f0879be012b7e45649d32eed403b1e9df0c3ed07cc2f43ba8d"
+      },
+      "process_envelope": {
+        "bytes": 1921,
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/roles/quality-v3-n2/rail-initial/extensions/process-envelope.json",
+        "sha256": "9a78ee1678c2c0f0131ecfd3c39a1c6cf43dac68886cfae09e73465d333af7f8"
+      },
+      "rail": "extensions",
+      "role": "quality",
+      "signed_at": "2026-10-27T22:33:14.335141+00:00"
+    }
+  ],
+  "role_result_manifests": [
+    {
+      "failure_metadata": [],
+      "failures_and_limitations": [
+        "The outside-author URL set condition is deliberately unqualified until root runs the original guard after both new actual reports exist.",
+        "EUR-Lex direct HTTP202 returned zero bytes and provider open returned a bot challenge. Substantive product specification and historical registration were checked only through fresh indexed provider results; the raw provider response and direct failure remain retained.",
+        "Sheffield explicitly derives inflections from DEX and definitions from Wiktionary; it is a substantive fresh paradigm capture but is not claimed as an independent underlying lexicographic authority.",
+        "Static metadata assessment only; no native production audit, playthrough, runtime closure or installation qualification. Fresh 4e audit/replay/final gates are still required.",
+        "Eight initial supplies belong to a persistent exploration world, not the rubric five-to-seven-seed challenge-board shape.",
+        "No historical raw artifact trees were pruned in this role; mandatory fresh captures remain retained."
+      ],
+      "first_peer_read_at": null,
+      "manifest": {
+        "bytes": 10641,
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/roles/factual-v3-n2/rail-initial/result-manifest.json",
+        "sha256": "63098fe514e96e5329d051684a6c82b148ae4a5164aaac82e3bd368a7ba1a983"
+      },
+      "recorded_at": "2026-10-27T22:32:30.765019+00:00",
+      "reported_overall_qualification": false
+    },
+    {
+      "failure_metadata": [
+        {
+          "bytes": 0,
+          "capture_id": "cascaval-spec",
+          "capture_path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/roles/quality-v3-n2/rail-initial/captures/cascaval-spec.html",
+          "capture_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "error": null,
+          "requested_url": "https://eur-lex.europa.eu/legal-content/RO/TXT/HTML/?uri=CELEX%3A52020XC0116%2801%29",
+          "status": 202
+        },
+        {
+          "bytes": 0,
+          "capture_id": "cascaval-registration",
+          "capture_path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/roles/quality-v3-n2/rail-initial/captures/cascaval-registration.html",
+          "capture_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "error": null,
+          "requested_url": "https://eur-lex.europa.eu/legal-content/RO/TXT/HTML/?uri=CELEX%3A32021R0657",
+          "status": 202
+        }
+      ],
+      "failures_and_limitations": [
+        "This is initial static semantic quality review only; current native audit, replay, final review, installation and qualification remain pending.",
+        "Predecessor native review whole-file hashes are supplied in the own-role packet; only permitted supplied rows were read and independently hashed.",
+        "Initial exploratory four-query web search tool call has no separately measured UTC or retained response copy; actual invocation/response remains in conversation tool transcript. Subsequent searches have measured UTC and retained raw tool results. Every cited substantive source has actual retained HTTP request/capture bindings.",
+        "Read timestamps before evidence initialization were not separately measured; actual tool calls are retained and retrospective read log says accessed_at:null.",
+        "Two EU HTTP202captures contain no bytes and contribute no chosen substantive evidence; each failure is retained.",
+        "No peer report/source set/author private artifact was read. Applicable procedural skill was also consulted and disclosed."
+      ],
+      "first_peer_read_at": null,
+      "manifest": {
+        "bytes": 15005,
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/roles/quality-v3-n2/rail-initial/result-manifest.json",
+        "sha256": "b586128fb370416bf5610444119be52e904b2dc32bc1069aa0752dae43df7323"
+      },
+      "recorded_at": "2026-10-27T22:34:05.836437+00:00",
+      "reported_overall_qualification": false
+    }
+  ],
+  "scope": "4d initial reviews only; exact native byte copies; no new verdicts",
+  "source14": {
+    "bytes": 2411870,
+    "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content-continuous/go-backend/internal/contentrails/sources/authored-v14.json",
+    "sha256": "3532fade3c689c3e6e64bf10eb3706f03cfb2de04ef3556e0351cfdf6be3ec73"
+  },
+  "worktree_head_before": "410361b74687a73d4441c341eead099f5c4491b7",
+  "world_sidecars": [
+    {
+      "changed_ids": [
+        "n_gas_placinte_poale_brau",
+        "n_v20gas_cascaval",
+        "n_v20gas_chiftele",
+        "n_v20gas_snitel"
+      ],
+      "first_peer_read_at": null,
+      "guard_envelope": {
+        "bytes": 3414,
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/roles/factual-v3-n2/rail-initial/world/guard-envelope.json",
+        "sha256": "db3328fa156642f6ec03df0d2cf8b5c97870730cc4b9216a5e97a8f72edefb3e"
+      },
+      "helper_raw": {
+        "bytes": 5152,
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/roles/factual-v3-n2/rail-initial/world/helper-raw.json",
+        "sha256": "b7c2e255a1344b9656ad060f6bc99d3d75c80eb864a1998fcb66e2dfccd361c5"
+      },
+      "role": "factual",
+      "signed_at": "2026-10-27T22:32:30.742012+00:00"
+    },
+    {
+      "changed_ids": [
+        "n_gas_placinte_poale_brau",
+        "n_v20gas_cascaval",
+        "n_v20gas_chiftele",
+        "n_v20gas_snitel"
+      ],
+      "first_peer_read_at": null,
+      "guard_envelope": {
+        "bytes": 3890,
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/roles/quality-v3-n2/rail-initial/world/guard-envelope.json",
+        "sha256": "83d572d669cab2e6a25a556aca1598b584816bff63549e5b7732f47ca3b9e45d"
+      },
+      "helper_raw": {
+        "bytes": 4762,
+        "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n2/roles/quality-v3-n2/rail-initial/world/helper-raw.json",
+        "sha256": "c685f8f32ea45592a78274f7088588aa87a108e582b85efe7b55555ed822fd42"
+      },
+      "role": "quality",
+      "signed_at": "2026-10-27T22:33:14.335364+00:00"
+    }
+  ]
+}

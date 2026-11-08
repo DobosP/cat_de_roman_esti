@@ -1,5 +1,35 @@
 # Work log
 
+## 2026-11-08 — V3 content loop landing: n1, n2, n4 (210 inflected inputs)
+
+Valid until: the next V3 landing review — then treat as history.
+
+An independent Claude Code landing review accepted the whole queued prefix of `content/continuous`
+(n1 `28a9beb5`, n2 `a7c2f858`, n4 `3ca792da`) and fast-forwarded local `main` to it. Every new
+input is an inflected form of a label or alias the owner already had: 38 forms on 17 owners, 80
+on 20 and 92 on 55, so 210 forms on 92 owners in all. There are no new concepts, verified
+synonyms, edges or boards in any game. KG aliases 9520 → 9730; nodes, edges and puzzles unchanged.
+
+- Item review: all 210 forms checked by hand against Romanian morphology. A fold-equal collision
+  scan against every KG label and alias and a literal scan of every other `scripts/*_data.py`,
+  `docs/reviews/*/graph-candidates.json`, Python test and Go test found 0 hits. The owner holds
+  are untouched.
+- N1 reviewer labels `factual-v2-c1`/`quality-v2-c1` were kept from the inherited V2 C1 round-1
+  reviews. The root transcript shows ten fresh `spawn_agent` calls with `fork_turns=none` and
+  distinct V3 task names, inheriting `gpt-6.1-sol` (factual high, quality ultra). The round-2
+  quality reviewer opened no factual file before it signed. Accepted with this note.
+- Gates on exact `3ca792da`: pinned `scripts/gate.sh build` 11/11. Fresh 4i with those
+  generated SPA assets was green outright, including the full `go test -count=1 -race ./...`.
+- HTTP: every form in both orders resolves directly to its owner in one guess slot. There are 20
+  alias-target wins on the six owners that are Cald targets.
+- The candidate's per-step unlanded STATUS history for n1/n2/n4 is preserved in the three batch
+  READMEs and in commit `3ca792da`. STATUS now carries only the landed summary.
+- Removed after verification: the two clean comparison worktrees (`v3-n1-baseline-comparison` and
+  branch `codex/v3-n1-baseline-comparison` at `052212fa`, plus `v3-n4-reconcile-main23aa-comparison`)
+  and this review's own worktree. Evidence under `~/work/_temp/content-loop/continuous/` is
+  untouched; it is still waiting for a NAS copy before any retention cleanup.
+
+
 ## 2026-10-28 — Consolidate historical source; NAS-gated checkout retirement
 
 Valid until: later source curation or checkout restoration changes these recorded identities — then treat as history.

@@ -1,0 +1,107 @@
+{
+  "schema": "cat-v3-n1-initial-rail-review-bindings-1",
+  "created_at": "2026-10-26T23:06:28.357737+00:00",
+  "candidate_commit": "c0d251385d01a7981e5afa17b85db335f964133a",
+  "source": {
+    "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content-continuous/go-backend/internal/contentrails/sources/authored-v13.json",
+    "bytes": 2411898,
+    "sha256": "8d8970a9414e231990aea9bbfa36bb346fa6ade377ad602b9f518f44fb389080"
+  },
+  "rails": {
+    "extensions": {
+      "factual": {
+        "review": {
+          "path": "docs/reviews/v3-n1-alias-curation/native/extensions/factual-review.json",
+          "sha256": "be5cb3e60cf04d0547fe314677a2a8b555236c835c92d24fbf1e07765b07aeb0"
+        },
+        "envelope": {
+          "bytes": 13685,
+          "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n1/roles/factual-v2-c1/rail-initial/extensions/envelope.json",
+          "sha256": "e4b0c330c37ffa3d29ab80d1a7f98ec82d1f96f37b086a92ff6ac8bbfcbcb45f"
+        },
+        "signed_at": "2026-10-26T23:00:05.475298Z",
+        "first_peer_read_at": null,
+        "new_or_changed_items": 0
+      },
+      "quality": {
+        "review": {
+          "path": "docs/reviews/v3-n1-alias-curation/native/extensions/quality-review.json",
+          "sha256": "9af6e0e06c0014f0879be012b7e45649d32eed403b1e9df0c3ed07cc2f43ba8d"
+        },
+        "envelope": {
+          "bytes": 2474,
+          "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n1/roles/quality-v2-c1/rail-initial/extensions/quality-envelope.json",
+          "sha256": "96370aa3b07ae8a8ae420d2709268c9ede6990f91a3a3f937e000f88cef84974"
+        },
+        "signed_at": "2026-10-26T23:01:42.732889Z",
+        "first_peer_read_at": null,
+        "new_or_changed_items": 0
+      }
+    },
+    "quick": {
+      "factual": {
+        "review": {
+          "path": "docs/reviews/v3-n1-alias-curation/native/quick/factual-review.json",
+          "sha256": "2cbc0e910887e35b63a53c98769d466f75ca5025f91bd033dd616d5f1becbcdc"
+        },
+        "envelope": {
+          "bytes": 13291,
+          "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n1/roles/factual-v2-c1/rail-initial/quick/envelope.json",
+          "sha256": "4bf0d19449c5213fa7b429ec3bdcbd9975aa40c719e79a990bb771b530934a72"
+        },
+        "signed_at": "2026-10-26T23:00:04.857188Z",
+        "first_peer_read_at": null,
+        "new_or_changed_items": 0
+      },
+      "quality": {
+        "review": {
+          "path": "docs/reviews/v3-n1-alias-curation/native/quick/quality-review.json",
+          "sha256": "96649939c67c484c84f250ab6511288fb64283bca2d8e6ac56cf25c58e0a8c1f"
+        },
+        "envelope": {
+          "bytes": 2453,
+          "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n1/roles/quality-v2-c1/rail-initial/quick/quality-envelope.json",
+          "sha256": "edae6dc4a9d1bcb71ff38803b14dcc30e1c719ab8b1eec4bbf11497a4d135e8a"
+        },
+        "signed_at": "2026-10-26T23:01:42.732280Z",
+        "first_peer_read_at": null,
+        "new_or_changed_items": 0
+      }
+    },
+    "world": {
+      "factual": {
+        "review": {
+          "path": "docs/reviews/v3-n1-alias-curation/native/world/factual-review.json",
+          "sha256": "65dc32a684ae538f8b4af8cb44807b3e77689009cefdeeb764b23da055aa3b50"
+        },
+        "envelope": {
+          "bytes": 13474,
+          "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n1/roles/factual-v2-c1/rail-initial/world/envelope.json",
+          "sha256": "ff9db1830bc8d13780919682c543cee722614deb3812f01cf2cf75047fd00a14"
+        },
+        "signed_at": "2026-10-26T23:00:05.143327Z",
+        "first_peer_read_at": null,
+        "new_or_changed_items": 0
+      },
+      "quality": {
+        "review": {
+          "path": "docs/reviews/v3-n1-alias-curation/native/world/quality-review.json",
+          "sha256": "c153700926e423ca204b7bea6b906dc60da9593d2f006245995e6f650a8d2897"
+        },
+        "envelope": {
+          "bytes": 2454,
+          "path": "/home/dobo/work/_temp/content-loop/continuous/evidence/n1/roles/quality-v2-c1/rail-initial/world/quality-envelope.json",
+          "sha256": "46716326d2bc2b0ee8152d2b8175f425880b1c37a0ddc0b96780c63d04b365dc"
+        },
+        "signed_at": "2026-10-26T23:01:42.732596Z",
+        "first_peer_read_at": null,
+        "new_or_changed_items": 0
+      }
+    }
+  },
+  "ordering": "All six actual own attestations finalized before collection. Each first_peer_read_at:null means no peer read occurred; no synthetic peer-read timestamp is invented. Any later peer access must be later than both own attestations.",
+  "guard": "No new or changed authored item/concept; per-item guard not required for exact inherited rail rows. Both sidecars retained. Lexical forms separately passed round2 guard.",
+  "inherited_concept_sources": "90 unchanged factual concepts preserve predecessor sources:[] under world.go310-315; item URL rule and new/noninherited concept-source rule unchanged.",
+  "extensions_rankings": "Retained source-record ranking descriptor is historical provenance; current rankings/pack bindings and fresh runtime audits still required.",
+  "content_qualified": false
+}
