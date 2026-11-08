@@ -1,7 +1,7 @@
 # ADR-0221: Consolidate historical source stock and retire old checkouts
 
 Date: 2026-10-28
-Status: accepted (Paul asked to inspect historical Cat loop work, consolidate useful unmerged work on one branch, merge it and delete the old checkouts; he explicitly kept the live continuous loop).
+Status: accepted (Paul asked to inspect historical Cat loop work, consolidate useful unmerged work on one branch, merge it and delete the old checkouts; he explicitly kept the live continuous loop). Decision 5 is superseded for the V3 loop artefacts by [ADR-0225](0225-retire-v3-content-loop-artefacts.md) (2026-11-09).
 Amends physical-checkout retention in ADR-0188/0210. Content acceptance rules are unchanged.
 
 ## Context

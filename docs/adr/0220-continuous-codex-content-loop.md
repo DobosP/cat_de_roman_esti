@@ -1,7 +1,7 @@
 # ADR-0220: Continuous Codex content loop with landing reviews
 
 Date: 2026-10-26
-Status: accepted
+Status: accepted; the V3 loop is retired and its artefacts archived to the NAS by [ADR-0225](0225-retire-v3-content-loop-artefacts.md) (2026-11-09).
 
 ## Context
 

@@ -1,5 +1,21 @@
 # Work log
 
+## 2026-11-09 — Retire V3 artefacts; re-review the 79 held Conexiuni boards
+
+Valid until: a later retention or board decision — then treat as history.
+
+- **V3 retirement** ([ADR-0225](docs/adr/0225-retire-v3-content-loop-artefacts.md)): a destroy-direction guard review found no process, open file, session, unit, link or editable install using the paths.
+  The branch and worktree went to `branch-archive/2026-11-09/` and the two `_temp` folders (7.46 GB) to `temp-archive/2026-11-09/` on the NAS, verified, then deleted.
+  The V4 seed set (40 MB) was copied out first.
+- **Held Conexiuni boards** (Paul: review them, land those that pass the quality bar, hold the rest): all 79 approved-but-held boards were reviewed.
+  - 3 fail `tile_fairness`.
+  - 55 would repeat a group exactly or 3-of-4 from the 83 eligible boards, or push a member past 8 uses.
+  - The other 21 each got a blind solve from the 16 shuffled tiles, a web-checked factual judge and a rubric quality judge.
+  - All 42 judgments were "hold", and every board's recorded demotion or reserve reason still applies, so none passed.
+  - Typical defects: labels that name a member, exact reuse of another board's group, members that do not satisfy their label, mirrored groups and catch-all labels.
+  - `board_demotions_v43.json` and `release_reserve_v1.json` are unchanged.
+- **Gate host:** Docker `default-address-pools` is now `10.200.0.0/16` in /24 slices (Paul applied it), after pool exhaustion blocked a gate build.
+
 ## 2026-11-08 — V3 content loop landing: n1, n2, n4 (210 inflected inputs)
 
 Valid until: the next V3 landing review — then treat as history.
