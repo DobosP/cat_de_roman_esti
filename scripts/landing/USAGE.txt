@@ -1,0 +1,69 @@
+V4 landing kit
+
+Run these commands from a clean review worktree. BASELINE and SHA are full
+commit IDs. Put EVIDENCE in owned scratch and use a new 4i output directory.
+
+    bash scripts/landing/preflight.sh "$PWD"
+    GATE_OPERATOR=agent:codex bash scripts/gate.sh build --sha "$SHA"
+    bash scripts/landing/run-4i.sh --baseline "$BASELINE" --sha "$SHA" \
+      --build-dir "$MIRROR" --out "$EVIDENCE/4i"
+    python3 -IB scripts/landing/kgdiff.py --baseline "$BASELINE" --sha "$SHA" \
+      > "$EVIDENCE/kgdiff.json"
+
+MIRROR is the owning wrapper's build mirror, usually
+~/work/_temp/<worktree-slug>/gates/cat_de_roman_esti. Run 4i after the pinned
+build and before a gate repopulates that mirror. 4i keeps each command log
+and a results.json receipt; any failing command makes the aggregate nonzero.
+It removes its temporary checkout projection and private Go cache when done.
+Use --go-cache for one rolling writable cache in owned scratch if desired.
+Go modules must already be in the locally available module cache.
+
+Start the pinned build's .gate/build/cat-server as an anonymous, disposable
+loopback process on a free port. On POSIX, for example:
+
+    env -i PATH="$PATH" CAT_ACCOUNTS_ENABLED=0 CAT_SUBMISSIONS_DIR= \
+      .gate/build/cat-server -listen 127.0.0.1:18941
+
+In another shell:
+
+    python3 -IB scripts/landing/play.py --baseline "$BASELINE" --sha "$SHA" \
+      --build-dir "$MIRROR" --base-url http://127.0.0.1:18941 > "$EVIDENCE/play.jsonl"
+
+Play reports one result per alias and per new, changed or newly selectable
+board. Add a --touched-board ID argument for each additional board affected
+by graph or caption changes. Unknown and ineligible explicit IDs fail.
+Play uses the owning build's private cat-browser-plan for exact Lanț and
+Alchimie seeds and steps. It submits the steps to ordinary HTTP endpoints,
+checks each played Lanț caption against the committed map, and verifies
+the win on reload. An unselectable new board, ambiguous shelf,
+unavailable plan or exhausted seed search fails the playthrough. Quick-game
+installation is closed in V4. Stop the disposable server after the run.
+
+Threat model
+
+The caller, tools on PATH, local Git object store, owning pinned wrapper and
+pinned Go installation are trusted. Treat build paths, receipt fields and game
+responses as untrusted data. 4i uses an isolated projection of the exact Git
+commit, checks the clean source and the receipt's commit, tree and toolchain,
+and copies only registered, digest-checked current and frozen SPA bytes. It disables Go
+downloads and does not invoke Docker. The scratch destination and tool
+environment belong to the landing operator. Receipt checks do not defend
+against an operator who can replace trusted tools or forge both build receipts.
+
+Preflight reads disk capacity and inspects the local Unix Docker socket for
+the committed pinned image and the exact Compose project label. It runs
+only read operations and never changes the network, daemon or host. Use
+CAT_LANDING_DOCKER_SOCKET for a nondefault local Unix socket. The local HTTP
+client uses a literal loopback address, verifies all four registered build
+identity fields and the content manifest, and refuses redirects and proxies. Planner output stays in memory.
+Fuzzy neighbours in kgdiff are advisory, and play verifies actual resolution.
+
+Portability
+
+The Python commands use Python 3.12+ and the standard library. Run
+python3 -IB tests/test_landing_kit.py on Linux, macOS or Windows.
+Bash launchers are conveniences. On Windows invoke
+python -IB scripts/landing/run_4i.py directly and use a prebuilt pinned Linux
+mirror as input. The Go race lane requires CGO and a compatible host C compiler.
+The pinned GUI build and Unix-socket Docker preflight use the owning Linux
+gate environment.
