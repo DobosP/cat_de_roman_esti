@@ -1,6 +1,6 @@
 # ADR-0205: one authored game stylesheet and browser contracts
 
-Status: Accepted on exact source1673389147a3ba432742008d55d28edb84d94af2; local landing delegated by E10.
+Status: Accepted on exact source1673389147a3ba432742008d55d28edb84d94af2; local landing delegated by E10. Its 'Alchimie exploration-before-common order' clause is superseded by [ADR-0224](0224-target-based-alchimie.md) (2026-11-08), which removed the current exploration stylesheet.
 Date: 2026-10-19
 Authority: S1 M4, PROGRAM E8/E10 and the requested efficient game migration.
 
