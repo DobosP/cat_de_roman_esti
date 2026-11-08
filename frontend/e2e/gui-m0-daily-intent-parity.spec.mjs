@@ -138,7 +138,9 @@ for (const game of games) {
       await expect.poll(() => new URL(page.url()).searchParams.get("challenge"))
         .toBe(variant === "today" ? null : "daily");
       if (game.key === "alchimie") {
-        expect(new URL(page.url()).searchParams.get("mode")).toBe("challenges");
+        const url = new URL(page.url());
+        expect(url.pathname).toBe("/alchimie");
+        expect(url.searchParams.has("mode")).toBe(false);
       }
       expect(creates).toHaveLength(0);
       const persisted = await request.get(gameURL(game, initial.game_id));

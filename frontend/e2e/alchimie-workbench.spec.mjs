@@ -299,7 +299,9 @@ test("rapid partner taps send one combine while the response is pending", async 
   } finally {
     release();
   }
-  const discovered = await (await response).json();
+  const reply = await response;
+  expect(reply.status()).toBe(200);
+  const discovered = await reply.json();
   await expect(slots(page)).toHaveCount(0);
   await expect(useLastResult(page, discovered.discovered[0].label)).toBeVisible();
   expect(posts).toHaveLength(1);

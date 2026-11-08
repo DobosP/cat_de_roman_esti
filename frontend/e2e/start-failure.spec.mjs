@@ -119,9 +119,14 @@ for (const game of games) {
     const originalScores = await scoreState(page);
     const copy = page.getByRole("button", { name: "Copiază rezultatul" });
     const replay = page.getByRole("button", { name: /^Încă (?:unul|un lanț) →$/ });
-    // The compact quick-game result now fits a 560px desktop. Keep this recovery
-    // scenario genuinely scrolled by exercising a shorter window after completion.
-    if (game.derived) await page.setViewportSize({ ...page.viewportSize(), height: 320 });
+    // Keep the recovery scenario genuinely scrolled even when the compact
+    // result and replay action fit above the fold.
+    if (game.derived || game.key === "alchimie") {
+      await page.setViewportSize({ ...page.viewportSize(), height: 320 });
+    }
+    if (game.key === "alchimie") {
+      await page.locator(".alchemy-challenge").evaluate((screen) => { screen.scrollTop = 48; });
+    }
     await replay.scrollIntoViewIfNeeded();
     // Sticky headers and partially visible rules do not indicate scroll length.
     expect(await replay.evaluate((button) => {
