@@ -17,5 +17,5 @@ All 79 Conexiuni holds and the existing pack rows remain in place.
 
 The v17 source and all three independently signed native rail pairs reproduced exactly
 on the branch. All installed authority entries, source validation and sealed export passed.
-The scratch independent corpus matched all 1,206 cases. Exact branch capture follows.
+The actual independent branch capture and native replay matched all 1,206 cases.
 Evidence is under `~/work/_temp/content__v4/c2/`.
