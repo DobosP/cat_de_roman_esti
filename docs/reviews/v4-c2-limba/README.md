@@ -15,7 +15,7 @@ strict Python/native critique, native promotion, rank, derive, ops and mobile ch
 Their original dossier bytes reproduced exactly during the branch transaction.
 All 79 Conexiuni holds and the existing pack rows remain in place.
 
-The reviewed v17 source, three independent rail pairs and fresh native audits were
-verified in scratch. The scratch independent corpus matched all 1,206 cases.
-Branch qualification will recapture and bind the exact current source.
+The v17 source and all three independently signed native rail pairs reproduced exactly
+on the branch. All installed authority entries, source validation and sealed export passed.
+The scratch independent corpus matched all 1,206 cases. Exact branch capture follows.
 Evidence is under `~/work/_temp/content__v4/c2/`.
