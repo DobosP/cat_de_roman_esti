@@ -15605,6 +15605,63 @@
    ],
    "source": "ai",
    "status": "approved"
+  },
+  {
+   "category": "societate",
+   "difficulty": "normal",
+   "group_labels": {
+    "g1": "Vehicule cu variante destinate transportului de marfă",
+    "g2": "Părți ale ciclului zilnic",
+    "g3": "Sigle de exact trei litere majuscule",
+    "g4": "Poți merge cu bilet ca spectator sau vizitator"
+   },
+   "groups": {
+    "g1": [
+     "n_v24_transport_road_camion",
+     "n_v24_transport_road_duba",
+     "n_v28_transport_water_vapor",
+     "n_v2sti_avion"
+    ],
+    "g2": [
+     "n_v1_8_dimineata",
+     "n_v24_time_day_zi",
+     "n_v1_8_seara",
+     "n_v29_time_daily_noapte"
+    ],
+    "g3": [
+     "n_v11soc_dna",
+     "n_v11soc_sri",
+     "n_v11soc_cfr",
+     "n_onu"
+    ],
+    "g4": [
+     "n_v2art_muzeu",
+     "n_v2art_teatru",
+     "n_v3fil_cinematograf",
+     "n_v4spo_stadion"
+    ]
+   },
+   "id": "cx_societate_379",
+   "order": [
+    "n_v2sti_avion",
+    "n_v11soc_dna",
+    "n_v11soc_cfr",
+    "n_v11soc_sri",
+    "n_v28_transport_water_vapor",
+    "n_v24_time_day_zi",
+    "n_v2art_muzeu",
+    "n_v29_time_daily_noapte",
+    "n_v4spo_stadion",
+    "n_v1_8_seara",
+    "n_v24_transport_road_camion",
+    "n_v2art_teatru",
+    "n_v3fil_cinematograf",
+    "n_onu",
+    "n_v1_8_dimineata",
+    "n_v24_transport_road_duba"
+   ],
+   "source": "ai",
+   "status": "approved"
   }
  ],
  "contexto": [
@@ -17727,6 +17784,14 @@
    "source": "ai",
    "status": "approved",
    "target": "n_v4via_usa"
+  },
+  {
+   "category": "arta_cultura",
+   "difficulty": "usor",
+   "id": "ct_arta_cultura_378",
+   "source": "ai",
+   "status": "approved",
+   "target": "n_v2art_muzeu"
   }
  ],
  "lant": [
@@ -18984,87 +19049,42 @@
  "meta": {
   "counts": {
    "alchimie": 83,
-   "conexiuni": 249,
-   "contexto": 265,
+   "conexiuni": 250,
+   "contexto": 266,
    "lant": 125
   },
   "id_high_water": {
    "alchimie": 107,
-   "conexiuni": 378,
-   "contexto": 377,
+   "conexiuni": 379,
+   "contexto": 378,
    "lant": 248
   },
   "last_import": {
    "allocated": [
     {
-     "category": "limba",
-     "game": "conexiuni",
-     "id": "cx_limba_377",
-     "raw_ref": "conexiuni[0]"
-    },
-    {
-     "category": "limba",
-     "game": "conexiuni",
-     "id": "cx_limba_378",
-     "raw_ref": "conexiuni[1]"
+     "category": "arta_cultura",
+     "game": "contexto",
+     "id": "ct_arta_cultura_378",
+     "raw_ref": "contexto[0]"
     }
    ],
    "categories": [
     {
      "bindings": {
-      "candidate_sha256": "sha256:d9f50d297e80b9c6341f2d68bd66c93acfd3e2cadcca38d7634d98f2f4f5eaeb",
-      "factual_reviewer": "v4_c2_l1_factual_a",
-      "factual_sha256": "sha256:ed2fd7a8d3b93b5ce11be7ff905c37f182c9897f6ba1b39f262544afd5afde68",
-      "quality_reviewer": "v4_c2_l1_quality_a",
-      "quality_sha256": "sha256:4c7a0c8c835107f54ec731a270d01a21046f4eb69c9b80d546691fcebcc1ad1c"
+      "candidate_sha256": "sha256:a4846a2ccde1d5c7f5db630b54e262fb2488eb2ca3cf1f99c3a2baaa08d3de56",
+      "factual_reviewer": "v4_c3_l4_cald_factual_a",
+      "factual_sha256": "sha256:93656f6b8fa9468131b1edfbf0c8b4d120177fdde422b379169c79bd9745a078",
+      "quality_reviewer": "v4_c3_l4_cald_quality_a",
+      "quality_sha256": "sha256:a8188f16924be37cde243ed190a546a524155514e2c1763c1b81a9e30df9e1ac"
      },
-     "category": "limba",
+     "category": "arta_cultura",
      "exclusions": []
-    },
-    {
-     "bindings": {
-      "candidate_sha256": "sha256:a6e191e0a05bc1613a12c4d8421533a76201f11cd3628b3a137294e56cbb35f5",
-      "factual_reviewer": "v4_c2_l1_factual_a",
-      "factual_sha256": "sha256:260bcd21fb1899ae37aefac17ed28702ee88529dd20affeec1a1bc140c069875",
-      "quality_reviewer": "v4_c2_l1_quality_a",
-      "quality_sha256": "sha256:27ba129ea3b83c7962e3494e1d656319321ba631e0e34057cab91075707fadcb"
-     },
-     "category": "muzica",
-     "exclusions": [
-      {
-       "layer": "factual",
-       "reason": "A3 and B1. The exact KG Radio node denotes the broadcast medium for songs and music programs. Aparat selects the separate receiver sense of the printed word, so the Radio KG identity fails the physical-device predicate.",
-       "ref": "conexiuni[0]"
-      },
-      {
-       "layer": "quality",
-       "reason": "I would start with Telefon, Radio, Căști and Casetofonul. Made in Romania is a credible wrong fourth for the English-named festivals, and separating live concerts from judged performances resolves that trap. I would recognize Undeva-n Balcani and Made in Romania as titles. Acasă needs context, and Oriunde te vei afla looks like a common phrase unless I already know the La Familia track. The KG marks that title hard at salience 0.2143, consistent with the narrow recognition I would expect from a 12-year-old. A player can guess the four spatial phrases by elimination, while the intended song-title connection depends on a deep cut for normal difficulty. The displayed content is child-safe.",
-       "ref": "conexiuni[0]"
-      }
-     ]
-    },
-    {
-     "bindings": {
-      "candidate_sha256": "sha256:fd2221e8da8d3fca65549f70dbada144f3a27ce2c03bc02d2d027c8f9c4decf5",
-      "factual_reviewer": "v4_c2_l1_factual_a",
-      "factual_sha256": "sha256:bfb60808a10046f14165bd406b780bf642162220fa6e479864b5b111e078ac73",
-      "quality_reviewer": "v4_c2_l1_quality_a",
-      "quality_sha256": "sha256:57e7bd2abc133786888373c2d0b9479b2efc3acef03701148df9e9745eb27ff7"
-     },
-     "category": "personalitati",
-     "exclusions": [
-      {
-       "layer": "quality",
-       "reason": "I would start with Stela Popescu and Tamara Buciuceanu-Botez and look for the other two film actors. The four remaining work titles can also be isolated immediately among twelve names, before recognizing the Brâncuși relation. That leaves a straight profession sort, with the two Theodors and Ion Andreescu the likely slow step for a young player. The apparent difficulty comes from recall of art names, and the art-title grouping has a visible type shortcut. Pasărea măiastră is a familiar folklore phrase, with much lower salience as the exact sculpture series. The intended groups are cleanly separated and there is no observed A5 trigger. I reject at B7 for the weak difficulty gradient on greu.",
-       "ref": "conexiuni[0]"
-      }
-     ]
     }
    ],
    "kg_sha256": "8b8addd26cdc3aa5972a97368196e9593d5ef38477625f2fba988845e10879d4",
    "operator": "native-pack-only-import-v1",
    "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
-   "source_pack_sha256": "2803020851b30f40405e77224e4669b94c2d67f721fb65e3cd204cf41f4c1b15",
+   "source_pack_sha256": "7f4da4daa657f16e0d8e4b171ffcdcb45259b0e2f44ac0bf9d586b2acfd224ff",
    "write": true
   },
   "note": "Curated games pack (ADR-0011): AI-generated, fact/quality-verified batch + hand-crafted starters. Only status=approved items are served.",

@@ -38,3 +38,11 @@ The failed Cald trial submitted five opening and eight adaptive guesses. Eleven
 were recognized attempts and two returned unknown-word feedback. The run ended unsolved.
 The reviewed Alchimie weather draft had one intuitive opening. Its other starts
 required an unspecified season or a cyclone assumption.
+
+## C3 outcomes
+
+Eight Conexiuni author drafts became one paired accept and seven item-level drops.
+Two drafts failed blind partition play. Five more failed factual or quality review,
+including broad physical-feature predicates and weak classification traps.
+Muzeu resumed its original C2 hypothesis after the exact native and paired-review
+prerequisites were resolved. The compact retry receipt is in the C3 review directory.
