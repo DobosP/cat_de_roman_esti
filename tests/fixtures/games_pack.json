@@ -15491,6 +15491,120 @@
    ],
    "source": "ai",
    "status": "approved"
+  },
+  {
+   "category": "limba",
+   "difficulty": "normal",
+   "group_labels": {
+    "g1": "Semne grafice din scrierea românească",
+    "g2": "Verbe pentru lucrul cu limbajul",
+    "g3": "Părți de vorbire neflexibile",
+    "g4": "Categorii căutate la analiza unui verb la mod personal"
+   },
+   "groups": {
+    "g1": [
+     "n_v21lim_ghilimele",
+     "n_v4lim_virgula",
+     "n_v17lim_cratima",
+     "n_v4lim_semn_intrebare"
+    ],
+    "g2": [
+     "n_v24_action_language_a_citi",
+     "n_v24_action_language_a_scrie",
+     "n_v24_action_senses_a_vorbi",
+     "n_v24_action_language_a_spune"
+    ],
+    "g3": [
+     "n_v4lim_adverb",
+     "n_v4lim_conjunctie",
+     "n_v4lim_interjectie",
+     "n_v4lim_prepozitie"
+    ],
+    "g4": [
+     "n_v4lim_timp_verbal",
+     "n_v21lim_mod_verbal",
+     "n_v4lim_persoana_gramaticala",
+     "n_v4lim_numar_gramatical"
+    ]
+   },
+   "id": "cx_limba_377",
+   "order": [
+    "n_v4lim_prepozitie",
+    "n_v4lim_numar_gramatical",
+    "n_v17lim_cratima",
+    "n_v24_action_language_a_scrie",
+    "n_v4lim_interjectie",
+    "n_v24_action_senses_a_vorbi",
+    "n_v4lim_conjunctie",
+    "n_v4lim_adverb",
+    "n_v4lim_timp_verbal",
+    "n_v21lim_ghilimele",
+    "n_v4lim_virgula",
+    "n_v21lim_mod_verbal",
+    "n_v24_action_language_a_citi",
+    "n_v4lim_semn_intrebare",
+    "n_v24_action_language_a_spune",
+    "n_v4lim_persoana_gramaticala"
+   ],
+   "source": "ai",
+   "status": "approved"
+  },
+  {
+   "category": "limba",
+   "difficulty": "normal",
+   "group_labels": {
+    "g1": "Specii folclorice românești transmise oral",
+    "g2": "Noțiuni despre cum se aude un cuvânt",
+    "g3": "Termeni pentru relații între cuvinte după sens sau formă",
+    "g4": "Cuvinte din bucătărie împrumutate din turcă"
+   },
+   "groups": {
+    "g1": [
+     "n_v2art_balada_populara",
+     "n_v4art_colind",
+     "n_v4art_basm",
+     "n_v42lim_ghicitoare"
+    ],
+    "g2": [
+     "n_v4lim_sunet",
+     "n_v3lim_silaba",
+     "n_v21lim_diftong",
+     "n_v3lim_accent"
+    ],
+    "g3": [
+     "n_v3lim_sinonim",
+     "n_v3lim_antonim",
+     "n_v20lim_omonim",
+     "n_v20lim_paronim"
+    ],
+    "g4": [
+     "n_v2gas_ciorba",
+     "n_v3gas_cafea",
+     "n_v24_food_breakfast_iaurt",
+     "n_v20gas_chiftele"
+    ]
+   },
+   "id": "cx_limba_378",
+   "order": [
+    "n_v3gas_cafea",
+    "n_v3lim_accent",
+    "n_v3lim_silaba",
+    "n_v42lim_ghicitoare",
+    "n_v2art_balada_populara",
+    "n_v24_food_breakfast_iaurt",
+    "n_v3lim_sinonim",
+    "n_v2gas_ciorba",
+    "n_v21lim_diftong",
+    "n_v20lim_omonim",
+    "n_v4lim_sunet",
+    "n_v20lim_paronim",
+    "n_v3lim_antonim",
+    "n_v4art_colind",
+    "n_v20gas_chiftele",
+    "n_v4art_basm"
+   ],
+   "source": "ai",
+   "status": "approved"
   }
  ],
  "contexto": [
@@ -18870,76 +18984,87 @@
  "meta": {
   "counts": {
    "alchimie": 83,
-   "conexiuni": 247,
+   "conexiuni": 249,
    "contexto": 265,
    "lant": 125
   },
   "id_high_water": {
    "alchimie": 107,
-   "conexiuni": 376,
+   "conexiuni": 378,
    "contexto": 377,
    "lant": 248
   },
   "last_import": {
    "allocated": [
     {
-     "category": "gastronomie",
-     "game": "lant",
-     "id": "lt_gastronomie_247",
-     "raw_ref": "lant[0]"
-    },
-    {
-     "category": "geografie",
-     "game": "lant",
-     "id": "lt_geografie_248",
-     "raw_ref": "lant[0]"
-    },
-    {
-     "category": "societate",
+     "category": "limba",
      "game": "conexiuni",
-     "id": "cx_societate_376",
+     "id": "cx_limba_377",
      "raw_ref": "conexiuni[0]"
+    },
+    {
+     "category": "limba",
+     "game": "conexiuni",
+     "id": "cx_limba_378",
+     "raw_ref": "conexiuni[1]"
     }
    ],
    "categories": [
     {
      "bindings": {
-      "candidate_sha256": "sha256:61ec5dd8128a7df1e4e7d3afe0f541c6d24f0d4957443fb426ee940fe97bc0d8",
-      "factual_reviewer": "v4_c1_l4_factual_a",
-      "factual_sha256": "sha256:fefeda7760f98d2b4f4fe6a36a0d7f06e1ec546d63f417ce134b95f174e7f101",
-      "quality_reviewer": "v4_c1_l4_quality_a",
-      "quality_sha256": "sha256:4846c29b5724ffaa1a952c57be175ac98d5fbd34ffea3b4df9efc0fe6d592e19"
+      "candidate_sha256": "sha256:d9f50d297e80b9c6341f2d68bd66c93acfd3e2cadcca38d7634d98f2f4f5eaeb",
+      "factual_reviewer": "v4_c2_l1_factual_a",
+      "factual_sha256": "sha256:ed2fd7a8d3b93b5ce11be7ff905c37f182c9897f6ba1b39f262544afd5afde68",
+      "quality_reviewer": "v4_c2_l1_quality_a",
+      "quality_sha256": "sha256:4c7a0c8c835107f54ec731a270d01a21046f4eb69c9b80d546691fcebcc1ad1c"
      },
-     "category": "gastronomie",
+     "category": "limba",
      "exclusions": []
     },
     {
      "bindings": {
-      "candidate_sha256": "sha256:e523d5e9d6827b71ab4c014936ed03fb1977e847103013422b1781e40f28be82",
-      "factual_reviewer": "v4_c1_l4_factual_a",
-      "factual_sha256": "sha256:08dd1b8d45cc6e0adc008b98f3dcaeb11872eee4b9433df7ca20769fc3bdd5a0",
-      "quality_reviewer": "v4_c1_l4_quality_a",
-      "quality_sha256": "sha256:d484efaf12d2ad6f92a780be9ae3a8302d24f99fec8e05a6e98d5859a1268ce5"
+      "candidate_sha256": "sha256:a6e191e0a05bc1613a12c4d8421533a76201f11cd3628b3a137294e56cbb35f5",
+      "factual_reviewer": "v4_c2_l1_factual_a",
+      "factual_sha256": "sha256:260bcd21fb1899ae37aefac17ed28702ee88529dd20affeec1a1bc140c069875",
+      "quality_reviewer": "v4_c2_l1_quality_a",
+      "quality_sha256": "sha256:27ba129ea3b83c7962e3494e1d656319321ba631e0e34057cab91075707fadcb"
      },
-     "category": "geografie",
-     "exclusions": []
+     "category": "muzica",
+     "exclusions": [
+      {
+       "layer": "factual",
+       "reason": "A3 and B1. The exact KG Radio node denotes the broadcast medium for songs and music programs. Aparat selects the separate receiver sense of the printed word, so the Radio KG identity fails the physical-device predicate.",
+       "ref": "conexiuni[0]"
+      },
+      {
+       "layer": "quality",
+       "reason": "I would start with Telefon, Radio, Căști and Casetofonul. Made in Romania is a credible wrong fourth for the English-named festivals, and separating live concerts from judged performances resolves that trap. I would recognize Undeva-n Balcani and Made in Romania as titles. Acasă needs context, and Oriunde te vei afla looks like a common phrase unless I already know the La Familia track. The KG marks that title hard at salience 0.2143, consistent with the narrow recognition I would expect from a 12-year-old. A player can guess the four spatial phrases by elimination, while the intended song-title connection depends on a deep cut for normal difficulty. The displayed content is child-safe.",
+       "ref": "conexiuni[0]"
+      }
+     ]
     },
     {
      "bindings": {
-      "candidate_sha256": "sha256:dc9e95392dc4ea1c40839b224e89554248c9b2a3b951b5e67232e7df9b49b38e",
-      "factual_reviewer": "v4_c1_l4_factual_a",
-      "factual_sha256": "sha256:eb1a5f3d50def44761fb78d43049695278f8e36285f9a48cd3f6c66cbdd79be1",
-      "quality_reviewer": "v4_c1_l4_quality_a",
-      "quality_sha256": "sha256:24a465ca675ce07557ec149bc72cdcb4488981b61adb5b2c220594f9790f2a91"
+      "candidate_sha256": "sha256:fd2221e8da8d3fca65549f70dbada144f3a27ce2c03bc02d2d027c8f9c4decf5",
+      "factual_reviewer": "v4_c2_l1_factual_a",
+      "factual_sha256": "sha256:bfb60808a10046f14165bd406b780bf642162220fa6e479864b5b111e078ac73",
+      "quality_reviewer": "v4_c2_l1_quality_a",
+      "quality_sha256": "sha256:57e7bd2abc133786888373c2d0b9479b2efc3acef03701148df9e9745eb27ff7"
      },
-     "category": "societate",
-     "exclusions": []
+     "category": "personalitati",
+     "exclusions": [
+      {
+       "layer": "quality",
+       "reason": "I would start with Stela Popescu and Tamara Buciuceanu-Botez and look for the other two film actors. The four remaining work titles can also be isolated immediately among twelve names, before recognizing the Brâncuși relation. That leaves a straight profession sort, with the two Theodors and Ion Andreescu the likely slow step for a young player. The apparent difficulty comes from recall of art names, and the art-title grouping has a visible type shortcut. Pasărea măiastră is a familiar folklore phrase, with much lower salience as the exact sculpture series. The intended groups are cleanly separated and there is no observed A5 trigger. I reject at B7 for the weak difficulty gradient on greu.",
+       "ref": "conexiuni[0]"
+      }
+     ]
     }
    ],
    "kg_sha256": "8b8addd26cdc3aa5972a97368196e9593d5ef38477625f2fba988845e10879d4",
    "operator": "native-pack-only-import-v1",
    "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
-   "source_pack_sha256": "f771b04d5ea56f3aa98196942be36feccadb2ac914a26da40cb32019e151c8c6",
+   "source_pack_sha256": "2803020851b30f40405e77224e4669b94c2d67f721fb65e3cd204cf41f4c1b15",
    "write": true
   },
   "note": "Curated games pack (ADR-0011): AI-generated, fact/quality-verified batch + hand-crafted starters. Only status=approved items are served.",

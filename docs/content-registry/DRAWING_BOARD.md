@@ -28,3 +28,13 @@ underlying proof, source, validator or prerequisite changes.
 | v4_c1_a_21 | Blind play | The cities also partition by pre-1918 membership. Remove the competing partition. |
 | v4_c1_l4_lt_vocea_actor | Blind play | The presenter-to-actor captions require hidden career knowledge. Try a truthful, legible route. |
 | v4_c1_l4_lt_maitreyi_cantareata | Blind play | A generic part-whole caption hides the dramaturgy step. Try a route the visible clues explain. |
+
+## C2 outcomes
+
+The journal binds five Conexiuni drafts, thirteen Cald targets and fifteen Alchimie
+hypotheses. Two language boards reached native review. Seven attempts were rejected
+and twenty-four hypotheses wait for their recorded prerequisites.
+The failed Cald trial submitted five opening and eight adaptive guesses. Eleven
+were recognized attempts and two returned unknown-word feedback. The run ended unsolved.
+The reviewed Alchimie weather draft had one intuitive opening. Its other starts
+required an unspecified season or a cyclone assumption.
