@@ -611,7 +611,7 @@ func TestApprovedDossierCensus(t *testing.T) {
 	if e != nil {
 		t.Fatal(e)
 	}
-	if len(dossiers) != 709 {
+	if len(dossiers) != 713 {
 		t.Fatalf("approved census count %d", len(dossiers))
 	}
 	for id, d := range dossiers {
