@@ -20,6 +20,7 @@ The authored source is v16. The fresh quick audit replayed 85 boards, the world 
 preserved 1,156 save prefixes, and the extensions audit replayed 49 additions across 27
 boards. Both roles signed every exact proposal and audit in the native directories.
 The installed authorities, native source validator and sealed export check passed.
+The independent Django/Go corpus matched 1,206 cases and binds eight source digests.
 
 The loop retains frozen candidates, critic comparisons, source receipts, native dossier
 bindings and exact qualification receipts under `~/work/_temp/content__v4/c1/`.
