@@ -26,3 +26,4 @@ All 123 Go test files and five oracle/start fixtures remain at baseline in this 
 Two helper bookkeeping failures were corrected and retained; no native failure was waived.
 The later Arbitru trial solved mechanically but failed its single critic on ambiguity/free-pair semantics.
 It is not in this pack; no factual/quality or import approval exists for that failed trial.
+The initial P10 strict 4i doc admission failed; its missing README inventory entry is fixed without a validator exception.
