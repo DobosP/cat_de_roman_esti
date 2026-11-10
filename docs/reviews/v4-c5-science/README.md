@@ -22,5 +22,8 @@ The 42 components, 20 incomplete probes and six author constructions remain cont
 with one reviewed registry item. All 725 previous pack rows and 79 locks remain exact.
 All v20 initial/final role pairs, installed authorities and native source checks passed.
 The actual independent source-bound Django/Go corpus matched 1,206 cases.
-Separate pins and exact-SHA qualification follow.
+Exact 1eb2e768 passed build11/4i10/unit27/full37 and all859browser cases.
+All10prefixboards won and reloaded over HTTP; fresh landing review signed GO.
+Separate five-file owner test-pin approval remains pending.
+Verified compact receipts remain; superseded owned raw gate trees were pruned.
 Evidence is under ~/work/_temp/content__v4/c10 and releases/c5.
