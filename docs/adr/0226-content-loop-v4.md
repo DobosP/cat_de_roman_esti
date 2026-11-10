@@ -1,7 +1,7 @@
 # ADR-0226: Content loop V4
 
 Date: 2026-11-09
-Status: accepted (Paul, 2026-11-09).
+Status: accepted (Paul, 2026-11-09); separate test-pin owner step partially superseded by ADR-0227 (2026-11-10).
 Decider: Paul Dobos.
 
 ## Context

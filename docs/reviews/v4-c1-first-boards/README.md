@@ -1,8 +1,8 @@
 # V4 C1 existing-node boards
 
-Valid until C1 completes exact-SHA landing review, then treat as history.
+Valid until: a later product change invalidates this source-scoped record — then treat as history.
 
-C1 adds two Conexiuni boards, Istorie and Societate, and two Lanțul Cuvintelor routes,
+C1 landed two Conexiuni boards, Istorie and Societate, and two Lanțul Cuvintelor routes,
 Făină → Salată de boeuf and Jiu → Marea Neagră. Each is pilot-eligible.
 The pack grows from 716 to 720 boards and from 709 to 713 approvals.
 
@@ -24,3 +24,6 @@ The independent Django/Go corpus matched 1,206 cases and binds eight source dige
 
 The loop retains frozen candidates, critic comparisons, source receipts, native dossier
 bindings and exact qualification receipts under `~/work/_temp/content__v4/c1/`.
+
+Landed locally in the five-cohort product prefix on 2026-11-10; exact pin approval and
+future delegation: [ADR-0227](../../adr/0227-owner-qualified-test-pin-delegation.md).

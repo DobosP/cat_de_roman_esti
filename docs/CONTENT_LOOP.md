@@ -104,7 +104,9 @@ A headless driver needs a separate owner-accepted agent-ops ADR and approved pro
 8. Apply ADR-0186 to the source-bound HTTP corpus. Capture/replay with the asserted reviewed
    case count (1,206 at V4 start). A changed count is NEEDS-OWNER with a case-list diff.
    Self-capture is not independent expected evidence. Put moved pin expectations in a separate
-   commit with an old-to-new list. Paul approves that commit under ADR-0210 until he delegates.
+   commit with an old-to-new list. [ADR-0227](adr/0227-owner-qualified-test-pin-delegation.md) delegates
+   future separate test-expectation commits only after independent-oracle regeneration, every
+   existing exact-SHA gate and a fresh independent landing review. Count changes still need Paul.
 
 **Per landing**
 9. Queue qualified items, with frozen bytes, two reviews, critic evidence, install and gate

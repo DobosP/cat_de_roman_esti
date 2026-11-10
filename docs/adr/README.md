@@ -221,3 +221,5 @@ Parallel lanes also allocated0188/0189 independently. All four full-filename bod
 - [0225](0225-retire-v3-content-loop-artefacts.md) — V3 content-loop branch, worktree and `_temp` evidence archived to the NAS with byte verification and deleted locally; V4 seed inputs kept in scratch.
 
 - [0226](0226-content-loop-v4.md) — V4 in-chat Codex content loop, independent roles, standing source policy, local Git landings.
+
+- [0227](0227-owner-qualified-test-pin-delegation.md) — owner accepts the exact C1–C5 prefix and delegates future separate, independently regenerated, fully gated and freshly reviewed test pins; all other owner boundaries remain.

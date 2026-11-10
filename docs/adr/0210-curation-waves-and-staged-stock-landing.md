@@ -1,7 +1,7 @@
 # ADR-0210: Curation waves and staged landing of reviewed content stock
 
 Date: 2026-10-22
-Status: accepted (Paul's decisions in the 2026-10-22 Claude Code review of the content loop)
+Status: partially superseded by ADR-0227 for the separate test-pin approval operator only; all other rulings retained.
 
 ## Decision
 

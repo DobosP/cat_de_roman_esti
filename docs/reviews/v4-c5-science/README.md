@@ -1,6 +1,6 @@
 # V4 release C5 Science board
 
-Valid until release C5 completes exact-SHA qualification and landing, then treat as history.
+Valid until: a later product change invalidates this source-scoped record — then treat as history.
 
 C5 contains the sole frozen C10 Science/normal Conexiuni proposal, cx_stiinta_381.
 All sixteen nodes already exist. KG words, names, edges and accepted inputs stay fixed.
@@ -17,13 +17,14 @@ was checked explicitly. Groups, labels, identities, category and difficulty are 
 Both independent source-backed reviews affirmed child safety and freshly bound the
 canonical pending dossier before native promotion. Score 92 is pilot-eligible.
 Chiciură recognition retains a nonblocking factual editorial flag for landing review.
-
 The 42 components, 20 incomplete probes and six author constructions remain context,
-with one reviewed registry item. All 725 previous pack rows and 79 locks remain exact.
+with one registry item, now landed. All 725 previous pack rows and 79 locks remain exact.
 All v20 initial/final role pairs, installed authorities and native source checks passed.
 The actual independent source-bound Django/Go corpus matched 1,206 cases.
 Exact 1eb2e768 passed build11/4i10/unit27/full37 and all859browser cases.
 All10prefixboards won and reloaded over HTTP; fresh landing review signed GO.
-Separate five-file owner test-pin approval remains pending.
+Paul approved the exact pins; local landing is recorded below.
 Verified compact receipts remain; superseded owned raw gate trees were pruned.
 Evidence is under ~/work/_temp/content__v4/c10 and releases/c5.
+Landed locally in the five-cohort product prefix on 2026-11-10; exact pin approval and
+future delegation: [ADR-0227](../../adr/0227-owner-qualified-test-pin-delegation.md).
