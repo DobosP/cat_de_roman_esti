@@ -21,7 +21,7 @@ The nine source bindings and three auditors are unchanged. Old signed counts ret
 Staging has 729 pack rows, 722 approved, seven pending and 540 eligible.
 Conexiuni has 254 approved rows and 92 eligible. Landed C7 remains 728 total and 539 eligible.
 All 728 earlier rows, 336 frozen cores, KG data, seven components and 17,495 captions remain exact.
-Compiled C8 HTTP, independent capture/seed fixtures, pins, exact-SHA gates and landing remain pending.
+Independent Django/native API parity matched 1,206 cases. One Conexiuni fixture case changes; pins, gates and served play remain pending.
 An exclusive proof-filename collision was recovered with a new final graph receipt.
 This was proof-file handling, not a native failure or gate waiver.
 C7 raw gate trees were pruned after 104 evidence files verified. Retention manifests preserve history.
