@@ -46,3 +46,12 @@ Two drafts failed blind partition play. Five more failed factual or quality revi
 including broad physical-feature predicates and weak classification traps.
 Muzeu resumed its original C2 hypothesis after the exact native and paired-review
 prerequisites were resolved. The compact retry receipt is in the C3 review directory.
+
+## C4 and C5 outcomes
+
+The three drawing-board redesigns yielded one reviewed Film TV board. Gastronomie
+and Geografie were rejected at the exact predicate/source boundary.
+The next Conexiuni author slice selected zero successors. Its one raw draft repeats
+an exact rejected audio-device group and a second three-of-four group.
+Six Lanț hypotheses remain author-parked for thin route novelty or generic links.
+All ten records retain their source payloads, reasons and next-action predicates.

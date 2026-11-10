@@ -15662,6 +15662,63 @@
    ],
    "source": "ai",
    "status": "approved"
+  },
+  {
+   "category": "film_tv",
+   "difficulty": "normal",
+   "group_labels": {
+    "g1": "Concursuri TV în care un juriu judecă prestația concurenților",
+    "g2": "Comedii românești lansate în cinematografe",
+    "g3": "Aparate prevăzute cu difuzoare pentru redarea sunetului",
+    "g4": "Elemente pregătite înainte de filmarea unei scene"
+   },
+   "groups": {
+    "g1": [
+     "n_v11fil_romanii_au_talent",
+     "n_ftv_iumor",
+     "n_v20fil_te_cunosc_de_undeva",
+     "n_ftv_chefi_la_cutite"
+    ],
+    "g2": [
+     "n_v17fil_pacala_film",
+     "n_ftv_operatiunea_monstrul",
+     "n_v11fil_teambuilding",
+     "n_ftv_filantropica"
+    ],
+    "g3": [
+     "n_v4muz_boxa",
+     "n_v4muz_casti",
+     "n_v4fil_televizor",
+     "n_v4mem_telefon"
+    ],
+    "g4": [
+     "n_v3fil_scenariu",
+     "n_v4fil_decor",
+     "n_v4fil_machiaj",
+     "n_v4art_costum"
+    ]
+   },
+   "id": "cx_film_tv_380",
+   "order": [
+    "n_v17fil_pacala_film",
+    "n_ftv_chefi_la_cutite",
+    "n_v11fil_teambuilding",
+    "n_ftv_iumor",
+    "n_v4muz_boxa",
+    "n_ftv_filantropica",
+    "n_v4fil_televizor",
+    "n_v3fil_scenariu",
+    "n_v11fil_romanii_au_talent",
+    "n_v4fil_machiaj",
+    "n_v4mem_telefon",
+    "n_v20fil_te_cunosc_de_undeva",
+    "n_v4muz_casti",
+    "n_v4fil_decor",
+    "n_ftv_operatiunea_monstrul",
+    "n_v4art_costum"
+   ],
+   "source": "ai",
+   "status": "approved"
   }
  ],
  "contexto": [
@@ -19049,42 +19106,42 @@
  "meta": {
   "counts": {
    "alchimie": 83,
-   "conexiuni": 250,
+   "conexiuni": 251,
    "contexto": 266,
    "lant": 125
   },
   "id_high_water": {
    "alchimie": 107,
-   "conexiuni": 379,
+   "conexiuni": 380,
    "contexto": 378,
    "lant": 248
   },
   "last_import": {
    "allocated": [
     {
-     "category": "arta_cultura",
-     "game": "contexto",
-     "id": "ct_arta_cultura_378",
-     "raw_ref": "contexto[0]"
+     "category": "film_tv",
+     "game": "conexiuni",
+     "id": "cx_film_tv_380",
+     "raw_ref": "conexiuni[0]"
     }
    ],
    "categories": [
     {
      "bindings": {
-      "candidate_sha256": "sha256:a4846a2ccde1d5c7f5db630b54e262fb2488eb2ca3cf1f99c3a2baaa08d3de56",
-      "factual_reviewer": "v4_c3_l4_cald_factual_a",
-      "factual_sha256": "sha256:93656f6b8fa9468131b1edfbf0c8b4d120177fdde422b379169c79bd9745a078",
-      "quality_reviewer": "v4_c3_l4_cald_quality_a",
-      "quality_sha256": "sha256:a8188f16924be37cde243ed190a546a524155514e2c1763c1b81a9e30df9e1ac"
+      "candidate_sha256": "sha256:e156d26e7f955e9f6456bacae4830c0f7d5dcfa694d5c2fe359d38137ead64d9",
+      "factual_reviewer": "v4_c4_l1_factual_a",
+      "factual_sha256": "sha256:139dd862439cdbfa0068b2489423590b593e97fee94bc159ca1177ac7fe31118",
+      "quality_reviewer": "v4_c4_l1_quality_a",
+      "quality_sha256": "sha256:7579dfd3fd4f0740c293c2fc22737442cd37a741c5b53290df71366c76d5171a"
      },
-     "category": "arta_cultura",
+     "category": "film_tv",
      "exclusions": []
     }
    ],
    "kg_sha256": "8b8addd26cdc3aa5972a97368196e9593d5ef38477625f2fba988845e10879d4",
    "operator": "native-pack-only-import-v1",
    "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
-   "source_pack_sha256": "7f4da4daa657f16e0d8e4b171ffcdcb45259b0e2f44ac0bf9d586b2acfd224ff",
+   "source_pack_sha256": "b69e06427df10168c88291e4efdf456b157db6f0d4f15440f9b80ab2ca9a921b",
    "write": true
   },
   "note": "Curated games pack (ADR-0011): AI-generated, fact/quality-verified batch + hand-crafted starters. Only status=approved items are served.",
