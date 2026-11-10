@@ -85,3 +85,15 @@ The first two drafts are linked alternatives sharing twelve tiles. The component
 pool retains 43 group definitions, 40 unique quads and six incomplete hypotheses
 with exact reasons and witnesses, without allocating additional board records.
 No draft proceeds to blind play, review or installation.
+
+## C9 Cald target intake
+
+Six existing-node targets passed isolated native and Python mechanics. None passed
+the complete blind filter. Miere, Oală, Salcie and Sinaia remained unsolved after
+five committed openings and eight adaptive submissions. Făină won after three
+adaptive submissions, with zero original raw-warm openings. Prosop stopped after
+its original five also failed that floor; final target sense remains unassessed.
+Every original commitment, unknown response and native prefix remains exact.
+The six hypotheses are parked for independently approved material neighborhood
+revision with a changed source and sealed-baseline feedback delta. Fresh-critic
+rerolls on unchanged data cannot release them. All 21 prior Cald rows remain exact.

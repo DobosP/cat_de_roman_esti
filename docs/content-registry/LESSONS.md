@@ -69,3 +69,12 @@ provides no writer authentication or concurrent writer coordination.
 
 Append each cohort’s observed gate and gameplay lessons here with exact evidence
 references.
+
+## C9 native association evidence
+
+Six recognizable labels and numerical native floors yielded zero blind-filter
+accepts. A later win preserves useful evidence but does not repair a failed
+original-opening floor. Unrecognized guesses remain in the submitted-turn budget
+and retain their exact native responses; they never justify invented replacements.
+Author-known-target probes establish mechanics, while separate blind play tests
+the usable association gradient. Both forms of evidence remain distinctly labelled.
