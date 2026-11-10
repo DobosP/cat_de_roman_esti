@@ -15890,6 +15890,63 @@
    ],
    "source": "ai",
    "status": "approved"
+  },
+  {
+   "category": "societate",
+   "difficulty": "normal",
+   "group_labels": {
+    "g1": "Cuvinte cu un element grecesc care înseamnă «mic»",
+    "g2": "Au părți numite «foi»",
+    "g3": "Au roți pentru deplasare",
+    "g4": "Sărbători celebrate în fiecare an la aceeași dată"
+   },
+   "groups": {
+    "g1": [
+     "n_v3muz_microfon",
+     "n_v3sti_microscop",
+     "n_v4sti_microb",
+     "n_microbiologie"
+    ],
+    "g2": [
+     "n_v3lit_carte",
+     "n_v2lim_varza",
+     "n_v4gas_ceapa",
+     "n_v87_food_cremsnit"
+    ],
+    "g3": [
+     "n_v32_garden_transport_roaba",
+     "n_v24_transport_rail_tramvai",
+     "n_v1_10_locomotiva",
+     "n_v42vdr_pegas"
+    ],
+    "g4": [
+     "n_v1_8_craciun",
+     "n_v42vdr_8_martie",
+     "n_v21soc_ziua_nationala",
+     "n_v17lim_ziua_limbii_romane"
+    ]
+   },
+   "id": "cx_societate_384",
+   "order": [
+    "n_microbiologie",
+    "n_v32_garden_transport_roaba",
+    "n_v1_10_locomotiva",
+    "n_v24_transport_rail_tramvai",
+    "n_v4sti_microb",
+    "n_v2lim_varza",
+    "n_v1_8_craciun",
+    "n_v87_food_cremsnit",
+    "n_v17lim_ziua_limbii_romane",
+    "n_v4gas_ceapa",
+    "n_v3muz_microfon",
+    "n_v42vdr_8_martie",
+    "n_v21soc_ziua_nationala",
+    "n_v42vdr_pegas",
+    "n_v3lit_carte",
+    "n_v3sti_microscop"
+   ],
+   "source": "ai",
+   "status": "approved"
   }
  ],
  "contexto": [
@@ -18020,6 +18077,14 @@
    "source": "ai",
    "status": "approved",
    "target": "n_v2art_muzeu"
+  },
+  {
+   "category": "meme_net",
+   "difficulty": "greu",
+   "id": "ct_meme_net_379",
+   "source": "ai",
+   "status": "approved",
+   "target": "n_v3mem_emoji"
   }
  ],
  "lant": [
@@ -19307,59 +19372,42 @@
  "meta": {
   "counts": {
    "alchimie": 83,
-   "conexiuni": 254,
-   "contexto": 266,
+   "conexiuni": 255,
+   "contexto": 267,
    "lant": 128
   },
   "id_high_water": {
    "alchimie": 107,
-   "conexiuni": 383,
-   "contexto": 378,
+   "conexiuni": 384,
+   "contexto": 379,
    "lant": 251
   },
   "last_import": {
    "allocated": [
     {
-     "category": "societate",
-     "game": "lant",
-     "id": "lt_societate_250",
-     "raw_ref": "lant[0]"
-    },
-    {
-     "category": "stiinta",
-     "game": "lant",
-     "id": "lt_stiinta_251",
-     "raw_ref": "lant[0]"
+     "category": "meme_net",
+     "game": "contexto",
+     "id": "ct_meme_net_379",
+     "raw_ref": "contexto[0]"
     }
    ],
    "categories": [
     {
      "bindings": {
-      "candidate_sha256": "sha256:67fed881f3e81c9af2b80a7e39a50e814ef93b9e1ea2810dcfbc7906800a01de",
-      "factual_reviewer": "v4_c15_factual",
-      "factual_sha256": "sha256:b44f7f69b5853e98c0f033e0277a38aadfa75f030e337f876b236a4b9dc2cdc1",
-      "quality_reviewer": "v4_c15_quality",
-      "quality_sha256": "sha256:dfd7700276ad8378d47d16c2d6cb44ef65c3eda35da85de85759738463f6aa1b"
+      "candidate_sha256": "sha256:31c9fc22ff86eaea5fc4baf1c8e296d1da7e0df33b9b459fece12e9d4486c094",
+      "factual_reviewer": "codex-c17-factual-06-07-20261110",
+      "factual_sha256": "sha256:a31554e0e90ce5234035aeefe76b9f64a995241653fed3ff2965d54fb6a971cf",
+      "quality_reviewer": "quality-c17-06-07-codex-20261110",
+      "quality_sha256": "sha256:601de184936b68943414b390194519b772c8de074fb6060371142df07271bf34"
      },
-     "category": "societate",
-     "exclusions": []
-    },
-    {
-     "bindings": {
-      "candidate_sha256": "sha256:a261a5988e6c440ab745db511df3d4d87441728810f24e6d08abd33bb5ae066c",
-      "factual_reviewer": "v4_c15_factual",
-      "factual_sha256": "sha256:a0278c27f406973fd64e3e254d3cba33d68815c03d88f92e9f7bb1201e572734",
-      "quality_reviewer": "v4_c15_quality",
-      "quality_sha256": "sha256:b834a16306668a01412f3617cfb4fb17e531e1521724600b903e736622ddbf01"
-     },
-     "category": "stiinta",
+     "category": "meme_net",
      "exclusions": []
     }
    ],
    "kg_sha256": "8b8addd26cdc3aa5972a97368196e9593d5ef38477625f2fba988845e10879d4",
    "operator": "native-pack-only-import-v1",
    "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
-   "source_pack_sha256": "70a9b92b0b93f865a28d25c55b997d26a2234db33f0f60210a356b6122bdfe88",
+   "source_pack_sha256": "65ddf113e220e64b0c2c9929fe9b00e24dab3fff4bedb7170c18cdb61bed5b76",
    "write": true
   },
   "note": "Curated games pack (ADR-0011): AI-generated, fact/quality-verified batch + hand-crafted starters. Only status=approved items are served.",
