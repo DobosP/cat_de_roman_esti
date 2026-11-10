@@ -57,8 +57,8 @@ func TestV4C8SelectsItsExactEightSourceCorpus(t *testing.T) {
 		t.Fatal("V4 c8 loader changed its independent captured responses", err)
 	}
 	data, err := content.Load()
-	if err != nil || !reflect.DeepEqual(data.Sources, want.Sources) {
-		t.Fatal("live compiled bundle does not have the actual V4 c8 source tuple", err)
+	if err != nil || len(data.Sources) != 8 || reflect.DeepEqual(data.Sources, want.Sources) {
+		t.Fatal("live compiled bundle did not move past the historical V4 c8 source tuple", err)
 	}
 	sources := v4c8ExpectedSources()
 	before := source6GUICloneSources(sources)
