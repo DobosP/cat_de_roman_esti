@@ -78,6 +78,9 @@ var frozenV4C3 []byte
 //go:embed testdata/python-http-parity-v4-c4.json.gz
 var frozenV4C4 []byte
 
+//go:embed testdata/python-http-parity-v4-c5.json.gz
+var frozenV4C5 []byte
+
 const FrozenSHA256 = "9041e05f13190a06a526c1aeed1f264d467483cd267ffcdb24f422ed9430b2cb"
 const V12SHA256 = "6293a0dde67ee0b0e5929cc1103bd80795e0aff1af2ba5fdf53e983ab79351fd"
 const V13SHA256 = "67d009c7eaa710bd98281b3300d3df4dc4ed4e224a157934abd7e19bce112670"
@@ -98,6 +101,7 @@ const V4C1SHA256 = "82a0a9a19ee1e2fc408ba110689a6adf451c8a113fac1ca646b06f90894f
 const V4C2SHA256 = "b8379012ece42d7723f6ca4b6cabb9e189d111dfb88e178ab3a0d6336539cb45"
 const V4C3SHA256 = "1222bc5f57abfbca24d0794ed9a2f60daa1a679c8ac22e97ec416823f0e443d9"
 const V4C4SHA256 = "bd9109338ead1ad3ad07a9074f53770838aacafefee3a3dc76b40bd5a2549c34"
+const V4C5SHA256 = "1322b541a1414bfd3db1fa25c67600403d1b5c3e718eb9eddc97d1d7d0af4207"
 const MaxCorpusBytes = 32 * 1024 * 1024
 const MaxCases = 4096
 
@@ -381,6 +385,17 @@ func reviewedV4C4() (*Corpus, error) {
 	return c, err
 }
 
+func reviewedV4C5() (*Corpus, error) {
+	if fmt.Sprintf("%x", sha256.Sum256(frozenV4C5)) != V4C5SHA256 {
+		return nil, fmt.Errorf("independent V4 c5 HTTP corpus digest drift")
+	}
+	c, err := ReadCorpus(bytes.NewReader(frozenV4C5), true)
+	if err == nil && (len(c.Cases) != 1206 || len(c.Sources) != 8) {
+		return nil, fmt.Errorf("expected 1206 independent V4 c5 HTTP cases and exact eight sources")
+	}
+	return c, err
+}
+
 // ForSources selects an independently captured reviewed corpus only when its
 // entire source identity equals the requested export. Historical Frozen remains
 // immutable; unknown, partial or mixed source sets never gain expected responses.
@@ -412,7 +427,7 @@ var (
 )
 
 func indexReviewedSources() {
-	for _, load := range []func() (*Corpus, error){Frozen, reviewedV12, reviewedV13, reviewedV14, reviewedV15, reviewedV16, source6GUIRequalificationCorpus, reviewedV18, reviewedV19, reviewedV110, reviewedV111, reviewedV112, reviewedV113, reviewedV3N1, reviewedV3N2, reviewedV3N4, reviewedV4C1, reviewedV4C2, reviewedV4C3, reviewedV4C4} {
+	for _, load := range []func() (*Corpus, error){Frozen, reviewedV12, reviewedV13, reviewedV14, reviewedV15, reviewedV16, source6GUIRequalificationCorpus, reviewedV18, reviewedV19, reviewedV110, reviewedV111, reviewedV112, reviewedV113, reviewedV3N1, reviewedV3N2, reviewedV3N4, reviewedV4C1, reviewedV4C2, reviewedV4C3, reviewedV4C4, reviewedV4C5} {
 		c, err := load()
 		if err != nil {
 			reviewedSources, reviewedSourcesErr = nil, err

@@ -21,5 +21,6 @@ Chiciură recognition retains a nonblocking factual editorial flag for landing r
 The 42 components, 20 incomplete probes and six author constructions remain context,
 with one reviewed registry item. All 725 previous pack rows and 79 locks remain exact.
 All v20 initial/final role pairs, installed authorities and native source checks passed.
-The actual corpus, separate pins and exact-SHA qualification follow.
+The actual independent source-bound Django/Go corpus matched 1,206 cases.
+Separate pins and exact-SHA qualification follow.
 Evidence is under ~/work/_temp/content__v4/c10 and releases/c5.
