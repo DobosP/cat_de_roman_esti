@@ -16,7 +16,7 @@ Default rails, validation, export, ops and mobile source checks are green.
 Staging has 728 pack rows, 721 approved, seven pending and 539 eligible.
 Conexiuni has 253 approved rows and 91 eligible. Landed C6 remains 727 total, 720 approved and 538 eligible.
 All 727 prior rows, KG 8b8addd2, 17,495 captions and seven protected components remain exact.
-Compiled C7 HTTP, independent 1,206-case capture, pins, exact-SHA gates and landing remain pending.
+The independent Django/native API corpus matched 1,206 cases. Pins, exact-SHA gates and served HTTP play remain pending.
 The canonical seven-key factual artifact was refused before promotion. The same reviewer signed
 a four-key projection with identical item values, then strict native apply promoted one.
 Root accidentally executed an initial source-review writer and lost the original signed bytes.
