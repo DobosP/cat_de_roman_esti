@@ -2,7 +2,7 @@
 
 Valid until: payload, source or relevant runtime changes — then treat as history.
 
-Source staging only. Corpus registration, separate test expectations, exact-SHA gates,
+Source staging only. The independent 1,206-case S10 corpus is registered; candidate expectations, exact-SHA gates,
 normal HTTP wins and fresh independent landing review remain pending.
 
 Two approved additions use existing KG nodes: `cx_societate_384` and `ct_meme_net_379`.
