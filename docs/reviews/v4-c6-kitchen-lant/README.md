@@ -21,5 +21,6 @@ link is context, with no verified-evidence claim. Cratiță’s form hold stays 
 All 50 distinct author hypotheses remain traceable: one reviewed, 26 parked, 23 rejected.
 The 193,406 filtered mechanical pairs remain context rather than candidate allocations.
 Native v21 authorities, validation, export, ops and mobile checks passed.
-Actual corpus, separate delegated test expectations and exact-SHA qualification follow.
+The actual independent source-bound Django/Go corpus matched 1,206 cases.
+Separate delegated test expectations and exact-SHA qualification follow.
 Evidence is under ~/work/_temp/content__v4/c11 and releases/c6.
