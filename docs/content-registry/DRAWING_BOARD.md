@@ -55,3 +55,10 @@ The next Conexiuni author slice selected zero successors. Its one raw draft repe
 an exact rejected audio-device group and a second three-of-four group.
 Six Lanț hypotheses remain author-parked for thin route novelty or generic links.
 All ten records retain their source payloads, reasons and next-action predicates.
+
+## C6 Alchimie trial
+
+The holiday-meal hypothesis remains parked. Its exact native projection had a
+two-action route and two plausible openings. The blind critic flagged ambiguous
+food deductions and an optional finished-cake-to-other-pastry rule.
+The original candidate, native audit and comparison remain bound in the journal.
