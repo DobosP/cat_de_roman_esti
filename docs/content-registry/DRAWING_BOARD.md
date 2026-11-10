@@ -62,3 +62,14 @@ The holiday-meal hypothesis remains parked. Its exact native projection had a
 two-action route and two plausible openings. The blind critic flagged ambiguous
 food deductions and an optional finished-cake-to-other-pastry rule.
 The original candidate, native audit and comparison remain bound in the journal.
+
+## C7 ingredient rounds
+
+Plăcintă cu mere and Salam de biscuiți passed strict native/Python lints and
+exact pending projection replays, then each failed a separate blind critic.
+Both two-action routes were mechanically playable. The whole books contained
+free or under-specified ingredient pairs and lacked two credible independent
+openings. Neither proceeds to paired review or installation.
+The Diplomat draft failed the one-pair rule; the unused-oven pie draft was
+superseded before blind play. Four concrete records are rejected. The 23-family
+author triage remains context, and all 15 prior C2 hypotheses remain unchanged.
