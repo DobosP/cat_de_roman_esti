@@ -19,6 +19,7 @@ The actual package and test mirrors reproduce the verified preview exactly.
 Registry replay requires the explicit repository evidence root for the compact
 [retry receipt](retry-receipt.json). Owner holds retain their original scope.
 
-The v18 authority candidates are prepared for independent review.
+All v18 initial and final role signatures, live native audits and installed authority
+checks passed. Graph, resolver, captions and Cald projection bytes remained unchanged.
 Source-bound corpus, pins and full landing qualification follow.
 Evidence is under `~/work/_temp/content__v4/c3/`.
