@@ -2939,3 +2939,55 @@ completed expanded HTTP source tree. Receipt
 `26d1388760a5e94977b48391eb07e3cc2c70b35276fdd6d30291f1ef877d1fdd` records
 21,213,184 allocated bytes removed. Current capture executable, exact corpus,
 source packets, dependency frames, compact results and reconstruction recipes remain.
+
+## V4 Cald critic operator repair, 2026-11-10
+
+Valid until: operator code, trusted configuration or native provider changes — then recheck this scope.
+
+The earlier private C9 controllers lacked strict duplicate-key and input-hash binding,
+sanitized projections, final warmth/ambiguity closure and safe immutable publication.
+The configuration-only audit reproduced those gaps. The repaired operator occupies
+`scripts/miner/cald_protocol.py` with focused tests in `tests/test_cald_protocol.py`.
+The native P8 provider and game algorithms retain their earlier bytes. Root's loop
+checkout is reused for this bounded two-file tool task. Its files were excluded from
+C9 candidate `642f0c2f`; that exact candidate's independent pinned gates continue in
+the separate rolling keeper. The optional app worktree creation call stalled and was
+cancelled at the orchestration layer. Git and app inventories showed no new checkout.
+
+The operator uses an externally pinned Root-private configuration, complete case/source/
+provider/helper/public/private-template bindings, strict JSON schemas, five immutable
+original openings, eight adaptive submissions and thirteen total attempts. Rejected
+or repeated submitted guesses count. Explicit turns, serialized writers, exclusive
+ordered intents, immutable receipt publication and digest markers bind exact retries
+and partial recovery. Public projections contain human-visible feedback, with raw
+native data retained privately. Final comparison requires a native win, target binding,
+at least one original raw distance <=2, an honest boolean false ambiguity report and
+nonblank dominant sense. Semantic and factual/quality judgments remain separate.
+
+Twenty-five focused controller tests and six independent recovery/identity controls
+pass. The existing miner regression suite plus new tests passes all 36 cases with
+zero skips, failures or errors. Actual known-target diagnostic, unknown/repeat,
+fuzzy-confirmation and native technical-error sanitization controls pass. Those runs
+are diagnostics. No independent critic has used the new operator at this checkpoint.
+The three-platform Go provider compiles are genuine compile-only evidence.
+
+The builder's original portable.py used a filtered command in a thin source tree
+without the package tests. It executed zero contexto tests, so its package-coverage
+claim was incorrect. The original receipt and handoff remain historical. The fresh
+reviewer ran the actual frozen-P8 seven top-level tests and nine subtests successfully.
+The builder then restored all five test sources and testdata in its one rolling thin
+setup and independently repeated the complete unfiltered package run successfully.
+Corrected proof is `85a89eb2eb736a971d3b080b4bf67e2f51b25d701921cbb449df5584218b39d8`,
+with additive handoff `4cf154d4414383b4f114bba1bfb31162ce2ba7a734100f7e68a7ec08eadba307`.
+Old no-tests records were preserved. Owned duplicate compiled binaries, superseded
+raw diagnostics and the reviewer's temporary cache were pruned after verification;
+compact manifests record their historical scope and actual remaining keepers.
+
+Fresh independent code GO has SHA-256
+`61a37af256332d3ed38ad651238e9e653e45db2a134ac4a19a9e96d98886fb3e`.
+Accepted controller/test hashes are
+`3ddc2ed651f662d550d2618411d89f52afafc1d8b8dfdf8062b10a1d5ac20374` and
+`98cf3f31fceb913fff6f18cef24a4fbbae0690401557a2a7532a3d85950c0e62`.
+Root's dedicated tool commit and trust-configuration review precede genuine C17 critic
+use. Old six C9 Cald guards remain closed. No C17 factual/quality approval, import,
+canonical allocation, promotion, cohort qualification or landing follows this tool work.
