@@ -73,3 +73,15 @@ openings. Neither proceeds to paired review or installation.
 The Diplomat draft failed the one-pair rule; the unused-oven pie draft was
 superseded before blind play. Four concrete records are rejected. The 23-family
 author triage remains context, and all 15 prior C2 hypotheses remain unchanged.
+
+## C8 Conexiuni intake
+
+Three complete drafts are rejected at deterministic screening. Isolated native
+and fresh Python checks agree on one fairness failure for nature/materials, one
+three-tile quad reuse for nature/light, and three failures for cooking.
+The original author measurements were Python-only. The separate native receipts
+confirm them; combined sibling-pack findings remain supplementary.
+The first two drafts are linked alternatives sharing twelve tiles. The component
+pool retains 43 group definitions, 40 unique quads and six incomplete hypotheses
+with exact reasons and witnesses, without allocating additional board records.
+No draft proceeds to blind play, review or installation.
