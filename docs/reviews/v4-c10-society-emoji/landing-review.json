@@ -1,0 +1,396 @@
+{
+  "schema": "cat-v4-c10-independent-landing-review-1",
+  "reviewer": "agent:codex:/root/v4_c10_landing_review",
+  "signed_at": "2026-11-10T23:03:39.551358+00:00",
+  "candidate_sha": "4824609e5a8442beab43c762efdb3c859fc5bd9b",
+  "source_commit": "6cdacb83b8902f37d77d8656bc6981704a104a1a",
+  "registration_commit": "9ca321ec02aceee0c068b57506aa9fa1686d780d",
+  "baseline_actual_clean_main": "e10637d74d00d7b20afb2fb8d2dcd6124a12fa93",
+  "technical_verdict": "GO",
+  "content_evidence_verdict": "GO",
+  "blocking_findings": [],
+  "qualification_only": true,
+  "landing_performed": false,
+  "push_performed": false,
+  "deployment_performed": false,
+  "independence": "Fresh reviewer authored/judged no C10 item, spawned no child, mutated no tracked source, committed/pushed/landed nothing. Worker wrapper calls left GATE_OPERATOR unset; Root owner trust receipt is separate.",
+  "checks": {
+    "build": {
+      "passed": 11,
+      "result_sha256": "3fc4962b662c6259bbd519ff5e32d7b25ec451a8a29276f554842dbce2bc5063",
+      "verified_registered_artifacts": 40,
+      "verified_file_artifact_bytes": 66210955,
+      "artifact_verification_sha256": "62da119d19f8ab1dccb0c8a697d3e3590e7496a1295ab1ad3fa0334d944e55ac",
+      "retention_manifest_sha256": "a195dc9801b39b5172de701cb95f4873cf7a85938aea7d80c5934cdbe1a2068c",
+      "elapsed_seconds": 131.48920184199233,
+      "command": [
+        "bash",
+        "scripts/gate.sh",
+        "build",
+        "--sha",
+        "4824609e5a8442beab43c762efdb3c859fc5bd9b",
+        "--parallel",
+        "4"
+      ]
+    },
+    "unit": {
+      "passed": 27,
+      "result_sha256": "605096e9d94eadf352381e6c2533d44ec47189063972c35caf04c0a6c59d907b",
+      "verified_registered_artifacts": 81,
+      "verified_file_artifact_bytes": 7630875,
+      "artifact_verification_sha256": "a96f66c52161906487aa4f8cab3ca237725a18c3f507e7f5819e809d6372820b",
+      "retention_manifest_sha256": "84c40c2785e089353efd979bea20f7df1ede464d71261d1c1358edb7bc29279e",
+      "elapsed_seconds": 1489.5728371629957,
+      "command": [
+        "bash",
+        "scripts/gate.sh",
+        "unit",
+        "--sha",
+        "4824609e5a8442beab43c762efdb3c859fc5bd9b",
+        "--parallel",
+        "4"
+      ]
+    },
+    "full": {
+      "passed": 37,
+      "result_sha256": "185faae06c3e50b4aab94888cdf2d79b00474fa7baf70cd3ba295ead564e9634",
+      "verified_registered_artifacts": 165,
+      "verified_file_artifact_bytes": 95764942,
+      "artifact_verification_sha256": "60166e0538f0a5cdfbe29dae9c899f9f42793025069178ee1291ca967c113e5e",
+      "retention_manifest_sha256": "fae1407cff59ff831d4367b084c78d1bca51e05feba87f64499298028a8defb4",
+      "elapsed_seconds": 897.0072839049972,
+      "command": [
+        "python3",
+        "-I",
+        "scripts/gui-full-runner.py",
+        "--sha",
+        "4824609e5a8442beab43c762efdb3c859fc5bd9b",
+        "--parallel",
+        "4"
+      ]
+    },
+    "fresh4i": {
+      "sha": "4824609e5a8442beab43c762efdb3c859fc5bd9b",
+      "status": "pass",
+      "fresh_checks": 10,
+      "all_log_bytes_rehashed": {
+        "01-rails.log": {
+          "sha256": "42de2a46bfdf1eac332f0c486b7407fa9ba5c08d36a80e1319da63bf0d196207",
+          "bytes": 1423
+        },
+        "02-validate.log": {
+          "sha256": "39697358429732a6bdac12f892fddff35d015ea69f2aed817de9bf3c436ff706",
+          "bytes": 99
+        },
+        "03-export.log": {
+          "sha256": "07c19d98980f702cd8bf3cf0e6d2e3c93ad9babb6cde89e30e6af096049e0392",
+          "bytes": 115
+        },
+        "04-ops.log": {
+          "sha256": "51bb6b142edf1c95c8b1e761ef2e71ac49be2767ab32851fcfa9960d75189ecf",
+          "bytes": 1070
+        },
+        "05-mobile.log": {
+          "sha256": "ed618377fee6eca71dc3e6b3401d53a6333d471b8a50dae97e005bc130a30ff5",
+          "bytes": 112
+        },
+        "06-race.log": {
+          "sha256": "6f114fb01ba1ad0056d9dabfd51690a84484ea07dcfae68a05c82b993d3069c4",
+          "bytes": 3271
+        },
+        "07-vet.log": {
+          "sha256": "09fc1352141b3b6cbef7609f1f9fa9a6dacd58c165c276208d6364ce25a9141f",
+          "bytes": 47
+        },
+        "08-auth.log": {
+          "sha256": "7241948d2471e98e2bbab6a6620a64b981cd3ad96e50f21b1ee17fed4ae63237",
+          "bytes": 139
+        },
+        "09-doc.log": {
+          "sha256": "d0dbac432fb43e4874cf5271c80bf015bf4e5135aaec54cf7eee9f9854f9c83c",
+          "bytes": 201
+        },
+        "10-diff.log": {
+          "sha256": "b9445f9127876e843e45e9f92eaa46a601bded97d3808dc225fbc220d6ad78c6",
+          "bytes": 132
+        }
+      },
+      "Go_race_packages": 29,
+      "Go_no_test_packages": 11,
+      "Go_failures": 0,
+      "go_version": "go version go1.27.3 linux/amd64",
+      "full_backend_race_count1_generated96assets": true,
+      "temporary_isolated_source_cleaned_by_runner": true,
+      "result_sha256": "70ae064308e710d3f53c73b907771b7c49efd829afe5589dc0701025e701c4ff",
+      "elapsed_seconds": 1591.4266766710207
+    },
+    "authcore_vet_and_current162runtime_inventory": "pass",
+    "strict_document_inventory": {
+      "declared_and_physical_Markdown": 680,
+      "current_docs_checked": 67,
+      "all_error_and_budget_arrays_empty": true,
+      "log_sha256": "d0dbac432fb43e4874cf5271c80bf015bf4e5135aaec54cf7eee9f9854f9c83c"
+    }
+  },
+  "integration": {
+    "sha": "4824609e5a8442beab43c762efdb3c859fc5bd9b",
+    "status": "pass",
+    "browser": {
+      "expected": 859,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "retries": 0
+    },
+    "csp": {
+      "stage": "enforced",
+      "current": 0,
+      "legacy": 0
+    },
+    "postgres": {
+      "accounts": {
+        "passing_tests": 12,
+        "skips": 0,
+        "package_pass": true
+      },
+      "httpapi": {
+        "passing_tests": 302,
+        "skips": 0,
+        "package_pass": true
+      }
+    },
+    "parity_cases": 1206,
+    "baseline_pngs": 9,
+    "baseline_outcomes": 17,
+    "all_baseline_outcomes_pass": true,
+    "image_id": "sha256:656a38a79e4010ddb0d8d081382feb3d43c4f00717f0f06a3f65da2e63a29ebe",
+    "full_supervisor": {
+      "gate_exit": 0,
+      "owner_exit": 0,
+      "errors": [],
+      "cleanup_verified": true
+    },
+    "owned_project_containers_and_networks_remaining": 0,
+    "unit_reuse_exact_result_sha256": "605096e9d94eadf352381e6c2533d44ec47189063972c35caf04c0a6c59d907b",
+    "inline_attachments": 292,
+    "PNG_attachments": 36,
+    "JSON_attachments": 256,
+    "attachment_manifest_sha256": "8e1f7b575c19f22fdbc5c1130c4ea6d4f500a810170db8a39cb814dfe6a89607"
+  },
+  "normal_HTTP": {
+    "managed_GUI_and_content_identity_exact": true,
+    "normal_default_server_no_override": true,
+    "request_count": 37,
+    "society": {
+      "seed": 0,
+      "four_groups": true,
+      "mistakes": 0,
+      "score": 1000,
+      "win_and_reload": true
+    },
+    "Emoji": {
+      "seed": 5,
+      "submissions": 11,
+      "native_attempts": 9,
+      "unknown": [
+        "emoticon",
+        "simbol"
+      ],
+      "hint_calls": 0,
+      "score": 520,
+      "exact_target": "n_v3mem_emoji",
+      "win_and_reload": true
+    },
+    "server_stopped_and_port_closed": true,
+    "evidence_sha256": "8ed10dbbe20cd1228653756427b04a56c16fbb9ae23f12207b211cd371a6ccef",
+    "scope": "Current HTTP replay is by a target-aware landing reviewer; original blind evidence remains independently scoped."
+  },
+  "source_continuity": {
+    "old731_rows_exact": true,
+    "frozen336_cores_exact": true,
+    "all7components_and17495captions_exact": true,
+    "KG_nodes_edges_forms_puzzles": [
+      2584,
+      10141,
+      9730,
+      180
+    ],
+    "pack_total_approved_pending_eligible": [
+      733,
+      726,
+      7,
+      544
+    ],
+    "registry_events_rows_reviewed_landed": [
+      3503,
+      3055,
+      2,
+      15
+    ],
+    "old2984_current_rows_803protected_87owner_79Cx_6oldC9guards_preserved": true,
+    "world252_352_quick85_ext49_semantics_exact": true,
+    "two_exact_raw_and_canonical_FQ_promote_and_child_safe": true,
+    "native_six_role_review_documents_and_six_final_documents_verified": true,
+    "novelty_comparisons": 811,
+    "max_overlap_tiles_quad": [
+      4,
+      2
+    ],
+    "max_member_use": 6,
+    "fuzzy_shift": 0,
+    "source_review_sha256": "db94f987dff53914dce690acded3f6ead01f855e1c60c65fdca2fc261b06d2b2",
+    "complete_novelty_sha256": "082fb9e3c60a08897198288a1f04600c859e17c8b24fe3fb75937bc434f10e24",
+    "review_scope_closure_sha256": "2424c10fe04dca7bfb7729af4e18d92e16431301171652779235bf11f63d1b34",
+    "native_signatures_sha256": "92acc15402b20ff1f22366236289ca6bf54592cd2866848dd67c8d418100d4f4"
+  },
+  "corpus_and_pins": {
+    "cases": 1206,
+    "case_count_unchanged": true,
+    "all_requests_and_order_exact": true,
+    "only_changed_response": "index924GET/api/categories: contexto14→15 and conexiuni18→19",
+    "five_independent_Python_outputs_twice_equal_candidate": true,
+    "independent_Django_HTTP_twice_exact": true,
+    "seven_expectations_separate_commit": "8c3b8835ad80e75a4b7aa6fa69365ea6a38ba8d6",
+    "inventory_repair_candidate": "4824609e5a8442beab43c762efdb3c859fc5bd9b",
+    "delegation": "ADR0227 all existing exactSHA gates and fresh independent landing GO conditions satisfied; no count/validator/threshold/source-policy relaxation.",
+    "evidence_review_sha256": "72de2d841764071194a3a986178ebfb25273fa99cb48586ad0c2661fcec71fed",
+    "reproduction_scope": "Independent oracle role ran twice; reviewer rehashed actual keepers, frozenGit input and monitored readsets, exact outputs and request/bodydiff; not a third oracle generation."
+  },
+  "go_drop": {
+    "society": "GO content-evidence: exact raw/canonical independent promote+child_safe, unique partition, declared warnings reviewed; exact runtime gates and normal HTTP remain independent.",
+    "Emoji": "GO content-evidence: immutable original HOLD then same-role substantive new-evidence supplement and fresh exact canonical promote+child_safe; no reroll.",
+    "Castel": "HOLD; mechanical blind pass is insufficient, not imported.",
+    "seven_other_Cald_trials": "DROP terminal critic failures; no unchanged reroll/import.",
+    "Arbitru": "DROP terminal ambiguity/free-pair critic despite two-action mechanical solve; no FQ/import."
+  },
+  "nonblocking_flags": [
+    "Society: Carte accepted in ordinary printed-book sense; digital form lacks physical leaves.",
+    "Society: g4 mixes two concept and two event types under explicit annual-observance predicate; lower-end normal/broad societate calibration unmeasured.",
+    "Emoji: emoticon/simbol unknown; Public online versus Sticker ranking untested; no emoji/emoticon identity claim.",
+    "One AI blind route and AI reviews establish no measured human recognition, enjoyment or difficulty.",
+    "Prior Emoji Conexiuni tombstone remains typed board/quad/reskin debt, not an unconditional Cald-target ban.",
+    "Native saved runtime manifests are historical provenance under ADR0189. All9bindings and3strictauditors checked; freshcurrent audit records actual162 files.",
+    "Stored original society blind response lacks challenge_id; additive bound-copy repair changes only thatmetadata key and preserves all gameplay bytes.",
+    "Corpus does not itself exercise new boards; actual normal HTTP wins independently cover both."
+  ],
+  "retention": {
+    "independent_archive_files_verified": 2822,
+    "archive_original_logical_bytes": 54891451,
+    "root_availability_receipt_sha256": "78d883328b5240f64941aa177d68dd58f9c64fdb50dc4d40d61ad70f593ec339",
+    "alloriginal_curation_and_signature_bytes_losslessly_preserved": true,
+    "raw_duplicates_pruned": true,
+    "oracle111_original_available_members_losslessly_preserved": true,
+    "oracle_raw_trees_unavailable": true,
+    "oracle_archive_index_sha256": "424c41110aa1f26773138df4e563434b0d4bd1fca37cd19ad6cda5a767044deb",
+    "oracle_archive_verification_sha256": "36cc95676ab253f99073f8cc6c96ec81bfee5341dfee665ff12504edba152603",
+    "canonical41native_JSON_and9PNG_raw": true,
+    "registered_artifact_text_lossless_maps": [
+      "build-artifact-retention.json",
+      "unit-artifact-retention.json",
+      "full-artifact-retention.json"
+    ],
+    "raw_gate_mirror_pruned_by_reviewer": false,
+    "derived_compression_map_sha256": "affda5435b8028873b2cbacd8ae4fd4ec38d47b7f1b75004675bb379f409ea4e",
+    "combined_C10_logical_bytes_before_index_and_signature": 41897142,
+    "decimal50MB_ceiling": true
+  },
+  "workflow_helper_refusals": [
+    {
+      "stage": "prior failed P10 exactSHA4i",
+      "candidate": "8c3b8835ad80e75a4b7aa6fa69365ea6a38ba8d6",
+      "exit": 1,
+      "original": "../landing-review-p10-failed/4i/results.json",
+      "diagnostic": "../landing-review-p10-failed/doc-inventory-failure.json",
+      "canonical_gate_failure": true,
+      "cause": "Tracked physical Markdown inventory679 vs actual680; sole omittedC10README.",
+      "resolution": "Root authored directI10child with complete680Git-derived inventory and two status acknowledgments. AllI10build/4i/unit/full/normalHTTP run fresh; no P10pass substitution.",
+      "signed_NO_GO_sha256": "2f424e4988f806fb22ac88f9aa82ec23756a4d8f79bbcde1f6744b5903ce050a"
+    },
+    {
+      "stage": "historical P10 reviewer helper/schema coverage corrections",
+      "canonical_gate_failure": false,
+      "original_root": "../landing-review-p10-failed",
+      "closed_manifest_sha256": "a357587ba60cf033cfe9a63681a293438d8140d5bade4bfbc065ec2be00fd986",
+      "scope": "Original retention-directoryheader assumption,336-vs418 core distinction,ADR0189runtimeprovenance distinction and782-to811raw-registry coverage expansion are preserved in their original files. Corrected helpers freshlyreviewed I10; no product/test/rubric relaxation."
+    },
+    {
+      "stage": "I10 pre-full cleanup bookkeeping",
+      "canonical_gate_failure": false,
+      "original": "full-disk-preflight-first.json",
+      "corrected": "full-disk-preflight.json",
+      "cause": "The first cleanup predicate matched metadata files with the temporary-source directory prefix.",
+      "resolution": "Filter actual directories only; all4i/extra native source directories were already absent. Original false metadata is retained; no source/gate/test result changed."
+    },
+    {
+      "stage": "I10 artifact retention packaging",
+      "canonical_gate_failure": false,
+      "helper_exit": 1,
+      "original": "retain_artifacts_full_first_failed.py",
+      "diagnostic": "full-retention-first-refusal.json",
+      "cause": "Canonical full legitimately registers the identical legacy intent path twice. The first archive verifier incorrectly required unique tar headers.",
+      "resolution": "All165canonicalrows retained and rehashed;164unique paths. Identical duplicate mapped to one verified member. All292attachments and9canonicalPNG preserved. Superseded duplicatearchive pruned only after exact member/PAX verification; its hash/history/recipe and originalhelper remain. No gate rerun.",
+      "availability_receipt": "full-retention-failed-archive-availability.json"
+    }
+  ],
+  "canonical_gate_failures_this_I10_attempt": 0,
+  "canonical_gate_failures_prior_P10_attempt": 1,
+  "prior_P10_attempt_reference": {
+    "historical_root": "/home/dobo/work/_temp/content__v4/releases/c10/landing-review-p10-failed",
+    "failed_candidate": "8c3b8835ad80e75a4b7aa6fa69365ea6a38ba8d6",
+    "signed_NO_GO_sha256": "2f424e4988f806fb22ac88f9aa82ec23756a4d8f79bbcde1f6744b5903ce050a",
+    "manifest_sha256": "a357587ba60cf033cfe9a63681a293438d8140d5bade4bfbc065ec2be00fd986",
+    "new_candidate": "4824609e5a8442beab43c762efdb3c859fc5bd9b",
+    "required_new_exact_SHA_checks": true,
+    "all_P10_gate_and_HTTP_results_historical_only": true,
+    "canonical_P10_failure": "09-doc: trackedinventory679 vs physical680; root repaired source declaration in new child",
+    "P10_full_launches": 0,
+    "Root_repair_receipt_sha256": "b17b324d99e3c37be961b464a2577f59221d0456ab403c50a258376889ad6fbc"
+  },
+  "inventory_repair_review_sha256": "1f5113fac51080b70c7c55210ebc9d2825125a4d56ba501bb9289e2be5772df4",
+  "player_diff_sha256": "629ac9df2089957ed88665b286f1f0a214362472ca1f5471b649ee900b8eac3b",
+  "derived_old_weight_shifts": [
+    {
+      "id": "cx_geografie_302",
+      "fields": {
+        "selection_weight": {
+          "before": 3,
+          "after": 2
+        },
+        "rank": {
+          "before": 79,
+          "after": 80
+        }
+      }
+    },
+    {
+      "id": "ct_societate_083",
+      "fields": {
+        "selection_weight": {
+          "before": 2,
+          "after": 3
+        }
+      }
+    },
+    {
+      "id": "ct_societate_090",
+      "fields": {
+        "selection_weight": {
+          "before": 1,
+          "after": 2
+        }
+      }
+    }
+  ],
+  "cleanup": {
+    "review_clean": true,
+    "Loop_clean_sameP10": true,
+    "shared_main_clean_sameD": true,
+    "full_owned_containers_and_networks": 0,
+    "normal_listener_closed": true,
+    "alllaunched_sessions_observed_finished": true,
+    "temporary4i_and_extra_native_sources_absent": true,
+    "rolling_gate_and_latest_root_setup_retained_for_Root": true
+  },
+  "evidence_manifest_sha256": "b67f2e287ee55f21fa8b62ab978efdfb64882f4a5515ce9af80a4f637d1f7aae",
+  "self_attestation": "Named independent reviewer GO on exactcandidate; no cryptographic identity claim; no main landing claimed."
+}

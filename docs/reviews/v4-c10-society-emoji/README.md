@@ -2,8 +2,8 @@
 
 Valid until: payload, source or relevant runtime changes — then treat as history.
 
-Source staging only. The independent 1,206-case S10 corpus is registered; candidate expectations, exact-SHA gates,
-normal HTTP wins and fresh independent landing review remain pending.
+Qualified local product I10 `4824609e`: build11 / fresh4i10 / unit27 / singlefull37 pass.
+Both new boards won and reloaded through normal HTTP; [fresh independent GO](landing-review.json).
 
 Two approved additions use existing KG nodes: `cx_societate_384` and `ct_meme_net_379`.
 The society board uses micro-, parts called foi, wheeled transport and fixed-date celebrations.
@@ -22,7 +22,7 @@ Installed authority: `9c7f1340b2fc968046df441aab0f2c52f0cf05a5488ee706eeafbfe52e
 Bundle: `e186ea09e8f4a60f840627fbbe7d6ecfb870d2d2dfe8e2610693da5d2354cabb`.
 Seven native checks pass with 162 runtime sources, nine bindings and three strict auditors.
 Independent stock-source roles signed INITIAL and both FINAL phases; the builder ran no review writers.
-All 123 Go test files and five oracle/start fixtures remain at baseline in this source staging.
+S10 kept all123 Go tests and five fixtures exact; R10/P10 separately registered independently regenerated expectations.
 Two helper bookkeeping failures were corrected and retained; no native failure was waived.
 The later Arbitru trial solved mechanically but failed its single critic on ambiguity/free-pair semantics.
 It is not in this pack; no factual/quality or import approval exists for that failed trial.

@@ -46,3 +46,10 @@ Exact product `8f9ff9188129a3026f1ea3bbd938dc2fc21a16af` fast-forwarded cleanly 
 Clean main `94e8d175` fast-forwarded to qualified product `642f0c2f133786fcc0198f2f2b1440978632369a`. Separately reviewed operator-only child `12b9af3bf6222e0162a72e027be1cf30d0a6068f` then landed. The two existing-KG Lanț routes, `lt_societate_250` and `lt_stiinta_251`, passed exact build 11, unit 27, fresh 4i 10 and full 37, followed by independent GO `da74b8527b66db7f2d2f7b7aac20f2f63772f2f94afc2f006da31e46ed2bc625`. All 859 browser cases passed with zero skips, retries or flaky outcomes. Enforced CSP was 0/0; PostgreSQL accounts 12, HTTP API 302, parity 1,206 and nine PNGs with all 17 baseline outcomes passed.
 
 Eleven normal public-text witnesses won and reloaded. Five chip-only witnesses won; six encountered UI omissions, with free-text fallback accepting the legal moves. Original blind evidence records prospective native-caption graph play. Four events advance only the two reviewed rows through qualified and landed: 3,351 → 3,355 events, 2,984 IDs unchanged and 13 → 15 landed boards. All other 2,982 rows and protected holds/guards remain exact. The prefix is nine Conexiuni, one Cald and five Lanț boards, with zero shared vocabulary additions. P9 inventory is 731 pack records, 724 approved, seven pending and 542 eligible; Lanț has 128 records, 126 approved and 126 eligible. T has its own operator tests and code review. P9 carries the product GUI gate qualification. C16, C17 and ADR-0228 policy/M2 state retain their separate scope. [C9 record](../reviews/v4-c9-postal-shirt-lant/README.md).
+
+
+## C10 — 2026-11-11
+
+Valid until: a relevant source/runtime change — then treat as history.
+
+Product `4824609e5a8442beab43c762efdb3c859fc5bd9b` landed locally after build11/4i10/unit27/full37 and [fresh GO](../reviews/v4-c10-society-emoji/landing-review.json). Society `cx_societate_384` and Cald `ct_meme_net_379` won/reloaded on normal HTTP. Separate seven-file expectations `8c3b8835` satisfy ADR-0227; fixed corpus stays 1,206. The original P10 doc-inventory NO-GO, full I10 requalification, all292 attachments and9PNGs remain; no remote publication occurred.
