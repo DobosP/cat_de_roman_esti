@@ -20,5 +20,8 @@ All three v19 initial and final factual/quality pairs signed the exact native
 candidates and live audits. Installed authority reconstruction, source validation,
 sealed export, ops, mobile and graph/resolver continuity checks passed.
 The actual independent source-bound Django/Go corpus matched 1,206 cases.
-Separate five-file pins 7d0b11c9 are in fresh independent exact-SHA qualification.
+Exact 7d0b11c9 passed build11/4i10/unit27/full37 and all859browser cases.
+The fresh reviewer signed GO; all9prefix boards won and reloaded over HTTP.
+Separate five-file owner approval remains pending. Verified compact receipts remain,
+and superseded raw gate trees were pruned.
 Evidence is under `~/work/_temp/content__v4/c4/` and `~/work/_temp/content__v4/c5/`.
