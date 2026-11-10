@@ -2887,3 +2887,55 @@ Special:MyLanguage UA-policy path before its GET, dropping that host for this ru
 and adding one owner-queue entry. The permitted English terms capture preceded the
 refusal. DEX stays dropped. Source-client policy/configuration review and exact
 SOURCES approval remain pending.
+
+## V4 C9 independent oracle and corpus registration, 2026-11-10
+
+Valid until: exact-SHA qualification changes this source-bound scope — then treat as history.
+
+Frozen source is `70c30b2dc5e6be8cc1834aa1e8cac6a83cc0b000`. Actual Django 5.2.16,
+Python 3.12.3 and Unicode 15.0.0 produced the 1,206-case corpus. The native S9 replay
+matched every case. Supplemental real cat-qualify parity matched all 1,206 under
+exactly two generated registration files overlaid in the single thin setup, with
+S9 capture binary bytes fixed. That overlay is explicitly source S9 plus registration.
+The corpus gzip is 33,343 bytes, SHA-256
+`59e18f54c6a4e13a20d88b9023188eb894a5d1611c84f054bfc2e13920a318bb`.
+
+Methods, paths, indices and case count stay exact. Twelve response bodies change,
+and three source-selected correct Lanț move bodies change at cases 1119–1121.
+Django's private source-selected session changes the old Bonțida/music route to
+Mică Unire 1859→Constituția României. The capture was unchanged. The exact request
+and response leaf diff and complete changed cases are retained. Canonical parity
+and new-board listening HTTP play follow registration and pin application.
+
+All 69 Python source inputs match Git S9. Three archived exporters ran twice with
+separate output roots and six exits 0, producing byte-identical results for all five
+outputs. The Lanț fixture changes five of 60 cases, with 1,280 scalar leaves and
+1,147 recursive delta entries. Case 12, usor/seed 17/category empty/daily null,
+changes from 21 to 22 actions; total Lanț actions grow from 1,335 to 1,336.
+All case identities and request configurations stay fixed. The browser Lanț seed 38
+start changes 15 leaves from the Pagaia/Cinci inele route to Wimbledon/Primul număr 1 ATP.
+Other three Go fixtures and five other game starts remain exact. Actual normal invalid-
+request diagnostics in Contexto stderr are retained. Fresh source-open readsets and
+full old/new byte hashes, structural deltas and actions are preserved in seed-rebind.
+
+The genuine new Lanț fixture hash is
+`aea3a20bfaca51d689cfbb8cc9467320e4430430aeac2cba38dbf62edf834115`.
+Browser seeded-starts hash is
+`869c4a49b672d2692d945cc3ae087b1af3280cbf3acc4753dd77d67fd6f4f5d4`.
+Registration proposal `14374a250ef679e2dc52249f66f069e94d7ce072a0c7252a37891c9d2372f199`
+and four-Go expectation proposal
+`070912071a5643ace8487685b368bd2ff9855a07450b9f1bcb6d723ef1dddbbc` were both generated
+before either application. The two genuine changed seed outputs join the four Go
+expectations in a separate six-file commit under conditional ADR-0227 delegation.
+Every existing exact-SHA gate and fresh independent landing review still applies.
+
+Root verified immutable Git keepers for nine planned generated duplicates and the
+completed extension proposal, then removed their ten scratch paths under receipt
+`9ab167b7f76371dc5f1feaafcb4befe7212d88cbaa47e5c826b3c5f1140d4f35`.
+Exact bytes remain in frozen S9 Git. Historical path-bound consumers require explicit
+verified restoration. Root also rechecked all 243 original inputs, all 244 final thin
+setup files, both overlays and 67 retained capture members before removing the
+completed expanded HTTP source tree. Receipt
+`26d1388760a5e94977b48391eb07e3cc2c70b35276fdd6d30291f1ef877d1fdd` records
+21,213,184 allocated bytes removed. Current capture executable, exact corpus,
+source packets, dependency frames, compact results and reconstruction recipes remain.

@@ -25,5 +25,5 @@ All nine source bindings and three strict auditors verify. Source checks include
 An initial automatic-approval refusal preceded accepted re-review using original USER authorization evidence.
 C8 raw gates and three superseded C15 derived paths were pruned after verified keepers/successors.
 The old C15 caption binary bytes are unavailable. Its source/build proofs and original source packets remain.
-Real C9 selection, filtered menus, HTTP wins/reloads, independent corpus/pins and exact-SHA gates are pending.
-Full source receipts live at /home/dobo/work/_temp/content__v4/releases/c9/final-handoff.json.
+Fresh Django/native replay and supplemental registered parity matched 1,206 cases; six separate expectations derive from independent oracles.
+Two Python runs match five outputs; only Lanț fixture/browser starts change. Listening play and exact-SHA qualification remain pending.
