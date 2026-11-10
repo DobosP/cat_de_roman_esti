@@ -2703,3 +2703,69 @@ Apometrele recognition, ordinary zipper-design inference and B7 difficulty/recog
 The initial factual source-review signed bytes were lost when root accidentally ran a writer. Those original signed bytes remain unavailable. The genuine same-reviewer reissue manifest `63cb522e3726cb8398c4bfbd67a735f12c3fa503824bb5ff6801c7d502a7fda1` preceded quality and native consumption. Root-generated replacement bytes were excluded from authority. C12’s seven-key canonical factual artifact was refused before promotion, then the same reviewer signed an identical-item four-key projection that strict native apply accepted.
 
 C6 raw gate trees were pruned after verification under `releases/c6/raw-retention.json`. Five superseded C12 producer or duplicate artifacts were also pruned under retention receipt `7d4f94d80b20327d222b1f1d05136543f45c6c119d598b9ae03f698399a4a2f5`, with original author/source packets and reproduction instructions retained. Original compiled bytes of those pruned artifacts are unavailable. The reviewer pruned only its expanded oracle closure and duplicate regenerated copies under `releases/c7/landing-review/oracle-retention.json`. C7 owning raw gate trees remain retained at qualification.
+
+## 2026-11-10 — C8 native source staging and C14 registry application
+
+Valid until later source qualification or landing supersedes these staging facts — then treat as history.
+
+Local main remains C7 product `26ebaf39bd642d9778c9c9d7d09159f1297c0dfa` with documentation record `da7674dcfa263528623ce1eccc8393d31700e6bb`. The landed prefix remains twelve boards, comprising eight Conexiuni, one Cald and three Lanț. Shared words, names, edges, forms, aliases and puzzles remain unchanged. The landed inventory stays 728 pack rows, 721 approved and 539 eligible, including 253 Conexiuni rows and 91 eligible.
+
+C8 stages only `cx_stiinta_383`, a stiinta/greu board of sixteen familiar animal, process, material and human-body concepts. The predicates are metamorphosis, ordinary melting, mammalian plant-and-animal diet and paired left/right human anatomy. Raw and fresh same-role canonical source-backed factual/quality judgments bind child safety and the exact dossier. The private promote judgments were not native apply approvals. Strict canonical build and apply promoted one board. Native/Python mechanics have zero findings and the blind critic matched four recognizable groups without ambiguity. The native ranking is score 92, rank 7, selection weight 5, play quality 100 and Romanian familiarity 86.
+
+The bear predicate uses the ordinary Romanian forest/brown-bear sense, especially Ursus arctos, without hiding polar-bear and panda exceptions. Paired anatomy uses the typical human body plan rather than an exceptionless count for every individual or species. Melting butter/chocolate uses ordinary material mixtures. The reviewers retain secondary encyclopedia/dictionary citation weaknesses, unmeasured recognition and greu calibration, and limited historical A6 stock scope. The 22 first-cache source receipts remain genuine evidence with their original fetcher roles. These source judgments confer no broad graph/form/source-policy approval.
+
+Native v23 initial/final review pairs and fresh audits closed for quick, world and extensions. Default all-rail, validation, export, ops, mobile and whitespace source checks are green. Staging is 729 pack rows with 722 approved, seven pending and 540 eligible. Conexiuni is 254 approved with 92 eligible. All 728 previous pack rows, the 336 frozen cores, KG `8b8addd26cdc3aa5972a97368196e9593d5ef38477625f2fba988845e10879d4`, seven protected graph/index components and 17,495 caption values remain exact. Compiled normal C8 HTTP and UI admission, independent 1,206-case capture, seed fixtures, separate pins, exact-SHA gates, qualification and landing remain pending.
+
+The fresh runtime inventory is 160 paths. The sole additional path beyond the historical 159 is `go-backend/internal/contentrails/sources/authored-v23.json`. The nine source bindings and three auditor identities/hashes remain unchanged. Earlier signed 159-path audit history remains scoped to its original source and was not forced to match the new count. The verified output set covers 48 files, comprising 46 owned outputs and two parent pack inputs.
+
+Receipt `/home/dobo/work/_temp/content__v4/releases/c8/source-checks.json` has SHA-256 `7c440df3057f2448ca9713e95dd9f33e96a744a62ace10a5031667ac3398df48`.
+
+Receipt `/home/dobo/work/_temp/content__v4/releases/c8/owned-source-output-manifest.json` has SHA-256 `191ac5490f4ec1d998743d9ff99718e1e8e3baf7bf6285b6cdc4a74090bc4134`.
+
+Receipt `/home/dobo/work/_temp/content__v4/releases/c8/final-source-commands.json` has SHA-256 `9a0949a8d866bc7471dbb6205f9a408f5ee91f8f7eb8aeddca73320b65703fc9`.
+
+Receipt `/home/dobo/work/_temp/content__v4/releases/c8/final-graph-components-continuity.json` has SHA-256 `a3a0f723b4dcc15333179d63c84b200944b68ed823e371be6496399ddda35801`.
+
+Receipt `/home/dobo/work/_temp/content__v4/releases/c8/registry-application.json` has SHA-256 `3e31950e643f5e2e991927f855268fe4ae845ef7e2feba8b37dd458e391d5441`.
+
+The source descriptor has SHA-256 `27d762e9b10af15a325d4f52a541416d71665add1e3ba4c2fcac187b647e0d60`. The installed manifest has SHA-256 `8f8085c61034105754f477130decfa4b4b74f57ddac8f5b69054c0fdd612a85d`. The bundled export has SHA-256 `e153068cf972b9a6186d8d595630d761effc568aefcca6d13ca0afbb4d4a9062`. These are native source-stage identities rather than an exact-SHA cohort qualification.
+
+The following recorded native commands returned exit code 0 with Go 1.27.3 and the retained offline environment. They were read as receipts and were not executed by this documentation task.
+
+```bash
+/usr/local/go/bin/go -C /home/dobo/work/_worktrees/cat_de_roman_esti/content__v4/go-backend run ./cmd/cat-content-rail all --root /home/dobo/work/_worktrees/cat_de_roman_esti/content__v4 --check
+```
+
+The command receipt `/home/dobo/work/_temp/content__v4/releases/c8/rails-check-command.json` has SHA-256 `c918028ff243eb6e99ef158ac31d4060cc7b26d31e094437e60a24029e2b851f`. Its stdout hash is `bad585e6e6918db591268d91e8d99542871e3c016f79dd6fc7b9e86158f0feb4`.
+
+```bash
+/usr/local/go/bin/go -C /home/dobo/work/_worktrees/cat_de_roman_esti/content__v4/go-backend run ./cmd/cat-content validate --root /home/dobo/work/_worktrees/cat_de_roman_esti/content__v4
+```
+
+The command receipt `/home/dobo/work/_temp/content__v4/releases/c8/validate-command.json` has SHA-256 `43f853cb80c6711bd7303f2e805fba969037e30a400b8badbbe60685dabf6412`. Its stdout hash is `1d2e645a4a6946dae65ac9fc067442df3e7a430fc9fee3039e41fd1ee3819976`.
+
+```bash
+/usr/local/go/bin/go -C /home/dobo/work/_worktrees/cat_de_roman_esti/content__v4/go-backend run ./cmd/cat-content export --root /home/dobo/work/_worktrees/cat_de_roman_esti/content__v4 --check
+```
+
+The command receipt `/home/dobo/work/_temp/content__v4/releases/c8/export-check-command.json` has SHA-256 `18240450d8d4472019022b1e1f6ae2ec1785f569e625b81cd0eb49599a9eafbb`. Its stdout hash is `4f715aebbcf4c517ca8a5686959372f4ab156e4e62f897e6e5e607156dc5c8fb`.
+
+```bash
+/usr/local/go/bin/go -C /home/dobo/work/_worktrees/cat_de_roman_esti/content__v4/go-backend run ./cmd/cat-content-ops check --root /home/dobo/work/_worktrees/cat_de_roman_esti/content__v4 --check
+```
+
+The command receipt `/home/dobo/work/_temp/content__v4/releases/c8/final-ops-check-command.json` has SHA-256 `8c597d2df2e3204cd4835e73a0170299e3de8fdb9164a523fd1f8568cb24a137`. Its stdout hash is `608cf89c1f406a3d319257d2c0adfbfac8166e1309255ecf94a0b5395bb2d852`.
+
+```bash
+/usr/local/go/bin/go -C /home/dobo/work/_worktrees/cat_de_roman_esti/content__v4/go-backend run ./cmd/cat-mobile-pack --root /home/dobo/work/_worktrees/cat_de_roman_esti/content__v4 --check
+```
+
+The command receipt `/home/dobo/work/_temp/content__v4/releases/c8/mobile-check-command.json` has SHA-256 `d6507df87e46e1e4a03a1890d9e09f98faa342d8f82566171d7d0b97d430d14e`. Its stdout hash is `950ff344a404f9321e6be224962ce22be074b965cb0f5e72f8da04bc0757f5b9`.
+
+Root appended C14’s final two-ID proposal as seven events. The loop journal now has 2,850 IDs and 3,075 events with twelve landed boards. All 2,848 earlier current rows, 803 protected rows, 87 owner holds, 79 Conexiuni locks and six C9 retry guards remain exact. Science is reviewed, while the frozen language module is terminally rejected after its blind filter failure. Intended-partition matching did not override the critic’s ambiguity and property-valid alternative. Under the broad noun/verb predicate, Lumină can replace Mână while a broader ending-nă property supplies the other group. Language received no factual/quality review, canonical import or unchanged-source reroll. A future material construction needs a new ID and full rejected-stock/family/inventory novelty guards.
+
+All 12 prefreeze constructions, 52 complete components, eight incomplete probes, 11 frameworks and their original lineage remain author context. The two actual raw modules produce two durable IDs rather than twelve independent board approvals. Their one shared tile and projected reuse at most four of eight remain mechanical context. Original raw/private promotes and sidecars were never native applications. The operational promotion receipt’s earlier applied=null field was corrected from the already successful strict native result, with no approval failure. Moving C15 authored/preflight/critic scratch work is excluded from this source record.
+
+The source verifier encountered an already-owned exclusive proof filename. It retained the original and wrote `final-graph-components-continuity.json` as a new final receipt. This was proof-file handling, not a native gate failure or waiver. Earlier source-review integrity history remains unchanged, including the lost original C7 initial factual signed bytes and the genuine same-reviewer reissue before quality/native consumption.
+
+C7 owning raw gate trees were pruned after all 104 retained evidence files were verified. The receipt is `/home/dobo/work/_temp/content__v4/releases/c7/raw-retention.json`. The clean H7 app keeper was restored and attached at its original registered path. C7’s earlier qualification-time raw-retention statement remains historical. Retained manifests record that verification and subsequent removal without asserting that pruned bytes remain available. Source packets, accepted judgments, Git baselines and reproducible setup remain retained.

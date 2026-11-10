@@ -15833,6 +15833,63 @@
    ],
    "source": "ai",
    "status": "approved"
+  },
+  {
+   "category": "stiinta",
+   "difficulty": "greu",
+   "group_labels": {
+    "g1": "Animale care trec prin metamorfoză",
+    "g2": "Se topesc, trecând din solid în lichid",
+    "g3": "Mamifere cu hrană atât vegetală, cât și animală",
+    "g4": "Părți ale corpului aflate în perechi stânga–dreapta"
+   },
+   "groups": {
+    "g1": [
+     "n_v1_8_broasca",
+     "n_v1_8_fluture",
+     "n_v1_13_furnica",
+     "n_v1_10_buburuza"
+    ],
+    "g2": [
+     "n_v24_food_breakfast_unt",
+     "n_v85_food_ciocolata",
+     "n_v24_weather_precipitation_zapada",
+     "n_v24_weather_precipitation_grindina"
+    ],
+    "g3": [
+     "n_v1_8_arici",
+     "n_v33_forest_animal_urs",
+     "n_v29_animal_farm_porc",
+     "n_v1_11_mistret"
+    ],
+    "g4": [
+     "n_v4sti_ochi",
+     "n_v4sti_ureche",
+     "n_v24_body_limbs_mana",
+     "n_v24_body_limbs_picior"
+    ]
+   },
+   "id": "cx_stiinta_383",
+   "order": [
+    "n_v1_10_buburuza",
+    "n_v1_13_furnica",
+    "n_v1_11_mistret",
+    "n_v1_8_broasca",
+    "n_v24_food_breakfast_unt",
+    "n_v29_animal_farm_porc",
+    "n_v24_weather_precipitation_grindina",
+    "n_v24_body_limbs_mana",
+    "n_v4sti_ochi",
+    "n_v85_food_ciocolata",
+    "n_v33_forest_animal_urs",
+    "n_v24_weather_precipitation_zapada",
+    "n_v24_body_limbs_picior",
+    "n_v1_8_arici",
+    "n_v1_8_fluture",
+    "n_v4sti_ureche"
+   ],
+   "source": "ai",
+   "status": "approved"
   }
  ],
  "contexto": [
@@ -19230,42 +19287,42 @@
  "meta": {
   "counts": {
    "alchimie": 83,
-   "conexiuni": 253,
+   "conexiuni": 254,
    "contexto": 266,
    "lant": 126
   },
   "id_high_water": {
    "alchimie": 107,
-   "conexiuni": 382,
+   "conexiuni": 383,
    "contexto": 378,
    "lant": 249
   },
   "last_import": {
    "allocated": [
     {
-     "category": "viata_de_roman",
+     "category": "stiinta",
      "game": "conexiuni",
-     "id": "cx_viata_de_roman_382",
+     "id": "cx_stiinta_383",
      "raw_ref": "conexiuni[0]"
     }
    ],
    "categories": [
     {
      "bindings": {
-      "candidate_sha256": "sha256:a198a4906358c977e373452b059622514c4be577974afebe33c3d23410780039",
-      "factual_reviewer": "v4_c12_factual",
-      "factual_sha256": "sha256:3f7691d2d6783c800b38c4ed7ba3f490364144585b071d4118cfd67b2b44d7f3",
-      "quality_reviewer": "v4_c12_quality",
-      "quality_sha256": "sha256:811dbac8efc7beabdc4ee6cea3d61a31aa8bea4c7979225a890051ea2bf35dd4"
+      "candidate_sha256": "sha256:7c21cd817e1d76cd67afe6e9e9350a1bb3b55d8ea67be54230f6818a281e0558",
+      "factual_reviewer": "v4_c14_factual",
+      "factual_sha256": "sha256:b73f576c855670d22079226a8e00ab9bc47f28f7e421c7edba1e633f511381b4",
+      "quality_reviewer": "v4_c14_quality",
+      "quality_sha256": "sha256:830889566a273f48d0e786f1a6fccfe8cf747c211379df252f79943f85568bed"
      },
-     "category": "viata_de_roman",
+     "category": "stiinta",
      "exclusions": []
     }
    ],
    "kg_sha256": "8b8addd26cdc3aa5972a97368196e9593d5ef38477625f2fba988845e10879d4",
    "operator": "native-pack-only-import-v1",
    "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
-   "source_pack_sha256": "c7ce2da27b80f683392696bdb212fc7e80d24a5cc834f343454fb7a51a29f64c",
+   "source_pack_sha256": "74016c6424d3c8c1c60120f107ff66e988fcad3e7a1843e488cb3069dc2d34aa",
    "write": true
   },
   "note": "Curated games pack (ADR-0011): AI-generated, fact/quality-verified batch + hand-crafted starters. Only status=approved items are served.",
