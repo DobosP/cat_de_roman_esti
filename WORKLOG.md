@@ -2583,3 +2583,75 @@ Both three-move routes Aragaz→Cratiță→Supă→Lingură and Aragaz→Tigaie
 Stale owned ignored bytecode caused the first build to stop before checks. Overlapping 4i asset staging with unit mirror repopulation caused a precheck failure for missing `legacy/.vite`. Owned bytecode and staging were corrected. The final build 11, unit 27, fresh 4i 10 and full 37 are green with unchanged assertions and gates. All sessions ended and owned gate resources were cleaned up. C6 raw gate trees remain retained. Verified browser receipt compression and earlier C1–C5 pruning remain separately recorded history.
 
 The product prefix contains eleven boards, comprising seven Conexiuni, one Cald and three Lanț. KG words, names, edges, forms and puzzles are unchanged. C6 has 727 pack rows with 720 approved, seven pending and 538 eligible. Lanț has 126 total, 124 approved and 124 eligible. Conexiuni has 252 total and 90 eligible. Cald has 266 total, 264 approved and 256 eligible. Alchimie has 83 total, 80 approved and 68 eligible. Quick remains 421 total and 418 selectable. Only the selected registry row advances from reviewed through qualified to landed. The other 2,806 rows, all 803 protected rows, 87 owner holds, 79 Conexiuni locks and six C9 retry guards remain exact. C12/C13 proposals and C7 staging remain separate.
+
+## 2026-11-10 — C7 native staging and C12/C13 registry application
+
+Valid until later qualification or landing supersedes these staging facts — then treat as history.
+
+Local main remains C6 product `cc905fbb1908c2368cf7837195cb98819dcac48b` with independently accepted documentation record `6c295e577ca2709bdfe084c85336562da9070a2d`. The landed prefix remains seven Conexiuni boards, one Cald target and three Lanț routes, with zero additions in other games or KG words, names, edges, forms and puzzles. The landed census stays 727 pack rows, 720 approved and 538 eligible, including 252 Conexiuni rows and 90 eligible.
+
+C7 stages only `cx_viata_de_roman_382`, a viata_de_roman/greu household board with joining, measuring, ordinary zipper-closure and handled-tool predicates. Both independent source-backed raw judgments and fresh same-role canonical judgments passed. The exact blind partition was unambiguous with three recognizable groups, meeting the literal floor. The staged board has score 92, rank 7, selection weight 5 and pilot eligibility. Apometrele familiarity and usual zipper designs remain reviewer inferences with uncorroborated prevalence limits. Peers did not independently inspect all stock. B7 and G4 remain explicit landing-review subjects.
+
+Only 004 entered the frozen raw import. All five linked constructions and 51 group hypotheses remain context. The verified 004/005 overlap is 13 tiles and three exact quads. Original 12-tile prose and the mislabeled construction digest are retained beside the correction. Raw-module, construction, frozen-candidate and native-record hashes remain distinct. The predecessor `cx_viata_de_roman_173`, all owner holds and earlier terminal debt remain unchanged. Legacy aliases, degrees and source citations are inherited metadata rather than new lexical facts or permissions.
+
+Native v22 source checks are green for all three fresh initial review pairs, finals and audits. Staging has 728 pack rows, 721 approved, seven pending and 539 eligible. Conexiuni has 253 approved rows and 91 eligible. All 727 prior pack rows, KG `8b8addd26cdc3aa5972a97368196e9593d5ef38477625f2fba988845e10879d4`, 17,495 caption values and seven graph/index components remain exact. The source-output verification covers 48 files, comprising 46 owned outputs and two parent pack files.
+
+Receipt `/home/dobo/work/_temp/content__v4/releases/c7/source-checks.json` has SHA-256 `364f9952764b4bdfdbfe08961376b35ae560e3097ac58f7dbd30baf49e13363c`.
+
+Receipt `/home/dobo/work/_temp/content__v4/releases/c7/owned-source-output-manifest.json` has SHA-256 `96b1222de9beaa15269c24d6c842d0c011b6ba567707211a8c406fb906a2d9ac`.
+
+Receipt `/home/dobo/work/_temp/content__v4/releases/c7/final-source-commands.json` has SHA-256 `e23e93545bdebbbbb2edd84b43b9b444a6e76ca437253c93dbebe1fc6ae2d366`.
+
+Receipt `/home/dobo/work/_temp/content__v4/releases/c7/graph-components-continuity.json` has SHA-256 `daf9033d1ab292792eb63e74bea63bc41c0ee74688442aa3b2a7072f9302f618`.
+
+Receipt `/home/dobo/work/_temp/content__v4/releases/c7/registry-application.json` has SHA-256 `373ed8ca335ddb6b6d10d4d11c19be4df2bb68b3bc56c23957c3d5cd2237fe6f`.
+
+The source descriptor has SHA-256 `fd9302290854be4b27efbb195d7b4140b772ccb6ffca942b029993b6e8a0128d`. The installed manifest has SHA-256 `322013358eb03da08697f3c73cfde98c5038538e8d598ddd38975acfa840d3c7`. The bundled export has SHA-256 `dfd8bb378842b9ed5c4480c3b95a8b2137dcd3176702672aa657731fac423009`. These hashes describe staging source checks. Compiled C7 HTTP selection, an independent 1,206-case capture, separate expectation pins, exact-SHA qualification and landing remain pending.
+
+The following recorded native commands returned exit code 0 with Go 1.27.3 and the retained offline environment. They are receipt records, not commands executed by this documentation task.
+
+```bash
+/usr/local/go/bin/go -C /home/dobo/work/_worktrees/cat_de_roman_esti/content__v4/go-backend run ./cmd/cat-content-rail all --root /home/dobo/work/_worktrees/cat_de_roman_esti/content__v4 --check
+```
+
+The command receipt `/home/dobo/work/_temp/content__v4/releases/c7/rails-check-command.json` has SHA-256 `c5f5239d7352a154900e65bb69b38c24763bad8c61ce70d74552ff72322772f8`. Its stdout hash is `60ec0fa89cf4d659abb63614d41a3fadb606abb1b326470339f268f44dc330ed`.
+
+```bash
+/usr/local/go/bin/go -C /home/dobo/work/_worktrees/cat_de_roman_esti/content__v4/go-backend run ./cmd/cat-content validate --root /home/dobo/work/_worktrees/cat_de_roman_esti/content__v4
+```
+
+The command receipt `/home/dobo/work/_temp/content__v4/releases/c7/validate-command.json` has SHA-256 `dc911e9067ceffa7e8a5e8972773dba9d833395692871e186a1322350ef94236`. Its stdout hash is `1d2e645a4a6946dae65ac9fc067442df3e7a430fc9fee3039e41fd1ee3819976`.
+
+```bash
+/usr/local/go/bin/go -C /home/dobo/work/_worktrees/cat_de_roman_esti/content__v4/go-backend run ./cmd/cat-content export --root /home/dobo/work/_worktrees/cat_de_roman_esti/content__v4 --check
+```
+
+The command receipt `/home/dobo/work/_temp/content__v4/releases/c7/export-check-command.json` has SHA-256 `af135f2ef608a6e146999cf3e92ab0c6c31b7528a02eab4c76c780475611f113`. Its stdout hash is `4f715aebbcf4c517ca8a5686959372f4ab156e4e62f897e6e5e607156dc5c8fb`.
+
+```bash
+/usr/local/go/bin/go -C /home/dobo/work/_worktrees/cat_de_roman_esti/content__v4/go-backend run ./cmd/cat-content-ops check --root /home/dobo/work/_worktrees/cat_de_roman_esti/content__v4 --check
+```
+
+The command receipt `/home/dobo/work/_temp/content__v4/releases/c7/final-ops-check-command.json` has SHA-256 `b9c5b55cfe2fb12e41fa50a69ec3496eb9c2b7a183cb38331dc8a031468cac62`. Its stdout hash is `bd1503c2cba984a391fb10011c131a1c9defc44e818c42c134a24b2a359a486b`.
+
+```bash
+/usr/local/go/bin/go -C /home/dobo/work/_worktrees/cat_de_roman_esti/content__v4/go-backend run ./cmd/cat-mobile-pack --root /home/dobo/work/_worktrees/cat_de_roman_esti/content__v4 --check
+```
+
+The command receipt `/home/dobo/work/_temp/content__v4/releases/c7/mobile-check-command.json` has SHA-256 `e3be49b958f554bfe2c321b8b2e82331aba791d15690d6e98b1655fecf47cd31`. Its stdout hash is `950ff344a404f9321e6be224962ce22be074b965cb0f5e72f8da04bc0757f5b9`.
+
+Root applied the C12 canonical v2 and corrected C13 v2 proposals as 85 journal events and 41 IDs. The loop now has 2,848 IDs and 3,066 events with eleven landed boards. The new rows are one reviewed Conexiuni candidate, 35 author rejects and five Alchimie projection-prerequisite parks. All 2,807 earlier current rows and the 803 protected, 87 owner-held, 79 Conexiuni-held and six C9 guarded records remain exact. The application receipt above binds both packet event hashes.
+
+The C13 author pool contains 40 seed/target/cell hypotheses for 32 targets in six deficient cells, with zero selected. Native and Python full books agree on all 40, including five unprojectable outcomes. Of 35 projected books, 30 pass structural certification and five fail the opening floor. Thirteen have par 1. Strict native critique on 35 projected books and Python critique on all 40 each report zero failures and three warnings. These lint results are separate from structural certification and semantic recipe fairness. Seven Python payloads carry eight error messages. The author rejected 35 books and parked five.
+
+The two Murături records already compare distinct seed sets with the old C2 rejection. Root initially misattributed the nearby preserving-revision prose to C7 pie/salami, then corrected that attribution before append. Existing C13 sibling-only lineage and original author bytes remain unchanged. This records a comparison context without assigning a formal parent or reopening old C2/C7 rows. The clarification is retained at `/home/dobo/work/_temp/content__v4/c13/author-correction/context-clarification.json`.
+
+Three integrity incidents remain explicit. The first C12 canonical factual artifact had seven top-level keys and strict native build refused it before promotion. The same factual reviewer signed a four-key serialization projection with identical item values, after which strict build and apply-review promoted one. The refusal, original signed artifact and signed projection remain retained, with no schema waiver.
+
+For the initial C7 source factual review, root executed a misnamed `check.py` before inspecting its contents. It was a writer and overwrote the original signed outputs. Those original bytes are unavailable, with only their hashes retained. The root-generated replacement set was excluded from genuine signatures and native consumption. The same fresh reviewer personally repeated all checks and issued a separate genuine set at `2026-11-10T08:41:03.067658Z`, before quality signed at `2026-11-10T08:42:00.690667Z` and before native consumption. The genuine factual manifest is `63cb522e3726cb8398c4bfbd67a735f12c3fa503824bb5ff6801c7d502a7fda1`. The incident is retained at `/home/dobo/work/_temp/content__v4/releases/c7/rail-initial/handling-incident/incident.json`, and reviewer awareness at `/home/dobo/work/_temp/content__v4/releases/c7/rail-initial/factual/incident-awareness.json`.
+
+C13 detected concurrent `contentbuild/build.go` drift after its first native build. Every frozen Go and rules input was overlaid for the replacement build, and the full-book and strict-lint output hashes reproduced exactly. The final proof is limited to that frozen overlay. Original author packet bytes and superseded incident receipts remain retained under `/home/dobo/work/_temp/content__v4/c13/author`.
+
+The owned C6 keeper `.gate` tree and build mirror were pruned after re-verifying all 115 retained evidence files. `~/work/_temp/content__v4/releases/c6/raw-retention.json` records their sizes, removal and unavailable raw bytes. Source branches, original baselines, release images and compact receipts are retained. The single clean rolling keeper was restored and attached at `/home/dobo/.codex/worktrees/content-v4-review-c2/cat_de_roman_esti`.
+
+C7 retention removed exactly three old producer paths and two verified duplicate author-source trees after the current rolling CLI and independent landing-preparation proof were verified. The pruning receipt is `7d4f94d80b20327d222b1f1d05136543f45c6c119d598b9ae03f698399a4a2f5`. Old named compiled artifacts are unavailable. The original source packets, genuine judgments, current producer and Git baselines are retained. Historical 508-input reproduction requires the recorded rehydration procedure. No independent byte-identical rebuild of the old binaries is claimed.

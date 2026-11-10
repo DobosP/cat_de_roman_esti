@@ -1,0 +1,49 @@
+{
+  "blocking_findings": [],
+  "first_peer_read_at": null,
+  "handling_incident": {
+    "event": "same-factual-reviewer-genuine-reissuance-after-root-artifact-handling-error",
+    "first_peer_read_at": null,
+    "incident_record": {
+      "path": "/home/dobo/work/_temp/content__v4/releases/c7/rail-initial/handling-incident/incident.json",
+      "sha256": "ee15773a8ac7d21e2e755aa3d9d3ecd689fbd93de57d9fd3bbfd0932535b561e"
+    },
+    "no_peer_read": true,
+    "original_signed_bytes_available": false,
+    "original_signed_hashes_only": {
+      "extensions": "2486deac191e7d90e325d5319908d1024b702491ef0c728dad297c8c6fed1ef2",
+      "manifest": "fff26a1b83e1230e599ca02555d0bb5ee5106a00d1bf944083c5df994b9a62be",
+      "proof": "92f40a09cd4943a907d8379e3ab001d5c8238a50423e28ac0d96210477d8173e",
+      "quick": "150a0b14646a4b0d3991e64fdf40212deb6fc9d7b0cd66336f0c10fd1481eb39",
+      "world": "cad0036dfec76e54129d17afeb7c0d7790bdfbf57d6178e483768f38d071702a"
+    },
+    "reissue_scope": "New v2 bytes authored and signed by v4_c7_initial_factual after personally inspecting incident preservation and rerunning independent full source, candidate, predecessor, reference, Render hash, graph/pack/core and progression checks. No factual standard, judgment, candidate or source was relaxed or changed. The previous current directory remains untouched.",
+    "root_generated_set_is_review_signature": false,
+    "root_generated_set_native_consumption": false,
+    "root_generated_set_retained": true,
+    "signature_kind": "Reviewer-issued fresh declaration; no cryptographic identity attestation is claimed."
+  },
+  "issuance_script_sha256": "5ac03ac8bf4f45280c7a7bc4d6470cd272f76f4e0c5bd00ea4c1cb6e15d31aba",
+  "item_counts": {
+    "extension_boards": 68,
+    "extensions": 49,
+    "quick": 85,
+    "world_concepts": 252,
+    "world_recipes": 352
+  },
+  "no_network_or_builds": true,
+  "outputs": {
+    "extensions.json": "0642a00addf5427fbcfd2497bc2ac6dd63c7606a5419103679ab680ce7b60fdd",
+    "incident-awareness.json": "c753c77db715af34b26e165507d9f2f688cad1a35c143f1d6df8bfb00cf45f0d",
+    "proof.json": "91ccd9cb8cb1f74c7183cf80212c1067b1d05d200bcf1848a898471f249384e8",
+    "quick.json": "c7cd29a5543027a2a2b162e241c5c9019a256daa626a5ac8d08c6e9c99cd243d",
+    "world.json": "36bfad88c8f025eb51683de5fbc5bcb85632bfe1eb1cec1763b3c2e31a0a9438"
+  },
+  "repo_edits": false,
+  "reviewer": "v4_c7_initial_factual",
+  "role": "factual",
+  "signed_at": "2026-11-10T08:41:03.067658Z",
+  "source_sha256": "fd9302290854be4b27efbb195d7b4140b772ccb6ffca942b029993b6e8a0128d",
+  "stage": "INITIAL",
+  "writer_warning": "REISSUE_WRITER.py.txt is a writer, not a read-only verifier; direct execution would attempt issuance and refuses this existing v2 destination."
+}

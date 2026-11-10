@@ -15776,6 +15776,63 @@
    ],
    "source": "ai",
    "status": "approved"
+  },
+  {
+   "category": "viata_de_roman",
+   "difficulty": "greu",
+   "group_labels": {
+    "g1": "Folosite pentru a uni două bucăți de material",
+    "g2": "Instrumente sau aparate care măsoară o mărime",
+    "g3": "Obiecte închise în mod obișnuit cu fermoar",
+    "g4": "Unelte manuale prevăzute cu o coadă"
+   },
+   "groups": {
+    "g1": [
+     "n_v32_workshop_fastener_cui",
+     "n_v32_workshop_fastener_surub",
+     "n_v1_11_lipici",
+     "n_v1_11_ata"
+    ],
+    "g2": [
+     "n_v24_school_supplies_rigla",
+     "n_v88_school_raportor",
+     "n_v24_time_day_ceas",
+     "n_vdr_apometre"
+    ],
+    "g3": [
+     "n_v30_clothing_outer_geaca",
+     "n_v1_8_rucsac",
+     "n_v23via_penar",
+     "n_v1_9_cort"
+    ],
+    "g4": [
+     "n_v88_cleaning_matura",
+     "n_v32_garden_soil_lopata",
+     "n_v32_garden_soil_grebla",
+     "n_v1_12_sapa"
+    ]
+   },
+   "id": "cx_viata_de_roman_382",
+   "order": [
+    "n_v23via_penar",
+    "n_v1_9_cort",
+    "n_v1_12_sapa",
+    "n_v32_garden_soil_lopata",
+    "n_v88_cleaning_matura",
+    "n_v24_time_day_ceas",
+    "n_v30_clothing_outer_geaca",
+    "n_v32_garden_soil_grebla",
+    "n_v1_11_ata",
+    "n_vdr_apometre",
+    "n_v1_11_lipici",
+    "n_v32_workshop_fastener_surub",
+    "n_v32_workshop_fastener_cui",
+    "n_v88_school_raportor",
+    "n_v24_school_supplies_rigla",
+    "n_v1_8_rucsac"
+   ],
+   "source": "ai",
+   "status": "approved"
   }
  ],
  "contexto": [
@@ -19173,42 +19230,42 @@
  "meta": {
   "counts": {
    "alchimie": 83,
-   "conexiuni": 252,
+   "conexiuni": 253,
    "contexto": 266,
    "lant": 126
   },
   "id_high_water": {
    "alchimie": 107,
-   "conexiuni": 381,
+   "conexiuni": 382,
    "contexto": 378,
    "lant": 249
   },
   "last_import": {
    "allocated": [
     {
-     "category": "gastronomie",
-     "game": "lant",
-     "id": "lt_gastronomie_249",
-     "raw_ref": "lant[0]"
+     "category": "viata_de_roman",
+     "game": "conexiuni",
+     "id": "cx_viata_de_roman_382",
+     "raw_ref": "conexiuni[0]"
     }
    ],
    "categories": [
     {
      "bindings": {
-      "candidate_sha256": "sha256:b0da3bea700a2ce4d6c25d201d74ef71ffce0b5e0cfd9ec0fbf4ff6b548775f3",
-      "factual_reviewer": "v4_c11_factual",
-      "factual_sha256": "sha256:52e7a937a311ea4e9e0d8aa89c22c454d44fa002f4f0dc4e59d730c0c4b6940e",
-      "quality_reviewer": "v4_c11_quality",
-      "quality_sha256": "sha256:0ae3626ac6a1925db3786316e489b41105ab20fee17daa7e854a0c50e28db7f9"
+      "candidate_sha256": "sha256:a198a4906358c977e373452b059622514c4be577974afebe33c3d23410780039",
+      "factual_reviewer": "v4_c12_factual",
+      "factual_sha256": "sha256:3f7691d2d6783c800b38c4ed7ba3f490364144585b071d4118cfd67b2b44d7f3",
+      "quality_reviewer": "v4_c12_quality",
+      "quality_sha256": "sha256:811dbac8efc7beabdc4ee6cea3d61a31aa8bea4c7979225a890051ea2bf35dd4"
      },
-     "category": "gastronomie",
+     "category": "viata_de_roman",
      "exclusions": []
     }
    ],
    "kg_sha256": "8b8addd26cdc3aa5972a97368196e9593d5ef38477625f2fba988845e10879d4",
    "operator": "native-pack-only-import-v1",
    "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
-   "source_pack_sha256": "4c6108f7dbf7c40513855fde0c4c358dd5bc8b80275662f75599171583865e42",
+   "source_pack_sha256": "c7ce2da27b80f683392696bdb212fc7e80d24a5cc834f343454fb7a51a29f64c",
    "write": true
   },
   "note": "Curated games pack (ADR-0011): AI-generated, fact/quality-verified batch + hand-crafted starters. Only status=approved items are served.",
