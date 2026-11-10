@@ -15719,6 +15719,63 @@
    ],
    "source": "ai",
    "status": "approved"
+  },
+  {
+   "category": "stiinta",
+   "difficulty": "normal",
+   "group_labels": {
+    "g1": "Mamifere care trăiesc în pădure",
+    "g2": "Plante de grădină crescute din bulbi",
+    "g3": "Animale nevertebrate",
+    "g4": "Fenomene atmosferice cu apă în stare solidă"
+   },
+   "groups": {
+    "g1": [
+     "n_v33_forest_animal_cerb",
+     "n_v1_11_mistret",
+     "n_v33_forest_animal_veverita",
+     "n_v33_forest_animal_lup"
+    ],
+    "g2": [
+     "n_v1_12_lalea",
+     "n_v1_12_zambila",
+     "n_v1_12_crin",
+     "n_v42vdr_ghiocel"
+    ],
+    "g3": [
+     "n_v1_8_melc",
+     "n_v1_10_rama",
+     "n_v1_8_fluture",
+     "n_v1_13_furnica"
+    ],
+    "g4": [
+     "n_v24_weather_precipitation_zapada",
+     "n_v24_weather_precipitation_grindina",
+     "n_v1_13_viscol",
+     "n_v1_13_chiciura"
+    ]
+   },
+   "id": "cx_stiinta_381",
+   "order": [
+    "n_v33_forest_animal_lup",
+    "n_v33_forest_animal_veverita",
+    "n_v1_13_furnica",
+    "n_v33_forest_animal_cerb",
+    "n_v1_12_lalea",
+    "n_v1_8_fluture",
+    "n_v42vdr_ghiocel",
+    "n_v1_13_viscol",
+    "n_v24_weather_precipitation_zapada",
+    "n_v1_12_zambila",
+    "n_v1_10_rama",
+    "n_v1_12_crin",
+    "n_v1_13_chiciura",
+    "n_v1_8_melc",
+    "n_v1_11_mistret",
+    "n_v24_weather_precipitation_grindina"
+   ],
+   "source": "ai",
+   "status": "approved"
   }
  ],
  "contexto": [
@@ -19106,42 +19163,42 @@
  "meta": {
   "counts": {
    "alchimie": 83,
-   "conexiuni": 251,
+   "conexiuni": 252,
    "contexto": 266,
    "lant": 125
   },
   "id_high_water": {
    "alchimie": 107,
-   "conexiuni": 380,
+   "conexiuni": 381,
    "contexto": 378,
    "lant": 248
   },
   "last_import": {
    "allocated": [
     {
-     "category": "film_tv",
+     "category": "stiinta",
      "game": "conexiuni",
-     "id": "cx_film_tv_380",
+     "id": "cx_stiinta_381",
      "raw_ref": "conexiuni[0]"
     }
    ],
    "categories": [
     {
      "bindings": {
-      "candidate_sha256": "sha256:e156d26e7f955e9f6456bacae4830c0f7d5dcfa694d5c2fe359d38137ead64d9",
-      "factual_reviewer": "v4_c4_l1_factual_a",
-      "factual_sha256": "sha256:139dd862439cdbfa0068b2489423590b593e97fee94bc159ca1177ac7fe31118",
-      "quality_reviewer": "v4_c4_l1_quality_a",
-      "quality_sha256": "sha256:7579dfd3fd4f0740c293c2fc22737442cd37a741c5b53290df71366c76d5171a"
+      "candidate_sha256": "sha256:17b58a93d692f5f7b1695de171e65eb68bb7a26446e64b95f2d374a7cff0fd9c",
+      "factual_reviewer": "v4_c10_factual",
+      "factual_sha256": "sha256:2a42aac222afc5c8518632ba893550cfc2df0a8c45a2692685aba7f7f90e5bdf",
+      "quality_reviewer": "v4_c10_quality",
+      "quality_sha256": "sha256:b380760ac4031d25010a40ad8cf3e6f15c37e1009bdd5dd7e6c3831ec81092e2"
      },
-     "category": "film_tv",
+     "category": "stiinta",
      "exclusions": []
     }
    ],
    "kg_sha256": "8b8addd26cdc3aa5972a97368196e9593d5ef38477625f2fba988845e10879d4",
    "operator": "native-pack-only-import-v1",
    "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
-   "source_pack_sha256": "b69e06427df10168c88291e4efdf456b157db6f0d4f15440f9b80ab2ca9a921b",
+   "source_pack_sha256": "99782a238dfc1c8e8912202d4836cad0a92c7c5a24bbe16cea80d2d2a2d2b3eb",
    "write": true
   },
   "note": "Curated games pack (ADR-0011): AI-generated, fact/quality-verified batch + hand-crafted starters. Only status=approved items are served.",
