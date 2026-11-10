@@ -19282,6 +19282,26 @@
    "start": "n_v24_home_appliances_aragaz",
    "status": "approved",
    "target": "n_v30_kitchen_utensil_lingura"
+  },
+  {
+   "category": "societate",
+   "difficulty": "usor",
+   "id": "lt_societate_250",
+   "optimal": 2,
+   "source": "ai",
+   "start": "n_v1_11_hartie",
+   "status": "approved",
+   "target": "n_v17soc_posta_romana"
+  },
+  {
+   "category": "stiinta",
+   "difficulty": "normal",
+   "id": "lt_stiinta_251",
+   "optimal": 3,
+   "source": "ai",
+   "start": "n_v4sti_metal",
+   "status": "approved",
+   "target": "n_v29_clothing_everyday_camasa"
   }
  ],
  "meta": {
@@ -19289,31 +19309,48 @@
    "alchimie": 83,
    "conexiuni": 254,
    "contexto": 266,
-   "lant": 126
+   "lant": 128
   },
   "id_high_water": {
    "alchimie": 107,
    "conexiuni": 383,
    "contexto": 378,
-   "lant": 249
+   "lant": 251
   },
   "last_import": {
    "allocated": [
     {
+     "category": "societate",
+     "game": "lant",
+     "id": "lt_societate_250",
+     "raw_ref": "lant[0]"
+    },
+    {
      "category": "stiinta",
-     "game": "conexiuni",
-     "id": "cx_stiinta_383",
-     "raw_ref": "conexiuni[0]"
+     "game": "lant",
+     "id": "lt_stiinta_251",
+     "raw_ref": "lant[0]"
     }
    ],
    "categories": [
     {
      "bindings": {
-      "candidate_sha256": "sha256:7c21cd817e1d76cd67afe6e9e9350a1bb3b55d8ea67be54230f6818a281e0558",
-      "factual_reviewer": "v4_c14_factual",
-      "factual_sha256": "sha256:b73f576c855670d22079226a8e00ab9bc47f28f7e421c7edba1e633f511381b4",
-      "quality_reviewer": "v4_c14_quality",
-      "quality_sha256": "sha256:830889566a273f48d0e786f1a6fccfe8cf747c211379df252f79943f85568bed"
+      "candidate_sha256": "sha256:67fed881f3e81c9af2b80a7e39a50e814ef93b9e1ea2810dcfbc7906800a01de",
+      "factual_reviewer": "v4_c15_factual",
+      "factual_sha256": "sha256:b44f7f69b5853e98c0f033e0277a38aadfa75f030e337f876b236a4b9dc2cdc1",
+      "quality_reviewer": "v4_c15_quality",
+      "quality_sha256": "sha256:dfd7700276ad8378d47d16c2d6cb44ef65c3eda35da85de85759738463f6aa1b"
+     },
+     "category": "societate",
+     "exclusions": []
+    },
+    {
+     "bindings": {
+      "candidate_sha256": "sha256:a261a5988e6c440ab745db511df3d4d87441728810f24e6d08abd33bb5ae066c",
+      "factual_reviewer": "v4_c15_factual",
+      "factual_sha256": "sha256:a0278c27f406973fd64e3e254d3cba33d68815c03d88f92e9f7bb1201e572734",
+      "quality_reviewer": "v4_c15_quality",
+      "quality_sha256": "sha256:b834a16306668a01412f3617cfb4fb17e531e1521724600b903e736622ddbf01"
      },
      "category": "stiinta",
      "exclusions": []
@@ -19322,7 +19359,7 @@
    "kg_sha256": "8b8addd26cdc3aa5972a97368196e9593d5ef38477625f2fba988845e10879d4",
    "operator": "native-pack-only-import-v1",
    "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
-   "source_pack_sha256": "74016c6424d3c8c1c60120f107ff66e988fcad3e7a1843e488cb3069dc2d34aa",
+   "source_pack_sha256": "70a9b92b0b93f865a28d25c55b997d26a2234db33f0f60210a356b6122bdfe88",
    "write": true
   },
   "note": "Curated games pack (ADR-0011): AI-generated, fact/quality-verified batch + hand-crafted starters. Only status=approved items are served.",

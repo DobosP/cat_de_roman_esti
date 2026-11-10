@@ -1,0 +1,82 @@
+{
+  "actual_inspected_readset": {
+    "path": "/tmp/cat-v4-c9-initial-factual/final-extensions/readset.json",
+    "sha256": "bb26142e2cf3b7402eeb2fc040ba5dae197adb41ff59f13af3ed95c2c8b69b20"
+  },
+  "counts": {
+    "additions": 49,
+    "affected_books": 27,
+    "all68_merged_recipe_entries": 521,
+    "archived_core_recipes": 472,
+    "archived_cores": 68
+  },
+  "current_runtime_fingerprint": {
+    "path": "/home/dobo/work/_temp/content__v4/releases/c9/rail-proposals/extensions/runtime-auditor-fingerprint.json",
+    "sha256": "6ce6887899cba48f8adec0b467c77b7b5b822e354609c376a8c758f1d0c6649c"
+  },
+  "dependency_resolution_receipt": {
+    "path": "/home/dobo/work/_temp/content__v4/releases/c9/rail-proposals/extensions/dependency-resolved.json",
+    "sha256": "f7e72fb45a3256aea285e34e2e7eecd8214fc6daee083bd07b1cfb1692c19769"
+  },
+  "entry": {
+    "path": "/home/dobo/work/_temp/content__v4/releases/c9/rail-proposals/extensions/final-review-entry.json",
+    "sha256": "f80818b32d72750a2d91ccf671a8a46a2366a695abc2dbc8116cc41ee02cff6b"
+  },
+  "initial_manifest": {
+    "path": "/home/dobo/work/_temp/content__v4/releases/c9/rail-initial/factual/manifest.json",
+    "sha256": "5ad903b053edbb9e217b818d85dfcd1a289c4e3a5fa144829b5db819ba90446e"
+  },
+  "initial_review": {
+    "path": "/home/dobo/work/_temp/content__v4/releases/c9/rail-initial/factual/extensions.json",
+    "sha256": "508218351e50a8d57119612416be5f6e98924f5ee68017bb72704169c9aa8483"
+  },
+  "kind": "v4-c9-extension-final-factual-signature-v1",
+  "limits": "Independent exact-input and pure-data checks of this bound native extension receipt. The native audit/proposal/installer/export was not rerun. Its assertions are attributed to the hash-bound native result, with all current source/runtime inputs checked. This is not an Ext install, authority registration/default-rail pass, source freeze, production, C9 Lan ordinary HTTP/filter selection, full gate, UI, whole-KG alcohol-free or landing qualification. No new world item, source/body verification, dictionary, alias, degree or owner-hold authority is granted.",
+  "output": {
+    "bytes": 4003,
+    "path": "/home/dobo/work/_temp/content__v4/releases/c9/rail-final/factual/extensions.json",
+    "sha256": "d7a26a5f0d078a86cc4c439862d2fc424d2e7a616ab37555e5560b28d1e5e70f",
+    "staged_path": "/tmp/cat-v4-c9-initial-factual/final-extensions/signed/extensions.json",
+    "verdict": "accept"
+  },
+  "prior_INITIAL_and_QW_finals_preserved": true,
+  "proof": {
+    "path": "/tmp/cat-v4-c9-initial-factual/final-extensions/proof.json",
+    "sha256": "d1a8d21265c69489d4542d3589ff86e1c4f02e4b10ca6d80502f90fa98009824"
+  },
+  "reviewer": "v4_c9_initial_factual",
+  "role": "factual",
+  "runtime_metadata_deltas": {
+    "go-backend/internal/content/bundled.json": {
+      "current_sha256": "dc4ff2ff53e1580e97feea72428cfb8b2c849cbb1e698df80fcbd063c2020a4a",
+      "preinstall_signed_audit_sha256": "e153068cf972b9a6186d8d595630d761effc568aefcca6d13ca0afbb4d4a9062"
+    },
+    "go-backend/internal/content/digest.go": {
+      "current_sha256": "b6f6acc0e1531382f6d05f31cb8b901af79d8d785efd5de695bfa73fdae80706",
+      "preinstall_signed_audit_sha256": "f6e474bd0a7b8295c615aa0be610517e9bc7c818615d88219775a6b760a0038d"
+    },
+    "go-backend/internal/contentbuild/build.go": {
+      "current_sha256": "3d4887fa22fa0d3f0d74e5a4056b33ba2d9e593d7bd0c0a32683990432af2fac",
+      "preinstall_signed_audit_sha256": "d3ad4c53e8f51f950e11ac32f041c4e0d82bb0d706c696c5a7d8a574a78433af"
+    }
+  },
+  "signature": {
+    "current_peer_extension_final_read": false,
+    "declaration": "I independently inspected these exact current extension inputs and reached the scoped factual accept in the seven-key artifact. No peer current extension FINAL was read, no previous reviewer issuance/verification writer was executed, and no native audit/proposal/install/export command was rerun. I halt after this signature.",
+    "first_peer_extension_final_read_at": null,
+    "signature_kind": "same factual reviewer declaration with immutable raw SHA256 bindings; no external cryptographic identity claim",
+    "signed_by": "v4_c9_initial_factual"
+  },
+  "signed_at": "2026-11-10T15:46:51.083213Z",
+  "source": {
+    "base_commit": "8f9ff9188129a3026f1ea3bbd938dc2fc21a16af",
+    "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v4/go-backend/internal/contentrails/sources/authored-v24.json",
+    "sha256": "3c0541aba0754bbc65b3ffcc7657c9f90adb213e27981907540bd4dc132a1b5c",
+    "version": 24
+  },
+  "stage": "FINAL_EXTENSIONS_ONLY",
+  "verification_program": {
+    "path": "/tmp/cat-v4-c9-initial-factual/final-extensions/verify.py",
+    "sha256": "4f651b11e59a78b7766b27a4d105000476ebb13a8f4a0526af32754b50f2347e"
+  }
+}

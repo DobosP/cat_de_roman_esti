@@ -29,3 +29,5 @@ Case-count changes remain NEEDS-OWNER. [ADR-0226](../adr/0226-content-loop-v4.md
 other standing rulings. The 79 held Conexiuni boards remain locked. Bare *sucitoare* and
 *ii*/*iei* for *Ie* remain prohibited. Mănăstire and Sucitor require Paul's explicit go.
 Minors are excluded from name entries; living-person proposals wait here.
+
+- **Foundation policy-host refusal, 2026-11-10.** `foundation.wikimedia.org` is dropped for this V4 run after robots refused `/wiki/Special:MyLanguage/Policy:Wikimedia_Foundation_User-Agent_Policy` before its GET. This applies the standing refusal rule alongside the policy-only grant in [ADR-0228](../adr/0228-policy-only-source-hosts.md). The earlier permitted Romanian and English terms captures remain evidence. Full source-client configuration approval and remaining policy closure are pending. Execution receipt `/home/dobo/work/_temp/content__v4/tooling/m2-policy-reader-v2/execution.json`, SHA-256 `77c1969064edbbfa6b17455858d9800fc4c60b538268a69dc207690d72362afd`.

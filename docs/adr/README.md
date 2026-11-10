@@ -223,3 +223,5 @@ Parallel lanes also allocated0188/0189 independently. All four full-filename bod
 - [0226](0226-content-loop-v4.md) — V4 in-chat Codex content loop, independent roles, standing source policy, local Git landings.
 
 - [0227](0227-owner-qualified-test-pin-delegation.md) — owner accepts the exact C1–C5 prefix and delegates future separate, independently regenerated, fully gated and freshly reviewed test pins; all other owner boundaries remain.
+
+- [0228](0228-policy-only-source-hosts.md) — Paul approves three policy-only hosts for primary terms and licence inspection under the existing V4 source controls.

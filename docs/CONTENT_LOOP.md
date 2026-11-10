@@ -138,6 +138,11 @@ response and reuse it. Record exact URLs, body SHA, time and first-fetch role. D
 let redirects add hosts. Only cite receipt metadata and a brief paraphrase in tracked docs.
 dexonline legacy captures and new GETs are allowed with these controls.
 
+[ADR-0228](adr/0228-policy-only-source-hosts.md) additionally permits policy-only GETs to
+`foundation.wikimedia.org`, `creativecommons.org` and `docs.github.com` for primary terms
+and licences. These calls use role `policy` and the same cache, UA, robots, rate and refusal
+controls. Content research uses the ADR-0226 host grant.
+
 Obey robots and terms, including crawler directives, `Content-Signal` and stricter crawl
 delay. A 429 or 5xx parks the host for one hour (or longer if Retry-After requires it).
 A policy refusal drops that host for the run and adds one owner queue entry. Keep working on

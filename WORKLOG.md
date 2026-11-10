@@ -2797,3 +2797,93 @@ Science383 normal-listen seed0 scored all four groups, zero mistakes, win and ex
 Only science advances reviewed→qualified→landed. Journal2850IDs/3077events/13landed preserves the other2849 rows and all803 protected/87owner/79Conexiuni holds/sixC9 retry guards. Reparsed lineage covers414 full constructions and1325quads, with maximum5boardtiles/2quadtiles, projected reuse3 and predecessor287overlap0. Brown-bear ordinary sense, typical human anatomy, secondary-source notices, modest-greu calibration and unmeasured recognition remain explicit. Failed language remains terminally rejected without FQ/import or unchanged reroll.
 
 C7 raw gate trees were pruned after 104 retained files verified. Superseded old e5 compiled producer bytes and reviewer-owned expanded oracle copies were pruned under their original receipts. Original pruned bytes are unavailable, with retained manifests recording history and Git/pinned reconstruction supporting continuation. C8 owning raw gate trees remain retained at qualification.
+
+## V4 C9 native v24 staging and policy-host grant, 2026-11-10
+
+Valid until: exact-SHA qualification changes this staging scope — then treat as history.
+
+C9 adds two reviewed existing-KG Lanț definitions. Hârtie→Poșta Română is
+`lt_societate_250`, societate/usor, par 2, score 85 and rank 8. metal→Cămașă is
+`lt_stiinta_251`, stiinta/normal, par 3, score 80 and rank 20. Both are ranked eligible.
+Source-backed raw judgments and fresh same-role canonical four-key reviews bind child
+safety and two genuine native promotes. The private promote recommendations were
+unapplied. Native strict application has SHA-256
+`6fb8f84ff5ad872d35f606ea02b8676c126d3b7cd56f1b8226d882844fa68ba2`.
+
+The author packet uses P7 `26ebaf39`, canonical installation uses P8 `8f9ff918`,
+and the source series starts from C8 record `94e8d175`. The author evaluated 134
+genuine hypotheses in 27 domains and 25 of 29 deficient cells. Sixty-five are
+parked, 67 rejected and two independently reviewed. The 72,715 mechanical endpoint
+pairs remain context. Root rechecked 17 registry tests and 442 locked inputs,
+reconciled the exact two-event C8 suffix, and appended 274 events. Staging has
+2,984 IDs, 3,351 events and thirteen landed boards from C1–C8. All 2,850 prior
+current rows, 803 protected rows, 87 owner holds, 79 Conexiuni locks and six earlier
+C9 retry guards remain exact. The proposal was relocated byte-exact to `c15/registry`.
+
+Blind critics solved the postal route in two moves and the clothing route in four,
+within par+2. Prospective evidence retains 15/56 simple paths and 45/180 first-hit
+winning walks. Whole bounded node overlaps involve 51/25 prior stock routes, with
+17/6 old routes sharing edges. Generic captions, weaker door/material detours,
+incidental alcohol in broad menus, recognition and band calibration remain explicit
+limits. Child safety is bound to the reviewed neutral objectives. Full forward KG
+menus precede actual compiled runtime-filter and ordinary HTTP checks.
+
+Canonical authored-v24 has SHA-256
+`3c0541aba0754bbc65b3ffcc7657c9f90adb213e27981907540bd4dc132a1b5c`,
+with parent v23 `27d762e9b10af15a325d4f52a541416d71665add1e3ba4c2fcac187b647e0d60`
+and base P8. Runtime inventory grows from 160 to 161 solely through authored-v24.json.
+Nine source bindings and three strict auditors verify. Quick's 85 authored boards,
+the world's 352 recipes/252 concepts and 49 extensions across 68 books retain their
+earlier semantic content. Fresh genuine initial and same-role bound final reviews
+close all three native rails. Quick/world installers closed before extensions.
+
+An early extension proposal returned the actual stale-quick-pack guard. Mechanical
+quick-literal rebind and native interim export resolved the dependency. A fresh
+extension proposal/audit and independent same-role finals then closed it. The original
+refusal is retained. Automatic approval review initially rejected the final combined
+local operation for missing user authority, before process creation. The complete
+original USER attachment, ADR-0226 owner log and accepted install/rails steps were
+provided. Re-review accepted the same combined operation before execution. Evidence
+is in `releases/c9/original-user-authority-evidence.json` and resolution receipt
+`f447702419ed1ec80c46449b6788e360931c7ab65eda70c2cd71fb2bbde0d820`.
+
+Final installed manifest is
+`6bed7335edf7e336bdea217caac9bdc80ece09b08ca94c2cd10106ba134b20de`.
+The sealed bundle is `627a75212f1d5d2fc1c606cdff3715a832b15a8978864cb1562ca07506819339`.
+Default all --check, validate, export --check, native ops, rank, derive and mobile
+checks passed. The native source-check receipt is
+`e2f68c52fc2fc1337e8f694c46f4c9d7f28118aa6b7543ef709752d4c3fbfb7f`.
+Final handoff `8592e0b01ab53999bc8fd597cbeb33f51ad35cc2726a720eba4bfc0808f2a34f`
+binds actual commands, environments, output hashes and 48 native-data files.
+All 729 prior pack rows, 336 derived cores, KG, seven components and 17,495 captions
+remain exact. C9 staging has 731 records, 724 approved, seven pending and 542 eligible.
+Lanț is 128 total, 126 approved and 126 eligible. Landed C8 remains 126/124/124.
+
+All Go tests and five seed fixtures retain P8 bytes at this source checkpoint.
+Compiled ordinary selection, filtered menus, HTTP wins/reloads, independent 1,206-case
+corpus and seed regeneration, separate delegated expectation pins and exact-SHA
+qualification follow source freeze. The native staging is separate from landed C8.
+
+C8 product `8f9ff918` and independently reviewed record `94e8d175` remain local-main
+truth. After rechecking 104 retained files, Root pruned 2,393,964,544 allocated bytes
+of owned raw gate trees. Receipt
+`4651d150d20b062aaf4fcc1ea88eb97b6153cd18dfc367e35a9343b3935df782` records the pruning.
+Those raw trees are unavailable. Source packets, compact receipts, canonical sources
+and images, and reconstruction instructions remain. Three derived C15 paths were
+also pruned after current native successors, all 17,495 caption values and native
+checks verified. Phase-A receipt
+`1550657ff3fc0076a9f22061e8b17d8214fca98b78b8e1970675d76ab1127aa5` records 15,302,656
+allocated bytes removed. The old caption executable bytes are unavailable. Exact old
+ops bytes remain in original C16, and the old plain preflight caption bytes remain
+recoverable from their verified gzip. Original author/source packets, baselines,
+dossiers and signed judgments remain. Phase-B duplicate pruning awaits frozen-Git keepers.
+
+Paul approved three additional policy-only hosts under the existing source controls.
+ADR-0228 quotes the exact question and answer. Owner record has SHA-256
+`f23c4a09010719dbc0771186c4a043f7cf233d4620ed2bc1dd3d4bec4eef3261`.
+Bounded private callers used the unchanged manual client after independent review.
+Six primary policy bodies were captured. Robots refused the Foundation
+Special:MyLanguage UA-policy path before its GET, dropping that host for this run
+and adding one owner-queue entry. The permitted English terms capture preceded the
+refusal. DEX stays dropped. Source-client policy/configuration review and exact
+SOURCES approval remain pending.

@@ -1,0 +1,66 @@
+{
+  "actual_inspected_readset": {
+    "path": "/tmp/cat-v4-c9-initial-factual/final-quick-world/readset.json",
+    "sha256": "14e31544405cd0c843c36912d36f51de0e911fad8b943a1c27d8b743e506b980"
+  },
+  "artifact_composer": {
+    "path": "/tmp/cat-v4-c9-initial-factual/final-quick-world/sign.py",
+    "sha256": "ea8c3bc17c21525fd4e0eee57c5775ed912603c1705f10546fdf73bcceb4ed37"
+  },
+  "extension_final_created": false,
+  "initial_entry_sha256": "4605325f88130bd3a407c546442413e5dc7ecd1949e36c8fee36b0f560be9e5f",
+  "initial_manifest": {
+    "path": "/home/dobo/work/_temp/content__v4/releases/c9/rail-initial/factual/manifest.json",
+    "sha256": "5ad903b053edbb9e217b818d85dfcd1a289c4e3a5fa144829b5db819ba90446e"
+  },
+  "kind": "v4-c9-quick-world-final-factual-signature-v1",
+  "limits": "Same factual actor inspecting exact INITIAL -> proposal -> native audit -> current input bindings. No native audit or proposal was rerun; audit claims are attributed to the bound native receipts and independently checked for source/readset and mechanical consistency. No installer, native write, export, build, gate, HTTP serving qualification, C9 Lan selection, network fetch, extension final or landing is claimed.",
+  "outputs": {
+    "quick": {
+      "bytes": 2511,
+      "entry_sha256": "b2bcb8c6043760c3b043b34f37acabab3fec2058ee6a517cfd4eabf4de50a129",
+      "initial_sha256": "e28ec52189b7ced8567e2239fdcd494cf39a293f750b24ab4f71a2fb0b3a3da8",
+      "path": "/home/dobo/work/_temp/content__v4/releases/c9/rail-final/factual/quick.json",
+      "sha256": "8baacc34663e959b7c209ebe525a3ce0a50bd8e0e01315bec55fecf9580769c3",
+      "staged_path": "/tmp/cat-v4-c9-initial-factual/final-quick-world/signed/quick.json",
+      "verdict": "accept"
+    },
+    "world": {
+      "bytes": 2804,
+      "entry_sha256": "46abf566fb68645af3a9370dc63161bf1ba3d6bf24fbd3adda07c1d4c7ec3a32",
+      "initial_sha256": "1fb58c6b06cac2ea47df09b30522b1f1d6f8c0c0a059fa59620ad38846a5552e",
+      "path": "/home/dobo/work/_temp/content__v4/releases/c9/rail-final/factual/world.json",
+      "sha256": "4b1dcd98ed5299b73693b571369bde677b3bf29bc6b12d228516af44205784ee",
+      "staged_path": "/tmp/cat-v4-c9-initial-factual/final-quick-world/signed/world.json",
+      "verdict": "accept"
+    }
+  },
+  "proof": {
+    "path": "/tmp/cat-v4-c9-initial-factual/final-quick-world/proof.json",
+    "sha256": "943ef882e6c823aed0db9501660f5f739d9ae4d17644f76c273b804092a3639b"
+  },
+  "reviewer": "v4_c9_initial_factual",
+  "role": "factual",
+  "signature": {
+    "declaration": "I personally reviewed these exact proposals, native audits, own INITIALs and current source/runtime bindings and independently reached both scoped factual accepts. No quality FINAL was read, and no other-role writer was executed. I halt after these two decisions.",
+    "first_peer_final_read_at": null,
+    "quality_final_read": false,
+    "signature_kind": "same reviewer role declaration plus immutable raw SHA256 bindings; no external cryptographic identity claim",
+    "signed_by": "v4_c9_initial_factual"
+  },
+  "signed_at": "2026-11-10T14:57:40.198763Z",
+  "source_scope": {
+    "canonical_source24_sha256": "3c0541aba0754bbc65b3ffcc7657c9f90adb213e27981907540bd4dc132a1b5c",
+    "go_tool_binary_not_locally_resolved_or_executed": true,
+    "native_runtime_files": 161,
+    "producer_frame_files": 127,
+    "quality_initial_descriptor_checked_as_metadata_only": true,
+    "source_bindings": 9,
+    "strict_auditors": 3
+  },
+  "stage": "FINAL_QUICK_WORLD_ONLY",
+  "verification_program": {
+    "path": "/tmp/cat-v4-c9-initial-factual/final-quick-world/verify.py",
+    "sha256": "88c503ed908a9a0db92099e0b4d077cca2389f443ceaf708d6f1ab1db917999c"
+  }
+}
