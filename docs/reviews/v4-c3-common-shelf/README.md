@@ -10,7 +10,7 @@ The Conexiuni author examined the final 23 L1 cells. Eight drafts yielded one
 paired accept and seven individual drops, with the exact source and reasons retained.
 Muzeu resumed the original C2 hypothesis through its real prerequisite receipt.
 Its blind critic committed five openings before feedback and won with the third
-adaptive guess. Two original openings were within two raw directed hops.
+adaptive guess. One of the original five openings was within two raw directed hops.
 Every immutable native feedback prefix reproduced byte for byte on current source.
 
 Both boards received separate factual and quality judgments, current native dossier
