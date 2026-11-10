@@ -2543,3 +2543,43 @@ Valid until: the next KIT_BUMP — then treat as history.
 - Core-v1.12 stays published but unadopted (roedu-ui ADR-0036).
 - `shared-go/authcore` unchanged (Social hash pin). Follow-ups: owner moves the content loop's host Go to
   1.27.3; Teacher stays on go1.27.1 (ADR-0033); redeploy is Paul's decision. Nothing deployed.
+
+## 2026-11-10 — C6 exact qualification and local landing record
+
+Valid until a later product or record supersedes these source-bound facts — then treat as history.
+
+Operator `agent:codex (PROGRAM E8)` landed product `cc905fbb1908c2368cf7837195cb98819dcac48b` with `git merge --ff-only cc905fbb1908c2368cf7837195cb98819dcac48b` from clean main `75b1b9bd`. Main was clean afterward.
+
+The accepted commands ran from `/home/dobo/work/_worktrees/cat_de_roman_esti/content__v4-review-c6`.
+
+```bash
+GATE_OPERATOR=agent:codex bash scripts/gate.sh build --sha cc905fbb1908c2368cf7837195cb98819dcac48b --parallel 4
+
+GATE_OPERATOR=agent:codex bash scripts/gate.sh unit --sha cc905fbb1908c2368cf7837195cb98819dcac48b --parallel 4
+
+bash scripts/landing/run-4i.sh --repo /home/dobo/work/_worktrees/cat_de_roman_esti/content__v4-review-c6 --baseline 1eb2e7682675bb967b11e267b965b7bec2cd9eef --sha cc905fbb1908c2368cf7837195cb98819dcac48b --build-dir /home/dobo/work/_temp/content__v4-review-c6/gates/cat_de_roman_esti --go-cache /home/dobo/work/_temp/content__v4/go-cache --out /home/dobo/work/_temp/content__v4/releases/c6/landing-review/4i
+
+env -u GATE_OPERATOR python3 -I scripts/gui-full-runner.py --sha cc905fbb1908c2368cf7837195cb98819dcac48b --parallel 4
+
+python3 -IB scripts/landing/play.py --baseline 75b1b9bde5a03d88040d32c04a2cd1bb52881bd5 --sha cc905fbb1908c2368cf7837195cb98819dcac48b --build-dir /home/dobo/work/_temp/content__v4-review-c6/gates/cat_de_roman_esti --base-url http://127.0.0.1:18946
+```
+
+Full launched once at `2026-11-10T08:44:48.152546+00:00`. The successful serial 4i receipt supersedes the separate first-staging failure.
+
+The build result hash is `b17e1a2ffe9cb5f9326176dd251dfa80f11b1d983ec9b1ebbf624a2308555674`.
+
+The unit result hash is `07e05a052cf29659431ab5d71b6f4cd03313b34fc18bd59e02922697ffa6a212`.
+
+The fresh 4i result hash is `b71170a58d51fb3b435ce09e8dace2259f71e6ad1bdbc98292428113b49dab1d`.
+
+The full result hash is `f8ca307deabd25c944b146fac636f1c4a23c947186a99ff46fd3ca8a85210385`.
+
+All 11 build checks, 27 unit checks, 10 fresh 4i checks and 37 full checks passed. All 859 browser cases passed with zero skips, retries or flaky outcomes. CSP violations were 0 current and 0 legacy. Fresh PostgreSQL accounts 12 and HTTP API 302, parity 1,206, nine PNGs and all 17 baseline outcomes passed. The actual image and supervisor cleanup were verified.
+
+Fresh independent GO `911601a4bbfb6beb607cd4f8f9afd0eda15d269506961ff9c47cb0a4e20de76b` and evidence manifest `70029e35b42f618ebe16c4fb7a2bd841853ad09921f45af2db9566792815ff61` bind 115 verified files. The reviewer authored or judged no C11 item. ADR-0227 has source hash `e4958e676c9f7985d7a4de9964c150d951f678649cd3435c553e34ab83718e94`. Its future separate-pin conditions are satisfied by closed native gates, independent oracle regeneration and the captured 1,206-case corpus. The 69 oracle inputs and scenario identities and counts remain exact.
+
+Both three-move routes Aragaz→Cratiță→Supă→Lingură and Aragaz→Tigaie→Castron→Lingură won and reloaded with exact generic captions. Seven overlap cases involving selected shortest nodes differ from the 44 overlaps involving all 19 bounded nodes. The maximum is 11 nodes and 15 edges at Chefi→Jamila. Selected shortest edges have zero overlap with prior bounded routes, and selected shortest nodes have zero overlap with prior shortest DAGs. Generic captions, weaker pan-to-bowl inference and optional uncaptured Jamila context remain limited notes.
+
+Stale owned ignored bytecode caused the first build to stop before checks. Overlapping 4i asset staging with unit mirror repopulation caused a precheck failure for missing `legacy/.vite`. Owned bytecode and staging were corrected. The final build 11, unit 27, fresh 4i 10 and full 37 are green with unchanged assertions and gates. All sessions ended and owned gate resources were cleaned up. C6 raw gate trees remain retained. Verified browser receipt compression and earlier C1–C5 pruning remain separately recorded history.
+
+The product prefix contains eleven boards, comprising seven Conexiuni, one Cald and three Lanț. KG words, names, edges, forms and puzzles are unchanged. C6 has 727 pack rows with 720 approved, seven pending and 538 eligible. Lanț has 126 total, 124 approved and 124 eligible. Conexiuni has 252 total and 90 eligible. Cald has 266 total, 264 approved and 256 eligible. Alchimie has 83 total, 80 approved and 68 eligible. Quick remains 421 total and 418 selectable. Only the selected registry row advances from reviewed through qualified to landed. The other 2,806 rows, all 803 protected rows, 87 owner holds, 79 Conexiuni locks and six C9 retry guards remain exact. C12/C13 proposals and C7 staging remain separate.
