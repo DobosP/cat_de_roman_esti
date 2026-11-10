@@ -19158,6 +19158,16 @@
    "start": "n_v20geo_jiu",
    "status": "approved",
    "target": "n_marea_neagra"
+  },
+  {
+   "category": "gastronomie",
+   "difficulty": "normal",
+   "id": "lt_gastronomie_249",
+   "optimal": 3,
+   "source": "ai",
+   "start": "n_v24_home_appliances_aragaz",
+   "status": "approved",
+   "target": "n_v30_kitchen_utensil_lingura"
   }
  ],
  "meta": {
@@ -19165,40 +19175,40 @@
    "alchimie": 83,
    "conexiuni": 252,
    "contexto": 266,
-   "lant": 125
+   "lant": 126
   },
   "id_high_water": {
    "alchimie": 107,
    "conexiuni": 381,
    "contexto": 378,
-   "lant": 248
+   "lant": 249
   },
   "last_import": {
    "allocated": [
     {
-     "category": "stiinta",
-     "game": "conexiuni",
-     "id": "cx_stiinta_381",
-     "raw_ref": "conexiuni[0]"
+     "category": "gastronomie",
+     "game": "lant",
+     "id": "lt_gastronomie_249",
+     "raw_ref": "lant[0]"
     }
    ],
    "categories": [
     {
      "bindings": {
-      "candidate_sha256": "sha256:17b58a93d692f5f7b1695de171e65eb68bb7a26446e64b95f2d374a7cff0fd9c",
-      "factual_reviewer": "v4_c10_factual",
-      "factual_sha256": "sha256:2a42aac222afc5c8518632ba893550cfc2df0a8c45a2692685aba7f7f90e5bdf",
-      "quality_reviewer": "v4_c10_quality",
-      "quality_sha256": "sha256:b380760ac4031d25010a40ad8cf3e6f15c37e1009bdd5dd7e6c3831ec81092e2"
+      "candidate_sha256": "sha256:b0da3bea700a2ce4d6c25d201d74ef71ffce0b5e0cfd9ec0fbf4ff6b548775f3",
+      "factual_reviewer": "v4_c11_factual",
+      "factual_sha256": "sha256:52e7a937a311ea4e9e0d8aa89c22c454d44fa002f4f0dc4e59d730c0c4b6940e",
+      "quality_reviewer": "v4_c11_quality",
+      "quality_sha256": "sha256:0ae3626ac6a1925db3786316e489b41105ab20fee17daa7e854a0c50e28db7f9"
      },
-     "category": "stiinta",
+     "category": "gastronomie",
      "exclusions": []
     }
    ],
    "kg_sha256": "8b8addd26cdc3aa5972a97368196e9593d5ef38477625f2fba988845e10879d4",
    "operator": "native-pack-only-import-v1",
    "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
-   "source_pack_sha256": "99782a238dfc1c8e8912202d4836cad0a92c7c5a24bbe16cea80d2d2a2d2b3eb",
+   "source_pack_sha256": "4c6108f7dbf7c40513855fde0c4c358dd5bc8b80275662f75599171583865e42",
    "write": true
   },
   "note": "Curated games pack (ADR-0011): AI-generated, fact/quality-verified batch + hand-crafted starters. Only status=approved items are served.",
