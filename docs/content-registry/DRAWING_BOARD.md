@@ -97,3 +97,12 @@ Every original commitment, unknown response and native prefix remains exact.
 The six hypotheses are parked for independently approved material neighborhood
 revision with a changed source and sealed-baseline feedback delta. Fresh-critic
 rerolls on unchanged data cannot release them. All 21 prior Cald rows remain exact.
+
+
+## C19/C20 — 2026-11-11
+
+Valid until: a recorded material retry prerequisite fires — then re-screen; terminal unchanged payloads remain rejected.
+
+C19 records 105 genuine author functional questions across all29 deficient Lanț cells:60 rejected,44 parked,1 already served (`lt_gastronomie_246`). Of104 resolved directed KG pairs and1 unresolved idea(H073,Clip scurt→Cronometru),15 met necessary native distance/choice floors and0 survived author semantics. Broad hubs/sense changes/generic captions remained material failures; mechanical pass is not quality approval. Full bounded path/walk/menu/overlap evidence and all dispositions remain in the original C19 packet. No raw category modules, critic/FQ, import, promotion or new landing. Prior terminal/owner/hold identities remain unchanged.
+
+C20 keeps48 component questions/32 need cells:31 complete node components and17 incomplete,16 author semantic/fairness rejects,10 novelty/reuse blocks,17 identity/prerequisite parks,1 evidence park and4 isolated unqualified components. No full construction/raw board/native candidate run exists, so no board IDs or accepts are manufactured. Animal predicates crossfit; H029 wording discovery and initial/final author records are retained. Future use needs an honest full construction plus current complete screen and independent gates.
