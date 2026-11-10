@@ -2991,3 +2991,80 @@ Accepted controller/test hashes are
 Root's dedicated tool commit and trust-configuration review precede genuine C17 critic
 use. Old six C9 Cald guards remain closed. No C17 factual/quality approval, import,
 canonical allocation, promotion, cohort qualification or landing follows this tool work.
+
+## V4 C9 product landing and separate T operator record, 2026-11-10
+
+Valid until: later product changes this exact source-bound scope — then treat as history.
+
+Operator `agent:codex (PROGRAM E8)` ran `git merge --ff-only
+642f0c2f133786fcc0198f2f2b1440978632369a` from clean main
+`94e8d175ed45c5e2fe89f1196d738ea4659ecc06`. Product `642f0c2f133786fcc0198f2f2b1440978632369a`
+landed cleanly. The separate pure Python/doc tool child
+`12b9af3bf6222e0162a72e027be1cf30d0a6068f` then landed, with consumer data, Go source and pins
+unchanged. This documentation record follows T and carries the P9 inventory. Product and
+operator qualification retain their separate evidence.
+
+Exact product build 11, unit 27, fresh 4i 10 and full 37 passed, verifying 40, 81 and 165
+registered build, unit and full artifacts. All 859 browser cases passed with zero skips, retries
+or flaky outcomes. Enforced CSP was 0/0. Fresh PostgreSQL accounts 12 and HTTP API 302, parity
+1,206 and nine PNGs with all 17 baseline outcomes passed. Supervisor and owner exits were zero;
+all launched sessions finished with zero owned containers or networks remaining.
+
+Fresh independent GO `da74b8527b66db7f2d2f7b7aac20f2f63772f2f94afc2f006da31e46ed2bc625` binds
+the 151-member manifest `9996df8355b824267c698809698f9c6fc8c82a7b929056330e49f8ca28cda118`.
+Every retained file was rehashed for this record. All 46 lossless mappings had compressed and
+raw SHA-256 hashes and lengths verified by streaming reads; original receipts stayed in place.
+
+Build, unit and full raw result hashes are
+`722bc62ff7f7f297fb6da636ad2a0b6c686e78480f504f31d8684eee71a4d077`,
+`4cc625e0c0f8c893dc76f968762e5ee7bfc656e89c74173985be40fddbe16c12` and
+`b5d5305cb9e25a3579e50a992d3ff132aec34fa027c1c0353e2aed6f27dc0f86`. The fresh 4i result hash is
+`db91c7385f0dc752a834f969f72ee868fb4f7b6b86de66b48cde47cedf88b628`.
+
+Eleven normal listening public-text HTTP witnesses won and reloaded: three shortest postal
+routes, seven shortest clothing routes and the original four-move blind clothing route. Five
+chip-only witnesses won; six encountered UI omissions. Native `internal/lant/service.go:623–659`
+resolves real neighbours through free text, and frontend `Lant.tsx:485–495,828–850` submits
+typed values. The omitted moves remain legal under that existing contract, and gate requirements
+remain unchanged. Original critics used prospective native-caption graphs; the normal HTTP
+witnesses provide separate evidence.
+
+Generic captions, weak door/material detours, optional alcohol in broad nondisplay menus and
+recognition/calibration limits remain explicit. The bounded graphs share nodes with 51 and 25
+stock routes and edges with 17 and 6 routes, respectively. Those measurements retain their
+scoped novelty meaning.
+
+All 729 prior pack rows, 336 core rows, KG, seven components and 17,495 captions remain exact.
+P9 inventory is 731 pack records, 724 approved, seven pending and 542 eligible. Lanț has 128
+records, 126 approved and 126 eligible. Shared words, names, edges and forms have zero
+additions. Exactly four transitions qualify and land `v4-c15:C15-H001` / `lt_societate_250` and
+`v4-c15:C15-H124` / `lt_stiinta_251`: 3,351 → 3,355 events, 2,984 IDs unchanged and 13 → 15
+landed boards. All other 2,982 rows, 803 protected rows, 87 owner holds, 79 Conexiuni locks and
+six older C9 retry guards remain exact. Content approval in this record covers those two C15
+routes; C16 and C17 retain their separate state.
+
+T has independent operator qualification: 25 controller tests, 11 miner tests, six extra
+controls and provider compilation on Linux, macOS and Windows. Corrected real frozen-P8 coverage
+is seven top-level tests and nine subtests. The earlier filtered command selected zero tests and
+remains historical. Corrected proof
+`85a89eb2eb736a971d3b080b4bf67e2f51b25d701921cbb449df5584218b39d8`, additive handoff
+`4cf154d4414383b4f114bba1bfb31162ce2ba7a734100f7e68a7ec08eadba307` and independent exact-commit
+GO `222458705ec2d969ac44f526d67f614f6dc7bd0e3d83fe0de7ad8479e10895c9` remain retained. Real
+operator use still requires trust-config review.
+
+ADR-0228 retains the three-host policy-only grant. Foundation run refusal and its owner-queue
+entry, the DEX drop, M2 adoption and source-client adoption hold state remain unchanged.
+
+The four workflow-helper errors in the P9 final record were corrected: the relative audit path,
+the bound-proof input-schema assumption, the Conexiuni order-field assumption applied to Lanț,
+and post-sign stdout growth. Canonical gate failures were zero. The earlier automatic approval
+refusal was re-reviewed and accepted for the same combined operation after the original USER
+authorization proof was supplied, before execution. Existing WORKLOG detail and original
+receipts remain intact.
+
+C8 raw gate trees were pruned after retained-file verification. The older C15 caption executable
+is unavailable; exact older operator bytes remain in C16, and the preflight caption gzip
+remains. Ten generated duplicates rehydrate from frozen S9 Git, the owned HTTP thin source tree
+was pruned, and the old raw pin diff reconstructs from the recorded Git pair. Retained manifests
+describe historical inputs and current availability. Original author, source, baseline and
+genuine judgment proofs remain.
