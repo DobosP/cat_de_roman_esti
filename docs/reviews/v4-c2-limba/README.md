@@ -18,4 +18,7 @@ All 79 Conexiuni holds and the existing pack rows remain in place.
 The v17 source and all three independently signed native rail pairs reproduced exactly
 on the branch. All installed authority entries, source validation and sealed export passed.
 The actual independent branch capture and native replay matched all 1,206 cases.
+Exact 2af8f7d3 passed build11/4i10/unit27/full37 and all 859 browser cases.
+The fresh landing reviewer signed technical GO, and all six prefix boards won
+and reloaded over HTTP. Separate five-file test-pin approval remains pending.
 Evidence is under `~/work/_temp/content__v4/c2/`.

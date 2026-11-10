@@ -22,5 +22,8 @@ Registry replay requires the explicit repository evidence root for the compact
 All v18 initial and final role signatures, live native audits and installed authority
 checks passed. Graph, resolver, captions and Cald projection bytes remained unchanged.
 The exact independent source capture and native replay matched 1,206 cases.
-Separate pins and full landing qualification follow.
+Exact 409e6b2c passed build11/4i10/unit27/full37 and all 859 browser cases.
+All eight prefix boards won and reloaded over HTTP. The fresh landing reviewer
+signed technical GO. Separate six-file test-pin approval remains pending.
+Verified compact receipts remain. Superseded raw build and gate trees were pruned.
 Evidence is under `~/work/_temp/content__v4/c3/`.

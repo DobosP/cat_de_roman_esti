@@ -16,6 +16,8 @@ six parked Lanț hypotheses. No C5 item is selected or approved.
 The Cx draft has direct 4/4 and 3/4 witnesses from earlier rejected raw groups.
 Historical author source bindings retain their original provenance.
 
-The v19 rail candidates are prepared for independent continuity review.
-Fresh native audits, exact corpus, separate pins and full qualification follow.
+All three v19 initial and final factual/quality pairs signed the exact native
+candidates and live audits. Installed authority reconstruction, source validation,
+sealed export, ops, mobile and graph/resolver continuity checks passed.
+The actual corpus, separate pins and exact-SHA qualification follow.
 Evidence is under `~/work/_temp/content__v4/c4/` and `~/work/_temp/content__v4/c5/`.
