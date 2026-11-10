@@ -130,7 +130,7 @@ func TestCheckReadonlyAndRefusals(t *testing.T) {
 		t.Fatal(err)
 	}
 	report, err := s.Check()
-	if err != nil || integer(report["boards"]) != 726 || report["write"] != false {
+	if err != nil || integer(report["boards"]) != 727 || report["write"] != false {
 		t.Fatalf("native check: %v, %v", report, err)
 	}
 	if err = checkSnapshots(s.Inputs); err != nil {
@@ -221,7 +221,7 @@ func BenchmarkReviewedRankings(b *testing.B) {
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		result, err := s.generateRankings()
-		if err != nil || len(array(result["boards"])) != 726 {
+		if err != nil || len(array(result["boards"])) != 727 {
 			b.Fatalf("full reviewed ranking: %v", err)
 		}
 	}
