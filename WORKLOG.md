@@ -2771,3 +2771,29 @@ The source verifier encountered an already-owned exclusive proof filename. It re
 C7 owning raw gate trees were pruned after all 104 retained evidence files were verified. The receipt is `/home/dobo/work/_temp/content__v4/releases/c7/raw-retention.json`. The clean H7 app keeper was restored and attached at its original registered path. C7’s earlier qualification-time raw-retention statement remains historical. Retained manifests record that verification and subsequent removal without asserting that pruned bytes remain available. Source packets, accepted judgments, Git baselines and reproducible setup remain retained.
 
 C8 independent Django/native API capture and separate native replay matched all 1,206 cases from source `cdb42b2aa779c3149a9c4fe5aaa60c33bdc611c8`, gzip `a144a21a42005efebe83428c1035efb9ef2d80076d3468d107112593c3e24190`. Method/path identities are fixed. Thirteen responses and four source-selected correct-guess bodies change. Existing normal/default seed 17 selects `cx_societate_278`. The independent Python seed oracle ran twice with 69 frozen inputs exact and changed only Conexiuni curated-normal index 1, seed 17, normal, empty category/daily, null pack limit, 17 actions. Its 606 scalar-leaf changes have zero container replacements. Generated fixture `3b20553c243bc41a0089d042487da9c92e58b85757dd93fed8cfc949c020815f` belongs in the separate five-file expectation commit. All other three Go fixtures and six public starts are exact. These API replay results precede normal served-board and GUI qualification.
+
+## V4 C8 exact-SHA qualification and local landing, 2026-11-10
+
+Valid until later product changes this source-bound scope — then treat as history.
+
+Operator `agent:codex (PROGRAM E8)` ran `git merge --ff-only 8f9ff9188129a3026f1ea3bbd938dc2fc21a16af` from clean main `da7674dcfa263528623ce1eccc8393d31700e6bb`. Main was clean at product `8f9ff9188129a3026f1ea3bbd938dc2fc21a16af`. The initial sandbox attempt refused read-only Git metadata before landing. The authorized escalation completed the fast-forward.
+
+Exact commands and operator records remain bound in `/home/dobo/work/_temp/content__v4/releases/c8/landing-review/commands.json`, SHA-256 `2beabbf28e6226c6c10669bb0662516c0089ea665954a13f4d57eb2b2d5a79de`.
+
+build result SHA-256 `871eac9673f20edb64bdecfb84332a36d3abe81e81973b422721eb41a22d78e1`.
+
+unit result SHA-256 `98522da3375e3a5911cd66cf19b645b192e904610c62367f0ff2afd64b1cc643`.
+
+fresh 4i result SHA-256 `e0eb11141c8efc5a3f3ab92995c3513ea777400f0e2cb826e3fc11c8ccc1547e`.
+
+full result SHA-256 `04172b38d80a4f4161228c442e73f4c2b40d9bb41a4b0314d2612102083371ad`.
+
+Build 11, unit 27, fresh 4i 10 and sole full 37 passed, with actual artifact counts 40/81/165. Native race passed 29 packages with 11 having no tests, both vets and auth checks passed, and docs checked 67 current/677 physical Markdown paths. All 859 browser cases passed with zero skips, retries or flaky outcomes. Enforced CSP was 0 current/0 legacy. Fresh PG accounts 12 and HTTP API 302, parity 1,206, nine PNGs and all 17 baseline outcomes passed. Running image 58c38092, exact P8 tree d05017c1, supervisor/owner exit 0, no owned resources and all sessions finished were verified. The owned-bytecode unit precheck refusal ran no tests and preceded the corrected green unit.
+
+Independent GO `8ffda23956a58b9b94af91d9349188904829a450bb2fb15193b0e53fcecce4f2` and manifest `dca7ce5b32bae905e7d9ba8772b6dd7fbd18beaf1aa1d0496d598c8e23ef2c38` bind 104 files rehashed by Root. The reviewer authored/judged no C14/C8 item. All five separate pin expectations satisfy ADR-0227. Fresh immutable-S8 Django reproduced HTTP gzip a144a21a and 1,206 cases, with all five seed outputs from 69 exact inputs. The Conexiuni fixture curated-normal case has 606 scalar changes, and normal seed17 selects existing cx_societate_278. The corpus changes 13 responses and four source-selected correct-guess request-body values at 1014–1017, with methods and paths exact. This does not assert all request bodies unchanged.
+
+Science383 normal-listen seed0 scored all four groups, zero mistakes, win and exact terminal reload, with managed admission identity and stopped/closed listener. Nine first Conexiuni exposures are Buburuză, Arici, Broască, Mână, Picior, Porc, ochi, ureche and Ciocolată. Shared words, names, edges, forms, aliases and puzzles are unchanged. The landed prefix has nine Conexiuni, one Cald and three Lanț boards. Pack729/722approved/sevenpending/540eligible and Conexiuni254/92eligible are the actual product inventory. C9 dirty preparation remains separate.
+
+Only science advances reviewed→qualified→landed. Journal2850IDs/3077events/13landed preserves the other2849 rows and all803 protected/87owner/79Conexiuni holds/sixC9 retry guards. Reparsed lineage covers414 full constructions and1325quads, with maximum5boardtiles/2quadtiles, projected reuse3 and predecessor287overlap0. Brown-bear ordinary sense, typical human anatomy, secondary-source notices, modest-greu calibration and unmeasured recognition remain explicit. Failed language remains terminally rejected without FQ/import or unchanged reroll.
+
+C7 raw gate trees were pruned after 104 retained files verified. Superseded old e5 compiled producer bytes and reviewer-owned expanded oracle copies were pruned under their original receipts. Original pruned bytes are unavailable, with retained manifests recording history and Git/pinned reconstruction supporting continuation. C8 owning raw gate trees remain retained at qualification.

@@ -36,3 +36,7 @@ C7 receipts bind product `26ebaf39bd642d9778c9c9d7d09159f1297c0dfa`. The current
 boards, comprising eight Conexiuni, one Cald and three Lanț. Other game additions and
 shared KG words, names, edges, forms and puzzles remain zero. Earlier C6 raw trees were
 pruned under retention manifests. C7 owning raw gates remain retained at qualification.
+
+## C8 landed locally, 2026-11-10
+
+Exact product `8f9ff9188129a3026f1ea3bbd938dc2fc21a16af` fast-forwarded cleanly from `da7674dcfa263528623ce1eccc8393d31700e6bb`. The sole `cx_stiinta_383` passed build 11, unit 27, fresh 4i 10, full 37 and independent GO `8ffda23956a58b9b94af91d9349188904829a450bb2fb15193b0e53fcecce4f2`. All 859 browser cases, CSP 0/0, PG 12+302, parity 1,206 and nine PNGs/all 17 baseline outcomes passed. Normal HTTP won and reloaded with zero mistakes. ADR-0227 covers the five independently regenerated separate pins. One registry ID advances reviewed→qualified→landed. The landed prefix is nine Conexiuni, one Cald and three Lanț boards, with zero shared vocabulary additions. Limits and retained receipts are in [the C8 record](../reviews/v4-c8-science-conex/README.md).

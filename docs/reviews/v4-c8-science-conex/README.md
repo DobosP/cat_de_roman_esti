@@ -1,29 +1,29 @@
-# V4 release C8 science Conexiuni staging
+# V4 release C8 science Conexiuni — landed
 
-Valid until exact-SHA qualification and landing change this scope — then treat as history.
-Local main remains C7 product 26ebaf39 with documentation record da7674dc.
-The sole cx_stiinta_383 is stiinta/greu, score 92, rank 7, weight 5 and pilot eligible.
-Its sixteen familiar concepts sort by metamorphosis, melting, mammalian mixed diet and paired anatomy.
-Source-backed raw and fresh canonical factual/quality judgments bind child safety and strict promotion.
-Private promote judgments were not native applications. The canonical apply promoted one.
-The blind partition matched uniquely without ambiguity and recognized all four groups.
-Urs uses the ordinary Romanian forest/brown-bear sense, especially Ursus arctos.
-Anatomy uses the typical human body plan. Neither predicate claims every species or individual.
-Secondary-source citation limits, recognition, greu calibration and historical A6 scope remain explicit.
-Twenty-two genuine first-cache source receipts are bound without measured recognition claims.
-Only two frozen raw IDs are registered. Twelve prefreeze constructions and their components stay context.
-Language matched the intended answer but failed on ambiguity and a property-valid alternative.
-It is terminally rejected with no factual/quality approval, import or unchanged-critic reroll.
-Native v23 initial/final reviews and audits closed for quick, world and extensions.
-Default rails, validation, export, ops, mobile and whitespace source checks are green.
-The runtime inventory is 160, with authored-v23.json as the sole addition to the prior 159 paths.
-The nine source bindings and three auditors are unchanged. Old signed counts retain historical scope.
-Staging has 729 pack rows, 722 approved, seven pending and 540 eligible.
-Conexiuni has 254 approved rows and 92 eligible. Landed C7 remains 728 total and 539 eligible.
-All 728 earlier rows, 336 frozen cores, KG data, seven components and 17,495 captions remain exact.
-Independent Django/native API parity matched 1,206 cases. One Conexiuni fixture case changes; pins, gates and served play remain pending.
-An exclusive proof-filename collision was recovered with a new final graph receipt.
-This was proof-file handling, not a native failure or gate waiver.
-C7 raw gate trees were pruned after 104 evidence files verified. Retention manifests preserve history.
-Receipts are under ~/work/_temp/content__v4/releases/c8 in source-checks.json,
-owned-source-output-manifest.json, final-source-commands.json and registry-application.json.
+Valid until later product changes these source-bound facts — then treat as history.
+Product 8f9ff9188129a3026f1ea3bbd938dc2fc21a16af landed by clean local fast-forward
+from da7674dcfa263528623ce1eccc8393d31700e6bb on 2026-11-10.
+Operator `agent:codex (PROGRAM E8)` acted under ADR-0227 qualified-pin delegation.
+The sole cx_stiinta_383 is stiinta/greu, score 92, rank 7, weight 5 and eligible.
+Sixteen existing nodes sort by metamorphosis, melting, mixed diet and paired anatomy.
+Normal listening HTTP admitted the exact managed GUI/content identity, scored all four
+groups with zero mistakes, won and reloaded exactly. Nine nodes gained first Conexiuni exposure.
+They are Buburuză, Arici, Broască, Mână, Picior, Porc, ochi, ureche and Ciocolată.
+Shared words, names, edges, forms, aliases and puzzles stay unchanged.
+Exact build 11, unit 27, fresh 4i 10 and full 37 passed with independent GO 8ffda239.
+All 859 browser cases passed without skips, retries or flaky outcomes. Enforced CSP was 0/0.
+Fresh PostgreSQL accounts 12 and HTTP API 302, parity 1,206 and nine PNGs/all 17 outcomes passed.
+Actual image/source/tree, supervisor and owner exit 0, cleanup and ended sessions were checked.
+Fresh immutable-S8 Django and five Python outputs reproduced exactly from 69 unchanged inputs.
+The five separate expectation pins satisfy ADR-0227. One Conexiuni fixture case changes.
+The corpus has 13 changed responses and four source-selected request-body values in cases 1014–1017.
+Native v23 initial/final reviews and audits close quick, world and extensions with 160 runtime paths.
+All 728 older pack rows, 336 frozen cores, KG, seven components and 17,495 captions stay exact.
+Pack is 729/722 approved/seven pending/540 eligible. Conexiuni is 254/92 eligible.
+Brown-bear sense, typical human anatomy, secondary sources and unmeasured recognition remain limits.
+Greu calibration is modest. Twelve prefreeze constructions retain lineage and failed-language context.
+Language is terminally rejected for ambiguity, with no factual/quality approval or import.
+An owned-bytecode unit precheck refusal preceded the corrected green run. No tests ran on that refusal.
+Old e5 producer and verified expanded oracle copies were pruned. Their raw bytes are unavailable.
+Original source packets, manifests and reproduction instructions remain. C8 raw gate trees remain at qualification.
+Full receipts live at /home/dobo/work/_temp/content__v4/releases/c8/landing-review/final.json.
