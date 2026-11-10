@@ -14,6 +14,7 @@ before and afterward. Shared words and names were unchanged.
 | C4 | `7d0b11c9a5023177f136e57cc5d81deb23408a74` | Conexiuni +1 (Film TV); other games +0 | `c4/qualification.json`: build11/4i10/unit27/full37, 859 browser, fresh GO | Landed in product prefix above. |
 | C5 (C10 intake) | `1eb2e7682675bb967b11e267b965b7bec2cd9eef` | Conexiuni +1 (Știință); other games +0 | `releases/c5/qualification.json`: build11/4i10/unit27/full37, 859 browser, fresh GO | Landed in product prefix above. |
 | C6 (C11 intake) | `cc905fbb1908c2368cf7837195cb98819dcac48b` | Lanț +1 Aragaz→Lingură, gastronomie/normal, par 3. Other games +0. | `releases/c6/qualification.json` records build 11, unit 27, fresh 4i 10, full 37, 859 browser cases, 1,206 parity cases and PostgreSQL 12/302. Fresh GO is `911601a4…`. | Landed locally at 2026-11-10T09:05:37.981813+00:00 by clean fast-forward from `75b1b9bd`. |
+| C7 (C12 intake) | `26ebaf39bd642d9778c9c9d7d09159f1297c0dfa` | Conexiuni +1 household-properties board. Eight existing nodes gain first Conexiuni exposure. Other games +0. | `releases/c7/qualification.json` records build 11, unit 27, fresh 4i 10, full 37, 859 browser cases, parity 1,206 and PostgreSQL 12/302. Fresh GO is `d9835f6b…`. | Landed locally at 2026-11-10T11:50:52.426278+00:00 by clean fast-forward from `6c295e57`. |
 
 Receipts are relative to `~/work/_temp/content__v4/`. `owner/landing.json` records the actual
 command, operator and UTC; `owner/landed-delta.json` records the product delta.
@@ -29,3 +30,9 @@ C6 receipts bind landed product `cc905fbb`. The earlier C1–C5 prefix remains h
 The landed V4 prefix contains eleven boards, comprising seven Conexiuni, one Cald and three Lanț.
 Other game additions and KG words, names, edges, forms and puzzles remain zero.
 C6 raw gates remain retained. C12/C13 proposals and C7 staging are separate from this record.
+
+The C1–C6 rows and earlier prefix paragraphs record their landing-time facts.
+C7 receipts bind product `26ebaf39bd642d9778c9c9d7d09159f1297c0dfa`. The current landed prefix has twelve
+boards, comprising eight Conexiuni, one Cald and three Lanț. Other game additions and
+shared KG words, names, edges, forms and puzzles remain zero. Earlier C6 raw trees were
+pruned under retention manifests. C7 owning raw gates remain retained at qualification.

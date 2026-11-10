@@ -2657,3 +2657,49 @@ The owned C6 keeper `.gate` tree and build mirror were pruned after re-verifying
 C7 retention removed exactly three old producer paths and two verified duplicate author-source trees after the current rolling CLI and independent landing-preparation proof were verified. The pruning receipt is `7d4f94d80b20327d222b1f1d05136543f45c6c119d598b9ae03f698399a4a2f5`. Old named compiled artifacts are unavailable. The original source packets, genuine judgments, current producer and Git baselines are retained. Historical 508-input reproduction requires the recorded rehydration procedure. No independent byte-identical rebuild of the old binaries is claimed.
 
 C7 independent Django 5.2.16 and Python 3.12.3 API capture matched native Go across all 1,206 cases, with a separate saved-corpus replay. Capture source is `e14d25cb0e5432b14675f9788319d818e8c91210`. The deterministic gzip hash is `bb609c8acb1c268f196c979f9fe71e32482feda1348c64e959c8ef5e840bb639`. The sole response change is case 924, the curated Conexiuni category count from 27 to 28. Request identities and bodies are exact. Both independent seed-oracle runs reproduced all five C6 fixture/start artifacts byte-for-byte, so their expected files need zero copies. Existing API-only replay profiles were used. Real served-board play and exact-SHA qualification follow in the landing gates.
+
+## 2026-11-10 — C7 exact qualification and local landing record
+
+Valid until a later product or record supersedes these source-bound facts — then treat as history.
+
+Operator `agent:codex (PROGRAM E8)` landed product `26ebaf39bd642d9778c9c9d7d09159f1297c0dfa` with `git merge --ff-only 26ebaf39bd642d9778c9c9d7d09159f1297c0dfa` from clean main `6c295e577ca2709bdfe084c85336562da9070a2d`. Main was clean afterward.
+
+The accepted commands ran from `/home/dobo/work/_worktrees/cat_de_roman_esti/content__v4-review-c7`.
+
+```bash
+GATE_OPERATOR=agent:codex bash scripts/gate.sh build --sha 26ebaf39bd642d9778c9c9d7d09159f1297c0dfa --parallel 4
+
+bash scripts/landing/run-4i.sh --repo /home/dobo/work/_worktrees/cat_de_roman_esti/content__v4-review-c7 --baseline cc905fbb1908c2368cf7837195cb98819dcac48b --sha 26ebaf39bd642d9778c9c9d7d09159f1297c0dfa --build-dir /home/dobo/work/_temp/content__v4-review-c7/gates/cat_de_roman_esti --go-cache /home/dobo/work/_temp/content__v4/go-cache --out /home/dobo/work/_temp/content__v4/releases/c7/landing-review/4i
+
+GATE_OPERATOR=agent:codex bash scripts/gate.sh unit --sha 26ebaf39bd642d9778c9c9d7d09159f1297c0dfa --parallel 4
+
+env -u GATE_OPERATOR python3 -I scripts/gui-full-runner.py --sha 26ebaf39bd642d9778c9c9d7d09159f1297c0dfa --parallel 4
+
+python3 -IB scripts/landing/play.py --baseline 6c295e577ca2709bdfe084c85336562da9070a2d --sha 26ebaf39bd642d9778c9c9d7d09159f1297c0dfa --build-dir /home/dobo/work/_temp/content__v4-review-c7/gates/cat_de_roman_esti --base-url http://127.0.0.1:18947
+```
+
+Full launched once at `2026-11-10T11:33:25.146450+00:00`. Official isolated staging verified all 96 assets before unit. A supplemental checker initially used `embedfs/build/dist` and was corrected to `embedfs/dist`. This correction caused no qualification-gate failure or waiver.
+
+The build result hash is `a4231ceb18832d71cda293a13607f04041b9d9b5d2345214e5c85aa1cdd45402`.
+
+The unit result hash is `baad07b86411932860e4b1827f72ca10c7c0915e1bc9708b293ca8de28766cc1`.
+
+The fresh 4i result hash is `703b1de62dc330da6fe8fedaae491a36f1d9ac79e3e41d27fb2aec58e70da51c`.
+
+The full result hash is `c133b6026e35d5b1e426d00a58dbb1d95b85d4a07210f092c92004a815a9b26a`.
+
+All 11 build, 27 unit, 10 fresh 4i and 37 full checks passed on exact P. Native race reports 29 passing packages and 11 without tests, followed by vet and auth checks. The doc gate checked 67 current documents and 676 physical Markdown files. All 859 browser cases passed with zero skips, retries or flaky outcomes. Enforced CSP violations were 0 current and 0 legacy. Fresh PostgreSQL accounts 12 and HTTP API 302, parity 1,206, nine PNGs and all 17 baseline outcomes passed. Actual image/source/tree identity, supervisor and owner exit 0, cleanup and ended sessions were verified.
+
+Fresh independent GO `d9835f6b7ad3ab64047f5a3dfd272b0a62dd1830b6066ac08ad64c4ba17e0981` and evidence manifest `b9c22da0ef05c6a5ee82c0faf64fe01fda5b48c59947cf4445dbe5e2782f88ab` bind 104 verified files. The reviewer authored or judged no C7/C12 item. ADR-0227 has source hash `e4958e676c9f7985d7a4de9964c150d951f678649cd3435c553e34ab83718e94`, and its future separate-pin conditions are satisfied. The four-file actual pin diff has SHA-256 `74ee300904db60add6fc3cba5b5476b78de0815ef375883044620f60f856f83d`. The proposed diff differed only in path headers.
+
+The reviewer independently regenerated a fresh immutable-S Django corpus with 1,206 responses and gzip SHA-256 `bb609c8acb1c268f196c979f9fe71e32482feda1348c64e959c8ef5e840bb639`. All five Python seed fixtures reproduced exactly from 69 unchanged source inputs with aggregate `ff5c9a518c036237014ee20f4591beece270a89d279639640c422b18e5c02c35`. Every request stayed identical. Case 924 changed only `/924/body/categories/4/curated/conexiuni` from 27 to 28.
+
+Ordinary HTTP play used a normal listening server and checked the managed GUI/content admission identity. Seed 0 selected `cx_viata_de_roman_382`, all four groups scored correctly with zero mistakes, and win/reload matched exactly. Eight existing KG nodes gained first Conexiuni exposure, namely Ață, Lipici, Sapă, Rucsac, Cort, Ceas, Cui and Șurub. Shared words, names, edges, forms, aliases and puzzles are unchanged.
+
+The landed prefix now has twelve boards, comprising eight Conexiuni, one Cald and three Lanț. Pack is 728 total with 721 approved, seven pending and 539 eligible. Conexiuni is 253 approved with 91 eligible. Lanț is 126 total, 124 approved and 124 eligible. Cald is 266 total, 264 approved and 256 eligible. Alchimie is 83 total, 80 approved and 68 eligible. Quick remains 421 total and 418 selectable. Only selected C7 advances reviewed→qualified→landed. The other 2,847 rows, prior eleven landed boards, all 803 protected rows, 87 owner holds, 79 Conexiuni locks and six C9 retry guards remain exact. C14 and the dirty C8 source census of 729 rows are outside this product record.
+
+Apometrele recognition, ordinary zipper-design inference and B7 difficulty/recognition calibration remain limited editorial judgments without empirical prevalence or child-enjoyment measurement. G4 uses the checked sole-004 prefreeze premise across all five variants. Variant 005 shares 13 tiles and three exact quads and is unselected rather than approved. Original 12-tile prose and construction/frozen-digest corrections remain recorded. Earlier separate submission of 005 would defeat that premise.
+
+The initial factual source-review signed bytes were lost when root accidentally ran a writer. Those original signed bytes remain unavailable. The genuine same-reviewer reissue manifest `63cb522e3726cb8398c4bfbd67a735f12c3fa503824bb5ff6801c7d502a7fda1` preceded quality and native consumption. Root-generated replacement bytes were excluded from authority. C12’s seven-key canonical factual artifact was refused before promotion, then the same reviewer signed an identical-item four-key projection that strict native apply accepted.
+
+C6 raw gate trees were pruned after verification under `releases/c6/raw-retention.json`. Five superseded C12 producer or duplicate artifacts were also pruned under retention receipt `7d4f94d80b20327d222b1f1d05136543f45c6c119d598b9ae03f698399a4a2f5`, with original author/source packets and reproduction instructions retained. Original compiled bytes of those pruned artifacts are unavailable. The reviewer pruned only its expanded oracle closure and duplicate regenerated copies under `releases/c7/landing-review/oracle-retention.json`. C7 owning raw gate trees remain retained at qualification.
