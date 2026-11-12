@@ -15947,6 +15947,63 @@
    ],
    "source": "ai",
    "status": "approved"
+  },
+  {
+   "category": "stiinta",
+   "difficulty": "normal",
+   "group_labels": {
+    "g1": "Părți vizibile ale corpului unei păsări",
+    "g2": "Obiecte cu piese care pivotează în jurul unei articulații",
+    "g3": "Copaci cu frunze late",
+    "g4": "Forme naturale de gheață"
+   },
+   "groups": {
+    "g1": [
+     "n_v1_11_aripa",
+     "n_v1_11_gheara",
+     "n_v4sti_ochi",
+     "n_v24_body_limbs_picior"
+    ],
+    "g2": [
+     "n_v1_3_home_balama",
+     "n_v1_11_foarfeca",
+     "n_v32_workshop_hand_cleste",
+     "n_v88_school_compas"
+    ],
+    "g3": [
+     "n_v1_11_stejar",
+     "n_v1_12_fag",
+     "n_v1_12_mesteacan",
+     "n_v1_12_plop"
+    ],
+    "g4": [
+     "n_v24_weather_precipitation_grindina",
+     "n_v1_13_polei",
+     "n_v1_13_chiciura",
+     "n_v1_13_ghetar"
+    ]
+   },
+   "id": "cx_stiinta_385",
+   "order": [
+    "n_v24_body_limbs_picior",
+    "n_v4sti_ochi",
+    "n_v1_12_plop",
+    "n_v1_11_aripa",
+    "n_v1_3_home_balama",
+    "n_v1_12_mesteacan",
+    "n_v88_school_compas",
+    "n_v1_13_chiciura",
+    "n_v24_weather_precipitation_grindina",
+    "n_v1_11_foarfeca",
+    "n_v1_12_fag",
+    "n_v32_workshop_hand_cleste",
+    "n_v1_13_ghetar",
+    "n_v1_11_stejar",
+    "n_v1_11_gheara",
+    "n_v1_13_polei"
+   ],
+   "source": "ai",
+   "status": "approved"
   }
  ],
  "contexto": [
@@ -19372,42 +19429,42 @@
  "meta": {
   "counts": {
    "alchimie": 83,
-   "conexiuni": 255,
+   "conexiuni": 256,
    "contexto": 267,
    "lant": 128
   },
   "id_high_water": {
    "alchimie": 107,
-   "conexiuni": 384,
+   "conexiuni": 385,
    "contexto": 379,
    "lant": 251
   },
   "last_import": {
    "allocated": [
     {
-     "category": "meme_net",
-     "game": "contexto",
-     "id": "ct_meme_net_379",
-     "raw_ref": "contexto[0]"
+     "category": "stiinta",
+     "game": "conexiuni",
+     "id": "cx_stiinta_385",
+     "raw_ref": "conexiuni[0]"
     }
    ],
    "categories": [
     {
      "bindings": {
-      "candidate_sha256": "sha256:31c9fc22ff86eaea5fc4baf1c8e296d1da7e0df33b9b459fece12e9d4486c094",
-      "factual_reviewer": "codex-c17-factual-06-07-20261110",
-      "factual_sha256": "sha256:a31554e0e90ce5234035aeefe76b9f64a995241653fed3ff2965d54fb6a971cf",
-      "quality_reviewer": "quality-c17-06-07-codex-20261110",
-      "quality_sha256": "sha256:601de184936b68943414b390194519b772c8de074fb6060371142df07271bf34"
+      "candidate_sha256": "sha256:9ab239addf347a75c6bd1d76d51b9d34f43c59967380dbe90dbc5062aa776984",
+      "factual_reviewer": "c42_mapped_exact_conexiuni_factual_reviewer",
+      "factual_sha256": "sha256:c7dd4a03fe6ce515d3490421476f85e0336537ca4f43423fa1825307ade82df7",
+      "quality_reviewer": "c42_mapped_exact_conexiuni_quality_reviewer",
+      "quality_sha256": "sha256:00e301b78399589d186c674a3cfaa8e6f5598063839008faa14404cd37a53536"
      },
-     "category": "meme_net",
+     "category": "stiinta",
      "exclusions": []
     }
    ],
    "kg_sha256": "8b8addd26cdc3aa5972a97368196e9593d5ef38477625f2fba988845e10879d4",
    "operator": "native-pack-only-import-v1",
-   "rubric_sha256": "3fc2d6db8f8607d0bb70a9f7b4f329a42102b57ed2134e0f6e02ae5fb6e8e101",
-   "source_pack_sha256": "65ddf113e220e64b0c2c9929fe9b00e24dab3fff4bedb7170c18cdb61bed5b76",
+   "rubric_sha256": "159155390d188545ed71c1697a21b7e46b236a51a3aacaf3ab6351ee17afcc3a",
+   "source_pack_sha256": "a28ea49639c4a23aeaf90116a7603ba0dba1a11d51e99acc029fe25fe2719645",
    "write": true
   },
   "note": "Curated games pack (ADR-0011): AI-generated, fact/quality-verified batch + hand-crafted starters. Only status=approved items are served.",
