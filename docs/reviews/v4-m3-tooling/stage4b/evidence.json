@@ -1,0 +1,98 @@
+{
+  "commands_and_results": [
+    {
+      "bytes": 6937,
+      "path": "/home/dobo/work/_temp/content__v4/tooling/m3-native-development/stage4b-v2-formatted-inputs.json",
+      "sha256": "f5592bc8d3add89f92e434397813d07b41896335470987d0e56f93baa7aa4df6"
+    },
+    {
+      "bytes": 109093,
+      "path": "/home/dobo/work/_temp/content__v4/tooling/m3-native-development/stage4b-v2-native.json",
+      "sha256": "8ba3bf47ef0cfb38ba55a63f7868519e6db1f8e766943ea447ff45080fada36b"
+    },
+    {
+      "bytes": 16380,
+      "path": "/home/dobo/work/_temp/content__v4/tooling/m3-native-development/stage4b-v2-portable.json",
+      "sha256": "a583aac390e218ffcd87344f11bd1ba3552e5bf6bc1f490d7b03318cc4909f3c"
+    }
+  ],
+  "operational_base_sha": "e3d2d6006b2e9162215b01d5653ab2448d84997c",
+  "operator": "agent:codex (PROGRAM E8)",
+  "product_qualification": false,
+  "remaining": [
+    "Review final exact cumulative candidate and current producer inputs.",
+    "Run canonical exact-SHA build, 4i, unit and full with real disposable PostgreSQL.",
+    "Obtain independent landing review and authorized local landing."
+  ],
+  "schema": "cat-m3-tool-evidence-1",
+  "source_paths": [
+    {
+      "bytes": 14181,
+      "git_mode": "100644",
+      "path": "go-backend/cmd/cat-content-rail/main.go",
+      "sha256": "487c66b61b6283e4efcbb12c2d1787cc15ea401e6b5f790a58efa9363b77424c"
+    },
+    {
+      "bytes": 2408,
+      "git_mode": "100644",
+      "path": "go-backend/cmd/cat-content-rail/quick_bridge_test.go",
+      "sha256": "4e3cf72b1a937f8d9250a0974c42eba111647f1c632efa2fd2a3c04ec7a20705"
+    },
+    {
+      "bytes": 22177,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentrails/quick_bridge.go",
+      "sha256": "bd5f9f54e301c99c39a8b2cc9e71b80c5e42477d7323dcbaf136b7d80cf5952f"
+    },
+    {
+      "bytes": 11074,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentrails/quick_bridge_confirm.go",
+      "sha256": "d9d32ca67c9584630c9ce231a699e84b3c79a1cd7d69493635e04c8d75175d42"
+    },
+    {
+      "bytes": 6981,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentrails/quick_bridge_full.go",
+      "sha256": "30ce93a4542235dcc4cea092510bc0a81d5b60d62ec239f1b907c058062d219f"
+    },
+    {
+      "bytes": 17767,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentrails/quick_bridge_full_test.go",
+      "sha256": "6b8edda427e7e0f7815606ee0da7d1c91e0223f426147116ae7d9bdce54d8762"
+    },
+    {
+      "bytes": 12001,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentrails/quick_bridge_history.go",
+      "sha256": "ca8f54f9a25d2de3ac1c978e9901de54c9fdf26f095e857ad800dfeb1e3d675e"
+    },
+    {
+      "bytes": 18155,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentrails/quick_bridge_history_recovery_test.go",
+      "sha256": "d84ddc68294c42624694babe48633c8bb160ebac773ff439f82d354544a29ae1"
+    },
+    {
+      "bytes": 6667,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentrails/quick_bridge_install.go",
+      "sha256": "ee0eef63b3d7e4c8469a44c260cca0f580f12c73ca8196628365e56a7beb0ce7"
+    },
+    {
+      "bytes": 5386,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentrails/quick_bridge_session.go",
+      "sha256": "18082830c2e9b3759ff0725aa41c9fabd8d5b5f55d0c8e71308487f34579c94e"
+    },
+    {
+      "bytes": 27864,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentrails/rail.go",
+      "sha256": "6ab0fe1e12ced71b75fbf8361433e06308a93a10e70ae5a846028610384cd531"
+    }
+  ],
+  "source_validation": "Exact B18 context and 11 A-to-B changed bodies, original race/vet and portable controls.",
+  "stage": "M3-4B"
+}

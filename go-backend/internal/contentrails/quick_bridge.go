@@ -289,6 +289,10 @@ func bundleMembers(bundle map[string]any) map[string][]byte {
 }
 
 func bridgePending(root string, frame, bundle map[string]any, snap *quickPendingSnapshot, files *quickBridgeFiles) (map[string]any, map[string]map[string]any, map[string]map[string]any, map[string]map[string]any, error) {
+	return bridgePendingWithHistory(root, frame, bundle, snap, files, false)
+}
+
+func bridgePendingWithHistory(root string, frame, bundle map[string]any, snap *quickPendingSnapshot, files *quickBridgeFiles, hasHistory bool) (map[string]any, map[string]map[string]any, map[string]map[string]any, map[string]map[string]any, error) {
 	fail := func() (map[string]any, map[string]map[string]any, map[string]map[string]any, map[string]map[string]any, error) {
 		return nil, nil, nil, nil, fmt.Errorf("quick bridge current pending/dossier/stock binding differs")
 	}
@@ -324,7 +328,7 @@ func bridgePending(root string, frame, bundle map[string]any, snap *quickPending
 	// Deliberate Stage4A refusal. Empty unresolved lists do not override a false
 	// complete flag. A relevance-closure schema needs independent review first.
 	screen := object(pending["screen"])
-	if bridgeStockClosure(screen) != nil {
+	if bridgeStockClosure(screen) != nil && !hasHistory {
 		return nil, nil, nil, nil, fmt.Errorf("quick bridge unresolved stock history; independent relevance closure is not implemented")
 	}
 	if !arrayShape(pending["input_bindings"], 4, 4100) {

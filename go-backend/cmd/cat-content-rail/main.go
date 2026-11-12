@@ -45,6 +45,13 @@ func run() error {
 	bridgeFrame := f.String("bridge-draft", "", "independently pinned quick-bridge-frame-v1; draft validation only")
 	bridgePin := f.String("bridge-frame-sha256", "", "Root-controlled reviewed frame SHA; author self-pins are not independent evidence")
 	bridgeOut := f.String("bridge-out", "", "new private scratch draft; never a native review or install input")
+	bridgePrepare := f.String("bridge-prepare", "", "frame-v2 to full native source/candidate and unsupported canonical drafts")
+	bridgeRelease := f.String("bridge-propose", "", "independently pinned full same-role confirmation frame")
+	bridgeReleasePin := f.String("bridge-release-sha256", "", "Root-controlled whole-candidate confirmation frame pin")
+	bridgeInstall := f.String("bridge-install", "", "independently pinned final bridge frame; existing guarded native installer")
+	bridgeInstallPin := f.String("bridge-install-sha256", "", "Root-controlled reviewed final bridge frame pin")
+	bridgeView := f.String("bridge-view", "", "full draft bundle for byte extraction only")
+	bridgeMember := f.String("bridge-member", "", "source.json, candidate.json, factual-draft.json or quality-draft.json")
 	if err := f.Parse(os.Args[2:]); err != nil {
 		return err
 	}
@@ -54,29 +61,77 @@ func run() error {
 	pendingFlags := map[string]bool{"pending-inventory": true, "prepare-pending": true, "inventory-manifest": true, "author-seal": true, "receipt-manifest": true, "pending-out": true, "pending-bundle": true, "pending-view": true, "pending-item": true}
 	used := map[string]bool{}
 	pendingMode, bridgeMode := false, false
-	bridgeFlags := map[string]bool{"bridge-draft": true, "bridge-frame-sha256": true, "bridge-out": true}
+	bridgeFlags := map[string]bool{"bridge-draft": true, "bridge-frame-sha256": true, "bridge-out": true, "bridge-prepare": true, "bridge-propose": true, "bridge-release-sha256": true, "bridge-install": true, "bridge-install-sha256": true, "bridge-view": true, "bridge-member": true}
 	f.Visit(func(v *flag.Flag) {
 		used[v.Name] = true
 		pendingMode = pendingMode || pendingFlags[v.Name]
 		bridgeMode = bridgeMode || bridgeFlags[v.Name]
 	})
 	if bridgeMode {
-		if rail != "quick" || *bridgeFrame == "" || *bridgePin == "" || *bridgeOut == "" {
-			return fmt.Errorf("quick bridge draft requires quick rail, exact frame, independent frame pin and new scratch output")
+		if rail != "quick" {
+			return fmt.Errorf("quick bridge actions require quick rail")
+		}
+		allowed := map[string]bool{"root": true}
+		action := ""
+		switch {
+		case *bridgeFrame != "" && *bridgePin != "" && *bridgeOut != "":
+			action = "draft"
+			for _, key := range []string{"bridge-draft", "bridge-frame-sha256", "bridge-out"} {
+				allowed[key] = true
+			}
+		case *bridgePrepare != "" && *bridgePin != "" && *bridgeOut != "":
+			action = "prepare"
+			for _, key := range []string{"bridge-prepare", "bridge-frame-sha256", "bridge-out"} {
+				allowed[key] = true
+			}
+		case *bridgeRelease != "" && *bridgeReleasePin != "" && *bridgeOut != "":
+			action = "propose"
+			for _, key := range []string{"bridge-propose", "bridge-release-sha256", "bridge-out"} {
+				allowed[key] = true
+			}
+		case *bridgeInstall != "" && *bridgeInstallPin != "":
+			action = "install"
+			allowed["bridge-install"], allowed["bridge-install-sha256"] = true, true
+		case *bridgeView != "" && *bridgeMember != "":
+			action = "view"
+			allowed["bridge-view"], allowed["bridge-member"] = true, true
+		default:
+			return fmt.Errorf("quick bridge requires one complete separate pinned action")
 		}
 		for key := range used {
-			if key != "root" && !bridgeFlags[key] {
-				return fmt.Errorf("quick bridge draft cannot mix source, pending, proposal, authority or install actions")
+			if !allowed[key] {
+				return fmt.Errorf("quick bridge cannot mix source, pending, proposal, authority or install actions")
 			}
 		}
 		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Minute)
 		defer cancel()
-		result, err := contentrails.DraftQuickBridge(ctx, *root, contentrails.QuickBridgeDraftOptions{Frame: *bridgeFrame, FrameSHA256: *bridgePin, Output: *bridgeOut})
+		var result map[string]any
+		var err error
+		switch action {
+		case "draft":
+			result, err = contentrails.DraftQuickBridge(ctx, *root, contentrails.QuickBridgeDraftOptions{Frame: *bridgeFrame, FrameSHA256: *bridgePin, Output: *bridgeOut})
+		case "prepare":
+			result, err = contentrails.PrepareQuickBridge(ctx, *root, *bridgePrepare, *bridgePin, *bridgeOut)
+		case "propose":
+			result, err = contentrails.ProposeQuickBridge(ctx, *root, *bridgeRelease, *bridgeReleasePin, *bridgeOut)
+		case "install":
+			err = contentrails.InstallQuickBridge(ctx, *root, *bridgeInstall, *bridgeInstallPin)
+			result = map[string]any{"ok": true, "mode": "write", "rail": "quick"}
+		case "view":
+			var b []byte
+			b, err = contentrails.QuickFullDraftView(*bridgeView, *bridgeMember)
+			if err != nil {
+				return err
+			}
+			_, err = os.Stdout.Write(b)
+			return err
+		}
 		if err != nil {
 			return err
 		}
 		return json.NewEncoder(os.Stdout).Encode(result)
 	}
+
 	if pendingMode {
 		allowed := map[string]bool{"root": true}
 		switch {

@@ -687,9 +687,32 @@ func inputReadPaths(root string, s *Source, inputs ...string) ([]string, error) 
 // the duration of the install even though its hashes are no longer an
 // acceptance term (ADR-0189).
 func InstallProposal(root string, s *Source, rail, candidate, factual, quality, proposal, audit, finalFactual, finalQuality, expectedPin, sourcePath string) error {
+	return installProposal(root, s, rail, candidate, factual, quality, proposal, audit, finalFactual, finalQuality, expectedPin, sourcePath, nil)
+}
+
+func installProposal(root string, s *Source, rail, candidate, factual, quality, proposal, audit, finalFactual, finalQuality, expectedPin, sourcePath string, bridge *quickInstallGuard) error {
 	root, err := filepath.Abs(root)
 	if err != nil {
 		return err
+	}
+	if rail == "quick" {
+		needed, e := quickNeedsBridge(root, s)
+		if e != nil {
+			return e
+		}
+		if needed && bridge == nil {
+			return fmt.Errorf("changed quick authored payload requires mandatory V4 raw/whole-candidate bridge")
+		}
+		if bridge != nil {
+			if e = bridge.validateSource(root, s, candidate, factual, quality); e != nil {
+				return e
+			}
+			if e = bridge.verify(context.Background(), false); e != nil {
+				return e
+			}
+		}
+	} else if bridge != nil {
+		return fmt.Errorf("quick bridge cannot guard another rail")
 	}
 	if err = validateLoadedSource(root, s, sourcePath); err != nil {
 		return err
@@ -701,6 +724,9 @@ func InstallProposal(root string, s *Source, rail, candidate, factual, quality, 
 	inputs, err := inputReadPaths(root, s, candidate, factual, quality, proposal, audit, finalFactual, finalQuality, sourcePath, target)
 	if err != nil {
 		return err
+	}
+	if bridge != nil {
+		inputs = append(inputs, bridge.release.session.paths("")...)
 	}
 	readset, err := contentops.CaptureReadSet(inputs)
 	if err != nil {
@@ -720,8 +746,19 @@ func InstallProposal(root string, s *Source, rail, candidate, factual, quality, 
 	if err != nil {
 		return err
 	}
+	if bridge != nil {
+		if err = bridge.verify(context.Background(), false); err != nil {
+			return err
+		}
+	}
 	changes := map[string][]byte{target: blob}
 	return contentops.GuardedTransaction(root, changes, readset, func() error {
+		if bridge != nil {
+			if err = bridge.verify(context.Background(), true); err != nil {
+				return err
+			}
+		}
+
 		if err = validateLoadedSource(root, s, sourcePath); err != nil {
 			return err
 		}
@@ -738,6 +775,11 @@ func InstallProposal(root string, s *Source, rail, candidate, factual, quality, 
 		actual, err := Read(target)
 		if err != nil || !same(actual, value) {
 			return fmt.Errorf("installed artifact differs from reviewed proposal")
+		}
+		if bridge != nil {
+			if err = bridge.verify(context.Background(), true); err != nil {
+				return err
+			}
 		}
 		return nil
 	})

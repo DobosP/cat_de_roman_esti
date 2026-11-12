@@ -30,3 +30,21 @@ func TestQuickBridgeDraftRefusesIncompleteMixedAndNonQuickActions(t *testing.T) 
 		}
 	}
 }
+
+func TestQuickBridgeFullActionsCannotMixOrInventWriteAuthority(t *testing.T) {
+	original := os.Args
+	t.Cleanup(func() { os.Args = original })
+	for _, args := range [][]string{
+		{"quick", "--bridge-prepare", "missing", "--bridge-frame-sha256", strings.Repeat("a", 64), "--write"},
+		{"quick", "--bridge-propose", "missing", "--bridge-release-sha256", strings.Repeat("a", 64), "--source", "missing"},
+		{"quick", "--bridge-install", "missing", "--bridge-install-sha256", strings.Repeat("a", 64), "--bridge-out", "unused"},
+		{"quick", "--bridge-view", "missing", "--bridge-member", "source.json", "--write"},
+		{"quick", "--bridge-install", "missing"},
+		{"world", "--bridge-prepare", "missing", "--bridge-frame-sha256", strings.Repeat("a", 64)},
+	} {
+		os.Args = append([]string{"cat-content-rail"}, args...)
+		if err := run(); err == nil || !strings.Contains(err.Error(), "bridge") {
+			t.Fatal("full bridge mode isolation failed", args, err)
+		}
+	}
+}
