@@ -9,8 +9,6 @@ import (
 	"sort"
 	"strings"
 	"testing"
-
-	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
 )
 
 // Selector/data contracts only. These tests do not replay HTTP journeys or
@@ -50,15 +48,11 @@ func source27ReadExpectedCorpus(t *testing.T) *Corpus {
 	return corpus
 }
 
-func TestSource27SelectsExactCurrentIndependentCorpus(t *testing.T) {
+func TestSource27SelectsExactHistoricalIndependentCorpus(t *testing.T) {
 	want := source27ReadExpectedCorpus(t)
 	loaded, err := reviewedV4M3Stage5Recovery27()
 	if err != nil || !reflect.DeepEqual(loaded, want) {
 		t.Fatal("Source27 loader changed its independent captured responses", err)
-	}
-	data, err := content.Load()
-	if err != nil || !reflect.DeepEqual(data.Sources, want.Sources) {
-		t.Fatal("live compiled bundle does not have the actual Source27 source tuple", err)
 	}
 	sources := source27ExpectedSources()
 	before := source6GUICloneSources(sources)
