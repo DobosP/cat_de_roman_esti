@@ -228,6 +228,10 @@ func (a *installedAuthorities) registeredParent(version int, parentSHA string) b
 }
 
 func (a *installedAuthorities) rebuild(root string, selected *Source, rail string) (map[string]any, bool, error) {
+	return a.rebuildFromSourceOperation(root, selected, rail, nil)
+}
+
+func (a *installedAuthorities) rebuildFromSourceOperation(root string, selected *Source, rail string, operation *installedSourceOperation) (map[string]any, bool, error) {
 	entry := object(object(a.raw["rails"])[rail])
 	if entry == nil {
 		return nil, false, nil
@@ -235,37 +239,44 @@ func (a *installedAuthorities) rebuild(root string, selected *Source, rail strin
 	if _, err := loadInstalledAuthorities(root); err != nil {
 		return nil, true, err
 	}
-	sources, err := a.sources(root)
+	var err error
+	if operation == nil {
+		operation, err = a.captureSourceOperation(root)
+	}
 	if err != nil {
 		return nil, true, err
 	}
-	s := sources[text(entry["source_sha256"])]
-	if s == nil || selected == nil || (selected.SHA256 != AuthoredSHA256 && selected.SHA256 != s.SHA256) {
-		return nil, true, fmt.Errorf("installed authority does not authorize selected authored source")
-	}
-	beforeSources, err := bindings(root)
-	if err != nil {
-		return nil, true, err
-	}
-	paths := map[string]string{}
-	for _, key := range installedDocumentKeys {
-		_, path, err := authorityDocument(root, object(entry[key]))
-		if err != nil {
-			return nil, true, err
+	var beforeSources map[string]any
+	catalog, err := operation.withSource(root, a, text(entry["source_sha256"]), func(s *Source) (map[string]any, error) {
+		if s == nil || selected == nil || (selected.SHA256 != AuthoredSHA256 && selected.SHA256 != s.SHA256) {
+			return nil, fmt.Errorf("installed authority does not authorize selected authored source")
 		}
-		paths[key] = path
-	}
-	catalog, err := buildInstalledProposal(root, s, rail, paths["candidate"], paths["factual_review"], paths["quality_review"])
+		currentSources, err := bindings(root)
+		if err != nil {
+			return nil, err
+		}
+		beforeSources = currentSources
+		paths := map[string]string{}
+		for _, key := range installedDocumentKeys {
+			_, path, err := authorityDocument(root, object(entry[key]))
+			if err != nil {
+				return nil, err
+			}
+			paths[key] = path
+		}
+		catalog, err := buildInstalledProposal(root, s, rail, paths["candidate"], paths["factual_review"], paths["quality_review"])
+		if err != nil {
+			return nil, err
+		}
+		if err = ConfirmFinal(root, rail, catalog, paths["proposal"], paths["audit"], paths["final_factual_review"], paths["final_quality_review"], text(entry["artifact_sha256"])); err != nil {
+			return nil, err
+		}
+		if err = validateInstalled(root, rail, catalog, text(entry["artifact_sha256"])); err != nil {
+			return nil, err
+		}
+		return catalog, nil
+	})
 	if err != nil {
-		return nil, true, err
-	}
-	if err = ConfirmFinal(root, rail, catalog, paths["proposal"], paths["audit"], paths["final_factual_review"], paths["final_quality_review"], text(entry["artifact_sha256"])); err != nil {
-		return nil, true, err
-	}
-	if err = validateInstalled(root, rail, catalog, text(entry["artifact_sha256"])); err != nil {
-		return nil, true, err
-	}
-	if _, err = a.sources(root); err != nil {
 		return nil, true, err
 	}
 	for _, key := range installedDocumentKeys {

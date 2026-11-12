@@ -173,12 +173,16 @@ func baseline(root string, s *Source, rail string) (map[string]any, error) {
 	return buildReviewed(root, s, rail, candidate, sha, reviews)
 }
 func Check(root string, s *Source, rail string) (CheckResult, error) {
+	return checkWithSourceOperation(root, s, rail, nil)
+}
+
+func checkWithSourceOperation(root string, s *Source, rail string, operation *installedSourceOperation) (CheckResult, error) {
 	result := CheckResult{Rail: rail, SourceSHA256: s.SHA256}
 	a, err := loadInstalledAuthorities(root)
 	if err != nil {
 		return result, err
 	}
-	rebuilt, adopted, err := a.rebuild(root, s, rail)
+	rebuilt, adopted, err := a.rebuildFromSourceOperation(root, s, rail, operation)
 	if adopted {
 		result.SourceSHA256 = text(object(object(a.raw["rails"])[rail])["source_sha256"])
 	} else if err == nil {
@@ -231,13 +235,24 @@ func Check(root string, s *Source, rail string) (CheckResult, error) {
 	return result, nil
 }
 func CheckAll(root string, s *Source) ([]CheckResult, error) {
+	a, err := loadInstalledAuthorities(root)
+	if err != nil {
+		return nil, err
+	}
+	operation, err := a.captureSourceOperation(root)
+	if err != nil {
+		return nil, err
+	}
 	out := []CheckResult{}
 	for _, rail := range Rails {
-		result, err := Check(root, s, rail)
+		result, err := checkWithSourceOperation(root, s, rail, operation)
 		out = append(out, result)
 		if err != nil {
 			return out, err
 		}
+	}
+	if err = operation.verify(root, a); err != nil {
+		return out, err
 	}
 	return out, nil
 }

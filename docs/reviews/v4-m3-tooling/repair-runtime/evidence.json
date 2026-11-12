@@ -1,0 +1,50 @@
+{
+  "commands_and_results": [
+    {
+      "bytes": 6070,
+      "path": "/tmp/cat-v4-m3-runtime-snapshot-review/manifest.json",
+      "sha256": "49dc7478046d52fc131f0ca7e763087ba06a2fbdd9c83701ad0b68e6103030fc"
+    }
+  ],
+  "operational_base_sha": "e3d2d6006b2e9162215b01d5653ab2448d84997c",
+  "operator": "agent:codex (PROGRAM E8)",
+  "product_qualification": false,
+  "remaining": [
+    "Review final exact cumulative candidate and current producer inputs.",
+    "Run canonical exact-SHA build, 4i, unit and full with real disposable PostgreSQL.",
+    "Obtain independent landing review and authorized local landing."
+  ],
+  "schema": "cat-m3-tool-evidence-1",
+  "source_paths": [
+    {
+      "before_sha256": "d236a29074326fd17fd9a92f890adce21a9a5e663736e84919ca2be3822405b0",
+      "bytes": 13540,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentrails/installed.go",
+      "sha256": "0a5b552886ad3a846536c73b4fc25573b53db1a343a9a9c0b1b1478f1f66dc27"
+    },
+    {
+      "before_sha256": null,
+      "bytes": 4137,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentrails/installed_source_operation.go",
+      "sha256": "6872c7e906f0a20c3ea1bebb5711b0cb5048dc49d60ed870983e5c71651af4a6"
+    },
+    {
+      "before_sha256": null,
+      "bytes": 9915,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentrails/installed_source_operation_test.go",
+      "sha256": "f45a0e8e78136b836996a285d8f9b7fb5943133c45ceef26865881d641bd7704"
+    },
+    {
+      "before_sha256": "91681aea33527b4621656254c5858ade0f2820ad89f48b6788391e2d8cf36641",
+      "bytes": 29164,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentrails/rail.go",
+      "sha256": "decf78d1a9273e75b50712ad5009e2b6fa96c50925b81e8e1f777d89fc436980"
+    }
+  ],
+  "source_validation": "Baseline one, existing negative 13 and two new top-level tests pass without skips or failures. The original timing observation is diagnostic.",
+  "stage": "M3-5D-RUNTIME"
+}
