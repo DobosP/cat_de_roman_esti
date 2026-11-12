@@ -1,14 +1,17 @@
 export const meta = {
   name: 'critique-games',
-  description: 'Hard-critique curated pack items against docs/CRITIQUE_RUBRIC.md: Sonnet analysts critique per-item dossiers, Opus verifiers adversarially re-judge with live Romanian-relevance web checks (ADR-0023).',
-  whenToUse: 'Before promoting pack items to approved (gate mode), or to sweep existing approved stock (sweep mode). Run `python scripts/critique_pack.py --dossier <dir> [--ids ...]` FIRST, then invoke with args {dossierDir, ids, mode}.',
+  description: 'Legacy adversarial critique against docs/CRITIQUE_RUBRIC.md. Explicit dossier routing includes I/J; this sequential analyst/verifier is not the V4 peer-blind factual/quality quorum.',
+  whenToUse: 'For pack gate/sweep proposals after fresh dossiers. args {dossierDir, ids, dossierRefs, mode}. Quick proposals require exact native pending dossier descriptors (G5), not pack import; they remain non-installable until the quick prerequisites close.',
   phases: [
     { title: 'Critique', detail: 'analyst per item: rubric walk + simulated play' },
     { title: 'Verify', detail: 'Opus adversarial re-judge with web checks' },
   ],
 }
 
-// args: { dossierDir: string, ids: string[], mode: 'gate'|'sweep', repo?: string }
+// args: { dossierDir, ids, dossierRefs, mode: 'gate'|'sweep', repo? }
+// dossierRefs: exact {id, game, review_binding, dossier_sha256, record_sha256,
+// kg_sha256, rubric_sha256}; quick also {status, provenance_mode, source_id,
+// runtime_id, pending_sha256}. These are routing assertions, not native proof.
 // gate  -> verdicts for PENDING items in apply_rereview.py vocabulary (promote|keep|reject)
 // sweep -> PROPOSALS for approved items (keep|demote|revise); the owner decides (ADR-0019 precedent).
 const A = typeof args === 'string' ? JSON.parse(args) : (args || {})
@@ -19,17 +22,39 @@ const MODE = A.mode || 'gate'
 const IDS = A.ids || []
 const DOSSIERS = A.dossierDir
 if (!['gate', 'sweep'].includes(MODE)) throw new Error('mode must be gate or sweep')
-if (!Array.isArray(IDS) || IDS.some(id => typeof id !== 'string' || !id.length)) {
+if (!Array.isArray(IDS) || IDS.some(id => typeof id !== 'string' || !/^[A-Za-z0-9_-]+$/.test(id))) {
   throw new Error('ids must be a non-empty string array')
 }
 if (new Set(IDS).size !== IDS.length) throw new Error('ids must be unique')
-if (!DOSSIERS || !IDS.length) throw new Error('args {dossierDir, ids} required — run scripts/critique_pack.py --dossier first')
+if (!DOSSIERS || !IDS.length) throw new Error('args {dossierDir, ids, dossierRefs} required')
 
-const GAME_BY_PREFIX = { cx: 'conexiuni', ct: 'contexto', lt: 'lant', al: 'alchimie' }
-const gameOf = id => GAME_BY_PREFIX[id.slice(0, 2)] || 'unknown'
-const SECTION_BY_GAME = { conexiuni: 'B', contexto: 'C', lant: 'D', alchimie: 'E' }
+const GAME_BY_PREFIX = { cx: 'conexiuni', ct: 'contexto', lt: 'lant', al: 'alchimie', iq92_: 'intrusul', pq92_: 'perechi' }
+const SECTION_BY_GAME = { conexiuni: 'B', contexto: 'C', lant: 'D', alchimie: 'E', intrusul: 'I', perechi: 'J' }
+const isQuick = game => ['intrusul', 'perechi'].includes(game)
+const refs = A.dossierRefs
+if (!Array.isArray(refs) || refs.length !== IDS.length) throw new Error('exact dossierRefs coverage required')
+const DOSSIER_BY_ID = new Map()
+for (const ref of refs) {
+  if (!ref || !IDS.includes(ref.id) || DOSSIER_BY_ID.has(ref.id) ||
+      !Object.keys(SECTION_BY_GAME).includes(ref.game) ||
+      !Object.entries(GAME_BY_PREFIX).some(([prefix, game]) => ref.id.startsWith(prefix) && ref.game === game) ||
+      typeof ref.review_binding !== 'string' || !/^sha256:[0-9a-f]{64}$/.test(ref.review_binding) ||
+      !['dossier_sha256', 'record_sha256', 'kg_sha256', 'rubric_sha256'].every(key => typeof ref[key] === 'string' && /^[0-9a-f]{64}$/.test(ref[key]))) {
+    throw new Error('unsupported or inconsistent dossier identity/binding')
+  }
+  if (isQuick(ref.game) && (MODE !== 'gate' || ref.status !== 'pending' || ref.provenance_mode !== 'source_backed' ||
+      typeof ref.source_id !== 'string' || !ref.source_id.startsWith('aq92_') || ref.source_id.length <= 5 ||
+      typeof ref.runtime_id !== 'string' || !(ref.game === 'intrusul' ? /^vi_[0-9a-f]{20}$/ : /^vp_[0-9a-f]{20}$/).test(ref.runtime_id) ||
+      typeof ref.pending_sha256 !== 'string' || !/^[0-9a-f]{64}$/.test(ref.pending_sha256))) {
+    throw new Error('quick routing requires exact pending native identity and hashes')
+  }
+  DOSSIER_BY_ID.set(ref.id, ref)
+}
+const gameOf = id => DOSSIER_BY_ID.get(id).game
 const sectionOf = id => SECTION_BY_GAME[gameOf(id)]
-if (IDS.some(id => gameOf(id) === 'unknown')) throw new Error('every id must have a known game prefix')
+const dossierContext = id => `Routing descriptor: ${JSON.stringify(DOSSIER_BY_ID.get(id))}.
+Read the exact dossier bytes and verify its id/game, record, KG, rubric and review binding against this descriptor; quick also requires pending state/source-backed provenance, source/runtime identity and pending hash. A mismatch is not a reviewable item. Never substitute a materialized vi_/vp_ ID for its authored iq92_/pq92_ ID. The native bridge must later revalidate exact bytes/hashes; this workflow cannot grant that proof.`
+const quickContext = id => !isQuick(gameOf(id)) ? '' : `For Intrusul apply A+I: one honest three-inlier predicate, exactly one defensible odd tile and no cheap type/surface shortcut. For Perechi apply A+J: four honest pair relations, one defensible semantic perfect matching and four nonblank explanations; explicitly assess alternates/ambiguity. Inspect exact KG identities and full stock/holds, including core, supplements, reserves and same-batch siblings. Structural gates and key matching cannot establish semantic quality. Assess only actual public-mode context; keep labels/keys/answers private until native earned/terminal disclosure and sources/catalog IDs always server-private. Follow CONTENT_LOOP.md source controls using admissible captured receipts; no unrestricted WebSearch/WebFetch or KG-only citation exception. This is legacy adversarial commentary, not the answer-stripped blind critic or either V4 peer-blind factual/quality judgment; never translate its promote into a native accept.`
 const VOCAB = MODE === 'gate' ? ['promote', 'keep', 'reject'] : ['keep', 'demote', 'revise']
 
 const CRITIQUE_SCHEMA = {
@@ -58,11 +83,13 @@ const VERDICT_SCHEMA = {
   required: ['id', 'review_binding', 'final', 'overturned', 'web_checks', 'evidence'],
 }
 
-const critiquePrompt = id => `You are a HARSH game-content critic for a Romanian word-game arcade. Judge pack item ${id} (game: ${gameOf(id)}).
+const critiquePrompt = id => `You are a HARSH game-content critic for a Romanian word-game arcade. Judge item ${id} (game: ${gameOf(id)}).
 
 Read, in this order:
 1. ${RUBRIC} — the rubric. Sections A + ${sectionOf(id)} bind you.
-2. ${DOSSIERS}/${id}.json — the item dossier: members with node types/salience/descriptions, lint findings, cross-group strong edges.
+2. ${DOSSIERS}/${id}.json — the exact native dossier, including identity and private semantic evidence.
+${dossierContext(id)}
+${quickContext(id)}
 
 Then:
 - Simulate an average Romanian player (not a specialist). For conexiuni: labels are HIDDEN during play — can the player partition the 16 tiles from the tiles alone, and does each solved group feel earned and consistent? For contexto: would the player ever converge on this target by free association, and does getting warmer feel legible?
@@ -83,9 +110,11 @@ Item ${c.id} (game: ${gameOf(c.id)}), mode=${MODE}. Review binding: ${c.review_b
 
 1. Read ${RUBRIC} (sections A, F, and ${sectionOf(c.id)}) and ${DOSSIERS}/${c.id}.json yourself — do not trust the critic's summary.
    For lant/alchimie, independently inspect the labeled representative paths or productive openings/minimum recipe; do not accept aggregate branch/closure counts as semantic evidence. For lant, also verify exact directed-pair freshness against both ${PACK} and ${REPO}/cat_de_roman_esti/fixtures/lant_rejection_tombstones.json, excluding the current item ID from the pack comparison.
+   ${dossierContext(c.id)}
+   ${quickContext(c.id)}
    For conexiuni, independently test all four predicates, the full 16-tile partition, type/surface shortcuts, and rejected-template reuse; do not accept zero deterministic FAILs as proof of quality.
 2. Refute-first: argue the OPPOSITE of the critic's verdict; keep whichever position survives the evidence.
-3. Run rubric section F web checks (WebSearch/WebFetch) on every claim in ${JSON.stringify(c.web_claims)} and on any A1/A2/C2 doubt you have: ro.wikipedia presence, school-canon, national media (digi24/HotNews/ProTV/Libertatea/GSP), charts, sustained-vs-spike interest, cross-generational legibility. Record each check + outcome in web_checks.
+3. For quick games obey the captured-source restrictions above. Run rubric section F checks (WebSearch/WebFetch only where authorized) on every claim in ${JSON.stringify(c.web_claims)} and on any A1/A2/C2 doubt you have: ro.wikipedia presence, school-canon, national media (digi24/HotNews/ProTV/Libertatea/GSP), charts, sustained-vs-spike interest, cross-generational legibility. Record each check + outcome in web_checks.
 4. Salience numbers under-rate some famous nodes — fame is settled by the web checks, never by salience alone.
 5. ADR-0019 boundary: ${MODE === 'gate' ? 'a trigger forces final "keep" (stays pending), noted in evidence.' : 'note any trigger in evidence but return your honest QUALITY verdict — sweep verdicts are only owner proposals; deferring to "keep" hides the signal the owner needs.'}
 6. Copy the dossier's review_binding exactly into review_binding; it must equal the value above.
@@ -118,7 +147,7 @@ const results = await pipeline(
     phase: 'Critique', label: `critique:${id}`, schema: CRITIQUE_SCHEMA,
   }),
   (critique, id) => {
-    if (!critique || critique.id !== id || !critique.review_binding) return null
+    if (!critique || critique.id !== id || critique.review_binding !== DOSSIER_BY_ID.get(id).review_binding) return null
     const clean = critique.proposed === (MODE === 'gate' ? 'promote' : 'keep') && critique.failure_modes.length === 0
     const sampledOut = MODE === 'sweep' && clean && sampleBucket(id) !== 0
     if (sampledOut) return { critique, verdict: null, verified: false, verifierLost: false, sampledOut: true }

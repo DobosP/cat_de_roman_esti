@@ -1,8 +1,10 @@
 # Content critique rubric (ADR-0023)
 
-Hard-critique standard every curated pack item must pass **before** `status: approved`.
-Two layers: deterministic lints (`scripts/critique_pack.py`) and an LLM judge fleet
-(`.claude/workflows/critique-games.js`) applying this rubric with live web checks.
+Hard-critique standard for curated pack items before `status: approved` and for
+authored quick boards before native acceptance (ADR-0148).
+Pack items use deterministic lints (`scripts/critique_pack.py`) and the legacy judge
+fleet (`.claude/workflows/critique-games.js`). Quick boards use native mechanic
+gates and independent reviews, with the I/J and pending bindings below.
 The playability validator (`scripts/validate_games_pack.py`) checks *solvability*;
 this rubric checks whether the item is **fair, recognizable, and fun for a broad
 Romanian audience**. ADR-0019's editorial boundary sits ABOVE this rubric: a judge
@@ -12,7 +14,7 @@ Gate artifacts use version-2 batch/binding/coverage metadata (section G4) and th
 vocabulary `promote|reject|keep` for pending items. Sweeps over `approved` items output
 *proposals* (`keep|demote|revise`) for the owner — approved content is never auto-demoted.
 
-## A. Universal kill criteria (all four games)
+## A. Universal kill criteria (all six games)
 
 - **A1 Recognition floor.** The concepts a player must produce or recognize are things
   an average Romanian (non-specialist, cross-generational) has actually heard of.
@@ -172,19 +174,20 @@ A verifier with web access confirms A1/A2/C2 by checking ≥2 independent signal
 
 ## G. Judge-fleet protocol (fleet skill routing)
 
-1. **Dossier**: `scripts/critique_pack.py --status pending --ids <exact-ids>
+1. **Pack dossier**: `scripts/critique_pack.py --status pending --ids <exact-ids>
    --strict --dossier <dir>` emits one JSON per item and fails on unknown or
    filter-excluded IDs. Dossier degrees and Contexto neighbors use the runtime directed
    non-distractor graph. Each dossier carries the canonical pack-record and KG-snapshot
    digests plus `review_binding`, a SHA-256 over that dossier and the current rubric.
-2. **Critique** (analyst / Sonnet): per item, walk B, C, D, or E above, simulate a player,
+2. **Critique** (analyst / Sonnet): bind A plus B (Conexiuni), C (Cald sau Rece),
+   D (Lanț), E (Alchimie), I (Intrusul), or J (Perechi); simulate a player,
    name failure modes, and use the dossier's labeled routes or pair/recipe evidence for
    Lanț/Alchimie before proposing a verdict + claims needing web verification.
 3. **Adversarial verify** (Opus, web access): refute-first — try to overturn the
    critique; run section-F checks on every A1/A2/C2 claim; settle the verdict. Gate
    mode verifies every item; only clean approved-stock sweeps may use the stable
    one-in-four sample. Model-returned IDs and review bindings must match the request.
-4. **Batch-bound apply**: before staging, `import_candidates.py` requires complete factual
+4. **Pack batch-bound apply**: before staging, `import_candidates.py` requires complete factual
    and quality coverage for every raw candidate ref, binds both artifacts to the exact
    candidate-file SHA-256, and rejects missing/unknown/duplicate rows or unresolved
    `fix` verdicts before any graph or pack mutation. Surviving items stage as `pending`.
@@ -202,6 +205,26 @@ A verifier with web access confirms A1/A2/C2 by checking ≥2 independent signal
    fails closed. No pack copy is written before this passes.
    Approved-stock sweep proposals remain an owner decision.
    Verdict archives stay in the session scratchpad (v16 precedent). See ADR-0025.
+
+5. **Quick pending binding** (prerequisite, not implemented by this rubric): use a
+   dedicated native pending dossier, never a fabricated pack dossier or a quick row
+   in `games_pack.json`. Bind explicit `game`, exact authored `iq92_*`/`pq92_*` ID,
+   `aq92_*` source family, native `vi_*`/`vp_*` identity, exact row/pending/KG/rubric
+   digests, full inventory/registry/exclusions and the exact dossier bytes. Review
+   routing must cross-check these identities; an ID prefix alone is insufficient.
+   Retain exact held identities and all stock, including reserves and same-batch
+   siblings. The initial intake is source-backed: seal the existing 1–16 genuine HTTP(S) author URLs;
+   each fresh factual/quality reviewer independently chooses a captured URL first
+   fetched by neither author nor legacy. Follow `CONTENT_LOOP.md` source controls;
+   do not invent a KG-only citation exception or expose author entries before both sign.
+   Require separate fresh, peer-blind factual and quality accepts, per-item
+   `child_safe: true`, exact raw reports/identities/hashes, and answer-stripped blind play
+   with a private key. Critic failure drops the item; hold/reject never promotes.
+   The sequential analyst/adversarial verifier in the legacy workflow sees the
+   analyst verdict and cannot supply the V4 factual/quality quorum. Its proposals
+   cannot be copied into native accepts. Native pending intake, projection, raw
+   binding, existing final install and current-rubric rail qualification must close
+   before quick content is installable. This section grants no approval or owner ruling.
 
 ## H. Lint reference (`scripts/critique_pack.py`)
 
@@ -226,3 +249,55 @@ A verifier with web access confirms A1/A2/C2 by checking ≥2 independent signal
 
 FAIL blocks promotion (`--strict` exits 1). WARN routes the item to the judge fleet —
 it may pass with justification recorded in the verdict reasoning.
+
+
+## I. Intrusul boards (three inliers and one odd tile)
+
+Apply A and the existing ADR-0052/0054/0148/0149 mechanics; these criteria add no
+score, threshold, fallback, capacity or owner-boundary change. Preserve all 336
+frozen core records and all 85 existing authored payloads/provenance; rank fields
+may follow the existing recomputation rule.
+
+- **I1 Honest predicate.** State one precise, natural predicate true of each of
+  the three inliers and false of the outsider, using the exact KG senses. An absent
+  graph link does not establish that a human predicate is false.
+- **I2 One defensible outsider.** From the actual visible mode, the player can
+  identify one odd tile and explain why. An equally natural alternative outsider
+  or a predicate that also fits the outsider defeats uniqueness. Type sorting,
+  literal display/name shortcuts and obscure words cannot substitute for the
+  intended semantic distinction. Do not reveal the hidden label to make play fair.
+- **I3 Recognition and evidence.** Every visible word and claimed relation must
+  pass A1–A4/A7 for its exact identity and difficulty. Fresh factual and quality
+  judgments establish semantic fairness; structural/rating passes do not approve it.
+- **I4 Freshness and privacy.** Apply A6 to full core, supplements, reserves,
+  registry, exclusions and held/rejected stock, plus prospective siblings. A reused
+  visible set or inlier trio stays novelty debt after reordering, relabeling or
+  swapping the outsider. Keep inlier membership, outsider, hidden label, rationale,
+  sources and catalog/source IDs out of blind tasks. Public answers/predicates use
+  only native earned hints and terminal disclosure; sources and catalog/source IDs
+  remain server-private.
+
+## J. Perechi boards (four disjoint pairs across eight tiles)
+
+Apply A and the same existing quick-game authorities and preservation rules as I.
+
+- **J1 Honest pair relations.** Each of four disjoint unordered pairs has a
+  precise, truthful, natural relation over two exact KG identities. Explain every
+  pair; catch-all association wording is not a predicate.
+- **J2 One defensible perfect matching.** The eight distinct tiles admit one
+  intended semantic matching without an equally natural alternate matching or
+  ambiguous tile. The existing strong-edge perfect-matching condition and native
+  rating gates remain necessary; a unique maximum-weight matching alone cannot
+  establish semantic uniqueness. Type sorting, literal display/name shortcuts or
+  hidden labels cannot rescue an unfair matching.
+- **J3 Recognition and evidence.** Apply A1–A4/A7 to every tile and pair relation.
+  Require four nonblank semantic explanations and explicit alternate/ambiguity
+  assessment from blind play, followed by fresh factual and quality judgments.
+  Matching the private key mechanically does not approve the predicates.
+- **J4 Freshness and privacy.** Census the same full inventory as I4. The same
+  eight-tile set stays novelty debt with different pairings or labels. Keep pair
+  membership, hidden labels, rationale, sources and catalog/source IDs private;
+  blind tasks contain shuffled opaque tokens and only actual visible-mode context.
+  Public preterminal play may expose only native solved/earned-hint pairs; sources
+  and catalog/source IDs remain server-private. Preserve terminal answer/scoring
+  rules and all child-safety and owner holds.

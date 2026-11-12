@@ -225,3 +225,5 @@ Parallel lanes also allocated0188/0189 independently. All four full-filename bod
 - [0227](0227-owner-qualified-test-pin-delegation.md) — owner accepts the exact C1–C5 prefix and delegates future separate, independently regenerated, fully gated and freshly reviewed test pins; all other owner boundaries remain.
 
 - [0228](0228-policy-only-source-hosts.md) — Paul approves three policy-only hosts for primary terms and licence inspection under the existing V4 source controls.
+
+- [0229](0229-native-quick-review-and-rubric-requalification.md) — native quick proof/raw/full-review tools, explicit historical reconstruction, scoped source/cache reuse and fresh unchanged Source27 requalification; no content or owner-policy grant.
