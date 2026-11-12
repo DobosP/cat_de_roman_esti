@@ -1,0 +1,14 @@
+{
+  "operational_base_sha": "e3d2d6006b2e9162215b01d5653ab2448d84997c",
+  "product_qualification": false,
+  "required_controls": "Fixed immutable closed historical profiles; copied returns; nil/current path enforces current159; no serving/install/acceptance API.",
+  "schema": "cat-m3-tool-threat-model-1",
+  "stage": "M3-5A",
+  "threats": "Historical rubric accepted by current paths, mixed snapshot/current bytes, arbitrary profile/root override, historical install fallback.",
+  "trust_scope": [
+    "Root operates the reviewed sequential workflow with independently pinned exact code and inputs.",
+    "Byte and mode integrity leave source truth, reviewer independence and gameplay quality to their existing authorities.",
+    "The model trusts Root and the underlying UID, kernel and container controls.",
+    "Existing source policy, admission, owner holds and landing authority remain in force."
+  ]
+}

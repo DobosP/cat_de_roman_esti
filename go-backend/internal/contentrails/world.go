@@ -18,7 +18,11 @@ func worldCandidate(root string, s *Source, historical bool) (map[string]any, er
 // Installed reconstruction checks the completed candidate against the installed
 // world. Staging instead requires its immutable predecessor to remain current.
 func worldCandidateForPhase(root string, s *Source, historical, installed bool) (map[string]any, error) {
-	g, err := sourceGraph(root)
+	return worldCandidateForContext(root, s, historical, installed, nil)
+}
+
+func worldCandidateForContext(root string, s *Source, historical, installed bool, context *HistoricalWorldContext) (map[string]any, error) {
+	g, err := worldSourceGraph(root, context)
 	if err != nil {
 		return nil, err
 	}
@@ -142,7 +146,7 @@ func worldCandidateForPhase(root string, s *Source, historical, installed bool) 
 		}
 		concepts = append(concepts, map[string]any{"id": id, "label": n.LabelRO, "description": description, "source": n.Source, "redistributable": n.Redistributable, "snapshot": contentbuild.NodeSnapshot(n)})
 	}
-	bind, err := bindings(root)
+	bind, err := worldScopedBindings(root, context)
 	if err != nil {
 		return nil, err
 	}
@@ -150,12 +154,12 @@ func worldCandidateForPhase(root string, s *Source, historical, installed bool) 
 	if !historical {
 		previousName = "world_candidate"
 	}
-	previous, err := archive(root, s, previousName)
+	previous, err := worldArchive(root, s, previousName, context)
 	if err != nil {
 		return nil, err
 	}
 	if !historical && !installed {
-		if err = previousMatchesCurrent(root, previous); err != nil {
+		if err = previousMatchesCurrentForContext(root, previous, context); err != nil {
 			return nil, err
 		}
 	}
@@ -163,7 +167,7 @@ func worldCandidateForPhase(root string, s *Source, historical, installed bool) 
 	world["starter_ids"] = starters
 	oldBind := map[string]any{"kg_sha256": bind["kg_sample.json"], "rubric_sha256": bind["rubric"], "editorial_source_sha256": s.SHA256, "previous_world_sha256": object(object(s.Raw["archives"])[previousName])["sha256"]}
 	if historical {
-		old, err := archive(root, s, "world_candidate")
+		old, err := worldArchive(root, s, "world_candidate", context)
 		if err != nil {
 			return nil, err
 		}
@@ -179,7 +183,7 @@ func worldCandidateForPhase(root string, s *Source, historical, installed bool) 
 		out["native_source_version"] = s.Version
 	}
 	if installed {
-		if err = previousMatchesCurrent(root, out); err != nil {
+		if err = previousMatchesCurrentForContext(root, out, context); err != nil {
 			return nil, fmt.Errorf("installed world differs from reconstructed candidate/history: %w", err)
 		}
 	}
@@ -266,6 +270,10 @@ func compatibleVersions(old, current map[string]any, sourceSHA string) ([]any, e
 	return versions, nil
 }
 func buildWorld(root string, s *Source, candidate map[string]any, candidateSHA string, reviews []Review) (map[string]any, error) {
+	return buildWorldForContext(root, s, candidate, candidateSHA, reviews, nil)
+}
+
+func buildWorldForContext(root string, s *Source, candidate map[string]any, candidateSHA string, reviews []Review, historical *HistoricalWorldContext) (map[string]any, error) {
 	accepted := acceptedIDs(reviews)
 	for _, v := range rows(candidate["recipes"]) {
 		if !accepted[text(object(v)["id"])] {
@@ -288,7 +296,7 @@ func buildWorld(root string, s *Source, candidate map[string]any, candidateSHA s
 		if len(conceptReview) != len(rows(candidate["concepts"])) {
 			return nil, fmt.Errorf("complete concept coverage required")
 		}
-		old, err := archive(root, s, "world_previous")
+		old, err := worldArchive(root, s, "world_previous", historical)
 		if err != nil {
 			return nil, err
 		}
@@ -336,7 +344,7 @@ func buildWorld(root string, s *Source, candidate map[string]any, candidateSHA s
 		}
 		r["sources"] = unique
 	}
-	g, err := sourceGraph(root)
+	g, err := worldSourceGraph(root, historical)
 	if err != nil {
 		return nil, err
 	}
@@ -504,7 +512,11 @@ func ownedIDs(state map[string]any) map[string]bool {
 }
 
 func previousMatchesCurrent(root string, previous map[string]any) error {
-	current, err := fixture(root, "alchimie_discovery_world_v92.json")
+	return previousMatchesCurrentForContext(root, previous, nil)
+}
+
+func previousMatchesCurrentForContext(root string, previous map[string]any, historical *HistoricalWorldContext) error {
+	current, err := worldFixture(root, "alchimie_discovery_world_v92.json", historical)
 	if err != nil {
 		return err
 	}

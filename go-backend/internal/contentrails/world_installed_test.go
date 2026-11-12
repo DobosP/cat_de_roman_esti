@@ -37,13 +37,13 @@ func TestInstalledWorldReconstructionAfterRecipeTransition(t *testing.T) {
 	}
 	dir := filepath.Join(root, "docs/reviews/v1-5-hot-chocolate/native/world")
 	candidate, factual, quality := filepath.Join(dir, "candidate.json"), filepath.Join(dir, "factual-review.json"), filepath.Join(dir, "quality-review.json")
-	if _, err = Candidate(root, s, "world", false); err == nil || !strings.Contains(err.Error(), "previous immutable archive is stale") {
+	if _, err = historicalWorldCandidate(root, s, HistoricalSource5World); err == nil || !strings.Contains(err.Error(), "previous immutable archive is stale") {
 		t.Fatal("public staging accepted an already-completed mechanics transition", err)
 	}
-	if _, err = BuildProposal(root, s, "world", candidate, factual, quality); err == nil {
+	if _, err = historicalWorldProposal(root, s, candidate, factual, quality, false); err == nil {
 		t.Fatal("public proposal bypassed the unchanged staging predecessor guard")
 	}
-	proposal, err := buildInstalledProposal(root, s, "world", candidate, factual, quality)
+	proposal, err := historicalWorldProposal(root, s, candidate, factual, quality, true)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -82,7 +82,7 @@ func TestInstalledWorldReconstructionAfterRecipeTransition(t *testing.T) {
 			mutation.change(current)
 			path, _ := ArtifactPath(temp, "world")
 			writeJSONTest(t, path, current)
-			if _, err = buildInstalledProposal(temp, s, "world", candidate, factual, quality); err == nil || !strings.Contains(err.Error(), "installed world differs") {
+			if _, err = historicalWorldProposal(temp, s, filepath.Join(temp, "docs/reviews/v1-5-hot-chocolate/native/world/candidate.json"), filepath.Join(temp, "docs/reviews/v1-5-hot-chocolate/native/world/factual-review.json"), filepath.Join(temp, "docs/reviews/v1-5-hot-chocolate/native/world/quality-review.json"), true); err == nil || !strings.Contains(err.Error(), "installed world differs") {
 				t.Fatal("installed reconstruction accepted changed mechanics/history", err)
 			}
 		})

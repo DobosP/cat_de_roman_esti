@@ -73,12 +73,21 @@ func buildInstalledProposal(root string, s *Source, rail, candidatePath, factual
 }
 
 func buildProposal(root string, s *Source, rail, candidatePath, factualPath, qualityPath string, installed bool) (map[string]any, error) {
-	candidate, err := Read(candidatePath)
+	return buildProposalForContext(root, s, rail, candidatePath, factualPath, qualityPath, installed, nil)
+}
+
+func buildProposalForContext(root string, s *Source, rail, candidatePath, factualPath, qualityPath string, installed bool, historical *HistoricalWorldContext) (map[string]any, error) {
+	if historical != nil && (rail != "world" || historical.root != root) {
+		return nil, fmt.Errorf("historical context is World reconstruction only")
+	}
+	candidate, err := worldReadObject(candidatePath, historical)
 	if err != nil {
 		return nil, err
 	}
 	var expected map[string]any
-	if installed && rail == "world" {
+	if historical != nil {
+		expected, err = worldCandidateForContext(root, s, false, installed, historical)
+	} else if installed && rail == "world" {
 		expected, err = worldCandidateForPhase(root, s, false, true)
 	} else {
 		expected, err = Candidate(root, s, rail, false)
@@ -86,7 +95,7 @@ func buildProposal(root string, s *Source, rail, candidatePath, factualPath, qua
 	if err != nil {
 		return nil, err
 	}
-	raw, err := os.ReadFile(candidatePath)
+	raw, err := worldReadBytes(candidatePath, historical)
 	if err != nil {
 		return nil, err
 	}
@@ -98,19 +107,24 @@ func buildProposal(root string, s *Source, rail, candidatePath, factualPath, qua
 		return nil, fmt.Errorf("candidate differs from native authored source/version/current bindings")
 	}
 	sha := digestBytes(raw)
-	reviews, err := readReviews(root, rail, sha, candidate, []string{factualPath, qualityPath})
+	reviews, err := readReviewsForContext(root, rail, sha, candidate, []string{factualPath, qualityPath}, historical)
 	if err != nil {
 		return nil, err
 	}
-	before, err := bindings(root)
+	before, err := worldScopedBindings(root, historical)
 	if err != nil {
 		return nil, err
 	}
-	out, err := buildReviewed(root, s, rail, candidate, sha, reviews)
+	var out map[string]any
+	if historical != nil {
+		out, err = buildWorldForContext(root, s, candidate, sha, reviews, historical)
+	} else {
+		out, err = buildReviewed(root, s, rail, candidate, sha, reviews)
+	}
 	if err != nil {
 		return nil, err
 	}
-	after, err := bindings(root)
+	after, err := worldScopedBindings(root, historical)
 	if err != nil {
 		return nil, err
 	}
@@ -118,7 +132,7 @@ func buildProposal(root string, s *Source, rail, candidatePath, factualPath, qua
 		return nil, fmt.Errorf("sources changed during review construction")
 	}
 	for i, path := range []string{factualPath, qualityPath} {
-		b, err := os.ReadFile(path)
+		b, err := worldReadBytes(path, historical)
 		if err != nil || digestBytes(b) != reviews[i].SHA256 {
 			return nil, fmt.Errorf("review changed during construction")
 		}

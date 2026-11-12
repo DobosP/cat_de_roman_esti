@@ -154,3 +154,21 @@ func historicalSource5RailsRoot(t *testing.T) string {
 	}
 	return root
 }
+
+// Explicit read-only historical API routes. These helpers never register a
+// global root/rubric override and do not change the archived fixture construction.
+func historicalWorldCandidate(root string, s *Source, profile HistoricalWorldProfile) (map[string]any, error) {
+	c, err := OpenHistoricalWorldContext(root, profile)
+	if err != nil {
+		return nil, err
+	}
+	return c.Candidate(s)
+}
+
+func historicalWorldProposal(root string, s *Source, candidate, factual, quality string, installed bool) (map[string]any, error) {
+	c, err := OpenHistoricalWorldContext(root, HistoricalSource5World)
+	if err != nil {
+		return nil, err
+	}
+	return c.ReconstructProposal(s, candidate, factual, quality, installed)
+}

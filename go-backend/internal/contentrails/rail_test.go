@@ -204,7 +204,7 @@ func TestCompleteIndependentJudgmentsSourcesAndCandidateBinding(t *testing.T) {
 func TestHistoricalWorldTransitionsKeepCurrentBooksAndRefuseChangedRecipes(t *testing.T) {
 	root, _ := historicalWorldRoot(t)
 	s := sourceForTest(t)
-	next, err := Candidate(root, s, "world", false)
+	next, err := historicalWorldCandidate(root, s, HistoricalSource4WorldOnSource5KG)
 	if err != nil {
 		t.Fatal(err)
 	}

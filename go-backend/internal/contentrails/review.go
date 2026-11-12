@@ -3,7 +3,6 @@ package contentrails
 import (
 	"fmt"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild"
-	"os"
 	"path/filepath"
 	"strings"
 )
@@ -40,6 +39,10 @@ func reviewKind(rail string) string {
 	return ""
 }
 func readReviews(root, rail, candidateSHA string, candidate map[string]any, paths []string) ([]Review, error) {
+	return readReviewsForContext(root, rail, candidateSHA, candidate, paths, nil)
+}
+
+func readReviewsForContext(root, rail, candidateSHA string, candidate map[string]any, paths []string, historical *HistoricalWorldContext) ([]Review, error) {
 	if len(paths) != 2 {
 		return nil, fmt.Errorf("two semantic reviews required")
 	}
@@ -64,11 +67,11 @@ func readReviews(root, rail, candidateSHA string, candidate map[string]any, path
 	reviews := []Review{}
 	roles := []string{"factual", "quality"}
 	for i, path := range paths {
-		raw, err := Read(path)
+		raw, err := worldReadObject(path, historical)
 		if err != nil {
 			return nil, err
 		}
-		blob, err := os.ReadFile(path)
+		blob, err := worldReadBytes(path, historical)
 		if err != nil {
 			return nil, err
 		}
@@ -95,7 +98,7 @@ func readReviews(root, rail, candidateSHA string, candidate map[string]any, path
 		}
 		reviews = append(reviews, Review{role, reviewer, digestBytes(blob), candidateSHA, raw})
 	}
-	g, err := sourceGraph(root)
+	g, err := worldSourceGraph(root, historical)
 	if err != nil {
 		return nil, err
 	}
