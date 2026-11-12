@@ -121,6 +121,14 @@ func bridgeReviews(pending map[string]any, dossiers map[string]map[string]any, m
 		return nil, nil, err
 	}
 	authorURLs := map[string]bool{}
+	authorBodies := map[string]bool{}
+	originalEvidence, e := bridgeBoundObject(files, object(pending["bindings"])["author_evidence_sha256"])
+	if e != nil {
+		return nil, nil, e
+	}
+	for _, v := range rows(originalEvidence["receipts"]) {
+		authorBodies[text(object(v)["capture_sha256"])] = true
+	}
 	for _, source := range ids(seal["urls"]) {
 		u, err := bridgeURL(source)
 		if err != nil {
@@ -184,7 +192,7 @@ func bridgeReviews(pending map[string]any, dossiers map[string]map[string]any, m
 				}
 				first := text(receipt["fetched_by_role"])
 				when, _ := bridgeTime(receipt["fetched_at"])
-				if !authorURLs[u] && (first == "factual" || first == "quality" || first == "critic") && !when.After(times[role]) {
+				if !authorURLs[u] && !authorBodies[text(receipt["capture_sha256"])] && (first == "factual" || first == "quality" || first == "critic") && !when.After(times[role]) {
 					valid = true
 				}
 			}

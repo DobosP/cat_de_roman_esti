@@ -135,6 +135,9 @@ func pendingBundle(ctx context.Context, snap *quickPendingSnapshot, boards, rati
 		"author_seal_sha256": digestBytes(inputs[opt.AuthorSeal]), "author_evidence_sha256": digestBytes(inputs[opt.ReceiptManifest]),
 		"tool_sha256": tool["sha256"],
 	}
+	if opt.CacheBinding != "" {
+		binding["author_cache_binding_sha256"] = opt.CacheBindingSHA256
+	}
 	pending := map[string]any{"schema": "quick-pending-v1", "status": "pending", "provenance_mode": "source_backed", "qualified": false, "approval": nil, "qualification": quickPendingQualification, "baseline_source_sha256": snap.source.SHA256, "baseline_source_version": snap.source.Version, "bindings": binding, "inventory": snap.manifest, "tool": tool, "input_bindings": pendingInputBindings(inputs), "boards": boards, "rated": ratings, "screen": screen, "preserved_old_rows": old}
 	pendingBytes, err := Render(pending)
 	if err != nil {

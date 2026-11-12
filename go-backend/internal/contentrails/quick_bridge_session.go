@@ -18,7 +18,7 @@ type quickBridgeSession struct {
 	names                     map[string]string
 }
 
-func loadQuickBridge(ctx context.Context, root, framePath, pin string) (*quickBridgeSession, error) {
+func loadQuickBridge(ctx context.Context, root, framePath, pin string, cachePins ...QuickCachePin) (*quickBridgeSession, error) {
 	root, err := pendingRoot(root)
 	if err != nil {
 		return nil, err
@@ -31,10 +31,26 @@ func loadQuickBridge(ctx context.Context, root, framePath, pin string) (*quickBr
 		return nil, fmt.Errorf("quick bridge independently pinned full frame differs")
 	}
 	frame, err := pendingDecode(b, MaxBytes)
-	if err != nil || !pendingExact(frame, "schema", "bundle", "native_build_proof", "operator_replay", "author_release", "review_evidence", "artifacts", "factual_envelope", "quality_envelope", "critic_closure", "history_closure") || frame["schema"] != "quick-bridge-frame-v2" {
-		return nil, fmt.Errorf("quick full bridge requires frame-v2 with explicit history closure")
+	frameKeys := []string{"schema", "bundle", "native_build_proof", "operator_replay", "author_release", "review_evidence", "artifacts", "factual_envelope", "quality_envelope", "critic_closure", "history_closure"}
+	if frame["schema"] == "quick-bridge-frame-v3" {
+		frameKeys = append(frameKeys, "author_cache_binding")
 	}
-	files := &quickBridgeFiles{blobs: map[string][]byte{framePath: b}, total: len(b)}
+	if err != nil || !pendingExact(frame, frameKeys...) || frame["schema"] != "quick-bridge-frame-v2" && frame["schema"] != "quick-bridge-frame-v3" {
+		return nil, fmt.Errorf("quick full bridge requires frame-v2 or cache-bound frame-v3 with explicit history closure")
+	}
+	cacheContext, err := cachePin(cachePins)
+	if err != nil {
+		return nil, err
+	}
+	files := &quickBridgeFiles{blobs: map[string][]byte{framePath: b}, total: len(b), cachePin: cacheContext}
+	if frame["schema"] == "quick-bridge-frame-v3" {
+		ref, e := cacheRef(frame["author_cache_binding"])
+		if e != nil || cacheContext.Path == "" || ref["path"] != cacheContext.Path || ref["sha256"] != cacheContext.SHA256 {
+			return nil, fmt.Errorf("quick frame-v3 independent cache pin differs")
+		}
+	} else if cacheContext.Path != "" {
+		return nil, fmt.Errorf("known v2 exposure context requires frame-v3")
+	}
 	material := map[string]map[string]any{}
 	for _, key := range []string{"bundle", "native_build_proof", "operator_replay", "author_release", "review_evidence", "artifacts", "factual_envelope", "quality_envelope", "critic_closure", "history_closure"} {
 		ref := object(frame[key])
@@ -55,6 +71,17 @@ func loadQuickBridge(ctx context.Context, root, framePath, pin string) (*quickBr
 	if err != nil {
 		return nil, err
 	}
+	if frame["schema"] == "quick-bridge-frame-v3" {
+		context, e := bridgeCacheContext(pending, files)
+		if e != nil {
+			return nil, e
+		}
+		if !same(context["binding"], map[string]any{"path": object(frame["author_cache_binding"])["path"], "sha256": object(frame["author_cache_binding"])["sha256"]}) || integer(object(frame["author_cache_binding"])["bytes"]) != len(files.blobs[cacheContext.Path]) {
+			return nil, fmt.Errorf("quick frame-v3 cache descriptor differs")
+		}
+	} else if object(pending["bindings"])["author_cache_binding_sha256"] != nil {
+		return nil, fmt.Errorf("v2 pending requires full frame-v3")
+	}
 	consumer, err := bridgeProof(root, material["native_build_proof"], pending, snap, files)
 	if err != nil {
 		return nil, err
@@ -67,7 +94,7 @@ func loadQuickBridge(ctx context.Context, root, framePath, pin string) (*quickBr
 	if err = bridgeCritic(root, frame, pending, dossiers, public, private, material, consumer, names, files); err != nil {
 		return nil, err
 	}
-	if err = bridgeHistory(snap, pending, material["history_closure"], names, material, files); err != nil {
+	if err = bridgeHistoryWithCache(snap, pending, material["history_closure"], names, material, files); err != nil {
 		return nil, err
 	}
 	s := &quickBridgeSession{root, framePath, pin, frame, pending, dossiers, material, files, snap, raw, names}
@@ -93,6 +120,9 @@ func (s *quickBridgeSession) paths(except string) []string {
 	return out
 }
 func (s *quickBridgeSession) verify(ctx context.Context, except string) error {
+	if len(s.files.blobs) > 4100 || s.files.total > 64<<20 {
+		return fmt.Errorf("quick bridge complete external readset cap")
+	}
 	if err := ctx.Err(); err != nil {
 		return err
 	}

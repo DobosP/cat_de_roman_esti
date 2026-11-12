@@ -34,12 +34,17 @@ func (g *quickInstallGuard) verify(ctx context.Context, after bool) error {
 	if after {
 		except = g.target
 	}
+	if object(g.release.session.pending["bindings"])["author_cache_binding_sha256"] != nil {
+		if _, e := bridgeCacheContext(g.release.session.pending, g.release.session.files); e != nil {
+			return e
+		}
+	}
 	if err := g.release.session.verify(ctx, except); err != nil {
 		return err
 	}
 	return g.strict.Verify()
 }
-func InstallQuickBridge(ctx context.Context, root, path, pin string) error {
+func InstallQuickBridge(ctx context.Context, root, path, pin string, cachePins ...QuickCachePin) error {
 	b, err := pendingRegular(path, MaxBytes)
 	if err != nil {
 		return err
@@ -48,15 +53,30 @@ func InstallQuickBridge(ctx context.Context, root, path, pin string) error {
 		return fmt.Errorf("quick bridge independent install frame pin differs")
 	}
 	frame, err := pendingDecode(b, MaxBytes)
-	if err != nil || !pendingExact(frame, "schema", "release", "proposal", "audit", "final_factual_review", "final_quality_review", "factual_binding", "quality_binding", "expected_sha256", "operator_checks") || frame["schema"] != "quick-bridge-install-v1" || !authorityDigest(frame["expected_sha256"]) || !same(frame["operator_checks"], map[string]any{"fresh_same_role_finals": true, "final_isolation": true}) {
+	installKeys := []string{"schema", "release", "proposal", "audit", "final_factual_review", "final_quality_review", "factual_binding", "quality_binding", "expected_sha256", "operator_checks"}
+	if frame["schema"] == "quick-bridge-install-v2" {
+		installKeys = append(installKeys, "author_cache_context")
+	}
+	if err != nil || !pendingExact(frame, installKeys...) || frame["schema"] != "quick-bridge-install-v1" && frame["schema"] != "quick-bridge-install-v2" || !authorityDigest(frame["expected_sha256"]) || !same(frame["operator_checks"], map[string]any{"fresh_same_role_finals": true, "final_isolation": true}) {
 		return fmt.Errorf("quick bridge exact final install frame required")
 	}
 	releaseRef := object(frame["release"])
-	release, err := loadQuickBridgeRelease(ctx, root, text(releaseRef["path"]), text(releaseRef["sha256"]))
+	release, err := loadQuickBridgeRelease(ctx, root, text(releaseRef["path"]), text(releaseRef["sha256"]), cachePins...)
 	if err != nil {
 		return err
 	}
 	s := release.session
+	if object(s.pending["bindings"])["author_cache_binding_sha256"] != nil {
+		context, e := bridgeCacheContext(s.pending, s.files)
+		if e != nil {
+			return e
+		}
+		if frame["schema"] != "quick-bridge-install-v2" || !same(frame["author_cache_context"], context) {
+			return fmt.Errorf("quick install v2 complete exposure context required")
+		}
+	} else if frame["schema"] != "quick-bridge-install-v1" {
+		return fmt.Errorf("quick install version/context mismatch")
+	}
 	if _, err = s.files.read(releaseRef); err != nil {
 		return err
 	}
@@ -107,6 +127,14 @@ func InstallQuickBridge(ctx context.Context, root, path, pin string) error {
 		final := material["final_"+role+"_review"]
 		binding := material[role+"_binding"]
 		expected := map[string]any{"schema": "quick-bridge-final-binding-v1", "role": role, "reviewer": s.names[role], "release_sha256": release.pin, "frame_sha256": s.frameSHA, "canonical_review_sha256": object(release.raw[role+"_review"])["sha256"], "confirmation_sha256": object(release.raw[role+"_confirmation"])["sha256"], "raw_review_sha256": s.material[role+"_envelope"]["review_sha256"], "critic_closure_sha256": object(s.frame["critic_closure"])["sha256"], "history_closure_sha256": object(s.frame["history_closure"])["sha256"], "catalog_sha256": frame["expected_sha256"], "audit_sha256": object(frame["audit"])["sha256"], "final_review_sha256": object(frame["final_"+role+"_review"])["sha256"]}
+		if object(s.pending["bindings"])["author_cache_binding_sha256"] != nil {
+			context, e := bridgeCacheContext(s.pending, s.files)
+			if e != nil {
+				return e
+			}
+			expected["schema"] = "quick-bridge-final-binding-v2"
+			expected["author_cache_context"] = context
+		}
 		comparable := object(clone(binding))
 		delete(comparable, "signed_at")
 		delete(comparable, "first_peer_read_at")

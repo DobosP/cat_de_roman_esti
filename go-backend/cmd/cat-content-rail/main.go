@@ -38,6 +38,8 @@ func run() error {
 	inventoryManifest := f.String("inventory-manifest", "", "exact frozen quick pending inventory")
 	authorSeal := f.String("author-seal", "", "sealed complete author URL set bound to packet")
 	receiptManifest := f.String("receipt-manifest", "", "byte-bound author capture evidence; no policy approval inferred")
+	cacheBinding := f.String("author-cache-binding", "", "independent Root-controlled v2 author use/exposure binding")
+	cacheSHA := f.String("author-cache-binding-sha256", "", "independent Root expected SHA outside author packet")
 	pendingOut := f.String("pending-out", "", "new private scratch bundle outside all checkouts")
 	pendingBundle := f.String("pending-bundle", "", "private pending bundle for exact role-view extraction")
 	pendingView := f.String("pending-view", "", "extract public or dossier member only; no freshness approval")
@@ -67,6 +69,13 @@ func run() error {
 		pendingMode = pendingMode || pendingFlags[v.Name]
 		bridgeMode = bridgeMode || bridgeFlags[v.Name]
 	})
+	if (*cacheBinding == "") != (*cacheSHA == "") {
+		return fmt.Errorf("author cache binding requires independent path and SHA together")
+	}
+	cachePins := []contentrails.QuickCachePin{}
+	if *cacheBinding != "" {
+		cachePins = append(cachePins, contentrails.QuickCachePin{Path: *cacheBinding, SHA256: *cacheSHA})
+	}
 	if bridgeMode {
 		if rail != "quick" {
 			return fmt.Errorf("quick bridge actions require quick rail")
@@ -98,6 +107,9 @@ func run() error {
 		default:
 			return fmt.Errorf("quick bridge requires one complete separate pinned action")
 		}
+		if action != "view" && len(cachePins) > 0 {
+			allowed["author-cache-binding"], allowed["author-cache-binding-sha256"] = true, true
+		}
 		for key := range used {
 			if !allowed[key] {
 				return fmt.Errorf("quick bridge cannot mix source, pending, proposal, authority or install actions")
@@ -109,13 +121,13 @@ func run() error {
 		var err error
 		switch action {
 		case "draft":
-			result, err = contentrails.DraftQuickBridge(ctx, *root, contentrails.QuickBridgeDraftOptions{Frame: *bridgeFrame, FrameSHA256: *bridgePin, Output: *bridgeOut})
+			result, err = contentrails.DraftQuickBridge(ctx, *root, contentrails.QuickBridgeDraftOptions{Frame: *bridgeFrame, FrameSHA256: *bridgePin, Output: *bridgeOut, CacheBinding: *cacheBinding, CacheBindingSHA256: *cacheSHA})
 		case "prepare":
-			result, err = contentrails.PrepareQuickBridge(ctx, *root, *bridgePrepare, *bridgePin, *bridgeOut)
+			result, err = contentrails.PrepareQuickBridge(ctx, *root, *bridgePrepare, *bridgePin, *bridgeOut, cachePins...)
 		case "propose":
-			result, err = contentrails.ProposeQuickBridge(ctx, *root, *bridgeRelease, *bridgeReleasePin, *bridgeOut)
+			result, err = contentrails.ProposeQuickBridge(ctx, *root, *bridgeRelease, *bridgeReleasePin, *bridgeOut, cachePins...)
 		case "install":
-			err = contentrails.InstallQuickBridge(ctx, *root, *bridgeInstall, *bridgeInstallPin)
+			err = contentrails.InstallQuickBridge(ctx, *root, *bridgeInstall, *bridgeInstallPin, cachePins...)
 			result = map[string]any{"ok": true, "mode": "write", "rail": "quick"}
 		case "view":
 			var b []byte
@@ -132,12 +144,18 @@ func run() error {
 		return json.NewEncoder(os.Stdout).Encode(result)
 	}
 
+	if len(cachePins) > 0 && !pendingMode && !bridgeMode {
+		return fmt.Errorf("author cache context requires preparation or bridge action")
+	}
 	if pendingMode {
 		allowed := map[string]bool{"root": true}
 		switch {
 		case *pendingInventory:
 			allowed["pending-inventory"] = true
 		case *preparePending != "" && *inventoryManifest != "" && *authorSeal != "" && *receiptManifest != "" && *pendingOut != "":
+			if len(cachePins) > 0 {
+				allowed["author-cache-binding"], allowed["author-cache-binding-sha256"] = true, true
+			}
 			for _, key := range []string{"prepare-pending", "inventory-manifest", "author-seal", "receipt-manifest", "pending-out"} {
 				allowed[key] = true
 			}
@@ -173,7 +191,7 @@ func run() error {
 		}
 		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Minute)
 		defer cancel()
-		result, err := contentrails.PrepareQuickPending(ctx, *root, contentrails.QuickPendingOptions{Packet: *preparePending, InventoryManifest: *inventoryManifest, AuthorSeal: *authorSeal, ReceiptManifest: *receiptManifest, Output: *pendingOut})
+		result, err := contentrails.PrepareQuickPending(ctx, *root, contentrails.QuickPendingOptions{Packet: *preparePending, InventoryManifest: *inventoryManifest, AuthorSeal: *authorSeal, ReceiptManifest: *receiptManifest, Output: *pendingOut, CacheBinding: *cacheBinding, CacheBindingSHA256: *cacheSHA})
 		if err != nil {
 			return err
 		}

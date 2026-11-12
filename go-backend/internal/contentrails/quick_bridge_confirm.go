@@ -14,7 +14,7 @@ type quickBridgeRelease struct {
 	confirmations                           map[string]map[string]any
 }
 
-func loadQuickBridgeRelease(ctx context.Context, root, path, pin string) (*quickBridgeRelease, error) {
+func loadQuickBridgeRelease(ctx context.Context, root, path, pin string, cachePins ...QuickCachePin) (*quickBridgeRelease, error) {
 	b, err := pendingRegular(path, MaxBytes)
 	if err != nil {
 		return nil, err
@@ -23,13 +23,28 @@ func loadQuickBridgeRelease(ctx context.Context, root, path, pin string) (*quick
 		return nil, fmt.Errorf("quick bridge independent release pin differs")
 	}
 	release, err := pendingDecode(b, MaxBytes)
-	if err != nil || !pendingExact(release, "schema", "bridge_frame", "prepare_bundle", "source", "candidate", "factual_review", "quality_review", "factual_confirmation", "quality_confirmation", "operator_checks") || release["schema"] != "quick-bridge-release-v1" || !same(release["operator_checks"], map[string]any{"fresh_whole_candidate_same_role": true, "confirmation_isolation": true, "baseline_evidence_checked": true}) {
+	releaseKeys := []string{"schema", "bridge_frame", "prepare_bundle", "source", "candidate", "factual_review", "quality_review", "factual_confirmation", "quality_confirmation", "operator_checks"}
+	if release["schema"] == "quick-bridge-release-v2" {
+		releaseKeys = append(releaseKeys, "author_cache_context")
+	}
+	if err != nil || !pendingExact(release, releaseKeys...) || release["schema"] != "quick-bridge-release-v1" && release["schema"] != "quick-bridge-release-v2" || !same(release["operator_checks"], map[string]any{"fresh_whole_candidate_same_role": true, "confirmation_isolation": true, "baseline_evidence_checked": true}) {
 		return nil, fmt.Errorf("quick bridge exact independently reviewed release frame required")
 	}
 	frameRef := object(release["bridge_frame"])
-	s, err := loadQuickBridge(ctx, root, text(frameRef["path"]), text(frameRef["sha256"]))
+	s, err := loadQuickBridge(ctx, root, text(frameRef["path"]), text(frameRef["sha256"]), cachePins...)
 	if err != nil {
 		return nil, err
+	}
+	if object(s.pending["bindings"])["author_cache_binding_sha256"] != nil {
+		context, e := bridgeCacheContext(s.pending, s.files)
+		if e != nil {
+			return nil, e
+		}
+		if release["schema"] != "quick-bridge-release-v2" || !same(release["author_cache_context"], context) {
+			return nil, fmt.Errorf("quick release v2 complete exposure context required")
+		}
+	} else if release["schema"] != "quick-bridge-release-v1" {
+		return nil, fmt.Errorf("quick release version/context mismatch")
 	}
 	if _, err = s.files.read(frameRef); err != nil {
 		return nil, err
@@ -102,6 +117,14 @@ func loadQuickBridgeRelease(ctx context.Context, root, path, pin string) (*quick
 func bridgeCanonical(s *quickBridgeSession, role string, index int, report, confirmation, release, draft, baselineEvidence, baseline map[string]any) error {
 	sourceSHA, candidateSHA := draft["source_sha256"], draft["candidate_sha256"]
 	binding := map[string]any{"schema": "quick-bridge-canonical-binding-v1", "frame_sha256": s.frameSHA, "prepare_bundle_sha256": object(release["prepare_bundle"])["sha256"], "source_sha256": sourceSHA, "baseline": baselineEvidence}
+	if object(s.pending["bindings"])["author_cache_binding_sha256"] != nil {
+		context, e := bridgeCacheContext(s.pending, s.files)
+		if e != nil {
+			return e
+		}
+		binding["schema"] = "quick-bridge-canonical-binding-v2"
+		binding["author_cache_context"] = context
+	}
 	if !pendingExact(report, "kind", "role", "reviewer", "candidate_sha256", "items", "baseline_evidence", "evidence_sha256", "inherited_review_sha256") || report["kind"] != "quick-content-review-v1" || report["role"] != role || report["reviewer"] != s.names[role] || report["candidate_sha256"] != candidateSHA || !same(report["baseline_evidence"], binding) || report["evidence_sha256"] != s.frameSHA || report["inherited_review_sha256"] != object(baselineEvidence["review"])["sha256"] {
 		return fmt.Errorf("quick bridge canonical full role/identity/candidate/evidence binding")
 	}
@@ -141,7 +164,20 @@ func bridgeCanonical(s *quickBridgeSession, role string, index int, report, conf
 			}
 		}
 	}
-	if !pendingExact(confirmation, "schema", "role", "reviewer", "signed_at", "first_peer_read_at", "frame_sha256", "prepare_bundle_sha256", "source_sha256", "candidate_sha256", "canonical_review_sha256", "baseline_evidence", "items", "verdict", "rationale") || confirmation["schema"] != "quick-full-candidate-confirmation-v1" || confirmation["role"] != role || confirmation["reviewer"] != s.names[role] || confirmation["frame_sha256"] != s.frameSHA || confirmation["prepare_bundle_sha256"] != object(release["prepare_bundle"])["sha256"] || confirmation["source_sha256"] != sourceSHA || confirmation["candidate_sha256"] != candidateSHA || confirmation["canonical_review_sha256"] != object(release[role+"_review"])["sha256"] || !same(confirmation["baseline_evidence"], baselineEvidence) || confirmation["verdict"] != "accept" || bridgeNorm(text(confirmation["rationale"])) == "" || !arrayShape(confirmation["items"], len(all), len(all)) {
+	confirmationKeys := []string{"schema", "role", "reviewer", "signed_at", "first_peer_read_at", "frame_sha256", "prepare_bundle_sha256", "source_sha256", "candidate_sha256", "canonical_review_sha256", "baseline_evidence", "items", "verdict", "rationale"}
+	confirmationSchema := "quick-full-candidate-confirmation-v1"
+	if object(s.pending["bindings"])["author_cache_binding_sha256"] != nil {
+		context, e := bridgeCacheContext(s.pending, s.files)
+		if e != nil {
+			return e
+		}
+		confirmationSchema = "quick-full-candidate-confirmation-v2"
+		confirmationKeys = append(confirmationKeys, "author_cache_context")
+		if !same(confirmation["author_cache_context"], context) {
+			return fmt.Errorf("quick canonical confirmation v2 exposure context differs")
+		}
+	}
+	if !pendingExact(confirmation, confirmationKeys...) || confirmation["schema"] != confirmationSchema || confirmation["role"] != role || confirmation["reviewer"] != s.names[role] || confirmation["frame_sha256"] != s.frameSHA || confirmation["prepare_bundle_sha256"] != object(release["prepare_bundle"])["sha256"] || confirmation["source_sha256"] != sourceSHA || confirmation["candidate_sha256"] != candidateSHA || confirmation["canonical_review_sha256"] != object(release[role+"_review"])["sha256"] || !same(confirmation["baseline_evidence"], baselineEvidence) || confirmation["verdict"] != "accept" || bridgeNorm(text(confirmation["rationale"])) == "" || !arrayShape(confirmation["items"], len(all), len(all)) {
 		return fmt.Errorf("quick bridge fresh full-candidate original same-role confirmation required")
 	}
 	signed, err := bridgeTime(confirmation["signed_at"])
@@ -184,8 +220,8 @@ func bridgePeerBlindConfirmations(confirmations map[string]map[string]any) error
 	}
 	return nil
 }
-func ProposeQuickBridge(ctx context.Context, root, release, pin, output string) (map[string]any, error) {
-	r, err := loadQuickBridgeRelease(ctx, root, release, pin)
+func ProposeQuickBridge(ctx context.Context, root, release, pin, output string, cachePins ...QuickCachePin) (map[string]any, error) {
+	r, err := loadQuickBridgeRelease(ctx, root, release, pin, cachePins...)
 	if err != nil {
 		return nil, err
 	}

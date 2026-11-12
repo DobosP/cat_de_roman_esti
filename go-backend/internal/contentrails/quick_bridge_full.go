@@ -103,6 +103,14 @@ func bridgeFullDraft(s *quickBridgeSession) (map[string]any, error) {
 			items = append(items, map[string]any{"id": r["id"], "record_sha256": r["record_sha256"], "judgment": r, "baseline_item": nil, "baseline_evidence": nil})
 		}
 		draft := map[string]any{"kind": "quick-canonical-review-draft-v1", "role": role, "reviewer": s.names[role], "frame_sha256": s.frameSHA, "source_sha256": source.SHA256, "candidate_sha256": digestBytes(candidateBytes), "baseline_evidence": evidence[role], "items": items, "approval": nil, "requires_fresh_whole_candidate_confirmation": true}
+		if object(s.pending["bindings"])["author_cache_binding_sha256"] != nil {
+			context, e := bridgeCacheContext(s.pending, s.files)
+			if e != nil {
+				return nil, e
+			}
+			draft["kind"] = "quick-canonical-review-draft-v2"
+			draft["author_cache_context"] = context
+		}
 		b, err := Render(draft)
 		if err != nil {
 			return nil, err
@@ -114,10 +122,19 @@ func bridgeFullDraft(s *quickBridgeSession) (map[string]any, error) {
 		return nil, err
 	}
 	// Canonical digest binds the complete frozen core payload without changing it.
-	return map[string]any{"schema": "quick-full-draft-bundle-v1", "frame_sha256": s.frameSHA, "pending_sha256": object(s.pending["_bridge"])["pending_sha256"], "baseline_source_sha256": s.snap.source.SHA256, "preserved_old_rows": s.pending["preserved_old_rows"], "core_payload_sha256": digest(core["boards"]), "source_sha256": source.SHA256, "candidate_sha256": digestBytes(candidateBytes), "members": members, "qualified": false, "approval": nil}, nil
+	out := map[string]any{"schema": "quick-full-draft-bundle-v1", "frame_sha256": s.frameSHA, "pending_sha256": object(s.pending["_bridge"])["pending_sha256"], "baseline_source_sha256": s.snap.source.SHA256, "preserved_old_rows": s.pending["preserved_old_rows"], "core_payload_sha256": digest(core["boards"]), "source_sha256": source.SHA256, "candidate_sha256": digestBytes(candidateBytes), "members": members, "qualified": false, "approval": nil}
+	if object(s.pending["bindings"])["author_cache_binding_sha256"] != nil {
+		context, e := bridgeCacheContext(s.pending, s.files)
+		if e != nil {
+			return nil, e
+		}
+		out["schema"] = "quick-full-draft-bundle-v2"
+		out["author_cache_context"] = context
+	}
+	return out, nil
 }
-func PrepareQuickBridge(ctx context.Context, root, frame, pin, output string) (map[string]any, error) {
-	s, err := loadQuickBridge(ctx, root, frame, pin)
+func PrepareQuickBridge(ctx context.Context, root, frame, pin, output string, cachePins ...QuickCachePin) (map[string]any, error) {
+	s, err := loadQuickBridge(ctx, root, frame, pin, cachePins...)
 	if err != nil {
 		return nil, err
 	}
@@ -140,7 +157,11 @@ func QuickFullDraftView(path, member string) ([]byte, error) {
 		return nil, err
 	}
 	bundle, err := pendingDecode(b, quickPendingMaxBytes)
-	if err != nil || !pendingExact(bundle, "schema", "frame_sha256", "pending_sha256", "baseline_source_sha256", "preserved_old_rows", "core_payload_sha256", "source_sha256", "candidate_sha256", "members", "qualified", "approval") || bundle["schema"] != "quick-full-draft-bundle-v1" || bundle["qualified"] != false || bundle["approval"] != nil || !arrayShape(bundle["members"], 4, 4) {
+	bundleKeys := []string{"schema", "frame_sha256", "pending_sha256", "baseline_source_sha256", "preserved_old_rows", "core_payload_sha256", "source_sha256", "candidate_sha256", "members", "qualified", "approval"}
+	if bundle["schema"] == "quick-full-draft-bundle-v2" {
+		bundleKeys = append(bundleKeys, "author_cache_context")
+	}
+	if err != nil || !pendingExact(bundle, bundleKeys...) || bundle["schema"] != "quick-full-draft-bundle-v1" && bundle["schema"] != "quick-full-draft-bundle-v2" || bundle["qualified"] != false || bundle["approval"] != nil || !arrayShape(bundle["members"], 4, 4) {
 		return nil, fmt.Errorf("quick full draft bundle schema")
 	}
 	seen := map[string]bool{}

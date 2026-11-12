@@ -653,6 +653,49 @@ def quick_public(public,private,dossier,pending,challenge):
     quick_require(all(isinstance(v,str) and v.strip() and v not in public_text for v in forbidden),'private identity/rationale/source/predicate leakage')
 
 
+def quick_cache_context(a,root,external,evidence,seal,bound,selected,captures):
+    path=getattr(a,'author_cache_binding',None)
+    expected=getattr(a,'author_cache_binding_sha256',None)
+    v2=evidence.get('schema')=='quick-author-evidence-v2'
+    if not v2:
+        quick_require(not path and not expected and 'author_cache_binding_sha256' not in bound,'known cache exposure context cannot select v1')
+        return None,set()
+    quick_require(isinstance(path,str) and isinstance(expected,str) and re.fullmatch('[0-9a-f]{64}',expected) is not None,'independent Root cache path and SHA required')
+    quick_require(path not in selected.values() and path not in captures and path in external,'Root cache binding role/path missing or aliased')
+    quick_require(str(quick_path(path))==path,'Root cache binding canonical path')
+    quick_pin(external[path],expected,'independent Root cache binding')
+    binding=json_object(external[path])
+    quick_require(exact_keys(binding,'schema','operator','root','baseline_source_sha256','inventory_sha256','packet_sha256','run_id','cache_root','client','author','author_context','created_at','source_controls','first_receipt_journal','owner_refusals','attempts','deliveries','inspection_ack','exposure_urls') and binding['schema']=='quick-author-cache-binding-v1' and binding['operator']=='agent:codex' and binding['root']==str(root),'Root cache binding shape/operator/current root')
+    quick_require(bound.get('author_cache_binding_sha256')==expected and binding['packet_sha256']==bound['author_packet_sha256'] and binding['inventory_sha256']==bound['inventory_sha256'],'Root cache current packet/inventory binding')
+    quick_require(evidence.get('packet_sha256')==bound['author_packet_sha256'] and seal.get('packet_sha256')==bound['author_packet_sha256'] and seal.get('evidence_sha256')==bound['author_evidence_sha256'] and seal.get('cache_binding_sha256')==expected and seal.get('schema')=='quick-author-seal-v2','v2 seal/evidence/independent Root pin binding')
+    quick_require(exact_keys(evidence,'schema','packet_sha256','items','receipts','cache_binding') and exact_keys(seal,'schema','author','packet_sha256','evidence_sha256','cache_binding_sha256','sealed_at','urls'),'v2 exact evidence/seal schema')
+    urls=binding['exposure_urls']
+    quick_require(isinstance(urls,list) and 1<=len(urls)<=4096 and all(isinstance(u,str) for u in urls) and urls==sorted(set(urls)) and seal['urls']==urls,'complete sorted author exposure')
+    quick_require(isinstance(binding['attempts'],list) and 1<=len(binding['attempts'])<=64 and isinstance(binding['deliveries'],list) and len(binding['deliveries'])==len(urls),'fixed cache attempt/delivery caps')
+    used={path};roles={path:'binding'}
+    def descriptor(value,role,existing=False):
+        quick_require(exact_keys(value,'path','bytes','sha256') and isinstance(value['path'],str) and type(value['bytes']) is int and 1<=value['bytes']<=4<<20 and isinstance(value['sha256'],str),'cache closure descriptor shape/cap')
+        name=value['path'];quick_require(name in external and (existing or name not in roles) and name not in selected.values() and name not in captures,'cache closure unknown/multiple artifact roles')
+        quick_require(str(quick_path(name))==name and root not in Path(name).parents,'cache closure canonical/external path')
+        quick_require(len(external[name])==value['bytes'],'cache closure byte count');quick_pin(external[name],value['sha256'],'cache closure '+role)
+        used.add(name);roles[name]=role
+        return external[name]
+    quick_require(evidence['cache_binding']=={'path':path,'bytes':len(external[path]),'sha256':expected},'evidence Root binding descriptor differs')
+    for key in ('client','first_receipt_journal','owner_refusals','inspection_ack'):descriptor(binding[key],key)
+    quick_require(binding['client']['sha256']=='29f6979a54bba0bb5858c9449e226f759d863ef11667db8ceee30de0ee9f33c3','approved manual client only')
+    controls=json_object(descriptor(binding['source_controls'],'source_controls'))
+    quick_require(exact_keys(controls,'schema','run_id','client_sha256','checked_at','terms_checked_by','terms_evidence','hosts') and controls['schema']=='quick-cache-current-controls-v1' and isinstance(controls['hosts'],list) and 1<=len(controls['hosts'])<=3 and isinstance(controls['terms_evidence'],list) and 1<=len(controls['terms_evidence'])<=32,'fixed source-control closure shape/caps')
+    for i,value in enumerate(controls['terms_evidence']):descriptor(value,'terms/'+str(i))
+    for i,value in enumerate(controls['hosts']):
+        quick_require(exact_keys(value,'host','state','robots_receipt','robots_body'),'source-control host shape')
+        for key in ('state','robots_receipt','robots_body'):descriptor(value[key],'host/'+str(i)+'/'+key)
+    for i,value in enumerate(binding['attempts']):descriptor(value,'attempt/'+str(i))
+    for i,value in enumerate(binding['deliveries']):
+        quick_require(exact_keys(value,'url','first_receipt','attempt_sha256','result_row','requested_role','delivery_kind','requested_at','client_requested_at','observed_by','observation_kind'),'Root delivery exact shape')
+        descriptor(value['first_receipt'],'first_receipt/'+str(i))
+    return {'binding':{'path':path,'sha256':expected},'exposure_urls':urls},used
+
+
 def quick_current(a):
     import tempfile
     root=quick_path(str(Path(a.root).absolute()));repo=Repo(root)
@@ -673,7 +716,9 @@ def quick_current(a):
     members=inventory['members'];quick_require(isinstance(members,list) and 1<=len(members)<=20000,'inventory cap')
     paths=[r.get('path') for r in members if isinstance(r,dict)];quick_require(len(paths)==len(members) and all(isinstance(p,str) for p in paths) and paths==sorted(set(paths)),'inventory path identity')
     for row in members:quick_bound_file(row,root)
-    bound=pending['bindings'];quick_require(exact_keys(bound,'kg_sha256','rubric_sha256','inventory_sha256','stock_sha256','holds_sha256','registry_sha256','author_packet_sha256','author_seal_sha256','author_evidence_sha256','tool_sha256'),'binding shape')
+    bound=pending['bindings'];binding_keys=['kg_sha256','rubric_sha256','inventory_sha256','stock_sha256','holds_sha256','registry_sha256','author_packet_sha256','author_seal_sha256','author_evidence_sha256','tool_sha256']
+    if 'author_cache_binding_sha256' in bound:binding_keys.append('author_cache_binding_sha256')
+    quick_require(exact_keys(bound,*binding_keys),'binding shape')
     quick_require(all(isinstance(v,str) and re.fullmatch('[0-9a-f]{64}',v) is not None for v in bound.values()),'binding digest shape')
     quick_require(bound['inventory_sha256']==quick_digest(inventory) and bound['tool_sha256']==tool_hash,'inventory/tool binding differs')
     for field,rel in [('kg_sha256',FIX+'kg_sample.json'),('rubric_sha256','docs/CRITIQUE_RUBRIC.md')]:
@@ -697,7 +742,7 @@ def quick_current(a):
     selected={}
     for name,field,schema in [('packet','author_packet_sha256','quick-author-packet-v1'),('seal','author_seal_sha256','quick-author-seal-v1'),('evidence','author_evidence_sha256','quick-author-evidence-v1')]:
         matches=[p for p,b in external.items() if sha256(b)==bound[field]];quick_require(len(matches)==1,'author input binding ambiguous/missing')
-        selected[name]=matches[0];quick_require(json_object(external[matches[0]]).get('schema')==schema,'author input schema')
+        selected[name]=matches[0];actual_schema=json_object(external[matches[0]]).get('schema');quick_require(actual_schema==schema or name in ('seal','evidence') and actual_schema==schema[:-1]+'2','author input schema')
     packet=json_object(external[selected['packet']]);quick_require(exact_keys(packet,'schema','baseline_source_sha256','boards') and packet['baseline_source_sha256']==pending['baseline_source_sha256'] and packet['boards']==pending['boards'],'exact raw author packet differs')
     # Captures may be HTML/binary: identify inventory only among JSON candidates.
     inv_matches=[]
@@ -711,7 +756,11 @@ def quick_current(a):
     quick_require(all(len(data)<=4<<20 for path,data in external.items() if path!=selected['inventory']),'external author/source document exceeds 4 MiB')
     evidence=json_object(external[selected['evidence']]);quick_require(isinstance(evidence.get('receipts'),list),'receipt inventory absent')
     captures={r.get('capture_path') for r in evidence['receipts'] if isinstance(r,dict)}
-    quick_require(set(external)==set(selected.values())|captures,'external readset exact capture coverage')
+    seal=json_object(external[selected['seal']])
+    cache_context,cache_paths=quick_cache_context(a,root,external,evidence,seal,bound,selected,captures)
+    if cache_context:quick_require(json_object(external[cache_context['binding']['path']])['baseline_source_sha256']==pending['baseline_source_sha256'],'cache binding stale baseline')
+    quick_require(set(external)==set(selected.values())|captures|cache_paths,'external readset exact fixed capture/cache closure coverage')
+    replay_cache=[] if cache_context is None else ['--author-cache-binding',cache_context['binding']['path'],'--author-cache-binding-sha256',cache_context['binding']['sha256']]
     # Native replay checks compiled rubric/authority, full current path membership,
     # source chain, stock/history/holds, raw inputs and actual service projections.
     # View extraction is intentionally never used as a freshness attestation.
@@ -719,7 +768,7 @@ def quick_current(a):
         current=json_object(quick_run(tool_path,['--root',str(root),'--pending-inventory'],temp))
         quick_require(current==inventory,'current native inventory differs')
         out=Path(temp)/'replayed.json'
-        quick_run(tool_path,['--root',str(root),'--prepare-pending',selected['packet'],'--inventory-manifest',selected['inventory'],'--author-seal',selected['seal'],'--receipt-manifest',selected['evidence'],'--pending-out',str(out)],temp)
+        quick_run(tool_path,['--root',str(root),'--prepare-pending',selected['packet'],'--inventory-manifest',selected['inventory'],'--author-seal',selected['seal'],'--receipt-manifest',selected['evidence'],'--pending-out',str(out),*replay_cache],temp)
         quick_require(quick_read(out)==blob,'fresh native preparation bytes differ')
     # Reread the frozen readsets after the subprocess before publishing either key.
     quick_require(quick_read(bundle_path)==blob,'bundle changed during replay')
@@ -731,6 +780,7 @@ def quick_current(a):
     # proof and its declared local source bodies after the expensive replay.
     quick_require(quick_build_proof(a,root,tool,pending['inventory'])==proof,'build proof changed during replay')
     binding={'stock_screen':pending['screen'],'consumer_tools':consumer,'root':str(root),'baseline_source_sha256':pending['baseline_source_sha256'],'baseline_source_version':pending['baseline_source_version'],'bundle':{'path':str(bundle_path),'sha256':sha256(blob)},'native_tool':tool,'native_build_proof':proof,'pending_sha256':json_object(blob)['index']['pending_sha256'],'record_sha256':dossier['record_sha256'],'review_binding':dossier['review_binding'],'bindings':bound,'inventory_sha256':quick_digest(inventory),'game':public['game'],'mode':public['mode']}
+    if cache_context is not None:binding['author_cache_context']=cache_context
     return public,private,pub_raw,binding
 
 
@@ -787,6 +837,7 @@ def add_quick_arguments(parser):
     parser.add_argument('--root',required=True);parser.add_argument('--pending-bundle',required=True);parser.add_argument('--pending-sha256',required=True)
     parser.add_argument('--item-id',required=True);parser.add_argument('--native-tool',required=True);parser.add_argument('--native-tool-sha256',required=True)
     parser.add_argument('--native-build-proof',required=True);parser.add_argument('--native-build-proof-sha256',required=True)
+    parser.add_argument('--author-cache-binding');parser.add_argument('--author-cache-binding-sha256')
     add_scratch_argument(parser)
 
 

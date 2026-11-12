@@ -22,11 +22,15 @@ import (
 
 const quickBridgeQualification = "Validated raw review fragments only; full-candidate same-role confirmation and guarded install binding are not implemented. No approval or installation authority."
 
-type QuickBridgeDraftOptions struct{ Frame, FrameSHA256, Output string }
+type QuickBridgeDraftOptions struct {
+	Frame, FrameSHA256, Output       string
+	CacheBinding, CacheBindingSHA256 string
+}
 
 type quickBridgeFiles struct {
-	blobs map[string][]byte
-	total int
+	blobs    map[string][]byte
+	total    int
+	cachePin QuickCachePin
 }
 
 func (f *quickBridgeFiles) read(ref map[string]any) ([]byte, error) {
@@ -47,7 +51,7 @@ func (f *quickBridgeFiles) read(ref map[string]any) ([]byte, error) {
 		}
 	} else {
 		f.total += len(b)
-		if f.total > 64<<20 {
+		if f.total > 64<<20 || len(f.blobs) >= 4100 {
 			return nil, fmt.Errorf("quick bridge external evidence exceeds 64 MiB")
 		}
 		f.blobs[path] = b
@@ -201,7 +205,7 @@ func DraftQuickBridge(ctx context.Context, root string, opt QuickBridgeDraftOpti
 	if err != nil || !pendingExact(frame, "schema", "bundle", "native_build_proof", "operator_replay", "author_release", "review_evidence", "artifacts", "factual_envelope", "quality_envelope", "critic_closure") || frame["schema"] != "quick-bridge-frame-v1" {
 		return nil, fmt.Errorf("quick bridge frame schema")
 	}
-	files := &quickBridgeFiles{blobs: map[string][]byte{opt.Frame: frameBytes}, total: len(frameBytes)}
+	files := &quickBridgeFiles{blobs: map[string][]byte{opt.Frame: frameBytes}, total: len(frameBytes), cachePin: QuickCachePin{opt.CacheBinding, opt.CacheBindingSHA256}}
 	material := map[string]map[string]any{}
 	for _, key := range []string{"bundle", "native_build_proof", "operator_replay", "author_release", "review_evidence", "artifacts", "factual_envelope", "quality_envelope", "critic_closure"} {
 		ref := object(frame[key])
@@ -218,6 +222,9 @@ func DraftQuickBridge(ctx context.Context, root string, opt QuickBridgeDraftOpti
 	snap, err := captureQuickPending(root, nil)
 	if err != nil {
 		return nil, err
+	}
+	if opt.CacheBinding != "" || opt.CacheBindingSHA256 != "" {
+		return nil, fmt.Errorf("quick cache v2 requires full frame-v3 prepare/release/install path")
 	}
 	pending, dossiers, public, private, err := bridgePending(root, frame, material["bundle"], snap, files)
 	if err != nil {
@@ -314,7 +321,11 @@ func bridgePendingWithHistory(root string, frame, bundle map[string]any, snap *q
 		return fail()
 	}
 	bind := object(pending["bindings"])
-	if !pendingExact(bind, "kg_sha256", "rubric_sha256", "inventory_sha256", "stock_sha256", "holds_sha256", "registry_sha256", "author_packet_sha256", "author_seal_sha256", "author_evidence_sha256", "tool_sha256") {
+	bindingKeys := []string{"kg_sha256", "rubric_sha256", "inventory_sha256", "stock_sha256", "holds_sha256", "registry_sha256", "author_packet_sha256", "author_seal_sha256", "author_evidence_sha256", "tool_sha256"}
+	if bind["author_cache_binding_sha256"] != nil {
+		bindingKeys = append(bindingKeys, "author_cache_binding_sha256")
+	}
+	if !pendingExact(bind, bindingKeys...) {
 		return fail()
 	}
 	for _, value := range bind {
@@ -353,7 +364,7 @@ func bridgePendingWithHistory(root string, frame, bundle map[string]any, snap *q
 		value, decodeErr := pendingDecode(b, quickPendingMaxBytes)
 		if decodeErr == nil {
 			for key, schema := range map[string]string{"packet": "quick-author-packet-v1", "seal": "quick-author-seal-v1", "evidence": "quick-author-evidence-v1", "inventory": "quick-pending-inventory-v1"} {
-				if value["schema"] == schema {
+				if value["schema"] == schema || key == "seal" && value["schema"] == "quick-author-seal-v2" || key == "evidence" && value["schema"] == "quick-author-evidence-v2" {
 					if selected[key] != nil {
 						return fail()
 					}
@@ -361,6 +372,11 @@ func bridgePendingWithHistory(root string, frame, bundle map[string]any, snap *q
 					selectedPaths[path] = true
 				}
 			}
+		}
+	}
+	for path, b := range external {
+		if len(b) > MaxBytes && !same(selected["inventory"], func() map[string]any { v, _ := pendingDecode(b, quickPendingMaxBytes); return v }()) {
+			return nil, nil, nil, nil, fmt.Errorf("quick bridge external author/capture exceeds 4 MiB: %s", path)
 		}
 	}
 	if len(selected) != 4 || !same(selected["inventory"], snap.manifest) {
@@ -372,6 +388,26 @@ func bridgePendingWithHistory(root string, frame, bundle map[string]any, snap *q
 	}
 	for _, v := range rows(selected["evidence"]["receipts"]) {
 		usedPaths[text(object(v)["capture_path"])] = true
+	}
+	cacheContext := files.cachePin.Path != "" || files.cachePin.SHA256 != ""
+	var cacheBinding map[string]any
+	if selected["evidence"]["schema"] == "quick-author-evidence-v2" || cacheContext || bind["author_cache_binding_sha256"] != nil {
+		if selected["evidence"]["schema"] != "quick-author-evidence-v2" || selected["seal"]["schema"] != "quick-author-seal-v2" || bind["author_cache_binding_sha256"] != files.cachePin.SHA256 {
+			return fail()
+		}
+		read := func(ref map[string]any) ([]byte, error) {
+			path := text(ref["path"])
+			b, ok := external[path]
+			if !ok || usedPaths[path] || len(b) > MaxBytes || len(b) != integer(ref["bytes"]) || digestBytes(b) != ref["sha256"] {
+				return nil, fmt.Errorf("quick bridge cache closure differs")
+			}
+			usedPaths[path] = true
+			return b, nil
+		}
+		cacheBinding, _, err = cacheLoad(root, files.cachePin, read)
+		if err != nil {
+			return nil, nil, nil, nil, err
+		}
 	}
 	if len(usedPaths) != len(external) {
 		return fail()
@@ -391,10 +427,16 @@ func bridgePendingWithHistory(root string, frame, bundle map[string]any, snap *q
 			packetBytes = external[path]
 		}
 	}
-	if len(packetBytes) == 0 || digestBytes(bridgeOriginal(external, "quick-author-packet-v1")) != bind["author_packet_sha256"] || digestBytes(bridgeOriginal(external, "quick-author-seal-v1")) != bind["author_seal_sha256"] || digestBytes(bridgeOriginal(external, "quick-author-evidence-v1")) != bind["author_evidence_sha256"] {
+	sealSchema, evidenceSchema := text(selected["seal"]["schema"]), text(selected["evidence"]["schema"])
+	if len(packetBytes) == 0 || digestBytes(bridgeOriginal(external, "quick-author-packet-v1")) != bind["author_packet_sha256"] || digestBytes(bridgeOriginal(external, sealSchema)) != bind["author_seal_sha256"] || digestBytes(bridgeOriginal(external, evidenceSchema)) != bind["author_evidence_sha256"] {
 		return fail()
 	}
-	if err = pendingEvidence(packetBytes, boards, selected["seal"], selected["evidence"], external); err != nil {
+	if evidenceSchema == "quick-author-evidence-v2" {
+		err = pendingEvidenceV2(root, snap.source.SHA256, digest(snap.manifest), packetBytes, bridgeOriginal(external, evidenceSchema), boards, selected["seal"], selected["evidence"], cacheBinding, external, files.cachePin)
+	} else {
+		err = pendingEvidence(packetBytes, boards, selected["seal"], selected["evidence"], external)
+	}
+	if err != nil {
 		return nil, nil, nil, nil, err
 	}
 	old := []any{}

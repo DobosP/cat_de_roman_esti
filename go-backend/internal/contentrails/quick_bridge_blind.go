@@ -12,7 +12,23 @@ func bridgeCritic(root string, frame, pending map[string]any, dossiers, public, 
 	if !pendingExact(closure, "schema", "role", "reviewer", "signed_at", "pending_sha256", "items") || closure["schema"] != "quick-critic-semantic-closure-v1" || closure["role"] != "critic" || closure["reviewer"] != identities["critic"] || closure["pending_sha256"] != pendingSHA || !arrayShape(closure["items"], len(dossiers), len(dossiers)) {
 		return fmt.Errorf("quick bridge independent critic semantic closure exact coverage required")
 	}
-	if !pendingExact(receipt, "schema", "root", "created_at", "bundle_sha256", "native_build_proof_sha256", "consumer_tools", "checks", "replays") || receipt["schema"] != "quick-bridge-operator-replay-v1" || receipt["root"] != root || receipt["bundle_sha256"] != object(frame["bundle"])["sha256"] || receipt["native_build_proof_sha256"] != object(frame["native_build_proof"])["sha256"] || !same(receipt["consumer_tools"], consumer) || !same(receipt["checks"], map[string]any{"fresh_compare_quick": true, "review_isolation": true, "source_first_fetch_provenance": true}) || !arrayShape(receipt["replays"], len(dossiers), len(dossiers)) {
+	receiptKeys := []string{"schema", "root", "created_at", "bundle_sha256", "native_build_proof_sha256", "consumer_tools", "checks", "replays"}
+	receiptSchema := "quick-bridge-operator-replay-v1"
+	checks := map[string]any{"fresh_compare_quick": true, "review_isolation": true, "source_first_fetch_provenance": true}
+	if object(pending["bindings"])["author_cache_binding_sha256"] != nil {
+		receiptSchema = "quick-bridge-operator-replay-v2"
+		receiptKeys = append(receiptKeys, "author_cache_binding", "author_exposure_urls")
+		checks["current_author_delivery_inspection"] = true
+		checks["complete_author_exposure"] = true
+		context, err := bridgeCacheContext(pending, files)
+		if err != nil {
+			return err
+		}
+		if !same(receipt["author_cache_binding"], context["binding"]) || !same(receipt["author_exposure_urls"], context["exposure_urls"]) {
+			return fmt.Errorf("quick bridge Root replay cache/exposure binding differs")
+		}
+	}
+	if !pendingExact(receipt, receiptKeys...) || receipt["schema"] != receiptSchema || receipt["root"] != root || receipt["bundle_sha256"] != object(frame["bundle"])["sha256"] || receipt["native_build_proof_sha256"] != object(frame["native_build_proof"])["sha256"] || !same(receipt["consumer_tools"], consumer) || !same(receipt["checks"], checks) || !arrayShape(receipt["replays"], len(dossiers), len(dossiers)) {
 		return fmt.Errorf("quick bridge Root-pinned replay/isolation/source-provenance receipt required")
 	}
 	created, err := bridgeTime(receipt["created_at"])
@@ -75,6 +91,13 @@ func bridgeComparison(root string, frame, pending, dossier, public, private, com
 		return fmt.Errorf("quick bridge exact Stage3 comparison/mechanical-only schema required")
 	}
 	binding := map[string]any{"stock_screen": pending["screen"], "consumer_tools": consumer, "root": root, "baseline_source_sha256": pending["baseline_source_sha256"], "baseline_source_version": pending["baseline_source_version"], "bundle": map[string]any{"path": object(frame["bundle"])["path"], "sha256": object(frame["bundle"])["sha256"]}, "native_tool": pending["tool"], "native_build_proof": map[string]any{"path": object(frame["native_build_proof"])["path"], "sha256": object(frame["native_build_proof"])["sha256"]}, "pending_sha256": object(pending["_bridge"])["pending_sha256"], "record_sha256": dossier["record_sha256"], "review_binding": dossier["review_binding"], "bindings": pending["bindings"], "inventory_sha256": object(pending["bindings"])["inventory_sha256"], "game": public["game"], "mode": public["mode"]}
+	if object(pending["bindings"])["author_cache_binding_sha256"] != nil {
+		context, e := bridgeCacheContext(pending, files)
+		if e != nil {
+			return e
+		}
+		binding["author_cache_context"] = context
+	}
 	if !same(binding, comp["native_binding"]) {
 		return fmt.Errorf("quick bridge comparison current native/proof/inventory/consumer/dossier binding differs")
 	}

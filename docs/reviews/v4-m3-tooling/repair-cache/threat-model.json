@@ -1,0 +1,14 @@
+{
+  "operational_base_sha": "e3d2d6006b2e9162215b01d5653ab2448d84997c",
+  "product_qualification": false,
+  "required_controls": "Additive v2bindings; exactproof1/currentconsumer/firstroles/fullU; independently pinned trustedRoot+approvedclient; actual native replay required.",
+  "schema": "cat-m3-tool-threat-model-1",
+  "stage": "M3-5E-CACHE",
+  "threats": "Author-cache provenance substitution, old first-role evidence, stale source/consumer/complete universe, Root/client forgery.",
+  "trust_scope": [
+    "Root operates the reviewed sequential workflow with independently pinned exact code and inputs.",
+    "Byte and mode integrity leave source truth, reviewer independence and gameplay quality to their existing authorities.",
+    "The model trusts Root and the underlying UID, kernel and container controls.",
+    "Existing source policy, admission, owner holds and landing authority remain in force."
+  ]
+}

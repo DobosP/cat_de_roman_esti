@@ -1,0 +1,26 @@
+{
+  "final_exact_candidate_review": null,
+  "operational_base_sha": "e3d2d6006b2e9162215b01d5653ab2448d84997c",
+  "original_independent_reviews": [
+    {
+      "bytes": 2141,
+      "path": "/tmp/cat-v4-m3-cache-consumer-review/manifest.json",
+      "reviewer": "agent:codex /root/m3_cache_consumer_review",
+      "scope": "Original consumer Python/static scope and historical aggregate-native NO-GO",
+      "sha256": "47aeaf5ea298417296c3b24fba6d623a1d16d60df4af15d198b31addef8125a5",
+      "verdict": "GO exact Python/static propagation scope only; aggregate native proposal remains NO-GO"
+    },
+    {
+      "bytes": 11194,
+      "path": "/tmp/cat-v4-m3-cache-repair-native-review/manifest.json",
+      "reviewer": "agent:/root/m3_cache_repair_native_review",
+      "scope": "Exact 14-file formatted native CODE/provenance/current-policy/context review only, within approved-client exact-original-provenance plus independently pinned trusted-Root model; no current authority/adoption/replay/content qualification",
+      "sha256": "22d97cc79ae5ef3004a34db6f1595ee5dc8c45b1d8293c6160be2b8f68db1800",
+      "verdict": "GO"
+    }
+  ],
+  "product_qualification": false,
+  "schema": "cat-m3-tool-review-ref-1",
+  "scope": "Pointers to existing signed technical reviews on their original exact scopes.",
+  "stage": "M3-5E-CACHE"
+}

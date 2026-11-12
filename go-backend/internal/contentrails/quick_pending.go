@@ -19,6 +19,7 @@ import (
 // authority are resolved at fixed paths under Root; no source override exists.
 type QuickPendingOptions struct {
 	Packet, InventoryManifest, AuthorSeal, ReceiptManifest, Output string
+	CacheBinding, CacheBindingSHA256                               string
 }
 
 var quickPendingID = regexp.MustCompile(`^(iq92_|pq92_|aq92_)[A-Za-z0-9_-]{1,180}$`)
@@ -163,6 +164,9 @@ func PrepareQuickPending(ctx context.Context, root string, opt QuickPendingOptio
 		if err != nil {
 			return nil, err
 		}
+		if path != opt.InventoryManifest && len(b) > MaxBytes {
+			return nil, fmt.Errorf("quick author document exceeds 4 MiB")
+		}
 		totalInputBytes += len(b)
 		if totalInputBytes > 64<<20 {
 			return nil, fmt.Errorf("pending external evidence aggregate exceeds 64 MiB")
@@ -185,8 +189,55 @@ func PrepareQuickPending(ctx context.Context, root string, opt QuickPendingOptio
 	if err != nil {
 		return nil, err
 	}
+	var cacheBinding map[string]any
+	cacheContext := opt.CacheBinding != "" || opt.CacheBindingSHA256 != ""
+	if evidence["schema"] == "quick-author-evidence-v2" || cacheContext {
+		if evidence["schema"] != "quick-author-evidence-v2" || seal["schema"] != "quick-author-seal-v2" {
+			return nil, fmt.Errorf("quick cache v2 context cannot be downgraded")
+		}
+		if _, exists := inputs[opt.CacheBinding]; exists || opt.CacheBinding == opt.Output {
+			return nil, fmt.Errorf("quick cache Root binding aliases author inputs/output")
+		}
+		read := func(ref map[string]any) ([]byte, error) {
+			path := text(ref["path"])
+			if distinct[path] || path == opt.Output || len(inputs) >= 4100 {
+				return nil, fmt.Errorf("quick cache closure role collision/member cap")
+			}
+			b, e := pendingRegular(path, MaxBytes)
+			if e != nil {
+				return nil, e
+			}
+			if len(b) != integer(ref["bytes"]) || digestBytes(b) != ref["sha256"] {
+				return nil, fmt.Errorf("quick cache closure pin differs")
+			}
+			totalInputBytes += len(b)
+			if totalInputBytes > 64<<20 {
+				return nil, fmt.Errorf("quick cache external aggregate cap")
+			}
+			inputs[path], distinct[path] = b, true
+			inputPaths = append(inputPaths, path)
+			return b, nil
+		}
+		cacheBinding, _, err = cacheLoad(root, QuickCachePin{opt.CacheBinding, opt.CacheBindingSHA256}, read)
+		if err != nil {
+			return nil, err
+		}
+	} else if seal["schema"] != "quick-author-seal-v1" || evidence["schema"] != "quick-author-evidence-v1" {
+		return nil, fmt.Errorf("quick author evidence/seal version mismatch")
+	}
 	for _, v := range rows(evidence["receipts"]) {
 		path := text(object(v)["capture_path"])
+		if cacheBinding != nil {
+			if err = cacheExternal(root, path); err != nil {
+				return nil, err
+			}
+		}
+		if cacheBinding != nil && distinct[path] {
+			return nil, fmt.Errorf("quick author capture aliases another artifact role")
+		}
+		if len(inputs) >= 4100 {
+			return nil, fmt.Errorf("quick pending external member cap")
+		}
 		if !distinct[path] {
 			if path == opt.Output {
 				return nil, fmt.Errorf("pending capture/output path collision")
@@ -222,7 +273,12 @@ func PrepareQuickPending(ctx context.Context, root string, opt QuickPendingOptio
 	if err != nil {
 		return nil, err
 	}
-	if err = pendingEvidence(inputs[opt.Packet], boards, seal, evidence, inputs); err != nil {
+	if evidence["schema"] == "quick-author-evidence-v2" {
+		err = pendingEvidenceV2(root, snap.source.SHA256, digest(snap.manifest), inputs[opt.Packet], inputs[opt.ReceiptManifest], boards, seal, evidence, cacheBinding, inputs, QuickCachePin{opt.CacheBinding, opt.CacheBindingSHA256})
+	} else {
+		err = pendingEvidence(inputs[opt.Packet], boards, seal, evidence, inputs)
+	}
+	if err != nil {
 		return nil, err
 	}
 	kg, err := snap.object("cat_de_roman_esti/fixtures/kg_sample.json")
