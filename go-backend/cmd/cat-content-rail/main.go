@@ -42,6 +42,9 @@ func run() error {
 	pendingBundle := f.String("pending-bundle", "", "private pending bundle for exact role-view extraction")
 	pendingView := f.String("pending-view", "", "extract public or dossier member only; no freshness approval")
 	pendingItem := f.String("pending-item", "", "exact authored iq92_/pq92_ item for role view")
+	bridgeFrame := f.String("bridge-draft", "", "independently pinned quick-bridge-frame-v1; draft validation only")
+	bridgePin := f.String("bridge-frame-sha256", "", "Root-controlled reviewed frame SHA; author self-pins are not independent evidence")
+	bridgeOut := f.String("bridge-out", "", "new private scratch draft; never a native review or install input")
 	if err := f.Parse(os.Args[2:]); err != nil {
 		return err
 	}
@@ -50,8 +53,30 @@ func run() error {
 	}
 	pendingFlags := map[string]bool{"pending-inventory": true, "prepare-pending": true, "inventory-manifest": true, "author-seal": true, "receipt-manifest": true, "pending-out": true, "pending-bundle": true, "pending-view": true, "pending-item": true}
 	used := map[string]bool{}
-	pendingMode := false
-	f.Visit(func(v *flag.Flag) { used[v.Name] = true; pendingMode = pendingMode || pendingFlags[v.Name] })
+	pendingMode, bridgeMode := false, false
+	bridgeFlags := map[string]bool{"bridge-draft": true, "bridge-frame-sha256": true, "bridge-out": true}
+	f.Visit(func(v *flag.Flag) {
+		used[v.Name] = true
+		pendingMode = pendingMode || pendingFlags[v.Name]
+		bridgeMode = bridgeMode || bridgeFlags[v.Name]
+	})
+	if bridgeMode {
+		if rail != "quick" || *bridgeFrame == "" || *bridgePin == "" || *bridgeOut == "" {
+			return fmt.Errorf("quick bridge draft requires quick rail, exact frame, independent frame pin and new scratch output")
+		}
+		for key := range used {
+			if key != "root" && !bridgeFlags[key] {
+				return fmt.Errorf("quick bridge draft cannot mix source, pending, proposal, authority or install actions")
+			}
+		}
+		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Minute)
+		defer cancel()
+		result, err := contentrails.DraftQuickBridge(ctx, *root, contentrails.QuickBridgeDraftOptions{Frame: *bridgeFrame, FrameSHA256: *bridgePin, Output: *bridgeOut})
+		if err != nil {
+			return err
+		}
+		return json.NewEncoder(os.Stdout).Encode(result)
+	}
 	if pendingMode {
 		allowed := map[string]bool{"root": true}
 		switch {
