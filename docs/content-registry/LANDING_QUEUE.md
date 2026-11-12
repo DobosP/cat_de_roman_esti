@@ -59,3 +59,9 @@ Product `4824609e5a8442beab43c762efdb3c859fc5bd9b` landed locally after build11/
 Valid until: a relevant source or runtime change — then treat as history.
 
 Exact Source28 `c423ce996ad94a36da021d8ed9852fe08aa491b0` added Știință/normal `cx_stiinta_385`. Build 11, 4i 10, unit 28 and full 37 passed before fresh independent GO and a clean local fast-forward from `b25b3af30efa3b4f6905e5d871f0c35814797e8d`. Normal HTTP won and reloaded with zero mistakes. The eighteen-board V4 prefix contains eleven Conexiuni boards, two Cald targets and five Lanț routes. All 79 Conexiuni holds and shared vocabulary were preserved. [Exact receipt](../reviews/v4-c42-stiinta/landing.json).
+
+## C44 landed locally, 2026-11-12
+
+Valid until: a relevant source or runtime change — then treat as history.
+
+Exact Source29 `0fda2bada38c7611615b43bdd590f87849f55d9f` added Viață de român/greu `cx_viata_de_roman_386`. Paul held the landing after qualification and then asked for it; it was fast-forwarded from `73b0c0ac47890fbcd2b1ffe6333f0f7eaa2b1b5f` at 2026-11-12T20:19:57Z. The nineteen-board V4 prefix contains twelve Conexiuni boards, two Cald targets and five Lanț routes. All 79 Conexiuni holds and shared vocabulary were preserved. V4 is stopped. [Exact receipt](../reviews/v4-c44-viata-de-roman/landing.json).
