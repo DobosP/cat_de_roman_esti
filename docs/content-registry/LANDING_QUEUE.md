@@ -53,3 +53,9 @@ Eleven normal public-text witnesses won and reloaded. Five chip-only witnesses w
 Valid until: a relevant source/runtime change — then treat as history.
 
 Product `4824609e5a8442beab43c762efdb3c859fc5bd9b` landed locally after build11/4i10/unit27/full37 and [fresh GO](../reviews/v4-c10-society-emoji/landing-review.json). Society `cx_societate_384` and Cald `ct_meme_net_379` won/reloaded on normal HTTP. Separate seven-file expectations `8c3b8835` satisfy ADR-0227; fixed corpus stays 1,206. The original P10 doc-inventory NO-GO, full I10 requalification, all292 attachments and9PNGs remain; no remote publication occurred.
+
+## C42 landed locally, 2026-11-12
+
+Valid until: a relevant source or runtime change — then treat as history.
+
+Exact Source28 `c423ce996ad94a36da021d8ed9852fe08aa491b0` added Știință/normal `cx_stiinta_385`. Build 11, 4i 10, unit 28 and full 37 passed before fresh independent GO and a clean local fast-forward from `b25b3af30efa3b4f6905e5d871f0c35814797e8d`. Normal HTTP won and reloaded with zero mistakes. The eighteen-board V4 prefix contains eleven Conexiuni boards, two Cald targets and five Lanț routes. All 79 Conexiuni holds and shared vocabulary were preserved. [Exact receipt](../reviews/v4-c42-stiinta/landing.json).

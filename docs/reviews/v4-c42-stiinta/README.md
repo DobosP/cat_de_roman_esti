@@ -11,3 +11,7 @@ The native importer and promotion preserved the 733 earlier pack rows, all 79 Co
 The [Quick](native/quick/audit.json), [World](native/world/audit.json) and [extension](native/extensions/audit.json) audits preserve the 336 derived boards, 85 supplemental boards, 352 World recipes, 252 concepts, ten compatible save versions, 27 recipe books and 49 additions. The reserve, KG and 17,495 Lanț captions stay exact. Source28’s installed-authority manifest is `04af5a18d019401a1c2f14eb9e56ed432663cd4b2f75ab4ee7b2c99bff036b7f`.
 
 The final native source checks passed for all four rails, validate, export, ops, rank, derive and the mobile pack. The exported bundle is `9605875fb468cb461a2f12b77505f1323a0a53cf4c6f172d419b7dff72239fe6`. The exact-SHA landing gates and managed HTTP play use this source tuple.
+
+Exact `c423ce996ad94a36da021d8ed9852fe08aa491b0` landed locally on 2026-11-12 with build 11/11, 4i 10/10, unit 28/28, full 37/37 and fresh independent landing GO. Normal HTTP solved all four groups with zero mistakes and verified the won state after reload. All 859 browser cases, 1,206 independent parity cases, PG 12/302, CSP 0/0 and nine PNGs with 17 baseline outcomes passed.
+
+The first exact 4i run detected a stale seed-17 package fixture. Three fresh Python/Django captures reproduced the corrected fixture byte for byte. The seven separate expectation paths satisfy ADR-0227. [Landing receipt](landing.json).
