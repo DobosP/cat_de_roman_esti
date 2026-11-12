@@ -19,7 +19,8 @@ LANDING = Path(__file__).resolve().parents[1] / "scripts" / "landing"
 sys.path.insert(0, str(LANDING))
 from kgdiff import compare_content
 from play import LocalHTTP, check_alias, check_contexto_win, find_contexto, planned_board, play, scope, verify_server
-from run_4i import gate_tree_entry, go_environment, prepare_source, run_checks, stage_assets
+from run_4i import (PRODUCER_PACKAGE, PRODUCER_TEST, PRODUCER_TEST_PATH, gate_tree_entry, go_environment,
+                    prepare_source, run_checks, stage_assets)
 from support import BUILD, DESCRIPTOR, EMBED, LOCK, LOCK_COPY, SYNC, digest, relative_parts
 
 
@@ -84,13 +85,16 @@ class Diffs(unittest.TestCase):
 class BuildAndChecks(unittest.TestCase):
     def test_go_forces_offline_defaults_and_ignores_inherited_app_environment(self):
         with patch.dict(os.environ, {"GOFLAGS": "-skip .*", "CAT_ACCOUNTS_ENABLED": "1",
-                                     "GOENV": "/outside", "GOPROXY": "https://example.invalid"}):
+                                     "GOENV": "/outside", "GOPROXY": "https://example.invalid",
+                                     "PENDING_REVIEW_TOOL": "/outside", "PENDING_REVIEW_TOOL_SHA256": "a" * 64}):
             env = go_environment()
         self.assertEqual(env["GOPROXY"], "off")
         self.assertEqual(env["GOENV"], "off")
         self.assertEqual(env["GOTOOLCHAIN"], "local")
         self.assertEqual(env["GOFLAGS"], "-mod=readonly -buildvcs=false")
         self.assertNotIn("CAT_ACCOUNTS_ENABLED", env)
+        self.assertNotIn("PENDING_REVIEW_TOOL", env)
+        self.assertNotIn("PENDING_REVIEW_TOOL_SHA256", env)
 
     def test_wrapper_tree_uses_portable_paths_modes_and_exclusions(self):
         content = hashlib.sha256(b"sample").digest()
@@ -159,10 +163,98 @@ class BuildAndChecks(unittest.TestCase):
             self.assertEqual([row["exit_code"] for row in results], [1] + [0]*9)
             calls = [call.args[0] for call in runner.call_args_list]
             self.assertEqual(len(calls), 10)
-            self.assertIn("-count=1", calls[5])
+            self.assertEqual(calls[5], ["go", "-C", "go-backend", "test", "-count=1", "-race", "-timeout=60m", "./..."])
+            self.assertNotIn("producer_preparation", results[5])
             self.assertIn("-count=1", calls[7])
             self.assertEqual(calls[9][-3:], ["a"*40, "b"*40, "--"])
             self.assertEqual(len(list(root.glob("*.log"))), 10)
+
+
+    @unittest.skipUnless(sys.platform == "linux", "The registered Go test uses a Linux build tag")
+    def test_registered_06_binds_only_the_race_child_to_a_fresh_executable_and_raw_events(self):
+        for case in ("pass", "wrong-hash", "skip", "duplicate", "nonzero-race", "replaced", "failed-build", "symlink"):
+            with self.subTest(case=case), tempfile.TemporaryDirectory(prefix="cat landing ") as path:
+                root = Path(path).resolve()
+                source, output = root / "projection", root / "results"
+                output.mkdir()
+                packed(source, str(PRODUCER_TEST_PATH), b"synthetic Go test registration")
+                binary = b"synthetic"
+                binary_digest = digest(binary)
+                calls = []
+                files = []
+                recorded_json = b""
+
+                def run(command, **kwargs):
+                    nonlocal recorded_json
+                    env = kwargs["env"]
+                    calls.append(command)
+                    if "-json" in command:
+                        self.assertEqual(command, ["pinned-go", "-C", "go-backend", "test",
+                                                   "-count=1", "-race", "-timeout=60m", "-json", "./..."])
+                        self.assertEqual(kwargs["cwd"], source)
+                        self.assertEqual(kwargs["timeout"], 3900)
+                        self.assertEqual(env["PENDING_REVIEW_TOOL"], str(files[0]))
+                        self.assertEqual(env["PENDING_REVIEW_TOOL_SHA256"], binary_digest)
+                        self.assertEqual(files[0].read_bytes(), binary)
+                        event = {"Package": PRODUCER_PACKAGE, "Test": PRODUCER_TEST}
+                        logged_digest = "e" * 64 if case == "wrong-hash" else binary_digest
+                        rows = [dict(event, Action="run"), dict(event, Action="output",
+                                Output=f"    readset_producer_test.go:240: actual unstripped producer {len(binary)} bytes sha256={logged_digest}; source executable remained read-only\n"),
+                                dict(event, Action="skip" if case == "skip" else "pass"),
+                                {"Package": PRODUCER_PACKAGE, "Action": "pass"}]
+                        if case == "duplicate":
+                            rows.insert(0, rows[0])
+                        recorded_json = b"".join((json.dumps(row) + "\n").encode() for row in rows)
+                        kwargs["stdout"].write(recorded_json)
+                        if case == "replaced":
+                            file = files[0]
+                            file.rename(file.with_name("previous"))
+                            file.write_bytes(binary)
+                            file.chmod(0o700)
+                        return Mock(returncode=3 if case == "nonzero-race" else 0)
+                    self.assertNotIn("PENDING_REVIEW_TOOL", env)
+                    self.assertNotIn("PENDING_REVIEW_TOOL_SHA256", env)
+                    if command[3:4] == ["build"]:
+                        self.assertEqual(command[:7], ["pinned-go", "-C", "go-backend", "build", "-mod=readonly", "-buildvcs=false", "-o"])
+                        self.assertEqual(command[-1], "./cmd/cat-content-rail")
+                        self.assertEqual(kwargs["cwd"], source)
+                        file = Path(command[7])
+                        files.append(file)
+                        self.assertEqual(file.parent.parent, root)
+                        self.assertEqual(file.parent.stat().st_mode & 0o777, 0o700)
+                        if case == "symlink":
+                            outside = root / "outside"
+                            outside.write_bytes(binary)
+                            file.symlink_to(outside)
+                        else:
+                            file.write_bytes(binary)
+                            file.chmod(0o700)
+                        if case == "failed-build":
+                            return Mock(returncode=2)
+                    return Mock(returncode=0)
+
+                with patch("run_4i.PRODUCER_MIN_BYTES", 3), patch("run_4i.subprocess.run", side_effect=run), redirect_stdout(io.StringIO()):
+                    results = run_checks("pinned-go", root, source, output, "a"*40, "b"*40, {"GOPROXY": "off"})
+                expected_code = 0 if case == "pass" else 3 if case == "nonzero-race" else 125
+                self.assertEqual([row["exit_code"] for row in results], [0]*5 + [expected_code] + [0]*4)
+                self.assertEqual([row["name"] for row in results[5:]], ["06-race", "07-vet", "08-auth", "09-doc", "10-diff"])
+                self.assertEqual(calls[-1][-3:], ["a"*40, "b"*40, "--"])
+                self.assertFalse(files[0].parent.exists())
+                preparation = results[5]["producer_preparation"]
+                proof_raw = (output / preparation["file"]).read_bytes()
+                self.assertEqual(preparation["sha256"], digest(proof_raw))
+                proof = json.loads(proof_raw)
+                self.assertEqual(proof["status"], "pass" if case == "pass" else "fail")
+                self.assertEqual(proof["build"]["exit_code"], 2 if case == "failed-build" else 0)
+                if case in {"failed-build", "symlink"}:
+                    self.assertIsNone(proof["race"])
+                    self.assertFalse((output / "06-race.jsonl").exists())
+                    self.assertEqual(len(calls), 10)
+                else:
+                    self.assertEqual(proof["producer"], {"bytes": len(binary), "sha256": binary_digest})
+                    self.assertEqual((output / "06-race.jsonl").read_bytes(), recorded_json)
+                    self.assertEqual(proof["race"]["json"]["sha256"], digest(recorded_json))
+                    self.assertEqual(len(calls), 11)
 
 
 class Playback(unittest.TestCase):

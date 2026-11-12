@@ -3,6 +3,8 @@
 import * as fs from "node:fs";
 import path from "node:path";
 import { createHash } from "node:crypto";
+import { actualProducerEvents, hasActualProducerTest, PRODUCER_BUILD_ASSERT, PRODUCER_BUILD_CHECK, PRODUCER_DESCRIPTOR,
+  PRODUCER_RACE_ASSERT, producerBuildArgs, producerOutputValid, producerSizeValid } from "./gui-pending-producer.mjs";
 
 const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const HEX = /^[a-f0-9]{64}$/;
@@ -48,6 +50,10 @@ function artifactIndex(values) {
   }
   return index;
 }
+function assertionShape(action) {
+  return own(action, ["check", "kind", "label", "passed", "duration_ms"])
+    && action.kind === "assertion" && action.passed === true && integer(action.duration_ms);
+}
 function commandShape(action, bootstrap = false) {
   return own(action, [bootstrap ? "phase" : "check", "kind", "command", "argument_count", "args_sha256", "cwd", "exit_code", "duration_ms",
     "stdout_sha256", "stderr_sha256", "stdout_log", "stderr_log"])
@@ -64,9 +70,10 @@ export function validateUnitReuse(context, read) {
     && integer(context.parallel) && context.parallel >= 1 && context.parallel <= 4 && HEX.test(context.config_sha256)
     && time(context.started), "current full identity is incomplete or dirty");
   const files = new Map();
-  const retain = (name, expected) => {
+  const retain = (name, expected, limit) => {
     demand(name.startsWith(PREFIX), "evidence outside unit target"); relative(name);
-    const bytes = files.get(name) ?? Buffer.from(read(name));
+    const bytes = files.get(name) ?? Buffer.from(read(name, limit));
+    demand(limit === undefined || bytes.length <= limit, `evidence size exceeds bound: ${name}`);
     if (expected !== undefined) demand(HEX.test(expected) && hash(bytes) === expected, `artifact hash differs: ${name}`);
     files.set(name, bytes); return bytes;
   };
@@ -93,7 +100,7 @@ export function validateUnitReuse(context, read) {
   }
   demand(requiredChecks.every((name) => checks.has(name)), "required unit check missing");
   const artifacts = artifactIndex(result.artifacts);
-  const evidenced = (name) => { demand(artifacts.has(name), `result lacks artifact: ${name}`); return retain(name, artifacts.get(name)); };
+  const evidenced = (name, limit) => { demand(artifacts.has(name), `result lacks artifact: ${name}`); return retain(name, artifacts.get(name), limit); };
   const executionBytes = evidenced(`${PREFIX}execution.json`), execution = JSON.parse(executionBytes);
   demand(own(execution, ["schema", "invocation", "sha", "tree_sha256", "actions"]) && execution.schema === 1 && UUID.test(execution.invocation)
     && execution.sha === result.sha && execution.tree_sha256 === result.tree_sha256 && Array.isArray(execution.actions), "unit execution identity differs");
@@ -141,20 +148,53 @@ export function validateUnitReuse(context, read) {
   }
   demand(bootstrapLogs.size === bootstrapArtifacts.size, "unbound bootstrap artifact");
   const laneLogs = new Set(), lanes = [];
-  for (const [index, name] of UNIT_REUSE_LANES.entries()) {
-    const [command, args, cwd, labels] = laneCommands[index], actions = execution.actions.filter((action) => action.check === name);
-    const commands = actions.filter((action) => action.kind === "command"), assertions = actions.filter((action) => action.kind === "assertion");
-    const action = commands[0];
-    demand(commands.length === 1 && actions.length === 1 + labels.length && assertions.length === labels.length
-      && labels.every((label) => assertions.filter((item) => item.label === label).length === 1)
-      && assertions.every((item) => own(item, ["check", "kind", "label", "passed", "duration_ms"]) && item.passed === true && integer(item.duration_ms))
-      && commandShape(action) && action.command === command && action.cwd === cwd && action.argument_count === args.length
-      && action.args_sha256 === hash(JSON.stringify(args)), `lane command/assertion differs: ${name}`);
+  function retainCommandStreams(name, action) {
     for (const stream of ["stdout", "stderr"]) {
       const file = action[`${stream}_log`];
       demand(typeof file === "string" && new RegExp(`^\\.gate/unit/logs/${execution.invocation}-${name}-[0-9]+\\.${stream}\\.log$`).test(file)
         && !laneLogs.has(file) && artifacts.get(file) === action[`${stream}_sha256`], `lane stream binding differs: ${name}`);
       laneLogs.add(file); evidenced(file);
+    }
+  }
+  const descriptor = `${PREFIX}${PRODUCER_DESCRIPTOR}`;
+  const buildActions = execution.actions.filter((action) => action.check === PRODUCER_BUILD_CHECK);
+  const registered = context.actualPendingProducer === true;
+  let pendingProducer;
+  if (registered) {
+    demand(checks.has(PRODUCER_BUILD_CHECK), "registered pending producer build check missing");
+    const descriptorBytes = evidenced(descriptor, 4096), producer = JSON.parse(descriptorBytes);
+    demand(own(producer, ["schema", "target", "invocation", "sha", "tree_sha256", "toolchain_digest", "output", "bytes", "sha256"])
+      && descriptorBytes.equals(Buffer.from(JSON.stringify(producer, null, 2) + "\n"))
+      && producer.schema === 1 && producer.target === result.target && producer.invocation === execution.invocation
+      && ["sha", "tree_sha256", "toolchain_digest"].every((key) => producer[key] === result[key])
+      && producerOutputValid(producer.output, execution.invocation) && producerSizeValid(producer.bytes)
+      && typeof producer.sha256 === "string" && HEX.test(producer.sha256), "pending producer descriptor differs");
+    const [prerequisite, build] = buildActions, args = producerBuildArgs(producer.output);
+    demand(buildActions.length === 2 && assertionShape(prerequisite) && prerequisite.label === PRODUCER_BUILD_ASSERT
+      && commandShape(build) && build.command === "go" && build.cwd === "go-backend"
+      && build.argument_count === args.length && build.args_sha256 === hash(JSON.stringify(args)), "pending producer build recipe differs");
+    retainCommandStreams(PRODUCER_BUILD_CHECK, build);
+    pendingProducer = { descriptor, descriptor_sha256: hash(descriptorBytes), build_action_sha256: hash(JSON.stringify(build)),
+      executable_bytes: producer.bytes, executable_sha256: producer.sha256 };
+  } else {
+    demand(!checks.has(PRODUCER_BUILD_CHECK) && buildActions.length === 0 && !artifacts.has(descriptor), "unexpected pending producer evidence");
+  }
+  for (const [index, name] of UNIT_REUSE_LANES.entries()) {
+    const [command, args, cwd, baseLabels] = laneCommands[index], actions = execution.actions.filter((action) => action.check === name);
+    const producerLane = registered && name === "cat-backend-race";
+    const labels = producerLane ? [...baseLabels, PRODUCER_RACE_ASSERT] : baseLabels;
+    const commands = actions.filter((action) => action.kind === "command"), assertions = actions.filter((action) => action.kind === "assertion");
+    const action = commands[0];
+    demand(commands.length === 1 && actions.length === 1 + labels.length && assertions.length === labels.length
+      && labels.every((label) => assertions.filter((item) => item.label === label).length === 1)
+      && assertions.every(assertionShape)
+      && commandShape(action) && action.command === command && action.cwd === cwd && action.argument_count === args.length
+      && action.args_sha256 === hash(JSON.stringify(args)), `lane command/assertion differs: ${name}`);
+    retainCommandStreams(name, action);
+    if (producerLane) {
+      demand(execution.actions.indexOf(buildActions[1]) < execution.actions.indexOf(action)
+        && actualProducerEvents(files.get(action.stdout_log), { bytes: pendingProducer.executable_bytes, sha256: pendingProducer.executable_sha256 }),
+      "backend race lacks exact pending producer events");
     }
     lanes.push({ name, command, args, cwd, action_sha256: hash(JSON.stringify(action)), stdout_log: action.stdout_log,
       stdout_sha256: action.stdout_sha256, stderr_log: action.stderr_log, stderr_sha256: action.stderr_sha256 });
@@ -172,7 +212,8 @@ export function validateUnitReuse(context, read) {
     result_sha256: hash(resultBytes), execution_sha256: hash(executionBytes), invocation: execution.invocation,
     wrapper_invocation: wrapper.invocation, sha: result.sha, tree_sha256: result.tree_sha256, toolchain_digest: result.toolchain_digest,
     versions_lock_sha256: result.versions_lock_sha256, config_sha256: wrapper.config_sha256, parallel: result.parallel,
-    stage: result.csp.stage, started: result.started, finished: result.finished, lanes } };
+    stage: result.csp.stage, started: result.started, finished: result.finished, lanes,
+    ...(pendingProducer ? { pending_review_producer: pendingProducer } : {}) } };
 }
 
 // evidenceRoot may be an owning retained capsule with the original `.gate/unit`
@@ -193,7 +234,7 @@ export function loadUnitReuse(root, context, evidenceRoot = root) {
     try { fs.lstatSync(path.join(evidenceRoot, PREFIX, "wrapper-fail.json")); wrapperFailed = true; }
     catch (error) { if (error.code !== "ENOENT") throw error; }
     demand(!wrapperFailed, "unit wrapper failure marker present");
-    const read = (name) => {
+    const read = (name, limit) => {
       relative(name);
       demand(name === "versions.lock.json" || name.startsWith(PREFIX), "read outside unit evidence scope");
       let cursor = name === "versions.lock.json" ? root : evidenceRoot;
@@ -204,17 +245,30 @@ export function loadUnitReuse(root, context, evidenceRoot = root) {
         demand(!stat.isSymbolicLink() && (index === parts.length - 1 ? stat.isFile() : stat.isDirectory()), "nonregular evidence path");
       }
       const before = fs.lstatSync(cursor, { bigint: true });
+      demand(limit === undefined || before.size <= BigInt(limit), "evidence size exceeds bound");
       const fd = fs.openSync(cursor, fs.constants.O_RDONLY | fs.constants.O_NOFOLLOW | fs.constants.O_NONBLOCK);
       try {
         const opened = fs.fstatSync(fd, { bigint: true });
         demand(opened.isFile() && opened.ino === before.ino && opened.dev === before.dev
           && fs.realpathSync(cursor) === cursor && fs.realpathSync(`/proc/self/fd/${fd}`) === cursor, "evidence alias or replacement while opening");
-        const bytes = fs.readFileSync(fd), after = fs.fstatSync(fd, { bigint: true }), current = fs.lstatSync(cursor, { bigint: true });
+        let bytes;
+        if (limit === undefined) bytes = fs.readFileSync(fd);
+        else {
+          const buffer = Buffer.alloc(limit + 1);
+          let offset = 0;
+          while (offset < buffer.length) {
+            const count = fs.readSync(fd, buffer, offset, buffer.length - offset, null);
+            if (!count) break;
+            offset += count;
+          }
+          bytes = buffer.subarray(0, offset);
+        }
+        const after = fs.fstatSync(fd, { bigint: true }), current = fs.lstatSync(cursor, { bigint: true });
         demand(current.isFile() && !current.isSymbolicLink() && current.ino === after.ino && current.dev === after.dev
           && before.size === after.size && before.mtimeNs === after.mtimeNs && after.size === BigInt(bytes.length), "evidence changed while reading");
         return bytes;
       } finally { fs.closeSync(fd); }
     };
-    return validateUnitReuse(context, read);
+    return validateUnitReuse({ ...context, actualPendingProducer: hasActualProducerTest(root) }, read);
   } catch (error) { return { status: "miss", reason: String(error?.message ?? error) }; }
 }

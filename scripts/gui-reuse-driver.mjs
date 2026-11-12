@@ -79,14 +79,14 @@ function promote(hook, source) {
   write(root, `${capsule}/manifest.json`, JSON.stringify({ schema: 1, owner: "cat-gate-native-reuse", files }) + "\n");
 }
 
-export function createGateReuse(hook, config) {
+export function createGateReuse(hook, config, actualPendingProducer = false) {
   const ctx = hook.context, prefix = `.gate/${ctx.target}`;
   const context = { ...ctx, config_sha256: hash(JSON.stringify(config)) };
   const unit = ctx.target === "full" ? loadUnitReuse(ctx.root, context) : { status: "miss", reason: "unit executes frontend lanes" };
   let retained = [], promotion = { status: "not-requested" };
   if (unit.status === "hit") {
     retained = retain(hook, unit, `${prefix}/unit-reuse-source`);
-    if (unit.files.has(".gate/unit/native-inputs.json")) {
+    if (!actualPendingProducer && unit.files.has(".gate/unit/native-inputs.json")) {
       try { promote(hook, unit); promotion = { status: "retained-original-unit" }; }
       catch (error) {
         // Preserve unrecognized/corrupt cache bytes. Optional promotion must not
@@ -116,6 +116,7 @@ export function createGateReuse(hook, config) {
           save(hook, `${prefix}/native-inputs.json`, current);
           let original;
           try {
+            if (actualPendingProducer) throw Error("Registered pending producer requires a fresh complete backend race");
             const source = JSON.parse(read(ctx.root, `${capsule}/.gate/unit/result.json`));
             original = loadUnitReuse(ctx.root, { ...context, target: "full", sha: source.sha, tree_sha256: source.tree_sha256 },
               confined(ctx.root, capsule));

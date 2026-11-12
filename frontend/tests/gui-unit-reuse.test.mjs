@@ -5,6 +5,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createHash } from "node:crypto";
 import { loadUnitReuse, validateUnitReuse, UNIT_REUSE_LANES } from "../../scripts/gui-unit-reuse.mjs";
+import { PRODUCER_BUILD_ASSERT, PRODUCER_BUILD_CHECK, PRODUCER_DESCRIPTOR,
+  PRODUCER_RACE_ASSERT, producerBuildArgs } from "../../scripts/gui-pending-producer.mjs";
 
 // Synthetic hostile-input contracts, never release or gate qualification evidence.
 const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
@@ -72,7 +74,7 @@ function fixture() {
     files.set("versions.lock.json", Buffer.from("synthetic versions\n"));
     return files;
   }
-  return { context, result, execution, wrapper, captured, bootstrap, logs, materialize };
+  return { context, result, execution, wrapper, captured, bootstrap, logs, command, materialize };
 }
 function validate(value, files = value.materialize()) {
   return validateUnitReuse(value.context, (name) => { assert.ok(files.has(name), `fixture file missing: ${name}`); return files.get(name); });
@@ -182,4 +184,105 @@ void test("capsule reads current versions and every wrapper-failure marker force
   for (const make of [() => fs.writeFileSync(marker, ""), () => fs.mkdirSync(marker), () => fs.symlinkSync(path.join(directory, "absent"), marker)]) {
     make(); assert.match(loadUnitReuse(root, value.context, capsule).reason, /wrapper failure marker/); fs.rmSync(marker, { recursive: true, force: true });
   }
+});
+
+const optInPackage = "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentops";
+const optInTest = "TestQuickPendingActualCompiledProducerReadset";
+const producerFile = `.gate/unit/${PRODUCER_DESCRIPTOR}`;
+
+function registeredFixture() {
+  const value = fixture();
+  value.context.actualPendingProducer = true;
+  const descriptor = { schema: 1, target: "unit", invocation: inner, sha: value.result.sha,
+    tree_sha256: value.result.tree_sha256, toolchain_digest: value.result.toolchain_digest,
+    output: `/tmp/cat-pending-review-producer-${inner}-a123Z9/cat-content-rail`,
+    bytes: 40 * 1024 * 1024, sha256: "d".repeat(64) };
+  const build = value.command(PRODUCER_BUILD_CHECK, "go", producerBuildArgs(descriptor.output), "go-backend");
+  const race = value.execution.actions.find((action) => action.check === "cat-backend-race" && action.kind === "command");
+  const assertion = (check, label) => ({ check, kind: "assertion", label, passed: true, duration_ms: 0 });
+  value.result.checks.push({ name: PRODUCER_BUILD_CHECK, status: "pass", duration_ms: 5 });
+  value.execution.actions.unshift(assertion(PRODUCER_BUILD_CHECK, PRODUCER_BUILD_ASSERT), build);
+  value.execution.actions.push(assertion("cat-backend-race", PRODUCER_RACE_ASSERT));
+  const base = { Package: optInPackage, Test: optInTest };
+  const events = [
+    { ...base, Action: "run" },
+    { ...base, Action: "output", Output: `    readset_producer_test.go:240: actual unstripped producer ${descriptor.bytes} bytes sha256=${descriptor.sha256}; source executable remained read-only\n` },
+    { ...base, Action: "pass" },
+    { Package: optInPackage, Action: "pass" },
+  ];
+  const materialize = (eventBytes = Buffer.concat(events.map(encode)),
+    descriptorBytes = Buffer.from(JSON.stringify(descriptor, null, 2) + "\n")) => {
+    value.logs.set(producerFile, descriptorBytes);
+    value.logs.set(race.stdout_log, eventBytes);
+    race.stdout_sha256 = hash(eventBytes);
+    return value.materialize();
+  };
+  return { value, descriptor, build, events, materialize };
+}
+
+void test("registered reuse binds the actual producer build, its streams and exact race events", () => {
+  const { value, descriptor, build, materialize } = registeredFixture();
+  const files = materialize(), actual = validate(value, files);
+  assert.deepEqual(actual.proof.lanes.map((lane) => lane.name), UNIT_REUSE_LANES);
+  assert.deepEqual(actual.proof.pending_review_producer, {
+    descriptor: producerFile, descriptor_sha256: hash(files.get(producerFile)), build_action_sha256: hash(JSON.stringify(build)),
+    executable_bytes: descriptor.bytes, executable_sha256: descriptor.sha256,
+  });
+  assert.equal(actual.files.size, 24);
+  assert.equal(actual.files.has(descriptor.output), false);
+  const historical = fixture(); historical.context.actualPendingProducer = true;
+  assert.throws(() => validate(historical), /build check missing/);
+  value.context.actualPendingProducer = false;
+  assert.throws(() => validate(value, files), /unexpected pending producer/);
+});
+
+void test("registered reuse refuses stale build identities and incomplete or malformed exact race output", () => {
+  const variants = [
+    (v) => { v.value.result.checks.pop(); },
+    (v) => { v.descriptor.invocation = outer; },
+    (v) => { v.descriptor.output = "/tmp/unowned/cat-content-rail"; },
+    (v) => { v.descriptor.bytes = 32 * 1024 * 1024; },
+    (v) => { v.build.args_sha256 = hash('["build","-ldflags=-s -w"]'); },
+    (v) => { v.value.execution.actions.push(...v.value.execution.actions.splice(0, 2)); },
+    (v) => { v.value.execution.actions.pop(); },
+    (v) => { v.events.splice(0, 1); },
+    (v) => { v.events.splice(1, 0, v.events[0]); },
+    (v) => { v.events[2].Action = "skip"; },
+    (v) => { v.events[2].Package = "other"; },
+    (v) => { v.events[1].Output = v.events[1].Output.replace(/^.*actual /, "actual "); },
+    (v) => { v.events[1].Output = v.events[1].Output.replace("41943040", "41943041"); },
+    (v) => { v.events[1].Output = v.events[1].Output.replace("d".repeat(64), "e".repeat(64)); },
+    (v) => { v.events.push({ Package: optInPackage, Action: "output", Output: "(cached)" }); },
+  ];
+  for (const mutate of variants) {
+    const value = registeredFixture(); mutate(value);
+    assert.throws(() => validate(value.value, value.materialize()), /pending producer|cat-backend-race/);
+  }
+  const value = registeredFixture();
+  assert.throws(() => validate(value.value, value.materialize(Buffer.from("{malformed\n"))), /exact pending producer events/);
+  const files = value.materialize();
+  files.delete(producerFile);
+  assert.throws(() => validate(value.value, files), /fixture file missing/);
+});
+
+void test("the production loader derives registration from the live projection and treats stale proofs as misses", (t) => {
+  const base = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../.gate"); fs.mkdirSync(base, { recursive: true });
+  const root = fs.mkdtempSync(path.join(base, "synthetic-producer-reuse-")); t.after(() => fs.rmSync(root, { force: true, recursive: true }));
+  function install(files) {
+    for (const [name, bytes] of files) {
+      fs.mkdirSync(path.dirname(path.join(root, name)), { recursive: true });
+      fs.writeFileSync(path.join(root, name), bytes);
+    }
+  }
+  const historical = fixture();
+  install(historical.materialize());
+  assert.equal(loadUnitReuse(root, historical.context).status, "hit");
+  const registration = path.join(root, "go-backend/internal/contentops/readset_producer_test.go");
+  fs.mkdirSync(path.dirname(registration), { recursive: true }); fs.writeFileSync(registration, "synthetic registration");
+  assert.match(loadUnitReuse(root, historical.context).reason, /build check missing/);
+  const registered = registeredFixture();
+  install(registered.materialize());
+  assert.equal(loadUnitReuse(root, historical.context).status, "hit");
+  fs.writeFileSync(path.join(root, producerFile), Buffer.alloc(4097, 32));
+  assert.match(loadUnitReuse(root, historical.context).reason, /size exceeds bound/);
 });

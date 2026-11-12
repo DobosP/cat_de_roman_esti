@@ -1,0 +1,87 @@
+{
+  "commands_and_results": [
+    {
+      "bytes": 2318,
+      "path": "/tmp/cat-v4-source27-clean-gate-producer-author/manifest.json",
+      "sha256": "f90c435dfad2263943f2fc196f8eb54c3d4ddf98e733a196b35ddd54e24c0ff1"
+    },
+    {
+      "bytes": 51173,
+      "path": "/tmp/cat-v4-source27-clean-gate-producer-author/M3-6C-GATE.patch",
+      "sha256": "8aadfa2056d31ec6342422274bfe700d2bb74d6f5ef4dffd22deb866a98dba08"
+    },
+    {
+      "bytes": 691,
+      "path": "/tmp/cat-v4-source27-clean-gate-producer-independent-review/verdict.json",
+      "sha256": "1057ea7c290a71b02c3d2bf4e977641659d214bbfbefbd2e9f0cc18b06546afb"
+    }
+  ],
+  "operational_base_sha": "e3d2d6006b2e9162215b01d5653ab2448d84997c",
+  "operator": "agent:codex (PROGRAM E8)",
+  "owning_gates_executed": false,
+  "product_qualification": false,
+  "remaining": [
+    "Review final exact cumulative candidate and current producer inputs.",
+    "Run canonical exact-SHA build, 4i, unit and full with real disposable PostgreSQL.",
+    "Obtain independent landing review and authorized local landing."
+  ],
+  "schema": "cat-m3-tool-evidence-1",
+  "source_paths": [
+    {
+      "before_sha256": "d5611613d709c0124457030c22f55c6f8d50b1055057bd25fc840fbf6ade4fb2",
+      "bytes": 21519,
+      "git_mode": "100644",
+      "path": "frontend/tests/gui-unit-reuse.test.mjs",
+      "sha256": "9a82a526b1682a3879208990000ec4bec2350086e53a65818aa78f6f93be7ae4"
+    },
+    {
+      "before_sha256": null,
+      "bytes": 7067,
+      "git_mode": "100644",
+      "path": "scripts/gui-pending-producer.mjs",
+      "sha256": "0a59899d16c71766eed5886de78b8434a04433181c70eeccbf02949696c5728f"
+    },
+    {
+      "before_sha256": "2c72193ffb50b4565629f283da2f8830359070ad560d59d42d18f45fd03a4046",
+      "bytes": 42041,
+      "git_mode": "100644",
+      "path": "scripts/gui-repo-hook.mjs",
+      "sha256": "f426876e1fc5ec0959e8941373a8ce51705a23561e8bef19b303efeb2c6de7fb"
+    },
+    {
+      "before_sha256": "9c58504c99a1a2a6ffb24df1e4efffdfb13be467068740b44925569f6b4d80d5",
+      "bytes": 8495,
+      "git_mode": "100644",
+      "path": "scripts/gui-reuse-driver.mjs",
+      "sha256": "ca0f9cba6cdebae560c2090f9bd265035de490ef3f1d325cf141b4dc77454583"
+    },
+    {
+      "before_sha256": "1066e251642240c3020e967107d26f8ad92e125c967d34d24b772f51ba406871",
+      "bytes": 20553,
+      "git_mode": "100644",
+      "path": "scripts/gui-unit-reuse.mjs",
+      "sha256": "7a8472acc7a60f86d176fb18c5f68244b4bac69b435b8836b6803ed5b85abd5b"
+    },
+    {
+      "before_sha256": "5c194fef9ef85efa56ad20a4a3857e880c66c4aec5253e2bd1fb4aba97562de8",
+      "bytes": 19153,
+      "git_mode": "100644",
+      "path": "scripts/landing/run_4i.py",
+      "sha256": "f61c28312e5a31d0c3184b23c39fc7d79434a77b19d021a576aa6f627f133be6"
+    },
+    {
+      "before_sha256": "4c7db9e9e814c16358d8581d8d5cbcc506393bf508ae9b13eeabf5e558f7b899",
+      "bytes": 24524,
+      "git_mode": "100644",
+      "path": "tests/test_landing_kit.py",
+      "sha256": "2a97c58ad6914f3ab4f726d5b49f1766f24e4354e50df2ea17ff2b14c253e20d"
+    }
+  ],
+  "source_validation": "Independent exact-code controls passed 49 Node and seven Python tests. The unchanged Go opt-in test anchors the exact candidate producer.",
+  "stage": "M3-6C-GATE",
+  "unchanged_optin": {
+    "bytes": 7241,
+    "path": "/home/dobo/work/_worktrees/cat_de_roman_esti/content__v4/go-backend/internal/contentops/readset_producer_test.go",
+    "sha256": "7b217bd254c67c5471a6fe03599addb5148d12e1c106e11de25eaf44bf7aec2e"
+  }
+}

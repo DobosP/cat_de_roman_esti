@@ -8,6 +8,7 @@ import os
 from pathlib import Path
 import re
 import shlex
+import stat
 import subprocess
 import sys
 import tarfile
@@ -117,6 +118,141 @@ def go_environment():
     return environment
 
 
+PRODUCER_TEST_PATH = Path("go-backend/internal/contentops/readset_producer_test.go")
+PRODUCER_TEST = "TestQuickPendingActualCompiledProducerReadset"
+PRODUCER_PACKAGE = "github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentops"
+PRODUCER_MIN_BYTES = 32 << 20
+PRODUCER_MAX_BYTES = 256 << 20
+PRODUCER_STAT_KEYS = ("st_dev", "st_ino", "st_size", "st_mode", "st_uid", "st_gid", "st_nlink", "st_mtime_ns", "st_ctime_ns")
+
+
+def actual_producer_registered(source):
+    file = source / PRODUCER_TEST_PATH
+    try:
+        info = file.lstat()
+    except FileNotFoundError:
+        return False
+    require(stat.S_ISREG(info.st_mode) and file.resolve(strict=True) == file, "Nonregular actual producer test registration")
+    return True
+
+
+def producer_identity(info):
+    return tuple(getattr(info, key) for key in PRODUCER_STAT_KEYS)
+
+
+def fingerprint_producer(file):
+    before = file.lstat()
+    require(stat.S_ISREG(before.st_mode) and before.st_nlink == 1 and before.st_uid == os.geteuid()
+            and before.st_mode & stat.S_IXUSR and PRODUCER_MIN_BYTES < before.st_size <= PRODUCER_MAX_BYTES
+            and file.resolve(strict=True) == file, "Actual producer executable is outside its regular-file, size or ownership bounds")
+    identity = producer_identity(before)
+    fd = os.open(file, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
+    with os.fdopen(fd, "rb") as stream:
+        require(producer_identity(os.fstat(fd)) == identity and Path(f"/proc/self/fd/{fd}").resolve(strict=True) == file,
+                "Actual producer changed before hashing")
+        checksum = hashlib.sha256()
+        remaining = before.st_size
+        while remaining:
+            block = stream.read(min(65536, remaining))
+            require(block, "Actual producer was truncated while hashing")
+            checksum.update(block)
+            remaining -= len(block)
+        require(not stream.read(1) and producer_identity(os.fstat(fd)) == identity
+                and producer_identity(file.lstat()) == identity and file.resolve(strict=True) == file,
+                "Actual producer changed while hashing")
+    return {"bytes": before.st_size, "sha256": checksum.hexdigest()}, identity
+
+
+def verify_producer_events(log, producer):
+    positions = {"run": [], "fingerprint": [], "pass": [], "package_pass": []}
+    with log.open("rb") as stream:
+        for number, line in enumerate(stream):
+            if not line.strip():
+                continue
+            event = read_json(line)
+            action, output = event.get("Action"), event.get("Output", "")
+            require(isinstance(action, str) and isinstance(output, str)
+                    and isinstance(event.get("Test", ""), str), "Malformed Go race event")
+            if event.get("Package") != PRODUCER_PACKAGE:
+                continue
+            require(action != "fail" and "(cached)" not in output, "Failed or cached actual producer package")
+            if action == "pass" and "Test" not in event:
+                positions["package_pass"].append(number)
+            if event.get("Test") != PRODUCER_TEST:
+                continue
+            require(action in ("run", "output", "pass"), "Unexpected actual producer test action")
+            if action in ("run", "pass"):
+                positions[action].append(number)
+            if action == "output" and "actual unstripped producer" in output:
+                match = re.fullmatch(r"\s*readset_producer_test\.go:\d+: actual unstripped producer ([0-9]+) bytes sha256=([a-f0-9]{64}); source executable remained read-only\n", output)
+                require(match and match.groups() == (str(producer["bytes"]), producer["sha256"]),
+                        "Actual producer log differs from built executable")
+                positions["fingerprint"].append(number)
+    require(all(len(rows) == 1 for rows in positions.values()), "Actual producer must run, log and pass exactly once")
+    order = [rows[0] for rows in positions.values()]
+    require(order == sorted(order), "Actual producer event order differs")
+
+
+def log_identity(file):
+    with file.open("rb") as stream:
+        return {"file": file.name, "bytes": os.fstat(stream.fileno()).st_size,
+                "sha256": hashlib.file_digest(stream, "sha256").hexdigest()}
+
+
+def run_producer_race(backend, command, source, output, environment, log):
+    proof = {"schema": 1, "status": "fail", "build": None, "producer": None, "race": None}
+    code = 125
+    try:
+        require(sys.platform == "linux", "Registered actual producer race requires Linux")
+        with tempfile.TemporaryDirectory(prefix=".cat-4i-pending-producer-", dir=output.parent) as temporary:
+            scratch = Path(temporary)
+            info = scratch.lstat()
+            require(stat.S_ISDIR(info.st_mode) and info.st_uid == os.geteuid()
+                    and stat.S_IMODE(info.st_mode) == 0o700 and scratch.resolve(strict=True) == scratch,
+                    "Private actual producer scratch required")
+            file = scratch / "cat-content-rail"
+            build_command = backend + ["build", "-mod=readonly", "-buildvcs=false", "-o", str(file), "./cmd/cat-content-rail"]
+            build_log = output / "06-producer-build.log"
+            proof["build"] = {"argv": build_command, "exit_code": None}
+            try:
+                with build_log.open("x", encoding="utf-8") as build:
+                    print(f"+ {shlex.join(build_command)}", file=build, flush=True)
+                    result = subprocess.run(build_command, cwd=source, env=environment, stdout=build,
+                                            stderr=subprocess.STDOUT, timeout=3900)
+                    proof["build"]["exit_code"] = result.returncode
+            finally:
+                proof["build"]["log"] = log_identity(build_log)
+            require(result.returncode == 0, "Actual producer build failed")
+            producer, identity = fingerprint_producer(file)
+            proof["producer"] = producer
+            print(f"actual unstripped producer {producer['bytes']} bytes sha256={producer['sha256']}", file=log, flush=True)
+
+            race_json = output / "06-race.jsonl"
+            proof["race"] = {"argv": command, "exit_code": None}
+            race_env = {**environment, "PENDING_REVIEW_TOOL": str(file), "PENDING_REVIEW_TOOL_SHA256": producer["sha256"]}
+            print(f"+ {shlex.join(command)}", file=log, flush=True)
+            try:
+                with race_json.open("xb") as raw:
+                    result = subprocess.run(command, cwd=source, env=race_env, stdout=raw, stderr=log, timeout=3900)
+                    proof["race"]["exit_code"] = result.returncode
+                    code = result.returncode
+            finally:
+                proof["race"]["json"] = log_identity(race_json)
+            require(code == 0, "Backend race process failed")
+            verify_producer_events(race_json, producer)
+            require(producer_identity(file.lstat()) == identity and file.resolve(strict=True) == file,
+                    "Actual producer changed during race")
+        proof["status"] = "pass"
+    except (OSError, ValueError, subprocess.TimeoutExpired) as exc:
+        proof["error"] = str(exc)
+        print(exc, file=log)
+        code = code or 125
+    receipt = output / "06-producer.json"
+    with receipt.open("x", encoding="utf-8") as stream:
+        stream.write(json.dumps(proof, indent=2) + "\n")
+    return code, log_identity(receipt)
+
+
 def run_checks(go, repo, source, output, baseline, sha, environment):
     backend = [go, "-C", "go-backend"]
     commands = (
@@ -133,16 +269,25 @@ def run_checks(go, repo, source, output, baseline, sha, environment):
     )
     results = []
     for name, command in commands:
+        preparation = None
         with (output / f"{name}.log").open("x", encoding="utf-8") as log:
-            print(f"+ {shlex.join(command)}", file=log, flush=True)
             try:
-                process = subprocess.run(command, cwd=repo if name == "10-diff" else source,
-                                         env=environment, stdout=log, stderr=subprocess.STDOUT, timeout=3900)
-                code = process.returncode
-            except (OSError, subprocess.TimeoutExpired) as exc:
+                registered_race = name == "06-race" and actual_producer_registered(source)
+                if registered_race:
+                    command = [*command[:-1], "-json", command[-1]]
+                    code, preparation = run_producer_race(backend, command, source, output, environment, log)
+                else:
+                    print(f"+ {shlex.join(command)}", file=log, flush=True)
+                    process = subprocess.run(command, cwd=repo if name == "10-diff" else source,
+                                             env=environment, stdout=log, stderr=subprocess.STDOUT, timeout=3900)
+                    code = process.returncode
+            except (OSError, ValueError, subprocess.TimeoutExpired) as exc:
                 print(exc, file=log)
                 code = 125
-        results.append({"name": name, "exit_code": code})
+        row = {"name": name, "exit_code": code}
+        if preparation is not None:
+            row["producer_preparation"] = preparation
+        results.append(row)
         print(f"{name} {code}", flush=True)
     return results
 
