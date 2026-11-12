@@ -11,6 +11,7 @@ import (
 	"testing"
 
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentops"
+	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/testfixture"
 )
 
 // All positive data below are deliberately synthetic, private t.TempDir
@@ -207,7 +208,7 @@ func TestQuickBridgeUnresolvedHistoryNeverPassesAnEmptyShape(t *testing.T) {
 	}
 }
 func TestQuickBridgePublicationRereadsRawEvidenceAndRollsBack(t *testing.T) {
-	dir := t.TempDir()
+	dir := testfixture.NativePendingDir(t)
 	source, out := filepath.Join(dir, "raw.json"), filepath.Join(dir, "draft.json")
 	if err := os.WriteFile(source, []byte("raw original"), 0600); err != nil {
 		t.Fatal(err)
@@ -216,16 +217,25 @@ func TestQuickBridgePublicationRereadsRawEvidenceAndRollsBack(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+	const body = "draft bytes"
 	checks := 0
 	verify := func() error {
 		checks++
 		if checks == 2 {
+			actual, err := os.ReadFile(out)
+			if err != nil {
+				return err
+			}
+			if string(actual) != body {
+				return fmt.Errorf("post-publication check observed unexpected draft bytes")
+			}
 			return os.WriteFile(source, []byte("raw changed"), 0600)
 		}
 		return nil
 	}
-	if err := publishQuickPending(context.Background(), out, []byte("draft bytes"), readset, verify); err == nil {
-		t.Fatal("changed raw report survived guarded publication")
+	err = publishQuickPending(context.Background(), out, []byte(body), readset, verify)
+	if checks != 2 || err == nil || err.Error() != "strict pending readset changed: "+source {
+		t.Fatal("expected changed raw evidence refusal after draft publication", checks, err)
 	}
 	if _, err := os.Lstat(out); !os.IsNotExist(err) {
 		t.Fatal("failed publication left output", err)

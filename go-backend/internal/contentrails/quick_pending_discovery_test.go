@@ -4,6 +4,7 @@ package contentrails
 
 import (
 	"context"
+	"errors"
 	"os"
 	"path/filepath"
 	"syscall"
@@ -11,6 +12,7 @@ import (
 	"time"
 
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentops"
+	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/testfixture"
 )
 
 func TestQuickPendingDiscoveryRefusesFIFOWithoutBlocking(t *testing.T) {
@@ -68,10 +70,7 @@ func TestQuickPendingFrozenCurrentArtifactRequiresExactInstalledMetadata(t *test
 }
 
 func TestQuickPendingCancellationBeforeAndAfterPublicationCleansArtifact(t *testing.T) {
-	scratch := t.TempDir()
-	if err := os.Chmod(scratch, 0700); err != nil {
-		t.Fatal(err)
-	}
+	scratch := testfixture.NativePendingDir(t)
 	input := filepath.Join(scratch, "input")
 	if err := os.WriteFile(input, []byte("fixed"), 0600); err != nil {
 		t.Fatal(err)
@@ -80,26 +79,37 @@ func TestQuickPendingCancellationBeforeAndAfterPublicationCleansArtifact(t *test
 	if err != nil {
 		t.Fatal(err)
 	}
+	const body = "private complete artifact"
 	for _, after := range []bool{false, true} {
 		ctx, cancel := context.WithCancel(context.Background())
 		path := filepath.Join(scratch, "pending.json")
-		if !after {
+		wantChecks := 0
+		if after {
+			wantChecks = 2
+		} else {
 			cancel()
 		}
 		checks := 0
-		err := publishQuickPending(ctx, path, []byte("private complete artifact"), readset, func() error {
+		err := publishQuickPending(ctx, path, []byte(body), readset, func() error {
 			checks++
 			if after && checks == 2 {
+				actual, err := os.ReadFile(path)
+				if err != nil {
+					return err
+				}
+				if string(actual) != body {
+					return errors.New("post-publication check observed unexpected artifact bytes")
+				}
 				cancel()
 			}
 			return nil
 		})
 		cancel()
-		if err == nil {
-			t.Fatal("canceled preparation published successfully", after)
+		if !errors.Is(err, context.Canceled) || checks != wantChecks {
+			t.Fatalf("expected cancellation at the selected boundary (after=%t, checks=%d, want=%d): %v", after, checks, wantChecks, err)
 		}
 		if _, err := os.Lstat(path); !os.IsNotExist(err) {
-			t.Fatal("canceled private publication remained", after)
+			t.Fatal("canceled private publication remained", after, err)
 		}
 	}
 }

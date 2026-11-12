@@ -13,6 +13,7 @@ import (
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentops"
+	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/testfixture"
 )
 
 func pendingTestRow() map[string]any {
@@ -214,18 +215,18 @@ func TestQuickPendingNativeProjectionAndDossierKeepAnswersPrivate(t *testing.T) 
 	}
 }
 func TestQuickPendingScratchAndGuardedReadsetRefuseMutation(t *testing.T) {
-	root, scratch := t.TempDir(), t.TempDir()
-	if err := os.Chmod(scratch, 0700); err != nil {
+	root, scratch := t.TempDir(), testfixture.NativePendingDir(t)
+	if err := os.Chmod(root, 0700); err != nil {
 		t.Fatal(err)
 	}
-	if err := pendingScratch(root, filepath.Join(root, "bad.json")); err == nil {
-		t.Fatal("repository output passed")
+	if err := pendingScratch(root, filepath.Join(root, "bad.json")); err == nil || err.Error() != "pending output must be outside repository" {
+		t.Fatal("expected repository output refusal", err)
 	}
 	if err := os.Mkdir(filepath.Join(scratch, ".git"), 0700); err != nil {
 		t.Fatal(err)
 	}
-	if err := pendingScratch(root, filepath.Join(scratch, "bad.json")); err == nil {
-		t.Fatal("other checkout output passed")
+	if err := pendingScratch(root, filepath.Join(scratch, "bad.json")); err == nil || err.Error() != "pending output must be outside all Git checkouts" {
+		t.Fatal("expected other checkout output refusal", err)
 	}
 	if err := os.Remove(filepath.Join(scratch, ".git")); err != nil {
 		t.Fatal(err)
@@ -239,25 +240,30 @@ func TestQuickPendingScratchAndGuardedReadsetRefuseMutation(t *testing.T) {
 		t.Fatal(err)
 	}
 	out := filepath.Join(scratch, "bundle.json")
+	publishedAndMutated := false
 	err = contentbuild.WritePrivatePendingArtifact(out, []byte("private"), func(publish func() error) error {
 		return contentops.GuardedTransaction(scratch, nil, readset, func() error {
 			if err := publish(); err != nil {
 				return err
 			}
-			return os.WriteFile(input, []byte("changed"), 0600)
+			if err := os.WriteFile(input, []byte("changed"), 0600); err != nil {
+				return err
+			}
+			publishedAndMutated = true
+			return nil
 		})
 	})
-	if err == nil {
-		t.Fatal("readset race passed")
+	if !publishedAndMutated || err == nil || err.Error() != "strict pending readset changed: "+input {
+		t.Fatal("expected readset refusal after publication and input mutation", publishedAndMutated, err)
 	}
-	if _, err := os.Stat(out); !os.IsNotExist(err) {
-		t.Fatal("failed guarded pending publication remained")
+	if _, err := os.Lstat(out); !os.IsNotExist(err) {
+		t.Fatal("failed guarded pending publication remained", err)
 	}
 	link := filepath.Join(scratch, "link")
 	if err := os.Symlink(root, link); err != nil {
 		t.Fatal(err)
 	}
-	if _, err := pendingRegular(filepath.Join(link, "input.json"), 1<<20); err == nil {
-		t.Fatal("symlinked pending input accepted")
+	if _, err := pendingRegular(filepath.Join(link, "input.json"), 1<<20); err == nil || !strings.Contains(err.Error(), "without symlinks") {
+		t.Fatal("expected symlinked pending input refusal", err)
 	}
 }
