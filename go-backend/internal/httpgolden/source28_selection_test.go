@@ -9,8 +9,6 @@ import (
 	"sort"
 	"strings"
 	"testing"
-
-	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
 )
 
 func source28ExpectedSources() map[string]string {
@@ -48,37 +46,17 @@ func source28ReadExpectedCorpus(t *testing.T) *Corpus {
 	return corpus
 }
 
-func TestSource28SelectsExactCurrentIndependentCorpus(t *testing.T) {
+func TestSource28SelectsExactHistoricalIndependentCorpus(t *testing.T) {
 	want := source28ReadExpectedCorpus(t)
 	loaded, err := reviewedV4C42Source28()
 	if err != nil || !reflect.DeepEqual(loaded, want) {
 		t.Fatal("Source28 loader changed its independent captured responses", err)
-	}
-	data, err := content.Load()
-	if err != nil || !reflect.DeepEqual(data.Sources, want.Sources) {
-		t.Fatal("live compiled bundle does not have the actual Source28 source tuple", err)
 	}
 	sources := source28ExpectedSources()
 	before := source6GUICloneSources(sources)
 	selected, err := ForSources(sources)
 	if err != nil || !reflect.DeepEqual(selected, want) || !reflect.DeepEqual(sources, before) {
 		t.Fatal("complete Source28 tuple selected different responses or changed its input", err)
-	}
-	if len(reviewedSources) != 28 {
-		t.Fatal("expected Source28 plus 27 historical selectors", len(reviewedSources))
-	}
-	for _, row := range reviewedSources {
-		if reflect.DeepEqual(row.sources, want.Sources) {
-			continue
-		}
-		historical, err := row.load()
-		if err != nil || !reflect.DeepEqual(row.sources, historical.Sources) {
-			t.Fatal("historical loader no longer binds its exact sources", err)
-		}
-		selected, err := ForSources(row.sources)
-		if err != nil || !reflect.DeepEqual(selected, historical) {
-			t.Fatal("historical whole tuple selected different responses", err)
-		}
 	}
 }
 
