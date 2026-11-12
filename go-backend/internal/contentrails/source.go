@@ -18,6 +18,7 @@ import (
 	"reflect"
 	"sort"
 	"strings"
+	"unicode/utf8"
 )
 
 //go:embed sources/authored-v1.json
@@ -100,6 +101,16 @@ func Render(v any) ([]byte, error) {
 	}
 	return append(b.Bytes(), '\n'), nil
 }
+
+// decodeRailJSON delegates strict decoding to contentops.Decode. On invalid
+// UTF-8, retain the rail error that used to precede Decode's broader byte guard.
+func decodeRailJSON(raw []byte) (map[string]any, error) {
+	value, err := contentops.Decode(raw)
+	if err != nil && !utf8.Valid(raw) {
+		return nil, strictjson.Validate(raw)
+	}
+	return value, err
+}
 func Read(path string) (map[string]any, error) {
 	f, err := os.Open(path)
 	if err != nil {
@@ -113,10 +124,7 @@ func Read(path string) (map[string]any, error) {
 	if len(b) > MaxBytes {
 		return nil, fmt.Errorf("rail JSON byte cap")
 	}
-	if err = strictjson.Validate(b); err != nil {
-		return nil, err
-	}
-	return contentops.Decode(b)
+	return decodeRailJSON(b)
 }
 func LoadSource(path string) (*Source, error) {
 	raw := authoredSource
@@ -161,10 +169,7 @@ func decodeSource(raw []byte, expectedParent string, expectedVersion int) (*Sour
 	if len(raw) > MaxBytes {
 		return nil, fmt.Errorf("authored source byte cap exceeded")
 	}
-	if err := strictjson.Validate(raw); err != nil {
-		return nil, err
-	}
-	value, err := contentops.Decode(raw)
+	value, err := decodeRailJSON(raw)
 	if err != nil {
 		return nil, err
 	}
