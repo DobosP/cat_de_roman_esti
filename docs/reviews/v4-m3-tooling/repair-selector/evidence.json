@@ -1,0 +1,71 @@
+{
+  "commands_and_results": [
+    {
+      "path": "/home/dobo/work/_temp/content__v4/tooling/m3-selection-native-overlay-v1/result.json",
+      "sha256": "7355477b2239c09c2248080cd594faf30c82646a5f50bfb45388d839dbf0c9b2"
+    },
+    {
+      "bytes": 659427,
+      "path": "/home/dobo/work/_temp/content__v4/tooling/m3-stage5-recovery-v5/phase-61-selection-contract.json",
+      "sha256": "25ca3e48ead1f6ae736a03553f770fb1d714c75093a8c54068bf3b2fdfeb662f"
+    },
+    {
+      "bytes": 5300,
+      "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e-operator/coverage80-root-actual-stream-verification.json",
+      "sha256": "292254b1dbb7d6d018c9a1666a49374517dd56b631b54546901d405eb70f17b2"
+    },
+    {
+      "bytes": 2792,
+      "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e-operator/pg17-root-closeout-v1.stdout",
+      "sha256": "72f45283ad378d90427be248fb3d325e06e3df35a0f28b3709023da19f5cc2a9"
+    }
+  ],
+  "corpus": {
+    "changes": {
+      "go-backend/internal/httpgolden/golden.go": {
+        "after_sha256": "59ac65819e22db6faabdc281e0a516283db274409b0712839c4f6c4e8f1ec56b",
+        "before_sha256": "2274d315b2e75174f272cb20742dc914de78651125766fe8e2cf06ed9cf68be0"
+      },
+      "go-backend/internal/httpgolden/testdata/python-http-parity-v4-m3-stage5-recovery27.json.gz": {
+        "after_sha256": "d5b42e701b0d0170addfbbbc66b56b9d2c26fa3aa4081843c786e4315f63236b",
+        "before_sha256": null
+      }
+    },
+    "code_review": {
+      "path": "/tmp/cat-v4-source27-oracle-review/review-manifest.json",
+      "sha256": "4282ef5c81c2da2981081c5628cb5c2d57a8b5b60ec9b0a4c1d4e9cc64548650"
+    },
+    "independent_oracle_receipt": {
+      "path": "/tmp/cat-v4-source27-independent-oracle/stable-artifact-manifest.json",
+      "sha256": "4298d1aafb7b2fe50c1a675f65aaa489ba5240fca3893dd01317ae32ecb8cfb3"
+    },
+    "schema": "cat-m3-independent-oracle-transition-1"
+  },
+  "operational_base_sha": "e3d2d6006b2e9162215b01d5653ab2448d84997c",
+  "operator": "agent:codex (PROGRAM E8)",
+  "product_qualification": false,
+  "remaining": [
+    "Review final exact cumulative candidate and current producer inputs.",
+    "Run canonical exact-SHA build, 4i, unit and full with real disposable PostgreSQL.",
+    "Obtain independent landing review and authorized local landing."
+  ],
+  "schema": "cat-m3-tool-evidence-1",
+  "source_paths": [
+    {
+      "before_sha256": null,
+      "bytes": 7973,
+      "git_mode": "100644",
+      "path": "go-backend/internal/httpgolden/source27_selection_test.go",
+      "sha256": "adab9c4d9b6a5a780178e2a73d44e86e69e3d49d5f06662645b71b8e4e8acea3"
+    },
+    {
+      "before_sha256": "05ec6eca8b9fb7e560ca24b00bee98b5e9de0391cb262462f81c5b5f51ff9688",
+      "bytes": 7050,
+      "git_mode": "100644",
+      "path": "go-backend/internal/httpgolden/v4c10_selection_test.go",
+      "sha256": "a96de2cee0b6f41418faa2cd192adadfc94b2dc1c8c9ed0d973f0ab6e3d18d8a"
+    }
+  ],
+  "source_validation": "Root focused overlay race recorded 196 PASS, zero FAIL/SKIP. The later focused and full native checks have separate receipts.",
+  "stage": "M3-6A-SELECT"
+}

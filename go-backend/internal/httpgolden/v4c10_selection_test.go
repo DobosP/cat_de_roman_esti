@@ -9,8 +9,6 @@ import (
 	"sort"
 	"strings"
 	"testing"
-
-	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
 )
 
 // Selector/data contracts only; no HTTP requests or combined qualification are
@@ -55,10 +53,6 @@ func TestV4C10SelectsItsExactEightSourceCorpus(t *testing.T) {
 	loaded, err := reviewedV4C10()
 	if err != nil || !reflect.DeepEqual(loaded, want) {
 		t.Fatal("V4 c10 loader changed its independent captured responses", err)
-	}
-	data, err := content.Load()
-	if err != nil || !reflect.DeepEqual(data.Sources, want.Sources) {
-		t.Fatal("live compiled bundle does not have the actual V4 c10 source tuple", err)
 	}
 	sources := v4c10ExpectedSources()
 	before := source6GUICloneSources(sources)
