@@ -1,0 +1,1740 @@
+{
+  "base_commit_sha": "e3d2d6006b2e9162215b01d5653ab2448d84997c",
+  "clean_gate_series_rebind": {
+    "bytes": 6224,
+    "path": "/tmp/cat-v4-source27-post90-gate-series-rebind/assembly-inputs.json",
+    "sha256": "3e88745dccf1f687949497f98626ba1e2748b72493ac1d96f5c3d0ac3a6bdaad"
+  },
+  "cleanup_receipt": {
+    "bytes": 285712,
+    "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-post90-cleanup-transaction-v1/RESULT.json",
+    "sha256": "74ca0de0f717d2f3d6c3f9a9d4426f8b7d77b74b6931225621ae93a419ab1bd1"
+  },
+  "exact_path_plan": {
+    "bytes": 141617,
+    "path": "/tmp/cat-v4-m3-source27-series-plan/path-plan.json",
+    "sha256": "3236d0e0c24bac99b4bdebc885d02c4e5946d49cd1112db05283815b2419040b"
+  },
+  "external_receipt_scope": "The final self commit/tree and this file’s own digest belong in the external exact assembly receipt.",
+  "product_qualified": false,
+  "rebind_inputs": {
+    "bytes": 127182,
+    "path": "/tmp/cat-v4-source27-post90-series-rebind-plan/pins.json",
+    "sha256": "303bd7e6d7824667d10c7064c68f0f8321dc7a9024e8452386ac4686dac6f9f4"
+  },
+  "schema": "cat-m3-source27-series-1",
+  "stage_count": 16,
+  "stage_order": [
+    "M3-1",
+    "M3-2",
+    "M3-3",
+    "M3-4A",
+    "M3-4B",
+    "M3-5A",
+    "M3-5B26",
+    "M3-5C-HISTORY",
+    "M3-5D-RUNTIME",
+    "M3-5E-CACHE",
+    "M3-5F27",
+    "M3-6",
+    "M3-6A-SELECT",
+    "M3-6B-DECODE",
+    "M3-6C-GATE",
+    "M3-7"
+  ],
+  "stages": [
+    {
+      "commit_sha": "389f740206883f564bb1e9d72067f3e3201b710b",
+      "ordinal": 1,
+      "parent_commit_sha": "e3d2d6006b2e9162215b01d5653ab2448d84997c",
+      "parent_stage": null,
+      "same_commit_docs": [
+        {
+          "bytes": 24949,
+          "git_mode": "100644",
+          "path": "docs/STATUS.md",
+          "sha256": "fed5919649f891873607e9122be8ffa49b0a13c0c3e3fbaa61c276b4d423c234"
+        },
+        {
+          "bytes": 858,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/stage1/threat-model.json",
+          "sha256": "cfbc30acb0ac68e5b13f829412e5c88aeb8a6397f5f5a95ff6fffce849ccf3b2"
+        },
+        {
+          "bytes": 1827,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/stage1/evidence.json",
+          "sha256": "75f359343e849a043742f0146b31b53e8d597cb8c3b4914a85b23c887d86035e"
+        },
+        {
+          "bytes": 706,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/stage1/review-ref.json",
+          "sha256": "e807a2185048425305669fb5dd0082454009f529af5a82fe0689abf2ceb48e31"
+        },
+        {
+          "bytes": 6130,
+          "git_mode": "100644",
+          "path": "docs/adr/0229-native-quick-review-and-rubric-requalification.md",
+          "sha256": "3e913cbf8dce916260ada95e12393d9afe3cd70144ff8afdba62dc91cff098c2"
+        },
+        {
+          "bytes": 23720,
+          "git_mode": "100644",
+          "path": "docs/adr/README.md",
+          "sha256": "0d679ba0b665e28dafd7cf37b0bb8a39c070437831bf9f989d98a7adba7db0f6"
+        },
+        {
+          "bytes": 45601,
+          "git_mode": "100644",
+          "path": "docs/tracked-markdown.json",
+          "sha256": "76a8ad9f73c6185ce81ec85114e1fb14ea7d547aabff509b15bfd545c5727a86"
+        }
+      ],
+      "source_paths": [
+        {
+          "bytes": 16345,
+          "git_mode": "100644",
+          "path": ".claude/workflows/critique-games.js",
+          "sha256": "4f557b1da4e17b8ad810eae1a9c5735dd690870dabd3746131e929df8c837899"
+        },
+        {
+          "bytes": 7891,
+          "git_mode": "100644",
+          "path": ".claude/workflows/verify-authored-content.js",
+          "sha256": "f4b9ead16b7470124d46ca2b96948d1e05ebc53cfa51ab47e0818eb78844d538"
+        },
+        {
+          "bytes": 22796,
+          "git_mode": "100644",
+          "path": "docs/CRITIQUE_RUBRIC.md",
+          "sha256": "159155390d188545ed71c1697a21b7e46b236a51a3aacaf3ab6351ee17afcc3a"
+        }
+      ],
+      "stage": "M3-1",
+      "tree_sha": "13ab39f9de8d51cc0c5c7577ae9a8f31ae9c3924"
+    },
+    {
+      "commit_sha": "61fbf7cec1be0279902dd0afbcc5e4f1fa2d1e5d",
+      "ordinal": 2,
+      "parent_commit_sha": "389f740206883f564bb1e9d72067f3e3201b710b",
+      "parent_stage": "M3-1",
+      "same_commit_docs": [
+        {
+          "bytes": 24956,
+          "git_mode": "100644",
+          "path": "docs/STATUS.md",
+          "sha256": "d53344e0c997af019e54a6aac7c4ba2f2ba7c4913acaed79d72ea766489cdba9"
+        },
+        {
+          "bytes": 919,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/stage2/threat-model.json",
+          "sha256": "634853f62a3bb08dea718e7e95793e6080c44fad927f16760167ed1fb0a466e4"
+        },
+        {
+          "bytes": 5874,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/stage2/evidence.json",
+          "sha256": "5ef1966aa51211f59659fb67076797360cf77e76b614a31103655a20bd09b178"
+        },
+        {
+          "bytes": 722,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/stage2/review-ref.json",
+          "sha256": "16ea482aadfef1256c931b86967096f91566954c1d3b133f97909a54bc6c7174"
+        }
+      ],
+      "source_paths": [
+        {
+          "bytes": 10282,
+          "git_mode": "100644",
+          "path": "go-backend/cmd/cat-content-rail/main.go",
+          "sha256": "e5e67e9e06d8c77d424a9483ba16b8b3e143d5e00ffa335ea099ca66bb75381c"
+        },
+        {
+          "bytes": 1739,
+          "git_mode": "100644",
+          "path": "go-backend/cmd/cat-content-rail/main_test.go",
+          "sha256": "e85ae28889cdf64d035b245a036af270d29aff5e5fe0bb942b0d3e53ed189af7"
+        },
+        {
+          "bytes": 25194,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentbuild/catalogs.go",
+          "sha256": "f62d9920228ce114f6dea238378cb1d263936b9c7931641ecd21bbc747160b8a"
+        },
+        {
+          "bytes": 3866,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentbuild/operators.go",
+          "sha256": "6a557dc5fae93039ec589e1cb1379fdc95dce3881be2d81cf1b868b033765b3f"
+        },
+        {
+          "bytes": 2534,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentbuild/pending_digest.go",
+          "sha256": "b3b34d2f135b0795a6a7630c1639b7eff8f8f56ea7e6a7239026629d643491a4"
+        },
+        {
+          "bytes": 10183,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentbuild/pending_output_linux.go",
+          "sha256": "250f25a56c01b48092b03fb28e05039a41e708d66b9ef09571d2f859c5e4bc51"
+        },
+        {
+          "bytes": 2433,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentbuild/pending_output_linux_test.go",
+          "sha256": "89da52bb0ce0374c998327d1ab08db9e26eb479400d9641cac4bccbe1b9dd319"
+        },
+        {
+          "bytes": 712,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentbuild/pending_output_other.go",
+          "sha256": "2fe27aea7f3da7aec77b10f3ca42a507f3b561d9eed72c6b772d75cc0bf81651"
+        },
+        {
+          "bytes": 5782,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentbuild/pending_output_security_test.go",
+          "sha256": "9fee93e785cf1d430b0073a0ce325cf9428267461e267b48a51d5876fafdcbaf"
+        },
+        {
+          "bytes": 1873,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentbuild/publication_adversarial_test.go",
+          "sha256": "4b412484c7d5b089051283ddac45c8bc03a8230fc9de86b98009723a843691a8"
+        },
+        {
+          "bytes": 6391,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentbuild/quick_pending_test.go",
+          "sha256": "bc11e339a6107aa6186168fde5a7affcb9d69fe02ed631bd43b9bb02218588c1"
+        },
+        {
+          "bytes": 18375,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentops/files.go",
+          "sha256": "4fe3ae0992cdd9ec8cf198cfc8eeb21b7245ef79296e8969eaac389c6af33017"
+        },
+        {
+          "bytes": 3960,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentops/readset_check.go",
+          "sha256": "2c296f0f7e9658ce4e40451e0bfbda861ad6101a3d0843771dcf76479d75c001"
+        },
+        {
+          "bytes": 7241,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentops/readset_producer_test.go",
+          "sha256": "7b217bd254c67c5471a6fe03599addb5148d12e1c106e11de25eaf44bf7aec2e"
+        },
+        {
+          "bytes": 9841,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick.go",
+          "sha256": "b00bb9357b8f647d7af822ee6f8fa62ac1d1d5b256b1deb28920482efc275034"
+        },
+        {
+          "bytes": 14053,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_pending.go",
+          "sha256": "e12c57cf1b638617bb55819df8c0f5aa7a9f2f55bce62d33b823304a60767b20"
+        },
+        {
+          "bytes": 1832,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_pending_commit_test.go",
+          "sha256": "68b4da9297008df85fb206a719bfb2d5b0799bbcc37663ba5c76cd6a2bb42174"
+        },
+        {
+          "bytes": 2925,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_pending_discovery_test.go",
+          "sha256": "32e1fbc7c7356f28ecc11df4b3dcde321938c6405d1301b73bf1579e4b1111a2"
+        },
+        {
+          "bytes": 11381,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_pending_inventory.go",
+          "sha256": "cca679ed6008c95df9f9bbe88714d7ecc34014bd12b115badb8b559b0b239590"
+        },
+        {
+          "bytes": 15332,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_pending_projection.go",
+          "sha256": "9ed2ceea091dda579876d552c4dc2b4572b2070466e95a720e9827acd81108b2"
+        },
+        {
+          "bytes": 5391,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_pending_screen.go",
+          "sha256": "b3c844467f6ced893da48680fe70af54bea295d93bc5367914776dd312aa3c60"
+        },
+        {
+          "bytes": 11944,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_pending_test.go",
+          "sha256": "c0af341a771046398a1608854776ceabb7b8cd4dca9a4cb2f8ab70afe9b25c25"
+        }
+      ],
+      "stage": "M3-2",
+      "tree_sha": "3baaa572f5e10f68fc27132ea685198f0b56c706"
+    },
+    {
+      "commit_sha": "2d7bd5e2b23425ffd1093ad0649995d87840ed1a",
+      "ordinal": 3,
+      "parent_commit_sha": "61fbf7cec1be0279902dd0afbcc5e4f1fa2d1e5d",
+      "parent_stage": "M3-2",
+      "same_commit_docs": [
+        {
+          "bytes": 24910,
+          "git_mode": "100644",
+          "path": "docs/STATUS.md",
+          "sha256": "d7a4e817fea653bd622eaf088cbc8546ee92b6167199a5816b54487f3eee340a"
+        },
+        {
+          "bytes": 878,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/stage3/threat-model.json",
+          "sha256": "c2b8b1b4cfdd9d45bd44ddf4db3f931aa1eed5f1c34d6caf73c1890e4676291c"
+        },
+        {
+          "bytes": 3224,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/stage3/evidence.json",
+          "sha256": "35db8ed5d9c1d5200c27977f857f60e53f5382b90d8b38a929e46104962e31fd"
+        },
+        {
+          "bytes": 664,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/stage3/review-ref.json",
+          "sha256": "0370560a6759cab12017ed35e7c84e1391964f1e5002cb541f07d5d7cac0559a"
+        }
+      ],
+      "source_paths": [
+        {
+          "bytes": 68415,
+          "git_mode": "100644",
+          "path": "scripts/miner/critic_blind.py",
+          "sha256": "a4496de6a910560b3c81f1db53e04e73dbaba92303c5ba13e67cec5b5ae6a847"
+        },
+        {
+          "bytes": 38356,
+          "git_mode": "100644",
+          "path": "tests/test_quick_blind_binding.py",
+          "sha256": "90f4a671e041dd64df670347926dc52667d439a4726ced8d68b67ebedbdf3e8a"
+        }
+      ],
+      "stage": "M3-3",
+      "tree_sha": "e6b2545b79354f55d3148963fc4126e6214386b8"
+    },
+    {
+      "commit_sha": "737558c00666133c3eaf666f1c38fe775ac35264",
+      "ordinal": 4,
+      "parent_commit_sha": "2d7bd5e2b23425ffd1093ad0649995d87840ed1a",
+      "parent_stage": "M3-3",
+      "same_commit_docs": [
+        {
+          "bytes": 24894,
+          "git_mode": "100644",
+          "path": "docs/STATUS.md",
+          "sha256": "7e3e4068093cf4e24acf028f4b2b4987247cc4204f02176ad8479da1f15df2fb"
+        },
+        {
+          "bytes": 890,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/stage4a/threat-model.json",
+          "sha256": "2a5fb5f1f8ece312789a5edb7177663c54dd5882da0e80b44da52a662d24272b"
+        },
+        {
+          "bytes": 5214,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/stage4a/evidence.json",
+          "sha256": "cc10eb606d3a277e20e6f6bea9d12cd1eaa28d6d391d9a3ef8034f4eb52f9370"
+        },
+        {
+          "bytes": 1257,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/stage4a/review-ref.json",
+          "sha256": "9f60c11f86067c84b0e290016296bebaebd9506628c977a7d23f7914ebe14ba7"
+        }
+      ],
+      "source_paths": [
+        {
+          "bytes": 11577,
+          "git_mode": "100644",
+          "path": "go-backend/cmd/cat-content-rail/main.go",
+          "sha256": "26d2155996c70f52b32345c1ed04b3907497e34b91015a521e50ac49bb2d1848"
+        },
+        {
+          "bytes": 1454,
+          "git_mode": "100644",
+          "path": "go-backend/cmd/cat-content-rail/quick_bridge_test.go",
+          "sha256": "360111cd44ec83d9f65ca22410140413f7f1609949198bda4b6016c1522a8b07"
+        },
+        {
+          "bytes": 21835,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_bridge.go",
+          "sha256": "bfc18579431efd800cc2651a3ab47f13018e18a08a8188a1bbd3fb9b77e24977"
+        },
+        {
+          "bytes": 10645,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_bridge_blind.go",
+          "sha256": "2416e0060ed9ac6eac99b79d1e896881d679846165ce510cd81ceaf448f495a7"
+        },
+        {
+          "bytes": 12682,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_bridge_blind_test.go",
+          "sha256": "419498ec38b669fb9bd2477aa459b9f5f860b4b905ce71cebe7a66906a9d473c"
+        },
+        {
+          "bytes": 918,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_bridge_chronology_test.go",
+          "sha256": "ebf81cf750fc3149d1f6036c41c2eb6cc1924955f9539156729c445b284cda4d"
+        },
+        {
+          "bytes": 11133,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_bridge_reviews.go",
+          "sha256": "24684cbbb040ced4bd1f59a4dbae487cfca8f3c0f8219def91936d3e6abce9a2"
+        },
+        {
+          "bytes": 14877,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_bridge_test.go",
+          "sha256": "49e8b6ccdc396f0df44cd38f40a626ca85572b728fe7f5517ac0bfc015dd60a4"
+        },
+        {
+          "bytes": 42166,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_bridge_url_matrix_test.go",
+          "sha256": "9ec5c53eec6ea46a263f4156d4e8ae92286f08ede19f733e9e730cffe5824ad8"
+        },
+        {
+          "bytes": 2239,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_bridge_url_test.go",
+          "sha256": "05029441d32c276dbc7ff86b8a4f3a6a3cd6fdaed3153dfea6da8498decce7ba"
+        }
+      ],
+      "stage": "M3-4A",
+      "tree_sha": "233b1c6fbf4869eeaa911e729f6c45af77633702"
+    },
+    {
+      "commit_sha": "f1ffc5875f43ff5f152a312b7cae915bd8cba9b6",
+      "ordinal": 5,
+      "parent_commit_sha": "737558c00666133c3eaf666f1c38fe775ac35264",
+      "parent_stage": "M3-4A",
+      "same_commit_docs": [
+        {
+          "bytes": 24899,
+          "git_mode": "100644",
+          "path": "docs/STATUS.md",
+          "sha256": "e6e732881ad4faf50129a4f8b341be04b19dcdf32c2238a8801cc686e03c3987"
+        },
+        {
+          "bytes": 907,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/stage4b/threat-model.json",
+          "sha256": "441d4cd539be1cfce9af42651db6d9540c60819ec52fb55e6352e9d6563dd02a"
+        },
+        {
+          "bytes": 3697,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/stage4b/evidence.json",
+          "sha256": "ef6be568d10dadac54a9a2cd7d34c2407ef2a95fcabbe43d51c20a88df856242"
+        },
+        {
+          "bytes": 2024,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/stage4b/review-ref.json",
+          "sha256": "06c231f3b47ade9e83804462626c4f6af13fe4d8ea82d7958e6462fa9b8cd6c4"
+        }
+      ],
+      "source_paths": [
+        {
+          "bytes": 14181,
+          "git_mode": "100644",
+          "path": "go-backend/cmd/cat-content-rail/main.go",
+          "sha256": "487c66b61b6283e4efcbb12c2d1787cc15ea401e6b5f790a58efa9363b77424c"
+        },
+        {
+          "bytes": 2408,
+          "git_mode": "100644",
+          "path": "go-backend/cmd/cat-content-rail/quick_bridge_test.go",
+          "sha256": "4e3cf72b1a937f8d9250a0974c42eba111647f1c632efa2fd2a3c04ec7a20705"
+        },
+        {
+          "bytes": 22177,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_bridge.go",
+          "sha256": "bd5f9f54e301c99c39a8b2cc9e71b80c5e42477d7323dcbaf136b7d80cf5952f"
+        },
+        {
+          "bytes": 11074,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_bridge_confirm.go",
+          "sha256": "d9d32ca67c9584630c9ce231a699e84b3c79a1cd7d69493635e04c8d75175d42"
+        },
+        {
+          "bytes": 6981,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_bridge_full.go",
+          "sha256": "30ce93a4542235dcc4cea092510bc0a81d5b60d62ec239f1b907c058062d219f"
+        },
+        {
+          "bytes": 17767,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_bridge_full_test.go",
+          "sha256": "6b8edda427e7e0f7815606ee0da7d1c91e0223f426147116ae7d9bdce54d8762"
+        },
+        {
+          "bytes": 12001,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_bridge_history.go",
+          "sha256": "ca8f54f9a25d2de3ac1c978e9901de54c9fdf26f095e857ad800dfeb1e3d675e"
+        },
+        {
+          "bytes": 18155,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_bridge_history_recovery_test.go",
+          "sha256": "d84ddc68294c42624694babe48633c8bb160ebac773ff439f82d354544a29ae1"
+        },
+        {
+          "bytes": 6667,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_bridge_install.go",
+          "sha256": "ee0eef63b3d7e4c8469a44c260cca0f580f12c73ca8196628365e56a7beb0ce7"
+        },
+        {
+          "bytes": 5386,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_bridge_session.go",
+          "sha256": "18082830c2e9b3759ff0725aa41c9fabd8d5b5f55d0c8e71308487f34579c94e"
+        },
+        {
+          "bytes": 27864,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/rail.go",
+          "sha256": "6ab0fe1e12ced71b75fbf8361433e06308a93a10e70ae5a846028610384cd531"
+        }
+      ],
+      "stage": "M3-4B",
+      "tree_sha": "f9151f2a4f7d871e670fdbe31f68e2a368adbdcf"
+    },
+    {
+      "commit_sha": "b3747ed7e62f24c77893de25e8dbaa938bfaef56",
+      "ordinal": 6,
+      "parent_commit_sha": "f1ffc5875f43ff5f152a312b7cae915bd8cba9b6",
+      "parent_stage": "M3-4B",
+      "same_commit_docs": [
+        {
+          "bytes": 24897,
+          "git_mode": "100644",
+          "path": "docs/STATUS.md",
+          "sha256": "9258f7c5fb58df8ef6f42e50b7ae3d2f2fe79f484dd2e671d0b10ffc1de8d932"
+        },
+        {
+          "bytes": 909,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/stage5a/threat-model.json",
+          "sha256": "967ea56ad11111679b0e78d9802e64600e7829a4d397f950ad291dac6994b9e4"
+        },
+        {
+          "bytes": 3171,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/stage5a/evidence.json",
+          "sha256": "dc934308c86e15af83f03c532db0fe47707a8cfabbf792c3282bc0e91244d131"
+        },
+        {
+          "bytes": 1696,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/stage5a/review-ref.json",
+          "sha256": "853ab5b48ce6b2cb640476e4129dd3e76774b15fd762a953c7ed7f66189d348c"
+        }
+      ],
+      "source_paths": [
+        {
+          "bytes": 38608,
+          "git_mode": "100644",
+          "path": "cat_de_roman_esti/wordgames/packs.py",
+          "sha256": "ffee874f972355011a0ee89bb528b2e38bb6279d7bdb69c2bdde15b385e5c589"
+        },
+        {
+          "bytes": 11744,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentbuild/build.go",
+          "sha256": "86175a8df65d28a4db8d734cd7f321cb9c3579f2fa52179ad2af82595b60fd40"
+        },
+        {
+          "bytes": 7709,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/historical_context_v16_test.go",
+          "sha256": "993edda9fad55d9e048e55efff6c8a697aa2c52a45afb7f55e27a64848ac2441"
+        },
+        {
+          "bytes": 16646,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/historical_world.go",
+          "sha256": "e55461463971f2bad60bd2b12dbcf928664dda65d52f66e3d82a2872cfb5aa1d"
+        },
+        {
+          "bytes": 11782,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/historical_world_test.go",
+          "sha256": "75e8d221a81ec98ad7c681370a663f7f8b0251c2946d371f5ae134546addeb61"
+        },
+        {
+          "bytes": 28682,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/rail.go",
+          "sha256": "91681aea33527b4621656254c5858ade0f2820ad89f48b6788391e2d8cf36641"
+        },
+        {
+          "bytes": 20317,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/rail_test.go",
+          "sha256": "5d3d0b83ed1cbd253134cf4fbb957cd24651e623748573d7a9b973e55c2812a0"
+        },
+        {
+          "bytes": 5070,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/review.go",
+          "sha256": "c444dabf018496f273a346e4b23e0e7978e806e8d00088f3a4347b6b8de46b51"
+        },
+        {
+          "bytes": 19049,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/world.go",
+          "sha256": "13b9cf6ca3962f35b303f2a0184ad8db55a7860b0b7185338c660564fbe6646d"
+        },
+        {
+          "bytes": 4013,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/world_installed_test.go",
+          "sha256": "18e5c32f2483b94cb089e5d362e47fa271c6e54043db53f964d71e24069c4986"
+        }
+      ],
+      "stage": "M3-5A",
+      "tree_sha": "daa98e7f3d2e1c1069ff0b3186902e8902fa8795"
+    },
+    {
+      "commit_sha": "c6430c48a6cdacd311669eb4154773f02512ddba",
+      "ordinal": 7,
+      "parent_commit_sha": "b3747ed7e62f24c77893de25e8dbaa938bfaef56",
+      "parent_stage": "M3-5A",
+      "same_commit_docs": [
+        {
+          "bytes": 24950,
+          "git_mode": "100644",
+          "path": "docs/STATUS.md",
+          "sha256": "e7a25dc14a816ea6fab08078896a656e16832581dccf75ccde20f35fbc298bc0"
+        },
+        {
+          "bytes": 11138,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/source26-baseline.json",
+          "sha256": "4cdce04a8caf950c55127d3cb7fd9a5224691a30dce0922e5622cab9f0c741d7"
+        }
+      ],
+      "source_paths": [
+        {
+          "bytes": 889314,
+          "git_mode": "100644",
+          "path": "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json",
+          "sha256": "2f230b5a71714e8e5a78e6195ce523edd3df895f422c6080ae2e67be652b8595"
+        },
+        {
+          "bytes": 480649,
+          "git_mode": "100644",
+          "path": "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json",
+          "sha256": "d89c88bd2ada5ab5a285a0d31b5e19d530dd89278152ab57beb6abfac056b8c1"
+        },
+        {
+          "bytes": 168685,
+          "git_mode": "100644",
+          "path": "cat_de_roman_esti/fixtures/board_rankings_v37.json",
+          "sha256": "28f16fdcb66a33830419e128f0522c04901b142166f1e8d7724292c19002ec0f"
+        },
+        {
+          "bytes": 249190,
+          "git_mode": "100644",
+          "path": "cat_de_roman_esti/fixtures/derived_catalog_v38.json",
+          "sha256": "6f2687c35f4927ded018bb321fbf84e567e7d652474c681fd7bea2d5afd25cf1"
+        },
+        {
+          "bytes": 384681,
+          "git_mode": "100644",
+          "path": "cat_de_roman_esti/fixtures/quick_games_v92.json",
+          "sha256": "d210baab434e591ed54a1e9056c8a06d18743b299739a9bf59978bc8a41f08c1"
+        },
+        {
+          "bytes": 25777,
+          "git_mode": "100644",
+          "path": "cat_de_roman_esti/wordgames/derived_catalog.py",
+          "sha256": "0eb924597200fd959e3e0fea759e021fcfe30f8031dac8a1fe02e8948c086277"
+        },
+        {
+          "bytes": 11253,
+          "git_mode": "100644",
+          "path": "cat_de_roman_esti/wordgames/quick_catalog.py",
+          "sha256": "6c674005db8f74f61ca7cac9cf6eb38c99e22e0ad2ae797ee8380b59288e8b15"
+        },
+        {
+          "bytes": 29717,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-requalification/native/extensions/audit.json",
+          "sha256": "45a378dd38c32a9b6cf4bdccae2e08c8fcb330a60f2f5a8a39b8918e9446fe47"
+        },
+        {
+          "bytes": 2020146,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-requalification/native/extensions/candidate.json",
+          "sha256": "e20f2444b58452f4137e6aab10b12bf0a9b8e54b1f301edfd4762987c814bfa6"
+        },
+        {
+          "bytes": 94277,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-requalification/native/extensions/factual-review.json",
+          "sha256": "80d15b69672d9963410cc1bca888bd008ac4870c5d24ab37c3a56949240af810"
+        },
+        {
+          "bytes": 2692,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-requalification/native/extensions/final-factual-review.json",
+          "sha256": "2548215fd5c1fc3e189432f82978122b524689e6c905329f970030a258898d7a"
+        },
+        {
+          "bytes": 3022,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-requalification/native/extensions/final-quality-review.json",
+          "sha256": "c55ec6e16c6dfede1765acf71d4d606c4ba13b61b30c516ad9cd05a4eadb14d1"
+        },
+        {
+          "bytes": 480649,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-requalification/native/extensions/proposal.json",
+          "sha256": "d89c88bd2ada5ab5a285a0d31b5e19d530dd89278152ab57beb6abfac056b8c1"
+        },
+        {
+          "bytes": 96216,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-requalification/native/extensions/quality-review.json",
+          "sha256": "bd77a44cf5835635252bde968843d54794613fab9e89be484855d96a30934420"
+        },
+        {
+          "bytes": 340,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-requalification/native/provenance/final-factual-extensions-manifest.json",
+          "sha256": "fd9a0074cebc2b91055208f0b1a0ed63d1d6abf139de7d314633419150e83acf"
+        },
+        {
+          "bytes": 440,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-requalification/native/provenance/final-factual-quick-world-manifest.json",
+          "sha256": "1e7284b49292de712e3ffd7cb441d841d97fe1cc31de9a5ce0224f0c27c4268d"
+        },
+        {
+          "bytes": 340,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-requalification/native/provenance/final-quality-extensions-manifest.json",
+          "sha256": "c830da0534c0f2dafa455361c7ee8e1d00ee3876c0b9ae98e72697e0c72aac9f"
+        },
+        {
+          "bytes": 440,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-requalification/native/provenance/final-quality-quick-world-manifest.json",
+          "sha256": "74a2a4731ff89e055fb5e64e7d02dcb2dbe76776273a7fc870fde1226c3b3ad3"
+        },
+        {
+          "bytes": 552,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-requalification/native/provenance/initial-factual-manifest.json",
+          "sha256": "073c509f890200178a01fa72064937ce66ed15a1dd5164453332d4113fbaaed7"
+        },
+        {
+          "bytes": 552,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-requalification/native/provenance/initial-quality-manifest.json",
+          "sha256": "05fc692190ab964d29c18d5daf65cfaa53c6a2d30bb0b4e74989d289d25d6dce"
+        },
+        {
+          "bytes": 53849,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-requalification/native/quick/audit.json",
+          "sha256": "e45cd8cad99d16f8e1dbdff273f524be8f830714eb4831f6743c43b3236987e3"
+        },
+        {
+          "bytes": 119217,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-requalification/native/quick/candidate.json",
+          "sha256": "33381eff1ffac1b3a70cb2cd72ff28e534ab630be4d7f18864a503712d346a91"
+        },
+        {
+          "bytes": 170430,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-requalification/native/quick/factual-review.json",
+          "sha256": "8940dbb6e5a6cc65d4ba14da45b4347a6f6dcf2ae26d6c6e924018f4ef929213"
+        },
+        {
+          "bytes": 2058,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-requalification/native/quick/final-factual-review.json",
+          "sha256": "c3b8c891fc11c32d83a4acf8fa5f9f3967c322a8cc61332b51ee1efda738828f"
+        },
+        {
+          "bytes": 2467,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-requalification/native/quick/final-quality-review.json",
+          "sha256": "030590432a89a4a858d5307c6877c471ed7442deace7335ca102b65d55769f88"
+        },
+        {
+          "bytes": 384681,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-requalification/native/quick/proposal.json",
+          "sha256": "d210baab434e591ed54a1e9056c8a06d18743b299739a9bf59978bc8a41f08c1"
+        },
+        {
+          "bytes": 130541,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-requalification/native/quick/quality-review.json",
+          "sha256": "32e164c7004cfa72a6c703b93d6b14a0e708fe557d80116f025cbff464a1f200"
+        },
+        {
+          "bytes": 36676,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-requalification/native/world/audit.json",
+          "sha256": "a35043ea6b2377ff275cf6504015a47d25b8bdfbe7eea19378fbe89c21c90099"
+        },
+        {
+          "bytes": 878387,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-requalification/native/world/candidate.json",
+          "sha256": "31d75999751aef62fbef870337657cc2c48370c0f117eb5b140e9b4e9793431e"
+        },
+        {
+          "bytes": 830989,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-requalification/native/world/factual-review.json",
+          "sha256": "1ab5301237276a60e5ffb1f1ce2b2809bce2f1510bbcfaf7f7fde4858c16f118"
+        },
+        {
+          "bytes": 2331,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-requalification/native/world/final-factual-review.json",
+          "sha256": "6fc13c61b266dd61c701314373a4981cb9f71056fe4475761d1a6f9aadf8973c"
+        },
+        {
+          "bytes": 2570,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-requalification/native/world/final-quality-review.json",
+          "sha256": "40d7be462889177b9633b272a1ec7dc07e1a588798e10ae5db0643e677bfa843"
+        },
+        {
+          "bytes": 889314,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-requalification/native/world/proposal.json",
+          "sha256": "2f230b5a71714e8e5a78e6195ce523edd3df895f422c6080ae2e67be652b8595"
+        },
+        {
+          "bytes": 790423,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-requalification/native/world/quality-review.json",
+          "sha256": "52b3d1ca7af8f31229b1a84941ef6b8c1b344d161eb0007e648214c2a0274ae0"
+        },
+        {
+          "bytes": 7646446,
+          "git_mode": "100644",
+          "path": "go-backend/internal/content/bundled.json",
+          "sha256": "afaca5b1cf21d12beef9e0a4ec45f5718a0b2299b4ae13bc77fee655c3103fcc"
+        },
+        {
+          "bytes": 170,
+          "git_mode": "100644",
+          "path": "go-backend/internal/content/digest.go",
+          "sha256": "d07dedf674eee071d86cb7328d1c4162cebc0bc4ecb5c83199403bf20a2533dc"
+        },
+        {
+          "bytes": 11744,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentbuild/build.go",
+          "sha256": "b266febfab801958739d8710e947b76257b9eb0e492bca2097df81c16cded7d7"
+        },
+        {
+          "bytes": 442,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/installed_authorities_pin.go",
+          "sha256": "d0ce1a1f0e283e525ad804acdb0b872830b3a157abb11dd8e0f3b7f6ff5f625f"
+        },
+        {
+          "bytes": 2411870,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/sources/authored-v26.json",
+          "sha256": "275fe815be6d6e296bf717a1778e8437452b23768e2a7ef0474f217278312dfb"
+        },
+        {
+          "bytes": 10586,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/sources/installed-authorities.json",
+          "sha256": "28a219fa98ac5682e3f0b990acb51b8baa7ae83943ef5acba265edf4adc38a06"
+        },
+        {
+          "bytes": 168685,
+          "git_mode": "100644",
+          "path": "tests/fixtures/board_rankings_v37.json",
+          "sha256": "28f16fdcb66a33830419e128f0522c04901b142166f1e8d7724292c19002ec0f"
+        },
+        {
+          "bytes": 249190,
+          "git_mode": "100644",
+          "path": "tests/fixtures/derived_catalog_v38.json",
+          "sha256": "6f2687c35f4927ded018bb321fbf84e567e7d652474c681fd7bea2d5afd25cf1"
+        }
+      ],
+      "stage": "M3-5B26",
+      "tree_sha": "6be8877c4e2928c5ac0ede385fef2f4e7c719198"
+    },
+    {
+      "commit_sha": "0d75436b715ca47e465c5ef81665756b33c9acbe",
+      "ordinal": 8,
+      "parent_commit_sha": "c6430c48a6cdacd311669eb4154773f02512ddba",
+      "parent_stage": "M3-5B26",
+      "same_commit_docs": [
+        {
+          "bytes": 24921,
+          "git_mode": "100644",
+          "path": "docs/STATUS.md",
+          "sha256": "65b22d4fdabff3948b9efdf27ac2738af3fec0d179eecc3d2d8ed7f4580acf19"
+        },
+        {
+          "bytes": 900,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/repair-history/threat-model.json",
+          "sha256": "b8accc9df1c3f09fcb4e326e1d960765af9558228a5458fc8c5879f9750d9e8a"
+        },
+        {
+          "bytes": 3417,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/repair-history/evidence.json",
+          "sha256": "88572bee3a244c3e15b3c06a31370fbc39f92fc19790895ea8f4d910093da704"
+        },
+        {
+          "bytes": 705,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/repair-history/review-ref.json",
+          "sha256": "769ffd8a7890e6f99c76895023abd6c23d607d2eafcb6ced5f229b83b92ed8e4"
+        }
+      ],
+      "source_paths": [
+        {
+          "before_sha256": "b266febfab801958739d8710e947b76257b9eb0e492bca2097df81c16cded7d7",
+          "bytes": 12620,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentbuild/build.go",
+          "sha256": "f9528c73fa41bd96be6a12e454cdfea0540f9d5dca4da3d4aff69fe111dd909d"
+        },
+        {
+          "before_sha256": "4ba997ad378a26da9d0da0294c84e6af4b644ea699dec7a285db2cfc2772d0f2",
+          "bytes": 24277,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentbuild/build_test.go",
+          "sha256": "82870046dd0dc42fc833b2fc255e60efe360479be594ad19bcae9cc01b88f567"
+        },
+        {
+          "before_sha256": "f62d9920228ce114f6dea238378cb1d263936b9c7931641ecd21bbc747160b8a",
+          "bytes": 25869,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentbuild/catalogs.go",
+          "sha256": "784ea79ea84cabae7987bed7431a698606940f25cfe24c0745304fe63ce85205"
+        },
+        {
+          "before_sha256": null,
+          "bytes": 15500,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentbuild/historical_build.go",
+          "sha256": "35d33a0715699937db593de2b6f70e786a0feb3cec02d8b35143e91f21fcc98c"
+        },
+        {
+          "before_sha256": null,
+          "bytes": 7532,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentbuild/historical_build_test.go",
+          "sha256": "44eaf504d4f94d8115b3dd46b353e692d9ec6af7400009c86f50a514f1a17977"
+        },
+        {
+          "before_sha256": "0188a658e2e66f4920fcad35b8e64b6ee443b8d04e195a86d050053b9cdbc556",
+          "bytes": 3666,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentbuild/reviewed_source6_history_context_test.go",
+          "sha256": "0abcd01391594f5c2992615f0a43094d637474f7944fda861fc05f027fd22330"
+        },
+        {
+          "before_sha256": "26643081a142d8573cc6e7d85735d3d58506feb77d2d8ca7fcdfbb036fbc82fe",
+          "bytes": 4839,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentbuild/source6_build_test.go",
+          "sha256": "70f5d05ac921e55bcfd139630f1213107fde924349bbee57dbec34f04e1b7f2f"
+        },
+        {
+          "before_sha256": "bfad4a44c89b97db020a1f56bfdc5ac0cee1eafc4f3156fb4806c4faa1baa8c1",
+          "bytes": 6820,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentbuild/source6_current_requalification_test.go",
+          "sha256": "1944c8d64ae8ddfc6aea4544caee7fe7bbc78a0acc399afc5f51f9990c407cea"
+        }
+      ],
+      "stage": "M3-5C-HISTORY",
+      "tree_sha": "536b1e10904fc8530dd1fdca14194b73045f3df6"
+    },
+    {
+      "commit_sha": "7b7f5e3af2e3c201148db308a28e5c4efced83f3",
+      "ordinal": 9,
+      "parent_commit_sha": "0d75436b715ca47e465c5ef81665756b33c9acbe",
+      "parent_stage": "M3-5C-HISTORY",
+      "same_commit_docs": [
+        {
+          "bytes": 24897,
+          "git_mode": "100644",
+          "path": "docs/STATUS.md",
+          "sha256": "609ae9bd1cb7b2386d97c927b2c28e1ca5e4762b9b795affb12762181f3534e6"
+        },
+        {
+          "bytes": 911,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/repair-runtime/threat-model.json",
+          "sha256": "29166b34ddcd8bd4f3f73c10da51a0f01d25a9f6b699dae02522e047c67dbe56"
+        },
+        {
+          "bytes": 1991,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/repair-runtime/evidence.json",
+          "sha256": "7f7c104c21a05f7e697196b76948a00846f09de03bf9de6b0ecdfd5c5e143a3b"
+        },
+        {
+          "bytes": 701,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/repair-runtime/review-ref.json",
+          "sha256": "9ffe108ec94ae257b6aa579ae373100aba626054b683136f491278cb46f178da"
+        }
+      ],
+      "source_paths": [
+        {
+          "before_sha256": "d236a29074326fd17fd9a92f890adce21a9a5e663736e84919ca2be3822405b0",
+          "bytes": 13540,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/installed.go",
+          "sha256": "0a5b552886ad3a846536c73b4fc25573b53db1a343a9a9c0b1b1478f1f66dc27"
+        },
+        {
+          "before_sha256": null,
+          "bytes": 4137,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/installed_source_operation.go",
+          "sha256": "6872c7e906f0a20c3ea1bebb5711b0cb5048dc49d60ed870983e5c71651af4a6"
+        },
+        {
+          "before_sha256": null,
+          "bytes": 9915,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/installed_source_operation_test.go",
+          "sha256": "f45a0e8e78136b836996a285d8f9b7fb5943133c45ceef26865881d641bd7704"
+        },
+        {
+          "before_sha256": "91681aea33527b4621656254c5858ade0f2820ad89f48b6788391e2d8cf36641",
+          "bytes": 29164,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/rail.go",
+          "sha256": "decf78d1a9273e75b50712ad5009e2b6fa96c50925b81e8e1f777d89fc436980"
+        }
+      ],
+      "stage": "M3-5D-RUNTIME",
+      "tree_sha": "d5175ed4e0f9cd699220e63d1906af7356c52f08"
+    },
+    {
+      "commit_sha": "d2dd3eabdc477cfeb2f238864a9f6e5a6bab2a99",
+      "ordinal": 10,
+      "parent_commit_sha": "7b7f5e3af2e3c201148db308a28e5c4efced83f3",
+      "parent_stage": "M3-5D-RUNTIME",
+      "same_commit_docs": [
+        {
+          "bytes": 24977,
+          "git_mode": "100644",
+          "path": "docs/STATUS.md",
+          "sha256": "4f76a57776c9d70bda60530029638910f012a6690276a6c2ed88de33e6b6fe11"
+        },
+        {
+          "bytes": 917,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/repair-cache/threat-model.json",
+          "sha256": "8b2dbac7e0877ae3c6a1e1b84525730bf7ae8a4a949c0a30abecd4b05b239dd1"
+        },
+        {
+          "bytes": 7205,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/repair-cache/evidence.json",
+          "sha256": "a4b5f404e35fdd273d0077d17a8433dbe67355d376213e1f6c0fea6d1f9cd076"
+        },
+        {
+          "bytes": 1327,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/repair-cache/review-ref.json",
+          "sha256": "caaaf5c955430c6da8896e103fb0e5a8e8691a62799b9b04fbb9abadd8cf7942"
+        }
+      ],
+      "source_paths": [
+        {
+          "before_sha256": "487c66b61b6283e4efcbb12c2d1787cc15ea401e6b5f790a58efa9363b77424c",
+          "bytes": 15284,
+          "git_mode": "100644",
+          "path": "go-backend/cmd/cat-content-rail/main.go",
+          "sha256": "863b1dca2606180c25a3999cbcd741bebadc1d33f607adc6cb61562c42f8f440"
+        },
+        {
+          "before_sha256": null,
+          "bytes": 33883,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_author_cache.go",
+          "sha256": "f4a12eaaeff39ae4247eb071c1c907520beff81277c4d0525e85f61dde7b2ceb"
+        },
+        {
+          "before_sha256": null,
+          "bytes": 4183,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_author_cache_bridge_test.go",
+          "sha256": "e4a9356ce1d8f7375626e93b28dc562b3c28b980f7622beb5887dac3572b173f"
+        },
+        {
+          "before_sha256": null,
+          "bytes": 24653,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_author_cache_test.go",
+          "sha256": "098fbdd5ac407e5b24d47fed95cdd675237dec4b78fd45ac294371e2103aa68f"
+        },
+        {
+          "before_sha256": "bd5f9f54e301c99c39a8b2cc9e71b80c5e42477d7323dcbaf136b7d80cf5952f",
+          "bytes": 24362,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_bridge.go",
+          "sha256": "2ef99a9f09004dabbf87a299c5c141c7720e9aaf42c25bfaafaeda6d956d6e6e"
+        },
+        {
+          "before_sha256": "2416e0060ed9ac6eac99b79d1e896881d679846165ce510cd81ceaf448f495a7",
+          "bytes": 11554,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_bridge_blind.go",
+          "sha256": "09e6b407b6e0530a42e7e6b87628f935d7ab5f00060ec590101fb1f61fc8c731"
+        },
+        {
+          "before_sha256": "d9d32ca67c9584630c9ce231a699e84b3c79a1cd7d69493635e04c8d75175d42",
+          "bytes": 12651,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_bridge_confirm.go",
+          "sha256": "34f523c70e44741d6c05f0660ef331f197db8e8936ec71da1aa0e2d06e8979c5"
+        },
+        {
+          "before_sha256": "30ce93a4542235dcc4cea092510bc0a81d5b60d62ec239f1b907c058062d219f",
+          "bytes": 7769,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_bridge_full.go",
+          "sha256": "3ba5ec40ea5b542928663b33f4736e96ff3b47903e57dc8d3e5142178e2f6a89"
+        },
+        {
+          "before_sha256": "ee0eef63b3d7e4c8469a44c260cca0f580f12c73ca8196628365e56a7beb0ce7",
+          "bytes": 7854,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_bridge_install.go",
+          "sha256": "434f078c8036907fc5a56e596a4127b981a7cdef3b23b610ba95320e668af829"
+        },
+        {
+          "before_sha256": "24684cbbb040ced4bd1f59a4dbae487cfca8f3c0f8219def91936d3e6abce9a2",
+          "bytes": 11477,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_bridge_reviews.go",
+          "sha256": "b561ca67647ca049d75be245b52b0129e8f7daebd46512a593da7e80f738662b"
+        },
+        {
+          "before_sha256": "18082830c2e9b3759ff0725aa41c9fabd8d5b5f55d0c8e71308487f34579c94e",
+          "bytes": 6894,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_bridge_session.go",
+          "sha256": "00cee99e28c3ab501c5837b5f7403e8a1634d50cafc13a796cb6036e14ad9a14"
+        },
+        {
+          "before_sha256": "e12c57cf1b638617bb55819df8c0f5aa7a9f2f55bce62d33b823304a60767b20",
+          "bytes": 16422,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_pending.go",
+          "sha256": "c5d0d61bb13846a7da3a3e01dfecd36c7a3395366c5271db26c33026266f1254"
+        },
+        {
+          "before_sha256": "9ed2ceea091dda579876d552c4dc2b4572b2070466e95a720e9827acd81108b2",
+          "bytes": 15430,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/quick_pending_projection.go",
+          "sha256": "b668510ac685fe5703885dbf9ed235fc457b9a94ab491320bb84ce6f60a5bf1f"
+        },
+        {
+          "before_sha256": "a4496de6a910560b3c81f1db53e04e73dbaba92303c5ba13e67cec5b5ae6a847",
+          "bytes": 74700,
+          "git_mode": "100644",
+          "path": "scripts/miner/critic_blind.py",
+          "sha256": "5d5892931419055d4c56f882d0baf6d3d831b71fd5d7bfbb0bd3f043d968ddd8"
+        }
+      ],
+      "stage": "M3-5E-CACHE",
+      "tree_sha": "19e439fc32f46ab43af76fbf85d8dba35a57c013"
+    },
+    {
+      "commit_sha": "8dcfad4b513d6097041a889964af812ad99da9c3",
+      "ordinal": 11,
+      "parent_commit_sha": "d2dd3eabdc477cfeb2f238864a9f6e5a6bab2a99",
+      "parent_stage": "M3-5E-CACHE",
+      "same_commit_docs": [
+        {
+          "bytes": 24920,
+          "git_mode": "100644",
+          "path": "docs/STATUS.md",
+          "sha256": "178629cba2d0dc2f9b32628872e5827db1b6b8e3141787e7203ba6c512f33c1e"
+        },
+        {
+          "bytes": 13524,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/source27-transition.json",
+          "sha256": "9593906f1393e60d23f2b881fe06c9b353f9496dd8472350611d11b759d10411"
+        }
+      ],
+      "source_paths": [
+        {
+          "before_sha256": "2f230b5a71714e8e5a78e6195ce523edd3df895f422c6080ae2e67be652b8595",
+          "bytes": 889330,
+          "git_mode": "100644",
+          "path": "cat_de_roman_esti/fixtures/alchimie_discovery_world_v92.json",
+          "sha256": "7c9f9ff091d21e15e198c8a93917ab350962ac6a98fd66f9e1347287e068cf70"
+        },
+        {
+          "before_sha256": "d89c88bd2ada5ab5a285a0d31b5e19d530dd89278152ab57beb6abfac056b8c1",
+          "bytes": 480665,
+          "git_mode": "100644",
+          "path": "cat_de_roman_esti/fixtures/alchimie_recipe_extensions_v92.json",
+          "sha256": "a93682f876ea22a614cdb6e31810867d00d557bbdcf3c8fa7a36bb5d9cdd25eb"
+        },
+        {
+          "before_sha256": "28f16fdcb66a33830419e128f0522c04901b142166f1e8d7724292c19002ec0f",
+          "bytes": 168685,
+          "git_mode": "100644",
+          "path": "cat_de_roman_esti/fixtures/board_rankings_v37.json",
+          "sha256": "28f16fdcb66a33830419e128f0522c04901b142166f1e8d7724292c19002ec0f"
+        },
+        {
+          "before_sha256": "6f2687c35f4927ded018bb321fbf84e567e7d652474c681fd7bea2d5afd25cf1",
+          "bytes": 249190,
+          "git_mode": "100644",
+          "path": "cat_de_roman_esti/fixtures/derived_catalog_v38.json",
+          "sha256": "6f2687c35f4927ded018bb321fbf84e567e7d652474c681fd7bea2d5afd25cf1"
+        },
+        {
+          "before_sha256": "d210baab434e591ed54a1e9056c8a06d18743b299739a9bf59978bc8a41f08c1",
+          "bytes": 384697,
+          "git_mode": "100644",
+          "path": "cat_de_roman_esti/fixtures/quick_games_v92.json",
+          "sha256": "2140b0a380f65ac05f9a8e3719118b6d9befe281d16ed87ddb4a77ead1e10840"
+        },
+        {
+          "before_sha256": "0eb924597200fd959e3e0fea759e021fcfe30f8031dac8a1fe02e8948c086277",
+          "bytes": 25777,
+          "git_mode": "100644",
+          "path": "cat_de_roman_esti/wordgames/derived_catalog.py",
+          "sha256": "0eb924597200fd959e3e0fea759e021fcfe30f8031dac8a1fe02e8948c086277"
+        },
+        {
+          "before_sha256": "6c674005db8f74f61ca7cac9cf6eb38c99e22e0ad2ae797ee8380b59288e8b15",
+          "bytes": 11253,
+          "git_mode": "100644",
+          "path": "cat_de_roman_esti/wordgames/quick_catalog.py",
+          "sha256": "ea02d201702ff1b14cbc19aca0783d27107c38e52a41e0f8dab97f08ea9cd3fa"
+        },
+        {
+          "bytes": 30399,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-recovery-source27/native/extensions/audit.json",
+          "sha256": "f908cf1a4abff57939a21c661693bd32614b825003ce38de5417e03d6579b9a9"
+        },
+        {
+          "bytes": 2020146,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-recovery-source27/native/extensions/candidate.json",
+          "sha256": "f95d1dfacd02a3484126cae2518c2467c4860505c3d27d6537d2adca8d683832"
+        },
+        {
+          "bytes": 53000,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-recovery-source27/native/extensions/factual-review.json",
+          "sha256": "3a518d598629aa5e97b09b1607dfaa0525967fed498d72b3049d1df67d4a685b"
+        },
+        {
+          "bytes": 2336,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-recovery-source27/native/extensions/final-factual-review.json",
+          "sha256": "2af13298c9e2d522ac37b84d0e0206131137777854bded77ae8c088795279e06"
+        },
+        {
+          "bytes": 2701,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-recovery-source27/native/extensions/final-quality-review.json",
+          "sha256": "f1bc0726b8e853d272440e354dc1c97d986ec1b1a647977fe73576454d40d84b"
+        },
+        {
+          "bytes": 480665,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-recovery-source27/native/extensions/proposal.json",
+          "sha256": "a93682f876ea22a614cdb6e31810867d00d557bbdcf3c8fa7a36bb5d9cdd25eb"
+        },
+        {
+          "bytes": 70066,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-recovery-source27/native/extensions/quality-review.json",
+          "sha256": "a395d5127170e717034319a5e8dcf963ab69cfb3fc0274375850e4442de153d3"
+        },
+        {
+          "bytes": 459,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-recovery-source27/native/provenance/final-factual-extensions-manifest.json",
+          "sha256": "162daf675c96d6d7ef2728a407c393fa0f260e7f45caa303349459f460e80a56"
+        },
+        {
+          "bytes": 612,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-recovery-source27/native/provenance/final-factual-quick-world-manifest.json",
+          "sha256": "cb958f3060bd2e054a72381f71a808d6c7a491ea7ad371f7295d6db927fb12e9"
+        },
+        {
+          "bytes": 450,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-recovery-source27/native/provenance/final-quality-extensions-manifest.json",
+          "sha256": "6db02cbf73988dcf6880d98ca6d9942308ac9452eebfb80a689459630eef8840"
+        },
+        {
+          "bytes": 603,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-recovery-source27/native/provenance/final-quality-quick-world-manifest.json",
+          "sha256": "5ef81adb2e8aeda500a4abca192627be30f5f21cee8f3257bba17dc193c56ec6"
+        },
+        {
+          "bytes": 825,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-recovery-source27/native/provenance/initial-factual-manifest.json",
+          "sha256": "c12d811256a0d54012d9366ec4efb47ad388426e06b944fe71af52dfbb9b60fb"
+        },
+        {
+          "bytes": 824,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-recovery-source27/native/provenance/initial-quality-manifest.json",
+          "sha256": "0877478d0f8fdf775dfbaa6d346409ddd46b2ce38b7e45c7a545116dd37a0cf0"
+        },
+        {
+          "bytes": 54531,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-recovery-source27/native/quick/audit.json",
+          "sha256": "96d2e94befb2fd26214d4860acce563d0da9b38744321af387f237942f95f872"
+        },
+        {
+          "bytes": 119217,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-recovery-source27/native/quick/candidate.json",
+          "sha256": "15a3cea36e5a24b7122fa401cb85f0429b6e06ab987f4d593d62ea8b5709c5f5"
+        },
+        {
+          "bytes": 99915,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-recovery-source27/native/quick/factual-review.json",
+          "sha256": "aeb6b6377f6e4511d9b180226ac4866510280354accb6b454e46f6ec388a2990"
+        },
+        {
+          "bytes": 1717,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-recovery-source27/native/quick/final-factual-review.json",
+          "sha256": "57908736b6426ab33681ec19a9e0ce7423c73c60cc576ea763933a2564da3b6d"
+        },
+        {
+          "bytes": 1907,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-recovery-source27/native/quick/final-quality-review.json",
+          "sha256": "bdc82cf291a52a9d155c2ac2498856611cb12c43d52d537879feeb50423f4c97"
+        },
+        {
+          "bytes": 384697,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-recovery-source27/native/quick/proposal.json",
+          "sha256": "2140b0a380f65ac05f9a8e3719118b6d9befe281d16ed87ddb4a77ead1e10840"
+        },
+        {
+          "bytes": 64524,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-recovery-source27/native/quick/quality-review.json",
+          "sha256": "671839d48efb8e4e5d3fdafdf3279d9e8969fc8cc4c1c1ca756badf76da70a3d"
+        },
+        {
+          "bytes": 37358,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-recovery-source27/native/world/audit.json",
+          "sha256": "fa5eb2fb7f4b7dd7587d83eaa42aaa4ef1e0a4e1e928dfb814f221e7c54128ea"
+        },
+        {
+          "bytes": 878387,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-recovery-source27/native/world/candidate.json",
+          "sha256": "2f758551e1f775bb452e3323e4c021b9e93af22996c5eb71b66e494939da0233"
+        },
+        {
+          "bytes": 441285,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-recovery-source27/native/world/factual-review.json",
+          "sha256": "b02c2bc1163aed73dad12778f40a7e8acc9a04b5bfddc860e3664b595a8d97b9"
+        },
+        {
+          "bytes": 1890,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-recovery-source27/native/world/final-factual-review.json",
+          "sha256": "c880f2cf99cc442c9a0f2c29fe6480d5431b75f1261dc2f32d2c8f38ac77351b"
+        },
+        {
+          "bytes": 2271,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-recovery-source27/native/world/final-quality-review.json",
+          "sha256": "5aac9db71ac3ddfc701d26b1dfc2f256fca22d65d3f4a217ae1057ad3ba24867"
+        },
+        {
+          "bytes": 889330,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-recovery-source27/native/world/proposal.json",
+          "sha256": "7c9f9ff091d21e15e198c8a93917ab350962ac6a98fd66f9e1347287e068cf70"
+        },
+        {
+          "bytes": 692483,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-stage5-recovery-source27/native/world/quality-review.json",
+          "sha256": "0abd57f41cd89c572a1937e2fbc191376d21f43101b8998d31276ff369ec141e"
+        },
+        {
+          "before_sha256": "afaca5b1cf21d12beef9e0a4ec45f5718a0b2299b4ae13bc77fee655c3103fcc",
+          "bytes": 7646478,
+          "git_mode": "100644",
+          "path": "go-backend/internal/content/bundled.json",
+          "sha256": "2b39d200d8512e8b2fbf111179ebcda4cb3a58a605536c4d2493bf2a273e92c9"
+        },
+        {
+          "before_sha256": "d07dedf674eee071d86cb7328d1c4162cebc0bc4ecb5c83199403bf20a2533dc",
+          "bytes": 170,
+          "git_mode": "100644",
+          "path": "go-backend/internal/content/digest.go",
+          "sha256": "3f19307631ca73f4537a694d8fc390c552402d70526dcf56e887f8d3977b882c"
+        },
+        {
+          "before_sha256": "f9528c73fa41bd96be6a12e454cdfea0540f9d5dca4da3d4aff69fe111dd909d",
+          "bytes": 12620,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentbuild/build.go",
+          "sha256": "cab5c3d420c4e9fdbd89a35c0842d0ee949581007ea41688389db646d047d6a0"
+        },
+        {
+          "before_sha256": "d0ce1a1f0e283e525ad804acdb0b872830b3a157abb11dd8e0f3b7f6ff5f625f",
+          "bytes": 442,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/installed_authorities_pin.go",
+          "sha256": "11950041efc52e6c958ce0a66100ab901fbe8a74a8bf067a6a3e1c856c699047"
+        },
+        {
+          "before_sha256": null,
+          "bytes": 2411902,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/sources/authored-v27.json",
+          "sha256": "410a3d3288d391b0ea795347217902d30136545f325d9928f3f22c907f1ef91e"
+        },
+        {
+          "before_sha256": "28a219fa98ac5682e3f0b990acb51b8baa7ae83943ef5acba265edf4adc38a06",
+          "bytes": 10877,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/sources/installed-authorities.json",
+          "sha256": "ee488b2cedf17495e90d2fd94abab085e56c87e998edd2aa64c1fff785d61d75"
+        },
+        {
+          "before_sha256": "28f16fdcb66a33830419e128f0522c04901b142166f1e8d7724292c19002ec0f",
+          "bytes": 168685,
+          "git_mode": "100644",
+          "path": "tests/fixtures/board_rankings_v37.json",
+          "sha256": "28f16fdcb66a33830419e128f0522c04901b142166f1e8d7724292c19002ec0f"
+        },
+        {
+          "before_sha256": "6f2687c35f4927ded018bb321fbf84e567e7d652474c681fd7bea2d5afd25cf1",
+          "bytes": 249190,
+          "git_mode": "100644",
+          "path": "tests/fixtures/derived_catalog_v38.json",
+          "sha256": "6f2687c35f4927ded018bb321fbf84e567e7d652474c681fd7bea2d5afd25cf1"
+        }
+      ],
+      "stage": "M3-5F27",
+      "tree_sha": "9eb7d8cf2502266dc65932dc4f3282ed18938d1b"
+    },
+    {
+      "commit_sha": "ead8d0853603e7f92d78aa17b7a115d0e04f9b0c",
+      "ordinal": 12,
+      "parent_commit_sha": "8dcfad4b513d6097041a889964af812ad99da9c3",
+      "parent_stage": "M3-5F27",
+      "same_commit_docs": [],
+      "source_paths": [
+        {
+          "before_sha256": "2274d315b2e75174f272cb20742dc914de78651125766fe8e2cf06ed9cf68be0",
+          "git_mode": "100644",
+          "path": "go-backend/internal/httpgolden/golden.go",
+          "sha256": "59ac65819e22db6faabdc281e0a516283db274409b0712839c4f6c4e8f1ec56b"
+        },
+        {
+          "before_sha256": null,
+          "git_mode": "100644",
+          "path": "go-backend/internal/httpgolden/testdata/python-http-parity-v4-m3-stage5-recovery27.json.gz",
+          "sha256": "d5b42e701b0d0170addfbbbc66b56b9d2c26fa3aa4081843c786e4315f63236b"
+        }
+      ],
+      "stage": "M3-6",
+      "tree_sha": "1d7459983103120aeaba940cbdbdd7ab105af0b7"
+    },
+    {
+      "commit_sha": "4d67367589769f08f95333fdd7abd3f45b1ba0f7",
+      "ordinal": 13,
+      "parent_commit_sha": "ead8d0853603e7f92d78aa17b7a115d0e04f9b0c",
+      "parent_stage": "M3-6",
+      "same_commit_docs": [
+        {
+          "bytes": 24942,
+          "git_mode": "100644",
+          "path": "docs/STATUS.md",
+          "sha256": "9858af51afb0f55a61c49a4b52dda306576183a3ee80beecd11db3529f68934f"
+        },
+        {
+          "bytes": 967,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/repair-selector/threat-model.json",
+          "sha256": "685c03c8784d03da8d1ecbba8cb1cd995fc89cd3b9849c43403a867d4a44005e"
+        },
+        {
+          "bytes": 3152,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/repair-selector/evidence.json",
+          "sha256": "ee20f6c10e903ec93b8f9e948bbacbd14ad23839ce2e29d431541c39d91d2d12"
+        },
+        {
+          "bytes": 1000,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/repair-selector/review-ref.json",
+          "sha256": "c6293b3bf1e95b700e0e543d68bc20bdb4096db66ee1a5f4fb568c5dd88bdbc9"
+        }
+      ],
+      "source_paths": [
+        {
+          "before_sha256": null,
+          "bytes": 7973,
+          "git_mode": "100644",
+          "path": "go-backend/internal/httpgolden/source27_selection_test.go",
+          "sha256": "adab9c4d9b6a5a780178e2a73d44e86e69e3d49d5f06662645b71b8e4e8acea3"
+        },
+        {
+          "before_sha256": "05ec6eca8b9fb7e560ca24b00bee98b5e9de0391cb262462f81c5b5f51ff9688",
+          "bytes": 7050,
+          "git_mode": "100644",
+          "path": "go-backend/internal/httpgolden/v4c10_selection_test.go",
+          "sha256": "a96de2cee0b6f41418faa2cd192adadfc94b2dc1c8c9ed0d973f0ab6e3d18d8a"
+        }
+      ],
+      "stage": "M3-6A-SELECT",
+      "tree_sha": "4f1a938080a1a44ca18957e6e84cd83ca387945e"
+    },
+    {
+      "commit_sha": "62c5ffc1676fc98f17cb03c2932602132d365c4a",
+      "ordinal": 14,
+      "parent_commit_sha": "4d67367589769f08f95333fdd7abd3f45b1ba0f7",
+      "parent_stage": "M3-6A-SELECT",
+      "same_commit_docs": [
+        {
+          "bytes": 24906,
+          "git_mode": "100644",
+          "path": "docs/STATUS.md",
+          "sha256": "fa8f4d0a475e6cc2ada9c2e9373e423201f9bfa6d095ecd086f2c2e9dff3d16c"
+        },
+        {
+          "bytes": 954,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/repair-decode/threat-model.json",
+          "sha256": "04490bdf7a3435812bae80f0e1fdf2d1f595bb04272733bd418094cf61ab68ee"
+        },
+        {
+          "bytes": 3808,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/repair-decode/evidence.json",
+          "sha256": "2a022b266522a53ca505e5abf3de44ce099af87f59bd746665196f63966f32f7"
+        },
+        {
+          "bytes": 921,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/repair-decode/review-ref.json",
+          "sha256": "b213a302f69c729686e832ebc1e15ceca32ed734774240777081c2b14a62be8c"
+        }
+      ],
+      "source_paths": [
+        {
+          "before_sha256": "71f80f89377d6f40a3d9ce3589f4ff15bf7050f084553330b1564dcc3484e0de",
+          "bytes": 6773,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/source.go",
+          "sha256": "7f54c4dce015c2e9f4a6213501b85b07807d3a42ae64ae61dcc2c61c2e82c9ac"
+        },
+        {
+          "before_sha256": null,
+          "bytes": 1102,
+          "git_mode": "100644",
+          "path": "go-backend/internal/contentrails/source_decode_test.go",
+          "sha256": "6e2b58dbde1789b4aa7c5915eea5d6bb08f4bc73199204c805a235d38509a270"
+        }
+      ],
+      "stage": "M3-6B-DECODE",
+      "tree_sha": "785ed370248a2c090feb237ce89d791dc26438a8"
+    },
+    {
+      "commit_sha": "3a6775863363e07f0a6b85b60592a5b2812528c2",
+      "ordinal": 15,
+      "parent_commit_sha": "62c5ffc1676fc98f17cb03c2932602132d365c4a",
+      "parent_stage": "M3-6B-DECODE",
+      "same_commit_docs": [
+        {
+          "bytes": 24957,
+          "git_mode": "100644",
+          "path": "docs/STATUS.md",
+          "sha256": "e2c5b0d5bae74e6a8ac1c27aaa18fbfac40448acb5e2495204d3a8c17b70e4b7"
+        },
+        {
+          "bytes": 966,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/clean-gate/threat-model.json",
+          "sha256": "246b87145917a07340d6eb81c0ec16e95e41af7970ee189a0b70e87eb58b9241"
+        },
+        {
+          "bytes": 3501,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/clean-gate/evidence.json",
+          "sha256": "8fa150d0d64be732548c78274834ff7ac8797841b09b54b9ed73335c0a68a59c"
+        },
+        {
+          "bytes": 680,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/clean-gate/review-ref.json",
+          "sha256": "8dcc6c4f0d88ab4bfe54a2972e5a3ce1c26f287963b44b9b563627fd6cc81f96"
+        }
+      ],
+      "source_paths": [
+        {
+          "before_sha256": "d5611613d709c0124457030c22f55c6f8d50b1055057bd25fc840fbf6ade4fb2",
+          "bytes": 21519,
+          "git_mode": "100644",
+          "path": "frontend/tests/gui-unit-reuse.test.mjs",
+          "sha256": "9a82a526b1682a3879208990000ec4bec2350086e53a65818aa78f6f93be7ae4"
+        },
+        {
+          "before_sha256": null,
+          "bytes": 7067,
+          "git_mode": "100644",
+          "path": "scripts/gui-pending-producer.mjs",
+          "sha256": "0a59899d16c71766eed5886de78b8434a04433181c70eeccbf02949696c5728f"
+        },
+        {
+          "before_sha256": "2c72193ffb50b4565629f283da2f8830359070ad560d59d42d18f45fd03a4046",
+          "bytes": 42041,
+          "git_mode": "100644",
+          "path": "scripts/gui-repo-hook.mjs",
+          "sha256": "f426876e1fc5ec0959e8941373a8ce51705a23561e8bef19b303efeb2c6de7fb"
+        },
+        {
+          "before_sha256": "9c58504c99a1a2a6ffb24df1e4efffdfb13be467068740b44925569f6b4d80d5",
+          "bytes": 8495,
+          "git_mode": "100644",
+          "path": "scripts/gui-reuse-driver.mjs",
+          "sha256": "ca0f9cba6cdebae560c2090f9bd265035de490ef3f1d325cf141b4dc77454583"
+        },
+        {
+          "before_sha256": "1066e251642240c3020e967107d26f8ad92e125c967d34d24b772f51ba406871",
+          "bytes": 20553,
+          "git_mode": "100644",
+          "path": "scripts/gui-unit-reuse.mjs",
+          "sha256": "7a8472acc7a60f86d176fb18c5f68244b4bac69b435b8836b6803ed5b85abd5b"
+        },
+        {
+          "before_sha256": "5c194fef9ef85efa56ad20a4a3857e880c66c4aec5253e2bd1fb4aba97562de8",
+          "bytes": 19153,
+          "git_mode": "100644",
+          "path": "scripts/landing/run_4i.py",
+          "sha256": "f61c28312e5a31d0c3184b23c39fc7d79434a77b19d021a576aa6f627f133be6"
+        },
+        {
+          "before_sha256": "4c7db9e9e814c16358d8581d8d5cbcc506393bf508ae9b13eeabf5e558f7b899",
+          "bytes": 24524,
+          "git_mode": "100644",
+          "path": "tests/test_landing_kit.py",
+          "sha256": "2a97c58ad6914f3ab4f726d5b49f1766f24e4354e50df2ea17ff2b14c253e20d"
+        }
+      ],
+      "stage": "M3-6C-GATE",
+      "tree_sha": "83a5a33dd50fbfc484cf1480628e1417980e2e8e"
+    },
+    {
+      "commit_sha": null,
+      "ordinal": 16,
+      "parent_commit_sha": "3a6775863363e07f0a6b85b60592a5b2812528c2",
+      "parent_stage": "M3-6C-GATE",
+      "same_commit_docs": [
+        {
+          "bytes": 25061,
+          "git_mode": "100644",
+          "path": "docs/STATUS.md",
+          "sha256": "66c99d8dd902c8c6150350ae035492ee825cbd89e0833c13e2c63a2fb1b18142"
+        },
+        {
+          "bytes": 354517,
+          "git_mode": "100644",
+          "path": "WORKLOG.md",
+          "sha256": "243346f8047def752b58a1f3a373664419e22d8d57308b214e4412432fd6086a"
+        },
+        {
+          "bytes": 1524,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/README.md",
+          "sha256": "dd47282802be6a6319ff5d54d9670146942d8d26512e653e659c92cf7a77c5f2"
+        },
+        {
+          "bytes": 28355,
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/qualification.json",
+          "sha256": "d05400d253bf12b37c69bf54a27b336f8f8496cb5978786602d09aa207617995"
+        },
+        {
+          "git_mode": "100644",
+          "path": "docs/reviews/v4-m3-tooling/series.json",
+          "self_descriptor_external": true
+        },
+        {
+          "bytes": 45645,
+          "git_mode": "100644",
+          "path": "docs/tracked-markdown.json",
+          "sha256": "ce3e41d2c5e4657619dfb649923e99e114a073ee513650f491056365f08c3a57"
+        }
+      ],
+      "source_paths": [],
+      "stage": "M3-7",
+      "tree_sha": null
+    }
+  ]
+}

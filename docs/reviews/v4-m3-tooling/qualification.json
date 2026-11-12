@@ -1,0 +1,640 @@
+{
+  "dirty_operations": {
+    "actual_producer_opt_in": {
+      "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/tmp/cat-v4-source27-runtime-recovery-v7e/controller.py",
+        "optin",
+        "--root-executor",
+        "--packet-sha256",
+        "fa8008f1568c412f992bfdfae7e951930fff6a3457b656d8532b2c4564a71585",
+        "--review",
+        "/tmp/cat-v4-source27-runtime-recovery-v7e-review/FINAL_MANIFEST.json",
+        "--review-sha256",
+        "0efd904e4ab7eaad353bc987d379837d33782b8e6e9fa566b4b621d5615d487c",
+        "--out",
+        "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e"
+      ],
+      "command_result": {
+        "bytes": 6973,
+        "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e/commands/actual-producer-optin-control.json",
+        "sha256": "3ebf067ecdd895c7247aa885e2f8d7f498ab5d78c7af0839ffb799c9ba1a2807"
+      },
+      "exit": 0,
+      "go_test_argv": [
+        "test",
+        "-race",
+        "-json",
+        "./internal/contentops",
+        "-run",
+        "^TestQuickPendingActualCompiledProducerReadset$",
+        "-count=1",
+        "-timeout=1200s"
+      ],
+      "phase": "75-optin",
+      "phase_receipt": {
+        "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e/phase-75-optin.json",
+        "sha256": "efb018c91511fe4f8350513baa7532fbd5571fa65416899179c28114cfec8a05"
+      },
+      "result": {
+        "bytes": 1618,
+        "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e-operator/optin.result.json",
+        "sha256": "b723f08ab1e15fb679b02e12c099968e6fe53c5c7041fee37ee5141cfe5fde35"
+      }
+    },
+    "current_producer": {
+      "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/tmp/cat-v4-source27-runtime-recovery-v7e/controller.py",
+        "producer",
+        "--root-executor",
+        "--packet-sha256",
+        "fa8008f1568c412f992bfdfae7e951930fff6a3457b656d8532b2c4564a71585",
+        "--review",
+        "/tmp/cat-v4-source27-runtime-recovery-v7e-review/FINAL_MANIFEST.json",
+        "--review-sha256",
+        "0efd904e4ab7eaad353bc987d379837d33782b8e6e9fa566b4b621d5615d487c",
+        "--out",
+        "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e"
+      ],
+      "exit": 0,
+      "native": {
+        "frame": {
+          "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e/producer/frame.json",
+          "sha256": "01a97ee7c28bfbcce807a841fef4c96da357e1c99e228dcbae3a1450563d7858"
+        },
+        "phase_source_descriptors": 1006,
+        "proof": {
+          "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e/producer/native-build-proof.json",
+          "sha256": "99f6780ee42c6b5ce23b8b0cf681b0c6c2624743619498194e29999b1753f6c5"
+        },
+        "proof_fields": 16,
+        "proof_source_inputs": 252,
+        "tool": {
+          "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e/producer/cat-content-rail",
+          "sha256": "326ae57f413b7d6d202935aade173add7dcfc672c3dfc397fa91db768ed609a6"
+        }
+      },
+      "phase": "70-producer",
+      "phase_receipt": {
+        "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e/phase-70-producer.json",
+        "sha256": "0c30971dbd15bd920a1cdbabe234628f90415ee690110bb8d0c1e195d0bed743"
+      },
+      "result": {
+        "bytes": 1195,
+        "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e-operator/producer.result.json",
+        "sha256": "2e13ef398973c2e1f1ae27614f3d70eafc8b635cc76f86b9ca620ee3395a8ebc"
+      }
+    },
+    "current_rail_closure": {
+      "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/tmp/cat-v4-source27-runtime-recovery-v7e/controller.py",
+        "closure",
+        "--root-executor",
+        "--packet-sha256",
+        "fa8008f1568c412f992bfdfae7e951930fff6a3457b656d8532b2c4564a71585",
+        "--review",
+        "/tmp/cat-v4-source27-runtime-recovery-v7e-review/FINAL_MANIFEST.json",
+        "--review-sha256",
+        "0efd904e4ab7eaad353bc987d379837d33782b8e6e9fa566b4b621d5615d487c",
+        "--out",
+        "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e"
+      ],
+      "exit": 0,
+      "phase": "68-closure",
+      "phase_receipt": {
+        "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e/phase-68-closure.json",
+        "sha256": "21f85c14445cdba68999f3644670e8ba27af2d95b97d9d940feeb6a58de0a9ab"
+      },
+      "result": {
+        "bytes": 1192,
+        "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e-operator/closure.result.json",
+        "sha256": "fdd82e0ac63cb1ae2d94cbada46da7d11eb0e0124507688e20c15afc02ca997e"
+      }
+    },
+    "dirty_managed_assets": {
+      "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/tmp/cat-v4-source27-runtime-recovery-v7e/controller.py",
+        "assets",
+        "--root-executor",
+        "--packet-sha256",
+        "fa8008f1568c412f992bfdfae7e951930fff6a3457b656d8532b2c4564a71585",
+        "--review",
+        "/tmp/cat-v4-source27-runtime-recovery-v7e-review/FINAL_MANIFEST.json",
+        "--review-sha256",
+        "0efd904e4ab7eaad353bc987d379837d33782b8e6e9fa566b4b621d5615d487c",
+        "--out",
+        "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e",
+        "--transition-sha256",
+        "1696f2b42a6a624d31abdc620ea2b35cf312cc37a1b3d9b31edc13fadf93ecbf"
+      ],
+      "exit": 0,
+      "phase": "65-assets",
+      "phase_receipt": {
+        "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e/phase-65-assets.json",
+        "sha256": "afb0a59c3d0e07967ff5c036b54690b978f80b4b91ec9d061743e3f059ad56b3"
+      },
+      "result": {
+        "bytes": 1288,
+        "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e-operator/assets.result.json",
+        "sha256": "7d0492bce88f7c3ea39592bfc6bf346b3033cfb28e046ea79670620556b85ef0"
+      }
+    },
+    "dirty_projection": {
+      "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/tmp/cat-v4-source27-runtime-recovery-v7e/controller.py",
+        "build-projection",
+        "--root-executor",
+        "--packet-sha256",
+        "fa8008f1568c412f992bfdfae7e951930fff6a3457b656d8532b2c4564a71585",
+        "--review",
+        "/tmp/cat-v4-source27-runtime-recovery-v7e-review/FINAL_MANIFEST.json",
+        "--review-sha256",
+        "0efd904e4ab7eaad353bc987d379837d33782b8e6e9fa566b4b621d5615d487c",
+        "--out",
+        "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e",
+        "--work",
+        "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e-projection",
+        "--prerequisite-sha256",
+        "51b83413f7ec4fe1dcceff9fd51327a330f6b5384a07ea735bf11ad773661c6d",
+        "--guard-max-all",
+        "4294967296",
+        "--guard-max-unique",
+        "805306368"
+      ],
+      "exit": 0,
+      "owning_build_result_sha256": "bacfd57241ebf4c99f5d5bb016f46b7db2e1efde250bccadd49a943788822cdf",
+      "owning_tree_sha256": "a0794f302a08e07e43606a3b73787c9b7ef502a7160133f30232457edd0a5b10",
+      "phase": "15-build-prerequisites",
+      "phase_receipt": {
+        "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e/phase-15-build-prerequisites.json",
+        "sha256": "51b83413f7ec4fe1dcceff9fd51327a330f6b5384a07ea735bf11ad773661c6d"
+      },
+      "result": {
+        "bytes": 1486,
+        "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e-operator/build-projection.result.json",
+        "sha256": "6e0d66b9567a835e47c2675deb44633ee265c6f296e19158417b55d75a5414bc"
+      }
+    },
+    "normal_managed_loopback_HTTP": {
+      "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/tmp/cat-v4-source27-runtime-recovery-v7e/controller.py",
+        "http",
+        "--root-executor",
+        "--packet-sha256",
+        "fa8008f1568c412f992bfdfae7e951930fff6a3457b656d8532b2c4564a71585",
+        "--review",
+        "/tmp/cat-v4-source27-runtime-recovery-v7e-review/FINAL_MANIFEST.json",
+        "--review-sha256",
+        "0efd904e4ab7eaad353bc987d379837d33782b8e6e9fa566b4b621d5615d487c",
+        "--out",
+        "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e"
+      ],
+      "command_result": {
+        "bytes": 6257,
+        "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e/commands/normal-http-loopback.json",
+        "sha256": "4310f611140a01bd6899c12881c742e794bbe1e9a14ef2409183b5956a362d9b"
+      },
+      "exit": 0,
+      "parity_cases": 1206,
+      "phase": "67-http",
+      "phase_receipt": {
+        "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e/phase-67-http.json",
+        "sha256": "072947e1c66fe087a45c617c63ed946bdb190510f813672122b9eea7ccaea1d7"
+      },
+      "result": {
+        "bytes": 1183,
+        "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e-operator/http.result.json",
+        "sha256": "3394d7674d95de47a5ad83500e1aa1a8ef77cc0605bd482b22673487c335324d"
+      }
+    },
+    "technical_current_J": {
+      "admission_sha256": "eea079debe81e196e9baabffe70606930d728faeb5f054e786f8e1e5b06d0b0f",
+      "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "-",
+        "/tmp/cat-v4-source27-v7e-j-envelope-author",
+        "af544868769ec40a3e66135dc11d182d133d91c2337b4291c71807e9292732f8",
+        "/tmp/cat-v4-source27-v7e-j-envelope-bridge-independent-review/FINAL_MANIFEST.json",
+        "f756cec5f146a2aa646a48df6d997f0bb95033362f63a03342ee95a0144e2c2f",
+        "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e",
+        "eea079debe81e196e9baabffe70606930d728faeb5f054e786f8e1e5b06d0b0f"
+      ],
+      "comparison_is_byte_identical_on_repeat": true,
+      "controls": "N1–N5; exact repeated comparison; original response preserved.",
+      "exit": 0,
+      "manifest": {
+        "bytes": 14264,
+        "path": "/home/dobo/work/_temp/content__v4/tooling/source27-actual-J-technical-envelope-v1/manifest.json",
+        "sha256": "6359807482eaa5f9c95f1f6ce89aaeebbd22493f86c1a11a5547aec94e096d01"
+      },
+      "operator_result": {
+        "bytes": 1206,
+        "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e-operator/current-j-envelope.result.json",
+        "sha256": "78c33168210da2fd4d7697efa5b29026004ef19f806d96b84a6336a3140e4a8b"
+      },
+      "phase72": {
+        "bytes": 935651,
+        "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e/phase-72-current-j.json",
+        "sha256": "e1cb36f0416fdb87f384b9ddc3dca192caab775be09631d54e5af640e3b7fdb9"
+      },
+      "prepare_build_compare_repeat": {
+        "build-quick.result.json": {
+          "bytes": 1872,
+          "path": "/var/tmp/cat-v4-source27-v7e-current-j/build-quick.result.json",
+          "sha256": "4ebfe0f2ed9ec8f45e900710239e8219cf1c6bf5773e250d540c235a2993feed"
+        },
+        "compare-quick.result.json": {
+          "bytes": 1962,
+          "path": "/var/tmp/cat-v4-source27-v7e-current-j/compare-quick.result.json",
+          "sha256": "f5175524f122f646c644fd7d389e373e6e249f91b239ff26ce25ba8a73cf32df"
+        },
+        "prepare.result.json": {
+          "bytes": 1434,
+          "path": "/var/tmp/cat-v4-source27-v7e-current-j/prepare.result.json",
+          "sha256": "702b9fd9f5d40c12e32d6cdeee244e73b295b10b3029e97be1e34aa0a86f713a"
+        },
+        "repeat.result.json": {
+          "bytes": 1969,
+          "path": "/var/tmp/cat-v4-source27-v7e-current-j/repeat.result.json",
+          "sha256": "19a79e6e83c70e57ccfa0ac14057a201504312eeef01fd7b0c6ab34daa0d9674"
+        }
+      },
+      "qualification": false,
+      "review_sha256": "0450db7594875c2da8e907013624dbd10d749cb58aaa7cd49d39f5ed46774207",
+      "runtime_admission_scope": "Phase72 technical current J",
+      "scope": "One unqualified technical Perechi replay with the original blind response and zero redispatch. Mechanical comparison approval remains null."
+    }
+  },
+  "focused_80": {
+    "nested": 889,
+    "packages": 4,
+    "race_streams": 4,
+    "rails_top_level": 95,
+    "terminal": {
+      "bytes": 198379,
+      "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-v7e-native-coverage-recovery-receipt-v2/complete-80-focused-coverage.json",
+      "sha256": "64f8a200fc309b42b2b6f9881e4b2cb0c13ae73c798b57c32ab218bac6df9cb0"
+    },
+    "top_level": 177,
+    "verified": {
+      "bytes": 5300,
+      "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e-operator/coverage80-root-actual-stream-verification.json",
+      "sha256": "292254b1dbb7d6d018c9a1666a49374517dd56b631b54546901d405eb70f17b2"
+    },
+    "verified_commands": 6
+  },
+  "historical_refusals": [
+    {
+      "record": "905 PASS, six FAIL, one SKIP and timeout; original retained evidence",
+      "reference": "source26-baseline.json",
+      "scope": "Source26 original full run"
+    },
+    {
+      "record": "Original failed journal and unchanged phase20 pointer.",
+      "reference": "source27-transition.json",
+      "scope": "First Source27 phase30"
+    },
+    {
+      "record": "NO-GO under its original scope.",
+      "reference": {
+        "bytes": 2141,
+        "path": "/tmp/cat-v4-m3-cache-consumer-review/manifest.json",
+        "sha256": "47aeaf5ea298417296c3b24fba6d623a1d16d60df4af15d198b31addef8125a5"
+      },
+      "scope": "Original Source3 aggregate native review"
+    },
+    {
+      "record": "Obsolete C10 whole-package red, V6a failed80, V7b auth refusal and original reviewed protocol NO-GOs preserved.",
+      "reference": {
+        "bytes": 20771,
+        "path": "/tmp/cat-v4-source27-post90-series-rebind-plan/plan.md",
+        "sha256": "2601ac1e64641c60a00a517deb2f437d74ed9e2ee79776428cf93638c3e85334"
+      },
+      "scope": "Obsolete selector and V6a/V7b predecessors"
+    },
+    {
+      "record": "Immutable refused actual native run retained.",
+      "reference": {
+        "bytes": 1612,
+        "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e-operator/focused.result.json",
+        "sha256": "ef6656d7f445779f3d2311746b71474e951f6307b114280a9733613b339ffdd6"
+      },
+      "scope": "Original V7e focused80"
+    },
+    {
+      "record": "Default native Go command exited zero. Receipt validation refused an unclassified PostgreSQL skip. The later reviewed admission preserves the original failed85.",
+      "reference": {
+        "bytes": 7396,
+        "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-v7e-native-coverage-recovery-receipt-v2/failed-85-full-native-coverage.json",
+        "sha256": "bc5fb50a22850067b2262dff6df0936a8baa7941aa0a48c0840440d3e3508419"
+      },
+      "scope": "First coverage recovery 85"
+    }
+  ],
+  "native_full_85_and_portable_90": {
+    "Root_replay_closeout": {
+      "bytes": 2792,
+      "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e-operator/pg17-root-closeout-v1.stdout",
+      "sha256": "72f45283ad378d90427be248fb3d325e06e3df35a0f28b3709023da19f5cc2a9"
+    },
+    "admission": {
+      "bytes": 26209,
+      "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-native-full85-pg17-recovery-v1/replay-admission.json",
+      "sha256": "b8470864121cd005f95619fa880250a0715e01ddf8ce01688eb341dab86e329e"
+    },
+    "controller_review_sha256": "7f38b230fcea10d5ff540747881a0080154003c55454f6eee164d4c94b614371",
+    "default_pg_obligations": [
+      {
+        "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/accounts",
+        "reason": "native accounts integration needs -accounts.database disposable PostgreSQL",
+        "release_status": "PENDING actual disposable PG RUN/PASS in canonical owning full",
+        "test": "TestNativeAccountConsentMinorHoldAndCSRF"
+      },
+      {
+        "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/accounts",
+        "reason": "native accounts integration needs -accounts.database disposable PostgreSQL",
+        "release_status": "PENDING actual disposable PG RUN/PASS in canonical owning full",
+        "test": "TestNativeConsentInputAndLogoutContracts"
+      },
+      {
+        "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/accounts",
+        "reason": "native accounts integration needs -accounts.database disposable PostgreSQL",
+        "release_status": "PENDING actual disposable PG RUN/PASS in canonical owning full",
+        "test": "TestNativeEraseRevokesAllAccountData"
+      },
+      {
+        "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/accounts",
+        "reason": "native accounts integration needs -accounts.database disposable PostgreSQL",
+        "release_status": "PENDING actual disposable PG RUN/PASS in canonical owning full",
+        "test": "TestNativeLegacyDjangoImportIsIdempotent"
+      },
+      {
+        "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/accounts",
+        "reason": "native accounts integration needs -accounts.database disposable PostgreSQL",
+        "release_status": "PENDING actual disposable PG RUN/PASS in canonical owning full",
+        "test": "TestNativeMigratedAccountPreservesAndErasesLegacyCopies"
+      },
+      {
+        "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/accounts",
+        "reason": "native accounts integration needs -accounts.database disposable PostgreSQL",
+        "release_status": "PENDING actual disposable PG RUN/PASS in canonical owning full",
+        "test": "TestNativePlayedConsentGateAndConcurrentBest"
+      },
+      {
+        "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/accounts",
+        "reason": "native accounts integration needs -accounts.database disposable PostgreSQL",
+        "release_status": "PENDING actual disposable PG RUN/PASS in canonical owning full",
+        "test": "TestNativePrivateScoresIsolationIdempotencyAndCap"
+      },
+      {
+        "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/accounts",
+        "reason": "native accounts integration needs -accounts.database disposable PostgreSQL",
+        "release_status": "PENDING actual disposable PG RUN/PASS in canonical owning full",
+        "test": "TestNativeProfileVisibilityAndRenewedConsent"
+      },
+      {
+        "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/accounts",
+        "reason": "native accounts integration needs -accounts.database disposable PostgreSQL",
+        "release_status": "PENDING actual disposable PG RUN/PASS in canonical owning full",
+        "test": "TestNativeServerRankingTiesPrivacyAndMonotonicBest"
+      },
+      {
+        "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/accounts",
+        "reason": "native accounts integration needs -accounts.database disposable PostgreSQL",
+        "release_status": "PENDING actual disposable PG RUN/PASS in canonical owning full",
+        "test": "TestNativeSharedOAuthSingleUseAndThrottle"
+      },
+      {
+        "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/accounts",
+        "reason": "native accounts integration needs -accounts.database disposable PostgreSQL",
+        "release_status": "PENDING actual disposable PG RUN/PASS in canonical owning full",
+        "test": "TestNativeStoreSessionExpiryDisabledIdentityAndCap"
+      },
+      {
+        "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpapi",
+        "reason": "explicit disposable -arcade.database required",
+        "release_status": "PENDING actual disposable PG RUN/PASS in canonical owning full",
+        "test": "TestArcadeAnonymousClaimIsOneOwnerUnderConcurrentHTTPRequests"
+      },
+      {
+        "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpapi",
+        "reason": "explicit disposable -arcade.database required",
+        "release_status": "PENDING actual disposable PG RUN/PASS in canonical owning full",
+        "test": "TestArcadeAuthenticatedOwnershipTerminalRankingExportAndErase"
+      },
+      {
+        "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpapi",
+        "reason": "explicit disposable -arcade.database required",
+        "release_status": "PENDING actual disposable PG RUN/PASS in canonical owning full",
+        "test": "TestArcadeCuratedPlayedKeyUsesOwnedServerTerminalResult"
+      },
+      {
+        "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpapi",
+        "reason": "explicit disposable -arcade.database required",
+        "release_status": "PENDING actual disposable PG RUN/PASS in canonical owning full",
+        "test": "TestArcadeOwnershipCapacityFailsClosedWithoutDisablingAnonymousCreation"
+      },
+      {
+        "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpapi",
+        "reason": "explicit disposable -arcade.database required",
+        "release_status": "PENDING actual disposable PG RUN/PASS in canonical owning full",
+        "test": "TestArcadeTerminalClaimAndErasureRaceCannotRetainVerifiedIdentity"
+      },
+      {
+        "package": "github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpapi",
+        "reason": "explicit disposable -arcade.database required",
+        "release_status": "PENDING actual disposable PG RUN/PASS in canonical owning full",
+        "test": "TestTCPEarlyAccountAndPrivacyRefusalsWithoutBodyUpload"
+      }
+    ],
+    "disposable_pg_obligation_count": 17,
+    "fresh_race_replay": {
+      "coverage-full-rails-1": {
+        "nested": 190,
+        "top": 27
+      },
+      "coverage-full-rails-2": {
+        "nested": 478,
+        "top": 17
+      },
+      "coverage-full-rails-3": {
+        "nested": 133,
+        "top": 51
+      },
+      "coverage-whole-auth-race": {
+        "nested": 13,
+        "top": 15
+      }
+    },
+    "guarded_source_map_sha256": "aed69105ba2eb39fc816792d295e55da1feda50a42c5c7d0958ce4d92faec3ee",
+    "native_commands": [
+      "coverage-full-rails-1",
+      "coverage-full-rails-2",
+      "coverage-full-rails-3",
+      "coverage-whole-backend-vet",
+      "coverage-inventory-auth",
+      "coverage-whole-auth-race",
+      "coverage-whole-auth-vet"
+    ],
+    "outer_argv": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "-",
+      "/tmp/cat-v4-source27-native-full85-pg17-recovery-author/controller.py",
+      "2bdf424caff6b61ed29d63f3752d723418d1e14566caee9c6188ce1c99607215",
+      "--root-executor",
+      "--packet-sha256",
+      "aa60e679447b497ecc167e599e14f9b99298b8899d84782216f443cc5ea0f2e9",
+      "--review",
+      "/tmp/cat-v4-source27-native-full85-pg17-recovery-independent-review/FINAL_MANIFEST.json",
+      "--review-sha256",
+      "7f38b230fcea10d5ff540747881a0080154003c55454f6eee164d4c94b614371"
+    ],
+    "outer_exit": 0,
+    "outer_result": {
+      "bytes": 1474,
+      "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e-operator/native-full85-pg17-recovery-v1.result.json",
+      "sha256": "52c276ff850c87f37d45a925409639837b015dc2dcfed65a6edde6e01c788f4a"
+    },
+    "portable_checksums": 15,
+    "portable_commands": [
+      "portable-linux-cli",
+      "portable-linux-tests",
+      "portable-darwin-cli",
+      "portable-darwin-tests",
+      "portable-windows-cli",
+      "portable-windows-tests"
+    ],
+    "portable_results": {
+      "bytes": 4727,
+      "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-native-full85-pg17-recovery-v1/portable-results.json",
+      "sha256": "3dc711b1f4cf746214f2d0f30866790a36b494b6a8e20bab8f432af15dac33f1"
+    },
+    "retained_backend_rest": {
+      "diagnostic": {
+        "bytes": 3926,
+        "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e-operator/coverage85-root-exact-skip-classification-diagnostic.json",
+        "sha256": "3372d645a647267891f0f758d9f8e8572665f0d49706dfc2797366de1b5a00e3"
+      },
+      "nested_passed": 3017,
+      "top_level_passed": 360,
+      "top_level_started": 377
+    },
+    "retention": "The 15 owned portable binaries were pruned. Portable receipts and checksums remain.",
+    "terminals": {
+      "85-full-native-coverage": {
+        "bytes": 181720,
+        "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-native-full85-pg17-recovery-v1/complete-85-full-native-coverage.json",
+        "sha256": "af03dfe064c9b1fd4ef02ec2b318850a5139a6e936b11f6183ca198e51f89845"
+      },
+      "90-portable": {
+        "bytes": 12682,
+        "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-native-full85-pg17-recovery-v1/complete-90-portable.json",
+        "sha256": "7bd180a60a7b3c846967a55d9181236de2f1263b47b71d56515e094b880e094c"
+      }
+    }
+  },
+  "operational_base_sha": "e3d2d6006b2e9162215b01d5653ab2448d84997c",
+  "operator": "agent:codex (PROGRAM E8)",
+  "oracle_registration": {
+    "actual_cases": 1206,
+    "changes": {
+      "go-backend/internal/httpgolden/golden.go": {
+        "after_sha256": "59ac65819e22db6faabdc281e0a516283db274409b0712839c4f6c4e8f1ec56b",
+        "before_sha256": "2274d315b2e75174f272cb20742dc914de78651125766fe8e2cf06ed9cf68be0"
+      },
+      "go-backend/internal/httpgolden/testdata/python-http-parity-v4-m3-stage5-recovery27.json.gz": {
+        "after_sha256": "d5b42e701b0d0170addfbbbc66b56b9d2c26fa3aa4081843c786e4315f63236b",
+        "before_sha256": null
+      }
+    },
+    "code_review": {
+      "path": "/tmp/cat-v4-source27-oracle-review/review-manifest.json",
+      "sha256": "4282ef5c81c2da2981081c5628cb5c2d57a8b5b60ec9b0a4c1d4e9cc64548650"
+    },
+    "historical_compressed_corpora": 26,
+    "independent_oracle_receipt": {
+      "path": "/tmp/cat-v4-source27-independent-oracle/stable-artifact-manifest.json",
+      "sha256": "4298d1aafb7b2fe50c1a675f65aaa489ba5240fca3893dd01317ae32ecb8cfb3"
+    },
+    "schema": "cat-m3-independent-oracle-transition-1",
+    "scope": "Separate additive expectation commit under ADR-0227 and source selection under ADR-0186."
+  },
+  "pending": {
+    "canonical_disposable_pg_run_pass": null,
+    "clean_build": null,
+    "clean_product_sha": null,
+    "cleanup_and_scaffold_inspection": {
+      "independent_review": {
+        "bytes": 2193,
+        "path": "/tmp/cat-v4-source27-post90-actual-inspection-independent-review/GO.json",
+        "sha256": "8fef5bfc97701969d48a5e6a9ed535e18ec28692f3c7d6d3ce7c4d4959b5e220"
+      },
+      "inspection": {
+        "bytes": 153792,
+        "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-post90-cleanup-inspect-v1/INSPECT.json",
+        "sha256": "619dad2f06e16d3a6a77af376d9aa668aae6c5c7806eff4b6f98f17caa3a4be2"
+      },
+      "result": {
+        "bytes": 285712,
+        "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-post90-cleanup-transaction-v1/RESULT.json",
+        "sha256": "74ca0de0f717d2f3d6c3f9a9d4426f8b7d77b74b6931225621ae93a419ab1bd1"
+      },
+      "root_apply": {
+        "bytes": 3035,
+        "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e-operator/post90-cleanup-v7-apply.result.json",
+        "sha256": "0a2f136c9e1e534429573b8d34ae8af82bea89a69734072e52a1db2c2871e510"
+      }
+    },
+    "final_current_source_inputs_comparison": null,
+    "fresh_4i": null,
+    "full": null,
+    "independent_landing_review": null,
+    "local_fast_forward": null,
+    "receipt_only_child_sha": null,
+    "unit": null
+  },
+  "preserved_counts": {
+    "C9_guards": 6,
+    "held_Conexiuni_rows": 79,
+    "landed_V4_boards": {
+      "Cald sau Rece": 2,
+      "Conexiuni": 10,
+      "Lanțul Cuvintelor": 5,
+      "total": 17
+    },
+    "owner_held_rows": 87,
+    "protected_rows": 803,
+    "shared_deltas": {
+      "edges": 0,
+      "forms": 0,
+      "names": 0,
+      "puzzles": 0,
+      "words": 0
+    }
+  },
+  "product_qualified": false,
+  "schema": "cat-m3-source27-qualification-1",
+  "scope": "Verified dirty Source27 operation. Clean product qualification pending.",
+  "verified_date": "2026-11-12"
+}
