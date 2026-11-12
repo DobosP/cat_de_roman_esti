@@ -29,3 +29,22 @@ func TestInstalledAuthorityOutputRefusesIncompleteOrMixedModes(t *testing.T) {
 		}
 	}
 }
+
+func TestQuickPendingModesRefuseMixedIncompleteAndSourceOverride(t *testing.T) {
+	original := os.Args
+	t.Cleanup(func() { os.Args = original })
+	for _, args := range [][]string{
+		{"quick", "--prepare-pending", "missing"},
+		{"quick", "--pending-inventory", "--write"},
+		{"quick", "--pending-inventory", "--source", "missing"},
+		{"quick", "--pending-inventory", "--check"},
+		{"world", "--pending-inventory"},
+		{"quick", "--pending-bundle", "missing", "--pending-view", "private", "--pending-item", "iq92_test"},
+		{"quick", "--pending-bundle", "missing", "--pending-view", "public", "--pending-item", "iq92_test", "--candidate-out", "unused"},
+	} {
+		os.Args = append([]string{"cat-content-rail"}, args...)
+		if err := run(); err == nil || !strings.Contains(err.Error(), "pending") {
+			t.Fatal("pending action isolation failed", args, err)
+		}
+	}
+}

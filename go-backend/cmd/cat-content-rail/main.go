@@ -33,11 +33,71 @@ func run() error {
 	finalQuality := f.String("final-quality-review", "", "final quality acceptance")
 	pin := f.String("expected-sha256", "", "explicit reviewed output artifact pin for installation")
 	installedOut := f.String("installed-authority-out", "", "build draft installed-authority entry from current independently reviewed installed artifact; never write manifest or pin")
+	pendingInventory := f.Bool("pending-inventory", false, "emit complete current quick pending inventory; no approvals")
+	preparePending := f.String("prepare-pending", "", "exact new quick-author-packet-v1; separate private pending action")
+	inventoryManifest := f.String("inventory-manifest", "", "exact frozen quick pending inventory")
+	authorSeal := f.String("author-seal", "", "sealed complete author URL set bound to packet")
+	receiptManifest := f.String("receipt-manifest", "", "byte-bound author capture evidence; no policy approval inferred")
+	pendingOut := f.String("pending-out", "", "new private scratch bundle outside all checkouts")
+	pendingBundle := f.String("pending-bundle", "", "private pending bundle for exact role-view extraction")
+	pendingView := f.String("pending-view", "", "extract public or dossier member only; no freshness approval")
+	pendingItem := f.String("pending-item", "", "exact authored iq92_/pq92_ item for role view")
 	if err := f.Parse(os.Args[2:]); err != nil {
 		return err
 	}
 	if f.NArg() != 0 {
 		return fmt.Errorf("unexpected positional argument")
+	}
+	pendingFlags := map[string]bool{"pending-inventory": true, "prepare-pending": true, "inventory-manifest": true, "author-seal": true, "receipt-manifest": true, "pending-out": true, "pending-bundle": true, "pending-view": true, "pending-item": true}
+	used := map[string]bool{}
+	pendingMode := false
+	f.Visit(func(v *flag.Flag) { used[v.Name] = true; pendingMode = pendingMode || pendingFlags[v.Name] })
+	if pendingMode {
+		allowed := map[string]bool{"root": true}
+		switch {
+		case *pendingInventory:
+			allowed["pending-inventory"] = true
+		case *preparePending != "" && *inventoryManifest != "" && *authorSeal != "" && *receiptManifest != "" && *pendingOut != "":
+			for _, key := range []string{"prepare-pending", "inventory-manifest", "author-seal", "receipt-manifest", "pending-out"} {
+				allowed[key] = true
+			}
+		case *pendingBundle != "" && *pendingItem != "" && (*pendingView == "public" || *pendingView == "dossier"):
+			for _, key := range []string{"pending-bundle", "pending-item", "pending-view"} {
+				allowed[key] = true
+			}
+		default:
+			return fmt.Errorf("quick pending requires one complete separate pending action")
+		}
+		if rail != "quick" {
+			return fmt.Errorf("quick pending actions require quick rail")
+		}
+		for key := range used {
+			if !allowed[key] {
+				return fmt.Errorf("quick pending action cannot mix authority/source/install or other actions")
+			}
+		}
+		if *pendingInventory {
+			value, err := contentrails.QuickPendingInventory(*root)
+			if err != nil {
+				return err
+			}
+			return json.NewEncoder(os.Stdout).Encode(value)
+		}
+		if *pendingBundle != "" {
+			value, err := contentrails.QuickPendingView(*pendingBundle, *pendingItem, *pendingView)
+			if err != nil {
+				return err
+			}
+			_, err = os.Stdout.Write(value)
+			return err
+		}
+		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Minute)
+		defer cancel()
+		result, err := contentrails.PrepareQuickPending(ctx, *root, contentrails.QuickPendingOptions{Packet: *preparePending, InventoryManifest: *inventoryManifest, AuthorSeal: *authorSeal, ReceiptManifest: *receiptManifest, Output: *pendingOut})
+		if err != nil {
+			return err
+		}
+		return json.NewEncoder(os.Stdout).Encode(result)
 	}
 	s, err := contentrails.LoadSource(*source)
 	if err != nil {

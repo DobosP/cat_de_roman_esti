@@ -625,7 +625,11 @@ func validGitSHA(s string) bool {
 
 // ReadSet is an immutable snapshot for source-hash-bound offline installers.
 // Its entries are opaque so callers cannot silently replace reviewed baselines.
-type ReadSet struct{ entries map[string]snapshot }
+type ReadSet struct {
+	entries     map[string]snapshot
+	regularOnly bool
+	producer    *pendingProducerSnapshot
+}
 
 // CaptureReadSet records bytes, presence and mode without taking a write lock.
 // Capture every source and target baseline BEFORE building a prospective result.
@@ -645,7 +649,7 @@ func CaptureReadSet(paths []string) (ReadSet, error) {
 		}
 		expected[absolute] = snap
 	}
-	return ReadSet{expected}, nil
+	return ReadSet{entries: expected}, nil
 }
 
 // GuardedTransaction checks the captured read set under the shared operator lock,
@@ -653,12 +657,20 @@ func CaptureReadSet(paths []string) (ReadSet, error) {
 // runs the caller's final gate. Any failure restores and byte-verifies originals.
 // The verify callback must not recursively acquire this shared lock.
 func GuardedTransaction(root string, changes map[string][]byte, expected ReadSet, verify func() error) error {
-	if len(expected.entries) == 0 {
+	if len(expected.entries) == 0 && expected.producer == nil {
 		return errors.New("missing immutable read set")
 	}
 	absolute, e := filepath.Abs(root)
 	if e != nil {
 		return e
+	}
+	if expected.regularOnly {
+		// The strict pending readset permits only a scratch publication callback.
+		// Existing mutable targets retain the historical transaction contract.
+		if len(changes) != 0 {
+			return errors.New("strict regular readset only supports new scratch publication")
+		}
+		return guardedTransactionWithInventory(absolute, nil, verify, nil, nil, expected.Verify)
 	}
 	return guardedTransaction(absolute, changes, verify, nil, expected.entries)
 }

@@ -474,38 +474,58 @@ func validateQuick(raw, derived map[string]any, g *graph.Service, digests map[st
 	if object(raw["bindings"])["core_payload_sha256"] != indentedDigest(derived["boards"]) {
 		return fail("frozen core payload binding drift")
 	}
+	rated, nodes, err := validateQuickRows(array(raw["authored"]), array(derived["boards"]), g)
+	if err != nil {
+		return err
+	}
+	if !equal(rated, raw["boards"]) {
+		return fail("native rating or payload drift")
+	}
+	if !equal(raw["nodes"], nodes) {
+		return fail("concept provenance drift")
+	}
+	return nil
+}
+
+// validateQuickRows is deliberately review-free. It derives exactly the same
+// shapes, scores, ranks and stock constraints for pending and reviewed catalogs.
+// Callers must establish independent semantic approval separately.
+func validateQuickRows(authored, stock []any, g *graph.Service) ([]any, map[string]any, error) {
+	fail := func(s string) error { return fmt.Errorf("quick catalog: %s", s) }
+	if len(authored) < 1 || len(authored) > 256 {
+		return nil, nil, fail("authored bound")
+	}
 	rated := []any{}
 	seen := map[string]bool{}
-	for _, v := range array(raw["authored"]) {
+	for _, v := range authored {
 		m := object(v)
 		id := str(m["id"])
 		if !exact(m, "id", "game", "source_id", "category", "difficulty", "payload", "sources", "rationale") || id == "" || seen[id] || str(m["rationale"]) == "" {
-			return fail("authored shape/identity")
+			return nil, nil, fail("authored shape/identity")
 		}
 		seen[id] = true
 		for _, u := range array(m["sources"]) {
 			if !validReference(u) {
-				return fail("source reference")
+				return nil, nil, fail("source reference")
 			}
 		}
 		if len(array(m["sources"])) < 1 || len(array(m["sources"])) > 16 {
-			return fail("source reference bound")
+			return nil, nil, fail("source reference bound")
 		}
 		rating, e := rateQuick(m, g)
 		if e != nil {
-			return fail(e.Error())
+			return nil, nil, fail(e.Error())
 		}
 		rated = append(rated, rating)
 	}
 	assignRanks(rated)
-	if !equal(rated, raw["boards"]) {
-		return fail("native rating or payload drift")
-	}
 	visible := map[string]bool{}
+	runtimeIDs := map[string]bool{}
 	trios := map[string]bool{}
 	families := map[string]int{}
-	for _, v := range array(derived["boards"]) {
+	for _, v := range stock {
 		m := object(v)
+		runtimeIDs[str(m["id"])] = true
 		ids := quickVisible(m)
 		sort.Strings(ids)
 		visible[str(m["game"])+strings.Join(ids, "\x00")] = true
@@ -518,11 +538,15 @@ func validateQuick(raw, derived map[string]any, g *graph.Service, digests map[st
 	nodes := map[string]any{}
 	for _, v := range rated {
 		m := object(v)
+		if runtimeIDs[str(m["id"])] {
+			return nil, nil, fail("reused runtime identity")
+		}
+		runtimeIDs[str(m["id"])] = true
 		ids := quickVisible(m)
 		sort.Strings(ids)
 		key := str(m["game"]) + strings.Join(ids, "\x00")
 		if visible[key] {
-			return fail("reused visible board")
+			return nil, nil, fail("reused visible board")
 		}
 		visible[key] = true
 		if m["game"] == "intrusul" {
@@ -530,23 +554,20 @@ func validateQuick(raw, derived map[string]any, g *graph.Service, digests map[st
 			sort.Strings(members)
 			key := strings.Join(members, "\x00")
 			if trios[key] {
-				return fail("reused inlier trio")
+				return nil, nil, fail("reused inlier trio")
 			}
 			trios[key] = true
 		}
 		family := str(m["game"]) + "\x00" + str(m["source_id"])
 		families[family]++
 		if families[family] > 3 {
-			return fail("source family cap")
+			return nil, nil, fail("source family cap")
 		}
 		for _, n := range ids {
 			nodes[n] = nodeMap(*g.Node(n))
 		}
 	}
-	if !equal(raw["nodes"], nodes) {
-		return fail("concept provenance drift")
-	}
-	return nil
+	return rated, nodes, nil
 }
 func quickVisible(m map[string]any) []string {
 	p := object(m["payload"])
@@ -569,7 +590,7 @@ func graphStrengths(g *graph.Service) map[string]float64 {
 		sort.Strings(p)
 		key := strings.Join(p, "\x00")
 		s := math.Min(1, math.Max(0, e.Strength))
-		if strengths[key] < s {
+		if old, present := strengths[key]; !present || old < s {
 			strengths[key] = s
 		}
 	}

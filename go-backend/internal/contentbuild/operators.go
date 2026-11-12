@@ -87,3 +87,27 @@ func lantCaptions(g *graph.Service, r map[string]any) map[string]any {
 // ValidReference checks an offline provenance citation under the shared URL
 // contract, including Python-compatible explicit port range validation.
 func ValidReference(value string) bool { return validReference(value) }
+
+// ValidateQuickRows runs native quick shape, rating, identity, full-stock and
+// family checks without asserting any reviews. Stock contains private catalog
+// rows (including held/dead rows); it must not also contain the authored rows.
+// The returned ranks are private projections, never installation approval.
+func ValidateQuickRows(authored, stock []any, g *graph.Service) ([]any, map[string]any, error) {
+	return validateQuickRows(authored, stock, g)
+}
+
+// ReadPendingInput uses the prospective operator's complete no-symlink path
+// opener and bounded regular-file check. Unsupported platforms fail closed.
+func ReadPendingInput(path string, max int64) ([]byte, error) {
+	return readDirect(path, max)
+}
+
+// QuickGraphSnapshot parses an already frozen KG object using the exact native
+// SourceGraph parser. Pending preparation must not reopen mutable fixture bytes.
+func QuickGraphSnapshot(raw map[string]any) (*graph.Service, error) {
+	c, err := parsedGraph(raw)
+	if err != nil {
+		return nil, err
+	}
+	return graph.New(c), nil
+}

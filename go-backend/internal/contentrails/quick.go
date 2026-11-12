@@ -6,6 +6,7 @@ import (
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/catalog"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentbuild"
+	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/graph"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpapi"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/pyrandom"
@@ -135,29 +136,7 @@ func auditQuick(ctx context.Context, root string, raw map[string]any) (map[strin
 	if err = contentbuild.ValidateQuickCatalog(raw, base, g, bind); err != nil {
 		return nil, err
 	}
-	data.Nodes = g.Content.Nodes
-	data.Edges = g.Content.Edges
-	data.Labels = g.Content.Labels
-	data.CategoryLabels = g.Content.CategoryLabels
-	data.NormalizedIndex = g.Content.NormalizedIndex
-	// Preserve the independently frozen derived payload; replace only supplements
-	// inside this offline process, then prove ordinary seeded HTTP selection.
-	combined := []content.Board{}
-	for _, board := range data.Boards {
-		if len(board.SourceID) < 5 || board.SourceID[:5] != "aq92_" {
-			combined = append(combined, board)
-		}
-	}
-	for _, v := range rows(raw["boards"]) {
-		m := object(v)
-		var rank *int
-		if m["starter_rank"] != nil {
-			r := integer(m["starter_rank"])
-			rank = &r
-		}
-		combined = append(combined, content.Board{Game: text(m["game"]), CatalogID: text(m["id"]), SourceID: text(m["source_id"]), Category: text(m["category"]), Difficulty: text(m["difficulty"]), OverallScore: integer(m["standard_score"]), StarterScore: integer(m["starter_score"]), OverallRank: integer(m["standard_rank"]), StarterRank: rank, StarterSafe: m["starter_eligible"] == true, Payload: object(m["payload"])})
-	}
-	data.Boards = combined
+	data = quickOverlay(data, g, rows(raw["boards"]))
 	client, _ := httpgolden.NewClient(httpgolden.Local(httpapi.New(data)), 2000)
 	defer client.Close()
 	replays := []any{}
@@ -271,4 +250,34 @@ func containsString(v any, want string) bool {
 		}
 	}
 	return false
+}
+
+// quickOverlay is an isolated in-process projection shared by the reviewed
+// audit and the explicitly unapproved pending operator. Validation and approval
+// belong to the caller. No serving artifact or source is written here.
+func quickOverlay(data *content.Content, g *graph.Service, rated []any) *content.Content {
+	data.Nodes = g.Content.Nodes
+	data.Edges = g.Content.Edges
+	data.Labels = g.Content.Labels
+	data.CategoryLabels = g.Content.CategoryLabels
+	data.NormalizedIndex = g.Content.NormalizedIndex
+	// Preserve the independently frozen derived payload; replace only supplements
+	// inside this offline process, then prove ordinary seeded HTTP selection.
+	combined := []content.Board{}
+	for _, board := range data.Boards {
+		if len(board.SourceID) < 5 || board.SourceID[:5] != "aq92_" {
+			combined = append(combined, board)
+		}
+	}
+	for _, v := range rated {
+		m := object(v)
+		var rank *int
+		if m["starter_rank"] != nil {
+			r := integer(m["starter_rank"])
+			rank = &r
+		}
+		combined = append(combined, content.Board{Game: text(m["game"]), CatalogID: text(m["id"]), SourceID: text(m["source_id"]), Category: text(m["category"]), Difficulty: text(m["difficulty"]), OverallScore: integer(m["standard_score"]), StarterScore: integer(m["starter_score"]), OverallRank: integer(m["standard_rank"]), StarterRank: rank, StarterSafe: m["starter_eligible"] == true, Payload: object(m["payload"])})
+	}
+	data.Boards = combined
+	return data
 }

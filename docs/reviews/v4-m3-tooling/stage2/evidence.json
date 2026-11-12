@@ -1,0 +1,159 @@
+{
+  "commands_and_results": [
+    {
+      "bytes": 13739,
+      "path": "/home/dobo/work/_temp/content__v4/tooling/m3-native-development/v3-native-checks.json",
+      "sha256": "1f1673d855fffe598dae2d4537cd609057775ba4b9892025d3f12b2aca1096d0"
+    },
+    {
+      "bytes": 2839,
+      "path": "/home/dobo/work/_temp/content__v4/tooling/m3-native-development/v3-independent.json",
+      "sha256": "a19e968a989d1cb842633a6a05e59d5f754b3edbc4dbf70834e66af7f8dc2532"
+    }
+  ],
+  "operational_base_sha": "e3d2d6006b2e9162215b01d5653ab2448d84997c",
+  "operator": "agent:codex (PROGRAM E8)",
+  "product_qualification": false,
+  "remaining": [
+    "Review final exact cumulative candidate and current producer inputs.",
+    "Run canonical exact-SHA build, 4i, unit and full with real disposable PostgreSQL.",
+    "Obtain independent landing review and authorized local landing."
+  ],
+  "schema": "cat-m3-tool-evidence-1",
+  "source_paths": [
+    {
+      "bytes": 10282,
+      "git_mode": "100644",
+      "path": "go-backend/cmd/cat-content-rail/main.go",
+      "sha256": "e5e67e9e06d8c77d424a9483ba16b8b3e143d5e00ffa335ea099ca66bb75381c"
+    },
+    {
+      "bytes": 1739,
+      "git_mode": "100644",
+      "path": "go-backend/cmd/cat-content-rail/main_test.go",
+      "sha256": "e85ae28889cdf64d035b245a036af270d29aff5e5fe0bb942b0d3e53ed189af7"
+    },
+    {
+      "bytes": 25194,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentbuild/catalogs.go",
+      "sha256": "f62d9920228ce114f6dea238378cb1d263936b9c7931641ecd21bbc747160b8a"
+    },
+    {
+      "bytes": 3866,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentbuild/operators.go",
+      "sha256": "6a557dc5fae93039ec589e1cb1379fdc95dce3881be2d81cf1b868b033765b3f"
+    },
+    {
+      "bytes": 2534,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentbuild/pending_digest.go",
+      "sha256": "b3b34d2f135b0795a6a7630c1639b7eff8f8f56ea7e6a7239026629d643491a4"
+    },
+    {
+      "bytes": 10183,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentbuild/pending_output_linux.go",
+      "sha256": "250f25a56c01b48092b03fb28e05039a41e708d66b9ef09571d2f859c5e4bc51"
+    },
+    {
+      "bytes": 2433,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentbuild/pending_output_linux_test.go",
+      "sha256": "89da52bb0ce0374c998327d1ab08db9e26eb479400d9641cac4bccbe1b9dd319"
+    },
+    {
+      "bytes": 712,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentbuild/pending_output_other.go",
+      "sha256": "2fe27aea7f3da7aec77b10f3ca42a507f3b561d9eed72c6b772d75cc0bf81651"
+    },
+    {
+      "bytes": 5782,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentbuild/pending_output_security_test.go",
+      "sha256": "9fee93e785cf1d430b0073a0ce325cf9428267461e267b48a51d5876fafdcbaf"
+    },
+    {
+      "bytes": 1873,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentbuild/publication_adversarial_test.go",
+      "sha256": "4b412484c7d5b089051283ddac45c8bc03a8230fc9de86b98009723a843691a8"
+    },
+    {
+      "bytes": 6391,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentbuild/quick_pending_test.go",
+      "sha256": "bc11e339a6107aa6186168fde5a7affcb9d69fe02ed631bd43b9bb02218588c1"
+    },
+    {
+      "bytes": 18375,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentops/files.go",
+      "sha256": "4fe3ae0992cdd9ec8cf198cfc8eeb21b7245ef79296e8969eaac389c6af33017"
+    },
+    {
+      "bytes": 3960,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentops/readset_check.go",
+      "sha256": "2c296f0f7e9658ce4e40451e0bfbda861ad6101a3d0843771dcf76479d75c001"
+    },
+    {
+      "bytes": 7241,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentops/readset_producer_test.go",
+      "sha256": "7b217bd254c67c5471a6fe03599addb5148d12e1c106e11de25eaf44bf7aec2e"
+    },
+    {
+      "bytes": 9841,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentrails/quick.go",
+      "sha256": "b00bb9357b8f647d7af822ee6f8fa62ac1d1d5b256b1deb28920482efc275034"
+    },
+    {
+      "bytes": 14053,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentrails/quick_pending.go",
+      "sha256": "e12c57cf1b638617bb55819df8c0f5aa7a9f2f55bce62d33b823304a60767b20"
+    },
+    {
+      "bytes": 1832,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentrails/quick_pending_commit_test.go",
+      "sha256": "68b4da9297008df85fb206a719bfb2d5b0799bbcc37663ba5c76cd6a2bb42174"
+    },
+    {
+      "bytes": 2925,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentrails/quick_pending_discovery_test.go",
+      "sha256": "32e1fbc7c7356f28ecc11df4b3dcde321938c6405d1301b73bf1579e4b1111a2"
+    },
+    {
+      "bytes": 11381,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentrails/quick_pending_inventory.go",
+      "sha256": "cca679ed6008c95df9f9bbe88714d7ecc34014bd12b115badb8b559b0b239590"
+    },
+    {
+      "bytes": 15332,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentrails/quick_pending_projection.go",
+      "sha256": "9ed2ceea091dda579876d552c4dc2b4572b2070466e95a720e9827acd81108b2"
+    },
+    {
+      "bytes": 5391,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentrails/quick_pending_screen.go",
+      "sha256": "b3c844467f6ced893da48680fe70af54bea295d93bc5367914776dd312aa3c60"
+    },
+    {
+      "bytes": 11944,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentrails/quick_pending_test.go",
+      "sha256": "c0af341a771046398a1608854776ceabb7b8cd4dca9a4cb2f8ab70afe9b25c25"
+    }
+  ],
+  "source_validation": "25 top-level tests and 18 subtests, independent controls, race/vet and six portable target compiles in the original native code scope.",
+  "stage": "M3-2"
+}
