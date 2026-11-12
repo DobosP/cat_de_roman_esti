@@ -16004,6 +16004,63 @@
    ],
    "source": "ai",
    "status": "approved"
+  },
+  {
+   "category": "viata_de_roman",
+   "difficulty": "greu",
+   "group_labels": {
+    "g1": "Vehicule rutiere cu motor",
+    "g2": "Elemente fixe care mărginesc o clădire sau o încăpere",
+    "g3": "Nume care se termină în -ar",
+    "g4": "Folosite direct pe corp pentru igiena personală"
+   },
+   "groups": {
+    "g1": [
+     "n_v24_transport_personal_motocicleta",
+     "n_v24_transport_road_duba",
+     "n_v4soc_autobuz",
+     "n_v24_transport_road_microbuz"
+    ],
+    "g2": [
+     "n_v24_home_structure_acoperis",
+     "n_v24_home_structure_perete",
+     "n_v24_home_structure_tavan",
+     "n_v24_home_surfaces_podea"
+    ],
+    "g3": [
+     "n_v29_kitchen_table_pahar",
+     "n_v1_11_sertar",
+     "n_v23via_abecedar",
+     "n_v1_9_fular"
+    ],
+    "g4": [
+     "n_v31_hygiene_bath_sapun",
+     "n_v31_hygiene_hair_sampon",
+     "n_v31_hygiene_oral_periuta_dinti",
+     "n_v31_hygiene_bath_prosop"
+    ]
+   },
+   "id": "cx_viata_de_roman_386",
+   "order": [
+    "n_v23via_abecedar",
+    "n_v1_9_fular",
+    "n_v31_hygiene_bath_prosop",
+    "n_v31_hygiene_hair_sampon",
+    "n_v31_hygiene_bath_sapun",
+    "n_v24_home_structure_tavan",
+    "n_v29_kitchen_table_pahar",
+    "n_v31_hygiene_oral_periuta_dinti",
+    "n_v24_transport_road_microbuz",
+    "n_v24_home_surfaces_podea",
+    "n_v4soc_autobuz",
+    "n_v24_transport_road_duba",
+    "n_v24_transport_personal_motocicleta",
+    "n_v24_home_structure_perete",
+    "n_v24_home_structure_acoperis",
+    "n_v1_11_sertar"
+   ],
+   "source": "ai",
+   "status": "approved"
   }
  ],
  "contexto": [
@@ -19429,42 +19486,42 @@
  "meta": {
   "counts": {
    "alchimie": 83,
-   "conexiuni": 256,
+   "conexiuni": 257,
    "contexto": 267,
    "lant": 128
   },
   "id_high_water": {
    "alchimie": 107,
-   "conexiuni": 385,
+   "conexiuni": 386,
    "contexto": 379,
    "lant": 251
   },
   "last_import": {
    "allocated": [
     {
-     "category": "stiinta",
+     "category": "viata_de_roman",
      "game": "conexiuni",
-     "id": "cx_stiinta_385",
+     "id": "cx_viata_de_roman_386",
      "raw_ref": "conexiuni[0]"
     }
    ],
    "categories": [
     {
      "bindings": {
-      "candidate_sha256": "sha256:9ab239addf347a75c6bd1d76d51b9d34f43c59967380dbe90dbc5062aa776984",
-      "factual_reviewer": "c42_mapped_exact_conexiuni_factual_reviewer",
-      "factual_sha256": "sha256:c7dd4a03fe6ce515d3490421476f85e0336537ca4f43423fa1825307ade82df7",
-      "quality_reviewer": "c42_mapped_exact_conexiuni_quality_reviewer",
-      "quality_sha256": "sha256:00e301b78399589d186c674a3cfaa8e6f5598063839008faa14404cd37a53536"
+      "candidate_sha256": "sha256:8d508b3d64eed570adbe92396e38aec9eb8fd999fc07f9f303772b68ee75843e",
+      "factual_reviewer": "agent:codex:/root/c44_source28_exact_mapped_factual_review",
+      "factual_sha256": "sha256:6c9cd1393d3dedb57c69c6e02c89efdbd840bf0321882a046ddbaadb6347adae",
+      "quality_reviewer": "agent:codex/c44_source28_exact_mapped_quality_review",
+      "quality_sha256": "sha256:8184f2897f66135bdd3246fabf55fe29fce8c5caa60850326669c4d417945cb3"
      },
-     "category": "stiinta",
+     "category": "viata_de_roman",
      "exclusions": []
     }
    ],
    "kg_sha256": "8b8addd26cdc3aa5972a97368196e9593d5ef38477625f2fba988845e10879d4",
    "operator": "native-pack-only-import-v1",
    "rubric_sha256": "159155390d188545ed71c1697a21b7e46b236a51a3aacaf3ab6351ee17afcc3a",
-   "source_pack_sha256": "a28ea49639c4a23aeaf90116a7603ba0dba1a11d51e99acc029fe25fe2719645",
+   "source_pack_sha256": "1ba0f099b47e3c0c8fd7319938a9649ec3e508a08fd7467990d1cfbb147335f5",
    "write": true
   },
   "note": "Curated games pack (ADR-0011): AI-generated, fact/quality-verified batch + hand-crafted starters. Only status=approved items are served.",
