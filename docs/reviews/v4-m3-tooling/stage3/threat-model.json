@@ -1,0 +1,14 @@
+{
+  "operational_base_sha": "e3d2d6006b2e9162215b01d5653ab2448d84997c",
+  "product_qualification": false,
+  "required_controls": "Exact16-fieldproof1, current consumer and independently pinned real proof; complete reread before comparison; approval null.",
+  "schema": "cat-m3-tool-threat-model-1",
+  "stage": "M3-3",
+  "threats": "Fake/stale proof, source/inventory/consumer mismatch, answer disclosure, mutated response/key or incomplete frame.",
+  "trust_scope": [
+    "Root operates the reviewed sequential workflow with independently pinned exact code and inputs.",
+    "Byte and mode integrity leave source truth, reviewer independence and gameplay quality to their existing authorities.",
+    "The model trusts Root and the underlying UID, kernel and container controls.",
+    "Existing source policy, admission, owner holds and landing authority remain in force."
+  ]
+}

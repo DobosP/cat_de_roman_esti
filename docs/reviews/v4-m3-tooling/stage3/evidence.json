@@ -1,0 +1,74 @@
+{
+  "commands_and_results": [
+    {
+      "bytes": 54612,
+      "path": "/home/dobo/work/_temp/content__v4/tooling/m3-native-development/stage3-v2-root-tests.json",
+      "sha256": "9cf152a8091cd6dbb95c53f6637e2d3bd973ebb3cd792e38ec53f48a8286bc0c"
+    }
+  ],
+  "later_actual_operational_reference": {
+    "comparison_is_byte_identical_on_repeat": true,
+    "controls": "N1–N5; exact repeated comparison; original response preserved.",
+    "manifest": {
+      "bytes": 14264,
+      "path": "/home/dobo/work/_temp/content__v4/tooling/source27-actual-J-technical-envelope-v1/manifest.json",
+      "sha256": "6359807482eaa5f9c95f1f6ce89aaeebbd22493f86c1a11a5547aec94e096d01"
+    },
+    "phase72": {
+      "bytes": 935651,
+      "path": "/home/dobo/work/_temp/content__v4/tooling/m3-source27-runtime-recovery-v7e/phase-72-current-j.json",
+      "sha256": "e1cb36f0416fdb87f384b9ddc3dca192caab775be09631d54e5af640e3b7fdb9"
+    },
+    "prepare_build_compare_repeat": {
+      "build-quick.result.json": {
+        "bytes": 1872,
+        "path": "/var/tmp/cat-v4-source27-v7e-current-j/build-quick.result.json",
+        "sha256": "4ebfe0f2ed9ec8f45e900710239e8219cf1c6bf5773e250d540c235a2993feed"
+      },
+      "compare-quick.result.json": {
+        "bytes": 1962,
+        "path": "/var/tmp/cat-v4-source27-v7e-current-j/compare-quick.result.json",
+        "sha256": "f5175524f122f646c644fd7d389e373e6e249f91b239ff26ce25ba8a73cf32df"
+      },
+      "prepare.result.json": {
+        "bytes": 1434,
+        "path": "/var/tmp/cat-v4-source27-v7e-current-j/prepare.result.json",
+        "sha256": "702b9fd9f5d40c12e32d6cdeee244e73b295b10b3029e97be1e34aa0a86f713a"
+      },
+      "repeat.result.json": {
+        "bytes": 1969,
+        "path": "/var/tmp/cat-v4-source27-v7e-current-j/repeat.result.json",
+        "sha256": "19a79e6e83c70e57ccfa0ac14057a201504312eeef01fd7b0c6ab34daa0d9674"
+      }
+    },
+    "qualification": false,
+    "review_sha256": "0450db7594875c2da8e907013624dbd10d749cb58aaa7cd49d39f5ed46774207",
+    "runtime_admission_scope": "Phase72 technical current J",
+    "scope": "One unqualified technical Perechi replay with the original blind response and zero redispatch. Mechanical comparison approval remains null."
+  },
+  "operational_base_sha": "e3d2d6006b2e9162215b01d5653ab2448d84997c",
+  "operator": "agent:codex (PROGRAM E8)",
+  "product_qualification": false,
+  "remaining": [
+    "Review final exact cumulative candidate and current producer inputs.",
+    "Run canonical exact-SHA build, 4i, unit and full with real disposable PostgreSQL.",
+    "Obtain independent landing review and authorized local landing."
+  ],
+  "schema": "cat-m3-tool-evidence-1",
+  "source_paths": [
+    {
+      "bytes": 68415,
+      "git_mode": "100644",
+      "path": "scripts/miner/critic_blind.py",
+      "sha256": "a4496de6a910560b3c81f1db53e04e73dbaba92303c5ba13e67cec5b5ae6a847"
+    },
+    {
+      "bytes": 38356,
+      "git_mode": "100644",
+      "path": "tests/test_quick_blind_binding.py",
+      "sha256": "90f4a671e041dd64df670347926dc52667d439a4726ced8d68b67ebedbdf3e8a"
+    }
+  ],
+  "source_validation": "26 Python methods and 130 subcases plus 11 historical mocks in the original consumer scope.",
+  "stage": "M3-3"
+}
