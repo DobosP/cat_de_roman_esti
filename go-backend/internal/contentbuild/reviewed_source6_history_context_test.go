@@ -44,7 +44,7 @@ func TestReviewedSource6PinsRestoreAndChangedSourceRefuses(t *testing.T) {
 		if len(reviewedPins) != 3 || reviewedPins["quick_games_v92.json"] != "234305a844033cff0914a5213f6c0b8dcd1b21918d57cc851780259c9e87ee59" {
 			t.Fatal("reviewed GUI Source6 pin scope differs")
 		}
-		built, err := Build(root)
+		built, err := buildHistorical(root, historicalBuildReviewedSource6)
 		if err != nil {
 			t.Fatal("complete literal historical context must rebuild before mutation", err)
 		}
@@ -60,7 +60,7 @@ func TestReviewedSource6PinsRestoreAndChangedSourceRefuses(t *testing.T) {
 		if err = os.WriteFile(file, append(raw, '\n'), 0600); err != nil {
 			t.Fatal(err)
 		}
-		if _, err = Build(root); err == nil || !strings.Contains(err.Error(), "quick_games_v92.json: reviewed artifact digest drift") {
+		if _, err = buildHistorical(root, historicalBuildReviewedSource6); err == nil || !strings.Contains(err.Error(), "quick_games_v92.json: reviewed artifact digest drift") {
 			t.Fatal("changed historical quick bytes bypassed the real reviewed pin", err)
 		}
 	})

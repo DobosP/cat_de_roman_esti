@@ -1,0 +1,83 @@
+{
+  "commands_and_results": [
+    {
+      "bytes": 2633,
+      "path": "/tmp/cat-v4-m3-contentbuild-history-review/signed-review.json",
+      "sha256": "1038ff3e244c2f465cd1bdc818bea436008607983873bb9a941cd3410d75aa87"
+    },
+    {
+      "bytes": 2478,
+      "path": "/tmp/cat-v4-m3-contentbuild-history-review/manifest.json",
+      "sha256": "9bf40fdae78d13a694cdf6a9501417a1c85572e1ac9ee765ae058c3a12549b1e"
+    }
+  ],
+  "operational_base_sha": "e3d2d6006b2e9162215b01d5653ab2448d84997c",
+  "operator": "agent:codex (PROGRAM E8)",
+  "product_qualification": false,
+  "remaining": [
+    "Review final exact cumulative candidate and current producer inputs.",
+    "Run canonical exact-SHA build, 4i, unit and full with real disposable PostgreSQL.",
+    "Obtain independent landing review and authorized local landing."
+  ],
+  "schema": "cat-m3-tool-evidence-1",
+  "source_paths": [
+    {
+      "before_sha256": "b266febfab801958739d8710e947b76257b9eb0e492bca2097df81c16cded7d7",
+      "bytes": 12620,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentbuild/build.go",
+      "sha256": "f9528c73fa41bd96be6a12e454cdfea0540f9d5dca4da3d4aff69fe111dd909d"
+    },
+    {
+      "before_sha256": "4ba997ad378a26da9d0da0294c84e6af4b644ea699dec7a285db2cfc2772d0f2",
+      "bytes": 24277,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentbuild/build_test.go",
+      "sha256": "82870046dd0dc42fc833b2fc255e60efe360479be594ad19bcae9cc01b88f567"
+    },
+    {
+      "before_sha256": "f62d9920228ce114f6dea238378cb1d263936b9c7931641ecd21bbc747160b8a",
+      "bytes": 25869,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentbuild/catalogs.go",
+      "sha256": "784ea79ea84cabae7987bed7431a698606940f25cfe24c0745304fe63ce85205"
+    },
+    {
+      "before_sha256": null,
+      "bytes": 15500,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentbuild/historical_build.go",
+      "sha256": "35d33a0715699937db593de2b6f70e786a0feb3cec02d8b35143e91f21fcc98c"
+    },
+    {
+      "before_sha256": null,
+      "bytes": 7532,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentbuild/historical_build_test.go",
+      "sha256": "44eaf504d4f94d8115b3dd46b353e692d9ec6af7400009c86f50a514f1a17977"
+    },
+    {
+      "before_sha256": "0188a658e2e66f4920fcad35b8e64b6ee443b8d04e195a86d050053b9cdbc556",
+      "bytes": 3666,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentbuild/reviewed_source6_history_context_test.go",
+      "sha256": "0abcd01391594f5c2992615f0a43094d637474f7944fda861fc05f027fd22330"
+    },
+    {
+      "before_sha256": "26643081a142d8573cc6e7d85735d3d58506feb77d2d8ca7fcdfbb036fbc82fe",
+      "bytes": 4839,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentbuild/source6_build_test.go",
+      "sha256": "70f5d05ac921e55bcfd139630f1213107fde924349bbee57dbec34f04e1b7f2f"
+    },
+    {
+      "before_sha256": "bfad4a44c89b97db020a1f56bfdc5ac0cee1eafc4f3156fb4806c4faa1baa8c1",
+      "bytes": 6820,
+      "git_mode": "100644",
+      "path": "go-backend/internal/contentbuild/source6_current_requalification_test.go",
+      "sha256": "1944c8d64ae8ddfc6aea4544caee7fe7bbc78a0acc399afc5f51f9990c407cea"
+    }
+  ],
+  "source_validation": "106 exact and 63 supplementary PASS, zero FAIL/SKIP, vet and three compile targets for the historical reconstruction repair.",
+  "stage": "M3-5C-HISTORY"
+}

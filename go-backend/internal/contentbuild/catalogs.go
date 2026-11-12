@@ -32,12 +32,16 @@ func sha(v any) bool {
 }
 func score(m map[string]any, k string) bool { n, ok := integer(m[k]); return ok && n >= 0 && n <= 100 }
 func validateRankings(raw, pack map[string]any, digests map[string]any) (map[string]map[string]any, error) {
+	return validateRankingsForBuild(raw, pack, digests, nil)
+}
+
+func validateRankingsForBuild(raw, pack map[string]any, digests map[string]any, historical *historicalBuildContext) (map[string]map[string]any, error) {
 	fail := func(s string) (map[string]map[string]any, error) { return nil, fmt.Errorf("board rankings: %s", s) }
 	meta := object(raw["meta"])
 	if !exact(raw, "meta", "boards") || !exact(meta, "schema_version", "pack_sha256", "kg_sha256", "rubric_sha256", "counts") || number(meta["schema_version"]) != 1 {
 		return fail("schema drift")
 	}
-	if e := bindings(meta, map[string]any{"pack_sha256": digests["games_pack.json"], "kg_sha256": digests["kg_sample.json"], "rubric_sha256": RubricSHA256}); e != nil {
+	if e := bindings(meta, map[string]any{"pack_sha256": digests["games_pack.json"], "kg_sha256": digests["kg_sample.json"], "rubric_sha256": buildRubricSHA256(historical)}); e != nil {
 		return fail(e.Error())
 	}
 	expected := map[string][2]string{}
@@ -230,12 +234,16 @@ func candidateID(game, source string, p map[string]any, r map[string]any) string
 	return prefix + "_" + valueDigest(map[string]any{"game": game, "source_id": source, "payload": p})[:20]
 }
 func validateDerived(raw, pack map[string]any, digests map[string]any, r map[string]any) error {
+	return validateDerivedForBuild(raw, pack, digests, r, nil)
+}
+
+func validateDerivedForBuild(raw, pack map[string]any, digests map[string]any, r map[string]any, historical *historicalBuildContext) error {
 	fail := func(s string) error { return fmt.Errorf("derived catalog: %s", s) }
 	meta := object(raw["meta"])
 	if !exact(raw, "meta", "boards") || !exact(meta, "schema_version", "formula_version", "pack_sha256", "kg_sha256", "rubric_sha256", "v37_rankings_sha256", "counts") || number(meta["schema_version"]) != 1 || meta["formula_version"] != "v38-derived-1" {
 		return fail("schema drift")
 	}
-	if e := bindings(meta, map[string]any{"pack_sha256": digests["games_pack.json"], "kg_sha256": digests["kg_sample.json"], "v37_rankings_sha256": digests["board_rankings_v37.json"], "rubric_sha256": RubricSHA256}); e != nil {
+	if e := bindings(meta, map[string]any{"pack_sha256": digests["games_pack.json"], "kg_sha256": digests["kg_sample.json"], "v37_rankings_sha256": digests["board_rankings_v37.json"], "rubric_sha256": buildRubricSHA256(historical)}); e != nil {
 		return fail(e.Error())
 	}
 	sources := map[string]map[string]any{}
@@ -462,11 +470,15 @@ func independentReviews(v any) bool {
 	return Normalize(str(a["reviewer"])) != "" && Normalize(str(b["reviewer"])) != "" && Normalize(str(a["reviewer"])) != Normalize(str(b["reviewer"])) && ((a["role"] == "factual" && b["role"] == "quality") || (a["role"] == "quality" && b["role"] == "factual")) && sha(a["sha256"]) && sha(b["sha256"])
 }
 func validateQuick(raw, derived map[string]any, g *graph.Service, digests map[string]any) error {
+	return validateQuickForBuild(raw, derived, g, digests, nil)
+}
+
+func validateQuickForBuild(raw, derived map[string]any, g *graph.Service, digests map[string]any, historical *historicalBuildContext) error {
 	fail := func(s string) error { return fmt.Errorf("quick catalog: %s", s) }
 	if raw["kind"] != "quick-content-catalog-v1" || len(array(raw["authored"])) == 0 || len(array(raw["authored"])) > 256 || !sha(raw["candidate_sha256"]) || !independentReviews(raw["reviews"]) {
 		return fail("schema/reviews/bounds")
 	}
-	want := map[string]any{"kg_sha256": digests["kg_sample.json"], "pack_sha256": digests["games_pack.json"], "core_catalog_sha256": digests["derived_catalog_v38.json"], "rubric_sha256": RubricSHA256}
+	want := map[string]any{"kg_sha256": digests["kg_sample.json"], "pack_sha256": digests["games_pack.json"], "core_catalog_sha256": digests["derived_catalog_v38.json"], "rubric_sha256": buildRubricSHA256(historical)}
 	if e := bindings(object(raw["bindings"]), want); e != nil {
 		return fail(e.Error())
 	}

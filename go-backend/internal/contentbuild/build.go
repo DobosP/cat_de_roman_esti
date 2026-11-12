@@ -39,6 +39,20 @@ func Load(root string) (*content.Content, error) {
 	return content.Decode(b)
 }
 func build(root string, validate bool) (map[string]any, error) {
+	return buildWithHistoricalContext(root, validate, nil)
+}
+
+// A non-nil context is reachable only through the closed immutable replay path.
+// Serving, export, source validation and operator entry points always pass nil.
+func buildWithHistoricalContext(root string, validate bool, historical *historicalBuildContext) (map[string]any, error) {
+	if historical != nil {
+		if historical.root != root {
+			return nil, fmt.Errorf("historical build context/root mismatch")
+		}
+		if err := historical.verify(); err != nil {
+			return nil, err
+		}
+	}
 	r, err := frozenRules()
 	if err != nil {
 		return nil, err
@@ -64,27 +78,27 @@ func build(root string, validate bool) (map[string]any, error) {
 		if name == "quick_games_v92.json" || name == "alchimie_discovery_world_v92.json" {
 			max = 2 << 20
 		}
-		raw, e := ReadObject(sourcePath(root, name), max)
+		raw, e := buildReadObject(sourcePath(root, name), max, historical)
 		if e != nil {
 			return nil, fmt.Errorf("%s: %w", name, e)
 		}
-		b, e := os.ReadFile(sourcePath(root, name))
+		b, e := buildReadBytes(sourcePath(root, name), max, historical)
 		if e != nil {
 			return nil, e
 		}
 		src[name] = raw
 		digests[name] = TextSHA256(b)
-		if p := reviewedPins[name]; p != "" && p != digests[name] {
+		if p := buildReviewedPin(name, historical); p != "" && p != digests[name] {
 			return nil, fmt.Errorf("%s: reviewed artifact digest drift", name)
 		}
 	}
 	kg, pack := src["kg_sample.json"], src["games_pack.json"]
 	for _, name := range []string{"kg_sample.json", "games_pack.json"} {
-		a, e := os.ReadFile(sourcePath(root, name))
+		a, e := buildReadBytes(sourcePath(root, name), 16<<20, historical)
 		if e != nil {
 			return nil, e
 		}
-		b, e := os.ReadFile(filepath.Join(root, "tests", "fixtures", name))
+		b, e := buildReadBytes(filepath.Join(root, "tests", "fixtures", name), 16<<20, historical)
 		if e != nil {
 			return nil, e
 		}
@@ -92,7 +106,7 @@ func build(root string, validate bool) (map[string]any, error) {
 			return nil, fmt.Errorf("copies_identical: %s package/test copies differ", name)
 		}
 	}
-	if err := verifyRubric(root); err != nil {
+	if err := verifyBuildRubric(root, historical); err != nil {
 		return nil, err
 	}
 	c, err := parsedGraph(kg)
@@ -108,7 +122,7 @@ func build(root string, validate bool) (map[string]any, error) {
 			return nil, fmt.Errorf("pack invalid: %s", errorSummary(errors))
 		}
 	}
-	rank, err := validateRankings(src["board_rankings_v37.json"], pack, digests)
+	rank, err := validateRankingsForBuild(src["board_rankings_v37.json"], pack, digests, historical)
 	if err != nil {
 		return nil, err
 	}
@@ -117,11 +131,11 @@ func build(root string, validate bool) (map[string]any, error) {
 		return nil, err
 	}
 	derived := src["derived_catalog_v38.json"]
-	if err := validateDerived(derived, pack, digests, r); err != nil {
+	if err := validateDerivedForBuild(derived, pack, digests, r, historical); err != nil {
 		return nil, err
 	}
 	quick := src["quick_games_v92.json"]
-	if err := validateQuick(quick, derived, g, digests); err != nil {
+	if err := validateQuickForBuild(quick, derived, g, digests, historical); err != nil {
 		return nil, err
 	}
 	world, err := validateWorld(src["alchimie_discovery_world_v92.json"], g)
@@ -309,12 +323,14 @@ func asContent(v any) (*content.Content, error) {
 	return &c, e
 }
 
-func verifyRubric(root string) error {
-	b, err := os.ReadFile(filepath.Join(root, "docs", "CRITIQUE_RUBRIC.md"))
+func verifyRubric(root string) error { return verifyBuildRubric(root, nil) }
+
+func verifyBuildRubric(root string, historical *historicalBuildContext) error {
+	b, err := buildReadBytes(filepath.Join(root, "docs", "CRITIQUE_RUBRIC.md"), 1<<20, historical)
 	if err != nil {
 		return fmt.Errorf("required reviewed rubric: %w", err)
 	}
-	if TextSHA256(b) != RubricSHA256 {
+	if TextSHA256(b) != buildRubricSHA256(historical) {
 		return fmt.Errorf("reviewed rubric digest drift")
 	}
 	return nil

@@ -22,7 +22,7 @@ func TestRebuildCurrentSource6ReviewOnlyRequalification(t *testing.T) {
 	if !reflect.DeepEqual(reviewedPins, wantPins) {
 		t.Fatal("current reviewed authority differs or historical pins leaked")
 	}
-	built, err := Build(root)
+	built, err := buildHistorical(root, historicalBuildReviewedSource6)
 	if err != nil {
 		t.Fatal(err)
 	}

@@ -12,7 +12,7 @@ import (
 func TestRebuildSource6TwoAliasReviewedBundleAndPin(t *testing.T) {
 	root := source6HistoricalRoot(t)
 	historicalSource6ReviewedPins(t)
-	built, err := Build(root)
+	built, err := buildHistorical(root, historicalBuildOriginalSource6)
 	if err != nil {
 		t.Fatal(err)
 	}

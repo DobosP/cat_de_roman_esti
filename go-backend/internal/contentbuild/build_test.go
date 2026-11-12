@@ -106,7 +106,7 @@ func source4HistoricalRoot(t *testing.T) string {
 		}
 	}
 	rubric, e := os.ReadFile(filepath.Join(original, "docs/CRITIQUE_RUBRIC.md"))
-	if e != nil || TextSHA256(rubric) != RubricSHA256 {
+	if e != nil || TextSHA256(rubric) != historicalBuildRubricSHA256 {
 		t.Fatal("historical rubric differs", e)
 	}
 	write("docs/CRITIQUE_RUBRIC.md", rubric)
@@ -120,7 +120,7 @@ func TestRebuildCurrentReviewedBundleAndPin(t *testing.T) {
 	// below independently rebuilds its immutable world-only release context.
 	historicalSource45ReviewedPins(t)
 	old := source4ArchivedBundle(t)
-	b, e := Build(root)
+	b, e := buildHistorical(root, historicalBuildSource4)
 	if e != nil {
 		t.Fatal(e)
 	}
@@ -167,7 +167,7 @@ func TestRebuildCurrentReviewedBundleAndPin(t *testing.T) {
 func TestRebuildSource5WorldOnlyReviewedBundleAndPin(t *testing.T) {
 	root := source5HistoricalRoot(t)
 	historicalSource45ReviewedPins(t)
-	b, e := Build(root)
+	b, e := buildHistorical(root, historicalBuildSource5)
 	if e != nil {
 		t.Fatal(e)
 	}
