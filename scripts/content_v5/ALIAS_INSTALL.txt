@@ -1,0 +1,33 @@
+V5 alias installation
+
+Freeze the exact S1 canonical accepted_forms order in the reviewed registry
+payload. At S6 the orchestrator records v5_review_binding (author_thread,
+payload_sha256 and exact per-role review references), v5_derived_view_sha256
+and the independently checked S5 v5_independence_checks. The payload digest
+covers the canonical sorted-key UTF-8 JSON of {id, kind, owner_id, forms,
+identity}; identity is the complete registry identity including selected sense,
+lemma, and synonym_lemma when relevant. Receipt titles must match these lemmas.
+Each judgment binds both hashes. Synonyms carry a separate blind-critic pass
+and independently verified receipt references for both Wiktionary entries and
+one corroborating Romanian source, plus a substitution pass. The supported
+corroborating entry is an approved Romanian Wikipedia article. Forms require
+the word's own Wiktionary table, as attested by both reviewers.
+
+Run python3 -I scripts/content_v5/alias_install.py --help. Provide the actual
+clean content/v5 SHA, immutable screen and native validator binaries and their
+digests, and the JSON batch and judgment manifest under campaign scratch.
+Each source reference points to the immutable cache/<hash>.response.json;
+the installer verifies the corresponding content-addressed body bytes.
+Use --write only for S7. Run the remaining rank/derive, export, rail, resolver
+diff, reference and HTTP checks through the existing gates.
+
+Threat model
+The orchestrator and its committed S6 ledger are trusted to verify signatures,
+reviewer independence, the source's sense and the truth of each judgment.
+The installer binds that evidence to the reviewed forms, validates both fixture
+mirrors with the native validator and writes only those two mirrors under the
+native operator lock. Candidate JSON and source bodies are never executed.
+The checkout and campaign scratch are private to the orchestrator. Files are
+staged before entering the mirror transaction, whose rollback restores original
+bytes on a failed write. Inspect the exact mirrors on recovery after a killed
+process. Use the standard-library Python 3.12 CLI on Linux, macOS or Windows.
