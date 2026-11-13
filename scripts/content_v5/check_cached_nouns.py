@@ -11,6 +11,8 @@ import sys
 from urllib.parse import quote
 from xml.parsers import expat
 
+sys.dont_write_bytecode = True
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 from wiktionary_dump import (
     FORM, MAX_MANIFEST, DumpError, extract, parse_literal_table, read_small, receipt_for, unique_keys,
 )
@@ -371,7 +373,7 @@ def compare(cache, day, archive_sha256, samples, *, cached_baseline_sha256=None)
 def main():
     cli = argparse.ArgumentParser(description=__doc__)
     cli.add_argument("cache", type=Path)
-    cli.add_argument("--sample", type=Path, default=Path(__file__).with_name("official-sample.private.json"))
+    cli.add_argument("--sample", type=Path, default=Path(__file__).with_name("dump_samples") / "20261101-sample.json")
     cli.add_argument("--cached-baseline", type=Path, help="compare the pinned historical 20 cached titles")
     args = cli.parse_args()
     try:
