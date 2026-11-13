@@ -1,0 +1,46 @@
+V5 receipt-only closeout
+
+From the actual clean local main after the reviewed fast-forward, run
+python3 -I scripts/content_v5/close_landing.py --help. Preview first. For
+--write provide the pinned cat-doc-check executable. After a successful write,
+stage and commit only the four reported files. Do not amend the qualified SHA.
+
+The root-owned manifest carries train_id, baseline, candidate, landed_at,
+item_ids, gui_gates, and evidence. Every evidence entry is a scratch-relative
+path and SHA-256. Required entries are assembly, build, 4i, reference,
+pin-review, http-play, landing-review and, for GUI, unit, full, unit-wrapper,
+full-wrapper and full-supervisor. Use original pinned gate result, wrapper
+and supervisor JSON. All other entries bind sha (the candidate) and their
+relevant baseline, status, verdict or thread IDs. No authored assertion may
+substitute for a gate, a source corpus or a replay.
+
+The assembly record gives sorted item_ids, frozen_payload_sha256 keyed by
+candidate ID, installed IDs per item, and touched_boards pairs [game, id].
+Hash canonical sorted-key compact UTF-8 JSON of each registry payload.
+Forms/synonyms specify owner_id, boards board_id, concepts/names node_id, and
+edges edge_id. Freeze graph payload in the committed source field names and
+board payload with category and difficulty. Lane-specific recipe/caption
+closeout needs the corresponding future lane adapter before that lane runs.
+
+The HTTP record binds the exact raw play JSONL with a transcript path/digest.
+The reference record binds the corpus (JSON or gzip), independent capture
+summary, native replay summary, and named independent expectations_origin.
+Each nested path uses the same path/sha256 reference shape. The recapture
+summary (cat-v5-independent-recapture-1) carries sha, case_count, reference
+and corpus_sha256 from the independent fixed-corpus recapture. The replay
+envelope (cat-v5-native-replay-1) carries sha, corpus_sha256 and the original
+native report. Both must cover 1,206 cases. The pin reviewer binds
+reference_sha256, corpus_sha256, corpus_pin_path, pin_sha, the old/new pin
+change list and its own independent thread. The
+list has before, after and changes (path, before_sha256, after_sha256, using
+null on a nonexistent side). The landing reviewer binds sorted item_ids and
+the SHA-256 of assembly, http_play, reference and pin_review.
+
+Threat model
+The orchestrator owns the local Git database, evidence and pinned checker.
+The checker validates exact bindings and local fast-forward evidence without
+changing refs. Reflog data proves the move, not the literal argv. Reviewer
+truthfulness and selection of an independent oracle are operator obligations.
+The four local writes roll back after an ordinary error. A killed process
+requires inspecting the four exact paths before retry. Use the standard-
+library Python 3.12 CLI. The pinned doc checker is Go.
