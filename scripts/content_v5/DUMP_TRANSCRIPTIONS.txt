@@ -1,0 +1,38 @@
+V5 proposal-blind table transcription
+
+Each S5 reviewer independently rehashes the archive and extracts the exact page
+with the raw dump reader, without its table parser or the author's proposal.
+Give each reviewer only the page and source bindings until both transcriptions
+are sealed. The same reviewers subsequently judge the frozen forms and sense.
+
+Use a cat-v5-dump-proposed-cells-1 JSON object with item_id, author_thread,
+payload, payload_sha256, derived_view_sha256, source and proposed_cells.
+The frozen payload is the canonical V5 alias installer form payload, including
+identity with its selected sense and lemma. The source title must match the
+lemma. All proposed forms must appear in proposed_cells. Each cell is
+[row label, column label, literal form]. Use the exact visible label spelling.
+The source object is archive_url, archive_sha256, archive_receipt_sha256,
+title, revision_id and text_sha256, copied from the verified page extraction.
+
+Each cat-v5-dump-transcription-1 object contains role (factual or quality),
+thread_id, the same source object and cells. Transcribe the full literal table.
+The same form can occur under multiple labels. Skip non-form placeholders.
+Keep each original, separately hashed transcript, including any discrepancy.
+
+  python3 -I scripts/content_v5/dump_transcriptions.py --scratch "$scratch" \
+    --proposal PROPOSAL SHA256 \
+    --transcription FACTUAL SHA256 --transcription QUALITY SHA256
+
+The diff lists missing proposed cell triples by reviewer and affected forms.
+It exits 1 for a discrepancy and 2 for invalid inputs. A discrepant form must
+be dropped unless the reviewer can resolve the difference. Rebind and recheck
+the retained forms after a drop. Use no output as content evidence before the
+ADR-0231 parser gate and the signed S5 factual and quality verdicts.
+
+Threat model
+The orchestrator controls the scratch root, pre-dispatch evidence and actor
+identities. The comparator verifies exact input bytes, the frozen payload,
+source equality, three distinct actors, and exact cell coverage. It cannot
+infer independent reading or verify a signature, archive or parser gate.
+The reviewers and the dump reader rehash the retained source separately.
+The comparator has no network or write access and uses Python 3.12 stdlib.
