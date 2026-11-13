@@ -1,17 +1,20 @@
 #!/usr/bin/env python3
-"""Seed and inspect the V4 candidate journal using local inputs only."""
+"""Seed the V4 candidate journal and check current transitions using local inputs only."""
 
 import argparse
 import ast
 import hashlib
 import json
+import os
 import re
 import subprocess
 import sys
 import tempfile
 import unicodedata
 from collections import Counter
+from datetime import date
 from pathlib import Path
+from urllib.parse import unquote, urlsplit
 
 SCHEMA = "cat-content-candidate-1"
 BASELINE = "1e3a04eb70d58770315be2b65fa22759cb6cfe11"
@@ -32,6 +35,77 @@ STOCK = "docs/content-stock"
 HELD_V2 = f"{STOCK}/held-v2"
 ARCHIVE = f"{STOCK}/archive/2026-10-28/source"
 SHA256 = re.compile(r"[a-f0-9]{64}")
+FIRST_FETCHER = re.compile(r"[a-zA-Z0-9][a-zA-Z0-9_.:-]{0,127}")
+BAD_URL_ESCAPE = re.compile(r"%(?![a-fA-F0-9]{2})")
+URL_ESCAPE = re.compile(r"%([a-fA-F0-9]{2})")
+ESCAPED_URL_PATH = re.compile(r"[a-zA-Z0-9._~!$&'()*+,;=:@%/\[\]-]+")
+AMBIGUOUS_PATH_ESCAPE = re.compile(r"%(?:2f|5c|25)", re.IGNORECASE)
+UNRESERVED_URL_BYTES = b"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._~"
+EMPTY_SHA256 = hashlib.sha256(b"").hexdigest()
+LIVE_SOURCE_HOSTS = {
+    "ro.wikipedia.org",
+    "ro.wiktionary.org",
+    "www.wikidata.org",
+    "raw.githubusercontent.com",
+    "localhost:8077",
+}
+DUMP_ARCHIVE = re.compile(
+    r"https://dumps\.wikimedia\.org/rowiktionary/([0-9]{8})/"
+    r"rowiktionary-\1-pages-articles\.xml\.bz2"
+)
+KG_PATH = f"{FIXTURES}/kg_sample.json"
+KG_BOARD_LANES = {
+    "board.alchimie": "A",
+    "board.conexiuni": "B",
+    "board.contexto": "B",
+    "board.lant": "B",
+}
+# Exact canonical event hashes from c6196077532532fb0a065f96a6185b9baa43f738.
+# These historical sourced events predate the S2 receipt check. The prior chain
+# and candidate ID are in each digest, so copying a scope or ID grants no exception.
+PRE_RECEIPT_SOURCED_EVENTS = frozenset({
+    "64b4209f9b9f570584714d53e171ae8383ca99145070e99e4da2a30351f4256e",
+    "63ac6bb566b1a1749d89811ddf4a391fa1d02dd9acbccbf4a8e91f71bc190ab6",
+    "93f066fbb47365084fe64ced857bba7ca5c507e41108cd559851b959dd40697f",
+    "190fbf601e877943f59fcc5a8b429c1ce84917f4ce61ff425201fdcc0d9fadde",
+    "a48fdc7f81b2214027a6196d6f744c807759402700d1cb8fc167be9b376147b7",
+    "4ed09bbff29fc53f274866f4ff287bfcdd171de67170b5c30a3c30d6a089841b",
+    "006eb01039e1e9ef49ea6d41898d9449d8151faf92e34c7ce45802439fb94111",
+    "001ddc880b1dac584da045e19d8378bd8cf1c33ada40eec6b0765c91b62ee348",
+    "6a8840436ea6a3d34d679db7d2521f78a03e3af330f8b68d3f67c91b08792c75",
+    "b4772750d9399861299c7f4492455d145108eee1b4adc808ee9be84156b354de",
+    "dd1765a55b79bfbb343a0148b8403f18ac7b4a0328473c2959728c972a02db9e",
+    "ec6d84d4c0d25f4b2b06378d18d747142a1d226fc81425846619a2133318ce31",
+    "2403c1cb27f9c308c618e9f9080313538e1c31a527e895f48c8586615af707e2",
+    "b0206afe67b78df292fa3b7effab5a732df2bbba71ec8a6a479bd23e3dbf64f9",
+    "eed575e91d5187e9385e19b559aa8c6dda8950950d6ac699a05a630b16e033f7",
+    "fbf0b991fe1336d3d217f0054b9af8237ec2a9ac8f1c956f2dce9b74061d9af7",
+    "f30d9f127518da7321d8bbd3ea235b9ab5e3a27617607500e9add94380dbdfac",
+    "9b8cca976ac7b6a3f18ae3c507fd7bbfb9be31bb69d7fb86be5f5929ea8f36e6",
+    "105aa7b36c20d7a6b98b3de8e74e5aa2f864d939174ac63c5c9daa879d0e2907",
+    "ecd988be5cae3b4a6b989a876ecac3a15a70e1d7093ced8fdf45dce830ee8745",
+    "e258793ca507e7d1c1ffb6b24f46ff3387fcf0b5dd8d5d88dc227846de0d0e84",
+    "27c00caff9351db7c728fcbd3c9657c325bc1b553e6ec7f3c643e67bc094e2ed",
+    "ddc8ae8f666a41337463c3ea4d917c19f74321c00abffb73592d4b3a774fbbd0",
+    "9a29dddb45baddcc660fb94f7ade20d6e897353bd513270df507287a1dfa1916",
+})
+# These events name attempt responses whose bytes were verified against the
+# canonical final-URL receipts. Preserve only the exact append-only history.
+RESPONSE_RECEIPT_SOURCED_EVENTS = frozenset({
+    "969a911925db7d64c4cace9164b6825f06035bb49f04f383e08ae2fb3bc4002c",
+    "e638cd35586821fd0906bd5b173d519a6d0cf84451834cdf31ef4b1da8a46ce6",
+    "38dbb743344efc5dd42c4d7b91485a05d40e73f0597bd879e67fcf6a648ab65e",
+    "9f2d7955e15fe885eb50c1a208df2c12cceb1a844af89153e17b4eedde34a900",
+    "6cb2009b422cca3693c9c131d1fb75f60561393a54f1bf5f69b3c11d3f013a95",
+    "4d0486b381ae0efdc59ab7e49b96ef304b02dc0a2c436dd48c2048415e376955",
+    "8663f9062797caa1e792c2fa9357fbf0a7751102fe0f1d81c1465f24a34c71ff",
+    "abf52b8863630caee980633f9e5e9fc39fcbb94ce95c9bedd710e123536fe3a1",
+    "319fed65958c595fd195341facda0ad2d8a4abc7bab70f69238f0f3ceedc8f09",
+    "896709c5b08f9e3da8bc7704cf5dc02d178c2e4bd26e6124652bb909b4adae28",
+    "8d18172c8819bb92d35faf20ebc56be20c60b59c42eec04b206b3d2418f40b2c",
+    "8fc447e5ce69f61840a99cd4b2d6a73741a492d13026f8aeb8853ed08ab8d86b",
+    "7fa182bed058e210f9254666a84cad5870c794ed8dd094f84fb5541c3d0122f7",
+})
 BOARD_PREFIX = {
     "al": "alchimie",
     "ct": "contexto",
@@ -991,6 +1065,179 @@ def has_retry_evidence(prior, event, evidence_root):
     )
 
 
+def receipt_hash(value):
+    return (
+        isinstance(value, str)
+        and SHA256.fullmatch(value) is not None
+        # Repeated halves include the usual zero and repeated-character placeholders.
+        and value[:32] != value[32:]
+        and value != EMPTY_SHA256
+    )
+
+
+def live_source_receipt(ref):
+    url = ref.get("url")
+    path = ref.get("path")
+    if (
+        not isinstance(url, str)
+        or re.fullmatch(r"https://[!-~]+", url) is None
+        or len(url) > 4096
+        or any(char in url for char in "#\\")
+        or BAD_URL_ESCAPE.search(url) is not None
+        or any(
+            octet != octet.upper() or int(octet, 16) in UNRESERVED_URL_BYTES
+            for octet in URL_ESCAPE.findall(url)
+        )
+        or not isinstance(path, str)
+        or any(char in path for char in "\x00\r\n")
+        or re.split(r"[/\\]", path)[-1] != f"{digest(url.encode('ascii'))}.receipt.json"
+        or not receipt_hash(ref.get("sha256"))
+        or not receipt_hash(ref.get("body_sha256"))
+        or ref["sha256"] == ref["body_sha256"]
+    ):
+        return False
+    try:
+        source = urlsplit(url)
+        decoded_path = unquote(source.path, errors="strict")
+    except ValueError:
+        return False
+    segments = decoded_path.split("/")
+    # Match Go's per-rune lowercase mapping for dotted capital I.
+    folded_path = decoded_path.replace("İ", "i").lower()
+    # These paths are policy-only in the source client.
+    terms_path = folded_path in {"/terms", "/terms-of-service", "/terms-of-use"} or folded_path.startswith(
+        ("/wiki/wikipedia:termeni", "/wiki/wikționar:termeni", "/wiki/wikidata:terms_of_use")
+    )
+    if (
+        source.netloc not in LIVE_SOURCE_HOSTS
+        or decoded_path in {"", "/", "/robots.txt"}
+        or terms_path
+        or ESCAPED_URL_PATH.fullmatch(source.path) is None
+        or (url.endswith("?") and not source.query)
+        or "//" in decoded_path
+        or any(segment in {".", ".."} for segment in segments)
+        or any(ord(char) < 32 or ord(char) == 127 for char in decoded_path)
+        or AMBIGUOUS_PATH_ESCAPE.search(source.path) is not None
+    ):
+        return False
+    if source.netloc == "raw.githubusercontent.com":
+        return (
+            len(segments) >= 5
+            and segments[1:3] == ["hermitdave", "FrequencyWords"]
+            and bool(segments[-1])
+            and "%" not in source.path
+            and not source.query
+        )
+    return True
+
+
+def dump_page_receipt(ref):
+    url, title, revision = ref.get("archive_url"), ref.get("title"), ref.get("revision_id")
+    archive = DUMP_ARCHIVE.fullmatch(url) if isinstance(url, str) else None
+    if archive is None:
+        return False
+    try:
+        if date.fromisoformat(archive[1]).year < 2001:
+            return False
+    except ValueError:
+        return False
+    hashes = [ref.get(key) for key in ("archive_receipt_sha256", "archive_sha256", "text_sha256")]
+    return (
+        ref.get("fetched_by_role") == "script"
+        and isinstance(title, str)
+        and bool(title.strip())
+        and all(ord(char) >= 32 for char in title)
+        and type(revision) is int
+        and revision > 0
+        and all(receipt_hash(sha) for sha in hashes)
+        and len(set(hashes)) == 3
+    )
+
+
+def kg_board_receipt(ref, event, evidence_root):
+    commit = ref.get("commit")
+    origin = event["origin"]
+    if (
+        evidence_root is None
+        or KG_BOARD_LANES.get(event["type"]) != event["lane"]
+        or "model" in (origin.get("kind"), origin.get("state"))
+        or origin["source"].get("scope") == "model"
+        or set(ref) != {"scope", "fetched_by_role", "path", "commit", "sha256"}
+        or ref.get("fetched_by_role") != "script"
+        or ref.get("path") != KG_PATH
+        or not isinstance(commit, str)
+        or re.fullmatch(r"[a-f0-9]{40}", commit) is None
+        or not receipt_hash(ref.get("sha256"))
+    ):
+        return False
+    git = ["git", "--no-replace-objects", "-C", str(evidence_root)]
+    # Resolve the actual checkout and its objects without caller Git overrides.
+    env = {key: value for key, value in os.environ.items() if not key.startswith("GIT_")}
+    env.update(
+        GIT_ALLOW_PROTOCOL="",
+        GIT_CONFIG_GLOBAL=os.devnull,
+        GIT_CONFIG_NOSYSTEM="1",
+        GIT_NO_LAZY_FETCH="1",
+    )
+    try:
+        top = subprocess.check_output(
+            [*git, "rev-parse", "--show-toplevel"], stderr=subprocess.DEVNULL, env=env,
+        )
+        if Path(os.fsdecode(top.removesuffix(b"\n"))).resolve(strict=True) != evidence_root:
+            return False
+        resolved = subprocess.check_output(
+            [*git, "rev-parse", "--verify", f"{commit}^{{commit}}"],
+            stderr=subprocess.DEVNULL, env=env,
+        )
+        if resolved.strip() != commit.encode("ascii"):
+            return False
+        entry = subprocess.check_output(
+            [*git, "ls-tree", commit, "--", KG_PATH], stderr=subprocess.DEVNULL, env=env,
+        )
+        match = re.fullmatch(
+            rb"100644 blob ([a-f0-9]{40})\t" + re.escape(KG_PATH.encode()) + rb"\n", entry,
+        )
+        if match is None:
+            return False
+        data = subprocess.check_output(
+            [*git, "cat-file", "blob", match[1].decode("ascii")],
+            stderr=subprocess.DEVNULL, env=env,
+        )
+    except (OSError, subprocess.CalledProcessError):
+        return False
+    return digest(data) == ref["sha256"]
+
+
+def has_source_receipt(event, new_provenance, evidence_root):
+    for ref in new_provenance:
+        if not isinstance(ref, dict):
+            continue
+        if ref.get("scope") == "kg-only":
+            if kg_board_receipt(ref, event, evidence_root):
+                return True
+            continue
+        fetcher = ref.get("first_fetcher")
+        if (
+            ref.get("first_fetch_origin") == "v5"
+            and ref.get("origin", "v5") == "v5"
+            and isinstance(ref.get("scope", ""), str)
+            and ref.get("scope") not in ("model", "legacy")
+            and ref.get("fetched_by_role") in ("script", "factual", "quality", "critic")
+            and isinstance(fetcher, str)
+            and FIRST_FETCHER.fullmatch(fetcher)
+            and type(ref.get("status", 200)) is int
+            and ref.get("status", 200) == 200
+            and ref.get("body_problem", "") == ""
+            and "dump_failure" not in ref
+            and (dump_page_receipt(ref) if "archive_url" in ref else live_source_receipt(ref))
+        ):
+            return True
+    event_sha = digest(encode(event).encode("utf-8"))
+    return (
+        event_sha in PRE_RECEIPT_SOURCED_EVENTS or event_sha in RESPONSE_RECEIPT_SOURCED_EVENTS
+    )
+
+
 def current_rows(events, evidence_root=None):
     if evidence_root is not None:
         evidence_root = evidence_root.resolve(strict=True)
@@ -1009,7 +1256,7 @@ def current_rows(events, evidence_root=None):
                 event["previous_sha256"] == digest(encode(prior).encode("utf-8")),
                 f"Transition predecessor mismatch: {id_}",
             )
-            for field in ("identity", "type", "class", "origin"):
+            for field in ("identity", "type", "class", "lane", "origin"):
                 expect(prior[field] == event[field], f"Transition changed {field}: {id_}")
             old_provenance = prior["provenance"]
             expect(
@@ -1021,6 +1268,12 @@ def current_rows(events, evidence_root=None):
                 expect(
                     before == PIPELINE[PIPELINE.index(after) - 1],
                     f"Transition skipped a gate: {id_} ({before} → {after})",
+                )
+            if after == "sourced":
+                added = event["provenance"][len(old_provenance):]
+                expect(
+                    has_source_receipt(event, added, evidence_root),
+                    f"Sourced transition needs a source-client, dump or eligible KG receipt: {id_}",
                 )
             retry_state = before in {"held_recorded", "already_served"} or before.startswith(
                 "parked("
@@ -1077,7 +1330,9 @@ def main(argv=None):
     view = sub.add_parser("view", help="emit one current row per candidate")
     for command in (check, view):
         command.add_argument("journal", type=Path)
-        command.add_argument("--evidence-root", type=Path, help="trusted retry receipt directory")
+        command.add_argument(
+            "--evidence-root", type=Path, help="trusted retry and KG evidence root"
+        )
     view.add_argument("--state")
     args = parser.parse_args(argv)
     try:
