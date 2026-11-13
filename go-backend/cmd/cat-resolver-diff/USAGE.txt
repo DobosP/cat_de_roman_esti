@@ -1,0 +1,25 @@
+Cald resolver comparison for a forms train
+
+Build the private command with the project's pinned Go:
+  CGO_ENABLED=0 go -C go-backend build -trimpath -o <scratch>/cat-resolver-diff ./cmd/cat-resolver-diff
+
+Give scripts/content_v5/resolver_diff.py the exact before and candidate SHAs
+and that binary's SHA-256. The wrapper reads the committed bundles, checks
+their source identities, runs the native audit, and prints one JSON receipt.
+Include reviewed fuzzy-neighbour spellings with --probes when applicable.
+All exact added spellings are discovered from the bundles. No unbounded typo
+space is searched; the receipt lists exactly which strings were compared.
+
+The audit compares first-guess ownership, score fields, confirmation and
+unknown behaviour for every exported Cald board, including approved boards
+outside ranked selection. The audit pins a board in a private in-memory
+instance of the real game service. This is separate from the S9 HTTP play
+and cannot supply independent parity expectations or land a train.
+
+Threat model
+  Trust the operator, Git object store, pinned Go build, native resolver,
+  and private campaign scratch directory. The wrapper binds the compared
+  commits, bundle digests, probe bytes and command digest. The tool reads
+  bounded input files, never starts a server, and never modifies a fixture.
+  Do not expose the receipt to players. It contains private board identities
+  and changed answers. The operator still clears every change independently.
