@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"bytes"
 	"crypto/sha1"
 	"errors"
 	"fmt"
@@ -97,7 +98,7 @@ func TestDumpReceiptRevalidatesAcrossRuns(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	expected := dumpChecksum{testManifestURL, hash([]byte(manifest)), fmt.Sprintf("%x", sha1.Sum([]byte(testArchive)))}
+	expected := dumpChecksum{URL: testManifestURL, SHA256: hash([]byte(manifest)), SHA1: fmt.Sprintf("%x", sha1.Sum([]byte(testArchive)))}
 	if rec.DumpChecksum == nil || *rec.DumpChecksum != expected || rec.SHA256 != hash([]byte(testArchive)) ||
 		rec.FetchedByRole != "script" || rec.FirstFetcher != "dump-source" || rec.Bytes != len(testArchive) {
 		t.Fatalf("archive receipt: %+v", rec)
@@ -178,14 +179,15 @@ func TestCachedDumpRequiresManifestAndOriginalBytes(t *testing.T) {
 
 func TestDumpRequiresExactManifestEntry(t *testing.T) {
 	for _, tc := range []struct {
-		body, failure string
+		name, body, failure string
 	}{
-		{manifestLine(testDumpName+".extra", testArchive), "dump_checksum_missing"},
-		{manifestLine(testDumpName, testArchive) + manifestLine(testDumpName, "different"), "dump_checksum_invalid"},
-		{"malformed\n", "dump_checksum_invalid"},
-		{"<title>Terms of Use</title>", "terms_page"},
+		{"missing", manifestLine(testDumpName+".extra", testArchive), "dump_checksum_missing"},
+		{"different repeat", manifestLine(testDumpName, testArchive) + manifestLine(testDumpName, "different"), "dump_checksum_invalid"},
+		{"identical repeat", manifestLine(testDumpName, testArchive) + manifestLine(testDumpName, testArchive), "dump_checksum_invalid"},
+		{"malformed", manifestLine(testDumpName, testArchive) + "malformed\n", "dump_checksum_invalid"},
+		{"terms", "<title>Terms of Use</title>", "terms_page"},
 	} {
-		t.Run(tc.failure, func(t *testing.T) {
+		t.Run(tc.name, func(t *testing.T) {
 			c, sent, _ := setup(t, func(req *http.Request) (*http.Response, error) {
 				switch req.URL.String() {
 				case dumpBase + "/robots.txt":
@@ -206,6 +208,171 @@ func TestDumpRequiresExactManifestEntry(t *testing.T) {
 			}
 			if len(*sent) != 2 {
 				t.Fatalf("requests: %+v", *sent)
+			}
+		})
+	}
+}
+
+func repeatedSQLManifest() string {
+	// Shape of the official 20261101 manifest, with fixture hashes and archive.
+	const tag = "rowiktionary-20261101-change_tag.sql.gz"
+	const definition = "rowiktionary-20261101-change_tag_def.sql.gz"
+	return manifestLine(tag, "first tag") + manifestLine(definition, "first definition") +
+		manifestLine(testDumpName, testArchive) +
+		manifestLine(tag, "second tag") + manifestLine(definition, "second definition")
+}
+
+func TestDumpAllowsRepeatedUnrelatedManifestEntries(t *testing.T) {
+	c, sent, _ := setup(t, func(req *http.Request) (*http.Response, error) {
+		switch req.URL.String() {
+		case dumpBase + "/robots.txt":
+			return response(200, "User-Agent: *\n")
+		case testManifestURL:
+			r, err := response(200, repeatedSQLManifest())
+			r.ContentLength = -1
+			return r, err
+		case testArchiveURL:
+			return goodDump(req)
+		}
+		t.Fatalf("unexpected request: %s", req.URL)
+		return nil, nil
+	})
+	c.role = "script"
+	rec, err := c.get(testArchiveURL)
+	if err != nil || rec.DumpChecksum == nil || rec.DumpChecksum.SHA1 != fmt.Sprintf("%x", sha1.Sum([]byte(testArchive))) ||
+		rec.DumpChecksum.RecoveredOutcomeSHA256 != "" || len(*sent) != 3 {
+		t.Fatalf("archive receipt: %+v, requests %+v, error %v", rec, *sent, err)
+	}
+}
+
+func seedRejectedManifest(t *testing.T, c *client, body string, edit func(*dumpOutcome)) (string, string) {
+	t.Helper()
+	if _, err := c.get(dumpBase + "/robots.txt"); err != nil {
+		t.Fatal(err)
+	}
+	h, err := c.openHost(dumpHost)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := h.reserve(testManifestURL, "script"); err != nil {
+		t.Fatal(err)
+	}
+	why := stop("dump_checksum_invalid", legacyManifestDuplicate)
+	outcome := dumpOutcome{receipt: receipt{
+		URL: testManifestURL, Status: 200, Bytes: len(body), SHA256: hash([]byte(body)),
+		FetchedAt: epoch(h.state.LastStart), ReceivedAt: epoch(h.state.LastStart), FetchedByRole: "script",
+		Origin: "v5", FirstOrigin: "v5", FirstFetcher: c.fetcher, AttemptRole: "script", AttemptID: c.fetcher,
+		Headers: map[string]string{"content-length": fmt.Sprint(len(body)), "content-type": "text/plain"},
+	}, Failure: &why}
+	if edit != nil {
+		edit(&outcome)
+	}
+	if err := h.saveDumpDiagnostic(outcome.receipt, []byte(body)); err != nil {
+		t.Fatal(err)
+	}
+	path := filepath.Join(c.cache, receiptName(testManifestURL))
+	if err := h.store(path, outcome); err != nil {
+		t.Fatal(err)
+	}
+	if err := h.commitDumpOutcome(outcome); err != nil {
+		t.Fatal(err)
+	}
+	return path, h.file
+}
+
+func TestDumpReusesCompletedRejectedManifestWithoutAnotherGET(t *testing.T) {
+	c, sent, _ := mockDump(t, goodDump)
+	manifest := repeatedSQLManifest()
+	path, state := seedRejectedManifest(t, c, manifest, nil)
+	read := func(path string) []byte {
+		t.Helper()
+		body, err := os.ReadFile(path)
+		if err != nil {
+			t.Fatal(err)
+		}
+		return body
+	}
+	original, originalState := read(path), read(state)
+	originalDigest := hash(bytes.TrimSuffix(original, []byte("\n")))
+	c.cacheOnly, c.role, c.fetcher = true, "quality", "quality-reader"
+	recovered, err := c.get(testManifestURL)
+	if err != nil || recovered.DumpManifestRecoveredOutcomeSHA256 != originalDigest ||
+		recovered.SHA256 != hash([]byte(manifest)) || recovered.FirstFetcher != "dump-source" {
+		t.Fatalf("recovered manifest: %+v, error %v", recovered, err)
+	}
+	if !bytes.Equal(original, read(path)) || !bytes.Equal(originalState, read(state)) || len(*sent) != 1 {
+		t.Fatalf("offline lookup changed the original history or sent a request: %+v", *sent)
+	}
+	if _, err := os.Stat(filepath.Join(c.cache, recovered.SHA256+".body")); !errors.Is(err, os.ErrNotExist) {
+		t.Fatalf("offline recovery published a manifest body: %v", err)
+	}
+
+	c.cacheOnly, c.role = false, "script"
+	c.fetcher = "new-archive-fetcher"
+	got, err := c.get(testArchiveURL)
+	if err != nil || got.DumpChecksum == nil || got.DumpChecksum.RecoveredOutcomeSHA256 != originalDigest {
+		t.Fatalf("archive receipt: %+v, error %v", got, err)
+	}
+	c.cacheOnly, c.role = true, "factual"
+	cached, err := c.get(testArchiveURL)
+	if err != nil || cached.DumpChecksum == nil || *cached.DumpChecksum != *got.DumpChecksum ||
+		len(*sent) != 2 || (*sent)[1].url != testArchiveURL || !bytes.Equal(original, read(path)) {
+		t.Fatalf("archive reuse: %+v, requests %+v, error %v", cached, *sent, err)
+	}
+}
+
+func TestDumpRejectedManifestRecoveryFailsClosed(t *testing.T) {
+	for _, tc := range []struct {
+		name, body, failure string
+		edit                func(*dumpOutcome)
+		damageBody          bool
+		damageOutcome       bool
+	}{
+		{name: "different prior failure", failure: "incomplete_body", edit: func(o *dumpOutcome) { o.Failure.Code = "incomplete_body" }},
+		{name: "wrong prior message", edit: func(o *dumpOutcome) { o.Failure.Message = "malformed" }},
+		{name: "partial diagnostic", edit: func(o *dumpOutcome) { o.BodyProblem = "response body exceeds the retained diagnostic byte limit" }},
+		{name: "non-200 response", edit: func(o *dumpOutcome) { o.Status = 206 }},
+		{name: "encoded", edit: func(o *dumpOutcome) { o.Headers["content-encoding"] = "gzip" }},
+		{name: "range", edit: func(o *dumpOutcome) { o.Headers["content-range"] = "bytes 0-12/24" }},
+		{name: "wrong length", edit: func(o *dumpOutcome) { o.Headers["content-length"] = "0" }},
+		{name: "policy header", edit: func(o *dumpOutcome) { o.Headers["content-signal-present"] = "true" }},
+		{name: "no duplicates", body: manifestLine(testDumpName, testArchive)},
+		{name: "malformed after duplicates", body: repeatedSQLManifest() + "malformed\n"},
+		{name: "repeated target", body: repeatedSQLManifest() + manifestLine(testDumpName, testArchive)},
+		{name: "damaged diagnostic", failure: "cache_integrity", damageBody: true},
+		{name: "outcome no longer matches history", failure: "cache_integrity", damageOutcome: true},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			c, sent, _ := mockDump(t, goodDump)
+			body := tc.body
+			if body == "" {
+				body = repeatedSQLManifest()
+			}
+			path, _ := seedRejectedManifest(t, c, body, tc.edit)
+			if tc.damageBody {
+				path := filepath.Join(c.cache, hash([]byte(body))+".diagnostic")
+				if err := os.WriteFile(path, []byte("0"+body[1:]), 0600); err != nil {
+					t.Fatal(err)
+				}
+			}
+			if tc.damageOutcome {
+				var outcome dumpOutcome
+				if found, err := readJSON(path, 512*1024, &outcome); err != nil || !found {
+					t.Fatalf("reading original outcome: %v", err)
+				}
+				outcome.Headers["content-type"] = "application/octet-stream"
+				if err := writeJSON(path, outcome); err != nil {
+					t.Fatal(err)
+				}
+			}
+			want := tc.failure
+			if want == "" {
+				want = "dump_checksum_invalid"
+			}
+			_, err := c.get(testArchiveURL)
+			code(t, err, want)
+			if len(*sent) != 1 {
+				t.Fatalf("invalid recovery triggered a request: %+v", *sent)
 			}
 		})
 	}

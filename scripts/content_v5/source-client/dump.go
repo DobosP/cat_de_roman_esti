@@ -22,10 +22,11 @@ import (
 )
 
 const (
-	dumpHost         = "dumps.wikimedia.org"
-	maxDumpBytes     = 256 * 1024 * 1024
-	maxManifestBytes = 1024 * 1024
-	dumpPreviewBytes = 32 * 1024
+	dumpHost                = "dumps.wikimedia.org"
+	maxDumpBytes            = 256 * 1024 * 1024
+	maxManifestBytes        = 1024 * 1024
+	dumpPreviewBytes        = 32 * 1024
+	legacyManifestDuplicate = "published SHA-1 manifest repeats a filename"
 )
 
 var dumpDirectory = regexp.MustCompile(`^/(rowiktionary|rowiki)/([0-9]{8})/([^/]+)$`)
@@ -72,9 +73,10 @@ func (file dumpFile) suffix() string {
 }
 
 type dumpChecksum struct {
-	URL    string `json:"url"`
-	SHA256 string `json:"sha256"`
-	SHA1   string `json:"sha1"`
+	URL                    string `json:"url"`
+	SHA256                 string `json:"sha256"`
+	SHA1                   string `json:"sha1"`
+	RecoveredOutcomeSHA256 string `json:"recovered_outcome_sha256,omitempty"`
 }
 
 type dumpAttempt struct {
@@ -109,7 +111,10 @@ func parseManifest(body []byte) (map[string]string, error) {
 		}
 		name := string(match[2])
 		if _, exists := entries[name]; exists {
-			return nil, stop("dump_checksum_invalid", "published SHA-1 manifest repeats a filename")
+			// An empty digest marks an ambiguous basename, even if all
+			// occurrences list the same hash.
+			entries[name] = ""
+			continue
 		}
 		entries[name] = strings.ToLower(string(match[1]))
 	}
@@ -121,7 +126,13 @@ func (material dumpMaterial) checksumFor(file dumpFile) (dumpChecksum, error) {
 	if !ok {
 		return dumpChecksum{}, stop("dump_checksum_missing", "published SHA-1 manifest lacks the exact archive filename")
 	}
-	return dumpChecksum{material.URL, material.SHA256, digest}, nil
+	if digest == "" {
+		return dumpChecksum{}, stop("dump_checksum_invalid", "published SHA-1 manifest repeats the exact archive filename")
+	}
+	return dumpChecksum{
+		URL: material.URL, SHA256: material.SHA256, SHA1: digest,
+		RecoveredOutcomeSHA256: material.DumpManifestRecoveredOutcomeSHA256,
+	}, nil
 }
 
 func (h *hostClient) getDump(target *url.URL, rules robotRules) (dumpMaterial, error) {
@@ -216,7 +227,7 @@ func (h *hostClient) readDumpOutcome(target *url.URL) (dumpOutcome, bool, error)
 		identifier.MatchString(rec.FirstFetcher) && rec.FirstFetcher == rec.AttemptID &&
 		rec.FetchedByRole == "script" && rec.FetchedByRole == rec.AttemptRole &&
 		rec.FetchedAt > 0 && rec.FetchedAt == epoch(attempt.Started) && rec.ReceivedAt >= rec.FetchedAt && rec.ReceivedAt < 253402300800 &&
-		rec.Headers != nil
+		rec.Headers != nil && rec.DumpManifestRecoveredOutcomeSHA256 == ""
 	if outcome.Failure == nil {
 		valid = valid && rec.Status == http.StatusOK && validSHA(rec.SHA256) && rec.BodyProblem == "" &&
 			rec.Bytes > 0 && rec.Bytes <= file.limit && (rec.DumpChecksum == nil) == (file.manifest == nil)
@@ -234,7 +245,7 @@ func (h *hostClient) readDumpOutcome(target *url.URL) (dumpOutcome, bool, error)
 		return dumpOutcome{}, false, stop("cache_integrity", "invalid dump outcome or provenance")
 	}
 	if outcome.Failure != nil && rec.Status != 0 {
-		if err := h.verifyDumpDiagnostic(rec); err != nil {
+		if _, err := h.readDumpDiagnostic(rec); err != nil {
 			return dumpOutcome{}, false, err
 		}
 	}
@@ -243,6 +254,9 @@ func (h *hostClient) readDumpOutcome(target *url.URL) (dumpOutcome, bool, error)
 
 func (h *hostClient) verifyDumpOutcome(file dumpFile, outcome dumpOutcome) (dumpMaterial, error) {
 	if outcome.Failure != nil {
+		if file.manifest == nil && *outcome.Failure == stop("dump_checksum_invalid", legacyManifestDuplicate) {
+			return h.recheckRejectedManifest(file, outcome)
+		}
 		return dumpMaterial{}, *outcome.Failure
 	}
 	rec := outcome.receipt
@@ -253,11 +267,14 @@ func (h *hostClient) verifyDumpOutcome(file dumpFile, outcome dumpOutcome) (dump
 		if err != nil {
 			return dumpMaterial{}, err
 		}
-		if !found || saved.Failure != nil {
-			return dumpMaterial{}, stop("cache_integrity", "cached archive lacks its successful checksum receipt")
+		if !found {
+			return dumpMaterial{}, stop("cache_integrity", "cached archive lacks its checksum receipt")
 		}
 		manifest, err := h.verifyDumpOutcome(manifestFile, saved)
 		if err != nil {
+			if saved.Failure != nil {
+				return dumpMaterial{}, stop("cache_integrity", "cached archive lacks a verified checksum manifest")
+			}
 			return dumpMaterial{}, err
 		}
 		expected, err = manifest.checksumFor(file)
@@ -273,6 +290,46 @@ func (h *hostClient) verifyDumpOutcome(file dumpFile, outcome dumpOutcome) (dump
 		return dumpMaterial{}, err
 	}
 	return dumpMaterial{rec, entries}, nil
+}
+
+func (h *hostClient) recheckRejectedManifest(file dumpFile, outcome dumpOutcome) (dumpMaterial, error) {
+	rec := outcome.receipt
+	original := h.state.DumpAttempts[hash([]byte(rec.URL))].OutcomeSHA256
+	encoding := rec.Headers["content-encoding"]
+	declared, err := strconv.ParseInt(rec.Headers["content-length"], 10, 64)
+	if !validSHA(original) || rec.Status != http.StatusOK || rec.BodyProblem != "" || rec.Bytes <= 0 ||
+		err != nil || (declared != -1 && declared != int64(rec.Bytes)) ||
+		(encoding != "" && !strings.EqualFold(encoding, "identity")) || rec.Headers["content-range"] != "" ||
+		strings.Contains(strings.ToLower(rec.Headers["content-type"]), "text/html") {
+		return dumpMaterial{}, *outcome.Failure
+	}
+	rawOutcome, err := readBounded(filepath.Join(h.cache, receiptName(rec.URL)), 512*1024)
+	if err != nil || !bytes.HasSuffix(rawOutcome, []byte("\n")) ||
+		hash(bytes.TrimSuffix(rawOutcome, []byte("\n"))) != original {
+		return dumpMaterial{}, stop("cache_integrity", "original manifest outcome bytes do not match the recorded outcome")
+	}
+	body, err := h.readDumpDiagnostic(rec)
+	if err != nil {
+		return dumpMaterial{}, err
+	}
+	target, err := url.Parse(rec.URL)
+	if err != nil {
+		return dumpMaterial{}, stop("cache_integrity", "original manifest outcome URL is invalid")
+	}
+	if responseRefusal(target, rec, body).Code != "" || dumpResponseRefusal(rec, file, body).Code != "" {
+		return dumpMaterial{}, *outcome.Failure
+	}
+	entries, err := parseManifest(body)
+	if err != nil {
+		return dumpMaterial{}, *outcome.Failure
+	}
+	for _, digest := range entries {
+		if digest == "" {
+			rec.DumpManifestRecoveredOutcomeSHA256 = original
+			return dumpMaterial{rec, entries}, nil
+		}
+	}
+	return dumpMaterial{}, *outcome.Failure
 }
 
 func (h *hostClient) verifyDumpFile(file dumpFile, digest string, size int, expectedSHA1 string) (map[string]string, error) {
@@ -478,20 +535,21 @@ func (h *hostClient) saveDumpDiagnostic(rec receipt, body []byte) error {
 	if _, err := os.Lstat(path); errors.Is(err, os.ErrNotExist) {
 		return atomicWrite(path, body)
 	}
-	return h.verifyDumpDiagnostic(rec)
+	_, err := h.readDumpDiagnostic(rec)
+	return err
 }
 
-func (h *hostClient) verifyDumpDiagnostic(rec receipt) error {
+func (h *hostClient) readDumpDiagnostic(rec receipt) ([]byte, error) {
 	path := filepath.Join(h.cache, rec.SHA256+".diagnostic")
 	info, err := os.Lstat(path)
 	if err != nil || !info.Mode().IsRegular() || info.Size() != int64(rec.Bytes) {
-		return stop("cache_integrity", "failed dump response body is missing or has the wrong size")
+		return nil, stop("cache_integrity", "failed dump response body is missing or has the wrong size")
 	}
 	body, err := readBounded(path, dumpPreviewBytes)
 	if err != nil || len(body) != rec.Bytes || hash(body) != rec.SHA256 {
-		return stop("cache_integrity", "failed dump response body does not match its receipt")
+		return nil, stop("cache_integrity", "failed dump response body does not match its receipt")
 	}
-	return nil
+	return body, nil
 }
 
 func (h *hostClient) storeDumpPayload(target *url.URL, rec receipt, file dumpFile, body *bufio.Reader, declared int64, checksum dumpChecksum) (string, int, map[string]string, refusal) {

@@ -69,9 +69,10 @@ publisher-listed digest. The manifest bytes live in <cache>/<sha256>.body
 and the original compressed archive bytes in <cache>/<sha256>.dump, using
 their respective hashes. The URL's JSON receipt is stored at
 <cache>/<SHA-256 of the canonical URL>.receipt.json. Cache hits recheck the
-manifest receipt and body, the archive's SHA-256 and the matching published
-SHA-1 entry. Reviewer use still depends on the independent parser gate in
-ADR-0231 decision 5.
+manifest receipt and bytes, the archive's SHA-256 and the matching published
+SHA-1 entry. The archive basename must occur exactly once in the manifest.
+Other basenames may occur multiple times. Reviewer use still depends on
+the independent parser gate in ADR-0231 decision 5.
 
 A dated file GET consumes the file's attempt even on failure. Keep the
 shared host state, outcome receipts and payloads together across runs.
@@ -81,7 +82,16 @@ diagnostic retains up to 32 KiB, with body_problem set when the retained
 bytes represent a prefix or the full response could not be verified.
 Transport failures before HTTP headers have no response body. The host
 attempt history pins completed outcome metadata, and cache reuse verifies
-its diagnostic bytes. Failed outcomes cannot serve as source evidence.
+its diagnostic bytes.
+A cached manifest rejected by the former global duplicate check can be
+re-evaluated offline if it is a complete HTTP 200 response and the retained
+bytes, response policy and original outcome all verify. The original URL
+receipt and diagnostic are retained unchanged. The recovered manifest lookup
+adds dump_manifest_recovered_outcome_sha256 and a dependent archive receipt
+adds dump_checksum.recovered_outcome_sha256. Both fields pin the original
+outcome in host history. Read those manifest bytes from
+<cache>/<sha256>.diagnostic and verify the original outcome and body. Other
+failed outcomes remain terminal.
 A 429 or 5xx still parks the host. The immutable dated URL stays spent
 after the breaker expires.
 Missing evidence after a recorded attempt fails closed. A crash between

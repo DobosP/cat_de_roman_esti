@@ -32,6 +32,9 @@ type receipt struct {
 	AttemptID     string            `json:"attempt_fetcher,omitempty"`
 	BodyProblem   string            `json:"body_problem,omitempty"`
 	DumpChecksum  *dumpChecksum     `json:"dump_checksum,omitempty"`
+	// A recovered manifest marks a lookup result only. The original outcome
+	// and its digest in the request history remain unchanged.
+	DumpManifestRecoveredOutcomeSHA256 string `json:"dump_manifest_recovered_outcome_sha256,omitempty"`
 }
 
 type hostState struct {
