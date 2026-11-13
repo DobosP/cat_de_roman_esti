@@ -28,14 +28,14 @@ def digest(data):
 
 
 def read_bundle(repo, sha):
-    raw = git(repo, "show", f"{sha}:{BUNDLE}")
+    raw = git(repo, "--no-replace-objects", "show", f"{sha}:{BUNDLE}")
     require(len(raw) <= 32 * 1024 * 1024, "Content bundle exceeds 32 MiB")
     data = read_json(raw)
-    pin = re.search(rb'^const bundledSHA256 = "([0-9a-f]{64})"\r?$', git(repo, "show", f"{sha}:{BUNDLE_PIN}"),
+    pin = re.search(rb'^const bundledSHA256 = "([0-9a-f]{64})"\r?$', git(repo, "--no-replace-objects", "show", f"{sha}:{BUNDLE_PIN}"),
                     re.MULTILINE)
     require(pin is not None and pin[1].decode("ascii") == digest(raw), f"Bundle pin differs at {sha}")
     for name in SOURCE_FILES:
-        source = git(repo, "show", f"{sha}:{FIXTURES}/{name}")
+        source = git(repo, "--no-replace-objects", "show", f"{sha}:{FIXTURES}/{name}")
         text = source.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
         require(data["sources"][name] == digest(text), f"Stale source {name} at {sha}")
     return raw

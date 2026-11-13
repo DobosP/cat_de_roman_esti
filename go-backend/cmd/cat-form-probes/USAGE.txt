@@ -1,0 +1,102 @@
+cat-form-probes and build_form_probes.py
+=======================================
+
+Pilot 2 forms operator for ADR-0231 decisions 5–7. Run locally against the
+authorized private campaign root. The build requires the independent GO
+receipt for the pinned Wiktionary parser and replays its historical and
+additional live comparisons from the exact kit commit. A gate mismatch or
+unavailable cache input aborts the build. The tool has no network path.
+
+Build the native helper into private campaign scratch:
+
+  GOPROXY=off CGO_ENABLED=0 go -C go-backend build -trimpath \
+    -o <scratch>/cat-form-probes ./cmd/cat-form-probes
+
+Prepare and hash a pre-author proposal packet in private campaign scratch.
+Each item supplies its registry/proposal identifier, existing graph owner,
+and exact table surface strings, for example:
+
+  {"schema":"cat-v5-form-probe-input-1","items":[
+    {"id":"form-family-1","owner_id":"n_example","forms":["formă","forme"]}
+  ]}
+
+Build the resolver probe files:
+
+  python3 -I scripts/content_v5/build_form_probes.py build \
+    --repo <worktree> --sha <exact-kit-commit> --baseline <exact-baseline-commit> \
+    --scratch <campaign-root> --output <fresh-subdirectory-under-campaign-root> \
+    --gate <campaign-relative-reviewed-go-receipt> --gate-sha256 <hash> \
+    --proposals <campaign-relative-proposal-packet> --proposals-sha256 <hash> \
+    --binary <cat-form-probes> --binary-sha256 <hash>
+
+Keep the manifest, native result and JSON probe shards. The original dump
+and cache receipts are reused. Corpus bytes are rebuilt from the archive
+and discarded after the native scan. The manifest pins the archive and
+published checksum receipt, gate, parser, comparator, sample, proposal,
+baseline bundle, helper binary, corpus and every shard. The native result
+assigns each raw neighbor and classified nearby coverage gap to its
+proposal indexes. It preserves exact accents, spelling and byte identity.
+The per-proposal coverage gap count covers nearby page titles only. An
+unsupported paradigm can contain forms whose page title is outside the
+matching window. The aggregate coverage block describes those omissions
+and the number of observed but unconfirmed entries.
+
+The searchable scope is verified, nonredirect main-namespace titles with
+the supported standalone Romanian language heading and exact cells in
+supported literal noun and adjective tables. This adds a title when its
+Romanian heading is established even if its table is unsupported. Redirects,
+unreadable sections, other heading spellings, ambiguous layouts, ungated
+verb tables and forms absent from the archive have incomplete coverage.
+The native scan runs graph.Normalize and evaluates graph.SequenceRatio
+with the candidate key first and the probe key second, matching the serving
+direction. Its inclusive suggestion floor is .78. This includes all .84
+fuzzy ownership contenders even when they cannot win by themselves.
+
+The tracked profanity-probes.json contains folded Romanian probes for the
+child-facing resolver. Its seed records exact token and count witnesses
+from the pinned approved Romanian FrequencyWords 50k cache. The supplement
+explicitly enumerates additional severe Romanian vulgar spellings and
+common variants without extrapolating runtime stem matches. Review both
+groups against innocuous folded homographs and the exact file hash. The
+native helper verifies seed spellings under the actual baseline normalizer.
+The list is a bounded set of exact probes. Keep its SHA-256 in the train
+receipt and report the reviewed hash to Paul once. The tool does not need
+the full 50k data tracked in Git.
+
+Read native-result.json before authoring. Exact matches against the
+profanity list and newly acquired profanity resolutions are nonwaivable.
+Each unsafe native probe lists nearby proposal indexes and the individual
+changes found by applying a form alone or removing it from the tested batch.
+When a combination remains ambiguous, split the proposal and rerun rather
+than assigning unsupported blame to one form. Existing owner matches,
+reviewed-unresolved surfaces and duplicate candidate keys are also reported.
+Inspect all ordinary neighbor changes with the regular form and landing
+reviewers.
+
+After the exact forms-only candidate and bundle export are committed,
+audit all Cald targets against all shards:
+
+  python3 -I scripts/content_v5/build_form_probes.py replay \
+    --repo <worktree> --scratch <campaign-root> \
+    --output <fresh-subdirectory-under-campaign-root> \
+    --manifest <build-manifest-path> --manifest-sha256 <hash> \
+    --candidate <exact-candidate-commit> --resolver-binary <cat-resolver-diff> \
+    --resolver-binary-sha256 <hash>
+
+Each shard can also be passed to resolver_diff.py --probes. The replay
+wrapper pins every shard, runs the exact kit's resolver wrapper, verifies
+both bundles and their exact alias additions, and checks the target and
+probe coverage. It reserves automatic alias probes before the native
+resolver's input limit and tests the entire profanity set on the first
+shard. Exit 2 records a nonwaivable profanity failure in the replay
+manifest. Exit 1 indicates an invalid or failed run. Exit 0 indicates
+the replay completed without a profanity violation. The regular reviewers
+still decide each other changed Cald outcome, with unresolved corpus
+coverage visible for manual inspection. After any form drop, rebuild the
+probe packet and rerun against the resulting candidate.
+
+Python wrapper and reader have no third-party dependencies. Focused checks:
+
+  python3 -B -m unittest discover -s scripts/content_v5/tests -p test_build_form_probes.py
+  GOPROXY=off go -C go-backend test -race ./cmd/cat-form-probes
+  GOPROXY=off go -C go-backend vet ./cmd/cat-form-probes
