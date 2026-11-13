@@ -5,29 +5,74 @@ payload. At S6 the orchestrator records v5_review_binding (author_thread,
 payload_sha256 and exact per-role review references), v5_derived_view_sha256
 and the independently checked S5 v5_independence_checks. The payload digest
 covers the canonical sorted-key UTF-8 JSON of {id, kind, owner_id, forms,
-identity}; identity is the complete registry identity including selected sense,
-lemma, and synonym_lemma when relevant. Receipt titles must match these lemmas.
-Each judgment binds both hashes. Synonyms carry a separate blind-critic pass
-and independently verified receipt references for both Wiktionary entries and
-one corroborating Romanian source, plus a substitution pass. The supported
-corroborating entry is an approved Romanian Wikipedia article. Forms require
-the word's own Wiktionary table, as attested by both reviewers.
+identity}. Use the complete registry identity, including selected sense, lemma
+and synonym_lemma when relevant. Each judgment binds the payload and derived
+view hashes. Receipt titles must match the selected lemmas.
 
-Run python3 -I scripts/content_v5/alias_install.py --help. Provide the actual
-clean content/v5 SHA, immutable screen and native validator binaries and their
+Run python3 -I scripts/content_v5/alias_install.py --help. Provide the exact
+clean content/v5 SHA, immutable screen and native validator binaries with their
 digests, and the JSON batch and judgment manifest under campaign scratch.
-Each source reference points to the immutable cache/<hash>.response.json;
-the installer verifies the corresponding content-addressed body bytes.
 Use --write only for S7. Run the remaining rank/derive, export, rail, resolver
 diff, reference and HTTP checks through the existing gates.
 
+Live Wiktionary evidence
+
+Each live S5 citation points to an immutable cache/<hash>.response.json
+attempt receipt. The installer checks the content-addressed body and independent
+V5 first fetch. The corresponding canonical S2 receipt may have a .receipt.json
+suffix. Forms require their own Wiktionary table. Synonyms require a separate
+blind-critic pass, both Wiktionary selected-sense entries, a corroborating
+Romanian Wikipedia article and a substitution pass.
+
+Dump Wiktionary evidence
+
+For a noun or adjective form, the S6 registry v5_review_binding and the matching
+judgment manifest item additionally contain a dump object:
+
+  {"gate":{"path":"...","sha256":"..."},
+   "proposal":{"path":"...","sha256":"..."},
+   "transcriptions":{"factual":{"path":"...","sha256":"..."},
+                     "quality":{"path":"...","sha256":"..."}},
+   "table_kind":"noun"}
+
+The proposal and original transcriptions use DUMP_TRANSCRIPTIONS.txt. In each
+signed S5 review, include a source object with kind "dump-inflection-table",
+table_kind matching the dump binding, and source equal to the proposal's
+archive/page source object. The transcript thread IDs must match the two
+accepting, child_safe S5 judgments. The registry provenance row must carry the
+same six archive/page fields and match the archive receipt's first_fetcher,
+first_fetch_origin and fetched_by_role. Additional evidence, such as a live
+spot check, can appear as a separate citation.
+
+The hash-pinned gate document uses schema "cat-v5-wiktionary-parser-gate-1".
+It contains verdict "GO", reviewer_thread, archive (archive_url,
+archive_sha256, archive_receipt_sha256), parser_sha256, comparator_sha256,
+sample_sha256 and the original historical and fresh comparison references
+(each an object with path and sha256). The independent gate reviewer is
+distinct from the authors and both S5 reviewers. Paths are relative to the
+campaign scratch root. Retain the source client's dated archive, checksum,
+their receipts, and both samples' live HTML bodies and canonical receipts in
+cache/. Before reading form evidence, the installer uses the exact committed
+parser, comparator and sample manifests in dump_samples/<date>-{sample,cached}.json
+to replay both comparisons offline. Every result field must match the original
+reviewed reports. It then checks both transcriptions, the exact archive and
+raw revision, the proposed visible cells and eligible registry provenance.
+A dump install receipt includes dump_parser_gate_sha256 by item ID.
+
+The campaign schedules the one-in-ten live spot checks and verifies the tracked
+attribution before the first train carrying dump-derived content. It applies
+the vocative, per-form resolver and human review decisions in ADR-0231.
+
 Threat model
-The orchestrator and its committed S6 ledger are trusted to verify signatures,
-reviewer independence, the source's sense and the truth of each judgment.
-The installer binds that evidence to the reviewed forms, validates both fixture
-mirrors with the native validator and writes only those two mirrors under the
-native operator lock. Candidate JSON and source bodies are never executed.
-The checkout and campaign scratch are private to the orchestrator. Files are
-staged before entering the mirror transaction, whose rollback restores original
-bytes on a failed write. Inspect the exact mirrors on recovery after a killed
-process. Use the standard-library Python 3.12 CLI on Linux, macOS or Windows.
+
+The orchestrator and committed S6 registry are trusted to verify signatures,
+reviewer independence, the selected source sense and the truth of signed
+judgments. The independent parser-gate reviewer attests to the actual live
+comparison run and exact reports. The installer verifies those bindings and
+runs only the reviewed committed parser code. Candidate JSON and source
+bodies are data. The checkout and campaign scratch are private to the
+orchestrator. The installer stages output, validates it with the native
+validator and writes only the two fixture mirrors under the native operator
+lock. The transaction restores original bytes on a failed write. Inspect the
+exact mirrors on recovery after a killed process. Use standard-library Python
+3.12 on Linux, macOS or Windows.

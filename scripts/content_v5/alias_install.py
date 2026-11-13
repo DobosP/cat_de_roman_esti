@@ -3,8 +3,9 @@
 
 The operator supplies the exact screen executable and two independently
 produced judgment envelopes from the private pool. Candidate JSON is data,
-never code. Reviewer attestations bind an archived V5 response and its cached
-body. The screen is rerun on the actual checkout. The command writes
+never code. Reviewer attestations bind a cached V5 response or a gated dump
+revision and two independent raw-table transcriptions. The screen is rerun
+on the actual checkout. The command writes
 only the fixture mirrors in an explicitly requested clean content/v5
 checkout, rolls back on failure and leaves export, audits and gates to S7–S9.
 """
@@ -17,15 +18,20 @@ import re
 import subprocess
 import sys
 import tempfile
+from types import ModuleType
 import unicodedata
 from urllib.parse import unquote
+from xml.parsers.expat import ExpatError
 
 sys.dont_write_bytecode = True
-SCRIPTS = Path(__file__).resolve().parents[1]
+V5 = Path(__file__).resolve().parent
+SCRIPTS = V5.parent
+sys.path.insert(0, str(V5))
 sys.path.insert(0, str(SCRIPTS))
 sys.path.insert(0, str(SCRIPTS / "landing"))
 from content_file_transaction import atomic_write, file_transaction
-from content_registry import current_rows
+from content_registry import current_rows, dump_page_receipt
+import dump_transcriptions
 from support import clean_source, exact_commit, git, read_artifact, read_json, require
 
 KG = "cat_de_roman_esti/fixtures/kg_sample.json"
@@ -34,6 +40,16 @@ REGISTRY = "docs/content-registry/registry.jsonl"
 HEX = re.compile(r"[a-f0-9]{64}")
 ROLE_NAMES = ("factual", "quality")
 RO_WIKTIONARY = re.compile(r"https://ro\.wiktionary\.org/wiki/[^\s?#]+")
+PARSER_PATH = "scripts/content_v5/wiktionary_dump.py"
+COMPARATOR_PATH = "scripts/content_v5/check_cached_nouns.py"
+ARCHIVE_KEYS = ("archive_url", "archive_sha256", "archive_receipt_sha256")
+SAMPLE_KINDS = {
+    "adjective": "adjective",
+    "invariable-marked noun": "noun",
+    "plural-only noun": "noun",
+    "single table with two plurals": "noun",
+    "ordinary noun": "noun",
+}
 
 
 def sha256(raw):
@@ -96,16 +112,184 @@ def entry_key(url):
     return lemma_key(unquote(url.removeprefix("https://ro.wiktionary.org/wiki/"), errors="strict"))
 
 
-def acceptance(judgments, accepted, expected_input, scratch, registry):
+def verified_json(scratch, ref, label):
+    require(isinstance(ref, dict) and set(ref) == {"path", "sha256"}, f"Invalid {label} reference")
+    return dump_transcriptions.verified_document(scratch, ref["path"], ref["sha256"])
+
+
+def archive_binding(source):
+    return {key: source[key] for key in ARCHIVE_KEYS}
+
+
+def replay_parser_gate(scratch, day, code_and_samples, historical, fresh):
+    cache = scratch / "cache"
+    require(cache.is_dir() and cache.resolve() == cache, "Canonical dump cache required")
+    with tempfile.TemporaryDirectory(prefix="alias-gate-", dir=scratch) as name:
+        staging = Path(name)
+        for path, data in code_and_samples.items():
+            (staging / path).write_bytes(data)
+        command = [sys.executable, "-I", "-B", str(staging / Path(COMPARATOR_PATH).name), str(cache),
+                   "--sample", str(staging / f"{day}-sample.json")]
+        baseline = ["--cached-baseline", str(staging / f"{day}-cached.json")]
+        for description, report, options in (("historical", historical, baseline), ("additional live", fresh, [])):
+            replay = read_json(capture([*command, *options], f"Dump parser gate {description} replay"))
+            require(replay.get("equal") is True and canonical(replay) == canonical(report),
+                    f"Dump parser gate {description} replay differs from the reviewed comparison")
+
+
+def reviewed_parser_gate(scratch, ref, repo, sha):
+    require(repo is not None and sha is not None, "Exact checkout required for dump parser gate")
+    gate = verified_json(scratch, ref, "parser gate")
+    require(set(gate) == {"schema", "verdict", "reviewer_thread", "archive", "parser_sha256",
+                          "comparator_sha256", "sample_sha256", "historical", "fresh"}
+            and gate["schema"] == "cat-v5-wiktionary-parser-gate-1"
+            and gate["verdict"] == "GO" and isinstance(gate["reviewer_thread"], str)
+            and dump_transcriptions.THREAD.fullmatch(gate["reviewer_thread"]),
+            "A reviewed GO receipt is required for the dump parser gate")
+    archive = gate["archive"]
+    require(isinstance(archive, dict) and set(archive) == set(ARCHIVE_KEYS)
+            and isinstance(archive["archive_url"], str)
+            and all(dump_transcriptions.valid_digest(value) for value in
+                    (archive["archive_sha256"], archive["archive_receipt_sha256"], gate["sample_sha256"])),
+            "Invalid parser gate archive binding")
+    archive_match = dump_transcriptions.ARCHIVE_URL.fullmatch(archive["archive_url"])
+    require(archive_match, "Expected a dated Romanian Wiktionary archive")
+    day = archive_match[1]
+    sample_path = f"scripts/content_v5/dump_samples/{day}"
+    sample_raw = git(repo, "--no-replace-objects", "show", f"{sha}:{sample_path}-sample.json")
+    baseline_raw = git(repo, "--no-replace-objects", "show", f"{sha}:{sample_path}-cached.json")
+    sample = read_json(sample_raw)
+    baseline = read_json(baseline_raw)
+    baseline_sha = sha256(baseline_raw)
+    require(sha256(sample_raw) == gate["sample_sha256"]
+            and sample["archive_date"] == day and sample["archive_sha256"] == archive["archive_sha256"]
+            and sample["cached_comparison_sha256"] == baseline_sha
+            and baseline["archive"] == {**archive, "missing_titles": []},
+            "Dump parser gate differs from the committed samples or their archive")
+    fresh_rows = sample["pages"]
+    past_rows = baseline["cached_comparison"]
+    require(isinstance(fresh_rows, list) and len(fresh_rows) == 10, "Invalid additional live sample")
+    require(isinstance(past_rows, list) and 14 <= len(past_rows) <= 64, "Invalid historical live sample")
+    categories = [row["category"] for row in fresh_rows]
+    require(all(category in SAMPLE_KINDS for category in categories)
+            and all(categories.count(category) >= 2 for category in SAMPLE_KINDS if category != "ordinary noun"),
+            "Dump parser gate sample lacks required categories")
+    require(not {row["title"] for row in past_rows} & {row["title"] for row in fresh_rows}
+            and not {row["dump_revision"] for row in past_rows} & {row["dump_revision"] for row in fresh_rows},
+            "Additional live comparison repeats historical pages")
+
+    historical = verified_json(scratch, gate["historical"], "historical comparison")
+    fresh = verified_json(scratch, gate["fresh"], "additional live comparison")
+    for report in (historical, fresh):
+        require(report.get("equal") is True and report.get("archive") == {**archive, "missing_titles": []}
+                and all(report.get(key) == gate[key] for key in
+                        ("parser_sha256", "comparator_sha256", "sample_sha256")),
+                "Dump parser gate has an unbound or failing comparison")
+
+    parser_code = git(repo, "--no-replace-objects", "show", f"{sha}:{PARSER_PATH}")
+    comparator_code = git(repo, "--no-replace-objects", "show", f"{sha}:{COMPARATOR_PATH}")
+    require(sha256(parser_code) == digest(gate["parser_sha256"], "parser")
+            and sha256(comparator_code) == digest(gate["comparator_sha256"], "comparator"),
+            "Dump parser gate does not bind the exact committed parser and comparator")
+    code_and_samples = {
+        Path(PARSER_PATH).name: parser_code, Path(COMPARATOR_PATH).name: comparator_code,
+        f"{day}-sample.json": sample_raw, f"{day}-cached.json": baseline_raw,
+    }
+    replay_parser_gate(scratch, day, code_and_samples, historical, fresh)
+    # Execute the verified tracked bytes instead of importing a potentially stale .pyc.
+    parser = ModuleType("wiktionary_dump")
+    exec(compile(parser_code, str(repo / PARSER_PATH), "exec"), parser.__dict__)
+    return gate, parser, day
+
+
+def check_dump_proposal(scratch, dump, gate, proposal, item, row, view, review_threads):
+    require(gate["reviewer_thread"] not in {*review_threads.values(), row["author_thread"]},
+            "Parser gate reviewer must be distinct from the author and both S5 reviewers")
+    require(proposal.get("item_id") == item["id"] and proposal.get("payload") == item
+            and proposal.get("author_thread") == row["author_thread"]
+            and proposal.get("payload_sha256") == row["payload_sha256"]
+            and proposal.get("derived_view_sha256") == view
+            and dump_transcriptions.valid_source(proposal.get("source"))
+            and archive_binding(proposal["source"]) == gate["archive"],
+            f"Dump proposal differs from the reviewed payload or parser gate for {item['id']}")
+    require(set(dump["transcriptions"]) == set(ROLE_NAMES), "Exactly two S5 transcriptions are required")
+    refs = [dump["proposal"], *(dump["transcriptions"][role] for role in ROLE_NAMES)]
+    require(len({ref["path"] for ref in refs}) == 3, "Dump evidence requires distinct original artifacts")
+    transcripts = [verified_json(scratch, dump["transcriptions"][role], f"{role} transcription")
+                   for role in ROLE_NAMES]
+    for role, transcript in zip(ROLE_NAMES, transcripts, strict=True):
+        require(transcript.get("thread_id") == review_threads[role] and transcript.get("role") == role,
+                f"Dump transcription does not bind the {role} S5 reviewer")
+    report = dump_transcriptions.compare(proposal, transcripts)
+    require(report["pass"] is True and report["forms"].keys() == set(item["forms"]),
+            f"Independent dump transcriptions differ for {item['id']}")
+
+
+def matches_dump_provenance(ref, binding):
+    return (isinstance(ref, dict) and dump_page_receipt(ref)
+            and all(ref.get(key) == value for key, value in binding.items())
+            and ref.get("origin", "v5") == "v5"
+            and isinstance(ref.get("scope", ""), str) and ref.get("scope") not in {"kg-only", "model", "legacy"}
+            and type(ref.get("status", 200)) is int and ref.get("status", 200) == 200
+            and ref.get("body_problem", "") == "" and "dump_failure" not in ref)
+
+
+def verify_dump_pages(scratch, archive, parser, day, items):
+    cache = scratch / "cache"
+    require(cache.is_dir() and cache.resolve() == cache, "Canonical dump cache required")
+    titles = list(dict.fromkeys(proposal["source"]["title"] for proposal, *_ in items))
+    pages = {}
+    for offset in range(0, len(titles), parser.MAX_TITLES):
+        extracted = parser.extract(cache, day, titles[offset:offset + parser.MAX_TITLES],
+                                   expected_archive_sha256=archive["archive_sha256"])
+        require(archive_binding(extracted) == archive and not extracted["missing_titles"],
+                "Extracted dump archive or exact titles differ from the reviewed gate")
+        pages.update((page["title"], page) for page in extracted["pages"])
+    receipt, receipt_sha = parser.archive_receipt(cache, day)
+    require(receipt_sha == archive["archive_receipt_sha256"]
+            and receipt.get("url") == archive["archive_url"] and receipt.get("sha256") == archive["archive_sha256"],
+            "Verified dump archive receipt changed")
+    fetcher = receipt.get("first_fetcher")
+    require(receipt.get("fetched_by_role") == "script" and receipt.get("first_fetch_origin") == "v5"
+            and isinstance(fetcher, str) and dump_transcriptions.THREAD.fullmatch(fetcher),
+            "Dump archive lacks independent V5 script-fetch provenance")
+    provenance_fields = {"first_fetcher": fetcher, "first_fetch_origin": "v5", "fetched_by_role": "script"}
+    table_cells = {}
+    for proposal, table_kind, provenance in items:
+        source = proposal["source"]
+        page = pages[source["title"]]
+        require(page["revision_id"] == source["revision_id"]
+                and page["text_sha256"] == source["text_sha256"]
+                and sha256(page["wikitext"].encode("utf-8")) == source["text_sha256"],
+                f"Raw dump page differs for {proposal['item_id']}")
+        require(fetcher != proposal["author_thread"], "Dump archive first fetcher is the author")
+        binding = {**source, **provenance_fields}
+        require(any(matches_dump_provenance(ref, binding) for ref in provenance),
+                f"Dump source differs from eligible reviewed registry provenance for {proposal['item_id']}")
+        table = (source["title"], table_kind)
+        if table not in table_cells:
+            result = parser.parse_literal_table(source["title"], page["wikitext"], table_kind)
+            table_cells[table] = set(result["forms"])
+        require(dump_transcriptions.table_cells(proposal["proposed_cells"]) <= table_cells[table],
+                f"Proposed cells differ from the gated parser for {proposal['item_id']}")
+
+
+def acceptance(judgments, accepted, expected_input, scratch, registry, *, repo=None, sha=None):
     require(set(judgments) == {"schema", "input_sha256", "items"}
             and judgments["schema"] == "cat-v5-alias-judgments-1"
             and judgments["input_sha256"] == expected_input, "Judgments do not bind the candidate")
     require(set(judgments["items"]) == accepted.keys(), "Judgment item coverage differs")
+    gates = {}
+    dump_batches = {}
+    dump_receipts = {}
     for item_id, row in judgments["items"].items():
         expected = accepted[item_id]
         roles = ROLE_NAMES if expected["kind"] == "form" else (*ROLE_NAMES, "critic")
         durable = registry[item_id]["v5_review_binding"]
-        require(row == durable and set(row) == {"author_thread", "payload_sha256", "reviews"}
+        fields = {"author_thread", "payload_sha256", "reviews"}
+        if "dump" in row:
+            fields.add("dump")
+        require(row == durable and set(row) == fields
                 and isinstance(row["author_thread"], str) and row["author_thread"],
                 f"Judgment manifest differs from reviewed registry evidence for {item_id}")
         identity = registry[item_id]["identity"]
@@ -123,7 +307,23 @@ def acceptance(judgments, accepted, expected_input, scratch, registry):
             "reviewer_identity_leaks_checked": True, "source_reuse_checked": True,
         }, f"S5 independence checks are incomplete for {item_id}")
         require(set(row["reviews"]) == set(roles), f"Missing independent evidence for {item_id}")
+        proposal = None
+        if "dump" in row:
+            dump = row["dump"]
+            require(expected["kind"] == "form" and isinstance(dump, dict)
+                    and set(dump) == {"gate", "proposal", "transcriptions", "table_kind"}
+                    and dump["table_kind"] in {"noun", "adjective"}, f"Invalid dump form binding for {item_id}")
+            ref = dump["gate"]
+            require(isinstance(ref, dict) and set(ref) == {"path", "sha256"}
+                    and isinstance(ref["path"], str), "Invalid parser gate reference")
+            gate_key = (ref["path"], digest(ref["sha256"], "parser gate"))
+            if gate_key not in gates:
+                gates[gate_key] = reviewed_parser_gate(scratch, ref, repo, sha)
+            gate, parser, day = gates[gate_key]
+            proposal = verified_json(scratch, dump["proposal"], "dump proposal")
+
         threads = {row["author_thread"]}
+        review_threads = {}
         evidence_paths = set()
         for role in roles:
             ref = row["reviews"][role]
@@ -140,6 +340,7 @@ def acceptance(judgments, accepted, expected_input, scratch, registry):
             thread = review["thread_id"]
             require(isinstance(thread, str) and thread and thread not in threads, "Review threads must be distinct")
             threads.add(thread)
+            review_threads[role] = thread
             if role == "critic":
                 require(review.get("verdict") == "pass", f"Blind critic did not pass {item_id}")
                 continue
@@ -147,6 +348,11 @@ def acceptance(judgments, accepted, expected_input, scratch, registry):
                     f"{role} judgment did not accept {item_id}")
             sources = review["sources"]
             require(isinstance(sources, list), f"Invalid sources for {item_id}")
+            if proposal is not None:
+                citation = {"kind": "dump-inflection-table", "source": proposal.get("source"),
+                            "table_kind": dump["table_kind"]}
+                require(citation in sources, f"{role} does not cite the exact dump table for {item_id}")
+                continue
             wiktionary = set()
             romanian = set()
             for source in sources:
@@ -167,6 +373,17 @@ def acceptance(judgments, accepted, expected_input, scratch, registry):
             else:
                 require(expected_lemmas <= wiktionary and romanian and review.get("substitution_pass") is True,
                         f"{role} synonym evidence incomplete for {item_id}")
+
+        if proposal is not None:
+            check_dump_proposal(scratch, dump, gate, proposal, frozen, row, view, review_threads)
+            archive = gate["archive"]
+            archive_key = tuple(archive[key] for key in ARCHIVE_KEYS)
+            _, _, _, items = dump_batches.setdefault(archive_key, (archive, parser, day, []))
+            items.append((proposal, dump["table_kind"], registry[item_id]["provenance"]))
+            dump_receipts[item_id] = gate_key[1]
+    for batch in dump_batches.values():
+        verify_dump_pages(scratch, *batch)
+    return dump_receipts
 
 
 def canonical(value):
@@ -294,7 +511,7 @@ def main(argv=None):
             require(registry_raw.endswith(b"\n"), "Registry journal has an incomplete tail")
             registry = current_rows((read_json(line) for line in registry_raw.split(b"\n")[:-1]), repo)
             require_reviewed_pool(registry, selected)
-            acceptance(judgments, selected, sha256(candidate), scratch, registry)
+            dump_receipts = acceptance(judgments, selected, sha256(candidate), scratch, registry, repo=repo, sha=sha)
             fixture = generate(raw, selected)
             staged = staging / "kg_sample.json"
             staged.write_bytes(fixture)
@@ -308,8 +525,9 @@ def main(argv=None):
             "screen_executable_sha256": args.screen_sha256, "validator_executable_sha256": args.cat_content_sha256,
             "previous_kg_sha256": sha256(raw), "generated_kg_sha256": sha256(fixture),
             "items": selected,
+            **({"dump_parser_gate_sha256": dump_receipts} if dump_receipts else {}),
         }, ensure_ascii=True, sort_keys=True))
-    except (KeyError, TypeError, OSError, ValueError, subprocess.SubprocessError) as exc:
+    except (KeyError, TypeError, OSError, ValueError, subprocess.SubprocessError, ExpatError) as exc:
         parser.exit(1, f"alias install: {exc}\n")
     return 0
 
