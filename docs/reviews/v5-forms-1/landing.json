@@ -1,0 +1,82 @@
+{
+  "actual_landing_at": "2026-11-13T14:02:18+00:00",
+  "actual_local_landed": true,
+  "baseline": "c51bf6a36c3bcd63fd1d60908f200851a44245cc",
+  "candidate": "48c92469c594454a50d651e8eab1f42ecc12f1e0",
+  "evidence": {
+    "4i": {
+      "bytes": 1269,
+      "path": "forms-1-rebuild/exact-4i/results.json",
+      "sha256": "bb1b2635c4ffdc82d23bf74d5c2cd82e13302d12bc88d505beed6748b85ae551"
+    },
+    "assembly": {
+      "bytes": 408,
+      "path": "forms-1-rebuild/assembly.json",
+      "sha256": "8a6c115700e60f7be1f953bc851cbc810d3e6c63bb1faa68793b61ec0338fcd6"
+    },
+    "build": {
+      "bytes": 8023,
+      "path": "forms-1-rebuild/exact-build.json",
+      "sha256": "4c65f14cdcedc5ff3dd79ec488d444581a6c1af9683e950c6a0124dadebcf443"
+    },
+    "http-play": {
+      "bytes": 286,
+      "path": "forms-1-rebuild/http-play.json",
+      "sha256": "0db19bf73992bfbceb5061ec442e367b7d69bb207417e69a1a5685bbb1d92997"
+    },
+    "http-transcript": {
+      "bytes": 484,
+      "path": "forms-1-rebuild/exact-play.jsonl",
+      "sha256": "e38d8ccfb155f0b56a66e4c60bcb371d653af061e3d80d88806ce0e3635d0574"
+    },
+    "landing-review": {
+      "bytes": 851,
+      "path": "forms-1-rebuild/landing-review.json",
+      "sha256": "39a0c95ac583be424c73bfa66beeb22472cd338e6d2cc1b9f8a341da67010e71"
+    },
+    "pin-changes": {
+      "bytes": 1093,
+      "path": "forms-1-rebuild/pin-changes.json",
+      "sha256": "a3c8bcd75b81c818ccdd4ec05f316813880ab68881517c0864a9a4832732c16e"
+    },
+    "pin-review": {
+      "bytes": 881,
+      "path": "forms-1-rebuild/pin-review.json",
+      "sha256": "6b51935ca4ddc3e68e55b5f1c0f5117ab9f6a5218cab43aa41fcc7521978f2e2"
+    },
+    "reference": {
+      "bytes": 720,
+      "path": "forms-1-rebuild/reference.json",
+      "sha256": "8b017302145b6927d9f73f6e53b6f9879d9565fe9ba320b1c8e0361ce638b1e1"
+    },
+    "reference-capture": {
+      "bytes": 845,
+      "path": "forms-1-rebuild/reference-capture.json",
+      "sha256": "8c6a0f5a7913c9f4ee5f19a934866a6ec2cf9d7d24c04fc8ff895b30919d8b66"
+    },
+    "reference-corpus": {
+      "bytes": 33336,
+      "path": "forms-1-rebuild/source30-raw.json.gz",
+      "sha256": "6013a42a2df2f13e3367cf64cccfedaa099d8343c50138304c2c683da334aba9"
+    },
+    "reference-replay": {
+      "bytes": 624,
+      "path": "forms-1-rebuild/exact-native-replay-envelope.json",
+      "sha256": "4f9493ac1311f01e1ea47af38d67a0a019f436c7209684181334268ce9b32dbb"
+    }
+  },
+  "gui_gates": false,
+  "item_ids": [
+    "v5-f2:usturoi"
+  ],
+  "observed_reflog": "merge 48c92469c594454a50d651e8eab1f42ecc12f1e0: Fast-forward",
+  "operator": "agent:codex",
+  "prescribed_command": [
+    "git",
+    "merge",
+    "--ff-only",
+    "48c92469c594454a50d651e8eab1f42ecc12f1e0"
+  ],
+  "schema": "cat-v5-landing-1",
+  "train_id": "v5-forms-1"
+}

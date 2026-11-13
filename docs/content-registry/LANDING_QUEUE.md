@@ -65,3 +65,7 @@ Exact Source28 `c423ce996ad94a36da021d8ed9852fe08aa491b0` added Știință/norma
 Valid until: a relevant source or runtime change — then treat as history.
 
 Exact Source29 `0fda2bada38c7611615b43bdd590f87849f55d9f` added Viață de român/greu `cx_viata_de_roman_386`. Paul held the landing after qualification and then asked for it; it was fast-forwarded from `73b0c0ac47890fbcd2b1ffe6333f0f7eaa2b1b5f` at 2026-11-12T20:19:57Z. The nineteen-board V4 prefix contains twelve Conexiuni boards, two Cald targets and five Lanț routes. All 79 Conexiuni holds and shared vocabulary were preserved. V4 is stopped. [Exact receipt](../reviews/v4-c44-viata-de-roman/landing.json).
+
+## V5 train v5-forms-1
+
+Local main advanced from `c51bf6a36c3bcd63fd1d60908f200851a44245cc` to `48c92469c594454a50d651e8eab1f42ecc12f1e0` at 2026-11-13T14:02:18+00:00 with 1 items. [Landing receipt](../reviews/v5-forms-1/landing.json).
