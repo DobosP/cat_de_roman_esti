@@ -227,3 +227,5 @@ Parallel lanes also allocated0188/0189 independently. All four full-filename bod
 - [0228](0228-policy-only-source-hosts.md) — Paul approves three policy-only hosts for primary terms and licence inspection under the existing V4 source controls.
 
 - [0229](0229-native-quick-review-and-rubric-requalification.md) — native quick proof/raw/full-review tools, explicit historical reconstruction, scoped source/cache reuse and fresh unchanged Source27 requalification; no content or owner-policy grant.
+
+- [0230](0230-content-loop-v5.md) — content loop V5: counted Codex goal, trains of 6+ boards and weekly forms, ro.wiktionary word evidence, path-level robots refusals, all lanes open as their tools land; catalog reuse decided after the pilot.

@@ -23,7 +23,7 @@ transitions from immutable Git baseline `6b67eaa4b9f92dab60f96f7b03b8fa617d881ae
 All ten prefix boards won and reloaded over HTTP; every cohort's independent corpus matched
 1,206 cases. All 79 Conexiuni locks and all 87 owner-held rows remain unchanged.
 Later loop staging is separate from this landed product inventory.
-The [V4 procedure](../CONTENT_LOOP.md) governs future cohorts. Historical V3 landings are in
+The [V5 procedure](../CONTENT_LOOP.md) governs future trains. Historical V3 landings are in
 [ADR-0225](../adr/0225-retire-v3-content-loop-artefacts.md).
 
 C6 receipts bind landed product `cc905fbb`. The earlier C1–C5 prefix remains historical.

@@ -12,7 +12,7 @@ For version scope and outcome reporting, see
 [ADR-0113](adr/0113-outcome-based-version-batches.md). Capture the baseline commit before
 authoring so the final inventory comparison covers the whole batch.
 
-Follow the [V4 content loop](CONTENT_LOOP.md) ([ADR-0226](adr/0226-content-loop-v4.md))
+Follow the [V5 content loop](CONTENT_LOOP.md) ([ADR-0230](adr/0230-content-loop-v5.md))
 for branch, cadence, role separation, owner holds and local landing. Work in `content/v4`
 with cohort evidence under `~/work/_temp/content__v4/<cohort>/`. The class P rails remain
 bound by [ADR-0212](adr/0212-bounded-content-workflow-repair.md). A KG change is class G.

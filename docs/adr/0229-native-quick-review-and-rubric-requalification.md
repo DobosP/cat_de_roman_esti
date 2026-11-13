@@ -3,7 +3,7 @@ Valid until: this M3 technical contract changes or is superseded — then treat 
 # ADR-0229: Native quick review and current-rubric requalification
 
 Date: 2026-11-11
-Status: proposed technical implementation; operational and release qualification pending.
+Status: proposed technical implementation; operational and release qualification pending. Its contract for the Quick install path was accepted by Paul in [ADR-0230](0230-content-loop-v5.md) (2026-11-13), to be reviewed once its real cost is measured; the tooling landed at `e8b2d540` and the five-case gold set was ratified on 2026-11-11.
 Decider: existing ADR-0226 implementation authority; no new owner ruling is attributed.
 
 ## Context

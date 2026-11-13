@@ -13,14 +13,14 @@ retry_when as prerequisite, a relative ref in file:line form and the receipt fil
 sha256. The referenced JSON line must carry candidate_id, prerequisite, previous_sha256
 and verdict set to resolved. Owner-answer and permanent holds stay locked in Milestone 0.
 The view command emits one current row per ID and optionally filters by state. Candidate
-evidence, review and installation gates live in the [V4 procedure](../CONTENT_LOOP.md).
+evidence, review and installation gates live in the [V5 procedure](../CONTENT_LOOP.md).
 
 Regenerate into a new directory from the repository root with Python 3.9 or newer and Git.
 The converter reads committed inputs from the pinned V3 retirement baseline.
 
 ~~~sh
 python3 -I scripts/content_registry.py seed --repo . --seed /path/to/v3-seed --output /path/to/new-output
-python3 -I scripts/content_registry.py check docs/content-registry/registry.jsonl
+python3 -I scripts/content_registry.py check --evidence-root . docs/content-registry/registry.jsonl
 ~~~
 
 | Input scope | Rows |

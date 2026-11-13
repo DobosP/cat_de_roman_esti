@@ -1,6 +1,6 @@
 # V4 owner queue
 
-The [V4 procedure](../CONTENT_LOOP.md) routes living-person proposals, source-policy
+The [V5 procedure](../CONTENT_LOOP.md) routes living-person proposals, source-policy
 refusals, approval-bound rows and other owner decisions here. Append Paul's verbatim answer
 with its date and exact scope; [ADR-0227](../adr/0227-owner-qualified-test-pin-delegation.md)
 contains the complete latest question and all three selected-answer receipts.
@@ -31,3 +31,5 @@ other standing rulings. The 79 held Conexiuni boards remain locked. Bare *sucito
 Minors are excluded from name entries; living-person proposals wait here.
 
 - **Foundation policy-host refusal, 2026-11-10.** `foundation.wikimedia.org` is dropped for this V4 run after robots refused `/wiki/Special:MyLanguage/Policy:Wikimedia_Foundation_User-Agent_Policy` before its GET. This applies the standing refusal rule alongside the policy-only grant in [ADR-0228](../adr/0228-policy-only-source-hosts.md). The earlier permitted Romanian and English terms captures remain evidence. Full source-client configuration approval and remaining policy closure are pending. Execution receipt `/home/dobo/work/_temp/content__v4/tooling/m2-policy-reader-v2/execution.json`, SHA-256 `77c1969064edbbfa6b17455858d9800fc4c60b538268a69dc207690d72362afd`.
+
+- **dexonline refusal resolved, 2026-11-13.** Paul chose ro.wiktionary inflection tables as word and form evidence; dexonline is not used in V5. He also replaced the whole-host robots rule with a path-level one and allowed one question when two of his rules collide. Verbatim answers: [ADR-0230](../adr/0230-content-loop-v5.md) owner log.
