@@ -2,8 +2,11 @@
 
 import hashlib
 import json
+import os
 from pathlib import Path
+import subprocess
 import sys
+import tempfile
 import unittest
 from unittest.mock import patch
 
@@ -17,6 +20,61 @@ BASE = "a" * 40
 
 
 class CloseLandingTests(unittest.TestCase):
+    def test_write_preserves_native_evidence_and_rolls_back_owned_outputs(self):
+        scratch = Path(os.environ.get("CAT_V5_TEST_SCRATCH", Path.cwd())).resolve()
+        receipt = "docs/reviews/v5-forms-1/landing.json"
+        saved = {close.REGISTRY: b"", close.STATUS: b"previous status", close.QUEUE: b"previous queue"}
+        outputs = {**dict.fromkeys(saved, b"updated"), receipt: b"landing receipt"}
+        outputs[close.REGISTRY] = b""
+        for existing_parent in (True, False):
+            with self.subTest(existing_parent=existing_parent), tempfile.TemporaryDirectory(
+                prefix="closeout-rollback-", dir=scratch,
+            ) as name:
+                repo = Path(name)
+                (repo / "docs/reviews").mkdir(parents=True)
+                (repo / close.REGISTRY).parent.mkdir()
+                for relative, data in saved.items():
+                    (repo / relative).write_bytes(data)
+                path = repo / receipt
+                evidence = path.parent / "native" / "review.json"
+                if existing_parent:
+                    evidence.parent.mkdir(parents=True)
+                    evidence.write_bytes(b"native evidence")
+
+                def fail_docs(*args, **kwargs):
+                    self.assertEqual(path.read_bytes(), outputs[receipt])
+                    raise subprocess.CalledProcessError(1, "cat-doc-check")
+
+                with patch.object(close, "git"), patch.object(close.subprocess, "run") as docs:
+                    docs.side_effect = fail_docs
+                    with self.assertRaises(subprocess.CalledProcessError):
+                        close.write(repo, outputs, Path("cat-doc-check"))
+                    for relative, data in saved.items():
+                        self.assertEqual((repo / relative).read_bytes(), data)
+                    self.assertFalse(path.exists())
+                    self.assertEqual(path.parent.is_dir(), existing_parent)
+                    if existing_parent:
+                        self.assertEqual(evidence.read_bytes(), b"native evidence")
+
+                    if existing_parent:
+                        path.symlink_to(path.parent / "missing.json")
+                        with self.assertRaisesRegex(ValueError, "Landing receipt already exists"):
+                            close.write(repo, outputs, Path("cat-doc-check"))
+                        path.unlink()
+                    else:
+                        path.parent.symlink_to(repo / "docs/reviews/missing", target_is_directory=True)
+                        with self.assertRaisesRegex(ValueError, "Landing directory must be a real directory"):
+                            close.write(repo, outputs, Path("cat-doc-check"))
+                        path.parent.unlink()
+
+                    docs.side_effect = None
+                    close.write(repo, outputs, Path("cat-doc-check"))
+                    with self.assertRaisesRegex(ValueError, "Landing receipt already exists"):
+                        close.write(repo, outputs, Path("cat-doc-check"))
+                self.assertEqual(path.read_bytes(), outputs[receipt])
+                if existing_parent:
+                    self.assertEqual(evidence.read_bytes(), b"native evidence")
+
     def test_transitions_preserve_history_and_bind_receipt(self):
         item = {"id": "a", "state": "reviewed", "holds": [], "dependencies": [],
                 "co_landing_group": None, "payload": {"forms": ["nuci"]}}

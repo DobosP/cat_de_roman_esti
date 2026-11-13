@@ -464,7 +464,9 @@ def expected(repo, scratch, manifest):
             "Candidate changed protected registry state before closeout")
     check_scope(scratch, documents, delta, ids, registry, bundle)
     evidence = check_reference(repo, scratch, candidate, bundle, evidence, documents)
-    path = f"docs/reviews/v5-{train}/landing.json"
+    train_dir = train if train.startswith("v5-") else f"v5-{train}"
+    docs_path = f"reviews/{train_dir}/landing.json"
+    path = f"docs/{docs_path}"
     receipt = json_bytes({
         "schema": "cat-v5-landing-1", "train_id": train, "actual_local_landed": True,
         "baseline": base, "candidate": candidate, "actual_landing_at": when.isoformat(),
@@ -482,7 +484,7 @@ def expected(repo, scratch, manifest):
             "Unexpected STATUS layout")
     old = lines[2].rstrip("\r\n")
     headline = f"Last verified: {when.date().isoformat()} — V5 train `{train}` landed locally at `{candidate}`."
-    link = f" [Landing receipt](reviews/v5-{train}/landing.json)."
+    link = f" [Landing receipt]({docs_path})."
     if " — V5 train " in old:
         previous = ""
     else:
@@ -492,7 +494,7 @@ def expected(repo, scratch, manifest):
     queue_entry = (
         f"\n## V5 train {train}\n\n"
         f"Local main advanced from `{base}` to `{candidate}` at {when.isoformat()} "
-        f"with {len(ids)} items. [Landing receipt](../reviews/v5-{train}/landing.json).\n"
+        f"with {len(ids)} items. [Landing receipt](../{docs_path}).\n"
     ).encode()
     return {REGISTRY: updated, STATUS: "".join(lines).encode("utf-8"),
             QUEUE: queue + queue_entry, path: receipt}
@@ -506,9 +508,12 @@ def write(repo, outputs, doc_checker):
     path = repo / receipt
     require(path.parent.parent.resolve() == path.parent.parent and path.parent.parent.is_dir(),
             "Receipt parent must be a canonical tracked docs directory")
-    require(not path.exists() and not path.is_symlink(), "Landing receipt already exists")
-    require(not path.parent.exists() and not path.parent.is_symlink(), "Landing directory already exists")
-    path.parent.mkdir(mode=0o755)
+    require(not path.parent.is_symlink() and (not path.parent.exists() or path.parent.is_dir()),
+            "Landing directory must be a real directory")
+    require(not path.is_symlink() and not path.exists(), "Landing receipt already exists")
+    created_parent = not path.parent.exists()
+    if created_parent:
+        path.parent.mkdir(mode=0o755)
     done = []
     try:
         for name, data in outputs.items():
@@ -526,7 +531,8 @@ def write(repo, outputs, doc_checker):
         finally:
             try:
                 path.unlink(missing_ok=True)
-                path.parent.rmdir()
+                if created_parent:
+                    path.parent.rmdir()
             except OSError as cleanup:
                 raise RuntimeError(f"Closeout failed: {original}; receipt cleanup also failed: {cleanup}") from original
         raise
