@@ -1,0 +1,89 @@
+Cat content V5 source client
+
+From the task worktree, build the standalone Go 1.27.3 module into campaign
+scratch. Use a single shared cache across jobs and campaign runs so source
+spacing, UTC daily budgets and Retry-After survive a process or run change.
+
+  go -C scripts/content_v5/source-client build -o <scratch>/content-source .
+  <scratch>/content-source --cache <scratch>/cache --run <campaign-id> \
+    --role factual --fetcher <thread-id> --cache-only \
+    --legacy-cache <read-only-v4-cache> https://ro.wiktionary.org/wiki/mas%C4%83
+
+Drop --cache-only to allow new reads. Keep one stable --run ID through retries
+and resumes. Set --fetcher to the real script or thread ID. Scope and host
+refusals apply to cache hits too. A normal lookup checks cached robots before
+the cached content. First-fetch fields are retained on cache hits and across
+transient HTTP retries. The first_fetch_origin field distinguishes
+legacy from V5 first fetches even when a later V5 response replaces a legacy
+transient response. Legacy receipts preserve their original fetched_by_role
+and fetched_at without inventing a thread ID. Only a V5 first fetch by a
+non-author can satisfy the independent first-fetcher requirement. A client
+receipt authenticates neither the caller nor the source claim. Reviewers
+still read the source and judge the evidence independently.
+
+One successful lookup prints one JSON receipt. Read its body from
+<cache>/<sha256>.body, using the legacy directory if origin is "legacy".
+Errors use JSON on stderr with code, message and retry_at when known. Non-200
+content responses remain in scratch for diagnosis. Persistent 429 and 5xx
+responses park the host, including cached lookups, until retry_at. The cap counts all network
+request starts, including robots, redirects and failed attempts. A cache hit
+consumes no reads. Cache misses return cache_miss in cache-only mode.
+
+  <scratch>/content-source --cache <scratch>/cache --run <campaign-id> \
+    --role script --fetcher <script-id> --owner-queue
+  <scratch>/content-source --cache <scratch>/cache --run <campaign-id> \
+    --role policy --fetcher <thread-id> --refuse-host <approved-host> \
+    --reason "<one-line terms or crawler policy finding>"
+
+The owner queue returns one entry per refused host in this run, with host,
+run, code, reason and UTC timestamp. An interrupted read with no verifiable
+receipt appears as source_recovery_required once for that host alongside
+the other hosts' entries. Its timestamp is the original request start. The
+underlying refusal and interruption state persist under the campaign cache. Use the refusal command for a terms or crawler block found during
+policy inspection that the automatic checks cannot recognize. For authorized
+policy inspection, a retrieved terms receipt is returned once and the host
+then drops for the run. A robots path refusal drops that URL without an owner
+queue entry. For port 8077, the documented RO-EDU endpoint uses HTTP and the
+V5 contract requires HTTPS. The client reports localhost_protocol_conflict
+and queues it on an HTTP URL or failure to complete local HTTPS. It makes no
+plaintext request and never disables certificate verification.
+
+Threat model
+
+Remote responses, robots directives and redirects are untrusted. The client
+checks the literal HTTPS host and permitted paths before each GET. The bare
+Wikidata spelling resolves locally to the approved www spelling. Redirects
+are evaluated one at a time and can only stay on the same HTTPS host. The
+client disables ambient proxies and sends no credentials, cookies or
+referer. Remote DNS answers must be publicly routable candidates, and the
+local grant is dialed only at 127.0.0.1:8077. Transport uses system roots,
+bounds header size and body reads, and never renders or runs response bodies.
+An oversized or partial body is retained with an explicit body_problem and
+cannot become evidence. A failed network attempt has no HTTP receipt.
+
+The cache is trusted campaign scratch with one writer and is not a sandbox
+for hostile local operators. Do not use a public or shared-writable
+directory or point the writable cache into the legacy cache. URL-keyed
+receipts bind size and SHA-256 to their body file; a missing or altered body
+fails closed. A per-host request reservation is written before any GET and
+names the immutable response receipt. If a process stops after that receipt
+is saved, the next lookup recovers the URL pointer and applies the response’s
+breaker or policy refusal to the original run. If the response receipt is
+unavailable, the host parks with source_recovery_required and the other
+hosts remain available. Keep the interrupted state for investigation. A stale
+.v5-lock parks reads until the operator confirms no client is running and
+removes the empty lock directory. Use a local filesystem. First-fetch roles depend on
+the orchestrator supplying the real IDs and keeping legacy input read-only.
+The client preserves Content-Signal and known crawler and terms indicators.
+It cannot interpret arbitrary legal text or detect every challenge page.
+Only receipt metadata and a short paraphrase go into tracked docs.
+
+Focused checks
+
+  go -C scripts/content_v5/source-client test -count=1 -race ./...
+  go -C scripts/content_v5/source-client vet ./...
+  CGO_ENABLED=0 GOOS=<linux|darwin|windows> GOARCH=amd64 \
+    go -C scripts/content_v5/source-client build -o <scratch>/<binary> .
+
+Tests use a mocked RoundTripper and clock. Use campaign scratch for temporary
+and build caches. The binary has no third-party dependencies.
