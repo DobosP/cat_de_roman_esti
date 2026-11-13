@@ -20,6 +20,7 @@ type source struct {
 }
 
 var sources = map[string]source{
+	dumpHost:                    {10 * time.Second, 20, false},
 	"ro.wikipedia.org":          {10 * time.Second, 20, false},
 	"ro.wiktionary.org":         {10 * time.Second, 20, false},
 	"www.wikidata.org":          {10 * time.Second, 20, false},
@@ -84,6 +85,13 @@ func admit(raw string, role string) (*url.URL, error) {
 	}
 	if _, err := url.QueryUnescape(target.RawQuery); err != nil {
 		return nil, stop("url_denied", "malformed URL query")
+	}
+	if target.Host == dumpHost {
+		_, fileAllowed := datedDump(target)
+		if (target.Path != "/robots.txt" && !fileAllowed) || strings.Contains(escaped, "%") ||
+			target.RawQuery != "" || target.ForceQuery {
+			return nil, stop("url_denied", "Wikimedia dump reads require an approved, literally dated file or robots.txt")
+		}
 	}
 	target.RawPath = normalizeOctets(target.EscapedPath())
 	target.RawQuery = normalizeOctets(target.RawQuery)

@@ -23,8 +23,8 @@ still read the source and judge the evidence independently.
 
 One successful lookup prints one JSON receipt. Read its body from
 <cache>/<sha256>.body, using the legacy directory if origin is "legacy".
-Errors use JSON on stderr with code, message and retry_at when known. Non-200
-content responses remain in scratch for diagnosis. Persistent 429 and 5xx
+Errors use JSON on stderr with code, message and retry_at when known. For ordinary page reads,
+non-200 responses and their bodies remain in scratch for diagnosis. Persistent 429 and 5xx
 responses park the host, including cached lookups, until retry_at. The cap counts all network
 request starts, including robots, redirects and failed attempts. A cache hit
 consumes no reads. Cache misses return cache_miss in cache-only mode.
@@ -47,6 +47,48 @@ queue entry. For port 8077, the documented RO-EDU endpoint uses HTTP and the
 V5 contract requires HTTPS. The client reports localhost_protocol_conflict
 and queues it on an HTTP URL or failure to complete local HTTPS. It makes no
 plaintext request and never disables certificate verification.
+
+Dated Romanian Wikimedia dumps
+
+  <scratch>/content-source --cache <scratch>/cache --run v5-pilot-2 \
+    --role script --fetcher <script-id> \
+    https://dumps.wikimedia.org/rowiktionary/20261101/rowiktionary-20261101-pages-articles.xml.bz2
+
+The exact allowed filenames are <project>-YYYYMMDD-sha1sums.txt for
+rowiktionary or rowiki, rowiktionary-YYYYMMDD-pages-articles.xml.bz2,
+rowiki-YYYYMMDD-all-titles-in-ns0.gz and rowiki-YYYYMMDD-redirect.sql.gz.
+The dated directory and filename must agree. The host's robots.txt uses the
+ordinary policy route. Each file requires one sequential GET, with at least
+10 seconds between starts and 20 reads per UTC day across the host. The
+initial dated reads require role script. Factual and quality reviewers may
+use --cache-only with their own role and ID to revalidate a receipt.
+
+The archive receipt adds dump_checksum.url and dump_checksum.sha256 for
+the exact checksum manifest and dump_checksum.sha1 for the archive's
+publisher-listed digest. The manifest bytes live in <cache>/<sha256>.body
+and the original compressed archive bytes in <cache>/<sha256>.dump, using
+their respective hashes. The URL's JSON receipt is stored at
+<cache>/<SHA-256 of the canonical URL>.receipt.json. Cache hits recheck the
+manifest receipt and body, the archive's SHA-256 and the matching published
+SHA-1 entry. Reviewer use still depends on the independent parser gate in
+ADR-0231 decision 5.
+
+A dated file GET consumes the file's attempt even on failure. Keep the
+shared host state, outcome receipts and payloads together across runs.
+A failed HTTP response keeps its status, headers, first fetch and refusal
+code. Its receipt hashes the bytes in <cache>/<sha256>.diagnostic. The
+diagnostic retains up to 32 KiB, with body_problem set when the retained
+bytes represent a prefix or the full response could not be verified.
+Transport failures before HTTP headers have no response body. The host
+attempt history pins completed outcome metadata, and cache reuse verifies
+its diagnostic bytes. Failed outcomes cannot serve as source evidence.
+A 429 or 5xx still parks the host. The immutable dated URL stays spent
+after the breaker expires.
+Missing evidence after a recorded attempt fails closed. A crash between
+publishing a verified payload and recording its outcome may leave an orphan
+payload that the client cannot return. Keep the interrupted state for
+investigation and prune orphan payloads in campaign scratch once verified
+unreferenced.
 
 Threat model
 
@@ -76,6 +118,19 @@ removes the empty lock directory. Use a local filesystem. First-fetch roles depe
 the orchestrator supplying the real IDs and keeping legacy input read-only.
 The client preserves Content-Signal and known crawler and terms indicators.
 It cannot interpret arbitrary legal text or detect every challenge page.
+Dated dump URLs require a direct complete response, with no redirects or
+HTTP content coding. The client requests identity encoding and leaves
+archives compressed. A stream writes at most 256 MiB for an archive or
+1 MiB for a manifest. Archive requests have a 15-minute deadline.
+Manifest requests and early body diagnostics have a 30-second deadline.
+The first 32 KiB are checked for recognized terms or crawler markup,
+including with missing or misleading Content-Type.
+A hash or transport failure discards the temporary payload and retains
+only the bounded HTTP diagnostic. The only accepted SHA-1 is the unique exact basename
+entry in the corresponding dated Wikimedia manifest, retrieved over
+verified HTTPS. SHA-256 pins the exact archive bytes for later review.
+The shared cache lock serializes downloads and protects the durable URL
+attempt history. Use one trusted cache for the campaign.
 Only receipt metadata and a short paraphrase go into tracked docs.
 
 Focused checks

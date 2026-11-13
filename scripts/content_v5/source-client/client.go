@@ -49,6 +49,12 @@ func (c *client) openHost(host string) (*hostClient, error) {
 			return nil, stop("cache_integrity", "invalid owner queue entry")
 		}
 	}
+	for key, attempt := range h.state.DumpAttempts {
+		if host != dumpHost || !validSHA(key) || attempt.Started.IsZero() || attempt.Started.After(h.state.LastStart) ||
+			attempt.OutcomeSHA256 != "" && !validSHA(attempt.OutcomeSHA256) {
+			return nil, stop("cache_integrity", "invalid dump request history")
+		}
+	}
 	return h, h.recover()
 }
 
@@ -69,6 +75,9 @@ func (h *hostClient) recover() error {
 		!identifier.MatchString(pending.Run) || !identifier.MatchString(pending.Fetcher) ||
 		!roles[pending.Role] || pending.Role == "legacy" || !pending.Started.Equal(h.state.LastStart) {
 		return stop("cache_integrity", "invalid pending source request")
+	}
+	if _, dump := datedDump(target); dump {
+		return h.recoverDump(target, pending)
 	}
 	rec, body, found, err := loadNamedReceipt(h.cache, pending.filename(), pending.URL, "v5")
 	if err != nil {
@@ -160,6 +169,10 @@ func (c *client) get(raw string) (receipt, error) {
 		return robots, nil
 	}
 	h.delay = max(h.delay, rules.delay)
+	if _, dump := datedDump(target); dump {
+		material, err := h.getDump(target, rules)
+		return material.receipt, err
+	}
 	return h.fetch(target, rules)
 }
 
@@ -212,7 +225,7 @@ func (h *hostClient) fetch(target *url.URL, rules robotRules) (receipt, error) {
 func (h *hostClient) cached(target *url.URL) (receipt, []byte, bool, error) {
 	address := target.String()
 	rec, body, found, err := loadReceipt(h.cache, address, "v5")
-	if found || err != nil || h.legacy == "" {
+	if found || err != nil || h.legacy == "" || h.host == dumpHost {
 		return rec, body, found, err
 	}
 	return loadReceipt(h.legacy, address, "legacy")
@@ -276,12 +289,7 @@ func (h *hostClient) request(target *url.URL, role string) (receipt, []byte, err
 	if bodyErr != nil {
 		bodyProblem = "response body could not be read completely"
 	}
-	headers := map[string]string{
-		"content-type": res.Header.Get("Content-Type"), "content-signal": strings.Join(res.Header.Values("Content-Signal"), ", "),
-		"retry-after": res.Header.Get("Retry-After"), "x-robots-tag": strings.Join(res.Header.Values("X-Robots-Tag"), ", "),
-		"location":               res.Header.Get("Location"),
-		"content-signal-present": strconv.FormatBool(len(res.Header.Values("Content-Signal")) > 0),
-	}
+	headers := sourceHeaders(res)
 	received := h.now().UTC()
 	rec := receipt{
 		URL: target.String(), SHA256: hash(body), Status: res.StatusCode, Bytes: len(body), Headers: headers,
@@ -346,6 +354,16 @@ func (h *hostClient) reserve(address, role string) error {
 		next := previous.Add(24 * time.Hour)
 		return refusal{"daily_read_cap", "source reached its daily new-read cap", &next}
 	}
+	if h.host == dumpHost && address != "https://"+dumpHost+"/robots.txt" {
+		key := hash([]byte(address))
+		if _, exists := h.state.DumpAttempts[key]; exists {
+			return stop("cache_integrity", "a dump GET was already reserved for this URL")
+		}
+		if h.state.DumpAttempts == nil {
+			h.state.DumpAttempts = make(map[string]dumpAttempt)
+		}
+		h.state.DumpAttempts[key] = dumpAttempt{Started: now}
+	}
 	h.state.LastStart = now
 	h.state.Reads++
 	h.state.Pending = &pendingRead{h.run, address, now, role, h.fetcher}
@@ -371,15 +389,27 @@ func returnTermsReceipt(why refusal, role string, target *url.URL) bool {
 	return why.Code == "terms_page" && role == "policy" && target.Path != "/robots.txt"
 }
 
+func sourceHeaders(res *http.Response) map[string]string {
+	return map[string]string{
+		"content-type": res.Header.Get("Content-Type"), "content-signal": strings.Join(res.Header.Values("Content-Signal"), ", "),
+		"retry-after": res.Header.Get("Retry-After"), "x-robots-tag": strings.Join(res.Header.Values("X-Robots-Tag"), ", "),
+		"location":               res.Header.Get("Location"),
+		"content-signal-present": strconv.FormatBool(len(res.Header.Values("Content-Signal")) > 0),
+	}
+}
+
 func responseRefusal(target *url.URL, rec receipt, body []byte) refusal {
+	dumpRobots := target.Host == dumpHost && target.Path == "/robots.txt"
+	html := strings.Contains(strings.ToLower(rec.Headers["content-type"]), "text/html")
 	switch {
-	case strings.Contains(strings.ToLower(rec.Headers["content-type"]), "text/html") && hostRefusalTitle.Match(body),
+	case (html || dumpRobots) && hostRefusalTitle.Match(body),
 		rec.Status == 401 || rec.Status == 403 || rec.Status == 451,
 		noAI.MatchString(rec.Headers["x-robots-tag"]):
 		return stop("crawler_block", "source returned a crawler or access block")
 	case rec.Headers["content-signal"] != "" || rec.Headers["content-signal-present"] == "true":
 		return stop("content_signal", "source returned a Content-Signal")
-	case rec.Status == 200 && (termsPath(target) || termsTitle.Match(body)):
+	case rec.Status == 200 && termsPath(target),
+		(rec.Status == 200 || dumpRobots) && termsTitle.Match(body):
 		return stop("terms_page", "source returned a terms page")
 	case target.Path == "/robots.txt" && !retryStatus(rec.Status):
 		_, err := inspectRobots(rec, body)

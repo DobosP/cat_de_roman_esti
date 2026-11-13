@@ -31,15 +31,17 @@ type receipt struct {
 	AttemptRole   string            `json:"attempt_role,omitempty"`
 	AttemptID     string            `json:"attempt_fetcher,omitempty"`
 	BodyProblem   string            `json:"body_problem,omitempty"`
+	DumpChecksum  *dumpChecksum     `json:"dump_checksum,omitempty"`
 }
 
 type hostState struct {
-	LastStart time.Time         `json:"last_start"`
-	Breaker   time.Time         `json:"breaker_until"`
-	UTCDay    string            `json:"utc_day"`
-	Reads     int               `json:"reads"`
-	Denials   map[string]denial `json:"owner_queue,omitempty"`
-	Pending   *pendingRead      `json:"pending_read,omitempty"`
+	LastStart    time.Time              `json:"last_start"`
+	Breaker      time.Time              `json:"breaker_until"`
+	UTCDay       string                 `json:"utc_day"`
+	Reads        int                    `json:"reads"`
+	Denials      map[string]denial      `json:"owner_queue,omitempty"`
+	Pending      *pendingRead           `json:"pending_read,omitempty"`
+	DumpAttempts map[string]dumpAttempt `json:"dump_attempts,omitempty"`
 }
 
 type pendingRead struct {
