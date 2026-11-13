@@ -229,3 +229,5 @@ Parallel lanes also allocated0188/0189 independently. All four full-filename bod
 - [0229](0229-native-quick-review-and-rubric-requalification.md) — native quick proof/raw/full-review tools, explicit historical reconstruction, scoped source/cache reuse and fresh unchanged Source27 requalification; no content or owner-policy grant.
 
 - [0230](0230-content-loop-v5.md) — content loop V5: counted goal (executor renamed ChatGPT by its amendment), trains of 6+ boards and weekly forms, ro.wiktionary word evidence, path-level robots refusals, all lanes open as their tools land; catalog reuse decided after the pilot.
+
+- [0231](0231-v5-dumps-words-and-model-candidates.md) — V5 amendment, new campaign `v5-pilot-2` with a fresh clock: hash-pinned ro.wiktionary dump as evidence, full paradigms from tables with per-form drops and profanity probes, same-word diminutives cleared, 12 words and 48 links behind a one-word board dry run, model-proposed candidates after the backlog (never evidence), forms-and-words trains at 20 forms or 6 words, ledger-based token meter, credit for ro.wiktionary.

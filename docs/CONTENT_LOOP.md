@@ -1,8 +1,11 @@
 # Content loop V5
 
-[ADR-0230](adr/0230-content-loop-v5.md) records Paul's decisions. ADR-0226 rules it does not
-revise still apply. [STATUS](STATUS.md) records what shipped. [CRITIQUE_RUBRIC](CRITIQUE_RUBRIC.md)
-sets the quality bar. *(to build)* marks a tool that Phase 0 builds; everything else exists today.
+[ADR-0230](adr/0230-content-loop-v5.md) records Paul's decisions, and
+[ADR-0231](adr/0231-v5-dumps-words-and-model-candidates.md) amends them from campaign `v5-pilot-2`:
+Wiktionary dump evidence, full paradigms with per-form drops, the words lane, model-proposed
+candidates, trains and the token meter. ADR-0226 rules they do not revise still apply.
+[STATUS](STATUS.md) records what shipped. [CRITIQUE_RUBRIC](CRITIQUE_RUBRIC.md) sets the quality
+bar. *(to build)* marks a tool that has not landed yet; everything else exists today.
 
 ## Campaigns and the counted goal
 
@@ -11,16 +14,30 @@ name: the operator `agent:codex`, any `~/.codex` path and thread parameters (ADR
 Work happens on branch `content/v5` in the worktree `~/work/_worktrees/cat_de_roman_esti/content__v5`.
 Scratch, cache and evidence live in `~/work/_temp/content__v5/`, never under `/tmp`. The contract is
 `~/work/_temp/content__v5/contract.json`. It holds the base SHA, the end (days and goal-meter
-tokens), targets, train limits, source caps, thread limit and tool budget.
+tokens), targets, train limits, source caps, thread limit and tool budget. A live campaign's
+contract is never edited: an amendment closes the campaign and starts the next one (ADR-0231).
+Whenever main gains a V5 amendment ADR, merge local main into `content/v5` at the next turn start,
+before any dispatch, and reread this procedure and the ADR.
 
-The first campaign is the pilot. Phase 0 builds the core kit, and the pilot clock starts when the
-kit lands. The pilot then runs 7 days or 40 M goal-meter tokens. Its targets are 60 new forms,
-and 6 new boards in at least 2 games. Lanes that open later are reported but carry no target.
+The first campaign, `v5-pilot-1`, built the core kit and closed when ADR-0231 amended it. The
+current campaign is `v5-pilot-2`, whose contract ADR-0231 states. It runs 7 days from its
+`campaign-start`, or 40 M goal-meter tokens. Its targets are 60 new forms on existing words,
+12 new words, 48 new links, and 6 new boards in at least 2 games. Lanes without a target are
+reported but count toward nothing.
 
 - **Counting.** Progress counts only through
   `scripts/report_content_delta.py --baseline <base> --json`. Phase 0 extends it with names,
-  links and first exposures. A turn that raises no counter and unblocks no named queued item is
-  no progress.
+  links and first exposures. An existing word is a concept in the `base_sha` bundle; only forms
+  on existing words count toward the forms target. A link counts only when at least one end is a
+  new word. Forms of new words and links between existing words are reported apart. A turn that
+  raises no counter and unblocks no named queued item is no progress.
+- **Trains.** A board train assembles at 6 qualified boards, or after 96 hours with at least 3,
+  and holds at most 20. Forms and new words share a train. It opens when 20 forms or 6 new words
+  are in the reviewed pool (S6), or after 96 hours with at least 1 reviewed item, or with at
+  least 1 when quota reaches 70%, or near the end, when under 24 hours or under 4 M tokens remain
+  (`resume.py` accepts no train events after its stop). It holds at most 100 forms and 20 new
+  words; its `train-open` kind is `forms`, or `mixed` when it carries a word. At most one train is
+  open.
 - **Report line.** Every report starts with new words, forms, names and links, each shown
   separately with examples. Then come boards by game, first exposures of existing words, tokens and active
   hours per landed unit, counters against targets, and blocked lanes with their reasons. At most
@@ -28,12 +45,15 @@ and 6 new boards in at least 2 games. Lanes that open later are reported but car
 - **Queue ranking.** Counters rank the queue by measured pass rate. A lane with two empty
   batches, or three hits of the same failure reason, cools down until a recorded input changes.
   Targets never lower a gate.
-- **Quota.** Start at 20% or less of the weekly meter. Below 70%, use full fan-out. From 70% to
+- **Quota.** Start at 20% or less of the weekly meter, unless the contract carries Paul's start override. Below 70%, use full fan-out. From 70% to
   90%, finish judged items and take no new intake. At 90% or more, close the open train, report
   and stop. Never run on paid credits.
 - **Stops.** Stop and report at once on any of: a hold or child-safety breach; an attempt to land
   past a red gate; quota at 90% or more; budget or days spent; or Paul saying stop. Paul re-arms a
   campaign with one message.
+- **Token meter.** The goal-meter value given to `resume.py` is the cumulative uncached input plus
+  output of the root and all jobs, summed from the ledgers of this campaign and its predecessors
+  (ADR-0231).
 
 ## Registry, ledger and state
 
@@ -46,7 +66,9 @@ and retracted(reason). Only Paul's quoted ruling changes an owner hold. Partial 
 and missing dependencies are refused. Recorded exclusions are re-screened only when their retry
 predicate fires, and predicates are rechecked at dispatch. The need map is recomputed when ranking
 changes. Legacy captures stay labelled legacy. Every attempt is registered with its lane, the stage it
-reached and a reason code, including generator output that never reached an author.
+reached and a reason code, including generator output that never reached an author. A
+model-proposed candidate carries origin `model`. A `sourced` transition needs a source-client or
+dump receipt hash; model output is never evidence.
 
 The ledger is append-only. It records these rows:
 `job-dispatch {job_id, train_id, item_ids, lane, game, role, thread_id, at}`,
@@ -63,8 +85,9 @@ train.
 | B boards | Conexiuni, Lanț, Cald sau Rece | Rubric floors on existing words. Conexiuni includes new boards for the cells of the 83 FAIL-lint predecessors, which stay in place; each new board shares fewer than eight tiles and no three-of-four quad with its predecessor or any inventory or tombstone board. The 79 owner-held boards stay untouched. Lanț gets the native prospective captions, Cald the ADR-0213 protocol. | Now |
 | Q quick | Perechi first; Intrusul authored in the pilot too | Rubric I/J and the ratified five-case gold set, through the ADR-0229 native quick path. The parked C51 Perechi prospect (V4 `state.json` `prepared.c51`) goes first, once its 13 history references are closed. | When the quick batch proof lands and installs one board |
 | A Alchimie | Alchimie target rounds | Built from existing words, with exact action par, at least 2 openings and no one-move target. New recipe links are class G. The world stays at 256 concepts or fewer. | With the Alchimie install step *(to build)* |
-| F forms | Typed input in every game, Cald first | The word's own ro.wiktionary inflection table. A script proposes the forms; the author does not fetch. Both reviewers read the table and judge the word family. Diminutives are excluded in the pilot. | After the core kit |
-| W new words | Shared graph | A ro.wiktionary entry, a ro.wikipedia article and positive frequency. 4–8 truthful links: at least 2 to existing main words and at least 2 within the same category. | With the link install and the all-boards view diff *(to build)* |
+| F forms | Typed input in every game, Cald first | Every form in the word's own ro.wiktionary inflection table that the game lacks: nouns and adjectives first, verbs after the verb sample passes; vocatives only for nouns naming people or animals. A script proposes the forms from the table; neither rules nor a model creates one, and the author does not fetch. Both reviewers read the table and judge the family. Per-form drops, same-word diminutives and profanity probes: ADR-0231 decisions 6–7. No diminutive forms are authored. | After the core kit |
+| W new words | Shared graph | A Romanian section in ro.wiktionary, a live ro.wikipedia article and positive frequency. 4–8 truthful links: at least 2 to existing main words and at least 2 within the same category, each citing a quoted span the span checker finds in the cited source's cached receipt. The queued backlog goes first. Before the first words train, the one-word dry run (ADR-0231 decision 8); over 10 disturbed boards, the lane waits and the loop asks Paul once. Child-safety labels and the sensitive classes for Paul's queue: ADR-0231 decision 8. | With the link install, the all-boards view diff and the span checker *(to build)* |
+| G model candidates | Feeds W and E | Proposals from the model inside the goal, one cultural cell at a time, three fresh threads per cell, 10 items per thread (ADR-0231 decision 9). Never evidence, never forms; senses never ship. A cell under 10 script-clean candidates per 100 cools down. | When every backlog `idea` row has passed S1 and the dump Wiktionary check |
 | N names | Shared graph | A ro.wikipedia article and the matching Wikidata item, under the Names rules below. | With W's tools and the rubric Names section *(to build)* |
 | E edges, captions | Lanț, Cald, Alchimie | One source stating each relation. The ten-caption Lanț trial needs a caption generator and full requalification. | Edges with W; captions with the generator *(to build)* |
 | S synonyms | Shared graph | Both words share the selected sense in ro.wiktionary, a second Romanian source agrees, and the synonym passes a substitution test. Both reviewers judge it. | After the core kit |
@@ -94,21 +117,25 @@ Prefer content a Romanian 12-year-old would recognise.
 ## Roles, threads and the turn checklist
 
 Every role runs in a fresh ChatGPT thread (`fork_turns=none`, a distinct task name, one job per
-thread). The roles are author, blind critic, factual reviewer, quality reviewer, assembler, pin
-reviewer and landing reviewer. Reviewers never see each other's verdict before both sign. Author
+thread). The roles are generator, author, blind critic, factual reviewer, quality reviewer,
+assembler, pin reviewer and landing reviewer. A generator thread never authors, judges or critiques
+its own proposals; its reasons, agreement counts and scores stay hidden from every judging role.
+Prompts describe its work as proposing candidate words. Reviewers never see each other's verdict
+before both sign. Author
 sources stay hidden until both sign. The critic gets answer-stripped input only and is told
 nothing about the train, generator scores, peer verdicts or reuse. The landing reviewer neither
 authors nor judges any item in the train. The assembler never reviews.
 
-At most six threads run at once. During intake the slots are 2 authors, 1 blind critic,
+At most six threads run at once. During intake the slots are 2 authors (generator threads use
+these, never both while authored items wait), 1 blind critic,
 2 reviewers and 1 assembler. During qualification the author slots go to the pin reviewer and
 the landing reviewer. Judgment roles run at the top effort rung; authors, the assembler and tool
 repair run one rung lower. Hashing, equality checks, replays and counts are scripts, never agents.
-The root reads no file over 200 lines itself, except this procedure and ADR-0230. A headless driver
+The root reads no file over 200 lines itself, except this procedure, ADR-0230 and ADR-0231. A headless driver
 needs a separate owner-accepted agent-ops ADR.
 
 Each turn:
-1. Run `resume.py` *(to build)*.
+1. Run `resume.py` with the goal-meter value defined above.
 2. Read the quota meter and apply the quota rule.
 3. Reap finished jobs and write their completion rows.
 4. Update the counters and apply the cool-down rule.
@@ -125,16 +152,16 @@ Only the gated item waits.
 
 | Stage | Who | Output | Gate |
 |---|---|---|---|
-| S1 need and screen | Script | Survivors with reason codes. Every reject is registered. | Screens pass: resolver, registry, exclusions, full inventory, collisions, fuzzy neighbours, Cald inbound floor, co-landing. The form screen *(to build)* covers forms. A cell with no survivors is recorded as graph-blocked. |
-| S2 evidence | Script and source client | Cached receipts per item, or a park with a retry predicate | First fetcher and role recorded |
+| S1 need and screen | Script | Survivors with reason codes. Every reject is registered. | Screens pass: resolver, registry, exclusions, full inventory, collisions, fuzzy neighbours, Cald inbound floor, co-landing. The form screen covers forms. The collision probe builder *(to build)* feeds every real form near a proposed key and the profanity probe list to `resolver_diff.py --probes` (ADR-0231 decision 7); until it lands, forms use the form screen and the landing reviewer's manual probing. A cell with no survivors is recorded as graph-blocked. |
+| S2 evidence | Script and source client | Cached receipts per item, or a park with a retry predicate. A dump receipt names the file hash, page title, revision id and page byte hash. | First fetcher and role recorded |
 | S3 author and freeze | Author | Frozen payload and hash, with the private key kept apart. No board number yet. | Bytes frozen. The lint passes: `critique_pack.py --strict` joined to `cat-content-ops critique --strict` or `cat-content validate-pack` as applicable (rubric A6 included). Rejected and tombstoned items are screened on resubmission. |
 | S4 blind play | Critic | Transcript and derived-view hash | A fail drops the item; no reroll of an unchanged payload. Standalone forms keep the ADR-0210 exemption. |
-| S5 two judgments | Factual and quality reviewers | Two signed verdicts with `child_safe` | Two accepts. For source-backed claims, each reviewer cites at least one URL whose first fetcher was neither the author nor legacy. For KG-only boards, each reviewer checks the predicates against the game data independently. Over 20% identical rationales, reviewer-name leaks and cited-URL reuse are checked. |
+| S5 two judgments | Factual and quality reviewers | Two signed verdicts with `child_safe` | Two accepts. For source-backed claims, each reviewer cites at least one URL whose first fetcher was neither the author nor legacy. For dump evidence, instead of a URL, each reviewer recomputes the file's SHA-256, extracts the page's raw text without the table parser and transcribes the cells without seeing the proposal; a script diffs it against the proposal, and the script-fetched file receipt meets the first-fetcher rule (ADR-0231 decision 5). One family in ten also gets a live ro.wiktionary spot check. For KG-only boards, each reviewer checks the predicates against the game data independently. Over 20% identical rationales, reviewer-name leaks and cited-URL reuse are checked. |
 | S6 pool | Script | Item in state `reviewed` | Author, critic and both reviewers are four distinct threads |
 | S7 train assembly | Assembler and scripts | Candidate commit, go/drop table, touched boards, changed resolver answers | See below |
 | S8 reference and pins | Script, pin reviewer | One pin commit and the changed-case list | Case count unchanged, else Paul |
 | S9 gates and landing review | Script, landing reviewer | Receipts and verdict | All green and a fresh GO |
-| S10 land and close | Root and `close_landing.py` *(to build)* | Landing receipt and docs commit | Doc, registry and whitespace checks |
+| S10 land and close | Root and `close_landing.py` | Landing receipt and docs commit | Doc, registry and whitespace checks |
 
 **S7 assembly.** The assembler takes these steps in order:
 1. Re-run the novelty, tile-fairness, history, second-grouping and fuzzy-neighbour screens over
@@ -143,7 +170,7 @@ Only the gated item waits.
 3. Assign board numbers.
 4. Install:
    - `cat-content-ops import-candidates --pack-only` for boards;
-   - the alias install script *(to build)* for forms;
+   - the alias install script for forms;
    - the existing reviewed graph transaction (`scripts/import_candidates.py` → `densify_content.run`)
      for words, names and edges;
    - the ADR-0229 quick path for Quick.
@@ -155,10 +182,12 @@ Only the gated item waits.
    `cat-mobile-pack --check` and `cat-content-rail all --check`.
 7. Refresh every changed rail binding once, under ADR-0189 and ADR-0212. A pack change can
    invalidate the world audit even when the world payload is identical, so run fresh audits.
-8. For forms trains, run `resolver_diff.py` *(to build)* over every Cald target. The landing
-   reviewer clears each changed answer, or the form is dropped. For trains with links or
-   captions, run a derived-view diff over all landed boards *(to build)*. Every touched board is
-   played over HTTP and blind-played again.
+8. For forms trains, run `resolver_diff.py` over every Cald target. The landing reviewer clears
+   each changed answer, or that form is dropped by itself and the diff reruns on the kept set. A
+   change that only removes an existing wrong resolution may be cleared. A profanity probe that
+   newly resolves is never cleared (ADR-0231 decisions 6–7). For trains with new words, links or
+   captions, run the all-boards view diff *(to build)*. Every disturbed board is played over HTTP
+   and blind-played again.
 
 If an item fails at S7–S9, eject it and rebuild the train once. A second failure ends the train,
 and its items then qualify one at a time.
@@ -201,14 +230,18 @@ and redo S7–S9 on the new SHA. Keep the loop branch; remove only owned review 
 
 ## Source controls
 
-The research network path is the plain cache-first source client *(to build in Phase 0)*. The
-hosts, cap and refusal rules below are Paul's approved source list (ADR-0230); a new host still
-needs him. Until the client lands, use the existing cached receipts.
+The research network path is the plain cache-first source client. The hosts, cap and refusal
+rules below are Paul's approved source list (ADR-0230, ADR-0231); a new host still needs him.
 
 **Hosts.** The content hosts are `ro.wikipedia.org`, `ro.wiktionary.org`, `www.wikidata.org`,
 `raw.githubusercontent.com` (FrequencyWords only) and `localhost:8077`. ADR-0228 adds policy-only
-hosts. dexonline is left untouched: no reads, and its legacy captures are not evidence for new
-words or forms.
+hosts. `dumps.wikimedia.org` serves the `rowiktionary` and `rowiki` dump files and their
+checksum files only, through the client's dump route *(to build)*: one sequential GET per file,
+10 s spacing, each dump and checksum file one read against the daily cap, one download per file and dump date,
+checked against Wikimedia's checksum and pinned by SHA-256. The dump route opens for evidence only
+after its parser gate (ADR-0231 decision 5); until then forms use live table reads. The
+ro.wikipedia title lists are a pre-filter only. dexonline is left untouched: no reads, and its
+legacy captures are not evidence for new words or forms.
 
 **Requests.**
 - Read-only HTTPS GETs only.
@@ -228,11 +261,12 @@ words or forms.
 - When two of Paul's own rules collide, record it, keep other lanes running, name the blocked
   lanes in the report line and ask Paul once.
 - Jobs cannot change the procedure, the rubric (except the Names section under ADR-0230), ADRs,
-  AGENTS, validators, pins outside the pin commit, source policy or hold fixtures.
+  AGENTS, validators, pins outside the pin commit, source policy or hold fixtures. The only
+  exceptions are the registry check and source-client dump route that ADR-0231 decision 11 names.
 
 ## Tools, recovery and housekeeping
 
-**Phase 0** builds the core kit before the pilot clock starts:
+**Phase 0** built the core kit in `v5-pilot-1`:
 - `resume.py` and the ledger metering writer;
 - the extended `report_content_delta.py`;
 - `close_landing.py`;
@@ -242,8 +276,11 @@ words or forms.
 - the cache-first source client.
 
 **Lane tools** each open their lane when they land: the quick batch proof, the Alchimie install
-step, the link install with the all-boards view diff, the rubric Names section (its own reviewed
-commit), and the caption generator.
+step, the link install with the all-boards view diff and the link span checker, the rubric Names
+section (its own reviewed commit), and the caption generator. ADR-0231 decision 11 adds the
+source client's dump route, the dump reader and table parser, the collision probe builder with the
+profanity probe list, the counter split in `report_content_delta.py` and the registry check's
+receipt-hash requirement; these may be built inside the campaign.
 
 **Rules for every tool.**
 - Each tool is its own commit with a threat model, focused tests, a portable build (Go on
