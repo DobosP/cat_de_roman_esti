@@ -1,0 +1,84 @@
+Cat content V5 link span checker
+
+From the task worktree, run with standard-library Python 3.10 or later:
+
+  python3 -IB scripts/content_v5/link_spans.py --cache <campaign-cache> --batch <scratch>/links.json
+
+The batch stays in private campaign scratch. It is a UTF-8 JSON object with
+schema "cat-v5-link-spans-1" and an array "links" of 1–160 rows. This covers
+20 words with eight links each. Each row has:
+
+  link             Object with the exact src_id, dst_id, relation and
+                   bidirectional boolean of the proposed fixture edge.
+  url              Final canonical URL, using the exact source-client spelling.
+  receipt_sha256   SHA-256 of the exact cached receipt bytes, including newline.
+  body_sha256      SHA-256 of the exact cached body bytes.
+  quote            Short literal text, at most 280 Unicode code points.
+
+Before running the checker, the operator must successfully look up every final
+URL using the V5 source client with --cache-only, the same --cache and the
+current campaign --run. Use the operator's actual role and fetcher ID. This
+checks current robots, run-scoped terms and crawler refusals, and the host
+breaker. A source refused or unavailable in the current run cannot be used.
+Use the exact cached bytes admitted by that lookup.
+
+Bind the SHA-256 of <cache>/<SHA-256 of ASCII URL>.receipt.json, not of stdout
+or of reserialized JSON. The checker reads that URL pointer and its
+<cache>/<body_sha256>.body. Changed receipts, legacy origins, partial
+responses and mismatching body bytes fail. Following a redirect or fetching a
+missing source remains the source client's job. If the page's HTML canonical
+link differs from the exact final receipt URL, acquire the canonical article
+through the client and use that receipt instead. Use the installed typed link
+identity exactly and keep the batch digest with the associated review.
+
+Supported material is HTTP 200 UTF-8 HTML on query-free /wiki/ URLs at
+ro.wikipedia.org and ro.wiktionary.org. The supported main-namespace view
+has Romanian MediaWiki Vector article markup and one matching head canonical
+link. The parser admits paragraphs, list and definition items, and blockquotes
+in the main article's .mw-parser-output. It keeps supported inline markup and
+resolves HTML character references. A block or excluded region, including an
+inline citation, ends the current text segment. It never joins text across
+that boundary. Within a segment it compares only NFC and collapsed Unicode
+whitespace, with case, diacritics and punctuation intact. The first literal
+match in document order determines the position. Text, JSON, raw dumps, tables,
+headings, and unrecognized page layouts are outside this format.
+
+The command emits a JSON report with the same schema, batch_sha256, overall
+status and one result in input order for every link. It repeats the exact
+link identity, URL and receipt and body hashes. Each result records
+quote_sha256 for the raw quote's UTF-8 bytes and either a diagnostic code or
+a normalized segment match (zero-based block, inclusive start, exclusive end,
+and SHA-256 of the normalized block's UTF-8 bytes). The report contains no
+quoted text. Exit 0 means every link has a literal match, 1 means at least
+one link failed its evidence check, and 2 means the batch could not be read
+or validated. The command never modifies source, cache, fixture or registry.
+
+Threat model
+
+The batch and remote page are untrusted. The checker reuses the registry's
+canonical live-receipt rules, limits input and parsing, accepts only a
+complete successful V5 receipt with first-fetch provenance, verifies the
+exact URL pointer and body, and checks canonical document identity. It
+refuses malformed markup, duplicate article roots, explicit hidden regions,
+navigation, reference lists, inline styles and other unsupported subtrees.
+Source text in HTML attributes, comments, scripts or style is never matched.
+Before extracting any text, the checker applies the V5 source client's raw
+crawler and terms title patterns, including to titles in SVG or HTML comments.
+The parser is a structural extractor for the supported Wikimedia markup. It
+never executes HTML, scripts, or stylesheets and does not evaluate arbitrary
+CSS selector visibility. The same-run cache-only source-client lookup checks
+current policy. Use the normal factual and quality review for the
+text's visible context, meaning and link direction, the campaign's independent
+first-fetcher rule, and child safety. A matching span establishes literal
+presence only. Receipt hashes bind bytes within the trusted cache and cannot
+authenticate a cache writer or prove that an otherwise matching quote entails
+the proposed relationship. Do not use a cache writable by untrusted parties.
+Retain only receipt metadata and a short paraphrase in tracked docs.
+
+Focused checks
+
+  CAT_V5_TEST_SCRATCH=<campaign-scratch> python3 -IB -m unittest discover -s scripts/content_v5/tests -p test_link_spans.py -v
+
+The tests use synthetic cached HTML and receipt files. A separate local
+layout check can exercise the parser on existing cached pages without
+turning legacy data into evidence or making a network read.
