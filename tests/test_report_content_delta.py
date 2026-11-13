@@ -181,7 +181,7 @@ def serving_bundle(docs):
         "pack_ranked": True,
         "pack_items": [],
         "boards": [],
-        "normalization_map": {"N": "n", "Î": "i", "Ș": "s", "ș": "s"},
+        "normalization_map": {"I": "i", "N": "n", "Î": "i", "Ș": "s", "ș": "s"},
         "accent_normalization_map": {"ș": "s\u0326"},
         "normalized_index": {"nucile": "nut"},
         "discovery_world": {"recipes": []},
@@ -197,10 +197,13 @@ def board(game, key, payload, eligible=True):
             "source_id": key, "overall_score": 55, "starter_safe": True}
 
 
-def test_campaign_counts_installed_words_names_forms_and_relationships():
+def test_campaign_splits_target_forms_and_links_from_other_installed_additions():
     docs = documents()
     docs["derived"] = None
     before = serving_bundle(docs)
+    before["nodes"].append({
+        "id": "elder", "node_type": "person", "label_ro": "Bunic", "aliases": [],
+    })
     before["edges"] = [
         {"src_id": "nut", "dst_id": "cake", "relation": "recipe", "is_distractor": False},
     ]
@@ -210,18 +213,28 @@ def test_campaign_counts_installed_words_names_forms_and_relationships():
     before["normalized_index"]["nuca veche"] = "nut"
     after["nodes"][0]["aliases"].append("nuca veche")
     after["normalized_index"]["nuca veche"] = "nut"
+    after["nodes"][2]["aliases"].append("bunicul")
     after["nodes"].extend([
         {"id": "jam", "node_type": "concept", "label_ro": "Gem", "aliases": ["gemul"]},
+        {"id": "juice", "node_type": "concept", "label_ro": "Suc", "aliases": []},
         {"id": "person", "node_type": "person", "label_ro": "Ion Creangă", "aliases": []},
-        {"id": "place", "node_type": "place", "label_ro": "Iași", "aliases": []},
+        {"id": "place", "node_type": "concept", "label_ro": "Iași", "aliases": ["Iașului"]},
         {"id": "event", "node_type": "event", "label_ro": "Serbarea școlară", "aliases": []},
-        {"id": "nut_rekey", "node_type": "concept", "label_ro": "Nucă", "aliases": []},
+        {"id": "nut_rekey", "node_type": "concept", "label_ro": "Nucă", "aliases": ["nuco"]},
     ])
-    after["normalized_index"].update(nucilor="nut", gemul="jam", **{"nucă": "nut", "paste": "nut"})
+    after["normalized_index"].update(
+        nucilor="nut", gemul="jam", bunicul="elder", iasului="place", nuco="nut_rekey",
+        **{"nucă": "nut", "paste": "nut"},
+    )
     after["edges"][0].update(src_id="cake", dst_id="nut", label_ro="reworded", bidirectional=True)
     after["edges"].extend([
         {"src_id": "jam", "dst_id": "cake", "relation": "ingredient", "is_distractor": False},
         {"src_id": "cake", "dst_id": "jam", "relation": "ingredient", "is_distractor": False},
+        {"src_id": "jam", "dst_id": "juice", "relation": "ingredient", "is_distractor": False},
+        {"src_id": "jam", "dst_id": "place", "relation": "part_of", "is_distractor": False},
+        {"src_id": "cake", "dst_id": "nut", "relation": "ingredient", "is_distractor": False},
+        {"src_id": "elder", "dst_id": "place", "relation": "part_of", "is_distractor": False},
+        {"src_id": "nut", "dst_id": "nut_rekey", "relation": "kind_of", "is_distractor": False},
         {"src_id": "jam", "dst_id": "nut", "relation": "decoy", "is_distractor": True},
     ])
     after["discovery_world"]["recipes"].append({"pair": ["cake", "nut"], "result": "cake"})
@@ -231,16 +244,33 @@ def test_campaign_counts_installed_words_names_forms_and_relationships():
     )
 
     report = delta.campaign_delta(before, after, delta.inventory(docs), {"place"})
-    assert [row["id"] for row in report["new_words"]["examples"]] == ["jam"]
+    assert [row["id"] for row in report["new_words"]["examples"]] == ["jam", "juice"]
     assert [row["id"] for row in report["new_names"]["examples"]] == ["place"]
     assert [row["id"] for row in report["unclassified_new_entities"]["examples"]] == [
         "event", "nut_rekey", "person",
     ]
-    assert [row["form"] for row in report["new_forms"]["examples"]] == ["gemul", "nucilor"]
-    assert report["new_links"]["count"] == 2
-    assert report["new_links_by_kind"]["kg"]["examples"] == [
-        {"kind": "kg", "node_ids": ["cake", "jam"], "relation": "ingredient"},
+    assert [row["form"] for row in report["new_forms"]["examples"]] == ["nucilor"]
+    assert [row["form"] for row in report["new_word_forms"]["examples"]] == ["gemul"]
+    assert [row["form"] for row in report["other_new_forms"]["examples"]] == [
+        "bunicul", "nuco", "Iașului",
     ]
+    assert report["all_new_forms"]["count"] == 5
+    assert [row["form"] for row in report["all_new_forms"]["examples"]] == [
+        "bunicul", "gemul", "nucilor", "nuco", "Iașului",
+    ]
+    assert report["new_links"]["count"] == 3
+    assert [row["node_ids"] for row in report["new_links"]["examples"]] == [
+        ["cake", "jam"], ["jam", "juice"], ["jam", "place"],
+    ]
+    assert report["links_between_existing_words"]["examples"] == [
+        {"kind": "kg", "node_ids": ["cake", "nut"], "relation": "ingredient"},
+    ]
+    assert [row["node_ids"] for row in report["other_new_kg_links"]["examples"]] == [
+        ["elder", "place"], ["nut", "nut_rekey"],
+    ]
+    assert report["all_new_links"]["count"] == 7
+    assert report["new_links_by_kind"]["kg"]["count"] == 6
+    assert report["all_new_links"]["examples"] == report["new_links_by_kind"]["kg"]["examples"]
     assert report["new_links_by_kind"]["alchimie_recipe"]["examples"] == [
         {"kind": "alchimie_recipe", "pair": ["cake", "nut"], "result": "jam"},
     ]
@@ -434,6 +464,15 @@ def test_implicit_campaign_counts_local_main_from_unlanded_branch(tmp_path, caps
     report = json.loads(capsys.readouterr().out)
     assert report["campaign"]["new_forms"]["count"] == 1
     assert report["campaign_comparison"] == "explicit_commit"
+    assert delta.main([
+        "--repo", str(tmp_path), "--baseline", "main", "--head", "candidate", "--text",
+    ]) == 0
+    lines = capsys.readouterr().out.splitlines()
+    assert lines[0] == (
+        "words +0, forms on existing words +1 (nuci), names +0, links with a new word +0"
+    )
+    assert lines[1] == "forms on new words +0, forms on other entities +0"
+    assert lines[2] == "links between existing words +0, other KG links +0, Alchimie recipes +0"
     (tmp_path / delta.FILES["rankings"]).write_text("{}", encoding="utf-8")
     assert delta.main(["--repo", str(tmp_path), "--baseline", "main", "--json"]) == 0
     report = json.loads(capsys.readouterr().out)

@@ -11,6 +11,8 @@ Ranking eligibility is the sidecar's declaration, not a runtime validation resul
 The campaign section compares the Go serving exports and their pinned sources.
 It counts separate installed concepts, names, normalized aliases, relationships,
 new selectable authored boards, and first explicit board appearances by game.
+The forms and links target counters follow ADR-0231. The all_new_forms and
+all_new_links summaries preserve the full installed additions.
 See campaign_delta for the exact rules. Campaign metrics default to local main.
 An explicit --head selects a comparison commit without attesting to landing.
 
@@ -21,6 +23,8 @@ Bundle, pin and source digests catch accidental stale exports; a party able to
 alter all three can forge consistency. The report cannot prove source evidence,
 gate approval, or release. Keep it private: board targets and forms can reveal
 answers. A working tree comparison assumes no concurrent content installation.
+Use new_forms and new_links for campaign targets. The broader summaries include
+additions that could inflate those targets, such as forms on new words or recipes.
 """
 
 from __future__ import annotations
@@ -441,17 +445,18 @@ def campaign_delta(before: dict, after: dict, before_sources: dict, names: set[s
     alias matches and new non-concept nodes without a name binding are unclassified.
     Forms are unique normalized aliases that now resolve to their owner and did
     not resolve to that owner at baseline. The metric cannot classify morphology
-    versus synonymy.
+    versus synonymy. The forms target counts only aliases of baseline concepts.
 
     A board needs a new ID and a new role assignment relative to all authored stock
     at baseline, including ineligible or reserved stock. A changed assignment on an
     existing ID may contribute first exposures of baseline KG IDs, including names.
     First exposures compare the two selectable inventories, not historical plays.
-    Count graph links by unordered pair/relation
-    (the installer's key), and recipes by unordered ingredients/result. Captions,
-    edge directions and metadata have their own diffs. Recipes cover the legacy
-    discovery API and declared extensions on selectable rounds; native qualification
-    proves the extensions actually apply. Procedurally selected roles and indirect
+    Count graph links by unordered pair/relation (the installer's key), and
+    recipes by unordered ingredients/result. Only graph
+    links touching at least one counted new word contribute to the links target.
+    Captions, edge directions and metadata have their own diffs. Recipes cover the
+    legacy discovery API and declared extensions on selectable rounds; native
+    qualification proves the extensions actually apply. Procedurally selected roles and indirect
     exposure through guesses, hops, recipe results and the legacy world are outside
     the board exposure metric.
     """
@@ -498,15 +503,43 @@ def campaign_delta(before: dict, after: dict, before_sources: dict, names: set[s
             for node in sorted((exposed - old_exposed) & old_nodes.keys())
         ])
 
+    baseline_words = {
+        node_id for node_id, node in old_nodes.items() if node["node_type"] == "concept"
+    }
+    new_word_ids = {row["id"] for row in new_words}
+    forms = new_forms(before, after, nodes)
+    forms_on_baseline_words, forms_on_new_words, other_forms = [], [], []
+    for form in forms:
+        if form["node_id"] in baseline_words:
+            forms_on_baseline_words.append(form)
+        elif form["node_id"] in new_word_ids:
+            forms_on_new_words.append(form)
+        else:
+            other_forms.append(form)
+
     kg_links = additions(relationship_links(before), relationship_links(after))
+    links_to_new_words, links_between_existing_words, other_kg_links = [], [], []
+    for link in kg_links:
+        if not new_word_ids.isdisjoint(link["node_ids"]):
+            links_to_new_words.append(link)
+        elif baseline_words.issuperset(link["node_ids"]):
+            links_between_existing_words.append(link)
+        else:
+            other_kg_links.append(link)
     recipes = additions(
         recipe_links(before, old_boards["alchimie"]), recipe_links(after, boards["alchimie"]),
     )
     return {
         "new_words": summary(new_words),
         "new_names": summary(new_names),
-        "new_forms": summary(new_forms(before, after, nodes)),
-        "new_links": summary(kg_links + recipes),
+        "new_forms": summary(forms_on_baseline_words),
+        "new_word_forms": summary(forms_on_new_words),
+        "other_new_forms": summary(other_forms),
+        "all_new_forms": summary(forms),
+        "new_links": summary(links_to_new_words),
+        "links_between_existing_words": summary(links_between_existing_words),
+        "other_new_kg_links": summary(other_kg_links),
+        "all_new_links": summary(kg_links + recipes),
         "new_links_by_kind": {"kg": summary(kg_links), "alchimie_recipe": summary(recipes)},
         "new_boards": new_boards,
         "first_exposures": first_exposures,
@@ -526,18 +559,29 @@ def text_report(report: dict) -> str:
     if campaign is None:
         lines.append(f"Campaign metrics unavailable ({report['campaign_unavailable']})")
     else:
-        def count(key: str) -> str:
-            result = campaign[key]
+        def count(label: str, result: dict) -> str:
             examples = ", ".join(
                 row.get("form") or row.get("label_ro") or row.get("result")
                 or " ↔ ".join(row["node_ids"])
                 for row in result["examples"]
             )
-            label = key.removeprefix("new_")
             return f"{label} +{result['count']}" + (f" ({examples})" if examples else "")
 
-        kinds = ("new_words", "new_forms", "new_names", "new_links")
-        lines.append(", ".join(count(key) for key in kinds))
+        lines.append(", ".join((
+            count("words", campaign["new_words"]),
+            count("forms on existing words", campaign["new_forms"]),
+            count("names", campaign["new_names"]),
+            count("links with a new word", campaign["new_links"]),
+        )))
+        lines.append(", ".join((
+            count("forms on new words", campaign["new_word_forms"]),
+            count("forms on other entities", campaign["other_new_forms"]),
+        )))
+        lines.append(", ".join((
+            count("links between existing words", campaign["links_between_existing_words"]),
+            count("other KG links", campaign["other_new_kg_links"]),
+            count("Alchimie recipes", campaign["new_links_by_kind"]["alchimie_recipe"]),
+        )))
         for key in ("new_boards", "first_exposures"):
             totals = ", ".join(f"{game} +{value['count']}" for game, value in campaign[key].items())
             lines.append(f"{key.replace('_', ' ')}: {totals}")
