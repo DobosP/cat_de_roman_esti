@@ -1,0 +1,83 @@
+ADR-0231 Romanian Wiktionary dump evidence
+
+Run with the Python 3.12 standard library.
+
+  python3 -I scripts/content_v5/wiktionary_dump.py --cache "$cache" --date YYYYMMDD "exact title"
+  python3 -I scripts/content_v5/wiktionary_dump.py --cache "$cache" --date YYYYMMDD --literal-table noun "exact title"
+  python3 -I scripts/content_v5/check_cached_nouns.py "$cache" --sample scripts/content_v5/dump_samples/20261101-sample.json --cached-baseline scripts/content_v5/dump_samples/20261101-cached.json
+  python3 -I scripts/content_v5/check_cached_nouns.py "$cache" --sample scripts/content_v5/dump_samples/20261101-sample.json
+
+The first invocation bypasses the noun parser and returns raw XML text decoded as UTF-8,
+with the exact title, direct revision ID and text SHA-256. The JSON field stores the text
+losslessly. Decode JSON and write UTF-8 bytes without adding a trailing newline to reproduce
+its byte hash. The output also binds the complete archive SHA-256 and the SHA-256 of the
+exact cache receipt bytes. The optional table output is an ungated proposal.
+
+The input threat model treats cache payloads as untrusted. Only dated rowiktionary receipts
+at names derived from the expected URLs are read. Filenames derived from digests require
+lowercase hex. The successful script provenance, manifest receipt SHA-256, exact manifest
+filename entry, compressed archive length and archive SHA-256 and SHA-1 all have to agree.
+These checks detect disagreement, corruption and archive substitution relative to the source
+client's trusted cache. Cache receipts are local provenance records. An attacker with write
+access to the full cache and attempt ledger is outside the trust boundary.
+
+For a manifest originally refused because a filename repeats, the archive receipt must
+carry the source client's recovery marker. It binds the exact original compact Go JSON
+receipt bytes, excluding one final LF, to the completed shared attempt. The original
+HTTP 200 script receipt must record the precise duplicate-filename refusal and a complete
+diagnostic of at most 32 KiB. The original bytes are verified against that receipt before
+reading the checksum. In either route, the requested archive basename must appear exactly
+once. Duplicates for unrelated filenames are permitted.
+
+Archive parsing has no network, subprocess or writes. The reader rejects file symlinks,
+checks opened-file identity, bounds compressed and decompressed bytes, bzip2 members,
+unfinished XML tokens, nesting, text sizes and aggregate output. XML DTDs, external entities
+and alternate encodings fail closed. The byte stream must decode as UTF-8 across chunk and
+bzip2 member boundaries. NUL bytes and literal CR in serialized XML fail closed because XML
+normalization would otherwise obscure exact source text. An XML character reference for CR
+survives decoding. No output is emitted until the final bzip2 member, both archive hashes
+and the entire XML document have been checked.
+
+The parser supports one standalone literal noun or adjective invocation under the matching
+Romanian part-of-speech heading. Same-line comments are stripped for language-heading
+detection, and a following level-one or level-two heading ends the section. Unsupported
+wrappers and ambiguous multiline comment contexts before or within the invocation fail
+closed. The parser rejects duplicate parameters, missing parameters,
+ambiguity, unrecognized lemma cells, unfamiliar values and unknown templates. The observed
+plural-only noun pattern requires the title in the plural nominative and all singular cells
+marked invariable. The placeholder {{inv}} is recognized only as an entire noun cell. Its
+exact rendered label is `invariabil`, and it contributes no form. Blank and dash cells
+contribute no form. Comma-separated noun literals and slash alternatives in the observed
+two-plural pattern retain their visible row and column labels. Adjective simple links are
+read as the visible form. The two repeated neuter cells follow the explicit mapping in
+Format:adjectiv-ron revision 1153974. Format:substantiv-ron revision 1004026 and Format:inv
+revision 23577 establish the noun layout and placeholder. The parser makes no grammatical
+inferences. A consumer still applies the ADR's vocative rule and per-form screens independently.
+
+The comparator reads the exact sample manifest and pins the archive SHA-256 before
+extracting requested revisions itself. For each exact title it reads one URL-derived
+receipt and one SHA-256-derived body under the source client's size limits. The receipt,
+rendered canonical link, page metadata and dump must agree on identity and the expected
+revision. The fresh comparison requires the sample runner's script fetcher. The rendered
+table must use the supported layout and cell markup. Its ancestors must have no
+inline styles or duplicate attributes. A nonvoid HTML tag is never self-closing. A header line break stays a break,
+and breaks inside form cells make the comparison fail. The comparator checks exact
+positions of displayed `invariabil` labels alongside literal forms. Its receipt binds
+the sample, parser, comparator, dump revision text, cached body and cached receipt hashes.
+Exit 1 means a row failed or was missing. Exit 2 means the manifest or archive failed.
+
+The historical 20-page baseline is pinned by the sample manifest. The ten additional
+pages still require matching live revisions and rendered cells. The five reserves are
+recorded in the manifest for follow-up only. Neither comparison supplies independent
+family transcriptions. Verbs require their own parser and sample.
+
+If a primary page's cached revision differs from the dump, keep its failed comparison
+receipt. For a missing or refused source, retain the exact source-client refusal receipt
+and its outcome hash. Review and pin a replacement manifest before rerunning the gate.
+It must retain the primary title, expected dump revision and observed live revision or
+refusal hash, and bind the approved reserve title, expected revision, category and
+approved V5 source receipt. Verify that the resulting sample has ten distinct titles
+and revision IDs and still has at least two pages in each category required by ADR-0231.
+A same-revision cell disagreement keeps the gate closed until the parser is fixed.
+The current comparator reads the primary manifest only. A replacement needs an explicit
+comparator update and fresh review of the manifest and any supplemental fetch provenance.
