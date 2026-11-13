@@ -6,9 +6,10 @@ sets the quality bar. *(to build)* marks a tool that Phase 0 builds; everything 
 
 ## Campaigns and the counted goal
 
-Codex runs each campaign as a Codex goal in one chat. Work happens on branch `content/v5` in the
-worktree `~/work/_worktrees/cat_de_roman_esti/content__v5`. Scratch, cache and evidence live in
-`~/work/_temp/content__v5/`, never under `/tmp`. The contract is
+ChatGPT runs each campaign as a goal in one ChatGPT app chat. Machine identifiers keep the old
+name: the operator `agent:codex`, any `~/.codex` path and thread parameters (ADR-0230 amendment).
+Work happens on branch `content/v5` in the worktree `~/work/_worktrees/cat_de_roman_esti/content__v5`.
+Scratch, cache and evidence live in `~/work/_temp/content__v5/`, never under `/tmp`. The contract is
 `~/work/_temp/content__v5/contract.json`. It holds the base SHA, the end (days and goal-meter
 tokens), targets, train limits, source caps, thread limit and tool budget.
 
@@ -83,7 +84,7 @@ Prefer content a Romanian 12-year-old would recognise.
 - **Sources.** A ro.wikipedia article and the matching Wikidata item.
 - **Minors and living persons.** Minors are never entries. A living person goes to Paul's queue
   and waits for his ruling.
-- **The rubric section.** Codex writes the Names section of `docs/CRITIQUE_RUBRIC.md` as its own
+- **The rubric section.** ChatGPT writes the Names section of `docs/CRITIQUE_RUBRIC.md` as its own
   commit, and a fresh reviewer that did not write it checks it (ADR-0230). It keeps the two rules
   above and the rubric's existing bar. A rubric change requalifies the rails (ADR-0229), so it
   lands with or before the first train that carries a name.
@@ -92,7 +93,7 @@ Prefer content a Romanian 12-year-old would recognise.
 
 ## Roles, threads and the turn checklist
 
-Every role runs in a fresh Codex thread (`fork_turns=none`, a distinct task name, one job per
+Every role runs in a fresh ChatGPT thread (`fork_turns=none`, a distinct task name, one job per
 thread). The roles are author, blind critic, factual reviewer, quality reviewer, assembler, pin
 reviewer and landing reviewer. Reviewers never see each other's verdict before both sign. Author
 sources stay hidden until both sign. The critic gets answer-stripped input only and is told

@@ -1,7 +1,7 @@
 # ADR-0230: Content loop V5 — counted goal, trains, words first
 
 Date: 2026-11-13
-Status: accepted (Paul, 2026-11-13).
+Status: accepted (Paul, 2026-11-13); amended the same day, executor name (see Amendment).
 Decider: Paul Dobos.
 Supersedes in part [ADR-0226](0226-content-loop-v4.md). Keeps [ADR-0227](0227-owner-qualified-test-pin-delegation.md)
 and [ADR-0228](0228-policy-only-source-hosts.md). Accepts [ADR-0229](0229-native-quick-review-and-rubric-requalification.md)'s
@@ -156,3 +156,23 @@ Synonyms: Wiktionary + second source (Recommended)
 The full question and option texts are kept with the proposal, in `10-owner-answers-20261113.md`.
 Earlier, on 2026-11-12, Paul wrote: "i like the goal looping work design but just inprove it", and
 "Yes, do both", which approved the `/tmp` evidence salvage and the C44 record (`163578f8`).
+
+## Amendment, 2026-11-13: the executor is named ChatGPT
+
+Paul, later the same day in the same session (instruction, then his selected answers, verbatim):
+
+```text
+i chage my mind and change the name oc codex with chatgpt
+
+V5 start: Rename only (Recommended)
+Scope: V5 docs + prompt (Recommended)
+```
+
+He starts the pilot himself in the ChatGPT app. Where decisions 1, 6 and 7 say Codex, read
+ChatGPT; nothing else in them changes. The owner log above stays verbatim. Machine identifiers
+keep their names: the operator literal `agent:codex` (the Quick cache binding's `operator` field
+requires it at `go-backend/internal/contentrails/quick_author_cache.go:70`, and
+`scripts/gui-game-preflight.sh:14` checks it), so the gate command keeps
+`GATE_OPERATOR=agent:codex` and its records match; also any `~/.codex` path and thread parameters
+such as `fork_turns`. The "detached Codex review worktree" in decision 10 names a V4
+artifact and keeps its name.
