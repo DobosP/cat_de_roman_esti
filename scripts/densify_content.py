@@ -133,7 +133,12 @@ def run(dense: dict, build_version: str, note: str) -> int:
     base_raw = PACKAGE_FIXTURE.read_text(encoding="utf-8")
     tests_base = TESTS_FIXTURE.read_text(encoding="utf-8")
     data = json.loads(base_raw)
+    nodes, edges = merge_records(data, dense)
+    return rebuild(data, nodes, edges, build_version, note, base_raw, tests_base)
 
+
+def merge_records(data: dict, dense: dict) -> tuple[list[dict], list[dict]]:
+    """Apply the existing dense merge to decoded records without writing files."""
     new_nodes_in: list[dict] = dense.get("nodes", [])
     new_edges_in: list[dict] = dense.get("edges", [])
 
@@ -238,7 +243,7 @@ def run(dense: dict, build_version: str, note: str) -> int:
     print(f"  nodes:   +{len(seen_new):<3} -> {len(nodes)}")
     print(f"  aliases: +{added_aliases}")
     print(f"  edges:   +{added_edges:<3} -> {len(edges)}  (skipped {skipped_edges} dup/invalid)")
-    return rebuild(data, nodes, edges, build_version, note, base_raw, tests_base)
+    return nodes, edges
 
 
 def rebuild(
@@ -254,6 +259,36 @@ def rebuild(
     fixture copies, validate, and roll back on failure. The shared finalize step for
     ``run()`` (content merges) and ``refine_dataset.py`` (in-place refinement) so the
     puzzle-regeneration rules never diverge between the two paths."""
+    out = rebuild_document(data, nodes, edges, build_version, note)
+    PACKAGE_FIXTURE.write_text(out, encoding="utf-8")
+    TESTS_FIXTURE.write_text(out, encoding="utf-8")
+
+    mean_deg = sum(node["degree"] for node in nodes) / max(1, len(nodes))
+    nd_mean = sum(1 for edge in edges if not edge["is_distractor"]) * 2 / max(1, len(nodes))
+    puzzles = data["kg_puzzles"]
+    pcd = data["meta"]["counts"]["puzzles_by_cat_diff"]
+    print("densify_content: wrote both fixture copies")
+    print(f"  nodes: {len(nodes)} | edges: {len(edges)} | puzzles regenerated: {len(puzzles)}")
+    print(f"  by bucket: {pcd}")
+    print(f"  mean degree (all): {mean_deg:.2f} | non-distractor: {nd_mean:.2f}")
+
+    errors = validate_fixture(PACKAGE_FIXTURE)
+    if errors:
+        PACKAGE_FIXTURE.write_text(base_raw, encoding="utf-8")
+        TESTS_FIXTURE.write_text(tests_base, encoding="utf-8")
+        msg = f"\ndensify_content: VALIDATION FAILED ({len(errors)}); rolled back."
+        print(msg, file=sys.stderr)
+        for error in errors[:40]:
+            print(f"  - {error}", file=sys.stderr)
+        return 1
+    print("\ndensify_content: GREEN — dense fixture is valid.")
+    return 0
+
+
+def rebuild_document(
+    data: dict, nodes: list[dict], edges: list[dict], build_version: str, note: str,
+) -> str:
+    """Build a dense KG document for an explicit output destination."""
     # ---- recompute degree (= incident-edge count) + tier from salience ----
     deg: Counter[str] = Counter()
     for e in edges:
@@ -365,28 +400,7 @@ def rebuild(
     data["kg_edges"] = edges
     data["kg_puzzles"] = puzzles
 
-    out = json.dumps(data, indent=2, ensure_ascii=False) + "\n"
-    PACKAGE_FIXTURE.write_text(out, encoding="utf-8")
-    TESTS_FIXTURE.write_text(out, encoding="utf-8")
-
-    mean_deg = sum(deg.values()) / max(1, len(nodes))
-    nd_mean = sum(1 for e in edges if not e["is_distractor"]) * 2 / max(1, len(nodes))
-    print("densify_content: wrote both fixture copies")
-    print(f"  nodes: {len(nodes)} | edges: {len(edges)} | puzzles regenerated: {len(puzzles)}")
-    print(f"  by bucket: {dict(sorted(gen_counter.items()))}")
-    print(f"  mean degree (all): {mean_deg:.2f} | non-distractor: {nd_mean:.2f}")
-
-    errors = validate_fixture(PACKAGE_FIXTURE)
-    if errors:
-        PACKAGE_FIXTURE.write_text(base_raw, encoding="utf-8")
-        TESTS_FIXTURE.write_text(tests_base, encoding="utf-8")
-        msg = f"\ndensify_content: VALIDATION FAILED ({len(errors)}); rolled back."
-        print(msg, file=sys.stderr)
-        for e in errors[:40]:
-            print(f"  - {e}", file=sys.stderr)
-        return 1
-    print("\ndensify_content: GREEN — dense fixture is valid.")
-    return 0
+    return json.dumps(data, indent=2, ensure_ascii=False) + "\n"
 
 
 if __name__ == "__main__":

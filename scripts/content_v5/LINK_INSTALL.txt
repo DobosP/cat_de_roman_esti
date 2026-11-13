@@ -1,0 +1,75 @@
+V5 additive word and link installation
+
+Run scripts/content_v5/link_install.py with Python 3.12, an exact clean
+content/v5 checkout, the active campaign scratch root, both full Git SHAs
+and the native cat-content executable with its SHA-256. The baseline must
+equal the campaign contract baseline. Use --help for the exact command.
+
+The hash-pinned cat-v5-link-install-1 manifest has items, gate, claims and
+judgments. Each item has id (registry ID), node, links and source.
+
+- node has id, node_type (concept), label_ro, category, description and
+  salience with at most four decimals. Start with a fresh description.
+- links has four to eight typed edges with src_id, dst_id, relation,
+  bidirectional (Boolean), label_ro and strength (at most three decimals).
+  An existing relation type is required. Every link touches the item's word.
+  There must be two distinct baseline single-word concepts and two distinct
+  neighbors in the item's category. A link between two new words must
+  appear identically in both frozen item lists and is installed once.
+- source has wiktionary (the registry's dated archive and exact raw page
+  receipt fields), wikipedia (url, receipt_sha256, body_sha256) and
+  frequency (receipt with path and sha256, body_sha256, word, count).
+  The operator replays the independently reviewed Wiktionary parser gate,
+  checks the exact Romanian lexical section, verifies the canonical cached
+  Romanian Wikipedia article, and rehashes the approved FrequencyWords list
+  and exact positive row. The reviewers check that the article supports the
+  selected sense, including when the canonical article title differs. Legacy
+  FrequencyWords data may support frequency.
+- gate is the same hash-pinned parser gate used by ALIAS_INSTALL.txt.
+  claims binds the LINK_SPANS.txt batch by path and sha256. Every exact edge
+  must have one checked span. Claims and receipts remain in private scratch.
+
+The registry row binds the SHA-256 of the canonical item in checks under
+v5_word_source_sha256. Canonical bytes use sorted keys, compact UTF-8 JSON
+and no final newline. The item also binds the S2 source provenance.
+
+The one-word dry run requires an empty judgments object and exactly the
+first S2-sourced word from the queued backlog, in registry creation order.
+Use --dry-run-out to create a new throwaway directory under scratch. The
+operator emits the graph and rederived pack paths and hashes. Pass both
+outputs to the prospective all-boards view diff. No train or board review
+is implied by the generated files.
+
+S7 uses --write with independently reviewed registry rows and one judgment
+binding per item. Each item binding must match registry v5_word_review_binding
+with author_thread, payload_sha256, derived_view_sha256 and reviews (factual,
+quality and critic reference objects with path and sha256). The registry also
+binds v5_derived_view_sha256 and the four standard v5_independence_checks.
+The separate critic receipt binds the same payload and view, an independent
+thread, verdict pass and the retained transcript path and SHA-256. Each signed review
+includes role, thread_id, item_id, payload_sha256, derived_view_sha256,
+span_result_sha256, verdict accept, child_safe true and a sources list of
+exact article citations (url, receipt_sha256, body_sha256). Each reviewer
+must cite an eligible word or link article first fetched independently of
+the author. Each signed span_result_sha256 binds the canonical object with
+schema cat-v5-link-item-spans-1, item_id and links (verified per-link report
+rows in frozen item order). Adding or dropping another item leaves this
+digest intact. The installer also reports the whole train's span result
+hash. Owner rulings and board replays still apply.
+
+The operator reuses the graph merger, puzzle rebuild and pack rederivation.
+It checks that all frozen additions survived without changes and that old
+nodes and edges were preserved except graph degrees. It runs native graph
+and pack validators before any published write and lists every changed or
+retired pack board. S7 also runs the remaining content and landing gates.
+
+Threat model
+
+The orchestrator owns the worktree, the journal, the exact executable and
+campaign scratch. Source responses and JSON are data. Hashes and structural
+checks verify retained bytes and bindings. Reviewers still judge the claimed
+relations, source-visible sense, salience, child safety and owner decisions.
+The lock and four-file transaction verify before/after bytes and restore
+the original mirrors on a failed write. Inspect mirror bytes and the lock
+if a process is killed during a write. The dry-run mode never writes to
+the checkout. Neither mode makes network requests or runs gameplay.
