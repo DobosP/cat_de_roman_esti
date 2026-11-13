@@ -1,0 +1,35 @@
+V5 campaign state
+
+Run from content/v5 at the start of each turn. Take quota and ordinary usage
+from the live app meter and tokens from the existing chat goal.
+
+  python3 -I scripts/content_v5/resume.py --campaign-dir <campaign> resume \
+    --quota-pct <used> --ordinary-usage <yes-or-no> --goal-meter-tokens <used> --save-state
+
+Use no if ordinary usage is unavailable or only paid credits remain.
+Read the stop reasons first. At a durable stop, close the train and finish the
+report. At 70–89% used, finish judged work and dispatch no new intake.
+The caller checks this before each dispatch. Paul re-arms with a new campaign contract. The override is immutable
+for this campaign. Its ledger row binds the exact contract bytes.
+
+Append one bounded JSON event with append --input <file>, or on stdin.
+Use UTC ISO timestamps. Enter campaign-start only after checking the exact
+core-kit SHA is on content/v5 and the independent reviews are in hand.
+Root-meter fields are cumulative within the campaign. Replaying a receipt
+after a missing acknowledgement leaves totals unchanged. Job completions
+are keyed by the original dispatch and thread. If the spawn succeeds before
+the dispatch is written, recover its ID from the owned thread inventory using
+the distinct task name, then append and poll that ID before considering retry. If a stop is already
+latched, observe and close the recovered thread in the campaign report without
+appending a new dispatch. A pending ledger dispatch is an observation target, never a live-process proof.
+
+If the ledger ends in an incomplete row, preserve the exact bytes and stop
+appending. Check the original dispatch, gate or receipt. Under exclusive
+orchestrator custody, record the repair in campaign evidence, restore through
+the last verified complete newline, and append the recovered event exactly
+once. Never truncate a valid row or a ledger belonging to another campaign.
+
+Run the standard-library tests with CAT_V5_TEST_SCRATCH set to a writable
+campaign directory. They exercise the actual CLI and persisted recovery.
+The tool uses Python 3.12, POSIX flock on Linux/macOS and msvcrt byte locking
+on Windows. Windows locking retries use the standard library's bounded retry.
