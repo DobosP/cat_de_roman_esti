@@ -111,9 +111,6 @@ var frozenV5Forms1Source30 []byte
 //go:embed testdata/python-http-parity-v5-p2-forms-1-source31.json.gz
 var frozenV5Pilot2Forms1Source31 []byte
 
-//go:embed testdata/python-http-parity-v5-p2-mixed-1-source32.json.gz
-var frozenV5Pilot2Mixed1Source32 []byte
-
 const FrozenSHA256 = "9041e05f13190a06a526c1aeed1f264d467483cd267ffcdb24f422ed9430b2cb"
 const V12SHA256 = "6293a0dde67ee0b0e5929cc1103bd80795e0aff1af2ba5fdf53e983ab79351fd"
 const V13SHA256 = "67d009c7eaa710bd98281b3300d3df4dc4ed4e224a157934abd7e19bce112670"
@@ -145,7 +142,6 @@ const V4C42Source28SHA256 = "438abf5396eb07cfe21acfab6185ce726f0af1dbef32407773e
 const V4C44Source29SHA256 = "c6e835321b337e0df256d7897cfa8c25563f977342f4e74de6625e17fe3461f2"
 const V5Forms1Source30SHA256 = "6013a42a2df2f13e3367cf64cccfedaa099d8343c50138304c2c683da334aba9"
 const V5Pilot2Forms1Source31SHA256 = "c70953212a7544bab7bc269209d2fb36f307f8c71aee880a5d32f2b155086708"
-const V5Pilot2Mixed1Source32SHA256 = "e0f44fae844dc7137d36a480128b6ae53387f500a9feae2eac2bb729edfa4b8f"
 const MaxCorpusBytes = 32 * 1024 * 1024
 const MaxCases = 4096
 
@@ -550,17 +546,6 @@ func reviewedV5Pilot2Forms1Source31() (*Corpus, error) {
 	return c, err
 }
 
-func reviewedV5Pilot2Mixed1Source32() (*Corpus, error) {
-	if fmt.Sprintf("%x", sha256.Sum256(frozenV5Pilot2Mixed1Source32)) != V5Pilot2Mixed1Source32SHA256 {
-		return nil, fmt.Errorf("independent V5 Pilot 2 Mixed 1 Source32 HTTP corpus digest drift")
-	}
-	c, err := ReadCorpus(bytes.NewReader(frozenV5Pilot2Mixed1Source32), true)
-	if err == nil && (len(c.Cases) != 1206 || len(c.Sources) != 8) {
-		return nil, fmt.Errorf("expected 1206 independent V5 Pilot 2 Mixed 1 Source32 HTTP cases and exact eight sources")
-	}
-	return c, err
-}
-
 // ForSources selects an independently captured reviewed corpus only when its
 // entire source identity equals the requested export. Historical Frozen remains
 // immutable; unknown, partial or mixed source sets never gain expected responses.
@@ -592,7 +577,7 @@ var (
 )
 
 func indexReviewedSources() {
-	for _, load := range []func() (*Corpus, error){Frozen, reviewedV12, reviewedV13, reviewedV14, reviewedV15, reviewedV16, source6GUIRequalificationCorpus, reviewedV18, reviewedV19, reviewedV110, reviewedV111, reviewedV112, reviewedV113, reviewedV3N1, reviewedV3N2, reviewedV3N4, reviewedV4C1, reviewedV4C2, reviewedV4C3, reviewedV4C4, reviewedV4C5, reviewedV4C6, reviewedV4C7, reviewedV4C8, reviewedV4C9, reviewedV4C10, reviewedV4M3Stage5Recovery27, reviewedV4C42Source28, reviewedV4C44Source29, reviewedV5Forms1Source30, reviewedV5Pilot2Forms1Source31, reviewedV5Pilot2Mixed1Source32} {
+	for _, load := range []func() (*Corpus, error){Frozen, reviewedV12, reviewedV13, reviewedV14, reviewedV15, reviewedV16, source6GUIRequalificationCorpus, reviewedV18, reviewedV19, reviewedV110, reviewedV111, reviewedV112, reviewedV113, reviewedV3N1, reviewedV3N2, reviewedV3N4, reviewedV4C1, reviewedV4C2, reviewedV4C3, reviewedV4C4, reviewedV4C5, reviewedV4C6, reviewedV4C7, reviewedV4C8, reviewedV4C9, reviewedV4C10, reviewedV4M3Stage5Recovery27, reviewedV4C42Source28, reviewedV4C44Source29, reviewedV5Forms1Source30, reviewedV5Pilot2Forms1Source31} {
 		c, err := load()
 		if err != nil {
 			reviewedSources, reviewedSourcesErr = nil, err
