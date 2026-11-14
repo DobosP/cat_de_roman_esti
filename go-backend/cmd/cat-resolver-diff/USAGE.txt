@@ -9,6 +9,8 @@ their source identities, runs the native audit, and prints one JSON receipt.
 Include reviewed fuzzy-neighbour spellings with --probes when applicable.
 All exact added spellings are discovered from the bundles. No unbounded typo
 space is searched; the receipt lists exactly which strings were compared.
+Direct native runs accept --workers from 1 to 16 to split targets. The
+default is one worker. Reports use the same sorted target and probe order.
 
 The audit compares first-guess ownership, score fields, confirmation and
 unknown behaviour for every exported Cald board, including approved boards

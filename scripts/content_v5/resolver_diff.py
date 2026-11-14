@@ -50,6 +50,7 @@ def main(argv=None):
     parser.add_argument("--binary-sha256", required=True)
     parser.add_argument("--scratch", type=Path, required=True)
     parser.add_argument("--probes", type=Path)
+    parser.add_argument("--workers", type=int, choices=range(1, 17), default=1)
     args = parser.parse_args(argv)
     try:
         repo = args.repo.resolve(strict=True)
@@ -72,6 +73,8 @@ def main(argv=None):
             (directory / "after.json").write_bytes(after)
             command = [str(binary), "--before", str(directory / "before.json"),
                        "--after", str(directory / "after.json")]
+            if args.workers != 1:
+                command.extend(["--workers", str(args.workers)])
             if probes is not None:
                 (directory / "probes.json").write_bytes(probes)
                 command.extend(["--probes", str(directory / "probes.json")])

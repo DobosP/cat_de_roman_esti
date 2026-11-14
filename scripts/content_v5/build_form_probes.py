@@ -380,6 +380,7 @@ def replay(args, repo, scratch, output):
     require(len(groups) == len(manifest["shards"]), "Collision shard count differs")
     output.mkdir(mode=0o700)
     reports, forbidden, targets = [], [], None
+    workers = ["--workers", str(args.workers)] if args.workers != 1 else []
     for row, group in zip(manifest["shards"], groups, strict=True):
         path = manifest_path.parent / row["path"]
         require(pinned(manifest_path.parent, row["path"], row["sha256"], 512 * 1024) == json_bytes(group)
@@ -387,7 +388,7 @@ def replay(args, repo, scratch, output):
         report = subprocess_json(
             [sys.executable, "-I", "-B", str(resolver), "--repo", str(repo), "--baseline", baseline,
              "--sha", candidate, "--binary", str(binary), "--binary-sha256", args.resolver_binary_sha256,
-             "--scratch", str(output), "--probes", str(path)],
+             "--scratch", str(output), "--probes", str(path), *workers],
             output, "Cald resolver shard", 3660,
         )
         probes = sorted(set(group) | {row["surface"] for row in proposed})
@@ -440,6 +441,7 @@ def main(argv=None):
         audit.add_argument("--" + key, required=True)
     audit.add_argument("--manifest", required=True, type=Path)
     audit.add_argument("--resolver-binary", required=True, type=Path)
+    audit.add_argument("--workers", type=int, choices=range(1, 17), default=1)
     args = cli.parse_args(argv)
     try:
         repo = args.repo.resolve(strict=True)

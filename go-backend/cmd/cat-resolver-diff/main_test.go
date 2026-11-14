@@ -1,8 +1,13 @@
 package main
 
 import (
+	"bytes"
+	"encoding/json"
+	"os"
 	"path/filepath"
 	"reflect"
+	"sort"
+	"strconv"
 	"testing"
 
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/graph"
@@ -81,6 +86,93 @@ func TestNewAliasWinsOnlyAtItsOwner(t *testing.T) {
 	if old.Mode != "unknown" || old.Won || new.Mode != "direct" || !new.Won ||
 		new.Attempts != 1 || new.Guess["id"] != selected.Owner {
 		t.Fatalf("unexpected before %+v or after %+v", old, new)
+	}
+}
+
+func TestResolverReportMatchesAcrossWorkerCounts(t *testing.T) {
+	// A worker must retain its session between create, guess and confirmation.
+	t.Setenv("CAT_MAX_SESSIONS_PER_GAME", "1")
+	t.Setenv("CAT_SESSION_TTL_SECONDS", "7200")
+
+	candidate := installed(t)
+	ids := make([]string, 0, len(candidate.targets))
+	for id := range candidate.targets {
+		ids = append(ids, id)
+	}
+	sort.Strings(ids)
+	selected := map[string]bool{}
+	for _, id := range ids[:8] {
+		selected[id] = true
+	}
+	items := candidate.content.PackItems[:0]
+	for _, item := range candidate.content.PackItems {
+		if item.Game != "contexto" || selected[item.ID] {
+			items = append(items, item)
+		}
+	}
+	candidate.content.PackItems = items
+	dir := t.TempDir()
+	writeBundle := func(name string) string {
+		t.Helper()
+		raw, err := json.Marshal(candidate.content)
+		if err != nil {
+			t.Fatal(err)
+		}
+		path := filepath.Join(dir, name)
+		if err := os.WriteFile(path, raw, 0o600); err != nil {
+			t.Fatal(err)
+		}
+		return path
+	}
+	beforePath := writeBundle("before.json")
+	owner := candidate.targets[ids[0]].Owner
+	resolver := graph.New(candidate.content)
+	for _, spelling := range []string{"martorrezolvator", "semnprobator"} {
+		for i := range candidate.content.Nodes {
+			node := &candidate.content.Nodes[i]
+			if node.ID == owner {
+				node.Aliases = append(node.Aliases, spelling)
+			}
+		}
+		candidate.content.NormalizedIndex[resolver.Normalize(spelling)] = owner
+	}
+	afterPath := writeBundle("candidate.json")
+	probesPath := filepath.Join(dir, "probes.json")
+	if err := os.WriteFile(probesPath, []byte(`["semnprobator","România","semnprobator"]`), 0o600); err != nil {
+		t.Fatal(err)
+	}
+	args := []string{"--before", beforePath, "--after", afterPath, "--probes", probesPath}
+	var serial bytes.Buffer
+	if err := run(args, &serial); err != nil {
+		t.Fatal(err)
+	}
+	var report struct {
+		Targets []target
+		Probes  []string
+		Changes []change
+	}
+	if err := json.Unmarshal(serial.Bytes(), &report); err != nil {
+		t.Fatal(err)
+	}
+	if len(report.Targets) != len(selected) || len(report.Changes) < 2 ||
+		!reflect.DeepEqual(report.Probes, []string{"România", "martorrezolvator", "semnprobator"}) {
+		t.Fatalf("unexpected coverage: %d targets, %v probes, %d changes",
+			len(report.Targets), report.Probes, len(report.Changes))
+	}
+	for _, workers := range []int{2, 4} {
+		var parallel bytes.Buffer
+		if err := run(append(args, "--workers", strconv.Itoa(workers)), &parallel); err != nil {
+			t.Fatal(err)
+		}
+		if !bytes.Equal(serial.Bytes(), parallel.Bytes()) {
+			t.Fatalf("report bytes differ for %d workers", workers)
+		}
+	}
+	for _, workers := range []int{0, maxWorkers + 1} {
+		var refused bytes.Buffer
+		if err := run(append(args, "--workers", strconv.Itoa(workers)), &refused); err == nil || refused.Len() != 0 {
+			t.Fatalf("expected invalid worker count %d to fail without a report", workers)
+		}
 	}
 }
 

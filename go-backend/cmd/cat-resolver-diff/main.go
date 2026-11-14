@@ -13,6 +13,7 @@ import (
 	"reflect"
 	"slices"
 	"strings"
+	"sync"
 	"unicode/utf8"
 
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
@@ -54,7 +55,10 @@ type bundle struct {
 	digest  string
 }
 
-const maxBundleBytes = 32 << 20
+const (
+	maxBundleBytes = 32 << 20
+	maxWorkers     = 16
+)
 
 func load(path string) (*bundle, error) {
 	file, err := os.Open(path)
@@ -234,15 +238,20 @@ func readAnswer(b *bundle, t target, exclude map[string]bool, text string) (answ
 }
 
 func compare(before, after *bundle, extra []string) ([]target, []string, []change, error) {
+	return compareWithWorkers(before, after, extra, 1)
+}
+
+func compareWithWorkers(before, after *bundle, extra []string, workers int) ([]target, []string, []change, error) {
+	if workers < 1 || workers > maxWorkers {
+		return nil, nil, nil, fmt.Errorf("--workers must be between 1 and %d", maxWorkers)
+	}
 	probes, err := probesFor(before, after, extra)
 	if err != nil {
 		return nil, nil, nil, err
 	}
 	targets := make([]target, 0, len(before.targets))
-	exclude := make(map[string]bool, len(before.targets))
-	for id, t := range before.targets {
+	for _, t := range before.targets {
 		targets = append(targets, t)
-		exclude[id] = true
 	}
 	slices.SortFunc(targets, func(a, b target) int { return strings.Compare(a.ID, b.ID) })
 	changes := []change{}
@@ -251,16 +260,61 @@ func compare(before, after *bundle, extra []string) ([]target, []string, []chang
 	}
 	before.prepare()
 	after.prepare()
+	workers = min(workers, len(targets))
+	if workers <= 1 {
+		changes, err = compareTargets(before, after, targets, probes)
+		if err != nil {
+			return nil, nil, nil, err
+		}
+		return targets, probes, changes, nil
+	}
+	type result struct {
+		changes []change
+		err     error
+	}
+	results := make([]result, workers)
+	var wg sync.WaitGroup
+	for i := range workers {
+		start, end := i*len(targets)/workers, (i+1)*len(targets)/workers
+		workerBefore, workerAfter := *before, *after
+		if i > 0 {
+			// Share the immutable graph and synchronized profiles. Give each worker
+			// its own session stores so it cannot evict another worker's active guess.
+			workerBefore.game = contexto.New(before.content)
+			workerAfter.game = contexto.New(after.content)
+		}
+		wg.Go(func() {
+			results[i].changes, results[i].err = compareTargets(&workerBefore, &workerAfter, targets[start:end], probes)
+		})
+	}
+	wg.Wait()
+	// Each worker has a contiguous slice of the sorted targets. Keep both
+	// change order and the first error independent of completion order.
+	for _, result := range results {
+		if result.err != nil {
+			return nil, nil, nil, result.err
+		}
+		changes = append(changes, result.changes...)
+	}
+	return targets, probes, changes, nil
+}
+
+func compareTargets(before, after *bundle, targets []target, probes []string) ([]change, error) {
+	exclude := make(map[string]bool, len(before.targets))
+	for id := range before.targets {
+		exclude[id] = true
+	}
+	changes := []change{}
 	for _, t := range targets {
 		delete(exclude, t.ID)
 		for _, probe := range probes {
 			old, err := readAnswer(before, t, exclude, probe)
 			if err != nil {
-				return nil, nil, nil, err
+				return nil, err
 			}
 			next, err := readAnswer(after, t, exclude, probe)
 			if err != nil {
-				return nil, nil, nil, err
+				return nil, err
 			}
 			if !reflect.DeepEqual(old, next) {
 				changes = append(changes, change{t.ID, probe, old, next})
@@ -268,7 +322,7 @@ func compare(before, after *bundle, extra []string) ([]target, []string, []chang
 		}
 		exclude[t.ID] = true
 	}
-	return targets, probes, changes, nil
+	return changes, nil
 }
 
 func run(args []string, output io.Writer) error {
@@ -276,6 +330,7 @@ func run(args []string, output io.Writer) error {
 	baseline := fs.String("before", "", "before content bundle")
 	candidate := fs.String("after", "", "after content bundle")
 	probesPath := fs.String("probes", "", "optional JSON array of reviewed fuzzy-neighbour probes")
+	workers := fs.Int("workers", 1, fmt.Sprintf("number of parallel target workers (1–%d)", maxWorkers))
 	if err := fs.Parse(args); err != nil {
 		return err
 	}
@@ -307,7 +362,7 @@ func run(args []string, output io.Writer) error {
 	if err != nil {
 		return fmt.Errorf("after bundle: %w", err)
 	}
-	targets, checked, changes, err := compare(before, after, probes)
+	targets, checked, changes, err := compareWithWorkers(before, after, probes, *workers)
 	if err != nil {
 		return err
 	}
