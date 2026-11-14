@@ -6,12 +6,19 @@ import (
 	"testing"
 )
 
+const source32SparanghelKGSHA256 = "1c6e504326e91bf92d3c2c5d8bf1d5cfe74d43aa81939305ca65d7d2f0c9bed1"
+
 // A new qualified input family resolves to the same old device and charges one
 // attempt; this does not approve Ceas as a hidden target or promise warm feedback.
 func TestV14ClockSynonymInNaturallySelectedExistingGame(t *testing.T) {
 	c, err := content.Load()
 	if err != nil {
 		t.Fatal(err)
+	}
+	// The independently replayed Source32 graph adds one reachable concept.
+	wantRank := 2389
+	if c.Sources["kg_sample.json"] == source32SparanghelKGSHA256 {
+		wantRank = 2390
 	}
 	s := New(c)
 	start, apiErr := s.Create(big.NewInt(23), "usor", nil, "viata_de_roman")
@@ -25,7 +32,7 @@ func TestV14ClockSynonymInNaturallySelectedExistingGame(t *testing.T) {
 			t.Fatalf("%q: %v %v", text, got, e)
 		}
 		guess := got["guess"].(map[string]any)
-		if guess["id"] != "n_v24_time_day_ceas" || guess["rank"] != 2389 || guess["closeness"] != 7 {
+		if guess["id"] != "n_v24_time_day_ceas" || guess["rank"] != wantRank || guess["closeness"] != 7 {
 			t.Fatalf("existing device feedback changed: %v", guess)
 		}
 	}
