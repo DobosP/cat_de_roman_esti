@@ -22,6 +22,32 @@ edges edge_id. Freeze graph payload in the committed source field names and
 board payload with category and difficulty. Lane-specific recipe/caption
 closeout needs the corresponding future lane adapter before that lane runs.
 
+For additive Pilot 2 words, assembly.word_link_manifest references the exact
+cat-v5-link-install-1 input. Use each canonical authored item SHA-256 in
+frozen_payload_sha256 and {node_id, edge_ids} in installed. Include the sorted
+native edge IDs from each item's signed list. An identical link signed by both
+new endpoints appears in both lists and is counted once in the committed delta.
+Closeout replays the source and signed review checks and verifies all fields of
+each added node and incident link. The pilot contract fixes the backlog baseline,
+and the train's previous main fixes the actual before inventory. Any legacy
+puzzle delta must equal the existing generator's result from the final graph.
+
+For a word train, assembly.board_view_diff references the full native
+cat-board-view-diff-1 report for the exact committed before and after bundles.
+List every disturbed board in touched_boards and the exact HTTP transcript.
+If any board is disturbed, assembly.board_reblind references a
+cat-v5-board-reblind-1 object with sha, board_view_diff_sha256 and boards.
+Each boards row has game, id, view_sha256 (the native after_sha256), thread_id,
+verdict (pass) and a retained transcript path/digest reference. The transcript
+is a JSON object with those five board, view and role fields plus play, a
+nonempty array of action or feedback objects containing actual play text.
+Known author, factual, quality, landing and pin threads cannot sign reblind.
+Distinct boards may share a critic thread within one blind batch. Coverage
+must equal the native disturbed list. Each transcript and play must be distinct.
+All direct train attachments share the 50 MiB receipt budget. Reusable pinned
+source-cache bodies and the dated dump remain outside the train attachment list.
+Keep all train evidence in campaign scratch.
+
 The HTTP record binds the exact raw play JSONL with a transcript path/digest.
 The reference record binds the corpus (JSON or gzip), independent capture
 summary, native replay summary, and named independent expectations_origin.

@@ -1,5 +1,6 @@
 """Receipt closeout validations with synthetic gate and registry evidence."""
 
+from copy import deepcopy
 import hashlib
 import json
 import os
@@ -127,6 +128,204 @@ class CloseLandingTests(unittest.TestCase):
             delta["aliases"]["added"] = []
             with self.assertRaisesRegex(ValueError, "Installed aliases differ"):
                 close.check_scope(Path("."), docs, delta, ["a"], {"a": row}, bundle)
+
+    def word_fixture(self):
+        def node(owner, label):
+            return {"id": owner, "label_ro": label, "node_type": "concept",
+                    "description": label, "category": "stiinta", "salience": .6}
+
+        def edge(src, dst):
+            return {"src_id": src, "dst_id": dst, "relation": "related_to",
+                    "label_ro": "related", "bidirectional": False, "strength": .7}
+
+        common = edge("n_one", "n_two")
+        links = [common, *(edge("n_one", f"n_{i}") for i in range(3)),
+                 *(edge("n_two", f"n_{i}") for i in range(3))]
+        items = [{"id": "one", "node": node("n_one", "One"), "links": links[:4]},
+                 {"id": "two", "node": node("n_two", "Two"), "links": [common, *links[4:]]}]
+        delta = {"concepts": {"added": [{**item["node"], "degree": len(item["links"]),
+                                      "difficulty_tier": close.link_install.tier_for_salience(.6)} for item in items]},
+                 "edges": {"added": [{**row, "id": f"e{i}", "is_distractor": 0, "bidirectional": 0}
+                                     for i, row in enumerate(links)]},
+                 "aliases": {"added": []}, "boards": {}}
+        return items, links, delta
+
+    def test_shared_word_edge_has_one_committed_effect_and_exact_fields(self):
+        items, links, delta = self.word_fixture()
+        self.assertEqual(close.word_artifacts(items, links, delta), {
+            "one": {"node_id": "n_one", "edge_ids": ["e0", "e1", "e2", "e3"]},
+            "two": {"node_id": "n_two", "edge_ids": ["e0", "e4", "e5", "e6"]},
+        })
+        for field, value in (("relation", "is_a"), ("label_ro", "other"), ("bidirectional", 1),
+                             ("src_id", "n_two"), ("strength", .6), ("is_distractor", 1)):
+            with self.subTest(field=field):
+                changed = deepcopy(delta)
+                changed["edges"]["added"][0][field] = value
+                with self.assertRaisesRegex(ValueError, "incident link"):
+                    close.word_artifacts(items, links, changed)
+        for duplicate in (True, False):
+            with self.subTest(duplicate=duplicate):
+                changed = deepcopy(delta)
+                extra = {**changed["edges"]["added"][0], "id": "extra"}
+                if not duplicate:
+                    extra["dst_id"] = "n_extra"
+                changed["edges"]["added"].append(extra)
+                with self.assertRaisesRegex(ValueError, "incident link"):
+                    close.word_artifacts(items, links, changed)
+
+    def test_word_scope_requires_exact_disturbed_board_http_play(self):
+        items, links, delta = self.word_fixture()
+        words = close.word_artifacts(items, links, delta)
+        for item, word in words.items():
+            word["payload_sha256"] = close.sha256(item.encode())
+        registry = {item: {"type": "concept", "payload": {"forms": [], "node_id": word["node_id"]}}
+                    for item, word in words.items()}
+        docs = {
+            "assembly": {"item_ids": sorted(words), "installed": {
+                item: {key: row[key] for key in ("node_id", "edge_ids")} for item, row in words.items()},
+                "frozen_payload_sha256": {item: row["payload_sha256"] for item, row in words.items()},
+                "touched_boards": [["contexto", "board"]]},
+            "landing-review": {"item_ids": sorted(words)},
+            "http-play": {"sha": SHA, "baseline": BASE, "transcript": {"path": "play.jsonl"}},
+        }
+        delta["boards"]["contexto"] = {"added": [], "removed": [], "changed": []}
+        bundle = {"manifest": {"content_hash": "hash"}, "pack_items": [
+            {"id": "board", "pilot_eligible": True, "status": "approved", "game": "contexto",
+             "payload": {"target": "n_0"}}]}
+        header = {"sha": SHA, "baseline": BASE, "content_hash": "hash"}
+        views = {("contexto", "board"): "a" * 64}
+
+        def play_receipt(rows):
+            raw = b"".join((json.dumps(row) + "\n").encode() for row in rows)
+            docs["http-play"]["transcript"]["sha256"] = close.sha256(raw)
+            return raw
+
+        raw = play_receipt([header, {"game": "contexto", "id": "board", "won": True, "seed": 1},
+                            {"boards": 1, "aliases": 0, "failures": 0}])
+        with patch.object(close, "read_artifact", return_value=raw):
+            close.check_scope(Path("."), docs, delta, sorted(words), registry, bundle, words, views)
+            docs["assembly"]["touched_boards"] = []
+            with self.assertRaisesRegex(ValueError, "disturbed board"):
+                close.check_scope(Path("."), docs, delta, sorted(words), registry, bundle, words, views)
+        docs["assembly"]["touched_boards"] = [["contexto", "board"]]
+        raw = play_receipt([header, {"boards": 0, "aliases": 0, "failures": 0}])
+        with patch.object(close, "read_artifact", return_value=raw):
+            with self.assertRaisesRegex(ValueError, "HTTP play scope differs"):
+                close.check_scope(Path("."), docs, delta, sorted(words), registry, bundle, words, views)
+
+    def test_word_board_reblind_requires_exact_bundle_and_every_changed_view(self):
+        before, after = "a" * 64, "b" * 64
+        first = {"game": "contexto", "id": "board", "kind": "changed",
+                 "before_sha256": "c" * 64, "after_sha256": "d" * 64}
+        diff = {"schema": "cat-board-view-diff-1", "baseline_bundle_sha256": before,
+                "candidate_bundle_sha256": after, "disturbed_total": 2,
+                "games": {game: {"disturbed": 2 if game == "contexto" else 0} for game in close.BOARD_GAMES},
+                "disturbed": [first, {**first, "id": "board-2"}]}
+        diff_ref = {"path": "diff", "sha256": "e" * 64}
+        reblind_ref = {"path": "blind", "sha256": "f" * 64}
+        assembly = {"sha": SHA, "board_view_diff": diff_ref, "board_reblind": reblind_ref}
+        opening = {"game": "contexto", "id": "board", "view_sha256": "d" * 64,
+                   "thread_id": "fresh-blind-thread", "verdict": "pass"}
+        reblind = {"schema": "cat-v5-board-reblind-1", "sha": SHA, "board_view_diff_sha256": diff_ref["sha256"],
+                   "boards": [{**opening, "transcript": {"path": "play-1", "sha256": "1" * 64}},
+                              {**opening, "id": "board-2",
+                               "transcript": {"path": "play-2", "sha256": "2" * 64}}]}
+        plays = {"play-1": {**opening, "play": [{"guess": "Câmpie"}]},
+                 "play-2": {**opening, "id": "board-2", "play": [{"guess": "Munte"}]}}
+
+        def evidence(_scratch, ref, _limit):
+            document = {"diff": diff, "blind": reblind, **plays}[ref["path"]]
+            return close.json_bytes(document)
+
+        def check(candidate=after, other_roles=frozenset()):
+            recorder = close.Evidence(Path("."), {})
+            result = close.word_board_scope(recorder, assembly, before, candidate, other_roles)
+            self.assertEqual(set(recorder.attachments), {
+                "board-view-diff", "board-reblind", "board-reblind-transcript-1", "board-reblind-transcript-2",
+            })
+            return result
+
+        with patch.object(close, "evidence_file", side_effect=evidence):
+            self.assertEqual(check(), {("contexto", "board"): "d" * 64, ("contexto", "board-2"): "d" * 64})
+            with self.assertRaisesRegex(ValueError, "Exact full"):
+                check("0" * 64)
+            with self.assertRaisesRegex(ValueError, "Independent reblind"):
+                check(other_roles={"fresh-blind-thread"})
+            reblind["boards"][0]["view_sha256"] = "c" * 64
+            with self.assertRaisesRegex(ValueError, "reblind pass differs"):
+                check()
+            reblind["boards"][0]["view_sha256"] = "d" * 64
+            for invalid in ([], [{}], [{"guess": "   "}], [{"won": True}]):
+                with self.subTest(play=invalid):
+                    plays["play-2"]["play"] = invalid
+                    with self.assertRaisesRegex(ValueError, "exact binding or play"):
+                        check()
+            plays["play-2"]["play"] = plays["play-1"]["play"]
+            with self.assertRaisesRegex(ValueError, "Reused disturbed-board reblind play"):
+                check()
+            reblind["boards"][1]["transcript"]["sha256"] = "1" * 64
+            with self.assertRaisesRegex(ValueError, "Reused disturbed-board reblind transcript"):
+                check()
+            reblind["boards"] = reblind["boards"][:1]
+            with self.assertRaisesRegex(ValueError, "every disturbed board"):
+                check()
+
+    def test_evidence_aggregates_old_and_word_attachments_under_one_budget(self):
+        data = b"three"
+        ref = {"path": "nested", "sha256": close.sha256(data)}
+        tracker = close.Evidence(Path("."), {"assembly": {
+            "path": "assembly", "sha256": "a" * 64, "bytes": close.MAX_EVIDENCE - len(data),
+        }})
+
+        def bounded_read(_scratch, path, limit):
+            self.assertIn(path, {"nested", "later"})
+            if len(data) > limit:
+                raise ValueError("Artifact exceeds size bound")
+            return data
+
+        with patch.object(close, "read_artifact", side_effect=bounded_read):
+            tracker.add("word-link-claims", ref)
+            tracker.add("shared-claims", ref, shared=True)
+            self.assertEqual(tracker.used, close.MAX_EVIDENCE)
+            self.assertEqual(set(tracker.attachments), {"assembly", "word-link-claims"})
+            with self.assertRaisesRegex(ValueError, "Conflicting digest"):
+                tracker.add("conflict", {**ref, "sha256": "b" * 64}, shared=True)
+            with self.assertRaisesRegex(ValueError, "reused across"):
+                tracker.add("http-transcript", ref)
+            with self.assertRaisesRegex(ValueError, "size bound"):
+                tracker.add("reference-corpus", {**ref, "path": "later"})
+
+    def test_reblind_independence_includes_all_relevant_known_roles(self):
+        tracker = close.Evidence(Path("."), {})
+        docs = {"landing-review": {"thread_id": "landing"}, "pin-review": {"thread_id": "pins"}}
+        rows = [{"id": "word", "checks": {}, "reviews": []},
+                {"id": "board", "checks": {"v5_author": {"thread_id": "board-author"},
+                                             "v5_blind": {"thread_id": "board-critic"}},
+                 "reviews": [{"role": "quality", "thread_id": "board-quality"}]},
+                {"id": "form", "checks": {}, "reviews": [], "v5_author_thread": "form-author",
+                 "v5_review_binding": {"reviews": {"factual": {"path": "form-factual"}}}}]
+        judgments = {"word": {"author_thread": "word-author", "reviews": {
+            "factual": {"path": "word-factual"}, "critic": {"path": "word-critic"},
+        }}}
+        def attachment(_name, ref, *_args, **_kwargs):
+            return close.json_bytes({"thread_id": ref["path"], "transcript_path": "word-critic-play",
+                                     "transcript_sha256": "a" * 64})
+        with patch.object(tracker, "add", side_effect=attachment):
+            self.assertEqual(close.other_reblind_roles(tracker, docs, rows, judgments), {
+                "landing", "pins", "board-author", "board-critic", "board-quality", "form-author",
+                "form-factual", "word-author", "word-factual", "word-critic",
+            })
+
+    def test_qualified_word_replays_unchanged_exact_reviewed_predecessor(self):
+        item = "one"
+        prior = {"id": item, "state": "reviewed", "holds": [], "reviews": [],
+                 "checks": {"v5_word_source_sha256": "a" * 64}, "frozen_payload": {"sha256": "a" * 64}}
+        qualified = {**prior, "state": "qualified",
+                     "previous_sha256": close.sha256(close.registry_encode(prior).encode())}
+        self.assertEqual(close.reviewed_word_rows({item: qualified}, [prior, qualified], {item}), {item: prior})
+        qualified["checks"] = {"v5_word_source_sha256": "b" * 64}
+        with self.assertRaisesRegex(ValueError, "changed exact reviewed evidence"):
+            close.reviewed_word_rows({item: qualified}, [prior, qualified], {item})
 
     def test_pack_payload_excludes_generated_record_fields(self):
         installed = {"id": "cx1", "status": "approved", "source": "v5",

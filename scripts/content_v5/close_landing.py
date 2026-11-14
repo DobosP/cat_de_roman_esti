@@ -19,13 +19,16 @@ import subprocess
 import sys
 
 sys.dont_write_bytecode = True
-SCRIPTS = Path(__file__).resolve().parents[1]
+V5 = Path(__file__).resolve().parent
+SCRIPTS = V5.parent
+sys.path.insert(0, str(V5))
 sys.path.insert(0, str(SCRIPTS))
 sys.path.insert(0, str(SCRIPTS / "landing"))
 from content_file_transaction import atomic_write, restore_files
 from content_registry import current_rows, encode as registry_encode, read_journal
 from support import clean_source, exact_commit, git, read_artifact, read_json, require
 from kgdiff import committed_delta
+import link_install
 from play import scope as pack_play_scope
 
 REGISTRY = "docs/content-registry/registry.jsonl"
@@ -46,6 +49,9 @@ CHECKS_4I = {"01-rails", "02-validate", "03-export", "04-ops", "05-mobile",
              "06-race", "07-vet", "08-auth", "09-doc", "10-diff"}
 TRAIN = re.compile(r"[a-z0-9][a-z0-9-]{0,63}")
 SHA256 = re.compile(r"[a-f0-9]{64}")
+BUNDLE = "go-backend/internal/content/bundled.json"
+BOARD_GAMES = {"alchimie", "conexiuni", "contexto", "intrusul", "lant", "perechi"}
+WORD_REVIEW_FIELDS = ("v5_word_review_binding", "v5_derived_view_sha256", "v5_independence_checks")
 
 
 def sha256(data):
@@ -158,21 +164,31 @@ def evidence_file(scratch, ref, limit):
     return raw
 
 
-def check_reference(repo, scratch, candidate, bundle, evidence, documents):
+class Evidence:
+    def __init__(self, scratch, initial):
+        self.scratch = scratch
+        self.attachments = dict(initial)
+        self.paths = {item["path"]: item for item in initial.values()}
+        self.used = sum(item["bytes"] for item in initial.values())
+
+    def add(self, name, ref, limit=MAX_EVIDENCE, *, shared=False):
+        require(isinstance(ref, dict) and ref.keys() == {"path", "sha256"}, "Invalid evidence reference")
+        prior = self.paths.get(ref["path"])
+        if prior and shared:
+            require(prior["sha256"] == ref["sha256"], "Conflicting digest for shared closeout evidence")
+            return evidence_file(self.scratch, ref, min(limit, prior["bytes"]))
+        require(name not in self.attachments and prior is None, "Evidence file reused across closeout roles")
+        raw = evidence_file(self.scratch, ref, min(limit, MAX_EVIDENCE - self.used))
+        entry = {**ref, "bytes": len(raw)}
+        self.attachments[name] = self.paths[ref["path"]] = entry
+        self.used += len(raw)
+        return raw
+
+
+def check_reference(repo, candidate, bundle, evidence, documents):
     reference = documents["reference"]
     pin_review = documents["pin-review"]
-    attachments = dict(evidence)
-    used = sum(item["bytes"] for item in evidence.values())
-    names = {item["path"] for item in evidence.values()}
-
-    def attachment(name, ref):
-        nonlocal used
-        require(ref["path"] not in names, "Evidence file reused across closeout roles")
-        data = evidence_file(scratch, ref, MAX_EVIDENCE - used)
-        attachments[name] = {**ref, "bytes": len(data)}
-        names.add(ref["path"])
-        used += len(data)
-        return data
+    attachment = evidence.add
 
     corpus_raw = attachment("reference-corpus", reference["corpus"])
     corpus_digest = sha256(corpus_raw)
@@ -203,7 +219,7 @@ def check_reference(repo, scratch, candidate, bundle, evidence, documents):
             and report.get("requests") == 1206 and report.get("reference") == corpus["reference"]
             and report.get("content_hash") == bundle["manifest"]["content_hash"],
             "Native reference replay differs")
-    require(pin_review.get("reference_sha256") == evidence["reference"]["sha256"]
+    require(pin_review.get("reference_sha256") == evidence.attachments["reference"]["sha256"]
             and pin_review.get("corpus_sha256") == corpus_digest,
             "Pin review does not bind the exact independent reference")
     pin = exact_commit(repo, pin_review["pin_sha"])
@@ -226,7 +242,6 @@ def check_reference(repo, scratch, candidate, bundle, evidence, documents):
             listed = git(repo, "ls-tree", "--name-only", sha, "--", path).splitlines()
             actual = sha256(git(repo, "show", f"{sha}:{path}")) if path.encode() in listed else None
             require(row[label] == actual, f"Pin file digest differs for {path}")
-    return attachments
 
 
 def valid_case(case):
@@ -252,7 +267,197 @@ def valid_seed(seed):
     return type(seed) is int and 0 <= seed < 10000
 
 
-def check_scope(scratch, documents, delta, item_ids, registry, bundle):
+def reviewed_word_rows(registry, events, item_ids):
+    predecessors = {row["id"]: row for row in events if row["id"] in item_ids and row["state"] == "reviewed"}
+    result = dict(registry)
+    for item in item_ids:
+        row = registry[item]
+        if row["state"] != "qualified":
+            continue
+        prior = predecessors.get(item)
+        fields = ("frozen_payload", "reviews", "holds", *WORD_REVIEW_FIELDS)
+        require(prior is not None and row["previous_sha256"] == sha256(registry_encode(prior).encode("utf-8"))
+                and all(row.get(field) == prior.get(field) for field in fields)
+                and all(row["checks"].get(field) == prior["checks"].get(field) for field in (
+                    "v5_word_source_sha256", *WORD_REVIEW_FIELDS,
+                )), f"Qualified word changed exact reviewed evidence for {item}")
+        result[item] = prior
+    return result
+
+
+def word_artifacts(items, links, delta):
+    words = {item["node"]["id"] for item in items}
+    incident = [edge for edge in delta["edges"]["added"]
+                if edge["src_id"] in words or edge["dst_id"] in words]
+    actual = {link_install.link_key(edge): edge for edge in incident}
+    require(len(actual) == len(incident) and actual.keys() == {link_install.link_key(edge) for edge in links},
+            "Committed incident links differ from frozen word reviews")
+    for edge in links:
+        installed = actual[link_install.link_key(edge)]
+        require(type(installed["is_distractor"]) is int and type(installed["bidirectional"]) is int
+                and installed == {**edge, "id": installed["id"], "is_distractor": 0,
+                                  "bidirectional": int(edge["bidirectional"])},
+                "Committed incident link fields differ from frozen word review")
+    nodes = {row["id"]: row for row in delta["concepts"]["added"]}
+    expected = {}
+    for item in items:
+        node = item["node"]
+        edge_ids = sorted(actual[link_install.link_key(edge)]["id"] for edge in item["links"])
+        require(nodes.get(node["id"]) == {**node, "degree": len(edge_ids),
+                                         "difficulty_tier": link_install.tier_for_salience(node["salience"])},
+                f"Committed node differs from frozen word review for {item['id']}")
+        expected[item["id"]] = {"node_id": node["id"], "edge_ids": edge_ids}
+    return expected
+
+
+def actual_play_text(value):
+    if isinstance(value, str):
+        return bool(value.strip())
+    if isinstance(value, (dict, list)):
+        return any(actual_play_text(item) for item in (value.values() if isinstance(value, dict) else value))
+    return False
+
+
+def word_board_scope(evidence, assembly, before_bundle_sha, bundle_sha, other_roles):
+    diff_ref = assembly["board_view_diff"]
+    diff = read_json(evidence.add("board-view-diff", diff_ref, 8 * 1024 * 1024))
+    require(diff.get("schema") == "cat-board-view-diff-1" and "one_word_dry_run" not in diff
+            and diff.get("baseline_bundle_sha256") == before_bundle_sha
+            and diff.get("candidate_bundle_sha256") == bundle_sha
+            and isinstance(diff.get("games"), dict) and diff["games"].keys() == BOARD_GAMES
+            and isinstance(diff.get("disturbed"), list)
+            and type(diff.get("disturbed_total")) is int and diff["disturbed_total"] == len(diff["disturbed"]),
+            "Exact full word-train board-view diff required")
+    views = {}
+    for row in diff["disturbed"]:
+        require(row["game"] in BOARD_GAMES and isinstance(row["id"], str) and row["id"]
+                and row["kind"] == "changed"
+                and SHA256.fullmatch(row.get("before_sha256", "")) and SHA256.fullmatch(row.get("after_sha256", ""))
+                and row["before_sha256"] != row["after_sha256"],
+                "Disturbed board must have a playable changed view")
+        key = (row["game"], row["id"])
+        require(key not in views, "Duplicate disturbed board")
+        views[key] = row["after_sha256"]
+    require(all(type(row.get("disturbed")) is int and row["disturbed"] == sum(key[0] == game for key in views)
+                for game, row in diff["games"].items()), "Board-view disturbance counts differ")
+    if not views and "board_reblind" not in assembly:
+        return views
+    reblind = read_json(evidence.add("board-reblind", assembly["board_reblind"], 4 * 1024 * 1024))
+    require(reblind.get("schema") == "cat-v5-board-reblind-1" and reblind.get("sha") == assembly["sha"]
+            and reblind.get("board_view_diff_sha256") == diff_ref["sha256"]
+            and isinstance(reblind.get("boards"), list), "Reblind receipt differs from exact word-train view diff")
+    fields = ("game", "id", "view_sha256", "thread_id", "verdict")
+    seen, transcript_hashes, play_hashes = set(), set(), set()
+    for index, row in enumerate(reblind["boards"], 1):
+        key = (row["game"], row["id"])
+        thread = row["thread_id"]
+        require(key in views and key not in seen and row["view_sha256"] == views[key]
+                and link_install.text(thread, 128) and thread not in other_roles and row["verdict"] == "pass",
+                "Independent reblind pass differs from exact disturbed board view")
+        ref = row["transcript"]
+        raw = evidence.add(f"board-reblind-transcript-{index}", ref)
+        require(ref["sha256"] not in transcript_hashes, "Reused disturbed-board reblind transcript")
+        transcript = read_json(raw)
+        play = transcript.get("play")
+        require(transcript.keys() == {*fields, "play"}
+                and all(transcript[field] == row[field] for field in fields)
+                and isinstance(play, list) and play and all(isinstance(step, dict) and step for step in play)
+                and actual_play_text(play), "Disturbed-board reblind transcript lacks exact binding or play")
+        play_sha = sha256(link_install.canonical(play))
+        require(play_sha not in play_hashes, "Reused disturbed-board reblind play")
+        seen.add(key)
+        transcript_hashes.add(ref["sha256"])
+        play_hashes.add(play_sha)
+    require(seen == views.keys(), "Reblind evidence must cover every disturbed board")
+    return views
+
+
+def other_reblind_roles(evidence, documents, rows, judgments):
+    threads = {documents[role]["thread_id"] for role in ("landing-review", "pin-review")}
+    for index, row in enumerate(rows, 1):
+        checks = row["checks"]
+        word = judgments.get(row["id"])
+        binding = word or row.get("v5_review_binding", {})
+        author = checks.get("v5_author")
+        authored_thread = author.get("thread_id") if isinstance(author, dict) else None
+        threads.update(filter(None, (row.get("v5_author_thread"), authored_thread, binding.get("author_thread"))))
+        threads.update(proof["thread_id"] for proof in row["reviews"]
+                       if proof.get("role") in {"critic", "factual", "quality"} and proof.get("thread_id"))
+        for blind in (row.get("v5_blind"), checks.get("v5_blind")):
+            if isinstance(blind, dict) and blind.get("thread_id"):
+                threads.add(blind["thread_id"])
+        for role, ref in binding.get("reviews", {}).items():
+            if role not in {"critic", "factual", "quality"}:
+                continue
+            proof = read_json(evidence.add(f"item-{index}-{role}-review", ref, link_install.MAX_INPUT,
+                                           shared=word is None))
+            threads.add(proof["thread_id"])
+            if role == "critic" and word is not None:
+                transcript = {"path": proof["transcript_path"], "sha256": proof["transcript_sha256"]}
+                evidence.add(f"item-{index}-critic-transcript", transcript, link_install.MAX_INPUT)
+        dump = binding.get("dump")
+        if dump:
+            evidence.add(f"item-{index}-dump-proposal", dump["proposal"], link_install.MAX_INPUT, shared=True)
+            for role, ref in dump["transcriptions"].items():
+                evidence.add(f"item-{index}-dump-{role}-transcription", ref, link_install.MAX_INPUT, shared=True)
+            dump_gate = read_json(evidence.add(f"item-{index}-dump-parser-gate", dump["gate"],
+                                              link_install.MAX_INPUT, shared=True))
+            for name in ("historical", "fresh"):
+                evidence.add(f"item-{index}-dump-parser-{name}", dump_gate[name],
+                             link_install.MAX_INPUT, shared=True)
+    return threads
+
+
+def check_word_landing(repo, evidence, documents, delta, item_ids, registry, journal, base, candidate,
+                       before_bundle_sha, bundle_sha):
+    scratch = evidence.scratch
+    assembly = documents["assembly"]
+    word_ids = {item for item in item_ids if registry[item]["type"] == "concept"
+                and "v5_word_source_sha256" in registry[item]["checks"]}
+    if not word_ids:
+        require(not ({"word_link_manifest", "board_view_diff", "board_reblind"} & assembly.keys()),
+                "Word-train evidence requires a reviewed additive word")
+        return {}, {}
+    document = read_json(evidence.add("word-link-manifest", assembly["word_link_manifest"], link_install.MAX_INPUT))
+    require(document.keys() == {"schema", "items", "gate", "claims", "judgments"}
+            and document["schema"] == "cat-v5-link-install-1" and isinstance(document["items"], list)
+            and len(document["items"]) == len(word_ids) <= 20
+            and {item["id"] for item in document["items"]} == word_ids,
+            "Word manifest must cover exactly the reviewed word items")
+    items = document["items"]
+    for index, item in enumerate(items, 1):
+        row = registry[item["id"]]
+        raw = link_install.canonical(item)
+        require(row["checks"]["v5_word_source_sha256"] == sha256(raw)
+                and evidence.add(f"word-{index}-frozen", row["frozen_payload"], link_install.MAX_INPUT) == raw,
+                f"Frozen word evidence differs for {item['id']}")
+    contract = read_json(read_artifact(scratch, "contract.json", 64 * 1024))
+    require(contract.get("campaign") == "v5-pilot-2", "Expected the active Pilot 2 word contract")
+    pilot_base = exact_commit(repo, contract["base_sha"])
+    git(repo, "merge-base", "--is-ancestor", pilot_base, base)
+    kg = git(repo, "--no-replace-objects", "show", f"{base}:{link_install.KG}")
+    origin = read_json(git(repo, "--no-replace-objects", "show", f"{pilot_base}:{link_install.KG}"))
+    key_for, excluded = link_install.native_label_authority(repo, kg, base)
+    _, links = link_install.merge_input(items, read_json(kg), origin, key_for=key_for, excluded=excluded)
+    artifacts = word_artifacts(items, links, delta)
+    evidence.add("word-link-claims", document["claims"], link_install.MAX_INPUT)
+    gate = read_json(evidence.add("word-parser-gate", document["gate"], link_install.MAX_INPUT))
+    for name in ("historical", "fresh"):
+        evidence.add(f"word-parser-{name}", gate[name], link_install.MAX_INPUT)
+    events = (read_json(line) for line in journal.splitlines())
+    reviewed = reviewed_word_rows(registry, events, word_ids)
+    roles = other_reblind_roles(evidence, documents, (reviewed[item] for item in sorted(item_ids)),
+                                document["judgments"])
+    views = word_board_scope(evidence, assembly, before_bundle_sha, bundle_sha, roles)
+    _, edge_results = link_install.verify_span_evidence(scratch, document["claims"], links)
+    gate, bindings = link_install.verified_sources(scratch, document["gate"], repo, candidate, items)
+    link_install.verify_registry(scratch, document, reviewed, bindings, gate, edge_results, False)
+    return {item: {**artifact, "payload_sha256": registry[item]["checks"]["v5_word_source_sha256"]}
+            for item, artifact in artifacts.items()}, views
+
+
+def check_scope(scratch, documents, delta, item_ids, registry, bundle, words=None, views=None,
+                legacy_puzzles_verified=False):
     assembly = documents["assembly"]
     expected_ids = sorted(item_ids)
     require(assembly.get("item_ids") == expected_ids
@@ -270,13 +475,23 @@ def check_scope(scratch, documents, delta, item_ids, registry, bundle):
     bound_boards = set()
     bound_nodes = set()
     bound_edges = set()
+    words = words or {}
+    views = views or {}
+    word_edges = {edge for artifact in words.values() for edge in artifact["edge_ids"]}
     for item in item_ids:
         row = registry.get(item)
-        require(row is not None and frozen[item] == sha256(registry_encode(row["payload"]).encode("utf-8")),
-                f"Assembly differs from frozen registry payload for {item}")
+        require(row is not None, f"Unknown registry ID {item}")
+        word = words.get(item)
+        expected_sha = word["payload_sha256"] if word else sha256(registry_encode(row["payload"]).encode("utf-8"))
+        require(frozen[item] == expected_sha, f"Assembly differs from frozen registry payload for {item}")
         kind = row["type"]
         artifact = installed[item]
-        if kind in {"form", "synonym"}:
+        if word:
+            node = word["node_id"]
+            require(artifact == {"node_id": node, "edge_ids": word["edge_ids"]} and node not in bound_nodes,
+                    f"Installed word and incident link IDs differ for {item}")
+            bound_nodes.add(node)
+        elif kind in {"form", "synonym"}:
             owner = row["identity"]["owner_id"]
             forms = {(owner, form) for form in row["payload"]["forms"]}
             require(artifact == {"owner_id": owner} and forms and forms <= added_aliases
@@ -299,6 +514,7 @@ def check_scope(scratch, documents, delta, item_ids, registry, bundle):
                 "id", "label_ro", "node_type", "description", "category",
             }
             require(ident in records and ident not in bound
+                    and (kind != "edge" or ident not in word_edges)
                     and required_fields <= payload.keys()
                     and all(records[ident].get(key) == value for key, value in payload.items()),
                     f"Installed {kind} payload differs for {item}")
@@ -309,10 +525,11 @@ def check_scope(scratch, documents, delta, item_ids, registry, bundle):
             and not delta["edges"].get("removed") and not delta["edges"].get("changed")
             and all(set(row["fields"]) <= {"degree"} for row in delta["concepts"].get("changed", ()))
             and not any(diff["removed"] or diff["changed"] for diff in delta["boards"].values())
-            and not any(delta.get("legacy_puzzles", {}).get(field) for field in ("added", "removed", "changed")),
+            and (legacy_puzzles_verified
+                 or not any(delta.get("legacy_puzzles", {}).get(field) for field in ("added", "removed", "changed"))),
             "Committed removal or existing content rewrite is outside the reviewed train")
     require(bound_aliases == added_aliases, "Committed aliases are outside the reviewed train")
-    require(bound_nodes == added_nodes.keys() and bound_edges == added_edges.keys(),
+    require(bound_nodes == added_nodes.keys() and bound_edges | word_edges == added_edges.keys(),
             "Committed graph additions are outside the reviewed train")
     require(bound_boards == {(game, board) for game, ids in added_boards.items() for board in ids},
             "Committed boards are outside the reviewed train")
@@ -324,6 +541,8 @@ def check_scope(scratch, documents, delta, item_ids, registry, bundle):
     for touched in touched_pairs:
         require(isinstance(touched, list) and len(touched) == 2
                 and all(isinstance(field, str) for field in touched), "Invalid touched board")
+    require(views.keys() <= {tuple(pair) for pair in touched_pairs},
+            "Every disturbed board must be in exact HTTP play scope")
     pack_touched = [board for game, board in touched_pairs if game in pack_delta["boards"]]
     pack_boards, blocked, _ = pack_play_scope(pack_delta, bundle, pack_touched)
     require(not blocked, "Committed pack change contains an unplayable board")
@@ -443,14 +662,16 @@ def expected(repo, scratch, manifest):
     require(type(manifest["gui_gates"]) is bool, "gui_gates must be boolean")
     changed = git(repo, "diff", "--name-only", "-z", base, candidate).split(b"\0")
     delta = committed_delta(repo, base, candidate, include_neighbors=False)
-    bundle_path = "go-backend/internal/content/bundled.json"
-    before_bundle = read_json(git(repo, "show", f"{base}:{bundle_path}"))
-    bundle = read_json(git(repo, "show", f"{candidate}:{bundle_path}"))
+    before_bundle_raw = git(repo, "show", f"{base}:{BUNDLE}")
+    bundle_raw = git(repo, "show", f"{candidate}:{BUNDLE}")
+    before_bundle = read_json(before_bundle_raw)
+    bundle = read_json(bundle_raw)
     require(manifest["gui_gates"] or not needs_gui(delta, before_bundle, bundle, changed),
             "Changed board, edge or caption source requires GUI gates")
     lock_raw = git(repo, "show", f"{candidate}:versions.lock.json")
-    evidence, documents = read_receipts(scratch, manifest["evidence"], candidate, base,
+    receipts, documents = read_receipts(scratch, manifest["evidence"], candidate, base,
                                         manifest["gui_gates"], read_json(lock_raw), sha256(lock_raw))
+    evidence = Evidence(scratch, receipts)
     journal = read_artifact(repo, REGISTRY)
     registry = current_rows(read_journal(repo / REGISTRY), repo)
     prior_journal = git(repo, "show", f"{base}:{REGISTRY}")
@@ -462,8 +683,19 @@ def expected(repo, scratch, manifest):
     require(all(registry.get(key) == row for key, row in protected.items())
             and all(key in protected for key, row in registry.items() if row["state"] == "landed"),
             "Candidate changed protected registry state before closeout")
-    check_scope(scratch, documents, delta, ids, registry, bundle)
-    evidence = check_reference(repo, scratch, candidate, bundle, evidence, documents)
+    require(set(ids) <= registry.keys(), "Unknown registry ID")
+    words, views = check_word_landing(repo, evidence, documents, delta, ids, registry,
+                                      journal, base, candidate, sha256(before_bundle_raw), sha256(bundle_raw))
+    legacy_puzzles_verified = False
+    if words and any(delta["legacy_puzzles"][field] for field in ("added", "removed", "changed")):
+        kg = read_json(git(repo, "--no-replace-objects", "show", f"{candidate}:{link_install.KG}"))
+        expected_puzzles = kg["kg_puzzles"]
+        rebuilt = link_install.rebuild_document(kg, kg["kg_nodes"], kg["kg_edges"], "v5-closeout", "")
+        require(expected_puzzles == read_json(rebuilt)["kg_puzzles"],
+                "Committed legacy puzzles differ from exact graph regeneration")
+        legacy_puzzles_verified = True
+    check_scope(scratch, documents, delta, ids, registry, bundle, words, views, legacy_puzzles_verified)
+    check_reference(repo, candidate, bundle, evidence, documents)
     train_dir = train if train.startswith("v5-") else f"v5-{train}"
     docs_path = f"reviews/{train_dir}/landing.json"
     path = f"docs/{docs_path}"
@@ -472,7 +704,7 @@ def expected(repo, scratch, manifest):
         "baseline": base, "candidate": candidate, "actual_landing_at": when.isoformat(),
         "prescribed_command": ["git", "merge", "--ff-only", candidate],
         "observed_reflog": f"merge {candidate}: Fast-forward", "operator": "agent:codex",
-        "item_ids": sorted(ids), "gui_gates": manifest["gui_gates"], "evidence": evidence,
+        "item_ids": sorted(ids), "gui_gates": manifest["gui_gates"], "evidence": evidence.attachments,
     })
     ref = {"path": path, "sha256": sha256(receipt), "bytes": len(receipt)}
     entries = transitions(registry, ids, ref, candidate, when.isoformat())
