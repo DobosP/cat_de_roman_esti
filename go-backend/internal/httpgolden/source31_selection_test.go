@@ -9,6 +9,8 @@ import (
 	"sort"
 	"strings"
 	"testing"
+
+	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
 )
 
 func source31ExpectedSources() map[string]string {
@@ -46,11 +48,15 @@ func source31ReadExpectedCorpus(t *testing.T) *Corpus {
 	return corpus
 }
 
-func TestSource31SelectsExactHistoricalIndependentCorpus(t *testing.T) {
+func TestSource31SelectsExactCurrentIndependentCorpus(t *testing.T) {
 	want := source31ReadExpectedCorpus(t)
 	loaded, err := reviewedV5Pilot2Forms1Source31()
 	if err != nil || !reflect.DeepEqual(loaded, want) {
 		t.Fatal("Source31 loader changed its independent captured responses", err)
+	}
+	data, err := content.Load()
+	if err != nil || !reflect.DeepEqual(data.Sources, want.Sources) {
+		t.Fatal("live compiled bundle does not have the actual Source31 source tuple", err)
 	}
 	sources := source31ExpectedSources()
 	before := source6GUICloneSources(sources)
@@ -58,8 +64,8 @@ func TestSource31SelectsExactHistoricalIndependentCorpus(t *testing.T) {
 	if err != nil || !reflect.DeepEqual(selected, want) || !reflect.DeepEqual(sources, before) {
 		t.Fatal("complete Source31 tuple selected different responses or changed its input", err)
 	}
-	if len(reviewedSources) < 31 {
-		t.Fatal("expected at least the 31 Source31-era selectors", len(reviewedSources))
+	if len(reviewedSources) != 31 {
+		t.Fatal("expected Source31 plus 30 historical selectors", len(reviewedSources))
 	}
 	for _, row := range reviewedSources {
 		if reflect.DeepEqual(row.sources, want.Sources) {

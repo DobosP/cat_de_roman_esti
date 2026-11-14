@@ -1,11 +1,11 @@
 {
   "meta": {
-    "build_version": "fixture-v5-pilot-2-words",
+    "build_version": "fixture-v3-n4-alias-curation",
     "generated_at": "2026-06-21T00:00:00Z",
-    "note": "Pilot 2 reviewed graph words and source-backed links.",
+    "note": "V3 n4: 55 existing-owner morphology families, 92 pending literal input aliases.",
     "counts": {
-      "nodes": 2585,
-      "edges": 10145,
+      "nodes": 2584,
+      "edges": 10141,
       "puzzles": 180,
       "by_category": {
         "arta_cultura": 131,
@@ -20,7 +20,7 @@
         "personalitati": 129,
         "societate": 210,
         "sport": 160,
-        "stiinta": 282,
+        "stiinta": 281,
         "viata_de_roman": 322
       },
       "puzzles_by_cat_diff": {
@@ -16937,7 +16937,7 @@
       "description": "Plante comestibile folosite crude, fierte, coapte sau conservate.",
       "salience": 0.9217,
       "difficulty_tier": "easy",
-      "degree": 21,
+      "degree": 20,
       "aliases": [
         "legumele",
         "legumă"
@@ -20561,7 +20561,7 @@
       "description": "Organism viu care face fotosinteză și are celule vegetale.",
       "salience": 0.8612,
       "difficulty_tier": "easy",
-      "degree": 55,
+      "degree": 54,
       "aliases": [
         "plante",
         "plantele",
@@ -20811,7 +20811,7 @@
       "description": "Organ al plantei care produce hrană prin fotosinteză.",
       "salience": 0.4821,
       "difficulty_tier": "medium",
-      "degree": 42,
+      "degree": 41,
       "aliases": [
         "frunze",
         "frunzele",
@@ -33301,7 +33301,7 @@
       "description": "Concept cotidian din grupul «plante și părțile lor»: Rădăcină.",
       "salience": 0.86,
       "difficulty_tier": "easy",
-      "degree": 17,
+      "degree": 16,
       "aliases": [
         "rădăcini",
         "rădăcinile",
@@ -40706,16 +40706,6 @@
         "papurii",
         "papurilor"
       ]
-    },
-    {
-      "id": "n_v1_27_sparanghel",
-      "node_type": "concept",
-      "label_ro": "Sparanghel",
-      "category": "stiinta",
-      "description": "Legumă crescută pentru lăstarii tineri. Planta are frunze mici, care arată ca niște solzi.",
-      "salience": 0.52,
-      "difficulty_tier": "medium",
-      "degree": 4
     }
   ],
   "kg_edges": [
@@ -142128,46 +142118,6 @@
       "strength": 0.85,
       "is_distractor": 0,
       "bidirectional": 1
-    },
-    {
-      "id": "de9483",
-      "src_id": "n_v1_27_sparanghel",
-      "dst_id": "n_v4sti_planta",
-      "relation": "is_a",
-      "label_ro": "plantă erbacee",
-      "strength": 0.84,
-      "is_distractor": 0,
-      "bidirectional": 0
-    },
-    {
-      "id": "de9484",
-      "src_id": "n_v1_27_sparanghel",
-      "dst_id": "n_v24_nature_plant_parts_radacina",
-      "relation": "has_part",
-      "label_ro": "rădăcini cărnoase",
-      "strength": 0.68,
-      "is_distractor": 0,
-      "bidirectional": 0
-    },
-    {
-      "id": "de9485",
-      "src_id": "n_v1_27_sparanghel",
-      "dst_id": "n_v4sti_frunza",
-      "relation": "has_part",
-      "label_ro": "frunze în formă de solzi",
-      "strength": 0.64,
-      "is_distractor": 0,
-      "bidirectional": 0
-    },
-    {
-      "id": "de9486",
-      "src_id": "n_v1_27_sparanghel",
-      "dst_id": "n_v4gas_legume",
-      "relation": "related_to",
-      "label_ro": "cultivat ca legumă",
-      "strength": 0.78,
-      "is_distractor": 0,
-      "bidirectional": 0
     }
   ],
   "kg_puzzles": [
