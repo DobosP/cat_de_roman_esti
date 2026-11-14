@@ -372,11 +372,19 @@ def dry_backlog(registry):
 
 
 def verify_review(scratch, item, row, binding, gate_reviewer, span_sha, allowed_urls):
+    fields = {"v5_word_review_binding", "v5_derived_view_sha256", "v5_independence_checks"}
+    checks = row.get("checks", {})
+    top_fields, nested_fields = fields & row.keys(), fields & checks.keys()
+    # Early Pilot 2 journal rows stored the complete review proof under checks.
+    require((top_fields == fields and not nested_fields)
+            or (nested_fields == fields and not top_fields),
+            "Reviewed word binding must occupy exactly one complete registry location")
+    review = row if top_fields else checks
     require(set(binding) == {"author_thread", "payload_sha256", "derived_view_sha256", "reviews"}
             and binding["payload_sha256"] == digest(canonical(item))
-            and row.get("v5_word_review_binding") == binding
-            and row.get("v5_derived_view_sha256") == binding["derived_view_sha256"]
-            and row.get("v5_independence_checks") == {
+            and review.get("v5_word_review_binding") == binding
+            and review.get("v5_derived_view_sha256") == binding["derived_view_sha256"]
+            and review.get("v5_independence_checks") == {
                 "signed_reviews": True, "rationale_overlap_ok": True,
                 "reviewer_identity_leaks_checked": True, "source_reuse_checked": True,
             }

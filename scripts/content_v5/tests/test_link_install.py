@@ -206,15 +206,25 @@ class LinkInstallTests(unittest.TestCase):
                 return {**binding, "role": role, "thread_id": "critic-thread", "verdict": "pass",
                         "item_id": item["id"], "transcript_path": "transcript",
                         "transcript_sha256": install.digest(transcript)}
-            return {**binding, "role": role, "thread_id": "shared",
+            return {**binding, "role": role, "thread_id": role + "-thread",
                     "verdict": "accept", "child_safe": True, "item_id": item["id"],
                     "span_result_sha256": span}
         allowed = {"https://ro.wikipedia.org/wiki/Example"}
-        with patch.object(install, "verified_json", side_effect=document), patch.object(
+        with patch.object(install, "verified_json", side_effect=document) as receipts, patch.object(
             install, "cited_live_sources", return_value=allowed,
         ), patch.object(install, "read_artifact", return_value=transcript):
+            install.verify_review(SCRATCH, item, registry, binding, "gate", span, allowed)
+            install.verify_review(SCRATCH, item, {"checks": registry}, binding, "gate", span, allowed)
+            receipts.reset_mock()
+            for invalid in ({"checks": {"v5_word_review_binding": binding}},
+                            {**registry, "checks": {"v5_word_review_binding": binding}},
+                            {"v5_word_review_binding": binding, "checks": registry}):
+                with self.subTest(invalid=invalid):
+                    with self.assertRaisesRegex(ValueError, "exactly one complete registry location"):
+                        install.verify_review(SCRATCH, item, invalid, binding, "gate", span, allowed)
+            receipts.assert_not_called()
             with self.assertRaisesRegex(ValueError, "independent quality"):
-                install.verify_review(SCRATCH, item, registry, binding, "gate", span, allowed)
+                install.verify_review(SCRATCH, item, registry, binding, "quality-thread", span, allowed)
             with self.assertRaisesRegex(ValueError, "independent factual"):
                 install.verify_review(SCRATCH, item, registry, binding, "gate", "wrong span", allowed)
 
