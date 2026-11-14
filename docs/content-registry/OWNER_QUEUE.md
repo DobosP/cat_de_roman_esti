@@ -7,6 +7,7 @@ contains the complete latest question and all three selected-answer receipts.
 
 | Pending decision | Scope | Recommendation |
 | --- | --- | --- |
+| Pilot 2 Lanț A5 near-duplicate | v5-p2-b4:prospect_lant_ac776153c212146e passed blind play at par and factual review. Both shortest routes and visible choices reproduce the Transilvania branch of served `lt_geografie_239`. | Retire the pending prospect. |
 | dexonline.ro terms refusal (2026-11-09) | The [published site notice](https://dexonline.ro/) requires prior written consent for automated extraction and use outside its official releases. Dropped for this run. | Continue on permitted sources. Park dexonline-dependent items. |
 
 Resolved 2026-11-10, receipt received `2026-11-10T06:50:27.299154+00:00`.
