@@ -289,6 +289,8 @@ def acceptance(judgments, accepted, expected_input, scratch, registry, *, repo=N
         fields = {"author_thread", "payload_sha256", "reviews"}
         if "dump" in row:
             fields.add("dump")
+        if "derived_view_sha256" in row:
+            fields.add("derived_view_sha256")
         require(row == durable and set(row) == fields
                 and isinstance(row["author_thread"], str) and row["author_thread"],
                 f"Judgment manifest differs from reviewed registry evidence for {item_id}")
@@ -302,6 +304,8 @@ def acceptance(judgments, accepted, expected_input, scratch, registry, *, repo=N
         frozen = {**expected, "identity": identity}
         require(row["payload_sha256"] == sha256(canonical(frozen)), f"Frozen payload differs for {item_id}")
         view = digest(registry[item_id]["v5_derived_view_sha256"], "derived view")
+        require(row.get("derived_view_sha256", view) == view,
+                f"Redundant judgment view differs from reviewed registry evidence for {item_id}")
         require(registry[item_id]["v5_independence_checks"] == {
             "signed_reviews": True, "rationale_overlap_ok": True,
             "reviewer_identity_leaks_checked": True, "source_reuse_checked": True,

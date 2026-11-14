@@ -123,6 +123,13 @@ class AliasInstallTests(unittest.TestCase):
                                   "v5_independence_checks": {"signed_reviews": True, "rationale_overlap_ok": True,
                                      "reviewer_identity_leaks_checked": True, "source_reuse_checked": True}}}
                 aliases.acceptance(envelope, selected, "input", Path("."), registry)
+                binding = envelope["items"]["a"]
+                binding["derived_view_sha256"] = view
+                aliases.acceptance(envelope, selected, "input", Path("."), registry)
+                binding["derived_view_sha256"] = "d" * 64
+                with self.assertRaisesRegex(ValueError, "Redundant judgment view differs"):
+                    aliases.acceptance(envelope, selected, "input", Path("."), registry)
+                binding.pop("derived_view_sha256")
                 registry["a"]["v5_review_binding"] = {**envelope["items"]["a"], "author_thread": "different"}
                 with self.assertRaisesRegex(ValueError, "reviewed registry evidence"):
                     aliases.acceptance(envelope, selected, "input", Path("."), registry)
