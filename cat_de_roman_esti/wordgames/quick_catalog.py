@@ -32,7 +32,7 @@ from .recipe_extensions import record_snapshot
 from .service import get_service
 
 CATALOG_PATH = Path(__file__).resolve().parents[1] / "fixtures/quick_games_v92.json"
-CATALOG_SHA256 = "f9499c795e5c08ab09f7067ce9945c35b21fedd8ef744c97d92fc065a23e5204"
+CATALOG_SHA256 = "33d3408f841dc7172f5aad8cee109b99692c79aab03f33d464917521431296cb"
 MAX_BOARDS = 256
 MAX_BYTES = 2 * 1024 * 1024
 
