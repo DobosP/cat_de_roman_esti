@@ -2597,6 +2597,12 @@ func TestV13EverydayFormsGiveOneWarmPrivateAttempt(t *testing.T) {
 					"n_vuia_i":                                   5,
 				}
 			}
+			if row.id == "n_v1_3_material_lemn" && c.Sources["kg_sample.json"] == source32FourWordKGSHA256 {
+				wantInbound["n_v1_27_sparanghel"] = 3
+				wantInbound["n_v1_32_dig"] = 3
+				wantInbound["n_v1_32_trasnet"] = 4
+				wantInbound["n_v1_35_cactus"] = 3
+			}
 			if !maps.Equal(inbound, wantInbound) {
 				t.Fatalf("reviewed inbound vocabulary changed: %v", inbound)
 			}
