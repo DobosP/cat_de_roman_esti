@@ -58,7 +58,7 @@ Last verified: 2026-11-14 — V5 train `v5-p2-forms-1` landed locally at `a024c8
 | Perechi | 193 | 193 | 0 | 192 selectable / 153 preferred |
 
 Pack **735 = 728 approved + 7 pending**, with 546 eligible on local main. Quick remains 421 total and 418 selectable, with 341 preferred and starter 62/61. The 85 authored and 336 frozen payloads stay exact. Pool counts describe curated records. Existing on-demand fallback generators remain.
-Qualified KG: `fixture-v3-n4-alias-curation` (V1.13 plus the V3 n1/n2/n4 inflected inputs, landed 2026-11-08), 2584 nodes/10141 links/9730 forms/180 puzzle IDs (nine regenerated at V1.13).
+Qualified KG: `fixture-v3-n4-alias-curation` contains 2,584 nodes, 10,141 links, 9,739 forms and 180 puzzle IDs. Pilot 2 adds five Pătrunjel forms and two Robinet forms.
 Alchimie challenge refresh: 49 existing additions across 27 books; all 68 selectable books retain
 521 recipes, routes and par. One former addition belongs to a reserved board.
 Exploration has **252 concepts/352 recipes/148 discoveries**, 96 supplies, 12 tiers,
