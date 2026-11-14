@@ -35,6 +35,7 @@ MAX_INPUT = 1024 * 1024
 EDGE_KEYS = ("src_id", "dst_id", "relation", "bidirectional")
 NODE_KEYS = {"id", "node_type", "label_ro", "category", "description", "salience"}
 LINK_KEYS = {*EDGE_KEYS, "label_ro", "strength"}
+WIKI_DEFINITION = re.compile(r"^#[ \t]*[^#\s:*]")
 
 
 def canonical(value):
@@ -293,7 +294,7 @@ def verified_sources(scratch, gate_ref, repo, sha, items):
                 lines.append(line.rstrip("\n"))
             offset += len(line)
         require(any(pos.fullmatch(line) for line in lines)
-                and any(re.match(r"^#[ \t]+\S", line) for line in lines),
+                and any(WIKI_DEFINITION.match(line) for line in lines),
                 "No supported Romanian lexical definition in the page")
         require(not re.search(r"(?i)(?<!\w)(?:vulgar|argou|peiorativ|depreciativ|trivial)(?!\w)", language),
                 "Romanian lexical section contains an excluded usage label")

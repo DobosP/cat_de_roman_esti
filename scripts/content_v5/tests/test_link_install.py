@@ -128,6 +128,14 @@ class LinkInstallTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, "span check failed"):
                     install.verify_span_evidence(SCRATCH, ref, [link])
 
+    def test_wiktionary_direct_definitions_can_start_immediately_after_marker(self):
+        for line in ("#(''bot.'') (''Asparagus officinalis'')", "# Ordinary definition"):
+            with self.subTest(line=line):
+                self.assertIsNotNone(install.WIKI_DEFINITION.match(line))
+        for line in ("## Subdefinition", "#: Example", "#* Citation", "#  : Example", "# \t"):
+            with self.subTest(line=line):
+                self.assertIsNone(install.WIKI_DEFINITION.match(line))
+
     def test_frequency_positive_row_cannot_override_source_refusal(self):
         body = b"miner 503\n"
         sha = install.digest(body)
