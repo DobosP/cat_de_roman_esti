@@ -481,6 +481,74 @@ class ComparatorTests(unittest.TestCase):
         self.assertEqual(row["dump_text_sha256"], sha256(NOUN.encode()).hexdigest())
         self.assertEqual(result["parser_sha256"], sha256(Path(comparator.__file__).with_name("wiktionary_dump.py").read_bytes()).hexdigest())
 
+    def visible_cells(self, html, title, kind):
+        parsed = comparator.PageHTML()
+        parsed.feed(html)
+        parsed.close()
+        return comparator.rendered_cells(parsed.tables, title, kind)
+
+    def test_classless_adjective_with_localized_red_link(self):
+        red_link = (
+            '<a rel="mw:WikiLink" href="https://ro.wiktionary.org/wiki/luminoși?action=edit&amp;redlink=1" '
+            'title="luminoși (pagină inexistentă)" class="new" typeof="mw:LocalizedAttrs" '
+            """data-mw-i18n='{"title":{"lang":"x-page","key":"red-link-title","params":["luminoși"]}}'>luminoși</a>"""
+        )
+        html = (
+            '<table cellspacing="1" width="33%" style="float:right;background:#bdb;color:#353;" about="#mwt9">'
+            '<tbody><tr><td colspan="3"><b>Declinarea adjectivului <br/><span>luminos</span></b></td></tr>'
+            '<tr><td></td><td><b>Singular</b></td><td><b>Plural</b></td></tr>'
+            f'<tr><td>Masculin</td><td>luminos</td><td><b>{red_link}</b></td></tr>'
+            '<tr><td>Feminin</td><td>luminoasă</td><td>luminoase</td></tr>'
+            '<tr><td>Neutru</td><td>luminos</td><td>luminoase</td></tr></tbody></table>'
+        )
+        expected = {
+            ("Masculin", "Singular", "luminos"), ("Masculin", "Plural", "luminoși"),
+            ("Feminin", "Singular", "luminoasă"), ("Feminin", "Plural", "luminoase"),
+            ("Neutru", "Singular", "luminos"), ("Neutru", "Plural", "luminoase"),
+        }
+        self.assertEqual(self.visible_cells(html, "luminos", "adjective"), (expected, set()))
+        for old, new in (
+            ('typeof="mw:LocalizedAttrs"', 'typeof="mw:Transclusion"'),
+            ('typeof="mw:LocalizedAttrs" ', ""),
+            ('class="new"', 'class="new" hidden'),
+            ('class="new"', 'class="mw-redirect"'),
+            ('"key":"red-link-title"', '"key":"red-link-title","style":"display:none"'),
+            ('"lang":"x-page"', '"lang":"x-page","lang":"x-page"'),
+            ('"params":["luminoși"]', '"params":["altul"]'),
+            ("redlink=1", "redlink=0"),
+        ):
+            with self.subTest(new=new), self.assertRaisesRegex(DumpError, "unsupported rendered"):
+                self.visible_cells(html.replace(old, new), "luminos", "adjective")
+
+    def test_plural_only_noun_caption_requires_complete_singular_markers(self):
+        html = (
+            '<table class="substantiv-ron"><tbody>'
+            '<tr><td colspan="3"><b>Declinarea substantivului <br/>'
+            '<span><i><small>invariabil</small></i></span></b></td></tr>'
+            '<tr><td>f.</td><td>Singular</td><td>Plural</td></tr>'
+            '<tr><td>Nominativ-Acuzativ</td><td><i><small>invariabil</small></i></td><td>aplauze</td></tr>'
+            '<tr><td>Articulat</td><td>invariabil</td><td>aplauzele</td></tr>'
+            '<tr><td>Genitiv-Dativ</td><td>invariabil</td><td>aplauzelor</td></tr>'
+            '<tr><td>Vocativ</td><td>invariabil</td><td>aplauzelor</td></tr></tbody></table>'
+        )
+        forms = {
+            ("Nominativ-Acuzativ", "Plural", "aplauze"), ("Articulat", "Plural", "aplauzele"),
+            ("Genitiv-Dativ", "Plural", "aplauzelor"), ("Vocativ", "Plural", "aplauzelor"),
+        }
+        self.assertEqual(
+            self.visible_cells(html, "aplauze", "noun"),
+            (forms, {(row, "Singular") for row, _, _ in forms}),
+        )
+        for old, new in (
+            ("<td>aplauze</td>", "<td>aplauze / altul</td>"),
+            ("<td>aplauze</td>", "<td>altul</td>"),
+            ("<td>invariabil</td>", "<td>-</td>"),
+            ("<span><i>", "<span hidden><i>"),
+            ("<span><i><small>invariabil", "<span><i><small>aplauze"),
+        ):
+            with self.subTest(new=new), self.assertRaisesRegex(DumpError, "unsupported rendered"):
+                self.visible_cells(html.replace(old, new), "aplauze", "noun")
+
     def test_rendered_breaks_and_unsupported_markup_do_not_create_forms(self):
         for cell in (
             "men<br>tă", "men<br/>tă", "mentă<br>", "men<sup>tă</sup>", "men<!-- comment -->tă",

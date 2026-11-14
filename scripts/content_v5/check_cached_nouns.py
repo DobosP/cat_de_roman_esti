@@ -17,7 +17,7 @@ from wiktionary_dump import (
     FORM, MAX_MANIFEST, DumpError, extract, parse_literal_table, read_small, receipt_for, unique_keys,
 )
 
-SAMPLE_SHA256 = "b429d57a83f2afa12d758e68584eda7505e6e4a9496cee5976717a70481efc48"
+SAMPLE_SHA256 = "4b75c026a90ba03c8bb66de57513d57ddf27c3e70dc2844b95ee1607e4a4047b"
 MAX_HTML = 16 * 1024 * 1024
 MAX_SCRIPT = 128 * 1024
 MAX_CODE = 128 * 1024
@@ -50,8 +50,35 @@ PRESENTATION_ATTRIBUTES = {
     "td": {"width", "colspan", "valign", "align", "style"},
     "th": {"width", "colspan", "valign", "align", "style"},
     "span": {"title", "style"},
-    "a": {"href", "title", "rel", "id", "class"},
+    "a": {"href", "title", "rel", "id", "class", "typeof", "data-mw-i18n"},
 }
+LOCALIZED_ATTRIBUTES = {"typeof", "data-mw-i18n"}
+
+
+def valid_localized_red_link(attrs):
+    if (
+        attrs.keys() != {"class", "rel", "href", "title"} | LOCALIZED_ATTRIBUTES
+        or attrs["class"] != "new"
+        or attrs["rel"] != "mw:WikiLink"
+        or attrs["typeof"] != "mw:LocalizedAttrs"
+    ):
+        return False
+    title = attrs["title"] or ""
+    suffix = " (pagină inexistentă)"
+    form = title.removesuffix(suffix)
+    if not title.endswith(suffix) or not FORM.fullmatch(form):
+        return False
+    if attrs["href"] != WIKI + form + "?action=edit&redlink=1":
+        return False
+    metadata = attrs["data-mw-i18n"] or ""
+    if len(metadata) > 512:
+        return False
+    try:
+        return JSON.decode(metadata) == {
+            "title": {"lang": "x-page", "key": "red-link-title", "params": [form]},
+        }
+    except ValueError:
+        return False
 
 
 def valid_attributes(tag, pairs):
@@ -64,6 +91,8 @@ def valid_attributes(tag, pairs):
         return False
     if "colspan" in attrs and attrs["colspan"] != "3":
         return False
+    if LOCALIZED_ATTRIBUTES.intersection(attrs):
+        return valid_localized_red_link(attrs)
     return True
 
 
@@ -241,13 +270,20 @@ def rendered_cells(tables, title, kind):
         table.invalid
         or len(rows) != len(labels) + 2
         or len(rows[0]) != 1
-        or [part.strip() for part in rows[0][0].split("\n")] != [prefix, title]
         or table.spans != [["3"]] + [["1", "1", "1"]] * (len(labels) + 1)
         or any(len(row) != 3 for row in rows[1:])
         or rows[1][1:] != ["Singular", "Plural"]
         or tuple(row[0] for row in rows[2:]) != labels
     ):
         raise DumpError("unsupported rendered inflection table layout or markup")
+    caption = title
+    if kind == "noun" and rows[2][1] == "invariabil":
+        # The plural-only template displays the singular marker in its caption.
+        if rows[2][2] != title or any(row[1] != "invariabil" for row in rows[2:]):
+            raise DumpError("unsupported rendered plural-only noun pattern")
+        caption = "invariabil"
+    if [part.strip() for part in rows[0][0].split("\n")] != [prefix, caption]:
+        raise DumpError("unsupported rendered inflection table caption")
     forms = set()
     invariable_cells = set()
     for row, singular, plural in rows[2:]:
