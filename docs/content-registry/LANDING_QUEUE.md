@@ -69,3 +69,7 @@ Exact Source29 `0fda2bada38c7611615b43bdd590f87849f55d9f` added Viață de româ
 ## V5 train v5-forms-1
 
 Local main advanced from `c51bf6a36c3bcd63fd1d60908f200851a44245cc` to `48c92469c594454a50d651e8eab1f42ecc12f1e0` at 2026-11-13T14:02:18+00:00 with 1 items. [Landing receipt](../reviews/v5-forms-1/landing.json).
+
+## V5 train v5-p2-forms-1
+
+Local main advanced from `b85cdb706fc2a7e2c204109ce20672d18e20d718` to `a024c821666a2b2556e7f450ad777844928ee107` at 2026-11-14T04:35:02+00:00 with 2 items. [Landing receipt](../reviews/v5-p2-forms-1/landing.json).

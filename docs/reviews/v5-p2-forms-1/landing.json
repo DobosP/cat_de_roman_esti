@@ -1,0 +1,108 @@
+{
+  "actual_landing_at": "2026-11-14T04:35:02+00:00",
+  "actual_local_landed": true,
+  "baseline": "b85cdb706fc2a7e2c204109ce20672d18e20d718",
+  "candidate": "a024c821666a2b2556e7f450ad777844928ee107",
+  "evidence": {
+    "4i": {
+      "bytes": 1269,
+      "path": "v5-pilot-2/first-forms-train/rebuild/final-4i/results.json",
+      "sha256": "3f91a2724b2464d25ba6b76a072dc891ae7eeebc3a2947b13dc5b62ca9eba16d"
+    },
+    "assembly": {
+      "bytes": 1035,
+      "path": "v5-pilot-2/first-forms-train/rebuild/assembly.json",
+      "sha256": "b1cadc160117e97cad622158452a98e18c2cbbf5b505411a8fdb9fb921f4c7d1"
+    },
+    "build": {
+      "bytes": 8026,
+      "path": "v5-pilot-2/first-forms-train/rebuild/final-build.json",
+      "sha256": "393d4e87ed99537a53a2a5f8c0f8b6e1d94e924c808fbc6a24e536724affe65d"
+    },
+    "full": {
+      "bytes": 36392,
+      "path": "v5-pilot-2/first-forms-train/rebuild/final-gui-full.json",
+      "sha256": "47d4d44dd4c79954cf8eb1df870690b3213d10e380b65830b03687a38e06c8e4"
+    },
+    "full-supervisor": {
+      "bytes": 517,
+      "path": "v5-pilot-2/first-forms-train/rebuild/final-gui-full-supervisor.json",
+      "sha256": "9f6653aeb926c9c25fb1159fab62f595b8e906fb03c52b312a335214212415cd"
+    },
+    "full-wrapper": {
+      "bytes": 542,
+      "path": "v5-pilot-2/first-forms-train/rebuild/final-gui-full-wrapper.json",
+      "sha256": "0e076249cee517d11b14aba59cf4834f570526467809a9151f0868c69ed5ae18"
+    },
+    "http-play": {
+      "bytes": 306,
+      "path": "v5-pilot-2/first-forms-train/rebuild/http-play.json",
+      "sha256": "d2ef60a46e43573eae4aaaadf7c63d93f34d3838550fe57181b747b3ae3394ef"
+    },
+    "http-transcript": {
+      "bytes": 1004,
+      "path": "v5-pilot-2/first-forms-train/rebuild/http-play.jsonl",
+      "sha256": "4b1e7ff5b0b2847e9912a0d33d0c06235c95f03f0eb926679436f983b4e47ab2"
+    },
+    "landing-review": {
+      "bytes": 5403,
+      "path": "v5-pilot-2/first-forms-train/rebuild/landing-review-with-gui.json",
+      "sha256": "1ff5aaca9edac7e6aab8e85516707a15916046ad82f3e9e487329f2fa1ea707b"
+    },
+    "pin-changes": {
+      "bytes": 1096,
+      "path": "v5-pilot-2/first-forms-train/rebuild/reference-prep/pin-changes.json",
+      "sha256": "30395207513a27264d25983aa100228a2f8a1c237dade383bf98b93474fcac93"
+    },
+    "pin-review": {
+      "bytes": 2644,
+      "path": "v5-pilot-2/first-forms-train/rebuild/reference-prep/pin-review.json",
+      "sha256": "42e33949bc8ac24d1ff6f60d18b0c9c85f17b08db396b4a32f4e9261d661786f"
+    },
+    "reference": {
+      "bytes": 827,
+      "path": "v5-pilot-2/first-forms-train/rebuild/reference-prep/reference.json",
+      "sha256": "206ac67e05a9d80921bac26ff6c27fdaf12bfaaee8f39d08984beadc35477ddb"
+    },
+    "reference-capture": {
+      "bytes": 940,
+      "path": "v5-pilot-2/first-forms-train/rebuild/reference-prep/reference-capture.json",
+      "sha256": "b46aaa645e2d9e349901889a731cb395f58a664d3575f6a653ef3f1795cc4274"
+    },
+    "reference-corpus": {
+      "bytes": 33327,
+      "path": "v5-pilot-2/first-forms-train/rebuild/reference-prep/source31-raw.json.gz",
+      "sha256": "c70953212a7544bab7bc269209d2fb36f307f8c71aee880a5d32f2b155086708"
+    },
+    "reference-replay": {
+      "bytes": 629,
+      "path": "v5-pilot-2/first-forms-train/rebuild/reference-prep/native-replay-envelope.json",
+      "sha256": "1ce265cd3d340ecb58398dfce92a8230603782bd459601760d75e3479460cb03"
+    },
+    "unit": {
+      "bytes": 21769,
+      "path": "v5-pilot-2/first-forms-train/rebuild/final-gui-unit.json",
+      "sha256": "80dca2e4d4653b375f59c70f6c145ec663bf5f182c9a71a60f9cb89f08a11dcf"
+    },
+    "unit-wrapper": {
+      "bytes": 551,
+      "path": "v5-pilot-2/first-forms-train/rebuild/final-gui-unit-wrapper.json",
+      "sha256": "5901ff2bba7a43024b296780a6d68d77b702720b1db6a0920f65d9bda6c24202"
+    }
+  },
+  "gui_gates": true,
+  "item_ids": [
+    "v5-p2-f1:patrunjel",
+    "v5-p2-f5:robinet-pair"
+  ],
+  "observed_reflog": "merge a024c821666a2b2556e7f450ad777844928ee107: Fast-forward",
+  "operator": "agent:codex",
+  "prescribed_command": [
+    "git",
+    "merge",
+    "--ff-only",
+    "a024c821666a2b2556e7f450ad777844928ee107"
+  ],
+  "schema": "cat-v5-landing-1",
+  "train_id": "v5-p2-forms-1"
+}
