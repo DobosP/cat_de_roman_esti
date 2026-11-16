@@ -25,6 +25,8 @@ const (
 	lockName         = ".boardstats.lock"
 )
 
+var errCorruptSnapshot = errors.New("corrupt board stats snapshot")
+
 type storedBucket struct {
 	Steps int    `json:"steps"`
 	Count uint64 `json:"count"`
@@ -151,7 +153,9 @@ func (s *Store) load() error {
 			s.report(fmt.Errorf("defer %s: snapshot date is in the future", name))
 			return
 		}
-		s.restoreDay(date)
+		if _, err := s.restoreDay(date); err != nil {
+			s.report(err)
+		}
 	}); err != nil {
 		return fmt.Errorf("read board stats directory: %w", err)
 	}
@@ -163,25 +167,29 @@ func (s *Store) load() error {
 
 // A snapshot can outlive a clock rollback. Restore it when its date is
 // eligible again so the first new round cannot replace its previous counts.
+// Leave filesystem failures uncached so future requests can retry the read.
 // Callers check the date bounds before invoking this method.
-func (s *Store) restoreDay(date string) *day {
+func (s *Store) restoreDay(date string) (*day, error) {
 	if d := s.days[date]; d != nil {
-		return d
+		return d, nil
 	}
 	name := snapshotPrefix + date + ".json"
 	d, err := readSnapshot(s.dir, name, date)
-	if err != nil {
-		if !errors.Is(err, os.ErrNotExist) {
-			s.report(fmt.Errorf("skip %s: %w", name, err))
-		}
+	if errors.Is(err, errCorruptSnapshot) {
+		s.report(fmt.Errorf("skip %s: %w", name, err))
 		d = &day{}
+	} else if err != nil {
+		return nil, fmt.Errorf("read %s: %w", name, err)
 	}
 	s.days[date] = d
-	return d
+	return d, nil
 }
 
 func readSnapshot(dir *os.Root, name, date string) (*day, error) {
 	info, err := dir.Lstat(name)
+	if errors.Is(err, os.ErrNotExist) {
+		return &day{}, nil
+	}
 	if err != nil {
 		return nil, err
 	}
@@ -201,12 +209,16 @@ func readSnapshot(dir *os.Root, name, date string) (*day, error) {
 		return nil, err
 	}
 	if len(raw) > maxSnapshotBytes {
-		return nil, errors.New("board stats snapshot too large")
+		return nil, fmt.Errorf("%w: file too large", errCorruptSnapshot)
 	}
 	if err := strictjson.Validate(raw); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("%w: %w", errCorruptSnapshot, err)
 	}
-	return decodeSnapshot(raw, date)
+	d, err := decodeSnapshot(raw, date)
+	if err != nil {
+		return nil, fmt.Errorf("%w: %w", errCorruptSnapshot, err)
+	}
+	return d, nil
 }
 
 func decodeSnapshot(raw []byte, date string) (*day, error) {

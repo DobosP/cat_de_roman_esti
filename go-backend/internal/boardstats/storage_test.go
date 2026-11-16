@@ -70,6 +70,9 @@ func TestRestartPrunesExpiredSnapshotsAndReportsCorruption(t *testing.T) {
 	if _, ok := s.Place(broken, 0); ok {
 		t.Fatal("corrupt file contributed counts")
 	}
+	if err := s.Record(broken, Win, 0); err != nil {
+		t.Fatalf("corrupt bytes blocked new rounds: %v", err)
+	}
 	if fresh, err := Open(dir, options); !errors.Is(err, ErrLocked) {
 		if fresh != nil {
 			_ = fresh.Close()
@@ -200,6 +203,75 @@ func TestFutureSnapshotIsRestoredAfterClockRollback(t *testing.T) {
 				t.Fatalf("persisted place after rollback: %+v, %t; want %+v", place, ok, want)
 			}
 		})
+	}
+}
+
+func TestUnreadableSnapshotWithholdsRoundAndPlaceUntilRecovery(t *testing.T) {
+	dir := t.TempDir()
+	key := testKey(17)
+	var clock atomic.Int64
+	now := func() time.Time { return time.Unix(clock.Load(), 0).In(testDay(17).Location()) }
+	options := Options{Now: now, Report: func(error) {}}
+	clock.Store(testDay(17).Unix())
+	seed := openTest(t, dir, options)
+	recordN(t, seed, key, Win, 3, 100)
+	if err := seed.Close(); err != nil {
+		t.Fatal(err)
+	}
+	path := filepath.Join(dir, snapshotName(key))
+	before, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	clock.Store(testDay(16).Unix())
+	store := openTest(t, dir, options)
+	clock.Store(testDay(17).Unix())
+	// A closed Root makes the lazy filesystem read fail even as root, while
+	// leaving the real snapshot and the store's original Root intact.
+	blocked, err := os.OpenRoot(dir)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := blocked.Close(); err != nil {
+		t.Fatal(err)
+	}
+	store.mu.Lock()
+	usable := store.dir
+	store.dir = blocked
+	store.mu.Unlock()
+	recoverRead := func() {
+		store.mu.Lock()
+		store.dir = usable
+		store.mu.Unlock()
+	}
+	t.Cleanup(recoverRead)
+
+	if _, ok := store.Place(key, 0); ok {
+		t.Fatal("place appeared before the snapshot could be read")
+	}
+	if err := store.Record(key, Loss, 0); !errors.Is(err, os.ErrClosed) {
+		t.Fatalf("record with unreadable snapshot returned %v", err)
+	}
+	recoverRead()
+	if err := store.Flush(); err != nil {
+		t.Fatal(err)
+	}
+	after, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !bytes.Equal(before, after) {
+		t.Fatal("failed admission modified the saved snapshot")
+	}
+	if place, ok := store.Place(key, 0); !ok || place.Rounds != 100 {
+		t.Fatalf("recovered place: %+v, %t", place, ok)
+	}
+	if err := store.Record(key, Loss, 0); err != nil {
+		t.Fatal(err)
+	}
+	if place, ok := store.Place(key, 0); !ok || place.Rounds != 101 {
+		t.Fatalf("first admitted round after recovery: %+v, %t", place, ok)
 	}
 }
 

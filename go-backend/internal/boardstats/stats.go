@@ -173,7 +173,10 @@ func (s *Store) Record(key Key, outcome Outcome, steps int) error {
 	}
 	s.discardExpired(oldest)
 
-	d := s.restoreDay(key.Day)
+	d, err := s.restoreDay(key.Day)
+	if err != nil {
+		return err
+	}
 	b := d.boards[key]
 	if b == nil {
 		if len(d.boards) >= maxBoardsPerDay {
@@ -226,7 +229,10 @@ func (s *Store) Place(key Key, steps int) (Place, bool) {
 		return Place{}, false
 	}
 	s.discardExpired(oldest)
-	d := s.restoreDay(key.Day)
+	d, err := s.restoreDay(key.Day)
+	if err != nil {
+		return Place{}, false
+	}
 	b := d.boards[key]
 	if b == nil || b.rounds < MinimumRounds {
 		return Place{}, false
