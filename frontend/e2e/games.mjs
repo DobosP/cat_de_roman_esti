@@ -11,7 +11,7 @@ export const games = [
   { key: "lant", path: "/lant", board: '[aria-label="Următorul concept"]' },
 ];
 const fixtures = new Map();
-export const seededStarts = JSON.parse(readFileSync(new URL("./seeded-starts.json", import.meta.url), "utf8"));
+export const seededStarts = JSON.parse(readFileSync(new URL("./seeded-starts-rules-v2.json", import.meta.url), "utf8"));
 const escapeRegex = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 export function solution(game) {

@@ -88,7 +88,7 @@ func TestPythonHTTPSequences(t *testing.T) {
 		t.Fatal(e)
 	}
 	s := New(c)
-	data, e := os.ReadFile("testdata/python_games.json")
+	data, e := os.ReadFile("testdata/python_games_rules_v2.json")
 	if e != nil {
 		t.Fatal(e)
 	}

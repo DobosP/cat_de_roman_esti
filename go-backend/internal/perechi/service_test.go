@@ -52,7 +52,7 @@ func compare(t *testing.T, body map[string]any, err *Error, want goldenResponse)
 	}
 }
 func TestPythonAPIGoldens(t *testing.T) {
-	raw, err := os.ReadFile("testdata/python-goldens.json")
+	raw, err := os.ReadFile("testdata/python-goldens-rules-v2.json")
 	if err != nil {
 		t.Fatal(err)
 	}

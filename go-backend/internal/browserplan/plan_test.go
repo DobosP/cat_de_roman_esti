@@ -18,7 +18,7 @@ func testContent(t *testing.T) *content.Content {
 }
 func TestIndependentFrozenBrowserStartsAndWinningPlans(t *testing.T) {
 	c := testContent(t)
-	raw, err := os.ReadFile("../../../frontend/e2e/seeded-starts.json")
+	raw, err := os.ReadFile("../../../frontend/e2e/seeded-starts-rules-v2.json")
 	if err != nil {
 		t.Fatal(err)
 	}

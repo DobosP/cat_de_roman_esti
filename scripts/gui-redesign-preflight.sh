@@ -17,6 +17,9 @@ cd /work/frontend
 npm ci --no-audit --no-fund > "$out/npm-ci.log" 2>&1
 cd /work
 
+go -C go-backend build -o "$out/cat-browser-plan" ./cmd/cat-browser-plan
+export CDR_BROWSER_PLAN_BINARY="$out/cat-browser-plan"
+
 node scripts/gui-full-browser.mjs inventory > "$out/inventory.log" 2>&1
 cp .gate/gen/browser-inventory.json "$out/browser-inventory.json"
 
@@ -24,8 +27,6 @@ node scripts/gui-style-audit.mjs --root /work > "$out/style-audit.json" || true
 node -e 'const r=require(process.argv[1]); console.log("CSS bag audit", JSON.stringify(r.counters), JSON.stringify(r.findings))' "$out/style-audit.json"
 if [[ "${1:-}" == inventory ]]; then exit 0; fi
 
-go -C go-backend build -o "$out/cat-browser-plan" ./cmd/cat-browser-plan
-export CDR_BROWSER_PLAN_BINARY="$out/cat-browser-plan"
 cd /work/frontend
 if (( $# )); then
   node node_modules/@playwright/test/cli.js test --config playwright.gui.config.mjs --project desktop --reporter json "$@" > "$out/playwright.json"

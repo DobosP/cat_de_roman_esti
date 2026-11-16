@@ -183,7 +183,7 @@ def main():
         ccases.append(case)
     conexiuni.get_pack = original
     for game, cases in [("perechi", pcases), ("conexiuni", ccases)]:
-        path = root / "go-backend/internal" / game / "testdata/python-goldens.json"
+        path = root / "go-backend/internal" / game / "testdata/python-goldens-rules-v2.json"
         path.write_text(
             json.dumps(
                 {"python": platform.python_version(), "cases": cases},

@@ -6,18 +6,14 @@
         "body": {
           "actions": 0,
           "game_id": "<session>",
-          "hint_available": true,
-          "hint_level": 0,
-          "hints_left": 3,
+          "hint_available": false,
           "hints_used": 0,
           "lost": false,
           "mistakes": 0,
-          "perfect": false,
           "remaining_mistakes": 6,
           "remaining_pairs": 4,
           "solved_count": 0,
           "solved_pairs": [],
-          "steps": 0,
           "tiles": [
             {
               "id": "n_spt_nadia_zecele_perfect",
@@ -75,18 +71,14 @@
           "body": {
             "actions": 0,
             "game_id": "<session>",
-            "hint_available": true,
-            "hint_level": 0,
-            "hints_left": 3,
+            "hint_available": false,
             "hints_used": 0,
             "lost": false,
             "mistakes": 0,
-            "perfect": false,
             "remaining_mistakes": 6,
             "remaining_pairs": 4,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 0,
             "tiles": [
               {
                 "id": "n_spt_nadia_zecele_perfect",
@@ -137,96 +129,27 @@
         {
           "action": "hint",
           "body": {
-            "actions": 0,
-            "clue": {
-              "label": "Sport",
-              "message": "Tema unei perechi: Sport."
-            },
-            "game_id": "<session>",
-            "hint_available": true,
-            "hint_level": 1,
-            "hints_left": 2,
-            "hints_used": 1,
-            "lost": false,
-            "mistakes": 0,
-            "ok": true,
-            "perfect": false,
-            "remaining_mistakes": 6,
-            "remaining_pairs": 4,
-            "solved_count": 0,
-            "solved_pairs": [],
-            "steps": 1,
-            "tiles": [
-              {
-                "id": "n_spt_nadia_zecele_perfect",
-                "label": "Primul 10 perfect",
-                "solved": false
-              },
-              {
-                "id": "n_spt_steaua_1986",
-                "label": "Steaua 1986",
-                "solved": false
-              },
-              {
-                "id": "n_spt_romania_argentina_1994",
-                "label": "România - Argentina 1994",
-                "solved": false
-              },
-              {
-                "id": "n_spt_simona_wimbledon_2019",
-                "label": "Wimbledon 2019",
-                "solved": false
-              },
-              {
-                "id": "n_spt_world_cup_1994",
-                "label": "Cupa Mondială 1994",
-                "solved": false
-              },
-              {
-                "id": "n_nadia_comaneci",
-                "label": "Nadia Comăneci",
-                "solved": false
-              },
-              {
-                "id": "n_spt_finala_sevilla_1986",
-                "label": "Finala de la Sevilla",
-                "solved": false
-              },
-              {
-                "id": "n_spt_finala_wimbledon_serena",
-                "label": "Finala cu Serena Williams",
-                "solved": false
-              }
-            ],
-            "won": false
+            "detail": "Indiciul se deschide după două greșeli."
           },
           "ids": [],
-          "status": 200
+          "status": 400
         },
         {
           "action": "match",
           "body": {
             "actions": 1,
-            "clue": {
-              "label": "Sport",
-              "message": "Tema unei perechi: Sport."
-            },
             "correct": false,
             "game_id": "<session>",
-            "hint_available": true,
-            "hint_level": 1,
-            "hints_left": 2,
-            "hints_used": 1,
+            "hint_available": false,
+            "hints_used": 0,
             "lost": false,
             "mistakes": 1,
             "ok": true,
-            "perfect": false,
             "remaining_mistakes": 5,
             "remaining_pairs": 4,
             "repeated": false,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 2,
             "tiles": [
               {
                 "id": "n_spt_nadia_zecele_perfect",
@@ -281,26 +204,18 @@
           "action": "match",
           "body": {
             "actions": 1,
-            "clue": {
-              "label": "Sport",
-              "message": "Tema unei perechi: Sport."
-            },
             "correct": false,
             "game_id": "<session>",
-            "hint_available": true,
-            "hint_level": 1,
-            "hints_left": 2,
-            "hints_used": 1,
+            "hint_available": false,
+            "hints_used": 0,
             "lost": false,
             "mistakes": 1,
             "ok": true,
-            "perfect": false,
             "remaining_mistakes": 5,
             "remaining_pairs": 4,
             "repeated": true,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 2,
             "tiles": [
               {
                 "id": "n_spt_nadia_zecele_perfect",
@@ -355,26 +270,18 @@
           "action": "match",
           "body": {
             "actions": 2,
-            "clue": {
-              "label": "Sport",
-              "message": "Tema unei perechi: Sport."
-            },
             "correct": false,
             "game_id": "<session>",
             "hint_available": true,
-            "hint_level": 1,
-            "hints_left": 2,
-            "hints_used": 1,
+            "hints_used": 0,
             "lost": false,
             "mistakes": 2,
             "ok": true,
-            "perfect": false,
             "remaining_mistakes": 4,
             "remaining_pairs": 4,
             "repeated": false,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 3,
             "tiles": [
               {
                 "id": "n_spt_nadia_zecele_perfect",
@@ -429,24 +336,29 @@
           "action": "hint",
           "body": {
             "actions": 2,
-            "clue": {
-              "label": "America '94, cu vecinii la geam",
-              "message": "Legătura unei perechi: America '94, cu vecinii la geam."
-            },
             "game_id": "<session>",
-            "hint_available": true,
-            "hint_level": 2,
-            "hints_left": 1,
-            "hints_used": 2,
+            "hint": {
+              "label": "America '94, cu vecinii la geam",
+              "tiles": [
+                {
+                  "id": "n_spt_romania_argentina_1994",
+                  "label": "România - Argentina 1994"
+                },
+                {
+                  "id": "n_spt_world_cup_1994",
+                  "label": "Cupa Mondială 1994"
+                }
+              ]
+            },
+            "hint_available": false,
+            "hints_used": 1,
             "lost": false,
             "mistakes": 2,
             "ok": true,
-            "perfect": false,
             "remaining_mistakes": 4,
             "remaining_pairs": 4,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 4,
             "tiles": [
               {
                 "id": "n_spt_nadia_zecele_perfect",
@@ -497,80 +409,10 @@
         {
           "action": "hint",
           "body": {
-            "actions": 2,
-            "game_id": "<session>",
-            "hint": {
-              "label": "America '94, cu vecinii la geam",
-              "tiles": [
-                {
-                  "id": "n_spt_romania_argentina_1994",
-                  "label": "România - Argentina 1994"
-                },
-                {
-                  "id": "n_spt_world_cup_1994",
-                  "label": "Cupa Mondială 1994"
-                }
-              ]
-            },
-            "hint_available": false,
-            "hint_level": 3,
-            "hints_left": 0,
-            "hints_used": 3,
-            "lost": false,
-            "mistakes": 2,
-            "ok": true,
-            "perfect": false,
-            "remaining_mistakes": 4,
-            "remaining_pairs": 4,
-            "solved_count": 0,
-            "solved_pairs": [],
-            "steps": 5,
-            "tiles": [
-              {
-                "id": "n_spt_nadia_zecele_perfect",
-                "label": "Primul 10 perfect",
-                "solved": false
-              },
-              {
-                "id": "n_spt_steaua_1986",
-                "label": "Steaua 1986",
-                "solved": false
-              },
-              {
-                "id": "n_spt_romania_argentina_1994",
-                "label": "România - Argentina 1994",
-                "solved": false
-              },
-              {
-                "id": "n_spt_simona_wimbledon_2019",
-                "label": "Wimbledon 2019",
-                "solved": false
-              },
-              {
-                "id": "n_spt_world_cup_1994",
-                "label": "Cupa Mondială 1994",
-                "solved": false
-              },
-              {
-                "id": "n_nadia_comaneci",
-                "label": "Nadia Comăneci",
-                "solved": false
-              },
-              {
-                "id": "n_spt_finala_sevilla_1986",
-                "label": "Finala de la Sevilla",
-                "solved": false
-              },
-              {
-                "id": "n_spt_finala_wimbledon_serena",
-                "label": "Finala cu Serena Williams",
-                "solved": false
-              }
-            ],
-            "won": false
+            "detail": "Indiciul a fost deja folosit"
           },
           "ids": [],
-          "status": 200
+          "status": 400
         },
         {
           "action": "match",
@@ -592,9 +434,7 @@
               ]
             },
             "hint_available": false,
-            "hint_level": 3,
-            "hints_left": 0,
-            "hints_used": 3,
+            "hints_used": 1,
             "lost": false,
             "mistakes": 2,
             "ok": true,
@@ -611,7 +451,6 @@
                 }
               ]
             },
-            "perfect": false,
             "remaining_mistakes": 4,
             "remaining_pairs": 3,
             "solved_count": 1,
@@ -630,7 +469,6 @@
                 ]
               }
             ],
-            "steps": 5,
             "tiles": [
               {
                 "id": "n_spt_nadia_zecele_perfect",
@@ -701,9 +539,7 @@
               ]
             },
             "hint_available": false,
-            "hint_level": 3,
-            "hints_left": 0,
-            "hints_used": 3,
+            "hints_used": 1,
             "lost": false,
             "mistakes": 2,
             "ok": true,
@@ -720,7 +556,6 @@
                 }
               ]
             },
-            "perfect": false,
             "remaining_mistakes": 4,
             "remaining_pairs": 2,
             "solved_count": 2,
@@ -752,7 +587,6 @@
                 ]
               }
             ],
-            "steps": 5,
             "tiles": [
               {
                 "id": "n_spt_nadia_zecele_perfect",
@@ -823,9 +657,7 @@
               ]
             },
             "hint_available": false,
-            "hint_level": 3,
-            "hints_left": 0,
-            "hints_used": 3,
+            "hints_used": 1,
             "lost": false,
             "mistakes": 2,
             "ok": true,
@@ -842,7 +674,6 @@
                 }
               ]
             },
-            "perfect": false,
             "remaining_mistakes": 4,
             "remaining_pairs": 1,
             "solved_count": 3,
@@ -887,7 +718,6 @@
                 ]
               }
             ],
-            "steps": 5,
             "tiles": [
               {
                 "id": "n_spt_nadia_zecele_perfect",
@@ -958,9 +788,7 @@
               ]
             },
             "hint_available": false,
-            "hint_level": 3,
-            "hints_left": 0,
-            "hints_used": 3,
+            "hints_used": 1,
             "lost": false,
             "mistakes": 2,
             "ok": true,
@@ -977,10 +805,9 @@
                 }
               ]
             },
-            "perfect": false,
             "remaining_mistakes": 4,
             "remaining_pairs": 0,
-            "score": 350,
+            "score": 650,
             "share": "cat_de_roman_esti · Perechi · 2 greșeli · indiciu\n🟩🟩🟩🟩",
             "solution": [
               {
@@ -1091,7 +918,6 @@
                 ]
               }
             ],
-            "steps": 5,
             "tiles": [
               {
                 "id": "n_spt_nadia_zecele_perfect",
@@ -1161,15 +987,12 @@
               ]
             },
             "hint_available": false,
-            "hint_level": 3,
-            "hints_left": 0,
-            "hints_used": 3,
+            "hints_used": 1,
             "lost": false,
             "mistakes": 2,
-            "perfect": false,
             "remaining_mistakes": 4,
             "remaining_pairs": 0,
-            "score": 350,
+            "score": 650,
             "share": "cat_de_roman_esti · Perechi · 2 greșeli · indiciu\n🟩🟩🟩🟩",
             "solution": [
               {
@@ -1280,7 +1103,6 @@
                 ]
               }
             ],
-            "steps": 5,
             "tiles": [
               {
                 "id": "n_spt_nadia_zecele_perfect",
@@ -1355,18 +1177,14 @@
         "body": {
           "actions": 0,
           "game_id": "<session>",
-          "hint_available": true,
-          "hint_level": 0,
-          "hints_left": 3,
+          "hint_available": false,
           "hints_used": 0,
           "lost": false,
           "mistakes": 0,
-          "perfect": false,
           "remaining_mistakes": 6,
           "remaining_pairs": 4,
           "solved_count": 0,
           "solved_pairs": [],
-          "steps": 0,
           "tiles": [
             {
               "id": "n_v28_nature_weather_curcubeu",
@@ -1424,18 +1242,14 @@
           "body": {
             "actions": 0,
             "game_id": "<session>",
-            "hint_available": true,
-            "hint_level": 0,
-            "hints_left": 3,
+            "hint_available": false,
             "hints_used": 0,
             "lost": false,
             "mistakes": 0,
-            "perfect": false,
             "remaining_mistakes": 6,
             "remaining_pairs": 4,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 0,
             "tiles": [
               {
                 "id": "n_v28_nature_weather_curcubeu",
@@ -1486,96 +1300,27 @@
         {
           "action": "hint",
           "body": {
-            "actions": 0,
-            "clue": {
-              "label": "Viața în România",
-              "message": "Tema unei perechi: Viața în România."
-            },
-            "game_id": "<session>",
-            "hint_available": true,
-            "hint_level": 1,
-            "hints_left": 2,
-            "hints_used": 1,
-            "lost": false,
-            "mistakes": 0,
-            "ok": true,
-            "perfect": false,
-            "remaining_mistakes": 6,
-            "remaining_pairs": 4,
-            "solved_count": 0,
-            "solved_pairs": [],
-            "steps": 1,
-            "tiles": [
-              {
-                "id": "n_v28_nature_weather_curcubeu",
-                "label": "Curcubeu",
-                "solved": false
-              },
-              {
-                "id": "n_v20ist_castelul_peles",
-                "label": "Castelul Peleș",
-                "solved": false
-              },
-              {
-                "id": "n_v24_food_pantry_faina",
-                "label": "Făină",
-                "solved": false
-              },
-              {
-                "id": "n_v24_time_day_zi",
-                "label": "Zi",
-                "solved": false
-              },
-              {
-                "id": "n_geox_sinaia",
-                "label": "Sinaia",
-                "solved": false
-              },
-              {
-                "id": "n_v4art_culoare",
-                "label": "Culoare",
-                "solved": false
-              },
-              {
-                "id": "n_v29_time_calendar",
-                "label": "Calendar",
-                "solved": false
-              },
-              {
-                "id": "n_gas_cozonac",
-                "label": "Cozonac",
-                "solved": false
-              }
-            ],
-            "won": false
+            "detail": "Indiciul se deschide după două greșeli."
           },
           "ids": [],
-          "status": 200
+          "status": 400
         },
         {
           "action": "match",
           "body": {
             "actions": 1,
-            "clue": {
-              "label": "Viața în România",
-              "message": "Tema unei perechi: Viața în România."
-            },
             "correct": false,
             "game_id": "<session>",
-            "hint_available": true,
-            "hint_level": 1,
-            "hints_left": 2,
-            "hints_used": 1,
+            "hint_available": false,
+            "hints_used": 0,
             "lost": false,
             "mistakes": 1,
             "ok": true,
-            "perfect": false,
             "remaining_mistakes": 5,
             "remaining_pairs": 4,
             "repeated": false,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 2,
             "tiles": [
               {
                 "id": "n_v28_nature_weather_curcubeu",
@@ -1630,26 +1375,18 @@
           "action": "match",
           "body": {
             "actions": 1,
-            "clue": {
-              "label": "Viața în România",
-              "message": "Tema unei perechi: Viața în România."
-            },
             "correct": false,
             "game_id": "<session>",
-            "hint_available": true,
-            "hint_level": 1,
-            "hints_left": 2,
-            "hints_used": 1,
+            "hint_available": false,
+            "hints_used": 0,
             "lost": false,
             "mistakes": 1,
             "ok": true,
-            "perfect": false,
             "remaining_mistakes": 5,
             "remaining_pairs": 4,
             "repeated": true,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 2,
             "tiles": [
               {
                 "id": "n_v28_nature_weather_curcubeu",
@@ -1704,26 +1441,18 @@
           "action": "match",
           "body": {
             "actions": 2,
-            "clue": {
-              "label": "Viața în România",
-              "message": "Tema unei perechi: Viața în România."
-            },
             "correct": false,
             "game_id": "<session>",
             "hint_available": true,
-            "hint_level": 1,
-            "hints_left": 2,
-            "hints_used": 1,
+            "hints_used": 0,
             "lost": false,
             "mistakes": 2,
             "ok": true,
-            "perfect": false,
             "remaining_mistakes": 4,
             "remaining_pairs": 4,
             "repeated": false,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 3,
             "tiles": [
               {
                 "id": "n_v28_nature_weather_curcubeu",
@@ -1778,24 +1507,29 @@
           "action": "hint",
           "body": {
             "actions": 2,
-            "clue": {
-              "label": "Fenomen optic și culorile sale",
-              "message": "Legătura unei perechi: Fenomen optic și culorile sale."
-            },
             "game_id": "<session>",
-            "hint_available": true,
-            "hint_level": 2,
-            "hints_left": 1,
-            "hints_used": 2,
+            "hint": {
+              "label": "Fenomen optic și culorile sale",
+              "tiles": [
+                {
+                  "id": "n_v28_nature_weather_curcubeu",
+                  "label": "Curcubeu"
+                },
+                {
+                  "id": "n_v4art_culoare",
+                  "label": "Culoare"
+                }
+              ]
+            },
+            "hint_available": false,
+            "hints_used": 1,
             "lost": false,
             "mistakes": 2,
             "ok": true,
-            "perfect": false,
             "remaining_mistakes": 4,
             "remaining_pairs": 4,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 4,
             "tiles": [
               {
                 "id": "n_v28_nature_weather_curcubeu",
@@ -1846,80 +1580,10 @@
         {
           "action": "hint",
           "body": {
-            "actions": 2,
-            "game_id": "<session>",
-            "hint": {
-              "label": "Fenomen optic și culorile sale",
-              "tiles": [
-                {
-                  "id": "n_v28_nature_weather_curcubeu",
-                  "label": "Curcubeu"
-                },
-                {
-                  "id": "n_v4art_culoare",
-                  "label": "Culoare"
-                }
-              ]
-            },
-            "hint_available": false,
-            "hint_level": 3,
-            "hints_left": 0,
-            "hints_used": 3,
-            "lost": false,
-            "mistakes": 2,
-            "ok": true,
-            "perfect": false,
-            "remaining_mistakes": 4,
-            "remaining_pairs": 4,
-            "solved_count": 0,
-            "solved_pairs": [],
-            "steps": 5,
-            "tiles": [
-              {
-                "id": "n_v28_nature_weather_curcubeu",
-                "label": "Curcubeu",
-                "solved": false
-              },
-              {
-                "id": "n_v20ist_castelul_peles",
-                "label": "Castelul Peleș",
-                "solved": false
-              },
-              {
-                "id": "n_v24_food_pantry_faina",
-                "label": "Făină",
-                "solved": false
-              },
-              {
-                "id": "n_v24_time_day_zi",
-                "label": "Zi",
-                "solved": false
-              },
-              {
-                "id": "n_geox_sinaia",
-                "label": "Sinaia",
-                "solved": false
-              },
-              {
-                "id": "n_v4art_culoare",
-                "label": "Culoare",
-                "solved": false
-              },
-              {
-                "id": "n_v29_time_calendar",
-                "label": "Calendar",
-                "solved": false
-              },
-              {
-                "id": "n_gas_cozonac",
-                "label": "Cozonac",
-                "solved": false
-              }
-            ],
-            "won": false
+            "detail": "Indiciul a fost deja folosit"
           },
           "ids": [],
-          "status": 200
+          "status": 400
         },
         {
           "action": "match",
@@ -1941,19 +1605,15 @@
               ]
             },
             "hint_available": false,
-            "hint_level": 3,
-            "hints_left": 0,
-            "hints_used": 3,
+            "hints_used": 1,
             "lost": false,
             "mistakes": 3,
             "ok": true,
-            "perfect": false,
             "remaining_mistakes": 3,
             "remaining_pairs": 4,
             "repeated": false,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 6,
             "tiles": [
               {
                 "id": "n_v28_nature_weather_curcubeu",
@@ -2024,19 +1684,15 @@
               ]
             },
             "hint_available": false,
-            "hint_level": 3,
-            "hints_left": 0,
-            "hints_used": 3,
+            "hints_used": 1,
             "lost": false,
             "mistakes": 4,
             "ok": true,
-            "perfect": false,
             "remaining_mistakes": 2,
             "remaining_pairs": 4,
             "repeated": false,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 7,
             "tiles": [
               {
                 "id": "n_v28_nature_weather_curcubeu",
@@ -2107,19 +1763,15 @@
               ]
             },
             "hint_available": false,
-            "hint_level": 3,
-            "hints_left": 0,
-            "hints_used": 3,
+            "hints_used": 1,
             "lost": false,
             "mistakes": 5,
             "ok": true,
-            "perfect": false,
             "remaining_mistakes": 1,
             "remaining_pairs": 4,
             "repeated": false,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 8,
             "tiles": [
               {
                 "id": "n_v28_nature_weather_curcubeu",
@@ -2190,13 +1842,10 @@
               ]
             },
             "hint_available": false,
-            "hint_level": 3,
-            "hints_left": 0,
-            "hints_used": 3,
+            "hints_used": 1,
             "lost": true,
             "mistakes": 6,
             "ok": true,
-            "perfect": false,
             "remaining_mistakes": 0,
             "remaining_pairs": 4,
             "repeated": false,
@@ -2258,7 +1907,6 @@
             ],
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 9,
             "tiles": [
               {
                 "id": "n_v28_nature_weather_curcubeu",
@@ -2328,12 +1976,9 @@
               ]
             },
             "hint_available": false,
-            "hint_level": 3,
-            "hints_left": 0,
-            "hints_used": 3,
+            "hints_used": 1,
             "lost": true,
             "mistakes": 6,
-            "perfect": false,
             "remaining_mistakes": 0,
             "remaining_pairs": 4,
             "score": 0,
@@ -2394,7 +2039,6 @@
             ],
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 9,
             "tiles": [
               {
                 "id": "n_v28_nature_weather_curcubeu",
@@ -2469,18 +2113,14 @@
         "body": {
           "actions": 0,
           "game_id": "<session>",
-          "hint_available": true,
-          "hint_level": 0,
-          "hints_left": 3,
+          "hint_available": false,
           "hints_used": 0,
           "lost": false,
           "mistakes": 0,
-          "perfect": false,
           "remaining_mistakes": 6,
           "remaining_pairs": 4,
           "solved_count": 0,
           "solved_pairs": [],
-          "steps": 0,
           "tiles": [
             {
               "id": "n_muz_ozone",
@@ -2538,18 +2178,14 @@
           "body": {
             "actions": 0,
             "game_id": "<session>",
-            "hint_available": true,
-            "hint_level": 0,
-            "hints_left": 3,
+            "hint_available": false,
             "hints_used": 0,
             "lost": false,
             "mistakes": 0,
-            "perfect": false,
             "remaining_mistakes": 6,
             "remaining_pairs": 4,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 0,
             "tiles": [
               {
                 "id": "n_muz_ozone",
@@ -2600,96 +2236,27 @@
         {
           "action": "hint",
           "body": {
-            "actions": 0,
-            "clue": {
-              "label": "Muzică",
-              "message": "Tema unei perechi: Muzică."
-            },
-            "game_id": "<session>",
-            "hint_available": true,
-            "hint_level": 1,
-            "hints_left": 2,
-            "hints_used": 1,
-            "lost": false,
-            "mistakes": 0,
-            "ok": true,
-            "perfect": false,
-            "remaining_mistakes": 6,
-            "remaining_pairs": 4,
-            "solved_count": 0,
-            "solved_pairs": [],
-            "steps": 1,
-            "tiles": [
-              {
-                "id": "n_muz_ozone",
-                "label": "O-Zone",
-                "solved": false
-              },
-              {
-                "id": "n_muz_delia",
-                "label": "Delia",
-                "solved": false
-              },
-              {
-                "id": "n_muz_iris",
-                "label": "Iris",
-                "solved": false
-              },
-              {
-                "id": "n_muz_cargo",
-                "label": "Cargo",
-                "solved": false
-              },
-              {
-                "id": "n_muz_florin_salam",
-                "label": "Florin Salam",
-                "solved": false
-              },
-              {
-                "id": "n_muz_andra",
-                "label": "Andra",
-                "solved": false
-              },
-              {
-                "id": "n_muz_nicolae_guta",
-                "label": "Nicolae Guță",
-                "solved": false
-              },
-              {
-                "id": "n_muz_dragostea_din_tei",
-                "label": "Dragostea din tei",
-                "solved": false
-              }
-            ],
-            "won": false
+            "detail": "Indiciul se deschide după două greșeli."
           },
           "ids": [],
-          "status": 200
+          "status": 400
         },
         {
           "action": "match",
           "body": {
             "actions": 1,
-            "clue": {
-              "label": "Muzică",
-              "message": "Tema unei perechi: Muzică."
-            },
             "correct": false,
             "game_id": "<session>",
-            "hint_available": true,
-            "hint_level": 1,
-            "hints_left": 2,
-            "hints_used": 1,
+            "hint_available": false,
+            "hints_used": 0,
             "lost": false,
             "mistakes": 1,
             "ok": true,
-            "perfect": false,
             "remaining_mistakes": 5,
             "remaining_pairs": 4,
             "repeated": false,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 2,
             "tiles": [
               {
                 "id": "n_muz_ozone",
@@ -2744,26 +2311,18 @@
           "action": "match",
           "body": {
             "actions": 1,
-            "clue": {
-              "label": "Muzică",
-              "message": "Tema unei perechi: Muzică."
-            },
             "correct": false,
             "game_id": "<session>",
-            "hint_available": true,
-            "hint_level": 1,
-            "hints_left": 2,
-            "hints_used": 1,
+            "hint_available": false,
+            "hints_used": 0,
             "lost": false,
             "mistakes": 1,
             "ok": true,
-            "perfect": false,
             "remaining_mistakes": 5,
             "remaining_pairs": 4,
             "repeated": true,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 2,
             "tiles": [
               {
                 "id": "n_muz_ozone",
@@ -2818,26 +2377,18 @@
           "action": "match",
           "body": {
             "actions": 2,
-            "clue": {
-              "label": "Muzică",
-              "message": "Tema unei perechi: Muzică."
-            },
             "correct": false,
             "game_id": "<session>",
             "hint_available": true,
-            "hint_level": 1,
-            "hints_left": 2,
-            "hints_used": 1,
+            "hints_used": 0,
             "lost": false,
             "mistakes": 2,
             "ok": true,
-            "perfect": false,
             "remaining_mistakes": 4,
             "remaining_pairs": 4,
             "repeated": false,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 3,
             "tiles": [
               {
                 "id": "n_muz_ozone",
@@ -2892,24 +2443,29 @@
           "action": "hint",
           "body": {
             "actions": 2,
-            "clue": {
-              "label": "Legături cu Republica Moldova",
-              "message": "Legătura unei perechi: Legături cu Republica Moldova."
-            },
             "game_id": "<session>",
-            "hint_available": true,
-            "hint_level": 2,
-            "hints_left": 1,
-            "hints_used": 2,
+            "hint": {
+              "label": "Legături cu Republica Moldova",
+              "tiles": [
+                {
+                  "id": "n_muz_dragostea_din_tei",
+                  "label": "Dragostea din tei"
+                },
+                {
+                  "id": "n_muz_ozone",
+                  "label": "O-Zone"
+                }
+              ]
+            },
+            "hint_available": false,
+            "hints_used": 1,
             "lost": false,
             "mistakes": 2,
             "ok": true,
-            "perfect": false,
             "remaining_mistakes": 4,
             "remaining_pairs": 4,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 4,
             "tiles": [
               {
                 "id": "n_muz_ozone",
@@ -2960,80 +2516,10 @@
         {
           "action": "hint",
           "body": {
-            "actions": 2,
-            "game_id": "<session>",
-            "hint": {
-              "label": "Legături cu Republica Moldova",
-              "tiles": [
-                {
-                  "id": "n_muz_dragostea_din_tei",
-                  "label": "Dragostea din tei"
-                },
-                {
-                  "id": "n_muz_ozone",
-                  "label": "O-Zone"
-                }
-              ]
-            },
-            "hint_available": false,
-            "hint_level": 3,
-            "hints_left": 0,
-            "hints_used": 3,
-            "lost": false,
-            "mistakes": 2,
-            "ok": true,
-            "perfect": false,
-            "remaining_mistakes": 4,
-            "remaining_pairs": 4,
-            "solved_count": 0,
-            "solved_pairs": [],
-            "steps": 5,
-            "tiles": [
-              {
-                "id": "n_muz_ozone",
-                "label": "O-Zone",
-                "solved": false
-              },
-              {
-                "id": "n_muz_delia",
-                "label": "Delia",
-                "solved": false
-              },
-              {
-                "id": "n_muz_iris",
-                "label": "Iris",
-                "solved": false
-              },
-              {
-                "id": "n_muz_cargo",
-                "label": "Cargo",
-                "solved": false
-              },
-              {
-                "id": "n_muz_florin_salam",
-                "label": "Florin Salam",
-                "solved": false
-              },
-              {
-                "id": "n_muz_andra",
-                "label": "Andra",
-                "solved": false
-              },
-              {
-                "id": "n_muz_nicolae_guta",
-                "label": "Nicolae Guță",
-                "solved": false
-              },
-              {
-                "id": "n_muz_dragostea_din_tei",
-                "label": "Dragostea din tei",
-                "solved": false
-              }
-            ],
-            "won": false
+            "detail": "Indiciul a fost deja folosit"
           },
           "ids": [],
-          "status": 200
+          "status": 400
         },
         {
           "action": "match",
@@ -3055,9 +2541,7 @@
               ]
             },
             "hint_available": false,
-            "hint_level": 3,
-            "hints_left": 0,
-            "hints_used": 3,
+            "hints_used": 1,
             "lost": false,
             "mistakes": 2,
             "ok": true,
@@ -3074,7 +2558,6 @@
                 }
               ]
             },
-            "perfect": false,
             "remaining_mistakes": 4,
             "remaining_pairs": 3,
             "solved_count": 1,
@@ -3093,7 +2576,6 @@
                 ]
               }
             ],
-            "steps": 5,
             "tiles": [
               {
                 "id": "n_muz_ozone",
@@ -3164,9 +2646,7 @@
               ]
             },
             "hint_available": false,
-            "hint_level": 3,
-            "hints_left": 0,
-            "hints_used": 3,
+            "hints_used": 1,
             "lost": false,
             "mistakes": 2,
             "ok": true,
@@ -3183,7 +2663,6 @@
                 }
               ]
             },
-            "perfect": false,
             "remaining_mistakes": 4,
             "remaining_pairs": 2,
             "solved_count": 2,
@@ -3215,7 +2694,6 @@
                 ]
               }
             ],
-            "steps": 5,
             "tiles": [
               {
                 "id": "n_muz_ozone",
@@ -3286,9 +2764,7 @@
               ]
             },
             "hint_available": false,
-            "hint_level": 3,
-            "hints_left": 0,
-            "hints_used": 3,
+            "hints_used": 1,
             "lost": false,
             "mistakes": 2,
             "ok": true,
@@ -3305,7 +2781,6 @@
                 }
               ]
             },
-            "perfect": false,
             "remaining_mistakes": 4,
             "remaining_pairs": 1,
             "solved_count": 3,
@@ -3350,7 +2825,6 @@
                 ]
               }
             ],
-            "steps": 5,
             "tiles": [
               {
                 "id": "n_muz_ozone",
@@ -3421,9 +2895,7 @@
               ]
             },
             "hint_available": false,
-            "hint_level": 3,
-            "hints_left": 0,
-            "hints_used": 3,
+            "hints_used": 1,
             "lost": false,
             "mistakes": 2,
             "ok": true,
@@ -3440,10 +2912,9 @@
                 }
               ]
             },
-            "perfect": false,
             "remaining_mistakes": 4,
             "remaining_pairs": 0,
-            "score": 350,
+            "score": 650,
             "share": "cat_de_roman_esti · Perechi · 2 greșeli · indiciu\n🟩🟩🟩🟩",
             "solution": [
               {
@@ -3554,7 +3025,6 @@
                 ]
               }
             ],
-            "steps": 5,
             "tiles": [
               {
                 "id": "n_muz_ozone",
@@ -3624,15 +3094,12 @@
               ]
             },
             "hint_available": false,
-            "hint_level": 3,
-            "hints_left": 0,
-            "hints_used": 3,
+            "hints_used": 1,
             "lost": false,
             "mistakes": 2,
-            "perfect": false,
             "remaining_mistakes": 4,
             "remaining_pairs": 0,
-            "score": 350,
+            "score": 650,
             "share": "cat_de_roman_esti · Perechi · 2 greșeli · indiciu\n🟩🟩🟩🟩",
             "solution": [
               {
@@ -3743,7 +3210,6 @@
                 ]
               }
             ],
-            "steps": 5,
             "tiles": [
               {
                 "id": "n_muz_ozone",
@@ -3819,18 +3285,14 @@
           "actions": 0,
           "board_category": "muzica",
           "game_id": "<session>",
-          "hint_available": true,
-          "hint_level": 0,
-          "hints_left": 2,
+          "hint_available": false,
           "hints_used": 0,
           "lost": false,
           "mistakes": 0,
-          "perfect": false,
           "remaining_mistakes": 6,
           "remaining_pairs": 4,
           "solved_count": 0,
           "solved_pairs": [],
-          "steps": 0,
           "tiles": [
             {
               "id": "n_muz_carlas_dreams",
@@ -3889,18 +3351,14 @@
             "actions": 0,
             "board_category": "muzica",
             "game_id": "<session>",
-            "hint_available": true,
-            "hint_level": 0,
-            "hints_left": 2,
+            "hint_available": false,
             "hints_used": 0,
             "lost": false,
             "mistakes": 0,
-            "perfect": false,
             "remaining_mistakes": 6,
             "remaining_pairs": 4,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 0,
             "tiles": [
               {
                 "id": "n_muz_carlas_dreams",
@@ -3951,98 +3409,28 @@
         {
           "action": "hint",
           "body": {
-            "actions": 0,
-            "board_category": "muzica",
-            "clue": {
-              "label": "Legături cu Republica Moldova",
-              "message": "Legătura unei perechi: Legături cu Republica Moldova."
-            },
-            "game_id": "<session>",
-            "hint_available": true,
-            "hint_level": 2,
-            "hints_left": 1,
-            "hints_used": 1,
-            "lost": false,
-            "mistakes": 0,
-            "ok": true,
-            "perfect": false,
-            "remaining_mistakes": 6,
-            "remaining_pairs": 4,
-            "solved_count": 0,
-            "solved_pairs": [],
-            "steps": 1,
-            "tiles": [
-              {
-                "id": "n_muz_carlas_dreams",
-                "label": "Carla's Dreams",
-                "solved": false
-              },
-              {
-                "id": "n_muz_delia",
-                "label": "Delia",
-                "solved": false
-              },
-              {
-                "id": "n_muz_nicolae_guta",
-                "label": "Nicolae Guță",
-                "solved": false
-              },
-              {
-                "id": "n_muz_holograf",
-                "label": "Holograf",
-                "solved": false
-              },
-              {
-                "id": "n_muz_iris",
-                "label": "Iris",
-                "solved": false
-              },
-              {
-                "id": "n_muz_vali_vijelie",
-                "label": "Vali Vijelie",
-                "solved": false
-              },
-              {
-                "id": "n_muz_andra",
-                "label": "Andra",
-                "solved": false
-              },
-              {
-                "id": "n_muz_sub_pielea_mea",
-                "label": "Sub pielea mea",
-                "solved": false
-              }
-            ],
-            "won": false
+            "detail": "Indiciul se deschide după două greșeli."
           },
           "ids": [],
-          "status": 200
+          "status": 400
         },
         {
           "action": "match",
           "body": {
             "actions": 1,
             "board_category": "muzica",
-            "clue": {
-              "label": "Legături cu Republica Moldova",
-              "message": "Legătura unei perechi: Legături cu Republica Moldova."
-            },
             "correct": false,
             "game_id": "<session>",
-            "hint_available": true,
-            "hint_level": 2,
-            "hints_left": 1,
-            "hints_used": 1,
+            "hint_available": false,
+            "hints_used": 0,
             "lost": false,
             "mistakes": 1,
             "ok": true,
-            "perfect": false,
             "remaining_mistakes": 5,
             "remaining_pairs": 4,
             "repeated": false,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 2,
             "tiles": [
               {
                 "id": "n_muz_carlas_dreams",
@@ -4098,26 +3486,18 @@
           "body": {
             "actions": 1,
             "board_category": "muzica",
-            "clue": {
-              "label": "Legături cu Republica Moldova",
-              "message": "Legătura unei perechi: Legături cu Republica Moldova."
-            },
             "correct": false,
             "game_id": "<session>",
-            "hint_available": true,
-            "hint_level": 2,
-            "hints_left": 1,
-            "hints_used": 1,
+            "hint_available": false,
+            "hints_used": 0,
             "lost": false,
             "mistakes": 1,
             "ok": true,
-            "perfect": false,
             "remaining_mistakes": 5,
             "remaining_pairs": 4,
             "repeated": true,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 2,
             "tiles": [
               {
                 "id": "n_muz_carlas_dreams",
@@ -4173,26 +3553,18 @@
           "body": {
             "actions": 2,
             "board_category": "muzica",
-            "clue": {
-              "label": "Legături cu Republica Moldova",
-              "message": "Legătura unei perechi: Legături cu Republica Moldova."
-            },
             "correct": false,
             "game_id": "<session>",
             "hint_available": true,
-            "hint_level": 2,
-            "hints_left": 1,
-            "hints_used": 1,
+            "hints_used": 0,
             "lost": false,
             "mistakes": 2,
             "ok": true,
-            "perfect": false,
             "remaining_mistakes": 4,
             "remaining_pairs": 4,
             "repeated": false,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 3,
             "tiles": [
               {
                 "id": "n_muz_carlas_dreams",
@@ -4263,18 +3635,14 @@
               ]
             },
             "hint_available": false,
-            "hint_level": 3,
-            "hints_left": 0,
-            "hints_used": 2,
+            "hints_used": 1,
             "lost": false,
             "mistakes": 2,
             "ok": true,
-            "perfect": false,
             "remaining_mistakes": 4,
             "remaining_pairs": 4,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 4,
             "tiles": [
               {
                 "id": "n_muz_carlas_dreams",
@@ -4325,7 +3693,7 @@
         {
           "action": "hint",
           "body": {
-            "detail": "Nu mai sunt indicii disponibile."
+            "detail": "Indiciul a fost deja folosit"
           },
           "ids": [],
           "status": 400
@@ -4351,9 +3719,7 @@
               ]
             },
             "hint_available": false,
-            "hint_level": 3,
-            "hints_left": 0,
-            "hints_used": 2,
+            "hints_used": 1,
             "lost": false,
             "mistakes": 2,
             "ok": true,
@@ -4370,7 +3736,6 @@
                 }
               ]
             },
-            "perfect": false,
             "remaining_mistakes": 4,
             "remaining_pairs": 3,
             "solved_count": 1,
@@ -4389,7 +3754,6 @@
                 ]
               }
             ],
-            "steps": 4,
             "tiles": [
               {
                 "id": "n_muz_carlas_dreams",
@@ -4461,9 +3825,7 @@
               ]
             },
             "hint_available": false,
-            "hint_level": 3,
-            "hints_left": 0,
-            "hints_used": 2,
+            "hints_used": 1,
             "lost": false,
             "mistakes": 2,
             "ok": true,
@@ -4480,7 +3842,6 @@
                 }
               ]
             },
-            "perfect": false,
             "remaining_mistakes": 4,
             "remaining_pairs": 2,
             "solved_count": 2,
@@ -4512,7 +3873,6 @@
                 ]
               }
             ],
-            "steps": 4,
             "tiles": [
               {
                 "id": "n_muz_carlas_dreams",
@@ -4584,9 +3944,7 @@
               ]
             },
             "hint_available": false,
-            "hint_level": 3,
-            "hints_left": 0,
-            "hints_used": 2,
+            "hints_used": 1,
             "lost": false,
             "mistakes": 2,
             "ok": true,
@@ -4603,7 +3961,6 @@
                 }
               ]
             },
-            "perfect": false,
             "remaining_mistakes": 4,
             "remaining_pairs": 1,
             "solved_count": 3,
@@ -4648,7 +4005,6 @@
                 ]
               }
             ],
-            "steps": 4,
             "tiles": [
               {
                 "id": "n_muz_carlas_dreams",
@@ -4720,9 +4076,7 @@
               ]
             },
             "hint_available": false,
-            "hint_level": 3,
-            "hints_left": 0,
-            "hints_used": 2,
+            "hints_used": 1,
             "lost": false,
             "mistakes": 2,
             "ok": true,
@@ -4739,10 +4093,9 @@
                 }
               ]
             },
-            "perfect": false,
             "remaining_mistakes": 4,
             "remaining_pairs": 0,
-            "score": 500,
+            "score": 650,
             "share": "cat_de_roman_esti · Perechi · 2 greșeli · indiciu\n🟩🟩🟩🟩",
             "solution": [
               {
@@ -4853,7 +4206,6 @@
                 ]
               }
             ],
-            "steps": 4,
             "tiles": [
               {
                 "id": "n_muz_carlas_dreams",
@@ -4924,15 +4276,12 @@
               ]
             },
             "hint_available": false,
-            "hint_level": 3,
-            "hints_left": 0,
-            "hints_used": 2,
+            "hints_used": 1,
             "lost": false,
             "mistakes": 2,
-            "perfect": false,
             "remaining_mistakes": 4,
             "remaining_pairs": 0,
-            "score": 500,
+            "score": 650,
             "share": "cat_de_roman_esti · Perechi · 2 greșeli · indiciu\n🟩🟩🟩🟩",
             "solution": [
               {
@@ -5043,7 +4392,6 @@
                 ]
               }
             ],
-            "steps": 4,
             "tiles": [
               {
                 "id": "n_muz_carlas_dreams",
@@ -5119,18 +4467,14 @@
           "actions": 0,
           "daily": "2026-10-03",
           "game_id": "<session>",
-          "hint_available": true,
-          "hint_level": 0,
-          "hints_left": 3,
+          "hint_available": false,
           "hints_used": 0,
           "lost": false,
           "mistakes": 0,
-          "perfect": false,
           "remaining_mistakes": 6,
           "remaining_pairs": 4,
           "solved_count": 0,
           "solved_pairs": [],
-          "steps": 0,
           "tiles": [
             {
               "id": "n_v32_workshop_hand_surubelnita",
@@ -5189,18 +4533,14 @@
             "actions": 0,
             "daily": "2026-10-03",
             "game_id": "<session>",
-            "hint_available": true,
-            "hint_level": 0,
-            "hints_left": 3,
+            "hint_available": false,
             "hints_used": 0,
             "lost": false,
             "mistakes": 0,
-            "perfect": false,
             "remaining_mistakes": 6,
             "remaining_pairs": 4,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 0,
             "tiles": [
               {
                 "id": "n_v32_workshop_hand_surubelnita",
@@ -5251,98 +4591,28 @@
         {
           "action": "hint",
           "body": {
-            "actions": 0,
-            "clue": {
-              "label": "Literatură",
-              "message": "Tema unei perechi: Literatură."
-            },
-            "daily": "2026-10-03",
-            "game_id": "<session>",
-            "hint_available": true,
-            "hint_level": 1,
-            "hints_left": 2,
-            "hints_used": 1,
-            "lost": false,
-            "mistakes": 0,
-            "ok": true,
-            "perfect": false,
-            "remaining_mistakes": 6,
-            "remaining_pairs": 4,
-            "solved_count": 0,
-            "solved_pairs": [],
-            "steps": 1,
-            "tiles": [
-              {
-                "id": "n_v32_workshop_hand_surubelnita",
-                "label": "Șurubelniță",
-                "solved": false
-              },
-              {
-                "id": "n_v30_kitchen_drink_cana",
-                "label": "Cană",
-                "solved": false
-              },
-              {
-                "id": "n_v84_food_cuptor",
-                "label": "Cuptor de bucătărie",
-                "solved": false
-              },
-              {
-                "id": "n_v24_food_snack_ceai",
-                "label": "Ceai",
-                "solved": false
-              },
-              {
-                "id": "n_v32_workshop_fastener_surub",
-                "label": "Șurub",
-                "solved": false
-              },
-              {
-                "id": "n_v84_food_tava_copt",
-                "label": "Tavă de copt",
-                "solved": false
-              },
-              {
-                "id": "n_v4lit_biblioteca",
-                "label": "Bibliotecă",
-                "solved": false
-              },
-              {
-                "id": "n_v3lit_carte",
-                "label": "Carte",
-                "solved": false
-              }
-            ],
-            "won": false
+            "detail": "Indiciul se deschide după două greșeli."
           },
           "ids": [],
-          "status": 200
+          "status": 400
         },
         {
           "action": "match",
           "body": {
             "actions": 1,
-            "clue": {
-              "label": "Literatură",
-              "message": "Tema unei perechi: Literatură."
-            },
             "correct": false,
             "daily": "2026-10-03",
             "game_id": "<session>",
-            "hint_available": true,
-            "hint_level": 1,
-            "hints_left": 2,
-            "hints_used": 1,
+            "hint_available": false,
+            "hints_used": 0,
             "lost": false,
             "mistakes": 1,
             "ok": true,
-            "perfect": false,
             "remaining_mistakes": 5,
             "remaining_pairs": 4,
             "repeated": false,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 2,
             "tiles": [
               {
                 "id": "n_v32_workshop_hand_surubelnita",
@@ -5397,27 +4667,19 @@
           "action": "match",
           "body": {
             "actions": 1,
-            "clue": {
-              "label": "Literatură",
-              "message": "Tema unei perechi: Literatură."
-            },
             "correct": false,
             "daily": "2026-10-03",
             "game_id": "<session>",
-            "hint_available": true,
-            "hint_level": 1,
-            "hints_left": 2,
-            "hints_used": 1,
+            "hint_available": false,
+            "hints_used": 0,
             "lost": false,
             "mistakes": 1,
             "ok": true,
-            "perfect": false,
             "remaining_mistakes": 5,
             "remaining_pairs": 4,
             "repeated": true,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 2,
             "tiles": [
               {
                 "id": "n_v32_workshop_hand_surubelnita",
@@ -5472,27 +4734,19 @@
           "action": "match",
           "body": {
             "actions": 2,
-            "clue": {
-              "label": "Literatură",
-              "message": "Tema unei perechi: Literatură."
-            },
             "correct": false,
             "daily": "2026-10-03",
             "game_id": "<session>",
             "hint_available": true,
-            "hint_level": 1,
-            "hints_left": 2,
-            "hints_used": 1,
+            "hints_used": 0,
             "lost": false,
             "mistakes": 2,
             "ok": true,
-            "perfect": false,
             "remaining_mistakes": 4,
             "remaining_pairs": 4,
             "repeated": false,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 3,
             "tiles": [
               {
                 "id": "n_v32_workshop_hand_surubelnita",
@@ -5547,25 +4801,30 @@
           "action": "hint",
           "body": {
             "actions": 2,
-            "clue": {
-              "label": "Locul de păstrare și împrumut al cărților",
-              "message": "Legătura unei perechi: Locul de păstrare și împrumut al cărților."
-            },
             "daily": "2026-10-03",
             "game_id": "<session>",
-            "hint_available": true,
-            "hint_level": 2,
-            "hints_left": 1,
-            "hints_used": 2,
+            "hint": {
+              "label": "Locul de păstrare și împrumut al cărților",
+              "tiles": [
+                {
+                  "id": "n_v4lit_biblioteca",
+                  "label": "Bibliotecă"
+                },
+                {
+                  "id": "n_v3lit_carte",
+                  "label": "Carte"
+                }
+              ]
+            },
+            "hint_available": false,
+            "hints_used": 1,
             "lost": false,
             "mistakes": 2,
             "ok": true,
-            "perfect": false,
             "remaining_mistakes": 4,
             "remaining_pairs": 4,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 4,
             "tiles": [
               {
                 "id": "n_v32_workshop_hand_surubelnita",
@@ -5616,81 +4875,10 @@
         {
           "action": "hint",
           "body": {
-            "actions": 2,
-            "daily": "2026-10-03",
-            "game_id": "<session>",
-            "hint": {
-              "label": "Locul de păstrare și împrumut al cărților",
-              "tiles": [
-                {
-                  "id": "n_v4lit_biblioteca",
-                  "label": "Bibliotecă"
-                },
-                {
-                  "id": "n_v3lit_carte",
-                  "label": "Carte"
-                }
-              ]
-            },
-            "hint_available": false,
-            "hint_level": 3,
-            "hints_left": 0,
-            "hints_used": 3,
-            "lost": false,
-            "mistakes": 2,
-            "ok": true,
-            "perfect": false,
-            "remaining_mistakes": 4,
-            "remaining_pairs": 4,
-            "solved_count": 0,
-            "solved_pairs": [],
-            "steps": 5,
-            "tiles": [
-              {
-                "id": "n_v32_workshop_hand_surubelnita",
-                "label": "Șurubelniță",
-                "solved": false
-              },
-              {
-                "id": "n_v30_kitchen_drink_cana",
-                "label": "Cană",
-                "solved": false
-              },
-              {
-                "id": "n_v84_food_cuptor",
-                "label": "Cuptor de bucătărie",
-                "solved": false
-              },
-              {
-                "id": "n_v24_food_snack_ceai",
-                "label": "Ceai",
-                "solved": false
-              },
-              {
-                "id": "n_v32_workshop_fastener_surub",
-                "label": "Șurub",
-                "solved": false
-              },
-              {
-                "id": "n_v84_food_tava_copt",
-                "label": "Tavă de copt",
-                "solved": false
-              },
-              {
-                "id": "n_v4lit_biblioteca",
-                "label": "Bibliotecă",
-                "solved": false
-              },
-              {
-                "id": "n_v3lit_carte",
-                "label": "Carte",
-                "solved": false
-              }
-            ],
-            "won": false
+            "detail": "Indiciul a fost deja folosit"
           },
           "ids": [],
-          "status": 200
+          "status": 400
         },
         {
           "action": "match",
@@ -5713,9 +4901,7 @@
               ]
             },
             "hint_available": false,
-            "hint_level": 3,
-            "hints_left": 0,
-            "hints_used": 3,
+            "hints_used": 1,
             "lost": false,
             "mistakes": 2,
             "ok": true,
@@ -5732,7 +4918,6 @@
                 }
               ]
             },
-            "perfect": false,
             "remaining_mistakes": 4,
             "remaining_pairs": 3,
             "solved_count": 1,
@@ -5751,7 +4936,6 @@
                 ]
               }
             ],
-            "steps": 5,
             "tiles": [
               {
                 "id": "n_v32_workshop_hand_surubelnita",
@@ -5823,9 +5007,7 @@
               ]
             },
             "hint_available": false,
-            "hint_level": 3,
-            "hints_left": 0,
-            "hints_used": 3,
+            "hints_used": 1,
             "lost": false,
             "mistakes": 2,
             "ok": true,
@@ -5842,7 +5024,6 @@
                 }
               ]
             },
-            "perfect": false,
             "remaining_mistakes": 4,
             "remaining_pairs": 2,
             "solved_count": 2,
@@ -5874,7 +5055,6 @@
                 ]
               }
             ],
-            "steps": 5,
             "tiles": [
               {
                 "id": "n_v32_workshop_hand_surubelnita",
@@ -5946,9 +5126,7 @@
               ]
             },
             "hint_available": false,
-            "hint_level": 3,
-            "hints_left": 0,
-            "hints_used": 3,
+            "hints_used": 1,
             "lost": false,
             "mistakes": 2,
             "ok": true,
@@ -5965,7 +5143,6 @@
                 }
               ]
             },
-            "perfect": false,
             "remaining_mistakes": 4,
             "remaining_pairs": 1,
             "solved_count": 3,
@@ -6010,7 +5187,6 @@
                 ]
               }
             ],
-            "steps": 5,
             "tiles": [
               {
                 "id": "n_v32_workshop_hand_surubelnita",
@@ -6082,9 +5258,7 @@
               ]
             },
             "hint_available": false,
-            "hint_level": 3,
-            "hints_left": 0,
-            "hints_used": 3,
+            "hints_used": 1,
             "lost": false,
             "mistakes": 2,
             "ok": true,
@@ -6101,10 +5275,9 @@
                 }
               ]
             },
-            "perfect": false,
             "remaining_mistakes": 4,
             "remaining_pairs": 0,
-            "score": 350,
+            "score": 650,
             "share": "cat_de_roman_esti · Perechi · 2 greșeli · indiciu · 2026-10-03\n🟩🟩🟩🟩",
             "solution": [
               {
@@ -6215,7 +5388,6 @@
                 ]
               }
             ],
-            "steps": 5,
             "tiles": [
               {
                 "id": "n_v32_workshop_hand_surubelnita",
@@ -6286,15 +5458,12 @@
               ]
             },
             "hint_available": false,
-            "hint_level": 3,
-            "hints_left": 0,
-            "hints_used": 3,
+            "hints_used": 1,
             "lost": false,
             "mistakes": 2,
-            "perfect": false,
             "remaining_mistakes": 4,
             "remaining_pairs": 0,
-            "score": 350,
+            "score": 650,
             "share": "cat_de_roman_esti · Perechi · 2 greșeli · indiciu · 2026-10-03\n🟩🟩🟩🟩",
             "solution": [
               {
@@ -6405,7 +5574,6 @@
                 ]
               }
             ],
-            "steps": 5,
             "tiles": [
               {
                 "id": "n_v32_workshop_hand_surubelnita",
@@ -6480,18 +5648,14 @@
         "body": {
           "actions": 0,
           "game_id": "<session>",
-          "hint_available": true,
-          "hint_level": 0,
-          "hints_left": 3,
+          "hint_available": false,
           "hints_used": 0,
           "lost": false,
           "mistakes": 0,
-          "perfect": false,
           "remaining_mistakes": 6,
           "remaining_pairs": 4,
           "solved_count": 0,
           "solved_pairs": [],
-          "steps": 0,
           "tiles": [
             {
               "id": "n_v32_garden_container_ghiveci_flori",
@@ -6549,18 +5713,14 @@
           "body": {
             "actions": 0,
             "game_id": "<session>",
-            "hint_available": true,
-            "hint_level": 0,
-            "hints_left": 3,
+            "hint_available": false,
             "hints_used": 0,
             "lost": false,
             "mistakes": 0,
-            "perfect": false,
             "remaining_mistakes": 6,
             "remaining_pairs": 4,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 0,
             "tiles": [
               {
                 "id": "n_v32_garden_container_ghiveci_flori",
@@ -6616,18 +5776,14 @@
         "body": {
           "actions": 0,
           "game_id": "<session>",
-          "hint_available": true,
-          "hint_level": 0,
-          "hints_left": 3,
+          "hint_available": false,
           "hints_used": 0,
           "lost": false,
           "mistakes": 0,
-          "perfect": false,
           "remaining_mistakes": 6,
           "remaining_pairs": 4,
           "solved_count": 0,
           "solved_pairs": [],
-          "steps": 0,
           "tiles": [
             {
               "id": "n_v24_transport_rail_tren",
@@ -6685,18 +5841,14 @@
           "body": {
             "actions": 0,
             "game_id": "<session>",
-            "hint_available": true,
-            "hint_level": 0,
-            "hints_left": 3,
+            "hint_available": false,
             "hints_used": 0,
             "lost": false,
             "mistakes": 0,
-            "perfect": false,
             "remaining_mistakes": 6,
             "remaining_pairs": 4,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 0,
             "tiles": [
               {
                 "id": "n_v24_transport_rail_tren",
@@ -6752,18 +5904,14 @@
         "body": {
           "actions": 0,
           "game_id": "<session>",
-          "hint_available": true,
-          "hint_level": 0,
-          "hints_left": 3,
+          "hint_available": false,
           "hints_used": 0,
           "lost": false,
           "mistakes": 0,
-          "perfect": false,
           "remaining_mistakes": 6,
           "remaining_pairs": 4,
           "solved_count": 0,
           "solved_pairs": [],
-          "steps": 0,
           "tiles": [
             {
               "id": "n_v30_kitchen_utensil_furculita",
@@ -6821,18 +5969,14 @@
           "body": {
             "actions": 0,
             "game_id": "<session>",
-            "hint_available": true,
-            "hint_level": 0,
-            "hints_left": 3,
+            "hint_available": false,
             "hints_used": 0,
             "lost": false,
             "mistakes": 0,
-            "perfect": false,
             "remaining_mistakes": 6,
             "remaining_pairs": 4,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 0,
             "tiles": [
               {
                 "id": "n_v30_kitchen_utensil_furculita",
@@ -6888,18 +6032,14 @@
         "body": {
           "actions": 0,
           "game_id": "<session>",
-          "hint_available": true,
-          "hint_level": 0,
-          "hints_left": 3,
+          "hint_available": false,
           "hints_used": 0,
           "lost": false,
           "mistakes": 0,
-          "perfect": false,
           "remaining_mistakes": 6,
           "remaining_pairs": 4,
           "solved_count": 0,
           "solved_pairs": [],
-          "steps": 0,
           "tiles": [
             {
               "id": "n_v32_body_face_pleoapa",
@@ -6957,18 +6097,14 @@
           "body": {
             "actions": 0,
             "game_id": "<session>",
-            "hint_available": true,
-            "hint_level": 0,
-            "hints_left": 3,
+            "hint_available": false,
             "hints_used": 0,
             "lost": false,
             "mistakes": 0,
-            "perfect": false,
             "remaining_mistakes": 6,
             "remaining_pairs": 4,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 0,
             "tiles": [
               {
                 "id": "n_v32_body_face_pleoapa",
@@ -7024,18 +6160,14 @@
         "body": {
           "actions": 0,
           "game_id": "<session>",
-          "hint_available": true,
-          "hint_level": 0,
-          "hints_left": 3,
+          "hint_available": false,
           "hints_used": 0,
           "lost": false,
           "mistakes": 0,
-          "perfect": false,
           "remaining_mistakes": 6,
           "remaining_pairs": 4,
           "solved_count": 0,
           "solved_pairs": [],
-          "steps": 0,
           "tiles": [
             {
               "id": "n_v32_workshop_hand_ciocan",
@@ -7093,18 +6225,14 @@
           "body": {
             "actions": 0,
             "game_id": "<session>",
-            "hint_available": true,
-            "hint_level": 0,
-            "hints_left": 3,
+            "hint_available": false,
             "hints_used": 0,
             "lost": false,
             "mistakes": 0,
-            "perfect": false,
             "remaining_mistakes": 6,
             "remaining_pairs": 4,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 0,
             "tiles": [
               {
                 "id": "n_v32_workshop_hand_ciocan",
@@ -7160,18 +6288,14 @@
         "body": {
           "actions": 0,
           "game_id": "<session>",
-          "hint_available": true,
-          "hint_level": 0,
-          "hints_left": 3,
+          "hint_available": false,
           "hints_used": 0,
           "lost": false,
           "mistakes": 0,
-          "perfect": false,
           "remaining_mistakes": 6,
           "remaining_pairs": 4,
           "solved_count": 0,
           "solved_pairs": [],
-          "steps": 0,
           "tiles": [
             {
               "id": "n_v32_garden_container_ghiveci_flori",
@@ -7229,18 +6353,14 @@
           "body": {
             "actions": 0,
             "game_id": "<session>",
-            "hint_available": true,
-            "hint_level": 0,
-            "hints_left": 3,
+            "hint_available": false,
             "hints_used": 0,
             "lost": false,
             "mistakes": 0,
-            "perfect": false,
             "remaining_mistakes": 6,
             "remaining_pairs": 4,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 0,
             "tiles": [
               {
                 "id": "n_v32_garden_container_ghiveci_flori",
@@ -7296,18 +6416,14 @@
         "body": {
           "actions": 0,
           "game_id": "<session>",
-          "hint_available": true,
-          "hint_level": 0,
-          "hints_left": 3,
+          "hint_available": false,
           "hints_used": 0,
           "lost": false,
           "mistakes": 0,
-          "perfect": false,
           "remaining_mistakes": 6,
           "remaining_pairs": 4,
           "solved_count": 0,
           "solved_pairs": [],
-          "steps": 0,
           "tiles": [
             {
               "id": "n_v24_transport_rail_tren",
@@ -7365,18 +6481,14 @@
           "body": {
             "actions": 0,
             "game_id": "<session>",
-            "hint_available": true,
-            "hint_level": 0,
-            "hints_left": 3,
+            "hint_available": false,
             "hints_used": 0,
             "lost": false,
             "mistakes": 0,
-            "perfect": false,
             "remaining_mistakes": 6,
             "remaining_pairs": 4,
             "solved_count": 0,
             "solved_pairs": [],
-            "steps": 0,
             "tiles": [
               {
                 "id": "n_v24_transport_rail_tren",

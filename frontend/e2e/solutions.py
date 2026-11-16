@@ -96,8 +96,8 @@ def solution(game: str, pack_id: str | None = None, daily: str | None = None) ->
             for a, b in combinations(sorted(session.owned), 2)
             if not session.recipes.get(module._pair_key(a, b))
         ]
-        if len(hint_setup) < 2 * module.NUDGE_AFTER_FRUITLESS:
-            raise ValueError("browser fixture needs enough barren pairs for both hint stages")
+        if len(hint_setup) < 6:
+            raise ValueError("browser fixture needs six owned pairs that produce no result")
     elif game == "contexto":
         steps.append({"action": "guess", "payload": {"text": svc.label(session.target)}})
     elif game == "lant":
@@ -139,7 +139,7 @@ if __name__ == "__main__":
     if sys.argv[1] == "--write-starts":
         games = ("alchimie", "intrusul", "perechi", "conexiuni", "contexto", "lant")
         starts = {game: solution(game)["initial"] for game in games}
-        Path(__file__).with_name("seeded-starts.json").write_text(
+        Path(__file__).with_name("seeded-starts-rules-v2.json").write_text(
             json.dumps(starts, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n"
         )
     else:

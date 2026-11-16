@@ -159,7 +159,7 @@ def generate(game):
 
 if __name__ == "__main__":
     for game in ["contexto", "lant"]:
-        out = Path("go-backend/internal") / game / "testdata" / "python_games.json"
+        out = Path("go-backend/internal") / game / "testdata" / "python_games_rules_v2.json"
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(
             json.dumps(generate(game), ensure_ascii=False, separators=(",", ":")) + "\n",
