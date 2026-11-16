@@ -21,8 +21,8 @@ export function ResultCard({ title, children, steps, perfect, podium, onCopy, on
       <h2 id={titleId} ref={heading} tabIndex={-1}>{title}</h2>
       {children}
       {perfect && <strong className="game-result-perfect">Perfect</strong>}
-      {steps !== undefined && <p>Pașii tăi: <strong>{steps} {roNoun(steps, "pas", "pași")}</strong></p>}
       {podium}
+      {steps !== undefined && <p>Pașii tăi: <strong>{steps} {roNoun(steps, "pas", "pași")}</strong></p>}
       <div className="game-result-actions">
         <button type="button" className="btn" onClick={onReplay} disabled={actionsBusy}>Încă o rundă</button>
         <button type="button" className="btn game-result-secondary" onClick={onExit}>Înapoi la jocuri</button>

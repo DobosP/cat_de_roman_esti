@@ -30,6 +30,7 @@ import { FreeRoundOptions } from "../components/FreeRoundOptions";
 import { HintBar } from "../components/HintBar";
 import { useEventValue } from "../hooks/useEventValue";
 import { useGameEntry, useRoundStart } from "../hooks/useGameEntry";
+import { BoardPlacePodium } from "../components/BoardPlacePodium";
 import { ResultCard } from "../components/ResultCard";
 import { useActiveGame } from "../hooks/useActiveGame";
 import { useRecordScore } from "../hooks/useRecordScore";
@@ -596,6 +597,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
 
         {finished && (
           <ResultCard title={state.won ? "Ai găsit toate grupurile!" : "Nu a ieșit de data asta"}
+            podium={<BoardPlacePodium round={state} gameTitle={DEF.title} replay={mode === "Reluare"} />}
             steps={state.steps} perfect={state.perfect && mode !== "Reluare"} actionsBusy={loading}
             onCopy={sharePayload ? copyShare : undefined} onReplay={() => startEntry(state.game_id)} onExit={handleExit} />
         )}

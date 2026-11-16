@@ -22,6 +22,7 @@ import { FreeRoundOptions } from "../components/FreeRoundOptions";
 import { HintBar } from "../components/HintBar";
 import { useEventValue } from "../hooks/useEventValue";
 import { useGameEntry, useRoundStart } from "../hooks/useGameEntry";
+import { BoardPlacePodium } from "../components/BoardPlacePodium";
 import { ResultCard } from "../components/ResultCard";
 import { nextActiveTileId } from "../perechiFocus.mjs";
 import { gameByKey } from "../games";
@@ -607,6 +608,7 @@ export default function Perechi({ onExit, onToast }: Props) {
 
         {finished && state.solution && (
           <ResultCard title={state.won ? "Toate se potrivesc!" : "Acestea erau perechile"}
+            podium={<BoardPlacePodium round={state} gameTitle={DEF.title} replay={mode === "Reluare"} />}
             steps={state.steps} perfect={state.perfect && mode !== "Reluare"}
             actionsBusy={loading} onCopy={sharePayload ? copyShare : undefined}
             onReplay={() => startEntry(state.game_id)} onExit={exitSafely}>

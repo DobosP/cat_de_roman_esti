@@ -12,6 +12,7 @@ import {
   type PathStep,
   createLant,
   getLant,
+  giveUpLant,
   hintLant,
   moveLant,
   undoLant,
@@ -23,6 +24,7 @@ import { GameFrame, CoachLine } from "../components/GameFrame";
 import { FreeRoundOptions } from "../components/FreeRoundOptions";
 import { HintBar } from "../components/HintBar";
 import { useGameEntry, useRoundStart } from "../hooks/useGameEntry";
+import { BoardPlacePodium } from "../components/BoardPlacePodium";
 import { ResultCard } from "../components/ResultCard";
 import { useActiveGame } from "../hooks/useActiveGame";
 import { useRecordScore } from "../hooks/useRecordScore";
@@ -34,7 +36,7 @@ import { buildSharePayload, copyResult, roNoun, stableKey } from "../share";
 const GAME_KEY = "lant";
 const DEF = gameByKey("lant");
 
-const isTerminalResume = (state: LantState) => state.won;
+const isTerminalResume = (state: LantState) => state.won || state.gave_up === true;
 
 // Lanțul Cuvintelor — choose a direct link from CURRENT toward TARGET.
 // Free typing remains available for concepts outside the server's local choices.
@@ -138,7 +140,8 @@ export default function Lant({
   const [hint, setHint] = useState<HintResult | null>(null);
   const [progress, setProgress] = useState<LantProgress | null>(null);
   const [recovery, setRecovery] = useState<RecoveryFeedback | null>(null);
-  const [gaveUp, setGaveUp] = useState(false);
+  const [locallyGaveUp, setLocallyGaveUp] = useState(false);
+  const gaveUp = locallyGaveUp || state?.gave_up === true;
   const [feedbackRevision, repeatFeedback] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const choicesRef = useRef<HTMLElement>(null);
@@ -186,7 +189,7 @@ export default function Lant({
       setStartFailed(false);
       setState(fresh);
       setText("");
-      setGaveUp(false);
+      setLocallyGaveUp(false);
       if (!terminal) onToast("Joc reluat.", "info");
     },
     [actionOwner, admit, onToast],
@@ -202,7 +205,7 @@ export default function Lant({
       startInFlightRef.current = false;
       setBusy(false); setCreating(false); setStartFailed(false);
       if (!active.peek() && state) {
-        if (!state.won) setActionSync({ gameId: state.game_id, kind: "failed" });
+        if (!isTerminalResume(state)) setActionSync({ gameId: state.game_id, kind: "failed" });
       } else { setState(null); setActionSync(null); setRecovery(null); }
     },
   });
@@ -211,17 +214,14 @@ export default function Lant({
     if (!startInFlightRef.current) { liveRef.current = false; actionOwner.invalidate(); cancelResume(); onExit(); }
   }, [actionOwner, cancelResume, onExit]);
 
-  const abandonChain = () => {
-    if (!state || !liveRef.current || startInFlightRef.current || actionOwner.hasPending() || actionSync) return;
-    actionOwner.invalidate();
-    pendingActionFocusRef.current = null;
-    complete(state);
-    active.forgetIfCurrent(state.game_id);
-    setGaveUp(true);
+  function finishLocalGiveUp(round: LantState) {
+    complete(round);
+    active.forgetIfCurrent(round.game_id);
+    setLocallyGaveUp(true);
     setHint(null);
     setProgress(null);
     setRecovery(null);
-  };
+  }
 
   const start = useCallback(
     async (daily?: string) => {
@@ -245,7 +245,7 @@ export default function Lant({
           retryResume();
           return;
         }
-        setGaveUp(false);
+        setLocallyGaveUp(false);
         dismissRecovery();
         setActionSync(null);
         setBusy(false);
@@ -283,7 +283,7 @@ export default function Lant({
   }, [state, finished, gaveUp, puzzleKey, recordOnce, settleCompletion]);
 
   useLayoutEffect(() => {
-    if (!liveRef.current || !currentGameId || won || busy || loading || creating || actionSync || inputRef.current?.disabled) return;
+    if (!liveRef.current || !currentGameId || finished || busy || loading || creating || actionSync || inputRef.current?.disabled) return;
     if (initiallyFocusedGameRef.current === currentGameId) return;
     initiallyFocusedGameRef.current = currentGameId;
     // Focus only a newly opened round, without stealing navigation during loading
@@ -292,13 +292,13 @@ export default function Lant({
         (document.activeElement === document.body || document.activeElement === inputRef.current)) {
       focusInputForFinePointer();
     }
-  }, [currentGameId, won, busy, loading, creating, actionSync, active, focusInputForFinePointer]);
+  }, [currentGameId, finished, busy, loading, creating, actionSync, active, focusInputForFinePointer]);
 
   useLayoutEffect(() => {
     const pending = pendingActionFocusRef.current;
     if (!liveRef.current || busy || loading || creating || !pending?.ready) return;
     pendingActionFocusRef.current = null;
-    if (won || actionSync || currentGameId !== pending.ticket.gameId ||
+    if (finished || actionSync || currentGameId !== pending.ticket.gameId ||
         active.peek() !== pending.ticket.gameId) return;
     const focused = document.activeElement;
     if (focused !== document.body && focused !== pending.origin) return;
@@ -317,7 +317,7 @@ export default function Lant({
     const nextChoice = choicesRef.current?.querySelector<HTMLButtonElement>("button:not(:disabled)");
     if (nextChoice) nextChoice.focus({ preventScroll: true });
     else if (input && !input.disabled) input.focus({ preventScroll: true });
-  }, [busy, loading, creating, currentGameId, won, actionSync, active]);
+  }, [busy, loading, creating, currentGameId, finished, actionSync, active]);
 
   const actionsLocked = !isPresent || busy || loading || creating || gaveUp || actionSync !== null;
 
@@ -356,7 +356,7 @@ export default function Lant({
     return true;
   }
 
-  async function reconcileAction(ticket: GameActionTicket, previous: LantState) {
+  async function reconcileAction(ticket: GameActionTicket, previous: LantState, allowLocalGiveUp = false) {
     const outcome = await recoverOwnedGameAction(
       actionOwner, ticket, getLant,
       (error) => error instanceof ApiError && error.status === 404,
@@ -378,13 +378,18 @@ export default function Lant({
       return;
     }
     const fresh = outcome.state;
+    const terminal = isTerminalResume(fresh);
     setActionSync(null);
     setState(fresh);
+    if (allowLocalGiveUp && !terminal && fresh.can_report_give_up !== true) {
+      finishLocalGiveUp(fresh);
+      return;
+    }
     setHint(fresh.earned_hint ?? null);
     // GET carries authoritative position and earned help, not a reconstructed move verdict.
     setProgress(null);
-    if (fresh.current.id !== previous.current.id || fresh.won) setText("");
-    setRecovery(fresh.won ? null : {
+    if (fresh.current.id !== previous.current.id || terminal) setText("");
+    setRecovery(terminal ? null : {
       message: "Joc sincronizat. Poți continua.", choices: [], tone: "info",
     });
     if (fresh.won && !previous.won) sound.playWin();
@@ -406,6 +411,39 @@ export default function Lant({
     setBusy(true);
     try {
       await reconcileAction(ticket, state);
+    } finally {
+      finishAction(ticket);
+    }
+  }
+
+  async function handleGiveUp() {
+    if (!state || finished || actionsLocked || !liveRef.current || startInFlightRef.current || actionOwner.hasPending()) return;
+    if (!state.daily || state.can_report_give_up !== true) {
+      actionOwner.invalidate();
+      pendingActionFocusRef.current = null;
+      finishLocalGiveUp(state);
+      return;
+    }
+
+    const ticket = beginAction(state);
+    if (!ticket) return;
+    setBusy(true);
+    setHint(null);
+    setProgress(null);
+    setRecovery(null);
+    try {
+      const fresh = await giveUpLant(state.game_id);
+      if (!mayAdoptAction(ticket)) return;
+      if (fresh.game_id !== ticket.gameId || fresh.gave_up !== true || fresh.won !== false || fresh.perfect !== false) {
+        await reconcileAction(ticket, state);
+        return;
+      }
+      setState(fresh);
+      setText("");
+    } catch (error) {
+      // A stale capability can lose its route. Only an owned live GET without
+      // the capability can complete the player's explicit give-up locally.
+      await reconcileAction(ticket, state, error instanceof ApiError && error.status === 404);
     } finally {
       finishAction(ticket);
     }
@@ -451,6 +489,7 @@ export default function Lant({
               won: res.won ?? prev.won,
               score: res.score ?? prev.score,
               share: res.share ?? prev.share,
+              place: res.place,
               choices: res.choices ?? prev.choices,
               backtrack_recommended:
                 res.backtrack_recommended ?? prev.backtrack_recommended,
@@ -553,9 +592,9 @@ export default function Lant({
           startFailed={startFailed} unavailable={unavailable} onStart={() => startEntry(state?.game_id)} resumeRecovery={resumeRecovery} onResume={() => { entry.presentRecovery(); retryResume(); }}
           status={state && !entry.recoveredTerminal(state) && <span>{state.moves} {roNoun(state.moves, "salt", "salturi")}</span>}
           options={<FreeRoundOptions game={GAME_KEY} value={entry.options} onChange={entry.updateOptions} />}
-          onTool={abandonChain}
+          onTool={(tool) => { if (tool === "give-up") void handleGiveUp(); }}
           tools={state && !finished ? (
-            <Button type="submit" variant="secondary" disabled={busy || creating || actionSync !== null}
+            <Button type="submit" variant="secondary" disabled={actionsLocked}
               value="give-up">Renunț la rundă</Button>
           ) : undefined}>
         {state && !entry.recoveredTerminal(state) && <>
@@ -779,6 +818,7 @@ export default function Lant({
 
         {finished && (
           <ResultCard title={won ? "Ai reușit!" : "Ai renunțat la rundă"} steps={state.steps}
+            podium={<BoardPlacePodium round={state} gameTitle={DEF.title} replay={mode === "Reluare"} />}
             perfect={won && state.perfect && mode !== "Reluare"} actionsBusy={creating}
             onCopy={sharePayload ? () => void handleCopy() : undefined} onReplay={() => startEntry(state.game_id)} onExit={exitSafely}>
             <p>{won ? "Ai ajuns la" : "Ținta era"} <strong>{state.target.label}</strong>.

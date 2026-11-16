@@ -55,6 +55,10 @@ export interface LantState extends PerfectRoundCounters {
   moves: number;
   optimal: number;
   won: boolean;
+  /** Present when the server has recorded an explicit give-up. */
+  gave_up?: true;
+  /** Enabled, eligible daily rounds report an explicit give-up to the server. */
+  can_report_give_up?: true;
   /** Already requested help for this position; reading never escalates it. */
   earned_hint?: HintResult;
   difficulty: Difficulty;
@@ -144,6 +148,11 @@ export function undoLant(gameId: string): Promise<LantState> {
   return postJson<LantState>(
     `${PREFIX}/games/${encodeURIComponent(gameId)}/undo`,
   );
+}
+
+/** POST /games/{id}/giveup — report an explicit give-up for an eligible daily round. */
+export function giveUpLant(gameId: string): Promise<LantState> {
+  return postJson<LantState>(`${PREFIX}/games/${encodeURIComponent(gameId)}/giveup`);
 }
 
 /** POST /games/{id}/hint — progressively reveal direction, alternatives, then one hop. */

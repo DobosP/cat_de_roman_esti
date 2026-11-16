@@ -21,6 +21,7 @@ import { useCoachMessage } from "../hooks/useCoachMessage";
 import { FreeRoundOptions } from "../components/FreeRoundOptions";
 import { HintBar } from "../components/HintBar";
 import { useGameEntry, useRoundStart } from "../hooks/useGameEntry";
+import { BoardPlacePodium } from "../components/BoardPlacePodium";
 import { ResultCard } from "../components/ResultCard";
 import { ALCHIMIE_HELP } from "../gameHelp/alchimie.mjs";
 import { useActiveGame } from "../hooks/useActiveGame";
@@ -750,6 +751,7 @@ export default function AlchimieChallenge({
         {!won && <HintBar remaining={state.hints_left ?? 0} disabled={actionsLocked} onHint={() => void doHint()} />}
         {won && (
           <ResultCard title="Ai făurit ținta!" steps={state.steps} perfect={state.perfect && mode !== "Reluare"}
+            podium={<BoardPlacePodium round={state} gameTitle={DEF.title} replay={mode === "Reluare"} />}
             actionsBusy={creating} onCopy={sharePayload ? handleCopy : undefined} onReplay={() => startEntry(state.game_id)} onExit={exitSafely}>
             <strong>{state.target.label}</strong>
             {displayedRecipe && <p>{displayedRecipe.parents[0].label} + {displayedRecipe.parents[1].label}</p>}

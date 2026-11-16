@@ -15,6 +15,7 @@ import { GameFrame, Attempts, CoachLine } from "../components/GameFrame";
 import { FreeRoundOptions } from "../components/FreeRoundOptions";
 import { HintBar } from "../components/HintBar";
 import { useGameEntry, useRoundStart } from "../hooks/useGameEntry";
+import { BoardPlacePodium } from "../components/BoardPlacePodium";
 import { ResultCard } from "../components/ResultCard";
 import { sound } from "../sound";
 import {
@@ -444,6 +445,7 @@ export default function CaldRece({
                 target: res.target ?? prev.target,
                 score: res.score ?? prev.score,
                 share: res.share ?? prev.share,
+                place: res.place,
               }
             : prev,
         );
@@ -739,6 +741,7 @@ export default function CaldRece({
           onHint={() => void handleClue()} />}
         {finished && state.target && (
           <ResultCard title={won ? "Ai găsit cuvântul!" : "Conceptul secret era:"} steps={state.steps}
+            podium={<BoardPlacePodium round={state} gameTitle={DEF.title} replay={mode === "Reluare"} />}
             actionsBusy={busy} onCopy={sharePayload ? handleCopy : undefined} onReplay={() => startEntry(state.game_id)} onExit={handleExit}>
             <strong>{state.target.label}</strong>
             {state.target.description && <p>{state.target.description}</p>}

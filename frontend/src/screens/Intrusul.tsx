@@ -22,6 +22,7 @@ import { FreeRoundOptions } from "../components/FreeRoundOptions";
 import { HintBar } from "../components/HintBar";
 import { useEventValue } from "../hooks/useEventValue";
 import { useGameEntry, useRoundStart } from "../hooks/useGameEntry";
+import { BoardPlacePodium } from "../components/BoardPlacePodium";
 import { ResultCard } from "../components/ResultCard";
 import { gameByKey } from "../games";
 import { useActiveGame } from "../hooks/useActiveGame";
@@ -465,6 +466,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
 
         {finished && state.solution && (
           <ResultCard title={state.won ? "L-ai găsit!" : "Nu a ieșit de data asta"}
+            podium={<BoardPlacePodium round={state} gameTitle={DEF.title} replay={mode === "Reluare"} />}
             steps={state.steps} perfect={state.perfect && mode !== "Reluare"}
             actionsBusy={loading} onCopy={sharePayload ? copyShare : undefined}
             onReplay={() => startEntry(state.game_id)} onExit={exitSafely}>
