@@ -18,16 +18,16 @@
   min-height: 44px;
 }
 .rank-row--me {
-  border-color: var(--brand-gold, #ffd166);
-  box-shadow: 0 0 0 1px var(--brand-gold, #ffd166) inset;
+  border-color: var(--brand-gold);
+  box-shadow: 0 0 0 1px var(--brand-gold) inset;
 }
 .rank-num {
   min-width: 2rem; text-align: center; font-weight: 800;
-  font-variant-numeric: tabular-nums; color: var(--text-dim, #a99fd0);
+  font-variant-numeric: tabular-nums; color: var(--text-muted);
 }
-.rank-num--1 { color: #ffd166; }
-.rank-num--2 { color: #cfd8e3; }
-.rank-num--3 { color: #e0a06a; }
+.rank-num--1 { color: var(--brand-gold); }
+.rank-num--2 { color: var(--text); }
+.rank-num--3 { color: var(--brand-coral); }
 
 @media (max-width: 640px) {
   .ranking-game-tabs { display: none; }

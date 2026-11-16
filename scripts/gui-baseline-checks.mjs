@@ -40,7 +40,12 @@ const REDESIGN_SOURCES = [
   REDESIGN_FIXTURE_PATH, "scripts/gui-baseline-fixtures.py",
   "scripts/gui-baseline.mjs", "scripts/gui-baseline-checks.mjs",
   "frontend/src/games.ts", "frontend/src/screens/Home.tsx", "frontend/src/components/GameFrame.tsx",
-  "frontend/src/styles/theme.css", "frontend/src/styles/arcade.css",
+  "frontend/src/entry.ts", "frontend/src/hooks/useGameEntry.ts", "frontend/src/theme.ts",
+  "frontend/src/components/FreeRoundOptions.tsx", "frontend/src/components/HintBar.tsx",
+  "frontend/src/components/ResultCard.tsx", "frontend/src/components/ResultsHistory.tsx",
+  ...["AlchimieChallenge", "CaldRece", "Conexiuni", "Intrusul", "Lant", "Perechi"].map((name) => "frontend/src/screens/" + name + ".tsx"),
+  ...["theme", "arcade", "home", "game-frame", "alchimie", "contexto", "conexiuni", "intrusul", "lant", "perechi"]
+    .map((name) => "frontend/src/styles/" + name + ".css"),
   ...["intrusul", "perechi", "conexiuni", "lant", "cald-rece", "alchimie"].map((key) => "frontend/src/art/" + key + ".svg"),
 ];
 export function redesignSourceHashes(root, acquire = (name) => read(root, name)) {

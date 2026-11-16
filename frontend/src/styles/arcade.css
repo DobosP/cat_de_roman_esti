@@ -270,7 +270,9 @@ input:focus-visible {
 }
 
 .field:disabled {
-  opacity: 0.55;
+  opacity: 1;
+  background: var(--surface-strong);
+  color: var(--text-muted);
 }
 
 /* ------------------------------------------------------------------ segmented picker */

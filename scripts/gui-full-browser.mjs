@@ -303,7 +303,10 @@ try {
       const assetNonces = [...document.querySelectorAll('link[rel="stylesheet"],link[rel="modulepreload"]')].map((item) => item.nonce);
       const fontPreloads = [...document.querySelectorAll('link[rel~="preload"]')].map((item) => ({ href: item.href, rel: item.getAttribute("rel"), as: item.getAttribute("as"), type: item.getAttribute("type"), crossorigin: item.getAttribute("crossorigin"), nonce: item.nonce, attributes: [...item.attributes].map((attr) => attr.name) }));
       const fontFaces = [...document.fonts].map((item) => ({ family: item.family, status: item.status, style: item.style, weight: item.weight, unicodeRange: item.unicodeRange }));
-      return { fontPreloads, fontStatus: document.fonts.status, fontFaces, nonces: scripts.map((item) => item.nonce), meta: metas.map((item) => ({ content: item.content, nonce: item.nonce })), assetNonces,
+      const themeScript = document.getElementById("cat-theme-bootstrap");
+      const themeBeforeStyles = Boolean(themeScript && [...document.querySelectorAll('link[rel="stylesheet"]')]
+        .every((sheet) => themeScript.compareDocumentPosition(sheet) & Node.DOCUMENT_POSITION_FOLLOWING));
+      return { themeBeforeStyles, fontPreloads, fontStatus: document.fonts.status, fontFaces, nonces: scripts.map((item) => item.nonce), meta: metas.map((item) => ({ content: item.content, nonce: item.nonce })), assetNonces,
         module: module?.src, css, preloads, json: scripts.filter((item) => item.type === "application/json").length, violations: window.__cspViolations,
         ui: document.documentElement.getAttribute("data-ui") };
     });
@@ -337,6 +340,7 @@ try {
     violations.push(...observation.violations.map((item) => ({ route, ...item })));
     const frozenRoute = !PORTED_ROUTES.includes(new URL(route, process.env.GATE_APP_URL).pathname);
     assert.equal(observation.ui, frozenRoute ? "legacy" : "preact", `ADR-0197 delivery for ${route}`);
+    assert.equal(observation.themeBeforeStyles, !frozenRoute, "Current theme bootstrap must precede styles");
     if (frozenRoute) {
       const frozen = cspDescriptor.frozen;
       assert.ok(frozen, "Frozen page requires a verified frozen descriptor");

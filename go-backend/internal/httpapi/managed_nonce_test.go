@@ -104,6 +104,34 @@ func TestManagedNonceShellBytePreservationAndSDKContext(t *testing.T) {
 	if err != nil || bytes.Contains(body, []byte(`<script>alert(1)</script>`)) {
 		t.Fatal("nonce not escaped")
 	}
+	t.Run("fixed theme bootstrap precedes managed CSS", func(t *testing.T) {
+		index := strings.Replace(nonceFixtureIndex, `<html lang="ro">`, `<html lang="ro" data-ui="preact">`, 1)
+		const themeMarker = `<meta name="cat-theme-bootstrap" content="1" />`
+		index = strings.Replace(index, "</head>", themeMarker+"</head>", 1)
+		shell, err := newManagedNonceShell([]byte(index), nonceFixtureManifest(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		body, err := shell.render(csp.WithNonce(context.Background(), nonce))
+		if err != nil {
+			t.Fatal(err)
+		}
+		want := []byte(`<script id="cat-theme-bootstrap" nonce="` + nonce + `">` + managedThemeBootstrap + `</script>`)
+		at := bytes.Index(body, want)
+		cssAt := bytes.Index(body, []byte(`<link rel="stylesheet"`))
+		if at < 0 || cssAt <= at || bytes.Count(body, want) != 1 {
+			t.Fatal("only the server-owned fixed bootstrap may run before the styles")
+		}
+		for _, malformed := range []string{
+			strings.Replace(index, themeMarker, themeMarker+themeMarker, 1),
+			strings.Replace(index, themeMarker, `<meta name="cat-theme-bootstrap" content="other" />`, 1),
+			strings.Replace(index, `data-ui="preact"`, `data-ui="react"`, 1),
+		} {
+			if _, err := newManagedNonceShell([]byte(malformed), nonceFixtureManifest(t)); err == nil {
+				t.Fatal("invalid theme bootstrapping was admitted")
+			}
+		}
+	})
 }
 
 func TestManagedNonceShellRefusals(t *testing.T) {
