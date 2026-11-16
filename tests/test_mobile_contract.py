@@ -210,7 +210,7 @@ def test_alchimie_hides_target_id_until_win() -> None:
             assert {"recent", "useful", "ready", "depleted"} <= set(item)
 
     # Paid cues progressively name an output, one owned ingredient and a full pair.
-    for level, kind in enumerate(("output", "ingredient", "pair"), start=1):
+    for level, kind in enumerate(("output", "category", "pair"), start=1):
         state = c.post(f"/api/wordgames/alchimie/games/{gid}/hint").json()
         assert state["hint_level"] == level and state["hint_kind"] == kind
         assert secret not in _collect_ids(state)
@@ -219,7 +219,7 @@ def test_alchimie_hides_target_id_until_win() -> None:
         assert "attempted_pairs" not in _collect_keys(state)
         if kind == "output":
             assert set(state["hint_output"]) == {"label"} and state["hint"] is None
-        elif kind == "ingredient":
+        elif kind == "category":
             assert state["hint"] is None and state["hint_ingredient"]["id"] in session.owned
         else:
             assert len(state["hint"]) == 2 and all(item["id"] in session.owned for item in state["hint"])

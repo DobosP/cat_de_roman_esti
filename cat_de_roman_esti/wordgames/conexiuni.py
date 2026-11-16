@@ -441,7 +441,7 @@ def _clue_at(session: ConexiuniSession, level: int, group: str) -> dict[str, obj
             public.add(category_label(session.category).casefold())
         if label.casefold() not in public:
             return {"pattern": "", "label": label, "message": f"Numele grupului: {label}."}
-    elif level == 3 and session.groups[group]:
+    elif level == 3 and len(session.solved) < len(session.groups) - 1:
         node = session.groups[group][0]
         word = get_service().display_label(node)
         return {

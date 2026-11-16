@@ -759,7 +759,7 @@ def test_hints_progress_from_output_to_ingredient_to_useful_pair(client: Client)
     ingredient = client.post(root + "/hint").json()
     assert ingredient["steps"] == ingredient["hint_level"] == 2
     assert ingredient["hint"] is ingredient["hint_output"] is None
-    assert ingredient["hint_kind"] == "ingredient" and secret not in str(ingredient)
+    assert ingredient["hint_kind"] == "category" and secret not in str(ingredient)
 
     res = client.post(root + "/hint").json()
     assert res["steps"] == res["hint_level"] == 3

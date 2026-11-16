@@ -501,6 +501,22 @@ def main() -> int:
                 request("POST", path + "/" + action, json.dumps(sample_move(session)))
             request("GET", path)
             request("POST", path + "/" + hint)
+        # Once three sets are solved, the remaining membership is public.
+        for module, action, hint in ((perechi, "match", "hint"), (conexiuni, "guess", "clue")):
+            base = f"/api/wordgames/{module.GAME_KEY}/games"
+            initial = request("POST", base + "?seed=38")
+            path = f"{base}/{initial['game_id']}"
+            session = module.store.get(initial["game_id"])
+            assert session is not None
+            for _ in range(2):
+                request("POST", path + "/" + hint)
+            sets = [pair.members for pair in session.pairs] if module is perechi else list(session.groups.values())
+            for ids in sets[:3]:
+                request("POST", path + "/" + action, json.dumps({"ids": list(ids)}))
+            before = request("GET", path)
+            assert before["hints_left"] == 0
+            request("POST", path + "/" + hint)
+            assert request("GET", path) == before
         if args.benchmark:
             for seed in range(1000):
                 game = request("POST", f"{BASE}?seed={seed}")

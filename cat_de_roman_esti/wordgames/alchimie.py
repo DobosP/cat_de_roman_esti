@@ -875,11 +875,11 @@ def _share_line(session: AlchimieSession) -> str:
     return "\n".join(lines)
 
 
-_HINT_STAGES = ("output", "ingredient", "pair")
+_HINT_KINDS = ("output", "category", "pair")
 
 
 def _hint_options(session: AlchimieSession) -> tuple[list[int], RecipePair | None, str | None]:
-    if session.hint_level >= len(_HINT_STAGES):
+    if session.hint_level >= len(_HINT_KINDS):
         return [], None, None
     pair = _useful_pair(session)
     if pair is None:
@@ -889,7 +889,7 @@ def _hint_options(session: AlchimieSession) -> tuple[list[int], RecipePair | Non
         None,
     )
     first_level = max(1 if output else 2, session.hint_level + 1)
-    return list(range(first_level, len(_HINT_STAGES) + 1)), pair, output
+    return list(range(first_level, len(_HINT_KINDS) + 1)), pair, output
 
 
 def _state_payload(game_id: str, session: AlchimieSession) -> dict[str, object]:
@@ -917,7 +917,7 @@ def _state_payload(game_id: str, session: AlchimieSession) -> dict[str, object]:
         "perfect": session.won and session.steps == 0,
         "hint_level": session.hint_level,
         "hints_left": len(hint_levels),
-        "hint_stage": _HINT_STAGES[hint_levels[0] - 1] if hint_levels else "pair",
+        "hint_stage": "output" if hint_levels and hint_levels[0] == 1 else "pair",
         "hint_available": bool(hint_levels),
         # Counts describe the bounded shape, never the private recipe ids/routes.
         "recipe_summary": {
@@ -1133,7 +1133,7 @@ class HintGameView(ContractAPIView):
         svc = get_service()
         hint = {
             "hint": None,
-            "hint_kind": _HINT_STAGES[level - 1],
+            "hint_kind": _HINT_KINDS[level - 1],
             "hint_output": None,
         }
         if level == 1:

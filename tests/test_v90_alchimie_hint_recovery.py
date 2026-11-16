@@ -49,7 +49,7 @@ def _earn(game):
     response = _post(game, "hint")
     assert response.status_code == 200
     body = response.json()
-    keys = PUBLIC_HINT_KEYS | ({"hint_ingredient"} if body["hint_kind"] == "ingredient" else set())
+    keys = PUBLIC_HINT_KEYS | ({"hint_ingredient"} if body["hint_kind"] == "category" else set())
     assert body["earned_hint"] == {key: body[key] for key in keys}
     return body
 
@@ -129,7 +129,7 @@ def test_free_repeated_pair_and_rejected_pair_preserve_earned_cue(game):
 def test_public_target_label_skips_output_rung_then_win_clears_ingredient(game):
     assert _post(game, "combine", {"a": "a", "b": "b"}).status_code == 200
     paid = _earn(game)
-    assert paid["hint_kind"] == "ingredient"
+    assert paid["hint_kind"] == "category"
     assert paid["hint_level"] == 2 and paid["steps"] == 1
     assert paid["hint_output"] is None and paid["hint"] is None
     assert "secret_target" not in json.dumps(paid)

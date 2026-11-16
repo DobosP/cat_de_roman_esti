@@ -237,6 +237,10 @@ func (s *Service) clue(g *gameSession, index, level int) map[string]string {
 	}
 	return nil
 }
+func canMarkPair(g *gameSession) bool {
+	return len(g.solved) < len(g.pairs)-1
+}
+
 func (s *Service) state(id string, g *gameSession) map[string]any {
 	tiles := make([]map[string]any, len(g.order))
 	for i, node := range g.order {
@@ -258,7 +262,7 @@ func (s *Service) state(id string, g *gameSession) map[string]any {
 	index := hintPair(g)
 	if !g.won && !g.lost && index >= 0 {
 		for level := g.hintLevel + 1; level <= 3; level++ {
-			if level == 3 || s.clue(g, index, level) != nil {
+			if (level == 3 && canMarkPair(g)) || s.clue(g, index, level) != nil {
 				hintsLeft++
 			}
 		}
@@ -368,7 +372,7 @@ func (s *Service) Hint(id string) (map[string]any, *Error) {
 		index := hintPair(g)
 		for level := g.hintLevel + 1; level <= 3 && index >= 0; level++ {
 			clue := s.clue(g, index, level)
-			if level < 3 && clue == nil {
+			if (level < 3 && clue == nil) || (level == 3 && !canMarkPair(g)) {
 				continue
 			}
 			if level < 3 || g.hinted != index {
@@ -378,6 +382,9 @@ func (s *Service) Hint(id string) (map[string]any, *Error) {
 			g.hintsUsed++
 			body := s.state(id, g)
 			body["ok"] = true
+			if level < 3 {
+				body["hint"] = map[string]any{"tiles": []map[string]string{}, "label": clue["label"]}
+			}
 			return body, nil
 		}
 		return nil, fail(400, "Nu mai sunt indicii disponibile.")

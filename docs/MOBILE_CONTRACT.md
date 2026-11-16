@@ -118,7 +118,7 @@ its private id hidden.
 
 The optional `earned_hint` carries the cue paid for at the current inventory state.
 GET and resume return this cue without another charge. A new distinct combination or a
-reset clears that display cue. Steps and hint usage stay cumulative across reset.
+reset clears that display cue. Steps and the hint rung stay cumulative across reset. The legacy score view retains its reset behavior.
 See [ADR-0136](adr/0136-reconcile-uncertain-alchimie-actions.md) for action recovery.
 
 ### Alchimie exploration (V92, separate from scored challenges)

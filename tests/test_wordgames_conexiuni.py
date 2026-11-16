@@ -430,6 +430,26 @@ def test_ladder_continues_with_an_unsolved_group_if_first_target_is_solved() -> 
     assert third["clue"]["tile"]["id"] in groups[second_group]
 
 
+def test_public_last_group_skips_the_membership_hint_without_charge() -> None:
+    client, created, groups = _groups_for()
+    root = f"{BASE}/games/{created['game_id']}"
+    for level in (1, 2):
+        earned = client.post(root + "/clue").json()
+        assert earned["hint_level"] == earned["steps"] == level
+
+    # The remaining words are already known to share one group. Retain the
+    # paid name and pattern, and leave the public membership cue unavailable.
+    for key in sorted(groups)[1:]:
+        matched = _post_json(client, root + "/guess", {"ids": groups[key]}).json()
+        assert matched["correct"] and matched["steps"] == 2
+    assert matched["remaining_groups"] == 1 and matched["hints_left"] == 0
+    assert matched["clue_available"] is False and matched["hint_level"] == 2
+    assert all("tile" not in clue for clue in matched["clues"])
+    before = client.get(root).json()
+    assert client.post(root + "/clue").status_code == 400
+    assert client.get(root).json() == before
+
+
 def test_score_and_share_reflect_two_clue_penalties() -> None:
     c, b, groups = _groups_for()
     gid = b["game_id"]

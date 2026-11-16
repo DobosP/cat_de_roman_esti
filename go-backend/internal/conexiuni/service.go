@@ -464,7 +464,7 @@ func (s *Service) clueFor(g *gameSession, cat string, level int) clue {
 			return clue{label: label, message: "Numele grupului: " + label + "."}
 		}
 	case 3:
-		if len(g.groups[cat]) > 0 {
+		if len(g.solved) < len(g.groups)-1 && len(g.groups[cat]) > 0 {
 			member := g.groups[cat][0]
 			return clue{member: member, message: "Un cuvânt din grup: " + s.concept(member)["label"] + "."}
 		}

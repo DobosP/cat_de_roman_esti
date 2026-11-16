@@ -145,7 +145,7 @@ def _hint_levels(session: PerechiSession) -> list[int]:
     available = (
         bool(theme) and theme != link and theme not in known,
         bool(link) and link not in known,
-        True,
+        len(session.solved) < PAIR_COUNT - 1,
     )
     return [
         level for level in range(session.hint_level + 1, MAX_HINTS + 1)
@@ -458,7 +458,10 @@ class HintView(ContractAPIView):
             session.clue = {"label": label, "message": f"Legătura unei perechi: {label}."}
         else:
             session.clue = None
-        return Response({"ok": True, **_state(game_id, session)})
+        result = {"ok": True, **_state(game_id, session)}
+        if session.clue is not None and session.hint_level < 3:
+            result["hint"] = {"tiles": [], "label": session.clue["label"]}
+        return Response(result)
 
 
 _BASE = "api/wordgames/perechi"

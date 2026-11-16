@@ -177,7 +177,10 @@ Default race runs skip database contracts and cannot substitute for these gates.
 
 ## Retained independent reference commands
 
-The manual Rust reference preserves its complete build/test comparison:
+Rust uses the historical rules-1 mechanics and their retained fixtures. The
+rules-2 HTTP corpus covers the redesigned Go and Python games ([ADR-0232](adr/0232-steps-and-hint-ladder.md)).
+
+Build and test the Rust reference manually.
 
 ```bash
 CARGO_TARGET_DIR="$native_build_dir/rust-target" \
@@ -185,7 +188,15 @@ CARGO_TARGET_DIR="$native_build_dir/rust-target" \
 (cd rust-backend && cargo +1.98.1 fmt --all -- --check \
   && cargo +1.98.1 clippy --locked --all-targets -- -D warnings \
   && cargo +1.98.1 test --locked)
-PYTHONPATH=. python scripts/check_go_parity.py --runtime rust \
+```
+
+For the historical HTTP comparison, use a rules-1 checkout such as
+`8186210aa4dcfcd66660a81c28fcf9e3f908b475` with the Rust binary built from that
+checkout. Run these commands from its repository root.
+
+```bash
+go -C go-backend run ./cmd/cat-qualify replay \
+  --input "$PWD/go-backend/internal/httpgolden/testdata/python-http-parity-v5-p2-forms-1-source31.json.gz" \
   --binary "$native_build_dir/rust-target/release/cat-rust-server"
 ```
 

@@ -194,8 +194,8 @@ func (s *Service) state(id string, g *gameSession) map[string]any {
 	}
 	hints := s.hintLevels(g)
 	hintStage := "pair"
-	if len(hints) > 0 {
-		hintStage = [...]string{"", "output", "ingredient", "pair"}[hints[0]]
+	if len(hints) > 0 && hints[0] == 1 {
+		hintStage = "output"
 	}
 	p := map[string]any{"game_id": id, "target": map[string]any{"id": targetID, "label": s.graph.Label(g.target), "description": s.graph.Description(g.target), "revealed": g.won()}, "inventory": inv, "inventory_summary": map[string]any{"active": active, "depleted": len(inv) - active, "total": len(inv)}, "discovered_count": max(0, len(g.order)-len(g.seeds)), "seed_count": len(g.seeds), "moves": g.moves, "attempted_count": len(g.attempted), "difficulty": g.difficulty, "target_depth": g.projection.Par, "won": g.won(), "hints_used": g.hintsUsed, "hint_stage": hintStage, "hint_available": len(hints) > 0, "steps": g.steps(), "perfect": g.won() && g.steps() == 0, "hints_left": len(hints), "hint_level": g.hintLevel, "recipe_summary": map[string]any{"pairs": len(g.projection.Recipes), "routes": len(g.projection.Routes), "max_results": maxResults}}
 	if g.earnedHint != nil {
@@ -346,7 +346,7 @@ func (s *Service) hintPayload(cue hint) map[string]any {
 		out["hint_output"] = map[string]any{"label": cue.label}
 		out["message"] = "Indiciu: caută mai întâi «" + cue.label + "»."
 	case 2:
-		out["hint_kind"] = "ingredient"
+		out["hint_kind"] = "category"
 		out["hint_ingredient"] = s.concept(cue.pair[0])
 		out["message"] = "Indiciu: încearcă cu " + s.graph.Label(cue.pair[0]) + "."
 	case 3:

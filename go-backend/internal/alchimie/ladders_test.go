@@ -17,9 +17,9 @@ func TestAlchemyLadderAndLifetimePairsSurviveReset(t *testing.T) {
 		Par:     2,
 	}, "usor", "", "")
 	id, _ := s.store.Create(g)
-	for level, kind := range []string{"output", "ingredient", "pair"} {
+	for level, kind := range []string{"output", "category", "pair"} {
 		hint, err := s.Hint(id)
-		if err != nil || hint["hint_level"] != level+1 || hint["steps"] != level+1 || hint["hint_kind"] != kind {
+		if err != nil || hint["hint_level"] != level+1 || hint["steps"] != level+1 || hint["hint_kind"] != kind || hint["hint_stage"] != "pair" {
 			t.Fatalf("rung %d: %#v, %v", level+1, hint, err)
 		}
 		stored := hint["earned_hint"].(map[string]any)
@@ -31,7 +31,7 @@ func TestAlchemyLadderAndLifetimePairsSurviveReset(t *testing.T) {
 			if hint["hint"] != nil || hint["hint_ingredient"] != nil || len(stored) != 4 || !reflect.DeepEqual(hint["hint_output"], map[string]any{"label": "useful"}) {
 				t.Fatalf("rung 1 revealed more than the useful output label: %#v", stored)
 			}
-		case "ingredient":
+		case "category":
 			if hint["hint"] != nil || hint["hint_output"] != nil || len(stored) != 5 || hint["hint_ingredient"].(map[string]any)["id"] != "a" {
 				t.Fatalf("rung 2 revealed more than one ingredient: %#v", stored)
 			}
@@ -69,7 +69,7 @@ func TestAlchemySkipsAlreadyPublicGoalOutput(t *testing.T) {
 	id, _ := s.store.Create(g)
 	before, _ := s.Get(id)
 	hint, err := s.Hint(id)
-	if err != nil || before["hints_left"] != 2 || hint["hint_level"] != 2 || hint["hint_kind"] != "ingredient" || hint["steps"] != 1 {
+	if err != nil || before["hints_left"] != 2 || hint["hint_level"] != 2 || hint["hint_kind"] != "category" || hint["steps"] != 1 {
 		t.Fatalf("already public rung charged a step: %#v -> %#v, %v", before, hint, err)
 	}
 }
