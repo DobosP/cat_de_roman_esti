@@ -33,15 +33,16 @@ async function accessible(page, testInfo, state) {
 }
 
 for (const game of games) {
-  test(`${game.key} intro, live board and result are accessible without page overflow`, async ({ page }, testInfo) => {
-    await deterministicStarts(page, game);
-    await page.goto(game.path);
-    await expect(page.getByRole("button", { name: /^Joacă(?: →)?$/ })).toBeEnabled();
-    await accessible(page, testInfo, "intro");
-    const controls = { keyboard: testInfo.project.name === "desktop" };
-    await start(page, game, controls);
-    await accessible(page, testInfo, "live");
-    await solve(page, game, solution(game).steps, controls);
-    await accessible(page, testInfo, "result");
-  });
+  for (const colorScheme of ["light", "dark"]) {
+    test(`${game.key} board and result are accessible in ${colorScheme}`, async ({ page }, testInfo) => {
+      await page.emulateMedia({ colorScheme, reducedMotion: "reduce" });
+      await deterministicStarts(page, game);
+      const controls = { keyboard: testInfo.project.name === "desktop" };
+      await start(page, game, controls);
+      await accessible(page, testInfo, "live");
+      await solve(page, game, solution(game).steps, controls);
+      await expect(page.locator(".game-result h2")).toBeFocused();
+      await accessible(page, testInfo, "result");
+    });
+  }
 }

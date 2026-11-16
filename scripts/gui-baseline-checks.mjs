@@ -15,12 +15,50 @@ export const HOME = freeze([
 ]);
 export const FOOTER = "Toate cele șase jocuri folosesc aceeași hartă de legături culturale românești.";
 export const ORIGINAL_BASELINE_SHA256 = "ff055e404bf138ce0442381ab33eb643d431f922e4284f66a5002efcc397be68";
-const SOURCES = {
-  "frontend/src/games.ts": "ce6a53bd118fae4f0cfa62eb12d6afadb31596a1e265c5122e202560ef26b0ad",
-  "frontend/src/screens/Home.tsx": "0d373bd1e1140f2c517f450ce40156f1d4ad97db9c28d3517d29d7f2c944afb5",
-  "baselines/cat/capture.json": ORIGINAL_BASELINE_SHA256,
-};
-const liveContexts = new WeakSet(), identifiedContexts = new WeakSet(), liveWitnesses = new WeakSet();
+export const ORIGINAL_BASELINE_PATH = "baselines/cat/history/original-capture.json";
+export const REDESIGN_BASELINE_PATH = "baselines/cat/capture.json";
+export const REDESIGN_CHECKSUM_PATH = "baselines/cat/capture.sha256";
+export const REDESIGN_FIXTURE_PATH = "baselines/cat/fixtures.json";
+export const REDESIGN_GAMES = freeze([
+  { game: "intrusul", route: "/intrusul", ready: ".intrusul-grid button", title: "Intrusul" },
+  { game: "perechi", route: "/perechi", ready: ".perechi-grid button", title: "Perechi" },
+  { game: "conexiuni", route: "/conexiuni", ready: ".connections-grid button", title: "Conexiuni" },
+  { game: "lant", route: "/lant", ready: ".lant-choice-grid button", title: "Lanțul Cuvintelor" },
+  { game: "contexto", route: "/cald-rece", ready: ".contexto-input-bar input", title: "Cald sau Rece" },
+  { game: "alchimie", route: "/alchimie", ready: ".alchemy-inventory-grid button", title: "Alchimie" },
+]);
+const [intrusul] = REDESIGN_GAMES;
+const views = [
+  { name: "home", route: "/", ready: ".games-grid .game-card" },
+  ...REDESIGN_GAMES.map((screen) => ({ ...screen, name: screen.game })),
+  { ...intrusul, name: "help" },
+  { ...intrusul, name: "result" },
+];
+export const REDESIGN_CASES = freeze(["light", "dark"].flatMap((theme) =>
+  views.map((screen) => ({ ...screen, theme, key: screen.name + "-" + theme }))));
+const REDESIGN_SOURCES = [
+  REDESIGN_FIXTURE_PATH, "scripts/gui-baseline-fixtures.py",
+  "scripts/gui-baseline.mjs", "scripts/gui-baseline-checks.mjs",
+  "frontend/src/games.ts", "frontend/src/screens/Home.tsx", "frontend/src/components/GameFrame.tsx",
+  "frontend/src/entry.ts", "frontend/src/hooks/useGameEntry.ts", "frontend/src/theme.ts",
+  "frontend/src/hooks/useEventValue.ts", "frontend/src/hooks/useCoachMessage.ts",
+  "frontend/src/hooks/useSavedGameResume.ts",
+  "frontend/index.html", "go-backend/internal/httpapi/managed_nonce.go",
+  "frontend/src/components/FreeRoundOptions.tsx", "frontend/src/components/HintBar.tsx",
+  "frontend/src/components/ResultCard.tsx", "frontend/src/components/ResultsHistory.tsx",
+  "frontend/src/components/BoardPlacePodium.tsx", "frontend/src/api/round.ts", "frontend/src/api/lant.ts",
+  "frontend/src/styles/app.css", "frontend/src/styles/board-place.css",
+  ...["alchimie", "contexto", "conexiuni", "intrusul", "lant", "perechi"].map((name) => "frontend/src/gameHelp/" + name + ".mjs"),
+  ...["AlchimieChallenge", "CaldRece", "Conexiuni", "Intrusul", "Lant", "Perechi"].map((name) => "frontend/src/screens/" + name + ".tsx"),
+  ...["theme", "arcade", "home", "game-frame", "alchimie", "contexto", "conexiuni", "intrusul", "lant", "perechi"]
+    .map((name) => "frontend/src/styles/" + name + ".css"),
+  ...["intrusul", "perechi", "conexiuni", "lant", "cald-rece", "alchimie"].map((key) => "frontend/src/art/" + key + ".svg"),
+];
+export function redesignSourceHashes(root, acquire = (name) => read(root, name)) {
+  return Object.fromEntries(REDESIGN_SOURCES.map((name) => [name, acquire(name).sha256]));
+}
+const liveContexts = new WeakSet(), identifiedContexts = new WeakSet();
+const liveWitnesses = new WeakSet(), redesignWitnesses = new WeakSet();
 const hex = (value, length) => typeof value === "string" && value.length === length && !/[^a-f0-9]/.test(value);
 const uuid = (value) => typeof value === "string" && value.length === 36 && /^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}(?![\s\S])/.test(value);
 const image = (value) => typeof value === "string" && value.startsWith("sha256:") && hex(value.slice(7), 64);
@@ -87,19 +125,43 @@ export function prepareVerification(root, mode) {
     && ["target", "sha", "tree_sha256", "toolchain_digest", "config_sha256"].every((key) => config[key] === descriptor[key])
     && hash(JSON.stringify(config.config)) === descriptor.config_sha256
     && config.config?.role === "consumer" && config.config?.app === "cat_de_roman_esti");
-  for (const [name, expected] of Object.entries(SOURCES)) assert.equal(acquire(name).sha256, expected, "Reviewed Home source or immutable baseline changed: " + name);
+  assert.equal(acquire("baselines/cat/history/original-source-lock.json").sha256,
+    "b51ee37fe2fdea4055d4ff7e7ab2b19168e79bc2993941cfd9cd5a042a56514c", "Original baseline source lock changed");
+  const historical = acquire(ORIGINAL_BASELINE_PATH);
+  assert.equal(historical.sha256, ORIGINAL_BASELINE_SHA256, "Original baseline manifest changed");
+  const original = JSON.parse(historical.bytes);
+  const historicalPngs = acquire("baselines/cat/history/original-pngs.sha256");
+  const preserved = original.pages.map((item, index) => {
+    assert.equal(item.screenshot, "baselines/cat/route-" + index + ".png");
+    const name = path.basename(item.screenshot);
+    assert.equal(acquire("baselines/cat/history/" + name).sha256, item.sha256, "Original baseline PNG changed");
+    return item.sha256 + "  " + name;
+  });
+  assert.equal(historicalPngs.bytes.toString(), preserved.join("\n") + "\n");
+  const accepted = acquire(REDESIGN_BASELINE_PATH), checksum = acquire(REDESIGN_CHECKSUM_PATH);
+  assert.equal(checksum.bytes.toString(), accepted.sha256 + "  capture.json\n", "Redesign baseline capture changed");
+  const baseline = JSON.parse(accepted.bytes);
+  assert.deepEqual(redesignSourceHashes(root, acquire), baseline.source_sha256, "Reviewed redesign source changed");
+  assert.deepEqual(baseline.pages.map((row) => row.key), REDESIGN_CASES.map((row) => row.key));
+  const baselinePngs = baseline.pages.map((row) => {
+    assert.equal(row.screenshot, "baselines/cat/" + row.key + ".png");
+    const file = acquire(row.screenshot);
+    assert.equal(file.sha256, row.sha256, "Reviewed redesign PNG changed");
+    return file.bytes;
+  });
   for (const name of ["scripts/gate.sh", "compose.gate.yml", "Taskfile.yml", "Taskfile.repo.yml",
-    "scripts/gui-baseline.mjs", "scripts/gui-baseline-checks.mjs", "frontend/package.json", "frontend/package-lock.json"]) acquire(name);
+    "frontend/package.json", "frontend/package-lock.json"]) acquire(name);
   const installed = JSON.parse(acquire("frontend/node_modules/playwright/package.json").bytes);
   const npm = JSON.parse(read(root, "frontend/package-lock.json").bytes);
   assert.ok(installed.name === "playwright" && installed.version === "1.63.0" && npm.packages?.["node_modules/playwright"]?.version === "1.63.0");
   const manifest = acquire("go-backend/embedfs/dist/.vite/manifest.json"), lock = acquire("versions.lock.json");
   const binding = freeze({ target, invocation: descriptor.invocation, sha: descriptor.sha, tree_sha256: descriptor.tree_sha256,
+    baseline_sha256: accepted.sha256, original_baseline_sha256: historical.sha256,
     toolchain_digest: descriptor.toolchain_digest, config_sha256: descriptor.config_sha256, config_file_sha256: descriptor.config_file_sha256,
     descriptor_sha256: raw.sha256, manifest_sha256: manifest.sha256, versions_lock_sha256: lock.sha256,
     app_image_id: process.env.GATE_APP_IMAGE_ID, image_authority: "Producer declaration; owning wrapper/parent host verify actual CID/IID",
     origin: process.env.GATE_APP_URL, dirty: process.env.GATE_DIRTY === "true", playwright_version: installed.version });
-  const context = { identity: null };
+  const context = { identity: null, baseline, original, baselinePngs };
   for (const [key, value] of Object.entries({ root, mode, binding, inputs: freeze(inputs) }))
     Object.defineProperty(context, key, { value, enumerable: true, writable: false, configurable: false });
   liveContexts.add(context); return context;
@@ -211,6 +273,30 @@ export async function captureHomeWitness(page, context) {
   assert.ok(final.origin === context.binding.origin && final.secure === true);
   assertHomeData(data); freeze(data); liveWitnesses.add(data); return data;
 }
+export async function captureRedesignHomeWitness(page, context) {
+  assert.ok(identifiedContexts.has(context), "Live identified source/image context required");
+  const cards = page.locator(".games-grid .game-card");
+  const observed = [];
+  assert.equal(await cards.count(), REDESIGN_GAMES.length);
+  for (const [index, expected] of REDESIGN_GAMES.entries()) {
+    const card = cards.nth(index);
+    const value = await deadline(card.evaluate((element) => {
+      const img = element.querySelector("img");
+      return { tag: element.tagName, href: element.getAttribute("href"),
+        title: element.querySelector("strong")?.textContent, alt: img?.getAttribute("alt"),
+        illustration: img?.naturalWidth > 0 && new URL(img.src).origin === location.origin };
+    }), "Redesign Home card deadline");
+    assert.deepEqual(value, { tag: "A", href: expected.route, title: expected.title, alt: "", illustration: true });
+    assert.equal(await deadline(page.getByRole("link", { name: new RegExp("^" + expected.title) }).count(),
+      "Redesign Home link-name deadline"), 1);
+    observed.push({ ...value, snapshot: await deadline(card.ariaSnapshot({ timeout: 5000 }), "Redesign ariaSnapshot deadline") });
+  }
+  assert.equal(page.url(), context.binding.origin + "/");
+  const witness = freeze({ binding: context.binding, cards: observed });
+  redesignWitnesses.add(witness);
+  return witness;
+}
+
 export function recheckVerification(context) {
   assert.ok(liveContexts.has(context));
   for (const row of context.inputs) assert.equal(read(context.root, row.path).sha256, row.sha256, "Baseline source/context changed");
@@ -292,6 +378,55 @@ export function comparisonOutcomes(baseline, current, witness, binding, pngs, { 
   }
   return outcomes;
 }
+export function redesignOutcomes(baseline, original, current, witness, binding, pngs) {
+  const outcomes = [];
+  const check = (name, operation) => {
+    try { operation(); outcomes.push({ name, status: "pass" }); }
+    catch { outcomes.push({ name, status: "fail" }); }
+  };
+  check("home-live-semantic-witness", () => assert.ok(redesignWitnesses.has(witness) && witness.binding === binding));
+  check("visual-case-identity", () => {
+    for (const pages of [baseline.pages, current.pages]) {
+      assert.deepEqual(pages.map(({ key, route, theme }) => ({ key, route, theme })),
+        REDESIGN_CASES.map(({ key, route, theme }) => ({ key, route, theme })));
+    }
+  });
+  check("distinct-color-schemes", () => {
+    const perTheme = REDESIGN_CASES.length / 2;
+    for (const report of [baseline, current]) {
+      for (let index = 0; index < perTheme; index++) {
+        assert.notEqual(report.pages[index].sha256, report.pages[index + perTheme].sha256);
+      }
+    }
+  });
+  check("axe-zero", () => {
+    for (const report of [baseline, current]) {
+      assert.equal(report.pages.length, REDESIGN_CASES.length);
+      for (const row of report.pages) assert.deepEqual(row.axe, []);
+    }
+  });
+  for (const [index, { key }] of REDESIGN_CASES.entries()) {
+    const pair = pngs[index];
+    check("png:" + key, () => {
+      assert.ok(Buffer.isBuffer(pair?.original) && Buffer.isBuffer(pair?.current));
+      assert.equal(hash(pair.original), baseline.pages[index].sha256);
+      assert.equal(hash(pair.current), current.pages[index].sha256);
+      assert.ok(pair.original.equals(pair.current), "Exact redesign screenshot pixels changed");
+    });
+  }
+  check("vitals-route-identity", () => assert.deepEqual(current.vitals.map((item) => item.route), original.vitals.map((item) => item.route)));
+  for (const [index, item] of original.vitals.entries()) for (const key of ["lcp", "inp"]) {
+    const expected = item.median[key], actual = current.vitals[index]?.median[key];
+    const tolerance = Math.max(expected * .1, 50);
+    check("vitals:" + item.route + ":" + key, () => {
+      assert.ok(Number.isFinite(expected) && expected >= 0 && Number.isFinite(actual) && actual >= 0);
+      assert.ok(!(actual - expected > tolerance), "Vitals baseline regression");
+    });
+    Object.assign(outcomes.at(-1), { expected, actual, absolute_delta: Math.abs(actual - expected), tolerance });
+  }
+  return outcomes;
+}
+
 export function writeVerification(context, output, name, value) {
   return writePrivate(context, output, name, Buffer.from(JSON.stringify(value, null, 2) + "\n"));
 }

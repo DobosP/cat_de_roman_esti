@@ -38,6 +38,8 @@ test("lant shows the authoritative recovered position while animation frames are
   await expect(position.getByText(server.current.label, { exact: true })).toHaveCSS("opacity", "1");
   await expect(position.locator(".lant-route-word")).toHaveCount(1);
   await page.clock.resume();
-  await expect(page.getByRole("status").filter({ has: page.getByRole("button", { name: "Copiază rezultatul" }) })).toHaveCSS("opacity", "1");
+  const result = page.getByRole("region", { name: "Ai reușit!", exact: true });
+  await expect(result).toHaveCSS("opacity", "1");
+  await expect(result.getByRole("heading", { name: "Ai reușit!", exact: true })).toBeFocused();
   await page.screenshot({ path: test.info().outputPath("authoritative-position.png"), fullPage: true });
 });

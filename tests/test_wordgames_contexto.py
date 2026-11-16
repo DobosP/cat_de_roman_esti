@@ -589,47 +589,44 @@ def test_progressive_clues_are_category_then_strictly_warmer_without_target_leak
     from cat_de_roman_esti.wordgames.service import get_service
 
     c = make_client()
-    gid = c.post(f"/api/wordgames/contexto/games?seed={SEED}").json()["game_id"]
-    early = c.post(f"/api/wordgames/contexto/games/{gid}/clue")
-    assert early.status_code == 400
-
-    before = _make_counted_guesses(c, gid, 3)
-    assert before["clue_available"] is True
-    assert before["next_clue_kind"] == "category"
-    assert before["clues_used"] == 0
-    assert "target" not in before
-    best_before = min(guess["rank"] for guess in before["guesses"])
-
-    clue = c.post(f"/api/wordgames/contexto/games/{gid}/clue")
-    assert clue.status_code == 200, clue.content.decode()
-    body = clue.json()
-    session = store.get(gid)
-    assert session is not None
+    created = c.post("/api/wordgames/contexto/games?seed=17&difficulty=usor").json()
+    root = f"/api/wordgames/contexto/games/{created['game_id']}"
+    session = store.get(created["game_id"])
+    svc = get_service()
     secret = session.target
-    target_node = get_service().node(secret)
-    assert body["clues_used"] == 1
-    assert body["clue_kind"] == "category"
-    assert body["clue"]["category"]["key"] == target_node.category
-    assert body["clue"]["category"]["label"]
-    assert secret not in str(body)
-    assert "target" not in body
+    assert created["hint_level"] == created["steps"] == 0
+    assert created["next_clue_kind"] == "category" and created["hints_left"] == 3
 
-    assert body["clue_available"] is True
-    assert body["next_clue_kind"] == "warmer"
-    warmer = c.post(f"/api/wordgames/contexto/games/{gid}/clue")
-    assert warmer.status_code == 200
-    again = warmer.json()
-    assert again["clue_kind"] == "warmer"
-    assert again["clues_used"] == 2
-    assert 1 < again["warm_clue"]["rank"] < best_before
-    hinted_id = get_service().resolve(again["warm_clue"]["label"])
-    assert hinted_id is not None and hinted_id != secret
-    assert again["clue_available"] is False
-    _assert_secret_hidden(again, secret, get_service().label(secret))
+    category = c.post(root + "/clue").json()
+    assert category["hint_level"] == category["steps"] == category["clues_used"] == 1
+    assert category["clue_kind"] == "category"
+    assert category["clue"]["category"]["key"] == svc.node(secret).category
+    assert "warm_clue" not in category
+    _assert_secret_hidden(category, secret, svc.label(secret))
 
-    exhausted = c.post(f"/api/wordgames/contexto/games/{gid}/clue")
-    assert exhausted.status_code == 400
-    assert c.get(f"/api/wordgames/contexto/games/{gid}").json()["clues_used"] == 2
+    warm = c.post(root + "/clue").json()
+    assert warm["steps"] == warm["hint_level"] == 2
+    assert set(warm["word"]) == {"label", "rank", "message"}
+    assert 1 < warm["word"]["rank"] <= 150
+    assert svc.resolve(warm["word"]["label"]) not in (None, secret)
+    _assert_secret_hidden(warm, secret, svc.label(secret))
+
+    warmer = c.post(root + "/clue").json()
+    assert warmer["steps"] == warmer["hint_level"] == 3
+    assert 1 < warmer["word"]["rank"] <= 25
+    assert warmer["word"]["rank"] < warm["word"]["rank"]
+    assert svc.resolve(warmer["word"]["label"]) not in (None, secret)
+    assert warmer["clue_available"] is False and warmer["hints_left"] == 0
+    _assert_secret_hidden(warmer, secret, svc.label(secret))
+
+    resumed = c.get(root).json()
+    assert resumed["warm_clue"] == warmer["word"]
+    assert c.post(root + "/clue").status_code == 400
+    assert c.get(root).json() == resumed
+    assert "perfect" not in resumed
+
+    won = _post_json(c, root + "/guess", {"text": secret})
+    assert won["steps"] == 4 and won["won"] and "perfect" not in won
 
 
 def test_public_theme_skips_redundant_category_clue_without_penalty() -> None:
@@ -643,7 +640,7 @@ def test_public_theme_skips_redundant_category_clue_without_penalty() -> None:
     assert body["clues_used"] == 0
     clue = c.post(f"/api/wordgames/contexto/games/{created['game_id']}/clue").json()
     assert clue["clue_kind"] == "warmer"
-    assert clue["clues_used"] == 1
+    assert clue["clues_used"] == 1 and clue["hint_level"] == 2
     assert "clue" not in clue  # category was already public; no paid duplicate
 
 
@@ -722,7 +719,8 @@ def test_warmer_clues_prefer_familiar_words_on_approved_easy_targets() -> None:
         WARM_CLUE_MIN_SALIENCE,
         GuessRecord,
         _build_session,
-        _warmer_clue_candidate,
+        _warm_candidates,
+        _warm_clue_at,
     )
     from cat_de_roman_esti.wordgames.packs import get_pack
     from cat_de_roman_esti.wordgames.service import get_service
@@ -740,7 +738,7 @@ def test_warmer_clues_prefer_familiar_words_on_approved_easy_targets() -> None:
             anchor_id="test-cold",
             attempt_number=1,
         )
-        clue = _warmer_clue_candidate(session)
+        clue = _warm_clue_at(_warm_candidates(session), 3, None)
         assert clue is not None
         node_id = svc.resolve(clue.label)
         assert node_id is not None and node_id != session.target

@@ -5,7 +5,7 @@
 
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "preact/hooks";
 import { useIsPresent } from "@roedu/ui/motion";
-import { Button, Spinner, type ToastKind } from "@roedu/ui";
+import { Button, type ToastKind } from "@roedu/ui";
 import {
   alchimieApi,
   ApiError,
@@ -16,21 +16,21 @@ import {
   type InventoryItem,
 } from "../api/alchimie";
 import { createGameActionOwner, recoverOwnedGameAction, type GameActionTicket } from "../gameActionRecovery.mjs";
-import { GameShell } from "../components/GameShell";
+import { GameFrame, CoachLine } from "../components/GameFrame";
+import { useCoachMessage } from "../hooks/useCoachMessage";
+import { FreeRoundOptions } from "../components/FreeRoundOptions";
+import { HintBar } from "../components/HintBar";
+import { useGameEntry, useRoundStart } from "../hooks/useGameEntry";
+import { BoardPlacePodium } from "../components/BoardPlacePodium";
+import { ResultCard } from "../components/ResultCard";
 import { ALCHIMIE_HELP } from "../gameHelp/alchimie.mjs";
-import { GameHelp } from "../components/GameHelp";
-import { GameIntro } from "../components/GameIntro";
-import { StartFailureNotice } from "../components/StartFailureNotice";
-import { DifficultyPicker } from "../components/DifficultyPicker";
 import { useActiveGame } from "../hooks/useActiveGame";
 import { useRecordScore } from "../hooks/useRecordScore";
 import { useSavedGameResume } from "../hooks/useSavedGameResume";
 import { gameByKey } from "../games";
 import { sound } from "../sound";
-import { bestScore } from "../scores/read";
 import { categoryLabel } from "../categories";
-import { CategoryPicker } from "../components/CategoryPicker";
-import { buildSharePayload, copyResult, formatDayKey, stableKey, todayLocal } from "../share";
+import { buildSharePayload, copyResult, stableKey } from "../share";
 
 const GAME_KEY = "alchimie";
 const DEF = gameByKey("alchimie");
@@ -99,12 +99,6 @@ const DIFFICULTY_LABEL: Record<Difficulty, string> = {
   greu: "Greu",
 };
 
-const DIFFICULTIES: { id: Difficulty; label: string; hint: string }[] = [
-  { id: "usor", label: DIFFICULTY_LABEL.usor, hint: "recomandat" },
-  { id: "normal", label: "Normal", hint: "echilibrat" },
-  { id: "greu", label: DIFFICULTY_LABEL.greu, hint: "țintă îndepărtată" },
-];
-
 export default function AlchimieChallenge({
   onExit,
   onToast,
@@ -112,12 +106,15 @@ export default function AlchimieChallenge({
   onExit: () => void;
   onToast: (m: string, k?: ToastKind) => void;
 }) {
-  const active = useActiveGame("alchimie");
+  const active = useActiveGame(GAME_KEY);
+  const entry = useGameEntry(GAME_KEY, active);
+  const { admit, remember, complete, settleCompletion } = entry;
   const isPresent = useIsPresent();
   const liveRef = useRef(true);
   const lifetimeRef = useRef(0);
   const [state, setState] = useState<AlchimieState | null>(null);
   const [startFailed, setStartFailed] = useState(false);
+  const [unavailable, setUnavailable] = useState(false);
   const startInFlightRef = useRef(false);
   const [loading, setLoading] = useState(() => active.peek() !== null);
   const [creating, setCreating] = useState(false);
@@ -130,20 +127,13 @@ export default function AlchimieChallenge({
   const [recipesOpen, setRecipesOpen] = useState(false);
   const [recipeQuery, setRecipeQuery] = useState("");
   const [inventoryQuery, setInventoryQuery] = useState("");
-  const [lastMessage, setLastMessage] = useState<string | null>(null);
-  const [difficulty, setDifficulty] = useState<Difficulty>("usor");
-  const [category, setCategory] = useState<string | null>(null);
-  const [isRecord, setIsRecord] = useState(false);
-  const [isPuzzleRecord, setIsPuzzleRecord] = useState(false);
+  const [lastMessage, setLastMessage, feedbackRevision] = useCoachMessage();
   const inventoryButtonsRef = useRef(new Map<string, HTMLButtonElement>());
   const inventoryPanelRef = useRef<HTMLElement>(null);
   const inventorySearchRef = useRef<HTMLInputElement>(null);
-  const completionHeadingRef = useRef<HTMLHeadingElement>(null);
-  const completionFocusedGameRef = useRef<string | null>(null);
   const pendingCraftFocusRef = useRef<{ gameId: string; origin: HTMLElement; targetId: string | null; reveal?: boolean; result?: boolean } | null>(null);
   const dragSourceRef = useRef<{ id: string; gameId: string } | null>(null);
   const [dragOverId, setDragOverId] = useState<string | null>(null);
-  const [menuOpen, setMenuOpen] = useState(false);
   const [actionSync, setActionSync] = useState<ActionSync | null>(null);
   const actionOwner = useMemo(() => createGameActionOwner(active), [active]);
   useLayoutEffect(() => {
@@ -154,14 +144,14 @@ export default function AlchimieChallenge({
   const actionsLocked = !isPresent || creating || busy || loading || actionSync !== null;
   const recordOnce = useRecordScore("alchimie");
 
-  const best = useMemo(() => bestScore(GAME_KEY), []);
 
   const applyAuthoritativeState = useCallback((fresh: AlchimieState, options: { preserveLibrary?: boolean; preserveReaction?: boolean } = {}) => {
     pendingCraftFocusRef.current = null;
     setState(fresh);
     setSelected(fresh.earned_hint?.hint?.slice(0, 1).map((item) => item.id) ?? []);
     setEmptyPairKey(null);
-    setHintIds(new Set(fresh.earned_hint?.hint?.map((item) => item.id) ?? []));
+    setHintIds(new Set(fresh.earned_hint?.hint?.map((item) => item.id) ??
+      (fresh.earned_hint?.hint_ingredient ? [fresh.earned_hint.hint_ingredient.id] : [])));
     if (!options.preserveLibrary) {
       setInventoryQuery("");
       setRecipeQuery("");
@@ -170,27 +160,22 @@ export default function AlchimieChallenge({
     // GET carries earned inventory, not a verdict for the last attempted pair.
     if (!options.preserveReaction) setLastReaction(null);
     setLastMessage(null);
-  }, []);
+  }, [setLastMessage]);
 
   const applyResumedGame = useCallback(
-    (s: AlchimieState, { terminal, bypassed }: { terminal: boolean; bypassed: boolean }) => {
-      if (!liveRef.current) return;
+    (s: AlchimieState, { terminal }: { terminal: boolean }) => {
+      if (!liveRef.current || !admit(s, terminal)) return;
       actionOwner.invalidate();
       setActionSync(null);
       setBusy(false);
       setStartFailed(false);
       applyAuthoritativeState(s);
-      setDifficulty(s.difficulty);
-      setCategory(s.board_category ?? null);
-      setIsRecord(false);
-      setIsPuzzleRecord(false);
-      // The daily-bypass notice already says the round was resumed.
-      if (!terminal && !bypassed) onToast("Joc reluat.", "info");
+      if (!terminal) onToast("Joc reluat.", "info");
     },
-    [actionOwner, applyAuthoritativeState, onToast],
+    [actionOwner, admit, applyAuthoritativeState, onToast],
   );
 
-  const { recovery: resumeRecovery, retryResume, cancelResume, dismissRecovery } = useSavedGameResume({
+  const { recovery: resumeRecovery, pending: resumePending, retryResume, cancelResume, dismissRecovery } = useSavedGameResume({
     active,
     load: alchimieApi.get,
     isTerminal: isTerminalResume,
@@ -205,7 +190,6 @@ export default function AlchimieChallenge({
         if (!state.won) setActionSync({ gameId: state.game_id, kind: "failed" });
       } else { setState(null); setActionSync(null); }
     },
-    onDailyBypassed: () => onToast("Ai continuat jocul liber început. Provocarea zilei te așteaptă după ce îl termini.", "info"),
   });
 
   const exitSafely = useCallback(() => {
@@ -221,31 +205,34 @@ export default function AlchimieChallenge({
       if (!liveRef.current || startInFlightRef.current) return;
       startInFlightRef.current = true;
       const epoch = lifetimeRef.current;
+      const expected = active.peek();
       actionOwner.invalidate();
       cancelResume();
       setStartFailed(false);
+      setUnavailable(false);
       setCreating(true);
       try {
         const s = await alchimieApi.create(opts);
         if (!liveRef.current || epoch !== lifetimeRef.current) return;
+        if (!remember(s, expected)) {
+          setState(null);
+          retryResume();
+          return;
+        }
         setState(s);
         setRecipesOpen(false);
         setRecipeQuery("");
         setLastReaction(null);
-        setMenuOpen(false);
         dragSourceRef.current = null;
         setDragOverId(null);
         setActionSync(null);
         setBusy(false);
-        active.remember(s.game_id);
         dismissRecovery();
         setSelected([]);
         setEmptyPairKey(null);
         setHintIds(new Set());
         setInventoryQuery("");
         setLastMessage(null);
-        setIsRecord(false);
-        setIsPuzzleRecord(false);
       } catch {
         if (liveRef.current && epoch === lifetimeRef.current) setStartFailed(true);
       } finally {
@@ -255,20 +242,10 @@ export default function AlchimieChallenge({
         }
       }
     },
-    [active, actionOwner, cancelResume, dismissRecovery],
+    [active, actionOwner, cancelResume, dismissRecovery, remember, retryResume, setLastMessage],
   );
 
   const won = state?.won ?? false;
-  const currentGameId = state?.game_id;
-  useLayoutEffect(() => {
-    if (!liveRef.current || !isPresent || !won || !currentGameId || completionFocusedGameRef.current === currentGameId) return;
-    const heading = completionHeadingRef.current;
-    if (!heading) return;
-    completionFocusedGameRef.current = currentGameId;
-    heading.focus();
-  }, [won, currentGameId, isPresent]);
-
-
   const puzzleKey = useMemo(() => {
     if (!state?.won || !state.target.id) return null;
     const seeds = state.inventory
@@ -291,7 +268,6 @@ export default function AlchimieChallenge({
     return buildSharePayload({
       gameTitle: "Alchimie",
       serverShare: state.share,
-      score: state.score,
       puzzleKey,
     });
   }, [state, puzzleKey]);
@@ -308,28 +284,14 @@ export default function AlchimieChallenge({
     const detail = state.daily
       ? `Zilnic ${state.daily} · ${state.moves} ${movesLabel}`
       : `${DIFFICULTY_LABEL[state.difficulty]} · ${state.moves} ${movesLabel}`;
-    let current = true;
     void recordOnce(state.game_id, state.score, detail, {
       puzzleKey,
       difficulty: state.difficulty,
       daily: state.daily,
+      steps: state.steps,
       category: state.board_category,
-    }).then((outcome) => {
-      active.forgetIfCurrent(state.game_id);
-      if (!current || !liveRef.current || !outcome) return;
-      const { isBest, isPuzzleBest } = outcome;
-      setIsPuzzleRecord(isPuzzleBest);
-      if (isBest) {
-        setIsRecord(true);
-        sound.playRecord();
-      } else if (isPuzzleBest) {
-        sound.playRecord();
-      }
-    });
-    return () => {
-      current = false;
-    };
-  }, [state, puzzleKey, recordOnce, active, isPresent]);
+    }).then(() => { settleCompletion(state); });
+  }, [state, puzzleKey, recordOnce, settleCompletion, isPresent]);
 
   const beginAction = useCallback((previous: AlchimieState) => {
     if (!liveRef.current || startInFlightRef.current) return null;
@@ -365,6 +327,7 @@ export default function AlchimieChallenge({
       }
       setActionSync(null);
       setState(null);
+      setUnavailable(true);
       setSelected([]);
       onToast("Jocul nu mai este disponibil. Poți începe altul.", "info");
       return;
@@ -457,7 +420,7 @@ export default function AlchimieChallenge({
       if (recoverableEmpty && !res.already_tried) {
         feedback += " Primul cuvânt rămâne ales. Atinge alt partener.";
       }
-      if (recoverableEmpty && res.hint_available) {
+      if (recoverableEmpty && res.hints_left) {
         feedback += " Apasă „Indiciu” dacă te-ai blocat.";
       }
       setLastMessage(feedback);
@@ -542,26 +505,8 @@ export default function AlchimieChallenge({
   }, [state, actionsLocked, beginAction, mayAdoptAction, applyAuthoritativeState,
     reconcileAction, actionOwner]);
 
-  const newGame = useCallback(() => {
-    if (startInFlightRef.current) return;
-    if (state && !state.won && !busy && !actionSync && !actionOwner.hasPending()) {
-      active.forgetIfCurrent(state.game_id);
-    }
-    actionOwner.invalidate();
-    setActionSync(null);
-    setBusy(false);
-    setSelected([]);
-    setEmptyPairKey(null);
-    setInventoryQuery("");
-    setRecipeQuery("");
-    setRecipesOpen(false);
-    setLastReaction(null);
-    setState(null);
-  }, [active, state, busy, actionSync, actionOwner]);
-
-  // Ask for a gentle nudge: the server points at a useful pair (it costs some score).
   const doHint = useCallback(async () => {
-    if (startInFlightRef.current || !state || actionsLocked || won || !state.hint_available) return;
+    if (startInFlightRef.current || !state || actionsLocked || won || !state.hints_left) return;
     const ticket = beginAction(state);
     if (!ticket) return;
     setBusy(true);
@@ -653,7 +598,7 @@ export default function AlchimieChallenge({
   useLayoutEffect(() => {
     if (!state || won) return;
     const onKey = (event: KeyboardEvent) => {
-      if (event.defaultPrevented || startInFlightRef.current) return;
+      if (event.defaultPrevented || startInFlightRef.current || (event.target instanceof Element && event.target.closest("dialog[open]"))) return;
       if (event.key === "Escape" && selected.length > 0) {
         event.preventDefault();
         clearSelection();
@@ -663,121 +608,57 @@ export default function AlchimieChallenge({
     return () => window.removeEventListener("keydown", onKey);
   }, [state, won, selected, clearSelection]);
 
-  if (loading && !state) {
-    return (
-      <div className="screen-pad fill center">
-        <Spinner size="lg" label="Se încarcă…" />
-      </div>
-    );
-  }
+  const nextRound = () => void start({ difficulty: entry.options.difficulty, category: entry.options.category ?? undefined });
+  const resumeEntry = () => {
+    if (entry.readyAfterTerminal(state)) setState(null);
+    retryResume();
+  };
+  const startEntry = useRoundStart(entry, (!state || entry.readyAfterTerminal(state)) && !loading && !creating && !startFailed && !resumePending && !resumeRecovery && !unavailable, resumeEntry,
+    (daily) => daily ? void start({ daily, difficulty: "usor" }) : nextRound());
+  const mode = entry.mode(state);
+  useLayoutEffect(() => {
+    if (state && won && isPresent) complete(state);
+  }, [state, won, isPresent, complete]);
 
-  // ---- Intro: difficulty picker + daily challenge + personal best. ----
-  if (!state) {
-    return (
-      <div className="screen-pad fill alchemy-screen alchemy-intro alchemy-challenge" aria-busy={creating}>
-        {creating && <span className="visually-hidden" role="status">Se pregătește jocul…</span>}
-        <div inert={creating} className="container col game-container alchemy-challenge-intro-content">
-          <GameShell onExit={exitSafely} accent={DEF.accent} busy={creating} />
-
-          <GameIntro
-            startFailed={startFailed}
-            resumeRecovery={resumeRecovery ? {
-              kind: resumeRecovery.kind,
-              canRetry: resumeRecovery.kind === "failed" || resumeRecovery.hasCurrent,
-              onRetry: retryResume,
-            } : null}
-            icon={DEF.icon}
-            title={DEF.title}
-            tag={DEF.tag}
-            accent={DEF.accent}
-            glow={DEF.glow}
-            best={best}
-            description={
-              <p className="alchemy-intro-description">
-                Atinge un cuvânt, apoi altul: se combină imediat. Descoperă cuvinte noi până creezi ținta.
-                {" "}Perechile fără rezultat nu scad scorul.
-              </p>
-            }
-            steps={[
-              { icon: "👆", label: "Atinge un cuvânt" },
-              { icon: "👆", label: "Atinge altul" },
-              { icon: "✨", label: "Descoperă automat" },
-            ]}
-            startLabel="Joacă →"
-            onStart={() => void start({ difficulty, category: category ?? undefined })}
-            onDaily={() => void start({ difficulty, daily: todayLocal() })}
-            dailyLabel="Provocarea zilei"
-            starting={!isPresent || creating || loading}
-          >
-            <details className="alchemy-setup-options">
-              <summary>{DIFFICULTY_LABEL[difficulty]} · {category ? categoryLabel(category) : "Toate temele"} · Personalizează</summary>
-              <div className="alchemy-setup-content">
-            <DifficultyPicker
-              options={DIFFICULTIES}
-              value={difficulty}
-              onChange={(id) => {
-                sound.playSelect();
-                setDifficulty(id);
-              }}
-            />
-            <CategoryPicker
-              game="alchimie"
-              difficulty={difficulty}
-              value={category}
-              onChange={(key) => {
-                sound.playSelect();
-                setCategory(key);
-              }}
-              onInvalid={() => setCategory(null)}
-              accent={DEF.accent}
-            />
-              </div>
-            </details>
-          </GameIntro>
-        </div>
-      </div>
-    );
-  }
-
-  const latest = lastReaction?.gameId === state.game_id ? lastReaction : null;
+  const latest = lastReaction?.gameId === state?.game_id ? lastReaction : null;
   // A recovered victory identifies its earned recipe even without the last response.
-  const winningRecipe = won ? reactionLog.find(({ results }) => results.some(({ id }) => id === state.target.id)) : undefined;
+  const winningRecipe = state?.won ? reactionLog.find(({ results }) => results.some(({ id }) => id === state.target.id)) : undefined;
   const displayedRecipe = won ? winningRecipe ?? latest : latest ?? reactionLog[0];
   const usableResults = won ? [] : displayedRecipe?.results.filter((item) => inventoryById.get(item.id)?.depleted === false) ?? [];
   const earnedCount = recipesOpen ? reactionLog.length : inventory.length;
   const countLabel = recipesOpen ? (earnedCount === 1 ? "rețetă" : "rețete") : (earnedCount === 1 ? "cuvânt" : "cuvinte");
 
   return (
-    <div className="screen-pad fill alchemy-screen alchemy-challenge" aria-busy={creating}>
-      {creating && <span className="visually-hidden" role="status">Se pregătește jocul…</span>}
-      <div inert={creating} className="container col game-container alchemy-game">
-        <GameShell onExit={exitSafely} accent={DEF.accent} title={DEF.title} busy={creating} />
-
+    <div className="screen-pad fill alchemy-screen alchemy-challenge">
+      <div className="container game-container alchemy-game">
+        <GameFrame game={DEF} mode={mode} onExit={exitSafely} help={ALCHIMIE_HELP} busy={creating || loading}
+          verifying={entry.recoveredTerminal(state) && !entry.readyAfterTerminal(state)}
+          startFailed={startFailed} unavailable={unavailable} onStart={() => startEntry(state?.game_id)} resumeRecovery={resumeRecovery} onResume={() => { entry.presentRecovery(); retryResume(); }}
+          status={state && !entry.recoveredTerminal(state) && <span>{state.moves} {state.moves === 1 ? "combinație" : "combinații"}</span>}
+          options={<FreeRoundOptions game={GAME_KEY} value={entry.options} onChange={entry.updateOptions} />}
+          onTool={(tool) => {
+            if (tool === "reset") void doReset();
+            if (tool === "new") nextRound();
+          }}
+          tools={state && !won ? <>
+            <Button type="submit" variant="secondary" disabled={actionsLocked}
+              value="reset">Reia același joc</Button>
+            {!state.daily && <Button type="submit" className="alchimie-other-board" variant="secondary" disabled={busy || creating || loading || !isPresent}
+              value="new">Alt joc</Button>}
+          </> : undefined}>
+        {state && !entry.recoveredTerminal(state) && <>
         <div className="alchemy-workspace">
           <section className="alchemy-bench" aria-label="Alambic">
             <section className={`alchemy-target${won ? " alchemy-target--won" : ""}`} aria-label="Ținta de făurit">
               <div className="alchemy-target-copy">
                 <div className="alchemy-target-meta">
-                  <span className="alchemy-eyebrow">{won ? "ȚINTA FĂURITĂ" : "CREEAZĂ"}</span>
+                  <span className="alchemy-eyebrow">{won ? "Ținta făurită" : "Ce trebuie să creezi"}</span>
                   <span className="alchemy-theme">
                     {state.board_category && `${categoryLabel(state.board_category)} · `}{DIFFICULTY_LABEL[state.difficulty]}
-                    {state.daily && ` · ${formatDayKey(state.daily)}`}
                   </span>
                 </div>
                 <h2>{state.target.label}</h2>
-                <p className="alchemy-round-count">{state.moves} {state.moves === 1 ? "combinație" : "combinații"}</p>
                 {state.target.description && <p>{state.target.description}</p>}
-                {won && <div className="alchemy-challenge-complete">
-                  <h2 ref={completionHeadingRef} tabIndex={-1} className="alchemy-completion-heading">Ai făurit ținta!</h2>
-                  <p>{state.score} puncte.{isRecord ? " Record personal." : isPuzzleRecord ? " Recordul acestei provocări." : ""}</p>
-                  <StartFailureNotice failed={startFailed} reserveSpace />
-                  <div className="row wrap alchemy-completion-actions">
-                    <Button type="button" disabled={creating} onClick={() => void start({ difficulty: state.difficulty, category: state.board_category ?? undefined })}>{creating ? "Se pregătește…" : "Încă unul →"}</Button>
-                    {sharePayload && <Button type="button" variant="secondary" disabled={creating} onClick={() => void handleCopy()}>Copiază rezultatul</Button>}
-                    <Button type="button" variant="secondary" disabled={creating} onClick={newGame}>Schimbă opțiunile</Button>
-                    <Button type="button" variant="secondary" disabled={creating} onClick={exitSafely}>Meniu</Button>
-                  </div>
-                </div>}
               </div>
             </section>
             {!won && <div className="alchemy-craft-cue" id="alchemy-instructions" role="group" aria-label="Combinație">
@@ -802,17 +683,16 @@ export default function AlchimieChallenge({
                   onClick={(event) => selectResult(item.id, event.currentTarget)}>Folosește {item.label}</button>)}
               </div>}
             </div>}
-            {lastMessage && <p className={`alchemy-feedback${emptyPairKey ? " alchemy-feedback--empty" : ""}${latest?.discoveryMessage === lastMessage ? " visually-hidden" : ""}`} role="status" aria-live="polite" aria-atomic="true">{lastMessage}</p>}
+            {!won && !actionSync && <CoachLine revision={feedbackRevision}>
+              {lastMessage || state.earned_hint ? <>
+                {lastMessage && <span>{lastMessage}</span>}
+                {state.earned_hint && <span className="alchemy-earned-hint">{state.earned_hint.message}</span>}
+              </> : "Alege două cuvinte ca să le combini."}
+            </CoachLine>}
             {actionSync && <div className="col alchemy-sync-recovery" role="alert">
               <strong>{actionSync.kind === "changed" ? "Jocul salvat s-a schimbat." : "Verificarea jocului nu a reușit."}</strong>
               <span>{actionSync.kind === "changed" ? "Încarcă jocul curent pentru a continua." : "Acțiunea poate fi deja salvată. Verifică jocul înainte de o nouă combinație, un indiciu sau o reluare."}</span>
               <Button type="button" onClick={() => void retryActionSync()} disabled={busy}>{busy ? "Se verifică…" : actionSync.kind === "changed" ? "Încarcă jocul curent" : "Verifică jocul"}</Button>
-            </div>}
-            {!won && state.earned_hint && <p className="alchemy-earned-hint" role="status">{state.earned_hint.message}</p>}
-            {state.hint_available && !won && <div className="alchemy-assistance">
-              <Button type="button" variant="secondary" className="alchemy-challenge-hint" disabled={actionsLocked}
-                onClick={() => void doHint()} aria-describedby="alchemy-hint-cost">Indiciu</Button>
-              <span id="alchemy-hint-cost">Penalizare de 150 puncte.</span>
             </div>}
           </section>
 
@@ -868,19 +748,17 @@ export default function AlchimieChallenge({
           </section>
         </div>
 
-        <GameHelp help={ALCHIMIE_HELP} />
-        <details className="alchemy-menu" open={menuOpen} onToggle={(event) => setMenuOpen(event.currentTarget.open)}>
-          <summary>Opțiuni de joc</summary>
-          <div className="alchemy-menu-content">
-            {!won && <div className="row wrap alchemy-challenge-actions">
-              <Button type="button" variant="secondary" disabled={actionsLocked} onClick={doReset}>Reia același joc</Button>
-              <Button type="button" variant="secondary" className="alchimie-other-board" disabled={!isPresent || creating || busy || loading}
-                onClick={() => void start({ difficulty: state.difficulty, category: state.board_category ?? undefined })}>Alt joc</Button>
-              <Button type="button" variant="secondary" disabled={actionsLocked} onClick={newGame}>Schimbă opțiunile</Button>
-            </div>}
-          </div>
-        </details>
-        {!won && <StartFailureNotice failed={startFailed} />}
+        {!won && <HintBar remaining={state.hints_left ?? 0} disabled={actionsLocked} onHint={() => void doHint()} />}
+        {won && (
+          <ResultCard title="Ai făurit ținta!" steps={state.steps} perfect={state.perfect && mode !== "Reluare"}
+            podium={<BoardPlacePodium round={state} gameTitle={DEF.title} replay={mode === "Reluare"} />}
+            actionsBusy={creating} onCopy={sharePayload ? handleCopy : undefined} onReplay={() => startEntry(state.game_id)} onExit={exitSafely}>
+            <strong>{state.target.label}</strong>
+            {displayedRecipe && <p>{displayedRecipe.parents[0].label} + {displayedRecipe.parents[1].label}</p>}
+          </ResultCard>
+        )}
+        </>}
+        </GameFrame>
       </div>
     </div>
   );

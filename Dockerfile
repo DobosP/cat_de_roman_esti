@@ -37,8 +37,10 @@ RUN GOMAXPROCS=2 GOFLAGS=-p=2 go run ./cmd/cat-content export --root .. --check
 # No defaults or environment fallback: failure prevents the app compilation.
 RUN GOMAXPROCS=2 GOFLAGS=-p=2 go run ./cmd/cat-gui-build --root .. --sha "$GATE_SHA" --tree-sha256 "$GATE_TREE_SHA256" \
     && CGO_ENABLED=0 GOMAXPROCS=2 GOFLAGS=-p=2 go build -trimpath -ldflags="-s -w" -o /out/app ./cmd/cat-server
-# Distroless has no shell: the submissions mount point is prepared here.
-RUN mkdir -p /out/data/submissions && chown 10001:10001 /out/data/submissions && chmod 700 /out/data/submissions
+# Distroless has no shell. Prepare the optional writable mount points here.
+RUN mkdir -p /out/data/submissions /out/data/board-stats \
+    && chown 10001:10001 /out/data/submissions /out/data/board-stats \
+    && chmod 700 /out/data/submissions /out/data/board-stats
 
 FROM gcr.io/distroless/static-debian13:nonroot@sha256:e2e927ec666bae08560abb3c55d0659eceabb657f56b6782ab500a9fc7f555e3
 WORKDIR /

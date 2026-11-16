@@ -7,8 +7,9 @@ const result = (page) => page.getByRole("button", { name: "Copiază rezultatul",
 const saved = (page, game) => page.evaluate((key) => localStorage.getItem(key), activeKey(game));
 const played = (page, game) => page.evaluate((key) => JSON.parse(localStorage.getItem("cat_wordgame_scores_v1") || "{}")[key]?.played ?? 0, game.key);
 const server = async (request, game, id) => (await request.get(gameURL(game, id))).json();
-const hint = (page, game) => page.getByRole("button", { name: game.key === "intrusul" ? /^💡 Arată indiciul/ : /^💡 Arată o pereche/ });
-const cue = (page, game) => page.locator(game.key === "intrusul" ? ".intrusul-clue" : ".perechi-hint");
+const hint = (page) => page.getByRole("button", { name: "Indiciu", exact: true });
+const cue = (page) => page.locator(".coach-line").filter({ hasText: /Tema|Legătura|Trei cuvinte|marcate/ });
+const freshRound = (page) => page.getByRole("button", { name: "Începe o rundă nouă", exact: true });
 
 function traffic(page, game, id) {
   const counts = { reads: 0, mutations: 0 };
@@ -36,7 +37,6 @@ async function prepare(page, request, game, mode = "practice") {
   let setup = [];
   let step = solution(game).practice;
   if (mode === "match") step = steps[0];
-  if (mode === "hint") setup = wrong.slice(0, game.key === "intrusul" ? 1 : 2);
   if (mode === "win") { setup = steps.slice(0, -1); step = steps.at(-1); }
   if (mode === "loss") { setup = wrong.slice(0, initial.remaining_mistakes - 1); step = wrong[initial.remaining_mistakes - 1]; }
   for (const move of setup) expect((await request.post(`${gameURL(game, initial.game_id)}/${move.action}`, { data: move.payload })).status()).toBe(200);
@@ -45,7 +45,7 @@ async function prepare(page, request, game, mode = "practice") {
   const perform = async (options = {}) => {
     if (mode !== "hint") return act(page, game, step, options);
     const response = page.waitForResponse((response) => response.request().method() === "POST" && new URL(response.url()).pathname === `${gameURL(game, initial.game_id)}/hint`);
-    await hint(page, game).click();
+    await hint(page).click();
     return response;
   };
   return { initial, step, action, perform };
@@ -88,8 +88,8 @@ async function replaceSaved(context, request, game, remove = false) {
 }
 
 async function allLocked(page, game) {
-  await expect(page.locator(`.${game.key}-feedback`)).toHaveCount(0);
-  for (const button of await page.locator(`${game.board} button, .${game.key}-actions button`).all()) await expect(button).toBeDisabled();
+  await expect(page.locator(".coach-line")).toHaveCount(0);
+  for (const button of await page.locator(`${game.board} button, .hint-bar button`).all()) await expect(button).toBeDisabled();
 }
 
 async function screenshot(page, name) {
@@ -108,7 +108,18 @@ for (const game of games.filter(({ derived }) => derived)) {
         const committed = await loseResponse(page, game, initial.game_id, action);
         expect((await perform({ keyboard: game.key === "perechi" && mode === "match" })).status()).toBe(503);
         const fresh = await server(request, game, initial.game_id);
-        for (const field of ["tiles", "mistakes", "hints_used", ...(game.key === "intrusul" ? ["wrong_ids", "attempts", "clue"] : ["solved_pairs", "solved_count", "actions", "hint"])]) expect(fresh[field]).toEqual(committed()[field]);
+        for (const field of ["tiles", "mistakes", "hints_used", "steps", "hints_left", "hint_level", ...(game.key === "intrusul" ? ["wrong_ids", "attempts", "clue"] : ["solved_pairs", "solved_count", "actions", "clue"])]) expect(fresh[field]).toEqual(committed()[field]);
+        if (game.key === "perechi") {
+          const paid = committed();
+          if (mode === "hint" && paid.hint_level < 3) {
+            // Early hint POSTs retain the legacy object for old clients. Recovery
+            // GETs persist the public clue and expose no highlighted tiles yet.
+            expect(paid.hint).toEqual({ tiles: [], label: paid.clue.label });
+            expect(fresh.hint).toBeUndefined();
+          } else {
+            expect(fresh.hint).toEqual(paid.hint);
+          }
+        }
         if (mode === "win" || mode === "loss") {
           await expect(result(page)).toBeVisible();
           await expect.poll(() => played(page, game)).toBe(1);
@@ -117,21 +128,21 @@ for (const game of games.filter(({ derived }) => derived)) {
           expect(fresh.score).toBe(committed().score);
           await screenshot(page, `recovered-${mode}.png`);
           await page.reload();
-          await expect(page.getByRole("button", { name: /^Joacă(?: →)?$/ })).toBeEnabled();
+          await expect(page.locator(game.board)).toBeVisible();
           expect(await played(page, game)).toBe(1);
         } else {
           expect(fresh.solution).toBeUndefined();
           expect(fresh.score).toBeUndefined();
           if (mode === "hint") {
-            await expect(cue(page, game)).toContainText(game.key === "intrusul" ? fresh.clue.label : fresh.hint.label);
+            await expect(cue(page)).toHaveText(fresh.clue?.message ?? "Atinge cele două cuvinte marcate.");
             expect(fresh.hints_used).toBe(1);
-            await expect(hint(page, game)).toHaveCount(0);
+            await expect(hint(page)).toHaveCount(fresh.hints_left > 0 ? 1 : 0);
             await screenshot(page, "recovered-hint.png");
             await page.reload();
-            await expect(cue(page, game)).toBeVisible();
+            await expect(cue(page)).toBeVisible();
             expect((await server(request, game, initial.game_id)).hints_used).toBe(1);
           } else {
-            await expect(page.locator(`.${game.key}-feedback`)).toContainText("înregistrată");
+            await expect(page.locator(".coach-line")).toContainText("înregistrată");
             if (mode === "match") {
               for (const tile of fresh.solved_pairs[0].tiles) await expect(page.locator(".perechi-solved")).toContainText(tile.label);
               const focused = await page.locator(`${game.board} button:focus`).count();
@@ -162,7 +173,7 @@ for (const game of games.filter(({ derived }) => derived)) {
       await screenshot(page, "persistent-read-only-retry.png");
       await verify(page).click();
       await expect(verify(page)).toHaveCount(0);
-      await expect(cue(page, game)).toBeVisible();
+      await expect(cue(page)).toBeVisible();
       expect((await server(request, game, initial.game_id)).hints_used).toBe(1);
       expect(counts).toEqual({ reads: 3, mutations: 1 });
     });
@@ -202,7 +213,12 @@ for (const game of games.filter(({ derived }) => derived)) {
       expect(await saved(page, game)).toBeNull();
       expect(counts).toEqual({ reads: 1, mutations: 1 });
       await currentGame(page).click();
-      await expect(page.getByRole("button", { name: /^Joacă(?: →)?$/ })).toBeEnabled();
+      await expect(freshRound(page)).toBeEnabled();
+      expect(await saved(page, game)).toBeNull();
+      await freshRound(page).click();
+      await expect(page.locator(game.board)).toBeVisible();
+      expect(await saved(page, game)).toEqual(expect.any(String));
+      expect(await saved(page, game)).not.toBe(initial.game_id);
       expect(await played(page, game)).toBe(0);
       await tab.close();
     });
@@ -212,7 +228,7 @@ for (const game of games.filter(({ derived }) => derived)) {
       const counts = traffic(page, game, initial.game_id);
       await loseResponse(page, game, initial.game_id, action, false);
       await perform();
-      await expect(page.locator(`.${game.key}-feedback`)).toHaveText("Joc sincronizat. Poți continua.");
+      await expect(page.locator(".coach-line")).toHaveText("Joc sincronizat. Poți continua.");
       expect(await server(request, game, initial.game_id)).toEqual(initial);
       expect(counts).toEqual({ reads: 1, mutations: 1 });
     });
@@ -232,19 +248,19 @@ for (const game of games.filter(({ derived }) => derived)) {
           await allLocked(page, game);
           await verify(page).click();
         }
-        await expect(cue(page, game)).toBeVisible();
+        await expect(cue(page)).toBeVisible();
         expect(await saved(page, game)).toBe(initial.game_id);
         expect(counts).toEqual({ reads: phase === "mutation" ? 1 : 2, mutations: 1 });
       });
     }
 
-    test("owned confirmed 404 returns to intro and forgets only the missing round", async ({ page, request }) => {
+    test("owned confirmed 404 shows the recovery frame and forgets only the missing round", async ({ page, request }) => {
       const { initial, action, perform } = await prepare(page, request, game);
       const counts = traffic(page, game, initial.game_id);
       await loseResponse(page, game, initial.game_id, action);
       await page.route(`**${gameURL(game, initial.game_id)}`, (route) => route.fulfill({ status: 404, json: {} }), { times: 1 });
       await perform();
-      await expect(page.getByRole("button", { name: /^Joacă(?: →)?$/ })).toBeEnabled();
+      await expect(freshRound(page)).toBeEnabled();
       expect(await saved(page, game)).toBeNull();
       expect(counts).toEqual({ reads: 1, mutations: 1 });
     });
@@ -253,7 +269,7 @@ for (const game of games.filter(({ derived }) => derived)) {
       const { initial } = await prepare(page, request, game, "hint");
       const counts = traffic(page, game, initial.game_id);
       const { tab, fresh } = await replaceSaved(context, request, game);
-      await hint(page, game).click();
+      await hint(page).click();
       await expect(currentGame(page)).toBeEnabled();
       await allLocked(page, game);
       expect(counts).toEqual({ reads: 0, mutations: 0 });
@@ -285,8 +301,18 @@ for (const game of games.filter(({ derived }) => derived)) {
         expect(counts).toEqual({ reads: mutation ? 0 : 1, mutations: 1 });
         await currentGame(page).click();
         await expect(currentGame(page)).toHaveCount(0);
-        if (fresh) await expect(page.locator(game.board)).toBeVisible();
-        else await expect(page.getByRole("button", { name: /^Joacă(?: →)?$/ })).toBeEnabled();
+        if (!fresh) {
+          await expect(freshRound(page)).toBeEnabled();
+          expect(await saved(page, game)).toBeNull();
+          await freshRound(page).click();
+        }
+        await expect(page.locator(game.board)).toBeVisible();
+        const savedAfterRecovery = await saved(page, game);
+        if (fresh) expect(savedAfterRecovery).toBe(fresh.game_id);
+        else {
+          expect(savedAfterRecovery).toEqual(expect.any(String));
+          expect(savedAfterRecovery).not.toBe(initial.game_id);
+        }
         expect(await played(page, game)).toBe(0);
         await tab.close();
       });
@@ -294,10 +320,8 @@ for (const game of games.filter(({ derived }) => derived)) {
 
     test("browser Back preserves the saved round when a winning reply arrives during departure", async ({ page, request }) => {
       await page.goto("/");
-      const title = game.key === "intrusul" ? "Intrusul" : "Perechi";
-      await page.getByRole("button", { name: new RegExp(`^Joacă ${title} —`) }).click();
       const created = page.waitForResponse((response) => response.request().method() === "POST" && new URL(response.url()).pathname === `/api/wordgames/${game.key}/games`);
-      await page.getByRole("button", { name: /^Joacă(?: →)?$/ }).click();
+      await page.locator(`.games-grid a[href="${game.path}"]`).click();
       const initial = await (await created).json();
       await expect(page.locator(game.board)).toBeVisible();
       const steps = solution(game).steps;
@@ -331,7 +355,7 @@ for (const game of games.filter(({ derived }) => derived)) {
         const held = await holdResponse(page, game, initial.game_id, phase === "read" ? "" : action);
         const performed = perform();
         await held.requested;
-        await page.getByRole("button", { name: "Ieși la lista de jocuri" }).click();
+        await page.getByRole("button", { name: "Înapoi la jocuri" }).click();
         if (phase === "unmounted") await expect(page.locator(game.board)).toHaveCount(0);
         held.release();
         await performed;
@@ -340,7 +364,8 @@ for (const game of games.filter(({ derived }) => derived)) {
         expect(await saved(page, game)).toBe(initial.game_id);
         expect(counts).toEqual({ reads: phase === "read" ? 1 : 0, mutations: 1 });
         await page.goto(game.path);
-        await expect(result(page)).toBeVisible();
+        await expect(page.locator(game.board)).toBeVisible();
+        await expect(result(page)).toHaveCount(0);
         await expect.poll(() => played(page, game)).toBe(1);
         expect((await server(request, game, initial.game_id)).won).toBe(true);
       });

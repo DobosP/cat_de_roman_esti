@@ -64,12 +64,12 @@ func TestCreationPrivacyAndSeededStability(t *testing.T) {
 		t.Fatal("seeded shuffle changed")
 	}
 	checkNoPrivateState(t, initial)
-	for _, key := range []string{"attempts", "mistakes", "hints_used"} {
+	for _, key := range []string{"attempts", "mistakes", "hints_used", "steps", "hint_level"} {
 		if initial[key] != 0 {
 			t.Errorf("%s = %v", key, initial[key])
 		}
 	}
-	if initial["remaining_mistakes"] != 3 || initial["hint_available"] != false || initial["won"] != false || initial["lost"] != false {
+	if initial["remaining_mistakes"] != 3 || initial["hint_available"] != true || initial["hints_left"] != 2 || initial["won"] != false || initial["lost"] != false {
 		t.Fatal("incorrect initial state")
 	}
 	if _, exists := initial["board_category"]; exists {
@@ -91,13 +91,19 @@ func TestCreationPrivacyAndSeededStability(t *testing.T) {
 func TestWrongRepeatHintScoredWinAndSnapshotOwnership(t *testing.T) {
 	service := testService(t)
 	id, _ := createGame(t, service, 17)
-	_, err := service.Hint(id)
-	checkError(t, err, 400, "Indiciul apare după prima încercare.")
+	theme, err := service.Hint(id)
+	if err != nil || theme["steps"] != 1 || theme["hint_level"] != 1 || theme["remaining_mistakes"] != 3 {
+		t.Fatalf("theme hint: %#v, %v", theme, err)
+	}
+	checkNoPrivateState(t, theme)
+	if clue := theme["clue"].(map[string]string); len(clue) != 2 || clue["label"] != "Cultură" {
+		t.Fatalf("theme clue exceeds rung: %#v", clue)
+	}
 	first, err := service.Guess(id, " a ")
 	if err != nil {
 		t.Fatal(err)
 	}
-	if first["correct"] != false || first["already_tried"] != false || first["attempts"] != 1 || first["mistakes"] != 1 || first["hint_available"] != true {
+	if first["correct"] != false || first["already_tried"] != false || first["attempts"] != 1 || first["mistakes"] != 1 || first["steps"] != 2 || first["hint_available"] != true {
 		t.Fatalf("bad wrong state: %#v", first)
 	}
 	checkNoPrivateState(t, first)
@@ -107,26 +113,31 @@ func TestWrongRepeatHintScoredWinAndSnapshotOwnership(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if repeated["already_tried"] != true || repeated["attempts"] != 1 || repeated["mistakes"] != 1 || !reflect.DeepEqual(repeated["wrong_ids"], []string{"a"}) {
+	if repeated["already_tried"] != true || repeated["attempts"] != 1 || repeated["mistakes"] != 1 || repeated["steps"] != 2 || !reflect.DeepEqual(repeated["wrong_ids"], []string{"a"}) {
 		t.Fatal("repeated guess cost or response alias")
 	}
 	hinted, err := service.Hint(id)
 	if err != nil {
 		t.Fatal(err)
 	}
-	if hinted["hints_used"] != 1 || hinted["hint_available"] != false || hinted["clue"].(map[string]string)["message"] != "Trei cuvinte țin de: Grupul privat." {
+	if hinted["hints_used"] != 2 || hinted["hint_level"] != 2 || hinted["steps"] != 3 || hinted["remaining_mistakes"] != 2 || hinted["hint_available"] != false || hinted["clue"].(map[string]string)["message"] != "Trei cuvinte țin de: Grupul privat." {
 		t.Fatalf("bad hint: %#v", hinted)
 	}
-	if _, exists := hinted["solution"]; exists {
+	if _, exists := hinted["solution"]; exists || len(hinted["clue"].(map[string]string)) != 2 {
 		t.Fatal("hint exposed answer")
 	}
+	before, _ := service.Get(id)
 	_, err = service.Hint(id)
-	checkError(t, err, 400, "Indiciul a fost deja folosit")
+	checkError(t, err, 400, "Nu mai sunt indicii disponibile.")
+	after, _ := service.Get(id)
+	if !reflect.DeepEqual(before, after) {
+		t.Fatalf("exhausted request mutated round: %#v -> %#v", before, after)
+	}
 	won, err := service.Guess(id, "d")
 	if err != nil {
 		t.Fatal(err)
 	}
-	if won["correct"] != true || won["won"] != true || won["lost"] != false || won["attempts"] != 2 || won["score"] != 650 {
+	if won["correct"] != true || won["won"] != true || won["lost"] != false || won["attempts"] != 2 || won["steps"] != 3 || won["perfect"] != false || won["score"] != 500 {
 		t.Fatalf("bad win: %#v", won)
 	}
 	if won["share"] != "cat_de_roman_esti · Intrusul\n🟩 2 încercări · indiciu" {
@@ -149,7 +160,7 @@ func TestFirstTryScoreAndThirdWrongLoss(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if won["score"] != 1000 || won["share"] != "cat_de_roman_esti · Intrusul\n🟩 1 încercare" {
+	if won["steps"] != 0 || won["perfect"] != true || won["score"] != 1000 || won["share"] != "cat_de_roman_esti · Intrusul\n🟩 1 încercare" {
 		t.Fatalf("first-try score: %#v", won)
 	}
 	lostID, _ := createGame(t, service, 52)
@@ -313,13 +324,13 @@ func TestConcurrentRepeatedWrongHintAndWin(t *testing.T) {
 				successMu.Lock()
 				hints++
 				successMu.Unlock()
-			} else if err.Detail != "Indiciul a fost deja folosit" {
+			} else if err.Detail != "Nu mai sunt indicii disponibile." {
 				t.Error(err)
 			}
 		}()
 	}
 	wg.Wait()
-	if hints != 1 {
+	if hints != 2 {
 		t.Fatalf("hint charged %d times", hints)
 	}
 	wins := 0
@@ -332,7 +343,7 @@ func TestConcurrentRepeatedWrongHintAndWin(t *testing.T) {
 				successMu.Lock()
 				wins++
 				successMu.Unlock()
-				if body["score"] != 650 {
+				if body["score"] != 500 {
 					t.Error("wrong score")
 				}
 			} else if err.Detail != "Jocul s-a terminat" {
@@ -421,5 +432,17 @@ func TestBundledReviewedContentWorksWithoutPython(t *testing.T) {
 		if err != nil || won["score"] != 1000 {
 			t.Fatalf("bundled gameplay: %#v %v", won, err)
 		}
+	}
+}
+
+func TestThemedBoardSkipsPublicIntrusulRung(t *testing.T) {
+	s := testService(t)
+	created, err := s.Create(big.NewInt(17), "", "cultura", "", false)
+	if err != nil || created["hint_level"] != 0 || created["hints_left"] != 1 {
+		t.Fatalf("themed board did not skip the public category: %#v, %v", created, err)
+	}
+	hinted, err := s.Hint(created["game_id"].(string))
+	if err != nil || hinted["hint_level"] != 2 || hinted["steps"] != 1 || hinted["hints_left"] != 0 {
+		t.Fatalf("public rung charged a step: %#v, %v", hinted, err)
 	}
 }

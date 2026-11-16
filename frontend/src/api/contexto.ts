@@ -2,6 +2,7 @@
 // Server-authoritative: the secret target is never sent until the game is won or
 // given up. All URLs are relative ("/api/..."), so they hit the SPA's origin.
 
+import type { RoundCounters } from "./round";
 import { getJson, postJson } from "./client";
 export { ApiError } from "./client";
 
@@ -72,7 +73,7 @@ export interface WarmClue {
 export type NextClueKind = "category" | "warmer";
 
 /** Full game state (GET /games/{id} and POST /games). */
-export interface ContextoState {
+export interface ContextoState extends RoundCounters {
   game_id: string;
   attempts: number;
   won: boolean;
@@ -102,7 +103,7 @@ export interface ContextoState {
 }
 
 /** A rejected guess (unknown concept) — not counted as an attempt. */
-export interface GuessRejected {
+export interface GuessRejected extends RoundCounters {
   ok: false;
   message: string;
   /** Bounded, server-filtered labels; the hidden target is never included. */
@@ -124,7 +125,7 @@ export interface GuessRejected {
 }
 
 /** An accepted guess. */
-export interface GuessAccepted {
+export interface GuessAccepted extends RoundCounters {
   ok: true;
   /** Present only when the server confidently accepted a corrected label. */
   message?: string;

@@ -1,0 +1,1860 @@
+{
+  "components": {},
+  "info": {
+    "description": "Server-authoritative word-game arcade over the Romanian knowledge graph.",
+    "title": "cat_de_roman_esti",
+    "version": "1.2.0"
+  },
+  "openapi": "3.0.3",
+  "paths": {
+    "/api/alchimie/explore": {
+      "post": {
+        "description": "APIView with FastAPI/starlette method semantics.\n\n``metadata_class = None`` disables DRF's automatic 200-with-metadata OPTIONS\nhandler, so an undeclared method (including OPTIONS outside CORS preflight)\nraises MethodNotAllowed — rendered below as the starlette-parity 405 body.",
+        "operationId": "alchimie_explore_create",
+        "responses": {
+          "200": {
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "alchimie"
+        ]
+      }
+    },
+    "/api/alchimie/explore/{game_id}": {
+      "get": {
+        "description": "APIView with FastAPI/starlette method semantics.\n\n``metadata_class = None`` disables DRF's automatic 200-with-metadata OPTIONS\nhandler, so an undeclared method (including OPTIONS outside CORS preflight)\nraises MethodNotAllowed — rendered below as the starlette-parity 405 body.",
+        "operationId": "alchimie_explore_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "game_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "alchimie"
+        ]
+      }
+    },
+    "/api/alchimie/explore/{game_id}/combine": {
+      "post": {
+        "description": "APIView with FastAPI/starlette method semantics.\n\n``metadata_class = None`` disables DRF's automatic 200-with-metadata OPTIONS\nhandler, so an undeclared method (including OPTIONS outside CORS preflight)\nraises MethodNotAllowed — rendered below as the starlette-parity 405 body.",
+        "operationId": "alchimie_explore_combine",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "game_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "alchimie"
+        ]
+      }
+    },
+    "/api/alchimie/explore/{game_id}/goal": {
+      "post": {
+        "description": "APIView with FastAPI/starlette method semantics.\n\n``metadata_class = None`` disables DRF's automatic 200-with-metadata OPTIONS\nhandler, so an undeclared method (including OPTIONS outside CORS preflight)\nraises MethodNotAllowed — rendered below as the starlette-parity 405 body.",
+        "operationId": "alchimie_explore_goal",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "game_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "alchimie"
+        ]
+      }
+    },
+    "/api/alchimie/explore/{game_id}/hint": {
+      "post": {
+        "description": "APIView with FastAPI/starlette method semantics.\n\n``metadata_class = None`` disables DRF's automatic 200-with-metadata OPTIONS\nhandler, so an undeclared method (including OPTIONS outside CORS preflight)\nraises MethodNotAllowed — rendered below as the starlette-parity 405 body.",
+        "operationId": "alchimie_explore_hint",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "game_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "alchimie"
+        ]
+      }
+    },
+    "/api/categories": {
+      "get": {
+        "description": "Category taxonomy plus broad and per-difficulty game availability.\n\n``available.<game>`` is true when the game can actually start for that\ncategory at some difficulty. ``available_by_difficulty.<game>.<difficulty>``\napplies the exact ranked selector boundary to curated shelves, then preserves\nthe existing approximate node-floor fallback for category mining.",
+        "operationId": "meta_categories",
+        "responses": {
+          "200": {
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "meta"
+        ]
+      }
+    },
+    "/api/health": {
+      "get": {
+        "description": "APIView with FastAPI/starlette method semantics.\n\n``metadata_class = None`` disables DRF's automatic 200-with-metadata OPTIONS\nhandler, so an undeclared method (including OPTIONS outside CORS preflight)\nraises MethodNotAllowed — rendered below as the starlette-parity 405 body.",
+        "operationId": "meta_health",
+        "responses": {
+          "200": {
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "meta"
+        ]
+      }
+    },
+    "/api/manifest": {
+      "get": {
+        "description": "Trust manifest for the bundled offline KG (version + schema + content hash).",
+        "operationId": "meta_manifest",
+        "responses": {
+          "200": {
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "meta"
+        ]
+      }
+    },
+    "/api/submissions": {
+      "post": {
+        "description": "APIView with FastAPI/starlette method semantics.\n\n``metadata_class = None`` disables DRF's automatic 200-with-metadata OPTIONS\nhandler, so an undeclared method (including OPTIONS outside CORS preflight)\nraises MethodNotAllowed — rendered below as the starlette-parity 405 body.",
+        "operationId": "submissions_create",
+        "responses": {
+          "200": {
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "submissions"
+        ]
+      }
+    },
+    "/api/wordgames/alchimie/games": {
+      "post": {
+        "description": "Start a new Alchimie game.\n\n``?difficulty=`` in {usor,normal,greu} tunes the target depth + seed count.\n``?daily=YYYY-MM-DD`` makes a shared, deterministic daily instance (ignores seed).\nOtherwise an optional ``?seed=`` makes the instance reproducible. Every board is\nthemed; without ``?category=`` the server deterministically selects a usable theme.",
+        "operationId": "alchimie_create_game",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "hint_level": {
+                      "description": "Highest rung used, or zero before the first hint.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "hints_left": {
+                      "description": "Remaining available rungs.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "perfect": {
+                      "description": "A win with zero steps.",
+                      "type": "boolean"
+                    },
+                    "score": {
+                      "description": "Legacy account score.",
+                      "type": "integer"
+                    },
+                    "steps": {
+                      "description": "Cumulative steps in this round.",
+                      "minimum": 0,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "alchimie"
+        ]
+      }
+    },
+    "/api/wordgames/alchimie/games/{game_id}": {
+      "get": {
+        "description": "Full current state of an existing game.",
+        "operationId": "alchimie_get_game",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "game_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "hint_level": {
+                      "description": "Highest rung used, or zero before the first hint.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "hints_left": {
+                      "description": "Remaining available rungs.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "perfect": {
+                      "description": "A win with zero steps.",
+                      "type": "boolean"
+                    },
+                    "score": {
+                      "description": "Legacy account score.",
+                      "type": "integer"
+                    },
+                    "steps": {
+                      "description": "Cumulative steps in this round.",
+                      "minimum": 0,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "alchimie"
+        ]
+      }
+    },
+    "/api/wordgames/alchimie/games/{game_id}/combine": {
+      "post": {
+        "description": "Combine two owned concepts through the session's sparse recipe projection.",
+        "operationId": "alchimie_combine",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "game_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "hint_level": {
+                      "description": "Highest rung used, or zero before the first hint.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "hints_left": {
+                      "description": "Remaining available rungs.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "perfect": {
+                      "description": "A win with zero steps.",
+                      "type": "boolean"
+                    },
+                    "score": {
+                      "description": "Legacy account score.",
+                      "type": "integer"
+                    },
+                    "steps": {
+                      "description": "Cumulative steps in this round.",
+                      "minimum": 0,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "alchimie"
+        ]
+      }
+    },
+    "/api/wordgames/alchimie/games/{game_id}/hint": {
+      "post": {
+        "description": "Reveal a single useful cue without serializing the private recipe route.",
+        "operationId": "alchimie_hint_game",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "game_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "hint_level": {
+                      "description": "Highest rung used, or zero before the first hint.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "hints_left": {
+                      "description": "Remaining available rungs.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "perfect": {
+                      "description": "A win with zero steps.",
+                      "type": "boolean"
+                    },
+                    "score": {
+                      "description": "Legacy account score.",
+                      "type": "integer"
+                    },
+                    "steps": {
+                      "description": "Cumulative steps in this round.",
+                      "minimum": 0,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "alchimie"
+        ]
+      }
+    },
+    "/api/wordgames/alchimie/games/{game_id}/reset": {
+      "post": {
+        "description": "Reset the SAME instance back to its original seed inventory (target unchanged).",
+        "operationId": "alchimie_reset_game",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "game_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "hint_level": {
+                      "description": "Highest rung used, or zero before the first hint.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "hints_left": {
+                      "description": "Remaining available rungs.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "perfect": {
+                      "description": "A win with zero steps.",
+                      "type": "boolean"
+                    },
+                    "score": {
+                      "description": "Legacy account score.",
+                      "type": "integer"
+                    },
+                    "steps": {
+                      "description": "Cumulative steps in this round.",
+                      "minimum": 0,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "alchimie"
+        ]
+      }
+    },
+    "/api/wordgames/conexiuni/games": {
+      "post": {
+        "description": "Start a game. Optional ``?category=`` serves a curated board for that theme\n(503 when unavailable — Conexiuni boards cannot be mined per-category). Dailies\nuse curated content once they meet the four-board scoped or eight-board shared\nvariety floor (ADR-0063).",
+        "operationId": "conexiuni_create_game",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "hint_level": {
+                      "description": "Highest rung used, or zero before the first hint.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "hints_left": {
+                      "description": "Remaining available rungs.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "perfect": {
+                      "description": "A win with zero steps.",
+                      "type": "boolean"
+                    },
+                    "score": {
+                      "description": "Legacy account score.",
+                      "type": "integer"
+                    },
+                    "steps": {
+                      "description": "Cumulative steps in this round.",
+                      "minimum": 0,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "conexiuni"
+        ]
+      }
+    },
+    "/api/wordgames/conexiuni/games/{game_id}": {
+      "get": {
+        "description": "APIView with FastAPI/starlette method semantics.\n\n``metadata_class = None`` disables DRF's automatic 200-with-metadata OPTIONS\nhandler, so an undeclared method (including OPTIONS outside CORS preflight)\nraises MethodNotAllowed — rendered below as the starlette-parity 405 body.",
+        "operationId": "conexiuni_get_game",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "game_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "hint_level": {
+                      "description": "Highest rung used, or zero before the first hint.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "hints_left": {
+                      "description": "Remaining available rungs.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "perfect": {
+                      "description": "A win with zero steps.",
+                      "type": "boolean"
+                    },
+                    "score": {
+                      "description": "Legacy account score.",
+                      "type": "integer"
+                    },
+                    "steps": {
+                      "description": "Cumulative steps in this round.",
+                      "minimum": 0,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "conexiuni"
+        ]
+      }
+    },
+    "/api/wordgames/conexiuni/games/{game_id}/clue": {
+      "post": {
+        "description": "APIView with FastAPI/starlette method semantics.\n\n``metadata_class = None`` disables DRF's automatic 200-with-metadata OPTIONS\nhandler, so an undeclared method (including OPTIONS outside CORS preflight)\nraises MethodNotAllowed — rendered below as the starlette-parity 405 body.",
+        "operationId": "conexiuni_clue",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "game_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "hint_level": {
+                      "description": "Highest rung used, or zero before the first hint.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "hints_left": {
+                      "description": "Remaining available rungs.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "perfect": {
+                      "description": "A win with zero steps.",
+                      "type": "boolean"
+                    },
+                    "score": {
+                      "description": "Legacy account score.",
+                      "type": "integer"
+                    },
+                    "steps": {
+                      "description": "Cumulative steps in this round.",
+                      "minimum": 0,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "conexiuni"
+        ]
+      }
+    },
+    "/api/wordgames/conexiuni/games/{game_id}/guess": {
+      "post": {
+        "description": "APIView with FastAPI/starlette method semantics.\n\n``metadata_class = None`` disables DRF's automatic 200-with-metadata OPTIONS\nhandler, so an undeclared method (including OPTIONS outside CORS preflight)\nraises MethodNotAllowed — rendered below as the starlette-parity 405 body.",
+        "operationId": "conexiuni_guess",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "game_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "hint_level": {
+                      "description": "Highest rung used, or zero before the first hint.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "hints_left": {
+                      "description": "Remaining available rungs.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "perfect": {
+                      "description": "A win with zero steps.",
+                      "type": "boolean"
+                    },
+                    "score": {
+                      "description": "Legacy account score.",
+                      "type": "integer"
+                    },
+                    "steps": {
+                      "description": "Cumulative steps in this round.",
+                      "minimum": 0,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "conexiuni"
+        ]
+      }
+    },
+    "/api/wordgames/contexto/games": {
+      "post": {
+        "description": "Start a game. Optional ``?category=`` prefers a curated target for that\ntheme and otherwise mines within the category. Dailies use curated content\nonce they meet the four-board scoped or eight-board shared variety floor\n(ADR-0063). For a signed-in player, curated instances they have already\nfinished are excluded (dailies are exempt).",
+        "operationId": "contexto_create_game",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "hint_level": {
+                      "description": "Highest rung used, or zero before the first hint.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "hints_left": {
+                      "description": "Remaining available rungs.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "score": {
+                      "description": "Legacy account score.",
+                      "type": "integer"
+                    },
+                    "steps": {
+                      "description": "Cumulative steps in this round.",
+                      "minimum": 0,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "contexto"
+        ]
+      }
+    },
+    "/api/wordgames/contexto/games/{game_id}": {
+      "get": {
+        "description": "APIView with FastAPI/starlette method semantics.\n\n``metadata_class = None`` disables DRF's automatic 200-with-metadata OPTIONS\nhandler, so an undeclared method (including OPTIONS outside CORS preflight)\nraises MethodNotAllowed — rendered below as the starlette-parity 405 body.",
+        "operationId": "contexto_get_game",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "game_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "hint_level": {
+                      "description": "Highest rung used, or zero before the first hint.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "hints_left": {
+                      "description": "Remaining available rungs.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "score": {
+                      "description": "Legacy account score.",
+                      "type": "integer"
+                    },
+                    "steps": {
+                      "description": "Cumulative steps in this round.",
+                      "minimum": 0,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "contexto"
+        ]
+      }
+    },
+    "/api/wordgames/contexto/games/{game_id}/clue": {
+      "post": {
+        "description": "APIView with FastAPI/starlette method semantics.\n\n``metadata_class = None`` disables DRF's automatic 200-with-metadata OPTIONS\nhandler, so an undeclared method (including OPTIONS outside CORS preflight)\nraises MethodNotAllowed — rendered below as the starlette-parity 405 body.",
+        "operationId": "contexto_clue",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "game_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "hint_level": {
+                      "description": "Highest rung used, or zero before the first hint.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "hints_left": {
+                      "description": "Remaining available rungs.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "score": {
+                      "description": "Legacy account score.",
+                      "type": "integer"
+                    },
+                    "steps": {
+                      "description": "Cumulative steps in this round.",
+                      "minimum": 0,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "contexto"
+        ]
+      }
+    },
+    "/api/wordgames/contexto/games/{game_id}/giveup": {
+      "post": {
+        "description": "APIView with FastAPI/starlette method semantics.\n\n``metadata_class = None`` disables DRF's automatic 200-with-metadata OPTIONS\nhandler, so an undeclared method (including OPTIONS outside CORS preflight)\nraises MethodNotAllowed — rendered below as the starlette-parity 405 body.",
+        "operationId": "contexto_give_up",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "game_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "hint_level": {
+                      "description": "Highest rung used, or zero before the first hint.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "hints_left": {
+                      "description": "Remaining available rungs.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "score": {
+                      "description": "Legacy account score.",
+                      "type": "integer"
+                    },
+                    "steps": {
+                      "description": "Cumulative steps in this round.",
+                      "minimum": 0,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "contexto"
+        ]
+      }
+    },
+    "/api/wordgames/contexto/games/{game_id}/guess": {
+      "post": {
+        "description": "APIView with FastAPI/starlette method semantics.\n\n``metadata_class = None`` disables DRF's automatic 200-with-metadata OPTIONS\nhandler, so an undeclared method (including OPTIONS outside CORS preflight)\nraises MethodNotAllowed — rendered below as the starlette-parity 405 body.",
+        "operationId": "contexto_guess",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "game_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "hint_level": {
+                      "description": "Highest rung used, or zero before the first hint.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "hints_left": {
+                      "description": "Remaining available rungs.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "score": {
+                      "description": "Legacy account score.",
+                      "type": "integer"
+                    },
+                    "steps": {
+                      "description": "Cumulative steps in this round.",
+                      "minimum": 0,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "contexto"
+        ]
+      }
+    },
+    "/api/wordgames/intrusul/games": {
+      "post": {
+        "description": "APIView with FastAPI/starlette method semantics.\n\n``metadata_class = None`` disables DRF's automatic 200-with-metadata OPTIONS\nhandler, so an undeclared method (including OPTIONS outside CORS preflight)\nraises MethodNotAllowed — rendered below as the starlette-parity 405 body.",
+        "operationId": "intrusul_create_game",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "hint_level": {
+                      "description": "Highest rung used, or zero before the first hint.",
+                      "maximum": 2,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "hints_left": {
+                      "description": "Remaining available rungs.",
+                      "maximum": 2,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "perfect": {
+                      "description": "A win with zero steps.",
+                      "type": "boolean"
+                    },
+                    "score": {
+                      "description": "Legacy account score.",
+                      "type": "integer"
+                    },
+                    "steps": {
+                      "description": "Cumulative steps in this round.",
+                      "minimum": 0,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "intrusul"
+        ]
+      }
+    },
+    "/api/wordgames/intrusul/games/{game_id}": {
+      "get": {
+        "description": "APIView with FastAPI/starlette method semantics.\n\n``metadata_class = None`` disables DRF's automatic 200-with-metadata OPTIONS\nhandler, so an undeclared method (including OPTIONS outside CORS preflight)\nraises MethodNotAllowed — rendered below as the starlette-parity 405 body.",
+        "operationId": "intrusul_get_game",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "game_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "hint_level": {
+                      "description": "Highest rung used, or zero before the first hint.",
+                      "maximum": 2,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "hints_left": {
+                      "description": "Remaining available rungs.",
+                      "maximum": 2,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "perfect": {
+                      "description": "A win with zero steps.",
+                      "type": "boolean"
+                    },
+                    "score": {
+                      "description": "Legacy account score.",
+                      "type": "integer"
+                    },
+                    "steps": {
+                      "description": "Cumulative steps in this round.",
+                      "minimum": 0,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "intrusul"
+        ]
+      }
+    },
+    "/api/wordgames/intrusul/games/{game_id}/guess": {
+      "post": {
+        "description": "APIView with FastAPI/starlette method semantics.\n\n``metadata_class = None`` disables DRF's automatic 200-with-metadata OPTIONS\nhandler, so an undeclared method (including OPTIONS outside CORS preflight)\nraises MethodNotAllowed — rendered below as the starlette-parity 405 body.",
+        "operationId": "intrusul_guess",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "game_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "hint_level": {
+                      "description": "Highest rung used, or zero before the first hint.",
+                      "maximum": 2,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "hints_left": {
+                      "description": "Remaining available rungs.",
+                      "maximum": 2,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "perfect": {
+                      "description": "A win with zero steps.",
+                      "type": "boolean"
+                    },
+                    "score": {
+                      "description": "Legacy account score.",
+                      "type": "integer"
+                    },
+                    "steps": {
+                      "description": "Cumulative steps in this round.",
+                      "minimum": 0,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "intrusul"
+        ]
+      }
+    },
+    "/api/wordgames/intrusul/games/{game_id}/hint": {
+      "post": {
+        "description": "APIView with FastAPI/starlette method semantics.\n\n``metadata_class = None`` disables DRF's automatic 200-with-metadata OPTIONS\nhandler, so an undeclared method (including OPTIONS outside CORS preflight)\nraises MethodNotAllowed — rendered below as the starlette-parity 405 body.",
+        "operationId": "intrusul_hint",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "game_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "hint_level": {
+                      "description": "Highest rung used, or zero before the first hint.",
+                      "maximum": 2,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "hints_left": {
+                      "description": "Remaining available rungs.",
+                      "maximum": 2,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "perfect": {
+                      "description": "A win with zero steps.",
+                      "type": "boolean"
+                    },
+                    "score": {
+                      "description": "Legacy account score.",
+                      "type": "integer"
+                    },
+                    "steps": {
+                      "description": "Cumulative steps in this round.",
+                      "minimum": 0,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "intrusul"
+        ]
+      }
+    },
+    "/api/wordgames/lant/games": {
+      "post": {
+        "description": "Start a game. Optional ``?category=`` prefers a curated pair for that\ntheme and otherwise mines with both endpoints inside the category. Dailies\nuse curated content once they meet the four-board scoped or eight-board shared\nvariety floor (ADR-0063).",
+        "operationId": "lant_create_game",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "hint_level": {
+                      "description": "Highest rung used, or zero before the first hint.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "hints_left": {
+                      "description": "Remaining available rungs.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "perfect": {
+                      "description": "A win with zero steps.",
+                      "type": "boolean"
+                    },
+                    "score": {
+                      "description": "Legacy account score.",
+                      "type": "integer"
+                    },
+                    "steps": {
+                      "description": "Cumulative steps in this round.",
+                      "minimum": 0,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "lant"
+        ]
+      }
+    },
+    "/api/wordgames/lant/games/{game_id}": {
+      "get": {
+        "description": "APIView with FastAPI/starlette method semantics.\n\n``metadata_class = None`` disables DRF's automatic 200-with-metadata OPTIONS\nhandler, so an undeclared method (including OPTIONS outside CORS preflight)\nraises MethodNotAllowed — rendered below as the starlette-parity 405 body.",
+        "operationId": "lant_get_game",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "game_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "hint_level": {
+                      "description": "Highest rung used, or zero before the first hint.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "hints_left": {
+                      "description": "Remaining available rungs.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "perfect": {
+                      "description": "A win with zero steps.",
+                      "type": "boolean"
+                    },
+                    "score": {
+                      "description": "Legacy account score.",
+                      "type": "integer"
+                    },
+                    "steps": {
+                      "description": "Cumulative steps in this round.",
+                      "minimum": 0,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "lant"
+        ]
+      }
+    },
+    "/api/wordgames/lant/games/{game_id}/giveup": {
+      "post": {
+        "description": "Give up an eligible curated daily Lanț round with board comparison enabled.",
+        "operationId": "lant_giveup",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "game_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "hint_level": {
+                      "description": "Highest rung used, or zero before the first hint.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "hints_left": {
+                      "description": "Remaining available rungs.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "perfect": {
+                      "description": "A win with zero steps.",
+                      "type": "boolean"
+                    },
+                    "score": {
+                      "description": "Legacy account score.",
+                      "type": "integer"
+                    },
+                    "steps": {
+                      "description": "Cumulative steps in this round.",
+                      "minimum": 0,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "lant"
+        ]
+      }
+    },
+    "/api/wordgames/lant/games/{game_id}/hint": {
+      "post": {
+        "description": "APIView with FastAPI/starlette method semantics.\n\n``metadata_class = None`` disables DRF's automatic 200-with-metadata OPTIONS\nhandler, so an undeclared method (including OPTIONS outside CORS preflight)\nraises MethodNotAllowed — rendered below as the starlette-parity 405 body.",
+        "operationId": "lant_hint",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "game_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "hint_level": {
+                      "description": "Highest rung used, or zero before the first hint.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "hints_left": {
+                      "description": "Remaining available rungs.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "perfect": {
+                      "description": "A win with zero steps.",
+                      "type": "boolean"
+                    },
+                    "score": {
+                      "description": "Legacy account score.",
+                      "type": "integer"
+                    },
+                    "steps": {
+                      "description": "Cumulative steps in this round.",
+                      "minimum": 0,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "lant"
+        ]
+      }
+    },
+    "/api/wordgames/lant/games/{game_id}/move": {
+      "post": {
+        "description": "APIView with FastAPI/starlette method semantics.\n\n``metadata_class = None`` disables DRF's automatic 200-with-metadata OPTIONS\nhandler, so an undeclared method (including OPTIONS outside CORS preflight)\nraises MethodNotAllowed — rendered below as the starlette-parity 405 body.",
+        "operationId": "lant_move",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "game_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "hint_level": {
+                      "description": "Highest rung used, or zero before the first hint.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "hints_left": {
+                      "description": "Remaining available rungs.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "perfect": {
+                      "description": "A win with zero steps.",
+                      "type": "boolean"
+                    },
+                    "score": {
+                      "description": "Legacy account score.",
+                      "type": "integer"
+                    },
+                    "steps": {
+                      "description": "Cumulative steps in this round.",
+                      "minimum": 0,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "lant"
+        ]
+      }
+    },
+    "/api/wordgames/lant/games/{game_id}/undo": {
+      "post": {
+        "description": "APIView with FastAPI/starlette method semantics.\n\n``metadata_class = None`` disables DRF's automatic 200-with-metadata OPTIONS\nhandler, so an undeclared method (including OPTIONS outside CORS preflight)\nraises MethodNotAllowed — rendered below as the starlette-parity 405 body.",
+        "operationId": "lant_undo",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "game_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "hint_level": {
+                      "description": "Highest rung used, or zero before the first hint.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "hints_left": {
+                      "description": "Remaining available rungs.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "perfect": {
+                      "description": "A win with zero steps.",
+                      "type": "boolean"
+                    },
+                    "score": {
+                      "description": "Legacy account score.",
+                      "type": "integer"
+                    },
+                    "steps": {
+                      "description": "Cumulative steps in this round.",
+                      "minimum": 0,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "lant"
+        ]
+      }
+    },
+    "/api/wordgames/perechi/games": {
+      "post": {
+        "description": "APIView with FastAPI/starlette method semantics.\n\n``metadata_class = None`` disables DRF's automatic 200-with-metadata OPTIONS\nhandler, so an undeclared method (including OPTIONS outside CORS preflight)\nraises MethodNotAllowed — rendered below as the starlette-parity 405 body.",
+        "operationId": "perechi_create_game",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "hint_level": {
+                      "description": "Highest rung used, or zero before the first hint.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "hints_left": {
+                      "description": "Remaining available rungs.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "perfect": {
+                      "description": "A win with zero steps.",
+                      "type": "boolean"
+                    },
+                    "score": {
+                      "description": "Legacy account score.",
+                      "type": "integer"
+                    },
+                    "steps": {
+                      "description": "Cumulative steps in this round.",
+                      "minimum": 0,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "perechi"
+        ]
+      }
+    },
+    "/api/wordgames/perechi/games/{game_id}": {
+      "get": {
+        "description": "APIView with FastAPI/starlette method semantics.\n\n``metadata_class = None`` disables DRF's automatic 200-with-metadata OPTIONS\nhandler, so an undeclared method (including OPTIONS outside CORS preflight)\nraises MethodNotAllowed — rendered below as the starlette-parity 405 body.",
+        "operationId": "perechi_get_game",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "game_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "hint_level": {
+                      "description": "Highest rung used, or zero before the first hint.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "hints_left": {
+                      "description": "Remaining available rungs.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "perfect": {
+                      "description": "A win with zero steps.",
+                      "type": "boolean"
+                    },
+                    "score": {
+                      "description": "Legacy account score.",
+                      "type": "integer"
+                    },
+                    "steps": {
+                      "description": "Cumulative steps in this round.",
+                      "minimum": 0,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "perechi"
+        ]
+      }
+    },
+    "/api/wordgames/perechi/games/{game_id}/hint": {
+      "post": {
+        "description": "APIView with FastAPI/starlette method semantics.\n\n``metadata_class = None`` disables DRF's automatic 200-with-metadata OPTIONS\nhandler, so an undeclared method (including OPTIONS outside CORS preflight)\nraises MethodNotAllowed — rendered below as the starlette-parity 405 body.",
+        "operationId": "perechi_hint",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "game_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "hint_level": {
+                      "description": "Highest rung used, or zero before the first hint.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "hints_left": {
+                      "description": "Remaining available rungs.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "perfect": {
+                      "description": "A win with zero steps.",
+                      "type": "boolean"
+                    },
+                    "score": {
+                      "description": "Legacy account score.",
+                      "type": "integer"
+                    },
+                    "steps": {
+                      "description": "Cumulative steps in this round.",
+                      "minimum": 0,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "perechi"
+        ]
+      }
+    },
+    "/api/wordgames/perechi/games/{game_id}/match": {
+      "post": {
+        "description": "APIView with FastAPI/starlette method semantics.\n\n``metadata_class = None`` disables DRF's automatic 200-with-metadata OPTIONS\nhandler, so an undeclared method (including OPTIONS outside CORS preflight)\nraises MethodNotAllowed — rendered below as the starlette-parity 405 body.",
+        "operationId": "perechi_match",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "game_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "hint_level": {
+                      "description": "Highest rung used, or zero before the first hint.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "hints_left": {
+                      "description": "Remaining available rungs.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "perfect": {
+                      "description": "A win with zero steps.",
+                      "type": "boolean"
+                    },
+                    "score": {
+                      "description": "Legacy account score.",
+                      "type": "integer"
+                    },
+                    "steps": {
+                      "description": "Cumulative steps in this round.",
+                      "minimum": 0,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "perechi"
+        ]
+      }
+    }
+  }
+}

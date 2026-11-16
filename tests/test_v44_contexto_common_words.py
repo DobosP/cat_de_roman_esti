@@ -30,7 +30,8 @@ from cat_de_roman_esti.graph import Graph  # noqa: E402
 from cat_de_roman_esti.wordgames.contexto import (  # noqa: E402
     _build_session,
     _score_feedback,
-    _warmer_clue_candidate,
+    _warm_candidates,
+    _warm_clue_at,
     rank_for,
     store,
 )
@@ -354,13 +355,13 @@ def test_warmer_clue_uses_playable_proxy_rank_and_never_repeats_its_anchor() -> 
     played = _post_guess(client, game_id, "Șosetă")
     assert played["guess"]["rank"] == 8
 
-    clue = _warmer_clue_candidate(session)
+    clue = _warm_clue_at(_warm_candidates(session), 3, None)
     assert clue is not None
     assert clue.label != "Șosetă"
     hinted = _post_guess(client, game_id, clue.label)
     assert hinted["guess"]["rank"] == clue.rank
 
-    again = _warmer_clue_candidate(session)
+    again = _warm_clue_at(_warm_candidates(session), 3, None)
     if again is not None:
         assert again.label not in {"Șosetă", clue.label}
         again_id = get_service().resolve(again.label)

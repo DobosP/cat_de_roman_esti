@@ -98,9 +98,6 @@ MIN_REACHABLE = 120
 RESPONSIVE_MAX_HOPS = 5
 MIN_RESPONSIVE = 40
 
-# A clue should help a stuck player without making the opening trivial. It reveals only
-# the target's broad KG category, never the hidden id/label/description.
-MIN_CLUE_ATTEMPTS = 3
 CLUE_SCORE_PENALTY = 120
 WARM_CLUE_MIN_SALIENCE = 0.55
 
@@ -166,8 +163,8 @@ class ContextoSession:
     # ``clue_revealed`` retains its historical meaning: the category clue was used.
     clue_revealed: bool = False
     warm_clue: WarmClue | None = None
-    warm_clue_exhausted: bool = False
     clues_used: int = 0
+    hint_level: int = 0
     difficulty: str = _DEFAULT_DIFFICULTY
     daily: str | None = None
     # Player-picked board theme + curated-pack provenance (None for mined games).
@@ -711,63 +708,76 @@ def _best_played_rank(session: ContextoSession) -> int:
     return min((guess.rank for guess in session.guesses.values()), default=session.reachable + 1)
 
 
-def _warmer_clue_candidate(session: ContextoSession) -> WarmClue | None:
-    """Best deterministic non-target word strictly warmer than the player's best.
-
-    The target and rank 1 are hard excluded. Already-played semantic anchors are also
-    excluded, so a broad projected guess is never "hinted" back as its KG label.
-    """
-
-    if session.warm_clue is not None or session.warm_clue_exhausted:
-        return None
-    best_rank = _best_played_rank(session)
-    if best_rank <= 2:
-        return None
+def _warm_candidates(session: ContextoSession) -> list[tuple[int, float, str, str]]:
+    """Rank reachable and unplayed candidates, excluding target identities and proxies."""
     svc = get_service()
+    target_label = normalize(svc.label(session.target))
     played_anchors = {guess.anchor_id for guess in session.guesses.values()}
     hop_dist = svc.distances_to(session.target)
-    candidates: list[tuple[int, float, str, str]] = []
+    best_rank = _best_played_rank(session)
+    candidates = []
     for node_id in hop_dist:
         if node_id == session.target:
             continue
         score = _score_feedback(svc, session, node_id, distances=hop_dist)
-        if score.anchor_id in played_anchors:
+        if score.anchor_id in played_anchors or not 1 < score.rank < min(151, best_rank):
             continue
-        if not 1 < score.rank < best_rank:
+        label = svc.label(node_id)
+        if not label or normalize(label) == target_label:
             continue
         node = svc.node(node_id)
-        candidates.append(
-            (
-                score.rank,
-                node.salience if node is not None else 0.0,
-                svc.label(node_id),
-                node_id,
-            )
-        )
-    candidates.sort(key=lambda item: (item[0], -item[1], item[2].casefold(), item[3]))
+        candidates.append((score.rank, node.salience if node is not None else 0.0, label, node_id))
+    return candidates
 
-    def first_safe(*, familiar_only: bool) -> WarmClue | None:
-        for rank, salience, label, _node_id in candidates:
-            if familiar_only and salience < WARM_CLUE_MIN_SALIENCE:
-                continue
-            return WarmClue(label=label, rank=rank)
+
+def _warm_clue_at(
+    candidates: list[tuple[int, float, str, str]], level: int, previous: WarmClue | None
+) -> WarmClue | None:
+    if level == 2:
+        # Prefer a warm word outside the final rung's range. With only hot words
+        # available, leave room for the hotter rung by picking the least close.
+        eligible = [item for item in candidates if item[0] > 25]
+        reverse_rank = not eligible
+        eligible = eligible or candidates
+    else:
+        eligible = [
+            item for item in candidates
+            if item[0] <= 25 and (previous is None or item[0] < previous.rank)
+        ]
+        reverse_rank = False
+    if not eligible:
         return None
+    rank, _, label, _ = min(
+        eligible,
+        key=lambda item: (
+            item[1] < WARM_CLUE_MIN_SALIENCE,
+            -item[0] if reverse_rank else item[0],
+            -item[1],
+            item[2].casefold(),
+            item[3],
+        ),
+    )
+    return WarmClue(label=label, rank=rank)
 
-    # Prefer a recognisable word even when an obscure node happens to rank a little
-    # better. Fall back only when no familiar safe improvement exists.
-    return first_safe(familiar_only=True) or first_safe(familiar_only=False)
 
-
-def _next_clue_kind(session: ContextoSession) -> str | None:
-    if session.won or session.gave_up or session.attempts < MIN_CLUE_ATTEMPTS:
-        return None
-    if not session.clue_revealed and session.category is None:
-        return "category"
-    # Advertise the warmer stage only when an actual unplayed non-target candidate
-    # exists. A projected rank-3 guess may already own the sole rank-2 anchor.
-    if _warmer_clue_candidate(session) is not None:
-        return "warmer"
-    return None
+def _next_clues(session: ContextoSession) -> list[tuple[int, WarmClue | None]]:
+    if session.won or session.gave_up or session.hint_level == 3:
+        return []
+    clues: list[tuple[int, WarmClue | None]] = []
+    if session.hint_level == 0 and session.category is None:
+        category = _category_clue_payload(session)["category"]
+        if category["key"] and normalize(category["label"]) != normalize(
+            get_service().label(session.target)
+        ):
+            clues.append((1, None))
+    candidates = _warm_candidates(session)
+    prev = session.warm_clue
+    for level in range(max(2, session.hint_level + 1), 4):
+        clue = _warm_clue_at(candidates, level, prev)
+        if clue is not None:
+            clues.append((level, clue))
+            prev = clue
+    return clues
 
 
 def _warm_clue_payload(clue: WarmClue) -> dict:
@@ -779,13 +789,16 @@ def _warm_clue_payload(clue: WarmClue) -> dict:
 
 
 def _clue_view(session: ContextoSession) -> dict:
-    next_clue_kind = _next_clue_kind(session)
+    next_clues = _next_clues(session)
     body: dict = {
+        "steps": session.attempts + session.clues_used,
+        "hints_left": len(next_clues),
+        "hint_level": session.hint_level,
         "clues_used": session.clues_used,
-        "clue_available": next_clue_kind is not None,
+        "clue_available": bool(next_clues),
     }
-    if next_clue_kind is not None:
-        body["next_clue_kind"] = next_clue_kind
+    if next_clues:
+        body["next_clue_kind"] = "category" if next_clues[0][0] == 1 else "warmer"
     if session.clue_revealed:
         body["clue"] = _category_clue_payload(session)
     if session.warm_clue is not None:
@@ -842,6 +855,7 @@ class CreateGameView(ContractAPIView):
         if category is not None and not is_known(category):
             raise http_error(400, "Categorie necunoscută.")
         if daily is not None:
+            difficulty, category = "usor", None
             seed = daily_seed(daily, GAME_KEY)
             curated = get_pack().pick_daily(
                 GAME_KEY,
@@ -1096,27 +1110,19 @@ class ClueView(ContractAPIView):
     def post(self, request, game_id: str, session: ContextoSession):
         if session.won or session.gave_up:
             raise http_error(400, "Jocul s-a terminat")
-        if session.attempts < MIN_CLUE_ATTEMPTS:
-            need = MIN_CLUE_ATTEMPTS - session.attempts
-            raise http_error(
-                400,
-                f"Mai încearcă {need} {'concept' if need == 1 else 'concepte'} înainte de indiciu.",
-            )
-        if not session.clue_revealed and session.category is None:
-            clue_kind = "category"
+        clues = _next_clues(session)
+        if not clues:
+            raise http_error(400, "Nu mai sunt indicii disponibile.")
+        level, clue = clues[0]
+        session.hint_level = level
+        session.clues_used += 1
+        if clue is None:
             session.clue_revealed = True
-            session.clues_used += 1
-            direct = {"clue_kind": clue_kind, **_category_clue_payload(session)}
+            direct = {"clue_kind": "category", **_category_clue_payload(session)}
         else:
-            clue = _warmer_clue_candidate(session)
-            if clue is None:
-                session.warm_clue_exhausted = True
-                raise http_error(400, "Nu mai există un indiciu sigur mai cald.")
-            clue_kind = "warmer"
             session.warm_clue = clue
-            session.clues_used += 1
             direct = {
-                "clue_kind": clue_kind,
+                "clue_kind": "warmer",
                 "word": _warm_clue_payload(clue),
                 "message": f"Mai cald: {clue.label}.",
             }

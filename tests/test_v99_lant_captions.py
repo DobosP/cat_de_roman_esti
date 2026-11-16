@@ -165,7 +165,11 @@ def test_v99_meaningful_first_hint_is_earned_and_restored_without_a_hop():
         assert hint["relation"] in visible_relations
         assert hint["relation"] != "legătură directă"
         saved = client.get(url).json()
-        assert saved["earned_hint"] == hint
+        assert saved["earned_hint"] == {
+            key: value for key, value in hint.items()
+            if key not in {"steps", "perfect", "hint_level", "hints_left"}
+        }
+        assert saved["steps"] == hint["steps"] == 1
         assert saved["path"] == state["path"] and saved["moves"] == 0
     finally:
         lant.store.delete(gid)

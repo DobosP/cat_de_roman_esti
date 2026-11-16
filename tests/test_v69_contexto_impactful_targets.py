@@ -156,27 +156,25 @@ def test_contexto_create_opts_into_filtered_shelf_weights_for_seeded_and_daily()
     assert target == impact.payload["target"]
     assert target != legacy.payload["target"]
 
-    daily_case = None
+    # The private themed selector still weights eligible shelves. The public
+    # daily route now uses the shared easy shelf regardless of its query filter.
     for offset in range(366):
         day = (date(2026, 1, 1) + timedelta(days=offset)).isoformat()
-        legacy = pack.pick_daily("contexto", day, **filters)
-        impact = pack.pick_daily(
-            "contexto",
-            day,
-            filtered_shelf_weights=True,
-            **filters,
-        )
-        assert legacy is not None and impact is not None
-        if legacy.id != impact.id:
-            daily_case = (day, legacy, impact)
+        legacy_daily = pack.pick_daily("contexto", day, **filters)
+        themed_daily = pack.pick_daily("contexto", day, filtered_shelf_weights=True, **filters)
+        assert legacy_daily is not None and themed_daily is not None
+        if legacy_daily.id != themed_daily.id:
             break
-    assert daily_case is not None
-    day, legacy, impact = daily_case
+    else:
+        raise AssertionError("No themed day demonstrated the weighted selection")
+    global_daily = pack.pick_daily(
+        "contexto", day, difficulty="usor", filtered_shelf_weights=True
+    )
+    assert global_daily is not None
     target = _revealed_target(
         Client(),
         f"/api/wordgames/contexto/games?daily={day}&category=muzica&difficulty=usor",
     )
-    assert target == impact.payload["target"]
-    assert target != legacy.payload["target"]
+    assert target == global_daily.payload["target"]
     assert store._ttl == 7200
     assert store._max == 1000

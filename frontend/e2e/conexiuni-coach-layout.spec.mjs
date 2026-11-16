@@ -3,6 +3,13 @@ import { applyDoubledText } from "./fixture-text-size.mjs";
 import { games, deterministicStarts, start } from "./games.mjs";
 
 const game = games.find(({ key }) => key === "conexiuni");
+const messages = [
+  "Alege patru cuvinte care merg împreună.",
+  "Mai alege 3.",
+  "Mai alege 2.",
+  "Mai alege 1.",
+  "Grup gata de verificat.",
+];
 
 for (const width of [320, 390]) for (const textScale of [1, 2]) {
   test(`selection and remaining mistakes never overlap at ${width}px and ${textScale * 100}% text`, async ({ page }) => {
@@ -11,27 +18,38 @@ for (const width of [320, 390]) for (const textScale of [1, 2]) {
     await start(page, game);
     if (textScale === 2) await applyDoubledText(page);
     await page.evaluate(() => globalThis.document.fonts.ready);
-    for (const selected of [0, 1, 2, 3, 4]) {
-      if (selected) await page.locator(".connections-grid button").nth(selected - 1).click();
-      await expect(page.locator(".next-move-progress")).toHaveText(`${selected}/4`);
-      await expect(page.getByRole("img", { name: "4 greșeli disponibile", exact: true })).toBeVisible();
-      const boxes = await page.locator(".connections-coach").evaluate((element) => ({
-        parent: element.getBoundingClientRect().toJSON(),
-        parts: [...element.querySelectorAll(":scope > span:not(.next-move-icon)")].map((part) => ({
+    const board = page.locator(".connections-grid");
+    const frame = page.locator(".game-frame");
+    const status = frame.locator(".game-frame-status");
+    const coach = frame.locator(".coach-line");
+    for (const [selected, message] of messages.entries()) {
+      if (selected) await board.getByRole("button").nth(selected - 1).click();
+      await expect(board.locator('button[aria-pressed="true"]')).toHaveCount(selected);
+      await expect(coach).toHaveText(message);
+      await expect(status.getByText("4 încercări", { exact: true })).toBeVisible();
+      const boxes = await frame.evaluate((element) => {
+        const band = element.querySelector(".game-frame-status");
+        const coachLine = element.querySelector(".coach-line");
+        const box = (part) => ({
           rect: part.getBoundingClientRect().toJSON(), client: part.clientWidth, scroll: part.scrollWidth,
-        })),
-      }));
-      for (const { rect, client, scroll } of boxes.parts) {
+        });
+        return {
+          frame: element.getBoundingClientRect().toJSON(), band: box(band), coach: box(coachLine),
+          counters: [...band.children].map(box),
+        };
+      });
+      const bounded = ({ rect, client, scroll }, parent) => {
         expect(rect.width).toBeGreaterThan(35);
-        expect(rect.left).toBeGreaterThanOrEqual(boxes.parent.left);
-        expect(rect.right).toBeLessThanOrEqual(boxes.parent.right);
+        expect(rect.left).toBeGreaterThanOrEqual(parent.left);
+        expect(rect.right).toBeLessThanOrEqual(parent.right);
         expect(scroll).toBeLessThanOrEqual(client + 1);
-      }
-      for (let a = 0; a < boxes.parts.length; a += 1) for (let b = a + 1; b < boxes.parts.length; b += 1) {
-        const first = boxes.parts[a].rect, second = boxes.parts[b].rect;
-        const overlaps = first.left < second.right && second.left < first.right && first.top < second.bottom && second.top < first.bottom;
-        expect(overlaps, `parts ${a} and ${b} must stay separate`).toBe(false);
-      }
+      };
+      bounded(boxes.coach, boxes.frame);
+      for (const counter of boxes.counters) bounded(counter, boxes.band.rect);
+      expect(boxes.band.rect.bottom).toBeLessThanOrEqual(boxes.coach.rect.top);
+      const [attempts, mode] = boxes.counters.map(({ rect }) => rect);
+      expect(attempts.left < mode.right && mode.left < attempts.right &&
+        attempts.top < mode.bottom && mode.top < attempts.bottom).toBe(false);
       expect(await page.locator(".connections-screen").evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(true);
     }
   });

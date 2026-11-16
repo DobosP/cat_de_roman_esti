@@ -9,6 +9,7 @@ import (
 
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/catalog"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
+	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/gameapi"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/pyrandom"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/session"
 )
@@ -28,27 +29,27 @@ type Error struct {
 func (e *Error) Error() string { return fmt.Sprint(e.Detail) }
 
 type gameSession struct {
+	boardObservation                gameapi.TerminalObservation
 	members                         []string
 	intruder, groupLabel            string
 	order                           []string
 	difficulty, sourceID, catalogID string
 	sourceRing                      []string
-	daily, category                 string
+	daily, category, boardCategory  string
 	wrongIDs                        []string
 	attempts                        int
-	hintUsed, won, lost             bool
+	hintLevel, hintsUsed            int
+	won, lost                       bool
 }
 
 func (s *gameSession) finished() bool { return s.won || s.lost }
+func (s *gameSession) steps() int     { return len(s.wrongIDs) + s.hintsUsed }
 
 func (s *gameSession) score() int {
 	if !s.won {
 		return 0
 	}
-	result := 1000 - 200*len(s.wrongIDs)
-	if s.hintUsed {
-		result -= 150
-	}
+	result := 1000 - 200*len(s.wrongIDs) - 150*s.hintsUsed
 	if result < 100 {
 		return 100
 	}
@@ -120,7 +121,7 @@ func build(board *content.Board, rng *pyrandom.Random, daily, category string, p
 	if len(ring) > SourceRingLimit {
 		ring = ring[len(ring)-SourceRingLimit:]
 	}
-	return &gameSession{members: members, intruder: intruder, groupLabel: group, order: order, difficulty: board.Difficulty, sourceID: board.SourceID, catalogID: board.CatalogID, sourceRing: ring, daily: daily, category: category, wrongIDs: []string{}}, nil
+	return &gameSession{members: members, intruder: intruder, groupLabel: group, order: order, difficulty: board.Difficulty, sourceID: board.SourceID, catalogID: board.CatalogID, sourceRing: ring, daily: daily, category: category, boardCategory: board.Category, wrongIDs: []string{}}, nil
 }
 
 func (s *Service) Create(seed *big.Int, daily, category, previous string, starter bool) (map[string]any, *Error) {
@@ -215,7 +216,7 @@ func (s *Service) share(game *gameSession) string {
 		attemptWord = "încercare"
 	}
 	detail := fmt.Sprintf("%s %d %s", result, game.attempts, attemptWord)
-	if game.hintUsed {
+	if game.hintsUsed > 0 {
 		detail += " · indiciu"
 	}
 	share := header + "\n" + detail
@@ -225,25 +226,45 @@ func (s *Service) share(game *gameSession) string {
 	return share
 }
 
+func (s *Service) clue(game *gameSession, level int) map[string]string {
+	theme := s.content.CategoryLabels[game.boardCategory]
+	switch level {
+	case 1:
+		if theme != "" && !strings.EqualFold(theme, game.groupLabel) && !strings.EqualFold(theme, s.content.CategoryLabels[game.category]) {
+			return map[string]string{"label": theme, "message": "Tema tablei: " + theme + "."}
+		}
+	case 2:
+		if game.groupLabel != "" && !strings.EqualFold(s.content.CategoryLabels[game.category], game.groupLabel) {
+			return map[string]string{"label": game.groupLabel, "message": "Trei cuvinte țin de: " + game.groupLabel + "."}
+		}
+	}
+	return nil
+}
+
 func (s *Service) state(id string, game *gameSession) map[string]any {
 	remaining := MaxMistakes - len(game.wrongIDs)
 	if remaining < 0 {
 		remaining = 0
 	}
-	hints := 0
-	if game.hintUsed {
-		hints = 1
+	hintsLeft := 0
+	if !game.finished() {
+		for level := game.hintLevel + 1; level <= 2; level++ {
+			if s.clue(game, level) != nil {
+				hintsLeft++
+			}
+		}
 	}
 	wrong := append([]string{}, game.wrongIDs...)
-	body := map[string]any{"game_id": id, "tiles": s.concepts(game.order), "wrong_ids": wrong, "attempts": game.attempts, "mistakes": len(wrong), "remaining_mistakes": remaining, "won": game.won, "lost": game.lost, "difficulty": game.difficulty, "hints_used": hints, "hint_available": !game.finished() && len(wrong) > 0 && !game.hintUsed}
+	steps := game.steps()
+	body := map[string]any{"game_id": id, "tiles": s.concepts(game.order), "wrong_ids": wrong, "attempts": game.attempts, "mistakes": len(wrong), "remaining_mistakes": remaining, "won": game.won, "lost": game.lost, "difficulty": game.difficulty, "hints_used": game.hintsUsed, "hint_available": hintsLeft > 0, "steps": steps, "perfect": game.won && steps == 0, "hints_left": hintsLeft, "hint_level": game.hintLevel}
 	if game.daily != "" {
 		body["daily"] = game.daily
 	}
 	if game.category != "" {
 		body["board_category"] = game.category
 	}
-	if game.hintUsed {
-		body["clue"] = map[string]string{"label": game.groupLabel, "message": "Trei cuvinte țin de: " + game.groupLabel + "."}
+	if clue := s.clue(game, game.hintLevel); clue != nil {
+		body["clue"] = clue
 	}
 	if game.finished() {
 		body["score"] = game.score()
@@ -264,7 +285,11 @@ func (s *Service) action(id string, fn func(*gameSession) (map[string]any, *Erro
 }
 
 func (s *Service) Get(id string) (map[string]any, *Error) {
-	return s.action(id, func(game *gameSession) (map[string]any, *Error) { return s.state(id, game), nil })
+	return s.GetWithTerminal(id, nil)
+}
+
+func (s *Service) GetWithTerminal(id string, onTerminal gameapi.TerminalResponse) (map[string]any, *Error) {
+	return s.action(id, gameapi.WithTerminalResponse(onTerminal, (*gameSession).boardTerminal, func(game *gameSession) (map[string]any, *Error) { return s.state(id, game), nil }))
 }
 
 func (s *Service) Guess(id, selected string) (map[string]any, *Error) {
@@ -275,7 +300,11 @@ func (s *Service) Guess(id, selected string) (map[string]any, *Error) {
 // mutation. Missing-session lookup precedes validation; validation precedes the
 // terminal guard, matching the existing anonymous API's error precedence.
 func (s *Service) GuessInput(id string, validate func() (string, *Error)) (map[string]any, *Error) {
-	return s.action(id, func(game *gameSession) (map[string]any, *Error) {
+	return s.GuessInputWithTerminal(id, validate, nil)
+}
+
+func (s *Service) GuessInputWithTerminal(id string, validate func() (string, *Error), onTerminal gameapi.TerminalResponse) (map[string]any, *Error) {
+	return s.action(id, gameapi.WithTerminalResponse(onTerminal, (*gameSession).boardTerminal, func(game *gameSession) (map[string]any, *Error) {
 		selected, validationErr := validate()
 		if validationErr != nil {
 			return nil, validationErr
@@ -308,7 +337,7 @@ func (s *Service) GuessInput(id string, validate func() (string, *Error)) (map[s
 		body := s.state(id, game)
 		body["ok"], body["correct"], body["already_tried"], body["message"] = true, correct, false, message
 		return body, nil
-	})
+	}))
 }
 
 func (s *Service) Hint(id string) (map[string]any, *Error) {
@@ -316,17 +345,37 @@ func (s *Service) Hint(id string) (map[string]any, *Error) {
 		if game.finished() {
 			return nil, &Error{400, "Jocul s-a terminat"}
 		}
-		if game.hintUsed {
-			return nil, &Error{400, "Indiciul a fost deja folosit"}
+		for level := game.hintLevel + 1; level <= 2; level++ {
+			if s.clue(game, level) == nil {
+				continue
+			}
+			game.hintLevel = level
+			game.hintsUsed++
+			body := s.state(id, game)
+			body["ok"] = true
+			return body, nil
 		}
-		if len(game.wrongIDs) == 0 {
-			return nil, &Error{400, "Indiciul apare după prima încercare."}
-		}
-		game.hintUsed = true
-		body := s.state(id, game)
-		body["ok"] = true
-		return body, nil
+		return nil, &Error{400, "Nu mai sunt indicii disponibile."}
 	})
+}
+
+// BoardTerminal observes a server-terminal reviewed daily once and returns its
+// anonymous outcome for subsequent comparisons.
+func (s *Service) BoardTerminal(id string, onFirst func(gameapi.TerminalRound)) (gameapi.TerminalRound, bool) {
+	return gameapi.ObserveBoardTerminal(s.store, id, onFirst, (*gameSession).boardTerminal)
+}
+
+func (game *gameSession) boardTerminal() (gameapi.TerminalRound, *gameapi.TerminalObservation) {
+	var outcome gameapi.TerminalOutcome
+	switch {
+	case game.won:
+		outcome = gameapi.TerminalWin
+	case game.lost:
+		outcome = gameapi.TerminalLoss
+	default:
+		return gameapi.TerminalRound{}, nil
+	}
+	return gameapi.TerminalRound{BoardID: game.catalogID, Day: game.daily, Steps: game.steps(), Outcome: outcome}, &game.boardObservation
 }
 
 // Progress exposes only server-authored terminal bookkeeping, never solutions.

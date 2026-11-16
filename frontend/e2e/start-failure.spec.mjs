@@ -6,6 +6,8 @@ const escapeRegex = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 const createPath = (game) => `/api/wordgames/${game.key}/games`;
 const createResponse = (page, game) => page.waitForResponse((response) =>
   response.request().method() === "POST" && new URL(response.url()).pathname === createPath(game));
+const frame = (page) => page.getByRole("main");
+const retry = (page) => page.getByRole("button", { name: "Reîncearcă", exact: true });
 const notice = (page) => page.getByRole("alert").filter({ hasText: "Nu am putut porni jocul." });
 
 function options(response) {
@@ -63,36 +65,39 @@ for (const game of games) {
   test(`${game.key} keeps a failed new start visible and retries the selected options`, async ({ page }) => {
     await page.clock.install();
     await deterministicStarts(page, game);
-    await page.goto(game.path);
-    if (!game.derived) {
-      await openGameOptions(page, game, { setup: true });
-      await page.getByRole("group", { name: "DIFICULTATE" })
-        .getByRole("button", { name: /^Normal/ }).click();
-      await page.getByRole("group", { name: "CATEGORIE" }).getByRole("button").nth(1).click();
-    }
-    const selections = await page.getByRole("button", { pressed: true }).allTextContents();
+    await page.goto("/");
     const originalScores = await scoreState(page);
+    if (!game.derived) {
+      await page.evaluate((key) => localStorage.setItem(`cat_free_v2_${key}`, JSON.stringify({
+        difficulty: "normal", category: "istorie",
+      })), game.key);
+    }
     const failedStart = await failNextCreate(page, game, true);
     const failedResponse = createResponse(page, game);
-    await page.getByRole("button", { name: /^Joacă(?: →)?$/ }).click();
+    await page.locator(`.games-grid a[href="${game.path}"]`).click();
     await failedStart.requested;
     try {
-      await expect(page.locator(".game-intro")).toHaveAttribute("inert", "");
-      await expect(page.locator(".game-intro")).toHaveAttribute("aria-busy", "true");
-      await expect(page.locator(".game-shell-header button")).toBeDisabled();
+      await expect(frame(page)).toHaveAttribute("aria-busy", "true");
+      await expect(page.locator(".game-frame-band button").first()).toBeDisabled();
+      await expect(page.locator(game.board)).toHaveCount(0);
     } finally {
       failedStart.release();
     }
     const failed = await failedResponse;
     expect(failed.status()).toBe(503);
     await assertPersistentFailure(page);
-    await expect(page.getByRole("button", { name: /^Joacă(?: →)?$/ })).toBeEnabled();
-    expect(await page.getByRole("button", { pressed: true }).allTextContents()).toEqual(selections);
+    await expect(retry(page)).toBeEnabled();
+    if (!game.derived) {
+      await openGameOptions(page, game);
+      await expect(page.getByRole("combobox", { name: "Dificultate" })).toHaveValue("normal");
+      await expect(page.getByRole("combobox", { name: "Temă" })).toHaveValue("istorie");
+      await page.keyboard.press("Escape");
+    }
     expect(await page.evaluate((key) => localStorage.getItem(key), activeKey(game))).toBeNull();
     expect(await scoreState(page)).toBe(originalScores);
 
     const retryResponse = createResponse(page, game);
-    await page.getByRole("button", { name: /^Joacă(?: →)?$/ }).click();
+    await retry(page).click();
     const retried = await retryResponse;
     expect(retried.status()).toBe(200);
     expect(options(retried)).toBe(options(failed));
@@ -110,7 +115,7 @@ for (const game of games) {
     await deterministicStarts(page, game);
     await start(page, game);
     await openGameOptions(page, game);
-    await page.getByText("Reguli și ajutor", { exact: true }).click();
+    await page.keyboard.press("Escape");
     await solve(page, game, solution(game).steps);
     await expect.poll(async () => {
       const scores = JSON.parse(await scoreState(page) || "{}");
@@ -118,7 +123,7 @@ for (const game of games) {
     }).toBe(1);
     const originalScores = await scoreState(page);
     const copy = page.getByRole("button", { name: "Copiază rezultatul" });
-    const replay = page.getByRole("button", { name: /^Încă (?:unul|un lanț) →$/ });
+    const replay = page.getByRole("button", { name: "Încă o rundă", exact: true });
     // Keep the recovery scenario genuinely scrolled even when the compact
     // result and replay action fit above the fold.
     if (game.derived || game.key === "alchimie") {
@@ -140,7 +145,7 @@ for (const game of games) {
     const failedResponse = createResponse(page, game);
     await replay.click();
     await failedReplay.requested;
-    const pendingReplay = page.getByRole("button", { name: "Se pregătește…", exact: true });
+    const pendingReplay = replay;
     await expect(pendingReplay).toBeDisabled();
     // Wait for the browser's ordinary disabled-button blur before measuring
     // whether revealing the error changes focus; the request can precede render.
@@ -154,12 +159,12 @@ for (const game of games) {
     await focusWhilePending.dispose();
     await expect(copy).toBeVisible();
     await expect(replay).toBeEnabled();
-    await expect(replay).toBeInViewport();
+    await expect(retry(page)).toBeInViewport();
     await expect(notice(page)).toHaveCount(1);
     expect(await scoreState(page)).toBe(originalScores);
 
     const retriedResponse = createResponse(page, game);
-    await replay.click();
+    await retry(page).click();
     const retried = await retriedResponse;
     expect(retried.status()).toBe(200);
     expect(options(retried)).toBe(options(failed));
@@ -189,7 +194,7 @@ test("alchimie retains its live round and blocks actions while another round is 
   });
   const another = page.locator("button.alchimie-other-board");
   await expect(partner).toBeEnabled();
-  await openAlchemyDisclosure(page, ".alchemy-menu");
+  await openGameOptions(page, game);
   const originalScores = await scoreState(page);
   let release;
   let entered;
@@ -212,34 +217,25 @@ test("alchimie retains its live round and blocks actions while another round is 
   await requested;
   try {
     await expect(partner).toBeDisabled();
-    await expect(another).toBeDisabled();
-    await expect(page.locator(".game-shell-header button")).toBeDisabled();
+    await expect(page.getByRole("dialog")).toHaveCount(0);
+    const back = page.locator(".game-frame-band button").first();
+    await expect(back).toBeDisabled();
     await partner.dispatchEvent("click");
-    await another.dispatchEvent("click");
-    await page.locator(".game-shell-header button").dispatchEvent("click");
+    await back.dispatchEvent("click");
     await page.keyboard.press("Enter");
     await page.keyboard.press("Escape");
     expect(await page.evaluate((key) => localStorage.getItem(key), activeKey(game)))
       .toBe(initial.game_id);
     expect(await (await request.get(gameURL(game, initial.game_id))).json()).toEqual(initial);
     expect(oldMutations).toEqual([]);
-    await expect.poll(() => another.evaluate((button) => globalThis.document.activeElement !== button)).toBe(true);
     focusWhilePending = await page.evaluateHandle(() => globalThis.document.activeElement);
   } finally {
     release();
   }
   expect((await failedResponse).status()).toBe(503);
   await assertPersistentFailure(page);
-  await expect(another).toBeEnabled();
-  await expect(another).toBeInViewport();
-  await expect.poll(() => another.evaluate((button) => {
-    const rect = button.getBoundingClientRect();
-    const scroller = button.closest(".screen-pad").getBoundingClientRect();
-    return rect.top >= Math.max(0, scroller.top) - 1 &&
-      rect.bottom <= Math.min(globalThis.innerHeight, scroller.bottom) + 1 &&
-      rect.left >= Math.max(0, scroller.left) - 1 &&
-      rect.right <= Math.min(globalThis.innerWidth, scroller.right) + 1;
-  }), { message: "the entire retry button must remain beside the visible error" }).toBe(true);
+  await expect(retry(page)).toBeEnabled();
+  await expect(retry(page)).toBeInViewport();
   expect(await page.evaluate((previous) => globalThis.document.activeElement === previous, focusWhilePending)).toBe(true);
   await focusWhilePending.dispose();
   await expect(partner).toBeEnabled();
@@ -259,7 +255,7 @@ test("alchimie retains its live round and blocks actions while another round is 
   await expect(page.getByRole("button", { name: "Cuvinte", exact: true })).toHaveAttribute("aria-expanded", "true");
 
   const retryResponse = createResponse(page, game);
-  await another.click();
+  await retry(page).click();
   const retried = await retryResponse;
   expect(retried.status()).toBe(200);
   const fresh = await retried.json();
@@ -269,7 +265,7 @@ test("alchimie retains its live round and blocks actions while another round is 
   expect(fresh.game_id).not.toBe(initial.game_id);
   expect(oldMutations).toEqual([]);
   await expect(inventorySearch).toBeVisible();
-  await expect(page.locator(".alchemy-menu")).not.toHaveAttribute("open");
+  await expect(page.getByRole("dialog")).toHaveCount(0);
   await expect(page.locator(".alchemy-library-tools input.alchemy-inventory-search")).toHaveValue("");
   await expect(page.getByRole("button", { name: "Rețete", exact: true })).toHaveAttribute("aria-expanded", "false");
   await expect(page.locator(".alchemy-slot")).toHaveCount(0);

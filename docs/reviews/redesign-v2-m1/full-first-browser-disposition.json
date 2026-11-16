@@ -1,0 +1,698 @@
+{
+  "sha": "ffab22be5869d7984148c539b4a74bdf9d6e795c",
+  "report_sha256": "3e3d144d9f56768a81c186fdce15064b28c8acc00d1b7919141b71f0d2bd7260",
+  "stats": {
+    "startTime": "2026-11-16T12:38:00.763Z",
+    "duration": 600768.824,
+    "expected": 723,
+    "skipped": 0,
+    "unexpected": 114,
+    "flaky": 0
+  },
+  "failures": [
+    {
+      "file": "alchimie-workbench.spec.mjs",
+      "title": "the initial game puts words above 500px and keeps secondary controls in Help",
+      "project": "mobile",
+      "error": "Error: first ingredient row fits above 500px"
+    },
+    {
+      "file": "conexiuni-coach-layout.spec.mjs",
+      "title": "selection and remaining mistakes never overlap at 320px and 100% text",
+      "project": "desktop",
+      "error": "Error: expect(locator).toHaveText(expected) failed"
+    },
+    {
+      "file": "conexiuni-coach-layout.spec.mjs",
+      "title": "selection and remaining mistakes never overlap at 320px and 200% text",
+      "project": "desktop",
+      "error": "Error: expect(locator).toHaveText(expected) failed"
+    },
+    {
+      "file": "conexiuni-coach-layout.spec.mjs",
+      "title": "selection and remaining mistakes never overlap at 390px and 100% text",
+      "project": "desktop",
+      "error": "Error: expect(locator).toHaveText(expected) failed"
+    },
+    {
+      "file": "conexiuni-coach-layout.spec.mjs",
+      "title": "selection and remaining mistakes never overlap at 390px and 200% text",
+      "project": "desktop",
+      "error": "Error: expect(locator).toHaveText(expected) failed"
+    },
+    {
+      "file": "conexiuni-coach-layout.spec.mjs",
+      "title": "selection and remaining mistakes never overlap at 320px and 100% text",
+      "project": "mobile",
+      "error": "Error: expect(locator).toHaveText(expected) failed"
+    },
+    {
+      "file": "conexiuni-coach-layout.spec.mjs",
+      "title": "selection and remaining mistakes never overlap at 320px and 200% text",
+      "project": "mobile",
+      "error": "Error: expect(locator).toHaveText(expected) failed"
+    },
+    {
+      "file": "conexiuni-coach-layout.spec.mjs",
+      "title": "selection and remaining mistakes never overlap at 390px and 100% text",
+      "project": "mobile",
+      "error": "Error: expect(locator).toHaveText(expected) failed"
+    },
+    {
+      "file": "conexiuni-coach-layout.spec.mjs",
+      "title": "selection and remaining mistakes never overlap at 390px and 200% text",
+      "project": "mobile",
+      "error": "Error: expect(locator).toHaveText(expected) failed"
+    },
+    {
+      "file": "conexiuni-simpler-ui.spec.mjs",
+      "title": "long Romanian words remain readable at 320 pixels and doubled text without horizontal scrolling",
+      "project": "desktop",
+      "error": "Error: României must fit without splitting its letters across lines"
+    },
+    {
+      "file": "conexiuni-simpler-ui.spec.mjs",
+      "title": "long Romanian words remain readable at 320 pixels and doubled text without horizontal scrolling",
+      "project": "mobile",
+      "error": "Error: României must fit without splitting its letters across lines"
+    },
+    {
+      "file": "contexto-action-recovery.spec.mjs",
+      "title": "a lost give-up response reveals only the server's terminal answer without a score",
+      "project": "desktop",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "contexto-action-recovery.spec.mjs",
+      "title": "a lost give-up response reveals only the server's terminal answer without a score",
+      "project": "mobile",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "derived-action-recovery.spec.mjs",
+      "title": "a cleared saved pointer between verification attempts cannot revive an old win",
+      "project": "desktop",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "derived-action-recovery.spec.mjs",
+      "title": "a changed saved round rejects an old winning removed-pointer completion without scoring",
+      "project": "desktop",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "derived-action-recovery.spec.mjs",
+      "title": "a cleared saved pointer between verification attempts cannot revive an old win",
+      "project": "mobile",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "derived-action-recovery.spec.mjs",
+      "title": "a changed saved round rejects an old winning removed-pointer completion without scoring",
+      "project": "mobile",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "derived-action-recovery.spec.mjs",
+      "title": "lost committed hint recovers exact earned state with one GET",
+      "project": "desktop",
+      "error": "Error: expect(received).toEqual(expected) // deep equality"
+    },
+    {
+      "file": "derived-action-recovery.spec.mjs",
+      "title": "a cleared saved pointer between verification attempts cannot revive an old win",
+      "project": "desktop",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "derived-action-recovery.spec.mjs",
+      "title": "a changed saved round rejects an old winning removed-pointer completion without scoring",
+      "project": "desktop",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "derived-action-recovery.spec.mjs",
+      "title": "lost committed hint recovers exact earned state with one GET",
+      "project": "mobile",
+      "error": "Error: expect(received).toEqual(expected) // deep equality"
+    },
+    {
+      "file": "derived-action-recovery.spec.mjs",
+      "title": "a cleared saved pointer between verification attempts cannot revive an old win",
+      "project": "mobile",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "derived-action-recovery.spec.mjs",
+      "title": "a changed saved round rejects an old winning removed-pointer completion without scoring",
+      "project": "mobile",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "gui-m0-contexto-lifecycle-parity.spec.mjs",
+      "title": "a real corrected target win retains the actual server correction message in the result owner",
+      "project": "desktop",
+      "error": "Error: expect(locator).toHaveCount(expected) failed"
+    },
+    {
+      "file": "gui-m0-contexto-lifecycle-parity.spec.mjs",
+      "title": "a real corrected target win retains the actual server correction message in the result owner",
+      "project": "mobile",
+      "error": "Error: expect(locator).toHaveCount(expected) failed"
+    },
+    {
+      "file": "gui-m0-contexto-parity.spec.mjs",
+      "title": "public temperature presentation maps Fierbinte to its localized label and icon",
+      "project": "desktop",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "gui-m0-contexto-parity.spec.mjs",
+      "title": "public temperature presentation maps Cald to its localized label and icon",
+      "project": "desktop",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "gui-m0-contexto-parity.spec.mjs",
+      "title": "public temperature presentation maps Caldut to its localized label and icon",
+      "project": "desktop",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "gui-m0-contexto-parity.spec.mjs",
+      "title": "public temperature presentation maps Rece to its localized label and icon",
+      "project": "desktop",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "gui-m0-contexto-parity.spec.mjs",
+      "title": "public temperature presentation maps Foarte rece to its localized label and icon",
+      "project": "desktop",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "gui-m0-contexto-parity.spec.mjs",
+      "title": "public temperature presentation maps Inghetat to its localized label and icon",
+      "project": "desktop",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "gui-m0-contexto-parity.spec.mjs",
+      "title": "the real winning guess renders Gasit as Găsit and moves focus to the result",
+      "project": "desktop",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "gui-m0-contexto-parity.spec.mjs",
+      "title": "public temperature presentation maps Fierbinte to its localized label and icon",
+      "project": "mobile",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "gui-m0-contexto-parity.spec.mjs",
+      "title": "public temperature presentation maps Cald to its localized label and icon",
+      "project": "mobile",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "gui-m0-contexto-parity.spec.mjs",
+      "title": "public temperature presentation maps Caldut to its localized label and icon",
+      "project": "mobile",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "gui-m0-contexto-parity.spec.mjs",
+      "title": "public temperature presentation maps Rece to its localized label and icon",
+      "project": "mobile",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "gui-m0-contexto-parity.spec.mjs",
+      "title": "public temperature presentation maps Foarte rece to its localized label and icon",
+      "project": "mobile",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "gui-m0-contexto-parity.spec.mjs",
+      "title": "public temperature presentation maps Inghetat to its localized label and icon",
+      "project": "mobile",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "gui-m0-contexto-parity.spec.mjs",
+      "title": "the real winning guess renders Gasit as Găsit and moves focus to the result",
+      "project": "mobile",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "gui-m0-derived-presentation-parity.spec.mjs",
+      "title": "intrusul immediate hints spend steps without spending attempts",
+      "project": "desktop",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "gui-m0-derived-presentation-parity.spec.mjs",
+      "title": "perechi immediate hints spend steps without spending attempts",
+      "project": "desktop",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "gui-m0-derived-presentation-parity.spec.mjs",
+      "title": "intrusul immediate hints spend steps without spending attempts",
+      "project": "mobile",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "gui-m0-derived-presentation-parity.spec.mjs",
+      "title": "perechi immediate hints spend steps without spending attempts",
+      "project": "mobile",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "gui-m0-lant-parity.spec.mjs",
+      "title": "a genuinely corrected winning hop retains the server's spelling message in the result",
+      "project": "desktop",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "gui-m0-lant-parity.spec.mjs",
+      "title": "a server-earned backtrack hint highlights free undo and clears when a real hop is undone",
+      "project": "desktop",
+      "error": "Test timeout of 45000ms exceeded."
+    },
+    {
+      "file": "gui-m0-lant-parity.spec.mjs",
+      "title": "a genuinely corrected winning hop retains the server's spelling message in the result",
+      "project": "mobile",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "gui-m0-lant-parity.spec.mjs",
+      "title": "a server-earned backtrack hint highlights free undo and clears when a real hop is undone",
+      "project": "mobile",
+      "error": "Test timeout of 45000ms exceeded."
+    },
+    {
+      "file": "gui-m2-pilot-journeys.spec.mjs",
+      "title": "leaving Intrusul keeps the retained screen inert while a winning reply is held",
+      "project": "desktop",
+      "error": "Error: expect(locator).toHaveText(expected) failed"
+    },
+    {
+      "file": "gui-m2-pilot-journeys.spec.mjs",
+      "title": "leaving Intrusul keeps the retained screen inert while a winning reply is held",
+      "project": "mobile",
+      "error": "Error: expect(locator).toHaveText(expected) failed"
+    },
+    {
+      "file": "gui-m2-pilot-journeys.spec.mjs",
+      "title": "leaving Intrusul keeps the retained screen inert while a winning reply is held",
+      "project": "motion-on",
+      "error": "Error: expect(locator).toHaveText(expected) failed"
+    },
+    {
+      "file": "lant-current-position.spec.mjs",
+      "title": "lant shows the authoritative recovered position while animation frames are paused",
+      "project": "desktop",
+      "error": "Error: expect(locator).toHaveCSS(expected) failed"
+    },
+    {
+      "file": "lant-current-position.spec.mjs",
+      "title": "lant shows the authoritative recovered position while animation frames are paused",
+      "project": "mobile",
+      "error": "Error: expect(locator).toHaveCSS(expected) failed"
+    },
+    {
+      "file": "lant-relationship-captions.spec.mjs",
+      "title": "lt_geografie_239 route 1: meaningful choices survive earned path and reload",
+      "project": "desktop",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "lant-relationship-captions.spec.mjs",
+      "title": "lt_geografie_239 route 2: meaningful choices survive earned path and reload",
+      "project": "desktop",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "lant-relationship-captions.spec.mjs",
+      "title": "lt_geografie_239 route 3: meaningful choices survive earned path and reload",
+      "project": "desktop",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "lant-relationship-captions.spec.mjs",
+      "title": "lt_geografie_239: noun-bearing hints persist without taking a hop",
+      "project": "desktop",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "lant-relationship-captions.spec.mjs",
+      "title": "lt_literatura_240 route 1: meaningful choices survive earned path and reload",
+      "project": "desktop",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "lant-relationship-captions.spec.mjs",
+      "title": "lt_literatura_240 route 2: meaningful choices survive earned path and reload",
+      "project": "desktop",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "lant-relationship-captions.spec.mjs",
+      "title": "lt_literatura_240 route 3: meaningful choices survive earned path and reload",
+      "project": "desktop",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "lant-relationship-captions.spec.mjs",
+      "title": "lt_literatura_240: noun-bearing hints persist without taking a hop",
+      "project": "desktop",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "lant-relationship-captions.spec.mjs",
+      "title": "lt_gastronomie_241 route 1: meaningful choices survive earned path and reload",
+      "project": "desktop",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "lant-relationship-captions.spec.mjs",
+      "title": "lt_gastronomie_241 route 2: meaningful choices survive earned path and reload",
+      "project": "desktop",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "lant-relationship-captions.spec.mjs",
+      "title": "lt_gastronomie_241: noun-bearing hints persist without taking a hop",
+      "project": "desktop",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "lant-relationship-captions.spec.mjs",
+      "title": "lt_gastronomie_243 route 1: meaningful choices survive earned path and reload",
+      "project": "desktop",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "lant-relationship-captions.spec.mjs",
+      "title": "lt_gastronomie_243 route 2: meaningful choices survive earned path and reload",
+      "project": "desktop",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "lant-relationship-captions.spec.mjs",
+      "title": "lt_gastronomie_244 route 1: meaningful choices survive earned path and reload",
+      "project": "desktop",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "lant-relationship-captions.spec.mjs",
+      "title": "lt_gastronomie_244 route 2: meaningful choices survive earned path and reload",
+      "project": "desktop",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "lant-relationship-captions.spec.mjs",
+      "title": "lt_gastronomie_245 route 1: meaningful choices survive earned path and reload",
+      "project": "desktop",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "lant-relationship-captions.spec.mjs",
+      "title": "lt_gastronomie_245 route 2: meaningful choices survive earned path and reload",
+      "project": "desktop",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "lant-relationship-captions.spec.mjs",
+      "title": "lt_geografie_239 route 1: meaningful choices survive earned path and reload",
+      "project": "mobile",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "lant-relationship-captions.spec.mjs",
+      "title": "lt_geografie_239 route 2: meaningful choices survive earned path and reload",
+      "project": "mobile",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "lant-relationship-captions.spec.mjs",
+      "title": "lt_geografie_239 route 3: meaningful choices survive earned path and reload",
+      "project": "mobile",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "lant-relationship-captions.spec.mjs",
+      "title": "lt_geografie_239: noun-bearing hints persist without taking a hop",
+      "project": "mobile",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "lant-relationship-captions.spec.mjs",
+      "title": "lt_literatura_240 route 1: meaningful choices survive earned path and reload",
+      "project": "mobile",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "lant-relationship-captions.spec.mjs",
+      "title": "lt_literatura_240 route 2: meaningful choices survive earned path and reload",
+      "project": "mobile",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "lant-relationship-captions.spec.mjs",
+      "title": "lt_literatura_240 route 3: meaningful choices survive earned path and reload",
+      "project": "mobile",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "lant-relationship-captions.spec.mjs",
+      "title": "lt_literatura_240: noun-bearing hints persist without taking a hop",
+      "project": "mobile",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "lant-relationship-captions.spec.mjs",
+      "title": "lt_gastronomie_241 route 1: meaningful choices survive earned path and reload",
+      "project": "mobile",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "lant-relationship-captions.spec.mjs",
+      "title": "lt_gastronomie_241 route 2: meaningful choices survive earned path and reload",
+      "project": "mobile",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "lant-relationship-captions.spec.mjs",
+      "title": "lt_gastronomie_241: noun-bearing hints persist without taking a hop",
+      "project": "mobile",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "lant-relationship-captions.spec.mjs",
+      "title": "lt_gastronomie_243 route 1: meaningful choices survive earned path and reload",
+      "project": "mobile",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "lant-relationship-captions.spec.mjs",
+      "title": "lt_gastronomie_243 route 2: meaningful choices survive earned path and reload",
+      "project": "mobile",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "lant-relationship-captions.spec.mjs",
+      "title": "lt_gastronomie_244 route 1: meaningful choices survive earned path and reload",
+      "project": "mobile",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "lant-relationship-captions.spec.mjs",
+      "title": "lt_gastronomie_244 route 2: meaningful choices survive earned path and reload",
+      "project": "mobile",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "lant-relationship-captions.spec.mjs",
+      "title": "lt_gastronomie_245 route 1: meaningful choices survive earned path and reload",
+      "project": "mobile",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "lant-relationship-captions.spec.mjs",
+      "title": "lt_gastronomie_245 route 2: meaningful choices survive earned path and reload",
+      "project": "mobile",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "mobile-status-notices.spec.mjs",
+      "title": "intrusul keeps its status and notices visible through resume and result",
+      "project": "mobile",
+      "error": "Test timeout of 120000ms exceeded."
+    },
+    {
+      "file": "mobile-status-notices.spec.mjs",
+      "title": "perechi keeps its status and notices visible through resume and result",
+      "project": "mobile",
+      "error": "Test timeout of 120000ms exceeded."
+    },
+    {
+      "file": "perechi-loss-progress.spec.mjs",
+      "title": "Perechi loss progress renders 0 earned pairs out of four only after the terminal match",
+      "project": "desktop",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "perechi-loss-progress.spec.mjs",
+      "title": "Perechi loss progress renders 1 earned pairs out of four only after the terminal match",
+      "project": "desktop",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "perechi-loss-progress.spec.mjs",
+      "title": "Perechi loss progress renders 2 earned pairs out of four only after the terminal match",
+      "project": "desktop",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "perechi-loss-progress.spec.mjs",
+      "title": "Perechi win reveals all four pairs without the loss-progress paragraph",
+      "project": "desktop",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "perechi-loss-progress.spec.mjs",
+      "title": "Perechi terminal loss without solution does not render a reveal or progress paragraph",
+      "project": "desktop",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "perechi-loss-progress.spec.mjs",
+      "title": "Perechi live response with unexpected solution still hides unearned answers and progress",
+      "project": "desktop",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "perechi-loss-progress.spec.mjs",
+      "title": "Perechi loss progress renders 0 earned pairs out of four only after the terminal match",
+      "project": "mobile",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "perechi-loss-progress.spec.mjs",
+      "title": "Perechi loss progress renders 1 earned pairs out of four only after the terminal match",
+      "project": "mobile",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "perechi-loss-progress.spec.mjs",
+      "title": "Perechi loss progress renders 2 earned pairs out of four only after the terminal match",
+      "project": "mobile",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "perechi-loss-progress.spec.mjs",
+      "title": "Perechi win reveals all four pairs without the loss-progress paragraph",
+      "project": "mobile",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "perechi-loss-progress.spec.mjs",
+      "title": "Perechi terminal loss without solution does not render a reveal or progress paragraph",
+      "project": "mobile",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "perechi-loss-progress.spec.mjs",
+      "title": "Perechi live response with unexpected solution still hides unearned answers and progress",
+      "project": "mobile",
+      "error": "Error: expect(locator).toBeVisible() failed"
+    },
+    {
+      "file": "release-recovery-storage.spec.mjs",
+      "title": "denied localStorage and sessionStorage getters still allow all six games",
+      "project": "desktop",
+      "error": "Error: page.evaluate: SecurityError: Storage denied"
+    },
+    {
+      "file": "release-recovery-storage.spec.mjs",
+      "title": "a denied-storage chunk failure offers home and explicit reload without losing a saved round",
+      "project": "desktop",
+      "error": "Test timeout of 45000ms exceeded."
+    },
+    {
+      "file": "release-recovery-storage.spec.mjs",
+      "title": "a slowly failing chunk reloads once then exposes recovery on the next document",
+      "project": "desktop",
+      "error": "Test timeout of 45000ms exceeded."
+    },
+    {
+      "file": "release-recovery-storage.spec.mjs",
+      "title": "denied localStorage and sessionStorage getters still allow all six games",
+      "project": "mobile",
+      "error": "Error: page.evaluate: SecurityError: Storage denied"
+    },
+    {
+      "file": "release-recovery-storage.spec.mjs",
+      "title": "a denied-storage chunk failure offers home and explicit reload without losing a saved round",
+      "project": "mobile",
+      "error": "Test timeout of 45000ms exceeded."
+    },
+    {
+      "file": "release-recovery-storage.spec.mjs",
+      "title": "a slowly failing chunk reloads once then exposes recovery on the next document",
+      "project": "mobile",
+      "error": "Test timeout of 45000ms exceeded."
+    },
+    {
+      "file": "resume-recovery.spec.mjs",
+      "title": "a stale 200 response cannot displace another tab's game",
+      "project": "desktop",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "resume-recovery.spec.mjs",
+      "title": "a stale 404 response cannot displace another tab's game",
+      "project": "desktop",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "resume-recovery.spec.mjs",
+      "title": "an older create response cannot replace a newer tab's saved round",
+      "project": "desktop",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "resume-recovery.spec.mjs",
+      "title": "a stale 200 response cannot displace another tab's game",
+      "project": "mobile",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "resume-recovery.spec.mjs",
+      "title": "a stale 404 response cannot displace another tab's game",
+      "project": "mobile",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "resume-recovery.spec.mjs",
+      "title": "an older create response cannot replace a newer tab's saved round",
+      "project": "mobile",
+      "error": "Error: expect(received).toBe(expected) // Object.is equality"
+    },
+    {
+      "file": "v1-board-grid-steps.spec.mjs",
+      "title": "intrusul board only ever shows whole rows of 4, 2 or 1 tiles",
+      "project": "desktop",
+      "error": "Error: intrusul at 1280px / 24px text"
+    },
+    {
+      "file": "v1-board-grid-steps.spec.mjs",
+      "title": "intrusul board only ever shows whole rows of 4, 2 or 1 tiles",
+      "project": "mobile",
+      "error": "Error: intrusul at 1280px / 24px text"
+    }
+  ]
+}

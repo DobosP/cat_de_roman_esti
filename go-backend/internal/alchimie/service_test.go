@@ -15,7 +15,7 @@ import (
 
 func golden(t *testing.T) map[string]any {
 	t.Helper()
-	raw, e := os.ReadFile("testdata/python_parity.json")
+	raw, e := os.ReadFile("testdata/python_parity_rules_v2.json")
 	if e != nil {
 		t.Fatal(e)
 	}

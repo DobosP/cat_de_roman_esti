@@ -8,6 +8,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
+	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/gameapi"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpapi"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpgolden"
 	"io"
@@ -82,7 +83,7 @@ func run() error {
 	}
 	var corpus *httpgolden.Corpus
 	if mode == "parity" {
-		corpus, err = httpgolden.ForSources(data.Sources)
+		corpus, err = httpgolden.ForSourcesAndRules(data.Sources, gameapi.RulesVersion)
 		if err != nil {
 			return err
 		}

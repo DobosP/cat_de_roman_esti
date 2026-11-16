@@ -4,7 +4,7 @@ Two shippable shapes:
 
 | Mode | Flag | What it is | Compliance |
 | --- | --- | --- | --- |
-| **Anonymous arcade** | `CAT_ACCOUNTS_ENABLED=0` (default) | Stateless, no DB, progress in the browser | Minimal — no accounts/PII |
+| **Anonymous arcade** | `CAT_ACCOUNTS_ENABLED=0` (default) | No DB, progress in the browser, optional board counts | Accounts off |
 | **Optional native accounts** | `CAT_ACCOUNTS_ENABLED=1` | PostgreSQL + password/Google/Facebook sessions + consent/private score copy | Full child-data stack (below) |
 
 The selected production backend is Go ([ADR-0162](adr/0162-select-go-production-backend.md)).
@@ -50,9 +50,8 @@ rank (pseudonymously, with verifiable parental consent) is a **new DPIA** — se
 ## Anonymous arcade (v1) launch
 
 The v1 public launch ships **accounts OFF** (`CAT_ACCOUNTS_ENABLED=0`, the default): a
-stateless app container + Caddy TLS, no Postgres, no Google OAuth, no PII. This is the
-fastest, lowest-compliance path to a public URL — use it first, and flip to the accounts
-stack (below) only once its go-live checklist is done.
+Go app container + Caddy TLS, without Postgres or Google OAuth. Player progress is stored
+in the browser. Switch to the accounts stack only once its go-live checklist is done.
 
 This "v1" names the first anonymous public launch; it is not the V1 (1.0.x) testing
 release. For a same-Wi-Fi phone playtest served from the organizer's own computer (no
@@ -105,17 +104,80 @@ healthy container.
 [note below](#single-process-constraint)). Multiple replicas require session affinity
 or shared atomic session storage.
 
-**No user data is persisted.** `docker-compose.anon.yml` deliberately has no `db` service
-and no `CAT_SUBMISSIONS_DIR`/submissions volume — `POST /api/submissions` returns 503 in
-this mode, and progress lives only in the player's browser. There is nothing to back up.
+**The default anonymous app persists no player data on the server.** It has no `db`
+service or submissions mount. `POST /api/submissions` returns 503, player progress stays
+in the browser, and the board comparison is off. Caddy keeps its TLS and configuration
+volumes.
 
-**Go-live items that still apply anonymously** (a short subset of the
-[checklist below](#go-live-compliance-checklist), since there are no accounts/PII to
-protect): the legal pages (`/legal/privacy`, `/legal/terms`) still need a real
-controller/operator identity and contact — set `CAT_LEGAL_OPERATOR` and
-`CAT_LEGAL_CONTACT_EMAIL` in `.env.anon` (while either is empty the pages keep the DRAFT
-`[[PLACEHOLDER]]` wording); and if you set `CAT_DONATE_URL`, point it at the real donation
-page/provider with the receiving entity + tax treatment confirmed.
+**Anonymous go-live requirements** come from the [checklist below](#go-live-compliance-checklist).
+Set `CAT_LEGAL_OPERATOR` and `CAT_LEGAL_CONTACT_EMAIL` in `.env.anon` to publish the
+operator identity and contact on `/legal/privacy` and `/legal/terms`. The pages show draft
+placeholders while either is empty. If you set `CAT_DONATE_URL`, point it at the real
+donation provider with the receiving entity and tax treatment confirmed.
+
+### Optional anonymous daily board comparison
+
+Paul owns activation, deployment, and final privacy wording. See the wording draft in
+[ADR-0234](adr/0234-anonymous-daily-board-place.md).
+
+The `docker-compose.board-stats.yml` override sets `CAT_BOARD_STATS_DIR=/data/board-stats`
+and mounts the named `board_stats` volume. The image prepares the mount point for UID
+10001. The app root stays read-only and a directory lock permits one writer.
+
+The app stores board keys, win-step histograms, and aggregate win, loss, and give-up counts.
+Only reviewed daily boards for today or yesterday in Europe/Bucharest are eligible. A
+finished daily win includes `place` once its board has at least 100 counted rounds. The
+store batches atomic snapshots about every 30 seconds and flushes during graceful shutdown.
+At startup it loads retained snapshots and reports corrupt files it skips. While running,
+it retains today and the previous 13 Bucharest calendar days. Snapshots contain no guesses,
+IP addresses, session or browser identifiers, or account IDs. Include any backup of these
+snapshots in the same retention window.
+
+**Client address.** The app is reachable from Caddy on the Compose network and has no
+published port. Caddy overwrites `X-Cat-Client-IP` with the address it resolves. The app
+uses it only in memory to admit up to 20 finished rounds per address in ten minutes,
+then removes the address from the limiter. With DNS-only ingress, Caddy uses the address
+of the connected client.
+
+For Cloudflare-proxied ingress, configure Caddy’s global `servers` options before enabling
+comparison. Set `trusted_proxies static` to Cloudflare’s current published IPv4 and IPv6
+ranges, and set `client_ip_headers CF-Connecting-IP`. Keep those ranges current. Verify
+with a test upstream that an actual proxied request carries the client address. Check
+that direct requests with forged `CF-Connecting-IP` and `X-Cat-Client-IP` headers still
+carry the socket address to the upstream. [Caddy server options](https://caddyserver.com/docs/caddyfile/options#trusted-proxies),
+[Cloudflare IP ranges](https://www.cloudflare.com/ips/)
+
+**Activation.** With the qualified app image already present and Caddy running the
+reviewed ingress configuration, use the normal `GATE_SHA` and `GATE_TREE_SHA256` values for
+that release. Include the override after the anonymous Compose file.
+
+```bash
+docker compose --env-file .env.anon -f docker-compose.anon.yml \
+  -f docker-compose.board-stats.yml config --quiet
+docker compose --env-file .env.anon -f docker-compose.anon.yml \
+  -f docker-compose.board-stats.yml up -d --no-deps --no-build --pull never app
+```
+
+**Manual verification.** Use a separate test volume. With comparison off, finish a curated
+daily board and check that the response omits `place`. For the enabled check, seed 100
+fixture rounds for the exact release and today's curated board before starting the app.
+Win that daily board. Verify `place.rounds` is 101 and the result displays the four tiers
+and Romanian round-count wording. Reload the same session to confirm the count stays at
+101. Check that wins on free boards omit `place`. Restart the app after a flush on the
+same Bucharest date, start a new session for the same board, and confirm a win shows 102.
+Check app logs for startup or snapshot errors with the override enabled.
+
+**Deactivation.** Recreate `app` with the base profile and verify that a new daily win
+omits `place`.
+
+```bash
+docker compose --env-file .env.anon -f docker-compose.anon.yml \
+  up -d --no-deps --no-build --pull never app
+```
+
+The detached `board_stats` volume still contains its snapshots. Automatic pruning runs
+when the store is open. For retirement, have Paul confirm the project's `board_stats`
+volume and remove that volume separately from the app recreation.
 
 ---
 

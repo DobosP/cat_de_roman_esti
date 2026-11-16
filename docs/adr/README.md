@@ -231,3 +231,11 @@ Parallel lanes also allocated0188/0189 independently. All four full-filename bod
 - [0230](0230-content-loop-v5.md) — content loop V5: counted goal (executor renamed ChatGPT by its amendment), trains of 6+ boards and weekly forms, ro.wiktionary word evidence, path-level robots refusals, all lanes open as their tools land; catalog reuse decided after the pilot.
 
 - [0231](0231-v5-dumps-words-and-model-candidates.md) — V5 amendment, new campaign `v5-pilot-2` with a fresh clock: hash-pinned ro.wiktionary dump as evidence, full paradigms from tables with per-form drops and profanity probes, same-word diminutives cleared, 12 words and 48 links behind a one-word board dry run, model-proposed candidates after the backlog (never evidence), forms-and-words trains at 20 forms or 6 words, ledger-based token meter, credit for ro.wiktionary.
+
+- [0232](0232-steps-and-hint-ladder.md) — points stop being shown; steps per game (undone Lanț hops and fruitless Alchimie pairs count), a three-rung hint ladder any time at one step each, daily boards at Ușor with no theme, additive API fields, rules-versioned parity recorded from the Python oracle with a new case count.
+
+- [0233](0233-redesign-v2-interface.md) — redesign v2 interface: six illustrated standalone games, light and dark themes, one-tap daily then free entry, one game frame, help sheet and result panel; replaces frozen screenshots/hashes/axe ("re-lock") while byte ceilings stay.
+
+- [0234](0234-anonymous-daily-board-place.md) — anonymous daily board comparison, disabled by default, with aggregate-only storage, a podium and expiring rate limits.
+
+- [0235](0235-v5-real-use-fixes.md) — V5 real-use fixes: one disturbed-board definition (top-100 set or order; Lanț shortest route) in dry run, S7 and closeout; paired no-worse re-blind for existing Cald boards with both judges' sign-off; frozen items finish between 70% and 90%; full FrequencyWords list with diacritic folding; early Lanț overlap screen; root operating rules and budgets; pilot 3 after the weekly reset.

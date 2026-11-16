@@ -13,46 +13,51 @@ const themed = { ...game, packId: "al_arta_cultura_008" };
 const CREATE = "/api/wordgames/alchimie/games";
 const createdReply = (page) => page.waitForResponse((response) =>
   response.request().method() === "POST" && new URL(response.url()).pathname === CREATE);
-const difficultyGroup = (page) => page.getByRole("group", { name: "DIFICULTATE", exact: true });
-const categoryGroup = (page) => page.getByRole("group", { name: "CATEGORIE", exact: true });
+const dialog = (page) => page.getByRole("dialog", { name: "Cum se joacă Alchimie", exact: true });
 
-async function chooseNormal(page) {
-  await openGameOptions(page, game, { setup: true });
-  const normal = difficultyGroup(page).getByRole("button", { name: /^Normal\b/ });
-  await normal.click();
-  await expect(normal).toHaveAttribute("aria-pressed", "true");
+async function applyThemedFreeOptions(page) {
+  await openGameOptions(page, game);
+  const difficulty = dialog(page).getByLabel("Dificultate");
+  await difficulty.selectOption("normal");
+  await expect(difficulty).toHaveValue("normal");
+  const theme = dialog(page).getByLabel("Temă");
+  await expect(theme.locator('option[value="arta_cultura"]')).toHaveCount(1);
+  await theme.selectOption("arta_cultura");
+  await expect(theme).toHaveValue("arta_cultura");
+}
+
+async function nextGame(page, name) {
+  const response = createdReply(page);
+  await page.getByRole("button", { name, exact: true }).click();
+  const reply = await response;
+  expect(reply.status()).toBe(200);
+  return reply.json();
 }
 
 async function themedStart(page) {
   const plan = solution(themed);
   expect(plan.query.category).toBe("arta_cultura");
   expect(plan.query.difficulty).toBe("normal");
+  await deterministicStarts(page, game);
   const originalRequests = [];
-  await page.route(`**${CREATE}?*`, async (route) => {
+  await page.route((url) => url.pathname === CREATE, async (route) => {
+    if (route.request().method() !== "POST") return route.continue();
     const original = new URL(route.request().url());
     originalRequests.push(Object.fromEntries(original.searchParams));
-    // Stabilize the approved real board by its native selected seed. Never
-    // replace category/difficulty: that would hide a product option regression.
-    original.searchParams.set("seed", plan.query.seed);
+    // Stabilize the reviewed board without replacing the actual UI options.
+    original.searchParams.set("seed", original.searchParams.has("category") ? plan.query.seed : "38");
     await route.continue({ url: original.toString() });
   });
-  await page.goto(game.path);
-  await chooseNormal(page);
-  const theme = categoryGroup(page).getByRole("button", { name: "Artă și cultură", exact: true });
-  await theme.click();
-  await expect(theme).toHaveAttribute("aria-pressed", "true");
-  const response = createdReply(page);
-  await page.getByRole("button", { name: /^Joacă(?: →)?$/ }).click();
-  const reply = await response;
-  expect(reply.status()).toBe(200);
-  const state = await reply.json();
+  await start(page, game);
+  await applyThemedFreeOptions(page);
+  const state = await nextGame(page, "Alt joc");
   expect(state.difficulty).toBe("normal");
   expect(state.board_category).toBe("arta_cultura");
   expect(state.target.label).toBe(plan.initial.target.label);
   await expect(page.locator(game.board)).toBeVisible();
-  expect(originalRequests).toHaveLength(1);
-  expect(originalRequests[0]).toMatchObject({ difficulty: "normal", category: "arta_cultura" });
-  expect(originalRequests[0].daily).toBeUndefined();
+  expect(originalRequests).toHaveLength(2);
+  expect(originalRequests[1]).toMatchObject({ difficulty: "normal", category: "arta_cultura" });
+  expect(originalRequests[1].daily).toBeUndefined();
   return { state, originalRequests, plan };
 }
 
@@ -106,7 +111,7 @@ test("challenge lineage DOM presentation caps at12, orders newest first and grou
   });
   await page.reload();
   await expect(page.locator(game.board)).toBeVisible();
-  await expect(page.locator(".alchemy-menu")).not.toHaveAttribute("open");
+  await expect(dialog(page)).toBeHidden();
   await expect(page.locator(".alchemy-reaction-history")).toBeHidden();
   await openAlchemyDisclosure(page, ".alchemy-discoveries");
   // The same bounded, consecutive-grouped history now opens in one flat switch.
@@ -134,21 +139,17 @@ test("challenge lineage DOM presentation caps at12, orders newest first and grou
 
 test("successful Alt joc keeps the nondefault challenge category and difficulty in the real create request", async ({ page }) => {
   const { state, originalRequests } = await themedStart(page);
-  await openAlchemyDisclosure(page, ".alchemy-menu");
-  const response = createdReply(page);
-  await page.getByRole("button", { name: "Alt joc", exact: true }).click();
-  const reply = await response;
-  expect(reply.status()).toBe(200);
-  const next = await reply.json();
+  await openGameOptions(page, game);
+  const next = await nextGame(page, "Alt joc");
   expect(next.game_id).not.toBe(state.game_id);
   expect(next.difficulty).toBe("normal");
   expect(next.board_category).toBe("arta_cultura");
   expect(next.daily).toBeFalsy();
-  expect(originalRequests).toHaveLength(2);
-  expect(originalRequests[1]).toMatchObject({ difficulty: "normal", category: "arta_cultura" });
-  expect(originalRequests[1].daily).toBeUndefined();
+  expect(originalRequests).toHaveLength(3);
+  expect(originalRequests[2]).toMatchObject({ difficulty: "normal", category: "arta_cultura" });
+  expect(originalRequests[2].daily).toBeUndefined();
   await expect(page.locator(game.board)).toBeVisible();
-  expect(await page.evaluate(() => localStorage.getItem("cat_active_game_v1_alchimie"))).toBe(next.game_id);
+  await expect.poll(() => page.evaluate(() => localStorage.getItem("cat_active_game_v1_alchimie"))).toBe(next.game_id);
 });
 
 test("successful solved-challenge replay keeps the nondefault category and difficulty", async ({ page }) => {
@@ -156,42 +157,37 @@ test("successful solved-challenge replay keeps the nondefault category and diffi
   const won = await solve(page, themed, plan.steps);
   expect(won.won).toBe(true);
   await expect(page.getByRole("heading", { name: "Ai făurit ținta!", exact: true })).toBeVisible();
-  const response = createdReply(page);
-  await page.getByRole("button", { name: "Încă unul →", exact: true }).click();
-  const reply = await response;
-  expect(reply.status()).toBe(200);
-  const next = await reply.json();
+  const next = await nextGame(page, "Încă o rundă");
   expect(next.game_id).not.toBe(state.game_id);
   expect(next.difficulty).toBe("normal");
   expect(next.board_category).toBe("arta_cultura");
   expect(next.won).toBe(false);
   expect(next.daily).toBeFalsy();
-  expect(originalRequests).toHaveLength(2);
-  expect(originalRequests[1]).toMatchObject({ difficulty: "normal", category: "arta_cultura" });
-  expect(originalRequests[1].daily).toBeUndefined();
+  expect(originalRequests).toHaveLength(3);
+  expect(originalRequests[2]).toMatchObject({ difficulty: "normal", category: "arta_cultura" });
+  expect(originalRequests[2].daily).toBeUndefined();
   await expect(page.locator(game.board)).toBeVisible();
   await expect(page.getByRole("heading", { name: "Ai făurit ținta!", exact: true })).toHaveCount(0);
 });
 
-test("the real daily challenge create request uses the selected nondefault difficulty", async ({ page }) => {
+test("the real daily starts at Ușor and ignores the stored free-round theme", async ({ page }) => {
   const day = "2026-10-08";
-  await page.clock.setFixedTime(new Date("2026-10-08T12:00:00.000Z"));
+  await page.clock.setFixedTime(new Date(day + "T12:00:00.000Z"));
+  await page.addInitScript(() => {
+    localStorage.setItem("cat_free_v2_alchimie", JSON.stringify({ difficulty: "normal", category: "arta_cultura" }));
+  });
   const originalRequests = [];
   page.on("request", (request) => {
     const url = new URL(request.url());
     if (request.method() === "POST" && url.pathname === CREATE) originalRequests.push(Object.fromEntries(url.searchParams));
   });
-  await page.goto(game.path);
-  await chooseNormal(page);
-  const response = createdReply(page);
-  await page.getByRole("button", { name: "Provocarea zilei", exact: true }).click();
-  const reply = await response;
-  expect(reply.status()).toBe(200);
-  const state = await reply.json();
+  const state = await start(page, { ...game, daily: day });
   expect(originalRequests).toHaveLength(1);
-  expect(originalRequests[0]).toMatchObject({ daily: day, difficulty: "normal" });
+  expect(originalRequests[0]).toMatchObject({ daily: day, difficulty: "usor" });
   expect(originalRequests[0].category).toBeUndefined();
   expect(state.daily).toBe(day);
-  expect(state.difficulty).toBe("normal");
-  await expect(page.locator(game.board)).toBeVisible();
+  expect(state.difficulty).toBe("usor");
+  await openGameOptions(page, game);
+  await expect(dialog(page).getByLabel("Dificultate")).toHaveValue("normal");
+  await expect(dialog(page).getByLabel("Temă")).toHaveValue("arta_cultura");
 });

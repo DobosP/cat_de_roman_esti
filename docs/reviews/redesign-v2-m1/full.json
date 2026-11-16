@@ -1,0 +1,555 @@
+{
+  "schema": 1,
+  "target": "full",
+  "status": "pass",
+  "sha": "8b6679afae886cd0014e0b0bd98f0c2a6f30e1e1",
+  "dirty": false,
+  "tree_sha256": "a4a9090d79d69691e998dee6d71d6c33d9873635f25c3ca21731aba26458a699",
+  "toolchain_digest": "sha256:c84ff601865080c9915159220f136fcfb80218bb91240669d65d62ae654404d6",
+  "versions_lock_sha256": "07b78e8df5330c5463430ea90b3954142b25b25b2550941d071097d5efd8a0ad",
+  "parallel": 4,
+  "started": "2026-11-16T14:51:49.985Z",
+  "finished": "2026-11-16T14:59:57.684Z",
+  "checks": [
+    {
+      "name": "bootstrap-evidence",
+      "status": "pass",
+      "duration_ms": 3
+    },
+    {
+      "name": "cat-setup-npm-ci",
+      "status": "pass",
+      "duration_ms": 2586
+    },
+    {
+      "name": "versions-check",
+      "status": "pass",
+      "duration_ms": 508
+    },
+    {
+      "name": "toolchain-versions",
+      "status": "pass",
+      "duration_ms": 933
+    },
+    {
+      "name": "lint-scope",
+      "status": "pass",
+      "duration_ms": 655
+    },
+    {
+      "name": "kit:check",
+      "status": "pass",
+      "duration_ms": 232
+    },
+    {
+      "name": "cat-browser-capability",
+      "status": "pass",
+      "duration_ms": 1269
+    },
+    {
+      "name": "cat-active-ui",
+      "status": "pass",
+      "duration_ms": 82
+    },
+    {
+      "name": "cat-doccheck-source-contracts",
+      "status": "pass",
+      "duration_ms": 1404
+    },
+    {
+      "name": "cat-doc-check",
+      "status": "pass",
+      "duration_ms": 555
+    },
+    {
+      "name": "cat-content-validate",
+      "status": "pass",
+      "duration_ms": 2085
+    },
+    {
+      "name": "cat-content-export",
+      "status": "pass",
+      "duration_ms": 2387
+    },
+    {
+      "name": "cat-docs-gate",
+      "status": "pass",
+      "duration_ms": 79
+    },
+    {
+      "name": "cat-unit-fresh-build-output",
+      "status": "pass",
+      "duration_ms": 71
+    },
+    {
+      "name": "cat-unit-frontend-build",
+      "status": "pass",
+      "duration_ms": 2504
+    },
+    {
+      "name": "cat-unit-emitted-inventory",
+      "status": "pass",
+      "duration_ms": 343
+    },
+    {
+      "name": "cat-unit-assets",
+      "status": "pass",
+      "duration_ms": 328
+    },
+    {
+      "name": "cat-unit-gui-identity",
+      "status": "pass",
+      "duration_ms": 77
+    },
+    {
+      "name": "cat-route-budgets",
+      "status": "pass",
+      "duration_ms": 509
+    },
+    {
+      "name": "cat-frozen-legacy-integrity",
+      "status": "pass",
+      "duration_ms": 0
+    },
+    {
+      "name": "cat-frontend-unit",
+      "status": "pass",
+      "duration_ms": 8
+    },
+    {
+      "name": "cat-frontend-lint",
+      "status": "pass",
+      "duration_ms": 10
+    },
+    {
+      "name": "cat-frontend-types",
+      "status": "pass",
+      "duration_ms": 10
+    },
+    {
+      "name": "cat-backend-race",
+      "status": "pass",
+      "duration_ms": 9
+    },
+    {
+      "name": "cat-backend-vet",
+      "status": "pass",
+      "duration_ms": 10
+    },
+    {
+      "name": "cat-authcore-race",
+      "status": "pass",
+      "duration_ms": 10
+    },
+    {
+      "name": "cat-authcore-vet",
+      "status": "pass",
+      "duration_ms": 10
+    },
+    {
+      "name": "cat-full-build-cat-server",
+      "status": "pass",
+      "duration_ms": 1070
+    },
+    {
+      "name": "cat-full-build-cat-browser-plan",
+      "status": "pass",
+      "duration_ms": 689
+    },
+    {
+      "name": "cat-pg-accounts",
+      "status": "pass",
+      "duration_ms": 2597
+    },
+    {
+      "name": "cat-pg-httpapi",
+      "status": "pass",
+      "duration_ms": 119661
+    },
+    {
+      "name": "cat-http-parity",
+      "status": "pass",
+      "duration_ms": 3425
+    },
+    {
+      "name": "cat-legacy-owner-journey",
+      "status": "pass",
+      "duration_ms": 3123
+    },
+    {
+      "name": "cat-browser-full",
+      "status": "pass",
+      "duration_ms": 339319
+    },
+    {
+      "name": "csp-measurement",
+      "status": "pass",
+      "duration_ms": 13
+    },
+    {
+      "name": "app-image-evidence",
+      "status": "pass",
+      "duration_ms": 0
+    },
+    {
+      "name": "browser-evidence",
+      "status": "pass",
+      "duration_ms": 35
+    }
+  ],
+  "csp": {
+    "stage": "enforced",
+    "violations": 0,
+    "legacy_violations": 0
+  },
+  "budgets": {
+    "gate:active:global-css:global": {
+      "limit": 16093,
+      "actual": 12932,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/full/route-budgets/active.json"
+    },
+    "gate:active:route-js:/": {
+      "limit": 40960,
+      "actual": 25948,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/full/route-budgets/active.json"
+    },
+    "gate:active:route-css:/": {
+      "limit": 16093,
+      "actual": 12932,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/full/route-budgets/active.json"
+    },
+    "gate:active:route-js:/alchimie": {
+      "limit": 40960,
+      "actual": 37948,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/full/route-budgets/active.json"
+    },
+    "gate:active:route-css:/alchimie": {
+      "limit": 16093,
+      "actual": 12932,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/full/route-budgets/active.json"
+    },
+    "gate:active:route-js:/alchimie?mode=challenges": {
+      "limit": 40960,
+      "actual": 37948,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/full/route-budgets/active.json"
+    },
+    "gate:active:route-css:/alchimie?mode=challenges": {
+      "limit": 16093,
+      "actual": 12932,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/full/route-budgets/active.json"
+    },
+    "gate:active:route-js:/alchimie?mode=explore": {
+      "limit": 40960,
+      "actual": 37948,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/full/route-budgets/active.json"
+    },
+    "gate:active:route-css:/alchimie?mode=explore": {
+      "limit": 16093,
+      "actual": 12932,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/full/route-budgets/active.json"
+    },
+    "gate:active:route-js:/cald-rece": {
+      "limit": 40960,
+      "actual": 37334,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/full/route-budgets/active.json"
+    },
+    "gate:active:route-css:/cald-rece": {
+      "limit": 16093,
+      "actual": 12953,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/full/route-budgets/active.json"
+    },
+    "gate:active:route-js:/clasament": {
+      "limit": 40960,
+      "actual": 24447,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/full/route-budgets/active.json"
+    },
+    "gate:active:route-css:/clasament": {
+      "limit": 16093,
+      "actual": 12953,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/full/route-budgets/active.json"
+    },
+    "gate:active:route-js:/conexiuni": {
+      "limit": 40960,
+      "actual": 36863,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/full/route-budgets/active.json"
+    },
+    "gate:active:route-css:/conexiuni": {
+      "limit": 16093,
+      "actual": 12953,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/full/route-budgets/active.json"
+    },
+    "gate:active:route-js:/intrusul": {
+      "limit": 40960,
+      "actual": 36592,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/full/route-budgets/active.json"
+    },
+    "gate:active:route-css:/intrusul": {
+      "limit": 16093,
+      "actual": 12953,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/full/route-budgets/active.json"
+    },
+    "gate:active:route-js:/lant": {
+      "limit": 40960,
+      "actual": 37733,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/full/route-budgets/active.json"
+    },
+    "gate:active:route-css:/lant": {
+      "limit": 16093,
+      "actual": 12953,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/full/route-budgets/active.json"
+    },
+    "gate:active:route-js:/perechi": {
+      "limit": 40960,
+      "actual": 37415,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/full/route-budgets/active.json"
+    },
+    "gate:active:route-css:/perechi": {
+      "limit": 16093,
+      "actual": 12953,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/full/route-budgets/active.json"
+    },
+    "gate:active:consumer-css-total:all": {
+      "limit": 16093,
+      "actual": 12953,
+      "status": "pass",
+      "status_source": "consumer-css-total",
+      "inventory_sha256": "59c1349b018c215661d908e627ff4c3ec1d1fb9e777cfc7ac2bde6764cc2d5ba",
+      "consumer_status": "pass",
+      "classification": "active-consumer-numeric-gate",
+      "consumer_report": ".gate/full/route-budgets/active.json"
+    }
+  },
+  "artifacts": [
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-bootstrap-config-0.stdout.log sha256:b88e00bfaad7d77592262b79d6ae633e8979ce1ff54431d722601db5aea7a351",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-bootstrap-config-0.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-bootstrap-setup-1.stdout.log sha256:99a3924266dd990cfe4aafe4f7eac379a7d4fae7c0afa100d1f290daf80fe32c",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-bootstrap-setup-1.stderr.log sha256:6e3b1e37fae57c49e967288b4c9c975a2518d1f20dd827fad5385af714c66f7a",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-bootstrap-config-2.stdout.log sha256:b88e00bfaad7d77592262b79d6ae633e8979ce1ff54431d722601db5aea7a351",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-bootstrap-config-2.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/bootstrap-execution.json sha256:c605cffacd3bbd2ee634fc90969ca66a6645bc68a3db7a1f0b2c82863fe395c6",
+    ".gate/full/logs/setup-db1ab500-44f6-4873-b040-f795a7d07c03-cat-setup-npm-ci-0.stdout.log sha256:dd781dd2565fec17872dd47dbd4b4802e44483b65410e96d5fdf567a50556860",
+    ".gate/full/logs/setup-db1ab500-44f6-4873-b040-f795a7d07c03-cat-setup-npm-ci-0.stderr.log sha256:c211d12fa3e2f4c92b2151c523b2743bc220c1991e0de3797724e244bb411568",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-versions-check-13.stdout.log sha256:7454e34c107c807c75c71823eac1fa527ac51538989f7d88a8d27958f1bb7189",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-versions-check-13.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/validation-versions-check.json sha256:679af3b0804b6b0d64d58077dd1a99fa4af130e1b5ef121e5464db37e406129d",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-toolchain-versions-15.stdout.log sha256:70418260805d9ac708057fd6fc251f31734e71e641ae1c383c4fbb1e3c8331e5",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-toolchain-versions-15.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/validation-toolchain-versions.json sha256:4b8f3e38b6e421fa4071e66c1e533a483d749134d44d1f5ea1702f8e6b6de695",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-lint-scope-17.stdout.log sha256:65edc0d78f6644829e0d707b62660266a2c4864a9d1b6b6a07603c386cdaa35e",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-lint-scope-17.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/validation-lint-scope.json sha256:f6c7d9b653d4bb15e17bb638a2c46bcea76b91cacb9bdb77bd4881db829f84ce",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-kit:check-19.stdout.log sha256:1b2b239c0a79d4192f33dca56389a466cc2acbfb7ab983606e35a98f5af0b29c",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-kit:check-19.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-repo-full-21.stdout.log sha256:78079f32201a99e879af3ad94a740389400eb63618c0ccf4fd8dc0b766a92cf1",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-repo-full-21.stderr.log sha256:b9ba9fd46db4dd3fc6a2298d8f5ffaef0ffc0dd1c6edb0a8db393649146afe7f",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-browser-capability-0.stdout.log sha256:a735d22ffef613e2df2270b3da1aa3438cc6c9135ba91061947f0797940e5b98",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-browser-capability-0.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/browser-capability/db1ab500-44f6-4873-b040-f795a7d07c03/context.json sha256:b01182362a44623f76087d0b0cb8c7ccef4ec25106a0e9f99ad0c99e84a55cc0",
+    ".gate/full/browser-capability/db1ab500-44f6-4873-b040-f795a7d07c03/desktop-identity-response.bin sha256:1df240978b3f36458da7a7868a45f43f793bd5711e58d5eeddf7e4a85c7fe46d",
+    ".gate/full/browser-capability/db1ab500-44f6-4873-b040-f795a7d07c03/desktop-observation.json sha256:4b6b075023c7b92552e62f859e0837c864b51ad8159485a30d88682be2a700e9",
+    ".gate/full/browser-capability/db1ab500-44f6-4873-b040-f795a7d07c03/mobile-identity-response.bin sha256:1df240978b3f36458da7a7868a45f43f793bd5711e58d5eeddf7e4a85c7fe46d",
+    ".gate/full/browser-capability/db1ab500-44f6-4873-b040-f795a7d07c03/mobile-observation.json sha256:15e6edc923b08a4da1ee6ac659494118e3c0531f118d57b9e4d7502f9535c102",
+    ".gate/full/browser-capability/db1ab500-44f6-4873-b040-f795a7d07c03/result.json sha256:1509e5609cf9a00ee7bc36893b79f553ac01197c7125d409af2e1b0554399261",
+    ".gate/full/active-ui-proof.json sha256:f3c0ba774df57942e0f5b222f70ca8724489530c2ee90442269cc57798f30b3b",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-doccheck-source-contracts-4.stdout.log sha256:3a55cbec812662d910932138ece6ef7989445f4792e10b4ea04266d801fed71f",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-doccheck-source-contracts-4.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/doccheck-contracts/report.json sha256:bab9f4aff6374e6e9ff371a56f8c448af53c4330f436ffb61f9883d0e9ce2802",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-doc-check-6.stdout.log sha256:8ffd7ce68ad57024c9b30f74c050bbab46e1836e91e10a06dc16c4c2a673ad2b",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-doc-check-6.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-content-validate-7.stdout.log sha256:1d2e645a4a6946dae65ac9fc067442df3e7a430fc9fee3039e41fd1ee3819976",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-content-validate-7.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-content-export-8.stdout.log sha256:4f715aebbcf4c517ca8a5686959372f4ab156e4e62f897e6e5e607156dc5c8fb",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-content-export-8.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-docs-gate-9.stdout.log sha256:b0fe6cd615aa13e1f86c53da86f88fd28b31ca96b8b50f60b81e35471fafa22c",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-docs-gate-9.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-unit-fresh-build-output-10.stdout.log sha256:e2e1ce5545937fc5c06e9f7181367b495e3f34c43fe5a82665d41e2d4555c625",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-unit-fresh-build-output-10.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-unit-frontend-build-11.stdout.log sha256:0b5edc91eadfa7dd64217579d93c56e546d10e513cae300427c3ba559e1d9067",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-unit-frontend-build-11.stderr.log sha256:ee53b77219b80720b42476aa90f6b8a64d4e41e60ebb81c18d204edd804df309",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-unit-emitted-inventory-12.stdout.log sha256:42f857823926a5435216677c6aaa6e6fc4f8e2735578e83077d45697b0f8c841",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-unit-emitted-inventory-12.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-unit-assets-14.stdout.log sha256:f6c1486e46246e8c965a8bcdd57636db452f3177b5fc25f90198a192ba570f63",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-unit-assets-14.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-unit-gui-identity-16.stdout.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-unit-gui-identity-16.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "go-backend/embedfs/build/dist/.gui-build.json sha256:1df240978b3f36458da7a7868a45f43f793bd5711e58d5eeddf7e4a85c7fe46d",
+    "go-backend/embedfs/build/dist/.keep sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "go-backend/embedfs/build/dist/versions.lock.json sha256:07b78e8df5330c5463430ea90b3954142b25b25b2550941d071097d5efd8a0ad",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-route-budgets-18.stdout.log sha256:0b5a26a415e1edc059a3f9dc46aa212936ecdaa309ff0e1d1f6be59fcbc71200",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-route-budgets-18.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/route-budgets/active.json sha256:76468ff4ceb4a56c3d16eea6956ebe916d6e1c18ea3de5c57030ca10778bcc44",
+    ".gate/full/route-budgets/frozen-legacy.json sha256:b2477ed2e5694c196e6293aef060d5353237f4b25560bdb887927481c45395a2",
+    ".gate/full/route-budgets/measurements.json sha256:80528be1720108243b65a44b13d4eec83543eebcd158956af87d06795e3a690d",
+    ".gate/full/route-budgets/frozen-integrity.json sha256:ba9de7ebb418c89ecf8e8473ce3d51d7f908563d5ab1b00f2816233e20c0d013",
+    ".gate/full/route-budgets/gate-summary.json sha256:f795c57f2bdda73781b820dd606c9a7ae0164cfec0f42563c84b98b4ea9b2612",
+    ".gate/full/unit-reuse-source/.gate/unit/result.json sha256:b057cf7409ce24f8e3e8e6d343d6e18f438e7c3d76e0c7b767f08ec108d7278b",
+    ".gate/full/unit-reuse-source/.gate/unit/execution.json sha256:1828c71d47a56039e0410a79fd5ebf83907b1b50dd97d5243a37fc6221f8397a",
+    ".gate/full/unit-reuse-source/.gate/unit/wrapper-current.json sha256:b9f9dc73e64779c63b26822802742148f8ea15b792f7289e93e5bfb4567aec69",
+    ".gate/full/unit-reuse-source/.gate/unit/wrapper-kit-config.json sha256:4dbf75670d147634cb6de6fcb45a93d5af7c291d2f045cf28d3b4f19e33e9df4",
+    ".gate/full/unit-reuse-source/.gate/unit/bootstrap-execution.json sha256:cfff547f6f93f86b1198215b4683551a10cf894766b5a332da8c39169d151290",
+    ".gate/full/unit-reuse-source/.gate/unit/logs/0ad2d2f7-1112-4f44-b908-91ad044488c7-bootstrap-config-0.stdout.log sha256:b88e00bfaad7d77592262b79d6ae633e8979ce1ff54431d722601db5aea7a351",
+    ".gate/full/unit-reuse-source/.gate/unit/logs/0ad2d2f7-1112-4f44-b908-91ad044488c7-bootstrap-config-0.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/unit-reuse-source/.gate/unit/logs/0ad2d2f7-1112-4f44-b908-91ad044488c7-bootstrap-setup-1.stdout.log sha256:e8442f74753e86102a7c9f003c0ed19406be9addae54ccef95441e7d2d95c284",
+    ".gate/full/unit-reuse-source/.gate/unit/logs/0ad2d2f7-1112-4f44-b908-91ad044488c7-bootstrap-setup-1.stderr.log sha256:6e3b1e37fae57c49e967288b4c9c975a2518d1f20dd827fad5385af714c66f7a",
+    ".gate/full/unit-reuse-source/.gate/unit/logs/0ad2d2f7-1112-4f44-b908-91ad044488c7-bootstrap-config-2.stdout.log sha256:b88e00bfaad7d77592262b79d6ae633e8979ce1ff54431d722601db5aea7a351",
+    ".gate/full/unit-reuse-source/.gate/unit/logs/0ad2d2f7-1112-4f44-b908-91ad044488c7-bootstrap-config-2.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/unit-reuse-source/.gate/unit/pending-review-producer.json sha256:de4bc54c1b8d3f922ba8e525ab2733626e4132d080c47c92c484f764ad329483",
+    ".gate/full/unit-reuse-source/.gate/unit/logs/0ad2d2f7-1112-4f44-b908-91ad044488c7-cat-unit-build-pending-review-producer-27.stdout.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/unit-reuse-source/.gate/unit/logs/0ad2d2f7-1112-4f44-b908-91ad044488c7-cat-unit-build-pending-review-producer-27.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/unit-reuse-source/.gate/unit/logs/0ad2d2f7-1112-4f44-b908-91ad044488c7-cat-frontend-unit-21.stdout.log sha256:fbfe4963ca80cd6ffe064c23a8d8eec0b98c0a4633dc438acc6ec1b03a131d10",
+    ".gate/full/unit-reuse-source/.gate/unit/logs/0ad2d2f7-1112-4f44-b908-91ad044488c7-cat-frontend-unit-21.stderr.log sha256:c37ee44f1eb6851edd678082c58335566469168c9890ad881f9d709a2312e7a1",
+    ".gate/full/unit-reuse-source/.gate/unit/logs/0ad2d2f7-1112-4f44-b908-91ad044488c7-cat-frontend-lint-22.stdout.log sha256:5f1e1e0166916722e28d8bfad2f9234f389ad32c961fa847fff2ddf998a82f9a",
+    ".gate/full/unit-reuse-source/.gate/unit/logs/0ad2d2f7-1112-4f44-b908-91ad044488c7-cat-frontend-lint-22.stderr.log sha256:fb4ab4ed3317b84062092c84e6af20cc3b17671a099df61b7cf55ddeaafbe386",
+    ".gate/full/unit-reuse-source/.gate/unit/logs/0ad2d2f7-1112-4f44-b908-91ad044488c7-cat-frontend-types-23.stdout.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/unit-reuse-source/.gate/unit/logs/0ad2d2f7-1112-4f44-b908-91ad044488c7-cat-frontend-types-23.stderr.log sha256:f29bc3e1fe96d9bdaf4bfff3ac9fac2885480c4241d841bac8546290fd3a04b6",
+    ".gate/full/unit-reuse-source/.gate/unit/logs/0ad2d2f7-1112-4f44-b908-91ad044488c7-cat-backend-race-29.stdout.log sha256:5fdb013fe609ab6153de088742aecb837936926b1615d6c381ac7c022fb311b6",
+    ".gate/full/unit-reuse-source/.gate/unit/logs/0ad2d2f7-1112-4f44-b908-91ad044488c7-cat-backend-race-29.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/unit-reuse-source/.gate/unit/logs/0ad2d2f7-1112-4f44-b908-91ad044488c7-cat-backend-vet-33.stdout.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/unit-reuse-source/.gate/unit/logs/0ad2d2f7-1112-4f44-b908-91ad044488c7-cat-backend-vet-33.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/unit-reuse-source/.gate/unit/logs/0ad2d2f7-1112-4f44-b908-91ad044488c7-cat-authcore-race-34.stdout.log sha256:ba31a25a5b7b5c18ef5371d3b672180afb86609c6cac5329df9c027499ff35eb",
+    ".gate/full/unit-reuse-source/.gate/unit/logs/0ad2d2f7-1112-4f44-b908-91ad044488c7-cat-authcore-race-34.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/unit-reuse-source/.gate/unit/logs/0ad2d2f7-1112-4f44-b908-91ad044488c7-cat-authcore-vet-36.stdout.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/unit-reuse-source/.gate/unit/logs/0ad2d2f7-1112-4f44-b908-91ad044488c7-cat-authcore-vet-36.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/unit-reuse-source/.gate/unit/native-inputs.json sha256:955f75c5b5a1271a5b5c56628995f4cf3e4c913d1a82b50d689287e65c64f363",
+    ".gate/full/unit-reuse-source/.gate/unit/native-reuse/graph.stdout.json sha256:a525caf077765a800e6e8b98facc6f30aa0fbc914bd3bad70a8fe986e19a2381",
+    ".gate/full/unit-reuse-source/.gate/unit/native-reuse/graph.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/unit-reuse-source/.gate/unit/native-reuse/graph-command.json sha256:19ffbabc58f40e9f3746600f7bf72ca1bbd52d92c38e665751b3e58a7a3f7a09",
+    ".gate/full/unit-reuse-source/.gate/unit/native-reuse/graph.json sha256:b3d895a782aa0d4bb766f8ea723d6914cfa489a772f48e03a8590d087fe540b5",
+    ".gate/full/unit-reuse.json sha256:ad7ef6bd20ef1015b1d4cc332c02ba40dfeea2cec5c55cb9af1362bd322bdf77",
+    ".gate/full/managed-assets/inventory.json sha256:42f857823926a5435216677c6aaa6e6fc4f8e2735578e83077d45697b0f8c841",
+    ".gate/full/managed-assets/prepare.json sha256:e2e1ce5545937fc5c06e9f7181367b495e3f34c43fe5a82665d41e2d4555c625",
+    ".gate/full/managed-assets/sync.json sha256:f6c1486e46246e8c965a8bcdd57636db452f3177b5fc25f90198a192ba570f63",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-full-build-cat-server-29.stdout.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-full-build-cat-server-29.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/cat-server sha256:6862bb3779d0ca4d7b8e1cbce6ac9f1165bb28ea01fcf140ad76e8642e6ce5bf",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-full-build-cat-browser-plan-30.stdout.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-full-build-cat-browser-plan-30.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/cat-browser-plan sha256:802cad450f63cc4ef2ce58b7fb0706663821d7807fbd993c9a43e98ea3bb35dc",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-pg-accounts-32.stdout.log sha256:eec23d63fe5d9d80d7f2023bd8dce7ed8d36f48420bbcedad115ae382d9a3a62",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-pg-accounts-32.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-pg-httpapi-35.stdout.log sha256:82f4004a12b1063a79da98347ae88f6b9bf32d99383f5606d01741b7286d8ba5",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-pg-httpapi-35.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-http-parity-37.stdout.log sha256:f37181d8cb35a442924a9c54738ab2d3e46305ec6ee12175af970b90c257e275",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-http-parity-37.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/intent.json sha256:5dacdd1dc1b0cbb81e57772ad1aadf5a1e63d97f62f371fcfab12963c2aec8bc",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-legacy-owner-journey-40.stdout.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-legacy-owner-journey-40.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-legacy-owner-journey-41.stdout.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-legacy-owner-journey-41.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-legacy-owner-journey-42.stdout.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-legacy-owner-journey-42.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/legacy-observation.json sha256:42fb50e361f1d09bc2b5063118fb177fbc136cde98a4d41025000a66d676ae4f",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/00.stderr sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/00.stdout sha256:629230122ce448e922415b477c7ec7900a5b9ecb8068d205d3bb3befe2747396",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/01.stderr sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/01.stdout sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/02.stderr sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/02.stdout sha256:7384c05c6c516b09648e15b037cd769661d0c56a693d33aa1883348404ffe0d8",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/03.stderr sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/03.stdout sha256:98c7460925f7a45d8340e8ac88e3e37538e1427a968a1255478a2b163ae3fe7c",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/04.stderr sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/04.stdout sha256:98c7460925f7a45d8340e8ac88e3e37538e1427a968a1255478a2b163ae3fe7c",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/05.stderr sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/05.stdout sha256:7384c05c6c516b09648e15b037cd769661d0c56a693d33aa1883348404ffe0d8",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/06.stderr sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/06.stdout sha256:98c7460925f7a45d8340e8ac88e3e37538e1427a968a1255478a2b163ae3fe7c",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/07.stderr sha256:c48d1625d6f3a5715ab176a6ebc0f432be01a41e55619c8deb29c82db4f9ea8c",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/07.stdout sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/08.stderr sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/08.stdout sha256:7384c05c6c516b09648e15b037cd769661d0c56a693d33aa1883348404ffe0d8",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/09.stderr sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/09.stdout sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/10.stderr sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/10.stdout sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/11.stderr sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/11.stdout sha256:629230122ce448e922415b477c7ec7900a5b9ecb8068d205d3bb3befe2747396",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/confirm-current-identity.bin sha256:1df240978b3f36458da7a7868a45f43f793bd5711e58d5eeddf7e4a85c7fe46d",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/confirm.json sha256:42fb50e361f1d09bc2b5063118fb177fbc136cde98a4d41025000a66d676ae4f",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/create-state.bin sha256:bee500268363d8772bb7f107145942f4c5eee2652787a34a6a1ea528bd623d13",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/intent.json sha256:5dacdd1dc1b0cbb81e57772ad1aadf5a1e63d97f62f371fcfab12963c2aec8bc",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/legacy-after.json sha256:0c3113c0348b72c3da4e3498503a34f0f0cd97a4f2321ada84a0fa3e3779a4d6",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/legacy-health.bin sha256:4062edaf750fb8074e7e83e0c9028c94e32468a8b6f1614774328ef045150f93",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/legacy-identity.bin sha256:b33607fccc156e17ba832c7a17494fed6f37acac59733bb1a4052b46ab9fc01c",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/legacy-index.bin sha256:f13d10edf094a19668ff92acdad88038e9e9d97674e4d94176830d153dc4d2ee",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/observe-current-identity.bin sha256:1df240978b3f36458da7a7868a45f43f793bd5711e58d5eeddf7e4a85c7fe46d",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/owner-lifecycle.json sha256:d46d965cb284f027da72aa1b0cb26357f009f86355971f9207fca1015d2c59b2",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/owner-ready.json sha256:57d3042bf8a0d943c04b763d001003e568671758158d6e6185ea2eed1af32465",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/preflight-current-identity.bin sha256:1df240978b3f36458da7a7868a45f43f793bd5711e58d5eeddf7e4a85c7fe46d",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/preflight.json sha256:24f9b9e77fae8939dd12d463159ac1393e731f4ba6842fdd88b28514923360c2",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/primary-after.json sha256:7b5b54b81906dbbc4ea525ce80aeec1a94624e5e46f7cdf06e22aa40ba9863d6",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/primary-index.bin sha256:9f5f43cabf30d33573aad108682198294b06f2c45e3953c6371f8e4457cfb6fc",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/probe-result.json sha256:47d928319a2d987d74213e22d7d0df600f9569ffc242b868ca8f9ec3d58b3975",
+    ".gate/full/legacy-owner/9fe52bbc-edb1-40c4-89ae-e72d62ef65bb/request.json sha256:9681feefd477f465697e840065407f2ecfda7fbc10e389ab45f9ae8807292a72",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-browser-full-44.stdout.log sha256:965e45cb11eaaa2cc5b86f73da23dc92342a59a8cf7625add39a67791162f9c7",
+    ".gate/full/logs/db1ab500-44f6-4873-b040-f795a7d07c03-cat-browser-full-44.stderr.log sha256:75d1534f60457d2ac65bd3832ffb2e5dee0a1c736ce48125317bbdf97cd8bbc5",
+    ".gate/full/active-csp-observation.json sha256:8e888ab10ca618d44da02ef919b9b8703e26e5630bb8ff3482805d37633b2480",
+    ".gate/full/csp-measurement.json sha256:d68db3c2dbe0a971ca9a75bf222bd799a80bfb4ff9b1b2f3aebf335dd123d90d",
+    "app-image roedu-app:gate-cat_de_roman_esti-feat__redesign-v2-c241c6ad13c3 sha256:881c968ff6f48f0f1b8c1c771d3f0e769c91e99ede051ac7078d72ebe2577e39",
+    ".gate/full/browser-pw-journeys.json sha256:8b8f0ecc7f78aa53b09453ddaae305e03fae83e8b17cd3d307e0eea1231194a1",
+    ".gate/full/app-witness.json sha256:19df66b0e7adf40fbbe64570b6d84143c058f4cb4536fa277151431f1ef9ec7f",
+    ".gate/full/execution.json sha256:f5bdff5223362574486888e26cb0a8dba7d4b7acaccf755c300a02e0ecfd23d1"
+  ]
+}

@@ -152,7 +152,7 @@ def test_daily_curated_floor_matches_pool_size():
     c = Client()
     body = c.post("/api/wordgames/conexiuni/games?daily=2026-07-07&difficulty=normal").json()
     session = store.get(body["game_id"])
-    pool = get_pack().pool("conexiuni", difficulty="normal")
+    pool = get_pack().pool("conexiuni", difficulty="usor")
     if len(pool) >= CURATED_DAILY_MIN_POOL:
         assert session.pack_id is not None  # deep pool -> curated daily
     else:
@@ -172,7 +172,7 @@ def test_daily_prefers_curated_once_the_pool_is_deep(monkeypatch):
     items = [
         CuratedItem(
             id=f"cx_synth_{i:03d}", game="conexiuni", category="istorie",
-            difficulty="normal", source="ai", status="approved",
+            difficulty="usor", source="ai", status="approved",
             payload=base.payload,
         )
         for i in range(CURATED_DAILY_MIN_POOL)

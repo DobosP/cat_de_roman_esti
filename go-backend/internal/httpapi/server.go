@@ -35,6 +35,7 @@ const MaxRequestBytes = 64 * 1024
 var localOrigin = regexp.MustCompile(`^http://(localhost|127\.0\.0\.1)(:\d+)?$`)
 
 type Server struct {
+	boardComparison     *boardComparison
 	submissions         submissionQueue
 	Accounts            *accounts.Service
 	Auth                *authcore.Service
@@ -214,12 +215,13 @@ func (s *Server) serveHTTP(w http.ResponseWriter, r *http.Request) {
 			write(w, r, 404, map[string]any{"detail": "Not Found"})
 			return
 		}
+		onTerminal := s.boardResponse(r, "intrusul")
 		if len(parts) == 1 {
 			if r.Method != "GET" && r.Method != "HEAD" {
 				write(w, r, 405, map[string]any{"detail": "Method Not Allowed"})
 				return
 			}
-			body, err = s.game.Get(parts[0])
+			body, err = s.game.GetWithTerminal(parts[0], onTerminal)
 		} else {
 			if r.Method != "POST" {
 				write(w, r, 405, map[string]any{"detail": "Method Not Allowed"})
@@ -228,13 +230,13 @@ func (s *Server) serveHTTP(w http.ResponseWriter, r *http.Request) {
 			if parts[1] == "hint" {
 				body, err = s.game.Hint(parts[0])
 			} else {
-				body, err = s.game.GuessInput(parts[0], func() (string, *intrusul.Error) {
+				body, err = s.game.GuessInputWithTerminal(parts[0], func() (string, *intrusul.Error) {
 					id, failure, status := guessID(r)
 					if failure != nil {
 						return "", &intrusul.Error{Status: status, Detail: failure["detail"]}
 					}
 					return id, nil
-				})
+				}, onTerminal)
 			}
 		}
 	}

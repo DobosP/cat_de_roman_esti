@@ -3,7 +3,8 @@
 #   Caddy (TLS/proxy)  ──►  app (Go, single process, compiled SPA)
 #
 # No Postgres, no Google OAuth, no PII: the app is stateless (progress lives in the
-# browser) and the stack persists zero user data.
+# browser) and the default stack persists zero user data. Board comparison
+# has an optional writable volume in docker-compose.board-stats.yml.
 #
 # Usage on the host (e.g. a Hetzner CX22, EU):
 #   cp .env.anon.example .env.anon   # then fill in CAT_DOMAIN / TLS_EMAIL (see docs/DEPLOY.md)

@@ -62,14 +62,14 @@ func TestSource30SelectsExactHistoricalIndependentCorpus(t *testing.T) {
 		t.Fatal("expected at least the 30 Source30-era selectors", len(reviewedSources))
 	}
 	for _, row := range reviewedSources {
-		if reflect.DeepEqual(row.sources, want.Sources) {
+		if row.version == want.Version() && reflect.DeepEqual(row.sources, want.Sources) {
 			continue
 		}
 		historical, err := row.load()
 		if err != nil || !reflect.DeepEqual(row.sources, historical.Sources) {
 			t.Fatal("historical loader no longer binds its exact sources", err)
 		}
-		selected, err := ForSources(row.sources)
+		selected, err := ForSourcesAndRules(row.sources, row.version)
 		if err != nil || !reflect.DeepEqual(selected, historical) {
 			t.Fatal("historical whole tuple selected different responses", err)
 		}

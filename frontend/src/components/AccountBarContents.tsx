@@ -1,4 +1,4 @@
-// AccountBar — the fixed top-right cluster: Donează (if configured), Clasament link
+// AccountBar — the fixed top-right cluster: Donează (if configured)
 // (when accounts are on), and the account affordance (Sign in with Google → RO age-16
 // consent gate → signed-in chip). Renders one useAuth() for the whole bar.
 //
@@ -31,18 +31,9 @@ export default function AccountBarContents({ currentYear }: { currentYear: numbe
     </a>
   ) : null;
 
-  const ranking = me.accounts_enabled ? (
-    // The ranking is served by the frozen legacy bundle (ADR-0197): a plain
-    // same-origin link outside the ported link scope is a full navigation.
-    <a className="account-btn" href="/clasament">
-      🏆 Clasament
-    </a>
-  ) : null;
-
   return (
     <div className="account-bar">
       {donate}
-      {ranking}
       {me.accounts_enabled && <AccountSection me={me} refresh={refresh} currentYear={currentYear} />}
     </div>
   );

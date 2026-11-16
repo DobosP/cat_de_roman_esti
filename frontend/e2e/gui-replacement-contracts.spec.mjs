@@ -184,80 +184,24 @@ async function localHistory(page, value) {
   await page.addInitScript(({ key, value }) => localStorage.setItem(key, JSON.stringify(value)), { key: SCORE_KEY, value });
 }
 
-for (const [length, text] of [[0, null], [1, "🔥 Serie: o zi"], [3, "🔥 Serie: 3 zile"]]) {
-  test(`Home renders a local ${length}-day streak with Romanian copy and no history write`, async ({ page }) => {
-    const history = { _streak: { lastDate: length ? DAY : "", length } };
-    await localHistory(page, history);
-    await page.goto("/");
-    await expect(page.getByRole("heading", { name: "Circuitul de azi", exact: true })).toBeVisible();
-    const streak = page.getByText(/^🔥 Serie:/);
-    if (text === null) await expect(streak).toHaveCount(0);
-    else { await expect(streak).toHaveCount(1); await expect(streak).toHaveText(text); }
-    expect(await page.evaluate((key) => localStorage.getItem(key), SCORE_KEY)).toBe(JSON.stringify(history));
-  });
-}
-
-const DAILY_FIXTURE = [
-  ["alchimie", 900], ["intrusul", 800], ["perechi", 700],
-  ["conexiuni", 600], ["contexto", 500], ["lant", 0],
-];
-function completedHistory(count) {
-  const history = { _streak: { lastDate: DAY, length: 1 } };
-  for (const [game, score] of DAILY_FIXTURE.slice(0, count)) {
-    const entry = { score, detail: "Rezultat local de test", at: Date.parse(FIXED_TIME), daily: DAY };
-    history[game] = { best: score > 0 ? entry : null, played: 1, recent: [entry],
-      completedNonDaily: false, nonDailyCompletions: 0, nonDailyWon: false };
-  }
-  return history;
-}
-
-for (const completed of [5, 6]) {
-  const title = completed === 5
-    ? "Home with five completed games keeps one daily playable and hides the diploma"
-    : "Home grants its local diploma for six completions including a zero-point game";
-  test(title, async ({ page, isMobile }) => {
-    const history = completedHistory(completed), mutations = [], clipboard = [];
-    await localHistory(page, history);
-    page.on("request", (request) => {
-      if (request.method() === "POST" && new URL(request.url()).pathname.startsWith("/api/")) mutations.push(request.url());
-    });
-    await page.addInitScript(() => {
-      window.__replacementClipboard = [];
-      Object.defineProperty(navigator, "clipboard", { configurable: true,
-        value: { writeText: async (text) => { window.__replacementClipboard.push(text); } } });
-    });
-    await page.goto("/");
-    await expect(page.getByRole("heading", { name: "Circuitul de azi", exact: true })).toBeVisible();
-    const progress = page.getByRole("status", { name: `${completed} din 6 jocuri terminate azi, 3500 din 6000 de puncte`, exact: true });
-    await expect(progress).toBeVisible();
-    await expect(progress).toHaveAttribute("aria-live", "polite");
-    const games = page.getByRole("list", { name: "Progresul jocurilor de azi", exact: true });
-    await expect(games.getByRole("listitem")).toHaveCount(6);
-    await expect(games.getByRole("button")).toHaveCount(completed === 5 ? 1 : 0);
-    if (completed === 5) {
-      await expect(page.getByText(/^🏆 Diplomă de român/)).toHaveCount(0);
-      await expect(page.getByRole("button", { name: "Distribuie", exact: true })).toHaveCount(0);
-      const remaining = games.getByRole("button", { name: "Deschide Lanțul Cuvintelor — neterminat azi", exact: true });
-      await expect(remaining).toBeEnabled();
-      await remaining.click();
-      await expect(page).toHaveURL(/\/lant\?challenge=daily$/);
-      await expect(page.getByRole("button", { name: "Joacă provocarea zilei", exact: true })).toBeEnabled();
-    } else {
-      await expect(games.getByRole("listitem", { name: "Lanțul Cuvintelor: terminat azi, 0 puncte", exact: true })).toBeVisible();
-      await expect(page.getByText("🏆 Diplomă de român — 07.10.2026", { exact: true })).toBeVisible();
-      await expect(page.getByText("Ai închis circuitul de azi: 3500 puncte.", { exact: true })).toBeVisible();
-      const share = page.getByRole("button", { name: "Distribuie", exact: true });
-      await expect(share).toBeEnabled();
-      const coarsePointer = await page.evaluate(() => matchMedia("(pointer: coarse)").matches);
-      if (isMobile) expect(coarsePointer).toBe(true);
-      if (coarsePointer) expect((await share.boundingBox()).height).toBeGreaterThanOrEqual(44);
-      await share.click();
-      await expect(page.getByText("Copiat!", { exact: true })).toBeVisible();
-      clipboard.push(...await page.evaluate(() => window.__replacementClipboard));
-      const origin = new URL(page.url()).origin;
-      expect(clipboard).toEqual([`Cât de român ești? Circuit 6/6 azi · 3500 pct · Joacă: ${origin}/`]);
-    }
-    expect(mutations).toEqual([]);
-    expect(await page.evaluate((key) => localStorage.getItem(key), SCORE_KEY)).toBe(JSON.stringify(history));
-  });
-}
+test("results sheet shows steps, hides legacy points and preserves the stored history", async ({ page }) => {
+  const entry = { score: 900, detail: "Rezultat local de test", at: Date.parse(FIXED_TIME), daily: DAY, steps: 2 };
+  const legacy = { ...entry, score: 511, steps: undefined, at: entry.at - 1000 };
+  const history = { intrusul: { best: entry, recent: [entry, legacy], played: 2 } };
+  await localHistory(page, history);
+  await page.goto("/");
+  await expect(page.locator("dialog.results-history")).toHaveCount(0);
+  const trigger = page.getByRole("button", { name: "Rezultatele mele" });
+  await trigger.click();
+  const dialog = page.getByRole("dialog", { name: "Rezultatele mele" });
+  await expect(dialog.getByRole("listitem")).toHaveCount(1);
+  await expect(dialog.getByRole("listitem")).toContainText("Intrusul");
+  await expect(dialog.getByRole("listitem")).toContainText("2 pași");
+  await expect(dialog).not.toContainText(/900|511|puncte/i);
+  await expect(dialog.getByRole("button", { name: "Exportă istoricul" })).toBeEnabled();
+  await expect(dialog.getByRole("button", { name: "Importă istoricul" })).toBeEnabled();
+  await page.keyboard.press("Escape");
+  await expect(dialog).toHaveCount(0);
+  await expect(trigger).toBeFocused();
+  expect(await page.evaluate((key) => localStorage.getItem(key), SCORE_KEY)).toBe(JSON.stringify(history));
+});

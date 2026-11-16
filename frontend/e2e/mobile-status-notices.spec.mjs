@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { games, deterministicStarts, start, solve, solution, tabTo, openAlchemyDisclosure } from "./games.mjs";
+import { games, activeKey, deterministicStarts, start, solve, solution, tabTo, openAlchemyDisclosure } from "./games.mjs";
 
 async function settle(page) {
   await page.evaluate(async () => {
@@ -19,8 +19,8 @@ async function layout(page, testInfo, state) {
       return { left: box.left, top: box.top, right: box.right, bottom: box.bottom,
         width: box.width, height: box.height };
     };
-    const header = globalThis.document.querySelector(".game-shell-header");
-    const hud = header.querySelector(".hud");
+    const header = globalThis.document.querySelector(".game-frame-band");
+    const hud = header.querySelector(".game-frame-status");
     const scroller = globalThis.document.querySelector(".screen-pad");
     return {
       width: globalThis.innerWidth,
@@ -28,7 +28,7 @@ async function layout(page, testInfo, state) {
       scrollWidth: scroller.scrollWidth,
       clientWidth: scroller.clientWidth,
       header: rect(header),
-      title: rect(header.querySelector(".game-shell-title")),
+      title: rect(header.querySelector("h1")),
       hud: rect(hud),
       hudScrollWidth: hud?.scrollWidth,
       badges: hud ? [...hud.children].map((child) => ({ text: child.textContent, ...rect(child) })) : [],
@@ -65,29 +65,28 @@ for (const game of games) {
     await deterministicStarts(page, game);
     for (const width of widths) {
       await page.setViewportSize({ width, height: 850 });
-      await page.goto(game.path);
+      await page.goto("/");
+      // Each viewport opens the same first-run fixture. The preceding win can
+      // otherwise graduate the starter board and record a previous-game exclusion.
       await page.evaluate(() => localStorage.clear());
-      await page.reload();
-      await expect(page.getByRole("button", { name: /^Joacă(?: →)?$/ })).toBeEnabled();
-      await layout(page, testInfo, `${width}-intro`);
-      await start(page, game);
+      const initial = await start(page, game);
       await layout(page, testInfo, `${width}-live`);
       await page.reload();
       await expect(page.locator(game.board)).toBeVisible();
-      await expect(page.getByText(/^Joc reluat\./)).toBeVisible();
+      expect(await page.evaluate((key) => localStorage.getItem(key), activeKey(game))).toBe(initial.game_id);
       await layout(page, testInfo, `${width}-resume`);
       await testInfo.attach(`${width}-resume`, { body: await page.screenshot(), contentType: "image/png" });
-      const exit = page.getByRole("button", { name: "Ieși la lista de jocuri" });
+      const exit = page.getByRole("button", { name: "Înapoi la jocuri" });
       await tabTo(page, exit);
       await expect(exit).toBeFocused();
       await page.locator(".screen-pad").evaluate((element) => { element.scrollTop = element.scrollHeight; });
       await layout(page, testInfo, `${width}-scrolled`);
       if (width <= 640) {
-        const sticky = page.locator(".connections-coach-stack, .contexto-sticky-controls, .alchemy-bench, .word-hop-input");
+        const sticky = page.locator(".contexto-sticky-controls, .alchemy-bench, .word-hop-input");
         for (const control of await sticky.all()) {
           const top = (await control.boundingBox()).y;
-          const header = await page.locator(".game-shell-header").boundingBox();
-          expect(top, "secondary sticky controls stay below the wrapped header")
+          const header = await page.locator(".game-frame-band").boundingBox();
+          if (header.y >= 0) expect(top, "secondary sticky controls stay below the visible header")
             .toBeGreaterThanOrEqual(header.y + header.height);
         }
       }
@@ -107,7 +106,7 @@ for (const game of games) {
       await failure.focus();
       await page.keyboard.press("Space");
       await expect(failure).toHaveCount(0);
-      await expect(page.getByRole("button", { name: /^Încă (?:unul|un lanț) →$/ })).toBeEnabled();
+      await expect(page.getByRole("button", { name: "Încă o rundă", exact: true })).toBeEnabled();
     }
   });
 }
@@ -120,8 +119,8 @@ test("long Romanian status stays readable with text zoom and a short viewport", 
   // Presentation stress only: no game state or network response is changed.
   await page.evaluate(() => {
     globalThis.document.documentElement.style.fontSize = "200%";
-    globalThis.document.querySelector(".alchemy-round-count").textContent = "Personalități și viața de zi cu zi în România";
-    globalThis.document.querySelector(".game-shell-title").textContent = "Lanțul Cuvintelor Românești";
+    globalThis.document.querySelector(".game-frame-status > div").textContent = "Personalități și viața de zi cu zi în România";
+    globalThis.document.querySelector(".game-frame-heading h1").textContent = "Lanțul Cuvintelor Românești";
   });
   await layout(page, testInfo, "long-labels-200-percent");
   await testInfo.attach("long-labels-200-percent", { body: await page.screenshot(), contentType: "image/png" });

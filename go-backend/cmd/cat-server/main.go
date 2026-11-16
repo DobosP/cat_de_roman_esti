@@ -16,7 +16,9 @@ import (
 	"strings"
 	"syscall"
 	"time"
+	_ "time/tzdata"
 
+	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/boardstats"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpapi"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/session"
@@ -65,10 +67,32 @@ func main() {
 		}
 		return
 	}
+	if directory := os.Getenv("CAT_BOARD_STATS_DIR"); directory != "" {
+		bucharest, err := time.LoadLocation("Europe/Bucharest")
+		if err != nil {
+			log.Fatal(err)
+		}
+		now := func() time.Time { return time.Now().In(bucharest) }
+		stats, err := boardstats.Open(directory, boardstats.Options{
+			Now:    now,
+			Report: func(err error) { log.Printf("board comparison: %v", err) },
+		})
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer func() {
+			if err := stats.Close(); err != nil {
+				log.Printf("board comparison shutdown: %v", err)
+			}
+		}()
+		handler.EnableBoardComparison(stats, now)
+	}
 	server := &http.Server{Addr: addr, Handler: handler, ReadHeaderTimeout: 5 * time.Second, ReadTimeout: 15 * time.Second, WriteTimeout: 30 * time.Second, IdleTimeout: 60 * time.Second, MaxHeaderBytes: 16 * 1024}
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
+	shutdownDone := make(chan struct{})
 	go func() {
+		defer close(shutdownDone)
 		<-ctx.Done()
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 		defer cancel()
@@ -80,6 +104,7 @@ func main() {
 	if err = server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 		log.Fatal(err)
 	}
+	<-shutdownDone
 }
 
 // Source overrides must be validated/exported before building the sealed release.

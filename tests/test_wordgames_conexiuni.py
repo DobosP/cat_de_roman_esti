@@ -22,6 +22,7 @@ BASE = "/api/wordgames/conexiuni"
 
 
 PUBLIC_STATE_KEYS = {
+    "steps", "perfect", "hint_level", "hints_left",
     "game_id",
     "tiles",
     "solved",
@@ -119,7 +120,7 @@ def test_create_board_shape() -> None:
     assert b["won"] is False
     assert b["lost"] is False
     assert b["difficulty"] == "normal"
-    assert b["clue_available"] is False
+    assert b["clue_available"]
     assert b["clues_used"] == 0
     assert b["clues"] == []
     # secret solution not leaked at start
@@ -359,41 +360,40 @@ def test_unknown_game_404() -> None:
     assert c.post(f"{BASE}/games/nope/clue").status_code == 404
 
 
-def test_clue_unlocks_after_two_mistakes_without_solution_membership() -> None:
-    c, b, groups = _groups_for()
-    gid = b["game_id"]
-    wrong = _wrong_cross_group(groups)
+def test_clue_ladder_reveals_only_the_pattern_label_then_one_member() -> None:
+    from cat_de_roman_esti.wordgames.conexiuni import _group_label, _label_pattern, store
 
-    early = c.post(f"{BASE}/games/{gid}/clue")
-    assert early.status_code == 400
+    c, created, groups = _groups_for()
+    root = f"{BASE}/games/{created['game_id']}"
+    session = store.get(created["game_id"])
+    group = min(groups)
+    label = _group_label(session, group)
+    assert created["clue_available"] and created["steps"] == 0
+    pattern = c.post(root + "/clue").json()
+    assert pattern["hint_level"] == pattern["steps"] == 1
+    assert set(pattern["clue"]) == {"pattern", "message"}
+    assert pattern["clue"]["pattern"] == _label_pattern(label)
+    assert label not in pattern["clue"]["message"]
+    assert all(node not in str(pattern["clue"]) for nodes in groups.values() for node in nodes)
+    _assert_preterminal_public(pattern, groups)
 
-    _post_json(c, f"{BASE}/games/{gid}/guess", {"ids": _wrong_cross_group(groups, 1)})
-    assert c.get(f"{BASE}/games/{gid}").json()["clue_available"] is False
-    _post_json(c, f"{BASE}/games/{gid}/guess", {"ids": wrong})
-    state = c.get(f"{BASE}/games/{gid}").json()
-    assert state["mistakes"] == 2
-    assert state["clue_available"] is True
-    _assert_preterminal_public(state, groups)
+    full_label = c.post(root + "/clue").json()
+    assert full_label["hint_level"] == full_label["steps"] == 2
+    assert full_label["clue"]["label"] == label and "tile" not in full_label["clue"]
+    assert all(node not in str(full_label["clue"]) for nodes in groups.values() for node in nodes)
 
-    clue = c.post(f"{BASE}/games/{gid}/clue").json()
-    assert clue["ok"] is True
-    assert clue["clues_used"] == 1
-    assert clue["clue_available"] is False
-    assert set(clue["clue"]) == {"pattern", "message"}
-    assert clue["clue"] == clue["clues"][0]
-    assert "solution" not in clue
-    assert "tiles" in clue
-    _assert_preterminal_public(clue, groups)
-
-    # The clue is a redacted category-label pattern only: no category key, no exact
-    # category label, and no tile ids/membership are returned through the clue payload.
-    payload_text = f"{clue['clue']['pattern']} {clue['clue']['message']}"
-    assert all(cat not in payload_text for cat in groups)
-    from cat_de_roman_esti.wordgames.conexiuni import _category_label
-
-    assert all(_category_label(cat) not in payload_text for cat in groups)
-    assert all(nid not in payload_text for ids in groups.values() for nid in ids)
-    assert c.post(f"{BASE}/games/{gid}/clue").status_code == 400
+    member = c.post(root + "/clue").json()
+    assert member["hint_level"] == member["steps"] == 3
+    assert member["lives"] == created["lives"] and member["mistakes"] == 0
+    assert member["clue"]["tile"]["id"] in groups[group]
+    assert {node for nodes in groups.values() for node in nodes if node in str(member["clue"])} == {
+        member["clue"]["tile"]["id"]
+    }
+    assert "solution" not in member and "label" not in member["clue"]
+    assert member["clue"] == member["clues"][-1]
+    before = c.get(root).json()
+    assert c.post(root + "/clue").status_code == 400
+    assert c.get(root).json() == before
 
 
 def test_clue_penalizes_score_and_share() -> None:
@@ -413,83 +413,70 @@ def test_clue_penalizes_score_and_share() -> None:
     assert "indiciu x1" in last["share"]
 
 
-def test_second_clue_needs_three_mistakes_and_a_first_clue_already_used() -> None:
-    c, b, groups = _groups_for()
-    gid = b["game_id"]
+@pytest.mark.parametrize("rung", [1, 2])
+def test_solving_the_hinted_group_ends_its_ladder_without_charge(rung: int) -> None:
+    client, created, groups = _groups_for()
+    root = f"{BASE}/games/{created['game_id']}"
+    for level in range(1, rung + 1):
+        earned = client.post(root + "/clue").json()
+        assert earned["hint_level"] == earned["steps"] == level
 
-    _post_json(c, f"{BASE}/games/{gid}/guess", {"ids": _wrong_cross_group(groups, 0)})
-    _post_json(c, f"{BASE}/games/{gid}/guess", {"ids": _wrong_cross_group(groups, 1)})
-    first = c.post(f"{BASE}/games/{gid}/clue").json()
-    assert first["clues_used"] == 1
-
-    # One clue used, but only two mistakes so far: the second stays locked.
-    assert c.get(f"{BASE}/games/{gid}").json()["clue_available"] is False
-    assert c.post(f"{BASE}/games/{gid}/clue").status_code == 400
-
-    _post_json(c, f"{BASE}/games/{gid}/guess", {"ids": _wrong_cross_group(groups, 2)})
-    state = c.get(f"{BASE}/games/{gid}").json()
-    assert state["mistakes"] == 3
-    assert state["clue_available"] is True
-
-    second = c.post(f"{BASE}/games/{gid}/clue").json()
-    assert second["ok"] is True
-    assert second["clues_used"] == 2
-    assert second["clue_available"] is False
-    assert len(second["clues"]) == 2
-    assert second["clue"] == second["clues"][1]
-    _assert_preterminal_public(second, groups)
-
-    # Both clues spent: a third request is rejected, not silently served.
-    assert c.post(f"{BASE}/games/{gid}/clue").status_code == 400
+    matched = _post_json(client, root + "/guess", {"ids": groups[min(groups)]}).json()
+    assert matched["correct"] and matched["remaining_groups"] == 3
+    assert matched["hints_left"] == 0 and matched["clue_available"] is False
+    assert matched["steps"] == matched["hint_level"] == rung
+    before = client.get(root).json()
+    assert client.post(root + "/clue").status_code == 400
+    assert client.get(root).json() == before
 
 
-def test_next_clue_targets_alphabetically_next_group_and_wraps() -> None:
-    from cat_de_roman_esti.wordgames.conexiuni import (
-        ConexiuniSession,
-        _category_label,
-        _label_pattern,
-        _next_clue,
-    )
+def test_public_last_group_skips_the_membership_hint_without_charge() -> None:
+    client, created, groups = _groups_for()
+    root = f"{BASE}/games/{created['game_id']}"
+    for level in (1, 2):
+        earned = client.post(root + "/clue").json()
+        assert earned["hint_level"] == earned["steps"] == level
 
-    groups = {
-        "aaa": ["a1", "a2", "a3", "a4"],
-        "bbb": ["b1", "b2", "b3", "b4"],
-        "ccc": ["c1", "c2", "c3", "c4"],
-        "ddd": ["d1", "d2", "d3", "d4"],
-    }
-    order = [nid for ids in groups.values() for nid in ids]
-    pattern_of = lambda cat: _label_pattern(_category_label(cat))  # noqa: E731
+    # The remaining words are already known to share one group. Retain the
+    # paid name and pattern, and leave the public membership cue unavailable.
+    for key in sorted(groups)[1:]:
+        matched = _post_json(client, root + "/guess", {"ids": groups[key]}).json()
+        assert matched["correct"] and matched["steps"] == 2
+    assert matched["remaining_groups"] == 1 and matched["hints_left"] == 0
+    assert matched["clue_available"] is False and matched["hint_level"] == 2
+    assert all("tile" not in clue for clue in matched["clues"])
+    before = client.get(root).json()
+    assert client.post(root + "/clue").status_code == 400
+    assert client.get(root).json() == before
 
-    # First clue: alphabetically-first unsolved group.
-    session = ConexiuniSession(groups=groups, order=order)
-    first = _next_clue(session)
-    assert session.clued_categories == ["aaa"]
-    assert first["pattern"] == pattern_of("aaa")
 
-    # Second clue on the same session: alphabetically-next unsolved group after the
-    # one already clued (not a repeat).
-    second = _next_clue(session)
-    assert session.clued_categories == ["aaa", "bbb"]
-    assert second["pattern"] == pattern_of("bbb")
+@pytest.mark.parametrize("public_via", ["theme", "solved_group"])
+def test_public_label_skips_both_text_rungs_without_charge(public_via: str) -> None:
+    from cat_de_roman_esti.wordgames.conexiuni import _group_label, category_label, store
 
-    # Wrap-around: the last-clued group is the alphabetical maximum among what
-    # remains unsolved, so the next clue wraps back to the smallest unsolved one.
-    wrap_session = ConexiuniSession(groups=groups, order=order, clued_categories=["ddd"])
-    wrapped = _next_clue(wrap_session)
-    assert wrap_session.clued_categories == ["ddd", "aaa"]
-    assert wrapped["pattern"] == pattern_of("aaa")
+    client, created, groups = _groups_for()
+    root = f"{BASE}/games/{created['game_id']}"
+    subject, donor = sorted(groups)[:2]
+    # Use an isolated session whose unrevealed group shares a public label.
+    with store.transaction(created["game_id"]) as session:
+        assert session is not None
+        if public_via == "theme":
+            session.category = "istorie"
+            label = category_label(session.category)
+        else:
+            label = _group_label(session, donor)
+        session.group_labels = {**(session.group_labels or {}), subject: label}
+    if public_via == "solved_group":
+        solved = _post_json(client, root + "/guess", {"ids": groups[donor]}).json()
+        assert solved["correct"]
 
-    # Only one unsolved group remains: it is targeted again rather than repeating the
-    # wrap search (an identical payload is expected here, and only here).
-    lone_session = ConexiuniSession(
-        groups=groups,
-        order=order,
-        solved=["aaa", "bbb", "ccc"],
-        clued_categories=["ddd"],
-    )
-    lone = _next_clue(lone_session)
-    assert lone_session.clued_categories == ["ddd", "ddd"]
-    assert lone["pattern"] == pattern_of("ddd")
+    state = client.get(root).json()
+    assert state["steps"] == state["hint_level"] == 0 and state["hints_left"] == 1
+    clue = client.post(root + "/clue").json()
+    assert clue["hint_level"] == 3 and clue["steps"] == clue["clues_used"] == 1
+    assert clue["clue"]["pattern"] == "" and "label" not in clue["clue"]
+    assert clue["clue"]["tile"]["id"] in groups[subject]
+    assert clue["lives"] == state["lives"]
 
 
 def test_score_and_share_reflect_two_clue_penalties() -> None:

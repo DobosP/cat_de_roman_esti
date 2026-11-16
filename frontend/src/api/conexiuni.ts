@@ -2,6 +2,7 @@
 // Server-authoritative: solved groups are revealed as they are earned; unsolved groups
 // and the full solution remain hidden until the game is won or lost.
 
+import type { PerfectRoundCounters } from "./round";
 import { ApiError, getJson, postJson } from "./client";
 
 export type Difficulty = "usor" | "normal" | "greu";
@@ -18,11 +19,13 @@ export interface SolvedGroup {
 }
 
 export interface ConexiuniClue {
+  label?: string;
+  tile?: Tile;
   pattern: string;
   message: string;
 }
 
-export interface ConexiuniState {
+export interface ConexiuniState extends PerfectRoundCounters {
   game_id: string;
   tiles: Tile[];
   solved: SolvedGroup[];

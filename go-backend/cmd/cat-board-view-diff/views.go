@@ -12,7 +12,10 @@ import (
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/contentops"
 )
 
-func (s services) packView(item content.PackItem, dryRun bool) (boardView, error) {
+// packView splits one ranked board into counted parts and diagnostics. The
+// split is the same in every mode: a changed part disturbs the board and a
+// changed diagnostic only lists it for the scripted HTTP replay.
+func (s services) packView(item content.PackItem) (boardView, error) {
 	payload := item.Payload
 	parts := map[string]any{"category": item.Category, "category_label": s.data.CategoryLabels[item.Category], "difficulty": item.Difficulty}
 	diagnostic := map[string]any{}
@@ -29,13 +32,9 @@ func (s services) packView(item content.PackItem, dryRun bool) (boardView, error
 		}
 		parts["target"] = target
 		parts["top_100_ids"] = ids
-		extra := parts
-		if dryRun {
-			extra = diagnostic
-		}
-		extra["top_100_native_scores"] = top
-		extra["target_display"] = s.targetDisplay(target)
-		extra["reachable_count"] = reachable
+		diagnostic["top_100_native_scores"] = top
+		diagnostic["target_display"] = s.targetDisplay(target)
+		diagnostic["reachable_count"] = reachable
 	case "lant":
 		start, _ := payload["start"].(string)
 		par, ok := integer(payload["optimal"])
@@ -54,16 +53,12 @@ func (s services) packView(item content.PackItem, dryRun bool) (boardView, error
 			topology = append(topology, [2]string{step.From, step.To})
 		}
 		parts["shortest_steps"] = topology
-		extra := parts
-		if dryRun {
-			extra = diagnostic
-		}
-		extra["route_captions"], extra["route_labels"], extra["target_display"] = steps, labels, s.targetDisplay(target)
+		diagnostic["route_captions"], diagnostic["route_labels"], diagnostic["target_display"] = steps, labels, s.targetDisplay(target)
 		menus, err := s.lant.BoardRouteMenusForReview(start, target, par)
 		if err != nil {
 			return boardView{}, err
 		}
-		extra["route_menus"] = menus
+		diagnostic["route_menus"] = menus
 	case "alchimie":
 		seeds, ok := stringsIn(payload["seeds"])
 		par, parOK := integer(payload["target_depth"])

@@ -24,7 +24,7 @@ export const NATIVE_REUSE_POLICY = "historical-audited-source-reuse-with-fresh-g
 // sorted {path,mode:0777,sha256} for every .go/go.mod/go.sum in both native trees.
 export const AUDITED_NATIVE_SOURCE = Object.freeze({ count: 238, sha256: "ccf8b44c19805014570fd10457c544f5d6ecd55c84eb6db1d4f225efb380f3dc" });
 const ignored = new Set([".git", "node_modules", ".gate", ".vitest", "test-results", "TASK_BRIEF.md", "TASK_RESULT.md", "SWARM_RESULT.md"]);
-const frontendInputs = new Set(["frontend/package.json", "frontend/package-lock.json", "frontend/src/release.ts", "frontend/e2e/seeded-starts.json"]);
+const frontendInputs = new Set(["frontend/package.json", "frontend/package-lock.json", "frontend/src/release.ts", "frontend/e2e/seeded-starts.json", "frontend/e2e/seeded-starts-rules-v2.json"]);
 export const BACKEND_RACE_ARGS = Object.freeze(["test", "-race", "-timeout=30m", "-count=1", "-json", "./..."]);
 export const NATIVE_GRAPH_ARGS = Object.freeze(["list", "-race", "-deps", "-test", "-json", "./..."]);
 function demand(condition, reason) { if (!condition) throw Error(reason); }

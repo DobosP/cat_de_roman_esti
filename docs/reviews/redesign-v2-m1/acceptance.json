@@ -1,0 +1,96 @@
+{
+  "schema": "cat-redesign-v2-m1-acceptance-v1",
+  "tested_sha": "8b6679afae886cd0014e0b0bd98f0c2a6f30e1e1",
+  "capture_parent": "d2201600039a705693d4abe2790c780528df2ca9",
+  "tree_sha256": "a4a9090d79d69691e998dee6d71d6c33d9873635f25c3ca21731aba26458a699",
+  "toolchain": "sha256:c84ff601865080c9915159220f136fcfb80218bb91240669d65d62ae654404d6",
+  "operator": "agent:codex (PROGRAM E8)",
+  "unit": {
+    "command": "bash scripts/gate.sh unit --sha 8b6679afae886cd0014e0b0bd98f0c2a6f30e1e1 --parallel 4",
+    "result_sha256": "b057cf7409ce24f8e3e8e6d343d6e18f438e7c3d76e0c7b767f08ec108d7278b",
+    "wrapper_sha256": "b9f9dc73e64779c63b26822802742148f8ea15b792f7289e93e5bfb4567aec69",
+    "invocation": "dc5e6c23-1123-4fac-b89b-4dc7b1671af7",
+    "checks": {
+      "pass": 28
+    },
+    "artifact_count": 84
+  },
+  "full": {
+    "command": "python3 -I scripts/gui-full-runner.py --sha 8b6679afae886cd0014e0b0bd98f0c2a6f30e1e1 --parallel 4",
+    "result_sha256": "8444f67ee7583c4e2a9c0dd0c970339f32164e8d325c94fa6a7dd741d690fb1b",
+    "wrapper_sha256": "dd5fe184bf914d3077f814a34ce6fe23bcee49303f9f6304bd0c1292146ce3f1",
+    "invocation": "9fe52bbc-edb1-40c4-89ae-e72d62ef65bb",
+    "checks": {
+      "pass": 37
+    },
+    "artifact_count": 168
+  },
+  "browser": {
+    "report_sha256": "19fe1e204b8665798c31a5e9a46fa1f06108dc97161e88bd6c77e226506a0eb4",
+    "stats": {
+      "startTime": "2026-11-16T14:54:22.355Z",
+      "duration": 289135.514,
+      "expected": 837,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "csp": {
+    "stage": "enforced",
+    "violations": 0,
+    "legacy_violations": 0
+  },
+  "visual": {
+    "report_sha256": "a4e8100255db20f65c4001699d9a0a664f7c6e2da733964bbe6abfc3961a6b42",
+    "checks": 28,
+    "exact_pngs": 18,
+    "vitals": [
+      {
+        "name": "vitals:/conexiuni:lcp",
+        "status": "pass",
+        "expected": 2836,
+        "actual": 1736,
+        "absolute_delta": 1100,
+        "tolerance": 283.6
+      },
+      {
+        "name": "vitals:/conexiuni:inp",
+        "status": "pass",
+        "expected": 184,
+        "actual": 40,
+        "absolute_delta": 144,
+        "tolerance": 50
+      },
+      {
+        "name": "vitals:/alchimie?mode=challenges:lcp",
+        "status": "pass",
+        "expected": 4228,
+        "actual": 1668,
+        "absolute_delta": 2560,
+        "tolerance": 422.8
+      },
+      {
+        "name": "vitals:/alchimie?mode=challenges:inp",
+        "status": "pass",
+        "expected": 200,
+        "actual": 24,
+        "absolute_delta": 176,
+        "tolerance": 50
+      }
+    ]
+  },
+  "budgets": {
+    "report_sha256": "f795c57f2bdda73781b820dd606c9a7ae0164cfec0f42563c84b98b4ea9b2612",
+    "gzip_css_bytes": 12932,
+    "gzip_route_js_bytes": {
+      "/intrusul": 36592,
+      "/perechi": 37415,
+      "/conexiuni": 36863,
+      "/lant": 37733,
+      "/cald-rece": 37334,
+      "/alchimie": 37948
+    }
+  },
+  "parity_cases": 1332
+}

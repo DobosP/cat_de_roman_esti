@@ -1,8 +1,10 @@
 import { test, expect } from "@playwright/test";
 import { nativePlan } from "./native-plan.mjs";
-import { games, gameURL, start, tabTo } from "./games.mjs";
+import { games, gameURL, deterministicStarts, start, tabTo } from "./games.mjs";
 
 const game = games.find(({ key }) => key === "lant");
+const cueOnly = (cue) => Object.fromEntries(Object.entries(cue)
+  .filter(([key]) => !["steps", "hints_left", "hint_level", "perfect"].includes(key)));
 const cases = [
   { id: "lt_geografie_239", nouns: /oraș|regiune|salină|chei|revoluționar|răscoală|munți|Turda/ },
   { id: "lt_literatura_240", nouns: /poet|scriitor|revistă|societate|academie|fondator|postum/ },
@@ -28,8 +30,12 @@ async function begin(page, item) {
       });
     });
   }
-  await page.route("**/api/wordgames/lant/games?*", async (route) => {
+  // Keep the named fixture a real free round under the one-tap entry rule.
+  await deterministicStarts(page, game);
+  await page.route((url) => url.pathname === "/api/wordgames/lant/games", async (route) => {
+    if (route.request().method() !== "POST") return route.continue();
     const url = new URL(route.request().url());
+    expect(url.searchParams.has("daily")).toBe(false);
     for (const [name, value] of Object.entries(item.journey.query)) {
       url.searchParams.set(name, String(value));
     }
@@ -87,7 +93,7 @@ for (const item of cases) {
       expect(usefulChoices.length).toBeGreaterThanOrEqual(2);
       for (const choice of usefulChoices) {
         meaningful(choice.relation, item.nouns);
-        await expect(page.getByRole("button", { name: `Salt la ${choice.label}: ${choice.relation}`, exact: true }))
+        await expect(page.getByRole("button", { name: `${choice.label} ${choice.relation}`, exact: true }))
           .toContainText(choice.relation);
       }
       await fits(page);
@@ -117,22 +123,15 @@ for (const item of cases) {
           await page.reload();
           await expect(page.locator(".lant-current")).toContainText(next.label);
           expect(mutations).toBe(beforeReload);
-          const options = page.locator(".game-options > summary");
-          await tabTo(page, options);
-          await page.keyboard.press("Space");
           await expect(page.getByRole("group", { name: "Traseul parcurs" }))
             .toContainText(saved.path.at(-1).relation);
           await fits(page);
-          await options.press("Space");
         }
       }
       expect(state.won).toBe(true);
       const saved = await (await request.get(gameURL(game, id))).json();
       expect(saved.path).toEqual(state.path);
       await expect(page.getByRole("button", { name: "Copiază rezultatul" })).toBeVisible();
-      const options = page.locator(".game-options > summary");
-      await tabTo(page, options);
-      await page.keyboard.press("Space");
       const path = page.getByRole("group", { name: "Traseul parcurs" });
       for (const step of saved.path.slice(1)) await expect(path).toContainText(step.relation);
       expect(mutations).toBe(route.length - 1);
@@ -152,7 +151,7 @@ for (const item of cases) {
     const id = initial.game_id;
     async function ask() {
       const response = responseFor(page, id, "hint");
-      const button = page.getByRole("button", { name: /💡 (?:Indiciu|Mai clar)/ });
+      const button = page.getByRole("button", { name: /^(?:Indiciu|Fără indicii)$/ });
       await tabTo(page, button);
       await page.keyboard.press("Space");
       return (await response).json();
@@ -160,28 +159,33 @@ for (const item of cases) {
     const direction = await ask();
     expect(direction.stage).toBe("direction");
     meaningful(direction.relation, item.nouns);
-    await expect(page.locator(".lant-hint-panel")).toContainText(direction.relation);
+    await expect(page.locator(".coach-line")).toContainText(direction.relation);
     await page.reload();
-    await expect(page.locator(".lant-hint-panel")).toContainText(direction.relation);
+    await expect(page.locator(".coach-line")).toContainText(direction.relation);
     const saved = await (await request.get(gameURL(game, id))).json();
     expect(saved.moves).toBe(0);
-    expect(saved.earned_hint).toEqual(direction);
+    expect(saved.earned_hint).toEqual(cueOnly(direction));
     const alternatives = await ask();
     expect(alternatives.stage).toBe("alternatives");
     for (const choice of alternatives.alternatives_choices) {
       meaningful(choice.relation, item.nouns);
-      await expect(page.locator(".lant-hint-panel").getByRole("button", {
-        name: `Salt la ${choice.label}: ${choice.relation}`, exact: true,
-      })).toBeVisible();
+      const button = page.locator(".lant-hint-panel").getByRole("button", { name: choice.label, exact: true });
+      await expect(button).toBeVisible();
+      await expect(button).toHaveAccessibleDescription(choice.relation);
     }
     const exact = await ask();
     expect(exact.stage).toBe("hop");
+    expect(exact.steps).toBe(3);
+    await expect(page.getByRole("button", { name: "Fără indicii", exact: true })).toBeDisabled();
+    expect((await request.post(`${gameURL(game, id)}/hint`)).status()).toBe(400);
+    expect((await (await request.get(gameURL(game, id))).json()).steps).toBe(exact.steps);
     meaningful(exact.relation, item.nouns);
     await expect(page.locator(".lant-hint-panel")).toContainText(exact.relation);
     await fits(page);
     await page.screenshot({ path: test.info().outputPath("exact-hint.png"), fullPage: true });
     const move = responseFor(page, id, "move");
-    await tabTo(page, page.locator(".hint-fill-button"));
+    const hop = page.getByRole("button", { name: `Încearcă ${exact.hint.label} · ${exact.relation}`, exact: true });
+    await tabTo(page, hop);
     await page.keyboard.press("Space");
     const moved = await (await move).json();
     expect(moved.moves).toBe(1);

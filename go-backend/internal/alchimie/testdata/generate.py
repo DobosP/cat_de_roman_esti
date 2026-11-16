@@ -1,5 +1,6 @@
 """Generate private differential vectors from the pinned Python reference implementation."""
 
+import argparse
 import hashlib
 import json
 import os
@@ -9,6 +10,12 @@ from pathlib import Path
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--preserve-explore", type=Path,
+        help="Retain exploration vectors from their original, independently captured content release.",
+    )
+    args = parser.parse_args()
     ROOT = Path(__file__).resolve().parents[4]
     sys.path.insert(0, str(ROOT))
     os.environ["DJANGO_SETTINGS_MODULE"] = "cat_de_roman_esti.web.settings"
@@ -23,6 +30,12 @@ def main():
     from cat_de_roman_esti.wordgames import alchimie_explore as E
     from cat_de_roman_esti.wordgames.discovery_world import get_world
     from cat_de_roman_esti.wordgames.packs import get_pack
+
+    output = Path(__file__).with_name("python_parity_rules_v2.json")
+    def write_result(result):
+        output.write_text(
+            json.dumps(result, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n"
+        )
 
     def project(p):
         return {
@@ -140,6 +153,17 @@ def main():
         steps.append({"action": "reset", "hash": digest(v)})
         result["challenge_journeys"].append(steps)
         A.store.delete(gid)
+    if args.preserve_explore:
+        previous = json.loads(args.preserve_explore.read_text(encoding="utf-8"))
+        if previous.get("schema") != result["schema"]:
+            raise ValueError("Exploration vectors must use the original parity schema.")
+        for field in ("explore", "restores"):
+            if not isinstance(previous[field], list) or not previous[field]:
+                raise ValueError(f"Missing original {field} vectors.")
+            result[field] = previous[field]
+        write_result(result)
+        return
+
     w = get_world()
     goal = next(iter(w.goals))
     v = client.post(
@@ -203,13 +227,10 @@ def main():
         assert "inventory" in v
         result["restores"].append({"progress": progress, "hash": digest(v)})
         E.store.delete(v["game_id"])
-    out = Path(__file__).with_name("python_parity.json")
-    out.write_text(
-        json.dumps(result, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n"
-    )
+    write_result(result)
     print(
         "written",
-        out.stat().st_size,
+        output.stat().st_size,
         "explore crafts",
         step,
         "restores",

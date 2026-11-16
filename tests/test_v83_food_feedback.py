@@ -201,6 +201,8 @@ def test_native_proxy_warmer_clues_are_deterministic_and_reproduce_their_rank(
         try:
             for word in ("fotbal", "stilou", "curcubeu"):
                 assert _guess(client, url, word)["won"] is False
+            warm = client.post(url + "/clue").json()
+            assert 1 < warm["word"]["rank"] <= 150
             clue_response = client.post(url + "/clue")
             assert clue_response.status_code == 200
             clue = clue_response.json()

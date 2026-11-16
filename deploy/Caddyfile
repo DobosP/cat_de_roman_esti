@@ -2,7 +2,8 @@
 # docker-compose.anon.yml).
 #
 # Terminates TLS for $CAT_DOMAIN and proxies to the app container. Caddy sets
-# X-Forwarded-Proto for the native application. Account origins use the canonical CAT_DOMAIN.
+# X-Forwarded-Proto for the native application and supplies the client IP for
+# the optional board comparison. Account origins use the canonical CAT_DOMAIN.
 #
 # TLS options (see docs/DEPLOY.md):
 #   • Quick start — Cloudflare DNS-only (grey cloud): Caddy obtains its own Let's Encrypt
@@ -22,5 +23,8 @@
 	request_body {
 		max_size {$CAT_MAX_REQUEST_BYTES}
 	}
-	reverse_proxy app:8000
+	reverse_proxy app:8000 {
+		# Replace any value from the incoming request with the address Caddy resolved.
+		header_up X-Cat-Client-IP {client_ip}
+	}
 }

@@ -16,6 +16,7 @@ export default defineConfig({
   build: {
     outDir: "dist",
     emptyOutDir: true,
+    assetsInlineLimit: (file) => file.endsWith(".svg") ? false : undefined,
     // The post-build budget follows this graph's static imports. Dynamic game
     // chunks stay outside the first-load budget because browsers fetch them on play.
     manifest: true,

@@ -2,9 +2,11 @@
 // Server-authoritative: the chain, optimal distance and validation live in the backend;
 // these helpers only shuttle JSON. All URLs are relative (Vite proxies /api in dev).
 
+import type { PerfectRoundCounters } from "./round";
 import { getJson, postJson } from "./client";
 
 const PREFIX = "/api/wordgames/lant";
+const pendingGiveUps = new Map<string, Promise<LantState>>();
 
 // ---------------------------------------------------------------------- types
 export interface Concept {
@@ -45,7 +47,7 @@ export interface LantProgress {
   message: string;
 }
 
-export interface LantState {
+export interface LantState extends PerfectRoundCounters {
   game_id: string;
   start: Concept;
   target: LantTarget;
@@ -54,6 +56,10 @@ export interface LantState {
   moves: number;
   optimal: number;
   won: boolean;
+  /** Present when the server has recorded an explicit give-up. */
+  gave_up?: true;
+  /** Enabled, eligible daily rounds report an explicit give-up to the server. */
+  can_report_give_up?: true;
   /** Already requested help for this position; reading never escalates it. */
   earned_hint?: HintResult;
   difficulty: Difficulty;
@@ -69,7 +75,7 @@ export interface LantState {
   share?: string;
 }
 
-export interface MoveResult {
+export interface MoveResult extends PerfectRoundCounters {
   ok: boolean;
   /** Present only when ok === false. */
   last_error?: string;
@@ -93,7 +99,7 @@ export interface MoveResult {
   share?: string;
 }
 
-export interface HintResult {
+export interface HintResult extends PerfectRoundCounters {
   hint: Concept | null;
   /** Voluntary escalation, or an explicit free-undo recovery from a revisit trap. */
   stage?: "direction" | "alternatives" | "hop" | "backtrack";
@@ -126,7 +132,15 @@ export function createLant(opts?: {
 }
 
 /** GET /games/{id} — current state. */
-export function getLant(gameId: string): Promise<LantState> {
+export async function getLant(gameId: string): Promise<LantState> {
+  const giveUp = pendingGiveUps.get(gameId);
+  if (giveUp) {
+    try {
+      await giveUp;
+    } catch {
+      // The POST may have committed even if its response was lost.
+    }
+  }
   return getJson<LantState>(`${PREFIX}/games/${encodeURIComponent(gameId)}`);
 }
 
@@ -143,6 +157,17 @@ export function undoLant(gameId: string): Promise<LantState> {
   return postJson<LantState>(
     `${PREFIX}/games/${encodeURIComponent(gameId)}/undo`,
   );
+}
+
+/** POST /games/{id}/giveup — report an explicit give-up for an eligible daily round. */
+export function giveUpLant(gameId: string): Promise<LantState> {
+  const pending = pendingGiveUps.get(gameId);
+  if (pending) return pending;
+
+  const request = postJson<LantState>(`${PREFIX}/games/${encodeURIComponent(gameId)}/giveup`)
+    .finally(() => { pendingGiveUps.delete(gameId); });
+  pendingGiveUps.set(gameId, request);
+  return request;
 }
 
 /** POST /games/{id}/hint — progressively reveal direction, alternatives, then one hop. */

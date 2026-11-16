@@ -1,208 +1,82 @@
-/* Cald sau Rece keeps its guess form and the three recovery actions in one compact,
-   phone-first sticky block. Scrolled guesses pass under an opaque blurred edge. */
+.contexto-screen {
+  --frozen: #e4edfb;
+  --cold: #a9c4ee;
+  --mild: #fce9a6;
+  --warm: var(--game-intrusul);
+  --hot: var(--game-contexto);
+  --found: var(--game-conexiuni);
+}
 .contexto-sticky-controls {
   position: sticky;
   top: 0;
   z-index: 5;
   display: grid;
   gap: 6px;
-  padding-block: 8px;
-  background: rgba(13, 11, 32, 0.88);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  padding-block: 6px;
+  background: var(--page-bg);
 }
-
-@media (max-width: 640px) {
-  .contexto-sticky-controls {
-    top: var(--game-shell-sticky-offset);
-  }
-}
-
-@media (max-width: 640px) and (max-height: 600px) {
-  .contexto-sticky-controls {
-    position: static;
-  }
-}
-
-.contexto-input-bar {
-  min-width: 0;
-}
-
-.contexto-action-row {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 6px;
-}
-
-.contexto-action-row .roedu-btn,
-.contexto-reveal-confirm .roedu-btn {
-  min-width: 0;
-  min-height: 44px;
-  padding-inline: 8px;
-  font-size: 0.82rem;
-}
-
+.contexto-input-bar { min-width: 0; }
+.contexto-rank-guide { margin: 0; font-size: .8rem; line-height: 1.5; }
 .contexto-reveal-confirm {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto auto;
-  gap: 6px;
-  align-items: center;
-  min-height: 44px;
-  padding: 6px 8px;
-  border: 1px solid color-mix(in srgb, var(--warn) 55%, transparent);
-  border-radius: var(--roedu-radius-sm);
-  background: color-mix(in srgb, var(--warn) 10%, #15112d);
-  color: var(--text);
-  font-size: 0.82rem;
-}
-
-.contexto-warm-clue-button {
-  min-width: 0;
-  min-height: 44px;
-  padding: 6px 10px;
-  border: 1px solid rgba(244, 162, 89, 0.58);
-  border-radius: var(--roedu-radius-sm);
-  background: rgba(244, 162, 89, 0.1);
-  color: var(--text);
-  font-weight: 700;
-  overflow-wrap: anywhere;
-}
-
-.contexto-comparison {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  gap: 9px;
-  align-items: center;
-  min-height: 44px;
-  padding: 7px 11px;
-  border: 1px solid color-mix(in srgb, var(--game-contexto) 60%, transparent);
-  border-radius: var(--roedu-radius-sm);
-  background: color-mix(in srgb, var(--game-contexto) 11%, transparent);
-}
-
-.contexto-comparison--new-best,
-.contexto-comparison--warmer,
-.contexto-comparison--found {
-  border-color: color-mix(in srgb, var(--good) 65%, transparent);
-  background: color-mix(in srgb, var(--good) 10%, transparent);
-}
-
-.contexto-comparison--colder {
-  border-color: rgba(123, 184, 242, 0.65);
-  background: rgba(123, 184, 242, 0.1);
-}
-
-.contexto-comparison-copy {
-  min-width: 0;
   display: flex;
-  gap: 5px;
-  align-items: baseline;
-  overflow-wrap: anywhere;
-  font-size: 0.84rem;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px;
+  border: 1px solid var(--warn);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--warn) 8%, var(--surface));
 }
-
-.contexto-comparison-copy span {
-  color: var(--text-dim);
+.contexto-reveal-confirm > span { flex: 1 1 7rem; }
+.contexto-warm-clue-button { justify-self: start; overflow-wrap: anywhere; }
+.contexto-best { display: grid; gap: 8px; }
+.contexto-thermometer { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 4px; }
+.contexto-thermometer > span { display: grid; gap: 4px; font-size: .75rem; text-align: center; overflow-wrap: anywhere; }
+.contexto-thermometer > span::before {
+  content: "";
+  block-size: 18px;
+  box-shadow: inset 0 0 0 1.5px var(--ink);
+  background: var(--zone-color);
+  border-radius: 4px;
 }
-
-.contexto-comparison-rank {
-  color: var(--game-contexto);
-  font-variant-numeric: tabular-nums;
+.contexto-thermometer > span[data-current]::before {
+  outline: 2px solid var(--text);
+  outline-offset: 1px;
 }
-
-.contexto-guess-tabs {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 6px;
-  width: min(240px, 100%);
-  margin-inline: auto;
-}
-
+[data-temperature="Inghetat"] { --zone-color: var(--frozen); }
+[data-temperature="Foarte rece"], [data-temperature="Rece"] { --zone-color: var(--cold); }
+[data-temperature="Caldut"] { --zone-color: var(--mild); }
+[data-temperature="Cald"] { --zone-color: var(--warm); }
+[data-temperature="Fierbinte"] { --zone-color: var(--hot); }
+[data-temperature="Gasit"] { --zone-color: var(--found); }
+.contexto-list-heading { align-items: center; justify-content: space-between; gap: 8px; }
+.contexto-list-title { font-size: 1.1rem; }
+.contexto-guess-tabs { display: flex; gap: 4px; }
 .contexto-guess-tabs button {
   min-height: 44px;
-  border: 1px solid var(--surface-border);
-  border-radius: var(--roedu-radius-sm);
-  background: transparent;
-  color: var(--text-dim);
-  font-weight: 700;
-}
-
-.contexto-guess-tabs button.is-active {
-  border-color: color-mix(in srgb, var(--game-contexto) 72%, transparent);
-  background: color-mix(in srgb, var(--game-contexto) 13%, transparent);
-  color: var(--text);
-}
-
-.contexto-screen .game-container {
-  max-width: 740px;
-}
-
-.contexto-screen .contexto-input-bar .roedu-btn {
-  min-height: 44px;
-}
-
-.contexto-rank-guide {
-  margin: 0;
-  font-size: 0.8rem;
-  line-height: 1.5;
-}
-
-.contexto-tools {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 8px;
-  align-items: start;
-}
-
-.contexto-screen .contexto-action-row {
-  grid-template-columns: minmax(0, 1fr);
-  gap: 4px;
-}
-
-.contexto-clue-cost {
-  text-align: center;
-  font-size: 0.75rem;
-  line-height: 1.4;
-}
-
-.contexto-tools > .game-options[open] {
-  grid-column: 1 / -1;
-}
-
-.contexto-screen .game-container .contexto-list-title {
-  margin: 0;
-  font-size: 0.86rem;
+  padding: 0 12px;
+  border: 1px solid var(--surface-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
   font-weight: 600;
-  color: var(--text-dim);
 }
-
-.contexto-guess-row > .row,
-.contexto-guess-row > .row > .row {
+.contexto-guess-tabs button[aria-pressed="true"] { background: var(--selected-bg); color: var(--selected-text); }
+#contexto-guess-list { gap: 8px; }
+.contexto-guess-row {
+  display: flex;
+  align-items: center;
   flex-wrap: wrap;
-}
-
-.contexto-guess-row strong {
+  gap: 5px 10px;
+  padding: 8px 12px;
   overflow-wrap: anywhere;
+  background: linear-gradient(to right, color-mix(in srgb, var(--zone-color) 12%, var(--surface)) var(--guess-progress), var(--surface) var(--guess-progress));
 }
-
+.contexto-guess-row > strong:first-child { flex: 1 1 6rem; }
+.contexto-temperature { background: var(--zone-color); color: var(--ink); border-radius: 20px; padding: 3px 6px; font-size: .8rem; }
+.contexto-rank { font-variant-numeric: tabular-nums; }
+@media (max-width: 640px) and (max-height: 600px) { .contexto-sticky-controls { position: static; } }
 @media (max-width: 360px) {
-  .contexto-screen .contexto-input-bar {
-    flex-wrap: wrap;
-  }
-
-  .contexto-screen .contexto-input-bar .field {
-    flex-basis: 100%;
-  }
-
-  .contexto-screen .contexto-input-bar .roedu-btn {
-    width: 100%;
-  }
-
-  .contexto-screen .contexto-reveal-confirm {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  }
-
-  .contexto-screen .contexto-reveal-confirm > span {
-    grid-column: 1 / -1;
-  }
+  .contexto-input-bar { flex-wrap: wrap; }
+  .contexto-input-bar .field, .contexto-input-bar .roedu-btn { width: 100%; }
 }

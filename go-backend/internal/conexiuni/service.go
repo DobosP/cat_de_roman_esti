@@ -21,6 +21,7 @@ import (
 
 type Error = gameapi.Error
 type gameSession struct {
+	boardObservation            gameapi.TerminalObservation
 	curatedID                   string
 	groups                      map[string][]string
 	order, solved               []string
@@ -28,10 +29,13 @@ type gameSession struct {
 	won, lost                   bool
 	difficulty, daily, category string
 	labels                      map[string]string
-	clues                       []map[string]string
-	clued                       []string
-	cluesUsed                   int
+	clues                       []clue
+	clued                       string
+	hintLevel                   int
 	history                     [][]string
+}
+type clue struct {
+	pattern, message, label, member string
 }
 type rankedSet struct {
 	categories   []string
@@ -70,7 +74,7 @@ func stringsList(value any) ([]string, bool) {
 	return nil, false
 }
 func newSession(groups map[string][]string, order []string, difficulty, daily, category string, labels map[string]string) *gameSession {
-	return &gameSession{groups: groups, order: order, difficulty: difficulty, daily: daily, category: category, labels: labels, lives: 4, solved: []string{}, clues: []map[string]string{}, clued: []string{}, history: [][]string{}}
+	return &gameSession{groups: groups, order: order, difficulty: difficulty, daily: daily, category: category, labels: labels, lives: 4, solved: []string{}, history: [][]string{}}
 }
 func keys(groups map[string][]string) []string {
 	out := make([]string, 0, len(groups))
@@ -321,6 +325,9 @@ func (s *Service) CreateWithExclusions(seed *big.Int, daily, category, difficult
 			return nil, fail(400, "Categorie necunoscută.")
 		}
 	}
+	if daily != "" {
+		difficulty, category = "usor", ""
+	}
 	var rng *pyrandom.Random
 	var item *content.PackItem
 	opts := pack.PickOptions{Category: category, Difficulty: difficulty}
@@ -359,6 +366,25 @@ func (s *Service) CreateWithExclusions(seed *big.Int, daily, category, difficult
 	return body, nil
 }
 
+// BoardTerminal observes a server-terminal reviewed daily once and returns its
+// anonymous outcome for subsequent comparisons.
+func (s *Service) BoardTerminal(id string, onFirst func(gameapi.TerminalRound)) (gameapi.TerminalRound, bool) {
+	return gameapi.ObserveBoardTerminal(s.store, id, onFirst, (*gameSession).boardTerminal)
+}
+
+func (g *gameSession) boardTerminal() (gameapi.TerminalRound, *gameapi.TerminalObservation) {
+	var outcome gameapi.TerminalOutcome
+	switch {
+	case g.won:
+		outcome = gameapi.TerminalWin
+	case g.lost:
+		outcome = gameapi.TerminalLoss
+	default:
+		return gameapi.TerminalRound{}, nil
+	}
+	return gameapi.TerminalRound{BoardID: g.curatedID, Day: g.daily, Steps: g.steps(), Outcome: outcome}, &g.boardObservation
+}
+
 func (s *Service) Progress(id string) (curatedID string, finished, won bool, score int, found bool) {
 	score = -1
 	found, _ = s.store.Transaction(id, func(v *gameSession) error {
@@ -366,7 +392,7 @@ func (s *Service) Progress(id string) (curatedID string, finished, won bool, sco
 		finished = v.won || v.lost
 		won = v.won
 		if finished {
-			score = max(0, 1000-250*v.mistakes-100*v.cluesUsed)
+			score = max(0, 1000-250*v.mistakes-100*len(v.clues))
 		}
 		return nil
 	})
@@ -403,9 +429,6 @@ func owner(g *gameSession, id string) string {
 	}
 	return ""
 }
-func clueAvailable(g *gameSession) bool {
-	return !g.won && !g.lost && g.cluesUsed < 2 && g.mistakes >= 2+g.cluesUsed && len(g.solved) < len(g.groups)
-}
 func pattern(label string) string {
 	var out strings.Builder
 	start := true
@@ -431,6 +454,58 @@ func (s *Service) redaction(label string) string {
 	}
 	return pattern(label)
 }
+
+func clueGroup(g *gameSession) string {
+	if g.clued != "" {
+		if slices.Contains(g.solved, g.clued) {
+			return ""
+		}
+		return g.clued
+	}
+	for _, cat := range keys(g.groups) {
+		if !slices.Contains(g.solved, cat) {
+			return cat
+		}
+	}
+	return ""
+}
+
+func (s *Service) clueFor(g *gameSession, cat string, level int) clue {
+	label := s.label(g, cat)
+	public := label == "" || (g.category != "" && s.data.CategoryLabels[g.category] == label)
+	for _, solved := range g.solved {
+		public = public || s.label(g, solved) == label
+	}
+	switch level {
+	case 1:
+		redacted := s.redaction(label)
+		if !public && redacted != "" && !strings.EqualFold(redacted, label) {
+			return clue{pattern: redacted, message: "Numele unui grup rămas: " + redacted + " (fiecare _ este o literă lipsă)."}
+		}
+	case 2:
+		if !public {
+			return clue{label: label, message: "Numele grupului: " + label + "."}
+		}
+	case 3:
+		if len(g.solved) < len(g.groups)-1 && len(g.groups[cat]) > 0 {
+			member := g.groups[cat][0]
+			return clue{member: member, message: "Un cuvânt din grup: " + s.concept(member)["label"] + "."}
+		}
+	}
+	return clue{}
+}
+
+func (s *Service) cluePayload(c clue) map[string]any {
+	out := map[string]any{"pattern": c.pattern, "message": c.message}
+	if c.label != "" {
+		out["label"] = c.label
+	}
+	if c.member != "" {
+		out["tile"] = s.concept(c.member)
+	}
+	return out
+}
+
 func (s *Service) share(g *gameSession) string {
 	cats := keys(g.groups)
 	emoji := []string{"🟩", "🟦", "🟪", "🟧"}
@@ -455,8 +530,8 @@ func (s *Service) share(g *gameSession) string {
 		word = "greșeală"
 	}
 	header += fmt.Sprintf("%d %s", g.mistakes, word)
-	if g.cluesUsed > 0 {
-		header += fmt.Sprintf(" · indiciu x%d", g.cluesUsed)
+	if len(g.clues) > 0 {
+		header += fmt.Sprintf(" · indiciu x%d", len(g.clues))
 	}
 	if g.daily != "" {
 		header += " · " + g.daily
@@ -467,6 +542,8 @@ func (s *Service) share(g *gameSession) string {
 	}
 	return header + "\n" + body
 }
+func (g *gameSession) steps() int { return g.mistakes + len(g.clues) }
+
 func (s *Service) state(id string, g *gameSession) map[string]any {
 	terminal := g.won || g.lost
 	solvedIDs := map[string]bool{}
@@ -485,11 +562,21 @@ func (s *Service) state(id string, g *gameSession) map[string]any {
 	for i, cat := range g.solved {
 		solved[i] = s.group(g, cat)
 	}
-	clues := make([]map[string]string, len(g.clues))
+	clues := make([]map[string]any, len(g.clues))
 	for i, clue := range g.clues {
-		clues[i] = map[string]string{"pattern": clue["pattern"], "message": clue["message"]}
+		clues[i] = s.cluePayload(clue)
 	}
-	body := map[string]any{"game_id": id, "tiles": tiles, "solved": solved, "solved_count": len(g.solved), "remaining_groups": len(g.groups) - len(g.solved), "lives": g.lives, "mistakes": g.mistakes, "won": g.won, "lost": g.lost, "difficulty": g.difficulty, "clues_used": g.cluesUsed, "clue_available": clueAvailable(g), "clues": clues}
+	hintsLeft := 0
+	if !terminal {
+		cat := clueGroup(g)
+		for level := g.hintLevel + 1; level <= 3 && cat != ""; level++ {
+			if s.clueFor(g, cat, level).message != "" {
+				hintsLeft++
+			}
+		}
+	}
+	steps := g.steps()
+	body := map[string]any{"game_id": id, "tiles": tiles, "solved": solved, "solved_count": len(g.solved), "remaining_groups": len(g.groups) - len(g.solved), "lives": g.lives, "mistakes": g.mistakes, "won": g.won, "lost": g.lost, "difficulty": g.difficulty, "clues_used": len(g.clues), "clue_available": hintsLeft > 0, "clues": clues, "steps": steps, "perfect": g.won && steps == 0, "hints_left": hintsLeft, "hint_level": g.hintLevel}
 	if g.daily != "" {
 		body["daily"] = g.daily
 	}
@@ -497,7 +584,7 @@ func (s *Service) state(id string, g *gameSession) map[string]any {
 		body["board_category"] = g.category
 	}
 	if terminal {
-		body["score"] = max(0, 1000-250*g.mistakes-100*g.cluesUsed)
+		body["score"] = max(0, 1000-250*g.mistakes-100*len(g.clues))
 		body["share"] = s.share(g)
 		order := slices.Clone(g.solved)
 		for _, cat := range keys(g.groups) {
@@ -523,13 +610,21 @@ func (s *Service) action(id string, fn func(*gameSession) (map[string]any, *Erro
 	return body, err
 }
 func (s *Service) Get(id string) (map[string]any, *Error) {
-	return s.action(id, func(g *gameSession) (map[string]any, *Error) { return s.state(id, g), nil })
+	return s.GetWithTerminal(id, nil)
+}
+
+func (s *Service) GetWithTerminal(id string, onTerminal gameapi.TerminalResponse) (map[string]any, *Error) {
+	return s.action(id, gameapi.WithTerminalResponse(onTerminal, (*gameSession).boardTerminal, func(g *gameSession) (map[string]any, *Error) { return s.state(id, g), nil }))
 }
 func (s *Service) Guess(id string, ids []string) (map[string]any, *Error) {
 	return s.GuessInput(id, func() ([]string, *Error) { return ids, nil })
 }
 func (s *Service) GuessInput(id string, validate func() ([]string, *Error)) (map[string]any, *Error) {
-	return s.action(id, func(g *gameSession) (map[string]any, *Error) {
+	return s.GuessInputWithTerminal(id, validate, nil)
+}
+
+func (s *Service) GuessInputWithTerminal(id string, validate func() ([]string, *Error), onTerminal gameapi.TerminalResponse) (map[string]any, *Error) {
+	return s.action(id, gameapi.WithTerminalResponse(onTerminal, (*gameSession).boardTerminal, func(g *gameSession) (map[string]any, *Error) {
 		ids, err := validate()
 		if err != nil {
 			return nil, err
@@ -587,48 +682,26 @@ func (s *Service) GuessInput(id string, validate func() ([]string, *Error)) (map
 		body := s.state(id, g)
 		body["ok"], body["correct"], body["one_away"] = true, false, oneAway
 		return body, nil
-	})
+	}))
 }
 func (s *Service) Clue(id string) (map[string]any, *Error) {
 	return s.action(id, func(g *gameSession) (map[string]any, *Error) {
 		if g.won || g.lost {
 			return nil, fail(400, "Jocul s-a terminat")
 		}
-		if g.cluesUsed >= 2 {
-			return nil, fail(400, "Indiciile au fost deja folosite")
-		}
-		if g.mistakes < 2+g.cluesUsed {
-			need := 2 + g.cluesUsed - g.mistakes
-			word := "greșeli"
-			if need == 1 {
-				word = "greșeală"
+		cat := clueGroup(g)
+		for level := g.hintLevel + 1; level <= 3 && cat != ""; level++ {
+			clue := s.clueFor(g, cat, level)
+			if clue.message == "" {
+				continue
 			}
-			return nil, fail(400, fmt.Sprintf("Indiciul apare după încă %d %s.", need, word))
+			g.clued, g.hintLevel = cat, level
+			g.clues = append(g.clues, clue)
+			body := s.state(id, g)
+			body["ok"] = true
+			body["clue"] = s.cluePayload(clue)
+			return body, nil
 		}
-		unsolved := []string{}
-		for _, cat := range keys(g.groups) {
-			if !slices.Contains(g.solved, cat) {
-				unsolved = append(unsolved, cat)
-			}
-		}
-		cat := unsolved[0]
-		if len(g.clued) > 0 && len(unsolved) > 1 {
-			previous := g.clued[len(g.clued)-1]
-			for _, next := range unsolved {
-				if next > previous {
-					cat = next
-					break
-				}
-			}
-		}
-		g.clued = append(g.clued, cat)
-		redacted := s.redaction(s.label(g, cat))
-		clue := map[string]string{"pattern": redacted, "message": "Numele unui grup rămas: " + redacted + " (fiecare _ este o literă lipsă)."}
-		g.clues = append(g.clues, clue)
-		g.cluesUsed++
-		body := s.state(id, g)
-		body["ok"] = true
-		body["clue"] = map[string]string{"pattern": clue["pattern"], "message": clue["message"]}
-		return body, nil
+		return nil, fail(400, "Nu mai sunt indicii disponibile.")
 	})
 }

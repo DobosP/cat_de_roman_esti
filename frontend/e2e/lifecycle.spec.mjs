@@ -26,25 +26,13 @@ async function reloadState(page, game, id) {
 }
 
 async function visibleProgress(page, game, state) {
-  if (game.key === "conexiuni") {
-    await expect(page.getByLabel(`${state.lives} greșeli disponibile`, { exact: true })).toBeVisible();
-    return;
-  }
-  if (game.key === "alchimie") {
-    const count = page.locator(".alchemy-round-count");
-    await expect(count).toHaveText(`${state.moves} ${state.moves === 1 ? "combinație" : "combinații"}`);
-    await expect(count).toBeVisible();
-    return;
-  }
-  const label = game.key === "alchimie" ? /^Combinații$/i :
-    game.key === "lant" ? /^Salturi$/i : game.derived ? /^Greșeli$/i : /^Încercări$/i;
-  const value = game.key === "alchimie" ? String(state.moves) :
-    game.key === "lant" ? `${state.moves} ${state.moves === 1 ? "salt" : "salturi"}` :
-    game.key === "contexto" ? `${state.attempts} ${state.attempts === 1 ? "încercare" : "încercări"}` :
-    `${state.remaining_mistakes} ${state.remaining_mistakes === 1 ? "rămasă" : "rămase"}`;
-  await expect(page.locator(".hud .stat-badge").filter({
-    has: page.locator(".stat-badge-label", { hasText: label }),
-  }).locator(".stat-badge-value")).toHaveText(value);
+  const text = game.key === "alchimie" ? `${state.moves} ${state.moves === 1 ? "combinație" : "combinații"}`
+    : game.key === "lant" ? `${state.moves} ${state.moves === 1 ? "salt" : "salturi"}`
+    : (() => {
+      const attempts = state.lives ?? state.remaining_mistakes ?? state.attempts;
+      return attempts === 1 ? "O încercare" : `${attempts} încercări`;
+    })();
+  await expect(page.locator(".game-frame-status")).toContainText(text);
 }
 
 for (const game of games) {
@@ -69,7 +57,7 @@ for (const game of games) {
         .toBeNull();
       const created = page.waitForResponse((r) => r.request().method() === "POST" &&
         new URL(r.url()).pathname === `/api/wordgames/${game.key}/games`);
-      await page.getByRole("button", { name: /^Încă (?:unul|un lanț) →$/ }).click();
+      await page.getByRole("button", { name: "Încă o rundă", exact: true }).click();
       expect((await (await created).json()).game_id).not.toBe(id);
       await expect(page.locator(game.board)).toBeVisible();
     });
@@ -94,26 +82,28 @@ for (const game of games) {
       await page.route(`**${gameURL(game, state.game_id)}`, (route) => route.fulfill({
         status: 404, contentType: "application/json", body: JSON.stringify({ detail: "Joc inexistent" }),
       }), { times: 1 });
+      const created = page.waitForResponse((response) => response.request().method() === "POST" &&
+        new URL(response.url()).pathname === `/api/wordgames/${game.key}/games`);
       await page.reload();
-      await expect(page.getByRole("button", { name: /^Joacă(?: →)?$/ })).toBeEnabled();
-      expect(await page.evaluate((key) => localStorage.getItem(key), activeKey(game))).toBeNull();
-      const fresh = await start(page, game);
+      const fresh = await (await created).json();
+      await expect(page.locator(game.board)).toBeVisible();
+      await expect.poll(() => page.evaluate((key) => localStorage.getItem(key), activeKey(game)))
+        .toBe(fresh.game_id);
       expect(fresh.game_id).not.toBe(state.game_id);
     });
 
     test("can retry a failed create without leaving the game", async ({ page }) => {
-      await page.goto(game.path);
       await page.route(`**/api/wordgames/${game.key}/games?*`, (route) => route.fulfill({
         status: 503, contentType: "application/json",
         body: JSON.stringify({ detail: "Serviciu indisponibil temporar." }),
       }), { times: 1 });
-      await page.getByRole("button", { name: /^Joacă(?: →)?$/ }).click();
+      await page.goto(game.path);
       await expect(page.getByText(/Serviciu indisponibil temporar\.|Nu am putut porni jocul/))
         .toBeVisible();
-      await expect(page.getByRole("button", { name: /^Joacă(?: →)?$/ })).toBeEnabled();
+      await expect(page.getByRole("button", { name: "Reîncearcă", exact: true })).toBeEnabled();
       const created = page.waitForResponse((r) => r.request().method() === "POST" &&
         new URL(r.url()).pathname === `/api/wordgames/${game.key}/games`);
-      await page.getByRole("button", { name: /^Joacă(?: →)?$/ }).click();
+      await page.getByRole("button", { name: "Reîncearcă", exact: true }).click();
       expect((await created).status()).toBe(200);
       await expect(page.locator(game.board)).toBeVisible();
     });
@@ -148,5 +138,5 @@ test("intrusul names the last remaining mistake in the singular", async ({ page 
   expect(state.remaining_mistakes).toBe(1);
   expect(state.lost).toBe(false);
   await visibleProgress(page, game, state);
-  await expect(page.locator(".hud .stat-badge-value", { hasText: "1 rămasă" })).toBeVisible();
+  await expect(page.locator(".game-frame-status").getByText("O încercare", { exact: true })).toBeVisible();
 });

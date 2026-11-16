@@ -35,19 +35,24 @@ for (const [left, right] of [
     const won = await (await last).json();
     expect(won.won).toBe(true);
     expect(won.moves).toBe(2);
-    expect(won.score).toBe(1000);
+    expect(won.steps).toBe(0);
+    expect(won.perfect).toBe(true);
+    await expect(page.locator(".game-result")).toContainText("Perfect");
   });
 }
 
-test("empty experiments stay free while a real two-craft solution still completes", async ({ page }) => {
-  await start(page, game);
+test("new empty experiments count toward steps while a real two-craft solution still completes", async ({ page }) => {
+  const initial = await start(page, game);
   await activate(word(page, "Cristina Neagu"));
+  let attempts = 0;
   for (const partner of ["Dinamo București", "Rapid București", "FCSB"]) {
     const empty = reply(page);
     await activate(word(page, partner));
     const result = await (await empty).json();
     expect(result.discovered).toEqual([]);
-    await expect(page.locator(".alchemy-feedback")).toContainText("Fără penalizare.");
+    attempts++;
+    expect(result.steps).toBe(Math.max(0, attempts - initial.target_depth));
+    await expect(page.locator(".coach-line")).toContainText(result.message);
     await expect(page.getByRole("button", { name: "Scoate Cristina Neagu din alambic" })).toBeVisible();
   }
   const first = reply(page);
@@ -61,5 +66,7 @@ test("empty experiments stay free while a real two-craft solution still complete
   expect(won.won).toBe(true);
   expect(won.moves).toBe(5);
   expect(won.hints_used).toBe(0);
-  expect(won.score).toBe(1000);
+  expect(won.steps).toBe(Math.max(0, won.moves - initial.target_depth));
+  expect(won.perfect).toBe(false);
+  await expect(page.locator(".game-result")).toContainText(`${won.steps} pași`);
 });

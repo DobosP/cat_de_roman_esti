@@ -15,6 +15,8 @@ the per-game behaviour tests in ``test_wordgames_*.py``:
 
 from __future__ import annotations
 
+from datetime import date
+
 import pytest
 
 pytest.importorskip("django")
@@ -186,13 +188,7 @@ def _alchimie_play_to_win(c: Client, state: dict) -> dict:
 
 
 def test_alchimie_hides_target_id_until_win() -> None:
-    from itertools import combinations
-
-    from cat_de_roman_esti.wordgames.alchimie import (
-        NUDGE_AFTER_FRUITLESS,
-        _pair_key,
-        store,
-    )
+    from cat_de_roman_esti.wordgames.alchimie import store
 
     c = client()
     created = c.post(f"/api/wordgames/alchimie/games?seed={SEED}").json()
@@ -215,44 +211,20 @@ def test_alchimie_hides_target_id_until_win() -> None:
         for item in body["inventory"]:
             assert {"recent", "useful", "ready", "depleted"} <= set(item)
 
-    # Progressive hints expose no target id and no hidden route: the first response is
-    # output/theme-only; only a later response may name one currently-owned pair.
-    owned = [item["id"] for item in created["inventory"]]
-    barren_pairs = [
-        pair
-        for pair in combinations(sorted(owned), 2)
-        if not [
-            output
-            for output in session.recipes.get(_pair_key(*pair), ())
-            if output not in owned
-        ]
-    ]
-    assert len(barren_pairs) >= 2 * NUDGE_AFTER_FRUITLESS
-    state = created
-    attempted = 0
-    for hint_index, expected_kind in enumerate(("output", "pair")):
-        start = hint_index * NUDGE_AFTER_FRUITLESS
-        for barren in barren_pairs[start : start + NUDGE_AFTER_FRUITLESS]:
-            state = _post_json(
-                c,
-                f"/api/wordgames/alchimie/games/{gid}/combine",
-                {"a": barren[0], "b": barren[1]},
-            )
-            attempted += 1
-            assert state["already_tried"] is False
-            assert state["attempted_count"] == attempted
-            assert "attempted_pairs" not in _collect_keys(state)
+    # Paid cues progressively name an output, one owned ingredient and a full pair.
+    for level, kind in enumerate(("output", "category", "pair"), start=1):
         state = c.post(f"/api/wordgames/alchimie/games/{gid}/hint").json()
+        assert state["hint_level"] == level and state["hint_kind"] == kind
         assert secret not in _collect_ids(state)
         assert "recipes" not in state and "routes" not in state
-        assert state["attempted_count"] == attempted
+        assert state["attempted_count"] == 0
         assert "attempted_pairs" not in _collect_keys(state)
-        if expected_kind == "output":
-            assert state["hint_kind"] in {"output", "category"}
-            assert state["hint"] is None
+        if kind == "output":
+            assert set(state["hint_output"]) == {"label"} and state["hint"] is None
+        elif kind == "category":
+            assert state["hint"] is None and state["hint_ingredient"]["id"] in session.owned
         else:
-            assert state["hint_kind"] == "pair"
-            assert len(state["hint"]) == 2
+            assert len(state["hint"]) == 2 and all(item["id"] in session.owned for item in state["hint"])
 
     # Boundary: crafting the target flips revealed and exposes the real id.
     won = _alchimie_play_to_win(c, created)
@@ -323,7 +295,6 @@ def test_lant_exposes_id_free_local_choices_not_the_route_corridor() -> None:
 def test_conexiuni_hides_solution_until_over() -> None:
     from cat_de_roman_esti.wordgames.conexiuni import (
         MAX_LIVES,
-        MIN_CLUE_MISTAKES,
         NUM_GROUPS,
         _category_label,
         _group_label,
@@ -369,19 +340,12 @@ def test_conexiuni_hides_solution_until_over() -> None:
     assert all(_category_label(cat) not in strings for cat in hidden)
     assert all(_group_label(session, cat) not in strings for cat in hidden)
 
-    # Boundary for the optional clue: after enough mistakes it may reveal a redacted
-    # label pattern, but never category keys, exact category labels, or tile membership.
+    # Rung one is a redacted label; no category key, exact label, or membership.
     created = c.post(f"/api/wordgames/conexiuni/games?seed={SEED + 1}").json()
     gid = created["game_id"]
     session = store.get(gid)
     assert session is not None
     groups = session.groups
-    for index in range(MIN_CLUE_MISTAKES):
-        _post_json(
-            c,
-            f"/api/wordgames/conexiuni/games/{gid}/guess",
-            {"ids": _cross_group_guess(groups, index)},
-        )
     clue = c.post(f"/api/wordgames/conexiuni/games/{gid}/clue").json()
     assert "solution" not in clue
     assert set(clue["clue"]) == {"pattern", "message"}
@@ -392,7 +356,7 @@ def test_conexiuni_hides_solution_until_over() -> None:
 
     # Boundary: exhausting lives (4 wrong guesses) reveals the full solution.
     last = clue
-    for index in range(MIN_CLUE_MISTAKES, MAX_LIVES):
+    for index in range(MAX_LIVES):
         last = _post_json(
             c,
             f"/api/wordgames/conexiuni/games/{gid}/guess",
@@ -509,6 +473,7 @@ EXPECTED_OPERATION_IDS = {
     "lant_move",
     "lant_undo",
     "lant_hint",
+    "lant_giveup",
     "conexiuni_create_game",
     "conexiuni_get_game",
     "conexiuni_guess",
@@ -538,6 +503,46 @@ def test_openapi_operation_ids_are_stable() -> None:
     # The HTTP path must NOT be baked into the operationId (the churny default we
     # replaced) — so a generated client's method names survive a route refactor.
     assert not any("wordgames" in op for op in ops)
+
+
+def test_lant_daily_giveup_is_optional_and_terminal(monkeypatch) -> None:
+    from cat_de_roman_esti.wordgames import lant
+
+    current_day = date(2026, 11, 16)
+    monkeypatch.setattr(lant, "_comparison_day", lambda: current_day)
+    monkeypatch.delenv("CAT_BOARD_STATS_DIR", raising=False)
+    c = client()
+    base = "/api/wordgames/lant/games"
+    create = base + "?daily=2026-11-16"
+    inactive = c.post(create).json()
+    assert "can_report_give_up" not in inactive
+    off_path = f"{base}/{inactive['game_id']}/giveup"
+    for method in (c.post, c.get, c.head, c.options):
+        assert method(off_path).status_code == 404
+    assert c.post(off_path).json()["detail"] == "Not Found"
+
+    # The independent oracle does not use the store, only the configured flag.
+    monkeypatch.setenv("CAT_BOARD_STATS_DIR", "oracle-opt-in")
+    initial = c.post(create).json()
+    assert initial["can_report_give_up"] is True
+    path = f"{base}/{initial['game_id']}"
+    end = c.post(path + "/giveup")
+    assert end.status_code == 200
+    terminal = end.json()
+    assert terminal["gave_up"] and not terminal["won"] and not terminal["perfect"]
+    assert terminal["steps"] == initial["steps"] and terminal["hints_left"] == 0
+    assert terminal["choices"] == [] and "can_report_give_up" not in terminal
+    assert c.get(path).json() == terminal
+    assert c.post(path + "/undo").json() == terminal
+    assert c.post(path + "/hint").status_code == 400
+    move = c.post(path + "/move", {"text": "vecin"}, content_type="application/json")
+    assert move.status_code == 400
+
+    current_day = date(2026, 11, 18)
+    assert c.post(path + "/giveup").json() == terminal
+    new = c.post(create).json()
+    assert "can_report_give_up" not in new
+    assert c.post(f"{base}/{new['game_id']}/giveup").status_code == 404
 
 
 def test_manifest_endpoint_matches_fixture_manifest() -> None:

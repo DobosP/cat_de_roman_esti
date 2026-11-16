@@ -7,10 +7,10 @@
 @media (max-width: 640px) {
   .word-hop-input {
     position: sticky;
-    top: var(--game-shell-sticky-offset);
+    top: env(safe-area-inset-top);
     z-index: 7;
     padding-block: 8px;
-    background: rgba(13, 11, 32, 0.92);
+    background: var(--page-bg);
     backdrop-filter: blur(10px);
   }
 
@@ -75,7 +75,7 @@
   padding: 9px 10px;
   border: 1px solid color-mix(in srgb, var(--game-lant) 38%, var(--surface-border));
   border-radius: var(--roedu-radius-sm);
-  background: rgba(255, 255, 255, 0.035);
+  background: var(--surface);
   text-align: left;
   transition: border-color 0.16s ease, background 0.16s ease, transform 0.12s ease;
 }
@@ -107,37 +107,6 @@
   line-height: 1.2;
 }
 
-.lant-progress {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  min-height: 44px;
-  padding: 10px 12px;
-  border: 1px solid var(--surface-border);
-  border-radius: var(--roedu-radius-md);
-  background: rgba(255, 255, 255, 0.035);
-}
-
-.lant-progress > span {
-  width: 1.4rem;
-  text-align: center;
-  font-size: 1.15rem;
-}
-
-.lant-progress--closer,
-.lant-progress--won {
-  border-color: var(--good);
-}
-
-.lant-progress--lateral {
-  border-color: var(--warn);
-}
-
-.lant-progress--farther,
-.lant-progress--dead_end {
-  border-color: var(--bad);
-}
-
 .lant-undo--recommended {
   border-color: var(--warn) !important;
   box-shadow: 0 0 0 2px color-mix(in srgb, var(--warn) 28%, transparent);
@@ -157,12 +126,6 @@
   .lant-choice-panel {
     margin-inline: -4px;
   }
-}
-
-/* Intro disclosure: a real tap target that never demands the rules wall up front. */
-.lant-intro-disclosure {
-  font-size: 0.82rem;
-  text-align: left;
 }
 
 .lant-screen .game-container {
@@ -191,7 +154,12 @@
 
 .lant-target {
   text-align: right;
+  border-radius: 10px;
+  padding: 5px 8px;
+  background: var(--game-lant);
+  color: var(--ink);
 }
+.lant-target .faint { color: inherit; }
 
 .lant-route .faint {
   font-size: 0.7rem;
@@ -218,12 +186,6 @@
 
 .lant-screen .lant-choice-panel {
   margin: 0;
-}
-
-.lant-round-details {
-  margin: 0;
-  font-size: 0.85rem;
-  line-height: 1.5;
 }
 
 .lant-screen .breadcrumb-trail {
@@ -271,8 +233,6 @@
 
 /* The inactive Framer layout props are gone; feedback keeps its visible motion. */
 .lant-shake { animation: lant-shake 0.32s; }
-.lant-progress-enter { animation: lant-progress-enter 0.18s; }
 @keyframes lant-shake { 0%,100% { transform: translateX(0); } 20% { transform: translateX(-8px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-6px); } 80% { transform: translateX(6px); } }
-@keyframes lant-progress-enter { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
-@media (prefers-reduced-motion: reduce) { .lant-shake,.lant-progress-enter { animation: none; } }
-[data-motion="off"] .lant-shake,[data-motion="reduced"] .lant-shake,[data-motion="off"] .lant-progress-enter,[data-motion="reduced"] .lant-progress-enter { animation: none; }
+@media (prefers-reduced-motion: reduce) { .lant-shake { animation: none; } }
+[data-motion="off"] .lant-shake, [data-motion="reduced"] .lant-shake { animation: none; }

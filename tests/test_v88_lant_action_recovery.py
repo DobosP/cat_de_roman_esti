@@ -39,10 +39,15 @@ def move(client, url, text):
     return client.post(f"{url}/move", {"text": text}, content_type="application/json").json()
 
 
-def test_unearned_get_never_computes_help_or_exposes_private_route(game, monkeypatch):
+def _cue(body):
+    return {
+        k: v for k, v in body.items()
+        if k not in {"steps", "perfect", "hints_left", "hint_level"}
+    }
+
+
+def test_unearned_get_never_consumes_help_or_exposes_private_route(game):
     client, url, session = game
-    # Choice generation is independently allowed; producing earned help is not.
-    monkeypatch.setattr(lant, "_earned_hint_response", lambda *_: pytest.fail("GET earned help"))
     for _ in range(3):
         state = client.get(url).json()
         assert "earned_hint" not in state
@@ -59,7 +64,7 @@ def test_get_repeats_exact_earned_stage_without_escalating(game, stage, asks):
     assert earned["stage"] == stage
     for _ in range(4):
         state = client.get(url).json()
-        assert state["earned_hint"] == earned
+        assert state["earned_hint"] == _cue(earned)
         assert session.hint_requests == asks
         assert "hint_requests" not in state
     if stage == "direction":
@@ -70,7 +75,7 @@ def test_get_repeats_exact_earned_stage_without_escalating(game, stage, asks):
         assert len(earned["alternatives_choices"]) <= 2
     # Changing a decoded response cannot alter the retained server payload.
     state["earned_hint"]["message"] = "client supplied"
-    assert client.get(url).json()["earned_hint"] == earned
+    assert client.get(url).json()["earned_hint"] == _cue(earned)
 
 
 def test_invalid_move_and_noop_undo_preserve_earned_hint(game):
@@ -78,8 +83,8 @@ def test_invalid_move_and_noop_undo_preserve_earned_hint(game):
     earned = client.post(f"{url}/hint").json()
     assert move(client, url, "TARGET")["ok"] is False
     assert move(client, url, "START")["ok"] is False
-    assert client.get(url).json()["earned_hint"] == earned
-    assert client.post(f"{url}/undo").json()["earned_hint"] == earned
+    assert client.get(url).json()["earned_hint"] == _cue(earned)
+    assert client.post(f"{url}/undo").json()["earned_hint"] == _cue(earned)
     assert session.hint_requests == 1
 
 
@@ -91,7 +96,7 @@ def test_move_and_real_undo_clear_position_help_without_resetting_escalation(gam
     assert "earned_hint" not in client.get(url).json()
     next_hint = client.post(f"{url}/hint").json()
     assert next_hint["stage"] == "alternatives"
-    assert client.get(url).json()["earned_hint"] == next_hint
+    assert client.get(url).json()["earned_hint"] == _cue(next_hint)
     undone = client.post(f"{url}/undo").json()
     assert undone["moves"] == 0
     assert "earned_hint" not in undone
@@ -107,10 +112,10 @@ def test_skipped_generic_direction_preserves_earned_stage_across_get_and_undo(ga
     assert earned["stage"] == "alternatives"
     assert session.hint_requests == 2
     for _ in range(3):
-        assert client.get(url).json()["earned_hint"] == earned
+        assert client.get(url).json()["earned_hint"] == _cue(earned)
         assert session.hint_requests == 2
     assert move(client, url, "TARGET")["ok"] is False
-    assert client.post(f"{url}/undo").json()["earned_hint"] == earned
+    assert client.post(f"{url}/undo").json()["earned_hint"] == _cue(earned)
     assert session.hint_requests == 2
     assert move(client, url, "MID")["ok"] is True
     assert "earned_hint" not in client.get(url).json()
@@ -120,7 +125,7 @@ def test_skipped_generic_direction_preserves_earned_stage_across_get_and_undo(ga
     next_hint = client.post(f"{url}/hint").json()
     assert next_hint["stage"] == "hop"
     assert session.hint_requests == 3
-    assert client.get(url).json()["earned_hint"] == next_hint
+    assert client.get(url).json()["earned_hint"] == _cue(next_hint)
 
 
 def test_dead_end_and_move_limit_backtrack_help_are_recoverable(game):
@@ -130,23 +135,30 @@ def test_dead_end_and_move_limit_backtrack_help_are_recoverable(game):
     earned = client.post(f"{url}/hint").json()
     assert earned["stage"] == "backtrack"
     assert "MID" in earned["message"]
-    assert client.get(url).json()["earned_hint"] == earned
+    assert client.get(url).json()["earned_hint"] == _cue(earned)
     client.post(f"{url}/undo")
     session.chain = ["start", "mid"] * 32 + ["start"]
-    limited = client.post(f"{url}/hint").json()
-    assert limited["stage"] == "backtrack"
-    assert client.get(url).json()["earned_hint"] == limited
-    assert session.hint_requests == 1  # The 64-move limit spends no hint stage.
+    rejected = move(client, url, "MID")
+    assert rejected["ok"] is False and "Înapoi" in rejected["last_error"]
+    limited = client.get(url).json()
+    assert limited["hints_left"] == 0
+    assert client.post(f"{url}/hint").status_code == 400
+    assert client.get(url).json() == limited
+    assert session.hint_requests == session.hints_used == 1
+
+    undone = client.post(f"{url}/undo").json()
+    assert undone["steps"] == limited["steps"]
+    assert undone["hints_left"] > 0
 
 
 def test_retained_help_is_one_bounded_payload_and_clears_on_win(game):
     client, url, session = game
+    for _ in range(3):
+        body = client.post(f"{url}/hint").json()
+        assert session.earned_hint == _cue(body)
+        assert len(json.dumps(session.earned_hint)) < 800
     for _ in range(25):
-        for _ in range(4):
-            earned = client.post(f"{url}/hint").json()
-            assert session.earned_hint == earned
-            assert len(json.dumps(session.earned_hint)) < 800
-            assert session.hint_requests <= 3
+        assert client.post(f"{url}/hint").status_code == 400
         move(client, url, "MID")
         assert session.earned_hint is None
         move(client, url, "START")

@@ -1,0 +1,10 @@
+# Optional Compose override for owner-enabled anonymous board comparison.
+services:
+  app:
+    environment:
+      CAT_BOARD_STATS_DIR: /data/board-stats
+    volumes:
+      - board_stats:/data/board-stats
+
+volumes:
+  board_stats:

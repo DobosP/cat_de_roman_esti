@@ -2,6 +2,7 @@
 // ("/api/wordgames/alchimie/..."), server-authoritative: the target id is only revealed
 // by the backend once the player has actually crafted it.
 
+import type { PerfectRoundCounters } from "./round";
 import { getJson, postJson } from "./client";
 
 export interface Concept {
@@ -55,7 +56,7 @@ export interface TargetView {
 
 export type Difficulty = "usor" | "normal" | "greu";
 
-export interface AlchimieState {
+export interface AlchimieState extends PerfectRoundCounters {
   game_id: string;
   target: TargetView;
   inventory: InventoryItem[];
@@ -101,6 +102,7 @@ export interface EarnedHint {
   hint_kind: "output" | "category" | "pair" | "none";
   /** First hint: label only, never the private output/target id. */
   hint_output: { label: string } | null;
+  hint_ingredient?: Concept;
   message: string;
 }
 

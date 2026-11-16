@@ -2,17 +2,18 @@ import { test, expect } from "@playwright/test";
 import { games, deterministicStarts, start } from "./games.mjs";
 
 const game = (key) => games.find((candidate) => candidate.key === key);
-// [viewport width, browser text size in px, Conexiuni columns, Intrusul/Perechi columns]
+// [viewport width, browser text size in px, Conexiuni columns, Intrusul columns, Perechi columns]
 const cases = [
-  [390, 24, 2, 1],
-  [1280, 24, 4, 2],
-  [320, 32, 2, 1],
-  [360, 16, 4, 2],
+  [390, 24, 2, 1, 1],
+  [1280, 24, 4, 2, 2],
+  [320, 32, 2, 1, 1],
+  [360, 16, 4, 1, 2],
+  [1280, 16, 4, 4, 4],
 ];
 const boards = [
   { key: "conexiuni", tiles: 16, expected: ([, , columns]) => columns },
   { key: "intrusul", tiles: 4, expected: ([, , , columns]) => columns },
-  { key: "perechi", tiles: 8, expected: ([, , , columns]) => columns },
+  { key: "perechi", tiles: 8, expected: ([, , , , columns]) => columns },
 ];
 
 // Emulates the browser's default text-size setting, so rem and em media queries both follow it.

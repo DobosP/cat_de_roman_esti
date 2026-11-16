@@ -11,7 +11,7 @@ export const games = [
   { key: "lant", path: "/lant", board: '[aria-label="Următorul concept"]' },
 ];
 const fixtures = new Map();
-export const seededStarts = JSON.parse(readFileSync(new URL("./seeded-starts.json", import.meta.url), "utf8"));
+export const seededStarts = JSON.parse(readFileSync(new URL("./seeded-starts-rules-v2.json", import.meta.url), "utf8"));
 const escapeRegex = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 export function solution(game) {
@@ -29,7 +29,21 @@ export const gameURL = (game, id) => `/api/wordgames/${game.key}/games/${id}`;
 
 export async function deterministicStarts(page, game) {
   const query = game.packId ? solution(game).query : { seed: "38" };
-  await page.route(`**/api/wordgames/${game.key}/games?*`, async (route) => {
+  // Historical seeded mechanics witnesses use a free round. Daily-specific
+  // journeys pass a day and exercise the daily entry against their own clock.
+  if (!game.daily) {
+    const completeDaily = (key) => {
+      const now = new Date();
+      const day = [now.getFullYear(), now.getMonth() + 1, now.getDate()]
+        .map((value) => String(value).padStart(2, "0")).join("-");
+      const storageKey = `cat_daily_v2_${key}`;
+      if (!localStorage.getItem(storageKey)) localStorage.setItem(storageKey, JSON.stringify({ [day]: 2 }));
+    };
+    await page.addInitScript(completeDaily, game.key);
+    if (page.url() !== "about:blank") await page.evaluate(completeDaily, game.key);
+  }
+  await page.route((url) => url.pathname === `/api/wordgames/${game.key}/games`, async (route) => {
+    if (route.request().method() !== "POST") return route.continue();
     const url = new URL(route.request().url());
     for (const [name, value] of Object.entries(query)) url.searchParams.set(name, String(value));
     await route.continue({ url: url.toString() });
@@ -77,19 +91,12 @@ export async function openAlchemyDisclosure(page, selector, { keyboard = false }
   await expect(details).toHaveAttribute("open", "");
 }
 
-export async function openGameOptions(page, game, { keyboard = false, setup = false } = {}) {
-  if (game.derived && !setup) {
-    await expect(page.locator(".game-help > summary")).toBeVisible();
-    return;
+export async function openGameOptions(page, _game, { keyboard = false } = {}) {
+  const dialog = page.getByRole("dialog", { name: /Cum se joacă/ });
+  if (!(await dialog.isVisible())) {
+    await activate(page, page.getByRole("button", { name: "Cum se joacă", exact: true }), keyboard);
   }
-  if (game.key === "alchimie") {
-    return openAlchemyDisclosure(page, setup ? ".alchemy-setup-options" : ".alchemy-menu", { keyboard });
-  }
-  const details = page.locator(setup ? ".game-setup-options" : ".game-options");
-  if (await details.getAttribute("open") === null) {
-    await activate(page, details.locator(":scope > summary"), keyboard);
-  }
-  await expect(details).toHaveAttribute("open", "");
+  await expect(dialog).toBeVisible();
 }
 
 // ADR-0197 per-route delivery: the Preact shell serves exactly these document
@@ -104,12 +111,18 @@ export async function expectUi(page, url = page.url()) {
 }
 
 export async function start(page, game, { keyboard = false } = {}) {
-  await page.goto(game.path);
-  await expectUi(page, game.path);
+  if (keyboard) await page.goto("/");
   const response = page.waitForResponse((r) =>
     r.request().method() === "POST" &&
     new URL(r.url()).pathname === `/api/wordgames/${game.key}/games`);
-  await activate(page, page.getByRole("button", { name: /^Joacă(?: →)?$/ }), keyboard);
+  if (keyboard) {
+    const link = page.locator(`.games-grid a[href="${game.path}"]`);
+    await tabTo(page, link);
+    await page.keyboard.press("Enter");
+  } else {
+    await page.goto(game.path);
+  }
+  await expectUi(page, game.path);
   const created = await response;
   expect(created.status()).toBe(200);
   const state = await created.json();
@@ -148,10 +161,6 @@ export async function act(page, game, step, { keyboard = false } = {}) {
 }
 
 export async function solve(page, game, steps, options = {}) {
-  // Old journeys retain the exact Encore default. Only a fixture with explicit
-  // daily intent/state may select one exact alternative completion action.
-  const completionAction = options.completionAction ?? "encore";
-  expect(["encore", "daily-offer", "daily-free"]).toContain(completionAction);
   let result;
   for (const step of steps) {
     const response = await act(page, game, step, options);
@@ -163,8 +172,7 @@ export async function solve(page, game, steps, options = {}) {
     if (game.key === "perechi" && options.keyboard) {
       if (result.won) {
         const heading = page.getByRole("heading", { name: "Toate se potrivesc!" });
-        const resultContainer = page.locator('div[tabindex="-1"]').filter({ has: heading });
-        await expect(resultContainer).toBeFocused();
+        await expect(heading).toBeFocused();
         // One extra Enter on the focused result must not start a new round.
         let creates = 0;
         const countCreate = (request) => {
@@ -188,11 +196,6 @@ export async function solve(page, game, steps, options = {}) {
   }
   expect(result.won).toBe(true);
   await expect(page.getByRole("button", { name: "Copiază rezultatul" })).toBeVisible();
-  if (completionAction === "encore") {
-    await expect(page.getByRole("button", { name: /^Încă (?:unul|un lanț) →$/ })).toBeEnabled();
-  } else {
-    const name = completionAction === "daily-offer" ? "Joacă provocarea zilei →" : "Joacă liber →";
-    await expect(page.getByRole("button", { name, exact: true })).toBeEnabled();
-  }
+  await expect(page.getByRole("button", { name: "Încă o rundă", exact: true })).toBeEnabled();
   return result;
 }

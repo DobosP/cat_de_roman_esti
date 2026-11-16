@@ -72,8 +72,6 @@ MIN_OPENING_PAIRS = 2
 TARGET_SALIENCE_FLOOR = 0.4
 # Greu targets can otherwise sprawl very deep (gen 7+); cap so a game stays finishable.
 GREU_MAX_GENERATION = 5
-# How many consecutive fruitless combines before a gentle nudge becomes available.
-NUDGE_AFTER_FRUITLESS = 2
 # A deliberately sparse recipe space (ADR-0044) makes "nothing new" the common reply, so
 # after this many TOTAL fruitless combines every barren answer also carries one bounded,
 # rotating whisper. The whispers describe strategy only — never a recipe, target, or concept.
@@ -162,12 +160,12 @@ class AlchimieSession:
     owned: dict[str, tuple[str, str] | None] = field(default_factory=dict)
     order: list[str] = field(default_factory=list)
     moves: int = 0
-    # Consecutive combines that discovered nothing — drives the nudge offer.
-    fruitless_streak: int = 0
     # Every fruitless combine of this session — drives the free dead-pair whisper.
     fruitless_total: int = 0
-    # Number of hints (nudges) the player has revealed; each costs a little score.
+    # The legacy score uses paid hints since the last reset.
     hints_used: int = 0
+    hints_paid: int = 0
+    hint_level: int = 0
     # One already-earned public cue; cleared by a new experiment or reset.
     earned_hint: dict[str, object] | None = None
     # Player- or server-selected board theme + curated-pack provenance (None for mined games).
@@ -179,6 +177,8 @@ class AlchimieSession:
     # Private experiment memory.  Unordered ids are never serialized; clients receive
     # only its bounded count and the verdict for the pair they just submitted.
     attempted_pairs: set[RecipePair] = field(default_factory=set)
+    # Owned concepts belong to the same bounded projection after a reset.
+    counted_pairs: set[RecipePair] = field(default_factory=set, repr=False)
 
     @property
     def won(self) -> bool:
@@ -193,6 +193,10 @@ class AlchimieSession:
         """
         extra = max(0, self.moves - self.fruitless_total - self.target_depth)
         return max(100, 1000 - 120 * extra - 150 * self.hints_used)
+
+    @property
+    def steps(self) -> int:
+        return max(0, len(self.counted_pairs) - self.target_depth) + self.hints_paid
 
     def add(self, node_id: str, parents: tuple[str, str] | None) -> None:
         if node_id not in self.owned:
@@ -855,30 +859,43 @@ def _target_payload(session: AlchimieSession) -> dict[str, object]:
 
 def _share_line(session: AlchimieSession) -> str:
     """A short Wordle-style shareable result line for a won game."""
-    # "Perfect" == solved in the optimal number of combines with no hints.
-    perfect = (
-        session.moves - session.fruitless_total <= session.target_depth
-        and session.hints_used == 0
-    )
-    medal = "✨" if perfect else "⚗️"
+    medal = "✨" if session.steps == 0 else "⚗️"
     header = "cat_de_roman_esti · Alchimie"
     if session.category:
         header += f" · {category_label(session.category)}"
     lines = [
         header,
         f"⚗️ {session.moves} {'combinație' if session.moves == 1 else 'combinații'} · "
-        f"{session.score} pct {medal}",
+        f"{session.steps} {'pas' if session.steps == 1 else 'pași'} {medal}",
     ]
-    if session.hints_used:
-        lines.append(f"💡 x{session.hints_used}")
+    if session.hints_paid:
+        lines.append(f"💡 x{session.hints_paid}")
     if session.daily:
         lines.append(session.daily)
     return "\n".join(lines)
 
 
+_HINT_KINDS = ("output", "category", "pair")
+
+
+def _hint_options(session: AlchimieSession) -> tuple[list[int], RecipePair | None, str | None]:
+    if session.hint_level >= len(_HINT_KINDS):
+        return [], None, None
+    pair = _useful_pair(session)
+    if pair is None:
+        return [], None, None
+    output = next(
+        (node for node in session.recipes[pair] if node != session.target and node not in session.owned),
+        None,
+    )
+    first_level = max(1 if output else 2, session.hint_level + 1)
+    return list(range(first_level, len(_HINT_KINDS) + 1)), pair, output
+
+
 def _state_payload(game_id: str, session: AlchimieSession) -> dict[str, object]:
     inventory = _inventory_payload(session)
     active_count = sum(not bool(item["depleted"]) for item in inventory)
+    hint_levels, _, _ = _hint_options(session)
     payload: dict[str, object] = {
         "game_id": game_id,
         "target": _target_payload(session),
@@ -896,11 +913,12 @@ def _state_payload(game_id: str, session: AlchimieSession) -> dict[str, object]:
         "target_depth": session.target_depth,
         "won": session.won,
         "hints_used": session.hints_used,
-        "hint_stage": "output" if session.hints_used == 0 else "pair",
-        # A gentle nudge unlocks only after several fruitless combines in a row.
-        "hint_available": (
-            not session.won and session.fruitless_streak >= NUDGE_AFTER_FRUITLESS
-        ),
+        "steps": session.steps,
+        "perfect": session.won and session.steps == 0,
+        "hint_level": session.hint_level,
+        "hints_left": len(hint_levels),
+        "hint_stage": "output" if hint_levels and hint_levels[0] == 1 else "pair",
+        "hint_available": bool(hint_levels),
         # Counts describe the bounded shape, never the private recipe ids/routes.
         "recipe_summary": {
             "pairs": len(session.recipes),
@@ -956,6 +974,7 @@ class CreateGameView(ContractAPIView):
         if category is not None and not is_known(category):
             raise http_error(400, "Categorie necunoscută.")
         if daily:
+            difficulty, category = "usor", None
             rng = random.Random(daily_seed(daily, GAME_KEY))
             curated = get_pack().pick_daily(
                 GAME_KEY, daily, category=category, difficulty=difficulty
@@ -1054,6 +1073,7 @@ class CombineView(ContractAPIView):
             raise http_error(409, "Limita de experimente a jocului a fost atinsă.")
         session.earned_hint = None
         session.attempted_pairs.add(pair)
+        session.counted_pairs.add(pair)
         session.moves += 1
         # The category graph was used only to build this private, target-useful recipe
         # book. Runtime never reopens the broad common-neighbour space.
@@ -1072,20 +1092,14 @@ class CombineView(ContractAPIView):
                 score=session.score,
             )
 
-        # Track dry spells so the nudge can surface only when the player is genuinely stuck.
-        if discovered:
-            session.fruitless_streak = 0
-        else:
-            session.fruitless_streak += 1
-            session.fruitless_total += 1
-
         if not discovered:
+            session.fruitless_total += 1
             known = session.recipes.get(pair, ())
             if known:
                 names = ", ".join(svc.label(node) for node in known)
-                message = f"Ai deja rezultatul: {names}. Fără penalizare."
+                message = f"Ai deja rezultatul: {names}."
             else:
-                message = "Perechea nu are o rețetă în această rundă. Fără penalizare."
+                message = "Perechea nu are o rețetă în această rundă."
             whisper = _dead_pair_whisper(session)
             if whisper:
                 message += f" {whisper}"
@@ -1108,76 +1122,36 @@ class HintGameView(ContractAPIView):
     @extend_schema(operation_id="alchimie_hint_game", tags=["alchimie"])
     @_atomic_session
     def post(self, request, game_id: str, session: AlchimieSession):
-        """Reveal a progressive nudge without serializing the private recipe route.
-
-        Only allowed once the player has been genuinely stuck (``NUDGE_AFTER_FRUITLESS``
-        fruitless combines in a row). Each hint costs score and resets the dry-spell counter
-        so it can't be spammed. The first hint names a reachable non-target output (or just
-        re-orients to the already-public theme when the target is one action away). A later
-        hint may reveal one useful owned pair. Neither response exposes the target id or the
-        hidden full route.
-        """
+        """Reveal a single useful cue without serializing the private recipe route."""
         if session.won:
             raise http_error(400, "Jocul s-a terminat deja.")
-        if session.fruitless_streak < NUDGE_AFTER_FRUITLESS:
-            need = NUDGE_AFTER_FRUITLESS - session.fruitless_streak
-            noun = "combinație" if need == 1 else "combinații"
-            raise http_error(400, f"Mai încearcă {need} {noun} înainte de un indiciu.")
-        pair = _useful_pair(session)
-        session.fruitless_streak = 0
-        if pair is None:
-            session.earned_hint = None
-            # Defensive: no forward pair (shouldn't happen for built instances).
-            payload = _state_payload(game_id, session)
-            payload["hint"] = None
-            payload["hint_kind"] = "none"
-            payload["hint_output"] = None
-            payload["message"] = "Niciun indiciu disponibil acum."
-            return Response(payload)
-        session.hints_used += 1
+        levels, pair, output = _hint_options(session)
+        if not levels or pair is None:
+            raise http_error(400, "Nu mai sunt indicii disponibile.")
+        level = levels[0]
         a, b = pair
-        payload = _state_payload(game_id, session)
-        if session.hints_used == 1:
-            outputs = [
-                output
-                for output in session.recipes.get(pair, ())
-                if output not in session.owned and output != session.target
-            ]
-            payload["hint"] = None
-            if outputs:
-                output = outputs[0]
-                payload["hint_kind"] = "output"
-                # Label only: output ids and every route stay private until discovered.
-                payload["hint_output"] = {"label": get_service().label(output)}
-                payload["message"] = (
-                    f"Indiciu: caută mai întâi «{get_service().label(output)}»."
-                )
-            else:
-                payload["hint_kind"] = "category"
-                payload["hint_output"] = None
-                if session.category:
-                    payload["message"] = (
-                        "Indiciu: ținta e aproape. Rămâi în tema "
-                        f"{category_label(session.category)}."
-                    )
-                else:
-                    payload["message"] = (
-                        "Indiciu: ținta e la un pas; caută o pereche utilă."
-                    )
-        else:
-            payload["hint"] = [_concept(a), _concept(b)]
-            payload["hint_kind"] = "pair"
-            payload["hint_output"] = None
-            payload["message"] = (
-                f"Indiciu: combină {get_service().label(a)} + "
-                f"{get_service().label(b)}."
-            )
-        # Select only these freshly authored public fields, never a state snapshot or route.
-        session.earned_hint = {
-            key: payload[key] for key in ("hint", "hint_kind", "hint_output", "message")
+        svc = get_service()
+        hint = {
+            "hint": None,
+            "hint_kind": _HINT_KINDS[level - 1],
+            "hint_output": None,
         }
-        payload["earned_hint"] = session.earned_hint
-        return Response(payload)
+        if level == 1:
+            label = svc.label(output)
+            hint["hint_output"] = {"label": label}
+            hint["message"] = f"Indiciu: caută mai întâi «{label}»."
+        elif level == 2:
+            hint["hint_ingredient"] = _concept(a)
+            hint["message"] = f"Indiciu: încearcă cu {svc.label(a)}."
+        else:
+            hint["hint"] = [_concept(a), _concept(b)]
+            hint["message"] = f"Indiciu: combină {svc.label(a)} + {svc.label(b)}."
+
+        session.hint_level = level
+        session.hints_used += 1
+        session.hints_paid += 1
+        session.earned_hint = hint
+        return Response({**_state_payload(game_id, session), **hint})
 
 
 class ResetGameView(ContractAPIView):
@@ -1188,7 +1162,6 @@ class ResetGameView(ContractAPIView):
         session.owned.clear()
         session.order.clear()
         session.moves = 0
-        session.fruitless_streak = 0
         session.fruitless_total = 0
         session.hints_used = 0
         session.earned_hint = None

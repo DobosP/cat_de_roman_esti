@@ -1,186 +1,33 @@
-.perechi-game {
-  --perechi-accent: #ff78b7;
-}
-
-.perechi-instruction {
-  width: min(100%, 820px);
-  align-self: center;
-  display: grid;
-  gap: 3px;
-  min-height: 3.5rem;
-  align-content: center;
-  color: var(--text-dim);
-  text-align: center;
-  line-height: 1.4;
-}
-
-.perechi-instruction strong {
-  color: var(--perechi-accent);
-}
-
-.perechi-instruction-detail {
-  font-size: 0.8rem;
-}
-
-.perechi-grid {
-  width: min(100%, 820px);
-  align-self: center;
-  display: grid;
-  /* Enlarged text trades columns in whole steps only (4, 2, 1), never a ragged row. */
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 9px;
-}
-
+.perechi-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .perechi-tile {
   min-width: 0;
-  min-height: 72px;
+  min-height: 68px;
   display: grid;
   place-content: center;
-  gap: 5px;
-  padding: 12px 9px;
-  border-color: color-mix(in srgb, var(--perechi-accent) 22%, var(--surface-border));
-  background: color-mix(in srgb, var(--surface) 95%, var(--perechi-accent));
-  font-size: clamp(0.86rem, 3.6vw, 1rem);
-  line-height: 1.18;
+  gap: 4px;
+  padding: 10px;
+  border: 2px solid var(--surface-border-strong);
+  border-radius: 16px;
+  background: var(--surface);
+  font: 600 clamp(1rem, 4.2vw, 1.3rem)/1.15 var(--font-display);
   overflow-wrap: anywhere;
   text-align: center;
-  touch-action: manipulation;
 }
-
-.perechi-tile:not(:disabled):hover,
-.perechi-tile--selected {
-  border-color: var(--perechi-accent);
-  box-shadow: 0 0 20px -7px var(--perechi-accent);
-}
-
-.perechi-tile--selected {
-  background: color-mix(in srgb, var(--surface) 72%, var(--perechi-accent));
-  transform: translateY(-2px);
-}
-
-.perechi-tile--hinted {
-  border-color: var(--warn);
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--warn) 32%, transparent) inset;
-}
-
-.perechi-tile span {
-  color: var(--text-dim);
-  font-size: 0.7rem;
-  font-weight: 600;
-}
-
-.perechi-solved {
-  width: min(100%, 820px);
-  align-self: center;
-  display: grid;
-  gap: 6px;
-}
-
+.perechi-tile:not(:disabled):hover { border-color: var(--focus); }
+.perechi-tile--hinted { outline: 2px solid var(--warn); outline-offset: 2px; }
+.perechi-tile span { color: inherit; font: 600 .75rem var(--roedu-font-body); }
+.perechi-solved, .perechi-solution { display: grid; gap: 6px; }
 .perechi-solved-row {
   min-height: 44px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 8px 12px;
-  border: 1px solid color-mix(in srgb, var(--good) 45%, var(--surface-border));
-  border-radius: var(--radius-sm);
-  background: color-mix(in srgb, var(--surface) 86%, var(--good));
-}
-
-.perechi-solved-row span {
-  color: var(--text-dim);
-  font-size: 0.8rem;
-  text-align: right;
-}
-
-.perechi-hint,
-.perechi-feedback {
-  width: min(100%, 820px);
-  align-self: center;
-  box-sizing: border-box;
-  padding: 11px 14px;
-}
-
-.perechi-hint {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  border-color: color-mix(in srgb, var(--warn) 58%, var(--surface-border));
-}
-
-.perechi-feedback {
-  min-height: 44px;
-  display: grid;
-  place-items: center;
-  color: var(--text-dim);
-  text-align: center;
-}
-
-.perechi-actions {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.perechi-hint-status {
-  color: var(--text-dim);
-  font-size: 0.8rem;
-  text-align: center;
-}
-
-.perechi-actions .roedu-btn {
-  min-height: 44px;
-}
-
-.perechi-solution {
-  display: grid;
-  gap: 7px;
-  text-align: left;
-}
-
-.perechi-solution strong {
-  color: var(--perechi-accent);
-}
-
-/* Steps fit 8.5rem cards plus the 9px gap; four columns wait for a desktop viewport. */
-.perechi-game .game-container {
-  container-type: inline-size;
-}
-
-@container (width < calc(17rem + 9px)) {
-  .perechi-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
-@media (min-width: 760px) {
-  @container (width >= calc(34rem + 27px)) {
-    .perechi-grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-  }
-}
-
-@media (max-width: 339px) {
-  .perechi-tile {
-    min-height: 64px;
-  }
-
-  .perechi-solved-row {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .perechi-solved-row span {
-    text-align: left;
-  }
-}
-
-/* Kit Presence wrapper around the feedback row keeps its centered column layout. */
-.perechi-game .game-container > .roedu-presence {
-  display: flex;
   flex-direction: column;
+  gap: 3px;
+  padding: 8px 12px;
+  border: 1px solid var(--surface-border-strong);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--surface) 86%, var(--success));
 }
+.perechi-solved-row span { color: var(--text-muted); font-size: .875rem; }
+.perechi-game .game-container { container-type: inline-size; }
+@container (width < 17rem) { .perechi-grid { grid-template-columns: minmax(0, 1fr); } }
+@container (width > 36rem) { .perechi-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }

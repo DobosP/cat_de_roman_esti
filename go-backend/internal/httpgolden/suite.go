@@ -15,6 +15,7 @@ import (
 
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/browserplan"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
+	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/gameapi"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/graph"
 )
 
@@ -404,7 +405,7 @@ func Capture(ctx context.Context, client *Client, data *content.Content, referen
 	if reference == "" {
 		return nil, fmt.Errorf("capture requires a reference description")
 	}
-	c := &Corpus{SchemaVersion: 1, Reference: reference, Sources: data.Sources, Cases: []Case{}}
+	c := &Corpus{SchemaVersion: 1, RulesVersion: gameapi.RulesVersion, Reference: reference, Sources: data.Sources, Cases: []Case{}}
 	aliases := map[string]string{}
 	record := func(r Request) (map[string]any, error) {
 		res, err := client.Do(ctx, r)

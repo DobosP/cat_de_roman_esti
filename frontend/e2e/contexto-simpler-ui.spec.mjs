@@ -4,7 +4,7 @@ import { games, gameURL, deterministicStarts, solution, start, act } from "./gam
 
 const game = games.find(({ key }) => key === "contexto");
 const field = (page) => page.getByRole("textbox", { name: "Concept de ghicit" });
-const options = (page) => page.locator(".game-options > summary");
+const options = (page) => page.getByRole("button", { name: "Cum se joacă", exact: true });
 const candidateWords = () => ["fotbal", "stilou", "București", "măr"]
   .filter((word) => word.toLowerCase() !== solution(game).steps.at(-1).payload.text.toLowerCase());
 
@@ -12,21 +12,16 @@ test.beforeEach(async ({ page }) => {
   await deterministicStarts(page, game);
 });
 
-test("one start reaches the guess field with setup and secondary tools tucked away", async ({ page }) => {
-  await page.goto(game.path);
-  await expect(page.locator(".game-setup-options")).not.toHaveAttribute("open", "");
-  await expect(page.getByRole("button", { name: "Normal", exact: true })).not.toBeVisible();
+test("one tap reaches the guess field with help and secondary tools tucked away", async ({ page }) => {
   await start(page, game);
   await expect(field(page)).toBeInViewport();
   expect((await field(page).boundingBox()).y).toBeLessThan(280);
-  await expect(page.locator(".game-options")).not.toHaveAttribute("open", "");
-  await expect(page.getByRole("button", { name: "Arată răspunsul", exact: true })).not.toBeVisible();
+  await expect(page.getByRole("dialog")).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Renunț la rundă și vreau să văd răspunsul" })).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Recente", exact: true })).not.toBeVisible();
   await expect(page.locator("#contexto-rank-guide")).toHaveText("Un număr mai mic = mai aproape. #1 este ținta.");
-  await expect(page.getByRole("button", { name: "Cum citesc #?", exact: true })).toHaveCount(0);
-  await expect(page.locator("#contexto-clue-cost")).toBeVisible();
-  await expect(page.getByRole("button", { name: "Indiciu după 3 încercări", exact: true }))
-    .toHaveAccessibleDescription("−120 puncte / indiciu");
+  await expect(page.getByRole("button", { name: "Indiciu", exact: true })).toBeEnabled();
+  await expect(page.locator(".hint-bar")).toContainText("Costă un pas.");
 });
 
 test("Enter and the submit button both leave the field ready for the next guess", async ({ page }) => {
@@ -42,7 +37,7 @@ test("Enter and the submit button both leave the field ready for the next guess"
   await field(page).fill(second);
   const secondReply = page.waitForResponse((response) =>
     response.request().method() === "POST" && new URL(response.url()).pathname === `${gameURL(game, initial.game_id)}/guess`);
-  await page.getByRole("button", { name: "Ghicește", exact: true }).click();
+  await page.getByRole("button", { name: "Trimite", exact: true }).click();
   expect((await (await secondReply).json()).attempts).toBe(2);
   await expect(field(page)).toBeFocused();
   await expect(field(page)).toHaveValue("");
@@ -80,13 +75,13 @@ test("the options menu preserves explicit reveal confirmation and optional recen
     await expect(field(page)).toBeEnabled();
   }
   const rankOrder = latest.guesses.map((guess) => guess.label);
-  await options(page).click();
   await page.getByRole("button", { name: "Recente", exact: true }).click();
-  await expect(page.locator("#contexto-guess-list .contexto-guess-row strong").first())
+  await expect(page.locator("#contexto-guess-list .contexto-guess-row > strong:first-child").first())
     .toHaveText(latest.guess.label);
   await page.getByRole("button", { name: "Bune", exact: true }).click();
-  await expect(page.locator("#contexto-guess-list .contexto-guess-row strong")).toHaveText(rankOrder);
-  await page.getByRole("button", { name: "Arată răspunsul", exact: true }).click();
+  await expect(page.locator("#contexto-guess-list .contexto-guess-row > strong:first-child")).toHaveText(rankOrder);
+  await options(page).click();
+  await page.getByRole("button", { name: "Renunț la rundă și vreau să văd răspunsul", exact: true }).click();
   const cancel = page.getByRole("button", { name: "Nu", exact: true });
   await expect(cancel).toBeFocused();
   await expect(cancel).toBeInViewport();
@@ -96,7 +91,7 @@ test("the options menu preserves explicit reveal confirmation and optional recen
   expect(pending.attempts).toBe(2);
   await cancel.click();
   await expect(page.getByRole("button", { name: "Da, arată", exact: true })).toHaveCount(0);
-  await options(page).click();
+  await page.keyboard.press("Escape");
   await expect(field(page)).toBeEnabled();
   await expect(page.locator("#contexto-guess-list .contexto-guess-row")).toHaveCount(2);
 });
@@ -106,14 +101,14 @@ test("the guess field and reveal confirmation stay usable at 320px with a short 
   await start(page, game);
   await applyDoubledText(page);
   await expect(field(page)).toBeVisible();
-  await expect(page.locator("#contexto-clue-cost")).toBeVisible();
+  await expect(page.locator(".hint-bar")).toBeVisible();
   const overflow = await page.locator(".contexto-screen").evaluate((element) => ({
     scroll: element.scrollWidth, client: element.clientWidth,
   }));
   expect(overflow.scroll).toBeLessThanOrEqual(overflow.client + 1);
   await options(page).click();
-  await expect(page.getByRole("button", { name: "Începe alt joc", exact: true })).toBeVisible();
-  await page.getByRole("button", { name: "Arată răspunsul", exact: true }).click();
+  await expect(page.getByRole("dialog")).toBeVisible();
+  await page.getByRole("button", { name: "Renunț la rundă și vreau să văd răspunsul", exact: true }).click();
   const cancel = page.getByRole("button", { name: "Nu", exact: true });
   await expect(cancel).toBeFocused();
   await expect(cancel).toBeInViewport();
@@ -124,30 +119,27 @@ test("the guess field and reveal confirmation stay usable at 320px with a short 
   expect(expandedOverflow.scroll).toBeLessThanOrEqual(expandedOverflow.client + 1);
 });
 
-test("rules open full width below the clue button and 'Opțiuni de joc' stays beside it", async ({ page }) => {
+test("the help sheet traps focus, closes on Escape and returns to its trigger", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await start(page, game);
-  const clue = page.locator(".contexto-action-row");
-  const summary = options(page);
-  const help = page.locator(".contexto-screen details.game-help");
-  await help.locator("summary").click();
-  await expect(help).toHaveAttribute("open", "");
-  const [clueBox, optionsBox, helpBox, toolsBox] = await Promise.all([
-    clue.boundingBox(), summary.boundingBox(), help.boundingBox(), page.locator(".contexto-tools").boundingBox(),
-  ]);
-  await test.info().attach("help-layout", {
-    body: JSON.stringify({ clueBox, optionsBox, helpBox, toolsBox }, null, 2), contentType: "application/json",
-  });
-  expect(Math.abs(optionsBox.y - clueBox.y)).toBeLessThan(2);
-  expect(optionsBox.x).toBeGreaterThan(clueBox.x + clueBox.width);
-  expect(helpBox.y).toBeGreaterThanOrEqual(Math.max(clueBox.y + clueBox.height, optionsBox.y + optionsBox.height));
-  expect(Math.abs(helpBox.width - toolsBox.width)).toBeLessThan(2);
+  await options(page).click();
+  const help = page.getByRole("dialog", { name: /Cum se joacă Cald sau Rece/ });
+  await expect(help).toBeVisible();
+  await expect(help.getByRole("heading", { level: 2 })).toBeFocused();
+  await expect(help.getByText("Un cuvânt cald, în primele 150 de locuri.")).toBeVisible();
+  const first = help.getByRole("button", { name: "Închide ajutorul" });
+  await first.focus();
+  await page.keyboard.press("Shift+Tab");
+  await expect(help.getByRole("button", { name: "Renunț la rundă și vreau să văd răspunsul" })).toBeFocused();
+  await page.keyboard.press("Escape");
+  await expect(help).toHaveCount(0);
+  await expect(options(page)).toBeFocused();
 });
 
-test("the clue countdown label fits its half of the row at 320px", async ({ page }) => {
+test("the hint button keeps its label inside a 44px target at 320px", async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 640 });
   await start(page, game);
-  const clue = page.getByRole("button", { name: "Indiciu după 3 încercări", exact: true });
+  const clue = page.getByRole("button", { name: "Indiciu", exact: true });
   await expect(clue).toBeVisible();
   const fit = await clue.evaluate((element) => {
     const range = globalThis.document.createRange();
@@ -160,8 +152,7 @@ test("the clue countdown label fits its half of the row at 320px", async ({ page
     };
   });
   await test.info().attach("clue-fit", { body: JSON.stringify(fit, null, 2), contentType: "application/json" });
-  // The longer label may wrap to two lines, but it stays inside the unchanged 44px target.
   expect(fit.scroll).toBeLessThanOrEqual(fit.client + 1);
   expect(fit.textInside).toBe(true);
-  expect(fit.height).toBeLessThanOrEqual(45);
+  expect(fit.height).toBeGreaterThanOrEqual(44);
 });

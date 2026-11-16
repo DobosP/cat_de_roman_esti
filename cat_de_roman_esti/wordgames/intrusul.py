@@ -3,8 +3,8 @@
 Four familiar concepts are visible. Three satisfy one reviewed group predicate;
 the player taps the intruder.  The answer, trio membership, source provenance, and all
 ranking inputs remain server-side until the game ends.  A wrong tap is useful evidence,
-not a trap: it stays free on repeat, and one short authored-group hint unlocks after the
-first mistake.
+and stays free on repeat. The theme and authored group label become available
+through the hint ladder.
 """
 
 from __future__ import annotations
@@ -58,9 +58,11 @@ class IntrusulSession:
     daily: str | None = None
     # Echo only a player-requested category; a global/daily board keeps provenance private.
     category: str | None = None
+    board_category: str = field(default="", repr=False)
     wrong_ids: list[str] = field(default_factory=list)
     attempts: int = 0
-    hint_used: bool = False
+    hints_used: int = 0
+    hint_level: int = 0
     won: bool = False
     lost: bool = False
 
@@ -74,7 +76,7 @@ class IntrusulSession:
             return 0
         return max(
             100,
-            1_000 - 200 * len(self.wrong_ids) - 150 * int(self.hint_used),
+            1_000 - 200 * len(self.wrong_ids) - 150 * self.hints_used,
         )
 
 
@@ -96,11 +98,27 @@ def _concept(node_id: str) -> dict[str, str]:
     return {"id": node_id, "label": get_service().display_label(node_id)}
 
 
-def _clue(session: IntrusulSession) -> dict[str, str]:
-    return {
-        "label": session.group_label,
-        "message": f"Trei cuvinte țin de: {session.group_label}.",
-    }
+def _clue_at(session: IntrusulSession, level: int) -> dict[str, str] | None:
+    if level == 1 and session.board_category and session.category != session.board_category:
+        label = category_label(session.board_category)
+        if label.casefold() != session.group_label.casefold():
+            return {"label": label, "message": f"Tema tablei: {label}."}
+    public = category_label(session.category).casefold() if session.category else ""
+    if level == 2 and session.group_label and session.group_label.casefold() != public:
+        return {
+            "label": session.group_label,
+            "message": f"Trei cuvinte țin de: {session.group_label}.",
+        }
+    return None
+
+
+def _hint_levels(session: IntrusulSession) -> list[int]:
+    if session.finished:
+        return []
+    return [
+        level for level in range(session.hint_level + 1, 3)
+        if _clue_at(session, level) is not None
+    ]
 
 
 def _share(session: IntrusulSession) -> str:
@@ -109,7 +127,7 @@ def _share(session: IntrusulSession) -> str:
         header += f" · {category_label(session.category)}"
     result = "🟩" if session.won else "🟥"
     detail = f"{session.attempts} {'încercare' if session.attempts == 1 else 'încercări'}"
-    if session.hint_used:
+    if session.hints_used:
         detail += " · indiciu"
     lines = [header, f"{result} {detail}"]
     if session.daily:
@@ -118,6 +136,8 @@ def _share(session: IntrusulSession) -> str:
 
 
 def _state(game_id: str, session: IntrusulSession) -> dict[str, object]:
+    steps = len(session.wrong_ids) + session.hints_used
+    hints_left = len(_hint_levels(session))
     body: dict[str, object] = {
         "game_id": game_id,
         "tiles": [_concept(node_id) for node_id in session.order],
@@ -129,17 +149,19 @@ def _state(game_id: str, session: IntrusulSession) -> dict[str, object]:
         "won": session.won,
         "lost": session.lost,
         "difficulty": session.difficulty,
-        "hints_used": int(session.hint_used),
-        "hint_available": (
-            not session.finished and bool(session.wrong_ids) and not session.hint_used
-        ),
+        "steps": steps,
+        "perfect": session.won and steps == 0,
+        "hints_used": session.hints_used,
+        "hints_left": hints_left,
+        "hint_level": session.hint_level,
+        "hint_available": hints_left > 0,
     }
     if session.daily:
         body["daily"] = session.daily
     if session.category:
         body["board_category"] = session.category
-    if session.hint_used:
-        body["clue"] = _clue(session)
+    if session.hint_level:
+        body["clue"] = _clue_at(session, session.hint_level)
     if session.finished:
         body["score"] = session.score
         body["share"] = _share(session)
@@ -226,6 +248,7 @@ def _build_session(
         source_ring=source_ring,
         daily=daily,
         category=requested_category,
+        board_category=board.category,
     )
 
 
@@ -347,11 +370,11 @@ class HintView(ContractAPIView):
     def post(self, request, game_id: str, session: IntrusulSession):
         if session.finished:
             raise http_error(400, "Jocul s-a terminat")
-        if session.hint_used:
-            raise http_error(400, "Indiciul a fost deja folosit")
-        if not session.wrong_ids:
-            raise http_error(400, "Indiciul apare după prima încercare.")
-        session.hint_used = True
+        levels = _hint_levels(session)
+        if not levels:
+            raise http_error(400, "Nu mai sunt indicii disponibile.")
+        session.hint_level = levels[0]
+        session.hints_used += 1
         return Response({"ok": True, **_state(game_id, session)})
 
 

@@ -23,11 +23,14 @@ type managedDocumentShell interface {
 // insertion offsets; it never serializes HTML or rewrites existing attributes.
 // SDK Tags emits a replacement asset block. Cat instead retains its exact
 // metadata, crossorigin attributes and tag order, using the SDK's actual nonce.
+const managedThemeBootstrap = `try{const t=localStorage.getItem("cat_theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch{}`
+
 type managedNonceShell struct {
-	index        []byte
-	ui           string // <html data-ui> declared by the build; "" or "react" today
-	metaOffset   int
-	nonceOffsets []int
+	index          []byte
+	ui             string // <html data-ui> declared by the build; "" or "react" today
+	metaOffset     int
+	themeBootstrap bool
+	nonceOffsets   []int
 }
 
 func managedTagInsertion(raw []byte, start int) (int, error) {
@@ -315,6 +318,12 @@ func newManagedNonceShell(index []byte, manifest *assets.Manifest) (*managedNonc
 		case "base", "style":
 			return nil, fmt.Errorf("unsupported managed shell tag")
 		case "meta":
+			if attrs["name"] == "cat-theme-bootstrap" {
+				if !inHead || shell.ui != managedUIPreact || shell.themeBootstrap || len(attrs) != 2 || attrs["content"] != "1" {
+					return nil, fmt.Errorf("invalid managed theme bootstrap marker")
+				}
+				shell.themeBootstrap = true
+			}
 			if strings.EqualFold(attrs["property"], "csp-nonce") || strings.EqualFold(attrs["name"], "csp-nonce") ||
 				strings.EqualFold(attrs["http-equiv"], "Content-Security-Policy") ||
 				strings.EqualFold(attrs["http-equiv"], "Content-Security-Policy-Report-Only") {
@@ -415,6 +424,9 @@ func (s *managedNonceShell) render(ctx context.Context) ([]byte, error) {
 	position := 0
 	output.Write(s.index[:s.metaOffset])
 	output.Write(meta)
+	if s.themeBootstrap {
+		output.WriteString(`<script id="cat-theme-bootstrap" nonce="` + escaped + `">` + managedThemeBootstrap + `</script>`)
+	}
 	position = s.metaOffset
 	for _, offset := range s.nonceOffsets {
 		output.Write(s.index[position:offset])

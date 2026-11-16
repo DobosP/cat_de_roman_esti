@@ -1,6 +1,7 @@
 // Typed, same-origin client for Intrusul. The server owns the answer and score;
 // before the round ends the browser only receives visible tiles and earned feedback.
 
+import type { PerfectRoundCounters } from "./round";
 import { ApiError, getJson, postJson } from "./client";
 
 export type Difficulty = "usor" | "normal" | "greu";
@@ -23,7 +24,7 @@ export interface IntrusulSolution {
   };
 }
 
-export interface IntrusulState {
+export interface IntrusulState extends PerfectRoundCounters {
   game_id: string;
   tiles: IntrusulTile[];
   wrong_ids: string[];

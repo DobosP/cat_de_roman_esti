@@ -11,10 +11,13 @@ graph; the frontend sees a bounded local menu, never the route corridor or full 
 
 from __future__ import annotations
 
+import os
 import random
 import threading
 from collections import OrderedDict
 from dataclasses import dataclass, field
+from datetime import date, datetime, timedelta
+from zoneinfo import ZoneInfo
 
 from django.urls import path
 from drf_spectacular.utils import extend_schema
@@ -141,11 +144,14 @@ class LantSession:
     # The chain of node ids walked so far; chain[0] is always the start.
     chain: list[str] = field(default_factory=list)
     won: bool = False
+    gave_up: bool = False
+    hops_made: int = 0
+    hints_used: int = 0
     # Player-picked board theme + curated-pack provenance (None for mined games).
     category: str | None = None
     pack_id: str | None = None
     # Voluntary help level reached this session, not position on the chain: it escalates with
-    # every hint request and persists across moves and undo (a capped scalar, never a
+    # each paid hint and persists across moves and undo (a capped scalar, never a
     # per-position map, so it cannot retain O(n²) tuple keys in the session). It resets
     # only when a fresh game is created.
     hint_requests: int = 0
@@ -456,10 +462,32 @@ def _path(session: LantSession) -> list[dict[str, str]]:
     return out
 
 
+def _round_outcome(session: LantSession) -> dict:
+    steps = max(0, session.hops_made - session.optimal) + session.hints_used
+    return {
+        "steps": steps,
+        "perfect": session.won and steps == 0,
+        "hints_left": len(_hint_options(session)),
+        "hint_level": session.hint_requests,
+    }
+
+
+def _comparison_day() -> date:
+    return datetime.now(ZoneInfo("Europe/Bucharest")).date()
+
+
+def _eligible_give_up(session: LantSession) -> bool:
+    if not session.pack_id or not os.environ.get("CAT_BOARD_STATS_DIR"):
+        return False
+    today = _comparison_day()
+    return session.daily in (today.isoformat(), (today - timedelta(days=1)).isoformat())
+
+
 def _state(game_id: str, session: LantSession) -> dict:
     svc = get_service()
     state = {
         "game_id": game_id,
+        **_round_outcome(session),
         "start": _concept(session.start),
         "target": {
             "id": session.target,
@@ -472,11 +500,15 @@ def _state(game_id: str, session: LantSession) -> dict:
         "optimal": session.optimal,
         "won": session.won,
         "difficulty": session.difficulty,
-        "choices": _visible_choices(session),
+        "choices": [] if session.gave_up else _visible_choices(session),
         "backtrack_recommended": (
             session.difficulty == "usor" and session.non_improving_moves >= 2
         ),
     }
+    if session.gave_up:
+        state["gave_up"] = True
+    elif not session.won and _eligible_give_up(session):
+        state["can_report_give_up"] = True
     if session.earned_hint is not None:
         state["earned_hint"] = session.earned_hint
     if session.daily is not None:
@@ -741,9 +773,10 @@ class CreateGameView(ContractAPIView):
             difficulty = _DEFAULT_DIFFICULTY
         if category is not None and not is_known(category):
             raise http_error(400, "Categorie necunoscută.")
-        lo, hi = _DIFFICULTY_BANDS[difficulty]
         if daily is not None:
+            difficulty, category = "usor", None
             seed = daily_seed(daily, GAME_KEY)
+        lo, hi = _DIFFICULTY_BANDS[difficulty]
         rng = random.Random(seed)
         curated = _pick_curated(
             rng,
@@ -792,6 +825,8 @@ class MoveView(ContractAPIView):
     @_atomic_session
     def post(self, request, game_id: str, session: LantSession):
         body = parse_body(request, MoveBody)
+        if session.gave_up:
+            raise http_error(400, "Jocul s-a terminat")
         if session.won:
             return Response({"ok": True, **_state(game_id, session)})
         if session.moves >= _MAX_MOVES:
@@ -858,6 +893,7 @@ class MoveView(ContractAPIView):
             )
 
         session.chain.append(guess)
+        session.hops_made += 1
         session.earned_hint = None
         # hint_requests measures help consumed this session, not chain position: a move
         # never resets it (persists until a new game).
@@ -913,6 +949,7 @@ class MoveView(ContractAPIView):
 
         result = {
             "ok": True,
+            **_round_outcome(session),
             "current": _concept(guess),
             "relation": relation_caption(svc, prev, guess),
             "path": _path(session),
@@ -942,7 +979,7 @@ class UndoView(ContractAPIView):
     @extend_schema(operation_id="lant_undo", tags=["lant"])
     @_atomic_session
     def post(self, request, game_id: str, session: LantSession):
-        if session.won:
+        if session.won or session.gave_up:
             return Response(_state(game_id, session))
         # Never step below the start.
         if len(session.chain) > 1:
@@ -955,171 +992,133 @@ class UndoView(ContractAPIView):
         return Response(_state(game_id, session))
 
 
-def _earned_hint_response(session: LantSession, payload: dict) -> Response:
-    """Retain only help explicitly requested here; GET may repeat, never escalate it."""
-    if not session.won:
-        session.earned_hint = payload
-    return Response(payload)
+def _hint_options(session: LantSession) -> list[tuple[int, dict]]:
+    if session.won or session.gave_up or session.hint_requests >= 3 or session.moves >= _MAX_MOVES:
+        return []
+    level = session.hint_requests + 1
+
+    def backtrack(message: str, **details: int) -> list[tuple[int, dict]]:
+        hint = {"hint": None, "stage": "backtrack", "message": message, **details}
+        return [] if hint == session.earned_hint else [(level, hint)]
+
+    svc = get_service()
+    cur = session.current
+    dist_to_target = svc.distances_to(session.target)
+    remaining = dist_to_target.get(cur)
+    if remaining is None:
+        # Name only a visited concept when the target is unreachable from here.
+        for node in reversed(session.chain[:-1]):
+            if node in dist_to_target:
+                return backtrack(f"Fundătură — folosește Înapoi până la {svc.label(node)}.")
+        return backtrack("Nicio scurtătură de aici — încearcă să revii cu Înapoi.")
+
+    shortest = _shortest_hops(session, dist_to_target)
+    forward = shortest or _distinct_hops(
+        cur,
+        session.target,
+        [
+            node_id
+            for node_id in svc.neighbor_ids(cur)
+            if node_id not in session.chain and node_id in dist_to_target
+        ],
+        dist_to_target,
+    )
+    if not forward:
+        neighbors = set(svc.neighbor_ids(cur))
+        for node in reversed(session.chain[:-1]):
+            if node in neighbors and dist_to_target.get(node) == remaining - 1:
+                return backtrack(
+                    "Drumul continuă printr-un pas deja vizitat. Folosește "
+                    f"Înapoi până la {svc.label(node)}.",
+                    remaining=remaining,
+                )
+        return []
+
+    best = forward[0]
+    relation = _short_relation(cur, best)
+    common = {
+        "hint": None,
+        "remaining": 1 + dist_to_target[best],
+        "alternatives": len(forward),
+    }
+    options = []
+    if level == 1 and relation != "legătură directă":
+        options.append((1, {
+            **common,
+            "stage": "direction",
+            "relation": relation,
+            "message": f"Direcție: caută o legătură „{relation}”.",
+        }))
+    if level <= 2:
+        near = (
+            _distinct_hops(
+                cur,
+                session.target,
+                [*shortest, *_near_route_hops(session, dist_to_target)],
+                dist_to_target,
+            )
+            if shortest
+            else forward
+        )
+        alternatives = [_choice_payload(cur, node) for node in near[:2]]
+        labels = [choice["label"] for choice in alternatives]
+        lead = "O variantă utilă: " if len(alternatives) == 1 else "Variante utile: "
+        options.append((2, {
+            **common,
+            "stage": "alternatives",
+            "alternatives_choices": alternatives,
+            "alternatives_labels": labels,
+            "message": lead + ", ".join(labels) + ".",
+        }))
+    options.append((3, {
+        **common,
+        "stage": "hop",
+        "hint": _concept(best),
+        "relation": relation,
+        "message": f"Un salt bun: {svc.label(best)}.",
+    }))
+    return options
 
 
 class HintView(ContractAPIView):
     @extend_schema(operation_id="lant_hint", tags=["lant"])
     @_atomic_session
     def post(self, request, game_id: str, session: LantSession):
+        if session.won or session.gave_up:
+            raise http_error(400, "Jocul s-a terminat")
+        options = _hint_options(session)
+        if not options:
+            raise http_error(400, "Nu mai sunt indicii disponibile.")
+        session.hint_requests, session.earned_hint = options[0]
+        session.hints_used += 1
+        return Response({**session.earned_hint, **_round_outcome(session)})
+
+
+class GiveUpView(ContractAPIView):
+    def initial(self, request, *args, **kwargs):
+        super().initial(request, *args, **kwargs)
+        if not os.environ.get("CAT_BOARD_STATS_DIR"):
+            raise http_error(404, "Not Found")
+
+    @extend_schema(
+        operation_id="lant_giveup",
+        tags=["lant"],
+        request=None,
+        description="Give up an eligible curated daily Lanț round with board comparison enabled.",
+    )
+    def post(self, request, game_id: str):
+        return self._give_up(request, game_id)
+
+    @_atomic_session
+    def _give_up(self, request, game_id: str, session: LantSession):
+        if session.gave_up:
+            return Response(_state(game_id, session))
+        if not _eligible_give_up(session):
+            raise http_error(404, "Not Found")
         if session.won:
-            return _earned_hint_response(
-                session, {"hint": None, "message": "Ai ajuns deja la țintă."}
-            )
-        if session.moves >= _MAX_MOVES:
-            return _earned_hint_response(
-                session,
-                {
-                    "hint": None,
-                    "stage": "backtrack",
-                    "message": _MOVE_LIMIT_MESSAGE,
-                }
-            )
-
-        svc = get_service()
-        cur = session.current
-        # Help escalates and persists for the whole session (moves/undo never reset it);
-        # only a new game does. Three is the terminal reveal, so capping here bounds even
-        # an abusive stream of repeated hint requests. Each stage's CONTENT is still
-        # computed fresh from the current position at request time.
-        session.hint_requests = min(3, session.hint_requests + 1)
-        asks_here = session.hint_requests
-        dist_to_target = svc.distances_to(session.target)
-        remaining = dist_to_target.get(cur)
-        if remaining is None:
-            # Player wandered into a dead end: the target is unreachable from here. Point
-            # them back to the nearest node ON THEIR OWN CHAIN that can still reach the
-            # target — naming only a node they have already visited (never a hidden one).
-            for nid in reversed(session.chain):
-                if nid != cur and dist_to_target.get(nid) is not None:
-                    return _earned_hint_response(
-                        session,
-                        {
-                            "hint": None,
-                            "stage": "backtrack",
-                            "message": (
-                                "Fundătură — folosește Înapoi până la "
-                                f"{svc.label(nid)}."
-                            ),
-                        }
-                    )
-            return _earned_hint_response(
-                session,
-                {
-                    "hint": None,
-                    "message": "Nicio scurtătură de aici — încearcă să revii cu Înapoi.",
-                },
-            )
-
-        shortest = _shortest_hops(session, dist_to_target)
-        forward = shortest or _distinct_hops(
-            cur,
-            session.target,
-            [
-                node_id
-                for node_id in svc.neighbor_ids(cur)
-                if node_id not in session.chain and node_id in dist_to_target
-            ],
-            dist_to_target,
-        )
-        if not forward:
-            # A legal revisit may leave the only shortest continuation on the already
-            # walked chain.  Suggestions intentionally suppress revisits, so point to the
-            # free undo control instead of returning an empty/misleading hint.
-            prior_shortest = {
-                node_id
-                for node_id in svc.neighbor_ids(cur)
-                if node_id in session.chain[:-1]
-                and dist_to_target.get(node_id) == remaining - 1
-            }
-            if prior_shortest:
-                recovery = next(
-                    node_id
-                    for node_id in reversed(session.chain[:-1])
-                    if node_id in prior_shortest
-                )
-                return _earned_hint_response(
-                    session,
-                    {
-                        "hint": None,
-                        "stage": "backtrack",
-                        "remaining": remaining,
-                        "message": (
-                            "Drumul continuă printr-un pas deja vizitat. Folosește "
-                            f"Înapoi până la {svc.label(recovery)}."
-                        ),
-                    }
-                )
-        if forward:
-            best = forward[0]
-            guided_remaining = 1 + dist_to_target[best]
-            common = {
-                "hint": None,
-                "remaining": guided_remaining,
-                "alternatives": len(forward),
-            }
-            if asks_here == 1:
-                relation = _short_relation(cur, best)
-                if relation != "legătură directă":
-                    return _earned_hint_response(
-                        session,
-                        {
-                            **common,
-                            "stage": "direction",
-                            "relation": relation,
-                            "message": f"Direcție: caută o legătură „{relation}”.",
-                        }
-                    )
-                # A generic caption cannot guide a choice. Skip that empty stage
-                # and retain the useful help level, including across GET/move/undo.
-                session.hint_requests = asks_here = 2
-            if asks_here == 2:
-                near = (
-                    _distinct_hops(
-                        cur,
-                        session.target,
-                        [*shortest, *_near_route_hops(session, dist_to_target)],
-                        dist_to_target,
-                    )
-                    if shortest
-                    else forward
-                )
-                alternatives = [_choice_payload(cur, node_id) for node_id in near[:2]]
-                lead = (
-                    "O variantă utilă: "
-                    if len(alternatives) == 1
-                    else "Variante utile: "
-                )
-                return _earned_hint_response(
-                    session,
-                    {
-                        **common,
-                        "stage": "alternatives",
-                        "alternatives_choices": alternatives,
-                        "alternatives_labels": [choice["label"] for choice in alternatives],
-                        "message": lead
-                        + ", ".join(choice["label"] for choice in alternatives)
-                        + ".",
-                    }
-                )
-            return _earned_hint_response(
-                session,
-                {
-                    **common,
-                    "stage": "hop",
-                    "hint": _concept(best),
-                    "relation": _short_relation(cur, best),
-                    "message": f"Un salt bun: {svc.label(best)}.",
-                }
-            )
-
-        return _earned_hint_response(
-            session, {"hint": None, "message": "Niciun indiciu disponibil."}
-        )
+            raise http_error(409, "Jocul s-a terminat")
+        session.gave_up = True
+        return Response(_state(game_id, session))
 
 
 _BASE = "api/wordgames/lant"
@@ -1129,4 +1128,5 @@ urlpatterns = [
     path(f"{_BASE}/games/<str:game_id>/move", MoveView.as_view()),
     path(f"{_BASE}/games/<str:game_id>/undo", UndoView.as_view()),
     path(f"{_BASE}/games/<str:game_id>/hint", HintView.as_view()),
+    path(f"{_BASE}/games/<str:game_id>/giveup", GiveUpView.as_view()),
 ]

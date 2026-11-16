@@ -1,6 +1,7 @@
 // Typed, same-origin client for Perechi. Pair mappings, source provenance and scoring
 // stay server-side; the UI only renders solved pairs and the one explicitly earned hint.
 
+import type { PerfectRoundCounters } from "./round";
 import { ApiError, getJson, postJson } from "./client";
 
 export interface PerechiTile {
@@ -19,7 +20,7 @@ export interface PerechiPair {
   label: string;
 }
 
-export interface PerechiState {
+export interface PerechiState extends PerfectRoundCounters {
   game_id: string;
   tiles: PerechiTile[];
   solved_pairs: PerechiPair[];
@@ -33,6 +34,7 @@ export interface PerechiState {
   won: boolean;
   lost: boolean;
   hint?: PerechiPair;
+  clue?: { label: string; message: string };
   daily?: string;
   board_category?: string;
   // Terminal-only, authored by the server.

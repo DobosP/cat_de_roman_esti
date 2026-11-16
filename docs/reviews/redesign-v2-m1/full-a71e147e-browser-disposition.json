@@ -1,0 +1,24 @@
+{
+  "sha": "a71e147e5e65fd294c8156699626e8ab01194098",
+  "playwright_sha256": "20b5cb54dbe79598f561200413d6e3a492ef2035676ab1fbec2c08e6422c4012",
+  "stats": {
+    "startTime": "2026-11-16T14:15:01.957Z",
+    "duration": 418354.045,
+    "expected": 835,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  },
+  "failures": [
+    {
+      "project_case": "quick-games-simpler-ui-int-558b7-l-phone-and-desktop-columns-desktop",
+      "evidence_sha256": "914d79fe976aea244a3e2cea4702d5352bc27109876760767ef20a3d8d06eea8",
+      "failure": "1280px at 100% text: stale single column expectation, observed four columns."
+    },
+    {
+      "project_case": "quick-games-simpler-ui-int-558b7-l-phone-and-desktop-columns-mobile",
+      "evidence_sha256": "914d79fe976aea244a3e2cea4702d5352bc27109876760767ef20a3d8d06eea8",
+      "failure": "1280px at 100% text: stale single column expectation, observed four columns."
+    }
+  ]
+}

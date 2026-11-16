@@ -1,132 +1,32 @@
-.intrusul-game {
-  --intrusul-accent: #ffcf5c;
+.intrusul-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
+/* The narrow mock stacks each answer. Wider boards still reflow in whole rows. */
+.intrusul-game .game-container { container-type: inline-size; }
+@media (min-width: 760px) {
+  @container (width >= calc(17rem + 12px)) {
+    .intrusul-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @container (width >= calc(34rem + 36px)) {
+    .intrusul-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  }
 }
-
-.intrusul-instruction {
-  width: min(100%, 760px);
-  align-self: center;
-  margin: 0;
-  color: var(--text-dim);
-  text-align: center;
-  line-height: 1.4;
-}
-
-.intrusul-grid {
-  width: min(100%, 760px);
-  align-self: center;
-  display: grid;
-  /* Enlarged text trades columns in whole steps only (4, 2, 1), never a ragged row. */
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-}
-
 .intrusul-tile {
   min-width: 0;
-  min-height: 78px;
-  display: grid;
-  place-content: center;
-  gap: 5px;
-  padding: 14px 10px;
-  border-color: color-mix(in srgb, var(--intrusul-accent) 24%, var(--surface-border));
-  background: color-mix(in srgb, var(--surface) 95%, var(--intrusul-accent));
-  font-size: clamp(0.9rem, 3.8vw, 1.05rem);
-  line-height: 1.18;
-  overflow-wrap: anywhere;
-  text-align: center;
-  touch-action: manipulation;
-}
-
-.intrusul-tile:not(:disabled):hover {
-  border-color: var(--intrusul-accent);
-  box-shadow: 0 10px 28px -22px var(--intrusul-accent);
-}
-
-.intrusul-tile--tried {
-  border-color: color-mix(in srgb, var(--good) 58%, var(--surface-border));
-  background: color-mix(in srgb, var(--surface) 82%, var(--good));
-}
-
-.intrusul-tile span {
-  color: var(--text-dim);
-  font-size: 0.72rem;
-  font-weight: 600;
-}
-
-.intrusul-clue,
-.intrusul-feedback {
-  width: min(100%, 760px);
-  align-self: center;
-  box-sizing: border-box;
-  padding: 11px 14px;
-}
-
-.intrusul-clue {
+  min-height: 76px;
   display: flex;
   align-items: center;
-  gap: 9px;
-  border-color: color-mix(in srgb, var(--intrusul-accent) 55%, var(--surface-border));
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 16px;
+  border: 2px solid var(--surface-border-strong);
+  border-radius: 18px;
+  background: var(--surface);
+  font: 600 clamp(1.15rem, 5.5vw, 1.5rem)/1.15 var(--font-display);
+  overflow-wrap: anywhere;
+  text-align: left;
 }
-
-.intrusul-feedback {
-  min-height: 44px;
-  display: grid;
-  place-items: center;
-  color: var(--text-dim);
-  text-align: center;
-}
-
-.intrusul-actions {
-  display: flex;
-  justify-content: center;
-}
-
-.intrusul-hint-status {
-  color: var(--text-dim);
-  font-size: 0.8rem;
-  text-align: center;
-}
-
-.intrusul-actions .roedu-btn {
-  min-height: 44px;
-}
-
-.intrusul-solution {
-  display: grid;
-  gap: 6px;
-}
-
-.intrusul-answer {
-  color: var(--intrusul-accent);
-  font-size: 1.25rem;
-}
-
-/* Steps fit 8.5rem cards plus the 10px gap; four columns wait for a desktop viewport. */
-.intrusul-game .game-container {
-  container-type: inline-size;
-}
-
-@container (width < calc(17rem + 10px)) {
-  .intrusul-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
-@media (min-width: 760px) {
-  @container (width >= calc(34rem + 30px)) {
-    .intrusul-grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-  }
-}
-
-@media (max-width: 339px) {
-  .intrusul-tile {
-    min-height: 64px;
-  }
-}
-
-/* Kit Presence wrapper around the feedback row keeps its centered column layout. */
-.intrusul-game .game-container > .roedu-presence {
-  display: flex;
-  flex-direction: column;
-}
+.intrusul-tile:not(:disabled):hover { border-color: var(--focus); }
+.intrusul-tile--tried { background: var(--surface-strong); }
+.intrusul-tile span { color: var(--text-muted); font: 600 .8rem var(--roedu-font-body); }
+.intrusul-solution { display: grid; gap: 6px; }
+.intrusul-answer { font-size: 1.25rem; }

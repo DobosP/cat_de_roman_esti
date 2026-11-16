@@ -86,7 +86,7 @@ def test_create_uses_one_strict_private_catalog_board() -> None:
     assert body["attempts"] == body["mistakes"] == 0
     assert body["remaining_mistakes"] == intrusul.MAX_MISTAKES
     assert body["wrong_ids"] == []
-    assert body["hints_used"] == 0 and body["hint_available"] is False
+    assert body["hints_used"] == 0 and body["hint_available"]
     assert body["won"] is False and body["lost"] is False
     assert "board_category" not in body
 
@@ -266,7 +266,7 @@ def test_wrong_repeat_hint_and_scored_win_are_bounded() -> None:
     guess_url = f"{BASE}/games/{body['game_id']}/guess"
     hint_url = f"{BASE}/games/{body['game_id']}/hint"
 
-    assert _post(client, hint_url).status_code == 400
+    assert body["hint_level"] == body["steps"] == 0
     first = _post(client, guess_url, {"id": wrong}).json()
     assert first["correct"] is False and first["already_tried"] is False
     assert first["attempts"] == first["mistakes"] == 1
@@ -278,15 +278,25 @@ def test_wrong_repeat_hint_and_scored_win_are_bounded() -> None:
     assert repeated["already_tried"] is True
     assert repeated["attempts"] == repeated["mistakes"] == 1
 
+    theme = _post(client, hint_url).json()
+    assert theme["hint_level"] == theme["hints_used"] == 1
+    assert theme["steps"] == 2 and theme["hint_available"]
+    assert theme["clue"] == intrusul._clue_at(session, 1)
+    assert session.group_label not in theme["clue"]["message"]
     hinted = _post(client, hint_url).json()
-    assert hinted["hints_used"] == 1 and hinted["hint_available"] is False
-    assert hinted["clue"] == intrusul._clue(session)
+    assert hinted["hints_used"] == 2 and hinted["hint_available"] is False
+    assert hinted["steps"] == 3 and hinted["remaining_mistakes"] == first["remaining_mistakes"]
+    assert hinted["clue"] == intrusul._clue_at(session, 2)
     assert set(hinted["clue"]) == {"label", "message"}
+    assert all(node not in str(hinted["clue"]) for node in session.order)
+    before = client.get(hint_url.rsplit("/", 1)[0]).json()
     assert _post(client, hint_url).status_code == 400
+    assert client.get(hint_url.rsplit("/", 1)[0]).json() == before
 
     won = _post(client, guess_url, {"id": session.intruder}).json()
     assert won["correct"] is True and won["won"] is True and won["lost"] is False
-    assert won["attempts"] == 2 and won["score"] == 650
+    assert won["attempts"] == 2 and won["score"] == 500
+    assert won["steps"] == 3 and won["perfect"] is False
     assert won["solution"]["intruder"]["id"] == session.intruder
     assert {tile["id"] for tile in won["solution"]["group"]["tiles"]} == set(
         session.members
@@ -309,6 +319,7 @@ def test_first_try_score_third_wrong_loss_and_terminal_guards(
     first_url = f"{BASE}/games/{first['game_id']}"
     won = _post(client, f"{first_url}/guess", {"id": first_session.intruder}).json()
     assert won["score"] == 1_000
+    assert won["steps"] == 0 and won["perfect"] is True
     assert won["share"].splitlines()[1] == "🟩 1 încercare"
     assert recorded[-1] == (intrusul.GAME_KEY, first_session.source_id)
     assert _post(client, f"{first_url}/guess", {"id": first_session.intruder}).status_code == 400
@@ -325,6 +336,7 @@ def test_first_try_score_third_wrong_loss_and_terminal_guards(
     lost = responses[-1]
     assert lost["attempts"] == lost["mistakes"] == 3
     assert lost["remaining_mistakes"] == 0 and lost["score"] == 0
+    assert lost["steps"] == 3 and lost["perfect"] is False
     assert lost["share"].splitlines()[1] == "🟥 3 încercări"
     assert lost["solution"]["intruder"]["id"] == lost_session.intruder
     assert "îți arăt intrusul" in lost["message"]

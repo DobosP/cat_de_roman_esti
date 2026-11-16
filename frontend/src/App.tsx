@@ -86,7 +86,7 @@ export default function App() {
   let screen: VNode;
   switch (portedPath(path) ? path : "fallback") {
     case "/":
-      screen = <Home onToast={pushToast} />;
+      screen = <Home />;
       break;
     case "/intrusul":
       screen = <Intrusul onExit={goHome} onToast={pushToast} />;

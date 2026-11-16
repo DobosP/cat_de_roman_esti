@@ -2,12 +2,15 @@
 
 No network listener, database, production service or account is used. Only random
 session IDs are normalized. --benchmark adds aggregate local timings/peak memory,
-not a full-arcade capacity claim. The native executable must be built beforehand.
+not a full-arcade capacity claim. Comparison uses a prebuilt native executable. The independent recording mode uses
+Django TestClient alone and writes both the source-bound gzip and a provenance manifest.
 """
 
 from __future__ import annotations
 
 import argparse
+import gzip
+import hashlib
 import json
 import logging
 import os
@@ -15,6 +18,7 @@ import resource
 import select
 import subprocess
 import time
+from itertools import combinations
 from pathlib import Path
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
@@ -22,15 +26,78 @@ ROOT = Path(__file__).resolve().parents[1]
 BASE = "/api/wordgames/intrusul/games"
 
 
+def write_python_corpus(path: Path, cases: list[dict]) -> None:
+    def encoded(value: object) -> bytes:
+        return (json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n").encode()
+
+    def sha(data: bytes) -> str:
+        return hashlib.sha256(data).hexdigest()
+
+    # The export supplies names only. The digest of every real Python input is
+    # independently recomputed and checked against its published source identity.
+    export = json.loads((ROOT / "go-backend/internal/content/bundled.json").read_bytes())
+    content = ROOT / "cat_de_roman_esti/fixtures"
+    sources = {name: sha((content / name).read_bytes()) for name in export["sources"]}
+    if sources != export["sources"]:
+        raise RuntimeError("Published export and Django source identities differ")
+    reference = {
+        "schema_version": 1,
+        "rules_version": 2,
+        "reference": "Independent Django oracle for ADR-0232, anonymous arcade HTTP journeys",
+        "sources": sources,
+        "cases": cases,
+    }
+    raw = encoded(reference)
+    compressed = gzip.compress(raw, mtime=0)
+    source_commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
+    producer = Path(__file__).resolve()
+    producer_paths = [str(producer.relative_to(ROOT)), "cat_de_roman_esti"]
+    producer_dirty = bool(subprocess.check_output(
+        ["git", "status", "--porcelain", "--", *producer_paths], cwd=ROOT
+    ))
+    manifest = {
+        "cases": len(cases),
+        "compressed_bytes": len(compressed),
+        "gzip_sha256": sha(compressed),
+        "json_sha256": sha(raw),
+        "producer_commit": source_commit,
+        "producer_dirty": producer_dirty,
+        "producer_sha256": sha(producer.read_bytes()),
+        "request_set_sha256": sha(encoded([case["request"] for case in cases])),
+        "rules_version": 2,
+        "sources": sources,
+    }
+    path.write_bytes(compressed)
+    path.with_name(path.name + ".manifest.json").write_text(
+        json.dumps(manifest, ensure_ascii=False, sort_keys=True, indent=2) + "\n", encoding="utf-8"
+    )
+    print(f"Recorded {len(cases)} rules-2 responses from Django ({manifest['gzip_sha256']}).")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--binary", type=Path, required=True)
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument("--binary", type=Path, help="compare the Python and native responses")
+    mode.add_argument("--record-python", type=Path, help="record independently from Django")
     parser.add_argument("--runtime", choices=("go", "rust"), default="go")
     parser.add_argument("--benchmark", action="store_true")
     parser.add_argument("--report", type=Path)
     args = parser.parse_args()
     if os.environ.get("CAT_ACCOUNTS_ENABLED", "").lower() in {"1", "true", "yes", "on"}:
         parser.exit(1, "Parity requires accounts OFF.\n")
+    if args.record_python:
+        if args.benchmark or args.report or args.runtime != "go":
+            parser.error("Recording only accepts --record-python.")
+        overrides = (
+            "CAT_KG_FIXTURE", "CAT_GAMES_PACK", "CAT_BOARD_RANKINGS", "CAT_DEBUG",
+            "CAT_DOMAIN", "CAT_DATABASE_URL", "DATABASE_URL", "CAT_BOARD_STATS_DIR",
+        )
+        if any(os.environ.get(key) for key in overrides):
+            parser.error("Recording requires the bundled content and default anonymous settings.")
+        if os.environ.get("DJANGO_SETTINGS_MODULE", "cat_de_roman_esti.web.settings") != (
+            "cat_de_roman_esti.web.settings"
+        ):
+            parser.error("Recording requires the repository's Django settings.")
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "cat_de_roman_esti.web.settings")
     import django
 
@@ -50,11 +117,11 @@ def main() -> int:
         stdout=subprocess.PIPE,
         text=True,
         encoding="utf-8",
-    )
+    ) if args.binary else None
     replay_buffer = bytearray()
 
     def replay_line() -> bytes:
-        assert child.stdout is not None
+        assert child is not None and child.stdout is not None
         deadline = time.monotonic() + 60
         while b"\n" not in replay_buffer:
             remaining = deadline - time.monotonic()
@@ -71,6 +138,7 @@ def main() -> int:
         return bytes(line)
 
     aliases: dict[str, str] = {}
+    cases: list[dict] = []
     times_python: list[int] = []
     times_go: list[int] = []
     count = 0
@@ -86,8 +154,36 @@ def main() -> int:
             return [normalize(item) for item in value]
         return value
 
+    def freeze(value):
+        # Case paths may deliberately percent-encode the first byte of a session id.
+        if isinstance(value, str):
+            for old, new in aliases.items():
+                value = value.replace(f"%{ord(old[0]):02x}{old[1:]}", f"%{ord(new[0]):02x}{new[1:]}")
+                value = value.replace(old, new)
+            return value
+        if isinstance(value, dict):
+            return {key: freeze(item) for key, item in value.items()}
+        if isinstance(value, list):
+            return [freeze(item) for item in value]
+        return value
+
     def request(method: str, path: str, raw: str = "") -> dict:
         nonlocal count, go_peak
+        if child is None:
+            response = client.generic(method, path, data=raw.encode(), content_type="application/json")
+            expected = response.json() if response.content else None
+            if response.status_code == 200 and isinstance(expected, dict) and "game_id" in expected:
+                sid = expected["game_id"]
+                if sid not in aliases:
+                    aliases[sid] = f"session-{len(aliases)}"
+            cases.append({
+                "request": {"method": method, "path": freeze(path), "body": freeze(raw)},
+                "status": response.status_code,
+                "body": freeze(expected),
+            })
+            count += 1
+            return expected or {}
+
         split = urlsplit(path)
         mapped_path = split.path
         for python_id, go_id in aliases.items():
@@ -177,7 +273,7 @@ def main() -> int:
             request("POST", f"{BASE}?{query}")
         for method, path in (
             ("GET", BASE),
-            ("OPTIONS", BASE),
+            *([("OPTIONS", BASE)] if not args.record_python else []),
             ("POST", BASE + "/missing"),
             ("GET", BASE + "/missing"),
             ("POST", BASE + "/missing/guess"),
@@ -266,6 +362,10 @@ def main() -> int:
 
         for path in ("/api/health", "/api/manifest", "/api/categories", "/api/me"):
             request("GET", path)
+        if args.record_python:
+            request("GET", "/openapi.json")
+            for method in ("POST", "GET", "HEAD"):
+                request(method, "/api/wordgames/lant/games/missing/giveup")
         for module in (perechi, conexiuni, contexto, lant, alchimie):
             base = f"/api/wordgames/{module.GAME_KEY}/games"
             for query in (
@@ -350,23 +450,115 @@ def main() -> int:
         ):
             request("POST", f"/api/alchimie/explore/{eid}/{op}", body)
         request("GET", f"/api/alchimie/explore/{eid}")
+        # Rules-2 additions reuse stable private oracle seeds to drive complete ladders
+        # and prove that exhausting a ladder leaves the resumed state untouched.
+        actions = (
+            (intrusul, "hint", "guess", lambda s: {"id": s.intruder}),
+            (perechi, "hint", "match", lambda s: {"ids": list(s.pairs[-1].members)}),
+            (conexiuni, "clue", "guess", lambda s: {"ids": next(reversed(s.groups.values()))}),
+            (contexto, "clue", "guess", lambda s: {"text": s.target}),
+            (lant, "hint", "move", lambda s: {"text": s.target}),
+            (alchimie, "hint", "combine", lambda s: {"a": s.seeds[0], "b": s.seeds[1]}),
+        )
+        for module, hint, action, sample_move in actions:
+            base = f"/api/wordgames/{module.GAME_KEY}/games"
+            daily = request("POST", base + "?daily=2026-11-16&category=literatura&difficulty=greu")
+            if daily.get("game_id"):
+                request("GET", f"{base}/{daily['game_id']}")
+            query = "?seed=31&difficulty=greu" if module is lant else "?seed=17&difficulty=usor"
+            game = request("POST", base + query)
+            path = f"{base}/{game['game_id']}"
+            session = module.store.get(game["game_id"])
+            assert session is not None
+
+            if module is lant:
+                # Taking an accepted hop and undoing it leaves the path unchanged
+                # while retaining the move for the final cumulative outcome.
+                next_hop = lant._shortest_hops(session, get_service().distances_to(session.target))[0]
+                raw = json.dumps({"text": next_hop})
+                assert request("POST", path + "/move", raw)["ok"]
+                request("POST", path + "/undo")
+            if module is alchimie:
+                dry = next(pair for pair in combinations(session.seeds, 2) if not session.recipes.get(tuple(sorted(pair))))
+                request("POST", path + "/combine", json.dumps({"a": dry[0], "b": dry[1]}))
+                request("POST", path + "/combine", json.dumps({"a": dry[1], "b": dry[0]}))
+
+            for _ in range(4):
+                request("POST", path + "/" + hint)
+                request("GET", path)
+            if module is alchimie:
+                request("POST", path + "/reset")
+                request("POST", path + "/combine", json.dumps({"a": dry[0], "b": dry[1]}))
+                for a, b in alchimie._minimum_projected_plan(set(session.owned), session.target, session.recipes):
+                    request("POST", path + "/combine", json.dumps({"a": a, "b": b}))
+            elif module is lant:
+                while not session.won:
+                    route = lant._shortest_hops(session, get_service().distances_to(session.target))
+                    assert route
+                    assert request("POST", path + "/move", json.dumps({"text": route[0]}))["ok"]
+            elif module is contexto:
+                request("POST", path + "/guess", '{"text":"cuvantxyz"}')
+                request("POST", path + "/giveup")
+            else:
+                request("POST", path + "/" + action, json.dumps(sample_move(session)))
+            request("GET", path)
+            request("POST", path + "/" + hint)
+        # Once three sets are solved, the remaining membership is public.
+        for module, action, hint in ((perechi, "match", "hint"), (conexiuni, "guess", "clue")):
+            base = f"/api/wordgames/{module.GAME_KEY}/games"
+            initial = request("POST", base + "?seed=38")
+            path = f"{base}/{initial['game_id']}"
+            session = module.store.get(initial["game_id"])
+            assert session is not None
+            for _ in range(2):
+                request("POST", path + "/" + hint)
+            sets = [pair.members for pair in session.pairs] if module is perechi else list(session.groups.values())
+            for ids in sets[:3]:
+                request("POST", path + "/" + action, json.dumps({"ids": list(ids)}))
+            before = request("GET", path)
+            assert before["hints_left"] == 0
+            request("POST", path + "/" + hint)
+            assert request("GET", path) == before
+        # Solving the original subject publishes its later rungs. Replaying the
+        # planner never picks a new subject on behalf of an exhausted ladder.
+        for module, action, hint in ((perechi, "match", "hint"), (conexiuni, "guess", "clue")):
+            base = f"/api/wordgames/{module.GAME_KEY}/games"
+            initial = request("POST", base + "?seed=38")
+            path = f"{base}/{initial['game_id']}"
+            session = module.store.get(initial["game_id"])
+            assert session is not None
+            request("POST", path + "/" + hint)
+            if module is perechi:
+                ids = session.pairs[session.hinted_pair].members
+            else:
+                ids = session.groups[session.clue_category]
+            request("POST", path + "/" + action, json.dumps({"ids": list(ids)}))
+            before = request("GET", path)
+            assert before["hint_level"] == before["steps"] == 1 and before["hints_left"] == 0
+            request("POST", path + "/" + hint)
+            assert request("GET", path) == before
         if args.benchmark:
             for seed in range(1000):
                 game = request("POST", f"{BASE}?seed={seed}")
                 request("GET", f"{BASE}/{game['game_id']}")
     finally:
-        if child.stdin is not None:
-            child.stdin.close()
-        if child.poll() is None:
-            try:
-                child.wait(timeout=10)
-            except subprocess.TimeoutExpired:
-                child.terminate()
+        if child is not None:
+            if child.stdin is not None:
+                child.stdin.close()
+            if child.poll() is None:
                 try:
                     child.wait(timeout=10)
                 except subprocess.TimeoutExpired:
-                    child.kill()
-                    child.wait(timeout=10)
+                    child.terminate()
+                    try:
+                        child.wait(timeout=10)
+                    except subprocess.TimeoutExpired:
+                        child.kill()
+                        child.wait(timeout=10)
+    if args.record_python:
+        write_python_corpus(args.record_python, cases)
+        return 0
+    assert child is not None
     assert child.returncode == 0, f"Native replay exit {child.returncode}"
     print(
         f"{args.runtime} arcade HTTP parity: {count} responses matched "

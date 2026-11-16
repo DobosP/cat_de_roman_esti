@@ -499,7 +499,7 @@ async function main() {
   const routePaths = appRoutePaths(read(root, "frontend/src/App.tsx").toString("utf8"), ts);
   const alchimieBinding = alchimieRouteBinding(read(root, "frontend/" + alchimieEntry).toString("utf8"), ts);
   const portedSet = portedSetBindings(root, routePaths);
-  const baseline = json(root, "baselines/cat/capture.json");
+  const baseline = json(root, "baselines/cat/history/original-capture.json");
   assert.deepEqual(baseline.pages.map((item) => item.route).sort(), journeys.filter((name) => name !== "/alchimie").sort(), "All original frozen journeys must remain measured");
   const tarPath = config.npm_dir + "/scripts/kit-sync.mjs";
   const { readTarGz } = await import(pathToFileURL(regular(root, tarPath)).href);
@@ -521,7 +521,7 @@ async function main() {
     "frontend/index.html", "frontend/src/main.tsx", "frontend/src/App.tsx", "frontend/src/routes.ts", "frontend/src/homeCardBlur.ts",
     "frontend/src/components/AccountBar.tsx", ...Object.values(portedScreens).filter(Boolean).map((name) => "frontend/" + name),
     "frontend/" + alchimieTargetScreen, "frontend/src/lazyScreen.ts", "frontend/src/screenLocation.ts",
-    "go-backend/internal/httpapi/managed_delivery.go", "baselines/cat/capture.json",
+    "go-backend/internal/httpapi/managed_delivery.go", "baselines/cat/history/original-capture.json",
     ...frozenBaselineReferences, proof.archive, proof.archive + ".sha256", syncPath, bootstrapPath,
     `.gate/${target}/managed-assets/prepare.json`, `.gate/${target}/managed-assets/inventory.json`,
     ".gate/wrapper-current.json", `.gate/${target}/wrapper-current.json`, descriptor.config_path,

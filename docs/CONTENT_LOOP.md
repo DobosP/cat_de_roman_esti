@@ -3,7 +3,10 @@
 [ADR-0230](adr/0230-content-loop-v5.md) records Paul's decisions, and
 [ADR-0231](adr/0231-v5-dumps-words-and-model-candidates.md) amends them from campaign `v5-pilot-2`:
 Wiktionary dump evidence, full paradigms with per-form drops, the words lane, model-proposed
-candidates, trains and the token meter. ADR-0226 rules they do not revise still apply.
+candidates, trains and the token meter. [ADR-0235](adr/0235-v5-real-use-fixes.md) amends both from
+`v5-pilot-3`: one disturbed-board definition, the paired re-blind, the quota band, the full
+frequency list, the early Lanț overlap screen and the root operating rules. ADR-0226 rules they do
+not revise still apply.
 [STATUS](STATUS.md) records what shipped. [CRITIQUE_RUBRIC](CRITIQUE_RUBRIC.md) sets the quality
 bar. *(to build)* marks a tool that has not landed yet; everything else exists today.
 
@@ -19,9 +22,10 @@ contract is never edited: an amendment closes the campaign and starts the next o
 Whenever main gains a V5 amendment ADR, merge local main into `content/v5` at the next turn start,
 before any dispatch, and reread this procedure and the ADR.
 
-The first campaign, `v5-pilot-1`, built the core kit and closed when ADR-0231 amended it. The
-current campaign is `v5-pilot-2`, whose contract ADR-0231 states. It runs 7 days from its
-`campaign-start`, or 40 M goal-meter tokens. Its targets are 60 new forms on existing words,
+The first campaign, `v5-pilot-1`, built the core kit and closed when ADR-0231 amended it.
+`v5-pilot-2` closes when ADR-0235 supersedes it. The current campaign is `v5-pilot-3`, whose
+contract ADR-0235 states; it starts in a fresh chat after the weekly reset and carries over every
+reviewed and frozen item. It runs 7 days from its `campaign-start`, or 40 M goal-meter tokens. Its targets are 60 new forms on existing words,
 12 new words, 48 new links, and 6 new boards in at least 2 games. Lanes without a target are
 reported but count toward nothing.
 
@@ -46,8 +50,14 @@ reported but count toward nothing.
   batches, or three hits of the same failure reason, cools down until a recorded input changes.
   Targets never lower a gate.
 - **Quota.** Start at 20% or less of the weekly meter, unless the contract carries Paul's start override. Below 70%, use full fan-out. From 70% to
-  90%, finish judged items and take no new intake. At 90% or more, close the open train, report
-  and stop. Never run on paid credits.
+  90%, take no new intake (S1–S3), but frozen items may finish S4–S10 (ADR-0235); `resume.py`'s
+  `finish-judged-only` mode means exactly this. At 90% or more,
+  close the open train, report and stop. Never run on paid credits. Read the quota at the start and
+  end of every turn; a rise the campaign's own tokens do not explain is reported as shared usage.
+- **Budgets.** Tokens per landed unit, root included: a form 0.8 M, a new word with its links 3 M, a
+  board 3 M. A lane whose cost per landed unit exceeds twice its budget for two trains in a row,
+  after its second landed train, cools down and is reported. 8 M tokens since the last landing with
+  nothing landed stops the campaign with a report (ADR-0235).
 - **Stops.** Stop and report at once on any of: a hold or child-safety breach; an attempt to land
   past a red gate; quota at 90% or more; budget or days spent; or Paul saying stop. Paul re-arms a
   campaign with one message.
@@ -131,7 +141,11 @@ these, never both while authored items wait), 1 blind critic,
 2 reviewers and 1 assembler. During qualification the author slots go to the pin reviewer and
 the landing reviewer. Judgment roles run at the top effort rung; authors, the assembler and tool
 repair run one rung lower. Hashing, equality checks, replays and counts are scripts, never agents.
-The root reads no file over 200 lines itself, except this procedure, ADR-0230 and ADR-0231. A headless driver
+The root reads no file over 200 lines itself, except this procedure, ADR-0230, ADR-0231 and
+ADR-0235. A gate-operator job runs the S7–S9 scripts and returns one receipt; the root never polls
+a running gate and never rehearses a train that cannot open yet. Every new or changed gate runs
+first on the unchanged baseline. A gate the unchanged baseline fails is reported to Paul; until he
+rules, the items it covers wait, it rejects nothing, and nothing lands past it. A headless driver
 needs a separate owner-accepted agent-ops ADR.
 
 Each turn:
@@ -142,9 +156,12 @@ Each turn:
 5. Fill free slots from the queue head.
 6. If every slot is busy and no script step is pending, issue one long wait. Never sleep with a
    free slot and a non-empty queue.
-7. End with the report line.
+7. End with one line. A turn with no eligible work spends at most 3 calls, then marks the goal
+   blocked and states the exact wake time; a blocked goal resumes only on Paul's message. Running
+   jobs or a pending gate receipt are not "no eligible work"; step 6's single wait applies.
 
-Message Paul only when something lands, a train qualifies, a lane is blocked or a decision is his.
+Send a full report only when something lands, a train qualifies, a lane is blocked or a decision is
+his.
 Batch questions into one message, each answerable, with the exact commit and a recommended option.
 Only the gated item waits.
 
@@ -152,7 +169,7 @@ Only the gated item waits.
 
 | Stage | Who | Output | Gate |
 |---|---|---|---|
-| S1 need and screen | Script | Survivors with reason codes. Every reject is registered. | Screens pass: resolver, registry, exclusions, full inventory, collisions, fuzzy neighbours, Cald inbound floor, co-landing. The form screen covers forms. The collision probe builder *(to build)* feeds every real form near a proposed key and the profanity probe list to `resolver_diff.py --probes` (ADR-0231 decision 7); until it lands, forms use the form screen and the landing reviewer's manual probing. A cell with no survivors is recorded as graph-blocked. |
+| S1 need and screen | Script | Survivors with reason codes. Every reject is registered. | Screens pass: resolver, registry, exclusions, full inventory, collisions, fuzzy neighbours, Cald inbound floor, co-landing. The form screen covers forms. The collision probe builder (`build_form_probes.py`) feeds every real form near a proposed key and the profanity probe list to `resolver_diff.py --probes` (ADR-0231 decision 7). Words: positive frequency is a positive `exact` count from `scripts/content_v5/frequency.py` over the pinned FrequencyWords `ro_full` list (`~/work/_temp/content__v5/frequency/ro_full.txt`), with `undiacritised_only` and `minority_spelling` flagged for the reviewers (ADR-0235 decision 5). Lanț prospects: `cat-lant-overlap`; a `near_duplicate` is parked before authoring (ADR-0235 decision 6). A cell with no survivors is recorded as graph-blocked. |
 | S2 evidence | Script and source client | Cached receipts per item, or a park with a retry predicate. A dump receipt names the file hash, page title, revision id and page byte hash. | First fetcher and role recorded |
 | S3 author and freeze | Author | Frozen payload and hash, with the private key kept apart. No board number yet. | Bytes frozen. The lint passes: `critique_pack.py --strict` joined to `cat-content-ops critique --strict` or `cat-content validate-pack` as applicable (rubric A6 included). Rejected and tombstoned items are screened on resubmission. |
 | S4 blind play | Critic | Transcript and derived-view hash | A fail drops the item; no reroll of an unchanged payload. Standalone forms keep the ADR-0210 exemption. |
@@ -166,7 +183,9 @@ Only the gated item waits.
 **S7 assembly.** The assembler takes these steps in order:
 1. Re-run the novelty, tile-fairness, history, second-grouping and fuzzy-neighbour screens over
    the whole train plus stock.
-2. Recompute derived views at the candidate, and re-blind any item whose view changed.
+2. Recompute derived views at the candidate, and re-blind any item whose derived view changed. A
+   board's derived view is its `cat-board-view-diff` view SHA-256 under the one disturbed
+   definition (ADR-0235 decision 1); a whole-bundle digest is not a derived view.
 3. Assign board numbers.
 4. Install:
    - `cat-content-ops import-candidates --pack-only` for boards;
@@ -182,12 +201,14 @@ Only the gated item waits.
    `cat-mobile-pack --check` and `cat-content-rail all --check`.
 7. Refresh every changed rail binding once, under ADR-0189 and ADR-0212. A pack change can
    invalidate the world audit even when the world payload is identical, so run fresh audits.
-8. For forms trains, run `resolver_diff.py` over every Cald target. The landing reviewer clears
+8. For any train that adds answer keys (forms or new words), run `resolver_diff.py` over every Cald target. The landing reviewer clears
    each changed answer, or that form is dropped by itself and the diff reruns on the kept set. A
    change that only removes an existing wrong resolution may be cleared. A profanity probe that
    newly resolves is never cleared (ADR-0231 decisions 6–7). For trains with new words, links or
-   captions, run the all-boards view diff *(to build)*. Every disturbed board is played over HTTP
-   and blind-played again.
+   captions, run `cat-board-view-diff` over all landed boards. Every board whose view changed is
+   played over HTTP. Every disturbed board is blind-played again: a new board must be won; a
+   disturbed existing Cald board passes with a win or a `--reblind-compare` verdict of no-worse,
+   and both judges sign its top-100 change (ADR-0235 decision 2).
 
 If an item fails at S7–S9, eject it and rebuild the train once. A second failure ends the train,
 and its items then qualify one at a time.
@@ -222,8 +243,8 @@ and redo S7–S9 on the new SHA. Keep the loop branch; remove only owned review 
   reused: build, 4i, unit and full receipts, the reference capture and native replay, HTTP play,
   pins, the landing review, the landing receipt and any impact report.
 - **The item payload hash plus its derived-view hash.** Blind play, the two judgments and source
-  receipts bind here. They survive a moved base or a late board number while both hashes are
-  unchanged.
+  receipts bind here. They survive a moved base, a late board number or another train's landing
+  while both hashes are unchanged.
 - **Catalog reuse.** Side-catalog reviews are redone once per train. Whether an untouched
   catalog may be skipped is decided after the pilot (ADR-0230). Until then
   `impact.py` *(to build)* runs in shadow only and decides nothing.
@@ -280,7 +301,9 @@ step, the link install with the all-boards view diff and the link span checker, 
 section (its own reviewed commit), and the caption generator. ADR-0231 decision 11 adds the
 source client's dump route, the dump reader and table parser, the collision probe builder with the
 profanity probe list, the counter split in `report_content_delta.py` and the registry check's
-receipt-hash requirement; these may be built inside the campaign.
+receipt-hash requirement; these may be built inside the campaign. ADR-0235 landed
+`cat-board-view-diff --reblind-compare`, the paired closeout rule, `scripts/content_v5/frequency.py`
+and `cat-lant-overlap`.
 
 **Rules for every tool.**
 - Each tool is its own commit with a threat model, focused tests, a portable build (Go on

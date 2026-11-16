@@ -3,9 +3,8 @@ import type { ComponentProps } from "preact";
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "preact/hooks";
 import { Presence, useIsPresent, animateHeight, springs, type PresenceVariant } from "@roedu/ui/motion";
 import { useElementMotion } from "../hooks/useElementMotion";
-import { Button, Spinner, type ToastKind } from "@roedu/ui";
+import { Button, type ToastKind } from "@roedu/ui";
 import {
-  type Difficulty,
   type HintResult,
   type LantChoice,
   type LantProgress,
@@ -13,58 +12,43 @@ import {
   type PathStep,
   createLant,
   getLant,
+  giveUpLant,
   hintLant,
   moveLant,
   undoLant,
 } from "../api/lant";
 import { ApiError } from "../api/client";
 import { createGameActionOwner, recoverOwnedGameAction, type GameActionTicket } from "../gameActionRecovery.mjs";
-import { GameShell } from "../components/GameShell";
 import { LANT_HELP } from "../gameHelp/lant.mjs";
-import { GameIntro } from "../components/GameIntro";
-import { GameOptions } from "../components/GameOptions";
-import { GameSetupOptions } from "../components/GameSetupOptions";
-import { Hud, StatBadge } from "../components/Hud";
+import { GameFrame, CoachLine } from "../components/GameFrame";
+import { FreeRoundOptions } from "../components/FreeRoundOptions";
+import { HintBar } from "../components/HintBar";
+import { useGameEntry, useRoundStart } from "../hooks/useGameEntry";
+import { BoardPlacePodium } from "../components/BoardPlacePodium";
 import { ResultCard } from "../components/ResultCard";
-import { DifficultyPicker } from "../components/DifficultyPicker";
 import { useActiveGame } from "../hooks/useActiveGame";
 import { useRecordScore } from "../hooks/useRecordScore";
 import { useSavedGameResume } from "../hooks/useSavedGameResume";
 import { sound } from "../sound";
-import { bestScore } from "../scores/read";
 import { gameByKey } from "../games";
-import { categoryLabel } from "../categories";
-import { CategoryPicker } from "../components/CategoryPicker";
-import { buildSharePayload, copyResult, formatDayKey, roNoun, stableKey, todayLocal } from "../share";
+import { buildSharePayload, copyResult, roNoun, stableKey } from "../share";
 
 const GAME_KEY = "lant";
 const DEF = gameByKey("lant");
 
-const isTerminalResume = (state: LantState) => state.won;
-
-const DIFFICULTIES: { key: Difficulty; label: string; hint: string }[] = [
-  { key: "usor", label: "Ușor", hint: "recomandat" },
-  { key: "normal", label: "Normal", hint: "3–4 salturi" },
-  { key: "greu", label: "Greu", hint: "4–6 salturi" },
-];
+const isTerminalResume = (state: LantState) => state.won || state.gave_up === true;
 
 // Lanțul Cuvintelor — choose a direct link from CURRENT toward TARGET.
 // Free typing remains available for concepts outside the server's local choices.
 // All logic is server-authoritative; this screen only renders state + sends actions.
 
-const TARGET_COLOR = "#f178b6";
 const FEEDBACK_VARIANT: PresenceVariant = { enter: { opacity: [0, 1], transform: ["translateY(-6px)", "translateY(0px)"] }, exit: { opacity: [1, 0], transform: ["translateY(0px)", "translateY(-6px)"] } };
 const HINT_VARIANT: PresenceVariant = { enter: { opacity: [0, 1] }, exit: { opacity: [1, 0] }, transition: { spring: springs.gentle } };
 
-const PROGRESS_ICON: Record<LantProgress["kind"], string> = {
-  closer: "↗",
-  lateral: "↔",
-  farther: "↘",
-  dead_end: "↶",
-  won: "✓",
-};
 
-type ActionSync = { gameId: string; kind: "failed" | "changed" };
+type ActionSync = { gameId: string } & (
+  { kind: "failed"; allowLocalGiveUp?: boolean } | { kind: "changed" }
+);
 
 type ActionFocus = {
   ticket: GameActionTicket;
@@ -104,8 +88,7 @@ function BreadcrumbStep({ step, index, last }: { step: PathStep; index: number; 
             <Csp.span
               className="chip"
               css={{
-                borderColor: last ? DEF.accent : undefined,
-                color: last ? DEF.accent : undefined,
+                borderColor: last ? "var(--surface-border-strong)" : undefined,
                 fontWeight: last ? 700 : undefined,
               }}
             >
@@ -137,8 +120,11 @@ export default function Lant({
   const isPresent = useIsPresent(), liveRef = useRef(true);
   const lifetimeRef = useRef(0);
   const active = useActiveGame(GAME_KEY);
+  const entry = useGameEntry(GAME_KEY, active);
+  const { admit, remember, complete, settleCompletion } = entry;
   const [state, setState] = useState<LantState | null>(null);
   const [startFailed, setStartFailed] = useState(false);
+  const [unavailable, setUnavailable] = useState(false);
   const startInFlightRef = useRef(false);
   const [loading, setLoading] = useState(() => active.peek() !== null);
   const [creating, setCreating] = useState(false);
@@ -156,14 +142,9 @@ export default function Lant({
   const [hint, setHint] = useState<HintResult | null>(null);
   const [progress, setProgress] = useState<LantProgress | null>(null);
   const [recovery, setRecovery] = useState<RecoveryFeedback | null>(null);
-  const [difficulty, setDifficulty] = useState<Difficulty>("usor");
-  const [category, setCategory] = useState<string | null>(null);
-  const [showHow, setShowHow] = useState(false);
-  const [scored, setScored] = useState<{
-    score: number;
-    isBest: boolean;
-    isPuzzleBest: boolean;
-  } | null>(null);
+  const [locallyGaveUp, setLocallyGaveUp] = useState(false);
+  const gaveUp = locallyGaveUp || state?.gave_up === true;
+  const [feedbackRevision, repeatFeedback] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const choicesRef = useRef<HTMLElement>(null);
   const initiallyFocusedGameRef = useRef<string | null>(null);
@@ -174,7 +155,6 @@ export default function Lant({
     }
   }, []);
 
-  const best = useMemo(() => bestScore(GAME_KEY), []);
   const recordOnce = useRecordScore("lant");
 
   const puzzleKey = useMemo(() => {
@@ -190,18 +170,17 @@ export default function Lant({
   }, [state]);
 
   const sharePayload = useMemo(() => {
-    if (!state?.won || !state.share) return null;
+    if (!state || (!state.won && !gaveUp)) return null;
     return buildSharePayload({
       gameTitle: "Lanțul Cuvintelor",
-      serverShare: state.share,
-      score: state.score,
+      serverShare: state.share ?? `Am renunțat la lanțul de la „${state.start.label}” la „${state.target.label}”.`,
       puzzleKey,
     });
-  }, [state, puzzleKey]);
+  }, [state, puzzleKey, gaveUp]);
 
   const applyResumedGame = useCallback(
-    (fresh: LantState, { terminal, bypassed }: { terminal: boolean; bypassed: boolean }) => {
-      if (!liveRef.current) return;
+    (fresh: LantState, { terminal }: { terminal: boolean }) => {
+      if (!liveRef.current || !admit(fresh, terminal)) return;
       actionOwner.invalidate();
       pendingActionFocusRef.current = null;
       setActionSync(null);
@@ -209,19 +188,16 @@ export default function Lant({
       setHint(fresh.earned_hint ?? null);
       setRecovery(null);
       setProgress(null);
-      setScored(null);
-      setDifficulty(fresh.difficulty);
-      setCategory(fresh.board_category ?? null);
       setStartFailed(false);
       setState(fresh);
       setText("");
-      // The daily-bypass notice already says the round was resumed.
-      if (!terminal && !bypassed) onToast("Joc reluat.", "info");
+      setLocallyGaveUp(false);
+      if (!terminal) onToast("Joc reluat.", "info");
     },
-    [actionOwner, onToast],
+    [actionOwner, admit, onToast],
   );
 
-  const { recovery: resumeRecovery, retryResume, cancelResume, dismissRecovery } = useSavedGameResume({
+  const { recovery: resumeRecovery, pending: resumePending, retryResume, cancelResume, dismissRecovery } = useSavedGameResume({
     active,
     load: getLant,
     isTerminal: isTerminalResume,
@@ -231,59 +207,53 @@ export default function Lant({
       startInFlightRef.current = false;
       setBusy(false); setCreating(false); setStartFailed(false);
       if (!active.peek() && state) {
-        if (!state.won) setActionSync({ gameId: state.game_id, kind: "failed" });
+        if (!isTerminalResume(state)) setActionSync({ gameId: state.game_id, kind: "failed" });
       } else { setState(null); setActionSync(null); setRecovery(null); }
     },
-    onDailyBypassed: () => onToast("Ai continuat jocul liber început. Provocarea zilei te așteaptă după ce îl termini.", "info"),
   });
 
   const exitSafely = useCallback(() => {
     if (!startInFlightRef.current) { liveRef.current = false; actionOwner.invalidate(); cancelResume(); onExit(); }
   }, [actionOwner, cancelResume, onExit]);
 
-  // Giving up forgets only a settled live board: an uncertain move keeps its pointer
-  // so ordinary saved-game recovery can still reconcile it.
-  const abandonChain = useCallback(() => {
-    if (!liveRef.current || startInFlightRef.current || actionOwner.hasPending() || actionSync) return;
-    actionOwner.invalidate();
-    cancelResume();
-    dismissRecovery();
-    if (state) active.forgetIfCurrent(state.game_id);
+  function finishLocalGiveUp(round: LantState) {
+    complete(round);
+    active.forgetIfCurrent(round.game_id);
+    setLocallyGaveUp(true);
     setHint(null);
     setProgress(null);
     setRecovery(null);
-    setScored(null);
-    setText("");
-    pendingActionFocusRef.current = null;
-    setState(null);
-  }, [active, state, actionOwner, actionSync, cancelResume, dismissRecovery]);
+  }
 
   const start = useCallback(
-    async (opts?: { difficulty?: Difficulty; daily?: string }) => {
+    async (daily?: string) => {
       if (!liveRef.current || startInFlightRef.current) return;
       startInFlightRef.current = true;
       const epoch = lifetimeRef.current;
+      const expected = active.peek();
       actionOwner.invalidate();
       pendingActionFocusRef.current = null;
       cancelResume();
       setStartFailed(false);
+      setUnavailable(false);
       setCreating(true);
       try {
-        const fresh = await createLant({
-          difficulty: opts?.difficulty ?? difficulty,
-          daily: opts?.daily,
-          // The theme applies to picked games only; the daily stays the shared classic.
-          category: opts?.daily ? undefined : (category ?? undefined),
-        });
+        const fresh = await createLant(daily
+          ? { daily, difficulty: "usor" }
+          : { difficulty: entry.options.difficulty, category: entry.options.category ?? undefined });
         if (!liveRef.current || epoch !== lifetimeRef.current) return;
-        active.remember(fresh.game_id);
+        if (!remember(fresh, expected)) {
+          setState(null);
+          retryResume();
+          return;
+        }
+        setLocallyGaveUp(false);
         dismissRecovery();
         setActionSync(null);
         setBusy(false);
         setHint(fresh.earned_hint ?? null);
         setProgress(null);
         setRecovery(null);
-        setScored(null);
         setState(fresh);
         setText("");
       } catch {
@@ -295,39 +265,27 @@ export default function Lant({
         }
       }
     },
-    [difficulty, category, active, actionOwner, cancelResume, dismissRecovery],
+    [active, actionOwner, cancelResume, dismissRecovery, entry.options, remember, retryResume],
   );
-
-  // Record the score exactly once when the game is won.
-  useEffect(() => {
-    if (!liveRef.current || !state?.won || state.score === undefined) return;
-    const score = state.score;
-    const detail = `${state.moves}/${state.optimal} salturi${
-      state.daily ? ` · ${state.daily}` : ""
-    }`;
-    let current = true;
-    void recordOnce(state.game_id, score, detail, {
-      puzzleKey,
-      difficulty: state.difficulty,
-      daily: state.daily,
-      category: state.board_category,
-    }).then((outcome) => {
-      active.forgetIfCurrent(state.game_id);
-      if (!current || !liveRef.current || !outcome) return;
-      const { isBest, isPuzzleBest } = outcome;
-      setScored({ score, isBest, isPuzzleBest });
-      if (isBest || isPuzzleBest) sound.playRecord();
-    });
-    return () => {
-      current = false;
-    };
-  }, [state, puzzleKey, recordOnce, active, isPresent]);
 
   const currentGameId = state?.game_id;
   const won = state?.won ?? false;
+  const finished = won || gaveUp;
+
+  useEffect(() => {
+    if (!liveRef.current || !state || !finished) return;
+    const detail = gaveUp ? "Renunțare" : `${state.moves}/${state.optimal} salturi`;
+    void recordOnce(state.game_id, state.score ?? 0, detail, {
+      puzzleKey,
+      difficulty: state.difficulty,
+      daily: state.daily,
+      steps: state.steps,
+      category: state.board_category,
+    }).then(() => { settleCompletion(state); });
+  }, [state, finished, gaveUp, puzzleKey, recordOnce, settleCompletion]);
 
   useLayoutEffect(() => {
-    if (!liveRef.current || !currentGameId || won || busy || loading || creating || actionSync || inputRef.current?.disabled) return;
+    if (!liveRef.current || !currentGameId || finished || busy || loading || creating || actionSync || inputRef.current?.disabled) return;
     if (initiallyFocusedGameRef.current === currentGameId) return;
     initiallyFocusedGameRef.current = currentGameId;
     // Focus only a newly opened round, without stealing navigation during loading
@@ -336,13 +294,13 @@ export default function Lant({
         (document.activeElement === document.body || document.activeElement === inputRef.current)) {
       focusInputForFinePointer();
     }
-  }, [currentGameId, won, busy, loading, creating, actionSync, active, focusInputForFinePointer]);
+  }, [currentGameId, finished, busy, loading, creating, actionSync, active, focusInputForFinePointer]);
 
   useLayoutEffect(() => {
     const pending = pendingActionFocusRef.current;
     if (!liveRef.current || busy || loading || creating || !pending?.ready) return;
     pendingActionFocusRef.current = null;
-    if (won || actionSync || currentGameId !== pending.ticket.gameId ||
+    if (finished || actionSync || currentGameId !== pending.ticket.gameId ||
         active.peek() !== pending.ticket.gameId) return;
     const focused = document.activeElement;
     if (focused !== document.body && focused !== pending.origin) return;
@@ -361,37 +319,9 @@ export default function Lant({
     const nextChoice = choicesRef.current?.querySelector<HTMLButtonElement>("button:not(:disabled)");
     if (nextChoice) nextChoice.focus({ preventScroll: true });
     else if (input && !input.disabled) input.focus({ preventScroll: true });
-  }, [busy, loading, creating, currentGameId, won, actionSync, active]);
+  }, [busy, loading, creating, currentGameId, finished, actionSync, active]);
 
-  // On the win screen, Enter starts another chain with the same free-play filters.
-  useEffect(() => {
-    if (!state?.won) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (!liveRef.current || startInFlightRef.current) return;
-      const target = e.target instanceof Element ? e.target : null;
-      if (
-        e.defaultPrevented ||
-        target?.closest('button, a, input, textarea, select, summary, [role="button"], [contenteditable="true"]')
-      ) {
-        return;
-      }
-      if (e.key === "Enter") {
-        e.preventDefault();
-        void start({ difficulty: state.difficulty });
-      }
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [state?.won, state?.difficulty, start]);
-
-  const actionsLocked = !isPresent || busy || loading || actionSync !== null;
-  // Moves spent beyond the optimal path length from the original start.
-  const overPar = useMemo(() => {
-    if (!state) return 0;
-    return state.moves - state.optimal;
-  }, [state]);
-  // True distance left, learned from the most recent hint for THIS current node.
-  const hintRemaining = hint?.remaining ?? null;
+  const actionsLocked = !isPresent || busy || loading || creating || gaveUp || actionSync !== null;
 
   function beginAction(previous: LantState) {
     if (!liveRef.current || startInFlightRef.current) return null;
@@ -428,7 +358,7 @@ export default function Lant({
     return true;
   }
 
-  async function reconcileAction(ticket: GameActionTicket, previous: LantState) {
+  async function reconcileAction(ticket: GameActionTicket, previous: LantState, allowLocalGiveUp = false) {
     const outcome = await recoverOwnedGameAction(
       actionOwner, ticket, getLant,
       (error) => error instanceof ApiError && error.status === 404,
@@ -441,21 +371,29 @@ export default function Lant({
       }
       setActionSync(null);
       setState(null);
+      setUnavailable(true);
       onToast("Jocul nu mai este disponibil. Poți începe altul.", "info");
       return;
     }
     if (outcome.kind !== "recovered") {
-      setActionSync({ gameId: ticket.gameId, kind: outcome.kind === "changed" ? "changed" : "failed" });
+      setActionSync(outcome.kind === "changed"
+        ? { gameId: ticket.gameId, kind: "changed" }
+        : { gameId: ticket.gameId, kind: "failed", allowLocalGiveUp });
       return;
     }
     const fresh = outcome.state;
+    const terminal = isTerminalResume(fresh);
     setActionSync(null);
     setState(fresh);
+    if (allowLocalGiveUp && !terminal && fresh.can_report_give_up !== true) {
+      finishLocalGiveUp(fresh);
+      return;
+    }
     setHint(fresh.earned_hint ?? null);
     // GET carries authoritative position and earned help, not a reconstructed move verdict.
     setProgress(null);
-    if (fresh.current.id !== previous.current.id || fresh.won) setText("");
-    setRecovery(fresh.won ? null : {
+    if (fresh.current.id !== previous.current.id || terminal) setText("");
+    setRecovery(terminal ? null : {
       message: "Joc sincronizat. Poți continua.", choices: [], tone: "info",
     });
     if (fresh.won && !previous.won) sound.playWin();
@@ -476,7 +414,40 @@ export default function Lant({
     if (!ticket) return;
     setBusy(true);
     try {
-      await reconcileAction(ticket, state);
+      await reconcileAction(ticket, state, actionSync.allowLocalGiveUp);
+    } finally {
+      finishAction(ticket);
+    }
+  }
+
+  async function handleGiveUp() {
+    if (!state || finished || actionsLocked || !liveRef.current || startInFlightRef.current || actionOwner.hasPending()) return;
+    if (!state.daily || state.can_report_give_up !== true) {
+      actionOwner.invalidate();
+      pendingActionFocusRef.current = null;
+      finishLocalGiveUp(state);
+      return;
+    }
+
+    const ticket = beginAction(state);
+    if (!ticket) return;
+    setBusy(true);
+    setHint(null);
+    setProgress(null);
+    setRecovery(null);
+    try {
+      const fresh = await giveUpLant(state.game_id);
+      if (!mayAdoptAction(ticket)) return;
+      if (fresh.game_id !== ticket.gameId || fresh.gave_up !== true || fresh.won !== false || fresh.perfect !== false) {
+        await reconcileAction(ticket, state);
+        return;
+      }
+      setState(fresh);
+      setText("");
+    } catch (error) {
+      // A stale capability can lose its route. Only an owned live GET without
+      // the capability can complete the player's explicit give-up locally.
+      await reconcileAction(ticket, state, error instanceof ApiError && error.status === 404);
     } finally {
       finishAction(ticket);
     }
@@ -515,9 +486,14 @@ export default function Lant({
               current: res.current ?? prev.current,
               path: res.path ?? prev.path,
               moves: res.moves ?? prev.moves,
+              steps: res.steps,
+              perfect: res.perfect,
+              hints_left: res.hints_left,
+              hint_level: res.hint_level,
               won: res.won ?? prev.won,
               score: res.score ?? prev.score,
               share: res.share ?? prev.share,
+              place: res.place,
               choices: res.choices ?? prev.choices,
               backtrack_recommended:
                 res.backtrack_recommended ?? prev.backtrack_recommended,
@@ -525,6 +501,7 @@ export default function Lant({
           : prev,
       );
       setProgress(res.progress ?? null);
+      repeatFeedback((revision) => revision + 1);
       setText("");
       if (res.message) {
         setRecovery({
@@ -568,7 +545,7 @@ export default function Lant({
   }
 
   async function handleHint() {
-    if (!state || actionsLocked || won) return;
+    if (!state || actionsLocked || won || !state.hints_left) return;
     const ticket = beginAction(state);
     if (!ticket) return;
     setBusy(true);
@@ -577,8 +554,10 @@ export default function Lant({
       const res = await hintLant(state.game_id);
       if (!mayAdoptAction(ticket)) return;
       setHint(res);
+      setProgress(null);
+      repeatFeedback((revision) => revision + 1);
       setState((previous) => previous?.game_id === ticket.gameId
-        ? { ...previous, earned_hint: res } : previous);
+        ? { ...previous, earned_hint: res, steps: res.steps, hints_left: res.hints_left, hint_level: res.hint_level } : previous);
       if (res.hint || res.stage) {
         sound.playSelect();
       } else {
@@ -599,138 +578,55 @@ export default function Lant({
     else onToast("Nu am putut copia.", "error");
   }
 
-  if (loading && !state) {
-    return (
-      <div className="screen-pad fill center">
-        <Spinner size="lg" label="Se încarcă…" />
-      </div>
-    );
-  }
-
-  // Intro: difficulty picker + daily challenge.
-  if (!state) {
-    return (
-      <div className="screen-pad fill" aria-busy={creating}>
-        {creating && <span className="visually-hidden" role="status">Se pregătește jocul…</span>}
-        <Csp.div inert={creating} className="container col game-container" css={{ gap: "18px" }}>
-          <GameShell onExit={exitSafely} accent={DEF.accent} busy={creating} />
-
-          <GameIntro
-            startFailed={startFailed}
-            resumeRecovery={resumeRecovery ? {
-              kind: resumeRecovery.kind,
-              canRetry: resumeRecovery.kind === "failed" || resumeRecovery.hasCurrent,
-              onRetry: retryResume,
-            } : null}
-            icon={DEF.icon}
-            title={DEF.title}
-            tag={DEF.tag}
-            accent={DEF.accent}
-            glow={DEF.glow}
-            description={
-              <Csp.div className="col" css={{ gap: "8px" }}>
-                <Csp.p css={{ margin: "0px" }}>
-                  Ajungi la țintă prin concepte legate direct.
-                </Csp.p>
-                <Button
-                  type="button"
-                  variant="secondary"
-                  size="sm"
-                  className="lant-intro-disclosure-toggle"
-                  aria-expanded={showHow}
-                  aria-controls="lant-intro-disclosure"
-                  onClick={() => setShowHow((v) => !v)}
-                >
-                  Cum funcționează <span aria-hidden>{showHow ? "▲" : "▼"}</span>
-                </Button>
-                {showHow && (
-                  <ul id="lant-intro-disclosure" className="lant-intro-disclosure faint">
-                    <li>Salturile afișate amestecă drumul cel mai scurt cu ocoluri sigure.</li>
-                    <li>Înapoi e gratuit și nelimitat.</li>
-                    <li>Poți scrie orice concept legat — nu doar din listă.</li>
-                    <li>Limită: 64 de salturi pe lanț.</li>
-                  </ul>
-                )}
-              </Csp.div>
-            }
-            steps={[
-              { icon: "👆", label: "Alege o legătură" },
-              { icon: "🔗", label: "Fă un salt" },
-              { icon: "🎯", label: "Ajungi la țintă" },
-            ]}
-            best={best}
-            startLabel="Joacă →"
-            onStart={() => void start({ difficulty })}
-            onDaily={() => void start({ difficulty, daily: todayLocal() })}
-            dailyLabel="Provocarea zilei"
-            starting={!isPresent || creating || loading}
-          >
-            <GameSetupOptions>
-              <DifficultyPicker
-                options={DIFFICULTIES.map((d) => ({ id: d.key, label: d.label, hint: d.hint }))}
-                value={difficulty}
-                onChange={(id) => {
-                  sound.playSelect();
-                  setDifficulty(id);
-                }}
-              />
-              <CategoryPicker
-                game="lant"
-                difficulty={difficulty}
-                value={category}
-                onChange={(key) => {
-                  sound.playSelect();
-                  setCategory(key);
-                }}
-                onInvalid={() => setCategory(null)}
-                accent={DEF.accent}
-              />
-            </GameSetupOptions>
-          </GameIntro>
-        </Csp.div>
-      </div>
-    );
-  }
+  const resumeEntry = () => {
+    if (entry.readyAfterTerminal(state)) setState(null);
+    retryResume();
+  };
+  const startEntry = useRoundStart(entry, (!state || entry.readyAfterTerminal(state)) && !loading && !creating && !startFailed && !resumePending && !resumeRecovery && !unavailable, resumeEntry, (daily) => void start(daily));
+  const mode = entry.mode(state);
+  useLayoutEffect(() => {
+    if (state && finished && isPresent) complete(state);
+  }, [state, finished, isPresent, complete]);
 
   return (
-    <div className="screen-pad fill lant-screen" aria-busy={creating}>
-      {creating && <span className="visually-hidden" role="status">Se pregătește jocul…</span>}
-      <div inert={creating} className="container col game-container">
-        {/* header */}
-        <GameShell onExit={exitSafely} accent={DEF.accent} title={DEF.title} busy={creating}>
-          <Hud>
-            <StatBadge
-              label="SALTURI"
-              value={`${state.moves} ${roNoun(state.moves, "salt", "salturi")}`}
-              accent={DEF.accent}
-              title="Salturi făcute"
-            />
-          </Hud>
-        </GameShell>
-
+    <div className="screen-pad fill lant-screen">
+      <div className="container game-container">
+        <GameFrame game={DEF} mode={mode} onExit={exitSafely} help={LANT_HELP} busy={creating || loading}
+          verifying={entry.recoveredTerminal(state) && !entry.readyAfterTerminal(state)}
+          startFailed={startFailed} unavailable={unavailable} onStart={() => startEntry(state?.game_id)} resumeRecovery={resumeRecovery} onResume={() => { entry.presentRecovery(); retryResume(); }}
+          status={state && !entry.recoveredTerminal(state) && <span>{state.moves} {roNoun(state.moves, "salt", "salturi")}</span>}
+          options={<FreeRoundOptions game={GAME_KEY} value={entry.options} onChange={entry.updateOptions} />}
+          onTool={(tool) => { if (tool === "give-up") void handleGiveUp(); }}
+          tools={state && !finished ? (
+            <Button type="submit" variant="secondary" disabled={actionsLocked}
+              value="give-up">Renunț la rundă</Button>
+          ) : undefined}>
+        {state && !entry.recoveredTerminal(state) && <>
         <section className="card lant-route" aria-label="Poziția și ținta">
-          <div className="lant-current" aria-live={won ? "off" : "polite"} aria-atomic="true">
+          <div className="lant-current" aria-live={finished ? "off" : "polite"} aria-atomic="true">
             <span className="faint">EȘTI ACUM LA</span>
-            <Csp.div
-              className="lant-route-word"
-              css={{ color: won ? TARGET_COLOR : DEF.accent }}
-            >
+            <div className="lant-route-word">
               {state.current.label}
-            </Csp.div>
+            </div>
           </div>
           <span className="lant-route-arrow muted" aria-hidden>→</span>
           <div className="lant-target">
             <span className="faint">ȚINTĂ</span>
-            <Csp.strong className="lant-route-word" css={{ color: TARGET_COLOR }}>
+            <strong className="lant-route-word">
               {state.target.label}
-            </Csp.strong>
+            </strong>
           </div>
           {state.target.description && (
             <p className="muted lant-target-description">{state.target.description}</p>
           )}
         </section>
 
-        {!won && state.choices?.length > 0 ? (
+        <Breadcrumb path={state.path} />
+        {!finished && !actionSync && <CoachLine revision={feedbackRevision}>
+          {hint?.message ?? progress?.message ?? "Alege următorul cuvânt."}
+        </CoachLine>}
+
+        {!finished && state.choices?.length > 0 ? (
           <section ref={choicesRef} className="lant-choice-panel col" aria-labelledby="lant-choice-title">
             <Csp.div className="spread row" css={{ gap: "10px", alignItems: "baseline" }}>
               <strong id="lant-choice-title">Atinge următorul cuvânt</strong>
@@ -742,7 +638,6 @@ export default function Lant({
                   type="button"
                   className="lant-choice"
                   disabled={actionsLocked}
-                  aria-label={`Salt la ${choice.label}: ${choice.relation}`}
                   onClick={() => void submit(choice)}
                 >
                   <strong>{choice.label}</strong>
@@ -751,18 +646,6 @@ export default function Lant({
               ))}
             </div>
           </section>
-        ) : null}
-
-        {progress ? (
-          <div
-            key={progress.kind + "-" + state.moves}
-            className={"lant-progress lant-progress-enter lant-progress--" + progress.kind}
-            role="status"
-            aria-live="polite"
-          >
-            <span aria-hidden="true">{PROGRESS_ICON[progress.kind]}</span>
-            <strong>{progress.message}</strong>
-          </div>
         ) : null}
 
         <span
@@ -774,40 +657,7 @@ export default function Lant({
           {recovery?.message ?? ""}
         </span>
 
-        {/* input + actions OR win */}
-        {won ? (
-          <ResultCard
-              startFailed={startFailed}
-              actionsBusy={creating}
-            icon={state.moves <= state.optimal ? "★" : "✦"}
-            title={state.moves <= state.optimal ? "Lanț perfect!" : "Ai reușit!"}
-            accent={TARGET_COLOR}
-            score={state.score}
-            isRecord={scored?.isBest ?? false}
-            isPuzzleRecord={scored?.isPuzzleBest ?? false}
-            shareText={sharePayload}
-            onCopy={() => void handleCopy()}
-            onReplay={() => void start({ difficulty: state.difficulty })}
-            onOptions={() => {
-              if (startInFlightRef.current) return;
-              setState(null);
-            }}
-            onExit={exitSafely}
-            replayLabel="Încă un lanț →"
-          >
-            Ai ajuns la <Csp.strong css={{ color: "var(--text)" }}>{state.target.label}</Csp.strong>{" "}
-            în <Csp.strong css={{ color: "var(--text)" }}>{state.moves}</Csp.strong>{" "}
-            {roNoun(state.moves, "salt", "salturi")} (drumul cel mai scurt: {state.optimal}).
-            {recovery?.message ? (
-              <Csp.span className="muted" css={{ display: "block", marginTop: "8px" }}>
-                <Csp.span aria-hidden="true" css={{ marginRight: "6px" }}>
-                  ℹ
-                </Csp.span>
-                {recovery.message}
-              </Csp.span>
-            ) : null}
-          </ResultCard>
-        ) : (
+        {!finished && (
           <Csp.div
             key={shake}
             className={shake ? "col lant-shake" : "col"}
@@ -873,16 +723,7 @@ export default function Lant({
               >
                 {state.backtrack_recommended ? "↶ Înapoi · recomandat" : "↶ Înapoi"}
               </Button>
-              <Button
-                type="button"
-                variant="secondary"
-                disabled={actionsLocked}
-                onClick={() => void handleHint()}
-              >
-                {hint?.stage === "direction" || hint?.stage === "alternatives"
-                  ? "💡 Mai clar"
-                  : "💡 Indiciu"}
-              </Button>
+              <HintBar remaining={state.hints_left ?? 0} disabled={actionsLocked} onHint={() => void handleHint()} />
             </Csp.div>
 
             <Presence variant={FEEDBACK_VARIANT}>
@@ -892,8 +733,7 @@ export default function Lant({
                   className="card"
                   css={{
                     padding: "12px",
-                    borderColor:
-                      recovery.tone === "warning" ? "var(--bad)" : DEF.accent,
+                    borderColor: "var(--surface-border-strong)",
                   }}
                 >
                   <Csp.div className="col" css={{ gap: "8px" }}>
@@ -932,8 +772,6 @@ export default function Lant({
                 <HintPanel key="hint"
                   className="card lant-hint-panel"
                   css={{ padding: "12px", borderColor: "var(--warn)" }}
-                  role="status"
-                  aria-live="polite"
                 >
                   <Csp.div className="col" css={{ gap: "8px" }}>
                     <Csp.strong css={{ color: "var(--warn)", fontSize: "0.8rem" }}>
@@ -945,18 +783,6 @@ export default function Lant({
                             ? "UN PAS ÎNAPOI"
                             : "UN SALT"}
                     </Csp.strong>
-                    {hint.message ? (
-                      <Csp.span className="muted" css={{ fontSize: "0.85rem" }}>
-                        {hint.message}
-                      </Csp.span>
-                    ) : null}
-                    {hintRemaining !== null && (
-                      <span className="muted">
-                        {hintRemaining <= 1
-                          ? "Ești la un pas de țintă!"
-                          : `${hintRemaining} ${roNoun(hintRemaining, "salt", "salturi")} până la țintă`}
-                      </span>
-                    )}
                     {hint.alternatives_choices?.length ? (
                       <Csp.div className="row wrap" css={{ gap: "8px" }}>
                         {hint.alternatives_choices.map((choice) => (
@@ -966,7 +792,6 @@ export default function Lant({
                             variant="secondary"
                             title={choice.relation}
                             disabled={actionsLocked}
-                            aria-label={`Salt la ${choice.label}: ${choice.relation}`}
                             onClick={() => void submit(choice)}
                           >
                             {choice.label}
@@ -980,7 +805,6 @@ export default function Lant({
                         className="hint-fill-button"
                         disabled={actionsLocked}
                         title="Fă acest salt"
-                        aria-label={`Salt la ${hint.hint.label}${hint.relation ? `: ${hint.relation}` : ""}`}
                         onClick={() => {
                           if (hint.hint) void submit({ label: hint.hint.label, relation: hint.relation ?? "" });
                         }}
@@ -996,28 +820,18 @@ export default function Lant({
           </Csp.div>
         )}
 
-        <GameOptions help={LANT_HELP}>
-          <p className="muted lant-round-details">
-            De la <strong>{state.start.label}</strong> la <strong>{state.target.label}</strong>.
-            {" "}Drumul cel mai scurt: {state.optimal} {roNoun(state.optimal, "salt", "salturi")}{overPar > 0 ? ` · ai făcut ${overPar} ${roNoun(overPar, "salt", "salturi")} în plus` : ""}.
-            {state.daily ? ` Provocarea zilei: ${formatDayKey(state.daily)}.` : ""}
-            {state.board_category ? ` Categoria: ${categoryLabel(state.board_category)}.` : ""}
-          </p>
-          <strong>Drumul tău</strong>
-          <Breadcrumb path={state.path} />
-          {!state.won && (
-            <Button
-              type="button"
-              variant="secondary"
-              size="sm"
-              onClick={abandonChain}
-              disabled={busy || creating || actionSync !== null}
-              title="Renunță la acest lanț și alege altul"
-            >
-              Începe alt lanț
-            </Button>
-          )}
-        </GameOptions>
+        {finished && (
+          <ResultCard title={won ? "Ai reușit!" : "Ai renunțat la rundă"} steps={state.steps}
+            podium={<BoardPlacePodium round={state} gameTitle={DEF.title} replay={mode === "Reluare"} />}
+            perfect={won && state.perfect && mode !== "Reluare"} actionsBusy={creating}
+            onCopy={sharePayload ? () => void handleCopy() : undefined} onReplay={() => startEntry(state.game_id)} onExit={exitSafely}>
+            <p>{won ? "Ai ajuns la" : "Ținta era"} <strong>{state.target.label}</strong>.
+              {" "}Drumul cel mai scurt: {state.optimal} {roNoun(state.optimal, "salt", "salturi")}.</p>
+            {recovery?.message && <p>{recovery.message}</p>}
+          </ResultCard>
+        )}
+        </>}
+        </GameFrame>
       </div>
     </div>
   );

@@ -248,6 +248,8 @@ def test_baclava_warm_clue_uses_nuca_without_disclosing_a_hidden_nuca_target() -
         for guess in ("fotbal", "stilou", "curcubeu"):
             response = _guess(client, url, guess)
             assert response["won"] is False
+        warm = client.post(url + "/clue").json()
+        assert 1 < warm["word"]["rank"] <= 150
         clue_response = client.post(url + "/clue")
         assert clue_response.status_code == 200
         clue = clue_response.json()
@@ -263,7 +265,7 @@ def test_baclava_warm_clue_uses_nuca_without_disclosing_a_hidden_nuca_target() -
         contexto.store.delete(url.rsplit("/", 1)[-1])
 
     hidden_nuca = contexto._build_session(NUCA, "usor", None, category="gastronomie")
-    own_clue = contexto._warmer_clue_candidate(hidden_nuca)
+    own_clue = contexto._warm_clue_at(contexto._warm_candidates(hidden_nuca), 3, None)
     assert own_clue is None or get_service().resolve(own_clue.label) != NUCA
 
 

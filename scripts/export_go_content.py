@@ -7,9 +7,7 @@ never a browser/mobile asset. --check detects any source or export drift.
 from __future__ import annotations
 
 import argparse
-import contextlib
 import hashlib
-import io
 import json
 import os
 import unicodedata
@@ -97,10 +95,17 @@ def export_bytes() -> bytes:
     normalized, accented, letter_ranges, casefolded = unicode_tables()
     from django.test import Client, override_settings
 
-    from scripts.export_openapi import export_openapi
+    import django
 
-    with contextlib.redirect_stderr(io.StringIO()):
-        schema = export_openapi()
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "cat_de_roman_esti.web.settings")
+    django.setup()
+
+    # Both content builders reproduce the reviewed metadata stored with the Unicode 15
+    # build rules. The live API and standalone OpenAPI exporter publish the current schema.
+    rules = json.loads(
+        (ROOT / "go-backend/internal/contentbuild/rules_unicode15.json").read_bytes()
+    )
+    schema = rules["metadata"]["openapi"]
     from cat_de_roman_esti.wordgames.conexiuni import _label_pattern
 
     client = Client()

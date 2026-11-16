@@ -2,6 +2,7 @@ package httpapi
 
 import (
 	"bytes"
+	_ "embed"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -14,13 +15,16 @@ import (
 	"time"
 )
 
+//go:embed testdata/openapi-redesign-v2.json
+var openapiSchema json.RawMessage
+
 const unfinalizedLegalSentence = " Operatorul și datele de contact nu sunt încă finalizate."
 
 var legalBannerPattern = regexp.MustCompile(`(?s)<div class="draft">.*?</div>`)
 var legalOperatorPattern = regexp.MustCompile(`(?s)Operatorul serviciului este <strong>.*?</strong>\. `)
 var legalContactPattern = regexp.MustCompile(`(?s)<a href="mailto:[^"]*">.*?</a>`)
 var legalVersionPattern = regexp.MustCompile(`(?s)<p class='draft'>Versiune schiță: <code>.*?</code></p>`)
-var immutableViteAsset = regexp.MustCompile(`^/assets/.+-[A-Za-z0-9_-]{8}\.(?:css|js|woff|woff2)$`)
+var immutableViteAsset = regexp.MustCompile(`^/assets/.+-[A-Za-z0-9_-]{8}\.(?:css|js|svg|woff|woff2)$`)
 
 type websiteSettings struct{ operator, contact, donate, consentVersion string }
 
@@ -249,7 +253,7 @@ func (s *Server) website(w http.ResponseWriter, r *http.Request) bool {
 			websiteJSON(w, r, 405, openapiType(r), map[string]any{"detail": "Method \"" + r.Method + "\" not allowed."})
 		} else {
 			w.Header().Set("Content-Disposition", `inline; filename="cat_de_roman_esti.json"`)
-			websiteJSON(w, r, 200, openapiType(r), s.content.Metadata["openapi"])
+			websiteJSON(w, r, 200, openapiType(r), openapiSchema)
 		}
 		return true
 	case "/api/submissions":

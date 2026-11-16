@@ -3,10 +3,10 @@ import assert from "node:assert/strict";
 import * as fs from "node:fs";
 import { createHash } from "node:crypto";
 import { assertHomeData, assertHomeAliasData, assertAxePages, comparisonOutcomes, captureHomeWitness,
-  ORIGINAL_BASELINE_SHA256 } from "../../scripts/gui-baseline-checks.mjs";
+  ORIGINAL_BASELINE_SHA256, ORIGINAL_BASELINE_PATH, REDESIGN_CASES, redesignOutcomes } from "../../scripts/gui-baseline-checks.mjs";
 
 // Synthetic DATA controls only. No browser/context capability or passing receipt is manufactured.
-const raw = fs.readFileSync(new URL("../../baselines/cat/capture.json", import.meta.url));
+const raw = fs.readFileSync(new URL("../../" + ORIGINAL_BASELINE_PATH, import.meta.url));
 assert.equal(createHash("sha256").update(raw).digest("hex"), ORIGINAL_BASELINE_SHA256);
 const baseline = JSON.parse(raw), originalHome = baseline.pages[0].axe;
 const aliases = [".home-game--alchimie.game-card.card", ".game-card--featured", ".home-game--perechi.game-card.card",
@@ -134,4 +134,41 @@ void test("target-only axe comparison uses the original target fingerprint for b
   assert.equal(check(), "pass");
   current[1].axe.push({ id: "new-violation", targets: [[".target"]] });
   assert.equal(check(), "fail");
+});
+
+function visualCases() {
+  const pngs = REDESIGN_CASES.map(({ key }) => ({
+    original: Buffer.from(key),
+    current: Buffer.from(key),
+  }));
+  const pages = REDESIGN_CASES.map(({ key, route, theme }, index) => ({
+    key, route, theme, axe: [],
+    sha256: createHash("sha256").update(pngs[index].original).digest("hex"),
+  }));
+  return { pngs, before: { pages }, current: { pages: structuredClone(pages), vitals: structuredClone(baseline.vitals) } };
+}
+
+void test("redesign compares all eighteen unique themed screenshots and requires zero findings", () => {
+  const { pngs, before, current } = visualCases();
+  const compare = () => redesignOutcomes(before, baseline, current, null, null, pngs);
+  const valid = compare();
+  assert.equal(valid.filter(({ name }) => name.startsWith("png:")).length, 18);
+  assert.deepEqual(valid.filter(({ status }) => status === "fail").map(({ name }) => name), ["home-live-semantic-witness"]);
+  current.pages[3].axe.push({ id: "color-contrast" });
+  pngs[4].current = Buffer.from("changed");
+  current.pages[9].sha256 = current.pages[0].sha256;
+  const invalid = compare();
+  assert.deepEqual(invalid.filter(({ status }) => status === "fail").map(({ name }) => name),
+    ["home-live-semantic-witness", "distinct-color-schemes", "axe-zero", "png:lant-light", "png:home-dark"]);
+});
+
+void test("redesign refuses an absent route or new capture's more permissive vitals", () => {
+  const { pngs, before, current } = visualCases();
+  before.vitals = [{ median: { lcp: 1_000_000, inp: 1_000_000 } }];
+  current.pages.pop();
+  current.vitals[0].median.lcp = baseline.vitals[0].median.lcp * 2;
+  const failures = redesignOutcomes(before, baseline, current, null, null, pngs)
+    .filter(({ status }) => status === "fail").map(({ name }) => name);
+  assert.deepEqual(failures,
+    ["home-live-semantic-witness", "visual-case-identity", "distinct-color-schemes", "axe-zero", "png:result-dark", "vitals:/conexiuni:lcp"]);
 });

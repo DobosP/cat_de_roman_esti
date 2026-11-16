@@ -30,7 +30,7 @@ def combine(client, game_id, pair):
     return response.json()
 
 
-def test_empty_experiments_and_repeats_do_not_reduce_a_later_perfect_score():
+def test_empty_experiments_count_toward_steps_while_repeats_and_legacy_score_are_free():
     client, initial, session = create()
     empty = [pair for pair in combinations(initial["inventory"], 2)
              if A._pair_key(pair[0]["id"], pair[1]["id"]) not in session.recipes]
@@ -38,7 +38,7 @@ def test_empty_experiments_and_repeats_do_not_reduce_a_later_perfect_score():
     for first, second in empty[:3]:
         reply = combine(client, initial["game_id"], (first["id"], second["id"]))
         assert reply["discovered"] == []
-        assert "Fără penalizare" in reply["message"]
+        assert reply["message"] == "Perechea nu are o rețetă în această rundă."
         assert session.score == 1000
     assert session.moves == 3
     first, second = empty[0]
@@ -50,7 +50,8 @@ def test_empty_experiments_and_repeats_do_not_reduce_a_later_perfect_score():
         final = combine(client, initial["game_id"], pair)
     assert final["won"] and final["score"] == 1000
     assert final["moves"] == 5
-    assert "✨" in final["share"]
+    assert final["steps"] == 3 and final["perfect"] is False
+    assert "3 pași" in final["share"] and "✨" not in final["share"]
 
 
 def test_hints_and_extra_successful_crafts_keep_their_documented_costs():

@@ -192,7 +192,11 @@ def test_v1_private_schoolbag_hint_is_earned_and_restored_without_a_hop():
             "carte purtată în ghiozdan", "ghiozdan folosit de școlari"
         }
         saved = client.get(url).json()
-        assert saved["earned_hint"] == hint
+        assert saved["earned_hint"] == {
+            key: value for key, value in hint.items()
+            if key not in {"steps", "perfect", "hint_level", "hints_left"}
+        }
+        assert saved["steps"] == hint["steps"] == 1
         assert saved["path"] == state["path"] and saved["moves"] == 0
     finally:
         lant.store.delete(gid)

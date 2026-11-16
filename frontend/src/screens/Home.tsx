@@ -1,468 +1,82 @@
-// Home — the arcade lobby: playful wordmark, one card per game (each with its own
-// color identity), and the local records/history panel. Navigation is real URL
-// routing; opening a game also unlocks the shared WebAudio context (user gesture).
-//
-// Entrances (wordmark words, description, cards) are CSS keyframes keyed by
-// nth-child; hover/tap lifts are CSS states. Every game now navigates client-side.
-
-import type { TargetedEvent } from "preact";
-import { useCallback, useMemo, useRef, useState } from "preact/hooks";
-import { useLocation } from "preact-iso";
-import { Badge, Button, type ToastKind } from "@roedu/ui";
-import {
-  GAMES,
-  GAME_TITLES,
-  gameByKey,
-  type GameDef,
-  type GameKey,
-} from "../games";
-import { SoundToggle } from "../components/SoundToggle";
-import { RELEASE_LABEL } from "../release";
-import { portedPath } from "../routes";
-import { homeCardBlurEnabled } from "../homeCardBlur";
+import { useEffect, useRef, useState } from "preact/hooks";
+import intrusul from "../art/intrusul.svg";
+import perechi from "../art/perechi.svg";
+import conexiuni from "../art/conexiuni.svg";
+import lant from "../art/lant.svg";
+import contexto from "../art/cald-rece.svg";
+import alchimie from "../art/alchimie.svg";
+import { dailyStatus, localDay } from "../entry";
+import { gameByKey } from "../games";
+import { lazyScreen } from "../lazyScreen";
 import { sound } from "../sound";
-import { buildDailyCircuit, getDailyStreak, needsDerivedStarter } from "../scores/daily";
-import { exportScores, importScores } from "../scores/history";
-import { scoreBoard } from "../scores/read";
-import type { DerivedStarterGame, GameScoreEntry, ScoreEntry } from "../scores/core";
-import { appUrl, copyResult, displayDetail, formatDayKey, roNoun, todayLocal } from "../share";
+import { currentTheme, toggleTheme } from "../theme";
 
-type HistoryTab = "top" | "today" | "recent";
+const Results = lazyScreen(() => import("../components/ResultsHistory"));
+const cards = [
+  { key: "intrusul", image: intrusul, description: "Unul nu se potrivește." },
+  { key: "perechi", image: perechi, description: "Potrivește câte două." },
+  { key: "conexiuni", image: conexiuni, description: "Patru grupuri ascunse." },
+  { key: "lant", image: lant, description: "Din cuvânt în cuvânt, până la țintă." },
+  { key: "contexto", image: contexto, description: "Ghicește cuvântul secret." },
+  { key: "alchimie", image: alchimie, description: "Combină cuvinte, creează altele." },
+] as const;
 
-const TITLE_WORDS = ["Cât", "de", "român", "ești?"];
-
-export default function Home({
-  onToast,
-}: {
-  onToast: (message: string, kind?: ToastKind) => void;
-}) {
-  const { route } = useLocation();
-  const cardBlur = homeCardBlurEnabled((navigator as Navigator & { deviceMemory?: number }).deviceMemory);
-  const [historyTab, setHistoryTab] = useState<HistoryTab>("top");
-  const [gameFilter, setGameFilter] = useState<GameKey | "all">("all");
-  const [board, setBoard] = useState(() => scoreBoard());
-  const fileRef = useRef<HTMLInputElement | null>(null);
-  const today = todayLocal();
-
-  const circuit = useMemo(() => buildDailyCircuit(board, today), [board, today]);
-  const circuitByGame = useMemo(
-    () => new Map(circuit.games.map((game) => [game.game, game])),
-    [circuit],
-  );
-  // Not memoized: it reads localStorage directly (like `board`'s own state refresh),
-  // so it must re-run on every render that could follow a score/import update.
-  const dailyStreak = getDailyStreak(today);
-  const totals = useMemo(
-    () => GAMES.map((game) => ({ ...game, record: board[game.key] })),
-    [board],
-  );
-  const allRows = useMemo(
-    () =>
-      Object.entries(board)
-        .flatMap(([game, record]) => record.recent.map((entry) => ({ ...entry, game })))
-        .sort((a, b) => b.at - a.at),
-    [board],
-  );
-  const topRows = useMemo(
-    () =>
-      Object.entries(board)
-        .flatMap(([game, record]) => (record.best ? [{ ...record.best, game }] : []))
-        .sort((a, b) => b.score - a.score || b.at - a.at)
-        .slice(0, 12),
-    [board],
-  );
-  const todayRows = useMemo(
-    () => allRows.filter((entry) => entry.daily === today).slice(0, 20),
-    [allRows, today],
-  );
-  const recentRows = useMemo(
-    () =>
-      allRows
-        .filter((entry) => gameFilter === "all" || entry.game === gameFilter)
-        .slice(0, 30),
-    [allRows, gameFilter],
-  );
-  const playedTotal = totals.reduce((sum, row) => sum + (row.record?.played ?? 0), 0);
-
-  const openGame = useCallback(
-    (game: GameDef, challenge = false) => {
-      sound.unlockAudio();
-      sound.playSelect();
-      const path = challenge
-        ? `${game.path}?${game.key === "alchimie" ? "mode=challenges&" : ""}challenge=daily`
-        : game.path;
-      if (portedPath(game.path)) route(path);
-      else window.location.assign(path);
-    },
-    [route],
-  );
-
-  const handleExport = useCallback(() => {
-    const blob = new Blob([exportScores()], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `cat-de-roman-istoric-${todayLocal()}.json`;
-    a.click();
-    URL.revokeObjectURL(url);
-    onToast("Istoricul local a fost exportat.", "success");
-  }, [onToast]);
-
-  const handleDiplomaShare = useCallback(async () => {
-    const text = `Cât de român ești? Circuit 6/6 azi · ${circuit.total} pct · Joacă: ${appUrl()}`;
-    onToast((await copyResult(text)) ? "Copiat!" : "Nu am putut copia.", "info");
-  }, [circuit.total, onToast]);
-
-  const handleImport = useCallback(
-    async (event: TargetedEvent<HTMLInputElement, Event>) => {
-      const input = event.currentTarget;
-      const file = input.files?.[0];
-      input.value = "";
-      if (!file) return;
-      try {
-        const outcome = importScores(await file.text());
-        setBoard(scoreBoard());
-        const entries = `${outcome.entries} ${roNoun(outcome.entries, "rezultat", "rezultate")}`;
-        const games = `${outcome.games} ${roNoun(outcome.games, "joc", "jocuri")}`;
-        onToast(`Importat: ${entries} în ${games}.`, "success");
-      } catch (err) {
-        onToast(
-          err instanceof Error ? err.message : "Fișierul ales nu este un export de istoric valid.",
-          "error",
-        );
-      }
-    },
-    [onToast],
-  );
-
+export default function Home() {
+  const resultsButton = useRef<HTMLButtonElement>(null);
+  const [theme, setTheme] = useState(currentTheme);
+  const [resultsOpen, setResultsOpen] = useState(false);
+  const [, refresh] = useState(0);
+  useEffect(() => {
+    const media = matchMedia("(prefers-color-scheme: dark)");
+    const synchronizeTheme = () => setTheme(currentTheme());
+    const synchronizeDay = () => refresh((value) => value + 1);
+    media.addEventListener("change", synchronizeTheme);
+    document.addEventListener("visibilitychange", synchronizeDay);
+    window.addEventListener("storage", synchronizeDay);
+    return () => {
+      media.removeEventListener("change", synchronizeTheme);
+      document.removeEventListener("visibilitychange", synchronizeDay);
+      window.removeEventListener("storage", synchronizeDay);
+    };
+  }, []);
+  const day = localDay();
   return (
-    <div className="screen-pad fill home-screen" data-card-blur={cardBlur ? "on" : "off"}>
-      <div className="container col home-content">
-        <header className="col home-header">
-          <div className="row spread home-heading-row">
-            <h1 className="hero-title" aria-label="Cât de român ești?">
-              {TITLE_WORDS.map((word) => (
-                <span
-                  key={word}
-                  className={word === "ești?" ? "wordmark-gradient home-title-word" : "home-title-word"}
-                >
-                  {word}
-                </span>
-              ))}
-            </h1>
-            <div className="col center home-controls">
-              <SoundToggle />
-              <Badge size="sm">{RELEASE_LABEL}</Badge>
-            </div>
-          </div>
-          <p className="muted home-description">
-            De la Ștefan cel Mare la Las Fierbinți: șase jocuri scurte din cultura și
-            viața românească.
-          </p>
-        </header>
-
-        <div className="games-grid">
-          {GAMES.map((g) => {
-            const completedToday = circuitByGame.get(g.key)?.completed ?? false;
-            return (
-              <button
-                key={g.key}
-                type="button"
-                onClick={() => openGame(g)}
-                aria-label={`Joacă ${g.title} — ${
-                  completedToday
-                    ? "terminat azi"
-                    : g.featured
-                      ? "Începe aici"
-                      : g.tag
-                }`}
-                className={`card game-card${g.featured ? " game-card--featured" : ""}${
-                  completedToday ? " game-card--daily-complete" : ""
-                } home-game--${g.key}`}
-              >
-                <div
-                  aria-hidden
-                  className="game-card-halo"
-                />
-                <div className="row spread home-game-card-heading">
-                  <span
-                    className="game-card-icon"
-                    aria-hidden
-                  >
-                    {g.icon}
-                  </span>
-                  <Badge color={g.accent} size="sm">
-                    {completedToday ? "Azi ✓" : g.featured ? "Începe aici" : g.tag}
-                  </Badge>
-                </div>
-                <strong className="game-card-title">
-                  {g.title}
-                </strong>
-                <p className="muted game-card-blurb">{g.blurb}</p>
-                <span className="row game-card-footer">
-                  <span className="game-card-cta">
-                    Joacă →
-                  </span>
-                  {isStarterGame(g.key) && needsDerivedStarter(g.key) && (
-                    <span className="faint">🌱 Nivel de început</span>
-                  )}
-                  {board[g.key]?.best && (
-                    <span className="faint home-game-card-record">
-                      ★ record {board[g.key]!.best!.score}
-                    </span>
-                  )}
-                </span>
-              </button>
-            );
-          })}
+    <main className="home-screen">
+      <header className="home-header">
+        <div className="home-tools">
+          <button type="button" className="home-icon" onClick={() => setTheme(toggleTheme())}
+            aria-label={theme === "light" ? "Trece pe modul întunecat" : "Trece pe modul luminos"}>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              {theme === "light" ? <path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z" /> :
+                <path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 2v3m0 14v3M2 12h3m14 0h3M5 5l2 2m10 10 2 2M5 19l2-2M17 7l2-2" />}
+            </svg>
+          </button>
+          <button ref={resultsButton} type="button" className="home-icon" aria-label="Rezultatele mele" aria-haspopup="dialog"
+            onClick={() => setResultsOpen(true)}>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8 20h8M9 17h6" />
+            </svg>
+          </button>
         </div>
-
-        <section className="card daily-circuit" aria-labelledby="daily-circuit-title">
-          <div className="daily-circuit-head">
-            <div className="row daily-circuit-title">
-              <span className="daily-circuit-sun" aria-hidden>☀️</span>
-              <div className="col home-daily-title-copy">
-                <h2 id="daily-circuit-title">Circuitul de azi</h2>
-                <p className="muted">Doar pe acest dispozitiv.</p>
-                {dailyStreak >= 1 && (
-                  <p className="muted">
-                    🔥 Serie: {dailyStreak === 1 ? "o zi" : `${dailyStreak} zile`}
-                  </p>
-                )}
-              </div>
-            </div>
-            <div
-              className="daily-circuit-summary"
-              role="status"
-              aria-live="polite"
-              aria-label={`${circuit.completed} din 6 jocuri terminate azi, ${circuit.total} din 6000 de puncte`}
-            >
-              <strong>{circuit.completed}/6</strong>
-              <span>{circuit.total}/6000 pct</span>
-            </div>
-          </div>
-          <ul className="daily-circuit-games" aria-label="Progresul jocurilor de azi">
-            {circuit.games.map((row) => {
-              const game = gameByKey(row.game);
-              if (row.completed) {
-                return (
-                  <li
-                    key={row.game}
-                    className="daily-circuit-game-item daily-circuit-game is-complete"
-                    aria-label={`${game.title}: terminat azi, ${row.score} puncte`}
-                  >
-                    <span className="daily-circuit-game-icon" aria-hidden>
-                      {game.icon}
-                    </span>
-                    <span className="daily-circuit-game-name">{game.title}</span>
-                    <span className="daily-circuit-game-score" aria-hidden>
-                      {row.score} ✓
-                    </span>
-                  </li>
-                );
-              }
-
-              return (
-                <li key={row.game} className="daily-circuit-game-item">
-                  <button
-                    type="button"
-                    className="daily-circuit-game daily-circuit-game-action"
-                    onClick={() => openGame(game, true)}
-                    aria-label={`Deschide ${game.title} — neterminat azi`}
-                  >
-                    <span className="daily-circuit-game-icon" aria-hidden>
-                      {game.icon}
-                    </span>
-                    <span className="daily-circuit-game-name">{game.title}</span>
-                    <span className="daily-circuit-game-score" aria-hidden>
-                      Joacă →
-                    </span>
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-          {circuit.completed === 6 && (
-            <div className="col daily-circuit-diploma">
-              <strong>
-                🏆 Diplomă de român — {formatDayKey(today)}
-              </strong>
-              <p className="muted">Ai închis circuitul de azi: {circuit.total} puncte.</p>
-              <Button variant="secondary" size="sm" onClick={handleDiplomaShare}>
-                <span aria-hidden>📤</span> Distribuie
-              </Button>
-            </div>
-          )}
-        </section>
-
-        {playedTotal === 0 && (
-          <div className="row first-play-tools">
-            <Button variant="secondary" size="sm" onClick={() => fileRef.current?.click()}>
-              <span aria-hidden>⬆</span> Importă istoricul
-            </Button>
-          </div>
-        )}
-
-        <section className="col history-section" hidden={playedTotal === 0}>
-          <div className="row spread wrap home-history-heading">
-            <div className="segment history-tabs" role="group" aria-label="Istoric">
-              {(["top", "today", "recent"] as const).map((tab) => (
-                <button
-                  key={tab}
-                  type="button"
-                  className="segment-item"
-                  aria-pressed={historyTab === tab}
-                  onClick={() => setHistoryTab(tab)}
-                >
-                  {tab === "top" ? "Top" : tab === "today" ? "Azi" : "Istoric"}
-                </button>
-              ))}
-            </div>
-            <div className="row wrap home-history-actions">
-              <Button variant="secondary" size="sm" onClick={handleExport} disabled={playedTotal === 0}>
-                <span aria-hidden>⬇</span> Export
-              </Button>
-              <Button variant="secondary" size="sm" onClick={() => fileRef.current?.click()}>
-                <span aria-hidden>⬆</span> Import
-              </Button>
-            </div>
-          </div>
-
-          <div className="totals-grid">
-            {totals.map((row) => (
-              <div key={row.key} className={`card home-total-card home-game--${row.key}`}>
-                <div className="row spread home-total-heading">
-                  <Badge color={row.accent} size="sm">
-                    {row.title}
-                  </Badge>
-                  <strong className="home-tabular">
-                    {row.record?.played ?? 0}
-                  </strong>
-                </div>
-                <ScoreLine entry={row.record?.best ?? null} empty="Fără scor" />
-              </div>
-            ))}
-          </div>
-
-          {historyTab === "recent" && (
-            <label className="row home-history-filter">
-              <span className="faint home-history-filter-label">Joc</span>
-              <select
-                value={gameFilter}
-                onChange={(event) => setGameFilter(event.currentTarget.value as GameKey | "all")}
-                className="field home-history-filter-select"
-              >
-                <option value="all">Toate</option>
-                {GAMES.map((game) => (
-                  <option key={game.key} value={game.key}>
-                    {game.title}
-                  </option>
-                ))}
-              </select>
-            </label>
-          )}
-
-          <HistoryRows
-            rows={
-              historyTab === "top"
-                ? topRows
-                : historyTab === "today"
-                  ? todayRows
-                  : recentRows
-            }
-            empty={
-              historyTab === "top"
-                ? "Nu ai încă scoruri locale."
-                : historyTab === "today"
-                  ? "Nicio provocare zilnică terminată azi."
-                  : "Istoricul local este gol."
-            }
-          />
-        </section>
-
-        <input
-          ref={fileRef}
-          type="file"
-          accept="application/json,.json"
-          onChange={handleImport}
-          className="home-import-input"
-        />
-
-        <p className="faint home-footer">
-          Toate cele șase jocuri folosesc aceeași hartă de legături culturale românești.
-        </p>
+        <h1>Cât de român ești?</h1>
+        <p>Șase jocuri scurte din cultura și viața românească.</p>
+      </header>
+      <div className="games-grid">
+        {cards.map(({ key, image, description }) => {
+          const game = gameByKey(key);
+          return (
+            <a key={key} href={game.path} className={`game-card game-color-${key}`}
+              onClick={() => { sound.unlockAudio(); sound.playSelect(); }}>
+              <img src={image} alt="" width="160" height="110" />
+              <strong>{game.title}</strong>
+              <span>{description}</span>
+              {dailyStatus(key, day).done && <span className="game-card-done">✓ Gata azi</span>}
+            </a>
+          );
+        })}
       </div>
-    </div>
+      <p className="home-daily-note">Prima rundă de azi e jocul zilei, la fel pentru toată lumea. După ea, joci cât vrei.</p>
+      {resultsOpen && <Results onClose={() => { setResultsOpen(false); resultsButton.current?.focus(); }} />}
+    </main>
   );
-}
-
-function HistoryRows({ rows, empty }: { rows: GameScoreEntry[]; empty: string }) {
-  if (rows.length === 0) {
-    return (
-      <div className="card center muted home-history-empty">
-        {empty}
-      </div>
-    );
-  }
-  return (
-    <div className="col home-history-list">
-      {rows.map((entry, index) => (
-        <div
-          key={`${entry.game}-${entry.at}-${entry.score}-${index}`}
-          className="card row spread wrap home-history-row"
-        >
-          <div className="row home-history-description">
-            <span className="faint home-history-rank">
-              {index + 1}
-            </span>
-            <div className="col home-history-detail">
-              <strong>{GAME_TITLES[entry.game as GameKey] ?? entry.game}</strong>
-              <span className="muted home-history-detail-copy">
-                {displayDetail(entry.detail)}
-              </span>
-            </div>
-          </div>
-          <div className="row home-history-score">
-            <span className="faint home-history-time">
-              {formatWhen(entry.at)}
-            </span>
-            <strong className="home-tabular">{entry.score}</strong>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function ScoreLine({
-  entry,
-  empty,
-}: {
-  entry: ScoreEntry | null;
-  empty: string;
-}) {
-  if (!entry) return <span className="muted home-score-empty">{empty}</span>;
-  return (
-    <div className="row spread home-score-line">
-      <span className="muted home-score-detail">
-        {displayDetail(entry.detail)}
-      </span>
-      <strong className="home-score-value home-tabular">
-        {entry.score}
-      </strong>
-    </div>
-  );
-}
-
-function formatWhen(ms: number): string {
-  return new Intl.DateTimeFormat("ro-RO", {
-    day: "2-digit",
-    month: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-  }).format(new Date(ms));
-}
-
-function isStarterGame(key: GameKey): key is DerivedStarterGame {
-  return key === "intrusul" || key === "perechi";
 }
