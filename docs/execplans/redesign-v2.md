@@ -68,7 +68,9 @@ The exact broad Django rerun reproduced the 474 historical failed nodes and 188 
 
 ## Milestone 2
 
-- [ ] Start `feat/board-place` from landed Milestone 1 and record ADR-0234.
+The daily sample window uses the current and preceding Bucharest dates. The opt-in Lanț terminal receipt counts an explicit give-up in that window. The inherited local action applies whenever the capability is absent. The client copy refers to rounds pending Paul's final wording.
+
+- [x] Start `feat/board-place` from landed Milestone 1 and record [ADR-0234](../adr/0234-anonymous-daily-board-place.md).
 - [ ] Implement the bounded anonymous histograms, single-writer snapshots, trusted-proxy rate limiter, optional response and result podium.
 - [ ] Update optional deployment storage and draft the privacy line for Paul.
 - [ ] Run the final exact-SHA unit and full gates and independent review, verify enabled and disabled behavior, locally fast-forward and clean up.

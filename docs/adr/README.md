@@ -236,4 +236,4 @@ Parallel lanes also allocated0188/0189 independently. All four full-filename bod
 
 - [0233](0233-redesign-v2-interface.md) — redesign v2 interface: six illustrated standalone games, light and dark themes, one-tap daily then free entry, one game frame, help sheet and result panel; replaces frozen screenshots/hashes/axe ("re-lock") while byte ceilings stay.
 
-- 0234 — reserved: anonymous per-board comparison, off by default (redesign v2 milestone 2).
+- [0234](0234-anonymous-daily-board-place.md) — anonymous daily board comparison, disabled by default, with aggregate-only storage, a podium and expiring rate limits.

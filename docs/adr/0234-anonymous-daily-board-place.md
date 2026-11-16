@@ -1,0 +1,47 @@
+# ADR-0234 — Anonymous daily board place, off by default
+
+Date: 2026-11-16
+Status: accepted for local implementation
+Amends: [ADR-0061](0061-device-local-progress-and-upload-only-private-backup.md)
+
+Paul's decision: “Build it, switched off”. This adds an optional comparison to
+the result of one curated daily board in one game. Counts represent rounds.
+Paul owns activation, publication, deployment and final privacy wording.
+
+## Decision
+
+The server groups anonymous rounds by rules version, sealed content digest,
+Bucharest calendar date, game and curated board ID. Only that day's and the
+previous day's dates are eligible. The server records a session's first
+eligible terminal outcome once, based on the game engine's terminal
+transition. Account progress runs through its existing path. The enabled
+Lanț help action sends a one-time terminal give-up for eligible rounds.
+The client keeps its local give-up flow whenever the server omits support.
+
+Each board keeps a bounded histogram of steps for wins and separate totals
+for losses and give-ups. The response on eligible daily wins includes
+`place {better_than_pct, tier, rounds}` when at least 100 completed rounds
+exist. The percentage is the floor of 100 times the fraction with strictly
+more steps or a loss or give-up. Ties remain outside the numerator. The four
+tiers are Perfect (zero steps), Top 10% (90 or higher), Prima jumătate (50 or
+higher) and Ai reușit. The result hides place on a replay.
+
+The server processes at most 20 eligible terminal samples in a ten-minute
+window per forwarded client address from the trusted Caddy ingress. The
+rate-limit keys live only in memory. Snapshot files carry only board keys,
+histograms and aggregate totals. Guesses, addresses, session IDs, account
+IDs and browser identifiers are excluded from the snapshots.
+
+An unset `CAT_BOARD_STATS_DIR` disables the feature and omits `place`.
+When explicitly enabled, one process holds an exclusive directory lock.
+It flushes changed per-day snapshots in batches and at shutdown using a
+temporary file and atomic rename. It loads valid snapshots at startup,
+reports and skips corrupt ones, and retains 14 Bucharest calendar days.
+The optional storage mount allows UID 10001 to write while the application
+root stays read-only.
+
+## Privacy wording for Paul
+
+„Când comparația zilnică este activată, păstrăm timp de 14 zile totalurile
+rundelor finalizate și distribuția numărului de pași la victorie. Adresa de
+rețea este folosită temporar, în memorie, pentru a limita abuzul.”

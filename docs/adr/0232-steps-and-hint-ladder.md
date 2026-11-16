@@ -4,7 +4,7 @@
 - Status: accepted by Paul and qualified on local product `8b6679af` ([acceptance](../reviews/redesign-v2-m1/acceptance.json))
 - Amends the hint and scoring rules of all six games and the hint sections of
   [MOBILE_CONTRACT](../MOBILE_CONTRACT.md); keeps every operationId ([ADR-0003](0003-mobile-contract.md)).
-- Companion: [ADR-0233](0233-redesign-v2-interface.md) (interface). Board comparison: ADR-0234 (reserved).
+- Companion: [ADR-0233](0233-redesign-v2-interface.md) (interface). Board comparison: [ADR-0234](0234-anonymous-daily-board-place.md).
 
 ## Decision
 
