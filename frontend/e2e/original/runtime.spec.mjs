@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { games, activeKey, gameURL, deterministicStarts, solution, start, act } from "../games.mjs";
+import { games, activeKey, gameURL, deterministicStarts, solution, start, act } from "./games-v1.mjs";
 
 const SCORE_KEY = "cat_wordgame_scores_v1";
 const resultButton = (page) => page.getByRole("button", { name: "Copiază rezultatul", exact: true });

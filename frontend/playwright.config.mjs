@@ -16,6 +16,8 @@ const quotedBinary = process.platform === "win32"
 
 export default defineConfig({
   testDir: "./e2e",
+  // The sealed original React harness keeps its separate original config and source.
+  testIgnore: "**/original/**",
   outputDir: process.env.CDR_E2E_OUTPUT_DIR || "./test-results",
   fullyParallel: false,
   workers: 1,
