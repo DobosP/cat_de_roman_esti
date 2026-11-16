@@ -46,7 +46,9 @@ const FEEDBACK_VARIANT: PresenceVariant = { enter: { opacity: [0, 1], transform:
 const HINT_VARIANT: PresenceVariant = { enter: { opacity: [0, 1] }, exit: { opacity: [1, 0] }, transition: { spring: springs.gentle } };
 
 
-type ActionSync = { gameId: string; kind: "failed" | "changed" };
+type ActionSync = { gameId: string } & (
+  { kind: "failed"; allowLocalGiveUp?: boolean } | { kind: "changed" }
+);
 
 type ActionFocus = {
   ticket: GameActionTicket;
@@ -374,7 +376,9 @@ export default function Lant({
       return;
     }
     if (outcome.kind !== "recovered") {
-      setActionSync({ gameId: ticket.gameId, kind: outcome.kind === "changed" ? "changed" : "failed" });
+      setActionSync(outcome.kind === "changed"
+        ? { gameId: ticket.gameId, kind: "changed" }
+        : { gameId: ticket.gameId, kind: "failed", allowLocalGiveUp });
       return;
     }
     const fresh = outcome.state;
@@ -410,7 +414,7 @@ export default function Lant({
     if (!ticket) return;
     setBusy(true);
     try {
-      await reconcileAction(ticket, state);
+      await reconcileAction(ticket, state, actionSync.allowLocalGiveUp);
     } finally {
       finishAction(ticket);
     }

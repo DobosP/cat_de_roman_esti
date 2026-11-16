@@ -6,6 +6,7 @@ import type { PerfectRoundCounters } from "./round";
 import { getJson, postJson } from "./client";
 
 const PREFIX = "/api/wordgames/lant";
+const pendingGiveUps = new Map<string, Promise<LantState>>();
 
 // ---------------------------------------------------------------------- types
 export interface Concept {
@@ -131,7 +132,15 @@ export function createLant(opts?: {
 }
 
 /** GET /games/{id} — current state. */
-export function getLant(gameId: string): Promise<LantState> {
+export async function getLant(gameId: string): Promise<LantState> {
+  const giveUp = pendingGiveUps.get(gameId);
+  if (giveUp) {
+    try {
+      await giveUp;
+    } catch {
+      // The POST may have committed even if its response was lost.
+    }
+  }
   return getJson<LantState>(`${PREFIX}/games/${encodeURIComponent(gameId)}`);
 }
 
@@ -152,7 +161,13 @@ export function undoLant(gameId: string): Promise<LantState> {
 
 /** POST /games/{id}/giveup — report an explicit give-up for an eligible daily round. */
 export function giveUpLant(gameId: string): Promise<LantState> {
-  return postJson<LantState>(`${PREFIX}/games/${encodeURIComponent(gameId)}/giveup`);
+  const pending = pendingGiveUps.get(gameId);
+  if (pending) return pending;
+
+  const request = postJson<LantState>(`${PREFIX}/games/${encodeURIComponent(gameId)}/giveup`)
+    .finally(() => { pendingGiveUps.delete(gameId); });
+  pendingGiveUps.set(gameId, request);
+  return request;
 }
 
 /** POST /games/{id}/hint — progressively reveal direction, alternatives, then one hop. */
