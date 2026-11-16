@@ -22,7 +22,7 @@ Paul's decisions of 2026-11-16 apply to both milestones.
 
 ### Browser assertion replacements
 
-The original assertions are retained under `frontend/historical-e2e/redesign-v2/`.
+The former frozen Help text has a new exact-copy pin and tests for each ladder and the step rules. The original assertions are retained under `frontend/historical-e2e/redesign-v2/`.
 
 - The circuit, streak, diploma and pre-entry challenge actions are replaced by the Home card's one-tap daily/free decision, daily completion badge and dated resume tests. The pilot journey still checks same-document navigation and inert exiting frames.
 - Home's starter chip, rankings, record totals and history wall are replaced by the isolated free starter request, single-purpose cards and the lazy Results dialog. The existing private account, source-closure and byte-identity assertions stay active.

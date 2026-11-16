@@ -513,7 +513,11 @@ export default function Perechi({ onExit, onToast }: Props) {
     onToast((await copyResult(sharePayload)) ? "Copiat!" : "Nu am putut copia.", "info");
   }, [onToast, sharePayload]);
 
-  const startEntry = useRoundStart(entry, (!state || entry.readyAfterTerminal(state)) && !loading && !startFailed && !resumeRecovery && !unavailable, retryResume,
+  const resumeEntry = () => {
+    if (entry.readyAfterTerminal(state)) setState(null);
+    retryResume();
+  };
+  const startEntry = useRoundStart(entry, (!state || entry.readyAfterTerminal(state)) && !loading && !startFailed && !resumeRecovery && !unavailable, resumeEntry,
     (daily, previousGameId) => void start({ daily, previousGameId, category: entry.options.category ?? undefined }));
   const mode = entry.mode(state);
   useLayoutEffect(() => {

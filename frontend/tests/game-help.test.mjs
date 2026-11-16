@@ -12,41 +12,32 @@ const screens = {
   conexiuni: "Conexiuni", contexto: "CaldRece", lant: "Lant",
 };
 
-void test("every live game has concise guidance for goal, feedback and recovery", () => {
+void test("every live game explains its choices, its ladder and how steps count", () => {
   assert.deepEqual(Object.keys(GAME_HELP).sort(), Object.keys(screens).sort());
-  for (const [key] of Object.entries(screens)) {
-    assert.deepEqual(Object.keys(GAME_HELP[key]), ["goal", "feedback", "recovery"]);
-    for (const text of Object.values(GAME_HELP[key])) {
-      assert.ok(text.length > 30 && text.length < 220, `${key}: keep each explanation short`);
+  for (const key of Object.keys(screens)) {
+    const copy = GAME_HELP[key];
+    assert.deepEqual(Object.keys(copy), ["goal", "feedback", "recovery", "ladder", "steps"]);
+    assert.equal(copy.ladder.length, key === "intrusul" ? 2 : 3);
+    for (const text of [copy.goal, copy.feedback, copy.recovery, copy.steps, ...copy.ladder]) {
+      assert.ok(text.length > 8 && text.length < 220, `${key}: keep each explanation short`);
+      assert.doesNotMatch(text, /puncte|pct|scor/iu);
     }
   }
 });
 
-void test("help explains different kinds of relationship without revealing a board answer", () => {
-  assert.match(GAME_HELP.alchimie.feedback, /legăturile dintre rezultat/);
-  assert.match(GAME_HELP.perechi.goal, /nu trebuie să fie sinonime/);
-  assert.match(GAME_HELP.intrusul.goal, /nu aparține acelui grup/);
+void test("help explains the earning rules while keeping board answers private", () => {
+  assert.match(GAME_HELP.alchimie.steps, /perechile fără rezultat/);
+  assert.match(GAME_HELP.perechi.goal, /legătură proprie/);
+  assert.match(GAME_HELP.intrusul.feedback, /nu se potrivește/);
   assert.match(GAME_HELP.conexiuni.feedback, /Aproape: 3 din 4/);
-  assert.match(GAME_HELP.contexto.feedback, /#1 este ținta/);
-  assert.match(GAME_HELP.lant.feedback, /poate apropia sau ocoli/);
+  assert.match(GAME_HELP.contexto.feedback, /Locul 1 este cuvântul secret/);
+  assert.doesNotMatch(GAME_HELP.contexto.steps, /Perfect/);
+  assert.match(GAME_HELP.lant.steps, /Salturile anulate rămân numărate/);
 });
 
-void test("separate help records preserve every original text and the public aggregate", async () => {
-  // Preserve the original aggregate pin for the 16 unchanged texts; only the
-  // two Alchimie control instructions are intentionally revised by ADR-0222.
-  // A separate exact record pin below binds the current Alchimie guidance.
-  const historicalHelp = {
-    ...GAME_HELP,
-    alchimie: {
-      ...GAME_HELP.alchimie,
-      feedback: "După o descoperire, citește legăturile dintre rezultat și cele două concepte. Ele explică asocierea.",
-      recovery: "Dacă nu apare nimic nou, schimbă un concept. „Utile” arată ce mai poate contribui; cere un indiciu când devine disponibil.",
-    },
-  };
-  assert.equal(createHash("sha256").update(JSON.stringify(GAME_HELP.alchimie)).digest("hex"),
-    "8f259cc7c1838c0406234b3e59352ac6bcef4475ecd9b9cab807125bffd06c33");
-  assert.equal(createHash("sha256").update(JSON.stringify(historicalHelp)).digest("hex"),
-    "b8ac05ddf1c8d448b247d391358ff055624b246379d4981fef22e8374075504e");
+void test("approved help copy and its six standalone exports remain exact", async () => {
+  assert.equal(createHash("sha256").update(JSON.stringify(GAME_HELP)).digest("hex"),
+    "31779113a1caf918abaf9ebf3b12b33ecc4ef40b19a1dfd188f97cb0c3296637");
   for (const key of Object.keys(screens)) {
     const record = await import(`../src/gameHelp/${key}.mjs`);
     assert.deepEqual(Object.keys(record), [`${key.toUpperCase()}_HELP`]);

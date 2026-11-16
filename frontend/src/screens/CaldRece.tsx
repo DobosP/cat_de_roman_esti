@@ -544,7 +544,11 @@ export default function CaldRece({
     : null;
 
   const nextRound = () => void start({ difficulty: entry.options.difficulty, category: entry.options.category ?? undefined });
-  const startEntry = useRoundStart(entry, (!state || entry.readyAfterTerminal(state)) && !busy && !startFailed && !resumeRecovery && !unavailable, retryResume,
+  const resumeEntry = () => {
+    if (entry.readyAfterTerminal(state)) setState(null);
+    retryResume();
+  };
+  const startEntry = useRoundStart(entry, (!state || entry.readyAfterTerminal(state)) && !busy && !startFailed && !resumeRecovery && !unavailable, resumeEntry,
     (daily) => daily ? void start({ daily, difficulty: "usor" }) : nextRound());
   const mode = entry.mode(state);
   useLayoutEffect(() => {
@@ -559,12 +563,13 @@ export default function CaldRece({
           startFailed={startFailed} unavailable={unavailable} onStart={() => startEntry(state?.game_id)} resumeRecovery={resumeRecovery} onResume={() => { entry.presentRecovery(); retryResume(); }}
           status={state && !entry.recoveredTerminal(state) && <Attempts remaining={state.attempts} />}
           options={<FreeRoundOptions game={GAME_KEY} value={entry.options} onChange={entry.updateOptions} />}
+          onTool={() => void handleGiveUp()}
           tools={state && !finished ? (
             confirmReveal ? (
               <div className="contexto-reveal-confirm" id="contexto-reveal-confirmation" role="alert">
                 <span>Arătăm răspunsul?</span>
                 <RevealCancelButton onCancel={() => setConfirmReveal(false)} disabled={!isPresent || busy || actionSync !== null} />
-                <Button type="submit" onClick={() => void handleGiveUp()} disabled={busy || actionSync !== null}>
+                <Button type="submit" value="give-up" disabled={busy || actionSync !== null}>
                   Da, arată
                 </Button>
               </div>

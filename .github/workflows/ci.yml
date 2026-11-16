@@ -146,13 +146,13 @@ jobs:
           retention-days: 7
 
   native-rust:
-    name: Rust research (manual)
+    name: Rust rules-1 research (manual)
     if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_rust }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ inputs.qualified_sha }}
+          ref: 8186210aa4dcfcd66660a81c28fcf9e3f908b475
       - name: Install qualified Rust toolchain
         run: rustup toolchain install 1.98.1 --profile minimal --component rustfmt --component clippy
       - uses: actions/setup-python@v5
@@ -245,25 +245,27 @@ jobs:
           retention-days: 7
 
   native-rust-browser:
-    name: Rust research browser (manual)
+    name: Rust rules-1 browser research (manual)
     if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_rust }}
-    needs: [native-rust, native-go]
+    needs: [native-rust]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ inputs.qualified_sha }}
+          ref: 8186210aa4dcfcd66660a81c28fcf9e3f908b475
       - uses: actions/setup-node@v4
         with:
-          node-version: "24"
+          node-version: "26.10.0"
           cache: npm
           cache-dependency-path: frontend/package-lock.json
-      - uses: actions/download-artifact@v4
+      - uses: actions/setup-go@v5
         with:
-          name: cat-native-go
-          path: build
-      - name: Restore private planner executable permission
-        run: chmod +x build/cat-browser-plan
+          go-version: "1.27.3"
+          cache: false
+      - name: Build rules-1 private planner from this checkout
+        run: |
+          mkdir -p build
+          go -C go-backend build -o ../build/cat-browser-plan ./cmd/cat-browser-plan
       - uses: actions/download-artifact@v4
         with:
           name: cat-native-rust
@@ -342,7 +344,7 @@ jobs:
       - name: Set up Node 24 LTS
         uses: actions/setup-node@v4
         with:
-          node-version: "24"
+          node-version: "26.10.0"
           cache: npm
           cache-dependency-path: frontend/package-lock.json
 

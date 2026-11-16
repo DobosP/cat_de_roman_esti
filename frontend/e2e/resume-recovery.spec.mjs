@@ -194,10 +194,33 @@ test.describe("V74 saved-game recovery", () => {
       expect(await player.evaluate((key) => localStorage.getItem(key), activeKey(game)))
         .toBe(terminal.game_id);
 
+      // One witness lets another tab install an unfinished daily while the
+      // recovered receipt is still queued. The surviving pointer must win.
+      let newerId;
+      const creates = [];
+      if (game.key === "intrusul") {
+        const day = await player.evaluate(() => {
+          const now = new Date();
+          return [now.getFullYear(), now.getMonth() + 1, now.getDate()]
+            .map((part) => String(part).padStart(2, "0")).join("-");
+        });
+        const newer = await request.post(`/api/wordgames/${game.key}/games?daily=${day}`);
+        expect(newer.status()).toBe(200);
+        newerId = (await newer.json()).game_id;
+        await remember(holder, game, newerId);
+        player.on("request", (incoming) => {
+          if (incoming.method() === "POST" && new URL(incoming.url()).pathname === `/api/wordgames/${game.key}/games`) creates.push(incoming.url());
+        });
+      }
       await releaseScoreLock(holder);
       await expect.poll(() => timesPlayed(player, game)).toBe(1);
       await expect(player.locator(game.board)).toBeVisible();
-      expect(await player.evaluate((key) => localStorage.getItem(key), activeKey(game))).not.toBe(terminal.game_id);
+      const saved = await player.evaluate((key) => localStorage.getItem(key), activeKey(game));
+      expect(saved).not.toBe(terminal.game_id);
+      if (newerId) {
+        expect(saved).toBe(newerId);
+        expect(creates).toEqual([]);
+      }
       await player.close();
     }
     await holder.close();

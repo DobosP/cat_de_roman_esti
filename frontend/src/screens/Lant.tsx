@@ -535,7 +535,11 @@ export default function Lant({
     else onToast("Nu am putut copia.", "error");
   }
 
-  const startEntry = useRoundStart(entry, (!state || entry.readyAfterTerminal(state)) && !loading && !creating && !startFailed && !resumeRecovery && !unavailable, retryResume, (daily) => void start(daily));
+  const resumeEntry = () => {
+    if (entry.readyAfterTerminal(state)) setState(null);
+    retryResume();
+  };
+  const startEntry = useRoundStart(entry, (!state || entry.readyAfterTerminal(state)) && !loading && !creating && !startFailed && !resumeRecovery && !unavailable, resumeEntry, (daily) => void start(daily));
   const mode = entry.mode(state);
   useLayoutEffect(() => {
     if (state && finished && isPresent) complete(state);
@@ -549,9 +553,10 @@ export default function Lant({
           startFailed={startFailed} unavailable={unavailable} onStart={() => startEntry(state?.game_id)} resumeRecovery={resumeRecovery} onResume={() => { entry.presentRecovery(); retryResume(); }}
           status={state && !entry.recoveredTerminal(state) && <span>{state.moves} {roNoun(state.moves, "salt", "salturi")}</span>}
           options={<FreeRoundOptions game={GAME_KEY} value={entry.options} onChange={entry.updateOptions} />}
+          onTool={abandonChain}
           tools={state && !finished ? (
             <Button type="submit" variant="secondary" disabled={busy || creating || actionSync !== null}
-              onClick={abandonChain}>Renunț la rundă</Button>
+              value="give-up">Renunț la rundă</Button>
           ) : undefined}>
         {state && !entry.recoveredTerminal(state) && <>
         <section className="card lant-route" aria-label="Poziția și ținta">

@@ -608,7 +608,11 @@ export default function AlchimieChallenge({
   }, [state, won, selected, clearSelection]);
 
   const nextRound = () => void start({ difficulty: entry.options.difficulty, category: entry.options.category ?? undefined });
-  const startEntry = useRoundStart(entry, (!state || entry.readyAfterTerminal(state)) && !loading && !creating && !startFailed && !resumeRecovery && !unavailable, retryResume,
+  const resumeEntry = () => {
+    if (entry.readyAfterTerminal(state)) setState(null);
+    retryResume();
+  };
+  const startEntry = useRoundStart(entry, (!state || entry.readyAfterTerminal(state)) && !loading && !creating && !startFailed && !resumeRecovery && !unavailable, resumeEntry,
     (daily) => daily ? void start({ daily, difficulty: "usor" }) : nextRound());
   const mode = entry.mode(state);
   useLayoutEffect(() => {
@@ -631,11 +635,15 @@ export default function AlchimieChallenge({
           startFailed={startFailed} unavailable={unavailable} onStart={() => startEntry(state?.game_id)} resumeRecovery={resumeRecovery} onResume={() => { entry.presentRecovery(); retryResume(); }}
           status={state && !entry.recoveredTerminal(state) && <span>{state.moves} {state.moves === 1 ? "combinație" : "combinații"}</span>}
           options={<FreeRoundOptions game={GAME_KEY} value={entry.options} onChange={entry.updateOptions} />}
+          onTool={(tool) => {
+            if (tool === "reset") void doReset();
+            if (tool === "new") nextRound();
+          }}
           tools={state && !won ? <>
             <Button type="submit" variant="secondary" disabled={actionsLocked}
-              onClick={() => void doReset()}>Reia același joc</Button>
+              value="reset">Reia același joc</Button>
             {!state.daily && <Button type="submit" className="alchimie-other-board" variant="secondary" disabled={busy || creating || loading || !isPresent}
-              onClick={nextRound}>Alt joc</Button>}
+              value="new">Alt joc</Button>}
           </> : undefined}>
         {state && !entry.recoveredTerminal(state) && <>
         <div className="alchemy-workspace">

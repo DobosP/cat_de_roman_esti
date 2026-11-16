@@ -60,6 +60,8 @@ export function useGameEntry(game: GameKey, active: ActiveGameMemo) {
       return true;
     }
     presentingRecovery.write(false);
+    setSettledTerminal(null);
+    setRecoveredTerminal(null);
     const decision = roundEntry(game, date, { ...round, terminal });
     if (decision.kind === "resume") {
       if (round.daily) markDailyStarted(game, round.daily);
@@ -119,6 +121,7 @@ export function useGameEntry(game: GameKey, active: ActiveGameMemo) {
     recoveredTerminal: (round: Round | null) => round !== null && recoveredTerminal === round.game_id,
     readyAfterTerminal: (round: Round | null) => round !== null && settledTerminal === round.game_id,
     presentRecovery: () => { presentingRecovery.write(true); },
+    newerSavedRound: () => settledTerminal !== null && active.peek() !== null,
     day: date,
     choose: () => roundEntry(game, date),
     complete,
@@ -152,7 +155,10 @@ export function useRoundStart(
       const { entry: current, shouldStart: ready, start: create, retryResume: resume } = pending;
       if (!current.isPresent || !ready || didStart.read() || document.visibilityState !== "visible") return;
       const choice = current.choose();
-      if (choice.kind === "free" && current.useParked()) resume();
+      if (current.newerSavedRound() || (choice.kind === "free" && current.useParked())) {
+        didStart.write(true);
+        resume();
+      }
       else {
         didStart.write(true);
         create(choice.kind === "daily" ? choice.daily : undefined);

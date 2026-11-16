@@ -4,7 +4,7 @@ import type { GameHelpCopy } from "../gameHelp.mjs";
 import type { GameDef } from "../games";
 import type { ResumeRecovery } from "../hooks/useSavedGameResume";
 
-export function GameFrame({ game, mode, onExit, help, options, tools, status, children, busy,
+export function GameFrame({ game, mode, onExit, help, options, tools, onTool, status, children, busy,
   startFailed, unavailable, verifying, onStart, resumeRecovery, onResume }: {
   game: GameDef;
   mode: "Jocul zilei" | "Rundă liberă" | "Reluare";
@@ -12,6 +12,7 @@ export function GameFrame({ game, mode, onExit, help, options, tools, status, ch
   help: GameHelpCopy;
   options?: ComponentChildren;
   tools?: ComponentChildren;
+  onTool?: (value: string) => void;
   status?: ComponentChildren;
   children?: ComponentChildren;
   busy?: boolean;
@@ -89,7 +90,7 @@ export function GameFrame({ game, mode, onExit, help, options, tools, status, ch
       {verifying && <p className="game-frame-wait" role="status">Se verifică runda salvată…</p>}
       {children}
       {open && (
-        <dialog ref={dialog} className="game-help-sheet" aria-labelledby={helpTitle}
+        <dialog ref={dialog} className="game-help-sheet" aria-labelledby={helpTitle} onClose={() => setOpen(false)}
           onKeyDown={(event) => {
             if (event.key !== "Tab") return;
             const controls = Array.from(event.currentTarget.querySelectorAll<HTMLElement>("button:not(:disabled), select:not(:disabled)"))
@@ -121,7 +122,13 @@ export function GameFrame({ game, mode, onExit, help, options, tools, status, ch
           <p>{help.steps}</p>
           {options && <section className="game-help-options"><h3>Opțiuni pentru următoarea rundă liberă</h3>{options}</section>}
           <button type="button" className="btn game-help-confirm" onClick={closeHelp}>Am înțeles</button>
-          {tools && <form method="dialog">{tools}</form>}
+          {tools && <form method="dialog" onSubmit={(event) => {
+            event.preventDefault();
+            const submitter = event.submitter;
+            if (!(submitter instanceof HTMLButtonElement)) return;
+            closeHelp();
+            onTool?.(submitter.value);
+          }}>{tools}</form>}
         </dialog>
       )}
     </main>

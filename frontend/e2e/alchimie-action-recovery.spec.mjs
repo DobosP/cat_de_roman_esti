@@ -221,6 +221,10 @@ test("lost reset restores original seeds, clears cue and experiment memory once"
   expect(fresh).toEqual(committed());
   await expect(page.locator(".alchemy-earned-hint")).toHaveCount(0);
   await expect(page.getByRole("button", { name: /^Scoate .* din alambic$/ })).toHaveCount(0);
+  await openGameOptions(page, game);
+  await expect(resetButton(page)).toBeEnabled();
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("dialog")).toHaveCount(0);
   expect(counts).toEqual({ reads: 1, mutations: 1 });
 });
 

@@ -496,7 +496,11 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     return () => window.removeEventListener("keydown", onKey);
   }, [state, finished, actionsLocked, actionOwner, selected, exactBlockedRetry, submit, clearSelection]);
 
-  const startEntry = useRoundStart(entry, (!state || entry.readyAfterTerminal(state)) && !loading && !startFailed && !resumeRecovery && !unavailable, retryResume,
+  const resumeEntry = () => {
+    if (entry.readyAfterTerminal(state)) setState(null);
+    retryResume();
+  };
+  const startEntry = useRoundStart(entry, (!state || entry.readyAfterTerminal(state)) && !loading && !startFailed && !resumeRecovery && !unavailable, resumeEntry,
     (daily) => void start(daily));
   const mode = entry.mode(state);
   useLayoutEffect(() => {
