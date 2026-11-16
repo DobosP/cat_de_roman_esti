@@ -70,7 +70,7 @@ async function paintReady(page) {
 }
 
 async function fixedPage(screen) {
-  const context = await snapshotBrowser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: "reduce",
+  const context = await snapshotBrowser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1, reducedMotion: "reduce",
     colorScheme: screen.theme, locale: "ro-RO", timezoneId: "Europe/Bucharest" });
   const page = await context.newPage();
   await page.clock.setFixedTime(new Date(fixture.clock));
@@ -116,6 +116,8 @@ async function fixedPage(screen) {
       await page.locator(".game-result").waitFor();
       await page.getByText("Perfect", { exact: true }).waitFor();
     }
+    // Park the pointer away from the game and help controls after scripted clicks.
+    await page.mouse.move(389, 843);
     await paintReady(page);
     assert.equal(await page.evaluate(() => matchMedia("(prefers-color-scheme: dark)").matches), screen.theme === "dark");
     assert.deepEqual(counts, { creates: +Boolean(screen.game), guesses: +(screen.name === "result") });
@@ -128,7 +130,7 @@ async function fixedPage(screen) {
     }
     const name = screen.key + ".png";
     const image = await page.screenshot({
-      path: `${output}/${name}`, fullPage: true, animations: "disabled", caret: "hide", scale: "css",
+      path: `${output}/${name}`, animations: "disabled", caret: "hide", scale: "css",
     });
     const axe = await new AxeBuilder({ page, axeSource }).analyze();
     const fingerprint = axe.violations.map((violation) => ({ id: violation.id, impact: violation.impact,
@@ -170,12 +172,13 @@ try {
     process.stderr.write(`Captured original route ${route}: ${fingerprint.length} axe fingerprints\n`);
     await context.close();
   } else {
-    // Rounded control edges differed by a few raster pixels under GPU
-    // compositing. Use one fixed software profile for both capture and verify.
-    // The historical captures and the live vitals browser keep their profile.
+    // A complete software raster of the fixed viewport keeps rounded edges
+    // repeatable across capture and verification. Historical captures and
+    // live vitals measurements use their original browser profile.
     snapshotBrowser = await chromium.launch({
       ...browserOptions,
-      args: ["--disable-gpu", "--disable-gpu-compositing", "--disable-skia-runtime-opts"],
+      args: ["--disable-gpu", "--disable-gpu-compositing", "--disable-skia-runtime-opts",
+        "--disable-partial-raster", "--run-all-compositor-stages-before-draw"],
     });
     for (const screen of REDESIGN_CASES) await fixedPage(screen);
     if (capture && pages.some((page) => page.axe.length)) throw new Error("All redesign baseline Axe cases require zero findings");
