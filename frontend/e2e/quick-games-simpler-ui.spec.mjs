@@ -47,11 +47,11 @@ for (const game of quickGames) {
     const initial = await start(page, game);
     // Presentation stress uses a normal-length word; no board or response mutation.
     await page.locator(`${game.board} button strong`).first().evaluate((label) => { label.textContent = "Columbia"; });
-    for (const { width, scale, columns: perechiColumns } of [
-      { width: 390, scale: 1, columns: 2 },
-      { width: 320, scale: 2, columns: 1 },
-      { width: 1280, scale: 1, columns: 4 },
-      { width: 1280, scale: 2, columns: 2 },
+    for (const { width, scale, intrusulColumns, perechiColumns } of [
+      { width: 390, scale: 1, intrusulColumns: 1, perechiColumns: 2 },
+      { width: 320, scale: 2, intrusulColumns: 1, perechiColumns: 1 },
+      { width: 1280, scale: 1, intrusulColumns: 4, perechiColumns: 4 },
+      { width: 1280, scale: 2, intrusulColumns: 2, perechiColumns: 2 },
     ]) {
       await page.setViewportSize({ width, height: 844 });
       await page.evaluate((scale) => { globalThis.document.documentElement.style.fontSize = `${scale * 100}%`; }, scale);
@@ -75,7 +75,7 @@ for (const game of quickGames) {
           fontSize: Number.parseFloat(globalThis.getComputedStyle(label).fontSize),
         };
       });
-      const columns = game.key === "intrusul" ? 1 : perechiColumns;
+      const columns = game.key === "intrusul" ? intrusulColumns : perechiColumns;
       expect(new Set(metrics.tiles.map(({ rect }) => Math.round(rect.x))).size, `${width}px / ${scale * 100}% text`).toBe(columns);
       expect(metrics.pageWidth).toBeLessThanOrEqual(width);
       expect(metrics.fragments, "Columbia must remain a readable word").toHaveLength(1);
