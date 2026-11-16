@@ -83,11 +83,14 @@ type reblindReceipt struct {
 
 // reblindVerdict is the paired rule for an existing Cald board. k is the
 // number of candidate-only concepts ranked above the candidate's best guess.
-// Each of them moves an unchanged guess down by one rank.
-func reblindVerdict(wonCandidate bool, candidateBest, baselineBest, k int) string {
+// Each of them moves an unchanged guess down by one rank. Losing a win that
+// the same guesses reach on the baseline is measurably less close.
+func reblindVerdict(wonCandidate, wonBaseline bool, candidateBest, baselineBest, k int) string {
 	switch {
 	case wonCandidate:
 		return "win"
+	case wonBaseline:
+		return "worse"
 	case candidateBest <= baselineBest+k:
 		return "no-worse"
 	default:
@@ -194,6 +197,7 @@ func compareReblind(before, after *content.Content, cases []reblindCase) ([]rebl
 		row := reblindRow{boardKey: c.key, ViewSHA256: c.after, BaselineViewSHA256: c.before,
 			ThreadID: c.thread, Transcript: c.transcript, Guesses: len(c.guesses)}
 		target := "" // The candidate side runs last and leaves its target here.
+		baselineTarget := ""
 		for _, side := range []struct {
 			s            services
 			view         string
@@ -213,6 +217,11 @@ func compareReblind(before, after *content.Content, cases []reblindCase) ([]rebl
 				return nil, fmt.Errorf("%s/%s: view diff row differs from the native bundle view", c.key.Game, c.key.ID)
 			}
 			target = item.Payload["target"].(string)
+			if side.best == &row.BaselineBest {
+				baselineTarget = target
+			} else if target != baselineTarget {
+				return nil, fmt.Errorf("%s/%s: board target differs between baseline and candidate", c.key.Game, c.key.ID)
+			}
 			played, err := side.s.cald.BoardReplayForReview(target, item.Difficulty, c.guesses)
 			if err != nil {
 				return nil, fmt.Errorf("%s/%s: %w", c.key.Game, c.key.ID, err)
@@ -236,7 +245,7 @@ func compareReblind(before, after *content.Content, cases []reblindCase) ([]rebl
 				row.K++
 			}
 		}
-		row.Verdict = reblindVerdict(row.WonCandidate, row.CandidateBest, row.BaselineBest, row.K)
+		row.Verdict = reblindVerdict(row.WonCandidate, row.WonBaseline, row.CandidateBest, row.BaselineBest, row.K)
 		row.StockQuality = !row.WonCandidate && !row.WonBaseline
 		rows = append(rows, row)
 	}

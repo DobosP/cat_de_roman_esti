@@ -56,8 +56,9 @@ critic's typed guesses on the baseline and the candidate. The receipt must bind
 sha, baseline, both committed bundle digests and the exact view diff digest.
 Each row must name a disturbed Cald board with its exact before and after view
 digests and a verdict of win or no-worse. Closeout recomputes the verdict from
-the row: win when the candidate is won, else no-worse when candidate_best_rank
-is at most baseline_best_rank + k, else worse. A worse or misstated row refuses
+the row: win when the candidate is won, else worse when the same guesses win
+the baseline, else no-worse when candidate_best_rank is at most
+baseline_best_rank + k, else worse. A worse or misstated row refuses
 the landing. The critic transcript has the same six members as above. Its
 verdict is pass or fail, and pass requires the native candidate win. The same
 critic-thread, distinct-transcript and distinct-play rules apply across both
@@ -102,8 +103,9 @@ truthfulness and selection of an independent oracle are operator obligations.
 The paired comparison can only relax the blind-win rule for a disturbed
 existing Cald board whose top-100 change both judges signed. It never covers
 a new board, Lanț or another game. Closeout does not replay the guesses. It
-trusts the native receipt's numbers after checking its bindings, so the
-operator must run the pinned cat-board-view-diff on the committed bundles.
+trusts the native receipt's numbers after checking its bindings and that the
+guess counts match the critic's transcript and k fits under the best rank, so
+the operator must run the pinned cat-board-view-diff on the committed bundles.
 The four local writes roll back after an ordinary error. A killed process
 requires inspecting the four exact paths before retry. Use the standard-
 library Python 3.12 CLI. The pinned doc checker is Go.

@@ -19,22 +19,24 @@ import (
 
 func TestReblindVerdictRule(t *testing.T) {
 	for _, c := range []struct {
-		won                    bool
+		won, wonBaseline       bool
 		candidate, baseline, k int
 		want                   string
 	}{
-		{true, 1, 1, 0, "win"},
-		{true, 1, 40, 0, "win"},
-		{false, 5, 5, 0, "no-worse"},
-		{false, 4, 5, 0, "no-worse"},
-		{false, 6, 5, 0, "worse"},
+		{true, true, 1, 1, 0, "win"},
+		{true, false, 1, 40, 0, "win"},
+		{false, false, 5, 5, 0, "no-worse"},
+		{false, false, 4, 5, 0, "no-worse"},
+		{false, false, 6, 5, 0, "worse"},
 		// One candidate-only concept above the best guess explains one rank.
-		{false, 6, 5, 1, "no-worse"},
-		{false, 7, 5, 1, "worse"},
-		{false, 8, 5, 3, "no-worse"},
-		{false, 2, 1, 0, "worse"},
+		{false, false, 6, 5, 1, "no-worse"},
+		{false, false, 7, 5, 1, "worse"},
+		{false, false, 8, 5, 3, "no-worse"},
+		// The same guesses win the baseline but not the candidate: worse, whatever k says.
+		{false, true, 2, 1, 5, "worse"},
+		{false, true, 2, 1, 0, "worse"},
 	} {
-		if got := reblindVerdict(c.won, c.candidate, c.baseline, c.k); got != c.want {
+		if got := reblindVerdict(c.won, c.wonBaseline, c.candidate, c.baseline, c.k); got != c.want {
 			t.Errorf("won=%v candidate=%d baseline=%d k=%d: %s, want %s", c.won, c.candidate, c.baseline, c.k, got, c.want)
 		}
 	}

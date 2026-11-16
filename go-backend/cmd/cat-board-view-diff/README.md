@@ -127,7 +127,7 @@ Each receipt row carries these values.
 | `candidate_best_rank`, `baseline_best_rank` | Best native rank among the scored guesses on each build. An unknown word or an unconfirmed spelling suggestion costs no attempt and is not scored. Replay stops at the native win. |
 | `won_candidate`, `won_baseline` | Whether the same guesses win each build. |
 | `k` | Number of concepts present only in the candidate that rank above the candidate's best guess on that board. Each one moves an unchanged guess down one rank. |
-| `verdict` | `win` when the candidate is won. Otherwise `no-worse` when `candidate_best_rank <= baseline_best_rank + k`. Otherwise `worse`. |
+| `verdict` | `win` when the candidate is won. Otherwise `worse` when the same guesses win the baseline. Otherwise `no-worse` when `candidate_best_rank <= baseline_best_rank + k`. Otherwise `worse`. A board whose target differs between the two bundles is refused. |
 | `stock_quality` | True when neither build is won. Closeout copies these boards to the landing receipt for the owner queue. |
 
 The receipt binds both commit IDs, both bundle digests, the view diff digest, each

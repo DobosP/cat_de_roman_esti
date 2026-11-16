@@ -306,7 +306,7 @@ class CloseLandingTests(unittest.TestCase):
             won, won_before = candidate_best == 1, baseline_best == 1
             return {**binding(name, "paired-critic"), "baseline_view_sha256": hashes[name][0],
                     "transcript": {"path": f"play-{name}", "sha256": digit * 64},
-                    "guesses": 13, "candidate_scored_guesses": 13, "baseline_scored_guesses": 12,
+                    "guesses": 1, "candidate_scored_guesses": 1, "baseline_scored_guesses": 1,
                     "candidate_best_rank": candidate_best, "baseline_best_rank": baseline_best, "k": k,
                     "won_candidate": won, "won_baseline": won_before, "verdict": verdict,
                     "stock_quality": not won and not won_before}
@@ -445,6 +445,22 @@ class CloseLandingTests(unittest.TestCase):
         def missing_row_field(assembly, documents, hashes):
             del row(documents)["k"]
         refuse("Invalid paired reblind row", missing_row_field)
+
+        # Receipt numbers must match the transcript the critic actually played.
+        def forged_guess_count(assembly, documents, hashes):
+            row(documents).update(guesses=999, candidate_scored_guesses=500, baseline_scored_guesses=700)
+        def forged_scored_count(assembly, documents, hashes):
+            row(documents)["baseline_scored_guesses"] = 2
+        def forged_tolerance(assembly, documents, hashes):
+            row(documents).update(candidate_best_rank=90, baseline_best_rank=5, k=500)
+        for change in (forged_guess_count, forged_scored_count, forged_tolerance):
+            refuse("do not match the transcript", change)
+
+        # The same guesses win the baseline but not the candidate: measurably less close.
+        def lost_baseline_win(assembly, documents, hashes):
+            row(documents).update(baseline_best_rank=1, won_baseline=True, stock_quality=False, k=0,
+                                  candidate_best_rank=2, verdict="no-worse")
+        refuse("worse or misstated", lost_baseline_win)
 
         # One transcript or one play cannot serve two boards, across both receipts.
         def transcript_of_blind_board(assembly, documents, hashes):

@@ -453,13 +453,18 @@ def word_board_scope(evidence, assembly, before_bundle_sha, bundle_sha, other_ro
                     and (not won_before or row["baseline_best_rank"] == 1)
                     and row["stock_quality"] is (not won and not won_before),
                     "Paired reblind numbers are inconsistent")
-            verdict = "win" if won else (
+            verdict = "win" if won else "worse" if won_before else (
                 "no-worse" if row["candidate_best_rank"] <= row["baseline_best_rank"] + row["k"] else "worse")
             require(row["verdict"] == verdict and verdict in {"win", "no-worse"},
                     f"Paired reblind is worse or misstated for {key[0]}/{key[1]}")
             transcript = reblind_transcript(evidence, f"board-compare-transcript-{index}", row, {"pass", "fail"},
                                             transcript_hashes, play_hashes)
             require(won or transcript["verdict"] == "fail", "Critic pass without a native candidate win")
+            typed = sum(isinstance(step.get("guess"), str) for step in transcript["play"])
+            require(row["guesses"] == typed
+                    and 1 <= row["candidate_scored_guesses"] <= typed and 1 <= row["baseline_scored_guesses"] <= typed
+                    and (won or row["k"] <= row["candidate_best_rank"] - 2),
+                    "Paired reblind numbers do not match the transcript")
             seen.add(key)
             critics.add(thread)
             if row["stock_quality"]:
