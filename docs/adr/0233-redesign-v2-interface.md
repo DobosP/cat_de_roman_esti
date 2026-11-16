@@ -1,7 +1,7 @@
 # ADR-0233 — Redesign v2 interface
 
 - Date: 2026-11-16
-- Status: accepted by Paul; in implementation on `feat/redesign-v2`
+- Status: accepted by Paul and qualified on local product `8b6679af` ([acceptance](../reviews/redesign-v2-m1/acceptance.json))
 - Supersedes the frozen DOM, copy and visual clauses of
   [ADR-0205](0205-canonical-game-css-and-browser-contracts.md) (its byte ceilings stay), the
   protected introduction of [ADR-0222](0222-simplified-alchimie-collection-interface.md) and

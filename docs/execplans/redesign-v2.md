@@ -36,11 +36,35 @@ The former frozen Help text has a new exact-copy pin and tests for each ladder a
 ## Milestone 1
 
 - [x] Record the approved decisions and claim their ADR numbers.
-- [ ] Build the Go rules and independently implement the Python oracle. Record and replay the source- and rules-bound corpus, regenerate mechanics and OpenAPI goldens, and update the mobile contract.
-- [ ] Build the Home, entry, game screens, help, result and history UI. Measure the route and CSS budgets from the pinned build during implementation.
-- [ ] Migrate the browser journeys, retain superseded assertions with their replacements and capture the new GUI lock in a dedicated gate-change commit.
-- [ ] Rebase on content main. Run exact-SHA unit and full and get independent review of that SHA and baseline re-capture.
-- [ ] Walk through the managed build at 390 × 844 in both themes, locally fast-forward main, record receipts and clean up the verified-merged worktree.
+- [x] Build the Go rules and independently implement the Python oracle. Record and replay the source- and rules-bound corpus, regenerate mechanics and OpenAPI goldens, and update the mobile contract.
+- [x] Build the Home, entry, game screens, help, result and history UI. Measure the route and CSS budgets from the pinned build during implementation.
+- [x] Migrate the browser journeys, retain superseded assertions with their replacements and capture the new GUI lock in a dedicated gate-change commit.
+- [x] Rebase on content main. Run exact-SHA unit and full and get independent review of that SHA and baseline re-capture.
+- [x] Walk through the managed build at 390 × 844 in both themes, locally fast-forward main, record receipts and clean up the verified-merged worktree.
+
+Exact gate operator: `agent:codex` (PROGRAM E8). Qualified SHA `8b6679afae886cd0014e0b0bd98f0c2a6f30e1e1`. [Canonical commands, result hashes, browser counts and budgets](../reviews/redesign-v2-m1/acceptance.json).
+
+## Independent review
+
+- Rules and interface review found repeated/member hint disclosures, retargeting of an earned
+  hint after a group or pair was solved, and races around loading or saving a round from two
+  tabs. Those findings were fixed and the affected rules, save/retry and focus journeys were
+  rechecked.
+- The first full candidate at `ffab22be5869d7984148c539b4a74bdf9d6e795c` failed 114 browser
+  cases. The fixes removed obsolete setup selectors, kept the newest saved round after a
+  concurrent create, and restored visible controls at 320 px with doubled text and in the
+  Alchimie inventory. The next full found two copies of one stale Intrusul
+  1280 px expectation. The corrected four layout cases passed in the pinned browser.
+- The exact `a71e147e5e65fd294c8156699626e8ab01194098` renderer review gave GO. The captured
+  images preserved 390 × 844 and the nine screens in each theme. All 18 recaptured PNGs matched
+  byte for byte. The separate recapture passed all 28 checks, including zero Axe findings,
+  the live Home semantics, and original LCP and INP bounds.
+- The managed in-app walkthrough used `1db0266d16d38c034c8f511a22344e93b4a4846f`. It
+  covered both themes at 390 × 844, theme persistence, daily and free entry, saved resume,
+  each hint ladder, win, loss, give-up and Help focus. The final SHA includes later saved
+  round handling and reduced-motion fixes.
+
+The exact broad Django rerun reproduced the 474 historical failed nodes and 188 setup errors from main. No candidate-only red node matched the comparison. Superseded raw pytest and browser output trees were pruned after compact receipts were retained.
 
 ## Milestone 2
 
