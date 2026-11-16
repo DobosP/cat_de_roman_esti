@@ -116,7 +116,7 @@ var frozenV5Pilot2Forms1Source31 []byte
 var frozenRulesV2 []byte
 
 const RulesV2SHA256 = "6c6fc19f30abef0033424011d4c2f229ea14ed9c593c9da45610dd9acd6c54f7"
-const RulesV2Cases = 1332
+const RulesV2Cases = 1335
 
 const FrozenSHA256 = "9041e05f13190a06a526c1aeed1f264d467483cd267ffcdb24f422ed9430b2cb"
 const V12SHA256 = "6293a0dde67ee0b0e5929cc1103bd80795e0aff1af2ba5fdf53e983ab79351fd"

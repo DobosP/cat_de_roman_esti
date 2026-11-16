@@ -1370,6 +1370,68 @@
         ]
       }
     },
+    "/api/wordgames/lant/games/{game_id}/giveup": {
+      "post": {
+        "description": "Give up an eligible curated daily Lanț round with board comparison enabled.",
+        "operationId": "lant_giveup",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "game_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "properties": {
+                    "hint_level": {
+                      "description": "Highest rung used, or zero before the first hint.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "hints_left": {
+                      "description": "Remaining available rungs.",
+                      "maximum": 3,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "perfect": {
+                      "description": "A win with zero steps.",
+                      "type": "boolean"
+                    },
+                    "score": {
+                      "description": "Legacy account score.",
+                      "type": "integer"
+                    },
+                    "steps": {
+                      "description": "Cumulative steps in this round.",
+                      "minimum": 0,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "No response body"
+          }
+        },
+        "security": [
+          {}
+        ],
+        "tags": [
+          "lant"
+        ]
+      }
+    },
     "/api/wordgames/lant/games/{game_id}/hint": {
       "post": {
         "description": "APIView with FastAPI/starlette method semantics.\n\n``metadata_class = None`` disables DRF's automatic 200-with-metadata OPTIONS\nhandler, so an undeclared method (including OPTIONS outside CORS preflight)\nraises MethodNotAllowed — rendered below as the starlette-parity 405 body.",
