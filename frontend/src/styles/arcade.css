@@ -839,6 +839,11 @@ input:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .app-content > .roedu-presence {
+    transform: none !important;
+    will-change: auto !important;
+  }
+
   *,
   *::before,
   *::after {
