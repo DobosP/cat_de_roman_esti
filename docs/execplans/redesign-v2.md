@@ -20,6 +20,17 @@ Paul's decisions of 2026-11-16 apply to both milestones.
 - The six games stand alone. Home cards open games directly and show “Gata azi” after completion. The theme follows the device until the player uses the Home switch.
 - Local landing follows ADR-0004 after the exact-SHA unit and full gates and independent review. Paul owns publication, deployment, and activating counts in production.
 
+### Browser assertion replacements
+
+The original assertions are retained under `frontend/historical-e2e/redesign-v2/`.
+
+- The circuit, streak, diploma and pre-entry challenge actions are replaced by the Home card's one-tap daily/free decision, daily completion badge and dated resume tests. The pilot journey still checks same-document navigation and inert exiting frames.
+- Home's starter chip, rankings, record totals and history wall are replaced by the isolated free starter request, single-purpose cards and the lazy Results dialog. The existing private account, source-closure and byte-identity assertions stay active.
+- The intro focus, locked-hint countdown and point deductions are replaced by the game frame's entry and recovery focus, immediate hint buttons, enforced step increments and exhaustion tests. Intrusul, Perechi, Conexiuni, Cald, Lanț and Alchimie keep their keyboard and pending-reply journeys.
+- The setup pickers, in-round disclosures and result “Schimbă opțiunile” are replaced by the labelled Help dialog with exact per-difficulty availability, input retention, focus return and next-free-round preference checks. Alchimie recipe views retain their browser witnesses.
+- Score and best-record presentation assertions are replaced by result steps, score-free clipboard, Perfect for eligible wins and the terminal receipt checks.
+
+
 ## Milestone 1
 
 - [x] Record the approved decisions and claim their ADR numbers.

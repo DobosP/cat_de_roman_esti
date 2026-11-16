@@ -6,157 +6,10 @@ import { createHash } from "node:crypto";
 import { existsSync, lstatSync, readFileSync, realpathSync } from "node:fs";
 import { resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
-import { tabTo } from "./games.mjs";
 import { collectInitialBundleFiles } from "../scripts/check-bundle-budget.mjs";
 
-const SCORE_KEY = "cat_wordgame_scores_v1";
-const DAY = "2026-10-08";
-const NOW = "2026-10-08T12:00:00.000Z";
-const KEYS = ["alchimie", "intrusul", "perechi", "conexiuni", "contexto", "lant"];
-const TITLES = ["Alchimie", "Intrusul", "Perechi", "Conexiuni", "Cald sau Rece", "Lanțul Cuvintelor"];
 const root = fileURLToPath(new URL("../../", import.meta.url));
 const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
-
-function historyFixture() {
-  const history = {};
-  for (const [index, score] of [900, 0, 400].entries()) {
-    const entry = { score, detail: "Rezultat local de paritate", at: Date.parse(NOW), daily: DAY };
-    history[KEYS[index]] = { best: score > 0 ? entry : null, played: 1, recent: [entry],
-      completedNonDaily: false, nonDailyCompletions: 0, nonDailyWon: false };
-  }
-  return history;
-}
-
-async function openHome(page, history = historyFixture()) {
-  await page.clock.setFixedTime(new Date(NOW));
-  await page.route("**/api/me", (route) => route.fulfill({
-    json: { accounts_enabled: false, authenticated: false, user: null },
-  }));
-  await page.addInitScript(({ key, history }) => {
-    if (localStorage.getItem(key) === null) localStorage.setItem(key, JSON.stringify(history));
-  }, { key: SCORE_KEY, history });
-  await page.goto("/");
-  await expect(page.getByRole("heading", { name: "Circuitul de azi", exact: true })).toBeVisible();
-  return history;
-}
-
-test("Home presents exactly six local daily rows and completed rows remain read-only", async ({ page }) => {
-  const posts = [];
-  page.on("request", (request) => {
-    if (request.method() === "POST") posts.push(request.url());
-  });
-  const history = await openHome(page);
-  const circuit = page.getByRole("region", { name: "Circuitul de azi", exact: true });
-  await expect(circuit.getByText("Doar pe acest dispozitiv.", { exact: true })).toBeVisible();
-  const status = circuit.getByRole("status", { name: "3 din 6 jocuri terminate azi, 1300 din 6000 de puncte", exact: true });
-  await expect(status).toHaveAttribute("aria-live", "polite");
-  await expect(status).toContainText("3/6");
-  await expect(status).toContainText("1300/6000 pct");
-  const list = circuit.getByRole("list", { name: "Progresul jocurilor de azi", exact: true });
-  const rows = list.getByRole("listitem");
-  await expect(rows).toHaveCount(6);
-  await expect(rows.locator(".daily-circuit-game-name")).toHaveText(TITLES);
-  for (const [index, score] of [900, 0, 400].entries()) {
-    const row = rows.nth(index);
-    await expect(row).toHaveAccessibleName(`${TITLES[index]}: terminat azi, ${score} puncte`);
-    await expect(row.getByRole("button")).toHaveCount(0);
-    await expect(row).toContainText(`${score} ✓`);
-    await row.click();
-    await expect(page).toHaveURL(/\/$/);
-    await expect(page.locator(".games-grid .game-card").nth(index))
-      .toHaveAccessibleName(`Joacă ${TITLES[index]} — terminat azi`);
-    await expect(page.locator(".games-grid .game-card").nth(index)).toContainText("Azi ✓");
-  }
-  for (let index = 3; index < 6; index += 1) {
-    const action = rows.nth(index).getByRole("button", { name: `Deschide ${TITLES[index]} — neterminat azi`, exact: true });
-    await expect(action).toBeEnabled();
-    await expect(action).toContainText("Joacă →");
-  }
-  expect(posts).toEqual([]);
-  expect(await page.evaluate((key) => localStorage.getItem(key), SCORE_KEY)).toBe(JSON.stringify(history));
-});
-
-for (const [width, columns] of [[320, 2], [699, 2], [700, 3], [979, 3], [980, 6], [1280, 6]]) {
-  test(`daily circuit has ${columns} complete columns at ${width}px with visible keyboard focus and no overflow`, async ({ page }) => {
-    await page.setViewportSize({ width, height: 1000 });
-    await openHome(page);
-    const list = page.getByRole("list", { name: "Progresul jocurilor de azi", exact: true });
-    await expect(list.getByRole("listitem")).toHaveCount(6);
-    expect(await list.evaluate((element) => getComputedStyle(element).gridTemplateColumns.split(/\s+/).filter(Boolean).length))
-      .toBe(columns);
-    const dimensions = await list.getByRole("listitem").evaluateAll((rows) => rows.map((row) => ({
-      left: row.getBoundingClientRect().left, right: row.getBoundingClientRect().right,
-      width: row.clientWidth, scroll: row.scrollWidth,
-    })));
-    for (const bounds of dimensions) {
-      expect(bounds.left).toBeGreaterThanOrEqual(-1);
-      expect(bounds.right).toBeLessThanOrEqual(width + 1);
-      expect(bounds.scroll).toBeLessThanOrEqual(bounds.width + 1);
-    }
-    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
-    const action = list.getByRole("button", { name: "Deschide Conexiuni — neterminat azi", exact: true });
-    const bounds = await action.boundingBox();
-    expect(bounds.height).toBeGreaterThanOrEqual(44);
-    expect(bounds.width).toBeGreaterThanOrEqual(44);
-    await tabTo(page, action);
-    await expect(action).toBeFocused();
-    await expect(action).toBeInViewport();
-    const focus = await action.evaluate((element) => {
-      const style = getComputedStyle(element);
-      return { visible: element.matches(":focus-visible"), width: parseFloat(style.outlineWidth),
-        style: style.outlineStyle, color: style.outlineColor };
-    });
-    expect(focus.visible).toBe(true);
-    expect(focus.width).toBeGreaterThanOrEqual(2);
-    expect(focus.style).toBe("solid");
-    expect(focus.color).not.toBe("rgba(0, 0, 0, 0)");
-  });
-}
-
-test("Home's hero states its actual cultural range under the unchanged accessible brand", async ({ page }) => {
-  await page.addInitScript(() => {
-    const memory = sessionStorage.getItem("m3-synthetic-memory");
-    if (memory !== null) Object.defineProperty(navigator, "deviceMemory", { configurable: true, value: Number(memory) });
-  });
-  await openHome(page, {});
-  await expect(page.getByRole("heading", { name: "Cât de român ești?", exact: true })).toBeVisible();
-  await expect(page.getByText("De la Ștefan cel Mare la Las Fierbinți: șase jocuri scurte din cultura și viața românească.", { exact: true })).toBeVisible();
-  await expect(page.getByText("Șase jocuri românești. Alege unul și intri direct în ritm.", { exact: true })).toHaveCount(0);
-  // Synthetic reports exercise policy + delivered CSS; these are not device measurements.
-  for (const [memory, enabled] of [[2, false], [8, true], [0, true]]) {
-    await page.evaluate((value) => sessionStorage.setItem("m3-synthetic-memory", String(value)), memory);
-    await page.reload();
-    await expect(page.locator(".home-screen")).toHaveAttribute("data-card-blur", enabled ? "on" : "off");
-    expect(await page.locator(".home-screen .card").first().evaluate((node) => getComputedStyle(node).backdropFilter))
-      .toBe(enabled ? "blur(14px)" : "none");
-  }
-});
-
-for (const graduated of [false, true]) {
-  test(`Home ${graduated ? "removes both derived starter chips for explicit local graduation history" : "shows starter chips only on the two unplayed derived cards"}`, async ({ page }) => {
-    const history = {};
-    if (graduated) {
-      // Explicit local presentation history: three free losses graduate Intrusul;
-      // one free win graduates Perechi. Module arithmetic is covered separately.
-      const losses = [0, 1, 2].map((index) => ({ score: 0, detail: "Pierdere locală de test", at: Date.parse(NOW) - index }));
-      const win = { score: 500, detail: "Câștig local de test", at: Date.parse(NOW) };
-      history.intrusul = { best: null, played: 3, recent: losses, completedNonDaily: true,
-        nonDailyCompletions: 3, nonDailyWon: false };
-      history.perechi = { best: win, played: 1, recent: [win], completedNonDaily: true,
-        nonDailyCompletions: 1, nonDailyWon: true };
-    }
-    await openHome(page, history);
-    const cards = page.locator(".games-grid .game-card");
-    await expect(cards.locator(".game-card-title")).toHaveText(TITLES);
-    const chip = "🌱 Nivel de început";
-    await expect(cards.getByText(chip, { exact: true })).toHaveCount(graduated ? 0 : 2);
-    for (let index = 0; index < 6; index += 1) {
-      await expect(cards.nth(index).getByText(chip, { exact: true }))
-        .toHaveCount(!graduated && [1, 2].includes(index) ? 1 : 0);
-    }
-    expect(await page.evaluate((key) => localStorage.getItem(key), SCORE_KEY)).toBe(JSON.stringify(history));
-  });
-}
 
 function artifactBytes(directory, relative) {
   expect(typeof relative).toBe("string");
@@ -242,6 +95,10 @@ test("the actual served build keeps optional account/game chunks outside static 
     const unported = [];
     expect(ui).toBe("preact");
     for (const key of unported) expect(match.manifest[key]).toBeUndefined();
+    const history = match.manifest["src/components/ResultsHistory.tsx"];
+    expect(history?.isDynamicEntry).toBe(true);
+    expect(closure).not.toContain(history.file);
+    expect(requested.has(match.prefix + history.file)).toBe(false);
     const optional = ported
       .map((key) => {
         const row = match.manifest[key];

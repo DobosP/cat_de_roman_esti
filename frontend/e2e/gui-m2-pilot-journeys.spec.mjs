@@ -9,6 +9,7 @@ import { games, activeKey, gameURL, deterministicStarts, expectUi, solution, sta
 
 const ported = games.filter(({ key }) => ["intrusul", "perechi", "conexiuni"].includes(key));
 const legacy = ["/alchimie", "/cald-rece", "/lant", "/clasament"];
+const card = (page, path) => page.locator(`.games-grid a[href="${path}"]`);
 const motionOn = () => test.info().project.name === "motion-on";
 
 function documentRequests(page) {
@@ -41,7 +42,7 @@ async function heldDailyResumeDuringExit(page, request) {
     const response = await route.fetch();
     entered(); await held; await route.fulfill({ response });
   }, { times: 1 });
-  await page.getByRole("button", { name: "Deschide Lanțul Cuvintelor — neterminat azi", exact: true }).click();
+  await card(page, game.path).click();
   await requested;
   const exit = await page.evaluate(async () => {
     const changed = new Promise((resolve) => globalThis.addEventListener("popstate", resolve, { once: true }));
@@ -61,7 +62,7 @@ async function heldDailyResumeDuringExit(page, request) {
     await page.evaluate(async () => { await new Promise(requestAnimationFrame); await new Promise(requestAnimationFrame); });
     await expect(page).toHaveURL(/\/$/);
     if (motionOn()) await expect(page.locator('.app-content > .roedu-presence[data-state="exiting"] .screen')).toHaveCount(1);
-    await expect(page.getByText("Ai continuat jocul liber început. Provocarea zilei te așteaptă după ce îl termini.", { exact: true })).toHaveCount(0);
+    await expect(page.getByRole("alert")).toHaveCount(0);
     expect(await page.evaluate((key) => localStorage.getItem(key), activeKey(game))).toBe(state.game_id);
     expect(await page.evaluate(() => localStorage.getItem("cat_wordgame_scores_v1"))).toBe(beforeScores);
     expect(posts).toEqual([]);
@@ -78,9 +79,8 @@ async function heldMoveAcrossReentry(page, request) {
   await page.evaluate((key) => localStorage.removeItem(key), activeKey(game));
   await deterministicStarts(page, game);
   const navigations = documentRequests(page);
-  await page.getByRole("button", { name: /^Joacă Lanțul Cuvintelor —/ }).click();
   const creation = page.waitForResponse((item) => item.request().method() === "POST" && new URL(item.url()).pathname === "/api/wordgames/lant/games");
-  await page.getByRole("button", { name: /^Joacă(?: →)?$/ }).click();
+  await card(page, game.path).click();
   const initial = await (await creation).json();
   await expect(page.locator(game.board)).toBeEnabled();
   const step = solution(game).steps[0];
@@ -144,7 +144,6 @@ async function heldMoveAcrossReentry(page, request) {
 }
 
 async function heldCreateAcrossHistory(page, context, request, game) {
-  const title = { intrusul: "Intrusul", perechi: "Perechi", conexiuni: "Conexiuni" }[game.key];
   const createPath = `/api/wordgames/${game.key}/games`;
   const documents = documentRequests(page);
   await page.evaluate((key) => localStorage.removeItem(key), activeKey(game));
@@ -163,10 +162,9 @@ async function heldCreateAcrossHistory(page, context, request, game) {
     enteredOld(); await oldHeld; await route.fulfill({ response });
   }, { times: 1 });
   try {
-    await page.getByRole("button", { name: new RegExp(`^Joacă ${title} —`) }).click();
     const oldDelivered = page.waitForResponse((item) => item.request().method() === "POST"
       && new URL(item.url()).pathname === createPath);
-    await page.getByRole("button", { name: /^Joacă(?: →)?$/ }).click();
+    await card(page, game.path).click();
     await oldRequested;
     const newerResponse = await request.post(`${createPath}?seed=38&difficulty=usor`);
     expect(newerResponse.status()).toBe(200);
@@ -209,7 +207,7 @@ async function heldCreateAcrossHistory(page, context, request, game) {
       expect(returned.exiting).toBe(true); expect(returned.same).toBe(true); expect(returned.inert).toBe(false);
     }
     await freshRequested;
-    await expect(page.locator(".game-intro")).toHaveAttribute("aria-busy", "true");
+    await expect(page.locator(".game-frame")).toHaveAttribute("aria-busy", "true");
     expect(await page.evaluate((key) => localStorage.getItem(key), activeKey(game))).toBe(newer.game_id);
     releaseOld();
     expect((await oldDelivered).status()).toBe(200);
@@ -218,7 +216,7 @@ async function heldCreateAcrossHistory(page, context, request, game) {
     // The old create resolves while the frame is present again. It must neither
     // adopt its obsolete id nor unlock the fresh authoritative resume attempt.
     expect(await page.evaluate((key) => localStorage.getItem(key), activeKey(game))).toBe(newer.game_id);
-    await expect(page.locator(".game-intro")).toHaveAttribute("aria-busy", "true");
+    await expect(page.locator(".game-frame")).toHaveAttribute("aria-busy", "true");
     expect(await page.evaluate(() => localStorage.getItem("cat_wordgame_scores_v1"))).toBe(scoresBefore);
     releaseFresh();
     expect((await (await newerDelivered).json()).game_id).toBe(newer.game_id);
@@ -238,10 +236,10 @@ test("home deep link is the Preact shell and an unported card is a document navi
   await expect(page.locator(".roedu-root")).toHaveCount(1);
   expect(navigations).toHaveLength(1);
   const arrived = page.waitForURL(/\/cald-rece$/);
-  await page.getByRole("button", { name: /^Joacă Cald sau Rece —/ }).click();
+  await card(page, "/cald-rece").click();
   await arrived;
   await expectUi(page, "/cald-rece");
-  await expect(page.locator(".game-intro")).toBeVisible();
+  await expect(page.locator(".game-frame")).toBeVisible();
   expect(navigations).toHaveLength(1);
 });
 
@@ -271,7 +269,7 @@ for (const game of ported) {
     await start(page, game);
     expect(navigations).toHaveLength(1);
     expect(fetched).not.toContain("/" + home.file);
-    await page.getByRole("button", { name: "Ieși la lista de jocuri", exact: true }).click();
+    await page.getByRole("button", { name: "Înapoi la jocuri", exact: true }).click();
     await expect(page).toHaveURL(/\/$/);
     await expect(page.getByRole("heading", { name: "Cât de român ești?", exact: true })).toBeVisible();
     await expectUi(page, "/");
@@ -295,14 +293,14 @@ test("every unported route is the frozen legacy bundle", async ({ page }) => {
   const fetched = [], navigations = documentRequests(page);
   page.on("request", (request) => fetched.push(new URL(request.url()).pathname));
   await page.goto("/alchimie?mode=explore");
-  await expect(page.locator(".game-intro")).toBeVisible();
+  await expect(page.locator(".game-frame")).toBeVisible();
   await expect(page.getByRole("navigation", { name: "Modul Alchimie" })).toHaveCount(0);
   expect(fetched).toContain("/" + alchimie.file);
-  await page.getByRole("button", { name: "Ieși la lista de jocuri", exact: true }).click();
+  await page.getByRole("button", { name: "Înapoi la jocuri", exact: true }).click();
   await expect(page).toHaveURL(/\/$/);
-  await page.getByRole("button", { name: /^Joacă Alchimie —/ }).click();
+  await card(page, "/alchimie").click();
   await expect(page).toHaveURL(/\/alchimie$/);
-  await expect(page.locator(".game-intro")).toBeVisible();
+  await expect(page.locator(".game-frame")).toBeVisible();
   expect(fetched.filter((file) => file === "/" + alchimie.file)).toHaveLength(1);
   expect(navigations).toHaveLength(1);
   await page.goto("/not-a-route");
@@ -310,24 +308,23 @@ test("every unported route is the frozen legacy bundle", async ({ page }) => {
   await page.goto("/lant/?challenge=daily");
   await expect(page).toHaveURL(/\/lant\?challenge=daily$/);
   await expectUi(page, "/lant");
-  await expect(page.getByRole("button", { name: "Joacă provocarea zilei", exact: true })).toBeEnabled();
+  await expect(page.getByText("Jocul zilei", { exact: true })).toBeVisible();
 });
 
-test("Home circuit opens a ported daily client-side and an unported daily as a legacy document", async ({ page, request }) => {
+test("Home links open daily games client-side and leave a held resume inert", async ({ page, request }) => {
   const navigations = documentRequests(page);
   await page.goto("/");
-  await page.getByRole("button", { name: "Deschide Intrusul — neterminat azi", exact: true }).click();
-  await expect(page).toHaveURL(/\/intrusul\?challenge=daily$/);
+  await card(page, "/intrusul").click();
+  await expect(page).toHaveURL(/\/intrusul$/);
   await expectUi(page, "/intrusul");
-  await expect(page.getByRole("button", { name: "Joacă provocarea zilei", exact: true })).toBeFocused();
+  await expect(page.getByText("Jocul zilei", { exact: true })).toBeVisible();
   expect(navigations).toHaveLength(1);
   await page.goBack();
   await expect(page).toHaveURL(/\/$/);
-  const arrived = page.waitForURL(/\/lant\?challenge=daily$/);
-  await page.getByRole("button", { name: "Deschide Lanțul Cuvintelor — neterminat azi", exact: true }).click();
-  await arrived;
+  await card(page, "/lant").click();
+  await expect(page).toHaveURL(/\/lant$/);
   await expectUi(page, "/lant");
-  await expect(page.getByRole("button", { name: "Joacă provocarea zilei", exact: true })).toBeEnabled();
+  await expect(page.getByText("Jocul zilei", { exact: true })).toBeVisible();
   expect(navigations).toHaveLength(1);
   await heldDailyResumeDuringExit(page, request);
 });
@@ -355,7 +352,7 @@ test("leaving Intrusul keeps the retained screen inert while a winning reply is 
   // Leave inside one evaluation so the retained frame is observed within the
   // Presence exit (180 ms with real motion), like the original Presence fixture.
   const snapshot = await page.evaluate(async ([board]) => {
-    globalThis.document.querySelector('button[aria-label="Ieși la lista de jocuri"]').click();
+    globalThis.document.querySelector('button[aria-label="Înapoi la jocuri"]').click();
     await new Promise((resolve) => globalThis.requestAnimationFrame(resolve));
     const exiting = globalThis.document.querySelector('.app-content .roedu-presence[data-state="exiting"]');
     const buttons = exiting ? [...exiting.querySelectorAll(`${board} button`)] : [];

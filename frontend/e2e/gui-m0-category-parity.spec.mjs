@@ -6,7 +6,6 @@ import { games, deterministicStarts, openGameOptions } from "./games.mjs";
 
 const GAME_KEYS = ["alchimie", "conexiuni", "contexto", "lant"];
 const LEVELS = ["usor", "normal", "greu"];
-const DIFFICULTY_NAMES = { usor: /^Ușor\b/, normal: /^Normal\b/, greu: /^Greu\b/ };
 const LABELS = {
   istorie: "Istorie", literatura: "Literatură", geografie: "Geografie",
   personalitati: "Personalități", arta_cultura: "Artă și cultură", stiinta: "Știință",
@@ -14,8 +13,8 @@ const LABELS = {
   film_tv: "Film și seriale", meme_net: "Internet și meme", sport: "Sport",
   viata_de_roman: "Viața în România", gastronomie: "Gastronomie",
 };
-const categoryGroup = (page) => page.getByRole("group", { name: "CATEGORIE", exact: true });
-const difficultyGroup = (page) => page.getByRole("group", { name: "DIFICULTATE", exact: true });
+const categoryGroup = (page) => page.getByRole("combobox", { name: "Temă", exact: true });
+const difficultyGroup = (page) => page.getByRole("combobox", { name: "Dificultate", exact: true });
 const labelFor = (category) => LABELS[category.key] ?? "Necunoscut";
 
 async function nativeCategories(request) {
@@ -36,23 +35,22 @@ async function nativeCategories(request) {
 }
 
 async function chooseDifficulty(page, level) {
-  const choice = difficultyGroup(page).getByRole("button", { name: DIFFICULTY_NAMES[level] });
-  await choice.click();
-  await expect(choice).toHaveAttribute("aria-pressed", "true");
+  const choice = difficultyGroup(page);
+  await choice.selectOption(level);
+  await expect(choice).toHaveValue(level);
 }
 
 async function assertShelves(page, categories, game, level) {
-  const group = categoryGroup(page);
-  await expect(group).toBeVisible();
-  const expected = categories.filter((category) => category.available_by_difficulty[game][level])
+  const theme = categoryGroup(page);
+  await expect(theme).toBeVisible();
+  const expected = categories.filter((category) => category.key !== "mixed" && category.available_by_difficulty[game][level])
     .map(labelFor).sort();
-  const buttons = group.getByRole("button");
-  await expect(buttons).toHaveCount(expected.length + 1);
-  await expect(buttons.first()).toHaveText("Toate temele");
-  const actual = await buttons.allTextContents();
+  const options = theme.locator("option");
+  await expect(options).toHaveCount(expected.length + 1);
+  await expect(options.first()).toHaveText("Toate temele");
+  const actual = await options.allTextContents();
   expect(actual.slice(1).map((label) => label.trim()).sort()).toEqual(expected);
-  for (const button of await buttons.all()) await expect(button).toBeEnabled();
-  await expect(group.getByText("Indisponibil la această dificultate", { exact: true })).toHaveCount(0);
+  for (const option of await options.all()) await expect(option).toBeEnabled();
 }
 
 function presentationMatrix(native) {
@@ -77,13 +75,12 @@ for (const key of GAME_KEYS) {
     const metadata = page.waitForResponse((response) => response.request().method() === "GET"
       && new URL(response.url()).pathname === "/api/categories");
     await page.goto(game.path);
+    await openGameOptions(page, game);
     await metadata;
-    await openGameOptions(page, game, { setup: true });
     for (const level of LEVELS) {
       await chooseDifficulty(page, level);
       await assertShelves(page, native.categories, key, level);
-      await expect(categoryGroup(page).getByRole("button", { name: "Toate temele", exact: true }))
-        .toHaveAttribute("aria-pressed", "true");
+      await expect(categoryGroup(page)).toHaveValue("");
     }
   });
 
@@ -103,7 +100,7 @@ for (const key of GAME_KEYS) {
     });
     await deterministicStarts(page, game);
     await page.goto(game.path);
-    await openGameOptions(page, game, { setup: true });
+    await openGameOptions(page, game);
     // Every game has a different projected shelf, detecting a wrong game binding.
     for (const level of LEVELS) {
       await chooseDifficulty(page, level);
@@ -114,19 +111,17 @@ for (const key of GAME_KEYS) {
     const selected = projected.categories.find((category) => category.available_by_difficulty[key].usor);
     expect(selected.available_by_difficulty[key].normal).toBe(false);
     const group = categoryGroup(page);
-    await group.getByRole("button", { name: labelFor(selected), exact: true }).click();
-    await expect(group.getByRole("button", { name: labelFor(selected), exact: true }))
-      .toHaveAttribute("aria-pressed", "true");
-    await expect(group.getByRole("button", { name: "Toate temele", exact: true }))
-      .toHaveAttribute("aria-pressed", "false");
+    await group.selectOption(selected.key);
+    await expect(group).toHaveValue(selected.key);
     await chooseDifficulty(page, "normal");
     await assertShelves(page, projected.categories, key, "normal");
-    await expect(group.getByRole("button", { name: labelFor(selected), exact: true })).toHaveCount(0);
-    await expect(group.getByRole("button", { name: "Toate temele", exact: true }))
-      .toHaveAttribute("aria-pressed", "true");
+    await expect(group.locator(`option[value="${selected.key}"]`)).toHaveCount(0);
+    await expect(group).toHaveValue("");
+    await page.keyboard.press("Escape");
+    await page.evaluate((gameKey) => localStorage.removeItem(`cat_active_game_v1_${gameKey}`), key);
     const created = page.waitForResponse((response) => response.request().method() === "POST"
       && new URL(response.url()).pathname === `/api/wordgames/${key}/games`);
-    await page.getByRole("button", { name: /^Joacă(?: →)?$/, exact: true }).click();
+    await page.reload();
     const response = await created;
     expect(response.status()).toBe(200);
     const query = new URL(response.url()).searchParams;

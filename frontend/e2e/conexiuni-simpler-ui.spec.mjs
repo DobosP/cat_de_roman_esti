@@ -20,11 +20,9 @@ test.beforeEach(async ({ page }) => {
 
 test("all sixteen tiles and the three actions fit in four columns before optional controls", async ({ page }) => {
   if (test.info().project.name === "mobile") await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto(game.path);
-  await expect(page.locator(".game-setup-options")).not.toHaveAttribute("open", "");
   await start(page, game);
   await settle(page);
-  await expect(page.locator(".game-options")).not.toHaveAttribute("open", "");
+  await expect(page.getByRole("dialog")).toHaveCount(0);
   const tiles = page.locator(".connections-grid button");
   await expect(tiles).toHaveCount(16);
   const metrics = await tiles.evaluateAll((buttons) => ({
@@ -50,7 +48,7 @@ test("all sixteen tiles and the three actions fit in four columns before optiona
     expect(bounds.y).toBeGreaterThanOrEqual(metrics.tiles.at(-1).bottom);
     expect(bounds.y + bounds.height).toBeLessThanOrEqual(metrics.height);
   }
-  await expect(page.getByRole("button", { name: /^Indiciu/ })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Indiciu", exact: true })).toBeEnabled();
   await test.info().attach("compact-grid-geometry", { body: JSON.stringify(metrics, null, 2), contentType: "application/json" });
   await test.info().attach("compact-grid", { body: await page.screenshot(), contentType: "image/png" });
 });

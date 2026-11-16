@@ -8,7 +8,7 @@ import { games, deterministicStarts, solution, solve, tabTo } from "./games.mjs"
 const SCORE_KEY = "cat_wordgame_scores_v1";
 const FIXED_TIME = "2026-10-08T12:00:00.000Z";
 const FIXED_MS = Date.parse(FIXED_TIME);
-const TITLES = ["Alchimie", "Intrusul", "Perechi", "Conexiuni", "Cald sau Rece", "Lanțul Cuvintelor"];
+const TITLES = ["Intrusul", "Perechi", "Conexiuni", "Lanțul Cuvintelor", "Cald sau Rece", "Alchimie"];
 const DISABLED_ME = { accounts_enabled: false, authenticated: false, user: null };
 const SAVED_RECEIPT = "77777777-7777-4777-8777-777777777777";
 const LOCAL_ENTRY = { score: 500, detail: "Rezultat local de test", at: FIXED_MS, puzzleKey: "local-existing", difficulty: "normal" };
@@ -41,9 +41,8 @@ const creation = (page, game) => page.waitForResponse((response) => response.req
 const storedScores = (page) => page.evaluate((key) => localStorage.getItem(key), SCORE_KEY);
 
 async function openFreeFromHome(page, game) {
-  await page.getByRole("button", { name: new RegExp(`^Joacă ${TITLES[games.indexOf(game)]} —`) }).click();
   const created = creation(page, game);
-  await page.getByRole("button", { name: /^Joacă(?: →)?$/, exact: true }).click();
+  await page.locator(`.games-grid a[href="${game.path}"]`).click();
   const response = await created;
   expect(response.status()).toBe(200);
   const state = await response.json();
@@ -60,7 +59,7 @@ async function completeFree(page, game) {
 }
 
 async function returnHome(page) {
-  await page.getByRole("button", { name: "Ieși la lista de jocuri", exact: true }).click();
+  await page.locator(".game-result").getByRole("button", { name: "Înapoi la jocuri", exact: true }).click();
   await expect(page.getByRole("heading", { name: "Cât de român ești?", exact: true })).toBeVisible();
 }
 
@@ -122,19 +121,31 @@ test("an eligible fictional adult uploads private rows by POST without restoring
   expect(JSON.stringify(uploads.map(({ body }) => body))).not.toContain(SAVED_RECEIPT);
 });
 
-test("Home keeps the exact six-card order and sole Intrusul highlight without an empty history wall", async ({ page }) => {
+const homeCards = (page) => page.locator(".games-grid a.game-card");
+
+async function openResults(page, keyboard = false) {
+  const results = page.getByRole("button", { name: "Rezultatele mele", exact: true });
+  if (keyboard) {
+    await tabTo(page, results);
+    await page.keyboard.press("Enter");
+  } else {
+    await results.click();
+  }
+  const dialog = page.getByRole("dialog", { name: "Rezultatele mele", exact: true });
+  await expect(dialog).toBeVisible();
+  return dialog;
+}
+
+test("Home keeps the approved six-card order and opens import in the results sheet", async ({ page }) => {
   await anonymous(page);
   await historyFixture(page, {});
   await page.goto("/");
   await expect(page).toHaveTitle("Cât de român ești?");
-  const cards = page.locator(".games-grid .game-card");
-  await expect(cards.locator(".game-card-title")).toHaveText(TITLES);
-  const featured = page.locator(".game-card--featured");
-  await expect(featured).toHaveCount(1);
-  await expect(featured).toHaveAccessibleName("Joacă Intrusul — Începe aici");
-  await expect(page.locator(".history-section")).toBeHidden();
-  const importHistory = page.getByRole("button", { name: "Importă istoricul", exact: true });
-  await expect(importHistory).toBeVisible();
+  await expect(homeCards(page).locator("strong")).toHaveText(TITLES);
+  await expect(homeCards(page).locator("img")).toHaveCount(6);
+  await expect(page.getByRole("button", { name: "Importă istoricul" })).toHaveCount(0);
+  const dialog = await openResults(page, true);
+  const importHistory = dialog.getByRole("button", { name: "Importă istoricul", exact: true });
   const bounds = await importHistory.boundingBox();
   expect(bounds.height).toBeGreaterThanOrEqual(44);
   expect(bounds.width).toBeGreaterThanOrEqual(44);
@@ -143,33 +154,38 @@ test("Home keeps the exact six-card order and sole Intrusul highlight without an
   expect(await storedScores(page)).toBe("{}");
 });
 
-test("Home shows actual retained history instead of its first-play import action", async ({ page }) => {
+test("the results sheet shows retained steps and leaves legacy numeric history intact", async ({ page }) => {
   await anonymous(page);
   const history = existingHistory();
+  const modern = { ...LOCAL_ENTRY, at: FIXED_MS + 1, steps: 2, puzzleKey: "steps-existing" };
+  history.alchimie.recent.push(modern);
+  history.alchimie.played += 1;
   await historyFixture(page, history);
   await page.goto("/");
-  await expect(page.locator(".history-section")).toBeVisible();
-  await expect(page.locator(".history-tabs")).toBeVisible();
-  await expect(page.locator(".history-section").getByText(LOCAL_ENTRY.detail, { exact: true }).first()).toBeVisible();
-  await expect(page.locator(".first-play-tools")).toHaveCount(0);
+  const dialog = await openResults(page);
+  const round = dialog.getByRole("listitem");
+  await expect(round).toHaveCount(1);
+  await expect(round).toContainText("Alchimie");
+  await expect(round).toContainText("2 pași");
+  await expect(dialog.getByText(LOCAL_ENTRY.detail, { exact: true })).toHaveCount(0);
+  await expect(dialog.getByRole("button", { name: "Exportă istoricul" })).toBeVisible();
   expect(await storedScores(page)).toBe(JSON.stringify(history));
 });
 
 for (const width of [320, 390, 640]) {
-  test(`Home retains one whole card column and a usable import control at ${width}px`, async ({ page }) => {
+  test(`Home retains two whole card columns and a usable import control at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 920 });
     await anonymous(page);
     await historyFixture(page, {});
     await page.goto("/");
-    const cards = page.locator(".games-grid .game-card");
-    await expect(cards.locator(".game-card-title")).toHaveText(TITLES);
-    for (const card of await cards.all()) await expect(card).toHaveCSS("opacity", "1");
+    const cards = homeCards(page);
+    await expect(cards.locator("strong")).toHaveText(TITLES);
     const columns = await page.locator(".games-grid").evaluate((grid) =>
       getComputedStyle(grid).gridTemplateColumns.split(/\s+/).filter(Boolean).length);
-    expect(columns).toBe(1);
+    expect(columns).toBe(2);
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
-    const importHistory = page.getByRole("button", { name: "Importă istoricul", exact: true });
-    await importHistory.scrollIntoViewIfNeeded();
+    const dialog = await openResults(page, true);
+    const importHistory = dialog.getByRole("button", { name: "Importă istoricul", exact: true });
     const bounds = await importHistory.boundingBox();
     expect(bounds.height).toBeGreaterThanOrEqual(44);
     expect(bounds.width).toBeGreaterThanOrEqual(44);
@@ -190,7 +206,7 @@ for (const game of games.filter(({ derived }) => derived)) {
     expect(firstQuery.get("previous_game_id")).toBeNull();
     expect(firstQuery.get("daily")).toBeNull();
     const next = creation(page, game);
-    await page.getByRole("button", { name: /^Încă unul →$/, exact: true }).click();
+    await page.getByRole("button", { name: "Încă o rundă", exact: true }).click();
     const response = await next;
     expect(response.status()).toBe(200);
     const query = new URL(response.url()).searchParams;
@@ -226,16 +242,16 @@ for (const game of games.filter(({ derived }) => derived)) {
     await page.goto("/");
     await completeFree(page, game);
     await returnHome(page);
-    await page.getByRole("button", { name: `Deschide ${TITLES[games.indexOf(game)]} — neterminat azi`, exact: true }).click();
+    await page.clock.setFixedTime(new Date("2026-10-09T12:00:00.000Z"));
     const next = creation(page, game);
-    await page.getByRole("button", { name: "Joacă provocarea zilei", exact: true }).click();
+    await page.locator(`.games-grid a[href="${game.path}"]`).click();
     const response = await next;
     expect(response.status()).toBe(200);
     const query = new URL(response.url()).searchParams;
-    expect(query.get("daily")).toBe("2026-10-08");
+    expect(query.get("daily")).toBe("2026-10-09");
     expect(query.get("starter")).toBeNull();
     expect(query.get("previous_game_id")).toBeNull();
-    expect((await response.json()).daily).toBe("2026-10-08");
+    expect((await response.json()).daily).toBe("2026-10-09");
     await expect(page.locator(game.board)).toBeVisible();
     expect(JSON.parse(await storedScores(page))[game.key].played).toBe(1);
   });

@@ -1,25 +1,25 @@
 import { test, expect } from "@playwright/test";
-import { games, gameURL, deterministicStarts, solution, start } from "./games.mjs";
+import { games, gameURL, deterministicStarts, solution, start, openGameOptions } from "./games.mjs";
 
 const quickGames = games.filter(({ derived }) => derived);
 const activate = (locator, testInfo) => testInfo.project.name === "mobile" ? locator.tap() : locator.click();
 
-async function prepareHint(page, request, game) {
+async function prepareHint(page, request, game, last = false) {
   await deterministicStarts(page, game);
   const initial = await start(page, game);
-  const steps = solution(game).steps;
-  const wrongMoves = game.key === "intrusul"
-    ? [{ action: "guess", payload: { id: initial.tiles.find((tile) => tile.id !== steps[0].payload.id).id } }]
-    : steps[1].payload.ids.map((id) => ({ action: "match", payload: { ids: [steps[0].payload.ids[0], id] } }));
-  for (const move of wrongMoves) {
-    const response = await request.post(`${gameURL(game, initial.game_id)}/${move.action}`, { data: move.payload });
-    expect(response.status()).toBe(200);
+  let state = initial;
+  if (last) {
+    while (state.hints_left > 1) {
+      const response = await request.post(`${gameURL(game, initial.game_id)}/hint`);
+      expect(response.status()).toBe(200);
+      state = await response.json();
+    }
+    await page.reload();
   }
-  await page.reload();
-  const hint = page.locator(`.${game.key}-actions`).getByRole("button", { name: /−150 pct/ });
+  const hint = page.getByRole("button", { name: "Indiciu", exact: true });
   await expect(hint).toBeVisible();
   await expect(hint).toBeEnabled();
-  return { initial, hint };
+  return { initial, before: state, hint };
 }
 
 for (const game of quickGames) {
@@ -28,10 +28,9 @@ for (const game of quickGames) {
     await deterministicStarts(page, game);
     await start(page, game);
     await expect(page.locator(".screen")).toHaveCSS("opacity", "1");
-    await expect(page.locator(".game-options")).toHaveCount(0);
-    await expect(page.locator(".game-help")).not.toHaveAttribute("open");
+    await expect(page.getByRole("dialog")).toHaveCount(0);
     await expect(page.locator(`${game.board} button`)).toHaveCount(game.key === "intrusul" ? 4 : 8);
-    await expect(page.locator(`.${game.key}-actions button`)).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Indiciu", exact: true })).toBeEnabled();
     for (const tile of await page.locator(`${game.board} button`).all()) {
       const bounds = await tile.boundingBox();
       expect(bounds.y).toBeGreaterThanOrEqual(0);
@@ -48,7 +47,7 @@ for (const game of quickGames) {
     const initial = await start(page, game);
     // Presentation stress uses a normal-length word; no board or response mutation.
     await page.locator(`${game.board} button strong`).first().evaluate((label) => { label.textContent = "Columbia"; });
-    for (const { width, scale, columns } of [
+    for (const { width, scale, columns: perechiColumns } of [
       { width: 390, scale: 1, columns: 2 },
       { width: 320, scale: 2, columns: 1 },
       { width: 1280, scale: 1, columns: 4 },
@@ -76,6 +75,7 @@ for (const game of quickGames) {
           fontSize: Number.parseFloat(globalThis.getComputedStyle(label).fontSize),
         };
       });
+      const columns = game.key === "intrusul" ? 1 : perechiColumns;
       expect(new Set(metrics.tiles.map(({ rect }) => Math.round(rect.x))).size, `${width}px / ${scale * 100}% text`).toBe(columns);
       expect(metrics.pageWidth).toBeLessThanOrEqual(width);
       expect(metrics.fragments, "Columbia must remain a readable word").toHaveLength(1);
@@ -94,29 +94,32 @@ for (const game of quickGames) {
     expect(await (await request.get(gameURL(game, initial.game_id))).json()).toEqual(initial);
   });
 
-  test(`${game.key} makes an unlocked hint explicit, priced and persistent`, async ({ page, request }, testInfo) => {
+  test(`${game.key} makes an immediate one-step hint explicit and persistent`, async ({ page, request }, testInfo) => {
     const { initial, hint } = await prepareHint(page, request, game);
     const mutations = [];
     page.on("request", (request) => {
       if (request.method() === "POST" && new URL(request.url()).pathname.startsWith(`${gameURL(game, initial.game_id)}/`)) mutations.push(request.url());
     });
-    await activate(page.locator(".game-help > summary"), testInfo);
+    await openGameOptions(page, game);
+    await page.keyboard.press("Escape");
     expect(mutations).toHaveLength(0);
     const response = page.waitForResponse((response) => response.request().method() === "POST" &&
       new URL(response.url()).pathname === `${gameURL(game, initial.game_id)}/hint`);
     await activate(hint, testInfo);
     const earned = await (await response).json();
     expect(earned.hints_used).toBe(1);
-    const cue = page.locator(game.key === "intrusul" ? ".intrusul-clue" : ".perechi-hint");
-    await expect(cue).toBeVisible();
-    await expect(page.locator(`.${game.key}-actions button`)).toHaveCount(0);
+    expect(earned.steps).toBe(initial.steps + 1);
+    const cue = page.locator(".coach-line");
+    const clueText = earned.clue?.message ?? "Atinge cele două cuvinte marcate.";
+    await expect(cue).toHaveText(clueText);
+    await expect(hint).toHaveCount(earned.hints_left ? 1 : 0);
     await page.reload();
-    await expect(cue).toBeVisible();
+    await expect(cue).toHaveText(clueText);
     expect(mutations).toHaveLength(1);
   });
 
   test(`${game.key} restores usable board focus after keyboard hint activation`, async ({ page, request }) => {
-    const { initial, hint } = await prepareHint(page, request, game);
+    const { initial, before, hint } = await prepareHint(page, request, game, true);
     const mutations = [];
     page.on("request", (request) => {
       if (request.method() === "POST" && new URL(request.url()).pathname.startsWith(`${gameURL(game, initial.game_id)}/`)) mutations.push(request.url());
@@ -125,7 +128,7 @@ for (const game of quickGames) {
     const response = page.waitForResponse((response) => response.request().method() === "POST" &&
       new URL(response.url()).pathname === `${gameURL(game, initial.game_id)}/hint`);
     await page.keyboard.press("Enter");
-    expect((await (await response).json()).hints_used).toBe(1);
+    expect((await (await response).json()).hints_used).toBe(before.hints_used + 1);
     await expect(hint).toHaveCount(0);
     const focused = page.locator(`${game.board} button:focus`);
     await expect(focused).toHaveCount(1);
@@ -151,15 +154,14 @@ for (const game of quickGames) {
       await hint.focus();
       await page.keyboard.press("Enter");
       await requested;
-      const options = page.locator(".game-help > summary");
+      const options = page.getByRole("button", { name: "Cum se joacă", exact: true });
       await options.focus();
       await page.keyboard.press("Enter");
-      await expect(page.locator(".game-help")).toHaveAttribute("open", "");
-      await expect(options).toBeFocused();
+      const dialogHeading = page.getByRole("dialog").getByRole("heading", { level: 2 });
+      await expect(dialogHeading).toBeFocused();
       release();
-      await expect(hint).toHaveCount(0);
-      await expect(page.locator(game.key === "intrusul" ? ".intrusul-clue" : ".perechi-hint")).toBeVisible();
-      await expect(options).toBeFocused();
+      await expect(page.locator(".coach-line")).toContainText(/Tema|Legătura|Trei cuvinte|marcate/);
+      await expect(dialogHeading).toBeFocused();
       await expect(page.locator(`${game.board} button:focus`)).toHaveCount(0);
     } finally {
       release();
@@ -180,7 +182,7 @@ test("Perechi cancels on retap and submits a pair on the second word only", asyn
   });
   await activate(first, testInfo);
   await expect(first).toHaveAttribute("aria-pressed", "true");
-  await expect(page.locator(".perechi-instruction")).toContainText(step.labels[0]);
+  await expect(page.locator(".coach-line")).toContainText(step.labels[0]);
   await expect(page.getByRole("button", { name: "Golește", exact: true })).toHaveCount(0);
   await activate(first, testInfo);
   await expect(first).toHaveAttribute("aria-pressed", "false");

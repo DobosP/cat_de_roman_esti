@@ -31,12 +31,12 @@ async function recovery(page) {
   expect(typeof rejected.message).toBe("string");
   await expect(field(page)).toHaveValue(rejectedWord);
   await expect(recoveryCard(page, rejected.message)).toBeVisible();
-  await expect(page.getByRole("status").filter({ hasText: rejected.message })).toHaveCount(1);
+  await expect(page.getByRole("alert").filter({ hasText: rejected.message })).toHaveCount(1);
   return rejected;
 }
 async function cleared(page, message) {
   await expect(recoveryCard(page, message)).toHaveCount(0);
-  await expect(page.getByRole("status").filter({ hasText: message })).toHaveCount(0);
+  await expect(page.getByRole("alert").filter({ hasText: message })).toHaveCount(0);
 }
 test.beforeEach(async ({ page }) => deterministicStarts(page, game));
 
@@ -56,12 +56,12 @@ test("a real corrected target win retains the actual server correction message i
   expect(won.message).toBe(`Am înțeles: ${won.target.label}.`);
   expect(won).not.toHaveProperty("needs_confirmation");
   expect(mutations).toEqual([{ path: `${gameURL(game, initial.game_id)}/guess`, body: { text: typed } }]);
-  const heading = page.getByRole("heading", { name: "Ai găsit conceptul!", exact: true });
+  const heading = page.getByRole("heading", { name: "Ai găsit cuvântul!", exact: true });
   await expect(heading).toBeVisible();
-  const result = page.getByRole("status").filter({ has: heading });
+  const result = page.locator(".game-result").filter({ has: heading });
   await expect(result).toHaveCount(1);
   await expect(result).toContainText(won.message);
-  await expect(result.locator("span.muted").filter({ hasText: won.message })).toHaveCount(1);
+  await expect(result.locator(".muted").filter({ hasText: won.message })).toHaveCount(1);
   await expect(page.locator(".contexto-confirm-chip")).toHaveCount(0);
   await expect(field(page)).toHaveValue(""); await expect(field(page)).toBeDisabled();
 });
@@ -98,7 +98,7 @@ test("a real paid clue clears obsolete unknown recovery without converting it to
   const received = await response; expect(received.status()).toBe(200); const state = await received.json();
   expect(state.game_id).toBe(initial.game_id); expect(state.clues_used).toBe(rejected.clues_used + 1);
   expect(state.attempts).toBe(rejected.attempts); expect(state.won).toBe(false);
-  await expect(page.getByLabel("Indicii folosite", { exact: true })).toBeVisible();
+  await expect(page.locator(".coach-line")).toBeVisible();
   await cleared(page, rejected.message);
   expect(mutations.map(({ path }) => path)).toEqual([`${gameURL(game, initial.game_id)}/clue`]);
 });
@@ -106,14 +106,14 @@ test("a real paid clue clears obsolete unknown recovery without converting it to
 test("real giveup clears obsolete unknown recovery from the terminal result without posting another guess", async ({ page }) => {
   const initial = await start(page, game), rejected = await recovery(page), mutations = traffic(page);
   await openGameOptions(page, game);
-  await page.getByRole("button", { name: "Arată răspunsul", exact: true }).click();
+  await page.getByRole("button", { name: "Renunț la rundă și vreau să văd răspunsul", exact: true }).click();
   const response = responseFor(page, initial.game_id, "giveup");
   await page.getByRole("button", { name: "Da, arată", exact: true }).click();
   const received = await response; expect(received.status()).toBe(200); const state = await received.json();
   expect(state.game_id).toBe(initial.game_id); expect(state.gave_up).toBe(true); expect(state.won).toBe(false);
   const heading = page.getByRole("heading", { name: "Conceptul secret era:", exact: true });
   await expect(heading).toBeVisible();
-  await expect(page.getByRole("status").filter({ has: heading })).not.toContainText(rejected.message);
+  await expect(page.locator(".game-result").filter({ has: heading })).not.toContainText(rejected.message);
   await cleared(page, rejected.message);
   expect(mutations.map(({ path }) => path)).toEqual([`${gameURL(game, initial.game_id)}/giveup`]);
 });

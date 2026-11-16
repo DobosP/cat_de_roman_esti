@@ -1,21 +1,17 @@
 // Authored NOT RUN. These are ordinary native API/DOM presentation assertions.
 // No private React access, synthetic derived board or backend qualification claim.
 import { test, expect } from "@playwright/test";
-import { games, gameURL, deterministicStarts, solution, start, act, solve } from "./games.mjs";
+import { games, gameURL, deterministicStarts, solution, start, solve } from "./games.mjs";
 
 const quick = games.filter(({ derived }) => derived);
 const perechi = quick.find(({ key }) => key === "perechi");
 const intrusul = quick.find(({ key }) => key === "intrusul");
-const STARTER = "Primele runde sunt mai blânde. Câștigă una și deblochezi tot catalogul.";
 const escape = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 const tile = (page, game, label) => page.locator(game.board).getByRole("button", { name: new RegExp(`^${escape(label)}(?:,|$)`) });
 const created = (page, game) => page.waitForResponse((response) => response.request().method() === "POST"
   && new URL(response.url()).pathname === `/api/wordgames/${game.key}/games`);
 const actionReply = (page, game, id, action) => page.waitForResponse((response) => response.request().method() === "POST"
   && new URL(response.url()).pathname === `${gameURL(game, id)}/${action}`);
-const hintLabel = (game) => game.key === "intrusul" ? "💡 Arată indiciul · −150 pct" : "💡 Arată o pereche · −150 pct";
-const remaining = (value) => `${value} ${value === 1 ? "rămasă" : "rămase"}`;
-
 async function heldCreate(page, game) {
   let arrive, release;
   const requested = new Promise((resolve) => { arrive = resolve; });
@@ -36,110 +32,94 @@ async function heldCreate(page, game) {
 }
 
 for (const game of quick) {
-  test(`${game.key} exposes its exact initial locked-hint threshold and only prices the unlocked action`, async ({ page }) => {
+  test(`${game.key} immediate hints spend steps without spending attempts`, async ({ page, request }) => {
     await deterministicStarts(page, game);
-    const initial = await start(page, game), steps = solution(game).steps;
-    const lockedText = game.key === "intrusul"
-      ? "Indiciu disponibil după prima greșeală." : "Indiciu disponibil după două greșeli.";
-    await expect(page.getByText(lockedText, { exact: true })).toBeVisible();
-    await expect(page.getByRole("button", { name: hintLabel(game), exact: true })).toHaveCount(0);
-    const header = page.locator(".game-shell-header");
-    await expect(header.getByText("GREȘELI", { exact: true })).toBeVisible();
-    await expect(header.getByText(remaining(initial.remaining_mistakes), { exact: true })).toBeVisible();
-    const wrong = game.key === "intrusul"
-      ? initial.tiles.filter(({ id }) => id !== steps[0].payload.id).slice(0, 1)
-        .map(({ id, label }) => ({ action: "guess", payload: { id }, labels: [label] }))
-      : steps[1].payload.ids.map((id) => ({ action: "match", payload: { ids: [steps[0].payload.ids[0], id] },
-        labels: [steps[0].payload.ids[0], id].map((key) => initial.tiles.find(({ id }) => id === key).label) }));
-    let state;
-    for (const [index, step] of wrong.entries()) {
-      const response = await act(page, game, step); expect(response.status()).toBe(200); state = await response.json();
-      expect(state.won).toBe(false); expect(state.lost).toBe(false);
-      expect(state.remaining_mistakes).toBe(initial.remaining_mistakes - index - 1);
-      await expect(header.getByText(remaining(state.remaining_mistakes), { exact: true })).toBeVisible();
-      if (game.key === "perechi" && index === 0) {
-        await expect(page.getByText(lockedText, { exact: true })).toBeVisible();
-        await expect(page.getByRole("button", { name: hintLabel(game), exact: true })).toHaveCount(0);
-      }
+    const initial = await start(page, game);
+    await expect(page.getByText("Costă un pas.", { exact: true })).toBeVisible();
+    const hint = page.getByRole("button", { name: "Indiciu", exact: true });
+    let last = initial;
+    for (let spent = 1; spent <= initial.hints_left; spent += 1) {
+      const response = actionReply(page, game, initial.game_id, "hint");
+      await hint.click();
+      const received = await response;
+      expect(received.status()).toBe(200);
+      last = await received.json();
+      expect(last.steps).toBe(spent);
+      expect(last.remaining_mistakes).toBe(initial.remaining_mistakes);
+      expect(last.hints_left).toBe(initial.hints_left - spent);
     }
-    expect(state.hint_available).toBe(true);
-    const hint = page.getByRole("button", { name: hintLabel(game), exact: true });
-    await expect(hint).toBeVisible(); await expect(hint).toBeEnabled();
-    await expect(page.getByText(lockedText, { exact: true })).toHaveCount(0);
-    await expect(hint).toHaveAttribute("title", game.key === "intrusul"
-      ? "Arată legătura celor trei cuvinte. Costă 150 de puncte."
-      : "Marchează o pereche nerezolvată. Costă 150 de puncte.");
+    await expect(page.getByRole("button", { name: "Fără indicii" })).toBeDisabled();
+    const extra = await request.post(gameURL(game, initial.game_id) + "/hint");
+    expect(extra.status()).toBe(400);
+    const current = await (await request.get(gameURL(game, initial.game_id))).json();
+    expect(current.steps).toBe(last.steps);
+    expect(current.hint_level).toBe(last.hint_level);
+    await expect(page.getByRole("status").filter({ hasText: /indiciu|temă|pereche/i })).toBeVisible();
   });
 
-  test(`${game.key} successful held creation has exact busy header copy and one native create`, async ({ page }) => {
-    await deterministicStarts(page, game); await page.goto(game.path);
+  test(`${game.key} held initial creation keeps one pending frame and issues one request`, async ({ page }) => {
+    await deterministicStarts(page, game);
     const hold = await heldCreate(page, game), response = created(page, game);
-    const play = page.getByRole("button", { name: /^Joacă(?: →)?$/ });
-    await play.click(); await hold.requested;
+    await page.goto(game.path);
+    await hold.requested;
     try {
-      const header = page.getByRole("button", { name: "Se pregătește jocul", exact: true });
-      await expect(header).toBeDisabled(); await expect(header).toHaveAttribute("aria-busy", "true");
-      await expect(header).toContainText("Se pregătește…");
-      await expect(play).toBeDisabled();
-      await expect(page.locator(".game-intro")).toHaveAttribute("inert", "");
-      await expect(page.locator(".game-intro")).toHaveAttribute("aria-busy", "true");
-      await play.dispatchEvent("click"); await header.dispatchEvent("click");
-      await page.keyboard.press("Enter"); expect(hold.captured).toHaveLength(1);
+      await expect(page.locator(".game-frame")).toHaveAttribute("aria-busy", "true");
+      await expect(page.locator(game.board)).toHaveCount(0);
+      await page.keyboard.press("Enter");
+      expect(hold.captured).toHaveLength(1);
     } finally { hold.release(); }
-    const received = await response; expect(received.status()).toBe(200);
+    expect((await response).status()).toBe(200);
     await expect(page.locator(game.board)).toBeVisible();
-    const exit = page.getByRole("button", { name: "Ieși la lista de jocuri", exact: true });
-    await expect(exit).toBeEnabled(); await expect(exit).not.toHaveAttribute("aria-busy", "true");
+    await expect(page.locator(".game-frame")).not.toHaveAttribute("aria-busy", "true");
     expect(hold.captured).toHaveLength(1);
   });
 
-  test(`${game.key} successful held replay disables result actions and retains exact pending labels with one create`, async ({ page }) => {
-    await deterministicStarts(page, game); await start(page, game);
-    const won = await solve(page, game, solution(game).steps); expect(won.won).toBe(true);
-    const copy = page.getByRole("button", { name: "Copiază rezultatul", exact: true });
-    await expect(copy).toBeVisible();
+  test(`${game.key} held new round disables duplicate result actions`, async ({ page }) => {
+    await deterministicStarts(page, game);
+    await start(page, game);
+    await solve(page, game, solution(game).steps);
+    const result = page.locator(".game-result");
+    const again = result.getByRole("button", { name: "Încă o rundă" });
     const hold = await heldCreate(page, game), response = created(page, game);
-    await page.getByRole("button", { name: "Încă unul →", exact: true }).click();
+    await again.click();
     await hold.requested;
     try {
-      const pending = page.getByRole("button", { name: "Se pregătește…", exact: true });
-      await expect(pending).toBeDisabled(); await expect(copy).toBeDisabled();
-      await expect(page.getByRole("button", { name: "Meniu", exact: true })).toBeDisabled();
-      const header = page.getByRole("button", { name: "Se pregătește jocul", exact: true });
-      await expect(header).toBeDisabled(); await expect(header).toHaveAttribute("aria-busy", "true");
-      await expect(header).toContainText("Se pregătește…");
-      await pending.dispatchEvent("click"); await page.keyboard.press("Enter");
+      await expect(again).toBeDisabled();
+      await expect(page.locator(".game-frame")).toHaveAttribute("aria-busy", "true");
+      await again.dispatchEvent("click");
       expect(hold.captured).toHaveLength(1);
     } finally { hold.release(); }
-    const received = await response; expect(received.status()).toBe(200);
+    expect((await response).status()).toBe(200);
     await expect(page.locator(game.board)).toBeVisible();
-    await expect(copy).toHaveCount(0); expect(hold.captured).toHaveLength(1);
+    await expect(result).toHaveCount(0);
+    expect(hold.captured).toHaveLength(1);
   });
 
-  test(`${game.key} starter explanation is visible before graduation and absent on its later intro`, async ({ page }) => {
-    await deterministicStarts(page, game); await page.goto(game.path);
-    await expect(page.getByText(STARTER, { exact: true })).toBeVisible();
-    await start(page, game); const won = await solve(page, game, solution(game).steps); expect(won.won).toBe(true);
-    await expect.poll(() => page.evaluate((key) => JSON.parse(localStorage.getItem("cat_wordgame_scores_v1") || "{}")[key]?.nonDailyWon, game.key)).toBe(true);
-    await page.getByRole("button", { name: "Meniu", exact: true }).click();
-    await expect(page).toHaveURL(/\/$/); await page.goto(game.path);
-    await expect(page.getByRole("button", { name: /^Joacă(?: →)?$/ })).toBeVisible();
-    await expect(page.getByText(STARTER, { exact: true })).toHaveCount(0);
+  test(`${game.key} only free starts use the starter board option`, async ({ page }) => {
+    await deterministicStarts(page, game);
+    const first = created(page, game);
+    await start(page, game);
+    expect(new URL((await first).url()).searchParams.get("starter")).toBe("1");
+    await solve(page, game, solution(game).steps);
+    await expect.poll(() => page.evaluate((key) =>
+      JSON.parse(localStorage.getItem("cat_wordgame_scores_v1") || "{}")[key]?.nonDailyWon, game.key)).toBe(true);
+    const next = created(page, game);
+    await page.locator(".game-result").getByRole("button", { name: "Încă o rundă" }).click();
+    expect(new URL((await next).url()).searchParams.get("starter")).toBe("0");
   });
 }
 
-test("Intrusul daily HUD shows only daily/error state without an invented level badge", async ({ page }) => {
+test("Intrusul daily frame identifies today's board without introducing a difficulty label", async ({ page }) => {
   await page.clock.setFixedTime(new Date("2026-10-08T12:00:00.000Z"));
-  await deterministicStarts(page, intrusul); await page.goto(intrusul.path);
   const response = created(page, intrusul);
-  await page.getByRole("button", { name: "Provocarea zilei", exact: true }).click();
-  const received = await response; expect(received.status()).toBe(200); const state = await received.json();
-  expect(state.daily).toBe("2026-10-08");
-  const header = page.locator(".game-shell-header");
-  await expect(header.getByText("ZILNIC", { exact: true })).toBeVisible();
-  await expect(header.getByText("GREȘELI", { exact: true })).toBeVisible();
-  await expect(header.getByText(remaining(state.remaining_mistakes), { exact: true })).toBeVisible();
-  await expect(header.getByText("NIVEL", { exact: true })).toHaveCount(0);
+  await page.goto(intrusul.path);
+  const received = await response;
+  expect(received.status()).toBe(200);
+  expect((await received.json()).daily).toBe("2026-10-08");
+  expect(new URL(received.url()).searchParams.get("starter")).toBeNull();
+  const status = page.locator(".game-frame-status");
+  await expect(status.getByText("Jocul zilei")).toBeVisible();
+  await expect(status).not.toContainText(/nivel|greu|normal|ușor/i);
 });
 
 async function keyboardPair(page, state, step, focusedId) {
@@ -185,8 +165,7 @@ test("real Perechi earned pairs leave the grid and keyboard focus follows next, 
   expect(state.won).toBe(true);
   const heading = page.getByRole("heading", { name: "Toate se potrivesc!", exact: true });
   await expect(heading).toBeVisible();
-  const owner = page.locator('div[tabindex="-1"]').filter({ has: heading });
-  await expect(owner).toHaveCount(1); await expect(owner).toBeFocused();
+  await expect(heading).toBeFocused();
 });
 
 test("Perechi preserves deliberately moved help focus while a real keyboard match response is held", async ({ page }) => {
@@ -200,7 +179,7 @@ test("Perechi preserves deliberately moved help focus while a real keyboard matc
   }, { times: 1 });
   const response = keyboardPair(page, state, step, step.payload.ids[1]);
   await requested;
-  const help = page.locator(".game-help > summary");
+  const help = page.getByRole("button", { name: "Cum se joacă" });
   try { await help.focus(); await expect(help).toBeFocused(); }
   finally { release(); }
   const received = await response; expect(received.status()).toBe(200); const matched = await received.json();
@@ -245,6 +224,5 @@ test("real Perechi terminal loss moves keyboard-owned tile focus to the authorit
   await expect(page.locator(perechi.board)).toHaveCount(0);
   const heading = page.getByRole("heading", { name: "Acestea erau perechile", exact: true });
   await expect(heading).toBeVisible();
-  const owner = page.locator('div[tabindex="-1"]').filter({ has: heading });
-  await expect(owner).toHaveCount(1); await expect(owner).toBeFocused();
+  await expect(heading).toBeFocused();
 });

@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { games, activeKey, deterministicStarts, gameURL, start } from "./games.mjs";
 
 const game = games.find(({ key }) => key === "lant");
-const hints = (page) => page.getByRole("button", { name: /💡 (?:Indiciu|Mai clar)/ });
+const hints = (page) => page.getByRole("button", { name: /^(?:Indiciu|Fără indicii)$/ });
 const tapOrClick = (button) => test.info().project.name === "mobile" ? button.tap() : button.click();
 const responseFor = (page, id, action) => page.waitForResponse((response) =>
   response.request().method() === "POST" &&
@@ -22,9 +22,8 @@ test("current word, target and all local choices fit before the optional control
   const initial = await start(page, game);
   await expect(page.locator(".lant-current")).toContainText(initial.current.label);
   await expect(page.locator(".lant-target")).toContainText(initial.target.label);
-  const options = page.locator(".game-options");
-  await expect(options).not.toHaveAttribute("open", "");
-  await expect(page.locator(".breadcrumb-trail")).toBeHidden();
+  await expect(page.getByRole("dialog")).toHaveCount(0);
+  await expect(page.getByRole("group", { name: "Traseul parcurs" })).toContainText(initial.start.label);
   const choices = page.locator(".lant-choice-grid button");
   await expect(choices).toHaveCount(initial.choices.length);
   const measurements = await choices.evaluateAll((buttons) => ({
@@ -122,7 +121,7 @@ test("a delayed exact-hint hop preserves focus moved deliberately to game option
   await page.keyboard.press("Space");
   await requested;
   await expect(choice).toBeDisabled();
-  const options = page.locator(".game-options > summary");
+  const options = page.getByRole("button", { name: "Cum se joacă", exact: true });
   await options.focus();
   await expect(options).toBeFocused();
   release();
@@ -150,23 +149,25 @@ test("keyboard focus follows a consumed hint to a usable next word on either poi
   expect(moved.moves).toBe(2);
 });
 
-test("'Începe alt lanț' abandons the board and re-entering opens the intro, not the old board", async ({ page }) => {
+test("giving up shows a result and leaves the next visit ready for a new round", async ({ page }) => {
   const initial = await start(page, game);
-  await expect(page.getByRole("button", { name: "Începe alt lanț", exact: true })).toBeHidden();
-  await page.locator(".game-options > summary").click();
-  const giveUp = page.getByRole("button", { name: "Începe alt lanț", exact: true });
-  await expect(giveUp).toHaveAttribute("title", "Renunță la acest lanț și alege altul");
+  const giveUp = page.getByRole("button", { name: "Renunț la rundă", exact: true });
+  await expect(giveUp).toHaveCount(0);
+  await page.getByRole("button", { name: "Cum se joacă", exact: true }).click();
   await tapOrClick(giveUp);
-  const play = page.getByRole("button", { name: /^Joacă(?: →)?$/ });
-  await expect(play).toBeEnabled();
+  const result = page.locator(".game-result");
+  await expect(result.getByRole("heading", { name: "Ai renunțat la rundă" })).toBeFocused();
   expect(await page.evaluate((key) => localStorage.getItem(key), activeKey(game))).toBeNull();
-  let reads = 0;
+
+  let oldReads = 0;
   page.on("request", (request) => {
-    if (request.method() === "GET" && new URL(request.url()).pathname === gameURL(game, initial.game_id)) reads += 1;
+    if (request.method() === "GET" && new URL(request.url()).pathname === gameURL(game, initial.game_id)) oldReads += 1;
   });
-  await page.goto("/");
-  await page.getByRole("button", { name: /^Joacă Lanțul Cuvintelor —/ }).click();
-  await expect(play).toBeEnabled();
-  await expect(page.locator(game.board)).toHaveCount(0);
-  expect(reads).toBe(0);
+  await result.getByRole("button", { name: "Înapoi la jocuri", exact: true }).click();
+  const creation = page.waitForResponse((response) => response.request().method() === "POST"
+    && new URL(response.url()).pathname === "/api/wordgames/lant/games");
+  await page.getByRole("link", { name: /Lanțul Cuvintelor/ }).click();
+  expect((await (await creation).json()).game_id).not.toBe(initial.game_id);
+  await expect(page.locator(game.board)).toBeVisible();
+  expect(oldReads).toBe(0);
 });

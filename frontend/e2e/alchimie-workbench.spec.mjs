@@ -56,7 +56,7 @@ async function measure(page, testInfo, phase) {
       viewport: { width: globalThis.innerWidth, height: globalThis.innerHeight },
       pageWidth: globalThis.document.documentElement.scrollWidth,
       screen: { ...box(screen), width: screen.clientWidth, scrollWidth: screen.scrollWidth },
-      header: box(globalThis.document.querySelector(".game-shell-header")),
+      header: box(globalThis.document.querySelector(".game-frame-band")),
       components: selectors.flatMap((selector) =>
         [...globalThis.document.querySelectorAll(selector)].map((element, index) => ({
           selector, index, ...box(element), clientWidth: element.clientWidth,
@@ -80,14 +80,14 @@ async function measure(page, testInfo, phase) {
 
 test.beforeEach(async ({ page }) => deterministicStarts(page, game));
 
-test("the initial game puts words above 500px and collapses secondary controls", async ({ page }, testInfo) => {
+test("the initial game puts words above 500px and keeps secondary controls in Help", async ({ page }, testInfo) => {
   const mobile = testInfo.project.name === "mobile";
   await page.setViewportSize({ width: mobile ? 390 : 1280, height: mobile ? 844 : 850 });
   const initial = await start(page, game);
   await expect(page.locator(".alchemy-workspace > .alchemy-bench")).toHaveCount(1);
   await expect(page.locator(".alchemy-workspace > .alchemy-inventory-panel")).toHaveCount(1);
   await expect(page.locator(".alchemy-bench .alchemy-target")).toContainText(initial.target.label);
-  await expect(page.locator(".alchemy-bench .alchemy-round-count")).toHaveText("0 combinații");
+  await expect(page.locator(".game-frame-status")).toContainText("0 combinații");
   await expect(page.getByRole("group", { name: "Primul cuvânt", exact: true })).toBeVisible();
   await expect(page.getByRole("group", { name: "Al doilea cuvânt", exact: true })).toBeVisible();
   await expect(page.locator(".alchemy-ingredient-slot")).toHaveCount(2);
@@ -102,10 +102,8 @@ test("the initial game puts words above 500px and collapses secondary controls",
   await expect(search(page)).toBeVisible();
   await expect(page.getByRole("button", { name: "Rețete", exact: true })).toBeVisible();
   await expect(page.getByRole("button", { name: /Reia același joc/ })).toBeHidden();
-  for (const [selector, name] of [[".alchemy-menu", "Opțiuni de joc"]]) {
-    await expect(page.locator(selector)).not.toHaveAttribute("open");
-    await expect(page.locator(selector).locator(":scope > summary")).toContainText(name);
-  }
+  await expect(page.getByRole("dialog", { name: "Cum se joacă Alchimie" })).toBeHidden();
+  await expect(page.getByRole("button", { name: "Cum se joacă", exact: true })).toBeVisible();
   const metrics = await measure(page, testInfo, "initial-direct-craft");
   for (const control of [page.locator(".alchemy-target"), inventory(page).getByRole("button").first()]) {
     await expect(control).toBeInViewport({ ratio: 1 });
@@ -156,7 +154,7 @@ for (const keyboard of [false, true]) {
     await expect(page.locator(".alchemy-reaction-history .alchemy-reaction-result").first()).toBeHidden();
     for (const label of steps[0].labels) await expect(page.locator(".alchemy-last-reaction")).toContainText(label);
     await expect(page.locator(".alchemy-last-reaction .alchemy-result-emphasis")).toHaveText(earned.label);
-    await expect(page.locator(".alchemy-bench .alchemy-round-count")).toHaveText("1 combinație");
+    await expect(page.locator(".game-frame-status")).toContainText("1 combinație");
     await search(page).press("Escape");
     await expect(inventory(page).locator(".alchemy-word-label")).toHaveText(discovery.inventory.map((item) => item.label));
     const use = useLastResult(page, earned.label);
@@ -225,7 +223,7 @@ test("a delayed discovery preserves focus moved to another control while the com
   const response = responseFor(page, initial.game_id);
   await page.keyboard.press("Enter");
   await requested;
-  const otherControl = page.locator(".alchemy-menu > summary");
+  const otherControl = page.getByRole("button", { name: "Cum se joacă", exact: true });
   try {
     await tabTo(page, otherControl);
     await expect(otherControl).toBeFocused();

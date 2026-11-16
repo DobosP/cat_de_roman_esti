@@ -2,6 +2,7 @@ import { test, expect } from "@playwright/test";
 import { games, activeKey, gameURL, deterministicStarts, solution, start, act } from "./games.mjs";
 
 const game = games.find(({ key }) => key === "lant");
+const cueOnly = ({ steps, hints_left, hint_level, perfect, ...cue }) => cue;
 const scoresKey = "cat_wordgame_scores_v1";
 const field = (page) => page.getByRole("textbox", { name: "Următorul concept" });
 const verify = (page) => page.getByRole("button", { name: "Verifică jocul", exact: true });
@@ -88,7 +89,7 @@ async function approachTarget(page) {
   }
 }
 
-const hintButton = (page) => page.getByRole("button", { name: /💡 (?:Indiciu|Mai clar)/ });
+const hintButton = (page) => page.getByRole("button", { name: /^(?:Indiciu|Fără indicii)$/ });
 async function askHint(page, id) {
   const response = responseFor(page, id, "hint");
   await hintButton(page).click();
@@ -111,8 +112,7 @@ test("a lost winning hop adopts the server result and records it once without re
   expect(counts).toEqual({ reads: 1, mutations: 1 });
   await expect(page.getByText("EȘTI ACUM LA", { exact: true }).locator("..").getByText(server.current.label, { exact: true })).toHaveCSS("opacity", "1");
   await page.screenshot({ path: test.info().outputPath("recovered-win.png"), fullPage: true });
-  await page.reload();
-  await expect(page.getByRole("button", { name: /^Joacă(?: →)?$/ })).toBeEnabled();
+  await start(page, game);
   expect(await played(page)).toBe(1);
 });
 
@@ -125,7 +125,7 @@ test("a lost earned hint restores the exact stage and resume does not escalate i
   await expect(page.locator(".lant-hint-panel")).toBeVisible();
   await expect(hintButton(page)).toBeEnabled();
   const server = await (await request.get(gameURL(game, initial.game_id))).json();
-  expect(server.earned_hint).toEqual(committed());
+  expect(server.earned_hint).toEqual(cueOnly(committed()));
   const firstStage = server.earned_hint.stage;
   expect(["direction", "alternatives"]).toContain(firstStage);
   const heading = firstStage === "direction" ? "O DIRECȚIE" : "VARIANTE UTILE";
@@ -157,7 +157,7 @@ test("a lost undo restores the earlier position and discards help earned at the 
   await page.getByRole("button", { name: "Înapoi", exact: true }).click();
   expect((await response).status()).toBe(503);
   await expect(field(page)).toBeEnabled();
-  await expect(page.locator(".hud")).toContainText("0 salturi");
+  await expect(page.locator(".game-frame-status")).toContainText("0 salturi");
   await expect(page.locator(".lant-hint-panel")).toHaveCount(0);
   const server = await (await request.get(gameURL(game, initial.game_id))).json();
   expect(server.current).toEqual(initial.current);
@@ -199,7 +199,7 @@ test("failed verification locks mutations and its persistent retry only reads", 
   await expect(field(page)).toBeEnabled();
   await expect(field(page)).toHaveValue("");
   await expect(verify(page)).toHaveCount(0);
-  await expect(page.locator(".hud")).toContainText("1 salt");
+  await expect(page.locator(".game-frame-status")).toContainText("1 salt");
   expect(counts).toEqual({ reads: 2, mutations: 1 });
   const server = await (await request.get(gameURL(game, initial.game_id))).json();
   expect(server.moves).toBe(1);
@@ -221,7 +221,7 @@ test("a failure before commit keeps the input and earned help without an extra r
   expect(["direction", "alternatives"]).toContain(earned.stage);
   await expect(page.getByText(heading, { exact: true })).toBeVisible();
   expect(await (await request.get(gameURL(game, initial.game_id))).json()).toEqual(before);
-  expect(before.earned_hint).toEqual(earned);
+  expect(before.earned_hint).toEqual(cueOnly(earned));
   expect(counts).toEqual({ reads: 1, mutations: 1 });
   const accepted = await act(page, game, firstMove());
   expect((await accepted.json()).moves).toBe(1);
@@ -249,7 +249,7 @@ for (const missing of [false, true]) {
     await currentGame(page).click();
     expect((await loaded).status()).toBe(200);
     await expect(field(page)).toBeEnabled();
-    await expect(page.locator(".hud")).toContainText("0 salturi");
+    await expect(page.locator(".game-frame-status")).toContainText("0 salturi");
     expect(await remembered(page)).toBe(newer.game_id);
     expect(await played(page)).toBe(0);
     await other.close();
@@ -263,19 +263,19 @@ test("leaving during recovery preserves the old pointer and a late callback cann
   const held = await holdRecovery(page, initial.game_id);
   expect((await act(page, game, answer())).status()).toBe(503);
   await held.requested;
-  await page.getByRole("button", { name: "Ieși la lista de jocuri", exact: true }).click();
-  await expect(page.getByRole("button", { name: /^Joacă Lanțul Cuvintelor —/ })).toBeVisible();
+  await page.getByRole("button", { name: "Înapoi la jocuri", exact: true }).click();
+  await expect(page.getByRole("link", { name: /Lanțul Cuvintelor/ })).toBeVisible();
   expect(await remembered(page)).toBe(initial.game_id);
   const newer = await newerRound(request);
   const other = await saveFromOtherTab(context, newer.game_id);
   const loaded = responseFor(page, newer.game_id, "", "GET");
-  await page.getByRole("button", { name: /^Joacă Lanțul Cuvintelor —/ }).click();
+  await page.getByRole("link", { name: /Lanțul Cuvintelor/ }).click();
   expect((await loaded).status()).toBe(200);
   await expect(field(page)).toBeEnabled();
   const oldCompleted = responseFor(page, initial.game_id, "", "GET");
   held.release();
   await oldCompleted;
-  await expect(page.locator(".hud")).toContainText("0 salturi");
+  await expect(page.locator(".game-frame-status")).toContainText("0 salturi");
   await expect(page.getByRole("button", { name: "Copiază rezultatul" })).toHaveCount(0);
   expect(await remembered(page)).toBe(newer.game_id);
   expect(await played(page)).toBe(0);
@@ -302,7 +302,7 @@ test("an already different saved pointer pauses before any old-round mutation", 
   await other.close();
 });
 
-test("a verified missing owned session returns to setup and clears only that pointer", async ({ page }) => {
+test("a verified missing owned session offers a retry and clears only that pointer", async ({ page }) => {
   const initial = await start(page, game);
   const counts = traffic(page, initial.game_id);
   for (const suffix of ["/move", ""]) {
@@ -311,7 +311,7 @@ test("a verified missing owned session returns to setup and clears only that poi
     }), { times: 1 });
   }
   expect((await act(page, game, { action: "move", payload: { text: firstMove().payload.text } })).status()).toBe(404);
-  await expect(page.getByRole("button", { name: /^Joacă(?: →)?$/ })).toBeEnabled();
+  await expect(page.getByRole("button", { name: "Începe o rundă nouă", exact: true })).toBeEnabled();
   expect(await remembered(page)).toBeNull();
   expect(counts).toEqual({ reads: 1, mutations: 1 });
   expect(await played(page)).toBe(0);

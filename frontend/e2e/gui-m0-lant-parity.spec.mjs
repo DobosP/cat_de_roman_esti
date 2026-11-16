@@ -3,16 +3,15 @@
 // The clipboard sink observes presentation output only; it is not native proof.
 import { test, expect } from "@playwright/test";
 import {
-  games, gameURL, deterministicStarts, solution, start, tabTo, openGameOptions,
+  games, gameURL, deterministicStarts, solution, start, tabTo,
 } from "./games.mjs";
 
 const game = games.find(({ key }) => key === "lant");
+const cueOnly = ({ steps, hints_left, hint_level, perfect, ...cue }) => cue;
 const easyJourney = { ...game, packId: "lt_geografie_239" };
 const normalJourney = { ...game, packId: "lt_istorie_001" };
 const field = (page) => page.getByRole("textbox", { name: "Următorul concept" });
-const result = (page) => page.getByRole("status").filter({
-  has: page.getByRole("button", { name: "Copiază rezultatul", exact: true }),
-});
+const result = (page) => page.locator(".game-result");
 
 const responseFor = (page, id, action) => page.waitForResponse((response) =>
   response.request().method() === "POST" &&
@@ -55,11 +54,14 @@ async function saved(request, id) {
 async function assertProgress(page, moved, kind) {
   expect(moved.progress.kind).toBe(kind);
   expect(moved.progress.message.length).toBeGreaterThan(0);
-  const cue = page.locator(`.lant-progress--${kind}`);
-  await expect(cue).toBeVisible();
+  if (moved.won) {
+    await expect(result(page).getByRole("heading")).toBeFocused();
+    return;
+  }
+  const cue = page.locator(".coach-line");
   await expect(cue).toHaveAttribute("role", "status");
-  await expect(cue).toHaveAttribute("aria-live", "polite");
-  await expect(cue.locator("strong")).toHaveText(moved.progress.message);
+  await expect(cue).toHaveAttribute("aria-atomic", "true");
+  await expect(cue).toHaveText(moved.progress.message);
 }
 
 async function undo(page, id) {
@@ -74,34 +76,20 @@ async function undo(page, id) {
   return undone;
 }
 
-test("Lanț intro disclosure is optional, keyboard operated and states all four rules", async ({ page }) => {
-  let creates = 0;
-  page.on("request", (request) => {
-    if (request.method() === "POST" &&
-        new URL(request.url()).pathname === "/api/wordgames/lant/games") creates += 1;
-  });
-  await page.goto(game.path);
-  const toggle = page.getByRole("button", { name: "Cum funcționează", exact: true });
-  const disclosure = page.locator("#lant-intro-disclosure");
-  await expect(toggle).toHaveAttribute("aria-expanded", "false");
-  await expect(toggle).toHaveAttribute("aria-controls", "lant-intro-disclosure");
-  await expect(disclosure).toBeHidden();
+test("Lanț help is keyboard operated and states input, free undo, move cap and step rules", async ({ page }) => {
+  await begin(page);
+  const toggle = page.getByRole("button", { name: "Cum se joacă", exact: true });
+  const dialog = page.getByRole("dialog", { name: /Cum se joacă Lanțul Cuvintelor/ });
+  await expect(dialog).toHaveCount(0);
   await tabTo(page, toggle);
   await page.keyboard.press("Space");
+  await expect(dialog.getByRole("heading", { level: 2 })).toBeFocused();
+  await expect(dialog).toContainText("Alege o legătură din listă sau scrie tu alt cuvânt legat de cel curent.");
+  await expect(dialog).toContainText("Poți da înapoi gratuit. Un lanț poate avea până la 64 de salturi.");
+  await expect(dialog).toContainText("Salturile anulate rămân numărate.");
+  await page.keyboard.press("Escape");
+  await expect(dialog).toHaveCount(0);
   await expect(toggle).toBeFocused();
-  await expect(toggle).toHaveAttribute("aria-expanded", "true");
-  await expect(disclosure).toBeVisible();
-  await expect(disclosure.locator("li")).toHaveText([
-    "Salturile afișate amestecă drumul cel mai scurt cu ocoluri sigure.",
-    "Înapoi e gratuit și nelimitat.",
-    "Poți scrie orice concept legat — nu doar din listă.",
-    "Limită: 64 de salturi pe lanț.",
-  ]);
-  await page.keyboard.press("Space");
-  await expect(toggle).toHaveAttribute("aria-expanded", "false");
-  await expect(disclosure).toBeHidden();
-  await expect(toggle).toBeFocused();
-  expect(creates).toBe(0);
 });
 
 test("a genuinely corrected winning hop retains the server's spelling message in the result", async ({ page, request }) => {
@@ -118,7 +106,7 @@ test("a genuinely corrected winning hop retains the server's spelling message in
   expect(won.current.id).toBe(initial.target.id);
   expect(won.message).toBe(`Am înțeles: ${initial.target.label}.`);
   await expect(result(page)).toBeVisible();
-  const correction = result(page).locator("span.muted").filter({ hasText: won.message });
+  const correction = result(page).locator(".muted").filter({ hasText: won.message });
   await expect(correction).toBeVisible();
   await expect(correction).toContainText(won.message);
   await assertProgress(page, won, "won");
@@ -158,7 +146,7 @@ test("two real farther hops recommend the existing free undo and undo clears the
   expect(undone.backtrack_recommended).toBe(false);
   await expect(undoButton).not.toHaveClass(/lant-undo--recommended/);
   await expect(undoButton).toHaveAccessibleName("Înapoi");
-  await expect(page.locator(".lant-progress")).toHaveCount(0);
+  await expect(page.locator(".coach-line")).toHaveText("Alege următorul cuvânt.");
   const persisted = await saved(request, initial.game_id);
   expect(persisted.path).toEqual(undone.path);
   expect(persisted.moves).toBe(undone.moves);
@@ -178,7 +166,7 @@ test("normal difficulty renders real server progress without inventing an easy-o
   expect(undone.moves).toBe(0);
   expect(undone.current).toEqual(initial.current);
   expect(undone.path).toEqual(initial.path);
-  await expect(page.locator(".lant-progress")).toHaveCount(0);
+  await expect(page.locator(".coach-line")).toHaveText("Alege următorul cuvânt.");
   expect((await saved(request, initial.game_id)).path).toEqual(initial.path);
 });
 
@@ -204,11 +192,11 @@ test("a server-earned backtrack hint highlights free undo and clears when a real
   expect(persisted.backtrack_recommended).toBe(false);
   await page.reload();
   await expect(field(page)).toBeEnabled();
-  await expect(page.locator(".hud")).toContainText("64 de salturi");
+  await expect(page.locator(".game-frame-status")).toContainText("64 de salturi");
   const undoButton = page.locator(".lant-undo");
   await expect(undoButton).not.toHaveClass(/lant-undo--recommended/);
   const pending = responseFor(page, initial.game_id, "hint");
-  await page.getByRole("button", { name: /💡 (?:Indiciu|Mai clar)/ }).click();
+  await page.getByRole("button", { name: /^(?:Indiciu|Fără indicii)$/ }).click();
   const response = await pending;
   expect(response.status()).toBe(200);
   const earned = await response.json();
@@ -216,25 +204,25 @@ test("a server-earned backtrack hint highlights free undo and clears when a real
   expect(earned.hint).toBeNull();
   expect(earned.message).toBe("Limită atinsă — folosește Înapoi.");
   const panel = page.locator(".lant-hint-panel");
-  await expect(panel).toHaveAttribute("role", "status");
-  await expect(panel).toHaveAttribute("aria-live", "polite");
+  await expect(page.locator(".coach-line")).toHaveAttribute("role", "status");
   await expect(panel.getByText("UN PAS ÎNAPOI", { exact: true })).toBeVisible();
-  await expect(panel.getByText(earned.message, { exact: true })).toBeVisible();
+  await expect(page.locator(".coach-line")).toHaveText(earned.message);
   await expect(panel.getByRole("button")).toHaveCount(0);
   await expect(undoButton).toHaveClass(/lant-undo--recommended/);
   await expect(undoButton).toHaveAccessibleName("Înapoi");
-  expect((await saved(request, initial.game_id)).earned_hint).toEqual(earned);
+  expect((await saved(request, initial.game_id)).earned_hint).toEqual(cueOnly(earned));
   const undone = await undo(page, initial.game_id);
   expect(undone.moves).toBe(63);
   expect(undone.path).toEqual(persisted.path.slice(0, -1));
   expect(undone.earned_hint).toBeUndefined();
+  expect(undone.steps).toBe(earned.steps);
   await expect(panel).toHaveCount(0);
   await expect(undoButton).not.toHaveClass(/lant-undo--recommended/);
   expect((await saved(request, initial.game_id)).path).toEqual(undone.path);
 });
 
 for (const detour of [false, true]) {
-  test(`${detour ? "detour" : "optimal"} win uses authoritative hop counts in recap, round details and copied result`, async ({ page, request }) => {
+  test(`${detour ? "detour" : "optimal"} win uses authoritative hop counts, steps and point-free copied result`, async ({ page, request }) => {
     // Observe the real app's write at the external clipboard boundary. This
     // explicit browser-only sink does not manufacture a game or native receipt.
     await page.addInitScript(() => {
@@ -258,19 +246,12 @@ for (const detour of [false, true]) {
     expect(won.won).toBe(true);
     expect(won.moves).toBe(initial.optimal + (detour ? 2 : 0));
     const card = result(page);
-    await expect(card.getByRole("heading", { name: detour ? "Ai reușit!" : "Lanț perfect!", exact: true }))
-      .toBeVisible();
-    await expect(card).toContainText(`Ai ajuns la ${initial.target.label} în ${won.moves} salturi (drumul cel mai scurt: ${initial.optimal}).`);
-    await expect(page.locator(".hud .stat-badge-label").filter({ hasText: /^SALTURI$/ }))
-      .toBeVisible();
-    await expect(page.locator(".hud")).toContainText(`${won.moves} salturi`);
-    await openGameOptions(page, game, { keyboard: true });
-    const details = page.locator(".lant-round-details");
-    await expect(details).toContainText(`Drumul cel mai scurt: ${initial.optimal} salturi`);
-    if (detour) await expect(details).toContainText("ai făcut 2 salturi în plus");
-    else await expect(details).not.toContainText("în plus");
-    await expect(page.getByRole("group", { name: "Traseul parcurs" }))
-      .toContainText(initial.start.label);
+    await expect(card.getByRole("heading", { name: "Ai reușit!", exact: true })).toBeFocused();
+    await expect(card).toContainText(`Ai ajuns la ${initial.target.label}. Drumul cel mai scurt: ${initial.optimal} salturi.`);
+    await expect(card).toContainText(`Pașii tăi: ${detour ? 2 : 0} pași`);
+    await expect(card.getByText("Perfect", { exact: true })).toHaveCount(detour ? 0 : 1);
+    await expect(page.locator(".game-frame-status")).toContainText(`${won.moves} salturi`);
+    await expect(page.getByRole("group", { name: "Traseul parcurs" })).toContainText(initial.start.label);
     const persisted = await saved(request, initial.game_id);
     expect(persisted.path).toEqual(won.path);
     expect(persisted.moves).toBe(won.moves);
@@ -280,8 +261,8 @@ for (const detour of [false, true]) {
     const copied = await page.evaluate(() => globalThis.__guiM0LantClipboard[0]);
     const url = new URL(page.url());
     const publicShare = won.share.trim().replace(/^cat_de_roman_esti/u, "Cât de român ești?");
-    expect(copied).toBe(`${publicShare}\n\nJoacă: ${url.origin}${url.pathname}\nScor: ${won.score}`);
+    expect(copied).toBe(`${publicShare}\n\nJoacă: ${url.origin}${url.pathname}`);
     expect(copied).toContain(`${won.moves}/${initial.optimal} salturi`);
-    expect(copied).not.toMatch(/mutări|MUTĂRI/);
+    expect(copied).not.toMatch(/mutări|MUTĂRI|Scor:/);
   });
 }

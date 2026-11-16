@@ -68,7 +68,7 @@ async function prepare(page, request, { mistakes = 0, solved = 0 } = {}) {
   if (mistakes || solved) {
     await page.reload();
     await expect(page.locator(`${game.board} button`)).toHaveCount(16 - solved * 4);
-    await expect(page.locator(".connections-lives")).toHaveAttribute("aria-label", `${4 - mistakes} ${mistakes === 3 ? "greșeală disponibilă" : "greșeli disponibile"}`);
+    await expect(page.locator(".game-frame-status")).toContainText(mistakes === 3 ? "O încercare" : `${4 - mistakes} încercări`);
   }
   return initial;
 }
@@ -116,25 +116,27 @@ test.beforeEach(async ({ page }) => {
   await deterministicStarts(page, game);
 });
 
-test("a lost first clue is restored once, resumes exactly, and retains 100 points", async ({ page, request }) => {
+test("a lost first clue is restored once, resumes exactly, and charges one step", async ({ page, request }) => {
   const initial = await prepare(page, request, { mistakes: 3 });
   const counts = traffic(page, initial.game_id);
   const committed = await loseCommittedResponse(page, initial.game_id, "clue");
   expect((await askClue(page, initial.game_id)).status()).toBe(503);
-  await expect(page.locator(".connections-feedback [role=status]").filter({ hasText: "Joc sincronizat. Poți continua." })).toBeVisible();
-  await expect(clueButton(page)).toContainText("1 rămas");
+  await expect(page.locator(".coach-line").filter({ hasText: "Joc sincronizat. Poți continua." })).toBeVisible();
+  await expect(clueButton(page)).toBeEnabled();
   const server = await (await request.get(gameURL(game, initial.game_id))).json();
   expect(server.clues_used).toBe(1);
+  expect(server.steps).toBe(server.mistakes + 1);
+  expect(server.hints_left).toBe(2);
   expect(server.clues).toEqual(committed().clues);
   expect(server.solution).toBeUndefined();
   expect(server.solved).toEqual([]);
   await expect(page.getByText(server.clues[0].message, { exact: false })).toHaveCount(1);
   expect(counts).toEqual({ reads: 1, mutations: 1 });
-  await page.locator(".connections-feedback").scrollIntoViewIfNeeded();
-  await expect(page.locator(".connections-feedback")).toHaveCSS("opacity", "1");
+  await page.locator(".coach-line").scrollIntoViewIfNeeded();
+  await expect(page.locator(".coach-line")).toHaveCSS("opacity", "1");
   await page.screenshot({ path: test.info().outputPath("recovered-clue.png") });
   await page.reload();
-  await expect(clueButton(page)).toContainText("1 rămas");
+  await expect(clueButton(page)).toBeEnabled();
   await expect(page.getByText(server.clues[0].message, { exact: false })).toHaveCount(1);
   for (const step of steps()) expect((await guess(page, initial.game_id, step)).status()).toBe(200);
   await expect(page.getByRole("button", { name: "Copiază rezultatul" })).toBeVisible();
@@ -167,7 +169,7 @@ for (const lost of [false, true]) {
     const committed = await loseCommittedResponse(page, initial.game_id, "guess");
     expect((await guess(page, initial.game_id, lost ? wrong(3) : steps()[3])).status()).toBe(503);
     await expect(page.getByRole("button", { name: "Copiază rezultatul" })).toBeVisible();
-    await expect(page.getByText(lost ? "Nu mai ai greșeli disponibile." : "Ai găsit toate grupurile!", { exact: true })).toBeVisible();
+    await expect(page.getByText(lost ? "Nu a ieșit de data asta" : "Ai găsit toate grupurile!", { exact: true })).toBeVisible();
     await expect.poll(() => played(page)).toBe(1);
     await expect.poll(() => remembered(page)).toBeNull();
     const server = await (await request.get(gameURL(game, initial.game_id))).json();
@@ -177,12 +179,12 @@ for (const lost of [false, true]) {
     expect(server.score).toBe(committed().score);
     expect(server.solution).toHaveLength(4);
     expect(counts).toEqual({ reads: 1, mutations: 1 });
-    await expect(page.getByText(lost ? "Nu mai ai greșeli disponibile." : "Ai găsit toate grupurile!", { exact: true }).locator("../..")).toHaveCSS("opacity", "1");
+    await expect(page.getByText(lost ? "Nu a ieșit de data asta" : "Ai găsit toate grupurile!", { exact: true }).locator("../..")).toHaveCSS("opacity", "1");
     await page.getByRole("button", { name: "Copiază rezultatul" }).scrollIntoViewIfNeeded();
     await expect(page.getByText("Joc reluat.", { exact: true })).toHaveCount(0);
     await page.screenshot({ path: test.info().outputPath(`recovered-${lost ? "loss" : "win"}.png`) });
     await page.reload();
-    await expect(page.getByRole("button", { name: /^Joacă(?: →)?$/ })).toBeEnabled();
+    await expect(page.locator(game.board)).toBeVisible();
     expect(await played(page)).toBe(1);
   });
 }
@@ -218,7 +220,7 @@ test("failed verification persists, locks every board action, and retries by GET
   expect((await response).status()).toBe(200);
   await expect(verify(page)).toHaveCount(0);
   await expect(clueButton(page)).toBeEnabled();
-  await expect(clueButton(page)).toContainText("1 rămas");
+  await expect(clueButton(page)).toBeEnabled();
   expect((await (await request.get(gameURL(game, initial.game_id))).json()).clues_used).toBe(1);
   expect(counts).toEqual({ reads: 2, mutations: 1 });
 });
@@ -232,7 +234,7 @@ test("precommit failure preserves a valid selection and earned clue without repl
     status: 503, contentType: "application/json", body: "{}",
   }), { times: 1 });
   expect((await guess(page, initial.game_id, steps()[0])).status()).toBe(503);
-  await expect(page.locator(".connections-feedback [role=status]").filter({ hasText: "Joc sincronizat. Poți continua." })).toBeVisible();
+  await expect(page.locator(".coach-line").filter({ hasText: "Joc sincronizat. Poți continua." })).toBeVisible();
   await expect(page.getByRole("button", { name: "Verifică", exact: true })).toBeEnabled();
   await expect(page.locator(`${game.board} [aria-pressed=true]`)).toHaveCount(4);
   await expect(page.getByText(before.clues[0].message, { exact: false })).toHaveCount(1);
@@ -274,13 +276,13 @@ test("leaving during recovery preserves its pointer and stale completion cannot 
   const held = await holdRecovery(page, initial.game_id);
   expect((await guess(page, initial.game_id, steps()[3])).status()).toBe(503);
   await held.requested;
-  await page.getByRole("button", { name: "Ieși la lista de jocuri", exact: true }).click();
-  await expect(page.getByRole("button", { name: /^Joacă Conexiuni —/ })).toBeVisible();
+  await page.getByRole("button", { name: "Înapoi la jocuri", exact: true }).click();
+  await expect(page.locator(`.games-grid a[href="${game.path}"]`)).toBeVisible();
   expect(await remembered(page)).toBe(initial.game_id);
   const newer = await newerRound(request);
   const other = await saveFromOtherTab(context, newer.game_id);
   const loaded = responseFor(page, newer.game_id, "", "GET");
-  await page.getByRole("button", { name: /^Joacă Conexiuni —/ }).click();
+  await page.locator(`.games-grid a[href="${game.path}"]`).click();
   expect((await loaded).status()).toBe(200);
   const oldCompleted = responseFor(page, initial.game_id, "", "GET");
   held.release();
@@ -309,7 +311,7 @@ test("an already different saved pointer pauses before any old-round mutation", 
   await other.close();
 });
 
-test("a verified missing owned session returns to setup and conditionally clears its pointer", async ({ page, request }) => {
+test("a verified missing owned session shows the recovery frame and conditionally clears its pointer", async ({ page, request }) => {
   const initial = await prepare(page, request);
   const counts = traffic(page, initial.game_id);
   for (const suffix of ["/guess", ""]) {
@@ -318,7 +320,7 @@ test("a verified missing owned session returns to setup and conditionally clears
     }), { times: 1 });
   }
   expect((await guess(page, initial.game_id, steps()[0])).status()).toBe(404);
-  await expect(page.getByRole("button", { name: /^Joacă(?: →)?$/ })).toBeEnabled();
+  await expect(page.getByRole("button", { name: "Începe o rundă nouă", exact: true })).toBeEnabled();
   expect(await remembered(page)).toBeNull();
   expect(await played(page)).toBe(0);
   expect(counts).toEqual({ reads: 1, mutations: 1 });
@@ -329,15 +331,15 @@ test("lost one-away feedback stays neutral and confirmed duplicate feedback stil
   const counts = traffic(page, initial.game_id);
   const committed = await loseCommittedResponse(page, initial.game_id, "guess");
   expect((await guess(page, initial.game_id, solution(game).practice)).status()).toBe(503);
-  await expect(page.locator(".connections-feedback [role=status]").filter({ hasText: "Joc sincronizat. Poți continua." })).toBeVisible();
+  await expect(page.locator(".coach-line").filter({ hasText: "Joc sincronizat. Poți continua." })).toBeVisible();
   expect(committed().one_away).toBe(true);
-  await expect(page.locator(".connections-feedback [role=status]").filter({ hasText: "Aproape: 3 din 4. Schimbă o piesă." })).toHaveCount(0);
+  await expect(page.locator(".coach-line").filter({ hasText: "Aproape: 3 din 4. Schimbă o piesă." })).toHaveCount(0);
   const duplicate = responseFor(page, initial.game_id, "guess");
   await page.getByRole("button", { name: "Verifică", exact: true }).click();
   expect((await duplicate).status()).toBe(409);
   await expect(page.getByRole("button", { name: "Schimbă o piesă", exact: true })).toBeDisabled();
   await expect(page.locator(`${game.board} [aria-pressed=true]`)).toHaveCount(4);
-  await expect(page.locator(".connections-feedback [role=status]").filter({ hasText: "Aproape: 3 din 4. Schimbă o piesă." })).toHaveCount(0);
+  await expect(page.locator(".coach-line").filter({ hasText: "Aproape: 3 din 4. Schimbă o piesă." })).toHaveCount(0);
   expect((await (await request.get(gameURL(game, initial.game_id))).json()).mistakes).toBe(1);
   expect(counts).toEqual({ reads: 2, mutations: 2 });
   expect((await guess(page, initial.game_id, steps()[0])).status()).toBe(200);
@@ -347,7 +349,7 @@ test("lost one-away feedback stays neutral and confirmed duplicate feedback stil
 test("a confirmed duplicate remains blocked after failed verification and manual read", async ({ page, request }) => {
   const initial = await prepare(page, request);
   expect((await guess(page, initial.game_id, solution(game).practice)).status()).toBe(200);
-  await expect(page.locator(".connections-feedback [role=status]").filter({ hasText: "Aproape: 3 din 4. Schimbă o piesă." })).toBeVisible();
+  await expect(page.locator(".coach-line").filter({ hasText: "Aproape: 3 din 4. Schimbă o piesă." })).toBeVisible();
   const counts = traffic(page, initial.game_id);
   await page.route(`**${gameURL(game, initial.game_id)}`, (route) => route.fulfill({
     status: 503, contentType: "application/json", body: "{}",
@@ -358,7 +360,7 @@ test("a confirmed duplicate remains blocked after failed verification and manual
   await expect(verify(page)).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Schimbă o piesă", exact: true })).toBeDisabled();
   await expect(page.locator(`${game.board} [aria-pressed=true]`)).toHaveCount(4);
-  await expect(page.locator(".connections-feedback [role=status]").filter({ hasText: "Aproape: 3 din 4. Schimbă o piesă." })).toHaveCount(0);
+  await expect(page.locator(".coach-line").filter({ hasText: "Aproape: 3 din 4. Schimbă o piesă." })).toHaveCount(0);
   expect((await (await request.get(gameURL(game, initial.game_id))).json()).mistakes).toBe(1);
   expect(counts).toEqual({ reads: 2, mutations: 1 });
 });

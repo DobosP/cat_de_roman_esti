@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { games, activeKey, gameURL, deterministicStarts, solution, start, act, openAlchemyDisclosure } from "./games.mjs";
+import { games, activeKey, gameURL, deterministicStarts, solution, start, act, openAlchemyDisclosure, openGameOptions } from "./games.mjs";
 
 const game = games.find(({ key }) => key === "alchimie");
 const verify = (page) => page.getByRole("button", { name: "Verifică jocul", exact: true });
@@ -26,35 +26,13 @@ function responseFor(page, id, action, method = "POST") {
   return page.waitForResponse((response) => response.request().method() === method && new URL(response.url()).pathname === path);
 }
 
-async function unlock(request, id, nextPair) {
-  const pairs = solution(game).hint_setup;
-  let state = await serverState(request, id);
-  const inventory = state.inventory;
-  while (!state.hint_available && nextPair < pairs.length) {
-    const response = await request.post(`${gameURL(game, id)}/combine`, { data: pairs[nextPair] });
-    nextPair += 1;
-    expect(response.status()).toBe(200);
-    state = await response.json();
-    expect(state.already_tried).toBe(false);
-    expect(state.discovered).toEqual([]);
-    expect(state.inventory).toEqual(inventory);
-    expect(state.won).toBe(false);
-  }
-  expect(state.hint_available).toBe(true);
-  return nextPair;
-}
-
 async function prepare(page, request, { hints = 0, solved = 0 } = {}) {
   const initial = await start(page, game);
   for (const step of steps().slice(0, solved)) {
     expect((await request.post(`${gameURL(game, initial.game_id)}/combine`, { data: step.payload })).status()).toBe(200);
   }
-  let nextHintPair = 0;
-  for (let index = 0; index < hints; index += 1) {
-    nextHintPair = await unlock(request, initial.game_id, nextHintPair);
-    if (index < hints - 1) {
-      expect((await request.post(`${gameURL(game, initial.game_id)}/hint`)).status()).toBe(200);
-    }
+  for (let index = 1; index < hints; index += 1) {
+    expect((await request.post(`${gameURL(game, initial.game_id)}/hint`)).status()).toBe(200);
   }
   if (hints || solved) {
     await page.reload();
@@ -141,8 +119,8 @@ test("lost productive combine restores the exact earned inventory and private ta
 
 for (const { kind, hints, solved } of [
   { kind: "output", hints: 1, solved: 0 },
-  { kind: "pair", hints: 2, solved: 0 },
-  { kind: "category", hints: 1, solved: 1 },
+  { kind: "ingredient", hints: 2, solved: 0 },
+  { kind: "pair", hints: 3, solved: 0 },
 ]) {
   test(`lost paid ${kind} clue survives GET and resume without another charge`, async ({ page, request }) => {
     const initial = await prepare(page, request, { hints, solved });
@@ -161,9 +139,10 @@ for (const { kind, hints, solved } of [
     if (kind === "output") {
       expect(fresh.earned_hint.hint).toBeNull();
       expect(Object.keys(fresh.earned_hint.hint_output)).toEqual(["label"]);
-    } else if (kind === "category") {
+    } else if (kind === "ingredient") {
       expect(fresh.earned_hint.hint).toBeNull();
       expect(fresh.earned_hint.hint_output).toBeNull();
+      expect(initial.inventory.some((item) => item.id === fresh.earned_hint.hint_ingredient.id)).toBe(true);
     } else {
       expect(fresh.earned_hint.hint_output).toBeNull();
       expect(fresh.earned_hint.hint).toHaveLength(2);
@@ -171,9 +150,10 @@ for (const { kind, hints, solved } of [
         expect(initial.inventory.some((owned) => owned.id === item.id)).toBe(true);
       }
     }
-    expect(fresh.hint_available).toBe(false);
+    expect(fresh.steps).toBe(hints);
+    expect(fresh.hints_left).toBe(3 - hints);
     await expect(page.locator(".alchemy-earned-hint")).toHaveText(fresh.earned_hint.message);
-    await expect(hintButton(page)).toHaveCount(0);
+    await expect(hintButton(page)).toHaveCount(hints < 3 ? 1 : 0);
     await expect(page.getByRole("button", { name: /^Scoate .* din alambic$/ })).toHaveCount(kind === "pair" ? 1 : 0);
     expect(counts).toEqual({ reads: 1, mutations: 1 });
     await settledScreenshot(page, `recovered-hint-${kind}.png`, page.locator(".alchemy-earned-hint"));
@@ -202,7 +182,7 @@ for (const { kind, hints, solved } of [
 }
 
 test("lost reset restores original seeds, clears cue and experiment memory once", async ({ page, request }) => {
-  const initial = await prepare(page, request, { hints: 2 });
+  const initial = await prepare(page, request, { hints: 3 });
   // A paid pair hint must bring its words back from a filtered recipe view.
   const collectionSearch = page.getByRole("searchbox", { name: "Caută în toate conceptele descoperite", exact: true });
   await collectionSearch.fill("zzzz-hidden-hint-pair");
@@ -226,7 +206,7 @@ test("lost reset restores original seeds, clears cue and experiment memory once"
   const counts = traffic(page, initial.game_id);
   const committed = await loseCommittedResponse(page, initial.game_id, "reset");
   const response = responseFor(page, initial.game_id, "reset");
-  await openAlchemyDisclosure(page, ".alchemy-menu");
+  await openGameOptions(page, game);
   await resetButton(page).click();
   expect((await response).status()).toBe(503);
   await expect(page.getByText("Joc sincronizat. Poți continua.", { exact: true })).toBeVisible();
@@ -234,6 +214,9 @@ test("lost reset restores original seeds, clears cue and experiment memory once"
   expect(fresh.moves).toBe(0);
   expect(fresh.attempted_count).toBe(0);
   expect(fresh.hints_used).toBe(0);
+  expect(fresh.steps).toBe(hinted.steps);
+  expect(fresh.hint_level).toBe(hinted.hint_level);
+  expect(fresh.hints_left).toBe(0);
   expect(fresh.inventory).toEqual(initial.inventory);
   expect(fresh).toEqual(committed());
   await expect(page.locator(".alchemy-earned-hint")).toHaveCount(0);
@@ -267,7 +250,7 @@ test("lost winning combine records the terminal score exactly once", async ({ pa
   await expect(page.getByText("Ai făurit ținta!", { exact: true }).locator("../..")).toHaveCSS("opacity", "1");
   await settledScreenshot(page, "recovered-win.png", page.getByRole("button", { name: "Copiază rezultatul" }));
   await page.reload();
-  await expect(page.getByRole("button", { name: /^Joacă(?: →)?$/ })).toBeEnabled();
+  await expect(page.locator(game.board)).toBeVisible();
   expect(await played(page)).toBe(1);
 });
 
@@ -281,10 +264,10 @@ test("failed verification persists, locks mutations and retries by GET only", as
   await expect(verify(page)).toBeEnabled();
   for (const button of await page.locator(`${game.board} button`).all()) await expect(button).toBeDisabled();
   await expect(page.getByRole("button", { name: "Combină cele două concepte selectate" })).toHaveCount(0);
-  await openAlchemyDisclosure(page, ".alchemy-menu");
-  await expect(resetButton(page)).toBeDisabled();
   await expect(hintButton(page)).toBeDisabled();
-  await page.keyboard.press("Enter");
+  await openGameOptions(page, game);
+  await expect(resetButton(page)).toBeDisabled();
+  await page.keyboard.press("Escape");
   await page.clock.fastForward(4000);
   await page.clock.runFor(500);
   await expect(verify(page)).toBeVisible();
@@ -329,13 +312,13 @@ test("a GET with another game id fails closed until an owned read succeeds", asy
   expect(counts).toEqual({ reads: 2, mutations: 1 });
 });
 
-test("an owned confirmed 404 forgets only that round and returns to setup", async ({ page, request }) => {
+test("an owned confirmed 404 forgets only that round and shows the recovery frame", async ({ page, request }) => {
   const initial = await prepare(page, request);
   const counts = traffic(page, initial.game_id);
   await loseCommittedResponse(page, initial.game_id, "combine");
   await page.route(`**${gameURL(game, initial.game_id)}`, (route) => route.fulfill({ status: 404, contentType: "application/json", body: "{}" }), { times: 1 });
   await act(page, game, steps()[0]);
-  await expect(page.getByRole("button", { name: /^Joacă(?: →)?$/ })).toBeEnabled();
+  await expect(page.getByRole("button", { name: "Începe o rundă nouă", exact: true })).toBeEnabled();
   expect(await remembered(page)).toBeNull();
   expect(counts).toEqual({ reads: 1, mutations: 1 });
 });
@@ -385,7 +368,7 @@ for (const phase of ["mutation", "read"]) {
     const held = await holdResponse(page, initial.game_id, phase === "mutation" ? "hint" : "");
     const clicked = hintButton(page).click();
     await held.requested;
-    await page.getByRole("button", { name: "Ieși la lista de jocuri" }).click();
+    await page.getByRole("button", { name: "Înapoi la jocuri" }).click();
     held.release();
     await clicked;
     await expect(page.locator(game.board)).toHaveCount(0);
@@ -405,7 +388,7 @@ test("failed verification can start a fresh round without replaying the old acti
   await page.route(`**${gameURL(game, initial.game_id)}`, (route) => route.fulfill({ status: 503, contentType: "application/json", body: "{}" }), { times: 1 });
   await askHint(page, initial.game_id);
   await expect(verify(page)).toBeEnabled();
-  await openAlchemyDisclosure(page, ".alchemy-menu");
+  await openGameOptions(page, game);
   await page.locator(".alchimie-other-board").click();
   await expect(verify(page)).toHaveCount(0);
   await expect.poll(() => remembered(page)).not.toBe(initial.game_id);

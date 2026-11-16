@@ -7,6 +7,7 @@ import {
   solution,
   start,
   act,
+  openGameOptions,
 } from "./games.mjs";
 
 const SCORES_KEY = "cat_wordgame_scores_v1";
@@ -118,7 +119,7 @@ test.describe("V74 saved-game recovery", () => {
       }), { times: 1 });
       const failedCreate = page.waitForResponse((response) => response.request().method() === "POST" &&
         new URL(response.url()).pathname === `/api/wordgames/${game.key}/games`);
-      await page.getByRole("button", { name: /^Joacă(?: →)?$/ }).click();
+      await page.getByRole("button", { name: "Începe o rundă nouă", exact: true }).click();
       expect((await failedCreate).status()).toBe(503);
       await expect(page.getByRole("button", { name: "Reîncearcă reluarea" })).toBeEnabled();
       expect(await page.evaluate((key) => localStorage.getItem(key), activeKey(game))).toBe(state.game_id);
@@ -134,9 +135,10 @@ test.describe("V74 saved-game recovery", () => {
 
     test(`${game.key} recovers a terminal game and scores it exactly once`, async ({ page, request }) => {
       const terminal = await finishThroughBff(request, game);
-      await page.goto(game.path);
+      await deterministicStarts(page, game);
+      await page.goto("/");
       await remember(page, game, terminal.game_id);
-      await page.reload();
+      await page.goto(game.path);
 
       await expect(page.getByRole("button", { name: "Copiază rezultatul" })).toBeVisible();
       if (game.key === "alchimie") {
@@ -151,7 +153,7 @@ test.describe("V74 saved-game recovery", () => {
         .toBeNull();
 
       await page.reload();
-      await expect(page.getByRole("button", { name: /^Joacă(?: →)?$/ })).toBeEnabled();
+      await expect(page.locator(game.board)).toBeVisible();
       expect(await timesPlayed(page, game)).toBe(1);
     });
   }
@@ -164,34 +166,23 @@ test.describe("V74 saved-game recovery", () => {
     for (const game of games) {
       const terminal = await finishThroughBff(request, game);
       let player = await context.newPage();
-      await player.goto(game.path);
+      await player.goto("/");
       await remember(player, game, terminal.game_id);
       await holdScoreLock(holder);
 
-      await player.reload();
+      await player.goto(game.path);
       await expect(player.getByRole("button", { name: "Copiază rezultatul" })).toBeVisible();
       expect(await player.evaluate((key) => localStorage.getItem(key), activeKey(game)))
         .toBe(terminal.game_id);
 
-      if (game.key === "contexto") {
-        await player.getByRole("button", { name: "Meniu" }).click();
-        await expect(player).toHaveURL(/\/$/);
-        expect(await player.evaluate((key) => localStorage.getItem(key), activeKey(game)))
-          .toBe(terminal.game_id);
-        await player.goto(game.path);
-        await expect(player.getByRole("button", { name: "Copiază rezultatul" })).toBeVisible();
-      }
-
-      if (game.derived) {
-        await expect(player.getByRole("button", { name: "Schimbă opțiunile" })).toHaveCount(0);
-        await player.getByRole("button", { name: "Meniu" }).click();
-        await expect(player).toHaveURL(/\/$/);
-        expect(await player.evaluate((key) => localStorage.getItem(key), activeKey(game)))
-          .toBe(terminal.game_id);
-        await player.goto(game.path);
-      } else {
-        await player.getByRole("button", { name: "Schimbă opțiunile" }).click();
-      }
+      await openGameOptions(player, game);
+      await expect(player.getByRole("dialog")).toBeVisible();
+      await player.keyboard.press("Escape");
+      await player.getByRole("button", { name: "Înapoi la jocuri" }).last().click();
+      await expect(player).toHaveURL(/\/$/);
+      expect(await player.evaluate((key) => localStorage.getItem(key), activeKey(game)))
+        .toBe(terminal.game_id);
+      await player.goto(game.path);
       expect(await player.evaluate((key) => localStorage.getItem(key), activeKey(game)))
         .toBe(terminal.game_id);
       await player.reload();
@@ -220,7 +211,8 @@ test.describe("V74 saved-game recovery", () => {
       const game = games.find(({ key }) => key === "intrusul");
       const oldGame = await createThroughBff(request, game);
       const currentGame = await createThroughBff(request, game);
-      await page.goto(game.path);
+      await deterministicStarts(page, game);
+      await page.goto("/");
       await remember(page, game, oldGame.game_id);
 
       let release;
@@ -241,7 +233,7 @@ test.describe("V74 saved-game recovery", () => {
         }
       }, { times: 1 });
 
-      await page.reload({ waitUntil: "domcontentloaded" });
+      await page.goto(game.path, { waitUntil: "domcontentloaded" });
       await blocked;
       const otherTab = await context.newPage();
       await otherTab.goto("/");
@@ -264,7 +256,8 @@ test.describe("V74 saved-game recovery", () => {
   test("an unmounted resume cannot finish a newer route's create loading", async ({ page, request }) => {
     const game = games.find(({ key }) => key === "intrusul");
     const oldGame = await createThroughBff(request, game);
-    await page.goto(game.path);
+    await deterministicStarts(page, game);
+    await page.goto("/");
     await remember(page, game, oldGame.game_id);
 
     let releaseOld;
@@ -276,14 +269,11 @@ test.describe("V74 saved-game recovery", () => {
       await heldOld;
       await route.continue().catch(() => {});
     }, { times: 1 });
-    await page.reload({ waitUntil: "domcontentloaded" });
+    await page.goto(game.path, { waitUntil: "domcontentloaded" });
     await oldBlocked;
 
     await page.goto("/");
     await page.evaluate((key) => localStorage.removeItem(key), activeKey(game));
-    await deterministicStarts(page, game);
-    await page.goto(game.path);
-
     let releaseCreate;
     const heldCreate = new Promise((resolve) => { releaseCreate = resolve; });
     let markCreateBlocked;
@@ -293,10 +283,10 @@ test.describe("V74 saved-game recovery", () => {
       await heldCreate;
       await route.continue();
     }, { times: 1 });
-    await page.getByRole("button", { name: /^Joacă(?: →)?$/ }).click();
+    await page.goto(game.path, { waitUntil: "domcontentloaded" });
     await createBlocked;
     releaseOld();
-    await expect(page.getByRole("button", { name: /^Joacă(?: →)?$/ })).toBeDisabled();
+    await expect(page.getByRole("main")).toHaveAttribute("aria-busy", "true");
     releaseCreate();
     await expect(page.locator(game.board)).toBeVisible();
     expect(await page.evaluate((key) => localStorage.getItem(key), activeKey(game)))
@@ -307,7 +297,7 @@ test.describe("V74 saved-game recovery", () => {
     const game = games.find(({ key }) => key === "contexto");
     const terminal = await finishThroughBff(request, game);
     const otherTab = await context.newPage();
-    await Promise.all([page.goto(game.path), otherTab.goto(game.path)]);
+    await Promise.all([page.goto("/"), otherTab.goto("/")]);
     expect(await page.evaluate(() => typeof navigator.locks?.request === "function")).toBe(true);
     await remember(page, game, terminal.game_id);
 
@@ -337,8 +327,8 @@ test.describe("V74 saved-game recovery", () => {
     await page.route(`**${gameURL(game, terminal.game_id)}`, gate.handler, { times: 1 });
     await otherTab.route(`**${gameURL(game, terminal.game_id)}`, gate.handler, { times: 1 });
     const reloads = [
-      page.reload({ waitUntil: "domcontentloaded" }),
-      otherTab.reload({ waitUntil: "domcontentloaded" }),
+      page.goto(game.path, { waitUntil: "domcontentloaded" }),
+      otherTab.goto(game.path, { waitUntil: "domcontentloaded" }),
     ];
     await gate.ready;
     gate.release();

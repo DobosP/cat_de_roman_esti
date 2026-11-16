@@ -90,7 +90,7 @@ for (const reversed of [false, true]) {
     expect(oneAway.lives).toBe(initial.lives - 1);
     expect(posts).toHaveLength(1);
     expect(posts[0].body.ids).toEqual(ids);
-    const guidance = page.locator(".connections-feedback [role=status]")
+    const guidance = page.locator(".coach-line[role=status]")
       .filter({ hasText: "Aproape: 3 din 4. Schimbă o piesă." });
     await expect(guidance).toBeVisible();
     const blocked = page.getByRole("button", { name: "Schimbă o piesă", exact: true });
@@ -143,92 +143,42 @@ for (const reversed of [false, true]) {
   });
 }
 
-test("real mistakes gate both clues, count down the second and remove the exhausted action", async ({ page, request }) => {
+test("three immediate clues preserve lives, reveal earned details and reject an extra request", async ({ page, request }) => {
   const { initial, plan } = await begin(page);
   const posts = mutations(page, initial.game_id);
-  const countdown = page.locator(".connections-hint-status");
+  expect(initial.hints_left).toBe(3);
   expect(initial.clues_used).toBe(0);
-  expect(initial.clue_available).toBe(false);
-  await expect(clueButton(page)).toHaveCount(0);
-  await expect(countdown).toHaveText("Indiciu disponibil după încă 2 greșeli.");
-
-  // One member from each of the four real groups produces distinct wrong sets
-  // without solving a group or encountering retained one-away retry behavior.
-  const wrong = (index) => plan.steps.map((step) => step.payload.ids[index]);
-  const firstMistake = await guess(page, initial, wrong(0));
-  expect(firstMistake.correct).toBe(false);
-  expect(firstMistake.one_away).toBe(false);
-  expect(firstMistake.mistakes).toBe(1);
-  expect(firstMistake.clue_available).toBe(false);
-  await expect(clueButton(page)).toHaveCount(0);
-  await expect(countdown).toHaveText("Indiciu disponibil după încă 1 greșeală.");
-
-  const secondMistake = await guess(page, initial, wrong(1));
-  expect(secondMistake.correct).toBe(false);
-  expect(secondMistake.one_away).toBe(false);
-  expect(secondMistake.mistakes).toBe(2);
-  expect(secondMistake.clues_used).toBe(0);
-  expect(secondMistake.clue_available).toBe(true);
-  await expect(countdown).toHaveCount(0);
   await expect(clueButton(page)).toBeEnabled();
-  await expect(clueButton(page)).toHaveAttribute("title", "Arată începutul unei categorii");
-  await expect(clueButton(page)).toContainText("−100 pct");
-  await expect(clueButton(page)).not.toContainText("1 rămas");
-
-  async function takeClue() {
+  await expect(page.getByText("Costă un pas.", { exact: true })).toBeVisible();
+  const clues = [];
+  for (let rung = 1; rung <= 3; rung += 1) {
     const pending = responseFor(page, initial.game_id, "clue");
     await clueButton(page).click();
     const response = await pending;
     expect(response.status()).toBe(200);
     const state = await response.json();
-    expect(state.ok).toBe(true);
-    const visible = page.locator(".connections-feedback [role=status]")
-      .filter({ hasText: state.clue.message });
-    await expect(visible).toBeVisible();
-    await expect(visible).toHaveAttribute("aria-live", "polite");
-    return state;
+    expect(state.hint_level).toBe(rung);
+    expect(state.hints_left).toBe(3 - rung);
+    expect(state.steps).toBe(rung);
+    expect(state.lives).toBe(initial.lives);
+    expect(state.mistakes).toBe(0);
+    clues.push(state.clue);
+    await expect(page.locator(".coach-line[role=status]")).toContainText(state.clue.message);
   }
-
-  const firstClue = await takeClue();
-  expect(firstClue.clues_used).toBe(1);
-  expect(firstClue.clues).toHaveLength(1);
-  expect(firstClue.clue_available).toBe(false);
-  expect(firstClue.mistakes).toBe(secondMistake.mistakes);
-  expect(firstClue.lives).toBe(secondMistake.lives);
-  await expect(clueButton(page)).toHaveCount(0);
-  await expect(countdown).toHaveText("Indiciu disponibil după încă 1 greșeală.");
-
-  const thirdMistake = await guess(page, initial, wrong(2));
-  expect(thirdMistake.correct).toBe(false);
-  expect(thirdMistake.one_away).toBe(false);
-  expect(thirdMistake.mistakes).toBe(3);
-  expect(thirdMistake.clues_used).toBe(1);
-  expect(thirdMistake.clue_available).toBe(true);
-  await expect(countdown).toHaveCount(0);
-  await expect(clueButton(page)).toBeEnabled();
-  await expect(clueButton(page)).toContainText("1 rămas");
-  const secondClue = await takeClue();
-  expect(secondClue.clues_used).toBe(2);
-  expect(secondClue.clues).toHaveLength(2);
-  expect(secondClue.clues[0]).toEqual(firstClue.clues[0]);
-  expect(secondClue.clue_available).toBe(false);
-  expect(secondClue.mistakes).toBe(thirdMistake.mistakes);
-  expect(secondClue.lives).toBe(thirdMistake.lives);
-  expect(secondClue.lost).toBe(false);
-  await expect(countdown).toHaveText("Indicii folosite");
-  await expect(clueButton(page)).toHaveCount(0);
-  await expect(page.locator(".connections-hint-action")).toHaveCount(0);
-  for (const clue of secondClue.clues) {
-    await expect(page.locator(".connections-feedback [role=status]")
-      .filter({ hasText: clue.message })).toBeVisible();
-  }
+  expect(clues[0].label).toBeUndefined();
+  expect(clues[0].tile).toBeUndefined();
+  expect(clues[1].label).toBeTruthy();
+  expect(clues[1].tile).toBeUndefined();
+  expect(clues[2].tile.id).toBeTruthy();
+  await expect(page.getByRole("button", { name: "Fără indicii" })).toBeDisabled();
+  const previous = await saved(request, initial.game_id);
+  const extra = await request.post(gameURL(game, initial.game_id) + "/clue");
+  expect(extra.status()).toBe(400);
+  expect(await saved(request, initial.game_id)).toEqual(previous);
+  const wrong = await guess(page, initial, plan.practice.payload.ids);
+  expect(wrong.one_away).toBe(true);
+  expect(wrong.steps).toBe(4);
+  expect(wrong.lives).toBe(initial.lives - 1);
   expect(posts.map(({ path }) => path.slice(path.lastIndexOf("/") + 1)))
-    .toEqual(["guess", "guess", "clue", "guess", "clue"]);
-  await unscopedEnter(page);
-  expect(posts).toHaveLength(5);
-  const persisted = await saved(request, initial.game_id);
-  expect(persisted.clues).toEqual(secondClue.clues);
-  expect(persisted.clues_used).toBe(2);
-  expect(persisted.clue_available).toBe(false);
-  expect(persisted.lives).toBe(1);
+    .toEqual(["clue", "clue", "clue", "guess"]);
 });

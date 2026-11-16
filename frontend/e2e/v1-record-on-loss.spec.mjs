@@ -13,12 +13,13 @@ test("a lost first Intrusul round is history, never a record", async ({ page }) 
       name: new RegExp(`^${escapeRegex(tile.label)}(?:,|$)`),
     }).click();
   }
-  await expect(page.getByRole("heading", { name: "Acesta era intrusul" })).toBeVisible();
-  // Wait for the local history write so a late record flag cannot slip past the check.
+  await expect(page.getByRole("heading", { name: "Nu a ieșit de data asta" })).toBeVisible();
+  // Wait for the local history write so a late completion cannot slip past the check.
   await expect.poll(() => page.evaluate(() =>
     JSON.parse(localStorage.getItem("cat_wordgame_scores_v1") || "{}").intrusul?.played ?? 0,
   )).toBe(1);
-  await expect(page.getByText(/Record/)).toHaveCount(0);
+  await expect(page.getByText("Perfect", { exact: true })).toHaveCount(0);
+  await expect(page.locator(".game-result")).toContainText("3 pași");
   expect(await page.evaluate(() =>
     JSON.parse(localStorage.getItem("cat_wordgame_scores_v1")).intrusul.best,
   )).toBeNull();
