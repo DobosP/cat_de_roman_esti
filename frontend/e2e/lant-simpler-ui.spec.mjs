@@ -151,6 +151,12 @@ test("keyboard focus follows a consumed hint to a usable next word on either poi
 
 test("giving up shows a result and leaves the next visit ready for a new round", async ({ page }) => {
   const initial = await start(page, game);
+  expect(initial.can_report_give_up).toBeUndefined();
+  const giveUpPath = `${gameURL(game, initial.game_id)}/giveup`;
+  const reported = [];
+  page.on("request", (request) => {
+    if (new URL(request.url()).pathname === giveUpPath) reported.push(request.method());
+  });
   const giveUp = page.getByRole("button", { name: "Renunț la rundă", exact: true });
   await expect(giveUp).toHaveCount(0);
   await page.getByRole("button", { name: "Cum se joacă", exact: true }).click();
@@ -170,4 +176,5 @@ test("giving up shows a result and leaves the next visit ready for a new round",
   expect((await (await creation).json()).game_id).not.toBe(initial.game_id);
   await expect(page.locator(game.board)).toBeVisible();
   expect(oldReads).toBe(0);
+  expect(reported).toEqual([]);
 });
