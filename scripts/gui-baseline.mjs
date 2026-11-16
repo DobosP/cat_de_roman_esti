@@ -180,22 +180,45 @@ try {
       const context = await browser.newContext({ viewport: { width: 1000, height: 800 }, reducedMotion: "reduce",
         ...(originalCapture ? {} : { timezoneId: "Europe/Bucharest", locale: "ro-RO", colorScheme: "light" }) });
       const page = await context.newPage();
-      if (!originalCapture) await page.clock.setFixedTime(new Date(fixture.clock));
       const cdp = await page.context().newCDPSession(page);
       await cdp.send("Emulation.setCPUThrottlingRate", { rate: 4 });
       await cdp.send("Network.enable");
       await cdp.send("Network.emulateNetworkConditions", { offline: false, latency: 150, downloadThroughput: 1600 * 1000 / 8, uploadThroughput: 750 * 1000 / 8 });
       const metrics = [];
       await page.exposeBinding("__catVital", (_source, metric) => { metrics.push(metric); });
-      await page.addInitScript({ content: `${vitalsSource}\nwindow.__catVitals={};window.__catEvents=[];const entry=e=>({name:e.name,startTime:e.startTime,duration:e.duration,interactionId:e.interactionId||0,target:e.target?.closest?.('button')?.className||e.target?.tagName||'',text:e.target?.closest?.('button')?.textContent?.trim()||''});new PerformanceObserver(list=>window.__catEvents.push(...list.getEntries().map(entry))).observe({type:'event',buffered:true,durationThreshold:16});const record=m=>{window.__catVitals[m.name.toLowerCase()]=m.value;window.__catVital({name:m.name,id:m.id,value:m.value,rating:m.rating,entries:m.entries.map(entry)})};webVitals.onLCP(record,{reportAllChanges:true});webVitals.onINP(record,{reportAllChanges:true,durationThreshold:0});webVitals.onCLS(record,{reportAllChanges:true});` });
+      // Collect native Event Timing and, for a fast first action, the browser's
+      // actual First Input entry. Keep the original capture's probe unchanged.
+      const firstInput = originalCapture ? "" : "events.observe({type:'first-input',buffered:true});";
+      const entryType = originalCapture ? "" : "entryType:e.entryType,";
+      await page.addInitScript({ content: `${vitalsSource}\nwindow.__catVitals={};window.__catEvents=[];const entry=e=>({${entryType}name:e.name,startTime:e.startTime,duration:e.duration,interactionId:e.interactionId||0,target:e.target?.closest?.('button')?.className||e.target?.tagName||'',text:e.target?.closest?.('button')?.textContent?.trim()||''});const events=new PerformanceObserver(list=>window.__catEvents.push(...list.getEntries().map(entry)));events.observe({type:'event',buffered:true,durationThreshold:16});${firstInput}const record=m=>{window.__catVitals[m.name.toLowerCase()]=m.value;window.__catVital({name:m.name,id:m.id,value:m.value,rating:m.rating,entries:m.entries.map(entry)})};webVitals.onLCP(record,{reportAllChanges:true});webVitals.onINP(record,{reportAllChanges:true,durationThreshold:0});webVitals.onCLS(record,{reportAllChanges:true});` });
       // Extra attribution belongs only to the explicit diagnostic measurement.
       if (mode === "owner-diagnostic") {
         await page.addInitScript({ content: "window.__catLcpElements=[];new PerformanceObserver(list=>{for(const e of list.getEntries())window.__catLcpElements.push({startTime:e.startTime,renderTime:e.renderTime,loadTime:e.loadTime,size:e.size,resource:e.url?(new URL(e.url,location.href).origin===location.origin?new URL(e.url,location.href).pathname:'[foreign resource]'):null,element:e.element?{tag:e.element.tagName.toLowerCase(),id:e.element.getAttribute('id'),classes:e.element.getAttribute('class')}:null})}).observe({type:'largest-contentful-paint',buffered:true});" });
       }
       const game = route.startsWith("/alchimie") ? "alchimie" : "conexiuni";
-      if (originalCapture) await page.route(`**/api/wordgames/${game}/games?*`, async (request) => { const url = new URL(request.request().url()); url.searchParams.set("seed", "38"); await request.continue({ url: url.toString() }); });
+      const createPath = `/api/wordgames/${game}/games`;
+      if (originalCapture) await page.route(`**${createPath}?*`, async (request) => { const url = new URL(request.request().url()); url.searchParams.set("seed", "38"); await request.continue({ url: url.toString() }); });
+      let creation;
+      if (!originalCapture) {
+        // Playwright's fixed wall clock also replaces Performance, including its
+        // interactionCount accessor. Keep native timing and pin only the daily
+        // board selection via the real request to the running server.
+        await page.route((url) => url.pathname === createPath, async (request) => {
+          const url = new URL(request.request().url());
+          if (request.request().method() === "POST") url.searchParams.set("daily", day);
+          await request.continue({ url: url.toString() });
+        }, { times: 1 });
+        creation = page.waitForResponse((reply) =>
+          reply.request().method() === "POST" && new URL(reply.url()).pathname === createPath);
+      }
       await page.goto(origin + route);
       if (originalCapture) await page.getByRole("button", { name: /^Joacă(?: →)?$/ }).click();
+      else {
+        const reply = await creation;
+        if (!reply.ok() || (await reply.json()).daily !== day) {
+          throw new Error(`Actual vitals board for ${game} did not open on ${day}`);
+        }
+      }
       await page.locator(selector).first().waitFor();
       let actionStarted, actionLabel;
       if (route.startsWith("/alchimie")) {
@@ -216,8 +239,17 @@ try {
         await page.locator(selector).first().click();
         await page.locator('.connection-tile[aria-pressed="true"]').waitFor();
       }
-      await page.waitForFunction(() => Number.isFinite(window.__catVitals.lcp) && Number.isFinite(window.__catVitals.inp));
-      await page.waitForFunction((start) => window.__catEvents.some((entry) => entry.interactionId > 0 && entry.startTime >= start && /connection-tile|alchemy-word/.test(entry.target)), actionStarted);
+      if (originalCapture) {
+        await page.waitForFunction(() => Number.isFinite(window.__catVitals.lcp) && Number.isFinite(window.__catVitals.inp));
+      }
+      try {
+        await page.waitForFunction((start) => window.__catEvents.some((entry) => entry.interactionId > 0 &&
+          entry.startTime >= start && /connection-tile|alchemy-word/.test(entry.target)), actionStarted);
+      } catch (error) {
+        const received = await page.evaluate(() => ({ events: window.__catEvents, vitals: window.__catVitals,
+          interactionCount: performance.interactionCount }));
+        throw new Error(`No real performance entry for ${actionLabel} run ${run + 1}: ${JSON.stringify(received)}`, { cause: error });
+      }
       const observed = await page.evaluate(() => ({ ...window.__catVitals, events: window.__catEvents }));
       if (mode === "owner-diagnostic") {
         Object.assign(observed, await page.evaluate(() => ({
@@ -227,12 +259,19 @@ try {
               requestStart: entry.requestStart, responseStart: entry.responseStart, responseEnd: entry.responseEnd, transferSize: entry.transferSize, encodedBodySize: entry.encodedBodySize, decodedBodySize: entry.decodedBodySize })),
           fonts: [...document.fonts].map((font) => ({ family: font.family, status: font.status, weight: font.weight, unicodeRange: font.unicodeRange })) })));
       }
-      if (!Number.isFinite(observed.lcp) || !Number.isFinite(observed.inp)) throw new Error("Actual LCP/INP did not arrive from web-vitals");
+      if (originalCapture && (!Number.isFinite(observed.lcp) || !Number.isFinite(observed.inp))) throw new Error("Actual LCP/INP did not arrive from web-vitals");
       const actionEntries = observed.events.filter((entry) => entry.interactionId > 0 && entry.startTime >= actionStarted && /connection-tile|alchemy-word/.test(entry.target));
       // Genuine pagehide finalizes the library callbacks; no synthetic lifecycle event.
       await page.goto("about:blank");
       const final = (name) => metrics.filter((metric) => metric.name === name).at(-1)?.value;
-      runs.push({ ...observed, lcp: final("LCP"), inp: final("INP"), cls: final("CLS") ?? 0, action: { name: actionLabel, startTime: actionStarted, entries: actionEntries, latency_ms: Math.max(...actionEntries.map((entry) => entry.duration)) }, metrics }); await context.close();
+      const lcp = final("LCP"), inp = final("INP"), cls = final("CLS");
+      if (!originalCapture && ![lcp, inp, cls].every((value) => Number.isFinite(value) && value >= 0)) {
+        throw new Error(`Missing final native web-vitals for ${actionLabel} run ${run + 1}: ${JSON.stringify(metrics)}`);
+      }
+      runs.push({ ...observed, lcp, inp, cls: originalCapture ? cls ?? 0 : cls,
+        action: { name: actionLabel, startTime: actionStarted, entries: actionEntries,
+          latency_ms: Math.max(...actionEntries.map((entry) => entry.duration)) }, metrics });
+      await context.close();
       process.stderr.write(`Measured ${actionLabel} run ${run + 1}/5 with actual callbacks and action entries\n`);
     }
     const median = (key) => runs.map((item) => item[key]).sort((a, b) => a - b)[2];
@@ -243,7 +282,7 @@ try {
   const activeSdk = /^file:(vendor\/roedu-ui-\d+\.\d+\.\d+\.tgz)$/.exec(JSON.parse(fs.readFileSync("frontend/package.json")).dependencies?.["@roedu/ui"] ?? "")?.[1];
   if (!activeSdk) throw new Error("Active @roedu/ui vendor pointer required");
   const inputs = Object.fromEntries(["frontend/package.json", "frontend/package-lock.json", `frontend/${activeSdk}`, "docs/reviews/gui-original-react/original-ui-0.3.0.tgz", `${quality}/package.json`, `${quality}/package-lock.json`].map((file) => [file, hash(fs.readFileSync(file))]));
-  const report = { schema: 1, ...(originalCapture ? {} : { design: 2, clock: fixture.clock, source_sha256: sources }), mode: capture ? "capture" : mode, proof_scope: mode === "original-capture" ? "pinned-gen-original-runner-built-server" : mode === "owner-diagnostic" ? "owner-shell-baseline-diagnostic-only-not-full-receipt" : "actual-app-image", sha: process.env.GATE_SHA, tree_sha256: process.env.GATE_TREE_SHA256, toolchain_digest: process.env.TOOLCHAIN_DIGEST, inputs, sizes, closures, css, cssTotal, pages, axeVersion, axe_source_sha256: hash(axeSource), vitalsVersion, vitals_source_sha256: hash(vitalsSource), vitals, method: { runs: 5, reducedMotion: "reduce", cpu: 4, rtt_ms: 150, down_kbps: 1600 },
+  const report = { schema: 1, ...(originalCapture ? {} : { design: 2, clock: fixture.clock, vitals_daily: day, source_sha256: sources }), mode: capture ? "capture" : mode, proof_scope: mode === "original-capture" ? "pinned-gen-original-runner-built-server" : mode === "owner-diagnostic" ? "owner-shell-baseline-diagnostic-only-not-full-receipt" : "actual-app-image", sha: process.env.GATE_SHA, tree_sha256: process.env.GATE_TREE_SHA256, toolchain_digest: process.env.TOOLCHAIN_DIGEST, inputs, sizes, closures, css, cssTotal, pages, axeVersion, axe_source_sha256: hash(axeSource), vitalsVersion, vitals_source_sha256: hash(vitalsSource), vitals, method: { runs: 5, reducedMotion: "reduce", cpu: 4, rtt_ms: 150, down_kbps: 1600 },
     ...(verification ? { verification: verification.binding, verification_inputs: verification.inputs, identity: verification.identity, home_semantics: homeWitness, home_semantics_failure: homeWitnessFailure } : {}),
     ...(mode === "owner-diagnostic" ? { diagnostic_attribution: { measurement_overhead: "Extra LCP/resource/font instrumentation; overhead is unmeasured and may affect diagnostic timings" } } : {}) };
   if (verification) writeVerification(verification, output, "capture.json", report);

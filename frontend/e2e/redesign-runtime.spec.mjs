@@ -74,7 +74,7 @@ async function leavingSnapshot(page, game) {
     window.__redesignExit = { terminalAppearances: 0 };
     const observer = new MutationObserver((records) => {
       for (const record of records) for (const node of record.addedNodes) {
-        if (node instanceof Element && (node.matches(".game-result") || node.querySelector(".game-result"))) {
+        if (node instanceof globalThis.Element && (node.matches(".game-result") || node.querySelector(".game-result"))) {
           window.__redesignExit.terminalAppearances++;
         }
       }

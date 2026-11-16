@@ -93,8 +93,7 @@ def read_receipts(scratch, manifests, candidate, base, gui, lock, lock_sha):
                     and data["thread_id"], "Fresh landing GO required")
         elif role == "pin-review":
             require(data.get("verdict") == "GO" and isinstance(data.get("thread_id"), str)
-                    and data["thread_id"] and data.get("case_count") == case_count,
-                    "Independent pin GO over 1,206 cases required")
+                    and data["thread_id"], "Independent pin GO required")
         elif role not in {"unit-wrapper", "full-wrapper", "full-supervisor"}:
             require(data.get("status") == "pass", f"{role} receipt is not green")
         if role in {"build", "unit", "full"}:
@@ -121,8 +120,6 @@ def read_receipts(scratch, manifests, candidate, base, gui, lock, lock_sha):
                     and {item.get("name") for item in data["checks"]} == CHECKS_4I
                     and all(type(item.get("exit_code")) is int and item["exit_code"] == 0
                             for item in data["checks"]), "4i checks or baseline differ")
-        if role == "reference":
-            require(data.get("case_count") == case_count, "Reference case count must stay 1,206")
         total += len(raw)
         found[role] = {**ref, "bytes": len(raw)}
     require(documents["pin-review"]["thread_id"] != documents["landing-review"]["thread_id"],
@@ -201,6 +198,8 @@ def check_reference(repo, candidate, bundle, evidence, documents):
     rules = corpus.get("rules_version", 1)
     require(type(rules) is int and rules in PARITY_CASES_BY_RULES, "Unknown HTTP parity rules version")
     case_count = PARITY_CASES_BY_RULES[rules]
+    require(reference.get("case_count") == case_count and pin_review.get("case_count") == case_count,
+            "Reference and pin review counts must match the rules version")
     capture = read_json(attachment("reference-capture", reference["capture"]))
     replay = read_json(attachment("reference-replay", reference["replay"]))
     pins = read_json(attachment("pin-changes", pin_review["changes"]))

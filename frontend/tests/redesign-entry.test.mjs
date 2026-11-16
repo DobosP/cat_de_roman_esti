@@ -27,7 +27,7 @@ beforeEach(() => {
   });
 });
 
-test("daily comes before a saved free round and completes once on that date for that game", () => {
+void test("daily comes before a saved free round and completes once on that date for that game", () => {
   const saved = { game_id: "free", terminal: false };
   assert.deepEqual(roundEntry(game, day, saved), { kind: "daily", daily: day });
   markDailyStarted(game, day);
@@ -42,7 +42,7 @@ test("daily comes before a saved free round and completes once on that date for 
   assert.deepEqual(roundEntry(game, "2026-11-17"), { kind: "daily", daily: "2026-11-17" });
 });
 
-test("an unfinished daily keeps its original date including across midnight", () => {
+void test("an unfinished daily keeps its original date including across midnight", () => {
   for (const daily of [yesterday, day]) {
     assert.deepEqual(roundEntry(game, day, { game_id: "daily", daily, terminal: false }),
       { kind: "resume", gameId: "daily", daily });
@@ -53,7 +53,7 @@ test("an unfinished daily keeps its original date including across midnight", ()
   assert.equal(localDay(new Date(2026, 10, 16, 0, 0)), day);
 });
 
-test("free options are validated and stored per game", () => {
+void test("free options are validated and stored per game", () => {
   writeFreeOptions(game, { difficulty: "greu", category: "istorie" });
   assert.deepEqual(readFreeOptions(game), { difficulty: "greu", category: "istorie" });
   assert.deepEqual(readFreeOptions("lant"), { difficulty: "usor", category: null });
@@ -61,7 +61,7 @@ test("free options are validated and stored per game", () => {
   assert.deepEqual(readFreeOptions(game), { difficulty: "usor", category: null });
 });
 
-test("denied storage behaves as a first visit", () => {
+void test("denied storage behaves as a first visit", () => {
   Object.defineProperty(globalThis, "localStorage", {
     configurable: true,
     get() { throw new Error("Storage denied"); },

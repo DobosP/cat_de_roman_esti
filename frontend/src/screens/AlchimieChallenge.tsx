@@ -16,7 +16,8 @@ import {
   type InventoryItem,
 } from "../api/alchimie";
 import { createGameActionOwner, recoverOwnedGameAction, type GameActionTicket } from "../gameActionRecovery.mjs";
-import { GameFrame, CoachLine, useCoachMessage } from "../components/GameFrame";
+import { GameFrame, CoachLine } from "../components/GameFrame";
+import { useCoachMessage } from "../hooks/useCoachMessage";
 import { FreeRoundOptions } from "../components/FreeRoundOptions";
 import { HintBar } from "../components/HintBar";
 import { useGameEntry, useRoundStart } from "../hooks/useGameEntry";
@@ -630,11 +631,11 @@ export default function AlchimieChallenge({
           startFailed={startFailed} unavailable={unavailable} onStart={() => startEntry(state?.game_id)} resumeRecovery={resumeRecovery} onResume={() => { entry.presentRecovery(); retryResume(); }}
           status={state && !entry.recoveredTerminal(state) && <span>{state.moves} {state.moves === 1 ? "combinație" : "combinații"}</span>}
           options={<FreeRoundOptions game={GAME_KEY} value={entry.options} onChange={entry.updateOptions} />}
-          tools={state && !won ? (close) => <>
-            <Button type="button" variant="secondary" disabled={actionsLocked}
-              onClick={() => { close(); void doReset(); }}>Reia același joc</Button>
-            {!state.daily && <Button type="button" className="alchimie-other-board" variant="secondary" disabled={busy || creating || loading || !isPresent}
-              onClick={() => { close(); nextRound(); }}>Alt joc</Button>}
+          tools={state && !won ? <>
+            <Button type="submit" variant="secondary" disabled={actionsLocked}
+              onClick={() => void doReset()}>Reia același joc</Button>
+            {!state.daily && <Button type="submit" className="alchimie-other-board" variant="secondary" disabled={busy || creating || loading || !isPresent}
+              onClick={nextRound}>Alt joc</Button>}
           </> : undefined}>
         {state && !entry.recoveredTerminal(state) && <>
         <div className="alchemy-workspace">

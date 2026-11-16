@@ -559,12 +559,12 @@ export default function CaldRece({
           startFailed={startFailed} unavailable={unavailable} onStart={() => startEntry(state?.game_id)} resumeRecovery={resumeRecovery} onResume={() => { entry.presentRecovery(); retryResume(); }}
           status={state && !entry.recoveredTerminal(state) && <Attempts remaining={state.attempts} />}
           options={<FreeRoundOptions game={GAME_KEY} value={entry.options} onChange={entry.updateOptions} />}
-          tools={state && !finished ? (close) => (
+          tools={state && !finished ? (
             confirmReveal ? (
               <div className="contexto-reveal-confirm" id="contexto-reveal-confirmation" role="alert">
                 <span>Arătăm răspunsul?</span>
                 <RevealCancelButton onCancel={() => setConfirmReveal(false)} disabled={!isPresent || busy || actionSync !== null} />
-                <Button type="button" onClick={() => { close(); void handleGiveUp(); }} disabled={busy || actionSync !== null}>
+                <Button type="submit" onClick={() => void handleGiveUp()} disabled={busy || actionSync !== null}>
                   Da, arată
                 </Button>
               </div>

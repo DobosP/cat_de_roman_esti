@@ -24,9 +24,11 @@ import {
 } from "../api/conexiuni";
 import { Button, type ToastKind } from "@roedu/ui";
 import { CONEXIUNI_HELP } from "../gameHelp/conexiuni.mjs";
-import { GameFrame, Attempts, CoachLine, useCoachMessage } from "../components/GameFrame";
+import { GameFrame, Attempts, CoachLine } from "../components/GameFrame";
+import { useCoachMessage } from "../hooks/useCoachMessage";
 import { FreeRoundOptions } from "../components/FreeRoundOptions";
 import { HintBar } from "../components/HintBar";
+import { useEventValue } from "../hooks/useEventValue";
 import { useGameEntry, useRoundStart } from "../hooks/useGameEntry";
 import { ResultCard } from "../components/ResultCard";
 import { useActiveGame } from "../hooks/useActiveGame";
@@ -78,7 +80,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   const [state, setState] = useState<ConexiuniState | null>(null);
   const [startFailed, setStartFailed] = useState(false);
   const [unavailable, setUnavailable] = useState(false);
-  const startInFlight = useRef(false);
+  const startInFlight = useEventValue(false);
   const [loading, setLoading] = useState(() => active.peek() !== null);
   const [busy, setBusy] = useState(false);
   const [actionSync, setActionSync] = useState<ActionSync | null>(null);
@@ -167,7 +169,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     onResume: applyResumedGame,
     onReentry: () => {
       const savedId = active.peek();
-      startInFlight.current = false;
+      startInFlight.write(false);
       setBusy(false); setStartFailed(false); setLoading(savedId !== null);
       setSelected([]); setBlockedGuess(null); setHint(null);
       if (!savedId && state) {
@@ -178,8 +180,8 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
 
   const start = useCallback(
     async (daily?: string) => {
-      if (!liveRef.current || startInFlight.current) return;
-      startInFlight.current = true;
+      if (!liveRef.current || startInFlight.read()) return;
+      startInFlight.write(true);
       const epoch = lifetimeRef.current;
       const expected = active.peek();
       actionOwner.invalidate();
@@ -210,7 +212,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
         if (liveRef.current && epoch === lifetimeRef.current) setStartFailed(true);
       } finally {
         if (epoch === lifetimeRef.current) {
-          startInFlight.current = false;
+          startInFlight.write(false);
           if (liveRef.current) setLoading(false);
         }
       }
@@ -293,7 +295,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   }, [actionsLocked, actionOwner, finished]);
 
   const beginAction = useCallback((previous: ConexiuniState) => {
-    if (!liveRef.current || startInFlight.current) return null;
+    if (!liveRef.current || startInFlight.read()) return null;
     const ticket = actionOwner.begin(previous.game_id);
     if (!ticket) return null;
     if (!actionOwner.owns(ticket)) {
@@ -455,7 +457,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   }, [sharePayload, onToast]);
 
   const handleExit = useCallback(() => {
-    if (!liveRef.current || startInFlight.current) return;
+    if (!liveRef.current || startInFlight.read()) return;
     actionOwner.invalidate();
     setSelected([]);
     setBlockedGuess(null);

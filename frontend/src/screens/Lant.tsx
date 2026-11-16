@@ -549,9 +549,9 @@ export default function Lant({
           startFailed={startFailed} unavailable={unavailable} onStart={() => startEntry(state?.game_id)} resumeRecovery={resumeRecovery} onResume={() => { entry.presentRecovery(); retryResume(); }}
           status={state && !entry.recoveredTerminal(state) && <span>{state.moves} {roNoun(state.moves, "salt", "salturi")}</span>}
           options={<FreeRoundOptions game={GAME_KEY} value={entry.options} onChange={entry.updateOptions} />}
-          tools={state && !finished ? (close) => (
-            <Button type="button" variant="secondary" disabled={busy || creating || actionSync !== null}
-              onClick={() => { close(); abandonChain(); }}>Renunț la rundă</Button>
+          tools={state && !finished ? (
+            <Button type="submit" variant="secondary" disabled={busy || creating || actionSync !== null}
+              onClick={abandonChain}>Renunț la rundă</Button>
           ) : undefined}>
         {state && !entry.recoveredTerminal(state) && <>
         <section className="card lant-route" aria-label="Poziția și ținta">

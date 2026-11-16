@@ -52,6 +52,7 @@ export interface PerechiMatchResult extends PerechiState {
 
 export interface PerechiHintResult extends PerechiState {
   ok: true;
+  hint: PerechiPair;
 }
 
 export interface CreatePerechiOpts {

@@ -3,7 +3,8 @@ import { nativePlan } from "./native-plan.mjs";
 import { games, gameURL, start, tabTo } from "./games.mjs";
 
 const game = games.find(({ key }) => key === "lant");
-const cueOnly = ({ steps, hints_left, hint_level, perfect, ...cue }) => cue;
+const cueOnly = (cue) => Object.fromEntries(Object.entries(cue)
+  .filter(([key]) => !["steps", "hints_left", "hint_level", "perfect"].includes(key)));
 const cases = [
   { id: "lt_geografie_239", nouns: /oraș|regiune|salină|chei|revoluționar|răscoală|munți|Turda/ },
   { id: "lt_literatura_240", nouns: /poet|scriitor|revistă|societate|academie|fondator|postum/ },

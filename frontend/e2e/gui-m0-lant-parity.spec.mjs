@@ -7,7 +7,8 @@ import {
 } from "./games.mjs";
 
 const game = games.find(({ key }) => key === "lant");
-const cueOnly = ({ steps, hints_left, hint_level, perfect, ...cue }) => cue;
+const cueOnly = (cue) => Object.fromEntries(Object.entries(cue)
+  .filter(([key]) => !["steps", "hints_left", "hint_level", "perfect"].includes(key)));
 const easyJourney = { ...game, packId: "lt_geografie_239" };
 const normalJourney = { ...game, packId: "lt_istorie_001" };
 const field = (page) => page.getByRole("textbox", { name: "Următorul concept" });

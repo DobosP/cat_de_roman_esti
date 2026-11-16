@@ -76,7 +76,7 @@ export interface AlchimieState extends PerfectRoundCounters {
   /** True once the player is genuinely stuck and a nudge can be requested. */
   hint_available: boolean;
   /** What the next progressive hint will reveal. */
-  hint_stage: "output" | "ingredient" | "pair";
+  hint_stage: "output" | "pair";
   /** One paid, public cue; cleared by a new unique experiment or reset. */
   earned_hint?: EarnedHint;
   daily?: string;
@@ -99,7 +99,7 @@ export interface CombineResult extends AlchimieState {
 export interface EarnedHint {
   /** The two concepts the nudge suggests combining, or null if unavailable. */
   hint: [Concept, Concept] | null;
-  hint_kind: "output" | "category" | "ingredient" | "pair" | "none";
+  hint_kind: "output" | "category" | "pair" | "none";
   /** First hint: label only, never the private output/target id. */
   hint_output: { label: string } | null;
   hint_ingredient?: Concept;

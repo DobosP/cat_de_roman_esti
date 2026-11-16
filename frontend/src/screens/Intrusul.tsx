@@ -9,7 +9,6 @@ import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } fr
 import { Button, type ToastKind } from "@roedu/ui";
 import { useIsPresent } from "@roedu/ui/motion";
 import {
-  acquireFlight,
   releaseFlight,
 } from "../asyncControl.mjs";
 import { ApiError } from "../api/client";
@@ -20,9 +19,11 @@ import {
   type IntrusulState,
 } from "../api/intrusul";
 import { INTRUSUL_HELP } from "../gameHelp/intrusul.mjs";
-import { GameFrame, Attempts, CoachLine, useCoachMessage } from "../components/GameFrame";
+import { GameFrame, Attempts, CoachLine } from "../components/GameFrame";
+import { useCoachMessage } from "../hooks/useCoachMessage";
 import { FreeRoundOptions } from "../components/FreeRoundOptions";
 import { HintBar } from "../components/HintBar";
+import { useEventValue } from "../hooks/useEventValue";
 import { useGameEntry, useRoundStart } from "../hooks/useGameEntry";
 import { ResultCard } from "../components/ResultCard";
 import { gameByKey } from "../games";
@@ -60,11 +61,11 @@ export default function Intrusul({ onExit, onToast }: Props) {
   const { admit, remember, complete, settleCompletion } = entry;
   const liveRef = useRef(true), lifetimeRef = useRef(0);
   const recordOnce = useRecordScore(GAME_KEY);
-  const startInFlight = useRef(false);
+  const startInFlight = useEventValue(false);
   const actionOwner = useMemo(() => createGameActionOwner(active), [active]);
   const tileRefs = useRef(new Map<string, HTMLButtonElement>());
   const hintButtonRef = useRef<HTMLButtonElement | null>(null);
-  const pendingHintFocus = useRef<{
+  const pendingHintFocus = useEventValue<{
     gameId: string;
     savedId: string | null;
     origin: HTMLButtonElement;
@@ -80,7 +81,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
     liveRef.current = isPresent;
     if (!isPresent) {
       actionOwner.invalidate();
-      pendingHintFocus.current = null;
+      pendingHintFocus.write(null);
     }
     return () => { liveRef.current = false; lifetimeRef.current += 1; actionOwner.invalidate(); };
   }, [actionOwner, isPresent]);
@@ -94,9 +95,9 @@ export default function Intrusul({ onExit, onToast }: Props) {
   const finished = Boolean(state?.won || state?.lost);
   const actionsLocked = !isPresent || loading || busy || actionSync !== null;
   useLayoutEffect(() => {
-    const pending = pendingHintFocus.current;
+    const pending = pendingHintFocus.read();
     if (!pending || busy) return;
-    pendingHintFocus.current = null;
+    pendingHintFocus.write(null);
     if (!state || finished || actionsLocked || state.game_id !== pending.gameId ||
       active.peek() !== pending.savedId) return;
     // Disabling/removing the initiating hint button can move focus to body. Keep
@@ -106,9 +107,9 @@ export default function Intrusul({ onExit, onToast }: Props) {
     if (target && !target.disabled) target.focus();
   }, [active, actionsLocked, busy, finished, state]);
   const exitSafely = useCallback(() => {
-    if (!liveRef.current || startInFlight.current) return;
+    if (!liveRef.current || startInFlight.read()) return;
     actionOwner.invalidate();
-    pendingHintFocus.current = null;
+    pendingHintFocus.write(null);
     liveRef.current = false;
     onExit();
   }, [actionOwner, onExit]);
@@ -116,7 +117,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
   const applyResumedGame = useCallback((fresh: IntrusulState, { terminal }: { terminal: boolean }) => {
     if (!liveRef.current || !admit(fresh, terminal)) return;
     actionOwner.invalidate();
-    pendingHintFocus.current = null;
+    pendingHintFocus.write(null);
     setActionSync(null);
     setBusy(false);
     setStartFailed(false);
@@ -135,9 +136,9 @@ export default function Intrusul({ onExit, onToast }: Props) {
     onResume: applyResumedGame,
     onReentry: () => {
       const savedId = active.peek();
-      startInFlight.current = false;
+      startInFlight.write(false);
       setBusy(false); setStartFailed(false); setLoading(savedId !== null);
-      pendingHintFocus.current = null;
+      pendingHintFocus.write(null);
       setFeedback(null);
       if (!savedId && state) {
         if (!finished) setActionSync({ previous: state, action: "guess", kind: "failed", savedId: null });
@@ -148,11 +149,12 @@ export default function Intrusul({ onExit, onToast }: Props) {
   const start = useCallback(
     async ({ daily, previousGameId, category }: StartOpts = {}) => {
       if (!isPresent || !liveRef.current) return;
-      if (!acquireFlight(startInFlight)) return;
+      if (startInFlight.read()) return;
+      startInFlight.write(true);
       const epoch = lifetimeRef.current;
       const expected = active.peek();
       actionOwner.invalidate();
-      pendingHintFocus.current = null;
+      pendingHintFocus.write(null);
       cancelResume();
       setStartFailed(false);
       setUnavailable(false);
@@ -234,7 +236,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
   }, [finished, isPresent, puzzleKey, recordOnce, settleCompletion, state]);
 
   const beginAction = useCallback((previous: IntrusulState, action: "guess" | "hint") => {
-    if (!isPresent || !liveRef.current || startInFlight.current) return null;
+    if (!isPresent || !liveRef.current || startInFlight.read()) return null;
     const ticket = actionOwner.begin(previous.game_id);
     if (!ticket) return null;
     if (!actionOwner.owns(ticket)) {
@@ -374,12 +376,12 @@ export default function Intrusul({ onExit, onToast }: Props) {
       }
       const nextTile = fresh.tiles.find((tile) => !fresh.wrong_ids.includes(tile.id));
       if (restoreFocus && nextTile && fresh.hints_used > state.hints_used && !fresh.won && !fresh.lost) {
-        pendingHintFocus.current = {
+        pendingHintFocus.write({
           gameId: fresh.game_id,
           savedId: ticket.savedId,
           origin: focusOrigin,
           tileId: nextTile.id,
-        };
+        });
       }
       setState(fresh);
       setFeedback(fresh.clue?.message ?? "Indiciul este pe tablă.");

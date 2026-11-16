@@ -2,7 +2,8 @@ import { test, expect } from "@playwright/test";
 import { games, activeKey, gameURL, deterministicStarts, solution, start, act } from "./games.mjs";
 
 const game = games.find(({ key }) => key === "lant");
-const cueOnly = ({ steps, hints_left, hint_level, perfect, ...cue }) => cue;
+const cueOnly = (cue) => Object.fromEntries(Object.entries(cue)
+  .filter(([key]) => !["steps", "hints_left", "hint_level", "perfect"].includes(key)));
 const scoresKey = "cat_wordgame_scores_v1";
 const field = (page) => page.getByRole("textbox", { name: "Următorul concept" });
 const verify = (page) => page.getByRole("button", { name: "Verifică jocul", exact: true });

@@ -1,5 +1,5 @@
 import type { ComponentChildren } from "preact";
-import { useCallback, useId, useLayoutEffect, useRef, useState } from "preact/hooks";
+import { useId, useLayoutEffect, useRef, useState } from "preact/hooks";
 import type { GameHelpCopy } from "../gameHelp.mjs";
 import type { GameDef } from "../games";
 import type { ResumeRecovery } from "../hooks/useSavedGameResume";
@@ -11,7 +11,7 @@ export function GameFrame({ game, mode, onExit, help, options, tools, status, ch
   onExit: () => void;
   help: GameHelpCopy;
   options?: ComponentChildren;
-  tools?: (close: () => void) => ComponentChildren;
+  tools?: ComponentChildren;
   status?: ComponentChildren;
   children?: ComponentChildren;
   busy?: boolean;
@@ -121,7 +121,7 @@ export function GameFrame({ game, mode, onExit, help, options, tools, status, ch
           <p>{help.steps}</p>
           {options && <section className="game-help-options"><h3>Opțiuni pentru următoarea rundă liberă</h3>{options}</section>}
           <button type="button" className="btn game-help-confirm" onClick={closeHelp}>Am înțeles</button>
-          {tools?.(closeHelp)}
+          {tools && <form method="dialog">{tools}</form>}
         </dialog>
       )}
     </main>
@@ -139,12 +139,6 @@ export function CoachLine({ children, revision, id }: {
       {children && <span key={revision}>{children}</span>}
     </div>
   );
-}
-
-export function useCoachMessage(initial: string | null = null) {
-  const [[message, revision], setMessage] = useState<[string | null, number]>([initial, 0]);
-  const announce = useCallback((text: string | null) => setMessage(([, next]) => [text, next + 1]), []);
-  return [message, announce, revision] as const;
 }
 
 export function Attempts({ remaining }: { remaining: number }) {

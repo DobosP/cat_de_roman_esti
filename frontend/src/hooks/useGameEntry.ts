@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "preact/hooks";
+import { useCallback, useEffect, useLayoutEffect, useState } from "preact/hooks";
+import { useEventValue } from "./useEventValue";
 import { useIsPresent } from "@roedu/ui/motion";
 import { dailyStatus, localDay, markDailyDone, markDailyStarted, readFreeOptions, roundEntry, writeFreeOptions } from "../entry";
 import type { GameKey } from "../games";
@@ -23,67 +24,71 @@ function write(key: string, value: string | null) {
 export function useGameEntry(game: GameKey, active: ActiveGameMemo) {
   const parkedKey = `cat_parked_free_v2_${game}`;
   const replayKey = `cat_replay_v2_${game}`;
-  const date = useRef(localDay());
+  const [date, setDate] = useState(localDay);
   const isPresent = useIsPresent();
-  const presentPreviously = useRef(isPresent);
-  const parkedCandidate = useRef<string | null>(null);
-  const replay = useRef(read(replayKey));
-  const recoveredTerminal = useRef<string | null>(null);
-  const presentingRecovery = useRef(false);
+  const presentPreviously = useEventValue(false);
+  const initialized = useEventValue(false);
+  const parkedCandidate = useEventValue<string | null>(null);
+  const [replay, setReplay] = useState(() => read(replayKey));
+  const [recoveredTerminal, setRecoveredTerminal] = useState<string | null>(null);
+  const presentingRecovery = useEventValue(false);
   const [settledTerminal, setSettledTerminal] = useState<string | null>(null);
   const [options, setOptions] = useState(() => readFreeOptions(game));
 
   useLayoutEffect(() => {
-    if (isPresent && !presentPreviously.current) {
-      date.current = localDay();
-      parkedCandidate.current = null;
-      recoveredTerminal.current = null;
-      presentingRecovery.current = false;
+    if (isPresent && initialized.read() && !presentPreviously.read()) {
+      setDate(localDay());
+      parkedCandidate.write(null);
+      setRecoveredTerminal(null);
+      presentingRecovery.write(false);
       setSettledTerminal(null);
-      replay.current = read(replayKey);
+      setReplay(read(replayKey));
       setOptions(readFreeOptions(game));
     }
-    presentPreviously.current = isPresent;
-  }, [game, isPresent, replayKey]);
+    presentPreviously.write(isPresent);
+    initialized.write(true);
+  }, [game, initialized, isPresent, parkedCandidate, presentPreviously, presentingRecovery, replayKey]);
 
   const admit = useCallback((round: Round, terminal: boolean) => {
-    replay.current = read(replayKey);
+    setReplay(read(replayKey));
     // A completion discovered by GET still belongs to the saved day, even if the
     // originating tab closed before it could persist the result.
     if (terminal) {
-      recoveredTerminal.current = presentingRecovery.current ? null : round.game_id;
-      presentingRecovery.current = false;
+      setRecoveredTerminal(presentingRecovery.read() ? null : round.game_id);
+      presentingRecovery.write(false);
       if (round.daily) markDailyDone(game, round.daily);
       return true;
     }
-    presentingRecovery.current = false;
-    const decision = roundEntry(game, date.current, { ...round, terminal });
+    presentingRecovery.write(false);
+    const decision = roundEntry(game, date, { ...round, terminal });
     if (decision.kind === "resume") {
       if (round.daily) markDailyStarted(game, round.daily);
       return true;
     }
-    if (!round.daily) parkedCandidate.current = round.game_id;
+    if (!round.daily) parkedCandidate.write(round.game_id);
     return false;
-  }, [game, replayKey]);
+  }, [date, game, parkedCandidate, presentingRecovery, replayKey]);
 
   const remember = useCallback((round: Round, expected: string | null) => {
     // Another tab may have started a newer game while this POST was in flight.
     const current = active.peek();
     if (current !== null && current !== expected) return false;
     if (round.daily) {
-      if (parkedCandidate.current && active.isCurrent(parkedCandidate.current)) {
-        write(parkedKey, parkedCandidate.current);
+      const candidate = parkedCandidate.read();
+      if (candidate && active.isCurrent(candidate)) {
+        write(parkedKey, candidate);
       }
-      replay.current = dailyStatus(game, round.daily).started ? round.game_id : null;
-      write(replayKey, replay.current);
+      const replayId = dailyStatus(game, round.daily).started ? round.game_id : null;
+      setReplay(replayId);
+      write(replayKey, replayId);
       markDailyStarted(game, round.daily);
     } else {
       write(parkedKey, null);
     }
-    parkedCandidate.current = null;
+    parkedCandidate.write(null);
     active.remember(round.game_id);
     return true;
-  }, [active, game, parkedKey, replayKey]);
+  }, [active, game, parkedCandidate, parkedKey, replayKey]);
 
   const useParked = (completedId?: string) => {
     const activeId = active.peek();
@@ -96,8 +101,8 @@ export function useGameEntry(game: GameKey, active: ActiveGameMemo) {
   };
 
   const mode = (round: Round | null) => round?.daily
-    ? replay.current === round.game_id ? "Reluare" : "Jocul zilei"
-    : round || dailyStatus(game, date.current).done ? "Rundă liberă" : "Jocul zilei";
+    ? replay === round.game_id ? "Reluare" : "Jocul zilei"
+    : round || dailyStatus(game, date).done ? "Rundă liberă" : "Jocul zilei";
 
   const complete = useCallback((round: Round) => {
     if (round.daily) markDailyDone(game, round.daily);
@@ -105,17 +110,17 @@ export function useGameEntry(game: GameKey, active: ActiveGameMemo) {
 
   const settleCompletion = useCallback((round: Round) => {
     active.forgetIfCurrent(round.game_id);
-    if (recoveredTerminal.current === round.game_id && presentPreviously.current) {
+    if (recoveredTerminal === round.game_id && presentPreviously.read()) {
       setSettledTerminal(round.game_id);
     }
-  }, [active]);
+  }, [active, presentPreviously, recoveredTerminal]);
   return {
     admit, remember, mode, isPresent, useParked, options, settleCompletion,
-    recoveredTerminal: (round: Round | null) => round !== null && recoveredTerminal.current === round.game_id,
+    recoveredTerminal: (round: Round | null) => round !== null && recoveredTerminal === round.game_id,
     readyAfterTerminal: (round: Round | null) => round !== null && settledTerminal === round.game_id,
-    presentRecovery: () => { presentingRecovery.current = true; },
-    day: date.current,
-    choose: () => roundEntry(game, date.current),
+    presentRecovery: () => { presentingRecovery.write(true); },
+    day: date,
+    choose: () => roundEntry(game, date),
     complete,
     updateOptions: (next: typeof options) => { writeFreeOptions(game, next); setOptions(next); },
   } as const;
@@ -130,9 +135,9 @@ export function useRoundStart(
   retryResume: () => void,
   start: (daily?: string, previousGameId?: string) => void,
 ) {
-  const didStart = useRef(false);
-  const latest = useRef({ entry, shouldStart, start, retryResume });
-  useLayoutEffect(() => { latest.current = { entry, shouldStart, start, retryResume }; });
+  const didStart = useEventValue(false);
+  const latest = useEventValue<{ entry: GameEntry; shouldStart: boolean; start: typeof start; retryResume: typeof retryResume } | null>(null);
+  useLayoutEffect(() => { latest.write({ entry, shouldStart, start, retryResume }); });
   const startEntry = (completedId?: string) => {
     const choice = entry.choose();
     if (choice.kind === "free" && entry.useParked(completedId)) retryResume();
@@ -140,21 +145,23 @@ export function useRoundStart(
   };
 
   useEffect(() => {
-    if (!entry.isPresent || !shouldStart) { didStart.current = false; return; }
+    if (!entry.isPresent || !shouldStart) { didStart.write(false); return; }
     const tryStart = () => {
-      const { entry: current, shouldStart: ready, start: create, retryResume: resume } = latest.current;
-      if (!current.isPresent || !ready || didStart.current || document.visibilityState !== "visible") return;
+      const pending = latest.read();
+      if (!pending) return;
+      const { entry: current, shouldStart: ready, start: create, retryResume: resume } = pending;
+      if (!current.isPresent || !ready || didStart.read() || document.visibilityState !== "visible") return;
       const choice = current.choose();
       if (choice.kind === "free" && current.useParked()) resume();
       else {
-        didStart.current = true;
+        didStart.write(true);
         create(choice.kind === "daily" ? choice.daily : undefined);
       }
     };
     tryStart();
     document.addEventListener("visibilitychange", tryStart);
     return () => document.removeEventListener("visibilitychange", tryStart);
-  }, [entry.isPresent, shouldStart]);
+  }, [didStart, entry.isPresent, latest, shouldStart]);
 
   return startEntry;
 }

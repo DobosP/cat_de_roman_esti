@@ -9,7 +9,6 @@ import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } fr
 import { Button, type ToastKind } from "@roedu/ui";
 import { useIsPresent } from "@roedu/ui/motion";
 import {
-  acquireFlight,
   releaseFlight,
 } from "../asyncControl.mjs";
 import { ApiError } from "../api/client";
@@ -20,9 +19,11 @@ import {
   type PerechiState,
 } from "../api/perechi";
 import { PERECHI_HELP } from "../gameHelp/perechi.mjs";
-import { GameFrame, Attempts, CoachLine, useCoachMessage } from "../components/GameFrame";
+import { GameFrame, Attempts, CoachLine } from "../components/GameFrame";
+import { useCoachMessage } from "../hooks/useCoachMessage";
 import { FreeRoundOptions } from "../components/FreeRoundOptions";
 import { HintBar } from "../components/HintBar";
+import { useEventValue } from "../hooks/useEventValue";
 import { useGameEntry, useRoundStart } from "../hooks/useGameEntry";
 import { ResultCard } from "../components/ResultCard";
 import { nextActiveTileId } from "../perechiFocus.mjs";
@@ -76,7 +77,7 @@ export default function Perechi({ onExit, onToast }: Props) {
   const { admit, remember, complete, settleCompletion } = entry;
   const liveRef = useRef(true), lifetimeRef = useRef(0);
   const recordOnce = useRecordScore(GAME_KEY);
-  const startInFlight = useRef(false);
+  const startInFlight = useEventValue(false);
   const actionOwner = useMemo(() => createGameActionOwner(active), [active]);
   const [actionSync, setActionSync] = useState<{
     previous: PerechiState;
@@ -86,14 +87,14 @@ export default function Perechi({ onExit, onToast }: Props) {
   } | null>(null);
   const tileRefs = useRef(new Map<string, HTMLButtonElement>());
   const hintButtonRef = useRef<HTMLButtonElement | null>(null);
-  const pendingFocus = useRef<PendingFocus | null>(null);
-  const focusedTileBeforeMutation = useRef<{ id: string; origin: HTMLButtonElement } | null>(null);
+  const pendingFocus = useEventValue<PendingFocus | null>(null);
+  const focusedTileBeforeMutation = useEventValue<{ id: string; origin: HTMLButtonElement } | null>(null);
   useLayoutEffect(() => {
     liveRef.current = isPresent;
     if (!isPresent) {
       actionOwner.invalidate();
-      pendingFocus.current = null;
-      focusedTileBeforeMutation.current = null;
+      pendingFocus.write(null);
+      focusedTileBeforeMutation.write(null);
     }
     return () => { liveRef.current = false; lifetimeRef.current += 1; actionOwner.invalidate(); };
   }, [actionOwner, isPresent]);
@@ -109,20 +110,20 @@ export default function Perechi({ onExit, onToast }: Props) {
   const finished = Boolean(state?.won || state?.lost);
   const actionsLocked = !isPresent || loading || busy || actionSync !== null;
   const exitSafely = useCallback(() => {
-    if (!liveRef.current || startInFlight.current) return;
+    if (!liveRef.current || startInFlight.read()) return;
     actionOwner.invalidate();
-    pendingFocus.current = null;
-    focusedTileBeforeMutation.current = null;
+    pendingFocus.write(null);
+    focusedTileBeforeMutation.write(null);
     liveRef.current = false;
     onExit();
   }, [actionOwner, onExit]);
   const queueFocusAfterUpdate = useCallback(
     (fresh: PerechiState, candidateIds: readonly string[]) => {
-      const focused = focusedTileBeforeMutation.current;
+      const focused = focusedTileBeforeMutation.read();
       if (!focused || !candidateIds.includes(focused.id)) return;
       if (!focusStillOwned(focused.origin)) {
-        pendingFocus.current = null;
-        focusedTileBeforeMutation.current = null;
+        pendingFocus.write(null);
+        focusedTileBeforeMutation.write(null);
         return;
       }
       const focusedId = focused.id;
@@ -130,9 +131,9 @@ export default function Perechi({ onExit, onToast }: Props) {
       if (fresh.won || fresh.lost) return;
       if (!fresh.tiles.find((tile) => tile.id === focusedId)?.solved) return;
       const nextId = nextActiveTileId(fresh.tiles, focusedId);
-      pendingFocus.current = nextId
+      pendingFocus.write(nextId
         ? { kind: "tile", id: nextId, ...ownership }
-        : null;
+        : null);
     },
     [active],
   );
@@ -142,26 +143,26 @@ export default function Perechi({ onExit, onToast }: Props) {
   // keep the claim until the target is focusable, and apply it in the same commit
   // that unlocks it (Intrusul's pattern).
   useLayoutEffect(() => {
-    const pending = pendingFocus.current;
+    const pending = pendingFocus.read();
     if (!pending) return;
     if (pending.kind === "hint" && busy) return;
     if (state?.game_id !== pending.gameId || active.peek() !== pending.savedId) {
-      pendingFocus.current = null;
+      pendingFocus.write(null);
       return;
     }
     if (pending.kind === "hint") {
-      pendingFocus.current = null;
+      pendingFocus.write(null);
       if (actionsLocked || finished) return;
     }
     if (!focusStillOwned(pending.origin)) {
-      pendingFocus.current = null;
-      focusedTileBeforeMutation.current = null;
+      pendingFocus.write(null);
+      focusedTileBeforeMutation.write(null);
       return;
     }
     const target = tileRefs.current.get(pending.id);
     if (!target || ("disabled" in target && target.disabled)) return;
     target.focus();
-    pendingFocus.current = null;
+    pendingFocus.write(null);
   }, [active, actionsLocked, busy, finished, state?.game_id, state?.solved_count, state?.hints_used]);
 
   const applyResumedGame = useCallback((fresh: PerechiState, { terminal }: { terminal: boolean }) => {
@@ -173,8 +174,8 @@ export default function Perechi({ onExit, onToast }: Props) {
     setState(fresh);
     setSelected(null);
     setChecking(null);
-    pendingFocus.current = null;
-    focusedTileBeforeMutation.current = null;
+    pendingFocus.write(null);
+    focusedTileBeforeMutation.write(null);
     setFeedback(fresh.won || fresh.lost ? null : fresh.clue?.message ?? (fresh.hint ? "Atinge cele două cuvinte marcate." : "Joc reluat. Atinge primul cuvânt."));
   }, [actionOwner, admit, setFeedback]);
   const { recovery: resumeRecovery, retryResume, cancelResume, dismissRecovery } = useSavedGameResume({
@@ -185,9 +186,9 @@ export default function Perechi({ onExit, onToast }: Props) {
     onResume: applyResumedGame,
     onReentry: () => {
       const savedId = active.peek();
-      startInFlight.current = false;
+      startInFlight.write(false);
       setBusy(false); setStartFailed(false); setLoading(savedId !== null);
-      pendingFocus.current = null; focusedTileBeforeMutation.current = null;
+      pendingFocus.write(null); focusedTileBeforeMutation.write(null);
       setSelected(null); setChecking(null);
       setFeedback(null);
       if (!savedId && state) {
@@ -199,12 +200,13 @@ export default function Perechi({ onExit, onToast }: Props) {
   const start = useCallback(
     async ({ daily, previousGameId, category }: StartOpts = {}) => {
       if (!isPresent || !liveRef.current) return;
-      if (!acquireFlight(startInFlight)) return;
+      if (startInFlight.read()) return;
+      startInFlight.write(true);
       const epoch = lifetimeRef.current;
       const expected = active.peek();
       actionOwner.invalidate();
-      pendingFocus.current = null;
-      focusedTileBeforeMutation.current = null;
+      pendingFocus.write(null);
+      focusedTileBeforeMutation.write(null);
       cancelResume();
       setStartFailed(false);
       setUnavailable(false);
@@ -285,7 +287,7 @@ export default function Perechi({ onExit, onToast }: Props) {
   }, [finished, isPresent, puzzleKey, recordOnce, settleCompletion, state]);
 
   const beginAction = useCallback((previous: PerechiState, action: "match" | "hint") => {
-    if (!isPresent || !liveRef.current || startInFlight.current) return null;
+    if (!isPresent || !liveRef.current || startInFlight.read()) return null;
     const ticket = actionOwner.begin(previous.game_id);
     if (!ticket) return null;
     if (!actionOwner.owns(ticket)) {
@@ -377,15 +379,15 @@ export default function Perechi({ onExit, onToast }: Props) {
       setActionSync({ ...actionSync, kind: "changed" });
       return;
     }
-    const focused = focusedTileBeforeMutation.current;
+    const focused = focusedTileBeforeMutation.read();
     if (action === "match" && focused) {
       // A deliberate retry continues the same tile claim from this control.
       // Moving elsewhere before or during the read still supersedes the claim.
       if (focusStillOwned(retryOrigin)) {
-        focusedTileBeforeMutation.current = { ...focused, origin: retryOrigin };
+        focusedTileBeforeMutation.write({ ...focused, origin: retryOrigin });
       } else {
-        pendingFocus.current = null;
-        focusedTileBeforeMutation.current = null;
+        pendingFocus.write(null);
+        focusedTileBeforeMutation.write(null);
       }
     }
     setBusy(true);
@@ -403,9 +405,9 @@ export default function Perechi({ onExit, onToast }: Props) {
       if (!ticket) return;
       const focusedId = ids.find((id) => tileRefs.current.get(id) === document.activeElement);
       const focusOrigin = focusedId ? tileRefs.current.get(focusedId) : undefined;
-      focusedTileBeforeMutation.current = focusedId && focusOrigin
+      focusedTileBeforeMutation.write(focusedId && focusOrigin
         ? { id: focusedId, origin: focusOrigin }
-        : null;
+        : null);
       setChecking(ids);
       setBusy(true);
       try {
@@ -475,7 +477,7 @@ export default function Perechi({ onExit, onToast }: Props) {
     }
     const ticket = beginAction(state, "hint");
     if (!ticket) return;
-    focusedTileBeforeMutation.current = null;
+    focusedTileBeforeMutation.write(null);
     const focusOrigin = hintButtonRef.current;
     const restoreFocus = focusOrigin !== null && document.activeElement === focusOrigin;
     setBusy(true);
@@ -490,13 +492,13 @@ export default function Perechi({ onExit, onToast }: Props) {
         fresh.tiles.some((tile) => tile.id === hinted.id && !tile.solved),
       );
       if (restoreFocus && nextTile && fresh.hints_used > state.hints_used && !fresh.won && !fresh.lost) {
-        pendingFocus.current = {
+        pendingFocus.write({
           kind: "hint",
           gameId: fresh.game_id,
           savedId: ticket.savedId,
           origin: focusOrigin,
           id: nextTile.id,
-        };
+        });
       }
       setState(fresh);
       setSelected(null);

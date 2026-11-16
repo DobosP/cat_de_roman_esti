@@ -131,7 +131,7 @@ for (const { kind, hints, solved } of [
     const fresh = await serverState(request, initial.game_id);
     expect(fresh.hints_used).toBe(hints);
     expect(fresh.earned_hint).toEqual(committed().earned_hint);
-    expect(fresh.earned_hint.hint_kind).toBe(kind);
+    expect(fresh.earned_hint.hint_kind).toBe(kind === "ingredient" ? "category" : kind);
     expect(fresh.target.id).toBeNull();
     expect(fresh.target.revealed).toBe(false);
     expect(fresh.recipes).toBeUndefined();
