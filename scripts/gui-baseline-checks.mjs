@@ -42,6 +42,7 @@ const REDESIGN_SOURCES = [
   "frontend/src/games.ts", "frontend/src/screens/Home.tsx", "frontend/src/components/GameFrame.tsx",
   "frontend/src/entry.ts", "frontend/src/hooks/useGameEntry.ts", "frontend/src/theme.ts",
   "frontend/src/hooks/useEventValue.ts", "frontend/src/hooks/useCoachMessage.ts",
+  "frontend/src/hooks/useSavedGameResume.ts",
   "frontend/index.html", "go-backend/internal/httpapi/managed_nonce.go",
   "frontend/src/components/FreeRoundOptions.tsx", "frontend/src/components/HintBar.tsx",
   "frontend/src/components/ResultCard.tsx", "frontend/src/components/ResultsHistory.tsx",
