@@ -61,7 +61,15 @@ func assertManagedCurrentIndex(t *testing.T, w *httptest.ResponseRecorder, origi
 	if bytes.Count(w.Body.Bytes(), []byte(meta)) != 1 {
 		t.Fatal("header/bootstrap mismatch")
 	}
-	unbridged := bytes.Replace(w.Body.Bytes(), []byte(meta), nil, 1)
+	bridge := meta
+	if bytes.Contains(original, []byte(`<meta name="cat-theme-bootstrap" content="1"`)) {
+		theme := `<script id="cat-theme-bootstrap" nonce="` + nonce + `">` + managedThemeBootstrap + `</script>`
+		bridge += theme
+		if bytes.Count(w.Body.Bytes(), []byte(bridge)) != 1 {
+			t.Fatal("fixed theme bootstrap must follow the single request nonce")
+		}
+	}
+	unbridged := bytes.Replace(w.Body.Bytes(), []byte(bridge), nil, 1)
 	unbridged = bytes.ReplaceAll(unbridged, []byte(` nonce="`+nonce+`"`), nil)
 	if !bytes.Equal(unbridged, original) {
 		t.Fatal("nonce bridge changed original bytes")
