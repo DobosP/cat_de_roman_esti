@@ -36,27 +36,36 @@ def plain(folded):
 
 
 class Frequencies:
-    def __init__(self, counts, plain_counts, variants, sha256, skipped):
+    def __init__(self, counts, plain_counts, variants, sha256, skipped, dominant=None):
         self.counts = counts
         self.plain_counts = plain_counts
+        self.dominant = dominant or {}
         self.variants = variants
         self.sha256 = sha256
         self.skipped = skipped
 
     def lookup(self, label):
-        if not isinstance(label, str) or not label.strip() or len(label) > MAX_LABEL_CHARS:
+        if not isinstance(label, str) or not label.strip() or len(label.strip()) > MAX_LABEL_CHARS:
             raise ValueError("Label must be a non-empty string of bounded length")
         label = label.strip()
         if any(char.isspace() for char in label):
             return {"label": label, "exact": None, "variants": None,
-                    "undiacritised": None, "status": "multiword"}
+                    "undiacritised": None, "status": "multiword",
+                    "dominant_spelling": None, "minority_spelling": None}
         key = fold(label)
         exact = self.counts.get(key, 0)
         undiacritised = self.plain_counts.get(plain(key), 0)
         status = ("exact" if exact else
                   "undiacritised_only" if undiacritised else "absent")
+        dominant, dominant_count = self.dominant.get(plain(key), (None, 0))
+        # A label written without diacritics can carry the count of another
+        # word's undiacritised writing (soc for șoc): flag it for the reviewer.
+        # Labels with diacritics are not flagged, because their plain letters are
+        # also the definite form of many feminine nouns (bluza for bluză).
+        minority = plain(key) == key and dominant is not None and dominant != key and exact < dominant_count
         return {"label": label, "exact": exact, "variants": self.variants.get(key, 0),
-                "undiacritised": undiacritised, "status": status}
+                "undiacritised": undiacritised, "status": status,
+                "dominant_spelling": dominant, "minority_spelling": minority}
 
 
 def load(list_path, expected_sha256, max_bytes=MAX_LIST_BYTES):
@@ -90,11 +99,13 @@ def load(list_path, expected_sha256, max_bytes=MAX_LIST_BYTES):
         key = fold(word)
         counts[key] = counts.get(key, 0) + int(number)
         variants[key] = variants.get(key, 0) + 1
-    plain_counts = {}
-    for key, count in counts.items():
+    plain_counts, dominant = {}, {}
+    for key, count in sorted(counts.items()):
         flat = plain(key)
         plain_counts[flat] = plain_counts.get(flat, 0) + count
-    return Frequencies(counts, plain_counts, variants, digest, skipped)
+        if count > dominant.get(flat, (None, 0))[1]:
+            dominant[flat] = (key, count)
+    return Frequencies(counts, plain_counts, variants, digest, skipped, dominant)
 
 
 def read_labels(path):

@@ -60,6 +60,19 @@ class FrequencyTests(unittest.TestCase):
         self.assertEqual(row["exact"], 0)
         self.assertEqual((row["undiacritised"], row["status"]), (40, "undiacritised_only"))
 
+    def test_minority_spelling_is_flagged(self):
+        # tara (14) is the plain writing of țară (26): its exact count is real but
+        # most of the plain letters belong to the diacritic spelling.
+        row = self.freq.lookup("tara")
+        self.assertEqual((row["exact"], row["dominant_spelling"], row["minority_spelling"]),
+                         (14, "țară", True))
+        row = self.freq.lookup("țară")
+        self.assertEqual((row["dominant_spelling"], row["minority_spelling"]), ("țară", False))
+        row = self.freq.lookup("școală")
+        self.assertEqual((row["dominant_spelling"], row["minority_spelling"]), ("scoala", False))
+        self.assertIs(self.freq.lookup("libelulă")["minority_spelling"], False)
+        self.assertIsNone(self.freq.lookup("cal de mare")["minority_spelling"])
+
     def test_plain_spelling_and_absent_and_multiword(self):
         self.assertEqual(self.freq.lookup("tata")["status"], "exact")
         self.assertEqual(self.freq.lookup("tată")["status"], "undiacritised_only")
@@ -99,7 +112,8 @@ class FrequencyTests(unittest.TestCase):
         self.assertEqual([row["status"] for row in report["rows"]],
                          ["exact", "multiword", "absent"])
         self.assertEqual(set(report["rows"][0]),
-                         {"label", "exact", "variants", "undiacritised", "status"})
+                         {"label", "exact", "variants", "undiacritised", "status",
+                          "dominant_spelling", "minority_spelling"})
         text = self.root / "labels.txt"
         text.write_text("tată\n\nșcoală\n", encoding="utf-8")
         command[command.index("--labels") + 1] = str(text)

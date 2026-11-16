@@ -21,13 +21,22 @@ For a single-word label:
 A label containing whitespace has status multiword and is not looked up.
 undiacritised_only is a flagged fallback, not evidence: the plain spelling can
 be another word (tată vs tata, față vs fata). A reviewer must judge it.
+dominant_spelling is the most frequent list spelling with the label's plain
+letters; minority_spelling is true when the label has no diacritics, that is
+another spelling, and the label's own count is lower. Then exact may be another
+word's undiacritised writing (soc vs șoc), and a reviewer must judge it. Labels
+with diacritics are not flagged: their plain letters are also the definite form
+of many feminine nouns (bluza for bluză).
+absent can mean only the lemma is missing: the list holds inflected forms
+(hribi, corcodușa), so a reviewer checks those before parking a real word.
 
   python3 -I scripts/content_v5/frequency.py --list PATH --sha256 HEX \
     --labels FILE.json|FILE.txt --out FILE.json
 
 Labels are a JSON list of strings or one label per line (at most 100,000 and
 1 MiB). The output holds schema, list_sha256, skipped_lines and rows of
-{label, exact, variants, undiacritised, status}. Exit 2 means invalid input
+{label, exact, variants, undiacritised, status, dominant_spelling,
+minority_spelling}. Exit 2 means invalid input
 (hash mismatch, oversize, bad labels). A frequency is a hint for ranking
 candidates, never content evidence.
 
