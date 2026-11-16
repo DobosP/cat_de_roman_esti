@@ -8,9 +8,6 @@ import { Csp } from "../components/CspStyle";
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "preact/hooks";
 import { Button, type ToastKind } from "@roedu/ui";
 import { useIsPresent } from "@roedu/ui/motion";
-import {
-  releaseFlight,
-} from "../asyncControl.mjs";
 import { ApiError } from "../api/client";
 import { createGameActionOwner, recoverOwnedGameAction, type GameActionTicket } from "../gameActionRecovery.mjs";
 import {
@@ -238,7 +235,7 @@ export default function Perechi({ onExit, onToast }: Props) {
         if (liveRef.current && epoch === lifetimeRef.current) setStartFailed(true);
       } finally {
         if (epoch === lifetimeRef.current) {
-          releaseFlight(startInFlight);
+          startInFlight.write(false);
           if (liveRef.current) setLoading(false);
         }
       }
