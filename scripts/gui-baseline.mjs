@@ -250,6 +250,13 @@ try {
           interactionCount: performance.interactionCount }));
         throw new Error(`No real performance entry for ${actionLabel} run ${run + 1}: ${JSON.stringify(received)}`, { cause: error });
       }
+      if (!originalCapture) {
+        // The browser's action observer can run before web-vitals processes its
+        // entries in requestIdleCallback. Wait for the genuine first report
+        // before leaving, then keep the pagehide-finalized values below.
+        await page.waitForFunction(() => Number.isFinite(window.__catVitals.lcp) &&
+          Number.isFinite(window.__catVitals.inp), undefined, { polling: 100 });
+      }
       const observed = await page.evaluate(() => ({ ...window.__catVitals, events: window.__catEvents }));
       if (mode === "owner-diagnostic") {
         Object.assign(observed, await page.evaluate(() => ({
