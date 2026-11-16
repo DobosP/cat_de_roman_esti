@@ -26,6 +26,9 @@ DAY = CLOCK[:10]
 
 def collect():
     client = Client()
+    metadata = client.get("/api/categories")
+    if metadata.status_code != 200:
+        raise RuntimeError("Expected the offline category taxonomy")
     starts = {}
     requests = {}
     for game in GAMES:
@@ -71,6 +74,7 @@ def collect():
             "oracle_source_sha256": oracle,
             "content_source_pins": dict(sorted(json.loads(bundled.read_bytes())["sources"].items())),
         },
+        "categories": metadata.json(),
         "requests": requests,
         "starts": starts,
         "intrusul_result": {"request": request, "body": win},

@@ -76,6 +76,7 @@ async function fixedPage(screen) {
     sessionStorage.clear();
   });
   await page.route("**/api/me", (route) => route.fulfill({ json: { accounts_enabled: false, authenticated: false, user: null } }));
+  await page.route("**/api/categories", (route) => route.fulfill({ json: fixture.categories }));
   const counts = { creates: 0, guesses: 0 };
   const refused = [];
   await page.route("**/api/wordgames/**", async (route) => {
