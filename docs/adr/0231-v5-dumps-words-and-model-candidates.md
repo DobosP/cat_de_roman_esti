@@ -1,7 +1,7 @@
 # ADR-0231: V5 amendment — Wiktionary dump evidence, full paradigms, words lane, model candidates
 
 Date: 2026-11-13
-Status: accepted (Paul, 2026-11-13).
+Status: accepted (Paul, 2026-11-13); amended by [ADR-0235](0235-v5-real-use-fixes.md) (2026-11-16).
 Decider: Paul Dobos.
 Amends [ADR-0230](0230-content-loop-v5.md) decisions 1–7: the campaign and its meter, targets,
 trains, word evidence (including the first-fetcher rule for dump evidence), sources, lanes and

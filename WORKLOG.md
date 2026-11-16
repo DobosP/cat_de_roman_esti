@@ -1,5 +1,11 @@
 # Work log
 
+## 2026-11-16 — V4 source limits moved from STATUS
+
+Valid until: never current — history.
+
+- **V4 source and quick-admission limits (history; V5 rules in [ADR-0230](adr/0230-content-loop-v5.md)).** [ADR-0228](adr/0228-policy-only-source-hosts.md) retains the policy-only host grant. The approved two-URL WikiTech policy inspection completed. The Foundation robots refusal and DEX whole-run drop remain. Paul ratified the five I/J calibration cases `937ddcc0…`. Exact SOURCES/source-client adoption and new quick admission remain pending.
+
 ## 2026-11-16 — Redesign v2 starts
 
 Valid until: redesign v2 milestone 1 lands — then treat as history.

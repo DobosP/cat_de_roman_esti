@@ -237,3 +237,5 @@ Parallel lanes also allocated0188/0189 independently. All four full-filename bod
 - [0233](0233-redesign-v2-interface.md) — redesign v2 interface: six illustrated standalone games, light and dark themes, one-tap daily then free entry, one game frame, help sheet and result panel; replaces frozen screenshots/hashes/axe ("re-lock") while byte ceilings stay.
 
 - [0234](0234-anonymous-daily-board-place.md) — anonymous daily board comparison, disabled by default, with aggregate-only storage, a podium and expiring rate limits.
+
+- [0235](0235-v5-real-use-fixes.md) — V5 real-use fixes: one disturbed-board definition (top-100 set or order; Lanț shortest route) in dry run, S7 and closeout; paired no-worse re-blind for existing Cald boards with both judges' sign-off; frozen items finish between 70% and 90%; full FrequencyWords list with diacritic folding; early Lanț overlap screen; root operating rules and budgets; pilot 3 after the weekly reset.

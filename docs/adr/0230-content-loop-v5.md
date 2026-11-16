@@ -2,7 +2,7 @@
 
 Date: 2026-11-13
 Status: accepted (Paul, 2026-11-13); amended the same day, executor name (see Amendment); decisions 1–7
-amended by [ADR-0231](0231-v5-dumps-words-and-model-candidates.md).
+amended by [ADR-0231](0231-v5-dumps-words-and-model-candidates.md) and [ADR-0235](0235-v5-real-use-fixes.md).
 Decider: Paul Dobos.
 Supersedes in part [ADR-0226](0226-content-loop-v4.md). Keeps [ADR-0227](0227-owner-qualified-test-pin-delegation.md)
 and [ADR-0228](0228-policy-only-source-hosts.md). Accepts [ADR-0229](0229-native-quick-review-and-rubric-requalification.md)'s

@@ -43,7 +43,7 @@ sub-path does not match.
 
 The output is `cat-lant-overlap-1` JSON with the bundle SHA-256 and manifest content
 hash, deterministic and without timestamps. Exit zero means the screen completed;
-a `near_duplicate` is data for the screen, not an error. Treat it as a reject of the
+a `near_duplicate` is data for the screen, not an error. Treat it as a park (S1) of the
 prospect and register it.
 
 ## Threat model
