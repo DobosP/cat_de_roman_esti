@@ -77,7 +77,7 @@ export default function Perechi({ onExit, onToast }: Props) {
   const { admit, remember, complete, settleCompletion } = entry;
   const liveRef = useRef(true), lifetimeRef = useRef(0);
   const recordOnce = useRecordScore(GAME_KEY);
-  const startInFlight = useEventValue(false);
+  const startInFlight = useEventValue<boolean>(false);
   const actionOwner = useMemo(() => createGameActionOwner(active), [active]);
   const [actionSync, setActionSync] = useState<{
     previous: PerechiState;

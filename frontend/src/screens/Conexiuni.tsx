@@ -80,7 +80,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   const [state, setState] = useState<ConexiuniState | null>(null);
   const [startFailed, setStartFailed] = useState(false);
   const [unavailable, setUnavailable] = useState(false);
-  const startInFlight = useEventValue(false);
+  const startInFlight = useEventValue<boolean>(false);
   const [loading, setLoading] = useState(() => active.peek() !== null);
   const [busy, setBusy] = useState(false);
   const [actionSync, setActionSync] = useState<ActionSync | null>(null);

@@ -26,12 +26,12 @@ export function useGameEntry(game: GameKey, active: ActiveGameMemo) {
   const replayKey = `cat_replay_v2_${game}`;
   const [date, setDate] = useState(localDay);
   const isPresent = useIsPresent();
-  const presentPreviously = useEventValue(false);
-  const initialized = useEventValue(false);
+  const presentPreviously = useEventValue<boolean>(false);
+  const initialized = useEventValue<boolean>(false);
   const parkedCandidate = useEventValue<string | null>(null);
   const [replay, setReplay] = useState(() => read(replayKey));
   const [recoveredTerminal, setRecoveredTerminal] = useState<string | null>(null);
-  const presentingRecovery = useEventValue(false);
+  const presentingRecovery = useEventValue<boolean>(false);
   const [settledTerminal, setSettledTerminal] = useState<string | null>(null);
   const [options, setOptions] = useState(() => readFreeOptions(game));
 
@@ -135,7 +135,7 @@ export function useRoundStart(
   retryResume: () => void,
   start: (daily?: string, previousGameId?: string) => void,
 ) {
-  const didStart = useEventValue(false);
+  const didStart = useEventValue<boolean>(false);
   const latest = useEventValue<{ entry: GameEntry; shouldStart: boolean; start: typeof start; retryResume: typeof retryResume } | null>(null);
   useLayoutEffect(() => { latest.write({ entry, shouldStart, start, retryResume }); });
   const startEntry = (completedId?: string) => {

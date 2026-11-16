@@ -115,8 +115,8 @@ var frozenV5Pilot2Forms1Source31 []byte
 //go:embed testdata/python-http-parity-rules-v2.json.gz
 var frozenRulesV2 []byte
 
-const RulesV2SHA256 = "39ec492770228b22380b59c19438631acc56634552969752162e0b56c68ad714"
-const RulesV2Cases = 1302
+const RulesV2SHA256 = "1b4b0c3dca08b145162a57c4ec080202f2da76005555cdfa25d0c9e5e920c7a1"
+const RulesV2Cases = 1320
 
 const FrozenSHA256 = "9041e05f13190a06a526c1aeed1f264d467483cd267ffcdb24f422ed9430b2cb"
 const V12SHA256 = "6293a0dde67ee0b0e5929cc1103bd80795e0aff1af2ba5fdf53e983ab79351fd"

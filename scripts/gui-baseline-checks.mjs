@@ -41,6 +41,8 @@ const REDESIGN_SOURCES = [
   "scripts/gui-baseline.mjs", "scripts/gui-baseline-checks.mjs",
   "frontend/src/games.ts", "frontend/src/screens/Home.tsx", "frontend/src/components/GameFrame.tsx",
   "frontend/src/entry.ts", "frontend/src/hooks/useGameEntry.ts", "frontend/src/theme.ts",
+  "frontend/src/hooks/useEventValue.ts", "frontend/src/hooks/useCoachMessage.ts",
+  "frontend/index.html", "go-backend/internal/httpapi/managed_nonce.go",
   "frontend/src/components/FreeRoundOptions.tsx", "frontend/src/components/HintBar.tsx",
   "frontend/src/components/ResultCard.tsx", "frontend/src/components/ResultsHistory.tsx",
   ...["AlchimieChallenge", "CaldRece", "Conexiuni", "Intrusul", "Lant", "Perechi"].map((name) => "frontend/src/screens/" + name + ".tsx"),
