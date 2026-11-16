@@ -130,7 +130,7 @@ func TestReferenceSourceBindingAndMismatchFailClosed(t *testing.T) {
 }
 func TestRulesSelectionAndReplayRefuseDrift(t *testing.T) {
 	data := testData(t)
-	legacy, err := ForSourcesAndRules(data.Sources, 1)
+	legacy, err := ForSourcesAndRules(source31ExpectedSources(), 1)
 	if err != nil || legacy.Version() != 1 || len(legacy.Cases) != 1206 {
 		t.Fatal("historical selection must use the historical corpus", err)
 	}
@@ -138,8 +138,19 @@ func TestRulesSelectionAndReplayRefuseDrift(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if _, err := Replay(context.Background(), client, legacy, data); err == nil || client.Count() != 0 {
-		t.Fatal("same-source prior rules reached the current runtime")
+	// Preserve the independently captured Source31 rules-1 corpus. A later
+	// source tuple has no rules-1 capture and must never fall back to it.
+	if !reflect.DeepEqual(data.Sources, legacy.Sources) {
+		if _, err := ForSourcesAndRules(data.Sources, 1); err == nil {
+			t.Fatal("uncaptured current source tuple selected prior rules")
+		}
+	}
+	// This separate, in-memory fixture reaches the rules-version boundary
+	// without a source mismatch masking it. No captured response is replayed.
+	priorRules := *legacy
+	priorRules.Sources = source6GUICloneSources(data.Sources)
+	if _, err := Replay(context.Background(), client, &priorRules, data); err == nil || err.Error() != "reference rules version 1 differs from native rules version 2" || client.Count() != 0 {
+		t.Fatal("same-source prior rules reached the current runtime", err)
 	}
 	for _, version := range []RulesVersion{0, 3} {
 		if _, err := ForSourcesAndRules(data.Sources, version); err == nil {
