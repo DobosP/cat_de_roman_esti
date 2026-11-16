@@ -69,3 +69,50 @@ func ValidateBoardReviewRules(c *content.Content) error {
 	}
 	return nil
 }
+
+// BoardReplayGuess is the native outcome of one typed guess replayed for review.
+type BoardReplayGuess struct {
+	// Scored is false for an unknown word or an unconfirmed fuzzy suggestion.
+	// Neither costs an attempt in live play.
+	Scored bool
+	ID     string
+	Rank   int
+	Won    bool
+}
+
+// BoardReplayForReview plays typed guesses on a private session for target
+// through the live guess path. It stops after the native win and removes the
+// session. Fuzzy suggestions are never confirmed.
+func (s *Service) BoardReplayForReview(target, difficulty string, texts []string) ([]BoardReplayGuess, error) {
+	if !s.g.Exists(target) {
+		return nil, fmt.Errorf("unknown Cald target")
+	}
+	id, err := s.store.Create(s.build(target, difficulty, nil, ""))
+	if err != nil {
+		return nil, err
+	}
+	defer s.store.Delete(id)
+	played := make([]BoardReplayGuess, 0, len(texts))
+	for _, text := range texts {
+		body, fault := s.Guess(id, text, "")
+		if fault != nil {
+			return nil, fmt.Errorf("native guess refused: %s", fault.Error())
+		}
+		step := BoardReplayGuess{}
+		if body["ok"] == true {
+			guess := body["guess"].(map[string]any)
+			step = BoardReplayGuess{true, guess["id"].(string), guess["rank"].(int), body["won"].(bool)}
+		}
+		played = append(played, step)
+		if step.Won {
+			break
+		}
+	}
+	return played, nil
+}
+
+// BoardRankForReview is the live rank an exact KG concept has on target's board.
+func (s *Service) BoardRankForReview(target, id string) (rank int, reachable bool) {
+	sc := s.score(s.build(target, "", nil, ""), id, false, 0)
+	return sc.Rank, sc.Reachable
+}

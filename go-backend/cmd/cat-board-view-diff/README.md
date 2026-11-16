@@ -96,6 +96,77 @@ reachable stock counts as disturbed. The report sets `one_word_dry_run.hold` whe
 more than 10 boards are disturbed across all six games. Source evidence and
 registry order are checked by the link installer.
 
+## Paired re-blind of disturbed existing Cald boards
+
+A blind critic plays each disturbed existing Cald board on the candidate. This mode
+replays the critic's typed guesses with the native Cald service on both exact
+bundles and writes a `cat-v5-board-reblind-compare-1` receipt.
+
+```sh
+"$CAMPAIGN/cat-board-view-diff" --reblind-compare \
+  --baseline "$BASE_BUNDLE" --baseline-sha256 "$BASE_SHA256" \
+  --candidate "$CANDIDATE_BUNDLE" --candidate-sha256 "$CANDIDATE_SHA256" \
+  --baseline-commit "$BASE_COMMIT" --candidate-commit "$CANDIDATE_COMMIT" \
+  --view-diff "$CAMPAIGN/board-diff.json" --view-diff-sha256 "$DIFF_SHA256" \
+  --evidence-root "$CAMPAIGN" --transcripts "$CAMPAIGN/board-reblind-list.json" \
+  > "$CAMPAIGN/board-reblind-compare.json"
+```
+
+The transcript list has the schema `cat-v5-board-reblind-compare-input-1` and a
+`boards` array. Each row gives `game` (`contexto`), `id` and a `transcript` object
+with `path` and `sha256`. Paths use forward slashes and stay below the evidence
+root. Each transcript is the object that closeout reads: `game`, `id`, `view_sha256`
+(the view diff `after_sha256`), `thread_id`, `verdict` and `play`. A play step whose
+`guess` member is a string is one typed guess, in play order. Every other step is
+feedback and is not replayed.
+
+Each receipt row carries these values.
+
+| Field | Meaning |
+| --- | --- |
+| `candidate_best_rank`, `baseline_best_rank` | Best native rank among the scored guesses on each build. An unknown word or an unconfirmed spelling suggestion costs no attempt and is not scored. Replay stops at the native win. |
+| `won_candidate`, `won_baseline` | Whether the same guesses win each build. |
+| `k` | Number of concepts present only in the candidate that rank above the candidate's best guess on that board. Each one moves an unchanged guess down one rank. |
+| `verdict` | `win` when the candidate is won. Otherwise `no-worse` when `candidate_best_rank <= baseline_best_rank + k`. Otherwise `worse`. |
+| `stock_quality` | True when neither build is won. Closeout copies these boards to the landing receipt for the owner queue. |
+
+The receipt binds both commit IDs, both bundle digests, the view diff digest, each
+board ID with its before and after view digests, the critic thread and each
+transcript path and digest. It contains no guess text. Rows are in stable board ID
+order and the same inputs give the same bytes. The mode rebuilds each board's
+counted view from both bundles and refuses a view diff row that differs. It refuses
+a board outside the diff's changed Cald disturbances, a repeated board or
+transcript, a transcript bound to another view and a play in which either build
+scores no guess. A `worse` row is recorded evidence and the command still exits 0.
+
+Limits: 512 boards, 1 MiB per transcript and for the list, 8 MiB for the view
+diff, 512 play steps, 64 typed guesses and 256 bytes per guess.
+
+## Threat model
+
+The orchestrator owns the bundles, the view diff, the transcripts and this tool's
+output. The tool guards against mixed-up or edited files between steps. It cannot
+prove where a file came from.
+
+- SHA-256 digests bind exact bytes. The two commit IDs are recorded labels. The
+  tool has no Git access. Closeout checks them and compares both bundle digests
+  with the bundles committed at those IDs.
+- The paired verdict can only relax the blind-win rule for a disturbed existing
+  Cald board, and only when closeout also finds the two reviewer signatures for
+  that board's top-100 change. New boards keep the absolute win rule. Lanț and the
+  other games keep the blind pass rule. This tool enforces the Cald-only scope.
+  [Closeout](../../../scripts/content_v5/CLOSE_LANDING.txt) enforces the rest.
+- The replay proves what the typed guesses score on both builds. It cannot prove
+  that the critic was blind, independent or the real author of the transcript.
+  Those stay operator and reviewer obligations.
+- A critic who guesses a candidate-only word gains nothing on the baseline, where
+  that word is unknown and unscored.
+- `os.Root` confines transcript paths to the evidence root and refuses symlinks
+  that leave it. The leaf must be a regular file.
+- All inputs are size-bounded and read once. The command works offline and starts
+  no HTTP service. The replay uses one private native session per board and build
+  and removes it.
+
 ## Input and report boundaries
 
 Pass independently recorded digests for trusted native exports or a qualified

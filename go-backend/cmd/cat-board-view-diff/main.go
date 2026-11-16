@@ -38,6 +38,14 @@ func run(args []string, output, diagnostics io.Writer) error {
 	flags.StringVar(&preview.kgSHA, "prospective-kg-sha256", "", "exact prospective KG SHA-256")
 	flags.StringVar(&preview.pack, "prospective-pack", "", "exact rederived prospective pack file")
 	flags.StringVar(&preview.packSHA, "prospective-pack-sha256", "", "exact prospective pack SHA-256")
+	paired := flags.Bool("reblind-compare", false, "replay blind critic guesses on both bundles for disturbed existing Cald boards")
+	var reblind reblindFiles
+	flags.StringVar(&reblind.diff, "view-diff", "", "exact full view diff report for paired re-blind")
+	flags.StringVar(&reblind.diffSHA, "view-diff-sha256", "", "exact view diff SHA-256")
+	flags.StringVar(&reblind.baselineCommit, "baseline-commit", "", "full baseline commit ID recorded in the paired re-blind receipt")
+	flags.StringVar(&reblind.candidateCommit, "candidate-commit", "", "full candidate commit ID recorded in the paired re-blind receipt")
+	flags.StringVar(&reblind.root, "evidence-root", "", "campaign scratch that holds the critic transcripts")
+	flags.StringVar(&reblind.input, "transcripts", "", "paired re-blind transcript list")
 	if err := flags.Parse(args); err != nil {
 		if errors.Is(err, flag.ErrHelp) {
 			return nil
@@ -52,6 +60,9 @@ func run(args []string, output, diagnostics io.Writer) error {
 	}
 	if !*dryRun && (*candidate == "" || !validSHA(*candidateSHA) || preview != (previewFiles{})) {
 		return errors.New("S7 comparison requires candidate bundle path and lowercase SHA-256 digest")
+	}
+	if (*dryRun || !*paired) && (*paired || reblind != (reblindFiles{})) {
+		return errors.New("paired re-blind inputs need --reblind-compare and two exact bundles")
 	}
 	before, err := loadBundle(*baseline, *baselineSHA)
 	if err != nil {
@@ -71,6 +82,13 @@ func run(args []string, output, diagnostics io.Writer) error {
 		if err != nil {
 			return fmt.Errorf("candidate bundle: %w", err)
 		}
+	}
+	if *paired {
+		receipt, err := reblind.compare(before, after, *baselineSHA, *candidateSHA)
+		if err != nil {
+			return fmt.Errorf("paired re-blind: %w", err)
+		}
+		return writeReport(receipt, output)
 	}
 	result, err := compare(before, after)
 	if err != nil {
