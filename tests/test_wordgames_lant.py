@@ -38,15 +38,22 @@ def _create(seed: int = SEED, **params):
     return res.json()
 
 
+def _shortest_next(game_id: str) -> str:
+    session = store.get(game_id)
+    distances = get_service().distances_to(session.target)
+    choices = lant._shortest_hops(session, distances)
+    assert choices
+    return choices[0]
+
+
 def _win(game: dict) -> dict:
-    """Follow shortest-path hints to a win; return the final move response body."""
+    """Walk the private shortest route through the ordinary move endpoint."""
     gid = game["game_id"]
     body = {}
     for _ in range(game["optimal"]):
-        hint = _revealed_hop(gid)["hint"]
         body = c.post(
             f"/api/wordgames/lant/games/{gid}/move",
-            {"text": hint["label"]},
+            {"text": _shortest_next(gid)},
             content_type="application/json",
         ).json()
     assert body["won"] is True
@@ -143,32 +150,33 @@ def test_valid_direct_hop_outside_visible_menu_stays_legal():
     assert moved["current"]["id"] in svc.neighbor_ids(game["start"]["id"])
 
 
-def test_winning_playthrough_by_following_hints():
+def test_hinted_hop_preserves_shortest_win_and_each_paid_rung_counts():
     game = _create()
     gid = game["game_id"]
-    optimal = game["optimal"]
+    cue = _revealed_hop(gid)
+    body = c.post(
+        f"/api/wordgames/lant/games/{gid}/move",
+        {"text": cue["hint"]["id"]},
+        content_type="application/json",
+    ).json()
+    assert body["ok"] and body["steps"] == cue["steps"]
+    won = _win({**game, "optimal": game["optimal"] - 1})
+    assert won["moves"] == game["optimal"]
+    assert won["steps"] == cue["steps"] and won["perfect"] is False
+    assert c.get(f"/api/wordgames/lant/games/{gid}").json()["current"]["id"] == game["target"]["id"]
 
-    won = False
-    # Following the shortest-path hint each turn must win in exactly `optimal` moves.
-    for _ in range(optimal):
-        hint = _revealed_hop(gid)["hint"]
 
-        mres = c.post(
-            f"/api/wordgames/lant/games/{gid}/move",
-            {"text": hint["label"]},
-            content_type="application/json",
-        )
-        assert mres.status_code == 200, mres.content.decode()
-        body = mres.json()
-        assert body["ok"] is True, body
-        assert body["relation"] != "" or True  # relation label may be empty for some edges
-        won = body["won"]
-
-    assert won is True
-    final = c.get(f"/api/wordgames/lant/games/{gid}").json()
-    assert final["won"] is True
-    assert final["current"]["id"] == final["target"]["id"]
-    assert final["moves"] == optimal
+def test_accepted_hop_counts_after_free_undo_on_shortest_win():
+    game = _create()
+    gid = game["game_id"]
+    move_url = f"/api/wordgames/lant/games/{gid}/move"
+    moved = c.post(move_url, {"text": _shortest_next(gid)}, content_type="application/json").json()
+    assert moved["moves"] == 1 and moved["steps"] == 0
+    undone = c.post(f"/api/wordgames/lant/games/{gid}/undo").json()
+    assert undone["moves"] == 0 and undone["steps"] == 0
+    won = _win(game)
+    assert won["moves"] == game["optimal"] and won["score"] == 1000
+    assert won["steps"] == 1 and won["perfect"] is False
 
 
 def test_unknown_concept_rejected():
@@ -762,8 +770,12 @@ def test_two_node_revisit_cycle_caps_then_undo_reopens_play(monkeypatch):
         "hint": None,
         "stage": "backtrack",
         "message": lant._MOVE_LIMIT_MESSAGE,
+        "steps": lant._MAX_MOVES,
+        "perfect": False,
+        "hint_level": 1,
+        "hints_left": 0,
     }
-    assert session.hint_requests == 0
+    assert session.hint_requests == 1
 
     undone = c.post(f"/api/wordgames/lant/games/{gid}/undo").json()
     assert undone["moves"] == lant._MAX_MOVES - 1
@@ -1041,18 +1053,17 @@ def test_hint_stages_persist_across_a_move(monkeypatch):
     ).json()
     assert mv["ok"] is True
     assert session.hint_requests == 3
-    next_position = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
-    # Still capped at the terminal stage; content is recomputed for the new position.
-    assert next_position["stage"] == "hop"
-    assert next_position["hint"] is not None
+    before = c.get(f"/api/wordgames/lant/games/{gid}").json()
+    assert c.post(f"/api/wordgames/lant/games/{gid}/hint").status_code == 400
+    assert c.get(f"/api/wordgames/lant/games/{gid}").json() == before
 
 
 def test_hint_on_won_game_returns_message():
     game = _create()
     _win(game)
-    h = c.post(f"/api/wordgames/lant/games/{game['game_id']}/hint").json()
-    assert h["hint"] is None
-    assert h["message"]
+    response = c.post(f"/api/wordgames/lant/games/{game['game_id']}/hint")
+    assert response.status_code == 400
+    assert response.json()["detail"]
 
 
 # --------------------------------------------------------------------- hardening: score
@@ -1089,14 +1100,12 @@ def test_over_par_lowers_score_but_never_below_floor():
     ).json()
     assert step["ok"] is True
 
-    # Now follow hints from the detour to the target; total moves must exceed optimal.
+    # Walk toward the target from the detour; total moves must exceed optimal.
     body = step
     while not body.get("won"):
-        h = _revealed_hop(gid)["hint"]
-        assert h is not None
         body = c.post(
             f"/api/wordgames/lant/games/{gid}/move",
-            {"text": h["label"]},
+            {"text": _shortest_next(gid)},
             content_type="application/json",
         ).json()
 
@@ -1748,9 +1757,10 @@ def test_hint_escalation_counter_is_capped_and_persists_through_moves_and_undo(
 
     stages = [
         c.post(f"/api/wordgames/lant/games/{gid}/hint").json()["stage"]
-        for _ in range(4)
+        for _ in range(2)
     ]
-    assert stages == ["alternatives", "hop", "hop", "hop"]
+    assert stages == ["alternatives", "hop"]
+    assert c.post(f"/api/wordgames/lant/games/{gid}/hint").status_code == 400
     assert session.hint_requests == 3
 
     for walk in range(24):
@@ -1764,11 +1774,8 @@ def test_hint_escalation_counter_is_capped_and_persists_through_moves_and_undo(
         # A move never resets help already consumed this session.
         assert session.hint_requests == 3
 
-        # Once capped, further hints stay at the terminal stage instead of re-teaching
-        # direction/alternatives from a stale, reset escalation.
-        again = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
-        assert again["stage"] == "hop"
-        assert session.hint_requests == 3
+        assert c.post(f"/api/wordgames/lant/games/{gid}/hint").status_code == 400
+        assert session.hint_requests == 3 and session.hints_used == 2
 
     c.post(f"/api/wordgames/lant/games/{gid}/undo")
     # Undo never resets it either.

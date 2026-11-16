@@ -211,7 +211,7 @@ def test_combine_with_no_discovery_counts_move(client: Client) -> None:
         body = res.json()
         if not body["discovered"]:
             barren = (a, b)
-            assert body["message"] == "Perechea nu are o rețetă în această rundă. Fără penalizare."
+            assert body["message"] == "Perechea nu are o rețetă în această rundă."
             assert body["already_tried"] is False
             assert body["moves"] >= 1
             break
@@ -462,32 +462,6 @@ def _barren_owned_pairs(
     ]
 
 
-def _force_fruitless(client: Client, state: dict) -> dict:
-    """Drive a game into the "stuck" state with distinct barren owned pairs.
-
-    Experiment memory prevents a retry from inflating the dry-spell counter, so every
-    accepted fruitless combine here represents a genuinely new experiment.
-    """
-    gid = state["game_id"]
-    session = A.store.get(gid)
-    assert session is not None
-    ids = [i["id"] for i in state["inventory"]]
-    pairs = _barren_owned_pairs(session, ids)
-    assert len(pairs) >= A.NUDGE_AFTER_FRUITLESS, (
-        "expected enough distinct barren pairs to force fruitless combines"
-    )
-    for a, b in pairs:
-        if state["hint_available"]:
-            break
-        state = client.post(
-            f"{BASE}/games/{gid}/combine",
-            {"a": a, "b": b},
-            content_type="application/json",
-        ).json()
-        assert state["discovered"] == [], "barren pair unexpectedly discovered a concept"
-        assert state["already_tried"] is False
-    assert state["hint_available"] is True
-    return state
 
 
 def _combine(client: Client, gid: str, pair: tuple[str, str]) -> dict:
@@ -498,21 +472,12 @@ def _combine(client: Client, gid: str, pair: tuple[str, str]) -> dict:
     ).json()
 
 
-def test_nudge_unlocks_after_two_fruitless_combines(client: Client) -> None:
-    """A stuck player reaches the hint one combine sooner than the V41 threshold."""
-    assert A.NUDGE_AFTER_FRUITLESS == 2
+def test_hint_is_available_on_first_move_and_costs_no_experiment(client: Client) -> None:
     state = _create(client, seed=7)
-    gid = state["game_id"]
-    session = A.store.get(gid)
-    assert session is not None
-    pairs = _barren_owned_pairs(session, [i["id"] for i in state["inventory"]])
-    assert len(pairs) >= A.NUDGE_AFTER_FRUITLESS
-
-    for count, pair in enumerate(pairs[: A.NUDGE_AFTER_FRUITLESS], start=1):
-        state = _combine(client, gid, pair)
-        assert state["discovered"] == []
-        assert state["hint_available"] is (count >= A.NUDGE_AFTER_FRUITLESS)
-    assert client.post(f"{BASE}/games/{gid}/hint").status_code == 200
+    assert state["hint_available"] and state["hints_used"] == state["steps"] == 0
+    hint = client.post(f"{BASE}/games/{state['game_id']}/hint").json()
+    assert hint["hints_used"] == hint["steps"] == 1
+    assert hint["moves"] == hint["attempted_count"] == 0
 
 
 def test_dead_pair_whisper_starts_late_rotates_and_stays_generic(
@@ -532,10 +497,10 @@ def test_dead_pair_whisper_starts_late_rotates_and_stays_generic(
     messages = [_combine(client, gid, pair)["message"] for pair in pairs[:needed]]
     # The first few dead pairs stay silent; the whisper is for a genuine dry spell.
     early = messages[: A.WHISPER_AFTER_FRUITLESS - 1]
-    assert early == ["Perechea nu are o rețetă în această rundă. Fără penalizare."] * len(early)
+    assert early == ["Perechea nu are o rețetă în această rundă."] * len(early)
 
     late = messages[A.WHISPER_AFTER_FRUITLESS - 1 :]
-    prefix = "Perechea nu are o rețetă în această rundă. Fără penalizare. "
+    prefix = "Perechea nu are o rețetă în această rundă. "
     whispers = [message.removeprefix(prefix) for message in late]
     assert all(message.startswith(prefix) for message in late)
     # Deterministic rotation that wraps back to the first whisper.
@@ -552,7 +517,7 @@ def test_dead_pair_whisper_starts_late_rotates_and_stays_generic(
     client.post(f"{BASE}/games/{gid}/reset")
     assert session.fruitless_total == 0
     assert _combine(client, gid, pairs[0])["message"] == (
-        "Perechea nu are o rețetă în această rundă. Fără penalizare."
+        "Perechea nu are o rețetă în această rundă."
     )
 
 
@@ -579,13 +544,13 @@ def test_repeated_barren_pair_is_authoritative_free_and_resettable(
     first = first_res.json()
     assert first["discovered"] == []
     assert first["inventory"] == inventory
-    assert first["message"] == "Perechea nu are o rețetă în această rundă. Fără penalizare."
+    assert first["message"] == "Perechea nu are o rețetă în această rundă."
     assert first["already_tried"] is False
     assert first["moves"] == first["attempted_count"] == 1
-    assert first["hint_available"] is False
+    assert first["hint_available"] is True
 
     score = session.score
-    fruitless = session.fruitless_streak
+    fruitless = session.fruitless_total
     hints_used = session.hints_used
     retry_res = client.post(
         f"{BASE}/games/{gid}/combine",
@@ -599,9 +564,9 @@ def test_repeated_barren_pair_is_authoritative_free_and_resettable(
     assert retry["message"] == "Deja încercată · fără cost. Schimbă un ingredient."
     assert retry["already_tried"] is True
     assert retry["moves"] == retry["attempted_count"] == 1
-    assert retry["hint_available"] is False
+    assert retry["hint_available"] is True
     assert retry["hints_used"] == hints_used
-    assert session.fruitless_streak == fruitless
+    assert session.fruitless_total == fruitless
     assert session.score == score
 
     resumed = client.get(f"{BASE}/games/{gid}").json()
@@ -675,7 +640,7 @@ def test_concurrent_duplicate_pair_is_charged_exactly_once(client: Client) -> No
     assert {body["moves"] for body in responses} == {1}
     assert {body["attempted_count"] for body in responses} == {1}
     assert session.moves == len(session.attempted_pairs) == 1
-    assert session.fruitless_streak == 1
+    assert session.fruitless_total == 1
 
 
 def test_repeated_productive_pair_is_free_and_does_not_replay_discovery(
@@ -704,7 +669,7 @@ def test_repeated_productive_pair_is_free_and_does_not_replay_discovery(
         "attempted_count": first["attempted_count"],
         "hints_used": first["hints_used"],
         "hint_available": first["hint_available"],
-        "fruitless_streak": session.fruitless_streak,
+        "fruitless_total": session.fruitless_total,
         "score": session.score,
     }
 
@@ -718,7 +683,7 @@ def test_repeated_productive_pair_is_free_and_does_not_replay_discovery(
     assert retry["message"] == "Deja încercată · fără cost. Schimbă un ingredient."
     for key in ("inventory", "moves", "attempted_count", "hints_used", "hint_available"):
         assert retry[key] == snapshot[key]
-    assert session.fruitless_streak == snapshot["fruitless_streak"]
+    assert session.fruitless_total == snapshot["fruitless_total"]
     assert session.score == snapshot["score"]
 
 
@@ -777,82 +742,41 @@ def _projected_distance_to_target(gid: str, owned: set[str]) -> int | None:
     return len(plan) if plan is not None else None
 
 
-def test_hint_unavailable_until_stuck(client: Client) -> None:
-    state = _create(client, seed=7)
-    assert state["hint_available"] is False
-    assert state["hints_used"] == 0
-    # Asking too early is a friendly 400, not a server error.
-    res = client.post(f"{BASE}/games/{state['game_id']}/hint")
-    assert res.status_code == 400
-
-
-def _seed_with_useful_and_barren(client: Client) -> dict:
-    """Find a game whose seed inventory has BOTH a forward-progress pair and a barren one.
-
-    On the dense graph most seeds qualify, but a few degenerate instances have no single
-    owned pair that strictly shortens the path to the target (the engine correctly returns
-    no hint there). We scan a handful of seeds and pick one where a hint must materialise,
-    so the test exercises the real nudge path without hard-coding a magic seed.
-    """
-    from cat_de_roman_esti.wordgames import alchimie as _A
-    for seed in range(40):
-        state = _create(client, seed=seed)
-        ids = [i["id"] for i in state["inventory"]]
-        session = _A.store.get(state["game_id"])
-        if (
-            session is None
-            or len(_barren_owned_pairs(session, ids))
-            < 2 * _A.NUDGE_AFTER_FRUITLESS
-        ):
-            continue
-        if _A._useful_pair(session) is not None:
-            return state
-    raise AssertionError("no seed offered both a barren and a forward-progress pair")
-
-
-def test_hints_progress_from_output_orientation_to_useful_pair(client: Client) -> None:
-    state = _force_fruitless(client, _seed_with_useful_and_barren(client))
-    assert state["hint_available"] is True
+def test_hints_progress_from_output_to_ingredient_to_useful_pair(client: Client) -> None:
+    state = client.post(f"{BASE}/games?seed=17&difficulty=usor").json()
     gid = state["game_id"]
+    root = f"{BASE}/games/{gid}"
     session = A.store.get(gid)
     assert session is not None
     secret = session.target
 
-    first = client.post(f"{BASE}/games/{gid}/hint").json()
-    assert first["hints_used"] == 1
-    assert first["hint"] is None
-    assert first["hint_kind"] in {"output", "category"}
+    first = client.post(root + "/hint").json()
+    assert first["hints_used"] == first["steps"] == first["hint_level"] == 1
+    assert first["hint"] is None and first["hint_kind"] == "output"
+    assert "hint_ingredient" not in first and set(first["hint_output"]) == {"label"}
     assert secret not in str(first)
-    if first["hint_kind"] == "output":
-        assert set(first["hint_output"]) == {"label"}
 
-    state = _force_fruitless(client, first)
-    res = client.post(f"{BASE}/games/{gid}/hint").json()
-    assert res["hints_used"] == 2
-    assert res["hint_kind"] == "pair"
-    assert res["hint"] is not None
-    a_id, b_id = res["hint"][0]["id"], res["hint"][1]["id"]
-    # The suggested pair must be owned and actually productive (a real forward move).
+    ingredient = client.post(root + "/hint").json()
+    assert ingredient["steps"] == ingredient["hint_level"] == 2
+    assert ingredient["hint"] is ingredient["hint_output"] is None
+    assert ingredient["hint_kind"] == "ingredient" and secret not in str(ingredient)
+
+    res = client.post(root + "/hint").json()
+    assert res["steps"] == res["hint_level"] == 3
+    assert res["hint_kind"] == "pair" and "hint_ingredient" not in res
+    a_id, b_id = [item["id"] for item in res["hint"]]
+    assert a_id == ingredient["hint_ingredient"]["id"]
     owned = {i["id"] for i in res["inventory"]}
     assert a_id in owned and b_id in owned
-    fresh = [
-        c
-        for c in session.recipes[A._pair_key(a_id, b_id)]
-        if c not in owned
-    ]
-    assert fresh, "hint pointed at a barren pair"
-    # ...and it must STRICTLY reduce exact projected actions, not just discover noise.
-    base_distance = _projected_distance_to_target(gid, owned)
-    new_distance = _projected_distance_to_target(gid, owned | set(fresh))
-    assert (
-        new_distance is not None
-        and base_distance is not None
-        and new_distance < base_distance
-    ), (
-        "hint did not shorten the path to the target"
-    )
-    # The nudge resets the dry spell so it can't be spammed.
-    assert res["hint_available"] is False
+    assert secret not in str(res)
+    fresh = set(session.recipes[A._pair_key(a_id, b_id)]) - owned
+    assert fresh
+    assert _projected_distance_to_target(gid, owned | fresh) < _projected_distance_to_target(gid, owned)
+
+    assert not res["hint_available"] and res["hints_left"] == 0
+    before = client.get(root).json()
+    assert client.post(root + "/hint").status_code == 400
+    assert client.get(root).json() == before
 
 
 def test_hint_penalizes_score() -> None:
@@ -862,12 +786,12 @@ def test_hint_penalizes_score() -> None:
     assert base.score == 1000
     assert "✨" in A._share_line(base)  # perfect medal
 
-    base.hints_used = 1
+    base.hints_used = base.hints_paid = 1
     assert base.score == 1000 - 150
     line = A._share_line(base)
     assert "✨" not in line and "💡 x1" in line
 
-    base.hints_used = 100  # never below the floor
+    base.hints_used = base.hints_paid = 100  # never below the floor
     assert base.score == 100
 
 
@@ -921,12 +845,24 @@ def test_empty_input_is_400(client: Client) -> None:
     assert res.status_code == 400
 
 
-def test_reset_clears_hints_and_streak(client: Client) -> None:
-    state = _force_fruitless(client, _create(client, seed=7))
+def test_reset_keeps_steps_and_hint_level_while_restoring_inventory(client: Client) -> None:
+    state = _create(client, seed=7)
     gid = state["game_id"]
-    client.post(f"{BASE}/games/{gid}/hint")
-    reset = client.post(f"{BASE}/games/{gid}/reset").json()
+    root = f"{BASE}/games/{gid}"
+    session = A.store.get(gid)
+    pairs = _barren_owned_pairs(session, session.seeds)[:session.target_depth + 1]
+    assert len(pairs) > session.target_depth
+    for pair in pairs:
+        state = _combine(client, gid, pair)
+    assert state["steps"] == 1
+
+    earned = client.post(root + "/hint").json()
+    assert earned["steps"] == 2
+    reset = client.post(root + "/reset").json()
     assert reset["hints_used"] == 0
-    assert reset["hint_available"] is False
-    assert reset["moves"] == 0
-    assert reset["attempted_count"] == 0
+    assert reset["hint_level"] == earned["hint_level"]
+    assert reset["steps"] == earned["steps"]
+    assert "earned_hint" not in reset
+    assert reset["moves"] == reset["attempted_count"] == 0
+    repeated = _combine(client, gid, pairs[0])
+    assert repeated["steps"] == reset["steps"]

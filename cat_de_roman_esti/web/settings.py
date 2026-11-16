@@ -241,6 +241,10 @@ SPECTACULAR_SETTINGS = {
     "DESCRIPTION": "Server-authoritative word-game arcade over the Romanian knowledge graph.",
     "VERSION": "1.2.0",
     "SERVE_INCLUDE_SCHEMA": False,
+    "POSTPROCESSING_HOOKS": [
+        "drf_spectacular.hooks.postprocess_schema_enums",
+        "cat_de_roman_esti.web.openapi.document_round_counters",
+    ],
 }
 
 # Same origins the FastAPI app allowed (Vite dev server etc.). Prod is same-origin.

@@ -26,7 +26,7 @@ from ..web.http import (
 )
 from ._progress import excluded_pack_ids, record_finished
 from ._session_endpoint import atomic_session
-from .categories import is_known
+from .categories import category_label, is_known
 from .derived_catalog import DerivedBoard, DerivedCatalog, get_derived_catalog
 from .service import SessionCapacityError, SessionStore, daily_seed, get_service
 
@@ -34,8 +34,7 @@ GAME_KEY = "perechi"
 PAIR_COUNT = 4
 BOARD_SIZE = 8
 MAX_MISTAKES = 6
-MIN_HINT_MISTAKES = 2
-MAX_HINTS = 1
+MAX_HINTS = 3
 SOURCE_RING_CAP = 4
 
 
@@ -54,11 +53,15 @@ class PerechiSession:
     mistakes: int = 0
     hinted_pair: int | None = field(default=None, repr=False)
     hints_used: int = 0
+    hint_level: int = 0
+    clue: dict[str, str] | None = None
+    clue_pair: int | None = None
     won: bool = False
     lost: bool = False
     daily: str | None = None
     category: str | None = None
     # Every field below stays inside the server session.
+    board_category: str = field(default="", repr=False)
     source_id: str = field(default="", repr=False)
     catalog_id: str = field(default="", repr=False)
     source_ring: tuple[str, ...] = field(default=(), repr=False)
@@ -115,20 +118,47 @@ def _share(session: PerechiSession) -> str:
     return f"{header}\n{progress}"
 
 
-def _hint_available(session: PerechiSession) -> bool:
-    return (
-        not session.won
-        and not session.lost
-        and session.hints_used < MAX_HINTS
-        and session.mistakes >= MIN_HINT_MISTAKES
-        and len(session.solved) < PAIR_COUNT
+def _hint_pair_index(session: PerechiSession) -> int | None:
+    if session.hinted_pair is not None and session.hinted_pair not in session.solved:
+        return session.hinted_pair
+    return next((index for index in range(PAIR_COUNT) if index not in session.solved), None)
+
+
+def _pair_theme(session: PerechiSession, index: int) -> str:
+    svc = get_service()
+    first, second = (svc.node(node) for node in session.pairs[index].members)
+    category = first.category if first and second and first.category == second.category else ""
+    return category_label(category or session.board_category)
+
+
+def _hint_levels(session: PerechiSession) -> list[int]:
+    if session.won or session.lost:
+        return []
+    index = _hint_pair_index(session)
+    if index is None:
+        return []
+    theme = _pair_theme(session, index).casefold()
+    known = {session.pairs[solved].label.casefold() for solved in session.solved}
+    if session.category:
+        known.add(category_label(session.category).casefold())
+    link = session.pairs[index].label.casefold()
+    available = (
+        bool(theme) and theme != link and theme not in known,
+        bool(link) and link not in known,
+        True,
     )
+    return [
+        level for level in range(session.hint_level + 1, MAX_HINTS + 1)
+        if available[level - 1]
+    ]
 
 
 def _state(game_id: str, session: PerechiSession) -> dict:
     svc = get_service()
     solved = set(session.solved)
     terminal = session.won or session.lost
+    steps = session.mistakes + session.hints_used
+    hints_left = len(_hint_levels(session))
     body: dict = {
         "game_id": game_id,
         "tiles": [
@@ -148,13 +178,25 @@ def _state(game_id: str, session: PerechiSession) -> dict:
         "mistakes": session.mistakes,
         "remaining_mistakes": MAX_MISTAKES - session.mistakes,
         "actions": len(session.solved) + len(session.wrong_history),
-        "hint_available": _hint_available(session),
+        "steps": steps,
+        "perfect": session.won and steps == 0,
+        "hint_available": hints_left > 0,
+        "hints_left": hints_left,
+        "hint_level": session.hint_level,
         "hints_used": session.hints_used,
         "won": session.won,
         "lost": session.lost,
     }
-    if session.hinted_pair is not None:
-        body["hint"] = _pair_payload(session.pairs[session.hinted_pair])
+    if session.clue is not None:
+        body["clue"] = session.clue
+    if session.hint_level == 3 and session.hinted_pair is not None:
+        hint = _pair_payload(session.pairs[session.hinted_pair])
+        public_labels = [session.pairs[index].label.casefold() for index in session.solved]
+        if session.category:
+            public_labels.append(category_label(session.category).casefold())
+        if session.hinted_pair != session.clue_pair and hint["label"].casefold() not in public_labels:
+            hint["label"] = ""
+        body["hint"] = hint
     if session.daily is not None:
         body["daily"] = session.daily
     if session.category is not None:
@@ -257,6 +299,7 @@ def _session_from_board(
         order=order,
         daily=daily,
         category=requested_category,
+        board_category=board.category,
         source_id=board._source_id,
         catalog_id=board._catalog_id,
         source_ring=_append_source(previous_ring, board._source_id),
@@ -343,6 +386,8 @@ class MatchView(ContractAPIView):
         pair_index = session.pair_index(selected)
         if pair_index is not None:
             session.solved.append(pair_index)
+            if session.hinted_pair == pair_index and session.hint_level < 3:
+                session.clue = None
             session.won = len(session.solved) == PAIR_COUNT
             if session.won:
                 record_finished(
@@ -396,15 +441,24 @@ class HintView(ContractAPIView):
     def post(self, request, game_id: str, session: PerechiSession):
         if session.won or session.lost:
             raise http_error(400, "Jocul s-a terminat")
-        if session.hints_used >= MAX_HINTS:
-            raise http_error(400, "Indiciul a fost deja folosit")
-        if session.mistakes < MIN_HINT_MISTAKES:
-            raise http_error(400, "Indiciul se deschide după două greșeli.")
-        unresolved = [index for index in range(PAIR_COUNT) if index not in session.solved]
-        session.hinted_pair = unresolved[0]
+        levels = _hint_levels(session)
+        if not levels:
+            raise http_error(400, "Nu mai sunt indicii disponibile.")
+        index = _hint_pair_index(session)
+        assert index is not None
+        session.hinted_pair = index
+        session.hint_level = levels[0]
         session.hints_used += 1
-        hint = _pair_payload(session.pairs[session.hinted_pair])
-        return Response({"ok": True, "hint": hint, **_state(game_id, session)})
+        if session.hint_level == 1:
+            label = _pair_theme(session, index)
+            session.clue = {"label": label, "message": f"Tema unei perechi: {label}."}
+        elif session.hint_level == 2:
+            session.clue_pair = index
+            label = session.pairs[index].label
+            session.clue = {"label": label, "message": f"Legătura unei perechi: {label}."}
+        else:
+            session.clue = None
+        return Response({"ok": True, **_state(game_id, session)})
 
 
 _BASE = "api/wordgames/perechi"

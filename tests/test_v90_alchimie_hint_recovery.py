@@ -45,24 +45,12 @@ def _read(game):
     return client.get(f"{BASE}/{gid}").json()
 
 
-def _unlock(game):
-    session = game[2]
-    for pair in combinations(session.seeds, 2):
-        if session.fruitless_streak >= A.NUDGE_AFTER_FRUITLESS:
-            break
-        if pair not in session.recipes and pair not in session.attempted_pairs:
-            response = _post(game, "combine", dict(zip(("a", "b"), pair, strict=True)))
-            assert response.status_code == 200
-            assert response.json()["discovered"] == []
-    assert _read(game)["hint_available"]
-
-
 def _earn(game):
-    _unlock(game)
     response = _post(game, "hint")
     assert response.status_code == 200
     body = response.json()
-    assert body["earned_hint"] == {key: body[key] for key in PUBLIC_HINT_KEYS}
+    keys = PUBLIC_HINT_KEYS | ({"hint_ingredient"} if body["hint_kind"] == "ingredient" else set())
+    assert body["earned_hint"] == {key: body[key] for key in keys}
     return body
 
 
@@ -84,22 +72,24 @@ def test_get_restores_paid_output_cue_exactly_without_charge_or_private_ids(game
         assert "secret_target" not in json.dumps(resumed)
         assert '"id": "x"' not in json.dumps(resumed)
         assert "recipes" not in resumed and "routes" not in resumed
-    assert _post(game, "hint").status_code == 400
-    assert _read(game) == resumed
+    assert resumed["steps"] == 1 and resumed["hint_level"] == 1
 
 
 def test_later_paid_pair_overwrites_one_cue_with_only_owned_ids(game):
     _earn(game)
     second = _earn(game)
-    cue = second["earned_hint"]
-    assert second["hints_used"] == 2
+    assert second["earned_hint"]["hint_ingredient"]["id"] == "a"
+    third = _earn(game)
+    cue = third["earned_hint"]
+    assert third["hints_used"] == third["steps"] == 3
+    assert _post(game, "hint").status_code == 400
     assert set(cue) == PUBLIC_HINT_KEYS
     assert cue["hint_kind"] == "pair" and cue["hint_output"] is None
     assert {item["id"] for item in cue["hint"]} == {"a", "b"}
     assert _read(game)["earned_hint"] == cue
     assert game[2].earned_hint is not None
-    assert "secret_target" not in json.dumps(second)
-    assert '"id": "x"' not in json.dumps(second)
+    assert "secret_target" not in json.dumps(third)
+    assert '"id": "x"' not in json.dumps(third)
 
 
 @pytest.mark.parametrize("action", ["empty", "productive", "reset"])
@@ -124,8 +114,9 @@ def test_new_experiment_or_reset_clears_cue(game, action):
 
 
 def test_free_repeated_pair_and_rejected_pair_preserve_earned_cue(game):
+    pair = ("a", "c")
+    _post(game, "combine", {"a": pair[0], "b": pair[1]})
     paid = _earn(game)
-    pair = next(iter(game[2].attempted_pairs))
     repeat = _post(game, "combine", {"a": pair[1], "b": pair[0]}).json()
     assert repeat["already_tried"] is True
     assert repeat["earned_hint"] == paid["earned_hint"]
@@ -135,10 +126,11 @@ def test_free_repeated_pair_and_rejected_pair_preserve_earned_cue(game):
     assert _read(game)["earned_hint"] == paid["earned_hint"]
 
 
-def test_last_step_category_cue_remains_label_only_then_win_clears_it(game):
+def test_public_target_label_skips_output_rung_then_win_clears_ingredient(game):
     assert _post(game, "combine", {"a": "a", "b": "b"}).status_code == 200
     paid = _earn(game)
-    assert paid["hint_kind"] == "category"
+    assert paid["hint_kind"] == "ingredient"
+    assert paid["hint_level"] == 2 and paid["steps"] == 1
     assert paid["hint_output"] is None and paid["hint"] is None
     assert "secret_target" not in json.dumps(paid)
     won = _post(game, "combine", {"a": "c", "b": "x"}).json()
@@ -154,14 +146,12 @@ def test_last_step_category_cue_remains_label_only_then_win_clears_it(game):
     assert "earned_hint" not in repeat
 
 
-def test_no_forward_pair_does_not_charge_or_retain_a_cue(game):
+def test_no_forward_pair_does_not_charge_or_change_earned_cue(game):
     _earn(game)
     # Defensive no-forward state: this cannot occur in a valid projected game.
     game[2].recipes = {}
-    game[2].fruitless_streak = A.NUDGE_AFTER_FRUITLESS
+    before = _read(game)
     response = _post(game, "hint")
-    assert response.status_code == 200
-    assert response.json()["hint_kind"] == "none"
-    assert response.json()["hints_used"] == 1
-    assert "earned_hint" not in response.json()
-    assert "earned_hint" not in _read(game)
+    assert response.status_code == 400
+    assert before["hints_used"] == 1
+    assert _read(game) == before

@@ -54,8 +54,7 @@ GROUP_SIZE = 4
 NUM_GROUPS = 4
 MAX_LIVES = 4
 BOARD_PICK_RETRIES = 16
-MIN_CLUE_MISTAKES = 2
-MAX_CLUES = 2
+MAX_CLUES = 3
 CLUE_SCORE_PENALTY = 100
 
 DIFFICULTIES = ("usor", "normal", "greu")
@@ -78,14 +77,10 @@ class ConexiuniSession:
     lost: bool = False
     difficulty: str = "normal"
     daily: str | None = None
-    # Redacted label-pattern clues already revealed. They never include category keys,
-    # exact labels, tile ids, or membership.
-    clues: list[dict[str, str]] = field(default_factory=list)
+    clues: list[dict[str, object]] = field(default_factory=list)
     clues_used: int = 0
-    # Server-only memory of which categories were already targeted by a clue, used to
-    # pick the next one (alphabetically after the last) without ever leaving the
-    # session. Never serialized to a response.
-    clued_categories: list[str] = field(default_factory=list)
+    hint_level: int = 0
+    clue_category: str | None = field(default=None, repr=False)
     # history of guesses (each a list of 4 ids) for the share grid
     history: list[list[str]] = field(default_factory=list)
     # Curated boards carry authored group labels (group key -> display label) and the
@@ -425,46 +420,55 @@ def _label_pattern(label: str) -> str:
     return "".join(out)
 
 
-def _clue_mistakes_needed(clues_used: int) -> int:
-    """Mistakes required to unlock the clue at ``clues_used`` (0-based): 2, then 3."""
-    return MIN_CLUE_MISTAKES + clues_used
+def _clue_group(session: ConexiuniSession) -> str | None:
+    if session.clue_category is not None and session.clue_category not in session.solved:
+        return session.clue_category
+    return min((key for key in session.groups if key not in session.solved), default=None)
 
 
-def _clue_available(session: ConexiuniSession) -> bool:
-    return (
-        not session.won
-        and not session.lost
-        and session.clues_used < MAX_CLUES
-        and session.mistakes >= _clue_mistakes_needed(session.clues_used)
-        and len(session.solved) < len(session.groups)
-    )
+def _clue_at(session: ConexiuniSession, level: int, group: str) -> dict[str, object] | None:
+    label = _group_label(session, group)
+    if level == 1:
+        pattern = _label_pattern(label)
+        if pattern and pattern.casefold() != label.casefold():
+            return {
+                "pattern": pattern,
+                "message": f"Numele unui grup rămas: {pattern} (fiecare _ este o literă lipsă).",
+            }
+    elif level == 2 and label:
+        public = {_group_label(session, key).casefold() for key in session.solved}
+        if session.category:
+            public.add(category_label(session.category).casefold())
+        if label.casefold() not in public:
+            return {"pattern": "", "label": label, "message": f"Numele grupului: {label}."}
+    elif level == 3 and session.groups[group]:
+        node = session.groups[group][0]
+        word = get_service().display_label(node)
+        return {
+            "pattern": "",
+            "tile": {"id": node, "label": word},
+            "message": f"Un cuvânt din grup: {word}.",
+        }
+    return None
 
 
-def _next_clue(session: ConexiuniSession) -> dict[str, str]:
-    """Pick a deterministic redacted label-pattern clue for one unsolved group.
-
-    The first clue targets the alphabetically-first unsolved group. A second clue
-    targets the unsolved group alphabetically after the one already clued, wrapping
-    around; if only one unsolved group remains, it is targeted again (never an
-    identical payload for the same group unless it is the only one left).
-    """
-    unsolved = sorted(cat for cat in session.groups if cat not in session.solved)
-    if session.clued_categories and len(unsolved) > 1:
-        prev = session.clued_categories[-1]
-        after = [cat for cat in unsolved if cat > prev]
-        cat = after[0] if after else unsolved[0]
-    else:
-        cat = unsolved[0]
-    session.clued_categories.append(cat)
-    pattern = _label_pattern(_group_label(session, cat))
-    return {
-        "pattern": pattern,
-        "message": f"Numele unui grup rămas: {pattern} (fiecare _ este o literă lipsă).",
-    }
+def _clue_levels(session: ConexiuniSession) -> list[tuple[int, dict[str, object]]]:
+    if session.won or session.lost:
+        return []
+    group = _clue_group(session)
+    if group is None:
+        return []
+    return [
+        (level, clue)
+        for level in range(session.hint_level + 1, MAX_CLUES + 1)
+        if (clue := _clue_at(session, level, group)) is not None
+    ]
 
 
 def _state(game_id: str, session: ConexiuniSession) -> dict:
     reveal = session.won or session.lost
+    steps = session.mistakes + session.clues_used
+    hints_left = len(_clue_levels(session))
     body: dict = {
         "game_id": game_id,
         "tiles": _tiles(session, include_solved=reveal),
@@ -477,7 +481,11 @@ def _state(game_id: str, session: ConexiuniSession) -> dict:
         "lost": session.lost,
         "difficulty": session.difficulty,
         "clues_used": session.clues_used,
-        "clue_available": _clue_available(session),
+        "clue_available": hints_left > 0,
+        "steps": steps,
+        "perfect": session.won and steps == 0,
+        "hints_left": hints_left,
+        "hint_level": session.hint_level,
         "clues": list(session.clues),
     }
     if session.daily:
@@ -532,6 +540,7 @@ class CreateGameView(ContractAPIView):
         if category is not None and not is_known(category):
             raise http_error(400, "Categorie necunoscută.")
         if daily:
+            difficulty, category = "usor", None
             rng = random.Random(daily_seed(daily, GAME_KEY))
             curated = get_pack().pick_daily(
                 GAME_KEY, daily, category=category, difficulty=difficulty
@@ -654,20 +663,15 @@ class ClueView(ContractAPIView):
     def post(self, request, game_id: str, session: ConexiuniSession):
         if session.won or session.lost:
             raise http_error(400, "Jocul s-a terminat")
-        if session.clues_used >= MAX_CLUES:
-            raise http_error(400, "Indiciile au fost deja folosite")
-        needed = _clue_mistakes_needed(session.clues_used)
-        if session.mistakes < needed:
-            need = needed - session.mistakes
-            raise http_error(
-                400,
-                f"Indiciul apare după încă {need} {'greșeală' if need == 1 else 'greșeli'}.",
-            )
-
-        clue_payload = _next_clue(session)
-        session.clues.append(clue_payload)
+        clues = _clue_levels(session)
+        if not clues:
+            raise http_error(400, "Nu mai sunt indicii disponibile.")
+        level, clue = clues[0]
+        session.clue_category = _clue_group(session)
+        session.hint_level = level
+        session.clues.append(clue)
         session.clues_used += 1
-        return Response({"ok": True, "clue": clue_payload, **_state(game_id, session)})
+        return Response({"ok": True, "clue": clue, **_state(game_id, session)})
 
 
 _BASE = "api/wordgames/conexiuni"

@@ -153,7 +153,7 @@ def test_create_shape_privacy_and_default_store_bounds() -> None:
     assert body["solved_pairs"] == []
     assert body["solved_count"] == 0 and body["remaining_pairs"] == 4
     assert body["mistakes"] == 0 and body["remaining_mistakes"] == 6
-    assert body["actions"] == 0 and body["hint_available"] is False
+    assert body["actions"] == 0 and body["hint_available"]
     assert body["hints_used"] == 0 and body["won"] is body["lost"] is False
     assert len(session.pairs) == 4
     assert len({frozenset(pair.members) for pair in session.pairs}) == 4
@@ -412,24 +412,33 @@ def test_unordered_repeated_wrong_pair_is_200_and_free() -> None:
     assert session.mistakes == len(session.wrong_history) == 1
 
 
-def test_hint_unlocks_after_two_mistakes_reveals_without_solving_and_is_single_use() -> None:
+def test_hint_ladder_reveals_theme_label_and_two_tiles_without_solving() -> None:
     client = Client()
     body = _create(client, seed=12)
-    gid = body["game_id"]
-    session = _session(gid)
-    assert client.post(f"{BASE}/games/{gid}/hint").status_code == 400
-    for wrong in _wrong_pairs(session)[:2]:
-        assert _post_json(client, f"{BASE}/games/{gid}/match", {"ids": wrong}).status_code == 200
-    hinted = client.post(f"{BASE}/games/{gid}/hint")
-    assert hinted.status_code == 200
-    result = hinted.json()
-    assert result["hints_used"] == 1 and result["solved_count"] == 0
-    assert result["actions"] == 2 and result["hint_available"] is False
-    assert {tile["id"] for tile in result["hint"]["tiles"]} == set(
-        session.pairs[session.hinted_pair].members
-    )
-    assert client.post(f"{BASE}/games/{gid}/hint").status_code == 400
-    _assert_private_preterminal(result, session)
+    root = f"{BASE}/games/{body['game_id']}"
+    session = _session(body["game_id"])
+
+    assert body["hint_available"] and body["steps"] == 0
+    theme = client.post(root + "/hint").json()
+    assert theme["hint_level"] == theme["steps"] == 1
+    assert "hint" not in theme
+    assert all(pair.label not in theme["clue"]["message"] for pair in session.pairs)
+
+    link = client.post(root + "/hint").json()
+    assert link["steps"] == link["hint_level"] == 2
+    assert "hint" not in link and link["clue"]["label"] == session.pairs[0].label
+    assert all(node not in str(link["clue"]) for node in session.order)
+
+    marked = client.post(root + "/hint").json()
+    assert marked["steps"] == marked["hint_level"] == 3
+    assert marked["hint_available"] is False and marked["hints_left"] == 0
+    assert marked["actions"] == marked["mistakes"] == marked["solved_count"] == 0
+    assert {tile["id"] for tile in marked["hint"]["tiles"]} == set(session.pairs[0].members)
+    assert marked["hint"]["label"] == link["clue"]["label"]
+    before = client.get(root).json()
+    assert client.post(root + "/hint").status_code == 400
+    assert client.get(root).json() == before
+    _assert_private_preterminal(marked, session)
 
 
 def test_perfect_win_score_terminal_solution_answer_free_share_and_progress_record(
@@ -451,6 +460,7 @@ def test_perfect_win_score_terminal_solution_answer_free_share_and_progress_reco
     assert result is not None
     assert result["won"] is True and result["lost"] is False
     assert result["score"] == 1000 and result["actions"] == 4
+    assert result["steps"] == 0 and result["perfect"] is True
     assert len(result["solution"]) == 4
     assert recorded == [("perechi", session.source_id)]
     assert session.source_id not in _serialized_strings(result)

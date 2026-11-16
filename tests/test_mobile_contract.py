@@ -186,13 +186,7 @@ def _alchimie_play_to_win(c: Client, state: dict) -> dict:
 
 
 def test_alchimie_hides_target_id_until_win() -> None:
-    from itertools import combinations
-
-    from cat_de_roman_esti.wordgames.alchimie import (
-        NUDGE_AFTER_FRUITLESS,
-        _pair_key,
-        store,
-    )
+    from cat_de_roman_esti.wordgames.alchimie import store
 
     c = client()
     created = c.post(f"/api/wordgames/alchimie/games?seed={SEED}").json()
@@ -215,44 +209,20 @@ def test_alchimie_hides_target_id_until_win() -> None:
         for item in body["inventory"]:
             assert {"recent", "useful", "ready", "depleted"} <= set(item)
 
-    # Progressive hints expose no target id and no hidden route: the first response is
-    # output/theme-only; only a later response may name one currently-owned pair.
-    owned = [item["id"] for item in created["inventory"]]
-    barren_pairs = [
-        pair
-        for pair in combinations(sorted(owned), 2)
-        if not [
-            output
-            for output in session.recipes.get(_pair_key(*pair), ())
-            if output not in owned
-        ]
-    ]
-    assert len(barren_pairs) >= 2 * NUDGE_AFTER_FRUITLESS
-    state = created
-    attempted = 0
-    for hint_index, expected_kind in enumerate(("output", "pair")):
-        start = hint_index * NUDGE_AFTER_FRUITLESS
-        for barren in barren_pairs[start : start + NUDGE_AFTER_FRUITLESS]:
-            state = _post_json(
-                c,
-                f"/api/wordgames/alchimie/games/{gid}/combine",
-                {"a": barren[0], "b": barren[1]},
-            )
-            attempted += 1
-            assert state["already_tried"] is False
-            assert state["attempted_count"] == attempted
-            assert "attempted_pairs" not in _collect_keys(state)
+    # Paid cues progressively name an output, one owned ingredient and a full pair.
+    for level, kind in enumerate(("output", "ingredient", "pair"), start=1):
         state = c.post(f"/api/wordgames/alchimie/games/{gid}/hint").json()
+        assert state["hint_level"] == level and state["hint_kind"] == kind
         assert secret not in _collect_ids(state)
         assert "recipes" not in state and "routes" not in state
-        assert state["attempted_count"] == attempted
+        assert state["attempted_count"] == 0
         assert "attempted_pairs" not in _collect_keys(state)
-        if expected_kind == "output":
-            assert state["hint_kind"] in {"output", "category"}
-            assert state["hint"] is None
+        if kind == "output":
+            assert set(state["hint_output"]) == {"label"} and state["hint"] is None
+        elif kind == "ingredient":
+            assert state["hint"] is None and state["hint_ingredient"]["id"] in session.owned
         else:
-            assert state["hint_kind"] == "pair"
-            assert len(state["hint"]) == 2
+            assert len(state["hint"]) == 2 and all(item["id"] in session.owned for item in state["hint"])
 
     # Boundary: crafting the target flips revealed and exposes the real id.
     won = _alchimie_play_to_win(c, created)
@@ -323,7 +293,6 @@ def test_lant_exposes_id_free_local_choices_not_the_route_corridor() -> None:
 def test_conexiuni_hides_solution_until_over() -> None:
     from cat_de_roman_esti.wordgames.conexiuni import (
         MAX_LIVES,
-        MIN_CLUE_MISTAKES,
         NUM_GROUPS,
         _category_label,
         _group_label,
@@ -369,19 +338,12 @@ def test_conexiuni_hides_solution_until_over() -> None:
     assert all(_category_label(cat) not in strings for cat in hidden)
     assert all(_group_label(session, cat) not in strings for cat in hidden)
 
-    # Boundary for the optional clue: after enough mistakes it may reveal a redacted
-    # label pattern, but never category keys, exact category labels, or tile membership.
+    # Rung one is a redacted label; no category key, exact label, or membership.
     created = c.post(f"/api/wordgames/conexiuni/games?seed={SEED + 1}").json()
     gid = created["game_id"]
     session = store.get(gid)
     assert session is not None
     groups = session.groups
-    for index in range(MIN_CLUE_MISTAKES):
-        _post_json(
-            c,
-            f"/api/wordgames/conexiuni/games/{gid}/guess",
-            {"ids": _cross_group_guess(groups, index)},
-        )
     clue = c.post(f"/api/wordgames/conexiuni/games/{gid}/clue").json()
     assert "solution" not in clue
     assert set(clue["clue"]) == {"pattern", "message"}
@@ -392,7 +354,7 @@ def test_conexiuni_hides_solution_until_over() -> None:
 
     # Boundary: exhausting lives (4 wrong guesses) reveals the full solution.
     last = clue
-    for index in range(MIN_CLUE_MISTAKES, MAX_LIVES):
+    for index in range(MAX_LIVES):
         last = _post_json(
             c,
             f"/api/wordgames/conexiuni/games/{gid}/guess",
