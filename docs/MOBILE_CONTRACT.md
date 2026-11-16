@@ -181,6 +181,24 @@ counter is capped at three and survives moves and undo; only a new game resets i
 content is recomputed from the current position, and a dead end can still return the ID-free
 `backtrack` recovery instead of a hop.
 
+### Optional anonymous place
+
+When enabled, a qualifying curated daily win can return an additive
+`place {better_than_pct, tier, rounds}` in its terminal response or saved-round
+read. The integer percentage is the share of completed rounds with strictly more
+steps, a loss, or a give-up, rounded down. It appears once the board has at least
+100 finished rounds. The tier identifiers are `perfect`, `top_10`, `top_half`
+and `completed`. The client hides the comparison during a replay.
+
+For active eligible daily Lanț rounds the full state can advertise
+`can_report_give_up: true`. This enables a bodyless
+`POST /api/wordgames/lant/games/{game_id}/giveup` (`lant_giveup`). An accepted
+give-up returns the full state with `gave_up: true`, `won: false` and
+`perfect: false`. Retries and GET return the same terminal outcome. An already
+won round returns 409. The endpoint returns 404 when disabled or out of scope.
+Clients retain the local give-up action when the capability is absent. See
+[ADR-0234](adr/0234-anonymous-daily-board-place.md).
+
 ## 4. Contexto rank view-model
 
 Contexto guess responses expose a bounded rank view of the player's own guesses without

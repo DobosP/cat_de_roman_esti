@@ -90,7 +90,7 @@ def main() -> int:
             parser.error("Recording only accepts --record-python.")
         overrides = (
             "CAT_KG_FIXTURE", "CAT_GAMES_PACK", "CAT_BOARD_RANKINGS", "CAT_DEBUG",
-            "CAT_DOMAIN", "CAT_DATABASE_URL", "DATABASE_URL",
+            "CAT_DOMAIN", "CAT_DATABASE_URL", "DATABASE_URL", "CAT_BOARD_STATS_DIR",
         )
         if any(os.environ.get(key) for key in overrides):
             parser.error("Recording requires the bundled content and default anonymous settings.")
@@ -364,6 +364,8 @@ def main() -> int:
             request("GET", path)
         if args.record_python:
             request("GET", "/openapi.json")
+            for method in ("POST", "GET", "HEAD"):
+                request(method, "/api/wordgames/lant/games/missing/giveup")
         for module in (perechi, conexiuni, contexto, lant, alchimie):
             base = f"/api/wordgames/{module.GAME_KEY}/games"
             for query in (

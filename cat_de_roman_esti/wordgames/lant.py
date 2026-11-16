@@ -11,10 +11,13 @@ graph; the frontend sees a bounded local menu, never the route corridor or full 
 
 from __future__ import annotations
 
+import os
 import random
 import threading
 from collections import OrderedDict
 from dataclasses import dataclass, field
+from datetime import date, datetime, timedelta
+from zoneinfo import ZoneInfo
 
 from django.urls import path
 from drf_spectacular.utils import extend_schema
@@ -141,6 +144,7 @@ class LantSession:
     # The chain of node ids walked so far; chain[0] is always the start.
     chain: list[str] = field(default_factory=list)
     won: bool = False
+    gave_up: bool = False
     hops_made: int = 0
     hints_used: int = 0
     # Player-picked board theme + curated-pack provenance (None for mined games).
@@ -468,6 +472,17 @@ def _round_outcome(session: LantSession) -> dict:
     }
 
 
+def _comparison_day() -> date:
+    return datetime.now(ZoneInfo("Europe/Bucharest")).date()
+
+
+def _eligible_give_up(session: LantSession) -> bool:
+    if not session.pack_id or not os.environ.get("CAT_BOARD_STATS_DIR"):
+        return False
+    today = _comparison_day()
+    return session.daily in (today.isoformat(), (today - timedelta(days=1)).isoformat())
+
+
 def _state(game_id: str, session: LantSession) -> dict:
     svc = get_service()
     state = {
@@ -485,11 +500,15 @@ def _state(game_id: str, session: LantSession) -> dict:
         "optimal": session.optimal,
         "won": session.won,
         "difficulty": session.difficulty,
-        "choices": _visible_choices(session),
+        "choices": [] if session.gave_up else _visible_choices(session),
         "backtrack_recommended": (
             session.difficulty == "usor" and session.non_improving_moves >= 2
         ),
     }
+    if session.gave_up:
+        state["gave_up"] = True
+    elif not session.won and _eligible_give_up(session):
+        state["can_report_give_up"] = True
     if session.earned_hint is not None:
         state["earned_hint"] = session.earned_hint
     if session.daily is not None:
@@ -806,6 +825,8 @@ class MoveView(ContractAPIView):
     @_atomic_session
     def post(self, request, game_id: str, session: LantSession):
         body = parse_body(request, MoveBody)
+        if session.gave_up:
+            raise http_error(400, "Jocul s-a terminat")
         if session.won:
             return Response({"ok": True, **_state(game_id, session)})
         if session.moves >= _MAX_MOVES:
@@ -958,7 +979,7 @@ class UndoView(ContractAPIView):
     @extend_schema(operation_id="lant_undo", tags=["lant"])
     @_atomic_session
     def post(self, request, game_id: str, session: LantSession):
-        if session.won:
+        if session.won or session.gave_up:
             return Response(_state(game_id, session))
         # Never step below the start.
         if len(session.chain) > 1:
@@ -972,7 +993,7 @@ class UndoView(ContractAPIView):
 
 
 def _hint_options(session: LantSession) -> list[tuple[int, dict]]:
-    if session.won or session.hint_requests >= 3 or session.moves >= _MAX_MOVES:
+    if session.won or session.gave_up or session.hint_requests >= 3 or session.moves >= _MAX_MOVES:
         return []
     level = session.hint_requests + 1
 
@@ -1063,7 +1084,7 @@ class HintView(ContractAPIView):
     @extend_schema(operation_id="lant_hint", tags=["lant"])
     @_atomic_session
     def post(self, request, game_id: str, session: LantSession):
-        if session.won:
+        if session.won or session.gave_up:
             raise http_error(400, "Jocul s-a terminat")
         options = _hint_options(session)
         if not options:
@@ -1073,6 +1094,33 @@ class HintView(ContractAPIView):
         return Response({**session.earned_hint, **_round_outcome(session)})
 
 
+class GiveUpView(ContractAPIView):
+    def initial(self, request, *args, **kwargs):
+        super().initial(request, *args, **kwargs)
+        if not os.environ.get("CAT_BOARD_STATS_DIR"):
+            raise http_error(404, "Not Found")
+
+    @extend_schema(
+        operation_id="lant_giveup",
+        tags=["lant"],
+        request=None,
+        description="Give up an eligible curated daily Lanț round with board comparison enabled.",
+    )
+    def post(self, request, game_id: str):
+        return self._give_up(request, game_id)
+
+    @_atomic_session
+    def _give_up(self, request, game_id: str, session: LantSession):
+        if session.gave_up:
+            return Response(_state(game_id, session))
+        if not _eligible_give_up(session):
+            raise http_error(404, "Not Found")
+        if session.won:
+            raise http_error(409, "Jocul s-a terminat")
+        session.gave_up = True
+        return Response(_state(game_id, session))
+
+
 _BASE = "api/wordgames/lant"
 urlpatterns = [
     path(f"{_BASE}/games", CreateGameView.as_view()),
@@ -1080,4 +1128,5 @@ urlpatterns = [
     path(f"{_BASE}/games/<str:game_id>/move", MoveView.as_view()),
     path(f"{_BASE}/games/<str:game_id>/undo", UndoView.as_view()),
     path(f"{_BASE}/games/<str:game_id>/hint", HintView.as_view()),
+    path(f"{_BASE}/games/<str:game_id>/giveup", GiveUpView.as_view()),
 ]

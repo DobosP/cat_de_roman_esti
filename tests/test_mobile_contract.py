@@ -15,6 +15,8 @@ the per-game behaviour tests in ``test_wordgames_*.py``:
 
 from __future__ import annotations
 
+from datetime import date
+
 import pytest
 
 pytest.importorskip("django")
@@ -471,6 +473,7 @@ EXPECTED_OPERATION_IDS = {
     "lant_move",
     "lant_undo",
     "lant_hint",
+    "lant_giveup",
     "conexiuni_create_game",
     "conexiuni_get_game",
     "conexiuni_guess",
@@ -500,6 +503,46 @@ def test_openapi_operation_ids_are_stable() -> None:
     # The HTTP path must NOT be baked into the operationId (the churny default we
     # replaced) — so a generated client's method names survive a route refactor.
     assert not any("wordgames" in op for op in ops)
+
+
+def test_lant_daily_giveup_is_optional_and_terminal(monkeypatch) -> None:
+    from cat_de_roman_esti.wordgames import lant
+
+    current_day = date(2026, 11, 16)
+    monkeypatch.setattr(lant, "_comparison_day", lambda: current_day)
+    monkeypatch.delenv("CAT_BOARD_STATS_DIR", raising=False)
+    c = client()
+    base = "/api/wordgames/lant/games"
+    create = base + "?daily=2026-11-16"
+    inactive = c.post(create).json()
+    assert "can_report_give_up" not in inactive
+    off_path = f"{base}/{inactive['game_id']}/giveup"
+    for method in (c.post, c.get, c.head, c.options):
+        assert method(off_path).status_code == 404
+    assert c.post(off_path).json()["detail"] == "Not Found"
+
+    # The independent oracle does not use the store, only the configured flag.
+    monkeypatch.setenv("CAT_BOARD_STATS_DIR", "oracle-opt-in")
+    initial = c.post(create).json()
+    assert initial["can_report_give_up"] is True
+    path = f"{base}/{initial['game_id']}"
+    end = c.post(path + "/giveup")
+    assert end.status_code == 200
+    terminal = end.json()
+    assert terminal["gave_up"] and not terminal["won"] and not terminal["perfect"]
+    assert terminal["steps"] == initial["steps"] and terminal["hints_left"] == 0
+    assert terminal["choices"] == [] and "can_report_give_up" not in terminal
+    assert c.get(path).json() == terminal
+    assert c.post(path + "/undo").json() == terminal
+    assert c.post(path + "/hint").status_code == 400
+    move = c.post(path + "/move", {"text": "vecin"}, content_type="application/json")
+    assert move.status_code == 400
+
+    current_day = date(2026, 11, 18)
+    assert c.post(path + "/giveup").json() == terminal
+    new = c.post(create).json()
+    assert "can_report_give_up" not in new
+    assert c.post(f"{base}/{new['game_id']}/giveup").status_code == 404
 
 
 def test_manifest_endpoint_matches_fixture_manifest() -> None:
