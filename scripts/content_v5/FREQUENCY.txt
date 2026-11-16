@@ -1,0 +1,41 @@
+V5 diacritic-folded word frequency
+
+The word screen looks up a label in a FrequencyWords list. Matching only the
+comma spelling lost real words, because the list spells many words with cedilla
+or without diacritics (țară 2,423, ţară 20,478, tara 13,968) and ro_50k omits
+rare words (olar, libelulă, aisberg, burlan, geamandură). Use ro_full.txt
+(content/2018/ro) rather than ro_50k.
+
+Loading hashes the list bytes before parsing, refuses lists over 64 MiB, then
+reads "word count" lines. Each word is NFC-normalised, cedilla ş ţ Ş Ţ are
+mapped to comma ș ț, and it is lowercased. Counts of spellings that become
+identical are summed (variants is the number of raw lines merged). Malformed
+lines are skipped and reported as skipped_lines.
+
+For a single-word label:
+  exact          folded count of the label's own spelling
+  undiacritised  count of the spelling with every diacritic removed, summed
+                 over every list spelling that flattens to it
+  status         exact (exact > 0); undiacritised_only (exact == 0 and
+                 undiacritised > 0); absent
+A label containing whitespace has status multiword and is not looked up.
+undiacritised_only is a flagged fallback, not evidence: the plain spelling can
+be another word (tată vs tata, față vs fata). A reviewer must judge it.
+
+  python3 -I scripts/content_v5/frequency.py --list PATH --sha256 HEX \
+    --labels FILE.json|FILE.txt --out FILE.json
+
+Labels are a JSON list of strings or one label per line (at most 100,000 and
+1 MiB). The output holds schema, list_sha256, skipped_lines and rows of
+{label, exact, variants, undiacritised, status}. Exit 2 means invalid input
+(hash mismatch, oversize, bad labels). A frequency is a hint for ranking
+candidates, never content evidence.
+
+Threat model
+The list is third-party subtitle-derived text fetched once by the operator.
+The tool never fetches; it verifies the operator-supplied SHA-256 over the
+exact bytes, bounds list, line and label sizes, decodes strictly as UTF-8 and
+executes nothing from the list. A poisoned list can only change counts, so a
+frequency never admits or rejects a word without review. A hyphenated or
+apostrophe label is looked up as one token and usually reads absent. The tool
+uses Python 3.12 stdlib, no network, and writes only the --out file atomically.
