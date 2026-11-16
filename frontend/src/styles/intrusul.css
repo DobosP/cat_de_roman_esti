@@ -1,4 +1,14 @@
-.intrusul-grid { display: grid; gap: 12px; }
+.intrusul-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
+/* The narrow mock stacks each answer. Wider boards still reflow in whole rows. */
+.intrusul-game .game-container { container-type: inline-size; }
+@media (min-width: 760px) {
+  @container (width >= calc(17rem + 12px)) {
+    .intrusul-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @container (width >= calc(34rem + 36px)) {
+    .intrusul-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  }
+}
 .intrusul-tile {
   min-width: 0;
   min-height: 76px;

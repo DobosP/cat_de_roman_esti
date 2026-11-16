@@ -66,7 +66,9 @@ for (const game of games) {
     for (const width of widths) {
       await page.setViewportSize({ width, height: 850 });
       await page.goto("/");
-      await page.evaluate((key) => localStorage.removeItem(key), activeKey(game));
+      // Each viewport opens the same first-run fixture. The preceding win can
+      // otherwise graduate the starter board and record a previous-game exclusion.
+      await page.evaluate(() => localStorage.clear());
       const initial = await start(page, game);
       await layout(page, testInfo, `${width}-live`);
       await page.reload();

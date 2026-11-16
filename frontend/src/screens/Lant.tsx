@@ -192,7 +192,7 @@ export default function Lant({
     [actionOwner, admit, onToast],
   );
 
-  const { recovery: resumeRecovery, retryResume, cancelResume, dismissRecovery } = useSavedGameResume({
+  const { recovery: resumeRecovery, pending: resumePending, retryResume, cancelResume, dismissRecovery } = useSavedGameResume({
     active,
     load: getLant,
     isTerminal: isTerminalResume,
@@ -539,7 +539,7 @@ export default function Lant({
     if (entry.readyAfterTerminal(state)) setState(null);
     retryResume();
   };
-  const startEntry = useRoundStart(entry, (!state || entry.readyAfterTerminal(state)) && !loading && !creating && !startFailed && !resumeRecovery && !unavailable, resumeEntry, (daily) => void start(daily));
+  const startEntry = useRoundStart(entry, (!state || entry.readyAfterTerminal(state)) && !loading && !creating && !startFailed && !resumePending && !resumeRecovery && !unavailable, resumeEntry, (daily) => void start(daily));
   const mode = entry.mode(state);
   useLayoutEffect(() => {
     if (state && finished && isPresent) complete(state);
@@ -762,7 +762,6 @@ export default function Lant({
                         className="hint-fill-button"
                         disabled={actionsLocked}
                         title="Fă acest salt"
-                        aria-label={`Salt la ${hint.hint.label}${hint.relation ? `: ${hint.relation}` : ""}`}
                         onClick={() => {
                           if (hint.hint) void submit({ label: hint.hint.label, relation: hint.relation ?? "" });
                         }}

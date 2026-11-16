@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { nativePlan } from "./native-plan.mjs";
-import { games, gameURL, start, tabTo } from "./games.mjs";
+import { games, gameURL, deterministicStarts, start, tabTo } from "./games.mjs";
 
 const game = games.find(({ key }) => key === "lant");
 const cueOnly = (cue) => Object.fromEntries(Object.entries(cue)
@@ -30,8 +30,12 @@ async function begin(page, item) {
       });
     });
   }
-  await page.route("**/api/wordgames/lant/games?*", async (route) => {
+  // Keep the named fixture a real free round under the one-tap entry rule.
+  await deterministicStarts(page, game);
+  await page.route((url) => url.pathname === "/api/wordgames/lant/games", async (route) => {
+    if (route.request().method() !== "POST") return route.continue();
     const url = new URL(route.request().url());
+    expect(url.searchParams.has("daily")).toBe(false);
     for (const [name, value] of Object.entries(item.journey.query)) {
       url.searchParams.set(name, String(value));
     }
@@ -165,9 +169,9 @@ for (const item of cases) {
     expect(alternatives.stage).toBe("alternatives");
     for (const choice of alternatives.alternatives_choices) {
       meaningful(choice.relation, item.nouns);
-      await expect(page.locator(".lant-hint-panel").getByRole("button", {
-        name: `${choice.label} ${choice.relation}`, exact: true,
-      })).toBeVisible();
+      const button = page.locator(".lant-hint-panel").getByRole("button", { name: choice.label, exact: true });
+      await expect(button).toBeVisible();
+      await expect(button).toHaveAccessibleDescription(choice.relation);
     }
     const exact = await ask();
     expect(exact.stage).toBe("hop");
@@ -180,7 +184,8 @@ for (const item of cases) {
     await fits(page);
     await page.screenshot({ path: test.info().outputPath("exact-hint.png"), fullPage: true });
     const move = responseFor(page, id, "move");
-    await tabTo(page, page.locator(".hint-fill-button"));
+    const hop = page.getByRole("button", { name: `Încearcă ${exact.hint.label} · ${exact.relation}`, exact: true });
+    await tabTo(page, hop);
     await page.keyboard.press("Space");
     const moved = await (await move).json();
     expect(moved.moves).toBe(1);

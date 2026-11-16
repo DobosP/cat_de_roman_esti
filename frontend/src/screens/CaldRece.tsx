@@ -169,7 +169,7 @@ export default function CaldRece({
     [actionOwner, admit],
   );
 
-  const { recovery: resumeRecovery, retryResume, cancelResume, dismissRecovery } = useSavedGameResume({
+  const { recovery: resumeRecovery, pending: resumePending, retryResume, cancelResume, dismissRecovery } = useSavedGameResume({
     active,
     load: contextoApi.getGame,
     isTerminal: isTerminalResume,
@@ -548,7 +548,7 @@ export default function CaldRece({
     if (entry.readyAfterTerminal(state)) setState(null);
     retryResume();
   };
-  const startEntry = useRoundStart(entry, (!state || entry.readyAfterTerminal(state)) && !busy && !startFailed && !resumeRecovery && !unavailable, resumeEntry,
+  const startEntry = useRoundStart(entry, (!state || entry.readyAfterTerminal(state)) && !busy && !startFailed && !resumePending && !resumeRecovery && !unavailable, resumeEntry,
     (daily) => daily ? void start({ daily, difficulty: "usor" }) : nextRound());
   const mode = entry.mode(state);
   useLayoutEffect(() => {
@@ -694,8 +694,9 @@ export default function CaldRece({
         </Presence>
 
         {state.warm_clue && !finished && (
+          <>
           <button type="button" className="btn game-result-secondary contexto-warm-clue-button"
-            aria-label={`Pune ${state.warm_clue.label} în câmpul de răspuns`}
+            aria-describedby="contexto-warm-clue-action"
             onClick={() => {
               const word = state.warm_clue?.label;
               if (!word) return;
@@ -705,6 +706,10 @@ export default function CaldRece({
             }}>
             Încearcă „{state.warm_clue.label}” · #{state.warm_clue.rank}
           </button>
+          <span id="contexto-warm-clue-action" className="visually-hidden">
+            Completează câmpul de răspuns fără a trimite o încercare.
+          </span>
+          </>
         )}
         {bestGuess && (
           <div className="contexto-best">

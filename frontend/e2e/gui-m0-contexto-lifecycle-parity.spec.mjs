@@ -61,7 +61,7 @@ test("a real corrected target win retains the actual server correction message i
   const result = page.locator(".game-result").filter({ has: heading });
   await expect(result).toHaveCount(1);
   await expect(result).toContainText(won.message);
-  await expect(result.locator(".muted").filter({ hasText: won.message })).toHaveCount(1);
+  await expect(result.getByText(won.message, { exact: true })).toHaveCount(1);
   await expect(page.locator(".contexto-confirm-chip")).toHaveCount(0);
   await expect(field(page)).toHaveValue(""); await expect(field(page)).toBeDisabled();
 });

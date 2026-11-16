@@ -71,6 +71,16 @@
 @media (min-width: 760px) and (min-height: 560px) { .alchemy-screen.alchemy-challenge .alchemy-bench:not(:has(.alchemy-sync-recovery, .alchemy-challenge-complete)) { position: sticky; top: 8px; } }
 @media (hover: hover) { .alchemy-word:not(:disabled):hover { border-color: var(--focus) !important; } .alchemy-word[draggable="true"] { cursor: grab !important; } }
 @media (min-width: 760px) { .alchemy-workspace { grid-template-columns: minmax(220px, .85fr) minmax(0, 1.45fr); gap: 32px; } }
-@media (max-width: 640px) { .alchemy-game { gap: 12px; } .alchemy-target h2 { font-size: 1.15rem; } .alchemy-library-toolbar { gap: 7px; } .alchemy-inventory-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, max(7rem, calc((100% - 8px) / 2))), 1fr)); } }
+@media (max-width: 640px) {
+  .alchemy-game { gap: 12px; }
+  .alchemy-game .game-frame { gap: 8px; }
+  .alchemy-workspace { gap: 10px; }
+  .alchemy-screen .alchemy-bench { padding: 8px; gap: 6px; }
+  .alchemy-target { padding: 8px; }
+  .alchemy-target h2 { font-size: 1.15rem; }
+  .alchemy-inventory-panel { gap: 8px; }
+  .alchemy-library-toolbar { gap: 7px; }
+  .alchemy-inventory-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, max(7rem, calc((100% - 8px) / 2))), 1fr)); }
+}
 @media (max-width: 19.9em) { .alchemy-inventory-grid { grid-template-columns: minmax(0, 1fr); } }
 @media (prefers-reduced-motion: reduce) { .alchemy-game *, .alchemy-game *::before, .alchemy-game *::after { scroll-behavior: auto; animation: none !important; transition: none !important; } }

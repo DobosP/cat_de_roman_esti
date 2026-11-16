@@ -87,9 +87,10 @@ async function heldMoveAcrossReentry(page, request) {
   let entered, release;
   const requested = new Promise((resolve) => { entered = resolve; });
   const held = new Promise((resolve) => { release = resolve; });
-  const counts = { moves: 0, reads: 0 };
+  const counts = { creates: 0, moves: 0, reads: 0 };
   page.on("request", (item) => {
     const path = new URL(item.url()).pathname;
+    if (item.method() === "POST" && path === "/api/wordgames/lant/games") counts.creates += 1;
     if (item.method() === "POST" && path === `${gameURL(game, initial.game_id)}/${step.action}`) counts.moves += 1;
     if (item.method() === "GET" && path === gameURL(game, initial.game_id)) counts.reads += 1;
   });
@@ -134,7 +135,8 @@ async function heldMoveAcrossReentry(page, request) {
     expect(await (await read).json()).toEqual(authoritative);
     await expect(page.locator(".lant-current .lant-route-word")).toHaveText(authoritative.current.label);
     await expect(page.locator(game.board)).toBeEnabled();
-    expect(counts).toEqual({ moves: 1, reads: 2 });
+    expect(await page.evaluate((key) => localStorage.getItem(key), activeKey(game))).toBe(initial.game_id);
+    expect(counts).toEqual({ creates: 0, moves: 1, reads: 2 });
     expect(navigations).toEqual([]);
     // A subsequent real move proves the recovered frame can act again.
     const next = solution(game).steps[1];

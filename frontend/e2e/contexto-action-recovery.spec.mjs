@@ -139,8 +139,15 @@ test("a lost give-up response reveals only the server's terminal answer without 
   expect(server.gave_up).toBe(true);
   expect(server.won).toBe(false);
   expect(server.attempts).toBe(0);
+  expect(server.steps).toBe(0);
+  expect(server.score).toBeUndefined();
+  await expect(page.getByText("0 pași", { exact: true })).toBeVisible();
   expect(counts).toEqual({ reads: 1, mutations: 1 });
-  expect(await played(page)).toBe(0);
+  await expect.poll(() => played(page)).toBe(1);
+  const completion = await page.evaluate((key) => JSON.parse(localStorage.getItem(key) || "{}").contexto, scoresKey);
+  expect(completion.best).toBeNull();
+  expect(completion.recent).toHaveLength(1);
+  expect(completion.recent[0]).toMatchObject({ score: 0, steps: 0, detail: "Renunțare" });
 });
 
 test("failed verification locks mutations and its persistent retry only reads", async ({ page, request }) => {

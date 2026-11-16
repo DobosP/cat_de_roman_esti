@@ -108,7 +108,18 @@ for (const game of games.filter(({ derived }) => derived)) {
         const committed = await loseResponse(page, game, initial.game_id, action);
         expect((await perform({ keyboard: game.key === "perechi" && mode === "match" })).status()).toBe(503);
         const fresh = await server(request, game, initial.game_id);
-        for (const field of ["tiles", "mistakes", "hints_used", "steps", "hints_left", "hint_level", ...(game.key === "intrusul" ? ["wrong_ids", "attempts", "clue"] : ["solved_pairs", "solved_count", "actions", "hint", "clue"])]) expect(fresh[field]).toEqual(committed()[field]);
+        for (const field of ["tiles", "mistakes", "hints_used", "steps", "hints_left", "hint_level", ...(game.key === "intrusul" ? ["wrong_ids", "attempts", "clue"] : ["solved_pairs", "solved_count", "actions", "clue"])]) expect(fresh[field]).toEqual(committed()[field]);
+        if (game.key === "perechi") {
+          const paid = committed();
+          if (mode === "hint" && paid.hint_level < 3) {
+            // Early hint POSTs retain the legacy object for old clients. Recovery
+            // GETs persist the public clue and expose no highlighted tiles yet.
+            expect(paid.hint).toEqual({ tiles: [], label: paid.clue.label });
+            expect(fresh.hint).toBeUndefined();
+          } else {
+            expect(fresh.hint).toEqual(paid.hint);
+          }
+        }
         if (mode === "win" || mode === "loss") {
           await expect(result(page)).toBeVisible();
           await expect.poll(() => played(page, game)).toBe(1);
@@ -202,7 +213,12 @@ for (const game of games.filter(({ derived }) => derived)) {
       expect(await saved(page, game)).toBeNull();
       expect(counts).toEqual({ reads: 1, mutations: 1 });
       await currentGame(page).click();
+      await expect(freshRound(page)).toBeEnabled();
+      expect(await saved(page, game)).toBeNull();
+      await freshRound(page).click();
       await expect(page.locator(game.board)).toBeVisible();
+      expect(await saved(page, game)).toEqual(expect.any(String));
+      expect(await saved(page, game)).not.toBe(initial.game_id);
       expect(await played(page, game)).toBe(0);
       await tab.close();
     });
@@ -285,8 +301,18 @@ for (const game of games.filter(({ derived }) => derived)) {
         expect(counts).toEqual({ reads: mutation ? 0 : 1, mutations: 1 });
         await currentGame(page).click();
         await expect(currentGame(page)).toHaveCount(0);
-        if (fresh) await expect(page.locator(game.board)).toBeVisible();
-        else await expect(page.locator(game.board)).toBeVisible();
+        if (!fresh) {
+          await expect(freshRound(page)).toBeEnabled();
+          expect(await saved(page, game)).toBeNull();
+          await freshRound(page).click();
+        }
+        await expect(page.locator(game.board)).toBeVisible();
+        const savedAfterRecovery = await saved(page, game);
+        if (fresh) expect(savedAfterRecovery).toBe(fresh.game_id);
+        else {
+          expect(savedAfterRecovery).toEqual(expect.any(String));
+          expect(savedAfterRecovery).not.toBe(initial.game_id);
+        }
         expect(await played(page, game)).toBe(0);
         await tab.close();
       });

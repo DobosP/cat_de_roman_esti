@@ -81,8 +81,11 @@ test("all three real hint rungs reveal bounded answers, and warm fill stays free
   await expect(clueCards(page)).toHaveCount(1);
   await expect(clueCards(page)).toHaveAttribute("role", "status");
   await expect(clueCards(page)).toContainText(`#${warm.warm_clue.rank}`);
-  const fill = page.getByRole("button", { name: `Pune ${warm.warm_clue.label} în câmpul de răspuns`, exact: true });
+  const fill = page.getByRole("button", {
+    name: `Încearcă „${warm.warm_clue.label}” · #${warm.warm_clue.rank}`, exact: true,
+  });
   await expect(fill).toBeVisible();
+  await expect(fill).toHaveAccessibleDescription("Completează câmpul de răspuns fără a trimite o încercare.");
   expect((await fill.boundingBox()).height).toBeGreaterThanOrEqual(44);
   const options = page.getByRole("button", { name: "Cum se joacă", exact: true });
   await options.focus(); await expect(options).toBeFocused();
@@ -158,8 +161,10 @@ for (const [token, label, icon] of TEMPERATURES) {
     const body = await guess(page, safeWords()[0]);
     const row = page.locator("#contexto-guess-list .contexto-guess-row").filter({ has: page.getByText(body.guess.label, { exact: true }) });
     await expect(row).toHaveCount(1);
-    await expect(row.getByText(label, { exact: true })).toBeVisible();
-    await expect(row.getByText(icon, { exact: true })).toBeVisible();
+    const badge = row.locator(".contexto-temperature");
+    await expect(badge).toBeVisible();
+    await expect(badge).toHaveText(`${icon} ${label}`);
+    await expect(badge.locator('[aria-hidden="true"]')).toHaveText(icon);
     await expect(row).toHaveAttribute("data-temperature", token);
     await expect(row.getByText(`#${body.guess.rank}`, { exact: true })).toBeVisible();
   });
@@ -173,8 +178,11 @@ test("the real winning guess renders Gasit as Găsit and moves focus to the resu
   expect(body.ok).toBe(true); expect(body.won).toBe(true);
   expect(body.guess.temperature).toBe("Gasit"); expect(body.guess.rank).toBe(1);
   const row = page.locator("#contexto-guess-list .contexto-guess-row").filter({ has: page.getByText(body.guess.label, { exact: true }) });
-  await expect(row.getByText("Găsit", { exact: true })).toBeVisible();
-  await expect(row.getByText("🎯", { exact: true })).toBeVisible();
+  const badge = row.locator(".contexto-temperature");
+  await expect(badge).toBeVisible();
+  await expect(badge).toHaveText("🎯 Găsit");
+  await expect(badge.locator('[aria-hidden="true"]')).toHaveText("🎯");
+  await expect(row.getByText("#1", { exact: true })).toBeVisible();
   await expect(row).toHaveAttribute("data-temperature", "Gasit");
   await expect(clueCards(page)).toHaveCount(0);
   await expect(page.getByRole("heading", { name: "Ai găsit cuvântul!" })).toBeFocused();

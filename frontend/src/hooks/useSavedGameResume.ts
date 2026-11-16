@@ -13,6 +13,7 @@ export type ResumeRecovery =
 
 export interface SavedGameResumeControl {
   recovery: ResumeRecovery | null;
+  pending: boolean;
   retryResume: () => void;
   cancelResume: () => void;
   dismissRecovery: () => void;
@@ -66,10 +67,19 @@ export function useSavedGameResume<T>({
     [active, generation, isTerminal, load, isPresent],
   );
 
+  // The attempt belongs to this render even before the subscription's
+  // passive effect has reflected it in the screen loading state.
+  const [settledAttempt, setSettledAttempt] = useState<typeof attempt | null>(null);
+  const pending = isPresent && attempt.hasSavedGame && attempt !== settledAttempt;
+
   useEffect(() => {
     if (!isPresent) return;
     const unsubscribe = subscribeSavedGameResume(attempt, {
-        setPending: (pending) => { if (presentRef.current) setPending(pending); },
+        setPending: (next) => {
+          if (!presentRef.current) return;
+          setPending(next);
+          if (!next && attempt.hasSavedGame) setSettledAttempt(attempt);
+        },
         onResume: (state, detail) => {
           if (!presentRef.current) return;
           setRecovery(null);
@@ -98,5 +108,5 @@ export function useSavedGameResume<T>({
 
   const dismissRecovery = useCallback(() => setRecovery(null), []);
 
-  return { recovery, retryResume, cancelResume, dismissRecovery };
+  return { recovery, pending, retryResume, cancelResume, dismissRecovery };
 }

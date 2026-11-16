@@ -265,10 +265,18 @@ test.describe("V74 saved-game recovery", () => {
       );
       expect(await page.evaluate((key) => localStorage.getItem(key), activeKey(game)))
         .toBe(currentGame.game_id);
+      const creates = [];
+      page.on("request", (incoming) => {
+        if (incoming.method() === "POST" && new URL(incoming.url()).pathname === `/api/wordgames/${game.key}/games`) creates.push(incoming.url());
+      });
+      const resumed = page.waitForResponse((response) => response.request().method() === "GET" &&
+        new URL(response.url()).pathname === gameURL(game, currentGame.game_id));
       await page.getByRole("button", { name: "Încarcă jocul curent" }).click();
+      expect((await resumed).status()).toBe(200);
       await expect(page.locator(game.board)).toBeVisible();
       expect(await page.evaluate((key) => localStorage.getItem(key), activeKey(game)))
         .toBe(currentGame.game_id);
+      expect(creates).toEqual([]);
       await otherTab.close();
     });
   }
@@ -378,6 +386,10 @@ test.describe("V74 saved-game recovery", () => {
   test("an older create response cannot replace a newer tab's saved round", async ({ context, page, request }) => {
     const game = games.find(({ key }) => key === "intrusul");
     await deterministicStarts(page, game);
+    const creates = [];
+    page.on("request", (incoming) => {
+      if (incoming.method() === "POST" && new URL(incoming.url()).pathname === `/api/wordgames/${game.key}/games`) creates.push(incoming.url());
+    });
     const gate = heldRoutes(1);
     await page.route((url) => url.pathname === `/api/wordgames/${game.key}/games`, gate.handler, { times: 1 });
     await page.goto(game.path);
@@ -393,6 +405,7 @@ test.describe("V74 saved-game recovery", () => {
     expect((await resumed).status()).toBe(200);
     await expect(page.locator(game.board)).toBeVisible();
     expect(await page.evaluate((key) => localStorage.getItem(key), activeKey(game))).toBe(newer.game_id);
+    expect(creates).toHaveLength(1);
     await otherTab.close();
   });
 

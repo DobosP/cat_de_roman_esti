@@ -31,6 +31,8 @@ The former frozen Help text has a new exact-copy pin and tests for each ladder a
 - Score and best-record presentation assertions are replaced by result steps, score-free clipboard, Perfect for eligible wins and the terminal receipt checks.
 
 
+- The archived Conexiuni visual test keeps the old numbers and life image. Its replacement checks the current coach copy, pressed tiles, visible attempts and non-overlap at both widths and text scales.
+
 ## Milestone 1
 
 - [x] Record the approved decisions and claim their ADR numbers.

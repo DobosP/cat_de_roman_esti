@@ -161,7 +161,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     [actionOwner, admit, setHint],
   );
 
-  const { recovery: resumeRecovery, retryResume, cancelResume, dismissRecovery } = useSavedGameResume({
+  const { recovery: resumeRecovery, pending: resumePending, retryResume, cancelResume, dismissRecovery } = useSavedGameResume({
     active,
     load: conexiuniApi.get,
     isTerminal: isTerminalResume,
@@ -500,7 +500,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     if (entry.readyAfterTerminal(state)) setState(null);
     retryResume();
   };
-  const startEntry = useRoundStart(entry, (!state || entry.readyAfterTerminal(state)) && !loading && !startFailed && !resumeRecovery && !unavailable, resumeEntry,
+  const startEntry = useRoundStart(entry, (!state || entry.readyAfterTerminal(state)) && !loading && !startFailed && !resumePending && !resumeRecovery && !unavailable, resumeEntry,
     (daily) => void start(daily));
   const mode = entry.mode(state);
   useLayoutEffect(() => {

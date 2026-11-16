@@ -125,7 +125,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
         : fresh.clue?.message ?? "Joc reluat. Atinge cuvântul care nu se potrivește.",
     );
   }, [actionOwner, admit, setFeedback]);
-  const { recovery: resumeRecovery, retryResume, cancelResume, dismissRecovery } = useSavedGameResume({
+  const { recovery: resumeRecovery, pending: resumePending, retryResume, cancelResume, dismissRecovery } = useSavedGameResume({
     active,
     load: intrusulApi.get,
     isTerminal: isTerminalResume,
@@ -399,7 +399,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
     if (entry.readyAfterTerminal(state)) setState(null);
     retryResume();
   };
-  const startEntry = useRoundStart(entry, (!state || entry.readyAfterTerminal(state)) && !loading && !startFailed && !resumeRecovery && !unavailable, resumeEntry,
+  const startEntry = useRoundStart(entry, (!state || entry.readyAfterTerminal(state)) && !loading && !startFailed && !resumePending && !resumeRecovery && !unavailable, resumeEntry,
     (daily, previousGameId) => void start({ daily, previousGameId, category: entry.options.category ?? undefined }));
   const mode = entry.mode(state);
   useLayoutEffect(() => {

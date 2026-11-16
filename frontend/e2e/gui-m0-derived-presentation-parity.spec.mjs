@@ -54,7 +54,8 @@ for (const game of quick) {
     const current = await (await request.get(gameURL(game, initial.game_id))).json();
     expect(current.steps).toBe(last.steps);
     expect(current.hint_level).toBe(last.hint_level);
-    await expect(page.getByRole("status").filter({ hasText: /indiciu|temă|pereche/i })).toBeVisible();
+    await expect(page.locator(".coach-line[role=status]"))
+      .toContainText(last.clue?.message ?? "Atinge cele două cuvinte marcate.");
   });
 
   test(`${game.key} held initial creation keeps one pending frame and issues one request`, async ({ page }) => {

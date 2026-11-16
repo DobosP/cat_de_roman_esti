@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { games, start, deterministicStarts } from "./games.mjs";
+import { games, start } from "./games.mjs";
 
 const chunk = "**/assets/Intrusul-*.js";
 const activeKey = "cat_active_game_v1_intrusul";
@@ -31,14 +31,17 @@ test("denied localStorage and sessionStorage getters still allow all six games",
   await expect(page.getByRole("heading", { name: "Cât de român ești?", exact: true })).toBeVisible();
   await expect(page.locator(".games-grid .game-card")).toHaveCount(6);
   for (const game of games) {
-    await deterministicStarts(page, game);
-    await start(page, game);
+    const fresh = await start(page, game);
+    expect(fresh.daily).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    await expect(page.getByText("Jocul zilei", { exact: true })).toBeVisible();
   }
   expect(errors).toEqual([]);
 });
 
 test("a denied-storage chunk failure offers home and explicit reload without losing a saved round", async ({ page, request }) => {
-  const created = await request.post("/api/wordgames/intrusul/games?seed=38");
+  const day = "2026-11-16";
+  await page.clock.setFixedTime(new Date(`${day}T12:00:00.000Z`));
+  const created = await request.post(`/api/wordgames/intrusul/games?daily=${day}`);
   expect(created.status()).toBe(200);
   const saved = await created.json();
   await page.addInitScript(({ key, id }) => localStorage.setItem(key, id), { key: activeKey, id: saved.game_id });
@@ -58,7 +61,7 @@ test("a denied-storage chunk failure offers home and explicit reload without los
 
   await page.getByRole("link", { name: "Înapoi la jocuri", exact: true }).click();
   await expect(page.locator(".games-grid .game-card")).toHaveCount(6);
-  await page.getByRole("button", { name: /^Joacă Intrusul —/ }).click();
+  await page.getByRole("link", { name: /^Intrusul / }).click();
   await expect(page.getByRole("heading", { name: failureTitle, exact: true })).toBeVisible();
   expect(navigations).toHaveLength(1);
 
@@ -81,7 +84,7 @@ test("a slowly failing chunk reloads once then exposes recovery on the next docu
   });
   const navigations = documentRequests(page);
   await page.goto("/");
-  await page.getByRole("button", { name: /^Joacă Intrusul —/ }).click();
+  await page.getByRole("link", { name: /^Intrusul / }).click();
   await expect(page.getByRole("heading", { name: failureTitle, exact: true })).toBeVisible();
   expect(navigations).toHaveLength(2);
   expect(await page.evaluate((key) => sessionStorage.getItem(key), recoveryKey)).toBe("/intrusul");

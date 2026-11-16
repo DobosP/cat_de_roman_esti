@@ -174,7 +174,7 @@ export default function AlchimieChallenge({
     [actionOwner, admit, applyAuthoritativeState, onToast],
   );
 
-  const { recovery: resumeRecovery, retryResume, cancelResume, dismissRecovery } = useSavedGameResume({
+  const { recovery: resumeRecovery, pending: resumePending, retryResume, cancelResume, dismissRecovery } = useSavedGameResume({
     active,
     load: alchimieApi.get,
     isTerminal: isTerminalResume,
@@ -612,7 +612,7 @@ export default function AlchimieChallenge({
     if (entry.readyAfterTerminal(state)) setState(null);
     retryResume();
   };
-  const startEntry = useRoundStart(entry, (!state || entry.readyAfterTerminal(state)) && !loading && !creating && !startFailed && !resumeRecovery && !unavailable, resumeEntry,
+  const startEntry = useRoundStart(entry, (!state || entry.readyAfterTerminal(state)) && !loading && !creating && !startFailed && !resumePending && !resumeRecovery && !unavailable, resumeEntry,
     (daily) => daily ? void start({ daily, difficulty: "usor" }) : nextRound());
   const mode = entry.mode(state);
   useLayoutEffect(() => {

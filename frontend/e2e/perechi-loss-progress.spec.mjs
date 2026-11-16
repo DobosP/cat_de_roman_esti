@@ -23,6 +23,10 @@ function liveState(gameId, solvedCount, mistakes) {
     mistakes,
     remaining_mistakes: 6 - mistakes,
     actions: solvedCount + mistakes,
+    steps: mistakes,
+    perfect: false,
+    hints_left: 3,
+    hint_level: 0,
     hint_available: mistakes >= 2,
     hints_used: 0,
     won: false,
@@ -36,6 +40,8 @@ function lossResponse(live) {
     mistakes: 6,
     remaining_mistakes: 0,
     actions: live.actions + 1,
+    steps: 6,
+    hints_left: 0,
     hint_available: false,
     lost: true,
     score: 0,
@@ -51,6 +57,8 @@ function winResponse(live) {
   return {
     ...liveState(live.game_id, 4, 0),
     hint_available: false,
+    hints_left: 0,
+    perfect: true,
     won: true,
     score: 1000,
     share: "cat_de_roman_esti · Perechi · 0 greșeli\n🟩🟩🟩🟩",
@@ -70,7 +78,11 @@ async function installPresentationFixture(page, live, response, expectedIds = []
   let matchSeen = false;
 
   await page.addInitScript(({ key, gameId }) => {
+    const date = new Date();
+    const day = [date.getFullYear(), date.getMonth() + 1, date.getDate()]
+      .map((value) => String(value).padStart(2, "0")).join("-");
     window.localStorage.setItem(key, gameId);
+    window.localStorage.setItem("cat_daily_v2_perechi", JSON.stringify({ [day]: 2 }));
   }, { key: ACTIVE_KEY, gameId: live.game_id });
 
   await page.route("**/api/wordgames/perechi/**", async (route) => {

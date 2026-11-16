@@ -175,7 +175,7 @@ export default function Perechi({ onExit, onToast }: Props) {
     focusedTileBeforeMutation.write(null);
     setFeedback(fresh.won || fresh.lost ? null : fresh.clue?.message ?? (fresh.hint ? "Atinge cele două cuvinte marcate." : "Joc reluat. Atinge primul cuvânt."));
   }, [actionOwner, admit, setFeedback]);
-  const { recovery: resumeRecovery, retryResume, cancelResume, dismissRecovery } = useSavedGameResume({
+  const { recovery: resumeRecovery, pending: resumePending, retryResume, cancelResume, dismissRecovery } = useSavedGameResume({
     active,
     load: perechiApi.get,
     isTerminal: isTerminalResume,
@@ -517,7 +517,7 @@ export default function Perechi({ onExit, onToast }: Props) {
     if (entry.readyAfterTerminal(state)) setState(null);
     retryResume();
   };
-  const startEntry = useRoundStart(entry, (!state || entry.readyAfterTerminal(state)) && !loading && !startFailed && !resumeRecovery && !unavailable, resumeEntry,
+  const startEntry = useRoundStart(entry, (!state || entry.readyAfterTerminal(state)) && !loading && !startFailed && !resumePending && !resumeRecovery && !unavailable, resumeEntry,
     (daily, previousGameId) => void start({ daily, previousGameId, category: entry.options.category ?? undefined }));
   const mode = entry.mode(state);
   useLayoutEffect(() => {
