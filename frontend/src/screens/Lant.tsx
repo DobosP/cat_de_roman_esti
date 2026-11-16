@@ -590,7 +590,6 @@ export default function Lant({
                   type="button"
                   className="lant-choice"
                   disabled={actionsLocked}
-                  aria-label={`Salt la ${choice.label}: ${choice.relation}`}
                   onClick={() => void submit(choice)}
                 >
                   <strong>{choice.label}</strong>
@@ -745,7 +744,6 @@ export default function Lant({
                             variant="secondary"
                             title={choice.relation}
                             disabled={actionsLocked}
-                            aria-label={`Salt la ${choice.label}: ${choice.relation}`}
                             onClick={() => void submit(choice)}
                           >
                             {choice.label}

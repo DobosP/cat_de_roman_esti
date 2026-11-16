@@ -88,7 +88,7 @@ for (const item of cases) {
       expect(usefulChoices.length).toBeGreaterThanOrEqual(2);
       for (const choice of usefulChoices) {
         meaningful(choice.relation, item.nouns);
-        await expect(page.getByRole("button", { name: `Salt la ${choice.label}: ${choice.relation}`, exact: true }))
+        await expect(page.getByRole("button", { name: `${choice.label} ${choice.relation}`, exact: true }))
           .toContainText(choice.relation);
       }
       await fits(page);
@@ -165,7 +165,7 @@ for (const item of cases) {
     for (const choice of alternatives.alternatives_choices) {
       meaningful(choice.relation, item.nouns);
       await expect(page.locator(".lant-hint-panel").getByRole("button", {
-        name: `Salt la ${choice.label}: ${choice.relation}`, exact: true,
+        name: `${choice.label} ${choice.relation}`, exact: true,
       })).toBeVisible();
     }
     const exact = await ask();
