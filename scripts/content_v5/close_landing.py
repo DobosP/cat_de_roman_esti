@@ -35,7 +35,7 @@ REGISTRY = "docs/content-registry/registry.jsonl"
 STATUS = "docs/STATUS.md"
 QUEUE = "docs/content-registry/LANDING_QUEUE.md"
 MAX_EVIDENCE = 50 * 1024 * 1024
-PARITY_CASES_BY_RULES = {1: 1206, 2: 1320}
+PARITY_CASES_BY_RULES = {1: 1206, 2: 1332}
 UNIT_CHECKS = {"cat-unit-frontend-build", "cat-frontend-unit", "cat-frontend-lint",
                "cat-frontend-types", "cat-backend-race", "cat-backend-vet",
                "cat-authcore-race", "cat-authcore-vet", "cat-route-budgets"}

@@ -45,6 +45,7 @@ const REDESIGN_SOURCES = [
   "frontend/index.html", "go-backend/internal/httpapi/managed_nonce.go",
   "frontend/src/components/FreeRoundOptions.tsx", "frontend/src/components/HintBar.tsx",
   "frontend/src/components/ResultCard.tsx", "frontend/src/components/ResultsHistory.tsx",
+  ...["alchimie", "contexto", "conexiuni", "intrusul", "lant", "perechi"].map((name) => "frontend/src/gameHelp/" + name + ".mjs"),
   ...["AlchimieChallenge", "CaldRece", "Conexiuni", "Intrusul", "Lant", "Perechi"].map((name) => "frontend/src/screens/" + name + ".tsx"),
   ...["theme", "arcade", "home", "game-frame", "alchimie", "contexto", "conexiuni", "intrusul", "lant", "perechi"]
     .map((name) => "frontend/src/styles/" + name + ".css"),
