@@ -1,5 +1,12 @@
 # Work log
 
+## 2026-11-16 — Redesign v2 starts
+
+Valid until: redesign v2 milestone 1 lands — then treat as history.
+
+- **Historical GUI M2 accepted on `main` c9017b5b (2026-10-13; [ADR-0198](adr/0198-owner-lands-m2-before-device-checkpoint.md), [ADR-0199](adr/0199-owner-no-device-checkpoint-agent-lands-m3-m4.md)):** UI1 active on core-v1.9 (`@roedu/ui` 1.0.9 / web-kit 0.1.9), Preact 11 + preact-iso shell; `/`, `/intrusul`, `/perechi`, `/conexiuni` ported (kit Presence, Conexiuni per-tile `variant`) and served by the current bundle, every other route by the frozen legacy bundle (ADR-0197). Unit 26/26 (route JS gz `/` 26,641, `/intrusul` 38,088, `/perechi` 38,915, `/conexiuni` 40,377 ≤ 40,960); full 37/37: browser 933/933, nine exact PNGs, axe, vitals, CSP enforced 0/0 (4 current + 5 frozen pages), PG, parity. REQ-9/REQ-10 workarounds were replaced by the later core-v1.10 landing below. [Bindings and findings](reviews/gui-m2-activation/bindings.md). **GUI Linux previous:** [M1-close b3f5f61](reviews/gui-normalized-react/m1-close-b3f5f61.json): 37/39, only E3 route-JS rows + aggregate red.
+- **GitHub Actions:** [ADR-0164](adr/0164-manual-github-actions.md), checked2026-10-05; required Go/Node dispatch, references opt-in, no hosted run.
+
 ## 2026-11-10 — V4 C1–C5 landed; qualified test pins delegated
 
 Valid until: a later owner ruling or product qualification changes this scope — then treat as history.
