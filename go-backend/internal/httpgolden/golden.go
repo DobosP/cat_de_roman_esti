@@ -9,6 +9,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
+	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/gameapi"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/strictjson"
 	"io"
 	"reflect"
@@ -111,6 +112,12 @@ var frozenV5Forms1Source30 []byte
 //go:embed testdata/python-http-parity-v5-p2-forms-1-source31.json.gz
 var frozenV5Pilot2Forms1Source31 []byte
 
+//go:embed testdata/python-http-parity-rules-v2.json.gz
+var frozenRulesV2 []byte
+
+const RulesV2SHA256 = "39ec492770228b22380b59c19438631acc56634552969752162e0b56c68ad714"
+const RulesV2Cases = 1302
+
 const FrozenSHA256 = "9041e05f13190a06a526c1aeed1f264d467483cd267ffcdb24f422ed9430b2cb"
 const V12SHA256 = "6293a0dde67ee0b0e5929cc1103bd80795e0aff1af2ba5fdf53e983ab79351fd"
 const V13SHA256 = "67d009c7eaa710bd98281b3300d3df4dc4ed4e224a157934abd7e19bce112670"
@@ -150,13 +157,37 @@ type Case struct {
 	Status  int     `json:"status"`
 	Body    any     `json:"body"`
 }
+type RulesVersion uint8
+
+func (v *RulesVersion) UnmarshalJSON(raw []byte) error {
+	switch string(raw) {
+	case "1":
+		*v = 1
+	case "2":
+		*v = 2
+	default:
+		return fmt.Errorf("unsupported corpus rules version")
+	}
+	return nil
+}
+
 type Corpus struct {
+	RulesVersion  RulesVersion      `json:"rules_version,omitempty"`
 	SchemaVersion int               `json:"schema_version"`
 	Reference     string            `json:"reference"`
 	Sources       map[string]string `json:"sources"`
 	Cases         []Case            `json:"cases"`
 }
+
+func (c *Corpus) Version() RulesVersion {
+	if c.RulesVersion == 0 {
+		return 1
+	}
+	return c.RulesVersion
+}
+
 type Report struct {
+	RulesVersion       RulesVersion      `json:"rules_version,omitempty"`
 	OK                 bool              `json:"ok"`
 	Mode               string            `json:"mode"`
 	Requests           int               `json:"requests"`
@@ -546,6 +577,17 @@ func reviewedV5Pilot2Forms1Source31() (*Corpus, error) {
 	return c, err
 }
 
+func reviewedRulesV2() (*Corpus, error) {
+	if fmt.Sprintf("%x", sha256.Sum256(frozenRulesV2)) != RulesV2SHA256 {
+		return nil, fmt.Errorf("independent redesign v2 HTTP corpus digest drift")
+	}
+	corpus, err := ReadCorpus(bytes.NewReader(frozenRulesV2), true)
+	if err == nil && (corpus.Version() != gameapi.RulesVersion || len(corpus.Cases) != RulesV2Cases) {
+		return nil, fmt.Errorf("independent redesign v2 HTTP corpus version or count drift")
+	}
+	return corpus, err
+}
+
 // ForSources selects an independently captured reviewed corpus only when its
 // entire source identity equals the requested export. Historical Frozen remains
 // immutable; unknown, partial or mixed source sets never gain expected responses.
@@ -553,19 +595,25 @@ func reviewedV5Pilot2Forms1Source31() (*Corpus, error) {
 // identities are indexed once per process; a match re-loads (and re-verifies)
 // only the selected corpus and returns a fresh value.
 func ForSources(sources map[string]string) (*Corpus, error) {
+	return ForSourcesAndRules(sources, 1)
+}
+
+// ForSourcesAndRules also binds the rules used to produce the expected responses.
+func ForSourcesAndRules(sources map[string]string, version RulesVersion) (*Corpus, error) {
 	reviewedSourcesOnce.Do(indexReviewedSources)
 	if reviewedSourcesErr != nil {
 		return nil, reviewedSourcesErr
 	}
 	for _, reviewed := range reviewedSources {
-		if reflect.DeepEqual(reviewed.sources, sources) {
+		if reviewed.version == version && reflect.DeepEqual(reviewed.sources, sources) {
 			return reviewed.load()
 		}
 	}
-	return nil, fmt.Errorf("no independently reviewed HTTP corpus matches exact source digests")
+	return nil, fmt.Errorf("no independently reviewed HTTP corpus matches exact source digests and rules version %d", version)
 }
 
 type reviewedSource struct {
+	version RulesVersion
 	sources map[string]string
 	load    func() (*Corpus, error)
 }
@@ -577,13 +625,13 @@ var (
 )
 
 func indexReviewedSources() {
-	for _, load := range []func() (*Corpus, error){Frozen, reviewedV12, reviewedV13, reviewedV14, reviewedV15, reviewedV16, source6GUIRequalificationCorpus, reviewedV18, reviewedV19, reviewedV110, reviewedV111, reviewedV112, reviewedV113, reviewedV3N1, reviewedV3N2, reviewedV3N4, reviewedV4C1, reviewedV4C2, reviewedV4C3, reviewedV4C4, reviewedV4C5, reviewedV4C6, reviewedV4C7, reviewedV4C8, reviewedV4C9, reviewedV4C10, reviewedV4M3Stage5Recovery27, reviewedV4C42Source28, reviewedV4C44Source29, reviewedV5Forms1Source30, reviewedV5Pilot2Forms1Source31} {
+	for _, load := range []func() (*Corpus, error){Frozen, reviewedV12, reviewedV13, reviewedV14, reviewedV15, reviewedV16, source6GUIRequalificationCorpus, reviewedV18, reviewedV19, reviewedV110, reviewedV111, reviewedV112, reviewedV113, reviewedV3N1, reviewedV3N2, reviewedV3N4, reviewedV4C1, reviewedV4C2, reviewedV4C3, reviewedV4C4, reviewedV4C5, reviewedV4C6, reviewedV4C7, reviewedV4C8, reviewedV4C9, reviewedV4C10, reviewedV4M3Stage5Recovery27, reviewedV4C42Source28, reviewedV4C44Source29, reviewedV5Forms1Source30, reviewedV5Pilot2Forms1Source31, reviewedRulesV2} {
 		c, err := load()
 		if err != nil {
 			reviewedSources, reviewedSourcesErr = nil, err
 			return
 		}
-		reviewedSources = append(reviewedSources, reviewedSource{sources: c.Sources, load: load})
+		reviewedSources = append(reviewedSources, reviewedSource{version: c.Version(), sources: c.Sources, load: load})
 	}
 }
 func replace(text string, aliases map[string]string) string {
@@ -623,6 +671,9 @@ func Replay(ctx context.Context, client *Client, c *Corpus, data *content.Conten
 	if !reflect.DeepEqual(c.Sources, data.Sources) {
 		return Report{}, fmt.Errorf("reference source digest binding differs from current reviewed export")
 	}
+	if c.Version() != gameapi.RulesVersion {
+		return Report{}, fmt.Errorf("reference rules version %d differs from native rules version %d", c.Version(), gameapi.RulesVersion)
+	}
 	aliases := map[string]string{}
 	reverse := map[string]string{}
 	for index, row := range c.Cases {
@@ -652,5 +703,5 @@ func Replay(ctx context.Context, client *Client, c *Corpus, data *content.Conten
 			return Report{}, fmt.Errorf("independent HTTP reference mismatch at case %d (%s %s), expected status %d, got %d", index, request.Method, strings.Split(row.Request.Path, "?")[0], row.Status, got.Status)
 		}
 	}
-	return Report{OK: true, Mode: "golden_replay", Requests: len(c.Cases), Reference: c.Reference, ElapsedSeconds: time.Since(start).Seconds(), ContentHash: data.Manifest["content_hash"].(string)}, nil
+	return Report{OK: true, Mode: "golden_replay", RulesVersion: c.Version(), Requests: len(c.Cases), Reference: c.Reference, ElapsedSeconds: time.Since(start).Seconds(), ContentHash: data.Manifest["content_hash"].(string)}, nil
 }

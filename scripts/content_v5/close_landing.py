@@ -35,6 +35,7 @@ REGISTRY = "docs/content-registry/registry.jsonl"
 STATUS = "docs/STATUS.md"
 QUEUE = "docs/content-registry/LANDING_QUEUE.md"
 MAX_EVIDENCE = 50 * 1024 * 1024
+PARITY_CASES_BY_RULES = {1: 1206, 2: 1302}
 UNIT_CHECKS = {"cat-unit-frontend-build", "cat-frontend-unit", "cat-frontend-lint",
                "cat-frontend-types", "cat-backend-race", "cat-backend-vet",
                "cat-authcore-race", "cat-authcore-vet", "cat-route-budgets"}
@@ -92,7 +93,7 @@ def read_receipts(scratch, manifests, candidate, base, gui, lock, lock_sha):
                     and data["thread_id"], "Fresh landing GO required")
         elif role == "pin-review":
             require(data.get("verdict") == "GO" and isinstance(data.get("thread_id"), str)
-                    and data["thread_id"] and data.get("case_count") == 1206,
+                    and data["thread_id"] and data.get("case_count") == case_count,
                     "Independent pin GO over 1,206 cases required")
         elif role not in {"unit-wrapper", "full-wrapper", "full-supervisor"}:
             require(data.get("status") == "pass", f"{role} receipt is not green")
@@ -121,7 +122,7 @@ def read_receipts(scratch, manifests, candidate, base, gui, lock, lock_sha):
                     and all(type(item.get("exit_code")) is int and item["exit_code"] == 0
                             for item in data["checks"]), "4i checks or baseline differ")
         if role == "reference":
-            require(data.get("case_count") == 1206, "Reference case count must stay 1,206")
+            require(data.get("case_count") == case_count, "Reference case count must stay 1,206")
         total += len(raw)
         found[role] = {**ref, "bytes": len(raw)}
     require(documents["pin-review"]["thread_id"] != documents["landing-review"]["thread_id"],
@@ -197,17 +198,20 @@ def check_reference(repo, candidate, bundle, evidence, documents):
             corpus_raw = archive.read(MAX_EVIDENCE + 1)
         require(len(corpus_raw) <= MAX_EVIDENCE, "Reference corpus exceeds decompression bound")
     corpus = read_json(corpus_raw)
+    rules = corpus.get("rules_version", 1)
+    require(type(rules) is int and rules in PARITY_CASES_BY_RULES, "Unknown HTTP parity rules version")
+    case_count = PARITY_CASES_BY_RULES[rules]
     capture = read_json(attachment("reference-capture", reference["capture"]))
     replay = read_json(attachment("reference-replay", reference["replay"]))
     pins = read_json(attachment("pin-changes", pin_review["changes"]))
     attachment("http-transcript", documents["http-play"]["transcript"])
     require(corpus.get("schema_version") == 1 and isinstance(corpus["cases"], list)
-            and len(corpus["cases"]) == 1206
+            and len(corpus["cases"]) == case_count
             and all(valid_case(case) for case in corpus["cases"])
             and isinstance(corpus.get("reference"), str) and corpus["reference"]
             and corpus.get("sources") == bundle["sources"], "Exact source-bound corpus required")
     require(capture.get("schema") == "cat-v5-independent-recapture-1"
-            and capture.get("sha") == candidate and capture.get("case_count") == 1206
+            and capture.get("sha") == candidate and capture.get("case_count") == case_count
             and capture.get("corpus_sha256") == corpus_digest and capture.get("reference") == corpus["reference"]
             and reference.get("expectations_origin") == corpus["reference"]
             and reference.get("source_is_independent") is True, "Independent capture evidence differs")
@@ -216,7 +220,8 @@ def check_reference(repo, candidate, bundle, evidence, documents):
             "Native replay receipt did not use the independent corpus")
     report = replay["report"]
     require(report.get("ok") is True and report.get("mode") in {"golden_replay", "independent_parity"}
-            and report.get("requests") == 1206 and report.get("reference") == corpus["reference"]
+            and report.get("requests") == case_count and report.get("rules_version", 1) == rules
+            and report.get("reference") == corpus["reference"]
             and report.get("content_hash") == bundle["manifest"]["content_hash"],
             "Native reference replay differs")
     require(pin_review.get("reference_sha256") == evidence.attachments["reference"]["sha256"]

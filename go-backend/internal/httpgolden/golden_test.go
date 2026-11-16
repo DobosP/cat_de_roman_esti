@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
+	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/gameapi"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/httpapi"
 	"io"
 	"net/http"
@@ -29,7 +30,7 @@ func testData(t *testing.T) *content.Content {
 }
 func TestCurrentIndependentHTTPParity(t *testing.T) {
 	data := testData(t)
-	c, err := ForSources(data.Sources)
+	c, err := ForSourcesAndRules(data.Sources, gameapi.RulesVersion)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -38,7 +39,7 @@ func TestCurrentIndependentHTTPParity(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if !report.OK || report.Requests != 1206 {
+	if !report.OK || report.Requests != RulesV2Cases || report.RulesVersion != gameapi.RulesVersion {
 		t.Fatal("incomplete independent parity")
 	}
 }
@@ -109,7 +110,7 @@ func TestUnknownMixedAndPartialSourcesRefuseWithoutRequests(t *testing.T) {
 }
 func TestReferenceSourceBindingAndMismatchFailClosed(t *testing.T) {
 	data := testData(t)
-	c, err := ForSources(data.Sources)
+	c, err := ForSourcesAndRules(data.Sources, gameapi.RulesVersion)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -118,7 +119,7 @@ func TestReferenceSourceBindingAndMismatchFailClosed(t *testing.T) {
 	if _, err = Replay(context.Background(), client, c, data); err == nil || client.Count() != 0 {
 		t.Fatal("source drift must refuse before requests")
 	}
-	c, err = ForSources(data.Sources)
+	c, err = ForSourcesAndRules(data.Sources, gameapi.RulesVersion)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -127,6 +128,34 @@ func TestReferenceSourceBindingAndMismatchFailClosed(t *testing.T) {
 		t.Fatal("expected response mismatch accepted")
 	}
 }
+func TestRulesSelectionAndReplayRefuseDrift(t *testing.T) {
+	data := testData(t)
+	legacy, err := ForSourcesAndRules(data.Sources, 1)
+	if err != nil || legacy.Version() != 1 || len(legacy.Cases) != 1206 {
+		t.Fatal("historical selection must use the historical corpus", err)
+	}
+	client, err := NewClient(Local(httpapi.New(data)), MaxCases)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if _, err := Replay(context.Background(), client, legacy, data); err == nil || client.Count() != 0 {
+		t.Fatal("same-source prior rules reached the current runtime")
+	}
+	for _, version := range []RulesVersion{0, 3} {
+		if _, err := ForSourcesAndRules(data.Sources, version); err == nil {
+			t.Fatalf("unsupported rules version %d selected", version)
+		}
+	}
+	sources := make(map[string]string)
+	for name, digest := range data.Sources {
+		sources[name] = digest
+	}
+	delete(sources, "kg_sample.json")
+	if _, err := ForSourcesAndRules(sources, gameapi.RulesVersion); err == nil {
+		t.Fatal("current rules selected a partial source identity")
+	}
+}
+
 func TestSessionAliasesKeepPrefixAndEscapedIdentityDistinct(t *testing.T) {
 	aliases := map[string]string{"session-1": "a111", "session-10": "b222"}
 	if got := replace("/session-10?previous_game_id=session-1", aliases); got != "/b222?previous_game_id=a111" {

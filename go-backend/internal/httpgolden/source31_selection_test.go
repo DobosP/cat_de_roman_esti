@@ -64,18 +64,24 @@ func TestSource31SelectsExactCurrentIndependentCorpus(t *testing.T) {
 	if err != nil || !reflect.DeepEqual(selected, want) || !reflect.DeepEqual(sources, before) {
 		t.Fatal("complete Source31 tuple selected different responses or changed its input", err)
 	}
-	if len(reviewedSources) != 31 {
-		t.Fatal("expected Source31 plus 30 historical selectors", len(reviewedSources))
+	legacyCount := 0
+	for _, row := range reviewedSources {
+		if row.version == 1 {
+			legacyCount++
+		}
+	}
+	if legacyCount != 31 {
+		t.Fatal("expected Source31 plus 30 historical rules-1 selectors", legacyCount)
 	}
 	for _, row := range reviewedSources {
-		if reflect.DeepEqual(row.sources, want.Sources) {
+		if row.version == want.Version() && reflect.DeepEqual(row.sources, want.Sources) {
 			continue
 		}
 		historical, err := row.load()
 		if err != nil || !reflect.DeepEqual(row.sources, historical.Sources) {
 			t.Fatal("historical loader no longer binds its exact sources", err)
 		}
-		selected, err := ForSources(row.sources)
+		selected, err := ForSourcesAndRules(row.sources, row.version)
 		if err != nil || !reflect.DeepEqual(selected, historical) {
 			t.Fatal("historical whole tuple selected different responses", err)
 		}

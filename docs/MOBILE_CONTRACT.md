@@ -9,8 +9,8 @@ native HTTP website/OpenAPI goldens, `internal/mobilepack` output contracts and
 
 ## 1. Stable OpenAPI operationIds
 
-The Go server serves the frozen, parity-checked OpenAPI schema from the reviewed content
-export (`go-backend/internal/httpapi`). The retained Django offline oracle originally pins
+The Go server serves the parity-checked OpenAPI golden exported by the Django oracle
+(`go-backend/internal/httpapi/testdata/openapi-redesign-v2.json`). The retained Django offline oracle originally pins
 operationIds via `@extend_schema(operation_id=...)` to `<tag>_<endpoint-name>`, e.g. `contexto_guess`, `alchimie_combine`, `lant_move`,
 `conexiuni_guess`, `conexiuni_clue`, `meta_manifest`. A generated TS client turns these into method names
 (`contextoGuess`, …). Unlike a framework default, they do **not** bake in the HTTP path, so a
@@ -32,12 +32,12 @@ any difficulty is playable, while `curated.<game>` remains a raw approved-invent
 and is not a runtime-playability promise. Clients that offer a difficulty and category
 together should use the nested field for that exact pair.
 
-V42 ([ADR-0063](adr/0063-four-board-category-daily-floor.md)) gives an explicit
+Before redesign v2, V42 ([ADR-0063](adr/0063-four-board-category-daily-floor.md)) gives an explicit
 category daily a curated floor of four records for the exact game/category/difficulty
 shelf; the unscoped floor stays eight. Below four, Alchimie, Contexto, and Lanț use their
 existing deterministic miner inside the requested theme, while Conexiuni returns its
 themed-unavailable 503. A successful response must never borrow an unscoped board and
-relabel it as `board_category`.
+relabel it as `board_category`. The redesign interface enters the shared easy daily board, and free rounds use the saved difficulty and theme.
 
 The native server exposes `GET /openapi.json`; client generation can also use the
 retained deterministic offline schema exporter (no serving process or live data):
@@ -81,11 +81,27 @@ positive reveal boundaries:
 | contexto | target id/label/solution | no `target` or `solution` key; target id/label absent everywhere; guesses carry rank feedback | won / gave up |
 | alchimie | target id | `target.id = null`, `revealed = false` (label shown as the goal by design) | crafted (won) |
 | lant | full route corridor | only `start` + `target` ids; up to six local choices carry label + relation but no id/on-track flag; hints prefer an unvisited target-reachable route, with an ID-free `backtrack` stage only when free undo is the safe recovery | per-hop by playing; at most one hop id from the third help request in the session, unless safe recovery is ID-free backtrack |
-| conexiuni | unsolved category grouping | no `solution`; remaining tiles carry only `{id,label}`; each correctly solved group exposes its own key/label/tiles; up to two optional clues stay redacted | that group: correct guess; full solution: won / lost |
+| conexiuni | unsolved category grouping | no `solution`; tiles carry `{id,label}`; earned clues may expose one group label and one member | that group: correct guess; full solution: won / lost |
 
 Seeds/daily are deterministic by design (shared daily challenge); offline play inherently ships
 the whole KG, so this guards the **API surface**, keeping gameplay server-authoritative rather
 than claiming the offline answer is unknowable.
+
+### Round counters and hint ladder
+
+[ADR-0232](adr/0232-steps-and-hint-ladder.md) defines steps, Perfect and the hints for each
+game. Stateful replies carry `steps`, `hints_left` and `hint_level`. `hint_level` is the
+ordinal of the last awarded rung, with zero before any award. Each awarded rung adds one
+step and leaves attempts or lives intact. Empty and already-public rungs are skipped.
+Once all available rungs are consumed, another request returns HTTP 400 and leaves the
+session intact. GET and resume never spend a hint. Games other than Cald sau Rece also
+carry `perfect`: true only for a zero-step win. The terminal `score` field remains for
+account compatibility.
+
+Intrusul first offers the board theme through `clue`, then the label shared by the other
+three words. Perechi offers the theme of one unsolved pair through `clue`, then the pair's
+link label, then its two tiles through `hint`. A start with an explicit theme may begin
+on a later rung.
 
 ### Alchimie additive projection views
 
@@ -95,19 +111,15 @@ contains only bounded pair/route/result counts — recipe ids and full routes ar
 `attempted_count` is the only public experiment-history aggregate. A combine response adds
 `already_tried` for its submitted unordered pair; a repeat changes no move, score, dry-spell,
 hint, or inventory state, and no response serializes attempted ingredient IDs or results.
-The first progressive hint has `hint_kind = output|category`, `hint = null`, and may include
-only a non-target output **label** in `hint_output`; later hints may return one owned pair with
-`hint_kind = pair`. Until win, none of these additive fields may contain the hidden target id.
-V42 unlocks that hint after two consecutive distinct barren combines. From the fourth total
-barren combine, `message` may append one deterministic generic strategy sentence; this is
-not a new field or score penalty, and repeated pairs advance neither dry counter.
+The first rung shows a useful output label in `hint_output`. The second offers one owned
+`hint_ingredient` with its id and label. The third offers the two owned inputs in `hint`.
+`hint_kind` identifies each awarded rung. Until the target is made, the response keeps
+its private id hidden.
 
-An optional `earned_hint` contains exactly the already-paid cue fields `hint`, `hint_kind`,
-`hint_output`, and `message`. GET and resume return this same cue without another charge.
-It is absent before a paid hint, after a new unique combine (productive or barren), and
-after reset; rejected actions and free repeated pairs preserve it. Later paid hints replace
-this single object. The existing POST hint fields remain compatible. See
-[ADR-0136](adr/0136-reconcile-uncertain-alchimie-actions.md) for retention and recovery policy.
+The optional `earned_hint` carries the cue paid for at the current inventory state.
+GET and resume return this cue without another charge. A new distinct combination or a
+reset clears that display cue. Steps and hint usage stay cumulative across reset.
+See [ADR-0136](adr/0136-reconcile-uncertain-alchimie-actions.md) for action recovery.
 
 ### Alchimie exploration (V92, separate from scored challenges)
 
@@ -247,52 +259,24 @@ concept's rank/temperature scale, but it is never a target: even a surface mappe
 target's scoring anchor remains a non-win with `rank >= 2`. Clients must treat ids and all
 feedback as opaque server values and must not infer or cache projection anchors.
 
-After three counted guesses, state may expose `next_clue_kind: "category" | "warmer"`.
-The first unthemed clue retains `clue.category`; the optional second stage adds:
-
-```json
-{
-  "warm_clue": {
-    "label": "cuvânt familiar",
-    "rank": 12,
-    "message": "Mai cald: cuvânt familiar (#12)."
-  }
-}
-```
-
-`warm_clue.rank` is strictly better than the player's best rank when issued, is never 1,
-and its label never names the target. A board created with `?category=` skips the redundant
-category stage because `board_category` is already public. The clue endpoint also returns
-`clue_kind` plus optional direct `category` or `word`; all fields are additive and the
+Clues offer the target category, a warm word (rank at most 150), then a warmer word
+(rank at most 25). A themed round skips its already-public category. Warm words exclude
+the target and appear in `warm_clue` with `label`, `rank` and `message`. The clue
+endpoint also returns `clue_kind` plus optional direct `category` or `word`; the
 operationId remains `contexto_clue`.
 
 ## 5. Conexiuni earned state and clue endpoint
 
-`POST /api/wordgames/conexiuni/games/{game_id}/clue` is additive. It unlocks after two
-mistakes; a second clue unlocks at three mistakes. At most two may be used, and each applies
-the existing score penalty. The first targets the deterministic first unsolved category and
-the second advances to another unsolved category when one exists. A first-clue response can
-look like:
-
-```json
-{
-  "ok": true,
-  "clue": { "pattern": "L_________", "message": "Numele unui grup rămas: L_________ (fiecare _ este o literă lipsă)." },
-  "clues_used": 1,
-  "clue_available": false,
-  "clues": [{ "pattern": "L_________", "message": "Numele unui grup rămas: L_________ (fiecare _ este o literă lipsă)." }]
-}
-```
-
-The clue payload itself stays redacted: it contains no category `key`, exact category label,
-tile ids, or membership. `clues_used` can reach two; after both are spent
-`clue_available` remains false and another request is rejected.
+`POST /api/wordgames/conexiuni/games/{game_id}/clue` earns the next available rung.
+The first rung exposes `clue.pattern`, a redacted group label. The second also exposes
+`clue.label`, the complete label of that group. The third adds `clue.tile` with one
+member's `{id,label}`. The clue carries no group key or full membership. The `clues`
+array retains previously earned public clues.
 
 Pre-terminal Conexiuni create/get/guess/clue responses use the same public view model:
 `tiles` contains only public tile `{id,label}` objects still playable on the board,
 and `solved` contains only groups already accepted as correct, each shaped as
-`{key,label,tiles}`. Unsolved keys, labels, membership, and the full `solution` remain
-absent until win/loss. A correct guess also returns its earned `{key,label}` in
+`{key,label,tiles}`. Unsolved keys, full memberships, and the full `solution` stay private until win/loss. A correct guess also returns its earned `{key,label}` in
 `category`. Re-submitting the same four ids in another order returns HTTP 409 and leaves
 lives, mistakes, clues, score, and history unchanged.
 

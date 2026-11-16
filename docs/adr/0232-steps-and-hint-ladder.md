@@ -63,5 +63,5 @@ previous rules.
 Corpora gain an optional `rules_version` (absent = 1); selection uses content sources and rules
 version. Rules-2 corpora are recorded from the Python oracle alone by a committed recorder, with
 journeys for every rung, the rejected extra hint, undo, reset, resume and terminal states. The
-case count changes from 1,206 (Paul: "Yes, new count is fine"). Mismatches are judged against
+case count changes from 1,206 to 1,302 (Paul: "Yes, new count is fine"). Mismatches are judged against
 this ADR, never against either implementation.

@@ -2,6 +2,8 @@ package gameapi
 
 import "fmt"
 
+const RulesVersion = 2
+
 type Error struct {
 	Status int
 	Detail any
