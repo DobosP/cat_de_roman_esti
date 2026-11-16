@@ -28,8 +28,10 @@ node -e 'const r=require(process.argv[1]); console.log("CSS bag audit", JSON.str
 if [[ "${1:-}" == inventory ]]; then exit 0; fi
 
 cd /work/frontend
-if (( $# )); then
-  node node_modules/@playwright/test/cli.js test --config playwright.gui.config.mjs --project desktop --reporter json "$@" > "$out/playwright.json"
-else
-  node node_modules/@playwright/test/cli.js test --config playwright.gui.config.mjs --reporter json > "$out/playwright.json"
+npm run build > "$out/current-build.log" 2>&1
+projects=(--project desktop)
+if [[ "${1:-}" == --all-projects || $# == 0 ]]; then
+  projects=()
 fi
+if [[ "${1:-}" == --all-projects ]]; then shift; fi
+node node_modules/@playwright/test/cli.js test --config playwright.gui.config.mjs   "${projects[@]}" --reporter json "$@" > "$out/playwright.json"

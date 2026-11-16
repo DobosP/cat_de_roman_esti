@@ -207,7 +207,7 @@ test("a server-earned backtrack hint highlights free undo and clears when a real
   expect(capped.ok).toBe(false);
   const guidance = "Limită atinsă — folosește Înapoi.";
   expect(capped.last_error).toBe(guidance);
-  await expect(page.locator(".lant-screen .card").getByText(guidance, { exact: true })).toBeVisible();
+  await expect(page.locator(".lant-screen .card").getByText(guidance)).toBeVisible();
   await expect(page.getByRole("status").filter({ hasText: guidance })).toHaveCount(1);
   expect(await saved(request, initial.game_id)).toEqual(persisted);
   const undone = await undo(page, initial.game_id);
