@@ -55,7 +55,7 @@ func (p previewFiles) compare(before *content.Content) (*report, error) {
 	if err != nil {
 		return nil, err
 	}
-	result, err := compareMode(before, after, true)
+	result, err := compare(before, after)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ func (p previewFiles) compare(before *content.Content) (*report, error) {
 	return result, nil
 }
 
-func writeReport(result *report, output io.Writer) error {
+func writeReport(result any, output io.Writer) error {
 	enc := json.NewEncoder(output)
 	enc.SetIndent("", "  ")
 	return enc.Encode(result)

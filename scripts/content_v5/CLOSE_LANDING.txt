@@ -33,8 +33,12 @@ and the train's previous main fixes the actual before inventory. Any legacy
 puzzle delta must equal the existing generator's result from the final graph.
 
 For a word train, assembly.board_view_diff references the full native
-cat-board-view-diff-1 report for the exact committed before and after bundles.
-List every disturbed board in touched_boards and the exact HTTP transcript.
+cat-board-view-diff-2 report for the exact committed before and after bundles.
+A Cald board is disturbed when its target or ordered top-100 IDs change. A Lanț
+board is disturbed when its shortest route changes. Feedback values, captions
+and menus are diagnostic changes: replayed over HTTP, never re-blinded.
+List every board of disturbed and diagnostic_changes in touched_boards and the
+exact HTTP transcript. A cat-board-view-diff-1 report is refused.
 If any board is disturbed, assembly.board_reblind references a
 cat-v5-board-reblind-1 object with sha, board_view_diff_sha256 and boards.
 Each boards row has game, id, view_sha256 (the native after_sha256), thread_id,

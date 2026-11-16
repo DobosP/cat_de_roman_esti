@@ -193,7 +193,7 @@ class CloseLandingTests(unittest.TestCase):
             {"id": "board", "pilot_eligible": True, "status": "approved", "game": "contexto",
              "payload": {"target": "n_0"}}]}
         header = {"sha": SHA, "baseline": BASE, "content_hash": "hash"}
-        views = {("contexto", "board"): "a" * 64}
+        views = {("contexto", "board")}
 
         def play_receipt(rows):
             raw = b"".join((json.dumps(row) + "\n").encode() for row in rows)
@@ -217,10 +217,12 @@ class CloseLandingTests(unittest.TestCase):
         before, after = "a" * 64, "b" * 64
         first = {"game": "contexto", "id": "board", "kind": "changed",
                  "before_sha256": "c" * 64, "after_sha256": "d" * 64}
-        diff = {"schema": "cat-board-view-diff-1", "baseline_bundle_sha256": before,
+        shifted = {**first, "id": "count-only", "before_sha256": "1" * 64, "after_sha256": "2" * 64}
+        diff = {"schema": "cat-board-view-diff-2", "baseline_bundle_sha256": before,
                 "candidate_bundle_sha256": after, "disturbed_total": 2,
                 "games": {game: {"disturbed": 2 if game == "contexto" else 0} for game in close.BOARD_GAMES},
-                "disturbed": [first, {**first, "id": "board-2"}]}
+                "disturbed": [first, {**first, "id": "board-2"}],
+                "diagnostic_changes": [{**shifted, "id": "board"}, shifted]}
         diff_ref = {"path": "diff", "sha256": "e" * 64}
         reblind_ref = {"path": "blind", "sha256": "f" * 64}
         assembly = {"sha": SHA, "board_view_diff": diff_ref, "board_reblind": reblind_ref}
@@ -246,9 +248,19 @@ class CloseLandingTests(unittest.TestCase):
             return result
 
         with patch.object(close, "evidence_file", side_effect=evidence):
-            self.assertEqual(check(), {("contexto", "board"): "d" * 64, ("contexto", "board-2"): "d" * 64})
+            # A count-only change is replayed over HTTP and needs no reblind.
+            self.assertEqual(check(), (
+                {("contexto", "board"): "d" * 64, ("contexto", "board-2"): "d" * 64},
+                {("contexto", "board"), ("contexto", "board-2"), ("contexto", "count-only")}))
             with self.assertRaisesRegex(ValueError, "Exact full"):
                 check("0" * 64)
+            for stale in ({"schema": "cat-board-view-diff-1"}, {"one_word_dry_run": {}}):
+                with self.subTest(stale=stale), patch.dict(diff, stale):
+                    with self.assertRaisesRegex(ValueError, "Exact full"):
+                        check()
+            with patch.dict(diff, {"diagnostic_changes": [shifted, shifted]}):
+                with self.assertRaisesRegex(ValueError, "Duplicate diagnostic"):
+                    check()
             with self.assertRaisesRegex(ValueError, "Independent reblind"):
                 check(other_roles={"fresh-blind-thread"})
             reblind["boards"][0]["view_sha256"] = "c" * 64

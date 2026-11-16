@@ -10,11 +10,11 @@ go -C go-backend build -o "$CAMPAIGN/cat-board-view-diff" ./cmd/cat-board-view-d
   > "$CAMPAIGN/board-diff.json"
 ```
 
-The report lists additions and disturbances in stable game and ID order. A baseline
-row absent from the candidate is a disturbance. Its report entry carries the old
-view hash for S7 follow-up. A changed row identifies the changed view fields.
-Selection scores, ranks, tickets and source grouping have their own changes list.
-The compact report contains no answer or recipe payloads.
+The report (schema `cat-board-view-diff-2`) lists additions and disturbances in
+stable game and ID order. A baseline row absent from the candidate is a disturbance.
+Its report entry carries the old view hash for S7 follow-up. A changed row identifies
+the changed view fields. Selection scores, ranks, tickets and source grouping have
+their own changes list. The compact report contains no answer or recipe payloads.
 
 For ranked pack games, the finite inventory follows `pack.Pack.PickSeeded` and
 `PickDaily`. Both restrict ranked pools to `PilotEligible`. Native ranking marks
@@ -39,13 +39,33 @@ The current baseline has 923 selectable finite IDs.
 | Lanțul Cuvintelor | 126 | 126 | 0 |
 | Perechi | 176 | 192 | 16 |
 
-| Game | Board view |
-| --- | --- |
-| Cald sau Rece | Target and ordered top 100 reachable KG concept IDs, using the live profile and score. Ties break by distance, label and ID after rank. S7 includes top-100 labels, distances, ranks, closeness and temperature, and the target display. S7 also includes the displayed reachable population count. Alternate inputs are outside the top-100 metric. |
-| Lanțul Cuvintelor | Declared par, actual shortest distance and complete directed shortest-route DAG with labels, full captions and displayed short captions. S7 also compares native menus, including detours, at each shortest-route prefix. Routes exceeding 2,048 menus fail the comparison. |
-| Alchimie | Real native recipe projection including compatible reviewed extensions, par, routes, displayed concepts and recipe link captions. |
-| Conexiuni | Visible tile order and labels, group membership and labels, clue patterns and the native content fairness screen. |
-| Intrusul and Perechi | Exact serving payloads and visible tile labels. |
+| Game | Counted board view | Diagnostics |
+| --- | --- | --- |
+| Cald sau Rece | Target and ordered top 100 reachable KG concept IDs, using the live profile and score. Ties break by distance, label and ID after rank. Alternate inputs are outside the top-100 metric. | Top-100 labels, distances, ranks, closeness and temperature, the target display and the displayed reachable population count. |
+| Lanțul Cuvintelor | Endpoints, declared par, actual shortest distance and the complete directed shortest-route DAG. | Route labels, full captions and displayed short captions, the target display and native menus, including detours, at each shortest-route prefix. Routes exceeding 2,048 menus fail the comparison. |
+| Alchimie | Real native recipe projection including compatible reviewed extensions, par, routes, displayed concepts and recipe link captions. | None. |
+| Conexiuni | Visible tile order and labels, group membership and labels, clue patterns and the native content fairness screen. | None. |
+| Intrusul and Perechi | Exact serving payloads and visible tile labels. | None. |
+
+Category, category label and difficulty are counted for all six games.
+
+## Disturbed boards and diagnostics
+
+The S7 comparison, the one-word preview and the paired re-blind share one
+definition. A board is disturbed when a counted field changes. A Cald board is
+disturbed when its target or its ordered top-100 ID list changes (owner decision,
+2026-11-16). A Lanț board is disturbed when its endpoints, declared par, shortest
+distance or shortest-route topology changes
+([ADR-0231](../../../docs/adr/0231-v5-dumps-words-and-model-candidates.md) decision 8).
+
+A changed diagnostic never disturbs a board. One new word enlarges the reachable
+population of every Cald board and shifts some closeness and temperature values.
+Those boards appear in `diagnostic_changes` with their changed field names and
+before and after hashes. A board can appear in both lists. Together `disturbed` and
+`diagnostic_changes` name every board whose native view changed. For S7, re-blind
+every disturbed board and replay every board of both lists over HTTP under the
+content loop. Schema `cat-board-view-diff-1` S7 reports counted the diagnostic
+fields as disturbances. Closeout refuses them.
 
 ## One-word preview before source pins
 
@@ -71,13 +91,10 @@ inputs. Pack IDs and frozen payload fields must retain their baseline identities
 The preview produces no serving bundle and updates no source pin. The report binds
 both input SHA-256 digests.
 
-The dry-run metric counts Cald changes in the ordered top-100 IDs. It counts
-Lanț changes in shortest-route topology. S7 Cald feedback and display fields and
-Lanț route captions, labels and menus appear as diagnostics in dry mode.
-A board removed from reachable stock counts as disturbed. The report sets
-`one_word_dry_run.hold` when more than 10 boards are disturbed across all six
-games. Source evidence and registry order are checked by the link installer.
-For S7, re-blind and replay every disturbed board under the content loop.
+The preview counts disturbed boards exactly as S7 does. A board removed from
+reachable stock counts as disturbed. The report sets `one_word_dry_run.hold` when
+more than 10 boards are disturbed across all six games. Source evidence and
+registry order are checked by the link installer.
 
 ## Input and report boundaries
 

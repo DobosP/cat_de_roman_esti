@@ -325,27 +325,31 @@ def actual_play_text(value):
 def word_board_scope(evidence, assembly, before_bundle_sha, bundle_sha, other_roles):
     diff_ref = assembly["board_view_diff"]
     diff = read_json(evidence.add("board-view-diff", diff_ref, 8 * 1024 * 1024))
-    require(diff.get("schema") == "cat-board-view-diff-1" and "one_word_dry_run" not in diff
+    require(diff.get("schema") == "cat-board-view-diff-2" and "one_word_dry_run" not in diff
             and diff.get("baseline_bundle_sha256") == before_bundle_sha
             and diff.get("candidate_bundle_sha256") == bundle_sha
             and isinstance(diff.get("games"), dict) and diff["games"].keys() == BOARD_GAMES
-            and isinstance(diff.get("disturbed"), list)
+            and isinstance(diff.get("disturbed"), list) and isinstance(diff.get("diagnostic_changes"), list)
             and type(diff.get("disturbed_total")) is int and diff["disturbed_total"] == len(diff["disturbed"]),
             "Exact full word-train board-view diff required")
-    views = {}
-    for row in diff["disturbed"]:
-        require(row["game"] in BOARD_GAMES and isinstance(row["id"], str) and row["id"]
-                and row["kind"] == "changed"
-                and SHA256.fullmatch(row.get("before_sha256", "")) and SHA256.fullmatch(row.get("after_sha256", ""))
-                and row["before_sha256"] != row["after_sha256"],
-                "Disturbed board must have a playable changed view")
-        key = (row["game"], row["id"])
-        require(key not in views, "Duplicate disturbed board")
-        views[key] = row["after_sha256"]
+    # Disturbed boards are re-blinded. Diagnostic changes are only replayed over HTTP.
+    views, diagnostic = {}, {}
+    for rows, found, label in ((diff["disturbed"], views, "Disturbed board"),
+                               (diff["diagnostic_changes"], diagnostic, "Diagnostic board change")):
+        for row in rows:
+            require(row["game"] in BOARD_GAMES and isinstance(row["id"], str) and row["id"]
+                    and row["kind"] == "changed"
+                    and SHA256.fullmatch(row.get("before_sha256", "")) and SHA256.fullmatch(row.get("after_sha256", ""))
+                    and row["before_sha256"] != row["after_sha256"],
+                    f"{label} must have a playable changed view")
+            key = (row["game"], row["id"])
+            require(key not in found, f"Duplicate {label.lower()}")
+            found[key] = row["after_sha256"]
     require(all(type(row.get("disturbed")) is int and row["disturbed"] == sum(key[0] == game for key in views)
                 for game, row in diff["games"].items()), "Board-view disturbance counts differ")
+    replay = views.keys() | diagnostic.keys()
     if not views and "board_reblind" not in assembly:
-        return views
+        return views, replay
     reblind = read_json(evidence.add("board-reblind", assembly["board_reblind"], 4 * 1024 * 1024))
     require(reblind.get("schema") == "cat-v5-board-reblind-1" and reblind.get("sha") == assembly["sha"]
             and reblind.get("board_view_diff_sha256") == diff_ref["sha256"]
@@ -373,7 +377,7 @@ def word_board_scope(evidence, assembly, before_bundle_sha, bundle_sha, other_ro
         transcript_hashes.add(ref["sha256"])
         play_hashes.add(play_sha)
     require(seen == views.keys(), "Reblind evidence must cover every disturbed board")
-    return views
+    return views, replay
 
 
 def other_reblind_roles(evidence, documents, rows, judgments):
@@ -421,7 +425,7 @@ def check_word_landing(repo, evidence, documents, delta, item_ids, registry, jou
     if not word_ids:
         require(not ({"word_link_manifest", "board_view_diff", "board_reblind"} & assembly.keys()),
                 "Word-train evidence requires a reviewed additive word")
-        return {}, {}
+        return {}, set()
     document = read_json(evidence.add("word-link-manifest", assembly["word_link_manifest"], link_install.MAX_INPUT))
     require(document.keys() == {"schema", "items", "gate", "claims", "judgments"}
             and document["schema"] == "cat-v5-link-install-1" and isinstance(document["items"], list)
@@ -452,15 +456,15 @@ def check_word_landing(repo, evidence, documents, delta, item_ids, registry, jou
     reviewed = reviewed_word_rows(registry, events, word_ids)
     roles = other_reblind_roles(evidence, documents, (reviewed[item] for item in sorted(item_ids)),
                                 document["judgments"])
-    views = word_board_scope(evidence, assembly, before_bundle_sha, bundle_sha, roles)
+    _, replay = word_board_scope(evidence, assembly, before_bundle_sha, bundle_sha, roles)
     _, edge_results = link_install.verify_span_evidence(scratch, document["claims"], links)
     gate, bindings = link_install.verified_sources(scratch, document["gate"], repo, candidate, items)
     link_install.verify_registry(scratch, document, reviewed, bindings, gate, edge_results, False)
     return {item: {**artifact, "payload_sha256": registry[item]["checks"]["v5_word_source_sha256"]}
-            for item, artifact in artifacts.items()}, views
+            for item, artifact in artifacts.items()}, replay
 
 
-def check_scope(scratch, documents, delta, item_ids, registry, bundle, words=None, views=None,
+def check_scope(scratch, documents, delta, item_ids, registry, bundle, words=None, replay=(),
                 legacy_puzzles_verified=False):
     assembly = documents["assembly"]
     expected_ids = sorted(item_ids)
@@ -480,7 +484,6 @@ def check_scope(scratch, documents, delta, item_ids, registry, bundle, words=Non
     bound_nodes = set()
     bound_edges = set()
     words = words or {}
-    views = views or {}
     word_edges = {edge for artifact in words.values() for edge in artifact["edge_ids"]}
     for item in item_ids:
         row = registry.get(item)
@@ -545,8 +548,8 @@ def check_scope(scratch, documents, delta, item_ids, registry, bundle, words=Non
     for touched in touched_pairs:
         require(isinstance(touched, list) and len(touched) == 2
                 and all(isinstance(field, str) for field in touched), "Invalid touched board")
-    require(views.keys() <= {tuple(pair) for pair in touched_pairs},
-            "Every disturbed board must be in exact HTTP play scope")
+    require(set(replay) <= {tuple(pair) for pair in touched_pairs},
+            "Every disturbed board and diagnostic change must be in exact HTTP play scope")
     pack_touched = [board for game, board in touched_pairs if game in pack_delta["boards"]]
     pack_boards, blocked, _ = pack_play_scope(pack_delta, bundle, pack_touched)
     require(not blocked, "Committed pack change contains an unplayable board")
@@ -688,8 +691,8 @@ def expected(repo, scratch, manifest):
             and all(key in protected for key, row in registry.items() if row["state"] == "landed"),
             "Candidate changed protected registry state before closeout")
     require(set(ids) <= registry.keys(), "Unknown registry ID")
-    words, views = check_word_landing(repo, evidence, documents, delta, ids, registry,
-                                      journal, base, candidate, sha256(before_bundle_raw), sha256(bundle_raw))
+    words, replay = check_word_landing(repo, evidence, documents, delta, ids, registry,
+                                       journal, base, candidate, sha256(before_bundle_raw), sha256(bundle_raw))
     legacy_puzzles_verified = False
     if words and any(delta["legacy_puzzles"][field] for field in ("added", "removed", "changed")):
         kg = read_json(git(repo, "--no-replace-objects", "show", f"{candidate}:{link_install.KG}"))
@@ -698,7 +701,7 @@ def expected(repo, scratch, manifest):
         require(expected_puzzles == read_json(rebuilt)["kg_puzzles"],
                 "Committed legacy puzzles differ from exact graph regeneration")
         legacy_puzzles_verified = True
-    check_scope(scratch, documents, delta, ids, registry, bundle, words, views, legacy_puzzles_verified)
+    check_scope(scratch, documents, delta, ids, registry, bundle, words, replay, legacy_puzzles_verified)
     check_reference(repo, candidate, bundle, evidence, documents)
     train_dir = train if train.startswith("v5-") else f"v5-{train}"
     docs_path = f"reviews/{train_dir}/landing.json"
