@@ -9,6 +9,7 @@ import (
 
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/catalog"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
+	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/gameapi"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/pyrandom"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/session"
 )
@@ -28,6 +29,7 @@ type Error struct {
 func (e *Error) Error() string { return fmt.Sprint(e.Detail) }
 
 type gameSession struct {
+	boardObservation                gameapi.TerminalObservation
 	members                         []string
 	intruder, groupLabel            string
 	order                           []string
@@ -41,6 +43,7 @@ type gameSession struct {
 }
 
 func (s *gameSession) finished() bool { return s.won || s.lost }
+func (s *gameSession) steps() int     { return len(s.wrongIDs) + s.hintsUsed }
 
 func (s *gameSession) score() int {
 	if !s.won {
@@ -252,7 +255,7 @@ func (s *Service) state(id string, game *gameSession) map[string]any {
 		}
 	}
 	wrong := append([]string{}, game.wrongIDs...)
-	steps := len(wrong) + game.hintsUsed
+	steps := game.steps()
 	body := map[string]any{"game_id": id, "tiles": s.concepts(game.order), "wrong_ids": wrong, "attempts": game.attempts, "mistakes": len(wrong), "remaining_mistakes": remaining, "won": game.won, "lost": game.lost, "difficulty": game.difficulty, "hints_used": game.hintsUsed, "hint_available": hintsLeft > 0, "steps": steps, "perfect": game.won && steps == 0, "hints_left": hintsLeft, "hint_level": game.hintLevel}
 	if game.daily != "" {
 		body["daily"] = game.daily
@@ -282,7 +285,11 @@ func (s *Service) action(id string, fn func(*gameSession) (map[string]any, *Erro
 }
 
 func (s *Service) Get(id string) (map[string]any, *Error) {
-	return s.action(id, func(game *gameSession) (map[string]any, *Error) { return s.state(id, game), nil })
+	return s.GetWithTerminal(id, nil)
+}
+
+func (s *Service) GetWithTerminal(id string, onTerminal gameapi.TerminalResponse) (map[string]any, *Error) {
+	return s.action(id, gameapi.WithTerminalResponse(onTerminal, (*gameSession).boardTerminal, func(game *gameSession) (map[string]any, *Error) { return s.state(id, game), nil }))
 }
 
 func (s *Service) Guess(id, selected string) (map[string]any, *Error) {
@@ -293,7 +300,11 @@ func (s *Service) Guess(id, selected string) (map[string]any, *Error) {
 // mutation. Missing-session lookup precedes validation; validation precedes the
 // terminal guard, matching the existing anonymous API's error precedence.
 func (s *Service) GuessInput(id string, validate func() (string, *Error)) (map[string]any, *Error) {
-	return s.action(id, func(game *gameSession) (map[string]any, *Error) {
+	return s.GuessInputWithTerminal(id, validate, nil)
+}
+
+func (s *Service) GuessInputWithTerminal(id string, validate func() (string, *Error), onTerminal gameapi.TerminalResponse) (map[string]any, *Error) {
+	return s.action(id, gameapi.WithTerminalResponse(onTerminal, (*gameSession).boardTerminal, func(game *gameSession) (map[string]any, *Error) {
 		selected, validationErr := validate()
 		if validationErr != nil {
 			return nil, validationErr
@@ -326,7 +337,7 @@ func (s *Service) GuessInput(id string, validate func() (string, *Error)) (map[s
 		body := s.state(id, game)
 		body["ok"], body["correct"], body["already_tried"], body["message"] = true, correct, false, message
 		return body, nil
-	})
+	}))
 }
 
 func (s *Service) Hint(id string) (map[string]any, *Error) {
@@ -346,6 +357,25 @@ func (s *Service) Hint(id string) (map[string]any, *Error) {
 		}
 		return nil, &Error{400, "Nu mai sunt indicii disponibile."}
 	})
+}
+
+// BoardTerminal observes a server-terminal reviewed daily once and returns its
+// anonymous outcome for subsequent comparisons.
+func (s *Service) BoardTerminal(id string, onFirst func(gameapi.TerminalRound)) (gameapi.TerminalRound, bool) {
+	return gameapi.ObserveBoardTerminal(s.store, id, onFirst, (*gameSession).boardTerminal)
+}
+
+func (game *gameSession) boardTerminal() (gameapi.TerminalRound, *gameapi.TerminalObservation) {
+	var outcome gameapi.TerminalOutcome
+	switch {
+	case game.won:
+		outcome = gameapi.TerminalWin
+	case game.lost:
+		outcome = gameapi.TerminalLoss
+	default:
+		return gameapi.TerminalRound{}, nil
+	}
+	return gameapi.TerminalRound{BoardID: game.catalogID, Day: game.daily, Steps: game.steps(), Outcome: outcome}, &game.boardObservation
 }
 
 // Progress exposes only server-authored terminal bookkeeping, never solutions.

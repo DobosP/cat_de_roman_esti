@@ -68,6 +68,7 @@ type warmClue struct {
 	Rank  int
 }
 type game struct {
+	boardObservation             gameapi.TerminalObservation
 	CuratedID                    string
 	Target, Difficulty, Category string
 	Daily                        *string
@@ -259,6 +260,28 @@ func (s *Service) CreateWithExclusions(seed *big.Int, difficulty string, daily *
 	return body, nil
 }
 
+// BoardTerminal observes a server-terminal reviewed daily once and returns its
+// anonymous outcome for subsequent comparisons.
+func (s *Service) BoardTerminal(id string, onFirst func(gameapi.TerminalRound)) (gameapi.TerminalRound, bool) {
+	return gameapi.ObserveBoardTerminal(s.store, id, onFirst, (*game).boardTerminal)
+}
+
+func (v *game) boardTerminal() (gameapi.TerminalRound, *gameapi.TerminalObservation) {
+	if v.Daily == nil {
+		return gameapi.TerminalRound{}, nil
+	}
+	var outcome gameapi.TerminalOutcome
+	switch {
+	case v.Won:
+		outcome = gameapi.TerminalWin
+	case v.GaveUp:
+		outcome = gameapi.TerminalGiveUp
+	default:
+		return gameapi.TerminalRound{}, nil
+	}
+	return gameapi.TerminalRound{BoardID: v.CuratedID, Day: *v.Daily, Steps: v.steps(), Outcome: outcome}, &v.boardObservation
+}
+
 // Progress reveals only the stable curated id and a terminal server score.
 // Mined targets and answers are never account-linked persistence keys.
 func (s *Service) Progress(id string) (curatedID string, finished, won bool, score int, found bool) {
@@ -284,7 +307,11 @@ func (s *Service) action(id string, fn func(*game) (map[string]any, *gameapi.Err
 	return body, e
 }
 func (s *Service) Get(id string) (map[string]any, *gameapi.Error) {
-	return s.action(id, func(v *game) (map[string]any, *gameapi.Error) { return s.state(id, v), nil })
+	return s.GetWithTerminal(id, nil)
+}
+
+func (s *Service) GetWithTerminal(id string, onTerminal gameapi.TerminalResponse) (map[string]any, *gameapi.Error) {
+	return s.action(id, gameapi.WithTerminalResponse(onTerminal, (*game).boardTerminal, func(v *game) (map[string]any, *gameapi.Error) { return s.state(id, v), nil }))
 }
 func (s *Service) feedbackAnchor(id, target string, allowExact bool) string {
 	if id == target {
@@ -540,9 +567,11 @@ func (s *Service) clues(v *game) []nextClue {
 	return left
 }
 
+func (v *game) steps() int { return v.Attempts + v.Clues }
+
 func (s *Service) clueView(v *game) map[string]any {
 	left := s.clues(v)
-	out := map[string]any{"clues_used": v.Clues, "clue_available": len(left) > 0, "steps": v.Attempts + v.Clues, "hints_left": len(left), "hint_level": v.HintLevel}
+	out := map[string]any{"clues_used": v.Clues, "clue_available": len(left) > 0, "steps": v.steps(), "hints_left": len(left), "hint_level": v.HintLevel}
 	if len(left) > 0 {
 		out["next_clue_kind"] = left[0].kind
 	}
@@ -712,7 +741,11 @@ func (s *Service) suggestProjection(text string) []*projection {
 	return out
 }
 func (s *Service) GuessInput(id string, validate func() (GuessBody, *gameapi.Error)) (map[string]any, *gameapi.Error) {
-	return s.action(id, func(v *game) (map[string]any, *gameapi.Error) {
+	return s.GuessInputWithTerminal(id, validate, nil)
+}
+
+func (s *Service) GuessInputWithTerminal(id string, validate func() (GuessBody, *gameapi.Error), onTerminal gameapi.TerminalResponse) (map[string]any, *gameapi.Error) {
+	return s.action(id, gameapi.WithTerminalResponse(onTerminal, (*game).boardTerminal, func(v *game) (map[string]any, *gameapi.Error) {
 		body, e := validate()
 		if e != nil {
 			return nil, e
@@ -824,7 +857,7 @@ func (s *Service) GuessInput(id string, validate func() (GuessBody, *gameapi.Err
 			out["share"] = s.share(v)
 		}
 		return out, nil
-	})
+	}))
 }
 func (s *Service) Guess(id, text, confirm string) (map[string]any, *gameapi.Error) {
 	return s.GuessInput(id, func() (GuessBody, *gameapi.Error) { return GuessBody{text, &confirm}, nil })
@@ -859,13 +892,17 @@ func (s *Service) Clue(id string) (map[string]any, *gameapi.Error) {
 	})
 }
 func (s *Service) GiveUp(id string) (map[string]any, *gameapi.Error) {
-	return s.action(id, func(v *game) (map[string]any, *gameapi.Error) {
+	return s.GiveUpWithTerminal(id, nil)
+}
+
+func (s *Service) GiveUpWithTerminal(id string, onTerminal gameapi.TerminalResponse) (map[string]any, *gameapi.Error) {
+	return s.action(id, gameapi.WithTerminalResponse(onTerminal, (*game).boardTerminal, func(v *game) (map[string]any, *gameapi.Error) {
 		if v.Won || v.GaveUp {
 			return nil, fail(400, "Jocul s-a terminat")
 		}
 		v.GaveUp = true
 		return s.state(id, v), nil
-	})
+	}))
 }
 func pySpace(c rune) bool {
 	return c >= 9 && c <= 13 || c >= 0x1c && c <= 0x20 || c == 0x85 || c == 0xa0 || c == 0x1680 || c >= 0x2000 && c <= 0x200a || c == 0x2028 || c == 0x2029 || c == 0x202f || c == 0x205f || c == 0x3000

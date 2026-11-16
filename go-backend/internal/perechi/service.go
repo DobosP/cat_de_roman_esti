@@ -21,6 +21,7 @@ type pair struct {
 	label   string
 }
 type gameSession struct {
+	boardObservation    gameapi.TerminalObservation
 	pairs               []pair
 	order               []string
 	solved              []int
@@ -30,6 +31,7 @@ type gameSession struct {
 	won, lost           bool
 	daily, category     string
 	boardCategory       string
+	catalogID           string
 	hintClue            map[string]string
 	sourceRing          []string
 }
@@ -67,7 +69,7 @@ func build(board *content.Board, rng *pyrandom.Random, daily, category string, p
 	if !ok || len(raw) != 4 {
 		return nil, fail(503, "Catalogul Perechi este invalid.")
 	}
-	game := &gameSession{daily: daily, category: category, boardCategory: board.Category, hinted: -1, solved: []int{}, wrongHistory: [][]string{}}
+	game := &gameSession{daily: daily, category: category, boardCategory: board.Category, catalogID: board.CatalogID, hinted: -1, solved: []int{}, wrongHistory: [][]string{}}
 	unique := map[string]bool{}
 	for _, value := range raw {
 		row, ok := value.(map[string]any)
@@ -244,6 +246,8 @@ func canMarkPair(g *gameSession) bool {
 	return len(g.solved) < len(g.pairs)-1
 }
 
+func (g *gameSession) steps() int { return g.mistakes + g.hintsUsed }
+
 func (s *Service) state(id string, g *gameSession) map[string]any {
 	tiles := make([]map[string]any, len(g.order))
 	for i, node := range g.order {
@@ -270,7 +274,7 @@ func (s *Service) state(id string, g *gameSession) map[string]any {
 			}
 		}
 	}
-	steps := g.mistakes + g.hintsUsed
+	steps := g.steps()
 	body := map[string]any{"game_id": id, "tiles": tiles, "solved_pairs": solved, "solved_count": len(g.solved), "remaining_pairs": 4 - len(g.solved), "mistakes": g.mistakes, "remaining_mistakes": 6 - g.mistakes, "actions": len(g.solved) + len(g.wrongHistory), "hint_available": hintsLeft > 0, "hints_used": g.hintsUsed, "won": g.won, "lost": g.lost, "steps": steps, "perfect": g.won && steps == 0, "hints_left": hintsLeft, "hint_level": g.hintLevel}
 	if g.hinted >= 0 {
 		if g.hintLevel < 3 && !slices.Contains(g.solved, g.hinted) && g.hintClue != nil {
@@ -312,13 +316,21 @@ func (s *Service) action(id string, fn func(*gameSession) (map[string]any, *Erro
 	return body, err
 }
 func (s *Service) Get(id string) (map[string]any, *Error) {
-	return s.action(id, func(g *gameSession) (map[string]any, *Error) { return s.state(id, g), nil })
+	return s.GetWithTerminal(id, nil)
+}
+
+func (s *Service) GetWithTerminal(id string, onTerminal gameapi.TerminalResponse) (map[string]any, *Error) {
+	return s.action(id, gameapi.WithTerminalResponse(onTerminal, (*gameSession).boardTerminal, func(g *gameSession) (map[string]any, *Error) { return s.state(id, g), nil }))
 }
 func (s *Service) Match(id string, ids []string) (map[string]any, *Error) {
 	return s.MatchInput(id, func() ([]string, *Error) { return ids, nil })
 }
 func (s *Service) MatchInput(id string, validate func() ([]string, *Error)) (map[string]any, *Error) {
-	return s.action(id, func(g *gameSession) (map[string]any, *Error) {
+	return s.MatchInputWithTerminal(id, validate, nil)
+}
+
+func (s *Service) MatchInputWithTerminal(id string, validate func() ([]string, *Error), onTerminal gameapi.TerminalResponse) (map[string]any, *Error) {
+	return s.action(id, gameapi.WithTerminalResponse(onTerminal, (*gameSession).boardTerminal, func(g *gameSession) (map[string]any, *Error) {
 		if g.won || g.lost {
 			return nil, fail(400, "Jocul s-a terminat")
 		}
@@ -365,7 +377,7 @@ func (s *Service) MatchInput(id string, validate func() ([]string, *Error)) (map
 		body := s.state(id, g)
 		body["ok"], body["correct"], body["repeated"] = true, false, false
 		return body, nil
-	})
+	}))
 }
 func (s *Service) Hint(id string) (map[string]any, *Error) {
 	return s.action(id, func(g *gameSession) (map[string]any, *Error) {
@@ -392,6 +404,25 @@ func (s *Service) Hint(id string) (map[string]any, *Error) {
 		}
 		return nil, fail(400, "Nu mai sunt indicii disponibile.")
 	})
+}
+
+// BoardTerminal observes a server-terminal reviewed daily once and returns its
+// anonymous outcome for subsequent comparisons.
+func (s *Service) BoardTerminal(id string, onFirst func(gameapi.TerminalRound)) (gameapi.TerminalRound, bool) {
+	return gameapi.ObserveBoardTerminal(s.store, id, onFirst, (*gameSession).boardTerminal)
+}
+
+func (g *gameSession) boardTerminal() (gameapi.TerminalRound, *gameapi.TerminalObservation) {
+	var outcome gameapi.TerminalOutcome
+	switch {
+	case g.won:
+		outcome = gameapi.TerminalWin
+	case g.lost:
+		outcome = gameapi.TerminalLoss
+	default:
+		return gameapi.TerminalRound{}, nil
+	}
+	return gameapi.TerminalRound{BoardID: g.catalogID, Day: g.daily, Steps: g.steps(), Outcome: outcome}, &g.boardObservation
 }
 
 // Progress exposes only server-authored terminal bookkeeping, never solutions.

@@ -94,6 +94,7 @@ func (s *Server) arcade(w http.ResponseWriter, r *http.Request) bool {
 		write(w, r, 404, map[string]any{"detail": "Not Found"})
 		return true
 	}
+	onTerminal := s.boardResponse(r, game)
 	if len(parts) == 3 {
 		if r.Method != "GET" && r.Method != "HEAD" {
 			badmethod()
@@ -101,21 +102,21 @@ func (s *Server) arcade(w http.ResponseWriter, r *http.Request) bool {
 		}
 		switch game {
 		case "perechi":
-			body, e = s.perechi.Get(id)
+			body, e = s.perechi.GetWithTerminal(id, onTerminal)
 		case "conexiuni":
-			body, e = s.conexiuni.Get(id)
+			body, e = s.conexiuni.GetWithTerminal(id, onTerminal)
 		case "contexto":
-			body, e = s.contexto.Get(id)
+			body, e = s.contexto.GetWithTerminal(id, onTerminal)
 		case "lant":
-			body, e = s.lant.Get(id)
+			body, e = s.lant.GetWithTerminal(id, onTerminal)
 		case "alchimie":
-			body, e = s.alchimie.Get(id)
+			body, e = s.alchimie.GetWithTerminal(id, onTerminal)
 		}
 		done()
 		return true
 	}
 	op := parts[3]
-	allowed := map[string]map[string]bool{"perechi": {"match": true, "hint": true}, "conexiuni": {"guess": true, "clue": true}, "contexto": {"guess": true, "clue": true, "giveup": true}, "lant": {"move": true, "hint": true, "undo": true}, "alchimie": {"combine": true, "hint": true, "reset": true}}
+	allowed := map[string]map[string]bool{"perechi": {"match": true, "hint": true}, "conexiuni": {"guess": true, "clue": true}, "contexto": {"guess": true, "clue": true, "giveup": true}, "lant": {"move": true, "hint": true, "undo": true, "giveup": s.boardComparison != nil}, "alchimie": {"combine": true, "hint": true, "reset": true}}
 	if !allowed[game][op] {
 		write(w, r, 404, map[string]any{"detail": "Not Found"})
 		return true
@@ -129,46 +130,49 @@ func (s *Server) arcade(w http.ResponseWriter, r *http.Request) bool {
 		if op == "hint" {
 			body, e = s.perechi.Hint(id)
 		} else {
-			body, e = s.perechi.MatchInput(id, func() ([]string, *gameapi.Error) { return idsBody(r, "MatchBody") })
+			body, e = s.perechi.MatchInputWithTerminal(id, func() ([]string, *gameapi.Error) { return idsBody(r, "MatchBody") }, onTerminal)
 		}
 	case "conexiuni":
 		if op == "clue" {
 			body, e = s.conexiuni.Clue(id)
 		} else {
-			body, e = s.conexiuni.GuessInput(id, func() ([]string, *gameapi.Error) { return idsBody(r, "GuessBody") })
+			body, e = s.conexiuni.GuessInputWithTerminal(id, func() ([]string, *gameapi.Error) { return idsBody(r, "GuessBody") }, onTerminal)
 		}
 	case "contexto":
 		switch op {
 		case "clue":
 			body, e = s.contexto.Clue(id)
 		case "giveup":
-			body, e = s.contexto.GiveUp(id)
+			body, e = s.contexto.GiveUpWithTerminal(id, onTerminal)
 		case "guess":
-			body, e = s.contexto.GuessInput(id, func() (contexto.GuessBody, *gameapi.Error) {
+			body, e = s.contexto.GuessInputWithTerminal(id, func() (contexto.GuessBody, *gameapi.Error) {
 				obj, err := fields(r, "GuessBody", []fieldRule{{Name: "text", Kind: "string"}, {Name: "confirm", Kind: "string", Optional: true, Nullable: true}}, false)
 				if err != nil {
 					return contexto.GuessBody{}, err
 				}
 				return contexto.GuessBody{Text: stringField(obj, "text"), Confirm: optionalString(obj, "confirm")}, nil
-			})
+			}, onTerminal)
 		}
 	case "lant":
 		switch op {
+		case "giveup":
+			eligibleDay := s.boardComparison.requestDateWindow()
+			body, e = s.lant.GiveUpWithTerminal(id, eligibleDay, s.boardComparison.response(r, game, eligibleDay))
 		case "hint":
 			body, e = s.lant.Hint(id)
 		case "undo":
-			body, e = s.lant.Undo(id)
+			body, e = s.lant.UndoWithTerminal(id, onTerminal)
 		case "move":
-			body, e = s.lant.MoveInput(id, func() (string, *gameapi.Error) { return textBody(r) })
+			body, e = s.lant.MoveInputWithTerminal(id, func() (string, *gameapi.Error) { return textBody(r) }, onTerminal)
 		}
 	case "alchimie":
 		switch op {
 		case "hint":
 			body, e = s.alchimie.Hint(id)
 		case "reset":
-			body, e = s.alchimie.Reset(id)
+			body, e = s.alchimie.ResetWithTerminal(id, onTerminal)
 		case "combine":
-			body, e = s.alchimie.CombineInput(id, func() (string, string, *gameapi.Error) { return pairBody(r, false) })
+			body, e = s.alchimie.CombineInputWithTerminal(id, func() (string, string, *gameapi.Error) { return pairBody(r, false) }, onTerminal)
 		}
 	}
 	done()

@@ -21,6 +21,7 @@ import (
 
 type Error = gameapi.Error
 type gameSession struct {
+	boardObservation            gameapi.TerminalObservation
 	curatedID                   string
 	groups                      map[string][]string
 	order, solved               []string
@@ -365,6 +366,25 @@ func (s *Service) CreateWithExclusions(seed *big.Int, daily, category, difficult
 	return body, nil
 }
 
+// BoardTerminal observes a server-terminal reviewed daily once and returns its
+// anonymous outcome for subsequent comparisons.
+func (s *Service) BoardTerminal(id string, onFirst func(gameapi.TerminalRound)) (gameapi.TerminalRound, bool) {
+	return gameapi.ObserveBoardTerminal(s.store, id, onFirst, (*gameSession).boardTerminal)
+}
+
+func (g *gameSession) boardTerminal() (gameapi.TerminalRound, *gameapi.TerminalObservation) {
+	var outcome gameapi.TerminalOutcome
+	switch {
+	case g.won:
+		outcome = gameapi.TerminalWin
+	case g.lost:
+		outcome = gameapi.TerminalLoss
+	default:
+		return gameapi.TerminalRound{}, nil
+	}
+	return gameapi.TerminalRound{BoardID: g.curatedID, Day: g.daily, Steps: g.steps(), Outcome: outcome}, &g.boardObservation
+}
+
 func (s *Service) Progress(id string) (curatedID string, finished, won bool, score int, found bool) {
 	score = -1
 	found, _ = s.store.Transaction(id, func(v *gameSession) error {
@@ -522,6 +542,8 @@ func (s *Service) share(g *gameSession) string {
 	}
 	return header + "\n" + body
 }
+func (g *gameSession) steps() int { return g.mistakes + len(g.clues) }
+
 func (s *Service) state(id string, g *gameSession) map[string]any {
 	terminal := g.won || g.lost
 	solvedIDs := map[string]bool{}
@@ -553,7 +575,7 @@ func (s *Service) state(id string, g *gameSession) map[string]any {
 			}
 		}
 	}
-	steps := g.mistakes + len(g.clues)
+	steps := g.steps()
 	body := map[string]any{"game_id": id, "tiles": tiles, "solved": solved, "solved_count": len(g.solved), "remaining_groups": len(g.groups) - len(g.solved), "lives": g.lives, "mistakes": g.mistakes, "won": g.won, "lost": g.lost, "difficulty": g.difficulty, "clues_used": len(g.clues), "clue_available": hintsLeft > 0, "clues": clues, "steps": steps, "perfect": g.won && steps == 0, "hints_left": hintsLeft, "hint_level": g.hintLevel}
 	if g.daily != "" {
 		body["daily"] = g.daily
@@ -588,13 +610,21 @@ func (s *Service) action(id string, fn func(*gameSession) (map[string]any, *Erro
 	return body, err
 }
 func (s *Service) Get(id string) (map[string]any, *Error) {
-	return s.action(id, func(g *gameSession) (map[string]any, *Error) { return s.state(id, g), nil })
+	return s.GetWithTerminal(id, nil)
+}
+
+func (s *Service) GetWithTerminal(id string, onTerminal gameapi.TerminalResponse) (map[string]any, *Error) {
+	return s.action(id, gameapi.WithTerminalResponse(onTerminal, (*gameSession).boardTerminal, func(g *gameSession) (map[string]any, *Error) { return s.state(id, g), nil }))
 }
 func (s *Service) Guess(id string, ids []string) (map[string]any, *Error) {
 	return s.GuessInput(id, func() ([]string, *Error) { return ids, nil })
 }
 func (s *Service) GuessInput(id string, validate func() ([]string, *Error)) (map[string]any, *Error) {
-	return s.action(id, func(g *gameSession) (map[string]any, *Error) {
+	return s.GuessInputWithTerminal(id, validate, nil)
+}
+
+func (s *Service) GuessInputWithTerminal(id string, validate func() ([]string, *Error), onTerminal gameapi.TerminalResponse) (map[string]any, *Error) {
+	return s.action(id, gameapi.WithTerminalResponse(onTerminal, (*gameSession).boardTerminal, func(g *gameSession) (map[string]any, *Error) {
 		ids, err := validate()
 		if err != nil {
 			return nil, err
@@ -652,7 +682,7 @@ func (s *Service) GuessInput(id string, validate func() ([]string, *Error)) (map
 		body := s.state(id, g)
 		body["ok"], body["correct"], body["one_away"] = true, false, oneAway
 		return body, nil
-	})
+	}))
 }
 func (s *Service) Clue(id string) (map[string]any, *Error) {
 	return s.action(id, func(g *gameSession) (map[string]any, *Error) {

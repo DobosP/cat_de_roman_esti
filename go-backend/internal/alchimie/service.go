@@ -17,6 +17,7 @@ import (
 
 type Error = gameapi.Error
 type gameSession struct {
+	boardObservation                    gameapi.TerminalObservation
 	curatedID                           string
 	seeds                               []string
 	target, difficulty, daily, category string
@@ -121,6 +122,19 @@ func (s *Service) CreateWithExclusions(seed *big.Int, daily, category, difficult
 	}
 	p["game_id"] = id
 	return p, nil
+}
+
+// BoardTerminal observes a server-terminal reviewed daily once and returns its
+// anonymous outcome for subsequent comparisons.
+func (s *Service) BoardTerminal(id string, onFirst func(gameapi.TerminalRound)) (gameapi.TerminalRound, bool) {
+	return gameapi.ObserveBoardTerminal(s.store, id, onFirst, (*gameSession).boardTerminal)
+}
+
+func (g *gameSession) boardTerminal() (gameapi.TerminalRound, *gameapi.TerminalObservation) {
+	if !g.won() {
+		return gameapi.TerminalRound{}, nil
+	}
+	return gameapi.TerminalRound{BoardID: g.curatedID, Day: g.daily, Steps: g.steps(), Outcome: gameapi.TerminalWin}, &g.boardObservation
 }
 
 func (s *Service) Progress(id string) (curatedID string, finished, won bool, score int, found bool) {
@@ -245,7 +259,11 @@ func (s *Service) transact(id string, fn func(*gameSession) (map[string]any, *Er
 	return value, result
 }
 func (s *Service) Get(id string) (map[string]any, *Error) {
-	return s.transact(id, func(g *gameSession) (map[string]any, *Error) { return s.state(id, g), nil })
+	return s.GetWithTerminal(id, nil)
+}
+
+func (s *Service) GetWithTerminal(id string, onTerminal gameapi.TerminalResponse) (map[string]any, *Error) {
+	return s.transact(id, gameapi.WithTerminalResponse(onTerminal, (*gameSession).boardTerminal, func(g *gameSession) (map[string]any, *Error) { return s.state(id, g), nil }))
 }
 func (s *Service) Combine(id, a, b string) (map[string]any, *Error) {
 	return s.CombineInput(id, func() (string, string, *Error) { return a, b, nil })
@@ -253,7 +271,11 @@ func (s *Service) Combine(id, a, b string) (map[string]any, *Error) {
 
 // Validation runs after lookup and under the same atomic action as Django.
 func (s *Service) CombineInput(id string, validate func() (string, string, *Error)) (map[string]any, *Error) {
-	return s.transact(id, func(g *gameSession) (map[string]any, *Error) {
+	return s.CombineInputWithTerminal(id, validate, nil)
+}
+
+func (s *Service) CombineInputWithTerminal(id string, validate func() (string, string, *Error), onTerminal gameapi.TerminalResponse) (map[string]any, *Error) {
+	return s.transact(id, gameapi.WithTerminalResponse(onTerminal, (*gameSession).boardTerminal, func(g *gameSession) (map[string]any, *Error) {
 		a, b, err := validate()
 		if err != nil {
 			return nil, err
@@ -336,7 +358,7 @@ func (s *Service) CombineInput(id string, validate func() (string, string, *Erro
 		p["already_tried"] = false
 		p["message"] = message
 		return p, nil
-	})
+	}))
 }
 func (s *Service) hintPayload(cue hint) map[string]any {
 	out := map[string]any{"hint": nil, "hint_output": nil}
@@ -414,7 +436,11 @@ func (s *Service) Hint(id string) (map[string]any, *Error) {
 	})
 }
 func (s *Service) Reset(id string) (map[string]any, *Error) {
-	return s.transact(id, func(g *gameSession) (map[string]any, *Error) {
+	return s.ResetWithTerminal(id, nil)
+}
+
+func (s *Service) ResetWithTerminal(id string, onTerminal gameapi.TerminalResponse) (map[string]any, *Error) {
+	return s.transact(id, gameapi.WithTerminalResponse(onTerminal, (*gameSession).boardTerminal, func(g *gameSession) (map[string]any, *Error) {
 		g.owned = map[string]*Pair{}
 		g.order = []string{}
 		g.moves = 0
@@ -427,7 +453,7 @@ func (s *Service) Reset(id string) (map[string]any, *Error) {
 			g.add(x, nil)
 		}
 		return s.state(id, g), nil
-	})
+	}))
 }
 
 func pyStrip(text string) string {
