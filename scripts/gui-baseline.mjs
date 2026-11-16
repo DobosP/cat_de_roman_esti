@@ -53,7 +53,9 @@ const local = mode === "original-capture" || !process.env.GATE_APP_URL;
 const server = local ? spawn(process.env.CDR_NATIVE_BINARY, ["-listen", "127.0.0.1:8138"], { cwd: root, stdio: ["ignore", "pipe", "pipe"], env: { ...process.env, CAT_ACCOUNTS_ENABLED: "0", CAT_SUBMISSIONS_ENABLED: "0" } }) : null;
 const origin = local ? "http://127.0.0.1:8138" : process.env.GATE_APP_URL;
 if (server) { server.stdout.on("data", (data) => process.stderr.write(data)); server.stderr.on("data", (data) => process.stderr.write(data)); }
-const browser = await chromium.launch(mode === "owner-diagnostic" ? { timeout: 10000 } : {});
+const browserOptions = mode === "owner-diagnostic" ? { timeout: 10000 } : {};
+const browser = await chromium.launch(browserOptions);
+let snapshotBrowser;
 let homeWitness = null, homeWitnessFailure = null;
 const pages = [];
 async function paintReady(page) {
@@ -63,11 +65,12 @@ async function paintReady(page) {
     await Promise.all(document.getAnimations()
       .filter((animation) => Number.isFinite(animation.effect?.getComputedTiming().endTime))
       .map((animation) => animation.finished.catch(() => {})));
+    await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
   });
 }
 
 async function fixedPage(screen) {
-  const context = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: "reduce",
+  const context = await snapshotBrowser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: "reduce",
     colorScheme: screen.theme, locale: "ro-RO", timezoneId: "Europe/Bucharest" });
   const page = await context.newPage();
   await page.clock.setFixedTime(new Date(fixture.clock));
@@ -124,7 +127,9 @@ async function fixedPage(screen) {
         witness: homeWitness, failure: homeWitnessFailure });
     }
     const name = screen.key + ".png";
-    const image = await page.screenshot({ path: `${output}/${name}`, fullPage: true });
+    const image = await page.screenshot({
+      path: `${output}/${name}`, fullPage: true, animations: "disabled", caret: "hide", scale: "css",
+    });
     const axe = await new AxeBuilder({ page, axeSource }).analyze();
     const fingerprint = axe.violations.map((violation) => ({ id: violation.id, impact: violation.impact,
       targets: violation.nodes.map((node) => node.target) }));
@@ -165,6 +170,13 @@ try {
     process.stderr.write(`Captured original route ${route}: ${fingerprint.length} axe fingerprints\n`);
     await context.close();
   } else {
+    // Rounded control edges differed by a few raster pixels under GPU
+    // compositing. Use one fixed software profile for both capture and verify.
+    // The historical captures and the live vitals browser keep their profile.
+    snapshotBrowser = await chromium.launch({
+      ...browserOptions,
+      args: ["--disable-gpu", "--disable-gpu-compositing", "--disable-skia-runtime-opts"],
+    });
     for (const screen of REDESIGN_CASES) await fixedPage(screen);
     if (capture && pages.some((page) => page.axe.length)) throw new Error("All redesign baseline Axe cases require zero findings");
   }
@@ -314,10 +326,11 @@ try {
   }
   process.stdout.write(JSON.stringify(report) + "\n");
 } finally {
+  const closeBrowsers = () => Promise.all([browser.close(), snapshotBrowser?.close()]);
   if (mode === "owner-diagnostic") {
     let closed = false;
-    try { await deadline(browser.close(), "Owner diagnostic browser cleanup deadline"); closed = true; }
+    try { await deadline(closeBrowsers(), "Owner diagnostic browser cleanup deadline"); closed = true; }
     finally { writeVerification(verification, output, "cleanup.json", { scope: "Owner-shell diagnostic only", binding: verification.binding, browser: closed ? "closed" : "failed" }); }
-  } else await browser.close();
+  } else await closeBrowsers();
   server?.kill("SIGTERM");
 }
