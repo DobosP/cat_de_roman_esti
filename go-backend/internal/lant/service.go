@@ -23,7 +23,8 @@ type game struct {
 	Optimal                             int
 	Chain                               []string
 	Won                                 bool
-	HintRequests, NonImproving          int
+	Hops, HintLevel, HintsUsed          int
+	NonImproving                        int
 	Earned                              map[string]any
 }
 
@@ -337,8 +338,17 @@ func (s *Service) share(v *game) string {
 	}
 	return fmt.Sprintf("%s\n🔗 %d/%d salturi\n%s", header, v.moves(), v.Optimal, daily)
 }
+func (s *Service) roundOutcome(out map[string]any, v *game, hintsLeft int) {
+	steps := max(0, v.Hops-v.Optimal) + v.HintsUsed
+	out["steps"] = steps
+	out["perfect"] = v.Won && steps == 0
+	out["hints_left"] = hintsLeft
+	out["hint_level"] = v.HintLevel
+}
+
 func (s *Service) state(id string, v *game) map[string]any {
 	out := map[string]any{"game_id": id, "start": s.concept(v.Start), "target": map[string]any{"id": v.Target, "label": s.g.Label(v.Target), "description": s.g.Description(v.Target)}, "current": s.concept(v.current()), "path": s.path(v), "moves": v.moves(), "optimal": v.Optimal, "won": v.Won, "difficulty": v.Difficulty, "choices": s.choices(v), "backtrack_recommended": v.Difficulty == "usor" && v.NonImproving >= 2}
+	s.roundOutcome(out, v, len(s.hintOptions(v)))
 	if v.Earned != nil {
 		out["earned_hint"] = clone(v.Earned)
 	}
@@ -533,6 +543,7 @@ func (s *Service) CreateWithExclusions(seed *big.Int, difficulty string, daily *
 		return nil, fail(400, "Categorie necunoscută.")
 	}
 	if daily != nil {
+		difficulty, category = "usor", ""
 		seed = new(big.Int).SetUint64(catalog.DailySeed(*daily, "lant"))
 	}
 	rng := pyrandom.New(seed)
@@ -655,6 +666,7 @@ func (s *Service) MoveInput(id string, validate func() (string, *gameapi.Error))
 			return map[string]any{"ok": false, "last_error": understood + s.g.DisplayLabel(guess) + " nu are o legătură directă cu " + s.g.Label(prev) + ". Alege un cuvânt din listă sau cere un indiciu."}, nil
 		}
 		v.Chain = append(v.Chain, guess)
+		v.Hops++
 		v.Earned = nil
 		v.Won = guess == v.Target
 		notes := []string{}
@@ -691,6 +703,7 @@ func (s *Service) MoveInput(id string, validate func() (string, *gameapi.Error))
 			v.NonImproving = 0
 		}
 		out := map[string]any{"ok": true, "current": s.concept(guess), "relation": s.caption(prev, guess), "path": s.path(v), "moves": v.moves(), "won": v.Won, "choices": s.choices(v), "backtrack_recommended": v.Difficulty == "usor" && v.NonImproving >= 2}
+		s.roundOutcome(out, v, len(s.hintOptions(v)))
 		if progress != nil {
 			out["progress"] = progress
 		}
@@ -723,100 +736,119 @@ func (s *Service) Undo(id string) (map[string]any, *gameapi.Error) {
 		return s.state(id, v), nil
 	})
 }
+
+type hintOption struct {
+	level   int
+	payload map[string]any
+}
+
+func (s *Service) hintOptions(v *game) []hintOption {
+	if v.Won || v.HintLevel >= 3 {
+		return nil
+	}
+	backtrack := func(message string, remaining int) []hintOption {
+		if message == v.Earned["message"] {
+			return nil
+		}
+		payload := map[string]any{"hint": nil, "stage": "backtrack", "message": message}
+		if remaining > 0 {
+			payload["remaining"] = remaining
+		}
+		return []hintOption{{v.HintLevel + 1, payload}}
+	}
+	if v.moves() >= 64 {
+		return backtrack("Limită atinsă — folosește Înapoi.", 0)
+	}
+	cur := v.current()
+	to := s.g.DistancesTo(v.Target)
+	remaining, ok := to[cur]
+	if !ok {
+		for i := len(v.Chain) - 1; i >= 0; i-- {
+			node := v.Chain[i]
+			if _, ok := to[node]; node != cur && ok {
+				return backtrack("Fundătură — folosește Înapoi până la "+s.g.Label(node)+".", 0)
+			}
+		}
+		return backtrack("Nicio scurtătură de aici — încearcă să revii cu Înapoi.", 0)
+	}
+	shortest := s.shortest(v, to)
+	forward := shortest
+	if len(forward) == 0 {
+		legal := []string{}
+		for _, node := range s.g.NeighborIDs(cur) {
+			if _, ok := to[node]; !contains(v.Chain, node) && ok {
+				legal = append(legal, node)
+			}
+		}
+		forward = s.distinct(cur, legal, to)
+	}
+	if len(forward) == 0 {
+		prior := map[string]bool{}
+		for _, node := range s.g.NeighborIDs(cur) {
+			if n, ok := to[node]; contains(v.Chain[:len(v.Chain)-1], node) && ok && n == remaining-1 {
+				prior[node] = true
+			}
+		}
+		for i := len(v.Chain) - 2; i >= 0; i-- {
+			node := v.Chain[i]
+			if prior[node] {
+				return backtrack("Drumul continuă printr-un pas deja vizitat. Folosește Înapoi până la "+s.g.Label(node)+".", remaining)
+			}
+		}
+		return nil
+	}
+
+	best := forward[0]
+	relation := s.short(cur, best)
+	common := func(stage, message string) map[string]any {
+		return map[string]any{"hint": nil, "remaining": 1 + to[best], "alternatives": len(forward), "stage": stage, "message": message}
+	}
+	out := []hintOption{}
+	if v.HintLevel < 1 && relation != "legătură directă" {
+		payload := common("direction", "Direcție: caută o legătură „"+relation+"”.")
+		payload["relation"] = relation
+		out = append(out, hintOption{1, payload})
+	}
+	if v.HintLevel < 2 {
+		near := forward
+		if len(shortest) > 0 {
+			near = s.distinct(cur, append(append([]string{}, shortest...), s.near(v, to)...), to)
+		}
+		choices := []map[string]any{}
+		labels := []string{}
+		for _, node := range near[:min(2, len(near))] {
+			choices = append(choices, s.choice(cur, node))
+			labels = append(labels, s.g.Label(node))
+		}
+		lead := "Variante utile: "
+		if len(choices) == 1 {
+			lead = "O variantă utilă: "
+		}
+		payload := common("alternatives", lead+strings.Join(labels, ", ")+".")
+		payload["alternatives_choices"], payload["alternatives_labels"] = choices, labels
+		out = append(out, hintOption{2, payload})
+	}
+	payload := common("hop", "Un salt bun: "+s.g.Label(best)+".")
+	payload["hint"], payload["relation"] = s.concept(best), relation
+	return append(out, hintOption{3, payload})
+}
+
 func (s *Service) Hint(id string) (map[string]any, *gameapi.Error) {
 	return s.action(id, func(v *game) (map[string]any, *gameapi.Error) {
-		earn := func(payload map[string]any) (map[string]any, *gameapi.Error) {
-			if !v.Won {
-				v.Earned = clone(payload).(map[string]any)
-			}
-			return payload, nil
-		}
 		if v.Won {
-			return earn(map[string]any{"hint": nil, "message": "Ai ajuns deja la țintă."})
+			return nil, fail(400, "Jocul s-a terminat")
 		}
-		if v.moves() >= 64 {
-			return earn(map[string]any{"hint": nil, "stage": "backtrack", "message": "Limită atinsă — folosește Înapoi."})
+		options := s.hintOptions(v)
+		if len(options) == 0 {
+			return nil, fail(400, "Nu mai sunt indicii disponibile.")
 		}
-		v.HintRequests = min(3, v.HintRequests+1)
-		cur := v.current()
-		to := s.g.DistancesTo(v.Target)
-		remaining, ok := to[cur]
-		if !ok {
-			for i := len(v.Chain) - 1; i >= 0; i-- {
-				node := v.Chain[i]
-				if _, ok := to[node]; node != cur && ok {
-					return earn(map[string]any{"hint": nil, "stage": "backtrack", "message": "Fundătură — folosește Înapoi până la " + s.g.Label(node) + "."})
-				}
-			}
-			return earn(map[string]any{"hint": nil, "message": "Nicio scurtătură de aici — încearcă să revii cu Înapoi."})
-		}
-		shortest := s.shortest(v, to)
-		forward := shortest
-		if len(forward) == 0 {
-			legal := []string{}
-			for _, node := range s.g.NeighborIDs(cur) {
-				if _, ok := to[node]; !contains(v.Chain, node) && ok {
-					legal = append(legal, node)
-				}
-			}
-			forward = s.distinct(cur, legal, to)
-		}
-		if len(forward) == 0 {
-			prior := map[string]bool{}
-			for _, node := range s.g.NeighborIDs(cur) {
-				if n, ok := to[node]; contains(v.Chain[:len(v.Chain)-1], node) && ok && n == remaining-1 {
-					prior[node] = true
-				}
-			}
-			for i := len(v.Chain) - 2; i >= 0; i-- {
-				node := v.Chain[i]
-				if prior[node] {
-					return earn(map[string]any{"hint": nil, "stage": "backtrack", "remaining": remaining, "message": "Drumul continuă printr-un pas deja vizitat. Folosește Înapoi până la " + s.g.Label(node) + "."})
-				}
-			}
-		}
-		if len(forward) > 0 {
-			best := forward[0]
-			common := map[string]any{"hint": nil, "remaining": 1 + to[best], "alternatives": len(forward)}
-			if v.HintRequests == 1 {
-				relation := s.short(cur, best)
-				if relation != "legătură directă" {
-					common["stage"] = "direction"
-					common["relation"] = relation
-					common["message"] = "Direcție: caută o legătură „" + relation + "”."
-					return earn(common)
-				}
-				v.HintRequests = 2
-			}
-			if v.HintRequests == 2 {
-				near := forward
-				if len(shortest) > 0 {
-					near = s.distinct(cur, append(append([]string{}, shortest...), s.near(v, to)...), to)
-				}
-				choices := []map[string]any{}
-				labels := []string{}
-				for _, node := range near[:min(2, len(near))] {
-					choice := s.choice(cur, node)
-					choices = append(choices, choice)
-					labels = append(labels, s.g.Label(node))
-				}
-				lead := "Variante utile: "
-				if len(choices) == 1 {
-					lead = "O variantă utilă: "
-				}
-				common["stage"] = "alternatives"
-				common["alternatives_choices"] = choices
-				common["alternatives_labels"] = labels
-				common["message"] = lead + strings.Join(labels, ", ") + "."
-				return earn(common)
-			}
-			common["stage"] = "hop"
-			common["hint"] = s.concept(best)
-			common["relation"] = s.short(cur, best)
-			common["message"] = "Un salt bun: " + s.g.Label(best) + "."
-			return earn(common)
-		}
-		return earn(map[string]any{"hint": nil, "message": "Niciun indiciu disponibil."})
+		cue := options[0]
+		v.HintLevel = cue.level
+		v.HintsUsed++
+		v.Earned = clone(cue.payload).(map[string]any)
+		hintsLeft := len(options) - 1
+		s.roundOutcome(cue.payload, v, hintsLeft)
+		return cue.payload, nil
 	})
 }
 func pySpace(c rune) bool {

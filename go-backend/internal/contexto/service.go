@@ -68,16 +68,16 @@ type warmClue struct {
 	Rank  int
 }
 type game struct {
-	CuratedID                                string
-	Target, Difficulty, Category             string
-	Daily                                    *string
-	Profile                                  *profile
-	Guesses                                  map[string]*record
-	Order                                    []string
-	Attempts                                 int
-	Won, GaveUp, CategoryClue, WarmExhausted bool
-	Warm                                     *warmClue
-	Clues                                    int
+	CuratedID                    string
+	Target, Difficulty, Category string
+	Daily                        *string
+	Profile                      *profile
+	Guesses                      map[string]*record
+	Order                        []string
+	Attempts                     int
+	Won, GaveUp, CategoryClue    bool
+	Warm                         *warmClue
+	Clues, HintLevel             int
 }
 type Service struct {
 	c              *content.Content
@@ -166,6 +166,9 @@ func (s *Service) CreateWithExclusions(seed *big.Int, difficulty string, daily *
 	}
 	if category != "" && s.c.CategoryLabels[category] == "" {
 		return nil, fail(400, "Categorie necunoscută.")
+	}
+	if daily != nil {
+		difficulty, category = "usor", ""
 	}
 	o := pack.PickOptions{Category: category, Difficulty: difficulty, FilteredShelfWeights: true}
 	var chosen *content.PackItem
@@ -429,17 +432,20 @@ func (s *Service) guesses(v *game) []map[string]any {
 }
 func (s *Service) categoryClue(v *game) map[string]any {
 	cat := s.g.Node(v.Target).Category
+	if cat == "" || v.Category != "" {
+		return nil
+	}
 	label := s.c.CategoryLabels[cat]
 	if label == "" {
 		label = cat
 	}
-	return map[string]any{"category": map[string]any{"key": cat, "label": label}, "message": "Categoria secretului: " + label + "."}
-}
-func (s *Service) warmer(v *game) *warmClue {
-	if v.Warm != nil || v.WarmExhausted {
+	if s.g.Normalize(label) == s.g.Normalize(s.g.Label(v.Target)) {
 		return nil
 	}
-	best := v.Profile.Reachable + 1
+	return map[string]any{"category": map[string]any{"key": cat, "label": label}, "message": "Categoria secretului: " + label + "."}
+}
+func (s *Service) warmer(v *game, level, priorRank int) *warmClue {
+	best := min(v.Profile.Reachable+1, priorRank)
 	anchors := map[string]bool{}
 	for _, r := range v.Guesses {
 		best = min(best, r.Rank)
@@ -448,12 +454,17 @@ func (s *Service) warmer(v *game) *warmClue {
 	if best <= 2 {
 		return nil
 	}
+	cap := 25
+	if level == 2 {
+		cap = 150
+	}
 	type candidate struct {
 		rank      int
 		sal       float64
 		label, id string
 	}
 	rows := []candidate{}
+	targetLabel := s.g.Normalize(s.g.Label(v.Target))
 	for index, distance := range v.Profile.Dist {
 		if distance < 0 {
 			continue
@@ -463,14 +474,27 @@ func (s *Service) warmer(v *game) *warmClue {
 			continue
 		}
 		sc := s.score(v, id, false, 0)
-		if anchors[sc.Anchor] || sc.Rank <= 1 || sc.Rank >= best {
+		if anchors[sc.Anchor] || sc.Rank <= 1 || sc.Rank >= best || sc.Rank > cap {
 			continue
 		}
-		rows = append(rows, candidate{sc.Rank, s.g.Salience(id), s.g.Label(id), id})
+		label := s.g.Label(id)
+		if label == "" || s.g.Normalize(label) == targetLabel {
+			continue
+		}
+		rows = append(rows, candidate{sc.Rank, s.g.Salience(id), label, id})
 	}
 	sort.Slice(rows, func(i, j int) bool {
 		a, b := rows[i], rows[j]
+		if level == 2 && (a.rank > 25) != (b.rank > 25) {
+			return a.rank > 25
+		}
+		if (a.sal >= .55) != (b.sal >= .55) {
+			return a.sal >= .55
+		}
 		if a.rank != b.rank {
+			if level == 2 && a.rank <= 25 {
+				return a.rank > b.rank
+			}
 			return a.rank < b.rank
 		}
 		if a.sal != b.sal {
@@ -482,29 +506,45 @@ func (s *Service) warmer(v *game) *warmClue {
 		}
 		return a.id < b.id
 	})
-	for _, familiar := range []bool{true, false} {
-		for _, r := range rows {
-			if familiar && r.sal < .55 {
-				continue
-			}
-			return &warmClue{r.label, r.rank}
-		}
+	if len(rows) > 0 {
+		return &warmClue{rows[0].label, rows[0].rank}
 	}
 	return nil
 }
 
-func (s *Service) clueView(v *game) map[string]any {
-	kind := ""
-	if !v.Won && !v.GaveUp && v.Attempts >= 3 {
-		if !v.CategoryClue && v.Category == "" {
-			kind = "category"
-		} else if s.warmer(v) != nil {
-			kind = "warmer"
+type nextClue struct {
+	level int
+	kind  string
+	warm  *warmClue
+}
+
+func (s *Service) clues(v *game) []nextClue {
+	if v.Won || v.GaveUp {
+		return nil
+	}
+	left := []nextClue{}
+	priorRank := v.Profile.Reachable + 1
+	if v.Warm != nil {
+		priorRank = v.Warm.Rank
+	}
+	for level := v.HintLevel + 1; level <= 3; level++ {
+		if level == 1 {
+			if s.categoryClue(v) != nil {
+				left = append(left, nextClue{level: level, kind: "category"})
+			}
+		} else if cue := s.warmer(v, level, priorRank); cue != nil {
+			left = append(left, nextClue{level: level, kind: "warmer", warm: cue})
+			priorRank = cue.Rank
 		}
 	}
-	out := map[string]any{"clues_used": v.Clues, "clue_available": kind != ""}
-	if kind != "" {
-		out["next_clue_kind"] = kind
+	return left
+}
+
+func (s *Service) clueView(v *game) map[string]any {
+	left := s.clues(v)
+	out := map[string]any{"clues_used": v.Clues, "clue_available": len(left) > 0, "steps": v.Attempts + v.Clues, "hints_left": len(left), "hint_level": v.HintLevel}
+	if len(left) > 0 {
+		out["next_clue_kind"] = left[0].kind
 	}
 	if v.CategoryClue {
 		out["clue"] = s.categoryClue(v)
@@ -794,33 +834,23 @@ func (s *Service) Clue(id string) (map[string]any, *gameapi.Error) {
 		if v.Won || v.GaveUp {
 			return nil, fail(400, "Jocul s-a terminat")
 		}
-		if v.Attempts < 3 {
-			n := 3 - v.Attempts
-			word := "concepte"
-			if n == 1 {
-				word = "concept"
-			}
-			return nil, fail(400, fmt.Sprintf("Mai încearcă %d %s înainte de indiciu.", n, word))
+		left := s.clues(v)
+		if len(left) == 0 {
+			return nil, fail(400, "Nu mai sunt indicii disponibile.")
 		}
-		out := map[string]any{"ok": true}
-		if !v.CategoryClue && v.Category == "" {
+		cue := left[0]
+		v.HintLevel = cue.level
+		v.Clues++
+		out := map[string]any{"ok": true, "clue_kind": cue.kind}
+		if cue.kind == "category" {
 			v.CategoryClue = true
-			v.Clues++
-			out["clue_kind"] = "category"
 			for k, x := range s.categoryClue(v) {
 				out[k] = x
 			}
 		} else {
-			clue := s.warmer(v)
-			if clue == nil {
-				v.WarmExhausted = true
-				return nil, fail(400, "Nu mai există un indiciu sigur mai cald.")
-			}
-			v.Warm = clue
-			v.Clues++
-			out["clue_kind"] = "warmer"
-			out["word"] = warmJSON(clue)
-			out["message"] = "Mai cald: " + clue.Label + "."
+			v.Warm = cue.warm
+			out["word"] = warmJSON(cue.warm)
+			out["message"] = "Mai cald: " + cue.warm.Label + "."
 		}
 		for k, x := range s.state(id, v) {
 			out[k] = x

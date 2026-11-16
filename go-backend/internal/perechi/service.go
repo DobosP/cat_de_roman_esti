@@ -10,6 +10,7 @@ import (
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/catalog"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/gameapi"
+	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/graph"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/pyrandom"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/session"
 )
@@ -25,19 +26,22 @@ type gameSession struct {
 	solved              []int
 	wrongHistory        [][]string
 	mistakes, hintsUsed int
-	hinted              int
+	hinted, hintLevel   int
 	won, lost           bool
 	daily, category     string
+	boardCategory       string
+	hintClue            map[string]string
 	sourceRing          []string
 }
 type Service struct {
 	data    *content.Content
 	catalog *catalog.Catalog
 	store   *session.Store[*gameSession]
+	graph   *graph.Service
 }
 
 func New(data *content.Content) *Service {
-	return &Service{data, catalog.New(data), session.New[*gameSession]()}
+	return &Service{data, catalog.New(data), session.New[*gameSession](), graph.New(data)}
 }
 func fail(status int, detail string) *Error { return &Error{Status: status, Detail: detail} }
 func list(value any) ([]string, bool) {
@@ -63,7 +67,7 @@ func build(board *content.Board, rng *pyrandom.Random, daily, category string, p
 	if !ok || len(raw) != 4 {
 		return nil, fail(503, "Catalogul Perechi este invalid.")
 	}
-	game := &gameSession{daily: daily, category: category, hinted: -1, solved: []int{}, wrongHistory: [][]string{}}
+	game := &gameSession{daily: daily, category: category, boardCategory: board.Category, hinted: -1, solved: []int{}, wrongHistory: [][]string{}}
 	unique := map[string]bool{}
 	for _, value := range raw {
 		row, ok := value.(map[string]any)
@@ -188,8 +192,50 @@ func share(g *gameSession) string {
 	}
 	return header + "\n" + strings.Repeat("🟩", len(g.solved)) + strings.Repeat("⬜", 4-len(g.solved))
 }
-func hintAvailable(g *gameSession) bool {
-	return !g.won && !g.lost && g.hintsUsed < 1 && g.mistakes >= 2 && len(g.solved) < 4
+func hintPair(g *gameSession) int {
+	if g.hinted >= 0 && !slices.Contains(g.solved, g.hinted) {
+		return g.hinted
+	}
+	for i := range g.pairs {
+		if !slices.Contains(g.solved, i) {
+			return i
+		}
+	}
+	return -1
+}
+
+func (s *Service) publicLabel(g *gameSession, label string) bool {
+	if g.category != "" && strings.EqualFold(s.data.CategoryLabels[g.category], label) {
+		return true
+	}
+	for _, index := range g.solved {
+		if strings.EqualFold(g.pairs[index].label, label) {
+			return true
+		}
+	}
+	return false
+}
+
+func (s *Service) clue(g *gameSession, index, level int) map[string]string {
+	pair := g.pairs[index]
+	label := pair.label
+	switch level {
+	case 1:
+		category := g.boardCategory
+		first, second := s.graph.Node(pair.members[0]), s.graph.Node(pair.members[1])
+		if first != nil && second != nil && first.Category != "" && first.Category == second.Category {
+			category = first.Category
+		}
+		theme := s.data.CategoryLabels[category]
+		if theme != "" && !strings.EqualFold(theme, label) && !s.publicLabel(g, theme) {
+			return map[string]string{"label": theme, "message": "Tema unei perechi: " + theme + "."}
+		}
+	case 2:
+		if label != "" && !s.publicLabel(g, label) {
+			return map[string]string{"label": label, "message": "Legătura unei perechi: " + label + "."}
+		}
+	}
+	return nil
 }
 func (s *Service) state(id string, g *gameSession) map[string]any {
 	tiles := make([]map[string]any, len(g.order))
@@ -208,9 +254,29 @@ func (s *Service) state(id string, g *gameSession) map[string]any {
 	for i, p := range g.solved {
 		solved[i] = s.pairPayload(g.pairs[p])
 	}
-	body := map[string]any{"game_id": id, "tiles": tiles, "solved_pairs": solved, "solved_count": len(g.solved), "remaining_pairs": 4 - len(g.solved), "mistakes": g.mistakes, "remaining_mistakes": 6 - g.mistakes, "actions": len(g.solved) + len(g.wrongHistory), "hint_available": hintAvailable(g), "hints_used": g.hintsUsed, "won": g.won, "lost": g.lost}
+	hintsLeft := 0
+	index := hintPair(g)
+	if !g.won && !g.lost && index >= 0 {
+		for level := g.hintLevel + 1; level <= 3; level++ {
+			if level == 3 || s.clue(g, index, level) != nil {
+				hintsLeft++
+			}
+		}
+	}
+	steps := g.mistakes + g.hintsUsed
+	body := map[string]any{"game_id": id, "tiles": tiles, "solved_pairs": solved, "solved_count": len(g.solved), "remaining_pairs": 4 - len(g.solved), "mistakes": g.mistakes, "remaining_mistakes": 6 - g.mistakes, "actions": len(g.solved) + len(g.wrongHistory), "hint_available": hintsLeft > 0, "hints_used": g.hintsUsed, "won": g.won, "lost": g.lost, "steps": steps, "perfect": g.won && steps == 0, "hints_left": hintsLeft, "hint_level": g.hintLevel}
 	if g.hinted >= 0 {
-		body["hint"] = s.pairPayload(g.pairs[g.hinted])
+		if g.hintLevel < 3 && !slices.Contains(g.solved, g.hinted) && g.hintClue != nil {
+			body["clue"] = map[string]string{"label": g.hintClue["label"], "message": g.hintClue["message"]}
+		}
+		if g.hintLevel == 3 {
+			pair := s.pairPayload(g.pairs[g.hinted])
+			label := g.pairs[g.hinted].label
+			if !s.publicLabel(g, label) && (g.hintClue == nil || !strings.EqualFold(g.hintClue["label"], label)) {
+				pair["label"] = ""
+			}
+			body["hint"] = pair
+		}
 	}
 	if g.daily != "" {
 		body["daily"] = g.daily
@@ -299,22 +365,22 @@ func (s *Service) Hint(id string) (map[string]any, *Error) {
 		if g.won || g.lost {
 			return nil, fail(400, "Jocul s-a terminat")
 		}
-		if g.hintsUsed >= 1 {
-			return nil, fail(400, "Indiciul a fost deja folosit")
-		}
-		if g.mistakes < 2 {
-			return nil, fail(400, "Indiciul se deschide după două greșeli.")
-		}
-		for i := range g.pairs {
-			if !slices.Contains(g.solved, i) {
-				g.hinted = i
-				break
+		index := hintPair(g)
+		for level := g.hintLevel + 1; level <= 3 && index >= 0; level++ {
+			clue := s.clue(g, index, level)
+			if level < 3 && clue == nil {
+				continue
 			}
+			if level < 3 || g.hinted != index {
+				g.hintClue = clue
+			}
+			g.hinted, g.hintLevel = index, level
+			g.hintsUsed++
+			body := s.state(id, g)
+			body["ok"] = true
+			return body, nil
 		}
-		g.hintsUsed++
-		body := s.state(id, g)
-		body["ok"] = true
-		return body, nil
+		return nil, fail(400, "Nu mai sunt indicii disponibile.")
 	})
 }
 

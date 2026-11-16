@@ -60,14 +60,14 @@ func TestPinnedValidationAndConcurrentHintStages(t *testing.T) {
 		go func() {
 			defer wg.Done()
 			_, err := s.Hint(id)
-			if err != nil {
+			if err != nil && (err.Status != 400 || err.Detail != "Nu mai sunt indicii disponibile.") {
 				t.Errorf("unexpected hint error %v", err)
 			}
 		}()
 	}
 	wg.Wait()
 	s.store.Transaction(id, func(v *game) error {
-		if v.HintRequests != 3 || v.moves() != 0 {
+		if v.HintLevel != 3 || v.HintsUsed < 2 || v.HintsUsed > 3 || v.moves() != 0 {
 			t.Errorf("hint stage/cost bounds wrong: %+v", v)
 		}
 		return nil

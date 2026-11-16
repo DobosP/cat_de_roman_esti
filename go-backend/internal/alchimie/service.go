@@ -17,19 +17,28 @@ import (
 
 type Error = gameapi.Error
 type gameSession struct {
-	curatedID                                         string
-	seeds                                             []string
-	target, difficulty, daily, category               string
-	owned                                             map[string]*Pair
-	order                                             []string
-	moves, fruitlessStreak, fruitlessTotal, hintsUsed int
-	earnedHint                                        map[string]any
-	projection                                        *Projection
-	attempted                                         map[Pair]bool
+	curatedID                           string
+	seeds                               []string
+	target, difficulty, daily, category string
+	owned                               map[string]*Pair
+	order                               []string
+	moves, fruitlessTotal, hintsUsed    int
+	hintLevel, paidHints                int
+	hintPair                            *Pair
+	hintPairKnown                       bool
+	earnedHint                          *hint
+	projection                          *Projection
+	attempted, lifetimePairs            map[Pair]bool
+}
+
+type hint struct {
+	level int
+	pair  Pair
+	label string
 }
 
 func newGame(seeds []string, target string, p *Projection, difficulty, daily, category string) *gameSession {
-	g := &gameSession{seeds: append([]string{}, seeds...), target: target, difficulty: difficulty, daily: daily, category: category, owned: map[string]*Pair{}, order: []string{}, projection: p, attempted: map[Pair]bool{}}
+	g := &gameSession{seeds: append([]string{}, seeds...), target: target, difficulty: difficulty, daily: daily, category: category, owned: map[string]*Pair{}, order: []string{}, projection: p, attempted: map[Pair]bool{}, lifetimePairs: map[Pair]bool{}}
 	for _, id := range seeds {
 		g.add(id, nil)
 	}
@@ -42,6 +51,9 @@ func (g *gameSession) add(id string, p *Pair) {
 	}
 }
 func (g *gameSession) won() bool { _, ok := g.owned[g.target]; return ok }
+func (g *gameSession) steps() int {
+	return max(0, len(g.lifetimePairs)-g.projection.Par) + g.paidHints
+}
 func (g *gameSession) score() int {
 	return max(100, 1000-120*max(0, g.moves-g.fruitlessTotal-g.projection.Par)-150*g.hintsUsed)
 }
@@ -67,6 +79,9 @@ func (s *Service) CreateWithExclusions(seed *big.Int, daily, category, difficult
 	}
 	if category != "" && s.data.CategoryLabels[category] == "" {
 		return nil, &Error{Status: 400, Detail: "Categorie necunoscută."}
+	}
+	if daily != "" {
+		difficulty, category = "usor", ""
 	}
 	rng := pyrandom.New(seed)
 	opts := pack.PickOptions{Category: category, Difficulty: difficulty}
@@ -99,11 +114,13 @@ func (s *Service) CreateWithExclusions(seed *big.Int, daily, category, difficult
 			return nil, err
 		}
 	}
+	p := s.state("", g)
 	id, e := s.store.Create(g)
 	if e != nil {
 		return nil, &Error{Status: 503, Detail: "Prea multe jocuri active. Încearcă din nou."}
 	}
-	return s.state(id, g), nil
+	p["game_id"] = id
+	return p, nil
 }
 
 func (s *Service) Progress(id string) (curatedID string, finished, won bool, score int, found bool) {
@@ -175,13 +192,14 @@ func (s *Service) state(id string, g *gameSession) map[string]any {
 	for _, outputs := range g.projection.Recipes {
 		maxResults = max(maxResults, len(outputs))
 	}
-	hintStage := "output"
-	if g.hintsUsed > 0 {
-		hintStage = "pair"
+	hints := s.hintLevels(g)
+	hintStage := "pair"
+	if len(hints) > 0 {
+		hintStage = [...]string{"", "output", "ingredient", "pair"}[hints[0]]
 	}
-	p := map[string]any{"game_id": id, "target": map[string]any{"id": targetID, "label": s.graph.Label(g.target), "description": s.graph.Description(g.target), "revealed": g.won()}, "inventory": inv, "inventory_summary": map[string]any{"active": active, "depleted": len(inv) - active, "total": len(inv)}, "discovered_count": max(0, len(g.order)-len(g.seeds)), "seed_count": len(g.seeds), "moves": g.moves, "attempted_count": len(g.attempted), "difficulty": g.difficulty, "target_depth": g.projection.Par, "won": g.won(), "hints_used": g.hintsUsed, "hint_stage": hintStage, "hint_available": !g.won() && g.fruitlessStreak >= 2, "recipe_summary": map[string]any{"pairs": len(g.projection.Recipes), "routes": len(g.projection.Routes), "max_results": maxResults}}
+	p := map[string]any{"game_id": id, "target": map[string]any{"id": targetID, "label": s.graph.Label(g.target), "description": s.graph.Description(g.target), "revealed": g.won()}, "inventory": inv, "inventory_summary": map[string]any{"active": active, "depleted": len(inv) - active, "total": len(inv)}, "discovered_count": max(0, len(g.order)-len(g.seeds)), "seed_count": len(g.seeds), "moves": g.moves, "attempted_count": len(g.attempted), "difficulty": g.difficulty, "target_depth": g.projection.Par, "won": g.won(), "hints_used": g.hintsUsed, "hint_stage": hintStage, "hint_available": len(hints) > 0, "steps": g.steps(), "perfect": g.won() && g.steps() == 0, "hints_left": len(hints), "hint_level": g.hintLevel, "recipe_summary": map[string]any{"pairs": len(g.projection.Recipes), "routes": len(g.projection.Routes), "max_results": maxResults}}
 	if g.earnedHint != nil {
-		p["earned_hint"] = g.earnedHint
+		p["earned_hint"] = s.hintPayload(*g.earnedHint)
 	}
 	if g.daily != "" {
 		p["daily"] = g.daily
@@ -199,12 +217,16 @@ func (s *Service) state(id string, g *gameSession) map[string]any {
 		if g.moves == 1 {
 			noun = "combinație"
 		}
-		if g.moves-g.fruitlessTotal <= g.projection.Par && g.hintsUsed == 0 {
+		if g.steps() == 0 {
 			medal = "✨"
 		}
-		share := fmt.Sprintf("%s\n⚗️ %d %s · %d pct %s", header, g.moves, noun, g.score(), medal)
-		if g.hintsUsed > 0 {
-			share += fmt.Sprintf("\n💡 x%d", g.hintsUsed)
+		stepNoun := "pași"
+		if g.steps() == 1 {
+			stepNoun = "pas"
+		}
+		share := fmt.Sprintf("%s\n⚗️ %d %s · %d %s %s", header, g.moves, noun, g.steps(), stepNoun, medal)
+		if g.paidHints > 0 {
+			share += fmt.Sprintf("\n💡 x%d", g.paidHints)
 		}
 		if g.daily != "" {
 			share += "\n" + g.daily
@@ -261,11 +283,12 @@ func (s *Service) CombineInput(id string, validate func() (string, string, *Erro
 			p["message"] = "Deja încercată · fără cost. Schimbă un ingredient."
 			return p, nil
 		}
-		if len(g.attempted) >= MaxAttemptedPairs {
+		if !g.lifetimePairs[key] && len(g.lifetimePairs) >= MaxAttemptedPairs {
 			return nil, &Error{Status: 409, Detail: "Limita de experimente a jocului a fost atinsă."}
 		}
 		g.earnedHint = nil
 		g.attempted[key] = true
+		g.lifetimePairs[key] = true
 		g.moves++
 		discovered := diff(g.projection.Recipes[key], sortedUnique(g.order))
 		parents := Pair{a, b}
@@ -273,9 +296,8 @@ func (s *Service) CombineInput(id string, validate func() (string, string, *Erro
 			g.add(x, &parents)
 		}
 		if len(discovered) > 0 {
-			g.fruitlessStreak = 0
+			g.hintPairKnown = false
 		} else {
-			g.fruitlessStreak++
 			g.fruitlessTotal++
 		}
 		message := ""
@@ -286,9 +308,9 @@ func (s *Service) CombineInput(id string, validate func() (string, string, *Erro
 				for _, x := range known {
 					names = append(names, s.graph.Label(x))
 				}
-				message = "Ai deja rezultatul: " + strings.Join(names, ", ") + ". Fără penalizare."
+				message = "Ai deja rezultatul: " + strings.Join(names, ", ") + "."
 			} else {
-				message = "Perechea nu are o rețetă în această rundă. Fără penalizare."
+				message = "Perechea nu are o rețetă în această rundă."
 			}
 			if g.fruitlessTotal >= 4 {
 				whispers := []string{"Încearcă perechi din aceeași temă.", "Combină un element descoperit cu unul de start.", "Indiciul te poate debloca."}
@@ -316,67 +338,78 @@ func (s *Service) CombineInput(id string, validate func() (string, string, *Erro
 		return p, nil
 	})
 }
+func (s *Service) hintPayload(cue hint) map[string]any {
+	out := map[string]any{"hint": nil, "hint_output": nil}
+	switch cue.level {
+	case 1:
+		out["hint_kind"] = "output"
+		out["hint_output"] = map[string]any{"label": cue.label}
+		out["message"] = "Indiciu: caută mai întâi «" + cue.label + "»."
+	case 2:
+		out["hint_kind"] = "ingredient"
+		out["hint_ingredient"] = s.concept(cue.pair[0])
+		out["message"] = "Indiciu: încearcă cu " + s.graph.Label(cue.pair[0]) + "."
+	case 3:
+		out["hint"] = []any{s.concept(cue.pair[0]), s.concept(cue.pair[1])}
+		out["hint_kind"] = "pair"
+		out["message"] = "Indiciu: combină " + s.graph.Label(cue.pair[0]) + " + " + s.graph.Label(cue.pair[1]) + "."
+	}
+	return out
+}
+
+func (s *Service) hintOutput(g *gameSession, key Pair) string {
+	for _, x := range g.projection.Recipes[key] {
+		if _, owned := g.owned[x]; x != g.target && !owned {
+			return s.graph.Label(x)
+		}
+	}
+	return ""
+}
+
+func (s *Service) hintLevels(g *gameSession) []int {
+	if g.won() || g.hintLevel >= 3 {
+		return nil
+	}
+	if !g.hintPairKnown {
+		g.hintPair = nil
+		if plan := MinimumPlan(g.order, g.target, g.projection.Recipes, MaxActions); len(plan) > 0 {
+			g.hintPair = &plan[0]
+		}
+		g.hintPairKnown = true
+	}
+	if g.hintPair == nil {
+		return nil
+	}
+	levels := []int{}
+	for level := g.hintLevel + 1; level <= 3; level++ {
+		if level > 1 || s.hintOutput(g, *g.hintPair) != "" {
+			levels = append(levels, level)
+		}
+	}
+	return levels
+}
+
 func (s *Service) Hint(id string) (map[string]any, *Error) {
 	return s.transact(id, func(g *gameSession) (map[string]any, *Error) {
 		if g.won() {
 			return nil, &Error{Status: 400, Detail: "Jocul s-a terminat deja."}
 		}
-		if g.fruitlessStreak < 2 {
-			need := 2 - g.fruitlessStreak
-			noun := "combinații"
-			if need == 1 {
-				noun = "combinație"
-			}
-			return nil, &Error{Status: 400, Detail: fmt.Sprintf("Mai încearcă %d %s înainte de un indiciu.", need, noun)}
+		levels := s.hintLevels(g)
+		if len(levels) == 0 {
+			return nil, &Error{Status: 400, Detail: "Nu mai sunt indicii disponibile."}
 		}
-		plan := MinimumPlan(g.order, g.target, g.projection.Recipes, MaxActions)
-		g.fruitlessStreak = 0
-		if len(plan) == 0 {
-			g.earnedHint = nil
-			p := s.state(id, g)
-			p["hint"] = nil
-			p["hint_kind"] = "none"
-			p["hint_output"] = nil
-			p["message"] = "Niciun indiciu disponibil acum."
-			return p, nil
+		cue := hint{level: levels[0], pair: *g.hintPair}
+		if cue.level == 1 {
+			cue.label = s.hintOutput(g, cue.pair)
 		}
+		g.hintLevel = cue.level
 		g.hintsUsed++
-		key := plan[0]
+		g.paidHints++
+		g.earnedHint = &cue
 		p := s.state(id, g)
-		p["hint"] = nil
-		p["hint_output"] = nil
-		if g.hintsUsed == 1 {
-			outputs := []string{}
-			for _, x := range g.projection.Recipes[key] {
-				if x != g.target {
-					if _, ok := g.owned[x]; !ok {
-						outputs = append(outputs, x)
-					}
-				}
-			}
-			if len(outputs) > 0 {
-				label := s.graph.Label(outputs[0])
-				p["hint_kind"] = "output"
-				p["hint_output"] = map[string]any{"label": label}
-				p["message"] = "Indiciu: caută mai întâi «" + label + "»."
-			} else {
-				p["hint_kind"] = "category"
-				if g.category != "" {
-					p["message"] = "Indiciu: ținta e aproape. Rămâi în tema " + s.data.CategoryLabels[g.category] + "."
-				} else {
-					p["message"] = "Indiciu: ținta e la un pas; caută o pereche utilă."
-				}
-			}
-		} else {
-			p["hint"] = []any{s.concept(key[0]), s.concept(key[1])}
-			p["hint_kind"] = "pair"
-			p["message"] = "Indiciu: combină " + s.graph.Label(key[0]) + " + " + s.graph.Label(key[1]) + "."
+		for key, value := range s.hintPayload(cue) {
+			p[key] = value
 		}
-		g.earnedHint = map[string]any{}
-		for _, key := range []string{"hint", "hint_kind", "hint_output", "message"} {
-			g.earnedHint[key] = p[key]
-		}
-		p["earned_hint"] = g.earnedHint
 		return p, nil
 	})
 }
@@ -385,10 +418,10 @@ func (s *Service) Reset(id string) (map[string]any, *Error) {
 		g.owned = map[string]*Pair{}
 		g.order = []string{}
 		g.moves = 0
-		g.fruitlessStreak = 0
 		g.fruitlessTotal = 0
 		g.hintsUsed = 0
 		g.earnedHint = nil
+		g.hintPairKnown = false
 		g.attempted = map[Pair]bool{}
 		for _, x := range g.seeds {
 			g.add(x, nil)

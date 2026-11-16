@@ -33,10 +33,11 @@ type gameSession struct {
 	order                           []string
 	difficulty, sourceID, catalogID string
 	sourceRing                      []string
-	daily, category                 string
+	daily, category, boardCategory  string
 	wrongIDs                        []string
 	attempts                        int
-	hintUsed, won, lost             bool
+	hintLevel, hintsUsed            int
+	won, lost                       bool
 }
 
 func (s *gameSession) finished() bool { return s.won || s.lost }
@@ -45,10 +46,7 @@ func (s *gameSession) score() int {
 	if !s.won {
 		return 0
 	}
-	result := 1000 - 200*len(s.wrongIDs)
-	if s.hintUsed {
-		result -= 150
-	}
+	result := 1000 - 200*len(s.wrongIDs) - 150*s.hintsUsed
 	if result < 100 {
 		return 100
 	}
@@ -120,7 +118,7 @@ func build(board *content.Board, rng *pyrandom.Random, daily, category string, p
 	if len(ring) > SourceRingLimit {
 		ring = ring[len(ring)-SourceRingLimit:]
 	}
-	return &gameSession{members: members, intruder: intruder, groupLabel: group, order: order, difficulty: board.Difficulty, sourceID: board.SourceID, catalogID: board.CatalogID, sourceRing: ring, daily: daily, category: category, wrongIDs: []string{}}, nil
+	return &gameSession{members: members, intruder: intruder, groupLabel: group, order: order, difficulty: board.Difficulty, sourceID: board.SourceID, catalogID: board.CatalogID, sourceRing: ring, daily: daily, category: category, boardCategory: board.Category, wrongIDs: []string{}}, nil
 }
 
 func (s *Service) Create(seed *big.Int, daily, category, previous string, starter bool) (map[string]any, *Error) {
@@ -215,7 +213,7 @@ func (s *Service) share(game *gameSession) string {
 		attemptWord = "încercare"
 	}
 	detail := fmt.Sprintf("%s %d %s", result, game.attempts, attemptWord)
-	if game.hintUsed {
+	if game.hintsUsed > 0 {
 		detail += " · indiciu"
 	}
 	share := header + "\n" + detail
@@ -225,25 +223,45 @@ func (s *Service) share(game *gameSession) string {
 	return share
 }
 
+func (s *Service) clue(game *gameSession, level int) map[string]string {
+	theme := s.content.CategoryLabels[game.boardCategory]
+	switch level {
+	case 1:
+		if theme != "" && !strings.EqualFold(theme, game.groupLabel) && !strings.EqualFold(theme, s.content.CategoryLabels[game.category]) {
+			return map[string]string{"label": theme, "message": "Tema tablei: " + theme + "."}
+		}
+	case 2:
+		if game.groupLabel != "" && !strings.EqualFold(s.content.CategoryLabels[game.category], game.groupLabel) {
+			return map[string]string{"label": game.groupLabel, "message": "Trei cuvinte țin de: " + game.groupLabel + "."}
+		}
+	}
+	return nil
+}
+
 func (s *Service) state(id string, game *gameSession) map[string]any {
 	remaining := MaxMistakes - len(game.wrongIDs)
 	if remaining < 0 {
 		remaining = 0
 	}
-	hints := 0
-	if game.hintUsed {
-		hints = 1
+	hintsLeft := 0
+	if !game.finished() {
+		for level := game.hintLevel + 1; level <= 2; level++ {
+			if s.clue(game, level) != nil {
+				hintsLeft++
+			}
+		}
 	}
 	wrong := append([]string{}, game.wrongIDs...)
-	body := map[string]any{"game_id": id, "tiles": s.concepts(game.order), "wrong_ids": wrong, "attempts": game.attempts, "mistakes": len(wrong), "remaining_mistakes": remaining, "won": game.won, "lost": game.lost, "difficulty": game.difficulty, "hints_used": hints, "hint_available": !game.finished() && len(wrong) > 0 && !game.hintUsed}
+	steps := len(wrong) + game.hintsUsed
+	body := map[string]any{"game_id": id, "tiles": s.concepts(game.order), "wrong_ids": wrong, "attempts": game.attempts, "mistakes": len(wrong), "remaining_mistakes": remaining, "won": game.won, "lost": game.lost, "difficulty": game.difficulty, "hints_used": game.hintsUsed, "hint_available": hintsLeft > 0, "steps": steps, "perfect": game.won && steps == 0, "hints_left": hintsLeft, "hint_level": game.hintLevel}
 	if game.daily != "" {
 		body["daily"] = game.daily
 	}
 	if game.category != "" {
 		body["board_category"] = game.category
 	}
-	if game.hintUsed {
-		body["clue"] = map[string]string{"label": game.groupLabel, "message": "Trei cuvinte țin de: " + game.groupLabel + "."}
+	if clue := s.clue(game, game.hintLevel); clue != nil {
+		body["clue"] = clue
 	}
 	if game.finished() {
 		body["score"] = game.score()
@@ -316,16 +334,17 @@ func (s *Service) Hint(id string) (map[string]any, *Error) {
 		if game.finished() {
 			return nil, &Error{400, "Jocul s-a terminat"}
 		}
-		if game.hintUsed {
-			return nil, &Error{400, "Indiciul a fost deja folosit"}
+		for level := game.hintLevel + 1; level <= 2; level++ {
+			if s.clue(game, level) == nil {
+				continue
+			}
+			game.hintLevel = level
+			game.hintsUsed++
+			body := s.state(id, game)
+			body["ok"] = true
+			return body, nil
 		}
-		if len(game.wrongIDs) == 0 {
-			return nil, &Error{400, "Indiciul apare după prima încercare."}
-		}
-		game.hintUsed = true
-		body := s.state(id, game)
-		body["ok"] = true
-		return body, nil
+		return nil, &Error{400, "Nu mai sunt indicii disponibile."}
 	})
 }
 
