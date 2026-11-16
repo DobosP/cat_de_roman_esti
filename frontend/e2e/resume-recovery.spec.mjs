@@ -12,6 +12,8 @@ import {
 
 const SCORES_KEY = "cat_wordgame_scores_v1";
 const SCORE_LOCK = "cat_wordgame_scores_v1_transaction";
+const receiptPending = (page) => page.getByText("Se verifică runda salvată…", { exact: true });
+const copyResult = (page) => page.getByRole("button", { name: "Copiază rezultatul" });
 
 async function createThroughBff(request, game) {
   const query = new URLSearchParams({ seed: "38", difficulty: "usor" });
@@ -133,24 +135,19 @@ test.describe("V74 saved-game recovery", () => {
       await expect(page.getByRole("alert")).toHaveCount(0);
     });
 
-    test(`${game.key} recovers a terminal game and scores it exactly once`, async ({ page, request }) => {
+    test(`${game.key} records a terminal saved receipt once and opens a playable round`, async ({ page, request }) => {
       const terminal = await finishThroughBff(request, game);
       await deterministicStarts(page, game);
       await page.goto("/");
       await remember(page, game, terminal.game_id);
       await page.goto(game.path);
 
-      await expect(page.getByRole("button", { name: "Copiază rezultatul" })).toBeVisible();
-      if (game.key === "alchimie") {
-        const winning = terminal.inventory.find((item) => item.id === terminal.target.id);
-        const equation = page.locator(".alchemy-winning-reaction");
-        await expect(equation).toContainText("Combinația câștigătoare");
-        await expect(equation).toContainText(terminal.target.label);
-        for (const parent of winning.parents) await expect(equation).toContainText(parent.label);
-      }
+      await expect(page.locator(game.board)).toBeVisible();
+      await expect(copyResult(page)).toHaveCount(0);
       await expect.poll(() => timesPlayed(page, game)).toBe(1);
-      await expect.poll(() => page.evaluate((key) => localStorage.getItem(key), activeKey(game)))
-        .toBeNull();
+      const saved = await page.evaluate((key) => localStorage.getItem(key), activeKey(game));
+      expect(saved).not.toBeNull();
+      expect(saved).not.toBe(terminal.game_id);
 
       await page.reload();
       await expect(page.locator(game.board)).toBeVisible();
@@ -171,7 +168,7 @@ test.describe("V74 saved-game recovery", () => {
       await holdScoreLock(holder);
 
       await player.goto(game.path);
-      await expect(player.getByRole("button", { name: "Copiază rezultatul" })).toBeVisible();
+      await expect(receiptPending(player)).toBeVisible();
       expect(await player.evaluate((key) => localStorage.getItem(key), activeKey(game)))
         .toBe(terminal.game_id);
 
@@ -186,21 +183,21 @@ test.describe("V74 saved-game recovery", () => {
       expect(await player.evaluate((key) => localStorage.getItem(key), activeKey(game)))
         .toBe(terminal.game_id);
       await player.reload();
-      await expect(player.getByRole("button", { name: "Copiază rezultatul" })).toBeVisible();
+      await expect(receiptPending(player)).toBeVisible();
       expect(await player.evaluate((key) => localStorage.getItem(key), activeKey(game)))
         .toBe(terminal.game_id);
 
       await player.close();
       player = await context.newPage();
       await player.goto(game.path);
-      await expect(player.getByRole("button", { name: "Copiază rezultatul" })).toBeVisible();
+      await expect(receiptPending(player)).toBeVisible();
       expect(await player.evaluate((key) => localStorage.getItem(key), activeKey(game)))
         .toBe(terminal.game_id);
 
       await releaseScoreLock(holder);
       await expect.poll(() => timesPlayed(player, game)).toBe(1);
-      await expect.poll(() => player.evaluate((key) => localStorage.getItem(key), activeKey(game)))
-        .toBeNull();
+      await expect(player.locator(game.board)).toBeVisible();
+      expect(await player.evaluate((key) => localStorage.getItem(key), activeKey(game))).not.toBe(terminal.game_id);
       await player.close();
     }
     await holder.close();
@@ -293,7 +290,7 @@ test.describe("V74 saved-game recovery", () => {
       .not.toBe(oldGame.game_id);
   });
 
-  test("two tabs adopt one terminal session but append its local score once", async ({ context, page, request }) => {
+  test("two tabs recover one terminal receipt and append its local score once", async ({ context, page, request }) => {
     const game = games.find(({ key }) => key === "contexto");
     const terminal = await finishThroughBff(request, game);
     const otherTab = await context.newPage();
@@ -334,8 +331,8 @@ test.describe("V74 saved-game recovery", () => {
     gate.release();
     await Promise.all(reloads);
 
-    await expect(page.getByRole("button", { name: "Copiază rezultatul" })).toBeVisible();
-    await expect(otherTab.getByRole("button", { name: "Copiază rezultatul" })).toBeVisible();
+    await expect(copyResult(page)).toHaveCount(0);
+    await expect(copyResult(otherTab)).toHaveCount(0);
     await expect.poll(() => timesPlayed(page, game)).toBe(1);
     await expect.poll(() => page.evaluate(
       ([scoresKey, gameKey]) => {
@@ -347,10 +344,32 @@ test.describe("V74 saved-game recovery", () => {
 
     // Reintroducing the same still-live terminal ID exercises the persisted receipt, rather
     // than relying on the normal terminal effect having removed the resume pointer.
-    await remember(page, game, terminal.game_id);
-    await page.reload();
-    await expect(page.getByRole("button", { name: "Copiază rezultatul" })).toBeVisible();
+    await otherTab.bringToFront();
+    await remember(otherTab, game, terminal.game_id);
+    await otherTab.reload();
+    await expect(otherTab.locator(game.board)).toBeVisible();
     await expect.poll(() => timesPlayed(page, game)).toBe(1);
+    await otherTab.close();
+  });
+
+  test("an older create response cannot replace a newer tab's saved round", async ({ context, page, request }) => {
+    const game = games.find(({ key }) => key === "intrusul");
+    await deterministicStarts(page, game);
+    const gate = heldRoutes(1);
+    await page.route((url) => url.pathname === `/api/wordgames/${game.key}/games`, gate.handler, { times: 1 });
+    await page.goto(game.path);
+    await gate.ready;
+    const newer = await createThroughBff(request, game);
+    const otherTab = await context.newPage();
+    await otherTab.goto("/");
+    await remember(otherTab, game, newer.game_id);
+    const resumed = page.waitForResponse((response) => response.request().method() === "GET" &&
+      new URL(response.url()).pathname === gameURL(game, newer.game_id));
+    await page.bringToFront();
+    gate.release();
+    expect((await resumed).status()).toBe(200);
+    await expect(page.locator(game.board)).toBeVisible();
+    expect(await page.evaluate((key) => localStorage.getItem(key), activeKey(game))).toBe(newer.game_id);
     await otherTab.close();
   });
 
@@ -377,8 +396,8 @@ test.describe("V74 saved-game recovery", () => {
     gate.release();
     await Promise.all(navigations);
 
-    await expect(page.getByRole("button", { name: "Copiază rezultatul" })).toBeVisible();
-    await expect(otherTab.getByRole("button", { name: "Copiază rezultatul" })).toBeVisible();
+    await expect(copyResult(page)).toHaveCount(0);
+    await expect(copyResult(otherTab)).toHaveCount(0);
     await expect.poll(async () => [
       await timesPlayed(page, intrusul),
       await timesPlayed(page, perechi),

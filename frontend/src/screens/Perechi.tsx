@@ -73,7 +73,7 @@ export default function Perechi({ onExit, onToast }: Props) {
   const active = useActiveGame(GAME_KEY);
   const isPresent = useIsPresent();
   const entry = useGameEntry(GAME_KEY, active);
-  const { admit, remember, complete } = entry;
+  const { admit, remember, complete, settleCompletion } = entry;
   const liveRef = useRef(true), lifetimeRef = useRef(0);
   const recordOnce = useRecordScore(GAME_KEY);
   const startInFlight = useRef(false);
@@ -201,6 +201,7 @@ export default function Perechi({ onExit, onToast }: Props) {
       if (!isPresent || !liveRef.current) return;
       if (!acquireFlight(startInFlight)) return;
       const epoch = lifetimeRef.current;
+      const expected = active.peek();
       actionOwner.invalidate();
       pendingFocus.current = null;
       focusedTileBeforeMutation.current = null;
@@ -219,10 +220,14 @@ export default function Perechi({ onExit, onToast }: Props) {
       try {
         const fresh = await perechiApi.create(opts);
         if (!liveRef.current || epoch !== lifetimeRef.current) return;
+        if (!remember(fresh, expected)) {
+          setState(null);
+          retryResume();
+          return;
+        }
         setState(fresh);
         setActionSync(null);
         setBusy(false);
-        remember(fresh);
         dismissRecovery();
         setSelected(null);
         setChecking(null);
@@ -236,7 +241,7 @@ export default function Perechi({ onExit, onToast }: Props) {
         }
       }
     },
-    [actionOwner, cancelResume, dismissRecovery, isPresent, remember, setFeedback],
+    [active, actionOwner, cancelResume, dismissRecovery, isPresent, remember, retryResume, setFeedback],
   );
 
   const puzzleKey = useMemo(() => {
@@ -269,7 +274,7 @@ export default function Perechi({ onExit, onToast }: Props) {
       steps: state.steps,
       category: state.board_category,
     }).then((outcome) => {
-      active.forgetIfCurrent(state.game_id);
+      settleCompletion(state);
       if (!current || !liveRef.current || !outcome) return;
       if (state.won) sound.playWin();
       else sound.playError();
@@ -277,7 +282,7 @@ export default function Perechi({ onExit, onToast }: Props) {
     return () => {
       current = false;
     };
-  }, [active, finished, isPresent, puzzleKey, recordOnce, state]);
+  }, [finished, isPresent, puzzleKey, recordOnce, settleCompletion, state]);
 
   const beginAction = useCallback((previous: PerechiState, action: "match" | "hint") => {
     if (!isPresent || !liveRef.current || startInFlight.current) return null;
@@ -509,7 +514,7 @@ export default function Perechi({ onExit, onToast }: Props) {
     onToast((await copyResult(sharePayload)) ? "Copiat!" : "Nu am putut copia.", "info");
   }, [onToast, sharePayload]);
 
-  const startEntry = useRoundStart(entry, !state && !loading && !startFailed && !resumeRecovery && !unavailable, retryResume,
+  const startEntry = useRoundStart(entry, (!state || entry.readyAfterTerminal(state)) && !loading && !startFailed && !resumeRecovery && !unavailable, retryResume,
     (daily, previousGameId) => void start({ daily, previousGameId, category: entry.options.category ?? undefined }));
   const mode = entry.mode(state);
   useLayoutEffect(() => {
@@ -523,11 +528,12 @@ export default function Perechi({ onExit, onToast }: Props) {
     <div className="screen-pad fill perechi-game">
       <div className="container game-container">
         <GameFrame game={DEF} mode={mode} onExit={exitSafely} help={PERECHI_HELP}
-          busy={loading} startFailed={startFailed} unavailable={unavailable} onStart={() => startEntry(state?.game_id)}
-          resumeRecovery={resumeRecovery} onResume={retryResume}
+          busy={loading} verifying={entry.recoveredTerminal(state) && !entry.readyAfterTerminal(state)}
+          startFailed={startFailed} unavailable={unavailable} onStart={() => startEntry(state?.game_id)}
+          resumeRecovery={resumeRecovery} onResume={() => { entry.presentRecovery(); retryResume(); }}
           options={<FreeRoundOptions game={GAME_KEY} value={entry.options} onChange={entry.updateOptions} />}
-          status={state && <Attempts remaining={state.remaining_mistakes} />}>
-        {state && <>
+          status={state && !entry.recoveredTerminal(state) && <Attempts remaining={state.remaining_mistakes} />}>
+        {state && !entry.recoveredTerminal(state) && <>
         {!finished && actionSync && (
           <Csp.div className="card col perechi-sync-recovery" role="alert" css={{ gap: "8px", padding: "12px" }}>
             <strong>{actionSync.kind === "changed" ? "Jocul salvat s-a schimbat." : "Verificarea jocului nu a reușit."}</strong>

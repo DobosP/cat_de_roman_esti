@@ -5,7 +5,7 @@ import type { GameDef } from "../games";
 import type { ResumeRecovery } from "../hooks/useSavedGameResume";
 
 export function GameFrame({ game, mode, onExit, help, options, tools, status, children, busy,
-  startFailed, unavailable, onStart, resumeRecovery, onResume }: {
+  startFailed, unavailable, verifying, onStart, resumeRecovery, onResume }: {
   game: GameDef;
   mode: "Jocul zilei" | "Rundă liberă" | "Reluare";
   onExit: () => void;
@@ -17,6 +17,7 @@ export function GameFrame({ game, mode, onExit, help, options, tools, status, ch
   busy?: boolean;
   startFailed?: boolean;
   unavailable?: boolean;
+  verifying?: boolean;
   onStart?: () => void;
   resumeRecovery?: ResumeRecovery | null;
   onResume?: () => void;
@@ -28,7 +29,13 @@ export function GameFrame({ game, mode, onExit, help, options, tools, status, ch
   const helpHeading = useRef<HTMLHeadingElement>(null);
   const [open, setOpen] = useState(false);
   const helpTitle = useId();
-  const closeHelp = () => dialog.current?.close();
+  const closeHelp = () => {
+    dialog.current?.close();
+    setOpen(false);
+    const opener = helpButton.current;
+    if (opener && !opener.disabled) opener.focus({ preventScroll: true });
+    else heading.current?.focus({ preventScroll: true });
+  };
 
   useLayoutEffect(() => { heading.current?.focus({ preventScroll: true }); }, []);
   useLayoutEffect(() => {
@@ -79,6 +86,7 @@ export function GameFrame({ game, mode, onExit, help, options, tools, status, ch
           <button type="button" className="btn" onClick={onStart} disabled={busy}>Începe o rundă nouă</button>
         </div>
       )}
+      {verifying && <p className="game-frame-wait" role="status">Se verifică runda salvată…</p>}
       {children}
       {open && (
         <dialog ref={dialog} className="game-help-sheet" aria-labelledby={helpTitle}
@@ -95,10 +103,7 @@ export function GameFrame({ game, mode, onExit, help, options, tools, status, ch
               first?.focus();
             }
           }}
-          onClose={() => {
-            setOpen(false);
-            if (document.activeElement === document.body) helpButton.current?.focus();
-          }}>
+          onCancel={(event) => { event.preventDefault(); closeHelp(); }}>
           <div className="game-help-heading">
             <h2 id={helpTitle} ref={helpHeading} tabIndex={-1}>Cum se joacă {game.title}</h2>
             <button type="button" className="game-frame-circle" aria-label="Închide ajutorul"

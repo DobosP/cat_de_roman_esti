@@ -23,7 +23,7 @@ for (const width of [320, 390]) {
     await page.setViewportSize({ width, height: 844 });
     await page.goto("/");
     await expect(page.getByRole("heading", { name: title })).toBeVisible();
-    await page.addStyleTag({ content: "html { font-size: 200% !important; }" });
+    await page.evaluate(() => { document.documentElement.style.fontSize = "200%"; });
     const links = page.locator(".games-grid").getByRole("link");
     await expect(links).toHaveCount(6);
     for (const link of await links.all()) {

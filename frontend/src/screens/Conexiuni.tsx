@@ -73,7 +73,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   const active = useActiveGame(GAME_KEY);
   const isPresent = useIsPresent();
   const entry = useGameEntry(GAME_KEY, active);
-  const { admit, remember, complete } = entry;
+  const { admit, remember, complete, settleCompletion } = entry;
   const liveRef = useRef(true), lifetimeRef = useRef(0);
   const [state, setState] = useState<ConexiuniState | null>(null);
   const [startFailed, setStartFailed] = useState(false);
@@ -181,6 +181,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
       if (!liveRef.current || startInFlight.current) return;
       startInFlight.current = true;
       const epoch = lifetimeRef.current;
+      const expected = active.peek();
       actionOwner.invalidate();
       cancelResume();
       setStartFailed(false);
@@ -191,10 +192,14 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
           ? { daily, difficulty: "usor" }
           : { difficulty: entry.options.difficulty, category: entry.options.category ?? undefined });
         if (!liveRef.current || epoch !== lifetimeRef.current) return;
+        if (!remember(s, expected)) {
+          setState(null);
+          retryResume();
+          return;
+        }
         setState(s);
         setActionSync(null);
         setBusy(false);
-        remember(s);
         dismissRecovery();
         setSelected([]);
         setBlockedGuess(null);
@@ -210,7 +215,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
         }
       }
     },
-    [actionOwner, cancelResume, dismissRecovery, entry.options, remember, setHint],
+    [active, actionOwner, cancelResume, dismissRecovery, entry.options, remember, retryResume, setHint],
   );
 
   const puzzleKey = useMemo(() => {
@@ -250,8 +255,8 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
       daily: state.daily,
       steps: state.steps,
       category: state.board_category,
-    }).then(() => { active.forgetIfCurrent(state.game_id); });
-  }, [active, finished, isPresent, puzzleKey, recordOnce, state]);
+    }).then(() => { settleCompletion(state); });
+  }, [finished, isPresent, puzzleKey, recordOnce, settleCompletion, state]);
 
   const toggle = useCallback(
     (id: string) => {
@@ -489,7 +494,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     return () => window.removeEventListener("keydown", onKey);
   }, [state, finished, actionsLocked, actionOwner, selected, exactBlockedRetry, submit, clearSelection]);
 
-  const startEntry = useRoundStart(entry, !state && !loading && !startFailed && !resumeRecovery && !unavailable, retryResume,
+  const startEntry = useRoundStart(entry, (!state || entry.readyAfterTerminal(state)) && !loading && !startFailed && !resumeRecovery && !unavailable, retryResume,
     (daily) => void start(daily));
   const mode = entry.mode(state);
   useLayoutEffect(() => {
@@ -500,11 +505,12 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     <div className="screen-pad fill connections-screen">
       <div className="container game-container connections-game">
         <GameFrame game={DEF} mode={mode} onExit={handleExit} help={CONEXIUNI_HELP}
-          busy={loading} startFailed={startFailed} unavailable={unavailable} onStart={() => startEntry(state?.game_id)}
-          resumeRecovery={resumeRecovery} onResume={retryResume}
+          busy={loading} verifying={entry.recoveredTerminal(state) && !entry.readyAfterTerminal(state)}
+          startFailed={startFailed} unavailable={unavailable} onStart={() => startEntry(state?.game_id)}
+          resumeRecovery={resumeRecovery} onResume={() => { entry.presentRecovery(); retryResume(); }}
           options={<FreeRoundOptions game={GAME_KEY} value={entry.options} onChange={entry.updateOptions} />}
-          status={state && <Attempts remaining={state.lives} />}>
-        {state && <>
+          status={state && !entry.recoveredTerminal(state) && <Attempts remaining={state.lives} />}>
+        {state && !entry.recoveredTerminal(state) && <>
         {!finished && !actionSync && (
           <CoachLine revision={feedbackRevision}>
             {feedback || earnedClue ? <>

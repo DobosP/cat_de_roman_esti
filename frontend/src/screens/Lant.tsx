@@ -117,7 +117,7 @@ export default function Lant({
   const lifetimeRef = useRef(0);
   const active = useActiveGame(GAME_KEY);
   const entry = useGameEntry(GAME_KEY, active);
-  const { admit, remember, complete } = entry;
+  const { admit, remember, complete, settleCompletion } = entry;
   const [state, setState] = useState<LantState | null>(null);
   const [startFailed, setStartFailed] = useState(false);
   const [unavailable, setUnavailable] = useState(false);
@@ -215,6 +215,8 @@ export default function Lant({
     if (!state || !liveRef.current || startInFlightRef.current || actionOwner.hasPending() || actionSync) return;
     actionOwner.invalidate();
     pendingActionFocusRef.current = null;
+    complete(state);
+    active.forgetIfCurrent(state.game_id);
     setGaveUp(true);
     setHint(null);
     setProgress(null);
@@ -226,6 +228,7 @@ export default function Lant({
       if (!liveRef.current || startInFlightRef.current) return;
       startInFlightRef.current = true;
       const epoch = lifetimeRef.current;
+      const expected = active.peek();
       actionOwner.invalidate();
       pendingActionFocusRef.current = null;
       cancelResume();
@@ -237,7 +240,11 @@ export default function Lant({
           ? { daily, difficulty: "usor" }
           : { difficulty: entry.options.difficulty, category: entry.options.category ?? undefined });
         if (!liveRef.current || epoch !== lifetimeRef.current) return;
-        remember(fresh);
+        if (!remember(fresh, expected)) {
+          setState(null);
+          retryResume();
+          return;
+        }
         setGaveUp(false);
         dismissRecovery();
         setActionSync(null);
@@ -256,7 +263,7 @@ export default function Lant({
         }
       }
     },
-    [actionOwner, cancelResume, dismissRecovery, entry.options, remember],
+    [active, actionOwner, cancelResume, dismissRecovery, entry.options, remember, retryResume],
   );
 
   const currentGameId = state?.game_id;
@@ -272,8 +279,8 @@ export default function Lant({
       daily: state.daily,
       steps: state.steps,
       category: state.board_category,
-    }).then(() => { active.forgetIfCurrent(state.game_id); });
-  }, [state, finished, gaveUp, puzzleKey, recordOnce, active]);
+    }).then(() => { settleCompletion(state); });
+  }, [state, finished, gaveUp, puzzleKey, recordOnce, settleCompletion]);
 
   useLayoutEffect(() => {
     if (!liveRef.current || !currentGameId || won || busy || loading || creating || actionSync || inputRef.current?.disabled) return;
@@ -528,7 +535,7 @@ export default function Lant({
     else onToast("Nu am putut copia.", "error");
   }
 
-  const startEntry = useRoundStart(entry, !state && !loading && !creating && !startFailed && !resumeRecovery && !unavailable, retryResume, (daily) => void start(daily));
+  const startEntry = useRoundStart(entry, (!state || entry.readyAfterTerminal(state)) && !loading && !creating && !startFailed && !resumeRecovery && !unavailable, retryResume, (daily) => void start(daily));
   const mode = entry.mode(state);
   useLayoutEffect(() => {
     if (state && finished && isPresent) complete(state);
@@ -538,14 +545,15 @@ export default function Lant({
     <div className="screen-pad fill lant-screen">
       <div className="container game-container">
         <GameFrame game={DEF} mode={mode} onExit={exitSafely} help={LANT_HELP} busy={creating || loading}
-          startFailed={startFailed} unavailable={unavailable} onStart={() => startEntry(state?.game_id)} resumeRecovery={resumeRecovery} onResume={retryResume}
-          status={state && <span>{state.moves} {roNoun(state.moves, "salt", "salturi")}</span>}
+          verifying={entry.recoveredTerminal(state) && !entry.readyAfterTerminal(state)}
+          startFailed={startFailed} unavailable={unavailable} onStart={() => startEntry(state?.game_id)} resumeRecovery={resumeRecovery} onResume={() => { entry.presentRecovery(); retryResume(); }}
+          status={state && !entry.recoveredTerminal(state) && <span>{state.moves} {roNoun(state.moves, "salt", "salturi")}</span>}
           options={<FreeRoundOptions game={GAME_KEY} value={entry.options} onChange={entry.updateOptions} />}
           tools={state && !finished ? (close) => (
             <Button type="button" variant="secondary" disabled={busy || creating || actionSync !== null}
               onClick={() => { close(); abandonChain(); }}>Renunț la rundă</Button>
           ) : undefined}>
-        {state && <>
+        {state && !entry.recoveredTerminal(state) && <>
         <section className="card lant-route" aria-label="Poziția și ținta">
           <div className="lant-current" aria-live={finished ? "off" : "polite"} aria-atomic="true">
             <span className="faint">EȘTI ACUM LA</span>

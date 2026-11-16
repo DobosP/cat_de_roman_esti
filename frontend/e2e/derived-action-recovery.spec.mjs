@@ -338,7 +338,8 @@ for (const game of games.filter(({ derived }) => derived)) {
         expect(await saved(page, game)).toBe(initial.game_id);
         expect(counts).toEqual({ reads: phase === "read" ? 1 : 0, mutations: 1 });
         await page.goto(game.path);
-        await expect(result(page)).toBeVisible();
+        await expect(page.locator(game.board)).toBeVisible();
+        await expect(result(page)).toHaveCount(0);
         await expect.poll(() => played(page, game)).toBe(1);
         expect((await server(request, game, initial.game_id)).won).toBe(true);
       });

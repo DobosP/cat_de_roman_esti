@@ -1,12 +1,12 @@
 import type { TargetedEvent } from "preact";
 import { useLayoutEffect, useRef, useState } from "preact/hooks";
-import { Button, type ToastKind } from "@roedu/ui";
+import { Button } from "@roedu/ui";
 import { GAMES } from "../games";
 import { exportScores, importScores } from "../scores/history";
 import { recentScores } from "../scores/read";
 import { formatDayKey, roNoun } from "../share";
 
-type Props = { onClose: () => void; onToast: (message: string, kind?: ToastKind) => void };
+type Props = { onClose: () => void };
 
 function completedRounds() {
   return recentScores(undefined, 300)
@@ -17,10 +17,11 @@ function completedRounds() {
     .slice(0, 30);
 }
 
-export default function ResultsHistory({ onClose, onToast }: Props) {
+export default function ResultsHistory({ onClose }: Props) {
   const dialog = useRef<HTMLDialogElement>(null);
   const input = useRef<HTMLInputElement>(null);
   const [rounds, setRounds] = useState(completedRounds);
+  const [message, setMessage] = useState("");
 
   useLayoutEffect(() => {
     const node = dialog.current!;
@@ -42,12 +43,11 @@ export default function ResultsHistory({ onClose, onToast }: Props) {
     event.currentTarget.value = "";
     if (!file) return;
     try {
-      if (file.size > 1024 * 1024) throw new Error("Fișier prea mare.");
       importScores(await file.text());
       setRounds(completedRounds());
-      onToast("Istoricul a fost importat.", "success");
+      setMessage("Istoricul a fost importat.");
     } catch {
-      onToast("Fișierul ales nu este un export de istoric valid.", "error");
+      setMessage("Fișierul ales nu este un export de istoric valid.");
     }
   };
 
@@ -66,6 +66,7 @@ export default function ResultsHistory({ onClose, onToast }: Props) {
           </time>
         </li>)}
       </ol> : <p>Nicio rundă terminată încă.</p>}
+      <p role="status">{message}</p>
       <div className="row wrap">
         <Button variant="secondary" onClick={download}>Exportă istoricul</Button>
         <Button variant="secondary" onClick={() => input.current?.click()}>Importă istoricul</Button>

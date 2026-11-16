@@ -1,5 +1,4 @@
-import { useEffect, useState } from "preact/hooks";
-import type { ToastKind } from "@roedu/ui";
+import { useEffect, useRef, useState } from "preact/hooks";
 import intrusul from "../art/intrusul.svg";
 import perechi from "../art/perechi.svg";
 import conexiuni from "../art/conexiuni.svg";
@@ -22,7 +21,8 @@ const cards = [
   { key: "alchimie", image: alchimie, description: "Combină cuvinte, creează altele." },
 ] as const;
 
-export default function Home({ onToast }: { onToast: (message: string, kind?: ToastKind) => void }) {
+export default function Home() {
+  const resultsButton = useRef<HTMLButtonElement>(null);
   const [theme, setTheme] = useState(currentTheme);
   const [resultsOpen, setResultsOpen] = useState(false);
   const [, refresh] = useState(0);
@@ -51,7 +51,7 @@ export default function Home({ onToast }: { onToast: (message: string, kind?: To
                 <path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 2v3m0 14v3M2 12h3m14 0h3M5 5l2 2m10 10 2 2M5 19l2-2M17 7l2-2" />}
             </svg>
           </button>
-          <button type="button" className="home-icon" aria-label="Rezultatele mele" aria-haspopup="dialog"
+          <button ref={resultsButton} type="button" className="home-icon" aria-label="Rezultatele mele" aria-haspopup="dialog"
             onClick={() => setResultsOpen(true)}>
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8 20h8M9 17h6" />
@@ -76,7 +76,7 @@ export default function Home({ onToast }: { onToast: (message: string, kind?: To
         })}
       </div>
       <p className="home-daily-note">Prima rundă de azi e jocul zilei, la fel pentru toată lumea. După ea, joci cât vrei.</p>
-      {resultsOpen && <Results onClose={() => setResultsOpen(false)} onToast={onToast} />}
+      {resultsOpen && <Results onClose={() => { setResultsOpen(false); resultsButton.current?.focus(); }} />}
     </main>
   );
 }

@@ -74,15 +74,26 @@ def test_generic_direction_gives_useful_options_in_one_request_and_keeps_free_pa
         assert all(set(choice) == {"label", "relation"}
                    for choice in first["alternatives_choices"])
         assert session.hint_requests == 2 and session.moves == 0
-        assert client.get(root).json()["earned_hint"] == first
+        assert first["steps"] == 1
+        saved = client.get(root).json()
+        assert saved["steps"] == first["steps"]
+        assert saved["earned_hint"] == {
+            key: value for key, value in first.items()
+            if key not in {"steps", "perfect", "hint_level", "hints_left"}
+        }
         assert session.hint_requests == 2
-        for _ in range(2):
-            hint = client.post(root + "/hint").json()
-            assert hint["stage"] == "hop"
-            state = client.post(root + "/move", {"text": hint["hint"]["label"]},
-                                content_type="application/json").json()
-            assert state["ok"]
+
+        hint = client.post(root + "/hint").json()
+        assert hint["stage"] == "hop"
+        assert hint["steps"] == 2 and hint["hints_left"] == 0
+        state = client.post(root + "/move", {"text": hint["hint"]["label"]},
+                            content_type="application/json").json()
+        assert state["ok"] and not state["won"]
+        assert client.post(root + "/hint").status_code == 400
+        state = client.post(root + "/move", {"text": session.target},
+                            content_type="application/json").json()
         assert state["won"] and state["moves"] == 2 and state["score"] == 1000
+        assert state["steps"] == 2 and state["perfect"] is False
         assert session.hint_requests == 3
         assert client.get(root).json()["score"] == 1000
     finally:

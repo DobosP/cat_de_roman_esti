@@ -106,7 +106,7 @@ export default function AlchimieChallenge({
 }) {
   const active = useActiveGame(GAME_KEY);
   const entry = useGameEntry(GAME_KEY, active);
-  const { admit, remember, complete } = entry;
+  const { admit, remember, complete, settleCompletion } = entry;
   const isPresent = useIsPresent();
   const liveRef = useRef(true);
   const lifetimeRef = useRef(0);
@@ -203,6 +203,7 @@ export default function AlchimieChallenge({
       if (!liveRef.current || startInFlightRef.current) return;
       startInFlightRef.current = true;
       const epoch = lifetimeRef.current;
+      const expected = active.peek();
       actionOwner.invalidate();
       cancelResume();
       setStartFailed(false);
@@ -211,6 +212,11 @@ export default function AlchimieChallenge({
       try {
         const s = await alchimieApi.create(opts);
         if (!liveRef.current || epoch !== lifetimeRef.current) return;
+        if (!remember(s, expected)) {
+          setState(null);
+          retryResume();
+          return;
+        }
         setState(s);
         setRecipesOpen(false);
         setRecipeQuery("");
@@ -219,7 +225,6 @@ export default function AlchimieChallenge({
         setDragOverId(null);
         setActionSync(null);
         setBusy(false);
-        remember(s);
         dismissRecovery();
         setSelected([]);
         setEmptyPairKey(null);
@@ -235,7 +240,7 @@ export default function AlchimieChallenge({
         }
       }
     },
-    [actionOwner, cancelResume, dismissRecovery, remember, setLastMessage],
+    [active, actionOwner, cancelResume, dismissRecovery, remember, retryResume, setLastMessage],
   );
 
   const won = state?.won ?? false;
@@ -283,8 +288,8 @@ export default function AlchimieChallenge({
       daily: state.daily,
       steps: state.steps,
       category: state.board_category,
-    }).then(() => { active.forgetIfCurrent(state.game_id); });
-  }, [state, puzzleKey, recordOnce, active, isPresent]);
+    }).then(() => { settleCompletion(state); });
+  }, [state, puzzleKey, recordOnce, settleCompletion, isPresent]);
 
   const beginAction = useCallback((previous: AlchimieState) => {
     if (!liveRef.current || startInFlightRef.current) return null;
@@ -602,7 +607,7 @@ export default function AlchimieChallenge({
   }, [state, won, selected, clearSelection]);
 
   const nextRound = () => void start({ difficulty: entry.options.difficulty, category: entry.options.category ?? undefined });
-  const startEntry = useRoundStart(entry, !state && !loading && !creating && !startFailed && !resumeRecovery && !unavailable, retryResume,
+  const startEntry = useRoundStart(entry, (!state || entry.readyAfterTerminal(state)) && !loading && !creating && !startFailed && !resumeRecovery && !unavailable, retryResume,
     (daily) => daily ? void start({ daily, difficulty: "usor" }) : nextRound());
   const mode = entry.mode(state);
   useLayoutEffect(() => {
@@ -621,8 +626,9 @@ export default function AlchimieChallenge({
     <div className="screen-pad fill alchemy-screen alchemy-challenge">
       <div className="container game-container alchemy-game">
         <GameFrame game={DEF} mode={mode} onExit={exitSafely} help={ALCHIMIE_HELP} busy={creating || loading}
-          startFailed={startFailed} unavailable={unavailable} onStart={() => startEntry(state?.game_id)} resumeRecovery={resumeRecovery} onResume={retryResume}
-          status={state && <span>{state.moves} {state.moves === 1 ? "combinație" : "combinații"}</span>}
+          verifying={entry.recoveredTerminal(state) && !entry.readyAfterTerminal(state)}
+          startFailed={startFailed} unavailable={unavailable} onStart={() => startEntry(state?.game_id)} resumeRecovery={resumeRecovery} onResume={() => { entry.presentRecovery(); retryResume(); }}
+          status={state && !entry.recoveredTerminal(state) && <span>{state.moves} {state.moves === 1 ? "combinație" : "combinații"}</span>}
           options={<FreeRoundOptions game={GAME_KEY} value={entry.options} onChange={entry.updateOptions} />}
           tools={state && !won ? (close) => <>
             <Button type="button" variant="secondary" disabled={actionsLocked}
@@ -630,7 +636,7 @@ export default function AlchimieChallenge({
             {!state.daily && <Button type="button" className="alchimie-other-board" variant="secondary" disabled={busy || creating || loading || !isPresent}
               onClick={() => { close(); nextRound(); }}>Alt joc</Button>}
           </> : undefined}>
-        {state && <>
+        {state && !entry.recoveredTerminal(state) && <>
         <div className="alchemy-workspace">
           <section className="alchemy-bench" aria-label="Alambic">
             <section className={`alchemy-target${won ? " alchemy-target--won" : ""}`} aria-label="Ținta de făurit">

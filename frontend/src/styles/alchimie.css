@@ -67,7 +67,7 @@
 .alchemy-library-heading { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 4px 10px; }
 .alchemy-library-heading h2 { margin: 0; font-size: 1.06rem; }
 .alchemy-library-count { margin: 0; color: var(--alchemy-muted); font-size: .84rem; }
-.alchemy-challenge .alchemy-word:disabled .alchemy-word-label { color: var(--alchemy-muted); }
+.alchemy-challenge .alchemy-word:disabled:not([aria-pressed="true"]) .alchemy-word-label { color: var(--alchemy-muted); }
 @media (min-width: 760px) and (min-height: 560px) { .alchemy-screen.alchemy-challenge .alchemy-bench:not(:has(.alchemy-sync-recovery, .alchemy-challenge-complete)) { position: sticky; top: 8px; } }
 @media (hover: hover) { .alchemy-word:not(:disabled):hover { border-color: var(--focus) !important; } .alchemy-word[draggable="true"] { cursor: grab !important; } }
 @media (min-width: 760px) { .alchemy-workspace { grid-template-columns: minmax(220px, .85fr) minmax(0, 1.45fr); gap: 32px; } }

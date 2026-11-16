@@ -119,7 +119,7 @@ export default function CaldRece({
   const isPresent = useIsPresent(), liveRef = useRef(true);
   const active = useActiveGame(GAME_KEY);
   const entry = useGameEntry(GAME_KEY, active);
-  const { admit, remember, complete } = entry;
+  const { admit, remember, complete, settleCompletion } = entry;
   const lifetimeRef = useRef(0);
   const [state, setState] = useState<ContextoState | null>(null);
   const [startFailed, setStartFailed] = useState(false);
@@ -191,6 +191,7 @@ export default function CaldRece({
       if (!liveRef.current || startInFlightRef.current) return;
       startInFlightRef.current = true;
       const epoch = lifetimeRef.current;
+      const expected = active.peek();
       actionOwner.invalidate();
       cancelResume();
       setStartFailed(false);
@@ -199,8 +200,12 @@ export default function CaldRece({
       try {
         const fresh = await contextoApi.createGame(opts);
         if (!liveRef.current || epoch !== lifetimeRef.current) return;
+        if (!remember(fresh, expected)) {
+          setState(null);
+          retryResume();
+          return;
+        }
         setState(fresh);
-        remember(fresh);
         dismissRecovery();
         setActionSync(null);
         setLatestId(null);
@@ -222,7 +227,7 @@ export default function CaldRece({
         }
       }
     },
-    [actionOwner, cancelResume, dismissRecovery, remember],
+    [active, actionOwner, cancelResume, dismissRecovery, remember, retryResume],
   );
 
   const won = state?.won ?? false;
@@ -274,8 +279,8 @@ export default function CaldRece({
       daily: state.daily,
       steps: state.steps,
       category: state.board_category,
-    }).then(() => { active.forgetIfCurrent(state.game_id); });
-  }, [state, puzzleKey, recordOnce, active, isPresent]);
+    }).then(() => { settleCompletion(state); });
+  }, [state, puzzleKey, recordOnce, settleCompletion, isPresent]);
 
   const beginAction = useCallback((previous: ContextoState) => {
     if (!liveRef.current || startInFlightRef.current) return null;
@@ -539,7 +544,7 @@ export default function CaldRece({
     : null;
 
   const nextRound = () => void start({ difficulty: entry.options.difficulty, category: entry.options.category ?? undefined });
-  const startEntry = useRoundStart(entry, !state && !busy && !startFailed && !resumeRecovery && !unavailable, retryResume,
+  const startEntry = useRoundStart(entry, (!state || entry.readyAfterTerminal(state)) && !busy && !startFailed && !resumeRecovery && !unavailable, retryResume,
     (daily) => daily ? void start({ daily, difficulty: "usor" }) : nextRound());
   const mode = entry.mode(state);
   useLayoutEffect(() => {
@@ -550,8 +555,9 @@ export default function CaldRece({
     <div className="screen-pad fill contexto-screen">
       <div className="container game-container">
         <GameFrame game={DEF} mode={mode} onExit={handleExit} help={CONTEXTO_HELP} busy={busy && (!state || finished)}
-          startFailed={startFailed} unavailable={unavailable} onStart={() => startEntry(state?.game_id)} resumeRecovery={resumeRecovery} onResume={retryResume}
-          status={state && <Attempts remaining={state.attempts} />}
+          verifying={entry.recoveredTerminal(state) && !entry.readyAfterTerminal(state)}
+          startFailed={startFailed} unavailable={unavailable} onStart={() => startEntry(state?.game_id)} resumeRecovery={resumeRecovery} onResume={() => { entry.presentRecovery(); retryResume(); }}
+          status={state && !entry.recoveredTerminal(state) && <Attempts remaining={state.attempts} />}
           options={<FreeRoundOptions game={GAME_KEY} value={entry.options} onChange={entry.updateOptions} />}
           tools={state && !finished ? (close) => (
             confirmReveal ? (
@@ -566,7 +572,7 @@ export default function CaldRece({
               Renunț la rundă și vreau să văd răspunsul
             </Button>
           ) : undefined}>
-        {state && <>
+        {state && !entry.recoveredTerminal(state) && <>
         {!finished && !actionSync && (
           <CoachLine revision={feedbackRevision}>
             {feedback && latestGuess ? `${latestGuess.label} · ${feedback.message}`

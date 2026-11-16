@@ -28,12 +28,18 @@ export function useGameEntry(game: GameKey, active: ActiveGameMemo) {
   const presentPreviously = useRef(isPresent);
   const parkedCandidate = useRef<string | null>(null);
   const replay = useRef(read(replayKey));
+  const recoveredTerminal = useRef<string | null>(null);
+  const presentingRecovery = useRef(false);
+  const [settledTerminal, setSettledTerminal] = useState<string | null>(null);
   const [options, setOptions] = useState(() => readFreeOptions(game));
 
   useLayoutEffect(() => {
     if (isPresent && !presentPreviously.current) {
       date.current = localDay();
       parkedCandidate.current = null;
+      recoveredTerminal.current = null;
+      presentingRecovery.current = false;
+      setSettledTerminal(null);
       replay.current = read(replayKey);
       setOptions(readFreeOptions(game));
     }
@@ -41,12 +47,16 @@ export function useGameEntry(game: GameKey, active: ActiveGameMemo) {
   }, [game, isPresent, replayKey]);
 
   const admit = useCallback((round: Round, terminal: boolean) => {
+    replay.current = read(replayKey);
     // A completion discovered by GET still belongs to the saved day, even if the
     // originating tab closed before it could persist the result.
     if (terminal) {
+      recoveredTerminal.current = presentingRecovery.current ? null : round.game_id;
+      presentingRecovery.current = false;
       if (round.daily) markDailyDone(game, round.daily);
       return true;
     }
+    presentingRecovery.current = false;
     const decision = roundEntry(game, date.current, { ...round, terminal });
     if (decision.kind === "resume") {
       if (round.daily) markDailyStarted(game, round.daily);
@@ -54,9 +64,12 @@ export function useGameEntry(game: GameKey, active: ActiveGameMemo) {
     }
     if (!round.daily) parkedCandidate.current = round.game_id;
     return false;
-  }, [game]);
+  }, [game, replayKey]);
 
-  const remember = useCallback((round: Round) => {
+  const remember = useCallback((round: Round, expected: string | null) => {
+    // Another tab may have started a newer game while this POST was in flight.
+    const current = active.peek();
+    if (current !== null && current !== expected) return false;
     if (round.daily) {
       if (parkedCandidate.current && active.isCurrent(parkedCandidate.current)) {
         write(parkedKey, parkedCandidate.current);
@@ -69,6 +82,7 @@ export function useGameEntry(game: GameKey, active: ActiveGameMemo) {
     }
     parkedCandidate.current = null;
     active.remember(round.game_id);
+    return true;
   }, [active, game, parkedKey, replayKey]);
 
   const useParked = (completedId?: string) => {
@@ -89,8 +103,17 @@ export function useGameEntry(game: GameKey, active: ActiveGameMemo) {
     if (round.daily) markDailyDone(game, round.daily);
   }, [game]);
 
+  const settleCompletion = useCallback((round: Round) => {
+    active.forgetIfCurrent(round.game_id);
+    if (recoveredTerminal.current === round.game_id && presentPreviously.current) {
+      setSettledTerminal(round.game_id);
+    }
+  }, [active]);
   return {
-    admit, remember, mode, isPresent, useParked, options,
+    admit, remember, mode, isPresent, useParked, options, settleCompletion,
+    recoveredTerminal: (round: Round | null) => round !== null && recoveredTerminal.current === round.game_id,
+    readyAfterTerminal: (round: Round | null) => round !== null && settledTerminal === round.game_id,
+    presentRecovery: () => { presentingRecovery.current = true; },
     day: date.current,
     choose: () => roundEntry(game, date.current),
     complete,
@@ -117,7 +140,7 @@ export function useRoundStart(
   };
 
   useEffect(() => {
-    if (!entry.isPresent) { didStart.current = false; return; }
+    if (!entry.isPresent || !shouldStart) { didStart.current = false; return; }
     const tryStart = () => {
       const { entry: current, shouldStart: ready, start: create, retryResume: resume } = latest.current;
       if (!current.isPresent || !ready || didStart.current || document.visibilityState !== "visible") return;
