@@ -2,8 +2,6 @@ import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } fr
 import { useIsPresent } from "@roedu/ui/motion";
 import { ApiError } from "../api/client";
 import type { ActiveGameMemo } from "./useActiveGame";
-import { useDailyIntent } from "./useDailyIntent";
-import { todayLocal } from "../share";
 import {
   createSavedGameResume,
   subscribeSavedGameResume,
@@ -25,9 +23,7 @@ interface SavedGameResumeOptions<T> {
   load: (gameId: string) => Promise<T>;
   isTerminal: (state: T) => boolean;
   setPending: (pending: boolean) => void;
-  onResume: (state: T, detail: { gameId: string; terminal: boolean; bypassed: boolean }) => void;
-  /** A circuit visit (`?challenge=daily`) resumed an unfinished free round instead. */
-  onDailyBypassed?: () => void;
+  onResume: (state: T, detail: { gameId: string; terminal: boolean }) => void;
   /** Retire local presentation before a retained frame reads its saved session again. */
   onReentry?: () => void;
 }
@@ -39,7 +35,6 @@ export function useSavedGameResume<T>({
   isTerminal,
   setPending,
   onResume,
-  onDailyBypassed,
   onReentry,
 }: SavedGameResumeOptions<T>): SavedGameResumeControl {
   const [generation, setGeneration] = useState(0);
@@ -58,24 +53,6 @@ export function useSavedGameResume<T>({
     }
     return () => { presentRef.current = false; unsubscribeRef.current?.(); };
   }, [isPresent]);
-  const dailyIntent = useDailyIntent();
-  // Read at resume time without resubscribing: the callbacks change every render.
-  // Returns whether the bypass notice was shown, so the screen skips its own resume toast.
-  const dailyResumeRef = useRef<(daily: unknown, terminal: boolean) => boolean>(() => false);
-  useEffect(() => {
-    dailyResumeRef.current = (daily, terminal) => {
-      if (!presentRef.current) return false;
-      if (!dailyIntent.active) return false;
-      // Today's resumed daily fulfils the circuit intent. An older day's daily or a
-      // free round keeps it for later; only an unfinished free round is announced.
-      if (daily === todayLocal()) dailyIntent.consume();
-      else if (!daily && !terminal && onDailyBypassed) {
-        onDailyBypassed();
-        return true;
-      }
-      return false;
-    };
-  });
   const attempt = useMemo(
     () =>
       createSavedGameResume({
@@ -96,8 +73,7 @@ export function useSavedGameResume<T>({
         onResume: (state, detail) => {
           if (!presentRef.current) return;
           setRecovery(null);
-          const bypassed = dailyResumeRef.current((state as { daily?: unknown }).daily, detail.terminal);
-          onResume(state, { ...detail, bypassed });
+          onResume(state, detail);
         },
         onTransientError: () => { if (presentRef.current) setRecovery({ kind: "failed" }); },
         onSuperseded: (hasCurrent) => { if (presentRef.current) setRecovery({ kind: "changed", hasCurrent }); },

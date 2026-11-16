@@ -1,114 +1,29 @@
-.csp-motion-opacity-55 { opacity: .55; }
-
-.connections-lives {
-  display: flex;
-  align-items: center;
-}
-
-
-.connections-coach-stack {
-  display: grid;
-  gap: 8px;
-}
-
-.connections-lives {
-  gap: 3px;
-  flex: none;
-}
-
-.connections-life-dot {
-  width: 8px;
-  height: 8px;
-  border: 1px solid var(--cue-accent);
-  border-radius: 999px;
-  background: var(--cue-accent);
-  box-shadow: 0 0 8px -2px var(--cue-accent);
-}
-
-.connections-life-dot--spent {
-  background: transparent;
-  opacity: 0.35;
-  box-shadow: none;
-}
-
-.connections-feedback {
-  gap: 4px;
-  padding: 9px 12px;
-  border-color: color-mix(in srgb, var(--roedu-color-primary) 55%, transparent);
-  font-size: 0.84rem;
-}
-
-
-.connection-tile {
-  hyphens: auto;
-}
-
-@media (max-width: 640px) {
-  .connections-coach {
-    backdrop-filter: blur(12px);
-  }
-
-}
-
-
-/* ===== V42 section: conexiuni (builder-4 styles go here) ===== */
-/* Clue unlock/remaining hint on the Indiciu button: a small, muted suffix, not a
-   separate control (ADR-0007 clue economy). */
-.conexiuni-clue-status { font-size: 0.78em; opacity: 0.75; }
-
-.connections-screen .game-shell-header,
-.connections-screen .connections-coach-stack,
-.connections-screen .connections-actions { position: static; }
-.connections-screen { scroll-padding-top: 12px; }
-.connections-screen .game-shell-header { flex-direction: row; align-items: center; margin: 0; padding: 0; background: none; backdrop-filter: none; }
-.connections-screen .game-shell-main { width: auto; max-width: 100%; flex: 0 1 auto; }
-.connections-screen .game-shell-status { width: auto; max-width: 100%; margin-left: auto; flex: 0 1 auto; }
-.connections-screen .game-shell-status .hud { justify-content: flex-end; }
-.connections-screen .connections-coach.next-move { grid-template-columns: minmax(0, 1fr) auto auto; padding: 9px 12px; border-radius: 12px; background: var(--surface); }
-.connections-screen .connections-coach .next-move-icon,
-.connections-screen .connections-coach .next-move-label { display: none; }
-.connections-screen .connections-coach .next-move-copy { gap: 4px; }
-.connections-screen .connections-coach strong { font-size: 0.9rem; }
-.connections-screen .connections-coach .next-move-progress { display: block; font-size: 0.8rem; }
-.connections-screen .connections-coach-action { display: flex; flex-direction: column; gap: 5px; align-items: center; }
-.connections-lives-label { font-size: 0.67rem; color: var(--text-dim); }
-/* Enlarged text trades columns for readable words in whole steps only (4, 2, 1), so the
-   sixteen tiles never leave a ragged row. Steps fit 4rem tiles plus the gap in effect. */
 .connections-screen .game-container { container-type: inline-size; }
-.connections-screen .connections-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-@container (width >= calc(16rem + 24px)) { .connections-screen .connections-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-.connections-screen .connection-tile { min-width: 0; overflow-wrap: anywhere; white-space: normal; border-radius: 10px; }
-.connections-screen .connections-actions { padding: 0; background: none; backdrop-filter: none; }
-.connections-screen .game-action-buttons { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px !important; }
-.connections-screen .game-action-buttons > button { min-width: 0; min-height: 44px; padding: 8px 6px; white-space: normal; overflow-wrap: anywhere; }
-.connections-hint-action { display: flex; justify-content: center; }
-.connections-hint-action > button { min-height: 44px; white-space: normal; }
-.connections-hint-status { margin: 0; font-size: 0.74rem; text-align: center; color: var(--text-dim); }
-.connections-screen .roedu-btn:focus-visible { outline: 3px solid var(--game-conexiuni); outline-offset: 2px; }
-@media (max-width: 640px) {
-  .connections-screen .connections-grid { gap: 6px !important; }
-  @container (width < calc(8rem + 6px)) { .connections-screen .connections-grid { grid-template-columns: minmax(0, 1fr); } }
-  @container (width >= calc(16rem + 18px)) { .connections-screen .connections-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-  .connections-screen .connection-tile { padding: 10px 4px !important; min-height: 68px !important; font-size: 0.76rem !important; }
-  .connections-screen .connections-coach.next-move { grid-template-columns: minmax(0, 1fr) auto; padding: 8px; gap: 8px; }
-  .connections-screen .connections-coach .next-move-action { grid-column: 1 / -1; justify-self: end; }
-  .connections-screen .connections-coach strong { font-size: 0.83rem; }
-}
-
-/* Kit Presence wrappers (Preact port): tiles stay direct grid cells of their
-   wrapper, solved rows keep their column width, feedback keeps its column gap. */
-.connections-grid > .roedu-presence {
-  display: grid;
+.connections-grid { display: grid; gap: 8px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@container (width < 9rem) { .connections-grid { grid-template-columns: minmax(0, 1fr); } }
+@container (width >= calc(16rem + 24px)) { .connections-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.connection-tile {
   min-width: 0;
+  min-height: 64px;
+  padding: 8px 5px;
+  border: 2px solid var(--surface-border-strong);
+  border-radius: 10px;
+  background: var(--surface);
+  font-weight: 600;
+  hyphens: auto;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
-.connections-grid > .roedu-presence > .connection-tile {
-  width: 100%;
-  height: 100%;
+.connections-grid > .roedu-presence { display: grid; min-width: 0; }
+.connections-grid > .roedu-presence > .connection-tile { width: 100%; height: 100%; }
+.connections-solved-row {
+  display: grid;
+  gap: 4px;
+  padding: 10px 12px;
+  background: var(--group-color, var(--game-color));
+  color: var(--ink);
 }
-.connections-game > .roedu-presence {
-  display: flex;
-  flex-direction: column;
-}
-.connections-feedback > .roedu-presence {
-  display: contents;
-}
+.connections-group-1 { --group-color: var(--game-intrusul); }
+.connections-group-2 { --group-color: var(--game-conexiuni); }
+.connections-group-3 { --group-color: var(--game-lant); }
+.connections-group-4 { --group-color: var(--game-alchimie); }

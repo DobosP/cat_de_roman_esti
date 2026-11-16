@@ -6,10 +6,12 @@ import { LocationProvider } from "preact-iso";
 import "@roedu/ui/styles.css";
 import "./styles/app.css";
 
+import { installTheme } from "./theme";
 import App from "./App";
 import { installReleaseRecovery } from "./releaseRecovery.mjs";
 import { PORTED_LINK_SCOPE } from "./routes";
 
+installTheme();
 installReleaseRecovery();
 
 // UI 1.0 has no ThemeProvider: the explicit .roedu-root wrapper carries the

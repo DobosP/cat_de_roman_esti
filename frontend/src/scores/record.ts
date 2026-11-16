@@ -11,6 +11,7 @@ export interface RecordOutcome {
 }
 
 export interface RecordScoreOptions {
+  steps?: number;
   /** Stable, deterministic key for this exact completed puzzle/run shape. */
   puzzleKey?: string | null;
   /** Difficulty tier for history filtering. */
@@ -120,6 +121,7 @@ function buildScoreUpdate(
   const puzzleKey = options.puzzleKey?.trim() || null;
   const entry = normalizeEntry({
     score,
+    steps: options.steps,
     detail,
     at: Date.now(),
     puzzleKey: puzzleKey ?? undefined,

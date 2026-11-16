@@ -1,4 +1,4 @@
-import { Csp, CspButton } from "../components/CspStyle";
+import { Csp } from "../components/CspStyle";
 // Conexiuni — NYT Connections over the Romanian KG. Text-only: a 4x4 grid of selectable
 // tile buttons. Pick exactly 4 and "Verifică"; the server says whether they share a
 // category (locks it as a coloured row) or not (one_away feedback + a lost life). Win when
@@ -19,30 +19,23 @@ import {
   conexiuniApi,
   GROUP_SIZE,
   type ConexiuniState,
-  type Difficulty,
   type GuessResult,
   type SolvedGroup,
 } from "../api/conexiuni";
 import { Button, type ToastKind } from "@roedu/ui";
-import { GameShell } from "../components/GameShell";
 import { CONEXIUNI_HELP } from "../gameHelp/conexiuni.mjs";
-import { GameIntro } from "../components/GameIntro";
-import { GameOptions } from "../components/GameOptions";
-import { GameSetupOptions } from "../components/GameSetupOptions";
-import { Hud, StatBadge } from "../components/Hud";
+import { GameFrame, Attempts, CoachLine, useCoachMessage } from "../components/GameFrame";
+import { FreeRoundOptions } from "../components/FreeRoundOptions";
+import { HintBar } from "../components/HintBar";
+import { useGameEntry, useRoundStart } from "../hooks/useGameEntry";
 import { ResultCard } from "../components/ResultCard";
-import { DifficultyPicker } from "../components/DifficultyPicker";
-import { NextMove } from "../components/PlayGuide";
 import { useActiveGame } from "../hooks/useActiveGame";
 import { useRecordScore } from "../hooks/useRecordScore";
 import { useSavedGameResume } from "../hooks/useSavedGameResume";
 import { sound } from "../sound";
-import { categoryColor, categoryLabel } from "../categories";
 import { selectionKey } from "../conexiuniSelectionKey";
-import { CategoryPicker } from "../components/CategoryPicker";
-import { bestScore } from "../scores/read";
 import { gameByKey } from "../games";
-import { buildSharePayload, copyResult, formatDayKey, stableKey, todayLocal } from "../share";
+import { buildSharePayload, copyResult, stableKey } from "../share";
 
 const GAME_KEY = "conexiuni";
 const DEF = gameByKey("conexiuni");
@@ -54,35 +47,12 @@ interface SelfProps {
   onToast: (message: string, kind?: ToastKind) => void;
 }
 
-const DIFF_LABEL: Record<Difficulty, string> = {
-  usor: "Ușor",
-  normal: "Normal",
-  greu: "Greu",
-};
-
-const DIFFICULTY_OPTIONS: { id: Difficulty; label: string; hint: string }[] = [
-  { id: "usor", label: DIFF_LABEL.usor, hint: "grupuri clare" },
-  { id: "normal", label: DIFF_LABEL.normal, hint: "mix echilibrat" },
-  { id: "greu", label: DIFF_LABEL.greu, hint: "legături subtile" },
-];
-
-const GROUP_COLORS = ["#f4c95d", "#70c1b3", "#5aa9e6", "#a78bfa"] as const;
-
 // Presence-per-tile exits: the exact original Framer keyframes (Conexiuni.tsx:714-728).
 const TILE_VARIANT: PresenceVariant = {
   enter: { opacity: [0, 1], transform: ["scale(0.6)", "scale(1)"] },
   exit: { opacity: [1, 0], transform: ["scale(1)", "scale(0.4)"] },
   transition: { spring: { stiffness: 320, damping: 20 } },
 };
-
-// Mirrors the server's ConexiuniSession clue economy (cat_de_roman_esti/wordgames/
-// conexiuni.py): up to two clues, unlocking at 2 then 3 mistakes.
-const MAX_CLUES = 2;
-const CLUE_MISTAKES_BASE = 2;
-
-type StartMode =
-  | { kind: "seed"; difficulty: Difficulty }
-  | { kind: "daily" };
 
 const ONE_AWAY_GUIDANCE =
   "Aproape: 3 din 4. Schimbă o piesă.";
@@ -102,9 +72,12 @@ const unsolvedTileIds = (fresh: ConexiuniState) => {
 export default function Conexiuni({ onExit, onToast }: SelfProps) {
   const active = useActiveGame(GAME_KEY);
   const isPresent = useIsPresent();
+  const entry = useGameEntry(GAME_KEY, active);
+  const { admit, remember, complete } = entry;
   const liveRef = useRef(true), lifetimeRef = useRef(0);
   const [state, setState] = useState<ConexiuniState | null>(null);
   const [startFailed, setStartFailed] = useState(false);
+  const [unavailable, setUnavailable] = useState(false);
   const startInFlight = useRef(false);
   const [loading, setLoading] = useState(() => active.peek() !== null);
   const [busy, setBusy] = useState(false);
@@ -120,23 +93,14 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   // A server-confirmed one-away or duplicate set that must change before resubmission.
   // Only the oneAway flag may surface the stronger 3-of-4 guidance.
   const [blockedGuess, setBlockedGuess] = useState<BlockedGuess | null>(null);
-  const [difficulty, setDifficulty] = useState<Difficulty>("usor");
-  const [category, setCategory] = useState<string | null>(null);
-  const [recordHit, setRecordHit] = useState(false);
-  const [puzzleRecordHit, setPuzzleRecordHit] = useState(false);
   const [shake, setShake] = useState(0);
   // Client-only display order for the remaining tiles (the "shuffle" button reorders
   // these; the authoritative grouping never changes). Keyed by tile id.
   const [shuffleNonce, setShuffleNonce] = useState(0);
   // Transient inline feedback shown beside the board. Recovery remains until
   // the player makes the requested selection change, then clears immediately.
-  const [hint, setHint] = useState<string | null>(null);
+  const [hint, setHint, feedbackRevision] = useCoachMessage();
   const recordOnce = useRecordScore(GAME_KEY);
-
-  // Recompute the persisted best whenever the game state changes (e.g. after a
-  // finished round writes a new record and we return to the start screen).
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const best = useMemo(() => bestScore(GAME_KEY), [state]);
 
   // Solved-id set so solved tiles drop out of the grid.
   const solvedIds = useMemo(() => {
@@ -166,14 +130,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     blockedGuess !== null &&
     selectionKey(selected) === blockedGuess.key;
   const feedback = blockedGuess?.oneAway ? ONE_AWAY_GUIDANCE : hint;
-  const clueMessages = useMemo(
-    () => state?.clues.map((clue, index) => ({ key: `clue-${index}`, message: clue.message })) ?? [],
-    [state?.clues],
-  );
-  const cluesUsed = state?.clues_used ?? 0;
-  const clueMistakesNeeded = CLUE_MISTAKES_BASE + cluesUsed;
-  const clueMistakesRemaining = Math.max(0, clueMistakesNeeded - (state?.mistakes ?? 0));
-
+  const earnedClue = state?.clues[state.clues.length - 1]?.message;
   const applyAuthoritativeState = useCallback((fresh: ConexiuniState) => {
     const available = unsolvedTileIds(fresh);
     setState(fresh);
@@ -185,26 +142,21 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   }, []);
 
   const applyResumedGame = useCallback(
-    (s: ConexiuniState, { terminal, bypassed }: { terminal: boolean; bypassed: boolean }) => {
-      if (!liveRef.current) return;
+    (s: ConexiuniState, { terminal }: { terminal: boolean }) => {
+      if (!liveRef.current || !admit(s, terminal)) return;
       actionOwner.invalidate();
       setActionSync(null);
       setBusy(false);
       setStartFailed(false);
       setState(s);
-      setDifficulty(s.difficulty);
-      setCategory(s.board_category ?? null);
-      setRecordHit(false);
-      setPuzzleRecordHit(false);
       setSelected([]);
       setBlockedGuess(null);
       setHint(null);
       setShuffleNonce(0);
       setShake(0);
-      // The daily-bypass notice already says the round was resumed.
-      if (!terminal && !bypassed) onToast("Joc reluat.", "info");
+      if (!terminal && !s.clues.length) setHint("Joc reluat. Alege patru cuvinte care merg împreună.");
     },
-    [actionOwner, onToast],
+    [actionOwner, admit, setHint],
   );
 
   const { recovery: resumeRecovery, retryResume, cancelResume, dismissRecovery } = useSavedGameResume({
@@ -222,35 +174,28 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
         if (!finished) setActionSync({ gameId: state.game_id, kind: "failed" });
       } else { setState(null); setActionSync(null); }
     },
-    onDailyBypassed: () => onToast("Ai continuat jocul liber început. Provocarea zilei te așteaptă după ce îl termini.", "info"),
   });
 
   const start = useCallback(
-    async (mode: StartMode) => {
+    async (daily?: string) => {
       if (!liveRef.current || startInFlight.current) return;
       startInFlight.current = true;
       const epoch = lifetimeRef.current;
       actionOwner.invalidate();
       cancelResume();
       setStartFailed(false);
+      setUnavailable(false);
       setLoading(true);
       try {
-        const s =
-          mode.kind === "daily"
-            ? // Daily carries difficulty like the other games (shared board, no theme).
-              await conexiuniApi.create({ daily: todayLocal(), difficulty })
-            : await conexiuniApi.create({
-                difficulty: mode.difficulty,
-                category: category ?? undefined,
-              });
+        const s = await conexiuniApi.create(daily
+          ? { daily, difficulty: "usor" }
+          : { difficulty: entry.options.difficulty, category: entry.options.category ?? undefined });
         if (!liveRef.current || epoch !== lifetimeRef.current) return;
         setState(s);
         setActionSync(null);
         setBusy(false);
-        active.remember(s.game_id);
+        remember(s);
         dismissRecovery();
-        setRecordHit(false);
-        setPuzzleRecordHit(false);
         setSelected([]);
         setBlockedGuess(null);
         setHint(null);
@@ -265,7 +210,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
         }
       }
     },
-    [active, actionOwner, cancelResume, dismissRecovery, category, difficulty],
+    [actionOwner, cancelResume, dismissRecovery, entry.options, remember, setHint],
   );
 
   const puzzleKey = useMemo(() => {
@@ -289,7 +234,6 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     return buildSharePayload({
       gameTitle: DEF.title,
       serverShare: state.share,
-      score: state.score,
       puzzleKey,
     });
   }, [state, finished, puzzleKey]);
@@ -300,29 +244,13 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     const detail = state.won
       ? `${state.mistakes} ${state.mistakes === 1 ? "greșeală" : "greșeli"}`
       : `pierdut · ${state.mistakes} greșeli`;
-    let current = true;
     void recordOnce(state.game_id, state.score, detail, {
       puzzleKey,
       difficulty: state.difficulty,
       daily: state.daily,
+      steps: state.steps,
       category: state.board_category,
-    }).then((outcome) => {
-      active.forgetIfCurrent(state.game_id);
-      if (!current || !liveRef.current || !outcome) return;
-      const { isBest, isPuzzleBest } = outcome;
-      if (state.won) sound.playWin();
-      else sound.playError();
-      if (isBest) {
-        setRecordHit(true);
-        sound.playRecord();
-      } else if (isPuzzleBest) {
-        sound.playRecord();
-      }
-      setPuzzleRecordHit(isPuzzleBest);
-    });
-    return () => {
-      current = false;
-    };
+    }).then(() => { active.forgetIfCurrent(state.game_id); });
   }, [active, finished, isPresent, puzzleKey, recordOnce, state]);
 
   const toggle = useCallback(
@@ -395,6 +323,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
       }
       setActionSync(null);
       setState(null);
+      setUnavailable(true);
       setSelected([]);
       setBlockedGuess(null);
       setHint(null);
@@ -494,7 +423,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     mayAdoptAction, onToast, reconcileAction, actionOwner]);
 
   const requestClue = useCallback(async () => {
-    if (!state || actionsLocked || finished || !state.clue_available) return;
+    if (!state || actionsLocked || finished || !state.hints_left) return;
     const ticket = beginAction(state);
     if (!ticket) return;
     setBusy(true);
@@ -503,14 +432,14 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
       if (!mayAdoptAction(ticket)) return;
       sound.playSelect();
       applyAuthoritativeState(res);
-      // Render the earned clue once; retire invisible selected ids and stale feedback.
+      setHint(res.clue?.message ?? null);
     } catch {
       await reconcileAction(ticket);
     } finally {
       if (actionOwner.finish(ticket)) setBusy(false);
     }
   }, [state, actionsLocked, finished, beginAction, mayAdoptAction,
-    applyAuthoritativeState, reconcileAction, actionOwner]);
+    applyAuthoritativeState, reconcileAction, actionOwner, setHint]);
 
   const copyShare = useCallback(async () => {
     if (!liveRef.current || !sharePayload) return;
@@ -520,20 +449,15 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     else onToast("Nu am putut copia.", "error");
   }, [sharePayload, onToast]);
 
-  // An ordinary live-board exit is permanent. Uncertain actions preserve the pointer
-  // for resume; terminal score completion owns its conditional cleanup.
   const handleExit = useCallback(() => {
     if (!liveRef.current || startInFlight.current) return;
-    if (!finished && state && !busy && !actionSync && !actionOwner.hasPending()) {
-      active.forgetIfCurrent(state.game_id);
-    }
     actionOwner.invalidate();
     setSelected([]);
     setBlockedGuess(null);
     setHint(null);
     liveRef.current = false;
     onExit();
-  }, [active, state, busy, actionSync, actionOwner, finished, onExit]);
+  }, [actionOwner, onExit, setHint]);
 
   // Keyboard: Enter submits a full selection, Escape/Backspace clears it. Inert when
   // no board is active, while a request is in flight, or once the game is finished.
@@ -543,7 +467,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
       if (!liveRef.current || actionsLocked || actionOwner.hasPending()) return;
       const target = e.target instanceof Element ? e.target : null;
       if (
-        e.defaultPrevented ||
+        e.defaultPrevented || target?.closest("dialog[open]") ||
         (e.key === "Enter" &&
           target?.closest(
             'button, a, input, textarea, select, summary, [role="button"], [contenteditable="true"]',
@@ -565,126 +489,37 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
     return () => window.removeEventListener("keydown", onKey);
   }, [state, finished, actionsLocked, actionOwner, selected, exactBlockedRetry, submit, clearSelection]);
 
-  // ----------------------------------------------------------------- INTRO
-  if (!state) {
-    return (
-      <Csp.div className="screen-pad fill connections-screen" css={{ overflowY: "auto" }}>
-        <Csp.div className="container col game-container" css={{ gap: "18px", paddingBottom: "32px" }}>
-          <GameShell onExit={handleExit} accent={DEF.accent} busy={loading} />
+  const startEntry = useRoundStart(entry, !state && !loading && !startFailed && !resumeRecovery && !unavailable, retryResume,
+    (daily) => void start(daily));
+  const mode = entry.mode(state);
+  useLayoutEffect(() => {
+    if (state && finished && isPresent) complete(state);
+  }, [state, finished, isPresent, complete]);
 
-          <GameIntro
-            startFailed={startFailed}
-            resumeRecovery={resumeRecovery ? {
-              kind: resumeRecovery.kind,
-              canRetry: resumeRecovery.kind === "failed" || resumeRecovery.hasCurrent,
-              onRetry: retryResume,
-            } : null}
-            icon={DEF.icon}
-            title={DEF.title}
-            tag={DEF.tag}
-            accent={DEF.accent}
-            glow={DEF.glow}
-            description={
-              <Csp.p css={{ margin: "0px" }}>
-                Găsește patru grupuri ascunse printre cele 16 cuvinte.
-              </Csp.p>
-            }
-            steps={[
-              { icon: "👆", label: "Alege patru" },
-              { icon: "✓", label: "Verifică" },
-              { icon: "🧩", label: "Găsește grupul" },
-            ]}
-            best={best}
-            startLabel="Joacă"
-            onStart={() => void start({ kind: "seed", difficulty })}
-            onDaily={() => void start({ kind: "daily" })}
-            dailyLabel="Provocarea zilei"
-            starting={!isPresent || loading}
-          >
-            <GameSetupOptions>
-            <DifficultyPicker
-              options={DIFFICULTY_OPTIONS}
-              value={difficulty}
-              onChange={(d) => {
-                sound.playSelect();
-                setDifficulty(d);
-              }}
-            />
-            <CategoryPicker
-              game="conexiuni"
-              difficulty={difficulty}
-              value={category}
-              onChange={(key) => {
-                sound.playSelect();
-                setCategory(key);
-              }}
-              onInvalid={() => setCategory(null)}
-              accent={DEF.accent}
-            />
-            </GameSetupOptions>
-          </GameIntro>
-        </Csp.div>
-      </Csp.div>
-    );
-  }
-
-  // ----------------------------------------------------------------- BOARD
   return (
-    <Csp.div className="screen-pad fill connections-screen" css={{ overflowY: "auto" }}>
-      <Csp.div className="container col game-container connections-game" css={{ gap: "12px", paddingBottom: "24px" }}>
-        {/* Header */}
-        <GameShell onExit={handleExit} accent={DEF.accent} title={DEF.title} busy={loading}>
-          <Hud><StatBadge label="Grupuri" value={`${state.solved.length}/4`} accent={DEF.accent} /></Hud>
-        </GameShell>
+    <div className="screen-pad fill connections-screen">
+      <div className="container game-container connections-game">
+        <GameFrame game={DEF} mode={mode} onExit={handleExit} help={CONEXIUNI_HELP}
+          busy={loading} startFailed={startFailed} unavailable={unavailable} onStart={() => startEntry(state?.game_id)}
+          resumeRecovery={resumeRecovery} onResume={retryResume}
+          options={<FreeRoundOptions game={GAME_KEY} value={entry.options} onChange={entry.updateOptions} />}
+          status={state && <Attempts remaining={state.lives} />}>
+        {state && <>
+        {!finished && !actionSync && (
+          <CoachLine revision={feedbackRevision}>
+            {feedback || earnedClue ? <>
+              {feedback && <span>{feedback}</span>}
+              {earnedClue && earnedClue !== feedback && <span>{earnedClue}</span>}
+            </> : selected.length === GROUP_SIZE ? "Grup gata de verificat."
+              : selected.length === 0 ? "Alege patru cuvinte care merg împreună." : `Mai alege ${GROUP_SIZE - selected.length}.`}
+          </CoachLine>
+        )}
 
-        {/* Solved groups as locked coloured rows */}
         <Presence initial={false}>
-          {state.solved.map((g, index) => (
-            <SolvedRow key={g.key} group={g} color={GROUP_COLORS[index]} />
+          {state.solved.map((group, index) => (
+            <SolvedRow key={group.key} group={group} index={index} />
           ))}
         </Presence>
-
-        {!finished && (
-          <div className="connections-coach-stack">
-            <NextMove
-              icon={selected.length === GROUP_SIZE ? "✓" : "👆"}
-              title={
-                exactBlockedRetry
-                  ? "Schimbă o piesă"
-                  : selected.length === 0
-                    ? "Alege 4 care merg împreună"
-                    : selected.length < GROUP_SIZE
-                      ? `Încă ${GROUP_SIZE - selected.length}`
-                      : "Grup gata"
-              }
-              detail={exactBlockedRetry ? "Aceeași combinație a fost deja verificată." : undefined}
-              progress={`${selected.length}/${GROUP_SIZE}`}
-              accent={DEF.accent}
-              ready={selected.length === GROUP_SIZE && !exactBlockedRetry}
-              className="connections-coach"
-              action={
-                <span className="connections-coach-action">
-                  <span className="connections-lives-label">Greșeli disponibile</span>
-                  <span
-                    className="connections-lives"
-                    role="img"
-                    aria-label={`${state.lives} ${state.lives === 1 ? "greșeală disponibilă" : "greșeli disponibile"}`}
-                    title={`${state.lives} ${state.lives === 1 ? "greșeală disponibilă" : "greșeli disponibile"}`}
-                  >
-                    {Array.from({ length: 4 }, (_, index) => (
-                      <span
-                        key={index}
-                        className={`connections-life-dot${index < state.lives ? "" : " connections-life-dot--spent"}`}
-                        aria-hidden="true"
-                      />
-                    ))}
-                  </span>
-
-                </span>
-              }
-            />
-          </div>
-        )}
 
         {!finished && actionSync ? (
           <Csp.div className="card col connections-sync-recovery" role="alert" css={{ gap: "8px", padding: "12px" }}>
@@ -698,164 +533,36 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
           </Csp.div>
         ) : null}
 
-        {/* Feedback stays immediately before the board. */}
-        <Presence>
-          {!finished && (feedback || clueMessages.length > 0) && (
-            <div
-              key="connections-feedback"
-              className="card connections-feedback col"
-            >
-              <Presence mode="wait">
-                {feedback && (
-                  <span
-                    key={feedback}
-                    role="status"
-                    aria-live="polite"
-                  >
-                    <span aria-hidden="true">↻ </span>
-                    {feedback}
-                  </span>
-                )}
-              </Presence>
-              {clueMessages.map(({ key, message }) => (
-                <span key={key} role="status" aria-live="polite">
-                  <span aria-hidden="true">💡 </span>
-                  {message}
-                </span>
-              ))}
-            </div>
-          )}
-        </Presence>
-
         {/* Active board: a wrong guess remounts the grid with the shake keyframe. */}
         {!finished && (
-          <Csp.div
-            key={shake}
-            className={shake ? "connections-grid connections-grid--shake" : "connections-grid"}
-            css={{
-              display: "grid",
-              gap: "8px",
-            }}
-          >
+          <div key={shake} className={shake ? "connections-grid connections-grid--shake" : "connections-grid"}>
             <Presence initial={false} variant={TILE_VARIANT}>
               {remainingTiles.map((t) => {
                 const isSel = selected.includes(t.id);
                 return (
-                  <Csp.button
-                    key={t.id}
-                    type="button"
-                    onClick={() => toggle(t.id)}
-                    disabled={actionsLocked}
-                    aria-pressed={isSel}
-                    title={t.label}
-                    className={("card center connection-tile") + (actionsLocked && !isSel ? " csp-motion-opacity-55" : "")}
-                    css={{
-                      padding: "12px 6px",
-                      minHeight: "64px",
-                      cursor: actionsLocked ? "default" : "pointer",
-                      textAlign: "center",
-                      fontSize: "0.82rem",
-                      lineHeight: 1.15,
-                      borderColor: isSel ? DEF.accent : "var(--surface-border)",
-                      background: isSel
-                        ? `color-mix(in srgb, var(--surface) 65%, ${DEF.accent})`
-                        : undefined,
-                      color: isSel ? "var(--text)" : undefined,
-                      fontWeight: isSel ? 700 : 500,
-                      boxShadow: isSel ? `0 0 18px -6px ${DEF.accent}` : undefined,
-                    }}
-                  >
+                  <button key={t.id} type="button" onClick={() => toggle(t.id)}
+                    disabled={actionsLocked} aria-pressed={isSel} className="card connection-tile">
                     {t.label}
-                  </Csp.button>
+                  </button>
                 );
               })}
             </Presence>
-          </Csp.div>
+          </div>
         )}
 
-        {/* Controls */}
         {!finished && (
-          <Csp.div className="col game-action-dock connections-actions" css={{ gap: "8px" }}>
-            <Csp.div className="row center wrap game-action-buttons" css={{ gap: "12px" }}>
-              <Button
-                type="button"
-                variant="secondary"
-                disabled={actionsLocked || remainingTiles.length <= GROUP_SIZE}
-                onClick={shuffle}
-                title="Amestecă pozițiile pieselor"
-              >
-                Amestecă
-              </Button>
-              <Button
-                type="button"
-                variant="secondary"
-                disabled={actionsLocked || selected.length === 0}
-                onClick={clearSelection}
-              >
-                Golește
-              </Button>
-                  <CspButton
-                    type="button"
-                    disabled={actionsLocked || selected.length !== GROUP_SIZE || exactBlockedRetry}
-                    onClick={submit}
-                    css={{ borderColor: DEF.accent }}
-                  >
-                    {busy ? "…" : exactBlockedRetry ? "Schimbă o piesă" : "Verifică"}
-                  </CspButton>
-            </Csp.div>
-            {state.clue_available ? (
-              <div className="connections-hint-action">
-              <Button
-                type="button"
-                variant="secondary"
-                disabled={actionsLocked || !state.clue_available}
-                onClick={() => void requestClue()}
-                title={
-                  state.clue_available
-                    ? "Arată începutul unei categorii"
-                    : cluesUsed >= MAX_CLUES
-                      ? "Indicii epuizate"
-                      : `Disponibil după ${clueMistakesNeeded} greșeli`
-                }
-                  >
-                    {cluesUsed >= MAX_CLUES ? "Indicii folosite" : "Indiciu"}<span className="conexiuni-clue-status"> · −100 pct</span>
-                    {!state.clue_available && cluesUsed < MAX_CLUES ? (
-                      <span className="conexiuni-clue-status">
-                        {" "}
-                        · încă {clueMistakesRemaining}{" "}
-                        {clueMistakesRemaining === 1 ? "greșeală" : "greșeli"}
-                      </span>
-                    ) : cluesUsed === 1 ? (
-                      <span className="conexiuni-clue-status"> · 1 rămas</span>
-                    ) : null}
-                  </Button>
-              </div>
-            ) : (
-              <p className="connections-hint-status">
-                {cluesUsed >= MAX_CLUES ? "Indicii folosite" : `Indiciu disponibil după încă ${clueMistakesRemaining} ${clueMistakesRemaining === 1 ? "greșeală" : "greșeli"}.`}
-              </p>
-            )}
-            <Csp.span className="faint center fine-only" css={{ fontSize: "0.72rem", opacity: 0.7 }}>
-              Enter = verifică · Esc = golește
-            </Csp.span>
-          </Csp.div>
+          <div className="game-frame-actions">
+            <HintBar remaining={state.hints_left ?? 0} disabled={actionsLocked} onHint={() => void requestClue()} />
+            <div className="row wrap">
+              <Button type="button" variant="secondary" disabled={actionsLocked || remainingTiles.length <= GROUP_SIZE}
+                onClick={shuffle}>Amestecă</Button>
+              <Button type="button" variant="secondary" disabled={actionsLocked || selected.length === 0}
+                onClick={clearSelection}>Golește</Button>
+              <Button type="button" disabled={actionsLocked || selected.length !== GROUP_SIZE || exactBlockedRetry}
+                onClick={submit}>{busy ? "Se verifică…" : exactBlockedRetry ? "Schimbă o piesă" : "Verifică"}</Button>
+            </div>
+          </div>
         )}
-
-        <GameOptions help={CONEXIUNI_HELP}>
-          <Csp.div className="row wrap" css={{ gap: "8px" }}>
-            {state.daily && (
-              <StatBadge label="ZILNIC" value={formatDayKey(state.daily)} accent={DEF.accent} title="Provocarea zilei" />
-            )}
-            <StatBadge label="DIFICULTATE" value={DIFF_LABEL[state.difficulty]} accent={DEF.accent} />
-            {state.board_category && (
-              <StatBadge
-                label="CATEGORIE"
-                value={categoryLabel(state.board_category)}
-                accent={categoryColor(state.board_category)}
-              />
-            )}
-          </Csp.div>
-        </GameOptions>
 
         {/* Lose reveal */}
         {state.lost && state.solution && (
@@ -869,75 +576,29 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
                 <SolvedRow
                   key={g.key}
                   group={g}
-                  color={GROUP_COLORS[state.solved.length + index]}
-                  dim
+                  index={state.solved.length + index}
                 />
               ))}
           </Csp.div>
         )}
 
-        {/* Finish banner */}
         {finished && (
-            <ResultCard
-              startFailed={startFailed}
-              actionsBusy={!isPresent || loading}
-              icon={state.won ? "🎉" : "💔"}
-              title={state.won ? "Ai găsit toate grupurile!" : "Nu mai ai greșeli disponibile."}
-              accent={DEF.accent}
-              won={state.won}
-              score={state.score}
-              isRecord={recordHit}
-              isPuzzleRecord={puzzleRecordHit}
-              shareText={sharePayload}
-              onCopy={copyShare}
-              onReplay={() => void start({ kind: "seed", difficulty })}
-              onOptions={() => {
-                if (!liveRef.current || startInFlight.current) return;
-                actionOwner.invalidate();
-                setActionSync(null);
-                setBusy(false);
-                setState(null);
-              }}
-              onExit={handleExit}
-            >
-              {state.mistakes} {state.mistakes === 1 ? "greșeală" : "greșeli"}
-            </ResultCard>
+          <ResultCard title={state.won ? "Ai găsit toate grupurile!" : "Nu a ieșit de data asta"}
+            steps={state.steps} perfect={state.perfect && mode !== "Reluare"} actionsBusy={loading}
+            onCopy={sharePayload ? copyShare : undefined} onReplay={() => startEntry(state.game_id)} onExit={handleExit} />
         )}
-      </Csp.div>
-    </Csp.div>
+        </>}
+        </GameFrame>
+      </div>
+    </div>
   );
 }
 
-function SolvedRow({
-  group,
-  color,
-  dim,
-}: {
-  group: SolvedGroup;
-  color: string;
-  dim?: boolean;
-}) {
+function SolvedRow({ group, index }: { group: SolvedGroup; index: number }) {
   return (
-    <Csp.div
-      className={dim ? "card col connections-solved-enter connections-solved-enter--dim" : "card col connections-solved-enter"}
-      css={{
-        padding: "12px",
-        gap: "6px",
-        borderColor: color,
-        background: `color-mix(in srgb, var(--surface) 78%, ${color})`,
-        opacity: dim ? 0.7 : 1,
-      }}
-    >
-      <Csp.span css={{ fontWeight: 700, color: "var(--text)", letterSpacing: "0.03em" }}>
-        {group.label}
-      </Csp.span>
-      <Csp.div className="row wrap" css={{ gap: "6px" }}>
-        {group.tiles.map((t) => (
-          <Csp.span key={t.id} className="chip" css={{ borderColor: color }}>
-            {t.label}
-          </Csp.span>
-        ))}
-      </Csp.div>
-    </Csp.div>
+    <div className={`card connections-solved-row connections-group-${index + 1}`}>
+      <strong>{group.label}</strong>
+      <span>{group.tiles.map((tile) => tile.label).join(" · ")}</span>
+    </div>
   );
 }

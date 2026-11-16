@@ -2,6 +2,7 @@
 // ("/api/wordgames/alchimie/..."), server-authoritative: the target id is only revealed
 // by the backend once the player has actually crafted it.
 
+import type { PerfectRoundCounters } from "./round";
 import { getJson, postJson } from "./client";
 
 export interface Concept {
@@ -55,7 +56,7 @@ export interface TargetView {
 
 export type Difficulty = "usor" | "normal" | "greu";
 
-export interface AlchimieState {
+export interface AlchimieState extends PerfectRoundCounters {
   game_id: string;
   target: TargetView;
   inventory: InventoryItem[];
@@ -75,7 +76,7 @@ export interface AlchimieState {
   /** True once the player is genuinely stuck and a nudge can be requested. */
   hint_available: boolean;
   /** What the next progressive hint will reveal. */
-  hint_stage: "output" | "pair";
+  hint_stage: "output" | "ingredient" | "pair";
   /** One paid, public cue; cleared by a new unique experiment or reset. */
   earned_hint?: EarnedHint;
   daily?: string;
@@ -98,9 +99,10 @@ export interface CombineResult extends AlchimieState {
 export interface EarnedHint {
   /** The two concepts the nudge suggests combining, or null if unavailable. */
   hint: [Concept, Concept] | null;
-  hint_kind: "output" | "category" | "pair" | "none";
+  hint_kind: "output" | "category" | "ingredient" | "pair" | "none";
   /** First hint: label only, never the private output/target id. */
   hint_output: { label: string } | null;
+  hint_ingredient?: Concept;
   message: string;
 }
 

@@ -24,12 +24,10 @@ export function stableKey(parts: Array<string | number | null | undefined>): str
 
 export function buildSharePayload({
   serverShare,
-  score,
   appUrl: url = appUrl(),
 }: SharePayloadOptions): string {
   const result = serverShare.trim().replace(/^cat_de_roman_esti/u, "Cât de român ești?");
   const lines = [result, "", `Joacă: ${url}`];
-  if (score !== undefined) lines.push(`Scor: ${score}`);
   // gameTitle/puzzleKey remain input metadata for call-site compatibility and local
   // records, but internal puzzle ids are deliberately absent from human-facing shares.
   return lines.join("\n");

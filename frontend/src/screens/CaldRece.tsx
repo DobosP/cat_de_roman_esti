@@ -10,15 +10,12 @@ import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } fr
 import { Presence, useIsPresent, type PresenceVariant } from "@roedu/ui/motion";
 import { useElementMotion } from "../hooks/useElementMotion";
 import { Button, type ToastKind } from "@roedu/ui";
-import { GameShell } from "../components/GameShell";
 import { CONTEXTO_HELP } from "../gameHelp/contexto.mjs";
-import { GameIntro } from "../components/GameIntro";
-import { GameHelp } from "../components/GameHelp";
-import { GameOptions } from "../components/GameOptions";
-import { GameSetupOptions } from "../components/GameSetupOptions";
-import { Hud, StatBadge } from "../components/Hud";
+import { GameFrame, Attempts, CoachLine } from "../components/GameFrame";
+import { FreeRoundOptions } from "../components/FreeRoundOptions";
+import { HintBar } from "../components/HintBar";
+import { useGameEntry, useRoundStart } from "../hooks/useGameEntry";
 import { ResultCard } from "../components/ResultCard";
-import { DifficultyPicker } from "../components/DifficultyPicker";
 import { sound } from "../sound";
 import {
   contextoApi,
@@ -31,7 +28,6 @@ import {
   type GuessResult,
   type Temperature,
 } from "../api/contexto";
-import { bestScore } from "../scores/read";
 import { useRecordScore } from "../hooks/useRecordScore";
 import { useActiveGame } from "../hooks/useActiveGame";
 import { useSavedGameResume } from "../hooks/useSavedGameResume";
@@ -41,16 +37,11 @@ import {
   type GameActionTicket,
 } from "../gameActionRecovery.mjs";
 import { gameByKey } from "../games";
-import { categoryColor, categoryLabel } from "../categories";
-import { CategoryPicker } from "../components/CategoryPicker";
-import { buildSharePayload, copyResult, formatDayKey, stableKey, todayLocal } from "../share";
+import { buildSharePayload, copyResult, stableKey } from "../share";
 
 const GAME_KEY = "contexto";
 const DEF = gameByKey("contexto");
-const CLUE_UNLOCK_ATTEMPTS = 3;
 const RECOVERY_VARIANT: PresenceVariant = { enter: { opacity: [0, 1], transform: ["translateY(-6px)", "translateY(0px)"] }, exit: { opacity: [1, 0], transform: ["translateY(0px)", "translateY(-6px)"] } };
-const REVEAL_VARIANT: PresenceVariant = { enter: { opacity: [0, 1], transform: ["translateY(-4px)", "translateY(0px)"] }, exit: { opacity: [1, 0], transform: ["translateY(0px)", "translateY(-4px)"] } };
-const COMPARISON_VARIANT: PresenceVariant = { ...RECOVERY_VARIANT, transition: { spring: { stiffness: 320, damping: 24 } } };
 
 const isTerminalResume = (state: ContextoState) => state.won || state.gave_up;
 
@@ -59,12 +50,6 @@ const DIFFICULTY_LABEL: Record<Difficulty, string> = {
   normal: "Normal",
   greu: "Greu",
 };
-
-const DIFFICULTIES: { id: Difficulty; label: string; hint: string }[] = [
-  { id: "usor", label: DIFFICULTY_LABEL.usor, hint: "recomandat" },
-  { id: "normal", label: "Normal", hint: "echilibrat" },
-  { id: "greu", label: DIFFICULTY_LABEL.greu, hint: "asocieri mai dificile" },
-];
 
 type GuessRecovery = {
   message: string;
@@ -77,27 +62,6 @@ type GuessRecovery = {
 type GuessView = "best" | "recent";
 type ActionSync = { gameId: string; kind: "failed" | "changed" };
 
-const FEEDBACK_ICON: Record<GuessFeedback["kind"], string> = {
-  first: "📍",
-  "new-best": "✨",
-  warmer: "🔥",
-  colder: "❄️",
-  same: "↔️",
-  repeat: "↻",
-  found: "🎯",
-};
-
-// Temperature -> colour on a hot/cold gradient (hot = red/orange, cold = blue).
-const TEMP_COLOR: Record<Temperature, string> = {
-  Gasit: "#5fd99b",
-  Fierbinte: "#ff5d3b",
-  Cald: "#f4a259",
-  Caldut: "#ffd166",
-  Rece: "#8ec5ff",
-  "Foarte rece": "#84bef8",
-  Inghetat: "#7bb8f2",
-};
-
 const TEMP_ICON: Record<Temperature, string> = {
   Gasit: "🎯",
   Fierbinte: "🔥",
@@ -109,6 +73,8 @@ const TEMP_ICON: Record<Temperature, string> = {
 };
 
 // API tokens stay ASCII for compatibility; only their player-facing labels are localized.
+const THERMOMETER_ZONES: Temperature[] = ["Inghetat", "Rece", "Caldut", "Cald", "Fierbinte", "Gasit"];
+
 const TEMP_LABEL: Record<Temperature, string> = {
   Gasit: "Găsit",
   Fierbinte: "Fierbinte",
@@ -119,72 +85,19 @@ const TEMP_LABEL: Record<Temperature, string> = {
   Inghetat: "Înghețat",
 };
 
-function barColor(g: Guess): string {
-  return TEMP_COLOR[g.temperature] ?? "#9aa3b2";
-}
-
 function GuessRow({ g, isLatest }: { g: Guess; isLatest: boolean }) {
-  const color = barColor(g);
   const pct = Math.max(2, Math.min(100, g.closeness));
   const element = useRef<HTMLDivElement>(null);
   useElementMotion(element, isLatest ? { opacity: [0, 1], transform: ["translateY(-10px) scale(0.97)", "translateY(0px) scale(1)"] } : false,
     { spring: { stiffness: 380, damping: 28 } }, []);
   return (
-    <Csp.div
-      ref={element}
-      className="card contexto-guess-row"
-      css={{
-        position: "relative",
-        overflow: "hidden",
-        padding: "10px 14px",
-        display: "grid",
-        gap: "8px",
-        borderColor: isLatest ? color : "var(--surface-border)",
-        boxShadow: isLatest ? `0 0 22px -10px ${color}` : undefined,
-      }}
-    >
-      {/* hot/cold fill bar */}
-      <Csp.div
-        aria-hidden
-        css={{
-          position: "absolute",
-          inset: "0px",
-          width: `${pct}%`,
-          background: `linear-gradient(90deg, ${color}26, ${color}0d)`,
-          transition: "width 0.5s cubic-bezier(0.2,0.7,0.3,1)",
-        }}
-      />
-      <Csp.div
-        className="row spread"
-        css={{ position: "relative", gap: "10px", alignItems: "center" }}
-      >
-        <Csp.span className="row" css={{ gap: "8px", alignItems: "center" }}>
-          <Csp.span aria-hidden css={{ fontSize: "1.1rem" }}>
-            {TEMP_ICON[g.temperature]}
-          </Csp.span>
-          <Csp.strong css={{ fontSize: "0.98rem" }}>{g.label}</Csp.strong>
-        </Csp.span>
-        <Csp.span className="row" css={{ gap: "8px", alignItems: "center" }}>
-          <Csp.span
-            className="badge"
-            css={{ borderColor: color, color: color, fontWeight: 700 }}
-          >
-            {TEMP_LABEL[g.temperature]}
-          </Csp.span>
-          <Csp.span
-            className="badge"
-            css={{
-              borderColor: color,
-              color: color,
-              fontWeight: 800,
-              fontVariantNumeric: "tabular-nums",
-            }}
-            title="Al câtelea cel mai apropiat de conceptul secret (#1 = secretul)"
-          >
-            #{g.rank}
-          </Csp.span>
-        </Csp.span>
-      </Csp.div>
+    <Csp.div ref={element} className="card contexto-guess-row" data-temperature={g.temperature}
+      css={{ "--guess-progress": `${pct}%` }}>
+      <strong>{g.label}</strong>
+      <span className="contexto-temperature">
+        <span aria-hidden="true">{TEMP_ICON[g.temperature]}</span> {TEMP_LABEL[g.temperature]}
+      </span>
+      <strong className="contexto-rank" title="Locul 1 este cuvântul secret">#{g.rank}</strong>
     </Csp.div>
   );
 }
@@ -204,29 +117,26 @@ export default function CaldRece({
   onToast: (message: string, kind?: ToastKind) => void;
 }) {
   const isPresent = useIsPresent(), liveRef = useRef(true);
+  const active = useActiveGame(GAME_KEY);
+  const entry = useGameEntry(GAME_KEY, active);
+  const { admit, remember, complete } = entry;
   const lifetimeRef = useRef(0);
   const [state, setState] = useState<ContextoState | null>(null);
   const [startFailed, setStartFailed] = useState(false);
+  const [unavailable, setUnavailable] = useState(false);
   const startInFlightRef = useRef(false);
   const [text, setText] = useState("");
-  const [busy, setBusy] = useState(false);
+  const [busy, setBusy] = useState(() => active.peek() !== null);
+  const [feedbackRevision, repeatFeedback] = useState(0);
   const [latestId, setLatestId] = useState<string | null>(null);
   const [feedback, setFeedback] = useState<GuessFeedback | null>(null);
   const [guessView, setGuessView] = useState<GuessView>("best");
   const [confirmReveal, setConfirmReveal] = useState(false);
   const [recovery, setRecovery] = useState<GuessRecovery | null>(null);
   const [actionSync, setActionSync] = useState<ActionSync | null>(null);
-  const [difficulty, setDifficulty] = useState<Difficulty>("usor");
-  const [category, setCategory] = useState<string | null>(null);
-  // Intro is shown until the player picks how to start.
-  const [showIntro, setShowIntro] = useState(true);
-  const [isRecord, setIsRecord] = useState(false);
-  const [isPuzzleRecord, setIsPuzzleRecord] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const restoreInputFocusRef = useRef(false);
-  const unconfirmedActionRef = useRef(false);
   const recordOnce = useRecordScore("contexto");
-  const active = useActiveGame("contexto");
   const actionOwner = useMemo(() => createGameActionOwner(active), [active]);
 
   useLayoutEffect(() => {
@@ -235,32 +145,28 @@ export default function CaldRece({
     return () => { liveRef.current = false; lifetimeRef.current += 1; actionOwner.invalidate(); };
   }, [actionOwner, isPresent]);
 
-  const best = bestScore(GAME_KEY);
-
   const applyResumedGame = useCallback(
-    (saved: ContextoState, { terminal, bypassed }: { terminal: boolean; bypassed: boolean }) => {
-      if (!liveRef.current) return;
+    (saved: ContextoState, { terminal }: { terminal: boolean }) => {
+      if (!liveRef.current || !admit(saved, terminal)) return;
       actionOwner.invalidate();
-      unconfirmedActionRef.current = false;
       setActionSync(null);
       setStartFailed(false);
       setState(saved);
-      setDifficulty(saved.difficulty);
-      setCategory(saved.board_category ?? null);
+
+
       setLatestId(null);
       setFeedback(null);
       setGuessView("best");
       setConfirmReveal(false);
       setText("");
       setRecovery(null);
-      setIsRecord(false);
-      setIsPuzzleRecord(false);
-      setShowIntro(false);
+
+
+
       restoreInputFocusRef.current = true;
-      // The daily-bypass notice already says the round was resumed.
-      if (!terminal && !bypassed) onToast("Joc reluat.", "info");
+
     },
-    [actionOwner, onToast],
+    [actionOwner, admit],
   );
 
   const { recovery: resumeRecovery, retryResume, cancelResume, dismissRecovery } = useSavedGameResume({
@@ -275,10 +181,9 @@ export default function CaldRece({
       if (!active.peek() && state) {
         if (!isTerminalResume(state)) setActionSync({ gameId: state.game_id, kind: "failed" });
       } else {
-        setState(null); setShowIntro(true); setActionSync(null); setRecovery(null);
+        setState(null); setActionSync(null); setRecovery(null);
       }
     },
-    onDailyBypassed: () => onToast("Ai continuat jocul liber început. Provocarea zilei te așteaptă după ce îl termini.", "info"),
   });
 
   const start = useCallback(
@@ -289,14 +194,14 @@ export default function CaldRece({
       actionOwner.invalidate();
       cancelResume();
       setStartFailed(false);
+      setUnavailable(false);
       setBusy(true);
       try {
         const fresh = await contextoApi.createGame(opts);
         if (!liveRef.current || epoch !== lifetimeRef.current) return;
         setState(fresh);
-        active.remember(fresh.game_id);
+        remember(fresh);
         dismissRecovery();
-        unconfirmedActionRef.current = false;
         setActionSync(null);
         setLatestId(null);
         setFeedback(null);
@@ -304,9 +209,9 @@ export default function CaldRece({
         setConfirmReveal(false);
         setText("");
         setRecovery(null);
-        setIsRecord(false);
-        setIsPuzzleRecord(false);
-        setShowIntro(false);
+
+
+
         restoreInputFocusRef.current = true;
       } catch {
         if (liveRef.current && epoch === lifetimeRef.current) setStartFailed(true);
@@ -317,7 +222,7 @@ export default function CaldRece({
         }
       }
     },
-    [active, actionOwner, cancelResume, dismissRecovery],
+    [actionOwner, cancelResume, dismissRecovery, remember],
   );
 
   const won = state?.won ?? false;
@@ -329,13 +234,13 @@ export default function CaldRece({
   useLayoutEffect(() => {
     if (!liveRef.current || busy || !restoreInputFocusRef.current) return;
     const input = inputRef.current;
-    if (!input || finished || showIntro || actionSync) return;
+    if (!input || finished || actionSync) return;
     if (input.disabled) return;
     restoreInputFocusRef.current = false;
     if (document.activeElement === document.body || document.activeElement === input) {
       input.focus({ preventScroll: true });
     }
-  }, [busy, finished, showIntro, actionSync]);
+  }, [busy, finished, actionSync]);
 
   const puzzleKey = useMemo(() => {
     if (!state?.won || !state.target) return null;
@@ -348,11 +253,10 @@ export default function CaldRece({
   }, [state]);
 
   const sharePayload = useMemo(() => {
-    if (!state?.won || !state.share) return null;
+    if (!state?.target || (!state.won && !state.gave_up)) return null;
     return buildSharePayload({
       gameTitle: DEF.title,
-      serverShare: state.share,
-      score: state.score,
+      serverShare: state.share ?? `Am renunțat. Cuvântul secret era „${state.target.label}”.`,
       puzzleKey,
     });
   }, [state, puzzleKey]);
@@ -360,35 +264,17 @@ export default function CaldRece({
   // Record the score exactly once when a game is won.
   useEffect(() => {
     if (!liveRef.current || !state || (!state.won && !state.gave_up)) return;
-    if (!state.won || state.score === undefined) {
-      active.forgetIfCurrent(state.game_id);
-      return;
-    }
     const attemptsLabel = state.attempts === 1 ? "încercare" : "încercări";
-    const detail = state.daily
-      ? `Zilnic ${state.daily} · ${state.attempts} ${attemptsLabel}`
+    const detail = state.gave_up ? "Renunțare"
+      : state.daily ? `Zilnic ${state.daily} · ${state.attempts} ${attemptsLabel}`
       : `${DIFFICULTY_LABEL[state.difficulty]} · ${state.attempts} ${attemptsLabel}`;
-    let current = true;
-    void recordOnce(state.game_id, state.score, detail, {
+    void recordOnce(state.game_id, state.score ?? 0, detail, {
       puzzleKey,
       difficulty: state.difficulty,
       daily: state.daily,
+      steps: state.steps,
       category: state.board_category,
-    }).then((outcome) => {
-      active.forgetIfCurrent(state.game_id);
-      if (!current || !liveRef.current || !outcome) return;
-      const { isBest, isPuzzleBest } = outcome;
-      setIsPuzzleRecord(isPuzzleBest);
-      if (isBest) {
-        setIsRecord(true);
-        sound.playRecord();
-      } else if (isPuzzleBest) {
-        sound.playRecord();
-      }
-    });
-    return () => {
-      current = false;
-    };
+    }).then(() => { active.forgetIfCurrent(state.game_id); });
   }, [state, puzzleKey, recordOnce, active, isPresent]);
 
   const beginAction = useCallback((previous: ContextoState) => {
@@ -402,7 +288,6 @@ export default function CaldRece({
       setActionSync({ gameId: previous.game_id, kind: "changed" });
       return null;
     }
-    unconfirmedActionRef.current = true;
     return ticket;
   }, [actionOwner]);
 
@@ -433,10 +318,10 @@ export default function CaldRece({
         setActionSync({ gameId: ticket.gameId, kind: "changed" });
         return;
       }
-      unconfirmedActionRef.current = false;
       setActionSync(null);
       setState(null);
-      setShowIntro(true);
+      setUnavailable(true);
+
       onToast("Jocul nu mai este disponibil. Poți începe altul.", "info");
       return;
     }
@@ -445,7 +330,6 @@ export default function CaldRece({
       return;
     }
     const fresh = outcome.state;
-    unconfirmedActionRef.current = false;
     setActionSync(null);
     setState(fresh);
     setConfirmReveal(false);
@@ -465,7 +349,7 @@ export default function CaldRece({
     if (actionSync.kind === "changed") {
       actionOwner.invalidate();
       setActionSync(null);
-      setShowIntro(true);
+
       retryResume();
       return;
     }
@@ -500,7 +384,6 @@ export default function CaldRece({
           confirm,
         );
         if (!mayAdoptAction(ticket)) return;
-        unconfirmedActionRef.current = false;
         if (!res.ok) {
           sound.playError();
           setRecovery({
@@ -518,6 +401,9 @@ export default function CaldRece({
                   ...prev,
                   guesses: res.guesses,
                   attempts: res.attempts,
+                  steps: res.steps,
+                  hints_left: res.hints_left,
+                  hint_level: res.hint_level,
                   clues_used: res.clues_used,
                   clue_available: res.clue_available,
                   next_clue_kind: res.next_clue_kind,
@@ -531,6 +417,7 @@ export default function CaldRece({
         setText("");
         setLatestId(res.guess.id);
         setFeedback(res.feedback);
+        repeatFeedback((revision) => revision + 1);
         if (res.message) {
           setRecovery({ message: res.message, choices: [], tone: "info" });
         }
@@ -540,6 +427,9 @@ export default function CaldRece({
                 ...prev,
                 guesses: res.guesses,
                 attempts: res.attempts,
+                steps: res.steps,
+                hints_left: res.hints_left,
+                hint_level: res.hint_level,
                 won: res.won,
                 clues_used: res.clues_used,
                 clue_available: res.clue_available,
@@ -570,7 +460,7 @@ export default function CaldRece({
   );
 
   const handleClue = useCallback(async () => {
-    if (!state || busy || finished || actionSync || !state.clue_available) return;
+    if (!state || busy || finished || actionSync || !state.hints_left) return;
     const ticket = beginAction(state);
     if (!ticket) return;
     setConfirmReveal(false);
@@ -579,8 +469,8 @@ export default function CaldRece({
     try {
       const res = await contextoApi.requestClue(state.game_id);
       if (!mayAdoptAction(ticket)) return;
-      unconfirmedActionRef.current = false;
       sound.playSelect();
+      setFeedback(null);
       setState(res);
     } catch {
       await reconcileAction(ticket, state);
@@ -603,7 +493,6 @@ export default function CaldRece({
     try {
       const res = await contextoApi.giveUp(state.game_id);
       if (!mayAdoptAction(ticket)) return;
-      unconfirmedActionRef.current = false;
       sound.playUndo();
       setState(res);
     } catch {
@@ -625,32 +514,15 @@ export default function CaldRece({
     onToast(ok ? "Copiat!" : "Nu am putut copia.", ok ? "info" : "error");
   }, [sharePayload, onToast]);
 
-  const showOptions = useCallback(() => {
-    if (startInFlightRef.current || actionOwner.hasPending() || actionSync) return;
-    if (!finished && state) active.forgetIfCurrent(state.game_id);
-    actionOwner.invalidate();
-    setConfirmReveal(false);
-    setFeedback(null);
-    setRecovery(null);
-    setShowIntro(true);
-  }, [active, finished, state, actionOwner, actionSync]);
-
-  // Live-board exits are permanent. Terminal cleanup is conditional on its own ID: scored
-  // wins wait for completion, while a no-score giveup is cleared by its terminal effect.
   const handleExit = useCallback(() => {
     if (startInFlightRef.current) return;
-    // An uncertain terminal action may still own a score that has not reached this
-    // screen. Keep its pointer for ordinary saved-game recovery after leaving.
-    if (!finished && state && !actionOwner.hasPending() && !unconfirmedActionRef.current && !actionSync) {
-      active.forgetIfCurrent(state.game_id);
-    }
     actionOwner.invalidate();
     setConfirmReveal(false);
     setFeedback(null);
     liveRef.current = false;
     cancelResume();
     onExit();
-  }, [active, finished, state, actionOwner, actionSync, cancelResume, onExit]);
+  }, [actionOwner, cancelResume, onExit]);
 
   const guesses = state?.guesses ?? [];
   const bestGuess = guesses[0];
@@ -660,122 +532,47 @@ export default function CaldRece({
       : [...guesses].sort(
           (left, right) => right.attempt_number - left.attempt_number,
         );
-  const clueCountdown = Math.max(
-    0,
-    CLUE_UNLOCK_ATTEMPTS - (state?.attempts ?? 0),
-  );
-  const clueActionLabel = state?.clue_available
-    ? state.next_clue_kind === "warmer"
-      ? "Mai cald"
-      : "Indiciu"
-    : clueCountdown > 0
-      ? `Indiciu după ${clueCountdown} ${clueCountdown === 1 ? "încercare" : "încercări"}`
-      : "Indiciu";
   // The most recently played guess (may sort anywhere in the list) — surfaced as an
   // explicit verdict so feedback is always visible, not buried by best-first sorting.
   const latestGuess = latestId
     ? (guesses.find((g) => g.id === latestId) ?? null)
     : null;
 
-  // ---- Intro: difficulty picker + daily challenge + personal best. ----
-  if (showIntro) {
-    return (
-      <div className="screen-pad fill">
-        <Csp.div
-          className="container col game-container"
-          css={{ gap: "18px", paddingBlock: "8px" }}
-        >
-          <Csp.div css={{ width: "100%" }}>
-            <GameShell onExit={handleExit} accent={DEF.accent} busy={busy} />
-          </Csp.div>
-
-          <GameIntro
-            startFailed={startFailed}
-            resumeRecovery={resumeRecovery ? {
-              kind: resumeRecovery.kind,
-              canRetry: resumeRecovery.kind === "failed" || resumeRecovery.hasCurrent,
-              onRetry: retryResume,
-            } : null}
-            icon={`${DEF.icon}🧊`}
-            title={DEF.title}
-            tag={DEF.tag}
-            accent={DEF.accent}
-            glow={DEF.glow}
-            description={
-              <Csp.p css={{ margin: "0px" }}>
-                Găsește secretul urmărind cât de cald e fiecare cuvânt.
-              </Csp.p>
-            }
-            steps={[
-              { icon: "⌨️", label: "Scrie un cuvânt" },
-              { icon: "🔥", label: "Vezi căldura" },
-              { icon: "🎯", label: "Apropie-te" },
-            ]}
-            best={best}
-            startLabel="Joacă"
-            onStart={() => void start({ difficulty, category: category ?? undefined })}
-            onDaily={() => void start({ difficulty, daily: todayLocal() })}
-            dailyLabel="Provocarea zilei"
-            starting={!isPresent || busy}
-          >
-            <GameSetupOptions>
-              <Csp.div css={{ width: "100%", maxWidth: "420px" }}>
-                <DifficultyPicker
-                  options={DIFFICULTIES}
-                  value={difficulty}
-                  onChange={(id) => {
-                    sound.playSelect();
-                    setDifficulty(id);
-                  }}
-                />
-              </Csp.div>
-              <Csp.div css={{ width: "100%", maxWidth: "420px" }}>
-                <CategoryPicker
-                  game="contexto"
-                  difficulty={difficulty}
-                  value={category}
-                  onChange={(key) => {
-                    sound.playSelect();
-                    setCategory(key);
-                  }}
-                  onInvalid={() => setCategory(null)}
-                  accent={DEF.accent}
-                />
-              </Csp.div>
-            </GameSetupOptions>
-          </GameIntro>
-        </Csp.div>
-      </div>
-    );
-  }
+  const nextRound = () => void start({ difficulty: entry.options.difficulty, category: entry.options.category ?? undefined });
+  const startEntry = useRoundStart(entry, !state && !busy && !startFailed && !resumeRecovery && !unavailable, retryResume,
+    (daily) => daily ? void start({ daily, difficulty: "usor" }) : nextRound());
+  const mode = entry.mode(state);
+  useLayoutEffect(() => {
+    if (state && finished && isPresent) complete(state);
+  }, [state, finished, isPresent, complete]);
 
   return (
-    // Whole-screen scroll (the .screen-pad owns overflow-y): the header/title flow
-    // and scroll away; the input stays pinned. The old fixed-header +
-    // inner-scroll-list layout collapsed the list to ~0px on short/phone viewports
-    // (worst with the keyboard up), stranding the guesses; single-scroll keeps every
-    // guess reachable at any height.
     <div className="screen-pad fill contexto-screen">
-      <Csp.div className="container col game-container" css={{ gap: "12px", paddingBlock: "8px" }}>
-        {/* header */}
-        <GameShell onExit={handleExit} accent={DEF.accent} title={DEF.title} busy={busy && finished}>
-          <Hud>
-            <StatBadge
-              label="Încercări"
-              value={`${state?.attempts ?? 0} ${state?.attempts === 1 ? "încercare" : "încercări"}`}
-              accent={DEF.accent}
-              title="Încercări"
-            />
-            {(state?.clues_used ?? 0) > 0 && (
-              <StatBadge
-                label="Indiciu"
-                value={`x${state?.clues_used}`}
-                accent={DEF.accent}
-                title="Indicii folosite"
-              />
-            )}
-          </Hud>
-        </GameShell>
+      <div className="container game-container">
+        <GameFrame game={DEF} mode={mode} onExit={handleExit} help={CONTEXTO_HELP} busy={busy && (!state || finished)}
+          startFailed={startFailed} unavailable={unavailable} onStart={() => startEntry(state?.game_id)} resumeRecovery={resumeRecovery} onResume={retryResume}
+          status={state && <Attempts remaining={state.attempts} />}
+          options={<FreeRoundOptions game={GAME_KEY} value={entry.options} onChange={entry.updateOptions} />}
+          tools={state && !finished ? (close) => (
+            confirmReveal ? (
+              <div className="contexto-reveal-confirm" id="contexto-reveal-confirmation" role="alert">
+                <span>Arătăm răspunsul?</span>
+                <RevealCancelButton onCancel={() => setConfirmReveal(false)} disabled={!isPresent || busy || actionSync !== null} />
+                <Button type="button" onClick={() => { close(); void handleGiveUp(); }} disabled={busy || actionSync !== null}>
+                  Da, arată
+                </Button>
+              </div>
+            ) : <Button type="button" variant="secondary" onClick={requestRevealConfirmation} disabled={busy || actionSync !== null}>
+              Renunț la rundă și vreau să văd răspunsul
+            </Button>
+          ) : undefined}>
+        {state && <>
+        {!finished && !actionSync && (
+          <CoachLine revision={feedbackRevision}>
+            {feedback && latestGuess ? `${latestGuess.label} · ${feedback.message}`
+              : state.warm_clue?.message ?? state.clue?.message ?? "Scrie un cuvânt și vezi cât de aproape ești."}
+          </CoachLine>
+        )}
 
         {/* The guess field stays within reach while the ranked words scroll. */}
         <div className="contexto-sticky-controls">
@@ -813,7 +610,6 @@ export default function CaldRece({
               }}
               disabled={!isPresent || busy || finished || actionSync !== null}
               autoComplete="off"
-              autoFocus
               spellcheck={false}
               aria-label="Concept de ghicit"
               aria-describedby="contexto-rank-guide"
@@ -823,7 +619,7 @@ export default function CaldRece({
               type="submit"
               disabled={!isPresent || busy || finished || actionSync !== null || !text.trim()}
             >
-              Ghicește
+              Trimite
             </Button>
           </Csp.form>
           <p id="contexto-rank-guide" className="faint contexto-rank-guide">
@@ -831,149 +627,12 @@ export default function CaldRece({
           </p>
         </div>
 
-        <div className="contexto-tools">
-          {!finished && <div className="contexto-action-row" aria-label="Acțiuni joc">
-            <Button
-              type="button"
-              variant="secondary"
-              size="sm"
-              onClick={() => void handleClue()}
-              aria-describedby="contexto-clue-cost"
-              disabled={!isPresent || busy || finished || actionSync !== null || !state?.clue_available}
-              title={
-                state?.clue_available
-                  ? state.next_clue_kind === "warmer"
-                    ? "Arată un cuvânt sigur mai cald"
-                    : "Arată categoria conceptului secret"
-                  : clueCountdown > 0
-                    ? `Disponibil după încă ${clueCountdown} ${clueCountdown === 1 ? "încercare" : "încercări"}`
-                    : "Nu mai există un indiciu sigur"
-              }
-            >
-              {clueActionLabel}
-            </Button>
-            <span id="contexto-clue-cost" className="faint contexto-clue-cost">
-              {!state?.clue_available && clueCountdown === 0
-                ? "Nu mai sunt indicii pentru această rundă."
-                : "−120 puncte / indiciu"}
-            </span>
-          </div>}
-
-          <GameOptions>
-            <Csp.div className="row wrap" css={{ gap: "8px" }}>
-              <StatBadge
-                label="Mod"
-                value={
-                  state?.daily
-                    ? `📅 ${formatDayKey(state.daily)}`
-                    : DIFFICULTY_LABEL[state?.difficulty ?? difficulty]
-                }
-                accent={DEF.accent}
-                title="Mod de joc"
-              />
-              {state?.board_category && (
-                <StatBadge
-                  label="Categorie"
-                  value={categoryLabel(state.board_category)}
-                  accent={categoryColor(state.board_category)}
-                />
-              )}
-            </Csp.div>
-            <Button
-              type="button"
-              variant="secondary"
-              size="sm"
-              onClick={requestRevealConfirmation}
-              disabled={!isPresent || busy || finished || actionSync !== null || !state}
-              aria-expanded={confirmReveal}
-              aria-controls="contexto-reveal-confirmation"
-            >
-              Arată răspunsul
-            </Button>
-            <Button
-              type="button"
-              variant="secondary"
-              size="sm"
-              onClick={showOptions}
-              disabled={!isPresent || busy || actionSync !== null}
-              title="Părăsește runda curentă și revino la alegerea dificultății și categoriei"
-            >
-              Începe alt joc
-            </Button>
-            <Presence initial={false} variant={REVEAL_VARIANT}>
-              {confirmReveal && !finished && (
-                <div
-                  id="contexto-reveal-confirmation"
-                  key="reveal-confirmation"
-                  className="contexto-reveal-confirm"
-                  role="alert"
-                >
-                  <span>Arătăm răspunsul?</span>
-                  <RevealCancelButton onCancel={() => setConfirmReveal(false)} disabled={!isPresent || busy || actionSync !== null} />
-                  <Button
-                    type="button"
-                    size="sm"
-                    onClick={() => void handleGiveUp()}
-                    disabled={!isPresent || busy || actionSync !== null}
-                  >
-                    Da, arată
-                  </Button>
-                </div>
-              )}
-            </Presence>
-            {guesses.length > 1 && (
-              <div
-                className="contexto-guess-tabs"
-                role="group"
-                aria-label="Ordinea încercărilor"
-              >
-                <button
-                  type="button"
-                  aria-pressed={guessView === "best"}
-                  className={guessView === "best" ? "is-active" : ""}
-                  onClick={() => {
-                    sound.playSelect();
-                    setGuessView("best");
-                  }}
-                >
-                  Bune
-                </button>
-                <button
-                  type="button"
-                  aria-pressed={guessView === "recent"}
-                  className={guessView === "recent" ? "is-active" : ""}
-                  onClick={() => {
-                    sound.playSelect();
-                    setGuessView("recent");
-                  }}
-                >
-                  Recente
-                </button>
-              </div>
-            )}
-
-          </GameOptions>
-        </div>
-        <GameHelp help={CONTEXTO_HELP} />
-
-        <span
-          className="visually-hidden"
-          role="status"
-          aria-live="polite"
-          aria-atomic="true"
-        >
-          {!finished ? (recovery?.message ?? "") : ""}
-        </span>
-
         <Presence variant={RECOVERY_VARIANT}>
           {!finished && recovery && (
             <Csp.div
               key={`${recovery.tone}-${recovery.message}`}
-              className="card"
-              css={{
-                padding: "12px",
-                borderColor: recovery.tone === "warning" ? "var(--warn)" : DEF.accent,
-              }}
+              className="card" role="alert"
+              css={{ padding: "12px" }}
             >
               <Csp.div className="col" css={{ gap: "8px" }}>
                 <span>
@@ -1023,171 +682,56 @@ export default function CaldRece({
           )}
         </Presence>
 
-        {(state?.clue || state?.warm_clue) && !finished && (
-          <Csp.div
-            className="col"
-            css={{ gap: "8px" }}
-            aria-label="Indicii folosite"
-            aria-live="polite"
-          >
-            {state.clue && (
-              <Csp.div
-                className="row spread"
-                css={{
-                  gap: "10px",
-                  alignItems: "center",
-                  padding: "9px 12px",
-                  borderRadius: "12px",
-                  border: `1px solid ${DEF.accent}66`,
-                  background: `${DEF.accent}12`,
-                }}
-              >
-                <Csp.span className="muted" css={{ fontSize: "0.82rem" }}>
-                  🧭 Categorie
-                </Csp.span>
-                <strong>{state.clue.category.label}</strong>
-              </Csp.div>
-            )}
-            {state.warm_clue && (
-              <Csp.div
-                className="row spread"
-                css={{
-                  gap: "10px",
-                  alignItems: "center",
-                  padding: "10px 12px",
-                  borderRadius: "12px",
-                  border: "1px solid #f4a25999",
-                  background: "rgba(244, 162, 89, 0.12)",
-                }}
-              >
-                <Csp.span className="muted" css={{ fontSize: "0.82rem" }}>
-                  🔥 Încearcă
-                </Csp.span>
-                <button
-                  type="button"
-                  className="contexto-warm-clue-button"
-                  title="Pune cuvântul în căsuță"
-                  aria-label={`Pune ${state.warm_clue.label} în câmpul de răspuns`}
-                  onClick={() => {
-                    const word = state.warm_clue?.label;
-                    if (!word) return;
-                    sound.playSelect();
-                    setText(word);
-                    setConfirmReveal(false);
-                    if (window.matchMedia("(pointer: fine)").matches) {
-                      inputRef.current?.focus();
-                    }
-                  }}
-                >
-                  {state.warm_clue.label}
-                </button>
-                <span
-                  className="badge"
-                  title="Acest cuvânt era mai aproape decât cea mai bună încercare"
-                >
-                  #{state.warm_clue.rank}
-                </span>
-              </Csp.div>
-            )}
-          </Csp.div>
+        {state.warm_clue && !finished && (
+          <button type="button" className="btn game-result-secondary contexto-warm-clue-button"
+            aria-label={`Pune ${state.warm_clue.label} în câmpul de răspuns`}
+            onClick={() => {
+              const word = state.warm_clue?.label;
+              if (!word) return;
+              sound.playSelect();
+              setText(word);
+              if (window.matchMedia("(pointer: fine)").matches) inputRef.current?.focus();
+            }}>
+            Încearcă „{state.warm_clue.label}” · #{state.warm_clue.rank}
+          </button>
         )}
-
-        {/* One short, server-authored comparison for the accepted guess just played. */}
-        <Presence mode="wait" variant={COMPARISON_VARIANT}>
-          {!finished && latestGuess && feedback && (
-            <div
-              key={`${latestGuess.id}-${feedback.kind}-${state?.attempts ?? 0}`}
-              className={`contexto-comparison contexto-comparison--${feedback.kind}`}
-              aria-live="polite"
-              role="status"
-            >
-              <span aria-hidden>{FEEDBACK_ICON[feedback.kind]}</span>
-              <span className="contexto-comparison-copy">
-                <strong>{latestGuess.label}</strong>
-                <span>{feedback.message}</span>
-              </span>
-              <strong
-                className="contexto-comparison-rank"
-                title="Al câtelea cel mai apropiat de conceptul secret (#1 = secretul)"
-              >
-                #{latestGuess.rank}
-              </strong>
+        {bestGuess && (
+          <div className="contexto-best">
+            <strong>Cel mai aproape: {bestGuess.label} (#{bestGuess.rank})</strong>
+            <div className="contexto-thermometer" role="img" aria-label={`Termometru: ${TEMP_LABEL[bestGuess.temperature]}`}>
+              {THERMOMETER_ZONES.map((zone) => (
+                <span key={zone} data-temperature={zone}
+                  data-current={(bestGuess.temperature === "Foarte rece" ? "Rece" : bestGuess.temperature) === zone || undefined}
+                  aria-hidden="true">{TEMP_LABEL[zone]}</span>
+              ))}
             </div>
-          )}
-        </Presence>
-
-        {/* win / giveup banner */}
-        <Presence>
-          {finished && state?.target && (
-            <ResultCard
-              startFailed={startFailed}
-              actionsBusy={busy}
-              icon={won ? "🎯" : "🫥"}
-              title={won ? "Ai găsit conceptul!" : "Conceptul secret era:"}
-              accent={won ? "var(--good)" : "var(--warn)"}
-              won={won}
-              score={won ? state.score : undefined}
-              isRecord={isRecord}
-              isPuzzleRecord={isPuzzleRecord}
-              shareText={sharePayload}
-              onCopy={() => void handleCopy()}
-              onReplay={() =>
-                void start({
-                  difficulty: state.difficulty,
-                  category: category ?? undefined,
-                })
-              }
-              onOptions={showOptions}
-              onExit={handleExit}
-            >
-              <Csp.span css={{ fontSize: "1.4rem", color: "var(--text)", display: "block" }}>
-                {state.target.label}
-              </Csp.span>
-              {state.target.description && (
-                <Csp.span css={{ fontSize: "0.85rem" }}>{state.target.description}</Csp.span>
-              )}
-              {won && recovery?.message ? (
-                <Csp.span className="muted" css={{ display: "block", marginTop: "8px" }}>
-                  <Csp.span aria-hidden="true" css={{ marginRight: "6px" }}>
-                    ℹ
-                  </Csp.span>
-                  {recovery.message}
-                </Csp.span>
-              ) : null}
-            </ResultCard>
-          )}
-        </Presence>
-
-        {/* best so far */}
-        {!finished && bestGuess && (
-          <Csp.p className="faint center" css={{ fontSize: "0.82rem", margin: "0px" }}>
-            Cel mai aproape:{" "}
-            <Csp.strong css={{ color: barColor(bestGuess) }}>
-              {bestGuess.label}
-            </Csp.strong>{" "}
-            <span title="Al câtelea cel mai apropiat de conceptul secret (#1 = secretul)">
-              (#{bestGuess.rank})
-            </span>
-          </Csp.p>
+          </div>
         )}
-
-        <h2 className="contexto-list-title">
-          {guessView === "best" ? "Cele mai apropiate cuvinte" : "Ultimele încercări"}
-        </h2>
-        {/* Bune keeps server rank order; Recente uses stable server attempt ordinals. */}
-        <Csp.div id="contexto-guess-list" className="col" css={{ gap: "8px" }}>
-          {guesses.length === 0 && !finished && (
-            <Csp.p className="faint center" css={{ marginTop: "24px" }}>
-              Sensul contează, nu literele. Începe cu orice idee!
-            </Csp.p>
-          )}
-          <>
-            {displayedGuesses.map((g) => (
-              <GuessRow key={g.id} g={g} isLatest={g.id === latestId} />
-            ))}
-          </>
-        </Csp.div>
-      </Csp.div>
+        <div className="row wrap contexto-list-heading">
+          <h2 className="contexto-list-title">
+            {guessView === "best" ? "Cele mai apropiate cuvinte" : "Ultimele încercări"}
+          </h2>
+          {guesses.length > 1 && <div className="contexto-guess-tabs" role="group" aria-label="Ordinea încercărilor">
+            <button type="button" aria-pressed={guessView === "best"} onClick={() => setGuessView("best")}>Bune</button>
+            <button type="button" aria-pressed={guessView === "recent"} onClick={() => setGuessView("recent")}>Recente</button>
+          </div>}
+        </div>
+        <div id="contexto-guess-list" className="col">
+          {displayedGuesses.map((g) => <GuessRow key={g.id} g={g} isLatest={g.id === latestId} />)}
+        </div>
+        {!finished && <HintBar remaining={state.hints_left ?? 0} disabled={!isPresent || busy || actionSync !== null}
+          onHint={() => void handleClue()} />}
+        {finished && state.target && (
+          <ResultCard title={won ? "Ai găsit cuvântul!" : "Conceptul secret era:"} steps={state.steps}
+            actionsBusy={busy} onCopy={sharePayload ? handleCopy : undefined} onReplay={() => startEntry(state.game_id)} onExit={handleExit}>
+            <strong>{state.target.label}</strong>
+            {state.target.description && <p>{state.target.description}</p>}
+            {won && recovery?.message && <p>{recovery.message}</p>}
+          </ResultCard>
+        )}
+        </>}
+        </GameFrame>
+      </div>
     </div>
   );
 }

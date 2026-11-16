@@ -1,6 +1,10 @@
-// Answer-free guidance; text preserved from the canonical game help.
 export const INTRUSUL_HELP = {
-  goal: "Trei cuvinte au o legătură comună. Alege-l pe al patrulea, care nu aparține acelui grup.",
-  feedback: "Un cuvânt marcat „ține de grup” este exclus dintre răspunsuri. Dacă îl atingi din nou, nu se socotește greșeală.",
-  recovery: "După prima greșeală, indiciul arată legătura celor trei. La final poți vedea grupul complet.",
+  goal: "Citește cele patru cuvinte.",
+  feedback: "Atinge-l pe cel care nu se potrivește cu celelalte trei.",
+  recovery: "La final vezi ce le leagă pe celelalte.",
+  ladder: [
+    "Tema celor patru cuvinte.",
+    "Ce au în comun cele trei cuvinte care se potrivesc.",
+  ],
+  steps: "Fiecare greșeală nouă și fiecare indiciu adaugă un pas. Dacă găsești intrusul cu zero pași, primești Perfect.",
 };

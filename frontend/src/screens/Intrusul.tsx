@@ -7,7 +7,7 @@ import { Csp } from "../components/CspStyle";
 
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "preact/hooks";
 import { Button, type ToastKind } from "@roedu/ui";
-import { Presence, useIsPresent } from "@roedu/ui/motion";
+import { useIsPresent } from "@roedu/ui/motion";
 import {
   acquireFlight,
   releaseFlight,
@@ -19,24 +19,22 @@ import {
   type CreateIntrusulOpts,
   type IntrusulState,
 } from "../api/intrusul";
-import { GameIntro } from "../components/GameIntro";
-import { GameOptions } from "../components/GameOptions";
-import { GameShell } from "../components/GameShell";
 import { INTRUSUL_HELP } from "../gameHelp/intrusul.mjs";
-import { Hud, StatBadge } from "../components/Hud";
+import { GameFrame, Attempts, CoachLine, useCoachMessage } from "../components/GameFrame";
+import { FreeRoundOptions } from "../components/FreeRoundOptions";
+import { HintBar } from "../components/HintBar";
+import { useGameEntry, useRoundStart } from "../hooks/useGameEntry";
 import { ResultCard } from "../components/ResultCard";
 import { gameByKey } from "../games";
 import { useActiveGame } from "../hooks/useActiveGame";
-import { useDailyIntent } from "../hooks/useDailyIntent";
 import { useRecordScore } from "../hooks/useRecordScore";
 import { useSavedGameResume } from "../hooks/useSavedGameResume";
 import {
   lastDerivedReplayId,
   rememberDerivedReplayId,
 } from "../derivedReplay";
-import { bestScore, scoreBoard } from "../scores/read";
-import { buildDailyCircuit, needsDerivedStarter } from "../scores/daily";
-import { buildSharePayload, copyResult, formatDayKey, stableKey, todayLocal } from "../share";
+import { needsDerivedStarter } from "../scores/daily";
+import { buildSharePayload, copyResult, stableKey } from "../share";
 import { sound } from "../sound";
 
 const GAME_KEY = "intrusul";
@@ -52,11 +50,14 @@ interface Props {
 interface StartOpts {
   daily?: string;
   previousGameId?: string;
+  category?: string;
 }
 
 export default function Intrusul({ onExit, onToast }: Props) {
   const active = useActiveGame(GAME_KEY);
   const isPresent = useIsPresent();
+  const entry = useGameEntry(GAME_KEY, active);
+  const { admit, remember, complete } = entry;
   const liveRef = useRef(true), lifetimeRef = useRef(0);
   const recordOnce = useRecordScore(GAME_KEY);
   const startInFlight = useRef(false);
@@ -85,11 +86,10 @@ export default function Intrusul({ onExit, onToast }: Props) {
   }, [actionOwner, isPresent]);
   const [state, setState] = useState<IntrusulState | null>(null);
   const [startFailed, setStartFailed] = useState(false);
+  const [unavailable, setUnavailable] = useState(false);
   const [loading, setLoading] = useState(() => active.peek() !== null);
   const [busy, setBusy] = useState(false);
-  const [feedback, setFeedback] = useState<string | null>(null);
-  const [recordHit, setRecordHit] = useState(false);
-  const [puzzleRecordHit, setPuzzleRecordHit] = useState(false);
+  const [feedback, setFeedback, feedbackRevision] = useCoachMessage();
 
   const finished = Boolean(state?.won || state?.lost);
   const actionsLocked = !isPresent || loading || busy || actionSync !== null;
@@ -105,20 +105,6 @@ export default function Intrusul({ onExit, onToast }: Props) {
     const target = tileRefs.current.get(pending.tileId);
     if (target && !target.disabled) target.focus();
   }, [active, actionsLocked, busy, finished, state]);
-  // Re-read after a terminal write when the player returns to this intro.
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const best = useMemo(() => bestScore(GAME_KEY), [state]);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const starterVisible = useMemo(() => needsDerivedStarter(GAME_KEY), [state]);
-  const dailyIntent = useDailyIntent();
-  // A circuit visit that resumed a free round offers today's unfinished daily next.
-  const dailyPending = useMemo(
-    () => !buildDailyCircuit(scoreBoard(), todayLocal()).games.find((g) => g.game === GAME_KEY)?.completed,
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [state],
-  );
-  const [dailyRetry, setDailyRetry] = useState(false);
-  const offerDaily = (dailyIntent.active || dailyRetry) && dailyPending && state?.daily !== todayLocal();
   const exitSafely = useCallback(() => {
     if (!liveRef.current || startInFlight.current) return;
     actionOwner.invalidate();
@@ -127,8 +113,8 @@ export default function Intrusul({ onExit, onToast }: Props) {
     onExit();
   }, [actionOwner, onExit]);
 
-  const applyResumedGame = useCallback((fresh: IntrusulState) => {
-    if (!liveRef.current) return;
+  const applyResumedGame = useCallback((fresh: IntrusulState, { terminal }: { terminal: boolean }) => {
+    if (!liveRef.current || !admit(fresh, terminal)) return;
     actionOwner.invalidate();
     pendingHintFocus.current = null;
     setActionSync(null);
@@ -138,9 +124,9 @@ export default function Intrusul({ onExit, onToast }: Props) {
     setFeedback(
       fresh.won || fresh.lost
         ? null
-        : "Joc reluat. Atinge cuvântul care nu se potrivește.",
+        : fresh.clue?.message ?? "Joc reluat. Atinge cuvântul care nu se potrivește.",
     );
-  }, [actionOwner]);
+  }, [actionOwner, admit, setFeedback]);
   const { recovery: resumeRecovery, retryResume, cancelResume, dismissRecovery } = useSavedGameResume({
     active,
     load: intrusulApi.get,
@@ -157,11 +143,10 @@ export default function Intrusul({ onExit, onToast }: Props) {
         if (!finished) setActionSync({ previous: state, action: "guess", kind: "failed", savedId: null });
       } else { setState(null); setActionSync(null); }
     },
-    onDailyBypassed: () => onToast("Ai continuat jocul liber început. Provocarea zilei te așteaptă după ce îl termini.", "info"),
   });
 
   const start = useCallback(
-    async ({ daily, previousGameId }: StartOpts = {}) => {
+    async ({ daily, previousGameId, category }: StartOpts = {}) => {
       if (!isPresent || !liveRef.current) return;
       if (!acquireFlight(startInFlight)) return;
       const epoch = lifetimeRef.current;
@@ -169,10 +154,12 @@ export default function Intrusul({ onExit, onToast }: Props) {
       pendingHintFocus.current = null;
       cancelResume();
       setStartFailed(false);
+      setUnavailable(false);
       setLoading(true);
       const opts: CreateIntrusulOpts = daily
         ? { daily }
         : {
+            category,
             starter: needsDerivedStarter(GAME_KEY),
             previousGameId:
               previousGameId ?? lastDerivedReplayId(GAME_KEY) ?? undefined,
@@ -181,14 +168,11 @@ export default function Intrusul({ onExit, onToast }: Props) {
         const fresh = await intrusulApi.create(opts);
         if (!liveRef.current || epoch !== lifetimeRef.current) return;
         setState(fresh);
-        setDailyRetry(false);
         setActionSync(null);
         setBusy(false);
-        active.remember(fresh.game_id);
+        remember(fresh);
         dismissRecovery();
         setFeedback(null);
-        setRecordHit(false);
-        setPuzzleRecordHit(false);
       } catch {
         if (liveRef.current && epoch === lifetimeRef.current) setStartFailed(true);
       } finally {
@@ -198,7 +182,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
         }
       }
     },
-    [active, actionOwner, cancelResume, dismissRecovery, isPresent],
+    [actionOwner, cancelResume, dismissRecovery, isPresent, remember, setFeedback],
   );
 
   const puzzleKey = useMemo(() => {
@@ -216,7 +200,6 @@ export default function Intrusul({ onExit, onToast }: Props) {
     return buildSharePayload({
       gameTitle: DEF.title,
       serverShare: state.share,
-      score: state.score,
       puzzleKey,
     });
   }, [finished, puzzleKey, state]);
@@ -231,6 +214,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
     void recordOnce(state.game_id, state.score, detail, {
       puzzleKey,
       daily: state.daily,
+      steps: state.steps,
       difficulty: state.difficulty,
       category: state.board_category,
     }).then((outcome) => {
@@ -238,9 +222,6 @@ export default function Intrusul({ onExit, onToast }: Props) {
       if (!current || !liveRef.current || !outcome) return;
       if (state.won) sound.playWin();
       else sound.playError();
-      setRecordHit(outcome.isBest);
-      setPuzzleRecordHit(outcome.isPuzzleBest);
-      if (outcome.isBest || outcome.isPuzzleBest) sound.playRecord();
     });
     return () => {
       current = false;
@@ -282,6 +263,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
         }
         setActionSync(null);
         setState(null);
+        setUnavailable(true);
         setFeedback(null);
         onToast("Jocul nu mai este disponibil. Poți începe altul.", "info");
         return;
@@ -313,6 +295,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
       actionOwner.invalidate();
       setActionSync(null);
       setState(null);
+      setUnavailable(active.peek() === null);
       setLoading(true);
       retryResume();
       return;
@@ -334,7 +317,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
     } finally {
       if (actionOwner.finish(ticket)) setBusy(false);
     }
-  }, [state, busy, actionSync, actionOwner, beginAction, isPresent, reconcile, retryResume]);
+  }, [state, busy, actionSync, active, actionOwner, beginAction, isPresent, reconcile, retryResume]);
 
   const choose = useCallback(
     async (id: string) => {
@@ -368,7 +351,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
       !state ||
       finished ||
       actionsLocked ||
-      !state.hint_available
+      !state.hints_left
     ) {
       return;
     }
@@ -408,64 +391,23 @@ export default function Intrusul({ onExit, onToast }: Props) {
     onToast((await copyResult(sharePayload)) ? "Copiat!" : "Nu am putut copia.", "info");
   }, [onToast, sharePayload]);
 
-  if (!state) {
-    return (
-      <div className="screen-pad fill">
-        <Csp.div className="container col game-container" css={{ gap: "18px", paddingBottom: "32px" }}>
-          <GameShell onExit={exitSafely} accent={DEF.accent} busy={loading} />
-          <GameIntro
-            startFailed={startFailed}
-            resumeRecovery={resumeRecovery ? {
-              kind: resumeRecovery.kind,
-              canRetry: resumeRecovery.kind === "failed" || resumeRecovery.hasCurrent,
-              onRetry: retryResume,
-            } : null}
-            icon={DEF.icon}
-            title={DEF.title}
-            tag={DEF.tag}
-            accent={DEF.accent}
-            glow={DEF.glow}
-            description={
-              <>
-                <Csp.p css={{ margin: "0px" }}>Trei cuvinte au ceva în comun. Unul nu.</Csp.p>
-                {starterVisible && (
-                  <Csp.p className="faint" css={{ margin: "6px 0 0", fontSize: "0.82rem" }}>
-                    Primele runde sunt mai blânde. Câștigă una și deblochezi tot catalogul.
-                  </Csp.p>
-                )}
-              </>
-            }
-            steps={[
-              { icon: "👀", label: "Privește cele patru" },
-              { icon: "👆", label: "Atinge intrusul" },
-              { icon: "✨", label: "Descoperă legătura" },
-            ]}
-            best={best}
-            startLabel="Joacă"
-            onStart={() => void start()}
-            onDaily={() => void start({ daily: todayLocal() })}
-            starting={!isPresent || loading}
-          />
-        </Csp.div>
-      </div>
-    );
-  }
+  const startEntry = useRoundStart(entry, !state && !loading && !startFailed && !resumeRecovery && !unavailable, retryResume,
+    (daily, previousGameId) => void start({ daily, previousGameId, category: entry.options.category ?? undefined }));
+  const mode = entry.mode(state);
+  useLayoutEffect(() => {
+    if (state && finished && isPresent) complete(state);
+  }, [state, finished, isPresent, complete]);
 
-  const wrong = new Set(state.wrong_ids);
+  const wrong = new Set(state?.wrong_ids);
   return (
     <div className="screen-pad fill intrusul-game">
-      <Csp.div className="container col game-container" css={{ gap: "14px", paddingBottom: "32px" }}>
-        <GameShell onExit={exitSafely} accent={DEF.accent} title={DEF.title} busy={loading}>
-          <Hud>
-            {state.daily && <StatBadge label="ZILNIC" value={formatDayKey(state.daily)} accent={DEF.accent} />}
-            <StatBadge
-              label="GREȘELI"
-              value={`${state.remaining_mistakes} ${state.remaining_mistakes === 1 ? "rămasă" : "rămase"}`}
-              accent={DEF.accent}
-            />
-          </Hud>
-        </GameShell>
-
+      <div className="container game-container">
+        <GameFrame game={DEF} mode={mode} onExit={exitSafely} help={INTRUSUL_HELP}
+          busy={loading} startFailed={startFailed} unavailable={unavailable} onStart={() => startEntry(state?.game_id)}
+          resumeRecovery={resumeRecovery} onResume={retryResume}
+          options={<FreeRoundOptions game={GAME_KEY} value={entry.options} onChange={entry.updateOptions} />}
+          status={state && <Attempts remaining={state.remaining_mistakes} />}>
+        {state && <>
         {!finished && actionSync && (
           <Csp.div className="card col intrusul-sync-recovery" role="alert" css={{ gap: "8px", padding: "12px" }}>
             <strong>{actionSync.kind === "changed" ? "Jocul salvat s-a schimbat." : "Verificarea jocului nu a reușit."}</strong>
@@ -479,22 +421,13 @@ export default function Intrusul({ onExit, onToast }: Props) {
         )}
 
         {!finished && !actionSync && (
-          <p className="intrusul-instruction" id="intrusul-instruction">
-            Atinge cuvântul care nu se potrivește.
-          </p>
-        )}
-
-        {!finished && state.clue && (
-          <div className="intrusul-clue card">
-            <span aria-hidden>💡</span>
-            <span>
-              Trei țin de <strong>{state.clue.label}</strong>.
-            </span>
-          </div>
+          <CoachLine id="intrusul-instruction" revision={feedbackRevision}>
+            {feedback ?? state.clue?.message ?? "Atinge cuvântul care nu se potrivește."}
+          </CoachLine>
         )}
 
         {!finished && (
-          <div className="intrusul-grid" aria-label="Cuvinte pentru Intrusul" aria-describedby={!actionSync ? "intrusul-instruction" : undefined}>
+          <div className="intrusul-grid" role="group" aria-label="Cuvinte pentru Intrusul" aria-describedby={!actionSync ? "intrusul-instruction" : undefined}>
             {state.tiles.map((tile) => {
               const tried = wrong.has(tile.id);
               return (
@@ -518,64 +451,14 @@ export default function Intrusul({ onExit, onToast }: Props) {
           </div>
         )}
 
-        <Presence mode="wait">
-          {!finished && !actionSync && feedback && (
-            <div
-              key={feedback}
-              className="intrusul-feedback card"
-              role="status"
-              aria-live="polite"
-            >
-              {feedback}
-            </div>
-          )}
-        </Presence>
-
-        {!finished && !state.hints_used && (
-          <div className="intrusul-actions">
-            {state.hint_available ? (
-              <Button
-                ref={hintButtonRef}
-                variant="secondary"
-                disabled={actionsLocked}
-                onClick={() => void requestHint()}
-                title="Arată legătura celor trei cuvinte. Costă 150 de puncte."
-              >
-                💡 Arată indiciul · −150 pct
-              </Button>
-            ) : (
-              <span className="intrusul-hint-status">Indiciu disponibil după prima greșeală.</span>
-            )}
-          </div>
-        )}
-
-        {!finished && <GameOptions help={INTRUSUL_HELP} />}
+        {!finished && <HintBar remaining={state.hints_left ?? 0} disabled={actionsLocked}
+          buttonRef={hintButtonRef} onHint={() => void requestHint()} />}
 
         {finished && state.solution && (
-          <ResultCard
-              startFailed={startFailed}
-            icon={state.won ? "🎯" : "🔎"}
-            title={state.won ? "L-ai găsit!" : "Acesta era intrusul"}
-            accent={DEF.accent}
-            won={state.won}
-            score={state.score}
-            isRecord={recordHit}
-            isPuzzleRecord={puzzleRecordHit}
-            actionsBusy={!isPresent || loading}
-            shareText={sharePayload}
-            onCopy={copyShare}
-            onReplay={
-              offerDaily
-                ? () => {
-                    setDailyRetry(true);
-                    dailyIntent.consume();
-                    void start({ daily: todayLocal() });
-                  }
-                : () => void start({ previousGameId: state.game_id })
-            }
-            replayLabel={offerDaily ? "Joacă provocarea zilei →" : state.daily ? "Joacă liber →" : undefined}
-            onExit={exitSafely}
-          >
+          <ResultCard title={state.won ? "L-ai găsit!" : "Nu a ieșit de data asta"}
+            steps={state.steps} perfect={state.perfect && mode !== "Reluare"}
+            actionsBusy={loading} onCopy={sharePayload ? copyShare : undefined}
+            onReplay={() => startEntry(state.game_id)} onExit={exitSafely}>
             <div className="intrusul-solution">
               {state.won ? (
                 <>
@@ -598,7 +481,9 @@ export default function Intrusul({ onExit, onToast }: Props) {
             </div>
           </ResultCard>
         )}
-      </Csp.div>
+        </>}
+        </GameFrame>
+      </div>
     </div>
   );
 }

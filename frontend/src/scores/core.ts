@@ -4,6 +4,7 @@
 export interface ScoreEntry {
   /** Numeric score, higher is better. */
   score: number;
+  steps?: number;
   /** Short human summary of the run (e.g. "3 încercări", "1000 pct"). */
   detail: string;
   /** ms epoch. */
@@ -176,6 +177,7 @@ export function normalizeEntry(value: unknown): ScoreEntry | null {
   if (!Number.isFinite(score) || !Number.isFinite(at) || !detail) return null;
   return {
     score,
+    ...(isNonNegativeInteger(value.steps) ? { steps: value.steps } : {}),
     detail,
     at,
     ...(typeof value.puzzleKey === "string" && value.puzzleKey.trim()
@@ -199,6 +201,7 @@ export function uniqueEntries(entries: ScoreEntry[]): ScoreEntry[] {
     const key = [
       entry.at,
       entry.score,
+      entry.steps ?? "",
       entry.detail,
       entry.puzzleKey ?? "",
       entry.daily ?? "",

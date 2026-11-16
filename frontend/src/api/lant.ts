@@ -2,6 +2,7 @@
 // Server-authoritative: the chain, optimal distance and validation live in the backend;
 // these helpers only shuttle JSON. All URLs are relative (Vite proxies /api in dev).
 
+import type { PerfectRoundCounters } from "./round";
 import { getJson, postJson } from "./client";
 
 const PREFIX = "/api/wordgames/lant";
@@ -45,7 +46,7 @@ export interface LantProgress {
   message: string;
 }
 
-export interface LantState {
+export interface LantState extends PerfectRoundCounters {
   game_id: string;
   start: Concept;
   target: LantTarget;
@@ -69,7 +70,7 @@ export interface LantState {
   share?: string;
 }
 
-export interface MoveResult {
+export interface MoveResult extends PerfectRoundCounters {
   ok: boolean;
   /** Present only when ok === false. */
   last_error?: string;
@@ -93,7 +94,7 @@ export interface MoveResult {
   share?: string;
 }
 
-export interface HintResult {
+export interface HintResult extends PerfectRoundCounters {
   hint: Concept | null;
   /** Voluntary escalation, or an explicit free-undo recovery from a revisit trap. */
   stage?: "direction" | "alternatives" | "hop" | "backtrack";

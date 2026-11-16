@@ -1,0 +1,109 @@
+.home-screen {
+  width: min(100%, 40rem);
+  margin-inline: auto;
+  padding: 1rem max(1rem, env(safe-area-inset-right)) max(1.125rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
+  box-sizing: border-box;
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+}
+.home-header { display: grid; gap: .375rem; }
+.home-header h1 { font-size: clamp(2rem, 9vw, 2.5rem); line-height: 1.05; }
+.home-header p, .home-daily-note { color: var(--text-muted); margin: 0; }
+.home-header p { font-size: .9375rem; }
+.home-daily-note { font-size: .875rem; }
+.home-tools { display: flex; gap: .625rem; justify-content: flex-end; }
+.home-icon {
+  display: grid;
+  place-items: center;
+  min-width: 44px;
+  min-height: 44px;
+  background: var(--surface);
+  border: 2px solid var(--surface-border-strong);
+  border-radius: 50%;
+  box-shadow: 0 3px var(--shadow-color);
+  padding: .5rem;
+}
+.home-icon svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.2;
+}
+.games-grid {
+  display: grid;
+  gap: .75rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.game-card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: .5rem .5rem .625rem;
+  gap: .125rem;
+  min-height: 44px;
+  min-width: 0;
+  color: var(--ink);
+  background: var(--game-color);
+  border: 3px solid var(--ink);
+  border-radius: 22px;
+  box-shadow: 0 4px var(--shadow-color);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.game-card:hover { translate: 0 -2px; }
+.game-card img {
+  display: block;
+  width: 100%;
+  height: 104px;
+  border-radius: 14px;
+  object-fit: contain;
+  background: color-mix(in srgb, var(--paper) 45%, transparent);
+  margin-bottom: .375rem;
+}
+.game-card strong {
+  font-family: var(--roedu-font-heading);
+  font-size: 1.3125rem;
+  line-height: 1;
+  font-weight: 650;
+}
+.game-card > span { font-size: .8125rem; font-weight: 600; line-height: 1.3; }
+.game-card .game-card-done {
+  position: absolute;
+  inset: .75rem .75rem auto auto;
+  box-sizing: border-box;
+  max-width: calc(100% - 1.5rem);
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 1rem;
+  padding: .2rem .45rem;
+  font-size: .75rem;
+}
+.results-history {
+  box-sizing: border-box;
+  width: min(calc(100% - 2rem), 34rem);
+  max-height: calc(100dvh - 2rem);
+  padding: 1rem;
+  border: 2px solid var(--surface-border-strong);
+  border-radius: 1.25rem;
+  color: var(--text);
+  background: var(--surface);
+}
+.results-history::backdrop { background: var(--scrim); }
+.results-history header, .results-history li { flex-wrap: wrap; }
+.results-history ol { list-style: none; padding: 0; }
+.results-history li {
+  display: flex;
+  align-items: baseline;
+  gap: .5rem;
+  padding: .5rem 0;
+  border-top: 1px solid var(--surface-border);
+}
+.results-history time { color: var(--text-muted); margin-left: auto; }
+.results-history button { min-height: 44px; }

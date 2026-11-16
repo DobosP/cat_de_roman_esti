@@ -1,30 +1,73 @@
-/* theme.css — cat_de_roman_esti's bespoke identity over the @roedu/ui 1.0 tokens.
- * "Arcada de noapte": a deep violet night sky, hot-coral primary energy, sunny-gold
- * accents. UI 1.0 has no ThemeProvider: the app imports the base stylesheet and
- * sets its token overrides on the explicit .roedu-root wrapper (same values the
- * former catTheme override produced as custom properties). Only the identity
- * lives here; per-game accents stay in src/games.ts / arcade.css.
- */
+:root {
+  color-scheme: light dark;
+}
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"] { color-scheme: dark; }
+
+:root, .roedu-root {
+  --page-bg: light-dark(#f4f5fb, #1c1b31);
+  --surface: light-dark(#fff, #2a2846);
+  --surface-strong: light-dark(#ebeef8, #383554);
+  --surface-border: light-dark(#c7cae0, #625f82);
+  --surface-border-strong: light-dark(#777a9a, #a29dc5);
+  --text: light-dark(#1b1d3a, #f4f1ff);
+  --text-muted: light-dark(#4a4e6e, #c9c6e8);
+  --brand-gold: light-dark(#80500b, #ffcf5c);
+  --brand-coral: light-dark(#9b2449, #ffa1b1);
+  --brand-cobalt: light-dark(#1855b5, #9fceff);
+  --focus: light-dark(#1855b5, #8ed0ff);
+  --success: light-dark(#1a6941, #80e8ad);
+  --warn: light-dark(#80500b, #ffcf5c);
+  --danger: light-dark(#a42d3a, #ff9faa);
+  --primary: light-dark(#233676, #c4a6ff);
+  --primary-text: light-dark(#fff, #1b1d3a);
+  --scrim: light-dark(#1b1d3a80, #0009);
+  --shadow-color: light-dark(#1b1d3a24, #0007);
+}
+
 .roedu-root {
-  --roedu-color-bg: #0d0b20;
-  --roedu-color-surface: rgba(32, 28, 64, 0.66);
-  --roedu-color-surface-muted: rgba(20, 17, 44, 0.55);
-  --roedu-color-text: #f4f2ff;
-  --roedu-color-text-muted: #a8a1cc;
-  --roedu-color-border: rgba(168, 156, 236, 0.2);
-  --roedu-color-primary: #ff5470;
-  --roedu-color-primary-text: #2b0714;
-  --roedu-color-accent: #ffd166;
-  --roedu-color-danger: #ff4d6d;
-  --roedu-color-success: #3ddc97;
-  --roedu-color-focus: #ffd166;
+  --ink: #1b1d3a;
+  --paper: #fff;
+  --selected-bg: var(--text);
+  --selected-text: var(--surface);
+  --game-intrusul: #ffcf5c;
+  --game-perechi: #ff78b7;
+  --game-conexiuni: #54e39d;
+  --game-lant: #4fd8e0;
+  --game-contexto: #ff8a5c;
+  --game-alchimie: #c4a6ff;
+  --text-dim: var(--text-muted);
+  --text-faint: var(--text-muted);
+  --accent: var(--primary);
+  --good: var(--success);
+  --bad: var(--danger);
+  --brand-gradient: linear-gradient(100deg, var(--game-intrusul), var(--game-perechi) 52%, var(--game-lant));
+  --roedu-color-bg: var(--page-bg);
+  --roedu-color-surface: var(--surface);
+  --roedu-color-surface-muted: var(--surface-strong);
+  --roedu-color-text: var(--text);
+  --roedu-color-text-muted: var(--text-muted);
+  --roedu-color-border: var(--surface-border);
+  --roedu-color-primary: var(--primary);
+  --roedu-color-primary-text: var(--primary-text);
+  --roedu-color-accent: var(--brand-gold);
+  --roedu-color-danger: var(--danger);
+  --roedu-color-success: var(--success);
+  --roedu-color-focus: var(--focus);
   --roedu-font-heading: 'Fredoka Variable', 'Fredoka', system-ui, sans-serif;
   --roedu-font-body: 'Inter Variable', 'Inter', system-ui, sans-serif;
   --roedu-radius-sm: 10px;
   --roedu-radius-md: 16px;
   --roedu-radius-lg: 24px;
   --roedu-radius-pill: 999px;
-  --roedu-shadow-sm: 0 2px 10px rgba(4, 2, 18, 0.4);
-  --roedu-shadow-md: 0 12px 32px -10px rgba(4, 2, 18, 0.6);
-  --roedu-shadow-lg: 0 24px 64px -16px rgba(4, 2, 18, 0.8);
+  --roedu-shadow-sm: 0 2px 10px var(--shadow-color);
+  --roedu-shadow-md: 0 12px 32px -10px var(--shadow-color);
+  --roedu-shadow-lg: 0 24px 64px -16px var(--shadow-color);
 }
+
+.game-color-intrusul { --game-color: var(--game-intrusul); }
+.game-color-perechi { --game-color: var(--game-perechi); }
+.game-color-conexiuni { --game-color: var(--game-conexiuni); }
+.game-color-lant { --game-color: var(--game-lant); }
+.game-color-contexto { --game-color: var(--game-contexto); }
+.game-color-alchimie { --game-color: var(--game-alchimie); }
