@@ -972,16 +972,13 @@ class UndoView(ContractAPIView):
 
 
 def _hint_options(session: LantSession) -> list[tuple[int, dict]]:
-    if session.won or session.hint_requests >= 3:
+    if session.won or session.hint_requests >= 3 or session.moves >= _MAX_MOVES:
         return []
     level = session.hint_requests + 1
 
     def backtrack(message: str, **details: int) -> list[tuple[int, dict]]:
         hint = {"hint": None, "stage": "backtrack", "message": message, **details}
         return [] if hint == session.earned_hint else [(level, hint)]
-
-    if session.moves >= _MAX_MOVES:
-        return backtrack(_MOVE_LIMIT_MESSAGE)
 
     svc = get_service()
     cur = session.current

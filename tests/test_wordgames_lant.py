@@ -765,21 +765,18 @@ def test_two_node_revisit_cycle_caps_then_undo_reopens_play(monkeypatch):
     }
     assert len(session.chain) == lant._MAX_MOVES + 1
 
-    capped_hint = c.post(f"/api/wordgames/lant/games/{gid}/hint").json()
-    assert capped_hint == {
-        "hint": None,
-        "stage": "backtrack",
-        "message": lant._MOVE_LIMIT_MESSAGE,
-        "steps": lant._MAX_MOVES,
-        "perfect": False,
-        "hint_level": 1,
-        "hints_left": 0,
-    }
-    assert session.hint_requests == 1
+    root = f"/api/wordgames/lant/games/{gid}"
+    capped = c.get(root).json()
+    assert capped["steps"] == lant._MAX_MOVES - session.optimal
+    assert capped["hints_left"] == capped["hint_level"] == 0
+    assert c.post(root + "/hint").status_code == 400
+    assert c.get(root).json() == capped
 
-    undone = c.post(f"/api/wordgames/lant/games/{gid}/undo").json()
+    undone = c.post(root + "/undo").json()
     assert undone["moves"] == lant._MAX_MOVES - 1
     assert len(undone["path"]) == lant._MAX_MOVES
+    assert undone["steps"] == capped["steps"] and undone["hint_level"] == 0
+    assert undone["hints_left"] > 0
 
     retried = c.post(
         f"/api/wordgames/lant/games/{gid}/move",

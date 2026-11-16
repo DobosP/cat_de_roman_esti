@@ -16,6 +16,8 @@ import (
 	"sync"
 )
 
+const maxChainMoves = 64
+
 type game struct {
 	CuratedID                           string
 	Start, Target, Difficulty, Category string
@@ -255,7 +257,7 @@ func (s *Service) choice(current, id string) map[string]any {
 	return map[string]any{"label": s.g.Label(id), "relation": s.short(current, id)}
 }
 func (s *Service) choiceIDs(v *game) []string {
-	if v.Won || v.moves() >= 64 {
+	if v.Won || v.moves() >= maxChainMoves {
 		return []string{}
 	}
 	cur := v.current()
@@ -619,7 +621,7 @@ func (s *Service) MoveInput(id string, validate func() (string, *gameapi.Error))
 			out["ok"] = true
 			return out, nil
 		}
-		if v.moves() >= 64 {
+		if v.moves() >= maxChainMoves {
 			return map[string]any{"ok": false, "last_error": "Limită atinsă — folosește Înapoi."}, nil
 		}
 		if strings.TrimFunc(text, pySpace) == "" {
@@ -743,7 +745,7 @@ type hintOption struct {
 }
 
 func (s *Service) hintOptions(v *game) []hintOption {
-	if v.Won || v.HintLevel >= 3 {
+	if v.Won || v.HintLevel >= 3 || v.moves() >= maxChainMoves {
 		return nil
 	}
 	backtrack := func(message string, remaining int) []hintOption {
@@ -755,9 +757,6 @@ func (s *Service) hintOptions(v *game) []hintOption {
 			payload["remaining"] = remaining
 		}
 		return []hintOption{{v.HintLevel + 1, payload}}
-	}
-	if v.moves() >= 64 {
-		return backtrack("Limită atinsă — folosește Înapoi.", 0)
 	}
 	cur := v.current()
 	to := s.g.DistancesTo(v.Target)

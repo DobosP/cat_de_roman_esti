@@ -436,7 +436,10 @@ func (s *Service) redaction(label string) string {
 }
 
 func clueGroup(g *gameSession) string {
-	if g.clued != "" && !slices.Contains(g.solved, g.clued) {
+	if g.clued != "" {
+		if slices.Contains(g.solved, g.clued) {
+			return ""
+		}
 		return g.clued
 	}
 	for _, cat := range keys(g.groups) {

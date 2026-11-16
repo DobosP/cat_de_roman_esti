@@ -61,3 +61,39 @@ func TestHopLadderCapsDisclosureAndUndoKeepsSteps(t *testing.T) {
 		t.Fatalf("undo lowered the cumulative hop count: %#v / %#v / %#v", detour, undone, won)
 	}
 }
+
+func TestPathLimitDoesNotSellTheUndoInstruction(t *testing.T) {
+	s := New(&content.Content{
+		Nodes: []content.Node{{ID: "s", LabelRO: "start"}, {ID: "a", LabelRO: "first"}, {ID: "t", LabelRO: "target"}},
+		Edges: []content.Edge{
+			{Src: "s", Dst: "a", Strength: 1},
+			{Src: "a", Dst: "s", Strength: 1},
+			{Src: "a", Dst: "t", Strength: 1},
+		},
+		NormalizedIndex: map[string]string{"start": "s", "first": "a", "target": "t"},
+	})
+	id, _ := s.store.Create(&game{Start: "s", Target: "t", Difficulty: "usor", Optimal: 2, Chain: []string{"s"}})
+	for move := range maxChainMoves {
+		word := "first"
+		if move%2 == 1 {
+			word = "start"
+		}
+		if body, err := s.Move(id, word); err != nil || body["ok"] != true {
+			t.Fatalf("move %d: %#v, %v", move+1, body, err)
+		}
+	}
+	if blocked, err := s.Move(id, "first"); err != nil || blocked["last_error"] != "Limită atinsă — folosește Înapoi." {
+		t.Fatalf("the move cap should still direct the player to undo: %#v, %v", blocked, err)
+	}
+	before, _ := s.Get(id)
+	_, err := s.Hint(id)
+	after, _ := s.Get(id)
+	if before["hints_left"] != 0 || err == nil || err.Status != 400 || !reflect.DeepEqual(before, after) {
+		t.Fatalf("requesting a hint at the move cap should leave the round intact: %#v, %v", after, err)
+	}
+	undone, err := s.Undo(id)
+	if err != nil || undone["moves"] != maxChainMoves-1 || undone["steps"] != maxChainMoves-2 ||
+		undone["hint_level"] != 0 || undone["hints_left"] == 0 {
+		t.Fatalf("undo should restore playable hints and leave cumulative steps intact: %#v, %v", undone, err)
+	}
+}

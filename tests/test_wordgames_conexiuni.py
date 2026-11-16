@@ -413,21 +413,21 @@ def test_clue_penalizes_score_and_share() -> None:
     assert "indiciu x1" in last["share"]
 
 
-def test_ladder_continues_with_an_unsolved_group_if_first_target_is_solved() -> None:
-    from cat_de_roman_esti.wordgames.conexiuni import _group_label, store
-
-    c, created, groups = _groups_for()
+@pytest.mark.parametrize("rung", [1, 2])
+def test_solving_the_hinted_group_ends_its_ladder_without_charge(rung: int) -> None:
+    client, created, groups = _groups_for()
     root = f"{BASE}/games/{created['game_id']}"
-    session = store.get(created["game_id"])
-    first_group, second_group = sorted(groups)[:2]
-    assert c.post(root + "/clue").status_code == 200
-    _post_json(c, root + "/guess", {"ids": groups[first_group]})
-    second = c.post(root + "/clue").json()
-    assert second["steps"] == second["hint_level"] == 2
-    assert second["clue"]["label"] == _group_label(session, second_group)
-    assert second["clue"]["pattern"] == ""
-    third = c.post(root + "/clue").json()
-    assert third["clue"]["tile"]["id"] in groups[second_group]
+    for level in range(1, rung + 1):
+        earned = client.post(root + "/clue").json()
+        assert earned["hint_level"] == earned["steps"] == level
+
+    matched = _post_json(client, root + "/guess", {"ids": groups[min(groups)]}).json()
+    assert matched["correct"] and matched["remaining_groups"] == 3
+    assert matched["hints_left"] == 0 and matched["clue_available"] is False
+    assert matched["steps"] == matched["hint_level"] == rung
+    before = client.get(root).json()
+    assert client.post(root + "/clue").status_code == 400
+    assert client.get(root).json() == before
 
 
 def test_public_last_group_skips_the_membership_hint_without_charge() -> None:
@@ -448,6 +448,35 @@ def test_public_last_group_skips_the_membership_hint_without_charge() -> None:
     before = client.get(root).json()
     assert client.post(root + "/clue").status_code == 400
     assert client.get(root).json() == before
+
+
+@pytest.mark.parametrize("public_via", ["theme", "solved_group"])
+def test_public_label_skips_both_text_rungs_without_charge(public_via: str) -> None:
+    from cat_de_roman_esti.wordgames.conexiuni import _group_label, category_label, store
+
+    client, created, groups = _groups_for()
+    root = f"{BASE}/games/{created['game_id']}"
+    subject, donor = sorted(groups)[:2]
+    # Use an isolated session whose unrevealed group shares a public label.
+    with store.transaction(created["game_id"]) as session:
+        assert session is not None
+        if public_via == "theme":
+            session.category = "istorie"
+            label = category_label(session.category)
+        else:
+            label = _group_label(session, donor)
+        session.group_labels = {**(session.group_labels or {}), subject: label}
+    if public_via == "solved_group":
+        solved = _post_json(client, root + "/guess", {"ids": groups[donor]}).json()
+        assert solved["correct"]
+
+    state = client.get(root).json()
+    assert state["steps"] == state["hint_level"] == 0 and state["hints_left"] == 1
+    clue = client.post(root + "/clue").json()
+    assert clue["hint_level"] == 3 and clue["steps"] == clue["clues_used"] == 1
+    assert clue["clue"]["pattern"] == "" and "label" not in clue["clue"]
+    assert clue["clue"]["tile"]["id"] in groups[subject]
+    assert clue["lives"] == state["lives"]
 
 
 def test_score_and_share_reflect_two_clue_penalties() -> None:

@@ -421,13 +421,19 @@ def _label_pattern(label: str) -> str:
 
 
 def _clue_group(session: ConexiuniSession) -> str | None:
-    if session.clue_category is not None and session.clue_category not in session.solved:
-        return session.clue_category
+    if session.clue_category is not None:
+        return None if session.clue_category in session.solved else session.clue_category
     return min((key for key in session.groups if key not in session.solved), default=None)
 
 
 def _clue_at(session: ConexiuniSession, level: int, group: str) -> dict[str, object] | None:
     label = _group_label(session, group)
+    if level in (1, 2):
+        public = {_group_label(session, key) for key in session.solved}
+        if session.category:
+            public.add(category_label(session.category))
+        if not label or label in public:
+            return None
     if level == 1:
         pattern = _label_pattern(label)
         if pattern and pattern.casefold() != label.casefold():
@@ -435,12 +441,8 @@ def _clue_at(session: ConexiuniSession, level: int, group: str) -> dict[str, obj
                 "pattern": pattern,
                 "message": f"Numele unui grup rămas: {pattern} (fiecare _ este o literă lipsă).",
             }
-    elif level == 2 and label:
-        public = {_group_label(session, key).casefold() for key in session.solved}
-        if session.category:
-            public.add(category_label(session.category).casefold())
-        if label.casefold() not in public:
-            return {"pattern": "", "label": label, "message": f"Numele grupului: {label}."}
+    elif level == 2:
+        return {"pattern": "", "label": label, "message": f"Numele grupului: {label}."}
     elif level == 3 and len(session.solved) < len(session.groups) - 1:
         node = session.groups[group][0]
         word = get_service().display_label(node)

@@ -71,3 +71,27 @@ func TestLastGroupMembershipIsAlreadyPublic(t *testing.T) {
 		t.Fatalf("last group could still be marked: %#v", after)
 	}
 }
+
+func TestSolvingHintedGroupDoesNotRetargetRemainingRungs(t *testing.T) {
+	s := New(&content.Content{})
+	groups := map[string][]string{
+		"first": {"a", "b", "c", "d"}, "second": {"e", "f", "g", "h"},
+		"third": {"i", "j", "k", "l"}, "fourth": {"m", "n", "o", "p"},
+	}
+	g := newSession(groups, []string{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p"},
+		"usor", "", "", map[string]string{"first": "Cuvinte ascunse", "fourth": "Alte cuvinte"})
+	id, _ := s.store.Create(g)
+	if hint, err := s.Clue(id); err != nil || hint["hint_level"] != 1 || hint["hints_left"] != 2 {
+		t.Fatalf("first rung: %#v, %v", hint, err)
+	}
+	solved, err := s.Guess(id, groups["first"])
+	if err != nil || solved["correct"] != true || solved["hints_left"] != 0 || solved["steps"] != 1 {
+		t.Fatalf("solving the hinted group must exhaust only its ladder: %#v, %v", solved, err)
+	}
+	before, _ := s.Get(id)
+	_, err = s.Clue(id)
+	after, _ := s.Get(id)
+	if err == nil || err.Status != 400 || !reflect.DeepEqual(before, after) {
+		t.Fatalf("the ladder retargeted or mutated after the subject was solved: %#v, %v", after, err)
+	}
+}

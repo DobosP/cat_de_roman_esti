@@ -442,6 +442,25 @@ def test_hint_ladder_reveals_theme_label_and_two_tiles_without_solving() -> None
     _assert_private_preterminal(marked, session)
 
 
+@pytest.mark.parametrize("rung", [1, 2])
+def test_solving_the_hinted_pair_ends_its_ladder_without_charge(rung: int) -> None:
+    client = Client()
+    created = _create(client, seed=12)
+    root = f"{BASE}/games/{created['game_id']}"
+    session = _session(created["game_id"])
+    for level in range(1, rung + 1):
+        earned = client.post(root + "/hint").json()
+        assert earned["hint_level"] == earned["steps"] == level
+
+    matched = _post_json(client, root + "/match", {"ids": list(session.pairs[0].members)}).json()
+    assert matched["correct"] and matched["remaining_pairs"] == 3
+    assert matched["hints_left"] == 0 and matched["hint_available"] is False
+    assert matched["steps"] == matched["hint_level"] == rung
+    before = client.get(root).json()
+    assert client.post(root + "/hint").status_code == 400
+    assert client.get(root).json() == before
+
+
 def test_public_last_pair_skips_the_marking_hint_without_charge() -> None:
     client = Client()
     created = _create(client, seed=12)

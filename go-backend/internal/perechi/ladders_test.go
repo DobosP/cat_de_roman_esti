@@ -66,3 +66,27 @@ func TestLastPairMembershipIsAlreadyPublic(t *testing.T) {
 		t.Fatalf("last pair could still be marked: %#v", after)
 	}
 }
+
+func TestSolvingHintedPairDoesNotRetargetRemainingRungs(t *testing.T) {
+	s := New(&content.Content{CategoryLabels: map[string]string{"theme": "Temă"}})
+	g := &gameSession{
+		boardCategory: "theme",
+		hinted:        -1,
+		pairs:         []pair{{[]string{"a", "b"}, "Legătura întâi"}, {[]string{"c", "d"}, "Altă legătură"}, {[]string{"e", "f"}, "A treia"}, {[]string{"g", "h"}, "A patra"}},
+		order:         []string{"a", "b", "c", "d", "e", "f", "g", "h"},
+	}
+	id, _ := s.store.Create(g)
+	if hint, err := s.Hint(id); err != nil || hint["hint_level"] != 1 || hint["hints_left"] != 2 {
+		t.Fatalf("first rung: %#v, %v", hint, err)
+	}
+	solved, err := s.Match(id, []string{"a", "b"})
+	if err != nil || solved["correct"] != true || solved["hints_left"] != 0 || solved["steps"] != 1 {
+		t.Fatalf("solving the hinted pair must exhaust only its ladder: %#v, %v", solved, err)
+	}
+	before, _ := s.Get(id)
+	_, err = s.Hint(id)
+	after, _ := s.Get(id)
+	if err == nil || err.Status != 400 || !reflect.DeepEqual(before, after) {
+		t.Fatalf("the ladder retargeted or mutated after the subject was solved: %#v, %v", after, err)
+	}
+}

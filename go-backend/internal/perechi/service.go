@@ -193,7 +193,10 @@ func share(g *gameSession) string {
 	return header + "\n" + strings.Repeat("🟩", len(g.solved)) + strings.Repeat("⬜", 4-len(g.solved))
 }
 func hintPair(g *gameSession) int {
-	if g.hinted >= 0 && !slices.Contains(g.solved, g.hinted) {
+	if g.hinted >= 0 {
+		if slices.Contains(g.solved, g.hinted) {
+			return -1
+		}
 		return g.hinted
 	}
 	for i := range g.pairs {

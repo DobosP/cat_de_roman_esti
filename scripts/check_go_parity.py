@@ -517,6 +517,24 @@ def main() -> int:
             assert before["hints_left"] == 0
             request("POST", path + "/" + hint)
             assert request("GET", path) == before
+        # Solving the original subject publishes its later rungs. Replaying the
+        # planner never picks a new subject on behalf of an exhausted ladder.
+        for module, action, hint in ((perechi, "match", "hint"), (conexiuni, "guess", "clue")):
+            base = f"/api/wordgames/{module.GAME_KEY}/games"
+            initial = request("POST", base + "?seed=38")
+            path = f"{base}/{initial['game_id']}"
+            session = module.store.get(initial["game_id"])
+            assert session is not None
+            request("POST", path + "/" + hint)
+            if module is perechi:
+                ids = session.pairs[session.hinted_pair].members
+            else:
+                ids = session.groups[session.clue_category]
+            request("POST", path + "/" + action, json.dumps({"ids": list(ids)}))
+            before = request("GET", path)
+            assert before["hint_level"] == before["steps"] == 1 and before["hints_left"] == 0
+            request("POST", path + "/" + hint)
+            assert request("GET", path) == before
         if args.benchmark:
             for seed in range(1000):
                 game = request("POST", f"{BASE}?seed={seed}")

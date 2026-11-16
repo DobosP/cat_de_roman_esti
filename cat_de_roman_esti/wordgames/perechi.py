@@ -119,8 +119,8 @@ def _share(session: PerechiSession) -> str:
 
 
 def _hint_pair_index(session: PerechiSession) -> int | None:
-    if session.hinted_pair is not None and session.hinted_pair not in session.solved:
-        return session.hinted_pair
+    if session.hinted_pair is not None:
+        return None if session.hinted_pair in session.solved else session.hinted_pair
     return next((index for index in range(PAIR_COUNT) if index not in session.solved), None)
 
 
