@@ -138,10 +138,17 @@ def test_dead_end_and_move_limit_backtrack_help_are_recoverable(game):
     assert client.get(url).json()["earned_hint"] == _cue(earned)
     client.post(f"{url}/undo")
     session.chain = ["start", "mid"] * 32 + ["start"]
-    limited = client.post(f"{url}/hint").json()
-    assert limited["stage"] == "backtrack"
-    assert client.get(url).json()["earned_hint"] == _cue(limited)
-    assert session.hint_requests == session.hints_used == 2
+    rejected = move(client, url, "MID")
+    assert rejected["ok"] is False and "Înapoi" in rejected["last_error"]
+    limited = client.get(url).json()
+    assert limited["hints_left"] == 0
+    assert client.post(f"{url}/hint").status_code == 400
+    assert client.get(url).json() == limited
+    assert session.hint_requests == session.hints_used == 1
+
+    undone = client.post(f"{url}/undo").json()
+    assert undone["steps"] == limited["steps"]
+    assert undone["hints_left"] > 0
 
 
 def test_retained_help_is_one_bounded_payload_and_clears_on_win(game):
