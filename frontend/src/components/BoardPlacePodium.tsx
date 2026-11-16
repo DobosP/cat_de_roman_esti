@@ -10,6 +10,7 @@ const tiers: readonly { key: BoardPlaceTier; label: string }[] = [
 ];
 
 const countFormat = new Intl.NumberFormat("ro-RO");
+const legend = tiers.map(({ label }) => label).join(", ");
 
 export function BoardPlacePodium({ round, replay, gameTitle }: {
   round: Pick<RoundCounters, "place"> & { daily?: string; won: boolean };
@@ -23,7 +24,7 @@ export function BoardPlacePodium({ round, replay, gameTitle }: {
   if (!tier) return null;
 
   const today = daily === localDay();
-  const rankedDay = today ? "azi" : formatDayKey(daily);
+  const boardDate = today ? "de azi" : `din ${formatDayKey(daily)}`;
   return (
     <div className="board-place">
       <div className="board-place-intro">
@@ -32,7 +33,7 @@ export function BoardPlacePodium({ round, replay, gameTitle }: {
           la {gameTitle}, din {countFormat.format(place.rounds)} {roNoun(place.rounds, "rundă", "runde")} încheiate
         </p>
       </div>
-      <div className="board-place-chart" role="img" aria-label={`Locul tău: ${tier.label}, ${rankedDay}`}>
+      <div className="board-place-chart" role="img" aria-label={`Podium cu treptele ${legend}. Treapta ta este ${tier.label}.`}>
         {tiers.map(({ key, label }) => (
           <div className="board-place-column" key={key} aria-hidden="true" data-current={key === tier.key || undefined}>
             {key === tier.key && <span className="board-place-marker">Tu</span>}
@@ -42,7 +43,7 @@ export function BoardPlacePodium({ round, replay, gameTitle }: {
         ))}
       </div>
       <p>
-        Mai bine decât <strong>{place.better_than_pct}%</strong> dintre rundele încheiate {today ? "azi pe această tablă" : `pe această tablă, în ${rankedDay}`}.
+        Mai bine decât <strong>{place.better_than_pct}%</strong> dintre rundele încheiate pe tabla {boardDate}.
       </p>
     </div>
   );

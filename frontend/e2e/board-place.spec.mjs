@@ -38,11 +38,11 @@ for (const [key, action, colorScheme] of [["contexto", "guess", "light"], ["lant
     const result = page.locator(".game-result");
     await expect(result.getByRole("heading", { level: 2 })).toBeFocused();
     await expect(result.getByRole("heading", { name: "Prima jumătate azi" })).toBeVisible();
-    await expect(result.getByRole("img", { name: "Locul tău: Prima jumătate, azi" })).toBeVisible();
+    await expect(result.getByRole("img", { name: "Podium cu treptele Perfect, Top 10%, Prima jumătate, Ai reușit. Treapta ta este Prima jumătate." })).toBeVisible();
     await expect(result.locator(".board-place-label")).toHaveText(labels);
     await expect(result.locator("[data-current] .board-place-label")).toHaveText("Prima jumătate");
     await expect(result.locator(".board-place-count")).toContainText("1.284 de runde încheiate");
-    await expect(result).toContainText("Mai bine decât 55% dintre rundele încheiate azi pe această tablă.");
+    await expect(result).toContainText("Mai bine decât 55% dintre rundele încheiate pe tabla de azi.");
 
     await page.evaluate(() => document.fonts.ready);
     const audit = await new AxeBuilder({ page }).include(".game-result")
