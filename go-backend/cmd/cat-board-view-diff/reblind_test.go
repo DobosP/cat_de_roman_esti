@@ -4,8 +4,10 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"maps"
 	"os"
 	"path/filepath"
+	"slices"
 	"strings"
 	"testing"
 
@@ -197,6 +199,25 @@ func TestPairedReblindReceiptBindsExactEvidence(t *testing.T) {
 		row.ThreadID != "blind-critic" || row.Transcript != good || row.Guesses != 2 || row.CandidateBest != 2 || row.BaselineBest != 2 ||
 		row.Verdict != "no-worse" || !row.StockQuality || receipt.Totals["no-worse"] != 1 || receipt.Totals["stock_quality"] != 1 {
 		t.Fatalf("unexpected receipt: %+v", receipt)
+	}
+	// scripts/content_v5/close_landing.py requires exactly these receipt members.
+	members := func(value any) string {
+		raw, err := json.Marshal(value)
+		if err != nil {
+			t.Fatal(err)
+		}
+		var decoded map[string]json.RawMessage
+		if err := json.Unmarshal(raw, &decoded); err != nil {
+			t.Fatal(err)
+		}
+		return strings.Join(slices.Sorted(maps.Keys(decoded)), " ")
+	}
+	if got := members(receipt); got != "baseline baseline_bundle_sha256 board_view_diff_sha256 boards candidate_bundle_sha256 schema sha totals" {
+		t.Fatalf("receipt members changed without closeout: %s", got)
+	}
+	if got := members(row); got != "baseline_best_rank baseline_scored_guesses baseline_view_sha256 candidate_best_rank candidate_scored_guesses "+
+		"game guesses id k stock_quality thread_id transcript verdict view_sha256 won_baseline won_candidate" {
+		t.Fatalf("receipt row members changed without closeout: %s", got)
 	}
 	var first, second bytes.Buffer
 	again, _ := files(list(board("moved", good))).compare(before, after, beforeSHA, afterSHA)

@@ -46,8 +46,36 @@ verdict (pass) and a retained transcript path/digest reference. The transcript
 is a JSON object with those five board, view and role fields plus play, a
 nonempty array of action or feedback objects containing actual play text.
 Known author, factual, quality, landing and pin threads cannot sign reblind.
-Distinct boards may share a critic thread within one blind batch. Coverage
-must equal the native disturbed list. Each transcript and play must be distinct.
+Distinct boards may share a critic thread within one blind batch. Each
+transcript and play must be distinct.
+
+A disturbed existing Cald board may instead rest on a paired comparison.
+assembly.board_reblind_compare references the cat-v5-board-reblind-compare-1
+receipt written by cat-board-view-diff --reblind-compare. It replays the blind
+critic's typed guesses on the baseline and the candidate. The receipt must bind
+sha, baseline, both committed bundle digests and the exact view diff digest.
+Each row must name a disturbed Cald board with its exact before and after view
+digests and a verdict of win or no-worse. Closeout recomputes the verdict from
+the row: win when the candidate is won, else no-worse when candidate_best_rank
+is at most baseline_best_rank + k, else worse. A worse or misstated row refuses
+the landing. The critic transcript has the same six members as above. Its
+verdict is pass or fail, and pass requires the native candidate win. The same
+critic-thread, distinct-transcript and distinct-play rules apply across both
+receipts. Every disturbed board needs exactly one row in one of the two
+receipts. Lanț and the other games accept only the blind pass.
+
+For every disturbed existing Cald board, on either path, both judges sign the
+top-100 change. assembly.board_change_reviews has factual and quality
+path/digest references to two cat-v5-board-change-review-1 objects. Each has
+sha, board_view_diff_sha256, role, thread_id, verdict (accept) and boards. The
+boards rows give game, id, before_sha256 and after_sha256 exactly as the view
+diff lists them, for every disturbed Cald board and no other. The two reviewer
+threads must differ from each other, from every author and from every critic,
+including the reblind critics. They may be the judges of the train's words.
+
+Rows with stock_quality (neither build is won) are copied to the landing
+receipt as stock_quality_boards, and the queue entry counts them for the owner.
+New boards keep their own absolute blind win.
 All direct train attachments share the 50 MiB receipt budget. Reusable pinned
 source-cache bodies and the dated dump remain outside the train attachment list.
 Keep all train evidence in campaign scratch.
@@ -71,6 +99,11 @@ The orchestrator owns the local Git database, evidence and pinned checker.
 The checker validates exact bindings and local fast-forward evidence without
 changing refs. Reflog data proves the move, not the literal argv. Reviewer
 truthfulness and selection of an independent oracle are operator obligations.
+The paired comparison can only relax the blind-win rule for a disturbed
+existing Cald board whose top-100 change both judges signed. It never covers
+a new board, Lanț or another game. Closeout does not replay the guesses. It
+trusts the native receipt's numbers after checking its bindings, so the
+operator must run the pinned cat-board-view-diff on the committed bundles.
 The four local writes roll back after an ordinary error. A killed process
 requires inspecting the four exact paths before retry. Use the standard-
 library Python 3.12 CLI. The pinned doc checker is Go.

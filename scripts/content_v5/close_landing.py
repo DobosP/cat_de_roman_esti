@@ -53,6 +53,11 @@ SHA256 = re.compile(r"[a-f0-9]{64}")
 BUNDLE = "go-backend/internal/content/bundled.json"
 BOARD_GAMES = {"alchimie", "conexiuni", "contexto", "intrusul", "lant", "perechi"}
 WORD_REVIEW_FIELDS = ("v5_word_review_binding", "v5_derived_view_sha256", "v5_independence_checks")
+REBLIND_EVIDENCE = {"board_reblind", "board_reblind_compare", "board_change_reviews"}
+COMPARE_COUNTS = ("guesses", "candidate_scored_guesses", "baseline_scored_guesses",
+                  "candidate_best_rank", "baseline_best_rank", "k")
+COMPARE_ROW = {"game", "id", "view_sha256", "baseline_view_sha256", "thread_id", "transcript", *COMPARE_COUNTS,
+               "won_candidate", "won_baseline", "verdict", "stock_quality"}
 
 
 def sha256(data):
@@ -322,7 +327,56 @@ def actual_play_text(value):
     return False
 
 
-def word_board_scope(evidence, assembly, before_bundle_sha, bundle_sha, other_roles):
+def reblind_transcript(evidence, name, row, verdicts, transcript_hashes, play_hashes):
+    fields = ("game", "id", "view_sha256", "thread_id")
+    ref = row["transcript"]
+    raw = evidence.add(name, ref)
+    require(ref["sha256"] not in transcript_hashes, "Reused disturbed-board reblind transcript")
+    transcript = read_json(raw)
+    play = transcript.get("play")
+    require(transcript.keys() == {*fields, "verdict", "play"}
+            and all(transcript[field] == row[field] for field in fields) and transcript["verdict"] in verdicts
+            and isinstance(play, list) and play and all(isinstance(step, dict) and step for step in play)
+            and actual_play_text(play), "Disturbed-board reblind transcript lacks exact binding or play")
+    play_sha = sha256(link_install.canonical(play))
+    require(play_sha not in play_hashes, "Reused disturbed-board reblind play")
+    transcript_hashes.add(ref["sha256"])
+    play_hashes.add(play_sha)
+    return transcript
+
+
+def board_change_reviews(evidence, assembly, diff_sha, changes, excluded):
+    """Both judges accept the exact top-100 change of every disturbed existing Cald board."""
+    if not changes:
+        require("board_change_reviews" not in assembly, "Board-change reviews need a disturbed Cald board")
+        return
+    refs = assembly.get("board_change_reviews")
+    require(isinstance(refs, dict) and refs.keys() == {"factual", "quality"},
+            "Factual and quality reviewers must both sign the disturbed Cald top-100 changes")
+    threads = set()
+    for role in ("factual", "quality"):
+        proof = read_json(evidence.add(f"board-change-review-{role}", refs[role], 4 * 1024 * 1024))
+        thread = proof.get("thread_id")
+        require(proof.keys() == {"schema", "sha", "board_view_diff_sha256", "role", "thread_id", "verdict", "boards"}
+                and proof["schema"] == "cat-v5-board-change-review-1" and proof["sha"] == assembly["sha"]
+                and proof["board_view_diff_sha256"] == diff_sha and proof["role"] == role
+                and proof["verdict"] == "accept" and link_install.text(thread, 128)
+                and isinstance(proof["boards"], list), f"Missing exact {role} board-change review")
+        require(thread not in excluded and thread not in threads,
+                "Board-change reviewers must be two threads other than every author and critic")
+        signed = {}
+        for row in proof["boards"]:
+            require(isinstance(row, dict) and row.keys() == {"game", "id", "before_sha256", "after_sha256"},
+                    f"Invalid {role} board-change row")
+            key = (row["game"], row["id"])
+            require(key not in signed, f"Duplicate {role} board-change row")
+            signed[key] = (row["before_sha256"], row["after_sha256"])
+        require(signed == changes, f"{role} review must sign every disturbed Cald board's exact top-100 change")
+        threads.add(thread)
+
+
+def word_board_scope(evidence, assembly, before_bundle_sha, bundle_sha, other_roles,
+                     authors_and_critics=frozenset()):
     diff_ref = assembly["board_view_diff"]
     diff = read_json(evidence.add("board-view-diff", diff_ref, 8 * 1024 * 1024))
     require(diff.get("schema") == "cat-board-view-diff-2" and "one_word_dry_run" not in diff
@@ -333,7 +387,7 @@ def word_board_scope(evidence, assembly, before_bundle_sha, bundle_sha, other_ro
             and type(diff.get("disturbed_total")) is int and diff["disturbed_total"] == len(diff["disturbed"]),
             "Exact full word-train board-view diff required")
     # Disturbed boards are re-blinded. Diagnostic changes are only replayed over HTTP.
-    views, diagnostic = {}, {}
+    views, diagnostic, before_views = {}, {}, {}
     for rows, found, label in ((diff["disturbed"], views, "Disturbed board"),
                                (diff["diagnostic_changes"], diagnostic, "Diagnostic board change")):
         for row in rows:
@@ -345,61 +399,103 @@ def word_board_scope(evidence, assembly, before_bundle_sha, bundle_sha, other_ro
             key = (row["game"], row["id"])
             require(key not in found, f"Duplicate {label.lower()}")
             found[key] = row["after_sha256"]
+            if found is views:
+                before_views[key] = row["before_sha256"]
     require(all(type(row.get("disturbed")) is int and row["disturbed"] == sum(key[0] == game for key in views)
                 for game, row in diff["games"].items()), "Board-view disturbance counts differ")
     replay = views.keys() | diagnostic.keys()
-    if not views and "board_reblind" not in assembly:
-        return views, replay
-    reblind = read_json(evidence.add("board-reblind", assembly["board_reblind"], 4 * 1024 * 1024))
-    require(reblind.get("schema") == "cat-v5-board-reblind-1" and reblind.get("sha") == assembly["sha"]
-            and reblind.get("board_view_diff_sha256") == diff_ref["sha256"]
-            and isinstance(reblind.get("boards"), list), "Reblind receipt differs from exact word-train view diff")
-    fields = ("game", "id", "view_sha256", "thread_id", "verdict")
-    seen, transcript_hashes, play_hashes = set(), set(), set()
-    for index, row in enumerate(reblind["boards"], 1):
-        key = (row["game"], row["id"])
-        thread = row["thread_id"]
-        require(key in views and key not in seen and row["view_sha256"] == views[key]
-                and link_install.text(thread, 128) and thread not in other_roles and row["verdict"] == "pass",
-                "Independent reblind pass differs from exact disturbed board view")
-        ref = row["transcript"]
-        raw = evidence.add(f"board-reblind-transcript-{index}", ref)
-        require(ref["sha256"] not in transcript_hashes, "Reused disturbed-board reblind transcript")
-        transcript = read_json(raw)
-        play = transcript.get("play")
-        require(transcript.keys() == {*fields, "play"}
-                and all(transcript[field] == row[field] for field in fields)
-                and isinstance(play, list) and play and all(isinstance(step, dict) and step for step in play)
-                and actual_play_text(play), "Disturbed-board reblind transcript lacks exact binding or play")
-        play_sha = sha256(link_install.canonical(play))
-        require(play_sha not in play_hashes, "Reused disturbed-board reblind play")
-        seen.add(key)
-        transcript_hashes.add(ref["sha256"])
-        play_hashes.add(play_sha)
+    if not views and not REBLIND_EVIDENCE & assembly.keys():
+        return views, replay, None
+    seen, critics, transcript_hashes, play_hashes = set(), set(), set(), set()
+    if "board_reblind" in assembly:
+        reblind = read_json(evidence.add("board-reblind", assembly["board_reblind"], 4 * 1024 * 1024))
+        require(reblind.get("schema") == "cat-v5-board-reblind-1" and reblind.get("sha") == assembly["sha"]
+                and reblind.get("board_view_diff_sha256") == diff_ref["sha256"]
+                and isinstance(reblind.get("boards"), list), "Reblind receipt differs from exact word-train view diff")
+        for index, row in enumerate(reblind["boards"], 1):
+            key = (row["game"], row["id"])
+            thread = row["thread_id"]
+            require(key in views and key not in seen and row["view_sha256"] == views[key]
+                    and link_install.text(thread, 128) and thread not in other_roles and row["verdict"] == "pass",
+                    "Independent reblind pass differs from exact disturbed board view")
+            reblind_transcript(evidence, f"board-reblind-transcript-{index}", row, {"pass"},
+                               transcript_hashes, play_hashes)
+            seen.add(key)
+            critics.add(thread)
+    stock = None
+    if "board_reblind_compare" in assembly:
+        # The paired verdict can stand in for a blind win only on an existing Cald board.
+        compare = read_json(evidence.add("board-reblind-compare", assembly["board_reblind_compare"], 4 * 1024 * 1024))
+        require(compare.keys() == {"schema", "baseline", "sha", "baseline_bundle_sha256", "candidate_bundle_sha256",
+                                   "board_view_diff_sha256", "boards", "totals"}
+                and compare["schema"] == "cat-v5-board-reblind-compare-1" and compare["sha"] == assembly["sha"]
+                and compare["baseline"] == assembly["baseline"]
+                and compare["baseline_bundle_sha256"] == before_bundle_sha
+                and compare["candidate_bundle_sha256"] == bundle_sha
+                and compare["board_view_diff_sha256"] == diff_ref["sha256"]
+                and isinstance(compare["boards"], list) and compare["boards"],
+                "Paired reblind receipt differs from the exact candidate and view diff")
+        stock = []
+        for index, row in enumerate(compare["boards"], 1):
+            require(isinstance(row, dict) and row.keys() == COMPARE_ROW, "Invalid paired reblind row")
+            key = (row["game"], row["id"])
+            thread = row["thread_id"]
+            ranks = [row[field] for field in COMPARE_COUNTS]
+            won, won_before = row["won_candidate"], row["won_baseline"]
+            require(key[0] == "contexto" and key in views and key not in seen and row["view_sha256"] == views[key]
+                    and row["baseline_view_sha256"] == before_views[key]
+                    and link_install.text(thread, 128) and thread not in other_roles,
+                    "Paired reblind row differs from exact disturbed existing Cald board view")
+            require(all(type(value) is int and value >= 0 for value in ranks)
+                    and row["candidate_best_rank"] >= 1 and row["baseline_best_rank"] >= 1
+                    and type(won) is bool and type(won_before) is bool
+                    and (not won or row["candidate_best_rank"] == 1)
+                    and (not won_before or row["baseline_best_rank"] == 1)
+                    and row["stock_quality"] is (not won and not won_before),
+                    "Paired reblind numbers are inconsistent")
+            verdict = "win" if won else (
+                "no-worse" if row["candidate_best_rank"] <= row["baseline_best_rank"] + row["k"] else "worse")
+            require(row["verdict"] == verdict and verdict in {"win", "no-worse"},
+                    f"Paired reblind is worse or misstated for {key[0]}/{key[1]}")
+            transcript = reblind_transcript(evidence, f"board-compare-transcript-{index}", row, {"pass", "fail"},
+                                            transcript_hashes, play_hashes)
+            require(won or transcript["verdict"] == "fail", "Critic pass without a native candidate win")
+            seen.add(key)
+            critics.add(thread)
+            if row["stock_quality"]:
+                stock.append({"game": key[0], "id": key[1]})
+        stock.sort(key=lambda board: (board["game"], board["id"]))
     require(seen == views.keys(), "Reblind evidence must cover every disturbed board")
-    return views, replay
+    board_change_reviews(evidence, assembly, diff_ref["sha256"],
+                         {key: (before_views[key], view) for key, view in views.items() if key[0] == "contexto"},
+                         authors_and_critics | critics)
+    return views, replay, stock
 
 
 def other_reblind_roles(evidence, documents, rows, judgments):
+    """Return every known role thread and the author and critic subset."""
     threads = {documents[role]["thread_id"] for role in ("landing-review", "pin-review")}
+    authors_and_critics = set()
     for index, row in enumerate(rows, 1):
         checks = row["checks"]
         word = judgments.get(row["id"])
         binding = word or row.get("v5_review_binding", {})
         author = checks.get("v5_author")
         authored_thread = author.get("thread_id") if isinstance(author, dict) else None
-        threads.update(filter(None, (row.get("v5_author_thread"), authored_thread, binding.get("author_thread"))))
-        threads.update(proof["thread_id"] for proof in row["reviews"]
-                       if proof.get("role") in {"critic", "factual", "quality"} and proof.get("thread_id"))
+        authors_and_critics.update(filter(None, (
+            row.get("v5_author_thread"), authored_thread, binding.get("author_thread"))))
+        for proof in row["reviews"]:
+            if proof.get("role") in {"critic", "factual", "quality"} and proof.get("thread_id"):
+                (authors_and_critics if proof["role"] == "critic" else threads).add(proof["thread_id"])
         for blind in (row.get("v5_blind"), checks.get("v5_blind")):
             if isinstance(blind, dict) and blind.get("thread_id"):
-                threads.add(blind["thread_id"])
+                authors_and_critics.add(blind["thread_id"])
         for role, ref in binding.get("reviews", {}).items():
             if role not in {"critic", "factual", "quality"}:
                 continue
             proof = read_json(evidence.add(f"item-{index}-{role}-review", ref, link_install.MAX_INPUT,
                                            shared=word is None))
-            threads.add(proof["thread_id"])
+            (authors_and_critics if role == "critic" else threads).add(proof["thread_id"])
             if role == "critic" and word is not None:
                 transcript = {"path": proof["transcript_path"], "sha256": proof["transcript_sha256"]}
                 evidence.add(f"item-{index}-critic-transcript", transcript, link_install.MAX_INPUT)
@@ -413,7 +509,7 @@ def other_reblind_roles(evidence, documents, rows, judgments):
             for name in ("historical", "fresh"):
                 evidence.add(f"item-{index}-dump-parser-{name}", dump_gate[name],
                              link_install.MAX_INPUT, shared=True)
-    return threads
+    return threads | authors_and_critics, authors_and_critics
 
 
 def check_word_landing(repo, evidence, documents, delta, item_ids, registry, journal, base, candidate,
@@ -423,9 +519,9 @@ def check_word_landing(repo, evidence, documents, delta, item_ids, registry, jou
     word_ids = {item for item in item_ids if registry[item]["type"] == "concept"
                 and "v5_word_source_sha256" in registry[item]["checks"]}
     if not word_ids:
-        require(not ({"word_link_manifest", "board_view_diff", "board_reblind"} & assembly.keys()),
+        require(not (({"word_link_manifest", "board_view_diff"} | REBLIND_EVIDENCE) & assembly.keys()),
                 "Word-train evidence requires a reviewed additive word")
-        return {}, set()
+        return {}, set(), None
     document = read_json(evidence.add("word-link-manifest", assembly["word_link_manifest"], link_install.MAX_INPUT))
     require(document.keys() == {"schema", "items", "gate", "claims", "judgments"}
             and document["schema"] == "cat-v5-link-install-1" and isinstance(document["items"], list)
@@ -454,14 +550,15 @@ def check_word_landing(repo, evidence, documents, delta, item_ids, registry, jou
         evidence.add(f"word-parser-{name}", gate[name], link_install.MAX_INPUT)
     events = (read_json(line) for line in journal.splitlines())
     reviewed = reviewed_word_rows(registry, events, word_ids)
-    roles = other_reblind_roles(evidence, documents, (reviewed[item] for item in sorted(item_ids)),
-                                document["judgments"])
-    _, replay = word_board_scope(evidence, assembly, before_bundle_sha, bundle_sha, roles)
+    roles, authors_and_critics = other_reblind_roles(
+        evidence, documents, (reviewed[item] for item in sorted(item_ids)), document["judgments"])
+    _, replay, stock = word_board_scope(evidence, assembly, before_bundle_sha, bundle_sha, roles,
+                                        authors_and_critics)
     _, edge_results = link_install.verify_span_evidence(scratch, document["claims"], links)
     gate, bindings = link_install.verified_sources(scratch, document["gate"], repo, candidate, items)
     link_install.verify_registry(scratch, document, reviewed, bindings, gate, edge_results, False)
     return {item: {**artifact, "payload_sha256": registry[item]["checks"]["v5_word_source_sha256"]}
-            for item, artifact in artifacts.items()}, replay
+            for item, artifact in artifacts.items()}, replay, stock
 
 
 def check_scope(scratch, documents, delta, item_ids, registry, bundle, words=None, replay=(),
@@ -640,6 +737,28 @@ def needs_gui(delta, before_bundle, after_bundle, changed):
     )
 
 
+def landing_receipt(train, base, candidate, when, ids, gui_gates, attachments, stock=None):
+    return json_bytes({
+        "schema": "cat-v5-landing-1", "train_id": train, "actual_local_landed": True,
+        "baseline": base, "candidate": candidate, "actual_landing_at": when.isoformat(),
+        "prescribed_command": ["git", "merge", "--ff-only", candidate],
+        "observed_reflog": f"merge {candidate}: Fast-forward", "operator": "agent:codex",
+        "item_ids": sorted(ids), "gui_gates": gui_gates, "evidence": attachments,
+        # Existing Cald boards that neither build wins in the paired reblind, for the owner queue.
+        **({} if stock is None else {"stock_quality_boards": stock}),
+    })
+
+
+def queue_entry(train, base, candidate, when, count, docs_path, stock=None):
+    flagged = (f"The receipt lists {len(stock)} existing Cald boards as `stock_quality_boards` for the owner.\n"
+               if stock else "")
+    return (
+        f"\n## V5 train {train}\n\n"
+        f"Local main advanced from `{base}` to `{candidate}` at {when.isoformat()} "
+        f"with {count} items. [Landing receipt](../{docs_path}).\n{flagged}"
+    ).encode()
+
+
 def expected(repo, scratch, manifest):
     require(set(manifest) == {"train_id", "baseline", "candidate", "landed_at", "item_ids",
                               "gui_gates", "evidence"}, "Unexpected closeout fields")
@@ -691,8 +810,8 @@ def expected(repo, scratch, manifest):
             and all(key in protected for key, row in registry.items() if row["state"] == "landed"),
             "Candidate changed protected registry state before closeout")
     require(set(ids) <= registry.keys(), "Unknown registry ID")
-    words, replay = check_word_landing(repo, evidence, documents, delta, ids, registry,
-                                       journal, base, candidate, sha256(before_bundle_raw), sha256(bundle_raw))
+    words, replay, stock = check_word_landing(repo, evidence, documents, delta, ids, registry, journal, base,
+                                              candidate, sha256(before_bundle_raw), sha256(bundle_raw))
     legacy_puzzles_verified = False
     if words and any(delta["legacy_puzzles"][field] for field in ("added", "removed", "changed")):
         kg = read_json(git(repo, "--no-replace-objects", "show", f"{candidate}:{link_install.KG}"))
@@ -706,13 +825,7 @@ def expected(repo, scratch, manifest):
     train_dir = train if train.startswith("v5-") else f"v5-{train}"
     docs_path = f"reviews/{train_dir}/landing.json"
     path = f"docs/{docs_path}"
-    receipt = json_bytes({
-        "schema": "cat-v5-landing-1", "train_id": train, "actual_local_landed": True,
-        "baseline": base, "candidate": candidate, "actual_landing_at": when.isoformat(),
-        "prescribed_command": ["git", "merge", "--ff-only", candidate],
-        "observed_reflog": f"merge {candidate}: Fast-forward", "operator": "agent:codex",
-        "item_ids": sorted(ids), "gui_gates": manifest["gui_gates"], "evidence": evidence.attachments,
-    })
+    receipt = landing_receipt(train, base, candidate, when, ids, manifest["gui_gates"], evidence.attachments, stock)
     ref = {"path": path, "sha256": sha256(receipt), "bytes": len(receipt)}
     entries = transitions(registry, ids, ref, candidate, when.isoformat())
     current_rows((*read_journal(repo / REGISTRY), *entries), repo)
@@ -730,13 +843,8 @@ def expected(repo, scratch, manifest):
         previous = f" Previous status: {old.removeprefix('Last verified: ')}"
     lines[2] = headline + link + previous + "\n"
     queue = read_artifact(repo, QUEUE)
-    queue_entry = (
-        f"\n## V5 train {train}\n\n"
-        f"Local main advanced from `{base}` to `{candidate}` at {when.isoformat()} "
-        f"with {len(ids)} items. [Landing receipt](../{docs_path}).\n"
-    ).encode()
     return {REGISTRY: updated, STATUS: "".join(lines).encode("utf-8"),
-            QUEUE: queue + queue_entry, path: receipt}
+            QUEUE: queue + queue_entry(train, base, candidate, when, len(ids), docs_path, stock), path: receipt}
 
 
 def write(repo, outputs, doc_checker):
