@@ -32,7 +32,7 @@ func TestExactBundleReplay(t *testing.T) {
 	if err := json.Unmarshal(out.Bytes(), &got); err != nil {
 		t.Fatal(err)
 	}
-	if got.Schema != "cat-board-view-diff-1" || got.BaselineSHA256 != sha || got.CandidateSHA256 != sha ||
+	if got.Schema != "cat-board-view-diff-2" || got.BaselineSHA256 != sha || got.CandidateSHA256 != sha ||
 		len(got.Games) != 6 || len(got.Added)+len(got.Disturbed)+len(got.SelectionChanges)+len(got.Diagnostics) != 0 || got.DisturbedTotal != 0 {
 		t.Fatalf("unexpected replay report: %s", out.String())
 	}

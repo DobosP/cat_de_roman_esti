@@ -18,6 +18,10 @@ import (
 
 var games = []string{"alchimie", "conexiuni", "contexto", "intrusul", "lant", "perechi"}
 
+// Schema 2 counts the same board parts in every mode. Schema 1 S7 reports also
+// counted Cald feedback and Lanț caption and menu fields as disturbances.
+const viewDiffSchema = "cat-board-view-diff-2"
+
 type boardKey struct {
 	Game string `json:"game"`
 	ID   string `json:"id"`
@@ -93,16 +97,13 @@ type report struct {
 }
 
 func compare(baseline, candidate *content.Content) (*report, error) {
-	return compareMode(baseline, candidate, false)
-}
-func compareMode(baseline, candidate *content.Content, dryRun bool) (*report, error) {
-	before, err := buildInventory(baseline, dryRun)
+	before, err := buildInventory(baseline)
 	if err != nil {
 		return nil, fmt.Errorf("baseline view: %w", err)
 	}
 	after := before
 	if baseline != candidate {
-		after, err = buildInventory(candidate, dryRun)
+		after, err = buildInventory(candidate)
 		if err != nil {
 			return nil, fmt.Errorf("candidate view: %w", err)
 		}
@@ -112,7 +113,7 @@ func compareMode(baseline, candidate *content.Content, dryRun bool) (*report, er
 
 func compareInventories(before, after inventory) *report {
 	out := &report{
-		Schema: "cat-board-view-diff-1", Games: map[string]*gameCount{},
+		Schema: viewDiffSchema, Games: map[string]*gameCount{},
 		Added: []change{}, Disturbed: []change{}, SelectionChanges: []selectionChange{}, Diagnostics: []change{},
 	}
 	for _, game := range games {
@@ -200,7 +201,7 @@ type services struct {
 	lant *lant.Service
 }
 
-func buildInventory(c *content.Content, dryRun bool) (inventory, error) {
+func buildInventory(c *content.Content) (inventory, error) {
 	result := inventory{boards: map[boardKey]boardView{}, approved: map[string]int{}, excluded: map[string]int{},
 		storedQuick: map[string]int{}, unreachableQuick: map[string]int{},
 		storedKeys: make(map[boardKey]bool, len(c.PackItems)+len(c.Boards))}
@@ -219,7 +220,7 @@ func buildInventory(c *content.Content, dryRun bool) (inventory, error) {
 			result.excluded[item.Game]++
 			continue
 		}
-		view, err := services.packView(item, dryRun)
+		view, err := services.packView(item)
 		if err != nil {
 			return result, fmt.Errorf("%s/%s: %w", key.Game, key.ID, err)
 		}
