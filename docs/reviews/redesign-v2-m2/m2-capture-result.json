@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "target": "baseline",
+  "status": "pass",
+  "sha": "bb26259769a6397d8d052d8c65388257982992f3",
+  "dirty": false,
+  "tree_sha256": "2b00d8f59fe3827a32d965420962b267a5cd32846fe8f9a36d465c030697e0e8",
+  "toolchain_digest": "sha256:c84ff601865080c9915159220f136fcfb80218bb91240669d65d62ae654404d6",
+  "versions_lock_sha256": "07b78e8df5330c5463430ea90b3954142b25b25b2550941d071097d5efd8a0ad",
+  "parallel": 4,
+  "started": "2026-11-16T15:18:59.044Z",
+  "finished": "2026-11-16T15:19:53.758Z",
+  "checks": [
+    {
+      "name": "bootstrap-evidence",
+      "status": "pass",
+      "duration_ms": 2
+    },
+    {
+      "name": "cat-setup-npm-ci",
+      "status": "pass",
+      "duration_ms": 2524
+    },
+    {
+      "name": "cat-baseline-frontend-build",
+      "status": "pass",
+      "duration_ms": 2350
+    },
+    {
+      "name": "cat-baseline-build-cat-server",
+      "status": "pass",
+      "duration_ms": 796
+    },
+    {
+      "name": "cat-baseline-build-cat-browser-plan",
+      "status": "pass",
+      "duration_ms": 604
+    },
+    {
+      "name": "cat-baseline-browser",
+      "status": "pass",
+      "duration_ms": 47566
+    }
+  ],
+  "csp": {
+    "stage": "enforced",
+    "violations": 0,
+    "legacy_violations": 0
+  },
+  "budgets": {},
+  "artifacts": [
+    ".gate/baseline/logs/2b706a10-b2c2-4099-85ac-860331715480-bootstrap-config-0.stdout.log sha256:b88e00bfaad7d77592262b79d6ae633e8979ce1ff54431d722601db5aea7a351",
+    ".gate/baseline/logs/2b706a10-b2c2-4099-85ac-860331715480-bootstrap-config-0.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/baseline/logs/2b706a10-b2c2-4099-85ac-860331715480-bootstrap-setup-1.stdout.log sha256:c64dc1dca5df56b138f8ed28db53c9680f414f78ef7f6448f717afcef25c9eee",
+    ".gate/baseline/logs/2b706a10-b2c2-4099-85ac-860331715480-bootstrap-setup-1.stderr.log sha256:6e3b1e37fae57c49e967288b4c9c975a2518d1f20dd827fad5385af714c66f7a",
+    ".gate/baseline/logs/2b706a10-b2c2-4099-85ac-860331715480-bootstrap-config-2.stdout.log sha256:b88e00bfaad7d77592262b79d6ae633e8979ce1ff54431d722601db5aea7a351",
+    ".gate/baseline/logs/2b706a10-b2c2-4099-85ac-860331715480-bootstrap-config-2.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/baseline/bootstrap-execution.json sha256:caced86334635fd396c28424d71e43c5e71f7c5d402fb0e5cc5ba030a14e0de5",
+    ".gate/baseline/logs/setup-2b706a10-b2c2-4099-85ac-860331715480-cat-setup-npm-ci-0.stdout.log sha256:dd781dd2565fec17872dd47dbd4b4802e44483b65410e96d5fdf567a50556860",
+    ".gate/baseline/logs/setup-2b706a10-b2c2-4099-85ac-860331715480-cat-setup-npm-ci-0.stderr.log sha256:c211d12fa3e2f4c92b2151c523b2743bc220c1991e0de3797724e244bb411568",
+    ".gate/baseline/logs/2b706a10-b2c2-4099-85ac-860331715480-repo-baseline-13.stdout.log sha256:d50e80e7691095792495b99a7b9eba0e04297da99a6764b4bce45504946d0b27",
+    ".gate/baseline/logs/2b706a10-b2c2-4099-85ac-860331715480-repo-baseline-13.stderr.log sha256:01a5d6de7b3dc87d753c5d7049787ba547e9c7e29bc29a43a58a5135cee1cb47",
+    ".gate/baseline/logs/2b706a10-b2c2-4099-85ac-860331715480-cat-baseline-frontend-build-0.stdout.log sha256:889ec55d89d43a6274beb6afc2891be27cd6a48394f2a6e04ef411efb6a94024",
+    ".gate/baseline/logs/2b706a10-b2c2-4099-85ac-860331715480-cat-baseline-frontend-build-0.stderr.log sha256:ee53b77219b80720b42476aa90f6b8a64d4e41e60ebb81c18d204edd804df309",
+    ".gate/baseline/logs/2b706a10-b2c2-4099-85ac-860331715480-cat-baseline-build-cat-server-1.stdout.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/baseline/logs/2b706a10-b2c2-4099-85ac-860331715480-cat-baseline-build-cat-server-1.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/baseline/cat-server sha256:60dc079237cd0673570b54eaefa69632d3ecf3329ac68e350c61f4925f505568",
+    ".gate/baseline/logs/2b706a10-b2c2-4099-85ac-860331715480-cat-baseline-build-cat-browser-plan-2.stdout.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/baseline/logs/2b706a10-b2c2-4099-85ac-860331715480-cat-baseline-build-cat-browser-plan-2.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/baseline/cat-browser-plan sha256:37c9467b484285c438fdffb623402ce761d160108f0631d567cb2fb10028934a",
+    ".gate/baseline/logs/2b706a10-b2c2-4099-85ac-860331715480-cat-baseline-browser-3.stdout.log sha256:c13d6983bf341be652c876e4e077915f0884f565c77e5a76972d8fc30b354e6c",
+    ".gate/baseline/logs/2b706a10-b2c2-4099-85ac-860331715480-cat-baseline-browser-3.stderr.log sha256:3674289eb9daf4fe50e3c2184721f12e2d74ce5b20dcff5c39e39477b02e3a20",
+    "baselines/cat/capture.json sha256:55bb7209584874f9bf99a5e36cf861c6a9e00048fecd55bd23b35fdac2db744e",
+    ".gate/baseline/execution.json sha256:c2c103b489b43aa5731759f58c33333faeca29e1344751e100b8a4e262cd3838"
+  ]
+}

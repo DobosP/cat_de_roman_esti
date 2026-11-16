@@ -1,9 +1,9 @@
 # Status — cat_de_roman_esti
 
-Last verified: 2026-11-16 — Redesign v2 Milestone 1 qualified for local main.
+Last verified: 2026-11-16 — both Redesign v2 milestones qualified for local main.
 
 - **Redesign v2 Milestone 1.** Exact product `8b6679af` passed unit 28/28, full 37/37, all 837 browser cases, 1,332 independent Python parity cases, and 18 byte-exact screenshots with zero Axe findings. Gzip sizes were 12,932 B CSS and 37,948 B for the largest game route. The six games use steps and hint ladders in the new illustrated arcade. [Acceptance record](reviews/redesign-v2-m1/acceptance.json) and [execplan](execplans/redesign-v2.md).
-- **Redesign v2 Milestone 2 in progress** on `feat/board-place`. [Anonymous daily board comparison, off by default](adr/0234-anonymous-daily-board-place.md).
+- **Redesign v2 Milestone 2.** Anonymous daily board comparison is off by default. Exact product `abda879a` passed unit 28/28, full 37/37, 855 browser cases, 1,335 independent parity cases, and 18 exact PNGs. Gzip sizes were 13,268 B CSS and 38,537 B for the largest game route. A seeded local walk-through recorded the 101st round and an eligible Lanț give-up. [Acceptance record](reviews/redesign-v2-m2/acceptance.json) and [board comparison ADR](adr/0234-anonymous-daily-board-place.md).
 
 ## Current state
 - **V4 C10 landed locally.** Society `cx_societate_384` (normal, pilot 79, rank 26) and Cald Emoji `ct_meme_net_379` (greu, pilot 59, rank 222) are eligible. Exact corrected I10 build 11, fresh 4i 10, unit 27 and single full 37 passed with actual 40/81/165 artifacts and fresh independent GO `5e7fb83e…`. All 859 browser cases passed with zero skips, retries or flaky outcomes; enforced CSP was 0 current/0 legacy, PostgreSQL accounts 12 and HTTP API 302 had zero skips, parity matched 1,206 and nine PNGs/all 17 outcomes passed. Both boards won and reloaded on the normal managed server: society seed 0, four groups/zero errors/1,000 points; Emoji seed 5, eleven submissions/nine recognized attempts/no hints/520 points. All 731 old rows, 336 cores, KG, seven components and 17,495 captions remain exact. Initial P10 strict inventory failed; its NO-GO is retained, complete 680-path admission fixed it and every I10 gate ran fresh. [C10 record](reviews/v4-c10-society-emoji/README.md).

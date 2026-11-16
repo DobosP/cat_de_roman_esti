@@ -71,6 +71,23 @@ The exact broad Django rerun reproduced the 474 historical failed nodes and 188 
 The daily sample window uses the current and preceding Bucharest dates. The opt-in Lanț terminal receipt counts an explicit give-up in that window. The inherited local action applies whenever the capability is absent. The client copy refers to rounds pending Paul's final wording.
 
 - [x] Start `feat/board-place` from landed Milestone 1 and record [ADR-0234](../adr/0234-anonymous-daily-board-place.md).
-- [ ] Implement the bounded anonymous histograms, single-writer snapshots, trusted-proxy rate limiter, optional response and result podium.
-- [ ] Update optional deployment storage and draft the privacy line for Paul.
-- [ ] Run the final exact-SHA unit and full gates and independent review, verify enabled and disabled behavior, locally fast-forward and clean up.
+- [x] Implement the bounded anonymous histograms, single-writer snapshots, trusted-proxy rate limiter, optional response and result podium.
+- [x] Update optional deployment storage and draft the privacy line for Paul.
+- [x] Run the final exact-SHA unit and full gates and independent review, verify enabled and disabled behavior, locally fast-forward and clean up.
+
+### Milestone 2 evidence
+
+The local 390 × 844 walkthrough used the exact compiled app in dark mode. The
+enabled Intrusul result displayed Perfect and 99% across 101 finished rounds.
+The saved snapshot contained 76 wins and 25 losses for Intrusul, and one
+Lanț give-up. The default-off instance showed the normal win with zero podiums.
+
+Independent Codex reviewers checked the immutable terminal result, storage and
+limiter, date wording and accessible tier list, same-round navigation and
+give-up recovery. A snapshot read error now preserves the previous snapshot
+for later recovery. The approved capture and the independent recapture both kept
+all 18 default-off PNGs byte for byte with zero Axe findings.
+
+The two broad Python runs had identical failing test IDs (474 failures and 188 setup errors).
+
+Exact gate operator `agent:codex` (PROGRAM E8). Product SHA `abda879a3675c5a5424a5f18866b70856104adde`. [Commands, receipt hashes, browser and parity counts, and gzip measurements](../reviews/redesign-v2-m2/acceptance.json). Superseded raw test output was pruned after the compact evidence was retained.

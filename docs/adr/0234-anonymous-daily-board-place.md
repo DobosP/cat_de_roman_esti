@@ -1,7 +1,7 @@
 # ADR-0234 — Anonymous daily board place, off by default
 
 Date: 2026-11-16
-Status: accepted for local implementation
+Status: accepted and qualified on local product `abda879a`
 Amends: [ADR-0061](0061-device-local-progress-and-upload-only-private-backup.md)
 
 Paul's decision: “Build it, switched off”. This adds an optional comparison to
@@ -39,6 +39,14 @@ temporary file and atomic rename. It loads valid snapshots at startup,
 reports and skips corrupt ones, and retains 14 Bucharest calendar days.
 The optional storage mount allows UID 10001 to write while the application
 root stays read-only.
+
+## Qualification
+
+The exact unit and full gate commands, SHA-256 receipts and budgets are in the
+[acceptance record](../reviews/redesign-v2-m2/acceptance.json). A temporary
+snapshot read error withholds placement and keeps the existing bytes available
+for later reads. Invalid snapshots are reported and skipped. The request
+observer attempts each terminal sample once.
 
 ## Privacy wording for Paul
 
