@@ -64,3 +64,24 @@ IPv4-mapped IPv6 share one full-address key. Each IPv6 /48 can occupy at most
 the least recently active bucket. Keys and prefix counts expire in memory.
 Before activation, verify that Docker preserves real IPv6 client addresses
 through the Caddy ingress as described in [DEPLOY](../DEPLOY.md).
+
+### B2 — Advisory replay exclusion
+
+Daily creates accept the optional boolean query parameter `replay=true`. The
+client sends it when opening another session for a daily already marked as
+started. The flag is fixed in the bounded server session before publication.
+Replays receive no place and never contribute a sample. This is advisory, and
+a client may omit it. The in-memory limiter remains the abuse bound.
+
+### B3 — Placement requires an admitted sample
+
+The session's terminal observer keeps the first outcome and whether its sample
+was actually recorded. A refused rate-limit, snapshot read or capacity attempt
+omits place on both the terminal response and later reads. An accepted sample
+can show updated aggregate placement without adding a second sample.
+
+### B6 — One terminal observation path and reachable tiers
+
+All six services use the response observer inside the action's existing
+transaction. The separate test-only terminal accessors are removed. Cald sau
+Rece has three displayed podium tiers because its rules do not award Perfect.

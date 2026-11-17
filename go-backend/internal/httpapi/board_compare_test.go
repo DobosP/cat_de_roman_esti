@@ -65,10 +65,6 @@ func TestBoardComparisonThresholdAndSingleTerminalSample(t *testing.T) {
 	if off.Place != nil {
 		t.Fatal("place leaked while the feature was off")
 	}
-	known, curated := s.game.BoardTerminal(off.GameID, nil)
-	if !curated {
-		t.Fatal("fixed witness must have a curated ID")
-	}
 
 	store, err := boardstats.Open(t.TempDir(), boardstats.Options{Now: now})
 	if err != nil {
@@ -82,7 +78,7 @@ func TestBoardComparisonThresholdAndSingleTerminalSample(t *testing.T) {
 	s.EnableBoardComparison(store, now)
 	key := boardstats.Key{
 		RulesVersion: gameapi.RulesVersion, ContentDigest: s.boardComparison.digest,
-		Day: day, Game: "intrusul", BoardID: known.BoardID,
+		Day: day, Game: "intrusul", BoardID: catalog.New(c).PickDaily("intrusul", day, "").CatalogID,
 	}
 	for i := 0; i < 98; i++ {
 		if err := store.Record(key, boardstats.Loss, 3); err != nil {

@@ -1,7 +1,5 @@
 package gameapi
 
-import "github.com/DobosP/cat_de_roman_esti/go-backend/internal/session"
-
 // TerminalOutcome describes the server-confirmed end of a round.
 type TerminalOutcome string
 
@@ -20,33 +18,21 @@ type TerminalRound struct {
 	Outcome TerminalOutcome
 }
 
-// TerminalObservation lives inside the bounded game session. Once captured,
-// the original result stays fixed even if a legacy reset reopens the board.
+// TerminalObservation lives inside the bounded game session. The first result
+// and its admission stay fixed even if a legacy reset reopens the board.
 type TerminalObservation struct {
-	first *TerminalRound
+	Replay   bool
+	first    *TerminalRound
+	admitted bool
 }
 
-func (o *TerminalObservation) observe(round TerminalRound, onFirst func(TerminalRound)) (TerminalRound, bool) {
-	if o == nil || round.BoardID == "" || round.Day == "" || round.Outcome == "" {
-		return TerminalRound{}, false
-	}
-	if o.first != nil {
-		return *o.first, true
-	}
-	if onFirst != nil {
-		o.first = &round
-		onFirst(round)
-	}
-	return round, true
-}
+// TerminalResponse runs under the session lock and returns whether this
+// session's original sample is included in the aggregate. A refused first
+// attempt stays refused on later requests.
+type TerminalResponse func(body map[string]any, round TerminalRound, first, admitted bool) bool
 
-// TerminalResponse runs under the session lock for a terminal response. It
-// receives the original result and whether this request claimed it first. It
-// may add to the response but must not re-enter the session.
-type TerminalResponse func(body map[string]any, round TerminalRound, first bool)
-
-// WithTerminalResponse observes terminal state in the same transaction as an
-// action or read, while the session is still pinned and its response current.
+// WithTerminalResponse observes a terminal state in the transaction that
+// produces its response, before reset or eviction can intervene.
 func WithTerminalResponse[T, E any](respond TerminalResponse,
 	inspect func(T) (TerminalRound, *TerminalObservation), action func(T) (map[string]any, *E),
 ) func(T) (map[string]any, *E) {
@@ -57,26 +43,16 @@ func WithTerminalResponse[T, E any](respond TerminalResponse,
 		body, err := action(value)
 		if err == nil && body != nil {
 			round, observation := inspect(value)
-			first := false
-			if result, ok := observation.observe(round, func(TerminalRound) { first = true }); ok {
-				respond(body, result, first)
+			if observation == nil || observation.Replay || round.BoardID == "" ||
+				round.Day == "" || round.Outcome == "" {
+				return body, err
 			}
+			first := observation.first == nil
+			if first {
+				observation.first = &round
+			}
+			observation.admitted = respond(body, *observation.first, first, observation.admitted)
 		}
 		return body, err
 	}
-}
-
-// ObserveBoardTerminal reads the current terminal state through its session
-// transaction. A non-nil onFirst consumes the observation and receives the
-// immutable result once under that transaction. The callback must be bounded
-// and must not re-enter this session. A nil callback only reads.
-func ObserveBoardTerminal[T any](store *session.Store[T], id string, onFirst func(TerminalRound),
-	inspect func(T) (TerminalRound, *TerminalObservation),
-) (result TerminalRound, terminal bool) {
-	store.Transaction(id, func(value T) error {
-		round, observation := inspect(value)
-		result, terminal = observation.observe(round, onFirst)
-		return nil
-	})
-	return result, terminal
 }

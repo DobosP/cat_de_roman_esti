@@ -56,7 +56,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
   const active = useActiveGame(GAME_KEY);
   const isPresent = useIsPresent();
   const entry = useGameEntry(GAME_KEY, active);
-  const { admit, remember, complete, settleCompletion } = entry;
+  const { admit, remember, complete, settleCompletion, replayFor } = entry;
   const liveRef = useRef(true), lifetimeRef = useRef(0);
   const recordOnce = useRecordScore(GAME_KEY);
   const startInFlight = useEventValue<boolean>(false);
@@ -158,7 +158,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
       setUnavailable(false);
       setLoading(true);
       const opts: CreateIntrusulOpts = daily
-        ? { daily }
+        ? { daily, replay: replayFor(daily) }
         : {
             category,
             starter: needsDerivedStarter(GAME_KEY),
@@ -187,7 +187,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
         }
       }
     },
-    [active, actionOwner, cancelResume, dismissRecovery, isPresent, remember, retryResume, setFeedback],
+    [replayFor, active, actionOwner, cancelResume, dismissRecovery, isPresent, remember, retryResume, setFeedback],
   );
 
   const puzzleKey = useMemo(() => {

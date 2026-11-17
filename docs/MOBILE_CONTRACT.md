@@ -183,6 +183,13 @@ content is recomputed from the current position, and a dead end can still return
 
 ### Optional anonymous place
 
+A new daily session can carry the optional boolean query parameter `replay=true`
+when the client knows an earlier attempt has started. The default is false.
+The server retains the flag for that session, excludes its terminal outcome
+from anonymous aggregates, and omits place on all its responses. It is advisory,
+with the rate limiter providing the abuse bound. Existing operation IDs stay.
+
+
 When enabled, a qualifying curated daily win can return an additive
 `place {better_than_pct, tier, rounds}` in its terminal response or saved-round
 read. The integer percentage is the share of completed rounds with strictly more

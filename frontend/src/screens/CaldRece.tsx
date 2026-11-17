@@ -120,7 +120,7 @@ export default function CaldRece({
   const isPresent = useIsPresent(), liveRef = useRef(true);
   const active = useActiveGame(GAME_KEY);
   const entry = useGameEntry(GAME_KEY, active);
-  const { admit, remember, complete, settleCompletion } = entry;
+  const { admit, remember, complete, settleCompletion, replayFor } = entry;
   const lifetimeRef = useRef(0);
   const [state, setState] = useState<ContextoState | null>(null);
   const [startFailed, setStartFailed] = useState(false);
@@ -199,7 +199,7 @@ export default function CaldRece({
       setUnavailable(false);
       setBusy(true);
       try {
-        const fresh = await contextoApi.createGame(opts);
+        const fresh = await contextoApi.createGame({ ...opts, replay: replayFor(opts.daily) });
         if (!liveRef.current || epoch !== lifetimeRef.current) return;
         if (!remember(fresh, expected)) {
           setState(null);
@@ -228,7 +228,7 @@ export default function CaldRece({
         }
       }
     },
-    [active, actionOwner, cancelResume, dismissRecovery, remember, retryResume],
+    [replayFor, active, actionOwner, cancelResume, dismissRecovery, remember, retryResume],
   );
 
   const won = state?.won ?? false;

@@ -119,6 +119,8 @@ export function createLant(opts?: {
   seed?: number;
   difficulty?: Difficulty;
   daily?: string;
+  /** Advisory flag for a daily round opened again after an earlier start. */
+  replay?: boolean;
   /** Curated category/theme (ADR-0011); omit for the classic full-graph ladder. */
   category?: string;
 }): Promise<LantState> {
@@ -126,6 +128,7 @@ export function createLant(opts?: {
   if (opts?.seed !== undefined) params.set("seed", String(opts.seed));
   if (opts?.difficulty) params.set("difficulty", opts.difficulty);
   if (opts?.daily) params.set("daily", opts.daily);
+  if (opts?.daily && opts.replay) params.set("replay", "true");
   if (opts?.category) params.set("category", opts.category);
   const q = params.toString() ? `?${params.toString()}` : "";
   return postJson<LantState>(`${PREFIX}/games${q}`);

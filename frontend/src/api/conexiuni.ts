@@ -69,6 +69,8 @@ export interface CreateOpts {
   seed?: number;
   difficulty?: Difficulty;
   daily?: string;
+  /** Advisory flag for a daily round opened again after an earlier start. */
+  replay?: boolean;
   /** Curated category/theme (ADR-0011); omit for the classic mixed board. */
   category?: string;
 }
@@ -79,6 +81,7 @@ export function createConexiuni(opts: CreateOpts = {}): Promise<ConexiuniState> 
   if (opts.seed !== undefined) q.set("seed", String(opts.seed));
   if (opts.difficulty) q.set("difficulty", opts.difficulty);
   if (opts.daily) q.set("daily", opts.daily);
+  if (opts.daily && opts.replay) q.set("replay", "true");
   if (opts.category) q.set("category", opts.category);
   const qs = q.toString();
   return postJson<ConexiuniState>(`${BASE}/games${qs ? `?${qs}` : ""}`);

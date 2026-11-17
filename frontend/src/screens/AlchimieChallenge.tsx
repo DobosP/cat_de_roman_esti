@@ -108,7 +108,7 @@ export default function AlchimieChallenge({
 }) {
   const active = useActiveGame(GAME_KEY);
   const entry = useGameEntry(GAME_KEY, active);
-  const { admit, remember, complete, settleCompletion } = entry;
+  const { admit, remember, complete, settleCompletion, replayFor } = entry;
   const isPresent = useIsPresent();
   const liveRef = useRef(true);
   const lifetimeRef = useRef(0);
@@ -212,7 +212,7 @@ export default function AlchimieChallenge({
       setUnavailable(false);
       setCreating(true);
       try {
-        const s = await alchimieApi.create(opts);
+        const s = await alchimieApi.create({ ...opts, replay: replayFor(opts.daily) });
         if (!liveRef.current || epoch !== lifetimeRef.current) return;
         if (!remember(s, expected)) {
           setState(null);
@@ -242,7 +242,7 @@ export default function AlchimieChallenge({
         }
       }
     },
-    [active, actionOwner, cancelResume, dismissRecovery, remember, retryResume, setLastMessage],
+    [replayFor, active, actionOwner, cancelResume, dismissRecovery, remember, retryResume, setLastMessage],
   );
 
   const won = state?.won ?? false;

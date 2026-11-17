@@ -114,6 +114,8 @@ export interface CreateOpts {
   seed?: number;
   difficulty?: Difficulty;
   daily?: string;
+  /** Advisory flag for a daily round opened again after an earlier start. */
+  replay?: boolean;
   /** Preferred theme; omit to let the server deterministically choose one. */
   category?: string;
 }
@@ -131,6 +133,7 @@ export function createAlchimie(opts: CreateOpts = {}): Promise<AlchimieState> {
   if (opts.seed !== undefined) params.set("seed", String(opts.seed));
   if (opts.difficulty) params.set("difficulty", opts.difficulty);
   if (opts.daily) params.set("daily", opts.daily);
+  if (opts.daily && opts.replay) params.set("replay", "true");
   if (opts.category) params.set("category", opts.category);
   const q = params.toString() ? `?${params.toString()}` : "";
   return postJson<AlchimieState>(`${BASE}/games${q}`);

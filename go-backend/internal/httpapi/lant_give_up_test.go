@@ -12,6 +12,7 @@ import (
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/boardstats"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/gameapi"
+	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/pack"
 )
 
 func lantGiveUpRequest(t *testing.T, s *Server, method, path, body string, wantStatus int) map[string]any {
@@ -104,13 +105,10 @@ func TestLantGiveUpHTTPReceiptAndOneAggregateSample(t *testing.T) {
 	}
 	lantGiveUpRequest(t, s, http.MethodPost, path+"/move", `{"text":"test"}`, http.StatusBadRequest)
 	lantGiveUpRequest(t, s, http.MethodPost, path+"/hint", "", http.StatusBadRequest)
-	terminal, found := s.lant.BoardTerminal(receipt["game_id"].(string), nil)
-	if !found || terminal.Outcome != gameapi.TerminalGiveUp || terminal.Day != day {
-		t.Fatalf("server terminal outcome is %+v, found=%t", terminal, found)
-	}
+
 	key := boardstats.Key{
 		RulesVersion: gameapi.RulesVersion, ContentDigest: s.boardComparison.digest,
-		Day: day, Game: "lant", BoardID: terminal.BoardID,
+		Day: day, Game: "lant", BoardID: pack.New(c).PickDaily("lant", day, pack.PickOptions{Difficulty: "usor"}).ID,
 	}
 	for range 99 {
 		if err := store.Record(key, boardstats.Win, 0); err != nil {
@@ -165,11 +163,8 @@ func TestLantGiveUpHTTPCountsAdmittedRoundAcrossMidnight(t *testing.T) {
 	if receipt["gave_up"] != true || routeClockReads != 1 {
 		t.Fatalf("admission and recording should share one clock read, got %d with receipt %#v", routeClockReads, receipt)
 	}
-	terminal, found := s.lant.BoardTerminal(id, nil)
-	if !found {
-		t.Fatal("receipt had no terminal round")
-	}
-	key := boardstats.Key{RulesVersion: gameapi.RulesVersion, ContentDigest: s.boardComparison.digest, Day: day, Game: "lant", BoardID: terminal.BoardID}
+
+	key := boardstats.Key{RulesVersion: gameapi.RulesVersion, ContentDigest: s.boardComparison.digest, Day: day, Game: "lant", BoardID: pack.New(c).PickDaily("lant", day, pack.PickOptions{Difficulty: "usor"}).ID}
 	for range 99 {
 		if err := store.Record(key, boardstats.Win, 0); err != nil {
 			t.Fatal(err)

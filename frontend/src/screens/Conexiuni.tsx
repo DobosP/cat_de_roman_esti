@@ -76,7 +76,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
   const active = useActiveGame(GAME_KEY);
   const isPresent = useIsPresent();
   const entry = useGameEntry(GAME_KEY, active);
-  const { admit, remember, complete, settleCompletion } = entry;
+  const { admit, remember, complete, settleCompletion, replayFor } = entry;
   const liveRef = useRef(true), lifetimeRef = useRef(0);
   const [state, setState] = useState<ConexiuniState | null>(null);
   const [startFailed, setStartFailed] = useState(false);
@@ -192,7 +192,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
       setLoading(true);
       try {
         const s = await conexiuniApi.create(daily
-          ? { daily, difficulty: "usor" }
+          ? { daily, replay: replayFor(daily), difficulty: "usor" }
           : { difficulty: entry.options.difficulty, category: entry.options.category ?? undefined });
         if (!liveRef.current || epoch !== lifetimeRef.current) return;
         if (!remember(s, expected)) {
@@ -218,7 +218,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
         }
       }
     },
-    [active, actionOwner, cancelResume, dismissRecovery, entry.options, remember, retryResume, setHint],
+    [replayFor, active, actionOwner, cancelResume, dismissRecovery, entry.options, remember, retryResume, setHint],
   );
 
   const puzzleKey = useMemo(() => {

@@ -71,9 +71,9 @@ func (c *boardComparison) requestDateWindow() func(string) bool {
 }
 
 func (c *boardComparison) response(r *http.Request, game string, eligibleDay func(string) bool) gameapi.TerminalResponse {
-	return func(body map[string]any, round gameapi.TerminalRound, first bool) {
+	return func(body map[string]any, round gameapi.TerminalRound, first, admitted bool) bool {
 		if !eligibleDay(round.Day) {
-			return
+			return admitted
 		}
 		key := boardstats.Key{
 			RulesVersion: gameapi.RulesVersion, ContentDigest: c.digest,
@@ -83,13 +83,16 @@ func (c *boardComparison) response(r *http.Request, game string, eligibleDay fun
 			c.limiter.allow(boardClientAddress(r), time.Now()) {
 			if err := c.stats.Record(key, outcome, round.Steps); err != nil {
 				log.Printf("board comparison record: %v", err)
+			} else {
+				admitted = true
 			}
 		}
-		if round.Outcome != gameapi.TerminalWin || body["won"] != true || body["steps"] != round.Steps {
-			return
+		if !admitted || round.Outcome != gameapi.TerminalWin || body["won"] != true || body["steps"] != round.Steps {
+			return admitted
 		}
 		if place, show := c.stats.Place(key, round.Steps); show {
 			body["place"] = place
 		}
+		return admitted
 	}
 }

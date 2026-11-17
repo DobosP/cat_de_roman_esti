@@ -13,135 +13,132 @@ type observedGame struct {
 	observation TerminalObservation
 }
 
-func newObservationStore(t *testing.T) *session.Store[*observedGame] {
+func observationStore(t *testing.T, capacity int) *session.Store[*observedGame] {
 	t.Helper()
-	store, err := session.NewWithOptions[*observedGame](time.Hour, 16, time.Now)
+	store, err := session.NewWithOptions[*observedGame](time.Hour, capacity, time.Now)
 	if err != nil {
 		t.Fatal(err)
 	}
 	return store
 }
 
-func addObservedGame(t *testing.T, store *session.Store[*observedGame], round TerminalRound) string {
-	t.Helper()
-	id, err := store.Create(&observedGame{round: round})
-	if err != nil {
-		t.Fatal(err)
-	}
-	return id
-}
-
 func inspectObservation(game *observedGame) (TerminalRound, *TerminalObservation) {
 	return game.round, &game.observation
 }
 
-func TestBoardTerminalConcurrentReadsObserveExactlyOnce(t *testing.T) {
-	store := newObservationStore(t)
-	want := TerminalRound{BoardID: "reviewed", Day: "2026-11-16", Steps: 2, Outcome: TerminalWin}
-	id := addObservedGame(t, store, want)
-
-	if got, ok := ObserveBoardTerminal(store, id, nil, inspectObservation); !ok || got != want {
-		t.Fatalf("read = %+v, %t", got, ok)
+func TestBoardTerminalConcurrentResponsesObserveExactlyOnce(t *testing.T) {
+	store := observationStore(t, 16)
+	want := TerminalRound{BoardID: "reviewed", Day: "2026-11-17", Steps: 2, Outcome: TerminalWin}
+	id, err := store.Create(&observedGame{round: want})
+	if err != nil {
+		t.Fatal(err)
 	}
-	observed := make(chan TerminalRound, 16)
-	var callers sync.WaitGroup
-	for range cap(observed) {
-		callers.Go(func() {
-			got, ok := ObserveBoardTerminal(store, id, func(round TerminalRound) {
-				observed <- round
-			}, inspectObservation)
-			if !ok || got != want {
-				t.Errorf("concurrent read = %+v, %t", got, ok)
+	admissions := 0
+	respond := func(body map[string]any, round TerminalRound, first, admitted bool) bool {
+		if round != want {
+			t.Errorf("round %+v, expected %+v", round, want)
+		}
+		if first {
+			if admitted {
+				t.Error("first sample already admitted")
 			}
+			admissions++
+		} else if !admitted {
+			t.Error("lost the original successful admission")
+		}
+		return true
+	}
+	action := WithTerminalResponse(respond, inspectObservation, func(*observedGame) (map[string]any, *Error) {
+		return map[string]any{"won": true}, nil
+	})
+	var callers sync.WaitGroup
+	for range 16 {
+		callers.Go(func() {
+			store.Transaction(id, func(game *observedGame) error { action(game); return nil })
 		})
 	}
 	callers.Wait()
-	close(observed)
-	if len(observed) != 1 || <-observed != want {
-		t.Fatal("expected one exact observation")
+	if admissions != 1 {
+		t.Fatalf("admitted %d samples", admissions)
 	}
 }
 
-func TestBoardTerminalIgnoresLiveFreeAndMinedRounds(t *testing.T) {
-	store := newObservationStore(t)
-	ids := []string{
-		"missing",
-		addObservedGame(t, store, TerminalRound{BoardID: "reviewed", Day: "2026-11-16"}),
-		addObservedGame(t, store, TerminalRound{BoardID: "reviewed", Outcome: TerminalLoss}),
-		addObservedGame(t, store, TerminalRound{Day: "2026-11-16", Outcome: TerminalGiveUp}),
+func TestBoardTerminalIgnoresLiveFreeMinedAndReplayRounds(t *testing.T) {
+	want := TerminalRound{BoardID: "reviewed", Day: "2026-11-17", Outcome: TerminalWin}
+	for _, test := range []struct {
+		name string
+		game observedGame
+	}{
+		{"live", observedGame{round: TerminalRound{BoardID: "reviewed", Day: want.Day}}},
+		{"free", observedGame{round: TerminalRound{BoardID: "reviewed", Outcome: TerminalLoss}}},
+		{"mined", observedGame{round: TerminalRound{Day: want.Day, Outcome: TerminalGiveUp}}},
+		{"replay", observedGame{round: want, observation: TerminalObservation{Replay: true}}},
+	} {
+		t.Run(test.name, func(t *testing.T) {
+			action := WithTerminalResponse(func(map[string]any, TerminalRound, bool, bool) bool {
+				t.Fatal("ineligible round reached aggregate callback")
+				return false
+			}, inspectObservation, func(*observedGame) (map[string]any, *Error) {
+				return map[string]any{"won": true}, nil
+			})
+			action(&test.game)
+			if test.game.observation.first != nil {
+				t.Fatal("ineligible round consumed an observation")
+			}
+		})
 	}
-	for _, id := range ids {
-		got, ok := ObserveBoardTerminal(store, id, func(TerminalRound) {
-			t.Fatal("ineligible round was observed")
-		}, inspectObservation)
-		if ok || got != (TerminalRound{}) {
-			t.Fatalf("ineligible read = %+v, %t", got, ok)
+}
+
+func TestBoardTerminalKeepsOriginalOutcomeAndRefusalAfterReset(t *testing.T) {
+	want := TerminalRound{BoardID: "reviewed", Day: "2026-11-17", Steps: 2, Outcome: TerminalWin}
+	game := &observedGame{round: want}
+	calls := 0
+	action := WithTerminalResponse(func(body map[string]any, round TerminalRound, first, admitted bool) bool {
+		calls++
+		if round != want || admitted || first != (calls == 1) {
+			t.Fatalf("changed admission or original outcome: %+v first=%t admitted=%t", round, first, admitted)
 		}
-	}
-}
-
-func TestBoardTerminalKeepsOriginalSampleAfterLegacyReset(t *testing.T) {
-	store := newObservationStore(t)
-	want := TerminalRound{BoardID: "reviewed", Day: "2026-11-16", Steps: 2, Outcome: TerminalWin}
-	id := addObservedGame(t, store, want)
-	if got, ok := ObserveBoardTerminal(store, id, func(TerminalRound) {}, inspectObservation); !ok || got != want {
-		t.Fatalf("initial sample = %+v, %t", got, ok)
-	}
-
-	store.Transaction(id, func(game *observedGame) error {
-		game.round.Outcome = ""
-		return nil
+		return false // A refused sample never becomes admitted on a repeated read.
+	}, inspectObservation, func(*observedGame) (map[string]any, *Error) {
+		return map[string]any{"won": true}, nil
 	})
-	if _, ok := ObserveBoardTerminal(store, id, nil, inspectObservation); ok {
-		t.Fatal("reopened round reported as terminal")
+	action(game)
+	game.round.Outcome = ""
+	action(game)
+	if calls != 1 {
+		t.Fatal("live reset reached the terminal observer")
 	}
-
-	store.Transaction(id, func(game *observedGame) error {
-		game.round.Outcome = TerminalWin
-		game.round.Steps = 7
-		return nil
-	})
-	got, ok := ObserveBoardTerminal(store, id, func(TerminalRound) {
-		t.Fatal("reset should not count another sample")
-	}, inspectObservation)
-	if !ok || got != want {
-		t.Fatalf("stored sample = %+v, %t", got, ok)
+	game.round.Outcome, game.round.Steps = TerminalWin, 7
+	action(game)
+	action(game)
+	if calls != 3 {
+		t.Fatalf("expected three terminal responses, got %d", calls)
 	}
 }
 
 func TestBoardTerminalResponseCapturesWhileActionPinsSession(t *testing.T) {
-	store, err := session.NewWithOptions[*observedGame](time.Hour, 1, time.Now)
+	store := observationStore(t, 1)
+	id, err := store.Create(&observedGame{round: TerminalRound{BoardID: "reviewed", Day: "2026-11-17"}})
 	if err != nil {
 		t.Fatal(err)
 	}
-	start := TerminalRound{BoardID: "reviewed", Day: "2026-11-16"}
-	id := addObservedGame(t, store, start)
 	observations := 0
-	terminal := func(body map[string]any, result TerminalRound, first bool) {
+	respond := func(body map[string]any, round TerminalRound, first, admitted bool) bool {
 		observations++
-		if !first || body["won"] != true || result.Outcome != TerminalWin {
-			t.Fatalf("terminal callback saw %+v with first=%t and response %v", result, first, body)
+		if !first || admitted || body["won"] != true || round.Outcome != TerminalWin {
+			t.Fatalf("wrong pinned terminal response: %+v", round)
 		}
 		if _, err := store.Create(&observedGame{}); err != session.ErrCapacity {
-			t.Fatalf("live terminal transaction became evictable: %v", err)
+			t.Fatalf("terminal session became evictable: %v", err)
 		}
+		return true
 	}
-	finish := WithTerminalResponse(terminal, inspectObservation, func(game *observedGame) (map[string]any, *Error) {
+	finish := WithTerminalResponse(respond, inspectObservation, func(game *observedGame) (map[string]any, *Error) {
 		game.round.Outcome = TerminalWin
 		return map[string]any{"won": true}, nil
 	})
-	store.Transaction(id, func(game *observedGame) error {
-		finish(game)
-		return nil
-	})
-	store.Transaction(id, func(game *observedGame) error {
-		game.round = start // Legacy reset can reopen after the action returns.
-		return nil
-	})
+	store.Transaction(id, func(game *observedGame) error { finish(game); return nil })
 	if observations != 1 {
-		t.Fatalf("terminal response observed %d times", observations)
-	}
-	if _, ok := ObserveBoardTerminal(store, id, nil, inspectObservation); ok {
-		t.Fatal("reset should report a live game")
+		t.Fatalf("got %d observations", observations)
 	}
 }

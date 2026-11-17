@@ -121,7 +121,7 @@ export default function Lant({
   const lifetimeRef = useRef(0);
   const active = useActiveGame(GAME_KEY);
   const entry = useGameEntry(GAME_KEY, active);
-  const { admit, remember, complete, settleCompletion } = entry;
+  const { admit, remember, complete, settleCompletion, replayFor } = entry;
   const [state, setState] = useState<LantState | null>(null);
   const [startFailed, setStartFailed] = useState(false);
   const [unavailable, setUnavailable] = useState(false);
@@ -239,7 +239,7 @@ export default function Lant({
       setCreating(true);
       try {
         const fresh = await createLant(daily
-          ? { daily, difficulty: "usor" }
+          ? { daily, replay: replayFor(daily), difficulty: "usor" }
           : { difficulty: entry.options.difficulty, category: entry.options.category ?? undefined });
         if (!liveRef.current || epoch !== lifetimeRef.current) return;
         if (!remember(fresh, expected)) {
@@ -265,7 +265,7 @@ export default function Lant({
         }
       }
     },
-    [active, actionOwner, cancelResume, dismissRecovery, entry.options, remember, retryResume],
+    [replayFor, active, actionOwner, cancelResume, dismissRecovery, entry.options, remember, retryResume],
   );
 
   const currentGameId = state?.game_id;

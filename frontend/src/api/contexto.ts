@@ -168,6 +168,8 @@ export interface CreateOpts {
   difficulty?: Difficulty;
   /** "YYYY-MM-DD" — start the deterministic daily challenge for that date. */
   daily?: string;
+  /** Advisory flag for a daily round opened again after an earlier start. */
+  replay?: boolean;
   /** Curated category/theme (ADR-0011); omit for the classic full-graph game. */
   category?: string;
 }
@@ -178,6 +180,7 @@ export function createGame(opts: CreateOpts = {}): Promise<ContextoState> {
   if (opts.seed !== undefined) params.set("seed", String(opts.seed));
   if (opts.difficulty) params.set("difficulty", opts.difficulty);
   if (opts.daily) params.set("daily", opts.daily);
+  if (opts.daily && opts.replay) params.set("replay", "true");
   if (opts.category) params.set("category", opts.category);
   const q = params.toString();
   return postJson<ContextoState>(`${BASE}/games${q ? `?${q}` : ""}`);

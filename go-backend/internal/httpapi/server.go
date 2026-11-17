@@ -204,7 +204,7 @@ func (s *Server) serveHTTP(w http.ResponseWriter, r *http.Request) {
 			write(w, r, 400, map[string]any{"detail": "starter trebuie să fie 0 sau 1."})
 			return
 		}
-		body, err = s.game.Create(seed, last(q, "daily"), category, last(q, "previous_game_id"), starter != nil && starter.Sign() != 0)
+		body, err = s.game.Create(seed, last(q, "daily"), category, last(q, "previous_game_id"), starter != nil && starter.Sign() != 0, last(q, "replay") == "true")
 	} else {
 		if !strings.HasPrefix(r.URL.Path, prefix+"/") {
 			write(w, r, 404, map[string]any{"detail": "Not Found"})

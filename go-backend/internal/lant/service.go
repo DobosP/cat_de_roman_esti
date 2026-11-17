@@ -557,7 +557,7 @@ func (s *Service) Create(seed *big.Int, difficulty string, daily *string, catego
 	return s.CreateWithExclusions(seed, difficulty, daily, category, nil)
 }
 
-func (s *Service) CreateWithExclusions(seed *big.Int, difficulty string, daily *string, category string, extraExcludeIDs map[string]bool) (map[string]any, *gameapi.Error) {
+func (s *Service) CreateWithExclusions(seed *big.Int, difficulty string, daily *string, category string, extraExcludeIDs map[string]bool, replay ...bool) (map[string]any, *gameapi.Error) {
 	if difficulty != "usor" && difficulty != "greu" {
 		difficulty = "normal"
 	}
@@ -584,6 +584,7 @@ func (s *Service) CreateWithExclusions(seed *big.Int, difficulty string, daily *
 	if picked != nil {
 		v.CuratedID = picked.ID
 	}
+	v.boardObservation.Replay = len(replay) > 0 && replay[0]
 	out := s.state("", v)
 	id, err := s.store.Create(v)
 	if err != nil {
@@ -591,12 +592,6 @@ func (s *Service) CreateWithExclusions(seed *big.Int, difficulty string, daily *
 	}
 	out["game_id"] = id
 	return out, nil
-}
-
-// BoardTerminal observes a server-terminal reviewed daily once and returns its
-// anonymous outcome for subsequent comparisons.
-func (s *Service) BoardTerminal(id string, onFirst func(gameapi.TerminalRound)) (gameapi.TerminalRound, bool) {
-	return gameapi.ObserveBoardTerminal(s.store, id, onFirst, (*game).boardTerminal)
 }
 
 func (v *game) boardTerminal() (gameapi.TerminalRound, *gameapi.TerminalObservation) {

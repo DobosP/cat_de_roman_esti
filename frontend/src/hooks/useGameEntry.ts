@@ -2,23 +2,13 @@ import { useCallback, useEffect, useLayoutEffect, useState } from "preact/hooks"
 import { useEventValue } from "./useEventValue";
 import { useIsPresent } from "@roedu/ui/motion";
 import { dailyStatus, localDay, markDailyDone, markDailyStarted, readFreeOptions, roundEntry, writeFreeOptions } from "../entry";
+import { readLocalValue as read, writeLocalValue as write } from "../pageStorage";
 import type { GameKey } from "../games";
 import type { ActiveGameMemo } from "./useActiveGame";
 
 interface Round {
   game_id: string;
   daily?: string;
-}
-
-function read(key: string): string | null {
-  try { return localStorage.getItem(key); } catch { return null; }
-}
-
-function write(key: string, value: string | null) {
-  try {
-    if (value === null) localStorage.removeItem(key);
-    else localStorage.setItem(key, value);
-  } catch { /* A browser without storage starts with a fresh entry each visit. */ }
 }
 
 export function useGameEntry(game: GameKey, active: ActiveGameMemo) {
@@ -106,6 +96,9 @@ export function useGameEntry(game: GameKey, active: ActiveGameMemo) {
     ? replay === round.game_id ? "Reluare" : "Jocul zilei"
     : round || dailyStatus(game, date).done ? "Rundă liberă" : "Jocul zilei";
 
+  const replayFor = useCallback((daily?: string) =>
+    Boolean(daily && dailyStatus(game, daily).started), [game]);
+
   const complete = useCallback((round: Round) => {
     if (round.daily) markDailyDone(game, round.daily);
   }, [game]);
@@ -117,7 +110,7 @@ export function useGameEntry(game: GameKey, active: ActiveGameMemo) {
     }
   }, [active, presentPreviously, recoveredTerminal]);
   return {
-    admit, remember, mode, isPresent, useParked, options, settleCompletion,
+    admit, remember, mode, isPresent, useParked, options, settleCompletion, replayFor,
     recoveredTerminal: (round: Round | null) => round !== null && recoveredTerminal === round.game_id,
     readyAfterTerminal: (round: Round | null) => round !== null && settledTerminal === round.game_id,
     presentRecovery: () => { presentingRecovery.write(true); },

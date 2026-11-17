@@ -103,7 +103,7 @@ func build(board *content.Board, rng *pyrandom.Random, daily, category string, p
 	return game, nil
 }
 
-func (s *Service) Create(seed *big.Int, daily, category, previous string, starter bool) (map[string]any, *Error) {
+func (s *Service) Create(seed *big.Int, daily, category, previous string, starter bool, replay ...bool) (map[string]any, *Error) {
 	if category != "" {
 		if _, ok := s.data.CategoryLabels[category]; !ok {
 			return nil, fail(400, "Categorie necunoscută.")
@@ -151,6 +151,7 @@ func (s *Service) Create(seed *big.Int, daily, category, previous string, starte
 	if err != nil {
 		return nil, err
 	}
+	game.boardObservation.Replay = len(replay) > 0 && replay[0]
 	state := s.state("", game)
 	id, createErr := s.store.Create(game)
 	if createErr != nil {
@@ -404,12 +405,6 @@ func (s *Service) Hint(id string) (map[string]any, *Error) {
 		}
 		return nil, fail(400, "Nu mai sunt indicii disponibile.")
 	})
-}
-
-// BoardTerminal observes a server-terminal reviewed daily once and returns its
-// anonymous outcome for subsequent comparisons.
-func (s *Service) BoardTerminal(id string, onFirst func(gameapi.TerminalRound)) (gameapi.TerminalRound, bool) {
-	return gameapi.ObserveBoardTerminal(s.store, id, onFirst, (*gameSession).boardTerminal)
 }
 
 func (g *gameSession) boardTerminal() (gameapi.TerminalRound, *gameapi.TerminalObservation) {

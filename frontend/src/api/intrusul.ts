@@ -59,6 +59,8 @@ export interface IntrusulHintResult extends IntrusulState {
 export interface CreateIntrusulOpts {
   seed?: number;
   daily?: string;
+  /** Advisory flag for a daily round opened again after an earlier start. */
+  replay?: boolean;
   category?: string;
   starter?: boolean;
   previousGameId?: string;
@@ -70,6 +72,7 @@ export function createIntrusul(opts: CreateIntrusulOpts = {}): Promise<IntrusulS
   const query = new URLSearchParams();
   if (opts.seed !== undefined) query.set("seed", String(opts.seed));
   if (opts.daily) query.set("daily", opts.daily);
+  if (opts.daily && opts.replay) query.set("replay", "true");
   if (opts.category) query.set("category", opts.category);
   // Shared dailies deliberately omit personalization inputs.
   if (!opts.daily && opts.starter !== undefined) {

@@ -76,15 +76,15 @@ func (s *Server) arcade(w http.ResponseWriter, r *http.Request) bool {
 				write(w, r, 400, map[string]any{"detail": "starter trebuie să fie 0 sau 1."})
 				return true
 			}
-			body, e = s.perechi.Create(seed, daily, category, last(q, "previous_game_id"), starter != nil && starter.Sign() != 0)
+			body, e = s.perechi.Create(seed, daily, category, last(q, "previous_game_id"), starter != nil && starter.Sign() != 0, last(q, "replay") == "true")
 		case "conexiuni":
-			body, e = s.conexiuni.CreateWithExclusions(seed, daily, category, difficulty, s.exclusions(r, "conexiuni"))
+			body, e = s.conexiuni.CreateWithExclusions(seed, daily, category, difficulty, s.exclusions(r, "conexiuni"), last(q, "replay") == "true")
 		case "contexto":
-			body, e = s.contexto.CreateWithExclusions(seed, difficulty, dailyPtr, category, s.exclusions(r, "contexto"))
+			body, e = s.contexto.CreateWithExclusions(seed, difficulty, dailyPtr, category, s.exclusions(r, "contexto"), last(q, "replay") == "true")
 		case "lant":
-			body, e = s.lant.CreateWithExclusions(seed, difficulty, dailyPtr, category, s.exclusions(r, "lant"))
+			body, e = s.lant.CreateWithExclusions(seed, difficulty, dailyPtr, category, s.exclusions(r, "lant"), last(q, "replay") == "true")
 		case "alchimie":
-			body, e = s.alchimie.CreateWithExclusions(seed, daily, category, difficulty, s.exclusions(r, "alchimie"))
+			body, e = s.alchimie.CreateWithExclusions(seed, daily, category, difficulty, s.exclusions(r, "alchimie"), last(q, "replay") == "true")
 		}
 		done()
 		return true
