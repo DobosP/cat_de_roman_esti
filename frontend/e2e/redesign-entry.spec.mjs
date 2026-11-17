@@ -71,6 +71,43 @@ test("one tap starts the day's game, reload resumes it and the next tap opens fr
   await expect(page.getByText("Rundă liberă", { exact: true })).toBeVisible();
 });
 
+test("a daily keeps its request's replay decision when another tab completes during creation", async ({ page, context }) => {
+  await page.clock.setFixedTime(now);
+  let release;
+  let entered;
+  const held = new Promise((resolve) => { release = resolve; });
+  const requested = new Promise((resolve) => { entered = resolve; });
+  await page.route((url) => url.pathname === "/api/wordgames/intrusul/games", async (route) => {
+    const response = await route.fetch();
+    entered(route.request());
+    await held;
+    await route.fulfill({ response });
+  }, { times: 1 });
+
+  const other = await context.newPage();
+  try {
+    await other.goto("/");
+    await page.goto("/");
+    const response = created(page, ultimo);
+    await page.locator(`.games-grid a[href="${ultimo.path}"]`).click();
+    const request = await requested;
+    expect(new URL(request.url()).searchParams.get("replay")).toBeNull();
+    await other.evaluate((day) => {
+      localStorage.setItem("cat_daily_v2_intrusul", JSON.stringify({ [day]: 2 }));
+      localStorage.removeItem("cat_active_game_v1_intrusul");
+    }, day);
+    release();
+    const round = await (await response).json();
+    expect(round.daily).toBe(day);
+    await expect(page.locator(ultimo.board)).toBeVisible();
+    await expect(page.locator(".game-frame-mode")).toHaveText("Jocul zilei");
+    expect(await page.evaluate(() => localStorage.getItem("cat_replay_v2_intrusul"))).toBeNull();
+  } finally {
+    release();
+    await other.close();
+  }
+});
+
 for (const colorScheme of ["light", "dark"]) {
   test(`device ${colorScheme} theme, persistent toggle and labelled help focus`, async ({ page }) => {
     await page.emulateMedia({ colorScheme, reducedMotion: "reduce" });
