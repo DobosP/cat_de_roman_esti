@@ -239,3 +239,5 @@ Parallel lanes also allocated0188/0189 independently. All four full-filename bod
 - [0234](0234-anonymous-daily-board-place.md) — anonymous daily board comparison, disabled by default, with aggregate-only storage, a podium and expiring rate limits.
 
 - [0235](0235-v5-real-use-fixes.md) — V5 real-use fixes: one disturbed-board definition (top-100 set or order; Lanț shortest route) in dry run, S7 and closeout; paired no-worse re-blind for existing Cald boards with both judges' sign-off; frozen items finish between 70% and 90%; full FrequencyWords list with diacritic folding; early Lanț overlap screen; root operating rules and budgets; pilot 3 after the weekly reset.
+
+- [0236](0236-v5-approved-tool-repairs.md) — Paul's two exact V5 freeze exceptions: narrow ignored-root-venv DocCheck repair, Pilot 3 pinned-full-frequency installer, explicit baseline-red disposition and five-word payload migration preserving unchanged-view blind evidence.

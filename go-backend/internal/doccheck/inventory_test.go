@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"sort"
 	"strings"
@@ -181,5 +182,179 @@ func TestInventoryPreservesAllCurrentPolicies(t *testing.T) {
 	if report.Green() || len(report.DeadLinks) != 1 || len(report.StaleTerms) != 1 ||
 		len(report.RetiredVerbs) != 1 || len(report.Orphans) != 1 || len(report.Budgets) != 1 {
 		t.Fatalf("inventory route lost a current policy: %+v", report)
+	}
+}
+
+// These are fixture-only proposal tests, never canonical campaign evidence.
+func gitInventoryFixture(t *testing.T) (string, string, []string) {
+	t.Helper()
+	root, inventory, paths := inventoryFixture(t)
+	inventoryGit(t, root, "init", "--quiet")
+	writeInventorySource(t, root, ".gitignore", ".venv/\n")
+	inventoryGit(t, root, "add", "--", ".gitignore", "README.md", "docs")
+	return root, inventory, paths
+}
+
+func inventoryGit(t *testing.T, root string, args ...string) {
+	t.Helper()
+	args = append([]string{"-C", root}, args...)
+	if raw, err := exec.Command("git", args...).CombinedOutput(); err != nil {
+		t.Fatalf("fixture git %v: %s: %v", args, raw, err)
+	}
+}
+
+func virtualenvAlias(t *testing.T, root, name string) {
+	t.Helper()
+	writeInventorySource(t, root, name+"/lib/private.md", "Opus 4.1\n")
+	if err := os.Symlink("lib", filepath.Join(root, filepath.FromSlash(name), "lib64")); err != nil {
+		t.Fatal("fixture requires symlink support:", err)
+	}
+}
+
+func TestInventoryCanonicalIgnoredVirtualenv(t *testing.T) {
+	root, inventory, _ := gitInventoryFixture(t)
+	virtualenvAlias(t, root, ".venv")
+	report, err := CheckInventory(root, inventory)
+	if err != nil || !report.Green() || report.Files != 2 {
+		t.Fatalf("canonical ignored, untracked .venv: %+v %v", report, err)
+	}
+}
+
+func TestInventoryVirtualenvExceptionIsNarrow(t *testing.T) {
+	for _, kind := range []string{"unignored", "tracked-markdown", "tracked-nonmarkdown", "nested", "other-ignored", "no-git", "root-alias", "global-rule"} {
+		t.Run(kind, func(t *testing.T) {
+			root, inventory, _ := gitInventoryFixture(t)
+			name := ".venv"
+			switch kind {
+			case "unignored":
+				writeInventorySource(t, root, ".gitignore", "# no exemption\n")
+			case "nested":
+				name = "source/.venv"
+			case "other-ignored":
+				name = "venv"
+				writeInventorySource(t, root, ".gitignore", "venv/\n")
+			case "no-git":
+				root, inventory, _ = inventoryFixture(t)
+				writeInventorySource(t, root, ".gitignore", ".venv/\n")
+			case "global-rule":
+				writeInventorySource(t, root, ".gitignore", "# no root rule\n")
+				writeInventorySource(t, root, ".git/info/exclude", ".venv/\n")
+			case "root-alias":
+				target := t.TempDir()
+				if err := os.Symlink(target, filepath.Join(root, ".venv")); err != nil {
+					t.Fatal(err)
+				}
+			}
+			if kind != "root-alias" {
+				virtualenvAlias(t, root, name)
+			}
+			switch kind {
+			case "tracked-markdown":
+				inventoryGit(t, root, "add", "-f", "--", ".venv/lib/private.md")
+			case "tracked-nonmarkdown":
+				writeInventorySource(t, root, ".venv/pyvenv.cfg", "fixture\n")
+				inventoryGit(t, root, "add", "-f", "--", ".venv/pyvenv.cfg")
+			}
+			if _, err := CheckInventory(root, inventory); err == nil || !strings.Contains(err.Error(), "alias refused") {
+				t.Fatalf("%s source directory alias admitted or wrong failure: %v", kind, err)
+			}
+		})
+	}
+}
+
+func TestInventoryVirtualenvEntriesRemainExcluded(t *testing.T) {
+	root, inventory, paths := gitInventoryFixture(t)
+	virtualenvAlias(t, root, ".venv")
+	paths = append(paths, ".venv/lib/private.md")
+	sort.Strings(paths)
+	writeInventory(t, inventory, paths)
+	if _, err := CheckInventory(root, inventory); err == nil || !strings.Contains(err.Error(), "differs from physical source set") {
+		t.Fatalf("excluded .venv source entry admitted: %v", err)
+	}
+}
+
+func TestInventoryCannotResideInExcludedVirtualenv(t *testing.T) {
+	root, _, paths := gitInventoryFixture(t)
+	virtualenvAlias(t, root, ".venv")
+	inventory := filepath.Join(root, ".venv/inventory.json")
+	writeInventory(t, inventory, paths)
+	if _, err := CheckInventory(root, inventory); err == nil || !strings.Contains(err.Error(), "cannot be inside excluded .venv") {
+		t.Fatalf("excluded .venv inventory file admitted: %v", err)
+	}
+}
+
+func TestInventoryVirtualenvLinksCannotSatisfySource(t *testing.T) {
+	for _, target := range []string{".venv/lib/private.md", ".venv/lib64/private.md", ".venv", "./.venv/lib/private.md", "private.txt"} {
+		t.Run(target, func(t *testing.T) {
+			root, inventory, _ := gitInventoryFixture(t)
+			virtualenvAlias(t, root, ".venv")
+			if target == "private.txt" {
+				if err := os.Symlink(".venv/lib/private.md", filepath.Join(root, target)); err != nil {
+					t.Fatal(err)
+				}
+			}
+			writeInventorySource(t, root, "README.md", "[Guide](docs/guide.md)\n[private]("+target+")\n")
+			report, err := CheckInventory(root, inventory)
+			if err != nil || report.Green() || len(report.DeadLinks) != 1 {
+				t.Fatalf("excluded .venv target satisfied source link: %+v %v", report, err)
+			}
+		})
+	}
+}
+
+func TestInventoryIgnoredVirtualenvDoesNotRelaxSourceAliases(t *testing.T) {
+	for _, kind := range []string{"markdown", "directory", "tracked-markdown", "tracked-directory"} {
+		t.Run(kind, func(t *testing.T) {
+			root, inventory, _ := gitInventoryFixture(t)
+			virtualenvAlias(t, root, ".venv")
+			name, target := "alias.md", "README.md"
+			if strings.Contains(kind, "directory") {
+				name, target = "alias", "docs"
+			}
+			if err := os.Symlink(target, filepath.Join(root, name)); err != nil {
+				t.Fatal(err)
+			}
+			if strings.HasPrefix(kind, "tracked-") {
+				inventoryGit(t, root, "add", "--", name)
+			}
+			if _, err := CheckInventory(root, inventory); err == nil || !strings.Contains(err.Error(), "alias refused") {
+				t.Fatalf("ordinary source alias admitted: %v", err)
+			}
+		})
+	}
+}
+
+func TestInventoryUnexcludedVirtualenvRemainsSource(t *testing.T) {
+	for _, tracked := range []bool{false, true} {
+		t.Run(fmt.Sprint(tracked), func(t *testing.T) {
+			root, inventory, paths := gitInventoryFixture(t)
+			writeInventorySource(t, root, ".venv/source.md", "# Source\n")
+			if tracked {
+				inventoryGit(t, root, "add", "-f", "--", ".venv/source.md")
+			} else {
+				writeInventorySource(t, root, ".gitignore", "# unignored source\n")
+			}
+			paths = append(paths, ".venv/source.md")
+			sort.Strings(paths)
+			writeInventory(t, inventory, paths)
+			report, err := CheckInventory(root, inventory)
+			if err != nil || !report.Green() || report.Files != 3 {
+				t.Fatalf("ordinary .venv source behavior changed: %+v %v", report, err)
+			}
+		})
+	}
+}
+
+func TestInventoryOrdinaryLinkStillWorksWithExcludedVirtualenv(t *testing.T) {
+	root, inventory, _ := gitInventoryFixture(t)
+	virtualenvAlias(t, root, ".venv")
+	writeInventorySource(t, root, ".venv-copy/private.txt", "ordinary non-source resource\n")
+	if err := os.Symlink("README.md", filepath.Join(root, "ordinary.txt")); err != nil {
+		t.Fatal(err)
+	}
+	writeInventorySource(t, root, "README.md", "[Guide](docs/guide.md)\n[near-prefix](.venv-copy/private.txt)\n[ordinary](ordinary.txt)\n")
+	report, err := CheckInventory(root, inventory)
+	if err != nil || !report.Green() || report.Files != 2 {
+		t.Fatalf("ordinary links changed: %+v %v", report, err)
 	}
 }

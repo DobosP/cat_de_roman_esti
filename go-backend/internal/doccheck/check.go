@@ -97,9 +97,9 @@ func Check(root string) (Report, error) {
 			paths = append(paths, f)
 		}
 	}
-	return checkFiles(root, paths)
+	return checkFiles(root, paths, false)
 }
-func checkFiles(root string, paths []string) (Report, error) {
+func checkFiles(root string, paths []string, excludedVirtualenv bool) (Report, error) {
 	r := emptyReport()
 	files := []string{}
 	texts := map[string]string{}
@@ -127,7 +127,15 @@ func checkFiles(root string, paths []string) (Report, error) {
 					continue
 				}
 				path := filepath.Clean(filepath.Join(root, filepath.Dir(f), target))
-				if _, err := os.Stat(path); err != nil {
+				_, err := os.Stat(path)
+				// An excluded dependency tree cannot satisfy a source-doc link,
+				// including a regular-file alias that resolves into that tree.
+				excludedTarget := excludedVirtualenv && inVirtualenv(root, path)
+				if excludedVirtualenv && !excludedTarget {
+					resolved, resolveErr := filepath.EvalSymlinks(path)
+					excludedTarget = resolveErr == nil && inVirtualenv(root, resolved)
+				}
+				if err != nil || excludedTarget {
 					r.DeadLinks = append(r.DeadLinks, fmt.Sprintf("%s:%d: %s", f, i+1, target))
 				}
 			}

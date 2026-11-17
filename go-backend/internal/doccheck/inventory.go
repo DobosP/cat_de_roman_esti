@@ -7,6 +7,7 @@ import (
 	"io"
 	"io/fs"
 	"os"
+	"os/exec"
 	"path"
 	"path/filepath"
 	"sort"
@@ -48,7 +49,11 @@ func CheckInventory(root, inventoryPath string) (Report, error) {
 	if err != nil {
 		return r, err
 	}
-	physical, err := physicalMarkdown(root)
+	excludedVirtualenv := ignoredVirtualenv(root)
+	if excludedVirtualenv && inVirtualenv(root, file.Name()) {
+		return r, fmt.Errorf("Markdown inventory cannot be inside excluded .venv")
+	}
+	physical, err := physicalMarkdown(root, excludedVirtualenv)
 	if err != nil {
 		return r, err
 	}
@@ -63,7 +68,7 @@ func CheckInventory(root, inventoryPath string) (Report, error) {
 			return r, fmt.Errorf("Markdown inventory differs from physical source set at %q (actual %q)", name, physical[i])
 		}
 	}
-	r, err = checkFiles(root, paths)
+	r, err = checkFiles(root, paths, excludedVirtualenv)
 	if err != nil {
 		return r, err
 	}
@@ -169,14 +174,46 @@ func decodeInventory(raw []byte) ([]string, error) {
 	return paths, nil
 }
 
-func physicalMarkdown(root string) ([]string, error) {
+// ignoredVirtualenv is deliberately narrower than a general Git-ignore filter.
+// Only this root's real, untracked .venv directory, ignored by the canonical
+// root .gitignore rule, is a dependency output. Missing Git/proof keeps the
+// original physical-tree checks; inventory admission does not require Git.
+func ignoredVirtualenv(root string) bool {
+	info, err := os.Lstat(filepath.Join(root, ".venv"))
+	if err != nil || !info.IsDir() || info.Mode()&os.ModeSymlink != 0 {
+		return false
+	}
+	top, err := exec.Command("git", "-C", root, "rev-parse", "--show-toplevel").Output()
+	if err != nil || filepath.Clean(strings.TrimSuffix(string(top), "\n")) != root {
+		return false
+	}
+	tracked := exec.Command("git", "-C", root, "ls-files", "--error-unmatch", "--", ".venv")
+	if err := tracked.Run(); err == nil {
+		return false
+	} else if exit, ok := err.(*exec.ExitError); !ok || exit.ExitCode() != 1 {
+		return false
+	}
+	ignore := exec.Command("git", "-C", root, "check-ignore", "--no-index", "-z", "-v", "--stdin")
+	ignore.Stdin = strings.NewReader(".venv/\x00")
+	ignored, err := ignore.Output()
+	fields := strings.Split(string(ignored), "\x00")
+	return err == nil && len(fields) == 5 && fields[0] == ".gitignore" &&
+		fields[2] == ".venv/" && fields[3] == ".venv/" && fields[4] == ""
+}
+
+func inVirtualenv(root, name string) bool {
+	relative, err := filepath.Rel(root, name)
+	return err == nil && (relative == ".venv" || strings.HasPrefix(relative, ".venv"+string(filepath.Separator)))
+}
+
+func physicalMarkdown(root string, excludedVirtualenv bool) ([]string, error) {
 	paths := []string{}
 	err := filepath.WalkDir(root, func(name string, entry fs.DirEntry, walkErr error) error {
 		if walkErr != nil {
 			return walkErr
 		}
 		if entry.IsDir() {
-			if name != root && generatedDirectories[entry.Name()] {
+			if name != root && (generatedDirectories[entry.Name()] || excludedVirtualenv && name == filepath.Join(root, ".venv")) {
 				return filepath.SkipDir
 			}
 			return nil

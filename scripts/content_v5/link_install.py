@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prepare the exact Pilot 2 additive word and link transaction."""
+"""Prepare an exact Pilot 2 or Pilot 3 additive word and link transaction."""
 
 import argparse
 from contextlib import redirect_stdout
@@ -25,11 +25,18 @@ from densify_content import CATEGORIES, merge_records, rebuild_document, tier_fo
 from import_candidates import GAME_KINDS, WordGameService, load_fixture, rederive_existing_items
 from link_spans import NO_AI, check_batch, extract_blocks, read_batch, raw_title_refused, verified_body
 from support import clean_source, digest, exact_commit, git, read_artifact, read_json, relative_parts, require
+import frequency as frequency_lookup
 
 KG = "cat_de_roman_esti/fixtures/kg_sample.json"
 PACK = "cat_de_roman_esti/fixtures/games_pack.json"
 REGISTRY = "docs/content-registry/registry.jsonl"
 FREQUENCY_URL = "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/ro/ro_50k.txt"
+FULL_FREQUENCY_PATH = "frequency/ro_full.txt"
+FULL_FREQUENCY_SHA256 = "a0d0993701e251e91b9047753b6032be751217a5aaba36ed879163e020e33ded"
+FULL_FREQUENCY_BYTES = 15_199_764
+FULL_FREQUENCY_CONTRACT = {"list": "FrequencyWords 2018 ro_full.txt",
+                           "sha256": FULL_FREQUENCY_SHA256,
+                           "tool": "scripts/content_v5/frequency.py"}
 MAX_KG = 16 * 1024 * 1024
 MAX_INPUT = 1024 * 1024
 EDGE_KEYS = ("src_id", "dst_id", "relation", "bidirectional")
@@ -148,7 +155,7 @@ def exact_additions(before, after, nodes, links):
         require(shape == expected and actual["is_distractor"] == 0, "Graph merge altered a frozen link")
 
 
-def generate(kg, pack, nodes, links, work, native, repo):
+def generate(kg, pack, nodes, links, work, native, repo, campaign):
     original = read_json(kg)
     data = read_json(kg)
     dense = {"nodes": nodes, "edges": [
@@ -158,8 +165,8 @@ def generate(kg, pack, nodes, links, work, native, repo):
     ]}
     with redirect_stdout(sys.stderr):
         merged_nodes, merged_edges = merge_records(data, dense)
-        result = rebuild_document(data, merged_nodes, merged_edges, "fixture-v5-pilot-2-words",
-                                  "Pilot 2 reviewed graph words and source-backed links.")
+        result = rebuild_document(data, merged_nodes, merged_edges, f"fixture-{campaign}-words",
+                                  f"Pilot {campaign.rsplit('-', 1)[1]} reviewed graph words and source-backed links.")
     exact_additions(original, data, nodes, links)
     kg_path = work / "kg_sample.json"
     kg_path.write_bytes(result.encode("utf-8"))
@@ -245,6 +252,49 @@ def frequency_rows(root, reference):
     return rows
 
 
+
+def campaign_contract(contract, base):
+    campaign = contract.get("campaign")
+    require(campaign in ("v5-pilot-2", "v5-pilot-3") and contract.get("base_sha") == base,
+            "Baseline differs from the active Pilot 2 or Pilot 3 contract")
+    if campaign == "v5-pilot-3":
+        require(contract.get("frequency") == FULL_FREQUENCY_CONTRACT,
+                "Pilot 3 frequency contract differs from ADR-0235")
+    return campaign
+
+
+def verify_frequency(root, source, label, campaign, frequencies):
+    if campaign == "v5-pilot-3":
+        require(set(source) == {"list", "row"}
+                and source["list"] == {"path": FULL_FREQUENCY_PATH, "sha256": FULL_FREQUENCY_SHA256},
+                "Pilot 3 requires the exact ADR-0235 pinned full frequency list")
+        if campaign not in frequencies:
+            # Preserve the path/symlink protections and the dedicated exact-size bound.
+            body = read_artifact(root, FULL_FREQUENCY_PATH, FULL_FREQUENCY_BYTES)
+            require(len(body) == FULL_FREQUENCY_BYTES and digest(body) == FULL_FREQUENCY_SHA256,
+                    "Pinned full frequency list bytes differ")
+            frequencies[campaign] = frequency_lookup.load(root / FULL_FREQUENCY_PATH,
+                                                          FULL_FREQUENCY_SHA256,
+                                                          max_bytes=FULL_FREQUENCY_BYTES)
+        row = frequencies[campaign].lookup(label)
+        require(canonical(source["row"]) == canonical(row), "Folded frequency result differs")
+        require(type(row["exact"]) is int and row["exact"] > 0 and row["status"] == "exact",
+                "Positive exact word frequency required")
+        return row
+    require(campaign == "v5-pilot-2", "Unsupported word frequency campaign")
+    # Historical Pilot 2 receipt evidence stays historical; it is never promoted to full-list proof.
+    require(set(source) == {"receipt", "body_sha256", "word", "count"}
+            and lemma_key(source["word"]) == lemma_key(label)
+            and type(source["count"]) is int and source["count"] > 0,
+            "Positive exact word frequency required")
+    ref = {key: source[key] for key in ("receipt", "body_sha256")}
+    key = canonical(ref)
+    if key not in frequencies:
+        frequencies[key] = frequency_rows(root, ref)
+    require(frequencies[key].get(source["word"]) == source["count"], "Exact frequency row differs")
+    return {"word": source["word"], "count": source["count"]}
+
+
 def wiki_language(parser, raw):
     starts, comments, unsupported = parser.top_level_lines(raw)
     headings = list(parser.section_headings(raw, starts, comments))
@@ -256,7 +306,7 @@ def wiki_language(parser, raw):
     return raw[start:end], {offset - start for offset in starts if start <= offset < end}
 
 
-def verified_sources(scratch, gate_ref, repo, sha, items):
+def verified_sources(scratch, gate_ref, repo, sha, items, campaign):
     gate, parser, day = reviewed_parser_gate(scratch, gate_ref, repo, sha)
     cache = scratch / "cache"
     require(cache.is_dir() and cache.resolve() == cache, "Canonical source cache required")
@@ -298,15 +348,8 @@ def verified_sources(scratch, gate_ref, repo, sha, items):
                 "No supported Romanian lexical definition in the page")
         require(not re.search(r"(?i)(?<!\w)(?:vulgar|argou|peiorativ|depreciativ|trivial)(?!\w)", language),
                 "Romanian lexical section contains an excluded usage label")
-        frequency = item["source"]["frequency"]
-        require(set(frequency) == {"receipt", "body_sha256", "word", "count"}
-                and lemma_key(frequency["word"]) == lemma_key(item["node"]["label_ro"])
-                and type(frequency["count"]) is int and frequency["count"] > 0, "Positive exact word frequency required")
-        ref = {k: frequency[k] for k in ("receipt", "body_sha256")}
-        key = canonical(ref)
-        if key not in frequencies:
-            frequencies[key] = frequency_rows(scratch, ref)
-        require(frequencies[key].get(frequency["word"]) == frequency["count"], "Exact frequency row differs")
+        verify_frequency(scratch, item["source"]["frequency"], item["node"]["label_ro"],
+                         campaign, frequencies)
     return gate, bindings
 
 
@@ -476,7 +519,7 @@ def main(argv=None):
     cli = argparse.ArgumentParser(description=__doc__)
     cli.add_argument("--repo", type=Path, required=True)
     cli.add_argument("--sha", required=True, help="Exact clean candidate commit")
-    cli.add_argument("--baseline", required=True, help="Exact Pilot 2 contract base commit")
+    cli.add_argument("--baseline", required=True, help="Exact active campaign contract base commit")
     cli.add_argument("--scratch", type=Path, required=True)
     cli.add_argument("--input", required=True, help="Word and link manifest relative to scratch")
     cli.add_argument("--input-sha256", required=True)
@@ -498,8 +541,7 @@ def main(argv=None):
                 "Link installation requires content/v5")
         require(not git(repo, "merge-base", "--is-ancestor", base, sha), "Pilot baseline must precede the candidate")
         contract = read_json(read_artifact(scratch, "contract.json", 64 * 1024))
-        require(contract["campaign"] == "v5-pilot-2" and contract["base_sha"] == base,
-                "Baseline differs from the active Pilot 2 contract")
+        campaign = campaign_contract(contract, base)
         raw = read_artifact(scratch, args.input, MAX_INPUT)
         require(digest(raw) == args.input_sha256, "Word manifest SHA-256 differs")
         document = read_json(raw)
@@ -516,13 +558,13 @@ def main(argv=None):
         key_for, excluded = native_label_authority(repo, kg, sha)
         nodes, links = merge_input(items, read_json(kg), baseline, key_for=key_for, excluded=excluded)
         span_sha, edge_results = verify_span_evidence(scratch, document["claims"], links)
-        gate, bindings = verified_sources(scratch, document["gate"], repo, sha, items)
+        gate, bindings = verified_sources(scratch, document["gate"], repo, sha, items, campaign)
         dry = args.dry_run_out is not None
         verify_registry(scratch, document, registry, bindings, gate, edge_results, dry)
         native = verified_binary(args.cat_content, args.cat_content_sha256)
         with tempfile.TemporaryDirectory(prefix="link-install-", dir=scratch) as name:
             prepared = Path(name)
-            new_kg, new_pack, changes, messages = generate(kg, pack, nodes, links, prepared, native, repo)
+            new_kg, new_pack, changes, messages = generate(kg, pack, nodes, links, prepared, native, repo, campaign)
         clean_source(repo, sha)
         outputs = {"kg_sha256": digest(new_kg), "pack_sha256": digest(new_pack)}
         if dry:

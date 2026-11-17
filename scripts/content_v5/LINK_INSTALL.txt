@@ -3,7 +3,9 @@ V5 additive word and link installation
 Run scripts/content_v5/link_install.py with Python 3.12, an exact clean
 content/v5 checkout, the active campaign scratch root, both full Git SHAs
 and the native cat-content executable with its SHA-256. The baseline must
-equal the campaign contract baseline. Use --help for the exact command.
+equal the campaign contract baseline. Only v5-pilot-2 and v5-pilot-3 are
+admitted; Pilot 3 also verifies the exact ADR-0235 frequency contract fields.
+Use --help for the exact command.
 
 The hash-pinned cat-v5-link-install-1 manifest has items, gate, claims and
 judgments. Each item has id (registry ID), node, links and source.
@@ -18,13 +20,25 @@ judgments. Each item has id (registry ID), node, links and source.
   appear identically in both frozen item lists and is installed once.
 - source has wiktionary (the registry's dated archive and exact raw page
   receipt fields), wikipedia (url, receipt_sha256, body_sha256) and
-  frequency (receipt with path and sha256, body_sha256, word, count).
+  frequency. Pilot 2 uses the historical {receipt, body_sha256, word, count}
+  shape. Pilot 3 uses {list, row}: list is exactly
+  {"path":"frequency/ro_full.txt","sha256":"a0d0993701e251e91b9047753b6032be751217a5aaba36ed879163e020e33ded"};
+  row is the complete frequency.py lookup result for node.label_ro (label,
+  exact, variants, undiacritised, status, dominant_spelling, minority_spelling).
+  The full list must be exactly 15,199,764 bytes. Its fixed path is read with
+  regular-file and no-symlink checks and its bytes are verified before lookup.
+  Pilot 3 requires positive exact, retaining all reviewer flags in the frozen
+  payload. A multiword row has no positive exact count and needs a separate
+  owner-defined evidence shape before this installer can support it.
   The operator replays the independently reviewed Wiktionary parser gate,
   checks the exact Romanian lexical section, verifies the canonical cached
-  Romanian Wikipedia article, and rehashes the approved FrequencyWords list
-  and exact positive row. The reviewers check that the article supports the
-  selected sense, including when the canonical article title differs. Legacy
-  FrequencyWords data may support frequency.
+  Romanian Wikipedia article, and rehashes the frequency input. Pilot 3 calls
+  frequency.py over the ADR-0235 pinned bytes, combining case/NFC/cedilla/comma
+  variants. No URL receipt is invented for that owner-admitted local artifact.
+  Pilot 2 retains its receipt/header checks and exact historical row parser.
+  The reviewers check the article's sense and the frozen frequency flags.
+  A carried Pilot 2 item needs a new Pilot 3 frequency payload, source hash and
+  new payload-bound reviews; retaining the old signatures cannot approve it.
 - gate is the same hash-pinned parser gate used by ALIAS_INSTALL.txt.
   claims binds the LINK_SPANS.txt batch by path and sha256. Every exact edge
   must have one checked span. Claims and receipts remain in private scratch.
