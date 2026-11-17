@@ -90,7 +90,7 @@ for (const failure of ["getter", "methods", "quota"]) {
     else Object.defineProperty(globalThis, "localStorage", {
       configurable: true,
       value: {
-        getItem: failure === "methods" ? () => { throw new Error("Read denied"); } : persistent.getItem,
+        getItem: failure === "methods" ? () => { throw new Error("Read denied"); } : (key) => persistent.getItem(key),
         setItem: () => { throw new Error("Quota exceeded"); },
         removeItem: () => { throw new Error("Write denied"); },
       },

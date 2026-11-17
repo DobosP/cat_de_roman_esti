@@ -47,8 +47,9 @@ for (const failure of ["denied", "quota"]) {
     else await page.addInitScript(() => {
       localStorage.setItem("cat_daily_v2_intrusul", "{}");
       const storage = localStorage;
-      const set = Storage.prototype.setItem;
-      const remove = Storage.prototype.removeItem;
+      const methods = Object.getOwnPropertyDescriptors(Storage.prototype);
+      const set = methods.setItem.value;
+      const remove = methods.removeItem.value;
       Storage.prototype.setItem = function (key, value) {
         if (this === storage) throw new DOMException("Storage full", "QuotaExceededError");
         return set.call(this, key, value);
