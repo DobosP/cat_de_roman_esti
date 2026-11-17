@@ -85,3 +85,7 @@ Alchimie journeys and advisory replay requests. The gzip corpus SHA-256 is
 `1912bc729dddd9bc1358777c8091a0e23c4f6b9da4d67dce47482529b9042e3e`. The recorder is
 `scripts/check_go_parity.py --record-python <output>`. The affected mechanics
 journeys are re-recorded by `scripts/record_alchimie_hint_journeys.py`.
+
+After rebasing on the independently recorded Pilot 3 forms at `2c38ec7a`, the
+same 1,364 requests were re-recorded from Python under the updated eight-source
+identity. Their gzip SHA-256 is `148895e93db1a4fc3cda7940736bdfae766c69c15e47e4be40957292af0b5b3c`.
