@@ -204,6 +204,16 @@
       "post": {
         "description": "Start a new Alchimie game.\n\n``?difficulty=`` in {usor,normal,greu} tunes the target depth + seed count.\n``?daily=YYYY-MM-DD`` makes a shared, deterministic daily instance (ignores seed).\nOtherwise an optional ``?seed=`` makes the instance reproducible. Every board is\nthemed; without ``?category=`` the server deterministically selects a usable theme.",
         "operationId": "alchimie_create_game",
+        "parameters": [
+          {
+            "description": "Advisory daily replay. Excluded from anonymous board placement.",
+            "in": "query",
+            "name": "replay",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "content": {
@@ -504,6 +514,16 @@
       "post": {
         "description": "Start a game. Optional ``?category=`` serves a curated board for that theme\n(503 when unavailable — Conexiuni boards cannot be mined per-category). Dailies\nuse curated content once they meet the four-board scoped or eight-board shared\nvariety floor (ADR-0063).",
         "operationId": "conexiuni_create_game",
+        "parameters": [
+          {
+            "description": "Advisory daily replay. Excluded from anonymous board placement.",
+            "in": "query",
+            "name": "replay",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "content": {
@@ -742,6 +762,16 @@
       "post": {
         "description": "Start a game. Optional ``?category=`` prefers a curated target for that\ntheme and otherwise mines within the category. Dailies use curated content\nonce they meet the four-board scoped or eight-board shared variety floor\n(ADR-0063). For a signed-in player, curated instances they have already\nfinished are excluded (dailies are exempt).",
         "operationId": "contexto_create_game",
+        "parameters": [
+          {
+            "description": "Advisory daily replay. Excluded from anonymous board placement.",
+            "in": "query",
+            "name": "replay",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "content": {
@@ -1022,6 +1052,16 @@
       "post": {
         "description": "APIView with FastAPI/starlette method semantics.\n\n``metadata_class = None`` disables DRF's automatic 200-with-metadata OPTIONS\nhandler, so an undeclared method (including OPTIONS outside CORS preflight)\nraises MethodNotAllowed — rendered below as the starlette-parity 405 body.",
         "operationId": "intrusul_create_game",
+        "parameters": [
+          {
+            "description": "Advisory daily replay. Excluded from anonymous board placement.",
+            "in": "query",
+            "name": "replay",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "content": {
@@ -1260,6 +1300,16 @@
       "post": {
         "description": "Start a game. Optional ``?category=`` prefers a curated pair for that\ntheme and otherwise mines with both endpoints inside the category. Dailies\nuse curated content once they meet the four-board scoped or eight-board shared\nvariety floor (ADR-0063).",
         "operationId": "lant_create_game",
+        "parameters": [
+          {
+            "description": "Advisory daily replay. Excluded from anonymous board placement.",
+            "in": "query",
+            "name": "replay",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "content": {
@@ -1622,6 +1672,16 @@
       "post": {
         "description": "APIView with FastAPI/starlette method semantics.\n\n``metadata_class = None`` disables DRF's automatic 200-with-metadata OPTIONS\nhandler, so an undeclared method (including OPTIONS outside CORS preflight)\nraises MethodNotAllowed — rendered below as the starlette-parity 405 body.",
         "operationId": "perechi_create_game",
+        "parameters": [
+          {
+            "description": "Advisory daily replay. Excluded from anonymous board placement.",
+            "in": "query",
+            "name": "replay",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "content": {

@@ -79,3 +79,9 @@ The hidden recipe, subject IDs and unearned ingredients remain private.
 Direct Go session and independent Python HTTP regressions cover another
 shortest route appearing between rungs, subject completion, reset and the
 hidden-answer boundary.
+
+Review-fix parity uses 1,364 independent responses, including frozen-subject
+Alchimie journeys and advisory replay requests. The gzip corpus SHA-256 is
+`1912bc729dddd9bc1358777c8091a0e23c4f6b9da4d67dce47482529b9042e3e`. The recorder is
+`scripts/check_go_parity.py --record-python <output>`. The affected mechanics
+journeys are re-recorded by `scripts/record_alchimie_hint_journeys.py`.

@@ -43,6 +43,8 @@ const REDESIGN_SOURCES = [
   "frontend/src/entry.ts", "frontend/src/hooks/useGameEntry.ts", "frontend/src/theme.ts",
   "frontend/src/hooks/useEventValue.ts", "frontend/src/hooks/useCoachMessage.ts",
   "frontend/src/hooks/useSavedGameResume.ts",
+  "frontend/src/pageStorage.ts", "frontend/src/hooks/useActiveGame.ts",
+  ...["intrusul", "perechi", "conexiuni", "contexto", "alchimie"].map((name) => "frontend/src/api/" + name + ".ts"),
   "frontend/index.html", "go-backend/internal/httpapi/managed_nonce.go",
   "frontend/src/components/FreeRoundOptions.tsx", "frontend/src/components/HintBar.tsx",
   "frontend/src/components/ResultCard.tsx", "frontend/src/components/ResultsHistory.tsx",
