@@ -23,7 +23,7 @@ from functools import lru_cache
 from itertools import combinations
 
 from django.urls import path
-from drf_spectacular.utils import extend_schema
+from drf_spectacular.utils import OpenApiParameter, extend_schema
 from pydantic import BaseModel
 from rest_framework.response import Response
 
@@ -962,7 +962,13 @@ def _dead_pair_whisper(session: AlchimieSession) -> str | None:
 class CreateGameView(ContractAPIView):
     authentication_classes = [OptionalSessionAuth]
 
-    @extend_schema(operation_id="alchimie_create_game", tags=["alchimie"])
+    @extend_schema(
+        operation_id="alchimie_create_game", tags=["alchimie"],
+        parameters=[OpenApiParameter(
+            name="replay", type=bool, location=OpenApiParameter.QUERY,
+            description="Advisory daily replay. Excluded from anonymous board placement.",
+        )],
+    )
     def post(self, request):
         """Start a new Alchimie game.
 

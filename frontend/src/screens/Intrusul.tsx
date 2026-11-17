@@ -151,6 +151,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
       startInFlight.write(true);
       const epoch = lifetimeRef.current;
       const expected = active.peek();
+      const replay = replayFor(daily);
       actionOwner.invalidate();
       pendingHintFocus.write(null);
       cancelResume();
@@ -158,7 +159,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
       setUnavailable(false);
       setLoading(true);
       const opts: CreateIntrusulOpts = daily
-        ? { daily, replay: replayFor(daily) }
+        ? { daily, replay }
         : {
             category,
             starter: needsDerivedStarter(GAME_KEY),
@@ -168,7 +169,7 @@ export default function Intrusul({ onExit, onToast }: Props) {
       try {
         const fresh = await intrusulApi.create(opts);
         if (!liveRef.current || epoch !== lifetimeRef.current) return;
-        if (!remember(fresh, expected)) {
+        if (!remember(fresh, expected, replay)) {
           setState(null);
           retryResume();
           return;

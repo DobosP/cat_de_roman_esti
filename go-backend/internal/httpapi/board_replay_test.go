@@ -49,7 +49,7 @@ func TestDailyReplayNeverContributesOrReceivesPlace(t *testing.T) {
 					boardID = board.CatalogID
 				}
 			} else {
-				board := pack.New(c).PickDaily(game, day, pack.PickOptions{Difficulty: "usor"})
+				board := pack.New(c).PickDaily(game, day, pack.PickOptions{Difficulty: "usor", FilteredShelfWeights: game == "contexto"})
 				if board != nil {
 					boardID = board.ID
 				}

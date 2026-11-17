@@ -20,7 +20,7 @@ from functools import lru_cache
 from itertools import combinations
 
 from django.urls import path
-from drf_spectacular.utils import extend_schema
+from drf_spectacular.utils import OpenApiParameter, extend_schema
 from pydantic import BaseModel
 from rest_framework.response import Response
 
@@ -527,7 +527,13 @@ def _session_from_curated(
 class CreateGameView(ContractAPIView):
     authentication_classes = [OptionalSessionAuth]
 
-    @extend_schema(operation_id="conexiuni_create_game", tags=["conexiuni"])
+    @extend_schema(
+        operation_id="conexiuni_create_game", tags=["conexiuni"],
+        parameters=[OpenApiParameter(
+            name="replay", type=bool, location=OpenApiParameter.QUERY,
+            description="Advisory daily replay. Excluded from anonymous board placement.",
+        )],
+    )
     def post(self, request):
         """Start a game. Optional ``?category=`` serves a curated board for that theme
         (503 when unavailable — Conexiuni boards cannot be mined per-category). Dailies

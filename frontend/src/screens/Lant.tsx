@@ -231,6 +231,7 @@ export default function Lant({
       startInFlightRef.current = true;
       const epoch = lifetimeRef.current;
       const expected = active.peek();
+      const replay = replayFor(daily);
       actionOwner.invalidate();
       pendingActionFocusRef.current = null;
       cancelResume();
@@ -239,10 +240,10 @@ export default function Lant({
       setCreating(true);
       try {
         const fresh = await createLant(daily
-          ? { daily, replay: replayFor(daily), difficulty: "usor" }
+          ? { daily, replay, difficulty: "usor" }
           : { difficulty: entry.options.difficulty, category: entry.options.category ?? undefined });
         if (!liveRef.current || epoch !== lifetimeRef.current) return;
-        if (!remember(fresh, expected)) {
+        if (!remember(fresh, expected, replay)) {
           setState(null);
           retryResume();
           return;

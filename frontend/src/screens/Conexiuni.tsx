@@ -185,6 +185,7 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
       startInFlight.write(true);
       const epoch = lifetimeRef.current;
       const expected = active.peek();
+      const replay = replayFor(daily);
       actionOwner.invalidate();
       cancelResume();
       setStartFailed(false);
@@ -192,10 +193,10 @@ export default function Conexiuni({ onExit, onToast }: SelfProps) {
       setLoading(true);
       try {
         const s = await conexiuniApi.create(daily
-          ? { daily, replay: replayFor(daily), difficulty: "usor" }
+          ? { daily, replay, difficulty: "usor" }
           : { difficulty: entry.options.difficulty, category: entry.options.category ?? undefined });
         if (!liveRef.current || epoch !== lifetimeRef.current) return;
-        if (!remember(s, expected)) {
+        if (!remember(s, expected, replay)) {
           setState(null);
           retryResume();
           return;

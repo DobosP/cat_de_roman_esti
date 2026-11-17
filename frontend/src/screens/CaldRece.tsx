@@ -193,15 +193,16 @@ export default function CaldRece({
       startInFlightRef.current = true;
       const epoch = lifetimeRef.current;
       const expected = active.peek();
+      const replay = replayFor(opts.daily);
       actionOwner.invalidate();
       cancelResume();
       setStartFailed(false);
       setUnavailable(false);
       setBusy(true);
       try {
-        const fresh = await contextoApi.createGame({ ...opts, replay: replayFor(opts.daily) });
+        const fresh = await contextoApi.createGame({ ...opts, replay });
         if (!liveRef.current || epoch !== lifetimeRef.current) return;
-        if (!remember(fresh, expected)) {
+        if (!remember(fresh, expected, replay)) {
           setState(null);
           retryResume();
           return;

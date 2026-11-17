@@ -206,15 +206,16 @@ export default function AlchimieChallenge({
       startInFlightRef.current = true;
       const epoch = lifetimeRef.current;
       const expected = active.peek();
+      const replay = replayFor(opts.daily);
       actionOwner.invalidate();
       cancelResume();
       setStartFailed(false);
       setUnavailable(false);
       setCreating(true);
       try {
-        const s = await alchimieApi.create({ ...opts, replay: replayFor(opts.daily) });
+        const s = await alchimieApi.create({ ...opts, replay });
         if (!liveRef.current || epoch !== lifetimeRef.current) return;
-        if (!remember(s, expected)) {
+        if (!remember(s, expected, replay)) {
           setState(null);
           retryResume();
           return;

@@ -20,7 +20,7 @@ from datetime import date, datetime, timedelta
 from zoneinfo import ZoneInfo
 
 from django.urls import path
-from drf_spectacular.utils import extend_schema
+from drf_spectacular.utils import OpenApiParameter, extend_schema
 from pydantic import BaseModel
 from rest_framework.response import Response
 
@@ -759,7 +759,13 @@ def _pick_pair(
 class CreateGameView(ContractAPIView):
     authentication_classes = [OptionalSessionAuth]
 
-    @extend_schema(operation_id="lant_create_game", tags=["lant"])
+    @extend_schema(
+        operation_id="lant_create_game", tags=["lant"],
+        parameters=[OpenApiParameter(
+            name="replay", type=bool, location=OpenApiParameter.QUERY,
+            description="Advisory daily replay. Excluded from anonymous board placement.",
+        )],
+    )
     def post(self, request):
         """Start a game. Optional ``?category=`` prefers a curated pair for that
         theme and otherwise mines with both endpoints inside the category. Dailies

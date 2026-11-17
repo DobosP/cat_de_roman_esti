@@ -465,6 +465,8 @@ def main() -> int:
             daily = request("POST", base + "?daily=2026-11-16&category=literatura&difficulty=greu")
             if daily.get("game_id"):
                 request("GET", f"{base}/{daily['game_id']}")
+            replay = request("POST", base + "?daily=2026-11-16&replay=true")
+            request("GET", f"{base}/{replay['game_id']}")
             query = "?seed=31&difficulty=greu" if module is lant else "?seed=17&difficulty=usor"
             game = request("POST", base + query)
             path = f"{base}/{game['game_id']}"
@@ -537,6 +539,50 @@ def main() -> int:
             assert before["hint_level"] == before["steps"] == 1 and before["hints_left"] == 0
             request("POST", path + "/" + hint)
             assert request("GET", path) == before
+        # Alchimie keeps the first hinted subject when another recipe is made,
+        # and ends that ladder after its subject is discovered, including Reset.
+        base = "/api/wordgames/alchimie/games"
+        for solve_subject in (False, True):
+            initial = request("POST", base + "?seed=17&difficulty=usor")
+            path = f"{base}/{initial['game_id']}"
+            session = alchimie.store.get(initial["game_id"])
+            assert session is not None
+            first = request("POST", path + "/hint")
+            original = session.hint_pair
+            subject = session.hint_subject
+            assert original is not None and subject is not None and first["hint_level"] == 1
+            if solve_subject:
+                pair = original
+            else:
+                # Find an unrelated discovery that would change a fresh planner.
+                def changes_plan(pair):
+                    discovered = set(session.recipes.get(pair, ())) - set(session.owned)
+                    if not discovered or subject in discovered:
+                        return False
+                    plan = alchimie._minimum_projected_plan(
+                        set(session.owned) | discovered, session.target, session.recipes,
+                    )
+                    return bool(plan and plan[0] != original)
+                pair = next(pair for pair in combinations(sorted(session.owned), 2)
+                            if changes_plan(pair))
+            request("POST", path + "/combine", json.dumps({"a": pair[0], "b": pair[1]}))
+            state = request("GET", path)
+            if solve_subject:
+                assert state["hints_left"] == 0
+                request("POST", path + "/hint")
+                request("POST", path + "/reset")
+                before = request("GET", path)
+                assert before["hints_left"] == 0
+                request("POST", path + "/hint")
+                assert request("GET", path) == before
+            else:
+                second = request("POST", path + "/hint")
+                assert second["hint_kind"] == "category"
+                assert second["hint_ingredient"]["id"] in original
+                third = request("POST", path + "/hint")
+                assert {item["id"] for item in third["hint"]} == set(original)
+                request("GET", path)
+                request("POST", path + "/hint")
         if args.benchmark:
             for seed in range(1000):
                 game = request("POST", f"{BASE}?seed={seed}")

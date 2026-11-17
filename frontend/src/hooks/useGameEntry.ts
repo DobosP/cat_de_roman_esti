@@ -61,7 +61,7 @@ export function useGameEntry(game: GameKey, active: ActiveGameMemo) {
     return false;
   }, [date, game, parkedCandidate, presentingRecovery, replayKey]);
 
-  const remember = useCallback((round: Round, expected: string | null) => {
+  const remember = useCallback((round: Round, expected: string | null, replayed: boolean) => {
     // Another tab may have started a newer game while this POST was in flight.
     const current = active.peek();
     if (current !== null && current !== expected) return false;
@@ -70,7 +70,7 @@ export function useGameEntry(game: GameKey, active: ActiveGameMemo) {
       if (candidate && active.isCurrent(candidate)) {
         write(parkedKey, candidate);
       }
-      const replayId = dailyStatus(game, round.daily).started ? round.game_id : null;
+      const replayId = replayed ? round.game_id : null;
       setReplay(replayId);
       write(replayKey, replayId);
       markDailyStarted(game, round.daily);

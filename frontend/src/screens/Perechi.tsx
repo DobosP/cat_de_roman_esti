@@ -202,6 +202,7 @@ export default function Perechi({ onExit, onToast }: Props) {
       startInFlight.write(true);
       const epoch = lifetimeRef.current;
       const expected = active.peek();
+      const replay = replayFor(daily);
       actionOwner.invalidate();
       pendingFocus.write(null);
       focusedTileBeforeMutation.write(null);
@@ -210,7 +211,7 @@ export default function Perechi({ onExit, onToast }: Props) {
       setUnavailable(false);
       setLoading(true);
       const opts: CreatePerechiOpts = daily
-        ? { daily, replay: replayFor(daily) }
+        ? { daily, replay }
         : {
             category,
             starter: needsDerivedStarter(GAME_KEY),
@@ -220,7 +221,7 @@ export default function Perechi({ onExit, onToast }: Props) {
       try {
         const fresh = await perechiApi.create(opts);
         if (!liveRef.current || epoch !== lifetimeRef.current) return;
-        if (!remember(fresh, expected)) {
+        if (!remember(fresh, expected, replay)) {
           setState(null);
           retryResume();
           return;

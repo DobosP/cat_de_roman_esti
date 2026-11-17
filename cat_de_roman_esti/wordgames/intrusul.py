@@ -13,7 +13,7 @@ import random
 from dataclasses import dataclass, field
 
 from django.urls import path
-from drf_spectacular.utils import extend_schema
+from drf_spectacular.utils import OpenApiParameter, extend_schema
 from pydantic import BaseModel
 from rest_framework.response import Response
 
@@ -255,7 +255,13 @@ def _build_session(
 class CreateGameView(ContractAPIView):
     authentication_classes = [OptionalSessionAuth]
 
-    @extend_schema(operation_id="intrusul_create_game", tags=["intrusul"])
+    @extend_schema(
+        operation_id="intrusul_create_game", tags=["intrusul"],
+        parameters=[OpenApiParameter(
+            name="replay", type=bool, location=OpenApiParameter.QUERY,
+            description="Advisory daily replay. Excluded from anonymous board placement.",
+        )],
+    )
     def post(self, request):
         seed = query_int(request, "seed")
         daily = query_str(request, "daily")
