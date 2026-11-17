@@ -25,10 +25,14 @@ func TestLantGiveUpAndWinningMoveProduceOneTerminalOutcome(t *testing.T) {
 		}
 		start := make(chan struct{})
 		first := make(chan gameapi.TerminalRound, 2)
-		observe := func(_ map[string]any, round gameapi.TerminalRound, firstObservation bool) {
+		observe := func(_ map[string]any, round gameapi.TerminalRound, firstObservation, admitted bool) bool {
 			if firstObservation {
+				if admitted {
+					t.Error("first observation was already admitted")
+				}
 				first <- round
 			}
+			return true
 		}
 		var moveErr, giveUpErr *gameapi.Error
 		var actions sync.WaitGroup

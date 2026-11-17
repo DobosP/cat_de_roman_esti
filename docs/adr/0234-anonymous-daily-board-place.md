@@ -106,3 +106,11 @@ stats Compose profile grants a 20-second stop grace. A failed or timed-out
 final flush is reported. A hung handler regression verifies that pending
 data reaches its snapshot and the directory lock is released after the
 HTTP deadline expires.
+
+### Privacy draft correction
+
+The 2026-11-16 privacy draft above predates the requested recorded-date
+retention rule. The retained window comprises 14 board dates relative to the
+latest date with recorded data. During a period with no new recorded date,
+snapshot files may remain longer than 14 elapsed days. Final privacy wording
+must describe that retention before Paul activates the feature.
