@@ -2,8 +2,6 @@
 
 Last verified: 2026-11-17 — Redesign v2 review fixes are being verified. Pilot 3 assembled 26 reviewed forms, with its exact qualification recorded separately.
 
-- **Redesign v2 Milestone 1.** Exact product `8b6679af` passed unit 28/28, full 37/37, all 837 browser cases, 1,332 independent Python parity cases, and 18 byte-exact screenshots with zero Axe findings. Gzip sizes were 12,932 B CSS and 37,948 B for the largest game route. The six games use steps and hint ladders in the new illustrated arcade. [Acceptance record](reviews/redesign-v2-m1/acceptance.json) and [execplan](execplans/redesign-v2.md).
-- **Redesign v2 Milestone 2.** Anonymous daily board comparison is off by default. Exact product `abda879a` passed unit 28/28, full 37/37, 855 browser cases, 1,335 independent parity cases, and 18 exact PNGs. Gzip sizes were 13,268 B CSS and 38,537 B for the largest game route. A seeded local walk-through recorded the 101st round and an eligible Lanț give-up. [Acceptance record](reviews/redesign-v2-m2/acceptance.json) and [board comparison ADR](adr/0234-anonymous-daily-board-place.md).
 
 - **Redesign review fixes in progress.** Page-lifetime storage fallback, stable Alchimie hint subject, and anonymous aggregate admission, limiter, clock and shutdown fixes. The exact acceptance run and independent review precede local landing.
 

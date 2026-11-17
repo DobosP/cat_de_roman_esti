@@ -92,7 +92,10 @@ test("a replay omits the podium even when the server sends a place", async ({ pa
     globalThis.localStorage.setItem("cat_daily_v2_intrusul", JSON.stringify({ [date]: 1 }));
   }, day);
   await supplyPlace(page, game, "guess");
+  const replayRequest = page.waitForRequest((request) => request.method() === "POST" &&
+    new URL(request.url()).pathname === "/api/wordgames/intrusul/games");
   await start(page, game);
+  expect(new URL((await replayRequest).url()).searchParams.get("replay")).toBe("true");
   await expect(page.locator(".game-frame-mode")).toHaveText("Reluare");
   expect((await solve(page, game, solution(game).steps)).place).toEqual(place);
   await expect(page.locator(".board-place")).toHaveCount(0);
