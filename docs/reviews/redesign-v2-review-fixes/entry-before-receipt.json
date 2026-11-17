@@ -1,0 +1,29 @@
+{
+  "outcome": "expected_pre_fix_failures_confirmed",
+  "baseline_commit": "2c38ec7a95cb782995503ad1a8dc17da7c358400",
+  "test_source_commit": "270cf275dd561f51fe284779b468be119c469798",
+  "node_version": "v26.10.0",
+  "node_test_exit_code": 1,
+  "tests": 8,
+  "passed": 4,
+  "failed": 4,
+  "assertion_failures": [
+    {
+      "name": "getter storage keeps daily, options and the saved round until reload",
+      "assertion": true
+    },
+    {
+      "name": "methods storage keeps daily, options and the saved round until reload",
+      "assertion": true
+    },
+    {
+      "name": "quota storage keeps daily, options and the saved round until reload",
+      "assertion": true
+    },
+    {
+      "name": "an unsuccessful removal hides the old stored id for this page",
+      "assertion": true
+    }
+  ],
+  "errors": []
+}

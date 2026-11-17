@@ -1,0 +1,426 @@
+{
+  "schema": 1,
+  "target": "unit",
+  "status": "pass",
+  "sha": "bb4ebbe8c8dabadf07981453af27c17f92d606cd",
+  "dirty": false,
+  "tree_sha256": "b6e274371359529a9c26df31d5141a01c9ecc7a188f4d84ac095f59f0a9a5756",
+  "toolchain_digest": "sha256:c84ff601865080c9915159220f136fcfb80218bb91240669d65d62ae654404d6",
+  "versions_lock_sha256": "07b78e8df5330c5463430ea90b3954142b25b25b2550941d071097d5efd8a0ad",
+  "parallel": 4,
+  "started": "2026-11-17T11:40:46.812Z",
+  "finished": "2026-11-17T12:07:31.311Z",
+  "checks": [
+    {
+      "name": "bootstrap-evidence",
+      "status": "pass",
+      "duration_ms": 1
+    },
+    {
+      "name": "cat-setup-npm-ci",
+      "status": "pass",
+      "duration_ms": 2994
+    },
+    {
+      "name": "versions-check",
+      "status": "pass",
+      "duration_ms": 667
+    },
+    {
+      "name": "toolchain-versions",
+      "status": "pass",
+      "duration_ms": 1106
+    },
+    {
+      "name": "lint-scope",
+      "status": "pass",
+      "duration_ms": 833
+    },
+    {
+      "name": "kit:check",
+      "status": "pass",
+      "duration_ms": 270
+    },
+    {
+      "name": "cat-active-ui",
+      "status": "pass",
+      "duration_ms": 91
+    },
+    {
+      "name": "cat-doccheck-source-contracts",
+      "status": "pass",
+      "duration_ms": 1767
+    },
+    {
+      "name": "cat-doc-check",
+      "status": "pass",
+      "duration_ms": 646
+    },
+    {
+      "name": "cat-content-validate",
+      "status": "pass",
+      "duration_ms": 2594
+    },
+    {
+      "name": "cat-content-export",
+      "status": "pass",
+      "duration_ms": 2928
+    },
+    {
+      "name": "cat-docs-gate",
+      "status": "pass",
+      "duration_ms": 108
+    },
+    {
+      "name": "cat-unit-fresh-build-output",
+      "status": "pass",
+      "duration_ms": 89
+    },
+    {
+      "name": "cat-unit-frontend-build",
+      "status": "pass",
+      "duration_ms": 4212
+    },
+    {
+      "name": "cat-unit-emitted-inventory",
+      "status": "pass",
+      "duration_ms": 383
+    },
+    {
+      "name": "cat-unit-assets",
+      "status": "pass",
+      "duration_ms": 453
+    },
+    {
+      "name": "cat-unit-gui-identity",
+      "status": "pass",
+      "duration_ms": 131
+    },
+    {
+      "name": "cat-route-budgets",
+      "status": "pass",
+      "duration_ms": 676
+    },
+    {
+      "name": "cat-frozen-legacy-integrity",
+      "status": "pass",
+      "duration_ms": 0
+    },
+    {
+      "name": "cat-frontend-unit",
+      "status": "pass",
+      "duration_ms": 24218
+    },
+    {
+      "name": "cat-frontend-lint",
+      "status": "pass",
+      "duration_ms": 5003
+    },
+    {
+      "name": "cat-frontend-types",
+      "status": "pass",
+      "duration_ms": 753
+    },
+    {
+      "name": "cat-native-reuse-inputs",
+      "status": "pass",
+      "duration_ms": 6723
+    },
+    {
+      "name": "cat-unit-build-pending-review-producer",
+      "status": "pass",
+      "duration_ms": 1309
+    },
+    {
+      "name": "cat-backend-race",
+      "status": "pass",
+      "duration_ms": 1545118
+    },
+    {
+      "name": "cat-backend-vet",
+      "status": "pass",
+      "duration_ms": 284
+    },
+    {
+      "name": "cat-authcore-race",
+      "status": "pass",
+      "duration_ms": 123
+    },
+    {
+      "name": "cat-authcore-vet",
+      "status": "pass",
+      "duration_ms": 106
+    }
+  ],
+  "csp": {
+    "stage": "enforced",
+    "violations": 0,
+    "legacy_violations": 0
+  },
+  "budgets": {
+    "gate:active:global-css:global": {
+      "limit": 16093,
+      "actual": 13290,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/unit/route-budgets/active.json"
+    },
+    "gate:active:route-js:/": {
+      "limit": 40960,
+      "actual": 28719,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/unit/route-budgets/active.json"
+    },
+    "gate:active:route-css:/": {
+      "limit": 16093,
+      "actual": 13290,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/unit/route-budgets/active.json"
+    },
+    "gate:active:route-js:/alchimie": {
+      "limit": 40960,
+      "actual": 38688,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/unit/route-budgets/active.json"
+    },
+    "gate:active:route-css:/alchimie": {
+      "limit": 16093,
+      "actual": 13290,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/unit/route-budgets/active.json"
+    },
+    "gate:active:route-js:/alchimie?mode=challenges": {
+      "limit": 40960,
+      "actual": 38688,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/unit/route-budgets/active.json"
+    },
+    "gate:active:route-css:/alchimie?mode=challenges": {
+      "limit": 16093,
+      "actual": 13290,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/unit/route-budgets/active.json"
+    },
+    "gate:active:route-js:/alchimie?mode=explore": {
+      "limit": 40960,
+      "actual": 38688,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/unit/route-budgets/active.json"
+    },
+    "gate:active:route-css:/alchimie?mode=explore": {
+      "limit": 16093,
+      "actual": 13290,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/unit/route-budgets/active.json"
+    },
+    "gate:active:route-js:/cald-rece": {
+      "limit": 40960,
+      "actual": 38094,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/unit/route-budgets/active.json"
+    },
+    "gate:active:route-css:/cald-rece": {
+      "limit": 16093,
+      "actual": 13311,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/unit/route-budgets/active.json"
+    },
+    "gate:active:route-js:/clasament": {
+      "limit": 40960,
+      "actual": 24458,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/unit/route-budgets/active.json"
+    },
+    "gate:active:route-css:/clasament": {
+      "limit": 16093,
+      "actual": 13311,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/unit/route-budgets/active.json"
+    },
+    "gate:active:route-js:/conexiuni": {
+      "limit": 40960,
+      "actual": 37581,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/unit/route-budgets/active.json"
+    },
+    "gate:active:route-css:/conexiuni": {
+      "limit": 16093,
+      "actual": 13311,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/unit/route-budgets/active.json"
+    },
+    "gate:active:route-js:/intrusul": {
+      "limit": 40960,
+      "actual": 37321,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/unit/route-budgets/active.json"
+    },
+    "gate:active:route-css:/intrusul": {
+      "limit": 16093,
+      "actual": 13311,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/unit/route-budgets/active.json"
+    },
+    "gate:active:route-js:/lant": {
+      "limit": 40960,
+      "actual": 38707,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/unit/route-budgets/active.json"
+    },
+    "gate:active:route-css:/lant": {
+      "limit": 16093,
+      "actual": 13311,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/unit/route-budgets/active.json"
+    },
+    "gate:active:route-js:/perechi": {
+      "limit": 40960,
+      "actual": 38148,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/unit/route-budgets/active.json"
+    },
+    "gate:active:route-css:/perechi": {
+      "limit": 16093,
+      "actual": 13311,
+      "status": "pass",
+      "sdk_status": "pass",
+      "classification": "active-numeric-gate",
+      "raw_report": ".gate/unit/route-budgets/active.json"
+    },
+    "gate:active:consumer-css-total:all": {
+      "limit": 16093,
+      "actual": 13311,
+      "status": "pass",
+      "status_source": "consumer-css-total",
+      "inventory_sha256": "fb49faee83ed4d0a50a3e78888c9a5e28aed5ebdfd48d1bd2c34d4b3ae14a6aa",
+      "consumer_status": "pass",
+      "classification": "active-consumer-numeric-gate",
+      "consumer_report": ".gate/unit/route-budgets/active.json"
+    }
+  },
+  "artifacts": [
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-bootstrap-config-0.stdout.log sha256:b88e00bfaad7d77592262b79d6ae633e8979ce1ff54431d722601db5aea7a351",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-bootstrap-config-0.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-bootstrap-setup-1.stdout.log sha256:f73d4c793c17d0c51f3d9e9c3483b44b32d8e9608950c2b2638b335421a19257",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-bootstrap-setup-1.stderr.log sha256:33f5dde1edd69d2597616f391598b3d98a2ff9c8d97d61910c6c5c571323b50b",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-bootstrap-config-2.stdout.log sha256:b88e00bfaad7d77592262b79d6ae633e8979ce1ff54431d722601db5aea7a351",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-bootstrap-config-2.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/unit/bootstrap-execution.json sha256:9316b0bf58158c7d394f31408680b393a5a8d9812bdf0f7eddd82c779cc0f22a",
+    ".gate/unit/logs/setup-b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-setup-npm-ci-0.stdout.log sha256:6698bfd5b37991744331f3d5220051979c50c2844e92254903a543cbf148f033",
+    ".gate/unit/logs/setup-b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-setup-npm-ci-0.stderr.log sha256:c211d12fa3e2f4c92b2151c523b2743bc220c1991e0de3797724e244bb411568",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-versions-check-13.stdout.log sha256:d5003afd869c79d859fef70e032a4bd81401fb9a476b2a9c59bdd18d446638e2",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-versions-check-13.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/unit/validation-versions-check.json sha256:8e873e66b4ac39305e4afb9dc4795d11c58cca222bd7ab6df00b647a85d838d3",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-toolchain-versions-15.stdout.log sha256:b81d7bf4071463533db512c94f6b8ba7d3f987124b07eb88d831ffc705ec358c",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-toolchain-versions-15.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/unit/validation-toolchain-versions.json sha256:9f81a3ccb23c519d93fd2dda67a407d09840766d38ff1c518c2ff49ad2ad878e",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-lint-scope-17.stdout.log sha256:0fd79756054a77221dfd99d4b5145dc5ea7bf1f986a1ebe7256e48a6d8879413",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-lint-scope-17.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/unit/validation-lint-scope.json sha256:f61b225b4da3c42c16b25f6a4341c6575cf8a51de8cbef84a42889e4ad8d50c7",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-kit:check-19.stdout.log sha256:430c9d23aa010c8f199f1e1c63535be6303d165133236fb2301e562509dacdd5",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-kit:check-19.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-repo-unit-21.stdout.log sha256:c78aab0e15298436bff835c18b6986de771fb80e6ff476c194271e707cacd084",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-repo-unit-21.stderr.log sha256:49c73af287e569aa68794d3f64ced88befe7802548661cee735c71d415510a09",
+    ".gate/unit/active-ui-proof.json sha256:1a93efb4f8420936082dbbf7fd3f599e1d7e821bd38dcc1bd0e0f7596bb3fb72",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-doccheck-source-contracts-3.stdout.log sha256:d32a39fec1a8ef9921b2c180740e14c987e6ee50f34eea8e004774da9f30d361",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-doccheck-source-contracts-3.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/unit/doccheck-contracts/report.json sha256:c3f77aa82a098e6894add1c7495d781ef606525f9e11cee09af9581a081ac03f",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-doc-check-5.stdout.log sha256:f85dee51edd2eeed1cd4225853391a79054453ab5a1a29b6a20e1b90c90b040c",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-doc-check-5.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-content-validate-6.stdout.log sha256:1d2e645a4a6946dae65ac9fc067442df3e7a430fc9fee3039e41fd1ee3819976",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-content-validate-6.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-content-export-7.stdout.log sha256:4f715aebbcf4c517ca8a5686959372f4ab156e4e62f897e6e5e607156dc5c8fb",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-content-export-7.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-docs-gate-8.stdout.log sha256:b0fe6cd615aa13e1f86c53da86f88fd28b31ca96b8b50f60b81e35471fafa22c",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-docs-gate-8.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-unit-fresh-build-output-9.stdout.log sha256:c34c7722c0e81fea5bdcff677f1d33fc2b97a90a5eda214335e56892a27090b2",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-unit-fresh-build-output-9.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-unit-frontend-build-10.stdout.log sha256:dc1367a3267bf38320466482efbe69e5d5ea8dba2f1115ed975dc93eb9601655",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-unit-frontend-build-10.stderr.log sha256:ee53b77219b80720b42476aa90f6b8a64d4e41e60ebb81c18d204edd804df309",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-unit-emitted-inventory-11.stdout.log sha256:0cebc27e1acebe4c32a9674fb3e2074c9f7450e2a96b8d6064aa4903610d67fe",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-unit-emitted-inventory-11.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-unit-assets-13.stdout.log sha256:5fefb3511d580d53e6c85fe38912a47a5fc515a94052b1a39753493459e82004",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-unit-assets-13.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-unit-gui-identity-15.stdout.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-unit-gui-identity-15.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "go-backend/embedfs/build/dist/.gui-build.json sha256:45598e3b31ff668d88df9503779c19303a0b89b09468ed53d58eae2678c9baf2",
+    "go-backend/embedfs/build/dist/.keep sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "go-backend/embedfs/build/dist/versions.lock.json sha256:07b78e8df5330c5463430ea90b3954142b25b25b2550941d071097d5efd8a0ad",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-route-budgets-17.stdout.log sha256:14edc12c580a7ca72570a26c96461388c1f9e0377f7c21964e46aa02b5eaa10f",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-route-budgets-17.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/unit/route-budgets/active.json sha256:e625ddd0e7f13130f8215e1aa903c382d1cfaabb802d64d366d13e77adf24f04",
+    ".gate/unit/route-budgets/frozen-legacy.json sha256:b2477ed2e5694c196e6293aef060d5353237f4b25560bdb887927481c45395a2",
+    ".gate/unit/route-budgets/measurements.json sha256:f0371d3f26608e38564da2b24327c646e574e89f858aa665efba10115a69687e",
+    ".gate/unit/route-budgets/frozen-integrity.json sha256:ba9de7ebb418c89ecf8e8473ce3d51d7f908563d5ab1b00f2816233e20c0d013",
+    ".gate/unit/route-budgets/gate-summary.json sha256:5bed1294eca1e384371f90d9164fb49feffe6833c97dee7435ba2834ff270d8c",
+    ".gate/unit/unit-reuse.json sha256:4316038b5b464de2223f04b3d3ffa7294f5ff6c60d26bb09ba3be508d456cd5d",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-frontend-unit-21.stdout.log sha256:67f826a423e04b6b38237bc317f3f48eb073c646604a195b1a2fddf8c7e81c37",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-frontend-unit-21.stderr.log sha256:25078e478c032e7a997afac2609173295c9ed6ee35d6956e2d3c1aad51eaccd3",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-frontend-lint-22.stdout.log sha256:f1e6b47cd47a69d3eeddbfadf7b9f1d79619494a9d8c9398c2a0c8ed9b222326",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-frontend-lint-22.stderr.log sha256:e46fcdd266a1ed25ccbaa6ea13f30c1f6d3c2311d6d0bb2ad39ab5979e333994",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-frontend-types-23.stdout.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-frontend-types-23.stderr.log sha256:f29bc3e1fe96d9bdaf4bfff3ac9fac2885480c4241d841bac8546290fd3a04b6",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-native-reuse-inputs-24.stdout.log sha256:0d0f5a7f27ef237f6a8cfa65faadeb232fd6ad15655ffef2cedcea26250fdaee",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-native-reuse-inputs-24.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/unit/native-inputs.json sha256:0d588d6bc6f4740769f4a15e3de6eaf88a30d5ce7e5f40d1a3c5579d26dce763",
+    ".gate/unit/native-reuse/graph.stdout.json sha256:60f3208904e05713637b87c3bc3f8386c9d29b4d35e11bcf3888850537278a81",
+    ".gate/unit/native-reuse/graph.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/unit/native-reuse/graph-command.json sha256:3a3e0eb2ba5d53d424fd502b2a6618fd8019efcdc96bbb2e327bd16b5b466acd",
+    ".gate/unit/native-reuse/graph.json sha256:009828b866b2baae383f354fd4a10894b0f69a6745562bf5bce2672ce803bd52",
+    ".gate/unit/native-reuse/selection.json sha256:e1a0c54ee5be8c44bb0ab6b87377a0e24f1d1d2bd01bc14524f639af5a0303f7",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-unit-build-pending-review-producer-27.stdout.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-unit-build-pending-review-producer-27.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/unit/pending-review-producer.json sha256:828ce8173cbb0b5c5a80336cd3a54793ab606df496aea1898e9563ba3a045037",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-backend-race-29.stdout.log sha256:aba0ced102c1ac495758afbbf996f79f8c9c6c40e3a2547714aef08a7e7e363b",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-backend-race-29.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-backend-vet-33.stdout.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-backend-vet-33.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-authcore-race-34.stdout.log sha256:1a93ed52bf0b94aab3acdaf160929a8c2c5ddb78f1c96c88f3871d4c2570877a",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-authcore-race-34.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-authcore-vet-36.stdout.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/unit/logs/b1fe4be0-d8c7-4e64-bceb-1f04abdd8c19-cat-authcore-vet-36.stderr.log sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".gate/unit/managed-assets/inventory.json sha256:0cebc27e1acebe4c32a9674fb3e2074c9f7450e2a96b8d6064aa4903610d67fe",
+    ".gate/unit/managed-assets/prepare.json sha256:c34c7722c0e81fea5bdcff677f1d33fc2b97a90a5eda214335e56892a27090b2",
+    ".gate/unit/managed-assets/sync.json sha256:5fefb3511d580d53e6c85fe38912a47a5fc515a94052b1a39753493459e82004",
+    ".gate/unit/execution.json sha256:cbf259e7955f049e584792ab0c144b0c00fdbc895fe350109b0d853625fd04f2"
+  ]
+}

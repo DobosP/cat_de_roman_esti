@@ -1,0 +1,34 @@
+{
+  "date": "2026-11-17",
+  "go_version": "go1.27.3",
+  "findings": {
+    "B1": {
+      "commit": "154e4ffd432069bdbef0ff2dafb4844fab7710d2",
+      "before": "The critic /64 flood admitted 81920 samples and refused an unrelated client. Mapped IPv4 got another budget and full-table admission was refused.",
+      "after": "Named-file httpapi limiter race tests and vet passed, including /64, /48, mapped IPv4, idle eviction and timer expiry.",
+      "sha256": {
+        "b1-before.log": "6aa9b28f7b82659387742137190de25f78a5f9b9f05d19f4265a567ba24f816e",
+        "b1-after.log": "2c9cae16b028427ff95e8f21166bffff395c9844b2103f45770c0c070538b7df"
+      }
+    },
+    "B4": {
+      "commit": "1d37ddfc290f47e2ec95b834f5d135bc270cd6f6",
+      "before": "A transient +20-day clock removed the recorded snapshot, admitted future samples, and left corrected-date Record returning ErrDate.",
+      "after": "Boardstats package race tests and vet passed, including the critic jump port, normal idle ticks, restart after twenty days, corruption and read-error recovery.",
+      "sha256": {
+        "b4-before.log": "ebbc46221e3925205f07c4bc1eaa3ab7b2e3da426bc46532891f1fd16a87c40f",
+        "b4-after.log": "990bf4b2818a2408fe5b2bb64847c07b24729277936cbe7ea215e05a5e2161d6"
+      }
+    },
+    "B5": {
+      "commit": "c0c1609a4a0b771777543f376929ca04fec7c9fd",
+      "before": "The existing ten-second drain was extracted without a budget change. The hung-request test exceeded the eight-second reserved-flush assertion.",
+      "after": "Hung-request race test and cat-server vet passed. The snapshot was written, the lock released, and its one round reloaded. Compose render verified stop_grace_period 20s and read-only root.",
+      "sha256": {
+        "b5-before.log": "aab418067b276c7083534525fc179636f74590375044439b0ab78a8cf30485d9",
+        "b5-after.log": "421d305ae843085c7b5697e0dcf4d53b9834fa66d23e334969d8f70b77617fad"
+      }
+    }
+  },
+  "counts_enabled_app_runs": 0
+}

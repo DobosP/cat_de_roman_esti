@@ -1,0 +1,186 @@
+{
+  "sha": "bb4ebbe8c8dabadf07981453af27c17f92d606cd",
+  "verdict": "GO",
+  "independent_reviews": [
+    {
+      "receipt_sha256": "5c37a24c677ee13abf6b2f19068710da28c57b1f83d09c31d02432c1f5e30879",
+      "record": {
+        "schema": 1,
+        "reviewer": "agent:codex/review_render_lock",
+        "exact_sha": "bb4ebbe8c8dabadf07981453af27c17f92d606cd",
+        "scope": [
+          "B1 bounded IPv6 and mapped IPv4 limiter",
+          "B3 per-session sample admission and immutable first terminal outcome",
+          "B4 recorded-date retention and clock-jump correction",
+          "B5 reserved shutdown flush time",
+          "Baseline capture and immutable source, PNG, original and performance bindings"
+        ],
+        "verdict": "GO",
+        "rationale": [
+          "The reviewed B1/B3/B4/B5 implementations and tests are byte-identical to source reviewed at d15a0e57886937f25f0ddbf690d8b326141fcfb9. No blockers remain in this scope.",
+          "The limiter uses IPv6 /64 keys, a 64-entry per-/48 occupancy bound, shared IPv4-mapped budgets, bounded global occupancy and expiry/eviction cleanup.",
+          "The session transaction captures its first outcome and admission once. Limiter, capacity, snapshot-read and closed-store refusals omit placement on the terminal response and later reads.",
+          "The newer explicit requirement anchors 14 retained board dates to real recorded data. Large forward clock readings withhold sampling without advancing retention. Correcting the clock restores sampling. The privacy correction now discloses that idle snapshots can exceed 14 elapsed days.",
+          "Shutdown attempts the final aggregate close with a separate three-second budget after the seven-second HTTP drain. The optional stats Compose profile grants 20 seconds.",
+          "All 59 frozen source hashes and six input hashes match both the exact capture parent and candidate. All 18 unique 390x844 committed PNGs match the previously reviewed images. All nine historical PNGs and the original manifest, source lock and PNG checksum list are preserved.",
+          "Independent inspection of the exact owner recapture verified all 28 predicates and compared every raw screenshot directly with git bytes. Axe findings are empty, Home semantic witness passes and browser cleanup completed."
+        ],
+        "evidence": {
+          "reviewed_source_sha": "d15a0e57886937f25f0ddbf690d8b326141fcfb9",
+          "capture_parent_sha": "723682b6717ff3b63d8eb904b953b0ff85f0d582",
+          "baseline_manifest_sha256": "ee2a333f198ea74cab16d0ee508cc000eabfafda52c29ad569035d8749f59f8a",
+          "pinned_baseline_receipt_sha256": "279e6a199e410762f3f20be732b38a47c2828a40fb7e264650a66d7f9a15c55a",
+          "pinned_baseline_checks": {
+            "passed": 6,
+            "total": 6
+          },
+          "owner_recapture_sha256": "2b3700e8f4f65aaaa31d6ff066b5328107d39e317994eb63b6481b0c5d6b45d6",
+          "owner_recapture_binding": {
+            "target": "shell",
+            "invocation": "8ca30db0-a613-482c-8f51-52162d8acc7c",
+            "sha": "bb4ebbe8c8dabadf07981453af27c17f92d606cd",
+            "tree_sha256": "b6e274371359529a9c26df31d5141a01c9ecc7a188f4d84ac095f59f0a9a5756",
+            "baseline_sha256": "ee2a333f198ea74cab16d0ee508cc000eabfafda52c29ad569035d8749f59f8a",
+            "original_baseline_sha256": "ff055e404bf138ce0442381ab33eb643d431f922e4284f66a5002efcc397be68",
+            "toolchain_digest": "sha256:c84ff601865080c9915159220f136fcfb80218bb91240669d65d62ae654404d6",
+            "config_sha256": "b88e00bfaad7d77592262b79d6ae633e8979ce1ff54431d722601db5aea7a351",
+            "config_file_sha256": "f5d2762fb7f522a69fac353ecbeb2be0ab109f8a47c696858d7832c9ce9f190f",
+            "descriptor_sha256": "18a300d55cf301009b4f546e1eb559246c8d5b0a8adc08d844d229d25f3c88af",
+            "manifest_sha256": "cd7a030fe692ce0ef2d288510a84d3b2381ae1b74219f712668ba073187f8462",
+            "versions_lock_sha256": "07b78e8df5330c5463430ea90b3954142b25b25b2550941d071097d5efd8a0ad",
+            "app_image_id": "sha256:5855d0b5b5857bfe78b519ebb9511b3c9b25c1feb24e146ff1aa12b3bf8192c5",
+            "image_authority": "Producer declaration; owning wrapper/parent host verify actual CID/IID",
+            "origin": "http://localhost:8080",
+            "dirty": false,
+            "playwright_version": "1.63.0"
+          },
+          "owner_recapture_checks": {
+            "passed": 28,
+            "total": 28,
+            "pngs_byte_equal": 18,
+            "axe_violations": 0
+          },
+          "live_vitals_median_ms": {
+            "/conexiuni": {
+              "lcp": 1916,
+              "inp": 56
+            },
+            "/alchimie?mode=challenges": {
+              "lcp": 1828,
+              "inp": 48
+            }
+          },
+          "original_vitals_median_ms": {
+            "/conexiuni": {
+              "lcp": 2836,
+              "inp": 184
+            },
+            "/alchimie?mode=challenges": {
+              "lcp": 4228,
+              "inp": 200
+            }
+          },
+          "committed_inventory_sha256": "db1bbb332dfe686f325b100eef3ab090fe1b846e5e9cdf1cbc8e876305c12d5a",
+          "committed_inventory_cases": 861,
+          "focused_disposition_sha256": "342f30704c73650dd809a2b7ec26db220060fc129beec7dcbfe0060f84649374"
+        },
+        "verification_limits": [
+          "This independent review covers source changes outside the reviewer-authored A1/B6 fixes. It does not provide independent authorship review of those fixes.",
+          "The focused 44-case, eight-entry-unit, typecheck and lint disposition belongs to source caf973aa57c1f0e0b160ff16a47f4a142b1c411a. Its later descendants change generated inventory and baseline records only. The disposition was read as orchestrator evidence.",
+          "The raw owner recapture is a shell diagnostic. It does not replace exact-SHA unit and full qualification, which remain pending at this review time.",
+          "The baseline captures the default-off interface. Runtime enabled-count behavior and shutdown/limiter tests were assessed in source and must pass the orchestrator qualification.",
+          "The wrapper declares app-image identity. Host CID/IID authority remains with the orchestrator. No gates, deployments or count activation were performed by this reviewer."
+        ]
+      }
+    },
+    {
+      "receipt_sha256": "4b99219fefc814a5b22c813297d2bd74bfca4ab1e4fb9e25314af1094d089f81",
+      "record": {
+        "verdict": "GO",
+        "sha": "bb4ebbe8c8dabadf07981453af27c17f92d606cd",
+        "reviewer": "agent:codex:m2_terminal_prep",
+        "date": "2026-11-17",
+        "scope": {
+          "A1": "Page-lifetime storage fallback for daily state, free options, parked/replay keys and saved rounds, including denied access, quota writes and removals, and reload.",
+          "B2": "Frozen advisory replay request intent through all six screens, transport wrappers, session publication and aggregate exclusion.",
+          "B3": "Placement requires the current session sample to have been admitted, with first outcome and refusal preserved across reads and reset.",
+          "B6": "Three reachable Cald podium tiers, tier-specific bar heights and accessible legend, hook cleanup, and removal of the duplicate terminal observer path."
+        },
+        "rationale": [
+          "The reviewed production sources match d15a0e57. Later changes affecting this scope bind storage test functions to their original receivers and update the Lanț test callback to the shared four-argument admission signature.",
+          "Failed writes and removals shadow stale persisted values for the page lifetime. Successful operations use storage again, successful reads observe other tabs, and reload discards the page fallback.",
+          "Each screen captures replay before awaiting create and uses the same captured flag when remembering the response. The server fixes that flag before publishing each session, and replay exits the production observer before admission.",
+          "Only successful Record calls set admission true. Refused samples omit place on both the terminal response and subsequent reads. The first result remains fixed under the existing session lock.",
+          "The old BoardTerminal and ObserveBoardTerminal accessors are absent. Tests exercise WithTerminalResponse, including the Lanț competing give-up/win callback, and the visibility listener is removed on hook cleanup."
+        ],
+        "evidence": {
+          "prior_source_review_sha": "d15a0e57886937f25f0ddbf690d8b326141fcfb9",
+          "focused_source_sha": "caf973aa57c1f0e0b160ff16a47f4a142b1c411a",
+          "focused_report": "/home/dobo/work/_temp/fix__redesign-v2-review/focused-disposition.json",
+          "focused_browser_passed": 44,
+          "focused_browser_skipped_unexpected_flaky": [
+            0,
+            0,
+            0
+          ],
+          "entry_tests_passed": 8,
+          "typecheck": "pass",
+          "lint": "pass",
+          "before_probe_receipt": "/home/dobo/work/_temp/fix__redesign-v2-review/entry-before-receipt.json",
+          "before_probe_source_sha": "2c38ec7a95cb782995503ad1a8dc17da7c358400",
+          "before_probe_test_source_sha": "270cf275dd561f51fe284779b468be119c469798",
+          "before_probe_actual_assertion_failures": 4,
+          "inventory_previous_cases_retained": 855,
+          "inventory_current_cases": 861,
+          "post_focused_diff": [
+            "baselines/cat/capture.json",
+            "baselines/cat/capture.sha256",
+            "frontend/e2e/gui-inventory.json"
+          ],
+          "whitespace_diff_check": "pass",
+          "worktree": "clean"
+        },
+        "limits": [
+          "This is a source review supported by existing pinned-run receipts. Final whole-product unit/full qualification belongs to the root acceptance record.",
+          "A2 Alchimie mechanics were authored by this reviewer and require the separate independent review. B1 network limiting, B4 retention clocks and B5 shutdown budgets are outside this verdict.",
+          "The pre-fix receipt ran the test source at 270cf275. The final test differs only by preserving the original mock receiver, and the current eight cases pass in the focused pinned run."
+        ]
+      }
+    },
+    {
+      "receipt_sha256": "5db0ef0e31c94cee60e9c95da41fc026a38092e25664c02d7aa7c268176e12a7",
+      "record": {
+        "schema_version": 1,
+        "date": "2026-11-17",
+        "reviewer": "agent:codex/m2_stats_prep",
+        "verdict": "GO",
+        "exact_sha": "bb4ebbe8c8dabadf07981453af27c17f92d606cd",
+        "scope": [
+          "A2 Alchimie first paid hint subject and recipe in the Go service",
+          "Independent Python oracle mirror, reset prerequisite ownership, disclosure and cumulative steps",
+          "Python-only HTTP and Alchimie mechanics response recording",
+          "Final 1364-response corpus provenance and content-source digest bindings"
+        ],
+        "rationale": [
+          "Go and Python preserve the first paid recipe and subject after an unrelated productive combine.",
+          "Discovering the subject through the pinned recipe or an alternative ends that ladder. Reset preserves the ended state and cumulative rung count.",
+          "Reset withholding checks both pinned ingredients before serving a further rung. Their return resumes the pinned recipe without selecting a new subject.",
+          "Rung one reveals the subject label, rung two one owned ingredient, and rung three the owned pair. Hidden subject IDs and the private recipe book remain excluded. Lifetime distinct pairs and paid hints preserve cumulative steps.",
+          "HTTP recording uses Django TestClient responses in a mode mutually exclusive with the native binary. The mechanics recorder recomputes response hashes through Django from stored request sequences. Go content is read only to verify source names and identities.",
+          "The A2 service, mirror, regression tests and both recorder scripts are byte-unchanged from reviewed source d15a0e57886937f25f0ddbf690d8b326141fcfb9 to the exact candidate.",
+          "Read-only verification matched all 1364 cases, compressed and decompressed corpus digests, the recorder source digest, clean producer metadata, and all eight source fixture digests."
+        ],
+        "corpus": {
+          "cases": 1364,
+          "gzip_sha256": "148895e93db1a4fc3cda7940736bdfae766c69c15e47e4be40957292af0b5b3c",
+          "source_identities_verified": 8
+        },
+        "limits": [
+          "Scoped source and provenance review. This reviewer ran no gates and no app with board counts enabled.",
+          "Parent-reported browser, native game, vet and parity results were not independently rerun during this review.",
+          "This verdict covers A2 and recorder independence. It does not constitute an independent review of this reviewer’s B1, B4 or B5 implementation, the other frontend fixes, or the entire release."
+        ]
+      }
+    }
+  ]
+}
