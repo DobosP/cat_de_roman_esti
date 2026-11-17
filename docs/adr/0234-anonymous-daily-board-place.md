@@ -96,3 +96,13 @@ recorded round or a validated snapshot, keeping 14 calendar dates ending at
 the newest recorded date. Idle snapshots can therefore outlive 14 wall-clock
 days. Startup reads existing data before pruning and establishes a fresh
 clock guard, allowing a service restarted after a long gap to resume.
+
+### B5 — reserved final flush time
+
+HTTP shutdown drains for at most seven seconds and closes remaining network
+connections on timeout. The aggregate store then receives an independent
+three-second close budget, including after a serving error. The optional
+stats Compose profile grants a 20-second stop grace. A failed or timed-out
+final flush is reported. A hung handler regression verifies that pending
+data reaches its snapshot and the directory lock is released after the
+HTTP deadline expires.

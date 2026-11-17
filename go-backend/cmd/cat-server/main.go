@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"errors"
 	"flag"
 	"fmt"
 	"log"
@@ -67,24 +68,20 @@ func main() {
 		}
 		return
 	}
+	var stats *boardstats.Store
 	if directory := os.Getenv("CAT_BOARD_STATS_DIR"); directory != "" {
 		bucharest, err := time.LoadLocation("Europe/Bucharest")
 		if err != nil {
 			log.Fatal(err)
 		}
 		now := func() time.Time { return time.Now().In(bucharest) }
-		stats, err := boardstats.Open(directory, boardstats.Options{
+		stats, err = boardstats.Open(directory, boardstats.Options{
 			Now:    now,
 			Report: func(err error) { log.Printf("board comparison: %v", err) },
 		})
 		if err != nil {
 			log.Fatal(err)
 		}
-		defer func() {
-			if err := stats.Close(); err != nil {
-				log.Printf("board comparison shutdown: %v", err)
-			}
-		}()
 		handler.EnableBoardComparison(stats, now)
 	}
 	server := &http.Server{Addr: addr, Handler: handler, ReadHeaderTimeout: 5 * time.Second, ReadTimeout: 15 * time.Second, WriteTimeout: 30 * time.Second, IdleTimeout: 60 * time.Second, MaxHeaderBytes: 16 * 1024}
@@ -94,17 +91,40 @@ func main() {
 	go func() {
 		defer close(shutdownDone)
 		<-ctx.Done()
-		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-		defer cancel()
-		if err := server.Shutdown(ctx); err != nil {
+		if err := shutdownServer(server, stats); err != nil {
 			log.Print(err)
 		}
 	}()
 	log.Printf("Go arcade %s: all six games and exploration; listen %s", c.AppVersion, addr)
-	if err = server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+	err = server.ListenAndServe()
+	stop() // Serving errors also drain requests and close the aggregate store.
+	<-shutdownDone
+	if err != nil && err != http.ErrServerClosed {
 		log.Fatal(err)
 	}
-	<-shutdownDone
+}
+
+func shutdownServer(server *http.Server, stats *boardstats.Store) error {
+	ctx, cancel := context.WithTimeout(context.Background(), 7*time.Second)
+	defer cancel()
+	result := server.Shutdown(ctx)
+	if result != nil {
+		result = errors.Join(result, server.Close())
+	}
+	if stats == nil {
+		return result
+	}
+	// A separate budget remains available even when HTTP draining times out.
+	closed := make(chan error, 1)
+	go func() { closed <- stats.Close() }()
+	timer := time.NewTimer(3 * time.Second)
+	defer timer.Stop()
+	select {
+	case err := <-closed:
+		return errors.Join(result, err)
+	case <-timer.C:
+		return errors.Join(result, errors.New("board comparison final flush exceeded three seconds"))
+	}
 }
 
 // Source overrides must be validated/exported before building the sealed release.

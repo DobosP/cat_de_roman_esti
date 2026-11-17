@@ -128,6 +128,10 @@ The app stores board keys, win-step histograms, and aggregate win, loss, and giv
 Only reviewed daily boards for today or yesterday in Europe/Bucharest are eligible. A
 finished daily win includes `place` once its board has at least 100 counted rounds. The
 store batches atomic snapshots about every 30 seconds and flushes during graceful shutdown.
+Shutdown reserves seven seconds for HTTP draining, then gives the final snapshot close
+its own three-second budget, including when a request ignored cancellation. The stats
+Compose override provides a 20-second stop grace. Flush errors and timeouts are logged;
+a volume that cannot finish within the flush budget can lose its unflushed tail.
 At startup it loads retained snapshots and reports corrupt files it skips. Retention covers
 the newest recorded Bucharest date and its previous 13 calendar days. Clock reads alone
 never expire recorded data, so an idle store can keep snapshots longer than 14 wall-clock

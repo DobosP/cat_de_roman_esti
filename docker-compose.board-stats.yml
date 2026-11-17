@@ -1,6 +1,7 @@
 # Optional Compose override for owner-enabled anonymous board comparison.
 services:
   app:
+    stop_grace_period: 20s
     environment:
       CAT_BOARD_STATS_DIR: /data/board-stats
     volumes:
