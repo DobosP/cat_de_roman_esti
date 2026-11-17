@@ -13,6 +13,7 @@ import (
 	"os"
 	"slices"
 	"strings"
+	"time"
 
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/strictjson"
 )
@@ -130,8 +131,7 @@ func walkDir(dir *os.Root, visit func(os.DirEntry)) error {
 }
 
 func (s *Store) load() error {
-	oldest, today := s.dayBounds()
-	pruned := true
+	today := s.trusted.Format(time.DateOnly)
 	if err := walkDir(s.dir, func(entry os.DirEntry) {
 		name := entry.Name()
 		date, ok := snapshotDay(name)
@@ -142,9 +142,8 @@ func (s *Store) load() error {
 			s.report(fmt.Errorf("skip %s: expected a regular board stats file", name))
 			return
 		}
-		if !ok || date < oldest {
+		if !ok {
 			if err := s.dir.Remove(name); err != nil && !errors.Is(err, os.ErrNotExist) {
-				pruned = false
 				s.report(fmt.Errorf("remove stale %s: %w", name, err))
 			}
 			return
@@ -153,14 +152,22 @@ func (s *Store) load() error {
 			s.report(fmt.Errorf("defer %s: snapshot date is in the future", name))
 			return
 		}
-		if _, err := s.restoreDay(date); err != nil {
-			s.report(err)
+		d, err := readSnapshot(s.dir, name, date)
+		if err != nil {
+			s.report(fmt.Errorf("skip %s: %w", name, err))
+			return
+		}
+		if len(d.boards) > 0 {
+			s.acceptRecordedDay(date)
+			if date >= s.oldestDay() {
+				s.days[date] = d
+			}
 		}
 	}); err != nil {
 		return fmt.Errorf("read board stats directory: %w", err)
 	}
-	if pruned {
-		s.prunedBefore = oldest
+	if err := s.flushLocked(); err != nil {
+		s.report(err)
 	}
 	return nil
 }
@@ -181,7 +188,10 @@ func (s *Store) restoreDay(date string) (*day, error) {
 	} else if err != nil {
 		return nil, fmt.Errorf("read %s: %w", name, err)
 	}
-	s.days[date] = d
+	if len(d.boards) > 0 {
+		s.acceptRecordedDay(date)
+		s.days[date] = d
+	}
 	return d, nil
 }
 
@@ -334,7 +344,7 @@ func (s *Store) flushLocked() error {
 	s.discardExpired(oldest)
 
 	var result error
-	if s.prunedBefore != oldest {
+	if !s.latest.IsZero() && s.prunedBefore != oldest {
 		var removeErr error
 		scanErr := walkDir(s.dir, func(entry os.DirEntry) {
 			if !entry.Type().IsRegular() {

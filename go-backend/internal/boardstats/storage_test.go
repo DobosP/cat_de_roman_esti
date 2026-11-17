@@ -21,7 +21,7 @@ func writeTestFile(t *testing.T, dir, name string, raw []byte) {
 
 func snapshotName(key Key) string { return snapshotPrefix + key.Day + ".json" }
 
-func TestRestartPrunesExpiredSnapshotsAndReportsCorruption(t *testing.T) {
+func TestRestartReportsCorruptionWithoutAdvancingRetention(t *testing.T) {
 	dir := t.TempDir()
 	seed := openTest(t, dir, Options{Now: func() time.Time { return testDay(15) }})
 	expired, retained, broken := testKey(2), testKey(3), testKey(15)
@@ -55,10 +55,11 @@ func TestRestartPrunesExpiredSnapshotsAndReportsCorruption(t *testing.T) {
 		!strings.Contains(reports[0].Error(), "checksum mismatch") {
 		t.Fatalf("corruption reports: %v", reports)
 	}
-	for _, absent := range []string{snapshotName(expired), temp} {
-		if _, err := os.Stat(filepath.Join(dir, absent)); !errors.Is(err, os.ErrNotExist) {
-			t.Fatalf("expired or abandoned file %s remains: %v", absent, err)
-		}
+	if _, err := os.Stat(filepath.Join(dir, temp)); !errors.Is(err, os.ErrNotExist) {
+		t.Fatalf("abandoned file %s remains: %v", temp, err)
+	}
+	if _, err := os.Stat(filepath.Join(dir, snapshotName(expired))); err != nil {
+		t.Fatalf("a corrupt newer snapshot advanced retention: %v", err)
 	}
 	if _, err := os.Stat(filepath.Join(dir, "owner-notes.txt")); err != nil {
 		t.Fatalf("unrelated file disappeared: %v", err)
@@ -140,6 +141,9 @@ func TestRetentionFollowsLocalCalendarAndDoesNotReopenPrunedDate(t *testing.T) {
 		t.Fatal(err)
 	}
 	clock.Add(int64((24 * time.Hour) / time.Second))
+	if err := s.Record(testKey(17), Loss, 0); err != nil {
+		t.Fatal(err)
+	}
 	if err := s.Flush(); err != nil {
 		t.Fatal(err)
 	}
@@ -155,6 +159,103 @@ func TestRetentionFollowsLocalCalendarAndDoesNotReopenPrunedDate(t *testing.T) {
 	}
 	if got, ok := s.Place(today, 1); !ok || got.Rounds != 100 {
 		t.Fatalf("retained current day changed: %+v, %t", got, ok)
+	}
+}
+
+// Ported from TestCriticClockJump in the independent redesign review.
+func TestForwardClockJumpCannotPruneOrAdmitSamples(t *testing.T) {
+	dir := t.TempDir()
+	var clock atomic.Int64
+	clock.Store(testDay(16).Unix())
+	var reports atomic.Int64
+	options := Options{
+		Now:    func() time.Time { return time.Unix(clock.Load(), 0).In(testDay(16).Location()) },
+		Report: func(error) { reports.Add(1) },
+	}
+	store := openTest(t, dir, options)
+	key := testKey(16)
+	recordN(t, store, key, Loss, 0, 120)
+	if err := store.Flush(); err != nil {
+		t.Fatal(err)
+	}
+	path := filepath.Join(dir, snapshotName(key))
+	before, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	clock.Store(testDay(36).Unix())
+	for range 2 {
+		if err := store.Flush(); err != nil {
+			t.Fatal(err)
+		}
+		if err := store.Record(testKey(36), Win, 0); !errors.Is(err, ErrDate) {
+			t.Errorf("sample during +20-day jump returned %v", err)
+		}
+		if _, show := store.Place(key, 0); show {
+			t.Error("place was shown during an untrusted clock reading")
+		}
+	}
+	if reports.Load() != 1 {
+		t.Errorf("one clock anomaly produced %d reports", reports.Load())
+	}
+	after, err := os.ReadFile(path)
+	if err != nil || !bytes.Equal(before, after) {
+		t.Errorf("clock jump removed or changed the existing snapshot: %v", err)
+	}
+	clock.Store(testDay(16).Unix())
+	if err := store.Record(key, Win, 0); err != nil {
+		t.Fatalf("corrected clock failed to recover: %v", err)
+	}
+	if place, show := store.Place(key, 0); !show || place.Rounds != 121 {
+		t.Fatalf("recovered aggregate: %+v, shown=%t", place, show)
+	}
+}
+
+func TestIdleClockTicksAndRestartKeepRetentionOnRecordedData(t *testing.T) {
+	for _, restart := range []bool{false, true} {
+		name := "idle periodic checks"
+		if restart {
+			name = "restart after twenty days"
+		}
+		t.Run(name, func(t *testing.T) {
+			dir := t.TempDir()
+			var clock atomic.Int64
+			clock.Store(testDay(16).Unix())
+			options := Options{Now: func() time.Time { return time.Unix(clock.Load(), 0).In(testDay(16).Location()) }}
+			store := openTest(t, dir, options)
+			key := testKey(16)
+			recordN(t, store, key, Loss, 0, 100)
+			if err := store.Flush(); err != nil {
+				t.Fatal(err)
+			}
+			if restart {
+				if err := store.Close(); err != nil {
+					t.Fatal(err)
+				}
+				clock.Store(testDay(36).Unix())
+				store = openTest(t, dir, options)
+			} else {
+				for day := 17; day <= 36; day++ {
+					clock.Store(testDay(day).Unix())
+					if err := store.Flush(); err != nil {
+						t.Fatal(err)
+					}
+				}
+			}
+			path := filepath.Join(dir, snapshotName(key))
+			if _, err := os.Stat(path); err != nil {
+				t.Fatalf("clock reads alone pruned recorded data: %v", err)
+			}
+			if err := store.Record(testKey(36), Win, 0); err != nil {
+				t.Fatalf("current sample after idle time: %v", err)
+			}
+			if err := store.Flush(); err != nil {
+				t.Fatal(err)
+			}
+			if _, err := os.Stat(path); !errors.Is(err, os.ErrNotExist) {
+				t.Fatalf("new recorded day failed to expire old data: %v", err)
+			}
+		})
 	}
 }
 

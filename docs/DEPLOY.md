@@ -128,9 +128,13 @@ The app stores board keys, win-step histograms, and aggregate win, loss, and giv
 Only reviewed daily boards for today or yesterday in Europe/Bucharest are eligible. A
 finished daily win includes `place` once its board has at least 100 counted rounds. The
 store batches atomic snapshots about every 30 seconds and flushes during graceful shutdown.
-At startup it loads retained snapshots and reports corrupt files it skips. While running,
-it retains today and the previous 13 Bucharest calendar days. Snapshots contain no guesses,
-IP addresses, session or browser identifiers, or account IDs. Include any backup of these
+At startup it loads retained snapshots and reports corrupt files it skips. Retention covers
+the newest recorded Bucharest date and its previous 13 calendar days. Clock reads alone
+never expire recorded data, so an idle store can keep snapshots longer than 14 wall-clock
+days. A reading over two days ahead of the last trusted clock reading withholds sampling
+and placement and logs the anomaly once. Correcting the clock resumes sampling. A restart
+with a verified current clock also permits sampling after a long shutdown. Snapshots
+contain no guesses, IP addresses, session or browser identifiers, or account IDs. Include any backup of these
 snapshots in the same retention window.
 
 **Client address.** The app is reachable from Caddy on the Compose network and has no

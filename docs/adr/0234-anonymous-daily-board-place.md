@@ -85,3 +85,14 @@ can show updated aggregate placement without adding a second sample.
 All six services use the response observer inside the action's existing
 transaction. The separate test-only terminal accessors are removed. Cald sau
 Rece has three displayed podium tiers because its rules do not award Perfect.
+
+### B4 — clock jumps and recorded retention
+
+A calendar reading more than two days ahead of the last trusted reading
+withholds samples and placement, reports the anomaly once, and leaves the
+trusted date and snapshots intact. Normal periodic checks can advance the
+trusted date during idle time. Retention advances only with a successfully
+recorded round or a validated snapshot, keeping 14 calendar dates ending at
+the newest recorded date. Idle snapshots can therefore outlive 14 wall-clock
+days. Startup reads existing data before pruning and establishes a fresh
+clock guard, allowing a service restarted after a long gap to resume.

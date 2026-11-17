@@ -96,6 +96,8 @@ type Store struct {
 	report       func(error)
 	days         map[string]*day
 	latest       time.Time
+	trusted      time.Time
+	clockWarned  bool
 	prunedBefore string
 	closed       bool
 
@@ -130,7 +132,7 @@ func Open(dir string, options Options) (*Store, error) {
 	}
 	store := &Store{
 		dir: root, lock: lock, now: options.Now, report: options.Report,
-		days: make(map[string]*day), latest: options.Now(),
+		days: make(map[string]*day), trusted: options.Now(),
 		stop: make(chan struct{}), stopped: make(chan struct{}),
 	}
 	if err := store.load(); err != nil {
@@ -210,6 +212,8 @@ func (s *Store) Record(key Key, outcome Outcome, steps int) error {
 	}
 	d.boards[key] = b
 	d.dirty = true
+	s.days[key.Day] = d
+	s.acceptRecordedDay(key.Day)
 	return nil
 }
 
@@ -259,12 +263,35 @@ func (s *Store) Place(key Key, steps int) (Place, bool) {
 func (s *Store) dayBounds() (oldest, today string) {
 	now := s.now()
 	today = now.Format(time.DateOnly)
-	// A clock correction cannot re-admit dates already pruned or widen the
-	// number of retained in-memory days.
-	if today > s.latest.Format(time.DateOnly) {
-		s.latest = now
+	if today > s.trusted.AddDate(0, 0, 2).Format(time.DateOnly) {
+		if !s.clockWarned {
+			s.report(errors.New("board stats clock advanced more than two calendar days; sampling withheld"))
+			s.clockWarned = true
+		}
+		return s.oldestDay(), ""
 	}
-	return s.latest.AddDate(0, 0, 1-RetentionDays).Format(time.DateOnly), today
+	s.clockWarned = false
+	if today > s.trusted.Format(time.DateOnly) {
+		s.trusted = now
+	}
+	return s.oldestDay(), today
+}
+
+func (s *Store) oldestDay() string {
+	anchor := s.latest
+	if anchor.IsZero() {
+		anchor = s.trusted
+	}
+	return anchor.AddDate(0, 0, 1-RetentionDays).Format(time.DateOnly)
+}
+
+// Successful records and valid snapshots advance retention. Clock reads
+// alone never make a stored day expire.
+func (s *Store) acceptRecordedDay(date string) {
+	if s.latest.IsZero() || date > s.latest.Format(time.DateOnly) {
+		s.latest, _ = time.ParseInLocation(time.DateOnly, date, s.trusted.Location())
+		s.discardExpired(s.oldestDay())
+	}
 }
 
 func (s *Store) discardExpired(oldest string) {
