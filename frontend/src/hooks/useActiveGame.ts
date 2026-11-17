@@ -6,6 +6,7 @@
 
 import { useMemo } from "preact/hooks";
 import type { GameKey } from "../games";
+import { readLocalValue, writeLocalValue } from "../pageStorage";
 
 const PREFIX = "cat_active_game_v1_";
 
@@ -27,41 +28,21 @@ export function useActiveGame(game: GameKey): ActiveGameMemo {
     const key = `${PREFIX}${game}`;
     return {
       remember: (gameId: string) => {
-        try {
-          localStorage.setItem(key, gameId);
-        } catch {
-          /* storage unavailable (private mode) — resume is best-effort */
-        }
+        writeLocalValue(key, gameId);
       },
       forget: () => {
-        try {
-          localStorage.removeItem(key);
-        } catch {
-          /* best-effort */
-        }
+        writeLocalValue(key, null);
       },
       forgetIfCurrent: (gameId: string) => {
-        try {
-          if (localStorage.getItem(key) !== gameId) return false;
-          localStorage.removeItem(key);
-          return true;
-        } catch {
-          return false;
-        }
+        if (readLocalValue(key) !== gameId) return false;
+        writeLocalValue(key, null);
+        return true;
       },
       isCurrent: (gameId: string) => {
-        try {
-          return localStorage.getItem(key) === gameId;
-        } catch {
-          return false;
-        }
+        return readLocalValue(key) === gameId;
       },
       peek: () => {
-        try {
-          return localStorage.getItem(key);
-        } catch {
-          return null;
-        }
+        return readLocalValue(key);
       },
     };
   }, [game]);

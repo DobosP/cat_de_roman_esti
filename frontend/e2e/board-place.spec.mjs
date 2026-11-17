@@ -36,10 +36,16 @@ for (const [key, action, colorScheme] of [["contexto", "guess", "light"], ["lant
     expect(initial.place).toBeUndefined();
     expect((await solve(page, game, solution(game).steps)).place).toEqual(place);
     const result = page.locator(".game-result");
+    const availableLabels = key === "contexto" ? labels.slice(1) : labels;
     await expect(result.getByRole("heading", { level: 2 })).toBeFocused();
     await expect(result.getByRole("heading", { name: "Prima jumătate azi" })).toBeVisible();
-    await expect(result.getByRole("img", { name: "Podium cu treptele Perfect, Top 10%, Prima jumătate, Ai reușit. Treapta ta este Prima jumătate." })).toBeVisible();
-    await expect(result.locator(".board-place-label")).toHaveText(labels);
+    await expect(result.getByRole("img", { name: `Podium cu treptele ${availableLabels.join(", ")}. Treapta ta este Prima jumătate.` })).toBeVisible();
+    await expect(result.locator(".board-place-label")).toHaveText(availableLabels);
+    await expect(result.locator(".board-place-chart")).toHaveCSS("grid-template-columns",
+      key === "contexto" ? /^(?:\S+\s+){2}\S+$/ : /^(?:\S+\s+){3}\S+$/);
+    await expect(result.locator('[data-tier="top_10"] .board-place-bar')).toHaveCSS("height", "64px");
+    await expect(result.locator('[data-tier="top_half"] .board-place-bar')).toHaveCSS("height", "46px");
+    await expect(result.locator('[data-tier="completed"] .board-place-bar')).toHaveCSS("height", "30px");
     await expect(result.locator("[data-current] .board-place-label")).toHaveText("Prima jumătate");
     await expect(result.locator(".board-place-count")).toContainText("1.284 de runde încheiate");
     await expect(result).toContainText("Mai bine decât 55% dintre rundele încheiate pe tabla de azi.");

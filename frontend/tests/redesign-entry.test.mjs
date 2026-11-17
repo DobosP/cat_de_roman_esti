@@ -12,19 +12,37 @@ function compile(path, imports = {}) {
   return `data:text/javascript;base64,${Buffer.from(bound).toString("base64")}`;
 }
 
-const {
-  dailyStatus, localDay, markDailyDone, markDailyStarted, readFreeOptions, roundEntry, writeFreeOptions,
-} = await import(compile("../src/entry.ts", { "./categories": compile("../src/categories.ts") }));
+let dailyStatus, localDay, markDailyDone, markDailyStarted, readFreeOptions, roundEntry, writeFreeOptions;
+let readLocalValue, writeLocalValue, useActiveGame;
+let page = 0;
+async function freshPage() {
+  const storage = compile("../src/pageStorage.ts") + `#${++page}`;
+  ({ readLocalValue, writeLocalValue } = await import(storage));
+  ({ dailyStatus, localDay, markDailyDone, markDailyStarted, readFreeOptions, roundEntry, writeFreeOptions } =
+    await import(compile("../src/entry.ts", {
+      "./categories": compile("../src/categories.ts"),
+      "./pageStorage": storage,
+    })));
+  const hooks = `data:text/javascript;base64,${Buffer.from("export const useMemo = (factory) => factory();").toString("base64")}`;
+  ({ useActiveGame } = await import(compile("../src/hooks/useActiveGame.ts", {
+    "preact/hooks": hooks, "../pageStorage": storage,
+  })));
+}
 const day = "2026-11-16";
 const yesterday = "2026-11-15";
 const game = "conexiuni";
 
-beforeEach(() => {
+beforeEach(async () => {
   const values = new Map();
   Object.defineProperty(globalThis, "localStorage", {
     configurable: true,
-    value: { getItem: (key) => values.get(key) ?? null, setItem: (key, value) => values.set(key, value) },
+    value: {
+      getItem: (key) => values.get(key) ?? null,
+      setItem: (key, value) => values.set(key, value),
+      removeItem: (key) => values.delete(key),
+    },
   });
+  await freshPage();
 });
 
 void test("daily comes before a saved free round and completes once on that date for that game", () => {
@@ -61,13 +79,66 @@ void test("free options are validated and stored per game", () => {
   assert.deepEqual(readFreeOptions(game), { difficulty: "usor", category: null });
 });
 
-void test("denied storage behaves as a first visit", () => {
-  Object.defineProperty(globalThis, "localStorage", {
-    configurable: true,
-    get() { throw new Error("Storage denied"); },
+for (const failure of ["getter", "methods", "quota"]) {
+  void test(`${failure} storage keeps daily, options and the saved round until reload`, async () => {
+    const key = "cat_daily_v2_conexiuni";
+    localStorage.setItem(key, "{}");
+    const persistent = localStorage;
+    if (failure === "getter") Object.defineProperty(globalThis, "localStorage", {
+      configurable: true, get() { throw new Error("Storage denied"); },
+    });
+    else Object.defineProperty(globalThis, "localStorage", {
+      configurable: true,
+      value: {
+        getItem: failure === "methods" ? () => { throw new Error("Read denied"); } : persistent.getItem,
+        setItem: () => { throw new Error("Quota exceeded"); },
+        removeItem: () => { throw new Error("Write denied"); },
+      },
+    });
+
+    assert.deepEqual(roundEntry(game, day), { kind: "daily", daily: day });
+    markDailyStarted(game, day);
+    markDailyDone(game, day);
+    markDailyStarted(game, day);
+    assert.deepEqual(dailyStatus(game, day), { started: true, done: true });
+    assert.deepEqual(roundEntry(game, day), { kind: "free" });
+    assert.equal(persistent.getItem(key), "{}");
+    writeFreeOptions(game, { difficulty: "greu", category: "istorie" });
+    assert.deepEqual(readFreeOptions(game), { difficulty: "greu", category: "istorie" });
+
+    const active = useActiveGame(game);
+    active.remember("daily-round");
+    assert.equal(useActiveGame(game).peek(), "daily-round");
+    assert.equal(active.isCurrent("daily-round"), true);
+    assert.equal(active.forgetIfCurrent("another-round"), false);
+    assert.equal(active.forgetIfCurrent("daily-round"), true);
+    assert.equal(active.peek(), null);
+
+    await freshPage();
+    assert.deepEqual(roundEntry(game, day), { kind: "daily", daily: day });
+    assert.deepEqual(readFreeOptions(game), { difficulty: "usor", category: null });
+    assert.equal(useActiveGame(game).peek(), null);
   });
-  markDailyDone(game, day);
-  assert.deepEqual(dailyStatus(game, day), { started: false, done: false });
-  assert.deepEqual(roundEntry(game, day), { kind: "daily", daily: day });
-  assert.deepEqual(readFreeOptions(game), { difficulty: "usor", category: null });
+}
+
+void test("an unsuccessful removal hides the old stored id for this page", () => {
+  const key = "cat_active_game_v1_conexiuni";
+  localStorage.setItem(key, "saved-id");
+  localStorage.removeItem = () => { throw new Error("Removal denied"); };
+  const active = useActiveGame(game);
+  assert.equal(active.forgetIfCurrent("saved-id"), true);
+  assert.equal(localStorage.getItem(key), "saved-id");
+  assert.equal(active.peek(), null);
+});
+
+void test("read failures use the last observed value and successful storage still sees other tabs", () => {
+  const key = "cat_active_game_v1_conexiuni";
+  localStorage.setItem(key, "old");
+  assert.equal(readLocalValue(key), "old");
+  localStorage.setItem(key, "another-tab");
+  assert.equal(readLocalValue(key), "another-tab");
+  localStorage.getItem = () => { throw new Error("Read denied"); };
+  assert.equal(readLocalValue(key), "another-tab");
+  writeLocalValue(key, "new");
+  assert.equal(readLocalValue(key), "new");
 });

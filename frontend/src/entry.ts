@@ -1,6 +1,7 @@
 import { CATEGORY_STYLES } from "./categories";
 import type { GameKey } from "./games";
 import type { Difficulty } from "./api/meta";
+import { readLocalValue as read, writeLocalValue as write } from "./pageStorage";
 
 interface DailyStatus { started: boolean; done: boolean }
 interface SavedRound { game_id: string; daily?: string; terminal: boolean }
@@ -18,14 +19,6 @@ export function localDay(date = new Date()): string {
   return [date.getFullYear(), date.getMonth() + 1, date.getDate()]
     .map((part, index) => String(part).padStart(index ? 2 : 4, "0"))
     .join("-");
-}
-
-function read(key: string): string | null {
-  try { return localStorage.getItem(key); } catch { return null; }
-}
-
-function write(key: string, value: string): void {
-  try { localStorage.setItem(key, value); } catch { /* storage is optional */ }
 }
 
 const dailyKey = (game: GameKey) => `cat_daily_v2_${game}`;

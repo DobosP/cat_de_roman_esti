@@ -741,7 +741,7 @@ export default function CaldRece({
           onHint={() => void handleClue()} />}
         {finished && state.target && (
           <ResultCard title={won ? "Ai găsit cuvântul!" : "Conceptul secret era:"} steps={state.steps}
-            podium={<BoardPlacePodium round={state} gameTitle={DEF.title} replay={mode === "Reluare"} />}
+            podium={<BoardPlacePodium round={state} gameTitle={DEF.title} replay={mode === "Reluare"} canBePerfect={false} />}
             actionsBusy={busy} onCopy={sharePayload ? handleCopy : undefined} onReplay={() => startEntry(state.game_id)} onExit={handleExit}>
             <strong>{state.target.label}</strong>
             {state.target.description && <p>{state.target.description}</p>}

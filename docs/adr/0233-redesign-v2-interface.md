@@ -31,3 +31,5 @@ Owner answers, 2026-11-16 (quoted): UI locks "Yes, re-lock"; fonts "Keep current
 "Re-lock" replaces the frozen screenshots, source hashes and axe expectations with new ones;
 the previous capture and PNG hashes are kept as history. It does not raise a byte cap: CSS
 16,093 B and route JS 40,960 B stay; exceeding them needs a separate owner ruling.
+
+Amendment 2026-11-17: denied browser storage or failed writes retain daily completion, free options and saved-round pointers for the current page lifetime; a reload uses only successfully persisted values and otherwise starts as a first visit.
