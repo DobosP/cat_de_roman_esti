@@ -135,9 +135,18 @@ snapshots in the same retention window.
 
 **Client address.** The app is reachable from Caddy on the Compose network and has no
 published port. Caddy overwrites `X-Cat-Client-IP` with the address it resolves. The app
-uses it only in memory to admit up to 20 finished rounds per address in ten minutes,
-then removes the address from the limiter. With DNS-only ingress, Caddy uses the address
-of the connected client.
+uses it only in memory to admit up to 20 finished rounds in ten minutes per IPv4 address
+or IPv6 /64 prefix. IPv4-mapped IPv6 shares the IPv4 budget. An IPv6 /48 can hold at most
+64 active buckets. At the 4,096-entry global bound, a new bucket replaces the least
+recently active one. The limiter removes expired keys even while traffic is idle. With
+DNS-only ingress, Caddy uses the address of the connected client.
+
+Before counting is enabled, verify the Docker host's IPv6 ingress with an isolated echo
+upstream behind the same Caddy and port-publishing configuration. Make requests from two
+external IPv6 networks and compare the upstream `X-Cat-Client-IP` values with the clients'
+public IPv6 addresses. Docker's userland proxy can collapse IPv6 connections to a gateway
+address. If both clients arrive as that gateway, keep counting off, correct the Docker
+IPv6 forwarding configuration, and repeat the check until each client address survives.
 
 For Cloudflare-proxied ingress, configure Caddy’s global `servers` options before enabling
 comparison. Set `trusted_proxies static` to Cloudflare’s current published IPv4 and IPv6

@@ -1,6 +1,7 @@
 package httpapi
 
 import (
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"net/netip"
@@ -88,7 +89,80 @@ func TestBoardRoundLimiterClearsExpiredWindowWithoutTraffic(t *testing.T) {
 	}
 }
 
-func TestBoardRoundLimiterCapsDistinctClients(t *testing.T) {
+// Ported from TestCriticLimiterIPv6 in the independent redesign review.
+func TestBoardRoundLimiterBoundsIPv6Subscriber(t *testing.T) {
+	var limiter boardRoundLimiter
+	t.Cleanup(func() {
+		limiter.mu.Lock()
+		defer limiter.mu.Unlock()
+		for _, window := range limiter.peers {
+			window.timer.Stop()
+		}
+	})
+	now := time.Now()
+	admitted := 0
+	for i := 0; i < 5000; i++ {
+		address := netip.MustParseAddr(fmt.Sprintf("2001:db8:1:1::%x", i+1))
+		for range roundLimit {
+			if limiter.allow(address, now) {
+				admitted++
+			}
+		}
+	}
+	if admitted != roundLimit {
+		t.Errorf("one IPv6 /64 admitted %d rounds, want %d", admitted, roundLimit)
+	}
+	if !limiter.allow(netip.MustParseAddr("198.51.100.77"), now) {
+		t.Error("IPv6 subscriber displaced an unrelated IPv4 client")
+	}
+}
+
+func TestBoardRoundLimiterSharesMappedIPv4Budget(t *testing.T) {
+	var limiter boardRoundLimiter
+	now := time.Now()
+	address := netip.MustParseAddr("192.0.2.9")
+	for range roundLimit {
+		if !limiter.allow(address, now) {
+			t.Fatal("IPv4 budget ended early")
+		}
+	}
+	if limiter.allow(netip.MustParseAddr("::ffff:192.0.2.9"), now) {
+		t.Error("IPv4-mapped IPv6 received a fresh budget")
+	}
+	for _, window := range limiter.peers {
+		window.timer.Stop()
+	}
+}
+
+func TestBoardRoundLimiterBoundsWiderIPv6PrefixAndReleasesExpiredSlot(t *testing.T) {
+	var limiter boardRoundLimiter
+	now := time.Now()
+	for i := range roundLimitIPv6Group {
+		address := netip.MustParseAddr(fmt.Sprintf("2001:db8:1:%x::1", i))
+		if !limiter.allow(address, now) {
+			t.Fatal("IPv6 /48 capacity ended early")
+		}
+	}
+	newSubnet := netip.MustParseAddr("2001:db8:1:ffff::1")
+	if limiter.allow(newSubnet, now) || !limiter.allow(netip.MustParseAddr("2001:db8:2::1"), now) {
+		t.Fatal("IPv6 /48 cap failed or affected a different /48")
+	}
+	key := netip.MustParseAddr("2001:db8:1::")
+	limiter.expire(key, limiter.peers[key])
+	if !limiter.allow(newSubnet, now) {
+		t.Fatal("expiry did not release the /48 slot")
+	}
+	limiter.mu.Lock()
+	defer limiter.mu.Unlock()
+	for key := range limiter.peers {
+		limiter.remove(key)
+	}
+	if len(limiter.groups) != 0 {
+		t.Fatal("empty limiter retained IPv6 group identifiers")
+	}
+}
+
+func TestBoardRoundLimiterEvictsOldestIdleClient(t *testing.T) {
 	now := time.Now()
 	limiter := boardRoundLimiter{peers: make(map[netip.Addr]*roundAllowance)}
 	for i := 0; i < roundLimitPeers; i++ {
@@ -97,7 +171,11 @@ func TestBoardRoundLimiterCapsDistinctClients(t *testing.T) {
 	}
 	known := netip.MustParseAddr("10.0.0.0")
 	newClient := netip.MustParseAddr("192.0.2.1")
-	if limiter.allow(newClient, now) || !limiter.allow(known, now) {
-		t.Fatal("client cap admitted a new address or affected a tracked address")
+	if !limiter.allow(known, now) || !limiter.allow(newClient, now.Add(time.Second)) {
+		t.Fatal("full table refused an existing or new client")
 	}
+	if limiter.peers[known] == nil || len(limiter.peers) != roundLimitPeers {
+		t.Fatal("eviction removed the recently active client or exceeded the table bound")
+	}
+	limiter.peers[newClient].timer.Stop()
 }

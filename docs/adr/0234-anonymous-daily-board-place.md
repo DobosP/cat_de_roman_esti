@@ -53,3 +53,14 @@ observer attempts each terminal sample once.
 „Când comparația zilnică este activată, păstrăm timp de 14 zile totalurile
 rundelor finalizate și distribuția numărului de pași la victorie. Adresa de
 rețea este folosită temporar, în memorie, pentru a limita abuzul.”
+
+## Amendment 2026-11-17
+
+### B1 — bounded network prefixes
+
+The limiter shares 20 samples per ten minutes within an IPv6 /64. IPv4 and
+IPv4-mapped IPv6 share one full-address key. Each IPv6 /48 can occupy at most
+64 of the 4,096 active buckets. A new bucket at the global capacity evicts
+the least recently active bucket. Keys and prefix counts expire in memory.
+Before activation, verify that Docker preserves real IPv6 client addresses
+through the Caddy ingress as described in [DEPLOY](../DEPLOY.md).
