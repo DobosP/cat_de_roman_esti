@@ -27,6 +27,7 @@ type gameSession struct {
 	hintLevel, paidHints                int
 	hintPair                            *Pair
 	hintPairKnown                       bool
+	hintSubject                         string
 	earnedHint                          *hint
 	projection                          *Projection
 	attempted, lifetimePairs            map[Pair]bool
@@ -74,7 +75,7 @@ func (s *Service) Create(seed *big.Int, daily, category, difficulty string) (map
 	return s.CreateWithExclusions(seed, daily, category, difficulty, nil)
 }
 
-func (s *Service) CreateWithExclusions(seed *big.Int, daily, category, difficulty string, extraExcludeIDs map[string]bool) (map[string]any, *Error) {
+func (s *Service) CreateWithExclusions(seed *big.Int, daily, category, difficulty string, extraExcludeIDs map[string]bool, replay ...bool) (map[string]any, *Error) {
 	if difficulty != "usor" && difficulty != "greu" && difficulty != "normal" {
 		difficulty = "normal"
 	}
@@ -115,6 +116,7 @@ func (s *Service) CreateWithExclusions(seed *big.Int, daily, category, difficult
 			return nil, err
 		}
 	}
+	g.boardObservation.Replay = len(replay) > 0 && replay[0]
 	p := s.state("", g)
 	id, e := s.store.Create(g)
 	if e != nil {
@@ -122,12 +124,6 @@ func (s *Service) CreateWithExclusions(seed *big.Int, daily, category, difficult
 	}
 	p["game_id"] = id
 	return p, nil
-}
-
-// BoardTerminal observes a server-terminal reviewed daily once and returns its
-// anonymous outcome for subsequent comparisons.
-func (s *Service) BoardTerminal(id string, onFirst func(gameapi.TerminalRound)) (gameapi.TerminalRound, bool) {
-	return gameapi.ObserveBoardTerminal(s.store, id, onFirst, (*gameSession).boardTerminal)
 }
 
 func (g *gameSession) boardTerminal() (gameapi.TerminalRound, *gameapi.TerminalObservation) {
@@ -318,7 +314,11 @@ func (s *Service) CombineInputWithTerminal(id string, validate func() (string, s
 			g.add(x, &parents)
 		}
 		if len(discovered) > 0 {
-			g.hintPairKnown = false
+			if g.hintLevel == 0 {
+				g.hintPairKnown = false
+			} else if has(discovered, g.hintSubject) {
+				g.hintPair = nil
+			}
 		} else {
 			g.fruitlessTotal++
 		}
@@ -382,7 +382,7 @@ func (s *Service) hintPayload(cue hint) map[string]any {
 func (s *Service) hintOutput(g *gameSession, key Pair) string {
 	for _, x := range g.projection.Recipes[key] {
 		if _, owned := g.owned[x]; x != g.target && !owned {
-			return s.graph.Label(x)
+			return x
 		}
 	}
 	return ""
@@ -399,8 +399,13 @@ func (s *Service) hintLevels(g *gameSession) []int {
 		}
 		g.hintPairKnown = true
 	}
-	if g.hintPair == nil {
+	if g.hintPair == nil || len(g.projection.Recipes[*g.hintPair]) == 0 {
 		return nil
+	}
+	for _, ingredient := range *g.hintPair {
+		if _, owned := g.owned[ingredient]; !owned {
+			return nil
+		}
 	}
 	levels := []int{}
 	for level := g.hintLevel + 1; level <= 3; level++ {
@@ -421,8 +426,14 @@ func (s *Service) Hint(id string) (map[string]any, *Error) {
 			return nil, &Error{Status: 400, Detail: "Nu mai sunt indicii disponibile."}
 		}
 		cue := hint{level: levels[0], pair: *g.hintPair}
+		if g.hintLevel == 0 {
+			g.hintSubject = s.hintOutput(g, cue.pair)
+			if g.hintSubject == "" {
+				g.hintSubject = g.target
+			}
+		}
 		if cue.level == 1 {
-			cue.label = s.hintOutput(g, cue.pair)
+			cue.label = s.graph.Label(g.hintSubject)
 		}
 		g.hintLevel = cue.level
 		g.hintsUsed++
@@ -447,7 +458,9 @@ func (s *Service) ResetWithTerminal(id string, onTerminal gameapi.TerminalRespon
 		g.fruitlessTotal = 0
 		g.hintsUsed = 0
 		g.earnedHint = nil
-		g.hintPairKnown = false
+		if g.hintLevel == 0 {
+			g.hintPairKnown = false
+		}
 		g.attempted = map[Pair]bool{}
 		for _, x := range g.seeds {
 			g.add(x, nil)

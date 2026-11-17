@@ -65,3 +65,17 @@ version. Rules-2 corpora are recorded from the Python oracle alone by a committe
 journeys for every rung, the rejected extra hint, undo, reset, resume and terminal states. The
 case count changes from 1,206 to 1,332 (Paul: "Yes, new count is fine"). Mismatches are judged against
 this ADR, never against either implementation.
+
+## Amendment 2026-11-17 — Alchimie hint subject
+
+The first paid Alchimie hint fixes one recipe and its subject for that session.
+Later rungs keep that subject after other discoveries. Making the named word,
+including through another recipe, ends the ladder, as solving the hinted pair or
+group does in Perechi and Conexiuni. A reset clears the earned cue and keeps the
+ladder's subject, ended state and cumulative rung count. If a reset removes a
+recipe ingredient, further hints wait until that ingredient is owned again.
+The hidden recipe, subject IDs and unearned ingredients remain private.
+
+Direct Go session and independent Python HTTP regressions cover another
+shortest route appearing between rungs, subject completion, reset and the
+hidden-answer boundary.

@@ -1,12 +1,135 @@
 package alchimie
 
 import (
+	"encoding/json"
 	"reflect"
 	"strings"
 	"testing"
 
 	"github.com/DobosP/cat_de_roman_esti/go-backend/internal/content"
 )
+
+func newBranchingLadderGame(t *testing.T) (*Service, string) {
+	t.Helper()
+	s := New(&content.Content{Nodes: []content.Node{
+		{ID: "a", LabelRO: "first"}, {ID: "b", LabelRO: "second"}, {ID: "c", LabelRO: "third"},
+		{ID: "d", LabelRO: "fourth"}, {ID: "e", LabelRO: "fifth"},
+		{ID: "x", LabelRO: "detour"}, {ID: "y", LabelRO: "other result"},
+		{ID: "z", LabelRO: "useful"}, {ID: "hidden", LabelRO: "known goal"},
+	}})
+	g := newGame([]string{"a", "b", "c", "d", "e"}, "hidden", &Projection{
+		Recipes: map[Pair][]string{
+			{"a", "b"}: {"z"}, {"c", "z"}: {"hidden"},
+			{"c", "d"}: {"x"}, {"e", "x"}: {"y"}, {"b", "y"}: {"hidden"},
+		},
+		Par: 2,
+	}, "usor", "", "")
+	id, err := s.store.Create(g)
+	if err != nil {
+		t.Fatal(err)
+	}
+	return s, id
+}
+
+func TestAlchemyHintSubjectSurvivesAnotherDiscovery(t *testing.T) {
+	s, id := newBranchingLadderGame(t)
+	first, err := s.Hint(id)
+	if err != nil || !reflect.DeepEqual(first["hint_output"], map[string]any{"label": "useful"}) {
+		t.Fatalf("first subject: %#v, %v", first, err)
+	}
+	if _, err := s.Combine(id, "c", "d"); err != nil {
+		t.Fatal(err)
+	}
+	before, _ := s.Get(id)
+	if before["hint_level"] != 1 || before["hints_left"] != 2 || before["earned_hint"] != nil {
+		t.Fatalf("resume after a different discovery: %#v", before)
+	}
+	for _, level := range []int{2, 3} {
+		body, err := s.Hint(id)
+		if err != nil || body["hint_level"] != level || body["steps"] != level {
+			t.Fatalf("rung %d: %#v, %v", level, body, err)
+		}
+		if level == 2 && body["hint_ingredient"].(map[string]any)["id"] != "a" {
+			t.Fatalf("rung 2 changed the first hint's subject: %#v", body["earned_hint"])
+		}
+		if level == 3 {
+			pair := body["hint"].([]any)
+			if pair[0].(map[string]any)["id"] != "a" || pair[1].(map[string]any)["id"] != "b" {
+				t.Fatalf("rung 3 changed the first hint's subject: %#v", pair)
+			}
+		}
+		raw, encodeErr := json.Marshal(body)
+		if encodeErr != nil {
+			t.Fatal(encodeErr)
+		}
+		if body["recipes"] != nil || body["routes"] != nil {
+			t.Fatalf("rung %d exposed the private recipe book", level)
+		}
+		for _, hidden := range []string{`"id":"z"`, `"id":"y"`, `"hidden"`} {
+			if strings.Contains(string(raw), hidden) {
+				t.Fatalf("rung %d leaked %s", level, hidden)
+			}
+		}
+	}
+}
+
+func TestAlchemySolvedHintSubjectEndsLadderAcrossReset(t *testing.T) {
+	for _, solvePair := range []Pair{{"a", "b"}, {"c", "d"}} {
+		t.Run(strings.Join(solvePair[:], "+"), func(t *testing.T) {
+			s, id := newBranchingLadderGame(t)
+			if solvePair != (Pair{"a", "b"}) {
+				s.store.Transaction(id, func(g *gameSession) error {
+					g.projection.Recipes[Pair{"a", "b"}] = []string{"z", "x"}
+					g.projection.Recipes[Pair{"c", "d"}] = []string{"z"}
+					return nil
+				})
+			}
+			s.Hint(id)
+			combined, err := s.Combine(id, solvePair[0], solvePair[1])
+			if err != nil || combined["won"] != false || combined["hints_left"] != 0 {
+				t.Fatalf("solving the hint subject should end the ladder: %#v, %v", combined, err)
+			}
+			for _, reset := range []bool{false, true} {
+				if reset {
+					if _, err := s.Reset(id); err != nil {
+						t.Fatal(err)
+					}
+				}
+				before, _ := s.Get(id)
+				_, err := s.Hint(id)
+				after, _ := s.Get(id)
+				if err == nil || err.Status != 400 || before["hints_left"] != 0 || before["hint_level"] != 1 ||
+					before["steps"] != 1 || !reflect.DeepEqual(before, after) {
+					t.Fatalf("solved ladder changed after reset=%t: %#v -> %#v, %v", reset, before, after, err)
+				}
+			}
+		})
+	}
+}
+
+func TestAlchemyResetWaitsForPinnedRecipeIngredients(t *testing.T) {
+	s, id := newBranchingLadderGame(t)
+	s.Combine(id, "a", "b")
+	first, err := s.Hint(id)
+	if err != nil || first["hint_level"] != 2 || first["hint_ingredient"].(map[string]any)["id"] != "c" {
+		t.Fatalf("first paid hint: %#v, %v", first, err)
+	}
+	before, _ := s.Reset(id)
+	_, err = s.Hint(id)
+	after, _ := s.Get(id)
+	if err == nil || err.Status != 400 || before["hints_left"] != 0 || !reflect.DeepEqual(before, after) {
+		t.Fatal("reset exposed a pinned recipe before its ingredients were owned")
+	}
+	s.Combine(id, "a", "b")
+	third, err := s.Hint(id)
+	if err != nil || third["hint_level"] != 3 || third["steps"] != 2 {
+		t.Fatalf("restored recipe rung: %#v, %v", third, err)
+	}
+	pair := third["hint"].([]any)
+	if pair[0].(map[string]any)["id"] != "c" || pair[1].(map[string]any)["id"] != "z" {
+		t.Fatalf("reset changed the pinned recipe: %#v", pair)
+	}
+}
 
 func TestAlchemyLadderAndLifetimePairsSurviveReset(t *testing.T) {
 	s := New(&content.Content{

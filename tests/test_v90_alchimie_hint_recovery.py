@@ -155,3 +155,72 @@ def test_no_forward_pair_does_not_charge_or_change_earned_cue(game):
     assert response.status_code == 400
     assert before["hints_used"] == 1
     assert _read(game) == before
+
+
+@pytest.fixture()
+def branching_game(game):
+    """A side discovery makes a different recipe route equally short."""
+    session = game[2]
+    session.recipes = {
+        ("a", "b"): ("x",), ("c", "x"): ("secret_target",),
+        ("c", "d"): ("w",), ("e", "w"): ("v",),
+        ("b", "v"): ("secret_target",),
+    }
+    return game
+
+
+def test_hint_subject_stays_fixed_after_a_different_productive_combine(branching_game):
+    first = _earn(branching_game)
+    assert first["hint_output"] == {"label": "Rezultat intermediar"}
+    combined = _post(branching_game, "combine", {"a": "c", "b": "d"})
+    assert combined.status_code == 200
+    resumed = _read(branching_game)
+    assert resumed["hint_level"] == 1 and resumed["hints_left"] == 2
+    assert "earned_hint" not in resumed
+
+    second = _earn(branching_game)
+    assert second["hint_ingredient"]["id"] == "a"
+    assert second["steps"] == second["hint_level"] == 2
+    third = _earn(branching_game)
+    assert [item["id"] for item in third["hint"]] == ["a", "b"]
+    assert third["steps"] == third["hint_level"] == 3
+    for body in (first, second, third):
+        encoded = json.dumps(body)
+        assert '"id": "x"' not in encoded
+        assert "secret_target" not in encoded
+        assert "recipes" not in body and "routes" not in body
+
+
+@pytest.mark.parametrize("solve_pair", [("a", "b"), ("c", "d")])
+def test_solving_the_hint_subject_ends_the_ladder_after_reset(branching_game, solve_pair):
+    if solve_pair != ("a", "b"):
+        branching_game[2].recipes[("a", "b")] = ("x", "v")
+        branching_game[2].recipes[("c", "d")] = ("x",)
+    _earn(branching_game)
+    combined = _post(branching_game, "combine", dict(zip(("a", "b"), solve_pair, strict=True)))
+    assert combined.status_code == 200
+    assert combined.json()["won"] is False
+    assert combined.json()["hints_left"] == 0
+    for reset in (False, True):
+        if reset:
+            assert _post(branching_game, "reset").status_code == 200
+        before = _read(branching_game)
+        assert before["hints_left"] == 0 and before["hint_level"] == 1
+        assert before["steps"] == 1
+        assert _post(branching_game, "hint").status_code == 400
+        assert _read(branching_game) == before
+
+
+def test_reset_keeps_the_pinned_recipe_private_until_its_ingredients_return(game):
+    assert _post(game, "combine", {"a": "a", "b": "b"}).status_code == 200
+    ingredient = _earn(game)
+    assert ingredient["hint_level"] == 2
+    assert ingredient["hint_ingredient"]["id"] == "c"
+    before = _post(game, "reset").json()
+    assert before["hints_left"] == 0
+    assert _post(game, "hint").status_code == 400
+    assert _read(game) == before
+    assert _post(game, "combine", {"a": "a", "b": "b"}).status_code == 200
+    pair = _earn(game)
+    assert pair["hint_level"] == 3 and pair["steps"] == 2
+    assert [item["id"] for item in pair["hint"]] == ["c", "x"]

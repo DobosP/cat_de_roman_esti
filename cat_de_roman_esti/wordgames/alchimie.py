@@ -166,6 +166,9 @@ class AlchimieSession:
     hints_used: int = 0
     hints_paid: int = 0
     hint_level: int = 0
+    # The first paid rung fixes one recipe and its subject for this session.
+    hint_pair: RecipePair | None = field(default=None, repr=False)
+    hint_subject: str | None = field(default=None, repr=False)
     # One already-earned public cue; cleared by a new experiment or reset.
     earned_hint: dict[str, object] | None = None
     # Player- or server-selected board theme + curated-pack provenance (None for mined games).
@@ -879,10 +882,13 @@ _HINT_KINDS = ("output", "category", "pair")
 
 
 def _hint_options(session: AlchimieSession) -> tuple[list[int], RecipePair | None, str | None]:
-    if session.hint_level >= len(_HINT_KINDS):
+    if session.won or session.hint_level >= len(_HINT_KINDS):
         return [], None, None
-    pair = _useful_pair(session)
-    if pair is None:
+    pair = session.hint_pair if session.hint_level else _useful_pair(session)
+    if (
+        pair is None or not session.recipes.get(pair)
+        or not all(node in session.owned for node in pair)
+    ):
         return [], None, None
     output = next(
         (node for node in session.recipes[pair] if node != session.target and node not in session.owned),
@@ -1084,6 +1090,8 @@ class CombineView(ContractAPIView):
         ]
         for c in discovered:
             session.add(c, (a, b))
+        if session.hint_subject in discovered:
+            session.hint_pair = None
         if session.won:
             record_finished(
                 request,
@@ -1130,6 +1138,9 @@ class HintGameView(ContractAPIView):
             raise http_error(400, "Nu mai sunt indicii disponibile.")
         level = levels[0]
         a, b = pair
+        if session.hint_level == 0:
+            session.hint_pair = pair
+            session.hint_subject = output or session.target
         svc = get_service()
         hint = {
             "hint": None,
